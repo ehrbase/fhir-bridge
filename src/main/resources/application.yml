@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: FHIR Bridge PoC
+server:
+  servlet:
+    context-path: /fhir-bridge-poc
