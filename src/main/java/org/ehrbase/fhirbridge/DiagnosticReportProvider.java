@@ -12,7 +12,7 @@ import org.openehealth.ipf.commons.ihe.fhir.AbstractPlainProvider;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class DiagnosticReportResourceProvider extends AbstractPlainProvider {
+public class DiagnosticReportProvider extends AbstractPlainProvider {
 
     @Create
     public MethodOutcome create(@ResourceParam DiagnosticReport diagnosticReport, HttpServletRequest request, HttpServletResponse response) {
@@ -20,7 +20,7 @@ public class DiagnosticReportResourceProvider extends AbstractPlainProvider {
     }
 
     @Read
-    public DiagnosticReport read(@IdParam IIdType id) {
-        return new DiagnosticReport();
+    public DiagnosticReport read(@IdParam IIdType id, HttpServletRequest request, HttpServletResponse response) {
+        return requestResource(null, null, DiagnosticReport.class, request, response, null);
     }
 }

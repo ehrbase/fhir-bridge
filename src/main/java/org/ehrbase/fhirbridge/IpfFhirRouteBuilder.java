@@ -16,7 +16,7 @@ public class IpfFhirRouteBuilder extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("fhir://diagnosticReport?audit=false")
+        from("fhir://service?audit=false")
             .process(exchange -> exchange.getMessage().setBody(new MethodOutcome()))
             .to("log:IPF-FHIR-LOGGER?showAll=true");
         // @formatter:on
@@ -33,12 +33,12 @@ public class IpfFhirRouteBuilder extends RouteBuilder {
     public FhirTransactionConfiguration<GenericFhirAuditDataset> transactionConfiguration() {
         return new FhirTransactionConfiguration<>(
                 "fhir",
-                "Test Fhir",
+                "DiagnosticReport Provider",
                 false,
                 null,
                 null,
                 FhirVersionEnum.R4,
-                new DiagnosticReportResourceProvider(),
+                new DiagnosticReportProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION
         );

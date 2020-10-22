@@ -32,7 +32,7 @@
         <!--                            <goal>repackage</goal>-->
         <!--                        </goals>-->
         <!--                    </execution>-->
-        <!--                </executio ns>-->
+        <!--                </executions>-->
         <!--            </plugin>-->
         <!--        </plugins>-->
     </build>
