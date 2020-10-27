@@ -53,16 +53,6 @@
             <artifactId>spring-tx</artifactId>
             <version>5.2.6.RELEASE</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-jdbc</artifactId>-->
-        <!--            <version>2.2.7.RELEASE</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.apache.camel.springboot</groupId>-->
-        <!--            <artifactId>camel-fhir-starter</artifactId>-->
-        <!--            <version>${camel.version}</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>org.openehealth.ipf.platform-camel</groupId>
             <artifactId>ipf-platform-camel-ihe-fhir-core</artifactId>
