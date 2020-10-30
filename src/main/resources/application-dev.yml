@@ -1,0 +1,9 @@
+logging:
+  level:
+    ca.uhn.fhir: info
+    org.apache.camel: info
+    org.ehrbase.fhirbridge: debug
+    org.hibernate: info
+    org.quartz: info
+    org.springframework: info
+    org.springframework.boot: info
