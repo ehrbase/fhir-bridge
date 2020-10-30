@@ -1,6 +1,19 @@
 spring:
   application:
     name: FHIR Bridge PoC
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
 server:
   servlet:
     context-path: /fhir-bridge-poc
+logging:
+  level:
+    ROOT: info
+    ca.uhn.fhir: warn
+    org.apache.camel: warn
+    org.hibernate: warn
+    org.quartz: warn
+    org.springframework: warn
+    org.springframework.boot: warn
