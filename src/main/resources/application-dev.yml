@@ -4,7 +4,7 @@ logging:
     org.apache.camel: info
     org.ehrbase.fhirbridge: debug
     org.hibernate: info
-    org.openehealth.ipf: debug
+    org.openehealth.ipf: info
     org.quartz: info
     org.springframework: info
     org.springframework.boot: info

@@ -11,15 +11,17 @@ public class DiagnosticReportRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("diagnostic-report-create://service")
+        from("diagnostic-report-create:/service")
             .routeId("diagnosticReport-create")
             .process(exchange -> exchange.getMessage().setBody(new MethodOutcome()))
-            .to("log:DiagnosticReport-Create?showAll=true");
+            .to("log:DiagnosticReport-Create?showAll=true")
+            .to("ehrbase:/test");
 
-        from("diagnostic-report-read://service")
+        from("diagnostic-report-read:/service")
                 .routeId("diagnosticReport-read")
                 .process(exchange -> exchange.getMessage().setBody(new DiagnosticReport()))
-                .to("log:DiagnosticReport-Read?showAll=true");
+                .to("log:DiagnosticReport-Read?showAll=true")
+                .to("ehrbase:/test");
         // @formatter:on
     }
 }
