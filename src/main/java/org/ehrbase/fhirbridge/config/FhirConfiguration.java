@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge;
+package org.ehrbase.fhirbridge.config;
 
 import org.springframework.context.annotation.Configuration;
 

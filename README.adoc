@@ -1,5 +1,11 @@
-# FHIR Bridge PoC
+= FHIR Bridge PoC
 
 Proof of concept implementation of the https://github.com/ehrbase/fhir-bridge[FHIR Bridge] application using
 https://github.com/oehf/ipf[Open eHealth Integration Platform].
 
+== Getting Started
+
+[source]
+----
+mvn clean install
+----

@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge;
+package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.rest.annotation.Create;
 import ca.uhn.fhir.rest.annotation.ResourceParam;
@@ -10,9 +10,10 @@ import org.openehealth.ipf.commons.ihe.fhir.AbstractPlainProvider;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class DiagnosticReportCreateResourceProvider extends AbstractPlainProvider {
+public class DiagnosticReportCreateProvider extends AbstractPlainProvider {
 
     @Create
+    @SuppressWarnings("unused")
     public MethodOutcome create(@ResourceParam DiagnosticReport diagnosticReport,
                                 RequestDetails requestDetails,
                                 HttpServletRequest httpServletRequest,
