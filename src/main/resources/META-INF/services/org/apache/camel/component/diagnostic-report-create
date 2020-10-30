@@ -1,1 +1,1 @@
-class=org.ehrbase.fhirbridge.camel.DiagnosticReportCreateComponent
+class=org.ehrbase.fhirbridge.camel.fhir.DiagnosticReportCreateComponent

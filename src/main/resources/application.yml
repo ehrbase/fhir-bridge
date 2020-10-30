@@ -11,6 +11,7 @@ logging:
     ca.uhn.fhir: warn
     org.apache.camel: warn
     org.hibernate: warn
+    org.openehealth.ipf: warn
     org.quartz: warn
     org.springframework: warn
     org.springframework.boot: warn

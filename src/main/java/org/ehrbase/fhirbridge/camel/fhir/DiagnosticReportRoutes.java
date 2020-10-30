@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.camel;
+package org.ehrbase.fhirbridge.camel.fhir;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.apache.camel.builder.RouteBuilder;
@@ -11,12 +11,12 @@ public class DiagnosticReportRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("diagnostic-report-create://service?audit=false")
+        from("diagnostic-report-create://service")
             .routeId("diagnosticReport-create")
             .process(exchange -> exchange.getMessage().setBody(new MethodOutcome()))
             .to("log:DiagnosticReport-Create?showAll=true");
 
-        from("diagnostic-report-read://service?audit=false")
+        from("diagnostic-report-read://service")
                 .routeId("diagnosticReport-read")
                 .process(exchange -> exchange.getMessage().setBody(new DiagnosticReport()))
                 .to("log:DiagnosticReport-Read?showAll=true");
