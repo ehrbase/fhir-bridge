@@ -1,11 +1,18 @@
 = FHIR Bridge PoC
 
 Proof of concept implementation of the https://github.com/ehrbase/fhir-bridge[FHIR Bridge] application using
-https://github.com/oehf/ipf[Open eHealth Integration Platform].
+https://camel.apache.org/[Apache Camel] and https://github.com/oehf/ipf[Open eHealth Integration Platform].
 
 == Getting Started
 
+=== Build the application
 [source]
 ----
 mvn clean install
+----
+
+=== Run the application
+[source]
+----
+java -jar fhir-bridge-poc-0.1.0-SNAPSHOT.jar
 ----
