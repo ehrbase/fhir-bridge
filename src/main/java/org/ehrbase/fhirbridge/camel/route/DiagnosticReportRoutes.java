@@ -13,14 +13,15 @@ public class DiagnosticReportRoutes extends RouteBuilder {
         // @formatter:off
         from("diagnostic-report-create:/service")
             .routeId("diagnosticReport-create")
-            .to("ehr:ehrbase?endpointType=composition")
-            .process(exchange -> exchange.getMessage().setBody(new MethodOutcome()));
-
+//            .to("ehr:ehrbase?ehrEndpointType=composition")
+            .process(exchange -> exchange.getMessage().setBody(new MethodOutcome()))
+            .to("log:debug?showAll=true");
 
         from("diagnostic-report-read:/service")
             .routeId("diagnosticReport-read")
-            .to("ehr:ehrbase?endpointType=aql")
-            .process(exchange -> exchange.getMessage().setBody(new DiagnosticReport()));
+//            .to("ehr:ehrbase?ehrEndpointType=aql")
+            .process(exchange -> exchange.getMessage().setBody(new DiagnosticReport()))
+            .to("log:debug?showAll=true");
         // @formatter:on
     }
 }

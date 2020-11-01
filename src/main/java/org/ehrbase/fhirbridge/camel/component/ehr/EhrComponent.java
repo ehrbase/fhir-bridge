@@ -14,7 +14,7 @@ public class EhrComponent extends DefaultComponent {
 
     @Override
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
-        Endpoint endpoint = new EhrEndpoint(uri, this);
+        EhrEndpoint endpoint = new EhrEndpoint(uri, this);
         setProperties(endpoint, parameters);
         return endpoint;
     }

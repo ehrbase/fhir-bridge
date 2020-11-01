@@ -5,7 +5,7 @@ services:
     ports:
       - 8080:8080
     networks:
-      - ehrbase-net
+      - ehrbase-network
     environment:
       DB_URL: jdbc:postgresql://ehrdb:5432/ehrbase
       DB_USER: ehrbase
@@ -20,11 +20,52 @@ services:
     ports:
       - 5432:5432
     networks:
-      - ehrbase-net
+      - ehrbase-network
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       EHRBASE_USER: ehrbase
       EHRBASE_PASSWORD: ehrbase
+  elasticsearch:
+    image: elasticsearch:7.7.0
+    container_name: elasticsearch
+    hostname: elasticsearch
+    environment:
+      - "discovery.type=single-node"
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - elk-network
+  kibana:
+    image: kibana:7.7.0
+    container_name: kibana
+    hostname: kibana
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch:elasticsearch
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk-network
+  logstash:
+    image: logstash:7.7.0
+    container_name: logstash
+    hostname: logstash
+    ports:
+      - 9600:9600
+      - 8089:8089
+      - 3001:3001/udp
+    volumes:
+      - ./logstash:/usr/share/logstash/pipeline/
+    links:
+      - elasticsearch:elasticsearch
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk-network
 networks:
-  ehrbase-net: { }
+  ehrbase-network: { }
+  elk-network:
+    driver: bridge

@@ -30,7 +30,7 @@ public class EhrEndpoint extends DefaultEndpoint {
 
     @UriParam
     @Metadata(required = "true")
-    private EhrEndpointType endpointType;
+    private EhrEndpointType ehrEndpointType;
 
     public EhrEndpoint(String uri, EhrComponent component) {
         super(uri, component);
@@ -71,11 +71,11 @@ public class EhrEndpoint extends DefaultEndpoint {
         this.name = name;
     }
 
-    public EhrEndpointType getEndpointType() {
-        return endpointType;
+    public EhrEndpointType getEhrEndpointType() {
+        return ehrEndpointType;
     }
 
-    public void setEndpointType(EhrEndpointType endpointType) {
-        this.endpointType = endpointType;
+    public void setEhrEndpointType(EhrEndpointType ehrEndpointType) {
+        this.ehrEndpointType = ehrEndpointType;
     }
 }

@@ -17,8 +17,9 @@ public class ConditionRoutes extends RouteBuilder {
         // @formatter:off
         from("condition-create:/service")
             .routeId("condition-create")
-            .to("ehr:ehrbase?endpointType=composition")
-            .process(exchange -> exchange.getMessage().setBody(new MethodOutcome()));
+//            .to("ehr:ehrbase?ehrEndpointType=composition")
+            .process(exchange -> exchange.getMessage().setBody(new MethodOutcome()))
+            .to("log:debug?showAll=true");
 
 
         from("condition-read:/service")
@@ -34,7 +35,7 @@ public class ConditionRoutes extends RouteBuilder {
                 );
                 exchange.getMessage().setBody(query);
             })
-            .to("ehr:ehrbase?endpointType=aql")
+            .to("ehr:ehrbase?ehrEndpointType=aql")
             .choice()
                 .when(simple("${body.size} == 0"))
                     .setBody(constant(null))

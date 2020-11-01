@@ -26,10 +26,10 @@ public class EhrProducer extends DefaultProducer {
 
         DefaultRestClient restClient = endpoint.createRestClient();
 
-        if (endpoint.getEndpointType() == EhrEndpointType.aql) {
+        if (endpoint.getEhrEndpointType() == EhrEndpointType.aql) {
             Query<?> query = exchange.getIn().getBody(Query.class);
             exchange.getMessage().setBody(restClient.aqlEndpoint().execute(query));
-        } else if (endpoint.getEndpointType() == EhrEndpointType.composition) {
+        } else if (endpoint.getEhrEndpointType() == EhrEndpointType.composition) {
             exchange.getMessage().setBody(restClient.compositionEndpoint(UUID.randomUUID()).mergeCompositionEntity(exchange.getIn().getBody()));
         }
     }
