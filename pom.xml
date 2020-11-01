@@ -18,7 +18,9 @@
         <commons-codec.version>1.15</commons-codec.version>
         <commons-io.version>2.8.0</commons-io.version>
         <commons-lang3.version>3.11</commons-lang3.version>
+        <ehrbase.version>v0.3.7</ehrbase.version>
         <error-prone.version>2.3.4</error-prone.version>
+        <gson.version>2.8.6</gson.version>
         <h2.version>1.4.200</h2.version>
         <hapi-fhir.version>5.1.0</hapi-fhir.version>
         <hikari.version>3.4.3</hikari.version>
@@ -111,6 +113,22 @@
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
             <version>${hikari.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ehrbase</groupId>
+            <artifactId>openEHR_SDK</artifactId>
+            <version>${ehrbase.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms-starter</artifactId>
+            <version>2.25.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-http-starter</artifactId>
+            <version>2.25.2</version>
         </dependency>
     </dependencies>
 
@@ -236,6 +254,18 @@
                 <artifactId>error_prone_annotations</artifactId>
                 <version>${error-prone.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 </project>

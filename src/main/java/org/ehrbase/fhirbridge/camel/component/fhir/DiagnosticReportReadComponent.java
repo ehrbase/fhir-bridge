@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.camel.fhir;
+package org.ehrbase.fhirbridge.camel.component.fhir;
 
 import org.ehrbase.fhirbridge.fhir.DiagnosticReportReadTransaction;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
