@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.context.FhirVersionEnum;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionConfiguration;
-import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 public class DiagnosticReportCreateTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
@@ -16,6 +15,6 @@ public class DiagnosticReportCreateTransaction extends FhirTransactionConfigurat
                 FhirVersionEnum.R4,
                 new DiagnosticReportCreateProvider(),
                 null,
-                FhirTransactionValidator.NO_VALIDATION);
+                DiagnosticReportCreateValidator::new);
     }
 }
