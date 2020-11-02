@@ -5,11 +5,13 @@ import ca.uhn.fhir.jpa.api.config.DaoConfig;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDaoCodeSystem;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDaoConceptMap;
+import ca.uhn.fhir.jpa.api.dao.IFhirResourceDaoSearchParameter;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDaoValueSet;
 import ca.uhn.fhir.jpa.config.r4.BaseR4Config;
 import ca.uhn.fhir.jpa.dao.JpaResourceDao;
 import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoCodeSystemR4;
 import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoConceptMapR4;
+import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoSearchParameterR4;
 import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoValueSetR4;
 import ca.uhn.fhir.jpa.model.config.PartitionSettings;
 import ca.uhn.fhir.jpa.model.entity.ModelConfig;
@@ -19,6 +21,7 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.SearchParameter;
 import org.hl7.fhir.r4.model.ValueSet;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -82,7 +85,7 @@ public class FhirJpaConfiguration {
     @Bean(name = "myCodeSystemDaoR4")
     public IFhirResourceDaoCodeSystem<CodeSystem, Coding, CodeableConcept> codeSystemDao(FhirContext context) {
         FhirResourceDaoCodeSystemR4 codeSystemDao = new FhirResourceDaoCodeSystemR4();
-        codeSystemDao.setResourceType(org.hl7.fhir.r4.model.CodeSystem.class);
+        codeSystemDao.setResourceType(CodeSystem.class);
         codeSystemDao.setContext(context);
         return codeSystemDao;
     }
@@ -101,5 +104,13 @@ public class FhirJpaConfiguration {
         conceptMapDao.setResourceType(ConceptMap.class);
         conceptMapDao.setContext(context);
         return conceptMapDao;
+    }
+
+    @Bean(name = "mySearchParameterDaoR4")
+    public IFhirResourceDaoSearchParameter<SearchParameter> searchParameterDao(FhirContext context) {
+        FhirResourceDaoSearchParameterR4 searchParameterDao = new FhirResourceDaoSearchParameterR4();
+        searchParameterDao.setResourceType(SearchParameter.class);
+        searchParameterDao.setContext(context);
+        return searchParameterDao;
     }
 }
