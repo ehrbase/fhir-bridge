@@ -118,17 +118,12 @@
             <groupId>com.github.ehrbase</groupId>
             <artifactId>openEHR_SDK</artifactId>
             <version>${ehrbase.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-jms-starter</artifactId>
-            <version>2.25.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-http-starter</artifactId>
-            <version>2.25.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
