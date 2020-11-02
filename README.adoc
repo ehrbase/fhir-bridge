@@ -6,13 +6,43 @@ https://camel.apache.org/[Apache Camel] and https://github.com/oehf/ipf[Open eHe
 == Getting Started
 
 === Build the application
+
 [source]
 ----
 mvn clean install
 ----
 
 === Run the application
+
 [source]
 ----
 java -jar fhir-bridge-poc-0.1.0-SNAPSHOT.jar
 ----
+
+=== Configuration Properties
+
+|===
+|Key | Default Value |Description
+
+|`spring.application.name`
+|`FHIR Bridge PoC`
+|
+|`spring.jpa.properties.hibernate.search.default.indexBase`
+|`${java.io.tmpdir}/fhir-bridge-poc/lucene`
+|
+|`ipf.atna.audit-enabled`
+|`true`
+|
+|`ipf.atna.audit-repository-host`
+|`localhost`
+|
+|`ipf.atna.audit-repository-port`
+|`3001`
+|
+|`server.port`
+|`8888`
+|
+|`server.servlet.context-path`
+|`/fhir-bridge-poc`
+|
+|===
