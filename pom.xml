@@ -38,6 +38,7 @@
         <spring.version>5.2.6.RELEASE</spring.version>
         <spring-boot.version>2.2.7.RELEASE</spring-boot.version>
         <snakeyaml.version>1.27</snakeyaml.version>
+        <stax2.version>4.2</stax2.version>
         <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
         <woodstox.version>6.1.1</woodstox.version>
     </properties>
@@ -313,7 +314,7 @@
             <dependency>
                 <groupId>org.codehaus.woodstox</groupId>
                 <artifactId>stax2-api</artifactId>
-                <version>4.2</version>
+                <version>${stax2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
