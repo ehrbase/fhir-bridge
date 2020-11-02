@@ -1,8 +1,15 @@
 spring:
   application:
     name: FHIR Bridge PoC
+  batch:
+    job:
+      enabled: false
   jpa:
     open-in-view: false
+    properties:
+      hibernate.search.default.indexBase: ${java.io.tmpdir}/fhir-bridge-poc/lucene
+      hibernate.search.lucene_version: LUCENE_CURRENT
+      hibernate.search.model_mapping: ca.uhn.fhir.jpa.search.LuceneSearchMappingFactory
 ipf:
   atna:
     audit-enabled: true
