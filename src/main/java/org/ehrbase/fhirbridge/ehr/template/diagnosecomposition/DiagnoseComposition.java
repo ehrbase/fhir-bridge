@@ -24,169 +24,169 @@ import java.util.List;
 @Archetype("openEHR-EHR-COMPOSITION.report.v1")
 @Template("Diagnose")
 public class DiagnoseComposition {
-  @Id
-  private VersionUid versionUid;
 
-  @Path("/context/end_time|value")
-  private TemporalAccessor endTimeValue;
+    @Id
+    private VersionUid versionUid;
+
+    @Path("/context/end_time|value")
+    private TemporalAccessor endTimeValue;
 
     @Path("/feeder_audit")
     private FeederAudit feederAudit;
 
-  @Path("/context/participations")
-  private List<Participation> participations;
+    @Path("/context/participations")
+    private List<Participation> participations;
 
-  @Path("/content[openEHR-EHR-EVALUATION.problem_diagnosis.v1]")
-  private DiagnoseEvaluation diagnose;
+    @Path("/content[openEHR-EHR-EVALUATION.problem_diagnosis.v1]")
+    private DiagnoseEvaluation diagnose;
 
-  @Path("/language")
-  private Language language;
+    @Path("/language")
+    private Language language;
 
-  @Path("/context/health_care_facility")
-  private PartyIdentified healthCareFacility;
+    @Path("/context/health_care_facility")
+    private PartyIdentified healthCareFacility;
 
-  @Path("/context/other_context[at0001]/items[at0002]/value|value")
-  private String berichtIdValue;
+    @Path("/context/other_context[at0001]/items[at0002]/value|value")
+    private String berichtIdValue;
 
-  @Path("/territory")
-  private Territory territory;
+    @Path("/territory")
+    private Territory territory;
 
-  @Path("/context/start_time|value")
-  private TemporalAccessor startTimeValue;
+    @Path("/context/start_time|value")
+    private TemporalAccessor startTimeValue;
 
-  @Path("/context/other_context[at0001]/items[openEHR-EHR-CLUSTER.case_identification.v0]")
-  private FallidentifikationCluster fallidentifikation;
+    @Path("/context/other_context[at0001]/items[openEHR-EHR-CLUSTER.case_identification.v0]")
+    private FallidentifikationCluster fallidentifikation;
 
-  @Path("/composer")
-  private PartyProxy composer;
+    @Path("/composer")
+    private PartyProxy composer;
 
-  @Path("/context/setting|defining_code")
-  private SettingDefiningcode settingDefiningcode;
+    @Path("/context/setting|defining_code")
+    private SettingDefiningcode settingDefiningcode;
 
-  @Path("/context/location")
-  private String location;
+    @Path("/context/location")
+    private String location;
 
-  @Path("/category|defining_code")
-  private CategoryDefiningcode categoryDefiningcode;
+    @Path("/category|defining_code")
+    private CategoryDefiningcode categoryDefiningcode;
 
-  public void setFeederAudit(FeederAudit feederAudit)
-    {
-this.feederAudit = feederAudit;
-}
-  public FeederAudit getFeederAudit()
-{
-    return this.feederAudit;
-}
+    public void setFeederAudit(FeederAudit feederAudit) {
+        this.feederAudit = feederAudit;
+    }
 
-  public VersionUid getVersionUid() {
-     return this.versionUid ;
-  }
+    public FeederAudit getFeederAudit() {
+        return this.feederAudit;
+    }
 
-  public void setVersionUid(VersionUid versionUid) {
-     this.versionUid = versionUid;
-  }
+    public VersionUid getVersionUid() {
+        return this.versionUid;
+    }
 
-  public void setEndTimeValue(TemporalAccessor endTimeValue) {
-     this.endTimeValue = endTimeValue;
-  }
+    public void setVersionUid(VersionUid versionUid) {
+        this.versionUid = versionUid;
+    }
 
-  public TemporalAccessor getEndTimeValue() {
-     return this.endTimeValue ;
-  }
+    public void setEndTimeValue(TemporalAccessor endTimeValue) {
+        this.endTimeValue = endTimeValue;
+    }
 
-  public void setParticipations(List<Participation> participations) {
-     this.participations = participations;
-  }
+    public TemporalAccessor getEndTimeValue() {
+        return this.endTimeValue;
+    }
 
-  public List<Participation> getParticipations() {
-     return this.participations ;
-  }
+    public void setParticipations(List<Participation> participations) {
+        this.participations = participations;
+    }
 
-  public void setDiagnose(DiagnoseEvaluation diagnose) {
-     this.diagnose = diagnose;
-  }
+    public List<Participation> getParticipations() {
+        return this.participations;
+    }
 
-  public DiagnoseEvaluation getDiagnose() {
-     return this.diagnose ;
-  }
+    public void setDiagnose(DiagnoseEvaluation diagnose) {
+        this.diagnose = diagnose;
+    }
 
-  public void setLanguage(Language language) {
-     this.language = language;
-  }
+    public DiagnoseEvaluation getDiagnose() {
+        return this.diagnose;
+    }
 
-  public Language getLanguage() {
-     return this.language ;
-  }
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
 
-  public void setHealthCareFacility(PartyIdentified healthCareFacility) {
-     this.healthCareFacility = healthCareFacility;
-  }
+    public Language getLanguage() {
+        return this.language;
+    }
 
-  public PartyIdentified getHealthCareFacility() {
-     return this.healthCareFacility ;
-  }
+    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
+        this.healthCareFacility = healthCareFacility;
+    }
 
-  public void setBerichtIdValue(String berichtIdValue) {
-     this.berichtIdValue = berichtIdValue;
-  }
+    public PartyIdentified getHealthCareFacility() {
+        return this.healthCareFacility;
+    }
 
-  public String getBerichtIdValue() {
-     return this.berichtIdValue ;
-  }
+    public void setBerichtIdValue(String berichtIdValue) {
+        this.berichtIdValue = berichtIdValue;
+    }
 
-  public void setTerritory(Territory territory) {
-     this.territory = territory;
-  }
+    public String getBerichtIdValue() {
+        return this.berichtIdValue;
+    }
 
-  public Territory getTerritory() {
-     return this.territory ;
-  }
+    public void setTerritory(Territory territory) {
+        this.territory = territory;
+    }
 
-  public void setStartTimeValue(TemporalAccessor startTimeValue) {
-     this.startTimeValue = startTimeValue;
-  }
+    public Territory getTerritory() {
+        return this.territory;
+    }
 
-  public TemporalAccessor getStartTimeValue() {
-     return this.startTimeValue ;
-  }
+    public void setStartTimeValue(TemporalAccessor startTimeValue) {
+        this.startTimeValue = startTimeValue;
+    }
 
-  public void setFallidentifikation(FallidentifikationCluster fallidentifikation) {
-     this.fallidentifikation = fallidentifikation;
-  }
+    public TemporalAccessor getStartTimeValue() {
+        return this.startTimeValue;
+    }
 
-  public FallidentifikationCluster getFallidentifikation() {
-     return this.fallidentifikation ;
-  }
+    public void setFallidentifikation(FallidentifikationCluster fallidentifikation) {
+        this.fallidentifikation = fallidentifikation;
+    }
 
-  public void setComposer(PartyProxy composer) {
-     this.composer = composer;
-  }
+    public FallidentifikationCluster getFallidentifikation() {
+        return this.fallidentifikation;
+    }
 
-  public PartyProxy getComposer() {
-     return this.composer ;
-  }
+    public void setComposer(PartyProxy composer) {
+        this.composer = composer;
+    }
 
-  public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
-     this.settingDefiningcode = settingDefiningcode;
-  }
+    public PartyProxy getComposer() {
+        return this.composer;
+    }
 
-  public SettingDefiningcode getSettingDefiningcode() {
-     return this.settingDefiningcode ;
-  }
+    public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
+        this.settingDefiningcode = settingDefiningcode;
+    }
 
-  public void setLocation(String location) {
-     this.location = location;
-  }
+    public SettingDefiningcode getSettingDefiningcode() {
+        return this.settingDefiningcode;
+    }
 
-  public String getLocation() {
-     return this.location ;
-  }
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-  public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
-     this.categoryDefiningcode = categoryDefiningcode;
-  }
+    public String getLocation() {
+        return this.location;
+    }
 
-  public CategoryDefiningcode getCategoryDefiningcode() {
-     return this.categoryDefiningcode ;
-  }
+    public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
+        this.categoryDefiningcode = categoryDefiningcode;
+    }
+
+    public CategoryDefiningcode getCategoryDefiningcode() {
+        return this.categoryDefiningcode;
+    }
 }
