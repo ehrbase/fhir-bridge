@@ -32,6 +32,22 @@ java -jar fhir-bridge-poc-0.1.0-SNAPSHOT.jar
 |===
 |Key | Default Value |Description
 
+|`fhir-bridge.fhir.jpa.allow-external-references`
+|`true`
+|Allow remote references.
+
+|`ipf.atna.audit-enabled`
+|`true`
+|Whether auditing is enabled.
+
+|`ipf.atna.audit-repository-host`
+|`localhost`
+|Host of the ATNA repository to send the events to.
+
+|`ipf.atna.audit-repository-port`
+|`3001`
+|Port of the ATNA repository to send the events to.
+
 |`spring.application.name`
 |`FHIR Bridge PoC`
 |Application name.
@@ -51,18 +67,6 @@ java -jar fhir-bridge-poc-0.1.0-SNAPSHOT.jar
 |`spring.jpa.properties.hibernate.search.default.indexBase`
 |`${java.io.tmpdir}/fhir-bridge-poc/indexes`
 |Default base directory for the indexes.
-
-|`ipf.atna.audit-enabled`
-|`true`
-|Whether auditing is enabled.
-
-|`ipf.atna.audit-repository-host`
-|`localhost`
-|Host of the ATNA repository to send the events to.
-
-|`ipf.atna.audit-repository-port`
-|`3001`
-|Port of the ATNA repository to send the events to.
 
 |`server.port`
 |`8888`

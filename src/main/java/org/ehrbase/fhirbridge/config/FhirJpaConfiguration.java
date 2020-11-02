@@ -26,6 +26,7 @@ import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.SearchParameter;
 import org.hl7.fhir.r4.model.ValueSet;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -35,6 +36,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import javax.persistence.EntityManagerFactory;
 
 @Configuration
+@EnableConfigurationProperties(FhirJpaProperties.class)
 @Import({BaseR4Config.class})
 @EntityScan(basePackages = {
         "ca.uhn.fhir.jpa.entity",
@@ -48,9 +50,9 @@ public class FhirJpaConfiguration {
     }
 
     @Bean
-    public ModelConfig modelConfig() {
+    public ModelConfig modelConfig(FhirJpaProperties properties) {
         ModelConfig config = new ModelConfig();
-        config.setAllowExternalReferences(true);
+        config.setAllowExternalReferences(properties.isAllowExternalReferences());
         return config;
     }
 
