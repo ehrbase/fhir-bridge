@@ -14,11 +14,11 @@ mvn clean install
 
 === Build the application and execute integration tests
 
-WARNING: If you want to run the integration tests during the build, please make sure that you have an EHRbase instance up and running.
-
 ----
 mvn clean install -DskipITs=false
 ----
+
+WARNING: When using `-DskipITs=false` option, please make sure you have an EHRbase instance up and running.
 
 === Run the application
 
@@ -35,6 +35,18 @@ java -jar fhir-bridge-poc-0.1.0-SNAPSHOT.jar
 |`spring.application.name`
 |`FHIR Bridge PoC`
 |Application name.
+
+|`spring.datasource.password`
+|
+|Login password of the database.
+
+|`spring.datasource.url`
+|
+|JDBC URL of the database.
+
+|`spring.datasource.username`
+|
+|Login username of the database.
 
 |`spring.jpa.properties.hibernate.search.default.indexBase`
 |`${java.io.tmpdir}/fhir-bridge-poc/indexes`
