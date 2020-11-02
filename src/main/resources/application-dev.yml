@@ -1,3 +1,8 @@
+spring:
+  jpa:
+    properties:
+      hibernate.show_sql: true
+      hibernate.format_sql: true
 logging:
   level:
     ca.uhn.fhir: info

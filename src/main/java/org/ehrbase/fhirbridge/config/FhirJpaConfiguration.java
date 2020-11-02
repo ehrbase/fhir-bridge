@@ -66,7 +66,7 @@ public class FhirJpaConfiguration {
         return transactionManager;
     }
 
-    @Bean(name = "myConditionReportDaoR4")
+    @Bean(name = "myConditionDaoR4")
     public IFhirResourceDao<Condition> conditionReportDao(FhirContext context) {
         JpaResourceDao<Condition> conditionReportDao = new JpaResourceDao<>();
         conditionReportDao.setResourceType(Condition.class);

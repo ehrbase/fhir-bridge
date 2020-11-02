@@ -17,6 +17,7 @@ public class ConditionRoutes extends RouteBuilder {
         // @formatter:off
         from("condition-create:/service")
             .routeId("condition-create")
+            .bean("myConditionDaoR4", "create(${body})")
 //            .to("ehr:ehrbase?ehrEndpointType=composition")
             .process(exchange -> exchange.getMessage().setBody(new MethodOutcome()))
             .to("log:debug?showAll=true");

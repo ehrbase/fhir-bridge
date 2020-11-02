@@ -13,13 +13,14 @@ public class DiagnosticReportRoutes extends RouteBuilder {
         // @formatter:off
         from("diagnostic-report-create:/service")
             .routeId("diagnosticReport-create")
-//            .to("ehr:ehrbase?ehrEndpointType=composition")
+            .bean("myDiagnosticReportDaoR4", "create(${body})")
+//            .to("ehr:composition:uuid:method")
             .process(exchange -> exchange.getMessage().setBody(new MethodOutcome()))
             .to("log:debug?showAll=true");
 
         from("diagnostic-report-read:/service")
             .routeId("diagnosticReport-read")
-//            .to("ehr:ehrbase?ehrEndpointType=aql")
+//            .to("ehr:aql:query")
             .process(exchange -> exchange.getMessage().setBody(new DiagnosticReport()))
             .to("log:debug?showAll=true");
         // @formatter:on
