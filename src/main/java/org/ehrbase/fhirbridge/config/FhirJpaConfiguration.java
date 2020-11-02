@@ -15,12 +15,14 @@ import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoSearchParameterR4;
 import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoValueSetR4;
 import ca.uhn.fhir.jpa.model.config.PartitionSettings;
 import ca.uhn.fhir.jpa.model.entity.ModelConfig;
+import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.CodeSystem;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.SearchParameter;
 import org.hl7.fhir.r4.model.ValueSet;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -80,6 +82,22 @@ public class FhirJpaConfiguration {
         diagnosticReportDao.setResourceType(DiagnosticReport.class);
         diagnosticReportDao.setContext(context);
         return diagnosticReportDao;
+    }
+
+    @Bean(name = "myObservationDaoR4")
+    public IFhirResourceDao<Observation> observationDao(FhirContext context) {
+        JpaResourceDao<Observation> observationDao = new JpaResourceDao<>();
+        observationDao.setResourceType(Observation.class);
+        observationDao.setContext(context);
+        return observationDao;
+    }
+
+    @Bean(name = "myAuditEventDaoR4")
+    public IFhirResourceDao<AuditEvent> auditEventDao(FhirContext context) {
+        JpaResourceDao<AuditEvent> auditEventDao = new JpaResourceDao<>();
+        auditEventDao.setResourceType(AuditEvent.class);
+        auditEventDao.setContext(context);
+        return auditEventDao;
     }
 
     @Bean(name = "myCodeSystemDaoR4")

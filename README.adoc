@@ -12,6 +12,14 @@ https://camel.apache.org/[Apache Camel] and https://github.com/oehf/ipf[Open eHe
 mvn clean install
 ----
 
+=== Build the application and execute integration tests
+
+WARNING: If you want to run the integration tests during the build, please make sure that you have an EHRbase instance up and running.
+
+----
+mvn clean install -DskipITs=false
+----
+
 === Run the application
 
 [source]

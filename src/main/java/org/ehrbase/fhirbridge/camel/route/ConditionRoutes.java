@@ -29,9 +29,9 @@ public class ConditionRoutes extends RouteBuilder {
                 IdType id = exchange.getIn().getBody(IdType.class);
                 Query<Record1<DiagnoseComposition>> query = Query.buildNativeQuery(
                         "SELECT c " +
-                                "FROM EHR e CONTAINS COMPOSITION c " +
-                                "WHERE c/archetype_details/template_id/value = 'Diagnose' AND " +
-                                "c/uid/value = '" + id.getIdPart() + "'",
+                            "FROM EHR e CONTAINS COMPOSITION c " +
+                            "WHERE c/archetype_details/template_id/value = 'Diagnose' " +
+                                "AND c/uid/value = '" + id.getIdPart() + "'",
                         DiagnoseComposition.class
                 );
                 exchange.getMessage().setBody(query);
