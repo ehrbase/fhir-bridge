@@ -15,6 +15,7 @@
         <maven.compiler.target>12</maven.compiler.target>
         <!-- Dependency Versions -->
         <bootstrap.version>4.5.3</bootstrap.version>
+        <checkstyle.version>3.1.1</checkstyle.version>
         <commons-codec.version>1.15</commons-codec.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-io.version>2.8.0</commons-io.version>
@@ -43,6 +44,25 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.version}</version>
+                <configuration>
+                    <configLocation>${project.basedir}/config/checkstyle/ehrbase_checks.xml</configLocation>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
