@@ -177,7 +177,7 @@ commands:
                 name: BUILD FHIR-BRIDGE
                 command: |
                     ls -la
-                    mvn clean verify -Dmaven.javadoc.skip=true -Dspring.profiles.active=ci
+                    mvn clean verify -Dmaven.javadoc.skip=true -DskipITs=false
 
 
     start-fhirbridge-application:
