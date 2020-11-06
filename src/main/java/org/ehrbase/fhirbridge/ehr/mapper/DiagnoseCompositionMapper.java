@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.camel.processor;
+package org.ehrbase.fhirbridge.ehr.mapper;
 
 import org.ehrbase.fhirbridge.ehr.template.diagnosecomposition.DiagnoseComposition;
 import org.ehrbase.fhirbridge.ehr.template.diagnosecomposition.definition.AtiopathogeneseSchweregradDvcodedtext;
