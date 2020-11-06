@@ -7,16 +7,17 @@
 
     <groupId>org.ehrbase.fhirbridge</groupId>
     <artifactId>fhir-bridge-poc</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.3.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>12</maven.compiler.source>
-        <maven.compiler.target>12</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <skipITs>true</skipITs>
         <!-- Plugin Versions -->
         <checkstyle.version>3.1.1</checkstyle.version>
         <failsafe.version>2.22.2</failsafe.version>
+        <surefire.version>2.22.2</surefire.version>
         <!-- Dependency Versions -->
         <bootstrap.version>4.5.3</bootstrap.version>
         <commons-codec.version>1.15</commons-codec.version>
@@ -107,6 +108,11 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -43,7 +43,12 @@ public class DiagnoseCompositionMapper {
     }
 
     private String getSeverityCode(DiagnoseComposition composition) {
-        switch (((AtiopathogeneseSchweregradDvcodedtext) composition.getDiagnose().getSchweregrad()).getSchweregradDefiningcode().getCode()) {
+        String code = ((AtiopathogeneseSchweregradDvcodedtext) composition.getDiagnose()
+                .getSchweregrad())
+                .getSchweregradDefiningcode()
+                .getCode();
+
+        switch (code) {
             case "at0049":
                 return "24484000";
             case "at0048":
