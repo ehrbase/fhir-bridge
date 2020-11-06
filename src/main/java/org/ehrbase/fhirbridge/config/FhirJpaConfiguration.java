@@ -44,13 +44,19 @@ import javax.persistence.EntityManagerFactory;
 })
 public class FhirJpaConfiguration {
 
+    private final FhirJpaProperties properties;
+
+    public FhirJpaConfiguration(FhirJpaProperties properties) {
+        this.properties = properties;
+    }
+
     @Bean
     public DaoConfig daoConfig() {
         return new DaoConfig();
     }
 
     @Bean
-    public ModelConfig modelConfig(FhirJpaProperties properties) {
+    public ModelConfig modelConfig() {
         ModelConfig config = new ModelConfig();
         config.setAllowExternalReferences(properties.isAllowExternalReferences());
         return config;
