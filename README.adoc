@@ -24,7 +24,7 @@ WARNING: When using `-DskipITs=false` option, please make sure you have an EHRba
 
 [source]
 ----
-java -jar fhir-bridge-poc-0.1.0-SNAPSHOT.jar
+java -jar fhir-bridge-poc-0.3.0-SNAPSHOT.jar
 ----
 
 === Configuration Properties
