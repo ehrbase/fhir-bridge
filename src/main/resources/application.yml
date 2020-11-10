@@ -8,6 +8,8 @@ spring:
     job:
       enabled: false
   jpa:
+    hibernate:
+      ddl-auto: validate
     open-in-view: false
     properties:
       hibernate.search.default.indexBase: ${java.io.tmpdir}/fhir-bridge-poc/lucene

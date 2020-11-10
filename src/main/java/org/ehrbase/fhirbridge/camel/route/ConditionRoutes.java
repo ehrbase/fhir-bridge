@@ -4,7 +4,7 @@ import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.client.aql.record.Record1;
-import org.ehrbase.fhirbridge.camel.processor.DiagnoseCompositionMapper;
+import org.ehrbase.fhirbridge.ehr.mapper.DiagnoseCompositionMapper;
 import org.ehrbase.fhirbridge.ehr.template.diagnosecomposition.DiagnoseComposition;
 import org.hl7.fhir.r4.model.IdType;
 import org.springframework.stereotype.Component;
