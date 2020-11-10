@@ -23,6 +23,7 @@ import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.SearchParameter;
 import org.hl7.fhir.r4.model.ValueSet;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -98,6 +99,14 @@ public class FhirJpaConfiguration {
         observationDao.setResourceType(Observation.class);
         observationDao.setContext(context);
         return observationDao;
+    }
+
+    @Bean(name = "myProcedureDaoR4")
+    public IFhirResourceDao<Procedure> procedureDao(FhirContext context) {
+        JpaResourceDao<Procedure> procedureDao = new JpaResourceDao<>();
+        procedureDao.setResourceType(Procedure.class);
+        procedureDao.setContext(context);
+        return procedureDao;
     }
 
     @Bean(name = "myAuditEventDaoR4")

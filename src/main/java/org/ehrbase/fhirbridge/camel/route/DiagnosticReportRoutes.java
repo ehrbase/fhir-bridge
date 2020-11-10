@@ -1,40 +1,30 @@
 package org.ehrbase.fhirbridge.camel.route;
 
+import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.processor.InternalAuditProcessor;
 import org.hl7.fhir.r4.model.DiagnosticReport;
-import org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirCamelValidators;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DiagnosticReportRoutes extends RouteBuilder {
 
-    private final InternalAuditProcessor internalAuditProcessor;
+    private final IFhirResourceDao<DiagnosticReport> diagnosticReportDao;
 
-    public DiagnosticReportRoutes(InternalAuditProcessor internalAuditProcessor) {
-        this.internalAuditProcessor = internalAuditProcessor;
+    public DiagnosticReportRoutes(IFhirResourceDao<DiagnosticReport> diagnosticReportDao) {
+        this.diagnosticReportDao = diagnosticReportDao;
     }
 
     @Override
     public void configure() {
         // @formatter:off
+        from("diag-rep-create:/service?audit=false")
+            .routeId("create-diagnostic-report")
+            .bean(diagnosticReportDao, "create(${body})")
+            .to("log:create-diagnostic-report?showAll=true");
 
-        from("diagnostic-report-create:/service")
-            .routeId("diagnosticReport-create")
-            .onCompletion()
-                .process(internalAuditProcessor)
-            .end()
-            .setHeader(FhirCamelValidators.VALIDATION_MODE, constant(FhirCamelValidators.MODEL))
-            .process(FhirCamelValidators.itiRequestValidator())
-            .bean("myDiagnosticReportDaoR4", "create(${body})");
-            // 1. Map to EHR Composition
-            // 2. Call Composition Endpoint
-
-        from("diagnostic-report-read:/service")
-            .routeId("diagnosticReport-read")
-//            .to("ehr:aql:query")
-            .process(exchange -> exchange.getMessage().setBody(new DiagnosticReport()))
-            .to("log:debug?showAll=true");
+        from("diag-rep-read:/service?audit=false")
+            .routeId("read-diagnostic-report-read")
+            .to("log:read-diagnostic-report?showAll=true");
         // @formatter:on
     }
 }
