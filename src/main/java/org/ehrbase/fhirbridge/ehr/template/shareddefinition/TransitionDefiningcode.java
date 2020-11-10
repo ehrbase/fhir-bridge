@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.template.shareddefinition;
 
+import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum TransitionDefiningcode implements EnumValueSet {

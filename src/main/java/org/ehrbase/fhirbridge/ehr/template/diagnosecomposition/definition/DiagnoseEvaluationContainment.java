@@ -2,6 +2,8 @@ package org.ehrbase.fhirbridge.ehr.template.diagnosecomposition.definition;
 
 import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.String;
+import java.time.temporal.TemporalAccessor;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
 import org.ehrbase.client.aql.field.ListAqlFieldImp;
@@ -9,8 +11,6 @@ import org.ehrbase.client.aql.field.ListSelectAqlField;
 import org.ehrbase.client.aql.field.SelectAqlField;
 import org.ehrbase.fhirbridge.ehr.template.shareddefinition.DerDiagnoseDefiningcode;
 import org.ehrbase.fhirbridge.ehr.template.shareddefinition.Language;
-
-import java.time.temporal.TemporalAccessor;
 
 public class DiagnoseEvaluationContainment extends Containment {
   public SelectAqlField<DiagnoseEvaluation> DIAGNOSE_EVALUATION = new AqlFieldImp<DiagnoseEvaluation>(DiagnoseEvaluation.class, "", "DiagnoseEvaluation", DiagnoseEvaluation.class, this);

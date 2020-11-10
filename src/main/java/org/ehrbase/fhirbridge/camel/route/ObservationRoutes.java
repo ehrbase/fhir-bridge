@@ -2,16 +2,29 @@ package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
+import org.ehrbase.client.openehrclient.OpenEhrClient;
+import org.ehrbase.fhirbridge.camel.FhirBridgeHeaders;
+import org.ehrbase.fhirbridge.camel.processor.ObservationValidator;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @Component
 public class ObservationRoutes extends RouteBuilder {
 
+    private final ObservationValidator observationValidator;
+
     private final IFhirResourceDao<Observation> observationDao;
 
-    public ObservationRoutes(IFhirResourceDao<Observation> observationDao) {
+    private final OpenEhrClient openEhrClient;
+
+    public ObservationRoutes(ObservationValidator observationValidator,
+                             IFhirResourceDao<Observation> observationDao,
+                             OpenEhrClient openEhrClient) {
+        this.observationValidator = observationValidator;
         this.observationDao = observationDao;
+        this.openEhrClient = openEhrClient;
     }
 
     @Override
@@ -19,8 +32,15 @@ public class ObservationRoutes extends RouteBuilder {
         // @formatter:off
         from("obs-create:/service?audit=false")
             .routeId("create-observation")
+            .process(observationValidator)
             .bean(observationDao, "create(${body})")
-            .to("log:create-observation?showAll=true");
+            .setBody(simple("${body.resource}"))
+            .process(exchange -> {
+                UUID ehrId = exchange.getIn().getHeader(FhirBridgeHeaders.EHR_ID, UUID.class);
+                Observation observation = exchange.getIn().getBody(Observation.class);
+
+                openEhrClient.compositionEndpoint(ehrId).mergeCompositionEntity(observation);
+            });
 
         from("obs-read:/service?audit=false")
             .routeId("read-observation")
