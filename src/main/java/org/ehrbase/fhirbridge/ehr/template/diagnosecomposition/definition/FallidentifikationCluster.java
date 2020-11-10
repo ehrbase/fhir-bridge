@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.template.diagnosecomposition.definition;
 
+import java.lang.String;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;

@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.template.diagnosecomposition.definition;
 
 import com.nedap.archie.rm.datastructures.Cluster;
+import java.lang.String;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
 import org.ehrbase.client.aql.field.ListAqlFieldImp;

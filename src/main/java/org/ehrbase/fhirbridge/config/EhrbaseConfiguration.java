@@ -33,7 +33,7 @@ public class EhrbaseConfiguration {
     }
 
     @Bean
-    public OpenEhrClient restClient(OpenEhrClientConfig restClientConfig, TemplateProvider templateProvider) {
+    public OpenEhrClient openEhrClient(OpenEhrClientConfig restClientConfig, TemplateProvider templateProvider) {
         return new DefaultRestClient(restClientConfig, templateProvider);
     }
 }

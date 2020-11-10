@@ -2,16 +2,15 @@ package org.ehrbase.fhirbridge.ehr.template.diagnosecomposition.definition;
 
 import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.String;
+import java.time.temporal.TemporalAccessor;
+import java.util.List;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
-import org.ehrbase.fhirbridge.ehr.template.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.template.shareddefinition.DerDiagnoseDefiningcode;
 import org.ehrbase.fhirbridge.ehr.template.shareddefinition.Language;
-
-import java.time.temporal.TemporalAccessor;
-import java.util.List;
 
 @Entity
 @Archetype("openEHR-EHR-EVALUATION.problem_diagnosis.v1")

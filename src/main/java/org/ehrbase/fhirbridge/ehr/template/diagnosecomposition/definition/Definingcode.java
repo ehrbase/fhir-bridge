@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.template.diagnosecomposition.definition;
 
+import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum Definingcode implements EnumValueSet {

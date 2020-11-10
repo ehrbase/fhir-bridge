@@ -3,6 +3,8 @@ package org.ehrbase.fhirbridge.ehr.template.diagnosecomposition;
 import com.nedap.archie.rm.generic.Participation;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.String;
+import java.time.temporal.TemporalAccessor;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
 import org.ehrbase.client.aql.field.ListAqlFieldImp;
@@ -14,8 +16,6 @@ import org.ehrbase.fhirbridge.ehr.template.shareddefinition.CategoryDefiningcode
 import org.ehrbase.fhirbridge.ehr.template.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.template.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.template.shareddefinition.Territory;
-
-import java.time.temporal.TemporalAccessor;
 
 public class DiagnoseCompositionContainment extends Containment {
   public SelectAqlField<DiagnoseComposition> DIAGNOSE_COMPOSITION = new AqlFieldImp<DiagnoseComposition>(DiagnoseComposition.class, "", "DiagnoseComposition", DiagnoseComposition.class, this);
