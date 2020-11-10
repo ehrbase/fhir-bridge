@@ -10,7 +10,29 @@ import java.util.stream.Collectors;
 
 public enum Profile {
 
-    BODY_TEMP(Observation.class, "http://hl7.org/fhir/StructureDefinition/bodytemp");
+    // Observation Profiles
+
+    BODY_HEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"),
+
+    BLOOD_PRESSURE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure"),
+
+    BODY_TEMP(Observation.class, "http://hl7.org/fhir/StructureDefinition/bodytemp"),
+
+    CLINICAL_FRAILTY_SCALE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score"),
+
+    CORONARIRUS_NACHWEIS_TEST(Observation.class, "https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest"),
+
+    FIO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/FiO2"),
+
+    HEART_RATE(Observation.class, "http://hl7.org/fhir/StructureDefinition/heartrate"),
+
+    PATIENT_IN_ICU(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu"),
+
+    PREGNANCY_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pregnancy-status"),
+
+    OBSERVATION_LAB(Observation.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"),
+
+    SOFA_SCORE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score");
 
     private final Class<? extends Resource> resourceType;
 
@@ -48,26 +70,4 @@ public enum Profile {
         }
         return null;
     }
-
-//    public static Set<String> getProfileUris() {
-//        return Arrays.stream(values())
-//                .map(Profile::getUri)
-//                .collect(Collectors.toSet());
-//    }
-//
-//    public static Profile resolve(String uri) {
-//        for (Profile profile : values()) {
-//            if (Objects.equals(profile.uri, uri)) {
-//                return profile;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    public static Collection<Profile> resolveAll(Collection<String> uri) {
-//        return uri.stream()
-//                .map(Profile::resolve)
-//                .filter(Objects::isNull)
-//                .collect(Collectors.toSet());
-//    }
 }
