@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ehrbase.fhirbridge</groupId>
@@ -13,11 +14,11 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <skipITs>true</skipITs>
-        <!-- Plugin Versions -->
+        <!-- Plugins -->
         <checkstyle.version>3.1.1</checkstyle.version>
         <failsafe.version>2.22.2</failsafe.version>
         <surefire.version>2.22.2</surefire.version>
-        <!-- Dependency Versions -->
+        <!-- Dependencies -->
         <bootstrap.version>4.5.3</bootstrap.version>
         <commons-codec.version>1.15</commons-codec.version>
         <commons-collections4.version>4.4</commons-collections4.version>
@@ -142,13 +143,14 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <version>${spring-boot.version}</version>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
         </dependency>
         <dependency>
             <groupId>org.openehealth.ipf.boot</groupId>

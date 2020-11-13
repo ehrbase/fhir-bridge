@@ -40,6 +40,14 @@ java -jar fhir-bridge-poc-0.3.0-SNAPSHOT.jar
 |`true`
 |Allow remote references.
 
+|`fhir-bridge.fhir.validation.terminology.mode`
+|`embedded`
+|Terminology validation mode: `embedded`, `server`, `none`
+
+|`fhir-bridge.fhir.validation.terminology.server-url`
+|
+|Base URL of the server used for the terminology validation.
+
 |`ipf.atna.audit-enabled`
 |`true`
 |Whether auditing is enabled.

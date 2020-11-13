@@ -1,10 +1,9 @@
-package org.ehrbase.fhirbridge.camel.route;
+package org.ehrbase.fhirbridge.camel;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.FhirBridgeHeaders;
-import org.ehrbase.fhirbridge.camel.processor.ObservationValidator;
 import org.ehrbase.fhirbridge.ehr.mapper.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.mapper.IntensivmedizinischesMonitoringKorpertemperaturCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.Profile;
@@ -16,16 +15,13 @@ import java.util.UUID;
 @Component
 public class ObservationRoutes extends RouteBuilder {
 
-    private final ObservationValidator observationValidator;
-
     private final IFhirResourceDao<Observation> observationDao;
 
     private final OpenEhrClient openEhrClient;
 
-    public ObservationRoutes(ObservationValidator observationValidator,
-                             IFhirResourceDao<Observation> observationDao,
-                             OpenEhrClient openEhrClient) {
-        this.observationValidator = observationValidator;
+    public ObservationRoutes(
+            IFhirResourceDao<Observation> observationDao,
+            OpenEhrClient openEhrClient) {
         this.observationDao = observationDao;
         this.openEhrClient = openEhrClient;
     }
@@ -33,9 +29,8 @@ public class ObservationRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("obs-create:/service?audit=false")
+        from("obs-create:/service?audit=false&fhirContext=#fhirContext")
             .routeId("create-observation")
-            .process(observationValidator)
             .bean(observationDao, "create(${body})")
             .setBody(simple("${body.resource}"))
             .process(exchange -> {
@@ -47,7 +42,7 @@ public class ObservationRoutes extends RouteBuilder {
                 openEhrClient.compositionEndpoint(ehrId).mergeCompositionEntity(converter.convertTo(observation));
             });
 
-        from("obs-read:/service?audit=false")
+        from("obs-read:/service?audit=false&fhirContext=#fhirContext")
             .routeId("read-observation")
             .to("log:read-observation?showAll=true");
         // @formatter:on
