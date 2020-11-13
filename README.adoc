@@ -27,7 +27,7 @@ WARNING: When using `-DskipITs=false` option, please make sure you have an EHRba
 java -jar fhir-bridge-poc-0.3.0-SNAPSHOT.jar
 ----
 
-=== Configuration Properties
+== Configuration Properties
 
 |===
 |Key | Default Value |Description
@@ -89,3 +89,6 @@ java -jar fhir-bridge-poc-0.3.0-SNAPSHOT.jar
 |Context path of the application.
 
 |===
+
+== Database
+The database creation scripts are available for PostgreSQL and H2 in the following location: `src/main/resources/schema`
