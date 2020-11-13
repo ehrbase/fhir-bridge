@@ -39,8 +39,8 @@
   },
   "subject": {
     "identifier": {
-      "system": "urn:ietf:rfc:3986",
-      "value": "urn:uuid:4c8fab89-ea83-4056-a245-14a23787e534"
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
     }
   },
   "issued": "2013-05-15T19:32:52+01:00",

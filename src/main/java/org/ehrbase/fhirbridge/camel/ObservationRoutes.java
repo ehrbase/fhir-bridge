@@ -5,8 +5,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
-import org.ehrbase.fhirbridge.ehr.mapper.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.mapper.IntensivmedizinischesMonitoringKorpertemperaturCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.Profile;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.stereotype.Component;
@@ -47,9 +45,9 @@ public class ObservationRoutes extends RouteBuilder {
                 UUID ehrId = exchange.getIn().getHeader(FhirBridgeHeaders.EHR_ID, UUID.class);
                 Profile profile  = exchange.getIn().getHeader(FhirBridgeHeaders.PROFILE, Profile.class);
                 Observation observation = exchange.getIn().getBody(Observation.class);
-
-                CompositionConverter<?, Observation> converter = getCompositionConverter(profile);
-                openEhrClient.compositionEndpoint(ehrId).mergeCompositionEntity(converter.toComposition(observation));
+//
+//                CompositionConverter<?, Observation> converter = getCompositionConverter(profile);
+//                openEhrClient.compositionEndpoint(ehrId).mergeCompositionEntity(converter.toComposition(observation));
             });
 
         from("obs-read:/service?audit=false&fhirContext=#fhirContext")
@@ -58,12 +56,12 @@ public class ObservationRoutes extends RouteBuilder {
         // @formatter:on
     }
 
-    private CompositionConverter<?, Observation> getCompositionConverter(Profile profile) {
-        switch (profile) {
-            case BODY_TEMP:
-                return new IntensivmedizinischesMonitoringKorpertemperaturCompositionConverter();
-            default:
-                throw new IllegalArgumentException();
-        }
-    }
+//    private CompositionConverter<?, Observation> getCompositionConverter(Profile profile) {
+//        switch (profile) {
+//            case BODY_TEMP:
+//                return new IntensivmedizinischesMonitoringKorpertemperaturCompositionConverter();
+//            default:
+//                throw new IllegalArgumentException();
+//        }
+//    }
 }

@@ -5,8 +5,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
-import org.ehrbase.fhirbridge.ehr.mapper.DiagnoseCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.template.diagnosecomposition.DiagnoseComposition;
 import org.hl7.fhir.r4.model.Condition;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +12,6 @@ import java.util.UUID;
 
 @Component
 public class ConditionRoutes extends RouteBuilder {
-
-    private final DiagnoseCompositionConverter converter = new DiagnoseCompositionConverter();
-
 
     private final IFhirResourceDao<Condition> conditionDao;
 
@@ -48,8 +43,8 @@ public class ConditionRoutes extends RouteBuilder {
             .process(exchange -> {
                 UUID ehrId = exchange.getIn().getHeader(FhirBridgeHeaders.EHR_ID, UUID.class);
                 Condition condition = exchange.getIn().getBody(Condition.class);
-                DiagnoseComposition composition = converter.toComposition(condition);
-                openEhrClient.compositionEndpoint(ehrId).mergeCompositionEntity(composition);
+
+                openEhrClient.compositionEndpoint(ehrId).mergeCompositionEntity(condition);
             });
 
         from("cond-read:/service?audit=false&fhirContext=#fhirContext")

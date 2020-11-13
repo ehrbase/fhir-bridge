@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class ConditionIT {
+class ConditionIT extends AbstractSetupIT {
 
     private final FhirContext context = FhirContext.forR4();
 
@@ -22,7 +22,7 @@ class ConditionIT {
     @Test
     void create() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("Condition/condition-example.json").getInputStream(), StandardCharsets.UTF_8);
-        MethodOutcome outcome = client.create().resource(resource).execute();
+        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
 
         assertNotNull(outcome.getId());
         assertEquals(true, outcome.getCreated());
