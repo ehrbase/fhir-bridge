@@ -10,7 +10,7 @@ public class ReadObservationTransaction extends FhirTransactionConfiguration<Gen
     public ReadObservationTransaction() {
         super("obs-read",
                 "Read Observation",
-                false,
+                true,
                 null,
                 null,
                 FhirVersionEnum.R4,

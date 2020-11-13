@@ -11,11 +11,12 @@ public class DiagnosticReportRoutes extends RouteBuilder {
 
     private final IFhirResourceDao<DiagnosticReport> diagnosticReportDao;
 
-    private final DefaultCreateResourceRequestValidator validator;
+    private final DefaultCreateResourceRequestValidator requestValidator;
 
-    public DiagnosticReportRoutes(IFhirResourceDao<DiagnosticReport> diagnosticReportDao, DefaultCreateResourceRequestValidator validator) {
+    public DiagnosticReportRoutes(IFhirResourceDao<DiagnosticReport> diagnosticReportDao,
+                                  DefaultCreateResourceRequestValidator requestValidator) {
         this.diagnosticReportDao = diagnosticReportDao;
-        this.validator = validator;
+        this.requestValidator = requestValidator;
     }
 
     @Override
@@ -23,7 +24,7 @@ public class DiagnosticReportRoutes extends RouteBuilder {
         // @formatter:off
         from("diag-rep-create:/service?audit=false&fhirContext=#fhirContext")
             .routeId("create-diagnostic-report")
-            .process(validator)
+            .process(requestValidator)
             .bean(diagnosticReportDao, "create(${body})")
             .to("log:create-diagnostic-report?showAll=true");
 

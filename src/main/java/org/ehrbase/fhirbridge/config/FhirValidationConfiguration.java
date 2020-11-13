@@ -3,13 +3,19 @@ package org.ehrbase.fhirbridge.config;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
 import ca.uhn.fhir.parser.IParser;
+import ca.uhn.fhir.validation.FhirValidator;
 import org.ehrbase.fhirbridge.FhirBridgeException;
 import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.fhir.common.validation.TerminologyServerValidationSupport;
+import org.ehrbase.fhirbridge.fhir.common.validation.TerminologyValidationMode;
+import org.hl7.fhir.common.hapi.validation.support.CachingValidationSupport;
+import org.hl7.fhir.common.hapi.validation.support.CommonCodeSystemsTerminologyService;
+import org.hl7.fhir.common.hapi.validation.support.InMemoryTerminologyServerValidationSupport;
 import org.hl7.fhir.common.hapi.validation.support.PrePopulatedValidationSupport;
 import org.hl7.fhir.common.hapi.validation.support.ValidationSupportChain;
+import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
 import org.hl7.fhir.r4.model.StructureDefinition;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
@@ -24,88 +30,47 @@ public class FhirValidationConfiguration {
 
     private final FhirValidationProperties properties;
 
-    private final FhirContext fhirContext;
-
     private final ResourcePatternResolver resourceLoader;
 
-    private final ApplicationContext applicationContext;
 
-
-    public FhirValidationConfiguration(FhirValidationProperties properties, FhirContext fhirContext, ResourcePatternResolver resourceLoader, ApplicationContext applicationContext) {
+    public FhirValidationConfiguration(FhirValidationProperties properties, ResourcePatternResolver resourceLoader) {
         this.properties = properties;
-        this.fhirContext = fhirContext;
         this.resourceLoader = resourceLoader;
-        this.applicationContext = applicationContext;
     }
 
     @Bean
-    public DefaultCreateResourceRequestValidator defaultCreateResourceRequestValidator(FhirContext fhirContext) {
-        ValidationSupportChain validationSupport = new ValidationSupportChain();
-        validationSupport.addValidationSupport(new DefaultProfileValidationSupport(fhirContext));
-        validationSupport.addValidationSupport(prePopulatedValidationSupport());
-
-        DefaultCreateResourceRequestValidator defaultCreateResourceRequestValidator = new DefaultCreateResourceRequestValidator(fhirContext);
-
-        return defaultCreateResourceRequestValidator;
+    public DefaultCreateResourceRequestValidator defaultCreateResourceRequestValidator(FhirContext fhirContext, FhirValidator fhirValidator) {
+        return new DefaultCreateResourceRequestValidator(fhirContext, fhirValidator);
     }
 
-//    @Bean
-//    public FhirValidator fhirValidator(FhirContext fhirContext) {
-//        Collection<IValidationSupport> validationSupports = applicationContext.getBeansOfType(IValidationSupport.class).values();
-//        ValidationSupportChain validationSupport = new ValidationSupportChain();
-//        validationSupport.addValidationSupport(new DefaultProfileValidationSupport(fhirContext));
-//        validationSupport.addValidationSupport(prePopulatedValidationSupport());
-//
-//        FhirInstanceValidator fhirInstanceValidator = new FhirInstanceValidator(validationSupport);
-//        fhirInstanceValidator.setErrorForUnknownProfiles(false);
-//        fhirInstanceValidator.setNoTerminologyChecks(properties.getTerminology().getMode() == TerminologyValidationMode.NONE);
-//        FhirValidator fhirValidator = fhirContext.newValidator();
-//        fhirValidator.registerValidatorModule(fhirInstanceValidator);
-//        return fhirValidator;
-//    }
+    @Bean
+    public FhirValidator fhirValidator(FhirContext fhirContext) {
+        FhirValidator fhirValidator = fhirContext.newValidator();
 
-    //    @Bean(name = "fhirBridgeValidator")
-//    public FhirValidator fhirValidator(FhirContext fhirContext, ResourcePatternResolver resourceLoader,
-////                                       DefaultProfileValidationSupport defaultProfileValidationSupport,
-////                                       PrePopulatedValidationSupport prePopulatedValidationSupport,
-//                                       @Autowired(required = false) TerminologyServerValidationSupport terminologyServerValidationSupport) {
-//
-//        ValidationSupportChain validationSupport = new ValidationSupportChain();
-//        validationSupport.addValidationSupport(new DefaultProfileValidationSupport(fhirContext));
-//        PrePopulatedValidationSupport prePopulatedValidationSupport = new PrePopulatedValidationSupport(fhirContext);
-//        IParser parser = fhirContext.newXmlParser();
-//        try {
-//            for (Resource resource : resourceLoader.getResources("classpath:/profiles/*")) {
-//                InputStream inputStream = resource.getInputStream();
-//                StructureDefinition structureDefinition = parser.parseResource(StructureDefinition.class, inputStream);
-//                prePopulatedValidationSupport.addStructureDefinition(structureDefinition);
-//            }
-//        } catch (IOException e) {
-//            throw new FhirBridgeException("Initialization failed", e);
-//        }
-//        validationSupport.addValidationSupport(prePopulatedValidationSupport);
-//
-//        TerminologyValidationMode mode = properties.getTerminology().getMode();
-//        if (mode == TerminologyValidationMode.EMBEDDED) {
-//            validationSupport.addValidationSupport(new CommonCodeSystemsTerminologyService(fhirContext));
-//            validationSupport.addValidationSupport(new InMemoryTerminologyServerValidationSupport(fhirContext));
-//        } else if (mode == TerminologyValidationMode.SERVER) {
-//            validationSupport.addValidationSupport(terminologyServerValidationSupport);
-//        }
-//
-////        CachingValidationSupport cachingValidationSupport = new CachingValidationSupport(validationSupport);
-//
-//        FhirInstanceValidator fhirInstanceValidator = new FhirInstanceValidator(validationSupport);
-//        fhirInstanceValidator.setBestPracticeWarningLevel(IResourceValidator.BestPracticeWarningLevel.Hint);
-//        fhirInstanceValidator.setErrorForUnknownProfiles(true);
-//        fhirInstanceValidator.setNoTerminologyChecks(properties.getTerminology().getMode() == TerminologyValidationMode.NONE);
-//
-//        FhirValidator fhirValidator = fhirContext.newValidator();
-//        fhirValidator.registerValidatorModule(fhirInstanceValidator);
-//        return fhirValidator;
-//    }
-//
-    private PrePopulatedValidationSupport prePopulatedValidationSupport() {
+        ValidationSupportChain validationSupport = new ValidationSupportChain();
+        validationSupport.addValidationSupport(new DefaultProfileValidationSupport(fhirContext));
+        validationSupport.addValidationSupport(prePopulatedValidationSupport(fhirContext));
+
+        TerminologyValidationMode mode = properties.getTerminology().getMode();
+        if (mode == TerminologyValidationMode.EMBEDDED) {
+            validationSupport.addValidationSupport(new CommonCodeSystemsTerminologyService(fhirContext));
+            validationSupport.addValidationSupport(new InMemoryTerminologyServerValidationSupport(fhirContext));
+        } else if (mode == TerminologyValidationMode.SERVER) {
+            validationSupport.addValidationSupport(terminologyServerValidationSupport(fhirContext));
+        }
+
+        CachingValidationSupport cachingValidationSupport = new CachingValidationSupport(validationSupport);
+
+        FhirInstanceValidator fhirInstanceValidator = new FhirInstanceValidator(cachingValidationSupport);
+        fhirInstanceValidator.setErrorForUnknownProfiles(false);
+        fhirInstanceValidator.setNoTerminologyChecks(properties.getTerminology().getMode() == TerminologyValidationMode.NONE);
+
+        fhirValidator.registerValidatorModule(fhirInstanceValidator);
+
+        return fhirValidator;
+    }
+
+    private PrePopulatedValidationSupport prePopulatedValidationSupport(FhirContext fhirContext) {
         PrePopulatedValidationSupport prePopulatedValidationSupport = new PrePopulatedValidationSupport(fhirContext);
         IParser parser = fhirContext.newXmlParser();
         try {
@@ -119,11 +84,9 @@ public class FhirValidationConfiguration {
         }
         return prePopulatedValidationSupport;
     }
-//
-//    @Bean
-//    @ConditionalOnProperty(name = "fhir-bridge.fhir.validation.terminology.mode", havingValue = "server")
-//    public TerminologyServerValidationSupport terminologyServerValidationSupport(FhirContext fhirContext) {
-//        String serverUrl = properties.getTerminology().getServerUrl();
-//        return new TerminologyServerValidationSupport(fhirContext, fhirContext.newRestfulGenericClient(serverUrl));
-//    }
+
+    private TerminologyServerValidationSupport terminologyServerValidationSupport(FhirContext fhirContext) {
+        String serverUrl = properties.getTerminology().getServerUrl();
+        return new TerminologyServerValidationSupport(fhirContext, fhirContext.newRestfulGenericClient(serverUrl));
+    }
 }

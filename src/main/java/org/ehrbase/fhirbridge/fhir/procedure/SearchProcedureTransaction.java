@@ -10,7 +10,7 @@ public class SearchProcedureTransaction extends FhirTransactionConfiguration<Gen
     public SearchProcedureTransaction() {
         super("proc-search",
                 "Search Procedure",
-                false,
+                true,
                 null,
                 null,
                 FhirVersionEnum.R4,

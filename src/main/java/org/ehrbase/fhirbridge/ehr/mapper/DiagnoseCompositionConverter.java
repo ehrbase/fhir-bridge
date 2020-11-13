@@ -17,7 +17,7 @@ import java.util.Date;
 public class DiagnoseCompositionConverter implements CompositionConverter<DiagnoseComposition, Condition> {
 
     @Override
-    public DiagnoseComposition convertTo(Condition condition) {
+    public DiagnoseComposition toComposition(Condition condition) {
         if (condition == null) {
             return null;
         }
@@ -31,7 +31,7 @@ public class DiagnoseCompositionConverter implements CompositionConverter<Diagno
     }
 
     @Override
-    public Condition convertFrom(DiagnoseComposition composition) {
+    public Condition fromComposition(DiagnoseComposition composition) {
         if (composition == null) {
             return null;
         }

@@ -34,7 +34,7 @@ public class IntensivmedizinischesMonitoringKorpertemperaturCompositionConverter
 
     private final Logger logger = LoggerFactory.getLogger(IntensivmedizinischesMonitoringKorpertemperaturCompositionConverter.class);
 
-    public Observation convertFrom(IntensivmedizinischesMonitoringKorpertemperaturComposition composition) {
+    public Observation fromComposition(IntensivmedizinischesMonitoringKorpertemperaturComposition composition) {
         Observation observation = new Observation();
 
         TemporalAccessor temporal;
@@ -79,7 +79,7 @@ public class IntensivmedizinischesMonitoringKorpertemperaturCompositionConverter
         return observation;
     }
 
-    public IntensivmedizinischesMonitoringKorpertemperaturComposition convertTo(Observation resource) {
+    public IntensivmedizinischesMonitoringKorpertemperaturComposition toComposition(Observation resource) {
 
         IntensivmedizinischesMonitoringKorpertemperaturComposition composition = new IntensivmedizinischesMonitoringKorpertemperaturComposition();
 
