@@ -62,7 +62,8 @@ public enum Profile {
 
     public static <T extends Resource> boolean isDefaultSupported(T resource) {
         return !(resource instanceof DiagnosticReport) &&
-                !(resource instanceof Observation);
+                !(resource instanceof Observation) &&
+                !(resource instanceof Patient);
     }
 
     public static <T extends Resource> Collection<Profile> resolve(T resource) {

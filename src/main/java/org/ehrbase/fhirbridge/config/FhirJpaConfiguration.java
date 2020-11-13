@@ -23,6 +23,7 @@ import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.SearchParameter;
 import org.hl7.fhir.r4.model.ValueSet;
@@ -115,6 +116,14 @@ public class FhirJpaConfiguration {
         auditEventDao.setResourceType(AuditEvent.class);
         auditEventDao.setContext(context);
         return auditEventDao;
+    }
+
+    @Bean(name = "myPatientDaoR4")
+    public IFhirResourceDao<Patient> patientDao(FhirContext context) {
+        JpaResourceDao<Patient> patientDao = new JpaResourceDao();
+        patientDao.setResourceType(Patient.class);
+        patientDao.setContext(context);
+        return patientDao;
     }
 
     @Bean(name = "myCodeSystemDaoR4")
