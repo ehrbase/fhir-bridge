@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.fhir;
 
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Resource;
 
 import java.util.Collection;
@@ -13,6 +14,10 @@ public enum Profile {
     // DiagnosticReport Profiles
 
     DIAGNOSTIC_REPORT_LAB(DiagnosticReport.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab"),
+
+    // Patient Profiles
+
+    PATIENT(Patient.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient"),
 
     // Observation Profiles
 
@@ -56,7 +61,8 @@ public enum Profile {
     }
 
     public static <T extends Resource> boolean isDefaultSupported(T resource) {
-        return !(resource instanceof DiagnosticReport) && !(resource instanceof Observation);
+        return !(resource instanceof DiagnosticReport) &&
+                !(resource instanceof Observation);
     }
 
     public static <T extends Resource> Collection<Profile> resolve(T resource) {

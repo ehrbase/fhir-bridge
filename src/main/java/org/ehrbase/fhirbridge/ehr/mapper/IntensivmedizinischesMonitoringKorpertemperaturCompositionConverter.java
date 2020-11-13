@@ -29,7 +29,6 @@ import java.util.List;
 
 import static java.util.Date.from;
 
-
 public class IntensivmedizinischesMonitoringKorpertemperaturCompositionConverter implements CompositionConverter<IntensivmedizinischesMonitoringKorpertemperaturComposition, Observation> {
 
     private final Logger logger = LoggerFactory.getLogger(IntensivmedizinischesMonitoringKorpertemperaturCompositionConverter.class);

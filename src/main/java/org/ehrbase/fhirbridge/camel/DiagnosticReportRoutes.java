@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.camel;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +14,14 @@ public class DiagnosticReportRoutes extends RouteBuilder {
 
     private final DefaultCreateResourceRequestValidator requestValidator;
 
+    private final PatientIdProcessor patientIdProcessor;
+
     public DiagnosticReportRoutes(IFhirResourceDao<DiagnosticReport> diagnosticReportDao,
-                                  DefaultCreateResourceRequestValidator requestValidator) {
+                                  DefaultCreateResourceRequestValidator requestValidator,
+                                  PatientIdProcessor patientIdProcessor) {
         this.diagnosticReportDao = diagnosticReportDao;
         this.requestValidator = requestValidator;
+        this.patientIdProcessor = patientIdProcessor;
     }
 
     @Override
@@ -26,6 +31,8 @@ public class DiagnosticReportRoutes extends RouteBuilder {
             .routeId("create-diagnostic-report")
             .process(requestValidator)
             .bean(diagnosticReportDao, "create(${body})")
+            .setBody(simple("${body.resource}"))
+            .process(patientIdProcessor)
             .to("log:create-diagnostic-report?showAll=true");
 
         from("diag-rep-read:/service?audit=false&fhirContext=#fhirContext")

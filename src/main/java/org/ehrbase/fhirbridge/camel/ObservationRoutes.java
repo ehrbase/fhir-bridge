@@ -4,6 +4,7 @@ import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.ehr.mapper.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.mapper.IntensivmedizinischesMonitoringKorpertemperaturCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.Profile;
@@ -19,14 +20,17 @@ public class ObservationRoutes extends RouteBuilder {
 
     private final DefaultCreateResourceRequestValidator requestValidator;
 
+    private final PatientIdProcessor patientIdProcessor;
+
     private final OpenEhrClient openEhrClient;
 
     public ObservationRoutes(
             IFhirResourceDao<Observation> observationDao,
             DefaultCreateResourceRequestValidator requestValidator,
-            OpenEhrClient openEhrClient) {
+            PatientIdProcessor patientIdProcessor, OpenEhrClient openEhrClient) {
         this.observationDao = observationDao;
         this.requestValidator = requestValidator;
+        this.patientIdProcessor = patientIdProcessor;
         this.openEhrClient = openEhrClient;
     }
 
@@ -38,6 +42,7 @@ public class ObservationRoutes extends RouteBuilder {
             .process(requestValidator)
             .bean(observationDao, "create(${body})")
             .setBody(simple("${body.resource}"))
+            .process(patientIdProcessor)
             .process(exchange -> {
                 UUID ehrId = exchange.getIn().getHeader(FhirBridgeHeaders.EHR_ID, UUID.class);
                 Profile profile  = exchange.getIn().getHeader(FhirBridgeHeaders.PROFILE, Profile.class);

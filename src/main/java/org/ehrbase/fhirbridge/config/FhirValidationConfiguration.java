@@ -4,8 +4,10 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.validation.FhirValidator;
+import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.FhirBridgeException;
 import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.fhir.common.validation.TerminologyServerValidationSupport;
 import org.ehrbase.fhirbridge.fhir.common.validation.TerminologyValidationMode;
 import org.hl7.fhir.common.hapi.validation.support.CachingValidationSupport;
@@ -32,7 +34,6 @@ public class FhirValidationConfiguration {
 
     private final ResourcePatternResolver resourceLoader;
 
-
     public FhirValidationConfiguration(FhirValidationProperties properties, ResourcePatternResolver resourceLoader) {
         this.properties = properties;
         this.resourceLoader = resourceLoader;
@@ -41,6 +42,11 @@ public class FhirValidationConfiguration {
     @Bean
     public DefaultCreateResourceRequestValidator defaultCreateResourceRequestValidator(FhirContext fhirContext, FhirValidator fhirValidator) {
         return new DefaultCreateResourceRequestValidator(fhirContext, fhirValidator);
+    }
+
+    @Bean
+    public PatientIdProcessor patientIdValidator(FhirContext fhirContext, OpenEhrClient openEhrClient) {
+        return new PatientIdProcessor(fhirContext, openEhrClient);
     }
 
     @Bean
