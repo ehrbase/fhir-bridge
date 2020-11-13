@@ -2,6 +2,8 @@ package org.ehrbase.fhirbridge.camel.processor;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import ca.uhn.fhir.validation.FhirValidator;
+import ca.uhn.fhir.validation.ValidationResult;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.ehrbase.fhirbridge.camel.FhirBridgeHeaders;
@@ -30,30 +32,25 @@ public class DefaultCreateResourceRequestValidator implements Processor, Message
 
     private final FhirContext fhirContext;
 
+    private final FhirValidator fhirValidator;
+
     private MessageSourceAccessor messages;
 
-    public DefaultCreateResourceRequestValidator(FhirContext fhirContext) {
+    public DefaultCreateResourceRequestValidator(FhirContext fhirContext, FhirValidator fhirValidator) {
         this.fhirContext = fhirContext;
+        this.fhirValidator = fhirValidator;
     }
 
     @Override
     public void process(Exchange exchange) {
         Resource resource = exchange.getIn().getBody(Resource.class);
 
-        logger.debug("Start {} resource validation...", resource.getResourceType());
+        logger.debug("Start validating {} resource...", resource.getResourceType());
 
         validateProfile(exchange, resource);
-//        Resource resource = exchange.getIn().getBody(Resource.class);
-//
-//        FhirInstanceValidator fhirInstanceValidator = new FhirInstanceValidator(validationSupport);
-//        fhirInstanceValidator.setErrorForUnknownProfiles(false);
-//        FhirValidator fhirValidator = fhirContext.newValidator();
-//        fhirValidator.registerValidatorModule(fhirInstanceValidator);
-//
-//        ValidationResult validationResult = fhirValidator.validateWithResult(resource);
-//        if (!validationResult.isSuccessful()) {
-//            throw new UnprocessableEntityException(fhirContext, validationResult.toOperationOutcome());
-//        }
+        validateResource(resource);
+
+        logger.info("{} resource validated", resource.getResourceType());
     }
 
     private void validateProfile(Exchange exchange, Resource resource) {
@@ -104,6 +101,13 @@ public class DefaultCreateResourceRequestValidator implements Processor, Message
             }
         }
 
+    }
+
+    private void validateResource(Resource resource) {
+        ValidationResult validationResult = fhirValidator.validateWithResult(resource);
+        if (!validationResult.isSuccessful()) {
+            throw new UnprocessableEntityException(fhirContext, validationResult.toOperationOutcome());
+        }
     }
 
     @Override

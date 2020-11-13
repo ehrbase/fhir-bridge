@@ -10,7 +10,7 @@ public class ReadProcedureTransaction extends FhirTransactionConfiguration<Gener
     public ReadProcedureTransaction() {
         super("proc-read",
                 "Read Procedure",
-                false,
+                true,
                 null,
                 null,
                 FhirVersionEnum.R4,

@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.camel;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
-import org.ehrbase.fhirbridge.camel.FhirBridgeHeaders;
+import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.ehr.mapper.DiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.template.diagnosecomposition.DiagnoseComposition;
 import org.hl7.fhir.r4.model.Condition;
@@ -16,10 +16,15 @@ public class ConditionRoutes extends RouteBuilder {
 
     private final IFhirResourceDao<Condition> conditionDao;
 
+    private final DefaultCreateResourceRequestValidator requestValidator;
+
     private final OpenEhrClient openEhrClient;
 
-    public ConditionRoutes(IFhirResourceDao<Condition> conditionDao, OpenEhrClient openEhrClient) {
+    public ConditionRoutes(IFhirResourceDao<Condition> conditionDao,
+                           DefaultCreateResourceRequestValidator requestValidator,
+                           OpenEhrClient openEhrClient) {
         this.conditionDao = conditionDao;
+        this.requestValidator = requestValidator;
         this.openEhrClient = openEhrClient;
     }
 
@@ -28,6 +33,7 @@ public class ConditionRoutes extends RouteBuilder {
         // @formatter:off
         from("cond-create:/service?audit=false&fhirContext=#fhirContext")
             .routeId("create-condition")
+            .process(requestValidator)
             .bean(conditionDao, "create(${body})")
             .setBody(simple("${body.resource}"))
             .process(exchange -> {
@@ -35,7 +41,7 @@ public class ConditionRoutes extends RouteBuilder {
                 Condition condition = exchange.getIn().getBody(Condition.class);
 
                 DiagnoseCompositionConverter converter = new DiagnoseCompositionConverter();
-                DiagnoseComposition composition = converter.convertTo(condition);
+                DiagnoseComposition composition = converter.toComposition(condition);
                 openEhrClient.compositionEndpoint(ehrId).mergeCompositionEntity(composition);
             });
 
