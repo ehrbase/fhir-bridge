@@ -65,14 +65,12 @@ public class DefaultCreateResourceRequestValidator implements Processor, Message
                     .collect(Collectors.toList());
 
             if (supportedProfiles.isEmpty()) {
-                if (!declaredProfiles.isEmpty()) {
-                    for (int i = 0; i < declaredProfiles.size(); i++) {
-                        operationOutcome.addIssue(new OperationOutcomeIssueComponent()
-                                .setSeverity(IssueSeverity.WARNING)
-                                .setCode(IssueType.VALUE)
-                                .setDiagnostics(messages.getMessage("validation.profile.notSupported", new Object[]{declaredProfiles.get(i), resourceType}))
-                                .addExpression(resource.getResourceType() + ".meta.profile[" + i + "]"));
-                    }
+                for (int i = 0; i < declaredProfiles.size(); i++) {
+                    operationOutcome.addIssue(new OperationOutcomeIssueComponent()
+                            .setSeverity(IssueSeverity.WARNING)
+                            .setCode(IssueType.VALUE)
+                            .setDiagnostics(messages.getMessage("validation.profile.notSupported", new Object[]{declaredProfiles.get(i), resourceType}))
+                            .addExpression(resource.getResourceType() + ".meta.profile[" + i + "]"));
                 }
                 operationOutcome.addIssue(new OperationOutcomeIssueComponent()
                         .setSeverity(IssueSeverity.FATAL)
@@ -96,11 +94,10 @@ public class DefaultCreateResourceRequestValidator implements Processor, Message
 
             if (operationOutcome.hasIssue()) {
                 throw new UnprocessableEntityException(fhirContext, operationOutcome);
-            } else {
-                exchange.getMessage().setHeader(FhirBridgeHeaders.PROFILE, supportedProfiles.iterator().next());
             }
-        }
 
+            exchange.getMessage().setHeader(FhirBridgeHeaders.PROFILE, supportedProfiles.iterator().next());
+        }
     }
 
     private void validateResource(Resource resource) {
