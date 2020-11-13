@@ -4,7 +4,7 @@ import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Resource;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -55,7 +55,7 @@ public enum Profile {
         return !(resource instanceof DiagnosticReport) && !(resource instanceof Observation);
     }
 
-    public static <T extends Resource> List<Profile> resolveAll(T resource) {
+    public static <T extends Resource> Collection<Profile> resolve(T resource) {
         return resource.getMeta().getProfile().stream()
                 .map(uri -> Profile.resolve(uri.getValue()))
                 .filter(Objects::nonNull)
