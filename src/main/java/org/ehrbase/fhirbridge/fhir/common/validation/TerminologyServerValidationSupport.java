@@ -76,7 +76,7 @@ public class TerminologyServerValidationSupport implements IValidationSupport, M
             } else {
                 return new CodeValidationResult()
                         .setSeverity(IssueSeverity.WARNING)
-                        .setMessage(messages.getMessage("error.validateCode", new Object[]{theCode, theCodeSystem, valueSetUrl}));
+                        .setMessage(messages.getMessage("validation.terminology.validateCode", new Object[]{theCode, theCodeSystem, valueSetUrl}));
             }
         } else {
             logger.debug("Perform '/ValueSet/$expand' operation: url={}", valueSetUrl);
@@ -103,7 +103,7 @@ public class TerminologyServerValidationSupport implements IValidationSupport, M
 
             return new CodeValidationResult()
                     .setSeverity(IssueSeverity.ERROR)
-                    .setMessage(messages.getMessage("error.expand", new Object[]{theCode, valueSetUrl}));
+                    .setMessage(messages.getMessage("validation.terminology.expand", new Object[]{theCode, valueSetUrl}));
         }
     }
 
@@ -156,7 +156,7 @@ public class TerminologyServerValidationSupport implements IValidationSupport, M
             } catch (ResourceNotFoundException e) {
                 return new CodeValidationResult()
                         .setSeverity(IssueSeverity.ERROR)
-                        .setMessage(messages.getMessage("error.lookup", new Object[]{theCode, theCodeSystem}));
+                        .setMessage(messages.getMessage("validation.terminology.lookup", new Object[]{theCode, theCodeSystem}));
             }
         }
 
