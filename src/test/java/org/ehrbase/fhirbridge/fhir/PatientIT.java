@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class PatientIT {
+class PatientIT extends AbstractSetupIT {
 
     private final FhirContext context = FhirContext.forR4();
 
@@ -25,7 +25,7 @@ class PatientIT {
     @Test
     void create() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("Patient/create.json").getInputStream(), StandardCharsets.UTF_8);
-        MethodOutcome outcome = client.create().resource(resource).execute();
+        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
 
         assertNotNull(outcome.getId());
         assertEquals(true, outcome.getCreated());
@@ -34,7 +34,7 @@ class PatientIT {
     @Test
     void createInvalid() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("Patient/create-invalid.json").getInputStream(), StandardCharsets.UTF_8);
-        ICreateTyped createTyped = client.create().resource(resource);
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age, Element 'Patient.extension[1].extension[dateTimeOfDocumentation]': minimum required = 1, but only found 0", exception.getMessage());
@@ -43,7 +43,7 @@ class PatientIT {
     @Test
     void createDefaultProfile() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("Patient/create-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
-        ICreateTyped createTyped = client.create().resource(resource);
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : Default profile is not supported", exception.getMessage());

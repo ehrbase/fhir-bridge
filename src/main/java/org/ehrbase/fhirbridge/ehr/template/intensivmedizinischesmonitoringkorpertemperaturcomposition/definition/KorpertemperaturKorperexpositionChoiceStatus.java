@@ -1,4 +1,0 @@
-package org.ehrbase.fhirbridge.ehr.template.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition;
-
-public interface KorpertemperaturKorperexpositionChoiceStatus {
-}

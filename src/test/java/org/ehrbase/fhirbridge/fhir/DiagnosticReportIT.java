@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class DiagnosticReportIT {
+class DiagnosticReportIT extends AbstractSetupIT{
 
     private final FhirContext context = FhirContext.forR4();
 
@@ -25,7 +25,7 @@ class DiagnosticReportIT {
     @Test
     void create() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create-with-observation.json").getInputStream(), StandardCharsets.UTF_8);
-        MethodOutcome outcome = client.create().resource(resource).execute();
+        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
 
         assertNotNull(outcome.getId());
         assertEquals(true, outcome.getCreated());
@@ -34,7 +34,7 @@ class DiagnosticReportIT {
     @Test
     void createWithDefaultProfile() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create-with-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
-        ICreateTyped createTyped = client.create().resource(resource);
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : Default profile is not supported", exception.getMessage());
@@ -43,7 +43,7 @@ class DiagnosticReportIT {
     @Test
     void createWithInvalidCode() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create-with-invalid-code.json").getInputStream(), StandardCharsets.UTF_8);
-        ICreateTyped createTyped = client.create().resource(resource);
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : This element does not match any known slice defined in the profile https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab", exception.getMessage());

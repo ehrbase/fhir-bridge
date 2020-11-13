@@ -74,7 +74,10 @@
     }
   ],
   "subject": {
-    "reference": "urn:uuid:07f602e0-579e-4fe3-95af-381728bf0d49"
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
   },
   "onsetDateTime": "2012-05-24"
 }

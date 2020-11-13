@@ -26,7 +26,10 @@
     ]
   },
   "subject": {
-    "reference": "urn:uuid:07f602e0-579e-4fe3-95af-381728bf0d49"
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
   },
   "effectiveDateTime": "2020-04-30T12:00:00+01:00",
   "valueQuantity": {
