@@ -3,22 +3,15 @@ package org.ehrbase.fhirbridge.mapping;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.KorpergrosseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.KorpergrosseCompositionContainment;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.definition.GrosseLangeObservation;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.math.BigDecimal;
-
-import com.nedap.archie.rm.datatypes.CodePhrase;
-import com.nedap.archie.rm.datavalues.DvCodedText;
-import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
-import com.nedap.archie.rm.generic.PartySelf;
-import com.nedap.archie.rm.support.identification.TerminologyId;
 
 /**
  * FHIR 2 openEHR - respiration rate
@@ -28,14 +21,15 @@ public class FhirObservationKorpergrosseOpenehrKorpergrosse {
 
     private static final Logger logger = LoggerFactory.getLogger(FhirObservationKorpergrosseOpenehrKorpergrosse.class);
 
-    private FhirObservationKorpergrosseOpenehrKorpergrosse() {}
+    private FhirObservationKorpergrosseOpenehrKorpergrosse() {
+    }
 
     public static KorpergrosseComposition map(Observation fhirObservation) {
 
         KorpergrosseComposition composition = new KorpergrosseComposition();
         GrosseLangeObservation observation = new GrosseLangeObservation();
 
-        DateTimeType  fhirEffectiveDateTime = null;
+        DateTimeType fhirEffectiveDateTime = null;
         try {
 
             // default for every observation

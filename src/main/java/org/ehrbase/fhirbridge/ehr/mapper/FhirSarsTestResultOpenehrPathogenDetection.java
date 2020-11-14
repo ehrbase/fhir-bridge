@@ -3,16 +3,21 @@ package org.ehrbase.fhirbridge.mapping;
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.mapper.CommonData;
-import org.ehrbase.fhirbridge.fhir.Profile;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KorpertemperaturBeliebigesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.KennzeichnungErregernachweisSARSCoV2Composition;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.KennzeichnungErregernachweisEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.*;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.ErregernameDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
+import org.ehrbase.fhirbridge.fhir.Profile;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
@@ -27,7 +32,8 @@ public class FhirSarsTestResultOpenehrPathogenDetection {
 
     private static final Logger logger = LoggerFactory.getLogger(FhirSarsTestResultOpenehrPathogenDetection.class);
 
-    private FhirSarsTestResultOpenehrPathogenDetection() {}
+    private FhirSarsTestResultOpenehrPathogenDetection() {
+    }
 
     public static KennzeichnungErregernachweisSARSCoV2Composition map(Observation fhirObservation) {
 
@@ -103,8 +109,7 @@ public class FhirSarsTestResultOpenehrPathogenDetection {
         return composition;
     }
 
-    public static Observation map(KennzeichnungErregernachweisSARSCoV2Composition compo)
-    {
+    public static Observation map(KennzeichnungErregernachweisSARSCoV2Composition compo) {
         Observation observation = new Observation();
 
         TemporalAccessor temporal;
@@ -113,11 +118,10 @@ public class FhirSarsTestResultOpenehrPathogenDetection {
 
         // evaluation time -> effective_time
         temporal = compo.getKennzeichnungErregernachweis().getZeitpunktDerKennzeichnungValue();
-        observation.getEffectiveDateTimeType().setValue(from(((OffsetDateTime)temporal).toInstant()));
+        observation.getEffectiveDateTimeType().setValue(from(((OffsetDateTime) temporal).toInstant()));
 
         // FIXME: cant map the code back because the compo has a boolean derived from the code in the FHIR resource
-        if (compo.getKennzeichnungErregernachweis().isErregernachweisValue())
-        {
+        if (compo.getKennzeichnungErregernachweis().isErregernachweisValue()) {
             // This is not right, could not the value that came initially in the FHIR observation
             coding = observation.getCode().addCoding();
             coding.setSystem("http://loing.org");

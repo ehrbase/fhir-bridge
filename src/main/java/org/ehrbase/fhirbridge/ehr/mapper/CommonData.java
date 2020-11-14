@@ -17,7 +17,9 @@ public class CommonData {
         // source system
         String sourceSystem = fhirResource.getMeta().getSource();
 
-        if (sourceSystem == null) sourceSystem = "FHIR-bridge";
+        if (sourceSystem == null) {
+            sourceSystem = "FHIR-bridge";
+        }
 
         FeederAuditDetails fad = new FeederAuditDetails();
         fad.setSystemId(sourceSystem);

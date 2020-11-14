@@ -1,30 +1,28 @@
 package org.ehrbase.fhirbridge.mapping;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.datatypes.CodePhrase;
+import com.nedap.archie.rm.datavalues.DvCodedText;
+import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import com.nedap.archie.rm.generic.PartySelf;
+import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.KlinischeFrailtySkalaComposition;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.KlinischeFrailtySkalaCfsObservation;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.math.BigDecimal;
-
-import com.nedap.archie.rm.datatypes.CodePhrase;
-import com.nedap.archie.rm.datavalues.DvCodedText;
-import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
-import com.nedap.archie.rm.generic.PartySelf;
-import com.nedap.archie.rm.support.identification.TerminologyId;
 
 /**
  * FHIR 2 openEHR - respiration rate
  */
 public class FhirObservationClinicalFrailtyScaleOpenehrClinicalFrailtyScale {
 
-    private static class ClinicalFrailty_Mapping_Assessment{
+    private static class ClinicalFrailty_Mapping_Assessment {
 
         private final static DvOrdinal ClinFrailty_Beurteilung_1_SEHR_FIT = new DvOrdinal(1L,
                 new DvCodedText("1", new CodePhrase(new TerminologyId("local"), "at0005")));
@@ -45,7 +43,7 @@ public class FhirObservationClinicalFrailtyScaleOpenehrClinicalFrailtyScale {
         private final static DvOrdinal ClinFrailty_Beurteilung_9_TERMINAL_ERKRANKT = new DvOrdinal(9L,
                 new DvCodedText("9", new CodePhrase(new TerminologyId("local"), "at0013")));
 
-        public DvOrdinal getDVOrdinal(int code){
+        public DvOrdinal getDVOrdinal(int code) {
             DvOrdinal ret;
             switch (code) {
                 case 1:
@@ -76,7 +74,7 @@ public class FhirObservationClinicalFrailtyScaleOpenehrClinicalFrailtyScale {
                     ret = ClinFrailty_Beurteilung_9_TERMINAL_ERKRANKT;
                     break;
                 default:
-                    throw new UnprocessableEntityException("Cannot match beurteilung\""+code+"\"");
+                    throw new UnprocessableEntityException("Cannot match beurteilung\"" + code + "\"");
             }
             return ret;
         }
@@ -84,14 +82,15 @@ public class FhirObservationClinicalFrailtyScaleOpenehrClinicalFrailtyScale {
 
     private static final Logger logger = LoggerFactory.getLogger(FhirObservationClinicalFrailtyScaleOpenehrClinicalFrailtyScale.class);
 
-    private FhirObservationClinicalFrailtyScaleOpenehrClinicalFrailtyScale() {}
+    private FhirObservationClinicalFrailtyScaleOpenehrClinicalFrailtyScale() {
+    }
 
     public static KlinischeFrailtySkalaComposition map(Observation fhirObservation) {
 
         KlinischeFrailtySkalaComposition composition = new KlinischeFrailtySkalaComposition();
         KlinischeFrailtySkalaCfsObservation observation = new KlinischeFrailtySkalaCfsObservation();
 
-        DateTimeType  fhirEffectiveDateTime = null;
+        DateTimeType fhirEffectiveDateTime = null;
         try {
 
             // default for every observation
