@@ -48,6 +48,7 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.HashMap;
@@ -512,7 +513,7 @@ public class FhirDiagnosticReportOpenehrLabResults {
 
         // cluster . time -> observation . effective_date
         temporal = cluster.getZeitpunktErgebnisStatusValue();
-        observation.getEffectiveDateTimeType().setValue(from(((OffsetDateTime) temporal).toInstant()));
+        observation.getEffectiveDateTimeType().setValue(Date.from(((ZonedDateTime) temporal).toInstant()));
 
         // cluster . value -> observation . value
         ProLaboranalytAnalytResultatDvquantity value = ((ProLaboranalytAnalytResultatDvquantity) cluster.getAnalytResultat());
