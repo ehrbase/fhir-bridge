@@ -8,8 +8,6 @@ import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.hl7.fhir.r4.model.Condition;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class ConditionRoutes extends RouteBuilder {
 
@@ -38,14 +36,7 @@ public class ConditionRoutes extends RouteBuilder {
             .routeId("create-condition")
             .process(requestValidator)
             .bean(conditionDao, "create(${body})")
-            .setBody(simple("${body.resource}"))
-            .process(patientIdProcessor)
-            .process(exchange -> {
-                UUID ehrId = exchange.getIn().getHeader(FhirBridgeHeaders.EHR_ID, UUID.class);
-                Condition condition = exchange.getIn().getBody(Condition.class);
-
-                openEhrClient.compositionEndpoint(ehrId).mergeCompositionEntity(condition);
-            });
+            .setBody(simple("${body.resource}"));
 
         from("cond-read:/service?audit=false&fhirContext=#fhirContext")
             .routeId("read-condition")

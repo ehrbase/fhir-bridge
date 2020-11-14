@@ -24,7 +24,7 @@ class DiagnosticReportIT extends AbstractSetupIT{
 
     @Test
     void create() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create-with-observation.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create.json").getInputStream(), StandardCharsets.UTF_8);
         MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
 
         assertNotNull(outcome.getId());

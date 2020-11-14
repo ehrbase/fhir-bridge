@@ -7,7 +7,7 @@ import com.nedap.archie.rm.support.identification.HierObjectId;
 import com.nedap.archie.rm.support.identification.PartyRef;
 import org.ehrbase.client.openehrclient.OpenEhrClientConfig;
 import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
-import org.ehrbase.fhirbridge.ehr.ClasspathTemplateProvider;
+import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.junit.jupiter.api.BeforeAll;
 
 import java.net.URI;
@@ -24,7 +24,7 @@ abstract class AbstractSetupIT {
     static void setup() throws URISyntaxException {
         DefaultRestClient client = new DefaultRestClient(
                 new OpenEhrClientConfig(new URI("http://localhost:8080/ehrbase/rest/openehr/v1/")),
-                new ClasspathTemplateProvider());
+                new ResourceTemplateProvider("classpath:/opt/*.opt"));
 
         EhrStatus ehrStatus = new EhrStatus();
         ehrStatus.setSubject(new PartySelf(new PartyRef(new HierObjectId(PATIENT_ID), "demographic", "PERSON")));

@@ -9,6 +9,7 @@ import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.client.aql.record.Record1;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.FhirBridgeHeaders;
+import org.ehrbase.fhirbridge.camel.component.ehr.CompositionConstants;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
@@ -57,7 +58,7 @@ public class PatientIdProcessor implements Processor, MessageSourceAware {
                             .addExpression(resource.getResourceType() + ".subject.identifier")));
         }
 
-        exchange.getIn().setHeader(FhirBridgeHeaders.EHR_ID, result.get(0).value1());
+        exchange.getIn().setHeader(CompositionConstants.EHR_ID, result.get(0).value1());
     }
 
     private String extractPatientId(Resource resource) {

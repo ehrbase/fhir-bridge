@@ -1,6 +1,8 @@
 fhir-bridge:
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
+    template:
+      prefix: classpath:/opt/
 spring:
   application:
     name: FHIR Bridge PoC

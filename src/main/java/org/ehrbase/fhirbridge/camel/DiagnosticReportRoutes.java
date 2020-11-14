@@ -1,16 +1,16 @@
 package org.ehrbase.fhirbridge.camel;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.mapping.FhirDiagnosticReportOpenehrLabResults;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 @Component
 public class DiagnosticReportRoutes extends RouteBuilder {
@@ -43,16 +43,23 @@ public class DiagnosticReportRoutes extends RouteBuilder {
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
             .process(exchange -> {
-                UUID ehrId = exchange.getIn().getHeader(FhirBridgeHeaders.EHR_ID, UUID.class);
                 DiagnosticReport diagnosticReport = exchange.getIn().getBody(DiagnosticReport.class);
-
-                GECCOLaborbefundComposition composition = FhirDiagnosticReportOpenehrLabResults.map(diagnosticReport);
-                openEhrClient.compositionEndpoint(ehrId).mergeCompositionEntity(composition);
+                exchange.getMessage().setBody(FhirDiagnosticReportOpenehrLabResults.map(diagnosticReport));
+            })
+            .to("ehr-composition:/test?operation=mergeCompositionEntity&")
+            .process(exchange -> {
+                GECCOLaborbefundComposition composition = exchange.getIn().getBody(GECCOLaborbefundComposition.class);
+                exchange.getMessage().setBody(FhirDiagnosticReportOpenehrLabResults.map(composition));
+            })
+            .process(exchange -> {
+                MethodOutcome methodOutcome = new MethodOutcome();
+                methodOutcome.setResource(exchange.getIn().getBody(IBaseResource.class));
+                exchange.getMessage().setBody(methodOutcome);
             });
+        // @formatter:on
 
         from("diag-rep-read:/service?audit=false&fhirContext=#fhirContext")
             .routeId("read-diagnostic-report-read")
             .to("log:read-diagnostic-report?showAll=true");
-        // @formatter:on
     }
 }
