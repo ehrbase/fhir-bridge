@@ -1,16 +1,17 @@
 package org.ehrbase.fhirbridge.camel.component.ehr;
 
 import org.apache.camel.RuntimeCamelException;
-import org.apache.camel.spi.UriParam;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
 
+@SuppressWarnings({"java:S2157", "java:S1452"})
 public class CompositionConfiguration implements Cloneable {
 
-    @UriParam(label = "producer")
     private OpenEhrClient openEhrClient;
 
-    @UriParam(label = "producer", enums = "mergeCompositionEntity,find")
     private CompositionOperation operation;
+
+    private CompositionConverter converter;
 
     public CompositionConfiguration() {
     }
@@ -41,5 +42,13 @@ public class CompositionConfiguration implements Cloneable {
 
     public void setOperation(CompositionOperation operation) {
         this.operation = operation;
+    }
+
+    public CompositionConverter getConverter() {
+        return converter;
+    }
+
+    public void setConverter(CompositionConverter converter) {
+        this.converter = converter;
     }
 }
