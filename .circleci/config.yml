@@ -26,8 +26,8 @@ workflows:
             #         - master
             #         - develop
             #         - release
-        - build-and-test-fhirbridge:
-            context: org-global
+        # - build-and-test-fhirbridge:
+        #     context: org-global
 
 
 
@@ -65,31 +65,31 @@ jobs:
             - save-fhirbridge-test-results
 
 
-    build-and-test-fhirbridge:
-        description: |
-            Build and test FHIR-bridge, analyze code, collect code coverage metrics,
-            upload results to sonarcloud.io
-        executor: docker-py3-java11-postgres
-        steps:
-            - checkout
-            - install-maven
-            - git-clone-ehrbase-repo
-            - cache-out-fhirbridge-m2-dependencies
-            - cache-out-ehrbase-m2-dependencies
-            - build-ehrbase
-            - start-ehrbase-server
-            - build-and-test-fhirbridge
-            - cache-in-ehrbase-m2-dependencies
-            - cache-in-fhirbridge-m2-dependencies
-            - start-fhirbridge-application
-            - run-robot-integration-tests
-            - save-fhirbridge-robot-test-results
-            # - collect-fhirbridge-unittest-results
-            - collect-fhirbridge-integrationtest-results
-            - save-fhirbridge-test-results
-            - save-jacoco-coverage-report
-            - sonarcloud/scan:
-                cache_version: 1
+    # build-and-test-fhirbridge:
+    #     description: |
+    #         Build and test FHIR-bridge, analyze code, collect code coverage metrics,
+    #         upload results to sonarcloud.io
+    #     executor: docker-py3-java11-postgres
+    #     steps:
+    #         - checkout
+    #         - install-maven
+    #         - git-clone-ehrbase-repo
+    #         - cache-out-fhirbridge-m2-dependencies
+    #         - cache-out-ehrbase-m2-dependencies
+    #         - build-ehrbase
+    #         - start-ehrbase-server
+    #         - build-and-test-fhirbridge
+    #         - cache-in-ehrbase-m2-dependencies
+    #         - cache-in-fhirbridge-m2-dependencies
+    #         - start-fhirbridge-application
+    #         - run-robot-integration-tests
+    #         - save-fhirbridge-robot-test-results
+    #         # - collect-fhirbridge-unittest-results
+    #         - collect-fhirbridge-integrationtest-results
+    #         - save-fhirbridge-test-results
+    #         - save-jacoco-coverage-report
+    #         - sonarcloud/scan:
+    #             cache_version: 1
 
 
 
@@ -429,8 +429,8 @@ executors:
               environment:
                 POSTGRES_USER: postgres
                 POSTGRES_PASSWORD: postgres
-            - image: postgres:11.5-alpine
-              name: fhirdb
-              environment:
-                POSTGRES_USER: fhir_bridge
-                POSTGRES_PASSWORD: fhir_bridge
+            # - image: postgres:11.5-alpine
+            #   name: fhirdb
+            #   environment:
+            #     POSTGRES_USER: fhir_bridge
+            #     POSTGRES_PASSWORD: fhir_bridge
