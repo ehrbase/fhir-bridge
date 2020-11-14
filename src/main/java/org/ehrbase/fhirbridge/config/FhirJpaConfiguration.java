@@ -120,7 +120,7 @@ public class FhirJpaConfiguration {
 
     @Bean(name = "myPatientDaoR4")
     public IFhirResourceDao<Patient> patientDao(FhirContext context) {
-        JpaResourceDao<Patient> patientDao = new JpaResourceDao();
+        JpaResourceDao<Patient> patientDao = new JpaResourceDao<>();
         patientDao.setResourceType(Patient.class);
         patientDao.setContext(context);
         return patientDao;

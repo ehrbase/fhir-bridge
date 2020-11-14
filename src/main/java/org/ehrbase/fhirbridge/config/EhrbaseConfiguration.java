@@ -5,6 +5,7 @@ import org.ehrbase.client.openehrclient.OpenEhrClientConfig;
 import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
 import org.ehrbase.client.templateprovider.TemplateProvider;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
+import org.ehrbase.fhirbridge.ehr.converter.DiagnoseCompositionConverter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,5 +38,10 @@ public class EhrbaseConfiguration {
     @Bean
     public OpenEhrClient openEhrClient(OpenEhrClientConfig restClientConfig, TemplateProvider templateProvider) {
         return new DefaultRestClient(restClientConfig, templateProvider);
+    }
+
+    @Bean
+    public DiagnoseCompositionConverter diagnoseCompositionConverter() {
+        return new DiagnoseCompositionConverter();
     }
 }

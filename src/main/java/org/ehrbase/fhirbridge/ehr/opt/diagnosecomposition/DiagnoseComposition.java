@@ -10,6 +10,7 @@ import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.DiagnoseEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.FallidentifikationCluster;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
@@ -19,11 +20,12 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.report.v1")
 @Template("Diagnose")
-public class DiagnoseComposition {
+public class DiagnoseComposition implements Composition {
     @Id
     private VersionUid versionUid;
 
@@ -187,5 +189,10 @@ public class DiagnoseComposition {
 
     public CategoryDefiningcode getCategoryDefiningcode() {
         return this.categoryDefiningcode;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(versionUid);
     }
 }

@@ -4,6 +4,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
 import org.apache.camel.impl.DefaultComponent;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,7 +66,14 @@ public class CompositionComponent extends DefaultComponent {
     @Override
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
         final CompositionConfiguration newConfiguration = getConfiguration().copy();
+
         CompositionEndpoint endpoint = new CompositionEndpoint(uri, this, newConfiguration);
+
+        CompositionConverter converter = resolveAndRemoveReferenceParameter(parameters, "converter", CompositionConverter.class);
+        if (converter != null) {
+            endpoint.getConfiguration().setConverter(converter);
+        }
+
         setProperties(endpoint, parameters);
         return endpoint;
     }

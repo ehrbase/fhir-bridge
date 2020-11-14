@@ -421,7 +421,6 @@ executors:
             is where all commands are executed. The other two imags are service containers w/
             PostgreSQL DBs, one for EHRbase, one for FHIRbridge.
             - EHRbase DB is accessible via localhost:5432
-            - FHRIbridge DB is accessible via fhirdb:5432
         working_directory: ~/projects
         docker:
             - image: circleci/python:3.8.5-node-browsers

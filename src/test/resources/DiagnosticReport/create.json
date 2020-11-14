@@ -54,8 +54,8 @@
         "coding": [
           {
             "system": "http://loinc.org",
-            "code": "59826-8",
-            "display": "Creatinine [Moles/volume] in Blood"
+            "code": "732-8",
+            "display": "Lymphocytes [#/volume] in Blood by Manual count"
           }
         ],
         "text": "Kreatinin"
