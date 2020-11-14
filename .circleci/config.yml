@@ -124,7 +124,7 @@ commands:
                 command: |
                     ls -la
                     cd ehrbase
-                    mvn package -Dmaven.javadoc.skip=true -Dmaven.test.skip
+                    mvn package -Dmaven.javadoc.skip=true -Djacoco.skip=true -Dmaven.test.skip
 
 
     start-ehrbase-server:
