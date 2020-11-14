@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.mapping;
 
-import java.time.ZonedDateTime;
-
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
+import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.mapper.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.korpergewichtcomposition.KorpergewichtComposition;
 import org.ehrbase.fhirbridge.ehr.opt.korpergewichtcomposition.definition.KorpergewichtObservation;
@@ -10,11 +10,9 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.Observation;
 
-import com.nedap.archie.rm.generic.PartySelf;
-
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import java.time.ZonedDateTime;
 
 public class FHIRObservationBodyWeightOpenehrBodyWeight {
     private FHIRObservationBodyWeightOpenehrBodyWeight() {

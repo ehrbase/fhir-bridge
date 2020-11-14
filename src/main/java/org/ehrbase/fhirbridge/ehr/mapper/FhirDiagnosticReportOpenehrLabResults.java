@@ -2,21 +2,47 @@ package org.ehrbase.fhirbridge.mapping;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.datavalues.quantity.DvInterval;
 import com.nedap.archie.rm.datavalues.quantity.datetime.DvDate;
+import com.nedap.archie.rm.generic.PartyIdentified;
+import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.mapper.CommonData;
-import org.ehrbase.fhirbridge.fhir.Profile;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestBezeichnungDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytAnalytResultatDvquantity;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytErgebnisStatusDvcodedtext;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytKommentarElement;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeEignungZumTestenDvcodedtext;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeIdentifikatorDerUbergeordnetenProbeElement;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeProbenentahmebedingungElement;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeZeitpunktDerProbenentnahmeDvdatetime;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeZeitpunktDerProbenentnahmeDvinterval;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbenartDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ReferenzbereichsHinweiseDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.StatusDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.UntersuchterAnalytDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-import org.hl7.fhir.r4.model.*;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.*;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.*;
-import com.nedap.archie.rm.generic.*;
+import org.ehrbase.fhirbridge.fhir.Profile;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Quantity;
+import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.ResourceType;
+import org.hl7.fhir.r4.model.Specimen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -137,6 +163,8 @@ public class FhirDiagnosticReportOpenehrLabResults {
                 registereintragStatus = StatusDefiningcode.VORLAUFIG;
                 laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.VORLAUFIG;
                 break;
+            default:
+                throw new IllegalArgumentException();
         }
 
         composition.setStatusDefiningcode(registereintragStatus);
@@ -178,8 +206,7 @@ public class FhirDiagnosticReportOpenehrLabResults {
 
         // Map method to Testmethode
 
-        if(!fhirObservation.getMethod().isEmpty() && !fhirObservation.getMethod().getCoding().isEmpty())
-        {
+        if (!fhirObservation.getMethod().isEmpty() && !fhirObservation.getMethod().getCoding().isEmpty()) {
             DvText testmethode = new DvText();
             testmethode.setValue(fhirObservation.getMethod().getCoding().get(0).getDisplay());
             laborergebnis.setValue(testmethode);
@@ -232,7 +259,7 @@ public class FhirDiagnosticReportOpenehrLabResults {
         ProbeCluster probe = new ProbeCluster();
 
         // Map to Probenart
-        if(!specimen.getType().getCoding().isEmpty()) {
+        if (!specimen.getType().getCoding().isEmpty()) {
             ProbenartDefiningcode probenart = null;
 
             if (specimen.getType().getCoding().get(0).getSystem().equals("http://terminology.hl7.org/CodeSystem/v2-0487")) {
@@ -293,8 +320,7 @@ public class FhirDiagnosticReportOpenehrLabResults {
 
         // Map Condition -> Probenentnahmebedingung
         for (CodeableConcept codeableConcept : specimen.getCondition()) {
-            if(!codeableConcept.getCoding().isEmpty())
-            {
+            if (!codeableConcept.getCoding().isEmpty()) {
                 ProbeProbenentahmebedingungElement bedingung = new ProbeProbenentahmebedingungElement();
                 bedingung.setValue(codeableConcept.getCoding().get(0).getDisplay());
                 probe.getProbenentahmebedingung().add(bedingung);
@@ -319,14 +345,15 @@ public class FhirDiagnosticReportOpenehrLabResults {
             case NULL:
                 eignungZumTestenDefiningcode = EignungZumTestenDefiningcode.MANGELHAFT_NICHT_VERARBEITET;
                 break;
+            default:
+                throw new IllegalArgumentException();
         }
 
         ProbeEignungZumTestenDvcodedtext eignungZumTesten = new ProbeEignungZumTestenDvcodedtext();
         eignungZumTesten.setEignungZumTestenDefiningcode(eignungZumTestenDefiningcode);
         probe.setEignungZumTesten(eignungZumTesten);
 
-        if(!specimen.getNote().isEmpty())
-        {
+        if (!specimen.getNote().isEmpty()) {
             probe.setKommentarValue(specimen.getNote().get(0).getText());
         }
 
@@ -416,8 +443,7 @@ public class FhirDiagnosticReportOpenehrLabResults {
                 interpretationDefiningcode = referenzBereichsHTTPDefiningcodeMap.get(code);
             }
 
-            if(!fhirObservation.getNote().isEmpty())
-            {
+            if (!fhirObservation.getNote().isEmpty()) {
                 kommentarElement.setValue(fhirObservation.getNote().get(0).getText());
             }
 
@@ -456,8 +482,7 @@ public class FhirDiagnosticReportOpenehrLabResults {
 
         laboranalyt.setReferenzbereichsHinweiseDefiningcode(interpretationDefiningcode);
 
-        if(kommentarElement.getValue() != null)
-        {
+        if (kommentarElement.getValue() != null) {
             laboranalyt.getKommentar().add(kommentarElement);
         }
 

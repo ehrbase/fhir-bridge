@@ -10,10 +10,17 @@ import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.DiagnoseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.AtiopathogeneseSchweregradDvcodedtext;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.DiagnoseEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.SchweregradDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.*;
-import org.hl7.fhir.r4.model.*;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.DerDiagnoseDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.DateTimeType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
@@ -25,7 +32,8 @@ public class FhirConditionOpenehrDiagnose {
 
     private static final Logger logger = LoggerFactory.getLogger(FhirConditionOpenehrDiagnose.class);
 
-    private FhirConditionOpenehrDiagnose(){}
+    private FhirConditionOpenehrDiagnose() {
+    }
 
     public static DiagnoseComposition map(Condition fhirCondition) {
 
@@ -51,21 +59,19 @@ public class FhirConditionOpenehrDiagnose {
 
         // severity
         SchweregradDefiningcode openEHRSeverity;
-        if (!fhirSeverity.getSystem().equalsIgnoreCase("http://snomed.info/sct"))
-        {
-            throw new UnprocessableEntityException("severity code system should be http://snomed.info/sct, found "+ fhirSeverity.getSystem());
+        if (!fhirSeverity.getSystem().equalsIgnoreCase("http://snomed.info/sct")) {
+            throw new UnprocessableEntityException("severity code system should be http://snomed.info/sct, found " + fhirSeverity.getSystem());
         }
-        switch (fhirSeverity.getCode())
-        {
+        switch (fhirSeverity.getCode()) {
             case "24484000":
                 openEHRSeverity = SchweregradDefiningcode.SCHWER;
-            break;
+                break;
             case "6736007":
                 openEHRSeverity = SchweregradDefiningcode.MAIG;
-            break;
+                break;
             case "255604002":
                 openEHRSeverity = SchweregradDefiningcode.LEICHT;
-            break;
+                break;
             default:
                 throw new UnprocessableEntityException("Unexpected value: " + fhirSeverity.getCode());
         }
@@ -79,24 +85,22 @@ public class FhirConditionOpenehrDiagnose {
         // the OPT uses only ICD10 codes from the German version of ICD
         // https://www.hl7.org/fhir/icd.html
         DerDiagnoseDefiningcode openEHRDiagnosis;
-        if (!fhirDiagnosis.getSystem().equalsIgnoreCase("http://fhir.de/CodeSystem/dimdi/icd-10-gm"))
-        {
-            throw new UnprocessableEntityException("code.system should be http://fhir.de/CodeSystem/dimdi/icd-10-gm but found"+ fhirDiagnosis.getSystem());
+        if (!fhirDiagnosis.getSystem().equalsIgnoreCase("http://fhir.de/CodeSystem/dimdi/icd-10-gm")) {
+            throw new UnprocessableEntityException("code.system should be http://fhir.de/CodeSystem/dimdi/icd-10-gm but found" + fhirDiagnosis.getSystem());
         }
-        switch (fhirDiagnosis.getCode())
-        {
+        switch (fhirDiagnosis.getCode()) {
             case "B97.2":
                 openEHRDiagnosis = DerDiagnoseDefiningcode.B972;
-            break;
+                break;
             case "U07.1":
                 openEHRDiagnosis = DerDiagnoseDefiningcode.U071;
-            break;
+                break;
             case "U07.2":
                 openEHRDiagnosis = DerDiagnoseDefiningcode.U072;
-            break;
+                break;
             case "B34.2":
                 openEHRDiagnosis = DerDiagnoseDefiningcode.B342;
-            break;
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + fhirDiagnosis.getCode());
         }
@@ -109,8 +113,7 @@ public class FhirConditionOpenehrDiagnose {
 
 
         // body site
-        if (fhirCondition.getBodySite().size() == 1)
-        {
+        if (fhirCondition.getBodySite().size() == 1) {
             String bodySiteName = fhirCondition.getBodySite().get(0).getCoding().get(0).getDisplay();
             evaluation.setKorperstelleValue("body site");
             evaluation.setKorperstelleValueStructure(bodySiteName);
@@ -130,8 +133,7 @@ public class FhirConditionOpenehrDiagnose {
         // check if the condition has a recorded date, if not, use the onset
         DateTimeType aDate = fhirCondition.getRecordedDateElement();
         logger.debug("recorded is {}", aDate);
-        if (aDate.isEmpty())
-        {
+        if (aDate.isEmpty()) {
             logger.debug("recorded date is null trying onset");
             aDate = fhirCondition.getOnsetDateTimeType();
             logger.debug("onset is {}", aDate);
@@ -150,8 +152,7 @@ public class FhirConditionOpenehrDiagnose {
         return composition;
     }
 
-    public static Condition map(DiagnoseComposition compo)
-    {
+    public static Condition map(DiagnoseComposition compo) {
         Condition condition = new Condition();
 
         TemporalAccessor temporal;
@@ -165,11 +166,10 @@ public class FhirConditionOpenehrDiagnose {
         // generates a ENUM with those codes.
 
         // severity code
-        text = ((AtiopathogeneseSchweregradDvcodedtext)compo.getDiagnose().getSchweregrad()).getSchweregradDefiningcode().getCode();
+        text = ((AtiopathogeneseSchweregradDvcodedtext) compo.getDiagnose().getSchweregrad()).getSchweregradDefiningcode().getCode();
 
         // transforms atcodes in snomed codes
-        switch (text)
-        {
+        switch (text) {
             case "at0049": // TODO: the enum classes need a method to create the Enum from the code value to avoid hardcoding
                 text = "24484000";
                 break;
@@ -180,6 +180,8 @@ public class FhirConditionOpenehrDiagnose {
                 text = "255604002";
                 break;
             // TODO: define what to do when the code is not mappeable
+            default:
+                throw new IllegalArgumentException();
         }
 
         coding = condition.getSeverity().addCoding();
@@ -194,7 +196,7 @@ public class FhirConditionOpenehrDiagnose {
 
         // date onset
         temporal = compo.getDiagnose().getDerErstdiagnoseValue();
-        condition.getOnsetDateTimeType().setValue(Date.from(((OffsetDateTime)temporal).toInstant()));
+        condition.getOnsetDateTimeType().setValue(Date.from(((OffsetDateTime) temporal).toInstant()));
 
         // body site
         text = compo.getDiagnose().getKorperstelleValueStructure();

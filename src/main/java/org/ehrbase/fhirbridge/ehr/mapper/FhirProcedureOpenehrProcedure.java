@@ -1,18 +1,25 @@
 package org.ehrbase.fhirbridge.mapping;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.datavalues.quantity.datetime.DvDateTime;
 import com.nedap.archie.rm.generic.PartyIdentified;
+import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.mapper.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.DetailsZurKorperstelleCluster;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.ProzedurAction;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.*;
-import com.nedap.archie.rm.generic.PartySelf;
-import org.hl7.fhir.r4.model.*;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
+import org.hl7.fhir.r4.model.Annotation;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.MarkdownType;
+import org.hl7.fhir.r4.model.Procedure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +27,6 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 
 /**
  * FHIR 2 openEHR - Procedure
@@ -29,7 +35,8 @@ public class FhirProcedureOpenehrProcedure {
 
     private static final Logger logger = LoggerFactory.getLogger(FhirProcedureOpenehrProcedure.class);
 
-    private FhirProcedureOpenehrProcedure(){}
+    private FhirProcedureOpenehrProcedure() {
+    }
 
     public static ProzedurComposition map(Procedure fhirProcedure) {
 
@@ -46,37 +53,35 @@ public class FhirProcedureOpenehrProcedure {
 
         Coding bodySite = null;
         List<CodeableConcept> bodySites = fhirProcedure.getBodySite();
-        if (bodySites.size() > 0)
-        {
+        if (bodySites.size() > 0) {
             CodeableConcept bodySiteCodes = bodySites.get(0); // could be empty
-            if (bodySiteCodes != null) bodySite = bodySiteCodes.getCoding().get(0);
+            if (bodySiteCodes != null) {
+                bodySite = bodySiteCodes.getCoding().get(0);
+            }
         }
 
 
         Annotation note = null;
         List<Annotation> notes = fhirProcedure.getNote();
-        if (notes.size() > 0)
-        {
+        if (notes.size() > 0) {
             note = fhirProcedure.getNote().get(0); // could be empty
         }
-        
-        
-        ProzedurAction action = new ProzedurAction();
-        
-        action.setTimeValue(performed.getValueAsCalendar().toZonedDateTime());
-        
-        action.setNameDerProzedurValue(code.getDisplay());
-        
 
-        if (note != null)
-        {
+
+        ProzedurAction action = new ProzedurAction();
+
+        action.setTimeValue(performed.getValueAsCalendar().toZonedDateTime());
+
+        action.setNameDerProzedurValue(code.getDisplay());
+
+
+        if (note != null) {
             action.setFreitextbeschreibungValue(note.getText());
         }
 
 
         // anatomical location
-        if (bodySite != null)
-        {
+        if (bodySite != null) {
             DetailsZurKorperstelleCluster anatomicalLocationCluster = new DetailsZurKorperstelleCluster();
 
             // mapping
@@ -121,8 +126,7 @@ public class FhirProcedureOpenehrProcedure {
         return composition;
     }
 
-    public static Procedure map(String uid, DvText procedureName, DvText procedureDescription, DvDateTime time, DvText bodyLocation)
-    {
+    public static Procedure map(String uid, DvText procedureName, DvText procedureDescription, DvDateTime time, DvText bodyLocation) {
         Procedure procedure = new Procedure();
 
         // name
@@ -131,18 +135,16 @@ public class FhirProcedureOpenehrProcedure {
 
         // description
         // description is optional
-        if (procedureDescription != null && procedureDescription.getValue() != null)
-        {
+        if (procedureDescription != null && procedureDescription.getValue() != null) {
             procedure.addNote(new Annotation(new MarkdownType(procedureDescription.getValue())));
         }
 
         // time
-        procedure.setPerformed(new DateTimeType(Date.from(((OffsetDateTime)time.getValue()).toInstant())));
+        procedure.setPerformed(new DateTimeType(Date.from(((OffsetDateTime) time.getValue()).toInstant())));
 
         // body site
         // FIXME: we would need a coded text to get the code not just the string value
-        if (bodyLocation != null)
-        {
+        if (bodyLocation != null) {
             CodeableConcept bodySiteContainer = new CodeableConcept();
             bodySiteContainer.addCoding(new Coding(null, null, bodyLocation.getValue()));
             procedure.addBodySite(bodySiteContainer);

@@ -2,23 +2,22 @@ package org.ehrbase.fhirbridge.mapping;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
-import org.ehrbase.fhirbridge.fhir.Profile;
+import com.nedap.archie.rm.generic.PartyIdentified;
+import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.SchwangerschaftsstatusComposition;
+import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition.SchwangerschaftsstatusObservation;
+import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition.StatusDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-import org.hl7.fhir.r4.model.*;
-import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.*;
-import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition.*;
-import com.nedap.archie.rm.generic.*;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.math.BigDecimal;
+
 import java.time.OffsetDateTime;
-import java.time.temporal.TemporalAccessor;
-import java.util.ArrayList;
-import java.util.List;
-import static java.util.Date.from;
 
 /**
  * FHIR to openEHR - Pregnancy Status
@@ -27,10 +26,12 @@ public class FhirObservationPregnancyStatusOpenehrPregnancyStatus {
 
     private static final Logger logger = LoggerFactory.getLogger(FhirObservationPregnancyStatusOpenehrPregnancyStatus.class);
 
-    private FhirObservationPregnancyStatusOpenehrPregnancyStatus() {}
+    private FhirObservationPregnancyStatusOpenehrPregnancyStatus() {
+    }
 
     /**
      * this maps a FHIR Observation to a SchwangerschaftsstatusComposition.
+     *
      * @param fhirObservation the FHIR Observation resource received in the API.
      * @return the Composition defined by the Schwangerschaftsstatus template.
      */
@@ -69,11 +70,11 @@ public class FhirObservationPregnancyStatusOpenehrPregnancyStatus {
 
     /**
      * Util method used from SchwangerschaftsstatusComposition map(Observation)
+     *
      * @param fhirObservation the FHIR Observation resource received in the API.
      * @return the Observation defined in the OPT that maps to the FHIR observation
      */
-    private static SchwangerschaftsstatusObservation mapObservation(Observation fhirObservation)
-    {
+    private static SchwangerschaftsstatusObservation mapObservation(Observation fhirObservation) {
         SchwangerschaftsstatusObservation observation = new SchwangerschaftsstatusObservation();
 
         // mandatory fields
@@ -91,19 +92,18 @@ public class FhirObservationPregnancyStatusOpenehrPregnancyStatus {
         Coding statusCode = fhirObservation.getValueCodeableConcept().getCoding().get(0);
 
         // TODO: this only considers LOINC cases
-        switch (statusCode.getCode())
-        {
+        switch (statusCode.getCode()) {
             case "LA15173-0": // pregnant
                 observation.setStatusDefiningcode(StatusDefiningcode.SCHWANGER);
-            break;
+                break;
             case "LA26683-5": // not pregnant
                 observation.setStatusDefiningcode(StatusDefiningcode.NICHT_SCHWANGER);
-            break;
+                break;
             case "LA4489-6": // unknown
                 observation.setStatusDefiningcode(StatusDefiningcode.UNBEKANNT);
-            break;
+                break;
             default:
-                throw new UnprocessableEntityException("Status code "+ statusCode.getCode() +" is not supported");
+                throw new UnprocessableEntityException("Status code " + statusCode.getCode() + " is not supported");
         }
 
         return observation;

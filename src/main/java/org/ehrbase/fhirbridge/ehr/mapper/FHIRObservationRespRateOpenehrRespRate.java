@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.mapping;
 
-import java.time.ZonedDateTime;
-
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
+import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.mapper.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.AtemfrequenzComposition;
 import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.AtemfrequenzObservation;
@@ -10,19 +10,18 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.Observation;
 
-import com.nedap.archie.rm.generic.PartySelf;
-
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import java.time.ZonedDateTime;
 
 public class FHIRObservationRespRateOpenehrRespRate {
-    private FHIRObservationRespRateOpenehrRespRate() {}
+    private FHIRObservationRespRateOpenehrRespRate() {
+    }
 
     public static AtemfrequenzComposition map(Observation fhirObservation) {
 
         //create composition and observation objects
-    	AtemfrequenzComposition composition = new AtemfrequenzComposition();
+        AtemfrequenzComposition composition = new AtemfrequenzComposition();
 
         // set feeder audit
         FeederAudit fa = CommonData.constructFeederAudit(fhirObservation);

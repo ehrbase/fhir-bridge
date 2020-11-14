@@ -15,7 +15,8 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SOFAScoreObservation;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -101,7 +102,8 @@ public class FhirObservationSofaScoreOpenehrSofa {
             new DvCodedText("4", new CodePhrase(new TerminologyId("local"), "at0039")));
 
 
-    private FhirObservationSofaScoreOpenehrSofa() {}
+    private FhirObservationSofaScoreOpenehrSofa() {
+    }
 
     public static SOFAComposition map(Observation fhirObservation) {
 
