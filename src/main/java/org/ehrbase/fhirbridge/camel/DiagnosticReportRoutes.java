@@ -46,7 +46,7 @@ public class DiagnosticReportRoutes extends RouteBuilder {
                 DiagnosticReport diagnosticReport = exchange.getIn().getBody(DiagnosticReport.class);
                 exchange.getMessage().setBody(FhirDiagnosticReportOpenehrLabResults.map(diagnosticReport));
             })
-            .to("ehr-composition:/test?operation=mergeCompositionEntity&")
+            .to("ehr-composition:/test?operation=mergeCompositionEntity")
             .process(exchange -> {
                 GECCOLaborbefundComposition composition = exchange.getIn().getBody(GECCOLaborbefundComposition.class);
                 exchange.getMessage().setBody(FhirDiagnosticReportOpenehrLabResults.map(composition));
