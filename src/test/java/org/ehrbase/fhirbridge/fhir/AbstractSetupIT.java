@@ -18,13 +18,15 @@ abstract class AbstractSetupIT {
 
     static final String PATIENT_ID_TOKEN = "\\{\\{patientId\\}\\}";
 
-    static final String PATIENT_ID = UUID.randomUUID().toString();
+    static String PATIENT_ID;
 
     @BeforeAll
     static void setup() throws URISyntaxException {
         DefaultRestClient client = new DefaultRestClient(
                 new OpenEhrClientConfig(new URI("http://localhost:8080/ehrbase/rest/openehr/v1/")),
                 new ResourceTemplateProvider("classpath:/opt/*.opt"));
+
+        PATIENT_ID = UUID.randomUUID().toString();
 
         EhrStatus ehrStatus = new EhrStatus();
         ehrStatus.setSubject(new PartySelf(new PartyRef(new HierObjectId(PATIENT_ID), "demographic", "PERSON")));

@@ -14,7 +14,7 @@ public class FhirValidationProperties {
 
     public static class Terminology {
 
-        private TerminologyValidationMode mode = TerminologyValidationMode.EMBEDDED;
+        private TerminologyValidationMode mode = TerminologyValidationMode.NONE;
 
         private String serverUrl;
 
