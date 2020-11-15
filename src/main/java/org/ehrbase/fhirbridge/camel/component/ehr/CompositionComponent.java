@@ -27,22 +27,6 @@ public class CompositionComponent extends DefaultComponent {
         this.configuration = createConfiguration();
     }
 
-    public CompositionComponent(CompositionConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
-    public static CompositionComponent compositionComponent() {
-        return new CompositionComponent();
-    }
-
-    public static CompositionComponent compositionComponent(CompositionConfiguration configuration) {
-        return new CompositionComponent(configuration);
-    }
-
-    public static CompositionComponent compositionComponent(OpenEhrClient openEhrClient) {
-        return compositionComponent(new CompositionConfiguration(openEhrClient));
-    }
-
     @Override
     protected void doStart() throws Exception {
         if (configuration.getOpenEhrClient() == null && isAllowAutoWiredOpenEhrClient()) {
@@ -62,7 +46,6 @@ public class CompositionComponent extends DefaultComponent {
         final CompositionConfiguration newConfiguration = getConfiguration().copy();
 
         CompositionEndpoint endpoint = new CompositionEndpoint(uri, this, newConfiguration);
-
         setProperties(endpoint, parameters);
         return endpoint;
     }
