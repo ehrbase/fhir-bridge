@@ -3,6 +3,9 @@ package org.ehrbase.fhirbridge.config;
 import org.ehrbase.fhirbridge.fhir.common.validation.TerminologyValidationMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * {@link ConfigurationProperties ConfigurationProperties} to configure FHIR validation.
+ */
 @ConfigurationProperties(prefix = "fhir-bridge.fhir.validation")
 public class FhirValidationProperties {
 

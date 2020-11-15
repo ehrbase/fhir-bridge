@@ -61,15 +61,15 @@ public class CompositionProducer extends DefaultProducer {
 
     private void find(UUID ehrId, Exchange exchange) {
         UUID compositionId = determineCompositionId(exchange);
-        Class<? extends Composition> expectedType = determineExpectedType(exchange);
+        Class<?> expectedType = determineExpectedType(exchange);
 
-        Composition result = getOpenEhrClient().compositionEndpoint(ehrId)
+        Object result = getOpenEhrClient().compositionEndpoint(ehrId)
                 .find(compositionId, expectedType)
                 .orElse(null);
 
         CompositionConverter converter = determineConverter(exchange);
-        if (converter != null) {
-            exchange.getMessage().setBody(converter.fromComposition(result));
+        if (converter != null && result instanceof Composition) {
+            exchange.getMessage().setBody(converter.fromComposition((Composition) result));
         } else {
             exchange.getMessage().setBody(result);
         }
@@ -91,14 +91,6 @@ public class CompositionProducer extends DefaultProducer {
         return operation;
     }
 
-    private CompositionConverter determineConverter(Exchange exchange) {
-        CompositionConverter converter = exchange.getIn().getHeader(CompositionConstants.CONVERTER, CompositionConverter.class);
-        if (converter == null) {
-            converter = endpoint.getConverter();
-        }
-        return converter;
-    }
-
     private UUID determineCompositionId(Exchange exchange) {
         UUID compositionId = exchange.getIn().getHeader(CompositionConstants.COMPOSITION_ID, UUID.class);
         if (compositionId == null) {
@@ -107,12 +99,20 @@ public class CompositionProducer extends DefaultProducer {
         return compositionId;
     }
 
-    private Class<? extends Composition> determineExpectedType(Exchange exchange) {
-        Class<? extends Composition> expectedType = exchange.getIn().getHeader(CompositionConstants.EXPECTED_TYPE, Class.class);
+    private Class<?> determineExpectedType(Exchange exchange) {
+        Class<?> expectedType = exchange.getIn().getHeader(CompositionConstants.EXPECTED_TYPE, Class.class);
         if (expectedType == null) {
             expectedType = endpoint.getExpectedType();
         }
         return expectedType;
+    }
+
+    private CompositionConverter determineConverter(Exchange exchange) {
+        CompositionConverter converter = exchange.getIn().getHeader(CompositionConstants.CONVERTER, CompositionConverter.class);
+        if (converter == null) {
+            converter = endpoint.getConverter();
+        }
+        return converter;
     }
 
     private OpenEhrClient getOpenEhrClient() {

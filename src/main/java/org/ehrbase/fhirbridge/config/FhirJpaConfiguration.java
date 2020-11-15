@@ -37,6 +37,9 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * {@link Configuration Configuration} for HAPI FHIR JPA server.
+ */
 @Configuration
 @EnableConfigurationProperties(FhirJpaProperties.class)
 @Import({BaseR4Config.class})

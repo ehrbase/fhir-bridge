@@ -2,6 +2,9 @@ package org.ehrbase.fhirbridge.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * {@link ConfigurationProperties ConfigurationProperties} to configure EHRbase SDK.
+ */
 @ConfigurationProperties(prefix = "fhir-bridge.ehrbase")
 public class EhrbaseProperties {
 

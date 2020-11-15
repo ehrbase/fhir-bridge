@@ -3,16 +3,10 @@ package org.ehrbase.fhirbridge.camel.component.ehr;
 import org.apache.camel.RuntimeCamelException;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 
+@SuppressWarnings("java:S2157")
 public class CompositionConfiguration implements Cloneable {
 
     private OpenEhrClient openEhrClient;
-
-    public CompositionConfiguration() {
-    }
-
-    public CompositionConfiguration(OpenEhrClient openEhrClient) {
-        this.openEhrClient = openEhrClient;
-    }
 
     public CompositionConfiguration copy() {
         try {
@@ -29,5 +23,4 @@ public class CompositionConfiguration implements Cloneable {
     public void setOpenEhrClient(OpenEhrClient openEhrClient) {
         this.openEhrClient = openEhrClient;
     }
-
 }
