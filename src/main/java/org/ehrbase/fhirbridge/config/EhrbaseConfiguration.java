@@ -14,6 +14,9 @@ import org.springframework.context.annotation.Import;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * {@link Configuration Configuration} for EHRbase SDK.
+ */
 @Configuration
 @EnableConfigurationProperties(EhrbaseProperties.class)
 @Import(EhrbaseTemplateInitializer.class)

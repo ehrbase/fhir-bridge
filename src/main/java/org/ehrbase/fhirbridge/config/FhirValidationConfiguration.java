@@ -26,6 +26,9 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * {@link Configuration Configuration} for FHIR validation.
+ */
 @Configuration
 @EnableConfigurationProperties(FhirValidationProperties.class)
 public class FhirValidationConfiguration {

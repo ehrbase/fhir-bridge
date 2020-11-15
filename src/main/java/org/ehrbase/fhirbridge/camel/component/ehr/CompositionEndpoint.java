@@ -8,14 +8,13 @@ import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
-import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
-@UriEndpoint(firstVersion = "1.0.0", scheme = "ehr-composition", title = "EHR Composition Component", syntax = "ehr-composition:name", producerOnly = true)
+@UriEndpoint(firstVersion = "1.0.0", scheme = "ehr-composition", title = "EHR Composition", syntax = "ehr-composition:name", producerOnly = true)
 public class CompositionEndpoint extends DefaultEndpoint {
 
     private final Logger logger = LoggerFactory.getLogger(CompositionEndpoint.class);
@@ -30,13 +29,13 @@ public class CompositionEndpoint extends DefaultEndpoint {
     private CompositionOperation operation;
 
     @UriPath
-    private CompositionConverter converter;
-
-    @UriPath
     private UUID compositionId;
 
     @UriPath
-    private Class<? extends Composition> expectedType;
+    private Class<?> expectedType;
+
+    @UriPath
+    private CompositionConverter converter;
 
     @UriParam
     private CompositionConfiguration configuration;
@@ -53,12 +52,16 @@ public class CompositionEndpoint extends DefaultEndpoint {
 
     @Override
     public Consumer createConsumer(Processor processor) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Cannot consume from ehr-composition endpoint");
     }
 
     @Override
     public boolean isSingleton() {
         return true;
+    }
+
+    public Logger getLogger() {
+        return logger;
     }
 
     public String getName() {
@@ -77,16 +80,28 @@ public class CompositionEndpoint extends DefaultEndpoint {
         this.ehrId = ehrId;
     }
 
-    public UUID getCompositionId() {
-        return compositionId;
-    }
-
     public CompositionOperation getOperation() {
         return operation;
     }
 
     public void setOperation(CompositionOperation operation) {
         this.operation = operation;
+    }
+
+    public UUID getCompositionId() {
+        return compositionId;
+    }
+
+    public void setCompositionId(UUID compositionId) {
+        this.compositionId = compositionId;
+    }
+
+    public Class<?> getExpectedType() {
+        return expectedType;
+    }
+
+    public void setExpectedType(Class<?> expectedType) {
+        this.expectedType = expectedType;
     }
 
     public CompositionConverter getConverter() {
@@ -97,18 +112,6 @@ public class CompositionEndpoint extends DefaultEndpoint {
         this.converter = converter;
     }
 
-    public void setCompositionId(UUID compositionId) {
-        this.compositionId = compositionId;
-    }
-
-    public Class<? extends Composition> getExpectedType() {
-        return expectedType;
-    }
-
-    public void setExpectedType(Class<? extends Composition> expectedType) {
-        this.expectedType = expectedType;
-    }
-
     public CompositionConfiguration getConfiguration() {
         return configuration;
     }
@@ -117,6 +120,7 @@ public class CompositionEndpoint extends DefaultEndpoint {
         this.configuration = configuration;
     }
 
+
     public OpenEhrClient getOpenEhrClient() {
         return getConfiguration().getOpenEhrClient();
     }
@@ -124,5 +128,4 @@ public class CompositionEndpoint extends DefaultEndpoint {
     public void setOpenEhrClient(OpenEhrClient openEhrClient) {
         getConfiguration().setOpenEhrClient(openEhrClient);
     }
-
 }

@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * EHR Composition component which uses EHRbase SDK.
+ */
 public class CompositionComponent extends DefaultComponent {
 
     private final Logger logger = LoggerFactory.getLogger(CompositionComponent.class);
@@ -58,6 +61,10 @@ public class CompositionComponent extends DefaultComponent {
         return configuration;
     }
 
+    public void setConfiguration(CompositionConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
     public boolean isAllowAutoWiredOpenEhrClient() {
         return allowAutoWiredOpenEhrClient;
     }
@@ -66,15 +73,7 @@ public class CompositionComponent extends DefaultComponent {
         this.allowAutoWiredOpenEhrClient = allowAutoWiredOpenEhrClient;
     }
 
-    public void setConfiguration(CompositionConfiguration configuration) {
-        this.configuration = configuration;
-    }
-
     public OpenEhrClient getOpenEhrClient() {
         return configuration.getOpenEhrClient();
-    }
-
-    public void setOpenEhrClient(OpenEhrClient openEhrClient) {
-        configuration.setOpenEhrClient(openEhrClient);
     }
 }
