@@ -23,7 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.OffsetDateTime;
-import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
@@ -80,7 +79,7 @@ public class DiagnoseCompositionConverter implements CompositionConverter {
 
         // date onset
         temporal = that.getDiagnose().getDerErstdiagnoseValue();
-        result.getOnsetDateTimeType().setValue(Date.from(((ZonedDateTime) temporal).toInstant()));
+        result.getOnsetDateTimeType().setValue(Date.from(((OffsetDateTime) temporal).toInstant()));
 
         // body site
         text = that.getDiagnose().getKorperstelleValueStructure();
