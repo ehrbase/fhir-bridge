@@ -4,13 +4,13 @@ import org.apache.camel.RuntimeCamelException;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 
 @SuppressWarnings("java:S2157")
-public class CompositionConfiguration implements Cloneable {
+public class EhrConfiguration implements Cloneable {
 
     private OpenEhrClient openEhrClient;
 
-    public CompositionConfiguration copy() {
+    public EhrConfiguration copy() {
         try {
-            return (CompositionConfiguration) clone();
+            return (EhrConfiguration) clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeCamelException(e);
         }

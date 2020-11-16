@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.camel.component.ehr;
+package org.ehrbase.fhirbridge.camel.component.ehr.composition;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultProducer;

@@ -1,1 +1,1 @@
-class=org.ehrbase.fhirbridge.camel.component.ehr.CompositionComponent
+class=org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionComponent

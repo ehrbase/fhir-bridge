@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.camel.component.ehr;
+package org.ehrbase.fhirbridge.camel.component.ehr.composition;
 
 public class CompositionConstants {
 
