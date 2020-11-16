@@ -3,9 +3,12 @@ package org.ehrbase.fhirbridge.camel;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.component.ehr.CompositionConstants;
+import org.ehrbase.client.aql.query.Query;
+import org.ehrbase.client.aql.record.Record1;
+import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
+import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.DiagnoseComposition;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Condition;
 import org.springframework.stereotype.Component;
@@ -26,8 +29,9 @@ public class ConditionRoutes extends RouteBuilder {
         this.requestValidator = requestValidator;
         this.patientIdProcessor = patientIdProcessor;
     }
-
+    
     @Override
+    @SuppressWarnings("java:S106")
     public void configure() {
         // @formatter:off
         from("cond-create:/service?audit=false&fhirContext=#fhirContext")
@@ -43,12 +47,19 @@ public class ConditionRoutes extends RouteBuilder {
                 exchange.getMessage().setBody(methodOutcome);
             });
 
+        from("direct:aql-demo-route")
+            .process(exchange -> {
+                Query<Record1<DiagnoseComposition>> query = Query.buildNativeQuery(
+                        "SELECT c " +
+                            "FROM EHR e CONTAINS COMPOSITION c " +
+                            "WHERE c/archetype_details/template_id/value = 'Diagnose' " +
+                                "AND c/uid/value = $compositionId", DiagnoseComposition.class
+                );
 
-        from("cond-read:/service?audit=false&fhirContext=#fhirContext")
-            .routeId("fhir:read-condition")
-            .setHeader(CompositionConstants.EHR_ID, constant("07f602e0-579e-4fe3-95af-381728bf0d49"))
-            .setHeader(CompositionConstants.COMPOSITION_ID, constant("66786767-93cf-41e5-8618-67ae50a3d3b9"))
-            .to("ehr-composition:/test?operation=find&expectedType=org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.DiagnoseComposition&converter=#diagnoseCompositionConverter");
+                exchange.getMessage().setHeader(AqlConstants.QUERY, query);
+            })
+            .to("ehr-aql:/myService?singleResult=true")
+            .setBody(simple("${body.value1}"));
         // @formatter:on
     }
 }
