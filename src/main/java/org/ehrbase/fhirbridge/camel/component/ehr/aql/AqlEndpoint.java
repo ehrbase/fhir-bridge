@@ -39,7 +39,7 @@ public class AqlEndpoint extends DefaultEndpoint {
 
     @Override
     public Consumer createConsumer(Processor processor) {
-        throw new UnsupportedOperationException("Cannot consume from AqlEndpoint");
+        throw new UnsupportedOperationException("Cannot consume from AQL endpoint");
     }
 
     @Override

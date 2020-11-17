@@ -4,6 +4,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
 import org.apache.camel.impl.DefaultComponent;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
+import org.ehrbase.fhirbridge.camel.component.ehr.EhrConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,23 +12,23 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * EHR Composition component which uses EHRbase SDK.
+ * Composition component
  */
 public class CompositionComponent extends DefaultComponent {
 
-    private final Logger logger = LoggerFactory.getLogger(CompositionComponent.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CompositionComponent.class);
 
-    private CompositionConfiguration configuration;
+    private EhrConfiguration configuration;
 
     private boolean allowAutoWiredOpenEhrClient = true;
 
     public CompositionComponent() {
-        this.configuration = createConfiguration();
+        this.configuration = new EhrConfiguration();
     }
 
     public CompositionComponent(CamelContext context) {
         super(context);
-        this.configuration = createConfiguration();
+        this.configuration = new EhrConfiguration();
     }
 
     @Override
@@ -38,7 +39,7 @@ public class CompositionComponent extends DefaultComponent {
                 OpenEhrClient client = beans.iterator().next();
                 configuration.setOpenEhrClient(client);
             } else if (beans.size() > 1) {
-                logger.debug("Cannot autowire OpenEhrClient as {} instances found in registry.", beans.size());
+                LOG.debug("Cannot autowire OpenEhrClient as {} instances found in registry.", beans.size());
             }
         }
         super.doStart();
@@ -46,22 +47,18 @@ public class CompositionComponent extends DefaultComponent {
 
     @Override
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
-        final CompositionConfiguration newConfiguration = getConfiguration().copy();
+        final EhrConfiguration newConfiguration = configuration.copy();
 
         CompositionEndpoint endpoint = new CompositionEndpoint(uri, this, newConfiguration);
         setProperties(endpoint, parameters);
         return endpoint;
     }
 
-    protected CompositionConfiguration createConfiguration() {
-        return new CompositionConfiguration();
-    }
-
-    public CompositionConfiguration getConfiguration() {
+    public EhrConfiguration getConfiguration() {
         return configuration;
     }
 
-    public void setConfiguration(CompositionConfiguration configuration) {
+    public void setConfiguration(EhrConfiguration configuration) {
         this.configuration = configuration;
     }
 

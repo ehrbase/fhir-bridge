@@ -2,12 +2,17 @@ package org.ehrbase.fhirbridge.camel;
 
 import org.ehrbase.client.aql.record.Record;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.RowMapper;
+import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
+import org.hl7.fhir.r4.model.Procedure;
 
-public class ProcedureRowMapper implements RowMapper<ProzedurComposition> {
+public class ProcedureRowMapper implements RowMapper<Procedure> {
+
+    private final ProcedureCompositionConverter converter = new ProcedureCompositionConverter();
 
     @Override
-    public ProzedurComposition mapRow(Record record, int rowNum) {
-        return (ProzedurComposition) record.value(0);
+    public Procedure mapRow(Record record, int rowNum) {
+        ProzedurComposition composition = (ProzedurComposition) record.value(0);
+        return converter.fromComposition(composition);
     }
 }

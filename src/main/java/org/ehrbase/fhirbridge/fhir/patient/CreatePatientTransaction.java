@@ -8,11 +8,11 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 public class CreatePatientTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
     public CreatePatientTransaction() {
-        super("pt-create",
+        super("fhir-create-patient",
                 "Create Patient",
                 false,
-                null,
-                null,
+                new CreatePatientAuditStrategy(false),
+                new CreatePatientAuditStrategy(true),
                 FhirVersionEnum.R4,
                 new CreatePatientProvider(),
                 null,

@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateDiagnosticReportProvider extends AbstractPlainProvider {
 
     @Create
-    public MethodOutcome create(@ResourceParam DiagnosticReport diagnosticReport, RequestDetails requestDetails,
-                                HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public MethodOutcome create(@ResourceParam DiagnosticReport diagnosticReport,
+                                RequestDetails requestDetails,
+                                HttpServletRequest httpServletRequest,
+                                HttpServletResponse httpServletResponse) {
         return requestAction(diagnosticReport, null, httpServletRequest, httpServletResponse, requestDetails);
     }
 }

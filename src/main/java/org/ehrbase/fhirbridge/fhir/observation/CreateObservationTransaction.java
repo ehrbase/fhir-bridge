@@ -8,11 +8,11 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 public class CreateObservationTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
     public CreateObservationTransaction() {
-        super("obs-create",
+        super("fhir-create-observation",
                 "Create Observation",
                 false,
-                null,
-                null,
+                new CreateObservationAuditStrategy(false),
+                new CreateObservationAuditStrategy(true),
                 FhirVersionEnum.R4,
                 new CreateObservationProvider(),
                 null,
