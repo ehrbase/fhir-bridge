@@ -4,9 +4,11 @@ import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultProducer;
 import org.ehrbase.client.aql.parameter.ParameterValue;
 import org.ehrbase.client.aql.query.Query;
+import org.ehrbase.client.aql.record.Record;
 
-import javax.persistence.NonUniqueResultException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AqlProducer extends DefaultProducer {
 
@@ -19,21 +21,41 @@ public class AqlProducer extends DefaultProducer {
 
     @Override
     public void process(Exchange exchange) {
-        Query<?> query = exchange.getIn().getHeader(AqlConstants.QUERY, Query.class);
+        Query<?> query = exchange.getIn().getHeader(AqlConstants.AQL_QUERY, Query.class);
         if (query == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException(); // TODO: Exception
         }
 
         ParameterValue<?>[] parameters = exchange.getIn().getBody(ParameterValue[].class);
-        List<?> result = endpoint.getOpenEhrClient().aqlEndpoint().execute(query, parameters);
 
-        if (endpoint.isSingleResult()) {
-            if (result.size() > 1) {
-                throw new NonUniqueResultException();
+        List<? extends Record> records = endpoint.getOpenEhrClient()
+                .aqlEndpoint()
+                .execute(query, parameters);
+
+        RowMapper<?> rowMapper = endpoint.getRowMapper();
+
+        AqlOutputType outputType = endpoint.getOutputType();
+        if (outputType == AqlOutputType.SelectOne) {
+            if (records.isEmpty()) {
+                exchange.getMessage().setBody(null);
+            } else if (records.size() == 1) {
+                if (rowMapper != null) {
+                    exchange.getMessage().setBody(rowMapper.mapRow(records.get(0), 0));
+                } else {
+                    exchange.getMessage().setBody(records.get(0));
+                }
+            } else {
+                throw new IllegalArgumentException(); // TODO: Exception
             }
-            exchange.getMessage().setBody(result.get(0));
         } else {
-            exchange.getMessage().setBody(result);
+            if (rowMapper != null) {
+                List<?> result = IntStream.range(0, records.size())
+                        .mapToObj(i -> rowMapper.mapRow(records.get(i), i))
+                        .collect(Collectors.toList());
+                exchange.getMessage().setBody(result);
+            } else {
+                exchange.getMessage().setBody(records);
+            }
         }
     }
 }

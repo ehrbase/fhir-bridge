@@ -5,7 +5,6 @@ import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
 import org.apache.camel.Producer;
 import org.apache.camel.impl.DefaultEndpoint;
-import org.apache.camel.spi.Metadata;
 import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
@@ -13,14 +12,17 @@ import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.component.ehr.EhrConfiguration;
 
 @UriEndpoint(scheme = "ehr-aql", title = "openEHR AQL", syntax = "ehr-aql:name", producerOnly = true)
+@SuppressWarnings({"java:S2160", "java:S1452"})
 public class AqlEndpoint extends DefaultEndpoint {
 
     @UriPath
-    @Metadata(required = "true")
     private String name;
 
     @UriParam
-    private boolean singleResult;
+    private AqlOutputType outputType = AqlOutputType.SelectList;
+
+    @UriParam
+    private RowMapper<?> rowMapper;
 
     @UriParam
     private EhrConfiguration configuration;
@@ -37,7 +39,7 @@ public class AqlEndpoint extends DefaultEndpoint {
 
     @Override
     public Consumer createConsumer(Processor processor) {
-        throw new UnsupportedOperationException("Cannot consume from AQL endpoint");
+        throw new UnsupportedOperationException("Cannot consume from AqlEndpoint");
     }
 
     @Override
@@ -53,12 +55,20 @@ public class AqlEndpoint extends DefaultEndpoint {
         this.name = name;
     }
 
-    public boolean isSingleResult() {
-        return singleResult;
+    public AqlOutputType getOutputType() {
+        return outputType;
     }
 
-    public void setSingleResult(boolean singleResult) {
-        this.singleResult = singleResult;
+    public void setOutputType(AqlOutputType outputType) {
+        this.outputType = outputType;
+    }
+
+    public RowMapper<?> getRowMapper() {
+        return rowMapper;
+    }
+
+    public void setRowMapper(RowMapper<?> rowMapper) {
+        this.rowMapper = rowMapper;
     }
 
     public EhrConfiguration getConfiguration() {

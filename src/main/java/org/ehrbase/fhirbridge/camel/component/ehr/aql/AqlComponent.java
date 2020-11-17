@@ -31,7 +31,6 @@ public class AqlComponent extends DefaultComponent {
     @Override
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
         final EhrConfiguration newConfiguration = configuration.copy();
-
         AqlEndpoint endpoint = new AqlEndpoint(uri, this, newConfiguration);
         setProperties(endpoint, parameters);
         return endpoint;
@@ -48,7 +47,6 @@ public class AqlComponent extends DefaultComponent {
                 LOG.debug("Cannot autowire OpenEhrClient as {} instances found in registry.", beans.size());
             }
         }
-
         super.doStart();
     }
 

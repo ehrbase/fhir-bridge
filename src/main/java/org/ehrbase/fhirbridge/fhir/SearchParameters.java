@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.jpa.searchparam.SearchParameterMap;
 import ca.uhn.fhir.model.api.Include;
 import ca.uhn.fhir.rest.api.SortSpec;
 import ca.uhn.fhir.rest.param.TokenParam;
@@ -10,17 +9,11 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirSearchParameters;
 import java.util.List;
 import java.util.Set;
 
-public class SearchParameters extends SearchParameterMap implements FhirSearchParameters {
-
-    private final FhirContext fhirContext;
-
-    public SearchParameters(FhirContext fhirContext) {
-        this.fhirContext = fhirContext;
-    }
+public class SearchParameters implements FhirSearchParameters {
 
     @Override
     public SortSpec getSortSpec() {
-        return getSort();
+        return null;
     }
 
     @Override
@@ -35,6 +28,6 @@ public class SearchParameters extends SearchParameterMap implements FhirSearchPa
 
     @Override
     public FhirContext getFhirContext() {
-        return fhirContext;
+        return null;
     }
 }
