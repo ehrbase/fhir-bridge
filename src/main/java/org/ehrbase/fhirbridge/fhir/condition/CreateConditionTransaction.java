@@ -8,11 +8,11 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 public class CreateConditionTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
     public CreateConditionTransaction() {
-        super("cond-create",
+        super("fhir-create-condition",
                 "Create Condition",
                 false,
-                null,
-                null,
+                new CreateConditionAuditStrategy(false),
+                new CreateConditionAuditStrategy(true),
                 FhirVersionEnum.R4,
                 new CreateConditionProvider(),
                 null,

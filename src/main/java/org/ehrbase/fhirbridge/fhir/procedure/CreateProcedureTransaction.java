@@ -8,7 +8,7 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 public class CreateProcedureTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
     public CreateProcedureTransaction() {
-        super("proc-create",
+        super("fhir-create-procedure",
                 "Create Procedure",
                 false,
                 new CreateProcedureAuditStrategy(false),

@@ -8,11 +8,11 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 public class CreateDiagnosticReportTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
     public CreateDiagnosticReportTransaction() {
-        super("diag-rep-create",
+        super("fhir-create-diagnostic-report",
                 "Create DiagnosticReport",
                 false,
-                null,
-                null,
+                new CreateDiagnosticReportAuditStrategy(false),
+                new CreateDiagnosticReportAuditStrategy(true),
                 FhirVersionEnum.R4,
                 new CreateDiagnosticReportProvider(),
                 null,

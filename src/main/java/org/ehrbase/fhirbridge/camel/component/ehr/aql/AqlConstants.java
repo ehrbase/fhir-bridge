@@ -5,8 +5,9 @@ package org.ehrbase.fhirbridge.camel.component.ehr.aql;
  */
 public final class AqlConstants {
 
-    public static final String AQL_QUERY = "CamelAqlQuery";
-    public static final String AQL_ROW_COUNT = "CamelAqlRowCount";
+    public static final String AQL_QUERY = "CamelEhrAqlQuery";
+
+    public static final String AQL_ROW_COUNT = "CamelEhrAqlRowCount";
 
     private AqlConstants() {
     }

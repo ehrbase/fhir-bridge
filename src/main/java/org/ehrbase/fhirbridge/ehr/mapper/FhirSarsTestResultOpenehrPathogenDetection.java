@@ -11,7 +11,7 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.ErregernameDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.fhir.Profile;
+import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;

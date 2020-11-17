@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * AQL component
+ */
 public class AqlComponent extends DefaultComponent {
 
     private static final Logger LOG = LoggerFactory.getLogger(AqlComponent.class);
