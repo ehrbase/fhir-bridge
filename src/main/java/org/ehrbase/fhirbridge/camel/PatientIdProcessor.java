@@ -16,6 +16,7 @@ import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r4.model.OperationOutcome.IssueSeverity;
 import org.hl7.fhir.r4.model.OperationOutcome.IssueType;
 import org.hl7.fhir.r4.model.OperationOutcome.OperationOutcomeIssueComponent;
+import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.Resource;
 import org.hl7.fhir.r4.model.ResourceType;
@@ -62,8 +63,8 @@ public class PatientIdProcessor implements Processor, MessageSourceAware {
 
     private String extractPatientId(Resource resource) {
         String patientId;
-        ResourceType resourceType = resource.getResourceType();
 
+        ResourceType resourceType = resource.getResourceType();
         switch (resourceType) {
             case Condition:
                 patientId = ((Condition) resource).getSubject().getIdentifier().getValue();
@@ -74,12 +75,21 @@ public class PatientIdProcessor implements Processor, MessageSourceAware {
             case Observation:
                 patientId = ((Observation) resource).getSubject().getIdentifier().getValue();
                 break;
+            case Patient:
+                Patient patient = (Patient) resource;
+                if (patient.hasIdentifier()) {
+                    patientId = ((Patient) resource).getIdentifier().get(0).getValue();
+                } else {
+                    patientId = null;
+                }
+                break;
             case Procedure:
                 patientId = ((Procedure) resource).getSubject().getIdentifier().getValue();
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported resource [" + resourceType + "]");
         }
+
         if (patientId == null) {
             throw new UnprocessableEntityException(fhirContext, new OperationOutcome()
                     .addIssue(new OperationOutcomeIssueComponent()

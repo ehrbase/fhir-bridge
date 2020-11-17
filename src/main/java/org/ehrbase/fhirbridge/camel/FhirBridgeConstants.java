@@ -5,9 +5,9 @@ package org.ehrbase.fhirbridge.camel;
  */
 public final class FhirBridgeConstants {
 
-    public static final String EHR_ID = "CamelFhirBridgeEhrId";
-
     public static final String PROFILE = "CamelFhirBridgeProfile";
+
+    public static final String METHOD_OUTCOME = "CamelFhirBridgeMethodOutcome";
 
     private FhirBridgeConstants() {
     }

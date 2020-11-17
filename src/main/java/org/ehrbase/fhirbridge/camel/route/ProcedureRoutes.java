@@ -1,16 +1,15 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.PatientIdProcessor;
 import org.ehrbase.fhirbridge.camel.ProcedureRowMapper;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Procedure;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -38,10 +37,11 @@ public class ProcedureRoutes extends RouteBuilder {
         from("fhir-create-procedure:fhirConsumer?fhirContext=#fhirContext")
             .process(requestValidator)
             .bean(procedureDao, "create(${body})")
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#procedureCompositionConverter")
-            .setBody(exchange -> new MethodOutcome().setResource(exchange.getIn().getBody(IBaseResource.class)));
+            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
 
         from("fhir-find-procedure:fhirConsumer?fhirContext=#fhirContext")
             .setHeader(AqlConstants.AQL_QUERY, () -> Query.buildNativeQuery(

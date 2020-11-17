@@ -1,12 +1,11 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.PatientIdProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.DiagnoseCompositionConverter;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Condition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -34,10 +33,11 @@ public class ConditionRoutes extends RouteBuilder {
         from("fhir-create-condition:/service?audit=false&fhirContext=#fhirContext")
             .process(requestValidator)
             .bean(conditionDao, "create(${body})")
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#diagnoseCompositionConverter")
-            .setBody(exchange -> new MethodOutcome().setResource(exchange.getIn().getBody(IBaseResource.class)));
+            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
         // @formatter:on
     }
 

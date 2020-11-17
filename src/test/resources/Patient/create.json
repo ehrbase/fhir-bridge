@@ -33,5 +33,11 @@
       "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age"
     }
   ],
+  "identifier": [
+    {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  ],
   "birthDate": "1953-09-30"
 }
