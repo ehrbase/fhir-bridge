@@ -22,8 +22,7 @@ public class SearchConditionProvider extends AbstractPlainProvider {
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
 
-        SearchParameters parameters = new SearchParameters(getFhirContext());
-        parameters.setSort(sort);
+        SearchParameters parameters = new SearchParameters();
 
         return this.requestBundle(null, parameters, "Condition", httpServletRequest, httpServletResponse, requestDetails);
     }

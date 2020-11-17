@@ -8,8 +8,8 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 public class ReadConditionTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
     public ReadConditionTransaction() {
-        super("cond-read",
-                "Read Condition",
+        super("cond-find",
+                "Find Condition",
                 true,
                 null,
                 null,

@@ -10,6 +10,7 @@ import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.FallidentifikationCluster;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.ProzedurAction;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
@@ -23,7 +24,7 @@ import java.util.List;
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.report.v1")
 @Template("Prozedur")
-public class ProzedurComposition {
+public class ProzedurComposition implements Composition {
     @Id
     private VersionUid versionUid;
 

@@ -41,7 +41,7 @@ java -jar fhir-bridge-poc-0.3.0-SNAPSHOT.jar
 |Allow remote references.
 
 |`fhir-bridge.fhir.validation.terminology.mode`
-|`embedded`
+|`none`
 |Terminology validation mode: `embedded`, `server`, `none`
 
 |`fhir-bridge.fhir.validation.terminology.server-url`

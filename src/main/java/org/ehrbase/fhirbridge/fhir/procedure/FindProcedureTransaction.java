@@ -5,16 +5,16 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionConfiguration;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
-public class ReadProcedureTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class FindProcedureTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public ReadProcedureTransaction() {
-        super("proc-read",
-                "Read Procedure",
+    public FindProcedureTransaction() {
+        super("fhir-find-procedure",
+                "Find Procedure",
                 true,
                 null,
                 null,
                 FhirVersionEnum.R4,
-                new ReadProcedureProvider(),
+                new FindProcedureProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }

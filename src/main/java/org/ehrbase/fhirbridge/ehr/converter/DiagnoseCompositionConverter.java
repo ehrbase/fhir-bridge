@@ -22,8 +22,8 @@ import org.hl7.fhir.r4.model.DateTimeType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
@@ -36,7 +36,7 @@ public class DiagnoseCompositionConverter implements CompositionConverter {
         if (composition == null) {
             return null;
         }
-        DiagnoseComposition that = (DiagnoseComposition) composition;
+        DiagnoseComposition diagnoseComposition = (DiagnoseComposition) composition;
 
         Condition result = new Condition();
         TemporalAccessor temporal;
@@ -50,7 +50,7 @@ public class DiagnoseCompositionConverter implements CompositionConverter {
         // generates a ENUM with those codes.
 
         // severity code
-        text = ((AtiopathogeneseSchweregradDvcodedtext) that.getDiagnose().getSchweregrad()).getSchweregradDefiningcode().getCode();
+        text = ((AtiopathogeneseSchweregradDvcodedtext) diagnoseComposition.getDiagnose().getSchweregrad()).getSchweregradDefiningcode().getCode();
 
         // transforms atcodes in snomed codes
         switch (text) {
@@ -73,41 +73,43 @@ public class DiagnoseCompositionConverter implements CompositionConverter {
         coding.setSystem("http://snomed.info/sct");
 
         // diagnose code
-        text = that.getDiagnose().getDerDiagnoseDefiningcode().getCode();
+        text = diagnoseComposition.getDiagnose().getDerDiagnoseDefiningcode().getCode();
         coding = result.getCode().addCoding();
         coding.setCode(text);
         coding.setSystem("http://fhir.de/CodeSystem/dimdi/icd-10-gm");
 
         // date onset
-        temporal = that.getDiagnose().getDerErstdiagnoseValue();
-        result.getOnsetDateTimeType().setValue(Date.from(((ZonedDateTime) temporal).toInstant()));
+        temporal = diagnoseComposition.getDiagnose().getDerErstdiagnoseValue();
+        result.getOnsetDateTimeType().setValue(Date.from(Instant.from(temporal)));
 
         // body site
-        text = that.getDiagnose().getKorperstelleValueStructure();
+        text = diagnoseComposition.getDiagnose().getKorperstelleValueStructure();
         result.addBodySite().addCoding().setDisplay(text);
 
         // FIXME: all FHIR resources need an ID, currently we are using the compo.uid as the resource ID,
         // this is a workaround, might not work on all cases.
-        result.setId(that.getVersionUid().toString());
+        result.setId(diagnoseComposition.getVersionUid().toString());
         return result;
     }
 
     @Override
-    public Composition toComposition(Object object) {
+    public DiagnoseComposition toComposition(Object object) {
         if (object == null) {
             return null;
         }
-        Condition that = (Condition) object;
+        Condition condition = (Condition) object;
 
-        DiagnoseComposition result = new DiagnoseComposition();
-        FeederAudit fa = CommonData.constructFeederAudit(that);
-        result.setFeederAudit(fa);
+        DiagnoseComposition composition = new DiagnoseComposition();
+
+        // set feeder audit
+        FeederAudit fa = CommonData.constructFeederAudit(condition);
+        composition.setFeederAudit(fa);
 
         // ========================================================================================
         // FHIR values
-        DateTimeType fhirOnsetDateTime = that.getOnsetDateTimeType();
-        Coding fhirSeverity = that.getSeverity().getCoding().get(0);
-        Coding fhirDiagnosis = that.getCode().getCoding().get(0);
+        DateTimeType fhirOnsetDateTime = condition.getOnsetDateTimeType();
+        Coding fhirSeverity = condition.getSeverity().getCoding().get(0);
+        Coding fhirDiagnosis = condition.getCode().getCoding().get(0);
 
 
         // mapping to openEHR
@@ -173,39 +175,43 @@ public class DiagnoseCompositionConverter implements CompositionConverter {
 
 
         // body site
-        if (that.getBodySite().size() == 1) {
-            String bodySiteName = that.getBodySite().get(0).getCoding().get(0).getDisplay();
+        if (condition.getBodySite().size() == 1) {
+            String bodySiteName = condition.getBodySite().get(0).getCoding().get(0).getDisplay();
             evaluation.setKorperstelleValue("body site");
             evaluation.setKorperstelleValueStructure(bodySiteName);
         }
 
 
-        result.setDiagnose(evaluation);
+        composition.setDiagnose(evaluation);
 
         // ======================================================================================
         // Required fields by API
-        result.setLanguage(Language.EN);
-        result.setLocation("test");
-        result.setSettingDefiningcode(SettingDefiningcode.EMERGENCY_CARE);
-        result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        composition.setLanguage(Language.EN);
+        composition.setLocation("test");
+        composition.setSettingDefiningcode(SettingDefiningcode.EMERGENCY_CARE);
+        composition.setTerritory(Territory.DE);
+        composition.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
 
         // check if the condition has a recorded date, if not, use the onset
-        DateTimeType aDate = that.getRecordedDateElement();
+        DateTimeType aDate = condition.getRecordedDateElement();
         logger.debug("recorded is {}", aDate);
         if (aDate.isEmpty()) {
             logger.debug("recorded date is null trying onset");
-            aDate = that.getOnsetDateTimeType();
+            aDate = condition.getOnsetDateTimeType();
             logger.debug("onset is {}", aDate);
         }
-        result.setStartTimeValue(aDate.getValueAsCalendar().toZonedDateTime());
+        composition.setStartTimeValue(aDate.getValueAsCalendar().toZonedDateTime());
 
         // https://github.com/ehrbase/ehrbase_client_library/issues/31
         PartyIdentified composer = new PartyIdentified();
         DvIdentifier identifier = new DvIdentifier();
-        identifier.setId(that.getRecorder().getReference());
+        identifier.setId(condition.getRecorder().getReference());
         composer.addIdentifier(identifier);
-        result.setComposer(composer);
-        return result;
+        composition.setComposer(composer);
+
+        //composition.setComposer(new PartySelf());
+
+        return composition;
+
     }
 }
