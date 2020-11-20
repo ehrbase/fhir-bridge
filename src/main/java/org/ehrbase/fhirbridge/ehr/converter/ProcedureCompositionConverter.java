@@ -21,7 +21,7 @@ import org.hl7.fhir.r4.model.Procedure;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProzedurCompositionConverter implements CompositionConverter<ProzedurComposition, Procedure> {
+public class ProcedureCompositionConverter implements CompositionConverter<ProzedurComposition, Procedure> {
 
     @Override
     public Procedure fromComposition(ProzedurComposition composition) {
