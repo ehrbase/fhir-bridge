@@ -11,6 +11,7 @@ import org.ehrbase.fhirbridge.ehr.converter.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.BodyTemperatureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.BodyWeightCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ClinicalFrailtyScaleScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.CoronavirusNachweisTestCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.FiO2CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.HeartRateCompositionConverter;
@@ -56,6 +57,8 @@ public class ObservationRoutes extends RouteBuilder {
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyTemperatureCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BODY_WEIGHT))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyWeightCompositionConverter()))
+                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.CLINICAL_FRAILTY_SCALE))
+                    .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new ClinicalFrailtyScaleScoreCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.CORONARIRUS_NACHWEIS_TEST))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new CoronavirusNachweisTestCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.FIO2))
