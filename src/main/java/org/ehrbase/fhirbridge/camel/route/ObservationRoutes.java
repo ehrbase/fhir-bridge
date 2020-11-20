@@ -9,6 +9,7 @@ import org.ehrbase.fhirbridge.camel.PatientIdProcessor;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.BodyTemperatureCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.BodyWeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.CoronavirusNachweisTestCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.Observation;
@@ -43,6 +44,8 @@ public class ObservationRoutes extends RouteBuilder {
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyHeightCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BODY_TEMP))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyTemperatureCompositionConverter()))
+                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BODY_WEIGHT))
+                    .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyWeightCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.CORONARIRUS_NACHWEIS_TEST))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new CoronavirusNachweisTestCompositionConverter()))
                 .otherwise()
