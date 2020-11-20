@@ -214,6 +214,8 @@ public class GeccoLaborbefundCompositionObservationConverter implements Composit
                 registereintragStatus = StatusDefiningcode.VORLAUFIG;
                 laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.VORLAUFIG;
                 break;
+            default:
+                break;
         }
 
         result.setStatusDefiningcode(registereintragStatus);
@@ -393,6 +395,8 @@ public class GeccoLaborbefundCompositionObservationConverter implements Composit
             case UNAVAILABLE:
             case NULL:
                 eignungZumTestenDefiningcode = EignungZumTestenDefiningcode.MANGELHAFT_NICHT_VERARBEITET;
+                break;
+            default:
                 break;
         }
 

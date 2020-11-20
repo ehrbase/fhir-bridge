@@ -1,11 +1,6 @@
 {
   "resourceType": "Condition",
   "id": "example",
-  "meta": {
-    "profile": [
-      "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"
-    ]
-  },
   "text": {
     "status": "generated",
     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Severe burn of left ear (Date: 24-May 2012)</div>"
@@ -74,10 +69,7 @@
     }
   ],
   "subject": {
-    "identifier": {
-      "system": "urn:ietf:rfc:4122",
-      "value": "{{patientId}}"
-    }
+    "reference": "urn:uuid:07f602e0-579e-4fe3-95af-381728bf0d49"
   },
   "onsetDateTime": "2012-05-24"
 }
