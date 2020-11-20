@@ -33,7 +33,7 @@ public enum Profile {
 
     CORONARIRUS_NACHWEIS_TEST(Observation.class, "https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest"),
 
-    FIO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/FiO2"),
+    FIO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/inhaled-oxygen-concentration"),
 
     HEART_RATE(Observation.class, "http://hl7.org/fhir/StructureDefinition/heartrate"),
 
