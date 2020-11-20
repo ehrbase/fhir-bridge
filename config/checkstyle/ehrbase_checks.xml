@@ -33,6 +33,9 @@
         <module name="ModifierOrder"/>
 
         <!-- Whitespace -->
+        <module name="EmptyLineSeparator">
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+        </module>
         <module name="NoLineWrap"/>
     </module>
 </module>
