@@ -28,7 +28,7 @@ public class PatientRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("fhir-create-patient:/service?audit=false&fhirContext=#fhirContext")
+        from("fhir-create-patient:fhirConsumer?fhirContext=#fhirContext")
             .process(requestValidator)
             .bean(patientDao, "create(${body})")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())

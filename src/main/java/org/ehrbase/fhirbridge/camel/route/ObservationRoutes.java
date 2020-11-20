@@ -36,7 +36,7 @@ public class ObservationRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("fhir-create-observation:/service?audit=false&fhirContext=#fhirContext")
+        from("fhir-create-observation:fhirConsumer?fhirContext=#fhirContext")
             .process(requestValidator)
             .bean(observationDao, "create(${body})")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
