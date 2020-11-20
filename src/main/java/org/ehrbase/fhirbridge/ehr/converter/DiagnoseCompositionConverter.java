@@ -5,8 +5,7 @@ import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.fhirbridge.ehr.Composition;
-import org.ehrbase.fhirbridge.ehr.mapper.CommonData;
+import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.DiagnoseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.AtiopathogeneseSchweregradDvcodedtext;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.DiagnoseEvaluation;
@@ -27,16 +26,15 @@ import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
-public class DiagnoseCompositionConverter implements CompositionConverter {
+public class DiagnoseCompositionConverter implements CompositionConverter<DiagnoseComposition, Condition> {
 
-    private final Logger logger = LoggerFactory.getLogger(DiagnoseCompositionConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DiagnoseCompositionConverter.class);
 
     @Override
-    public Condition fromComposition(Composition composition) {
+    public Condition fromComposition(DiagnoseComposition composition) {
         if (composition == null) {
             return null;
         }
-        DiagnoseComposition diagnoseComposition = (DiagnoseComposition) composition;
 
         Condition result = new Condition();
         TemporalAccessor temporal;
@@ -50,7 +48,7 @@ public class DiagnoseCompositionConverter implements CompositionConverter {
         // generates a ENUM with those codes.
 
         // severity code
-        text = ((AtiopathogeneseSchweregradDvcodedtext) diagnoseComposition.getDiagnose().getSchweregrad()).getSchweregradDefiningcode().getCode();
+        text = ((AtiopathogeneseSchweregradDvcodedtext) composition.getDiagnose().getSchweregrad()).getSchweregradDefiningcode().getCode();
 
         // transforms atcodes in snomed codes
         switch (text) {
@@ -73,37 +71,36 @@ public class DiagnoseCompositionConverter implements CompositionConverter {
         coding.setSystem("http://snomed.info/sct");
 
         // diagnose code
-        text = diagnoseComposition.getDiagnose().getDerDiagnoseDefiningcode().getCode();
+        text = composition.getDiagnose().getDerDiagnoseDefiningcode().getCode();
         coding = result.getCode().addCoding();
         coding.setCode(text);
         coding.setSystem("http://fhir.de/CodeSystem/dimdi/icd-10-gm");
 
         // date onset
-        temporal = diagnoseComposition.getDiagnose().getDerErstdiagnoseValue();
+        temporal = composition.getDiagnose().getDerErstdiagnoseValue();
         result.getOnsetDateTimeType().setValue(Date.from(Instant.from(temporal)));
 
         // body site
-        text = diagnoseComposition.getDiagnose().getKorperstelleValueStructure();
+        text = composition.getDiagnose().getKorperstelleValueStructure();
         result.addBodySite().addCoding().setDisplay(text);
 
         // FIXME: all FHIR resources need an ID, currently we are using the compo.uid as the resource ID,
         // this is a workaround, might not work on all cases.
-        result.setId(diagnoseComposition.getVersionUid().toString());
+        result.setId(composition.getVersionUid().toString());
         return result;
     }
 
     @Override
-    public DiagnoseComposition toComposition(Object object) {
-        if (object == null) {
+    public DiagnoseComposition toComposition(Condition condition) {
+        if (condition == null) {
             return null;
         }
-        Condition condition = (Condition) object;
 
-        DiagnoseComposition composition = new DiagnoseComposition();
+        DiagnoseComposition result = new DiagnoseComposition();
 
         // set feeder audit
         FeederAudit fa = CommonData.constructFeederAudit(condition);
-        composition.setFeederAudit(fa);
+        result.setFeederAudit(fa);
 
         // ========================================================================================
         // FHIR values
@@ -182,36 +179,36 @@ public class DiagnoseCompositionConverter implements CompositionConverter {
         }
 
 
-        composition.setDiagnose(evaluation);
+        result.setDiagnose(evaluation);
 
         // ======================================================================================
         // Required fields by API
-        composition.setLanguage(Language.EN);
-        composition.setLocation("test");
-        composition.setSettingDefiningcode(SettingDefiningcode.EMERGENCY_CARE);
-        composition.setTerritory(Territory.DE);
-        composition.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        result.setLanguage(Language.EN);
+        result.setLocation("test");
+        result.setSettingDefiningcode(SettingDefiningcode.EMERGENCY_CARE);
+        result.setTerritory(Territory.DE);
+        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
 
         // check if the condition has a recorded date, if not, use the onset
         DateTimeType aDate = condition.getRecordedDateElement();
-        logger.debug("recorded is {}", aDate);
+        LOG.debug("recorded is {}", aDate);
         if (aDate.isEmpty()) {
-            logger.debug("recorded date is null trying onset");
+            LOG.debug("recorded date is null trying onset");
             aDate = condition.getOnsetDateTimeType();
-            logger.debug("onset is {}", aDate);
+            LOG.debug("onset is {}", aDate);
         }
-        composition.setStartTimeValue(aDate.getValueAsCalendar().toZonedDateTime());
+        result.setStartTimeValue(aDate.getValueAsCalendar().toZonedDateTime());
 
         // https://github.com/ehrbase/ehrbase_client_library/issues/31
         PartyIdentified composer = new PartyIdentified();
         DvIdentifier identifier = new DvIdentifier();
         identifier.setId(condition.getRecorder().getReference());
         composer.addIdentifier(identifier);
-        composition.setComposer(composer);
+        result.setComposer(composer);
 
         //composition.setComposer(new PartySelf());
 
-        return composition;
+        return result;
 
     }
 }

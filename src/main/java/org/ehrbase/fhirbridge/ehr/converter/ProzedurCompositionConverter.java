@@ -4,8 +4,7 @@ import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.fhirbridge.ehr.Composition;
-import org.ehrbase.fhirbridge.ehr.mapper.CommonData;
+import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.DetailsZurKorperstelleCluster;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.ProzedurAction;
@@ -22,40 +21,37 @@ import org.hl7.fhir.r4.model.Procedure;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProcedureCompositionConverter implements CompositionConverter {
+public class ProzedurCompositionConverter implements CompositionConverter<ProzedurComposition, Procedure> {
 
     @Override
-    public Procedure fromComposition(Composition composition) {
+    public Procedure fromComposition(ProzedurComposition composition) {
         if (composition == null) {
             return null;
         }
-        ProzedurComposition that = (ProzedurComposition) composition;
-
         Procedure result = new Procedure();
-        result.setId(that.getVersionUid().toString());
+        result.setId(composition.getVersionUid().toString());
 
         return result;
     }
 
     @Override
-    public ProzedurComposition toComposition(Object object) {
-        if (object == null) {
+    public ProzedurComposition toComposition(Procedure procedure) {
+        if (procedure == null) {
             return null;
         }
-        Procedure that = (Procedure) object;
 
         ProzedurComposition result = new ProzedurComposition();
 
         // set feeder audit
-        FeederAudit fa = CommonData.constructFeederAudit(that);
+        FeederAudit fa = CommonData.constructFeederAudit(procedure);
         result.setFeederAudit(fa);
 
-        Coding code = that.getCode().getCoding().get(0);
+        Coding code = procedure.getCode().getCoding().get(0);
 
-        DateTimeType performed = that.getPerformedDateTimeType();
+        DateTimeType performed = procedure.getPerformedDateTimeType();
 
         Coding bodySite = null;
-        List<CodeableConcept> bodySites = that.getBodySite();
+        List<CodeableConcept> bodySites = procedure.getBodySite();
         if (!bodySites.isEmpty()) {
             CodeableConcept bodySiteCodes = bodySites.get(0); // could be empty
             if (bodySiteCodes != null) {
@@ -64,9 +60,9 @@ public class ProcedureCompositionConverter implements CompositionConverter {
         }
 
         Annotation note = null;
-        List<Annotation> notes = that.getNote();
+        List<Annotation> notes = procedure.getNote();
         if (!notes.isEmpty()) {
-            note = that.getNote().get(0); // could be empty
+            note = procedure.getNote().get(0); // could be empty
         }
 
         ProzedurAction action = new ProzedurAction();
@@ -114,7 +110,7 @@ public class ProcedureCompositionConverter implements CompositionConverter {
         // https://github.com/ehrbase/ehrbase_client_library/issues/31
         PartyIdentified composer = new PartyIdentified();
         DvIdentifier identifier = new DvIdentifier();
-        identifier.setId(that.getRecorder().getReference()); // TODO: if there is no recorder, try with the performer
+        identifier.setId(procedure.getRecorder().getReference()); // TODO: if there is no recorder, try with the performer
         composer.addIdentifier(identifier);
         result.setComposer(composer);
 

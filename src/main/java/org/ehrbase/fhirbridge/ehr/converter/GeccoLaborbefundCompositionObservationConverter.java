@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.mapping;
+package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
@@ -8,7 +8,7 @@ import com.nedap.archie.rm.datavalues.quantity.DvInterval;
 import com.nedap.archie.rm.datavalues.quantity.datetime.DvDate;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.fhirbridge.ehr.mapper.CommonData;
+import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningcode;
@@ -36,29 +36,26 @@ import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
-import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Quantity;
 import org.hl7.fhir.r4.model.Reference;
-import org.hl7.fhir.r4.model.ResourceType;
 import org.hl7.fhir.r4.model.Specimen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * FHIR to openEHR - Laboratory report
- */
-public class FhirDiagnosticReportOpenehrLabResults {
+import static java.util.Date.from;
 
-    private static final Logger logger = LoggerFactory.getLogger(FhirDiagnosticReportOpenehrLabResults.class);
+public class GeccoLaborbefundCompositionObservationConverter implements CompositionConverter<GECCOLaborbefundComposition, Observation> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(GeccoLaborbefundCompositionObservationConverter.class);
 
     private static final Map<String, UntersuchterAnalytDefiningcode> untersuchterAnalytLOINCDefiningcodeMap
             = new HashMap<>();
@@ -104,27 +101,83 @@ public class FhirDiagnosticReportOpenehrLabResults {
         }
     }
 
+    @Override
+    public Observation fromComposition(GECCOLaborbefundComposition composition) {
+        if (composition == null) {
+            return null;
+        }
 
-    private FhirDiagnosticReportOpenehrLabResults() {
+        // TODO: Do we have to map all possible values back to the observation?
+        Observation result = new Observation();
+
+        TemporalAccessor temporal;
+        Coding coding;
+
+        result.getIdentifier().add(new Identifier()); // analyseBefundCode
+        result.getIdentifier().get(0).getType().getCoding().add(new Coding());
+        result.getIdentifier().get(0).getType().getCoding().get(0).setSystem("http://terminology.hl7.org/CodeSystem/v2-0203");
+        result.getIdentifier().get(0).getType().getCoding().get(0).setCode("OBI");
+
+
+        ProLaboranalytCluster cluster = composition.getLaborergebnis().getProLaboranalyt();
+
+        // cluster . time -> observation . effective_date
+        temporal = cluster.getZeitpunktErgebnisStatusValue();
+        result.getEffectiveDateTimeType().setValue(from(((OffsetDateTime) temporal).toInstant()));
+
+        // cluster . value -> observation . value
+        ProLaboranalytAnalytResultatDvquantity value = ((ProLaboranalytAnalytResultatDvquantity) cluster.getAnalytResultat());
+        result.getValueQuantity().setValue(value.getAnalytResultatMagnitude());
+        result.getValueQuantity().setUnit(value.getAnalytResultatUnits());
+        result.getValueQuantity().setSystem("http://unitsofmeasure.org");
+        result.getValueQuantity().setCode(value.getAnalytResultatUnits());
+
+        // set codes that come hardcoded in the inbound resources
+
+        // observation . category
+        result.getCategory().add(new CodeableConcept());
+
+        coding = result.getCategory().get(0).addCoding();
+        coding.setSystem("http://loing.org");
+        coding.setCode("26436-6");
+
+        coding = result.getCategory().get(0).addCoding();
+        coding.setSystem("http://terminology.hl7.org/CodeSystem/observation-category");
+        coding.setCode("laboratory");
+
+        // observation . code
+        coding = result.getCode().addCoding();
+        coding.setSystem("http://loing.org");
+        coding.setCode("59826-8");
+        coding.setDisplay("Creatinine [Moles/volume] in Blood");
+        result.getCode().setText("Kreatinin");
+
+        // set patient
+        //observation.getSubject().setReference("Patient/"+ subjectId.getValue());
+
+        result.setStatus(Observation.ObservationStatus.FINAL);
+
+        result.getMeta().addProfile(Profile.OBSERVATION_LAB.getUri());
+
+        result.setId(composition.getVersionUid().toString());
+
+        return result;
     }
 
-    /**
-     * this maps a single lab observation to a composition, the map(DiagnosticReport) method maps a
-     * DiagnosticReport with a direct contained Observation to a composition.
-     *
-     * @param fhirObservation the FHIR Observation resource received in the API.
-     * @return the Composition defined by the laborbefund template.
-     */
-    public static GECCOLaborbefundComposition map(Observation fhirObservation) {
+    @Override
+    public GECCOLaborbefundComposition toComposition(Observation observation) {
+        if (observation == null) {
+            return null;
+        }
 
-        GECCOLaborbefundComposition composition = new GECCOLaborbefundComposition();
+        GECCOLaborbefundComposition result = new GECCOLaborbefundComposition();
 
         // set feeder auhttps://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/ObservationLabdit
-        FeederAudit fa = CommonData.constructFeederAudit(fhirObservation);
-        composition.setFeederAudit(fa);
+        FeederAudit fa = CommonData.constructFeederAudit(observation);
+        result.setFeederAudit(fa);
 
         LaborergebnisObservation laborergebnis = new LaborergebnisObservation();
-        ProLaboranalytCluster laboranalyt = mapToLaboranalyt(fhirObservation);
+        ProLaboranalytCluster laboranalyt = mapToLaboranalyt(observation);
 
 
         // Map Status to composition and laboranalyt
@@ -132,7 +185,7 @@ public class FhirDiagnosticReportOpenehrLabResults {
         ErgebnisStatusDefiningcode laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.UNVOLLSTANDIG;
 
         // TODO: Check if corrected=changed and default=registered is correct.
-        switch (fhirObservation.getStatus()) {
+        switch (observation.getStatus()) {
             case FINAL:
                 registereintragStatus = StatusDefiningcode.FINAL;
                 laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.ENDBEFUND;
@@ -161,11 +214,9 @@ public class FhirDiagnosticReportOpenehrLabResults {
                 registereintragStatus = StatusDefiningcode.VORLAUFIG;
                 laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.VORLAUFIG;
                 break;
-            default:
-                throw new IllegalArgumentException();
         }
 
-        composition.setStatusDefiningcode(registereintragStatus);
+        result.setStatusDefiningcode(registereintragStatus);
 
         ProLaboranalytErgebnisStatusDvcodedtext ergebnisStatus = new ProLaboranalytErgebnisStatusDvcodedtext();
         ergebnisStatus.setErgebnisStatusDefiningcode(laboranalytStatusDefiningcode);
@@ -173,72 +224,72 @@ public class FhirDiagnosticReportOpenehrLabResults {
 
 
         // Map category, only LOINC part see https://github.com/ehrbase/num_platform/issues/33
-        if (fhirObservation.getCategory().get(0).getCoding().get(0).getSystem().equals("http://loinc.org")) {
-            String loincCode = fhirObservation.getCategory().get(0).getCoding().get(0).getCode();
+        if (observation.getCategory().get(0).getCoding().get(0).getSystem().equals("http://loinc.org")) {
+            String loincCode = observation.getCategory().get(0).getCoding().get(0).getCode();
             LabortestBezeichnungDefiningcode categoryDefiningcode = labortestBezeichnungLOINCDefiningcodeMap.get(loincCode);
 
             if (categoryDefiningcode == null) {
                 throw new UnprocessableEntityException("Unknown LOINC code in observation");
             }
 
-            composition.setKategorieValue(categoryDefiningcode.getValue());
+            result.setKategorieValue(categoryDefiningcode.getValue());
             laborergebnis.setLabortestBezeichnungDefiningcode(categoryDefiningcode);
         } else {
             throw new UnprocessableEntityException("No LOINC code in observation");
         }
 
         // Map performer to health care facility
-        if (!fhirObservation.getPerformer().isEmpty()) {
+        if (!observation.getPerformer().isEmpty()) {
             PartyIdentified healthCareFacility = new PartyIdentified();
-            DvIdentifier identifier = mapIdentifier(fhirObservation.getPerformer().get(0).getIdentifier());
+            DvIdentifier identifier = mapIdentifier(observation.getPerformer().get(0).getIdentifier());
             healthCareFacility.addIdentifier(identifier);
-            healthCareFacility.setName(fhirObservation.getPerformer().get(0).getDisplay());
-            composition.setHealthCareFacility(healthCareFacility);
+            healthCareFacility.setName(observation.getPerformer().get(0).getDisplay());
+            result.setHealthCareFacility(healthCareFacility);
         }
 
         // Map speciment to Probe
-        if (!fhirObservation.getSpecimen().isEmpty()) {
-            laborergebnis.getProbe().add(mapSpecimen(fhirObservation.getSpecimenTarget()));
+        if (!observation.getSpecimen().isEmpty()) {
+            laborergebnis.getProbe().add(mapSpecimen(observation.getSpecimenTarget()));
         }
 
 
         // Map method to Testmethode
 
-        if (!fhirObservation.getMethod().isEmpty() && !fhirObservation.getMethod().getCoding().isEmpty()) {
+        if (!observation.getMethod().isEmpty() && !observation.getMethod().getCoding().isEmpty()) {
             DvText testmethode = new DvText();
-            testmethode.setValue(fhirObservation.getMethod().getCoding().get(0).getDisplay());
+            testmethode.setValue(observation.getMethod().getCoding().get(0).getDisplay());
             laborergebnis.setValue(testmethode);
         }
 
         laborergebnis.setProLaboranalyt(laboranalyt);
 
 
-        laborergebnis.setOriginValue(fhirObservation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime()); // mandatory
-        laborergebnis.setTimeValue(fhirObservation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+        laborergebnis.setOriginValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime()); // mandatory
+        laborergebnis.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         laborergebnis.setLanguage(Language.EN);
         laborergebnis.setSubject(new PartySelf());
 
 
-        composition.setLaborergebnis(laborergebnis);
+        result.setLaborergebnis(laborergebnis);
 
         // ======================================================================================
         // Required fields by API
-        composition.setLanguage(Language.EN);
-        composition.setLocation("test");
-        composition.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
-        composition.setTerritory(Territory.DE);
-        composition.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
-        composition.setStartTimeValue(fhirObservation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+        result.setLanguage(Language.EN);
+        result.setLocation("test");
+        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        result.setTerritory(Territory.DE);
+        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        result.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         // FIXME: https://github.com/ehrbase/ehrbase_client_library/issues/31
         //        PartyProxy composer = new PartyIdentified();
         //        composition.setComposer(composer);
 
-        composition.setComposer(new PartySelf());
+        result.setComposer(new PartySelf());
 
-        return composition;
+        return result;
     }
 
-    public static DvIdentifier mapIdentifier(Identifier identifier) {
+    private DvIdentifier mapIdentifier(Identifier identifier) {
         if (identifier == null) {
             throw new UnprocessableEntityException("Unknown identifier");
         }
@@ -253,7 +304,7 @@ public class FhirDiagnosticReportOpenehrLabResults {
     }
 
 
-    public static ProbeCluster mapSpecimen(Specimen specimen) {
+    private ProbeCluster mapSpecimen(Specimen specimen) {
         ProbeCluster probe = new ProbeCluster();
 
         // Map to Probenart
@@ -343,8 +394,6 @@ public class FhirDiagnosticReportOpenehrLabResults {
             case NULL:
                 eignungZumTestenDefiningcode = EignungZumTestenDefiningcode.MANGELHAFT_NICHT_VERARBEITET;
                 break;
-            default:
-                throw new IllegalArgumentException();
         }
 
         ProbeEignungZumTestenDvcodedtext eignungZumTesten = new ProbeEignungZumTestenDvcodedtext();
@@ -358,61 +407,13 @@ public class FhirDiagnosticReportOpenehrLabResults {
         return probe;
     }
 
-
-    /**
-     * this maps a DiagnosticReport with a direct contained Observation to an
-     * openEHR composition generated for the Laborbefund template.
-     *
-     * @param fhirDiagnosticReport the DiagnosticReport FHIR resource received in the API
-     * @return the Composition defined by the laborbefund template
-     */
-    public static GECCOLaborbefundComposition map(DiagnosticReport fhirDiagnosticReport) {
-
-
-        logger.debug("Contained size: {}", fhirDiagnosticReport.getContained().size());
-
-        // one contained Observation is expected
-        if (fhirDiagnosticReport.getContained().size() != 1) {
-            throw new UnprocessableEntityException("One contained Observation was expected " + fhirDiagnosticReport.getContained().size() + " were received in DiagnosticReport " + fhirDiagnosticReport.getId());
-        }
-        if (fhirDiagnosticReport.getContained().get(0).getResourceType() != ResourceType.Observation) {
-            throw new UnprocessableEntityException("One contained Observation was expected, contained is there but is not Observation, it is " + fhirDiagnosticReport.getContained().get(0).getResourceType().toString());
-        }
-
-        Observation fhirObservation = (Observation) fhirDiagnosticReport.getContained().get(0);
-
-        GECCOLaborbefundComposition composition = map(fhirObservation);
-
-
-        LaborergebnisObservation laborbefund = composition.getLaborergebnis();
-
-        ProLaboranalytCluster laboranalytCluster = laborbefund.getProLaboranalyt();
-
-        laborbefund.setTimeValue(fhirObservation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        laborbefund.setLabortestBezeichnungValue(fhirDiagnosticReport.getCode().getText());
-        laborbefund.setSchlussfolgerungValue(fhirDiagnosticReport.getConclusion());
-
-
-        laborbefund.setProLaboranalyt(laboranalytCluster);
-
-
-        //DvIdentifier receiverOrderIdentifier = new DvIdentifier();
-        //receiverOrderIdentifier.setId(fhirDiagnosticReport.getIdentifier().get(0).getValue());
-        //receiverOrderIdentifier.setType(fhirDiagnosticReport.getIdentifier().get(0).getSystem());
-        //laborbefund.setLaborWelchesDenUntersuchungsauftragAnnimmt(receiverOrderIdentifier);
-
-
-        return composition;
-    }
-
-
     /**
      * Maps a FHIR Observation to an openEHR LaboranalytResultatCluster generated from the Laborbefund template.
      *
      * @param fhirObservation the FHIR Observation resource received in the API.
      * @return the cluster defined in the OPT that maps to the FHIR observation
      */
-    private static ProLaboranalytCluster mapToLaboranalyt(Observation fhirObservation) {
+    private ProLaboranalytCluster mapToLaboranalyt(Observation fhirObservation) {
 
         // ========================================================================================
         // value quantity is expected
@@ -490,64 +491,5 @@ public class FhirDiagnosticReportOpenehrLabResults {
         return laboranalyt;
     }
 
-    // TODO: Is it necessary to implement a map function from Composition -> DiagnosticReport?
 
-    public static Observation map(GECCOLaborbefundComposition composition) {
-
-        // TODO: Do we have to map all possible values back to the observation?
-        Observation observation = new Observation();
-
-        TemporalAccessor temporal;
-        Coding coding;
-
-        observation.getIdentifier().add(new Identifier()); // analyseBefundCode
-        observation.getIdentifier().get(0).getType().getCoding().add(new Coding());
-        observation.getIdentifier().get(0).getType().getCoding().get(0).setSystem("http://terminology.hl7.org/CodeSystem/v2-0203");
-        observation.getIdentifier().get(0).getType().getCoding().get(0).setCode("OBI");
-
-
-        ProLaboranalytCluster cluster = composition.getLaborergebnis().getProLaboranalyt();
-
-        // cluster . time -> observation . effective_date
-        temporal = cluster.getZeitpunktErgebnisStatusValue();
-        observation.getEffectiveDateTimeType().setValue(Date.from(((ZonedDateTime) temporal).toInstant()));
-
-        // cluster . value -> observation . value
-        ProLaboranalytAnalytResultatDvquantity value = ((ProLaboranalytAnalytResultatDvquantity) cluster.getAnalytResultat());
-        observation.getValueQuantity().setValue(value.getAnalytResultatMagnitude());
-        observation.getValueQuantity().setUnit(value.getAnalytResultatUnits());
-        observation.getValueQuantity().setSystem("http://unitsofmeasure.org");
-        observation.getValueQuantity().setCode(value.getAnalytResultatUnits());
-
-        // set codes that come hardcoded in the inbound resources
-
-        // observation . category
-        observation.getCategory().add(new CodeableConcept());
-
-        coding = observation.getCategory().get(0).addCoding();
-        coding.setSystem("http://loing.org");
-        coding.setCode("26436-6");
-
-        coding = observation.getCategory().get(0).addCoding();
-        coding.setSystem("http://terminology.hl7.org/CodeSystem/observation-category");
-        coding.setCode("laboratory");
-
-        // observation . code
-        coding = observation.getCode().addCoding();
-        coding.setSystem("http://loing.org");
-        coding.setCode("59826-8");
-        coding.setDisplay("Creatinine [Moles/volume] in Blood");
-        observation.getCode().setText("Kreatinin");
-
-        // set patient
-        //observation.getSubject().setReference("Patient/"+ subjectId.getValue());
-
-        observation.setStatus(Observation.ObservationStatus.FINAL);
-
-        observation.getMeta().addProfile(Profile.OBSERVATION_LAB.getUri());
-
-        observation.setId(composition.getVersionUid().toString());
-
-        return observation;
-    }
 }

@@ -6,9 +6,9 @@ import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.PatientIdProcessor;
-import org.ehrbase.fhirbridge.camel.ProcedureRowMapper;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
-import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ProzedurCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.mapper.ProcedureRowMapper;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
 import org.hl7.fhir.r4.model.Procedure;
 import org.springframework.context.annotation.Bean;
@@ -54,8 +54,8 @@ public class ProcedureRoutes extends RouteBuilder {
     }
 
     @Bean
-    public ProcedureCompositionConverter procedureCompositionConverter() {
-        return new ProcedureCompositionConverter();
+    public ProzedurCompositionConverter procedureCompositionConverter() {
+        return new ProzedurCompositionConverter();
     }
 
     @Bean

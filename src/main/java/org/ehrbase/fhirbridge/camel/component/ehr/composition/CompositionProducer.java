@@ -3,7 +3,6 @@ package org.ehrbase.fhirbridge.camel.component.ehr.composition;
 import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultProducer;
 import org.ehrbase.fhirbridge.ehr.Composition;
-import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public class CompositionProducer extends DefaultProducer {
             throw new IllegalArgumentException("Body must not be null");
         }
 
-        CompositionConverter compositionConverter = endpoint.getCompositionConverter();
+        CompositionConverter<Composition, Object> compositionConverter = endpoint.getCompositionConverter();
         if (compositionConverter != null) {
             body = compositionConverter.toComposition(body);
         }
@@ -60,7 +59,7 @@ public class CompositionProducer extends DefaultProducer {
                 .find(compositionId, expectedType)
                 .orElse(null);
 
-        CompositionConverter compositionConverter = endpoint.getCompositionConverter();
+        CompositionConverter<Composition, Object> compositionConverter = endpoint.getCompositionConverter();
         if (compositionConverter != null) {
             exchange.getMessage().setBody(compositionConverter.fromComposition((Composition) result));
         } else {
