@@ -45,6 +45,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
@@ -53,9 +54,9 @@ import java.util.Map;
 
 import static java.util.Date.from;
 
-public class GeccoLaborbefundCompositionObservationConverter implements CompositionConverter<GECCOLaborbefundComposition, Observation> {
+public class ObservationLabCompositionConverter implements CompositionConverter<GECCOLaborbefundComposition, Observation> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GeccoLaborbefundCompositionObservationConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ObservationLabCompositionConverter.class);
 
     private static final Map<String, UntersuchterAnalytDefiningcode> untersuchterAnalytLOINCDefiningcodeMap
             = new HashMap<>();
@@ -123,7 +124,7 @@ public class GeccoLaborbefundCompositionObservationConverter implements Composit
 
         // cluster . time -> observation . effective_date
         temporal = cluster.getZeitpunktErgebnisStatusValue();
-        result.getEffectiveDateTimeType().setValue(from(((OffsetDateTime) temporal).toInstant()));
+        result.getEffectiveDateTimeType().setValue(Date.from(Instant.from(temporal)));
 
         // cluster . value -> observation . value
         ProLaboranalytAnalytResultatDvquantity value = ((ProLaboranalytAnalytResultatDvquantity) cluster.getAnalytResultat());
