@@ -1554,7 +1554,7 @@
       <short value="Literal reference, Relative, internal or absolute URL" />
       <definition value="A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources." />
       <comment value="Using absolute URLs provides a stable scalable approach suitable for a cloud/web context, while using relative/logical references provides a flexible approach suitable for use when trading across closed eco-system boundaries.   Absolute URLs do not need to point to a FHIR RESTful server, though this is the preferred approach. If the URL conforms to the structure &quot;/[type]/[id]&quot; then it should be assumed that the reference is to a FHIR RESTful server." />
-      <min value="1" />
+      <min value="0" />
       <max value="1" />
       <base>
         <path value="Reference.reference" />
@@ -4322,20 +4322,20 @@
       <min value="1" />
       <fixedCode value="82810-3" />
     </element>
-    <element id="Observation.subject">
-      <path value="Observation.subject" />
-      <min value="1" />
-      <type>
-        <code value="Reference" />
-        <targetProfile value="http://hl7.org/fhir/StructureDefinition/Patient" />
-      </type>
-      <mustSupport value="true" />
-    </element>
-    <element id="Observation.subject.reference">
-      <path value="Observation.subject.reference" />
-      <min value="1" />
-      <mustSupport value="true" />
-    </element>
+<!--    <element id="Observation.subject">-->
+<!--      <path value="Observation.subject" />-->
+<!--      <min value="1" />-->
+<!--      <type>-->
+<!--        <code value="Reference" />-->
+<!--        <targetProfile value="http://hl7.org/fhir/StructureDefinition/Patient" />-->
+<!--      </type>-->
+<!--      <mustSupport value="true" />-->
+<!--    </element>-->
+<!--    <element id="Observation.subject.reference">-->
+<!--      <path value="Observation.subject.reference" />-->
+<!--      <min value="1" />-->
+<!--      <mustSupport value="true" />-->
+<!--    </element>-->
     <element id="Observation.effective[x]">
       <path value="Observation.effective[x]" />
       <min value="1" />

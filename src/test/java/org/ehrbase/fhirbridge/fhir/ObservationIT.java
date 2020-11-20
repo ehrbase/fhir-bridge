@@ -58,6 +58,11 @@ class ObservationIT extends AbstractSetupIT {
     }
 
     @Test
+    void createPregnancyStatus() throws IOException {
+        create("Observation/create-pregnancy-status.json");
+    }
+
+    @Test
     void createSmokingStatus() throws IOException {
         create("Observation/create-smoking-status.json");
     }
