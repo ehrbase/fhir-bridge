@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.mapper;
+package org.ehrbase.fhirbridge.ehr.converter;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.archetyped.FeederAuditDetails;

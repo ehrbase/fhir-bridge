@@ -11,6 +11,7 @@ import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.StatusDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
@@ -24,7 +25,7 @@ import java.util.List;
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Template("GECCO_Laborbefund")
-public class GECCOLaborbefundComposition {
+public class GECCOLaborbefundComposition implements Composition {
     @Id
     private VersionUid versionUid;
 

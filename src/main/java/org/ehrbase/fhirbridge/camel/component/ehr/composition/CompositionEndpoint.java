@@ -9,7 +9,7 @@ import org.apache.camel.spi.UriParam;
 import org.apache.camel.spi.UriPath;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.component.ehr.EhrConfiguration;
-import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.Composition;
 
 @UriEndpoint(firstVersion = "1.0.0", scheme = "ehr-composition", title = "EHR Composition", syntax = "ehr-composition:name", producerOnly = true)
 @SuppressWarnings({"java:S2160", "java:S1452"})
@@ -22,7 +22,7 @@ public class CompositionEndpoint extends DefaultEndpoint {
     private CompositionOperation operation;
 
     @UriParam
-    private CompositionConverter compositionConverter;
+    private CompositionConverter<Composition, Object> compositionConverter;
 
     private Class<?> expectedType;
 
@@ -65,11 +65,11 @@ public class CompositionEndpoint extends DefaultEndpoint {
         this.operation = operation;
     }
 
-    public CompositionConverter getCompositionConverter() {
+    public CompositionConverter<Composition, Object> getCompositionConverter() {
         return compositionConverter;
     }
 
-    public void setCompositionConverter(CompositionConverter compositionConverter) {
+    public void setCompositionConverter(CompositionConverter<Composition, Object> compositionConverter) {
         this.compositionConverter = compositionConverter;
     }
 
