@@ -18,6 +18,7 @@ import org.ehrbase.fhirbridge.ehr.converter.ObservationLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.PatientInIcuCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.PregnancyStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.SmokingStatusCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.SofaScoreCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.stereotype.Component;
@@ -69,6 +70,8 @@ public class ObservationRoutes extends RouteBuilder {
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new PregnancyStatusCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.SMOKING_STATUS))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new SmokingStatusCompositionConverter()))
+                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.SOFA_SCORE))
+                    .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new SofaScoreCompositionConverter()))
                 .otherwise()
                     .process(exchange -> {
                         throw new FhirBridgeException("Unsupported profile / Not yet implemented");
