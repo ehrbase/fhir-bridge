@@ -11,6 +11,7 @@ import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.PatientAufDerIntensivstationObservation;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.StatusDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
@@ -24,7 +25,7 @@ import java.util.List;
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Template("Patient auf ICU")
-public class PatientAufICUComposition {
+public class PatientAufICUComposition implements Composition {
     @Id
     private VersionUid versionUid;
 
@@ -78,68 +79,72 @@ public class PatientAufICUComposition {
         this.versionUid = versionUid;
     }
 
-    public void setFeederAudit(FeederAudit feederAudit) {
-        this.feederAudit = feederAudit;
-    }
-
     public FeederAudit getFeederAudit() {
         return this.feederAudit;
     }
 
-    public void setEndTimeValue(TemporalAccessor endTimeValue) {
-        this.endTimeValue = endTimeValue;
+    public void setFeederAudit(FeederAudit feederAudit) {
+        this.feederAudit = feederAudit;
     }
 
     public TemporalAccessor getEndTimeValue() {
         return this.endTimeValue;
     }
 
-    public void setParticipations(List<Participation> participations) {
-        this.participations = participations;
+    public void setEndTimeValue(TemporalAccessor endTimeValue) {
+        this.endTimeValue = endTimeValue;
     }
 
     public List<Participation> getParticipations() {
         return this.participations;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
+    public void setParticipations(List<Participation> participations) {
+        this.participations = participations;
     }
 
     public Language getLanguage() {
         return this.language;
     }
 
-    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
-        this.healthCareFacility = healthCareFacility;
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public PartyIdentified getHealthCareFacility() {
         return this.healthCareFacility;
     }
 
-    public void setStatusDefiningcode(StatusDefiningcode statusDefiningcode) {
-        this.statusDefiningcode = statusDefiningcode;
+    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
+        this.healthCareFacility = healthCareFacility;
     }
 
     public StatusDefiningcode getStatusDefiningcode() {
         return this.statusDefiningcode;
     }
 
-    public void setTerritory(Territory territory) {
-        this.territory = territory;
+    public void setStatusDefiningcode(StatusDefiningcode statusDefiningcode) {
+        this.statusDefiningcode = statusDefiningcode;
     }
 
     public Territory getTerritory() {
         return this.territory;
     }
 
-    public void setStartTimeValue(TemporalAccessor startTimeValue) {
-        this.startTimeValue = startTimeValue;
+    public void setTerritory(Territory territory) {
+        this.territory = territory;
     }
 
     public TemporalAccessor getStartTimeValue() {
         return this.startTimeValue;
+    }
+
+    public void setStartTimeValue(TemporalAccessor startTimeValue) {
+        this.startTimeValue = startTimeValue;
+    }
+
+    public PatientAufDerIntensivstationObservation getPatientAufDerIntensivstation() {
+        return this.patientAufDerIntensivstation;
     }
 
     public void setPatientAufDerIntensivstation(
@@ -147,47 +152,43 @@ public class PatientAufICUComposition {
         this.patientAufDerIntensivstation = patientAufDerIntensivstation;
     }
 
-    public PatientAufDerIntensivstationObservation getPatientAufDerIntensivstation() {
-        return this.patientAufDerIntensivstation;
+    public PartyProxy getComposer() {
+        return this.composer;
     }
 
     public void setComposer(PartyProxy composer) {
         this.composer = composer;
     }
 
-    public PartyProxy getComposer() {
-        return this.composer;
+    public SettingDefiningcode getSettingDefiningcode() {
+        return this.settingDefiningcode;
     }
 
     public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
         this.settingDefiningcode = settingDefiningcode;
     }
 
-    public SettingDefiningcode getSettingDefiningcode() {
-        return this.settingDefiningcode;
+    public String getLocation() {
+        return this.location;
     }
 
     public void setLocation(String location) {
         this.location = location;
     }
 
-    public String getLocation() {
-        return this.location;
+    public CategoryDefiningcode getCategoryDefiningcode() {
+        return this.categoryDefiningcode;
     }
 
     public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
         this.categoryDefiningcode = categoryDefiningcode;
     }
 
-    public CategoryDefiningcode getCategoryDefiningcode() {
-        return this.categoryDefiningcode;
+    public List<Cluster> getErweiterung() {
+        return this.erweiterung;
     }
 
     public void setErweiterung(List<Cluster> erweiterung) {
         this.erweiterung = erweiterung;
-    }
-
-    public List<Cluster> getErweiterung() {
-        return this.erweiterung;
     }
 }
