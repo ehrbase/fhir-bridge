@@ -21,22 +21,27 @@ class ObservationIT extends AbstractSetupIT {
 
     @Test
     void createBodyHeight() throws IOException {
-        create("Observation/create-bodyheight.json");
+        create("Observation/create-body-height.json");
     }
 
     @Test
     void createBodyTemp() throws IOException {
-        create("Observation/create-bodytemp.json");
+        create("Observation/create-body-temp.json");
     }
 
     @Test
     void createBodyWeight() throws IOException {
-        create("Observation/create-bodyweight.json");
+        create("Observation/create-body-weight.json");
     }
 
     @Test
     void createCoronavirusNachweisTest() throws IOException {
         create("Observation/create-coronavirusnachweistest.json");
+    }
+
+    @Test
+    void createSmokingStatus() throws IOException {
+        create("Observation/create-smoking-status.json");
     }
 
     void create(String path) throws IOException {
