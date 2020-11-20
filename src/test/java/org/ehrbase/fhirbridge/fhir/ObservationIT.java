@@ -24,6 +24,15 @@ class ObservationIT extends AbstractSetupIT {
     private final IGenericClient client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge-poc/fhir/");
 
     @Test
+    void createBodyTemp() throws IOException {
+        String resource = IOUtils.toString(new ClassPathResource("Observation/create-bodytemp.json").getInputStream(), StandardCharsets.UTF_8);
+        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
+
+        assertNotNull(outcome.getId());
+        assertEquals(true, outcome.getCreated());
+    }
+
+    @Test
     void createCoronavirusNachweisTest() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("Observation/create-coronavirusnachweistest.json").getInputStream(), StandardCharsets.UTF_8);
         MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
