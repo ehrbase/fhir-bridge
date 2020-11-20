@@ -8,7 +8,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 public class EhrbaseTemplateInitializer implements InitializingBean {
 
-    private final Logger logger = LoggerFactory.getLogger(EhrbaseTemplateInitializer.class);
+    private final Logger LOG = LoggerFactory.getLogger(EhrbaseTemplateInitializer.class);
 
     private final OpenEhrClient openEhrClient;
 
@@ -23,7 +23,7 @@ public class EhrbaseTemplateInitializer implements InitializingBean {
     public void afterPropertiesSet() {
         templateProvider.getTemplateIds()
                 .forEach(templateId -> {
-                    logger.info("Initializing template '{}'", templateId);
+                    LOG.info("Initializing template '{}'", templateId);
                     openEhrClient.templateEndpoint().ensureExistence(templateId);
                 });
     }

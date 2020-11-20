@@ -40,7 +40,7 @@ public class ProcedureRoutes extends RouteBuilder {
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#procedureCompositionConverter")
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#prozedurCompositionConverter")
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
 
         from("fhir-find-procedure:fhirConsumer?fhirContext=#fhirContext")
@@ -54,7 +54,7 @@ public class ProcedureRoutes extends RouteBuilder {
     }
 
     @Bean
-    public ProzedurCompositionConverter procedureCompositionConverter() {
+    public ProzedurCompositionConverter prozedurCompositionConverter() {
         return new ProzedurCompositionConverter();
     }
 

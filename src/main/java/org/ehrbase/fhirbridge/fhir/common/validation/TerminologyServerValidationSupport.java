@@ -30,7 +30,7 @@ import javax.annotation.Nonnull;
 @SuppressWarnings({"SpringElInspection", "ELValidationInJSP"})
 public class TerminologyServerValidationSupport implements IValidationSupport, MessageSourceAware {
 
-    private final Logger logger = LoggerFactory.getLogger(TerminologyServerValidationSupport.class);
+    private final Logger LOG = LoggerFactory.getLogger(TerminologyServerValidationSupport.class);
 
     private final FhirContext context;
 
@@ -52,7 +52,7 @@ public class TerminologyServerValidationSupport implements IValidationSupport, M
 
         String valueSetUrl = ((ValueSet) theValueSet).getUrl();
         if (!theOptions.isInferSystem()) {
-            logger.debug("Perform '/ValueSet/$validate-code' operation: system={}, code={}, url={}", theCodeSystem, theCode, valueSetUrl);
+            LOG.debug("Perform '/ValueSet/$validate-code' operation: system={}, code={}, url={}", theCodeSystem, theCode, valueSetUrl);
 
             IBaseParameters requestParams = ParametersUtil.newInstance(getFhirContext());
             ParametersUtil.addParameterToParametersUri(getFhirContext(), requestParams, "system", theCodeSystem);
@@ -79,7 +79,7 @@ public class TerminologyServerValidationSupport implements IValidationSupport, M
                         .setMessage(messages.getMessage("validation.terminology.validateCode", new Object[]{theCode, theCodeSystem, valueSetUrl}));
             }
         } else {
-            logger.debug("Perform '/ValueSet/$expand' operation: url={}", valueSetUrl);
+            LOG.debug("Perform '/ValueSet/$expand' operation: url={}", valueSetUrl);
 
             IBaseParameters requestParams = ParametersUtil.newInstance(getFhirContext());
             ParametersUtil.addParameterToParameters(getFhirContext(), requestParams, "valueSet", theValueSet);
@@ -110,7 +110,7 @@ public class TerminologyServerValidationSupport implements IValidationSupport, M
     @Cacheable(cacheNames = "codeSystemSupported", key = "#theSystem")
     @Override
     public boolean isCodeSystemSupported(ValidationSupportContext theValidationSupportContext, String theSystem) {
-        logger.debug("Perform '/CodeSystem/_search' operation: url={}", theSystem);
+        LOG.debug("Perform '/CodeSystem/_search' operation: url={}", theSystem);
 
         IBaseParameters requestParams = ParametersUtil.newInstance(getFhirContext());
         ParametersUtil.addParameterToParametersUri(getFhirContext(), requestParams, "url", theSystem);
@@ -130,7 +130,7 @@ public class TerminologyServerValidationSupport implements IValidationSupport, M
                                              String theCodeSystem, String theCode, String theDisplay, String theValueSetUrl) {
         if (StringUtils.isEmpty(theValueSetUrl)) {
             try {
-                logger.debug("Perform '/CodeSystem/$lookup' operation: system={}, code={}", theCodeSystem, theCode);
+                LOG.debug("Perform '/CodeSystem/$lookup' operation: system={}, code={}", theCodeSystem, theCode);
 
                 IBaseParameters requestParams = ParametersUtil.newInstance(getFhirContext());
                 ParametersUtil.addParameterToParametersUri(getFhirContext(), requestParams, "system", theCodeSystem);
