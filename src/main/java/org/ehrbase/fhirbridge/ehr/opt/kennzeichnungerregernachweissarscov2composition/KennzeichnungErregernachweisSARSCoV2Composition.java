@@ -10,6 +10,7 @@ import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.FallidentifikationCluster;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.KennzeichnungErregernachweisEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
@@ -23,7 +24,7 @@ import java.util.List;
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.report.v1")
 @Template("Kennzeichnung Erregernachweis SARS-CoV-2")
-public class KennzeichnungErregernachweisSARSCoV2Composition {
+public class KennzeichnungErregernachweisSARSCoV2Composition implements Composition {
     @Id
     private VersionUid versionUid;
 
@@ -76,32 +77,36 @@ public class KennzeichnungErregernachweisSARSCoV2Composition {
         return this.versionUid;
     }
 
-    public void setFeederAudit(FeederAudit feederAudit) {
-        this.feederAudit = feederAudit;
+    public void setVersionUid(VersionUid versionUid) {
+        this.versionUid = versionUid;
     }
 
     public FeederAudit getFeederAudit() {
         return this.feederAudit;
     }
 
-    public void setVersionUid(VersionUid versionUid) {
-        this.versionUid = versionUid;
-    }
-
-    public void setEndTimeValue(TemporalAccessor endTimeValue) {
-        this.endTimeValue = endTimeValue;
+    public void setFeederAudit(FeederAudit feederAudit) {
+        this.feederAudit = feederAudit;
     }
 
     public TemporalAccessor getEndTimeValue() {
         return this.endTimeValue;
     }
 
-    public void setParticipations(List<Participation> participations) {
-        this.participations = participations;
+    public void setEndTimeValue(TemporalAccessor endTimeValue) {
+        this.endTimeValue = endTimeValue;
     }
 
     public List<Participation> getParticipations() {
         return this.participations;
+    }
+
+    public void setParticipations(List<Participation> participations) {
+        this.participations = participations;
+    }
+
+    public KennzeichnungErregernachweisEvaluation getKennzeichnungErregernachweis() {
+        return this.kennzeichnungErregernachweis;
     }
 
     public void setKennzeichnungErregernachweis(
@@ -109,95 +114,91 @@ public class KennzeichnungErregernachweisSARSCoV2Composition {
         this.kennzeichnungErregernachweis = kennzeichnungErregernachweis;
     }
 
-    public KennzeichnungErregernachweisEvaluation getKennzeichnungErregernachweis() {
-        return this.kennzeichnungErregernachweis;
+    public Language getLanguage() {
+        return this.language;
     }
 
     public void setLanguage(Language language) {
         this.language = language;
     }
 
-    public Language getLanguage() {
-        return this.language;
+    public PartyIdentified getHealthCareFacility() {
+        return this.healthCareFacility;
     }
 
     public void setHealthCareFacility(PartyIdentified healthCareFacility) {
         this.healthCareFacility = healthCareFacility;
     }
 
-    public PartyIdentified getHealthCareFacility() {
-        return this.healthCareFacility;
+    public String getBerichtIdValue() {
+        return this.berichtIdValue;
     }
 
     public void setBerichtIdValue(String berichtIdValue) {
         this.berichtIdValue = berichtIdValue;
     }
 
-    public String getBerichtIdValue() {
-        return this.berichtIdValue;
+    public Territory getTerritory() {
+        return this.territory;
     }
 
     public void setTerritory(Territory territory) {
         this.territory = territory;
     }
 
-    public Territory getTerritory() {
-        return this.territory;
+    public TemporalAccessor getStartTimeValue() {
+        return this.startTimeValue;
     }
 
     public void setStartTimeValue(TemporalAccessor startTimeValue) {
         this.startTimeValue = startTimeValue;
     }
 
-    public TemporalAccessor getStartTimeValue() {
-        return this.startTimeValue;
+    public FallidentifikationCluster getFallidentifikation() {
+        return this.fallidentifikation;
     }
 
     public void setFallidentifikation(FallidentifikationCluster fallidentifikation) {
         this.fallidentifikation = fallidentifikation;
     }
 
-    public FallidentifikationCluster getFallidentifikation() {
-        return this.fallidentifikation;
+    public PartyProxy getComposer() {
+        return this.composer;
     }
 
     public void setComposer(PartyProxy composer) {
         this.composer = composer;
     }
 
-    public PartyProxy getComposer() {
-        return this.composer;
+    public SettingDefiningcode getSettingDefiningcode() {
+        return this.settingDefiningcode;
     }
 
     public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
         this.settingDefiningcode = settingDefiningcode;
     }
 
-    public SettingDefiningcode getSettingDefiningcode() {
-        return this.settingDefiningcode;
+    public String getLocation() {
+        return this.location;
     }
 
     public void setLocation(String location) {
         this.location = location;
     }
 
-    public String getLocation() {
-        return this.location;
+    public CategoryDefiningcode getCategoryDefiningcode() {
+        return this.categoryDefiningcode;
     }
 
     public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
         this.categoryDefiningcode = categoryDefiningcode;
     }
 
-    public CategoryDefiningcode getCategoryDefiningcode() {
-        return this.categoryDefiningcode;
+    public String getBerichtIdValueTree() {
+        return this.berichtIdValueTree;
     }
 
     public void setBerichtIdValueTree(String berichtIdValueTree) {
         this.berichtIdValueTree = berichtIdValueTree;
-    }
-
-    public String getBerichtIdValueTree() {
-        return this.berichtIdValueTree;
     }
 }
