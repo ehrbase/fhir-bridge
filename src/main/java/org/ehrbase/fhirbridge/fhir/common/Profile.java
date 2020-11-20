@@ -27,6 +27,8 @@ public enum Profile {
 
     BODY_TEMP(Observation.class, "http://hl7.org/fhir/StructureDefinition/bodytemp"),
 
+    BODY_WEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-weight"),
+
     CLINICAL_FRAILTY_SCALE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score"),
 
     CORONARIRUS_NACHWEIS_TEST(Observation.class, "https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest"),
@@ -52,14 +54,6 @@ public enum Profile {
         this.uri = uri;
     }
 
-    public String getUri() {
-        return uri;
-    }
-
-    public Class<? extends Resource> getResourceType() {
-        return resourceType;
-    }
-
     public static <T extends Resource> boolean isDefaultSupported(T resource) {
         return !(resource instanceof DiagnosticReport) &&
                 !(resource instanceof Observation) &&
@@ -80,5 +74,13 @@ public enum Profile {
             }
         }
         return null;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public Class<? extends Resource> getResourceType() {
+        return resourceType;
     }
 }

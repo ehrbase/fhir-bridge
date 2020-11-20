@@ -21,25 +21,26 @@ class ObservationIT extends AbstractSetupIT {
 
     @Test
     void createBodyHeight() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Observation/create-bodyheight.json").getInputStream(), StandardCharsets.UTF_8);
-        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
-
-        assertNotNull(outcome.getId());
-        assertEquals(true, outcome.getCreated());
+        create("Observation/create-bodyheight.json");
     }
 
     @Test
     void createBodyTemp() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Observation/create-bodytemp.json").getInputStream(), StandardCharsets.UTF_8);
-        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
+        create("Observation/create-bodytemp.json");
+    }
 
-        assertNotNull(outcome.getId());
-        assertEquals(true, outcome.getCreated());
+    @Test
+    void createBodyWeight() throws IOException {
+        create("Observation/create-bodyweight.json");
     }
 
     @Test
     void createCoronavirusNachweisTest() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Observation/create-coronavirusnachweistest.json").getInputStream(), StandardCharsets.UTF_8);
+        create("Observation/create-coronavirusnachweistest.json");
+    }
+
+    void create(String path) throws IOException {
+        String resource = IOUtils.toString(new ClassPathResource(path).getInputStream(), StandardCharsets.UTF_8);
         MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
 
         assertNotNull(outcome.getId());
