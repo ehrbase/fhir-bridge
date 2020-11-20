@@ -48,6 +48,8 @@ public class ObservationRoutes extends RouteBuilder {
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyWeightCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.CORONARIRUS_NACHWEIS_TEST))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new CoronavirusNachweisTestCompositionConverter()))
+                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.SMOKING_STATUS))
+                    .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new CoronavirusNachweisTestCompositionConverter()))
                 .otherwise()
                     .process(exchange -> {
                         throw new FhirBridgeException("Unsupported profile / Not yet implemented");

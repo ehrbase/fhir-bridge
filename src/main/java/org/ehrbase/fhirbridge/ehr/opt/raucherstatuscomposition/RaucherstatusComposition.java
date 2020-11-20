@@ -11,6 +11,7 @@ import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.StatusDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
@@ -24,7 +25,7 @@ import java.util.List;
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Template("Raucherstatus")
-public class RaucherstatusComposition {
+public class RaucherstatusComposition implements Composition {
     @Id
     private VersionUid versionUid;
 
@@ -81,123 +82,123 @@ public class RaucherstatusComposition {
         this.versionUid = versionUid;
     }
 
-    public void setEndTimeValue(TemporalAccessor endTimeValue) {
-        this.endTimeValue = endTimeValue;
-    }
-
     public TemporalAccessor getEndTimeValue() {
         return this.endTimeValue;
     }
 
-    public void setParticipations(List<Participation> participations) {
-        this.participations = participations;
+    public void setEndTimeValue(TemporalAccessor endTimeValue) {
+        this.endTimeValue = endTimeValue;
     }
 
     public List<Participation> getParticipations() {
         return this.participations;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
+    public void setParticipations(List<Participation> participations) {
+        this.participations = participations;
     }
 
     public Language getLanguage() {
         return this.language;
     }
 
-    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
-        this.healthCareFacility = healthCareFacility;
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public PartyIdentified getHealthCareFacility() {
         return this.healthCareFacility;
     }
 
-    public void setStatusDefiningcode(StatusDefiningcode statusDefiningcode) {
-        this.statusDefiningcode = statusDefiningcode;
+    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
+        this.healthCareFacility = healthCareFacility;
     }
 
     public StatusDefiningcode getStatusDefiningcode() {
         return this.statusDefiningcode;
     }
 
-    public void setKategorieValue(String kategorieValue) {
-        this.kategorieValue = kategorieValue;
+    public void setStatusDefiningcode(StatusDefiningcode statusDefiningcode) {
+        this.statusDefiningcode = statusDefiningcode;
     }
 
     public String getKategorieValue() {
         return this.kategorieValue;
     }
 
-    public void setRaucherstatus(RaucherstatusEvaluation raucherstatus) {
-        this.raucherstatus = raucherstatus;
+    public void setKategorieValue(String kategorieValue) {
+        this.kategorieValue = kategorieValue;
     }
 
     public RaucherstatusEvaluation getRaucherstatus() {
         return this.raucherstatus;
     }
 
-    public void setTerritory(Territory territory) {
-        this.territory = territory;
+    public void setRaucherstatus(RaucherstatusEvaluation raucherstatus) {
+        this.raucherstatus = raucherstatus;
     }
 
     public Territory getTerritory() {
         return this.territory;
     }
 
-    public void setStartTimeValue(TemporalAccessor startTimeValue) {
-        this.startTimeValue = startTimeValue;
+    public void setTerritory(Territory territory) {
+        this.territory = territory;
     }
 
     public TemporalAccessor getStartTimeValue() {
         return this.startTimeValue;
     }
 
-    public void setComposer(PartyProxy composer) {
-        this.composer = composer;
+    public void setStartTimeValue(TemporalAccessor startTimeValue) {
+        this.startTimeValue = startTimeValue;
     }
 
     public PartyProxy getComposer() {
         return this.composer;
     }
 
-    public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
-        this.settingDefiningcode = settingDefiningcode;
+    public void setComposer(PartyProxy composer) {
+        this.composer = composer;
     }
 
     public SettingDefiningcode getSettingDefiningcode() {
         return this.settingDefiningcode;
     }
 
-    public void setFeederAudit(FeederAudit feederAudit) {
-        this.feederAudit = feederAudit;
+    public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
+        this.settingDefiningcode = settingDefiningcode;
     }
 
     public FeederAudit getFeederAudit() {
         return this.feederAudit;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setFeederAudit(FeederAudit feederAudit) {
+        this.feederAudit = feederAudit;
     }
 
     public String getLocation() {
         return this.location;
     }
 
-    public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
-        this.categoryDefiningcode = categoryDefiningcode;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public CategoryDefiningcode getCategoryDefiningcode() {
         return this.categoryDefiningcode;
     }
 
-    public void setErweiterung(List<Cluster> erweiterung) {
-        this.erweiterung = erweiterung;
+    public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
+        this.categoryDefiningcode = categoryDefiningcode;
     }
 
     public List<Cluster> getErweiterung() {
         return this.erweiterung;
+    }
+
+    public void setErweiterung(List<Cluster> erweiterung) {
+        this.erweiterung = erweiterung;
     }
 }
