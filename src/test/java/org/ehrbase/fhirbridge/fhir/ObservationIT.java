@@ -43,6 +43,11 @@ class ObservationIT extends AbstractSetupIT {
     }
 
     @Test
+    void createClinicalFrailtyScaleScore() throws IOException {
+        create("Observation/create-clinical-frailty-scale-score.json");
+    }
+
+    @Test
     void createCoronavirusNachweisTest() throws IOException {
         create("Observation/create-coronavirus-nachweis-test.json");
     }
