@@ -11,11 +11,11 @@ import org.hl7.fhir.r4.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GeccoLaborbefundCompositionDiagnosticReportConverter implements CompositionConverter<GECCOLaborbefundComposition, DiagnosticReport> {
+public class DiagnosticReportLabCompositionConverter implements CompositionConverter<GECCOLaborbefundComposition, DiagnosticReport> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GeccoLaborbefundCompositionDiagnosticReportConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DiagnosticReportLabCompositionConverter.class);
 
-    private final GeccoLaborbefundCompositionObservationConverter observationConverter = new GeccoLaborbefundCompositionObservationConverter();
+    private final ObservationLabCompositionConverter observationConverter = new ObservationLabCompositionConverter();
 
     @Override
     public DiagnosticReport fromComposition(GECCOLaborbefundComposition composition) {
