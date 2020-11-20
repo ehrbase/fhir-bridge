@@ -11,6 +11,7 @@ import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.BlutdruckObservation;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
@@ -23,7 +24,7 @@ import java.util.List;
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Template("Blutdruck")
-public class BlutdruckComposition {
+public class BlutdruckComposition implements Composition {
     @Id
     private VersionUid versionUid;
 
@@ -66,12 +67,12 @@ public class BlutdruckComposition {
     @Path("/context/other_context[at0001]/items[at0002]")
     private List<Cluster> erweiterung;
 
-    public void setFeederAudit(FeederAudit feederAudit) {
-        this.feederAudit = feederAudit;
-    }
-
     public FeederAudit getFeederAudit() {
         return this.feederAudit;
+    }
+
+    public void setFeederAudit(FeederAudit feederAudit) {
+        this.feederAudit = feederAudit;
     }
 
     public VersionUid getVersionUid() {
@@ -82,99 +83,99 @@ public class BlutdruckComposition {
         this.versionUid = versionUid;
     }
 
-    public void setEndTimeValue(TemporalAccessor endTimeValue) {
-        this.endTimeValue = endTimeValue;
-    }
-
     public TemporalAccessor getEndTimeValue() {
         return this.endTimeValue;
     }
 
-    public void setParticipations(List<Participation> participations) {
-        this.participations = participations;
+    public void setEndTimeValue(TemporalAccessor endTimeValue) {
+        this.endTimeValue = endTimeValue;
     }
 
     public List<Participation> getParticipations() {
         return this.participations;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
+    public void setParticipations(List<Participation> participations) {
+        this.participations = participations;
     }
 
     public Language getLanguage() {
         return this.language;
     }
 
-    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
-        this.healthCareFacility = healthCareFacility;
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public PartyIdentified getHealthCareFacility() {
         return this.healthCareFacility;
     }
 
-    public void setComposer(PartyProxy composer) {
-        this.composer = composer;
+    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
+        this.healthCareFacility = healthCareFacility;
     }
 
     public PartyProxy getComposer() {
         return this.composer;
     }
 
-    public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
-        this.settingDefiningcode = settingDefiningcode;
+    public void setComposer(PartyProxy composer) {
+        this.composer = composer;
     }
 
     public SettingDefiningcode getSettingDefiningcode() {
         return this.settingDefiningcode;
     }
 
-    public void setTerritory(Territory territory) {
-        this.territory = territory;
+    public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
+        this.settingDefiningcode = settingDefiningcode;
     }
 
     public Territory getTerritory() {
         return this.territory;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setTerritory(Territory territory) {
+        this.territory = territory;
     }
 
     public String getLocation() {
         return this.location;
     }
 
-    public void setBlutdruck(BlutdruckObservation blutdruck) {
-        this.blutdruck = blutdruck;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public BlutdruckObservation getBlutdruck() {
         return this.blutdruck;
     }
 
-    public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
-        this.categoryDefiningcode = categoryDefiningcode;
+    public void setBlutdruck(BlutdruckObservation blutdruck) {
+        this.blutdruck = blutdruck;
     }
 
     public CategoryDefiningcode getCategoryDefiningcode() {
         return this.categoryDefiningcode;
     }
 
-    public void setStartTimeValue(TemporalAccessor startTimeValue) {
-        this.startTimeValue = startTimeValue;
+    public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
+        this.categoryDefiningcode = categoryDefiningcode;
     }
 
     public TemporalAccessor getStartTimeValue() {
         return this.startTimeValue;
     }
 
-    public void setErweiterung(List<Cluster> erweiterung) {
-        this.erweiterung = erweiterung;
+    public void setStartTimeValue(TemporalAccessor startTimeValue) {
+        this.startTimeValue = startTimeValue;
     }
 
     public List<Cluster> getErweiterung() {
         return this.erweiterung;
+    }
+
+    public void setErweiterung(List<Cluster> erweiterung) {
+        this.erweiterung = erweiterung;
     }
 }
