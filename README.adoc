@@ -1,7 +1,9 @@
 = FHIR Bridge PoC
 
-Proof of concept implementation of the https://github.com/ehrbase/fhir-bridge[FHIR Bridge] application using
-https://camel.apache.org/[Apache Camel] and https://github.com/oehf/ipf[Open eHealth Integration Platform].
+FHIR Bridge is an official component of https://ehrbase.org/[EHRbase].
+The purpose of the application is to act as a broker between an HL7 FHIR client and an openEHR server.
+
+The implementation is based on https://camel.apache.org/[Apache Camel] and https://github.com/oehf/ipf[Open eHealth Integration Platform].
 
 == Getting Started
 
@@ -24,7 +26,7 @@ WARNING: When using `-DskipITs=false` option, please make sure you have an EHRba
 
 [source]
 ----
-java -jar fhir-bridge-poc-0.3.0-SNAPSHOT.jar
+java -jar fhir-bridge-1.0.0-SNAPSHOT.jar
 ----
 
 == Configuration Properties
@@ -91,4 +93,5 @@ java -jar fhir-bridge-poc-0.3.0-SNAPSHOT.jar
 |===
 
 == Database
+
 The database creation scripts are available for PostgreSQL and H2 in the following location: `src/main/resources/schema`
