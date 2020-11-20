@@ -1,4 +1,4 @@
-= FHIR Bridge PoC
+= FHIR Bridge image:https://circleci.com/gh/ehrbase/fhir-bridge-poc.svg?style=shield["CircleCI",link="https://circleci.com/gh/ehrbase/fhir-bridge-poc"]
 
 FHIR Bridge is an official component of https://ehrbase.org/[EHRbase].
 The purpose of the application is to act as a broker between an HL7 FHIR client and an openEHR server.
