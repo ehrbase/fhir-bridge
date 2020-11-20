@@ -7,8 +7,9 @@ import org.ehrbase.fhirbridge.camel.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.PatientIdProcessor;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
+import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.BodyTemperatureCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.KennzeichnungErregernachweisSARSCoV2CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CoronavirusNachweisTestCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.stereotype.Component;
@@ -38,10 +39,12 @@ public class ObservationRoutes extends RouteBuilder {
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
             .choice()
+                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BODY_HEIGHT))
+                    .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyHeightCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BODY_TEMP))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyTemperatureCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.CORONARIRUS_NACHWEIS_TEST))
-                    .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new KennzeichnungErregernachweisSARSCoV2CompositionConverter()))
+                    .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new CoronavirusNachweisTestCompositionConverter()))
                 .otherwise()
                     .process(exchange -> {
                         throw new FhirBridgeException("Unsupported profile / Not yet implemented");
