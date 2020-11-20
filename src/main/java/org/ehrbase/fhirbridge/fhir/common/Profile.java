@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.fhir.common;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.Resource;
 
 import java.util.Collection;
@@ -45,7 +46,11 @@ public enum Profile {
 
     SOFA_SCORE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score"),
 
-    SMOKING_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status");
+    SMOKING_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status"),
+
+    // Procedure Profiles
+
+    PROCEDURE(Procedure.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure");
 
     private final Class<? extends Resource> resourceType;
 
@@ -59,7 +64,8 @@ public enum Profile {
     public static <T extends Resource> boolean isDefaultSupported(T resource) {
         return !(resource instanceof DiagnosticReport) &&
                 !(resource instanceof Observation) &&
-                !(resource instanceof Patient);
+                !(resource instanceof Patient) &&
+                !(resource instanceof Procedure);
     }
 
     public static <T extends Resource> Collection<Profile> resolve(T resource) {
