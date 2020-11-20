@@ -1,0 +1,46 @@
+{
+  "id": "cefe30c3-7597-421a-8509-8c15aa2a2d87",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu"
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "survey",
+          "display": "Survey",
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "01",
+        "display": "Is the patient in the intensive care unit?",
+        "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes"
+      }
+    ]
+  },
+  "effectiveDateTime": "2020-10-14",
+  "status": "final",
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "code": "373067005",
+        "display": "No (qualifier value)",
+        "system": "http://snomed.info/sct"
+      }
+    ]
+  },
+  "resourceType": "Observation"
+}
