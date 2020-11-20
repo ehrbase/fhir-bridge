@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class PatientIT extends AbstractSetupIT {
+class ProcedureIT extends AbstractSetupIT {
 
     private final FhirContext context = FhirContext.forR4();
 
@@ -24,7 +24,7 @@ class PatientIT extends AbstractSetupIT {
 
     @Test
     void create() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Patient/create.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("Procedure/create.json").getInputStream(), StandardCharsets.UTF_8);
         MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
 
         assertNotNull(outcome.getId());
@@ -32,20 +32,20 @@ class PatientIT extends AbstractSetupIT {
     }
 
     @Test
-    void createInvalid() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Patient/create-invalid.json").getInputStream(), StandardCharsets.UTF_8);
-        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
-
-        assertEquals("HTTP 422 : Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age, Element 'Patient.extension[1].extension[dateTimeOfDocumentation]': minimum required = 1, but only found 0", exception.getMessage());
-    }
-
-    @Test
     void createWithDefaultProfile() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Patient/create-with-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("Procedure/create-with-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : Default profile is not supported", exception.getMessage());
+    }
+
+    @Test
+    void createWithNonExistingSubject() throws IOException {
+        String resource = IOUtils.toString(new ClassPathResource("Procedure/create-with-non-existing-subject.json").getInputStream(), StandardCharsets.UTF_8);
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
+        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+
+        assertEquals("HTTP 422 : EhrId not found for subject '123456789'", exception.getMessage());
     }
 }

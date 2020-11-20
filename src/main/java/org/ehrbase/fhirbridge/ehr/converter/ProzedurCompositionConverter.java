@@ -28,9 +28,9 @@ public class ProzedurCompositionConverter implements CompositionConverter<Prozed
         if (composition == null) {
             return null;
         }
+
         Procedure result = new Procedure();
         result.setId(composition.getVersionUid().toString());
-
         return result;
     }
 
