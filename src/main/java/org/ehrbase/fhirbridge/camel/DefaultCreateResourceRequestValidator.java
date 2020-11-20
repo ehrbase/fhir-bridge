@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 public class DefaultCreateResourceRequestValidator implements Processor, MessageSourceAware {
 
-    private final Logger logger = LoggerFactory.getLogger(DefaultCreateResourceRequestValidator.class);
+    private final Logger LOG = LoggerFactory.getLogger(DefaultCreateResourceRequestValidator.class);
 
     private final FhirContext fhirContext;
 
@@ -44,12 +44,12 @@ public class DefaultCreateResourceRequestValidator implements Processor, Message
     public void process(Exchange exchange) {
         Resource resource = exchange.getIn().getBody(Resource.class);
 
-        logger.debug("Start validating {} resource...", resource.getResourceType());
+        LOG.debug("Start validating {} resource...", resource.getResourceType());
 
         validateProfile(exchange, resource);
         validateResource(resource);
 
-        logger.info("{} resource validated", resource.getResourceType());
+        LOG.info("{} resource validated", resource.getResourceType());
     }
 
     private void validateProfile(Exchange exchange, Resource resource) {
