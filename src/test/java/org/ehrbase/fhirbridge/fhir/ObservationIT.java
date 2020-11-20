@@ -73,6 +73,11 @@ class ObservationIT extends AbstractSetupIT {
     }
 
     @Test
+    void createSofaScore() throws IOException {
+        create("Observation/create-sofa-score.json");
+    }
+
+    @Test
     void createSmokingStatus() throws IOException {
         create("Observation/create-smoking-status.json");
     }
