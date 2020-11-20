@@ -38,7 +38,7 @@ public class CompositionProducer extends DefaultProducer {
             throw new IllegalArgumentException("Body must not be null");
         }
 
-        CompositionConverter<Composition, Object> compositionConverter = endpoint.getCompositionConverter();
+        CompositionConverter<Composition, Object> compositionConverter = determineCompositionConverter(exchange);
         if (compositionConverter != null) {
             body = compositionConverter.toComposition(body);
         }
@@ -59,7 +59,7 @@ public class CompositionProducer extends DefaultProducer {
                 .find(compositionId, expectedType)
                 .orElse(null);
 
-        CompositionConverter<Composition, Object> compositionConverter = endpoint.getCompositionConverter();
+        CompositionConverter<Composition, Object> compositionConverter = determineCompositionConverter(exchange);
         if (compositionConverter != null) {
             exchange.getMessage().setBody(compositionConverter.fromComposition((Composition) result));
         } else {
@@ -73,5 +73,15 @@ public class CompositionProducer extends DefaultProducer {
             operation = endpoint.getOperation();
         }
         return operation;
+    }
+
+    @SuppressWarnings("unchecked")
+    private CompositionConverter<Composition, Object> determineCompositionConverter(Exchange exchange) {
+        CompositionConverter<Composition, Object> compositionConverter =
+                exchange.getIn().getHeader(CompositionConstants.COMPOSITION_CONVERTER, CompositionConverter.class);
+        if (compositionConverter == null) {
+            compositionConverter = endpoint.getCompositionConverter();
+        }
+        return compositionConverter;
     }
 }
