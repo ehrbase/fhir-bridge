@@ -30,7 +30,7 @@ public class DiagnosticReportRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("fhir-create-diagnostic-report:/service?audit=false&fhirContext=#fhirContext")
+        from("fhir-create-diagnostic-report:fhirConsumer?fhirContext=#fhirContext")
             .process(requestValidator)
             .bean(diagnosticReportDao, "create(${body})")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())

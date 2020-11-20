@@ -30,7 +30,7 @@ public class ConditionRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("fhir-create-condition:/service?audit=false&fhirContext=#fhirContext")
+        from("fhir-create-condition:fhirConsumer?fhirContext=#fhirContext")
             .process(requestValidator)
             .bean(conditionDao, "create(${body})")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
