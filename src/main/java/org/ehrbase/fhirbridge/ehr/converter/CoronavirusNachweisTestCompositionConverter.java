@@ -26,9 +26,9 @@ import java.util.Date;
 import java.util.List;
 
 
-public class KennzeichnungErregernachweisSARSCoV2CompositionConverter implements CompositionConverter<KennzeichnungErregernachweisSARSCoV2Composition, Observation> {
+public class CoronavirusNachweisTestCompositionConverter implements CompositionConverter<KennzeichnungErregernachweisSARSCoV2Composition, Observation> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KennzeichnungErregernachweisSARSCoV2CompositionConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CoronavirusNachweisTestCompositionConverter.class);
 
     @Override
     public Observation fromComposition(KennzeichnungErregernachweisSARSCoV2Composition composition) {
