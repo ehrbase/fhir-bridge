@@ -23,6 +23,11 @@ class ObservationIT extends AbstractSetupIT {
     private final IGenericClient client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge-poc/fhir/");
 
     @Test
+    void createBloodPressure() throws IOException {
+        create("Observation/create-blood-pressure.json");
+    }
+
+    @Test
     void createBodyHeight() throws IOException {
         create("Observation/create-body-height.json");
     }
@@ -40,6 +45,11 @@ class ObservationIT extends AbstractSetupIT {
     @Test
     void createCoronavirusNachweisTest() throws IOException {
         create("Observation/create-coronavirus-nachweis-test.json");
+    }
+
+    @Test
+    void createFiO2() throws IOException {
+        create("Observation/create-fio2.json");
     }
 
     @Test

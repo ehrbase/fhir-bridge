@@ -7,6 +7,7 @@ import org.ehrbase.fhirbridge.camel.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.PatientIdProcessor;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
+import org.ehrbase.fhirbridge.ehr.converter.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.BodyTemperatureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.BodyWeightCompositionConverter;
@@ -42,16 +43,18 @@ public class ObservationRoutes extends RouteBuilder {
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
             .choice()
+                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BLOOD_PRESSURE))
+                    .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BloodPressureCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BODY_HEIGHT))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyHeightCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BODY_TEMP))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyTemperatureCompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BODY_WEIGHT))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new BodyWeightCompositionConverter()))
-                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.FIO2))
-                    .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new FiO2CompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.CORONARIRUS_NACHWEIS_TEST))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new CoronavirusNachweisTestCompositionConverter()))
+                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.FIO2))
+                    .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new FiO2CompositionConverter()))
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.SMOKING_STATUS))
                     .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new SmokingStatusCompositionConverter()))
                 .otherwise()
