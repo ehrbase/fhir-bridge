@@ -1,0 +1,106 @@
+{
+  "resourceType": "Observation",
+  "meta": {
+    "profile": [
+      "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"
+    ],
+    "source": "http://www.highmed.org"
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "OBI"
+          }
+        ]
+      },
+      "system": "https://diz.mii.de/fhir/core/NamingSystem/test-lab-results",
+      "value": "59826-8_1234567890",
+      "assigner": {
+        "identifier": {
+          "system": "https://www.medizininformatik-initiative.de/fhir/core/NamingSystem/org-identifier",
+          "value": "DIZ-ID"
+        }
+      }
+    }
+  ],
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "26436-6"
+        },
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "laboratory"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "732-8",
+        "display": "Lymphocytes [#/volume] in Blood by Manual count"
+      }
+    ],
+    "text": "Kreatinin"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "encounter": {
+    "reference": "http://external.fhir.server/Encounter/555"
+  },
+  "effectiveDateTime": "2018-11-20T12:05:00+01:00",
+  "issued": "2018-03-11T10:28:00+01:00",
+  "performer": [
+    {
+      "reference": "http://external.fhir.server/Organization/7772",
+      "display": "Zentrallabor des IKCL"
+    }
+  ],
+  "valueQuantity": {
+    "value": 72,
+    "unit": "µmol/l",
+    "system": "http://unitsofmeasure.org",
+    "code": "umol/L"
+  },
+  "interpretation": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+          "code": "N"
+        }
+      ]
+    }
+  ],
+  "referenceRange": [
+    {
+      "low": {
+        "value": 72
+      },
+      "high": {
+        "value": 127
+      },
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/referencerange-meaning",
+            "code": "normal",
+            "display": "Normal Range"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -7,7 +7,7 @@ import org.ehrbase.fhirbridge.camel.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.PatientIdProcessor;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
-import org.ehrbase.fhirbridge.ehr.converter.ProzedurCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.mapper.ProcedureRowMapper;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
 import org.hl7.fhir.r4.model.Procedure;
@@ -40,7 +40,7 @@ public class ProcedureRoutes extends RouteBuilder {
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#prozedurCompositionConverter")
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#procedureCompositionConverter")
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
 
         from("fhir-find-procedure:fhirConsumer?fhirContext=#fhirContext")
@@ -54,8 +54,8 @@ public class ProcedureRoutes extends RouteBuilder {
     }
 
     @Bean
-    public ProzedurCompositionConverter prozedurCompositionConverter() {
-        return new ProzedurCompositionConverter();
+    public ProcedureCompositionConverter procedureCompositionConverter() {
+        return new ProcedureCompositionConverter();
     }
 
     @Bean

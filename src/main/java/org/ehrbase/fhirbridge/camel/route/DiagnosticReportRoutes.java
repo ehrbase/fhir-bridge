@@ -5,7 +5,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.PatientIdProcessor;
-import org.ehrbase.fhirbridge.ehr.converter.GeccoLaborbefundCompositionDiagnosticReportConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DiagnosticReportLabCompositionConverter;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -36,13 +36,13 @@ public class DiagnosticReportRoutes extends RouteBuilder {
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#geccoLaborbefundCompositionDiagnosticReportConverter")
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#diagnosticReportLabCompositionConverter")
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
         // @formatter:on
     }
 
     @Bean
-    public GeccoLaborbefundCompositionDiagnosticReportConverter geccoLaborbefundCompositionDiagnosticReportConverter() {
-        return new GeccoLaborbefundCompositionDiagnosticReportConverter();
+    public DiagnosticReportLabCompositionConverter diagnosticReportLabCompositionConverter() {
+        return new DiagnosticReportLabCompositionConverter();
     }
 }
