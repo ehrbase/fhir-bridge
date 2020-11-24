@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "d9f6a4ea-db6e-4816-986d-79b7d1f45886",
-		"name": "fhir-bridge-poc",
+		"name": "fhir-bridge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [

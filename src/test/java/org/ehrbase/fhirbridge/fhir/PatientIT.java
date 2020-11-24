@@ -21,10 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 class PatientIT extends AbstractSetupIT {
 
-    private final FhirContext context = FhirContext.forR4();
-
-    private final IGenericClient client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge-poc/fhir/");
-
     @Test
     void create() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("Patient/create.json").getInputStream(), StandardCharsets.UTF_8);

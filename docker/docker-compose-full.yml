@@ -64,5 +64,16 @@ services:
       - elasticsearch
     networks:
       - ehrbase-network
+  fhir-bridge:
+    image: ehrbaseorg/fhir-bridge:latest
+    ports:
+      - 8888:8888
+    environment:
+      FHIR_BRIDGE_EHRBASE_BASE_URL: http://ehrbase:8080/ehrbase/rest/openehr/v1/
+      IPF_ATNA_AUDIT_REPOSITORY_HOST: logstash
+    networks:
+      - ehrbase-network
+    depends_on:
+      - ehrbase
 networks:
   ehrbase-network: { }

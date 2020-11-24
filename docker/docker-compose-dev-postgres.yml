@@ -28,6 +28,13 @@ services:
       POSTGRES_PASSWORD: postgres
       EHRBASE_USER: ehrbase
       EHRBASE_PASSWORD: ehrbase
+  fhirbridge-db:
+    image: postgres:11.5-alpine
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: fhir_bridge
+      POSTGRES_PASSWORD: fhir_bridge
   elasticsearch:
     image: elasticsearch:7.7.0
     hostname: elasticsearch
