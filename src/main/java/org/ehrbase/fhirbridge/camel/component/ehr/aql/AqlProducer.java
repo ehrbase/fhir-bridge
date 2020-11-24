@@ -32,7 +32,7 @@ public class AqlProducer extends DefaultProducer {
                 .aqlEndpoint()
                 .execute(query, parameters);
 
-        RowMapper<?> rowMapper = endpoint.getRowMapper();
+        RowMapper<?> rowMapper = determineRowMapper(exchange);
 
         AqlOutputType outputType = endpoint.getOutputType();
         if (outputType == AqlOutputType.SelectOne) {
@@ -57,5 +57,13 @@ public class AqlProducer extends DefaultProducer {
                 exchange.getMessage().setBody(records);
             }
         }
+    }
+
+    private RowMapper<?> determineRowMapper(Exchange exchange) {
+        RowMapper<?> rowMapper = exchange.getIn().getHeader(AqlConstants.ROW_MAPPER, RowMapper.class);
+        if (rowMapper == null) {
+            rowMapper = endpoint.getRowMapper();
+        }
+        return rowMapper;
     }
 }
