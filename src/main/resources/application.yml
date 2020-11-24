@@ -5,7 +5,7 @@ fhir-bridge:
       prefix: classpath:/opt/
 spring:
   application:
-    name: FHIR Bridge PoC
+    name: FHIR Bridge
   batch:
     job:
       enabled: false

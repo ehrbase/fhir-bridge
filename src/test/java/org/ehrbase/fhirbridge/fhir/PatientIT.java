@@ -16,6 +16,9 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * Integration tests for {@link org.hl7.fhir.r4.model.Patient Patient} resource.
+ */
 class PatientIT extends AbstractSetupIT {
 
     private final FhirContext context = FhirContext.forR4();
