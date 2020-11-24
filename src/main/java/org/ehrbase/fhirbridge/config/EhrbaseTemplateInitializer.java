@@ -8,7 +8,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 public class EhrbaseTemplateInitializer implements InitializingBean {
 
-    private final Logger LOG = LoggerFactory.getLogger(EhrbaseTemplateInitializer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EhrbaseTemplateInitializer.class);
 
     private final OpenEhrClient openEhrClient;
 

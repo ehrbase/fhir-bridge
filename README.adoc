@@ -1,4 +1,4 @@
-= FHIR Bridge image:https://circleci.com/gh/ehrbase/fhir-bridge-poc.svg?style=shield["CircleCI",link="https://circleci.com/gh/ehrbase/fhir-bridge-poc"]
+= image:https://ehrbase.org/wp-content/uploads/2019/10/ehrbase_logo-1.svg[EHRbase,199,60] FHIR Bridge image:https://circleci.com/gh/ehrbase/fhir-bridge-poc.svg?style=shield["CircleCI",link="https://circleci.com/gh/ehrbase/fhir-bridge-poc"]
 
 FHIR Bridge is an official component of https://ehrbase.org/[EHRbase].
 The purpose of the application is to act as a broker between an HL7 FHIR client and an openEHR server.
@@ -6,6 +6,15 @@ The purpose of the application is to act as a broker between an HL7 FHIR client 
 The implementation is based on https://camel.apache.org/[Apache Camel] and https://github.com/oehf/ipf[Open eHealth Integration Platform].
 
 == Getting Started
+
+=== Prerequisites
+
+* JDK (>= 11.0.2)
+* Apache Maven (>= 3.6.0)
+* EHRbase (>= v0.14.0)
+* [Optional] Elasticsearch (>= 7.7.0)
+* [Optional] Kibana (>= 7.7.0)
+* [Optional] Logstash (>= 7.7.0)
 
 === Build the application
 
@@ -38,6 +47,10 @@ java -jar fhir-bridge-1.0.0-SNAPSHOT.jar
 |`http://localhost:8080/ehrbase/rest/openehr/v1/`
 |Base URL for the EHRbase running instance.
 
+|`fhir-bridge.ehrbase.template.prefix`
+|`classpath:/opt/`
+|Prefix to apply to template names.
+
 |`fhir-bridge.fhir.jpa.allow-external-references`
 |`true`
 |Allow remote references.
@@ -63,7 +76,7 @@ java -jar fhir-bridge-1.0.0-SNAPSHOT.jar
 |Port of the ATNA repository to send the events to.
 
 |`spring.application.name`
-|`FHIR Bridge PoC`
+|`FHIR Bridge`
 |Application name.
 
 |`spring.datasource.password`
