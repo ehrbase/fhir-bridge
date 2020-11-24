@@ -16,6 +16,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <skipITs>true</skipITs>
+        <commandLineArguments/>
         <!-- Plugins -->
         <checkstyle.version>3.1.1</checkstyle.version>
         <failsafe.version>2.22.2</failsafe.version>
@@ -50,6 +51,15 @@
         <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
         <woodstox.version>6.1.1</woodstox.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>circleci</id>
+            <properties>
+                <commandLineArguments>--logging.level.root=error --logging.level.org.apache.camel=off</commandLineArguments>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -103,6 +113,7 @@
                         </goals>
                         <configuration>
                             <skip>${skipITs}</skip>
+                            <commandlineArguments>${commandLineArguments}</commandlineArguments>
                         </configuration>
                     </execution>
                     <execution>
