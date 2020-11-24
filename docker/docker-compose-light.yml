@@ -28,41 +28,5 @@ services:
       POSTGRES_PASSWORD: postgres
       EHRBASE_USER: ehrbase
       EHRBASE_PASSWORD: ehrbase
-  elasticsearch:
-    image: elasticsearch:7.7.0
-    hostname: elasticsearch
-    environment:
-      - "discovery.type=single-node"
-    ports:
-      - 9200:9200
-      - 9300:9300
-    networks:
-      - ehrbase-network
-  kibana:
-    image: kibana:7.7.0
-    hostname: kibana
-    ports:
-      - 5601:5601
-    links:
-      - elasticsearch:elasticsearch
-    depends_on:
-      - elasticsearch
-    networks:
-      - ehrbase-network
-  logstash:
-    image: logstash:7.7.0
-    hostname: logstash
-    ports:
-      - 9600:9600
-      - 8089:8089
-      - 3001:3001/udp
-    volumes:
-      - ./logstash:/usr/share/logstash/pipeline/
-    links:
-      - elasticsearch:elasticsearch
-    depends_on:
-      - elasticsearch
-    networks:
-      - ehrbase-network
 networks:
   ehrbase-network: { }

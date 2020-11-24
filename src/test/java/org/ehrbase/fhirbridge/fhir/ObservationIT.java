@@ -21,10 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 class ObservationIT extends AbstractSetupIT {
 
-    private final FhirContext context = FhirContext.forR4();
-
-    private final IGenericClient client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge-poc/fhir/");
-
     @Test
     void createBloodPressure() throws IOException {
         create("Observation/create-blood-pressure.json");

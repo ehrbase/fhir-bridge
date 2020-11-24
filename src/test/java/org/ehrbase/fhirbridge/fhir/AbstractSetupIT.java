@@ -1,5 +1,7 @@
 package org.ehrbase.fhirbridge.fhir;
 
+import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.rest.client.api.IGenericClient;
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.ehr.EhrStatus;
 import com.nedap.archie.rm.generic.PartySelf;
@@ -19,6 +21,10 @@ abstract class AbstractSetupIT {
     static final String PATIENT_ID_TOKEN = "\\{\\{patientId\\}\\}";
 
     static String PATIENT_ID;
+
+    protected final FhirContext context = FhirContext.forR4();
+
+    protected final IGenericClient client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge/fhir/");
 
     @BeforeAll
     static void setup() throws URISyntaxException {

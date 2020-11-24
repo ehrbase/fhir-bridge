@@ -1,8 +1,6 @@
 package org.ehrbase.fhirbridge.fhir;
 
-import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.api.MethodOutcome;
-import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
@@ -20,10 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Integration tests for {@link org.hl7.fhir.r4.model.Procedure Procedure} resource.
  */
 class ProcedureIT extends AbstractSetupIT {
-
-    private final FhirContext context = FhirContext.forR4();
-
-    private final IGenericClient client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge-poc/fhir/");
 
     @Test
     void create() throws IOException {

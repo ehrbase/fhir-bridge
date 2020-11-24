@@ -28,7 +28,7 @@ ipf:
 server:
   port: 8888
   servlet:
-    context-path: /fhir-bridge-poc
+    context-path: /fhir-bridge
 logging:
   level:
     ca.uhn.fhir: warn

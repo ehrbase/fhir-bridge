@@ -7,15 +7,17 @@ services:
     networks:
       - ehrbase-network
     environment:
-      DB_URL: jdbc:postgresql://ehrdb:5432/ehrbase
+      DB_URL: jdbc:postgresql://ehrbase-db:5432/ehrbase
       DB_USER: ehrbase
       DB_PASS: ehrbase
       AUTH_TYPE: BASIC
       AUTH_USER: ehrbase-user
       AUTH_PASSWORD: SuperSecretPassword
       SYSTEM_NAME: local.ehrbase.org
+    depends_on:
+      - ehrbase-db
     restart: on-failure
-  ehrdb:
+  ehrbase-db:
     image: ehrbaseorg/ehrbase-postgres:latest
     ports:
       - 5432:5432
@@ -26,16 +28,8 @@ services:
       POSTGRES_PASSWORD: postgres
       EHRBASE_USER: ehrbase
       EHRBASE_PASSWORD: ehrbase
-  fhirdb:
-    image: postgres:11.5-alpine
-    ports:
-      - 9999:5432
-    environment:
-      POSTGRES_USER: fhir_bridge
-      POSTGRES_PASSWORD: fhir_bridge
   elasticsearch:
     image: elasticsearch:7.7.0
-    container_name: elasticsearch
     hostname: elasticsearch
     environment:
       - "discovery.type=single-node"
@@ -43,10 +37,9 @@ services:
       - 9200:9200
       - 9300:9300
     networks:
-      - elk-network
+      - ehrbase-network
   kibana:
     image: kibana:7.7.0
-    container_name: kibana
     hostname: kibana
     ports:
       - 5601:5601
@@ -55,10 +48,9 @@ services:
     depends_on:
       - elasticsearch
     networks:
-      - elk-network
+      - ehrbase-network
   logstash:
     image: logstash:7.7.0
-    container_name: logstash
     hostname: logstash
     ports:
       - 9600:9600
@@ -71,8 +63,6 @@ services:
     depends_on:
       - elasticsearch
     networks:
-      - elk-network
+      - ehrbase-network
 networks:
   ehrbase-network: { }
-  elk-network:
-    driver: bridge

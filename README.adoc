@@ -1,4 +1,4 @@
-= image:https://ehrbase.org/wp-content/uploads/2019/10/ehrbase_logo-1.svg[EHRbase,199,60] FHIR Bridge image:https://circleci.com/gh/ehrbase/fhir-bridge-poc.svg?style=shield["CircleCI",link="https://circleci.com/gh/ehrbase/fhir-bridge-poc"]
+= FHIR Bridge image:https://circleci.com/gh/ehrbase/fhir-bridge-poc.svg?style=shield["CircleCI",link="https://circleci.com/gh/ehrbase/fhir-bridge-poc"]
 
 FHIR Bridge is an official component of https://ehrbase.org/[EHRbase].
 The purpose of the application is to act as a broker between an HL7 FHIR client and an openEHR server.
@@ -12,30 +12,53 @@ The implementation is based on https://camel.apache.org/[Apache Camel] and https
 * JDK (>= 11.0.2)
 * Apache Maven (>= 3.6.0)
 * EHRbase (>= v0.14.0)
-* [Optional] Elasticsearch (>= 7.7.0)
-* [Optional] Kibana (>= 7.7.0)
-* [Optional] Logstash (>= 7.7.0)
+* [Optional] ELK Stack: Elasticsearch, Kibana and Logstash (>= 7.7.0)
 
 === Build the application
 
-[source]
+[source,bash]
 ----
-mvn clean install
+$ mvn clean install
 ----
 
 === Build the application and execute integration tests
 
+[source,bash]
 ----
-mvn clean install -DskipITs=false
+$ mvn clean install -DskipITs=false
 ----
 
 WARNING: When using `-DskipITs=false` option, please make sure you have an EHRbase instance up and running.
 
 === Run the application
 
-[source]
+[source,bash]
 ----
-java -jar fhir-bridge-1.0.0-SNAPSHOT.jar
+$ java -jar fhir-bridge-1.0.0-SNAPSHOT.jar
+----
+
+== Docker and Docker Compose
+
+=== Build the Docker image
+
+[source,bash]
+----
+$ mvn clean spring-boot:build-image
+----
+
+=== Start a Docker container
+
+[source,bash]
+----
+$ docker run -p 8888:8888 -e "FHIR_BRIDGE_EHRBASE_BASE_URL=http://172.17.0.1:8080/ehrbase/rest/openehr/v1/" --name=fhir-bridge ehrbaseorg/fhir-bridge
+----
+
+=== Setup a full environment using Docker Compose
+
+[source,bash]
+----
+$ cd docker
+$ docker-compose -f docker-compose-full.yml up
 ----
 
 == Configuration Properties
