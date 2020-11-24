@@ -1,14 +1,22 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.DefaultCreateResourceRequestValidator;
+import org.ehrbase.client.aql.parameter.ParameterValue;
+import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.PatientIdProcessor;
+import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
+import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
+import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.DiagnoseCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.mapper.DiagnoseRowMapper;
+import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.DiagnoseComposition;
 import org.hl7.fhir.r4.model.Condition;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 @Component
 public class ConditionRoutes extends RouteBuilder {
@@ -36,13 +44,44 @@ public class ConditionRoutes extends RouteBuilder {
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#diagnoseCompositionConverter")
+            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new DiagnoseCompositionConverter()))
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+
+        from("fhir-find-condition:fhirConsumer?fhirContext=#fhirContext")
+            .process(buildAqlQuery())
+            .setHeader(AqlConstants.ROW_MAPPER, constant(new DiagnoseRowMapper()))
+            .to("ehr-aql:aqlProducer");
         // @formatter:on
     }
 
-    @Bean
-    public DiagnoseCompositionConverter diagnoseCompositionConverter() {
-        return new DiagnoseCompositionConverter();
+    @SuppressWarnings("unchecked")
+    private Processor buildAqlQuery() {
+        return exchange -> {
+            // @formatter:off
+            String aql =
+                    "SELECT c " +
+                    "FROM EHR e " +
+                        "CONTAINS COMPOSITION c " +
+                        "CONTAINS EVALUATION eval[openEHR-EHR-EVALUATION.problem_diagnosis.v1] " +
+                    "WHERE c/archetype_details/template_id/value = 'Diagnose' " +
+                        "AND e/ehr_status/subject/external_ref/id/value = $subjectId";
+            // @formatter:on
+
+            Map<String, ParameterValue<?>> parameters = exchange.getIn().getBody(Map.class);
+
+            if (parameters.get("startTimeFrom") != null) {
+                aql += " AND c/context/start_time/value >= $startTimeFrom";
+            }
+            if (parameters.get("startTimeTo") != null) {
+                aql += " AND c/context/start_time/value <= $startTimeTo";
+            }
+            if (parameters.get("code") != null) {
+                aql += " AND eval/data[at0001]/items[at0002]/value/defining_code/code_string = $code";
+            }
+
+            exchange.getMessage().setHeader(AqlConstants.AQL_QUERY, Query.buildNativeQuery(aql, DiagnoseComposition.class));
+            exchange.getMessage().setBody(parameters.values());
+        };
     }
 }

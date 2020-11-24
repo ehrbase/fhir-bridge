@@ -2,9 +2,9 @@ package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.PatientIdProcessor;
+import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.hl7.fhir.r4.model.Patient;
 import org.springframework.stereotype.Component;
 
