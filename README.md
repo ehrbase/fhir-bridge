@@ -1,5 +1,6 @@
 # FHIR Bridge
-image:https://circleci.com/gh/ehrbase/fhir-bridge-poc.svg?style=shield["CircleCI",link="https://circleci.com/gh/ehrbase/fhir-bridge-poc"]
+
+[![CircleCI Status](https://circleci.com/gh/ehrbase/fhir-bridge-poc.svg?style=shield)](https://circleci.com/gh/ehrbase/fhir-bridge-poc)
 
 
 FHIR Bridge is an official component of https://ehrbase.org/[EHRbase].
