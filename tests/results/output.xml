@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2b1 (Python 3.7.5 on darwin)" generated="20201125 16:43:38.048" rpa="false">
+<suite id="s1" name="Robot" source="/Users/peterwohlfarth/Repos/fhir-bridge-poc/tests/robot">
+<suite id="s1-s1" name="OBSERVATION" source="/Users/peterwohlfarth/Repos/fhir-bridge-poc/tests/robot/OBSERVATION">
+<suite id="s1-s1-s1" name="01 Create" source="/Users/peterwohlfarth/Repos/fhir-bridge-poc/tests/robot/OBSERVATION/01_create.robot">
+<test id="s1-s1-s1-t1" name="001 Create Body Temperature">
+<kw name="prepare new request session" library="generic" type="setup">
+<doc>Prepares request settings for RESTistance AND RequestsLibrary
+:headers: valid argument values:
+- JSON (default)
+- XML
+- no accept header
+- no content header
+- no accept header xml
+- no accept/content headers
+- no headers</doc>
+<arguments>
+<arg>Prefer=return=representation</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.307" level="TRACE">Arguments: [ ${headers}='JSON' | &amp;{extra_headers}={'Prefer': 'return=representation'} ]</msg>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>${headers}</arg>
+<arg>${extra_headers}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.308" level="TRACE">Arguments: [ '${headers}' | '${extra_headers}' ]</msg>
+<msg timestamp="20201125 16:43:38.308" level="INFO">JSON</msg>
+<msg timestamp="20201125 16:43:38.308" level="INFO">{'Prefer': 'return=representation'}</msg>
+<msg timestamp="20201125 16:43:38.308" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.308" endtime="20201125 16:43:38.308"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>$headers=='JSON'</arg>
+<arg>set request headers</arg>
+<arg>content=application/json</arg>
+<arg>accept=application/json</arg>
+<arg>&amp;{extra_headers}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.309" level="TRACE">Arguments: [ "$headers=='JSON'" | 'set request headers' | 'content=application/json' | 'accept=application/json' | '&amp;{extra_headers}' ]</msg>
+<kw name="set request headers" library="generic">
+<doc>Sets the headers of a request
+:content: None (default) / application/json / application/xml
+:accept: None (default) / application/json / application/xml
+:extra_headers: optional - e.g. Prefer=return=representation
+e.g. If-Match={ehrstatus_uid}</doc>
+<arguments>
+<arg>content=application/json</arg>
+<arg>accept=application/json</arg>
+<arg>&amp;{extra_headers}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.312" level="TRACE">Arguments: [ ${content}='application/json' | ${accept}='application/json' | &amp;{extra_headers}={'Prefer': 'return=representation'} ]</msg>
+<kw name="Log Many" library="BuiltIn">
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<arguments>
+<arg>${content}</arg>
+<arg>${accept}</arg>
+<arg>${extra_headers}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.313" level="TRACE">Arguments: [ '${content}' | '${accept}' | '${extra_headers}' ]</msg>
+<msg timestamp="20201125 16:43:38.313" level="INFO">application/json</msg>
+<msg timestamp="20201125 16:43:38.313" level="INFO">application/json</msg>
+<msg timestamp="20201125 16:43:38.313" level="INFO">{'Prefer': 'return=representation'}</msg>
+<msg timestamp="20201125 16:43:38.313" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.312" endtime="20201125 16:43:38.313"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${content}"=="${NONE}" and "${accept}"=="${NONE}"</arg>
+<arg>Log To Console</arg>
+<arg>\nWARNING: NO REQUEST HEADERS SET!</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.313" level="TRACE">Arguments: [ '"application/json"=="None" and "application/json"=="None"' | 'Log To Console' | '\\nWARNING: NO REQUEST HEADERS SET!' ]</msg>
+<msg timestamp="20201125 16:43:38.314" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.313" endtime="20201125 16:43:38.314"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>&amp;{EMPTY}</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20201125 16:43:38.314" level="TRACE">Arguments: [ '&amp;{EMPTY}' ]</msg>
+<msg timestamp="20201125 16:43:38.314" level="TRACE">Return: {}</msg>
+<msg timestamp="20201125 16:43:38.314" level="INFO">&amp;{headers} = { }</msg>
+<status status="PASS" starttime="20201125 16:43:38.314" endtime="20201125 16:43:38.314"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${headers}</arg>
+<arg>Content-Type=${content}</arg>
+<arg>Accept=${accept}</arg>
+<arg>&amp;{extra_headers}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.315" level="TRACE">Arguments: [ {} | Content-Type='application/json' | Accept='application/json' | Prefer='return=representation' ]</msg>
+<msg timestamp="20201125 16:43:38.315" level="TRACE">Return: {'Accept': 'application/json',
+ 'Content-Type': 'application/json',
+ 'Prefer': 'return=representation'}</msg>
+<status status="PASS" starttime="20201125 16:43:38.315" endtime="20201125 16:43:38.315"></status>
+</kw>
+<kw name="Set Headers" library="REST">
+<tags>
+<tag>settings</tag>
+</tags>
+<doc>*Sets new request headers or updates the existing.*</doc>
+<arguments>
+<arg>${headers}</arg>
+</arguments>
+<assign>
+<var>&amp;{headers}</var>
+</assign>
+<msg timestamp="20201125 16:43:38.315" level="TRACE">Arguments: [ {'Accept': 'application/json',
+ 'Content-Type': 'application/json',
+ 'Prefer': 'return=representation'} ]</msg>
+<msg timestamp="20201125 16:43:38.315" level="TRACE">Return: {'Accept': 'application/json',
+ 'Content-Type': 'application/json',
+ 'Prefer': 'return=representation',
+ 'User-Agent': 'RESTinstance/1.0.0'}</msg>
+<msg timestamp="20201125 16:43:38.316" level="INFO">&amp;{headers} = { Accept=application/json | Content-Type=application/json | User-Agent=RESTinstance/1.0.0 | Prefer=return=representation }</msg>
+<status status="PASS" starttime="20201125 16:43:38.315" endtime="20201125 16:43:38.316"></status>
+</kw>
+<msg timestamp="20201125 16:43:38.316" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.312" endtime="20201125 16:43:38.316"></status>
+</kw>
+<msg timestamp="20201125 16:43:38.316" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.308" endtime="20201125 16:43:38.316"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>$headers=='no accept header'</arg>
+<arg>set request headers</arg>
+<arg>content=application/json</arg>
+<arg>&amp;{extra_headers}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.317" level="TRACE">Arguments: [ "$headers=='no accept header'" | 'set request headers' | 'content=application/json' | '&amp;{extra_headers}' ]</msg>
+<msg timestamp="20201125 16:43:38.317" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.316" endtime="20201125 16:43:38.317"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>$headers=='no content header'</arg>
+<arg>set request headers</arg>
+<arg>accept=application/json</arg>
+<arg>&amp;{extra_headers}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.317" level="TRACE">Arguments: [ "$headers=='no content header'" | 'set request headers' | 'accept=application/json' | '&amp;{extra_headers}' ]</msg>
+<msg timestamp="20201125 16:43:38.318" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.317" endtime="20201125 16:43:38.318"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>$headers=='no accept/content headers'</arg>
+<arg>set request headers</arg>
+<arg>&amp;{extra_headers}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.318" level="TRACE">Arguments: [ "$headers=='no accept/content headers'" | 'set request headers' | '&amp;{extra_headers}' ]</msg>
+<msg timestamp="20201125 16:43:38.318" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.318" endtime="20201125 16:43:38.318"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>$headers=='no headers'</arg>
+<arg>set request headers</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.318" level="TRACE">Arguments: [ "$headers=='no headers'" | 'set request headers' ]</msg>
+<msg timestamp="20201125 16:43:38.319" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.318" endtime="20201125 16:43:38.319"></status>
+</kw>
+<msg timestamp="20201125 16:43:38.319" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.307" endtime="20201125 16:43:38.319"></status>
+</kw>
+<kw name="create new ehr" library="ehr">
+<doc>Creates new EHR record with a server-generated ehr_id.
+DEPENDENCY: `prepare new request session`
+:ehr_status_object: ehr_status_as_json_file</doc>
+<arguments>
+<arg>000_ehr_status.json</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.319" level="TRACE">Arguments: [ ${ehr_status_object}='000_ehr_status.json' ]</msg>
+<kw name="Load JSON From File" library="JSONLibrary">
+<doc>Load JSON from file.</doc>
+<arguments>
+<arg>${VALID EHR DATA SETS}/${ehr_status_object}</arg>
+</arguments>
+<assign>
+<var>${ehr_status_json}</var>
+</assign>
+<msg timestamp="20201125 16:43:38.319" level="TRACE">Arguments: [ '/Users/peterwohlfarth/Repos/fhir-bridge-poc/tests/robot/_resources/test_data/ehr/valid/000_ehr_status.json' ]</msg>
+<msg timestamp="20201125 16:43:38.320" level="DEBUG">Check if file exists</msg>
+<msg timestamp="20201125 16:43:38.320" level="TRACE">Return: {'_type': 'EHR_STATUS',
+ 'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+ 'is_modifiable': True,
+ 'is_queryable': True,
+ 'name': {'value': 'EHR Status'},
+ 'subject': {'external_ref': {'id': {'_type': 'GENERIC_ID',
+                                     'scheme': 'id_scheme',
+                                     'value': '__AUTO-GENRATED-BY-TEST__'},
+                              'namespace': '__AUTO-GENRATED-BY-TEST__',
+                              'type': 'PERSON'}}}</msg>
+<msg timestamp="20201125 16:43:38.320" level="INFO">${ehr_status_json} = {'_type': 'EHR_STATUS', 'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1', 'name': {'value': 'EHR Status'}, 'subject': {'external_ref': {'id': {'_type': 'GENERIC_ID', 'value': '__AUTO-GENRATED-...</msg>
+<status status="PASS" starttime="20201125 16:43:38.319" endtime="20201125 16:43:38.320"></status>
+</kw>
+<kw name="Update Value To Json" library="JSONLibrary">
+<doc>Update value to JSON using JSONPath</doc>
+<arguments>
+<arg>${ehr_status_json}</arg>
+<arg>$.subject.external_ref.id.value</arg>
+<arg>${{str(uuid.uuid4())}}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.320" level="TRACE">Arguments: [ {'_type': 'EHR_STATUS',
+ 'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+ 'is_modifiable': True,
+ 'is_queryable': True,
+ 'name': {'value': 'EHR Status'},
+ 'subject': {'external_ref': {'id': {'_type': 'GENERIC_ID',
+                                     'scheme': 'id_scheme',
+                                     'value': '__AUTO-GENRATED-BY-TEST__'},
+                              'namespace': '__AUTO-GENRATED-BY-TEST__',
+                              'type': 'PERSON'}}} | '$.subject.external_ref.id.value' | 'c4f8275c-07a8-4a73-8f60-c6b914223856' ]</msg>
+<msg timestamp="20201125 16:43:38.345" level="TRACE">Return: {'_type': 'EHR_STATUS',
+ 'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+ 'is_modifiable': True,
+ 'is_queryable': True,
+ 'name': {'value': 'EHR Status'},
+ 'subject': {'external_ref': {'id': {'_type': 'GENERIC_ID',
+                                     'scheme': 'id_scheme',
+                                     'value': 'c4f8275c-07a8-4a73-8f60-c6b914223856'},
+                              'namespace': '__AUTO-GENRATED-BY-TEST__',
+                              'type': 'PERSON'}}}</msg>
+<status status="PASS" starttime="20201125 16:43:38.320" endtime="20201125 16:43:38.346"></status>
+</kw>
+<kw name="Update Value To Json" library="JSONLibrary">
+<doc>Update value to JSON using JSONPath</doc>
+<arguments>
+<arg>${ehr_status_json}</arg>
+<arg>$.subject.external_ref.namespace</arg>
+<arg>namespace_${{''.join(random.choices(string.digits, k=7))}}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.346" level="TRACE">Arguments: [ {'_type': 'EHR_STATUS',
+ 'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+ 'is_modifiable': True,
+ 'is_queryable': True,
+ 'name': {'value': 'EHR Status'},
+ 'subject': {'external_ref': {'id': {'_type': 'GENERIC_ID',
+                                     'scheme': 'id_scheme',
+                                     'value': 'c4f8275c-07a8-4a73-8f60-c6b914223856'},
+                              'namespace': '__AUTO-GENRATED-BY-TEST__',
+                              'type': 'PERSON'}}} | '$.subject.external_ref.namespace' | 'namespace_2386821' ]</msg>
+<msg timestamp="20201125 16:43:38.366" level="TRACE">Return: {'_type': 'EHR_STATUS',
+ 'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+ 'is_modifiable': True,
+ 'is_queryable': True,
+ 'name': {'value': 'EHR Status'},
+ 'subject': {'external_ref': {'id': {'_type': 'GENERIC_ID',
+                                     'scheme': 'id_scheme',
+                                     'value': 'c4f8275c-07a8-4a73-8f60-c6b914223856'},
+                              'namespace': 'namespace_2386821',
+                              'type': 'PERSON'}}}</msg>
+<status status="PASS" starttime="20201125 16:43:38.346" endtime="20201125 16:43:38.366"></status>
+</kw>
+<kw name="Post" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<arguments>
+<arg>${EHRBASE_URL}/ehr</arg>
+<arg>${ehr_status_json}</arg>
+</arguments>
+<assign>
+<var>&amp;{resp}</var>
+</assign>
+<msg timestamp="20201125 16:43:38.366" level="TRACE">Arguments: [ 'http://localhost:8080/ehrbase/rest/openehr/v1/ehr' | {'_type': 'EHR_STATUS',
+ 'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+ 'is_modifiable': True,
+ 'is_queryable': True,
+ 'name': {'value': 'EHR Status'},
+ 'subject': {'external_ref': {'id': {'_type': 'GENERIC_ID',
+                                     'scheme': 'id_scheme',
+                                     'value': 'c4f8275c-07a8-4a73-8f60-c6b914223856'},
+                              'namespace': 'namespace_2386821',
+                              'type': 'PERSON'}}} ]</msg>
+<msg timestamp="20201125 16:43:38.373" level="DEBUG">Starting new HTTP connection (1): localhost:8080</msg>
+<msg timestamp="20201125 16:43:38.418" level="DEBUG">http://localhost:8080 "POST /ehrbase/rest/openehr/v1/ehr HTTP/1.1" 201 None</msg>
+<msg timestamp="20201125 16:43:38.444" level="TRACE">Return: {'body': {'ehr_id': {'_type': 'HIER_OBJECT_ID',
+                     'value': 'd64ea4f6-ba93-4cf1-95c8-868c37ed5785'},
+          'ehr_status': {'_type': 'EHR_STATUS',
+                         'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+                         'is_modifiable': True,
+                         'is_queryable': True,
+                         'name': {'_type': 'DV_TEXT', 'value': 'EHR Status'},
+                         'subject': {'_type': 'PARTY_SELF',
+                                     'external_ref': {'_type': 'PARTY_REF',
+                                                      'id': {'_type': 'GENERIC_ID',
+                                                             'scheme': 'id_scheme',
+                                                             'value': 'c4f8275c-07a8-4a73-8f60-c6b914223856'},
+                                                      'namespace': 'namespace_2386821',
+                                                      'type': 'PERSON'}},
+                         'uid': {'_type': 'HIER_OBJECT_ID',
+                                 'value': 'bd42dfd8-f137-4ea4-8c74-984059716c90::local.ehrbase.org::1'}},
+          'system_id': {'_type': 'HIER_OBJECT_ID',
+                        'value': '0f889dc9-6710-48ec-bbbe-7118c14b2734'},
+          'time_created': '2020-11-25T15:43:38.387'},
+ 'headers': {'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate',
+             'Connection': 'keep-alive',
+             'Content-Type': 'application/json',
+             'Date': 'Wed, 25 Nov 2020 15:43:38 GMT',
+             'ETag': '"d64ea4f6-ba93-4cf1-95c8-868c37ed5785"',
+             'Expires': '0',
+             'Keep-Alive': 'timeout=60',
+             'Last-Modified': 'Fri, 02 Jan 1970 10:12:04 GMT',
+             'Location': 'http://85162b68b902:8080/ehrbase/rest/openehr/v1/ehr/d64ea4f6-ba93-4cf1-95c8-868c37ed5785',
+             'Pragma': 'no-cache',
+             'Transfer-Encoding': 'chunked',
+             'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers',
+             'X-Content-Type-Options': 'nosniff',
+             'X-Frame-Options': 'DENY',
+             'X-XSS-Protection': '1; mode=block'},
+ 'seconds': 0.045312,
+ 'status': 201}</msg>
+<msg timestamp="20201125 16:43:38.445" level="INFO">&amp;{resp} = { seconds=0.045312 | status=201 | body={'system_id': {'_type': 'HIER_OBJECT_ID', 'value': '0f889dc9-6710-48ec-bbbe-7118c14b2734'}, 'ehr_id': {'_type': 'HIER_OBJECT_ID', 'value': 'd64ea4f6-ba93-4cf1-95...</msg>
+<status status="PASS" starttime="20201125 16:43:38.366" endtime="20201125 16:43:38.445"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>201</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.445" level="TRACE">Arguments: [ 'response status' | '201' ]</msg>
+<msg timestamp="20201125 16:43:38.446" level="TRACE">Return: [201]</msg>
+<status status="PASS" starttime="20201125 16:43:38.445" endtime="20201125 16:43:38.446"></status>
+</kw>
+<kw name="Output Debug Info To Console" library="generic">
+<doc>Prints all details of a request to console in JSON style.
+Can also be used to output a single JSON
+- request headers
+- request body
+- response headers
+- response body</doc>
+<msg timestamp="20201125 16:43:38.446" level="TRACE">Arguments: [ ${payload}=None ]</msg>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${OUTPUT_LEVEL}"=="verbose"</arg>
+<arg>Output</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.447" level="TRACE">Arguments: [ '"verbose"=="verbose"' | 'Output' ]</msg>
+<kw name="Output" library="REST">
+<tags>
+<tag>I/O</tag>
+</tags>
+<doc>*Outputs JSON to terminal or a file.*</doc>
+<msg timestamp="20201125 16:43:38.447" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20201125 16:43:38.447" level="INFO">
+{
+    "request": {
+        "method": "POST",
+        "url": "http://localhost:8080/ehrbase/rest/openehr/v1/ehr",
+        "scheme": "http",
+        "netloc": "localhost:8080",
+        "path": "/ehrbase/rest/openehr/v1/ehr",
+        "query": {},
+        "body": {
+            "_type": "EHR_STATUS",
+            "archetype_node_id": "openEHR-EHR-EHR_STATUS.generic.v1",
+            "name": {
+                "value": "EHR Status"
+            },
+            "subject": {
+                "external_ref": {
+                    "id": {
+                        "_type": "GENERIC_ID",
+                        "value": "c4f8275c-07a8-4a73-8f60-c6b914223856",
+                        "scheme": "id_scheme"
+                    },
+                    "namespace": "namespace_2386821",
+                    "type": "PERSON"
+                }
+            },
+            "is_modifiable": true,
+            "is_queryable": true
+        },
+        "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "User-Agent": "RESTinstance/1.0.0",
+            "Prefer": "return=representation"
+        },
+        "proxies": {},
+        "timeout": [
+            null,
+            null
+        ],
+        "cert": null,
+        "sslVerify": true,
+        "allowRedirects": true,
+        "timestamp": {
+            "utc": "2020-11-25T15:43:38.418043+00:00",
+            "local": "2020-11-25T16:43:38.418043+01:00"
+        }
+    },
+    "response": {
+        "seconds": 0.045312,
+        "status": 201,
+        "body": {
+            "system_id": {
+                "_type": "HIER_OBJECT_ID",
+                "value": "0f889dc9-6710-48ec-bbbe-7118c14b2734"
+            },
+            "ehr_id": {
+                "_type": "HIER_OBJECT_ID",
+                "value": "d64ea4f6-ba93-4cf1-95c8-868c37ed5785"
+            },
+            "ehr_status": {
+                "_type": "EHR_STATUS",
+                "name": {
+                    "_type": "DV_TEXT",
+                    "value": "EHR Status"
+                },
+                "subject": {
+                    "_type": "PARTY_SELF",
+                    "external_ref": {
+                        "_type": "PARTY_REF",
+                        "namespace": "namespace_2386821",
+                        "type": "PERSON",
+                        "id": {
+                            "_type": "GENERIC_ID",
+                            "value": "c4f8275c-07a8-4a73-8f60-c6b914223856",
+                            "scheme": "id_scheme"
+                        }
+                    }
+                },
+                "archetype_node_id": "openEHR-EHR-EHR_STATUS.generic.v1",
+                "uid": {
+                    "_type": "HIER_OBJECT_ID",
+                    "value": "bd42dfd8-f137-4ea4-8c74-984059716c90::local.ehrbase.org::1"
+                },
+                "is_modifiable": true,
+                "is_queryable": true
+            },
+            "time_created": "2020-11-25T15:43:38.387"
+        },
+        "headers": {
+            "Vary": "Origin, Access-Control-Request-Method, Access-Control-Request-Headers",
+            "Location": "http://85162b68b902:8080/ehrbase/rest/openehr/v1/ehr/d64ea4f6-ba93-4cf1-95c8-868c37ed5785",
+            "ETag": "\"d64ea4f6-ba93-4cf1-95c8-868c37ed5785\"",
+            "Last-Modified": "Fri, 02 Jan 1970 10:12:04 GMT",
+            "X-Content-Type-Options": "nosniff",
+            "X-XSS-Protection": "1; mode=block",
+            "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0",
+            "X-Frame-Options": "DENY",
+            "Content-Type": "application/json",
+            "Transfer-Encoding": "chunked",
+            "Date": "Wed, 25 Nov 2020 15:43:38 GMT",
+            "Keep-Alive": "timeout=60",
+            "Connection": "keep-alive"
+        }
+    }
+}</msg>
+<msg timestamp="20201125 16:43:38.455" level="TRACE">Return: {'request': {'allowRedirects': True,
+             'body': {'_type': 'EHR_STATUS',
+                      'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+                      'is_modifiable': True,
+                      'is_queryable': True,
+                      'name': {'value': 'EHR Status'},
+                      'subject': {'external_ref': {'id': {'_type': 'GENERIC_ID',
+                                                          'scheme': 'id_scheme',
+                                                          'value': 'c4f8275c-07a8-4a73-8f60-c6b914223856'},
+                                                   'namespace': 'namespace_2386821',
+                                                   'type': 'PERSON'}}},
+             'cert': None,
+             'headers': {'Accept': 'application/json',
+                         'Content-Type': 'application/json',
+                         'Prefer': 'return=representation',
+                         'User-Agent': 'RESTinstance/1.0.0'},
+             'method': 'POST',
+             'netloc': 'localhost:8080',
+             'path': '/ehrbase/rest/openehr/v1/ehr',
+             'proxies': {},
+             'query': {},
+             'scheme': 'http',
+             'sslVerify': True,
+             'timeout': [None, None],
+             'timestamp': {'local': '2020-11-25T16:43:38.418043+01:00',
+                           'utc': '2020-11-25T15:43:38.418043+00:00'},
+             'url': 'http://localhost:8080/ehrbase/rest/openehr/v1/ehr'},
+ 'response': {'body': {'ehr_id': {'_type': 'HIER_OBJECT_ID',
+                                  'value': 'd64ea4f6-ba93-4cf1-95c8-868c37ed5785'},
+                       'ehr_status': {'_type': 'EHR_STATUS',
+                                      'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+                                      'is_modifiable': True,
+                                      'is_queryable': True,
+                                      'name': {'_type': 'DV_TEXT',
+                                               'value': 'EHR Status'},
+                                      'subject': {'_type': 'PARTY_SELF',
+                                                  'external_ref': {'_type': 'PARTY_REF',
+                                                                   'id': {'_type': 'GENERIC_ID',
+                                                                          'scheme': 'id_scheme',
+                                                                          'value': 'c4f8275c-07a8-4a73-8f60-c6b914223856'},
+                                                                   'namespace': 'namespace_2386821',
+                                                                   'type': 'PERSON'}},
+                                      'uid': {'_type': 'HIER_OBJECT_ID',
+                                              'value': 'bd42dfd8-f137-4ea4-8c74-984059716c90::local.ehrbase.org::1'}},
+                       'system_id': {'_type': 'HIER_OBJECT_ID',
+                                     'value': '0f889dc9-6710-48ec-bbbe-7118c14b2734'},
+                       'time_created': '2020-11-25T15:43:38.387'},
+              'headers': {'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate',
+                          'Connection': 'keep-alive',
+                          'Content-Type': 'application/json',
+                          'Date': 'Wed, 25 Nov 2020 15:43:38 GMT',
+                          'ETag': '"d64ea4f6-ba93-4cf1-95c8-868c37ed5785"',
+                          'Expires': '0',
+                          'Keep-Alive': 'timeout=60',
+                          'Last-Modified': 'Fri, 02 Jan 1970 10:12:04 GMT',
+                          'Location': 'http://85162b68b902:8080/ehrbase/rest/openehr/v1/ehr/d64ea4f6-ba93-4cf1-95c8-868c37ed5785',
+                          'Pragma': 'no-cache',
+                          'Transfer-Encoding': 'chunked',
+                          'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers',
+                          'X-Content-Type-Options': 'nosniff',
+                          'X-Frame-Options': 'DENY',
+                          'X-XSS-Protection': '1; mode=block'},
+              'seconds': 0.045312,
+              'status': 201}}</msg>
+<status status="PASS" starttime="20201125 16:43:38.447" endtime="20201125 16:43:38.457"></status>
+</kw>
+<msg timestamp="20201125 16:43:38.457" level="TRACE">Return: {'request': {'allowRedirects': True,
+             'body': {'_type': 'EHR_STATUS',
+                      'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+                      'is_modifiable': True,
+                      'is_queryable': True,
+                      'name': {'value': 'EHR Status'},
+                      'subject': {'external_ref': {'id': {'_type': 'GENERIC_ID',
+                                                          'scheme': 'id_scheme',
+                                                          'value': 'c4f8275c-07a8-4a73-8f60-c6b914223856'},
+                                                   'namespace': 'namespace_2386821',
+                                                   'type': 'PERSON'}}},
+             'cert': None,
+             'headers': {'Accept': 'application/json',
+                         'Content-Type': 'application/json',
+                         'Prefer': 'return=representation',
+                         'User-Agent': 'RESTinstance/1.0.0'},
+             'method': 'POST',
+             'netloc': 'localhost:8080',
+             'path': '/ehrbase/rest/openehr/v1/ehr',
+             'proxies': {},
+             'query': {},
+             'scheme': 'http',
+             'sslVerify': True,
+             'timeout': [None, None],
+             'timestamp': {'local': '2020-11-25T16:43:38.418043+01:00',
+                           'utc': '2020-11-25T15:43:38.418043+00:00'},
+             'url': 'http://localhost:8080/ehrbase/rest/openehr/v1/ehr'},
+ 'response': {'body': {'ehr_id': {'_type': 'HIER_OBJECT_ID',
+                                  'value': 'd64ea4f6-ba93-4cf1-95c8-868c37ed5785'},
+                       'ehr_status': {'_type': 'EHR_STATUS',
+                                      'archetype_node_id': 'openEHR-EHR-EHR_STATUS.generic.v1',
+                                      'is_modifiable': True,
+                                      'is_queryable': True,
+                                      'name': {'_type': 'DV_TEXT',
+                                               'value': 'EHR Status'},
+                                      'subject': {'_type': 'PARTY_SELF',
+                                                  'external_ref': {'_type': 'PARTY_REF',
+                                                                   'id': {'_type': 'GENERIC_ID',
+                                                                          'scheme': 'id_scheme',
+                                                                          'value': 'c4f8275c-07a8-4a73-8f60-c6b914223856'},
+                                                                   'namespace': 'namespace_2386821',
+                                                                   'type': 'PERSON'}},
+                                      'uid': {'_type': 'HIER_OBJECT_ID',
+                                              'value': 'bd42dfd8-f137-4ea4-8c74-984059716c90::local.ehrbase.org::1'}},
+                       'system_id': {'_type': 'HIER_OBJECT_ID',
+                                     'value': '0f889dc9-6710-48ec-bbbe-7118c14b2734'},
+                       'time_created': '2020-11-25T15:43:38.387'},
+              'headers': {'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate',
+                          'Connection': 'keep-alive',
+                          'Content-Type': 'application/json',
+                          'Date': 'Wed, 25 Nov 2020 15:43:38 GMT',
+                          'ETag': '"d64ea4f6-ba93-4cf1-95c8-868c37ed5785"',
+                          'Expires': '0',
+                          'Keep-Alive': 'timeout=60',
+                          'Last-Modified': 'Fri, 02 Jan 1970 10:12:04 GMT',
+                          'Location': 'http://85162b68b902:8080/ehrbase/rest/openehr/v1/ehr/d64ea4f6-ba93-4cf1-95c8-868c37ed5785',
+                          'Pragma': 'no-cache',
+                          'Transfer-Encoding': 'chunked',
+                          'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers',
+                          'X-Content-Type-Options': 'nosniff',
+                          'X-Frame-Options': 'DENY',
+                          'X-XSS-Protection': '1; mode=block'},
+              'seconds': 0.045312,
+              'status': 201}}</msg>
+<status status="PASS" starttime="20201125 16:43:38.446" endtime="20201125 16:43:38.458"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${OUTPUT_LEVEL}"=="verbose" and ${payload}!=${None}</arg>
+<arg>Output</arg>
+<arg>${payload}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.459" level="TRACE">Arguments: [ '"verbose"=="verbose" and None!=None' | 'Output' | '${payload}' ]</msg>
+<msg timestamp="20201125 16:43:38.459" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.458" endtime="20201125 16:43:38.459"></status>
+</kw>
+<msg timestamp="20201125 16:43:38.459" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.446" endtime="20201125 16:43:38.459"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${response}</arg>
+<arg>${resp}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.459" level="TRACE">Arguments: [ '${response}' | '${resp}' ]</msg>
+<msg timestamp="20201125 16:43:38.460" level="INFO">${response} = {'seconds': 0.045312, 'status': 201, 'body': {'system_id': {'_type': 'HIER_OBJECT_ID', 'value': '0f889dc9-6710-48ec-bbbe-7118c14b2734'}, 'ehr_id': {'_type': 'HIER_OBJECT_ID', 'value': 'd64ea4f6-ba93-4...</msg>
+<msg timestamp="20201125 16:43:38.460" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.459" endtime="20201125 16:43:38.460"></status>
+</kw>
+<kw name="extract subject_id from response" library="generic">
+<doc>Extracts subject_id from response of preceding request.
+This KW executes only in EHR_SERVICE test suite, it is ignored
+in all over test suites.</doc>
+<msg timestamp="20201125 16:43:38.460" level="TRACE">Arguments: [  ]</msg>
+<kw name="String" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON string.*</doc>
+<arguments>
+<arg>response body ehr_status subject external_ref id value</arg>
+</arguments>
+<assign>
+<var>${subjectid}</var>
+</assign>
+<msg timestamp="20201125 16:43:38.460" level="TRACE">Arguments: [ 'response body ehr_status subject external_ref id value' ]</msg>
+<msg timestamp="20201125 16:43:38.461" level="TRACE">Return: ['c4f8275c-07a8-4a73-8f60-c6b914223856']</msg>
+<msg timestamp="20201125 16:43:38.461" level="INFO">${subjectid} = ['c4f8275c-07a8-4a73-8f60-c6b914223856']</msg>
+<status status="PASS" starttime="20201125 16:43:38.460" endtime="20201125 16:43:38.461"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>\n\tDEBUG OUTPUT - EHR_STATUS SUBJECT_ID: \n\t${subjectid}[0]</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.461" level="TRACE">Arguments: [ '\n\tDEBUG OUTPUT - EHR_STATUS SUBJECT_ID: \n\tc4f8275c-07a8-4a73-8f60-c6b914223856' ]</msg>
+<msg timestamp="20201125 16:43:38.461" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.461" endtime="20201125 16:43:38.461"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${subject_id}</arg>
+<arg>${subjectid}[0]</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.461" level="TRACE">Arguments: [ '${subject_id}' | '${subjectid}[0]' ]</msg>
+<msg timestamp="20201125 16:43:38.462" level="INFO">${subject_id} = c4f8275c-07a8-4a73-8f60-c6b914223856</msg>
+<msg timestamp="20201125 16:43:38.462" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.461" endtime="20201125 16:43:38.462"></status>
+</kw>
+<msg timestamp="20201125 16:43:38.462" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.460" endtime="20201125 16:43:38.462"></status>
+</kw>
+<msg timestamp="20201125 16:43:38.462" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.319" endtime="20201125 16:43:38.462"></status>
+</kw>
+<kw name="create body temperature" library="observation">
+<arguments>
+<arg>create-body-temp.json</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.462" level="TRACE">Arguments: [ ${fhir_resource}='create-body-temp.json' ]</msg>
+<kw name="Load JSON From File" library="JSONLibrary">
+<doc>Load JSON from file.</doc>
+<arguments>
+<arg>${DATA_SET_PATH_OBSERVATION}/${fhir_resource}</arg>
+</arguments>
+<assign>
+<var>${payload}</var>
+</assign>
+<msg timestamp="20201125 16:43:38.463" level="TRACE">Arguments: [ '/Users/peterwohlfarth/Repos/fhir-bridge-poc/tests/../src/test/resources/Observation/create-body-temp.json' ]</msg>
+<msg timestamp="20201125 16:43:38.463" level="DEBUG">Check if file exists</msg>
+<msg timestamp="20201125 16:43:38.464" level="TRACE">Return: {'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://terminology.hl7.org/CodeSystem/observation-category'}]}],
+ 'code': {'coding': [{'code': '8310-5', 'system': 'http://loinc.org'}]},
+ 'effectiveDateTime': '2020-04-30T12:00:00+01:00',
+ 'id': 'bodytemp',
+ 'meta': {'profile': ['http://hl7.org/fhir/StructureDefinition/bodytemp']},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'identifier': {'system': 'urn:ietf:rfc:4122',
+                            'value': '{{patientId}}'}},
+ 'valueQuantity': {'code': 'Cel',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'Cel',
+                   'value': 37.5}}</msg>
+<msg timestamp="20201125 16:43:38.464" level="INFO">${payload} = {'resourceType': 'Observation', 'id': 'bodytemp', 'meta': {'profile': ['http://hl7.org/fhir/StructureDefinition/bodytemp']}, 'status': 'final', 'category': [{'coding': [{'system': 'http://terminology....</msg>
+<status status="PASS" starttime="20201125 16:43:38.462" endtime="20201125 16:43:38.464"></status>
+</kw>
+<kw name="Update Value To Json" library="JSONLibrary">
+<doc>Update value to JSON using JSONPath</doc>
+<arguments>
+<arg>${payload}</arg>
+<arg>$.subject.reference</arg>
+<arg>urn:uuid:${subject_id}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.465" level="TRACE">Arguments: [ {'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://terminology.hl7.org/CodeSystem/observation-category'}]}],
+ 'code': {'coding': [{'code': '8310-5', 'system': 'http://loinc.org'}]},
+ 'effectiveDateTime': '2020-04-30T12:00:00+01:00',
+ 'id': 'bodytemp',
+ 'meta': {'profile': ['http://hl7.org/fhir/StructureDefinition/bodytemp']},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'identifier': {'system': 'urn:ietf:rfc:4122',
+                            'value': '{{patientId}}'}},
+ 'valueQuantity': {'code': 'Cel',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'Cel',
+                   'value': 37.5}} | '$.subject.reference' | 'urn:uuid:c4f8275c-07a8-4a73-8f60-c6b914223856' ]</msg>
+<msg timestamp="20201125 16:43:38.486" level="TRACE">Return: {'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://terminology.hl7.org/CodeSystem/observation-category'}]}],
+ 'code': {'coding': [{'code': '8310-5', 'system': 'http://loinc.org'}]},
+ 'effectiveDateTime': '2020-04-30T12:00:00+01:00',
+ 'id': 'bodytemp',
+ 'meta': {'profile': ['http://hl7.org/fhir/StructureDefinition/bodytemp']},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'identifier': {'system': 'urn:ietf:rfc:4122',
+                            'value': '{{patientId}}'}},
+ 'valueQuantity': {'code': 'Cel',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'Cel',
+                   'value': 37.5}}</msg>
+<status status="PASS" starttime="20201125 16:43:38.465" endtime="20201125 16:43:38.487"></status>
+</kw>
+<kw name="Post" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a POST request to the endpoint.*</doc>
+<arguments>
+<arg>${BASE_URL}/Observation</arg>
+<arg>body=${payload}</arg>
+</arguments>
+<assign>
+<var>&amp;{resp}</var>
+</assign>
+<msg timestamp="20201125 16:43:38.487" level="TRACE">Arguments: [ 'http://localhost:8888/fhir-bridge/fhir/Observation' | body={'category': [{'coding': [{'code': 'vital-signs',
+                           'system': 'http://terminology.hl7.org/CodeSystem/observation-category'}]}],
+ 'code': {'coding': [{'code': '8310-5', 'system': 'http://loinc.org'}]},
+ 'effectiveDateTime': '2020-04-30T12:00:00+01:00',
+ 'id': 'bodytemp',
+ 'meta': {'profile': ['http://hl7.org/fhir/StructureDefinition/bodytemp']},
+ 'resourceType': 'Observation',
+ 'status': 'final',
+ 'subject': {'identifier': {'system': 'urn:ietf:rfc:4122',
+                            'value': '{{patientId}}'}},
+ 'valueQuantity': {'code': 'Cel',
+                   'system': 'http://unitsofmeasure.org',
+                   'unit': 'Cel',
+                   'value': 37.5}} ]</msg>
+<msg timestamp="20201125 16:43:38.489" level="DEBUG">Starting new HTTP connection (1): localhost:8888</msg>
+<msg timestamp="20201125 16:43:38.655" level="DEBUG">http://localhost:8888 "POST /fhir-bridge/fhir/Observation HTTP/1.1" 422 None</msg>
+<msg timestamp="20201125 16:43:38.657" level="TRACE">Return: {'body': {'issue': [{'code': 'value',
+                     'diagnostics': "EhrId not found for subject '{{patientId}}'",
+                     'expression': ['Observation.subject.identifier'],
+                     'severity': 'error'}],
+          'resourceType': 'OperationOutcome'},
+ 'headers': {'Connection': 'keep-alive',
+             'Content-Type': 'application/fhir+json;charset=UTF-8',
+             'Date': 'Wed, 25 Nov 2020 15:43:38 GMT',
+             'Keep-Alive': 'timeout=60',
+             'Transfer-Encoding': 'chunked',
+             'X-Powered-By': 'HAPI FHIR 5.1.0 REST Server (FHIR Server; FHIR 4.0.1/R4)',
+             'X-Request-ID': 'QiKtOlDJFLzhmlrb'},
+ 'seconds': 0.16724799999999998,
+ 'status': 422}</msg>
+<msg timestamp="20201125 16:43:38.657" level="INFO">&amp;{resp} = { seconds=0.16724799999999998 | status=422 | body={'resourceType': 'OperationOutcome', 'issue': [{'severity': 'error', 'code': 'value', 'diagnostics': "EhrId not found for subject '{{patientId}}'", 'e...</msg>
+<status status="PASS" starttime="20201125 16:43:38.487" endtime="20201125 16:43:38.657"></status>
+</kw>
+<kw name="Output Debug Info To Console" library="generic">
+<doc>Prints all details of a request to console in JSON style.
+Can also be used to output a single JSON
+- request headers
+- request body
+- response headers
+- response body</doc>
+<msg timestamp="20201125 16:43:38.657" level="TRACE">Arguments: [ ${payload}=None ]</msg>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${OUTPUT_LEVEL}"=="verbose"</arg>
+<arg>Output</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.658" level="TRACE">Arguments: [ '"verbose"=="verbose"' | 'Output' ]</msg>
+<kw name="Output" library="REST">
+<tags>
+<tag>I/O</tag>
+</tags>
+<doc>*Outputs JSON to terminal or a file.*</doc>
+<msg timestamp="20201125 16:43:38.658" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20201125 16:43:38.659" level="INFO">
+{
+    "request": {
+        "method": "POST",
+        "url": "http://localhost:8888/fhir-bridge/fhir/Observation",
+        "scheme": "http",
+        "netloc": "localhost:8888",
+        "path": "/fhir-bridge/fhir/Observation",
+        "query": {},
+        "body": {
+            "resourceType": "Observation",
+            "id": "bodytemp",
+            "meta": {
+                "profile": [
+                    "http://hl7.org/fhir/StructureDefinition/bodytemp"
+                ]
+            },
+            "status": "final",
+            "category": [
+                {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                            "code": "vital-signs"
+                        }
+                    ]
+                }
+            ],
+            "code": {
+                "coding": [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "8310-5"
+                    }
+                ]
+            },
+            "subject": {
+                "identifier": {
+                    "system": "urn:ietf:rfc:4122",
+                    "value": "{{patientId}}"
+                }
+            },
+            "effectiveDateTime": "2020-04-30T12:00:00+01:00",
+            "valueQuantity": {
+                "value": 37.5,
+                "unit": "Cel",
+                "system": "http://unitsofmeasure.org",
+                "code": "Cel"
+            }
+        },
+        "headers": {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "User-Agent": "RESTinstance/1.0.0",
+            "Prefer": "return=representation"
+        },
+        "proxies": {},
+        "timeout": [
+            null,
+            null
+        ],
+        "cert": null,
+        "sslVerify": true,
+        "allowRedirects": true,
+        "timestamp": {
+            "utc": "2020-11-25T15:43:38.655880+00:00",
+            "local": "2020-11-25T16:43:38.655880+01:00"
+        }
+    },
+    "response": {
+        "seconds": 0.16724799999999998,
+        "status": 422,
+        "body": {
+            "resourceType": "OperationOutcome",
+            "issue": [
+                {
+                    "severity": "error",
+                    "code": "value",
+                    "diagnostics": "EhrId not found for subject '{{patientId}}'",
+                    "expression": [
+                        "Observation.subject.identifier"
+                    ]
+                }
+            ]
+        },
+        "headers": {
+            "X-Powered-By": "HAPI FHIR 5.1.0 REST Server (FHIR Server; FHIR 4.0.1/R4)",
+            "X-Request-ID": "QiKtOlDJFLzhmlrb",
+            "Content-Type": "application/fhir+json;charset=UTF-8",
+            "Transfer-Encoding": "chunked",
+            "Date": "Wed, 25 Nov 2020 15:43:38 GMT",
+            "Keep-Alive": "timeout=60",
+            "Connection": "keep-alive"
+        }
+    }
+}</msg>
+<msg timestamp="20201125 16:43:38.661" level="TRACE">Return: {'request': {'allowRedirects': True,
+             'body': {'category': [{'coding': [{'code': 'vital-signs',
+                                                'system': 'http://terminology.hl7.org/CodeSystem/observation-category'}]}],
+                      'code': {'coding': [{'code': '8310-5',
+                                           'system': 'http://loinc.org'}]},
+                      'effectiveDateTime': '2020-04-30T12:00:00+01:00',
+                      'id': 'bodytemp',
+                      'meta': {'profile': ['http://hl7.org/fhir/StructureDefinition/bodytemp']},
+                      'resourceType': 'Observation',
+                      'status': 'final',
+                      'subject': {'identifier': {'system': 'urn:ietf:rfc:4122',
+                                                 'value': '{{patientId}}'}},
+                      'valueQuantity': {'code': 'Cel',
+                                        'system': 'http://unitsofmeasure.org',
+                                        'unit': 'Cel',
+                                        'value': 37.5}},
+             'cert': None,
+             'headers': {'Accept': 'application/json',
+                         'Content-Type': 'application/json',
+                         'Prefer': 'return=representation',
+                         'User-Agent': 'RESTinstance/1.0.0'},
+             'method': 'POST',
+             'netloc': 'localhost:8888',
+             'path': '/fhir-bridge/fhir/Observation',
+             'proxies': {},
+             'query': {},
+             'scheme': 'http',
+             'sslVerify': True,
+             'timeout': [None, None],
+             'timestamp': {'local': '2020-11-25T16:43:38.655880+01:00',
+                           'utc': '2020-11-25T15:43:38.655880+00:00'},
+             'url': 'http://localhost:8888/fhir-bridge/fhir/Observation'},
+ 'response': {'body': {'issue': [{'code': 'value',
+                                  'diagnostics': "EhrId not found for subject '{{patientId}}'",
+                                  'expression': ['Observation.subject.identifier'],
+                                  'severity': 'error'}],
+                       'resourceType': 'OperationOutcome'},
+              'headers': {'Connection': 'keep-alive',
+                          'Content-Type': 'application/fhir+json;charset=UTF-8',
+                          'Date': 'Wed, 25 Nov 2020 15:43:38 GMT',
+                          'Keep-Alive': 'timeout=60',
+                          'Transfer-Encoding': 'chunked',
+                          'X-Powered-By': 'HAPI FHIR 5.1.0 REST Server (FHIR Server; FHIR 4.0.1/R4)',
+                          'X-Request-ID': 'QiKtOlDJFLzhmlrb'},
+              'seconds': 0.16724799999999998,
+              'status': 422}}</msg>
+<status status="PASS" starttime="20201125 16:43:38.658" endtime="20201125 16:43:38.662"></status>
+</kw>
+<msg timestamp="20201125 16:43:38.662" level="TRACE">Return: {'request': {'allowRedirects': True,
+             'body': {'category': [{'coding': [{'code': 'vital-signs',
+                                                'system': 'http://terminology.hl7.org/CodeSystem/observation-category'}]}],
+                      'code': {'coding': [{'code': '8310-5',
+                                           'system': 'http://loinc.org'}]},
+                      'effectiveDateTime': '2020-04-30T12:00:00+01:00',
+                      'id': 'bodytemp',
+                      'meta': {'profile': ['http://hl7.org/fhir/StructureDefinition/bodytemp']},
+                      'resourceType': 'Observation',
+                      'status': 'final',
+                      'subject': {'identifier': {'system': 'urn:ietf:rfc:4122',
+                                                 'value': '{{patientId}}'}},
+                      'valueQuantity': {'code': 'Cel',
+                                        'system': 'http://unitsofmeasure.org',
+                                        'unit': 'Cel',
+                                        'value': 37.5}},
+             'cert': None,
+             'headers': {'Accept': 'application/json',
+                         'Content-Type': 'application/json',
+                         'Prefer': 'return=representation',
+                         'User-Agent': 'RESTinstance/1.0.0'},
+             'method': 'POST',
+             'netloc': 'localhost:8888',
+             'path': '/fhir-bridge/fhir/Observation',
+             'proxies': {},
+             'query': {},
+             'scheme': 'http',
+             'sslVerify': True,
+             'timeout': [None, None],
+             'timestamp': {'local': '2020-11-25T16:43:38.655880+01:00',
+                           'utc': '2020-11-25T15:43:38.655880+00:00'},
+             'url': 'http://localhost:8888/fhir-bridge/fhir/Observation'},
+ 'response': {'body': {'issue': [{'code': 'value',
+                                  'diagnostics': "EhrId not found for subject '{{patientId}}'",
+                                  'expression': ['Observation.subject.identifier'],
+                                  'severity': 'error'}],
+                       'resourceType': 'OperationOutcome'},
+              'headers': {'Connection': 'keep-alive',
+                          'Content-Type': 'application/fhir+json;charset=UTF-8',
+                          'Date': 'Wed, 25 Nov 2020 15:43:38 GMT',
+                          'Keep-Alive': 'timeout=60',
+                          'Transfer-Encoding': 'chunked',
+                          'X-Powered-By': 'HAPI FHIR 5.1.0 REST Server (FHIR Server; FHIR 4.0.1/R4)',
+                          'X-Request-ID': 'QiKtOlDJFLzhmlrb'},
+              'seconds': 0.16724799999999998,
+              'status': 422}}</msg>
+<status status="PASS" starttime="20201125 16:43:38.658" endtime="20201125 16:43:38.663"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${OUTPUT_LEVEL}"=="verbose" and ${payload}!=${None}</arg>
+<arg>Output</arg>
+<arg>${payload}</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.663" level="TRACE">Arguments: [ '"verbose"=="verbose" and None!=None' | 'Output' | '${payload}' ]</msg>
+<msg timestamp="20201125 16:43:38.663" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.663" endtime="20201125 16:43:38.663"></status>
+</kw>
+<msg timestamp="20201125 16:43:38.663" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.657" endtime="20201125 16:43:38.663"></status>
+</kw>
+<msg timestamp="20201125 16:43:38.663" level="TRACE">Return: None</msg>
+<status status="PASS" starttime="20201125 16:43:38.462" endtime="20201125 16:43:38.664"></status>
+</kw>
+<kw name="validate response - 201" library="observation">
+<msg timestamp="20201125 16:43:38.664" level="TRACE">Arguments: [  ]</msg>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>201</arg>
+</arguments>
+<msg timestamp="20201125 16:43:38.664" level="TRACE">Arguments: [ 'response status' | '201' ]</msg>
+<msg timestamp="20201125 16:43:38.665" level="FAIL">422 is not one of [201]
+
+Failed validating 'enum' in schema:
+    {'enum': [201], 'type': 'integer'}
+
+On instance:
+    422</msg>
+<msg timestamp="20201125 16:43:38.665" level="DEBUG">Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/REST/keywords.py", line 767, in integer
+    self._assert_schema(schema, reality)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/REST/keywords.py", line 1383, in _assert_schema
+    raise AssertionError(e)</msg>
+<status status="FAIL" starttime="20201125 16:43:38.664" endtime="20201125 16:43:38.665"></status>
+</kw>
+<status status="FAIL" starttime="20201125 16:43:38.664" endtime="20201125 16:43:38.665"></status>
+</kw>
+<doc>1. create EHR
+2. trigger observation endpoint</doc>
+<tags>
+<tag>create</tag>
+<tag>observation</tag>
+<tag>POC</tag>
+</tags>
+<status status="FAIL" starttime="20201125 16:43:38.307" endtime="20201125 16:43:38.666" critical="yes">422 is not one of [201]
+
+Failed validating 'enum' in schema:
+    {'enum': [201], 'type': 'integer'}
+
+On instance:
+    422</status>
+</test>
+<status status="FAIL" starttime="20201125 16:43:38.070" endtime="20201125 16:43:38.666"></status>
+</suite>
+<status status="FAIL" starttime="20201125 16:43:38.068" endtime="20201125 16:43:38.666"></status>
+</suite>
+<status status="FAIL" starttime="20201125 16:43:38.050" endtime="20201125 16:43:38.667"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1">Critical Tests</stat>
+<stat pass="0" fail="1">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1">create</stat>
+<stat pass="0" fail="1">observation</stat>
+<stat pass="0" fail="1">POC</stat>
+</tag>
+<suite>
+<stat pass="0" fail="1" id="s1" name="Robot">Robot</stat>
+<stat pass="0" fail="1" id="s1-s1" name="OBSERVATION">Robot.OBSERVATION</stat>
+<stat pass="0" fail="1" id="s1-s1-s1" name="01 Create">Robot.OBSERVATION.01 Create</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
