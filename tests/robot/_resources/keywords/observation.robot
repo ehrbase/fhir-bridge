@@ -308,7 +308,7 @@ POST /Observation with fake ehr reference
 
 
 create Observation Heart Rate JSON
-    [Arguments]         ${resourceType}    ${ID}    ${meta}    ${profile}    ${status}     ${Identifieravailable}    ${Identifiercodingsystem}    ${Identifiercodingcode}    ${Identifiersystem}    ${Identifiervalue}    ${Identifierassigner}    ${Identifierreference}    ${categoryavailable}    ${categorycodingavailable}    ${categorysystem}    ${categorycode}    ${codeavailable}    ${codecodingavailable}    ${code0system}    ${code0code}    ${code0display}    ${code1system}    ${code1code}    ${code1display}    ${codetext}    ${subject}    ${reference}    ${effectivedatetime}    ${vQavailable}    ${vQvalue}    ${vQunit}    ${vQsystem}    ${vQcode}    ${dataabsentreason}    ${responsecode}    ${diagnosticINDEX}    ${diagnosticsENG}    ${diagnosticsDE}
+    [Arguments]         ${resourceType}    ${ID}    ${meta}    ${profile}    ${status}     ${Identifieravailable}    ${Identifiercodingsystem}    ${Identifiercodingcode}    ${Identifiersystem}    ${Identifiervalue}    ${Identifierassigner}    ${Identifierreference}    ${categoryavailable}    ${categorycodingavailable}    ${categorysystem}    ${categorycode}    ${codeavailable}    ${codecodingavailable}    ${code0system}    ${code0code}    ${code0display}    ${code1system}    ${code1code}    ${code1display}    ${codetext}    ${subject}    ${subjectvalue}    ${effectivedatetime}    ${vQavailable}    ${vQvalue}    ${vQunit}    ${vQsystem}    ${vQcode}    ${dataabsentreason}    ${responsecode}    ${diagnosticINDEX}    ${diagnosticsENG}    ${diagnosticsDE}
 
                         prepare new request session  Prefer=return=representation
 
@@ -322,7 +322,7 @@ create Observation Heart Rate JSON
                         ...    update Identifier                ${Identifieravailable}                          ${Identifiercodingsystem}      ${Identifiercodingcode}     ${Identifiersystem}     ${Identifiervalue}      ${Identifierassigner}    ${Identifierreference}    AND
                         ...    update Category                  ${categoryavailable}                            ${categorycodingavailable}     ${categorysystem}           ${categorycode}         AND
                         ...    update Code                      ${codeavailable}                                ${codecodingavailable}         ${code0system}              ${code0code}            ${code0display}         ${code1system}           ${code1code}             ${code1display}    ${codetext}    AND
-                        ...    update Subject                   ${subject}                                      ${reference}                   AND
+                        ...    update Subject                   ${subject}                                      ${subjectvalue}                AND
                         ...    update Effective Date Time       ${effectivedatetime}                            AND
                         ...    update Value Quantity            ${vQavailable}                                  ${vQvalue}                     ${vQunit}                   ${vQsystem}            ${vQcode}                AND
                         ...    update Data Absent Reason        ${dataabsentreason}                             AND

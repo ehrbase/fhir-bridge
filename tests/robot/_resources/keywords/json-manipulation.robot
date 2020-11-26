@@ -411,34 +411,34 @@ update Subject
 
                         # Run Keyword only if subject is available
                         Run Keyword And Return If    $subject=="true"
-                        ...    update Reference    ${reference}
+                        ...    update Subject value    ${reference}
 
                         # Run Keyword only if subject is not available
                         Run Keyword And Return If    $subject=="false"
                         ...    Delete Object From Json  ${payload}  $.subject
 
-update Reference
-    [Arguments]         ${reference}
+update Subject value
+    [Arguments]         ${subjectvalue}
 
                         # Run Keyword only when Reference is empty
-                        Run Keyword And Return If    $reference=="${EMPTY}"
-                        ...    Update Value To Json    ${payload}    $.subject.reference    ${reference}
+                        Run Keyword And Return If    $subjectvalue=="${EMPTY}"
+                        ...    Update Value To Json    ${payload}    $.subject.identifier.value    ${subjectvalue}
 
                         # Run Keyword only when Reference is missing
-                        Run Keyword And Return If    $reference=="missing"
-                        ...    Delete Object From Json    ${payload}    $.subject.reference
+                        Run Keyword And Return If    $subjectvalue=="missing"
+                        ...    Delete Object From Json    ${payload}    $.subject.identifier.value
 
                         # Run Keyword only when Reference is valid
-                        Run Keyword And Return If    $reference=="valid"
-                        ...    Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
+                        Run Keyword And Return If    $subjectvalue=="valid"
+                        ...    Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 
                         # Run Keyword only when Reference is invalid UUID
-                        Run Keyword And Return If    $reference=="invalid"
-                        ...    Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${{str(uuid.uuid4())}}
+                        Run Keyword And Return If    $subjectvalue=="invalid"
+                        ...    Update Value To Json    ${payload}    $.subject.identifier.value    ${{str(uuid.uuid4())}}
 
                         # Else 
                         Run Keyword  
-                        ...    Update Value To Json    ${payload}    $.subject.reference    ${reference}
+                        ...    Update Value To Json    ${payload}    $.subject.identifier.value    ${subjectvalue}
 
 update Effective Date Time
     [Arguments]         ${effectivedatetime}

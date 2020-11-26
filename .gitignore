@@ -3,3 +3,7 @@
 target
 
 *-local.yml
+
+
+# Robot Framework
+tests/results
