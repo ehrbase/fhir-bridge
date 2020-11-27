@@ -2,8 +2,9 @@ package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
+import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.DiagnosticReportLabCompositionConverter;
 import org.hl7.fhir.r4.model.DiagnosticReport;
@@ -19,18 +20,25 @@ public class DiagnosticReportRoutes extends RouteBuilder {
 
     private final PatientIdProcessor patientIdProcessor;
 
+    private final DefaultExceptionHandler defaultExceptionHandler;
+
     public DiagnosticReportRoutes(IFhirResourceDao<DiagnosticReport> diagnosticReportDao,
                                   DefaultCreateResourceRequestValidator requestValidator,
-                                  PatientIdProcessor patientIdProcessor) {
+                                  PatientIdProcessor patientIdProcessor,
+                                  DefaultExceptionHandler defaultExceptionHandler) {
         this.diagnosticReportDao = diagnosticReportDao;
         this.requestValidator = requestValidator;
         this.patientIdProcessor = patientIdProcessor;
+        this.defaultExceptionHandler = defaultExceptionHandler;
     }
 
     @Override
     public void configure() {
         // @formatter:off
         from("fhir-create-diagnostic-report:fhirConsumer?fhirContext=#fhirContext")
+            .onException(Exception.class)
+                .process(defaultExceptionHandler)
+            .end()
             .process(requestValidator)
             .bean(diagnosticReportDao, "create(${body})")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())

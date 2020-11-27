@@ -75,7 +75,7 @@ public class DefaultCreateResourceRequestValidator implements Processor, Message
                 operationOutcome.addIssue(new OperationOutcomeIssueComponent()
                         .setSeverity(IssueSeverity.FATAL)
                         .setCode(IssueType.VALUE)
-                        .setDiagnostics(messages.getMessage("validation.profile.defaultNotSupported"))
+                        .setDiagnostics(messages.getMessage("validation.profile.defaultNotSupported", new Object[]{resourceType, Profile.getAllSupportedProfileUris(resource)}))
                         .addExpression(resource.getResourceType() + ".meta.profile[]"));
             } else if (supportedProfiles.size() > 1) {
                 for (int i = 0; i < declaredProfiles.size(); i++) {

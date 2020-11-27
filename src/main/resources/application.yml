@@ -39,6 +39,7 @@ logging:
   level:
     ca.uhn.fhir: warn
     com.zaxxer.hikari: warn
+    liquibase: warn
     org.apache.camel: warn
     org.hibernate: warn
     org.openehealth.ipf: warn
