@@ -81,7 +81,3 @@ $ docker-compose -f docker-compose-full.yml up
 | `spring.jpa.properties.hibernate.search.default.indexBase` | `${java.io.tmpdir}/fhir-bridge-poc/indexes`      | Default base directory for the indexes.                     |
 | `server.port`                                              | `8888`                                           | Server HTTP port.                                           |
 | `server.servlet.context-path`                              | `/fhir-bridge-poc`                               | Context path of the application.                            |
-
-## Database
-
-The database creation scripts are available for PostgreSQL and H2 in the following location: `src/main/resources/schema`
