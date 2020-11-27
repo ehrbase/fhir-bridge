@@ -7,3 +7,8 @@ target
 
 # Robot Framework
 tests/results
+
+
+# Python
+venv
+*.venv
