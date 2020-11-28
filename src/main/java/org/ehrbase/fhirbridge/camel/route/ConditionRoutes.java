@@ -9,6 +9,7 @@ import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.DiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.mapper.DiagnoseRowMapper;
@@ -27,18 +28,26 @@ public class ConditionRoutes extends RouteBuilder {
 
     private final PatientIdProcessor patientIdProcessor;
 
+    private final DefaultExceptionHandler defaultExceptionHandler;
+
     public ConditionRoutes(IFhirResourceDao<Condition> conditionDao,
                            DefaultCreateResourceRequestValidator requestValidator,
-                           PatientIdProcessor patientIdProcessor) {
+                           PatientIdProcessor patientIdProcessor,
+                           DefaultExceptionHandler defaultExceptionHandler) {
         this.conditionDao = conditionDao;
         this.requestValidator = requestValidator;
         this.patientIdProcessor = patientIdProcessor;
+        this.defaultExceptionHandler = defaultExceptionHandler;
     }
 
     @Override
     public void configure() {
+
         // @formatter:off
         from("fhir-create-condition:fhirConsumer?fhirContext=#fhirContext")
+            .onException(Exception.class)
+                .process(defaultExceptionHandler)
+            .end()
             .process(requestValidator)
             .bean(conditionDao, "create(${body})")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
@@ -49,6 +58,9 @@ public class ConditionRoutes extends RouteBuilder {
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
 
         from("fhir-find-condition:fhirConsumer?fhirContext=#fhirContext")
+            .onException(Exception.class)
+                .process(defaultExceptionHandler)
+            .end()
             .process(buildAqlQuery())
             .setHeader(AqlConstants.ROW_MAPPER, constant(new DiagnoseRowMapper()))
             .to("ehr-aql:aqlProducer");

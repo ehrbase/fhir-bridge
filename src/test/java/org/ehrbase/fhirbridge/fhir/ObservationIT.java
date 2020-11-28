@@ -95,7 +95,27 @@ class ObservationIT extends AbstractSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : Default profile is not supported", exception.getMessage());
+        assertEquals("HTTP 422 : Default profile is not supported for Observation. One of the following profiles is expected: " +
+                        "[https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, " +
+                        "http://hl7.org/fhir/StructureDefinition/bodytemp, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-weight, " +
+                        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score, https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest, " +
+                        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/inhaled-oxygen-concentration, http://hl7.org/fhir/StructureDefinition/heartrate, " +
+                        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pregnancy-status, " +
+                        "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-rate, " +
+                        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status]",
+                exception.getMessage());
+    }
+
+    @Test
+    void createWithInvalidQuantity() throws IOException {
+        String resource = IOUtils.toString(new ClassPathResource("Observation/create-with-invalid-quantity.json").getInputStream(), StandardCharsets.UTF_8);
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
+        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+
+        assertEquals("HTTP 422 : HTTP status '400 Bad Request' was returned by EHRbase while trying to save the composition. Details: Wrong Status code. " +
+                "Expected: [200, 201, 204]. Got: 400. Error message: {\"error\":\"org.ehrbase.validation.constraints.wrappers.ValidationException: :" +
+                "-Validation error at /content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/data[at0001]/events[at0006]/data[at0003]/items[at0005]:value is not within interval, " +
+                "expected:0.0 <= 1500.0 < 1000.0.\\n\\n\",\"status\":\"Bad Request\"}", exception.getMessage());
     }
 
     private void create(String path) throws IOException {
