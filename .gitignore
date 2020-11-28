@@ -5,3 +5,6 @@ target
 *-local.yml
 
 .pytest_cache
+
+# Robot Tests
+**results**
