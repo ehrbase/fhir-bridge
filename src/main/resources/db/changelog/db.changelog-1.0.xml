@@ -1,0 +1,1412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="1" author="subigre">
+        <createSequence sequenceName="SEQ_BLKEXCOL_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_BLKEXCOLFILE_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_BLKEXJOB_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_CNCPT_MAP_GRP_ELM_TGT_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_CODESYSTEM_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_CODESYSTEMVER_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_CONCEPT_DESIG_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_CONCEPT_MAP_GROUP_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_CONCEPT_MAP_GRP_ELM_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_CONCEPT_MAP_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_CONCEPT_PC_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_CONCEPT_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_CONCEPT_PROP_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_EMPI_LINK_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_FORCEDID_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_HISTORYTAG_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_IDXCMPSTRUNIQ_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_NPM_PACK" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_NPM_PACKVER" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_NPM_PACKVERRES" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_RES_REINDEX_JOB" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_RESLINK_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_RESOURCE_HISTORY_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_RESOURCE_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_RESPARMPRESENT_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_RESTAG_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SEARCH" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SEARCH_INC" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SEARCH_RES" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SPIDX_COORDS" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SPIDX_DATE" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SPIDX_NUMBER" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SPIDX_QUANTITY" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SPIDX_STRING" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SPIDX_TOKEN" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SPIDX_URI" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_SUBSCRIPTION_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_TAGDEF_ID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_VALUESET_C_DSGNTN_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_VALUESET_CONCEPT_PID" startValue="1" incrementBy="50"/>
+        <createSequence sequenceName="SEQ_VALUESET_PID" startValue="1" incrementBy="50"/>
+
+        <createTable tableName="HFJ_BINARY_STORAGE_BLOB">
+            <column name="BLOB_ID" type="varchar(200)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_BINARY_STORAGE_BLOB_PKEY"/>
+            </column>
+            <column name="BLOB_DATA" type="blob">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONTENT_TYPE" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BLOB_HASH" type="varchar(128)"/>
+            <column name="PUBLISHED_DATE" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESOURCE_ID" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BLOB_SIZE" type="integer"/>
+        </createTable>
+
+        <createTable tableName="HFJ_BLK_EXPORT_COLFILE">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_BLK_EXPORT_COLFILE_PKEY"/>
+            </column>
+            <column name="RES_ID" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COLLECTION_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_BLK_EXPORT_COLLECTION">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_BLK_EXPORT_COLLECTION_PKEY"/>
+            </column>
+            <column name="TYPE_FILTER" type="varchar(1000)"/>
+            <column name="RES_TYPE" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OPTLOCK" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="JOB_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_BLK_EXPORT_JOB">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_BLK_EXPORT_JOB_PKEY"/>
+            </column>
+            <column name="CREATED_TIME" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXP_TIME" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="JOB_ID" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REQUEST" type="varchar(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXP_SINCE" type="timestamp"/>
+            <column name="JOB_STATUS" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATUS_MESSAGE" type="varchar(500)"/>
+            <column name="STATUS_TIME" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OPTLOCK" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_FORCED_ID">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_FORCED_ID_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="FORCED_ID" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESOURCE_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESOURCE_TYPE" type="varchar(100)" defaultValue=""/>
+        </createTable>
+
+        <createTable tableName="HFJ_HISTORY_TAG">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_HISTORY_TAG_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="TAG_ID" type="bigint"/>
+            <column name="RES_VER_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_IDX_CMP_STRING_UNIQ">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_IDX_CMP_STRING_UNIQ_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="IDX_STRING" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="HFJ_PARTITION">
+            <column name="PART_ID" type="integer">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_PARTITION_PKEY"/>
+            </column>
+            <column name="PART_DESC" type="varchar(200)"/>
+            <column name="PART_NAME" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_RES_LINK">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_RES_LINK_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="SRC_PATH" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SRC_RESOURCE_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SOURCE_RESOURCE_TYPE" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TARGET_RESOURCE_ID" type="bigint"/>
+            <column name="TARGET_RESOURCE_TYPE" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TARGET_RESOURCE_URL" type="varchar(200)"/>
+            <column name="SP_UPDATED" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="HFJ_RES_PARAM_PRESENT">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_RES_PARAM_PRESENT_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="HASH_PRESENCE" type="bigint"/>
+            <column name="SP_PRESENT" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_RES_REINDEX_JOB">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_RES_REINDEX_JOB_PKEY"/>
+            </column>
+            <column name="JOB_DELETED" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REINDEX_COUNT" type="integer"/>
+            <column name="RES_TYPE" type="varchar(100)"/>
+            <column name="SUSPENDED_UNTIL" type="timestamp"/>
+            <column name="UPDATE_THRESHOLD_HIGH" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATE_THRESHOLD_LOW" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="HFJ_RES_TAG">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_RES_TAG_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="TAG_ID" type="bigint"/>
+            <column name="RES_ID" type="bigint"/>
+            <column name="RES_TYPE" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_RES_VER">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_RES_VER_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="RES_DELETED_AT" type="timestamp"/>
+            <column name="RES_VERSION" type="varchar(7)"/>
+            <column name="HAS_TAGS" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_PUBLISHED" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_UPDATED" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ENCODING" type="varchar(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TEXT" type="blob"/>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_VER" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_RES_VER_PROV">
+            <column name="RES_VER_PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_RES_VER_PROV_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="REQUEST_ID" type="varchar(16)"/>
+            <column name="SOURCE_URI" type="varchar(100)"/>
+            <column name="RES_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_RESOURCE">
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_RESOURCE_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="RES_DELETED_AT" type="timestamp"/>
+            <column name="RES_VERSION" type="varchar(7)"/>
+            <column name="HAS_TAGS" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_PUBLISHED" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_UPDATED" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_HAS_LINKS" type="boolean"/>
+            <column name="HASH_SHA256" type="varchar(64)"/>
+            <column name="SP_INDEX_STATUS" type="bigint"/>
+            <column name="RES_LANGUAGE" type="varchar(20)"/>
+            <column name="SP_CMPSTR_UNIQ_PRESENT" type="boolean"/>
+            <column name="SP_COORDS_PRESENT" type="boolean"/>
+            <column name="SP_DATE_PRESENT" type="boolean"/>
+            <column name="SP_NUMBER_PRESENT" type="boolean"/>
+            <column name="SP_QUANTITY_PRESENT" type="boolean"/>
+            <column name="SP_STRING_PRESENT" type="boolean"/>
+            <column name="SP_TOKEN_PRESENT" type="boolean"/>
+            <column name="SP_URI_PRESENT" type="boolean"/>
+            <column name="RES_TYPE" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_VER" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="HFJ_SEARCH">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SEARCH_PKEY"/>
+            </column>
+            <column name="CREATED" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEARCH_DELETED" type="boolean"/>
+            <column name="EXPIRY_OR_NULL" type="timestamp"/>
+            <column name="FAILURE_CODE" type="integer"/>
+            <column name="FAILURE_MESSAGE" type="varchar(500)"/>
+            <column name="LAST_UPDATED_HIGH" type="timestamp"/>
+            <column name="LAST_UPDATED_LOW" type="timestamp"/>
+            <column name="NUM_BLOCKED" type="integer"/>
+            <column name="NUM_FOUND" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PREFERRED_PAGE_SIZE" type="integer"/>
+            <column name="RESOURCE_ID" type="bigint"/>
+            <column name="RESOURCE_TYPE" type="varchar(200)"/>
+            <column name="SEARCH_PARAM_MAP" type="blob"/>
+            <column name="SEARCH_QUERY_STRING" type="clob"/>
+            <column name="SEARCH_QUERY_STRING_HASH" type="integer"/>
+            <column name="SEARCH_TYPE" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEARCH_STATUS" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TOTAL_COUNT" type="integer"/>
+            <column name="SEARCH_UUID" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OPTLOCK_VERSION" type="integer"/>
+        </createTable>
+
+        <createTable tableName="HFJ_SEARCH_INCLUDE">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SEARCH_INCLUDE_PKEY"/>
+            </column>
+            <column name="SEARCH_INCLUDE" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INC_RECURSE" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REVINCLUDE" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEARCH_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_SEARCH_RESULT">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SEARCH_RESULT_PKEY"/>
+            </column>
+            <column name="SEARCH_ORDER" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESOURCE_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEARCH_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="HFJ_SPIDX_COORDS">
+            <column name="SP_ID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SPIDX_COORDS_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="SP_MISSING" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_NAME" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_UPDATED" type="timestamp"/>
+            <column name="HASH_IDENTITY" type="bigint"/>
+            <column name="SP_LATITUDE" type="float"/>
+            <column name="SP_LONGITUDE" type="float"/>
+        </createTable>
+
+        <createTable tableName="HFJ_SPIDX_DATE">
+            <column name="SP_ID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SPIDX_DATE_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="SP_MISSING" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_NAME" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_UPDATED" type="timestamp"/>
+            <column name="HASH_IDENTITY" type="bigint"/>
+            <column name="SP_VALUE_HIGH" type="timestamp"/>
+            <column name="SP_VALUE_HIGH_DATE_ORDINAL" type="integer"/>
+            <column name="SP_VALUE_LOW" type="timestamp"/>
+            <column name="SP_VALUE_LOW_DATE_ORDINAL" type="integer"/>
+        </createTable>
+
+        <createTable tableName="HFJ_SPIDX_NUMBER">
+            <column name="SP_ID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SPIDX_NUMBER_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="SP_MISSING" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_NAME" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_UPDATED" type="timestamp"/>
+            <column name="HASH_IDENTITY" type="bigint"/>
+            <column name="SP_VALUE" type="decimal(19, 2)"/>
+        </createTable>
+
+        <createTable tableName="HFJ_SPIDX_QUANTITY">
+            <column name="SP_ID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SPIDX_QUANTITY_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="SP_MISSING" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_NAME" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_UPDATED" type="timestamp"/>
+            <column name="HASH_IDENTITY" type="bigint"/>
+            <column name="HASH_IDENTITY_AND_UNITS" type="bigint"/>
+            <column name="HASH_IDENTITY_SYS_UNITS" type="bigint"/>
+            <column name="SP_SYSTEM" type="varchar(200)"/>
+            <column name="SP_UNITS" type="varchar(200)"/>
+            <column name="SP_VALUE" type="number(19, 2)"/>
+        </createTable>
+
+        <createTable tableName="HFJ_SPIDX_STRING">
+            <column name="SP_ID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SPIDX_STRING_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="SP_MISSING" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_NAME" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_UPDATED" type="timestamp"/>
+            <column name="HASH_EXACT" type="bigint"/>
+            <column name="HASH_IDENTITY" type="bigint"/>
+            <column name="HASH_NORM_PREFIX" type="bigint"/>
+            <column name="SP_VALUE_EXACT" type="varchar(200)"/>
+            <column name="SP_VALUE_NORMALIZED" type="varchar(200)"/>
+        </createTable>
+
+        <createTable tableName="HFJ_SPIDX_TOKEN">
+            <column name="SP_ID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SPIDX_TOKEN_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="SP_MISSING" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_NAME" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_UPDATED" type="timestamp"/>
+            <column name="HASH_IDENTITY" type="bigint"/>
+            <column name="HASH_SYS" type="bigint"/>
+            <column name="HASH_SYS_AND_VALUE" type="bigint"/>
+            <column name="HASH_VALUE" type="bigint"/>
+            <column name="SP_SYSTEM" type="varchar(200)"/>
+            <column name="SP_VALUE" type="varchar(200)"/>
+        </createTable>
+
+        <createTable tableName="HFJ_SPIDX_URI">
+            <column name="SP_ID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SPIDX_URI_PKEY"/>
+            </column>
+            <column name="PARTITION_DATE" type="date"/>
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="SP_MISSING" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_NAME" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_UPDATED" type="timestamp"/>
+            <column name="HASH_IDENTITY" type="bigint"/>
+            <column name="HASH_URI" type="bigint"/>
+            <column name="SP_URI" type="varchar(254)"/>
+        </createTable>
+
+        <createTable tableName="HFJ_SUBSCRIPTION_STATS">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_SUBSCRIPTION_STATS_PKEY"/>
+            </column>
+            <column name="CREATED_TIME" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_ID" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="HFJ_TAG_DEF">
+            <column name="TAG_ID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="HFJ_TAG_DEF_PKEY"/>
+            </column>
+            <column name="TAG_CODE" type="varchar(200)"/>
+            <column name="TAG_DISPLAY" type="varchar(200)"/>
+            <column name="TAG_SYSTEM" type="varchar(200)"/>
+            <column name="TAG_TYPE" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="MPI_LINK">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="MPI_LINK_PKEY"/>
+            </column>
+            <column name="CREATED" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EID_MATCH" type="boolean"/>
+            <column name="TARGET_TYPE" type="varchar(40)"/>
+            <column name="LINK_SOURCE" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MATCH_RESULT" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NEW_PERSON" type="boolean"/>
+            <column name="PERSON_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SCORE" type="float"/>
+            <column name="TARGET_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VECTOR" type="bigint"/>
+            <column name="VERSION" type="varchar(16)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="NPM_PACKAGE">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="NPM_PACKAGE_PKEY"/>
+            </column>
+            <column name="CUR_VERSION_ID" type="varchar(200)"/>
+            <column name="PACKAGE_DESC" type="varchar(200)"/>
+            <column name="PACKAGE_ID" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_TIME" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="NPM_PACKAGE_VER">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="NPM_PACKAGE_VER_PKEY"/>
+            </column>
+            <column name="CURRENT_VERSION" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PKG_DESC" type="varchar(200)"/>
+            <column name="DESC_UPPER" type="varchar(200)"/>
+            <column name="FHIR_VERSION" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FHIR_VERSION_ID" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PACKAGE_ID" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PACKAGE_SIZE_BYTES" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SAVED_TIME" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_TIME" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VERSION_ID" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PACKAGE_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BINARY_RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="NPM_PACKAGE_VER_RES">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="NPM_PACKAGE_VER_RES_PKEY"/>
+            </column>
+            <column name="CANONICAL_URL" type="varchar(200)"/>
+            <column name="CANONICAL_VERSION" type="varchar(200)"/>
+            <column name="FILE_DIR" type="varchar(200)"/>
+            <column name="FHIR_VERSION" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FHIR_VERSION_ID" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FILE_NAME" type="varchar(200)"/>
+            <column name="RES_SIZE_BYTES" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_TIME" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PACKVER_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BINARY_RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="TRM_CODESYSTEM">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_CODESYSTEM_PKEY"/>
+            </column>
+            <column name="CODE_SYSTEM_URI" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CURRENT_VERSION_PID" type="bigint"/>
+            <column name="CS_NAME" type="varchar(200)"/>
+            <column name="RES_ID" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="TRM_CODESYSTEM_VER">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_CODESYSTEM_VER_PKEY"/>
+            </column>
+            <column name="CS_DISPLAY" type="varchar(200)"/>
+            <column name="CODESYSTEM_PID" type="bigint"/>
+            <column name="CS_VERSION_ID" type="varchar(200)"/>
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="TRM_CONCEPT">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_CONCEPT_PKEY"/>
+            </column>
+            <column name="CODEVAL" type="varchar(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CODESYSTEM_PID" type="bigint"/>
+            <column name="DISPLAY" type="varchar(400)"/>
+            <column name="INDEX_STATUS" type="bigint"/>
+            <column name="PARENT_PIDS" type="clob"/>
+            <column name="CODE_SEQUENCE" type="integer"/>
+            <column name="CONCEPT_UPDATED" type="timestamp"/>
+        </createTable>
+
+        <createTable tableName="TRM_CONCEPT_DESIG">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_CONCEPT_DESIG_PKEY"/>
+            </column>
+            <column name="LANG" type="varchar(500)"/>
+            <column name="USE_CODE" type="varchar(500)"/>
+            <column name="USE_DISPLAY" type="varchar(500)"/>
+            <column name="USE_SYSTEM" type="varchar(500)"/>
+            <column name="VAL" type="varchar(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CS_VER_PID" type="bigint"/>
+            <column name="CONCEPT_PID" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="TRM_CONCEPT_MAP">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_CONCEPT_MAP_PKEY"/>
+            </column>
+            <column name="RES_ID" type="bigint"/>
+            <column name="SOURCE_URL" type="varchar(200)"/>
+            <column name="TARGET_URL" type="varchar(200)"/>
+            <column name="URL" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="TRM_CONCEPT_MAP_GROUP">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_CONCEPT_MAP_GROUP_PKEY"/>
+            </column>
+            <column name="CONCEPT_MAP_URL" type="varchar(200)"/>
+            <column name="SOURCE_URL" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SOURCE_VS" type="varchar(200)"/>
+            <column name="SOURCE_VERSION" type="varchar(200)"/>
+            <column name="TARGET_URL" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TARGET_VS" type="varchar(200)"/>
+            <column name="TARGET_VERSION" type="varchar(200)"/>
+            <column name="CONCEPT_MAP_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="TRM_CONCEPT_MAP_GRP_ELEMENT">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_CONCEPT_MAP_GRP_ELEMENT_PKEY"/>
+            </column>
+            <column name="SOURCE_CODE" type="varchar(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONCEPT_MAP_URL" type="varchar(200)"/>
+            <column name="SOURCE_DISPLAY" type="varchar(400)"/>
+            <column name="SYSTEM_URL" type="varchar(200)"/>
+            <column name="SYSTEM_VERSION" type="varchar(200)"/>
+            <column name="VALUESET_URL" type="varchar(200)"/>
+            <column name="CONCEPT_MAP_GROUP_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="TRM_CONCEPT_MAP_GRP_ELM_TGT">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_CONCEPT_MAP_GRP_ELM_TGT_PKEY"/>
+            </column>
+            <column name="TARGET_CODE" type="varchar(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONCEPT_MAP_URL" type="varchar(200)"/>
+            <column name="TARGET_DISPLAY" type="varchar(400)"/>
+            <column name="TARGET_EQUIVALENCE" type="varchar(50)"/>
+            <column name="SYSTEM_URL" type="varchar(200)"/>
+            <column name="SYSTEM_VERSION" type="varchar(200)"/>
+            <column name="VALUESET_URL" type="varchar(200)"/>
+            <column name="CONCEPT_MAP_GRP_ELM_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="TRM_CONCEPT_PC_LINK">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_CONCEPT_PC_LINK_PKEY"/>
+            </column>
+            <column name="CHILD_PID" type="bigint"/>
+            <column name="CODESYSTEM_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARENT_PID" type="bigint"/>
+            <column name="REL_TYPE" type="integer"/>
+        </createTable>
+
+        <createTable tableName="TRM_CONCEPT_PROPERTY">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_CONCEPT_PROPERTY_PKEY"/>
+            </column>
+            <column name="PROP_CODESYSTEM" type="varchar(500)"/>
+            <column name="PROP_DISPLAY" type="varchar(500)"/>
+            <column name="PROP_KEY" type="varchar(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROP_TYPE" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROP_VAL" type="varchar(500)"/>
+            <column name="PROP_VAL_LOB" type="blob"/>
+            <column name="CS_VER_PID" type="bigint"/>
+            <column name="CONCEPT_PID" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="TRM_VALUESET">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_VALUESET_PKEY"/>
+            </column>
+            <column name="EXPANSION_STATUS" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VSNAME" type="varchar(200)"/>
+            <column name="RES_ID" type="bigint"/>
+            <column name="TOTAL_CONCEPT_DESIGNATIONS" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TOTAL_CONCEPTS" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="URL" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="TRM_VALUESET_C_DESIGNATION">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_VALUESET_C_DESIGNATION_PKEY"/>
+            </column>
+            <column name="VALUESET_CONCEPT_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LANG" type="varchar(500)"/>
+            <column name="USE_CODE" type="varchar(500)"/>
+            <column name="USE_DISPLAY" type="varchar(500)"/>
+            <column name="USE_SYSTEM" type="varchar(500)"/>
+            <column name="VAL" type="varchar(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALUESET_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="TRM_VALUESET_CONCEPT">
+            <column name="PID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="TRM_VALUESET_CONCEPT_PKEY"/>
+            </column>
+            <column name="CODEVAL" type="varchar(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DISPLAY" type="varchar(400)"/>
+            <column name="VALUESET_ORDER" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SYSTEM_URL" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALUESET_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="IDX_BLKEX_EXPTIME" tableName="HFJ_BLK_EXPORT_JOB">
+            <column name="EXP_TIME"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="HFJ_BLK_EXPORT_JOB" columnNames="JOB_ID" constraintName="IDX_BLKEX_JOB_ID"/>
+
+        <addUniqueConstraint tableName="HFJ_FORCED_ID" columnNames="RESOURCE_PID" constraintName="IDX_FORCEDID_RESID"/>
+
+        <addUniqueConstraint tableName="HFJ_FORCED_ID" columnNames="RESOURCE_TYPE, FORCED_ID" constraintName="IDX_FORCEDID_TYPE_FID"/>
+
+        <addUniqueConstraint tableName="HFJ_HISTORY_TAG" columnNames="RES_VER_PID, TAG_ID" constraintName="IDX_RESHISTTAG_TAGID"/>
+
+        <createIndex indexName="IDX_IDXCMPSTRUNIQ_RESOURCE" tableName="HFJ_IDX_CMP_STRING_UNIQ">
+            <column name="RES_ID"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="HFJ_IDX_CMP_STRING_UNIQ" columnNames="IDX_STRING" constraintName="IDX_IDXCMPSTRUNIQ_STRING"/>
+
+        <addUniqueConstraint tableName="HFJ_PARTITION" columnNames="PART_NAME" constraintName="IDX_PART_NAME"/>
+
+        <createIndex indexName="IDX_RL_TPATHRES" tableName="HFJ_RES_LINK">
+            <column name="SRC_PATH"/>
+            <column name="TARGET_RESOURCE_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_RL_SRC" tableName="HFJ_RES_LINK">
+            <column name="SRC_RESOURCE_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_RL_DEST" tableName="HFJ_RES_LINK">
+            <column name="TARGET_RESOURCE_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_RESPARMPRESENT_RESID" tableName="HFJ_RES_PARAM_PRESENT">
+            <column name="RES_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_RESPARMPRESENT_HASHPRES" tableName="HFJ_RES_PARAM_PRESENT">
+            <column name="HASH_PRESENCE"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="HFJ_RES_TAG" columnNames="RES_ID, TAG_ID" constraintName="IDX_RESTAG_TAGID"/>
+
+        <createIndex indexName="IDX_RESVER_TYPE_DATE" tableName="HFJ_RES_VER">
+            <column name="RES_TYPE"/>
+            <column name="RES_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_RESVER_ID_DATE" tableName="HFJ_RES_VER">
+            <column name="RES_ID"/>
+            <column name="RES_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_RESVER_DATE" tableName="HFJ_RES_VER">
+            <column name="RES_UPDATED"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="HFJ_RES_VER" columnNames="RES_ID, RES_VER" constraintName="IDX_RESVER_ID_VER"/>
+
+        <createIndex indexName="IDX_RESVERPROV_SOURCEURI" tableName="HFJ_RES_VER_PROV">
+            <column name="SOURCE_URI"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_RESVERPROV_REQUESTID" tableName="HFJ_RES_VER_PROV">
+            <column name="REQUEST_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_RES_DATE" tableName="HFJ_RESOURCE">
+            <column name="RES_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_RES_LANG" tableName="HFJ_RESOURCE">
+            <column name="RES_TYPE"/>
+            <column name="RES_LANGUAGE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_RES_TYPE" tableName="HFJ_RESOURCE">
+            <column name="RES_TYPE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_INDEXSTATUS" tableName="HFJ_RESOURCE">
+            <column name="SP_INDEX_STATUS"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SEARCH_RESTYPE_HASHS" tableName="HFJ_SEARCH">
+            <column name="RESOURCE_TYPE"/>
+            <column name="SEARCH_QUERY_STRING_HASH"/>
+            <column name="CREATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SEARCH_CREATED" tableName="HFJ_SEARCH">
+            <column name="CREATED"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="HFJ_SEARCH" columnNames="SEARCH_UUID" constraintName="IDX_SEARCH_UUID"/>
+
+        <addUniqueConstraint tableName="HFJ_SEARCH_RESULT" columnNames="SEARCH_PID, SEARCH_ORDER" constraintName="IDX_SEARCHRES_ORDER"/>
+
+        <createIndex indexName="IDX_SP_COORDS_HASH" tableName="HFJ_SPIDX_COORDS">
+            <column name="HASH_IDENTITY"/>
+            <column name="SP_LATITUDE"/>
+            <column name="SP_LONGITUDE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_COORDS_UPDATED" tableName="HFJ_SPIDX_COORDS">
+            <column name="SP_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_COORDS_RESID" tableName="HFJ_SPIDX_COORDS">
+            <column name="RES_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_DATE_HASH" tableName="HFJ_SPIDX_DATE">
+            <column name="HASH_IDENTITY"/>
+            <column name="SP_VALUE_LOW"/>
+            <column name="SP_VALUE_HIGH"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_DATE_HASH_LOW" tableName="HFJ_SPIDX_DATE">
+            <column name="HASH_IDENTITY"/>
+            <column name="SP_VALUE_LOW"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_DATE_ORD_HASH" tableName="HFJ_SPIDX_DATE">
+            <column name="HASH_IDENTITY"/>
+            <column name="SP_VALUE_LOW_DATE_ORDINAL"/>
+            <column name="SP_VALUE_HIGH_DATE_ORDINAL"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_DATE_ORD_HASH_LOW" tableName="HFJ_SPIDX_DATE">
+            <column name="HASH_IDENTITY"/>
+            <column name="SP_VALUE_LOW_DATE_ORDINAL"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_DATE_RESID" tableName="HFJ_SPIDX_DATE">
+            <column name="RES_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_DATE_UPDATED" tableName="HFJ_SPIDX_DATE">
+            <column name="SP_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_NUMBER_HASH_VAL" tableName="HFJ_SPIDX_NUMBER">
+            <column name="HASH_IDENTITY"/>
+            <column name="SP_VALUE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_NUMBER_UPDATED" tableName="HFJ_SPIDX_NUMBER">
+            <column name="SP_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_NUMBER_RESID" tableName="HFJ_SPIDX_NUMBER">
+            <column name="RES_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_QUANTITY_HASH" tableName="HFJ_SPIDX_QUANTITY">
+            <column name="HASH_IDENTITY"/>
+            <column name="SP_VALUE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_QUANTITY_HASH_UN" tableName="HFJ_SPIDX_QUANTITY">
+            <column name="HASH_IDENTITY_AND_UNITS"/>
+            <column name="SP_VALUE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_QUANTITY_HASH_SYSUN" tableName="HFJ_SPIDX_QUANTITY">
+            <column name="HASH_IDENTITY_SYS_UNITS"/>
+            <column name="SP_VALUE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_QUANTITY_UPDATED" tableName="HFJ_SPIDX_QUANTITY">
+            <column name="SP_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_QUANTITY_RESID" tableName="HFJ_SPIDX_QUANTITY">
+            <column name="RES_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_STRING_HASH_IDENT" tableName="HFJ_SPIDX_STRING">
+            <column name="HASH_IDENTITY"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_STRING_HASH_NRM" tableName="HFJ_SPIDX_STRING">
+            <column name="HASH_NORM_PREFIX"/>
+            <column name="SP_VALUE_NORMALIZED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_STRING_HASH_EXCT" tableName="HFJ_SPIDX_STRING">
+            <column name="HASH_EXACT"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_STRING_UPDATED" tableName="HFJ_SPIDX_STRING">
+            <column name="SP_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_STRING_RESID" tableName="HFJ_SPIDX_STRING">
+            <column name="RES_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_TOKEN_HASH" tableName="HFJ_SPIDX_TOKEN">
+            <column name="HASH_IDENTITY"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_TOKEN_HASH_S" tableName="HFJ_SPIDX_TOKEN">
+            <column name="HASH_SYS"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_TOKEN_HASH_SV" tableName="HFJ_SPIDX_TOKEN">
+            <column name="HASH_SYS_AND_VALUE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_TOKEN_HASH_V" tableName="HFJ_SPIDX_TOKEN">
+            <column name="HASH_VALUE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_TOKEN_UPDATED" tableName="HFJ_SPIDX_TOKEN">
+            <column name="SP_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_TOKEN_RESID" tableName="HFJ_SPIDX_TOKEN">
+            <column name="RES_ID"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_URI" tableName="HFJ_SPIDX_URI">
+            <column name="RES_TYPE"/>
+            <column name="SP_NAME"/>
+            <column name="SP_URI"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_URI_HASH_IDENTITY" tableName="HFJ_SPIDX_URI">
+            <column name="HASH_IDENTITY"/>
+            <column name="SP_URI"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_URI_HASH_URI" tableName="HFJ_SPIDX_URI">
+            <column name="HASH_URI"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_URI_RESTYPE_NAME" tableName="HFJ_SPIDX_URI">
+            <column name="RES_TYPE"/>
+            <column name="SP_NAME"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_URI_UPDATED" tableName="HFJ_SPIDX_URI">
+            <column name="SP_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_URI_COORDS" tableName="HFJ_SPIDX_URI">
+            <column name="RES_ID"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="HFJ_SUBSCRIPTION_STATS" columnNames="RES_ID" constraintName="IDX_SUBSC_RESID"/>
+
+        <addUniqueConstraint tableName="HFJ_TAG_DEF" columnNames="TAG_TYPE, TAG_SYSTEM, TAG_CODE" constraintName="IDX_TAGDEF_TYPESYSCODE"/>
+
+        <addUniqueConstraint tableName="MPI_LINK" columnNames="PERSON_PID, TARGET_PID" constraintName="IDX_EMPI_PERSON_TGT"/>
+
+        <addUniqueConstraint tableName="NPM_PACKAGE" columnNames="PACKAGE_ID" constraintName="IDX_PACK_ID"/>
+
+        <addUniqueConstraint tableName="NPM_PACKAGE_VER" columnNames="PACKAGE_ID, VERSION_ID" constraintName="IDX_PACKVER"/>
+
+        <createIndex indexName="IDX_PACKVERRES_URL" tableName="NPM_PACKAGE_VER_RES">
+            <column name="CANONICAL_URL"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="TRM_CODESYSTEM" columnNames="CODE_SYSTEM_URI" constraintName="IDX_CS_CODESYSTEM"/>
+
+        <createIndex indexName="IDX_CONCEPT_INDEXSTATUS" tableName="TRM_CONCEPT">
+            <column name="INDEX_STATUS"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_CONCEPT_UPDATED" tableName="TRM_CONCEPT">
+            <column name="CONCEPT_UPDATED"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="TRM_CONCEPT" columnNames="CODESYSTEM_PID, CODEVAL" constraintName="IDX_CONCEPT_CS_CODE"/>
+
+        <addUniqueConstraint tableName="TRM_CONCEPT_MAP" columnNames="URL" constraintName="IDX_CONCEPT_MAP_URL"/>
+
+        <createIndex indexName="IDX_CNCPT_MAP_GRP_CD" tableName="TRM_CONCEPT_MAP_GRP_ELEMENT">
+            <column name="SOURCE_CODE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_CNCPT_MP_GRP_ELM_TGT_CD" tableName="TRM_CONCEPT_MAP_GRP_ELM_TGT">
+            <column name="TARGET_CODE"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="TRM_VALUESET" columnNames="URL" constraintName="IDX_VALUESET_URL"/>
+
+        <addUniqueConstraint tableName="TRM_VALUESET_CONCEPT" columnNames="VALUESET_PID, SYSTEM_URL, CODEVAL"
+                             constraintName="IDX_VS_CONCEPT_CS_CD"/>
+
+        <addUniqueConstraint tableName="TRM_VALUESET_CONCEPT" columnNames="VALUESET_PID, VALUESET_ORDER"
+                             constraintName="IDX_VS_CONCEPT_ORDER"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_BLK_EXPORT_COLFILE" baseColumnNames="COLLECTION_PID"
+                                 constraintName="FK_BLKEXCOLFILE_COLLECT"
+                                 referencedColumnNames="PID" referencedTableName="HFJ_BLK_EXPORT_COLLECTION"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_BLK_EXPORT_COLLECTION" baseColumnNames="JOB_PID"
+                                 constraintName="FK_BLKEXCOL_JOB"
+                                 referencedTableName="HFJ_BLK_EXPORT_JOB" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="hfj_forced_id" baseColumnNames="resource_pid"
+                                 constraintName="FK_FORCEDID_RESOURCE"
+                                 referencedTableName="hfj_resource" referencedColumnNames="res_id"/>
+
+        <addForeignKeyConstraint baseTableName="hfj_history_tag" baseColumnNames="tag_id"
+                                 constraintName="FKtderym7awj6q8iq5c51xv4ndw"
+                                 referencedTableName="hfj_tag_def" referencedColumnNames="tag_id"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_HISTORY_TAG" baseColumnNames="RES_VER_PID"
+                                 constraintName="FK_HISTORYTAG_HISTORY"
+                                 referencedTableName="HFJ_RES_VER" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_IDX_CMP_STRING_UNIQ" baseColumnNames="RES_ID"
+                                 constraintName="FK_IDXCMPSTRUNIQ_RES_ID"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_RES_LINK" baseColumnNames="SRC_RESOURCE_ID"
+                                 constraintName="FK_RESLINK_SOURCE"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_RES_LINK" baseColumnNames="TARGET_RESOURCE_ID"
+                                 constraintName="FK_RESLINK_TARGET"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_RES_PARAM_PRESENT" baseColumnNames="RES_ID"
+                                 constraintName="FK_RESPARMPRES_RESID"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_RES_TAG" baseColumnNames="TAG_ID"
+                                 constraintName="FKbfcjbaftmiwr3rxkwsy23vneo"
+                                 referencedTableName="HFJ_TAG_DEF" referencedColumnNames="TAG_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_RES_TAG" baseColumnNames="RES_ID"
+                                 constraintName="FK_RESTAG_RESOURCE"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_RES_VER" baseColumnNames="RES_ID"
+                                 constraintName="FK_RESOURCE_HISTORY_RESOURCE"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_RES_VER_PROV" baseColumnNames="RES_PID"
+                                 constraintName="FK_RESVERPROV_RES_PID"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_RES_VER_PROV" baseColumnNames="RES_VER_PID"
+                                 constraintName="FK_RESVERPROV_RESVER_PID"
+                                 referencedTableName="HFJ_RES_VER" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_SEARCH_INCLUDE" baseColumnNames="SEARCH_PID"
+                                 constraintName="FK_SEARCHINC_SEARCH"
+                                 referencedTableName="HFJ_SEARCH" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_SPIDX_COORDS" baseColumnNames="RES_ID"
+                                 constraintName="FKc97mpk37okwu8qvtceg2nh9vn"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_SPIDX_DATE" baseColumnNames="RES_ID"
+                                 constraintName="FK17s70oa59rm9n61k9thjqrsqm"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_SPIDX_NUMBER" baseColumnNames="RES_ID"
+                                 constraintName="FKcltihnc5tgprj9bhpt7xi5otb"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_SPIDX_QUANTITY" baseColumnNames="RES_ID"
+                                 constraintName="FKn603wjjoi1a6asewxbbd78bi5"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_SPIDX_STRING" baseColumnNames="RES_ID"
+                                 constraintName="FK_SPIDXSTR_RESOURCE"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_SPIDX_TOKEN" baseColumnNames="RES_ID"
+                                 constraintName="FK7ulx3j1gg3v7maqrejgc7ybc4"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_SPIDX_URI" baseColumnNames="RES_ID"
+                                 constraintName="FKgxsreutymmfjuwdswv3y887do"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="HFJ_SUBSCRIPTION_STATS" baseColumnNames="RES_ID"
+                                 constraintName="FK_SUBSC_RESOURCE_ID"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="MPI_LINK" baseColumnNames="PERSON_PID"
+                                 constraintName="FK_EMPI_LINK_PERSON"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="MPI_LINK" baseColumnNames="TARGET_PID"
+                                 constraintName="FK_EMPI_LINK_TARGET"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="NPM_PACKAGE_VER" baseColumnNames="PACKAGE_PID"
+                                 constraintName="FK_NPM_PKV_PKG"
+                                 referencedTableName="NPM_PACKAGE" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="NPM_PACKAGE_VER" baseColumnNames="BINARY_RES_ID"
+                                 constraintName="FK_NPM_PKV_RESID"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="NPM_PACKAGE_VER_RES" baseColumnNames="PACKVER_PID"
+                                 constraintName="FK_NPM_PACKVERRES_PACKVER"
+                                 referencedTableName="NPM_PACKAGE_VER" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="NPM_PACKAGE_VER_RES" baseColumnNames="BINARY_RES_ID"
+                                 constraintName="FK_NPM_PKVR_RESID"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CODESYSTEM" baseColumnNames="CURRENT_VERSION_PID"
+                                 constraintName="FK_TRMCODESYSTEM_CURVER"
+                                 referencedTableName="TRM_CODESYSTEM_VER" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CODESYSTEM" baseColumnNames="RES_ID"
+                                 constraintName="FK_TRMCODESYSTEM_RES"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CODESYSTEM_VER" baseColumnNames="CODESYSTEM_PID"
+                                 constraintName="FK_CODESYSVER_CS_ID"
+                                 referencedTableName="TRM_CODESYSTEM" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CODESYSTEM_VER" baseColumnNames="RES_ID"
+                                 constraintName="FK_CODESYSVER_RES_ID"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT" baseColumnNames="CODESYSTEM_PID"
+                                 constraintName="FK_CONCEPT_PID_CS_PID"
+                                 referencedTableName="TRM_CODESYSTEM_VER" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_DESIG" baseColumnNames="CS_VER_PID"
+                                 constraintName="FK_CONCEPTDESIG_CSV"
+                                 referencedTableName="TRM_CODESYSTEM_VER" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_DESIG" baseColumnNames="CONCEPT_PID"
+                                 constraintName="FK_CONCEPTDESIG_CONCEPT"
+                                 referencedTableName="TRM_CONCEPT" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_MAP" baseColumnNames="RES_ID"
+                                 constraintName="FK_TRMCONCEPTMAP_RES"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_MAP_GROUP" baseColumnNames="CONCEPT_MAP_PID"
+                                 constraintName="FK_TCMGROUP_CONCEPTMAP"
+                                 referencedTableName="TRM_CONCEPT_MAP" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_MAP_GRP_ELEMENT" baseColumnNames="CONCEPT_MAP_GROUP_PID"
+                                 constraintName="FK_TCMGELEMENT_GROUP"
+                                 referencedTableName="TRM_CONCEPT_MAP_GROUP" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_MAP_GRP_ELM_TGT" baseColumnNames="CONCEPT_MAP_GRP_ELM_PID"
+                                 constraintName="FK_TCMGETARGET_ELEMENT"
+                                 referencedTableName="TRM_CONCEPT_MAP_GRP_ELEMENT" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_PC_LINK" baseColumnNames="CHILD_PID"
+                                 constraintName="FK_TERM_CONCEPTPC_CHILD"
+                                 referencedTableName="TRM_CONCEPT" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_PC_LINK" baseColumnNames="CODESYSTEM_PID"
+                                 constraintName="FK_TERM_CONCEPTPC_CS"
+                                 referencedTableName="TRM_CODESYSTEM_VER" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_PC_LINK" baseColumnNames="PARENT_PID"
+                                 constraintName="FK_TERM_CONCEPTPC_PARENT"
+                                 referencedTableName="TRM_CONCEPT" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_PROPERTY" baseColumnNames="CS_VER_PID"
+                                 constraintName="FK_CONCEPTPROP_CSV"
+                                 referencedTableName="TRM_CODESYSTEM_VER" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_CONCEPT_PROPERTY" baseColumnNames="CONCEPT_PID"
+                                 constraintName="FK_CONCEPTPROP_CONCEPT"
+                                 referencedTableName="TRM_CONCEPT" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_VALUESET" baseColumnNames="RES_ID"
+                                 constraintName="FK_TRMVALUESET_RES"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_VALUESET_C_DESIGNATION" baseColumnNames="VALUESET_CONCEPT_PID"
+                                 constraintName="FK_TRM_VALUESET_CONCEPT_PID"
+                                 referencedTableName="TRM_VALUESET_CONCEPT" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_VALUESET_C_DESIGNATION" baseColumnNames="VALUESET_PID"
+                                 constraintName="FK_TRM_VSCD_VS_PID"
+                                 referencedTableName="TRM_VALUESET" referencedColumnNames="PID"/>
+
+        <addForeignKeyConstraint baseTableName="TRM_VALUESET_CONCEPT" baseColumnNames="VALUESET_PID"
+                                 constraintName="FK_TRM_VALUESET_PID"
+                                 referencedTableName="TRM_VALUESET" referencedColumnNames="PID"/>
+    </changeSet>
+</databaseChangeLog>
