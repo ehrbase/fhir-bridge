@@ -11,6 +11,8 @@ version: 2.1
 #    - runs (Java) integration tests
 #    - creates code coverage report w/ Jacoco
 #    - performes sonarcloud.io code analysis
+#    - creates a tag and pushes that to Git
+#    - Builds the Docker image and pushes that do DockerHub with appropriate tag
 
 
 workflows:
@@ -26,8 +28,22 @@ workflows:
             #         - master
             #         - develop
             #         - release
-        # - build-and-test-fhirbridge:
-        #     context: org-global
+        - build-and-test-fhirbridge:
+            context: org-global
+        - tag-version:
+              requires:
+                  - build-and-test-fhirbridge
+              filters:
+                  branches:
+                      only:
+                          - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+)$/
+        - build_and_deploy:
+              requires:
+                  - build-and-test-fhirbridge
+              filters:
+                  branches:
+                      only:
+                          - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
 
 
 
