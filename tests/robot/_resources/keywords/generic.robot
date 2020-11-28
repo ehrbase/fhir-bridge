@@ -114,3 +114,17 @@ Output Debug Info To Console
     Run Keyword If      "${OUTPUT_LEVEL}"=="verbose"    Output
     Run Keyword If      "${OUTPUT_LEVEL}"=="verbose" and ${payload}!=${None}
                         ...    Output    ${payload}
+
+
+TRACE GITHUB ISSUE
+    [Arguments]     ${GITHUB_ISSUE}
+    ...             ${not-ready}=
+    ...             ${message}=Next step fails due to a bug!
+    ...             ${loglevel}=ERROR
+
+                                                        # TODO: RENAME TO   fhir-bridge when migration finished
+                    Log    ${message} | <a href="https://github.com/ehrbase/fhir-bridge-poc/issues/${GITHUB_ISSUE}">Github ISSUE #${GITHUB_ISSUE}</a>
+                    ...    level=${loglevel}    html=True
+
+                    Set Tags    bug    GITHUB ISSUE ${GITHUB_ISSUE}
+                    Run Keyword If    '${not-ready}'=='not-ready'    Set Tags    not-ready

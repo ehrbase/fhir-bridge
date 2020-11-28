@@ -117,41 +117,47 @@ Force Tags              create    bloodpressure
 	[Template]			create blood pressure with ehr reference
     [Tags]              
 
-	# FIELD/PATH						VALUE			ISSUE	HTTP	ERROR MESSAGE    ... LOCATION
-	# 													INDEX	CODE
-	$.category							missing			0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1, but only found 0
-	$.category							${{ [] }}		0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1, but only found 0
+	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    ... LOCATION
+	# 														INDEX	CODE
+	$.category								missing			0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1, but only found 0
+	$.category								${{ [] }}		0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1, but only found 0
 	
-	# $.category						${{ {} }}		0		422    	This property must be an Array, not an Object
-	$.category							${{ {} }}		0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1, but only found 0
 
-	# $.category						${{ [{}] }}		0		422    	Object must have some content
-	$.category							${{ [{}] }}		0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1
+	# $.category							${{ {} }}		0		422    	This property must be an Array, not an Object
+	$.category								${{ {} }}		0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1, but only found 0
 
-	$.category[0].coding    			missing			0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1
-	$.category[0].coding    			${EMPTY}		0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1
 
-	$.category[0].coding[0].code    	missing    		0    	422    	This element does not match any known slice defined in the profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure
+	# $.category							${{ [{}] }}		0		422    	Object must have some content
+	$.category								${{ [{}] }}		0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1
+
+
+	$.category[0].coding    				missing			0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1
+	$.category[0].coding    				${EMPTY}		0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.category': minimum required = 1
+	$.category[0].coding[0].code    		missing    		0    	422    	This element does not match any known slice defined in the profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure
 	
-	# $.category[0].coding[0].code    	${EMPTY}    	2    	422    	@value cannot be empty
-	$.category[0].coding[0].code    	${EMPTY}    	0    	422    	This element does not match any known slice defined in the profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure
-	$.category[0].coding[0].code    	foobar    		0    	422    	This element does not match any known slice defined in the profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure
-	...																	Observation.category[0]
 
-	$.category[0].coding[0].system    	missing    		2    	422    	A code with no system has no defined meaning. A system should be provided
-	...																	Observation.category[0].coding[0]
-
-
-	# $.category[0].coding[0].system    ${EMPTY}    	3    	422    	@value cannot be empty
-	# ...																Observation.category[0].coding[0].system
-	$.category[0].coding[0].system    	${EMPTY}   		0    	422    	This element does not match any known slice defined in the profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure
-	...																	Observation.category[0]
+	# $.category[0].coding[0].code    		${EMPTY}    	2    	422    	@value cannot be empty
+	$.category[0].coding[0].code    		${EMPTY}    	0    	422    	This element does not match any known slice defined in the profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure
 	
-	$.category[0].coding[0].system    	foobar    		2    	422    	Coding.system must be an absolute reference, not a local reference
-	...																	Observation.category[0].coding[0]
+
+	$.category[0].coding[0].code    		foobar    		0    	422    	This element does not match any known slice defined in the profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure
+	...																		Observation.category[0]
+
+	$.category[0].coding[0].system    		missing    		2    	422    	A code with no system has no defined meaning. A system should be provided
+	...																		Observation.category[0].coding[0]
+
+
+	# $.category[0].coding[0].system    	${EMPTY}    	3    	422    	@value cannot be empty
+	# ...																	Observation.category[0].coding[0].system
+	$.category[0].coding[0].system    		${EMPTY}   		0    	422    	This element does not match any known slice defined in the profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure
+	...																		Observation.category[0]
 	
-	$.category[0].coding[0].system    	http://foobar.de  0    	422    	This element does not match any known slice defined in the profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure
-	...																	Observation.category[0]
+
+	$.category[0].coding[0].system    		foobar    		2    	422    	Coding.system must be an absolute reference, not a local reference
+	...																		Observation.category[0].coding[0]
+	
+	$.category[0].coding[0].system    		http://foobar.de  0    	422    	This element does not match any known slice defined in the profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure
+	...																		Observation.category[0]
 
 
 005 Create Blood Pressure Fails Due To Invalid/Missing 'component:SystolicBP'
@@ -159,142 +165,152 @@ Force Tags              create    bloodpressure
 	[Template]			create blood pressure with ehr reference
     [Tags]              
 
-	# # FIELD/PATH		VALUE		ISSUE	ERROR MESSAGE    LOCATION
-	# # 								INDEX
-	# $.component			missing		1		422    Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component': minimum required = 2, but only found 0
-	# $.component[0]		missing		0		422    Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component': minimum required = 2, but only found 1
-	# $.component[1]		missing		0		422    Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component': minimum required = 2, but only found 1
-	# $.component[1]		missing		1		422    Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.DiastolicBP.': minimum required = 1, but only found 0
-	
-	# # FIELD/PATH							VALUE		ISSUE	HTTP	ERROR MESSAGE    LOCATION
-	# $.component[0].code  					missing		2		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..code': minimum required = 1, but only found 0
-	# $.component[0].code.coding[0].system    missing    	2    	422    	A code with no system has no defined meaning. A system should be provided
-	# ...																   	Observation.component[0].code.coding[0]
-	
-	# # $.component[0].code.coding[0].system    ${EMPTY}    3    	422    	@value cannot be empty
-	# # ...																Observation.component[0].code.coding[0].system
-	# $.component[0].code.coding[0].system    ${EMPTY}    2    	422    	A code with no system has no defined meaning. A system should be provided
-	# ...																	Observation.component[0].code.coding[0]
-	
-	# $.component[0].code.coding[0].system    foobar    	2    	422    	Coding.system must be an absolute reference, not a local reference
-	# ...																	Observation.component[0].code.coding[0]
-	
-	# $.component[0].code.coding[0].system    http://f.de    1    422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.SystolicBP.': minimum required = 1, but only found 0
-	
-	
-	# $.component[0].code.coding[0].code    	missing    	1    	422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.SystolicBP.': minimum required = 1, but only found 0
-	# $.component[0].code.coding[0].code    	${EMPTY}   	1    	422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.SystolicBP.': minimum required = 1, but only found 0
-	
-	# # $.component[0].code.coding[0].code    ${123}		1    	422    Error parsing JSON: the primitive value must be a string
-	# # ...																Observation.component[0].code.coding[0].code
-	# $.component[0].code.coding[0].code    	${123}		1    	422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.SystolicBP.': minimum required = 1, but only found 0
-	# ...																	Observation
-	
-	# $.component[0].code.coding[0].code    	foobar    	1    	422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.SystolicBP.': minimum required = 1, but only found 0
+	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    LOCATION
+	# 														INDEX	CODE
+	$.component								missing			1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component': minimum required = 2, but only found 0
+	$.component[0]							missing			0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component': minimum required = 2, but only found 1
+	$.component[1]							missing			0		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component': minimum required = 2, but only found 1
+	$.component[1]							missing			1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.DiastolicBP.': minimum required = 1, but only found 0
 	
 
-	# $.component[0].valueQuantity			missing		0		422    	vs-3: If there is no a value a data absent reason must be present .value.exists.. or dataAbsentReason.exists...
-	# ...																	Observation.component[0]
+	$.component[0].code  					missing			2		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..code': minimum required = 1, but only found 0
+	$.component[0].code.coding[0].system    missing    		2    	422    	A code with no system has no defined meaning. A system should be provided
+	...																   		Observation.component[0].code.coding[0]
 	
-	# $.component[0].valueQuantity			${EMPTY}	0		422    	vs-3: If there is no a value a data absent reason must be present .value.exists.. or dataAbsentReason.exists...
-	# ...																	Observation.component[0]
+	# $.component[0].code.coding[0].system    ${EMPTY}    	3    	422    	@value cannot be empty
+	# ...																	Observation.component[0].code.coding[0].system
+	$.component[0].code.coding[0].system    ${EMPTY}    	2    	422    	A code with no system has no defined meaning. A system should be provided
+	...																		Observation.component[0].code.coding[0]
 	
-	# $.component[0].valueQuantity			${{{}}}		0		422    	vs-3: If there is no a value a data absent reason must be present .value.exists.. or dataAbsentReason.exists...
-	# ...																	Observation.component[0]
+	$.component[0].code.coding[0].system    foobar    		2    	422    	Coding.system must be an absolute reference, not a local reference
+	...																		Observation.component[0].code.coding[0]
 	
-	# $.component[0].valueQuantity.value		missing		1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..value': minimum required = 1, but only found 0
-	# ...																	Observation.component[0].value.ofType(Quantity)
+	$.component[0].code.coding[0].system    http://f.de    	1    	422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.SystolicBP.': minimum required = 1, but only found 0
 	
-	# $.component[0].valueQuantity.value		${EMPTY}	1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..value': minimum required = 1, but only found 0
-	# ...																	Observation.component[0].value.ofType(Quantity)
 	
-	# $.component[0].valueQuantity.value		${EMPTY}	1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..value': minimum required = 1, but only found 0
-	# ...																	Observation.component[0].value.ofType(Quantity)
+	$.component[0].code.coding[0].code    	missing    		1    	422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.SystolicBP.': minimum required = 1, but only found 0
+	$.component[0].code.coding[0].code    	${EMPTY}   		1    	422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.SystolicBP.': minimum required = 1, but only found 0
 	
-	# $.component[0].valueQuantity.value		${None}		1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..value': minimum required = 1, but only found 0
-	# ...																	Observation.component[0].value.ofType(Quantity)
+	# $.component[0].code.coding[0].code    ${123}			1    	422    	Error parsing JSON: the primitive value must be a string
+	# ...																	Observation.component[0].code.coding[0].code
+	$.component[0].code.coding[0].code    	${123}			1    	422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.SystolicBP.': minimum required = 1, but only found 0
+	...																		Observation
 	
+	$.component[0].code.coding[0].code    	foobar    		1    	422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.SystolicBP.': minimum required = 1, but only found 0
+
+
+	$.component[0].valueQuantity			missing			0		422    	vs-3: If there is no a value a data absent reason must be present .value.exists.. or dataAbsentReason.exists...
+	...																		Observation.component[0]
+	
+	$.component[0].valueQuantity			${EMPTY}		0		422    	vs-3: If there is no a value a data absent reason must be present .value.exists.. or dataAbsentReason.exists...
+	...																		Observation.component[0]
+	
+	$.component[0].valueQuantity			${{{}}}			0		422    	vs-3: If there is no a value a data absent reason must be present .value.exists.. or dataAbsentReason.exists...
+	...																		Observation.component[0]
+	
+	$.component[0].valueQuantity.value		missing			1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..value': minimum required = 1, but only found 0
+	...																		Observation.component[0].value.ofType(Quantity)
+	
+	$.component[0].valueQuantity.value		${EMPTY}		1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..value': minimum required = 1, but only found 0
+	...																		Observation.component[0].value.ofType(Quantity)
+	
+	$.component[0].valueQuantity.value		${EMPTY}		1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..value': minimum required = 1, but only found 0
+	...																		Observation.component[0].value.ofType(Quantity)
+	
+	$.component[0].valueQuantity.value		${None}			1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..value': minimum required = 1, but only found 0
+	...																		Observation.component[0].value.ofType(Quantity)
+	
+
 	# # ISSUTE REPORTED --> https://github.com/ehrbase/fhir-bridge-poc/issues/35
 	# $.component[0].valueQuantity.value		107			0		422    	Error parsing JSON: the primitive value must be a number
 	# ...																	Observation.component[0].value[x].value
 
 
-
-	# # REPORTED ISSUE --> https://github.com/ehrbase/fhir-bridge-poc/issues/36
-	# $.component[0].valueQuantity.value		${1000}			0		422    There was a problem saving the compositionWrong Status code. Expected: .200, 201, 204.. Got: 400. Error message.*value is not within interval, expected:0.0 <= 1000.0 < 1000.0.*Bad Request.*
-	# $.component[0].valueQuantity.value		${-1}			0		422    There was a problem saving the compositionWrong Status code. Expected: .200, 201, 204.. Got: 400. Error message.*value is not within interval, expected:0.0 <= -1.0 < 1000.0.*Bad Request.*
-	
-
-
-	$.component[0].valueQuantity.value		foobar		0		400    	.*Invalid attribute value .*foobar.* Character f is neither a decimal digit number.*
+	$.component[0].valueQuantity.value		${1000}			0		422    .*value is not within interval, expected:0.0 <= 1000.0 < 1000.0.*Bad Request.*
+	$.component[0].valueQuantity.value		${1000.09}		0		422    .*value is not within interval, expected:0.0 <= 1000.09 < 1000.0.*Bad Request.*
+	$.component[0].valueQuantity.value		${-1}			0		422    .*value is not within interval, expected:0.0 <= -1.0 < 1000.0.*Bad Request.*
+	$.component[0].valueQuantity.value		100,7			0		400    .* Invalid attribute value .*100,7.*: Character , is neither a decimal digit number, decimal point, nor .*e.* notation exponential mark.
+	$.component[0].valueQuantity.value		foobar			0		400    	.*Invalid attribute value .*foobar.* Character f is neither a decimal digit number, decimal point, nor .*e.* notation exponential mark.
 	# ...																	Observation.component[0].value.ofType(Quantity).value
 	
-	$.component[0].valueQuantity.unit		missing		1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..unit': minimum required = 1, but only found 0
-	...																	Observation.component[0].value.ofType(Quantity)
+
+	$.component[0].valueQuantity.unit		missing			1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..unit': minimum required = 1, but only found 0
+	...																		Observation.component[0].value.ofType(Quantity)
 	
-	$.component[0].valueQuantity.unit		${EMPTY}	1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..unit': minimum required = 1, but only found 0
-	...																	Observation.component[0].value.ofType(Quantity)
+	$.component[0].valueQuantity.unit		${EMPTY}		1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..unit': minimum required = 1, but only found 0
+	...																		Observation.component[0].value.ofType(Quantity)
 	
 
-
-
-	# TODO: CREATE ISSUE???  gibt aktuell ein 201 zurueck
-	# $.component[0].valueQuantity.unit		${123}		0		422    	Error parsing JSON: the primitive value must be a string
+	# # ISSUTE REPORTED --> https://github.com/ehrbase/fhir-bridge-poc/issues/35
+	# $.component[0].valueQuantity.unit		${123}			0		422    	Error parsing JSON: the primitive value must be a string
 	# ...																	Observation.component[0].value[x].unit
 	
 
-
-	$.component[0].valueQuantity.system		missing		3		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..system': minimum required = 1, but only found 0
-	...																	Observation.component[0].value.ofType(Quantity)
+	$.component[0].valueQuantity.system		missing			3		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..system': minimum required = 1, but only found 0
+	...																		Observation.component[0].value.ofType(Quantity)
 	
 
 	# $.component[0].valueQuantity.system		${EMPTY}	2		422    	@value cannot be empty
 	# ...																	Observation.component[0].value.ofType(Quantity).system
-	$.component[0].valueQuantity.system		${EMPTY}	3		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..system': minimum required = 1, but only found 0
-	...																	Observation.component[0].value.ofType(Quantity)
+	$.component[0].valueQuantity.system		${EMPTY}		3		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..system': minimum required = 1, but only found 0
+	...																		Observation.component[0].value.ofType(Quantity)
 
 
+	$.component[0].valueQuantity.system		foobar			2		422    	Value is 'foobar' but must be 'http://unitsofmeasure.org'
+	...																		Observation.component[0].value.ofType(Quantity).system
 
-	$.component[0].valueQuantity.system		foobar		2		422    	Value is 'foobar' but must be 'http://unitsofmeasure.org'
-	...																	Observation.component[0].value.ofType(Quantity).system
-
-	
 	
 	# $.component[0].valueQuantity.system		${123}		0		422    	Error parsing JSON: the primitive value must be a string
 	# ...																	Observation.component[0].value[x].system
-	$.component[0].valueQuantity.system		${123}		2		422    	Value is '123' but must be 'http://unitsofmeasure.org'
-	...																	Observation.component[0].value.ofType(Quantity).system
+	$.component[0].valueQuantity.system		${123}			2		422    	Value is '123' but must be 'http://unitsofmeasure.org'
+	...																		Observation.component[0].value.ofType(Quantity).system
 
 	
 	
-	$.component[0].valueQuantity.code		missing		1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..code': minimum required = 1, but only found 0
-	...																	Observation.component[0].value.ofType(Quantity)
+	$.component[0].valueQuantity.code		missing			1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..code': minimum required = 1, but only found 0
+	...																		Observation.component[0].value.ofType(Quantity)
 
 	
-	
-	# $.component[0].valueQuantity.code		${EMPTY}	1		422    	@value cannot be empty
+	# $.component[0].valueQuantity.code		${EMPTY}		1		422    	@value cannot be empty
 	# ...																	Observation.component[0].value.ofType(Quantity).code
-	$.component[0].valueQuantity.code		${EMPTY}	1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..code': minimum required = 1, but only found 0
-	...																	Observation.component[0].value.ofType(Quantity)
+	$.component[0].valueQuantity.code		${EMPTY}		1		422    	Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.0..value.ofType.Quantity..code': minimum required = 1, but only found 0
+	...																		Observation.component[0].value.ofType(Quantity)
 
-	
-	
-	
-	# $.component[0].valueQuantity.code		${123}		0		422    	Error parsing JSON: the primitive value must be a string
+		
+	# $.component[0].valueQuantity.code		${123}			0		422    	Error parsing JSON: the primitive value must be a string
 	# ...																	Observation.component[0].value[x].code
-	$.component[0].valueQuantity.code		${123}		1		422    	Value is '123' but must be 'mm.Hg.'
-	...																	Observation.component[0].value.ofType(Quantity).code
+	$.component[0].valueQuantity.code		${123}			1		422    	Value is '123' but must be 'mm.Hg.'
+	...																		Observation.component[0].value.ofType(Quantity).code
 
 	
-	
-	$.component[0].valueQuantity.code		foobar		1		422    	Value is 'foobar' but must be 'mm.Hg.'
-	...																	Observation.component[0].value.ofType(Quantity).code
+	$.component[0].valueQuantity.code		foobar			1		422    	Value is 'foobar' but must be 'mm.Hg.'
+	...																		Observation.component[0].value.ofType(Quantity).code
+
+
+
+
+
+005 BUT TRACE - Create Blood Pressure Fails Due To Invalid/Missing 'component:SystolicBP'
+	[Documentation]     TEMP TC FOR BUG TRACING
+	...					TODO: remove this TC and uncomment related part(s) in table above when issue is fixed
+	[Template]			create blood pressure with ehr reference
+    [Tags]				not-ready   35
+
+	$.component[0].valueQuantity.unit		${123}			0		422    	Error parsing JSON: the primitive value must be a string
+	...																		Observation.component[0].value[x].unit
+
+	$.component[0].valueQuantity.value		113				0		422    	Error parsing JSON: the primitive value must be a number
+	...
+	[Teardown]    TRACE GITHUB ISSUE    35
+
+
+
 
 
 006 Create Blood Pressure Fails Due To Invalid/Missing 'component:DiastolicBP'
 	[Documentation]     TODO
 	[Template]			create blood pressure with ehr reference
-    [Tags]              not-ready    xxx
+    [Tags]              not-ready    refactoring    WIP
 
 	# FIELD/PATH							VALUE		ISSUE	HTTP	ERROR MESSAGE    LOCATION
 	$.component[1].code  					missing		1		422		Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, Element 'Observation.component.DiastolicBP.': minimum required = 1, but only found 0
@@ -435,10 +451,10 @@ generate payload from example json
 
 						# comment: delete field/object that has value 'missing' in test case table 
 						Run Keyword And Return If   $value=="missing"
-						...    Run Keyword    Delete Object From Json    ${payload}    ${json_path}
-							Output Debug Info To Console    ${payload}
+						...    	Run Keyword    Delete Object From Json    ${payload}    ${json_path}
 
 						# comment: set value from data table in test case
 						Update Value To Json    ${payload}    ${json_path}    ${value}
+						Output Debug Info To Console    ${payload}
 
 	[Return]			${payload}
