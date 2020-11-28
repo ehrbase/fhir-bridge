@@ -34,7 +34,8 @@ class PatientIT extends AbstractSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age, Element 'Patient.extension[1].extension[dateTimeOfDocumentation]': minimum required = 1, but only found 0", exception.getMessage());
+        assertEquals("HTTP 422 : Profile https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age, " +
+                "Element 'Patient.extension[1].extension[dateTimeOfDocumentation]': minimum required = 1, but only found 0", exception.getMessage());
     }
 
     @Test
@@ -43,6 +44,7 @@ class PatientIT extends AbstractSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : Default profile is not supported", exception.getMessage());
+        assertEquals("HTTP 422 : Default profile is not supported for Patient. One of the following profiles is expected: " +
+                "[https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient]", exception.getMessage());
     }
 }
