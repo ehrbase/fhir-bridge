@@ -470,7 +470,7 @@ commands:
         steps:
             - add_ssh_keys:
                   fingerprints:
-                      - 0c:dd:08:d5:13:cf:20:3c:25:c4:f3:59:a8:a5:c4:36
+                      - 09:77:7b:61:25:16:a0:19:a7:c4:ba:62:11:0b:9a:29
             - run:
                   name: Configure GIT
                   command: |
