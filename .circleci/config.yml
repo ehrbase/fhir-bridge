@@ -31,19 +31,21 @@ workflows:
         - build-and-test-fhirbridge:
             context: org-global
         - tag-version:
-              requires:
-                  - build-and-test-fhirbridge
-              filters:
-                  branches:
-                      only:
-                          - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+)$/
+            context: org-global
+            requires:
+                - build-and-test-fhirbridge
+            filters:
+                branches:
+                    only:
+                        - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+)$/
         - build_and_deploy:
-              requires:
-                  - build-and-test-fhirbridge
-              filters:
-                  branches:
-                      only:
-                          - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
+            context: org-global
+            requires:
+                - build-and-test-fhirbridge
+            filters:
+                branches:
+                    only:
+                        - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
 
 
 
@@ -157,8 +159,8 @@ jobs:
                       echo "Publishing Docker image with following tag: ${TAG}"
                       echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
                       ./mvnw clean install -DskipTests -Djdk.tls.client.protocols=TLSv1.2
-                      docker build -t $DOCKER_USER/fhir-bridge:$TAG .
-                      docker push $DOCKER_USER/fhir-bridge:$TAG
+                      docker build -t ehrbaseorg/fhir-bridge-poc:$TAG .
+                      docker push ehrbaseorg/fhir-bridge-poc:$TAG
 
 
 
@@ -344,13 +346,13 @@ commands:
                 name: Generate Cache Checksum for FHIR-bridge Dependencies
                 command: find . -name 'pom.xml' | sort | xargs cat > /tmp/fhirbridge_maven_cache_seed
             - restore_cache:
-                key: fhirbridge-
+                key: fhirbridge-v1
 
 
     cache-in-fhirbridge-m2-dependencies:
         steps:
             - save_cache:
-                key: fhirbridge-{{ checksum "/tmp/fhirbridge_maven_cache_seed" }}
+                key: fhirbridge-v1-{{ checksum "/tmp/fhirbridge_maven_cache_seed" }}
                 paths:
                 - ~/.m2
     
