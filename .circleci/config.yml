@@ -28,13 +28,12 @@ workflows:
             #         - master
             #         - develop
             #         - release
-        # - build-and-test-fhirbridge:
-        #     context: org-global
+        - build-and-test-fhirbridge:
+            context: org-global
         - tag-version:
             context: org-global
             requires:
-                # - build-and-test-fhirbridge
-                - build-and-quicktest-fhirbridge
+                - build-and-test-fhirbridge
             filters:
                 branches:
                     only:
@@ -42,8 +41,7 @@ workflows:
         - build_and_deploy:
             context: org-global
             requires:
-                # - build-and-test-fhirbridge
-                - build-and-quicktest-fhirbridge
+                - build-and-test-fhirbridge
             filters:
                 branches:
                     only:
