@@ -125,7 +125,7 @@ jobs:
                       The version number is parsed from the branch name, for example release/v1.0.5 will create a tag v1.0.5
                       and set the version number in pom.xml to same version.
                   command: |
-                      VERSION_NUMBER="$(echo $CIRCLE_BRANCH | awk -F'/' '{print $2;}')"
+                      VERSION_NUMBER="$(echo $CIRCLE_BRANCH | awk -F'/v' '{print $2;}')"
                       echo "Updating the application version from the branch to ${VERSION_NUMBER}"
                       ./mvnw versions:set -DnewVersion=$VERSION_NUMBER versions:commit
 
