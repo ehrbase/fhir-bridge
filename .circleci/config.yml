@@ -130,7 +130,7 @@ jobs:
                       ./mvnw versions:set -DnewVersion=$VERSION_NUMBER versions:commit
 
                       git commit -am "updated version to ${VERSION_NUMBER} [skip ci]"
-                      git tag -a $VERSION_NUMBER -m "fhir-bridge release version ${VERSION_NUMBER}"
+                      git tag -a v$VERSION_NUMBER -m "fhir-bridge release version v${VERSION_NUMBER}"
                       git push --set-upstream origin $CIRCLE_BRANCH
                       git push origin --tags
 
