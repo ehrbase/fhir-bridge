@@ -163,8 +163,8 @@ jobs:
                       echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
                       #   ./mvnw clean install -DskipTests -Djdk.tls.client.protocols=TLSv1.2
                       #   docker build -t ehrbaseorg/fhir-bridge-poc:$TAG .
-                      mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ehrbaseorg/fhir-bridge-poc:$TAG -DskipTests
-                      docker push ehrbaseorg/fhir-bridge-poc:$TAG
+                      mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ehrbaseorg/fhir-bridge:$TAG -DskipTests
+                      docker push ehrbaseorg/fhir-bridge:$TAG
 
 
 
