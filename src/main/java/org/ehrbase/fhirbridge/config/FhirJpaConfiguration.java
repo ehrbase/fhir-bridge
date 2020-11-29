@@ -23,6 +23,8 @@ import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.SearchParameter;
 import org.hl7.fhir.r4.model.ValueSet;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -35,6 +37,9 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * {@link Configuration Configuration} for HAPI FHIR JPA server.
+ */
 @Configuration
 @EnableConfigurationProperties(FhirJpaProperties.class)
 @Import({BaseR4Config.class})
@@ -100,12 +105,28 @@ public class FhirJpaConfiguration {
         return observationDao;
     }
 
+    @Bean(name = "myProcedureDaoR4")
+    public IFhirResourceDao<Procedure> procedureDao(FhirContext context) {
+        JpaResourceDao<Procedure> procedureDao = new JpaResourceDao<>();
+        procedureDao.setResourceType(Procedure.class);
+        procedureDao.setContext(context);
+        return procedureDao;
+    }
+
     @Bean(name = "myAuditEventDaoR4")
     public IFhirResourceDao<AuditEvent> auditEventDao(FhirContext context) {
         JpaResourceDao<AuditEvent> auditEventDao = new JpaResourceDao<>();
         auditEventDao.setResourceType(AuditEvent.class);
         auditEventDao.setContext(context);
         return auditEventDao;
+    }
+
+    @Bean(name = "myPatientDaoR4")
+    public IFhirResourceDao<Patient> patientDao(FhirContext context) {
+        JpaResourceDao<Patient> patientDao = new JpaResourceDao<>();
+        patientDao.setResourceType(Patient.class);
+        patientDao.setContext(context);
+        return patientDao;
     }
 
     @Bean(name = "myCodeSystemDaoR4")

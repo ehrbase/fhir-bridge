@@ -1,0 +1,32 @@
+version: '3'
+services:
+  ehrbase:
+    image: ehrbaseorg/ehrbase:latest
+    ports:
+      - 8080:8080
+    networks:
+      - ehrbase-network
+    environment:
+      DB_URL: jdbc:postgresql://ehrbase-db:5432/ehrbase
+      DB_USER: ehrbase
+      DB_PASS: ehrbase
+      AUTH_TYPE: BASIC
+      AUTH_USER: ehrbase-user
+      AUTH_PASSWORD: SuperSecretPassword
+      SYSTEM_NAME: local.ehrbase.org
+    depends_on:
+      - ehrbase-db
+    restart: on-failure
+  ehrbase-db:
+    image: ehrbaseorg/ehrbase-postgres:latest
+    ports:
+      - 5432:5432
+    networks:
+      - ehrbase-network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      EHRBASE_USER: ehrbase
+      EHRBASE_PASSWORD: ehrbase
+networks:
+  ehrbase-network: { }
