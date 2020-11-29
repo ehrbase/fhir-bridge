@@ -28,12 +28,13 @@ workflows:
             #         - master
             #         - develop
             #         - release
-        - build-and-test-fhirbridge:
-            context: org-global
+        # - build-and-test-fhirbridge:
+        #     context: org-global
         - tag-version:
             context: org-global
             requires:
-                - build-and-test-fhirbridge
+                # - build-and-test-fhirbridge
+                - build-and-quicktest-fhirbridge
             filters:
                 branches:
                     only:
@@ -41,7 +42,8 @@ workflows:
         - build_and_deploy:
             context: org-global
             requires:
-                - build-and-test-fhirbridge
+                # - build-and-test-fhirbridge
+                - build-and-quicktest-fhirbridge
             filters:
                 branches:
                     only:
@@ -143,6 +145,7 @@ jobs:
                   password: $DOCKER_HUB_PASSWORD
         steps:
             - checkout
+            - install-maven
             - configure-git-for-ci-bot
             - setup_remote_docker:
                   version: 19.03.13
@@ -158,8 +161,9 @@ jobs:
                       fi
                       echo "Publishing Docker image with following tag: ${TAG}"
                       echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
-                      ./mvnw clean install -DskipTests -Djdk.tls.client.protocols=TLSv1.2
-                      docker build -t ehrbaseorg/fhir-bridge-poc:$TAG .
+                      #   ./mvnw clean install -DskipTests -Djdk.tls.client.protocols=TLSv1.2
+                      #   docker build -t ehrbaseorg/fhir-bridge-poc:$TAG .
+                      mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ehrbaseorg/fhir-bridge-poc:$TAG -DskipTests
                       docker push ehrbaseorg/fhir-bridge-poc:$TAG
 
 
