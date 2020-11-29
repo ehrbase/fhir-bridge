@@ -290,7 +290,7 @@ Force Tags              create    bloodpressure
 
 
 
-005 BUT TRACE - Create Blood Pressure Fails Due To Invalid/Missing 'component:SystolicBP'
+005 BUG TRACE - Create Blood Pressure Fails Due To Invalid/Missing 'component:SystolicBP'
 	[Documentation]     TEMP TC FOR BUG TRACING
 	...					TODO: remove this TC and uncomment related part(s) in table above when issue is fixed
 	[Template]			create blood pressure with ehr reference
