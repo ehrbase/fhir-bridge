@@ -1,30 +1,45 @@
 fhir-bridge:
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
+    template:
+      prefix: classpath:/opt/
 spring:
   application:
-    name: FHIR Bridge PoC
+    name: FHIR Bridge
   batch:
     job:
       enabled: false
   jpa:
+    hibernate:
+      ddl-auto: validate
     open-in-view: false
     properties:
       hibernate.search.default.indexBase: ${java.io.tmpdir}/fhir-bridge-poc/lucene
       hibernate.search.lucene_version: LUCENE_CURRENT
       hibernate.search.model_mapping: ca.uhn.fhir.jpa.search.LuceneSearchMappingFactory
+  liquibase:
+    database-change-log-table: DATABASE_CHANGELOG
+    database-change-log-lock-table: DATABASE_CHANGELOG_LOCK
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+  messages:
+    basename: messages/messages
+    use-code-as-default-message: true
 ipf:
   atna:
     audit-enabled: true
     audit-repository-host: localhost
     audit-repository-port: 3001
+  fhir:
+    fhir-version: r4
 server:
   port: 8888
   servlet:
-    context-path: /fhir-bridge-poc
+    context-path: /fhir-bridge
 logging:
   level:
     ca.uhn.fhir: warn
+    com.zaxxer.hikari: warn
+    liquibase: warn
     org.apache.camel: warn
     org.hibernate: warn
     org.openehealth.ipf: warn

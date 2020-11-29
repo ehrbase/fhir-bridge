@@ -2,6 +2,9 @@ package org.ehrbase.fhirbridge.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * {@link ConfigurationProperties ConfigurationProperties} to configure HAPI FHIR JPA server.
+ */
 @ConfigurationProperties(prefix = "fhir-bridge.fhir.jpa")
 public class FhirJpaProperties {
 

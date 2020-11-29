@@ -4,36 +4,41 @@ import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.client.openehrclient.OpenEhrClientConfig;
 import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
 import org.ehrbase.client.templateprovider.TemplateProvider;
-import org.ehrbase.fhirbridge.ehr.ClasspathTemplateProvider;
+import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * {@link Configuration Configuration} for EHRbase SDK.
+ */
 @Configuration
 @EnableConfigurationProperties(EhrbaseProperties.class)
+@Import(EhrbaseTemplateInitializer.class)
 public class EhrbaseConfiguration {
 
-    private final EhrbaseProperties ehrbaseProperties;
+    private final EhrbaseProperties properties;
 
-    public EhrbaseConfiguration(EhrbaseProperties ehrbaseProperties) {
-        this.ehrbaseProperties = ehrbaseProperties;
+    public EhrbaseConfiguration(EhrbaseProperties properties) {
+        this.properties = properties;
     }
 
     @Bean
     public OpenEhrClientConfig restClientConfig() throws URISyntaxException {
-        return new OpenEhrClientConfig(new URI(ehrbaseProperties.getBaseUrl()));
+        return new OpenEhrClientConfig(new URI(properties.getBaseUrl()));
     }
 
     @Bean
     public TemplateProvider templateProvider() {
-        return new ClasspathTemplateProvider();
+        return new ResourceTemplateProvider(properties.getTemplate().getPrefix());
     }
 
     @Bean
-    public OpenEhrClient restClient(OpenEhrClientConfig restClientConfig, TemplateProvider templateProvider) {
+    public OpenEhrClient openEhrClient(OpenEhrClientConfig restClientConfig, TemplateProvider templateProvider) {
         return new DefaultRestClient(restClientConfig, templateProvider);
     }
 }
