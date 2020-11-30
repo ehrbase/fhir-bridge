@@ -70,7 +70,7 @@
   "dataAbsentReason": {
        "coding":  [
           {
-              "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+              "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
               "code": "unknown",
               "display": "unknown"
           }
