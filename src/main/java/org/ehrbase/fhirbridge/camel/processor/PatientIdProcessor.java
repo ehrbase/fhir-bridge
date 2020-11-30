@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.camel;
+package org.ehrbase.fhirbridge.camel.processor;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;

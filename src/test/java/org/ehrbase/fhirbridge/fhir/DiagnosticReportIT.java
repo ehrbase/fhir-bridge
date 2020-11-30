@@ -1,8 +1,6 @@
 package org.ehrbase.fhirbridge.fhir;
 
-import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.api.MethodOutcome;
-import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
@@ -36,7 +34,8 @@ class DiagnosticReportIT extends AbstractSetupIT{
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : Default profile is not supported", exception.getMessage());
+        assertEquals("HTTP 422 : Default profile is not supported for DiagnosticReport. One of the following profiles is expected: " +
+                "[https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab]", exception.getMessage());
     }
 
     @Test

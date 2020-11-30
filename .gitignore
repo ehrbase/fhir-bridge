@@ -4,11 +4,10 @@ target
 
 *-local.yml
 
-
-# Robot Framework
-tests/results
-
-
 # Python
 venv
 *.venv
+.pytest_cache
+
+# Robot Tests
+**results**

@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.camel;
+package org.ehrbase.fhirbridge.camel.processor;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
@@ -6,6 +6,7 @@ import ca.uhn.fhir.validation.FhirValidator;
 import ca.uhn.fhir.validation.ValidationResult;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.CanonicalType;
 import org.hl7.fhir.r4.model.OperationOutcome;
@@ -74,7 +75,7 @@ public class DefaultCreateResourceRequestValidator implements Processor, Message
                 operationOutcome.addIssue(new OperationOutcomeIssueComponent()
                         .setSeverity(IssueSeverity.FATAL)
                         .setCode(IssueType.VALUE)
-                        .setDiagnostics(messages.getMessage("validation.profile.defaultNotSupported"))
+                        .setDiagnostics(messages.getMessage("validation.profile.defaultNotSupported", new Object[]{resourceType, Profile.getAllSupportedProfileUris(resource)}))
                         .addExpression(resource.getResourceType() + ".meta.profile[]"));
             } else if (supportedProfiles.size() > 1) {
                 for (int i = 0; i < declaredProfiles.size(); i++) {

@@ -407,11 +407,11 @@ update Code Text
                         ...    Update Value To Json    ${payload}    $.code.text    ${codetext}
 
 update Subject
-    [Arguments]         ${subject}    ${reference}
+    [Arguments]         ${subject}    ${subjectvalue}
 
                         # Run Keyword only if subject is available
                         Run Keyword And Return If    $subject=="true"
-                        ...    update Subject value    ${reference}
+                        ...    update Subject value    ${subjectvalue}
 
                         # Run Keyword only if subject is not available
                         Run Keyword And Return If    $subject=="false"

@@ -6,6 +6,7 @@ import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.Resource;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -84,6 +85,13 @@ public enum Profile {
             }
         }
         return null;
+    }
+
+    public static <T extends Resource> Collection<String> getAllSupportedProfileUris(T resource) {
+        return Arrays.stream(values())
+                .filter(profile -> profile.getResourceType().isAssignableFrom(resource.getClass()))
+                .map(Profile::getUri)
+                .collect(Collectors.toList());
     }
 
     public String getUri() {
