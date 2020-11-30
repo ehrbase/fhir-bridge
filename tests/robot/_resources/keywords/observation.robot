@@ -63,20 +63,11 @@ validate response - 422 (profile not supported)
 
 
 validate response - 422 (with error message)
-<<<<<<< HEAD
-    [Arguments]    ${issue_index}    ${error_message}    ${location}
-    Integer     response status    422
-
-    String      response body resourceType    OperationOutcome
-    String      response body issue ${issue_index} diagnostics
-    ...         pattern=${error_message}
-=======
     [Arguments]    ${issue_index}    ${http_status_code}    ${error_message}    ${location}=${None}
     Integer     response status    ${http_status_code}
 
     String      response body resourceType    OperationOutcome
     String      response body issue ${issue_index} diagnostics    pattern=${error_message}
->>>>>>> develop
     Run Keyword If    $location!=None    String    response body issue ${issue_index} location 0
     ...         ${location}
 
