@@ -63,12 +63,20 @@ validate response - 422 (profile not supported)
 
 
 validate response - 422 (with error message)
+<<<<<<< HEAD
     [Arguments]    ${issue_index}    ${error_message}    ${location}
     Integer     response status    422
 
     String      response body resourceType    OperationOutcome
     String      response body issue ${issue_index} diagnostics
     ...         pattern=${error_message}
+=======
+    [Arguments]    ${issue_index}    ${http_status_code}    ${error_message}    ${location}=${None}
+    Integer     response status    ${http_status_code}
+
+    String      response body resourceType    OperationOutcome
+    String      response body issue ${issue_index} diagnostics    pattern=${error_message}
+>>>>>>> develop
     Run Keyword If    $location!=None    String    response body issue ${issue_index} location 0
     ...         ${location}
 
@@ -127,141 +135,75 @@ get coronavirus lab results
 
 
 create blood pressure
-    # [Arguments]         ${fhir_resource}
-
-    # ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-    #                     # Output    ${payload}
-    #                     Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    # &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-    #                     Output Debug Info To Console
     [Arguments]         ${example_json}
-    # post fhir resource  Blood Pressure    ${example_json}
     POST /Observation with ehr reference    Blood Pressure    ${example_json}
 
 
 create body temperature
-    [Arguments]         ${fhir_resource}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-                        Output Debug Info To Console
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Body Temperature    ${example_json}
 
 
 create FIO2
-    [Arguments]         ${fhir_resource}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-                        Output Debug Info To Console
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    FIO2    ${example_json}
 
 
 create heart rate
-    [Arguments]         ${fhir_resource}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-                        Output Debug Info To Console
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Hear Rate    ${example_json}
 
 
 create observation lab
-    [Arguments]         ${fhir_resource}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-                        Output Debug Info To Console
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Observation Lab    ${example_json}
 
 
 create sofa score
-    [Arguments]         ${fhir_resource}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-                        Output Debug Info To Console
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Sofa Score    ${example_json}
 
 
 create observation
-    [Arguments]         ${fhir_resource}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-                        Output Debug Info To Console
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    ???    ${example_json}
 
 
 create coronavirus lab result
-    [Arguments]         ${fhir_resource}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-                        Output Debug Info To Console
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Coronavirus Lab Result    ${example_json}
 
 
 create body height
-    [Arguments]         ${fhir_resource}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-                        Output Debug Info To Console
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Body Height    ${example_json}
 
 
 create pregnancy status
-    [Arguments]         ${fhir_resource}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-                        Output Debug Info To Console
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Pregnancy Status    ${example_json}
 
 
 create frailty scale score
-    [Arguments]         ${fhir_resource}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-                        Output Debug Info To Console
-
-
-# [ FAIL CREATING ]
-create blood pressure without ehr reference
     [Arguments]         ${example_json}
-    # post fhir resource with fake subject reference    Blood Pressure    ${example_json}
-    POST /Observation with fake ehr reference    Blood Pressure    ${example_json}
+    POST /Observation with ehr reference    Frailty Scale Score    ${example_json}
+
+
+# # [ FAIL CREATING ]
+# create blood pressure without ehr reference
+#     [Arguments]         ${example_json}
+#     # POST /Observation with fake ehr reference    Blood Pressure    ${example_json} 
+#     POST /Observation w/o ehr reference    Blood Pressure    ${example_json}
+
+
+
 
 
 # MAIN HTTP METHOD AND ENDPOINT
 POST /Observation
     [Arguments]         ${fhir_resource_name}    ${payload}
 
-    Log To Console      POSTING '${{$fhir_resource_name.upper()}}' OBSERVATION
+    Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' OBSERVATION
     &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
                         Output Debug Info To Console
 
@@ -270,47 +212,44 @@ POST /Observation with ehr reference
     [Arguments]         ${fhir_resource_name}    ${example_json}
 
     ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${example_json}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
+                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
+                        Output Debug Info To Console    ${payload}
                         POST /Observation    ${fhir_resource_name}    ${payload}
 
 
 POST /Observation with fake ehr reference
-    [Documentation]     Uses the hardcoded ehr reference in example_json (which does not exist
-    ...                 in EHRbase and thus can be considered fake.
+    [Documentation]     Injects random uuid as ehr reference into example_json. Since it does not exist
+    ...                 in EHRbase it can be considered fake reference.
     [Arguments]         ${fhir_resource_name}    ${example_json}
 
     ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${example_json}
-                        # Output    ${payload}
+                        Update Value To Json    ${payload}    $.subject.identifier.value    ${{str(uuid.uuid4())}}
+                        Output Debug Info To Console    ${payload}
                         POST /Observation    ${fhir_resource_name}    ${payload}
 
 
-# post fhir resource
-#     [Arguments]         ${fhir_resource}    ${example_json}
+POST /Observation w/o ehr reference
+    [Documentation]     Deletes subject property form example_json before posting the payload.
+    ...                 This makes the payload invalid since it doesn't have an ehr reference.
+    [Arguments]         ${fhir_resource_name}    ${example_json}
 
-#     Log To Console      POSTING OBSERVATION: ${fhir_resource}
-#     ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${example_json}
-#                         # Output    ${payload}
-#                         Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-#     &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-#                         Output Debug Info To Console
-
-
-# post fhir resource with fake subject reference
-#     [Arguments]         ${fhir_resource}    ${example_json}
-
-#     ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${example_json}
-#                         # Output    ${payload}
-
-#     &{resp}             POST    ${BASE_URL}/Observation    body=${payload}
-#                         Output Debug Info To Console
+    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${example_json}
+                        Delete Object From Json    ${payload}    $.subject
+                        Output Debug Info To Console    ${payload}
+                        POST /Observation    ${fhir_resource_name}    ${payload}
 
 
 create Observation Heart Rate JSON
-    [Arguments]         ${resourceType}    ${ID}    ${meta}    ${profile}    ${status}     ${Identifieravailable}    ${Identifiercodingsystem}    ${Identifiercodingcode}    ${Identifiersystem}    ${Identifiervalue}    ${Identifierassigner}    ${Identifierreference}    ${categoryavailable}    ${categorycodingavailable}    ${categorysystem}    ${categorycode}    ${codeavailable}    ${codecodingavailable}    ${code0system}    ${code0code}    ${code0display}    ${code1system}    ${code1code}    ${code1display}    ${codetext}    ${subject}    ${subjectvalue}    ${effectivedatetime}    ${vQavailable}    ${vQvalue}    ${vQunit}    ${vQsystem}    ${vQcode}    ${dataabsentreason}    ${responsecode}    ${diagnosticINDEX}    ${diagnosticsENG}    ${diagnosticsDE}
+    [Arguments]         ${resourceType}    ${ID}    ${meta}    ${profile}    ${status}     ${Identifieravailable}
+    ...                 ${Identifiercodingsystem}    ${Identifiercodingcode}    ${Identifiersystem}
+    ...                 ${Identifiervalue}    ${Identifierassigner}    ${Identifierreference}
+    ...                 ${categoryavailable}    ${categorycodingavailable}    ${categorysystem}    ${categorycode}
+    ...                 ${codeavailable}    ${codecodingavailable}    ${code0system}    ${code0code}    ${code0display}
+    ...                 ${code1system}    ${code1code}    ${code1display}    ${codetext}    ${subject}    ${subjectvalue}
+    ...                 ${effectivedatetime}    ${vQavailable}    ${vQvalue}    ${vQunit}    ${vQsystem}    ${vQcode}
+    ...                 ${dataabsentreason}    ${responsecode}    ${diagnosticINDEX}    ${diagnosticsENG}    ${diagnosticsDE}
 
-                        prepare new request session  Prefer=return=representation
+                        prepare new request session    Prefer=return=representation
 
     &{resp}             Run Keywords
                         ...    ehr.create new ehr               000_ehr_status.json                             AND

@@ -7,7 +7,7 @@ public final class AqlConstants {
 
     public static final String AQL_QUERY = "CamelEhrAqlQuery";
 
-    public static final String AQL_ROW_COUNT = "CamelEhrAqlRowCount";
+    public static final String ROW_MAPPER = "CamelEhrAqlRowMapper";
 
     private AqlConstants() {
     }

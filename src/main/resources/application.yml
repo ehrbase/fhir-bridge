@@ -10,11 +10,17 @@ spring:
     job:
       enabled: false
   jpa:
+    hibernate:
+      ddl-auto: validate
     open-in-view: false
     properties:
       hibernate.search.default.indexBase: ${java.io.tmpdir}/fhir-bridge-poc/lucene
       hibernate.search.lucene_version: LUCENE_CURRENT
       hibernate.search.model_mapping: ca.uhn.fhir.jpa.search.LuceneSearchMappingFactory
+  liquibase:
+    database-change-log-table: DATABASE_CHANGELOG
+    database-change-log-lock-table: DATABASE_CHANGELOG_LOCK
+    change-log: classpath:/db/changelog/db.changelog-master.xml
   messages:
     basename: messages/messages
     use-code-as-default-message: true
@@ -33,6 +39,7 @@ logging:
   level:
     ca.uhn.fhir: warn
     com.zaxxer.hikari: warn
+    liquibase: warn
     org.apache.camel: warn
     org.hibernate: warn
     org.openehealth.ipf: warn
