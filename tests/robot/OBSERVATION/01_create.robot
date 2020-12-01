@@ -18,9 +18,6 @@
 
 
 *** Settings ***
-# Library                 REST
-# Library                 Collections
-# Library                 JSONLibrary
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
