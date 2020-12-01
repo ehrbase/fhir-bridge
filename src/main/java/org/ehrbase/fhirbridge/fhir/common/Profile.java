@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.common;
 
+import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
@@ -7,19 +8,22 @@ import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.Resource;
 
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum Profile {
 
+    // Condition Profiles
+
+    DEFAULT_CONDITION(Condition.class, null),
+
+    SYMPTOMS_COVID_19(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/symptoms-covid-19"),
+
     // DiagnosticReport Profiles
 
     DIAGNOSTIC_REPORT_LAB(DiagnosticReport.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab"),
-
-    // Patient Profiles
-
-    PATIENT(Patient.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient"),
 
     // Observation Profiles
 
@@ -51,6 +55,10 @@ public enum Profile {
 
     SMOKING_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status"),
 
+    // Patient Profiles
+
+    PATIENT(Patient.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient"),
+
     // Procedure Profiles
 
     PROCEDURE(Procedure.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure");
@@ -64,41 +72,55 @@ public enum Profile {
         this.uri = uri;
     }
 
-    public static <T extends Resource> boolean isDefaultSupported(T resource) {
-        return !(resource instanceof DiagnosticReport) &&
-                !(resource instanceof Observation) &&
-                !(resource instanceof Patient) &&
-                !(resource instanceof Procedure);
-    }
-
-    public static <T extends Resource> Collection<Profile> resolve(T resource) {
-        return resource.getMeta().getProfile().stream()
-                .map(uri -> Profile.resolve(uri.getValue()))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toUnmodifiableList());
-    }
-
-    public static Profile resolve(String uri) {
+    public static <T extends Resource> Profile getDefaultProfile(Class<T> resourceType) {
         for (Profile profile : values()) {
-            if (Objects.equals(profile.uri, uri)) {
+            if (profile.isAssignable(resourceType) && profile.isDefault()) {
                 return profile;
             }
         }
         return null;
     }
 
-    public static <T extends Resource> Collection<String> getAllSupportedProfileUris(T resource) {
+    public static <T extends Resource> Set<Profile> getSupportedProfiles(Class<T> resourceType) {
         return Arrays.stream(values())
-                .filter(profile -> profile.getResourceType().isAssignableFrom(resource.getClass()))
-                .map(Profile::getUri)
-                .collect(Collectors.toList());
+                .filter(profile -> profile.isAssignable(resourceType))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    public static Set<Profile> resolveAll(Resource resource) {
+        return resource.getMeta().getProfile().stream()
+                .map(uri -> Profile.resolve(resource.getClass(), uri.getValue()))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toUnmodifiableSet());
+    }
+
+    public static <T extends Resource> Profile resolve(Class<T> resourceType, String uri) {
+        for (Profile profile : values()) {
+            if (profile.isAssignable(resourceType) && Objects.equals(profile.getUri(), uri)) {
+                return profile;
+            }
+        }
+        return null;
+    }
+
+    public Class<? extends Resource> getResourceType() {
+        return resourceType;
     }
 
     public String getUri() {
         return uri;
     }
 
-    public Class<? extends Resource> getResourceType() {
-        return resourceType;
+    public <T extends Resource> boolean isAssignable(Class<T> resourceType) {
+        return getResourceType() == resourceType;
+    }
+
+    public boolean isDefault() {
+        return uri == null;
+    }
+
+    @Override
+    public String toString() {
+        return uri;
     }
 }
