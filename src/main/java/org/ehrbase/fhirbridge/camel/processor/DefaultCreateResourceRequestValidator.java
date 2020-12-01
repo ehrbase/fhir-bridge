@@ -8,13 +8,12 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
-import org.hl7.fhir.r4.model.CanonicalType;
+import org.ehrbase.fhirbridge.fhir.util.ResourceUtils;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r4.model.OperationOutcome.IssueSeverity;
 import org.hl7.fhir.r4.model.OperationOutcome.IssueType;
 import org.hl7.fhir.r4.model.OperationOutcome.OperationOutcomeIssueComponent;
 import org.hl7.fhir.r4.model.Resource;
-import org.hl7.fhir.r4.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -22,13 +21,12 @@ import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.lang.NonNull;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class DefaultCreateResourceRequestValidator implements Processor, MessageSourceAware {
 
-    private final Logger LOG = LoggerFactory.getLogger(DefaultCreateResourceRequestValidator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultCreateResourceRequestValidator.class);
 
     private final FhirContext fhirContext;
 
@@ -48,43 +46,39 @@ public class DefaultCreateResourceRequestValidator implements Processor, Message
         LOG.debug("Start validating {} resource...", resource.getResourceType());
 
         validateProfile(exchange, resource);
+
         validateResource(resource);
 
         LOG.info("{} resource validated", resource.getResourceType());
     }
 
+    @SuppressWarnings("java:S1192")
     private void validateProfile(Exchange exchange, Resource resource) {
         OperationOutcome operationOutcome = new OperationOutcome();
+        Class<? extends Resource> resourceType = resource.getClass();
 
-        if (!Profile.isDefaultSupported(resource)) {
-            ResourceType resourceType = resource.getResourceType();
-            Collection<Profile> supportedProfiles = Profile.resolve(resource);
-            List<String> declaredProfiles = resource.getMeta().getProfile()
-                    .stream()
-                    .map(CanonicalType::getValue)
-                    .collect(Collectors.toList());
-
-            if (supportedProfiles.isEmpty()) {
-                for (int i = 0; i < declaredProfiles.size(); i++) {
-                    operationOutcome.addIssue(new OperationOutcomeIssueComponent()
-                            .setSeverity(IssueSeverity.WARNING)
-                            .setCode(IssueType.VALUE)
-                            .setDiagnostics(messages.getMessage("validation.profile.notSupported", new Object[]{declaredProfiles.get(i), resourceType}))
-                            .addExpression(resource.getResourceType() + ".meta.profile[" + i + "]"));
-                }
+        List<String> profiles = ResourceUtils.getProfiles(resource);
+        if (profiles.isEmpty()) {
+            Profile defaultProfile = Profile.getDefaultProfile(resourceType);
+            if (defaultProfile == null) {
                 operationOutcome.addIssue(new OperationOutcomeIssueComponent()
                         .setSeverity(IssueSeverity.FATAL)
                         .setCode(IssueType.VALUE)
-                        .setDiagnostics(messages.getMessage("validation.profile.defaultNotSupported", new Object[]{resourceType, Profile.getAllSupportedProfileUris(resource)}))
+                        .setDiagnostics(messages.getMessage("validation.profile.defaultNotSupported", new Object[]{resource.getResourceType(), Profile.getSupportedProfiles(resourceType)}))
+                        .addExpression(resource.getResourceType() + ".meta.profile[]"));
+                throw new UnprocessableEntityException(fhirContext, operationOutcome);
+            }
+
+            exchange.getMessage().setHeader(FhirBridgeConstants.PROFILE, defaultProfile);
+        } else {
+            Set<Profile> supportedProfiles = Profile.resolveAll(resource);
+            if (supportedProfiles.isEmpty()) {
+                operationOutcome.addIssue(new OperationOutcomeIssueComponent()
+                        .setSeverity(IssueSeverity.FATAL)
+                        .setCode(IssueType.VALUE)
+                        .setDiagnostics(messages.getMessage("validation.profile.missingSupported", new Object[]{resourceType, Profile.getSupportedProfiles(resourceType)}))
                         .addExpression(resource.getResourceType() + ".meta.profile[]"));
             } else if (supportedProfiles.size() > 1) {
-                for (int i = 0; i < declaredProfiles.size(); i++) {
-                    operationOutcome.addIssue(new OperationOutcomeIssueComponent()
-                            .setSeverity(IssueSeverity.INFORMATION)
-                            .setCode(IssueType.VALUE)
-                            .setDiagnostics(messages.getMessage("validation.profile.supported", new Object[]{declaredProfiles.get(i), resourceType}))
-                            .addExpression(resource.getResourceType() + ".meta.profile[" + i + "]"));
-                }
                 operationOutcome.addIssue(new OperationOutcomeIssueComponent()
                         .setSeverity(IssueSeverity.FATAL)
                         .setCode(IssueType.VALUE)

@@ -11,7 +11,7 @@ import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstan
 import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
-import org.ehrbase.fhirbridge.ehr.converter.DiagnoseCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.ehrbase.fhirbridge.ehr.mapper.DiagnoseRowMapper;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.DiagnoseComposition;
 import org.hl7.fhir.r4.model.Condition;
@@ -28,15 +28,19 @@ public class ConditionRoutes extends RouteBuilder {
 
     private final PatientIdProcessor patientIdProcessor;
 
+    private final CompositionConverterResolver compositionConverterResolver;
+
     private final DefaultExceptionHandler defaultExceptionHandler;
 
     public ConditionRoutes(IFhirResourceDao<Condition> conditionDao,
                            DefaultCreateResourceRequestValidator requestValidator,
                            PatientIdProcessor patientIdProcessor,
+                           CompositionConverterResolver compositionConverterResolver,
                            DefaultExceptionHandler defaultExceptionHandler) {
         this.conditionDao = conditionDao;
         this.requestValidator = requestValidator;
         this.patientIdProcessor = patientIdProcessor;
+        this.compositionConverterResolver = compositionConverterResolver;
         this.defaultExceptionHandler = defaultExceptionHandler;
     }
 
@@ -53,7 +57,7 @@ public class ConditionRoutes extends RouteBuilder {
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
-            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new DiagnoseCompositionConverter()))
+            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.CamelFhirBridgeProfile})"))
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
 

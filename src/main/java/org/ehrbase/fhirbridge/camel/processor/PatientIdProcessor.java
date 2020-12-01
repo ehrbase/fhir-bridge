@@ -62,7 +62,7 @@ public class PatientIdProcessor implements Processor, MessageSourceAware {
     }
 
     private String extractPatientId(Resource resource) {
-        String patientId;
+        String patientId = null;
 
         ResourceType resourceType = resource.getResourceType();
         switch (resourceType) {
@@ -79,8 +79,6 @@ public class PatientIdProcessor implements Processor, MessageSourceAware {
                 Patient patient = (Patient) resource;
                 if (patient.hasIdentifier()) {
                     patientId = ((Patient) resource).getIdentifier().get(0).getValue();
-                } else {
-                    patientId = null;
                 }
                 break;
             case Procedure:
