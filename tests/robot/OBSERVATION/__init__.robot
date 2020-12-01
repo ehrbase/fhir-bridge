@@ -1,2 +1,2 @@
 *** Settings ***
-Force Tags    observation
+Force Tags    observation    not-ready
