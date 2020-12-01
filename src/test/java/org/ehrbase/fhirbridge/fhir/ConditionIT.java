@@ -25,12 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ConditionIT extends AbstractSetupIT {
 
     @Test
-    void create() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Condition/create.json").getInputStream(), StandardCharsets.UTF_8);
-        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
-
-        assertNotNull(outcome.getId());
-        assertEquals(true, outcome.getCreated());
+    void createDefault() throws IOException {
+        create("Condition/create-default.json");
     }
 
     @Test
@@ -42,10 +38,24 @@ class ConditionIT extends AbstractSetupIT {
         assertEquals("HTTP 422 : Subject identifier is required", exception.getMessage());
     }
 
+    @Test
+    void createSymptomCovidAbsent() throws IOException {
+        create("Condition/create-symptom-covid-19-absent.json");
+    }
+
+    @Test
+    void createSymptomCovidPresent() throws IOException {
+        create("Condition/create-symptom-covid-19-present.json");
+    }
+
+    @Test
+    void createSymptomCovidUnknown() throws IOException {
+        create("Condition/create-symptom-covid-19-unknown.json");
+    }
 
     @Test
     void searchBySubject() throws IOException {
-        create();
+        createDefault();
 
         Bundle bundle = client.search()
                 .forResource(Condition.class)
@@ -57,7 +67,7 @@ class ConditionIT extends AbstractSetupIT {
 
     @Test
     void searchByInvalidSubject() throws IOException {
-        create();
+        createDefault();
 
         Bundle bundle = client.search()
                 .forResource(Condition.class)
@@ -69,7 +79,7 @@ class ConditionIT extends AbstractSetupIT {
 
     @Test
     void searchBySubjectAndCode() throws IOException {
-        create();
+        createDefault();
 
         Bundle bundle = client.search()
                 .forResource(Condition.class)
@@ -82,7 +92,7 @@ class ConditionIT extends AbstractSetupIT {
 
     @Test
     void searchBySubjectAndInvalidCode() throws IOException {
-        create();
+        createDefault();
 
         Bundle bundle = client.search()
                 .forResource(Condition.class)
@@ -95,7 +105,7 @@ class ConditionIT extends AbstractSetupIT {
 
     @Test
     void searchBySubjectAndStartTime() throws IOException {
-        create();
+        createDefault();
 
         Bundle bundle = client.search()
                 .forResource(Condition.class)
@@ -109,7 +119,7 @@ class ConditionIT extends AbstractSetupIT {
 
     @Test
     void searchBySubjectAndInvalidStartTime() throws IOException {
-        create();
+        createDefault();
 
         Bundle bundle = client.search()
                 .forResource(Condition.class)
@@ -118,5 +128,13 @@ class ConditionIT extends AbstractSetupIT {
                 .returnBundle(Bundle.class).execute();
 
         assertEquals(0, bundle.getTotal());
+    }
+
+    private void create(String path) throws IOException {
+        String resource = IOUtils.toString(new ClassPathResource(path).getInputStream(), StandardCharsets.UTF_8);
+        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
+
+        assertNotNull(outcome.getId());
+        assertEquals(true, outcome.getCreated());
     }
 }

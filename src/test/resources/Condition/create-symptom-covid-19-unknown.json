@@ -1,0 +1,65 @@
+{
+  "id": "8cb12ab0-3563-4154-bfeb-25aa897c2105",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/symptoms-covid-19"
+    ]
+  },
+  "modifierExtension": [
+    {
+      "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "code": "261665006",
+            "display": "Unknown (qualifier value)",
+            "system": "http://snomed.info/sct"
+          }
+        ],
+        "text": "Presence of symptom is unknown."
+      }
+    }
+  ],
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "75325-1",
+          "display": "Symptom",
+          "system": "http://loinc.org"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "36955009",
+        "display": "Loss of taste",
+        "system": "http://snomed.info/sct"
+      }
+    ]
+  },
+  "recordedDate": "2020-10-05",
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "resourceType": "Condition",
+  "verificationStatus": {
+    "coding": [
+      {
+        "code": "confirmed",
+        "display": "Confirmed",
+        "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+      },
+      {
+        "code": "410605003",
+        "display": "Confirmed present (qualifier value)",
+        "system": "http://snomed.info/sct"
+      }
+    ]
+  }
+}

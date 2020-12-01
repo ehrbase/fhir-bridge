@@ -49,6 +49,7 @@ public class DiagnosticReportRoutes extends RouteBuilder {
         // @formatter:on
     }
 
+    // TODO: Update when Apache Camel > 3.x
     @Bean
     public DiagnosticReportLabCompositionConverter diagnosticReportLabCompositionConverter() {
         return new DiagnosticReportLabCompositionConverter();

@@ -12,6 +12,7 @@ public class CompositionConverterResolver implements InitializingBean {
 
     private final EnumMap<Profile, CompositionConverter<?, ?>> profiles = new EnumMap<>(Profile.class);
 
+    @SuppressWarnings("java:S1452")
     public CompositionConverter<?, ?> resolve(Profile profile) {
         CompositionConverter<?, ?> compositionConverter = profiles.get(profile);
         if (compositionConverter == null) {
@@ -22,6 +23,10 @@ public class CompositionConverterResolver implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
+        // Conditions
+        profiles.put(Profile.DEFAULT_CONDITION, new DiagnoseCompositionConverter());
+        profiles.put(Profile.SYMPTOMS_COVID_19, new SymptomCompositionConverter());
+        // Observations
         profiles.put(Profile.DIAGNOSTIC_REPORT_LAB, new DiagnosticReportLabCompositionConverter());
         profiles.put(Profile.BODY_HEIGHT, new BodyHeightCompositionConverter());
         profiles.put(Profile.BLOOD_PRESSURE, new BloodPressureCompositionConverter());
