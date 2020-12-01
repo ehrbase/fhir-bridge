@@ -1,741 +1,23 @@
 {
 	"info": {
-		"_postman_id": "00aac5fb-8baa-4793-ac3c-1365222a9d35",
-		"name": "abac-hub",
+		"_postman_id": "d9f6a4ea-db6e-4816-986d-79b7d1f45886",
+		"name": "fhir-bridge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Actuator",
+			"name": "FHIR",
 			"item": [
 				{
-					"name": "Health",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/actuator/health",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"actuator",
-								"health"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Liquibase",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/actuator/liquibase",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"actuator",
-								"liquibase"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Loggers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/actuator/loggers",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"actuator",
-								"loggers"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Core",
-			"item": [
-				{
-					"name": "API",
+					"name": "Condition",
 					"item": [
 						{
-							"name": "BudgetaryCommitmentLevel2",
-							"item": [
-								{
-									"name": "Get",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/BudgetaryCommitmentLevel2/Get",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"BudgetaryCommitmentLevel2",
-												"Get"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "GetPositions",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/BudgetaryCommitmentLevel2/GetPositions",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"BudgetaryCommitmentLevel2",
-												"GetPositions"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "GetConsumptions",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/BudgetaryCommitmentLevel2/GetConsumptions",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"BudgetaryCommitmentLevel2",
-												"GetConsumptions"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "GetWorkflowInfo",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/BudgetaryCommitmentLevel2/GetWorkflowInfo",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"BudgetaryCommitmentLevel2",
-												"GetWorkflowInfo"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "GetPostingCriteriaTypeList",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/BudgetaryCommitmentLevel2/GetPostingCriteriaTypeList",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"BudgetaryCommitmentLevel2",
-												"GetPostingCriteriaTypeList"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "FindCommitmentClass",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/BudgetaryCommitmentLevel2/FindCommitmentClass",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"BudgetaryCommitmentLevel2",
-												"FindCommitmentClass"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Search",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/BudgetaryCommitmentLevel2/Search",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"BudgetaryCommitmentLevel2",
-												"Search"
-											]
-										}
-									},
-									"response": []
-								}
-							],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
-						},
-						{
-							"name": "PaymentOrder",
-							"item": [
-								{
-									"name": "Get",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/PaymentOrder/Get",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"PaymentOrder",
-												"Get"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "GetWorkflowInfo",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/PaymentOrder/GetWorkflowInfo",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"PaymentOrder",
-												"GetWorkflowInfo"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Search",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/PaymentOrder/Search",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"PaymentOrder",
-												"Search"
-											]
-										}
-									},
-									"response": []
-								}
-							],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
-						},
-						{
-							"name": "PaymentRequest",
-							"item": [
-								{
-									"name": "Get",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/PaymentRequest/Get",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"PaymentRequest",
-												"Get"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "GetWorkflowInfo",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/PaymentRequest/GetWorkflowInfo",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"PaymentRequest",
-												"GetWorkflowInfo"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "GetPostingCriteriaTypeList",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/PaymentRequest/GetPostingCriteriaTypeList",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"PaymentRequest",
-												"GetPostingCriteriaTypeList"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Search",
-									"request": {
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/core/api/PaymentRequest/Search",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"core",
-												"api",
-												"PaymentRequest",
-												"Search"
-											]
-										}
-									},
-									"response": []
-								}
-							],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "P2P",
-			"item": [
-				{
-					"name": "REST",
-					"item": [
-						{
-							"name": "Orders",
-							"item": [
-								{
-									"name": "List orders",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{base_url}}/p2p/orders",
-											"host": [
-												"{{base_url}}"
-											],
-											"path": [
-												"p2p",
-												"orders"
-											]
-										}
-									},
-									"response": []
-								}
-							],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
-						},
-						{
-							"name": "Step Executions",
-							"item": [],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
-						},
-						{
-							"name": "Test",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{base_url}}/test/_execute",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"test",
-										"_execute"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "Exact WebApi",
-					"item": [
-						{
-							"name": "Budget",
-							"item": [
-								{
-									"name": "List",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{p2p_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{p2p_base_url}}/api/Budget/List",
-											"host": [
-												"{{p2p_base_url}}"
-											],
-											"path": [
-												"api",
-												"Budget",
-												"List"
-											]
-										}
-									},
-									"response": []
-								}
-							],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
-						},
-						{
-							"name": "FlexReport",
-							"item": [
-								{
-									"name": "Get",
-									"event": [
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "55cfe727-2439-4b13-9607-1c26fddabbd8",
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{p2p_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"reportId\": 200023\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{p2p_base_url}}/api/FlexReport/Get",
-											"host": [
-												"{{p2p_base_url}}"
-											],
-											"path": [
-												"api",
-												"FlexReport",
-												"Get"
-											]
-										}
-									},
-									"response": []
-								}
-							],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
-						},
-						{
-							"name": "Order",
-							"item": [
-								{
-									"name": "ExecuteWorkflowAction",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{p2p_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"id\": 100201,\r\n    \"key\": \"6.3.1\",\r\n    \"executor\": {\r\n        \"type\": 1,\r\n        \"value\": 0\r\n    },\r\n    \"comment\": \"\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{p2p_base_url}}/api/Order/ExecuteWorkflowAction",
-											"host": [
-												"{{p2p_base_url}}"
-											],
-											"path": [
-												"api",
-												"Order",
-												"ExecuteWorkflowAction"
-											]
-										}
-									},
-									"response": []
-								}
-							],
-							"protocolProfileBehavior": {},
-							"_postman_isSubFolder": true
-						},
-						{
-							"name": "Token",
+							"name": "Create Condition",
 							"event": [
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "d4af3d79-624b-4c72-97f0-dee9e643dbad",
+										"id": "93587d00-90c3-4133-afe8-6466c54737f3",
 										"exec": [
 											""
 										],
@@ -747,37 +29,119 @@
 								"method": "POST",
 								"header": [],
 								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "grant_type",
-											"value": "password",
-											"type": "text"
-										},
-										{
-											"key": "username",
-											"value": "apiabac",
-											"type": "text"
-										},
-										{
-											"key": "password",
-											"value": "Abac.12345",
-											"type": "text"
-										},
-										{
-											"key": "apikey",
-											"value": "{C039EA93-E11B-4D8C-9556-919D7085F564}",
-											"type": "text"
+									"mode": "raw",
+									"raw": "{\r\n    \"resourceType\": \"Condition\",\r\n    \"clinicalStatus\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\",\r\n                \"code\": \"active\"\r\n            }\r\n        ]\r\n    },\r\n    \"verificationStatus\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/condition-ver-status\",\r\n                \"code\": \"confirmed\"\r\n            }\r\n        ]\r\n    },\r\n    \"category\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/condition-category\",\r\n                    \"code\": \"encounter-diagnosis\",\r\n                    \"display\": \"Encounter Diagnosis\"\r\n                },\r\n                {\r\n                    \"system\": \"http://snomed.info/sct\",\r\n                    \"code\": \"439401001\",\r\n                    \"display\": \"Diagnosis\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"severity\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"24484000\",\r\n                \"display\": \"Severe\"\r\n            }\r\n        ]\r\n    },\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://fhir.de/CodeSystem/dimdi/icd-10-gm\",\r\n                \"code\": \"B97.2\",\r\n                \"display\": \"Coronavirus as the cause of diseases classified to other chapters\"\r\n            }\r\n        ],\r\n        \"text\": \"Coronavirus as the cause of diseases classified to other chapters\"\r\n    },\r\n    \"bodySite\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"system\": \"http://snomed.info/sct\",\r\n                    \"code\": \"49521004\",\r\n                    \"display\": \"Left external ear structure\"\r\n                }\r\n            ],\r\n            \"text\": \"Left Ear\"\r\n        }\r\n    ],\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"onsetDateTime\": \"2012-05-24\",\r\n    \"recorder\": {\r\n        \"reference\": \"http://external.fhir.server/Practitioner/f201\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
-									"raw": "{{p2p_base_url}}/token",
+									"raw": "{{baseUrl}}/fhir/Condition",
 									"host": [
-										"{{p2p_base_url}}"
+										"{{baseUrl}}"
 									],
 									"path": [
-										"token"
+										"fhir",
+										"Condition"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create SymptomsCovid19",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "4926e05e-c21d-4e74-848b-0a8359c7868e",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"8cb12ab0-3563-4154-bfeb-25aa897c2105\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/symptoms-covid-19\"\r\n    ]\r\n  },\r\n  \"modifierExtension\": [\r\n    {\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence\",\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"code\": \"261665006\",\r\n            \"display\": \"Unknown (qualifier value)\",\r\n            \"system\": \"http://snomed.info/sct\"\r\n          }\r\n        ],\r\n        \"text\": \"Presence of symptom is unknown.\"\r\n      }\r\n    }\r\n  ],\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"code\": \"75325-1\",\r\n          \"display\": \"Symptom\",\r\n          \"system\": \"http://loinc.org\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"code\": \"36955009\",\r\n        \"display\": \"Loss of taste\",\r\n        \"system\": \"http://snomed.info/sct\"\r\n      }\r\n    ]\r\n  },\r\n  \"recordedDate\": \"2020-10-05\",\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"resourceType\": \"Condition\",\r\n  \"verificationStatus\": {\r\n    \"coding\": [\r\n      {\r\n        \"code\": \"confirmed\",\r\n        \"display\": \"Confirmed\",\r\n        \"system\": \"http://terminology.hl7.org/CodeSystem/condition-ver-status\"\r\n      },\r\n      {\r\n        \"code\": \"410605003\",\r\n        \"display\": \"Confirmed present (qualifier value)\",\r\n        \"system\": \"http://snomed.info/sct\"\r\n      }\r\n    ]\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Condition",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Condition"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Condition",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5e4a0b06-0a89-4411-9563-ab5acb9b3524",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Condition\",\r\n  \"id\": \"example\",\r\n  \"text\": {\r\n    \"status\": \"generated\",\r\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">Severe burn of left ear (Date: 24-May 2012)</div>\"\r\n  },\r\n  \"clinicalStatus\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\",\r\n        \"code\": \"active\"\r\n      }\r\n    ]\r\n  },\r\n  \"verificationStatus\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://terminology.hl7.org/CodeSystem/condition-ver-status\",\r\n        \"code\": \"confirmed\"\r\n      }\r\n    ]\r\n  },\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/condition-category\",\r\n          \"code\": \"encounter-diagnosis\",\r\n          \"display\": \"Encounter Diagnosis\"\r\n        },\r\n        {\r\n          \"system\": \"http://snomed.info/sct\",\r\n          \"code\": \"439401001\",\r\n          \"display\": \"Diagnosis\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"severity\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"24484000\",\r\n        \"display\": \"Severe\"\r\n      }\r\n    ]\r\n  },\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"39065001\",\r\n        \"display\": \"Burn of ear\"\r\n      }\r\n    ],\r\n    \"text\": \"Burnt Ear\"\r\n  },\r\n  \"bodySite\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://snomed.info/sct\",\r\n          \"code\": \"49521004\",\r\n          \"display\": \"Left external ear structure\"\r\n        }\r\n      ],\r\n      \"text\": \"Left Ear\"\r\n    }\r\n  ],\r\n  \"subject\": {\r\n    \"reference\": \"Patien/123456\"\r\n  },\r\n  \"onsetDateTime\": \"2012-05-24\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Condition?subject.identifier={{patientId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Condition"
+									],
+									"query": [
+										{
+											"key": "subject.identifier",
+											"value": "{{patientId}}"
+										},
+										{
+											"key": "code",
+											"value": "B97.2",
+											"disabled": true
+										},
+										{
+											"key": "recorded-date",
+											"value": "2012-05-24",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -788,7 +152,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "58575e25-8643-489e-9065-cee617218426",
+								"id": "3c460846-4bfc-4dc9-8c16-614af5ee7b5a",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -798,7 +162,852 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "2eed3f42-9700-41d9-9722-b8df490dae51",
+								"id": "be121688-8591-4c7b-af85-bf2d5d52455d",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "DiagnosticReport",
+					"item": [
+						{
+							"name": "Create DiagnosticReportLab",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3b6b5bee-c877-4313-bfa5-af7803163fe6",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"DiagnosticReport\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab\"\r\n    ],\r\n    \"source\": \"http://www.highmed.org\"\r\n  },\r\n  \"contained\": [\r\n    {\r\n      \"resourceType\": \"Observation\",\r\n      \"id\": \"obs-1\",\r\n      \"meta\": {\r\n        \"profile\": [\r\n          \"https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab\"\r\n        ]\r\n      },\r\n      \"identifier\": [\r\n        {\r\n          \"type\": {\r\n            \"coding\": [\r\n              {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                \"code\": \"OBI\"\r\n              }\r\n            ]\r\n          },\r\n          \"system\": \"https://diz.mii.de/fhir/core/NamingSystem/test-lab-results\",\r\n          \"value\": \"59826-8_1234567890\",\r\n          \"assigner\": {\r\n            \"identifier\": {\r\n              \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/NamingSystem/org-identifier\",\r\n              \"value\": \"DIZ-ID\"\r\n            }\r\n          }\r\n        }\r\n      ],\r\n      \"status\": \"final\",\r\n      \"category\": [\r\n        {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"26436-6\"\r\n            },\r\n            {\r\n              \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n              \"code\": \"laboratory\"\r\n            }\r\n          ]\r\n        }\r\n      ],\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://loinc.org\",\r\n            \"code\": \"732-8\",\r\n            \"display\": \"Lymphocytes [#/volume] in Blood by Manual count\"\r\n          }\r\n        ],\r\n        \"text\": \"Kreatinin\"\r\n      },\r\n      \"subject\": {\r\n        \"reference\": \"urn:uuid:07f602e0-579e-4fe3-95af-381728bf0d49\"\r\n      },\r\n      \"encounter\": {\r\n        \"reference\": \"http://external.fhir.server/Encounter/555\"\r\n      },\r\n      \"effectiveDateTime\": \"2018-11-20T12:05:00+01:00\",\r\n      \"issued\": \"2018-03-11T10:28:00+01:00\",\r\n      \"performer\": [\r\n        {\r\n          \"reference\": \"http://external.fhir.server/Organization/7772\",\r\n          \"display\": \"Zentrallabor des IKCL\"\r\n        }\r\n      ],\r\n      \"valueQuantity\": {\r\n        \"value\": 72,\r\n        \"unit\": \"µmol/l\",\r\n        \"system\": \"http://unitsofmeasure.org\",\r\n        \"code\": \"umol/L\"\r\n      },\r\n      \"interpretation\": [\r\n        {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n              \"code\": \"N\"\r\n            }\r\n          ]\r\n        }\r\n      ],\r\n      \"referenceRange\": [\r\n        {\r\n          \"low\": {\r\n            \"value\": 72\r\n          },\r\n          \"high\": {\r\n            \"value\": 127\r\n          },\r\n          \"type\": {\r\n            \"coding\": [\r\n              {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/referencerange-meaning\",\r\n                \"code\": \"normal\",\r\n                \"display\": \"Normal Range\"\r\n              }\r\n            ]\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"FILL\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://diz.mii.de/fhir/core/NamingSystem/test-befund\",\r\n      \"value\": \"0987654666\",\r\n      \"assigner\": {\r\n        \"identifier\": {\r\n          \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/NamingSystem/org-identifier\",\r\n          \"value\": \"DIZ-ID\"\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"basedOn\": [\r\n    {\r\n      \"reference\": \"http://external.fhir.server/ServiceRequest/111\"\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0074\",\r\n          \"code\": \"LAB\"\r\n        },\r\n        {\r\n          \"system\": \"http://loinc.org\",\r\n          \"code\": \"26436-6\",\r\n          \"display\": \"Laboratory studies\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"11502-2\",\r\n        \"display\": \"Laboratory report\"\r\n      }\r\n    ]\r\n  },\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n  \"effectiveDateTime\": \"2018-11-20T12:05:00+01:00\",\r\n  \"issued\": \"2018-03-11T10:28:00+01:00\",\r\n  \"result\": [\r\n    {\r\n      \"reference\": \"#obs-1\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/DiagnosticReport",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"DiagnosticReport"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Diagnostic Report",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ee493cfe-8169-4d3b-ba6e-98386425ae12",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/DiagnosticReport",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"DiagnosticReport"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Observation",
+					"item": [
+						{
+							"name": "Create BloodPressure",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "aa7848c6-8ec3-4b5a-a0f8-6e3c34a998e3",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"blood-pressure\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure\"\r\n    ]\r\n  },\r\n  \"text\": {\r\n    \"status\": \"generated\",\r\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: blood-pressure</p><p><b>meta</b>: </p><p><b>identifier</b>: urn:uuid:187e0c12-8dd2-67e2-99b2-bf273c878281</p><p><b>basedOn</b>: </p><p><b>status</b>: final</p><p><b>category</b>: Vital Signs <span>(Details : {http://terminology.hl7.org/CodeSystem/observation-category code 'vital-signs' = 'Vital Signs', given as 'Vital Signs'})</span></p><p><b>code</b>: Blood pressure systolic &amp; diastolic <span>(Details : {LOINC code '85354-9' = 'Blood pressure panel with all children optional', given as 'Blood pressure panel with all children optional'})</span></p><p><b>subject</b>: <a>urn:uuid:example</a></p><p><b>effective</b>: 17/09/2012</p><p><b>performer</b>: <a>Practitioner/example</a></p><p><b>interpretation</b>: Below low normal <span>(Details : {http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation code 'L' = 'Low', given as 'low'})</span></p><p><b>bodySite</b>: Right arm <span>(Details : {SNOMED CT code '368209003' = 'Right upper arm', given as 'Right arm'})</span></p><blockquote><p><b>component</b></p><p><b>code</b>: Systolic blood pressure <span>(Details : {LOINC code '8480-6' = 'Systolic blood pressure', given as 'Systolic blood pressure'}; {SNOMED CT code '271649006' = 'Systolic blood pressure', given as 'Systolic blood pressure'}; {http://acme.org/devices/clinical-codes code 'bp-s' = 'bp-s', given as 'Systolic Blood pressure'})</span></p><p><b>value</b>: 107 mmHg<span> (Details: UCUM code mm[Hg] = 'mmHg')</span></p><p><b>interpretation</b>: Normal <span>(Details : {http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation code 'N' = 'Normal', given as 'normal'})</span></p></blockquote><blockquote><p><b>component</b></p><p><b>code</b>: Diastolic blood pressure <span>(Details : {LOINC code '8462-4' = 'Diastolic blood pressure', given as 'Diastolic blood pressure'})</span></p><p><b>value</b>: 60 mmHg<span> (Details: UCUM code mm[Hg] = 'mmHg')</span></p><p><b>interpretation</b>: Below low normal <span>(Details : {http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation code 'L' = 'Low', given as 'low'})</span></p></blockquote></div>\"\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"urn:ietf:rfc:3986\",\r\n      \"value\": \"urn:uuid:187e0c12-8dd2-67e2-99b2-bf273c878281\"\r\n    }\r\n  ],\r\n  \"basedOn\": [\r\n    {\r\n      \"identifier\": {\r\n        \"system\": \"https://acme.org/identifiers\",\r\n        \"value\": \"1234\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\",\r\n          \"display\": \"Vital Signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"85354-9\",\r\n        \"display\": \"Blood pressure panel with all children optional\"\r\n      }\r\n    ],\r\n    \"text\": \"Blood pressure systolic & diastolic\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2012-09-17\",\r\n  \"performer\": [\r\n    {\r\n      \"reference\": \"http://external.fhir.server/Practitioner/example\"\r\n    }\r\n  ],\r\n  \"interpretation\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n          \"code\": \"L\",\r\n          \"display\": \"low\"\r\n        }\r\n      ],\r\n      \"text\": \"Below low normal\"\r\n    }\r\n  ],\r\n  \"bodySite\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"368209003\",\r\n        \"display\": \"Right arm\"\r\n      }\r\n    ]\r\n  },\r\n  \"component\": [\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://loinc.org\",\r\n            \"code\": \"8480-6\",\r\n            \"display\": \"Systolic blood pressure\"\r\n          },\r\n          {\r\n            \"system\": \"http://snomed.info/sct\",\r\n            \"code\": \"271649006\",\r\n            \"display\": \"Systolic blood pressure\"\r\n          },\r\n          {\r\n            \"system\": \"http://acme.org/devices/clinical-codes\",\r\n            \"code\": \"bp-s\",\r\n            \"display\": \"Systolic Blood pressure\"\r\n          }\r\n        ]\r\n      },\r\n      \"valueQuantity\": {\r\n        \"value\": 107,\r\n        \"unit\": \"mmHg\",\r\n        \"system\": \"http://unitsofmeasure.org\",\r\n        \"code\": \"mm[Hg]\"\r\n      },\r\n      \"interpretation\": [\r\n        {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n              \"code\": \"N\",\r\n              \"display\": \"normal\"\r\n            }\r\n          ],\r\n          \"text\": \"Normal\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://loinc.org\",\r\n            \"code\": \"8462-4\",\r\n            \"display\": \"Diastolic blood pressure\"\r\n          }\r\n        ]\r\n      },\r\n      \"valueQuantity\": {\r\n        \"value\": \"107\",\r\n        \"unit\": \"mmHg\",\r\n        \"system\": \"http://unitsofmeasure.org\",\r\n        \"code\": \"mm[Hg]\"\r\n      },\r\n      \"interpretation\": [\r\n        {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n              \"code\": \"L\",\r\n              \"display\": \"low\"\r\n            }\r\n          ],\r\n          \"text\": \"Below low normal\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create BodyHeight",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3812ddf9-bd87-4dea-aa04-24b8c83bcca4",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"23499ea6-d046-4e91-b7ab-d9cf040add72\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"OBI\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://www.charite.de/fhir/CodeSystem/observation-identifiers\",\r\n      \"value\": \"8302-2_BodyHeight\",\r\n      \"assigner\": {\r\n        \"reference\": \"Organization/Charité\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"8302-2\",\r\n        \"display\": \"Body height\"\r\n      },\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"50373000\",\r\n        \"display\": \"Body height measure (observable entity)\"\r\n      }\r\n    ],\r\n    \"text\": \"Body height\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-02\",\r\n  \"valueQuantity\": {\r\n    \"value\": 167,\r\n    \"unit\": \"centimeter\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"cm\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create BodyWeight",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "80c5a46d-37f8-45b9-b16e-4122a60ada51",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"80ac4908-3637-476d-a416-9ab7ed7474e6\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-weight\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"OBI\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://www.charite.de/fhir/CodeSystem/observation-identifiers\",\r\n      \"value\": \"29463-7_BodyWeight\",\r\n      \"assigner\": {\r\n        \"reference\": \"Organization/Charité\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"29463-7\",\r\n        \"display\": \"Body weight\"\r\n      },\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"27113001\",\r\n        \"display\": \"Body weight (observable entity)\"\r\n      }\r\n    ],\r\n    \"text\": \"Body weight\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-02\",\r\n  \"valueQuantity\": {\r\n    \"value\": \"10000\",\r\n    \"unit\": \"kilogram\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"kg\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create BodyTemp",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "1326bfc1-d295-4ef5-902f-7270ad690f8a",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"bodytemp\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"http://hl7.org/fhir/StructureDefinition/bodytemp\"\r\n    ]\r\n  },\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"8310-5\"\r\n      }\r\n    ]\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-04-30T12:00:00+01:00\",\r\n  \"valueQuantity\": {\r\n    \"value\": 37.5,\r\n    \"unit\": \"Cel\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"Cel\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create ClinicalFrailtyScaleScore",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "69c28ec5-fecc-4c08-bd43-0604bb126227",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"4b5cfc04-0d92-47f6-8bd0-be820286db01\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"OBI\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://www.charite.de/fhir/CodeSystem/observation-identifiers\",\r\n      \"value\": \"763264000_FrailtyScaleScore\",\r\n      \"assigner\": {\r\n        \"reference\": \"Organization/Charité\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"survey\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"763264000\",\r\n        \"display\": \"Canadian Study of Health and Aging Clinical Frailty Scale score\"\r\n      }\r\n    ],\r\n    \"text\": \"Frailty Scale Score\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-02\",\r\n  \"valueCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/frailty-score\",\r\n        \"code\": \"7\",\r\n        \"display\": \"Severely Frail\"\r\n      }\r\n    ]\r\n  },\r\n  \"method\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"445414007\",\r\n        \"display\": \"Canadian Study of Health and Aging clinical frailty scale\"\r\n      }\r\n    ]\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create CoronavirusNachweisTest",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e340907a-a9ac-4181-bcc0-3cd06e3196b8",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"OBI\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://diz.mii.de/fhir/core/NamingSystem/test-lab-results\",\r\n      \"value\": \"59826-8_1234567890\",\r\n      \"assigner\": {\r\n        \"identifier\": {\r\n          \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/NamingSystem/org-identifier\",\r\n          \"value\": \"DIZ-ID\"\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://loinc.org\",\r\n          \"code\": \"18725-2\",\r\n          \"display\": \"Microbiology studies\"\r\n        },\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"laboratory\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"94532-9\",\r\n        \"display\": \"SARS coronavirus+SARS-like coronavirus+SARS coronavirus 2+MERS coronavirus RNA [Presence] in Respiratory specimen by NAA with probe detection\"\r\n      }\r\n    ]\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"encounter\": {\r\n    \"reference\": \"http://external.fhir.server/Encounter/555\"\r\n  },\r\n  \"effectiveDateTime\": \"2018-11-20T12:05:00+01:00\",\r\n  \"issued\": \"2018-03-11T10:28:00+01:00\",\r\n  \"performer\": [\r\n    {\r\n      \"reference\": \"http://external.fhir.server/Organization/7772\",\r\n      \"display\": \"Zentrallabor des IKCL\"\r\n    }\r\n  ],\r\n  \"referenceRange\": [\r\n    {\r\n      \"low\": {\r\n        \"value\": 72\r\n      },\r\n      \"high\": {\r\n        \"value\": 127\r\n      },\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/referencerange-meaning\",\r\n            \"code\": \"normal\",\r\n            \"display\": \"Normal Range\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create FIO2",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "af48b809-50d2-4d2a-98ed-771d229e6cd1",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"c9f96dd3-a77a-4aa9-9b12-43cd1972d9a4\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/inhaled-oxygen-concentration\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"OBI\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n      \"value\": \"3150-0_FiO2\",\r\n      \"assigner\": {\r\n        \"reference\": \"Organization/Charité\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://loinc.org\",\r\n          \"code\": \"26436-6\"\r\n        },\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"laboratory\"\r\n        },\r\n        {\r\n          \"system\": \"http://loinc.org\",\r\n          \"code\": \"18767-4\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"3150-0\",\r\n        \"display\": \"Inhaled oxygen concentration\"\r\n      }\r\n    ],\r\n    \"text\": \"Inhaled oxygen concentration\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-09-21\",\r\n  \"valueQuantity\": {\r\n    \"value\": 21,\r\n    \"unit\": \"%\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"%\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create HeartRate",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7e43f7a0-646e-4e02-9920-11e467ef3137",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"heart-rate\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"http://hl7.org/fhir/StructureDefinition/heartrate\"\r\n    ]\r\n  },\r\n  \"text\": {\r\n    \"status\": \"generated\",\r\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: heart-rate</p><p><b>meta</b>: </p><p><b>status</b>: final</p><p><b>category</b>: Vital Signs <span>(Details : {http://terminology.hl7.org/CodeSystem/observation-category code 'vital-signs' = 'Vital Signs', given as 'Vital Signs'})</span></p><p><b>code</b>: Heart rate <span>(Details : {LOINC code '8867-4' = 'Heart rate', given as 'Heart rate'})</span></p><p><b>subject</b>: <a>urn:uuid:07f602e0-579e-4fe3-95af-381728bf0d49</a></p><p><b>effective</b>: 02/07/1999</p><p><b>value</b>: 44 beats/minute<span> (Details: UCUM code /min = '/min')</span></p></div>\"\r\n  },\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\",\r\n          \"display\": \"Vital Signs\"\r\n        }\r\n      ],\r\n      \"text\": \"Vital Signs\"\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"8867-4\",\r\n        \"display\": \"Heart rate\"\r\n      }\r\n    ],\r\n    \"text\": \"Heart rate\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"1999-07-02\",\r\n  \"valueQuantity\": {\r\n    \"value\": 44,\r\n    \"unit\": \"beats/minute\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"/min\"\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create ObservationLab",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "daaff9e5-048f-41d2-9a6a-af1d2faa0366",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab\"\r\n    ],\r\n    \"source\": \"http://www.highmed.org\"\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"OBI\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://diz.mii.de/fhir/core/NamingSystem/test-lab-results\",\r\n      \"value\": \"59826-8_1234567890\",\r\n      \"assigner\": {\r\n        \"identifier\": {\r\n          \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/NamingSystem/org-identifier\",\r\n          \"value\": \"DIZ-ID\"\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://loinc.org\",\r\n          \"code\": \"26436-6\"\r\n        },\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"laboratory\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"732-8\",\r\n        \"display\": \"Lymphocytes [#/volume] in Blood by Manual count\"\r\n      }\r\n    ],\r\n    \"text\": \"Kreatinin\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"encounter\": {\r\n    \"reference\": \"http://external.fhir.server/Encounter/555\"\r\n  },\r\n  \"effectiveDateTime\": \"2018-11-20T12:05:00+01:00\",\r\n  \"issued\": \"2018-03-11T10:28:00+01:00\",\r\n  \"performer\": [\r\n    {\r\n      \"reference\": \"http://external.fhir.server/Organization/7772\",\r\n      \"display\": \"Zentrallabor des IKCL\"\r\n    }\r\n  ],\r\n  \"valueQuantity\": {\r\n    \"value\": 72,\r\n    \"unit\": \"µmol/l\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"umol/L\"\r\n  },\r\n  \"interpretation\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n          \"code\": \"N\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"referenceRange\": [\r\n    {\r\n      \"low\": {\r\n        \"value\": 72\r\n      },\r\n      \"high\": {\r\n        \"value\": 127\r\n      },\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/referencerange-meaning\",\r\n            \"code\": \"normal\",\r\n            \"display\": \"Normal Range\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create PatientInIcu",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "62dafb29-9f2d-4f1c-935d-34901e6f4ffd",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"cefe30c3-7597-421a-8509-8c15aa2a2d87\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu\"\r\n    ]\r\n  },\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"code\": \"survey\",\r\n          \"display\": \"Survey\",\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"code\": \"01\",\r\n        \"display\": \"Is the patient in the intensive care unit?\",\r\n        \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes\"\r\n      }\r\n    ]\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-14\",\r\n  \"status\": \"final\",\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"valueCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"code\": \"373067005\",\r\n        \"display\": \"No (qualifier value)\",\r\n        \"system\": \"http://snomed.info/sct\"\r\n      }\r\n    ]\r\n  },\r\n  \"resourceType\": \"Observation\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create PregnancyStatus",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "4eeeefa4-de43-452a-857b-3aca53055fb9",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"pregnancy-status\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pregnancy-status\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"urn:ietf:rfc:3986\",\r\n      \"value\": \"urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281\"\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"survey\",\r\n          \"display\": \"Survey\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"82810-3\",\r\n        \"display\": \"Pregnancy status\"\r\n      }\r\n    ],\r\n    \"text\": \"Pregnancy status\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2012-09-17\",\r\n  \"valueCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"LA26683-5\",\r\n        \"display\": \"Not pregnant\"\r\n      }\r\n    ],\r\n    \"text\": \"Not pregnant\"\r\n  },\r\n  \"performer\": [\r\n    {\r\n      \"reference\": \"http://external.fhir.server/Practitioner/f201\"\r\n    }\r\n  ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create RespiratoryRate",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "143fe4f9-5f86-4f55-a02a-02b2fc009307",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"a0897b04-2e57-43a7-9372-3c1f6a2fef1c\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-rate\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"OBI\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://www.charite.de/fhir/CodeSystem/observation-identifiers\",\r\n      \"value\": \"9279-1_RespiratoryRate\",\r\n      \"assigner\": {\r\n        \"reference\": \"Organization/Charité\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"9279-1\",\r\n        \"display\": \"Respiratory rate\"\r\n      },\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"86290005\",\r\n        \"display\": \"Respiratory rate (observable entity)\"\r\n      }\r\n    ],\r\n    \"text\": \"Respiratory rate\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-09-25\",\r\n  \"valueQuantity\": {\r\n    \"value\": 22,\r\n    \"unit\": \"per minute\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"/min\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create SmokingStatus",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "2cc3454c-e613-4787-af4f-f4bcc5586531",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status\"\r\n    ]\r\n  },\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"social-history\",\r\n          \"display\": \"Social History\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"72166-2\",\r\n        \"display\": \"Tobacco smoking status\"\r\n      }\r\n    ]\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-09-21\",\r\n  \"valueCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"LA18978-9\",\r\n        \"display\": \"Never smoker\"\r\n      }\r\n    ],\r\n    \"text\": \"Patient is nonsmoker\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create SofaScore",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ea7423e1-2d7c-40cb-9061-9d44ed89755e",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"status\": \"final\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score\"\r\n    ]\r\n  },\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"survey\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes\",\r\n        \"code\": \"06\",\r\n        \"display\": \"SOFA-Score\"\r\n      }\r\n    ],\r\n    \"text\": \"Sepsis-related organ failure assessment score\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-09-16\",\r\n  \"component\": [\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"resp\",\r\n            \"display\": \"Respiratory system\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Respiratory system scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"resp3\",\r\n            \"display\": \"Respiratory system SOFA score 3\"\r\n          }\r\n        ],\r\n        \"text\": \"PaO2/FiO2 [mmHg (kPa)] < 200 (26.7) and mechanically ventilated\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"ns\",\r\n            \"display\": \"Nervous system\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Nervous system scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"ns4\",\r\n            \"display\": \"Nervous system SOFA score 4\"\r\n          }\r\n        ],\r\n        \"text\": \"Glasgow Coma Scale (GCS) < 6\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"cvs\",\r\n            \"display\": \"Cardiovascular system\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Cardiovascular system scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"cvs0\",\r\n            \"display\": \"Cardiovascular system SOFA score 0\"\r\n          }\r\n        ],\r\n        \"text\": \"Mean arterial pressure (MAP) ≥ 70 mmHg\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"liv\",\r\n            \"display\": \"Liver\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Liver scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"liv1\",\r\n            \"display\": \"Liver SOFA score 1\"\r\n          }\r\n        ],\r\n        \"text\": \"Bilirubin (mg/dl) [umol/L] 1.2-1.9 [20-32]\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"coa\",\r\n            \"display\": \"Coagulation\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Coagulation scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"coa2\",\r\n            \"display\": \"Coagulation SOFA score 2\"\r\n          }\r\n        ],\r\n        \"text\": \"Platelets×10^3/ul < 100\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"kid\",\r\n            \"display\": \"Kidneys\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Kidneys scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"kid4\",\r\n            \"display\": \"Kidneys SOFA score 4\"\r\n          }\r\n        ],\r\n        \"text\": \"Creatinine (mg/dl) [umol/L] (or urine output) > 5.0 [> 440] (or < 200 ml/d)\"\r\n      }\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Observation",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3c95cb26-f673-4e7c-b322-8108995575f6",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Patient",
+					"item": [
+						{
+							"name": "Create Patient",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "c2a7bcda-107d-4c48-b59d-3238b16edd8e",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Patient\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient\"\r\n    ]\r\n  },\r\n  \"extension\": [\r\n    {\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group\",\r\n      \"valueCoding\": {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"186019001\",\r\n        \"display\": \"Other ethnic, mixed origin\"\r\n      }\r\n    },\r\n    {\r\n      \"extension\": [\r\n        {\r\n          \"url\": \"dateTimeOfDocumentation\",\r\n          \"valueDateTime\": \"2020-10-01\"\r\n        },\r\n        {\r\n          \"url\": \"age\",\r\n          \"valueAge\": {\r\n            \"value\": 67,\r\n            \"unit\": \"years\",\r\n            \"system\": \"http://unitsofmeasure.org\",\r\n            \"code\": \"a\"\r\n          }\r\n        }\r\n      ],\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age\"\r\n    }\r\n  ],\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  ],\r\n  \"birthDate\": \"1953-09-30\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Patient",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Patient"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Patient",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "372ad844-2d99-4de9-85b3-07682df586c6",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Patient?identifier={{patientId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Patient"
+									],
+									"query": [
+										{
+											"key": "identifier",
+											"value": "{{patientId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Procedure",
+					"item": [
+						{
+							"name": "Create Procedure",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "6f71493a-9c0d-4427-a3be-29d985dfd663",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"resourceType\": \"Procedure\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure\"\r\n        ]\r\n    },\r\n    \"status\": \"completed\",\r\n    \"category\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"387713003\",\r\n                \"display\": \"Surgical procedure (procedure)\"\r\n            }\r\n        ]\r\n    },\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"80146002\",\r\n                \"display\": \"Excision of appendix (procedure)\"\r\n            },\r\n            {\r\n                \"system\": \"http://fhir.de/CodeSystem/dimdi/ops\",\r\n                \"version\": \"2020\",\r\n                \"code\": \"5-470\",\r\n                \"display\": \"Appendektomie\"\r\n            }\r\n        ]\r\n    },\r\n    \"performedDateTime\": \"2020-04-23\",\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"07f602e0-579e-4fe3-95af-381728bf0000\"\r\n        }\r\n    },\r\n    \"note\": [\r\n        {\r\n            \"text\": \"This is a note about the procedure\"\r\n        }\r\n    ],\r\n    \"recorder\": {\r\n        \"reference\": \"http://external.fhir.server/Practitioner/f201\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Procedure",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Procedure"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Procedure",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "bacf0f00-8298-4286-836f-d5e0ac0e6d44",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Procedure?subject.identifier={{patientId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Procedure"
+									],
+									"query": [
+										{
+											"key": "subject.identifier",
+											"value": "{{patientId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b07c702d-c82a-45fc-a4af-bc15798ab5e8",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "2f3fd9bf-a0b4-468a-914f-9192c2fed4e1",
 								"type": "text/javascript",
 								"exec": [
 									""
@@ -810,6 +1019,49 @@
 					"_postman_isSubFolder": true
 				}
 			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "EHRbase",
+			"item": [
+				{
+					"name": "Create EHR",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_type\": \"EHR_STATUS\",\r\n    \"name\": {\r\n      \"_type\": \"DV_TEXT\",\r\n      \"value\": \"EHR Status\"\r\n    },\r\n    \"subject\": {\r\n      \"_type\": \"PARTY_SELF\",\r\n\t\t\t\"external_ref\": {\r\n\t\t\t\t\"namespace\": \"DEMOGRAPHIC\",\r\n\t\t\t\t\"type\": \"PERSON\",\r\n\t\t\t\t\"id\": {\r\n\t\t\t\t\t\"_type\": \"HIER_OBJECT_ID\",\r\n\t\t\t\t\t\"value\": \"{{patientId}}\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n    },\r\n    \"archetype_node_id\": \"openEHR-EHR-EHR_STATUS.generic.v1\",\r\n    \"uid\": {\r\n      \"_type\": \"HIER_OBJECT_ID\",\r\n      \"value\": \"8e2abf44-ad74-47eb-ab53-79ec8cd0fd16::local.ehrbase.org::1\"\r\n    },\r\n    \"is_modifiable\": true,\r\n    \"is_queryable\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ehrbase/rest/openehr/v1/ehr",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ehrbase",
+								"rest",
+								"openehr",
+								"v1",
+								"ehr"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "REST",
+			"item": [],
 			"protocolProfileBehavior": {}
 		}
 	],
