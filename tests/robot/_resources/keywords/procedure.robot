@@ -50,11 +50,35 @@ validate response - 201
 
 
 create procedure
-    [Arguments]         ${fhir_resource}
+    [Arguments]         ${example_json}
+    POST /Procedure with ehr reference    Procedure    ${example_json}
 
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_PROCEDURE}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 
-    &{resp}             POST    ${BASE_URL}/Procedure   body=${payload}
+#                                   .                    
+#                                 .o8                    
+# oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
+#  888' `88b d88' `88b d88(  "8   888                    
+#  888   888 888   888 `"Y88b.    888                    
+#  888   888 888   888 o.  )88b   888 .                  
+#  888bod8P' `Y8bod8P' 8""888P'   "888"                  
+#  888                                                   
+# o888o                                                  
+#
+# [ VALIDATE POST RESPONSES ]
+
+
+POST /Procedure
+    [Arguments]         ${fhir_resource_name}    ${payload}
+
+    Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' PROCEDURE
+    &{resp}             POST    ${BASE_URL}/Procedure    body=${payload}
                         Output Debug Info To Console
+
+
+POST /Procedure with ehr reference
+    [Arguments]         ${fhir_resource_name}    ${example_json}
+
+    ${payload}          Load JSON From File    ${DATA_SET_PATH_PROCEDURE}/${example_json}
+                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
+                        Output Debug Info To Console    ${payload}
+                        POST /Procedure    ${fhir_resource_name}    ${payload}
