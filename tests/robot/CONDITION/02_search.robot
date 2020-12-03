@@ -32,7 +32,6 @@ Force Tags              search
 *** Test Cases ***
 001 Search Diagnose Condition
     [Documentation]     Search Diagnose Condition
-    [Tags]              not-ready
 
     condition.create diagnose condition    create.json
     condition.get diagnose condition
