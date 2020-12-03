@@ -72,14 +72,6 @@ get diagnose condition
 create diagnose condition
     [Arguments]         ${example_json}
     POST /Condition with ehr reference    Diagnose Condition    ${example_json}
-#    [Arguments]         ${fhir_resource}
-#
-#    ${payload}          Load JSON From File    ${DATA_SET_PATH_CONDITION}/${fhir_resource}
-#                        # Output    ${payload}
-#                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-#
-#    &{resp}             POST    ${BASE_URL}/Condition    body=${payload}
-#                        Output Debug Info To Console
 
 
 #                                   .                    
