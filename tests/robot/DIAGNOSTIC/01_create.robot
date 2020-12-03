@@ -60,5 +60,5 @@ Force Tags              create
     [Documentation]     Trigger endpoint using invalid payload.
 
     ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    create-hls-genetics-results.json 
+    diagnostic.create diagnostic report    create-hls-genetics-result.json 
     diagnostic.validate response - 422 (profile not supported)
