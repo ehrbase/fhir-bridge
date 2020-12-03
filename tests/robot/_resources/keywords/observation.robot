@@ -87,7 +87,7 @@ validate response - 422 (with error message)
 
 
 get body temperature
-    &{resp}             GET    ${BASE_URL}/Observation?identifier=${subject_id}&_profile=http://hl7.org/fhir/StructureDefinition/bodytemp
+    &{resp}             GET    ${BASE_URL}/Observation?subject.identifier=${subject_id}&_profile=http://hl7.org/fhir/StructureDefinition/bodytemp
                         Integer    response status    200
                         String     request method    GET
                         String     response body id
@@ -97,7 +97,7 @@ get body temperature
 
 
 get observation lab
-    &{resp}             GET    ${BASE_URL}/Observation?identifier=${subject_id}&_profile=https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab
+    &{resp}             GET    ${BASE_URL}/Observation?subject.identifier=${subject_id}&_profile=https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab
                         Integer    response status    200
                         String     request method    GET
                         String     response body id
@@ -107,7 +107,7 @@ get observation lab
 
 
 get coronavirus lab results
-    &{resp}             GET    ${BASE_URL}/Observation?identifier=${subject_id}&_profile=https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest
+    &{resp}             GET    ${BASE_URL}/Observation?subject.identifier=${subject_id}&_profile=https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest
                         Integer    response status    200
                         String     request method    GET
                         String     response body id

@@ -53,7 +53,7 @@ validate response - 422 (Unprocessable Entity)
 
 
 get diagnose condition
-    &{resp}             GET    ${BASE_URL}/Condition?identifier=${subject_id}
+    &{resp}             GET    ${BASE_URL}/Condition?subject.identifier=${subject_id}
                         Integer    response status    200
                         Output Debug Info To Console
 
