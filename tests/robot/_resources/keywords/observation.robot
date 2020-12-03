@@ -29,6 +29,7 @@
 #
 # [ VALIDATION KEYWORDS ] 
 
+
 validate response - 201
     Integer    response status    201
 
@@ -113,7 +114,6 @@ get coronavirus lab results
                         String     response body resourceType    Bundle
                         String     response body entry 0 resource resourceType    Observation
                         Output Debug Info To Console
-
 
 
 #                                            .
