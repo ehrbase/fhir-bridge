@@ -44,14 +44,14 @@ validate response - 422 (missing observation)
 
     # String     response body issue 0 diagnostics
     String     $.issue[0].diagnostics    # same as line above but in JSONPath syntax
-    ...        pattern=There was a problem saving the compositionOne contained Observation was expected 0 were received in DiagnosticReport
+    ...        pattern=One contained Observation was expected 0 were received in DiagnosticReport
     
     
 validate response - 422 (profile not supported)
     Integer    response status    422
 
     String     $.issue[0].diagnostics 
-    ...        pattern=is not supported for DiagnosticReport. One of the following profiles is expected
+    ...        pattern=not supported for DiagnosticReport
 
 
 #                                            .
@@ -68,14 +68,6 @@ validate response - 422 (profile not supported)
 create diagnostic report
     [Arguments]         ${example_json}
     POST /Diagnostic with ehr reference    Diagnostic Report    ${example_json}
-#    [Arguments]         ${fhir_resource}
-#
-#    ${payload}          Load JSON From File    ${DATA_SET_PATH_DIAGNOSTIC}/${fhir_resource}
-#                        # Output    ${payload}
-#                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-#
-#    &{resp}             POST    ${BASE_URL}/DiagnosticReport    body=${payload}
-#                        Output Debug Info To Console
 
 
 #                                   .                    
@@ -94,12 +86,12 @@ create diagnostic report
 POST /Diagnostic
     [Arguments]         ${fhir_resource_name}    ${payload}
 
-    Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' DIAGNOSTIC
-    &{resp}             POST    ${BASE_URL}/Diagnostic    body=${payload}
+    Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' DIAGNOSTICREPORT
+    &{resp}             POST    ${BASE_URL}/DiagnosticReport    body=${payload}
                         Output Debug Info To Console
 
 
-POST /Diacnostic with ehr reference
+POST /Diagnostic with ehr reference
     [Arguments]         ${fhir_resource_name}    ${example_json}
 
     ${payload}          Load JSON From File    ${DATA_SET_PATH_DIAGNOSTIC}/${example_json}
