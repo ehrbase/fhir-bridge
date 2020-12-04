@@ -2,8 +2,6 @@ package org.ehrbase.fhirbridge.camel.processor;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import ca.uhn.fhir.validation.FhirValidator;
-import ca.uhn.fhir.validation.ValidationResult;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
@@ -24,36 +22,25 @@ import org.springframework.lang.NonNull;
 import java.util.List;
 import java.util.Set;
 
-public class DefaultCreateResourceRequestValidator implements Processor, MessageSourceAware {
+public class ResourceProfileValidator implements Processor, MessageSourceAware {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DefaultCreateResourceRequestValidator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ResourceProfileValidator.class);
 
     private final FhirContext fhirContext;
 
-    private final FhirValidator fhirValidator;
-
     private MessageSourceAccessor messages;
 
-    public DefaultCreateResourceRequestValidator(FhirContext fhirContext, FhirValidator fhirValidator) {
+    public ResourceProfileValidator(FhirContext fhirContext) {
         this.fhirContext = fhirContext;
-        this.fhirValidator = fhirValidator;
     }
 
     @Override
+    @SuppressWarnings("java:S1192")
     public void process(Exchange exchange) {
         Resource resource = exchange.getIn().getBody(Resource.class);
 
         LOG.debug("Start validating {} resource...", resource.getResourceType());
 
-        validateProfile(exchange, resource);
-
-        validateResource(resource);
-
-        LOG.info("{} resource validated", resource.getResourceType());
-    }
-
-    @SuppressWarnings("java:S1192")
-    private void validateProfile(Exchange exchange, Resource resource) {
         OperationOutcome operationOutcome = new OperationOutcome();
         Class<? extends Resource> resourceType = resource.getClass();
 
@@ -92,14 +79,10 @@ public class DefaultCreateResourceRequestValidator implements Processor, Message
 
             exchange.getMessage().setHeader(FhirBridgeConstants.PROFILE, supportedProfiles.iterator().next());
         }
+
+        LOG.info("{} resource validated", resource.getResourceType());
     }
 
-    private void validateResource(Resource resource) {
-        ValidationResult validationResult = fhirValidator.validateWithResult(resource);
-        if (!validationResult.isSuccessful()) {
-            throw new UnprocessableEntityException(fhirContext, validationResult.toOperationOutcome());
-        }
-    }
 
     @Override
     public void setMessageSource(@NonNull MessageSource messageSource) {

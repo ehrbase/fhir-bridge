@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.camel.route;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.hl7.fhir.r4.model.Patient;
@@ -14,14 +14,14 @@ public class PatientRoutes extends RouteBuilder {
 
     private final IFhirResourceDao<Patient> patientDao;
 
-    private final DefaultCreateResourceRequestValidator requestValidator;
+    private final ResourceProfileValidator requestValidator;
 
     private final PatientIdProcessor patientIdProcessor;
 
     private final DefaultExceptionHandler defaultExceptionHandler;
 
     public PatientRoutes(IFhirResourceDao<Patient> patientDao,
-                         DefaultCreateResourceRequestValidator requestValidator,
+                         ResourceProfileValidator requestValidator,
                          PatientIdProcessor patientIdProcessor,
                          DefaultExceptionHandler defaultExceptionHandler) {
         this.patientDao = patientDao;
