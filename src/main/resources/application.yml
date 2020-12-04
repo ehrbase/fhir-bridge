@@ -14,9 +14,16 @@ spring:
       ddl-auto: validate
     open-in-view: false
     properties:
-      hibernate.search.default.indexBase: ${java.io.tmpdir}/fhir-bridge-poc/lucene
-      hibernate.search.lucene_version: LUCENE_CURRENT
+      hibernate.dialect: org.hibernate.dialect.H2Dialect
+      hibernate.jdbc.batch_size: 20
+      hibernate.cache.use_query_cache: false
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_structured_entries: false
+      hibernate.cache.use_minimal_puts: false
+      hibernate.search.default.indexBase: ${java.io.tmpdir}/fhir-bridge/lucenefiles
       hibernate.search.model_mapping: ca.uhn.fhir.jpa.search.LuceneSearchMappingFactory
+      hibernate.search.default.directory_provider: filesystem
+      hibernate.search.lucene_version: LUCENE_CURRENT
   liquibase:
     database-change-log-table: DATABASE_CHANGELOG
     database-change-log-lock-table: DATABASE_CHANGELOG_LOCK

@@ -118,6 +118,17 @@ class ObservationIT extends AbstractSetupIT {
                 "expected:0.0 <= 1500.0 < 1000.0.\\n\\n\",\"status\":\"Bad Request\"}", exception.getMessage());
     }
 
+
+    @Test
+    void createWithInvalidQuantityDatatype() throws IOException {
+        String resource = IOUtils.toString(new ClassPathResource("Observation/create-with-invalid-quantity-datatype.json").getInputStream(), StandardCharsets.UTF_8);
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
+        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+
+        assertEquals("HTTP 422 : Error parsing JSON: the primitive value must be a number", exception.getMessage());
+    }
+
+
     private void create(String path) throws IOException {
         String resource = IOUtils.toString(new ClassPathResource(path).getInputStream(), StandardCharsets.UTF_8);
         MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
