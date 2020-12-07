@@ -156,7 +156,6 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
-	[Tags]             test
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create smoking status    create-smoking-status.json
