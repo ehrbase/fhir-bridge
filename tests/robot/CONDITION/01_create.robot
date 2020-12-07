@@ -36,7 +36,7 @@ Force Tags              create
     ...                 2. trigger condition endpoint
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create diagnose condition    create.json
+    condition.create diagnose condition    create-default.json
     condition.validate response - 201
 
 
