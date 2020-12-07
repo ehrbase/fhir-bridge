@@ -1409,4 +1409,34 @@
                                  constraintName="FK_TRM_VALUESET_PID"
                                  referencedTableName="TRM_VALUESET" referencedColumnNames="PID"/>
     </changeSet>
+
+    <changeSet id="2" author="subigre">
+        <addColumn tableName="TRM_CONCEPT_MAP">
+            <column name="VER" type="varchar(200)"/>
+        </addColumn>
+
+        <dropUniqueConstraint tableName="TRM_CONCEPT_MAP" constraintName="IDX_CONCEPT_MAP_URL"/>
+
+        <addUniqueConstraint tableName="TRM_CONCEPT_MAP" columnNames="URL, VER" constraintName="IDX_CONCEPT_MAP_URL"/>
+
+        <addUniqueConstraint tableName="TRM_CODESYSTEM_VER" columnNames="CODESYSTEM_PID, CS_VERSION_ID"
+                             constraintName="IDX_CODESYSTEM_AND_VER"/>
+
+        <addColumn tableName="TRM_VALUESET">
+            <column name="VER" type="varchar(200)"/>
+        </addColumn>
+
+        <dropUniqueConstraint tableName="TRM_VALUESET" constraintName="IDX_VALUESET_URL"/>
+
+        <addUniqueConstraint tableName="TRM_VALUESET" columnNames="URL, VER" constraintName="IDX_VALUESET_URL"/>
+
+        <addColumn tableName="TRM_VALUESET_CONCEPT">
+            <column name="SYSTEM_VER" type="varchar(200)"/>
+        </addColumn>
+
+        <dropUniqueConstraint tableName="TRM_VALUESET_CONCEPT" constraintName="IDX_VS_CONCEPT_CS_CD"/>
+
+        <addUniqueConstraint tableName="TRM_VALUESET_CONCEPT" columnNames="VALUESET_PID, SYSTEM_URL, SYSTEM_VER, CODEVAL"
+                             constraintName="IDX_VS_CONCEPT_CS_CD"/>
+    </changeSet>
 </databaseChangeLog>

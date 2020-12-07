@@ -8,7 +8,7 @@ import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
-import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
@@ -24,7 +24,7 @@ public class ConditionRoutes extends RouteBuilder {
 
     private final IFhirResourceDao<Condition> conditionDao;
 
-    private final DefaultCreateResourceRequestValidator requestValidator;
+    private final ResourceProfileValidator requestValidator;
 
     private final PatientIdProcessor patientIdProcessor;
 
@@ -33,7 +33,7 @@ public class ConditionRoutes extends RouteBuilder {
     private final DefaultExceptionHandler defaultExceptionHandler;
 
     public ConditionRoutes(IFhirResourceDao<Condition> conditionDao,
-                           DefaultCreateResourceRequestValidator requestValidator,
+                           ResourceProfileValidator requestValidator,
                            PatientIdProcessor patientIdProcessor,
                            CompositionConverterResolver compositionConverterResolver,
                            DefaultExceptionHandler defaultExceptionHandler) {

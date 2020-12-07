@@ -3,10 +3,10 @@ package org.ehrbase.fhirbridge.config;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
 import ca.uhn.fhir.parser.IParser;
-import ca.uhn.fhir.validation.FhirValidator;
+import ca.uhn.fhir.rest.server.interceptor.RequestValidatingInterceptor;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.FhirBridgeException;
-import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.fhir.common.validation.TerminologyServerValidationSupport;
 import org.ehrbase.fhirbridge.fhir.common.validation.TerminologyValidationMode;
@@ -33,6 +33,8 @@ import java.io.InputStream;
 @EnableConfigurationProperties(FhirValidationProperties.class)
 public class FhirValidationConfiguration {
 
+    private final FhirContext fhirContext = FhirContext.forR4();
+
     private final FhirValidationProperties properties;
 
     private final ResourcePatternResolver resourceLoader;
@@ -43,8 +45,8 @@ public class FhirValidationConfiguration {
     }
 
     @Bean
-    public DefaultCreateResourceRequestValidator defaultCreateResourceRequestValidator(FhirContext fhirContext, FhirValidator fhirValidator) {
-        return new DefaultCreateResourceRequestValidator(fhirContext, fhirValidator);
+    public ResourceProfileValidator defaultCreateResourceRequestValidator(FhirContext fhirContext) {
+        return new ResourceProfileValidator(fhirContext);
     }
 
     @Bean
@@ -53,19 +55,17 @@ public class FhirValidationConfiguration {
     }
 
     @Bean
-    public FhirValidator fhirValidator(FhirContext fhirContext) {
-        FhirValidator fhirValidator = fhirContext.newValidator();
-
+    public RequestValidatingInterceptor requestValidatingInterceptor() {
         ValidationSupportChain validationSupport = new ValidationSupportChain();
         validationSupport.addValidationSupport(new DefaultProfileValidationSupport(fhirContext));
-        validationSupport.addValidationSupport(prePopulatedValidationSupport(fhirContext));
+        validationSupport.addValidationSupport(prePopulatedValidationSupport());
 
         TerminologyValidationMode mode = properties.getTerminology().getMode();
         if (mode == TerminologyValidationMode.EMBEDDED) {
             validationSupport.addValidationSupport(new CommonCodeSystemsTerminologyService(fhirContext));
             validationSupport.addValidationSupport(new InMemoryTerminologyServerValidationSupport(fhirContext));
         } else if (mode == TerminologyValidationMode.SERVER) {
-            validationSupport.addValidationSupport(terminologyServerValidationSupport(fhirContext));
+            validationSupport.addValidationSupport(terminologyServerValidationSupport());
         }
 
         CachingValidationSupport cachingValidationSupport = new CachingValidationSupport(validationSupport);
@@ -74,12 +74,12 @@ public class FhirValidationConfiguration {
         fhirInstanceValidator.setErrorForUnknownProfiles(false);
         fhirInstanceValidator.setNoTerminologyChecks(properties.getTerminology().getMode() == TerminologyValidationMode.NONE);
 
-        fhirValidator.registerValidatorModule(fhirInstanceValidator);
-
-        return fhirValidator;
+        RequestValidatingInterceptor interceptor = new RequestValidatingInterceptor();
+        interceptor.addValidatorModule(fhirInstanceValidator);
+        return interceptor;
     }
 
-    private PrePopulatedValidationSupport prePopulatedValidationSupport(FhirContext fhirContext) {
+    private PrePopulatedValidationSupport prePopulatedValidationSupport() {
         PrePopulatedValidationSupport prePopulatedValidationSupport = new PrePopulatedValidationSupport(fhirContext);
         IParser parser = fhirContext.newXmlParser();
         try {
@@ -94,7 +94,7 @@ public class FhirValidationConfiguration {
         return prePopulatedValidationSupport;
     }
 
-    private TerminologyServerValidationSupport terminologyServerValidationSupport(FhirContext fhirContext) {
+    private TerminologyServerValidationSupport terminologyServerValidationSupport() {
         String serverUrl = properties.getTerminology().getServerUrl();
         return new TerminologyServerValidationSupport(fhirContext, fhirContext.newRestfulGenericClient(serverUrl));
     }
