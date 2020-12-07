@@ -1,4 +1,5 @@
-# Copyright (c) 2019 Wladislaw Wagner (Vitasystems GmbH), P. Wohlfarth (Appsfactory)
+# Copyright (c) 2019 Wladislaw Wagner (Vitasystems GmbH), Peter Wohlfarth (Appsfactory GmbH), 
+# Dave Petzold (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -17,15 +18,16 @@
 
 
 *** Keywords ***
-create diagnose condition
-    [Arguments]         ${fhir_resource}
 
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_CONDITION}/${fhir_resource}
-                        # Output    ${payload}
-                        Update Value To Json    ${payload}    $.subject.reference    urn:uuid:${subject_id}
-
-    &{resp}             POST    ${BASE_URL}/Condition    body=${payload}
-                        Output Debug Info To Console
+#                       oooo   o8o        .o8                .             
+#                       `888   `"'       "888              .o8             
+# oooo    ooo  .oooo.    888  oooo   .oooo888   .oooo.   .o888oo  .ooooo.  
+#  `88.  .8'  `P  )88b   888  `888  d88' `888  `P  )88b    888   d88' `88b 
+#   `88..8'    .oP"888   888   888  888   888   .oP"888    888   888ooo888 
+#    `888'    d8(  888   888   888  888   888  d8(  888    888 . 888    .o 
+#     `8'     `Y888""8o o888o o888o `Y8bod88P" `Y888""8o   "888" `Y8bod8P' 
+#
+# [ VALIDATION KEYWORDS ] 
 
 
 validate response - 201
@@ -39,7 +41,64 @@ validate response - 422 (Unprocessable Entity)
                         ...        Specified profile type was 'Observation', but found type 'Condition'
 
 
+#                                                 oooo                     
+#                                                 `888                     
+#  .oooo.o  .ooooo.   .oooo.   oooo d8b  .ooooo.   888 .oo.                
+# d88(  "8 d88' `88b `P  )88b  `888""8P d88' `"Y8  888P"Y88b               
+# `"Y88b.  888ooo888  .oP"888   888     888        888   888               
+# o.  )88b 888    .o d8(  888   888     888   .o8  888   888               
+# 8""888P' `Y8bod8P' `Y888""8o d888b    `Y8bod8P' o888o o888o   
+#
+# [ SEARCH/RETRIEVE ]
+
+
 get diagnose condition
-    &{resp}             GET    ${BASE_URL}/Condition?identifier=${subject_id}
+    &{resp}             GET    ${BASE_URL}/Condition?subject.identifier=${subject_id}
                         Integer    response status    200
                         Output Debug Info To Console
+
+
+#                                            .
+#                                          .o8
+#  .ooooo.  oooo d8b  .ooooo.   .oooo.   .o888oo  .ooooo.
+# d88' `"Y8 `888""8P d88' `88b `P  )88b    888   d88' `88b
+# 888        888     888ooo888  .oP"888    888   888ooo888
+# 888   .o8  888     888    .o d8(  888    888 . 888    .o
+# `Y8bod8P' d888b    `Y8bod8P' `Y888""8o   "888" `Y8bod8P'
+#
+# [ SUCEED CREATING ]
+
+
+create diagnose condition
+    [Arguments]         ${example_json}
+    POST /Condition with ehr reference    Diagnose Condition    ${example_json}
+
+
+#                                   .                    
+#                                 .o8                    
+# oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
+#  888' `88b d88' `88b d88(  "8   888                    
+#  888   888 888   888 `"Y88b.    888                    
+#  888   888 888   888 o.  )88b   888 .                  
+#  888bod8P' `Y8bod8P' 8""888P'   "888"                  
+#  888                                                   
+# o888o                                                  
+#
+# [ VALIDATE POST RESPONSES ]
+
+
+POST /Condition
+    [Arguments]         ${fhir_resource_name}    ${payload}
+
+    Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' CONDITION
+    &{resp}             POST    ${BASE_URL}/Condition    body=${payload}
+                        Output Debug Info To Console
+
+
+POST /Condition with ehr reference
+    [Arguments]         ${fhir_resource_name}    ${example_json}
+
+    ${payload}          Load JSON From File    ${DATA_SET_PATH_CONDITION}/${example_json}
+                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
+                        Output Debug Info To Console    ${payload}
+                        POST /Condition    ${fhir_resource_name}    ${payload}

@@ -33,7 +33,7 @@ Force Tags              search
 001 Search Diagnose Condition
     [Documentation]     Search Diagnose Condition
 
-    condition.create diagnose condition    condition-example.json
+    condition.create diagnose condition    create.json
     condition.get diagnose condition
 
 

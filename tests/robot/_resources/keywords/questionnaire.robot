@@ -29,29 +29,9 @@
 #
 # [ VALIDATION KEYWORDS ] 
 
-
 validate response - 201
-    Integer    response status    201
-
-    String     response body resourceType    DiagnosticReport
-    String     response body id
-    String     response body meta versionId    1
-    string     response body contained 0 resourceType    Observation
-
-
-validate response - 422 (missing observation)
-    Integer    response status    422
-
-    # String     response body issue 0 diagnostics
-    String     $.issue[0].diagnostics    # same as line above but in JSONPath syntax
-    ...        pattern=One contained Observation was expected 0 were received in DiagnosticReport
-    
-    
-validate response - 422 (profile not supported)
-    Integer    response status    422
-
-    String     $.issue[0].diagnostics 
-    ...        pattern=not supported for DiagnosticReport
+    [Documentation]     Validates response of POST to /QuestionnaireResponse endpoint
+                        Integer    response status    201
 
 
 #                                            .
@@ -64,10 +44,9 @@ validate response - 422 (profile not supported)
 #
 # [ SUCEED CREATING ]
 
-
-create diagnostic report
+create questionnaire response
     [Arguments]         ${example_json}
-    POST /Diagnostic with ehr reference    Diagnostic Report    ${example_json}
+    POST /Questionaire with ehr reference    Questionaire    ${example_json}
 
 
 #                                   .                    
@@ -82,19 +61,18 @@ create diagnostic report
 #
 # [ VALIDATE POST RESPONSES ]
 
-
-POST /Diagnostic
+POST /Questionaire
     [Arguments]         ${fhir_resource_name}    ${payload}
 
-    Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' DIAGNOSTICREPORT
-    &{resp}             POST    ${BASE_URL}/DiagnosticReport    body=${payload}
+    Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' QUESTIONAIRE
+    &{resp}             POST    ${BASE_URL}/Questionaire    body=${payload}
                         Output Debug Info To Console
 
 
-POST /Diagnostic with ehr reference
+POST /Questionaire with ehr reference
     [Arguments]         ${fhir_resource_name}    ${example_json}
 
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_DIAGNOSTIC}/${example_json}
-                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
-                        Output Debug Info To Console    ${payload}
-                        POST /Diagnostic    ${fhir_resource_name}    ${payload}
+    ${payload}          Load JSON From File    ${DATA_SET_PATH_QUESTIONAIRE}/${example_json}
+                        #Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
+                        #Output Debug Info To Console    ${payload}
+                        POST /Questionaire    ${fhir_resource_name}    ${payload}

@@ -36,7 +36,7 @@ Force Tags              create
     ...                 2. trigger diagnosticreport endpoint
 
     ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    diagnosticreport-diagnosticreportlab-example-contained_obs.json 
+    diagnostic.create diagnostic report    create.json 
     diagnostic.validate response - 201
 
 
@@ -44,7 +44,7 @@ Force Tags              create
     [Documentation]     Trigger endpoint using invalid payload.
 
     ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    diagnosticreport-diagnosticreportlab-example.json 
+    diagnostic.create diagnostic report    create-without-observation.json 
     diagnostic.validate response - 422 (missing observation)
 
 
@@ -52,7 +52,7 @@ Force Tags              create
     [Documentation]     Trigger endpoint using invalid payload.
 
     ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    diagnosticreport-example.json 
+    diagnostic.create diagnostic report    create-with-default-profile.json 
     diagnostic.validate response - 422 (profile not supported)
 
 
@@ -60,5 +60,5 @@ Force Tags              create
     [Documentation]     Trigger endpoint using invalid payload.
 
     ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    diagnosticreport-hla-genetics-results-example.json 
+    diagnostic.create diagnostic report    create-hls-genetics-result.json 
     diagnostic.validate response - 422 (profile not supported)

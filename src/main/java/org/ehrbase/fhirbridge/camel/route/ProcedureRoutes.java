@@ -64,6 +64,7 @@ public class ProcedureRoutes extends RouteBuilder {
         // @formatter:on
     }
 
+    // TODO: Update when Apache Camel > 3.x
     @Bean
     public ProcedureCompositionConverter procedureCompositionConverter() {
         return new ProcedureCompositionConverter();
