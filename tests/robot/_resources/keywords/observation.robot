@@ -187,6 +187,11 @@ create smoking status
     POST /Observation with ehr reference    Smoking Status    ${example_json}
 
 
+create body weight
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Body Weight    ${example_json}
+
+
 # # [ FAIL CREATING ]
 # create blood pressure without ehr reference
 #     [Arguments]         ${example_json}
