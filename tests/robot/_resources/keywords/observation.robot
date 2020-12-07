@@ -182,6 +182,11 @@ create frailty scale score
     POST /Observation with ehr reference    Frailty Scale Score    ${example_json}
 
 
+create smoking status
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Smoking Status    ${example_json}
+
+
 # # [ FAIL CREATING ]
 # create blood pressure without ehr reference
 #     [Arguments]         ${example_json}
