@@ -192,6 +192,11 @@ create body weight
     POST /Observation with ehr reference    Body Weight    ${example_json}
 
 
+create patient in icu
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Patient in Intensive Care Unit (ICU)    ${example_json}
+
+
 # # [ FAIL CREATING ]
 # create blood pressure without ehr reference
 #     [Arguments]         ${example_json}
