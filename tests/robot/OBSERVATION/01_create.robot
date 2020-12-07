@@ -160,3 +160,13 @@ Force Tags              create
 	ehr.create new ehr    000_ehr_status.json
 	observation.create smoking status    create-smoking-status.json
   	observation.validate response - 201
+
+
+014 Create Body Weight
+	[Documentation]    1. create new EHR Patient record
+	...                2. post example json to observation endpoint
+	...                3. validate the response status
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create body weight    create-body-weight.json
+  	observation.validate response - 201
