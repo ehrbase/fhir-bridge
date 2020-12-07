@@ -45,5 +45,5 @@ Force Tags              create
     ...                 2. trigger condition endpoint using invalid payload
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create diagnose condition    create-with-invalid-subject.json
+    condition.create diagnose condition    create-with-invalid-profile.json
     condition.validate response - 422 (Unprocessable Entity)

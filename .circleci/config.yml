@@ -341,6 +341,7 @@ commands:
                         results/0/output.xml
                     mkdir ../00_robot_results
                     cp results/0/* ../00_robot_results/
+                when: always
 
             
     cache-out-fhirbridge-m2-dependencies:

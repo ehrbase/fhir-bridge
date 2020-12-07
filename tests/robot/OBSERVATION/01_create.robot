@@ -18,9 +18,6 @@
 
 
 *** Settings ***
-# Library                 REST
-# Library                 Collections
-# Library                 JSONLibrary
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
@@ -38,7 +35,6 @@ Force Tags              create
 001 Create Body Temperature 
 	[Documentation]    1. create EHR
 	...                2. trigger observation endpoint
-	[Tags]    POC
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create body temperature    create-body-temp.json
@@ -50,7 +46,7 @@ Force Tags              create
 	...                2. trigger observation endpoint
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create blood pressure    observation-bloodpressure-example.json
+	observation.create blood pressure    create-blood-pressure.json
     observation.validate response - 201
 
 
@@ -59,7 +55,7 @@ Force Tags              create
 	...                2. trigger observation endpoint
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create FIO2    observation-example-fiO2.json
+	observation.create FIO2    create-fio2.json
     observation.validate response - 201
 
 
@@ -68,7 +64,7 @@ Force Tags              create
 	...                2. trigger observation endpoint
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create heart rate    observation-example-heart-rate.json
+	observation.create heart rate    create-heart-rate.json
     observation.validate response - 201
 
 
@@ -77,7 +73,7 @@ Force Tags              create
 	...                2. trigger observation endpoint
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create sofa score    observation-sofa-score-example.json
+	observation.create sofa score    create-sofa-score.json
     observation.validate response - 201
 
 
@@ -86,7 +82,7 @@ Force Tags              create
 	...                2. trigger observation endpoint
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create observation lab    observation-observationlab-example.json
+	observation.create observation lab    create-observation-lab.json
     observation.validate response - 201
 
 
@@ -95,7 +91,7 @@ Force Tags              create
 	...                2. trigger observation endpoint
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create observation    observation-example.json
+	observation.create observation    create-with-default-profile.json
     observation.validate response - 422 (default profile not supported)
 
 
@@ -104,7 +100,7 @@ Force Tags              create
 	...                2. trigger observation endpoint
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create observation    observation-vitalsigns-example.json
+	observation.create observation    create-with-unsupported-profile.json
     observation.validate response - 422 (profile not supported)
 
 
@@ -113,16 +109,16 @@ Force Tags              create
 	...                2. trigger observation endpoint
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create observation    observation-coronavirusnachweistest-example.json
+	observation.create observation    create-coronavirus-nachweis-test.json
     observation.validate response - 201
 
 
 010 Create Body Height
 	[Documentation]    1. create EHR
 	...                2. trigger observation endpoint
-    
+
 	ehr.create new ehr    000_ehr_status.json
-	observation.create observation  observation-example-body-height.json
+	observation.create observation  create-body-height.json
 	observation.validate response - 201
 
 
@@ -131,7 +127,7 @@ Force Tags              create
 	...                2. trigger observation endpoint
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create pregnancy status    observation-pregnancy-status-example.json
+	observation.create pregnancy status    create-pregnancy-status.json
   	observation.validate response - 201
 
 
@@ -140,5 +136,6 @@ Force Tags              create
 	...                2. trigger observation endpoint
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create frailty scale score    observation-frailty-scale-score-example.json
+	observation.create frailty scale score    create-clinical-frailty-scale-score.json
   	observation.validate response - 201
+

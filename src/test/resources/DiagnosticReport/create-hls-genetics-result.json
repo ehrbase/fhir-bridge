@@ -1,0 +1,111 @@
+{
+  "resourceType": "DiagnosticReport",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/hlaresult"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n\t\t\t\t\t\t<h3>HLA-A,-B,-C genotyping report for Mary Chalmers (MRN:12345)</h3>\n\t\t\t\t\t\t<pre>\n  LOCUS   ALLELE 1            ALLELE 2\n  HLA-A   HLA-A:01:01G        HLA-A*01:02\n  HLA-B   HLA-B*15:01:01G     HLA-B*57:01:01G\n  HLA-C   HLA-C*01:02:01G     HLA-C*03:04:01G\n                </pre>\n\t\t\t\t\t\t<p>Allele assignments based on IMGT/HLA 3.23</p>\n\t\t\t\t\t\t<p>Effective date: 2015-12-15</p>\n\t\t\t\t\t\t<p>Method: Sequencing of exons 2 and 3 of HLA Class I genes</p>\n\t\t\t\t\t\t<p>Lab: aTypingLab Inc</p>\n\t\t\t\t\t\t<p>Note: Please refer the <a href=\"genomics.html#hla\">implementation guide </a> for more explanation on this\n                carefully organized bundle example.</p>\n\t\t\t\t\t\t<pre>\n  Bob Milius - NMDP - 2016-12-01\n\n  Transaction bundle that creates and links:\n  + DiagnosticReport summarizing genotyping for HLA-A,-B,-C typing of patient(donor)\n  + Obervations for each genotype\n  + Observations for each allele\n  + Sequences for exons 2 and 3 for HLA-A,-B, -C\n\n  The endpoints of the following resources are hardcoded into this transaction bundle\n  because these are presumed to already exist when developing the DiagnosticRequest\n  which was to generate this report bundle:\n\n  urn:uuid:119 (potential donor)\n  Specimen/120 (buccal swab)\n  Organization/68  (typing lab)\n  ServiceRequest/123  (report is based on this request)\n                </pre>\n\t\t\t\t\t</div>"
+  },
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/hla-genotyping-results-allele-database",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.ebi.ac.uk/ipd/imgt/hla",
+            "version": "3.23"
+          }
+        ],
+        "text": "IMGT/HLA 3.23"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/hla-genotyping-results-glstring",
+      "extension": [
+        {
+          "url": "text",
+          "valueString": "HLA-A:01:01G+HLA-A*01:02^HLA-B*15:01:01:01+HLA-B*57:01:01^HLA-C*01:02:01+HLA-C*03:04:01:01"
+        },
+        {
+          "url": "url",
+          "valueUrl": "https://gl.nmdp.org/imgt-hla/3.23.0/multilocus-unphased-genotype/i"
+        }
+      ]
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/hla-genotyping-results-method",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://www.ncbi.nlm.nih.gov/gtr/",
+            "code": "GTR000000000.0"
+          }
+        ],
+        "text": "Next Generation Sequencing of exons 2 and 3 of HLA Class I genes"
+      }
+    }
+  ],
+  "basedOn": [
+    {
+      "reference": "http://external.fhir.server/ServiceRequest/123"
+    }
+  ],
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+          "code": "GE",
+          "display": "Genetics"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "13303-3",
+        "display": "HLA-A+​B+​C (class I) [Type]"
+      }
+    ]
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "effectiveDateTime": "2016-12-15",
+  "issued": "2016-12-15T14:15:30-06:00",
+  "performer": [
+    {
+      "reference": "http://external.fhir.server/Organization/68",
+      "display": "aTypingLab Inc"
+    }
+  ],
+  "specimen": [
+    {
+      "reference": "http://external.fhir.server/Specimen/67",
+      "display": "buccal swab from Mary Chalmers"
+    }
+  ],
+  "result": [
+    {
+      "reference": "urn:uuid:49a86246-4004-42eb-9bdc-f542f93f9228",
+      "display": "HLA-A: HLA-A:01:01G+HLA-A*01:02"
+    },
+    {
+      "reference": "urn:uuid:60613a43-c4cb-4502-b3e2-cf9215feaa70",
+      "display": "HLA-B: HLA-B*15:01:01G+HLA-B*57:01:01G"
+    },
+    {
+      "reference": "urn:uuid:0e0a780e-4486-4cd0-bfae-7243c579f208",
+      "display": "HLA-C: HLA-C*01:02:01G+HLA-C*03:04:01G"
+    }
+  ]
+}

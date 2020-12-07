@@ -4,7 +4,7 @@ import org.ehrbase.fhirbridge.ehr.Composition;
 
 public interface CompositionConverter<C extends Composition, T> {
 
-    T fromComposition(C composition);
+    T fromComposition(C composition) throws CompositionConversionException;
 
-    C toComposition(T object);
+    C toComposition(T object) throws CompositionConversionException;
 }

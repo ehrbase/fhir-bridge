@@ -1,4 +1,5 @@
-# Copyright (c) 2020 P. Wohlfarth (Appsfactory), Wladislaw Wagner (Vitasystems GmbH), Dave Petzold (Appsfactory GmbH)
+# Copyright (c) 2020 P. Wohlfarth (Appsfactory), Wladislaw Wagner (Vitasystems GmbH), 
+# Dave Petzold (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -17,14 +18,11 @@
 
 
 *** Settings ***
-# Library                 REST
-# Library                 Collections
-# Library                 JSONLibrary
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              establish preconditions
 
-Force Tags              search
+Force Tags              search    not-ready
 
 
 
@@ -37,21 +35,21 @@ Force Tags              search
 001 Search Body Temperature
     [Documentation]    Search Body Temperature
 
-    observation.create body temperature    observation-bodytemp-example.json
+    observation.create body temperature    create-body-temp.json
 	observation.get body temperature
 
 
 002 Search Observation Lab
     [Documentation]    Search Observation Lab
 
-    observation.create observation lab    observation-observationlab-example.json
+    observation.create observation lab    create-observation-lab.json
 	observation.get observation lab
 
 
 003 Search Coronavirus Lab Results
     [Documentation]    Search Coronavirus Lab Results
 
-    observation.create coronavirus lab result    observation-coronavirusnachweistest-example.json
+    observation.create coronavirus lab result    create-coronavirus-nachweis-test.json
 	observation.get coronavirus lab results
 
 
