@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr;
 
 import org.apache.xmlbeans.XmlException;
-import org.ehrbase.client.templateprovider.TemplateProvider;
+import org.ehrbase.webtemplate.templateprovider.TemplateProvider;
 import org.ehrbase.fhirbridge.FhirBridgeException;
 import org.openehr.schemas.v1.OPERATIONALTEMPLATE;
 import org.openehr.schemas.v1.TemplateDocument;
