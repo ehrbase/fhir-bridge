@@ -34,6 +34,7 @@ Force Tags              create
 001 Create Diagnose Condition
     [Documentation]     1. create EHR
     ...                 2. trigger condition endpoint
+    [Tags]              diagnose-condition    valid
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnose condition    create-default.json
@@ -43,6 +44,7 @@ Force Tags              create
 002 Create Condition Using Invalid Profile
     [Documentation]     1. create EHR
     ...                 2. trigger condition endpoint using invalid payload
+    [Tags]              invalid
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnose condition    create-with-invalid-profile.json
