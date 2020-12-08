@@ -46,7 +46,6 @@ public class ConditionRoutes extends RouteBuilder {
 
     @Override
     public void configure() {
-
         // @formatter:off
         from("fhir-create-condition:fhirConsumer?fhirContext=#fhirContext")
             .onException(Exception.class)
