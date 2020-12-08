@@ -323,14 +323,16 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    robot -d results/0 -L TRACE -e todo --skiponfailure not-ready robot/
+                    robot -d results/0 -L TRACE \
+                            --skip TODO --skip future \
+                            --skiponfailure not-ready robot/
             - run:
                 name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
                 when: always
                 command: |
                     cd tests/
                     rebot --outputdir results/1/robot-tests \
-                        --skip TODO --skip future -e obsolete -e libtest \
+                        -e obsolete -e libtest \
                         --removekeywords for \
                         --removekeywords wuks \
                         --loglevel TRACE \
