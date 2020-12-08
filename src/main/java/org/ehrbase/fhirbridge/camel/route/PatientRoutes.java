@@ -34,6 +34,9 @@ public class PatientRoutes extends RouteBuilder {
     public void configure() {
         // @formatter:off
         from("fhir-create-patient:fhirConsumer?fhirContext=#fhirContext")
+            .onCompletion()
+                .process("auditCreateResourceProcessor")
+            .end()
             .onException(Exception.class)
                 .process(defaultExceptionHandler)
             .end()
