@@ -22,7 +22,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
-Force Tags              create    bloodpressure
+Force Tags              create    bloodpressure   zzz
 
 
 
@@ -334,6 +334,7 @@ create blood pressure with ehr reference
 	[Arguments]         ${json_path}    ${value}    ${issue_index}    ${http_status_code}
 	...					${error_message}    ${location}=${None}
 
+						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Blood Pressure    ${payload}
 						observation.validate response - 422 (with error message)    ${issue_index}
