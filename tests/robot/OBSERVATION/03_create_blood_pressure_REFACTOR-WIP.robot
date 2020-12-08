@@ -21,7 +21,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
 
-Force Tags              create    bloodpressure
+Force Tags              create    bloodpressure    not-ready
 
 
 
