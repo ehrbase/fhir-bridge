@@ -67,6 +67,9 @@ $ docker-compose -f docker-compose-full.yml up
 | Key                                                        | Default Value                                    | Description                                                 |
 | :--------------------------------------------------------- | :----------------------------------------------- | :---------------------------------------------------------- |
 | `fhir-bridge.ehrbase.base-url`                             | `http://localhost:8080/ehrbase/rest/openehr/v1/` | Base URL for the EHRbase running instance.                  |
+| `fhir-bridge.ehrbase.security.type`                        | `basic_auth`                                     | HTTP authorization type used by EHRbase.                    |
+| `fhir-bridge.ehrbase.security.username`                    | `myuser`                                         | Basic Auth username.                                        |
+| `fhir-bridge.ehrbase.security.password`                    | `myPassword432`                                  | Basic Auth password.                                        |
 | `fhir-bridge.ehrbase.template.prefix`                      | `classpath:/opt/`                                | Prefix to apply to template names.                          |
 | `fhir-bridge.fhir.jpa.allow-external-references`           | `true`                                           | Allow remote references.                                    |
 | `fhir-bridge.fhir.validation.terminology.mode`             | `none`                                           | Terminology validation mode: `embedded`, `server`, `none`   |

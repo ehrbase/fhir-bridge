@@ -7,6 +7,12 @@ import com.nedap.archie.rm.ehr.EhrStatus;
 import com.nedap.archie.rm.generic.PartySelf;
 import com.nedap.archie.rm.support.identification.HierObjectId;
 import com.nedap.archie.rm.support.identification.PartyRef;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.ehrbase.client.openehrclient.OpenEhrClientConfig;
 import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
@@ -28,9 +34,17 @@ abstract class AbstractSetupIT {
 
     @BeforeAll
     static void setup() throws URISyntaxException {
+        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("myuser", "myPassword432"));
+
+        CloseableHttpClient httpClient = HttpClientBuilder.create()
+                .setDefaultCredentialsProvider(credentialsProvider)
+                .build();
+
         DefaultRestClient client = new DefaultRestClient(
                 new OpenEhrClientConfig(new URI("http://localhost:8080/ehrbase/rest/openehr/v1/")),
-                new ResourceTemplateProvider("classpath:/opt/*.opt"));
+                new ResourceTemplateProvider("classpath:/opt/*.opt"),
+                httpClient);
 
         PATIENT_ID = UUID.randomUUID().toString();
 
