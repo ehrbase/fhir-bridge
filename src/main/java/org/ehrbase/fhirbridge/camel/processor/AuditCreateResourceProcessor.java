@@ -68,8 +68,7 @@ public class AuditCreateResourceProcessor implements Processor {
         RequestDetails requestDetails = exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
 
         return new AuditEvent.AuditEventEntityComponent()
-                .setWhat(new Reference()
-                        .setReference(methodOutcome.getId().getValue()))
+                .setWhat(new Reference(methodOutcome.getId()))
                 .setType(new Coding()
                         .setSystem("http://hl7.org/fhir/resource-types")
                         .setCode(requestDetails.getResourceName())
