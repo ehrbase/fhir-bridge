@@ -4,9 +4,9 @@ import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
-import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
+import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.stereotype.Component;
@@ -40,6 +40,9 @@ public class ObservationRoutes extends RouteBuilder {
     public void configure() {
         // @formatter:off
         from("fhir-create-observation:fhirConsumer?fhirContext=#fhirContext")
+            .onCompletion()
+                .process("auditCreateResourceProcessor")
+            .end()
             .onException(Exception.class)
                 .process(defaultExceptionHandler)
             .end()
