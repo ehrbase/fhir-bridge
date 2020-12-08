@@ -128,7 +128,10 @@ content-type: application/json
     }
   ],
   "subject": {
-    "reference": "urn:uuid:{{subject_id}}"
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{subject_id}}"
+    }
   },
   "onsetDateTime": "2012-05-24",
   "recorder": {
@@ -219,8 +222,11 @@ content-type: application/json
       "text": "Left Ear"
     }
   ],
-  "subject": {
-    "reference": "urn:uuid:{{subject_id}}"
+ "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{subject_id}}"
+    }
   },
   "onsetDateTime": "2012-05-24"
 }
@@ -403,7 +409,10 @@ content-type: application/json
     ]
   },
   "subject": {
-    "reference": "urn:uuid:{{subject_id}}"
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{subject_id}}"
+    }
   },
   "effectiveDateTime": "2018-11-20T12:05:00+01:00",
   "issued": "2018-03-11T10:28:00+01:00",
@@ -482,8 +491,11 @@ content-type: application/json
         "text": "Heart rate"
     },
     "subject": {
-        "reference": "urn:uuid:{{subject_id}}"
-    },
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{subject_id}}"
+    }
+  },
     "effectiveDateTime": "2020-09-25",
     "valueQuantity": {
         "value": 81,

@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 3.2b1 (Python 3.8.5 on darwin)" name="Generator">
+<meta content="Robot Framework 4.0b1 (Python 3.8.2 on linux)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKcAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAAqAAAAAAAAAAAAAAAAAAAALIAAAD/AAAA4AAAANwAAADcAAAA3AAAANwAAADcAAAA3AAAANwAAADcAAAA4AAAAP8AAACxAAAAAAAAAKYAAAD/AAAAuwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/AAAA/wAAAKkAAAD6AAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN8AAAD/AAAA+gAAAMMAAAAAAAAAAgAAAGsAAABrAAAAawAAAGsAAABrAAAAawAAAGsAAABrAAAADAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAIsAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAANEAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAAAAAAAAMgAAADIAAAAyAAAAMgAAADIAAAAyAAAAMgAAADIAAAAFAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAADwAAAB8AAAAAAAAAGAAAABcAAAAAAAAAH8AAABKAAAAAAAAAAAAAAAAAAAA2gAAAP8AAAD6AAAAwwAAAAAAAADCAAAA/wAAACkAAADqAAAA4QAAAAAAAAD7AAAA/wAAALAAAAAGAAAAAAAAANoAAAD/AAAA+gAAAMMAAAAAAAAAIwAAAP4AAAD/AAAA/wAAAGAAAAAAAAAAAAAAAMkAAAD/AAAAigAAAAAAAADaAAAA/wAAAPoAAADDAAAAAAAAAAAAAAAIAAAAcAAAABkAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAA2gAAAP8AAAD7AAAAywAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4AAAD/AAAAqwAAAP8AAACvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALIAAAD/AAAAsgAAAAAAAAC5AAAA/wAAAMoAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMkAAAD/AAAAvAAAAAAAAAAAAAAAAAAAAKwAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAArQAAAAAAAAAAwAMAAIABAAAf+AAAP/wAAD/8AAAgBAAAP/wAAD/8AAA//AAAJIwAADHEAAA//AAAP/wAAB/4AACAAQAAwAMAAA==">
 <style media="all" type="text/css">
 /* Generic and misc styles */
@@ -89,6 +89,10 @@ h2 {
 .pass {
     color: #393 !important;
 }
+.skip {
+    color: #fed84f !important;
+    font-weight: bold;
+}
 .label {
     padding: 2px 5px;
     font-size: 0.75em;
@@ -101,18 +105,23 @@ h2 {
 .label.debug, .label.trace, .label.error, .label.keyword {
     letter-spacing: 0;
 }
-.label.error, .label.fail, .label.pass, .label.warn {
+.label.error, .label.fail, .label.pass, .labe.skip, .label.warn {
     color: #fff !important;
     font-weight: bold;
 }
 .label.error, .label.fail {
-    background-color: #d9534f;
+    background-color: #ee5919;
 }
 .label.pass {
-    background-color: #5cb85c;
+    background-color: #97bd61;
+    color: black !important;
+}
+.label.skip {
+    background-color: #fed84f;
+    color: black !important;
 }
 .label.warn {
-    background-color: #ec971f;
+    background-color: #b62109;
 }
 /* Top right header */
 #top-right-header {
@@ -198,17 +207,23 @@ th.stats-col-graph:hover {
     width: auto;
     height: 7px;
     padding: 0;
-    background: #f33;
+    background: #aaa;
 }
 .empty-graph {
     background: #eee;
 }
-.pass-bar, .fail-bar {
+.pass-bar, .fail-bar, .skip-bar {
     float: left;
     height: 100%;
 }
+.fail-bar {
+    background: #ee5919;
+}
 .pass-bar {
-    background: #1d4;
+    background: #97bd61;
+}
+.skip-bar {
+    background:  #fed84f;
 }
 /* Tablesorter - adapted from provided Blue Skin */
 .tablesorter-header {
@@ -655,8 +670,6 @@ window.model = (function () {
         };
         suite.searchTestsByTag = function (tag) {
             return suite.searchTests(function (test) {
-                if (tag.info == "critical" || tag.info == "non-critical")
-                    return containsTagPattern(test.tags, tag.label);
                 if (tag.combined)
                     return containsTagPattern(test.tags, tag.combined);
                 return containsTag(test.tags, tag.label);
@@ -668,11 +681,6 @@ window.model = (function () {
         suite.allTests = function () {
             return suite.searchTests(function (test) {
                 return true;
-            });
-        };
-        suite.criticalTests = function () {
-            return suite.searchTests(function (test) {
-                return test.isCritical;
             });
         };
         return suite;
@@ -746,7 +754,6 @@ window.model = (function () {
             if (test.isChildrenLoaded)
                 return test.keywords();
         };
-        test.isCritical = data.isCritical;
         test.tags = data.tags;
         test.message = data.message;
         test.matchesTagPattern = function (pattern) {
@@ -834,18 +841,20 @@ window.stats = (function () {
                 suite: util.map(suiteElems, suiteStatElem)};
     }
     function statElem(stat) {
-        stat.total = stat.pass + stat.fail;
-        var percents = calculatePercents(stat.total, stat.pass, stat.fail);
+        stat.total = stat.pass + stat.fail + stat.skip;
+        var percents = calculatePercents(stat.total, stat.pass, stat.fail, stat.skip);
         stat.passPercent = percents[0];
-        stat.failPercent = percents[1];
-        var widths = calculateWidths(stat.passPercent, stat.failPercent);
+        stat.skipPercent = percents[1];
+        stat.failPercent = percents[2];
+        var widths = calculateWidths(stat.passPercent, stat.skipPercent, stat.failPercent);
         stat.passWidth = widths[0];
-        stat.failWidth = widths[1];
+        stat.skipWidth = widths[1];
+        stat.failWidth = widths[2];
         return stat;
     }
     function totalStatElem(data) {
         var stat = statElem(data);
-        stat.type = stat.label == 'Critical Tests' ? 'critical' : 'all';
+        stat.type = 'all';
         return stat;
     }
     function tagStatElem(data) {
@@ -867,33 +876,41 @@ window.stats = (function () {
                 return {title: link.slice(0, index), url: link.slice(index+1)};
             });
     }
-    function calculatePercents(total, passed, failed) {
-        if (total == 0)
-            return [0.0, 0.0];
+    function calculatePercents(total, passed, failed, skipped) {
+        if (total == 0) {
+            return [0.0, 0.0, 0.0];
+        }
         var pass = 100.0 * passed / total;
+        var skip = 100.0 * skipped / total;
         var fail = 100.0 * failed / total;
         if (pass > 0 && pass < 0.1)
-            return [0.1, 99.9];
+            pass = 0.1
         if (fail > 0 && fail < 0.1)
-            return [99.9, 0.1];
-        return [Math.round(pass*10)/10, Math.round(fail*10)/10];
+            fail = 0.1
+        if (skip > 0 && skip < 0.1)
+            skip = 0.1
+        return [Math.round(pass*10)/10, Math.round(skip*10)/10, Math.round(fail*10)/10];
     }
-    function calculateWidths(num1, num2) {
-        if (num1 + num2 == 0)
-            return [0.0, 0.0];
+    function calculateWidths(num1, num2, num3) {
+        if (num1 + num2 + num3 == 0)
+            return [0.0, 0.0, 0.0];
         // Make small percentages better visible
         if (num1 > 0 && num1 < 1)
-            return [1.0, 99.0];
+            num1 = 1
         if (num2 > 0 && num2 < 1)
-            return [99.0, 1.0];
+            num2 = 1
+        if (num3 > 0 && num3 < 1)
+            num3 = 1
         // Handle situation where both are rounded up
-        while (num1 + num2 > 100) {
-            if (num1 > num2)
+        while (num1 + num2 + num3 > 100) {
+            if (num1 > num2 && num1 > num3)
                 num1 -= 0.1;
-            if (num2 > num1)
+            if (num2 > num1 && num2 > num3)
                 num2 -= 0.1;
+            if (num3 > num1 && num3 > num2)
+                num3 -= 0.1;
         }
-        return [num1, num2];
+        return [num1, num2, num3];
     }
     return {
         Statistics: Statistics
@@ -1108,9 +1125,9 @@ window.testdata = function () {
     var elementsById = {};
     var idCounter = 0;
     var _statistics = null;
-    var LEVELS = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FAIL'];
-    var STATUSES = ['FAIL', 'PASS', 'NOT_RUN'];
-    var KEYWORDS = ['KEYWORD', 'SETUP', 'TEARDOWN', 'FOR', 'VAR'];
+    var LEVELS = ['TRACE', 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FAIL', 'SKIP'];
+    var STATUSES = ['FAIL', 'PASS', 'NOT_RUN', 'SKIP'];
+    var KEYWORDS = ['KEYWORD', 'SETUP', 'TEARDOWN', 'FOR', 'VAR', 'IF', 'ELSE IF', 'ELSE'];
     function addElement(elem) {
         if (!elem.id)
             elem.id = uniqueId();
@@ -1185,18 +1202,17 @@ window.testdata = function () {
         return util.map(taglist, strings.get);
     }
     function createTest(parent, element, strings, index) {
-        var statusElement = element[5];
+        var statusElement = element[4];
         var test = model.Test({
             parent: parent,
             id: 't' + (index + 1),
             name: strings.get(element[0]),
             doc: function () {
-                var doc = strings.get(element[3]);
+                var doc = strings.get(element[2]);
                 this.doc = function () { return doc; };
                 return doc;
             },
             timeout: strings.get(element[1]),
-            isCritical: element[2],
             status: parseStatus(statusElement),
             message: function () {
                 var msg = createMessage(statusElement, strings);
@@ -1204,10 +1220,10 @@ window.testdata = function () {
                 return msg;
             },
             times: model.Times(times(statusElement)),
-            tags: tags(element[4], strings),
-            isChildrenLoaded: typeof(element[6]) !== 'number'
+            tags: tags(element[3], strings),
+            isChildrenLoaded: typeof(element[5]) !== 'number'
         });
-        lazyPopulateKeywordsFromFile(test, element[6], strings);
+        lazyPopulateKeywordsFromFile(test, element[5], strings);
         return test;
     }
     function createMessage(statusElement, strings) {
@@ -1251,11 +1267,9 @@ window.testdata = function () {
     function suiteStats(stats) {
         return {
             total: stats[0],
-            totalPassed: stats[1],
-            totalFailed: stats[0] - stats[1],
-            critical: stats[2],
-            criticalPassed: stats[3],
-            criticalFailed: stats[2] - stats[3]
+            pass: stats[1],
+            fail: stats[2],
+            skip: stats[3]
         };
     }
     function Populator(items, strings, creator) {
@@ -1445,8 +1459,9 @@ function addStatistics() {
         '<th class="stats-col-stat">Total</th>' +
         '<th class="stats-col-stat">Pass</th>' +
         '<th class="stats-col-stat">Fail</th>' +
+        '<th class="stats-col-stat">Skip</th>' +
         '<th class="stats-col-elapsed">Elapsed</th>' +
-        '<th class="stats-col-graph">Pass / Fail</th>';
+        '<th class="stats-col-graph">Pass / Fail / Skip</th>';
     var statTable =
         '<h2>{Test} Statistics</h2>' +
         '<table class="statistics" id="total-stats"><thead><tr>' +
@@ -1503,6 +1518,7 @@ function renderNoTagStatTable() {
         '<td class="stats-col-stat"></td>' +
         '<td class="stats-col-stat"></td>' +
         '<td class="stats-col-stat"></td>' +
+        '<td class="stats-col-stat"></td>' +
         '<td class="stats-col-elapsed"></td>' +
         '<td class="stats-col-graph">' +
           '<div class="empty-graph"></div>' +
@@ -1521,12 +1537,14 @@ $.template('statColumnsTemplate',
     '<td class="stats-col-stat">${total}</td>' +
     '<td class="stats-col-stat">${pass}</td>' +
     '<td class="stats-col-stat">${fail}</td>' +
+    '<td class="stats-col-stat">${skip}</td>' +
     '<td class="stats-col-elapsed">${elapsed}</td>' +
     '<td class="stats-col-graph">' +
       '{{if total}}' +
       '<div class="graph">' +
         '<div class="pass-bar" style="width: ${passWidth}%" title="${passPercent}%"></div>' +
         '<div class="fail-bar" style="width: ${failWidth}%" title="${failPercent}%"></div>' +
+        '<div class="skip-bar" style="width: ${skipWidth}%" title="${skipPercent}%"></div>' +
       '</div>' +
       '{{else}}' +
       '<div class="empty-graph"></div>' +
@@ -1534,12 +1552,10 @@ $.template('statColumnsTemplate',
     '</td>'
 );
 $.template('suiteStatusMessageTemplate',
-    '${critical} critical {{= testOrTask("{test}")}}, ' +
-    '${criticalPassed} passed, ' +
-    '<span class="{{if criticalFailed}}fail{{else}}pass{{/if}}">${criticalFailed} failed</span><br>' +
-    '${total} {{= testOrTask("{test}")}} total, ' +
-    '${totalPassed} passed, ' +
-    '<span class="{{if totalFailed}}fail{{else}}pass{{/if}}">${totalFailed} failed</span>'
+    '${total} {{= testOrTask("{test}")}}{{if total != 1}}s{{/if}} total, ' +
+    '<span>${pass} passed</span>, ' +
+    '<span>${fail} failed</span>, ' +
+    '<span>${skip} skipped</span>'
 );
 // For complete cross-browser experience..
 // http://www.quirksmode.org/js/events_order.html
@@ -1585,28 +1601,28 @@ storage = function () {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[1,0,4123],[[4,5,6,0,[],[1,21,4102],[[7,8,9,0,[],[1,22,4099],[],[[10,0,1,11,[12,13,14,15],[1,494,3627],[]]],[],[1,1,1,1]]],[],[],[1,1,1,1]]],[],[],[1,1,1,1]];
+window.output["suite"] = [1,2,3,0,[],[1,0,94485],[[4,5,6,0,[],[1,15,94468],[],[[7,0,8,[9,10,11,12,13],[1,202,3397],[]],[14,0,8,[9,10,15,11,16,13],[1,3600,2735],[]],[17,0,8,[9,10,18,15,11,13],[1,6336,1399],[]],[19,0,8,[9,10,15,20,11,21,13],[1,7735,4158],[]],[22,0,8,[9,10,15,11,23,13],[1,11893,2800],[]],[24,0,8,[9,10,25,15,11,13],[1,14693,8993],[]],[26,0,8,[27,9,10,15,11,13],[1,23687,7589],[]],[28,0,8,[29,9,10,15,11,13],[1,31276,15293],[]],[30,0,8,[9,10,15,11,31,13],[1,46570,4466],[]],[32,0,8,[9,33,10,15,11,13],[1,51036,4912],[]],[34,0,8,[9,10,15,11,35,13],[1,55948,12827],[]],[36,0,8,[9,37,10,15,11,13],[1,68775,761],[]],[38,0,8,[9,10,15,39,11,13],[1,69536,24946],[]]],[],[13,13,0,0]]],[],[],[13,13,0,0]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*Robot","*/Users/davepetzold/fhir-bridge-poc/tests/robot","*../robot","*OBSERVATION","*/Users/davepetzold/fhir-bridge-poc/tests/robot/OBSERVATION","*../robot/OBSERVATION","*04 Create Heart Rate","*/Users/davepetzold/fhir-bridge-poc/tests/robot/OBSERVATION/04_create_heart_rate.robot","*../robot/OBSERVATION/04_create_heart_rate.robot","*001 Create Heart Rate (valid variants)","*<p>1. create EHR 2. fill json with table values 3. trigger observation endpoint 4. validate outcome\x3c/p>","*create","*Dave","*observation","*valid"]);
+window.output["strings"] = window.output["strings"].concat(["*","*OBSERVATION","*/home/wlad/projects/ec/fhir-bridge-poc/tests/robot/OBSERVATION","*../robot/OBSERVATION","*04 Create Heart Rate","*/home/wlad/projects/ec/fhir-bridge-poc/tests/robot/OBSERVATION/04_create_heart_rate.robot","*../robot/OBSERVATION/04_create_heart_rate.robot","*001 Create Heart Rate (valid variants)","*<p>1. create new EHR Patient record 2. update values for different ressources (see table) 3. post example json to observation endpoint 4. validate the response status 5. validate outcome against the array number and diagnostic text\x3c/p>","*create","*heart-rate","*observation","*valid","*xxx","*002 Create Heart Rate (invalid ressourceType)","*invalid","*ressourceType","*003 Create Heart Rate (invalid ID)","*ID","*004 Create Heart Rate (invalid Meta/Profile)","*Meta","*Profile","*005 Create Heart Rate (invalid Status)","*Status","*006 Create Heart Rate (invalid Identifier)","*Identifier","*007 Create Heart Rate (invalid Category)","*Category","*008 Create Heart Rate (invalid Code)","*Code","*009 Create Heart Rate (invalid Subject)","*Subject","*010 Create Heart Rate (invalid DateTime)","*DateTime","*011 Create Heart Rate (invalid valueQuantity)","*valueQuantity","*012 Create Heart Rate (invalid DataAbsentReason)","*DataAbsentReason","*013 Create Heart Rate (invalid multi)","*multi"]);
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:04","fail":0,"label":"Critical Tests","pass":1},{"elapsed":"00:00:04","fail":0,"label":"All Tests","pass":1}],[{"elapsed":"00:00:04","fail":0,"label":"create","pass":1},{"elapsed":"00:00:04","fail":0,"label":"Dave","pass":1},{"elapsed":"00:00:04","fail":0,"label":"observation","pass":1},{"elapsed":"00:00:04","fail":0,"label":"valid","pass":1}],[{"elapsed":"00:00:04","fail":0,"id":"s1","label":"Robot","name":"Robot","pass":1},{"elapsed":"00:00:04","fail":0,"id":"s1-s1","label":"Robot.OBSERVATION","name":"OBSERVATION","pass":1},{"elapsed":"00:00:04","fail":0,"id":"s1-s1-s1","label":"Robot.OBSERVATION.04 Create Heart Rate","name":"04 Create Heart Rate","pass":1}]];
+window.output["stats"] = [[{"elapsed":"00:01:34","fail":0,"label":"All Tests","pass":13,"skip":0}],[{"elapsed":"00:00:08","fail":0,"label":"Category","pass":1,"skip":0},{"elapsed":"00:00:15","fail":0,"label":"Code","pass":1,"skip":0},{"elapsed":"00:01:34","fail":0,"label":"create","pass":13,"skip":0},{"elapsed":"00:00:01","fail":0,"label":"DataAbsentReason","pass":1,"skip":0},{"elapsed":"00:00:05","fail":0,"label":"DateTime","pass":1,"skip":0},{"elapsed":"00:01:34","fail":0,"label":"heart-rate","pass":13,"skip":0},{"elapsed":"00:00:01","fail":0,"label":"ID","pass":1,"skip":0},{"elapsed":"00:00:09","fail":0,"label":"Identifier","pass":1,"skip":0},{"elapsed":"00:01:31","fail":0,"label":"invalid","pass":12,"skip":0},{"elapsed":"00:00:04","fail":0,"label":"Meta","pass":1,"skip":0},{"elapsed":"00:00:25","fail":0,"label":"multi","pass":1,"skip":0},{"elapsed":"00:01:34","fail":0,"label":"observation","pass":13,"skip":0},{"elapsed":"00:00:04","fail":0,"label":"Profile","pass":1,"skip":0},{"elapsed":"00:00:03","fail":0,"label":"ressourceType","pass":1,"skip":0},{"elapsed":"00:00:03","fail":0,"label":"Status","pass":1,"skip":0},{"elapsed":"00:00:04","fail":0,"label":"Subject","pass":1,"skip":0},{"elapsed":"00:00:03","fail":0,"label":"valid","pass":1,"skip":0},{"elapsed":"00:00:13","fail":0,"label":"valueQuantity","pass":1,"skip":0},{"elapsed":"00:01:34","fail":0,"label":"xxx","pass":13,"skip":0}],[{"elapsed":"00:01:34","fail":0,"id":"s1","label":"OBSERVATION","name":"OBSERVATION","pass":13,"skip":0},{"elapsed":"00:01:34","fail":0,"id":"s1-s1","label":"OBSERVATION.04 Create Heart Rate","name":"04 Create Heart Rate","pass":13,"skip":0}]];
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1606750245162;
+window.output["baseMillis"] = 1607460027612;
 </script>
 <script type="text/javascript">
-window.output["generated"] = 4332;
+window.output["generated"] = 101679;
 </script>
 <script type="text/javascript">
 window.output["expand_keywords"] = null;
 </script>
 <script type="text/javascript">
-window.settings = {"background":{"fail":"#f66","nonCriticalFail":"#9e9","pass":"#9e9"},"logURL":"log.html","rpa":false,"title":""};
+window.settings = {"background":{"fail":"#f66","pass":"#9e9","skip":"#fed84f"},"logURL":"log.html","rpa":false,"title":""};
 </script>
 <title></title>
 </head>
@@ -1645,12 +1661,12 @@ $(document).ready(function () {
 
 function setBackground(topsuite) {
     var color;
-    if (topsuite.criticalFailed)
+    if (topsuite.fail)
         color = window.settings.background.fail;
-    else if (topsuite.totalFailed)
-        color = window.settings.background.nonCriticalFail;
-    else
+    else if (topsuite.pass)
         color = window.settings.background.pass;
+    else
+        color = window.settings.background.skip;
     $('body').css('background-color', color);
 }
 
@@ -1664,20 +1680,10 @@ function addDetails() {
     if (window.location.hash)
         showDetailsByHash();
     else
-        renderTotalSelector();
+        renderSearchSelector();
 }
 
 function addCustomSortersForDetails() {
-    $.tablesorter.addParser({
-        id: 'criticality',
-        type: 'numeric',
-        is: function(s) {
-            return false;  // do not auto-detect
-        },
-        format: function(s) {
-            return s === 'yes' ? 0 : 1;
-        }
-    });
     $.tablesorter.addParser({
         id: 'times',
         type: 'text',
@@ -1713,26 +1719,22 @@ function showDetailsByHash() {
         action(query);
 }
 
-function totalDetailSelected(name) {
-    renderTotalSelector(name);
-    if (name) {
-        renderTotalDetails(name);
-        var title = name == 'critical' ? 'Critical {Test}s' : 'All {Test}s'
-        updatePrintSelector(testOrTask(title));
-    }
+function totalDetailSelected() {
+    renderTotalSelector();
     scrollToSelector('totals', name);
 }
 
-function renderTotalSelector(name) {
-    var args = {linkTarget: (name) ? 'totals?'+name : 'totals',
+function renderTotalSelector() {
+    var args = {linkTarget: 'totals',
                 totalTabStatus: 'detail-tab-selected'};
-    renderSelector(args, 'totalDetailsSelectorTemplate', {selected: name});
+    renderSelector(args, 'totalDetailsSelectorTemplate', {title: testOrTask('All {Test}s')});
+    updatePrintSelector(testOrTask('All {Test}s'));
+    renderTotalDetails();
 }
 
-function renderTotalDetails(name) {
-    var index = (name == 'critical') ? 0 : 1;
-    var stat = window.testdata.statistics().total[index];
-    var tests = getTotalTests(name);
+function renderTotalDetails() {
+    var stat = window.testdata.statistics().total[0];
+    var tests = window.testdata.suite().allTests().sort(sortByStatus)
     stat.totalTime = calculateTotalTime(tests);
     $.tmpl('tagOrTotalDetailsTemplate', stat).appendTo('#details-header');
     drawTestDetailsTable(tests, true);
@@ -1830,11 +1832,8 @@ function renderSearchSelector(suite, test, include, exclude) {
 function renderSearchDetails(suite, test, include, exclude) {
     var tests = searchTests(util.escape(suite), util.escape(test),
                             util.escape(include), util.escape(exclude));
-    var passed = calculatePassed(tests);
-    var stats = {total: tests.length,
-                 pass: passed,
-                 fail: tests.length - passed,
-                 totalTime: calculateTotalTime(tests)};
+    var stats = calculateStats(tests);
+    stats.totalTime = calculateTotalTime(tests);
     $.tmpl('tagOrTotalDetailsTemplate', stats).appendTo('#details-header');
     drawTestDetailsTable(tests, true);
 }
@@ -1887,19 +1886,11 @@ function renderTestDetailsHeader() {
 function sortByStatus(t1, t2) {
     if (t1.status != t2.status)
         return t1.status == 'FAIL' ? -1 : 1;
-    if (t1.isCritical != t2.isCritical)
-        return t1.isCritical ? -1 : 1;
     return t1.fullName < t2.fullName ? -1 : 1;
 }
 
 function getTestsHavingTag(tag) {
     return window.testdata.suite().searchTestsByTag(tag).sort(sortByStatus);
-}
-
-function getTotalTests(name) {
-    if (name == 'critical')
-        return window.testdata.suite().criticalTests().sort(sortByStatus);
-    return window.testdata.suite().allTests().sort(sortByStatus);
 }
 
 function calculateTotalTime(tests) {
@@ -1909,11 +1900,19 @@ function calculateTotalTime(tests) {
     return util.formatElapsed(total);
 }
 
-function calculatePassed(tests) {
+function calculateStats(tests) {
     var passed = util.filter(tests, function (test) {
         return test.status == 'PASS';
     });
-    return passed.length;
+    var failed = util.filter(tests, function (test) {
+        return test.status == 'FAIL';
+    });
+    return {
+      total: tests.length,
+      pass: passed.length,
+      fail: failed.length,
+      skip: tests.length - passed.length - failed.length
+    };
 }
 
 function renderTestDetails(sortByStatus, target) {
@@ -1936,12 +1935,12 @@ function renderTestDetailsRows(tests, target) {
 }
 
 function configureTableSorter(sortByStatus) {
-    var config = {headers: {3: {sorter: 'criticality'},
-                            6: {sortInitialOrder: 'desc'},
-                            7: {sorter: 'times'}},
+  // FIXME: define sorting by status, PASS, SKIP, FAIL
+    var config = {headers: {5: {sortInitialOrder: 'desc'},
+                            6: {sorter: 'times'}},
                   selectorSort: '.details-col-header'};
     if (sortByStatus)
-        config['sortList'] = [[4, 0], [3, 0]];
+        config['sortList'] = [[3, 0]];
     $('#test-details').tablesorter(config);
 }
 
@@ -1978,15 +1977,19 @@ function hideHiddenDetailsColumns(elem) {
   <table class="details">
     <tr>
       <th>Status:</th>
-      {{if criticalFailed}}
-      <td><a href="#totals?critical" onclick="totalDetailSelected('critical')"
-             class="fail">${criticalFailed} critical {{= testOrTask('{test}')}}{{if criticalFailed != 1}}s{{/if}} failed</a></td>
-      {{else totalFailed}}
-      <td><a href="#totals?critical" onclick="totalDetailSelected('critical')"
-             class="pass">All critical {{= testOrTask('{test}')}}s passed</a></td>
-      {{else}}
-      <td><a href="#totals?all" onclick="totalDetailSelected('all')"
+      {{if fail}}
+      <td><a href="#totals" onclick="totalDetailSelected()"
+             class="fail">${fail} {{= testOrTask('{test}')}}{{if fail != 1}}s{{/if}} failed</a></td>
+      {{else pass && skip}}
+      <td><a href="#totals" onclick="totalDetailSelected()"
+             class="pass">${pass} {{= testOrTask('{test}')}}{{if pass != 1}}s{{/if}} passed,
+             ${skip} {{= testOrTask('{test}')}}{{if skip != 1}}s{{/if}} skipped</a></td>
+      {{else pass}}
+      <td><a href="#totals" onclick="totalDetailSelected()"
              class="pass">All {{= testOrTask('{test}')}}s passed</a></td>
+      {{else}}
+      <td><a href="#totals" onclick="totalDetailSelected()"
+             class="skip">All {{= testOrTask('{test}')}}s skipped</a></td>
       {{/if}}
     </tr>
     {{if doc()}}
@@ -2027,10 +2030,10 @@ function hideHiddenDetailsColumns(elem) {
 </script>
 
 <script type="text/x-jquery-tmpl" id="totalStatisticsRowTemplate">
-  <tr onclick="totalDetailSelected('${type}')" class="row-${$item.index}">
+  <tr onclick="totalDetailSelected('all')" class="row-${$item.index}">
     <td class="stats-col-name">
       <div class="stat-name">
-        <a href="#totals?${type}">{{html label}}</a>
+        <a href="#totals">{{html label}}</a>
       </div>
     </td>
     {{tmpl($data) 'statColumnsTemplate'}}
@@ -2069,6 +2072,9 @@ function hideHiddenDetailsColumns(elem) {
 <script type="text/x-jquery-tmpl" id="detailsHeaderTemplate">
   <h2 id="${linkTarget}">{{= testOrTask('{Test}')}} Details</h2>
   <ul id="detail-tabs">
+    <li class="${searchTabStatus} detail-tab">
+      <a href="#search" onclick="renderSearchSelector()">Search</a>
+    </li>
     <li class="${totalTabStatus} detail-tab">
       <a href="#totals" onclick="renderTotalSelector()">Totals</a>
     </li>
@@ -2078,26 +2084,14 @@ function hideHiddenDetailsColumns(elem) {
     <li class="${suiteTabStatus} detail-tab">
       <a href="#suites" onclick="renderSuiteSelector()">Suites</a>
     </li>
-    <li class="${searchTabStatus} detail-tab">
-      <a href="#search" onclick="renderSearchSelector()">Search</a>
-    </li>
   </ul>
 </script>
 
 <script  type="text/x-jquery-tmpl" id="totalDetailsSelectorTemplate">
   <table class="details" id="details-header">
     <tr class="selector">
-      <th>Type:</th>
-      <td id="normal-selector">
-        <input id="radio-critical" type="radio" name="totals-radio"
-               onclick="totalDetailSelected('critical')"
-               {{if selected == 'critical'}}checked="checked"{{/if}}>
-        <label for="radio-critical">Critical {{= testOrTask('{Test}')}}s</label><br>
-        <input id="radio-all" type="radio" name="totals-radio"
-               onclick="totalDetailSelected('all')"
-               {{if selected == 'all'}}checked="checked"{{/if}}>
-        <label for="radio-all">All {{= testOrTask('{Test}')}}s</label>
-      </td>
+      <th>${title}</th>
+      <td>
       <td id="print-selector"></td>
     </tr>
   </table>
@@ -2302,7 +2296,7 @@ function hideHiddenDetailsColumns(elem) {
 <script type="text/x-jquery-tmpl" id="tagOrTotalDetailsTemplate">
   <tr>
     <th>Status:</th>
-    <td>${total} total, ${pass} passed, {{if fail}}<span class="fail">${fail} failed</span>{{else}}<span class="pass">0 failed</span>{{/if}}</td>
+    <td>{{tmpl($data) 'suiteStatusMessageTemplate'}}</td>
   </tr>
   {{if doc}}
   <tr>
@@ -2384,9 +2378,6 @@ function hideHiddenDetailsColumns(elem) {
           <div class='details-col-toggle' onclick="toggleDetailsColumn('tags')">&times;</div>
           <div class='details-col-header'>Tags</div>
         </th>
-        <th class="details-col-crit" title="Critical">
-          <div class='details-col-header'>Crit.</div>
-        </th>
         <th class="details-col-status" title="Status">
           <div class='details-col-header'>Status</div>
         </th>
@@ -2422,7 +2413,6 @@ function hideHiddenDetailsColumns(elem) {
   {{/if}}
     <td class="details-col-doc"><div class="doc details-limited">{{html doc()}}</div></td>
     <td class="details-col-tags"><div>{{html tags.join(', ')}}</div></td>
-    <td class="details-col-crit"><div>{{if isCritical}}yes{{else}}no{{/if}}</div></td>
     <td class="details-col-status"><div><span class="label ${status.toLowerCase()}">${status}</span></div></td>
     <td class="details-col-msg"><div class="message details-limited">{{html message()}}</div></td>
     <td class="details-col-elapsed"><div>${times.elapsedTime}</div></td>
