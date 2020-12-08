@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.config;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.client.openehrclient.OpenEhrClientConfig;
 import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
-import org.ehrbase.client.templateprovider.TemplateProvider;
+import org.ehrbase.webtemplate.templateprovider.TemplateProvider;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

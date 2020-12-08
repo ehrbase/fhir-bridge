@@ -4,6 +4,7 @@ import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
@@ -13,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Observation Observation} resource.
@@ -112,11 +114,19 @@ class ObservationIT extends AbstractSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : HTTP status '400 Bad Request' was returned by EHRbase while trying to save the composition. Details: Wrong Status code. " +
-                "Expected: [200, 201, 204]. Got: 400. Error message: {\"error\":\"org.ehrbase.validation.constraints.wrappers.ValidationException: :" +
-                "-Validation error at /content[openEHR-EHR-OBSERVATION.blood_pressure.v2]/data[at0001]/events[at0006]/data[at0003]/items[at0005]:value is not within interval, " +
-                "expected:0.0 <= 1500.0 < 1000.0.\\n\\n\",\"status\":\"Bad Request\"}", exception.getMessage());
+        assertTrue(StringUtils.startsWith(exception.getMessage(), "HTTP 422 : HTTP status '400 Bad Request' was returned by EHRbase while trying to save the composition. Details: Wrong Status code. "));
     }
+
+
+    @Test
+    void createWithInvalidQuantityDatatype() throws IOException {
+        String resource = IOUtils.toString(new ClassPathResource("Observation/create-with-invalid-quantity-datatype.json").getInputStream(), StandardCharsets.UTF_8);
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
+        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+
+        assertEquals("HTTP 422 : Error parsing JSON: the primitive value must be a number", exception.getMessage());
+    }
+
 
     private void create(String path) throws IOException {
         String resource = IOUtils.toString(new ClassPathResource(path).getInputStream(), StandardCharsets.UTF_8);
