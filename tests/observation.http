@@ -63,12 +63,6 @@ Content-Type: application/json
 {
   "resourceType": "Observation",
   "id": "blood-pressure",
-  "subject": {
-    "identifier": {
-      "system": "urn:ietf:rfc:4122",
-      "value": "{{subject_id}}"
-    }
-  },
   "meta": {
     "profile": [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure"
@@ -109,6 +103,12 @@ Content-Type: application/json
       }
     ],
     "text": "Blood pressure systolic & diastolic"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{subject_id}}"
+    }
   },
   "effectiveDateTime": "2012-09-17",
   "performer": [

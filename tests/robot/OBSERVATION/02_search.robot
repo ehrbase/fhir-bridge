@@ -34,6 +34,7 @@ Force Tags              search    not-ready
 *** Test Cases ***
 001 Search Body Temperature
     [Documentation]    Search Body Temperature
+    [Tags]             body-temperature    valid
 
     observation.create body temperature    create-body-temp.json
 	observation.get body temperature
@@ -41,6 +42,7 @@ Force Tags              search    not-ready
 
 002 Search Observation Lab
     [Documentation]    Search Observation Lab
+    [Tags]             observation-lab    valid
 
     observation.create observation lab    create-observation-lab.json
 	observation.get observation lab
@@ -48,6 +50,7 @@ Force Tags              search    not-ready
 
 003 Search Coronavirus Lab Results
     [Documentation]    Search Coronavirus Lab Results
+    [Tags]             coronavirus-lab-result    valid
 
     observation.create coronavirus lab result    create-coronavirus-nachweis-test.json
 	observation.get coronavirus lab results

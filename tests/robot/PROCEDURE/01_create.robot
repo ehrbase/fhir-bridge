@@ -36,6 +36,7 @@ Force Tags              create
 001 Create Procedure
 	[Documentation]    1. create EHR
 	...                2. trigger observation endpoint
+	[Tags]             valid
 
 	ehr.create new ehr    000_ehr_status.json
 	procedure.create procedure    create.json

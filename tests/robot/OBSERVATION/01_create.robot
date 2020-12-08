@@ -37,6 +37,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             body-temperature    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create body temperature    create-body-temp.json
@@ -47,6 +48,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             blood-pressure    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create blood pressure    create-blood-pressure.json
@@ -57,6 +59,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             fio2    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create FIO2    create-fio2.json
@@ -67,6 +70,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             heart-rate    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create heart rate    create-heart-rate.json
@@ -77,6 +81,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             sofa-score    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create sofa score    create-sofa-score.json
@@ -87,6 +92,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             observation-lab    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create observation lab    create-observation-lab.json
@@ -97,6 +103,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             invalid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create observation    create-with-default-profile.json
@@ -107,6 +114,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             invalid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create observation    create-with-unsupported-profile.json
@@ -117,6 +125,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             coronavirus-lab-result    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create observation    create-coronavirus-nachweis-test.json
@@ -127,6 +136,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             body-height    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create observation  create-body-height.json
@@ -137,6 +147,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             pregnancy-status    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create pregnancy status    create-pregnancy-status.json
@@ -147,6 +158,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             frailty-scale-score    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create frailty scale score    create-clinical-frailty-scale-score.json
@@ -157,6 +169,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             smoking-status    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create smoking status    create-smoking-status.json
@@ -167,6 +180,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             body-weight    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create body weight    create-body-weight.json
@@ -177,6 +191,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
+	[Tags]             patient-in-icu    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create patient in icu    create-patient-in-icu.json

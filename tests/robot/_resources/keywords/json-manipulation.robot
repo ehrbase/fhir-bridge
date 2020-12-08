@@ -30,7 +30,6 @@
 #
 # [ UPDATE JSON VALUES ]
 
-
 load JSON
     [Arguments]         ${fhir_resource}
 
