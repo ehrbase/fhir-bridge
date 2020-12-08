@@ -105,7 +105,10 @@ Content-Type: application/json
     "text": "Blood pressure systolic & diastolic"
   },
   "subject": {
-    "reference": "urn:uuid:{{subject_id}}"
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{subject_id}}"
+    }
   },
   "effectiveDateTime": "2012-09-17",
   "performer": [
