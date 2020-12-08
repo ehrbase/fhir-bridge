@@ -4,7 +4,7 @@ import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
-import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
+import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
@@ -16,7 +16,7 @@ public class ObservationRoutes extends RouteBuilder {
 
     private final IFhirResourceDao<Observation> observationDao;
 
-    private final DefaultCreateResourceRequestValidator requestValidator;
+    private final ResourceProfileValidator requestValidator;
 
     private final PatientIdProcessor patientIdProcessor;
 
@@ -25,7 +25,7 @@ public class ObservationRoutes extends RouteBuilder {
     private final DefaultExceptionHandler defaultExceptionHandler;
 
     public ObservationRoutes(IFhirResourceDao<Observation> observationDao,
-                             DefaultCreateResourceRequestValidator requestValidator,
+                             ResourceProfileValidator requestValidator,
                              PatientIdProcessor patientIdProcessor,
                              CompositionConverterResolver compositionConverterResolver,
                              DefaultExceptionHandler defaultExceptionHandler) {
@@ -44,7 +44,7 @@ public class ObservationRoutes extends RouteBuilder {
                 .process(defaultExceptionHandler)
             .end()
             .process(requestValidator)
-            .bean(observationDao, "create(${body})")
+            .bean(observationDao, "create(${body}, ${null}, ${header.FhirRequestDetails})")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
