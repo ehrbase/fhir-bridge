@@ -56,4 +56,5 @@ Force Tags              search    not-ready
 *** Keywords ***
 establish preconditions
     generic.prepare new request session    Prefer=return=representation
+    ...									   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
     ehr.create new ehr    000_ehr_status.json

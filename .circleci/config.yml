@@ -62,8 +62,8 @@ jobs:
     #           88  Y8,        ,8P  88      `8b          `8b
     #   88,   ,d88   Y8a.    .a8P   88      a8P  Y8a     a8P
     #    "Y8888P"     `"Y8888Y"'    88888888P"    "Y88888P"
-    
-    
+
+
     build-and-quicktest-fhirbridge:
         description: Build and test FHIR-bridge
         executor: docker-py3-java11-postgres
@@ -179,7 +179,7 @@ commands:
     #   Y8,           Y8,        ,8P  88   `8b d8'   88  88   `8b d8'   88    d8""""""""8b    88    `8b 88  88         8P          `8b
     #    Y8a.    .a8P  Y8a.    .a8P   88    `888'    88  88    `888'    88   d8'        `8b   88     `8888  88      .a8P   Y8a     a8P
     #     `"Y8888Y"'    `"Y8888Y"'    88     `8'     88  88     `8'     88  d8'          `8b  88      `888  88888888Y"'     "Y88888P"
-    
+
 
     git-clone-ehrbase-repo:
         steps:
@@ -212,11 +212,13 @@ commands:
                                              -Dexec.args='${project.version}' \
                                              --non-recursive exec:exec)
                     echo ${EHRbase_VERSION}
-                    java -jar "application/target/application-${EHRbase_VERSION}.jar" > log
+                    java -jar "application/target/application-${EHRbase_VERSION}.jar" --security.authType="BASIC" \
+                                                                                      --security.authUser="myuser" \
+                                                                                      --security.authPassword="myPassword432" > log
 
 
     build-and-test-fhirbridge:
-        description: | 
+        description: |
             Executes `mvn clean verify`
         steps:
             - run:
@@ -314,7 +316,7 @@ commands:
                 when: always
             - store_artifacts:
                 path: /tmp/logs/fhirbride_log
-      
+
 
     run-robot-integration-tests:
         steps:
@@ -323,14 +325,16 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    robot -d results/0 -L TRACE -e todo --noncritical not-ready robot/
+                    robot -d results/0 -L TRACE \
+                            --skip TODO --skip future \
+                            --skiponfailure not-ready robot/
             - run:
                 name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
+                when: always
                 command: |
                     cd tests/
                     rebot --outputdir results/1/robot-tests \
-                        --exclude TODO -e future -e obsolete -e libtest \
-                        --noncritical not-ready \
+                        -e obsolete -e libtest \
                         --removekeywords for \
                         --removekeywords wuks \
                         --loglevel TRACE \
@@ -339,14 +343,15 @@ commands:
                         --report NONE \
                         --xunit junit-output.xml --xunitskipnoncritical \
                         results/0/output.xml
+                
             - run:
                 name: COPY ROBOT OUTPUT FILES
+                when: always
                 command: |
                     mkdir 00_robot_results
                     cp tests/results/0/* 00_robot_results/
-                when: always
 
-            
+
     cache-out-fhirbridge-m2-dependencies:
         steps:
             - run:
@@ -362,7 +367,7 @@ commands:
                 key: fhirbridge-v1-{{ checksum "/tmp/fhirbridge_maven_cache_seed" }}
                 paths:
                 - ~/.m2
-    
+
     cache-out-ehrbase-m2-dependencies:
         steps:
             - run:
@@ -370,7 +375,7 @@ commands:
                 command: find ~/projects/ehrbase -name 'pom.xml' | sort | xargs cat > /tmp/ehrbase_maven_cache_seed
             - restore_cache:
                 key: EHRbase-v1-
-    
+
     cache-in-ehrbase-m2-dependencies:
         steps:
             - save_cache:
@@ -437,8 +442,8 @@ commands:
                 paths:
                     - .m2
                     - projects
-    
-    
+
+
     restore-fhirbridge-workspace:
         description: |
             Restores any file / folder that was previously persisted w/ 'persist_to_workspace'.
@@ -457,7 +462,7 @@ commands:
     install-maven:
         description: Installs Maven tool (but only if it's not already installed)
         steps:
-            - run: 
+            - run:
                 name: Install Maven tool
                 command: |
                     sudo killall -9 apt-get || true
@@ -472,7 +477,7 @@ commands:
                 command: |
                     python -c "import site; print(site.getsitepackages())"
                     pip install -r tests/requirements.txt
-    
+
     configure-git-for-ci-bot:
         steps:
             - add_ssh_keys:
@@ -497,7 +502,7 @@ commands:
 orbs:
     openjdk-install: cloudesire/openjdk-install@1.2.3
     sonarcloud: sonarsource/sonarcloud@1.0.2
-  
+
 
 executors:
     docker-python3-java11:
