@@ -10,9 +10,11 @@ services:
       DB_URL: jdbc:postgresql://ehrbase-db:5432/ehrbase
       DB_USER: ehrbase
       DB_PASS: ehrbase
-      AUTH_TYPE: BASIC
-      AUTH_USER: ehrbase-user
-      AUTH_PASSWORD: SuperSecretPassword
+      SECURITY_AUTHTYPE: BASIC
+      SECURITY_AUTHUSER: myuser
+      SECURITY_AUTHPASSWORD: myPassword432
+      SECURITY_AUTHADMINUSER: myadmin
+      SECURITY_AUTHADMINPASSWORD: mySuperAwesomePassword123
       SYSTEM_NAME: local.ehrbase.org
     depends_on:
       - ehrbase-db
