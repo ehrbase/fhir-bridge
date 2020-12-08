@@ -170,3 +170,13 @@ Force Tags              create
 	ehr.create new ehr    000_ehr_status.json
 	observation.create body weight    create-body-weight.json
   	observation.validate response - 201
+
+
+015 Create Patient in ICU
+	[Documentation]    1. create new EHR Patient record
+	...                2. post example json to observation endpoint
+	...                3. validate the response status
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create patient in icu    create-patient-in-icu.json
+  	observation.validate response - 201
