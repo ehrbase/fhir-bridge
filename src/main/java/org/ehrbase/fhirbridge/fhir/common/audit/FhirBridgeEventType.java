@@ -6,6 +6,8 @@ import org.openehealth.ipf.commons.audit.types.EventType;
 @SuppressWarnings("java:S115")
 public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<EventType> {
 
+    FindAuditEvent("fhir-find-audit-event", "Find Audit Event"),
+
     CreateCondition("fhir-create-condition", "Create Condition"),
 
     FindCondition("fhir-find-condition", "Find Condition"),

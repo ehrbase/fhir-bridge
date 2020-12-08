@@ -1,10 +1,16 @@
 package org.ehrbase.fhirbridge.config;
 
-import org.ehrbase.client.openehrclient.OpenEhrClient;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.ehrbase.client.openehrclient.OpenEhrClientConfig;
 import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
-import org.ehrbase.webtemplate.templateprovider.TemplateProvider;
+import org.ehrbase.fhirbridge.config.ehrbase.AuthorizationType;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
+import org.ehrbase.webtemplate.templateprovider.TemplateProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +44,21 @@ public class EhrbaseConfiguration {
     }
 
     @Bean
-    public OpenEhrClient openEhrClient(OpenEhrClientConfig restClientConfig, TemplateProvider templateProvider) {
-        return new DefaultRestClient(restClientConfig, templateProvider);
+    public DefaultRestClient openEhrClient(OpenEhrClientConfig restClientConfig, TemplateProvider templateProvider, HttpClient httpClient) {
+        return new DefaultRestClient(restClientConfig, templateProvider, httpClient);
+    }
+
+    @Bean
+    public HttpClient httpClient() {
+        HttpClientBuilder builder = HttpClientBuilder.create();
+
+        EhrbaseProperties.Security security = properties.getSecurity();
+        if (security.getType() == AuthorizationType.BASIC_AUTH) {
+            CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(security.getUsername(), security.getPassword()));
+            builder.setDefaultCredentialsProvider(credentialsProvider);
+        }
+
+        return builder.build();
     }
 }

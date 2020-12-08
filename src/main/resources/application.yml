@@ -1,6 +1,10 @@
 fhir-bridge:
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
+    security:
+      type: basic_auth
+      username: myuser
+      password: myPassword432
     template:
       prefix: classpath:/opt/
 spring:
