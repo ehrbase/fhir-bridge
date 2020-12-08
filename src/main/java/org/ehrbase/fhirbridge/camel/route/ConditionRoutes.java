@@ -8,9 +8,9 @@ import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
-import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
+import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.ehrbase.fhirbridge.ehr.mapper.DiagnoseRowMapper;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.DiagnoseComposition;
@@ -37,6 +37,7 @@ public class ConditionRoutes extends RouteBuilder {
                            PatientIdProcessor patientIdProcessor,
                            CompositionConverterResolver compositionConverterResolver,
                            DefaultExceptionHandler defaultExceptionHandler) {
+
         this.conditionDao = conditionDao;
         this.requestValidator = requestValidator;
         this.patientIdProcessor = patientIdProcessor;
@@ -46,9 +47,11 @@ public class ConditionRoutes extends RouteBuilder {
 
     @Override
     public void configure() {
-
         // @formatter:off
         from("fhir-create-condition:fhirConsumer?fhirContext=#fhirContext")
+            .onCompletion()
+                .process("auditCreateResourceProcessor")
+            .end()
             .onException(Exception.class)
                 .process(defaultExceptionHandler)
             .end()
