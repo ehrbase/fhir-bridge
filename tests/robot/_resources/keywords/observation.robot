@@ -52,8 +52,7 @@ validate response - 422 (default profile not supported)
 
     String     response body resourceType    OperationOutcome
     String     response body issue 0 diagnostics
-    ...        pattern=Default profile is not supported
-#old    ...        pattern=Default profile is not supported for Observation. One of the following profiles is expected:
+    ...        pattern=Default profile is not supported for Observation. One of the following profiles is expected:
 
 
 validate response - 422 (profile not supported)
@@ -61,8 +60,7 @@ validate response - 422 (profile not supported)
 
     String     response body resourceType    OperationOutcome
     String     response body issue 0 diagnostics
-    ...        pattern=Profile 'http://hl7.org/fhir/StructureDefinition/vitalsigns' not supported for Observation
-# old    ...        pattern=Profile http://hl7.org/fhir/StructureDefinition/vitalsigns is not supported for Observation. One of the following profiles is expected:
+    ...        pattern=The resource does not contain any supported profile. One of the following profiles is expected:
 
 
 validate response - 422 (with error message)
@@ -190,6 +188,11 @@ create smoking status
 create body weight
     [Arguments]         ${example_json}
     POST /Observation with ehr reference    Body Weight    ${example_json}
+
+
+create patient in icu
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Patient in Intensive Care Unit (ICU)    ${example_json}
 
 
 # # [ FAIL CREATING ]

@@ -325,14 +325,16 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    robot -d results/0 -L TRACE -e todo --noncritical not-ready robot/
+                    robot -d results/0 -L TRACE \
+                            --skip TODO --skip future \
+                            --skiponfailure not-ready robot/
             - run:
                 name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
+                when: always
                 command: |
                     cd tests/
                     rebot --outputdir results/1/robot-tests \
-                        --exclude TODO -e future -e obsolete -e libtest \
-                        --noncritical not-ready \
+                        -e obsolete -e libtest \
                         --removekeywords for \
                         --removekeywords wuks \
                         --loglevel TRACE \
@@ -341,12 +343,13 @@ commands:
                         --report NONE \
                         --xunit junit-output.xml --xunitskipnoncritical \
                         results/0/output.xml
+                
             - run:
                 name: COPY ROBOT OUTPUT FILES
+                when: always
                 command: |
                     mkdir 00_robot_results
                     cp tests/results/0/* 00_robot_results/
-                when: always
 
 
     cache-out-fhirbridge-m2-dependencies:
