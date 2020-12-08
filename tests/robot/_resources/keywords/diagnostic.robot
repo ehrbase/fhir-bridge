@@ -51,7 +51,7 @@ validate response - 422 (profile not supported)
     Integer    response status    422
 
     String     $.issue[0].diagnostics 
-    ...        pattern=not supported for DiagnosticReport
+    ...        pattern=One of the following profiles is expected:
 
 
 #                                            .
