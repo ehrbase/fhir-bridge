@@ -196,3 +196,14 @@ Force Tags              create
 	ehr.create new ehr    000_ehr_status.json
 	observation.create patient in icu    create-patient-in-icu.json
   	observation.validate response - 201
+
+
+016 Create Blood Gas Panel
+	[Documentation]    1. create new EHR Patient record
+	...                2. post example json to observation endpoint
+	...                3. validate the response status
+	[Tags]             blood-gas-panel    valid   not-ready
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create blood gas panel    create-blood-gas-panel.json
+  	observation.validate response - 201

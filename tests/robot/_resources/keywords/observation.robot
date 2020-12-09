@@ -195,11 +195,12 @@ create patient in icu
     POST /Observation with ehr reference    Patient in Intensive Care Unit (ICU)    ${example_json}
 
 
-# # [ FAIL CREATING ]
-# create blood pressure without ehr reference
-#     [Arguments]         ${example_json}
-#     # POST /Observation with fake ehr reference    Blood Pressure    ${example_json} 
-#     POST /Observation w/o ehr reference    Blood Pressure    ${example_json}
+create blood gas panel
+    [Arguments]         ${example_json}
+    POST /Observation with ehr reference    Blood Gas Panel    ${example_json}
+
+
+
 
 
 #                                   .                    

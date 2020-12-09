@@ -1,0 +1,79 @@
+{
+    "resourceType": "Observation",
+    "id": "e6dea5c4-60b0-43cf-b1ca-410ddd34f264",
+    "meta": {
+        "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel"
+        ]
+    },
+    "identifier": [
+        {
+            "type": {
+                "coding": [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                        "code": "OBI"
+                    }
+                ]
+            },
+            "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+            "value": "24336-0_gasPanelBldA",
+            "assigner": {
+                "reference": "Organization/Charité"
+            }
+        }
+    ],
+    "status": "final",
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://loinc.org",
+                    "code": "26436-6"
+                },
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "laboratory"
+                },
+                {
+                    "system": "http://loinc.org",
+                    "code": "18767-4"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://loinc.org",
+                "code": "24336-0",
+                "display": "Gas panel - Arterial blood"
+            }
+        ],
+        "text": "Gas panel - Arterial blood"
+    },
+    "subject": {
+        "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+        }
+    },
+    "effectiveDateTime": "2020-09-21",
+    "hasMember": [
+        {
+            "reference": "Observation/ac8b697d-7088-4fbe-9ece-51df2d3f1e04"
+        },
+        {
+            "reference": "Observation/6a78560b-2f7c-4af5-a7bc-3c7d62ca8458"
+        },
+        {
+            "reference": "Observation/e39a18a6-63d7-4117-a38e-1f29be15f6fa"
+        },
+        {
+            "reference": "Observation/6fa9e2be-d15a-4e77-81fc-056dda521875"
+        },
+        {
+            "reference": "Observation/c9f96dd3-a77a-4aa9-9b12-43cd1972d9a4"
+        }
+    ]
+}
