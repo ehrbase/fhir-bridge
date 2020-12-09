@@ -50,3 +50,33 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnose condition    create-with-invalid-profile.json
     condition.validate response - 422 (Unprocessable Entity)
+
+
+003 Create Condition Symptoms-Covid-19 Present
+    [Documentation]     1. create EHR
+    ...                 2. create condition symptos-covid-19 present
+    [Tags]              symptoms-covid-19    valid
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create symptoms-covid-19    create-symptom-covid-19-present.json
+    condition.validate response - 201
+
+
+004 Create Condition Symptoms-Covid-19 Absent
+    [Documentation]     1. create EHR
+    ...                 2. create condition symptos-covid-19 present
+    [Tags]              symptoms-covid-19    valid
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create symptoms-covid-19    create-symptom-covid-19-absent.json
+    condition.validate response - 201
+
+
+005 Create Condition Symptoms-Covid-19 Unknown
+    [Documentation]     1. create EHR
+    ...                 2. create condition symptos-covid-19 present
+    [Tags]              symptoms-covid-19    valid
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create symptoms-covid-19    create-symptom-covid-19-unknown.json
+    condition.validate response - 201

@@ -198,7 +198,17 @@ Force Tags              create
   	observation.validate response - 201
 
 
-015 Create Oxygen Saturation in Arterial Blood
+016 Create Blood Gas Panel
+	[Documentation]    1. create new EHR Patient record
+	...                2. post example json to observation endpoint
+	...                3. validate the response status
+	[Tags]             blood-gas-panel    valid   not-ready
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create blood gas panel    create-blood-gas-panel.json
+
+
+017 Create Oxygen Saturation in Arterial Blood
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status
@@ -209,7 +219,7 @@ Force Tags              create
   	observation.validate response - 201
 
 
-015 Create History of Travel
+018 Create History of Travel
 	[Documentation]    1. create new EHR Patient record
 	...                2. post example json to observation endpoint
 	...                3. validate the response status

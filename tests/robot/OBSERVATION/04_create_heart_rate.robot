@@ -25,7 +25,7 @@ Documentation           NOTE: The validation of error messages in the tables bel
 ...                           Validation of English messages (if the system language is set to English), 
 ...                           Validation of German messages (if the system language is set to German)
 
-Force Tags              create    heart-rate   xxx
+Force Tags              create    heart-rate
 
 
 *** Variables ***
@@ -384,7 +384,7 @@ Force Tags              create    heart-rate   xxx
 #  888  `88b.   888       o      888           `888'    `888'      `88b    d88'  888  `88b.   888     d88' oo     .d8P
 # o888o  o888o o888ooooood8     o888o           `8'      `8'        `Y8bood8P'  o888o  o888o o888bood8P'   8""88888P'
 #
-# [ HIGH LEVEL CRUD KEYWORDS ]
+# [ HIGH LEVEL KEYWORDS ]
 
 
 create Observation Heart Rate JSON

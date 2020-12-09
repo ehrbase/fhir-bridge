@@ -1,0 +1,54 @@
+{
+    "resourceType": "DiagnosticReport",
+    "id": "ef35ac3c-da77-42d1-8d6b-284564adad43",
+    "meta": {
+        "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnostic-report-radiology"
+        ]
+    },
+    "category": [
+        {
+            "coding": [
+                {
+                    "code": "18726-0",
+                    "display": "Radiology studies (set)",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "RAD",
+                    "display": "Radiology",
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0074"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "code": "18748-4",
+                "display": "Diagnostic imaging study",
+                "system": "http://loinc.org"
+            }
+        ]
+    },
+    "conclusion": "COVID-19-typischer Befund",
+    "conclusionCode": [
+        {
+            "coding": [
+                {
+                    "code": "118247008:{363713009=263654008,42752001=840539006}",
+                    "display": "|Radiologic finding (finding)|:{|Has interpretation (attribute)|=|Abnormal (qualifier value)|,|Due to (attribute)|=|Disease caused by severe acute respiratory syndrome coronavirus 2 (disorder)|}",
+                    "system": "http://snomed.info/sct"
+                }
+            ]
+        }
+    ],
+    "effectiveDateTime": "2020-09-30",
+    "status": "final",
+    "subject": {
+        "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+        }
+    }
+}
