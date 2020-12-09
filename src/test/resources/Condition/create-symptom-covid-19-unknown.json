@@ -1,4 +1,5 @@
 {
+  "resourceType": "Condition",
   "id": "8cb12ab0-3563-4154-bfeb-25aa897c2105",
   "meta": {
     "profile": [
@@ -47,7 +48,6 @@
       "value": "{{patientId}}"
     }
   },
-  "resourceType": "Condition",
   "verificationStatus": {
     "coding": [
       {

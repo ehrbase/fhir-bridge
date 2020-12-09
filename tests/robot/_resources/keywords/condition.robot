@@ -74,6 +74,11 @@ create diagnose condition
     POST /Condition with ehr reference    Diagnose Condition    ${example_json}
 
 
+create symptoms-covid-19
+    [Arguments]         ${example_json}
+    POST /Condition with ehr reference    Symptoms Covid-19    ${example_json}
+
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
