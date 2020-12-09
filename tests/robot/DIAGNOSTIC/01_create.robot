@@ -75,6 +75,5 @@ Force Tags              create
     [Tags]              diagnostic-report    radiology    valid   not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    create-radiology.json 
+    diagnostic.create diagnostic report radiology    create-radiology.json 
     diagnostic.validate response - 201
-
