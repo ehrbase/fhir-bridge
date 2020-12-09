@@ -38,7 +38,7 @@ Force Tags              create
     [Tags]              diagnose-condition    valid
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create diagnose condition    create-default.json
+    condition.create diagnose condition    create-condition-default.json
     condition.validate response - 201
 
 
@@ -48,5 +48,5 @@ Force Tags              create
     [Tags]              invalid
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create diagnose condition    create-with-invalid-profile.json
+    condition.create diagnose condition    create-condition-with-invalid-profile.json
     condition.validate response - 422 (Unprocessable Entity)

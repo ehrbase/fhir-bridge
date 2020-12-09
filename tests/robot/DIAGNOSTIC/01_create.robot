@@ -38,7 +38,7 @@ Force Tags              create
     [Tags]              diagnostic-report    valid
 
     ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    create.json 
+    diagnostic.create diagnostic report    create-diagnosticReport.json 
     diagnostic.validate response - 201
 
 
@@ -47,7 +47,7 @@ Force Tags              create
     [Tags]              invalidvalid
 
     ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    create-without-observation.json 
+    diagnostic.create diagnostic report    create-diagnosticReport-without-observation.json 
     diagnostic.validate response - 422 (missing observation)
 
 
@@ -56,7 +56,7 @@ Force Tags              create
     [Tags]              invalid
 
     ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    create-with-default-profile.json 
+    diagnostic.create diagnostic report    create-diagnosticReport-with-default-profile.json 
     diagnostic.validate response - 422 (profile not supported)
 
 
@@ -65,5 +65,5 @@ Force Tags              create
     [Tags]              invalid
 
     ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    create-hls-genetics-result.json 
+    diagnostic.create diagnostic report    create-diagnosticReport-hls-genetics-result.json 
     diagnostic.validate response - 422 (profile not supported)
