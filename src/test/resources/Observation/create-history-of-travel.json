@@ -1,0 +1,153 @@
+{
+    "resourceType": "Observation",
+    "id": "607eb4e3-65ac-4ff9-b67c-20ffa7699555",
+    "meta": {
+        "profile":  [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/history-of-travel"
+        ]
+    },
+    "identifier":  [
+        {
+            "type": {
+                "coding":  [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                        "code": "OBI"
+                    }
+                ]
+            },
+            "system": "https://www.charite.de/fhir/CodeSystem/observation-identifiers",
+            "value": "8691-8_HistoryOfTravel",
+            "assigner": {
+                "reference": "Organization/Charité"
+            }
+        }
+    ],
+    "status": "final",
+    "category":  [
+        {
+            "coding":  [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "social-history"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding":  [
+            {
+                "system": "http://loinc.org",
+                "code": "8691-8",
+                "display": "History of Travel"
+            },
+            {
+                "system": "http://snomed.info/sct",
+                "code": "443846001",
+                "display": "Detail of history of travel (observable entity)"
+            }
+        ],
+        "text": "History of travel"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "effectiveDateTime": "2020-09-28",
+    "valueCodeableConcept": {
+        "coding":  [
+            {
+                "code": "373066001",
+                "display": "Yes (qualifier value)",
+                "system": "http://snomed.info/sct"
+            }
+        ]
+    },
+    "component":  [
+        {
+            "code": {
+                "coding":  [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "82752-7",
+                        "display": "Date travel started"
+                    }
+                ],
+                "text": "Travel start date"
+            },
+            "valueDateTime": "2020-09-17"
+        },
+        {
+            "code": {
+                "coding":  [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "94651-7",
+                        "display": "Country of travel"
+                    }
+                ],
+                "text": "Country of travel"
+            },
+            "valueCodeableConcept": {
+                "coding":  [
+                    {
+                        "system": "urn:iso:std:iso:3166",
+                        "code": "DE",
+                        "display": "Germany"
+                    }
+                ],
+                "text": "Germany"
+            }
+        },
+        {
+            "code": {
+                "coding":  [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "82754-3",
+                        "display": "State of travel"
+                    }
+                ],
+                "text": "State of travel"
+            },
+            "valueCodeableConcept": {
+                "coding":  [
+                    {
+                        "system": "urn:iso:std:iso:3166-2:de",
+                        "code": "DE-NW",
+                        "display": "Nordrhein-Westfalen"
+                    }
+                ],
+                "text": "Nordrhein-Westfalen"
+            }
+        },
+        {
+            "code": {
+                "coding":  [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "94653-3",
+                        "display": "City of travel"
+                    }
+                ],
+                "text": "City of travel"
+            },
+            "valueString": "Essen"
+        },
+        {
+            "code": {
+                "coding":  [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "91560-3",
+                        "display": "Date of departure from travel destination"
+                    }
+                ],
+                "text": "Travel end date"
+            },
+            "valueDateTime": "2020-09-19"
+        }
+    ]
+}
