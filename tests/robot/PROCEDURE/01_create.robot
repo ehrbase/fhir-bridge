@@ -39,7 +39,7 @@ Force Tags              create
 	[Tags]             valid
 
 	ehr.create new ehr    000_ehr_status.json
-	procedure.create procedure    create.json
+	procedure.create procedure    create-procedure.json
     procedure.validate response - 201
 
 

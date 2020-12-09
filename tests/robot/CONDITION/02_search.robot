@@ -34,7 +34,7 @@ Force Tags              search
     [Documentation]     Search Diagnose Condition
     [Tags]              diagnose-condition    valid
 
-    condition.create diagnose condition    create-default.json
+    condition.create diagnose condition    create-condition-default.json
     condition.get diagnose condition
 
 
