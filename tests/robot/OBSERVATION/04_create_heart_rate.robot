@@ -21,8 +21,11 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+Documentation           NOTE: The validation of error messages in the tables below depends on system language settings:
+...                           Validation of English messages (if the system language is set to English), 
+...                           Validation of German messages (if the system language is set to German)
 
-Force Tags              create    heart-rate
+Force Tags              create    heart-rate   xxx
 
 
 *** Variables ***
@@ -38,7 +41,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             valid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -56,7 +59,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             ressourceType    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -73,7 +76,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             ID    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -88,7 +91,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             Meta    Profile    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -109,7 +112,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             Status    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -126,7 +129,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             Identifier    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -157,7 +160,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             Category    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -184,7 +187,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             Code    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -228,7 +231,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             Subject    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -249,7 +252,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             DateTime    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -269,7 +272,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             valueQuantity    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -305,7 +308,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             DataAbsentReason    invalid
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
@@ -322,7 +325,7 @@ Force Tags              create    heart-rate
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
-    ...                Info: Validation of English messages (if the system language is set to English) and messages against German (if the system language is set to German)
+
     [Tags]             invalid    multi
     [Template]         create Observation Heart Rate JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArryaNumber |         				                                                                                                                        diagnostics 							                                                                        |
