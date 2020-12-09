@@ -67,3 +67,14 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     diagnostic.create diagnostic report    create-hls-genetics-result.json 
     diagnostic.validate response - 422 (profile not supported)
+
+
+005 Create Diagnostic Report Radiology
+    [Documentation]     1. create EHR
+    ...                 2. create diagnosticreport radiology
+    [Tags]              diagnostic-report    radiology    valid   not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    diagnostic.create diagnostic report    create-radiology.json 
+    diagnostic.validate response - 201
+
