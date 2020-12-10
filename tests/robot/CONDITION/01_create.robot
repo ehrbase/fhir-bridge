@@ -127,5 +127,5 @@ Force Tags              create
     [Tags]             diabetes-mellitus    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create diabetes mellitus    Diabetes Mellitus Type 2  Insulin Treated    create-diabetes-mellitus-type-2-insulin-treated.json
+    condition.create diabetes mellitus    Diabetes Mellitus Type 2 Insulin Treated    create-diabetes-mellitus-type-2-insulin-treated.json
     condition.validate response - 201
