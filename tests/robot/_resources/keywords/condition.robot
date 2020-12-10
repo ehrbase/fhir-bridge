@@ -79,6 +79,11 @@ create symptoms-covid-19
     POST /Condition with ehr reference    Symptoms Covid-19    ${example_json}
 
 
+create diabetes mellitus
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
