@@ -23,7 +23,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
-Force Tags              create
+Force Tags              create    condition
 
 
 
@@ -87,7 +87,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. update example json patient id
     ...                3. post example json to observation endpoint
-	...                3. validate the response status
+	...                4. validate the response status
     [Tags]             diabetes-mellitus    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
@@ -99,7 +99,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. update example json patient id
     ...                3. post example json to observation endpoint
-	...                3. validate the response status
+	...                4. validate the response status
     [Tags]             diabetes-mellitus    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
@@ -111,7 +111,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. update example json patient id
     ...                3. post example json to observation endpoint
-	...                3. validate the response status
+	...                4. validate the response status
     [Tags]             diabetes-mellitus    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
@@ -123,7 +123,7 @@ Force Tags              create
 	[Documentation]    1. create new EHR Patient record
 	...                2. update example json patient id
     ...                3. post example json to observation endpoint
-	...                3. validate the response status
+	...                4. validate the response status
     [Tags]             diabetes-mellitus    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
