@@ -129,3 +129,27 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     condition.create diabetes mellitus    Diabetes Mellitus Type 2 Insulin Treated    create-diabetes-mellitus-type-2-insulin-treated.json
     condition.validate response - 201
+
+
+010 Create Rheumatological Immunological Diseases (Rheumatism)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                3. validate the response status
+    [Tags]             diabetes-mellitus    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create rheumatological immunological diseases    Rheumatological Immunological Diseases (Rheumatism)    create-rheumatological-immunological-diseases-rheumatism.json
+    condition.validate response - 201
+
+
+011 Create Rheumatological Immunological Diseases (Rheumatoid Arthritis)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                3. validate the response status
+    [Tags]             diabetes-mellitus    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create rheumatological immunological diseases    Rheumatological Immunological Diseases (Rheumatoid Arthritis)    create-rheumatological-immunological-diseases-rheumatoid-arthritis.json
+    condition.validate response - 201
