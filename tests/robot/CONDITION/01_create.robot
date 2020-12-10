@@ -1,4 +1,5 @@
-# Copyright (c) 2020 P. Wohlfarth (Appsfactory), Wladislaw Wagner (Vitasystems GmbH)
+# Copyright (c) 2020 P. Wohlfarth (Appsfactory GmbH), Wladislaw Wagner (Vitasystems GmbH) &
+# Dave Petzold (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -22,7 +23,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
-Force Tags              create
+Force Tags              create    condition
 
 
 
@@ -79,4 +80,52 @@ Force Tags              create
 
     ehr.create new ehr    000_ehr_status.json
     condition.create symptoms-covid-19    create-symptom-covid-19-unknown.json
+    condition.validate response - 201
+
+
+006 Create Condition Diabetes Mellitus
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             diabetes-mellitus    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create diabetes mellitus    Diabetes Mellitus    create-diabetes-mellitus.json
+    condition.validate response - 201
+
+
+007 Create Condition Diabetes Mellitus Type 1
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             diabetes-mellitus    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create diabetes mellitus    Diabetes Mellitus Type 1    create-diabetes-mellitus-type-1.json
+    condition.validate response - 201
+
+
+008 Create Condition Diabetes Mellitus Type 2
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             diabetes-mellitus    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create diabetes mellitus    Diabetes Mellitus Type 2    create-diabetes-mellitus-type-2.json
+    condition.validate response - 201
+
+
+009 Create Condition Diabetes Mellitus Type 2 Insulin Treated
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             diabetes-mellitus    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create diabetes mellitus    Diabetes Mellitus Type 2 Insulin Treated    create-diabetes-mellitus-type-2-insulin-treated.json
     condition.validate response - 201
