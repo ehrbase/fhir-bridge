@@ -24,6 +24,7 @@ import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
+import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.SearchParameter;
 import org.hl7.fhir.r4.model.ValueSet;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
@@ -138,6 +139,14 @@ public class FhirJpaConfiguration extends BaseR4Config {
         patientDao.setResourceType(Patient.class);
         patientDao.setContext(fhirContext());
         return patientDao;
+    }
+
+    @Bean(name = "myQuestionnaireResponseDaoR4")
+    public IFhirResourceDao<QuestionnaireResponse> questionnaireResponseDao() {
+        JpaResourceDao<QuestionnaireResponse> questionnaireResponseDao = new JpaResourceDao<>();
+        questionnaireResponseDao.setResourceType(QuestionnaireResponse.class);
+        questionnaireResponseDao.setContext(fhirContext());
+        return questionnaireResponseDao;
     }
 
     @Bean(name = "myCodeSystemDaoR4")
