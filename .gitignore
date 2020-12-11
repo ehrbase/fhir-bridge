@@ -11,3 +11,9 @@ venv
 
 # Robot Tests
 **results**
+
+VSCode
+.classpath
+.factorypath
+.project
+.settings/
