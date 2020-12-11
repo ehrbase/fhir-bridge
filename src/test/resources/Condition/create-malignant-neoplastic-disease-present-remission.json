@@ -1,0 +1,59 @@
+{
+    "resourceType": "Condition",
+    "id": "5743b814-eaa6-4ce2-b629-5490bdf17659",
+    "meta": {
+        "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/malignant-neoplastic-disease"
+        ]
+    },
+    "clinicalStatus": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "remission",
+                "display": "Remission"
+            }
+        ]
+    },
+    "verificationStatus": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                "code": "confirmed",
+                "display": "Confirmed"
+            },
+            {
+                "system": "http://snomed.info/sct",
+                "code": "410605003",
+                "display": "Confirmed present (qualifier value)"
+            }
+        ]
+    },
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "408475000",
+                    "display": "Diabetic medicine"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "363346000",
+                "display": "Malignant neoplastic disease"
+            }
+        ]
+    },
+    "subject": {
+        "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+        }
+    },
+    "recordedDate": "2020-10-06"
+}
