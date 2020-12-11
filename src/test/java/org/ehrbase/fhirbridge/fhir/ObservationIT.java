@@ -93,7 +93,7 @@ class ObservationIT extends AbstractSetupIT {
 
     @Test
     void createWithDefaultProfile() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Observation/create-with-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("Observation/create-observation-with-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
@@ -110,7 +110,7 @@ class ObservationIT extends AbstractSetupIT {
 
     @Test
     void createWithInvalidQuantity() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Observation/create-with-invalid-quantity.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("Observation/create-observation-with-invalid-quantity.json").getInputStream(), StandardCharsets.UTF_8);
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
@@ -120,7 +120,7 @@ class ObservationIT extends AbstractSetupIT {
 
     @Test
     void createWithInvalidQuantityDatatype() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Observation/create-with-invalid-quantity-datatype.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("Observation/create-observation-with-invalid-quantity-datatype.json").getInputStream(), StandardCharsets.UTF_8);
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 

@@ -26,12 +26,12 @@ class ConditionIT extends AbstractSetupIT {
 
     @Test
     void createDefault() throws IOException {
-        create("Condition/create-default.json");
+        create("Condition/create-condition-default.json");
     }
 
     @Test
     void createWithInvalidSubject() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Condition/create-with-invalid-subject.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("Condition/create-condition-with-invalid-subject.json").getInputStream(), StandardCharsets.UTF_8);
         ICreateTyped createTyped = client.create().resource(resource);
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
@@ -40,17 +40,17 @@ class ConditionIT extends AbstractSetupIT {
 
     @Test
     void createSymptomCovidAbsent() throws IOException {
-        create("Condition/create-symptom-covid-19-absent.json");
+        create("Condition/create-symptoms-covid-19-absent.json");
     }
 
     @Test
     void createSymptomCovidPresent() throws IOException {
-        create("Condition/create-symptom-covid-19-present.json");
+        create("Condition/create-symptoms-covid-19-present.json");
     }
 
     @Test
     void createSymptomCovidUnknown() throws IOException {
-        create("Condition/create-symptom-covid-19-unknown.json");
+        create("Condition/create-symptoms-covid-19-unknown.json");
     }
 
     @Test

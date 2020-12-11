@@ -21,7 +21,7 @@ class ProcedureIT extends AbstractSetupIT {
 
     @Test
     void create() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Procedure/create.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("Procedure/create-procedure.json").getInputStream(), StandardCharsets.UTF_8);
         MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
 
         assertNotNull(outcome.getId());
@@ -30,7 +30,7 @@ class ProcedureIT extends AbstractSetupIT {
 
     @Test
     void createWithDefaultProfile() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Procedure/create-with-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("Procedure/create-procedure-with-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
@@ -40,7 +40,7 @@ class ProcedureIT extends AbstractSetupIT {
 
     @Test
     void createWithNonExistingSubject() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Procedure/create-with-non-existing-subject.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("Procedure/create-procedure-with-non-existing-subject.json").getInputStream(), StandardCharsets.UTF_8);
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
