@@ -181,19 +181,7 @@ Force Tags              create
     condition.validate response - 201
 
 
-014 Create Chronic Lung Disease (Infectious disease of lung - disorder)
-	[Documentation]    1. create new EHR Patient record
-	...                2. update example json patient id
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status
-    [Tags]             chronic-lung-diseases    valid    not-ready
-
-    ehr.create new ehr    000_ehr_status.json
-    condition.create chronic lung diseases    Chronic Lung Disease (Infectious disease of lung - disorder)    create-chronic-lung-disease-infectious-disease-disorder.json
-    condition.validate response - 201
-
-
-015 Create Chronic Lung Disease (Fibrosis of Lung)
+014 Create Chronic Lung Disease (Fibrosis of Lung)
 	[Documentation]    1. create new EHR Patient record
 	...                2. update example json patient id
     ...                3. post example json to observation endpoint
@@ -202,4 +190,76 @@ Force Tags              create
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic Lung Disease (Fibrosis of Lung)    create-chronic-lung-disease-fibrosis-of-lung.json
+    condition.validate response - 201
+
+
+015 Create Chronic Lung Disease (Asthma)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-lung-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic lung diseases    Chronic Lung Disease (Asthma)    create-chronic-lung-disease-asthma.json
+    condition.validate response - 201
+
+
+016 Create Chronic Lung Disease (Cystic Fibrosis)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-lung-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic lung diseases    Chronic Lung Disease (Cystic Fibrosis)    create-chronic-lung-disease-cystic-fibrosis.json
+    condition.validate response - 201
+
+
+017 Create Chronic Lung Disease (Extreme Obesity with Alveolar Hypoventilation)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-lung-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic lung diseases    Chronic Lung Disease (Extreme Obesity with Alveolar Hypoventilation)    create-chronic-lung-disease-with-alveolar-hypoventilation.json
+    condition.validate response - 201
+
+
+018 Create Chronic Lung Disease (Pulmonary hypertension)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-lung-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic lung diseases    Chronic Lung Disease (Pulmonary hypertension)    create-chronic-lung-disease-pulmonary-hypertension.json
+    condition.validate response - 201
+
+
+019 Create Chronic Lung Disease (Sleep Apnea)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-lung-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic lung diseases    Chronic Lung Disease (Sleep Apnea)    create-chronic-lung-disease-sleep-apnea.json
+    condition.validate response - 201
+
+
+020 Create Chronic Lung Disease (Obstructive Sleep Apnea Syndrome)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-lung-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic lung diseases    Chronic Lung Disease (Obstructive Sleep Apnea Syndrome)    create-chronic-lung-disease-obstructive-sleep-apnea.json
     condition.validate response - 201
