@@ -9,7 +9,6 @@
       "value": "{{patientId}}"
     }
   },
-  "status": "completed",
   "item": [
     {
       "linkId": "P",
