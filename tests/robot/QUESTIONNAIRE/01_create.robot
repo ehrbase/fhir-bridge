@@ -35,12 +35,9 @@ Force Tags              create
 *** Test Cases ***
 001 Create Questionnaire Response
     [Documentation]     1. trigger QuestionaireResponse endpoint
-    [Tags]              not-ready    questionnaire-response    valid
+    [Tags]              questionnaire-response    valid
 
-    # comment: # CREATING EHR IS NOT REQUIRED YET
-    # ehr.create new ehr    000_ehr_status.json
 
+    ehr.create new ehr    000_ehr_status.json
     questionnaire.create questionnaire response    create-covapp-response.json
     questionnaire.validate response - 201
-
-
