@@ -106,7 +106,7 @@ Force Tags              create
 	[Tags]             invalid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create observation    create-with-default-profile.json
+	observation.create observation    create-observation-with-default-profile.json
     observation.validate response - 422 (default profile not supported)
 
 
@@ -117,7 +117,7 @@ Force Tags              create
 	[Tags]             invalid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create observation    create-with-unsupported-profile.json
+	observation.create observation    create-observation-with-unsupported-profile.json
     observation.validate response - 422 (profile not supported)
 
 
