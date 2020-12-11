@@ -40,17 +40,17 @@ class ConditionIT extends AbstractSetupIT {
 
     @Test
     void createSymptomCovidAbsent() throws IOException {
-        create("Condition/create-condition-symptom-covid-19-absent.json");
+        create("Condition/create-symptoms-covid-19-absent.json");
     }
 
     @Test
     void createSymptomCovidPresent() throws IOException {
-        create("Condition/create-condition-symptom-covid-19-present.json");
+        create("Condition/create-symptoms-covid-19-present.json");
     }
 
     @Test
     void createSymptomCovidUnknown() throws IOException {
-        create("Condition/create-condition-symptom-covid-19-unknown.json");
+        create("Condition/create-symptoms-covid-19-unknown.json");
     }
 
     @Test

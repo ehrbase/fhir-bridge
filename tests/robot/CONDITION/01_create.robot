@@ -61,7 +61,7 @@ Force Tags              create
     [Tags]              symptoms-covid-19    valid
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create symptoms-covid-19    create-symptom-covid-19-present.json
+    condition.create symptoms-covid-19    create-symptoms-covid-19-present.json
     condition.validate response - 201
 
 
@@ -71,7 +71,7 @@ Force Tags              create
     [Tags]              symptoms-covid-19    valid
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create symptoms-covid-19    create-symptom-covid-19-absent.json
+    condition.create symptoms-covid-19    create-symptoms-covid-19-absent.json
     condition.validate response - 201
 
 
@@ -81,7 +81,7 @@ Force Tags              create
     [Tags]              symptoms-covid-19    valid
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create symptoms-covid-19    create-symptom-covid-19-unknown.json
+    condition.create symptoms-covid-19    create-symptoms-covid-19-unknown.json
     condition.validate response - 201
 
 
