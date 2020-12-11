@@ -1,0 +1,51 @@
+{
+    "resourceType": "Condition",
+    "id": "2293419e-4b25-43ec-b517-c4103543243a",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-lung-diseases"
+      ]
+    },
+    "extension": [
+      {
+        "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "261665006",
+              "display": "Unknown (qualifier value)"
+            }
+          ],
+          "text": "Presence of condition is unknown."
+        }
+      }
+    ],
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "418112009",
+            "display": "Pulmonary medicine"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "13645005",
+          "display": "Chronic obstructive lung disease"
+        }
+      ]
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "recordedDate": "2020-10-06"
+  }
