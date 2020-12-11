@@ -81,6 +81,7 @@ $ docker-compose -f docker-compose-full.yml up
 | `spring.datasource.password`                               |                                                  | Login password of the database.                             |
 | `spring.datasource.url`                                    |                                                  | JDBC URL of the database.                                   |
 | `spring.datasource.username`                               |                                                  | Login username of the database.                             |
+| `spring.jpa.properties.hibernate.dialect`                  | `org.hibernate.dialect.H2Dialect`                | Tells Hibernate to generate the appropriate SQL statements. |
 | `spring.jpa.properties.hibernate.search.default.indexBase` | `${java.io.tmpdir}/fhir-bridge-poc/indexes`      | Default base directory for the indexes.                     |
 | `server.port`                                              | `8888`                                           | Server HTTP port.                                           |
 | `server.servlet.context-path`                              | `/fhir-bridge-poc`                               | Context path of the application.                            |
