@@ -54,6 +54,7 @@ validate response - 422 (profile not supported)
     ...        pattern=One of the following profiles is expected:
 
 
+
 #                                            .
 #                                          .o8
 #  .ooooo.  oooo d8b  .ooooo.   .oooo.   .o888oo  .ooooo.
@@ -68,6 +69,12 @@ validate response - 422 (profile not supported)
 create diagnostic report
     [Arguments]         ${example_json}
     POST /Diagnostic with ehr reference    Diagnostic Report    ${example_json}
+
+
+create diagnostic report radiology
+    [Arguments]         ${example_json}
+    POST /Diagnostic with ehr reference    Diagnostic Report Radiology    ${example_json}
+
 
 
 #                                   .                    

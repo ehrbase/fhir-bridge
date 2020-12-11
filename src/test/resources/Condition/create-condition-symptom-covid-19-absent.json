@@ -1,4 +1,5 @@
 {
+  "resourceType": "Condition",
   "id": "74962b89-f656-4f05-83af-2356667b45e4",
   "meta": {
     "profile": [
@@ -45,6 +46,5 @@
         "system": "http://snomed.info/sct"
       }
     ]
-  },
-  "resourceType": "Condition"
+  }
 }

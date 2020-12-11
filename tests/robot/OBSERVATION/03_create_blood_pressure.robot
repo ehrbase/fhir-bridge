@@ -22,7 +22,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
-Force Tags              create    bloodpressure   zzz
+Force Tags              create    blood-pressure    invalid
 
 
 
@@ -33,8 +33,8 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 *** Test Cases ***
-000 Create Blood Pressuere Fails Due To Invalid/Missing EHR Reference
-	[Documentation]    	Trigger observation endpoint w/o creating an EHR first
+000 Create Blood Pressuere (Invalid/Missing EHR Reference)
+	[Documentation]    	POST to observation endpoint w/o creating an EHR first
 	[Template]			create blood pressure w/o ehr reference
 	[Tags]				
 
@@ -61,7 +61,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.subject.identifier.value    ${{str(uuid.uuid4())}}    0    422    EhrId not found for subject '[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 	
 
-001 Create Blood Pressure Fails Due To Invalid/Missing 'resourceType'
+001 Create Blood Pressure (Invalid/Missing 'resourceType')
 	[Documentation]     TODO
 	...					NOTE: use Regular Expressions to replace braces () as described here:
 	...          		https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example
@@ -76,7 +76,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
     $.resourceType		${123}			0		422		This does not appear to be a FHIR resource .unknown name '123'.
 
 
-002 Create Blood Pressure Fails Due To Invalid/Missing 'meta'
+002 Create Blood Pressure (Invalid/Missing 'meta')
 	[Documentation]     TODO
 	[Template]			create blood pressure with ehr reference
     [Tags]             	
@@ -97,7 +97,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 
-003 Create Blood Pressure Fails Due To Invalid/Missing 'code'
+003 Create Blood Pressure (Invalid/Missing 'code')
 	[Documentation]     TODO
 	[Template]			create blood pressure with ehr reference
     [Tags]              
@@ -107,7 +107,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.code				missing			0		422    	Observation.code: minimum required = 1, but only found 0 .from ${profile url}
 	
 
-004 Create Blood Pressure Fails Due To Invalid/Missing 'category:VSCat'
+004 Create Blood Pressure (Invalid/Missing 'category:VSCat')
 	[Documentation]     TODO
 	[Template]			create blood pressure with ehr reference
     [Tags]              
@@ -140,7 +140,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	...																		Observation.category[0]
 
 
-005 Create Blood Pressure Fails Due To Invalid/Missing 'component:SystolicBP'
+005 Create Blood Pressure (Invalid/Missing 'component:SystolicBP')
 	[Documentation]     TODO
 	[Template]			create blood pressure with ehr reference
     [Tags]              
@@ -236,7 +236,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	...																		Observation.component[0].value.ofType(Quantity).code
 
 
-006 Create Blood Pressure Fails Due To Invalid/Missing 'component:DiastolicBP'
+006 Create Blood Pressure (Invalid/Missing 'component:DiastolicBP')
 	[Documentation]     TODO
 	[Template]			create blood pressure with ehr reference
     [Tags]              

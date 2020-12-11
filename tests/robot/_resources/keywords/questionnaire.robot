@@ -65,7 +65,7 @@ POST /Questionaire
     [Arguments]         ${fhir_resource_name}    ${payload}
 
     Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' QUESTIONAIRE
-    &{resp}             POST    ${BASE_URL}/Questionaire    body=${payload}
+    &{resp}             POST    ${BASE_URL}/QuestionnaireResponse    body=${payload}
                         Output Debug Info To Console
 
 
@@ -73,6 +73,6 @@ POST /Questionaire with ehr reference
     [Arguments]         ${fhir_resource_name}    ${example_json}
 
     ${payload}          Load JSON From File    ${DATA_SET_PATH_QUESTIONAIRE}/${example_json}
-                        #Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
-                        #Output Debug Info To Console    ${payload}
+                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
+                        Output Debug Info To Console    ${payload}
                         POST /Questionaire    ${fhir_resource_name}    ${payload}
