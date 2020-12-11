@@ -88,6 +88,11 @@ create rheumatological immunological diseases
     [Arguments]         ${text}    ${example_json}
     POST /Condition with ehr reference    ${text}    ${example_json}
 
+
+create chronic lung diseases
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
