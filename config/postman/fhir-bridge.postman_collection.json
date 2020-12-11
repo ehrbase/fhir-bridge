@@ -9,6 +9,53 @@
 			"name": "FHIR",
 			"item": [
 				{
+					"name": "AuditEvent",
+					"item": [
+						{
+							"name": "Find AuditEvent",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "b94cca15-4768-44ab-bc86-bc3a02825247",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/AuditEvent?date=gt2020-12-07&entity=DiagnosticReport/13/_history/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"AuditEvent"
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "gt2020-12-07"
+										},
+										{
+											"key": "entity",
+											"value": "DiagnosticReport/13/_history/1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "Condition",
 					"item": [
 						{
@@ -271,7 +318,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"blood-pressure\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure\"\r\n    ]\r\n  },\r\n  \"text\": {\r\n    \"status\": \"generated\",\r\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: blood-pressure</p><p><b>meta</b>: </p><p><b>identifier</b>: urn:uuid:187e0c12-8dd2-67e2-99b2-bf273c878281</p><p><b>basedOn</b>: </p><p><b>status</b>: final</p><p><b>category</b>: Vital Signs <span>(Details : {http://terminology.hl7.org/CodeSystem/observation-category code 'vital-signs' = 'Vital Signs', given as 'Vital Signs'})</span></p><p><b>code</b>: Blood pressure systolic &amp; diastolic <span>(Details : {LOINC code '85354-9' = 'Blood pressure panel with all children optional', given as 'Blood pressure panel with all children optional'})</span></p><p><b>subject</b>: <a>urn:uuid:example</a></p><p><b>effective</b>: 17/09/2012</p><p><b>performer</b>: <a>Practitioner/example</a></p><p><b>interpretation</b>: Below low normal <span>(Details : {http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation code 'L' = 'Low', given as 'low'})</span></p><p><b>bodySite</b>: Right arm <span>(Details : {SNOMED CT code '368209003' = 'Right upper arm', given as 'Right arm'})</span></p><blockquote><p><b>component</b></p><p><b>code</b>: Systolic blood pressure <span>(Details : {LOINC code '8480-6' = 'Systolic blood pressure', given as 'Systolic blood pressure'}; {SNOMED CT code '271649006' = 'Systolic blood pressure', given as 'Systolic blood pressure'}; {http://acme.org/devices/clinical-codes code 'bp-s' = 'bp-s', given as 'Systolic Blood pressure'})</span></p><p><b>value</b>: 107 mmHg<span> (Details: UCUM code mm[Hg] = 'mmHg')</span></p><p><b>interpretation</b>: Normal <span>(Details : {http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation code 'N' = 'Normal', given as 'normal'})</span></p></blockquote><blockquote><p><b>component</b></p><p><b>code</b>: Diastolic blood pressure <span>(Details : {LOINC code '8462-4' = 'Diastolic blood pressure', given as 'Diastolic blood pressure'})</span></p><p><b>value</b>: 60 mmHg<span> (Details: UCUM code mm[Hg] = 'mmHg')</span></p><p><b>interpretation</b>: Below low normal <span>(Details : {http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation code 'L' = 'Low', given as 'low'})</span></p></blockquote></div>\"\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"urn:ietf:rfc:3986\",\r\n      \"value\": \"urn:uuid:187e0c12-8dd2-67e2-99b2-bf273c878281\"\r\n    }\r\n  ],\r\n  \"basedOn\": [\r\n    {\r\n      \"identifier\": {\r\n        \"system\": \"https://acme.org/identifiers\",\r\n        \"value\": \"1234\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\",\r\n          \"display\": \"Vital Signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"85354-9\",\r\n        \"display\": \"Blood pressure panel with all children optional\"\r\n      }\r\n    ],\r\n    \"text\": \"Blood pressure systolic & diastolic\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2012-09-17\",\r\n  \"performer\": [\r\n    {\r\n      \"reference\": \"http://external.fhir.server/Practitioner/example\"\r\n    }\r\n  ],\r\n  \"interpretation\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n          \"code\": \"L\",\r\n          \"display\": \"low\"\r\n        }\r\n      ],\r\n      \"text\": \"Below low normal\"\r\n    }\r\n  ],\r\n  \"bodySite\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"368209003\",\r\n        \"display\": \"Right arm\"\r\n      }\r\n    ]\r\n  },\r\n  \"component\": [\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://loinc.org\",\r\n            \"code\": \"8480-6\",\r\n            \"display\": \"Systolic blood pressure\"\r\n          },\r\n          {\r\n            \"system\": \"http://snomed.info/sct\",\r\n            \"code\": \"271649006\",\r\n            \"display\": \"Systolic blood pressure\"\r\n          },\r\n          {\r\n            \"system\": \"http://acme.org/devices/clinical-codes\",\r\n            \"code\": \"bp-s\",\r\n            \"display\": \"Systolic Blood pressure\"\r\n          }\r\n        ]\r\n      },\r\n      \"valueQuantity\": {\r\n        \"value\": 107,\r\n        \"unit\": \"mmHg\",\r\n        \"system\": \"http://unitsofmeasure.org\",\r\n        \"code\": \"mm[Hg]\"\r\n      },\r\n      \"interpretation\": [\r\n        {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n              \"code\": \"N\",\r\n              \"display\": \"normal\"\r\n            }\r\n          ],\r\n          \"text\": \"Normal\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://loinc.org\",\r\n            \"code\": \"8462-4\",\r\n            \"display\": \"Diastolic blood pressure\"\r\n          }\r\n        ]\r\n      },\r\n      \"valueQuantity\": {\r\n        \"value\": \"107\",\r\n        \"unit\": \"mmHg\",\r\n        \"system\": \"http://unitsofmeasure.org\",\r\n        \"code\": \"mm[Hg]\"\r\n      },\r\n      \"interpretation\": [\r\n        {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n              \"code\": \"L\",\r\n              \"display\": \"low\"\r\n            }\r\n          ],\r\n          \"text\": \"Below low normal\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"urn:ietf:rfc:3986\",\r\n      \"value\": \"urn:uuid:187e0c12-8dd2-67e2-99b2-bf273c878281\"\r\n    }\r\n  ],\r\n  \"basedOn\": [\r\n    {\r\n      \"identifier\": {\r\n        \"system\": \"https://acme.org/identifiers\",\r\n        \"value\": \"1234\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\",\r\n          \"display\": \"Vital Signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"85354-9\",\r\n        \"display\": \"Blood pressure panel with all children optional\"\r\n      }\r\n    ],\r\n    \"text\": \"Blood pressure systolic & diastolic\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2012-09-17\",\r\n  \"performer\": [\r\n    {\r\n      \"reference\": \"http://external.fhir.server/Practitioner/example\"\r\n    }\r\n  ],\r\n  \"interpretation\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n          \"code\": \"L\",\r\n          \"display\": \"low\"\r\n        }\r\n      ],\r\n      \"text\": \"Below low normal\"\r\n    }\r\n  ],\r\n  \"bodySite\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"368209003\",\r\n        \"display\": \"Right arm\"\r\n      }\r\n    ]\r\n  },\r\n  \"component\": [\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://loinc.org\",\r\n            \"code\": \"8480-6\",\r\n            \"display\": \"Systolic blood pressure\"\r\n          },\r\n          {\r\n            \"system\": \"http://snomed.info/sct\",\r\n            \"code\": \"271649006\",\r\n            \"display\": \"Systolic blood pressure\"\r\n          },\r\n          {\r\n            \"system\": \"http://acme.org/devices/clinical-codes\",\r\n            \"code\": \"bp-s\",\r\n            \"display\": \"Systolic Blood pressure\"\r\n          }\r\n        ]\r\n      },\r\n      \"valueQuantity\": {\r\n        \"value\": \"107\",\r\n        \"unit\": \"mmHg\",\r\n        \"system\": \"http://unitsofmeasure.org\",\r\n        \"code\": \"mm[Hg]\"\r\n      },\r\n      \"interpretation\": [\r\n        {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n              \"code\": \"N\",\r\n              \"display\": \"normal\"\r\n            }\r\n          ],\r\n          \"text\": \"Normal\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://loinc.org\",\r\n            \"code\": \"8462-4\",\r\n            \"display\": \"Diastolic blood pressure\"\r\n          }\r\n        ]\r\n      },\r\n      \"valueQuantity\": {\r\n        \"value\": \"107\",\r\n        \"unit\": \"mmHg\",\r\n        \"system\": \"http://unitsofmeasure.org\",\r\n        \"code\": \"mm[Hg]\"\r\n      },\r\n      \"interpretation\": [\r\n        {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n              \"code\": \"L\",\r\n              \"display\": \"low\"\r\n            }\r\n          ],\r\n          \"text\": \"Below low normal\"\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -936,7 +983,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"resourceType\": \"Procedure\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure\"\r\n        ]\r\n    },\r\n    \"status\": \"completed\",\r\n    \"category\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"387713003\",\r\n                \"display\": \"Surgical procedure (procedure)\"\r\n            }\r\n        ]\r\n    },\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"80146002\",\r\n                \"display\": \"Excision of appendix (procedure)\"\r\n            },\r\n            {\r\n                \"system\": \"http://fhir.de/CodeSystem/dimdi/ops\",\r\n                \"version\": \"2020\",\r\n                \"code\": \"5-470\",\r\n                \"display\": \"Appendektomie\"\r\n            }\r\n        ]\r\n    },\r\n    \"performedDateTime\": \"2020-04-23\",\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"07f602e0-579e-4fe3-95af-381728bf0000\"\r\n        }\r\n    },\r\n    \"note\": [\r\n        {\r\n            \"text\": \"This is a note about the procedure\"\r\n        }\r\n    ],\r\n    \"recorder\": {\r\n        \"reference\": \"http://external.fhir.server/Practitioner/f201\"\r\n    }\r\n}",
+									"raw": "{\r\n    \"resourceType\": \"Procedure\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure\"\r\n        ]\r\n    },\r\n    \"status\": \"completed\",\r\n    \"category\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"387713003\",\r\n                \"display\": \"Surgical procedure (procedure)\"\r\n            }\r\n        ]\r\n    },\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"80146002\",\r\n                \"display\": \"Excision of appendix (procedure)\"\r\n            },\r\n            {\r\n                \"system\": \"http://fhir.de/CodeSystem/dimdi/ops\",\r\n                \"version\": \"2020\",\r\n                \"code\": \"5-470\",\r\n                \"display\": \"Appendektomie\"\r\n            }\r\n        ]\r\n    },\r\n    \"performedDateTime\": \"2020-04-23\",\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"note\": [\r\n        {\r\n            \"text\": \"This is a note about the procedure\"\r\n        }\r\n    ],\r\n    \"recorder\": {\r\n        \"reference\": \"http://external.fhir.server/Practitioner/f201\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1017,6 +1064,52 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "QuestionnaireResponse",
+					"item": [
+						{
+							"name": "Create QuestionnaireResponse",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "1b0958c3-706c-4a92-bd87-db1f574140e6",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"resourceType\": \"QuestionnaireResponse\",\r\n    \"id\": \"3141\",\r\n    \"text\": {\r\n        \"status\": \"generated\",\r\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">\\n      <pre>\\n            Comorbidity? YES\\n              Cardial Comorbidity? YES\\n                Angina? YES\\n                MI? NO\\n              Vascular Comorbidity?\\n                (no answers)\\n              ...\\n            Histopathology\\n              Abdominal\\n                pT category: 1a\\n              ...\\n          </pre>\\n    </div>\"\r\n    },\r\n    \"identifier\": {\r\n        \"system\": \"http://example.org/fhir/NamingSystem/questionnaire-ids\",\r\n        \"value\": \"Q12349876\"\r\n    },\r\n    \"status\": \"completed\",\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"authored\": \"2013-02-19T14:15:00-05:00\",\r\n    \"item\": [\r\n        {\r\n            \"linkId\": \"1\",\r\n            \"item\": [\r\n                {\r\n                    \"linkId\": \"1.1\",\r\n                    \"answer\": [\r\n                        {\r\n                            \"valueCoding\": {\r\n                                \"system\": \"http://cancer.questionnaire.org/system/code/yesno\",\r\n                                \"code\": \"1\",\r\n                                \"display\": \"Yes\"\r\n                            },\r\n                            \"item\": [\r\n                                {\r\n                                    \"linkId\": \"1.1.1\",\r\n                                    \"item\": [\r\n                                        {\r\n                                            \"linkId\": \"1.1.1.1\",\r\n                                            \"answer\": [\r\n                                                {\r\n                                                    \"valueCoding\": {\r\n                                                        \"system\": \"http://cancer.questionnaire.org/system/code/yesno\",\r\n                                                        \"code\": \"1\"\r\n                                                    }\r\n                                                }\r\n                                            ]\r\n                                        },\r\n                                        {\r\n                                            \"linkId\": \"1.1.1.2\",\r\n                                            \"answer\": [\r\n                                                {\r\n                                                    \"valueCoding\": {\r\n                                                        \"system\": \"http://cancer.questionnaire.org/system/code/yesno\",\r\n                                                        \"code\": \"1\"\r\n                                                    }\r\n                                                }\r\n                                            ]\r\n                                        },\r\n                                        {\r\n                                            \"linkId\": \"1.1.1.3\",\r\n                                            \"answer\": [\r\n                                                {\r\n                                                    \"valueCoding\": {\r\n                                                        \"system\": \"http://cancer.questionnaire.org/system/code/yesno\",\r\n                                                        \"code\": \"0\"\r\n                                                    }\r\n                                                }\r\n                                            ]\r\n                                        }\r\n                                    ]\r\n                                }\r\n                            ]\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/QuestionnaireResponse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"QuestionnaireResponse"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1027,6 +1120,21 @@
 				{
 					"name": "Create EHR",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "myPassword432",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "myuser",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
