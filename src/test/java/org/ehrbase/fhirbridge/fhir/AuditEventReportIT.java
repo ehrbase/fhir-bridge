@@ -22,7 +22,7 @@ class AuditEventReportIT extends AbstractSetupIT {
     @Test
     void createResourceAndSearchAuditEvent() throws IOException {
         Date now = new Date();
-        String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create-diagnosticReport.json").getInputStream(), StandardCharsets.UTF_8);
         MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
 
         assertNotNull(outcome.getId());
