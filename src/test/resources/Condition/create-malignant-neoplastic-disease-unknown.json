@@ -1,0 +1,51 @@
+{
+    "resourceType": "Condition",
+    "id": "2d8aed72-6a97-489e-8980-73f45bae024d",
+    "meta": {
+        "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/malignant-neoplastic-disease"
+        ]
+    },
+    "extension": [
+        {
+            "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
+            "valueCodeableConcept": {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "261665006",
+                        "display": "Unknown (qualifier value)"
+                    }
+                ],
+                "text": "Presence of condition is unknown."
+            }
+        }
+    ],
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "408475000",
+                    "display": "Diabetic medicine"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "363346000",
+                "display": "Malignant neoplastic disease"
+            }
+        ]
+    },
+    "subject": {
+        "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+        }
+    },
+    "recordedDate": "2020-10-06"
+}
