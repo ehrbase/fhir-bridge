@@ -263,3 +263,63 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic Lung Disease (Obstructive Sleep Apnea Syndrome)    create-chronic-lung-disease-obstructive-sleep-apnea.json
     condition.validate response - 201
+
+
+021 Create Chronic Liver Disease
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-liver-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic liver diseases    Chronic Liver Disease    create-chronic-liver-disease.json
+    condition.validate response - 201
+
+
+022 Create Chronic Liver Disease (Autoimmune Liver Disease)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-liver-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic liver diseases    Chronic Liver Disease (Autoimmune Liver Disease)    create-chronic-liver-disease-autoimmune.json
+    condition.validate response - 201
+
+
+023 Create Chronic Liver Disease (Chronic Viral Hepatitis)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-liver-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic liver diseases    Chronic Liver Disease (Chronic Viral Hepatitis)    create-chronic-liver-disease-chronic-viral-hepatitis.json
+    condition.validate response - 201
+
+
+024 Create Chronic Liver Disease (Cirrhosis of Liver)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-liver-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic liver diseases    Chronic Liver Disease (Cirrhosis of Liver)    create-chronic-liver-disease-cirrhosis-of-liver.json
+    condition.validate response - 201
+
+
+025 Create Chronic Liver Disease (Steatosis of Liver)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update example json patient id
+    ...                3. post example json to observation endpoint
+	...                4. validate the response status
+    [Tags]             chronic-liver-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic liver diseases    Chronic Liver Disease (Steatosis of Liver)    create-chronic-liver-disease-steatosis-of-liver.json
+    condition.validate response - 201
