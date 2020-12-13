@@ -408,7 +408,7 @@ Force Tags              create
     condition.create diagnosis covid-19    create-diagnosis-covid-19-present-remission.json
     condition.validate response - 201
 
-# TODO: CLARIFY IF UNKNOW STAUTUS FOR DIAGNOSIS MAKES SENSE
+# TODO: CLARIFY IF UNKNOW STATUS FOR DIAGNOSIS MAKES SENSE
 032 Create Diagnosis Covid-19 (Unknown)
 	[Documentation]    1. create new EHR Patient record
 	...                2. update {{patient_id}} in example json
@@ -417,5 +417,5 @@ Force Tags              create
     [Tags]             diagnosis-covid-19    valid    not-ready   xxx
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create diagnosis covid-19    create-diagnosis-covid-19-unknow.json
+    condition.create diagnosis covid-19    create-diagnosis-covid-19-unknown.json
     condition.validate response - 201
