@@ -104,6 +104,11 @@ create malignant neoplastic disease
     POST /Condition with ehr reference    Malignant Neoplastic Disease    ${example_json}
 
 
+create diagnosis covid-19
+    [Arguments]         ${example_json}
+    POST /Condition with ehr reference    Diagnosis Covid-19    ${example_json}
+
+
 
 #                                   .                    
 #                                 .o8                    
