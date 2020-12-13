@@ -371,3 +371,51 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     condition.create malignant neoplastic disease    create-malignant-neoplastic-disease-unknown.json
     condition.validate response - 201
+
+
+030 Create Diagnosis Covid-19 (Absent)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create diagnosis covid-19    create-diagnosis-covid-19-absent.json
+    condition.validate response - 201
+
+
+031 Create Diagnosis Covid-19 (Present Active)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create diagnosis covid-19    create-diagnosis-covid-19-present-active.json
+    condition.validate response - 201
+
+
+032 Create Diagnosis Covid-19 (Present Remission)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create diagnosis covid-19    create-diagnosis-covid-19-present-remission.json
+    condition.validate response - 201
+
+# TODO: CLARIFY IF UNKNOW STATUS FOR DIAGNOSIS MAKES SENSE
+032 Create Diagnosis Covid-19 (Unknown)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create diagnosis covid-19    create-diagnosis-covid-19-unknown.json
+    condition.validate response - 201
