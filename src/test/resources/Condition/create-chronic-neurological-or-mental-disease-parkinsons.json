@@ -1,0 +1,56 @@
+{
+    "resourceType": "Condition",
+    "id": "05abdb31-5304-4fb1-a9cb-60ae2ecf5b59",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-neurological-mental-diseases"
+      ]
+    },
+    "extension": [
+      {
+        "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "261665006",
+              "display": "Unknown (qualifier value)"
+            }
+          ],
+          "text": "Presence of condition is unknown."
+        }
+      }
+    ],
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "394591006",
+            "display": "Neurology"
+          },
+          {
+            "system": "http://snomed.info/sct",
+            "code": "394587001",
+            "display": "Psychiatry"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "49049000",
+          "display": "Parkinson's disease"
+        }
+      ]
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "recordedDate": "2020-10-06"
+  }
