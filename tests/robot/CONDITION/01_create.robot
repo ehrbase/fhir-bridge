@@ -378,7 +378,7 @@ Force Tags              create
 	...                2. update {{patient_id}} in example json
     ...                3. POST example json to Condition endpoint
 	...                4. validate the response status
-    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+    [Tags]             diagnosis-covid-19    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-absent.json
@@ -390,7 +390,7 @@ Force Tags              create
 	...                2. update {{patient_id}} in example json
     ...                3. POST example json to Condition endpoint
 	...                4. validate the response status
-    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+    [Tags]             diagnosis-covid-19    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-present-active.json
@@ -402,7 +402,7 @@ Force Tags              create
 	...                2. update {{patient_id}} in example json
     ...                3. POST example json to Condition endpoint
 	...                4. validate the response status
-    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+    [Tags]             diagnosis-covid-19    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-present-remission.json
@@ -414,7 +414,7 @@ Force Tags              create
 	...                2. update {{patient_id}} in example json
     ...                3. POST example json to Condition endpoint
 	...                4. validate the response status
-    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+    [Tags]             diagnosis-covid-19    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-unknown.json
@@ -466,4 +466,160 @@ Force Tags              create
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic kidney diseases    Chronic Kidney Disease (Disorder - stage 5 on dialysis)    create-chronic-kidney-disease-stage-5-dialysis.json
+    condition.validate response - 201
+
+
+037 Create Chronic Neurological or Mental Diseases (Anxiety Disorder)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Anxiety Disorder)    create-chronic-neurological-or-mental-disease-anxiety.json
+    condition.validate response - 201
+
+
+038 Create Chronic Neurological or Mental Diseases (Chronic Nervous System Disorder)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Chronic Nervous System Disorder)    create-chronic-neurological-or-mental-disease-chronic-nervous-system.json
+    condition.validate response - 201
+
+
+039 Create Chronic Neurological or Mental Diseases (Combined disorder of muscle AND peripheral nerve)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Combined disorder of muscle AND peripheral nerve)    create-chronic-neurological-or-mental-disease-muscle-and-peripheral-nerve.json
+    condition.validate response - 201
+
+
+040 Create Chronic Neurological or Mental Diseases (Dementia)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Dementia)    create-chronic-neurological-or-mental-disease-dementia.json
+    condition.validate response - 201
+
+
+041 Create Chronic Neurological or Mental Diseases (Depressive Disorder)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Depressive Disorder)    create-chronic-neurological-or-mental-disease-depressive.json
+    condition.validate response - 201
+
+
+042 Create Chronic Neurological or Mental Diseases (Epilepsy)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Epilepsy)    create-chronic-neurological-or-mental-disease-epilepsy.json
+    condition.validate response - 201
+
+
+043 Create Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident with Residual Deficits)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident with Residual Deficits)    create-chronic-neurological-or-mental-disease-history-of-cerebrovascular-accident-with.json
+    condition.validate response - 201
+
+
+044 Create Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident without Residual Deficits)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident without Residual Deficits)    create-chronic-neurological-or-mental-disease-history-of-cerebrovascular-accident-without.json
+    condition.validate response - 201
+
+
+045 Create Chronic Neurological or Mental Diseases (Mental Disorder)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Mental Disorder)    create-chronic-neurological-or-mental-disease-mental-diseases.json
+    condition.validate response - 201
+
+
+046 Create Chronic Neurological or Mental Diseases (Migraine)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Migraine)    create-chronic-neurological-or-mental-disease-migraine.json
+    condition.validate response - 201
+
+
+047 Create Chronic Neurological or Mental Diseases (Multiple Sclerosis)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Multiple Sclerosis)    create-chronic-neurological-or-mental-disease-multiple-sclerosis.json
+    condition.validate response - 201
+
+
+048 Create Chronic Neurological or Mental Diseases (Parkinson's Disease)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Parkinson's Disease)    create-chronic-neurological-or-mental-disease-parkinsons.json
+    condition.validate response - 201
+
+
+048 Create Chronic Neurological or Mental Diseases (Psychotic Disorder)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Psychotic Disorder)    create-chronic-neurological-or-mental-disease-psychotic-disorder.json
     condition.validate response - 201
