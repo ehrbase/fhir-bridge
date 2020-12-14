@@ -419,3 +419,51 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-unknown.json
     condition.validate response - 201
+
+
+033 Create Chronic Kidney Disease (Disorder - Present)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-kidney-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic kidney diseases    Chronic Kidney Disease (Disorder - Present)    create-chronic-kidney-disease-present.json
+    condition.validate response - 201
+
+
+034 Create Chronic Kidney Disease (Disorder - Absent)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-kidney-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic kidney diseases    Chronic Kidney Disease (Disorder - Absent)    create-chronic-kidney-disease-absent.json
+    condition.validate response - 201
+
+
+035 Create Chronic Kidney Disease (Disorder - Unknown)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-kidney-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic kidney diseases    Chronic Kidney Disease (Disorder - Unknown)    create-chronic-kidney-disease-unknown.json
+    condition.validate response - 201
+
+
+036 Create Chronic Kidney Disease (Disorder - stage 5 on dialysis)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             chronic-kidney-disease    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create chronic kidney diseases    Chronic Kidney Disease (Disorder - stage 5 on dialysis)    create-chronic-kidney-disease-stage-5-dialysis.json
+    condition.validate response - 201

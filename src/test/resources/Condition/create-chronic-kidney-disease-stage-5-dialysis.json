@@ -1,0 +1,59 @@
+{
+    "id": "68dc1113-2e71-40ac-b2f8-93009c45cba3",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-kidney-diseases"
+      ]
+    },
+    "category": [
+      {
+        "coding": [
+          {
+            "code": "394589003",
+            "display": "Nephrology (qualifier value)",
+            "system": "http://snomed.info/sct"
+          }
+        ]
+      }
+    ],
+    "clinicalStatus": {
+      "coding": [
+        {
+          "code": "active",
+          "display": "Active",
+          "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+        }
+      ]
+    },
+    "code": {
+      "coding": [
+        {
+          "code": "714152005",
+          "display": "Chronic kidney disease stage 5 on dialysis (disorder)",
+          "system": "http://snomed.info/sct"
+        }
+      ]
+    },
+    "recordedDate": "2020-10-28T17:01:09+01:00",
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "verificationStatus": {
+      "coding": [
+        {
+          "code": "confirmed",
+          "display": "Confirmed",
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+        },
+        {
+          "code": "410605003",
+          "display": "Confirmed present (qualifier value)",
+          "system": "http://snomed.info/sct"
+        }
+      ]
+    },
+    "resourceType": "Condition"
+  }
