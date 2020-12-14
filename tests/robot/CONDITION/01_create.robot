@@ -623,3 +623,110 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Psychotic Disorder)    create-chronic-neurological-or-mental-disease-psychotic-disorder.json
     condition.validate response - 201
+
+
+049 Create Cardiovascular Diseases (Cardiac Arrhythmia)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             cardiovascular-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create cardiovascular diseases    Cardiovascular Diseases (Cardiac Arrhythmia)    create-cardiovascular-diseases-cardiac-arrhythmia.json
+    condition.validate response - 201
+
+
+050 Create Cardiovascular Diseases (Cardiovascular Disease)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             cardiovascular-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create cardiovascular diseases    Cardiovascular Diseases (Cardiovascular Disease)    create-cardiovascular-diseases-cardiovascular-disease.json
+    condition.validate response - 201
+
+
+051 Create Cardiovascular Diseases (Carotid Artery Stenosis)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             cardiovascular-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create cardiovascular diseases    Cardiovascular Diseases (Carotid Artery Stenosis)    create-cardiovascular-diseases-carotid-artery-stenosis.json
+    condition.validate response - 201
+
+
+052 Create Cardiovascular Diseases (Coronary Arteriosclerosis)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             cardiovascular-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create cardiovascular diseases    Cardiovascular Diseases (Coronary Arteriosclerosis)    create-cardiovascular-diseases-coronary-arteriosclerosis.json
+    condition.validate response - 201
+
+
+053 Create Cardiovascular Diseases (Heart Failure)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             cardiovascular-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create cardiovascular diseases    Cardiovascular Diseases (Heart Failure)    create-cardiovascular-diseases-heart-failure.json
+    condition.validate response - 201
+
+
+054 Create Cardiovascular Diseases (History of Heart Revascularization)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             cardiovascular-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create cardiovascular diseases    Cardiovascular Diseases (History of Heart Revascularization)    create-cardiovascular-diseases-history-of-heart-revascularization.json
+    condition.validate response - 201
+
+
+055 Create Cardiovascular Diseases (History of Myocardial Infarction)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             cardiovascular-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create cardiovascular diseases    Cardiovascular Diseases (History of Myocardial Infarction)    create-cardiovascular-diseases-history-of-myocardial-infarction.json
+    condition.validate response - 201
+
+
+056 Create Cardiovascular Diseases (Hypertensive Disorder)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             cardiovascular-diseases    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create cardiovascular diseases    Cardiovascular Diseases (Hypertensive Disorder)    create-cardiovascular-diseases-hypertensive-disorder.json
+    condition.validate response - 201
+
+
+057 Create Cardiovascular Diseases (Peripheral Arterial Occlusive Disease)
+	[Documentation]    1. create new EHR Patient record
+	...                2. update {{patient_id}} in example json
+    ...                3. POST example json to Condition endpoint
+	...                4. validate the response status
+    [Tags]             cardiovascular-diseases    valid    not-ready
+    ehr.create new ehr    000_ehr_status.json
+    condition.create cardiovascular diseases    Cardiovascular Diseases (Peripheral Arterial Occlusive Disease)    create-cardiovascular-diseases-peripheral-arterial-occlusive-disease.json
+    condition.validate response - 201
