@@ -1,14 +1,12 @@
-package org.ehrbase.fhirbridge.ehr.opt.shareddefinition;
+package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum CategoryDefiningcode implements EnumValueSet {
-  EVENT("event", "event", "openehr", "433"),
+public enum LateralitatDefiningcode implements EnumValueSet {
+  LINKS("Links", "Die linke Körperseite.", "local", "at0003"),
 
-  EPISODIC("episodic", "episodic", "openehr", "435"),
-
-  PERSISTENT("persistent", "persistent", "openehr", "431");
+  RECHTS("Rechts", "Die rechte Körperseite.", "local", "at0004");
 
   private String value;
 
@@ -18,7 +16,7 @@ public enum CategoryDefiningcode implements EnumValueSet {
 
   private String code;
 
-  CategoryDefiningcode(String value, String description, String terminologyId, String code) {
+  LateralitatDefiningcode(String value, String description, String terminologyId, String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;
