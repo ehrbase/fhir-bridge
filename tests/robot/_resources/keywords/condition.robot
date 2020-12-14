@@ -119,6 +119,11 @@ create chronic neurological or mental diseases
     POST /Condition with ehr reference    ${text}    ${example_json}
 
 
+create cardiovascular diseases
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
