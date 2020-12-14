@@ -1,0 +1,59 @@
+{
+    "resourceType": "Condition",
+    "id": "c02bf407-199c-4dae-a6c9-f93f3911eca0",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/cardiovascular-diseases"
+      ]
+    },
+    "clinicalStatus": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+          "code": "active",
+          "display": "Active"
+        }
+      ]
+    },
+    "verificationStatus": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "code": "confirmed",
+          "display": "Confirmed"
+        },
+        {
+          "system": "http://snomed.info/sct",
+          "code": "410605003",
+          "display": "Confirmed present (qualifier value)"
+        }
+      ]
+    },
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "722414000",
+            "display": "Vascular medicine"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "417662000:246090004=22298006",
+          "display": "History of myocardial infarction"
+        }
+      ]
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "recordedDate": "2020-10-06"
+  }
