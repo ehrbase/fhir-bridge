@@ -537,7 +537,7 @@ Force Tags              create
     [Tags]             chronic-neurological-or-mental-disease    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Epilepsy)    create-chronic-neurological-for-mental-disease-epilepsy.json
+    condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Epilepsy)    create-chronic-neurological-or-mental-disease-epilepsy.json
     condition.validate response - 201
 
 
