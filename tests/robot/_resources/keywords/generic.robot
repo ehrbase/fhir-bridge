@@ -111,9 +111,9 @@ Output Debug Info To Console
     ...                 - response headers
     ...                 - response body
     [Arguments]         ${payload}=${None}
-    Run Keyword If      "${OUTPUT_LEVEL}"=="verbose"    Output
-    Run Keyword If      "${OUTPUT_LEVEL}"=="verbose" and ${payload}!=${None}
-                        ...    Output    ${payload}
+    Run Keyword And Return If   "${OUTPUT_LEVEL}"=="verbose" and ${payload}!=${None}
+                                ...    Output    ${payload}
+    Run Keyword If              "${OUTPUT_LEVEL}"=="verbose"    Output
 
 
 TRACE GITHUB ISSUE
