@@ -114,6 +114,11 @@ create chronic kidney diseases
     POST /Condition with ehr reference    ${text}    ${example_json}
 
 
+create chronic neurological or mental diseases
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
