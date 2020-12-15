@@ -28,9 +28,15 @@ abstract class AbstractSetupIT {
 
     static String PATIENT_ID;
 
-    protected final FhirContext context = FhirContext.forR4();
+    protected final FhirContext context;
 
-    protected final IGenericClient client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge/fhir/");
+    protected final IGenericClient client;
+
+    public AbstractSetupIT() {
+        context = FhirContext.forR4();
+        context.getRestfulClientFactory().setSocketTimeout(60 * 1000);
+        client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge/fhir/");
+    }
 
     @BeforeAll
     static void setup() throws URISyntaxException {
