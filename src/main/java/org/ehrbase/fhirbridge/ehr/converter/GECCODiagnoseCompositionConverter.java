@@ -26,6 +26,7 @@ import org.hl7.fhir.r4.model.Condition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -137,6 +138,9 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
 
         // Body Site
         if (!condition.getBodySite().isEmpty()) {
+
+            vorliegendeDiagnose.setKorperstelle(new ArrayList<>());
+
             for (Coding bodySite : condition.getBodySite().get(0).getCoding()) {
                 if (bodySite.getSystem().equals(SNOMED_SYSTEM) && koerperstelleMap.containsKey(bodySite.getCode())) {
                     KorperstelleCluster korperstelleCluster = new KorperstelleCluster();
