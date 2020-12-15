@@ -24,8 +24,11 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class TerminologyServerValidationSupport extends BaseValidationSupport implements MessageSourceAware {
 
@@ -136,6 +139,11 @@ public class TerminologyServerValidationSupport extends BaseValidationSupport im
                     .returnResourceType(Parameters.class)
                     .execute();
 
+            List<String> resultValues = ParametersUtil.getNamedParameterValuesAsString(getFhirContext(), output, "result");
+            if (resultValues.isEmpty() || isBlank(resultValues.get(0))) {
+                return null;
+            }
+
             BooleanType result = (BooleanType) output.getParameter("result");
             if (result.booleanValue()) {
                 StringType display = (StringType) output.getParameter("display");
@@ -144,7 +152,7 @@ public class TerminologyServerValidationSupport extends BaseValidationSupport im
                         .setDisplay(display.getValue());
             } else {
                 return new CodeValidationResult()
-                        .setSeverity(IssueSeverity.ERROR)
+                        .setSeverity(IssueSeverity.WARNING)
                         .setMessage(messages.getMessage("validation.terminology.validateCodeInValueSet", new Object[]{theCode, theCodeSystem, valueSetUrl}));
             }
         }
