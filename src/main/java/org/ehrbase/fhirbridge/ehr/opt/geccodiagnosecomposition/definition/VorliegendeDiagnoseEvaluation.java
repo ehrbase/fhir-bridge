@@ -35,7 +35,7 @@ public class VorliegendeDiagnoseEvaluation {
   private String kommentarValue;
 
   @Path("/data[at0001]/items[at0002]/value|defining_code")
-  private NameDesProblemsDerDiagnoseDefiningcode nameDesProblemsDerDiagnoseDefiningcode;
+  private ProblemDiagnoseDefiningcode nameDesProblemsDerDiagnoseDefiningcode;
 
   @Path("/language")
   private Language language;
@@ -104,11 +104,11 @@ public class VorliegendeDiagnoseEvaluation {
   }
 
   public void setNameDesProblemsDerDiagnoseDefiningcode(
-      NameDesProblemsDerDiagnoseDefiningcode nameDesProblemsDerDiagnoseDefiningcode) {
+      ProblemDiagnoseDefiningcode nameDesProblemsDerDiagnoseDefiningcode) {
      this.nameDesProblemsDerDiagnoseDefiningcode = nameDesProblemsDerDiagnoseDefiningcode;
   }
 
-  public NameDesProblemsDerDiagnoseDefiningcode getNameDesProblemsDerDiagnoseDefiningcode() {
+  public ProblemDiagnoseDefiningcode getNameDesProblemsDerDiagnoseDefiningcode() {
      return this.nameDesProblemsDerDiagnoseDefiningcode ;
   }
 
