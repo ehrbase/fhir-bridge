@@ -6,7 +6,7 @@
             "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/malignant-neoplastic-disease"
         ]
     },
-    "extension": [
+    "modifierExtension": [
         {
             "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
             "valueCodeableConcept": {
