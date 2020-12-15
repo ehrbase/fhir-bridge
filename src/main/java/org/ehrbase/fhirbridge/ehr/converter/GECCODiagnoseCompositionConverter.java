@@ -6,7 +6,6 @@ import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.ProblemDiagnoseDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.NameDesProblemsDerDiagnoseDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KategorieDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.SchweregradDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.NameDerKorperstelleDefiningcode;
@@ -36,7 +35,6 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
 
     private static final Map<String, KategorieDefiningcode> kategorieMap = new HashMap<>();
     private static final Map<String, ProblemDiagnoseDefiningcode> problemDiagnoseMap = new HashMap<>();
-    private static final Map<String, NameDesProblemsDerDiagnoseDefiningcode> vorliegendesProblemDiagnoseMap = new HashMap<>();
     private static final Map<String, NameDerKorperstelleDefiningcode> koerperstelleMap = new HashMap<>();
     private static final Map<String, SchweregradDefiningcode> schweregradMap = new HashMap<>();
 
@@ -53,10 +51,6 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
 
         for (ProblemDiagnoseDefiningcode problem : ProblemDiagnoseDefiningcode.values()) {
             problemDiagnoseMap.put(problem.getCode(), problem);
-        }
-
-        for (NameDesProblemsDerDiagnoseDefiningcode problem : NameDesProblemsDerDiagnoseDefiningcode.values()) {
-            vorliegendesProblemDiagnoseMap.put(problem.getCode(), problem);
         }
 
         for (NameDerKorperstelleDefiningcode korperstelle : NameDerKorperstelleDefiningcode.values()) {
@@ -131,8 +125,8 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
         // Map name des problems
         Coding problem = condition.getCode().getCoding().get(0);
         if (problem.getSystem().equals(SNOMED_SYSTEM) &&
-                vorliegendesProblemDiagnoseMap.containsKey(problem.getCode())) {
-            vorliegendeDiagnose.setNameDesProblemsDerDiagnoseDefiningcode(vorliegendesProblemDiagnoseMap.get(problem.getCode()));
+                problemDiagnoseMap.containsKey(problem.getCode())) {
+            vorliegendeDiagnose.setNameDesProblemsDerDiagnoseDefiningcode(problemDiagnoseMap.get(problem.getCode()));
         }
 
 
@@ -214,7 +208,7 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
 
         AusgeschlosseneDiagnoseEvaluation ausgeschlosseneDiagnose = new AusgeschlosseneDiagnoseEvaluation();
 
-        ausgeschlosseneDiagnose.setAussageUberDenAusschlussDefiningcode(AussageUberDenAusschlussDefiningcode.KNOWN_ABSENT_QUALIFIER_VALUE);
+        ausgeschlosseneDiagnose.setAussageUberDenAusschlussDefiningcode(AussageUberDenAusschlussDefiningcode.N410594000);
 
         // Map problem
         Coding problem = condition.getCode().getCoding().get(0);

@@ -4,27 +4,31 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum KategorieDefiningcode implements EnumValueSet {
-  VASCULARMEDICINE("vascularMedicine", null, "SNOMED Clinical Terms", "722414000"),
+  N116223007("116223007", "116223007", "SNOMED Clinical Terms", "116223007"),
 
-  PULMONARYMEDICINE("pulmonaryMedicine", null, "SNOMED Clinical Terms", "418112009"),
+  N418112009("418112009", "418112009", "SNOMED Clinical Terms", "418112009"),
 
-  TRANSPLANT_MEDICINE("Transplant medicine", null, "SNOMED Clinical Terms", "788415003"),
+  N394584008("394584008", "394584008", "SNOMED Clinical Terms", "394584008"),
 
-  COMPLICATION_DISORDER("Complication (disorder)", null, "SNOMED Clinical Terms", "116223007"),
+  N394591006("394591006", "394591006", "SNOMED Clinical Terms", "394591006"),
 
-  DIABETIC_MEDICINE("Diabetic Medicine", null, "SNOMED Clinical Terms", "408475000"),
+  N408480009("408480009", "408480009", "SNOMED Clinical Terms", "408480009"),
 
-  RHEUMATOLOTY("rheumatoloty", null, "SNOMED Clinical Terms", "394810000"),
+  N394807007("394807007", "394807007", "SNOMED Clinical Terms", "394807007"),
 
-  INFECTIOUSDISEASES("infectiousDiseases", null, "SNOMED Clinical Terms", "394807007"),
+  N394593009("394593009", "394593009", "SNOMED Clinical Terms", "394593009"),
 
-  IMMUNOLOGY("immunology", null, "SNOMED Clinical Terms", "408480009"),
+  N722414000("722414000", "722414000", "SNOMED Clinical Terms", "722414000"),
 
-  HEPATOLOGY("hepatology", null, "SNOMED Clinical Terms", "408472002"),
+  N408475000("408475000", "408475000", "SNOMED Clinical Terms", "408475000"),
 
-  ONCOLOGY("Oncology", null, "SNOMED Clinical Terms", "394593009"),
+  N788415003("788415003", "788415003", "SNOMED Clinical Terms", "788415003"),
 
-  GASTROENTEROLOGY("Gastroenterology", null, "SNOMED Clinical Terms", "394584008");
+  N394587001("394587001", "394587001", "SNOMED Clinical Terms", "394587001"),
+
+  N408472002("408472002", "408472002", "SNOMED Clinical Terms", "408472002"),
+
+  N394810000("394810000", "394810000", "SNOMED Clinical Terms", "394810000");
 
   private String value;
 

@@ -4,37 +4,37 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum NameDerKorperstelleDefiningcode implements EnumValueSet {
-  CEREBRAL_MENINGES_STRUCTURE_BODY_STRUCTURE("Cerebral meninges structure (body structure)", null, "SNOMED Clinical Terms", "8935007"),
+  N181254001("181254001", "181254001", "SNOMED Clinical Terms", "181254001"),
 
-  BONE_TISSUE_STRUCTURE_BODY_STRUCTURE("Bone (tissue) structure (body structure)", null, "SNOMED Clinical Terms", "3138006"),
+  N181285005("181285005", "181285005", "SNOMED Clinical Terms", "181285005"),
 
-  ENTIRE_SMALL_INTESTINE_BODY_STRUCTURE("Entire small intestine (body structure)", null, "SNOMED Clinical Terms", "181250005"),
+  N8935007("8935007", "8935007", "SNOMED Clinical Terms", "8935007"),
 
-  ENTIRE_LARGE_INTESTINE_BODY_STRUCTURE("Entire large intestine (body structure)", null, "SNOMED Clinical Terms", "181254001"),
+  N119206002("119206002", "119206002", "SNOMED Clinical Terms", "119206002"),
 
-  ENTIRE_LIVER_BODY_STRUCTURE("Entire liver (body structure)", null, "SNOMED Clinical Terms", "181268008"),
+  N181268008("181268008", "181268008", "SNOMED Clinical Terms", "181268008"),
 
-  ENTIRE_LUNG_BODY_STRUCTURE("Entire lung (body structure)", null, "SNOMED Clinical Terms", "181216001"),
+  N181250005("181250005", "181250005", "SNOMED Clinical Terms", "181250005"),
 
-  ENTIRE_PANCREAS_BODY_STRUCTURE("Entire pancreas (body structure)", null, "SNOMED Clinical Terms", "181277001"),
+  N181216001("181216001", "181216001", "SNOMED Clinical Terms", "181216001"),
 
-  TENDON_STRUCTURE_BODY_STRUCTURE("Tendon structure (body structure)", null, "SNOMED Clinical Terms", "13024002"),
+  N181277001("181277001", "181277001", "SNOMED Clinical Terms", "181277001"),
 
-  ENTIRE_HEART_VALVE_BODY_STRUCTURE("Entire heart valve (body structure)", null, "SNOMED Clinical Terms", "181285005"),
+  N302509004("302509004", "302509004", "SNOMED Clinical Terms", "302509004"),
 
-  ENTIRE_CORNEA_BODY_STRUCTURE("Entire cornea (body structure)", null, "SNOMED Clinical Terms", "181162001"),
+  N119181002("119181002", "119181002", "SNOMED Clinical Terms", "119181002"),
 
-  BLOOD_VESSEL_PART_BODY_STRUCTURE("Blood vessel part (body structure)", null, "SNOMED Clinical Terms", "119206002"),
+  N13024002("13024002", "13024002", "SNOMED Clinical Terms", "13024002"),
 
-  ENTIRE_KIDNEY_BODY_STRUCTURE("Entire kidney (body structure)", null, "SNOMED Clinical Terms", "181414000"),
+  N3138006("3138006", "3138006", "SNOMED Clinical Terms", "3138006"),
 
-  SKIN_PART_BODY_STRUCTURE("Skin part (body structure)", null, "SNOMED Clinical Terms", "119181002"),
+  N181414000("181414000", "181414000", "SNOMED Clinical Terms", "181414000"),
 
-  CARTILAGE_TISSUE_BODY_STRUCTURE("Cartilage tissue (body structure)", null, "SNOMED Clinical Terms", "309312004"),
+  N309312004("309312004", "309312004", "SNOMED Clinical Terms", "309312004"),
 
-  ENTIRE_HEART_BODY_STRUCTURE("Entire heart (body structure)", null, "SNOMED Clinical Terms", "302509004"),
+  N181162001("181162001", "181162001", "SNOMED Clinical Terms", "181162001"),
 
-  EAR_OSSICLE_STRUCTURE_BODY_STRUCTURE("Ear ossicle structure (body structure)", null, "SNOMED Clinical Terms", "41845008");
+  N41845008("41845008", "41845008", "SNOMED Clinical Terms", "41845008");
 
   private String value;
 
