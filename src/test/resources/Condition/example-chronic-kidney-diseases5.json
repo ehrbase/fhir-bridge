@@ -5,7 +5,7 @@
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-kidney-diseases"
     ]
   },
-  "extension": [
+  "modifierExtension": [
     {
       "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
       "valueCodeableConcept": {

@@ -6,7 +6,7 @@
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/history-of-organ-recipient-unknown"
     ]
   },
-  "extension": [
+  "modifierExtension": [
     {
       "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
       "valueCodeableConcept": {
