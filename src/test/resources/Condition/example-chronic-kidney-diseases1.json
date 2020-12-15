@@ -2,7 +2,7 @@
   "id": "ead303c5-7da6-4038-b5d4-7d17b224fa65",
   "meta": {
     "profile": [
-      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/complications-covid-19"
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-kidney-diseases"
     ]
   },
   "category": [

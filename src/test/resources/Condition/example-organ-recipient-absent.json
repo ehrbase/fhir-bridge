@@ -6,7 +6,7 @@
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/history-of-organ-recipient-absent"
     ]
   },
-  "extension": [
+  "modifierExtension": [
     {
       "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/certainty-of-absence",
       "valueCodeableConcept": {
