@@ -22,6 +22,19 @@ public enum Profile {
 
     SYMPTOMS_COVID_19(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/symptoms-covid-19"),
 
+    DIAGNOSE_LIVER_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-liver-diseases"),
+    DIAGNOSE_LUNG_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-lung-diseases"),
+    DIAGNOSE_DIABETES_MELLITUS(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diabetes-mellitus"),
+    DIAGNOSE_COVID_19(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnosis-covid-19"),
+    DIAGNOSE_MALIGNANT_NEOPLASTIC_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/malignant-neoplastic-disease"),
+    DIAGNOSE_RHEUMATOLOGICAL_IMMUNOLOGICAL_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/rheumatological-immunological-diseases"),
+    DIAGNOSE_CARDIOVASCULAR_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/cardiovascular-diseases"),
+    DIAGNOSE_CHRONIC_KIDNEY_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/complications-covid-19"),
+    DIAGNOSE_CHRONIC_NEUROLOGICAL_MENTAL_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-neurological-mental-diseases"),
+    DIAGNOSE_GASTROINTESTINAL_ULCERS(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/gastrointestinal-ulcers"),
+    DIAGNOSE_HIV(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/human-immunodeficiency-virus-infection"),
+    DIAGNOSE_ORGAN_RECIPIENT(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/organ-recipient"),
+
     // DiagnosticReport Profiles
 
     DIAGNOSTIC_REPORT_LAB(DiagnosticReport.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab"),

@@ -43,5 +43,18 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.SOFA_SCORE, new SofaScoreCompositionConverter());
         profiles.put(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
         profiles.put(Profile.PROCEDURE, new ProcedureCompositionConverter());
+
+        profiles.put(Profile.DIAGNOSE_LIVER_DISEASE, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_LUNG_DISEASE, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_DIABETES_MELLITUS, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_COVID_19, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_MALIGNANT_NEOPLASTIC_DISEASE, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_RHEUMATOLOGICAL_IMMUNOLOGICAL_DISEASE, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_CARDIOVASCULAR_DISEASE, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_CHRONIC_KIDNEY_DISEASE, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_CHRONIC_NEUROLOGICAL_MENTAL_DISEASE, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_GASTROINTESTINAL_ULCERS, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_HIV, new GECCODiagnoseCompositionConverter());
+        profiles.put(Profile.DIAGNOSE_ORGAN_RECIPIENT, new GECCODiagnoseCompositionConverter());
     }
 }
