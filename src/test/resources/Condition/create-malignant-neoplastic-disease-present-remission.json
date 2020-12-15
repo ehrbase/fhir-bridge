@@ -1,6 +1,6 @@
 {
     "resourceType": "Condition",
-    "id": "5743b814-eaa6-4ce2-b629-5490bdf17659",
+    "id": "9cf51de2-6bde-4921-a41a-677869f4c74a",
     "meta": {
         "profile": [
             "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/malignant-neoplastic-disease"
@@ -34,8 +34,8 @@
             "coding": [
                 {
                     "system": "http://snomed.info/sct",
-                    "code": "408475000",
-                    "display": "Diabetic medicine"
+                    "code": "394593009",
+                    "display": "Medical oncology (qualifier value)"
                 }
             ]
         }

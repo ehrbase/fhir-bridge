@@ -84,7 +84,7 @@ class ConditionIT extends AbstractSetupIT {
 
     @Test
     void createDiagnoseMalignantNeoplasticDisease() throws IOException {
-        //create("Condition/create-malignant-neoplastic-disease-absent.json");
+        create("Condition/create-malignant-neoplastic-disease-absent.json");
         create("Condition/create-malignant-neoplastic-disease-present-active.json");
         create("Condition/create-malignant-neoplastic-disease-present-remission.json");
         create("Condition/create-malignant-neoplastic-disease-unknown.json");
