@@ -22,7 +22,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
-Force Tags              create    blood-pressure    invalid
+Force Tags              create    smoking-status    invalid
 
 
 
@@ -33,7 +33,8 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 *** Test Cases ***
-000 Create Smoking Status (Invalid/Missing EHR Reference)
+
+001 Create Smoking Status (Invalid/Missing EHR Reference)
 	[Documentation]    	POST to observation endpoint w/o creating an EHR first
 	[Template]			create blood pressure w/o ehr reference
 	[Tags]              subject
@@ -138,193 +139,6 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	
 	$.category[0].coding[0].system    		http://foobar.de  0    	422    	This element does not match any known slice defined in the profile ${profile url}
 	...																		Observation.category[0]
-
-
-005 Create Blood Pressure (Invalid/Missing 'component:SystolicBP')
-	[Documentation]     TODO
-	[Template]			create blood pressure with ehr reference
-    [Tags]              
-
-	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    LOCATION
-	# 														INDEX	CODE
-	$.component								missing			1		422    	Observation.component: minimum required = 2, but only found 0 .from ${profile url}
-	$.component[0]							missing			0		422    	Observation.component: minimum required = 2, but only found 1 .from ${profile url}
-	$.component[1]							missing			0		422    	Observation.component: minimum required = 2, but only found 1 .from ${profile url}
-	$.component[1]							missing			1		422    	Observation.component.DiastolicBP: minimum required = 1, but only found 0 .from ${profile url}
-	
-	$.component[0].code  					missing			2		422    	Observation.component.code: minimum required = 1, but only found 0 .from ${profile url}
-	$.component[0].code.coding[0].system    missing    		2    	422    	A code with no system has no defined meaning. A system should be provided
-	...																   		Observation.component[0].code.coding[0]
-	
-	$.component[0].code.coding[0].system    ${EMPTY}    	3    	422    	@value cannot be empty
-	...																		Observation.component[0].code.coding[0].system
-
-	$.component[0].code.coding[0].system    foobar    		2    	422    	Coding.system must be an absolute reference, not a local reference
-	...																		Observation.component[0].code.coding[0]
-	
-	$.component[0].code.coding[0].system    http://f.de    	1    	422    	Observation.component.SystolicBP: minimum required = 1, but only found 0 .from ${profile url}
-	$.component[0].code.coding[0].code    	missing    		1    	422    	Observation.component.SystolicBP: minimum required = 1, but only found 0 .from ${profile url}
-	$.component[0].code.coding[0].code    	${EMPTY}   		1    	422    	Observation.component.SystolicBP: minimum required = 1, but only found 0 .from ${profile url}
-	$.component[0].code.coding[0].code    	${123}			0    	422    	Error parsing JSON: the primitive value must be a string
-	...																		Observation.component[0].code.coding[0].code
-	
-	$.component[0].code.coding[0].code    	foobar    		1    	422    	Observation.component.SystolicBP: minimum required = 1, but only found 0 .from ${profile url}
-
-	$.component[0].valueQuantity			missing			0		422    	vs-3: If there is no a value a data absent reason must be present .value.exists.. or dataAbsentReason.exists...
-	...																		Observation.component[0]
-	
-	$.component[0].valueQuantity			${EMPTY}		0		422    	This property must be an Object, not a primitive property
-	...																		Observation.component[0].value[x]
-	
-	$.component[0].valueQuantity			${{ {} }}		0		422    	Object must have some content
-	...																		Observation.component[0].value[x]
-	
-	$.component[0].valueQuantity.value		missing			1		422    	Observation.component:SystolicBP.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${profile url}
-	...																		Observation.component[0].value.ofType(Quantity)
-	
-	$.component[0].valueQuantity.value		${EMPTY}		0		422    	Error parsing JSON: the primitive value must be a number
-	...																		Observation.component[0].value[x].value
-	
-	$.component[0].valueQuantity.value		${EMPTY}		2		422    	@value cannot be empty
-	...																		Observation.component[0].value.ofType(Quantity).value
-	
-	$.component[0].valueQuantity.value		${None}			0		422    	This property must be an simple value, not null
-	...																		Observation.component[0].value[x].value
-	
-	$.component[0].valueQuantity.value		113				0		422    	Error parsing JSON: the primitive value must be a number
-	...																		Observation.component[0].value[x].value
-
-	$.component[0].valueQuantity.value		${1000}			0		422    	.*value is not within interval, expected:0.0 <= 1000.0 < 1000.0.*Bad Request.*
-	$.component[0].valueQuantity.value		${1000.09}		0		422    	.*value is not within interval, expected:0.0 <= 1000.09 < 1000.0.*Bad Request.*
-	$.component[0].valueQuantity.value		${-1}			0		422    	.*value is not within interval, expected:0.0 <= -1.0 < 1000.0.*Bad Request.*
-	$.component[0].valueQuantity.value		100,7			2		422    	The value '100,7' is not a valid decimal
-	...																		"Observation.component[0].value.ofType(Quantity).value
-	$.component[0].valueQuantity.value		foobar			0		422    	Error parsing JSON: the primitive value must be a number
-	...																		Observation.component[0].value[x].value
-	
-	$.component[0].valueQuantity.unit		missing			1		422    	Observation.component:SystolicBP.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
-	...																		Observation.component[0].value.ofType(Quantity)
-	
-	$.component[0].valueQuantity.unit		${EMPTY}		1		422    	@value cannot be empty
-	...																		Observation.component[0].value.ofType(Quantity).unit
-	
-	$.component[0].valueQuantity.unit		${123}			0		422    	Error parsing JSON: the primitive value must be a string
-	...																		Observation.component[0].value[x].unit
-
-	$.component[0].valueQuantity.system		missing			3		422    	Observation.component:SystolicBP.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
-	...																		Observation.component[0].value.ofType(Quantity)
-
-	$.component[0].valueQuantity.system		${EMPTY}		2		422    	@value cannot be empty
-	...																		Observation.component[0].value.ofType(Quantity).system
-
-	$.component[0].valueQuantity.system		foobar			2		422    	Value is 'foobar' but must be 'http://unitsofmeasure.org'
-	...																		Observation.component[0].value.ofType(Quantity).system
-
-	$.component[0].valueQuantity.system		${123}			0		422    	Error parsing JSON: the primitive value must be a string
-	...																		Observation.component[0].value[x].system
-	
-	$.component[0].valueQuantity.code		missing			1		422    	Observation.component:SystolicBP.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
-	...																		Observation.component[0].value.ofType(Quantity)
-
-	$.component[0].valueQuantity.code		${EMPTY}		1		422    	@value cannot be empty
-	...																		Observation.component[0].value.ofType(Quantity).code
-
-	$.component[0].valueQuantity.code		${123}			0		422    	Error parsing JSON: the primitive value must be a string
-	...																		Observation.component[0].value[x].code
-	
-	$.component[0].valueQuantity.code		foobar			1		422    	Value is 'foobar' but must be 'mm.Hg.'
-	...																		Observation.component[0].value.ofType(Quantity).code
-
-
-006 Create Blood Pressure (Invalid/Missing 'component:DiastolicBP')
-	[Documentation]     TODO
-	[Template]			create blood pressure with ehr reference
-    [Tags]              
-
-	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    LOCATION
-	$.component[1].code  					missing			1		422		Observation.component.DiastolicBP: minimum required = 1, but only found 0 .from ${profile url}
-	$.component[1].code.coding[0].system    missing    		3    	422		A code with no system has no defined meaning. A system should be provided
-	...																		Observation.component[1].code.coding[0]
-	
-	$.component[1].code.coding[0].system    ${EMPTY}    	4    	422		@value cannot be empty
-	...																		Observation.component[1].code.coding[0].system
-	
-	$.component[1].code.coding[0].system    foobar    		3    	422		Coding.system must be an absolute reference, not a local reference
-	...																		Observation.component[1].code.coding[0]
-	
-	$.component[1].code.coding[0].system    http://f.de  	1   	422		Observation.component.DiastolicBP: minimum required = 1, but only found 0 .from ${profile url}
-	$.component[1].code.coding[0].code    	missing    		1    	422		Observation.component.DiastolicBP: minimum required = 1, but only found 0 .from ${profile url}
-	$.component[1].code.coding[0].code    	${EMPTY}   		3    	422		@value cannot be empty
-	...																		Observation.component[1].code.coding[0].code
-	
-	$.component[1].code.coding[0].code    	${123}			0    	422		Error parsing JSON: the primitive value must be a string
-	...																		Observation.component[1].code.coding[0].code
-	
-	$.component[1].code.coding[0].code    	foobar    		1    	422		Observation.component.DiastolicBP: minimum required = 1, but only found 0 .from ${profile url}
-
-	$.component[1].valueQuantity			missing			1		422		vs-3: If there is no a value a data absent reason must be present .value.exists.. or dataAbsentReason.exists...
-	...																		Observation.component[1]
-	
-	$.component[1].valueQuantity			${EMPTY}		0		422		This property must be an Object, not a primitive property
-	...																		Observation.component[1].value[x]
-	
-	$.component[1].valueQuantity			${{{}}}			0		422		Object must have some content
-	...																		Observation.component[1].value[x]
-	
-	$.component[1].valueQuantity.value		missing			1		422		Observation.component:DiastolicBP.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${profile url}
-	...																		Observation.component[1].value.ofType(Quantity)
-	
-	$.component[1].valueQuantity.value		${EMPTY}		0		422		Error parsing JSON: the primitive value must be a number
-	...																		Observation.component[1].value[x].value
-	
-	$.component[1].valueQuantity.value		${EMPTY}		2		422		@value cannot be empty
-	...																		Observation.component[1].value.ofType(Quantity).value
-	
-	$.component[1].valueQuantity.value		${None}			0		422		This property must be an simple value, not null
-	...																		Observation.component[1].value[x].value
-	
-	$.component[1].valueQuantity.value		107				0		422		Error parsing JSON: the primitive value must be a number
-	...																		Observation.component[1].value[x].value
-
-	$.component[1].valueQuantity.value		${1000}			0		422		.*value is not within interval, expected:0.0 <= 1000.0 < 1000.0.*Bad Request.*
-	$.component[1].valueQuantity.value		${1500}			0		422		.*value is not within interval, expected:0.0 <= 1500.0 < 1000.0.*Bad Request.*
-	$.component[1].valueQuantity.value		${-1}			0		422		.*value is not within interval, expected:0.0 <= -1.0 < 1000.0.*Bad Request.*
-	$.component[1].valueQuantity.value		foobar			2		422		The value 'foobar' is not a valid decimal
-	...																		Observation.component[1].value.ofType(Quantity).value
-	
-	$.component[1].valueQuantity.unit		missing			1		422		Observation.component:DiastolicBP.value.x.:valueQuantity.unit: minimum required = 1, but only found 0
-	...																		Observation.component[1].value.ofType(Quantity)
-	
-	$.component[1].valueQuantity.unit		${EMPTY}		1		422		@value cannot be empty
-	...																		Observation.component[1].value.ofType(Quantity).unit
-	
-	$.component[1].valueQuantity.unit		${123}			0		422		Error parsing JSON: the primitive value must be a string
-	...																		Observation.component[1].value[x].unit
-	
-	$.component[1].valueQuantity.system		missing			3		422		Observation.component:DiastolicBP.value.x.:valueQuantity.system: minimum required = 1, but only found 0
-	...																		Observation.component[1].value.ofType(Quantity)
-	
-	$.component[1].valueQuantity.system		${EMPTY}		2		422		@value cannot be empty
-	...																		Observation.component[1].value.ofType(Quantity).system
-
-	$.component[1].valueQuantity.system		foobar			2		422		Value is 'foobar' but must be 'http://unitsofmeasure.org'
-	...																		Observation.component[1].value.ofType(Quantity).system
-
-	$.component[1].valueQuantity.system		${123}			0		422		Error parsing JSON: the primitive value must be a string
-	...																		Observation.component[1].value[x].system
-
-	$.component[1].valueQuantity.code		missing			1		422		Observation.component:DiastolicBP.value.x.:valueQuantity.code: minimum required = 1, but only found 0
-	...																		Observation.component[1].value.ofType(Quantity)
-
-	$.component[1].valueQuantity.code		${EMPTY}		1		422		@value cannot be empty
-	...																		Observation.component[1].value.ofType(Quantity).code
-
-	$.component[1].valueQuantity.code		${123}			0		422		Error parsing JSON: the primitive value must be a string
-	...																		Observation.component[1].value[x].code
-
-	$.component[1].valueQuantity.code		foobar			1		422		Value is 'foobar' but must be 'mm.Hg.'
-	...																		Observation.component[1].value.ofType(Quantity).code
-
 
 
 
