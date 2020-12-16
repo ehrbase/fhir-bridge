@@ -10,6 +10,8 @@
 @uuid = {{$guid}}
 @subject_namespace = {{$randomInt 001 10000}}
 @subject_id = {{create_ehr.response.body.ehr_status.subject.external_ref.id.value}}
+@ehr_id = {{create_ehr.response.body.ehr_id.value}}
+
 
 
 
@@ -21,6 +23,7 @@
 POST {{ehrbase_url}}/ehr HTTP/1.1
 content-type: application/json
 Prefer: return=representation
+Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
 {
   "_type": "EHR_STATUS",
@@ -43,19 +46,6 @@ Prefer: return=representation
   "is_queryable": true
 }
 
-###
-
-
-
-#/////////////////////////////////////////////////
-#// GET COMPOSITION VIA AQL                   ///
-#///////////////////////////////////////////////
-POST {{ehrbase_url}}/query/aql
-Content-Type: application/json
-Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
-{
-  "q": "SELECT c FROM EHR e [ehr_id/value='{{ehr_id}}'] CONTAINS COMPOSITION c"
-}
 ###
 
 
@@ -907,11 +897,38 @@ content-type: application/json
 ###
 
 
+#/////////////////////////////////////////////////
+#// GET COMPOSITION BY UID                    ///
+#///////////////////////////////////////////////
+
+GET {{ehrbase_url}}/ehr/{{ehr_id}}/composition/32c12782-ddca-4fba-86ee-b45cdfe62c34::local.ehrbase.org::1
+Accept: application/json
+Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI= 
+
+###
+
+
+
+#/////////////////////////////////////////////////
+#// GET COMPOSITION VIA AQL                   ///
+#///////////////////////////////////////////////
+
+POST {{ehrbase_url}}/query/aql
+Content-Type: application/json
+Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+
+{
+  "q": "SELECT c FROM EHR e [ehr_id/value='{{ehr_id}}'] CONTAINS COMPOSITION c"
+}
+
+###
+
+
 #//////////////////////////////
 #// AUDITEVENT             ///
 #////////////////////////////
 
-GET http://localhost:8888/fhir-bridge/fhir/AuditEvent
-    ?entity=501
+GET {{base_url}}/AuditEvent
+    ?entity=1
 content-type: application/json
 
