@@ -45,7 +45,7 @@ Force Tags              create
     immunization.validate response - 201
 
 
-001 Create History of Vaccination (not done)
+002 Create History of Vaccination (not done)
 	[Documentation]    1. create new EHR Patient record
 	...                2. update {{patient_id}} in example json
     ...                3. POST example json to Immunization endpoint
