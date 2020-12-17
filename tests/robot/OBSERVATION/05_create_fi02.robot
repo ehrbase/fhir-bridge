@@ -22,7 +22,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
-Force Tags              create    fi02    invalid   xxx
+Force Tags              create    fi02    invalid
 
 
 
@@ -34,17 +34,17 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 *** Test Cases ***
 001 Create FiO2 (Invalid/Missing EHR reference/subject)
-	[Documentation]		1) Create random UUID to serve as non-existent EHR reference\n\n
-	...					2) Replace {{patientID}} in example JSON with fake EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
-	...					   based on example JSON and data in TC table
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	[Documentation]		1. *CREATE* random UUID to serve as non-existent EHR reference\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with fake EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
+	...					   based on example JSON and data in TC table\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 	...					
-	...					NOTE: use Regular Expressions to replace braces (),[] as described here:
+	...					*NOTE:* use Regular Expressions to replace braces (),[] as described here:
 	...          		https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example
 
 	[Template]			Create FiO2 w/o ehr reference
-	[Tags]				
+	[Tags]				Subject
 	#												HTTP	
 	# FIELD/PATH 					VALUE			CODE	ERROR MESSAGE
 	$.subject.identifier.value		missing			422		mii-reference-1: Either reference.reference XOR reference.identifier exists ..this.reference.exists.. xor ..this.identifier.value.exists.. and .this.identifier.system.exists
@@ -70,14 +70,14 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	
 
 002 Create FiO2 (Invalid/Missing 'resourceType')
-	[Documentation]		1) Create an EHR record\n\n
-	...					2) Replace {{patientID}} in example JSON with EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
+	[Documentation]		1. *CREATE* an EHR record\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
 	...					   based on example JSON and data in TC table\n\n
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 	
 	[Template]			Create FiO2 with ehr reference
-    [Tags]          	
+    [Tags]          	resourceType
 	#									HTTP	
 	# FIELD/PATH 		VALUE			CODE	ERROR MESSAGE
 	$.resourceType		missing			422		Unable to find resourceType property
@@ -88,28 +88,28 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 003 Create FiO2 (Invalid/Missing 'ID')
-	[Documentation]		1) Create an EHR record\n\n
-	...					2) Replace {{patientID}} in example JSON with EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
+	[Documentation]		1. *CREATE* an EHR record\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
 	...					   based on example JSON and data in TC table\n\n
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 	
 	[Template]			Create FiO2 with ehr reference
-    [Tags]   			
+    [Tags]   			ID
 
 	# $.id				missing			201		
 	$.id				${EMPTY}		422		@value cannot be empty		
 
 
 004 Create FiO2 (Invalid/Missing 'identifier')
-	[Documentation]		1) Create an EHR record\n\n
-	...					2) Replace {{patientID}} in example JSON with EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
+	[Documentation]		1. *CREATE* an EHR record\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
 	...					   based on example JSON and data in TC table\n\n
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 	
 	[Template]			Create FiO2 with ehr reference
-    [Tags]   			
+    [Tags]   			identifier
 	#									   HTTP	
 	# FIELD/PATH 			VALUE		   CODE		ERROR MESSAGE
 	$.identifier			missing		   422     Observation.identifier:analyseBefundCode: minimum required = 1, but only found 0 .from ${profile url}
@@ -145,14 +145,14 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 005 Create FiO2 (Invalid/Missing 'meta')
-	[Documentation]		1) Create an EHR record\n\n
-	...					2) Replace {{patientID}} in example JSON with EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
+	[Documentation]		1. *CREATE* an EHR record\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
 	...					   based on example JSON and data in TC table\n\n
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 
 	[Template]			Create FiO2 with ehr reference
-    [Tags]             	
+    [Tags]             	meta
 	#												HTTP	
 	# FIELD/PATH 		VALUE						CODE	ERROR MESSAGE
 	$.meta				missing						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
@@ -180,14 +180,14 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 006 Create FiO2 (Invalid/Missing 'code')
-	[Documentation]		1) Create an EHR record\n\n
-	...					2) Replace {{patientID}} in example JSON with EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
+	[Documentation]		1. *CREATE* an EHR record\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
 	...					   based on example JSON and data in TC table\n\n
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 	
 	[Template]			Create FiO2 with ehr reference
-    [Tags]              
+    [Tags]              code
 	#											HTTP	
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.code						missing			422    	Observation.code: minimum required = 1, but only found 0 .from ${profile url}
@@ -208,14 +208,14 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	
 
 007 Create FiO2 (Invalid/Missing 'category')
-	[Documentation]		1) Create an EHR record\n\n
-	...					2) Replace {{patientID}} in example JSON with EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
+	[Documentation]		1. *CREATE* an EHR record\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
 	...					   based on example JSON and data in TC table\n\n
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 
 	[Template]			Create FiO2 with ehr reference
-    [Tags]    			
+    [Tags]    			category
 	#														HTTP	
 	# FIELD/PATH 						VALUE				CODE	ERROR MESSAGE				... LOCATION
 	$.category						  	missing				422    	Observation.category: minimum required = 1, but only found 0 .from ${profile url}
@@ -267,14 +267,14 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 008 Create FiO2 (Invalid/Missing 'effectiveDateTime')
-	[Documentation]		1) Create an EHR record\n\n
-	...					2) Replace {{patientID}} in example JSON with EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
+	[Documentation]		1. *CREATE* an EHR record\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
 	...					   based on example JSON and data in TC table\n\n
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 
 	[Template]			Create FiO2 with ehr reference
-    [Tags]  			
+    [Tags]  			DateTime
 	#											HTTP	
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.effectiveDateTime 		missing			422		Observation.effective.x.: minimum required = 1, but only found 0 .from ${profile url}
@@ -286,14 +286,14 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 009 Create FiO2 (Invalid/Missing 'valueQuantity')
-	[Documentation]		1) Create an EHR record\n\n
-	...					2) Replace {{patientID}} in example JSON with EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
+	[Documentation]		1. *CREATE* an EHR record\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
 	...					   based on example JSON and data in TC table\n\n
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 
 	[Template]			Create FiO2 with ehr reference
-    [Tags]              
+    [Tags]              valueQuantity
 	#											HTTP	
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.valueQuantity			  	missing			422    	Observation.value.x.: minimum required = 1, but only found 0 .from ${profile url}
@@ -337,11 +337,11 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 *** Keywords ***
 Create FiO2 with ehr reference
-	[Documentation]		1) Create an EHR record\n\n
-	...					2) Replace {{patientID}} in example JSON with EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
+	[Documentation]		1. *CREATE* an EHR record\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
 	...					   based on example JSON and data in TC table\n\n
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 
 	[Arguments]         ${json_path}  ${value}  ${http_status_code}  ${error_message}  ${location}=${None}
 
@@ -354,11 +354,11 @@ Create FiO2 with ehr reference
 
 
 Create FiO2 w/o ehr reference
-	[Documentation]		1) Create random UUID to serve as non-existent EHR reference\n\n
-	...					2) Replace {{patientID}} in example JSON with fake EHR reference\n\n
-	...					3) Generate (invalid) payload for FiO2 profile\n\n
+	[Documentation]		1. *CREATE* random UUID to serve as non-existent EHR reference\n\n
+	...					2. *REPLACE* {{patientID}} in example JSON with fake EHR reference\n\n
+	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
 	...					   based on example JSON and data in TC table
-	...					4) POST FiO2 payload to /Observation endpoint\n\n
+	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
 
 	[Arguments]         ${json_path}  ${value}  ${http_status_code}  ${error_message}  ${location}=${None}
 

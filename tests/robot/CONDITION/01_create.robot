@@ -378,7 +378,7 @@ Force Tags              create
 	...                2. update {{patient_id}} in example json
     ...                3. POST example json to Condition endpoint
 	...                4. validate the response status
-    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+    [Tags]             diagnosis-covid-19    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-absent.json
@@ -390,7 +390,7 @@ Force Tags              create
 	...                2. update {{patient_id}} in example json
     ...                3. POST example json to Condition endpoint
 	...                4. validate the response status
-    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+    [Tags]             diagnosis-covid-19    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-present-active.json
@@ -402,7 +402,7 @@ Force Tags              create
 	...                2. update {{patient_id}} in example json
     ...                3. POST example json to Condition endpoint
 	...                4. validate the response status
-    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+    [Tags]             diagnosis-covid-19    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-present-remission.json
@@ -414,7 +414,7 @@ Force Tags              create
 	...                2. update {{patient_id}} in example json
     ...                3. POST example json to Condition endpoint
 	...                4. validate the response status
-    [Tags]             diagnosis-covid-19    valid    not-ready   xxx
+    [Tags]             diagnosis-covid-19    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-unknown.json
