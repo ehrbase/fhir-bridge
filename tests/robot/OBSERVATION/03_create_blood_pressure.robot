@@ -41,6 +41,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	# FIELD/PATH					VALUE			ISSUE	HTTP	ERROR MESSAGE
 	# 												INDEX	CODE
 	$.subject.identifier.value		missing			0		422		Subject identifier is required
+	$.subject.identifier.system		missing			0		422		EhrId not found for subject '[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 	$.subject.identifier.value		foobar			0		422		EhrId not found for subject 'foobar'
 	$.subject.identifier.value		${EMPTY}		0		422		@value cannot be empty    Observation.subject.identifier.value
 	$.subject.identifier.value		${{ [] }}		0		422		This property must be an simple value, not an array    Observation.subject.identifier.value
@@ -83,17 +84,17 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 	# FIELD/PATH		VALUE						ISSUE	HTTP	ERROR MESSAGE
 	# 												INDEX	CODE
-	$.meta			missing							0		422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
-	$.meta.profile	missing							0		422    	Object must have some content
-	$.meta.profile    ${{ ["invalid_url"] }}		0   	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.
-	$.meta.profile    ${{ ["http://wrong.url"] }}	0    	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked
-	$.meta.profile	${EMPTY}						0		422    	This property must be an Array, not a a primitive property
+	$.meta				missing						0		422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
+	$.meta.profile		missing						0		422    	Object must have some content
+	$.meta.profile    	${{ ["invalid_url"] }}		0   	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.
+	$.meta.profile    	${{ ["http://wrong.url"] }}  0    	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked
+	$.meta.profile		${EMPTY}					0		422    	This property must be an Array, not a a primitive property
 	
 	# comment: the next one sets the value to an empty list/array []
 	$.meta.profile		${{ [] }}					0		422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	
 	# comment: the next one sets value to an empty object {}
-	$.meta.profile	${{ {} }}						0		422    	This property must be an Array, not a an object
+	$.meta.profile		${{ {} }}					0		422    	This property must be an Array, not a an object
 
 
 
@@ -362,8 +363,8 @@ generate payload from example json
 	[Arguments]			${json_path}    ${value}
 
 	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-blood-pressure.json
-                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
+                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 
 						# comment: delete field/object that has value 'missing' in test case table 
 						Run Keyword And Return If   $value=="missing"
