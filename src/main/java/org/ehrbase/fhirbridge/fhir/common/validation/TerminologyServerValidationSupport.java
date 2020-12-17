@@ -2,13 +2,13 @@ package org.ehrbase.fhirbridge.fhir.common.validation;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.support.ConceptValidationOptions;
-import ca.uhn.fhir.context.support.IValidationSupport;
+import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
 import ca.uhn.fhir.context.support.ValidationSupportContext;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
 import ca.uhn.fhir.util.ParametersUtil;
-import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.instance.model.api.IBaseParameters;
+import io.micrometer.core.lang.NonNull;
+import org.hl7.fhir.common.hapi.validation.support.BaseValidationSupport;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.BooleanType;
 import org.hl7.fhir.r4.model.Bundle;
@@ -16,156 +16,146 @@ import org.hl7.fhir.r4.model.CodeSystem;
 import org.hl7.fhir.r4.model.Parameters;
 import org.hl7.fhir.r4.model.StringType;
 import org.hl7.fhir.r4.model.ValueSet;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
-import org.springframework.lang.NonNull;
-import org.springframework.util.Assert;
 
-import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
-@SuppressWarnings({"SpringElInspection", "ELValidationInJSP"})
-public class TerminologyServerValidationSupport implements IValidationSupport, MessageSourceAware {
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
-    private final Logger LOG = LoggerFactory.getLogger(TerminologyServerValidationSupport.class);
+public class TerminologyServerValidationSupport extends BaseValidationSupport implements MessageSourceAware {
 
-    private final FhirContext context;
+    private static final Logger LOG = LoggerFactory.getLogger(TerminologyServerValidationSupport.class);
 
     private final IGenericClient client;
 
     private MessageSourceAccessor messages;
 
-    public TerminologyServerValidationSupport(FhirContext context, IGenericClient client) {
-        Assert.notNull(context, "FhirContext must not be null");
-        Assert.notNull(client, "IGenericClient must not be null");
-        this.context = context;
+    public TerminologyServerValidationSupport(FhirContext theFhirContext, IGenericClient client) {
+        super(theFhirContext);
         this.client = client;
     }
 
-    @Cacheable(cacheNames = "validateCodeInValueSet", key = "#theCodeSystem + '_' + #theCode + '_'+ #theValueSet.url")
     @Override
-    public CodeValidationResult validateCodeInValueSet(ValidationSupportContext theValidationSupportContext, ConceptValidationOptions theOptions,
-                                                       String theCodeSystem, String theCode, String theDisplay, @Nonnull IBaseResource theValueSet) {
+    @Cacheable(cacheNames = "codeSystemSupported", key = "#theSystem")
+    public boolean isCodeSystemSupported(ValidationSupportContext theValidationSupportContext, String theSystem) {
+        LOG.debug("Checks whether or not the CodeSystem '{}' is supported by the server", theSystem);
+        Bundle bundle = client.search()
+                .forResource(CodeSystem.class)
+                .where(CodeSystem.URL.matches().value(theSystem))
+                .returnBundle(Bundle.class)
+                .execute();
+        return bundle.getTotal() > 0;
+    }
 
-        String valueSetUrl = ((ValueSet) theValueSet).getUrl();
-        if (!theOptions.isInferSystem()) {
-            LOG.debug("Perform '/ValueSet/$validate-code' operation: system={}, code={}, url={}", theCodeSystem, theCode, valueSetUrl);
+    @Override
+    @Cacheable(cacheNames = "valueSetSupported", key = "#theValueSetUrl")
+    public boolean isValueSetSupported(ValidationSupportContext theValidationSupportContext, String theValueSetUrl) {
+        LOG.debug("Checks whether or not the ValueSet '{}' is supported by the server", theValueSetUrl);
+        Bundle bundle = client.search()
+                .forResource(ValueSet.class)
+                .where(ValueSet.URL.matches().value(theValueSetUrl))
+                .returnBundle(Bundle.class)
+                .execute();
+        return bundle.getTotal() > 0;
+    }
 
-            IBaseParameters requestParams = ParametersUtil.newInstance(getFhirContext());
-            ParametersUtil.addParameterToParametersUri(getFhirContext(), requestParams, "system", theCodeSystem);
-            ParametersUtil.addParameterToParametersString(getFhirContext(), requestParams, "code", theCode);
-            ParametersUtil.addParameterToParameters(getFhirContext(), requestParams, "valueSet", theValueSet);
+    @Override
+    @Cacheable(cacheNames = "codeInCodeSystem", key = "#theCodeSystem + #theCode")
+    public CodeValidationResult validateCode(ValidationSupportContext theValidationSupportContext, ConceptValidationOptions theOptions, String theCodeSystem, String theCode, String theDisplay, String theValueSetUrl) {
+        LOG.debug("Checks if the CodeSystem '{}' contains the code '{}'", theCodeSystem, theCode);
 
-            Parameters responseParams = client
-                    .operation()
-                    .onType(ValueSet.class)
-                    .named("validate-code")
-                    .withParameters(requestParams)
+        try {
+            Parameters input = new Parameters();
+            ParametersUtil.addParameterToParametersUri(getFhirContext(), input, "system", theCodeSystem);
+            ParametersUtil.addParameterToParametersString(getFhirContext(), input, "code", theCode);
+
+            Parameters output = client.operation()
+                    .onType(CodeSystem.class)
+                    .named("lookup")
+                    .withParameters(input)
                     .returnResourceType(Parameters.class)
                     .execute();
 
-            BooleanType result = (BooleanType) responseParams.getParameter("result");
+            return new CodeValidationResult()
+                    .setCode(theCode)
+                    .setCodeSystemName(((StringType) output.getParameter("name")).getValue())
+                    .setDisplay(((StringType) output.getParameter("display")).getValue());
+        } catch (ResourceNotFoundException e) {
+            return new CodeValidationResult()
+                    .setSeverity(IssueSeverity.ERROR)
+                    .setMessage(messages.getMessage("validation.terminology.lookup", new Object[]{theCode, theCodeSystem}));
+        }
+    }
+
+    @Override
+    @Cacheable(cacheNames = "codeInValueSet", key = "#theValueSet + #theCodeSystem + #theCode")
+    public CodeValidationResult validateCodeInValueSet(ValidationSupportContext theValidationSupportContext, ConceptValidationOptions theOptions, String theCodeSystem, String theCode, String theDisplay, @NotNull IBaseResource theValueSet) {
+        String valueSetUrl = DefaultProfileValidationSupport.getConformanceResourceUrl(myCtx, theValueSet);
+
+        LOG.debug("Checks if the ValueSet '{}' contains the code '{}'", valueSetUrl, theCode);
+
+        Parameters input = new Parameters();
+        ParametersUtil.addParameterToParametersUri(getFhirContext(), input, "url", valueSetUrl);
+
+        if (theOptions != null && theOptions.isInferSystem()) {
+            ValueSet valueSet = client.operation()
+                    .onType(ValueSet.class)
+                    .named("expand")
+                    .withParameters(input)
+                    .returnResourceType(ValueSet.class)
+                    .execute();
+
+            ValueSet.ValueSetExpansionComponent expansion = valueSet.getExpansion();
+            Optional<ValueSet.ValueSetExpansionContainsComponent> optCode = expansion.getContains().stream()
+                    .filter(valueSetExpansionContainsComponent -> Objects.equals(valueSetExpansionContainsComponent.getCode(), theCode))
+                    .findFirst();
+
+            if (optCode.isPresent()) {
+                ValueSet.ValueSetExpansionContainsComponent code = optCode.get();
+                return new CodeValidationResult()
+                        .setCode(code.getCode())
+                        .setDisplay(code.getDisplay());
+            } else {
+                return new CodeValidationResult()
+                        .setSeverity(IssueSeverity.ERROR)
+                        .setMessage(messages.getMessage("validation.terminology.expand", new Object[]{theCode, valueSetUrl}));
+            }
+        } else {
+            ParametersUtil.addParameterToParametersUri(getFhirContext(), input, "system", theCodeSystem);
+            ParametersUtil.addParameterToParametersString(getFhirContext(), input, "code", theCode);
+
+            Parameters output = client.operation()
+                    .onType(ValueSet.class)
+                    .named("validate-code")
+                    .withParameters(input)
+                    .returnResourceType(Parameters.class)
+                    .execute();
+
+            List<String> resultValues = ParametersUtil.getNamedParameterValuesAsString(getFhirContext(), output, "result");
+            if (resultValues.isEmpty() || isBlank(resultValues.get(0))) {
+                return null;
+            }
+
+            BooleanType result = (BooleanType) output.getParameter("result");
             if (result.booleanValue()) {
-                StringType display = (StringType) responseParams.getParameter("display");
+                StringType display = (StringType) output.getParameter("display");
                 return new CodeValidationResult()
                         .setCode(theCode)
                         .setDisplay(display.getValue());
             } else {
                 return new CodeValidationResult()
                         .setSeverity(IssueSeverity.WARNING)
-                        .setMessage(messages.getMessage("validation.terminology.validateCode", new Object[]{theCode, theCodeSystem, valueSetUrl}));
-            }
-        } else {
-            LOG.debug("Perform '/ValueSet/$expand' operation: url={}", valueSetUrl);
-
-            IBaseParameters requestParams = ParametersUtil.newInstance(getFhirContext());
-            ParametersUtil.addParameterToParameters(getFhirContext(), requestParams, "valueSet", theValueSet);
-
-            ValueSet valueSet = client
-                    .operation()
-                    .onType(ValueSet.class)
-                    .named("expand")
-                    .withParameters(requestParams)
-                    .returnResourceType(ValueSet.class)
-                    .execute();
-
-            ValueSet.ValueSetExpansionComponent expansion = valueSet.getExpansion();
-            for (ValueSet.ValueSetExpansionContainsComponent contains : expansion.getContains()) {
-                if (StringUtils.equals(theCode, contains.getCode())) {
-                    return new CodeValidationResult()
-                            .setCode(contains.getCode())
-                            .setDisplay(contains.getDisplay());
-                }
-            }
-
-            return new CodeValidationResult()
-                    .setSeverity(IssueSeverity.ERROR)
-                    .setMessage(messages.getMessage("validation.terminology.expand", new Object[]{theCode, valueSetUrl}));
-        }
-    }
-
-    @Cacheable(cacheNames = "codeSystemSupported", key = "#theSystem")
-    @Override
-    public boolean isCodeSystemSupported(ValidationSupportContext theValidationSupportContext, String theSystem) {
-        LOG.debug("Perform '/CodeSystem/_search' operation: url={}", theSystem);
-
-        IBaseParameters requestParams = ParametersUtil.newInstance(getFhirContext());
-        ParametersUtil.addParameterToParametersUri(getFhirContext(), requestParams, "url", theSystem);
-
-        Bundle response = client.search()
-                .forResource(CodeSystem.class)
-                .where(CodeSystem.URL.matches().value(theSystem))
-                .returnBundle(Bundle.class)
-                .execute();
-
-        return (response.getTotal() > 0);
-    }
-
-    @Cacheable(cacheNames = "validateCode", key = "#theCodeSystem + '_' + #theCode + '_'+ #theValueSetUrl")
-    @Override
-    public CodeValidationResult validateCode(ValidationSupportContext theValidationSupportContext, ConceptValidationOptions theOptions,
-                                             String theCodeSystem, String theCode, String theDisplay, String theValueSetUrl) {
-        if (StringUtils.isEmpty(theValueSetUrl)) {
-            try {
-                LOG.debug("Perform '/CodeSystem/$lookup' operation: system={}, code={}", theCodeSystem, theCode);
-
-                IBaseParameters requestParams = ParametersUtil.newInstance(getFhirContext());
-                ParametersUtil.addParameterToParametersUri(getFhirContext(), requestParams, "system", theCodeSystem);
-                ParametersUtil.addParameterToParametersString(getFhirContext(), requestParams, "code", theCode);
-
-                Parameters responseParams = client
-                        .operation()
-                        .onType(CodeSystem.class)
-                        .named("lookup")
-                        .withParameters(requestParams)
-                        .returnResourceType(Parameters.class)
-                        .execute();
-
-                StringType name = (StringType) responseParams.getParameter("name");
-                StringType version = (StringType) responseParams.getParameter("version");
-                StringType display = (StringType) responseParams.getParameter("display");
-
-                return new CodeValidationResult()
-                        .setCode(theCode)
-                        .setCodeSystemName(name.getValue())
-                        .setCodeSystemVersion(version.getValue())
-                        .setDisplay(display.getValue());
-            } catch (ResourceNotFoundException e) {
-                return new CodeValidationResult()
-                        .setSeverity(IssueSeverity.ERROR)
-                        .setMessage(messages.getMessage("validation.terminology.lookup", new Object[]{theCode, theCodeSystem}));
+                        .setMessage(messages.getMessage("validation.terminology.validateCodeInValueSet", new Object[]{theCode, theCodeSystem, valueSetUrl}));
             }
         }
-
-        return null;
-    }
-
-    @Override
-    public FhirContext getFhirContext() {
-        return context;
     }
 
     @Override
