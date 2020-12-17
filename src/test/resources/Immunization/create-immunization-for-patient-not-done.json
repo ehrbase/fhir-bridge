@@ -1,0 +1,30 @@
+{
+  "id": "b7db30a0-4ffd-4dd6-b3e5-53e2730789e6",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization"
+    ]
+  },
+  "_occurrenceDateTime": {
+    "extension": [
+      {
+        "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+        "valueCode": "unknown"
+      }
+    ]
+  },
+  "patient": {
+    "reference": "Patient/c786ac3c-0579-4aa2-adda-db784b214ad6"
+  },
+  "status": "not-done",
+  "vaccineCode": {
+    "coding": [
+      {
+        "code": "no-known-immunizations",
+        "display": "No known immunizations",
+        "system": "http://hl7.org/fhir/uv/ips/CodeSystem/absent-unknown-uv-ips"
+      }
+    ]
+  },
+  "resourceType": "Immunization"
+}
