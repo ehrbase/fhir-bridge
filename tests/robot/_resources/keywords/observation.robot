@@ -86,16 +86,6 @@ validate response - 422 (with error message NEW)
     END
 
 
-
-validate response - 422 (with error message) - new
-    [Arguments]     ${http_status_code}    ${error_message}    ${location}=${None}
-    Integer     response status    ${http_status_code}
-    String      response body resourceType    OperationOutcome
-
-    ${issues}=      String      $.issue[*].diagnostics
-                    Should Contain Match    ${issues}    regexp=${error_message}
-
-
 #                                                 oooo                     
 #                                                 `888                     
 #  .oooo.o  .ooooo.   .oooo.   oooo d8b  .ooooo.   888 .oo.                

@@ -170,7 +170,7 @@ create smoking status with ehr reference
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Smoking Status    ${payload}
-						observation.validate response - 422 (with error message) - new   ${http_status_code}
+						observation.validate response - 422 (with error message NEW)     ${http_status_code}
 						...															     ${error_message}
 						...															     ${location}
 
@@ -183,7 +183,7 @@ create smoking status w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Smoking Status    ${payload}
-						observation.validate response - 422 (with error message) - new    ${http_status_code}
+						observation.validate response - 422 (with error message NEW)      ${http_status_code}
 						...															      ${error_message}
 						...															      ${location}
 
