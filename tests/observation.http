@@ -22,7 +22,7 @@
 POST {{ehrbase_url}}/ehr HTTP/1.1
 content-type: application/json
 Prefer: return=representation
-# Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
 {
   "_type": "EHR_STATUS",

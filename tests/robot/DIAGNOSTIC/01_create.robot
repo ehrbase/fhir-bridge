@@ -44,7 +44,7 @@ Force Tags              create
 
 002 Create Diagnostic Report w/o Observation
     [Documentation]     Trigger endpoint using invalid payload.
-    [Tags]              invalidvalid
+    [Tags]              diagnostic-report    invalid
 
     ehr.create new ehr    000_ehr_status.json
     diagnostic.create diagnostic report    create-diagnosticReport-without-observation.json 
@@ -53,7 +53,7 @@ Force Tags              create
 
 003 Create Diagnostic Report Using Default Profile
     [Documentation]     Trigger endpoint using invalid payload.
-    [Tags]              invalid
+    [Tags]              diagnostic-report    invalid
 
     ehr.create new ehr    000_ehr_status.json
     diagnostic.create diagnostic report    create-diagnosticReport-with-default-profile.json 
@@ -62,7 +62,7 @@ Force Tags              create
 
 004 Create Diagnostic Report Using Unsupported Profile
     [Documentation]     Trigger endpoint using invalid payload.
-    [Tags]              invalid
+    [Tags]              diagnostic-report    invalid
 
     ehr.create new ehr    000_ehr_status.json
     diagnostic.create diagnostic report    create-diagnosticReport-hls-genetics-result.json 
