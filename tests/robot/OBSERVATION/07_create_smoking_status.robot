@@ -27,39 +27,58 @@ Force Tags              create    smoking-status    invalid
 
 
 *** Variables ***
-${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status	
+${smoking_status-url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status	
 
 
 
 
 *** Test Cases ***
 
-001 Create Smoking Status (Invalid/Missing EHR Reference)
-	[Documentation]    	POST to observation endpoint w/o creating an EHR first
-	[Template]			create blood pressure w/o ehr reference
-	[Tags]              subject
+001 Create Smoking Status (Invalid/Missing 'Subject')
+    [Documentation]    1. *LOAD* _create-smoking-status.json_ \n\n
+	...                2. *UPDATE* values for attribute ``Subject`` \n\n
+    ...                3. *POST* example JSON to observation endpoint \n\n
+	...                4. *VALIDATE* the response status \n\n
+    ...                5. *VALIDATE* outcome against diagnostic text & location
 
-	# FIELD/PATH					VALUE			ISSUE	HTTP	ERROR MESSAGE
-	# 												INDEX	CODE
-	$.subject.identifier.value		missing			0		422		Subject identifier is required
-	$.subject.identifier.value		foobar			0		422		EhrId not found for subject 'foobar'
-	$.subject.identifier.value		${EMPTY}		0		422		@value cannot be empty    Observation.subject.identifier.value
-	$.subject.identifier.value		${{ [] }}		0		422		This property must be an simple value, not an array    Observation.subject.identifier.value
-	$.subject.identifier.value		${{ {} }}		0		422		This property must be an simple value, not an object    Observation.subject.identifier.value
-	$.subject.identifier.value		${123}			0		422		Error parsing JSON: the primitive value must be a string    Observation.subject.identifier.value
-	$.subject.identifier			missing			0		422		Object must have some content    Observation.subject
-    $.subject.identifier			${EMPTY}		0		422		This property must be an Object, not a primitive property    Observation.subject.identifier
-    $.subject.identifier			${{ [] }}		0		422		This property must be an Object, not an array    Observation.subject.identifier
-    $.subject.identifier			${{ {} }}		0		422		Object must have some content    Observation.subject.identifier
-    $.subject.identifier			${123}			0		422		This property must be an Object, not a primitive property    Observation.subject.identifier
-    $.subject						missing			0		422		Observation.subject: minimum required = 1, but only found 0 .from ${profile url}
-	$.subject						${EMPTY}		0		422		This property must be an Object, not a primitive property    Observation.subject
-    $.subject						${{ [] }}		0		422		This property must be an Object, not an array    Observation.subject
-    $.subject						${{ {} }}		0		422		Object must have some content    Observation.subject
-    $.subject						${123}			0		422		This property must be an Object, not a primitive property    Observation.subject
+	[Template]			create smoking status w/o ehr reference
 
+	[Tags]              subject    xxx
+
+	# FIELD/PATH					VALUE					HTTP	ERROR MESSAGE													Location
+	# 														CODE
+
+	# invalid cases for value
+    $.subject.identifier.value		missing					422		 Subject identifier is required
+    $.subject.identifier.value		foobar					422		 EhrId not found for subject 'foobar'
+    $.subject.identifier.value		${EMPTY}				422		 @value cannot be empty                                        Observation.subject.identifier.value
+    $.subject.identifier.value		${{ [] }}				422		 This property must be an simple value, not an array           Observation.subject.identifier.value
+    $.subject.identifier.value		${{ {} }}				422		 This property must be an simple value, not an object          Observation.subject.identifier.value
+    $.subject.identifier.value		${123}					422		 Error parsing JSON: the primitive value must be a string      Observation.subject.identifier.value
+
+		# invalid cases for system
+    $.subject.identifier.system		foobar					422		Identifier.system must be an absolute reference, not a local reference
+    $.subject.identifier.system		${EMPTY}				422		@value cannot be empty                                         Observation.subject.identifier.system
+    $.subject.identifier.system		${{ [] }}				422		 This property must be an simple value, not an array           Observation.subject.identifier.system
+    $.subject.identifier.system		${{ {} }}				422		 This property must be an simple value, not an object          Observation.subject.identifier.system
+    $.subject.identifier.system		${123}					422		 Error parsing JSON: the primitive value must be a string      Observation.subject.identifier.system
+
+	# invalid cases for identifier
+    $.subject.identifier			missing					422		 Object must have some content                                 Observation.subject
+    $.subject.identifier			${EMPTY}				422		 This property must be an Object, not a primitive property     Observation.subject.identifier
+    $.subject.identifier			${{ [] }}				422		 This property must be an Object, not an array                 Observation.subject.identifier
+    $.subject.identifier			${{ {} }}				422		 Object must have some content                                 Observation.subject.identifier
+    $.subject.identifier			${123}					422		 This property must be an Object, not a primitive property     Observation.subject.identifier
+
+	# invalid cases for subject
+    $.subject						missing					422		 Observation.subject: minimum required = 1, but only found 0 .from ${smoking_status-url}
+    $.subject						${EMPTY}				422		 This property must be an Object, not a primitive property     Observation.subject
+    $.subject						${{ [] }}				422		 This property must be an Object, not an array                 Observation.subject
+    $.subject						${{ {} }}				422		 Object must have some content                                 Observation.subject
+    $.subject						${123}					422		 This property must be an Object, not a primitive property     Observation.subject
+	
 	# comment: random uuid																			 regex for uuid
-	$.subject.identifier.value    ${{str(uuid.uuid4())}}    0    422    EhrId not found for subject '[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+    $.subject.identifier.value    ${{str(uuid.uuid4())}}    422     EhrId not found for subject
 	
 
 001 Create Blood Pressure (Invalid/Missing 'resourceType')
@@ -105,7 +124,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 	# FIELD/PATH		VALUE			ISSUE	HTTP	ERROR MESSAGE
 	# 									INDEX	CODE
-	$.code				missing			0		422    	Observation.code: minimum required = 1, but only found 0 .from ${profile url}
+	$.code				missing			0		422    	Observation.code: minimum required = 1, but only found 0 .from ${${smoking_status-url}}
 	
 
 004 Create Blood Pressure (Invalid/Missing 'category:VSCat')
@@ -115,7 +134,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    ... LOCATION
 	# 														INDEX	CODE
-	$.category								missing			0		422    	Observation.category: minimum required = 1, but only found 0 .from ${profile url}
+	$.category								missing			0		422    	Observation.category: minimum required = 1, but only found 0 .from ${${smoking_status-url}}
 	$.category								${{ [] }}		0		422    	Array cannot be empty - the property should not be present if it has no values
 	$.category								${{ {} }}		0		422    	This property must be an Array, not an Object
 	$.category								${{ [{}] }}		0		422    	Object must have some content
@@ -123,9 +142,9 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.category[0].coding    				missing			0		422    	Object must have some content
 	$.category[0].coding    				${EMPTY}		0		422    	This property must be an Array, not a primitive property
 	
-	$.category[0].coding[0].code    		missing    		0    	422    	This element does not match any known slice defined in the profile ${profile url}
+	$.category[0].coding[0].code    		missing    		0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
 	$.category[0].coding[0].code    		${EMPTY}    	2    	422    	@value cannot be empty
-	$.category[0].coding[0].code    		foobar    		0    	422    	This element does not match any known slice defined in the profile ${profile url}
+	$.category[0].coding[0].code    		foobar    		0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
 	...																		Observation.category[0]
 
 	$.category[0].coding[0].system    		missing    		2    	422    	A code with no system has no defined meaning. A system should be provided
@@ -137,7 +156,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.category[0].coding[0].system    		foobar    		2    	422    	Coding.system must be an absolute reference, not a local reference
 	...																		Observation.category[0].coding[0]
 	
-	$.category[0].coding[0].system    		http://foobar.de  0    	422    	This element does not match any known slice defined in the profile ${profile url}
+	$.category[0].coding[0].system    		http://foobar.de  0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
 	...																		Observation.category[0]
 
 
@@ -145,30 +164,28 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 *** Keywords ***
 create smoking status with ehr reference
-	[Arguments]         ${json_path}    ${value}    ${issue_index}    ${http_status_code}
+	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
 	...					${error_message}    ${location}=${None}
 
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Smoking Status    ${payload}
-						observation.validate response - 422 (with error message)    ${issue_index}
-						...															${http_status_code}
-						...															${error_message}
-						...															${location}
+						observation.validate response - 422 (with error message) - new   ${http_status_code}
+						...															     ${error_message}
+						...															     ${location}
 
 
 create smoking status w/o ehr reference    
-	[Arguments]         ${json_path}    ${value}    ${issue_index}    ${http_status_code}
+	[Arguments]         ${json_path}        ${value}                ${http_status_code}
 	...					${error_message}    ${location}=${None}
 
 	${fake_ehr_ref}=	Evaluate    str(uuid.uuid4())    uuid
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Smoking Status    ${payload}
-						observation.validate response - 422 (with error message)    ${issue_index}
-						...															${http_status_code}
-						...															${error_message}
-						...															${location}
+						observation.validate response - 422 (with error message) - new    ${http_status_code}
+						...															      ${error_message}
+						...															      ${location}
 
 
 generate payload from example json
@@ -184,7 +201,7 @@ generate payload from example json
 						...    	Run Keyword    Delete Object From Json    ${payload}    ${json_path}
 
 						# comment: set value from data table in test case
-						Update Value To Json    ${payload}    ${json_path}    ${value}
+						Update Value To Json            ${payload}    ${json_path}    ${value}
 						Output Debug Info To Console    ${payload}
 
 	[Return]			${payload}
