@@ -444,7 +444,7 @@ content-type: application/json
     "id": "c8079220-594c-42dc-8cea-7a52a6833c2c",
     "meta": {
         "profile":  [
-            "abc"
+            "http://hl7.org/fhir/StructureDefinition/heartrate"
         ]
     },
     "identifier":  [
@@ -498,7 +498,7 @@ content-type: application/json
   },
     "effectiveDateTime": "2020-09-25",
     "valueQuantity": {
-        "value": 81,
+        "value": 812331,
         "unit": "per minute",
         "system": "http://unitsofmeasure.org",
         "code": "/min"
