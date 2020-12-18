@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.camel.processor;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import liquibase.pro.packaged.S;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.ehrbase.client.aql.parameter.ParameterValue;
@@ -86,7 +87,7 @@ public class PatientIdProcessor implements Processor, MessageSourceAware {
                 patientId = ((Procedure) resource).getSubject().getIdentifier().getValue();
                 break;
             case QuestionnaireResponse:
-                patientId = ((QuestionnaireResponse) resource).getSubject().getIdentifier().getValue();
+                patientId = getQuestionnaireId((QuestionnaireResponse) resource);
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported resource [" + resourceType + "]");
@@ -101,6 +102,20 @@ public class PatientIdProcessor implements Processor, MessageSourceAware {
                             .addExpression(resourceType + ".subject.identifier")));
         }
         return patientId;
+    }
+
+    public String getQuestionnaireId(QuestionnaireResponse resource){
+        if(resource.getQuestionnaire().contains("http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|")){
+         /*   String ehr_id = openEhrClient.ehrEndpoint().createEhr().toString();
+            Query<Record1<UUID>> query = Query.buildNativeQuery("select e/ehr_status/subject/external_ref/id/value from ehr e where  e/ehr_id/value = $patientId", UUID.class);
+            List<Record1<UUID>> result = openEhrClient.aqlEndpoint()
+                    .execute(query, new ParameterValue<>("patientId", ehr_id));*/
+           // return result.get(0).value1().toString();
+            return "07f602e0-579e-4fe3-95af-381728bf0d49";
+
+        }else{
+            return resource.getSubject().getIdentifier().getValue();
+        }
     }
 
     @Override
