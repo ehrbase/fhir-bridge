@@ -1,5 +1,6 @@
 {
   "resourceType": "Observation",
+  "id": "smoking-status",
   "meta": {
     "profile": [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status"
