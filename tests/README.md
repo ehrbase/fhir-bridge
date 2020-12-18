@@ -16,6 +16,10 @@ robot -d results/ -L TRACE -i createORobservation  robot # runs all tests which 
 robot -d results/ -L TRACE -i condition -i observation  robot # runs all tests with tag condition and all tests with tag observation (same as OR)
 ```
 
+```bash
+# docu command
+python3 -m robot.testdoc robot results/fhirbridgerobottests.html
+```
 
 ```bash
 # robot command line options explained
