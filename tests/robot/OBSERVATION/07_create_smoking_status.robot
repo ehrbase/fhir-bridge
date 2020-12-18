@@ -175,35 +175,37 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create blood pressure with ehr reference
-    [Tags]              category    todo    xxx
+	[Template]			create smoking status with ehr reference
+    [Tags]              category    xxx
 
 	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    ... LOCATION
 	# 														INDEX	CODE
-	$.category								missing			0		422    	Observation.category: minimum required = 1, but only found 0 .from ${${smoking_status-url}}
-	$.category								${{ [] }}		0		422    	Array cannot be empty - the property should not be present if it has no values
-	$.category								${{ {} }}		0		422    	This property must be an Array, not an Object
-	$.category								${{ [{}] }}		0		422    	Object must have some content
 
-	$.category[0].coding    				missing			0		422    	Object must have some content
-	$.category[0].coding    				${EMPTY}		0		422    	This property must be an Array, not a primitive property
-	
-	$.category[0].coding[0].code    		missing    		0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
-	$.category[0].coding[0].code    		${EMPTY}    	2    	422    	@value cannot be empty
-	$.category[0].coding[0].code    		foobar    		0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
-	...																		Observation.category[0]
-
-	$.category[0].coding[0].system    		missing    		2    	422    	A code with no system has no defined meaning. A system should be provided
-	...																		Observation.category[0].coding[0]
-
-	$.category[0].coding[0].system    		${EMPTY}    	3    	422    	@value cannot be empty
-	...																		Observation.category[0].coding[0].system
-
-	$.category[0].coding[0].system    		foobar    		2    	422    	Coding.system must be an absolute reference, not a local reference
-	...																		Observation.category[0].coding[0]
-	
-	$.category[0].coding[0].system    		http://foobar.de  0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
-	...																		Observation.category[0]
+	# invalid category
+	$.category								missing			0		422    	Observation.category: minimum required = 1, but only found 0 .from ${smoking_status-url}
+#	$.category								${{ [] }}		0		422    	Array cannot be empty - the property should not be present if it has no values
+#	$.category								${{ {} }}		0		422    	This property must be an Array, not an Object
+#	$.category								${{ [{}] }}		0		422    	Object must have some content
+#
+#	$.category[0].coding    				missing			0		422    	Object must have some content
+#	$.category[0].coding    				${EMPTY}		0		422    	This property must be an Array, not a primitive property
+#	
+#	$.category[0].coding[0].code    		missing    		0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
+#	$.category[0].coding[0].code    		${EMPTY}    	2    	422    	@value cannot be empty
+#	$.category[0].coding[0].code    		foobar    		0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
+#	...																		Observation.category[0]
+#
+#	$.category[0].coding[0].system    		missing    		2    	422    	A code with no system has no defined meaning. A system should be provided
+#	...																		Observation.category[0].coding[0]
+#
+#	$.category[0].coding[0].system    		${EMPTY}    	3    	422    	@value cannot be empty
+#	...																		Observation.category[0].coding[0].system
+#
+#	$.category[0].coding[0].system    		foobar    		2    	422    	Coding.system must be an absolute reference, not a local reference
+#	...																		Observation.category[0].coding[0]
+#	
+#	$.category[0].coding[0].system    		http://foobar.de  0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
+#	...																		Observation.category[0]
 
 
 #006 Create Blood Pressure (Invalid/Missing 'code')
