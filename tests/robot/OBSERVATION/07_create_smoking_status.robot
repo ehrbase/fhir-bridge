@@ -84,7 +84,7 @@ ${randinteger}                  ${12345}
     $.subject.identifier.value    ${{str(uuid.uuid4())}}    		422     EhrId not found for subject
 	
 
-002 Create Blood Pressure (Invalid/Missing 'resourceType')
+002 Create Smoking Status (Invalid/Missing 'resourceType')
 	[Documentation]     1. *Create* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -103,7 +103,7 @@ ${randinteger}                  ${12345}
     $.resourceType					${randinteger}					422		This does not appear to be a FHIR resource .unknown name '${randinteger}'.
 
 
-002 Create Blood Pressure (Invalid/Missing 'ID')
+003 Create Smoking Status (Invalid/Missing 'ID')
 	[Documentation]     1. *Create* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -120,7 +120,7 @@ ${randinteger}                  ${12345}
 	$.id							${randinteger}					422		Error parsing JSON: the primitive value must be a string						Observation.id
 
 
-003 Create Blood Pressure (Invalid/Missing 'meta')
+004 Create Smoking Status (Invalid/Missing 'meta')
 	[Documentation]     1. *Create* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
@@ -148,7 +148,7 @@ ${randinteger}                  ${12345}
 	$.meta.profile					${{ {} }}						422    	This property must be an Array, not a an object
 
 
-004 Create Blood Pressure (Invalid/Missing 'Status')
+005 Create Smoking Status (Invalid/Missing 'Status')
 	[Documentation]     1. *Create* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -167,7 +167,7 @@ ${randinteger}                  ${12345}
 	$.status						${randstring}					400		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
 
 
-005 Create Smoking Status (Invalid/Missing 'category')
+006 Create Smoking Status (Invalid/Missing 'category')
 	[Documentation]     1. *Create* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -176,7 +176,7 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create smoking status with ehr reference
-    [Tags]              category    xxx
+    [Tags]              category
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -205,24 +205,170 @@ ${randinteger}                  ${12345}
 #	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${smoking_status-url}					Observation.category[0]
 
 
-#006 Create Blood Pressure (Invalid/Missing 'code')
+007 Create Smoking Status (Invalid/Missing 'code')
+	[Documentation]     1. *Create* new an EHR record\n\n 
+	...                 2. *LOAD* _create-smoking-status.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Code`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create smoking status with ehr reference
+    [Tags]              code
+
+	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																CODE
+
+	# invalid code
+	$.code									missing					422    	Observation.code: minimum required = 1, but only found 0 .from ${smoking_status-url}						Observation
+	$.code									${{ [] }}				422    	Observation.code: minimum required = 1, but only found 0 .from ${smoking_status-url}						Observation
+	$.code									${{ {} }}				422    	Object must have some content																				Observation.code
+	$.code									${{ [{}] }}				422    	This property must be an Object, not an array																Observation.code
+
+	# invalid coding
+	$.code.coding   	 					missing					422    	Object must have some content																				Observation.code
+	$.code.coding	    					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.code.coding
+
+	# invalid Code Coding 0 System
+    $.code.coding[0].system					missing					422    	A code with no system has no defined meaning. A system should be provided									Observation.code.coding.0.
+	$.code.coding[0].system					${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..system
+	$.code.coding[0].system					http://foobar.de		422    	The pattern .system http://loinc.org, code 72166-2, and display 'null'. defined in the profile https://*	Observation.code
+	$.code.coding[0].system					${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.code.coding.0.
+	$.code.coding[0].system					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..system
+
+	# invalid Code Coding 0 Code
+    $.code.coding[0].code					missing					422    	The pattern .system http://loinc.org, code 72166-2, and display 'null'. defined in the profile https://*	Observation.code
+	$.code.coding[0].code					${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..code
+	$.code.coding[0].code					${randstring}			422    	The pattern .system http://loinc.org, code 72166-2, and display 'null'. defined in the profile https://*	Observation.code
+	$.code.coding[0].code					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..code
+
+	# invalid Code Coding 0 Display
+    $.code.coding[0].display				${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..display
+	$.code.coding[0].display				${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..display
+
+
+008 Create Smoking Status (Invalid/Missing 'effectiveDateTime')
+	[Documentation]     1. *Create* new an EHR record\n\n 
+	...                 2. *LOAD* _create-smoking-status.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create smoking status with ehr reference
+    [Tags]              effectiveDateTime
+
+	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																CODE
+	
+	# missing attribute
+	$.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
+	$.effectiveDateTime						${EMPTY}				422    	@value cannot be empty																						Observation.effective.ofType.dateTime.
+	
+	# wrong format
+	$.effectiveDateTime						${{ [] }}				422    	This property must be an simple value, not an array															Observation.effective.x.
+	$.effectiveDateTime						${{ {} }}				422    	This property must be an simple value, not an object														Observation.effective.x
+	$.effectiveDateTime						${{ [{}] }}				422    	This property must be an simple value, not an array															Observation.effective.x
+
+	# invalid day
+	$.effectiveDateTime						2020-09-00				422    	Not a valid date/time .Invalid date/time format: \"2020-09-00\".											Observation.effective.ofType.dateTime.
+	$.effectiveDateTime						2020-09-32				422    	Not a valid date/time .Invalid date/time format: \"2020-09-32\".											Observation.effective.ofType.dateTime.
+	$.effectiveDateTime						2020-09-dd				422    	Not a valid date/time .Invalid date/time format: \"2020-09-dd\".											Observation.effective.ofType.dateTime.
+	
+	# invalid month
+	$.effectiveDateTime						2020-00-21				422    	Not a valid date/time .Invalid date/time format: \"2020-00-21\".											Observation.effective.ofType.dateTime.
+	$.effectiveDateTime						2020-13-21				422    	Not a valid date/time .Invalid date/time format: \"2020-13-21\".											Observation.effective.ofType.dateTime.
+	$.effectiveDateTime						2020-mm-21				422    	Not a valid date/time .Invalid date/time format: \"2020-mm-21\".											Observation.effective.ofType.dateTime.
+
+	# invalid year
+	$.effectiveDateTime						0000-09-21				422    	The value '0000-09-21' is outside the range of reasonable years - check for data entry error				Observation.effective.ofType.dateTime.
+	$.effectiveDateTime						10000-09-21				422    	Not a valid date/time .Invalid date/time format: \"10000-09-21\".											Observation.effective.ofType.dateTime.
+	$.effectiveDateTime						yyyy-09-21				422    	Not a valid date/time .Invalid date/time format: \"yyyy-09-21\".											Observation.effective.ofType.dateTime.
+
+	# invalid Date format
+	$.effectiveDateTime						21.09.2020				422    	Not a valid date/time .Invalid date/time format: \"21.09.2020\".											Observation.effective.ofType.dateTime.
+	$.effectiveDateTime						${randstring}			422    	Not a valid date/time .Invalid date/time format: \"${randstring}".											Observation.effective.ofType.dateTime.
+	$.effectiveDateTime						${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.effective.x.
+
+
+009 Create Smoking Status (Invalid/Missing 'valueCodeableConcept')
+	[Documentation]     1. *Create* new an EHR record\n\n 
+	...                 2. *LOAD* _create-smoking-status.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``valueCodeableConcept`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create smoking status with ehr reference
+    [Tags]              valueCodeableConcept
+
+
+	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																	CODE
+	
+	# missing valueCodeableConcept
+	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
+	$.valueCodeableConcept						${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.value.x.
+
+	# wrong format
+	$.valueCodeableConcept						${{ [] }}				422    	This property must be an Object, not an array																Observation.value.x.
+	$.valueCodeableConcept						${{ {} }}				422    	Object must have some content																				Observation.value.x.
+	$.valueCodeableConcept						${{ [{}] }}				422    	This property must be an Object, not an array																Observation.value.x.
+
+	# missing coding
+	$.valueCodeableConcept.coding 				missing					422    	Index 0 out of bounds for length 0
+	$.valueCodeableConcept.coding				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.value.x..coding
+
+	# invalid system
+#	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+	$.valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..system
+#	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+	$.valueCodeableConcept.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.value.ofType.CodeableConcept..coding.0.
+	$.valueCodeableConcept.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..system
+
+	# invalid code
+#	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
+	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..code
+	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Unexpected value: ${randstring}
+	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..code
+
+	# invalid display
+	$.valueCodeableConcept.coding[0].display	${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..display
+	$.valueCodeableConcept.coding[0].display	${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..display
+
+	# invalid text
+	$.valueCodeableConcept.text					${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..text
+	$.valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..text
+
+
+#010 Create Smoking Status (Invalid/Missing 'valueCodeableConcept')
 #	[Documentation]     1. *Create* new an EHR record\n\n 
 #	...                 2. *LOAD* _create-smoking-status.json_\n\n
-#	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
-#	...                 4. *UPDATE* values for attribute ``code`` \n\n
-#   ...                 5. *POST* example JSON to observation endpoint\n\n
+#	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+#	...                 4. *UPDATE* values for attribute ``valueCodeableConcept`` \n\n
+#    ...                 5. *POST* example JSON to observation endpoint\n\n
 #	...                 6. *VALIDATE* the response status \n\n
-#   ...                 7. *VALIDATE* outcome against diagnostic text & location
-#	[Template]			create blood pressure with ehr reference
-#   [Tags]              code    todo
+#    ...                 7. *VALIDATE* outcome against diagnostic text & location
+#	[Template]			create smoking status with ehr reference add attribute
+#    [Tags]              valueCodeableConcept
 #
-#	# FIELD/PATH		VALUE			ISSUE	HTTP	ERROR MESSAGE
-#	# 									INDEX	CODE
-#	$.code				missing			0		422    	Observation.code: minimum required = 1, but only found 0 .from ${${smoking_status-url}}
-	
+#	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+#	# 																	CODE
+
 
 
 *** Keywords ***
+
+# oooo    oooo oooooooooooo oooooo   oooo oooooo   oooooo     oooo   .oooooo.   ooooooooo.   oooooooooo.    .oooooo..o
+# `888   .8P'  `888'     `8  `888.   .8'   `888.    `888.     .8'   d8P'  `Y8b  `888   `Y88. `888'   `Y8b  d8P'    `Y8
+#  888  d8'     888           `888. .8'     `888.   .8888.   .8'   888      888  888   .d88'  888      888 Y88bo.
+#  88888[       888oooo8       `888.8'       `888  .8'`888. .8'    888      888  888ooo88P'   888      888  `"Y8888o.
+#  888`88b.     888    "        `888'         `888.8'  `888.8'     888      888  888`88b.     888      888      `"Y88b
+#  888  `88b.   888       o      888           `888'    `888'      `88b    d88'  888  `88b.   888     d88' oo     .d8P
+# o888o  o888o o888ooooood8     o888o           `8'      `8'        `Y8bood8P'  o888o  o888o o888bood8P'   8""88888P'
+#
+# [ HIGH LEVEL KEYWORDS ]
+
 create smoking status with ehr reference
 	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
 	...					${error_message}    ${location}=${None}
@@ -265,3 +411,4 @@ generate payload from example json
 						Output Debug Info To Console    ${payload}
 
 	[Return]			${payload}
+
