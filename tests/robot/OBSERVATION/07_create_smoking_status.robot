@@ -167,7 +167,7 @@ ${randinteger}                  ${12345}
 	$.status						${randstring}					400		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
 
 
-005 Create Blood Pressure (Invalid/Missing 'category')
+005 Create Smoking Status (Invalid/Missing 'category')
 	[Documentation]     1. *Create* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -178,34 +178,31 @@ ${randinteger}                  ${12345}
 	[Template]			create smoking status with ehr reference
     [Tags]              category    xxx
 
-	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    ... LOCATION
-	# 														INDEX	CODE
+	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																CODE
 
 	# invalid category
-	$.category								missing			0		422    	Observation.category: minimum required = 1, but only found 0 .from ${smoking_status-url}
-#	$.category								${{ [] }}		0		422    	Array cannot be empty - the property should not be present if it has no values
-#	$.category								${{ {} }}		0		422    	This property must be an Array, not an Object
-#	$.category								${{ [{}] }}		0		422    	Object must have some content
-#
-#	$.category[0].coding    				missing			0		422    	Object must have some content
-#	$.category[0].coding    				${EMPTY}		0		422    	This property must be an Array, not a primitive property
-#	
-#	$.category[0].coding[0].code    		missing    		0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
-#	$.category[0].coding[0].code    		${EMPTY}    	2    	422    	@value cannot be empty
-#	$.category[0].coding[0].code    		foobar    		0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
-#	...																		Observation.category[0]
-#
-#	$.category[0].coding[0].system    		missing    		2    	422    	A code with no system has no defined meaning. A system should be provided
-#	...																		Observation.category[0].coding[0]
-#
-#	$.category[0].coding[0].system    		${EMPTY}    	3    	422    	@value cannot be empty
-#	...																		Observation.category[0].coding[0].system
-#
-#	$.category[0].coding[0].system    		foobar    		2    	422    	Coding.system must be an absolute reference, not a local reference
-#	...																		Observation.category[0].coding[0]
-#	
-#	$.category[0].coding[0].system    		http://foobar.de  0    	422    	This element does not match any known slice defined in the profile ${${smoking_status-url}}
-#	...																		Observation.category[0]
+#	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${smoking_status-url}
+	$.category								${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.category
+	$.category								${{ {} }}				422    	This property must be an Array, not an Object																Observation.category
+	$.category								${{ [{}] }}				422    	Object must have some content																				Observation.category
+
+	#invalid coding
+	$.category[0].coding    				missing					422    	Object must have some content																				Observation.category.0.
+	$.category[0].coding    				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.category.0..coding
+	
+	#invalid code 0
+#	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${smoking_status-url}
+	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
+#	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${smoking_status-url}					Observation.category.0.
+	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
+	
+	# invaild system 0
+#	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
+	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
+	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
+	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
+#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${smoking_status-url}					Observation.category[0]
 
 
 #006 Create Blood Pressure (Invalid/Missing 'code')
