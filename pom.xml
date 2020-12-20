@@ -91,7 +91,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <image>
-                        <name>ehrbaseorg/${project.artifactId}</name>
+                        <name>ehrbase/${project.artifactId}</name>
                     </image>
                     <wait>1000</wait>
                     <maxAttempts>60</maxAttempts>
