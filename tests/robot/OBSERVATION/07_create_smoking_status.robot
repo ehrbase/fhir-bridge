@@ -85,7 +85,7 @@ ${randinteger}                  ${12345}
 	
 
 002 Create Smoking Status (Invalid/Missing 'resourceType')
-	[Documentation]     1. *Create* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
@@ -104,7 +104,7 @@ ${randinteger}                  ${12345}
 
 
 003 Create Smoking Status (Invalid/Missing 'ID')
-	[Documentation]     1. *Create* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``ID`` \n\n
@@ -121,7 +121,7 @@ ${randinteger}                  ${12345}
 
 
 004 Create Smoking Status (Invalid/Missing 'meta')
-	[Documentation]     1. *Create* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``meta`` \n\n
@@ -149,7 +149,7 @@ ${randinteger}                  ${12345}
 
 
 005 Create Smoking Status (Invalid/Missing 'Status')
-	[Documentation]     1. *Create* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Status`` \n\n
@@ -168,7 +168,7 @@ ${randinteger}                  ${12345}
 
 
 006 Create Smoking Status (Invalid/Missing 'category')
-	[Documentation]     1. *Create* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Category`` \n\n
@@ -206,7 +206,7 @@ ${randinteger}                  ${12345}
 
 
 007 Create Smoking Status (Invalid/Missing 'code')
-	[Documentation]     1. *Create* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Code`` \n\n
@@ -248,7 +248,7 @@ ${randinteger}                  ${12345}
 
 
 008 Create Smoking Status (Invalid/Missing 'effectiveDateTime')
-	[Documentation]     1. *Create* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
@@ -292,7 +292,7 @@ ${randinteger}                  ${12345}
 
 
 009 Create Smoking Status (Invalid/Missing 'valueCodeableConcept')
-	[Documentation]     1. *Create* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``valueCodeableConcept`` \n\n
@@ -342,7 +342,7 @@ ${randinteger}                  ${12345}
 
 
 #010 Create Smoking Status (Invalid/Missing 'valueCodeableConcept')
-#	[Documentation]     1. *Create* new an EHR record\n\n 
+#	[Documentation]     1. *CREATE* new an EHR record\n\n 
 #	...                 2. *LOAD* _create-smoking-status.json_\n\n
 #	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 #	...                 4. *UPDATE* values for attribute ``valueCodeableConcept`` \n\n
@@ -354,6 +354,63 @@ ${randinteger}                  ${12345}
 #
 #	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 #	# 																	CODE
+
+
+
+011 Create Smoking Status (invalid multi)
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-smoking-status.json_\n\n
+	...                 3. *UPDATE* values for attributes \n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text (english + german)
+
+    [Tags]             multi
+    [Template]         create Smoking Status JSON
+#|  resourceType   |          		ID   			|           meta         						|  	  status  	|                         				category                           					        					   |                                        									code          								|         subject                    |	  DateTime	   |                      			     valueCodeableConcept			           		           |  R.-Code  |                                                             diagnostics 							                                              |   location
+#|                 |                				|  available  | 			profile  			|          		|  available  |  codingavailable  |  				system  									   |    	 code          |  available  |  coding available  |  			0.system	  		|  		0.code	  |    		   0.display 		    |  available  |   Identifier-value   |                 |  available  |		coding	|         system     	 |  		code      	|     display      |           |               				                                    ENG				                                                                  |
+
+# all attributes invalid for valueCodeableConcept
+    Observation    	        smoking-status  			   true         ${smoking_status-url}			  final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	               ${EMPTY}    	        ${EMPTY}		    422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..display
+    Observation    	        smoking-status  			   true         ${smoking_status-url}			  final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true           ${1234}	               test      	        ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
+    Observation    	        smoking-status  			   true         ${smoking_status-url}			  final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	             http://google.com      test   		        422          ele-1: All FHIR elements must have a @value or children                                                                                             Observation.value.ofType.CodeableConcept..coding.0..system
+    Observation    	        smoking-status  			   true         ${smoking_status-url}			  final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true	       missing	               ${EMPTY}             missing		        422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..code
+    Observation    	        smoking-status  			   true         ${smoking_status-url}			  final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               missing 	            test   		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..system
+
+# all attributes invalid for code
+    Observation    	        smoking-status  		       true         ${smoking_status-url}		      final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   false	  		 http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA18978-9    	    Never smoker		422          Object must have some content                                                                                                                       Observation.code
+    Observation    	        smoking-status  			   true         ${smoking_status-url}		      final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 ${EMPTY}             	  		  ${EMPTY}        ${EMPTY}                          true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA18978-9    	    Never smoker		422          @value cannot be empty                                                                                                                          	 Observation.code.coding.0..display
+    Observation    	        smoking-status  			   true         ${smoking_status-url}		      final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 http://google.com		  		  ${12345}        missing                           true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA18978-9    	    Never smoker		422          The pattern .system http://loinc.org, code 72166-2, and display 'null'. defined in the profile ${smoking_status-url}                                Observation.code
+    Observation    	        smoking-status  			   true         ${smoking_status-url}		      final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 test            		  		  missing         ${12345}                          true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA18978-9    	    Never smoker		422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.code.coding.0.
+    Observation    	        smoking-status  			   true         ${smoking_status-url}		      final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 missing         		  	      test            test1234                          true    		 	valid      		  2020-02-25	      true		    true	       http://loinc.org	       LA18978-9    	    Never smoker		422          A code with no system has no defined meaning. A system should be provided                                                                           Observation.code.coding.0.
+
+# all attributes invalid for category
+#	Observation    	        smoking-status  		       true         ${smoking_status-url}             final		     true             true           http://google.com                                                  test               true			     true		  		 http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA18978-9    	    Never smoker		422     	 This element does not match any known slice defined in the profile ${smoking_status-url}                                  							 Observation.category
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final		     true             true           missing                                                            ${EMPTY}                true			   true			  	 http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA18978-9    	    Never smoker		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..code
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final		     true             true           ${EMPTY}                                                           ${12345}                true			   true			  	 http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA18978-9    	    Never smoker		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..system
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final		     true             true           ${12345}                                                           missing                 true			   true			     http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA18978-9    	    Never smoker		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final		     true             true           test                                                               ${EMPTY}                true			   true			  	 http://loinc.org		  		  72166-2         Tobacco smoking status            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA18978-9    	    Never smoker		422          @value cannot be empty                                                                                                                				 Observation.category.0..coding.0..code
+
+# mix invalid attributes
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
+    ${1234}      	        smoking-status  			   true         ${smoking_status-url}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          This does not appear to be a FHIR resource .unknown name '1234'.                                                                                    1234
+    Observation    	        ${1234}      				   true         ${smoking_status-url}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.id
+    Observation    	        smoking-status  			   false        ${smoking_status-url}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  	      ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.value.ofType.CodeableConcept..coding.0.
+    Observation    	        smoking-status  			   true         ${1234}                           final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Profile reference '1234' could not be resolved, so has not been checked                                                                             Observation.meta.profile.0.
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             ${1234}	     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.status
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final  	     false            true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.code.coding.0..system
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final  	     true             false          ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Object must have some content                                                                                                                       Observation.category.0.
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final  	     true             true           ${1234}                                                            ${1234}                 false			   true			  	 ${1234}          		  	      ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.code: minimum required = 1, but only found 0 .from ${smoking_status-url}.                                                               Observation
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false		     ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final  	     true             true           ${1234}                                                            ${1234}                 true			   true 			 ${1234}          		  		  ${1234}         ${1234}                           false    	 	    valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.subject: minimum required = 1, but only found 0 .from ${smoking_status-url}.                                                            Observation
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false		     ${1234}          		  		  ${1234}         ${1234}                           true    		 	test      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  ${12345}		      true		    true	       ${1234}	               ${1234}              ${1234}		        422          Not a valid date/time .12345.                                                                                                                       Observation.effective.ofType.dateTime.
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  false		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+    Observation    	        smoking-status  			   true         ${smoking_status-url}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+
+
+
+
 
 
 
@@ -412,3 +469,31 @@ generate payload from example json
 
 	[Return]			${payload}
 
+
+
+create Smoking Status JSON
+    [Arguments]         ${resourceType}    				${ID}    					${meta}    							${profile}    
+	...					${status} 						${categoryavailable}    	${categorycodingavailable}    		${categorysystem}
+	...					${categorycode}					${codeavailable}    		${codecodingavailable}    			${code0system}
+	...					${code0code}    				${code0display}				${subject}    						${subjectvalue}
+    ...                 ${effectivedatetime}    		${vCCavailabe}				${vCCCodingavailable}				${vCC0System}
+	...					${vCC0Code}						${vCC0Display}				${http_status_code}    				${error_message}
+	...					${location}
+
+                        prepare new request session    Prefer=return=representation
+
+    &{resp}             Run Keywords
+                        ...    ehr.create new ehr               000_ehr_status.json                             AND
+                        ...    load JSON                        create-smoking-status.json					    AND
+                        ...    update Resource Type             ${resourceType}                                 AND
+                        ...    update ID                        ${ID}                                           AND
+                        ...    update Meta Profile              ${meta}                                         ${profile}                    	AND
+                        ...    update Status                    ${status}                                       AND
+                        ...    update Category                  ${categoryavailable}                            ${categorycodingavailable}     	${categorysystem}           ${categorycode}         AND
+                        ...    update Code 0                    ${codeavailable}                                ${codecodingavailable}         	${code0system}              ${code0code}            ${code0display}     AND
+                        ...    update Subject                   ${subject}                                      ${subjectvalue}                	AND
+                        ...    update Effective Date Time       ${effectivedatetime}                            AND
+						...    update vCC						${vCCavailabe}									${vCCCodingavailable}			${vCC0System}				${vCC0Code}				${vCC0Display}		AND
+                        ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
+                        ...    Output Debug Info To Console                                                     AND
+                        ...    validate response - 422 (with error message NEW)									${http_status_code}    			${error_message}    		${location}
