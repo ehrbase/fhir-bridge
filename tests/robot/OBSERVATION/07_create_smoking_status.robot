@@ -341,23 +341,71 @@ ${randinteger}                  ${12345}
 	$.valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..text
 
 
-#010 Create Smoking Status (Invalid/Missing 'valueCodeableConcept')
-#	[Documentation]     1. *CREATE* new an EHR record\n\n 
-#	...                 2. *LOAD* _create-smoking-status.json_\n\n
-#	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-#	...                 4. *UPDATE* values for attribute ``valueCodeableConcept`` \n\n
-#    ...                 5. *POST* example JSON to observation endpoint\n\n
-#	...                 6. *VALIDATE* the response status \n\n
-#    ...                 7. *VALIDATE* outcome against diagnostic text & location
-#	[Template]			create smoking status with ehr reference add attribute
-#    [Tags]              valueCodeableConcept
-#
-#	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
-#	# 																	CODE
+010 Create Smoking Status (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-smoking-status.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Tags]              DataAbsentReason
+
+	ehr.create new ehr    				  				000_ehr_status.json
+	create with DataAbsentReason		  				DataAbsentReason				create-smoking-status.json
+	validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
-011 Create Smoking Status (invalid multi)
+
+011 Create Smoking Status (Invalid/Missing 'DataAbsentReason')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-smoking-status.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create smoking status with ehr reference AND data absentreason
+    [Tags]              DataAbsentReason
+
+	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																	CODE
+
+	# missing valueCodeableConcept
+	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.dataAbsentReason
+
+	# wrong format
+	$.dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.dataAbsentReason
+	$.dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.dataAbsentReason
+	$.dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array
+
+	# missing coding
+	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.dataAbsentReason.coding
+
+	# invalid system - todo
+	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].system			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..system
+	$.dataAbsentReason.coding[0].system			${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.dataAbsentReason.coding.0.
+	$.dataAbsentReason.coding[0].system			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..system
+	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
+
+	# invalid code - todo
+	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..code
+	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..code
+
+	# invalid display - todo
+	$.dataAbsentReason.coding[0].display		missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..display
+	$.dataAbsentReason.coding[0].display		${randstring}			422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
+
+
+012 Create Smoking Status (invalid multi)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* values for attributes \n\n
@@ -410,10 +458,6 @@ ${randinteger}                  ${12345}
 
 
 
-
-
-
-
 *** Keywords ***
 
 # oooo    oooo oooooooooooo oooooo   oooo oooooo   oooooo     oooo   .oooooo.   ooooooooo.   oooooooooo.    .oooooo..o
@@ -425,6 +469,7 @@ ${randinteger}                  ${12345}
 # o888o  o888o o888ooooood8     o888o           `8'      `8'        `Y8bood8P'  o888o  o888o o888bood8P'   8""88888P'
 #
 # [ HIGH LEVEL KEYWORDS ]
+
 
 create smoking status with ehr reference
 	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
@@ -470,7 +515,6 @@ generate payload from example json
 	[Return]			${payload}
 
 
-
 create Smoking Status JSON
     [Arguments]         ${resourceType}    				${ID}    					${meta}    							${profile}    
 	...					${status} 						${categoryavailable}    	${categorycodingavailable}    		${categorysystem}
@@ -497,3 +541,50 @@ create Smoking Status JSON
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
                         ...    validate response - 422 (with error message NEW)									${http_status_code}    			${error_message}    		${location}
+
+
+generate payload from example json with data absentreason
+	[Documentation]		Generates actual request payload using example json as a starting point.
+	[Arguments]			${json_path}    ${value}
+
+	${dict_dataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "Smoking Status"} }}
+
+	${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/create-smoking-status.json
+                        Update Value To Json    	${payload}    $.subject.identifier.value    			${subject_id}
+						Delete Object From Json    	${payload}    $.text
+						Delete Object From Json    	${payload}    $.valueCodeableConcept
+						Add Object To Json  		${payload}    $												${dict_dataabsentreason}
+
+						# comment: delete field/object that has value 'missing' in test case table 
+						Run Keyword And Return If   $value=="missing"
+						...    	Run Keyword    Delete Object From Json    ${payload}    ${json_path}
+
+						# comment: set value from data table in test case
+						Update Value To Json            ${payload}    ${json_path}    ${value}
+						Output Debug Info To Console    ${payload}
+
+	[Return]			${payload}
+
+
+create smoking status with ehr reference AND data absentreason
+	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
+	...					${error_message}    ${location}=${None}
+
+						ehr.create new ehr    000_ehr_status.json
+	${payload}=    		generate payload from example json with data absentreason    ${json_path}    ${value}
+						observation.POST /Observation    Smoking Status    ${payload}
+						observation.validate response - 422 (with error message NEW)     ${http_status_code}
+						...															     ${error_message}
+						...															     ${location}
+
+
+create with DataAbsentReason
+    [Arguments]         ${fhir_resource_name}    ${example_json}
+
+	${dict_dataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "Smoking Status"} }}
+
+    ${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/${example_json}
+                        Update Value To Json    	${payload}    $.subject.identifier.value    				${subject_id}
+						Add Object To Json  		${payload}    $												${dict_dataabsentreason}
+                        Output Debug Info To Console    ${payload}
+                        POST /Observation    		${fhir_resource_name}    ${payload}
