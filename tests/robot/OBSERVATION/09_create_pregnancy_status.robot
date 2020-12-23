@@ -44,7 +44,7 @@ ${randinteger}                  ${12345}
 	...                 4. *VALIDATE* the response status \n\n
     ...                 5. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create pregnancy status w/o ehr reference
-	[Tags]              subject    xxx
+	[Tags]              subject
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
 	# 																CODE
@@ -146,7 +146,36 @@ ${randinteger}                  ${12345}
 	$.meta.profile					${{ {} }}						422    	This property must be an Array, not a an object
 
 
-005 Create Pregnancy Status (Invalid/Missing 'Status')
+005 Create Pregnancy Status (Invalid/Missing 'identifier')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create pregnancy status with ehr reference
+    [Tags]              identifier
+
+	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
+	# 																CODE
+	$.identifier					${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.identifier
+	$.identifier					${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.identifier
+	$.identifier					${{ {} }}						422    	This property must be an Array, not an Object																	Observation.identifier
+	$.identifier					${{ [{}] }}						422    	Object must have some content																					Observation.identifier.0.
+
+	# invalid system
+	$.identifier[0].system			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..system				
+	$.identifier[0].system			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..system
+	$.identifier[0].system			${randstring}				 	422	   	Identifier.system must be an absolute reference, not a local reference											Observation.identifier.0.
+
+	# invalid value
+	$.identifier[0].value			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..value				
+	$.identifier[0].value			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..value
+	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''urn:ietf:rfc:3986'', then the identifier.value must be a full URI						Observation.identifier.0.
+
+
+006 Create Pregnancy Status (Invalid/Missing 'Status')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -165,7 +194,7 @@ ${randinteger}                  ${12345}
 	$.status						${randstring}					400		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
 
 
-006 Create Pregnancy Status (Invalid/Missing 'category')
+007 Create Pregnancy Status (Invalid/Missing 'category')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -203,7 +232,7 @@ ${randinteger}                  ${12345}
 #	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category[0]
 
 
-007 Create Pregnancy Status (Invalid/Missing 'code')
+008 Create Pregnancy Status (Invalid/Missing 'code')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -224,20 +253,20 @@ ${randinteger}                  ${12345}
 	$.code									${{ [{}] }}				422    	This property must be an Object, not an array																Observation.code
 
 	# invalid coding
-	$.code.coding   	 					missing					422    	Object must have some content																				Observation.code
+	$.code.coding   	 					missing					422    	Observation.code.coding: minimum required = 1, but only found 0												Observation.code
 	$.code.coding	    					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.code.coding
 
 	# invalid Code Coding 0 System
     $.code.coding[0].system					missing					422    	A code with no system has no defined meaning. A system should be provided									Observation.code.coding.0.
 	$.code.coding[0].system					${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..system
-	$.code.coding[0].system					http://foobar.de		422    	The pattern .system http://loinc.org, code 72166-2, and display 'null'. defined in the profile https://*	Observation.code
+	$.code.coding[0].system					http://foobar.de		422    	The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile https://*	Observation.code
 	$.code.coding[0].system					${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.code.coding.0.
 	$.code.coding[0].system					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..system
 
 	# invalid Code Coding 0 Code
-    $.code.coding[0].code					missing					422    	The pattern .system http://loinc.org, code 72166-2, and display 'null'. defined in the profile https://*	Observation.code
+    $.code.coding[0].code					missing					422    	The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile https://*	Observation.code
 	$.code.coding[0].code					${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..code
-	$.code.coding[0].code					${randstring}			422    	The pattern .system http://loinc.org, code 72166-2, and display 'null'. defined in the profile https://*	Observation.code
+	$.code.coding[0].code					${randstring}			422    	The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile https://*	Observation.code
 	$.code.coding[0].code					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..code
 
 	# invalid Code Coding 0 Display
@@ -245,7 +274,7 @@ ${randinteger}                  ${12345}
 	$.code.coding[0].display				${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..display
 
 
-008 Create Pregnancy Status (Invalid/Missing 'effectiveDateTime')
+009 Create Pregnancy Status (Invalid/Missing 'effectiveDateTime')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -289,7 +318,7 @@ ${randinteger}                  ${12345}
 	$.effectiveDateTime						${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.effective.x.
 
 
-009 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
+010 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -305,7 +334,7 @@ ${randinteger}                  ${12345}
 	# 																	CODE
 	
 	# missing valueCodeableConcept
-	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
+#	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
 	$.valueCodeableConcept						${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.value.x.
 
 	# wrong format
@@ -314,7 +343,7 @@ ${randinteger}                  ${12345}
 	$.valueCodeableConcept						${{ [{}] }}				422    	This property must be an Object, not an array																Observation.value.x.
 
 	# missing coding
-	$.valueCodeableConcept.coding 				missing					422    	Index 0 out of bounds for length 0
+#	$.valueCodeableConcept.coding 				missing					422    	Index 0 out of bounds for length 0
 	$.valueCodeableConcept.coding				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.value.x..coding
 
 	# invalid system
@@ -327,7 +356,7 @@ ${randinteger}                  ${12345}
 	# invalid code
 #	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
 	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..code
-	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Unexpected value: ${randstring}
+	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Status code ${randstring} is not supported
 	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..code
 
 	# invalid display
@@ -339,7 +368,7 @@ ${randinteger}                  ${12345}
 	$.valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..text
 
 
-010 Create Pregnancy Status (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
+011 Create Pregnancy Status (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -356,7 +385,7 @@ ${randinteger}                  ${12345}
 
 
 
-011 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
+012 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -365,45 +394,45 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create pregnancy status with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason
+    [Tags]              DataAbsentReason    xxx
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 
 	# missing valueCodeableConcept
-	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+#	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.dataAbsentReason
 
 	# wrong format
-	$.dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.dataAbsentReason
-	$.dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.dataAbsentReason
-	$.dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array
+	#$.dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.dataAbsentReason
+	#$.dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.dataAbsentReason
+	#$.dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array
 
 	# missing coding
-	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.dataAbsentReason.coding
+	#$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	#$.dataAbsentReason.coding					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.dataAbsentReason.coding
 
 	# invalid system - todo
-	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].system			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..system
-	$.dataAbsentReason.coding[0].system			${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.dataAbsentReason.coding.0.
-	$.dataAbsentReason.coding[0].system			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..system
-	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
+	#$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
+	#$.dataAbsentReason.coding[0].system			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..system
+	#$.dataAbsentReason.coding[0].system			${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.dataAbsentReason.coding.0.
+	#$.dataAbsentReason.coding[0].system			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..system
+	#$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
 
 	# invalid code - todo
-	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..code
-	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..code
+	#$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	#$.dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..code
+	#$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+	#$.dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..code
 
 	# invalid display - todo
-	$.dataAbsentReason.coding[0].display		missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..display
-	$.dataAbsentReason.coding[0].display		${randstring}			422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
+	#$.dataAbsentReason.coding[0].display		missing					422    	Index 0 out of bounds for length 0
+	#$.dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..display
+	#$.dataAbsentReason.coding[0].display		${randstring}			422    	Index 0 out of bounds for length 0
+	#$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
 
 
-012 Create Pregnancy Status (invalid multi)
+013 Create Pregnancy Status (invalid multi)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* values for attributes \n\n
