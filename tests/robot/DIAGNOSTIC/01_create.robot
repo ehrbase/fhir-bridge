@@ -1,4 +1,5 @@
-# Copyright (c) 2020 P. Wohlfarth (Appsfactory), Wladislaw Wagner (Vitasystems GmbH)
+# Copyright (c) 2020 Peter Wohlfarth (Appsfactory GmbH), Wladislaw Wagner (Vitasystems GmbH),
+# Dave Petzold (Appsfactory GmbH) & Pauline Schulz (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -33,47 +34,68 @@ Force Tags              create
 
 *** Test Cases ***
 001 Create Diagnostic Report
-    [Documentation]     1. create EHR
-    ...                 2. trigger diagnosticreport endpoint
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-diagnosticReport.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to diagnostic endpoint\n\n
+	...                 5. *VALIDATE* the response status
     [Tags]              diagnostic-report    valid
 
-    ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    create-diagnosticReport.json 
+    ehr.create new ehr                      000_ehr_status.json
+    diagnostic.create diagnostic report     create-diagnosticReport.json 
     diagnostic.validate response - 201
 
 
 002 Create Diagnostic Report w/o Observation
-    [Documentation]     Trigger endpoint using invalid payload.
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-diagnosticReport-without-observation.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to diagnostic endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]              diagnostic-report    invalid
 
-    ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    create-diagnosticReport-without-observation.json 
+    ehr.create new ehr                      000_ehr_status.json
+    diagnostic.create diagnostic report     create-diagnosticReport-without-observation.json 
     diagnostic.validate response - 422 (missing observation)
 
 
 003 Create Diagnostic Report Using Default Profile
-    [Documentation]     Trigger endpoint using invalid payload.
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-diagnosticReport-with-default-profile.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to diagnostic endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]              diagnostic-report    invalid
 
-    ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    create-diagnosticReport-with-default-profile.json 
+    ehr.create new ehr                      000_ehr_status.json
+    diagnostic.create diagnostic report     create-diagnosticReport-with-default-profile.json 
     diagnostic.validate response - 422 (profile not supported)
 
 
 004 Create Diagnostic Report Using Unsupported Profile
-    [Documentation]     Trigger endpoint using invalid payload.
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-diagnosticReport-hls-genetics-result.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to diagnostic endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]              diagnostic-report    invalid
 
-    ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report    create-diagnosticReport-hls-genetics-result.json 
+    ehr.create new ehr                      000_ehr_status.json
+    diagnostic.create diagnostic report     create-diagnosticReport-hls-genetics-result.json 
     diagnostic.validate response - 422 (profile not supported)
 
 
 005 Create Diagnostic Report Radiology
-    [Documentation]     1. create EHR
-    ...                 2. create diagnosticreport radiology
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-radiology.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to diagnostic endpoint\n\n
+	...                 5. *VALIDATE* the response status
     [Tags]              diagnostic-report    radiology    valid   not-ready
 
-    ehr.create new ehr    000_ehr_status.json
-    diagnostic.create diagnostic report radiology    create-radiology.json 
+    ehr.create new ehr                      000_ehr_status.json
+    diagnostic.create diagnostic report radiology       create-radiology.json 
     diagnostic.validate response - 201
