@@ -52,14 +52,14 @@ Force Tags              create    body-temperature
 #    Observation 
 
 
-002 Create Body Temperature (invalid ressourceType)
+002 Create Body Temperature (invalid resourceType)
     [Documentation]    1. create new EHR Patient record
 	...                2. update values for different ressources (see table)
     ...                3. post example json to observation endpoint
 	...                4. validate the response status 
     ...                5. validate outcome against the array number and diagnostic text
 
-    [Tags]             invalid    ressourceType
+    [Tags]             invalid    resourceType
     [Template]         create Observation Body Temperature JSON
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                      diagnostics 						 									     |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                |                                         DE             |
