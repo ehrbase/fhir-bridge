@@ -21,8 +21,8 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
-Documentation           NOTE: The validation of error messages in the tables below depends on system language settings:
-...                           Validation of English messages (if the system language is set to English), 
+Documentation           *NOTE:* The validation of error messages in the tables below depends on system language settings:\n\n
+...                           Validation of English messages (if the system language is set to English), \n\n
 ...                           Validation of German messages (if the system language is set to German)
 
 Force Tags              create    body-temperature
@@ -35,14 +35,15 @@ Force Tags              create    body-temperature
 *** Test Cases ***
 
 001 Create Body Temperature (valid variants)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only valid values\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             valid
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                      diagnostics                                                                                  							                                                                        
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								        |                           DE                         |
     Observation    	        body-temperature  			true        http://hl7.org/fhir/StructureDefinition/bodytemp        final			true      	http://terminology.hl7.org/CodeSystem/v2-0203			OBI          		https://www.charite.de/fhir/CodeSystem/observation-identifiers        8310-5_BodyTemperature           true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        true			   true			  				http://loinc.org		  					8310-5          Body Temperature          	http://snomed.info/sct          	386725007    	    Body Temperature (observable entity)        Body Temperature       		true    		   valid			2020-02-25			true		  ${37.5}	     Cel	           http://unitsofmeasure.org    	   Cel			 false               201            0    		                            ${EMPTY}                                                            ${EMPTY}
@@ -53,14 +54,15 @@ Force Tags              create    body-temperature
 
 
 002 Create Body Temperature (invalid resourceType)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``resourceType`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    resourceType
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                      diagnostics 						 									     |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                |                                         DE             |
     qwert   	        body-temperature  				true        http://hl7.org/fhir/StructureDefinition/bodytemp        final			true      	http://terminology.hl7.org/CodeSystem/v2-0203			OBI          		https://www.charite.de/fhir/CodeSystem/observation-identifiers        8310-5_BodyTemperature           true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        	true			   true			  				http://loinc.org		  				8310-5          Body Temperature          	http://snomed.info/sct          	386725007    	    Body Temperature (observable entity)        Body Temperature       		true    		   valid				2020-02-25		true		${37.5}	     	Cel	           http://unitsofmeasure.org    	   		Cel			 false               422            0			This does not appear to be a FHIR resource                                    Dies scheint keine FHIR-Ressource zu sein
@@ -70,14 +72,15 @@ Force Tags              create    body-temperature
 
 
 003 Create Body Temperature (invalid ID)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``ID`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    ID
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                      |                      				category                           					        					|                                        									code          										                            	                                                                         					     		 |             subject                |	  DateTime	   	|                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					  |  		coding.code  	|  							     system  		   				   |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |       0.display       |  				1.system  				|  		1.code	  		|              1.display                  |     		 text  		   	 |  available  |   Identifier-value   |                	|  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               			ENG                                                           |                                           DE                                                            |
     Observation    	        ${EMPTY}  					true        http://hl7.org/fhir/StructureDefinition/bodytemp        final			true      	http://terminology.hl7.org/CodeSystem/v2-0203            OBI           		https://www.charite.de/fhir/CodeSystem/observation-identifiers      8310-5_BodyTemperature        true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        true			   true			  				http://loinc.org		  				8310-5         Body Temperature          	http://snomed.info/sct         		     386725007    	   Body Temperature (observable entity)        Body Temperature        		 true    		   valid      		  	2020-02-25		  true		   	${37.5}	     	Cel		       http://unitsofmeasure.org    	 	Cel			 false               422           0    	 	@value cannot be empty                                                                                                                               @value kann nicht leer sein
@@ -85,14 +88,15 @@ Force Tags              create    body-temperature
 
 
 004 Create Body Temperature (invalid meta/profile)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Meta`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    Meta    Profile
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                         DE                                                              |
 # no meta
@@ -106,14 +110,15 @@ Force Tags              create    body-temperature
 
 
 005 Create Body Temperature (invalid status)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Status`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    Status
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        							|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   		|    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                         DE                                                              |
     Observation    	        body-temperature  			true        http://hl7.org/fhir/StructureDefinition/bodytemp        test				true      	http://terminology.hl7.org/CodeSystem/v2-0203			OBI          		https://www.charite.de/fhir/CodeSystem/observation-identifiers        8310-5_BodyTemperature           true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        true			   true			  				http://loinc.org		  					8310-5          Body Temperature          	http://snomed.info/sct          	386725007    	    Body Temperature (observable entity)        Body Temperature       		true    		   valid			2020-02-25			true		  ${37.5}	     Cel	           http://unitsofmeasure.org    	   Cel			 false               400            0    		                        Unknown ObservationStatus code                                                                                                              					Unknown ObservationStatus code
@@ -123,14 +128,15 @@ Force Tags              create    body-temperature
 
 
 006 Create Body Temperature (invalid identifier)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Identifier`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    Identifier
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                         DE                                                              |
 # invalid Identifier Coding System
@@ -154,14 +160,15 @@ Force Tags              create    body-temperature
 
 
 007 Create Body Temperature (invalid category)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Category`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    Category
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                         DE                                                              |
 # no category
@@ -181,14 +188,15 @@ Force Tags              create    body-temperature
 
 
 008 Create Body Temperature (invalid code)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Code`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    Code
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                         DE                                                              |
 # no code
@@ -225,14 +233,15 @@ Force Tags              create    body-temperature
 
 
 009 Create Body Temperature (invalid subject)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Subject`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    Subject
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                         DE                                                              |
 # no subject
@@ -246,14 +255,15 @@ Force Tags              create    body-temperature
 
 
 010 Create Body Temperature (invalid DateTime)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``effectiveDateTime`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    DateTime
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                         DE                                                              |
     Observation    	    	body-temperature  				true        http://hl7.org/fhir/StructureDefinition/bodytemp        final			true      http://terminology.hl7.org/CodeSystem/v2-0203            OBI          https://www.charite.de/fhir/CodeSystem/observation-identifiers        8310-5_BodyTemperature              true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        true			   true			  				http://loinc.org		  				8310-5         Body Temperature          	http://snomed.info/sct         		     386725007    	   Body Temperature (observable entity)        Body Temperature        true    		 	valid      		  		202-02-25		      true		   ${37.5}	     Cel	       http://unitsofmeasure.org    	   		Cel			 false               422           1    	 is outside the range of reasonable years - check for data entry error                                                                                liegt außerhalb des Bereichs vernünftiger Jahre - Prüfung auf Dateneingabefehler
@@ -266,14 +276,15 @@ Force Tags              create    body-temperature
 
 
 011 Create Body Temperature (invalid valueQuantity)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``valueQuantity`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    valueQuantity
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                         DE                                                              |
 # no valueQuantity & no dataabsentreason
@@ -302,15 +313,16 @@ Force Tags              create    body-temperature
     Observation      	    body-temperature  				true        http://hl7.org/fhir/StructureDefinition/bodytemp        final			true      http://terminology.hl7.org/CodeSystem/v2-0203            OBI          https://www.charite.de/fhir/CodeSystem/observation-identifiers        8310-5_BodyTemperature              true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        true			   true			  				http://loinc.org		  				8310-5         Body Temperature          	http://snomed.info/sct         		     386725007    	   Body Temperature (observable entity)        Body Temperature        true    		 	valid      		  		2020-02-25		  	true		   ${37.5}	     Cel	       http://unitsofmeasure.org    	   		missing		 false               422           1    	 minimum required = 1, but only found 0                                                                                                               http://hl7.org/fhir/StructureDefinition/bodytemp: mindestens erforderlich = Observation.value
 
 
-012 Create Body Temperature (invalid dataabsentreason)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+012 Create Body Temperature (invalid DataAbsentReason)
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``DataAbsentReason`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    DataAbsentReason
     [Template]         create Observation Body Temperature JSON
+
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                         DE                                                              |
 # DataAbsentReason and  valueQuantity
@@ -320,14 +332,15 @@ Force Tags              create    body-temperature
 
 
 013 Create Body Temperature (invalid multi)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-body-temperature-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with multible invalid values \n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    multi
     [Template]         create Observation Body Temperature JSON
+    
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system						|  		coding.code  	|  							     system  		   				 	 |   		  value  		   |    assigner    |       reference          	|  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |        0.display         |  				1.system  		|  		1.code	     |                   1.display                |          text   		|   available  |   Identifier-value  	|                   |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                         DE                                                              |
 # all attributes invalid for valueQuantity
