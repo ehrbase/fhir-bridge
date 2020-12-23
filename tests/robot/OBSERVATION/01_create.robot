@@ -206,6 +206,7 @@ Force Tags              create
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create blood gas panel    create-blood-gas-panel.json
+	observation.validate response - 201
 
 
 017 Create Oxygen Saturation in Arterial Blood
