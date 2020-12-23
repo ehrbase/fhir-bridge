@@ -551,3 +551,113 @@ update Data Absent Reason
                         Run Keyword And Return If    $dataabsentreason=="false"
                         ...    Delete Object From Json  ${payload}  $.dataAbsentReason
 
+
+
+
+
+
+# coding for only coding [0] values
+update Code 0
+    [Arguments]         ${codeavailable}    ${codecodingavailable}    ${code0system}    ${code0code}    ${code0display}
+
+                        # Run Keyword only if code is available
+                        Run Keyword And Return If    $codeavailable=="true"
+                        ...    update Code Coding 0    ${codecodingavailable}    ${code0system}    ${code0code}    ${code0display}
+
+                        # Run Keyword only if code is not available
+                        Run Keyword And Return If    $codeavailable=="false"
+                        ...    Delete Object From Json  ${payload}  $.code
+
+update Code Coding 0
+    [Arguments]         ${codecodingavailable}    ${code0system}    ${code0code}    ${code0display}
+
+                        # Run Keyword only if Code-Coding is available
+                        Run Keyword And Return If    $codecodingavailable=="true"
+                        ...    Run Keywords
+                        ...    update Code 0 System             ${code0system}           AND
+                        ...    update Code 0 Code               ${code0code}             AND
+                        ...    update Code 0 Display            ${code0display}
+
+                        # Run Keyword only if Code-Coding is not available
+                        Run Keyword And Return If    $codecodingavailable=="false"
+                        ...    Delete Object From Json  ${payload}  $.code.coding
+
+
+
+
+
+
+
+
+
+# WORKSPACE!!!!
+
+update vCC
+    [Arguments]         ${vCCavailabe}    ${vCCCodingavailable}    ${vCC0System}    ${vCC0Code}    ${vCC0Display}
+
+                        # Run Keyword only if code is available
+                        Run Keyword And Return If    $vCCavailabe=="true"
+                        ...    update vCC Coding    ${vCCCodingavailable}    ${vCC0System}    ${vCC0Code}    ${vCC0Display}
+
+                        # Run Keyword only if code is not available
+                        Run Keyword And Return If    $vCCavailabe=="false"
+                        ...    Delete Object From Json  ${payload}  $.valueCodeableConcept
+
+update vCC Coding
+    [Arguments]         ${vCCCodingavailable}    ${vCC0System}    ${vCC0Code}    ${vCC0Display}
+
+                        # Run Keyword only if Code-Coding is available
+                        Run Keyword And Return If    $vCCCodingavailable=="true"
+                        ...    Run Keywords
+                        ...    update vCC 0 System             ${vCC0System}           AND
+                        ...    update vCC 0 Code               ${vCC0Code}             AND
+                        ...    update vCC 0 Display            ${vCC0Display}          
+
+                        # Run Keyword only if Code-Coding is not available
+                        Run Keyword And Return If    $vCCCodingavailable=="false"
+                        ...    Delete Object From Json  ${payload}  $.valueCodeableConcept.coding
+
+update vCC 0 System
+    [Arguments]         ${vCC0System}
+
+                        # Run Keyword only when vCC 0 System is empty
+                        Run Keyword And Return If    $vCC0System=="${EMPTY}"
+                        ...    Update Value To Json    ${payload}    $.valueCodeableConcept.coding[0].system    ${vCC0System}
+
+                        # Run Keyword only when vCC 0 System is missing
+                        Run Keyword And Return If    $vCC0System=="missing"
+                        ...    Delete Object From Json    ${payload}    $.valueCodeableConcept.coding[0].system
+
+                        # Else 
+                        Run Keyword  
+                        ...    Update Value To Json    ${payload}    $.valueCodeableConcept.coding[0].system    ${vCC0System}
+
+update vCC 0 Code
+    [Arguments]         ${vCC0Code}
+
+                        # Run Keyword only when 0.Code is empty
+                        Run Keyword And Return If    $vCC0Code=="${EMPTY}"
+                        ...    Update Value To Json    ${payload}    $.valueCodeableConcept.coding[0].code    ${vCC0Code}
+
+                        # Run Keyword only when 0.Code is missing
+                        Run Keyword And Return If    $vCC0Code=="missing"
+                        ...    Delete Object From Json    ${payload}    $.valueCodeableConcept.coding[0].code
+
+                        # Else 
+                        Run Keyword  
+                        ...    Update Value To Json    ${payload}    $.valueCodeableConcept.coding[0].code    ${vCC0Code}
+
+update vCC 0 Display
+    [Arguments]         ${vCC0Display}
+
+                        # Run Keyword only when 0.Display is empty
+                        Run Keyword And Return If    $vCC0Display=="${EMPTY}"
+                        ...    Update Value To Json    ${payload}    $.valueCodeableConcept.coding[0].display    ${vCC0Display}
+
+                        # Run Keyword only when 0.Display is missing
+                        Run Keyword And Return If    $vCC0Display=="missing"
+                        ...    Delete Object From Json    ${payload}    $.valueCodeableConcept.coding[0].display
+
+                        # Else 
+                        Run Keyword  
+                        ...    Update Value To Json    ${payload}    $.valueCodeableConcept.coding[0].display    ${vCC0Display}
