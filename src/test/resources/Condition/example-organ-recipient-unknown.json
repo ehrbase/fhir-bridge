@@ -3,7 +3,7 @@
   "id": "a217d162-b5b5-43e8-aa3b-c00b6eb9300f",
   "meta": {
     "profile": [
-      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/history-of-organ-recipient-unknown"
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/organ-recipient"
     ]
   },
   "modifierExtension": [
