@@ -29,7 +29,7 @@ public enum Profile {
     DIAGNOSE_MALIGNANT_NEOPLASTIC_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/malignant-neoplastic-disease"),
     DIAGNOSE_RHEUMATOLOGICAL_IMMUNOLOGICAL_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/rheumatological-immunological-diseases"),
     DIAGNOSE_CARDIOVASCULAR_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/cardiovascular-diseases"),
-    DIAGNOSE_CHRONIC_KIDNEY_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/complications-covid-19"),
+    DIAGNOSE_CHRONIC_KIDNEY_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-kidney-diseases"),
     DIAGNOSE_CHRONIC_NEUROLOGICAL_MENTAL_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-neurological-mental-diseases"),
     DIAGNOSE_GASTROINTESTINAL_ULCERS(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/gastrointestinal-ulcers"),
     DIAGNOSE_HIV(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/human-immunodeficiency-virus-infection"),
