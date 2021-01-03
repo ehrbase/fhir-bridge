@@ -34,6 +34,7 @@ public enum Profile {
     DIAGNOSE_GASTROINTESTINAL_ULCERS(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/gastrointestinal-ulcers"),
     DIAGNOSE_HIV(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/human-immunodeficiency-virus-infection"),
     DIAGNOSE_ORGAN_RECIPIENT(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/organ-recipient"),
+    DIAGNOSE_COMPLICATIONS_COVID_19(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/complications-covid-19"),
 
     // DiagnosticReport Profiles
 
