@@ -169,7 +169,7 @@
         <key value="unk-1" />
         <severity value="error" />
         <human value="If verificationStatus is present, uncertaintyOfPresence-Extension SHALL NOT be present." />
-        <expression value="verificationStatus.exists() != Condition.extension.where(url = 'https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence').exists()" />
+        <expression value="verificationStatus.exists() != Condition.modifierExtension.where(url = 'https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence').exists()" />
         <source value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/gecco-base-condition" />
       </constraint>
       <mapping>
@@ -3655,12 +3655,6 @@
       </mapping>
     </element>
     <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit.value[x]">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Condition.code.coding.extension.value[x]" />
       <short value="Value of extension" />
       <definition value="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list)." />
@@ -3689,28 +3683,28 @@
         <severity value="warning" />
         <human value="Wenn die Diagnosesicherheit &quot;A (Ausschluss)&quot; verwendet wird, dann muss clinicalStatus leer bleiben und verificationStaus auf &quot;refuted&quot; gesetzt werden." />
         <expression value="code!='A' or (%resource.verificationStatus.coding.where(code='refuted').exists() and %resource.clinicalStatus.empty())" />
-        <source value="Extension" />
+        <source value="http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit" />
       </constraint>
       <constraint>
         <key value="icd-5" />
         <severity value="warning" />
         <human value="Wenn die Diagnosesicherheit &quot;G (Gesichert)&quot; verwendet wird, dann muss clinicalStatus auf &quot;active&quot; und verificationStatus auf &quot;confirmed&quot; gesetzt werden." />
         <expression value="code!='G' or (%resource.clinicalStatus.coding.where(code='active').exists() and %resource.verificationStatus.coding.where(code='confirmed').exists())" />
-        <source value="Extension" />
+        <source value="http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit" />
       </constraint>
       <constraint>
         <key value="icd-6" />
         <severity value="warning" />
         <human value="Wenn die Diagnosesicherheit &quot;V (Verdacht auf)&quot; verwendet wird, dann muss clinicalStatus auf &quot;active&quot; und verificationStatus auf &quot;provisional&quot; oder &quot;differential&quot; gesetzt werden." />
         <expression value="code!='V' or (%resource.clinicalStatus.coding.where(code='active').exists() and (%resource.verificationStatus.coding.where(code='provisional').exists() or %resource.verificationStatus.coding.where(code='differential').exists()))" />
-        <source value="Extension" />
+        <source value="http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit" />
       </constraint>
       <constraint>
         <key value="icd-7" />
         <severity value="warning" />
         <human value="Wenn die Diagnosesicherheit &quot;Z (Zustand nach)&quot; verwendet wird, dann muss clinicalStatus auf &quot;resolved&quot; und verificationStatus auf &quot;confirmed&quot; gesetzt werden." />
         <expression value="code!='Z' or (%resource.clinicalStatus.coding.where(code='resolved').exists() and %resource.verificationStatus.coding.where(code='confirmed').exists())" />
-        <source value="Extension" />
+        <source value="http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit" />
       </constraint>
       <binding>
         <strength value="required" />
@@ -3958,7 +3952,6 @@
       <type>
         <code value="uri" />
       </type>
-      <patternUri value="http://fhir.de/CodeSystem/dimdi/icd-10-gm" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -5983,8 +5976,8 @@
       <constraint>
         <key value="mii-reference-1" />
         <severity value="error" />
-        <human value="Either reference.reference XOR reference.identifier exists" />
-        <expression value="$this.reference.exists() xor ($this.identifier.value.exists() and $this.identifier.system.exists()) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
+        <human value="Either reference.reference OR reference.identifier exists" />
+        <expression value="($this.reference.exists() or ($this.identifier.value.exists() and $this.identifier.system.exists())) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
         <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />
       </constraint>
       <mustSupport value="true" />

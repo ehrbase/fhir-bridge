@@ -3047,7 +3047,6 @@
       <type>
         <code value="uri" />
       </type>
-      <patternUri value="http://fhir.de/CodeSystem/dimdi/icd-10-gm" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -5073,8 +5072,8 @@
       <constraint>
         <key value="mii-reference-1" />
         <severity value="error" />
-        <human value="Either reference.reference XOR reference.identifier exists" />
-        <expression value="$this.reference.exists() xor ($this.identifier.value.exists() and $this.identifier.system.exists()) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
+        <human value="Either reference.reference OR reference.identifier exists" />
+        <expression value="($this.reference.exists() or ($this.identifier.value.exists() and $this.identifier.system.exists())) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
         <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />
       </constraint>
       <mustSupport value="true" />

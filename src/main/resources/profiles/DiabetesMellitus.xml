@@ -1,6 +1,6 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diabetes-mellitus" />
-  <version value="0.9" />
+  <version value="1.0" />
   <name value="DiabetesMellitus" />
   <title value="Diabetes Mellitus" />
   <status value="active" />
@@ -169,7 +169,7 @@
         <key value="unk-1" />
         <severity value="error" />
         <human value="If verificationStatus is present, uncertaintyOfPresence-Extension SHALL NOT be present." />
-        <expression value="verificationStatus.exists() != Condition.extension.where(url = 'https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence').exists()" />
+        <expression value="verificationStatus.exists() != Condition.modifierExtension.where(url = 'https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence').exists()" />
         <source value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/gecco-base-condition" />
       </constraint>
       <mapping>
@@ -3008,7 +3008,6 @@
       </type>
       <patternCoding>
         <system value="http://fhir.de/CodeSystem/dimdi/icd-10-gm" />
-        <code value="E14" />
       </patternCoding>
       <condition value="ele-1" />
       <constraint>
@@ -3185,191 +3184,6 @@
         <identity value="rim" />
         <map value="N/A" />
       </mapping>
-    </element>
-    <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit.id">
-      <path value="Condition.code.coding.extension.id" />
-      <representation value="xmlAttr" />
-      <short value="Unique id for inter-element referencing" />
-      <definition value="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces." />
-      <min value="0" />
-      <max value="1" />
-      <base>
-        <path value="Element.id" />
-        <min value="0" />
-        <max value="1" />
-      </base>
-      <type>
-        <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type">
-          <valueUrl value="string" />
-        </extension>
-        <code value="http://hl7.org/fhirpath/System.String" />
-      </type>
-      <mapping>
-        <identity value="rim" />
-        <map value="n/a" />
-      </mapping>
-    </element>
-    <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit.extension">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
-      <path value="Condition.code.coding.extension.extension" />
-      <slicing>
-        <discriminator>
-          <type value="value" />
-          <path value="url" />
-        </discriminator>
-        <description value="Extensions are always sliced by (at least) url" />
-        <rules value="open" />
-      </slicing>
-      <short value="Additional content defined by implementations" />
-      <definition value="May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension." />
-      <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
-      <alias value="extensions" />
-      <alias value="user content" />
-      <min value="0" />
-      <max value="*" />
-      <base>
-        <path value="Element.extension" />
-        <min value="0" />
-        <max value="*" />
-      </base>
-      <type>
-        <code value="Extension" />
-      </type>
-      <condition value="ele-1" />
-      <constraint>
-        <key value="ele-1" />
-        <severity value="error" />
-        <human value="All FHIR elements must have a @value or children" />
-        <expression value="hasValue() or (children().count() &gt; id.count())" />
-        <xpath value="@value|f:*|h:div" />
-        <source value="http://hl7.org/fhir/StructureDefinition/Element" />
-      </constraint>
-      <constraint>
-        <key value="ext-1" />
-        <severity value="error" />
-        <human value="Must have either extensions or value[x], not both" />
-        <expression value="extension.exists() != value.exists()" />
-        <xpath value="exists(f:extension)!=exists(f:*[starts-with(local-name(.), 'value')])" />
-        <source value="http://hl7.org/fhir/StructureDefinition/DomainResource" />
-      </constraint>
-      <mapping>
-        <identity value="rim" />
-        <map value="n/a" />
-      </mapping>
-      <mapping>
-        <identity value="rim" />
-        <map value="N/A" />
-      </mapping>
-    </element>
-    <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit.url">
-      <path value="Condition.code.coding.extension.url" />
-      <representation value="xmlAttr" />
-      <short value="identifies the meaning of the extension" />
-      <definition value="Source of the definition for the extension code - a logical name or a URL." />
-      <comment value="The definition may point directly to a computable or human-readable definition of the extensibility codes, or it may be a logical URI as declared in some other specification. The definition SHALL be a URI for the Structure Definition defining the extension." />
-      <min value="1" />
-      <max value="1" />
-      <base>
-        <path value="Extension.url" />
-        <min value="1" />
-        <max value="1" />
-      </base>
-      <type>
-        <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-fhir-type">
-          <valueUrl value="uri" />
-        </extension>
-        <code value="http://hl7.org/fhirpath/System.String" />
-      </type>
-      <fixedUri value="http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit" />
-      <mapping>
-        <identity value="rim" />
-        <map value="N/A" />
-      </mapping>
-    </element>
-    <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit.value[x]">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
-      <path value="Condition.code.coding.extension.value[x]" />
-      <short value="Value of extension" />
-      <definition value="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list)." />
-      <comment value="A stream of bytes, base64 encoded" />
-      <min value="1" />
-      <max value="1" />
-      <base>
-        <path value="Extension.value[x]" />
-        <min value="0" />
-        <max value="1" />
-      </base>
-      <type>
-        <code value="Coding" />
-      </type>
-      <condition value="ele-1" />
-      <constraint>
-        <key value="ele-1" />
-        <severity value="error" />
-        <human value="All FHIR elements must have a @value or children" />
-        <expression value="hasValue() or (children().count() &gt; id.count())" />
-        <xpath value="@value|f:*|h:div" />
-        <source value="http://hl7.org/fhir/StructureDefinition/Element" />
-      </constraint>
-      <constraint>
-        <key value="icd-4" />
-        <severity value="warning" />
-        <human value="Wenn die Diagnosesicherheit &quot;A (Ausschluss)&quot; verwendet wird, dann muss clinicalStatus leer bleiben und verificationStaus auf &quot;refuted&quot; gesetzt werden." />
-        <expression value="code!='A' or (%resource.verificationStatus.coding.where(code='refuted').exists() and %resource.clinicalStatus.empty())" />
-        <source value="Extension" />
-      </constraint>
-      <constraint>
-        <key value="icd-5" />
-        <severity value="warning" />
-        <human value="Wenn die Diagnosesicherheit &quot;G (Gesichert)&quot; verwendet wird, dann muss clinicalStatus auf &quot;active&quot; und verificationStatus auf &quot;confirmed&quot; gesetzt werden." />
-        <expression value="code!='G' or (%resource.clinicalStatus.coding.where(code='active').exists() and %resource.verificationStatus.coding.where(code='confirmed').exists())" />
-        <source value="Extension" />
-      </constraint>
-      <constraint>
-        <key value="icd-6" />
-        <severity value="warning" />
-        <human value="Wenn die Diagnosesicherheit &quot;V (Verdacht auf)&quot; verwendet wird, dann muss clinicalStatus auf &quot;active&quot; und verificationStatus auf &quot;provisional&quot; oder &quot;differential&quot; gesetzt werden." />
-        <expression value="code!='V' or (%resource.clinicalStatus.coding.where(code='active').exists() and (%resource.verificationStatus.coding.where(code='provisional').exists() or %resource.verificationStatus.coding.where(code='differential').exists()))" />
-        <source value="Extension" />
-      </constraint>
-      <constraint>
-        <key value="icd-7" />
-        <severity value="warning" />
-        <human value="Wenn die Diagnosesicherheit &quot;Z (Zustand nach)&quot; verwendet wird, dann muss clinicalStatus auf &quot;resolved&quot; und verificationStatus auf &quot;confirmed&quot; gesetzt werden." />
-        <expression value="code!='Z' or (%resource.clinicalStatus.coding.where(code='resolved').exists() and %resource.verificationStatus.coding.where(code='confirmed').exists())" />
-        <source value="Extension" />
-      </constraint>
-      <binding>
-        <strength value="required" />
-        <valueSet value="https://fhir.kbv.de/ValueSet/KBV_VS_SFHIR_ICD_DIAGNOSESICHERHEIT" />
-      </binding>
-      <mapping>
-        <identity value="rim" />
-        <map value="n/a" />
-      </mapping>
-      <mapping>
-        <identity value="rim" />
-        <map value="N/A" />
-      </mapping>
-    </element>
-    <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit.display">
-      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
-        <valueBoolean value="true" />
-      </extension>
-      <path value="Condition.code.coding.extension.display" />
-      <base>
-        <path value="Condition.code.coding.extension.display" />
-      </base>
     </element>
     <element id="Condition.code.coding:icd10-gm.extension:Seitenlokalisation">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
@@ -3595,7 +3409,6 @@
       <type>
         <code value="uri" />
       </type>
-      <patternUri value="http://fhir.de/CodeSystem/dimdi/icd-10-gm" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -3683,7 +3496,6 @@
       <type>
         <code value="code" />
       </type>
-      <patternCode value="E14" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -4195,7 +4007,6 @@
       </type>
       <patternCoding>
         <system value="http://snomed.info/sct" />
-        <code value="73211009" />
       </patternCoding>
       <condition value="ele-1" />
       <constraint>
@@ -4210,6 +4021,7 @@
       <isSummary value="true" />
       <binding>
         <strength value="required" />
+        <description value="Diabetes mellitus codes" />
         <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/diabetes-mellitus-diseases" />
       </binding>
       <mapping>
@@ -4423,7 +4235,6 @@
       <type>
         <code value="code" />
       </type>
-      <patternCode value="73211009" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -5623,8 +5434,8 @@
       <constraint>
         <key value="mii-reference-1" />
         <severity value="error" />
-        <human value="Either reference.reference XOR reference.identifier exists" />
-        <expression value="$this.reference.exists() xor ($this.identifier.value.exists() and $this.identifier.system.exists()) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
+        <human value="Either reference.reference OR reference.identifier exists" />
+        <expression value="($this.reference.exists() or ($this.identifier.value.exists() and $this.identifier.system.exists())) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
         <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />
       </constraint>
       <mustSupport value="true" />
@@ -7546,56 +7357,19 @@
     <element id="Condition.code.coding:icd10-gm">
       <path value="Condition.code.coding" />
       <sliceName value="icd10-gm" />
-      <patternCoding>
-        <code value="E14" />
-      </patternCoding>
       <binding>
         <strength value="required" />
         <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/diabetes-mellitus-diseases-icd" />
       </binding>
     </element>
-    <element id="Condition.code.coding:icd10-gm.extension">
-      <path value="Condition.code.coding.extension" />
-      <slicing>
-        <discriminator>
-          <type value="value" />
-          <path value="url" />
-        </discriminator>
-        <rules value="open" />
-      </slicing>
-    </element>
-    <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit">
-      <path value="Condition.code.coding.extension" />
-      <sliceName value="Diagnosesicherheit" />
-    </element>
-    <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit.url">
-      <path value="Condition.code.coding.extension.url" />
-      <fixedUri value="http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit" />
-    </element>
-    <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit.display">
-      <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
-        <valueBoolean value="true" />
-      </extension>
-      <path value="Condition.code.coding.extension.display" />
-    </element>
-    <element id="Condition.code.coding:icd10-gm.code">
-      <path value="Condition.code.coding.code" />
-      <patternCode value="E14" />
-    </element>
     <element id="Condition.code.coding:sct">
       <path value="Condition.code.coding" />
       <sliceName value="sct" />
-      <patternCoding>
-        <code value="73211009" />
-      </patternCoding>
       <binding>
         <strength value="required" />
+        <description value="Diabetes mellitus codes" />
         <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/diabetes-mellitus-diseases" />
       </binding>
-    </element>
-    <element id="Condition.code.coding:sct.code">
-      <path value="Condition.code.coding.code" />
-      <patternCode value="73211009" />
     </element>
     <element id="Condition.code.coding:orphanet">
       <path value="Condition.code.coding" />
