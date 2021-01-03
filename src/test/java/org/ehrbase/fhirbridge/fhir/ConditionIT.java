@@ -113,10 +113,10 @@ class ConditionIT extends AbstractSetupIT {
     @Test
     void createDiagnoseChronicKidneyDisease() throws IOException {
         create("Condition/example-chronic-kidney-diseases1.json");
-        create("Condition/example-chronic-kidney-diseases2.json");
+        /*create("Condition/example-chronic-kidney-diseases2.json");
         create("Condition/example-chronic-kidney-diseases3.json");
         create("Condition/example-chronic-kidney-diseases4.json");
-        create("Condition/example-chronic-kidney-diseases5.json");
+        create("Condition/example-chronic-kidney-diseases5.json");*/
 
     }
 
