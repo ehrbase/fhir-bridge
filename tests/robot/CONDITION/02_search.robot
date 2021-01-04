@@ -1,4 +1,5 @@
-# Copyright (c) 2020 P. Wohlfarth (Appsfactory), Wladislaw Wagner (Vitasystems GmbH)
+# Copyright (c) 2020 Peter Wohlfarth (Appsfactory GmbH), Wladislaw Wagner (Vitasystems GmbH),
+# Dave Petzold (Appsfactory GmbH) & Pauline Schulz (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -31,7 +32,12 @@ Force Tags              search
 
 *** Test Cases ***
 001 Search Diagnose Condition
-    [Documentation]     Search Diagnose Condition
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-condition-default.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *GET* ``${BASE_URL}/Condition?subject.identifier=${subject_id}`` \n\n
+    ...                 6. *VALIDATE* response status against 200
     [Tags]              diagnose-condition    valid
 
     condition.create diagnose condition    create-condition-default.json

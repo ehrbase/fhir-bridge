@@ -1,5 +1,5 @@
-# Copyright (c) 2020 Wladislaw Wagner (Vitasystems GmbH), Peter Wohlfarth (Appsfactory GmbH),
-# Dave Petzold (Appsfactory GmbH)
+# Copyright (c) 2020 Peter Wohlfarth (Appsfactory GmbH), Wladislaw Wagner (Vitasystems GmbH),
+# Dave Petzold (Appsfactory GmbH) & Pauline Schulz (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -34,7 +34,11 @@ Force Tags              create
 
 *** Test Cases ***
 001 Create Questionnaire Response
-    [Documentation]     1. trigger QuestionaireResponse endpoint
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-covapp-response.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to questionnaire endpoint\n\n
+	...                 5. *VALIDATE* the response status
     [Tags]              questionnaire-response    valid
 
 
