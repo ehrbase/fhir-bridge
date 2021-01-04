@@ -128,7 +128,7 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              meta    not-ready
+    [Tags]              meta
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
@@ -147,36 +147,7 @@ ${randinteger}                  ${12345}
 	$.meta.profile					${{ {} }}						422    	This property must be an Array, not a an object
 
 
-005 Create Sofa Score (Invalid/Missing 'identifier')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
-    ...                 5. *POST* example JSON to observation endpoint\n\n
-	...                 6. *VALIDATE* the response status \n\n
-    ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create sofa score with ehr reference
-    [Tags]              identifier    not-ready
-
-	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
-	# 																CODE
-	$.identifier					${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.identifier
-	$.identifier					${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.identifier
-	$.identifier					${{ {} }}						422    	This property must be an Array, not an Object																	Observation.identifier
-	$.identifier					${{ [{}] }}						422    	Object must have some content																					Observation.identifier.0.
-
-	# invalid system
-	$.identifier[0].system			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..system				
-	$.identifier[0].system			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..system
-	$.identifier[0].system			${randstring}				 	422	   	Identifier.system must be an absolute reference, not a local reference											Observation.identifier.0.
-
-	# invalid value
-	$.identifier[0].value			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..value				
-	$.identifier[0].value			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..value
-	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''urn:ietf:rfc:3986'', then the identifier.value must be a full URI						Observation.identifier.0.
-
-
-006 Create Sofa Score (Invalid/Missing 'Status')
+005 Create Sofa Score (Invalid/Missing 'Status')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -185,7 +156,7 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]		    create sofa score with ehr reference
-    [Tags]          	status    not-ready
+    [Tags]          	status
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -195,7 +166,7 @@ ${randinteger}                  ${12345}
 	$.status						${randstring}					400		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
 
 
-007 Create Sofa Score (Invalid/Missing 'category')
+006 Create Sofa Score (Invalid/Missing 'category')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -204,13 +175,13 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
 	# invalid category
-#	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${sofa_score-url}
+	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${sofa_score-url}
 	$.category								${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.category
 	$.category								${{ {} }}				422    	This property must be an Array, not an Object																Observation.category
 	$.category								${{ [{}] }}				422    	Object must have some content																				Observation.category
@@ -220,20 +191,20 @@ ${randinteger}                  ${12345}
 	$.category[0].coding    				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.category.0..coding
 	
 	#invalid code 0
-#	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${sofa_score-url}
+	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        Observation.category.0..coding.0.
 	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
-#	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${sofa_score-url}					Observation.category.0.
+	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${sofa_score-url}					    Observation.category.0.
 	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
 	
 	# invaild system 0
-#	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
+	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
 	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
-#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${sofa_score-url}					Observation.category[0]
+	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${sofa_score-url}					    Observation.category.0..coding.0.
 
 
-008 Create Sofa Score (Invalid/Missing 'code')
+007 Create Sofa Score (Invalid/Missing 'code')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -275,7 +246,7 @@ ${randinteger}                  ${12345}
 	$.code.coding[0].display				${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..display
 
 
-009 Create Sofa Score (Invalid/Missing 'effectiveDateTime')
+008 Create Sofa Score (Invalid/Missing 'effectiveDateTime')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -319,7 +290,7 @@ ${randinteger}                  ${12345}
 	$.effectiveDateTime						${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.effective.x.
 
 
-010 Create Sofa Score (Invalid/Missing 'valueCodeableConcept')
+009 Create Sofa Score (Invalid/Missing 'component')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -369,7 +340,7 @@ ${randinteger}                  ${12345}
 	$.valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..text
 
 
-011 Create Sofa Score (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
+010 Create Sofa Score (Invalid 'DataAbsentReason' AND 'component')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -386,7 +357,7 @@ ${randinteger}                  ${12345}
 
 
 
-012 Create Sofa Score (Invalid/Missing 'DataAbsentReason')
+011 Create Sofa Score (Invalid/Missing 'DataAbsentReason')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -433,7 +404,7 @@ ${randinteger}                  ${12345}
 	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
 
 
-013 Create Sofa Score (invalid multi)
+012 Create Sofa Score (invalid multi)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* values for attributes \n\n
