@@ -1,5 +1,6 @@
 {
   "resourceType": "Observation",
+  "id": "sofa-score",
   "status": "final",
   "meta": {
     "profile": [
