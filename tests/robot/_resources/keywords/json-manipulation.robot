@@ -133,6 +133,19 @@ update Identifier
                         Run Keyword And Return If    $Identifieravailable=="false"
                         ...    Delete Object From Json  ${payload}  $.identifier
 
+update Identifier with system and value
+    [Arguments]         ${Identifieravailable}    ${Identifiersystem}    ${Identifiervalue}
+
+                        # Run Keywords only if identifier is available
+                        Run Keyword And Return If    $Identifieravailable=="true"
+                        ...    Run Keywords
+                        ...    update Identifier system           ${Identifiersystem}           AND
+                        ...    update Identifier value            ${Identifiervalue}
+
+                        # Run Keyword only if Identifier is not available
+                        Run Keyword And Return If    $Identifieravailable=="false"
+                        ...    Delete Object From Json  ${payload}  $.identifier
+
 update Identifier coding system
     [Arguments]         ${Identifiercodingsystem}
 
