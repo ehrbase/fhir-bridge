@@ -21,8 +21,8 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
-Documentation           NOTE: The validation of error messages in the tables below depends on system language settings:
-...                           Validation of English messages (if the system language is set to English), 
+Documentation           *NOTE:* The validation of error messages in the tables below depends on system language settings:\n\n
+...                           Validation of English messages (if the system language is set to English), \n\n
 ...                           Validation of German messages (if the system language is set to German)
 
 Force Tags              create    heart-rate
@@ -36,14 +36,15 @@ Force Tags              create    heart-rate
 *** Test Cases ***
 
 001 Create Heart Rate (valid variants)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only valid values\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             valid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
     Observation    	        heart-rate  				true        http://hl7.org/fhir/StructureDefinition/heartrate        final			true      http://terminology.hl7.org/CodeSystem/v2-0203            Dave          https://www.charite.de/fhir/CodeSystem/observation-identifiers        8867-4_HeartRate              true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        true			   true			  				http://loinc.org		  				8867-4         Heart rate          	http://snomed.info/sct         		   abcd    	       Heart rate (observable entity)        Heart rate        true    		   valid      	      2020-02-25		  true		  ${88.8}	     pro Minute	       http://unitsofmeasure.org    	   /min			 false               201           0    		                            ${EMPTY}                                                                                                               ${EMPTY}
@@ -54,14 +55,15 @@ Force Tags              create    heart-rate
 
 
 002 Create Heart Rate (invalid resourceType)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json_\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``resourceType`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             resourceType    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
     abcd         	        heart-rate  				true        http://hl7.org/fhir/StructureDefinition/heartrate        final			true      http://terminology.hl7.org/CodeSystem/v2-0203            test          https://www.charite.de/fhir/CodeSystem/observation-identifiers        abcd          	             true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        true			   true			  				http://loinc.org		  				8867-4         Heart rate          	http://snomed.info/sct         			 abcd    	   Heart rate (observable entity)        Heart rate        true    		   valid      		  2020-02-25		  true		  ${88.8}	     test	          http://unitsofmeasure.org    	       /min			 false               422           0    	 This does not appear to be a FHIR resource                                                                                                           Dies scheint keine FHIR-Ressource zu sein
@@ -71,14 +73,15 @@ Force Tags              create    heart-rate
 
 
 003 Create Heart Rate (invalid ID)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``ID`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             ID    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
     Observation    	        ${EMPTY}  					true        http://hl7.org/fhir/StructureDefinition/heartrate        final			true      http://terminology.hl7.org/CodeSystem/v2-0203            Dave          https://www.charite.de/fhir/CodeSystem/observation-identifiers        8867-4_HeartRate              true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        true			   true			  				http://loinc.org		  				8867-4         Heart rate          	http://snomed.info/sct         		     abcd    	   Heart rate (observable entity)        Heart rate        true    		   valid      		  2020-02-25		  true		   ${88.8}	     pro Minute	       http://unitsofmeasure.org    	   /min			 false               422           0    	 @value cannot be empty                                                                                                                               @value kann nicht leer sein
@@ -86,14 +89,15 @@ Force Tags              create    heart-rate
 
 
 004 Create Heart Rate (invalid Meta/Profile)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Meta`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             Meta    Profile    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
 # no meta
@@ -107,14 +111,15 @@ Force Tags              create    heart-rate
 
 
 005 Create Heart Rate (invalid Status)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Status`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             Status    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
     Observation    	    	heart-rate  				true        http://hl7.org/fhir/StructureDefinition/heartrate        todo			true      http://terminology.hl7.org/CodeSystem/v2-0203            Dave          https://www.charite.de/fhir/CodeSystem/observation-identifiers        8867-4_HeartRate              true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        true			   true			  				http://loinc.org		  				8867-4         Heart rate          	http://snomed.info/sct         		     abcd    	   Heart rate (observable entity)        Heart rate        true    		 	valid      		  2020-02-25		  true		   ${88.8}	     pro Minute	       http://unitsofmeasure.org    	   /min			 false               400           0    	 Unknown ObservationStatus code                                                                                                                       Unknown ObservationStatus code
@@ -124,14 +129,15 @@ Force Tags              create    heart-rate
 
 
 006 Create Heart Rate (invalid Identifier)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Identifier`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             Identifier    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
 # invalid Identifier Coding System
@@ -155,14 +161,15 @@ Force Tags              create    heart-rate
 
 
 007 Create Heart Rate (invalid Category)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Categroy`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             Category    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
 # no category
@@ -182,14 +189,15 @@ Force Tags              create    heart-rate
 
 
 008 Create Heart Rate (invalid Code)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Code`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             Code    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
 # no code
@@ -226,14 +234,15 @@ Force Tags              create    heart-rate
 
 
 009 Create Heart Rate (invalid Subject)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``Subject`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             Subject    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
 # no subject
@@ -247,14 +256,15 @@ Force Tags              create    heart-rate
 
 
 010 Create Heart Rate (invalid DateTime)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``DateTime`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             DateTime    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
     Observation    	    	heart-rate  				true        http://hl7.org/fhir/StructureDefinition/heartrate        final			true      http://terminology.hl7.org/CodeSystem/v2-0203            Dave          https://www.charite.de/fhir/CodeSystem/observation-identifiers        8867-4_HeartRate              true          Organization/Charité        true             true           http://terminology.hl7.org/CodeSystem/observation-category         vital-signs        true			   true			  				http://loinc.org		  				8867-4         Heart rate          	http://snomed.info/sct         		     abcd    	   Heart rate (observable entity)        Heart rate        true    		 	valid      		  202-02-25		      true		   ${88.8}	     pro Minute	       http://unitsofmeasure.org    	   /min			 false               422           1    	 is outside the range of reasonable years - check for data entry error                                                                                liegt außerhalb des Bereichs vernünftiger Jahre - Prüfung auf Dateneingabefehler
@@ -267,14 +277,15 @@ Force Tags              create    heart-rate
 
 
 011 Create Heart Rate (invalid valueQuantity)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``valueQuantity`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             valueQuantity    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
 # no valueQuantity & no dataabsentreason
@@ -303,14 +314,15 @@ Force Tags              create    heart-rate
 
 
 012 Create Heart Rate (invalid DataAbsentReason)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with only ``DataAbsentReason`` invalid\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             DataAbsentReason    invalid
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
 # DataAbsentReason and  valueQuantity
@@ -320,14 +332,15 @@ Force Tags              create    heart-rate
 
 
 013 Create Heart Rate (invalid multi)
-    [Documentation]    1. create new EHR Patient record
-	...                2. update values for different ressources (see table)
-    ...                3. post example json to observation endpoint
-	...                4. validate the response status 
-    ...                5. validate outcome against the array number and diagnostic text
-
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _observation-example-heart-rate-robot.json _\n\n
+	...                 3. *UPDATE* values for all attributes from the table with multible invalid values \n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
     [Tags]             invalid    multi
     [Template]         create Observation Heart Rate JSON
+
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
 #|                 |                				|  available  | 			profile  								|          		|  available  |  			coding.system					|  		coding.code  	|  							     system  		   				  |   		  value  		   |    assigner    |       reference         |  available  |  codingavailable  |  				system  									   |    	 code       |  available  |  coding available  |  					0.system	  				|  		0.code	  |    0.display    |  				1.system  				|  		1.code	  |              1.display              |      text      |  available  |   Identifier-value   |                |  available  |		value	|    unit    	 |  			system      		   |    code    |                    |           |              |               				ENG								                                                                                      |                                           DE                                                            |
 # all attributes invalid for valueQuantity
