@@ -721,6 +721,18 @@ ${randinteger}                  ${12345}
     Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	         true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
 
 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# BUG TRACE
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
+	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
+	[Template]			create pregnancy status with ehr reference
+    [Tags]              category    not-ready
+
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 *** Keywords ***
 
 # oooo    oooo oooooooooooo oooooo   oooo oooooo   oooooo     oooo   .oooooo.   ooooooooo.   oooooooooo.    .oooooo..o
