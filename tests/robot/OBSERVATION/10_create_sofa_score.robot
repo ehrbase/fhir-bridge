@@ -30,6 +30,7 @@ Force Tags              create    sofa-score    invalid
 
 *** Variables ***
 ${sofa_score-url}			    https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score
+${sofa_score-url2}				https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score
 ${randstring}                   foobar
 ${randinteger}                  ${12345}
 
@@ -404,30 +405,52 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept
+
+	# FIELD/PATH								                VALUE					HTTP	ERROR MESSAGE																								                                Location
+	# 																	                CODE
 
     #invalid component 0 code coding system
-
+#	$.component[0].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.0..code.coding.0.
+	$.component[0].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.0..code.coding.0..system
+#	$.component[0].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
+	$.component[0].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.0..code.coding.0.
+	$.component[0].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.0..code.coding.0..system
 
     #invalid component 0 code coding code
-
+#	$.component[0].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
+	$.component[0].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.0..code.coding.0..code
+#	$.component[0].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.0..code.coding.0.
+	$.component[0].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.0..code.coding.0..code
 
     #invalid component 0 code coding display
-
+    $.component[0].code.coding[0].display						${EMPTY}				422    	@value cannot be empty																													Observation.component.0..code.coding.0..display
+	$.component[0].code.coding[0].display						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.0..code.coding.0..display
 
     #invalid component 0 code text
-
+	$.component[0].code.text									${EMPTY}				422    	@value cannot be empty																													Observation.component.0..code.text
+	$.component[0].code.text									${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.0..code.text
 
     #invalid component 0 valueCodableConcept coding system
-
+	$.component[0].valueCodeableConcept.coding[0].system 		missing					422    	Missing element 'system' - required by fixed value assigned in profile ${sofa_score-url}												Observation.component.0..value.ofType.CodeableConcept..coding.0..system
+	$.component[0].valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																													Observation.component.0..value.ofType.CodeableConcept..coding.0..system
+	$.component[0].valueCodeableConcept.coding[0].system		http://foobar.de		422    	Value is 'http://foobar.de' but must be '${sofa_score-url2}'                   															Observation.component.0..value.ofType.CodeableConcept..coding.0..system
+	$.component[0].valueCodeableConcept.coding[0].system		${randstring}			422    	Value is '${randstring}' but must be '${sofa_score-url2}'																				Observation.component.0..value.ofType.CodeableConcept..coding.0..system
+	$.component[0].valueCodeableConcept.coding[0].system		${randinteger}			422    	Value is '${randinteger}' but must be '${sofa_score-url2}'																				Observation.component.0..value.ofType.CodeableConcept..coding.0..system
 
     #invalid component 0 valueCodableConcept coding code
-
+	$.component[0].valueCodeableConcept.coding[0].code			missing					422    	Observation.component:respiratorySystem.value.x..coding.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.          	Observation.component.0..value.ofType.CodeableConcept..coding.0.
+	$.component[0].valueCodeableConcept.coding[0].code			${EMPTY}				422    	@value cannot be empty																													Observation.component.0..value.ofType.CodeableConcept..coding.0..code
+#	$.component[0].valueCodeableConcept.coding[0].code			${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.0..value.ofType.CodeableConcept..coding.0.
+	$.component[0].valueCodeableConcept.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.0..value.x..coding.0..code
 
     #invalid component 0 valueCodableConcept coding display
-
+	$.component[0].valueCodeableConcept.coding[0].display		${EMPTY}				422    	@value cannot be empty																													Observation.component.0..value.ofType.CodeableConcept..coding.0..display
+	$.component[0].valueCodeableConcept.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.0..value.x..coding.0..display
 
     #invalid component 0 valueCodableConcept text
+	$.component[0].valueCodeableConcept.text					${EMPTY}				422    	@value cannot be empty																													Observation.component.0..value.ofType.CodeableConcept..text
+	$.component[0].valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.0..value.x..text
 
 
 011 Create Sofa Score (Invalid/Missing 'component' for Array value 1)
@@ -439,30 +462,52 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept
+
+	# FIELD/PATH								                VALUE					HTTP	ERROR MESSAGE																								                                Location
+	# 																	                CODE
 
     #invalid component 1 code coding system
-
+#	$.component[1].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.1..code.coding.0.
+	$.component[1].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.1..code.coding.0..system
+#	$.component[1].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
+	$.component[1].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.1..code.coding.0.
+	$.component[1].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.1..code.coding.0..system
 
     #invalid component 1 code coding code
-
+#	$.component[1].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
+	$.component[1].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.1..code.coding.0..code
+#	$.component[1].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.1..code.coding.0.
+	$.component[1].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.1..code.coding.0..code
 
     #invalid component 1 code coding display
-
+    $.component[1].code.coding[0].display						${EMPTY}				422    	@value cannot be empty																													Observation.component.1..code.coding.0..display
+	$.component[1].code.coding[0].display						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.1..code.coding.0..display
 
     #invalid component 1 code text
-
+	$.component[1].code.text									${EMPTY}				422    	@value cannot be empty																													Observation.component.1..code.text
+	$.component[1].code.text									${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.1..code.text
 
     #invalid component 1 valueCodableConcept coding system
-
+	$.component[1].valueCodeableConcept.coding[0].system 		missing					422    	Missing element 'system' - required by fixed value assigned in profile ${sofa_score-url}												Observation.component.1..value.ofType.CodeableConcept..coding.0..system
+	$.component[1].valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																													Observation.component.1..value.ofType.CodeableConcept..coding.0..system
+	$.component[1].valueCodeableConcept.coding[0].system		http://foobar.de		422    	Value is 'http://foobar.de' but must be '${sofa_score-url2}'                   															Observation.component.1..value.ofType.CodeableConcept..coding.0..system
+	$.component[1].valueCodeableConcept.coding[0].system		${randstring}			422    	Value is '${randstring}' but must be '${sofa_score-url2}'																				Observation.component.1..value.ofType.CodeableConcept..coding.0..system
+	$.component[1].valueCodeableConcept.coding[0].system		${randinteger}			422    	Value is '${randinteger}' but must be '${sofa_score-url2}'																				Observation.component.1..value.ofType.CodeableConcept..coding.0..system
 
     #invalid component 1 valueCodableConcept coding code
-
+	$.component[1].valueCodeableConcept.coding[0].code			missing					422    	Observation.component:nervousSystem.value.x..coding.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.          		Observation.component.1..value.ofType.CodeableConcept..coding.0.
+	$.component[1].valueCodeableConcept.coding[0].code			${EMPTY}				422    	@value cannot be empty																													Observation.component.1..value.ofType.CodeableConcept..coding.0..code
+#	$.component[1].valueCodeableConcept.coding[0].code			${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.1..value.ofType.CodeableConcept..coding.0.
+	$.component[1].valueCodeableConcept.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.1..value.x..coding.0..code
 
     #invalid component 1 valueCodableConcept coding display
-
+	$.component[1].valueCodeableConcept.coding[0].display		${EMPTY}				422    	@value cannot be empty																													Observation.component.1..value.ofType.CodeableConcept..coding.0..display
+	$.component[1].valueCodeableConcept.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.1..value.x..coding.0..display
 
     #invalid component 1 valueCodableConcept text
+	$.component[1].valueCodeableConcept.text					${EMPTY}				422    	@value cannot be empty																													Observation.component.1..value.ofType.CodeableConcept..text
+	$.component[1].valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.1..value.x..text
 
 
 012 Create Sofa Score (Invalid/Missing 'component' for Array value 2)
@@ -474,30 +519,52 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept
+
+	# FIELD/PATH								                VALUE					HTTP	ERROR MESSAGE																								                                Location
+	# 																	                CODE
 
     #invalid component 2 code coding system
-
+#	$.component[2].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.2..code.coding.0.
+	$.component[2].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.2..code.coding.0..system
+#	$.component[2].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
+	$.component[2].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.2..code.coding.0.
+	$.component[2].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.2..code.coding.0..system
 
     #invalid component 2 code coding code
-
+#	$.component[2].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
+	$.component[2].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.2..code.coding.0..code
+#	$.component[2].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.2..code.coding.0.
+	$.component[2].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.2..code.coding.0..code
 
     #invalid component 2 code coding display
-
+    $.component[2].code.coding[0].display						${EMPTY}				422    	@value cannot be empty																													Observation.component.2..code.coding.0..display
+	$.component[2].code.coding[0].display						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.2..code.coding.0..display
 
     #invalid component 2 code text
-
+	$.component[2].code.text									${EMPTY}				422    	@value cannot be empty																													Observation.component.2..code.text
+	$.component[2].code.text									${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.2..code.text
 
     #invalid component 2 valueCodableConcept coding system
-
+	$.component[2].valueCodeableConcept.coding[0].system 		missing					422    	Missing element 'system' - required by fixed value assigned in profile ${sofa_score-url}												Observation.component.2..value.ofType.CodeableConcept..coding.0..system
+	$.component[2].valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																													Observation.component.2..value.ofType.CodeableConcept..coding.0..system
+	$.component[2].valueCodeableConcept.coding[0].system		http://foobar.de		422    	Value is 'http://foobar.de' but must be '${sofa_score-url2}'                   															Observation.component.2..value.ofType.CodeableConcept..coding.0..system
+	$.component[2].valueCodeableConcept.coding[0].system		${randstring}			422    	Value is '${randstring}' but must be '${sofa_score-url2}'																				Observation.component.2..value.ofType.CodeableConcept..coding.0..system
+	$.component[2].valueCodeableConcept.coding[0].system		${randinteger}			422    	Value is '${randinteger}' but must be '${sofa_score-url2}'																				Observation.component.2..value.ofType.CodeableConcept..coding.0..system
 
     #invalid component 2 valueCodableConcept coding code
-
+	$.component[2].valueCodeableConcept.coding[0].code			missing					422    	Observation.component:cardiovascularSystem.value.x..coding.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.        Observation.component.2..value.ofType.CodeableConcept..coding.0.
+	$.component[2].valueCodeableConcept.coding[0].code			${EMPTY}				422    	@value cannot be empty																													Observation.component.2..value.ofType.CodeableConcept..coding.0..code
+#	$.component[2].valueCodeableConcept.coding[0].code			${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.2..value.ofType.CodeableConcept..coding.0.
+	$.component[2].valueCodeableConcept.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.2..value.x..coding.0..code
 
     #invalid component 2 valueCodableConcept coding display
-
+	$.component[2].valueCodeableConcept.coding[0].display		${EMPTY}				422    	@value cannot be empty																													Observation.component.2..value.ofType.CodeableConcept..coding.0..display
+	$.component[2].valueCodeableConcept.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.2..value.x..coding.0..display
 
     #invalid component 2 valueCodableConcept text
+	$.component[2].valueCodeableConcept.text					${EMPTY}				422    	@value cannot be empty																													Observation.component.2..value.ofType.CodeableConcept..text
+	$.component[2].valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.2..value.x..text
 
 
 013 Create Sofa Score (Invalid/Missing 'component' for Array value 3)
@@ -509,33 +576,55 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept
+
+	# FIELD/PATH								                VALUE					HTTP	ERROR MESSAGE																								                                Location
+	# 																	                CODE
 
     #invalid component 3 code coding system
-
+#	$.component[3].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.3..code.coding.0.
+	$.component[3].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.3..code.coding.0..system
+#	$.component[3].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
+	$.component[3].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.3..code.coding.0.
+	$.component[3].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.3..code.coding.0..system
 
     #invalid component 3 code coding code
-
+#	$.component[3].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
+	$.component[3].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.3..code.coding.0..code
+#	$.component[3].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.3..code.coding.0.
+	$.component[3].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.3..code.coding.0..code
 
     #invalid component 3 code coding display
-
+    $.component[3].code.coding[0].display						${EMPTY}				422    	@value cannot be empty																													Observation.component.3..code.coding.0..display
+	$.component[3].code.coding[0].display						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.3..code.coding.0..display
 
     #invalid component 3 code text
-
+	$.component[3].code.text									${EMPTY}				422    	@value cannot be empty																													Observation.component.3..code.text
+	$.component[3].code.text									${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.3..code.text
 
     #invalid component 3 valueCodableConcept coding system
-
+	$.component[3].valueCodeableConcept.coding[0].system 		missing					422    	Missing element 'system' - required by fixed value assigned in profile ${sofa_score-url}												Observation.component.3..value.ofType.CodeableConcept..coding.0..system
+	$.component[3].valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																													Observation.component.3..value.ofType.CodeableConcept..coding.0..system
+	$.component[3].valueCodeableConcept.coding[0].system		http://foobar.de		422    	Value is 'http://foobar.de' but must be '${sofa_score-url2}'                   															Observation.component.3..value.ofType.CodeableConcept..coding.0..system
+	$.component[3].valueCodeableConcept.coding[0].system		${randstring}			422    	Value is '${randstring}' but must be '${sofa_score-url2}'																				Observation.component.3..value.ofType.CodeableConcept..coding.0..system
+	$.component[3].valueCodeableConcept.coding[0].system		${randinteger}			422    	Value is '${randinteger}' but must be '${sofa_score-url2}'																				Observation.component.3..value.ofType.CodeableConcept..coding.0..system
 
     #invalid component 3 valueCodableConcept coding code
-
+	$.component[3].valueCodeableConcept.coding[0].code			missing					422    	Observation.component:liver.value.x..coding.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.        				Observation.component.3..value.ofType.CodeableConcept..coding.0.
+	$.component[3].valueCodeableConcept.coding[0].code			${EMPTY}				422    	@value cannot be empty																													Observation.component.3..value.ofType.CodeableConcept..coding.0..code
+#	$.component[3].valueCodeableConcept.coding[0].code			${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.3..value.ofType.CodeableConcept..coding.0.
+	$.component[3].valueCodeableConcept.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.3..value.x..coding.0..code
 
     #invalid component 3 valueCodableConcept coding display
-
+	$.component[3].valueCodeableConcept.coding[0].display		${EMPTY}				422    	@value cannot be empty																													Observation.component.3..value.ofType.CodeableConcept..coding.0..display
+	$.component[3].valueCodeableConcept.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.3..value.x..coding.0..display
 
     #invalid component 3 valueCodableConcept text
+	$.component[3].valueCodeableConcept.text					${EMPTY}				422    	@value cannot be empty																													Observation.component.3..value.ofType.CodeableConcept..text
+	$.component[3].valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.3..value.x..text
 
 
-010 Create Sofa Score (Invalid/Missing 'component' for Array value 4)
+014 Create Sofa Score (Invalid/Missing 'component' for Array value 4)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -544,33 +633,55 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept
+
+	# FIELD/PATH								                VALUE					HTTP	ERROR MESSAGE																								                                Location
+	# 																	                CODE
 
     #invalid component 4 code coding system
-
+#	$.component[4].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.4..code.coding.0.
+	$.component[4].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.4..code.coding.0..system
+#	$.component[4].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
+	$.component[4].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.4..code.coding.0.
+	$.component[4].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.4..code.coding.0..system
 
     #invalid component 4 code coding code
-
+#	$.component[4].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
+	$.component[4].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.4..code.coding.0..code
+#	$.component[4].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.4..code.coding.0.
+	$.component[4].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.4..code.coding.0..code
 
     #invalid component 4 code coding display
-
+    $.component[4].code.coding[0].display						${EMPTY}				422    	@value cannot be empty																													Observation.component.4..code.coding.0..display
+	$.component[4].code.coding[0].display						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.4..code.coding.0..display
 
     #invalid component 4 code text
-
+	$.component[4].code.text									${EMPTY}				422    	@value cannot be empty																													Observation.component.4..code.text
+	$.component[4].code.text									${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.4..code.text
 
     #invalid component 4 valueCodableConcept coding system
-
+	$.component[4].valueCodeableConcept.coding[0].system 		missing					422    	Missing element 'system' - required by fixed value assigned in profile ${sofa_score-url}												Observation.component.4..value.ofType.CodeableConcept..coding.0..system
+	$.component[4].valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																													Observation.component.4..value.ofType.CodeableConcept..coding.0..system
+	$.component[4].valueCodeableConcept.coding[0].system		http://foobar.de		422    	Value is 'http://foobar.de' but must be '${sofa_score-url2}'                   															Observation.component.4..value.ofType.CodeableConcept..coding.0..system
+	$.component[4].valueCodeableConcept.coding[0].system		${randstring}			422    	Value is '${randstring}' but must be '${sofa_score-url2}'																				Observation.component.4..value.ofType.CodeableConcept..coding.0..system
+	$.component[4].valueCodeableConcept.coding[0].system		${randinteger}			422    	Value is '${randinteger}' but must be '${sofa_score-url2}'																				Observation.component.4..value.ofType.CodeableConcept..coding.0..system
 
     #invalid component 4 valueCodableConcept coding code
-
+	$.component[4].valueCodeableConcept.coding[0].code			missing					422    	Observation.component:coagulation.value.x..coding.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.        			Observation.component.4..value.ofType.CodeableConcept..coding.0.
+	$.component[4].valueCodeableConcept.coding[0].code			${EMPTY}				422    	@value cannot be empty																													Observation.component.4..value.ofType.CodeableConcept..coding.0..code
+#	$.component[4].valueCodeableConcept.coding[0].code			${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.4..value.ofType.CodeableConcept..coding.0.
+	$.component[4].valueCodeableConcept.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.4..value.x..coding.0..code
 
     #invalid component 4 valueCodableConcept coding display
-
+	$.component[4].valueCodeableConcept.coding[0].display		${EMPTY}				422    	@value cannot be empty																													Observation.component.4..value.ofType.CodeableConcept..coding.0..display
+	$.component[4].valueCodeableConcept.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.4..value.x..coding.0..display
 
     #invalid component 4 valueCodableConcept text
+	$.component[4].valueCodeableConcept.text					${EMPTY}				422    	@value cannot be empty																													Observation.component.4..value.ofType.CodeableConcept..text
+	$.component[4].valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.4..value.x..text
 
 
-010 Create Sofa Score (Invalid/Missing 'component' for Array value 5)
+015 Create Sofa Score (Invalid/Missing 'component' for Array value 5)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -579,33 +690,55 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept
+
+	# FIELD/PATH								                VALUE					HTTP	ERROR MESSAGE																								                                Location
+	# 																	                CODE
 
     #invalid component 5 code coding system
-
+#	$.component[5].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.5..code.coding.0.
+	$.component[5].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.5..code.coding.0..system
+#	$.component[5].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
+	$.component[5].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.5..code.coding.0.
+	$.component[5].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.5..code.coding.0..system
 
     #invalid component 5 code coding code
-
+#	$.component[5].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
+	$.component[5].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.5..code.coding.0..code
+#	$.component[5].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.5..code.coding.0.
+	$.component[5].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.5..code.coding.0..code
 
     #invalid component 5 code coding display
-
+    $.component[5].code.coding[0].display						${EMPTY}				422    	@value cannot be empty																													Observation.component.5..code.coding.0..display
+	$.component[5].code.coding[0].display						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.5..code.coding.0..display
 
     #invalid component 5 code text
-
+	$.component[5].code.text									${EMPTY}				422    	@value cannot be empty																													Observation.component.5..code.text
+	$.component[5].code.text									${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.5..code.text
 
     #invalid component 5 valueCodableConcept coding system
-
+	$.component[5].valueCodeableConcept.coding[0].system 		missing					422    	Missing element 'system' - required by fixed value assigned in profile ${sofa_score-url}												Observation.component.5..value.ofType.CodeableConcept..coding.0..system
+	$.component[5].valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																													Observation.component.5..value.ofType.CodeableConcept..coding.0..system
+	$.component[5].valueCodeableConcept.coding[0].system		http://foobar.de		422    	Value is 'http://foobar.de' but must be '${sofa_score-url2}'                   															Observation.component.5..value.ofType.CodeableConcept..coding.0..system
+	$.component[5].valueCodeableConcept.coding[0].system		${randstring}			422    	Value is '${randstring}' but must be '${sofa_score-url2}'																				Observation.component.5..value.ofType.CodeableConcept..coding.0..system
+	$.component[5].valueCodeableConcept.coding[0].system		${randinteger}			422    	Value is '${randinteger}' but must be '${sofa_score-url2}'																				Observation.component.5..value.ofType.CodeableConcept..coding.0..system
 
     #invalid component 5 valueCodableConcept coding code
-
+	$.component[5].valueCodeableConcept.coding[0].code			missing					422    	Observation.component:kidneys.value.x..coding.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.        				Observation.component.5..value.ofType.CodeableConcept..coding.0.
+	$.component[5].valueCodeableConcept.coding[0].code			${EMPTY}				422    	@value cannot be empty																													Observation.component.5..value.ofType.CodeableConcept..coding.0..code
+#	$.component[5].valueCodeableConcept.coding[0].code			${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.5..value.ofType.CodeableConcept..coding.0.
+	$.component[5].valueCodeableConcept.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.5..value.x..coding.0..code
 
     #invalid component 5 valueCodableConcept coding display
-
+	$.component[5].valueCodeableConcept.coding[0].display		${EMPTY}				422    	@value cannot be empty																													Observation.component.5..value.ofType.CodeableConcept..coding.0..display
+	$.component[5].valueCodeableConcept.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.5..value.x..coding.0..display
 
     #invalid component 5 valueCodableConcept text
+	$.component[5].valueCodeableConcept.text					${EMPTY}				422    	@value cannot be empty																													Observation.component.5..value.ofType.CodeableConcept..text
+	$.component[5].valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.5..value.x..text
 
 
-010 Create Sofa Score (Invalid 'DataAbsentReason' AND 'component')
+016 Create Sofa Score (Invalid 'DataAbsentReason' AND 'component')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -631,42 +764,144 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready
+    [Tags]              DataAbsentReason
 
-	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																	CODE
+	# FIELD/PATH											VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																				CODE
 
 	# missing valueCodeableConcept
-#	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.dataAbsentReason
+	$.component[0].dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+	$.component[1].dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+	$.component[2].dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+	$.component[3].dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+	$.component[4].dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+	$.component[5].dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+	$.component[0].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.0..dataAbsentReason
+	$.component[1].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.1..dataAbsentReason
+	$.component[2].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.2..dataAbsentReason
+	$.component[3].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.3..dataAbsentReason
+	$.component[4].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.4..dataAbsentReason
+	$.component[5].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.5..dataAbsentReason
 
 	# wrong format
-	$.dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.dataAbsentReason
-	$.dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.dataAbsentReason
-	$.dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array
+	$.component[0].dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.component.0..dataAbsentReason
+	$.component[1].dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.component.1..dataAbsentReason
+	$.component[2].dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.component.2..dataAbsentReason
+	$.component[3].dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.component.3..dataAbsentReason
+	$.component[4].dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.component.4..dataAbsentReason
+	$.component[5].dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.component.5..dataAbsentReason
+	$.component[0].dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.component.0..dataAbsentReason
+	$.component[1].dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.component.1..dataAbsentReason
+	$.component[2].dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.component.2..dataAbsentReason
+	$.component[3].dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.component.3..dataAbsentReason
+	$.component[4].dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.component.4..dataAbsentReason
+	$.component[5].dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.component.5..dataAbsentReason
+	$.component[0].dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array																Observation.component.0..dataAbsentReason
+	$.component[1].dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array																Observation.component.1..dataAbsentReason
+	$.component[2].dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array																Observation.component.2..dataAbsentReason
+	$.component[3].dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array																Observation.component.3..dataAbsentReason
+	$.component[4].dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array																Observation.component.4..dataAbsentReason
+	$.component[5].dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array																Observation.component.5..dataAbsentReason
 
 	# missing coding
-#	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.dataAbsentReason.coding
+	$.component[0].dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	$.component[1].dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	$.component[2].dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	$.component[3].dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	$.component[4].dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	$.component[5].dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	$.component[0].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.0..dataAbsentReason
+	$.component[1].dataAbsentReason							${EMPTY}				422     This property must be an Object, not a primitive property													Observation.component.1..dataAbsentReason
+	$.component[2].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.2..dataAbsentReason
+	$.component[3].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.3..dataAbsentReason
+	$.component[4].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.4..dataAbsentReason
+	$.component[5].dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.component.5..dataAbsentReason
 
-	# invalid system - todo
-#	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].system			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..system
-	$.dataAbsentReason.coding[0].system			${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.dataAbsentReason.coding.0.
-	$.dataAbsentReason.coding[0].system			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..system
-#	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
+	# invalid system
+	$.component[0].dataAbsentReason.coding[0].system		missing					422    	Index 0 out of bounds for length 0
+	$.component[1].dataAbsentReason.coding[0].system		missing					422     Index 0 out of bounds for length 0
+	$.component[2].dataAbsentReason.coding[0].system		missing					422    	Index 0 out of bounds for length 0
+	$.component[3].dataAbsentReason.coding[0].system		missing					422    	Index 0 out of bounds for length 0
+	$.component[4].dataAbsentReason.coding[0].system		missing					422    	Index 0 out of bounds for length 0
+	$.component[5].dataAbsentReason.coding[0].system		missing					422    	Index 0 out of bounds for length 0
+	$.component[0].dataAbsentReason.coding[0].system		${EMPTY}				422    	@value cannot be empty																						Observation.component.0..dataAbsentReason.coding.0..system
+	$.component[1].dataAbsentReason.coding[0].system		${EMPTY}				422     @value cannot be empty																						Observation.component.1..dataAbsentReason.coding.0..system
+	$.component[2].dataAbsentReason.coding[0].system		${EMPTY}				422    	@value cannot be empty																						Observation.component.2..dataAbsentReason.coding.0..system
+	$.component[3].dataAbsentReason.coding[0].system		${EMPTY}				422    	@value cannot be empty																						Observation.component.3..dataAbsentReason.coding.0..system
+	$.component[4].dataAbsentReason.coding[0].system		${EMPTY}				422    	@value cannot be empty																						Observation.component.4..dataAbsentReason.coding.0..system
+	$.component[5].dataAbsentReason.coding[0].system		${EMPTY}				422    	@value cannot be empty																						Observation.component.5..dataAbsentReason.coding.0..system
+	$.component[0].dataAbsentReason.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.component.0..dataAbsentReason.coding.0.
+	$.component[1].dataAbsentReason.coding[0].system		${randstring}			422     Coding.system must be an absolute reference, not a local reference											Observation.component.1..dataAbsentReason.coding.0.
+	$.component[2].dataAbsentReason.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.component.2..dataAbsentReason.coding.0.
+	$.component[3].dataAbsentReason.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.component.3..dataAbsentReason.coding.0.
+	$.component[4].dataAbsentReason.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.component.4..dataAbsentReason.coding.0.
+	$.component[5].dataAbsentReason.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.component.5..dataAbsentReason.coding.0.
+	$.component[0].dataAbsentReason.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.0..dataAbsentReason.coding.0..system
+	$.component[1].dataAbsentReason.coding[0].system		${randinteger}			422     Error parsing JSON: the primitive value must be a string													Observation.component.1..dataAbsentReason.coding.0..system
+	$.component[2].dataAbsentReason.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.2..dataAbsentReason.coding.0..system
+	$.component[3].dataAbsentReason.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.3..dataAbsentReason.coding.0..system
+	$.component[4].dataAbsentReason.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.4..dataAbsentReason.coding.0..system
+	$.component[5].dataAbsentReason.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.5..dataAbsentReason.coding.0..system
+	$.component[0].dataAbsentReason.coding[0].system		http://foobar.de		422    	Index 0 out of bounds for length 0
+	$.component[1].dataAbsentReason.coding[0].system		http://foobar.de		422     Index 0 out of bounds for length 0
+	$.component[2].dataAbsentReason.coding[0].system		http://foobar.de		422    	Index 0 out of bounds for length 0
+	$.component[3].dataAbsentReason.coding[0].system		http://foobar.de		422    	Index 0 out of bounds for length 0
+	$.component[4].dataAbsentReason.coding[0].system		http://foobar.de		422    	Index 0 out of bounds for length 0
+	$.component[5].dataAbsentReason.coding[0].system		http://foobar.de		422    	Index 0 out of bounds for length 0
 
-	# invalid code - todo
-#	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..code
-#	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..code
+	# invalid code
+	$.component[0].dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	$.component[1].dataAbsentReason.coding[0].code			missing					422     Index 0 out of bounds for length 0
+	$.component[2].dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	$.component[3].dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	$.component[4].dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	$.component[5].dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	$.component[0].dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.component.0..dataAbsentReason.coding.0..code
+	$.component[1].dataAbsentReason.coding[0].code			${EMPTY}				422     @value cannot be empty																						Observation.component.1..dataAbsentReason.coding.0..code
+	$.component[2].dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.component.2..dataAbsentReason.coding.0..code
+	$.component[3].dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.component.3..dataAbsentReason.coding.0..code
+	$.component[4].dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.component.4..dataAbsentReason.coding.0..code
+	$.component[5].dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.component.5..dataAbsentReason.coding.0..code
+	$.component[0].dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+	$.component[1].dataAbsentReason.coding[0].code			${randstring}			422     Index 0 out of bounds for length 0
+	$.component[2].dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+	$.component[3].dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+	$.component[4].dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+	$.component[5].dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+	$.component[0].dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.0..dataAbsentReason.coding.0..code
+	$.component[1].dataAbsentReason.coding[0].code			${randinteger}			422     Error parsing JSON: the primitive value must be a string													Observation.component.1..dataAbsentReason.coding.0..code
+	$.component[2].dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.2..dataAbsentReason.coding.0..code
+	$.component[3].dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.3..dataAbsentReason.coding.0..code
+	$.component[4].dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.4..dataAbsentReason.coding.0..code
+	$.component[5].dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.5..dataAbsentReason.coding.0..code
 
-	# invalid display - todo
-#	$.dataAbsentReason.coding[0].display		missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..display
-#	$.dataAbsentReason.coding[0].display		${randstring}			422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
+	# invalid display
+	$.component[0].dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.component.0..dataAbsentReason.coding.0..display
+	$.component[1].dataAbsentReason.coding[0].display		${EMPTY}				422     @value cannot be empty																						Observation.component.1..dataAbsentReason.coding.0..display
+	$.component[2].dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.component.2..dataAbsentReason.coding.0..display
+	$.component[3].dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.component.3..dataAbsentReason.coding.0..display
+	$.component[4].dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.component.4..dataAbsentReason.coding.0..display
+	$.component[5].dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.component.5..dataAbsentReason.coding.0..display
+	$.component[0].dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.0..dataAbsentReason.coding.0..display
+	$.component[1].dataAbsentReason.coding[0].display		${randinteger}			422     Error parsing JSON: the primitive value must be a string													Observation.component.1..dataAbsentReason.coding.0..display
+	$.component[2].dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.2..dataAbsentReason.coding.0..display
+	$.component[3].dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.3..dataAbsentReason.coding.0..display
+	$.component[4].dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.4..dataAbsentReason.coding.0..display
+	$.component[5].dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.5..dataAbsentReason.coding.0..display
+
+	# invalid text
+	$.component[0].dataAbsentReason.text					${EMPTY}				422    	@value cannot be empty																						Observation.component.0..dataAbsentReason.text
+	$.component[1].dataAbsentReason.text					${EMPTY}				422     @value cannot be empty																						Observation.component.1..dataAbsentReason.text
+	$.component[2].dataAbsentReason.text					${EMPTY}				422    	@value cannot be empty																						Observation.component.2..dataAbsentReason.text
+	$.component[3].dataAbsentReason.text					${EMPTY}				422    	@value cannot be empty																						Observation.component.3..dataAbsentReason.text
+	$.component[4].dataAbsentReason.text					${EMPTY}				422    	@value cannot be empty																						Observation.component.4..dataAbsentReason.text
+	$.component[5].dataAbsentReason.text					${EMPTY}				422    	@value cannot be empty																						Observation.component.5..dataAbsentReason.text
+	$.component[0].dataAbsentReason.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.0..dataAbsentReason.text
+	$.component[1].dataAbsentReason.text					${randinteger}			422     Error parsing JSON: the primitive value must be a string													Observation.component.1..dataAbsentReason.text
+	$.component[2].dataAbsentReason.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.2..dataAbsentReason.text
+	$.component[3].dataAbsentReason.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.3..dataAbsentReason.text
+	$.component[4].dataAbsentReason.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.4..dataAbsentReason.text
+	$.component[5].dataAbsentReason.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.component.5..dataAbsentReason.text
 
 
 012 Create Sofa Score (invalid multi)
@@ -724,12 +959,12 @@ ${randinteger}                  ${12345}
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
-	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
-	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready
-
-
+#BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
+#	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
+#	[Template]			create pregnancy status with ehr reference
+#    [Tags]              category    not-ready
+#
+#
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -823,13 +1058,23 @@ generate payload from example json with data absentreason
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${dict_dataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "sofa score"} }}
+	${dict_componentdataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "SOFA Score"} }}
 
 	${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/create-sofa-score.json
                         Update Value To Json    	${payload}    $.subject.identifier.value    			${subject_id}
 						Delete Object From Json    	${payload}    $.text
-						Delete Object From Json    	${payload}    $.valueCodeableConcept
-						Add Object To Json  		${payload}    $											${dict_dataabsentreason}
+						Delete Object From Json    	${payload}    $.component[0].valueCodeableConcept
+						Delete Object From Json    	${payload}    $.component[1].valueCodeableConcept
+						Delete Object From Json    	${payload}    $.component[2].valueCodeableConcept
+						Delete Object From Json    	${payload}    $.component[3].valueCodeableConcept
+						Delete Object From Json    	${payload}    $.component[4].valueCodeableConcept
+						Delete Object From Json    	${payload}    $.component[5].valueCodeableConcept
+						Add Object To Json  		${payload}    $.component[0]								${dict_componentdataabsentreason}
+						Add Object To Json  		${payload}    $.component[1]								${dict_componentdataabsentreason}
+						Add Object To Json  		${payload}    $.component[2]								${dict_componentdataabsentreason}
+						Add Object To Json  		${payload}    $.component[3]								${dict_componentdataabsentreason}
+						Add Object To Json  		${payload}    $.component[4]								${dict_componentdataabsentreason}
+						Add Object To Json  		${payload}    $.component[5]								${dict_componentdataabsentreason}
 
 						# comment: delete field/object that has value 'missing' in test case table 
 						Run Keyword And Return If   $value=="missing"
@@ -857,10 +1102,15 @@ create sofa score with ehr reference AND data absentreason
 create with DataAbsentReason
     [Arguments]         ${fhir_resource_name}    ${example_json}
 
-	${dict_dataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "sofa score"} }}
+	${dict_componentdataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "SOFA Score"} }}
 
     ${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/${example_json}
                         Update Value To Json    	${payload}    $.subject.identifier.value    				${subject_id}
-						Add Object To Json  		${payload}    $												${dict_dataabsentreason}
+						Add Object To Json  		${payload}    $.component[0]								${dict_componentdataabsentreason}
+						Add Object To Json  		${payload}    $.component[1]								${dict_componentdataabsentreason}
+						Add Object To Json  		${payload}    $.component[2]								${dict_componentdataabsentreason}
+						Add Object To Json  		${payload}    $.component[3]								${dict_componentdataabsentreason}
+						Add Object To Json  		${payload}    $.component[4]								${dict_componentdataabsentreason}
+						Add Object To Json  		${payload}    $.component[5]								${dict_componentdataabsentreason}
                         Output Debug Info To Console    ${payload}
                         POST /Observation    		${fhir_resource_name}    ${payload}
