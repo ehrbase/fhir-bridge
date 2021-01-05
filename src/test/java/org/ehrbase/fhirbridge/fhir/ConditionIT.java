@@ -142,7 +142,6 @@ class ConditionIT extends AbstractSetupIT {
         create("Condition/example-organ-recipient.json");
         create("Condition/example-organ-recipient2.json");
         create("Condition/example-organ-recipient3.json");
-        create("Condition/example-organ-recipient-unknown.json");
     }
 
     @Test
