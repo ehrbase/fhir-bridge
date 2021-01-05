@@ -12,6 +12,8 @@ public enum KategorieDefiningcode implements EnumValueSet {
 
   N394591006("394591006", "394591006", "SNOMED Clinical Terms", "394591006"),
 
+  N394589003("394589003", "394589003", "SNOMED Clinical Terms", "394589003"),
+
   N408480009("408480009", "408480009", "SNOMED Clinical Terms", "408480009"),
 
   N394807007("394807007", "394807007", "SNOMED Clinical Terms", "394807007"),
