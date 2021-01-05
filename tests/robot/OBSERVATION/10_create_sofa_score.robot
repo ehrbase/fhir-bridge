@@ -39,7 +39,7 @@ ${randinteger}                  ${12345}
 *** Test Cases ***
 
 001 Create Sofa Score (Invalid/Missing 'Subject')
-    [Documentation]     1. *LOAD* _create-pregnancy-status.json_ \n\n
+    [Documentation]     1. *LOAD* _create-sofa-score.json_ \n\n
 	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
     ...                 3. *POST* example JSON to observation endpoint \n\n
 	...                 4. *VALIDATE* the response status \n\n
@@ -85,7 +85,7 @@ ${randinteger}                  ${12345}
 
 002 Create Sofa Score (Invalid/Missing 'resourceType')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -104,7 +104,7 @@ ${randinteger}                  ${12345}
 
 003 Create Sofa Score (Invalid/Missing 'ID')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``ID`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -121,9 +121,9 @@ ${randinteger}                  ${12345}
 
 004 Create Sofa Score (Invalid/Missing 'meta')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``meta`` \n\n
+	...                 4. *UPDATE* values for attribute ``Meta`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
@@ -149,7 +149,7 @@ ${randinteger}                  ${12345}
 
 005 Create Sofa Score (Invalid/Missing 'Status')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Status`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -168,7 +168,7 @@ ${randinteger}                  ${12345}
 
 006 Create Sofa Score (Invalid/Missing 'category')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Category`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -206,21 +206,21 @@ ${randinteger}                  ${12345}
 
 007 Create Sofa Score (Invalid/Missing 'code')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Code`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              code    not-ready
+    [Tags]              code
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
 	# invalid code
-	$.code									missing					422    	Observation.code: minimum required = 1, but only found 0 .from ${sofa_score-url}						Observation
-	$.code									${{ [] }}				422    	Observation.code: minimum required = 1, but only found 0 .from ${sofa_score-url}						Observation
+	$.code									missing					422    	Observation.code: minimum required = 1, but only found 0 .from ${sofa_score-url}						    Observation
+	$.code									${{ [] }}				422    	Observation.code: minimum required = 1, but only found 0 .from ${sofa_score-url}						    Observation
 	$.code									${{ {} }}				422    	Object must have some content																				Observation.code
 	$.code									${{ [{}] }}				422    	This property must be an Object, not an array																Observation.code
 
@@ -231,14 +231,14 @@ ${randinteger}                  ${12345}
 	# invalid Code Coding 0 System
     $.code.coding[0].system					missing					422    	A code with no system has no defined meaning. A system should be provided									Observation.code.coding.0.
 	$.code.coding[0].system					${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..system
-	$.code.coding[0].system					http://foobar.de		422    	The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile https://*	Observation.code
+	$.code.coding[0].system					http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    	Observation.code
 	$.code.coding[0].system					${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.code.coding.0.
 	$.code.coding[0].system					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..system
 
 	# invalid Code Coding 0 Code
-    $.code.coding[0].code					missing					422    	The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile https://*	Observation.code
+    $.code.coding[0].code					missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          Observation.code
 	$.code.coding[0].code					${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..code
-	$.code.coding[0].code					${randstring}			422    	The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile https://*	Observation.code
+	$.code.coding[0].code					${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        Observation.code.coding.0.
 	$.code.coding[0].code					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..code
 
 	# invalid Code Coding 0 Display
@@ -248,20 +248,20 @@ ${randinteger}                  ${12345}
 
 008 Create Sofa Score (Invalid/Missing 'effectiveDateTime')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              effectiveDateTime    not-ready
+    [Tags]              effectiveDateTime
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 	
 	# missing attribute
-	$.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
+#   $.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
 	$.effectiveDateTime						${EMPTY}				422    	@value cannot be empty																						Observation.effective.ofType.dateTime.
 	
 	# wrong format
@@ -290,59 +290,324 @@ ${randinteger}                  ${12345}
 	$.effectiveDateTime						${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.effective.x.
 
 
-009 Create Sofa Score (Invalid/Missing 'component')
+009 Create Sofa Score (Invalid/Missing 'component' for missing or empty ground attributes)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``valueCodeableConcept`` \n\n
+	...                 4. *UPDATE* values for attribute ``component`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create sofa score with ehr reference
+    [Tags]              valueCodeableConcept
+
+
+	# FIELD/PATH								                VALUE					HTTP	ERROR MESSAGE																								                                Location
+	# 																	                CODE
+	
+	# missing valueCodeableConcept
+    $.component						                            missing					422    	Index 0 out of bounds for length 0
+    $.component        						                    ${EMPTY}				422    	This property must be an Array, not a primitive property													                                   Observation.component
+
+	# wrong format
+    $.component         						                ${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								                                    Observation.component
+    $.component         						                ${{ {} }}				422    	Object must have some content																				                                    Observation.component
+    $.component         						                ${{ [{}] }}				422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.					                                    Observation.component
+
+	# missing array value
+    $.component[0] 				                                missing					422    	Index 5 out of bounds for length 5
+    $.component[1] 				                                missing					422    	Index 5 out of bounds for length 5
+    $.component[2] 				                                missing					422    	Index 5 out of bounds for length 5
+    $.component[3] 				                                missing					422    	Index 5 out of bounds for length 5
+    $.component[4] 				                                missing					422    	Index 5 out of bounds for length 5
+    $.component[5] 				                                missing					422    	Index 5 out of bounds for length 5
+    
+    # empty array
+    $.component[0] 				                                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.0.
+    $.component[1] 				                                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.1.
+    $.component[2] 				                                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.2.
+    $.component[3] 				                                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.3.
+    $.component[4] 				                                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.4.
+    $.component[5] 				                                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.5.
+
+    # missing component x code
+    $.component[0].code 				                        missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.0.
+    $.component[1].code 				                        missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.1.
+    $.component[2].code 				                        missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.2.
+    $.component[3].code 				                        missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.3.
+    $.component[4].code 				                        missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.4.
+    $.component[5].code 				                        missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.5.
+
+    # empty component x code
+    $.component[0].code 				                        ${EMPTY}				422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.0.
+    $.component[1].code 				                        ${EMPTY}				422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.1.
+    $.component[2].code 				                        ${EMPTY}				422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.2.
+    $.component[3].code 				                        ${EMPTY}				422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.3.
+    $.component[4].code 				                        ${EMPTY}				422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.4.
+    $.component[5].code 				                        ${EMPTY}				422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.5.
+
+    # missing component x valueCodableConcept
+    $.component[0].valueCodeableConcept 				        missing					422    	Index 0 out of bounds for length 0
+    $.component[1].valueCodeableConcept 				        missing					422    	Index 0 out of bounds for length 0
+    $.component[2].valueCodeableConcept 				        missing					422    	Index 0 out of bounds for length 0
+    $.component[3].valueCodeableConcept 				        missing					422    	Index 0 out of bounds for length 0
+    $.component[4].valueCodeableConcept 				        missing					422    	Index 0 out of bounds for length 0
+    $.component[5].valueCodeableConcept				            missing					422    	Index 0 out of bounds for length 0
+
+    # empty component x valueCodableConcept
+    $.component[0].valueCodeableConcept 				        ${EMPTY}				422    	This property must be an Object, not a primitive property                                                                                       Observation.component.0..value.x.
+    $.component[1].valueCodeableConcept 				        ${EMPTY}				422    	This property must be an Object, not a primitive property                                                                                       Observation.component.1..value.x.
+    $.component[2].valueCodeableConcept 				        ${EMPTY}				422    	This property must be an Object, not a primitive property                                                                                       Observation.component.2..value.x.
+    $.component[3].valueCodeableConcept 				        ${EMPTY}				422    	This property must be an Object, not a primitive property                                                                                       Observation.component.3..value.x.
+    $.component[4].valueCodeableConcept 				        ${EMPTY}				422    	This property must be an Object, not a primitive property                                                                                       Observation.component.4..value.x.
+    $.component[5].valueCodeableConcept 				        ${EMPTY}				422    	This property must be an Object, not a primitive property                                                                                       Observation.component.5..value.x.
+
+    # missing component x code coding
+#    $.component[0].code.coding 				                    missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.0.
+#    $.component[1].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.1.
+#    $.component[2].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.2.
+#    $.component[3].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.3.
+#    $.component[4].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.4.
+#    $.component[5].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.5.
+
+    # empty component x code coding
+    $.component[0].code.coding 	 				                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.0..code.coding
+    $.component[1].code.coding 	 				                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.1..code.coding
+    $.component[2].code.coding 	 				                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.2..code.coding
+    $.component[3].code.coding 	 	 	 				        ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.3..code.coding
+    $.component[4].code.coding 	 		 				        ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.4..code.coding
+    $.component[5].code.coding 	 				                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.5..code.coding
+
+    # missing component x valueCodableConcept coding
+    $.component[0].valueCodeableConcept.coding 				    missing					422    	Observation.component:respiratorySystem.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                        Observation.component.0..value.ofType.CodeableConcept.
+    $.component[1].valueCodeableConcept.coding 				    missing					422    	Observation.component:nervousSystem.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                            Observation.component.1..value.ofType.CodeableConcept.
+    $.component[2].valueCodeableConcept.coding 				    missing					422    	Observation.component:cardiovascularSystem.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                     Observation.component.2..value.ofType.CodeableConcept.
+    $.component[3].valueCodeableConcept.coding 				    missing					422    	Observation.component:liver.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                    Observation.component.3..value.ofType.CodeableConcept.
+    $.component[4].valueCodeableConcept.coding 				    missing					422    	Observation.component:coagulation.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                              Observation.component.4..value.ofType.CodeableConcept.
+    $.component[5].valueCodeableConcept.coding				    missing					422    	Observation.component:kidneys.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                  Observation.component.5..value.ofType.CodeableConcept.
+
+    # empty component x valueCodableConcept coding
+    $.component[0].valueCodeableConcept.coding 				    ${EMPTY}				422    	Observation.component:respiratorySystem.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                        Observation.component.0..value.ofType.CodeableConcept.
+    $.component[1].valueCodeableConcept.coding 				    ${EMPTY}				422    	Observation.component:nervousSystem.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                            Observation.component.1..value.ofType.CodeableConcept.
+    $.component[2].valueCodeableConcept.coding 				    ${EMPTY}				422    	Observation.component:cardiovascularSystem.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                     Observation.component.2..value.ofType.CodeableConcept.
+    $.component[3].valueCodeableConcept.coding 				    ${EMPTY}				422    	Observation.component:liver.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                    Observation.component.3..value.ofType.CodeableConcept.
+    $.component[4].valueCodeableConcept.coding 				    ${EMPTY}				422    	Observation.component:coagulation.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                              Observation.component.4..value.ofType.CodeableConcept.
+    $.component[5].valueCodeableConcept.coding				    ${EMPTY}				422    	Observation.component:kidneys.value.x..coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                  Observation.component.5..value.ofType.CodeableConcept.
+
+
+010 Create Sofa Score (Invalid/Missing 'component' for Array value 0)
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[0]`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
     [Tags]              valueCodeableConcept    not-ready
 
+    #invalid component 0 code coding system
 
-	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																	CODE
-	
-	# missing valueCodeableConcept
-#	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
-	$.valueCodeableConcept						${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.value.x.
 
-	# wrong format
-	$.valueCodeableConcept						${{ [] }}				422    	This property must be an Object, not an array																Observation.value.x.
-	$.valueCodeableConcept						${{ {} }}				422    	Object must have some content																				Observation.value.x.
-	$.valueCodeableConcept						${{ [{}] }}				422    	This property must be an Object, not an array																Observation.value.x.
+    #invalid component 0 code coding code
 
-	# missing coding
-#	$.valueCodeableConcept.coding 				missing					422    	Index 0 out of bounds for length 0
-	$.valueCodeableConcept.coding				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.value.x..coding
 
-	# invalid system
-#	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
-	$.valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..system
-#	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
-	$.valueCodeableConcept.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.value.ofType.CodeableConcept..coding.0.
-	$.valueCodeableConcept.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..system
+    #invalid component 0 code coding display
 
-	# invalid code
-#	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
-	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..code
-	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Status code ${randstring} is not supported
-	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..code
 
-	# invalid display
-	$.valueCodeableConcept.coding[0].display	${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..display
-	$.valueCodeableConcept.coding[0].display	${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..display
+    #invalid component 0 code text
 
-	# invalid text
-	$.valueCodeableConcept.text					${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..text
-	$.valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..text
+
+    #invalid component 0 valueCodableConcept coding system
+
+
+    #invalid component 0 valueCodableConcept coding code
+
+
+    #invalid component 0 valueCodableConcept coding display
+
+
+    #invalid component 0 valueCodableConcept text
+
+
+011 Create Sofa Score (Invalid/Missing 'component' for Array value 1)
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[1]`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create sofa score with ehr reference
+    [Tags]              valueCodeableConcept    not-ready
+
+    #invalid component 1 code coding system
+
+
+    #invalid component 1 code coding code
+
+
+    #invalid component 1 code coding display
+
+
+    #invalid component 1 code text
+
+
+    #invalid component 1 valueCodableConcept coding system
+
+
+    #invalid component 1 valueCodableConcept coding code
+
+
+    #invalid component 1 valueCodableConcept coding display
+
+
+    #invalid component 1 valueCodableConcept text
+
+
+012 Create Sofa Score (Invalid/Missing 'component' for Array value 2)
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[2]`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create sofa score with ehr reference
+    [Tags]              valueCodeableConcept    not-ready
+
+    #invalid component 2 code coding system
+
+
+    #invalid component 2 code coding code
+
+
+    #invalid component 2 code coding display
+
+
+    #invalid component 2 code text
+
+
+    #invalid component 2 valueCodableConcept coding system
+
+
+    #invalid component 2 valueCodableConcept coding code
+
+
+    #invalid component 2 valueCodableConcept coding display
+
+
+    #invalid component 2 valueCodableConcept text
+
+
+013 Create Sofa Score (Invalid/Missing 'component' for Array value 3)
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[3]`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create sofa score with ehr reference
+    [Tags]              valueCodeableConcept    not-ready
+
+    #invalid component 3 code coding system
+
+
+    #invalid component 3 code coding code
+
+
+    #invalid component 3 code coding display
+
+
+    #invalid component 3 code text
+
+
+    #invalid component 3 valueCodableConcept coding system
+
+
+    #invalid component 3 valueCodableConcept coding code
+
+
+    #invalid component 3 valueCodableConcept coding display
+
+
+    #invalid component 3 valueCodableConcept text
+
+
+010 Create Sofa Score (Invalid/Missing 'component' for Array value 4)
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[4]`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create sofa score with ehr reference
+    [Tags]              valueCodeableConcept    not-ready
+
+    #invalid component 4 code coding system
+
+
+    #invalid component 4 code coding code
+
+
+    #invalid component 4 code coding display
+
+
+    #invalid component 4 code text
+
+
+    #invalid component 4 valueCodableConcept coding system
+
+
+    #invalid component 4 valueCodableConcept coding code
+
+
+    #invalid component 4 valueCodableConcept coding display
+
+
+    #invalid component 4 valueCodableConcept text
+
+
+010 Create Sofa Score (Invalid/Missing 'component' for Array value 5)
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[5]`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create sofa score with ehr reference
+    [Tags]              valueCodeableConcept    not-ready
+
+    #invalid component 5 code coding system
+
+
+    #invalid component 5 code coding code
+
+
+    #invalid component 5 code coding display
+
+
+    #invalid component 5 code text
+
+
+    #invalid component 5 valueCodableConcept coding system
+
+
+    #invalid component 5 valueCodableConcept coding code
+
+
+    #invalid component 5 valueCodableConcept coding display
+
+
+    #invalid component 5 valueCodableConcept text
 
 
 010 Create Sofa Score (Invalid 'DataAbsentReason' AND 'component')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -351,7 +616,7 @@ ${randinteger}                  ${12345}
 	[Tags]              DataAbsentReason    not-ready
 
 	ehr.create new ehr    				  				000_ehr_status.json
-	create with DataAbsentReason		  				DataAbsentReason				create-pregnancy-status.json
+	create with DataAbsentReason		  				DataAbsentReason				create-sofa-score.json
 	validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
@@ -359,7 +624,7 @@ ${randinteger}                  ${12345}
 
 011 Create Sofa Score (Invalid/Missing 'DataAbsentReason')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -406,56 +671,54 @@ ${randinteger}                  ${12345}
 
 012 Create Sofa Score (invalid multi)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* values for attributes \n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status \n\n
     ...                 6. *VALIDATE* outcome against diagnostic text (english + german)
-
     [Tags]             multi    not-ready
     [Template]         create sofa score JSON
 #|  resourceType   |          		ID   			|           meta         						|                              identifier                         |	  status  	|                         				category                           					        					   |                                        									code          								|         subject                    |	  DateTime	   |                      			     valueCodeableConcept			           		           |  R.-Code  |                                                             diagnostics 							                                              |   location
 #|                 |                				|  available  | 			profile  			|  available  |        system         |             value         |             |  available  |  codingavailable  |  				system  									   |    	 code          |  available  |  coding available  |  			0.system	  		|  		0.code	  |    		   0.display 		    |  available  |   Identifier-value   |                 |  available  |		coding	|         system     	 |  		code      	|     display      |           |               				                                    ENG				                                                                  |
 
 # all attributes invalid for valueCodeableConcept
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         sofa score            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	               ${EMPTY}    	        ${EMPTY}		    422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..display
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         sofa score           		  true    		 	valid      		  2020-02-25		  true		    true           ${1234}	               test      	        ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         sofa score            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	             http://google.com      test   		        422          ele-1: All FHIR elements must have a @value or children                                                                                             Observation.value.ofType.CodeableConcept..coding.0..system
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         sofa score            		  true    		 	valid      		  2020-02-25		  true		    true	       missing	               ${EMPTY}             missing		        422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..code
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         sofa score            	 	  true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               missing 	            test   		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..system
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         sofa score            true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	               ${EMPTY}    	        ${EMPTY}		    422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..display
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         sofa score           	true    		 	valid      		  2020-02-25		  true		    true           ${1234}	               test      	        ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         sofa score            true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	             http://google.com      test   		        422          ele-1: All FHIR elements must have a @value or children                                                                                             Observation.value.ofType.CodeableConcept..coding.0..system
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         sofa score            true    		 	valid      		  2020-02-25		  true		    true	       missing	               ${EMPTY}             missing		        422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..code
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         sofa score            true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               missing 	            test   		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..system
 
 # all attributes invalid for code
-    Observation    	        pregnancy-status  		       true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   false	  		 http://loinc.org		  		  82810-3         sofa score           		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Observation.code.coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                      Observation.code
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 ${EMPTY}             	  		  ${EMPTY}        ${EMPTY}                            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                          	 Observation.code.coding.0..display
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 http://google.com		  		  ${12345}        missing                             true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile ${sofa_score-url}                              Observation.code
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 test            		  		  missing         ${12345}                            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.code.coding.0.
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 missing         		  	      test            test1234                            true    		 	valid      		  2020-02-25	      true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          A code with no system has no defined meaning. A system should be provided                                                                           Observation.code.coding.0.
+    Observation    	        sofa-score  		       true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   false	  		 http://loinc.org		  		  82810-3         sofa score           	true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Observation.code.coding: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                            Observation.code
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 ${EMPTY}             	  		  ${EMPTY}        ${EMPTY}              true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                          	 Observation.code.coding.0..display
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 http://google.com		  		  ${12345}        missing               true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile ${sofa_score-url}                                    Observation.code
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 test            		  		  missing         ${12345}              true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.code.coding.0.
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 missing         		  	      test            test1234              true    		 	valid      		  2020-02-25	      true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          A code with no system has no defined meaning. A system should be provided                                                                           Observation.code.coding.0.
 
 # all attributes invalid for category
-#	Observation    	        pregnancy-status  		       true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://google.com                                                  test                    true			   true		  		 http://loinc.org		  		  82810-3         sofa score            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422     	 Status code LA26683-5 is not supported     																										 ${EMPTY}
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           missing                                                            ${EMPTY}                true			   true			  	 http://loinc.org		  		  82810-3         sofa score            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..code
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           ${EMPTY}                                                           ${12345}                true			   true			  	 http://loinc.org		  		  82810-3         sofa score            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..system
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           ${12345}                                                           missing                 true			   true			     http://loinc.org		  		  82810-3         sofa score            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           test                                                               ${EMPTY}                true			   true			  	 http://loinc.org		  		  82810-3         sofa score            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                				 Observation.category.0..coding.0..code
+#	Observation    	        sofa-score  		       true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://google.com                                                  test                    true			   true		  		 http://loinc.org		  		  82810-3         sofa score            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422     	 Status code LA26683-5 is not supported     																										 ${EMPTY}
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           missing                                                            ${EMPTY}                true			   true			  	 http://loinc.org		  		  82810-3         sofa score            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..code
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           ${EMPTY}                                                           ${12345}                true			   true			  	 http://loinc.org		  		  82810-3         sofa score            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..system
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           ${12345}                                                           missing                 true			   true			     http://loinc.org		  		  82810-3         sofa score            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           test                                                               ${EMPTY}                true			   true			  	 http://loinc.org		  		  82810-3         sofa score            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                				 Observation.category.0..coding.0..code
 
 # mix invalid attributes
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
-    ${1234}      	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          This does not appear to be a FHIR resource .unknown name '1234'.                                                                                    1234
-    Observation    	        ${1234}      				   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.id
-    Observation    	        pregnancy-status  			   false        ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  	      ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.value.ofType.CodeableConcept..coding.0.
-    Observation    	        pregnancy-status  			   true         ${1234}                			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Profile reference '1234' could not be resolved, so has not been checked                                                                             Observation.meta.profile.0.
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  false      ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             ${1234}	     	true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.status
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     false            true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.code.coding.0..system
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             false          ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Object must have some content                                                                                                                       Observation.category.0.
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 false			   true			  	 ${1234}          		  	      ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                               Observation
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false		     ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   true 			 ${1234}          		  		  ${1234}         ${1234}                           false    	 	    valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.subject: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                            Observation
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false		     ${1234}          		  		  ${1234}         ${1234}                           true    		 	test      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  ${12345}		      true		    true	       ${1234}	               ${1234}              ${1234}		        422          Not a valid date/time .12345.                                                                                                                       Observation.effective.ofType.dateTime.
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  false		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
-    Observation    	        pregnancy-status  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
-
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
+    ${1234}      	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          This does not appear to be a FHIR resource .unknown name '1234'.                                                                                    1234
+    Observation    	        ${1234}      			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.id
+    Observation    	        sofa-score  			   false        ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  	      ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.value.ofType.CodeableConcept..coding.0.
+    Observation    	        sofa-score  			   true         ${1234}                		  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Profile reference '1234' could not be resolved, so has not been checked                                                                             Observation.meta.profile.0.
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  false      ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             ${1234}	     	 true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.status
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	         false            true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.code.coding.0..system
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	         true             false          ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Object must have some content                                                                                                                       Observation.category.0.
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	         true             true           ${1234}                                                            ${1234}                 false			   true			  	 ${1234}          		  	      ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                                   Observation
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	         true             true           ${1234}                                                            ${1234}                 true			   false		     ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	         true             true           ${1234}                                                            ${1234}                 true			   true 			 ${1234}          		  		  ${1234}         ${1234}               false    	 	    valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.subject: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                                Observation
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	         true             true           ${1234}                                                            ${1234}                 true			   false		     ${1234}          		  		  ${1234}         ${1234}               true    		 	test      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	         true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  ${12345}		      true		    true	       ${1234}	               ${1234}              ${1234}		        422          Not a valid date/time .12345.                                                                                                                       Observation.effective.ofType.dateTime.
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	         true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  false		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+    Observation    	        sofa-score  			   true         ${sofa_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	         true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}               true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
 
 
 *** Keywords ***
@@ -528,7 +791,7 @@ create sofa score JSON
 
     &{resp}             Run Keywords
                         ...    ehr.create new ehr               000_ehr_status.json                             AND
-                        ...    load JSON                        create-pregnancy-status.json				    AND
+                        ...    load JSON                        create-sofa-score.json				    AND
                         ...    update Resource Type             ${resourceType}                                 AND
                         ...    update ID                        ${ID}                                           AND
                         ...    update Meta Profile              ${meta}                                         ${profile}                    	AND
