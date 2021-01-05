@@ -1,5 +1,5 @@
-# Copyright (c) 2020 P. Wohlfarth (Appsfactory GmbH), Wladislaw Wagner (Vitasystems GmbH) &
-# Dave Petzold (Appsfactory GmbH)
+# Copyright (c) 2020 Peter Wohlfarth (Appsfactory GmbH), Wladislaw Wagner (Vitasystems GmbH),
+# Dave Petzold (Appsfactory GmbH) & Pauline Schulz (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -34,10 +34,11 @@ Force Tags              create
 
 *** Test Cases ***
 001 Create History of Vaccination (Immunization completed)
-	[Documentation]    1. create new EHR Patient record
-	...                2. update {{patient_id}} in example json
-    ...                3. POST example json to Immunization endpoint
-	...                4. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-immunization-for-patient-complete.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to immunization endpoint\n\n
+	...                 5. *VALIDATE* the response status
     [Tags]             history-of-vaccination    valid    not-ready
 
     #ehr.create new ehr    000_ehr_status.json
@@ -46,10 +47,11 @@ Force Tags              create
 
 
 002 Create History of Vaccination (not done)
-	[Documentation]    1. create new EHR Patient record
-	...                2. update {{patient_id}} in example json
-    ...                3. POST example json to Immunization endpoint
-	...                4. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-immunization-for-patient-not-done.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to immunization endpoint\n\n
+	...                 5. *VALIDATE* the response status
     [Tags]             history-of-vaccination    valid    not-ready
 
     #ehr.create new ehr    000_ehr_status.json

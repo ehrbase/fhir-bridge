@@ -21,7 +21,8 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
-
+Documentation           *NOTE:* use Regular Expressions to replace braces () as described here:
+...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example
 Force Tags              create    fio2    invalid
 
 
@@ -34,17 +35,14 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 *** Test Cases ***
 001 Create FiO2 (Invalid/Missing EHR reference/subject)
-	[Documentation]		1. *CREATE* random UUID to serve as non-existent EHR reference\n\n
-	...					2. *REPLACE* {{patientID}} in example JSON with fake EHR reference\n\n
-	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
-	...					   based on example JSON and data in TC table\n\n
-	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
-	...					
-	...					*NOTE:* use Regular Expressions to replace braces (),[] as described here:
-	...          		https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example
-
+    [Documentation]     1. *LOAD* _create-fio2.json_ \n\n
+	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
+    ...                 3. *POST* example JSON to observation endpoint \n\n
+	...                 4. *VALIDATE* the response status \n\n
+    ...                 5. *VALIDATE* outcome against diagnostic text & locatio
 	[Template]			Create FiO2 w/o ehr reference
 	[Tags]				Subject
+
 	#												HTTP	
 	# FIELD/PATH 					VALUE			CODE	ERROR MESSAGE
 	$.subject.identifier.value		missing			422		mii-reference-1: Either reference.reference XOR reference.identifier exists ..this.reference.exists.. xor ..this.identifier.value.exists.. and .this.identifier.system.exists
@@ -70,11 +68,13 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	
 
 002 Create FiO2 (Invalid/Missing 'resourceType')
-	[Documentation]		1. *CREATE* an EHR record\n\n
-	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
-	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
-	...					   based on example JSON and data in TC table\n\n
-	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-fio2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 	
 	[Template]			Create FiO2 with ehr reference
     [Tags]          	resourceType
@@ -88,11 +88,13 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 003 Create FiO2 (Invalid/Missing 'ID')
-	[Documentation]		1. *CREATE* an EHR record\n\n
-	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
-	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
-	...					   based on example JSON and data in TC table\n\n
-	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-fio2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``ID`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 	
 	[Template]			Create FiO2 with ehr reference
     [Tags]   			ID
@@ -102,11 +104,13 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 004 Create FiO2 (Invalid/Missing 'identifier')
-	[Documentation]		1. *CREATE* an EHR record\n\n
-	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
-	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
-	...					   based on example JSON and data in TC table\n\n
-	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-fio2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Identifier`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 	
 	[Template]			Create FiO2 with ehr reference
     [Tags]   			identifier
@@ -145,11 +149,13 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 005 Create FiO2 (Invalid/Missing 'meta')
-	[Documentation]		1. *CREATE* an EHR record\n\n
-	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
-	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
-	...					   based on example JSON and data in TC table\n\n
-	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-fio2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Meta`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 
 	[Template]			Create FiO2 with ehr reference
     [Tags]             	meta
@@ -180,11 +186,13 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 006 Create FiO2 (Invalid/Missing 'code')
-	[Documentation]		1. *CREATE* an EHR record\n\n
-	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
-	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
-	...					   based on example JSON and data in TC table\n\n
-	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-fio2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Code`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 	
 	[Template]			Create FiO2 with ehr reference
     [Tags]              code
@@ -208,11 +216,13 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	
 
 007 Create FiO2 (Invalid/Missing 'category')
-	[Documentation]		1. *CREATE* an EHR record\n\n
-	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
-	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
-	...					   based on example JSON and data in TC table\n\n
-	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-fio2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Category`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 
 	[Template]			Create FiO2 with ehr reference
     [Tags]    			category
@@ -267,11 +277,13 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 008 Create FiO2 (Invalid/Missing 'effectiveDateTime')
-	[Documentation]		1. *CREATE* an EHR record\n\n
-	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
-	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
-	...					   based on example JSON and data in TC table\n\n
-	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-fio2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``effective DateTime`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 
 	[Template]			Create FiO2 with ehr reference
     [Tags]  			DateTime
@@ -286,11 +298,13 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 009 Create FiO2 (Invalid/Missing 'valueQuantity')
-	[Documentation]		1. *CREATE* an EHR record\n\n
-	...					2. *REPLACE* {{patientID}} in example JSON with EHR reference\n\n
-	...					3. *GENERATE* (invalid) payload for FiO2 profile\n\n
-	...					   based on example JSON and data in TC table\n\n
-	...					4. *POST* FiO2 payload to /Observation endpoint\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-fio2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``valueQuantity`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 
 	[Template]			Create FiO2 with ehr reference
     [Tags]              valueQuantity
