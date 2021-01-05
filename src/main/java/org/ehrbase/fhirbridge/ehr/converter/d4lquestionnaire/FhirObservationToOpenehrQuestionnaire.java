@@ -11,8 +11,6 @@ import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.GeneralInf
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Medication;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Symptoms;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.time.temporal.TemporalAccessor;

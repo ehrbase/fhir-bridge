@@ -106,8 +106,8 @@ public class PatientIdProcessor implements Processor, MessageSourceAware {
 
     public String getQuestionnaireId(QuestionnaireResponse resource){
         if(resource.getQuestionnaire().contains("http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|")){
-         /*   String ehr_id = openEhrClient.ehrEndpoint().createEhr().toString();
-            Query<Record1<UUID>> query = Query.buildNativeQuery("select e/ehr_status/subject/external_ref/id/value from ehr e where  e/ehr_id/value = $patientId", UUID.class);
+            String ehr_id = openEhrClient.ehrEndpoint().createEhr().toString();
+          /*  Query<Record1<UUID>> query = Query.buildNativeQuery("select e/ehr_status/subject/external_ref/id/value from ehr e where  e/ehr_id/value = $patientId", UUID.class);
             List<Record1<UUID>> result = openEhrClient.aqlEndpoint()
                     .execute(query, new ParameterValue<>("patientId", ehr_id));*/
            // return result.get(0).value1().toString();
