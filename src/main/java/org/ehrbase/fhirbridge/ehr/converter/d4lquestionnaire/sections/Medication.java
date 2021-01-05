@@ -2,13 +2,11 @@ package org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
+import liquibase.pro.packaged.Z;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ImmunsuppressivaEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.KortisionEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungDesImmunstatusEvaluation;
-import org.ehrbase.fhirbridge.opt.d4lquestionnairecomposition.definition.*;
-import org.ehrbase.fhirbridge.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.opt.shareddefinition.TransitionDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
+import org.hl7.fhir.r4.model.ImmunizationEvaluation;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.time.temporal.TemporalAccessor;
@@ -23,7 +21,7 @@ public class Medication extends QuestionnaireSection {
     private static final String M2 = "M2";
 
 
-    private Optional<ArzneimittelverwaltungAction> arzneimittelverwaltungActionQuestion = Optional.empty();
+    private Optional<ZusammenfassungDesImmunstatusEvaluation> zusammenfassungDesImmunstatusEvaluationQuestion = Optional.empty();
     private Optional<ImmunsuppressivaEvaluation> immunsuppressivaEvaluationQuestion = Optional.empty();
     private Optional<KortisionEvaluation> kortisonEvaluationQuestion = Optional.empty();
 
@@ -38,17 +36,16 @@ public class Medication extends QuestionnaireSection {
             if (getValueCode(question).isPresent()) {
                 extractMedication(question);
             }
-
         }
     }
 
     private void extractMedication(QuestionnaireResponse.QuestionnaireResponseItemComponent question) {
         switch (question.getLinkId()) {
             case M0:
-                this.mapSteroids(getQuestionLoincYesNoDontKnowToBoolean(question));
+                this.mapSteroids(getQuestionValueCodeToString(question));
                 break;
             case M1:
-                this.mapImmunosuppressants(getQuestionLoincYesNoDontKnowToBoolean(question));
+                this.mapImmunosuppressants(getQuestionValueCodeToString(question));
                 break;
             case M2:
                 this.mapVaccinatedFlu(getQuestionLoincYesNoToBoolean(question));
@@ -58,39 +55,54 @@ public class Medication extends QuestionnaireSection {
         }
     }
 
-    protected void mapSteroids(Boolean useSteroids) {
-        KortisonEvaluation kortisonEvaluation = new KortisonEvaluation();
+    protected void mapSteroids(String useSteroids) {
+        KortisionEvaluation kortisonEvaluation = new KortisionEvaluation();
         kortisonEvaluation.setLanguage(Language.DE);
         kortisonEvaluation.setSubject(new PartySelf());
-        kortisonEvaluation.setAktuelleAnwendungValue(useSteroids);
+        kortisonEvaluation.setStatusDefiningCode(getStatusDefiningCode2(useSteroids));
         kortisonEvaluationQuestion = Optional.of(kortisonEvaluation);
-
     }
 
-    protected void mapImmunosuppressants(Boolean useImmunosuppressants) {
+    protected void mapImmunosuppressants(String useImmunosuppressants) {
         ImmunsuppressivaEvaluation immunsuppressivaEvaluation = new ImmunsuppressivaEvaluation();
-        immunsuppressivaEvaluation.setAktuelleAnwendungValue(useImmunosuppressants);
+        immunsuppressivaEvaluation.setStatusDefiningCode(getStatusDefiningCode2(useImmunosuppressants));
         immunsuppressivaEvaluation.setLanguage(Language.DE);
         immunsuppressivaEvaluation.setSubject(new PartySelf());
         immunsuppressivaEvaluationQuestion = Optional.of(immunsuppressivaEvaluation);
     }
 
+    private StatusDefiningCode2 getStatusDefiningCode2(String codeString) {
+        if (codeString.equals(StatusDefiningCode2.JA.getValue())) {
+            return StatusDefiningCode2.JA;
+        } else if (codeString.equals(StatusDefiningCode2.NEIN.getValue())) {
+            return StatusDefiningCode2.NEIN;
+        } else if (codeString.equals(StatusDefiningCode2.ICH_WEISS_ES_NICHT.getValue())) {
+            return StatusDefiningCode2.ICH_WEISS_ES_NICHT;
+        } else {
+            throw new UnprocessableEntityException("The code:" + codeString + " cannot be mapped, please enter a valid code e.g. ja (LA33-6), nein (LA32-8), ich weiss es nicht (LA12688-0)");
+        }
+    }
+
+
     protected void mapVaccinatedFlu(Boolean wasVaccinatedFlu) {
-        ArzneimittelverwaltungAction arzneimittelverwaltungAction = new ArzneimittelverwaltungAction();
-        arzneimittelverwaltungAction.setArzneimittelValue("Grippeimpfung");
-        arzneimittelverwaltungAction.setLanguage(Language.DE);
-        arzneimittelverwaltungAction.setSubject(new PartySelf());
-        arzneimittelverwaltungAction.setTimeValue(authored);
+        ZusammenfassungDesImmunstatusEvaluation zusammenfassungDesImmunstatusEvaluation = new ZusammenfassungDesImmunstatusEvaluation();
+        ZusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement zusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement = new ZusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement();
+        zusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement.setValue("Grippe");
+        zusammenfassungDesImmunstatusEvaluation.setInfektionskrankheitOderErreger(List.of(zusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement));
 
-        //TODO what if false
-        arzneimittelverwaltungAction.setTransitionDefiningcode(TransitionDefiningcode.FINISH);
-
-        arzneimittelverwaltungAction.setArzneimittelbehandlungIstAbgeschlossenDefiningcodeCurrentState(RezeptWurdeAusgefuhrtDefiningcode.COMPLETED);
-        arzneimittelverwaltungAction.setArzneimittelbehandlungIstAbgeschlossenDefiningcodeCurrentState(RezeptWurdeAusgefuhrtDefiningcode.COMPLETED);
+        zusammenfassungDesImmunstatusEvaluation.setLanguage(Language.DE);
+        zusammenfassungDesImmunstatusEvaluation.setSubject(new PartySelf());
+        //TODO Datum der letzten Auffrischung was damit machen ?
 
 
-        arzneimittelverwaltungAction.setVergangeneImpfungSeitOktober2019Value(wasVaccinatedFlu);
-        arzneimittelverwaltungActionQuestion = Optional.of(arzneimittelverwaltungAction);
+        if(wasVaccinatedFlu){
+            zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
+            zusammenfassungDesImmunstatusEvaluation.setImmunsstatusDefiningCode(ImmunsstatusDefiningCode.IMPFSTATUS_IST_AKUTELL);
+        }else{
+            zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
+            zusammenfassungDesImmunstatusEvaluation.setImmunsstatusDefiningCode(ImmunsstatusDefiningCode.MPFSTATUS_IST_NICHT_AKUTELL);
+        }
+        zusammenfassungDesImmunstatusEvaluationQuestion = Optional.of(zusammenfassungDesImmunstatusEvaluation);
     }
 
 
@@ -101,13 +113,8 @@ public class Medication extends QuestionnaireSection {
     }
 
     public void setMedikamenteImpfungen(D4LQuestionnaireComposition d4LQuestionnaireComposition) {
-        List<ArzneimittelverwaltungAction> arzneimittelverwaltungActionsList = new ArrayList<>();
-        arzneimittelverwaltungActionQuestion.ifPresent(arzneimittelverwaltungActionsList::add);
-        medikamenteImpfungenSection.setArzneimittelverwaltung(arzneimittelverwaltungActionsList);
-        d4LQuestionnaireComposition.setZusammenfassungDesImmunstatus(ZusammenfassungDesImmunstatusEvaluation );
-
+        zusammenfassungDesImmunstatusEvaluationQuestion.ifPresent(d4LQuestionnaireComposition::setZusammenfassungDesImmunstatus);
         immunsuppressivaEvaluationQuestion.ifPresent(d4LQuestionnaireComposition::setImmunsuppressiva);
         kortisonEvaluationQuestion.ifPresent(d4LQuestionnaireComposition::setKortision);
-
     }
 }
