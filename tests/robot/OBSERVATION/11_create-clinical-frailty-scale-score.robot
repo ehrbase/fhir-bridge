@@ -47,7 +47,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	...                 4. *VALIDATE* the response status \n\n
     ...                 5. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create clinical frailty scale score w/o ehr reference
-	[Tags]              subject    xxx
+	[Tags]              subject
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	                                            Location
 	# 																CODE
@@ -94,7 +94,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]		    create clinical frailty scale score with ehr reference
-    [Tags]          	resourceType    not-ready
+    [Tags]          	resourceType
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
 	# 																CODE
