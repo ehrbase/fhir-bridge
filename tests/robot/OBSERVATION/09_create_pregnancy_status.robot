@@ -232,7 +232,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
 	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
-#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category[0]
+#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
 
 
 008 Create Pregnancy Status (Invalid/Missing 'code')
@@ -487,6 +487,78 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
     Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  false		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
     Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
 
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# BUG TRACE
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
+	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
+	[Template]			create pregnancy status with ehr reference
+    [Tags]              category    not-ready
+
+	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																CODE
+
+	# invalid category
+	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${pregnancy_status-url}
+	
+	#invalid code 0
+	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}
+	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
+	
+	# invaild system 0
+	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
+	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
+
+
+BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
+	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
+	[Template]			create pregnancy status with ehr reference
+    [Tags]              category    not-ready
+
+	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																	CODE
+	
+	# missing valueCodeableConcept
+	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
+
+	# missing coding
+	$.valueCodeableConcept.coding 				missing					422    	Index 0 out of bounds for length 0
+
+	# invalid system
+	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+
+	# invalid code
+	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
+
+
+BUG TRACE 03 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
+	[Documentation]		Belongs to TC 012! Remove separation when it's fixed!
+	[Template]			create pregnancy status with ehr reference AND data absentreason
+    [Tags]              DataAbsentReason    not-ready
+
+	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																	CODE
+
+	# missing valueCodeableConcept
+	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+
+	# missing coding
+	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+
+	# invalid system - todo
+	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
+
+	# invalid code - todo
+	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+
+	# invalid display - todo
+	$.dataAbsentReason.coding[0].display		missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].display		${randstring}			422    	Index 0 out of bounds for length 0
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 *** Keywords ***
