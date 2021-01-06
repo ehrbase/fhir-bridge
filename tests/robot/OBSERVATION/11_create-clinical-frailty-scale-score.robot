@@ -113,12 +113,12 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]		    create clinical frailty scale score with ehr reference
-    [Tags]          	ID    not-ready
+    [Tags]          	ID
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
 	# 																CODE
-	$.id							${EMPTY}						422		@value cannot be empty															Observation.id												
-	$.id							${randinteger}					422		Error parsing JSON: the primitive value must be a string						Observation.id
+    $.id							${EMPTY}						422		@value cannot be empty															Observation.id												
+    $.id							${randinteger}					422		Error parsing JSON: the primitive value must be a string						Observation.id
 
 
 004 Create Clinical Frailty Scale Score (Invalid/Missing 'meta')
@@ -130,23 +130,23 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              meta    not-ready
+    [Tags]              meta
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
-	$.meta							missing							422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
-	$.meta.profile					missing							422    	Object must have some content																					Observation.meta
-	$.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.						Observation.meta.profile.0.
-	$.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.						Observation.meta.profile.0.
-	$.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.							Observation.meta.profile.0.
-	$.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked								Observation.meta.profile.0.
-	$.meta.profile					${EMPTY}						422    	This property must be an Array, not a a primitive property														Observation.meta.profile
+    $.meta							missing							422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
+    $.meta.profile					missing							422    	Object must have some content																					Observation.meta
+    $.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.						Observation.meta.profile.0.
+    $.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.						Observation.meta.profile.0.
+    $.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.							Observation.meta.profile.0.
+    $.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked								Observation.meta.profile.0.
+    $.meta.profile					${EMPTY}						422    	This property must be an Array, not a a primitive property														Observation.meta.profile
 	
 	# comment: the next one sets the value to an empty list/array []
-	$.meta.profile					${{ [] }}						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
+    $.meta.profile					${{ [] }}						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	
 	# comment: the next one sets value to an empty object {}
-	$.meta.profile					${{ {} }}						422    	This property must be an Array, not a an object
+    $.meta.profile					${{ {} }}						422    	This property must be an Array, not a an object
 
 
 005 Create Clinical Frailty Scale Score (Invalid/Missing 'identifier')
