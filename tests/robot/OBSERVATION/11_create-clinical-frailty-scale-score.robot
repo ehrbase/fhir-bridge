@@ -29,7 +29,7 @@ Force Tags              create    frailty-scale-score    invalid
 
 
 *** Variables ***
-${pregnancy_status-url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pregnancy-status
+${frailty_score-url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score
 ${randstring}                   foobar
 ${randinteger}                  ${12345}
 ${identifiersystem}             urn:ietf:rfc:3986
@@ -40,60 +40,60 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 
 *** Test Cases ***
 
-001 Create Pregnancy Status (Invalid/Missing 'Subject')
-    [Documentation]     1. *LOAD* _create-pregnancy-status.json_ \n\n
+001 Create Clinical Frailty Scale Score (Invalid/Missing 'Subject')
+    [Documentation]     1. *LOAD* _create-clinical-frailty-scale-score.json_ \n\n
 	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
     ...                 3. *POST* example JSON to observation endpoint \n\n
 	...                 4. *VALIDATE* the response status \n\n
     ...                 5. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create pregnancy status w/o ehr reference
-	[Tags]              subject    not-ready
+	[Template]			create clinical frailty scale score w/o ehr reference
+	[Tags]              subject    xxx
 
-	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
+	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	                                            Location
 	# 																CODE
 
 	# invalid cases for value
     $.subject.identifier.value		missing							422		 Subject identifier is required
     $.subject.identifier.value		foobar							422		 EhrId not found for subject 'foobar'
-    $.subject.identifier.value		${EMPTY}						422		 @value cannot be empty                                        					Observation.subject.identifier.value
-    $.subject.identifier.value		${{ [] }}						422		 This property must be an simple value, not an array           					Observation.subject.identifier.value
-    $.subject.identifier.value		${{ {} }}						422		 This property must be an simple value, not an object          					Observation.subject.identifier.value
-    $.subject.identifier.value		${123}							422		 Error parsing JSON: the primitive value must be a string      					Observation.subject.identifier.value
+    $.subject.identifier.value		${EMPTY}						422		 @value cannot be empty                                        					                                            Observation.subject.identifier.value
+    $.subject.identifier.value		${{ [] }}						422		 This property must be an simple value, not an array           					                                            Observation.subject.identifier.value
+    $.subject.identifier.value		${{ {} }}						422		 This property must be an simple value, not an object          					                                            Observation.subject.identifier.value
+    $.subject.identifier.value		${123}							422		 Error parsing JSON: the primitive value must be a string      					                                            Observation.subject.identifier.value
 
 	# invalid cases for system
     $.subject.identifier.system		foobar							422		Identifier.system must be an absolute reference, not a local reference
-    $.subject.identifier.system		${EMPTY}						422		@value cannot be empty                                         					Observation.subject.identifier.system
-    $.subject.identifier.system		${{ [] }}						422		 This property must be an simple value, not an array           					Observation.subject.identifier.system
-    $.subject.identifier.system		${{ {} }}						422		 This property must be an simple value, not an object          					Observation.subject.identifier.system
-    $.subject.identifier.system		${123}							422		 Error parsing JSON: the primitive value must be a string      					Observation.subject.identifier.system
+    $.subject.identifier.system		${EMPTY}						422		@value cannot be empty                                         					                                            Observation.subject.identifier.system
+    $.subject.identifier.system		${{ [] }}						422		 This property must be an simple value, not an array           					                                            Observation.subject.identifier.system
+    $.subject.identifier.system		${{ {} }}						422		 This property must be an simple value, not an object          					                                            Observation.subject.identifier.system
+    $.subject.identifier.system		${123}							422		 Error parsing JSON: the primitive value must be a string      					                                            Observation.subject.identifier.system
 
 	# invalid cases for identifier
-    $.subject.identifier			missing							422		 Object must have some content                                 					Observation.subject
-    $.subject.identifier			${EMPTY}						422		 This property must be an Object, not a primitive property     					Observation.subject.identifier
-    $.subject.identifier			${{ [] }}						422		 This property must be an Object, not an array                 					Observation.subject.identifier
-    $.subject.identifier			${{ {} }}						422		 Object must have some content                                 					Observation.subject.identifier
-    $.subject.identifier			${123}							422		 This property must be an Object, not a primitive property     					Observation.subject.identifier
+    $.subject.identifier			missing							422		 Object must have some content                                 					                                            Observation.subject
+    $.subject.identifier			${EMPTY}						422		 This property must be an Object, not a primitive property     					                                            Observation.subject.identifier
+    $.subject.identifier			${{ [] }}						422		 This property must be an Object, not an array                 					                                            Observation.subject.identifier
+    $.subject.identifier			${{ {} }}						422		 Object must have some content                                 					                                            Observation.subject.identifier
+    $.subject.identifier			${123}							422		 This property must be an Object, not a primitive property     					                                            Observation.subject.identifier
 
 	# invalid cases for subject
-    $.subject						missing							422		 Observation.subject: minimum required = 1, but only found 0 .from ${pregnancy_status-url}
-    $.subject						${EMPTY}						422		 This property must be an Object, not a primitive property     					Observation.subject
-    $.subject						${{ [] }}						422		 This property must be an Object, not an array                 					Observation.subject
-    $.subject						${{ {} }}						422		 Object must have some content                                 					Observation.subject
-    $.subject						${123}							422		 This property must be an Object, not a primitive property     					Observation.subject
+    $.subject						missing							422		 Observation.subject: minimum required = 1, but only found 0 .from ${frailty_score-url}
+    $.subject						${EMPTY}						422		 This property must be an Object, not a primitive property     					                                            Observation.subject
+    $.subject						${{ [] }}						422		 This property must be an Object, not an array                 					                                            Observation.subject
+    $.subject						${{ {} }}						422		 Object must have some content                                 					                                            Observation.subject
+    $.subject						${123}							422		 This property must be an Object, not a primitive property     					                                            Observation.subject
 	
 	# comment: random uuid																			 regex for uuid
-    $.subject.identifier.value    ${{str(uuid.uuid4())}}    		422     EhrId not found for subject
+    $.subject.identifier.value    ${{str(uuid.uuid4())}}    		422     EhrId not found for subject '([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'
 	
 
-002 Create Pregnancy Status (Invalid/Missing 'resourceType')
+002 Create Clinical Frailty Scale Score (Invalid/Missing 'resourceType')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]		    create pregnancy status with ehr reference
+	[Template]		    create clinical frailty scale score with ehr reference
     [Tags]          	resourceType    not-ready
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
@@ -104,15 +104,15 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
     $.resourceType					${randinteger}					422		This does not appear to be a FHIR resource .unknown name '${randinteger}'.
 
 
-003 Create Pregnancy Status (Invalid/Missing 'ID')
+003 Create Clinical Frailty Scale Score (Invalid/Missing 'ID')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``ID`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]		    create pregnancy status with ehr reference
+	[Template]		    create clinical frailty scale score with ehr reference
     [Tags]          	ID    not-ready
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
@@ -121,15 +121,15 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.id							${randinteger}					422		Error parsing JSON: the primitive value must be a string						Observation.id
 
 
-004 Create Pregnancy Status (Invalid/Missing 'meta')
+004 Create Clinical Frailty Scale Score (Invalid/Missing 'meta')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``meta`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create pregnancy status with ehr reference
+	[Template]			create clinical frailty scale score with ehr reference
     [Tags]              meta    not-ready
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
@@ -149,15 +149,15 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.meta.profile					${{ {} }}						422    	This property must be an Array, not a an object
 
 
-005 Create Pregnancy Status (Invalid/Missing 'identifier')
+005 Create Clinical Frailty Scale Score (Invalid/Missing 'identifier')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create pregnancy status with ehr reference
+	[Template]			create clinical frailty scale score with ehr reference
     [Tags]              identifier    not-ready
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
@@ -178,15 +178,15 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''urn:ietf:rfc:3986'', then the identifier.value must be a full URI						Observation.identifier.0.
 
 
-006 Create Pregnancy Status (Invalid/Missing 'Status')
+006 Create Clinical Frailty Scale Score (Invalid/Missing 'Status')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Status`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]		    create pregnancy status with ehr reference
+	[Template]		    create clinical frailty scale score with ehr reference
     [Tags]          	status    not-ready
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																								Location
@@ -197,22 +197,22 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.status						${randstring}					400		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
 
 
-007 Create Pregnancy Status (Invalid/Missing 'category')
+007 Create Clinical Frailty Scale Score (Invalid/Missing 'category')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Category`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create pregnancy status with ehr reference
+	[Template]			create clinical frailty scale score with ehr reference
     [Tags]              category    not-ready
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
 	# invalid category
-#	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${pregnancy_status-url}
+#	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${frailty_score-url}
 	$.category								${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.category
 	$.category								${{ {} }}				422    	This property must be an Array, not an Object																Observation.category
 	$.category								${{ [{}] }}				422    	Object must have some content																				Observation.category
@@ -222,9 +222,9 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.category[0].coding    				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.category.0..coding
 	
 	#invalid code 0
-#	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}
+#	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${frailty_score-url}
 	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
-#	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
+#	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${frailty_score-url}					Observation.category.0.
 	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
 	
 	# invaild system 0
@@ -232,26 +232,26 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
 	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
-#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
+#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${frailty_score-url}					Observation.category.0.
 
 
-008 Create Pregnancy Status (Invalid/Missing 'code')
+008 Create Clinical Frailty Scale Score (Invalid/Missing 'code')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Code`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create pregnancy status with ehr reference
+	[Template]			create clinical frailty scale score with ehr reference
     [Tags]              code    not-ready
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
 	# invalid code
-	$.code									missing					422    	Observation.code: minimum required = 1, but only found 0 .from ${pregnancy_status-url}						Observation
-	$.code									${{ [] }}				422    	Observation.code: minimum required = 1, but only found 0 .from ${pregnancy_status-url}						Observation
+	$.code									missing					422    	Observation.code: minimum required = 1, but only found 0 .from ${frailty_score-url}						Observation
+	$.code									${{ [] }}				422    	Observation.code: minimum required = 1, but only found 0 .from ${frailty_score-url}						Observation
 	$.code									${{ {} }}				422    	Object must have some content																				Observation.code
 	$.code									${{ [{}] }}				422    	This property must be an Object, not an array																Observation.code
 
@@ -277,15 +277,15 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.code.coding[0].display				${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..display
 
 
-009 Create Pregnancy Status (Invalid/Missing 'effectiveDateTime')
+009 Create Clinical Frailty Scale Score (Invalid/Missing 'effectiveDateTime')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create pregnancy status with ehr reference
+	[Template]			create clinical frailty scale score with ehr reference
     [Tags]              effectiveDateTime    not-ready
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
@@ -321,15 +321,15 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.effectiveDateTime						${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.effective.x.
 
 
-010 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
+010 Create Clinical Frailty Scale Score (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``valueCodeableConcept`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create pregnancy status with ehr reference
+	[Template]			create clinical frailty scale score with ehr reference
     [Tags]              valueCodeableConcept    not-ready
 
 
@@ -371,9 +371,9 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..text
 
 
-011 Create Pregnancy Status (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
+011 Create Clinical Frailty Scale Score (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -382,21 +382,21 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	[Tags]              DataAbsentReason    not-ready
 
 	ehr.create new ehr    				  				000_ehr_status.json
-	create with DataAbsentReason		  				DataAbsentReason				create-pregnancy-status.json
+	create with DataAbsentReason		  				DataAbsentReason				create-clinical-frailty-scale-score.json
 	validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
 
-012 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
+012 Create Clinical Frailty Scale Score (Invalid/Missing 'DataAbsentReason')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create pregnancy status with ehr reference AND data absentreason
+	[Template]			create clinical frailty scale score with ehr reference AND data absentreason
     [Tags]              DataAbsentReason    not-ready
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
@@ -435,129 +435,82 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
 
 
-013 Create Pregnancy Status (invalid multi)
+013 Create Clinical Frailty Scale Score (invalid multi)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* values for attributes \n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status \n\n
     ...                 6. *VALIDATE* outcome against diagnostic text (english + german)
-    [Template]         create pregnancy status JSON
+    [Template]         create clinical frailty scale score JSON
     [Tags]             multi    not-ready
 
 #|  resourceType   |          		ID   			|           meta         						|                              identifier                         |	  status  	|                         				category                           					        					   |                                        									code          								|         subject                    |	  DateTime	   |                      			     valueCodeableConcept			           		           |  R.-Code  |                                                             diagnostics 							                                              |   location
 #|                 |                				|  available  | 			profile  			|  available  |        system         |             value         |             |  available  |  codingavailable  |  				system  									   |    	 code          |  available  |  coding available  |  			0.system	  		|  		0.code	  |    		   0.display 		    |  available  |   Identifier-value   |                 |  available  |		coding	|         system     	 |  		code      	|     display      |           |               				                                    ENG				                                                                  |
 
 # all attributes invalid for valueCodeableConcept
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	               ${EMPTY}    	        ${EMPTY}		    422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..display
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         Pregnancy status           		  true    		 	valid      		  2020-02-25		  true		    true           ${1234}	               test      	        ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	             http://google.com      test   		        422          ele-1: All FHIR elements must have a @value or children                                                                                             Observation.value.ofType.CodeableConcept..coding.0..system
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       missing	               ${EMPTY}             missing		        422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..code
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         Pregnancy status            	 	  true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               missing 	            test   		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..system
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         Clinical Frailty Scale Score            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	               ${EMPTY}    	        ${EMPTY}		    422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..display
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         Clinical Frailty Scale Score           		  true    		 	valid      		  2020-02-25		  true		    true           ${1234}	               test      	        ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         Clinical Frailty Scale Score            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	             http://google.com      test   		        422          ele-1: All FHIR elements must have a @value or children                                                                                             Observation.value.ofType.CodeableConcept..coding.0..system
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         Clinical Frailty Scale Score            		  true    		 	valid      		  2020-02-25		  true		    true	       missing	               ${EMPTY}             missing		        422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..code
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true		  		 http://loinc.org		  		  82810-3         Clinical Frailty Scale Score            	 	  true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               missing 	            test   		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..system
 
 # all attributes invalid for code
-    Observation    	        pregnancy-status  		       true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   false	  		 http://loinc.org		  		  82810-3         Pregnancy status           		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Observation.code.coding: minimum required = 1, but only found 0 .from ${pregnancy_status-url}.                                                      Observation.code
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 ${EMPTY}             	  		  ${EMPTY}        ${EMPTY}                            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                          	 Observation.code.coding.0..display
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 http://google.com		  		  ${12345}        missing                             true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile ${pregnancy_status-url}                              Observation.code
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 test            		  		  missing         ${12345}                            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.code.coding.0.
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 missing         		  	      test            test1234                            true    		 	valid      		  2020-02-25	      true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          A code with no system has no defined meaning. A system should be provided                                                                           Observation.code.coding.0.
+    Observation    	        clinical-frailty-scale-score  		       true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   false	  		 http://loinc.org		  		  82810-3         Clinical Frailty Scale Score           		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Observation.code.coding: minimum required = 1, but only found 0 .from ${frailty_score-url}.                                                      Observation.code
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 ${EMPTY}             	  		  ${EMPTY}        ${EMPTY}                            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                          	 Observation.code.coding.0..display
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 http://google.com		  		  ${12345}        missing                             true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile ${frailty_score-url}                              Observation.code
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 test            		  		  missing         ${12345}                            true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.code.coding.0.
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 missing         		  	      test            test1234                            true    		 	valid      		  2020-02-25	      true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          A code with no system has no defined meaning. A system should be provided                                                                           Observation.code.coding.0.
 
 # all attributes invalid for category
-#	Observation    	        pregnancy-status  		       true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://google.com                                                  test                    true			   true		  		 http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422     	 Status code LA26683-5 is not supported     																										 ${EMPTY}
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           missing                                                            ${EMPTY}                true			   true			  	 http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..code
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           ${EMPTY}                                                           ${12345}                true			   true			  	 http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..system
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           ${12345}                                                           missing                 true			   true			     http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           test                                                               ${EMPTY}                true			   true			  	 http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                				 Observation.category.0..coding.0..code
+#	Observation    	        clinical-frailty-scale-score  		       true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://google.com                                                  test                    true			   true		  		 http://loinc.org		  		  82810-3         Clinical Frailty Scale Score            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422     	 Status code LA26683-5 is not supported     																										 ${EMPTY}
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           missing                                                            ${EMPTY}                true			   true			  	 http://loinc.org		  		  82810-3         Clinical Frailty Scale Score            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..code
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           ${EMPTY}                                                           ${12345}                true			   true			  	 http://loinc.org		  		  82810-3         Clinical Frailty Scale Score            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..system
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           ${12345}                                                           missing                 true			   true			     http://loinc.org		  		  82810-3         Clinical Frailty Scale Score            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           test                                                               ${EMPTY}                true			   true			  	 http://loinc.org		  		  82810-3         Clinical Frailty Scale Score            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                				 Observation.category.0..coding.0..code
 
 # mix invalid attributes
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
-    ${1234}      	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          This does not appear to be a FHIR resource .unknown name '1234'.                                                                                    1234
-    Observation    	        ${1234}      				   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.id
-    Observation    	        pregnancy-status  			   false        ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  	      ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.value.ofType.CodeableConcept..coding.0.
-    Observation    	        pregnancy-status  			   true         ${1234}                			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Profile reference '1234' could not be resolved, so has not been checked                                                                             Observation.meta.profile.0.
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  false      ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             ${1234}	     	true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.status
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     false            true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.code.coding.0..system
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             false          ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Object must have some content                                                                                                                       Observation.category.0.
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 false			   true			  	 ${1234}          		  	      ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.code: minimum required = 1, but only found 0 .from ${pregnancy_status-url}.                                                               Observation
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false		     ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   true 			 ${1234}          		  		  ${1234}         ${1234}                           false    	 	    valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.subject: minimum required = 1, but only found 0 .from ${pregnancy_status-url}.                                                            Observation
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false		     ${1234}          		  		  ${1234}         ${1234}                           true    		 	test      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  ${12345}		      true		    true	       ${1234}	               ${1234}              ${1234}		        422          Not a valid date/time .12345.                                                                                                                       Observation.effective.ofType.dateTime.
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  false		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
-    Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
+    ${1234}      	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          This does not appear to be a FHIR resource .unknown name '1234'.                                                                                    1234
+    Observation    	        ${1234}      				   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.id
+    Observation    	        clinical-frailty-scale-score  			   false        ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  	      ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.value.ofType.CodeableConcept..coding.0.
+    Observation    	        clinical-frailty-scale-score  			   true         ${1234}                			  true       ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Profile reference '1234' could not be resolved, so has not been checked                                                                             Observation.meta.profile.0.
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  false      ${randinteger}     	 ${randinteger}             final		     true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             ${1234}	     	true             true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.status
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     false            true           ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.code.coding.0..system
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             false          ${1234}                                                            ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Object must have some content                                                                                                                       Observation.category.0.
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 false			   true			  	 ${1234}          		  	      ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.code: minimum required = 1, but only found 0 .from ${frailty_score-url}.                                                               Observation
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false		     ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   true 			 ${1234}          		  		  ${1234}         ${1234}                           false    	 	    valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.subject: minimum required = 1, but only found 0 .from ${frailty_score-url}.                                                            Observation
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false		     ${1234}          		  		  ${1234}         ${1234}                           true    		 	test      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  ${12345}		      true		    true	       ${1234}	               ${1234}              ${1234}		        422          Not a valid date/time .12345.                                                                                                                       Observation.effective.ofType.dateTime.
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  false		    true	       ${1234}	               ${1234}              ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
+    Observation    	        clinical-frailty-scale-score  			   true         ${frailty_score-url}			  true       ${randinteger}     	 ${randinteger}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
 
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
+BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'category')
 	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
-	[Template]			create pregnancy status with ehr reference
+	[Template]			create clinical frailty scale score with ehr reference
     [Tags]              category    not-ready
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
 	# invalid category
-	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${pregnancy_status-url}
+	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${frailty_score-url}
 	
 	#invalid code 0
-	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}
-	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
+	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${frailty_score-url}
+	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${frailty_score-url}					Observation.category.0.
 	
 	# invaild system 0
 	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
-	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
+	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${frailty_score-url}					Observation.category.0.
 
 
-BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
-	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
-	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready
-
-	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																	CODE
-	
-	# missing valueCodeableConcept
-	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
-
-	# missing coding
-	$.valueCodeableConcept.coding 				missing					422    	Index 0 out of bounds for length 0
-
-	# invalid system
-	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
-	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
-
-	# invalid code
-	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
-
-
-BUG TRACE 03 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
-	[Documentation]		Belongs to TC 012! Remove separation when it's fixed!
-	[Template]			create pregnancy status with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready
-
-	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																	CODE
-
-	# missing valueCodeableConcept
-	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
-
-	# missing coding
-	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
-
-	# invalid system - todo
-	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
-
-	# invalid code - todo
-	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
-
-	# invalid display - todo
-	$.dataAbsentReason.coding[0].display		missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].display		${randstring}			422    	Index 0 out of bounds for length 0
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -574,26 +527,26 @@ BUG TRACE 03 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
 # [ HIGH LEVEL KEYWORDS ]
 
 
-create pregnancy status with ehr reference
+create clinical frailty scale score with ehr reference
 	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
 	...					${error_message}    ${location}=${None}
 
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Observation           Pregnancy Status            ${payload}
+						observation.POST /Observation           Clinical Frailty Scale Score            ${payload}
 						observation.validate response - 422 (with error message NEW)        ${http_status_code}
 						...															        ${error_message}
 						...															        ${location}
 
 
-create pregnancy status w/o ehr reference    
+create clinical frailty scale score w/o ehr reference    
 	[Arguments]         ${json_path}        ${value}                ${http_status_code}
 	...					${error_message}    ${location}=${None}
 
 	${fake_ehr_ref}=	Evaluate    str(uuid.uuid4())    uuid
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
-						observation.POST /Observation    Pregnancy Status    ${payload}
+						observation.POST /Observation    Clinical Frailty Scale Score    ${payload}
 						observation.validate response - 422 (with error message NEW)      ${http_status_code}
 						...															      ${error_message}
 						...															      ${location}
@@ -603,7 +556,7 @@ generate payload from example json
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-pregnancy-status.json
+	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-clinical-frailty-scale-score.json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 
@@ -618,7 +571,7 @@ generate payload from example json
 	[Return]			${payload}
 
 
-create pregnancy status JSON
+create clinical frailty scale score JSON
     [Arguments]         ${resourceType}    				${ID}    						${meta}    							${profile}
 	...					${Identifieravailable}          ${Identifiersystem}         	${Identifiervalue}                  ${status}
 	...                 ${categoryavailable}    	    ${categorycodingavailable}    	${categorysystem}					${categorycode}
@@ -631,7 +584,7 @@ create pregnancy status JSON
 
     &{resp}             Run Keywords
                         ...    ehr.create new ehr               000_ehr_status.json                             AND
-                        ...    load JSON                        create-pregnancy-status.json				    AND
+                        ...    load JSON                        create-clinical-frailty-scale-score.json				    AND
                         ...    update Resource Type             ${resourceType}                                 AND
                         ...    update ID                        ${ID}                                           AND
                         ...    update Meta Profile              ${meta}                                         ${profile}                    	AND
@@ -651,9 +604,9 @@ generate payload from example json with data absentreason
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${dict_dataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "pregnancy status"} }}
+	${dict_dataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "Clinical Frailty Scale Score"} }}
 
-	${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/create-pregnancy-status.json
+	${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/create-clinical-frailty-scale-score.json
                         Update Value To Json    	${payload}    $.subject.identifier.value    			${subject_id}
 						Delete Object From Json    	${payload}    $.text
 						Delete Object From Json    	${payload}    $.valueCodeableConcept
@@ -670,13 +623,13 @@ generate payload from example json with data absentreason
 	[Return]			${payload}
 
 
-create pregnancy status with ehr reference AND data absentreason
+create clinical frailty scale score with ehr reference AND data absentreason
 	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
 	...					${error_message}    ${location}=${None}
 
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json with data absentreason    ${json_path}    ${value}
-						observation.POST /Observation    pregnancy status    ${payload}
+						observation.POST /Observation    Clinical Frailty Scale Score    ${payload}
 						observation.validate response - 422 (with error message NEW)     ${http_status_code}
 						...															     ${error_message}
 						...															     ${location}
@@ -685,7 +638,7 @@ create pregnancy status with ehr reference AND data absentreason
 create with DataAbsentReason
     [Arguments]         ${fhir_resource_name}    ${example_json}
 
-	${dict_dataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "pregnancy status"} }}
+	${dict_dataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "Clinical Frailty Scale Score"} }}
 
     ${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/${example_json}
                         Update Value To Json    	${payload}    $.subject.identifier.value    				${subject_id}
