@@ -1,4 +1,4 @@
-# Copyright (c) 2020 Dave Petzold (Appsfactory GmbH)
+# Copyright (c) 2021 Dave Petzold (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -32,8 +32,8 @@ Force Tags              create    frailty-scale-score    invalid
 ${frailty_score-url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score
 ${randstring}                   foobar
 ${randinteger}                  ${12345}
-${identifiersystem}             urn:ietf:rfc:3986
-${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
+${identifiersystem}             https://www.charite.de/fhir/CodeSystem/observation-identifiers
+${identifiervalue}              763264000_FrailtyScaleScore
 
 
 
@@ -158,37 +158,57 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              identifier    not-ready    xxx
+    [Tags]              identifier
 
-	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
-	# 																CODE
-	$.identifier					${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.identifier
-	$.identifier					${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.identifier
-	$.identifier					${{ {} }}						422    	This property must be an Array, not an Object																	Observation.identifier
-	$.identifier					${{ [{}] }}						422    	Object must have some content																					Observation.identifier.0.
+	# FIELD/PATH									VALUE							HTTP	ERROR MESSAGE																									Location
+	# 																				CODE
+	
+	# invalid identifier
+	$.identifier									${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.identifier
+	$.identifier									${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.identifier
+	$.identifier									${{ {} }}						422    	This property must be an Array, not an Object																	Observation.identifier
+	$.identifier									${{ [{}] }}						422    	Object must have some content																					Observation.identifier.0.
 
     # invalid type
+	$.identifier[0].type							${EMPTY}						422    	This property must be an Object, not a primitive property														Observation.identifier.0..type
+	$.identifier[0].type							${{ [] }}						422    	This property must be an Object, not an array																	Observation.identifier.0..type
+	$.identifier[0].type							${{ {} }}						422    	Object must have some content																					Observation.identifier.0..type
+	$.identifier[0].type							${{ [{}] }}						422    	This property must be an Object, not an array																	Observation.identifier.0..type
 
     # invalid type coding
+	$.identifier[0].type.coding						${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.identifier.0..type.coding
+	$.identifier[0].type.coding						${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.identifier.0..type.coding
+	$.identifier[0].type.coding						${{ {} }}						422    	Object must have some content																					Observation.identifier.0..type.coding
+	$.identifier[0].type.coding						${{ [{}] }}						422    	Object must have some content																					Observation.identifier.0..type.coding.0.
 
     # invalid type coding system
+	$.identifier[0].type.coding[0].system			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..type.coding.0..system			
+	$.identifier[0].type.coding[0].system			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..type.coding.0..system
+	$.identifier[0].type.coding[0].system			${randstring}				 	422	   	Coding.system must be an absolute reference, not a local reference												Observation.identifier.0..type.coding.0.
 
     # invalid type coding code
-
+	$.identifier[0].type.coding[0].code				${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..type.coding.0..code		
+	$.identifier[0].type.coding[0].code				${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..type.coding.0..code
 
 	# invalid system
-	$.identifier[0].system			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..system				
-	$.identifier[0].system			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..system
-	$.identifier[0].system			${randstring}				 	422	   	Identifier.system must be an absolute reference, not a local reference											Observation.identifier.0.
+	$.identifier[0].system							${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..system				
+	$.identifier[0].system							${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..system
+	$.identifier[0].system							${randstring}				 	422	   	Identifier.system must be an absolute reference, not a local reference											Observation.identifier.0.
 
 	# invalid value
-	$.identifier[0].value			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..value				
-	$.identifier[0].value			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..value
-	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''urn:ietf:rfc:3986'', then the identifier.value must be a full URI						Observation.identifier.0.
+	$.identifier[0].value							${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..value				
+	$.identifier[0].value							${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..value
 
     # invalid assigner
+	$.identifier[0].assigner						${EMPTY}						422    	This property must be an Object, not a primitive property														Observation.identifier.0..assigner
+	$.identifier[0].assigner						${{ [] }}						422    	This property must be an Object, not an array																	Observation.identifier.0..assigner
+	$.identifier[0].assigner						${{ {} }}						422    	Object must have some content																					Observation.identifier.0..assigner
+	$.identifier[0].assigner						${{ [{}] }}						422    	This property must be an Object, not an array																	Observation.identifier.0..assigner
 
     # invalid assigner reference
+	$.identifier[0].assigner.reference				${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..assigner.reference				
+	$.identifier[0].assigner.reference				${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..assigner.reference
+
 
 006 Create Clinical Frailty Scale Score (Invalid/Missing 'Status')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
@@ -199,7 +219,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]		    create clinical frailty scale score with ehr reference
-    [Tags]          	status    not-ready
+    [Tags]          	status
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																								Location
 	# 																CODE
