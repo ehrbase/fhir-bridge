@@ -158,7 +158,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              identifier    not-ready
+    [Tags]              identifier    not-ready    xxx
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
@@ -166,6 +166,15 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.identifier					${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.identifier
 	$.identifier					${{ {} }}						422    	This property must be an Array, not an Object																	Observation.identifier
 	$.identifier					${{ [{}] }}						422    	Object must have some content																					Observation.identifier.0.
+
+    # invalid type
+
+    # invalid type coding
+
+    # invalid type coding system
+
+    # invalid type coding code
+
 
 	# invalid system
 	$.identifier[0].system			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..system				
@@ -177,6 +186,9 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.identifier[0].value			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..value
 	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''urn:ietf:rfc:3986'', then the identifier.value must be a full URI						Observation.identifier.0.
 
+    # invalid assigner
+
+    # invalid assigner reference
 
 006 Create Clinical Frailty Scale Score (Invalid/Missing 'Status')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
