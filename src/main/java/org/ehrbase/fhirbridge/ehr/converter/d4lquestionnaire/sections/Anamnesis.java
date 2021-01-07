@@ -4,7 +4,11 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AdipositasEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ChronischeLungenkrankheitEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.DiabetesEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.HerzerkrankungEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.VorhandenDefiningCode;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.lang.reflect.InvocationTargetException;
@@ -117,13 +121,13 @@ public class Anamnesis extends QuestionnaireSection {
 
     private Method getSetMethodForVorhandenDefiningCode(Object evaluationObject) throws NoSuchMethodException {
         if (evaluationObject.getClass() == DiabetesEvaluation.class) {
-            return DiabetesEvaluation.class.getDeclaredMethod("setVorhandenDefiningcode", VorhandenDefiningCode.class);
+            return DiabetesEvaluation.class.getDeclaredMethod("setVorhandenDefiningCode", VorhandenDefiningCode.class);
         }else if (evaluationObject.getClass() == ChronischeLungenkrankheitEvaluation.class){
-            return ChronischeLungenkrankheitEvaluation.class.getDeclaredMethod("setVorhandenDefiningcode", VorhandenDefiningCode.class);
+            return ChronischeLungenkrankheitEvaluation.class.getDeclaredMethod("setVorhandenDefiningCode", VorhandenDefiningCode.class);
         }else if (evaluationObject.getClass() == HerzerkrankungEvaluation.class) {
-            return HerzerkrankungEvaluation.class.getDeclaredMethod("setVorhandenDefiningcode", VorhandenDefiningCode.class);
+            return HerzerkrankungEvaluation.class.getDeclaredMethod("setVorhandenDefiningCode", VorhandenDefiningCode.class);
         }else if (evaluationObject.getClass() == AdipositasEvaluation.class) {
-            return AdipositasEvaluation.class.getDeclaredMethod("setVorhandenDefiningcode", VorhandenDefiningCode.class);
+            return AdipositasEvaluation.class.getDeclaredMethod("setVorhandenDefiningCode", VorhandenDefiningCode.class);
         }else{
             throw new NoSuchMethodException("Class "+evaluationObject.getClass().getCanonicalName()+" is not supported for this method, only the classes DiabetesEvaluation, ChronischeLungenkrankheitEvaluation, HerzerkrankungEvaluation and AdipositasEvaluation are");
         }

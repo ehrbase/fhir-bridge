@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public abstract class QuestionnaireSection {
 
-
     protected final TemporalAccessor authored;
 
     public QuestionnaireSection(TemporalAccessor authored) {
@@ -28,8 +27,8 @@ public abstract class QuestionnaireSection {
         }
     }
 
-    TemporalAccessor getValueAsDate(QuestionnaireResponse.QuestionnaireResponseItemComponent value){
-        return LocalDate.parse(value.getAnswer().get(0).getValueDateType().getValueAsString());
+    Optional<TemporalAccessor>  getValueAsDate(QuestionnaireResponse.QuestionnaireResponseItemComponent value){
+        return Optional.of(LocalDate.parse(value.getAnswer().get(0).getValueDateType().getValueAsString()));
     }
 
     String getQuestionValueCodeToString(QuestionnaireResponse.QuestionnaireResponseItemComponent question){
@@ -70,6 +69,7 @@ public abstract class QuestionnaireSection {
     }*/
 
     public abstract void map(List<QuestionnaireResponse.QuestionnaireResponseItemComponent> item);
+
     public abstract Object toComposition();
 
 }
