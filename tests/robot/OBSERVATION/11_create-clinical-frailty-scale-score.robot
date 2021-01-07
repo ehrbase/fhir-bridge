@@ -325,13 +325,13 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              effectiveDateTime    not-ready
+    [Tags]              effectiveDateTime
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 	
 	# missing attribute
-	$.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
+#	$.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
 	$.effectiveDateTime						${EMPTY}				422    	@value cannot be empty																						Observation.effective.ofType.dateTime.
 	
 	# wrong format
@@ -369,14 +369,13 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
-
+    [Tags]              valueCodeableConcept
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 	
 	# missing valueCodeableConcept
-#	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
+	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
 	$.valueCodeableConcept						${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.value.x.
 
 	# wrong format
@@ -385,8 +384,11 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 	$.valueCodeableConcept						${{ [{}] }}				422    	This property must be an Object, not an array																Observation.value.x.
 
 	# missing coding
-#	$.valueCodeableConcept.coding 				missing					422    	Index 0 out of bounds for length 0
+	$.valueCodeableConcept.coding 				missing					422    	Object must have some content																				Observation.value.x.
 	$.valueCodeableConcept.coding				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.value.x..coding
+	$.valueCodeableConcept.coding				${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.value.x..coding
+	$.valueCodeableConcept.coding				${{ {} }}				422    	This property must be an Array, not an Object																Observation.value.x..coding
+	$.valueCodeableConcept.coding				${{ [{}] }}				422    	Object must have some content																				Observation.value.x..coding.0.
 
 	# invalid system
 #	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
@@ -398,19 +400,60 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 	# invalid code
 #	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
 	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..code
-	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Status code ${randstring} is not supported
+	$.valueCodeableConcept.coding[0].code		${randstring}			422    	For input string: \"${randstring}\"
 	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..code
 
 	# invalid display
 	$.valueCodeableConcept.coding[0].display	${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..display
 	$.valueCodeableConcept.coding[0].display	${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..display
 
-	# invalid text
-	$.valueCodeableConcept.text					${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..text
-	$.valueCodeableConcept.text					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..text
+
+011 Create Clinical Frailty Scale Score (Invalid/Missing 'method')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``method`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create clinical frailty scale score with ehr reference
+    [Tags]              method
+
+	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																	CODE
+	
+	# missing method
+	$.method									${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.method
+
+	# invalid format
+	$.method									${{ [] }}				422    	This property must be an Object, not an array																Observation.method
+	$.method									${{ {} }}				422    	Object must have some content																				Observation.method
+	$.method									${{ [{}] }}				422    	This property must be an Object, not an array																Observation.method	
+
+	# missing coding
+	$.method.coding								missing					422    	Object must have some content																				Observation.method
+	$.method.coding								${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.method.coding
+
+	# invalid format
+	$.method.coding								${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.method.coding
+	$.method.coding								${{ {} }}				422    	Object must have some content																				Observation.method.coding
+	$.method.coding								${{ [{}] }}				422    	Object must have some content																				Observation.method.coding.0.
+
+	# invalid system
+	$.method.coding[0].system					${EMPTY}				422    	@value cannot be empty																						Observation.method.coding.0..system
+	$.method.coding[0].system					${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.method.coding.0.
+	$.method.coding[0].system					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.method.coding.0..system
+
+	# invalid code
+	$.method.coding[0].code						${EMPTY}				422    	@value cannot be empty																						Observation.method.coding.0..code
+	$.method.coding[0].code						${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.method.coding.0..code
+
+	# invalid display
+	$.method.coding[0].display					${EMPTY}				422    	@value cannot be empty																						Observation.method.coding.0..display
+	$.method.coding[0].display					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.method.coding.0..display
 
 
-011 Create Clinical Frailty Scale Score (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
+012 Create Clinical Frailty Scale Score (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -427,7 +470,7 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 
 
 
-012 Create Clinical Frailty Scale Score (Invalid/Missing 'DataAbsentReason')
+013 Create Clinical Frailty Scale Score (Invalid/Missing 'DataAbsentReason')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -474,7 +517,7 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
 
 
-013 Create Clinical Frailty Scale Score (invalid multi)
+014 Create Clinical Frailty Scale Score (invalid multi)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* values for attributes \n\n
