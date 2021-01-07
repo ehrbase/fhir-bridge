@@ -415,20 +415,20 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 #	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.dataAbsentReason.coding
 
-	# invalid system - todo
+	# invalid system
 #	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].system			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..system
 	$.dataAbsentReason.coding[0].system			${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.dataAbsentReason.coding.0.
 	$.dataAbsentReason.coding[0].system			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..system
 #	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
 
-	# invalid code - todo
+	# invalid code
 #	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..code
 #	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..code
 
-	# invalid display - todo
+	# invalid display
 #	$.dataAbsentReason.coding[0].display		missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..display
 #	$.dataAbsentReason.coding[0].display		${randstring}			422    	Index 0 out of bounds for length 0

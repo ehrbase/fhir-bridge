@@ -595,38 +595,28 @@ update Code Coding 0
                         Run Keyword And Return If    $codecodingavailable=="false"
                         ...    Delete Object From Json  ${payload}  $.code.coding
 
-
-
-
-
-
-
-
-
-# WORKSPACE!!!!
-
 update vCC
     [Arguments]         ${vCCavailabe}    ${vCCCodingavailable}    ${vCC0System}    ${vCC0Code}    ${vCC0Display}
 
-                        # Run Keyword only if code is available
+                        # Run Keyword only if vCC is available
                         Run Keyword And Return If    $vCCavailabe=="true"
                         ...    update vCC Coding    ${vCCCodingavailable}    ${vCC0System}    ${vCC0Code}    ${vCC0Display}
 
-                        # Run Keyword only if code is not available
+                        # Run Keyword only if vCC is not available
                         Run Keyword And Return If    $vCCavailabe=="false"
                         ...    Delete Object From Json  ${payload}  $.valueCodeableConcept
 
 update vCC Coding
     [Arguments]         ${vCCCodingavailable}    ${vCC0System}    ${vCC0Code}    ${vCC0Display}
 
-                        # Run Keyword only if Code-Coding is available
+                        # Run Keyword only if vCC-Coding is available
                         Run Keyword And Return If    $vCCCodingavailable=="true"
                         ...    Run Keywords
                         ...    update vCC 0 System             ${vCC0System}           AND
                         ...    update vCC 0 Code               ${vCC0Code}             AND
                         ...    update vCC 0 Display            ${vCC0Display}          
 
-                        # Run Keyword only if Code-Coding is not available
+                        # Run Keyword only if vCC-Coding is not available
                         Run Keyword And Return If    $vCCCodingavailable=="false"
                         ...    Delete Object From Json  ${payload}  $.valueCodeableConcept.coding
 
@@ -674,3 +664,124 @@ update vCC 0 Display
                         # Else 
                         Run Keyword  
                         ...    Update Value To Json    ${payload}    $.valueCodeableConcept.coding[0].display    ${vCC0Display}
+
+update Component
+    [Arguments]         ${componentavailabe}    ${componentCodeavailable}    ${componentCodeCodingavailable}    ${ComponentC0System}    ${ComponentC0Code}    ${componentvCCavailable}    ${componentvCCCodingavailable}    ${ComponentvCC0System}    ${ComponentvCC0Code}
+
+                        # Run Keywords only if Component is available
+                        Run Keyword And Return If    $componentavailabe=="true"
+                        ...    Run Keywords
+                        ...    update Component 0 Code      ${componentCodeavailable}       ${componentCodeCodingavailable}     ${ComponentC0System}        ${ComponentC0Code}      AND
+                        ...    update Component 0 vCC       ${componentvCCavailable}        ${componentvCCCodingavailable}      ${ComponentvCC0System}      ${ComponentvCC0Code}       
+
+                        # Run Keyword only if Component is not available
+                        Run Keyword And Return If    $componentavailabe=="false"
+                        ...    Delete Object From Json  ${payload}  $.component
+
+update Component 0 Code
+    [Arguments]         ${componentCodeavailable}       ${componentCodeCodingavailable}     ${ComponentC0System}        ${ComponentC0Code}
+
+                        # Run Keywords only if Component Code is available
+                        Run Keyword And Return If    $componentCodeavailable=="true"
+                        ...    update Component 0 Code Coding    ${componentCodeCodingavailable}     ${ComponentC0System}        ${ComponentC0Code}   
+
+                        # Run Keyword only if Component Code is not available
+                        Run Keyword And Return If    $componentCodeavailable=="false"
+                        ...    Delete Object From Json  ${payload}  $.component[0].code
+
+update Component 0 vCC
+    [Arguments]         ${componentvCCavailable}        ${componentvCCCodingavailable}      ${ComponentvCC0System}      ${ComponentvCC0Code}
+
+                        # Run Keywords only if Component vCC is available
+                        Run Keyword And Return If    $componentvCCavailable=="true"
+                        ...    update Component 0 vCC Coding    ${componentvCCCodingavailable}      ${ComponentvCC0System}      ${ComponentvCC0Code}     
+
+                        # Run Keyword only if Component vCC is not available
+                        Run Keyword And Return If    $componentvCCavailable=="false"
+                        ...    Delete Object From Json  ${payload}  $.component[0].valueCodeableConcept
+
+update Component 0 Code Coding
+    [Arguments]         ${componentCodeCodingavailable}     ${ComponentC0System}        ${ComponentC0Code} 
+
+                        # Run Keywords only if Component Code Coding is available
+                        Run Keyword And Return If    $componentCodeCodingavailable=="true"
+                        ...    Run Keywords
+                        ...    update Component 0 Code Coding System    ${ComponentC0System}    AND
+                        ...    update Component 0 Code Coding Code      ${ComponentC0Code}       
+
+                        # Run Keyword only if Component Code Coding is not available
+                        Run Keyword And Return If    $componentCodeCodingavailable=="false"
+                        ...    Delete Object From Json  ${payload}  $.component[0].code.coding
+
+update Component 0 vCC Coding
+    [Arguments]         ${componentvCCCodingavailable}      ${ComponentvCC0System}      ${ComponentvCC0Code}
+
+                        # Run Keywords only if Component vCC Coding is available
+                        Run Keyword And Return If    $componentvCCCodingavailable=="true"
+                        ...    Run Keywords
+                        ...    update Component 0 vCC Coding System    ${ComponentvCC0System}    AND
+                        ...    update Component 0 vCC Coding Code      ${ComponentvCC0Code}       
+
+                        # Run Keyword only if Component vCC Coding is not available
+                        Run Keyword And Return If    $componentvCCCodingavailable=="false"
+                        ...    Delete Object From Json  ${payload}  $.component[0].valueCodeableConcept.coding
+
+update Component 0 Code Coding System
+    [Arguments]         ${ComponentC0System}
+
+                        # Run Keyword only when Component Code Coding 0.System is empty
+                        Run Keyword And Return If    $ComponentC0System=="${EMPTY}"
+                        ...    Update Value To Json    ${payload}       $.component[0].code.coding[0].system    ${ComponentC0System}
+
+                        # Run Keyword only when Component Code Coding 0.System is missing
+                        Run Keyword And Return If    $ComponentC0System=="missing"
+                        ...    Delete Object From Json    ${payload}    $.component[0].code.coding[0].system
+
+                        # Else 
+                        Run Keyword  
+                        ...    Update Value To Json    ${payload}    $.component[0].code.coding[0].system    ${ComponentC0System}
+
+update Component 0 Code Coding Code
+    [Arguments]         ${ComponentC0Code}
+
+                        # Run Keyword only when Component Code Coding 0.Code is empty
+                        Run Keyword And Return If    $ComponentC0Code=="${EMPTY}"
+                        ...    Update Value To Json    ${payload}       $.component[0].code.coding[0].code    ${ComponentC0Code}
+
+                        # Run Keyword only when Component Code Coding 0.Code is missing
+                        Run Keyword And Return If    $ComponentC0Code=="missing"
+                        ...    Delete Object From Json    ${payload}    $.component[0].code.coding[0].code
+
+                        # Else 
+                        Run Keyword  
+                        ...    Update Value To Json    ${payload}    $.component[0].code.coding[0].code    ${ComponentC0Code}
+
+update Component 0 vCC Coding System
+    [Arguments]         ${ComponentvCC0System}
+
+                        # Run Keyword only when Component vCC Coding 0.System is empty
+                        Run Keyword And Return If    $ComponentvCC0System=="${EMPTY}"
+                        ...    Update Value To Json    ${payload}       $.component[0].valueCodeableConcept.coding[0].system    ${ComponentvCC0System}
+
+                        # Run Keyword only when Component vCC Coding 0.System is missing
+                        Run Keyword And Return If    $ComponentvCC0System=="missing"
+                        ...    Delete Object From Json    ${payload}    $.component[0].valueCodeableConcept.coding[0].system
+
+                        # Else 
+                        Run Keyword  
+                        ...    Update Value To Json    ${payload}    $.component[0].valueCodeableConcept.coding[0].system    ${ComponentvCC0System}
+
+update Component 0 vCC Coding Code
+    [Arguments]         ${ComponentvCC0Code}
+
+                        # Run Keyword only when Component vCC Coding 0.Code is empty
+                        Run Keyword And Return If    $ComponentvCC0Code=="${EMPTY}"
+                        ...    Update Value To Json    ${payload}       $.component[0].valueCodeableConcept.coding[0].code    ${ComponentvCC0Code}
+
+                        # Run Keyword only when Component vCC Coding 0.Code is missing
+                        Run Keyword And Return If    $ComponentvCC0Code=="missing"
+                        ...    Delete Object From Json    ${payload}    $.component[0].valueCodeableConcept.coding[0].code
+
+                        # Else 
+                        Run Keyword  
+                        ...    Update Value To Json    ${payload}    $.component[0].valueCodeableConcept.coding[0].code    ${ComponentvCC0Code}

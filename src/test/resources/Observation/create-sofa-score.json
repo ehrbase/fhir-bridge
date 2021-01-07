@@ -1,5 +1,6 @@
 {
   "resourceType": "Observation",
+  "id": "sofa-score",
   "status": "final",
   "meta": {
     "profile": [
@@ -11,7 +12,8 @@
       "coding": [
         {
           "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey"
+          "code": "survey",
+          "display": "Survey"
         }
       ]
     }
