@@ -461,7 +461,7 @@ ${identifiervalue}              763264000_FrailtyScaleScore
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Tags]              DataAbsentReason    not-ready
+	[Tags]              DataAbsentReason
 
 	ehr.create new ehr    				  				000_ehr_status.json
 	create with DataAbsentReason		  				DataAbsentReason				create-clinical-frailty-scale-score.json
@@ -479,7 +479,7 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create clinical frailty scale score with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready
+    [Tags]              DataAbsentReason    xxx
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
