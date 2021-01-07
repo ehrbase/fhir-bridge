@@ -2,15 +2,18 @@ package org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
-import liquibase.pro.packaged.Z;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
-import org.hl7.fhir.r4.model.ImmunizationEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AelterOderGleich65JahreAltDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ImmunsstatusDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ImmunsuppressivaEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.KortisionEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.StatusDefiningCode2;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungDesImmunstatusEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.time.temporal.TemporalAccessor;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,11 +75,11 @@ public class Medication extends QuestionnaireSection {
     }
 
     private StatusDefiningCode2 getStatusDefiningCode2(String codeString) {
-        if (codeString.equals(StatusDefiningCode2.JA.getValue())) {
+        if (codeString.equals(StatusDefiningCode2.JA.getCode())) {
             return StatusDefiningCode2.JA;
-        } else if (codeString.equals(StatusDefiningCode2.NEIN.getValue())) {
+        } else if (codeString.equals(StatusDefiningCode2.NEIN.getCode())) {
             return StatusDefiningCode2.NEIN;
-        } else if (codeString.equals(StatusDefiningCode2.ICH_WEISS_ES_NICHT.getValue())) {
+        } else if (codeString.equals(StatusDefiningCode2.ICH_WEISS_ES_NICHT.getCode())) {
             return StatusDefiningCode2.ICH_WEISS_ES_NICHT;
         } else {
             throw new UnprocessableEntityException("The code:" + codeString + " cannot be mapped, please enter a valid code e.g. ja (LA33-6), nein (LA32-8), ich weiss es nicht (LA12688-0)");

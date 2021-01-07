@@ -1,14 +1,35 @@
 package org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AelterOderGleich65JahreAltDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AlterObservation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AltersklasseDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AusschlussPflegetaetigkeitEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.BerufsbereichDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.BeschaeftigungCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.KontaktAction;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.PflegetaetigkeitEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.PflegetaetigkeitGrundFuerDieTaetigkeitElement;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.RaucherDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchwangerschaftsstatusBeliebigesEreignisChoice;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchwangerschaftsstatusBeliebigesEreignisPointEvent;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchwangerschaftsstatusObservation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.StatusDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.WohnsituationDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.WohnsituationEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungDerBeschaeftigungEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungRauchverhaltenEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.StatusDefiningcode;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.TemporalAccessor;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +42,7 @@ public class GeneralInformation extends QuestionnaireSection {
     private static final String P5 = "P5";
     private static final String P6 = "P6";
     private static final String C0 = "C0";
+    private static final String CZ = "CZ";
 
 
     private Optional<AlterObservation> alterObservationQuestion = Optional.empty();
@@ -40,7 +62,7 @@ public class GeneralInformation extends QuestionnaireSection {
     @Override
     public void map(List<QuestionnaireResponse.QuestionnaireResponseItemComponent> item) {
         for (QuestionnaireResponse.QuestionnaireResponseItemComponent question : item) {
-            if (getValueCode(question).isPresent()) {
+            if (getValueCode(question).isPresent() || getValueAsDate(question).isPresent()) {
                 mapGeneralInformationQuestions(question);
             }
 
@@ -126,7 +148,9 @@ public class GeneralInformation extends QuestionnaireSection {
 
     protected void mapOccupation(String occupationClass) {
         ZusammenfassungDerBeschaeftigungEvaluation zusammenfassungDerBeschaftigungEvaluation = new ZusammenfassungDerBeschaeftigungEvaluation();
-        List<BeschaeftigungCluster> beschaftigungClusterList = new ArrayList<>();
+        zusammenfassungDerBeschaftigungEvaluation.setLanguage(Language.DE);
+        zusammenfassungDerBeschaftigungEvaluation.setSubject(new PartySelf());
+     //   List<BeschaeftigungCluster> beschaftigungClusterList = new ArrayList<>();
         BeschaeftigungCluster beschaftigungCluster = new BeschaeftigungCluster();
         switch (occupationClass) {
             case "community":
@@ -142,8 +166,8 @@ public class GeneralInformation extends QuestionnaireSection {
                 throw new UnprocessableEntityException();
         }
 
-        beschaftigungClusterList.add(beschaftigungCluster);
-        zusammenfassungDerBeschaftigungEvaluation.setBeschaeftigung(beschaftigungClusterList);
+        //beschaftigungClusterList.add(beschaftigungCluster);
+        zusammenfassungDerBeschaftigungEvaluation.setBeschaeftigung(List.of(beschaftigungCluster));
         zusammenfassungDerBeschaftigungEvaluationQuestion = Optional.of(zusammenfassungDerBeschaftigungEvaluation);
 
     }
@@ -163,10 +187,10 @@ public class GeneralInformation extends QuestionnaireSection {
         PflegetaetigkeitGrundFuerDieTaetigkeitElement pflegetatigkeitGrundFurDieTatigkeitElement = new PflegetaetigkeitGrundFuerDieTaetigkeitElement();
         pflegetatigkeitGrundFurDieTatigkeitElement.setValue("alterbedingten Beschwerden, chronischen Erkrankungen oder Gebrechlichkeit");
 
-        pflegetatigkeitEvaluation.setGrundFuerDieTaetigkeit(new ArrayList<>() {{
+/*        pflegetatigkeitEvaluation.setGrundFuerDieTaetigkeit(new ArrayList<>() {{
             add(pflegetatigkeitGrundFurDieTatigkeitElement);
-        }});
-
+        }});*/
+        pflegetatigkeitEvaluation.setGrundFuerDieTaetigkeit(List.of(pflegetatigkeitGrundFurDieTatigkeitElement));
         return pflegetatigkeitEvaluation;
     }
 
@@ -228,11 +252,14 @@ public class GeneralInformation extends QuestionnaireSection {
         SchwangerschaftsstatusObservation stillzeitEvaluation = new SchwangerschaftsstatusObservation();
         SchwangerschaftsstatusBeliebigesEreignisChoice schwangerschaftsstatusBeliebigesEreignisChoice = new SchwangerschaftsstatusBeliebigesEreignisPointEvent();
         schwangerschaftsstatusBeliebigesEreignisChoice.setStatusDefiningCode(pregnantLoincToStatusCode(pregnantLoincCode));
-        stillzeitEvaluation.setBeliebigesEreignis(new ArrayList<>() {{
+/*        stillzeitEvaluation.setBeliebigesEreignis(new ArrayList<>() {{
             add(schwangerschaftsstatusBeliebigesEreignisChoice);
-        }});
+        }});*/
+        schwangerschaftsstatusBeliebigesEreignisChoice.setTimeValue(this.authored);
+        stillzeitEvaluation.setBeliebigesEreignis(List.of(schwangerschaftsstatusBeliebigesEreignisChoice));
         stillzeitEvaluation.setLanguage(Language.DE);
         stillzeitEvaluation.setSubject(new PartySelf());
+        stillzeitEvaluation.setOriginValue(this.authored);
         schwangerschaftsstatusObservationQuestion = Optional.of(stillzeitEvaluation);
     }
 
@@ -241,25 +268,50 @@ public class GeneralInformation extends QuestionnaireSection {
         for (QuestionnaireResponse.QuestionnaireResponseItemComponent question : item) {
             if (question.getLinkId().equals(C0) && getValueCode(question).isPresent()) {
                 mapContactWithInfected(getQuestionLoincYesNoDontKnowToBoolean(question));
+            }else if(question.getLinkId().equals(CZ) && getValueAsDate(question).isPresent()){
+                mapDateOfContactInfected(getValueAsDate(question).get());
             } else {
                 throw new UnprocessableEntityException("LinkId " + question.getLinkId() + " undefined");
             }
         }
     }
 
+    private void mapDateOfContactInfected(TemporalAccessor date) {
+        KontaktAction kontaktAction = getKontaktAction();
+        LocalDateTime localDate = LocalDate.parse(date.toString()).atTime(1, 0);
+        kontaktAction.setBeginnValue(localDate);
+        kontaktAction.setEndeValue(localDate);
+        contactWithInfectedQuestion = Optional.of(kontaktAction);
+    }
 
     public void mapContactWithInfected(Boolean item) {
-        KontaktAction kontaktAction = new KontaktAction();
+        KontaktAction kontaktAction = getKontaktAction();
+        /*
+        kontaktAction.setLanguage(Language.DE);
+        kontaktAction.setSubject(new PartySelf());
+        kontaktAction.setBeginnNullFlavourDefiningCode(NullFlavour.MASKED);
+        kontaktAction.setCurrentState();*/
+
         if(item){
             kontaktAction.setKontaktZuEinemBestaetigtenFallDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
+
+
         }else{
             kontaktAction.setKontaktZuEinemBestaetigtenFallDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
         }
-        kontaktAction.setLanguage(Language.DE);
-        kontaktAction.setSubject(new PartySelf());
- //       kontaktAction.setOriginValue(this.authored);
-        kontaktAction.setTimeValue(this.authored);
         contactWithInfectedQuestion = Optional.of(kontaktAction);
+    }
+
+    private KontaktAction getKontaktAction() {
+        if (contactWithInfectedQuestion.isPresent()){
+            return contactWithInfectedQuestion.get();
+        }else{
+            KontaktAction kontaktAction = new KontaktAction();
+            kontaktAction.setLanguage(Language.DE);
+            kontaktAction.setSubject(new PartySelf());
+            kontaktAction.setTimeValue(this.authored);
+            return kontaktAction;
+        }
     }
 
     public void setGeneralInformation(D4LQuestionnaireComposition d4LQuestionnaireComposition){

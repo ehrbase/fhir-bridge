@@ -3,8 +3,21 @@ package org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.SymptomComposition;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.FieberInDenLetzten24StundenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.FieberInDenLetzten4TagenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ProblemDiagnoseEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchweregradDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchuettelfrostInDenLetzten24StundenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchlappheitAngeschlagenheitCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.GliederschmerzenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.HustenInDenLetzten24StundenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchnupfenInDenLetzten24StundenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.DurchfallCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.GeschmacksUndOderGeruchsverlustCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.HalsschmerzenInDenLetzten24StundenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.KopfschmerzenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AtemproblemeCluster;
+
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.time.temporal.TemporalAccessor;
@@ -15,6 +28,7 @@ import java.util.Optional;
 public class Symptoms extends QuestionnaireSection {
     private static final String S0 = "S0";
     private static final String S1 = "S1";
+    private static final String S2 = "S2";
     private static final String S3 = "S3";
     private static final String S4 = "S4";
     private static final String S5 = "S5";
@@ -55,6 +69,10 @@ public class Symptoms extends QuestionnaireSection {
             case S1:
                 setProblemDiagnoseEvaluationIfNotSet();
                 this.mapFever4days(getQuestionLoincYesNoToBoolean(question));
+                break;
+            case S2:
+                setProblemDiagnoseEvaluationIfNotSet();
+                this.mapFeverTemperature(getQuestionValueCodeToString(question));
                 break;
             case S3:
                 setProblemDiagnoseEvaluationIfNotSet();
@@ -98,7 +116,7 @@ public class Symptoms extends QuestionnaireSection {
                 break;
             case SZ:
                 setProblemDiagnoseEvaluationIfNotSet();
-                this.mapWhenSymptomsAppear(getValueAsDate(question));
+                this.mapWhenSymptomsAppear(getValueAsDate(question).get());
                 break;
             default:
                 throw new UnprocessableEntityException("LinkId " + question.getLinkId() + " undefined");
@@ -108,9 +126,7 @@ public class Symptoms extends QuestionnaireSection {
     private void setProblemDiagnoseEvaluationIfNotSet() {
         if (problemDiagnoseEvaluationQuestion.isEmpty()) {
             ProblemDiagnoseEvaluation problemDiagnoseEvaluation = new ProblemDiagnoseEvaluation();
-
             problemDiagnoseEvaluation.setDatumZeitpunktDesAuftretensDerErstdiagnoseValue(authored);
-
             problemDiagnoseEvaluation.setNameDesProblemsDerDiagnoseValue("COVID-19 Fragebogen");
             problemDiagnoseEvaluation.setLanguage(Language.DE);
             problemDiagnoseEvaluation.setSubject(new PartySelf());
@@ -122,11 +138,12 @@ public class Symptoms extends QuestionnaireSection {
     private void mapFever24h(Boolean hasFewer24h) {
         ProblemDiagnoseEvaluation problemDiagnoseEvaluation = problemDiagnoseEvaluationQuestion.get();
         FieberInDenLetzten24StundenCluster fieberInDenLetzten24StundenCluster = new FieberInDenLetzten24StundenCluster();
-        if(hasFewer24h){
+        fieberInDenLetzten24StundenCluster.setVorhandenValue(hasFewer24h);
+     /*   if(hasFewer24h){
             fieberInDenLetzten24StundenCluster.setSchweregradDefiningCode(SchweregradDefiningCode.N39_C);
         }else {
             fieberInDenLetzten24StundenCluster.setSchweregradDefiningCode(SchweregradDefiningCode.N38_C);
-        }
+        }*/
         problemDiagnoseEvaluation.setFieberInDenLetzten24Stunden(fieberInDenLetzten24StundenCluster);
         problemDiagnoseEvaluationQuestion = Optional.of(problemDiagnoseEvaluation);
     }
@@ -135,13 +152,49 @@ public class Symptoms extends QuestionnaireSection {
     private void mapFever4days(Boolean hasFewer4Days) {
         ProblemDiagnoseEvaluation problemDiagnoseEvaluation = problemDiagnoseEvaluationQuestion.get();
         FieberInDenLetzten4TagenCluster fieberInDenLetzten4TagenCluster = new FieberInDenLetzten4TagenCluster();
+        fieberInDenLetzten4TagenCluster.setVorhandenValue(hasFewer4Days);
+/*
         if(hasFewer4Days) {
+            fieberInDenLetzten4TagenCluster.setVorhandenValue(hasFewer4Days);
             fieberInDenLetzten4TagenCluster.setSchweregradDefiningCode(SchweregradDefiningCode.N39_C);
         }else {
             fieberInDenLetzten4TagenCluster.setSchweregradDefiningCode(SchweregradDefiningCode.N38_C);
-        }
+        }*/
         problemDiagnoseEvaluation.setFieberInDenLetzten4Tagen(fieberInDenLetzten4TagenCluster);
         problemDiagnoseEvaluationQuestion = Optional.of(problemDiagnoseEvaluation);
+    }
+
+    private void mapFeverTemperature(String maxFewerTemperature){
+        ProblemDiagnoseEvaluation problemDiagnoseEvaluation = problemDiagnoseEvaluationQuestion.get();
+        FieberInDenLetzten4TagenCluster  fieberInDenLetzten4TagenCluster = problemDiagnoseEvaluation.getFieberInDenLetzten4Tagen();
+        FieberInDenLetzten24StundenCluster fieberInDenLetzten24StundenCluster = problemDiagnoseEvaluation.getFieberInDenLetzten24Stunden();
+        if (fieberInDenLetzten4TagenCluster != null){
+            fieberInDenLetzten4TagenCluster.setSchweregradDefiningCode(parseStringToSchweregrad(maxFewerTemperature));
+            problemDiagnoseEvaluation.setFieberInDenLetzten4Tagen(fieberInDenLetzten4TagenCluster);
+        }
+        if(fieberInDenLetzten24StundenCluster != null){
+            fieberInDenLetzten24StundenCluster.setSchweregradDefiningCode(parseStringToSchweregrad(maxFewerTemperature));
+            problemDiagnoseEvaluation.setFieberInDenLetzten24Stunden(fieberInDenLetzten24StundenCluster);
+        }
+    }
+
+    private SchweregradDefiningCode parseStringToSchweregrad(String schweregrad){
+        //TODO 38 degree and 42 is missing
+        if (schweregrad.equals(SchweregradDefiningCode.N38_C.getCode())){
+            return SchweregradDefiningCode.N38_C;
+        }else if (schweregrad.equals(SchweregradDefiningCode.N39_C.getCode())){
+            return SchweregradDefiningCode.N39_C;
+        }else if (schweregrad.equals(SchweregradDefiningCode.N40_C.getCode())){
+            return SchweregradDefiningCode.N40_C;
+        }else if(schweregrad.equals(SchweregradDefiningCode.N41_C.getCode())){
+            return SchweregradDefiningCode.N41_C;
+        }else if(schweregrad.equals(SchweregradDefiningCode.N42_C.getCode())){
+            return SchweregradDefiningCode.N42_C;
+        }else if (schweregrad.equals(SchweregradDefiningCode.ICH_WEISS_ES_NICHT.getCode())){
+            return SchweregradDefiningCode.ICH_WEISS_ES_NICHT;
+        }else {
+            throw new UnprocessableEntityException("fewer max temperature: "+schweregrad+" is not a valid code value !");
+        }
     }
 
     private void mapChills(Boolean hasChills24h) {
