@@ -23,7 +23,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
-...						author: Peter Wohlfarth
+...						*Author:* Peter Wohlfarth
 Force Tags              create    body-weight    invalid
 
 
@@ -116,7 +116,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	# FIELD/PATH 			VALUE		   CODE		ERROR MESSAGE
 
 #According to https://simplifier.net/ForschungsnetzCovid-19/BodyWeight/~details the identifier does not need to be supported, as it has no "Must Support" flag in the details.
-#Therefore, some cases cases where value = missing do not result in errors. It seems as if the actual profile url is not checked.
+#Therefore, some cases where value = missing do not result in errors. It seems as if the actual profile url is not checked.
 
 	#$.identifier			missing		   422     Observation.identifier:analyseBefundCode: minimum required = 1, but only found 0 .from ${profile url} 
 	$.identifier			${EMPTY}	   422     This property must be an Array, not a primitive property
