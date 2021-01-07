@@ -238,13 +238,13 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
 	# invalid category
-#	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${frailty_score-url}
+	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${frailty_score-url}						Observation
 	$.category								${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.category
 	$.category								${{ {} }}				422    	This property must be an Array, not an Object																Observation.category
 	$.category								${{ [{}] }}				422    	Object must have some content																				Observation.category
@@ -252,19 +252,22 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 	#invalid coding
 	$.category[0].coding    				missing					422    	Object must have some content																				Observation.category.0.
 	$.category[0].coding    				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.category.0..coding
-	
+	$.category[0].coding					${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.category.0..coding
+	$.category[0].coding					${{ {} }}				422    	This property must be an Array, not an Object																Observation.category.0..coding
+	$.category[0].coding					${{ [{}] }}				422    	Object must have some content																				Observation.category.0..coding
+
 	#invalid code 0
-#	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${frailty_score-url}
+	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${frailty_score-url}						Observation.category.0..coding.0.
 	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
-#	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${frailty_score-url}					Observation.category.0.
+	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${frailty_score-url}						Observation.category.0..coding.0.
 	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
 	
 	# invaild system 0
-#	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
+	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
 	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
-#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${frailty_score-url}					Observation.category.0.
+	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${frailty_score-url}						Observation.category.0..coding.0.
 
 
 008 Create Clinical Frailty Scale Score (Invalid/Missing 'code')
@@ -276,36 +279,40 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              code    not-ready
+    [Tags]              code
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
 	# invalid code
-	$.code									missing					422    	Observation.code: minimum required = 1, but only found 0 .from ${frailty_score-url}						Observation
-	$.code									${{ [] }}				422    	Observation.code: minimum required = 1, but only found 0 .from ${frailty_score-url}						Observation
+	$.code									missing					422    	Observation.code: minimum required = 1, but only found 0 .from ${frailty_score-url}							Observation
+	$.code									${EMPTY}				422    	Observation.code: minimum required = 1, but only found 0 .from ${frailty_score-url}							Observation
+	$.code									${{ [] }}				422    	Observation.code: minimum required = 1, but only found 0 .from ${frailty_score-url}							Observation
 	$.code									${{ {} }}				422    	Object must have some content																				Observation.code
 	$.code									${{ [{}] }}				422    	This property must be an Object, not an array																Observation.code
 
 	# invalid coding
 	$.code.coding   	 					missing					422    	Observation.code.coding: minimum required = 1, but only found 0												Observation.code
 	$.code.coding	    					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.code.coding
+	$.code.coding							${{ [] }}				422    	Observation.code.coding: minimum required = 1, but only found 0 .from ${frailty_score-url}					Observation.code
+	$.code.coding							${{ {} }}				422    	Object must have some content																				Observation.code.coding
+	$.code.coding							${{ [{}] }}				422    	This element does not match any known slice defined in the profile ${frailty_score-url}						Observation.code.coding.0.
 
 	# invalid Code Coding 0 System
-    $.code.coding[0].system					missing					422    	A code with no system has no defined meaning. A system should be provided									Observation.code.coding.0.
+	$.code.coding[0].system					missing					422    	A code with no system has no defined meaning. A system should be provided									Observation.code.coding.0.
 	$.code.coding[0].system					${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..system
-	$.code.coding[0].system					http://foobar.de		422    	The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile https://*	Observation.code
+	$.code.coding[0].system					http://foobar.de		422    	This element does not match any known slice defined in the profile ${frailty_score-url}						Observation.code.coding.0.
 	$.code.coding[0].system					${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.code.coding.0.
 	$.code.coding[0].system					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..system
 
 	# invalid Code Coding 0 Code
-    $.code.coding[0].code					missing					422    	The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile https://*	Observation.code
+	$.code.coding[0].code					missing					422    	This element does not match any known slice defined in the profile ${frailty_score-url}						Observation.code.coding.0.
 	$.code.coding[0].code					${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..code
-	$.code.coding[0].code					${randstring}			422    	The pattern .system http://loinc.org, code 82810-3, and display 'null'. defined in the profile https://*	Observation.code
+	$.code.coding[0].code					${randstring}			422    	This element does not match any known slice defined in the profile ${frailty_score-url}						Observation.code.coding.0.
 	$.code.coding[0].code					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..code
 
 	# invalid Code Coding 0 Display
-    $.code.coding[0].display				${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..display
+	$.code.coding[0].display				${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..display
 	$.code.coding[0].display				${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..display
 
 
