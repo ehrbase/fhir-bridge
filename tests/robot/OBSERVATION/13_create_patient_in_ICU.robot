@@ -243,7 +243,7 @@ ${vCC_URL}		                http://snomed.info/sct
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create patient in ICU with ehr reference
     [Tags]              code
-    
+
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
@@ -297,13 +297,13 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              effectiveDateTime    not-ready
+    [Tags]              effectiveDateTime
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 	
 	# missing attribute
-#	$.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
+	$.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from ${patient-ICU-url}.					Observation
 	$.effectiveDateTime						${EMPTY}				422    	@value cannot be empty																						Observation.effective.ofType.dateTime.
 	
 	# wrong format
@@ -341,43 +341,52 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept
 
-	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								    Location
 	# 																	CODE
 	
 	# missing valueCodeableConcept
-	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
-	$.valueCodeableConcept						${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.value.x.
+#	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
+	$.valueCodeableConcept						${EMPTY}				422    	This property must be an Object, not a primitive property												    	Observation.value.x.
 
 	# wrong format
-	$.valueCodeableConcept						${{ [] }}				422    	This property must be an Object, not an array																Observation.value.x.
-	$.valueCodeableConcept						${{ {} }}				422    	Object must have some content																				Observation.value.x.
-	$.valueCodeableConcept						${{ [{}] }}				422    	This property must be an Object, not an array																Observation.value.x.
+	$.valueCodeableConcept						${{ [] }}				422    	This property must be an Object, not an array													    			Observation.value.x.
+	$.valueCodeableConcept						${{ {} }}				422    	Object must have some content																		    		Observation.value.x.
+	$.valueCodeableConcept						${{ [{}] }}				422    	This property must be an Object, not an array															    	Observation.value.x.
 
 	# missing coding
-	$.valueCodeableConcept.coding 				missing					422    	Object must have some content																				Observation.value.x.
-	$.valueCodeableConcept.coding				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.value.x..coding
-	$.valueCodeableConcept.coding				${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.value.x..coding
-	$.valueCodeableConcept.coding				${{ {} }}				422    	This property must be an Array, not an Object																Observation.value.x..coding
-	$.valueCodeableConcept.coding				${{ [{}] }}				422    	Object must have some content																				Observation.value.x..coding.0.
+	$.valueCodeableConcept.coding 				missing					422    	Object must have some content																			    	Observation.value.x.
+	$.valueCodeableConcept.coding				${EMPTY}				422    	This property must be an Array, not a primitive property												    	Observation.value.x..coding
+	$.valueCodeableConcept.coding				${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								    Observation.value.x..coding
+	$.valueCodeableConcept.coding				${{ {} }}				422    	This property must be an Array, not an Object																    Observation.value.x..coding
+	$.valueCodeableConcept.coding				${{ [{}] }}				422    	Object must have some content																				    Observation.value.x..coding.0.
 
 	# invalid system
-#	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
-	$.valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..system
-#	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
-	$.valueCodeableConcept.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.value.ofType.CodeableConcept..coding.0.
-	$.valueCodeableConcept.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..system
+	$.valueCodeableConcept.coding[0].system		missing					422    	A code with no system has no defined meaning. A system should be provided   								    Observation.value.ofType.CodeableConcept..coding.0.
+	$.valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																						    Observation.value.ofType.CodeableConcept..coding.0..system
+	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						    Observation.value.ofType.CodeableConcept..coding.0.
+	$.valueCodeableConcept.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											    Observation.value.ofType.CodeableConcept..coding.0.
+	$.valueCodeableConcept.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													    Observation.value.x..coding.0..system
+    $.valueCodeableConcept.coding[0].system		${{ [] }}				422    	This property must be an simple value, not an array                         								    Observation.value.x..coding.0..system
+	$.valueCodeableConcept.coding[0].system		${{ {} }}				422    	This property must be an simple value, not an object														    Observation.value.x..coding.0..system
+	$.valueCodeableConcept.coding[0].system		${{ [{}] }}				422    	This property must be an simple value, not an array 														    Observation.value.x..coding.0..system
 
 	# invalid code
-#	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
-	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..code
-	$.valueCodeableConcept.coding[0].code		${randstring}			422    	For input string: \"${randstring}\"
-	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..code
+	$.valueCodeableConcept.coding[0].code		missing					422    	Observation.value.x..coding:snomed.code: minimum required = 1, but only found 0 .from ${patient-ICU-url}.		Observation.value.ofType.CodeableConcept..coding.0.
+	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						    Observation.value.ofType.CodeableConcept..coding.0..code
+	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Aktivität durchgeführt has invalid code ${randstring}
+	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													    Observation.value.x..coding.0..code
+    $.valueCodeableConcept.coding[0].code		${{ [] }}				422    	This property must be an simple value, not an array                         								    Observation.value.x..coding.0..code
+	$.valueCodeableConcept.coding[0].code		${{ {} }}				422    	This property must be an simple value, not an object														    Observation.value.x..coding.0..code
+	$.valueCodeableConcept.coding[0].code		${{ [{}] }}				422    	This property must be an simple value, not an array 														    Observation.value.x..coding.0..code
 
 	# invalid display
-	$.valueCodeableConcept.coding[0].display	${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..display
-	$.valueCodeableConcept.coding[0].display	${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..display
+	$.valueCodeableConcept.coding[0].display	${EMPTY}				422    	@value cannot be empty																						    Observation.value.ofType.CodeableConcept..coding.0..display
+	$.valueCodeableConcept.coding[0].display	${randinteger}			422    	Error parsing JSON: the primitive value must be a string													    Observation.value.x..coding.0..display
+    $.valueCodeableConcept.coding[0].display	${{ [] }}				422    	This property must be an simple value, not an array                         								    Observation.value.x..coding.0..display
+	$.valueCodeableConcept.coding[0].display	${{ {} }}				422    	This property must be an simple value, not an object														    Observation.value.x..coding.0..display
+	$.valueCodeableConcept.coding[0].display	${{ [{}] }}				422    	This property must be an simple value, not an array 														    Observation.value.x..coding.0..display
 
 
 010 Create Patient in ICU (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
@@ -388,7 +397,7 @@ ${vCC_URL}		                http://snomed.info/sct
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Tags]              DataAbsentReason    not-ready
+	[Tags]              DataAbsentReason
 
 	ehr.create new ehr    				  				000_ehr_status.json
 	create with DataAbsentReason		  				DataAbsentReason				create-patient-in-icu.json
@@ -406,22 +415,22 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create patient in ICU with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready
+    [Tags]              DataAbsentReason
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 
 	# missing valueCodeableConcept
-	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+#	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.dataAbsentReason
 
 	# wrong format valueCodeableConcept
 	$.dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.dataAbsentReason
 	$.dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.dataAbsentReason
-	$.dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array
+	$.dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array                                                               Observation.dataAbsentReason
 
 	# missing coding
-	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+#	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.dataAbsentReason.coding
 
 	# wrong format coding
@@ -430,21 +439,30 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.dataAbsentReason.coding					${{ [{}] }}				422    	Object must have some content																				Observation.dataAbsentReason.coding.0.
 
 	# invalid system
-	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
+#	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].system			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..system
 	$.dataAbsentReason.coding[0].system			${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.dataAbsentReason.coding.0.
 	$.dataAbsentReason.coding[0].system			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..system
-	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
+#	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
+    $.dataAbsentReason.coding[0].system 		${{ [] }}				422    	This property must be an simple value, not an array                         								Observation.dataAbsentReason.coding.0..system
+	$.dataAbsentReason.coding[0].system 		${{ {} }}				422    	This property must be an simple value, not an object														Observation.dataAbsentReason.coding.0..system
+	$.dataAbsentReason.coding[0].system 		${{ [{}] }}				422    	This property must be an simple value, not an array 														Observation.dataAbsentReason.coding.0..system
 
 	# invalid code
-	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+#	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..code
-	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+#	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..code
+    $.dataAbsentReason.coding[0].code   		${{ [] }}				422    	This property must be an simple value, not an array                         								Observation.dataAbsentReason.coding.0..code
+	$.dataAbsentReason.coding[0].code   		${{ {} }}				422    	This property must be an simple value, not an object														Observation.dataAbsentReason.coding.0..code
+	$.dataAbsentReason.coding[0].code   		${{ [{}] }}				422    	This property must be an simple value, not an array 														Observation.dataAbsentReason.coding.0..code
 
 	# invalid display
 	$.dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..display
 	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
+    $.dataAbsentReason.coding[0].display		${{ [] }}				422    	This property must be an simple value, not an array                         								Observation.dataAbsentReason.coding.0..display
+	$.dataAbsentReason.coding[0].display		${{ {} }}				422    	This property must be an simple value, not an object														Observation.dataAbsentReason.coding.0..display
+	$.dataAbsentReason.coding[0].display		${{ [{}] }}				422    	This property must be an simple value, not an array 														Observation.dataAbsentReason.coding.0..display
 
 
 012 Create Patient in ICU (invalid multi)
@@ -455,7 +473,7 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 5. *VALIDATE* the response status \n\n
     ...                 6. *VALIDATE* outcome against diagnostic text (english + german)
     [Template]         create patient in ICU JSON
-    [Tags]             multi    not-ready
+    [Tags]             multi    xxx
 
 #|  resourceType   |          		ID   			|           meta         						|                              identifier                         |	  status  	|                         				category                           	   |                                        									code          								|         subject                    |	  DateTime	   |                      			     valueCodeableConcept			           		           |  R.-Code  |                                                             diagnostics 							                                              |   location
 #|                 |                				|  available  | 			profile  			|  available  |        system         |             value         |             |  available  |  codingavailable  |  	system  		|    	 code          |  available  |  coding available  |  			0.system	  		|  		0.code	  |    		   0.display 		    |  available  |   Identifier-value   |                 |  available  |		coding	|         system     	 |  		code      	|     display      |           |               				                                    ENG				                                                                  |
