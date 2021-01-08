@@ -116,12 +116,15 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]		    create patient in ICU with ehr reference
-    [Tags]          	ID    not-ready
+    [Tags]          	ID
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
 	# 																CODE
     $.id							${EMPTY}						422		@value cannot be empty															Observation.id												
     $.id							${randinteger}					422		Error parsing JSON: the primitive value must be a string						Observation.id
+    $.id    						${{ [] }}						422    	This property must be an simple value, not an array                     		Observation.id
+	$.id    						${{ {} }}						422    	This property must be an simple value, not an object							Observation.id
+	$.id    						${{ [{}] }}						422    	This property must be an simple value, not an array								Observation.id
 
 
 004 Create Patient in ICU (Invalid/Missing 'meta')
@@ -133,17 +136,25 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              meta    not-ready
+    [Tags]              meta
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
+
+    #invalid meta
     $.meta							missing							422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
+#    $.meta							${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.meta
+	$.meta							${{ {} }}						422    	Object must have some content																	                Observation.meta
+#	$.meta							${{ [{}] }}						422    	Object must have some content																					Observation.meta
+
+    #invalid profil
     $.meta.profile					missing							422    	Object must have some content																					Observation.meta
+    $.meta.profile					${EMPTY}						422    	This property must be an Array, not a a primitive property														Observation.meta.profile
     $.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.						Observation.meta.profile.0.
     $.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.						Observation.meta.profile.0.
     $.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.							Observation.meta.profile.0.
     $.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked								Observation.meta.profile.0.
-    $.meta.profile					${EMPTY}						422    	This property must be an Array, not a a primitive property														Observation.meta.profile
+    $.meta.profile[0]				${EMPTY}						422    	@value cannot be empty                                  														Observation.meta.profile.0.
 	
 	# comment: the next one sets the value to an empty list/array []
     $.meta.profile					${{ [] }}						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
@@ -152,68 +163,7 @@ ${vCC_URL}		                http://snomed.info/sct
     $.meta.profile					${{ {} }}						422    	This property must be an Array, not a an object
 
 
-005 Create Patient in ICU (Invalid/Missing 'identifier')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
-    ...                 5. *POST* example JSON to observation endpoint\n\n
-	...                 6. *VALIDATE* the response status \n\n
-    ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create patient in ICU with ehr reference
-    [Tags]              identifier    not-ready
-
-	# FIELD/PATH									VALUE							HTTP	ERROR MESSAGE																									Location
-	# 																				CODE
-	
-	# invalid identifier
-	$.identifier									${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.identifier
-	$.identifier									${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.identifier
-	$.identifier									${{ {} }}						422    	This property must be an Array, not an Object																	Observation.identifier
-	$.identifier									${{ [{}] }}						422    	Object must have some content																					Observation.identifier.0.
-
-    # invalid type
-	$.identifier[0].type							${EMPTY}						422    	This property must be an Object, not a primitive property														Observation.identifier.0..type
-	$.identifier[0].type							${{ [] }}						422    	This property must be an Object, not an array																	Observation.identifier.0..type
-	$.identifier[0].type							${{ {} }}						422    	Object must have some content																					Observation.identifier.0..type
-	$.identifier[0].type							${{ [{}] }}						422    	This property must be an Object, not an array																	Observation.identifier.0..type
-
-    # invalid type coding
-	$.identifier[0].type.coding						${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.identifier.0..type.coding
-	$.identifier[0].type.coding						${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.identifier.0..type.coding
-	$.identifier[0].type.coding						${{ {} }}						422    	Object must have some content																					Observation.identifier.0..type.coding
-	$.identifier[0].type.coding						${{ [{}] }}						422    	Object must have some content																					Observation.identifier.0..type.coding.0.
-
-    # invalid type coding system
-	$.identifier[0].type.coding[0].system			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..type.coding.0..system			
-	$.identifier[0].type.coding[0].system			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..type.coding.0..system
-	$.identifier[0].type.coding[0].system			${randstring}				 	422	   	Coding.system must be an absolute reference, not a local reference												Observation.identifier.0..type.coding.0.
-
-    # invalid type coding code
-	$.identifier[0].type.coding[0].code				${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..type.coding.0..code		
-	$.identifier[0].type.coding[0].code				${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..type.coding.0..code
-
-	# invalid system
-	$.identifier[0].system							${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..system				
-	$.identifier[0].system							${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..system
-	$.identifier[0].system							${randstring}				 	422	   	Identifier.system must be an absolute reference, not a local reference											Observation.identifier.0.
-
-	# invalid value
-	$.identifier[0].value							${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..value				
-	$.identifier[0].value							${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..value
-
-    # invalid assigner
-	$.identifier[0].assigner						${EMPTY}						422    	This property must be an Object, not a primitive property														Observation.identifier.0..assigner
-	$.identifier[0].assigner						${{ [] }}						422    	This property must be an Object, not an array																	Observation.identifier.0..assigner
-	$.identifier[0].assigner						${{ {} }}						422    	Object must have some content																					Observation.identifier.0..assigner
-	$.identifier[0].assigner						${{ [{}] }}						422    	This property must be an Object, not an array																	Observation.identifier.0..assigner
-
-    # invalid assigner reference
-	$.identifier[0].assigner.reference				${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..assigner.reference				
-	$.identifier[0].assigner.reference				${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..assigner.reference
-
-
-006 Create Patient in ICU (Invalid/Missing 'Status')
+005 Create Patient in ICU (Invalid/Missing 'Status')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -222,7 +172,7 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]		    create patient in ICU with ehr reference
-    [Tags]          	status    not-ready
+    [Tags]          	status
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -230,9 +180,12 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.status						${EMPTY}						422		@value cannot be empty																						Observation.status
 	$.status						${randinteger}					422		Error parsing JSON: the primitive value must be a string													Observation.status
 	$.status						${randstring}					400		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
+    $.status						${{ [] }}						422    	This property must be an simple value, not an array                     									Observation.status
+	$.status						${{ {} }}						422    	This property must be an simple value, not an object										                Observation.status
+	$.status						${{ [{}] }}						422    	This property must be an simple value, not an array															Observation.status
 
 
-007 Create Patient in ICU (Invalid/Missing 'category')
+006 Create Patient in ICU (Invalid/Missing 'category')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -241,14 +194,15 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
 	# invalid category
-	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${patient-ICU-url}						Observation
-	$.category								${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.category
+#	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${patient-ICU-url}						Observation
+    $.category								${EMPTY}				422    	This property must be an Array, not a primitive property                            						Observation.category
+    $.category								${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.category
 	$.category								${{ {} }}				422    	This property must be an Array, not an Object																Observation.category
 	$.category								${{ [{}] }}				422    	Object must have some content																				Observation.category
 
@@ -260,20 +214,26 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.category[0].coding					${{ [{}] }}				422    	Object must have some content																				Observation.category.0..coding
 
 	#invalid code 0
-	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
+#	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
 	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
-	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
+#	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
 	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
-	
+    $.category[0].coding[0].code 			${{ [] }}				422    	This property must be an simple value, not an array                                							Observation.category.0..coding.0..code
+	$.category[0].coding[0].code 			${{ {} }}				422    	This property must be an simple value, not an object														Observation.category.0..coding.0..code
+	$.category[0].coding[0].code 			${{ [{}] }}				422    	This property must be an simple value, not an array															Observation.category.0..coding.0..code
+
 	# invaild system 0
-	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
+#	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
 	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
-	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
+#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
+    $.category[0].coding[0].system 			${{ [] }}				422    	This property must be an simple value, not an array                                							Observation.category.0..coding.0..system
+	$.category[0].coding[0].system 			${{ {} }}				422    	This property must be an simple value, not an object														Observation.category.0..coding.0..system
+	$.category[0].coding[0].system 			${{ [{}] }}				422    	This property must be an simple value, not an array															Observation.category.0..coding.0..system
 
 
-008 Create Patient in ICU (Invalid/Missing 'code')
+007 Create Patient in ICU (Invalid/Missing 'code')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -282,8 +242,8 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              code    not-ready
-
+    [Tags]              code
+    
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
@@ -307,19 +267,28 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.code.coding[0].system					http://foobar.de		422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.code.coding.0.
 	$.code.coding[0].system					${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.code.coding.0.
 	$.code.coding[0].system					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..system
+    $.code.coding[0].system      			${{ [] }}				422    	This property must be an simple value, not an array                                							Observation.code.coding.0..system
+	$.code.coding[0].system      			${{ {} }}				422    	This property must be an simple value, not an object														Observation.code.coding.0..system
+	$.code.coding[0].system      			${{ [{}] }}				422    	This property must be an simple value, not an array															Observation.code.coding.0..system
 
 	# invalid Code Coding 0 Code
 	$.code.coding[0].code					missing					422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.code.coding.0.
 	$.code.coding[0].code					${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..code
 	$.code.coding[0].code					${randstring}			422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.code.coding.0.
 	$.code.coding[0].code					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..code
+    $.code.coding[0].code      			    ${{ [] }}				422    	This property must be an simple value, not an array                                							Observation.code.coding.0..code
+	$.code.coding[0].code      			    ${{ {} }}				422    	This property must be an simple value, not an object														Observation.code.coding.0..code
+	$.code.coding[0].code      			    ${{ [{}] }}				422    	This property must be an simple value, not an array															Observation.code.coding.0..code
 
 	# invalid Code Coding 0 Display
 	$.code.coding[0].display				${EMPTY}				422    	@value cannot be empty																						Observation.code.coding.0..display
 	$.code.coding[0].display				${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.code.coding.0..display
+    $.code.coding[0].display    			${{ [] }}				422    	This property must be an simple value, not an array                                							Observation.code.coding.0..display
+	$.code.coding[0].display    			${{ {} }}				422    	This property must be an simple value, not an object														Observation.code.coding.0..display
+	$.code.coding[0].display    			${{ [{}] }}				422    	This property must be an simple value, not an array															Observation.code.coding.0..display
 
 
-009 Create Patient in ICU (Invalid/Missing 'effectiveDateTime')
+008 Create Patient in ICU (Invalid/Missing 'effectiveDateTime')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -363,7 +332,7 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.effectiveDateTime						${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.effective.x.
 
 
-010 Create Patient in ICU (Invalid/Missing 'valueCodeableConcept')
+009 Create Patient in ICU (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -411,52 +380,7 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.valueCodeableConcept.coding[0].display	${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..display
 
 
-011 Create Patient in ICU (Invalid/Missing 'method')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``method`` \n\n
-    ...                 5. *POST* example JSON to observation endpoint\n\n
-	...                 6. *VALIDATE* the response status \n\n
-    ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Template]			create patient in ICU with ehr reference
-    [Tags]              method    not-ready
-
-	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																	CODE
-	
-	# missing method
-	$.method									${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.method
-
-	# invalid format
-	$.method									${{ [] }}				422    	This property must be an Object, not an array																Observation.method
-	$.method									${{ {} }}				422    	Object must have some content																				Observation.method
-	$.method									${{ [{}] }}				422    	This property must be an Object, not an array																Observation.method	
-
-	# missing coding
-	$.method.coding								missing					422    	Object must have some content																				Observation.method
-	$.method.coding								${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.method.coding
-
-	# invalid format
-	$.method.coding								${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.method.coding
-	$.method.coding								${{ {} }}				422    	Object must have some content																				Observation.method.coding
-	$.method.coding								${{ [{}] }}				422    	Object must have some content																				Observation.method.coding.0.
-
-	# invalid system
-	$.method.coding[0].system					${EMPTY}				422    	@value cannot be empty																						Observation.method.coding.0..system
-	$.method.coding[0].system					${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.method.coding.0.
-	$.method.coding[0].system					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.method.coding.0..system
-
-	# invalid code
-	$.method.coding[0].code						${EMPTY}				422    	@value cannot be empty																						Observation.method.coding.0..code
-	$.method.coding[0].code						${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.method.coding.0..code
-
-	# invalid display
-	$.method.coding[0].display					${EMPTY}				422    	@value cannot be empty																						Observation.method.coding.0..display
-	$.method.coding[0].display					${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.method.coding.0..display
-
-
-012 Create Patient in ICU (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
+010 Create Patient in ICU (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -473,7 +397,7 @@ ${vCC_URL}		                http://snomed.info/sct
 
 
 
-013 Create Patient in ICU (Invalid/Missing 'DataAbsentReason')
+011 Create Patient in ICU (Invalid/Missing 'DataAbsentReason')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -523,7 +447,7 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
 
 
-014 Create Patient in ICU (invalid multi)
+012 Create Patient in ICU (invalid multi)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
 	...                 3. *UPDATE* values for attributes \n\n
