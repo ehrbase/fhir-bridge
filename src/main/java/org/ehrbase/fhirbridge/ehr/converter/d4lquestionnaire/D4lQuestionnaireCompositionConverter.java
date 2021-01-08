@@ -2,22 +2,23 @@ package org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
+import liquibase.pro.packaged.V;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
+import org.ehrbase.client.openehrclient.VersionUid;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Anamnesis;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.GeneralInformation;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Medication;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Symptoms;
-import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.BlutdruckComposition;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
-import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.time.temporal.TemporalAccessor;
+import java.util.UUID;
 
 public class D4lQuestionnaireCompositionConverter implements CompositionConverter<D4LQuestionnaireComposition, QuestionnaireResponse> {
     private static final String P = "P";
@@ -43,7 +44,8 @@ public class D4lQuestionnaireCompositionConverter implements CompositionConverte
         initialiseSections(questionnaireResponse);
         mapSections(questionnaireResponse);
         d4LQuestionnaireComposition.setStartTimeValue(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
-
+       VersionUid versionUid = new VersionUid("9d2bc6df-ea9d-4a66-a091-dea7efe2384f");
+     d4LQuestionnaireComposition.setVersionUid(versionUid);
         return populateD4lQuestionnaireComposition(d4LQuestionnaireComposition);
     }
 

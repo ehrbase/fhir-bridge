@@ -1,8 +1,10 @@
 package org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartySelf;
+import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
@@ -24,7 +26,6 @@ import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.Woh
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.WohnsituationEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungDerBeschaeftigungEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungRauchverhaltenEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.StatusDefiningcode;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.time.LocalDate;
@@ -150,7 +151,6 @@ public class GeneralInformation extends QuestionnaireSection {
         ZusammenfassungDerBeschaeftigungEvaluation zusammenfassungDerBeschaftigungEvaluation = new ZusammenfassungDerBeschaeftigungEvaluation();
         zusammenfassungDerBeschaftigungEvaluation.setLanguage(Language.DE);
         zusammenfassungDerBeschaftigungEvaluation.setSubject(new PartySelf());
-     //   List<BeschaeftigungCluster> beschaftigungClusterList = new ArrayList<>();
         BeschaeftigungCluster beschaftigungCluster = new BeschaeftigungCluster();
         switch (occupationClass) {
             case "community":
@@ -252,9 +252,6 @@ public class GeneralInformation extends QuestionnaireSection {
         SchwangerschaftsstatusObservation stillzeitEvaluation = new SchwangerschaftsstatusObservation();
         SchwangerschaftsstatusBeliebigesEreignisChoice schwangerschaftsstatusBeliebigesEreignisChoice = new SchwangerschaftsstatusBeliebigesEreignisPointEvent();
         schwangerschaftsstatusBeliebigesEreignisChoice.setStatusDefiningCode(pregnantLoincToStatusCode(pregnantLoincCode));
-/*        stillzeitEvaluation.setBeliebigesEreignis(new ArrayList<>() {{
-            add(schwangerschaftsstatusBeliebigesEreignisChoice);
-        }});*/
         schwangerschaftsstatusBeliebigesEreignisChoice.setTimeValue(this.authored);
         stillzeitEvaluation.setBeliebigesEreignis(List.of(schwangerschaftsstatusBeliebigesEreignisChoice));
         stillzeitEvaluation.setLanguage(Language.DE);
@@ -284,18 +281,12 @@ public class GeneralInformation extends QuestionnaireSection {
         contactWithInfectedQuestion = Optional.of(kontaktAction);
     }
 
-    public void mapContactWithInfected(Boolean item) {
+    public void mapContactWithInfected(Boolean hadContact) {
         KontaktAction kontaktAction = getKontaktAction();
-        /*
-        kontaktAction.setLanguage(Language.DE);
-        kontaktAction.setSubject(new PartySelf());
-        kontaktAction.setBeginnNullFlavourDefiningCode(NullFlavour.MASKED);
-        kontaktAction.setCurrentState();*/
-
-        if(item){
+        DvCodedText dvCodedText = new DvCodedText("Florian Kaercher von der Charite", new CodePhrase(new TerminologyId("local"), "at0016"));
+        kontaktAction.setCurrentState(dvCodedText);
+        if(hadContact){
             kontaktAction.setKontaktZuEinemBestaetigtenFallDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
-
-
         }else{
             kontaktAction.setKontaktZuEinemBestaetigtenFallDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
         }
