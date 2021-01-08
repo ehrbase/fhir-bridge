@@ -479,41 +479,44 @@ ${identifiervalue}              763264000_FrailtyScaleScore
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create clinical frailty scale score with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    xxx
+    [Tags]              DataAbsentReason
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 
 	# missing valueCodeableConcept
-#	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.dataAbsentReason
 
-	# wrong format
+	# wrong format valueCodeableConcept
 	$.dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.dataAbsentReason
 	$.dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.dataAbsentReason
 	$.dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array
 
 	# missing coding
-#	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.dataAbsentReason.coding
 
+	# wrong format coding
+	$.dataAbsentReason.coding					${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.dataAbsentReason.coding
+	$.dataAbsentReason.coding					${{ {} }}				422    	This property must be an Array, not an Object																Observation.dataAbsentReason.coding
+	$.dataAbsentReason.coding					${{ [{}] }}				422    	Object must have some content																				Observation.dataAbsentReason.coding.0.
+
 	# invalid system
-#	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].system			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..system
 	$.dataAbsentReason.coding[0].system			${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.dataAbsentReason.coding.0.
 	$.dataAbsentReason.coding[0].system			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..system
-#	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
 
 	# invalid code
-#	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..code
-#	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..code
 
 	# invalid display
-#	$.dataAbsentReason.coding[0].display		missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..display
-#	$.dataAbsentReason.coding[0].display		${randstring}			422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
 
 
