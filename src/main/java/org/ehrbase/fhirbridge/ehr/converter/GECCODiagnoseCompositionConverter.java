@@ -41,6 +41,7 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
     private static String VERIFICATION_STATUS_PRESENT_CODE = "410605003";
     private static String VERIFICATION_STATUS_ABSENT_CODE = "410594000";
 
+    //TODO: ICD CODES
     private static String SNOMED_SYSTEM = "http://snomed.info/sct";
 
 
