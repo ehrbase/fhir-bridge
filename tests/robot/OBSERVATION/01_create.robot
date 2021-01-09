@@ -1,5 +1,5 @@
-# Copyright (c) 2020 Peter Wohlfarth (Appsfactory GmbH), Wladislaw Wagner (Vitasystems GmbH), 
-# Dave Petzold (Appsfactory GmbH)
+# Copyright (c) 2020 Peter Wohlfarth (Appsfactory GmbH), Wladislaw Wagner (Vitasystems GmbH),
+# Dave Petzold (Appsfactory GmbH) & Pauline Schulz (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -34,9 +34,11 @@ Force Tags              create
 
 *** Test Cases ***
 001 Create Body Temperature 
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-temp.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             body-temperature    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -45,20 +47,24 @@ Force Tags              create
 
 
 002 Create Blood Pressure 
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-blood-pressure.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             blood-pressure    valid
 
-	ehr.create new ehr    000_ehr_status.json
-	observation.create blood pressure    create-blood-pressure.json
+	ehr.create new ehr    					000_ehr_status.json
+	observation.create blood pressure    	create-blood-pressure.json
     observation.validate response - 201
 
 
 003 Create FIO2 
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-fio2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             fio2    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -67,9 +73,11 @@ Force Tags              create
 
 
 004 Create Heart Rate 
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-heart-rate.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             heart-rate    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -78,9 +86,11 @@ Force Tags              create
 
 
 005 Create Sofa Score
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             sofa-score    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -89,9 +99,11 @@ Force Tags              create
 
 
 006 Create Observation Lab
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             observation-lab    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -100,9 +112,12 @@ Force Tags              create
 
 
 007 Create Observation Using Default Profile
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-with-default-profile.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
 	[Tags]             invalid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -111,9 +126,12 @@ Force Tags              create
 
 
 008 Create Observation Using Unsupported Profile
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-with-unsupported-profile.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status \n\n
+    ...                 6. *VALIDATE* outcome against diagnostic text
 	[Tags]             invalid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -122,9 +140,11 @@ Force Tags              create
 
 
 009 Create Coronavirus Lab Result
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-coronavirus-nachweis-test.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             coronavirus-lab-result    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -133,9 +153,11 @@ Force Tags              create
 
 
 010 Create Body Height
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             body-height    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -144,9 +166,11 @@ Force Tags              create
 
 
 011 Create Pregnancy Status
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             pregnancy-status    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -155,9 +179,11 @@ Force Tags              create
 
 
 012 Create Frailty Scale Score
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             frailty-scale-score    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -166,9 +192,11 @@ Force Tags              create
 
 
 013 Create Smoking Status
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-smoking-status.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             smoking-status    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -177,9 +205,11 @@ Force Tags              create
 
 
 014 Create Body Weight
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-weight.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             body-weight    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -188,9 +218,11 @@ Force Tags              create
 
 
 015 Create Patient in ICU
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             patient-in-icu    valid
 
 	ehr.create new ehr    000_ehr_status.json
@@ -199,19 +231,24 @@ Force Tags              create
 
 
 016 Create Blood Gas Panel
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-blood-gas-panel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             blood-gas-panel    valid   not-ready
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create blood gas panel    create-blood-gas-panel.json
+	observation.validate response - 201
 
 
 017 Create Oxygen Saturation in Arterial Blood
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-oxygen-saturation.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             oxygen-saturation   valid    not-ready
 
 	ehr.create new ehr    000_ehr_status.json
@@ -220,9 +257,11 @@ Force Tags              create
 
 
 018 Create History of Travel
-	[Documentation]    1. create new EHR Patient record
-	...                2. post example json to observation endpoint
-	...                3. validate the response status
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
 	[Tags]             history-of-travel   valid    not-ready
 
 	ehr.create new ehr    000_ehr_status.json

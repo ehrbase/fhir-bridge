@@ -160,10 +160,10 @@ jobs:
                       echo "Publishing Docker image with following tag: ${TAG}"
                       echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
                       #   ./mvnw clean install -DskipTests -Djdk.tls.client.protocols=TLSv1.2
-                      #   docker build -t ehrbaseorg/fhir-bridge-poc:$TAG .
-                      mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ehrbaseorg/fhir-bridge:$TAG -Dmaven.test.skip
-                      docker tag ehrbaseorg/fhir-bridge ehrbaseorg/fhir-bridge:$TAG
-                      docker push ehrbaseorg/fhir-bridge:$TAG
+                      #   docker build -t ehrbase/fhir-bridge:$TAG .
+                      mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ehrbase/fhir-bridge:$TAG -Dmaven.test.skip
+                      docker tag ehrbase/fhir-bridge ehrbase/fhir-bridge:$TAG
+                      docker push ehrbase/fhir-bridge:$TAG
 
 
 
@@ -519,7 +519,7 @@ executors:
         working_directory: ~/projects
         docker:
             - image: circleci/python:3.8.5-node-browsers
-            - image: ehrbaseorg/ehrbase-postgres:10
+            - image: ehrbase/ehrbase-postgres:11.10
               environment:
                 POSTGRES_USER: postgres
                 POSTGRES_PASSWORD: postgres

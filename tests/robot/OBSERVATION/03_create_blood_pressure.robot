@@ -21,7 +21,8 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
-
+Documentation           *NOTE:* use Regular Expressions to replace braces () as described here:
+...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example
 Force Tags              create    blood-pressure    invalid
 
 
@@ -33,14 +34,19 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 *** Test Cases ***
-000 Create Blood Pressuere (Invalid/Missing EHR Reference)
-	[Documentation]    	POST to observation endpoint w/o creating an EHR first
+001 Create Blood Pressuere (Invalid/Missing EHR Reference)
+    [Documentation]     1. *LOAD* _create-blood-pressure.json_ \n\n
+	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
+    ...                 3. *POST* example JSON to observation endpoint \n\n
+	...                 4. *VALIDATE* the response status \n\n
+    ...                 5. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create blood pressure w/o ehr reference
-	[Tags]				
+	[Tags]				subject
 
 	# FIELD/PATH					VALUE			ISSUE	HTTP	ERROR MESSAGE
 	# 												INDEX	CODE
 	$.subject.identifier.value		missing			0		422		Subject identifier is required
+	$.subject.identifier.system		missing			0		422		EhrId not found for subject '[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 	$.subject.identifier.value		foobar			0		422		EhrId not found for subject 'foobar'
 	$.subject.identifier.value		${EMPTY}		0		422		@value cannot be empty    Observation.subject.identifier.value
 	$.subject.identifier.value		${{ [] }}		0		422		This property must be an simple value, not an array    Observation.subject.identifier.value
@@ -61,12 +67,16 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.subject.identifier.value    ${{str(uuid.uuid4())}}    0    422    EhrId not found for subject '[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 	
 
-001 Create Blood Pressure (Invalid/Missing 'resourceType')
-	[Documentation]     TODO
-	...					NOTE: use Regular Expressions to replace braces () as described here:
-	...          		https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example
+002 Create Blood Pressure (Invalid/Missing 'resourceType')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-blood-pressure.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create blood pressure with ehr reference
-    [Tags]          	
+    [Tags]          	resourceType
 
 	# FIELD/PATH		VALUE			ISSUE	HTTP	ERROR MESSAGE
 	# 									INDEX	CODE	
@@ -76,41 +86,59 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
     $.resourceType		${123}			0		422		This does not appear to be a FHIR resource .unknown name '123'.
 
 
-002 Create Blood Pressure (Invalid/Missing 'meta')
-	[Documentation]     TODO
+003 Create Blood Pressure (Invalid/Missing 'meta')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-blood-pressure.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``meta`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create blood pressure with ehr reference
-    [Tags]             	
+    [Tags]             	meta
 
 	# FIELD/PATH		VALUE						ISSUE	HTTP	ERROR MESSAGE
 	# 												INDEX	CODE
-	$.meta			missing							0		422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
-	$.meta.profile	missing							0		422    	Object must have some content
-	$.meta.profile    ${{ ["invalid_url"] }}		0   	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.
-	$.meta.profile    ${{ ["http://wrong.url"] }}	0    	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked
-	$.meta.profile	${EMPTY}						0		422    	This property must be an Array, not a a primitive property
+	$.meta				missing						0		422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
+	$.meta.profile		missing						0		422    	Object must have some content
+	$.meta.profile    	${{ ["invalid_url"] }}		0   	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.
+	$.meta.profile    	${{ ["http://wrong.url"] }}  0    	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked
+	$.meta.profile		${EMPTY}					0		422    	This property must be an Array, not a a primitive property
 	
 	# comment: the next one sets the value to an empty list/array []
 	$.meta.profile		${{ [] }}					0		422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	
 	# comment: the next one sets value to an empty object {}
-	$.meta.profile	${{ {} }}						0		422    	This property must be an Array, not a an object
+	$.meta.profile		${{ {} }}					0		422    	This property must be an Array, not a an object
 
 
 
-003 Create Blood Pressure (Invalid/Missing 'code')
-	[Documentation]     TODO
+004 Create Blood Pressure (Invalid/Missing 'code')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-blood-pressure.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Code`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create blood pressure with ehr reference
-    [Tags]              
+    [Tags]              code
 
 	# FIELD/PATH		VALUE			ISSUE	HTTP	ERROR MESSAGE
 	# 									INDEX	CODE
 	$.code				missing			0		422    	Observation.code: minimum required = 1, but only found 0 .from ${profile url}
 	
 
-004 Create Blood Pressure (Invalid/Missing 'category:VSCat')
-	[Documentation]     TODO
+005 Create Blood Pressure (Invalid/Missing 'category:VSCat')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-blood-pressure.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Category`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create blood pressure with ehr reference
-    [Tags]              
+    [Tags]              category
 
 	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    ... LOCATION
 	# 														INDEX	CODE
@@ -140,10 +168,16 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	...																		Observation.category[0]
 
 
-005 Create Blood Pressure (Invalid/Missing 'component:SystolicBP')
-	[Documentation]     TODO
+006 Create Blood Pressure (Invalid/Missing 'component:SystolicBP')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-blood-pressure.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Component:SystolicBP`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create blood pressure with ehr reference
-    [Tags]              
+    [Tags]              component
 
 	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    LOCATION
 	# 														INDEX	CODE
@@ -236,10 +270,16 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	...																		Observation.component[0].value.ofType(Quantity).code
 
 
-006 Create Blood Pressure (Invalid/Missing 'component:DiastolicBP')
-	[Documentation]     TODO
+007 Create Blood Pressure (Invalid/Missing 'component:DiastolicBP')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-blood-pressure.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Component:DiastolicBP`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create blood pressure with ehr reference
-    [Tags]              
+    [Tags]              component
 
 	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    LOCATION
 	$.component[1].code  					missing			1		422		Observation.component.DiastolicBP: minimum required = 1, but only found 0 .from ${profile url}
@@ -362,8 +402,8 @@ generate payload from example json
 	[Arguments]			${json_path}    ${value}
 
 	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-blood-pressure.json
-                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
+                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 
 						# comment: delete field/object that has value 'missing' in test case table 
 						Run Keyword And Return If   $value=="missing"
