@@ -109,6 +109,20 @@ create diagnosis covid-19
     POST /Condition with ehr reference    Diagnosis Covid-19    ${example_json}
 
 
+create chronic kidney diseases
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
+create chronic neurological or mental diseases
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
+create cardiovascular diseases
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
 
 #                                   .                    
 #                                 .o8                    

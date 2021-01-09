@@ -14,8 +14,15 @@ robot -d results/ -L TRACE -i create  robot # runs all tests with the tag "creat
 robot -d results/ -L TRACE -i createANDobservation  robot # runs all tests which have the tag create and observation (test needs both tags)
 robot -d results/ -L TRACE -i createORobservation  robot # runs all tests which have the tag create or observation (test needs at least one of the tag)
 robot -d results/ -L TRACE -i condition -i observation  robot # runs all tests with tag condition and all tests with tag observation (same as OR)
+# command from CI
+robot -d results/0 -L TRACE --skip TODO --skip future --skiponfailure not-ready robot
+
 ```
 
+```bash
+# docu command
+python3 -m robot.testdoc robot results/fhirbridgerobottests.html
+```
 
 ```bash
 # robot command line options explained
