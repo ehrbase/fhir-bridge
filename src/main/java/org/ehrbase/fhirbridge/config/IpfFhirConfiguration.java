@@ -14,6 +14,9 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * {@link Configuration Configuration} for IPF FHIR Servlet.
+ */
 @Configuration
 public class IpfFhirConfiguration {
 
