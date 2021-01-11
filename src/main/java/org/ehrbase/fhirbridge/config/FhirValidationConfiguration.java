@@ -5,6 +5,7 @@ import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.server.interceptor.RequestValidatingInterceptor;
+import org.apache.http.client.HttpClient;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.FhirBridgeException;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
@@ -41,11 +42,17 @@ public class FhirValidationConfiguration {
 
     private final ResourcePatternResolver resourceLoader;
 
+    private final HttpClient httpClient;
+
     private final MessageSource messageSource;
 
-    public FhirValidationConfiguration(FhirValidationProperties properties, ResourcePatternResolver resourceLoader, MessageSource messageSource) {
+    public FhirValidationConfiguration(FhirValidationProperties properties,
+                                       ResourcePatternResolver resourceLoader,
+                                       HttpClient httpClient,
+                                       MessageSource messageSource) {
         this.properties = properties;
         this.resourceLoader = resourceLoader;
+        this.httpClient = httpClient;
         this.messageSource = messageSource;
     }
 
@@ -100,8 +107,11 @@ public class FhirValidationConfiguration {
     }
 
     private TerminologyServerValidationSupport terminologyServerValidationSupport() {
+        fhirContext.getRestfulClientFactory()
+                .setHttpClient(httpClient);
+
         IGenericClient client = fhirContext.newRestfulGenericClient(properties.getTerminology().getServerUrl());
-        TerminologyServerValidationSupport terminologyServerValidationSupport = new  TerminologyServerValidationSupport(fhirContext, client);
+        TerminologyServerValidationSupport terminologyServerValidationSupport = new TerminologyServerValidationSupport(fhirContext, client);
         terminologyServerValidationSupport.setMessageSource(messageSource);
         return terminologyServerValidationSupport;
     }
