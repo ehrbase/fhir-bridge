@@ -1,0 +1,65 @@
+{
+  "resourceType": "Observation",
+  "id": "813f6951-d737-4e43-a078-40adfe468892",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/history-of-travel"
+    ]
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "OBI"
+          }
+        ]
+      },
+      "system": "https://www.charite.de/fhir/CodeSystem/observation-identifiers",
+      "value": "8691-8_HistoryOfTravel",
+      "assigner": {
+        "reference": "Organization/Charité"
+      }
+    }
+  ],
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "social-history"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "8691-8",
+        "display": "History of Travel"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "443846001",
+        "display": "Detail of history of travel (observable entity)"
+      }
+    ],
+    "text": "History of travel"
+  },
+  "subject": {
+    "reference": "Patient/011aadc9-bc53-4234-a13e-6f7ab33e470d"
+  },
+  "effectiveDateTime": "2020-11-09T12:57:06+01:00",
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "373067005",
+        "display": "No (qualifier value)"
+      }
+    ]
+  }
+}
