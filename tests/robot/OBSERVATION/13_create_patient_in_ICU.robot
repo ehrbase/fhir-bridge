@@ -473,7 +473,7 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 5. *VALIDATE* the response status \n\n
     ...                 6. *VALIDATE* outcome against diagnostic text (english + german)
     [Template]         create patient in ICU JSON
-    [Tags]             multi    xxx
+    [Tags]             multi    not-ready    xxx
 
 #|  resourceType   |          		ID   			|                      meta        				|   status    |                         				category                           |                                        									code          								|         subject                    |	  DateTime	   |                      			     valueCodeableConcept			           		           |  R.-Code  |                                                             diagnostics 							                                              |   location
 #|                 |                				|  available  | 			profile  			|             |  available  |  codingavailable  |  	system  		|    	 code          |  available  |  coding available  |  			0.system	  		|  		0.code	  |    		   0.display 		    |  available  |   Identifier-value   |                 |  available  |		coding	|         system     	 |  		code      	|     display      |           |               				                                    ENG				                                                                  |
