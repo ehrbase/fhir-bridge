@@ -318,6 +318,46 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.valueQuantity.code	  	${123}			422    	Error parsing JSON: the primitive value must be a string
 	$.valueQuantity.code	  	foobar			422    	.*No matching units for:foobar, expected units:kg.*Bad Request.*
 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# BUG TRACE
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BUG TRACE 01 Create body weight (Invalid Identfifier)
+	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
+	[Template]			Create Body Weight with ehr reference
+    [Tags]              identifier    not-ready
+
+	#									   					HTTP	
+	# FIELD/PATH 							VALUE		   	CODE		ERROR MESSAGE
+
+	$.identifier							missing		   	422    		Observation.identifier:analyseBefundCode: minimum required = 1, but only found 0 .from ${profile url} 
+	$.identifier[0].type					missing		   	422    		Observation.identifier:analyseBefundCode: minimum required = 1, but only found 0 .from ${profile url}
+	$.identifier[0].type.coding[0].system	missing    	   	422    		A code with no system has no defined meaning. A system should be provided
+	$.identifier[0].type.coding[0].system   http://foo     	422    		This element does not match any known slice defined in the profile ${profile url} -- No error message ??
+	$.identifier[0].type.coding[0].code     missing    	   	422    		This element does not match any known slice defined in the profile ${profile url} 
+	$.identifier[0].type.coding[0].code     foo    	       	422    		This element does not match any known slice defined in the profile ${profile url}
+	$.identifier[0].system					missing		   	422	   		Observation.identifier:analyseBefundCode.system: minimum required = 1, but only found 0				
+	$.identifier[0].value					missing		   	422	   		Observation.identifier:analyseBefundCode.value: minimum required = 1, but only found 0				
+	$.identifier[0].assigner				missing		   	422	   		Observation.identifier:analyseBefundCode.assigner: minimum required = 1, but only found 0				
+
+
+BUG TRACE 02 Create body weight (Invalid category)
+	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
+	[Template]			Create Body Weight with ehr reference
+    [Tags]              category    not-ready
+	#									   				HTTP	
+	# FIELD/PATH 						VALUE		   	CODE		ERROR MESSAGE
+
+	$.category[0].coding[1].code      	missing    		422    		This element does not match any known slice defined in the profile ${profile url}
+	$.category[0].coding[1].code      	${EMPTY}    	422    		@value cannot be empty
+	$.category[0].coding[1].code      	foobar    		422    		This element does not match any known slice defined in the profile ${profile url}
+	$.category[0].coding[1].code      	${123}    		422    		This element does not match any known slice defined in the profile ${profile url}
+	$.category[0].coding[1].system    	missing    		422    		This element does not match any known slice defined in the profile ${profile url}
+	$.category[0].coding[1].system    	${EMPTY}    	422    		Observation.category.coding:observation-category: minimum required = 1, but only found 0 .from ${profile url}
+	$.category[0].coding[1].system    	${None}    		422    		This property must be an simple value, not null    		Observation.category.0..coding.1..system
+	$.category[0].coding[1].system    	http://foo bar  422  		Observation.category.coding:observation-category: minimum required = 1, but only found 0 .from ${profile url}
+	$.category[0].coding[1].system    	http://foo    	422    		This element does not match any known slice defined in the profile ${profile url}
+
 
 # oooo    oooo oooooooooooo oooooo   oooo oooooo   oooooo     oooo   .oooooo.   ooooooooo.   oooooooooo.    .oooooo..o
 # `888   .8P'  `888'     `8  `888.   .8'   `888.    `888.     .8'   d8P'  `Y8b  `888   `Y88. `888'   `Y8b  d8P'    `Y8
