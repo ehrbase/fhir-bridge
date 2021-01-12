@@ -107,8 +107,7 @@ public class FhirValidationConfiguration {
     }
 
     private TerminologyServerValidationSupport terminologyServerValidationSupport() {
-        fhirContext.getRestfulClientFactory()
-                .setHttpClient(httpClient);
+        fhirContext.getRestfulClientFactory().setHttpClient(httpClient);
 
         IGenericClient client = fhirContext.newRestfulGenericClient(properties.getTerminology().getServerUrl());
         TerminologyServerValidationSupport terminologyServerValidationSupport = new TerminologyServerValidationSupport(fhirContext, client);
