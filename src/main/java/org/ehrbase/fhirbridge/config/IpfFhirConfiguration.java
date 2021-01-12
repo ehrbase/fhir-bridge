@@ -28,6 +28,7 @@ public class IpfFhirConfiguration {
                                       IServerAddressStrategy serverAddressStrategy,
                                       INarrativeGenerator narrativeGenerator,
                                       RequestValidatingInterceptor requestValidatingInterceptor) {
+
         IpfFhirServlet fhirServlet = new IpfBootFhirServlet(fhirContext, pagingProvider);
         IpfFhirConfigurationProperties.Servlet servletProperties = properties.getServlet();
         fhirServlet.setLogging(servletProperties.isLogging());
