@@ -223,6 +223,10 @@ create history of travel
     POST /Observation with ehr reference    History of Travel    ${example_json}
 
 
+create sex assigned at birth
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
