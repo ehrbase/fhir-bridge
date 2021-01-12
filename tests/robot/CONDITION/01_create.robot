@@ -836,5 +836,5 @@ Force Tags              create
     [Tags]             human-inmunodeficiency-virus-infection    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create human immunodeciency virus infection    Human Immunodeficiency Virus Infection (Unknown)    create-human-immunodeficiency-virus-infection-unknown.json    BUG-SEED
+    condition.create human immunodeciency virus infection    Human Immunodeficiency Virus Infection (Unknown)    create-human-immunodeficiency-virus-infection-unknown.json
     condition.validate response - 201
