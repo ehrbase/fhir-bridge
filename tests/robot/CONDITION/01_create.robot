@@ -877,3 +877,4 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     condition.create gastrointestinal ulcer    Gastrointestinal Ulcer (Unknown)    create-gastrointestinal-ulcer-unknown.json
     condition.validate response - 201
+
