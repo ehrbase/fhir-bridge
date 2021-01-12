@@ -267,3 +267,68 @@ Force Tags              create
 	ehr.create new ehr    000_ehr_status.json
 	observation.create history of travel    create-history-of-travel.json
   	observation.validate response - 201
+
+
+019 Create Sex assigned at Birth (Divers)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-sex-assigned-at-birth-divers.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             sex-assigned-at-birth   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create sex assigned at birth    Sex assigned at Birth (Divers)    create-sex-assigned-at-birth-divers.json
+    observation.validate response - 201
+
+
+020 Create Sex assigned at Birth (Female)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-sex-assigned-at-birth-female.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             sex-assigned-at-birth   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create sex assigned at birth    Sex assigned at Birth (Female)    create-sex-assigned-at-birth-female.json
+    observation.validate response - 201
+
+
+021 Create Sex assigned at Birth (Male)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-sex-assigned-at-birth-male.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             sex-assigned-at-birth   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create sex assigned at birth    Sex assigned at Birth (Male)    create-sex-assigned-at-birth-male.json
+    observation.validate response - 201
+
+
+022 Create Sex assigned at Birth (Unspecified)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-sex-assigned-at-birth-unspecified.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             sex-assigned-at-birth   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create sex assigned at birth    Sex assigned at Birth (Unspecified)    create-sex-assigned-at-birth-unspecified.json
+    observation.validate response - 201
+
+
+023 Create Sex assigned at Birth (Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-sex-assigned-at-birth-unknown.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             sex-assigned-at-birth   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create sex assigned at birth    Sex assigned at Birth (Unknown)    create-sex-assigned-at-birth-unknown.json
+    observation.validate response - 201
