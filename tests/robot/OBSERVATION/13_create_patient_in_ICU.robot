@@ -123,8 +123,8 @@ ${vCC_URL}		                http://snomed.info/sct
     $.id							${EMPTY}						422		@value cannot be empty															Observation.id												
     $.id							${randinteger}					422		Error parsing JSON: the primitive value must be a string						Observation.id
     $.id    						${{ [] }}						422    	This property must be an simple value, not an array                     		Observation.id
-	$.id    						${{ {} }}						422    	This property must be an simple value, not an object							Observation.id
-	$.id    						${{ [{}] }}						422    	This property must be an simple value, not an array								Observation.id
+    $.id    						${{ {} }}						422    	This property must be an simple value, not an object							Observation.id
+    $.id    						${{ [{}] }}						422    	This property must be an simple value, not an array								Observation.id
 
 
 004 Create Patient in ICU (Invalid/Missing 'meta')
@@ -144,7 +144,7 @@ ${vCC_URL}		                http://snomed.info/sct
     #invalid meta
     $.meta							missing							422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 #    $.meta							${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.meta
-	$.meta							${{ {} }}						422    	Object must have some content																	                Observation.meta
+    $.meta							${{ {} }}						422    	Object must have some content																	                Observation.meta
 #	$.meta							${{ [{}] }}						422    	Object must have some content																					Observation.meta
 
     #invalid profil
@@ -176,13 +176,13 @@ ${vCC_URL}		                http://snomed.info/sct
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																								Location
 	# 																CODE
-	$.status						missing							422		Observation.status: minimum required = 1, but only found 0 .from https://.*									Observation
-	$.status						${EMPTY}						422		@value cannot be empty																						Observation.status
-	$.status						${randinteger}					422		Error parsing JSON: the primitive value must be a string													Observation.status
-	$.status						${randstring}					400		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
+    $.status						missing							422		Observation.status: minimum required = 1, but only found 0 .from https://.*									Observation
+    $.status						${EMPTY}						422		@value cannot be empty																						Observation.status
+    $.status						${randinteger}					422		Error parsing JSON: the primitive value must be a string													Observation.status
+    $.status						${randstring}					400		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
     $.status						${{ [] }}						422    	This property must be an simple value, not an array                     									Observation.status
-	$.status						${{ {} }}						422    	This property must be an simple value, not an object										                Observation.status
-	$.status						${{ [{}] }}						422    	This property must be an simple value, not an array															Observation.status
+    $.status						${{ {} }}						422    	This property must be an simple value, not an object										                Observation.status
+    $.status						${{ [{}] }}						422    	This property must be an simple value, not an array															Observation.status
 
 
 006 Create Patient in ICU (Invalid/Missing 'category')
@@ -473,31 +473,31 @@ ${vCC_URL}		                http://snomed.info/sct
 	...                 5. *VALIDATE* the response status \n\n
     ...                 6. *VALIDATE* outcome against diagnostic text (english + german)
     [Template]         create patient in ICU JSON
-    [Tags]             multi    not-ready    xxx
+    [Tags]             multi
 
-#|  resourceType   |          		ID   			|                      meta        				|   status    |                         				category                           |                                        									code          								|         subject                    |	  DateTime	   |                      			     valueCodeableConcept			           		           |  R.-Code  |                                                             diagnostics 							                                              |   location
-#|                 |                				|  available  | 			profile  			|             |  available  |  codingavailable  |  	system  		|    	 code          |  available  |  coding available  |  			0.system	  		|  		0.code	  |    		   0.display 		    |  available  |   Identifier-value   |                 |  available  |		coding	|         system     	 |  		code      	|     display      |           |               				                                    ENG				                                                                  |
+#|  resourceType   |          		ID   			|                      meta        				|   status    |                         				category                           |                                        									code          								|         subject                    |	  DateTime	   |                      			     valueCodeableConcept			           		           			|  R.-Code  |                                                             diagnostics 							                                              |   location
+#|                 |                				|  available  | 			profile  			|             |  available  |  codingavailable  |  	system  		|    	 code          |  available  |  coding available  |  			0.system	  		|  		0.code	  |    		   0.display 		    |  available  |   Identifier-value   |                 |  available  |		coding	|         system     	 |  		code      	|     display      			|           |               				                                    ENG				                                                                  |
 
 # all attributes invalid for valueCodeableConcept
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	               ${EMPTY}    	        ${EMPTY}		    422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..display
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true           ${1234}	               test      	        ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display    
-	Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	             http://google.com      test   		        422          ele-1: All FHIR elements must have a @value or children                                                                                             Observation.value.ofType.CodeableConcept..coding.0..system
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       missing	               ${EMPTY}             missing		        422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..code
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               missing 	            test   		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..system
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	               ${EMPTY}    	        ${EMPTY}		    		422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..display
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true           ${1234}	               test      	        ${1234}		        		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display    
+	Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	             http://google.com      test   		        		422          ele-1: All FHIR elements must have a @value or children                                                                                             Observation.value.ofType.CodeableConcept..coding.0..system
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       missing	               ${EMPTY}             missing		        		422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..code
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               missing 	            test   		        		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..system
 
 # all attributes invalid for code
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   false	  		 http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   7	        	    Severely Frail		422          Observation.code.coding: minimum required = 1, but only found 0 .from ${patient-ICU-url}.                                                      	 Observation.code
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true			  	 ${EMPTY}             	  		  ${EMPTY}        ${EMPTY}                            true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   7	        	    Severely Frail		422          @value cannot be empty                                                                                                                          	 Observation.code.coding.0..display
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true			  	 http://google.com		  		  ${12345}        missing                             true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   7	        	    Severely Frail		422          Observation.code.coding:snomed: minimum required = 1, but only found 0 .from ${patient-ICU-url}.                              					 Observation.code
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true			  	 test            		  		  missing         ${12345}                            true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   7	        	    Severely Frail		422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.code.coding.0.
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true			  	 missing         		  	      test            test1234                            true    		 	valid      		  2020-02-25	      true		    true	       ${vCC_URL}	       	   7	        	    Severely Frail		422          A code with no system has no defined meaning. A system should be provided                                                                           Observation.code.coding.0.
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   false	  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   373067005	  	    No (qualifier value)		422          Observation.code.coding: minimum required = 1, but only found 0 .from ${patient-ICU-url}.                                                      	 Observation.code
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true			  	 ${EMPTY}             	  		  ${EMPTY}     	   ${EMPTY}                           true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   373067005	  	    No (qualifier value)		422          @value cannot be empty                                                                                                                          	 Observation.code.coding.0..display
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true			  	 http://google.com		  		  ${12345}   	   missing                            true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   373067005	   	    No (qualifier value)		422          Observation.code.coding:icu: minimum required = 1, but only found 0 .from ${patient-ICU-url}.                              						 Observation.code
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true			  	 test            		  		  missing    	   ${12345}                           true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   373067005	  	    No (qualifier value)		422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.code.coding.0.
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true			  	 missing         		  	      test             test1234                           true    		 	valid      		  2020-02-25	      true		    true	       ${vCC_URL}	       	   373067005	  	    No (qualifier value)		422          A code with no system has no defined meaning. A system should be provided                                                                           Observation.code.coding.0.
 
 # all attributes invalid for category
-	Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           http://google.com       test                    true			   true		  		 http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   7	        	    Severely Frail		422     	 Observation.category.coding:observation-category: minimum required = 1, but only found 0 .from ${patient-ICU-url}. 								 Observation.category.0.
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           missing                 ${EMPTY}                true			   true			  	 http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   7	        	    Severely Frail		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..code
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${EMPTY}                ${12345}                true			   true			  	 http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   7	        	    Severely Frail		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..system
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}	    	  final		     true             true           ${12345}                missing                 true			   true			     http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   7	        	    Severely Frail		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
-    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}			  final		     true             true           test                    ${EMPTY}                true			   true			  	 http://snomed.info/sct	  		  763264000       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   7	        	    Severely Frail		422          @value cannot be empty                                                                                                                				 Observation.category.0..coding.0..code
+	Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           http://google.com       ${EMPTY}                true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   373067005	   	    No (qualifier value)		422     	 @value cannot be empty 								 						 																	 Observation.category.0..coding.0..code
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           missing                 ${12345}                true			   true			  	 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   373067005	   	    No (qualifier value)		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..code
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${EMPTY}                test	                 true			   true			  	 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   373067005	   	    No (qualifier value)		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..system
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}	    	  final		     true             true           ${12345}                missing                 true			   true			     ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   373067005	   	    No (qualifier value)		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
+    Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}			  final		     true             true           test                    ${EMPTY}                true			   true			  	 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${vCC_URL}	       	   373067005	   	    No (qualifier value)		422          @value cannot be empty                                                                                                                				 Observation.category.0..coding.0..code
 
 # mix invalid attributes
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}			  final		     true             true           ${1234}                 ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display
@@ -516,20 +516,71 @@ ${vCC_URL}		                http://snomed.info/sct
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final  	     true             true           ${1234}                 ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  false		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.code.coding: minimum required = 1, but only found 0 .from ${patient-ICU-url}. 			                                             Observation.code
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final  	     true             true           ${1234}                 ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Observation.code.coding: minimum required = 1, but only found 0 .from ${patient-ICU-url}. 			                                             Observation.code
 
-
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Patient in ICU (Invalid/Missing 'effectiveDateTime')
-	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
+BUG TRACE 01 Create Patient in ICU (Invalid/Missing 'meta')
+	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              effectiveDateTime    not-ready
+    [Tags]              meta    not-ready
+
+	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
+	# 																CODE
+    $.meta							${{ [] }}						422    	Array cannot be empty - the property should not be present if it has no values									Observation.meta
+	$.meta							${{ [{}] }}						422    	Object must have some content
+
+
+BUG TRACE 02 Create Patient in ICU (Invalid/Missing 'category')
+	[Documentation]		Belongs to TC 006! Remove separation when it's fixed!
+	[Template]			create patient in ICU with ehr reference
+    [Tags]              category    not-ready
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
-	
-	# missing attribute
-	$.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
+
+	# invalid category
+	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${patient-ICU-url}						Observation
+
+	#invalid code 0
+	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
+	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
+
+	# invaild system 0
+	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
+	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
+
+
+BUG TRACE 03 Create Patient in ICU (Invalid/Missing 'valueCodeableConcept')
+	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
+	[Template]			create patient in ICU with ehr reference
+    [Tags]              valueCodeableConcept    not-ready
+
+	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								    Location
+	# 																	CODE
+	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
+
+
+BUG TRACE 04 Create Patient in ICU (Invalid/Missing 'DataAbsentReason')
+	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
+	[Template]			create patient in ICU with ehr reference AND data absentreason
+    [Tags]              DataAbsentReason    not-ready
+
+	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																	CODE
+
+	# missing valueCodeableConcept
+	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+
+	# missing coding
+	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+
+	# invalid system
+	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
+
+	# invalid code
+	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
