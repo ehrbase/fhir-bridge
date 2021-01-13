@@ -47,7 +47,6 @@ public class FhirValidationConfiguration {
     public RequestValidatingInterceptor requestValidatingInterceptor() {
         RequestValidatingInterceptor requestValidatingInterceptor = new RequestValidatingInterceptor();
         requestValidatingInterceptor.setFailOnSeverity(properties.getFailedOnSeverity());
-        requestValidatingInterceptor.setFailOnSeverity(properties.getFailedOnSeverity());
         requestValidatingInterceptor.addValidatorModule(instanceValidator());
         return requestValidatingInterceptor;
     }
@@ -56,6 +55,7 @@ public class FhirValidationConfiguration {
         FhirInstanceValidator instanceValidator = new FhirInstanceValidator(validationSupport());
         instanceValidator.setAnyExtensionsAllowed(properties.isAnyExtensionsAllowed());
         instanceValidator.setErrorForUnknownProfiles(properties.isErrorForUnknownProfiles());
+        instanceValidator.setNoTerminologyChecks(!isTerminologyValidationEnabled());
         return instanceValidator;
     }
 
