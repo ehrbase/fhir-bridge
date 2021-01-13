@@ -799,3 +799,42 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (Peripheral Arterial Occlusive Disease)    create-cardiovascular-diseases-peripheral-arterial-occlusive-disease.json
     condition.validate response - 201
+
+
+058 Create Human Immunodeficiency Virus Infection (Present)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-human-immunodeficiency-virus-infection-present.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]             human-inmunodeficiency-virus-infection    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create human immunodeciency virus infection    Human Immunodeficiency Virus Infection (Present)    create-human-immunodeficiency-virus-infection-present.json
+    condition.validate response - 201
+
+
+059 Create Human Immunodeficiency Virus Infection (Absent)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-human-immunodeficiency-virus-infection-absent.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]             human-inmunodeficiency-virus-infection    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create human immunodeciency virus infection    Human Immunodeficiency Virus Infection (Absent)    create-human-immunodeficiency-virus-infection-absent.json
+    condition.validate response - 201
+
+
+060 Create Human Immunodeficiency Virus Infection (Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-human-immunodeficiency-virus-infection-unknown.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]             human-inmunodeficiency-virus-infection    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create human immunodeciency virus infection    Human Immunodeficiency Virus Infection (Unknown)    create-human-immunodeficiency-virus-infection-unknown.json
+    condition.validate response - 201
