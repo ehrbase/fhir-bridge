@@ -1,0 +1,47 @@
+{
+  "resourceType": "Observation",
+  "id": "d3f16c6f-e67d-4a77-8873-d4ab024e9257",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sex-assigned-at-birth"
+    ]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "social-history",
+          "display": "Social History"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "76689-9",
+        "display": "Sex assigned at birth"
+      }
+    ]
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "effectiveDateTime": "2020-10-26T10:51:48+01:00",
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/administrative-gender",
+        "code": "male",
+        "display": "Male"
+      }
+    ],
+    "text": "Male"
+  }
+}
