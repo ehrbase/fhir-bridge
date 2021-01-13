@@ -18,3 +18,5 @@ VSCode
 .factorypath
 .project
 .settings/
+
+fhir-bridge.iml
