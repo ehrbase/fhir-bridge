@@ -3,6 +3,7 @@
 target
 
 *-local.yml
+keystore/
 
 # Python
 venv
@@ -17,3 +18,5 @@ VSCode
 .factorypath
 .project
 .settings/
+
+fhir-bridge.iml

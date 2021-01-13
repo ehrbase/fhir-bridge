@@ -52,7 +52,7 @@ $ mvn clean spring-boot:build-image
 
 ```bash
 $ docker run -p 8888:8888 -e "FHIR_BRIDGE_EHRBASE_BASE_URL=http://172.17.0.1:8080/ehrbase/rest/openehr/v1/" \
-             --name=fhir-bridge ehrbaseorg/fhir-bridge
+             --name=fhir-bridge ehrbase/fhir-bridge
 ```
 
 ### Setup a full environment using Docker Compose
