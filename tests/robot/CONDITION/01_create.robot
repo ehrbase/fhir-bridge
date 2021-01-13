@@ -1022,7 +1022,7 @@ Force Tags              create
     condition.validate response - 201
 
 
-074 Create Complications of Covid-19 - Venous Thrombosis
+075 Create Complications of Covid-19 - Venous Thrombosis
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-complications-of-covid-19-venous-thrombosis.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
