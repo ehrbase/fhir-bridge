@@ -22,7 +22,7 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">6320cb877339d07190de974da187d69d</other_details>
+    <other_details id="MD5-CAM-1.0.1">fac88cebaeea99a6ed72b4e6dd42585a</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">BE6703111625895423C2D6A31DE8E723</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
@@ -1750,9 +1750,11 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
                     <rm_type_name>CLUSTER</rm_type_name>
                     <occurrences>
                       <lower_included>true</lower_included>
+                      <upper_included>true</upper_included>
                       <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>true</upper_unbounded>
+                      <upper_unbounded>false</upper_unbounded>
                       <lower>0</lower>
+                      <upper>1</upper>
                     </occurrences>
                     <node_id>at0000</node_id>
                     <attributes xsi:type="C_MULTIPLE_ATTRIBUTE">
@@ -2731,9 +2733,11 @@ Zum Beispiel: Vertriebsleiter oder Softwareentwickler.</items>
                     <rm_type_name>EVENT</rm_type_name>
                     <occurrences>
                       <lower_included>true</lower_included>
+                      <upper_included>true</upper_included>
                       <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>true</upper_unbounded>
+                      <upper_unbounded>false</upper_unbounded>
                       <lower>0</lower>
+                      <upper>1</upper>
                     </occurrences>
                     <node_id>at0002</node_id>
                     <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -3939,13 +3943,11 @@ Zum Beispiel: Vertriebsleiter oder Softwareentwickler.</items>
                                 <code_list>at0023</code_list>
                                 <code_list>at0024</code_list>
                                 <code_list>at0025</code_list>
-                                <code_list>below-38C</code_list>
                                 <code_list>38C</code_list>
                                 <code_list>39C</code_list>
                                 <code_list>40C</code_list>
                                 <code_list>41C</code_list>
                                 <code_list>42C</code_list>
-                                <code_list>above-42C</code_list>
                                 <code_list>LA12688-0</code_list>
                               </children>
                             </attributes>
@@ -4329,9 +4331,6 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                       <items id="description">Wort oder kurzer Satz, mit dem die Charakteristik des Symptoms/Krankheitsanzeichens beschrieben wird.</items>
                       <items id="text">Charakteristik</items>
                     </term_definitions>
-                    <term_definitions code="below-38C">
-                      <items id="text">&lt; 38 °C</items>
-                    </term_definitions>
                     <term_definitions code="38C">
                       <items id="text">38 °C</items>
                     </term_definitions>
@@ -4346,9 +4345,6 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                     </term_definitions>
                     <term_definitions code="42C">
                       <items id="text">42 °C</items>
-                    </term_definitions>
-                    <term_definitions code="above-42C">
-                      <items id="text">> 42 °C</items>
                     </term_definitions>
                     <term_definitions code="LA12688-0">
                       <items id="text">Ich weiß es nicht</items>
@@ -4712,13 +4708,11 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                                 <code_list>at0023</code_list>
                                 <code_list>at0024</code_list>
                                 <code_list>at0025</code_list>
-                                <code_list>below-38C</code_list>
                                 <code_list>38C</code_list>
                                 <code_list>39C</code_list>
                                 <code_list>40C</code_list>
                                 <code_list>41C</code_list>
                                 <code_list>42C</code_list>
-                                <code_list>above-42C</code_list>
                                 <code_list>LA12688-0</code_list>
                               </children>
                             </attributes>
@@ -5102,9 +5096,6 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                       <items id="description">Wort oder kurzer Satz, mit dem die Charakteristik des Symptoms/Krankheitsanzeichens beschrieben wird.</items>
                       <items id="text">Charakteristik</items>
                     </term_definitions>
-                    <term_definitions code="below-38C">
-                      <items id="text">&lt; 38 °C</items>
-                    </term_definitions>
                     <term_definitions code="38C">
                       <items id="text">38 °C</items>
                     </term_definitions>
@@ -5119,9 +5110,6 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                     </term_definitions>
                     <term_definitions code="42C">
                       <items id="text">42 °C</items>
-                    </term_definitions>
-                    <term_definitions code="above-42C">
-                      <items id="text">> 42 °C</items>
                     </term_definitions>
                     <term_definitions code="LA12688-0">
                       <items id="text">Ich weiß es nicht</items>
@@ -15554,9 +15542,11 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                     <rm_type_name>ELEMENT</rm_type_name>
                     <occurrences>
                       <lower_included>true</lower_included>
+                      <upper_included>true</upper_included>
                       <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>true</upper_unbounded>
+                      <upper_unbounded>false</upper_unbounded>
                       <lower>1</lower>
+                      <upper>1</upper>
                     </occurrences>
                     <node_id>at0002</node_id>
                     <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -15910,7 +15900,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                             </occurrences>
                             <node_id/>
                             <item xsi:type="C_STRING">
-                              <list>Haben Sie sich im Zeitraum vom 1. August 2020 bis heute gegen Grippe impfen lassen?</list>
+                              <list>Haben Sie sich im Zeitraum vom 1. Oktober 2020 bis heute gegen Grippe impfen lassen?</list>
                             </item>
                           </children>
                         </attributes>
@@ -15991,7 +15981,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Infektiöse Krankheit oder Erreger</items>
             </term_definitions>
             <term_definitions code="at0003">
-              <items id="description">Status der Grundimmunisierung der Impfungen.</items>
+              <items id="description">Status der Grundimmunisierung.</items>
               <items id="text">Status der Grundimmunisierung</items>
             </term_definitions>
             <term_definitions code="at0004">
@@ -16011,12 +16001,12 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Unbestimmt</items>
             </term_definitions>
             <term_definitions code="at0008">
-              <items id="description">Datum an dem der primäre (oder Nachhol-) Impfstoffkurs abgeschlossen wurde.</items>
+              <items id="description">Datum an dem der primäre (oder Nachhol-) Impfverlauf abgeschlossen wurde.</items>
               <items id="text">Datum der vollständigen Grundimmunisierung</items>
             </term_definitions>
             <term_definitions code="at0009">
               <items id="description">Das Datum, an dem die letzte Auffrischungsimpfung verabreicht wurde.</items>
-              <items id="text">Datum der letzten Auffrischungsimpfung</items>
+              <items id="text">Datum der letzten Auffrischung</items>
             </term_definitions>
             <term_definitions code="at0010">
               <items id="description">Eine Aussage darüber, ob der Impfstatus aktuell ist.</items>
@@ -16028,7 +16018,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
             </term_definitions>
             <term_definitions code="at0012">
               <items id="description">Der Impfstatus ist nicht auf dem akutellen Stand.</items>
-              <items id="text">mpfstatus ist nicht akutell</items>
+              <items id="text">Impfstatus ist nicht akutell</items>
             </term_definitions>
             <term_definitions code="at0013">
               <items id="description">@ internal @</items>

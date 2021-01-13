@@ -166,8 +166,7 @@ public class GeneralInformation extends QuestionnaireSection {
                 throw new UnprocessableEntityException();
         }
 
-        //beschaftigungClusterList.add(beschaftigungCluster);
-        zusammenfassungDerBeschaftigungEvaluation.setBeschaeftigung(List.of(beschaftigungCluster));
+        zusammenfassungDerBeschaftigungEvaluation.setBeschaeftigung(beschaftigungCluster);
         zusammenfassungDerBeschaftigungEvaluationQuestion = Optional.of(zusammenfassungDerBeschaftigungEvaluation);
 
     }
@@ -208,10 +207,7 @@ public class GeneralInformation extends QuestionnaireSection {
 
     //TODO check if this is working
     private boolean isProfessionalCareGiver(){
-        return zusammenfassungDerBeschaftigungEvaluationQuestion.get().getBeschaeftigung().stream()
-                .map(beschaeftigungCluster -> beschaeftigungCluster.getBerufsbereichDefiningCode())
-                .equals(BerufsbereichDefiningCode.MEDIZINISCHEN_BEREICH_PFLEGE_ARZTPRAXIS_ODER_KRANKENHAUS);
-
+        return zusammenfassungDerBeschaftigungEvaluationQuestion.get().getBeschaeftigung().getBerufsbereichDefiningCode().equals(BerufsbereichDefiningCode.MEDIZINISCHEN_BEREICH_PFLEGE_ARZTPRAXIS_ODER_KRANKENHAUS);
     }
 
     private void setAusschlussPflegetatigkeitEvaluation() {
@@ -250,13 +246,11 @@ public class GeneralInformation extends QuestionnaireSection {
 
     protected void mapPregnant(String pregnantLoincCode) {
         SchwangerschaftsstatusObservation stillzeitEvaluation = new SchwangerschaftsstatusObservation();
-        SchwangerschaftsstatusBeliebigesEreignisChoice schwangerschaftsstatusBeliebigesEreignisChoice = new SchwangerschaftsstatusBeliebigesEreignisPointEvent();
-        schwangerschaftsstatusBeliebigesEreignisChoice.setStatusDefiningCode(pregnantLoincToStatusCode(pregnantLoincCode));
-        schwangerschaftsstatusBeliebigesEreignisChoice.setTimeValue(this.authored);
-        stillzeitEvaluation.setBeliebigesEreignis(List.of(schwangerschaftsstatusBeliebigesEreignisChoice));
+        stillzeitEvaluation.setStatusDefiningCode(pregnantLoincToStatusCode(pregnantLoincCode));
         stillzeitEvaluation.setLanguage(Language.DE);
         stillzeitEvaluation.setSubject(new PartySelf());
         stillzeitEvaluation.setOriginValue(this.authored);
+        stillzeitEvaluation.setTimeValue(this.authored);
         schwangerschaftsstatusObservationQuestion = Optional.of(stillzeitEvaluation);
     }
 
