@@ -838,3 +838,43 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     condition.create human immunodeciency virus infection    Human Immunodeficiency Virus Infection (Unknown)    create-human-immunodeficiency-virus-infection-unknown.json
     condition.validate response - 201
+
+
+061 Create Gastrointestinal Ulcer (Present)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-gastrointestinal-ulcer-present.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]             gastrointestinal-ulcer    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create gastrointestinal ulcer    Gastrointestinal Ulcer (Present)    create-gastrointestinal-ulcer-present.json
+    condition.validate response - 201
+
+
+062 Create Gastrointestinal Ulcer (Absent)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-gastrointestinal-ulcer-absent.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]             gastrointestinal-ulcer    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create gastrointestinal ulcer    Gastrointestinal Ulcer (Absent)    create-gastrointestinal-ulcer-absent.json
+    condition.validate response - 201
+
+
+063 Create Gastrointestinal Ulcer (Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-gastrointestinal-ulcer-unknown.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]             gastrointestinal-ulcer    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create gastrointestinal ulcer    Gastrointestinal Ulcer (Unknown)    create-gastrointestinal-ulcer-unknown.json
+    condition.validate response - 201
+
