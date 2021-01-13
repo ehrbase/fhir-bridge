@@ -50,7 +50,10 @@
     "text": "History of travel"
   },
   "subject": {
-    "reference": "Patient/011aadc9-bc53-4234-a13e-6f7ab33e470d"
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
   },
   "effectiveDateTime": "2020-11-09T12:57:06+01:00",
   "valueCodeableConcept": {
