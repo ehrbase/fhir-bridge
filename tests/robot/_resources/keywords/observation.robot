@@ -86,7 +86,6 @@ validate response - 422 (with error message NEW)
     END
 
 
-
 #                                                 oooo                     
 #                                                 `888                     
 #  .oooo.o  .ooooo.   .oooo.   oooo d8b  .ooooo.   888 .oo.                
@@ -222,6 +221,11 @@ create oxygen saturation
 create history of travel
     [Arguments]         ${example_json}
     POST /Observation with ehr reference    History of Travel    ${example_json}
+
+
+create sex assigned at birth
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 #                                   .                    

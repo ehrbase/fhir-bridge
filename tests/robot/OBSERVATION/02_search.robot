@@ -1,5 +1,5 @@
-# Copyright (c) 2020 P. Wohlfarth (Appsfactory), Wladislaw Wagner (Vitasystems GmbH), 
-# Dave Petzold (Appsfactory GmbH)
+# Copyright (c) 2020 Peter Wohlfarth (Appsfactory GmbH), Wladislaw Wagner (Vitasystems GmbH),
+# Dave Petzold (Appsfactory GmbH) & Pauline Schulz (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -33,7 +33,12 @@ Force Tags              search    not-ready
 
 *** Test Cases ***
 001 Search Body Temperature
-    [Documentation]    Search Body Temperature
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-temp.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *GET* ``${BASE_URL}/Observation?subject.identifier=${subject_id}`` \n\n
+    ...                 6. *VALIDATE* response status against 200
     [Tags]             body-temperature    valid
 
     observation.create body temperature    create-body-temp.json
@@ -41,7 +46,12 @@ Force Tags              search    not-ready
 
 
 002 Search Observation Lab
-    [Documentation]    Search Observation Lab
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *GET* ``${BASE_URL}/Observation?subject.identifier=${subject_id}`` \n\n
+    ...                 6. *VALIDATE* response status against 200
     [Tags]             observation-lab    valid
 
     observation.create observation lab    create-observation-lab.json
@@ -49,7 +59,12 @@ Force Tags              search    not-ready
 
 
 003 Search Coronavirus Lab Results
-    [Documentation]    Search Coronavirus Lab Results
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-coronavirus-nachweis-test.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *GET* ``${BASE_URL}/Observation?subject.identifier=${subject_id}`` \n\n
+    ...                 6. *VALIDATE* response status against 200
     [Tags]             coronavirus-lab-result    valid
 
     observation.create coronavirus lab result    create-coronavirus-nachweis-test.json
