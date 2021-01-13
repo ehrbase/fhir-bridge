@@ -15,7 +15,7 @@ public class ZusammenfassungDerBeschaeftigungEvaluationContainment extends Conta
 
   public ListSelectAqlField<Cluster> BESCHAEFTIGUNGSEPISODE = new ListAqlFieldImp<Cluster>(ZusammenfassungDerBeschaeftigungEvaluation.class, "/data[at0001]/items[at0003]", "beschaeftigungsepisode", Cluster.class, this);
 
-  public ListSelectAqlField<BeschaeftigungCluster> BESCHAEFTIGUNG = new ListAqlFieldImp<BeschaeftigungCluster>(ZusammenfassungDerBeschaeftigungEvaluation.class, "/data[at0001]/items[openEHR-EHR-CLUSTER.occupation_record.v1]", "beschaeftigung", BeschaeftigungCluster.class, this);
+  public SelectAqlField<BeschaeftigungCluster> BESCHAEFTIGUNG = new AqlFieldImp<BeschaeftigungCluster>(ZusammenfassungDerBeschaeftigungEvaluation.class, "/data[at0001]/items[openEHR-EHR-CLUSTER.occupation_record.v1]", "beschaeftigung", BeschaeftigungCluster.class, this);
 
   public ListSelectAqlField<Cluster> ERWEITERUNG = new ListAqlFieldImp<Cluster>(ZusammenfassungDerBeschaeftigungEvaluation.class, "/protocol[at0007]/items[at0008]", "erweiterung", Cluster.class, this);
 

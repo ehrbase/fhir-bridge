@@ -3,8 +3,8 @@ package org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition;
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.ItemTree;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.String;
 import java.time.temporal.TemporalAccessor;
-import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
@@ -17,30 +17,35 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.immunisation_summary.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2020-12-18T10:30:38.836771+01:00",
+    date = "2021-01-13T15:23:34.938859+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class ZusammenfassungDesImmunstatusEvaluation implements EntryEntity {
   /**
    * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Infektionskrankheit oder Erreger
    * Description: Identifizierung der Infektionskrankheit oder des Erregers.
-   * Comment: Es kann mehrere Krankheiten oder Erreger geben, die zusammen geimpft werden - zum Beispiel: Diptherie, Tetanus und Keuchhusten oder Masern, Mumps und Röteln.
    */
-  @Path("/data[at0001]/items[at0002 and name/value='Infektionskrankheit oder Erreger']")
-  private List<ZusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement> infektionskrankheitOderErreger;
+  @Path("/data[at0001]/items[at0002 and name/value='Infektionskrankheit oder Erreger']/value|value")
+  private String infektionskrankheitOderErregerValue;
 
   /**
-   * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Datum der letzten Auffrischungsimpfung
+   * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Tree/Infektionskrankheit oder Erreger/null_flavour
+   */
+  @Path("/data[at0001]/items[at0002 and name/value='Infektionskrankheit oder Erreger']/null_flavour|defining_code")
+  private NullFlavour infektionskrankheitOderErregerNullFlavourDefiningCode;
+
+  /**
+   * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Datum der letzten Auffrischung
    * Description: Das Datum, an dem die letzte Auffrischungsimpfung verabreicht wurde.
    */
   @Path("/data[at0001]/items[at0009]/value|value")
-  private TemporalAccessor datumDerLetztenAuffrischungsimpfungValue;
+  private TemporalAccessor datumDerLetztenAuffrischungValue;
 
   /**
-   * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Tree/Datum der letzten Auffrischungsimpfung/null_flavour
+   * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Tree/Datum der letzten Auffrischung/null_flavour
    */
   @Path("/data[at0001]/items[at0009]/null_flavour|defining_code")
-  private NullFlavour datumDerLetztenAuffrischungsimpfungNullFlavourDefiningCode;
+  private NullFlavour datumDerLetztenAuffrischungNullFlavourDefiningCode;
 
   /**
    * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Immunsstatus
@@ -56,17 +61,17 @@ public class ZusammenfassungDesImmunstatusEvaluation implements EntryEntity {
   private NullFlavour immunsstatusNullFlavourDefiningCode;
 
   /**
-   * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Haben Sie sich im Zeitraum vom 1. August 2020 bis heute gegen Grippe impfen lassen?
+   * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Haben Sie sich im Zeitraum vom 1. Oktober 2020 bis heute gegen Grippe impfen lassen?
    * Description: Zusätzliche Beschreibung der Zusammenfassung des Immunstatus für eine identifizierte Infektionskrankheit oder Erreger, die nicht in anderen Feldern erfasst wurde.
    */
-  @Path("/data[at0001]/items[at0016 and name/value='Haben Sie sich im Zeitraum vom 1. August 2020 bis heute gegen Grippe impfen lassen?']/value|defining_code")
-  private AelterOderGleich65JahreAltDefiningCode habenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode;
+  @Path("/data[at0001]/items[at0016 and name/value='Haben Sie sich im Zeitraum vom 1. Oktober 2020 bis heute gegen Grippe impfen lassen?']/value|defining_code")
+  private AelterOderGleich65JahreAltDefiningCode habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode;
 
   /**
-   * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Tree/Haben Sie sich im Zeitraum vom 1. August 2020 bis heute gegen Grippe impfen lassen?/null_flavour
+   * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Tree/Haben Sie sich im Zeitraum vom 1. Oktober 2020 bis heute gegen Grippe impfen lassen?/null_flavour
    */
-  @Path("/data[at0001]/items[at0016 and name/value='Haben Sie sich im Zeitraum vom 1. August 2020 bis heute gegen Grippe impfen lassen?']/null_flavour|defining_code")
-  private NullFlavour habenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode;
+  @Path("/data[at0001]/items[at0016 and name/value='Haben Sie sich im Zeitraum vom 1. Oktober 2020 bis heute gegen Grippe impfen lassen?']/null_flavour|defining_code")
+  private NullFlavour habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode;
 
   /**
    * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Tree
@@ -93,32 +98,39 @@ public class ZusammenfassungDesImmunstatusEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setInfektionskrankheitOderErreger(
-      List<ZusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement> infektionskrankheitOderErreger) {
-     this.infektionskrankheitOderErreger = infektionskrankheitOderErreger;
+  public void setInfektionskrankheitOderErregerValue(String infektionskrankheitOderErregerValue) {
+     this.infektionskrankheitOderErregerValue = infektionskrankheitOderErregerValue;
   }
 
-  public List<ZusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement> getInfektionskrankheitOderErreger(
-      ) {
-     return this.infektionskrankheitOderErreger ;
+  public String getInfektionskrankheitOderErregerValue() {
+     return this.infektionskrankheitOderErregerValue ;
   }
 
-  public void setDatumDerLetztenAuffrischungsimpfungValue(
-      TemporalAccessor datumDerLetztenAuffrischungsimpfungValue) {
-     this.datumDerLetztenAuffrischungsimpfungValue = datumDerLetztenAuffrischungsimpfungValue;
+  public void setInfektionskrankheitOderErregerNullFlavourDefiningCode(
+      NullFlavour infektionskrankheitOderErregerNullFlavourDefiningCode) {
+     this.infektionskrankheitOderErregerNullFlavourDefiningCode = infektionskrankheitOderErregerNullFlavourDefiningCode;
   }
 
-  public TemporalAccessor getDatumDerLetztenAuffrischungsimpfungValue() {
-     return this.datumDerLetztenAuffrischungsimpfungValue ;
+  public NullFlavour getInfektionskrankheitOderErregerNullFlavourDefiningCode() {
+     return this.infektionskrankheitOderErregerNullFlavourDefiningCode ;
   }
 
-  public void setDatumDerLetztenAuffrischungsimpfungNullFlavourDefiningCode(
-      NullFlavour datumDerLetztenAuffrischungsimpfungNullFlavourDefiningCode) {
-     this.datumDerLetztenAuffrischungsimpfungNullFlavourDefiningCode = datumDerLetztenAuffrischungsimpfungNullFlavourDefiningCode;
+  public void setDatumDerLetztenAuffrischungValue(
+      TemporalAccessor datumDerLetztenAuffrischungValue) {
+     this.datumDerLetztenAuffrischungValue = datumDerLetztenAuffrischungValue;
   }
 
-  public NullFlavour getDatumDerLetztenAuffrischungsimpfungNullFlavourDefiningCode() {
-     return this.datumDerLetztenAuffrischungsimpfungNullFlavourDefiningCode ;
+  public TemporalAccessor getDatumDerLetztenAuffrischungValue() {
+     return this.datumDerLetztenAuffrischungValue ;
+  }
+
+  public void setDatumDerLetztenAuffrischungNullFlavourDefiningCode(
+      NullFlavour datumDerLetztenAuffrischungNullFlavourDefiningCode) {
+     this.datumDerLetztenAuffrischungNullFlavourDefiningCode = datumDerLetztenAuffrischungNullFlavourDefiningCode;
+  }
+
+  public NullFlavour getDatumDerLetztenAuffrischungNullFlavourDefiningCode() {
+     return this.datumDerLetztenAuffrischungNullFlavourDefiningCode ;
   }
 
   public void setImmunsstatusDefiningCode(ImmunsstatusDefiningCode immunsstatusDefiningCode) {
@@ -138,24 +150,24 @@ public class ZusammenfassungDesImmunstatusEvaluation implements EntryEntity {
      return this.immunsstatusNullFlavourDefiningCode ;
   }
 
-  public void setHabenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode(
-      AelterOderGleich65JahreAltDefiningCode habenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode) {
-     this.habenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode = habenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode;
+  public void setHabenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode(
+      AelterOderGleich65JahreAltDefiningCode habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode) {
+     this.habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode = habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode;
   }
 
-  public AelterOderGleich65JahreAltDefiningCode getHabenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode(
+  public AelterOderGleich65JahreAltDefiningCode getHabenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode(
       ) {
-     return this.habenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode ;
+     return this.habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode ;
   }
 
-  public void setHabenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode(
-      NullFlavour habenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode) {
-     this.habenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode = habenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode;
+  public void setHabenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode(
+      NullFlavour habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode) {
+     this.habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode = habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode;
   }
 
-  public NullFlavour getHabenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode(
+  public NullFlavour getHabenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode(
       ) {
-     return this.habenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode ;
+     return this.habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode ;
   }
 
   public void setTree(ItemTree tree) {

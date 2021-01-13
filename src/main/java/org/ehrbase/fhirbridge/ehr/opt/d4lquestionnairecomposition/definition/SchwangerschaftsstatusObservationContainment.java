@@ -10,9 +10,16 @@ import org.ehrbase.client.aql.field.ListAqlFieldImp;
 import org.ehrbase.client.aql.field.ListSelectAqlField;
 import org.ehrbase.client.aql.field.SelectAqlField;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 public class SchwangerschaftsstatusObservationContainment extends Containment {
   public SelectAqlField<SchwangerschaftsstatusObservation> SCHWANGERSCHAFTSSTATUS_OBSERVATION = new AqlFieldImp<SchwangerschaftsstatusObservation>(SchwangerschaftsstatusObservation.class, "", "SchwangerschaftsstatusObservation", SchwangerschaftsstatusObservation.class, this);
+
+  public SelectAqlField<StatusDefiningCode> STATUS_DEFINING_CODE = new AqlFieldImp<StatusDefiningCode>(SchwangerschaftsstatusObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value|defining_code", "statusDefiningCode", StatusDefiningCode.class, this);
+
+  public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(SchwangerschaftsstatusObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0011]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
+
+  public SelectAqlField<TemporalAccessor> TIME_VALUE = new AqlFieldImp<TemporalAccessor>(SchwangerschaftsstatusObservation.class, "/data[at0001]/events[at0002]/time|value", "timeValue", TemporalAccessor.class, this);
 
   public SelectAqlField<TemporalAccessor> ORIGIN_VALUE = new AqlFieldImp<TemporalAccessor>(SchwangerschaftsstatusObservation.class, "/data[at0001]/origin|value", "originValue", TemporalAccessor.class, this);
 
@@ -23,8 +30,6 @@ public class SchwangerschaftsstatusObservationContainment extends Containment {
   public SelectAqlField<Language> LANGUAGE = new AqlFieldImp<Language>(SchwangerschaftsstatusObservation.class, "/language", "language", Language.class, this);
 
   public SelectAqlField<FeederAudit> FEEDER_AUDIT = new AqlFieldImp<FeederAudit>(SchwangerschaftsstatusObservation.class, "/feeder_audit", "feederAudit", FeederAudit.class, this);
-
-  public ListSelectAqlField<SchwangerschaftsstatusBeliebigesEreignisChoice> BELIEBIGES_EREIGNIS = new ListAqlFieldImp<SchwangerschaftsstatusBeliebigesEreignisChoice>(SchwangerschaftsstatusObservation.class, "/data[at0001]/events[at0002]", "beliebigesEreignis", SchwangerschaftsstatusBeliebigesEreignisChoice.class, this);
 
   private SchwangerschaftsstatusObservationContainment() {
     super("openEHR-EHR-OBSERVATION.pregnancy_status.v0");

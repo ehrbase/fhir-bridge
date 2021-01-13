@@ -89,21 +89,18 @@ public class Medication extends QuestionnaireSection {
 
     protected void mapVaccinatedFlu(Boolean wasVaccinatedFlu) {
         ZusammenfassungDesImmunstatusEvaluation zusammenfassungDesImmunstatusEvaluation = new ZusammenfassungDesImmunstatusEvaluation();
-        ZusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement zusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement = new ZusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement();
-        zusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement.setValue("Grippe");
-        zusammenfassungDesImmunstatusEvaluation.setInfektionskrankheitOderErreger(List.of(zusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement));
-
+        zusammenfassungDesImmunstatusEvaluation.setInfektionskrankheitOderErregerValue("Grippe");
         zusammenfassungDesImmunstatusEvaluation.setLanguage(Language.DE);
         zusammenfassungDesImmunstatusEvaluation.setSubject(new PartySelf());
         //TODO Datum der letzten Auffrischung was damit machen ?
 
 
         if(wasVaccinatedFlu){
-            zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
+            zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
             zusammenfassungDesImmunstatusEvaluation.setImmunsstatusDefiningCode(ImmunsstatusDefiningCode.IMPFSTATUS_IST_AKUTELL);
         }else{
-            zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1August2020BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
-            zusammenfassungDesImmunstatusEvaluation.setImmunsstatusDefiningCode(ImmunsstatusDefiningCode.MPFSTATUS_IST_NICHT_AKUTELL);
+            zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
+            zusammenfassungDesImmunstatusEvaluation.setImmunsstatusDefiningCode(ImmunsstatusDefiningCode.IMPFSTATUS_IST_NICHT_AKUTELL);
         }
         zusammenfassungDesImmunstatusEvaluationQuestion = Optional.of(zusammenfassungDesImmunstatusEvaluation);
     }

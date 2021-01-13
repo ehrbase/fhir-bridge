@@ -7,20 +7,39 @@ import java.time.temporal.TemporalAccessor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
-import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Entity
 @Archetype("openEHR-EHR-OBSERVATION.pregnancy_status.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2020-12-18T10:30:38.676227+01:00",
+    date = "2021-01-13T15:23:34.641623+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class SchwangerschaftsstatusObservation implements EntryEntity {
+  /**
+   * Path: Selbstüberwachung/Allgemeine Angaben/Schwangerschaftsstatus/Beliebiges Ereignis/Status
+   * Description: Liegt eine Schwangerschaft vor?
+   */
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value|defining_code")
+  private StatusDefiningCode statusDefiningCode;
+
+  /**
+   * Path: Selbstüberwachung/Allgemeine Angaben/Schwangerschaftsstatus/History/Beliebiges Ereignis/Tree/Status/null_flavour
+   */
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0011]/null_flavour|defining_code")
+  private NullFlavour statusNullFlavourDefiningCode;
+
+  /**
+   * Path: Selbstüberwachung/Allgemeine Angaben/Schwangerschaftsstatus/Beliebiges Ereignis/time
+   */
+  @Path("/data[at0001]/events[at0002]/time|value")
+  private TemporalAccessor timeValue;
+
   /**
    * Path: Selbstüberwachung/Allgemeine Angaben/Schwangerschaftsstatus/origin
    */
@@ -53,13 +72,29 @@ public class SchwangerschaftsstatusObservation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  /**
-   * Path: Selbstüberwachung/Allgemeine Angaben/Schwangerschaftsstatus/Beliebiges Ereignis
-   * Description: *
-   */
-  @Path("/data[at0001]/events[at0002]")
-  @Choice
-  private List<SchwangerschaftsstatusBeliebigesEreignisChoice> beliebigesEreignis;
+  public void setStatusDefiningCode(StatusDefiningCode statusDefiningCode) {
+     this.statusDefiningCode = statusDefiningCode;
+  }
+
+  public StatusDefiningCode getStatusDefiningCode() {
+     return this.statusDefiningCode ;
+  }
+
+  public void setStatusNullFlavourDefiningCode(NullFlavour statusNullFlavourDefiningCode) {
+     this.statusNullFlavourDefiningCode = statusNullFlavourDefiningCode;
+  }
+
+  public NullFlavour getStatusNullFlavourDefiningCode() {
+     return this.statusNullFlavourDefiningCode ;
+  }
+
+  public void setTimeValue(TemporalAccessor timeValue) {
+     this.timeValue = timeValue;
+  }
+
+  public TemporalAccessor getTimeValue() {
+     return this.timeValue ;
+  }
 
   public void setOriginValue(TemporalAccessor originValue) {
      this.originValue = originValue;
@@ -99,14 +134,5 @@ public class SchwangerschaftsstatusObservation implements EntryEntity {
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
-  }
-
-  public void setBeliebigesEreignis(
-      List<SchwangerschaftsstatusBeliebigesEreignisChoice> beliebigesEreignis) {
-     this.beliebigesEreignis = beliebigesEreignis;
-  }
-
-  public List<SchwangerschaftsstatusBeliebigesEreignisChoice> getBeliebigesEreignis() {
-     return this.beliebigesEreignis ;
   }
 }

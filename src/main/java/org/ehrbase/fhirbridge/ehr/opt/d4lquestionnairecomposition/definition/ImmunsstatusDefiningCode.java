@@ -4,9 +4,9 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum ImmunsstatusDefiningCode implements EnumValueSet {
-  IMPFSTATUS_IST_AKUTELL("Impfstatus ist akutell", "Der Impfstatus ist auf dem akutellen Stand.", "local", "at0011"),
+  IMPFSTATUS_IST_NICHT_AKUTELL("Impfstatus ist nicht akutell", "Der Impfstatus ist nicht auf dem akutellen Stand.", "local", "at0012"),
 
-  MPFSTATUS_IST_NICHT_AKUTELL("mpfstatus ist nicht akutell", "Der Impfstatus ist nicht auf dem akutellen Stand.", "local", "at0012");
+  IMPFSTATUS_IST_AKUTELL("Impfstatus ist akutell", "Der Impfstatus ist auf dem akutellen Stand.", "local", "at0011");
 
   private String value;
 

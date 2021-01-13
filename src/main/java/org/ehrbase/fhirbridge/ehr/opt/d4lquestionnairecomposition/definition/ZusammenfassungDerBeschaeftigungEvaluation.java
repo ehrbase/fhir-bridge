@@ -15,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 @Archetype("openEHR-EHR-EVALUATION.occupation_summary.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2020-12-18T10:30:38.661837+01:00",
+    date = "2021-01-13T15:23:34.616630+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class ZusammenfassungDerBeschaeftigungEvaluation implements EntryEntity {
@@ -32,7 +32,7 @@ public class ZusammenfassungDerBeschaeftigungEvaluation implements EntryEntity {
    * Description: Ein einzelner Job oder eine einzelne Rolle, die von einer Person während eines bestimmten Zeitraums ausgeführt wurde.
    */
   @Path("/data[at0001]/items[openEHR-EHR-CLUSTER.occupation_record.v1]")
-  private List<BeschaeftigungCluster> beschaeftigung;
+  private BeschaeftigungCluster beschaeftigung;
 
   /**
    * Path: Selbstüberwachung/Allgemeine Angaben/Zusammenfassung der Beschäftigung/Erweiterung
@@ -68,11 +68,11 @@ public class ZusammenfassungDerBeschaeftigungEvaluation implements EntryEntity {
      return this.beschaeftigungsepisode ;
   }
 
-  public void setBeschaeftigung(List<BeschaeftigungCluster> beschaeftigung) {
+  public void setBeschaeftigung(BeschaeftigungCluster beschaeftigung) {
      this.beschaeftigung = beschaeftigung;
   }
 
-  public List<BeschaeftigungCluster> getBeschaeftigung() {
+  public BeschaeftigungCluster getBeschaeftigung() {
      return this.beschaeftigung ;
   }
 
