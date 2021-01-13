@@ -81,14 +81,14 @@ public class FhirValidationConfiguration {
         // Validates terminology: CodeSystems and ValueSets (using the internal and/or remote terminology service)
         if (isTerminologyValidationEnabled()) {
             TerminologyValidationMode mode = properties.getTerminology().getMode();
-            if (mode == TerminologyValidationMode.INTERNAL || mode == TerminologyValidationMode.MIXED) {
-                validationSupportChain.addValidationSupport(new InMemoryTerminologyServerValidationSupport(fhirContext));
-                validationSupportChain.addValidationSupport(new CommonCodeSystemsTerminologyService(fhirContext));
-            }
             if (mode == TerminologyValidationMode.REMOTE || mode == TerminologyValidationMode.MIXED) {
                 RemoteTerminologyServiceValidationSupport remoteTerminologyServerValidationSupport = new RemoteTerminologyServiceValidationSupport(fhirContext);
                 remoteTerminologyServerValidationSupport.setBaseUrl(properties.getTerminology().getServerBaseUrl());
                 validationSupportChain.addValidationSupport(remoteTerminologyServerValidationSupport);
+            }
+            if (mode == TerminologyValidationMode.INTERNAL || mode == TerminologyValidationMode.MIXED) {
+                validationSupportChain.addValidationSupport(new InMemoryTerminologyServerValidationSupport(fhirContext));
+                validationSupportChain.addValidationSupport(new CommonCodeSystemsTerminologyService(fhirContext));
             }
         }
 
