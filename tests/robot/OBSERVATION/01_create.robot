@@ -371,3 +371,81 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     observation.create study inclusion due to covid 19    Study Inclusion due to Covid-19 confirmed Diagnosis (Unknown)    create-study-inclusion-due-to-covid-19-confirmed-diagnosis-unknown.json
     observation.validate response - 201
+
+
+027 Create Interventional Clinical Trial Participation (Present with EudraCT)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-interventional-clinical-trial-participation-present-with-EudraCT.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	interventional-clinical-trial-participation   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create interventional clinical trial participation    Interventional Clinical Trial Participation (Present with EudraCT)    create-interventional-clinical-trial-participation-present-with-EudraCT.json
+    observation.validate response - 201
+
+
+028 Create Interventional Clinical Trial Participation (Present with NCT)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-interventional-clinical-trial-participation-present-with-NCT.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	interventional-clinical-trial-participation   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create interventional clinical trial participation    Interventional Clinical Trial Participation (Present with NCT)    create-interventional-clinical-trial-participation-present-with-NCT.json
+    observation.validate response - 201
+
+
+029 Create Interventional Clinical Trial Participation (Present with EudraCT AND NCT)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-interventional-clinical-trial-participation-present-with-EudraCT-AND-NCT.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	interventional-clinical-trial-participation   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create interventional clinical trial participation    Interventional Clinical Trial Participation (Present with EudraCT AND NCT)    create-interventional-clinical-trial-participation-present-with-EudraCT-AND-NCT.json
+    observation.validate response - 201
+
+
+030 Create Interventional Clinical Trial Participation (Absent)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-interventional-clinical-trial-participation-absent.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	interventional-clinical-trial-participation   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create interventional clinical trial participation    Interventional Clinical Trial Participation (Absent)    create-interventional-clinical-trial-participation-absent.json
+    observation.validate response - 201
+
+
+031 Create Interventional Clinical Trial Participation (Not Applicable)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-interventional-clinical-trial-participation-not-applicable.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	interventional-clinical-trial-participation   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create interventional clinical trial participation    Interventional Clinical Trial Participation (Not Applicable)    create-interventional-clinical-trial-participation-not-applicable.json
+    observation.validate response - 201
+
+
+032 Create Interventional Clinical Trial Participation (Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-interventional-clinical-trial-participation-unknown.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	interventional-clinical-trial-participation   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create interventional clinical trial participation    Interventional Clinical Trial Participation (Unknown)    create-interventional-clinical-trial-participation-unknown.json
+    observation.validate response - 201
