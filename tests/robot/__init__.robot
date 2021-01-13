@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation           _Copyright (c) 2020/2021 Wladislaw Wagner (Vitasystems GmbH), Peter Wohlfarth (Appsfactory GmbH),_
-...                     _Dave Petzold (Appsfactory GmbH) & Pauline Schulz (Appsfactory GmbH_\n\n
+...                     _Dave Petzold (Appsfactory GmbH) & Pauline Schulz (Appsfactory GmbH)_\n\n
 ...                     ---
 ...                     This file is part of Project *EHRbase*\n\n
 ...                     ---
