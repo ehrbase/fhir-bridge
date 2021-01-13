@@ -228,6 +228,10 @@ create sex assigned at birth
     POST /Observation with ehr reference    ${text}    ${example_json}
 
 
+create study inclusion due to covid 19
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
