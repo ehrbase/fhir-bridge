@@ -1,0 +1,70 @@
+{
+    "resourceType": "Condition",
+    "id": "1b1a4aa2-7885-497c-bd44-8d9ee377ba2b",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/organ-recipient"
+      ]
+    },
+    "clinicalStatus": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+          "code": "active",
+          "display": "Active"
+        }
+      ]
+    },
+    "verificationStatus": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "code": "confirmed",
+          "display": "Confirmed"
+        },
+        {
+          "system": "http://snomed.info/sct",
+          "code": "410605003",
+          "display": "Confirmed present (qualifier value)"
+        }
+      ]
+    },
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "788415003",
+            "display": "Transplant medicine"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "161663000",
+          "display": "History of being a tissue or organ recipient"
+        }
+      ]
+    },
+    "bodySite": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "181268008",
+            "display": "Entire liver"
+          }
+        ]
+      }
+    ],
+    "subject": {
+        "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+        }
+    },
+    "recordedDate": "2020-10-05"
+  }
