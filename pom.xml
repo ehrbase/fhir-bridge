@@ -29,7 +29,7 @@
         <commons-text.version>1.9</commons-text.version>
         <ehrbase-sdk.version>develop-SNAPSHOT</ehrbase-sdk.version>
         <hapi-fhir.version>5.2.0</hapi-fhir.version>
-        <ipf.version>3.7.2</ipf.version>
+        <ipf.version>4.0.0</ipf.version>
         <spring-boot.version>2.3.2.RELEASE</spring-boot.version>
     </properties>
 
