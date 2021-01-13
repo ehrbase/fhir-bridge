@@ -916,3 +916,120 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     condition.create history of organ recipient    History of Organ Recipient (Unknown)    create-history-of-organ-recipient-unknown.json
     condition.validate response - 201
+
+
+067 Create Complications of Covid-19 - Cerebrovascular Accident (Disorder)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-complications-of-covid-19-cerebrovascular-accident.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              complications-of-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create complications of covid-19    Complications of Covid-19 - Cerebrovascular Accident (Disorder)    create-complications-of-covid-19-cerebrovascular-accident.json
+    condition.validate response - 201
+
+
+068 Create Complications of Covid-19 - Infectious Agent in Bloodstream (Finding - Present)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-complications-of-covid-19-infectious-agent-in-bloodstream-present.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              complications-of-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create complications of covid-19    Complications of Covid-19 - Infectious Agent in Bloodstream (Finding - Present)    create-complications-of-covid-19-infectious-agent-in-bloodstream-present.json
+    condition.validate response - 201
+
+
+069 Create Complications of Covid-19 - Infectious Agent in Bloodstream (Finding - Absent)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-complications-of-covid-19-infectious-agent-in-bloodstream-absent.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              complications-of-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create complications of covid-19    Complications of Covid-19 - Infectious Agent in Bloodstream (Finding - Absent)    create-complications-of-covid-19-infectious-agent-in-bloodstream-absent.json
+    condition.validate response - 201
+
+
+070 Create Complications of Covid-19 - Infectious Disease of Lung
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-complications-of-covid-19-infectious-disease-of-lung.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              complications-of-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create complications of covid-19    Complications of Covid-19 - Infectious Disease of Lung    create-complications-of-covid-19-infectious-disease-of-lung.json
+    condition.validate response - 201
+
+
+071 Create Complications of Covid-19 - Myocardial Infarction (Disorder - Present)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-complications-of-covid-19-myocardial-infarction-present.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              complications-of-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create complications of covid-19    Complications of Covid-19 - Myocardial Infarction (Disorder - Present)    create-complications-of-covid-19-myocardial-infarction-present.json
+    condition.validate response - 201
+
+
+072 Create Complications of Covid-19 - Myocardial Infarction (Disorder - Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-complications-of-covid-19-myocardial-infarction-unknown.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              complications-of-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create complications of covid-19    Complications of Covid-19 - Myocardial Infarction (Disorder - Unknown)    create-complications-of-covid-19-myocardial-infarction-unknown.json
+    condition.validate response - 201
+
+
+073 Create Complications of Covid-19 - Pre-Renal acute Kidney Injury
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-complications-of-covid-19-pre-renal-acute-kidney-injury.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              complications-of-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create complications of covid-19    Complications of Covid-19 - Pre-Renal acute Kidney Injury    create-complications-of-covid-19-pre-renal-acute-kidney-injury.json
+    condition.validate response - 201
+
+
+074 Create Complications of Covid-19 - Pulmonary Embolism
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-complications-of-covid-19-pulmonary-embolism.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              complications-of-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create complications of covid-19    Complications of Covid-19 - Pulmonary Embolism    create-complications-of-covid-19-pulmonary-embolism.json
+    condition.validate response - 201
+
+
+075 Create Complications of Covid-19 - Venous Thrombosis
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-complications-of-covid-19-venous-thrombosis.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              complications-of-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create complications of covid-19    Complications of Covid-19 - Venous Thrombosis    create-complications-of-covid-19-venous-thrombosis.json
+    condition.validate response - 201
