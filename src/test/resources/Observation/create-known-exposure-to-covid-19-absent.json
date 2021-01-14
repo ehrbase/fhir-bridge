@@ -1,0 +1,63 @@
+{
+    "resourceType": "Observation",
+    "id": "b69cf35d-6d43-4881-9189-d5ea00dcf573",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/known-exposure"
+      ]
+    },
+    "identifier": [
+      {
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "OBI"
+            }
+          ]
+        },
+        "system": "https://www.charite.de/fhir/CodeSystem/observation-identifiers",
+        "value": "88636-6_KnownExposure",
+        "assigner": {
+          "reference": "Organization/Charité"
+        }
+      }
+    ],
+    "status": "final",
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code": "social-history"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "88636-6",
+          "display": "Known exposure [Identifier]"
+        }
+      ],
+      "text": "Known exposure"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "effectiveDateTime": "2020-10-04",
+    "valueCodeableConcept": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "373067005",
+          "display": "No (qualifier value)"
+        }
+      ]
+    }
+  }
