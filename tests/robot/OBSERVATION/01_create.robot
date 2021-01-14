@@ -538,5 +538,5 @@ Force Tags              create
 	[Tags]             	observation-lab    CRP    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create known exposure to covid 19    Observation Lab - CRP    create-observation-lab-CRP.json
+    observation.create observation lab CRP    Observation Lab - CRP    create-observation-lab-CRP.json
 	observation.validate response - 201
