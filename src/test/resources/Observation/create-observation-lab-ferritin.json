@@ -1,0 +1,64 @@
+{
+    "resourceType": "Observation",
+    "id": "d8227682-e142-4a69-8616-2e6269f814b3",
+    "meta": {
+      "profile": [
+        "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"
+      ]
+    },
+    "identifier": [
+      {
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "OBI"
+            }
+          ]
+        },
+        "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+        "value": "2276-4_ferritin-mass-per-volume-in-serum-or-plasma",
+        "assigner": {
+          "reference": "Organization/Charité"
+        }
+      }
+    ],
+    "status": "final",
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "26436-6"
+          },
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code": "laboratory"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "2276-4",
+          "display": "Ferritin [Mass/volume] in Serum or Plasma"
+        }
+      ],
+      "text": "Ferritin"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "effectiveDateTime": "2020-10-16T08:49:21+02:00",
+    "valueQuantity": {
+      "value": 167.4,
+      "unit": "ng/mL",
+      "system": "http://unitsofmeasure.org",
+      "code": "ng/mL"
+    }
+  }
