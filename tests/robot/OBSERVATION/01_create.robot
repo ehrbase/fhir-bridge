@@ -488,3 +488,16 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     observation.create known exposure to covid 19    Known Exposure to Covid-19 (Unknown)    create-known-exposure-to-covid-19-unknown.json
     observation.validate response - 201
+
+
+036 Create PaO2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-pao2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	Pa02   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create PaO2  PaO2  create-pao2.json
+    observation.validate response - 201
