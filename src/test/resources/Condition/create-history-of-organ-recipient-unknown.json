@@ -1,0 +1,51 @@
+{
+    "resourceType": "Condition",
+    "id": "52058908-033b-4ea7-a4f8-6c00bcf1e0b1",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/organ-recipient"
+      ]
+    },
+    "modifierExtension": [
+      {
+        "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "261665006",
+              "display": "Unknown (qualifier value)"
+            }
+          ],
+          "text": "Presence of condition is unknown."
+        }
+      }
+    ],
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "788415003",
+            "display": "Transplant medicine"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "161663000",
+          "display": "History of being a tissue or organ recipient"
+        }
+      ]
+    },
+    "subject": {
+        "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+        }
+    },
+    "recordedDate": "2020-10-05"
+  }

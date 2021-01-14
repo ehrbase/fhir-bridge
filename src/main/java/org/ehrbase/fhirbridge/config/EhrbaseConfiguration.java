@@ -44,12 +44,11 @@ public class EhrbaseConfiguration {
     }
 
     @Bean
-    public DefaultRestClient openEhrClient(OpenEhrClientConfig restClientConfig, TemplateProvider templateProvider, HttpClient httpClient) {
-        return new DefaultRestClient(restClientConfig, templateProvider, httpClient);
+    public DefaultRestClient openEhrClient(OpenEhrClientConfig restClientConfig, TemplateProvider templateProvider) {
+        return new DefaultRestClient(restClientConfig, templateProvider, httpClient());
     }
 
-    @Bean
-    public HttpClient httpClient() {
+    private HttpClient httpClient() {
         HttpClientBuilder builder = HttpClientBuilder.create();
 
         EhrbaseProperties.Security security = properties.getSecurity();
