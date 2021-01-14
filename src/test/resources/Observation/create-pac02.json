@@ -55,7 +55,8 @@
   "subject": {
     "identifier": {
       "system": "urn:ietf:rfc:4122",
-      "value": "{{patientId}}"
+	  "value": "{{patientId}}"
+	}
   },
   "effectiveDateTime": "2020-09-21",
   "valueQuantity": {
