@@ -12,6 +12,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.javers:javers-core:5.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.picocontainer:picocontainer:2.15" level="project" />
+    <orderEntry type="library" name="Maven: io.github.classgraph:classgraph:4.8.78" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.3.2.RELEASE" level="project" />
@@ -53,7 +58,6 @@
     <orderEntry type="library" name="Maven: org.openehealth.ipf.commons:ipf-commons-spring:3.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.openehealth.ipf.commons:ipf-commons-ihe-fhir-r4-core:3.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.30" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
     <orderEntry type="library" name="Maven: org.openehealth.ipf.boot:ipf-atna-spring-boot-starter:3.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.openehealth.ipf.commons:ipf-commons-audit:3.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.jdom:jdom2:2.0.6" level="project" />
@@ -117,7 +121,6 @@
     <orderEntry type="library" name="Maven: ca.uhn.hapi.fhir:org.hl7.fhir.dstu2016may:5.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.20" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:3.0.2" level="project" />
-    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
     <orderEntry type="library" name="Maven: ca.uhn.hapi.fhir:hapi-fhir-structures-dstu2:5.2.0" level="project" />
     <orderEntry type="library" name="Maven: ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:5.2.0" level="project" />
     <orderEntry type="library" name="Maven: ca.uhn.hapi.fhir:org.hl7.fhir.dstu3:5.2.0" level="project" />
@@ -263,7 +266,6 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:fluent-hc:4.5.12" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: com.squareup:javapoet:1.13.0" level="project" />
-    <orderEntry type="library" name="Maven: io.github.classgraph:classgraph:4.8.97" level="project" />
     <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:generator:develop-v0.3.7-g9dc1adb-325" level="project" />
     <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:opt-1.4:develop-v0.3.7-g9dc1adb-325" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:3.1.0" level="project" />

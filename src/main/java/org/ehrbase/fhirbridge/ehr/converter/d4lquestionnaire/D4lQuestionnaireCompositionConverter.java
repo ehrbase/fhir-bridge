@@ -44,8 +44,6 @@ public class D4lQuestionnaireCompositionConverter implements CompositionConverte
         initialiseSections(questionnaireResponse);
         mapSections(questionnaireResponse);
         d4LQuestionnaireComposition.setStartTimeValue(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
-   //    VersionUid versionUid = new VersionUid("9d2bc6df-ea9d-4a66-a091-dea7efe2384f");
-   //  d4LQuestionnaireComposition.setVersionUid(versionUid);
         return populateD4lQuestionnaireComposition(d4LQuestionnaireComposition);
     }
 
