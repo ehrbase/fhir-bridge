@@ -501,3 +501,16 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     observation.create known exposure to covid 19    Known Exposure to Covid-19 (without valueCodeableConcept & with DataAbsentReason)    create-known-exposure-to-covid-19-unknown-with-DataAbsentReason.json
     observation.validate response - 201
+
+
+036 Create Observation Lab - CRP
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-CRP.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	observation-lab    CRP    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create known exposure to covid 19    Observation Lab - CRP    create-observation-lab-CRP.json
+    observation.validate response - 201

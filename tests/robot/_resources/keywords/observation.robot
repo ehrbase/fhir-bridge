@@ -242,6 +242,11 @@ create known exposure to covid 19
     [Arguments]         ${text}    ${example_json}
     POST /Observation with ehr reference    ${text}    ${example_json}
 
+
+create observation lab CRP
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
