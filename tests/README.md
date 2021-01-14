@@ -34,5 +34,5 @@ python3 -m robot.testdoc robot results/fhirbridgerobottests.html
 # ensures output log has all available details
 
 -i Observation
-# runs only the tests with the given tag
+# runs only the tests with the given tag, in this case "Observation".
 ```
