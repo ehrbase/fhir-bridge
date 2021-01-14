@@ -53,7 +53,10 @@
     "text": "Oxygen [Partial pressure] in Arterial blood"
   },
   "subject": {
-    "reference": "Patient/c786ac3c-0579-4aa2-adda-db784b214ad6"
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+	  "value": "{{patientId}}"
+	}
   },
   "effectiveDateTime": "2020-09-21",
   "valueQuantity": {
