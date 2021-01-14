@@ -14,6 +14,9 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * {@link Configuration Configuration} for IPF FHIR Servlet.
+ */
 @Configuration
 public class IpfFhirConfiguration {
 
@@ -25,6 +28,7 @@ public class IpfFhirConfiguration {
                                       IServerAddressStrategy serverAddressStrategy,
                                       INarrativeGenerator narrativeGenerator,
                                       RequestValidatingInterceptor requestValidatingInterceptor) {
+
         IpfFhirServlet fhirServlet = new IpfBootFhirServlet(fhirContext, pagingProvider);
         IpfFhirConfigurationProperties.Servlet servletProperties = properties.getServlet();
         fhirServlet.setLogging(servletProperties.isLogging());

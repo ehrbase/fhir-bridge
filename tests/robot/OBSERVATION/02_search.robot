@@ -39,7 +39,7 @@ Force Tags              search    not-ready
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *GET* ``${BASE_URL}/Observation?subject.identifier=${subject_id}`` \n\n
     ...                 6. *VALIDATE* response status against 200
-    [Tags]             body-temperature    valid
+    [Tags]              body-temperature    valid
 
     observation.create body temperature    create-body-temp.json
 	observation.get body temperature
@@ -52,7 +52,7 @@ Force Tags              search    not-ready
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *GET* ``${BASE_URL}/Observation?subject.identifier=${subject_id}`` \n\n
     ...                 6. *VALIDATE* response status against 200
-    [Tags]             observation-lab    valid
+    [Tags]              observation-lab    valid
 
     observation.create observation lab    create-observation-lab.json
 	observation.get observation lab
@@ -65,7 +65,7 @@ Force Tags              search    not-ready
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *GET* ``${BASE_URL}/Observation?subject.identifier=${subject_id}`` \n\n
     ...                 6. *VALIDATE* response status against 200
-    [Tags]             coronavirus-lab-result    valid
+    [Tags]              coronavirus-lab-result    valid
 
     observation.create coronavirus lab result    create-coronavirus-nachweis-test.json
 	observation.get coronavirus lab results
