@@ -238,12 +238,17 @@ create interventional clinical trial participation
     POST /Observation with ehr reference    ${text}    ${example_json}
 
 
-create Pa02
+create known exposure to covid 19
     [Arguments]         ${text}    ${example_json}
     POST /Observation with ehr reference    ${text}    ${example_json}
 
 
-create PaC02
+create PaO2
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create PaCO2
     [Arguments]         ${text}    ${example_json}
     POST /Observation with ehr reference    ${text}    ${example_json}
 
