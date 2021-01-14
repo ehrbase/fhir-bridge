@@ -516,7 +516,7 @@ Force Tags              create
     observation.validate response - 201
 
 
-033 Create Respiratory Rate
+038 Create Respiratory Rate
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -527,3 +527,16 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     observation.create respiratory rate  Respiratory Rate  create-respiratory-rate.json
     observation.validate response - 201
+
+
+039 Create Observation Lab - CRP
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-CRP.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	observation-lab    CRP    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create observation lab CRP    Observation Lab - CRP    create-observation-lab-CRP.json
+	observation.validate response - 201
