@@ -449,3 +449,42 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     observation.create interventional clinical trial participation    Interventional Clinical Trial Participation (Unknown)    create-interventional-clinical-trial-participation-unknown.json
     observation.validate response - 201
+
+
+033 Create Known Exposure to Covid-19 (Present)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-known-exposure-to-covid-19-present.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	known-exposure-to-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create known exposure to covid 19    Known Exposure to Covid-19 (Present)    create-known-exposure-to-covid-19-present.json
+    observation.validate response - 201
+
+
+034 Create Known Exposure to Covid-19 (Absent)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-known-exposure-to-covid-19-absent.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	known-exposure-to-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create known exposure to covid 19    Known Exposure to Covid-19 (Absent)    create-known-exposure-to-covid-19-absent.json
+    observation.validate response - 201
+
+
+035 Create Known Exposure to Covid-19 (Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-known-exposure-to-covid-19-unknown.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	known-exposure-to-covid-19    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create known exposure to covid 19    Known Exposure to Covid-19 (Unknown)    create-known-exposure-to-covid-19-unknown.json
+    observation.validate response - 201
