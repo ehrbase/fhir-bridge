@@ -22,7 +22,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
-...						author: Dave Petzold
+...						author: Peter Wohlfarth
 Force Tags              create    body-height    invalid
 
 
@@ -428,6 +428,29 @@ ${identifiervalue}              8302-2_BodyHeight
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}                 	true			   false			 ${1234}          		  		  ${1234}         ${1234}                         true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                                              Observation.code
 
 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# BUG TRACE
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'identifier')
+	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
+	[Template]			create body-height with ehr reference
+    [Tags]              identifier
+
+	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
+	# 																CODE
+	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''foobar'', then the identifier.value must be a full URI								Observation.identifier.0.
+
+
+BUG TRACE 02 Create Clinical Frailty Scale Score (Invalid/Missing 'DataAbsentReason')
+	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
+	[Template]			create body-height with ehr reference AND data absentreason
+    [Tags]              DataAbsentReason
+
+	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																	CODE
+	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
 
