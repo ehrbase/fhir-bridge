@@ -453,12 +453,25 @@ Force Tags              create
 
 033 Create Pa02
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-pao2.json_\n\n
+	...                 2. *LOAD* _create-Pa02.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	Pa02   valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create Pa02  Pa02  create-pao2.json
+    observation.create Pa02  Pa02  create-Pa02.json
+    observation.validate response - 201
+
+
+034 Create PaC02
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-PaC02.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	PaC02   valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create Pa02  Pa02  create-PaC02.json
     observation.validate response - 201
