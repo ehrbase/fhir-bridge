@@ -238,7 +238,11 @@ create interventional clinical trial participation
     POST /Observation with ehr reference    ${text}    ${example_json}
 
 
+<<<<<<< HEAD
 create Pa02
+=======
+create known exposure to covid 19
+>>>>>>> develop
     [Arguments]         ${text}    ${example_json}
     POST /Observation with ehr reference    ${text}    ${example_json}
 
