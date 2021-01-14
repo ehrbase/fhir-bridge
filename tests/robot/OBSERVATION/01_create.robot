@@ -555,7 +555,7 @@ Force Tags              create
     observation.validate response - 201
 
 
-040 Create Observation Lab - Ferritin
+041 Create Observation Lab - Ferritin
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-ferritin.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
