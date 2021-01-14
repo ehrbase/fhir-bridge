@@ -41,7 +41,6 @@ public class Symptoms extends QuestionnaireSection {
     private static final String SC = "SC";
     private static final String SZ = "SZ";
 
-    private Optional<FieberInDenLetzten24StundenCluster> fever24hQuestion = Optional.empty();
     private Optional<ProblemDiagnoseEvaluation> problemDiagnoseEvaluationQuestion= Optional.empty();
 
     public Symptoms(TemporalAccessor authored) {
@@ -168,11 +167,11 @@ public class Symptoms extends QuestionnaireSection {
         ProblemDiagnoseEvaluation problemDiagnoseEvaluation = problemDiagnoseEvaluationQuestion.get();
         FieberInDenLetzten4TagenCluster  fieberInDenLetzten4TagenCluster = problemDiagnoseEvaluation.getFieberInDenLetzten4Tagen();
         FieberInDenLetzten24StundenCluster fieberInDenLetzten24StundenCluster = problemDiagnoseEvaluation.getFieberInDenLetzten24Stunden();
-        if (fieberInDenLetzten4TagenCluster != null){
+        if (fieberInDenLetzten4TagenCluster != null && fieberInDenLetzten4TagenCluster.isVorhandenValue()){
             fieberInDenLetzten4TagenCluster.setSchweregradDefiningCode(parseStringToSchweregrad(maxFewerTemperature));
             problemDiagnoseEvaluation.setFieberInDenLetzten4Tagen(fieberInDenLetzten4TagenCluster);
         }
-        if(fieberInDenLetzten24StundenCluster != null){
+        if(fieberInDenLetzten24StundenCluster != null && fieberInDenLetzten24StundenCluster.isVorhandenValue()){
             fieberInDenLetzten24StundenCluster.setSchweregradDefiningCode(parseStringToSchweregrad(maxFewerTemperature));
             problemDiagnoseEvaluation.setFieberInDenLetzten24Stunden(fieberInDenLetzten24StundenCluster);
         }
