@@ -282,6 +282,31 @@ create observation lab gamma glutamyl transferase
     [Arguments]         ${text}    ${example_json}
     POST /Observation with ehr reference    ${text}    ${example_json}
 
+
+create observation lab lactate
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab leukocytes
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab lymphocytes
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab neutrophils
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create pH
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
