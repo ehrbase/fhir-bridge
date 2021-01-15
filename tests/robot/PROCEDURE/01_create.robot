@@ -46,3 +46,40 @@ Force Tags              create
     procedure.validate response - 201
 
 
+002 Create Radiology Procedures - Chest X-Ray
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-procedures-chest-x-ray.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create radiology procedures    Radiology Procedures - Chest X-Ray    create-radiology-procedures-chest-x-ray.json
+    procedure.validate response - 201
+
+
+003 Create Radiology Procedures - Computed Tomography
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-procedures-computed-tomography.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	radiology-procedures    computed-tomography    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create radiology procedures    Radiology Procedures - Computed Tomography    create-radiology-procedures-computed-tomography.json
+    procedure.validate response - 201
+
+
+003 Create Radiology Procedures - Ultrasound
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-procedures-ultrasound.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	radiology-procedures    ultrasound    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create radiology procedures    Radiology Procedures - Ultrasound    create-radiology-procedures-ultrasound.json
+    procedure.validate response - 201
