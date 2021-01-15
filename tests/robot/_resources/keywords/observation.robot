@@ -303,6 +303,11 @@ create observation lab neutrophils
     POST /Observation with ehr reference    ${text}    ${example_json}
 
 
+create observation lab Hemoglobin
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
 create pH
     [Arguments]         ${text}    ${example_json}
     POST /Observation with ehr reference    ${text}    ${example_json}
