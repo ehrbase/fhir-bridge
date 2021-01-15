@@ -605,3 +605,16 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     observation.create observation lab cardiac troponin  Observation Lab - Cardiac Troponin  create-observation-lab-cardiac-troponin.json
     observation.validate response - 201
+
+
+045 Create Observation Lab - Creatinine
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-creatinine.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	observation-lab    creatinine    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create observation lab creatinine  Creatinine  create-observation-lab-creatinine.json
+    observation.validate response - 201
