@@ -88,14 +88,40 @@ Force Tags              create
     diagnostic.validate response - 422 (profile not supported)
 
 
-005 Create Diagnostic Report Radiology
+005 Create Diagnostic Report Radiology - Typical Finding
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-radiology.json_\n\n
+	...                 2. *LOAD* _create-diagnostic-report-radiology-typical-finding.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to diagnostic endpoint\n\n
 	...                 5. *VALIDATE* the response status
     [Tags]              diagnostic-report    radiology    valid   not-ready
 
     ehr.create new ehr                      000_ehr_status.json
-    diagnostic.create diagnostic report radiology       create-radiology.json 
+    diagnostic.create diagnostic report radiology       Diagnostic Report Radiology - Typical Finding    create-diagnostic-report-radiology-typical-finding.json 
+    diagnostic.validate response - 201
+
+
+006 Create Diagnostic Report Radiology - Unspecific Finding
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-diagnostic-report-radiology-unspecific-finding.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to diagnostic endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              diagnostic-report    radiology    valid   not-ready
+
+    ehr.create new ehr                      000_ehr_status.json
+    diagnostic.create diagnostic report radiology       Diagnostic Report Radiology - Unspecific Finding    create-diagnostic-report-radiology-unspecific-finding.json 
+    diagnostic.validate response - 201
+
+
+007 Create Diagnostic Report Radiology - Normal Findings
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-diagnostic-report-radiology-normal-finding.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to diagnostic endpoint\n\n
+	...                 5. *VALIDATE* the response status
+    [Tags]              diagnostic-report    radiology    valid   not-ready
+
+    ehr.create new ehr                      000_ehr_status.json
+    diagnostic.create diagnostic report radiology       Diagnostic Report Radiology - Normal Findings    create-diagnostic-report-radiology-normal-finding.json 
     diagnostic.validate response - 201
