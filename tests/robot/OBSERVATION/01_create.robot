@@ -646,7 +646,20 @@ Force Tags              create
     observation.validate response - 201
 
 
-048 Create pH of Arterial blood
+048 Create Observation Lab - Hemoglobin
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-hemoglobin.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	Hemoglobin    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create observation lab Hemoglobin  Hemoglobin  create-observation-lab-hemoglobin.json
+    observation.validate response - 201
+
+
+049 Create pH of Arterial blood
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-ph-of-arterial-blood.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
