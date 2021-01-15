@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.camel.processor;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.Exchange;
-import org.apache.camel.processor.ErrorHandler;
+import org.apache.camel.Processor;
 import org.ehrbase.client.exception.WrongStatusCodeException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -12,7 +12,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DefaultExceptionHandler implements ErrorHandler, MessageSourceAware {
+public class DefaultExceptionHandler implements Processor, MessageSourceAware {
 
     private MessageSourceAccessor messages;
 
