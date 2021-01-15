@@ -2,38 +2,38 @@ package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.api.MethodOutcome;
+import com.nedap.archie.rm.RMObject;
+import com.nedap.archie.rm.archetyped.Locatable;
+import com.nedap.archie.rm.composition.Composition;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.apache.commons.io.IOUtils;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
+import org.ehrbase.client.flattener.Flattener;
+import org.ehrbase.client.flattener.Unflattener;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
+import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
-import org.javers.core.diff.Change;
 import org.javers.core.diff.Diff;
-import org.javers.core.metamodel.clazz.EntityDefinitionBuilder;
 import org.javers.core.metamodel.clazz.ValueObjectDefinition;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import static org.javers.core.diff.ListCompareAlgorithm.LEVENSHTEIN_DISTANCE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -64,16 +64,31 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
     @Test
     void mapD4LQuestionnaireComposition() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("QuestionnaireResponse/create-covapp-response.json").getInputStream(), StandardCharsets.UTF_8);
-        Javers javers = getJavers();
+
+        Composition composition = new CanonicalJson().unmarshal(IOUtils.toString(new ClassPathResource("QuestionnaireResponse/D4LQuestionnaire.json").getInputStream(), StandardCharsets.UTF_8), Composition.class);
+        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
+
+
+
+        resourceTemplateProvider.afterPropertiesSet();
+        Flattener cut = new Flattener(resourceTemplateProvider);
+      //  D4LQuestionnaireComposition d4LQuestionnaireComposition = cut.flatten(composition, D4LQuestionnaireComposition.class);
 
         IParser parser = context.newJsonParser();
         QuestionnaireResponse questionnaireResponse = parser.parseResource(QuestionnaireResponse.class, resource);
         D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter = new D4lQuestionnaireCompositionConverter();
         D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.toComposition(questionnaireResponse);
 
+        RMObject rmObject =
+                new Unflattener(resourceTemplateProvider).unflatten(mappedD4LQuestionnaireComposition);
+
+        D4LQuestionnaireComposition actual =
+                cut.flatten((Locatable) rmObject, D4LQuestionnaireComposition.class);
+
         D4LQuestionnaireComposition d4LQuestionnaireCompositionCorrect = createD4LQuestionaire(questionnaireResponse);
         d4LQuestionnaireCompositionCorrect.setVersionUid(new VersionUid("0cc98096-c6de-4670-865f-f4f2aae48128"));
 
+        Javers javers = getJavers();
         Diff diff = javers.compare(d4LQuestionnaireCompositionCorrect.getProblemDiagnose().get(0), mappedD4LQuestionnaireComposition.getProblemDiagnose().get(0));
         diff.getChanges().forEach(change -> System.out.println("Difference at" + change));
 
