@@ -652,7 +652,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	Hemoglobin    valid    not-ready
+	[Tags]             	observation-lab    hemoglobin    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     observation.create observation lab Hemoglobin  Hemoglobin  create-observation-lab-hemoglobin.json
