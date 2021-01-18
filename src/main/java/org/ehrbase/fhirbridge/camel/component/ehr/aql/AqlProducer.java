@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.camel.component.ehr.aql;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.impl.DefaultProducer;
+import org.apache.camel.support.DefaultProducer;
 import org.ehrbase.client.aql.parameter.ParameterValue;
 import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.client.aql.record.Record;
