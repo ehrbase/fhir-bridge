@@ -66,24 +66,16 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
         String resource = IOUtils.toString(new ClassPathResource("QuestionnaireResponse/create-covapp-response.json").getInputStream(), StandardCharsets.UTF_8);
 
         Composition composition = new CanonicalJson().unmarshal(IOUtils.toString(new ClassPathResource("QuestionnaireResponse/D4LQuestionnaire.json").getInputStream(), StandardCharsets.UTF_8), Composition.class);
+
         ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
-
-
-
         resourceTemplateProvider.afterPropertiesSet();
         Flattener cut = new Flattener(resourceTemplateProvider);
-      //  D4LQuestionnaireComposition d4LQuestionnaireComposition = cut.flatten(composition, D4LQuestionnaireComposition.class);
+        D4LQuestionnaireComposition d4LQuestionnaireComposition = cut.flatten(composition, D4LQuestionnaireComposition.class);
 
         IParser parser = context.newJsonParser();
         QuestionnaireResponse questionnaireResponse = parser.parseResource(QuestionnaireResponse.class, resource);
         D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter = new D4lQuestionnaireCompositionConverter();
         D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.toComposition(questionnaireResponse);
-
-        RMObject rmObject =
-                new Unflattener(resourceTemplateProvider).unflatten(mappedD4LQuestionnaireComposition);
-
-        D4LQuestionnaireComposition actual =
-                cut.flatten((Locatable) rmObject, D4LQuestionnaireComposition.class);
 
         D4LQuestionnaireComposition d4LQuestionnaireCompositionCorrect = createD4LQuestionaire(questionnaireResponse);
         d4LQuestionnaireCompositionCorrect.setVersionUid(new VersionUid("0cc98096-c6de-4670-865f-f4f2aae48128"));
