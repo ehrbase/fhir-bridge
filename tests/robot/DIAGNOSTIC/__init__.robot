@@ -1,2 +1,2 @@
 *** Settings ***
-Force Tags    diagnostic
+Force Tags    diagnostic-report
