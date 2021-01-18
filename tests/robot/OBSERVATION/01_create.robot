@@ -590,11 +590,89 @@ Force Tags              create
 	[Tags]             	observation-lab    gamma-glutamyl-transferase    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create observation lab d-dimer    Observation Lab - Gamma Glutamyl Transferase    create-observation-lab-gamma-glutamyl-transferase.json
+    observation.create observation lab gamma glutamyl transferase    Observation Lab - Gamma Glutamyl Transferase    create-observation-lab-gamma-glutamyl-transferase.json
     observation.validate response - 201
 
 
-044 Create Observation Lab - Cardiac Troponin
+044 Create Observation Lab - Lactate
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-lactate.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	observation-lab    lactate    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create observation lab lactate    Observation Lab - Lactate   create-observation-lab-lactate.json
+    observation.validate response - 201
+
+
+045 Create Observation Lab - Leukocytes
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-leukocytes.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	observation-lab    leukocytes    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create observation lab leukocytes    Observation Lab - Leukocytes   create-observation-lab-leukocytes.json
+    observation.validate response - 201
+
+
+046 Create Observation Lab - Lymphocytes
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-lymphocytes.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	observation-lab    lymphocytes    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create observation lab lymphocytes    Observation Lab - Lymphocytes   create-observation-lab-lymphocytes.json
+    observation.validate response - 201
+
+
+047 Create Observation Lab - Neutrophils
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-neutrophils.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	observation-lab    neutrophils    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create observation lab neutrophils    Observation Lab - Neutrophils   create-observation-lab-neutrophils.json
+    observation.validate response - 201
+
+
+048 Create Observation Lab - Hemoglobin
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-hemoglobin.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	Hemoglobin    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create observation lab Hemoglobin  Hemoglobin  create-observation-lab-hemoglobin.json
+    observation.validate response - 201
+
+
+049 Create pH of Arterial blood
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-ph-of-arterial-blood.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	pH    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create pH    pH of Arterial blood    create-ph-of-arterial-blood.json
+    observation.validate response - 201
+
+
+050 Create Observation Lab - Cardiac Troponin
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-cardiac-troponin.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -607,7 +685,7 @@ Force Tags              create
     observation.validate response - 201
 
 
-045 Create Observation Lab - Creatinine
+051 Create Observation Lab - Creatinine
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-creatinine.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
