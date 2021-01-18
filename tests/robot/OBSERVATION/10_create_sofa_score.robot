@@ -1180,7 +1180,7 @@ create sofa score JSON
 						...    update Component					${componentavailabe}							${componentCodeavailable}		${componentCodeCodingavailable}		${ComponentC0System}		${ComponentC0Code}		${componentvCCavailable}    ${componentvCCCodingavailable}    ${ComponentvCC0System}    ${ComponentvCC0Code}    AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    validate response - 422 (with error message NEW)									${http_status_code}    			${error_message}    				${location}
+                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    				${location}
 
 
 generate payload from example json with data absentreason
