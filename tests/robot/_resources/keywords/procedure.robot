@@ -54,6 +54,11 @@ create procedure
     POST /Procedure with ehr reference    Procedure    ${example_json}
 
 
+create radiology procedures
+    [Arguments]         ${text}    ${example_json}
+    POST /Procedure with ehr reference    ${text}    ${example_json}
+
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
