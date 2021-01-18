@@ -539,7 +539,7 @@ create body-height JSON
 						...    update Value Quantity            ${vQavailable}                                  ${vQvalue}                     ${vQunit}                   	${vQsystem}            	${vQcode}        	AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    validate response - 422 (with error message NEW)									${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason
