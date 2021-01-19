@@ -735,3 +735,16 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     observation.create observation lab interleukin 6  Interleukin 6  create-observation-lab-interleukin-6.json
     observation.validate response - 201
+
+
+055 Create Observation Lab - Natriuretic Peptide.b Prohormone N-Terminal
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-natriuretic-peptide.b-prohormone-n-terminal.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	observation-lab    natriuretic    peptide.b    prohormone    n-terminal    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create observation lab natriuretic peptide.b prohormone n-terminal  Natriuretic Peptide.b Prohormone N-Terminal  create-observation-lab-natriuretic-peptide.b-prohormone-n-terminal.json
+    observation.validate response - 201
