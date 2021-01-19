@@ -21,7 +21,7 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...						Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
 Force Tags              create
 
@@ -78,7 +78,7 @@ Force Tags              create
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-pharmacological-therapy.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...					4. *UPDATE* ``Status`` with stopped
+	...					4. *UPDATE* ``Status`` with not-taken
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
 	[Tags]             	pharmacological-therapy    valid    not-ready
@@ -133,7 +133,7 @@ Force Tags              create
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-pharmacological-therapy-ace-inhibitors-active.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...					4. *UPDATE* ``Status`` with stopped
+	...					4. *UPDATE* ``Status`` with not-taken
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
 	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready
@@ -188,7 +188,7 @@ Force Tags              create
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-pharmacological-therapy-anticoagulants.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...					4. *UPDATE* ``Status`` with stopped
+	...					4. *UPDATE* ``Status`` with not-taken
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
 	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready
