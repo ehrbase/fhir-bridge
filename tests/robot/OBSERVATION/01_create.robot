@@ -499,7 +499,7 @@ Force Tags              create
 	[Tags]             	PaO2   valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create PaO2  PaO2  create-paO2.json
+    observation.create PaO2  PaO2  create-pao2.json
     observation.validate response - 201
 
 
@@ -695,4 +695,17 @@ Force Tags              create
 
     ehr.create new ehr    000_ehr_status.json
     observation.create observation lab creatinine  Creatinine  create-observation-lab-creatinine.json
+    observation.validate response - 201
+
+
+052 Create Observation Lab - Lactate Dehydrogenase
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab-lactate-dehydrogenase.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	observation-lab    lactate-dehydrogenase    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create observation lactate dehydrogenase  Lactate Hydrogenase  create-observation-lab-lactate-dehydrogenase.json
     observation.validate response - 201
