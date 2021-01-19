@@ -213,7 +213,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with Unknown
     ...                 5. *POST* example JSON to Procedure endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	generic-therapy    prone-position    valid    not-ready
+	[Tags]             	generic-therapy    prone-position    valid    not-ready 
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create prone position with status change    Generic Therapy - Prone Position (Completed)    completed    create-prone-position-in-progress.json
