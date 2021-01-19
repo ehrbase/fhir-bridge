@@ -323,7 +323,12 @@ create observation lab creatinine
     POST /Observation with ehr reference    ${text}    ${example_json}
 
 
-create observation lactate dehydrogenase
+create observation lab lactate dehydrogenase
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab procalcitonin
     [Arguments]         ${text}    ${example_json}
     POST /Observation with ehr reference    ${text}    ${example_json}
 
