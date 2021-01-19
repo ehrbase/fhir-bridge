@@ -196,7 +196,7 @@ Force Tags              create
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-prone-position-in-progress.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...					4. *UPDATE* ``Status`` with Unknown
+	...					4. *UPDATE* ``Status`` with Completed
     ...                 5. *POST* example JSON to Procedure endpoint\n\n
 	...                 6. *VALIDATE* the response status
 	[Tags]             	generic-therapy    prone-position    valid    not-ready 
@@ -206,7 +206,7 @@ Force Tags              create
     procedure.validate response - 201
 
 
-014 Create Generic Therapy - Extracorporeal Membrane Oxygenation (Not Done)
+014 Create Generic Therapy - Extracorporeal Membrane Oxygenation (Not-Done)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-extracorporeal-membrane-oxygenation-no-done.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -215,6 +215,46 @@ Force Tags              create
 	[Tags]             	generic-therapy    extracorporeal-membrane-oxygenation    valid    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    procedure.create prone position    Generic Therapy - Extracorporeal Membrane Oxygenation (Not Done)    create-extracorporeal-membrane-oxygenation-no-done.json
+    procedure.create prone position    Generic Therapy - Extracorporeal Membrane Oxygenation (Not-Done)    create-extracorporeal-membrane-oxygenation-no-done.json
     procedure.validate response - 201
 
+
+015 Create Generic Therapy - Extracorporeal Membrane Oxygenation (In-Progress)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-extracorporeal-membrane-oxygenation-in-progress.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    extracorporeal-membrane-oxygenation    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create prone position    Generic Therapy - Extracorporeal Membrane Oxygenation (In-Progress)    create-extracorporeal-membrane-oxygenation-in-progress.json
+    procedure.validate response - 201
+
+
+016 Create Generic Therapy - Extracorporeal Membrane Oxygenation (Completed)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-extracorporeal-membrane-oxygenation-in-progress.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...					4. *UPDATE* ``Status`` with Completed
+    ...                 5. *POST* example JSON to Procedure endpoint\n\n
+	...                 6. *VALIDATE* the response status
+	[Tags]             	generic-therapy    extracorporeal-membrane-oxygenation    valid    not-ready 
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create extracorporeal membrane oxygenation with status change    Generic Therapy - Extracorporeal Membrane Oxygenation (Completed)    completed    create-extracorporeal-membrane-oxygenation-in-progress.json
+    procedure.validate response - 201
+
+
+017 Create Generic Therapy - Extracorporeal Membrane Oxygenation (Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-extracorporeal-membrane-oxygenation-in-progress.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...					4. *UPDATE* ``Status`` with Unknown
+    ...                 5. *POST* example JSON to Procedure endpoint\n\n
+	...                 6. *VALIDATE* the response status
+	[Tags]             	generic-therapy    extracorporeal-membrane-oxygenation    valid    not-ready 
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create extracorporeal membrane oxygenation with status change    Generic Therapy - Extracorporeal Membrane Oxygenation (Unknown)    unknown    create-extracorporeal-membrane-oxygenation-in-progress.json
+    procedure.validate response - 201
