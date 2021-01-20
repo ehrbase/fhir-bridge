@@ -403,3 +403,57 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     procedure.create respiratory therapies    Generic Therapy - Respiratory Therapies with not-performed performedDateTime (Status: Not-Done)    create-respiratory-therapies-with-not-performed-performedDateTime.json
     procedure.validate response - 201
+
+029 Create Generic Therapy - Apheresis with not-performed performedDateTime (Status: Not-Done)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-apheresis-with-not-performed-performedDateTime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    apheresis    valid    not-ready    not-implemented
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create apheresis    Generic Therapy - Apheresis with not-performed performedDateTime (Status: Not-Done)    create-apheresis-with-not-performed-performedDateTime.json
+    procedure.validate response - 201
+
+
+030 Create Generic Therapy - Apheresis with unknown performedDateTime (Status: Completed)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-apheresis-with-not-unknown-performedDateTime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...					4. *UPDATE* ``Status`` with completed
+    ...                 5. *POST* example JSON to Procedure endpoint\n\n
+	...                 6. *VALIDATE* the response status
+	[Tags]             	generic-therapy    apheresis    valid    not-ready    not-implemented
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create apheresis with status change    Apheresis with unknown performedDateTime (Status: Completed)    completed    create-apheresis-with-not-unknown-performedDateTime.json
+    procedure.validate response - 201
+
+
+031 Create Generic Therapy - Apheresis with unknown performedDateTime (Status: Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-apheresis-with-not-unknown-performedDateTime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...					4. *UPDATE* ``Status`` with unknown
+    ...                 5. *POST* example JSON to Procedure endpoint\n\n
+	...                 6. *VALIDATE* the response status
+	[Tags]             	generic-therapy    apheresis    valid    not-ready    not-implemented
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create apheresis with status change    Apheresis with unknown performedDateTime (Status: Unknown)    unknown    create-apheresis-with-not-unknown-performedDateTime.json
+    procedure.validate response - 201
+
+
+032 Create Generic Therapy - Apheresis with unknown performedDateTime (Status: In-Progress)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-apheresis-with-not-unknown-performedDateTime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...					4. *UPDATE* ``Status`` with in-progress
+    ...                 5. *POST* example JSON to Procedure endpoint\n\n
+	...                 6. *VALIDATE* the response status
+	[Tags]             	generic-therapy    apheresis    valid    not-ready    not-implemented
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create apheresis with status change    Apheresis with unknown performedDateTime (Status: In-Progress)    in-progress    create-apheresis-with-not-unknown-performedDateTime.json
+    procedure.validate response - 201
