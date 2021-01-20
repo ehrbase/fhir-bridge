@@ -325,7 +325,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 BUG TRACE 01 Create body weight (Invalid Identfifier)
 	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
 	[Template]			Create Body Weight with ehr reference
-    [Tags]              identifier    not-ready
+    [Tags]              identifier    not-ready    bug
 
 	#									   					HTTP	
 	# FIELD/PATH 							VALUE		   	CODE		ERROR MESSAGE
@@ -344,7 +344,7 @@ BUG TRACE 01 Create body weight (Invalid Identfifier)
 BUG TRACE 02 Create body weight (Invalid category)
 	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
 	[Template]			Create Body Weight with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    bug
 	#									   				HTTP	
 	# FIELD/PATH 						VALUE		   	CODE		ERROR MESSAGE
 
