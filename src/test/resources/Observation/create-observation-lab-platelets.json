@@ -1,0 +1,64 @@
+{
+	"resourceType": "Observation",
+	"id": "09a507cc-6517-4b8d-ac6e-3c708d9ae2f5",
+	"meta": {
+		"profile": [
+			"https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"
+		]
+	},
+	"identifier": [
+		{
+			"type": {
+				"coding": [
+					{
+						"system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+						"code": "OBI"
+					}
+				]
+			},
+			"system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+			"value": "777-3_platelets-number-per-volume-in-blood-by-automated-count",
+			"assigner": {
+				"reference": "Organization/Charité"
+			}
+		}
+	],
+	"status": "final",
+	"category": [
+		{
+			"coding": [
+				{
+					"system": "http://loinc.org",
+					"code": "26436-6"
+				},
+				{
+					"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+					"code": "laboratory"
+				}
+			]
+		}
+	],
+	"code": {
+		"coding": [
+			{
+				"system": "http://loinc.org",
+				"code": "777-3",
+				"display": "Platelets [#/volume] in Blood by Automated count"
+			}
+		],
+		"text": "Platelets"
+	},
+	"subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+	"effectiveDateTime": "2021-01-18T11:05:52+01:00",
+	"valueQuantity": {
+		"value": 287,
+		"unit": "per nanoliter",
+		"system": "http://unitsofmeasure.org",
+		"code": "/nL"
+	}
+}

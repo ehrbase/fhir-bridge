@@ -522,7 +522,7 @@ ${vCC_URL}		                http://snomed.info/sct
 BUG TRACE 01 Create Patient in ICU (Invalid/Missing 'meta')
 	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              meta    not-ready
+    [Tags]              meta    not-ready    bug
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
@@ -533,7 +533,7 @@ BUG TRACE 01 Create Patient in ICU (Invalid/Missing 'meta')
 BUG TRACE 02 Create Patient in ICU (Invalid/Missing 'category')
 	[Documentation]		Belongs to TC 006! Remove separation when it's fixed!
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -553,7 +553,7 @@ BUG TRACE 02 Create Patient in ICU (Invalid/Missing 'category')
 BUG TRACE 03 Create Patient in ICU (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								    Location
 	# 																	CODE
@@ -563,7 +563,7 @@ BUG TRACE 03 Create Patient in ICU (Invalid/Missing 'valueCodeableConcept')
 BUG TRACE 04 Create Patient in ICU (Invalid/Missing 'DataAbsentReason')
 	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
 	[Template]			create patient in ICU with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready
+    [Tags]              DataAbsentReason    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
