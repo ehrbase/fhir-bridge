@@ -1,0 +1,64 @@
+{
+	"resourceType": "Observation",
+	"id": "1d53f254-d9dc-4ec5-b948-0ef127272d44",
+	"meta": {
+		"profile": [
+			"https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"
+		]
+	},
+	"identifier": [
+		{
+			"type": {
+				"coding": [
+					{
+						"system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+						"code": "OBI"
+					}
+				]
+			},
+			"system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+			"value": "33762-6_natriuretic-peptide.b-prohormone-n-terminal-mass-per-volume-in-serum-or-plasma",
+			"assigner": {
+				"reference": "Organization/Charité"
+			}
+		}
+	],
+	"status": "final",
+	"category": [
+		{
+			"coding": [
+				{
+					"system": "http://loinc.org",
+					"code": "26436-6"
+				},
+				{
+					"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+					"code": "laboratory"
+				}
+			]
+		}
+	],
+	"code": {
+		"coding": [
+			{
+				"system": "http://loinc.org",
+				"code": "33762-6",
+				"display": "Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma"
+			}
+		],
+		"text": "Natriuretic peptide.B prohormone N-Terminal"
+	},
+	"subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+	"effectiveDateTime": "2021-01-18T11:05:52+01:00",
+	"valueQuantity": {
+		"value": 15,
+		"unit": "picogram per milliliter",
+		"system": "http://unitsofmeasure.org",
+		"code": "pg/mL"
+	}
+}
