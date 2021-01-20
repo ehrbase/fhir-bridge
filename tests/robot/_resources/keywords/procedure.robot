@@ -89,6 +89,16 @@ create extracorporeal membrane oxygenation with status change
     POST /Procedure with ehr reference with status change    ${text}    ${status}    ${example_json}
 
 
+create respiratory therapies
+    [Arguments]         ${text}    ${example_json}
+    POST /Procedure with ehr reference    ${text}    ${example_json}
+
+
+create respiratory therapies with status change
+    [Arguments]         ${text}    ${status}    ${example_json}
+    POST /Procedure with ehr reference with status change    ${text}    ${status}    ${example_json}
+
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
