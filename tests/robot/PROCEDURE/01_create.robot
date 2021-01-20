@@ -72,7 +72,7 @@ Force Tags              create
     procedure.validate response - 201
 
 
-003 Create Radiology Procedures - Ultrasound
+004 Create Radiology Procedures - Ultrasound
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-radiology-procedures-ultrasound.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -82,4 +82,71 @@ Force Tags              create
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Ultrasound    create-radiology-procedures-ultrasound.json
+    procedure.validate response - 201
+
+
+005 Create Generic Therapy - Dialysis with not performed "performedPeriod"
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-with-performedPeriod-not-performed.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis    Generic Therapy - Dialysis with not performed "performedPeriod"    create-dialysis-with-performedPeriod-not-performed.json
+    procedure.validate response - 201
+
+
+006 Create Generic Therapy - Dialysis with not performed "performedDateTime"
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-with-performedDateTime-not-performed.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis    Generic Therapy - Dialysis with not performed "performedDateTime"    create-dialysis-with-performedDateTime-not-performed.json
+    procedure.validate response - 201
+
+
+007 Create Generic Therapy - Dialysis with unknown "performedDateTime" (Status: In-Progress)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-with-performedDateTime-unknown.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis    Generic Therapy - Dialysis with unknown "performedDateTime" (Status: In-Progress)    create-dialysis-with-performedDateTime-unknown.json
+    procedure.validate response - 201
+
+
+008 Create Generic Therapy - Dialysis with unknown "performedDateTime" (Status: Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-with-performedDateTime-unknown.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...					4. *UPDATE* ``Status`` with unknown
+    ...                 5. *POST* example JSON to Procedure endpoint\n\n
+	...                 6. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis with status change    Generic Therapy - Dialysis with unknown "performedDateTime" (Status: Unknown)    unknown    create-dialysis-with-performedDateTime-unknown.json
+    procedure.validate response - 201
+
+
+009 Create Generic Therapy - Dialysis with unknown "performedDateTime" (Status: Completed)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-with-performedDateTime-unknown.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...					4. *UPDATE* ``Status`` with Completed
+    ...                 5. *POST* example JSON to Procedure endpoint\n\n
+	...                 6. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis with status change    Generic Therapy - Dialysis with unknown "performedDateTime" (Status: Completed)    completed    create-dialysis-with-performedDateTime-unknown.json
     procedure.validate response - 201
