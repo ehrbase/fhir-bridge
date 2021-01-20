@@ -39,7 +39,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy    valid    not-ready
+	[Tags]             	pharmacological-therapy    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy    Pharmacological Therapy (Active)    create-pharmacological-therapy.json
@@ -53,7 +53,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with unknown
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy    valid    not-ready
+	[Tags]             	pharmacological-therapy    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy (Unknown)    unknown    create-pharmacological-therapy.json
@@ -67,7 +67,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with stopped
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy    valid    not-ready
+	[Tags]             	pharmacological-therapy    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy (Stopped)    stopped    create-pharmacological-therapy.json
@@ -81,7 +81,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with not-taken
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy    valid    not-ready
+	[Tags]             	pharmacological-therapy    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy (Not-Taken)    not-taken    create-pharmacological-therapy.json
@@ -94,7 +94,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready
+	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy    Pharmacological Therapy ACE Inhibitors (Active)    create-pharmacological-therapy-ace-inhibitors-active.json
@@ -108,7 +108,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with unknown
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready
+	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy ACE Inhibitors (Unknown)    unknown    create-pharmacological-therapy-ace-inhibitors-active.json
@@ -122,7 +122,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with stopped
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready
+	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy ACE Inhibitors (Stopped)    stopped    create-pharmacological-therapy-ace-inhibitors-active.json
@@ -136,7 +136,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with not-taken
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready
+	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy ACE Inhibitors (Not-Taken)    not-taken    create-pharmacological-therapy-ace-inhibitors-active.json
@@ -149,7 +149,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready
+	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy    Pharmacological Therapy Anticoagulants (Active)    create-pharmacological-therapy-anticoagulants.json
@@ -163,7 +163,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with unknown
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready
+	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy Anticoagulants (Unknown)    unknown    create-pharmacological-therapy-anticoagulants.json
@@ -177,7 +177,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with stopped
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready
+	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy Anticoagulants (Stopped)    stopped    create-pharmacological-therapy-anticoagulants.json
@@ -191,7 +191,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with not-taken
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready
+	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy Anticoagulants (Not-Taken)    not-taken    create-pharmacological-therapy-anticoagulants.json
@@ -204,7 +204,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready
+	[Tags]             	pharmacological-therapy-anticoagulants    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy    Pharmacological Therapy Immunoglobulins    create-pharmacological-therapy-immunoglobulins.json
@@ -218,7 +218,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with unknown
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready
+	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy Immunoglobulins (Unknown)    unknown    create-pharmacological-therapy-immunoglobulins.json
@@ -233,7 +233,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with stopped
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready
+	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy Immunoglobulins (Stopped)    stopped    create-pharmacological-therapy-immunoglobulins.json
@@ -248,7 +248,7 @@ Force Tags              create
 	...					4. *UPDATE* ``Status`` with not-taken
     ...                 5. *POST* example JSON to MedicationStatement endpoint\n\n
 	...                 6. *VALIDATE* the response status
-	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready
+	[Tags]             	pharmacological-therapy-ace-inhibitors    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     medicationstatement.create pharmacological therapy with status change    Pharmacological Therapy Immunoglobulins (Not-Taken)    not-taken    create-pharmacological-therapy-immunoglobulins.json
