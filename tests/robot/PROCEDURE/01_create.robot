@@ -258,3 +258,148 @@ Force Tags              create
     ehr.create new ehr    000_ehr_status.json
     procedure.create extracorporeal membrane oxygenation with status change    Generic Therapy - Extracorporeal Membrane Oxygenation (Unknown)    unknown    create-extracorporeal-membrane-oxygenation-in-progress.json
     procedure.validate response - 201
+
+
+018 Create Generic Therapy - Respiratory Therapies - Invasive Ventilation (Tracheotomy)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-invasive-ventilation-tracheotomy.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create prone position    Generic Therapy - Respiratory Therapies - Invasive Ventilation (Tracheotomy)    create-respiratory-therapies-invasive-ventilation-tracheotomy.json
+    procedure.validate response - 201
+
+
+019 Create Generic Therapy - Respiratory Therapies - Invasive Ventilation (Orotracheal)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-invasive-ventilation-orotracheal.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create prone position    Generic Therapy - Respiratory Therapies - Invasive Ventilation (Orotracheal)    create-respiratory-therapies-invasive-ventilation-orotracheal.json
+    procedure.validate response - 201
+
+
+020 Create Generic Therapy - Respiratory Therapies - Artificial Respiration (Status: Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Generic Therapy - Respiratory Therapies - Artificial Respiration (Status: Unknown)    create-respiratory-therapies-artificial-respiration.json
+    procedure.validate response - 201
+
+
+021 Create Generic Therapy - Extracorporeal Membrane Oxygenation (In-Progress)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...					4. *UPDATE* ``Status`` with in-progress
+    ...                 5. *POST* example JSON to Procedure endpoint\n\n
+	...                 6. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready 
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies with status change    Generic Therapy - Extracorporeal Membrane Oxygenation (In-Progress)    in-progress    create-respiratory-therapies-artificial-respiration.json
+    procedure.validate response - 201
+
+
+022 Create Generic Therapy - Extracorporeal Membrane Oxygenation (Not-Done)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...					4. *UPDATE* ``Status`` with not-done
+    ...                 5. *POST* example JSON to Procedure endpoint\n\n
+	...                 6. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready 
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies with status change    Generic Therapy - Extracorporeal Membrane Oxygenation (Not-Done)    not-done    create-respiratory-therapies-artificial-respiration.json
+    procedure.validate response - 201
+
+
+023 Create Generic Therapy - Respiratory Therapies - Nasal High-Flow-Oxygen-Therapy
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-nasal-high-flow-oxygen-therapy.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Generic Therapy - Respiratory Therapies - Nasal High-Flow-Oxygen-Therapy    create-respiratory-therapies-nasal-high-flow-oxygen-therapy.json
+    procedure.validate response - 201
+
+
+024 Create Generic Therapy - Respiratory Therapies - Non-Invasive Ventilation
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-non-invasive-ventilation.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Generic Therapy - Respiratory Therapies - Non-Invasive Ventilation    create-respiratory-therapies-non-invasive-ventilation.json
+    procedure.validate response - 201
+
+
+025 Create Generic Therapy - Respiratory Therapies with valid performedDateTime (Status: In-Progress)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-with-valid-performeddatetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Generic Therapy - Respiratory Therapies with valid performedDateTime (Status: In-Progress)    create-respiratory-therapies-with-valid-performeddatetime.json
+    procedure.validate response - 201
+
+
+026 Create Generic Therapy - Respiratory Therapies with valid performedPeriod (Status: In-Progress)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-with-valid-performedperiod.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Generic Therapy - Respiratory Therapies with valid performedPeriod (Status: In-Progress)    create-respiratory-therapies-with-valid-performedperiod.json
+    procedure.validate response - 201
+
+
+027 Create Generic Therapy - Respiratory Therapies with unknown performedDateTime (Status: Unknown)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-with-unknown-performedDateTime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Generic Therapy - Respiratory Therapies with unknown performedDateTime (Status: Unknown)    create-respiratory-therapies-with-unknown-performedDateTime.json
+    procedure.validate response - 201
+
+
+028 Create Generic Therapy - Respiratory Therapies with not-performed performedDateTime (Status: Not-Done)
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-with-not-performed-performedDateTime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Generic Therapy - Respiratory Therapies with not-performed performedDateTime (Status: Not-Done)    create-respiratory-therapies-with-not-performed-performedDateTime.json
+    procedure.validate response - 201
