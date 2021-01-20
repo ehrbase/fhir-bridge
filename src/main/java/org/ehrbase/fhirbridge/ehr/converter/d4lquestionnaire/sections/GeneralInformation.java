@@ -277,7 +277,7 @@ public class GeneralInformation extends QuestionnaireSection {
 
     public void mapContactWithInfected(Boolean hadContact) {
         KontaktAction kontaktAction = getKontaktAction();
-        DvCodedText dvCodedText = new DvCodedText("Florian Kaercher von der Charite", new CodePhrase(new TerminologyId("local"), "at0016"));
+        DvCodedText dvCodedText = new DvCodedText("Done", new CodePhrase(new TerminologyId("local"), "at0016"));
         kontaktAction.setCurrentState(dvCodedText);
         if(hadContact){
             kontaktAction.setKontaktZuEinemBestaetigtenFallDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
