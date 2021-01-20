@@ -59,6 +59,36 @@ create radiology procedures
     POST /Procedure with ehr reference    ${text}    ${example_json}
 
 
+create dialysis
+    [Arguments]         ${text}    ${example_json}
+    POST /Procedure with ehr reference    ${text}    ${example_json}
+
+
+create dialysis with status change
+    [Arguments]         ${text}    ${status}    ${example_json}
+    POST /Procedure with ehr reference with status change    ${text}    ${status}    ${example_json}
+
+
+create prone position
+    [Arguments]         ${text}    ${example_json}
+    POST /Procedure with ehr reference    ${text}    ${example_json}
+
+
+create prone position with status change
+    [Arguments]         ${text}    ${status}    ${example_json}
+    POST /Procedure with ehr reference with status change    ${text}    ${status}    ${example_json}
+
+
+create extracorporeal membrane oxygenation
+    [Arguments]         ${text}    ${example_json}
+    POST /Procedure with ehr reference    ${text}    ${example_json}
+
+
+create extracorporeal membrane oxygenation with status change
+    [Arguments]         ${text}    ${status}    ${example_json}
+    POST /Procedure with ehr reference with status change    ${text}    ${status}    ${example_json}
+
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  
@@ -85,5 +115,15 @@ POST /Procedure with ehr reference
 
     ${payload}          Load JSON From File    ${DATA_SET_PATH_PROCEDURE}/${example_json}
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
+                        Output Debug Info To Console    ${payload}
+                        POST /Procedure    ${fhir_resource_name}    ${payload}
+
+
+POST /Procedure with ehr reference with status change
+    [Arguments]         ${fhir_resource_name}    ${status}    ${example_json}
+
+    ${payload}          Load JSON From File    ${DATA_SET_PATH_PROCEDURE}/${example_json}
+                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
+                        Update Value To Json    ${payload}    $.status                      ${status}
                         Output Debug Info To Console    ${payload}
                         POST /Procedure    ${fhir_resource_name}    ${payload}
