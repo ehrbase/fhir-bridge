@@ -1,0 +1,64 @@
+{
+	"resourceType": "Observation",
+	"id": "23c4f4a7-f40f-47d1-a448-a978e5b4c01d",
+	"meta": {
+		"profile": [
+			"https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"
+		]
+	},
+	"identifier": [
+		{
+			"type": {
+				"coding": [
+					{
+						"system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+						"code": "OBI"
+					}
+				]
+			},
+			"system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+			"value": "6301-6_inr-in-platelet-poor-plasma-by-coagulation-assay",
+			"assigner": {
+				"reference": "Organization/Charité"
+			}
+		}
+	],
+	"status": "final",
+	"category": [
+		{
+			"coding": [
+				{
+					"system": "http://loinc.org",
+					"code": "26436-6"
+				},
+				{
+					"system": "http://terminology.hl7.org/CodeSystem/observation-category",
+					"code": "laboratory"
+				}
+			]
+		}
+	],
+	"code": {
+		"coding": [
+			{
+				"system": "http://loinc.org",
+				"code": "6301-6",
+				"display": "INR in Platelet poor plasma by Coagulation assay"
+			}
+		],
+		"text": "INR"
+	},
+	"subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+	"effectiveDateTime": "2021-01-18T11:05:52+01:00",
+	"valueQuantity": {
+		"value": 1.02,
+		"unit": "International Normalized Ratio (INR)",
+		"system": "http://unitsofmeasure.org",
+		"code": "{INR}"
+	}
+}
