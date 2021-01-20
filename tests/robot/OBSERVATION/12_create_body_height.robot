@@ -438,7 +438,7 @@ ${vQSystem}						http://unitsofmeasure.org
 BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'identifier')
 	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
 	[Template]			create body-height with ehr reference
-    [Tags]              identifier    not-ready
+    [Tags]              identifier    not-ready    bug
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
@@ -448,7 +448,7 @@ BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'identifier')
 BUG TRACE 02 Create Clinical Frailty Scale Score (Invalid/Missing 'DataAbsentReason')
 	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
 	[Template]			create body-height with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready
+    [Tags]              DataAbsentReason    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE

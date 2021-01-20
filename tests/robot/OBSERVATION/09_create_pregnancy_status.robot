@@ -494,7 +494,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
 	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
 	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -514,7 +514,7 @@ BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
 BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
 	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
@@ -536,7 +536,7 @@ BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
 BUG TRACE 03 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
 	[Documentation]		Belongs to TC 012! Remove separation when it's fixed!
 	[Template]			create pregnancy status with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready
+    [Tags]              DataAbsentReason    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
