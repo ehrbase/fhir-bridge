@@ -21,7 +21,7 @@ robot -d results/0 -L TRACE --skip TODO --skip future --skiponfailure not-ready 
 
 ```bash
 # docu command
-python3 -m robot.testdoc robot results/fhirbridgerobottests.html
+python3 -m robot.testdoc robot results/fhir-bridge-robot-testdocu.html
 ```
 
 ```bash
