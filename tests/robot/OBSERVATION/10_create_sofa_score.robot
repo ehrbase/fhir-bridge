@@ -24,7 +24,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Dave Petzold
-Force Tags              create    sofa-score    invalid
+Force Tags              observation_create    sofa-score    invalid
 
 
 
@@ -365,14 +365,6 @@ ${randinteger}                  ${12345}
     $.component[4].valueCodeableConcept 				        ${EMPTY}				422    	This property must be an Object, not a primitive property                                                                                       Observation.component.4..value.x.
     $.component[5].valueCodeableConcept 				        ${EMPTY}				422    	This property must be an Object, not a primitive property                                                                                       Observation.component.5..value.x.
 
-    # missing component x code coding
-#    $.component[0].code.coding 				                    missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.0.
-#    $.component[1].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.1.
-#    $.component[2].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.2.
-#    $.component[3].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.3.
-#    $.component[4].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.4.
-#    $.component[5].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.5.
-
     # empty component x code coding
     $.component[0].code.coding 	 				                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.0..code.coding
     $.component[1].code.coding 	 				                ${EMPTY}				422    	This property must be an Array, not a primitive property                                                                                        Observation.component.1..code.coding
@@ -413,14 +405,12 @@ ${randinteger}                  ${12345}
 	# 																	                CODE
 
     #invalid component 0 code coding system
-#	$.component[0].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.0..code.coding.0.
 	$.component[0].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.0..code.coding.0..system
 #	$.component[0].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 	$.component[0].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.0..code.coding.0.
 	$.component[0].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.0..code.coding.0..system
 
     #invalid component 0 code coding code
-#	$.component[0].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[0].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.0..code.coding.0..code
 #	$.component[0].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.0..code.coding.0.
 	$.component[0].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.0..code.coding.0..code
@@ -470,14 +460,12 @@ ${randinteger}                  ${12345}
 	# 																	                CODE
 
     #invalid component 1 code coding system
-#	$.component[1].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.1..code.coding.0.
 	$.component[1].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.1..code.coding.0..system
 #	$.component[1].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 	$.component[1].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.1..code.coding.0.
 	$.component[1].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.1..code.coding.0..system
 
     #invalid component 1 code coding code
-#	$.component[1].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[1].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.1..code.coding.0..code
 #	$.component[1].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.1..code.coding.0.
 	$.component[1].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.1..code.coding.0..code
@@ -527,14 +515,12 @@ ${randinteger}                  ${12345}
 	# 																	                CODE
 
     #invalid component 2 code coding system
-#	$.component[2].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.2..code.coding.0.
 	$.component[2].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.2..code.coding.0..system
 #	$.component[2].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 	$.component[2].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.2..code.coding.0.
 	$.component[2].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.2..code.coding.0..system
 
     #invalid component 2 code coding code
-#	$.component[2].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[2].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.2..code.coding.0..code
 #	$.component[2].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.2..code.coding.0.
 	$.component[2].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.2..code.coding.0..code
@@ -584,14 +570,12 @@ ${randinteger}                  ${12345}
 	# 																	                CODE
 
     #invalid component 3 code coding system
-#	$.component[3].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.3..code.coding.0.
 	$.component[3].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.3..code.coding.0..system
 #	$.component[3].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 	$.component[3].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.3..code.coding.0.
 	$.component[3].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.3..code.coding.0..system
 
     #invalid component 3 code coding code
-#	$.component[3].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[3].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.3..code.coding.0..code
 #	$.component[3].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.3..code.coding.0.
 	$.component[3].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.3..code.coding.0..code
@@ -641,14 +625,12 @@ ${randinteger}                  ${12345}
 	# 																	                CODE
 
     #invalid component 4 code coding system
-#	$.component[4].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.4..code.coding.0.
 	$.component[4].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.4..code.coding.0..system
 #	$.component[4].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 	$.component[4].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.4..code.coding.0.
 	$.component[4].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.4..code.coding.0..system
 
     #invalid component 4 code coding code
-#	$.component[4].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[4].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.4..code.coding.0..code
 #	$.component[4].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.4..code.coding.0.
 	$.component[4].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.4..code.coding.0..code
@@ -698,14 +680,12 @@ ${randinteger}                  ${12345}
 	# 																	                CODE
 
     #invalid component 5 code coding system
-#	$.component[5].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.5..code.coding.0.
 	$.component[5].code.coding[0].system						${EMPTY}				422    	@value cannot be empty																													Observation.component.5..code.coding.0..system
 #	$.component[5].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 	$.component[5].code.coding[0].system						${randstring}			422    	Coding.system must be an absolute reference, not a local reference																		Observation.component.5..code.coding.0.
 	$.component[5].code.coding[0].system						${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.5..code.coding.0..system
 
     #invalid component 5 code coding code
-#	$.component[5].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[5].code.coding[0].code							${EMPTY}				422    	@value cannot be empty																													Observation.component.5..code.coding.0..code
 #	$.component[5].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.5..code.coding.0.
 	$.component[5].code.coding[0].code							${randinteger}			422    	Error parsing JSON: the primitive value must be a string																				Observation.component.5..code.coding.0..code
@@ -748,7 +728,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Tags]              DataAbsentReason    not-ready    bug
+	[Tags]              DataAbsentReason    not-ready    not-ready_bug
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-sofa-score.json
@@ -967,7 +947,7 @@ ${randinteger}                  ${12345}
 BUG TRACE 01 Create Sofa Score (Invalid/Missing 'effectiveDateTime')
 	[Documentation]		Belongs to TC 008! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              effectiveDateTime    not-ready    bug
+    [Tags]              effectiveDateTime    not-ready    not-ready_bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -976,34 +956,15 @@ BUG TRACE 01 Create Sofa Score (Invalid/Missing 'effectiveDateTime')
    $.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
 
 
-BUG TRACE 02 Create Sofa Score (Invalid/Missing 'component' for missing or empty ground attributes)
-	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
-	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    bug
-
-	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																CODE
-	
-    # missing component x code coding
-    $.component[0].code.coding 				                    missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.0.
-    $.component[1].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.1.
-    $.component[2].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.2.
-    $.component[3].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.3.
-    $.component[4].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.4.
-    $.component[5].code.coding 	 				                missing					422    	Observation.component.code: minimum required = 1, but only found 0 .from ${sofa_score-url}.                                                     Observation.component.5.
-
-
 BUG TRACE 03 Create Sofa Score (Invalid/Missing 'component' for Array value 0)
 	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    bug
+    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
 
    #invalid component 0 code coding system
-	$.component[0].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.0..code.coding.0.
 	$.component[0].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 
     #invalid component 0 code coding code
-	$.component[0].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[0].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.0..code.coding.0.
 
     #invalid component 0 valueCodableConcept coding code
@@ -1013,14 +974,12 @@ BUG TRACE 03 Create Sofa Score (Invalid/Missing 'component' for Array value 0)
 BUG TRACE 04 Create Sofa Score (Invalid/Missing 'component' for Array value 1)
 	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    bug
+    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
 
    #invalid component 1 code coding system
-	$.component[1].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.1..code.coding.0.
 	$.component[1].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 
     #invalid component 1 code coding code
-	$.component[1].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[1].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.1..code.coding.0.
 
     #invalid component 1 valueCodableConcept coding code
@@ -1030,14 +989,12 @@ BUG TRACE 04 Create Sofa Score (Invalid/Missing 'component' for Array value 1)
 BUG TRACE 05 Create Sofa Score (Invalid/Missing 'component' for Array value 2)
 	[Documentation]		Belongs to TC 012! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    bug
+    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
 
    #invalid component 2 code coding system
-	$.component[2].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.2..code.coding.0.
 	$.component[2].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 
     #invalid component 2 code coding code
-	$.component[2].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[2].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.2..code.coding.0.
 
     #invalid component 2 valueCodableConcept coding code
@@ -1047,14 +1004,12 @@ BUG TRACE 05 Create Sofa Score (Invalid/Missing 'component' for Array value 2)
 BUG TRACE 06 Create Sofa Score (Invalid/Missing 'component' for Array value 3)
 	[Documentation]		Belongs to TC 013! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    bug
+    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
 
    #invalid component 3 code coding system
-	$.component[3].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.3..code.coding.0.
 	$.component[3].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 
     #invalid component 3 code coding code
-	$.component[3].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[3].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.3..code.coding.0.
 
     #invalid component 3 valueCodableConcept coding code
@@ -1064,14 +1019,12 @@ BUG TRACE 06 Create Sofa Score (Invalid/Missing 'component' for Array value 3)
 BUG TRACE 07 Create Sofa Score (Invalid/Missing 'component' for Array value 4)
 	[Documentation]		Belongs to TC 014! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    bug
+    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
 
    #invalid component 4 code coding system
-	$.component[4].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.4..code.coding.0.
 	$.component[4].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 
     #invalid component 4 code coding code
-	$.component[4].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[4].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.4..code.coding.0.
 
     #invalid component 4 valueCodableConcept coding code
@@ -1081,14 +1034,12 @@ BUG TRACE 07 Create Sofa Score (Invalid/Missing 'component' for Array value 4)
 BUG TRACE 08 Create Sofa Score (Invalid/Missing 'component' for Array value 5)
 	[Documentation]		Belongs to TC 015! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    bug
+    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
 
    #invalid component 5 code coding system
-	$.component[5].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.5..code.coding.0.
 	$.component[5].code.coding[0].system						http://foobar.de		422    	This element does not match any known slice defined in the profile ${sofa_score-url}                    								Observation.component
 
     #invalid component 5 code coding code
-	$.component[5].code.coding[0].code							missing					422    	Observation.code.coding:sofaScore: minimum required = 1, but only found 0 .from ${sofa_score-url}.          							Observation.component
 	$.component[5].code.coding[0].code							${randstring}			422    	This element does not match any known slice defined in the profile ${sofa_score-url}                        							Observation.component.5..code.coding.0.
 
     #invalid component 5 valueCodableConcept coding code
