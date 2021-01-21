@@ -41,7 +41,7 @@ public class Symptoms extends QuestionnaireSection {
     private static final String SC = "SC";
     private static final String SZ = "SZ";
 
-    private Optional<ProblemDiagnoseEvaluation> problemDiagnoseEvaluationQuestion= Optional.empty();
+    private Optional<ProblemDiagnoseEvaluation> problemDiagnoseEvaluationQuestion = Optional.empty();
 
     public Symptoms(TemporalAccessor authored) {
         super(authored);
@@ -53,9 +53,7 @@ public class Symptoms extends QuestionnaireSection {
             if (getValueCode(question).isPresent()) {
                 mapSymptomsQuestions(question);
             }
-
         }
-
     }
 
     private void mapSymptomsQuestions(QuestionnaireResponse.QuestionnaireResponseItemComponent question) {
@@ -138,11 +136,6 @@ public class Symptoms extends QuestionnaireSection {
         ProblemDiagnoseEvaluation problemDiagnoseEvaluation = problemDiagnoseEvaluationQuestion.get();
         FieberInDenLetzten24StundenCluster fieberInDenLetzten24StundenCluster = new FieberInDenLetzten24StundenCluster();
         fieberInDenLetzten24StundenCluster.setVorhandenValue(hasFewer24h);
-     /*   if(hasFewer24h){
-            fieberInDenLetzten24StundenCluster.setSchweregradDefiningCode(SchweregradDefiningCode.N39_C);
-        }else {
-            fieberInDenLetzten24StundenCluster.setSchweregradDefiningCode(SchweregradDefiningCode.N38_C);
-        }*/
         problemDiagnoseEvaluation.setFieberInDenLetzten24Stunden(fieberInDenLetzten24StundenCluster);
         problemDiagnoseEvaluationQuestion = Optional.of(problemDiagnoseEvaluation);
     }
@@ -152,47 +145,40 @@ public class Symptoms extends QuestionnaireSection {
         ProblemDiagnoseEvaluation problemDiagnoseEvaluation = problemDiagnoseEvaluationQuestion.get();
         FieberInDenLetzten4TagenCluster fieberInDenLetzten4TagenCluster = new FieberInDenLetzten4TagenCluster();
         fieberInDenLetzten4TagenCluster.setVorhandenValue(hasFewer4Days);
-/*
-        if(hasFewer4Days) {
-            fieberInDenLetzten4TagenCluster.setVorhandenValue(hasFewer4Days);
-            fieberInDenLetzten4TagenCluster.setSchweregradDefiningCode(SchweregradDefiningCode.N39_C);
-        }else {
-            fieberInDenLetzten4TagenCluster.setSchweregradDefiningCode(SchweregradDefiningCode.N38_C);
-        }*/
         problemDiagnoseEvaluation.setFieberInDenLetzten4Tagen(fieberInDenLetzten4TagenCluster);
         problemDiagnoseEvaluationQuestion = Optional.of(problemDiagnoseEvaluation);
     }
 
-    private void mapFeverTemperature(String maxFewerTemperature){
+    private void mapFeverTemperature(String maxFewerTemperature) {
         ProblemDiagnoseEvaluation problemDiagnoseEvaluation = problemDiagnoseEvaluationQuestion.get();
-        FieberInDenLetzten4TagenCluster  fieberInDenLetzten4TagenCluster = problemDiagnoseEvaluation.getFieberInDenLetzten4Tagen();
+        FieberInDenLetzten4TagenCluster fieberInDenLetzten4TagenCluster = problemDiagnoseEvaluation.getFieberInDenLetzten4Tagen();
         FieberInDenLetzten24StundenCluster fieberInDenLetzten24StundenCluster = problemDiagnoseEvaluation.getFieberInDenLetzten24Stunden();
-        if (fieberInDenLetzten4TagenCluster != null && fieberInDenLetzten4TagenCluster.isVorhandenValue()){
+        if (fieberInDenLetzten4TagenCluster != null && fieberInDenLetzten4TagenCluster.isVorhandenValue()) {
             fieberInDenLetzten4TagenCluster.setSchweregradDefiningCode(parseStringToSchweregrad(maxFewerTemperature));
             problemDiagnoseEvaluation.setFieberInDenLetzten4Tagen(fieberInDenLetzten4TagenCluster);
         }
-        if(fieberInDenLetzten24StundenCluster != null && fieberInDenLetzten24StundenCluster.isVorhandenValue()){
+        if (fieberInDenLetzten24StundenCluster != null && fieberInDenLetzten24StundenCluster.isVorhandenValue()) {
             fieberInDenLetzten24StundenCluster.setSchweregradDefiningCode(parseStringToSchweregrad(maxFewerTemperature));
             problemDiagnoseEvaluation.setFieberInDenLetzten24Stunden(fieberInDenLetzten24StundenCluster);
         }
     }
 
-    private SchweregradDefiningCode parseStringToSchweregrad(String schweregrad){
+    private SchweregradDefiningCode parseStringToSchweregrad(String schweregrad) {
         //TODO 38 degree and 42 is missing
-        if (schweregrad.equals(SchweregradDefiningCode.N38_C.getCode())){
+        if (schweregrad.equals(SchweregradDefiningCode.N38_C.getCode())) {
             return SchweregradDefiningCode.N38_C;
-        }else if (schweregrad.equals(SchweregradDefiningCode.N39_C.getCode())){
+        } else if (schweregrad.equals(SchweregradDefiningCode.N39_C.getCode())) {
             return SchweregradDefiningCode.N39_C;
-        }else if (schweregrad.equals(SchweregradDefiningCode.N40_C.getCode())){
+        } else if (schweregrad.equals(SchweregradDefiningCode.N40_C.getCode())) {
             return SchweregradDefiningCode.N40_C;
-        }else if(schweregrad.equals(SchweregradDefiningCode.N41_C.getCode())){
+        } else if (schweregrad.equals(SchweregradDefiningCode.N41_C.getCode())) {
             return SchweregradDefiningCode.N41_C;
-        }else if(schweregrad.equals(SchweregradDefiningCode.N42_C.getCode())){
+        } else if (schweregrad.equals(SchweregradDefiningCode.N42_C.getCode())) {
             return SchweregradDefiningCode.N42_C;
-        }else if (schweregrad.equals(SchweregradDefiningCode.ICH_WEISS_ES_NICHT.getCode())){
+        } else if (schweregrad.equals(SchweregradDefiningCode.ICH_WEISS_ES_NICHT.getCode())) {
             return SchweregradDefiningCode.ICH_WEISS_ES_NICHT;
-        }else {
-            throw new UnprocessableEntityException("fewer max temperature: "+schweregrad+" is not a valid code value !");
+        } else {
+            throw new UnprocessableEntityException("fewer max temperature: " + schweregrad + " is not a valid code value !");
         }
     }
 

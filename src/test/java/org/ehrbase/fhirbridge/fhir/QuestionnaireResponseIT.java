@@ -2,34 +2,25 @@ package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.api.MethodOutcome;
-import com.nedap.archie.rm.RMObject;
-import com.nedap.archie.rm.composition.Composition;
-import liquibase.pro.packaged.T;
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
-import org.ehrbase.client.flattener.Flattener;
-import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
-import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
+import org.ehrbase.fhirbridge.customComparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.customComparators.CompositionComparator;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
-import org.javers.common.exception.JaversException;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
-import org.javers.core.metamodel.clazz.ValueObjectDefinition;
-import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
+
 import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Collections;
+import java.time.temporal.TemporalAccessor;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,17 +38,90 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
         assertEquals(true, outcome.getCreated());
     }
 
+    // ------ Anamnesis ------
     @Test
-    void mapD4LQuestionnaireCompositionJavers() throws IOException, IntrospectionException, InvocationTargetException, IllegalAccessException, JSONException {
+    void createWithInvalidLinkIdAnamnesis() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("anamnesis-invalid-linkid.json"));
+        assertEquals("LinkId D8 undefined", exception.getMessage());
+    }
+
+    @Test
+    void createAnamnesisInvalidVorhandenerDefiningCode() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("anamnesis-invalid-defining-code.json"));
+        assertEquals("The code LA32-123 for Question: definition cannot be mapped, please enter a valid code valid codes are: Yes (LA33-6), No (LA32-8), dont know (LA12688-0)", exception.getMessage());
+    }
+
+    // ------ General Information ------
+    @Test
+    void createGeneralInformationInvalidLinkId() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("general-information-invalid-linkid.json"));
+        assertEquals("LinkId P12 undefined", exception.getMessage());
+    }
+
+    @Test
+    void createGeneralInformationInvalidLinkIdKontakt() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("general-information-invalid-linkid-kontakt.json"));
+        assertEquals("LinkId CJ undefined", exception.getMessage());
+    }
+
+
+    @Test
+    void createGeneralInformationInvalidAge() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("general-information-invalid-age.json"));
+        assertEquals("The code for age:30-209202 cannot be mapped, plese enter a valid code e.g. 61-70", exception.getMessage());
+    }
+
+    @Test
+    void createGeneralInformationInvalidWohnungssituation() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("general-information-invalid-wohnungssituation.json"));
+        assertEquals("The code for Wohnungsituation:LA6255213-9 cannot be mapped, please enter a valid code e.g. Wohnt mit anderen zusammen (LOINC: LA9996-5)", exception.getMessage());
+    }
+
+    @Test
+    void createGeneralInformationInvalidPregnancy() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("general-information-invalid-pregnancy.json"));
+        assertEquals("The code for Pregnancy:LA266asd83-5 cannot be mapped, please enter a valid code e.g. pregnant (LA15173-0), not pregnant (LA26683-5) or unknown(LA4489-6) )", exception.getMessage());
+    }
+
+    @Test
+    void createGeneralInformationInvalidKontakt() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("general-information-invalid-kontakt.json"));
+        assertEquals("\"LA3asd3-6\" cannot be mapped to boolean, has to be either LA33-6 or LA33-8", exception.getMessage());
+    }
+
+    // ------ Medication ------
+
+    @Test
+    void createMediactionInvalidLinkId() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("medication-invalid-linkid.json"));
+        assertEquals("\"LA31233-6\" cannot be mapped to boolean, has to be either LA33-6 or LA33-8", exception.getMessage());
+    }
+
+
+    @Test
+    void createMediactionInvalidSteroid() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("medication-invalid-steroids.json"));
+        assertEquals("The code:LA3a2-8 cannot be mapped, please enter a valid code e.g. ja (LA33-6), nein (LA32-8), ich weiss es nicht (LA12688-0)", exception.getMessage());
+    }
+
+    // ------ Symptoms ------
+
+    @Test
+    void createSymptomsInvalidLinkId() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("symptoms-invalid-linkid.json"));
+        assertEquals("LinkId Sas undefined", exception.getMessage());
+    }
+
+    @Test
+    void createSymptomsInvalidSchweregrad() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("symtoms-invalid-schweregrad.json"));
+        assertEquals("fewer max temperature: 4sa0C is not a valid code value !", exception.getMessage());
+    }
+
+
+    @Test
+    void mapD4LQuestionnaireCompositionJavers() throws IOException, IntrospectionException, InvocationTargetException, IllegalAccessException {
         String resource = IOUtils.toString(new ClassPathResource("QuestionnaireResponse/create-covapp-response.json").getInputStream(), StandardCharsets.UTF_8);
-
-        RMObject composition = new CanonicalJson().unmarshal(IOUtils.toString(new ClassPathResource("QuestionnaireResponse/D4LQuestionnaire.json").getInputStream(), StandardCharsets.UTF_8), Composition.class);
-
-        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
-        resourceTemplateProvider.afterPropertiesSet();
-
-        Flattener cut = new Flattener(resourceTemplateProvider);
-        D4LQuestionnaireComposition d4LQuestionnaireComposition = cut.flatten(composition, D4LQuestionnaireComposition.class);
 
         IParser parser = context.newJsonParser();
         QuestionnaireResponse questionnaireResponse = parser.parseResource(QuestionnaireResponse.class, resource);
@@ -65,25 +129,34 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
         D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.toComposition(questionnaireResponse);
 
         Javers javers = getJavers();
-        Diff diff = javers.compare(d4LQuestionnaireComposition, mappedD4LQuestionnaireComposition);
-        diff.getChanges().forEach(change -> System.out.println("Difference at" + change));
-    //    assertEquals(diff.getChanges().size(), 0);
-
-    //    assertEquals(d4LQuestionnaireComposition.getStartTimeValue(), mappedD4LQuestionnaireComposition.getStartTimeValue());
+        Diff diff = new CompositionComparator().compareCompositions("QuestionnaireResponse/D4LQuestionnaireParagonComposition.json", mappedD4LQuestionnaireComposition, javers);
+        assertEquals(diff.getChanges().size(), 0);
     }
 
+    private Exception executeMappingUnprocessableEntityException(QuestionnaireResponse questionnaireResponse) {
+        return assertThrows(UnprocessableEntityException.class, () -> {
+            new D4lQuestionnaireCompositionConverter().toComposition(questionnaireResponse);
+        });
+    }
+
+    private QuestionnaireResponse loadQuestionnaireResponse(String path) throws IOException {
+        String resource = IOUtils.toString(new ClassPathResource("QuestionnaireResponse/" + path).getInputStream(), StandardCharsets.UTF_8);
+        IParser parser = context.newJsonParser();
+        return parser.parseResource(QuestionnaireResponse.class, resource);
+    }
 
     private Javers getJavers() {
         return JaversBuilder.javers()
-                .registerValueObject(new ValueObjectDefinition(D4LQuestionnaireComposition.class, Collections.singletonList("startTimeValue")))
-                .registerValueObject(new ValueObjectDefinition(ProblemDiagnoseEvaluation.class, Collections.singletonList("datumZeitpunktDesAuftretensDerErstdiagnoseValue")))
-                .registerValueObject(new ValueObjectDefinition(AlterObservation.class, Arrays.asList("originValue", "timeValue")))
+                .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
+                .registerValueObject(D4LQuestionnaireComposition.class)
+                .registerValueObject((ProblemDiagnoseEvaluation.class))
+                .registerValueObject(AlterObservation.class)
                 .registerValueObject(WohnsituationEvaluation.class)
                 .registerValueObject(AusschlussPflegetaetigkeitEvaluation.class)
                 .registerValueObject(ZusammenfassungRauchverhaltenEvaluation.class)
-                .registerValueObject(new ValueObjectDefinition(SchwangerschaftsstatusObservation.class, Arrays.asList("originValue", "timeValue")))
+                .registerValueObject(SchwangerschaftsstatusObservation.class)
                 .registerValueObject(PflegetaetigkeitEvaluation.class)
-                .registerValueObject(new ValueObjectDefinition(KontaktAction.class, Arrays.asList("endeValue", "beginnValue", "timeValue")))
+                .registerValueObject(KontaktAction.class)
                 .registerValueObject(ChronischeLungenkrankheitEvaluation.class)
                 .registerValueObject(BeschaeftigungCluster.class)
                 .registerValueObject(DiabetesEvaluation.class)
@@ -92,7 +165,7 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
                 .registerValueObject(KortisionEvaluation.class)
                 .registerValueObject(ImmunsuppressivaEvaluation.class)
                 .registerValueObject(ZusammenfassungDesImmunstatusEvaluation.class)
-                .registerValueObject(new ValueObjectDefinition(EinwilligungserklaerungAction.class, Arrays.asList("timeValue")))
+                .registerValueObject(EinwilligungserklaerungAction.class)
                 .registerValueObject(ZusammenfassungDerBeschaeftigungEvaluation.class)
                 .registerValueObject(FieberInDenLetzten24StundenCluster.class)
                 .registerValueObject(FieberInDenLetzten4TagenCluster.class)
@@ -109,23 +182,6 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
                 .build();
     }
 
-    private void debugJaversTest(T test, T mapped) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
-        Javers javers = getJavers();
-        for (PropertyDescriptor propertyDescriptor :
-                Introspector.getBeanInfo(D4LQuestionnaireComposition.class).getPropertyDescriptors()) {
-            Method method = propertyDescriptor.getReadMethod();
-            System.out.println(propertyDescriptor.getReadMethod());
-            try {
-                Diff diff = javers.compare(method.invoke(test), method.invoke(mapped));
-                diff.getChanges().forEach(change -> System.out.println("Difference at" + change));
-            } catch (JaversException je) {
-                if (!je.toString().contains("COMPARING_TOP_LEVEL_VALUES_NOT_SUPPORTED")) {
-                    throw je;
-                }
-            }
-        }
-    }
-
 
 /*    @Test
     void createInvalid() throws IOException {
@@ -136,43 +192,4 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
         assertEquals("HTTP 422 : QuestionnaireResponse.status: minimum required = 1, but only found 0 (from http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse)", exception.getMessage());
     }*/
 
- /*   @Test
-    void mapD4LQuestionnaireComposition() throws IOException, IntrospectionException, InvocationTargetException, IllegalAccessException, JSONException {
-        String resource = IOUtils.toString(new ClassPathResource("QuestionnaireResponse/create-covapp-response.json").getInputStream(), StandardCharsets.UTF_8);
-
-        String test = IOUtils.toString(new ClassPathResource("QuestionnaireResponse/D4LQuestionnaire.json").getInputStream(), StandardCharsets.UTF_8);
-
-        IParser parser = context.newJsonParser();
-        QuestionnaireResponse questionnaireResponse = parser.parseResource(QuestionnaireResponse.class, resource);
-        D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter = new D4lQuestionnaireCompositionConverter();
-        D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.toComposition(questionnaireResponse);
-
-
-        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
-        resourceTemplateProvider.afterPropertiesSet();
-        Unflattener cut = new Unflattener(resourceTemplateProvider);
-        Composition composition = (Composition) cut.unflatten(mappedD4LQuestionnaireComposition);
-
-        String s = new CanonicalJson().marshal(composition);
-        ObjectMapper mapper = new ObjectMapper();
-
-        JsonNode beforeNode = mapper.readTree(s);
-        JsonNode afterNode = mapper.readTree(test);
-        JsonNode patch = JsonDiff.asJson(beforeNode, afterNode);
-        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-        Javers javers = getJavers();
-
-        Diff diff = javers.compare(beforeNode, afterNode);
-        diff.getChanges().forEach(change -> System.out.println("Difference at" + change));
-
-        *//*
-        Gson g = new Gson();
-        Type mapType = new TypeToken<Map<String, Object>>(){}.getType();
-        Map<String, Object> firstMap = g.fromJson(s, mapType);
-        Map<String, Object> secondMap = g.fromJson(test, mapType);
-        System.out.println(Maps.difference(firstMap, secondMap));
-        JSONAssert.assertEquals(s, test, JSONCompareMode.NON_EXTENSIBLE);
-*//*
-        assertTrue(beforeNode.equals(afterNode));
-    }*/
 }
