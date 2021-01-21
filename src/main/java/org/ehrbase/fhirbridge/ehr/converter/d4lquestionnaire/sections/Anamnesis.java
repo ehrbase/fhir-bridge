@@ -113,7 +113,6 @@ public class Anamnesis extends QuestionnaireSection {
         } else {
             throw new UnprocessableEntityException("The code " + code + " for Question: " + evaluationObject.getClass().getName().split("\\.")[6].replace("Evaluation", "") + " cannot be mapped, please enter a valid code valid codes are: Yes (LA33-6), No (LA32-8), dont know (LA12688-0)");
         }
-
     }
 
     private Method getSetMethodForVorhandenDefiningCode(Object evaluationObject) throws NoSuchMethodException {

@@ -197,7 +197,7 @@ public class GeneralInformation extends QuestionnaireSection {
     //TODO check again the conversation with alina
     private void checkPflegetatigkeitAusschluss() {
         if (pflegetatigkeitEvaluationQuestion.isPresent()) {
-     //       if (!pflegetatigkeitEvaluationQuestion.get().isPrivatValue() && !pflegetatigkeitEvaluationQuestion.get().isBeruflichValue()) {
+            //       if (!pflegetatigkeitEvaluationQuestion.get().isPrivatValue() && !pflegetatigkeitEvaluationQuestion.get().isBeruflichValue()) {
             if (!pflegetatigkeitEvaluationQuestion.get().isPrivatValue() && !isProfessionalCareGiver()) {
                 pflegetatigkeitEvaluationQuestion = Optional.empty();
                 setAusschlussPflegetatigkeitEvaluation();
@@ -206,7 +206,7 @@ public class GeneralInformation extends QuestionnaireSection {
     }
 
     //TODO check if this is working
-    private boolean isProfessionalCareGiver(){
+    private boolean isProfessionalCareGiver() {
         return zusammenfassungDerBeschaftigungEvaluationQuestion.get().getBeschaeftigung().getBerufsbereichDefiningCode().equals(BerufsbereichDefiningCode.MEDIZINISCHEN_BEREICH_PFLEGE_ARZTPRAXIS_ODER_KRANKENHAUS);
     }
 
@@ -258,8 +258,8 @@ public class GeneralInformation extends QuestionnaireSection {
     public void mapContactWithInfectedQuestion(List<QuestionnaireResponse.QuestionnaireResponseItemComponent> item) {
         for (QuestionnaireResponse.QuestionnaireResponseItemComponent question : item) {
             if (question.getLinkId().equals(C0) && getValueCode(question).isPresent()) {
-                mapContactWithInfected(getQuestionLoincYesNoDontKnowToBoolean(question));
-            }else if(question.getLinkId().equals(CZ) && getValueAsDate(question).isPresent()){
+                mapContactWithInfected(getQuestionLoincYesNoToBoolean(question));
+            } else if (question.getLinkId().equals(CZ) && getValueAsDate(question).isPresent()) {
                 mapDateOfContactInfected(getValueAsDate(question).get());
             } else {
                 throw new UnprocessableEntityException("LinkId " + question.getLinkId() + " undefined");
@@ -279,18 +279,18 @@ public class GeneralInformation extends QuestionnaireSection {
         KontaktAction kontaktAction = getKontaktAction();
         DvCodedText dvCodedText = new DvCodedText("Done", new CodePhrase(new TerminologyId("local"), "at0016"));
         kontaktAction.setCurrentState(dvCodedText);
-        if(hadContact){
+        if (hadContact) {
             kontaktAction.setKontaktZuEinemBestaetigtenFallDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
-        }else{
+        } else {
             kontaktAction.setKontaktZuEinemBestaetigtenFallDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
         }
         contactWithInfectedQuestion = Optional.of(kontaktAction);
     }
 
     private KontaktAction getKontaktAction() {
-        if (contactWithInfectedQuestion.isPresent()){
+        if (contactWithInfectedQuestion.isPresent()) {
             return contactWithInfectedQuestion.get();
-        }else{
+        } else {
             KontaktAction kontaktAction = new KontaktAction();
             kontaktAction.setLanguage(Language.DE);
             kontaktAction.setSubject(new PartySelf());
@@ -299,7 +299,7 @@ public class GeneralInformation extends QuestionnaireSection {
         }
     }
 
-    public void setGeneralInformation(D4LQuestionnaireComposition d4LQuestionnaireComposition){
+    public void setGeneralInformation(D4LQuestionnaireComposition d4LQuestionnaireComposition) {
         alterObservationQuestion.ifPresent(d4LQuestionnaireComposition::setAlter);
         wohnsituationEvaluationQuestion.ifPresent(d4LQuestionnaireComposition::setWohnsituation);
         checkPflegetatigkeitAusschluss();

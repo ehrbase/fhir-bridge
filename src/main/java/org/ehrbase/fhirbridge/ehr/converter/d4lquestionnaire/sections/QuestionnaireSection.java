@@ -27,46 +27,29 @@ public abstract class QuestionnaireSection {
         }
     }
 
-    Optional<TemporalAccessor>  getValueAsDate(QuestionnaireResponse.QuestionnaireResponseItemComponent value){
+    Optional<TemporalAccessor> getValueAsDate(QuestionnaireResponse.QuestionnaireResponseItemComponent value) {
         return Optional.of(LocalDate.parse(value.getAnswer().get(0).getValueDateType().getValueAsString()));
     }
 
-    String getQuestionValueCodeToString(QuestionnaireResponse.QuestionnaireResponseItemComponent question){
+    String getQuestionValueCodeToString(QuestionnaireResponse.QuestionnaireResponseItemComponent question) {
         return getValueCode(question).get().toString();
     }
 
-    Boolean getQuestionLoincYesNoToBoolean(QuestionnaireResponse.QuestionnaireResponseItemComponent question){
+    Boolean getQuestionLoincYesNoToBoolean(QuestionnaireResponse.QuestionnaireResponseItemComponent question) {
         return yesNoLoincCodeToBoolean(getValueCode(question).get().toString());
     }
 
-    Boolean getQuestionLoincYesNoDontKnowToBoolean(QuestionnaireResponse.QuestionnaireResponseItemComponent question){
-        return yesNotDontKnowLoinToBoolean(getValueCode(question).get().toString());
-    }
 
-
-    private Boolean yesNoLoincCodeToBoolean(String code){
-        if (code.equals("LA33-6")){
-            return true;
-        }else if(code.equals("LA32-8") || code.equals("LA46-8")){ //TODO how to handle Others LOINC code in openEHR
-            return false;
-        }else{
-            throw new UnprocessableEntityException( "\""+ code + "\" cannot be mapped to boolean, has to be either LA33-6 or LA33-8");
-        }
-    }
-
-    private Boolean yesNotDontKnowLoinToBoolean(String code) {
+    private Boolean yesNoLoincCodeToBoolean(String code) {
         if (code.equals("LA33-6")) {
             return true;
-        } else if (code.equals("LA32-8") || code.equals("LA12688-0")) {
+        } else if (code.equals("LA32-8")) {
             return false;
         } else {
-            throw new UnprocessableEntityException("\"" + code + "\" cannot be mapped to boolean, has to be either LA33-6, LA33-8 or LA12688-0");
+            throw new UnprocessableEntityException("\"" + code + "\" cannot be mapped to boolean, has to be either LA33-6 or LA33-8");
         }
     }
 
-/*    LocalDate getValueDate(QuestionnaireResponse.QuestionnaireResponseItemComponent value) {
-        return LocalDate.parse(value.getAnswer().get(0).getValueDateType().getValueAsString());
-    }*/
 
     public abstract void map(List<QuestionnaireResponse.QuestionnaireResponseItemComponent> item);
 
