@@ -24,7 +24,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Dave Petzold
-Force Tags              create    frailty-scale-score    invalid
+Force Tags              observation_create    frailty-scale-score    invalid
 
 
 
@@ -583,7 +583,7 @@ ${vCC_URL}		https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/frailty
 BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'effectiveDateTime')
 	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              effectiveDateTime    not-ready    bug
+    [Tags]              effectiveDateTime    not-ready    not-ready_bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -595,14 +595,13 @@ BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'effectiveDate
 BUG TRACE 02 Create Clinical Frailty Scale Score (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    bug
+    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 	
 	# invalid system
-	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
-	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+#	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
 
 	# invalid code
 	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
