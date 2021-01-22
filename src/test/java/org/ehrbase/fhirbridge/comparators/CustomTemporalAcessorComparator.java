@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.customComparators;
+package org.ehrbase.fhirbridge.comparators;
 
 import org.javers.core.diff.custom.CustomValueComparator;
 

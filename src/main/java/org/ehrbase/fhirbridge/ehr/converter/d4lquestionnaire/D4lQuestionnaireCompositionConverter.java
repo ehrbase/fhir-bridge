@@ -18,6 +18,7 @@ import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnai
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
+import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.UUID;
 
@@ -44,12 +45,14 @@ public class D4lQuestionnaireCompositionConverter implements CompositionConverte
         D4LQuestionnaireComposition d4LQuestionnaireComposition = new D4LQuestionnaireComposition();
         initialiseSections(questionnaireResponse);
         mapSections(questionnaireResponse);
-        d4LQuestionnaireComposition.setStartTimeValue(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
+        OffsetDateTime offsetDateTime = OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
+        d4LQuestionnaireComposition.setStartTimeValue(offsetDateTime);
         return populateD4lQuestionnaireComposition(d4LQuestionnaireComposition);
     }
 
     private void initialiseSections(QuestionnaireResponse questionnaireResponse){
-        TemporalAccessor authored = questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime();
+        OffsetDateTime offsetDateTime = OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
+        TemporalAccessor authored = offsetDateTime;
         this.generalInformation = new GeneralInformation(authored);
         this.symptoms = new Symptoms(authored);
         this.anamnesis = new Anamnesis(authored);
