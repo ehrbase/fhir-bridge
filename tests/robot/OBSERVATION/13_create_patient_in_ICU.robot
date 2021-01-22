@@ -399,9 +399,9 @@ ${vCC_URL}		                http://snomed.info/sct
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Tags]              DataAbsentReason
 
-	ehr.create new ehr    				  				000_ehr_status.json
-	create with DataAbsentReason		  				DataAbsentReason				create-patient-in-icu.json
-	validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	ehr.create new ehr    				  							000_ehr_status.json
+	create with DataAbsentReason		  							DataAbsentReason				create-patient-in-icu.json
+	observation.validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -522,7 +522,7 @@ ${vCC_URL}		                http://snomed.info/sct
 BUG TRACE 01 Create Patient in ICU (Invalid/Missing 'meta')
 	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              meta    not-ready
+    [Tags]              meta    not-ready    bug
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
@@ -533,7 +533,7 @@ BUG TRACE 01 Create Patient in ICU (Invalid/Missing 'meta')
 BUG TRACE 02 Create Patient in ICU (Invalid/Missing 'category')
 	[Documentation]		Belongs to TC 006! Remove separation when it's fixed!
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -553,7 +553,7 @@ BUG TRACE 02 Create Patient in ICU (Invalid/Missing 'category')
 BUG TRACE 03 Create Patient in ICU (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
 	[Template]			create patient in ICU with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								    Location
 	# 																	CODE
@@ -563,7 +563,7 @@ BUG TRACE 03 Create Patient in ICU (Invalid/Missing 'valueCodeableConcept')
 BUG TRACE 04 Create Patient in ICU (Invalid/Missing 'DataAbsentReason')
 	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
 	[Template]			create patient in ICU with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready
+    [Tags]              DataAbsentReason    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
@@ -667,7 +667,7 @@ create patient in ICU JSON
 						...    update vCC						${vCCavailabe}									${vCCCodingavailable}			${vCC0System}				${vCC0Code}				${vCC0Display}		AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    validate response - 422 (with error message NEW)									${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason
