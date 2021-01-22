@@ -329,9 +329,9 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Tags]              DataAbsentReason
 
-	ehr.create new ehr    				  				000_ehr_status.json
-	create with DataAbsentReason		  				DataAbsentReason				create-body-height.json
-	validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	ehr.create new ehr    				  							000_ehr_status.json
+	create with DataAbsentReason		  							DataAbsentReason				create-body-height.json
+	observation.validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -438,7 +438,7 @@ ${vQSystem}						http://unitsofmeasure.org
 BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'identifier')
 	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
 	[Template]			create body-height with ehr reference
-    [Tags]              identifier    not-ready
+    [Tags]              identifier    not-ready    bug
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
@@ -448,7 +448,7 @@ BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'identifier')
 BUG TRACE 02 Create Clinical Frailty Scale Score (Invalid/Missing 'DataAbsentReason')
 	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
 	[Template]			create body-height with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready
+    [Tags]              DataAbsentReason    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
@@ -539,7 +539,7 @@ create body-height JSON
 						...    update Value Quantity            ${vQavailable}                                  ${vQvalue}                     ${vQunit}                   	${vQsystem}            	${vQcode}        	AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    validate response - 422 (with error message NEW)									${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason

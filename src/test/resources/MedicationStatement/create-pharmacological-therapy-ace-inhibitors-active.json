@@ -1,0 +1,32 @@
+{
+    "resourceType": "MedicationStatement",
+    "id": "25369138-60ff-4761-bd6e-b5c9c84758e2",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-ace-inhibitors"
+      ]
+    },
+    "status": "active",
+    "medicationCodeableConcept": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "41549009",
+          "display": "Product containing angiotensin-converting enzyme inhibitor (product)"
+        },
+        {
+          "system": "http://fhir.de/CodeSystem/dimdi/atc",
+          "code": "C09A",
+          "display": "ACE-HEMMER, REIN"
+        }
+      ],
+      "text": "ACE inhibitors"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "effectiveDateTime": "2020-10-19T08:43:33+02:00"
+  }

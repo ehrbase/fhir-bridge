@@ -381,9 +381,9 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Tags]              DataAbsentReason
 
-	ehr.create new ehr    				  				000_ehr_status.json
-	create with DataAbsentReason		  				DataAbsentReason				create-pregnancy-status.json
-	validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	ehr.create new ehr    				  							000_ehr_status.json
+	create with DataAbsentReason		  							DataAbsentReason				create-pregnancy-status.json
+	observation.validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -494,7 +494,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
 	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
 	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -514,7 +514,7 @@ BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
 BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
 	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
@@ -536,7 +536,7 @@ BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
 BUG TRACE 03 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
 	[Documentation]		Belongs to TC 012! Remove separation when it's fixed!
 	[Template]			create pregnancy status with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready
+    [Tags]              DataAbsentReason    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
@@ -644,7 +644,7 @@ create pregnancy status JSON
 						...    update vCC						${vCCavailabe}									${vCCCodingavailable}			${vCC0System}				${vCC0Code}				${vCC0Display}		AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    validate response - 422 (with error message NEW)									${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason
