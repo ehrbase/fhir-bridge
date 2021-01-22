@@ -7,12 +7,12 @@ import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
-import org.ehrbase.fhirbridge.customComparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.customComparators.CompositionComparator;
+import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
+import org.javers.core.metamodel.clazz.ValueObjectDefinition;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.time.temporal.TemporalAccessor;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -128,8 +129,7 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
         D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter = new D4lQuestionnaireCompositionConverter();
         D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.toComposition(questionnaireResponse);
 
-        Javers javers = getJavers();
-        Diff diff = new CompositionComparator().compareCompositions("QuestionnaireResponse/D4LQuestionnaireParagonComposition.json", mappedD4LQuestionnaireComposition, javers);
+        Diff diff = compareCompositions(getJavers(), "QuestionnaireResponse/D4LQuestionnaireParagonComposition.json", mappedD4LQuestionnaireComposition);
         assertEquals(diff.getChanges().size(), 0);
     }
 
@@ -148,7 +148,7 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
     private Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(D4LQuestionnaireComposition.class)
+                .registerValueObject(new ValueObjectDefinition(D4LQuestionnaireComposition.class, List.of("location")))
                 .registerValueObject((ProblemDiagnoseEvaluation.class))
                 .registerValueObject(AlterObservation.class)
                 .registerValueObject(WohnsituationEvaluation.class)
