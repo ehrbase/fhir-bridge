@@ -15900,7 +15900,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                             </occurrences>
                             <node_id/>
                             <item xsi:type="C_STRING">
-                              <list>Haben Sie sich im Zeitraum vom 1. Oktober 2020 bis heute gegen Grippe impfen lassen?</list>
+                              <list>Haben Sie sich im Zeitraum vom 1. Oktober 2019 bis heute gegen Grippe impfen lassen?</list>
                             </item>
                           </children>
                         </attributes>

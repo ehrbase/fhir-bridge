@@ -43,7 +43,7 @@ import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.Zus
 @Archetype("openEHR-EHR-COMPOSITION.self_monitoring.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-13T15:23:34.501774+01:00",
+    date = "2021-01-25T13:06:40.732275+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 @Template("D4L_questionnaire")

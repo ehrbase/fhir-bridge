@@ -186,18 +186,12 @@ public class GeneralInformation extends QuestionnaireSection {
         PflegetaetigkeitGrundFuerDieTaetigkeitElement pflegetatigkeitGrundFurDieTatigkeitElement = new PflegetaetigkeitGrundFuerDieTaetigkeitElement();
         pflegetatigkeitGrundFurDieTatigkeitElement.setValue("alterbedingten Beschwerden, chronischen Erkrankungen oder Gebrechlichkeit");
 
-/*        pflegetatigkeitEvaluation.setGrundFuerDieTaetigkeit(new ArrayList<>() {{
-            add(pflegetatigkeitGrundFurDieTatigkeitElement);
-        }});*/
         pflegetatigkeitEvaluation.setGrundFuerDieTaetigkeit(List.of(pflegetatigkeitGrundFurDieTatigkeitElement));
         return pflegetatigkeitEvaluation;
     }
 
-
-    //TODO check again the conversation with alina
     private void checkPflegetatigkeitAusschluss() {
         if (pflegetatigkeitEvaluationQuestion.isPresent()) {
-            //       if (!pflegetatigkeitEvaluationQuestion.get().isPrivatValue() && !pflegetatigkeitEvaluationQuestion.get().isBeruflichValue()) {
             if (!pflegetatigkeitEvaluationQuestion.get().isPrivatValue() && !isProfessionalCareGiver()) {
                 pflegetatigkeitEvaluationQuestion = Optional.empty();
                 setAusschlussPflegetatigkeitEvaluation();
@@ -205,7 +199,6 @@ public class GeneralInformation extends QuestionnaireSection {
         }
     }
 
-    //TODO check if this is working
     private boolean isProfessionalCareGiver() {
         return zusammenfassungDerBeschaftigungEvaluationQuestion.get().getBeschaeftigung().getBerufsbereichDefiningCode().equals(BerufsbereichDefiningCode.MEDIZINISCHEN_BEREICH_PFLEGE_ARZTPRAXIS_ODER_KRANKENHAUS);
     }
@@ -310,12 +303,5 @@ public class GeneralInformation extends QuestionnaireSection {
         schwangerschaftsstatusObservationQuestion.ifPresent(d4LQuestionnaireComposition::setSchwangerschaftsstatus);
         contactWithInfectedQuestion.ifPresent(d4LQuestionnaireComposition::setKontakt);
     }
-
-    //FIXME find a solution
-    @Override
-    public Object toComposition() {
-        return new Object();
-    }
-
 
 }

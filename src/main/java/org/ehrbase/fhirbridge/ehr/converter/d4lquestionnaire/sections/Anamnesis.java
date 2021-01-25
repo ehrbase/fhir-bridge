@@ -129,11 +129,6 @@ public class Anamnesis extends QuestionnaireSection {
         }
     }
 
-    //FIXME
-    @Override
-    public Object toComposition() {
-        return new Object();
-    }
 
     public void setVorUndGrunderkrankungen(D4LQuestionnaireComposition d4LQuestionnaireComposition) {
         chronischeLungenkrankheitEvaluationQuestion.ifPresent(d4LQuestionnaireComposition::setChronischeLungenkrankheit);

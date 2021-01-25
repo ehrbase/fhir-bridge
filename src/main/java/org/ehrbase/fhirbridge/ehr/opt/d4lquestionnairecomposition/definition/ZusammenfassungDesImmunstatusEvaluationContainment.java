@@ -26,9 +26,9 @@ public class ZusammenfassungDesImmunstatusEvaluationContainment extends Containm
 
   public SelectAqlField<NullFlavour> IMMUNSSTATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ZusammenfassungDesImmunstatusEvaluation.class, "/data[at0001]/items[at0010]/null_flavour|defining_code", "immunsstatusNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<AelterOderGleich65JahreAltDefiningCode> HABEN_SIE_SICH_IM_ZEITRAUM_VOM1_OKTOBER2020_BIS_HEUTE_GEGEN_GRIPPE_IMPFEN_LASSEN_DEFINING_CODE = new AqlFieldImp<AelterOderGleich65JahreAltDefiningCode>(ZusammenfassungDesImmunstatusEvaluation.class, "/data[at0001]/items[at0016]/value|defining_code", "habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode", AelterOderGleich65JahreAltDefiningCode.class, this);
+  public SelectAqlField<AelterOderGleich65JahreAltDefiningCode> HABEN_SIE_SICH_IM_ZEITRAUM_VOM1_OKTOBER2019_BIS_HEUTE_GEGEN_GRIPPE_IMPFEN_LASSEN_DEFINING_CODE = new AqlFieldImp<AelterOderGleich65JahreAltDefiningCode>(ZusammenfassungDesImmunstatusEvaluation.class, "/data[at0001]/items[at0016]/value|defining_code", "habenSieSichImZeitraumVom1Oktober2019BisHeuteGegenGrippeImpfenLassenDefiningCode", AelterOderGleich65JahreAltDefiningCode.class, this);
 
-  public SelectAqlField<NullFlavour> HABEN_SIE_SICH_IM_ZEITRAUM_VOM1_OKTOBER2020_BIS_HEUTE_GEGEN_GRIPPE_IMPFEN_LASSEN_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ZusammenfassungDesImmunstatusEvaluation.class, "/data[at0001]/items[at0016]/null_flavour|defining_code", "habenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode", NullFlavour.class, this);
+  public SelectAqlField<NullFlavour> HABEN_SIE_SICH_IM_ZEITRAUM_VOM1_OKTOBER2019_BIS_HEUTE_GEGEN_GRIPPE_IMPFEN_LASSEN_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ZusammenfassungDesImmunstatusEvaluation.class, "/data[at0001]/items[at0016]/null_flavour|defining_code", "habenSieSichImZeitraumVom1Oktober2019BisHeuteGegenGrippeImpfenLassenNullFlavourDefiningCode", NullFlavour.class, this);
 
   public SelectAqlField<ItemTree> TREE = new AqlFieldImp<ItemTree>(ZusammenfassungDesImmunstatusEvaluation.class, "/protocol[at0013]", "tree", ItemTree.class, this);
 

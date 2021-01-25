@@ -22,7 +22,7 @@ public abstract class QuestionnaireSection {
         try {
             code = Optional.of(value.getAnswer().get(0).getValueCoding().getCode());
             return code;
-        } catch (NullPointerException | FHIRException e) { //TODO fix to support every value (at the moment only codes or empty)
+        } catch (NullPointerException | FHIRException e) {
             return Optional.empty();
         }
     }
@@ -53,6 +53,5 @@ public abstract class QuestionnaireSection {
 
     public abstract void map(List<QuestionnaireResponse.QuestionnaireResponseItemComponent> item);
 
-    public abstract Object toComposition();
 
 }
