@@ -107,7 +107,7 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
     @Test
     void createMediactionInvalidLinkId() throws IOException {
         Exception exception = executeMappingUnprocessableEntityException(loadQuestionnaireResponse("medication-invalid-linkid.json"));
-        assertEquals("\"LA31233-6\" cannot be mapped to boolean, has to be either LA33-6 or LA33-8", exception.getMessage());
+        assertEquals("LinkId M9 undefined", exception.getMessage());
     }
 
 
