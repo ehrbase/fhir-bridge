@@ -30,6 +30,10 @@ import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+/**
+ * @deprecated use {@link org.hl7.fhir.common.hapi.validation.support.RemoteTerminologyServiceValidationSupport}
+ */
+@Deprecated
 public class TerminologyServerValidationSupport extends BaseValidationSupport implements MessageSourceAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(TerminologyServerValidationSupport.class);

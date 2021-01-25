@@ -1,0 +1,64 @@
+{
+    "resourceType": "Observation",
+    "id": "89bcdfdc-59ba-4eec-a09d-7a74a1a5489c",
+    "meta": {
+      "profile": [
+        "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"
+      ]
+    },
+    "identifier": [
+      {
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "OBI"
+            }
+          ]
+        },
+        "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+        "value": "2519-7_lactate-moles-per-volume-in-venous-blood",
+        "assigner": {
+          "reference": "Organization/Charité"
+        }
+      }
+    ],
+    "status": "final",
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "26436-6"
+          },
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code": "laboratory"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "2519-7",
+          "display": "Lactate [Moles/volume] in Venous blood"
+        }
+      ],
+      "text": "Lactate"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "effectiveDateTime": "2020-10-16T08:49:21+02:00",
+    "valueQuantity": {
+      "value": 2,
+      "unit": "mmol/L",
+      "system": "http://unitsofmeasure.org",
+      "code": "mmol/L"
+    }
+  }
