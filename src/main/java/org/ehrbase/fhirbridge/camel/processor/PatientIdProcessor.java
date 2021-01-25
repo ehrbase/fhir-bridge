@@ -133,7 +133,7 @@ public class PatientIdProcessor implements Processor, MessageSourceAware {
         DvText dvText = new DvText("any EHR status");
         EhrStatus ehrStatus = new EhrStatus("openEHR-EHR-ITEM_TREE.generic.v1", dvText, subject ,true, true, null);
         UUID ehrId = openEhrClient.ehrEndpoint().createEhr(ehrStatus);
-        System.out.println("EhrID: " + ehrId.toString());
+    //    System.out.println("EhrID: " + ehrId.toString());
         return genericId.getValue();
     }
 

@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.api.MethodOutcome;
+import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
@@ -13,6 +14,7 @@ import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
 import org.javers.core.metamodel.clazz.ValueObjectDefinition;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
@@ -37,6 +39,16 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
 
         assertNotNull(outcome.getId());
         assertEquals(true, outcome.getCreated());
+    }
+
+
+    @Test
+    void createInvalid() throws IOException {
+        String resource = IOUtils.toString(new ClassPathResource("QuestionnaireResponse/create-invalid.json").getInputStream(), StandardCharsets.UTF_8);
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
+        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+
+        assertEquals("HTTP 422 : QuestionnaireResponse.status: minimum required = 1, but only found 0 (from http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse)", exception.getMessage());
     }
 
     // ------ Anamnesis ------
@@ -181,15 +193,5 @@ class QuestionnaireResponseIT extends AbstractSetupIT {
                 .registerValueObject(GeschmacksUndOderGeruchsverlustCluster.class)
                 .build();
     }
-
-
-/*    @Test
-    void createInvalid() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("QuestionnaireResponse/create-invalid.json").getInputStream(), StandardCharsets.UTF_8);
-        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
-
-        assertEquals("HTTP 422 : QuestionnaireResponse.status: minimum required = 1, but only found 0 (from http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse)", exception.getMessage());
-    }*/
 
 }

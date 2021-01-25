@@ -164,7 +164,6 @@ public class Symptoms extends QuestionnaireSection {
     }
 
     private SchweregradDefiningCode parseStringToSchweregrad(String schweregrad) {
-        //TODO 38 degree and 42 is missing
         if (schweregrad.equals(SchweregradDefiningCode.N38_C.getCode())) {
             return SchweregradDefiningCode.N38_C;
         } else if (schweregrad.equals(SchweregradDefiningCode.N39_C.getCode())) {
@@ -271,8 +270,7 @@ public class Symptoms extends QuestionnaireSection {
         problemDiagnoseEvaluationQuestion = Optional.of(problemDiagnoseEvaluation);
     }
 
-    @Override
-    public List<ProblemDiagnoseEvaluation> toComposition() {
+    public List<ProblemDiagnoseEvaluation> getProblemDiagnose() {
         List<ProblemDiagnoseEvaluation> problemDiagnoseEvaluationList = new ArrayList<>();
         problemDiagnoseEvaluationQuestion.ifPresent(problemDiagnoseEvaluationList::add);
         return problemDiagnoseEvaluationList;

@@ -16,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.living_arrangement.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-13T15:23:34.560775+01:00",
+    date = "2021-01-25T13:06:40.787045+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class WohnsituationEvaluation implements EntryEntity {

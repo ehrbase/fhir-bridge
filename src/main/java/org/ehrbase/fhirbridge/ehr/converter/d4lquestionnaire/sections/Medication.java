@@ -92,24 +92,15 @@ public class Medication extends QuestionnaireSection {
         zusammenfassungDesImmunstatusEvaluation.setInfektionskrankheitOderErregerValue("Grippe");
         zusammenfassungDesImmunstatusEvaluation.setLanguage(Language.DE);
         zusammenfassungDesImmunstatusEvaluation.setSubject(new PartySelf());
-        //TODO Datum der letzten Auffrischung was damit machen ?
-
 
         if(wasVaccinatedFlu){
-            zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
+            zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1Oktober2019BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
             zusammenfassungDesImmunstatusEvaluation.setImmunsstatusDefiningCode(ImmunsstatusDefiningCode.IMPFSTATUS_IST_AKUTELL);
         }else{
-            zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1Oktober2020BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
+            zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1Oktober2019BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
             zusammenfassungDesImmunstatusEvaluation.setImmunsstatusDefiningCode(ImmunsstatusDefiningCode.IMPFSTATUS_IST_NICHT_AKUTELL);
         }
         zusammenfassungDesImmunstatusEvaluationQuestion = Optional.of(zusammenfassungDesImmunstatusEvaluation);
-    }
-
-
-    //FIXME
-    @Override
-    public Object toComposition() {
-        return new Object();
     }
 
     public void setMedikamenteImpfungen(D4LQuestionnaireComposition d4LQuestionnaireComposition) {

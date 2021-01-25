@@ -16,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.symptom_sign.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-13T15:23:34.762452+01:00",
+    date = "2021-01-25T13:06:40.984138+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class SchuettelfrostInDenLetzten24StundenCluster implements LocatableEntity {
