@@ -48,7 +48,10 @@ public class AuditCreateResourceProcessor implements Processor {
         }
 
         auditEvent.setSource(source());
-        auditEvent.addEntity(entity(exchange));
+        if (extractMethodOutcome(exchange) != null) {
+            auditEvent.addEntity(entity(exchange));
+        }
+
         auditEventDao.create(auditEvent);
     }
 
@@ -64,8 +67,8 @@ public class AuditCreateResourceProcessor implements Processor {
     }
 
     private AuditEvent.AuditEventEntityComponent entity(Exchange exchange) {
-        MethodOutcome methodOutcome = exchange.getIn().getHeader(FhirBridgeConstants.METHOD_OUTCOME, MethodOutcome.class);
-        RequestDetails requestDetails = exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
+        MethodOutcome methodOutcome = extractMethodOutcome(exchange);
+        RequestDetails requestDetails = extractRequestDetails(exchange);
 
         return new AuditEvent.AuditEventEntityComponent()
                 .setWhat(new Reference(methodOutcome.getId()))
@@ -73,5 +76,13 @@ public class AuditCreateResourceProcessor implements Processor {
                         .setSystem("http://hl7.org/fhir/resource-types")
                         .setCode(requestDetails.getResourceName())
                         .setDisplay(requestDetails.getResourceName()));
+    }
+
+    private MethodOutcome extractMethodOutcome(Exchange exchange) {
+        return exchange.getIn().getHeader(FhirBridgeConstants.METHOD_OUTCOME, MethodOutcome.class);
+    }
+
+    private RequestDetails extractRequestDetails(Exchange exchange) {
+        return exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
     }
 }
