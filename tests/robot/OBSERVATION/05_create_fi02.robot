@@ -179,7 +179,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 005 Create FiO2 (Invalid/Missing 'meta') - BUG TRACE TEST
 	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
 	[Template]			Create FiO2 with ehr reference
-	[Tags]				TODO: ADD GITHUB ISSUE    not-ready
+	[Tags]				TODO: ADD GITHUB ISSUE    not-ready    bug
 	# NOT-READY, RETURNS --> ERROR 500
 	# comment: sets value to an array with empty object
 	$.meta.profile		${{ [{}] }}					422    	This property should contain list of strings
@@ -260,7 +260,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 007 Create FiO2 (Invalid/Missing 'category') - BUG TRACE TEST
 	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
 	[Template]			Create FiO2 with ehr reference
-	[Tags]				TODO: ADD GITHUB ISSUE    not-ready
+	[Tags]				TODO: ADD GITHUB ISSUE    not-ready    bug
 	#														HTTP	
 	# FIELD/PATH 						VALUE				CODE	ERROR MESSAGE
 	# comment: category:blood-gas-studies

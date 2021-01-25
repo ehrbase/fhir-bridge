@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.camel.component.ehr.composition;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.impl.DefaultProducer;
+import org.apache.camel.support.DefaultProducer;
 import org.ehrbase.fhirbridge.ehr.Composition;
 
 import java.util.UUID;

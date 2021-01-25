@@ -1,0 +1,64 @@
+{
+    "resourceType": "Observation",
+    "id": "372f64fa-9cfe-4498-9200-9e36e4bba1f1",
+    "meta": {
+      "profile": [
+        "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"
+      ]
+    },
+    "identifier": [
+      {
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "OBI"
+            }
+          ]
+        },
+        "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+        "value": "48066-5_fibrin-d-dimer-ddu-mass-per-volume-in-platelet-poor-plasma",
+        "assigner": {
+          "reference": "Organization/Charité"
+        }
+      }
+    ],
+    "status": "final",
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "26436-6"
+          },
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code": "laboratory"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "48066-5",
+          "display": "Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma"
+        }
+      ],
+      "text": "D-dimer"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "effectiveDateTime": "2020-10-16T08:49:21+02:00",
+    "valueQuantity": {
+      "value": 390,
+      "unit": "ug/L{DDU}",
+      "system": "http://unitsofmeasure.org",
+      "code": "ug/L{DDU}"
+    }
+  }
