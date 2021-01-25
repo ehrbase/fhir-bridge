@@ -152,6 +152,12 @@ class ConditionIT extends AbstractSetupIT {
     }
 
     @Test
+    void createDiagnoseDependenceOnVentilator() throws IOException {
+        create("Condition/dependence-on-ventilator.json");
+        create("Condition/dependence-on-ventilator-2.json");
+    }
+
+    @Test
     void searchBySubject() throws IOException {
         createDefault();
 
