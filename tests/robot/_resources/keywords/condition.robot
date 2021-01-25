@@ -124,6 +124,25 @@ create cardiovascular diseases
     POST /Condition with ehr reference    ${text}    ${example_json}
 
 
+create human immunodeciency virus infection
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
+create gastrointestinal ulcer
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
+create history of organ recipient
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
+create complications of covid-19
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
 #                                   .                    
 #                                 .o8                    
 # oo.ooooo.   .ooooo.   .oooo.o .o888oo                  

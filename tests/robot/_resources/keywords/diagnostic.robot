@@ -72,9 +72,8 @@ create diagnostic report
 
 
 create diagnostic report radiology
-    [Arguments]         ${example_json}
-    POST /Diagnostic with ehr reference    Diagnostic Report Radiology    ${example_json}
-
+    [Arguments]         ${text}    ${example_json}
+    POST /Diagnostic with ehr reference    ${text}    ${example_json}
 
 
 #                                   .                    

@@ -1,0 +1,92 @@
+{
+    "resourceType": "Observation",
+    "id": "571c047d-3689-4fb7-9292-c1d71faecf72",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/interventional-clinical-trial-participation"
+      ]
+    },
+    "identifier": [
+      {
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+              "code": "OBI"
+            }
+          ]
+        },
+        "system": "https://www.charite.de/fhir/CodeSystem/observation-identifiers",
+        "value": "ecrf_03_InterventionalClinicalTrialsParticipation",
+        "assigner": {
+          "reference": "Organization/Charité"
+        }
+      }
+    ],
+    "status": "final",
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+            "code": "survey"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes",
+          "code": "03",
+          "display": "Participation in interventional clinical trials"
+        }
+      ],
+      "text": "Has the patient participated in one or more interventional clinical trials?"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "effectiveDateTime": "2020-10-16T08:49:21+02:00",
+    "valueCodeableConcept": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "373066001",
+          "display": "Yes (qualifier value)"
+        }
+      ],
+      "text": "Patient is enrolled in other studies"
+    },
+    "component": [
+      {
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes",
+              "code": "04",
+              "display": "EudraCT Number"
+            }
+          ],
+          "text": "EudraCT (European Union Drug Regulating Authorities Clinical Trials) registration number"
+        },
+        "valueString": "2020-042169-13"
+      },
+      {
+        "code": {
+          "coding": [
+            {
+              "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes",
+              "code": "05",
+              "display": "NCT number"
+            }
+          ],
+          "text": "A unique identification code given to each clinical study registered on ClinicalTrials.gov"
+        },
+        "valueString": "NCT00001016"
+      }
+    ]
+  }
