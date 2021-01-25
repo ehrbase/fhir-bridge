@@ -14,6 +14,7 @@ import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KategorieDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.StatusDefiningcode;
@@ -27,7 +28,7 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Template("GECCO_Diagnose")
-public class GECCODiagnoseComposition {
+public class GECCODiagnoseComposition implements Composition {
   @Id
   private VersionUid versionUid;
 
