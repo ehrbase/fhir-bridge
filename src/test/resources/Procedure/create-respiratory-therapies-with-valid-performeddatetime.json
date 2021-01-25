@@ -1,9 +1,9 @@
 {
     "resourceType": "Procedure",
-    "id": "1a596d5e-cf8c-4a67-a434-727c51350d5d",
+    "id": "7da8302b-b1b5-40bb-978e-210664998e18",
     "meta": {
       "profile": [
-        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/extracorporeal-membrane-oxygenation"
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"
       ]
     },
     "status": "in-progress",
@@ -20,11 +20,10 @@
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "233573008",
-          "display": "Extracorporeal membrane oxygenation (procedure)"
+          "code": "53950000",
+          "display": "Respiratory therapy (procedure)"
         }
-      ],
-      "text": "ECMO"
+      ]
     },
     "subject": {
         "identifier": {
@@ -32,12 +31,5 @@
           "value": "{{patientId}}"
         }
       },
-    "performedDateTime": {
-      "extension": [
-        {
-          "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
-          "valueCode": "unknown"
-        }
-      ]
-    }
+    "performedDateTime": "2020-09-21"
   }

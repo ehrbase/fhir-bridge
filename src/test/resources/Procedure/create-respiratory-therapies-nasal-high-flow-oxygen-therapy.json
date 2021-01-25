@@ -1,9 +1,9 @@
 {
     "resourceType": "Procedure",
-    "id": "1ea252e6-bfca-4520-bbd6-0be15222ced3",
+    "id": "ea6f5a49-ffc2-4b32-83e8-fcf82bc9abc2",
     "meta": {
       "profile": [
-        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position"
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"
       ]
     },
     "status": "in-progress",
@@ -11,8 +11,8 @@
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "225287004",
-          "display": "Procedures relating to positioning and support (procedure)"
+          "code": "277132007",
+          "display": "Therapeutic procedure (procedure)"
         }
       ]
     },
@@ -20,11 +20,11 @@
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "431182000",
-          "display": "Placing subject in prone position (procedure)"
+          "code": "371907003",
+          "display": "Oxygen administration by nasal cannula (procedure)"
         }
       ],
-      "text": "Prone position"
+      "text": "Nasal High-Flow-Oxygen-Therapy"
     },
     "subject": {
         "identifier": {
@@ -39,5 +39,16 @@
           "valueCode": "unknown"
         }
       ]
-    }
+    },
+    "usedCode": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "426854004",
+            "display": "High flow oxygen nasal cannula (physical object)"
+          }
+        ]
+      }
+    ]
   }

@@ -1,18 +1,18 @@
 {
     "resourceType": "Procedure",
-    "id": "1ea252e6-bfca-4520-bbd6-0be15222ced3",
+    "id": "b04e07b7-464f-4f13-a6a2-5f3304156c5c",
     "meta": {
       "profile": [
-        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position"
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"
       ]
     },
-    "status": "in-progress",
+    "status": "unknown",
     "category": {
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "225287004",
-          "display": "Procedures relating to positioning and support (procedure)"
+          "code": "277132007",
+          "display": "Therapeutic procedure (procedure)"
         }
       ]
     },
@@ -20,11 +20,10 @@
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "431182000",
-          "display": "Placing subject in prone position (procedure)"
+          "code": "53950000",
+          "display": "Respiratory therapy (procedure)"
         }
-      ],
-      "text": "Prone position"
+      ]
     },
     "subject": {
         "identifier": {

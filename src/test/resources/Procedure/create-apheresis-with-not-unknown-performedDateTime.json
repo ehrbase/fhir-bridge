@@ -1,18 +1,18 @@
 {
     "resourceType": "Procedure",
-    "id": "1ea252e6-bfca-4520-bbd6-0be15222ced3",
+    "id": "b60e7e62-87a5-406c-93ed-c8ce7706757b",
     "meta": {
       "profile": [
-        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position"
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis"
       ]
     },
-    "status": "in-progress",
+    "status": "completed",
     "category": {
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "225287004",
-          "display": "Procedures relating to positioning and support (procedure)"
+          "code": "277132007",
+          "display": "Therapeutic procedure (procedure)"
         }
       ]
     },
@@ -20,11 +20,11 @@
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "431182000",
-          "display": "Placing subject in prone position (procedure)"
+          "code": "127788007",
+          "display": "Apheresis (procedure)"
         }
       ],
-      "text": "Prone position"
+      "text": "Apheresis"
     },
     "subject": {
         "identifier": {

@@ -1,9 +1,9 @@
 {
     "resourceType": "Procedure",
-    "id": "1ea252e6-bfca-4520-bbd6-0be15222ced3",
+    "id": "c01d0750-4cc2-4a0b-a1b1-faf08d9fdd7f",
     "meta": {
       "profile": [
-        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position"
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"
       ]
     },
     "status": "in-progress",
@@ -11,8 +11,8 @@
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "225287004",
-          "display": "Procedures relating to positioning and support (procedure)"
+          "code": "277132007",
+          "display": "Therapeutic procedure (procedure)"
         }
       ]
     },
@@ -20,11 +20,11 @@
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "431182000",
-          "display": "Placing subject in prone position (procedure)"
+          "code": "40617009",
+          "display": "Artificial respiration (procedure)"
         }
       ],
-      "text": "Prone position"
+      "text": "Invasive ventilation (orotracheal)"
     },
     "subject": {
         "identifier": {
@@ -39,5 +39,16 @@
           "valueCode": "unknown"
         }
       ]
-    }
+    },
+    "usedCode": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "26412008",
+            "display": "Endotracheal tube, device (physical object)"
+          }
+        ]
+      }
+    ]
   }
