@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.generic.PartyProxy;
-import java.lang.String;
 import java.util.List;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
@@ -18,8 +17,8 @@ public class UnbekannteDiagnoseEvaluation {
   @Path("/subject")
   private PartyProxy subject;
 
-  @Path("/data[at0001]/items[at0002]/value|value")
-  private String unbekannteDiagnoseValue;
+  @Path("/data[at0001]/items[at0002]/value|defining_code")
+  private ProblemDiagnoseDefiningcode unbekannteDiagnoseDefiningcode;
 
   @Path("/protocol[at0003]/items[at0006]")
   private List<Cluster> erweiterung;
@@ -45,12 +44,13 @@ public class UnbekannteDiagnoseEvaluation {
      return this.subject ;
   }
 
-  public void setUnbekannteDiagnoseValue(String unbekannteDiagnoseValue) {
-     this.unbekannteDiagnoseValue = unbekannteDiagnoseValue;
+  public void setUnbekannteDiagnoseDefiningcode(
+      ProblemDiagnoseDefiningcode unbekannteDiagnoseDefiningcode) {
+     this.unbekannteDiagnoseDefiningcode = unbekannteDiagnoseDefiningcode;
   }
 
-  public String getUnbekannteDiagnoseValue() {
-     return this.unbekannteDiagnoseValue ;
+  public ProblemDiagnoseDefiningcode getUnbekannteDiagnoseDefiningcode() {
+     return this.unbekannteDiagnoseDefiningcode ;
   }
 
   public void setErweiterung(List<Cluster> erweiterung) {

@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.generic.PartyProxy;
-import java.lang.String;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
 import org.ehrbase.client.aql.field.ListAqlFieldImp;
@@ -15,7 +14,7 @@ public class AusgeschlosseneDiagnoseEvaluationContainment extends Containment {
 
   public ListSelectAqlField<Cluster> ERWEITERUNG = new ListAqlFieldImp<Cluster>(AusgeschlosseneDiagnoseEvaluation.class, "/protocol[at0009]/items[at0011]", "erweiterung", Cluster.class, this);
 
-  public SelectAqlField<String> PROBLEM_DIAGNOSE_VALUE = new AqlFieldImp<String>(AusgeschlosseneDiagnoseEvaluation.class, "/data[at0001]/items[at0003]/value|value", "problemDiagnoseValue", String.class, this);
+  public SelectAqlField<ProblemDiagnoseDefiningcode> PROBLEM_DIAGNOSE_DEFININGCODE = new AqlFieldImp<ProblemDiagnoseDefiningcode>(AusgeschlosseneDiagnoseEvaluation.class, "/data[at0001]/items[at0003]/value|defining_code", "problemDiagnoseDefiningcode", ProblemDiagnoseDefiningcode.class, this);
 
   public SelectAqlField<PartyProxy> SUBJECT = new AqlFieldImp<PartyProxy>(AusgeschlosseneDiagnoseEvaluation.class, "/subject", "subject", PartyProxy.class, this);
 

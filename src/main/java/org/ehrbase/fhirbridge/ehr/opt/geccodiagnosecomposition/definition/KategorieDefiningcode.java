@@ -4,33 +4,33 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum KategorieDefiningcode implements EnumValueSet {
-  N116223007("116223007", "116223007", "SNOMED Clinical Terms", "116223007"),
+  PULMONARYMEDICINE("pulmonaryMedicine", null, "SNOMED Clinical Terms", "418112009"),
 
-  N418112009("418112009", "418112009", "SNOMED Clinical Terms", "418112009"),
+  TRANSPLANT_MEDICINE("Transplant medicine", null, "SNOMED Clinical Terms", "788415003"),
 
-  N394584008("394584008", "394584008", "SNOMED Clinical Terms", "394584008"),
+  PSYCHIATRY("Psychiatry", null, "SNOMED Clinical Terms", "394587001"),
 
-  N394591006("394591006", "394591006", "SNOMED Clinical Terms", "394591006"),
+  DIABETIC_MEDICINE("Diabetic Medicine", null, "SNOMED Clinical Terms", "408475000"),
 
-  N394589003("394589003", "394589003", "SNOMED Clinical Terms", "394589003"),
+  RHEUMATOLOTY("rheumatoloty", null, "SNOMED Clinical Terms", "394810000"),
 
-  N408480009("408480009", "408480009", "SNOMED Clinical Terms", "408480009"),
+  INFECTIOUSDISEASES("infectiousDiseases", null, "SNOMED Clinical Terms", "394807007"),
 
-  N394807007("394807007", "394807007", "SNOMED Clinical Terms", "394807007"),
+  IMMUNOLOGY("immunology", null, "SNOMED Clinical Terms", "408480009"),
 
-  N394593009("394593009", "394593009", "SNOMED Clinical Terms", "394593009"),
+  NEUROLOGY("Neurology", null, "SNOMED Clinical Terms", "394591006"),
 
-  N722414000("722414000", "722414000", "SNOMED Clinical Terms", "722414000"),
+  VASCULARMEDICINE("vascularMedicine", null, "SNOMED Clinical Terms", "722414000"),
 
-  N408475000("408475000", "408475000", "SNOMED Clinical Terms", "408475000"),
+  NEPHROLOGY_QUALIFIER_VALUE("Nephrology (qualifier value)", null, "SNOMED Clinical Terms", "394589003"),
 
-  N788415003("788415003", "788415003", "SNOMED Clinical Terms", "788415003"),
+  COMPLICATION_DISORDER("Complication (disorder)", null, "SNOMED Clinical Terms", "116223007"),
 
-  N394587001("394587001", "394587001", "SNOMED Clinical Terms", "394587001"),
+  HEPATOLOGY("hepatology", null, "SNOMED Clinical Terms", "408472002"),
 
-  N408472002("408472002", "408472002", "SNOMED Clinical Terms", "408472002"),
+  ONCOLOGY("Oncology", null, "SNOMED Clinical Terms", "394593009"),
 
-  N394810000("394810000", "394810000", "SNOMED Clinical Terms", "394810000");
+  GASTROENTEROLOGY("Gastroenterology", null, "SNOMED Clinical Terms", "394584008");
 
   private String value;
 

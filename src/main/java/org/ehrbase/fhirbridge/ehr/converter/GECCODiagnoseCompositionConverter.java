@@ -5,16 +5,7 @@ import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.ProblemDiagnoseDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KategorieDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.SchweregradDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.NameDerKorperstelleDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.UnbekannteDiagnoseEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KorperstelleCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AussageUberDenAusschlussDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AussageUberDieFehlendeInformationDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.*;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
@@ -35,13 +26,13 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
 
     private static final Map<String, KategorieDefiningcode> kategorieMap = new HashMap<>();
     private static final Map<String, ProblemDiagnoseDefiningcode> problemDiagnoseMap = new HashMap<>();
+    private static final Map<String, NameDesProblemsDerDiagnoseDefiningcode> nameDesProblemDiagnoseMap = new HashMap<>();
     private static final Map<String, NameDerKorperstelleDefiningcode> koerperstelleMap = new HashMap<>();
     private static final Map<String, SchweregradDefiningcode> schweregradMap = new HashMap<>();
 
     private static String VERIFICATION_STATUS_PRESENT_CODE = "410605003";
     private static String VERIFICATION_STATUS_ABSENT_CODE = "410594000";
 
-    //TODO: ICD CODES
     private static String SNOMED_SYSTEM = "http://snomed.info/sct";
 
 
@@ -52,6 +43,10 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
 
         for (ProblemDiagnoseDefiningcode problem : ProblemDiagnoseDefiningcode.values()) {
             problemDiagnoseMap.put(problem.getCode(), problem);
+        }
+
+        for (NameDesProblemsDerDiagnoseDefiningcode problem : NameDesProblemsDerDiagnoseDefiningcode.values()) {
+            nameDesProblemDiagnoseMap.put(problem.getCode(), problem);
         }
 
         for (NameDerKorperstelleDefiningcode korperstelle : NameDerKorperstelleDefiningcode.values()) {
@@ -122,12 +117,11 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
     private VorliegendeDiagnoseEvaluation toVorliegendeDiagnose(Condition condition) {
         VorliegendeDiagnoseEvaluation vorliegendeDiagnose = new VorliegendeDiagnoseEvaluation();
 
-
         // Map name des problems
         Coding problem = condition.getCode().getCoding().get(0);
         if (problem.getSystem().equals(SNOMED_SYSTEM) &&
                 problemDiagnoseMap.containsKey(problem.getCode())) {
-            vorliegendeDiagnose.setNameDesProblemsDerDiagnoseDefiningcode(problemDiagnoseMap.get(problem.getCode()));
+            vorliegendeDiagnose.setNameDesProblemsDerDiagnoseDefiningcode(nameDesProblemDiagnoseMap.get(problem.getCode()));
         }
 
 
@@ -209,7 +203,7 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
 
         AusgeschlosseneDiagnoseEvaluation ausgeschlosseneDiagnose = new AusgeschlosseneDiagnoseEvaluation();
 
-        ausgeschlosseneDiagnose.setAussageUberDenAusschlussDefiningcode(AussageUberDenAusschlussDefiningcode.N410594000);
+        ausgeschlosseneDiagnose.setAussageUberDenAusschlussDefiningcode(AussageUberDenAusschlussDefiningcode.KNOWN_ABSENT_QUALIFIER_VALUE);
 
         // Map problem
         Coding problem = condition.getCode().getCoding().get(0);

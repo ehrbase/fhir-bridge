@@ -28,7 +28,7 @@ public class VorliegendeDiagnoseEvaluationContainment extends Containment {
 
   public SelectAqlField<String> KOMMENTAR_VALUE = new AqlFieldImp<String>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0069]/value|value", "kommentarValue", String.class, this);
 
-  public SelectAqlField<String> NAME_DES_PROBLEMS_DER_DIAGNOSE_VALUE = new AqlFieldImp<String>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0002]/value|value", "nameDesProblemsDerDiagnoseValue", String.class, this);
+  public SelectAqlField<NameDesProblemsDerDiagnoseDefiningcode> NAME_DES_PROBLEMS_DER_DIAGNOSE_DEFININGCODE = new AqlFieldImp<NameDesProblemsDerDiagnoseDefiningcode>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0002]/value|defining_code", "nameDesProblemsDerDiagnoseDefiningcode", NameDesProblemsDerDiagnoseDefiningcode.class, this);
 
   public SelectAqlField<Language> LANGUAGE = new AqlFieldImp<Language>(VorliegendeDiagnoseEvaluation.class, "/language", "language", Language.class, this);
 

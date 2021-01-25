@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum ProblemDiagnoseDefiningcode implements EnumValueSet {
+public enum NameDesProblemsDerDiagnoseDefiningcode implements EnumValueSet {
   VORHANDENSEIN_EINES_AORTOKORONAREN_BYPASSES("Vorhandensein eines aortokoronaren Bypasses", null, "ICD", "Z95.1"),
 
   HERZINSUFFIZIENZ_NICHT_NAHER_BEZEICHNET("Herzinsuffizienz, nicht näher bezeichnet", null, "ICD", "I50.9"),
@@ -42,15 +42,17 @@ public enum ProblemDiagnoseDefiningcode implements EnumValueSet {
 
   INFEKTIOSE_UND_PARASITARE_KRANKHEITEN_INFOLGE_HIV_KRANKHEIT_HUMANE_IMMUNDEFIZIENZ_VIRUSKRANKHEIT("Infektiöse und parasitäre Krankheiten infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]", null, "ICD", "B20"),
 
-  ESSENTIELLE_HYPERTONIE_NICHT_NAHER_BEZEICHNET_OHNE_ANGABE_EINER_HYPERTENSIVEN_KRISE("Essentielle Hypertonie, nicht näher bezeichnet :  Ohne Angabe einer hypertensiven Krise", null, "ICD", "I10.90"),
-
   ZUSTAND_NACH_HAMATOPOETISCHER_STAMMZELLTRANSPLANTATION_MIT_GEGENWARTIGER_IMMUNSUPPRESSION("Zustand nach hämatopoetischer Stammzelltransplantation mit gegenwärtiger Immunsuppression", null, "ICD", "Z94.81"),
 
   SEPSIS_NICHT_NAHER_BEZEICHNET("Sepsis, nicht näher bezeichnet", null, "ICD", "A41.9"),
 
   SCHLAGANFALL_NICHT_ALS_BLUTUNG_ODER_INFARKT_BEZEICHNET("Schlaganfall, nicht als Blutung oder Infarkt bezeichnet", null, "ICD", "I64"),
 
+  ESSENTIELLE_HYPERTONIE_NICHT_NAHER_BEZEICHNET_OHNE_ANGABE_EINER_HYPERTENSIVEN_KRISE("Essentielle Hypertonie, nicht näher bezeichnet : Ohne Angabe einer hypertensiven Krise", null, "ICD", "I10.90"),
+
   ZUSTAND_NACH_ORGAN_ODER_GEWEBETRANSPLANTATION_NICHT_NAHER_BEZEICHNET("Zustand nach Organ- oder Gewebetransplantation, nicht näher bezeichnet", null, "ICD", "Z94.9"),
+
+  ULCUS_PEPTICUM_JEJUNI_WEDER_ALS_AKUT_NOCH_ALS_CHRONISCH_BEZEICHNET_OHNE_BLUTUNG_ODER_PERFORATION("Ulcus pepticum jejuni : Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation", null, "ICD", "K28.9"),
 
   NICHT_NAHER_BEZEICHNETE_HIV_KRANKHEIT_HUMANE_IMMUNDEFIZIENZ_VIRUSKRANKHEIT("Nicht näher bezeichnete HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]", null, "ICD", "B24"),
 
@@ -66,8 +68,6 @@ public enum ProblemDiagnoseDefiningcode implements EnumValueSet {
 
   SONSTIGE_NAHER_BEZEICHNETE_KRANKHEITEN_INFOLGE_HIV_KRANKHEIT_HUMANE_IMMUNDEFIZIENZ_VIRUSKRANKHEIT("Sonstige näher bezeichnete Krankheiten infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]", null, "ICD", "B22"),
 
-  ULCUS_PEPTICUM_JEJUNI_WEDER_ALS_AKUT_NOCH_ALS_CHRONISCH_BEZEICHNET_OHNE_BLUTUNG_ODER_PERFORATION("Ulcus pepticum jejuni :  Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation", null, "ICD", "K28.9"),
-
   ZUSTAND_NACH_LUNGENTRANSPLANTATION("Zustand nach Lungentransplantation", null, "ICD", "Z94.2"),
 
   BOSARTIGE_NEUBILDUNGEN_INFOLGE_HIV_KRANKHEIT_HUMANE_IMMUNDEFIZIENZ_VIRUSKRANKHEIT("Bösartige Neubildungen infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]", null, "ICD", "B21");
@@ -80,7 +80,8 @@ public enum ProblemDiagnoseDefiningcode implements EnumValueSet {
 
   private String code;
 
-  ProblemDiagnoseDefiningcode(String value, String description, String terminologyId, String code) {
+  NameDesProblemsDerDiagnoseDefiningcode(String value, String description, String terminologyId,
+      String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;

@@ -4,23 +4,29 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum SchweregradDefiningcode implements EnumValueSet {
-  N442452003("442452003", "442452003", "SNOMED Clinical Terms", "442452003"),
+  FATAL_QUALIFIER_VALUE("Fatal (qualifier value)", null, "SNOMED Clinical Terms", "399166001"),
 
-  N371924009("371924009", "371924009", "SNOMED Clinical Terms", "371924009"),
+  LIFE_THREATENING_SEVERITY_QUALIFIER_VALUE("Life threatening severity (qualifier value)", null, "SNOMED Clinical Terms", "442452003"),
 
-  N261665006("261665006", "261665006", "SNOMED Clinical Terms", "261665006"),
+  SEVERE_SEVERITY_MODIFIER_QUALIFIER_VALUE("Severe (severity modifier) (qualifier value)", null, "SNOMED Clinical Terms", "24484000"),
 
-  N371923003("371923003", "371923003", "SNOMED Clinical Terms", "371923003"),
+  UNKNOWN_QUALIFIER_VALUE("Unknown (qualifier value)", null, "SNOMED Clinical Terms", "261665006"),
 
-  N399166001("399166001", "399166001", "SNOMED Clinical Terms", "399166001"),
+  SCHWER("Schwer", "Das Problem oder die Diagnose verhindert die normale Aktivität oder verursacht schwerwiegende gesundheitliche Schäden, falls es nicht behandelt wird.", "SNOMED Clinical Terms", "at0049"),
 
-  N24484000("24484000", "24484000", "SNOMED Clinical Terms", "24484000"),
+  MILD_QUALIFIER_VALUE("Mild (qualifier value)", null, "SNOMED Clinical Terms", "255604002"),
 
-  N255604002("255604002", "255604002", "SNOMED Clinical Terms", "255604002"),
+  MASSIG("Mäßig", "Das Problem oder die Diagnose beeinträchtigt die normale Aktivität oder verursacht bleibende gesundheitliche Schäden, falls es nicht behandelt wird.", "SNOMED Clinical Terms", "at0048"),
 
-  N6736007("6736007", "6736007", "SNOMED Clinical Terms", "6736007"),
+  LEICHT("Leicht", "Das Problem oder die Diagnose beeinträchtigt die normale Aktivität nicht, bzw. verursacht nicht bleibende gesundheitliche Schäden, falls es nicht behandelt wird.", "SNOMED Clinical Terms", "at0047"),
 
-  N277022003("277022003", "277022003", "SNOMED Clinical Terms", "277022003");
+  REMISSION_PHASE_QUALIFIER_VALUE("Remission phase (qualifier value)", null, "SNOMED Clinical Terms", "277022003"),
+
+  MODERATE_TO_SEVERE_QUALIFIER_VALUE("Moderate to severe (qualifier value)", null, "SNOMED Clinical Terms", "371924009"),
+
+  MODERATE_SEVERITY_MODIFIER_QUALIFIER_VALUE("Moderate (severity modifier) (qualifier value)", null, "SNOMED Clinical Terms", "6736007"),
+
+  MILD_TO_MODERATE_QUALIFIER_VALUE("Mild to moderate (qualifier value)", null, "SNOMED Clinical Terms", "371923003");
 
   private String value;
 
