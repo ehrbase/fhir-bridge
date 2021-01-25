@@ -23,7 +23,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
-...						author: Dave Petzold
+...						*Author:* Dave Petzold
 Force Tags              create    sofa-score    invalid
 
 
@@ -748,11 +748,11 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	[Tags]              DataAbsentReason    not-ready
+	[Tags]              DataAbsentReason    not-ready    bug
 
-	ehr.create new ehr    				  				000_ehr_status.json
-	create with DataAbsentReason		  				DataAbsentReason				create-sofa-score.json
-	validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	ehr.create new ehr    				  							000_ehr_status.json
+	create with DataAbsentReason		  							DataAbsentReason				create-sofa-score.json
+	observation.validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -967,7 +967,7 @@ ${randinteger}                  ${12345}
 BUG TRACE 01 Create Sofa Score (Invalid/Missing 'effectiveDateTime')
 	[Documentation]		Belongs to TC 008! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              effectiveDateTime    not-ready
+    [Tags]              effectiveDateTime    not-ready    bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -979,7 +979,7 @@ BUG TRACE 01 Create Sofa Score (Invalid/Missing 'effectiveDateTime')
 BUG TRACE 02 Create Sofa Score (Invalid/Missing 'component' for missing or empty ground attributes)
 	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept    not-ready    bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -996,7 +996,7 @@ BUG TRACE 02 Create Sofa Score (Invalid/Missing 'component' for missing or empty
 BUG TRACE 03 Create Sofa Score (Invalid/Missing 'component' for Array value 0)
 	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept    not-ready    bug
 
    #invalid component 0 code coding system
 	$.component[0].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.0..code.coding.0.
@@ -1013,7 +1013,7 @@ BUG TRACE 03 Create Sofa Score (Invalid/Missing 'component' for Array value 0)
 BUG TRACE 04 Create Sofa Score (Invalid/Missing 'component' for Array value 1)
 	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept    not-ready    bug
 
    #invalid component 1 code coding system
 	$.component[1].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.1..code.coding.0.
@@ -1030,7 +1030,7 @@ BUG TRACE 04 Create Sofa Score (Invalid/Missing 'component' for Array value 1)
 BUG TRACE 05 Create Sofa Score (Invalid/Missing 'component' for Array value 2)
 	[Documentation]		Belongs to TC 012! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept    not-ready    bug
 
    #invalid component 2 code coding system
 	$.component[2].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.2..code.coding.0.
@@ -1047,7 +1047,7 @@ BUG TRACE 05 Create Sofa Score (Invalid/Missing 'component' for Array value 2)
 BUG TRACE 06 Create Sofa Score (Invalid/Missing 'component' for Array value 3)
 	[Documentation]		Belongs to TC 013! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept    not-ready    bug
 
    #invalid component 3 code coding system
 	$.component[3].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.3..code.coding.0.
@@ -1064,7 +1064,7 @@ BUG TRACE 06 Create Sofa Score (Invalid/Missing 'component' for Array value 3)
 BUG TRACE 07 Create Sofa Score (Invalid/Missing 'component' for Array value 4)
 	[Documentation]		Belongs to TC 014! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept    not-ready    bug
 
    #invalid component 4 code coding system
 	$.component[4].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.4..code.coding.0.
@@ -1081,7 +1081,7 @@ BUG TRACE 07 Create Sofa Score (Invalid/Missing 'component' for Array value 4)
 BUG TRACE 08 Create Sofa Score (Invalid/Missing 'component' for Array value 5)
 	[Documentation]		Belongs to TC 015! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready
+    [Tags]              valueCodeableConcept    not-ready    bug
 
    #invalid component 5 code coding system
 	$.component[5].code.coding[0].system 						missing					422    	A code with no system has no defined meaning. A system should be provided																Observation.component.5..code.coding.0.
@@ -1180,7 +1180,7 @@ create sofa score JSON
 						...    update Component					${componentavailabe}							${componentCodeavailable}		${componentCodeCodingavailable}		${ComponentC0System}		${ComponentC0Code}		${componentvCCavailable}    ${componentvCCCodingavailable}    ${ComponentvCC0System}    ${ComponentvCC0Code}    AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    validate response - 422 (with error message NEW)									${http_status_code}    			${error_message}    				${location}
+                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    				${location}
 
 
 generate payload from example json with data absentreason

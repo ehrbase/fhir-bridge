@@ -30,6 +30,7 @@ Resource    ${EXECDIR}/robot/_resources/keywords/ehr.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/condition.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/diagnostic.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/immunization.robot
+Resource    ${EXECDIR}/robot/_resources/keywords/medicationstatement.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/observation.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/procedure.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/questionnaire.robot
@@ -39,13 +40,14 @@ Resource    ${EXECDIR}/robot/_resources/keywords/json-manipulation.robot
 
 *** Variables ***
 
-${BASE_URL}                     http://localhost:8888/fhir-bridge/fhir
-${EHRBASE_URL}                  http://localhost:8080/ehrbase/rest/openehr/v1
-${DATA_SET_PATH_CONDITION}      ${EXECDIR}/../src/test/resources/Condition
-${DATA_SET_PATH_DIAGNOSTIC}     ${EXECDIR}/../src/test/resources/DiagnosticReport
-${DATA_SET_PATH_IMMUNIZATION}   ${EXECDIR}/../src/test/resources/Immunization
-${DATA_SET_PATH_OBSERVATION}    ${EXECDIR}/../src/test/resources/Observation
-${DATA_SET_PATH_PROCEDURE}      ${EXECDIR}/../src/test/resources/Procedure
-${DATA_SET_PATH_QUESTIONAIRE}   ${EXECDIR}/../src/test/resources/QuestionnaireResponse
-${VALID EHR DATA SETS}          ${EXECDIR}/robot/_resources/test_data/ehr/valid
-${OUTPUT_LEVEL}                 verbose
+${BASE_URL}                             http://localhost:8888/fhir-bridge/fhir
+${EHRBASE_URL}                          http://localhost:8080/ehrbase/rest/openehr/v1
+${DATA_SET_PATH_CONDITION}              ${EXECDIR}/../src/test/resources/Condition
+${DATA_SET_PATH_DIAGNOSTIC}             ${EXECDIR}/../src/test/resources/DiagnosticReport
+${DATA_SET_PATH_MEDICATIONSTATEMENT}    ${EXECDIR}/../src/test/resources/MedicationStatement
+${DATA_SET_PATH_QUESTIONAIRE}           ${EXECDIR}/../src/test/resources/QuestionnaireResponse
+${DATA_SET_PATH_OBSERVATION}            ${EXECDIR}/../src/test/resources/Observation
+${DATA_SET_PATH_PROCEDURE}              ${EXECDIR}/../src/test/resources/Procedure
+${DATA_SET_PATH_QUESTIONAIRE}           ${EXECDIR}/../src/test/resources/QuestionnaireResponse
+${VALID EHR DATA SETS}                  ${EXECDIR}/robot/_resources/test_data/ehr/valid
+${OUTPUT_LEVEL}                         verbose

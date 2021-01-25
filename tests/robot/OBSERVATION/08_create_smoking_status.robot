@@ -22,7 +22,8 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 Documentation           *NOTE:* use Regular Expressions to replace braces () as described here:
-...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example
+...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
+...						*Author:* Dave Petzold
 Force Tags              create    smoking-status    invalid
 
 
@@ -43,9 +44,7 @@ ${randinteger}                  ${12345}
     ...                 3. *POST* example JSON to observation endpoint \n\n
 	...                 4. *VALIDATE* the response status \n\n
     ...                 5. *VALIDATE* outcome against diagnostic text & location
-
 	[Template]			create smoking status w/o ehr reference
-
 	[Tags]              subject
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
@@ -351,9 +350,9 @@ ${randinteger}                  ${12345}
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Tags]              DataAbsentReason
 
-	ehr.create new ehr    				  				000_ehr_status.json
-	create with DataAbsentReason		  				DataAbsentReason				create-smoking-status.json
-	validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	ehr.create new ehr    				  							000_ehr_status.json
+	create with DataAbsentReason		  							DataAbsentReason				create-smoking-status.json
+	observation.validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -463,7 +462,7 @@ ${randinteger}                  ${12345}
 BUG TRACE 01 Create smoking status (Invalid/Missing 'category')
 	[Documentation]		Belongs to TC 006! Remove separation when it's fixed!
 	[Template]			create smoking status with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -482,7 +481,7 @@ BUG TRACE 01 Create smoking status (Invalid/Missing 'category')
 BUG TRACE 02 Create smoking status (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
 	[Template]			create smoking status with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
@@ -577,7 +576,7 @@ create Smoking Status JSON
 						...    update vCC						${vCCavailabe}									${vCCCodingavailable}			${vCC0System}				${vCC0Code}				${vCC0Display}		AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    validate response - 422 (with error message NEW)									${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason
