@@ -1300,7 +1300,7 @@
                 "_type": "ELEMENT",
                 "name": {
                   "_type": "DV_TEXT",
-                  "value": "Haben Sie sich im Zeitraum vom 1. Oktober 2020 bis heute gegen Grippe impfen lassen?"
+                  "value": "Haben Sie sich im Zeitraum vom 1. Oktober 2019 bis heute gegen Grippe impfen lassen?"
                 },
                 "value": {
                   "_type": "DV_CODED_TEXT",
