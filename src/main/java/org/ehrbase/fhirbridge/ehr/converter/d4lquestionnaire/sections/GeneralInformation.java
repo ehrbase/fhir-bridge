@@ -77,7 +77,7 @@ public class GeneralInformation extends QuestionnaireSection {
                 mapAge(getQuestionValueCodeToString(question));
                 break;
             case P1:
-                // mapAgeOver60(getQuestionValueCodeToString(question));
+                mapAgeOver60(getQuestionLoincYesNoToBoolean(question));
                 break;
             case P2:
                 mapWohnsituationEvaluation(getQuestionValueCodeToString(question));
@@ -100,13 +100,30 @@ public class GeneralInformation extends QuestionnaireSection {
         }
     }
 
+    private AlterObservation getAlterObservation(){
+        if(alterObservationQuestion.isEmpty()){
+            AlterObservation alterObservation = new AlterObservation();
+            alterObservation.setLanguage(Language.DE);
+            alterObservation.setSubject(new PartySelf());
+            alterObservation.setTimeValue(super.authored);
+            alterObservation.setOriginValue(super.authored);
+            return alterObservation;
+        }else{
+            return alterObservationQuestion.get();
+        }
+    }
+
+    private void mapAgeOver60(Boolean over60) {
+        AlterObservation alterObservation = getAlterObservation();
+        if (over60) {
+            alterObservation.setAelterOderGleich65JahreAltDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
+        } else {
+            alterObservation.setAelterOderGleich65JahreAltDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
+        }
+    }
 
     protected void mapAge(String age) {
-        AlterObservation alterObservation = new AlterObservation();
-        alterObservation.setLanguage(Language.DE);
-        alterObservation.setSubject(new PartySelf());
-        alterObservation.setTimeValue(super.authored);
-        alterObservation.setOriginValue(super.authored);
+        AlterObservation alterObservation = getAlterObservation();
         if (age.equals(AltersklasseDefiningCode.JUENGER_ALS40.getCode())) {
             alterObservation.setAltersklasseDefiningCode(AltersklasseDefiningCode.JUENGER_ALS40);
         } else if (age.equals(AltersklasseDefiningCode.N6170.getCode())) {

@@ -207,6 +207,24 @@
                       "_type": "ELEMENT",
                       "name": {
                         "_type": "DV_TEXT",
+                        "value": "Älter oder gleich 65 Jahre alt?"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Ja",
+                        "defining_code": {
+                          "terminology_id": {
+                            "value": "LOINC"
+                          },
+                          "code_string": "LA33-6"
+                        }
+                      },
+                      "archetype_node_id": "at0006"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
                         "value": "Altersklasse"
                       },
                       "value": {
@@ -1322,6 +1340,5 @@
       ],
       "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
     }
-  ],
-  "archetype_node_id": "openEHR-EHR-COMPOSITION.self_monitoring.v0"
+  ]
 }
