@@ -13,10 +13,11 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComp
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KeineReisehistorieEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ProblemDiagnoseDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
@@ -107,7 +108,7 @@ public class TravelHistoryCompositionConverter implements CompositionConverter<R
             } else if (code.equals(snomed_no)) {
                 return map_no(observation, AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE);
             } else if (code.equals(snomed_unknown)) {
-                return map_unknown(observation, AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE) ;
+                return map_unknown(observation, AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
             } else {
                 throw new UnprocessableEntityException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
             }
@@ -124,7 +125,7 @@ public class TravelHistoryCompositionConverter implements CompositionConverter<R
     private static final String snomed_unknown = "261665006";
 
     private static String getSnomedCodeObservation(Observation fhirObservation) {
-        return  fhirObservation.getValueCodeableConcept().getCoding().get(0).getCode();
+        return fhirObservation.getValueCodeableConcept().getCoding().get(0).getCode();
     }
     //###################################################################################
 
@@ -168,53 +169,61 @@ public class TravelHistoryCompositionConverter implements CompositionConverter<R
 
     private ReisehistorieAdminEntry mapInternalEvents(ReisehistorieAdminEntry adminentry, Observation observation) {
 
-        for (int i = 0; i < observation.getComponent().size(); i++) {
-            Observation.ObservationComponentComponent codingObject = getCodingObject(observation, i);
-            //adminentry = mapTravelDestination(adminentry, codingObject);
+//        for (int i = 0; i < observation.getComponent().size(); i++) {
+//            Observation.ObservationComponentComponent codingObject = getCodingObject(observation, i);
+//            //adminentry = mapTravelDestination(adminentry, codingObject);
+//        }
+
+        for (Observation.ObservationComponentComponent observationComponent
+                : observation.getComponent()) {
+            observationComponent.getName();
         }
+        optional oben als member und rein packen
 
         return adminentry;
     }
 
-    private static final String loinc_url = "http://loinc.org";
-    private static final String loinc_DateTravelStarted = "82752-7";
-    private static final String loinc_DateOfDepartureFromTravelDestination = "91560-3";
-    private static final String loinc_CityOfTravel = "94653-3";
-    private static final String loinc_StateOfTravel = "82754-3";
-    private static final String loinc_CountryOfTravel = "94651-7";
+    private final String LOINC_URL = "http://loinc.org";
+    private final String LOINC_DATE_TRAVEL_STARTED = "82752-7";
+    private final String LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION = "91560-3";
+    private final String LOINC_CITY_OF_TRAVEL = "94653-3";
+    private final String LOINC_STATE_OF_TRAVEL = "82754-3";
+    private final String LOINC_COUNTRY_OF_TRAVEL = "94651-7";
 
     private ReisehistorieAdminEntry mapTravelDestination(ReisehistorieAdminEntry adminentry, Observation.ObservationComponentComponent codingObject) {
         String codeOfConcept = getCodeOfConcept(codingObject);
 
         //Birgit Continue -> code worked in old fhir-bridge, but not longer
-/*
+
+        // testen: 168 https://github.com/ehrbase/fhir-bridge-old/blob/feature/num_82_JunitTestsPrototype/src/test/java/org/ehrbase/fhirbridge/FhirBridgeApplicationIT.java
+
         adminentry.setBestimmtesReiseziel();
 
-        List<ReisehistorieBestimmtesReisezielCluster> travelDestinations = new ArrayList<>();
+        List<ReisehistorieBestimmtesReisezielCluster> travelDestinations = new
 
-        //travelDestinations.
+                //travelDestinations.
 
-        ReisehistorieBestimmtesReisezielCluster a;
+                ReisehistorieBestimmtesReisezielCluster a;
 
         a.setEinreisedatumValue();
 
-        if (codeOfConcept.equals(loinc_DateTravelStarted)) {
+        if (codeOfConcept.equals(LOINC_DATE_TRAVEL_STARTED)) {
             adminentry.setAbreisedatumValue(getDateTime(codingObject));
-        } else if (codeOfConcept.equals(loinc_DateOfDepartureFromTravelDestination)) {
+        } else if (codeOfConcept.equals(LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION)) {
             adminentry.setRuckreisedatumValue(getDateTime(codingObject));
-        } else if (codeOfConcept.equals(loinc_CityOfTravel)) {
+        } else if (codeOfConcept.equals(LOINC_CITY_OF_TRAVEL)) {
             adminentry.setStadtValue(getString(codingObject));
-        } else if (codeOfConcept.equals(loinc_StateOfTravel)) {
+        } else if (codeOfConcept.equals(LOINC_STATE_OF_TRAVEL)) {
             adminentry.setBundeslandRegionDefiningcode(getBundeslandByCode(codingObject));
-        } else if (codeOfConcept.equals(loinc_CountryOfTravel)) {
+        } else if (codeOfConcept.equals(LOINC_COUNTRY_OF_TRAVEL)) {
             adminentry.setLandDefiningcode(getLandByCode(codingObject));
         } else {
             throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + codeOfConcept + "' instead ");
         }
 
         travelDestinations.add(a);
-        adminentry.setBestimmtesReiseziel(travelDestinations);
-*/
+        adminentry.setBestimmtesReiseziel(List.of(travelDestinations, anders, anders));
+
 
         return adminentry;
     }
