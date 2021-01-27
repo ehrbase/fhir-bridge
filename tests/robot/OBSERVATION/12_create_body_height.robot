@@ -33,7 +33,7 @@ ${randinteger}                  ${12345}
 ${identifiersystem}             https://www.charite.de/fhir/CodeSystem/observation-identifiers
 ${identifiervalue}              8302-2_BodyHeight
 ${vQSystem}						http://unitsofmeasure.org
-
+${profile url}					https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height
 
 
 *** Test Cases ***
@@ -381,6 +381,63 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..display
 	$.dataAbsentReason.coding[0].display		${randstring}			422    	.*dataAbsentReason SHALL only be present if Observation.value.x. is not present
 	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
+
+
+
+012 Create Body Height (Invalid/Missing 'valueQuantity')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 7. *VALIDATE* outcome against diagnostic text & location
+	[Template]			create body-height with ehr reference
+    [Tags]              valueQuantity
+
+	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+	# 																	CODE
+
+	# invalid/missing valueQuantity
+	$.valueQuantity			  					missing			422    	.*If there is no component or hasMember element then either a value.x. or a data absent reason must be present
+	$.valueQuantity			  					${None}			422    	This property must be an Object, not null
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
+	
+	# missing parameters
+	$.valueQuantity.value	  					missing			422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.unit	  					missing			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.system	  					missing			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.code	  					missing			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
+	
+	# invalid value
+	$.valueQuantity.value	  					${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
+	$.valueQuantity.value	  					${None}			422    	This property must be an simple value, not null
+	$.valueQuantity.value	  					113				422    	Error parsing JSON: the primitive value must be a number
+	$.valueQuantity.value	  					${1001}			422    	.*value is not within interval, expected:0.0 <= 1001.0 <= 1000.0.*Bad Request.*
+	$.valueQuantity.value	  					${1000.09}		422    	.*value is not within interval, expected:0.0 <= 1000.09 <= 1000.0.*Bad Request.*
+	$.valueQuantity.value	  					${-1}			422    	.*value is not within interval, expected:0.0 <= -1.0 <= 1000.0.*Bad Request.*
+	$.valueQuantity.value	  					1000,7			422    	The value '1000,7' is not a valid decimal    Observation.value.ofType.Quantity..value
+	$.valueQuantity.value	  					foobar			422    	Error parsing JSON: the primitive value must be a number
+	
+	# invalid unit
+	$.valueQuantity.unit	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..unit
+	$.valueQuantity.unit	  					${None}			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.unit	  					${123}			422    	Error parsing JSON: the primitive value must be a string
+	
+	# invalid system
+	$.valueQuantity.system	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..system
+	$.valueQuantity.system	  					${None}			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.system	  					foobar			422    	Value is 'foobar' but must be 'http://unitsofmeasure.org'
+	$.valueQuantity.system	  					${123}			422    	Error parsing JSON: the primitive value must be a string
+	
+	#invalid code
+	$.valueQuantity.code	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..code
+	$.valueQuantity.code	  					${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.code	  					${123}			422    	Error parsing JSON: the primitive value must be a string
+	$.valueQuantity.code	  					foobar			422    	.*No matching units for:foobar, expected units:cm.*Bad Request.*
 
 
 013 Create Body Height (invalid multi)
