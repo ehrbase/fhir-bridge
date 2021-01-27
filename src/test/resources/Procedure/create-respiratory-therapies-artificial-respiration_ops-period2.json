@@ -10,9 +10,9 @@
   "category": {
     "coding": [
       {
-        "system": "http://fhir.de/CodeSystem/dimdi/ops",
-        "code": "8-713",
-        "display": "Maschinelle Beatmung und Atemunterstützung bei Erwachsenen"
+        "system": "http://snomed.info/sct",
+        "code": "277132007",
+        "display": "Therapeutic procedure (procedure)"
       }
     ]
   },
