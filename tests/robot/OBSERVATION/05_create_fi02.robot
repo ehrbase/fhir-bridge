@@ -362,7 +362,7 @@ Create FiO2 with ehr reference
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    FiO2    ${payload}
-						observation.validate response - 422 (with error message NEW)    ${http_status_code}
+						observation.validate response - 422 (with error message)    ${http_status_code}
 						...																${error_message}
 						...																${location}
 
@@ -380,7 +380,7 @@ Create FiO2 w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    FiO₂    ${payload}
-						observation.validate response - 422 (with error message NEW)    ${http_status_code}
+						observation.validate response - 422 (with error message)    ${http_status_code}
 						...																${error_message}
 						...																${location}
 

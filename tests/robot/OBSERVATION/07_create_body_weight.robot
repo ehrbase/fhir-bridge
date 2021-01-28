@@ -382,7 +382,7 @@ Create Body Weight with ehr reference
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    body-weight    ${payload}
-						observation.validate response - 422 (with error message NEW)    ${http_status_code}
+						observation.validate response - 422 (with error message)    ${http_status_code}
 						...																${error_message}
 						...																${location}
 
@@ -400,7 +400,7 @@ Create Body Weight w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    body-weight    ${payload}
-						observation.validate response - 422 (with error message NEW)    ${http_status_code}
+						observation.validate response - 422 (with error message)    ${http_status_code}
 						...																${error_message}
 						...																${location}
 
