@@ -116,7 +116,7 @@ Force Tags              procedure_create
     procedure.validate response - 201
 
 
-07 Create Respiratory Therapies - Artificial Respiration Alternative sct datetime
+007 Create Respiratory Therapies - Artificial Respiration Alternative sct datetime
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_sct-datetime.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -129,7 +129,7 @@ Force Tags              procedure_create
     procedure.validate response - 201
 
 
-08 Create Respiratory Therapies - Artificial Respiration Alternative sct period
+008 Create Respiratory Therapies - Artificial Respiration Alternative sct period
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_sct-period.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -143,7 +143,7 @@ Force Tags              procedure_create
 
 
 
-09 Create Respiratory Therapies - Artificial Respiration Alternative sct period_2
+009 Create Respiratory Therapies - Artificial Respiration Alternative sct period_2
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_sct-period_2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -157,7 +157,7 @@ Force Tags              procedure_create
 
 
 
-10 Create Respiratory Therapies - Artificial Respiration Alternative ops datetime
+010 Create Respiratory Therapies - Artificial Respiration Alternative ops datetime
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_ops-datetime.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -171,7 +171,7 @@ Force Tags              procedure_create
 
 
 
-11 Create Respiratory Therapies - Artificial Respiration Alternative ops period
+011 Create Respiratory Therapies - Artificial Respiration Alternative ops period
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_ops-period.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -185,7 +185,7 @@ Force Tags              procedure_create
 
 
 
-12 Create Respiratory Therapies - Artificial Respiration Alternative ops period_2
+012 Create Respiratory Therapies - Artificial Respiration Alternative ops period_2
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_ops-period_2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
