@@ -114,3 +114,87 @@ Force Tags              procedure_create
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Chest X-Ray sct period_2    create-radiology-procedures-chest-x-ray_sct_period_2.json
     procedure.validate response - 201
+
+
+007 Create Respiratory Therapies - Artificial Respiration Alternative sct datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_sct-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    sct    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration sct datetime     create-respiratory-therapies-artificial-respiration_sct-datetime.json
+    procedure.validate response - 201
+
+
+008 Create Respiratory Therapies - Artificial Respiration Alternative sct period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_sct-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    sct    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration sct period    create-respiratory-therapies-artificial-respiration_sct-period.json
+    procedure.validate response - 201
+
+
+
+009 Create Respiratory Therapies - Artificial Respiration Alternative sct period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_sct-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    sct    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration sct period_2    create-respiratory-therapies-artificial-respiration_sct-period_2.json
+    procedure.validate response - 201
+
+
+
+010 Create Respiratory Therapies - Artificial Respiration Alternative ops datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_ops-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    ops    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration ops datetime    create-respiratory-therapies-artificial-respiration_ops-datetime.json
+    procedure.validate response - 201
+
+
+
+011 Create Respiratory Therapies - Artificial Respiration Alternative ops period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_ops-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    ops    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration ops period    create-respiratory-therapies-artificial-respiration_ops-period.json
+    procedure.validate response - 201
+
+
+
+012 Create Respiratory Therapies - Artificial Respiration Alternative ops period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_ops-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    ops    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration ops period_2    create-respiratory-therapies-artificial-respiration_ops-period_2.json
+    procedure.validate response - 201
+
+
