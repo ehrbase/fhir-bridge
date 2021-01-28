@@ -23,7 +23,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
-Force Tags              create
+Force Tags              procedure_create    xxx
 
 
 
@@ -40,7 +40,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-implemented    alternative    dcm    datetime
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented    alternative    dcm    datetime
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Chest X-Ray dcm datetime    create-radiology-procedures-chest-x-ray_dcm_datetime.json
@@ -53,7 +53,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-implemented    alternative    dcm    period
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented   alternative    dcm    period
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Chest X-Ray dcm period    create-radiology-procedures-chest-x-ray_dcm_period.json
@@ -67,7 +67,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-implemented    alternative    dcm    period_2
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented   alternative    dcm    period_2
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Chest X-Ray dcm period_2   create-radiology-procedures-chest-x-ray_dcm_period_2.json
@@ -81,7 +81,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-implemented    alternative    sct    datetime
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented   alternative    sct    datetime
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Chest X-Ray sct datetime    create-radiology-procedures-chest-x-ray_sct_datetime.json
@@ -95,7 +95,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-implemented    alternative    sct    period
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented   alternative    sct    period
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Chest X-Ray sct period    create-radiology-procedures-chest-x-ray_sct_period.json
@@ -109,7 +109,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-implemented    alternative    sct    period_2
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented   alternative    sct    period_2
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Chest X-Ray sct period_2    create-radiology-procedures-chest-x-ray_sct_period_2.json
