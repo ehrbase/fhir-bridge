@@ -20,7 +20,7 @@ workflows:
   # WORKFLOW 1/1 Build, Test & Analyze FHIR-bridge code
   build_and_test_fhirbridge:
     jobs:
-        - build-and-quicktest-fhirbridge:
+        - quick-test-fhirbridge:
             context: org-global
             #   filters:
             #     branches:
@@ -28,12 +28,12 @@ workflows:
             #         - master
             #         - develop
             #         - release
-        - build-and-test-fhirbridge:
+        - full-test-fhirbridge:
             context: org-global
         - tag-version:
             context: org-global
             requires:
-                - build-and-test-fhirbridge
+                - full-test-fhirbridge
             filters:
                 branches:
                     only:
@@ -41,7 +41,7 @@ workflows:
         - build_and_deploy:
             context: org-global
             requires:
-                - build-and-test-fhirbridge
+                - full-test-fhirbridge
             filters:
                 branches:
                     only:
@@ -64,7 +64,7 @@ jobs:
     #    "Y8888P"     `"Y8888Y"'    88888888P"    "Y88888P"
 
 
-    build-and-quicktest-fhirbridge:
+    quick-test-fhirbridge:
         description: Build and test FHIR-bridge
         executor: docker-py3-java11-postgres
         steps:
@@ -83,7 +83,7 @@ jobs:
             - save-fhirbridge-test-results
 
 
-    build-and-test-fhirbridge:
+    full-test-fhirbridge:
         description: |
             Build and test FHIR-bridge, analyze code, collect code coverage metrics,
             upload results to sonarcloud.io
@@ -117,22 +117,20 @@ jobs:
             - checkout
             - configure-git-for-ci-bot
             - run:
-                  name: Update Snapshot Version
-                  description: |
-                      This automatically sets the application version when there is a commit to release or hotfix branch.
-                      The version number is parsed from the branch name, for example release/v1.0.5 will create a tag v1.0.5
-                      and set the version number in pom.xml to same version.
-                  command: |
-                      VERSION_NUMBER="$(echo $CIRCLE_BRANCH | awk -F'/v' '{print $2;}')"
-                      echo "Updating the application version from the branch to ${VERSION_NUMBER}"
-                      ./mvnw versions:set -DnewVersion=$VERSION_NUMBER versions:commit
+                # This automatically sets the application version when there is a commit to release or hotfix branch.
+                # The version number is parsed from the branch name, for example release/v1.0.5 will create a tag v1.0.5
+                # and set the version number in pom.xml to same version.
+                command: |
+                    VERSION_NUMBER="$(echo $CIRCLE_BRANCH | awk -F'/v' '{print $2;}')"
+                    echo "Updating the application version from the branch to ${VERSION_NUMBER}"
+                    ./mvnw versions:set -DnewVersion=$VERSION_NUMBER versions:commit
 
-                      git commit -am "updated version to ${VERSION_NUMBER} [skip ci]"
-                      git tag -a v$VERSION_NUMBER -m "fhir-bridge release version v${VERSION_NUMBER}"
-                      git push --set-upstream origin $CIRCLE_BRANCH
-                      git push origin --tags
+                    git commit -am "updated version to ${VERSION_NUMBER} [skip ci]"
+                    git tag -a v$VERSION_NUMBER -m "fhir-bridge release version v${VERSION_NUMBER}"
+                    git push --set-upstream origin $CIRCLE_BRANCH
+                    git push origin --tags
 
-                      exit 0
+                    exit 0
 
 
     build_and_deploy:
@@ -321,13 +319,23 @@ commands:
     run-robot-integration-tests:
         steps:
             - install-robot-dependencies
+            - run: echo DUMMY RUN ROBOT TEST
+            # - run:
+            #     name: RUN ROBOT TESTS
+            #     command: |
+            #         cd tests/
+            #         robot -d results/0 -L TRACE \
+            #                 --skip TODO --skip future \
+            #                 --skiponfailure not-ready robot/
             - run:
-                name: RUN ROBOT TESTS
+                name: GENERATE FHIRBRIDGE ROBOT TESTDOCUMENTATION HTML
                 command: |
+                    if [ "$CIRCLE_BRANCH" != "develop" ]; then
+                        circleci-agent step halt
+                    fi
                     cd tests/
-                    robot -d results/0 -L TRACE \
-                            --skip TODO --skip future \
-                            --skiponfailure not-ready robot/
+                    python3 -m robot.testdoc robot results/fhirbridge-robot-testdocumentation.html
+
             - run:
                 name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
                 when: always
@@ -343,7 +351,6 @@ commands:
                         --report NONE \
                         --xunit junit-output.xml --xunitskipnoncritical \
                         results/0/output.xml
-                
             - run:
                 name: COPY ROBOT OUTPUT FILES
                 when: always
