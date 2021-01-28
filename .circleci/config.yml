@@ -323,6 +323,7 @@ commands:
                 cd tests/
                 mkdir results && mkdir results/0
                 echo DUMMY RUN ROBOT TEST > results/0/dummy-report.html
+                python3 -m robot.testdoc robot results/0/temp-testdocumentation.html
                 
             # - run:
             #     name: RUN ROBOT TESTS
@@ -348,20 +349,18 @@ commands:
             #             --xunit junit-output.xml --xunitskipnoncritical \
             #             results/0/output.xml
             - run:
+                name: GENERATE TESTDOCUMENTATION HTML FOR CIRCLECI ARTIFACTS
+                command: |
+                    if [ "$CIRCLE_BRANCH" != "develop" ]; then
+                        cd tests/
+                        python3 -m robot.testdoc robot results/0/fhirbridge-robot-testdocumentation.html
+                    fi
+            - run:
                 name: COPY ROBOT OUTPUT FILES
                 when: always
                 command: |
                     mkdir 00_robot_results
                     cp tests/results/0/* 00_robot_results/
-            - run:
-                name: GENERATE FHIRBRIDGE ROBOT TESTDOCUMENTATION HTML
-                command: |
-                    if [ "$CIRCLE_BRANCH" != "develop" ]; then
-                        circleci-agent step halt
-                    fi
-                    echo LINE EXECUTED
-                    cd tests/
-                    python3 -m robot.testdoc robot results/fhirbridge-robot-testdocumentation.html
 
 
     cache-out-fhirbridge-m2-dependencies:
