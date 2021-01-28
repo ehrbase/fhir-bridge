@@ -33,7 +33,6 @@ ${randinteger}                  ${12345}
 ${identifiersystem}             https://www.charite.de/fhir/CodeSystem/observation-identifiers
 ${identifiervalue}              8302-2_BodyHeight
 ${vQSystem}						http://unitsofmeasure.org
-${profile url}					https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height
 
 
 *** Test Cases ***
@@ -401,16 +400,16 @@ ${profile url}					https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDe
 	# invalid/missing valueQuantity
 	$.valueQuantity			  					missing			422    	.*If there is no component or hasMember element then either a value.x. or a data absent reason must be present
 	$.valueQuantity			  					${None}			422    	This property must be an Object, not null
-	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
 	
 	# missing parameters
-	$.valueQuantity.value	  					missing			422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity.unit	  					missing			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity.system	  					missing			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity.code	  					missing			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.value	  					missing			422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity.unit	  					missing			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity.system	  					missing			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity.code	  					missing			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
 	
 	# invalid value
 	$.valueQuantity.value	  					${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
@@ -424,18 +423,18 @@ ${profile url}					https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDe
 	
 	# invalid unit
 	$.valueQuantity.unit	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..unit
-	$.valueQuantity.unit	  					${None}			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.unit	  					${None}			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.unit	  					${123}			422    	Error parsing JSON: the primitive value must be a string
 	
 	# invalid system
 	$.valueQuantity.system	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..system
-	$.valueQuantity.system	  					${None}			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.system	  					${None}			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.system	  					foobar			422    	Value is 'foobar' but must be 'http://unitsofmeasure.org'
 	$.valueQuantity.system	  					${123}			422    	Error parsing JSON: the primitive value must be a string
 	
 	#invalid code
 	$.valueQuantity.code	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..code
-	$.valueQuantity.code	  					${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.code	  					${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.code	  					${123}			422    	Error parsing JSON: the primitive value must be a string
 	$.valueQuantity.code	  					foobar			422    	.*No matching units for:foobar, expected units:cm.*Bad Request.*
 
