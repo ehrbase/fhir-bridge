@@ -44,15 +44,14 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         try {
             // default for every observation
             fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
-
-            //BSa Wie erscheint das im Mapping? Und wo finde ich das Referenzmodell mit diesen Infos zu openEHR?
+            
             grosseLangeObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
             grosseLangeObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
             grosseLangeObservation.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
             grosseLangeObservation.setSubject(new PartySelf());
 
             // special mapping content
-            grosseLangeObservation.setGrosseLangeUnits(observation.getValueQuantity().getCode());
+            grosseLangeObservation.setGrosseLangeUnits(observation.getValueQuantity().getUnit());
             //BSa Hier ist nicht sichtbar, ob Körpergröße oder Geburt gesetzt wird -> woher die Info?
             grosseLangeObservation.setGrosseLangeMagnitude(observation.getValueQuantity().getValue().doubleValue());
 
