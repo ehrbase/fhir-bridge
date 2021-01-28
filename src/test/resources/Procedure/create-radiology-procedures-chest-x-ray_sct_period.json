@@ -1,0 +1,45 @@
+{
+  "resourceType": "Procedure",
+  "id": "07e2eecd-b52c-4ae3-aca7-f9c12e184ede",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures"
+    ]
+  },
+  "status": "completed",
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "168537006",
+        "display": "Plain radiography"
+      }
+    ],
+    "text": "Chest x-ray"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "performedPeriod": {
+    "start": "2020-09-30"
+  },
+  "bodySite": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "39607008",
+          "display": "Lung structure (body structure)"
+        }
+      ]
+    }
+  ],
+  "report": [
+    {
+      "reference": "DiagnosticReport/example"
+    }
+  ]
+}
