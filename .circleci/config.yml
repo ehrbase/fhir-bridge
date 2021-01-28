@@ -319,7 +319,11 @@ commands:
     run-robot-integration-tests:
         steps:
             - install-robot-dependencies
-            - run: echo DUMMY RUN ROBOT TEST
+            - run: |
+                cd tests/
+                mkdir results && mkdir results/0
+                echo DUMMY RUN ROBOT TEST > results/0/dummy-report.html
+                
             # - run:
             #     name: RUN ROBOT TESTS
             #     command: |
@@ -327,36 +331,37 @@ commands:
             #         robot -d results/0 -L TRACE \
             #                 --skip TODO --skip future \
             #                 --skiponfailure not-ready robot/
-            - run:
-                name: GENERATE FHIRBRIDGE ROBOT TESTDOCUMENTATION HTML
-                command: |
-                    if [ "$CIRCLE_BRANCH" != "develop" ]; then
-                        circleci-agent step halt
-                    fi
-                    cd tests/
-                    python3 -m robot.testdoc robot results/fhirbridge-robot-testdocumentation.html
-
-            - run:
-                name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
-                when: always
-                command: |
-                    cd tests/
-                    rebot --outputdir results/1/robot-tests \
-                        -e obsolete -e libtest \
-                        --removekeywords for \
-                        --removekeywords wuks \
-                        --loglevel TRACE \
-                        --output NONE \
-                        --log NONE \
-                        --report NONE \
-                        --xunit junit-output.xml --xunitskipnoncritical \
-                        results/0/output.xml
+            
+            # - run:
+            #     name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
+            #     when: always
+            #     command: |
+            #         cd tests/
+            #         rebot --outputdir results/1/robot-tests \
+            #             -e obsolete -e libtest \
+            #             --removekeywords for \
+            #             --removekeywords wuks \
+            #             --loglevel TRACE \
+            #             --output NONE \
+            #             --log NONE \
+            #             --report NONE \
+            #             --xunit junit-output.xml --xunitskipnoncritical \
+            #             results/0/output.xml
             - run:
                 name: COPY ROBOT OUTPUT FILES
                 when: always
                 command: |
                     mkdir 00_robot_results
                     cp tests/results/0/* 00_robot_results/
+            - run:
+                name: GENERATE FHIRBRIDGE ROBOT TESTDOCUMENTATION HTML
+                command: |
+                    if [ "$CIRCLE_BRANCH" != "develop" ]; then
+                        circleci-agent step halt
+                    fi
+                    echo LINE EXECUTED
+                    cd tests/
+                    python3 -m robot.testdoc robot results/fhirbridge-robot-testdocumentation.html
 
 
     cache-out-fhirbridge-m2-dependencies:
