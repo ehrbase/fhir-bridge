@@ -732,7 +732,7 @@ ${randinteger}                  ${12345}
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-sofa-score.json
-	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	observation.validate response - 422 (with error message)		422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
