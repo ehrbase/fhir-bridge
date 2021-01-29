@@ -395,7 +395,7 @@ ${vCC_URL}		                http://snomed.info/sct
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-patient-in-icu.json
-	observation.validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -575,7 +575,7 @@ create patient in ICU with ehr reference
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
 						observation.POST /Observation           Patient in ICU            ${payload}
-						observation.validate response - 422 (with error message NEW)        ${http_status_code}
+						observation.validate response - 422 (with error message)        ${http_status_code}
 						...															        ${error_message}
 						...															        ${location}
 
@@ -588,7 +588,7 @@ create patient in ICU w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Patient in ICU    ${payload}
-						observation.validate response - 422 (with error message NEW)      ${http_status_code}
+						observation.validate response - 422 (with error message)      ${http_status_code}
 						...															      ${error_message}
 						...															      ${location}
 
@@ -637,7 +637,7 @@ create patient in ICU JSON
 						...    update vCC						${vCCavailabe}									${vCCCodingavailable}			${vCC0System}				${vCC0Code}				${vCC0Display}		AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason
@@ -670,7 +670,7 @@ create patient in ICU with ehr reference AND data absentreason
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json with data absentreason    ${json_path}    ${value}
 						observation.POST /Observation    Patient in ICU    ${payload}
-						observation.validate response - 422 (with error message NEW)     ${http_status_code}
+						observation.validate response - 422 (with error message)     ${http_status_code}
 						...															     ${error_message}
 						...															     ${location}
 

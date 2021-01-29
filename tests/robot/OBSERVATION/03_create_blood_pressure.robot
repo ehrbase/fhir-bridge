@@ -377,7 +377,7 @@ create blood pressure with ehr reference
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Blood Pressure    ${payload}
-						observation.validate response - 422 (with error message)    ${issue_index}
+						observation.validate response - 422 (with error message OLD)    ${issue_index}
 						...															${http_status_code}
 						...															${error_message}
 						...															${location}
@@ -391,7 +391,7 @@ create blood pressure w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Blood Pressure    ${payload}
-						observation.validate response - 422 (with error message)    ${issue_index}
+						observation.validate response - 422 (with error message OLD)    ${issue_index}
 						...															${http_status_code}
 						...															${error_message}
 						...															${location}
