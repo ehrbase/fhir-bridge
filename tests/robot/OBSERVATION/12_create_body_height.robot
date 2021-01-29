@@ -33,7 +33,6 @@ ${randinteger}                  ${12345}
 ${identifiersystem}             https://www.charite.de/fhir/CodeSystem/observation-identifiers
 ${identifiervalue}              8302-2_BodyHeight
 ${vQSystem}						http://unitsofmeasure.org
-${profile url}					https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height
 
 
 *** Test Cases ***
@@ -331,7 +330,7 @@ ${profile url}					https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDe
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-body-height.json
-	observation.validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -401,16 +400,16 @@ ${profile url}					https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDe
 	# invalid/missing valueQuantity
 	$.valueQuantity			  					missing			422    	.*If there is no component or hasMember element then either a value.x. or a data absent reason must be present
 	$.valueQuantity			  					${None}			422    	This property must be an Object, not null
-	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
 	
 	# missing parameters
-	$.valueQuantity.value	  					missing			422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity.unit	  					missing			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity.system	  					missing			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity.code	  					missing			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.value	  					missing			422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity.unit	  					missing			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity.system	  					missing			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
+	$.valueQuantity.code	  					missing			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
 	
 	# invalid value
 	$.valueQuantity.value	  					${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
@@ -424,18 +423,18 @@ ${profile url}					https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDe
 	
 	# invalid unit
 	$.valueQuantity.unit	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..unit
-	$.valueQuantity.unit	  					${None}			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.unit	  					${None}			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.unit	  					${123}			422    	Error parsing JSON: the primitive value must be a string
 	
 	# invalid system
 	$.valueQuantity.system	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..system
-	$.valueQuantity.system	  					${None}			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.system	  					${None}			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.system	  					foobar			422    	Value is 'foobar' but must be 'http://unitsofmeasure.org'
 	$.valueQuantity.system	  					${123}			422    	Error parsing JSON: the primitive value must be a string
 	
 	#invalid code
 	$.valueQuantity.code	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..code
-	$.valueQuantity.code	  					${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
+	$.valueQuantity.code	  					${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.code	  					${123}			422    	Error parsing JSON: the primitive value must be a string
 	$.valueQuantity.code	  					foobar			422    	.*No matching units for:foobar, expected units:cm.*Bad Request.*
 
@@ -533,7 +532,7 @@ create body-height with ehr reference
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
 						observation.POST /Observation           body-height            		${payload}
-						observation.validate response - 422 (with error message NEW)        ${http_status_code}
+						observation.validate response - 422 (with error message)        ${http_status_code}
 						...															        ${error_message}
 						...															        ${location}
 
@@ -546,7 +545,7 @@ create body-height w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    body-height    ${payload}
-						observation.validate response - 422 (with error message NEW)      ${http_status_code}
+						observation.validate response - 422 (with error message)      ${http_status_code}
 						...															      ${error_message}
 						...															      ${location}
 
@@ -596,7 +595,7 @@ create body-height JSON
 						...    update Value Quantity            ${vQavailable}                                  ${vQvalue}                     ${vQunit}                   	${vQsystem}            	${vQcode}        	AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason
@@ -629,7 +628,7 @@ create body-height with ehr reference AND data absentreason
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json with data absentreason    ${json_path}    ${value}
 						observation.POST /Observation    body-height    ${payload}
-						observation.validate response - 422 (with error message NEW)     ${http_status_code}
+						observation.validate response - 422 (with error message)     ${http_status_code}
 						...															     ${error_message}
 						...															     ${location}
 
