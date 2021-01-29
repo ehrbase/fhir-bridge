@@ -198,3 +198,90 @@ Force Tags              procedure_create
     procedure.validate response - 201
 
 
+
+013 Create Generic Therapy - Dialysis sct datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-sct-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-implemented    not-ready_not-implemented    alternative    sct    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generic Therapy - Dialysis sct datetime  create-dialysis-sct-datetime.json
+    procedure.validate response - 201
+
+
+014 Create Generic Therapy - Dialysis sct period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-sct-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-implemented    not-ready_not-implemented    alternative    sct    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generic Therapy - Dialysis sct period  create-dialysis-sct-period.json
+    procedure.validate response - 201
+
+
+
+015 Create Generic Therapy - Dialysis sct period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-sct-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-implemented    not-ready_not-implemented    alternative    sct    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generic Therapy - Dialysis sct period_2  create-dialysis-sct-period_2.json
+    procedure.validate response - 201
+
+
+
+016 Create Generic Therapy - Dialysis ops datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-ops-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-implemented    not-ready_not-implemented    alternative    ops    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generiy Therapy - Dialysis ops datetime  create-dialysis-ops-datetime.json
+    procedure.validate response - 201
+
+
+
+017 Create Generic Therapy - Dialysis ops period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-ops-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-implemented    not-ready_not-implemented    alternative    ops    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generic Therapy - Dialysis ops period  create-dialysis-ops-period.json
+    procedure.validate response - 201
+
+
+
+018 Create Generic Therapy - Dialysis ops period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-ops-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-implemented    not-ready_not-implemented    alternative    ops    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generic Therapy - Dialysis ops period_2  create-dialysis-ops-period_2.json
+    procedure.validate response - 201
+
+
+
+
+
+
