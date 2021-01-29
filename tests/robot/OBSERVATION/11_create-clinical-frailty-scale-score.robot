@@ -601,7 +601,7 @@ BUG TRACE 02 Create Clinical Frailty Scale Score (Invalid/Missing 'valueCodeable
 	# 																	CODE
 	
 	# invalid system
-#	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
 
 	# invalid code
 	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
