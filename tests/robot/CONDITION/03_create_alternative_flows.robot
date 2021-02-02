@@ -35,6 +35,42 @@ Force Tags              condition_create
 *** Test Cases ***
 
 
-001
-002
-003
+001 Create Condition Symptoms-Covid-19 sct
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-symptoms-covid-19-present_sct.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	symptoms-covid-19    valid    alternative    sct
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create symptoms-covid-19    Symptoms-Covid-19 sct    create-symptoms-covid-19-present_sct.json
+    procedure.validate response - 201
+
+
+
+002 Create Condition Symptoms-Covid-19 icd10
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-symptoms-covid-19-present_icd10.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	symptoms-covid-19    valid    alternative    icd10
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create symptoms-covid-19    Symptoms-Covid-19 icd10   create-symptoms-covid-19-present_icd10.json
+    procedure.validate response - 201
+
+
+
+003 Create Condition Symptoms-Covid-19 alphaid
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-symptoms-covid-19-present_alphaid.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	symptoms-covid-19    valid    alternative    alphaid
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create symptoms-covid-19    Symptoms-Covid-19 alphaid    create-symptoms-covid-19-present_alphaid.json
+    procedure.validate response - 201
