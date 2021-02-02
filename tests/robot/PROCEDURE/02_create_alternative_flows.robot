@@ -444,3 +444,48 @@ Force Tags              procedure_create
     ehr.create new ehr    000_ehr_status.json
 	procedure.create apheresis  Generic Therapy - Apheresis ops period_2  create-apheresis-ops-period_2.json
 	procedure.validate response - 201
+
+
+
+031 Create Generic Therapy - Prone Position sct datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-prone-position-in-progress_sct-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-implemented    alternative    sct    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create prone position    Generic Therapy - Prone Position sct datetime    create-prone-position-in-progress_sct-datetime.json
+    procedure.validate response - 201
+
+
+
+032 Create Generic Therapy - Prone Position 
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-prone-position-in-progress_sct-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-implemented
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create prone position    Generic Therapy - Prone Position    create-prone-position-not-done.json
+    procedure.validate response - 201
+
+
+
+033 Create Generic Therapy - Prone Position 
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-implemented
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create prone position    Generic Therapy - Prone Position    create-prone-position-not-done.json
+    procedure.validate response - 201
+
+
+
