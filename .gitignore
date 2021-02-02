@@ -21,3 +21,6 @@ venv
 .vscode/**
 
 fhir-bridge.iml
+tests/log.html
+tests/output.xml
+tests/report.html
