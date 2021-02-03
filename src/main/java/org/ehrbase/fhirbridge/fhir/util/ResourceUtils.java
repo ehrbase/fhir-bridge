@@ -6,6 +6,10 @@ import org.hl7.fhir.r4.model.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @deprecated Use {@link FhirUtils} instead.
+ */
+@Deprecated
 public class ResourceUtils {
 
     public static List<String> getProfiles(Resource resource) {
