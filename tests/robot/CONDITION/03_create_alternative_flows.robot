@@ -41,7 +41,7 @@ Force Tags              condition_create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	symptoms-covid-19    valid    alternative    sct
+	[Tags]             	symptoms-covid-19    valid    alternative    sct    not-ready    bug
 
     ehr.create new ehr    000_ehr_status.json
     condition.create symptoms-covid-19    Symptoms-Covid-19 sct    create-symptoms-covid-19-present_sct.json
@@ -55,7 +55,7 @@ Force Tags              condition_create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	symptoms-covid-19    valid    alternative    icd10
+	[Tags]             	symptoms-covid-19    valid    alternative    icd10    not-ready    bug
 
     ehr.create new ehr    000_ehr_status.json
     condition.create symptoms-covid-19    Symptoms-Covid-19 icd10   create-symptoms-covid-19-present_icd10.json
@@ -69,7 +69,7 @@ Force Tags              condition_create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	symptoms-covid-19    valid    alternative    alphaid
+	[Tags]             	symptoms-covid-19    valid    alternative    alphaid    not-ready    bug
 
     ehr.create new ehr    000_ehr_status.json
     condition.create symptoms-covid-19    Symptoms-Covid-19 alphaid    create-symptoms-covid-19-present_alphaid.json
