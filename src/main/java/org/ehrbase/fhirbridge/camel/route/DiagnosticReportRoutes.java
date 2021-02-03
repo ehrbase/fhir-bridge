@@ -3,9 +3,11 @@ package org.ehrbase.fhirbridge.camel.route;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
+import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.ehrbase.fhirbridge.ehr.converter.DiagnosticReportLabCompositionConverter;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.springframework.context.annotation.Bean;
@@ -20,15 +22,19 @@ public class DiagnosticReportRoutes extends RouteBuilder {
 
     private final PatientIdProcessor patientIdProcessor;
 
+    private final CompositionConverterResolver compositionConverterResolver;
+
     private final DefaultExceptionHandler defaultExceptionHandler;
 
     public DiagnosticReportRoutes(IFhirResourceDao<DiagnosticReport> diagnosticReportDao,
                                   ResourceProfileValidator requestValidator,
                                   PatientIdProcessor patientIdProcessor,
+                                  CompositionConverterResolver compositionConverterResolver,
                                   DefaultExceptionHandler defaultExceptionHandler) {
         this.diagnosticReportDao = diagnosticReportDao;
         this.requestValidator = requestValidator;
         this.patientIdProcessor = patientIdProcessor;
+        this.compositionConverterResolver = compositionConverterResolver;
         this.defaultExceptionHandler = defaultExceptionHandler;
     }
 
@@ -47,14 +53,10 @@ public class DiagnosticReportRoutes extends RouteBuilder {
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#diagnosticReportLabCompositionConverter")
+            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.CamelFhirBridgeProfile})"))
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
         // @formatter:on
     }
 
-    // TODO: Update when Apache Camel > 3.x
-    @Bean
-    public DiagnosticReportLabCompositionConverter diagnosticReportLabCompositionConverter() {
-        return new DiagnosticReportLabCompositionConverter();
-    }
 }
