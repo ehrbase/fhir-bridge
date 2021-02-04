@@ -4,6 +4,7 @@ import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
+import org.ehrbase.fhirbridge.camel.processor.DefaultMethodOutcomeProcessor;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.ehr.converter.DiagnosticReportLabCompositionConverter;
@@ -48,7 +49,7 @@ public class DiagnosticReportRoutes extends RouteBuilder {
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#diagnosticReportLabCompositionConverter")
-            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+            .process(new DefaultMethodOutcomeProcessor());
         // @formatter:on
     }
 
