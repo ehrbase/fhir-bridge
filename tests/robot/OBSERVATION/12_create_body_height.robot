@@ -22,8 +22,8 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
-...						author: Peter Wohlfarth
-Force Tags              create    body-height    invalid
+...						*Author:* Peter Wohlfarth
+Force Tags              observation_create    body-height    invalid
 
 
 *** Variables ***
