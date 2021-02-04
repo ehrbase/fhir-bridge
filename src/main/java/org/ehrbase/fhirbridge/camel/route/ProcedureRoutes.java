@@ -6,6 +6,7 @@ import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
+import org.ehrbase.fhirbridge.camel.processor.DefaultMethodOutcomeProcessor;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
@@ -52,7 +53,7 @@ public class ProcedureRoutes extends RouteBuilder {
             .setBody(simple("${body.resource}"))
             .process(patientIdProcessor)
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#procedureCompositionConverter")
-            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+            .process(new DefaultMethodOutcomeProcessor());
 
         from("fhir-find-procedure:fhirConsumer?fhirContext=#fhirContext")
             .onException(Exception.class)
