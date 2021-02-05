@@ -29,15 +29,15 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
         validateEqualPatientIds(bundle);
 
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
-            checkForClientIds(entry);
             setUrlMemberLists(entry, memberValidator);
+            checkForClientIds(entry);//has to be after setUrlMemberList because of fullUrl validation
             validateRequestElement(entry);
         }
         memberValidator.validateMembers();
     }
 
     void checkForClientIds(Bundle.BundleEntryComponent entry) {
-        if (entry.getResource().getId().contains("Observation/")) { // Since the id is the FullURL if there is no resource.id, we have to check for Observation/. This is because if there is a resource.id, an Observation/ is attached
+        if (entry.getResource().getId().startsWith("Observation/")) { // Since the id is the FullURL if there is no resource.id, we have to check for Observation/. This is because if there is a resource.id, an Observation/ is attached
             throw new UnprocessableEntityException("Ids assigned by the client are not supported by the Fhir bridge. Please delete the resource.id "+entry.getResource().getId().replace("Observation/", ""));
         }
     }
