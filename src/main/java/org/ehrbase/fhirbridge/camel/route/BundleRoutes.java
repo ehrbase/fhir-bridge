@@ -26,18 +26,19 @@ public class BundleRoutes extends RouteBuilder {
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
                     .to("direct:process-diagnostic-report-lab-bundle")
                 .otherwise()
-                    .throwException(new UnprocessableEntityException()); // TODO
+                    .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
+                            "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", "  + Profile.DIAGNOSTIC_REPORT_LAB.getUri()));
 
         from("direct:process-blood-gas-panel-bundle")
             .bean(BloodGasPanelBundleValidator.class)
             .bean(BloodGasPanelConverter.class, "convert")
-            .to("mock:handle-observation-resource")
+            .to("direct:process-observation-resource")
             .log(LoggingLevel.DEBUG, "Completed"); // TODO
 
         from("direct:process-diagnostic-report-lab-bundle")
             .bean(DiagnosticReportLabBundleValidator.class)
             .bean(DiagnosticReportLabConverter.class, "convert")
-            .to("mock:handle-diagnostic-report-resource")
+            .to("direct:process-diagnostic-report-resource")
             .log(LoggingLevel.DEBUG, "Completed"); // TODO
         // @formatter:on
     }
