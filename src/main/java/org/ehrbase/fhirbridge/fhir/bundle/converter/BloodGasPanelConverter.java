@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.fhir.bundle;
+package org.ehrbase.fhirbridge.fhir.bundle.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
@@ -29,8 +29,9 @@ public class BloodGasPanelConverter extends AbstractBundleConverter<Observation>
                 throw new UnprocessableEntityException("Resource '" + reference.getReference() + "' is missing");
             }
 
-            reference.setResource(resource);
+            resource.setId((String) null);
             reference.setReference(null);
+            reference.setResource(resource);
             contains.add(resource);
         }
 

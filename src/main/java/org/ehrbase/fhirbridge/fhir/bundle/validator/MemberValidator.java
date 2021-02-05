@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.fhir.bundle.BundleValidator;
+package org.ehrbase.fhirbridge.fhir.bundle.validator;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.hl7.fhir.r4.model.Reference;

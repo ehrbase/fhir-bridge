@@ -1,6 +1,4 @@
-package org.ehrbase.fhirbridge.fhir.bundle.BundleValidator;
-
-import org.ehrbase.fhirbridge.fhir.bundle.BundleValidator.AbstractBundleValidator;
+package org.ehrbase.fhirbridge.fhir.bundle.validator;
 
 import java.util.Map;
 

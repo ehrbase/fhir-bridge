@@ -1,8 +1,8 @@
-package org.ehrbase.fhirbridge.fhir.bundle;
+package org.ehrbase.fhirbridge.fhir.bundle.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
-import org.ehrbase.fhirbridge.fhir.util.FhirUtils;
+import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Resource;
 import org.springframework.core.convert.converter.Converter;
@@ -21,7 +21,7 @@ public abstract class AbstractBundleConverter<T> implements Converter<Bundle, T>
     protected T getRoot(Bundle bundle, Profile profile) {
         return (T) bundle.getEntry().stream()
                 .map(Bundle.BundleEntryComponent::getResource)
-                .filter(resource -> FhirUtils.hasProfile(resource, profile))
+                .filter(resource -> Resources.hasProfile(resource, profile))
                 .findFirst()
                 .orElseThrow(() -> new UnprocessableEntityException("Root resource with profile '" + profile.getUri() + "' is missing"));
     }
