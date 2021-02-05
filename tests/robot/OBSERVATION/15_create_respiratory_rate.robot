@@ -23,7 +23,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Peter Wohlfarth
-Force Tags              observation_create    observation-lab   invalid
+Force Tags              observation_create    respiratory-rate   invalid
 
 
 *** Variables ***
@@ -34,14 +34,14 @@ ${randinteger}                  ${12345}
 *** Test Cases ***
 
 
-001 Create Observation lab (Invalid/Missing 'resourceType')
+001 Create Respiratory Rate (Invalid/Missing 'resourceType')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
-	[Template]		    create Observation lab with ehr reference
+	[Template]		    create Respiratory Rate with ehr reference
     [Tags]          	resourceType
 
 	# FIELD/PATH					VALUE							HTTP																		            Location
@@ -53,15 +53,15 @@ ${randinteger}                  ${12345}
 
 
 
-002 Create Observation lab (Invalid/Missing 'identifier')
+002 Create Respiratory Rate (Invalid/Missing 'identifier')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 
-	[Template]			create Observation lab with ehr reference
+	[Template]			create Respiratory Rate with ehr reference
     [Tags]              identifier
 
 	# FIELD/PATH					VALUE							HTTP																										Location
@@ -81,14 +81,14 @@ ${randinteger}                  ${12345}
 	$.identifier[0].value			${randinteger}				 	422
 
 
-003 Create Observation lab (Invalid/Missing 'category')
+003 Create Respiratory Rate (Invalid/Missing 'category')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Category`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n               
-	[Template]			create Observation lab with ehr reference
+	[Template]			create Respiratory Rate with ehr reference
     [Tags]              category
 
 	# FIELD/PATH							VALUE					HTTP																									Location
@@ -121,14 +121,14 @@ ${randinteger}                  ${12345}
 
 
 
-004 Create Observation lab (Invalid/Missing 'code')
+004 Create Respiratory Rate (Invalid/Missing 'code')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Code`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                 
-	[Template]			create Observation lab with ehr reference
+	[Template]			create Respiratory Rate with ehr reference
     [Tags]              code
 
 	# FIELD/PATH							VALUE					HTTP																									Location
@@ -170,14 +170,14 @@ ${randinteger}                  ${12345}
 
 
 
-005 Create Observation lab (Invalid/Missing 'valueQuantity')
+005 Create Respiratory Rate (Invalid/Missing 'valueQuantity')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                 
-	[Template]			create Observation lab with ehr reference
+	[Template]			create Respiratory Rate with ehr reference
     [Tags]              valueQuantity
 
 	# FIELD/PATH								VALUE				HTTP																									Location
@@ -236,12 +236,12 @@ ${randinteger}                  ${12345}
 
 
 
-create Observation lab with ehr reference
+create Respiratory Rate with ehr reference
 	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
 
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Observation           Observation lab            	${payload}
+						observation.POST /Observation           Respiratory Rate            	${payload}
 						observation.validate response - 422 (w/o error message)  ${http_status_code}
 
 
@@ -250,7 +250,7 @@ generate payload from example json
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-observation-lab.json
+	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-respiratory-rate.json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 
