@@ -1,22 +1,17 @@
-package org.ehrbase.fhirbridge.fhir.bundle.BundleValidator;
+package org.ehrbase.fhirbridge.fhir.bundle.validator;
 
 import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Bundle;
-import org.hl7.fhir.r4.model.Condition;
-import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Patient;
-import org.hl7.fhir.r4.model.Procedure;
-import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Resource;
-import org.hl7.fhir.r4.model.ResourceType;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public abstract class AbstractBundleValidator implements FhirTransactionValidator {
 
@@ -38,7 +33,7 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
 
     void checkForClientIds(Bundle.BundleEntryComponent entry) {
         if (entry.getResource().getId().startsWith("Observation/")) { // Since the id is the FullURL if there is no resource.id, we have to check for Observation/. This is because if there is a resource.id, an Observation/ is attached
-            throw new UnprocessableEntityException("Ids assigned by the client are not supported by the Fhir bridge. Please delete the resource.id "+entry.getResource().getId().replace("Observation/", ""));
+            throw new UnprocessableEntityException("Ids assigned by the client are not supported by the Fhir bridge. Please delete the resource.id " + entry.getResource().getId().replace("Observation/", ""));
         }
     }
 
@@ -53,51 +48,12 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
         }
     }
 
-    //FIXME @renaud will refactor this method from the patientIdprocessor, for now its a duplicate
-    private String extractPatientId(Resource resource) {
-        String patientId = null;
-
-        ResourceType resourceType = resource.getResourceType();
-        switch (resourceType) {
-            case Condition:
-                patientId = ((Condition) resource).getSubject().getIdentifier().getValue();
-                break;
-            case DiagnosticReport:
-                patientId = ((DiagnosticReport) resource).getSubject().getIdentifier().getValue();
-                break;
-            case Observation:
-                patientId = ((Observation) resource).getSubject().getIdentifier().getValue();
-                break;
-            case Patient:
-                Patient patient = (Patient) resource;
-                if (patient.hasIdentifier()) {
-                    patientId = ((Patient) resource).getIdentifier().get(0).getValue();
-                }
-                break;
-            case Procedure:
-                patientId = ((Procedure) resource).getSubject().getIdentifier().getValue();
-                break;
-            case QuestionnaireResponse:
-                patientId = ((QuestionnaireResponse) resource).getSubject().getIdentifier().getValue();
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported resource [" + resourceType + "]");
+    void validateEqualPatientIds(Bundle bundle) {
+        List<String> patientIds = new ArrayList<>();
+        for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
+            Resources.getSubjectIdentifier(entry.getResource())
+                    .ifPresent(identifier -> patientIds.add(identifier.getValue()));
         }
-        if (patientId == null) {
-            throw new InternalErrorException(resource.getMeta().getProfile() + " has no, or a malformed, subject.reference id. Without a Patient reference the resource cannot be processed.");
-        }
-
-        return patientId;
-    }
-
-
-    void validateEqualPatientIds(Bundle bundle
-    ) {
-        List<String> patientIds = bundle.getEntry()
-                .stream()
-                .map(Bundle.BundleEntryComponent::getResource)
-                .map(this::extractPatientId)
-                .collect(Collectors.toUnmodifiableList());
         checkPatientIdsIdentical(patientIds);
     }
 
