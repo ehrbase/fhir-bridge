@@ -13,8 +13,8 @@ public class BloodGasPanelCompositionConverter implements CompositionConverter<B
     }
 
     @Override
-    public BefundDerBlutgasanalyseComposition toComposition(Observation obseravtion) throws CompositionConversionException {
-        BloodGasPanel bloodGasPanel = new BloodGasPanel(obseravtion);
+    public BefundDerBlutgasanalyseComposition toComposition(Observation observation) throws CompositionConversionException {
+        BloodGasPanel bloodGasPanel = new BloodGasPanel(observation);
         BlutgasAnalyseConverter blutgasAnalyseMapper = new BlutgasAnalyseConverter();
         return blutgasAnalyseMapper.convert(bloodGasPanel);
     }
