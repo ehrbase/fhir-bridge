@@ -23,7 +23,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
-Force Tags              create
+Force Tags              immunization_create
 
 
 
@@ -39,7 +39,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to immunization endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              history-of-vaccination    valid    not-ready
+    [Tags]              history-of-vaccination    valid    not-ready    not-implemented
 
     #ehr.create new ehr    000_ehr_status.json
     immunization.create history of vaccination    History of Vaccination (Immunization completed)    create-immunization-for-patient-complete.json
@@ -52,7 +52,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to immunization endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              history-of-vaccination    valid    not-ready
+    [Tags]              history-of-vaccination    valid    not-ready    not-implemented
 
     #ehr.create new ehr    000_ehr_status.json
     immunization.create history of vaccination    History of Vaccination (not done)    create-immunization-for-patient-not-done.json

@@ -27,8 +27,8 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.DEFAULT_CONDITION, new DiagnoseCompositionConverter());
         profiles.put(Profile.SYMPTOMS_COVID_19, new SymptomCompositionConverter());
         // Observations
-        profiles.put(Profile.DIAGNOSTIC_REPORT_LAB, new DiagnosticReportLabCompositionConverter());
         profiles.put(Profile.BODY_HEIGHT, new BodyHeightCompositionConverter());
+        profiles.put(Profile.BLOOD_GAS_PANEL, new BloodGasPanelCompositionConverter());
         profiles.put(Profile.BLOOD_PRESSURE, new BloodPressureCompositionConverter());
         profiles.put(Profile.BODY_TEMP, new BodyTemperatureCompositionConverter());
         profiles.put(Profile.BODY_WEIGHT, new BodyWeightCompositionConverter());
