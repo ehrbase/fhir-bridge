@@ -39,6 +39,8 @@ public class FhirUtils {
         Set<String> c2 = Arrays.stream(profiles)
                 .map(Profile::getUri)
                 .collect(Collectors.toSet());
+
         return !Collections.disjoint(c1, c2);
     }
+
 }
