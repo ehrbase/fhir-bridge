@@ -1,9 +1,21 @@
 package org.ehrbase.fhirbridge.ehr.converter.bloodgas;
 
 
+import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.fhirbridge.ehr.converter.bloodgas.laboratoryanalyteconverter.KohlendioxidpartialdruckConverter;
+import org.ehrbase.fhirbridge.ehr.converter.bloodgas.laboratoryanalyteconverter.PhWertConverter;
+import org.ehrbase.fhirbridge.ehr.converter.bloodgas.laboratoryanalyteconverter.SauerstoffpartialdruckConverter;
+import org.ehrbase.fhirbridge.ehr.converter.bloodgas.laboratoryanalyteconverter.SauerstoffsaettigungConverter;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.LaborergebnisObservation;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.LabortestBezeichnungDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Observation;
+
+import java.util.Optional;
 
 class LaborergebnisBefundConverter {
-/*
+
 
     private LaborergebnisBefundConverter() {
     }
@@ -59,7 +71,7 @@ class LaborergebnisBefundConverter {
         throw new IllegalArgumentException("The coding of the LabortestBezeichnung: "+fhirObservation.getCode().getCoding()+" cannot be mapped, needs to be either blood (LOINC code 24338-6)" +
                 ", arterial blood (24336-0) or capillary blood (24337-8), check JSON at path Observation.code.coding");
     }
-*/
+
 
 
 }

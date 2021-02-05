@@ -2,13 +2,10 @@ package org.ehrbase.fhirbridge.fhir.bundle.BundleValidator;
 
 import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.fhir.bundle.BundleValidator.AbstractBundleValidator;
 import org.hl7.fhir.r4.model.Bundle;
-import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Resource;
 
 import java.util.Map;
-import java.util.Optional;
 
 public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
     private static final String bloodGasUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel";
@@ -17,42 +14,27 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
     private static final String oxygenPartialPressureUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure";
     private static final String oxygenSaturationUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation";
 
-    private Optional<Observation> bloodGasPanel = Optional.empty();
-    private Optional<Observation> pH = Optional.empty();
-    private Optional<Observation> carbonDioxidePartialPressure = Optional.empty();
-    private Optional<Observation> oxygenPartialPressure = Optional.empty();
-    private Optional<Observation> oxygenSaturation = Optional.empty();
-
     private int bloodGasProfilesContained = 0;
     private int phProfilesContained = 0;
     private int carbonDioxideProfilesContained = 0;
     private int oxygenPartialProfilesContained = 0;
     private int oxygenSaturationProfilesContained = 0;
 
-    private Bundle bundle;
-
     @Override
-    public void validateRequest(Object payload, Map<String, Object> parameters) {
-        super.validateRequest(payload, parameters);
-        this.bundle = (Bundle) payload;
-        validateObservations();
+    public void validateRequest(Object bundle, Map<String, Object> parameters) {
+        super.validateRequest(bundle, parameters);
+        validateBloodGasPanel((Bundle) bundle);
     }
 
-    private void validateObservations() {
+    private void validateBloodGasPanel(Bundle bundle) {
         resetAttributes();
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
             validateProfiles(entry);
         }
-        checkIfObservationsComplete();
+        checkIfAtLeastOneObservationContained();
     }
 
-
     private void resetAttributes() {
-        bloodGasPanel = Optional.empty();
-        pH = Optional.empty();
-        carbonDioxidePartialPressure = Optional.empty();
-        oxygenPartialPressure = Optional.empty();
-        oxygenSaturation = Optional.empty();
         bloodGasProfilesContained = 0;
         phProfilesContained = 0;
         carbonDioxideProfilesContained = 0;
@@ -60,25 +42,24 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
         oxygenSaturationProfilesContained = 0;
     }
 
-
     private void validateProfiles(Bundle.BundleEntryComponent entry) {
         try {
             String profileUrl = entry.getResource().getMeta().getProfile().get(0).getValue();
             switch (profileUrl) {
                 case bloodGasUrl:
-                    setBloodGasPanel(entry.getResource());
+                    setBloodGasPanel();
                     break;
                 case pHUrl:
-                    setpH(entry.getResource());
+                    validatePhCount();
                     break;
                 case carbonDioxidePartialPressureUrl:
-                    setCarbonDioxidePartialPressure(entry.getResource());
+                    validateCarbonDioxideCount();
                     break;
                 case oxygenPartialPressureUrl:
-                    setOxygenPartialPressure(entry.getResource());
+                    validateOxygenPressureCount();
                     break;
                 case oxygenSaturationUrl:
-                    setOxygenSaturation(entry.getResource());
+                    validateOxygenSaturationCount();
                     break;
                 default:
                     throw new InternalErrorException("Blood gas panel bundle needs to contain only the profiles for the blood gas panel. Please delete profile " + profileUrl + " from the Bundle.");
@@ -90,7 +71,7 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
     }
 
 
-    private void checkIfObservationsComplete() {
+    private void checkIfAtLeastOneObservationContained() {
         if (!checkIfOneProfileIsPresent()) {
             throw new UnprocessableEntityException("Bundle Blood gas panel needs to contain at least one of the following profiles: oxygen partial pressure, carbon dioxide partial pressure" +
                     ", ph or oxygen saturation");
@@ -98,76 +79,46 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
     }
 
     private boolean checkIfOneProfileIsPresent() {
-        return oxygenPartialPressure.isPresent() || carbonDioxidePartialPressure.isPresent() || pH.isPresent() || oxygenSaturation.isPresent();
+        return oxygenPartialProfilesContained==1 || carbonDioxideProfilesContained==1|| phProfilesContained==1 || oxygenSaturationProfilesContained ==1;
     }
 
-    private void setBloodGasPanel(Resource resource) {
+    private void setBloodGasPanel() {
         bloodGasProfilesContained += 1;
-        if (bloodGasProfilesContained == 1) {
-            this.bloodGasPanel = Optional.of((Observation) resource);
-        } else {
+        if (bloodGasProfilesContained != 1) {
             throw new InternalErrorException("Blood gas Panel profile is duplicated within the bundle, please delete one of them");
         }
 
     }
 
-    private void setpH(Resource resource) {
+    private void validatePhCount() {
         phProfilesContained += 1;
-        if (phProfilesContained == 1) {
-            this.pH = Optional.of((Observation) resource);
-        } else {
+        if (phProfilesContained != 1) {
             throw new InternalErrorException("PH profile is duplicated within the bundle, please delete one of them");
         }
     }
 
-    private void setCarbonDioxidePartialPressure(Resource resource) {
+    private void validateCarbonDioxideCount() {
         carbonDioxideProfilesContained += 1;
-        if (carbonDioxideProfilesContained == 1) {
-            this.carbonDioxidePartialPressure = Optional.of((Observation) resource);
-        } else {
+        if (carbonDioxideProfilesContained != 1) {
             throw new InternalErrorException("Carbon Dioxide Partial Pressure profile is duplicated within the bundle, please delete one of them");
         }
 
     }
 
-    private void setOxygenPartialPressure(Resource resource) {
+    private void validateOxygenPressureCount() {
         oxygenPartialProfilesContained += 1;
-        if (oxygenPartialProfilesContained == 1) {
-            this.oxygenPartialPressure = Optional.of((Observation) resource);
-        } else {
+        if (oxygenPartialProfilesContained != 1) {
             throw new InternalErrorException("Oxygen partial pressure profile is duplicated within the bundle, please delete one of them");
         }
 
     }
 
-    private void setOxygenSaturation(Resource resource) {
+    private void validateOxygenSaturationCount() {
         oxygenSaturationProfilesContained += 1;
-        if (oxygenSaturationProfilesContained == 1) {
-            this.oxygenSaturation = Optional.of((Observation) resource);
-        } else {
+        if (oxygenSaturationProfilesContained != 1) {
             throw new InternalErrorException("Oxygen saturation profile is duplicated within the bundle, please delete one of them");
 
         }
-    }
-
-    public Observation getBloodGasPanel() {
-        return bloodGasPanel.get();
-    }
-
-    public Optional<Observation> getpH() {
-        return pH;
-    }
-
-    public Optional<Observation> getCarbonDioxidePartialPressure() {
-        return carbonDioxidePartialPressure;
-    }
-
-    public Optional<Observation> getOxygenPartialPressure() {
-        return oxygenPartialPressure;
-    }
-
-    public Optional<Observation> getOxygenSaturation() {
-        return oxygenSaturation;
     }
 
 }

@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter.bloodgas;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.BefundDerBlutgasanalyseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.StatusDefiningcode;
@@ -11,9 +10,7 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Reference;
 
-import java.util.List;
 import java.util.Optional;
 
 public class BlutgasAnalyseConverter {
@@ -63,38 +60,6 @@ public class BlutgasAnalyseConverter {
     }
 
 
-/*    private void checkHasMemberResources(BloodGasPanel bloodGasPanelBundle) {
-        List<Reference> members = bloodGasPanelBundle.getBloodGasPanel().getHasMember();
-        checkReferenceContained(bloodGasPanelBundle.getCarbonDioxidePartialPressure(), members);
-        checkReferenceContained(bloodGasPanelBundle.getOxygenPartialPressure(), members);
-        checkReferenceContained(bloodGasPanelBundle.getOxygenSaturation(), members);
-        checkReferenceContained(bloodGasPanelBundle.getpH(), members);
-        allMembersContained(members);
-    }*/
-
-    private void checkReferenceContained(Optional<Observation> fhirObservation, List<Reference> members) {
-        if (fhirObservation.isPresent()) {
-            String extractedReferenceId = fhirObservation.get().getId().substring(fhirObservation.get().getId().indexOf("Observation"));
-            isReferenceContained(members, extractedReferenceId);
-        }
-    }
-
-    private void isReferenceContained(List<Reference> members, String extractedReferenceId) {
-        for (Reference reference : members) {
-            if (reference.getReference().equals(extractedReferenceId)) {
-                members.remove(reference);
-                return;
-            }
-        }
-        throw new UnprocessableEntityException("BloodgasPanel references a set of Fhir resources as members, that need to be contained in this bundle. Nevertheless the id " + extractedReferenceId + " is missing.");
-    }
-
-    private void allMembersContained(List<Reference> members){
-        if (members.size() > 0) {
-            throw new UnprocessableEntityException("BloodgasPanel contains references to a resource/s that is not contained within this bundle, please check the hasMembers within the blood gas panel resource to match the amount and value of the resources contained in the bundle.");
-        }
-    }
-
     private void setMandatoryFields(BefundDerBlutgasanalyseComposition befundDerBlutgasanalyseComposition) {
         befundDerBlutgasanalyseComposition.setLanguage(Language.DE);
         befundDerBlutgasanalyseComposition.setLocation("test");
@@ -104,7 +69,7 @@ public class BlutgasAnalyseConverter {
         befundDerBlutgasanalyseComposition.setComposer(new PartySelf());
     }
 
-  /*  public BefundDerBlutgasanalyseComposition convert(BloodGasPanel bloodGasPanelBundle) {
+    public BefundDerBlutgasanalyseComposition convert(BloodGasPanel bloodGasPanelBundle) {
         Observation bloodGasPanel = bloodGasPanelBundle.getBloodGasPanel();
         BefundDerBlutgasanalyseComposition befundDerBlutgasanalyseComposition = new BefundDerBlutgasanalyseComposition();
         setMandatoryFields(befundDerBlutgasanalyseComposition);
@@ -113,7 +78,6 @@ public class BlutgasAnalyseConverter {
         befundDerBlutgasanalyseComposition.setKategorieValue(mapKategorie(bloodGasPanel));
         befundDerBlutgasanalyseComposition.setStartTimeValue(bloodGasPanel.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         befundDerBlutgasanalyseComposition.setLaborergebnis(LaborergebnisBefundConverter.map(bloodGasPanelBundle));
-        checkHasMemberResources(bloodGasPanelBundle);
         return befundDerBlutgasanalyseComposition;
-    }*/
+    }
 }
