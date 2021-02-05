@@ -30,7 +30,6 @@ public class BloodGasPanel {
         for (Resource resource : observation.getContained()) {
             setProfiles(resource);
         }
-        checkIfObservationsComplete();
     }
 
     // Implementing these as classes would be more appropriate
@@ -57,17 +56,6 @@ public class BloodGasPanel {
         } catch (IndexOutOfBoundsException e) {
             throw new UnprocessableEntityException("Make sure only the for Blood Gas Panel supported Profiles are contained in the Bundle these are: blood gas panel, oxygen saturation, carbon dioxide saturation, ph, oxygen partaial pressure");
         }
-    }
-
-    private void checkIfObservationsComplete() {
-        if (!checkIfOneProfileIsPresent()) {
-            throw new UnprocessableEntityException("Bundle Blood gas panel needs to contain at least one of the following profiles: oxygen partial pressure, carbon dioxide partial pressure" +
-                    ", ph or oxygen saturation");
-        }
-    }
-
-    private boolean checkIfOneProfileIsPresent() {
-        return oxygenPartialPressure.isPresent() || carbonDioxidePartialPressure.isPresent() || pH.isPresent() || oxygenSaturation.isPresent();
     }
 
     public Observation getBloodGasPanel() {
