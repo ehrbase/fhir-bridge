@@ -30,6 +30,8 @@ public enum Profile {
 
     BODY_HEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"),
 
+    BLOOD_GAS_PANEL(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel"),
+
     BLOOD_PRESSURE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure"),
 
     BODY_TEMP(Observation.class, "http://hl7.org/fhir/StructureDefinition/bodytemp"),
@@ -44,11 +46,19 @@ public enum Profile {
 
     HEART_RATE(Observation.class, "http://hl7.org/fhir/StructureDefinition/heartrate"),
 
+    PACO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure"),
+
+    PAO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure"),
+
     PATIENT_IN_ICU(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu"),
+
+    PH(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH"),
 
     PREGNANCY_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pregnancy-status"),
 
     OBSERVATION_LAB(Observation.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"),
+
+    OXYGEN_SATURATION(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation"),
 
     RESPIRATORY_RATE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-rate"),
 
