@@ -5,6 +5,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
+import org.ehrbase.fhirbridge.camel.processor.DefaultMethodOutcomeProcessor;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
@@ -53,14 +54,18 @@ public class ObservationRoutes extends RouteBuilder {
             .process(patientIdProcessor)
             .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.CamelFhirBridgeProfile})"))
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+            .process(new DefaultMethodOutcomeProcessor());
 
+        // Generic route to handle an Observation
         from("direct:process-observation-resource")
-            .to("bean:myObservationDaoR4?method=create")
-            .setBody(simple("${body.resource}"))
+            .onCompletion()
+                .process("auditCreateResourceProcessor")
+            .end()
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("myObservationDaoR4", "create"))
             .process("patientIdProcessor")
             .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.CamelFhirBridgeProfile})"))
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
+            .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
+            .process(new DefaultMethodOutcomeProcessor());
         // @formatter:on
     }
 }

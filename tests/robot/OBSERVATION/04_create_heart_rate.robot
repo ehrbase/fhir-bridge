@@ -24,8 +24,8 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* The validation of error messages in the tables below depends on system language settings:\n\n
 ...                           Validation of English messages (if the system language is set to English), \n\n
 ...                           Validation of German messages (if the system language is set to German)
-
-Force Tags              create    heart-rate
+...						*Author:* Dave Petzold
+Force Tags              observation_create    heart-rate
 
 
 *** Variables ***

@@ -23,7 +23,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 
-Force Tags              create
+Force Tags              condition_create
 
 
 
@@ -69,7 +69,7 @@ Force Tags              create
     [Tags]              symptoms-covid-19    valid
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create symptoms-covid-19    create-symptoms-covid-19-present.json
+    condition.create symptoms-covid-19    Symptoms-Covid-19    create-symptoms-covid-19-present.json
     condition.validate response - 201
 
 
@@ -82,7 +82,7 @@ Force Tags              create
     [Tags]              symptoms-covid-19    valid
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create symptoms-covid-19    create-symptoms-covid-19-absent.json
+    condition.create symptoms-covid-19    Symptoms-Covid-19    create-symptoms-covid-19-absent.json
     condition.validate response - 201
 
 
@@ -95,7 +95,7 @@ Force Tags              create
     [Tags]              symptoms-covid-19    valid
 
     ehr.create new ehr    000_ehr_status.json
-    condition.create symptoms-covid-19    create-symptoms-covid-19-unknown.json
+    condition.create symptoms-covid-19    Symptoms-Covid-19    create-symptoms-covid-19-unknown.json
     condition.validate response - 201
 
 
@@ -105,7 +105,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diabetes-mellitus    valid    not-ready
+    [Tags]              diabetes-mellitus    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diabetes mellitus    Diabetes Mellitus    create-diabetes-mellitus.json
@@ -118,7 +118,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diabetes-mellitus    valid    not-ready
+    [Tags]              diabetes-mellitus    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diabetes mellitus    Diabetes Mellitus Type 1    create-diabetes-mellitus-type-1.json
@@ -131,7 +131,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diabetes-mellitus    valid    not-ready
+    [Tags]              diabetes-mellitus    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diabetes mellitus    Diabetes Mellitus Type 2    create-diabetes-mellitus-type-2.json
@@ -144,7 +144,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diabetes-mellitus    valid    not-ready
+    [Tags]              diabetes-mellitus    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diabetes mellitus    Diabetes Mellitus Type 2 Insulin Treated    create-diabetes-mellitus-type-2-insulin-treated.json
@@ -157,7 +157,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diabetes-mellitus    valid    not-ready
+    [Tags]              diabetes-mellitus    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create rheumatological immunological diseases    Rheumatological Immunological Diseases (Rheumatism)    create-rheumatological-immunological-diseases-rheumatism.json
@@ -170,7 +170,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diabetes-mellitus    valid    not-ready
+    [Tags]              diabetes-mellitus    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create rheumatological immunological diseases    Rheumatological Immunological Diseases (Rheumatoid Arthritis)    create-rheumatological-immunological-diseases-rheumatoid-arthritis.json
@@ -183,7 +183,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-lung-disease    valid    not-ready
+    [Tags]              chronic-lung-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic lung disease    create-chronic-lung-disease.json
@@ -196,7 +196,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-lung-disease    valid    not-ready
+    [Tags]              chronic-lung-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic obstructive lung disease    create-chronic-obstructive-lung-disease.json
@@ -209,7 +209,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-lung-disease    valid    not-ready
+    [Tags]              chronic-lung-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic Lung Disease (Fibrosis of Lung)    create-chronic-lung-disease-fibrosis-of-lung.json
@@ -222,7 +222,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-lung-disease    valid    not-ready
+    [Tags]              chronic-lung-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic Lung Disease (Asthma)    create-chronic-lung-disease-asthma.json
@@ -235,7 +235,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-lung-disease    valid    not-ready
+    [Tags]              chronic-lung-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic Lung Disease (Cystic Fibrosis)    create-chronic-lung-disease-cystic-fibrosis.json
@@ -248,7 +248,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-lung-disease    valid    not-ready
+    [Tags]              chronic-lung-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic Lung Disease (Extreme Obesity with Alveolar Hypoventilation)    create-chronic-lung-disease-with-alveolar-hypoventilation.json
@@ -261,7 +261,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-lung-disease    valid    not-ready
+    [Tags]              chronic-lung-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic Lung Disease (Pulmonary hypertension)    create-chronic-lung-disease-pulmonary-hypertension.json
@@ -274,7 +274,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-lung-disease    valid    not-ready
+    [Tags]              chronic-lung-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic Lung Disease (Sleep Apnea)    create-chronic-lung-disease-sleep-apnea.json
@@ -287,7 +287,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-lung-disease    valid    not-ready
+    [Tags]              chronic-lung-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic lung diseases    Chronic Lung Disease (Obstructive Sleep Apnea Syndrome)    create-chronic-lung-disease-obstructive-sleep-apnea.json
@@ -300,7 +300,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-liver-disease    valid    not-ready
+    [Tags]              chronic-liver-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic liver diseases    Chronic Liver Disease    create-chronic-liver-disease.json
@@ -313,7 +313,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-liver-disease    valid    not-ready
+    [Tags]              chronic-liver-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic liver diseases    Chronic Liver Disease (Autoimmune Liver Disease)    create-chronic-liver-disease-autoimmune.json
@@ -326,7 +326,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-liver-disease    valid    not-ready
+    [Tags]              chronic-liver-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic liver diseases    Chronic Liver Disease (Chronic Viral Hepatitis)    create-chronic-liver-disease-chronic-viral-hepatitis.json
@@ -339,7 +339,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-liver-disease    valid    not-ready
+    [Tags]              chronic-liver-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic liver diseases    Chronic Liver Disease (Cirrhosis of Liver)    create-chronic-liver-disease-cirrhosis-of-liver.json
@@ -352,7 +352,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-liver-disease    valid    not-ready
+    [Tags]              chronic-liver-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic liver diseases    Chronic Liver Disease (Steatosis of Liver)    create-chronic-liver-disease-steatosis-of-liver.json
@@ -365,7 +365,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              malignant-neoplastic-disease    valid    not-ready
+    [Tags]              malignant-neoplastic-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create malignant neoplastic disease    create-malignant-neoplastic-disease-absent.json
@@ -378,7 +378,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              malignant-neoplastic-disease    valid    not-ready
+    [Tags]              malignant-neoplastic-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create malignant neoplastic disease    create-malignant-neoplastic-disease-present-active.json
@@ -391,7 +391,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              malignant-neoplastic-disease    valid    not-ready
+    [Tags]              malignant-neoplastic-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create malignant neoplastic disease    create-malignant-neoplastic-disease-present-remission.json
@@ -404,7 +404,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              malignant-neoplastic-disease    valid    not-ready
+    [Tags]              malignant-neoplastic-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create malignant neoplastic disease    create-malignant-neoplastic-disease-unknown.json
@@ -417,7 +417,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diagnosis-covid-19    valid    not-ready
+    [Tags]              diagnosis-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-absent.json
@@ -430,7 +430,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diagnosis-covid-19    valid    not-ready
+    [Tags]              diagnosis-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-present-active.json
@@ -443,7 +443,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diagnosis-covid-19    valid    not-ready
+    [Tags]              diagnosis-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-present-remission.json
@@ -456,7 +456,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diagnosis-covid-19    valid    not-ready
+    [Tags]              diagnosis-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create diagnosis covid-19    create-diagnosis-covid-19-unknown.json
@@ -469,7 +469,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-kidney-disease    valid    not-ready
+    [Tags]              chronic-kidney-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic kidney diseases    Chronic Kidney Disease (Disorder - Present)    create-chronic-kidney-disease-present.json
@@ -482,7 +482,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-kidney-disease    valid    not-ready
+    [Tags]              chronic-kidney-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic kidney diseases    Chronic Kidney Disease (Disorder - Absent)    create-chronic-kidney-disease-absent.json
@@ -495,7 +495,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-kidney-disease    valid    not-ready
+    [Tags]              chronic-kidney-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic kidney diseases    Chronic Kidney Disease (Disorder - Unknown)    create-chronic-kidney-disease-unknown.json
@@ -508,7 +508,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-kidney-disease    valid    not-ready
+    [Tags]              chronic-kidney-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic kidney diseases    Chronic Kidney Disease (Disorder - stage 5 on dialysis)    create-chronic-kidney-disease-stage-5-dialysis.json
@@ -521,7 +521,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Anxiety Disorder)    create-chronic-neurological-or-mental-disease-anxiety.json
@@ -534,7 +534,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Chronic Nervous System Disorder)    create-chronic-neurological-or-mental-disease-chronic-nervous-system.json
@@ -547,7 +547,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Combined disorder of muscle AND peripheral nerve)    create-chronic-neurological-or-mental-disease-muscle-and-peripheral-nerve.json
@@ -560,7 +560,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Dementia)    create-chronic-neurological-or-mental-disease-dementia.json
@@ -573,7 +573,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Depressive Disorder)    create-chronic-neurological-or-mental-disease-depressive.json
@@ -586,7 +586,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Epilepsy)    create-chronic-neurological-or-mental-disease-epilepsy.json
@@ -599,7 +599,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident with Residual Deficits)    create-chronic-neurological-or-mental-disease-history-of-cerebrovascular-accident-with.json
@@ -612,7 +612,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident without Residual Deficits)    create-chronic-neurological-or-mental-disease-history-of-cerebrovascular-accident-without.json
@@ -625,7 +625,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Mental Disorder)    create-chronic-neurological-or-mental-disease-mental-diseases.json
@@ -638,7 +638,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Migraine)    create-chronic-neurological-or-mental-disease-migraine.json
@@ -651,7 +651,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Multiple Sclerosis)    create-chronic-neurological-or-mental-disease-multiple-sclerosis.json
@@ -664,7 +664,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Parkinson's Disease)    create-chronic-neurological-or-mental-disease-parkinsons.json
@@ -677,7 +677,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready
+    [Tags]              chronic-neurological-or-mental-disease    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Psychotic Disorder)    create-chronic-neurological-or-mental-disease-psychotic-disorder.json
@@ -690,7 +690,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid    not-ready
+    [Tags]              cardiovascular-diseases    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (Cardiac Arrhythmia)    create-cardiovascular-diseases-cardiac-arrhythmia.json
@@ -703,7 +703,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid    not-ready
+    [Tags]              cardiovascular-diseases    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (Cardiovascular Disease)    create-cardiovascular-diseases-cardiovascular-disease.json
@@ -716,7 +716,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid    not-ready
+    [Tags]              cardiovascular-diseases    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (Carotid Artery Stenosis)    create-cardiovascular-diseases-carotid-artery-stenosis.json
@@ -729,7 +729,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid    not-ready
+    [Tags]              cardiovascular-diseases    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (Coronary Arteriosclerosis)    create-cardiovascular-diseases-coronary-arteriosclerosis.json
@@ -742,7 +742,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid    not-ready
+    [Tags]              cardiovascular-diseases    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (Heart Failure)    create-cardiovascular-diseases-heart-failure.json
@@ -755,7 +755,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid    not-ready
+    [Tags]              cardiovascular-diseases    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (History of Heart Revascularization)    create-cardiovascular-diseases-history-of-heart-revascularization.json
@@ -768,7 +768,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid    not-ready
+    [Tags]              cardiovascular-diseases    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (History of Myocardial Infarction)    create-cardiovascular-diseases-history-of-myocardial-infarction.json
@@ -781,7 +781,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid    not-ready
+    [Tags]              cardiovascular-diseases    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (Hypertensive Disorder)    create-cardiovascular-diseases-hypertensive-disorder.json
@@ -794,7 +794,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid    not-ready
+    [Tags]              cardiovascular-diseases    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (Peripheral Arterial Occlusive Disease)    create-cardiovascular-diseases-peripheral-arterial-occlusive-disease.json
@@ -807,7 +807,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              human-inmunodeficiency-virus-infection    valid    not-ready
+    [Tags]              human-inmunodeficiency-virus-infection    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create human immunodeciency virus infection    Human Immunodeficiency Virus Infection (Present)    create-human-immunodeficiency-virus-infection-present.json
@@ -820,7 +820,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              human-inmunodeficiency-virus-infection    valid    not-ready
+    [Tags]              human-inmunodeficiency-virus-infection    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create human immunodeciency virus infection    Human Immunodeficiency Virus Infection (Absent)    create-human-immunodeficiency-virus-infection-absent.json
@@ -833,7 +833,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              human-inmunodeficiency-virus-infection    valid    not-ready
+    [Tags]              human-inmunodeficiency-virus-infection    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create human immunodeciency virus infection    Human Immunodeficiency Virus Infection (Unknown)    create-human-immunodeficiency-virus-infection-unknown.json
@@ -846,7 +846,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              gastrointestinal-ulcer    valid    not-ready
+    [Tags]              gastrointestinal-ulcer    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create gastrointestinal ulcer    Gastrointestinal Ulcer (Present)    create-gastrointestinal-ulcer-present.json
@@ -859,7 +859,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              gastrointestinal-ulcer    valid    not-ready
+    [Tags]              gastrointestinal-ulcer    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create gastrointestinal ulcer    Gastrointestinal Ulcer (Absent)    create-gastrointestinal-ulcer-absent.json
@@ -872,7 +872,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              gastrointestinal-ulcer    valid    not-ready
+    [Tags]              gastrointestinal-ulcer    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create gastrointestinal ulcer    Gastrointestinal Ulcer (Unknown)    create-gastrointestinal-ulcer-unknown.json
@@ -885,7 +885,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              history-of-organ-recipient    valid    not-ready
+    [Tags]              history-of-organ-recipient    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create history of organ recipient    History of Organ Recipient (Present)    create-history-of-organ-recipient-present.json
@@ -898,7 +898,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              history-of-organ-recipient    valid    not-ready
+    [Tags]              history-of-organ-recipient    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create history of organ recipient    History of Organ Recipient (Absent)    create-history-of-organ-recipient-absent.json
@@ -911,7 +911,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              history-of-organ-recipient    valid    not-ready
+    [Tags]              history-of-organ-recipient    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create history of organ recipient    History of Organ Recipient (Unknown)    create-history-of-organ-recipient-unknown.json
@@ -924,7 +924,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              complications-of-covid-19    valid    not-ready
+    [Tags]              complications-of-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create complications of covid-19    Complications of Covid-19 - Cerebrovascular Accident (Disorder)    create-complications-of-covid-19-cerebrovascular-accident.json
@@ -937,7 +937,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              complications-of-covid-19    valid    not-ready
+    [Tags]              complications-of-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create complications of covid-19    Complications of Covid-19 - Infectious Agent in Bloodstream (Finding - Present)    create-complications-of-covid-19-infectious-agent-in-bloodstream-present.json
@@ -950,7 +950,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              complications-of-covid-19    valid    not-ready
+    [Tags]              complications-of-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create complications of covid-19    Complications of Covid-19 - Infectious Agent in Bloodstream (Finding - Absent)    create-complications-of-covid-19-infectious-agent-in-bloodstream-absent.json
@@ -963,7 +963,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              complications-of-covid-19    valid    not-ready
+    [Tags]              complications-of-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create complications of covid-19    Complications of Covid-19 - Infectious Disease of Lung    create-complications-of-covid-19-infectious-disease-of-lung.json
@@ -976,7 +976,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              complications-of-covid-19    valid    not-ready
+    [Tags]              complications-of-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create complications of covid-19    Complications of Covid-19 - Myocardial Infarction (Disorder - Present)    create-complications-of-covid-19-myocardial-infarction-present.json
@@ -989,7 +989,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              complications-of-covid-19    valid    not-ready
+    [Tags]              complications-of-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create complications of covid-19    Complications of Covid-19 - Myocardial Infarction (Disorder - Unknown)    create-complications-of-covid-19-myocardial-infarction-unknown.json
@@ -1002,7 +1002,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              complications-of-covid-19    valid    not-ready
+    [Tags]              complications-of-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create complications of covid-19    Complications of Covid-19 - Pre-Renal acute Kidney Injury    create-complications-of-covid-19-pre-renal-acute-kidney-injury.json
@@ -1015,7 +1015,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              complications-of-covid-19    valid    not-ready
+    [Tags]              complications-of-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create complications of covid-19    Complications of Covid-19 - Pulmonary Embolism    create-complications-of-covid-19-pulmonary-embolism.json
@@ -1028,7 +1028,7 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              complications-of-covid-19    valid    not-ready
+    [Tags]              complications-of-covid-19    valid    not-ready    not-implemented
 
     ehr.create new ehr    000_ehr_status.json
     condition.create complications of covid-19    Complications of Covid-19 - Venous Thrombosis    create-complications-of-covid-19-venous-thrombosis.json
