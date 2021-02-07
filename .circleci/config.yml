@@ -225,7 +225,7 @@ commands:
                 name: WAIT FOR EHRBASE SERVER TO BE READY
                 command: |
                     ls -la
-                    timeout=60
+                    timeout=180
                     while [ ! -f ehrbase/log ];
                         do
                             echo "Waiting for file ehrbase/log ..."
@@ -240,7 +240,7 @@ commands:
                         do
                             echo "waiting for EHRbase to be ready ...";
                             if [ "$timeout" == 0 ]; then
-                                echo "WARNING: Did not see a startup message even after waiting 60s"
+                                echo "WARNING: Did not see a startup message even after waiting 180s"
                                 cat ehrbase/log
                                 exit 1
                             fi
