@@ -285,7 +285,7 @@ commands:
                 name: WAIT FOR FHIRBRIDE TO BE READY
                 command: |
                     ls -la
-                    timeout=60
+                    timeout=180
                     while [ ! -f fhirbride_log ];
                         do
                             echo "Waiting for file fhirbride_log ..."
@@ -300,7 +300,8 @@ commands:
                         do
                             echo "waiting for FHIR-Bridge to be ready ...";
                             if [ "$timeout" == 0 ]; then
-                                echo "WARNING: Did not see a startup message even after waiting 60s"
+                                echo "WARNING: Did not see a startup message even after waiting 180s"
+                                cat fhirbride_log
                                 exit 1
                             fi
                             sleep 1;
