@@ -78,7 +78,7 @@
                         <name>ehrbase/${project.artifactId}</name>
                     </image>
                     <wait>1000</wait>
-                    <maxAttempts>120</maxAttempts>
+                    <maxAttempts>180</maxAttempts>
                     <excludes>
                         <exclude>
                             <groupId>org.springframework.boot</groupId>
