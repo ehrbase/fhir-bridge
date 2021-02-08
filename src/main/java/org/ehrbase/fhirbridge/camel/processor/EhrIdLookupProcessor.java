@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.camel.processor;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.checkerframework.checker.nullness.Opt;
 import org.ehrbase.client.aql.parameter.ParameterValue;
 import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.client.aql.record.Record1;
@@ -18,6 +19,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -37,7 +39,7 @@ public class EhrIdLookupProcessor implements Processor, MessageSourceAware {
     @Override
     public void process(Exchange exchange) {
         Resource resource = exchange.getIn().getBody(Resource.class);
-        String subject = Resources.getSubjectIdentifier(resource)
+        String subject = Resources.getSubjectIdentifier(resource, Optional.of(openEhrClient))
                 .map(Identifier::getValue)
                 .orElseThrow(() -> new UnprocessableEntityException(messages.getMessage("validation.subject.identifierRequired")));
 
