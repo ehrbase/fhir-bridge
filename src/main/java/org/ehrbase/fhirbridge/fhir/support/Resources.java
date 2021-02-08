@@ -1,5 +1,12 @@
 package org.ehrbase.fhirbridge.fhir.support;
 
+import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
+import com.nedap.archie.rm.datavalues.DvText;
+import com.nedap.archie.rm.ehr.EhrStatus;
+import com.nedap.archie.rm.generic.PartySelf;
+import com.nedap.archie.rm.support.identification.GenericId;
+import com.nedap.archie.rm.support.identification.PartyRef;
+import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.CanonicalType;
 import org.hl7.fhir.r4.model.Condition;
@@ -11,13 +18,13 @@ import org.hl7.fhir.r4.model.PrimitiveType;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Resource;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Resources {
@@ -48,7 +55,12 @@ public class Resources {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public static Optional<Identifier> getSubjectIdentifier(Resource resource) {
+    public static Optional<Identifier> getSubjectIdentifier(Resource resourceopenEhrClient) {
+        return getSubjectIdentifier(resourceopenEhrClient, Optional.empty());
+    }
+
+
+    public static Optional<Identifier> getSubjectIdentifier(Resource resource, Optional<OpenEhrClient> openEhrClient) {
         Identifier subjectIdentifier = null;
 
         if (resource instanceof Condition) {
@@ -66,10 +78,41 @@ public class Resources {
         } else if (resource instanceof Procedure) {
             subjectIdentifier = ((Procedure) resource).getSubject().getIdentifier();
         } else if (resource instanceof QuestionnaireResponse) {
-            subjectIdentifier = ((QuestionnaireResponse) resource).getSubject().getIdentifier();
+            subjectIdentifier = getQuestionnaireId((QuestionnaireResponse) resource, openEhrClient);
         }
 
         return Optional.ofNullable(subjectIdentifier);
+    }
+
+    public static Identifier getQuestionnaireId(QuestionnaireResponse resource, Optional<OpenEhrClient> openEhrClient){
+        if(openEhrClient.isEmpty()){
+            throw new InternalErrorException("getSubjectIdentifier was called without a confugred openEHRClient as parameter. Please add one.");
+        }
+        if(resource.getQuestionnaire().contains("http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|")){
+            return createQuestionnaireEHRAndReturnPatientId(openEhrClient.get());
+        }else{
+            return resource.getSubject().getIdentifier();
+        }
+    }
+
+
+    private static Identifier createQuestionnaireEHRAndReturnPatientId(OpenEhrClient openEhrClient){
+        PartySelf subject = new PartySelf();
+        PartyRef externalRef = new PartyRef();
+        externalRef.setType("PARTY_REF");
+        externalRef.setNamespace("patients");
+        GenericId genericId = new GenericId();
+        genericId.setScheme("id_scheme");
+        genericId.setValue("{{questionnaire_patient_id}}"+Math.floor(Math.random()*1000000000));
+        externalRef.setId(genericId);
+        subject.setExternalRef(externalRef);
+        DvText dvText = new DvText("any EHR status");
+        EhrStatus ehrStatus = new EhrStatus("openEHR-EHR-ITEM_TREE.generic.v1", dvText, subject ,true, true, null);
+        UUID ehrId = openEhrClient.ehrEndpoint().createEhr(ehrStatus);
+        System.out.println("EhrID: " + ehrId.toString());
+        Identifier identifier = new Identifier();
+        identifier.setValue(genericId.getValue());
+        return identifier;
     }
 
     public static boolean hasProfile(Resource resource, Profile profile) {
