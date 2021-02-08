@@ -22,7 +22,7 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              establish preconditions
 
-Force Tags              search
+Force Tags              condition_search
 
 
 

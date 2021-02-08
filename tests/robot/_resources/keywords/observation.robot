@@ -63,7 +63,7 @@ validate response - 422 (profile not supported)
     ...        pattern=The resource does not contain any supported profile. One of the following profiles is expected:
 
 # TODO: remove this KW, use the NEW one below instead
-validate response - 422 (with error message)
+validate response - 422 (with error message OLD)
     [Arguments]    ${issue_index}    ${http_status_code}    ${error_message}    ${location}=${None}
     Integer     response status    ${http_status_code}
 
@@ -72,8 +72,7 @@ validate response - 422 (with error message)
     Run Keyword If    $location != None    String    response body issue ${issue_index} location 0
     ...         ${location}
 
-# TODO: remove 'NEW' from KW name
-validate response - 422 (with error message NEW)
+validate response - 422 (with error message)
     [Arguments]     ${http_status_code}    ${error_message}    ${location}=${None}
                     Integer     response status    ${http_status_code}
                     String      response body resourceType    OperationOutcome
@@ -84,6 +83,11 @@ validate response - 422 (with error message NEW)
             ${locations}=   String      $.issue[*].location[0]
             Should Contain Match    ${locations}    regexp=${location}
     END
+
+validate response - 422 (w/o error message)
+    [Arguments]     ${http_status_code}
+                    Integer     response status    ${http_status_code}
+                    String      response body resourceType    OperationOutcome
 
 
 #                                                 oooo                     

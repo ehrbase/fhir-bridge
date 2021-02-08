@@ -22,7 +22,8 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 Documentation           *NOTE:* use Regular Expressions to replace braces () as described here:
-...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example
+...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
+...						*Author:* Wladislaw Wagner
 Force Tags              create    blood-pressure    invalid
 
 
@@ -377,7 +378,7 @@ create blood pressure with ehr reference
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Blood Pressure    ${payload}
-						observation.validate response - 422 (with error message)    ${issue_index}
+						observation.validate response - 422 (with error message OLD)    ${issue_index}
 						...															${http_status_code}
 						...															${error_message}
 						...															${location}
@@ -391,7 +392,7 @@ create blood pressure w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Blood Pressure    ${payload}
-						observation.validate response - 422 (with error message)    ${issue_index}
+						observation.validate response - 422 (with error message OLD)    ${issue_index}
 						...															${http_status_code}
 						...															${error_message}
 						...															${location}

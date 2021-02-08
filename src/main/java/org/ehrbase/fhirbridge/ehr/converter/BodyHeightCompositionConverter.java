@@ -31,6 +31,12 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
             return null;
         }
 
+        // references:
+        // https://ckm.highmed.org/ckm/templates/1246.169.1038
+        // https://tools.openehr.org/designer/?code=39ddef9b1e993dc441ff#/designer/repos/num-2021-01-11
+        // https://simplifier.net/ForschungsnetzCovid-19/BodyHeight/~overview
+        // https://simplifier.net/forschungsnetzcovid-19/observation-example-body-height
+
         KorpergrosseComposition result = new KorpergrosseComposition();
         GrosseLangeObservation grosseLangeObservation = new GrosseLangeObservation();
 
@@ -38,6 +44,8 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         try {
             // default for every observation
             fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
+
+            //BSa Wie erscheint das im Mapping? Und wo finde ich das Referenzmodell mit diesen Infos zu openEHR?
             grosseLangeObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
             grosseLangeObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
             grosseLangeObservation.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
@@ -45,6 +53,7 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
 
             // special mapping content
             grosseLangeObservation.setGrosseLangeUnits(observation.getValueQuantity().getCode());
+            //BSa Hier ist nicht sichtbar, ob Körpergröße oder Geburt gesetzt wird -> woher die Info?
             grosseLangeObservation.setGrosseLangeMagnitude(observation.getValueQuantity().getValue().doubleValue());
 
         } catch (Exception e) {
@@ -54,6 +63,7 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         result.setGrosseLange(grosseLangeObservation);
 
         // Required fields by API
+        //BSa Wird hier noch was automatisiert?
         result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
         result.setLocation("test");
         result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
