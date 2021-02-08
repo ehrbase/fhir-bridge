@@ -1,0 +1,39 @@
+{
+  "resourceType": "Procedure",
+  "id": "21ed57e3-502d-4bb7-8538-906f6fff3e5a",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dialysis"
+    ]
+  },
+  "status": "not-done",
+  "category": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "277132007",
+        "display": "Therapeutic procedure (procedure)"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://fhir.de/CodeSystem/dimdi/ops",
+        "code": "8-85",
+        "display": "Extrakorporale Zirkulation und Behandlung von Blut"
+      }
+    ],
+    "text": "Dialysis"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "performedPeriod": {
+    "start": "2020-10-24",
+    "end": "2020-10-24"
+  }
+}

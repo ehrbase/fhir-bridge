@@ -24,7 +24,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Dave Petzold
-Force Tags              create    pregnancy-status    invalid
+Force Tags              observation_create    pregnancy-status    invalid
 
 
 
@@ -212,7 +212,6 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	# 																CODE
 
 	# invalid category
-#	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${pregnancy_status-url}
 	$.category								${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.category
 	$.category								${{ {} }}				422    	This property must be an Array, not an Object																Observation.category
 	$.category								${{ [{}] }}				422    	Object must have some content																				Observation.category
@@ -222,13 +221,11 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.category[0].coding    				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.category.0..coding
 	
 	#invalid code 0
-#	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}
 	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
 #	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
 	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
 	
 	#invalid system 0
-#	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
 	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
@@ -350,14 +347,12 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.valueCodeableConcept.coding				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.value.x..coding
 
 	# invalid system
-#	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
 	$.valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..system
 #	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
 	$.valueCodeableConcept.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.value.ofType.CodeableConcept..coding.0.
 	$.valueCodeableConcept.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..system
 
 	# invalid code
-#	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
 	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..code
 	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Status code ${randstring} is not supported
 	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..code
@@ -383,7 +378,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-pregnancy-status.json
-	observation.validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -416,22 +411,18 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	$.dataAbsentReason.coding					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.dataAbsentReason.coding
 
 	# invalid system
-#	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].system			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..system
 	$.dataAbsentReason.coding[0].system			${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.dataAbsentReason.coding.0.
 	$.dataAbsentReason.coding[0].system			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..system
 #	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
 
 	# invalid code
-#	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..code
 #	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..code
 
 	# invalid display
-#	$.dataAbsentReason.coding[0].display		missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].display		${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..display
-#	$.dataAbsentReason.coding[0].display		${randstring}			422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].display		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..display
 
 
@@ -463,7 +454,6 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
     Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://terminology.hl7.org/CodeSystem/observation-category         social-history          true			   true			  	 missing         		  	      test            test1234                            true    		 	valid      		  2020-02-25	      true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          A code with no system has no defined meaning. A system should be provided                                                                           Observation.code.coding.0.
 
 # all attributes invalid for category
-#	Observation    	        pregnancy-status  		       true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           http://google.com                                                  test                    true			   true		  		 http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422     	 Status code LA26683-5 is not supported     																										 ${EMPTY}
     Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           missing                                                            ${EMPTY}                true			   true			  	 http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..code
     Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           ${EMPTY}                                                           ${12345}                true			   true			  	 http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          @value cannot be empty                                                                                                                              Observation.category.0..coding.0..system
     Observation    	        pregnancy-status  			   true         ${pregnancy_status-url}			  true       ${identifiersystem}     ${identifiervalue}           final		     true             true           ${12345}                                                           missing                 true			   true			     http://loinc.org		  		  82810-3         Pregnancy status            		  true    		 	valid      		  2020-02-25		  true		    true	       http://loinc.org	       LA26683-5    	    Not pregnant		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.category.0..coding.0..system
@@ -494,27 +484,22 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
 	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
 	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready    bug
+    [Tags]              category    not-ready    not-ready_bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
-	# invalid category
-	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${pregnancy_status-url}
-	
 	#invalid code 0
-	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}
 	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
 	
 	# invalid system 0
-	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
 
 
 BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
 	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready    bug
+    [Tags]              category    not-ready    not-ready_bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
@@ -526,17 +511,13 @@ BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
 	$.valueCodeableConcept.coding 				missing					422    	Index 0 out of bounds for length 0
 
 	# invalid system
-	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
 	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
-
-	# invalid code
-	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
 
 
 BUG TRACE 03 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
 	[Documentation]		Belongs to TC 012! Remove separation when it's fixed!
 	[Template]			create pregnancy status with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready    bug
+    [Tags]              DataAbsentReason    not-ready    not-ready_bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
@@ -547,17 +528,11 @@ BUG TRACE 03 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
 	# missing coding
 	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
 
-	# invalid system - todo
-	$.dataAbsentReason.coding[0].system			missing					422    	Index 0 out of bounds for length 0
+	# invalid system
 	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
 
-	# invalid code - todo
-	$.dataAbsentReason.coding[0].code			missing					422    	Index 0 out of bounds for length 0
+	# invalid code
 	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
-
-	# invalid display - todo
-	$.dataAbsentReason.coding[0].display		missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason.coding[0].display		${randstring}			422    	Index 0 out of bounds for length 0
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -581,7 +556,7 @@ create pregnancy status with ehr reference
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
 						observation.POST /Observation           Pregnancy Status            ${payload}
-						observation.validate response - 422 (with error message NEW)        ${http_status_code}
+						observation.validate response - 422 (with error message)        ${http_status_code}
 						...															        ${error_message}
 						...															        ${location}
 
@@ -594,7 +569,7 @@ create pregnancy status w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Pregnancy Status    ${payload}
-						observation.validate response - 422 (with error message NEW)      ${http_status_code}
+						observation.validate response - 422 (with error message)      ${http_status_code}
 						...															      ${error_message}
 						...															      ${location}
 
@@ -644,7 +619,7 @@ create pregnancy status JSON
 						...    update vCC						${vCCavailabe}									${vCCCodingavailable}			${vCC0System}				${vCC0Code}				${vCC0Display}		AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason
@@ -677,7 +652,7 @@ create pregnancy status with ehr reference AND data absentreason
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json with data absentreason    ${json_path}    ${value}
 						observation.POST /Observation    pregnancy status    ${payload}
-						observation.validate response - 422 (with error message NEW)     ${http_status_code}
+						observation.validate response - 422 (with error message)     ${http_status_code}
 						...															     ${error_message}
 						...															     ${location}
 

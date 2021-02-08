@@ -1,0 +1,54 @@
+{
+    "resourceType": "Procedure",
+    "id": "ea6f5a49-ffc2-4b32-83e8-fcf82bc9abc2",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"
+      ]
+    },
+    "status": "in-progress",
+    "category": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "277132007",
+          "display": "Therapeutic procedure (procedure)"
+        }
+      ]
+    },
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "371907003",
+          "display": "Oxygen administration by nasal cannula (procedure)"
+        }
+      ],
+      "text": "Nasal High-Flow-Oxygen-Therapy"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "performedDateTime": {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+          "valueCode": "unknown"
+        }
+      ]
+    },
+    "usedCode": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "426854004",
+            "display": "High flow oxygen nasal cannula (physical object)"
+          }
+        ]
+      }
+    ]
+  }

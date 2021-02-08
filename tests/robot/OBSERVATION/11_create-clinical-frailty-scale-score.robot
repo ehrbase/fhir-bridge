@@ -24,7 +24,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Dave Petzold
-Force Tags              create    frailty-scale-score    invalid
+Force Tags              observation_create    frailty-scale-score    invalid
 
 
 
@@ -469,7 +469,7 @@ ${vCC_URL}		https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/frailty
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-clinical-frailty-scale-score.json
-	observation.validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -583,7 +583,7 @@ ${vCC_URL}		https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/frailty
 BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'effectiveDateTime')
 	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              effectiveDateTime    not-ready    bug
+    [Tags]              effectiveDateTime    not-ready    not-ready_bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -595,13 +595,12 @@ BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'effectiveDate
 BUG TRACE 02 Create Clinical Frailty Scale Score (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
 	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    bug
+    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 	
 	# invalid system
-	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
 	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
 
 	# invalid code
@@ -631,7 +630,7 @@ create clinical frailty scale score with ehr reference
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
 						observation.POST /Observation           Clinical Frailty Scale Score            ${payload}
-						observation.validate response - 422 (with error message NEW)        ${http_status_code}
+						observation.validate response - 422 (with error message)        ${http_status_code}
 						...															        ${error_message}
 						...															        ${location}
 
@@ -644,7 +643,7 @@ create clinical frailty scale score w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Clinical Frailty Scale Score    ${payload}
-						observation.validate response - 422 (with error message NEW)      ${http_status_code}
+						observation.validate response - 422 (with error message)      ${http_status_code}
 						...															      ${error_message}
 						...															      ${location}
 
@@ -694,7 +693,7 @@ create clinical frailty scale score JSON
 						...    update vCC						${vCCavailabe}									${vCCCodingavailable}			${vCC0System}				${vCC0Code}				${vCC0Display}		AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason
@@ -727,7 +726,7 @@ create clinical frailty scale score with ehr reference AND data absentreason
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json with data absentreason    ${json_path}    ${value}
 						observation.POST /Observation    Clinical Frailty Scale Score    ${payload}
-						observation.validate response - 422 (with error message NEW)     ${http_status_code}
+						observation.validate response - 422 (with error message)     ${http_status_code}
 						...															     ${error_message}
 						...															     ${location}
 

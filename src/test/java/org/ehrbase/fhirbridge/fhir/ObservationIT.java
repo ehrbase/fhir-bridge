@@ -97,15 +97,7 @@ class ObservationIT extends AbstractSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : Default profile is not supported for Observation. One of the following profiles is expected: " +
-                        "[https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure, " +
-                        "http://hl7.org/fhir/StructureDefinition/bodytemp, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-weight, " +
-                        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score, https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest, " +
-                        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/inhaled-oxygen-concentration, http://hl7.org/fhir/StructureDefinition/heartrate, " +
-                        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pregnancy-status, " +
-                        "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-rate, " +
-                        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status]",
-                exception.getMessage());
+        assertTrue(StringUtils.startsWith(exception.getMessage(), "HTTP 422 : Default profile is not supported for Observation. One of the following profiles is expected:"));
     }
 
     @Test
