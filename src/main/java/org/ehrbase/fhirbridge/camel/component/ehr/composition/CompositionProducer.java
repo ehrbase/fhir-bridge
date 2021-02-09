@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.camel.component.ehr.composition;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.impl.DefaultProducer;
+import org.apache.camel.support.DefaultProducer;
 import org.ehrbase.fhirbridge.ehr.Composition;
 
 import java.util.UUID;
@@ -44,10 +44,11 @@ public class CompositionProducer extends DefaultProducer {
         }
 
         Object mergedComposition = endpoint.getOpenEhrClient().compositionEndpoint(ehrId).mergeCompositionEntity(body);
+        exchange.getMessage().setHeader(CompositionConstants.VERSION_UID, ((Composition) mergedComposition).getVersionUid());
+
         if (compositionConverter != null) {
             mergedComposition = compositionConverter.fromComposition((Composition) mergedComposition);
         }
-
         exchange.getMessage().setBody(mergedComposition);
     }
 

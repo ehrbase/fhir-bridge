@@ -24,7 +24,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Dave Petzold
-Force Tags              create    smoking-status    invalid
+Force Tags              observation_create    smoking-status    invalid
 
 
 
@@ -181,7 +181,6 @@ ${randinteger}                  ${12345}
 	# 																CODE
 
 	# invalid category
-#	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${smoking_status-url}
 	$.category								${{ [] }}				422    	Array cannot be empty - the property should not be present if it has no values								Observation.category
 	$.category								${{ {} }}				422    	This property must be an Array, not an Object																Observation.category
 	$.category								${{ [{}] }}				422    	Object must have some content																				Observation.category
@@ -191,13 +190,11 @@ ${randinteger}                  ${12345}
 	$.category[0].coding    				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.category.0..coding
 	
 	#invalid code 0
-#	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${smoking_status-url}
 	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
 #	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${smoking_status-url}					Observation.category.0.
 	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
 	
 	# invaild system 0
-#	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
 	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
@@ -319,14 +316,12 @@ ${randinteger}                  ${12345}
 	$.valueCodeableConcept.coding				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.value.x..coding
 
 	# invalid system
-#	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
 	$.valueCodeableConcept.coding[0].system		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..system
 #	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
 	$.valueCodeableConcept.coding[0].system		${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.value.ofType.CodeableConcept..coding.0.
 	$.valueCodeableConcept.coding[0].system		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..system
 
 	# invalid code
-#	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
 	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..code
 	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Unexpected value: ${randstring}
 	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..code
@@ -350,9 +345,9 @@ ${randinteger}                  ${12345}
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Tags]              DataAbsentReason
 
-	ehr.create new ehr    				  				000_ehr_status.json
-	create with DataAbsentReason		  				DataAbsentReason				create-smoking-status.json
-	validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	ehr.create new ehr    				  							000_ehr_status.json
+	create with DataAbsentReason		  							DataAbsentReason				create-smoking-status.json
+	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -462,36 +457,28 @@ ${randinteger}                  ${12345}
 BUG TRACE 01 Create smoking status (Invalid/Missing 'category')
 	[Documentation]		Belongs to TC 006! Remove separation when it's fixed!
 	[Template]			create smoking status with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    not-ready_bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
-	# invalid category
-	$.category								missing					422    	Observation.category: minimum required = 1, but only found 0 .from ${smoking_status-url}
 
 	#invalid code 0
-	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${smoking_status-url}
 	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${smoking_status-url}					Observation.category.0.
 	
 	# invaild system 0
-	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${smoking_status-url}					Observation.category.0.
 
 
 BUG TRACE 02 Create smoking status (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
 	[Template]			create smoking status with ehr reference
-    [Tags]              category    not-ready
+    [Tags]              category    not-ready    not-ready_bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 
 	# invalid system
-	$.valueCodeableConcept.coding[0].system		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
 	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
-
-	# invalid code
-	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
@@ -514,7 +501,7 @@ create smoking status with ehr reference
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Smoking Status    ${payload}
-						observation.validate response - 422 (with error message NEW)     ${http_status_code}
+						observation.validate response - 422 (with error message)     ${http_status_code}
 						...															     ${error_message}
 						...															     ${location}
 
@@ -527,7 +514,7 @@ create smoking status w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Smoking Status    ${payload}
-						observation.validate response - 422 (with error message NEW)      ${http_status_code}
+						observation.validate response - 422 (with error message)      ${http_status_code}
 						...															      ${error_message}
 						...															      ${location}
 
@@ -576,7 +563,7 @@ create Smoking Status JSON
 						...    update vCC						${vCCavailabe}									${vCCCodingavailable}			${vCC0System}				${vCC0Code}				${vCC0Display}		AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    validate response - 422 (with error message NEW)									${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason
@@ -609,7 +596,7 @@ create smoking status with ehr reference AND data absentreason
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json with data absentreason    ${json_path}    ${value}
 						observation.POST /Observation    Smoking Status    ${payload}
-						observation.validate response - 422 (with error message NEW)     ${http_status_code}
+						observation.validate response - 422 (with error message)     ${http_status_code}
 						...															     ${error_message}
 						...															     ${location}
 

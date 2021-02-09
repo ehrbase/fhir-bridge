@@ -24,7 +24,7 @@ import java.security.cert.CertificateException;
  */
 @Configuration
 @EnableConfigurationProperties(HttpClientProperties.class)
-public class HttpClientConfiguration {
+public class    HttpClientConfiguration {
 
 
     @Bean

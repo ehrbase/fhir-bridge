@@ -1,0 +1,64 @@
+{
+  "resourceType": "Observation",
+  "id": "bdda2957-a932-43c0-9cca-e5ffcc837e42",
+  "meta": {
+    "profile": [
+      "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"
+    ]
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "OBI"
+          }
+        ]
+      },
+      "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+      "value": "67151-1_troponin-t.cardiac-mass-per-volume-in-serum-or-plasma-by-high-sensitivity-method",
+      "assigner": {
+        "reference": "Organization/Charité"
+      }
+    }
+  ],
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "26436-6"
+        },
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "laboratory"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "67151-1",
+        "display": "Troponin T.cardiac [Mass/volume] in Serum or Plasma by High sensitivity method"
+      }
+    ],
+    "text": "Cardiac troponin"
+  },
+  "subject": {
+	"identifier": {
+	  "system": "urn:ietf:rfc:4122",
+	  "value": "{{patientId}}"
+	}
+  },
+  "effectiveDateTime": "2020-10-16T08:49:21+02:00",
+  "valueQuantity": {
+    "value": 7,
+    "unit": "ng/L",
+    "system": "http://unitsofmeasure.org",
+    "code": "ng/L"
+  }
+}

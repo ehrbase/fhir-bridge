@@ -1,0 +1,36 @@
+{
+  "resourceType": "Procedure",
+  "id": "1a596d5e-cf8c-4a67-a434-727c51350d5d",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/extracorporeal-membrane-oxygenation"
+    ]
+  },
+  "status": "in-progress",
+  "category": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "277132007",
+        "display": "Therapeutic procedure (procedure)"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://fhir.de/CodeSystem/dimdi/ops",
+        "code": "8-852",
+        "display": "Extrakorporaler Gasaustausch ohne und mit Herzunterstützung und Prä-ECMO-Therapie"
+      }
+    ],
+    "text": "ECMO"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "performedDateTime": "2020-10-24"
+}

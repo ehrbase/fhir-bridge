@@ -9,7 +9,8 @@ import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
+import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
+import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.ehrbase.fhirbridge.ehr.mapper.DiagnoseRowMapper;
@@ -26,7 +27,7 @@ public class ConditionRoutes extends RouteBuilder {
 
     private final ResourceProfileValidator requestValidator;
 
-    private final PatientIdProcessor patientIdProcessor;
+    private final EhrIdLookupProcessor ehrIdLookupProcessor;
 
     private final CompositionConverterResolver compositionConverterResolver;
 
@@ -34,13 +35,13 @@ public class ConditionRoutes extends RouteBuilder {
 
     public ConditionRoutes(IFhirResourceDao<Condition> conditionDao,
                            ResourceProfileValidator requestValidator,
-                           PatientIdProcessor patientIdProcessor,
+                           EhrIdLookupProcessor ehrIdLookupProcessor,
                            CompositionConverterResolver compositionConverterResolver,
                            DefaultExceptionHandler defaultExceptionHandler) {
 
         this.conditionDao = conditionDao;
         this.requestValidator = requestValidator;
-        this.patientIdProcessor = patientIdProcessor;
+        this.ehrIdLookupProcessor = ehrIdLookupProcessor;
         this.compositionConverterResolver = compositionConverterResolver;
         this.defaultExceptionHandler = defaultExceptionHandler;
     }
@@ -59,10 +60,10 @@ public class ConditionRoutes extends RouteBuilder {
             .bean(conditionDao, "create(${body})")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
-            .process(patientIdProcessor)
-            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.CamelFhirBridgeProfile})"))
+            .process(ehrIdLookupProcessor)
+            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+            .process(new ResourceResponseProcessor());
 
         from("fhir-find-condition:fhirConsumer?fhirContext=#fhirContext")
             .onException(Exception.class)

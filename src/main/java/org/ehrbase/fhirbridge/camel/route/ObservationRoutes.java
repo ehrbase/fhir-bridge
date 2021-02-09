@@ -5,8 +5,9 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
+import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
+import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.stereotype.Component;
@@ -16,22 +17,26 @@ public class ObservationRoutes extends RouteBuilder {
 
     private final IFhirResourceDao<Observation> observationDao;
 
-    private final ResourceProfileValidator requestValidator;
+    private final EhrIdLookupProcessor ehrIdLookupProcessor;
 
-    private final PatientIdProcessor patientIdProcessor;
+    private final ResourceResponseProcessor resourceResponseProcessor;
+
+    private final ResourceProfileValidator requestValidator;
 
     private final CompositionConverterResolver compositionConverterResolver;
 
     private final DefaultExceptionHandler defaultExceptionHandler;
 
     public ObservationRoutes(IFhirResourceDao<Observation> observationDao,
+                             EhrIdLookupProcessor ehrIdLookupProcessor,
+                             ResourceResponseProcessor resourceResponseProcessor,
                              ResourceProfileValidator requestValidator,
-                             PatientIdProcessor patientIdProcessor,
                              CompositionConverterResolver compositionConverterResolver,
                              DefaultExceptionHandler defaultExceptionHandler) {
         this.observationDao = observationDao;
+        this.ehrIdLookupProcessor = ehrIdLookupProcessor;
+        this.resourceResponseProcessor = resourceResponseProcessor;
         this.requestValidator = requestValidator;
-        this.patientIdProcessor = patientIdProcessor;
         this.compositionConverterResolver = compositionConverterResolver;
         this.defaultExceptionHandler = defaultExceptionHandler;
     }
@@ -39,21 +44,22 @@ public class ObservationRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
+         onException(Exception.class)
+            .process(defaultExceptionHandler);
+
         from("fhir-create-observation:fhirConsumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
-            .onException(Exception.class)
-                .process(defaultExceptionHandler)
-            .end()
             .process(requestValidator)
-            .bean(observationDao, "create(${body}, ${null}, ${header.FhirRequestDetails})")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
-            .setBody(simple("${body.resource}"))
-            .process(patientIdProcessor)
-            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.CamelFhirBridgeProfile})"))
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+            .to("direct:process-observation");
+
+        from("direct:process-observation")
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(observationDao, "create"))
+            .process(ehrIdLookupProcessor)
+            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
+            .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
+            .process(resourceResponseProcessor);
         // @formatter:on
     }
 }

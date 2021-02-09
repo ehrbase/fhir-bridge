@@ -63,7 +63,7 @@ validate response - 422 (profile not supported)
     ...        pattern=The resource does not contain any supported profile. One of the following profiles is expected:
 
 # TODO: remove this KW, use the NEW one below instead
-validate response - 422 (with error message)
+validate response - 422 (with error message OLD)
     [Arguments]    ${issue_index}    ${http_status_code}    ${error_message}    ${location}=${None}
     Integer     response status    ${http_status_code}
 
@@ -72,8 +72,7 @@ validate response - 422 (with error message)
     Run Keyword If    $location != None    String    response body issue ${issue_index} location 0
     ...         ${location}
 
-# TODO: remove 'NEW' from KW name
-validate response - 422 (with error message NEW)
+validate response - 422 (with error message)
     [Arguments]     ${http_status_code}    ${error_message}    ${location}=${None}
                     Integer     response status    ${http_status_code}
                     String      response body resourceType    OperationOutcome
@@ -84,6 +83,11 @@ validate response - 422 (with error message NEW)
             ${locations}=   String      $.issue[*].location[0]
             Should Contain Match    ${locations}    regexp=${location}
     END
+
+validate response - 422 (w/o error message)
+    [Arguments]     ${http_status_code}
+                    Integer     response status    ${http_status_code}
+                    String      response body resourceType    OperationOutcome
 
 
 #                                                 oooo                     
@@ -224,6 +228,156 @@ create history of travel
 
 
 create sex assigned at birth
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create study inclusion due to covid 19
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create interventional clinical trial participation
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create known exposure to covid 19
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create PaO2
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create PaCO2
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create respiratory rate
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab CRP
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab bilirubin
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab ferritin
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab d-dimer
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab gamma glutamyl transferase
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab lactate
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab leukocytes
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab lymphocytes
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab neutrophils
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab Hemoglobin
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create pH
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab cardiac troponin
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab creatinine
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab lactate dehydrogenase
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab procalcitonin
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+	
+
+create observation lab interleukin 6
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab natriuretic peptide.b prohormone n-terminal
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab partial thromboplastin time
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab albumin in serum
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab platelets
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab antithrombin
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab fibrinogen
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab inr
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
+
+
+create observation lab aspartate aminotransferase
     [Arguments]         ${text}    ${example_json}
     POST /Observation with ehr reference    ${text}    ${example_json}
 
