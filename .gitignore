@@ -12,9 +12,15 @@ venv
 
 # Robot Tests
 **results**
+tests/log.html
+tests/output.xml
+tests/report.html
 
-VSCode
+# VSCode
 .classpath
 .factorypath
 .project
 .settings/
+.vscode/**
+
+fhir-bridge.iml

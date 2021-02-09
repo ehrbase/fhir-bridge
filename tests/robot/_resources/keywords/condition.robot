@@ -75,8 +75,8 @@ create diagnose condition
 
 
 create symptoms-covid-19
-    [Arguments]         ${example_json}
-    POST /Condition with ehr reference    Symptoms Covid-19    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
 
 
 create diabetes mellitus
@@ -125,6 +125,21 @@ create cardiovascular diseases
 
 
 create human immunodeciency virus infection
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
+create gastrointestinal ulcer
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
+create history of organ recipient
+    [Arguments]         ${text}    ${example_json}
+    POST /Condition with ehr reference    ${text}    ${example_json}
+
+
+create complications of covid-19
     [Arguments]         ${text}    ${example_json}
     POST /Condition with ehr reference    ${text}    ${example_json}
 

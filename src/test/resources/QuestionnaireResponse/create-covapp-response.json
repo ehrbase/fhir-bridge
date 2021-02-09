@@ -1,47 +1,53 @@
 {
   "resourceType": "QuestionnaireResponse",
-  "language": "en",
-  "questionnaire": "http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|3.1.0",
-  "authored": "2020-04-30T10:05:25.182Z",
-  "subject": {
-    "identifier": {
-      "system": "urn:ietf:rfc:4122",
-      "value": "{{patientId}}"
-    }
-  },
+  "questionnaire": "http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|3.0.0",
   "status": "completed",
-  "item": [
+  "authored": "2020-05-04T14:15:00-05:00",
+  "item":  [
     {
       "linkId": "P",
-      "text": "Persöhnliche Informationen",
-      "item": [
+      "text": "Persönliche Informationen",
+      "item":  [
         {
           "linkId": "P0",
-          "text": "How old are you?",
-          "answer": [
+          "text": "Wie alt sind Sie?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://fhir.data4life.care/covid-19/r4/CodeSystem/age-group",
-                "code": "40-50"
+                "code": "61-70"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "P1",
+          "text": "Sind Sie älter oder gleich 65 Jahre alt?",
+          "answer":  [
+            {
+              "valueCoding": {
+                "system": "http://loinc.org",
+                "code": "LA33-6"
               }
             }
           ]
         },
         {
           "linkId": "P2",
-          "text": "What is your current living situation?",
-          "answer": [
+          "text": "Wie ist Ihre aktuelle Wohnsituation?",
+          "answer":  [
             {
               "valueCoding": {
-                "system": "http://loinc.org"
+                "system": "http://loinc.org",
+                "code": "LA6255-9"
               }
             }
           ]
         },
         {
           "linkId": "P3",
-          "text": "At least once a week, do you privately care for people with age-related conditions, chronic illnesses, or frailty?",
-          "answer": [
+          "text": "Pflegen oder unterstützen Sie privat mindestens einmal pro Woche eine oder mehrere Personen mit altersbedingten Beschwerden, chronischen Erkrankungen oder Gebrechlichkeit?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -52,20 +58,20 @@
         },
         {
           "linkId": "P4",
-          "text": "Do you work in one of the following areas?",
-          "answer": [
+          "text": "Sind Sie in einem der folgenden Bereiche tätig?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://fhir.data4life.care/covid-19/r4/CodeSystem/occupation-class",
-                "code": "LA46-8"
+                "code": "community"
               }
             }
           ]
         },
         {
           "linkId": "P5",
-          "text": "Do you smoke?",
-          "answer": [
+          "text": "Rauchen Sie?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -76,11 +82,12 @@
         },
         {
           "linkId": "P6",
-          "text": "Are you pregnant?",
-          "answer": [
+          "text": "Sind Sie schwanger?",
+          "answer":  [
             {
               "valueCoding": {
-                "system": "http://loinc.org"
+                "system": "http://loinc.org",
+                "code": "LA26683-5"
               }
             }
           ]
@@ -89,17 +96,26 @@
     },
     {
       "linkId": "C",
-      "text": "Kontakte zu Covid-19-Fällen",
-      "item": [
+      "text": "Kontakte zu COVID-19-Fällen",
+      "item":  [
         {
           "linkId": "C0",
-          "text": "Have you had close contact with a confirmed case?",
-          "answer": [
+          "text": "Hatten Sie engen Kontakt zu einem bestätigten Fall?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
-                "code": "LA12688-0"
+                "code": "LA33-6"
               }
+            }
+          ]
+        },
+        {
+          "linkId": "CZ",
+          "text": "An welchem Tag war der letzte Kontakt?",
+          "answer":  [
+            {
+              "valueDate": "2020-03-27"
             }
           ]
         }
@@ -108,35 +124,47 @@
     {
       "linkId": "S",
       "text": "Symptome",
-      "item": [
+      "item":  [
         {
           "linkId": "S0",
-          "text": "Have you had a fever (over 38°C) in the past 24 hours?",
-          "answer": [
+          "text": "Hatten Sie in den letzten 24 Std. Fieber (über 38°C)?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
-                "code": "LA12688-0"
+                "code": "LA32-8"
               }
             }
           ]
         },
         {
           "linkId": "S1",
-          "text": "Have you had a fever (over 38°C) in the past 4 days?",
-          "answer": [
+          "text": "Hatten Sie in den letzten 4 Tagen Fieber (über 38°C)?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
-                "code": "LA12688-0"
+                "code": "LA33-6"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "S2",
+          "text": "Wie hoch war die höchste Temperatur ca.?",
+          "answer":  [
+            {
+              "valueCoding": {
+                "system": "http://fhir.data4life.care/covid-19/r4/CodeSystem/fever-class",
+                "code": "40C"
               }
             }
           ]
         },
         {
           "linkId": "S3",
-          "text": "Have you had chills in the past 24 hours?",
-          "answer": [
+          "text": "Hatten Sie in den letzten 24 Std. Schüttelfrost?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -147,20 +175,44 @@
         },
         {
           "linkId": "S4",
-          "text": "In the past 24 hours, have you felt tired or worn out?",
-          "answer": [
+          "text": "Haben Sie sich in den letzten 24 Std. schlapp oder abgeschlagen gefühlt?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
-                "code": "LA12688-0"
+                "code": "LA33-6"
               }
             }
           ]
         },
         {
           "linkId": "S5",
-          "text": "In the past 24 hours, have you had body aches?",
-          "answer": [
+          "text": "Hatten Sie in den letzten 24 Std. Gliederschmerzen?",
+          "answer":  [
+            {
+              "valueCoding": {
+                "system": "http://loinc.org",
+                "code": "LA32-8"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "S6",
+          "text": "Hatten Sie in den letzten 24 Std. anhaltenden Husten?",
+          "answer":  [
+            {
+              "valueCoding": {
+                "system": "http://loinc.org",
+                "code": "LA33-6"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "S7",
+          "text": "Hatten Sie in den letzten 24 Std. Schnupfen?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -171,44 +223,8 @@
         },
         {
           "linkId": "S8",
-          "text": "In the past 24 hours, have you had diarrhea?",
-          "answer": [
-            {
-              "valueCoding": {
-                "system": "http://loinc.org",
-                "code": "LA12688-0"
-              }
-            }
-          ]
-        },
-        {
-          "linkId": "SA",
-          "text": "In the past 24 hours, have you had a headache?",
-          "answer": [
-            {
-              "valueCoding": {
-                "system": "http://loinc.org",
-                "code": "LA12688-0"
-              }
-            }
-          ]
-        },
-        {
-          "linkId": "SC",
-          "text": "Have you had any taste and/or smell loss in the last 24 hours?",
-          "answer": [
-            {
-              "valueCoding": {
-                "system": "http://loinc.org",
-                "code": "LA12688-0"
-              }
-            }
-          ]
-        },
-        {
-          "linkId": "S6",
-          "text": "In the past 24 hours, have you had a persistent cough?",
-          "answer": [
+          "text": "Hatten Sie in den letzten 24 Std. Durchfall?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -218,33 +234,45 @@
           ]
         },
         {
-          "linkId": "S7",
-          "text": "In the past 24 hours, have you had a runny nose?",
-          "answer": [
+          "linkId": "S9",
+          "text": "Hatten Sie in den letzten 24 Std. Halsschmerzen?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
-                "code": "LA12688-0"
+                "code": "LA33-6"
               }
             }
           ]
         },
         {
-          "linkId": "S9",
-          "text": "In the past 24 hours, have you had a sore throat?",
-          "answer": [
+          "linkId": "SA",
+          "text": "Hatten Sie in den letzten 24 Std. Kopfschmerzen?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
-                "code": "LA12688-0"
+                "code": "LA32-8"
               }
             }
           ]
         },
         {
           "linkId": "SB",
-          "text": "In the past 24 hours, did you feel that you were more quickly out of breath than usual?",
-          "answer": [
+          "text": "Sind Sie in den letzten 24 Std. schneller außer Atem als sonst?",
+          "answer":  [
+            {
+              "valueCoding": {
+                "system": "http://loinc.org",
+                "code": "LA32-8"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "SC",
+          "text": "Hatten Sie in den letzten 24 Std. Geschmacks- und/oder Geruchsverlust?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -255,10 +283,10 @@
         },
         {
           "linkId": "SZ",
-          "text": "With regard to all questions about symptoms: since when have you had the symptoms you specified?",
-          "answer": [
+          "text": "Bezogen auf alle Fragen zu Symptomen: Seit wann haben Sie die von Ihnen angegebenen Symptome?",
+          "answer":  [
             {
-              "valueDate": "2020-04-28"
+              "valueDate": "2020-03-30"
             }
           ]
         }
@@ -266,87 +294,48 @@
     },
     {
       "linkId": "D",
-      "text": "Chronische Erkrankungen",
-      "item": [
+      "text": "Kronische Erkrankungen",
+      "item":  [
         {
           "linkId": "D0",
-          "text": "Have you been diagnosed with chronic lung disease by a doctor?",
-          "answer": [
+          "text": "Wurde bei Ihnen durch einen Arzt/eine Ärztin eine chronische Lungenerkrankung festgestellt?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
-                "code": "LA12688-0"
+                "code": "LA32-8"
               }
             }
           ]
         },
         {
           "linkId": "D1",
-          "text": "Have you been diagnosed with diabetes by a doctor?",
-          "answer": [
+          "text": "Wurde bei Ihnen durch einen Arzt/eine Ärztin Diabetes festgestellt?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
-                "code": "LA12688-0"
+                "code": "LA33-6"
               }
             }
           ]
         },
         {
           "linkId": "D2",
-          "text": "Have you been diagnosed with heart disease by a doctor?",
-          "answer": [
+          "text": "Wurde bei Ihnen durch einen Arzt/eine Ärztin eine Herzerkrankung festgestellt?",
+          "answer":  [
             {
               "valueCoding": {
-                "system": "http://loinc.org"
+                "system": "http://loinc.org",
+                "code": "LA32-8"
               }
             }
           ]
         },
         {
           "linkId": "D3",
-          "text": "Have you been diagnosed with obesity by a doctor?",
-          "answer": [
-            {
-              "valueCoding": {
-                "system": "http://loinc.org"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "linkId": "M",
-      "text": "Medikation",
-      "item": [
-        {
-          "linkId": "M0",
-          "text": "Are you currently taking steroids?",
-          "answer": [
-            {
-              "valueCoding": {
-                "system": "http://loinc.org",
-                "code": "LA12688-0"
-              }
-            }
-          ]
-        },
-        {
-          "linkId": "M1",
-          "text": "Are you currently taking immunosuppressants?",
-          "answer": [
-            {
-              "valueCoding": {
-                "system": "http://loinc.org"
-              }
-            }
-          ]
-        },
-        {
-          "linkId": "M2",
-          "text": "Have you been vaccinated against flu between October 2019 and today?",
-          "answer": [
+          "text": "Wurde bei Ihnen durch einen Arzt/eine Ärztin Adipositas (Fettsucht) festgestellt?",
+          "answer":  [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -356,6 +345,49 @@
           ]
         }
       ]
+    },
+    {
+      "linkId": "M",
+      "text": "Medikation",
+      "item":  [
+        {
+          "linkId": "M0",
+          "text": "Nehmen Sie aktuell Cortison ein (in Tablettenform)?",
+          "answer":  [
+            {
+              "valueCoding": {
+                "system": "http://loinc.org",
+                "code": "LA32-8"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "M1",
+          "text": "Nehmen Sie aktuell Immunsuppressiva?",
+          "answer":  [
+            {
+              "valueCoding": {
+                "system": "http://loinc.org",
+                "code": "LA32-8"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "M2",
+          "text": "Haben Sie sich im Zeitraum von Oktober 2019 bis heute gegen Grippe impfen lassen?",
+          "answer":  [
+            {
+              "valueCoding": {
+                "system": "http://loinc.org",
+                "code": "LA33-6"
+              }
+            }
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "language": "de"
 }

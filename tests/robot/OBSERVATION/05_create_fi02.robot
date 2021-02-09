@@ -22,8 +22,9 @@ Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
 Documentation           *NOTE:* use Regular Expressions to replace braces () as described here:
-...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example
-Force Tags              create    fio2    invalid
+...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
+...						*Author:* Wladislaw Wagner
+Force Tags              observation_create    fio2    invalid
 
 
 
@@ -179,7 +180,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 005 Create FiO2 (Invalid/Missing 'meta') - BUG TRACE TEST
 	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
 	[Template]			Create FiO2 with ehr reference
-	[Tags]				TODO: ADD GITHUB ISSUE    not-ready
+	[Tags]				TODO: ADD GITHUB ISSUE    not-ready    bug
 	# NOT-READY, RETURNS --> ERROR 500
 	# comment: sets value to an array with empty object
 	$.meta.profile		${{ [{}] }}					422    	This property should contain list of strings
@@ -260,7 +261,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 007 Create FiO2 (Invalid/Missing 'category') - BUG TRACE TEST
 	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
 	[Template]			Create FiO2 with ehr reference
-	[Tags]				TODO: ADD GITHUB ISSUE    not-ready
+	[Tags]				TODO: ADD GITHUB ISSUE    not-ready    bug
 	#														HTTP	
 	# FIELD/PATH 						VALUE				CODE	ERROR MESSAGE
 	# comment: category:blood-gas-studies
@@ -362,7 +363,7 @@ Create FiO2 with ehr reference
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    FiO2    ${payload}
-						observation.validate response - 422 (with error message NEW)    ${http_status_code}
+						observation.validate response - 422 (with error message)    ${http_status_code}
 						...																${error_message}
 						...																${location}
 
@@ -380,7 +381,7 @@ Create FiO2 w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    FiO₂    ${payload}
-						observation.validate response - 422 (with error message NEW)    ${http_status_code}
+						observation.validate response - 422 (with error message)    ${http_status_code}
 						...																${error_message}
 						...																${location}
 
