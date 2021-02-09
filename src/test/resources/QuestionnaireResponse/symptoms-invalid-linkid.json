@@ -126,7 +126,7 @@
       "text": "Symptome",
       "item":  [
         {
-          "linkId": "S0",
+          "linkId": "Sas",
           "text": "Hatten Sie in den letzten 24 Std. Fieber (über 38°C)?",
           "answer":  [
             {

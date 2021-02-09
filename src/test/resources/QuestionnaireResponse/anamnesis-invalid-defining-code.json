@@ -303,7 +303,7 @@
             {
               "valueCoding": {
                 "system": "http://loinc.org",
-                "code": "LA32-8"
+                "code": "LA32-123"
               }
             }
           ]

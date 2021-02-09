@@ -3,15 +3,15 @@
   "questionnaire": "http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|3.0.0",
   "status": "completed",
   "authored": "2020-05-04T14:15:00-05:00",
-  "item":  [
+  "item": [
     {
       "linkId": "P",
       "text": "Persönliche Informationen",
-      "item":  [
+      "item": [
         {
           "linkId": "P0",
           "text": "Wie alt sind Sie?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://fhir.data4life.care/covid-19/r4/CodeSystem/age-group",
@@ -23,7 +23,7 @@
         {
           "linkId": "P1",
           "text": "Sind Sie älter oder gleich 65 Jahre alt?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -35,7 +35,7 @@
         {
           "linkId": "P2",
           "text": "Wie ist Ihre aktuelle Wohnsituation?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -47,7 +47,7 @@
         {
           "linkId": "P3",
           "text": "Pflegen oder unterstützen Sie privat mindestens einmal pro Woche eine oder mehrere Personen mit altersbedingten Beschwerden, chronischen Erkrankungen oder Gebrechlichkeit?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -59,7 +59,7 @@
         {
           "linkId": "P4",
           "text": "Sind Sie in einem der folgenden Bereiche tätig?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://fhir.data4life.care/covid-19/r4/CodeSystem/occupation-class",
@@ -71,7 +71,7 @@
         {
           "linkId": "P5",
           "text": "Rauchen Sie?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -83,7 +83,7 @@
         {
           "linkId": "P6",
           "text": "Sind Sie schwanger?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -97,11 +97,11 @@
     {
       "linkId": "C",
       "text": "Kontakte zu COVID-19-Fällen",
-      "item":  [
+      "item": [
         {
           "linkId": "C0",
           "text": "Hatten Sie engen Kontakt zu einem bestätigten Fall?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -113,7 +113,7 @@
         {
           "linkId": "CZ",
           "text": "An welchem Tag war der letzte Kontakt?",
-          "answer":  [
+          "answer": [
             {
               "valueDate": "2020-03-27"
             }
@@ -124,11 +124,11 @@
     {
       "linkId": "S",
       "text": "Symptome",
-      "item":  [
+      "item": [
         {
           "linkId": "S0",
           "text": "Hatten Sie in den letzten 24 Std. Fieber (über 38°C)?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -140,7 +140,7 @@
         {
           "linkId": "S1",
           "text": "Hatten Sie in den letzten 4 Tagen Fieber (über 38°C)?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -152,7 +152,7 @@
         {
           "linkId": "S2",
           "text": "Wie hoch war die höchste Temperatur ca.?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://fhir.data4life.care/covid-19/r4/CodeSystem/fever-class",
@@ -164,7 +164,7 @@
         {
           "linkId": "S3",
           "text": "Hatten Sie in den letzten 24 Std. Schüttelfrost?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -176,7 +176,7 @@
         {
           "linkId": "S4",
           "text": "Haben Sie sich in den letzten 24 Std. schlapp oder abgeschlagen gefühlt?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -188,7 +188,7 @@
         {
           "linkId": "S5",
           "text": "Hatten Sie in den letzten 24 Std. Gliederschmerzen?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -200,7 +200,7 @@
         {
           "linkId": "S6",
           "text": "Hatten Sie in den letzten 24 Std. anhaltenden Husten?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -212,7 +212,7 @@
         {
           "linkId": "S7",
           "text": "Hatten Sie in den letzten 24 Std. Schnupfen?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -224,7 +224,7 @@
         {
           "linkId": "S8",
           "text": "Hatten Sie in den letzten 24 Std. Durchfall?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -236,7 +236,7 @@
         {
           "linkId": "S9",
           "text": "Hatten Sie in den letzten 24 Std. Halsschmerzen?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -248,7 +248,7 @@
         {
           "linkId": "SA",
           "text": "Hatten Sie in den letzten 24 Std. Kopfschmerzen?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -260,7 +260,7 @@
         {
           "linkId": "SB",
           "text": "Sind Sie in den letzten 24 Std. schneller außer Atem als sonst?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -272,7 +272,7 @@
         {
           "linkId": "SC",
           "text": "Hatten Sie in den letzten 24 Std. Geschmacks- und/oder Geruchsverlust?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -284,7 +284,7 @@
         {
           "linkId": "SZ",
           "text": "Bezogen auf alle Fragen zu Symptomen: Seit wann haben Sie die von Ihnen angegebenen Symptome?",
-          "answer":  [
+          "answer": [
             {
               "valueDate": "2020-03-30"
             }
@@ -295,11 +295,11 @@
     {
       "linkId": "D",
       "text": "Kronische Erkrankungen",
-      "item":  [
+      "item": [
         {
-          "linkId": "D0",
+          "linkId": "D8",
           "text": "Wurde bei Ihnen durch einen Arzt/eine Ärztin eine chronische Lungenerkrankung festgestellt?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -311,7 +311,7 @@
         {
           "linkId": "D1",
           "text": "Wurde bei Ihnen durch einen Arzt/eine Ärztin Diabetes festgestellt?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -323,7 +323,7 @@
         {
           "linkId": "D2",
           "text": "Wurde bei Ihnen durch einen Arzt/eine Ärztin eine Herzerkrankung festgestellt?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -335,7 +335,7 @@
         {
           "linkId": "D3",
           "text": "Wurde bei Ihnen durch einen Arzt/eine Ärztin Adipositas (Fettsucht) festgestellt?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -349,11 +349,11 @@
     {
       "linkId": "M",
       "text": "Medikation",
-      "item":  [
+      "item": [
         {
           "linkId": "M0",
           "text": "Nehmen Sie aktuell Cortison ein (in Tablettenform)?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -365,7 +365,7 @@
         {
           "linkId": "M1",
           "text": "Nehmen Sie aktuell Immunsuppressiva?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
@@ -377,7 +377,7 @@
         {
           "linkId": "M2",
           "text": "Haben Sie sich im Zeitraum von Oktober 2019 bis heute gegen Grippe impfen lassen?",
-          "answer":  [
+          "answer": [
             {
               "valueCoding": {
                 "system": "http://loinc.org",
