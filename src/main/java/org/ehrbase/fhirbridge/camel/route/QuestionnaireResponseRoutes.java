@@ -11,17 +11,18 @@ public class QuestionnaireResponseRoutes extends RouteBuilder {
     public void configure() {
         // @formatter:off
         from("fhir-create-questionnaire-response:fhirConsumer?fhirContext=#fhirContext")
-            .onCompletion()
+                .setProperty("DebugMapping", simple("${properties:fhir-bridge.debug}"))
+                .onCompletion()
                 .process("auditCreateResourceProcessor")
-            .end()
-            .onException(Exception.class)
+                .end()
+                .onException(Exception.class)
                 .process("defaultExceptionHandler")
-            .end()
-            .bean("myQuestionnaireResponseDaoR4","create(${body})")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
-            .setBody(simple("${body.resource}"))
-            .process("patientIdProcessor")
-            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+                .end()
+                .bean("myQuestionnaireResponseDaoR4", "create(${body})")
+                .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
+                .setBody(simple("${body.resource}"))
+                .process("patientIdProcessor")
+                .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
         // @formatter:on
     }
 }
