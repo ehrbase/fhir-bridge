@@ -57,16 +57,16 @@ public class DiagnosticReportRoutes extends RouteBuilder {
                 .setProperty("DebugMapping", simple("${properties:fhir-bridge.debug}"))
                 .onCompletion()
                 .process("auditCreateResourceProcessor")
-            .end()
-            .process(requestValidator)
-            .to("direct:process-diagnostic-report");
+                .end()
+                .process(requestValidator)
+                .to("direct:process-diagnostic-report");
 
         from("direct:process-diagnostic-report")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(diagnosticReportDao, "create"))
-            .process(ehrIdLookupProcessor)
-                .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.CamelFhirBridgeProfile})"))
+                .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(diagnosticReportDao, "create"))
+                .process(ehrIdLookupProcessor)
+                .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
                 .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-        .process(resourceResponseProcessor);
+                .process(resourceResponseProcessor);
         // @formatter:on
     }
 
