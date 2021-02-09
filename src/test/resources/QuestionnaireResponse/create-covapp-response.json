@@ -3,6 +3,12 @@
   "questionnaire": "http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|3.0.0",
   "status": "completed",
   "authored": "2020-05-04T14:15:00-05:00",
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
   "item":  [
     {
       "linkId": "P",
