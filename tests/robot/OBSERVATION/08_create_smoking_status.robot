@@ -24,7 +24,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Dave Petzold
-Force Tags              create    smoking-status    invalid
+Force Tags              observation_create    smoking-status    invalid
 
 
 
