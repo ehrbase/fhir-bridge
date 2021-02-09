@@ -220,6 +220,51 @@ ${randinteger}                  ${12345}
 	$.valueQuantity.code	  					${None}				422
 	$.valueQuantity.code	  					${123}				422
 	
+
+
+006 Create Observation lab (Invalid/Missing 'subject')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n               
+	[Template]		    create Observation lab w/o ehr reference 
+    [Tags]          	subject
+
+	# FIELD/PATH					VALUE							HTTP
+	# 																CODE
+    # invalid cases for value
+    $.subject.identifier.value		missing							422
+    $.subject.identifier.value		foobar							422
+    $.subject.identifier.value		${EMPTY}						422
+    $.subject.identifier.value		${{ [] }}						422
+    $.subject.identifier.value		${{ {} }}						422
+    $.subject.identifier.value		${123}							422
+
+	# invalid cases for system
+    $.subject.identifier.system		foobar							422
+    $.subject.identifier.system		${EMPTY}						422
+    $.subject.identifier.system		${{ [] }}						422
+    $.subject.identifier.system		${{ {} }}						422
+    $.subject.identifier.system		${123}							422
+
+	# invalid cases for identifier
+    $.subject.identifier			missing							422
+    $.subject.identifier			${EMPTY}						422
+    $.subject.identifier			${{ [] }}						422
+    $.subject.identifier			${{ {} }}						422
+    $.subject.identifier			${123}							422
+
+	# invalid cases for subject
+    $.subject						missing							422
+    $.subject						${EMPTY}						422
+    $.subject						${{ [] }}						422
+    $.subject						${{ {} }}						422
+    $.subject						${123}							422
+	
+	# comment: random uuid												
+    $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
@@ -240,6 +285,16 @@ create Observation lab with ehr reference
 	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
 
 						ehr.create new ehr                      000_ehr_status.json
+	${payload}=    		generate payload from example json      ${json_path}                ${value}
+						observation.POST /Observation           Observation lab            	${payload}
+						observation.validate response - 422 (w/o error message)  ${http_status_code}
+
+
+create Observation lab w/o ehr reference    
+	[Arguments]         ${json_path}        ${value}                ${http_status_code}
+
+	${fake_ehr_ref}=	Evaluate    str(uuid.uuid4())    uuid
+						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
 						observation.POST /Observation           Observation lab            	${payload}
 						observation.validate response - 422 (w/o error message)  ${http_status_code}
