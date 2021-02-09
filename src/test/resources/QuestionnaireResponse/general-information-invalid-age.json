@@ -15,7 +15,7 @@
             {
               "valueCoding": {
                 "system": "http://fhir.data4life.care/covid-19/r4/CodeSystem/age-group",
-                "code": "61-70"
+                "code": "30-209202"
               }
             }
           ]

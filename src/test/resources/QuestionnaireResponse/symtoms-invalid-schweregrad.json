@@ -156,7 +156,7 @@
             {
               "valueCoding": {
                 "system": "http://fhir.data4life.care/covid-19/r4/CodeSystem/fever-class",
-                "code": "40C"
+                "code": "4sa0C"
               }
             }
           ]

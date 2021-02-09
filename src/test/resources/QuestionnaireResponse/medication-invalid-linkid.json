@@ -351,7 +351,7 @@
       "text": "Medikation",
       "item":  [
         {
-          "linkId": "M0",
+          "linkId": "M9",
           "text": "Nehmen Sie aktuell Cortison ein (in Tablettenform)?",
           "answer":  [
             {
