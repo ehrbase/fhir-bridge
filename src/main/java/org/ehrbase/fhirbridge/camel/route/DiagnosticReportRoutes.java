@@ -5,13 +5,10 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.MappingDebugger;
 import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
-import org.ehrbase.fhirbridge.ehr.converter.DiagnosticReportLabCompositionConverter;
 import org.hl7.fhir.r4.model.DiagnosticReport;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,7 +20,6 @@ public class DiagnosticReportRoutes extends RouteBuilder {
 
     private final PatientIdProcessor patientIdProcessor;
 
-    private final MappingDebugger mappingDebugger;
 
     private final CompositionConverterResolver compositionConverterResolver;
 
@@ -33,7 +29,6 @@ public class DiagnosticReportRoutes extends RouteBuilder {
     public DiagnosticReportRoutes(IFhirResourceDao<DiagnosticReport> diagnosticReportDao,
                                   ResourceProfileValidator requestValidator,
                                   PatientIdProcessor patientIdProcessor,
-                                  MappingDebugger mappingDebugger,
                                   CompositionConverterResolver compositionConverterResolver,
                                   DefaultExceptionHandler defaultExceptionHandler) {
         this.diagnosticReportDao = diagnosticReportDao;
@@ -41,13 +36,13 @@ public class DiagnosticReportRoutes extends RouteBuilder {
         this.patientIdProcessor = patientIdProcessor;
         this.compositionConverterResolver = compositionConverterResolver;
         this.defaultExceptionHandler = defaultExceptionHandler;
-        this.mappingDebugger = mappingDebugger;
     }
 
     @Override
     public void configure() {
         // @formatter:off
         from("fhir-create-diagnostic-report:fhirConsumer?fhirContext=#fhirContext")
+                .setProperty("DebugMapping", simple("${properties:fhir-bridge.debug}"))
                 .onCompletion()
                 .process("auditCreateResourceProcessor")
                 .end()
@@ -61,12 +56,8 @@ public class DiagnosticReportRoutes extends RouteBuilder {
                 .process(patientIdProcessor)
                 .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.CamelFhirBridgeProfile})"))
                 .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-                .wireTap("direct:debug-json-file")
-                .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
 
-        from("direct:debug-json-file")
-                .process(mappingDebugger)
-                .to("file:src/main/resources?fileName=test.json");
+                .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
 
         // @formatter:on
     }
