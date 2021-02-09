@@ -27,6 +27,8 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.Reiseh
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.StatusDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
@@ -226,7 +228,7 @@ public class ReisehistorieComposition implements Composition {
      return this.healthCareFacility ;
   }
 
-  public void setSettingDefiningCode(Setting settingDefiningCode) {
+  public void setSettingDefiningCode(SettingDefiningcode settingDefiningCode) {
      this.settingDefiningCode = settingDefiningCode;
   }
 
@@ -283,7 +285,7 @@ public class ReisehistorieComposition implements Composition {
      return this.feederAudit ;
   }
 
-  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+  public void setCategoryDefiningCode(CategoryDefiningcode categoryDefiningCode) {
      this.categoryDefiningCode = categoryDefiningCode;
   }
 

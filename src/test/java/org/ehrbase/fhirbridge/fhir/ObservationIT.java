@@ -92,6 +92,20 @@ class ObservationIT extends AbstractSetupIT {
     }
 
     @Test
+    void createHistoryOfTravelYes() throws IOException {
+        create("Observation/create-history-of-travel_yes.json");
+    }
+    @Test
+    void createHistoryOfTravelNo() throws IOException {
+        create("Observation/create-history-of-travel_no.json");
+    }
+    @Test
+    void createHistoryOfTravelUnknown() throws IOException {
+        create("Observation/create-history-of-travel_unknwon.json");
+    }
+
+
+    @Test
     void createWithDefaultProfile() throws IOException {
         String resource = IOUtils.toString(new ClassPathResource("Observation/create-observation-with-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
