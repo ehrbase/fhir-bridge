@@ -103,7 +103,7 @@ public class Resources {
         externalRef.setNamespace("patients");
         GenericId genericId = new GenericId();
         genericId.setScheme("id_scheme");
-        genericId.setValue("{{questionnaire_patient_id}}"+Math.floor(Math.random()*1000000000));
+        genericId.setValue("{{questionnaire_patient_id}}");
         externalRef.setId(genericId);
         subject.setExternalRef(externalRef);
         DvText dvText = new DvText("any EHR status");
