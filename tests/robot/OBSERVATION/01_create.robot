@@ -55,7 +55,7 @@ Force Tags              observation_create
 	[Tags]             	blood-pressure    valid
 
 	ehr.create new ehr    					000_ehr_status.json
-	observation.create blood pressure    	create-blood-pressure.json
+	observation.create blood pressure    	Blood Pressure    create-blood-pressure.json
     observation.validate response - 201
 
 
@@ -161,7 +161,7 @@ Force Tags              observation_create
 	[Tags]             	body-height    valid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create observation  create-body-height.json
+	observation.create body height    Body Height    create-body-height.json
 	observation.validate response - 201
 
 
