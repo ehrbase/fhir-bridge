@@ -52,10 +52,11 @@ public class CompositionProducer extends DefaultProducer {
         debugMapping(exchange, (Composition) body);
 
         Object mergedComposition = endpoint.getOpenEhrClient().compositionEndpoint(ehrId).mergeCompositionEntity(body);
+        exchange.getMessage().setHeader(CompositionConstants.VERSION_UID, ((Composition) mergedComposition).getVersionUid());
+
         if (compositionConverter != null) {
             mergedComposition = compositionConverter.fromComposition((Composition) mergedComposition);
         }
-
         exchange.getMessage().setBody(mergedComposition);
     }
 
