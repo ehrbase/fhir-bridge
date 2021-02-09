@@ -28,8 +28,8 @@ public class RadiologischerBefundConverter implements CompositionConverter<GECCO
         geccoRadiologischerBefundComposition.setLanguage(Language.DE);
         mapStatus(geccoRadiologischerBefundComposition, diagnosticReport);
         mapKategorie(geccoRadiologischerBefundComposition, diagnosticReport);
-        System.out.println("Kategory ------"+geccoRadiologischerBefundComposition.getKategorie().get(0).getValue());
-        System.out.println("Status ------"+geccoRadiologischerBefundComposition.getStatusDefiningCode());
+        System.out.println("Kategory ------" + geccoRadiologischerBefundComposition.getKategorie().get(0).getValue());
+        System.out.println("Status ------" + geccoRadiologischerBefundComposition.getStatusDefiningCode());
         geccoRadiologischerBefundComposition.setBildgebendesUntersuchungsergebnis(new BildgebendesUntersuchungsergebnisConverter().map(diagnosticReport));
         return geccoRadiologischerBefundComposition;
     }
@@ -44,24 +44,24 @@ public class RadiologischerBefundConverter implements CompositionConverter<GECCO
             geccoRadiologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
         } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
             geccoRadiologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
-        }else{
-            throw new UnprocessableEntityException("The Status "+ diagnosticReport.getStatus().toString() + " is not valid for radiology report.");
+        } else {
+            throw new UnprocessableEntityException("The Status " + diagnosticReport.getStatus().toString() + " is not valid for radiology report.");
         }
     }
 
-    private void mapKategorie(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition, DiagnosticReport diagnosticReport){
-        for (CodeableConcept codeableConcept:diagnosticReport.getCategory()
-             ) {
-            for (Coding coding:codeableConcept.getCoding()
-                 ) {
+    private void mapKategorie(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition, DiagnosticReport diagnosticReport) {
+        for (CodeableConcept codeableConcept : diagnosticReport.getCategory()
+        ) {
+            for (Coding coding : codeableConcept.getCoding()
+            ) {
                 mapCode(geccoRadiologischerBefundComposition, coding);
             }
         }
     }
 
     private void mapCode(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition, Coding coding) {
-            List<RadiologischerBefundKategorieElement> radiologischerBefundKategorieElementList = getRadiologischerBefundKategorieElementsList(geccoRadiologischerBefundComposition);
-            RadiologischerBefundKategorieElement radiologischerBefundKategorieElement = new RadiologischerBefundKategorieElement();
+        List<RadiologischerBefundKategorieElement> radiologischerBefundKategorieElementList = getRadiologischerBefundKategorieElementsList(geccoRadiologischerBefundComposition);
+        RadiologischerBefundKategorieElement radiologischerBefundKategorieElement = new RadiologischerBefundKategorieElement();
         radiologischerBefundKategorieElement.setValue(KategorieDefiningCode.RADIOLOGY);
         geccoRadiologischerBefundComposition.setKategorie(List.of(radiologischerBefundKategorieElement));
 
@@ -77,8 +77,8 @@ public class RadiologischerBefundConverter implements CompositionConverter<GECCO
             geccoRadiologischerBefundComposition.setKategorie(radiologischerBefundKategorieElementList);*/
     }
 
-    private List getRadiologischerBefundKategorieElementsList(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition){
-        if(geccoRadiologischerBefundComposition.getKategorie() == null){
+    private List getRadiologischerBefundKategorieElementsList(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition) {
+        if (geccoRadiologischerBefundComposition.getKategorie() == null) {
             return new LinkedList();
         }
         return geccoRadiologischerBefundComposition.getKategorie();

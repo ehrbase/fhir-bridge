@@ -45,6 +45,7 @@ public class CompositionProducer extends DefaultProducer {
 
         Object mergedComposition = endpoint.getOpenEhrClient().compositionEndpoint(ehrId).mergeCompositionEntity(body);
         if (compositionConverter != null) {
+            exchange.setProperty("Composition", mergedComposition);
             mergedComposition = compositionConverter.fromComposition((Composition) mergedComposition);
         }
 
