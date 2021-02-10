@@ -2,14 +2,22 @@ package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.apache.commons.io.IOUtils;
+import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.Bundle;
+import org.javers.core.Javers;
+import org.javers.core.JaversBuilder;
+import org.javers.core.metamodel.clazz.ValueObjectDefinition;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.temporal.TemporalAccessor;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,6 +26,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Integration tests for {@link org.hl7.fhir.r4.model.AuditEvent AuditEvent} resource.
  */
 class AuditEventReportIT extends AbstractSetupIT {
+
+    public AuditEventReportIT() {
+        super();
+    }
 
     @Test
     void createResourceAndSearchAuditEvent() throws IOException {
@@ -39,5 +51,16 @@ class AuditEventReportIT extends AbstractSetupIT {
         AuditEvent auditEvent = (AuditEvent) bundle.getEntryFirstRep().getResource();
         assertEquals(AuditEvent.AuditEventOutcome._0, auditEvent.getOutcome());
         assertEquals(outcome.getResource().getIdElement(), auditEvent.getEntity().get(0).getWhat().getReferenceElement());
+    }
+
+
+    @Override
+    public Javers getJavers() {
+        return JaversBuilder.javers().build();
+    }
+
+    @Override
+    public Exception executeMappingUnprocessableEntityException(IBaseResource questionnaireResponse) {
+        return null;
     }
 }

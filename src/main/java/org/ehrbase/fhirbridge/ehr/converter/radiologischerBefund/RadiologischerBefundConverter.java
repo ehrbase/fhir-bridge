@@ -59,7 +59,7 @@ public class RadiologischerBefundConverter implements CompositionConverter<GECCO
         } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
             geccoRadiologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
         } else {
-            throw new UnprocessableEntityException("The Status " + diagnosticReport.getStatus().toString() + " is not valid for radiology report.");
+            throw new UnprocessableEntityException("The status " + diagnosticReport.getStatus().toString() + " is not valid for radiology report.");
         }
     }
 
