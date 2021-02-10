@@ -45,7 +45,7 @@ public class PatientRoutes extends RouteBuilder {
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(ehrIdLookupProcessor)
-//            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
         // @formatter:on
     }
