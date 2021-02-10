@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.QuestionnaireResponse QuestionnaireResponse} resource.
  */
-class QuestionnaireResponseIT extends AbstractSetupIT {
+class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
 
     public QuestionnaireResponseIT() {
         super("QuestionnaireResponse/", QuestionnaireResponse.class);

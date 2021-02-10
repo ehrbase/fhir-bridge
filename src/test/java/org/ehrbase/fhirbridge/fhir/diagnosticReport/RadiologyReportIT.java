@@ -10,14 +10,13 @@ import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerB
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
-import org.ehrbase.fhirbridge.fhir.AbstractSetupIT;
+import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
 import org.javers.core.metamodel.clazz.ValueObjectDefinition;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
@@ -28,7 +27,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RadiologyReportIT extends AbstractSetupIT {
+public class RadiologyReportIT extends AbstractMappingTestSetupIT {
 
     public RadiologyReportIT() {
         super("DiagnosticReport/", DiagnosticReport.class);

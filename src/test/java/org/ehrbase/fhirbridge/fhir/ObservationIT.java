@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Observation Observation} resource.
  */
-class ObservationIT extends AbstractSetupIT {
+class ObservationIT extends AbstractMappingTestSetupIT {
 
     public ObservationIT() {
         super("Observation/", Observation.class);

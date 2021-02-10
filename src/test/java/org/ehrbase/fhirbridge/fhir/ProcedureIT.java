@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Procedure Procedure} resource.
  */
-class ProcedureIT extends AbstractSetupIT {
+class ProcedureIT extends AbstractMappingTestSetupIT {
 
     public ProcedureIT( ) {
         super("Procedure/", Procedure.class);
