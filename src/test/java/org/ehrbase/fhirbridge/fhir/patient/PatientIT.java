@@ -1,36 +1,42 @@
-package org.ehrbase.fhirbridge.fhir;
+package org.ehrbase.fhirbridge.fhir.patient;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
+import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
+import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.Patient;
+import org.javers.core.Javers;
+import org.javers.core.JaversBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.temporal.TemporalAccessor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Patient Patient} resource.
  */
-class PatientIT extends AbstractSetupIT {
+class PatientIT extends AbstractMappingTestSetupIT {
+
+    public PatientIT() {
+        super("Patient/", Patient.class);
+    }
 
     @Test
-    void create() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Patient/create-patient.json").getInputStream(), StandardCharsets.UTF_8);
-        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
-
-        assertNotNull(outcome.getId());
-        assertEquals(true, outcome.getCreated());
+    void createPatient() throws IOException {
+        create("create-patient.json");
     }
 
     @Test
     void createInvalid() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Patient/create-patient-invalid.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = super.testFileLoader.loadResourceToString("create-patient-invalid.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
@@ -39,11 +45,26 @@ class PatientIT extends AbstractSetupIT {
 
     @Test
     void createWithDefaultProfile() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Patient/create-patient-with-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = super.testFileLoader.loadResourceToString("create-patient-with-default-profile.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : Default profile is not supported for Patient. One of the following profiles is expected: " +
                 "[https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient]", exception.getMessage());
+    }
+
+    @Override
+    public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
+        return assertThrows(UnprocessableEntityException.class, () -> {
+            // new YourConverter().toComposition(((YourResource) domainResource)));
+        });
+    }
+
+    @Override
+    public Javers getJavers() {
+        return JaversBuilder.javers()
+                .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
+                // .registerValueObject(new ValueObjectDefinition(YourComposition.class, List.of("location")))
+                .build();
     }
 }
