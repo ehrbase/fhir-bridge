@@ -26,11 +26,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Integration tests for {@link org.hl7.fhir.r4.model.AuditEvent AuditEvent} resource.
  */
 class AuditEventReportIT extends AbstractSetupIT {
-
-    public AuditEventReportIT() {
-        super();
-    }
-
     @Test
     void createResourceAndSearchAuditEvent() throws IOException {
         Date now = new Date();
@@ -53,14 +48,4 @@ class AuditEventReportIT extends AbstractSetupIT {
         assertEquals(outcome.getResource().getIdElement(), auditEvent.getEntity().get(0).getWhat().getReferenceElement());
     }
 
-
-    @Override
-    public Javers getJavers() {
-        return JaversBuilder.javers().build();
-    }
-
-    @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource questionnaireResponse) {
-        return null;
-    }
 }

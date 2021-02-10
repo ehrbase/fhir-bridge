@@ -38,22 +38,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractSetupIT {
 
-    protected static final String PATIENT_ID_TOKEN = "\\{\\{patientId\\}\\}";
+    public static final String PATIENT_ID_TOKEN = "\\{\\{patientId\\}\\}";
 
-    protected static String PATIENT_ID;
+    public static String PATIENT_ID;
 
     protected final FhirContext context;
 
     protected final IGenericClient client;
-
-    protected TestFileLoader testFileLoader;
-
-    public AbstractSetupIT(String directory, Class clazz) {
-        context = FhirContext.forR4();
-        context.getRestfulClientFactory().setSocketTimeout(60 * 1000);
-        client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge/fhir/");
-        this.testFileLoader = new TestFileLoader(directory,clazz, context);
-    }
 
     public AbstractSetupIT() {
         context = FhirContext.forR4();
@@ -84,29 +75,6 @@ public abstract class AbstractSetupIT {
         client.ehrEndpoint().createEhr(ehrStatus);
     }
 
-    public Diff compareCompositions(Javers javers, String paragonFilePath, Composition mappedComposition)
-            throws IOException {
-        RMObject composition = new CanonicalJson().unmarshal(IOUtils.toString(new ClassPathResource(paragonFilePath).getInputStream(), StandardCharsets.UTF_8), com.nedap.archie.rm.composition.Composition.class);
-        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
-        resourceTemplateProvider.afterPropertiesSet();
-
-        Flattener cut = new Flattener(resourceTemplateProvider);
-        Composition paragonComposition = cut.flatten(composition, mappedComposition.getClass());
-        Diff diff = javers.compare(paragonComposition, mappedComposition);
-        diff.getChanges().forEach(System.out::println);
-        return diff;
-    }
-
-    protected void create(String path) throws IOException {
-        String resource = testFileLoader.loadResourceToString(path);
-        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
-
-        assertNotNull(outcome.getId());
-        assertEquals(true, outcome.getCreated());
-    }
-
-    public abstract Javers getJavers();
-    public abstract Exception executeMappingUnprocessableEntityException(IBaseResource questionnaireResponse);
 
 
 

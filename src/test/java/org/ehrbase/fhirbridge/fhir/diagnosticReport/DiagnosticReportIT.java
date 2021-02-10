@@ -5,6 +5,7 @@ import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.ehrbase.fhirbridge.fhir.AbstractSetupIT;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DiagnosticReport;
@@ -24,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.DiagnosticReport DiagnosticReport} resource.
  */
-class DiagnosticReportIT extends AbstractSetupIT {
+class DiagnosticReportIT extends AbstractMappingTestSetupIT {
 
     public DiagnosticReportIT() {
         super("DiagnosticReport/", DiagnosticReport.class);

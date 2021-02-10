@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Patient Patient} resource.
  */
-class PatientIT extends AbstractSetupIT {
+class PatientIT extends AbstractMappingTestSetupIT {
 
     public PatientIT() {
         super("Patient/", Patient.class);

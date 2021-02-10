@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Condition Condition} resource.
  */
-class ConditionIT extends AbstractSetupIT {
+class ConditionIT extends AbstractMappingTestSetupIT {
 
     public ConditionIT() {
         super("Condition/", Condition.class);
