@@ -222,14 +222,12 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	
 	#invalid code 0
 	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
-#	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
 	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
 	
 	#invalid system 0
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
 	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
-#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
 
 
 008 Create Pregnancy Status (Invalid/Missing 'code')
@@ -481,21 +479,6 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
-	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
-	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready    not-ready_bug
-
-	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																CODE
-
-	#invalid code 0
-	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
-	
-	# invalid system 0
-	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
-
-
 BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
 	[Template]			create pregnancy status with ehr reference
