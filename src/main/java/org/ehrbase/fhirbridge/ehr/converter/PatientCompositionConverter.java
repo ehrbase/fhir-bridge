@@ -26,8 +26,12 @@ import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.E
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.PersonendatenAdminEntry;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Patient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PatientCompositionConverter implements CompositionConverter<GECCOPersonendatenComposition, Patient> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(BloodPressureCompositionConverter.class);
 
     @Override
     public Patient fromComposition(GECCOPersonendatenComposition composition) {
@@ -37,10 +41,11 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
 
     @Override
     public GECCOPersonendatenComposition toComposition(Patient fhir_patient) {
+        LOG.info("I do this!");
         if (fhir_patient == null) {
             return null;
         }
-        
+
         //create composition and contained archetype objects
         GECCOPersonendatenComposition composition = new GECCOPersonendatenComposition();
         PersonendatenAdminEntry person_data = new PersonendatenAdminEntry();
