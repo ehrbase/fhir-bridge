@@ -143,8 +143,8 @@ get coronavirus lab results
 
 
 create blood pressure
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Blood Pressure    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create body temperature
@@ -183,8 +183,8 @@ create coronavirus lab result
 
 
 create body height
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Body Height    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create pregnancy status

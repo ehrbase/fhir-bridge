@@ -8,6 +8,7 @@ import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.client.aql.record.Record1;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
+import org.ehrbase.fhirbridge.fhir.support.PatientIdRepository;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Resource;
@@ -18,6 +19,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -28,16 +30,19 @@ public class EhrIdLookupProcessor implements Processor, MessageSourceAware {
 
     private final OpenEhrClient openEhrClient;
 
+    private final PatientIdRepository patientIdRepository;
+
     private MessageSourceAccessor messages;
 
-    public EhrIdLookupProcessor(OpenEhrClient openEhrClient) {
+    public EhrIdLookupProcessor(OpenEhrClient openEhrClient, PatientIdRepository patientIdRepository) {
         this.openEhrClient = openEhrClient;
+        this.patientIdRepository = patientIdRepository;
     }
 
     @Override
     public void process(Exchange exchange) {
         Resource resource = exchange.getIn().getBody(Resource.class);
-        String subject = Resources.getSubjectIdentifier(resource)
+        String subject = Resources.getSubjectIdentifier(resource, Optional.of(openEhrClient), Optional.of(patientIdRepository))
                 .map(Identifier::getValue)
                 .orElseThrow(() -> new UnprocessableEntityException(messages.getMessage("validation.subject.identifierRequired")));
 
