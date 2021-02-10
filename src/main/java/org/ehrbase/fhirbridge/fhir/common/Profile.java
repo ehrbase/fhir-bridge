@@ -26,6 +26,8 @@ public enum Profile {
 
     DIAGNOSTIC_REPORT_LAB(DiagnosticReport.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab"),
 
+    DIAGNOSTIC_REPORT_RADIOLOGY(DiagnosticReport.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnostic-report-radiology"),
+
     // Observation Profiles
 
     BODY_HEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"),

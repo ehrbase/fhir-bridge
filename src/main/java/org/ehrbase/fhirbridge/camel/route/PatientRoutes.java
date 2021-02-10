@@ -34,19 +34,20 @@ public class PatientRoutes extends RouteBuilder {
     public void configure() {
         // @formatter:off
         from("fhir-create-patient:fhirConsumer?fhirContext=#fhirContext")
-            .onCompletion()
+                .setProperty("DebugMapping", simple("${properties:fhir-bridge.debug}"))
+                .onCompletion()
                 .process("auditCreateResourceProcessor")
-            .end()
-            .onException(Exception.class)
+                .end()
+                .onException(Exception.class)
                 .process(defaultExceptionHandler)
-            .end()
-            .process(requestValidator)
-            .bean(patientDao, "create(${body})")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
-            .setBody(simple("${body.resource}"))
-            .process(ehrIdLookupProcessor)
+                .end()
+                .process(requestValidator)
+                .bean(patientDao, "create(${body})")
+                .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
+                .setBody(simple("${body.resource}"))
+                .process(ehrIdLookupProcessor)
 //            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+                .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
         // @formatter:on
     }
 }
