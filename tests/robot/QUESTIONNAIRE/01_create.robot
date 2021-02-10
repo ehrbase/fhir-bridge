@@ -39,7 +39,7 @@ Force Tags              questionnaire_create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to questionnaire endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              questionnaire-response    valid     not-ready    not-ready_bug
+    [Tags]              questionnaire-response    valid
 
 
     ehr.create new ehr    000_ehr_status.json
