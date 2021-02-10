@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.fhir;
+package org.ehrbase.fhirbridge;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
@@ -22,13 +22,13 @@ public class TestFileLoader {
     }
 
     public IBaseResource loadResource(String path) throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource(directory+path).getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource(directory + path).getInputStream(), StandardCharsets.UTF_8);
         IParser parser = context.newJsonParser();
         return parser.parseResource(clazz, resource);
     }
 
 
     public String loadResourceToString(String path) throws IOException {
-        return IOUtils.toString(new ClassPathResource(directory+path).getInputStream(), StandardCharsets.UTF_8);
+        return IOUtils.toString(new ClassPathResource(directory + path).getInputStream(), StandardCharsets.UTF_8);
     }
 }

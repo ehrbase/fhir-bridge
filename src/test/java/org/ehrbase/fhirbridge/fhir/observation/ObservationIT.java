@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.fhir;
+package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
@@ -6,6 +6,7 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -130,7 +131,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
 
 
     @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource questionnaireResponse) {
+    public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
         return assertThrows(UnprocessableEntityException.class, () -> {
             // new YourConverter().toComposition(((YourResource) domainResource)));
         });
