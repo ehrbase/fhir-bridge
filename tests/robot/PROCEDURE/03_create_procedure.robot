@@ -23,7 +23,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Peter Wohlfarth
-Force Tags              procedure_create    procedure   invalid
+Force Tags              procedure_create   invalid
 
 
 *** Variables ***
@@ -34,12 +34,10 @@ ${randinteger}                  ${12345}
 *** Test Cases ***
 
 001 Create Procedure (Invalid/Missing 'subject')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-procedure.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
-    ...                 5. *POST* example JSON to observation endpoint\n\n
-	...                 6. *VALIDATE* the response status \n\n                
+    [Documentation]     1. *LOAD* _create-procedure.json_ \n\n
+	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
+    ...                 3. *POST* example JSON to procedure endpoint \n\n
+	...                 4. *VALIDATE* the response status                   
 	[Template]		    create procedure w/o ehr reference 
     [Tags]          	subject
 
@@ -85,7 +83,7 @@ ${randinteger}                  ${12345}
 	...                 2. *LOAD* _create-procedure.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
-    ...                 5. *POST* example JSON to observation endpoint\n\n
+    ...                 5. *POST* example JSON to procedure endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
 	[Template]		    create procedure with ehr reference
     [Tags]          	code
@@ -129,7 +127,7 @@ ${randinteger}                  ${12345}
 	...                 2. *LOAD* _create-procedure.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
-    ...                 5. *POST* example JSON to observation endpoint\n\n
+    ...                 5. *POST* example JSON to procedure endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
 	[Template]		    create procedure with ehr reference
     [Tags]          	category
@@ -166,7 +164,7 @@ ${randinteger}                  ${12345}
 	...                 2. *LOAD* _create-procedure.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
-    ...                 5. *POST* example JSON to observation endpoint\n\n
+    ...                 5. *POST* example JSON to procedure endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
 	[Template]		    create procedure with ehr reference
     [Tags]          	resourceType
