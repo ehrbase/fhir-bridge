@@ -29,7 +29,7 @@ public abstract class AbstractMappingTestSetupIT extends AbstractSetupIT{
 
     public Diff compareCompositions(Javers javers, String paragonFilePath, Composition mappedComposition)
             throws IOException {
-        RMObject composition = new CanonicalJson().unmarshal(IOUtils.toString(new ClassPathResource(paragonFilePath).getInputStream(), StandardCharsets.UTF_8), com.nedap.archie.rm.composition.Composition.class);
+        RMObject composition = new CanonicalJson().unmarshal(testFileLoader.loadResourceToString(paragonFilePath), com.nedap.archie.rm.composition.Composition.class);
         ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
         resourceTemplateProvider.afterPropertiesSet();
 

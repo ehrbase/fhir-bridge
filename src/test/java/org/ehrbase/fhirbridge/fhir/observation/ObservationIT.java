@@ -32,12 +32,12 @@ class ObservationIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createBloodPressure() throws IOException {
-        create("create-blood-pressure.json");
+        create("BloodPressure/create-blood-pressure.json");
     }
 
     @Test
     void createBodyHeight() throws IOException {
-        create("create-body-height.json");
+        create("BodyHeight/create-body-height.json");
     }
 
     @Test
@@ -77,7 +77,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createObservationLab() throws IOException {
-        create("create-observation-lab.json");
+        create("ObservationLab/create-observation-lab.json");
     }
 
     @Test
