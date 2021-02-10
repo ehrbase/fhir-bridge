@@ -75,18 +75,16 @@ public class CompositionProducer extends DefaultProducer {
     private void writeToFile(String compositionJson) {
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter("src/main/resources/test.json"));
+            writer = new BufferedWriter(new FileWriter("src/main/resources/MappingOutput.json"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         try {
             assert writer != null;
             writer.write(compositionJson);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         try {
             writer.close();
         } catch (IOException e) {

@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import com.nedap.archie.rm.RMObject;
 import com.nedap.archie.rm.datavalues.DvText;
@@ -21,6 +22,7 @@ import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
 import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.javers.core.Javers;
 import org.javers.core.diff.Diff;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,15 +34,26 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-abstract class AbstractSetupIT {
+import static org.junit.jupiter.api.Assertions.*;
 
-    static final String PATIENT_ID_TOKEN = "\\{\\{patientId\\}\\}";
+public abstract class AbstractSetupIT {
 
-    static String PATIENT_ID;
+    protected static final String PATIENT_ID_TOKEN = "\\{\\{patientId\\}\\}";
+
+    protected static String PATIENT_ID;
 
     protected final FhirContext context;
 
     protected final IGenericClient client;
+
+    protected TestFileLoader testFileLoader;
+
+    public AbstractSetupIT(String directory, Class clazz) {
+        context = FhirContext.forR4();
+        context.getRestfulClientFactory().setSocketTimeout(60 * 1000);
+        client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge/fhir/");
+        this.testFileLoader = new TestFileLoader(directory,clazz, context);
+    }
 
     public AbstractSetupIT() {
         context = FhirContext.forR4();
@@ -71,19 +84,6 @@ abstract class AbstractSetupIT {
         client.ehrEndpoint().createEhr(ehrStatus);
     }
 
-/*    public Diff compare(Javers javers,String paragonFilePath, org.ehrbase.fhirbridge.ehr.Composition mappedComposition)
-            throws IOException {
-
-        RMObject composition = new CanonicalJson().unmarshal(IOUtils.toString(new ClassPathResource(paragonFilePath).getInputStream(), StandardCharsets.UTF_8), com.nedap.archie.rm.composition.Composition.class);
-        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
-        resourceTemplateProvider.afterPropertiesSet();
-
-        Flattener cut = new Flattener(resourceTemplateProvider);
-        Composition paragonComposition = cut.flatten(composition, mappedComposition.getClass());
-        Diff diff = javers.compare(paragonComposition, mappedComposition);
-        return diff;
-    }*/
-
     public Diff compareCompositions(Javers javers, String paragonFilePath, Composition mappedComposition)
             throws IOException {
         RMObject composition = new CanonicalJson().unmarshal(IOUtils.toString(new ClassPathResource(paragonFilePath).getInputStream(), StandardCharsets.UTF_8), com.nedap.archie.rm.composition.Composition.class);
@@ -96,5 +96,18 @@ abstract class AbstractSetupIT {
         diff.getChanges().forEach(System.out::println);
         return diff;
     }
+
+    protected void create(String path) throws IOException {
+        String resource = testFileLoader.loadResourceToString(path);
+        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
+
+        assertNotNull(outcome.getId());
+        assertEquals(true, outcome.getCreated());
+    }
+
+    public abstract Javers getJavers();
+    public abstract Exception executeMappingUnprocessableEntityException(IBaseResource questionnaireResponse);
+
+
 
 }
