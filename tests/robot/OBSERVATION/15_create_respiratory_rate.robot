@@ -219,7 +219,50 @@ ${randinteger}                  ${12345}
 	$.valueQuantity.code	  					${EMPTY}			422
 	$.valueQuantity.code	  					${None}				422
 	$.valueQuantity.code	  					${123}				422
+
+
+
+Create Respiratory Rate (Invalid/Missing 'subject')
+    [Documentation]     1. *LOAD* _create-respiratory-rate.json_ \n\n
+	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
+    ...                 3. *POST* example JSON to observation endpoint \n\n
+	...                 4. *VALIDATE* the response status              
+	[Template]		    create Respiratory Rate w/o ehr reference 
+    [Tags]          	subject
+
+	# FIELD/PATH					VALUE							HTTP
+	# 																CODE
+    # invalid cases for value
+    $.subject.identifier.value		missing							422
+    $.subject.identifier.value		foobar							422
+    $.subject.identifier.value		${EMPTY}						422
+    $.subject.identifier.value		${{ [] }}						422
+    $.subject.identifier.value		${{ {} }}						422
+    $.subject.identifier.value		${123}							422
+
+	# invalid cases for system
+    $.subject.identifier.system		foobar							422
+    $.subject.identifier.system		${EMPTY}						422
+    $.subject.identifier.system		${{ [] }}						422
+    $.subject.identifier.system		${{ {} }}						422
+    $.subject.identifier.system		${123}							422
+
+	# invalid cases for identifier
+    $.subject.identifier			missing							422
+    $.subject.identifier			${EMPTY}						422
+    $.subject.identifier			${{ [] }}						422
+    $.subject.identifier			${{ {} }}						422
+    $.subject.identifier			${123}							422
+
+	# invalid cases for subject
+    $.subject						missing							422
+    $.subject						${EMPTY}						422
+    $.subject						${{ [] }}						422
+    $.subject						${{ {} }}						422
+    $.subject						${123}							422
 	
+	# comment: random uuid												
+    $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
@@ -244,6 +287,15 @@ create Respiratory Rate with ehr reference
 						observation.POST /Observation           Respiratory Rate            	${payload}
 						observation.validate response - 422 (w/o error message)  ${http_status_code}
 
+
+create Respiratory Rate w/o ehr reference    
+	[Arguments]         ${json_path}        ${value}                ${http_status_code}
+
+	${fake_ehr_ref}=	Evaluate    str(uuid.uuid4())    uuid
+						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
+	${payload}=    		generate payload from example json      ${json_path}                ${value}
+						observation.POST /Observation           Respiratory Rate            	${payload}
+						observation.validate response - 422 (w/o error message)  ${http_status_code}
 
 
 generate payload from example json
