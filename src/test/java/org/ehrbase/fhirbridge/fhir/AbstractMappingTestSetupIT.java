@@ -4,6 +4,7 @@ import ca.uhn.fhir.rest.api.MethodOutcome;
 import com.nedap.archie.rm.RMObject;
 import org.apache.commons.io.IOUtils;
 import org.ehrbase.client.flattener.Flattener;
+import org.ehrbase.fhirbridge.TestFileLoader;
 import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.ehrbase.serialisation.jsonencoding.CanonicalJson;

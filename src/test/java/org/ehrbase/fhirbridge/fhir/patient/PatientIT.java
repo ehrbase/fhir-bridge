@@ -1,13 +1,13 @@
-package org.ehrbase.fhirbridge.fhir;
+package org.ehrbase.fhirbridge.fhir.patient;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
+import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.Procedure;
+import org.hl7.fhir.r4.model.Patient;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.junit.jupiter.api.Assertions;
@@ -21,42 +21,42 @@ import java.time.temporal.TemporalAccessor;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Integration tests for {@link org.hl7.fhir.r4.model.Procedure Procedure} resource.
+ * Integration tests for {@link org.hl7.fhir.r4.model.Patient Patient} resource.
  */
-class ProcedureIT extends AbstractMappingTestSetupIT {
+class PatientIT extends AbstractMappingTestSetupIT {
 
-    public ProcedureIT( ) {
-        super("Procedure/", Procedure.class);
+    public PatientIT() {
+        super("Patient/", Patient.class);
     }
 
     @Test
-    void createProcedure() throws IOException {
-       create("create-procedure.json");
+    void createPatient() throws IOException {
+        create("create-patient.json");
+    }
+
+    @Test
+    void createInvalid() throws IOException {
+        String resource = super.testFileLoader.loadResourceToString("create-patient-invalid.json");
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
+        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+
+        assertEquals("HTTP 422 : Extension.extension:dateTimeOfDocumentation: minimum required = 1, but only found 0 (from https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age)", exception.getMessage());
     }
 
     @Test
     void createWithDefaultProfile() throws IOException {
-        String resource = super.testFileLoader.loadResourceToString("create-procedure-with-default-profile.json");
+        String resource = super.testFileLoader.loadResourceToString("create-patient-with-default-profile.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : Default profile is not supported for Procedure. One of the following profiles is expected: " +
-                "[https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure]", exception.getMessage());
-    }
-
-    @Test
-    void createWithNonExistingSubject() throws IOException {
-        String resource = super.testFileLoader.loadResourceToString("create-procedure-with-non-existing-subject.json");
-        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
-
-        assertEquals("HTTP 422 : EhrId not found for subject '123456789'", exception.getMessage());
+        assertEquals("HTTP 422 : Default profile is not supported for Patient. One of the following profiles is expected: " +
+                "[https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient]", exception.getMessage());
     }
 
     @Override
     public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
         return assertThrows(UnprocessableEntityException.class, () -> {
-             new ProcedureCompositionConverter().toComposition(((Procedure) baseResource));
+            // new YourConverter().toComposition(((YourResource) domainResource)));
         });
     }
 

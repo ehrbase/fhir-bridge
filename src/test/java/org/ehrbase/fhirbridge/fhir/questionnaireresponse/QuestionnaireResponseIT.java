@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.fhir;
+package org.ehrbase.fhirbridge.fhir.questionnaireresponse;
 
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.api.MethodOutcome;
@@ -10,6 +10,7 @@ import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.D4lQuestionnaireCom
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.javers.core.Javers;

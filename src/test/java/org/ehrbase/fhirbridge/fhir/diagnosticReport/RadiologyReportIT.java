@@ -30,12 +30,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RadiologyReportIT extends AbstractMappingTestSetupIT {
 
     public RadiologyReportIT() {
-        super("DiagnosticReport/", DiagnosticReport.class);
+        super("DiagnosticReport/RadiologyReport/", DiagnosticReport.class);
     }
 
     @Test
     void createNormalFinding() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create-radiology-report-normal-finding.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("create-radiology-report-normal-finding.json").getInputStream(), StandardCharsets.UTF_8);
         MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
         assertNotNull(outcome.getId());
         assertEquals(true, outcome.getCreated());
@@ -43,34 +43,34 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mappingNormalFinding() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create-radiology-report-normal-finding.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("create-radiology-report-normal-finding.json").getInputStream(), StandardCharsets.UTF_8);
         IParser parser = context.newJsonParser();
         DiagnosticReport diagnosticReport = parser.parseResource(DiagnosticReport.class, resource);
         RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
         GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
-        Diff diff = compareCompositions(getJavers(), "DiagnosticReport/paragon-radiology-report-normal-finding.json", mappedGeccoRadiologischerBefundComposition);
+        Diff diff = compareCompositions(getJavers(), "paragon-radiology-report-normal-finding.json", mappedGeccoRadiologischerBefundComposition);
         assertEquals(diff.getChanges().size(), 0);
     }
 
     @Test
     void mappingTypicalFinding() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create-radiology-report-typical-finding.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("create-radiology-report-typical-finding.json").getInputStream(), StandardCharsets.UTF_8);
         IParser parser = context.newJsonParser();
         DiagnosticReport diagnosticReport = parser.parseResource(DiagnosticReport.class, resource);
         RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
         GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
-        Diff diff = compareCompositions(getJavers(), "DiagnosticReport/paragon-radiology-report-typical-finding.json", mappedGeccoRadiologischerBefundComposition);
+        Diff diff = compareCompositions(getJavers(), "paragon-radiology-report-typical-finding.json", mappedGeccoRadiologischerBefundComposition);
         assertEquals(diff.getChanges().size(), 0);
     }
 
     @Test
     void mappingUnspecificFinding() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("DiagnosticReport/create-radiology-report-unspecific-finding.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = IOUtils.toString(new ClassPathResource("create-radiology-report-unspecific-finding.json").getInputStream(), StandardCharsets.UTF_8);
         IParser parser = context.newJsonParser();
         DiagnosticReport diagnosticReport = parser.parseResource(DiagnosticReport.class, resource);
         RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
         GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
-        Diff diff = compareCompositions(getJavers(), "DiagnosticReport/paragon-radiology-report-unspecific-finding.json", mappedGeccoRadiologischerBefundComposition);
+        Diff diff = compareCompositions(getJavers(), "paragon-radiology-report-unspecific-finding.json", mappedGeccoRadiologischerBefundComposition);
         assertEquals(diff.getChanges().size(), 0);
     }
 
