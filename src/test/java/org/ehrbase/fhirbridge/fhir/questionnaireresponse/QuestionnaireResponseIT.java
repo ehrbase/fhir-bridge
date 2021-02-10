@@ -141,7 +141,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
         D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter = new D4lQuestionnaireCompositionConverter();
         D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.toComposition(resource);
 
-        Diff diff = compareCompositions(getJavers(), "QuestionnaireResponse/d4L-questionnaire-paragon-composition.json", mappedD4LQuestionnaireComposition);
+        Diff diff = compareCompositions(getJavers(), "d4L-questionnaire-paragon-composition.json", mappedD4LQuestionnaireComposition);
         assertEquals(diff.getChanges().size(), 0);
     }
 
