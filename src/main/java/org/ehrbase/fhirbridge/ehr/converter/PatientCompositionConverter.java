@@ -4,13 +4,10 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 
-import java.text.SimpleDateFormat;
 import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.temporal.Temporal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
@@ -24,6 +21,9 @@ import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.D
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EthnischerHintergrundCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EthnischerHintergrundDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.PersonendatenAdminEntry;
+import org.hl7.fhir.r4.model.Age;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Patient;
 import org.slf4j.Logger;
@@ -41,7 +41,6 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
 
     @Override
     public GECCOPersonendatenComposition toComposition(Patient fhir_patient) {
-        LOG.info("I do this!");
         if (fhir_patient == null) {
             return null;
         }
@@ -49,66 +48,83 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
         //create composition and contained archetype objects
         GECCOPersonendatenComposition composition = new GECCOPersonendatenComposition();
         PersonendatenAdminEntry person_data = new PersonendatenAdminEntry();
-        AlterObservation age = new AlterObservation();
 
         // set feeder audit
         FeederAudit fa = CommonData.constructFeederAudit(fhir_patient);
         composition.setFeederAudit(fa);
-        
-        //map values of interest from FHIR observation
-        ZonedDateTime date_time_of_documentation;
-        
-        try {
-            /* NOTE There are more fields included in the FHIR resource (but not marked as "support mandatory")
-            which are also considered in the template. But the example does only include age, date of birth and ethnic group.*/
-            
-            //get clinical values of interest from FHIR profile
-            //NOTE not sure if this is the best value for composition startTime since it refers to the documentation of the age, but its the only info on time of documentation...
-            //age - date_time_of_documentation
-            String date_time_of_documentation_string = fhir_patient.getExtensionByUrl("dateTimeOfDocumentation").getNamedProperty("valueDateTime").toString();
-            date_time_of_documentation = new SimpleDateFormat("dd/MM/yyyy").parse(date_time_of_documentation_string).toInstant().atZone(ZoneId.systemDefault());
-            //age - value
-            int years_int = Integer.parseInt(fhir_patient.getExtensionByUrl("age").getNamedProperty("value").toString());
-            //TODO remove just in case other way to extract values from extensions does not work
-            //IPrimitiveType<String> date_time_of_documentation_p = (IPrimitiveType<String>) extension_age.getValueAsPrimitive();
-            //date_time_of_documentation = new SimpleDateFormat("dd/MM/yyyy").parse(date_time_of_documentation_p.getValue()).toInstant().atZone(ZoneId.systemDefault());
-            //birthDate
-            Date birth_date = fhir_patient.getBirthDate();
-            //ethnic-group
-            Extension extension_ethnic_group = fhir_patient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group");
-            String ethnic_group = extension_ethnic_group.getNamedProperty("display").toString();
-            
-            //set stuff for composition
-            //age - Ereigniszeitpunkt
-            age.setTimeValue(date_time_of_documentation);
-            //age - Alter (ISO8601 duration e.g. P67Y)
-            age.setAlterValue(Period.ofYears(years_int));
-            //date of birth
-            DatenZurGeburtCluster datenZurGeburtCluster = new DatenZurGeburtCluster();
-            datenZurGeburtCluster.setGeburtsdatumValue((Temporal) birth_date);
-            person_data.setDatenZurGeburt(datenZurGeburtCluster);
-            //ethnic-group
-            EthnischerHintergrundCluster ec = new EthnischerHintergrundCluster();
-            ec.setEthnischerHintergrundDefiningCode(EthnischerHintergrundDefiningCode.valueOf(ethnic_group));
-            List<EthnischerHintergrundCluster> items = new ArrayList<>();
-            items.add(ec);
-            person_data.setEthnischerHintergrund(items);
-        } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
-        }
+
+        /* NOTE There are more fields included in the FHIR resource (but not marked as "support mandatory")
+        which are also considered in the template. But the example does only include age, date of birth and ethnic group.*/
+
         //assemble composition
+        composition.setAlter(get_age_from_fhir(fhir_patient));
+        person_data.setDatenZurGeburt(get_data_on_birth(fhir_patient));
+        person_data.setEthnischerHintergrund(get_ethnic_background_data(fhir_patient));
+        person_data.setSubject(new PartySelf());
+        person_data.setLanguage(Language.DE);
+
         composition.setPersonendaten(person_data);
-        composition.setAlter(age);
+
+        //NOTE not sure if this is the best value for composition startTime since it refers to the documentation of the age, but its the only info on time of documentation...
+        composition.setStartTimeValue(composition.getAlter().getTimeValue());
 
         // Required fields by API
-        composition.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
+        composition.setLanguage(Language.DE);
         composition.setLocation("test"); //FIXME: sensible value
         composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         composition.setTerritory(Territory.DE);
         composition.setCategoryDefiningCode(Category.EVENT);
-        composition.setStartTimeValue(date_time_of_documentation);
         composition.setComposer(new PartySelf()); //FIXME: sensible value
 
         return composition;
+    }
+
+    private List<EthnischerHintergrundCluster> get_ethnic_background_data(Patient fhir_patient) {
+        List<EthnischerHintergrundCluster> items = new ArrayList<>();
+        try {
+            Extension extension_ethnic_group = fhir_patient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group");
+            Coding ethnic_group = (Coding) extension_ethnic_group.getValue();
+            EthnischerHintergrundCluster ec = new EthnischerHintergrundCluster();
+            ec.setEthnischerHintergrundDefiningCode(EthnischerHintergrundDefiningCode.get_by_SNOMED_code(ethnic_group.getCode()));
+            items.add(ec);
+        } catch (Exception e) {
+            throw new UnprocessableEntityException(e.getMessage());
+        }
+        return items;
+    }
+
+    private AlterObservation get_age_from_fhir(Patient fhir_patient) {
+        AlterObservation age = new AlterObservation();
+        try {
+            Extension extension_age = fhir_patient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age");
+            //age - date_time_of_documentation
+            DateTimeType date_time_of_documentation_dt = (DateTimeType) extension_age.getExtensionByUrl("dateTimeOfDocumentation").getValue();
+            ZonedDateTime date_time_of_documentation = date_time_of_documentation_dt.getValueAsCalendar().toZonedDateTime();
+            //age - value
+            Age age_value = (Age) extension_age.getExtensionByUrl("age").getValue();
+            //age - Ereigniszeitpunkt
+            age.setOriginValue(date_time_of_documentation);
+            age.setTimeValue(date_time_of_documentation);
+            //age - Alter (ISO8601 duration e.g. P67Y)
+            LOG.info(age_value.getValue().toString());
+            age.setAlterValue(Period.ofYears(age_value.getValue().intValue()));
+            LOG.info(age.getAlterValue().toString());
+            age.setSubject(new PartySelf());
+            age.setLanguage(Language.DE);
+        } catch (Exception e) {
+            throw new UnprocessableEntityException(e.getMessage());
+        }
+        return age;
+    }
+
+    private DatenZurGeburtCluster get_data_on_birth(Patient fhir_patient) {
+        DatenZurGeburtCluster datenZurGeburtCluster = new DatenZurGeburtCluster();
+        try {
+            //date of birth
+            datenZurGeburtCluster.setGeburtsdatumValue(fhir_patient.getBirthDate().toInstant().atZone(ZoneId.of("Europe/Berlin")).toLocalDate());
+        } catch (Exception e) {
+            throw new UnprocessableEntityException(e.getMessage());
+        }
+        return datenZurGeburtCluster;
     }
 }
