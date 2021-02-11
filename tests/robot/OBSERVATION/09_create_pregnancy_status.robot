@@ -480,7 +480,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
-	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
+	[Documentation]		Belongs to TC 010! Remove separation when it's fixed! -> fixed that it has now 201 as respone and not 500 anymore
 	[Template]			create pregnancy status with ehr reference
     [Tags]              category    not-ready    not-ready_bug
 
