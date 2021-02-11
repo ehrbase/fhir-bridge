@@ -239,7 +239,7 @@ Force Tags              observation_create
 	[Tags]             	blood-gas-panel    valid   not-ready    not-implemented
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create blood gas panel    create-blood-gas-panel.json
+	observation.create blood gas panel  Blood gas Panel  create-blood-gas-panel.json
 	observation.validate response - 201
 
 
