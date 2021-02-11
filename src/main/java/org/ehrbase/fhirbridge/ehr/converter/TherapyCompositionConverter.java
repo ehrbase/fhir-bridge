@@ -118,7 +118,6 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         result.setCategoryDefiningCode(Category.EVENT);
         result.setComposer(new PartySelf());
 
-
         return result;
     }
 

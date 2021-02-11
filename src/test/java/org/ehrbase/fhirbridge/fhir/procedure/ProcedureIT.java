@@ -26,20 +26,17 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ProcedureIT extends AbstractMappingTestSetupIT {
 
-    public ProcedureIT( ) {
+    public ProcedureIT() {
         super("Procedure/", Procedure.class);
     }
 
     @Test
     void createProcedure() throws IOException {
-       create("create-procedure.json");
+        create("create-procedure.json");
     }
 
     @Test
     void createApheresisProcedure() throws IOException {
-        create("create-apheresis-ops-datetime.json");
-        create("create-apheresis-ops-period.json");
-        create("create-apheresis-ops-period_2.json");
         create("create-apheresis-sct-datetime.json");
         create("create-apheresis-sct-period.json");
         create("create-apheresis-sct-period_2.json");
@@ -49,9 +46,6 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createDialysisProcedure() throws IOException {
-        create("create-dialysis-ops-datetime.json");
-        create("create-dialysis-ops-period.json");
-        create("create-dialysis-ops-period_2.json");
         create("create-dialysis-sct-datetime.json");
         create("create-dialysis-sct-period.json");
         create("create-dialysis-sct-period_2.json");
@@ -97,9 +91,6 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     @Test
     void createRespiratoryTherapies() throws IOException {
         create("create-respiratory-therapies-artificial-respiration.json");
-        create("create-respiratory-therapies-artificial-respiration_ops-datetime.json");
-        create("create-respiratory-therapies-artificial-respiration_ops-period.json");
-        create("create-respiratory-therapies-artificial-respiration_ops-period_2.json");
         create("create-respiratory-therapies-artificial-respiration_sct-datetime.json");
         create("create-respiratory-therapies-artificial-respiration_sct-period.json");
         create("create-respiratory-therapies-artificial-respiration_sct-period_2.json");
@@ -119,8 +110,15 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : Default profile is not supported for Procedure. One of the following profiles is expected: " +
-                "[https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure]", exception.getMessage());
+        assertEquals("HTTP 422 : Default profile is not supported for Procedure. " +
+                "One of the following profiles is expected: " +
+                "[https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dialysis, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/extracorporeal-membrane-oxygenation, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies]", exception.getMessage());
     }
 
     @Test
@@ -135,7 +133,7 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
         return assertThrows(UnprocessableEntityException.class, () -> {
-             new ProcedureCompositionConverter().toComposition(((Procedure) baseResource));
+            new ProcedureCompositionConverter().toComposition(((Procedure) baseResource));
         });
     }
 
