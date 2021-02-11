@@ -36,6 +36,84 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
+    void createApheresisProcedure() throws IOException {
+        create("create-apheresis-ops-datetime.json");
+        create("create-apheresis-ops-period.json");
+        create("create-apheresis-ops-period_2.json");
+        create("create-apheresis-sct-datetime.json");
+        create("create-apheresis-sct-period.json");
+        create("create-apheresis-sct-period_2.json");
+        create("create-apheresis-with-not-performed-performedDateTime.json");
+        create("create-apheresis-with-not-unknown-performedDateTime.json");
+    }
+
+    @Test
+    void createDialysisProcedure() throws IOException {
+        create("create-dialysis-ops-datetime.json");
+        create("create-dialysis-ops-period.json");
+        create("create-dialysis-ops-period_2.json");
+        create("create-dialysis-sct-datetime.json");
+        create("create-dialysis-sct-period.json");
+        create("create-dialysis-sct-period_2.json");
+        create("create-dialysis-with-performedDateTime-not-performed.json");
+        create("create-dialysis-with-performedDateTime-unknown.json");
+        create("create-dialysis-with-performedPeriod-not-performed.json");
+    }
+
+    @Test
+    void createExtracorporealMembraneOxygenation() throws IOException {
+        create("create-extracorporeal-membrane-oxygenation-in-progress.json");
+        create("create-extracorporeal-membrane-oxygenation-in-progress_ops_datetime.json");
+        create("create-extracorporeal-membrane-oxygenation-in-progress_ops_period.json");
+        create("create-extracorporeal-membrane-oxygenation-in-progress_ops_period_2.json");
+        create("create-extracorporeal-membrane-oxygenation-in-progress_sct_datetime.json");
+        create("create-extracorporeal-membrane-oxygenation-in-progress_sct_period.json");
+        create("create-extracorporeal-membrane-oxygenation-in-progress_sct_period_2.json");
+        create("create-extracorporeal-membrane-oxygenation-no-done.json");
+    }
+
+    @Test
+    void createPronePosition() throws IOException {
+        create("create-prone-position-in-progress.json");
+        create("create-prone-position-in-progress_sct-datetime.json");
+        create("create-prone-position-in-progress_sct-period.json");
+        create("create-prone-position-in-progress_sct-period2.json");
+        create("create-prone-position-not-done.json");
+    }
+
+    @Test
+    void createRadiologyProcedures() throws IOException {
+        create("create-radiology-procedures-chest-x-ray.json");
+        create("create-radiology-procedures-chest-x-ray_dcm_datetime.json");
+        create("create-radiology-procedures-chest-x-ray_dcm_period.json");
+        create("create-radiology-procedures-chest-x-ray_dcm_period_2.json");
+        create("create-radiology-procedures-chest-x-ray_sct_datetime.json");
+        create("create-radiology-procedures-chest-x-ray_sct_period.json");
+        create("create-radiology-procedures-chest-x-ray_sct_period_2.json");
+        create("create-radiology-procedures-computed-tomography.json");
+        create("create-radiology-procedures-ultrasound.json");
+    }
+
+    @Test
+    void createRespiratoryTherapies() throws IOException {
+        create("create-respiratory-therapies-artificial-respiration.json");
+        create("create-respiratory-therapies-artificial-respiration_ops-datetime.json");
+        create("create-respiratory-therapies-artificial-respiration_ops-period.json");
+        create("create-respiratory-therapies-artificial-respiration_ops-period_2.json");
+        create("create-respiratory-therapies-artificial-respiration_sct-datetime.json");
+        create("create-respiratory-therapies-artificial-respiration_sct-period.json");
+        create("create-respiratory-therapies-artificial-respiration_sct-period_2.json");
+        create("create-respiratory-therapies-invasive-ventilation-orotracheal.json");
+        create("create-respiratory-therapies-invasive-ventilation-tracheotomy.json");
+        create("create-respiratory-therapies-nasal-high-flow-oxygen-therapy.json");
+        create("create-respiratory-therapies-non-invasive-ventilation.json");
+        create("create-respiratory-therapies-with-not-performed-performedDateTime.json");
+        create("create-respiratory-therapies-with-unknown-performedDateTime.json");
+        create("create-respiratory-therapies-with-valid-performeddatetime.json");
+        create("create-respiratory-therapies-with-valid-performedperiod.json");
+    }
+
+    @Test
     void createWithDefaultProfile() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-procedure-with-default-profile.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
