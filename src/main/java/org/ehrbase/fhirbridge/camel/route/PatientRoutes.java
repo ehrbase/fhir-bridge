@@ -6,7 +6,9 @@ import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
+import org.ehrbase.fhirbridge.ehr.converter.PatientCompositionConverter;
 import org.hl7.fhir.r4.model.Patient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -46,8 +48,14 @@ public class PatientRoutes extends RouteBuilder {
                 .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
                 .setBody(simple("${body.resource}"))
                 .process(ehrIdLookupProcessor)
-//            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
+                .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#patientCompositionConverter")
                 .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
         // @formatter:on
+    }
+
+    // TODO: Update when Apache Camel > 3.x
+    @Bean
+    public PatientCompositionConverter patientCompositionConverter() {
+        return new PatientCompositionConverter();
     }
 }
