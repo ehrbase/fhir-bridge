@@ -1,99 +1,109 @@
-package org.ehrbase.fhirbridge.fhir;
+package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
+import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.Observation;
+import org.javers.core.Javers;
+import org.javers.core.JaversBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.temporal.TemporalAccessor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Observation Observation} resource.
  */
-class ObservationIT extends AbstractSetupIT {
+class ObservationIT extends AbstractMappingTestSetupIT {
+
+    public ObservationIT() {
+        super("Observation/", Observation.class);
+    }
 
     @Test
     void createBloodPressure() throws IOException {
-        create("Observation/create-blood-pressure.json");
+        create("create-blood-pressure.json");
     }
 
     @Test
     void createBodyHeight() throws IOException {
-        create("Observation/create-body-height.json");
+        create("create-body-height.json");
     }
 
     @Test
     void createBodyTemp() throws IOException {
-        create("Observation/create-body-temp.json");
+        create("create-body-temp.json");
     }
 
     @Test
     void createBodyWeight() throws IOException {
-        create("Observation/create-body-weight.json");
+        create("create-body-weight.json");
     }
 
     @Test
     void createClinicalFrailtyScaleScore() throws IOException {
-        create("Observation/create-clinical-frailty-scale-score.json");
+        create("create-clinical-frailty-scale-score.json");
     }
 
     @Test
     void createCoronavirusNachweisTest() throws IOException {
-        create("Observation/create-coronavirus-nachweis-test.json");
+        create("create-coronavirus-nachweis-test.json");
     }
 
     @Test
     void createFiO2() throws IOException {
-        create("Observation/create-fio2.json");
+        create("create-fio2.json");
     }
 
     @Test
     void createHeartRate() throws IOException {
-        create("Observation/create-heart-rate.json");
+        create("create-heart-rate.json");
     }
 
     @Test
     void createPatientInIcu() throws IOException {
-        create("Observation/create-patient-in-icu.json");
+        create("create-patient-in-icu.json");
     }
 
     @Test
     void createObservationLab() throws IOException {
-        create("Observation/create-observation-lab.json");
+        create("create-observation-lab.json");
     }
 
     @Test
     void createPregnancyStatus() throws IOException {
-        create("Observation/create-pregnancy-status.json");
+        create("create-pregnancy-status.json");
     }
 
     @Test
     void createRespiratoryRate() throws IOException {
-        create("Observation/create-respiratory-rate.json");
+        create("create-respiratory-rate.json");
     }
 
     @Test
     void createSofaScore() throws IOException {
-        create("Observation/create-sofa-score.json");
+        create("create-sofa-score.json");
     }
 
     @Test
     void createSmokingStatus() throws IOException {
-        create("Observation/create-smoking-status.json");
+        create("create-smoking-status.json");
     }
 
     @Test
     void createWithDefaultProfile() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Observation/create-observation-with-default-profile.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = super.testFileLoader.loadResourceToString("create-observation-with-default-profile.json");
+
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
@@ -102,7 +112,7 @@ class ObservationIT extends AbstractSetupIT {
 
     @Test
     void createWithInvalidQuantity() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Observation/create-observation-with-invalid-quantity.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = super.testFileLoader.loadResourceToString("create-observation-with-invalid-quantity.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
@@ -112,7 +122,7 @@ class ObservationIT extends AbstractSetupIT {
 
     @Test
     void createWithInvalidQuantityDatatype() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Observation/create-observation-with-invalid-quantity-datatype.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = super.testFileLoader.loadResourceToString("create-observation-with-invalid-quantity-datatype.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
@@ -120,11 +130,19 @@ class ObservationIT extends AbstractSetupIT {
     }
 
 
-    private void create(String path) throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource(path).getInputStream(), StandardCharsets.UTF_8);
-        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
+    @Override
+    public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
+        return assertThrows(UnprocessableEntityException.class, () -> {
+            // new YourConverter().toComposition(((YourResource) domainResource)));
+        });
+    }
 
-        assertNotNull(outcome.getId());
-        assertEquals(true, outcome.getCreated());
+
+    @Override
+    public Javers getJavers() {
+        return JaversBuilder.javers()
+                .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
+                // .registerValueObject(new ValueObjectDefinition(YourComposition.class, List.of("location")))
+                .build();
     }
 }

@@ -3,10 +3,8 @@ package org.ehrbase.fhirbridge.camel.route;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
-import org.ehrbase.fhirbridge.ehr.converter.DiagnosticReportLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +31,7 @@ public class QuestionnaireResponseRoutes extends RouteBuilder {
     public void configure() {
         // @formatter:off
         from("fhir-create-questionnaire-response:fhirConsumer?fhirContext=#fhirContext")
+                .setProperty("DebugMapping", simple("${properties:fhir-bridge.debug}"))
                 .onCompletion()
                 .process("auditCreateResourceProcessor")
                 .end()

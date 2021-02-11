@@ -1,37 +1,43 @@
-package org.ehrbase.fhirbridge.fhir;
+package org.ehrbase.fhirbridge.fhir.condition;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
-import org.hl7.fhir.r4.model.Bundle;
-import org.hl7.fhir.r4.model.Condition;
-import org.hl7.fhir.r4.model.Patient;
+import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
+import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.*;
+import org.javers.core.Javers;
+import org.javers.core.JaversBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Condition Condition} resource.
  */
-class ConditionIT extends AbstractSetupIT {
+class ConditionIT extends AbstractMappingTestSetupIT {
+
+    public ConditionIT() {
+        super("Condition/", Condition.class);
+    }
 
     @Test
     void createDefault() throws IOException {
-        create("Condition/create-condition-default.json");
+        create("create-condition-default.json");
     }
 
     @Test
     void createWithInvalidSubject() throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource("Condition/create-condition-with-invalid-subject.json").getInputStream(), StandardCharsets.UTF_8);
+        String resource = super.testFileLoader.loadResourceToString("create-condition-with-invalid-subject.json");
         ICreateTyped createTyped = client.create().resource(resource);
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
@@ -40,17 +46,17 @@ class ConditionIT extends AbstractSetupIT {
 
     @Test
     void createSymptomCovidAbsent() throws IOException {
-        create("Condition/create-symptoms-covid-19-absent.json");
+        create("create-symptoms-covid-19-absent.json");
     }
 
     @Test
     void createSymptomCovidPresent() throws IOException {
-        create("Condition/create-symptoms-covid-19-present.json");
+        create("create-symptoms-covid-19-present.json");
     }
 
     @Test
     void createSymptomCovidUnknown() throws IOException {
-        create("Condition/create-symptoms-covid-19-unknown.json");
+        create("create-symptoms-covid-19-unknown.json");
     }
 
     @Test
@@ -130,11 +136,18 @@ class ConditionIT extends AbstractSetupIT {
         assertEquals(0, bundle.getTotal());
     }
 
-    private void create(String path) throws IOException {
-        String resource = IOUtils.toString(new ClassPathResource(path).getInputStream(), StandardCharsets.UTF_8);
-        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
+    @Override
+    public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
+        return assertThrows(UnprocessableEntityException.class, () -> {
+            // new YourConverter().toComposition(((YourResource) domainResource)));
+                });
+            }
 
-        assertNotNull(outcome.getId());
-        assertEquals(true, outcome.getCreated());
+    @Override
+    public Javers getJavers() {
+        return JaversBuilder.javers()
+                .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
+               // .registerValueObject(new ValueObjectDefinition(YourComposition.class, List.of("location")))
+                .build();
     }
 }

@@ -23,7 +23,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Peter Wohlfarth
-Force Tags              observation_create    respiratory-rate   invalid
+Force Tags              observation_create    blood-gas-panel    invalid
 
 
 *** Variables ***
@@ -34,14 +34,14 @@ ${randinteger}                  ${12345}
 *** Test Cases ***
 
 
-001 Create Respiratory Rate (Invalid/Missing 'resourceType')
+001 Create Blood Gas Panel (Invalid/Missing 'resourceType')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
+	...                 2. *LOAD* _create-blood-gas-panel.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
-	[Template]		    create Respiratory Rate with ehr reference
+	[Template]		    create Blood Gas Panel with ehr reference
     [Tags]          	resourceType
 
 	# FIELD/PATH					VALUE							HTTP																		            Location
@@ -53,15 +53,15 @@ ${randinteger}                  ${12345}
 
 
 
-002 Create Respiratory Rate (Invalid/Missing 'identifier')
+002 Create Blood Gas Panel (Invalid/Missing 'identifier')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
+	...                 2. *LOAD* _create-blood-gas-panel.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 
-	[Template]			create Respiratory Rate with ehr reference
+	[Template]			create Blood Gas Panel with ehr reference
     [Tags]              identifier
 
 	# FIELD/PATH					VALUE							HTTP																										Location
@@ -81,14 +81,14 @@ ${randinteger}                  ${12345}
 	$.identifier[0].value			${randinteger}				 	422
 
 
-003 Create Respiratory Rate (Invalid/Missing 'category')
+003 Create Blood Gas Panel (Invalid/Missing 'category')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
+	...                 2. *LOAD* _create-blood-gas-panel.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Category`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n               
-	[Template]			create Respiratory Rate with ehr reference
+	[Template]			create Blood Gas Panel with ehr reference
     [Tags]              category
 
 	# FIELD/PATH							VALUE					HTTP																									Location
@@ -121,14 +121,14 @@ ${randinteger}                  ${12345}
 
 
 
-004 Create Respiratory Rate (Invalid/Missing 'code')
+004 Create Blood Gas Panel (Invalid/Missing 'code')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
+	...                 2. *LOAD* _create-blood-gas-panel.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Code`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                 
-	[Template]			create Respiratory Rate with ehr reference
+	[Template]			create Blood Gas Panel with ehr reference
     [Tags]              code
 
 	# FIELD/PATH							VALUE					HTTP																									Location
@@ -149,9 +149,7 @@ ${randinteger}                  ${12345}
 	$.code.coding							${{ [{}] }}				422
 
 	# invalid Code Coding 0 System
-	$.code.coding[0].system					missing					422
 	$.code.coding[0].system					${EMPTY}				422
-	$.code.coding[0].system					http://foobar.de		422
 	$.code.coding[0].system					${randstring}			422
 	$.code.coding[0].system					${randinteger}			422
     $.code.coding[0].system      			${{ [] }}				422
@@ -159,9 +157,7 @@ ${randinteger}                  ${12345}
 	$.code.coding[0].system      			${{ [{}] }}				422
 
 	# invalid Code Coding 0 Code
-	$.code.coding[0].code					missing					422
 	$.code.coding[0].code					${EMPTY}				422
-	$.code.coding[0].code					${randstring}			422
 	$.code.coding[0].code					${randinteger}			422
     $.code.coding[0].code      			    ${{ [] }}				422
 	$.code.coding[0].code      			    ${{ {} }}				422
@@ -170,71 +166,17 @@ ${randinteger}                  ${12345}
 
 
 
-005 Create Respiratory Rate (Invalid/Missing 'valueQuantity')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
-    ...                 5. *POST* example JSON to observation endpoint\n\n
-	...                 6. *VALIDATE* the response status \n\n                 
-	[Template]			create Respiratory Rate with ehr reference
-    [Tags]              valueQuantity
-
-	# FIELD/PATH								VALUE				HTTP																									Location
-	# 																CODE
-
-	# invalid/missing valueQuantity
-	$.valueQuantity			  					missing				422
-	$.valueQuantity			  					${None}				422
-	$.valueQuantity			  					${{ {} }}			422
-	$.valueQuantity			  					${{ {} }}			422
-	$.valueQuantity			  					${{ {} }}			422
-	$.valueQuantity			  					${{ {} }}			422
-	
-	# missing parameters
-	$.valueQuantity.value	  					missing				422
-	$.valueQuantity.unit	  					missing				422
-	$.valueQuantity.system	  					missing				422
-	$.valueQuantity.code	  					missing				422
-	
-	# invalid value
-	$.valueQuantity.value	  					${EMPTY}			422
-	$.valueQuantity.value	  					${None}				422
-	$.valueQuantity.value	  					113					422
-	$.valueQuantity.value	  					1000,7				422
-	$.valueQuantity.value	  					foobar				422
-	
-	# invalid unit
-	$.valueQuantity.unit	  					${EMPTY}			422
-	$.valueQuantity.unit	  					${None}				422
-	$.valueQuantity.unit	  					${123}				422
-	
-	# invalid system
-	$.valueQuantity.system	  					${EMPTY}			422
-	$.valueQuantity.system	  					${None}				422
-	$.valueQuantity.system	  					foobar				422
-	$.valueQuantity.system	  					${123}				422
-	
-	#invalid code
-	$.valueQuantity.code	  					${EMPTY}			422
-	$.valueQuantity.code	  					${None}				422
-	$.valueQuantity.code	  					${123}				422
-
-
-
-Create Respiratory Rate (Invalid/Missing 'subject')
-    [Documentation]     1. *LOAD* _create-respiratory-rate.json_ \n\n
+005 Create Blood Gas Panel (Invalid/Missing 'subject')
+    [Documentation]     1. *LOAD* _create-blood-gas-panel.json_ \n\n
 	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
     ...                 3. *POST* example JSON to observation endpoint \n\n
 	...                 4. *VALIDATE* the response status              
-	[Template]		    create Respiratory Rate w/o ehr reference 
+	[Template]		    create Blood Gas Panel w/o ehr reference 
     [Tags]          	subject
 
 	# FIELD/PATH					VALUE							HTTP
 	# 																CODE
     # invalid cases for value
-    $.subject.identifier.value		missing							422
-    $.subject.identifier.value		foobar							422
     $.subject.identifier.value		${EMPTY}						422
     $.subject.identifier.value		${{ [] }}						422
     $.subject.identifier.value		${{ {} }}						422
@@ -255,14 +197,36 @@ Create Respiratory Rate (Invalid/Missing 'subject')
     $.subject.identifier			${123}							422
 
 	# invalid cases for subject
-    $.subject						missing							422
     $.subject						${EMPTY}						422
     $.subject						${{ [] }}						422
     $.subject						${{ {} }}						422
     $.subject						${123}							422
 	
-	# comment: random uuid												
-    $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
+
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# BUG TRACE
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BUG TRACE 01 Create Blood Gas Panel (Invalid/Missing 'subject')
+	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
+	[Template]			create blood gas panel with ehr reference
+    [Tags]              subject    not-ready    not-ready_bug
+
+	# FIELD/PATH								VALUE					HTTP
+	# 																	CODE
+	
+	# missing subject.identifier.value
+	$.subject.identifier.value					missing					422
+
+	# foobar as subject.identifier.value
+	$.subject.identifier.value					foobar					422    
+
+	# missing subject
+	$.subject									missing					422
+
+	# Random UUID as subject.identifier.value
+	$.subject.identifier.value      			${{str(uuid.uuid4())}}  422
+
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
@@ -279,22 +243,22 @@ Create Respiratory Rate (Invalid/Missing 'subject')
 
 
 
-create Respiratory Rate with ehr reference
+create Blood Gas Panel with ehr reference
 	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
 
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Observation           Respiratory Rate            	${payload}
+						observation.POST /Observation           Blood Gas Panel            	${payload}
 						observation.validate response - 422 (w/o error message)  ${http_status_code}
 
 
-create Respiratory Rate w/o ehr reference    
+create Blood Gas Panel w/o ehr reference    
 	[Arguments]         ${json_path}        ${value}                ${http_status_code}
 
 	${fake_ehr_ref}=	Evaluate    str(uuid.uuid4())    uuid
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Observation           Respiratory Rate            	${payload}
+						observation.POST /Observation           Blood Gas Panel            	${payload}
 						observation.validate response - 422 (w/o error message)  ${http_status_code}
 
 
@@ -302,7 +266,7 @@ generate payload from example json
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-respiratory-rate.json
+	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-blood-gas-panel.json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 
