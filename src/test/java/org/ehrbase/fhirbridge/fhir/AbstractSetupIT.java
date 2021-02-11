@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import com.nedap.archie.rm.RMObject;
 import com.nedap.archie.rm.datavalues.DvText;
@@ -21,6 +22,7 @@ import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
 import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.javers.core.Javers;
 import org.javers.core.diff.Diff;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,11 +34,13 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-abstract class AbstractSetupIT {
+import static org.junit.jupiter.api.Assertions.*;
 
-    static final String PATIENT_ID_TOKEN = "\\{\\{patientId\\}\\}";
+public abstract class AbstractSetupIT {
 
-    static String PATIENT_ID;
+    public static final String PATIENT_ID_TOKEN = "\\{\\{patientId\\}\\}";
+
+    public static String PATIENT_ID;
 
     protected final FhirContext context;
 
@@ -71,30 +75,7 @@ abstract class AbstractSetupIT {
         client.ehrEndpoint().createEhr(ehrStatus);
     }
 
-/*    public Diff compare(Javers javers,String paragonFilePath, org.ehrbase.fhirbridge.ehr.Composition mappedComposition)
-            throws IOException {
 
-        RMObject composition = new CanonicalJson().unmarshal(IOUtils.toString(new ClassPathResource(paragonFilePath).getInputStream(), StandardCharsets.UTF_8), com.nedap.archie.rm.composition.Composition.class);
-        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
-        resourceTemplateProvider.afterPropertiesSet();
 
-        Flattener cut = new Flattener(resourceTemplateProvider);
-        Composition paragonComposition = cut.flatten(composition, mappedComposition.getClass());
-        Diff diff = javers.compare(paragonComposition, mappedComposition);
-        return diff;
-    }*/
-
-    public Diff compareCompositions(Javers javers, String paragonFilePath, Composition mappedComposition)
-            throws IOException {
-        RMObject composition = new CanonicalJson().unmarshal(IOUtils.toString(new ClassPathResource(paragonFilePath).getInputStream(), StandardCharsets.UTF_8), com.nedap.archie.rm.composition.Composition.class);
-        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
-        resourceTemplateProvider.afterPropertiesSet();
-
-        Flattener cut = new Flattener(resourceTemplateProvider);
-        Composition paragonComposition = cut.flatten(composition, mappedComposition.getClass());
-        Diff diff = javers.compare(paragonComposition, mappedComposition);
-        diff.getChanges().forEach(System.out::println);
-        return diff;
-    }
 
 }

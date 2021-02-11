@@ -213,8 +213,8 @@ create patient in icu
 
 
 create blood gas panel
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Blood Gas Panel    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create oxygen saturation
