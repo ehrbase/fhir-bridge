@@ -43,15 +43,15 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
             kategorieMap.put(kategorie.getCode(), kategorie);
         }
 
-        for(NameDerProzedurDefiningCode nameDerProzedurDefiningCode: NameDerProzedurDefiningCode.values()) {
+        for (NameDerProzedurDefiningCode nameDerProzedurDefiningCode : NameDerProzedurDefiningCode.values()) {
             nameDerProzedurMap.put(nameDerProzedurDefiningCode.getCode(), nameDerProzedurDefiningCode);
         }
 
-        for(KoerperstelleDefiningCode koerperstelleDefiningCode: KoerperstelleDefiningCode.values()) {
+        for (KoerperstelleDefiningCode koerperstelleDefiningCode : KoerperstelleDefiningCode.values()) {
             koerperstelleMap.put(koerperstelleDefiningCode.getCode(), koerperstelleDefiningCode);
         }
 
-        for(GeraetenameDefiningCode geraetenameDefiningCode: GeraetenameDefiningCode.values()) {
+        for (GeraetenameDefiningCode geraetenameDefiningCode : GeraetenameDefiningCode.values()) {
             geraetenameMap.put(geraetenameDefiningCode.getCode(), geraetenameDefiningCode);
         }
     }
@@ -78,7 +78,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
         for (Coding coding : procedure.getCategory().getCoding()) {
             if (coding.getSystem().equals(SNOMED_SYSTEM) && kategorieMap.containsKey(coding.getCode())) {
-                GeccoProzedurKategorieElement element =  new GeccoProzedurKategorieElement();
+                GeccoProzedurKategorieElement element = new GeccoProzedurKategorieElement();
                 element.setValue(kategorieMap.get(coding.getCode()));
 
                 result.getKategorie().add(element);
@@ -130,28 +130,28 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
             Coding coding = procedure.getCode().getCoding().get(0);
 
-            if(coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
+            if (coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
                 durchgefuehrteProzedur.setNameDerProzedurDefiningCode(nameDerProzedurMap.get(coding.getCode()));
             } else {
                 throw new UnprocessableEntityException("Invalid name of procedure");
             }
 
-            if(durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.PLAIN_RADIOGRAPHY)) {
+            if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.PLAIN_RADIOGRAPHY)) {
                 // Map body site for PLAIN_RADIOGRAPHY
 
                 Coding bodySiteCoding = procedure.getBodySite().get(0).getCoding().get(0);
 
-                if(bodySiteCoding.getSystem().equals(SNOMED_SYSTEM) &&
+                if (bodySiteCoding.getSystem().equals(SNOMED_SYSTEM) &&
                         koerperstelleMap.containsKey(bodySiteCoding.getCode())) {
                     durchgefuehrteProzedur.setKoerperstelleDefiningCode(koerperstelleMap.get(bodySiteCoding.getCode()));
                 } else {
                     throw new UnprocessableEntityException("Invalid body site for PLAIN_RADIOGRAPHY");
                 }
-            } else if(durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.ARTIFICIAL_RESPIRATION_PROCEDURE)) {
+            } else if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.ARTIFICIAL_RESPIRATION_PROCEDURE)) {
                 // Map Medizingeraet for RESP
                 Coding usedCodeCoding = procedure.getUsedCode().get(0).getCoding().get(0);
 
-                if(usedCodeCoding.getSystem().equals(SNOMED_SYSTEM) && geraetenameMap.containsKey(usedCodeCoding.getCode())) {
+                if (usedCodeCoding.getSystem().equals(SNOMED_SYSTEM) && geraetenameMap.containsKey(usedCodeCoding.getCode())) {
 
                     MedizingeraetCluster medizingeraetCluster = new MedizingeraetCluster();
 
@@ -167,8 +167,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
             durchgefuehrteProzedur.setArtDerProzedurDefiningCode(composition.getKategorie().get(0).getValue());
 
 
-            if(procedure.getExtension().get(1).getValue() instanceof Coding)
-            {
+            if (procedure.getExtension().get(1).getValue() instanceof Coding) {
                 durchgefuehrteProzedur.setDurchfuehrungsabsichtValue(((Coding) procedure.getExtension().get(1).getValue()).getDisplay());
             } else {
                 throw new UnprocessableEntityException("Could not find extension durchfuehrungsabsicht.");
@@ -200,7 +199,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         try {
             Coding coding = procedure.getCode().getCoding().get(0);
 
-            if(coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
+            if (coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
                 nichtDurchgefuehrteProzedur.setEingriffDefiningCode(nameDerProzedurMap.get(coding.getCode()));
             } else {
                 throw new UnprocessableEntityException("Invalid name of procedure");
@@ -228,7 +227,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         try {
             Coding coding = procedure.getCode().getCoding().get(0);
 
-            if(coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
+            if (coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
                 unbekannteProzedur.setUnbekannteProzedurDefiningCode(nameDerProzedurMap.get(coding.getCode()));
             } else {
                 throw new UnprocessableEntityException("Invalid name of procedure");
