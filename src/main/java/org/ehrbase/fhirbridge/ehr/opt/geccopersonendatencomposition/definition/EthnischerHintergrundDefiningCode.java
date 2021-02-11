@@ -32,6 +32,15 @@ public enum EthnischerHintergrundDefiningCode implements EnumValueSet {
     this.code = code;
   }
 
+  public static EthnischerHintergrundDefiningCode get_by_SNOMED_code(String SNOMED_code) {
+    for(EthnischerHintergrundDefiningCode ehc : values()) {
+      if(ehc.code.equals(SNOMED_code)) {
+        return ehc;
+      }
+    }
+    return null;
+  }
+
   public String getValue() {
      return this.value ;
   }
