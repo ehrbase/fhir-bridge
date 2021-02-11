@@ -9,8 +9,19 @@ import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.GECCOProzedurComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.*;
-import org.hl7.fhir.r4.model.*;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.KategorieDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NameDerProzedurDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeraetenameDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.KoerperstelleDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeccoProzedurKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.UnbekannteProzedurEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.MedizingeraetCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NichtDurchgefuehrteProzedurEvaluation;
+import org.hl7.fhir.r4.model.Procedure;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Coding;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
