@@ -101,6 +101,16 @@ extract subject_id from response
     ${subjectid}=       String      response body ehr_status subject external_ref id value
                         Log To Console    \n\tDEBUG OUTPUT - EHR_STATUS SUBJECT_ID: \n\t${subjectid}[0]
                         Set Suite Variable    ${subject_id}    ${subjectid}[0]
+
+
+extract ehr_id from response
+    [Documentation]     Extracts ehr_id from response of preceding request.
+    ...                 This KW executes only in EHR_SERVICE test suite, it is ignored
+    ...                 in all over test suites.
+
+    ${ehrid}=           String      response body ehr_id value
+                        Log To Console    \n\tDEBUG OUTPUT - EHR_STATUS EHR_ID: \n\t${ehrid}[0]
+                        Set Suite Variable    ${ehr_id}    ${ehrid}[0]
     
 
 Output Debug Info To Console
