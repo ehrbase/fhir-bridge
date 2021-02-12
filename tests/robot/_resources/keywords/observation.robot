@@ -131,6 +131,16 @@ get coronavirus lab results
                         Output Debug Info To Console
 
 
+get heart rate results
+    &{resp}             POST 	${ehrbase_url}/query/aql
+                        Integer    response status    200
+                        String     request method    GET
+                        String     response body id
+                        String     response body resourceType    Bundle
+                        String     response body entry 0 resource resourceType    Observation
+                        Output Debug Info To Console
+
+
 #                                            .
 #                                          .o8
 #  .ooooo.  oooo d8b  .ooooo.   .oooo.   .o888oo  .ooooo.
@@ -158,8 +168,8 @@ create FIO2
 
 
 create heart rate
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Hear Rate    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create observation lab

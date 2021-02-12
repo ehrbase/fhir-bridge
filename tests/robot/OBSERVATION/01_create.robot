@@ -81,7 +81,7 @@ Force Tags              observation_create
 	[Tags]             	heart-rate    valid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create heart rate    create-heart-rate.json
+	observation.create heart rate    Heart Rate    create-heart-rate.json
     observation.validate response - 201
 
 
