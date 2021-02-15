@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
@@ -21,6 +22,8 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NichtD
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Coding;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.util.ArrayList;
@@ -29,6 +32,8 @@ import java.util.Map;
 
 
 public class TherapyCompositionConverter implements CompositionConverter<GECCOProzedurComposition, Procedure> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(TherapyCompositionConverter.class);
 
     private static final Map<String, KategorieDefiningCode> kategorieMap = new HashMap<>();
     private static final Map<String, NameDerProzedurDefiningCode> nameDerProzedurMap = new HashMap<>();
@@ -65,12 +70,18 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
     @Override
     public GECCOProzedurComposition toComposition(Procedure procedure) throws CompositionConversionException {
+
+        System.out.println("----------------------------------------------------");
+
         if (procedure == null) {
             return null;
         }
 
         GECCOProzedurComposition result = new GECCOProzedurComposition();
 
+        // set feeder audit
+        FeederAudit fa = CommonData.constructFeederAudit(procedure);
+        result.setFeederAudit(fa);
 
         // Map Kategorie
 
