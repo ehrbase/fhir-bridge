@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.oxygensaturation.OxygenSaturationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
@@ -48,5 +49,7 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.SOFA_SCORE, new SofaScoreCompositionConverter());
         profiles.put(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
         profiles.put(Profile.PROCEDURE, new ProcedureCompositionConverter());
+        profiles.put(Profile.OXYGEN_SATURATION, new OxygenSaturationConverter());
+
     }
 }
