@@ -132,7 +132,7 @@ get coronavirus lab results
 
 
 get heart rate results
-    &{resp}             POST 	${ehrbase_url}/query/aql
+    &{resp}             POST 	${ehrbase_url}/query/aql/SELECT c FROM EHR e [ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c
                         Integer    response status    200
                         String     request method    GET
                         String     response body id
