@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.oxygensaturation;
+package org.ehrbase.fhirbridge.ehr.converter.pulseoximetry;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.quantity.DvProportion;
@@ -14,7 +14,7 @@ import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComp
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
 import org.hl7.fhir.r4.model.Observation;
 
-public class OxygenSaturationConverter implements CompositionConverter<PulsoxymetrieComposition, Observation> {
+public class PulseOximetryConverter implements CompositionConverter<PulsoxymetrieComposition, Observation> {
 
     @Override
     public Observation fromComposition(PulsoxymetrieComposition composition) throws CompositionConversionException {
