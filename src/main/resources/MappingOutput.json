@@ -2,34 +2,22 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Laborbefund"
+    "value" : "Pulsoxymetrie"
   },
   "archetype_details" : {
     "archetype_id" : {
       "value" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
     },
     "template_id" : {
-      "value" : "GECCO_Laborbefund"
+      "value" : "Pulsoxymetrie"
     },
     "rm_version" : "1.0.4"
-  },
-  "feeder_audit" : {
-    "_type" : "FEEDER_AUDIT",
-    "originating_system_item_ids" : [ {
-      "_type" : "DV_IDENTIFIER",
-      "id" : "#obs-1",
-      "type" : "fhir_logical_id"
-    } ],
-    "originating_system_audit" : {
-      "_type" : "FEEDER_AUDIT_DETAILS",
-      "system_id" : "FHIR-bridge"
-    }
   },
   "language" : {
     "terminology_id" : {
       "value" : "ISO_639-1"
     },
-    "code_string" : "en"
+    "code_string" : "de"
   },
   "territory" : {
     "terminology_id" : {
@@ -54,7 +42,11 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2018-11-20T12:05:00+01:00"
+      "value" : "2020-09-21T00:00:00+02:00"
+    },
+    "end_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2020-09-21T00:00:00+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -97,28 +89,24 @@
         },
         "value" : {
           "_type" : "DV_TEXT",
-          "value" : "Laboratory studies (set)"
+          "value" : "vital-signs"
         },
         "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
-    },
-    "health_care_facility" : {
-      "_type" : "PARTY_IDENTIFIED",
-      "name" : "Zentrallabor des IKCL"
     }
   },
   "content" : [ {
     "_type" : "OBSERVATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Laborergebnis"
+      "value" : "Pulsoxymetrie"
     },
     "language" : {
       "terminology_id" : {
         "value" : "ISO_639-1"
       },
-      "code_string" : "en"
+      "code_string" : "de"
     },
     "encoding" : {
       "terminology_id" : {
@@ -136,117 +124,37 @@
       },
       "origin" : {
         "_type" : "DV_DATE_TIME",
-        "value" : "2018-11-20T12:05:00+01:00"
+        "value" : "2020-09-21T00:00:00+02:00"
       },
       "events" : [ {
         "_type" : "POINT_EVENT",
         "name" : {
           "_type" : "DV_TEXT",
-          "value" : "Jedes Ereignis"
+          "value" : "Beliebiges Ereignis"
         },
         "time" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2018-11-20T12:05:00+01:00"
+          "value" : "2020-09-21T00:00:00+02:00"
         },
         "data" : {
           "_type" : "ITEM_TREE",
           "name" : {
             "_type" : "DV_TEXT",
-            "value" : "Tree"
+            "value" : "Baum"
           },
           "items" : [ {
             "_type" : "ELEMENT",
             "name" : {
               "_type" : "DV_TEXT",
-              "value" : "Labortest-Kategorie"
+              "value" : "SpO₂"
             },
             "value" : {
-              "_type" : "DV_CODED_TEXT",
-              "value" : "Laboratory studies (set)",
-              "defining_code" : {
-                "terminology_id" : {
-                  "value" : "LOINC"
-                },
-                "code_string" : "26436-6"
-              }
+              "_type" : "DV_PROPORTION",
+              "numerator" : 98.0,
+              "denominator" : 100.0,
+              "type" : 2
             },
-            "archetype_node_id" : "at0005"
-          }, {
-            "_type" : "CLUSTER",
-            "name" : {
-              "_type" : "DV_TEXT",
-              "value" : "Pro Laboranalyt"
-            },
-            "items" : [ {
-              "_type" : "ELEMENT",
-              "name" : {
-                "_type" : "DV_TEXT",
-                "value" : "untersuchter Analyt"
-              },
-              "value" : {
-                "_type" : "DV_CODED_TEXT",
-                "value" : "Lymphocytes [#/volume] in Blood by Manual count",
-                "defining_code" : {
-                  "terminology_id" : {
-                    "value" : "LOINC"
-                  },
-                  "code_string" : "732-8"
-                }
-              },
-              "archetype_node_id" : "at0024"
-            }, {
-              "_type" : "ELEMENT",
-              "name" : {
-                "_type" : "DV_TEXT",
-                "value" : "Messwert"
-              },
-              "value" : {
-                "_type" : "DV_QUANTITY",
-                "units" : "µmol/l",
-                "magnitude" : 72.0
-              },
-              "archetype_node_id" : "at0001"
-            }, {
-              "_type" : "ELEMENT",
-              "name" : {
-                "_type" : "DV_TEXT",
-                "value" : "Zeitpunkt Validation"
-              },
-              "value" : {
-                "_type" : "DV_DATE_TIME",
-                "value" : "2018-11-20T12:05:00+01:00"
-              },
-              "archetype_node_id" : "at0025"
-            }, {
-              "_type" : "ELEMENT",
-              "name" : {
-                "_type" : "DV_TEXT",
-                "value" : "Ergebnis-Status"
-              },
-              "value" : {
-                "_type" : "DV_CODED_TEXT",
-                "value" : "Endbefund",
-                "defining_code" : {
-                  "terminology_id" : {
-                    "value" : "local"
-                  },
-                  "code_string" : "at0018"
-                }
-              },
-              "archetype_node_id" : "at0005"
-            }, {
-              "_type" : "ELEMENT",
-              "name" : {
-                "_type" : "DV_TEXT",
-                "value" : "Zeitpunkt Ergebnis-Status"
-              },
-              "value" : {
-                "_type" : "DV_DATE_TIME",
-                "value" : "2018-03-11T10:28:00+01:00"
-              },
-              "archetype_node_id" : "at0006"
-            } ],
-            "archetype_node_id" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+            "archetype_node_id" : "at0006"
           } ],
           "archetype_node_id" : "at0003"
         },
@@ -254,7 +162,7 @@
       } ],
       "archetype_node_id" : "at0001"
     },
-    "archetype_node_id" : "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+    "archetype_node_id" : "openEHR-EHR-OBSERVATION.pulse_oximetry.v1"
   } ],
   "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
 }
