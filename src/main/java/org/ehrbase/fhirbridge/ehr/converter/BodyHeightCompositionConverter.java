@@ -14,6 +14,9 @@ import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 
 public class BodyHeightCompositionConverter implements CompositionConverter<KorpergrosseComposition, Observation> {
 
@@ -30,29 +33,33 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         if (observation == null) {
             return null;
         }
-        
+
         KorpergrosseComposition result = new KorpergrosseComposition();
         GrosseLangeObservation grosseLangeObservation = new GrosseLangeObservation();
 
-        DateTimeType fhirEffectiveDateTime;
+
+        ZonedDateTime fhirEffectiveDateTime = null;
         try {
-            // default for every observation
-            fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
 
-            //BSa Wie erscheint das im Mapping? Und wo finde ich das Referenzmodell mit diesen Infos zu openEHR?
-            grosseLangeObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-            grosseLangeObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
 
-            //Birger nehme ich start/oder endzeit? und wohin/wie soll das gemappt werden?
-            // und was passiwert, wenn kein fhirEffectiveDateTime gegeben ist?
-            //grosseLangeObservation.setOriginValue(observation.getEffectivePeriod().getStart().);
+            if(observation.hasEffectiveDateTimeType()) {
 
+                // default for every observation
+                fhirEffectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+                grosseLangeObservation.setTimeValue(fhirEffectiveDateTime);
+                grosseLangeObservation.setOriginValue(fhirEffectiveDateTime);
+
+            } else if(observation.hasEffectivePeriod()) {
+                fhirEffectiveDateTime = observation.getEffectivePeriod().getStart().toInstant().atZone(ZoneId.systemDefault());
+                grosseLangeObservation.setTimeValue(fhirEffectiveDateTime);
+                grosseLangeObservation.setOriginValue(fhirEffectiveDateTime);
+            }
 
             grosseLangeObservation.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
             grosseLangeObservation.setSubject(new PartySelf());
 
             // special mapping content
-            grosseLangeObservation.setGrosseLangeUnits(observation.getValueQuantity().getUnit());
+            grosseLangeObservation.setGrosseLangeUnits(observation.getValueQuantity().getCode());
 
             //BSa Hier ist nicht sichtbar, ob Körpergröße oder Geburt gesetzt wird -> woher die Info?
             grosseLangeObservation.setGrosseLangeMagnitude(observation.getValueQuantity().getValue().doubleValue());
@@ -70,7 +77,7 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
         result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        result.setStartTimeValue(fhirEffectiveDateTime);
         result.setComposer(new PartySelf()); // FIXME: id ausdenken oder weglassen?
 
         return result;
