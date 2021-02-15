@@ -5,10 +5,12 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
+import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.mapper.ProcedureRowMapper;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
@@ -23,6 +25,8 @@ public class ProcedureRoutes extends RouteBuilder {
 
     private final ResourceProfileValidator requestValidator;
 
+    private final CompositionConverterResolver compositionConverterResolver;
+
     private final EhrIdLookupProcessor ehrIdLookupProcessor;
 
     private final DefaultExceptionHandler defaultExceptionHandler;
@@ -30,11 +34,13 @@ public class ProcedureRoutes extends RouteBuilder {
     public ProcedureRoutes(IFhirResourceDao<Procedure> procedureDao,
                            ResourceProfileValidator requestValidator,
                            EhrIdLookupProcessor ehrIdLookupProcessor,
+                           CompositionConverterResolver compositionConverterResolver,
                            DefaultExceptionHandler defaultExceptionHandler) {
         this.procedureDao = procedureDao;
         this.requestValidator = requestValidator;
         this.ehrIdLookupProcessor = ehrIdLookupProcessor;
         this.defaultExceptionHandler = defaultExceptionHandler;
+        this.compositionConverterResolver = compositionConverterResolver;
     }
 
     @Override
@@ -53,7 +59,8 @@ public class ProcedureRoutes extends RouteBuilder {
                 .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
                 .setBody(simple("${body.resource}"))
                 .process(ehrIdLookupProcessor)
-                .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#procedureCompositionConverter")
+                .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
+                .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
                 .process(new ResourceResponseProcessor());
 
         from("fhir-find-procedure:fhirConsumer?fhirContext=#fhirContext")

@@ -14,7 +14,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_X">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -26,24 +26,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.javers:javers-core:5.14.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.picocontainer:picocontainer:2.15" level="project" />
-    <orderEntry type="library" name="Maven: org.javers:javers-core:5.14.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.picocontainer:picocontainer:2.15" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase:openEHR_SDK:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:aql:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:building:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:client:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:generator:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:opt-1.4:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:response-dto:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:serialisation:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:terminology:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:test-coverage:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:test-data:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:util:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:validation:develop-v0.3.7-339-gc816cfc7-1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.ehrbase.openEHR_SDK:web-template:develop-v0.3.7-339-gc816cfc7-1" level="project" />
     <orderEntry type="library" name="Maven: org.javers:javers-core:5.14.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
