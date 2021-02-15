@@ -48,6 +48,12 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
             //BSa Wie erscheint das im Mapping? Und wo finde ich das Referenzmodell mit diesen Infos zu openEHR?
             grosseLangeObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
             grosseLangeObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
+
+            //Birger nehme ich start/oder endzeit? und wohin/wie soll das gemappt werden?
+            // und was passiwert, wenn kein fhirEffectiveDateTime gegeben ist?
+            //grosseLangeObservation.setOriginValue(observation.getEffectivePeriod().getStart().);
+
+
             grosseLangeObservation.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
             grosseLangeObservation.setSubject(new PartySelf());
 
