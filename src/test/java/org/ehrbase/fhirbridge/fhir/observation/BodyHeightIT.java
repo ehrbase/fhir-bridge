@@ -30,8 +30,13 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createBodyHeight() throws IOException {
+    void createBodyHeightLoincPeriod() throws IOException {
         create("create-body-height-loinc-period.json");
+    }
+
+    @Test
+    void createBodyHeightSnomedPeriod() throws IOException {
+        create("create-body-height-snomed-period.json");
     }
 
     // #####################################################################################
