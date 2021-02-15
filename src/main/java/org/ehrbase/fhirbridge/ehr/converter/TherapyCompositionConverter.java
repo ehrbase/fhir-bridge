@@ -71,7 +71,6 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
     @Override
     public GECCOProzedurComposition toComposition(Procedure procedure) throws CompositionConversionException {
 
-        System.out.println("----------------------------------------------------");
 
         if (procedure == null) {
             return null;
