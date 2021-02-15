@@ -30,13 +30,7 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         if (observation == null) {
             return null;
         }
-
-        // references:
-        // https://ckm.highmed.org/ckm/templates/1246.169.1038
-        // https://tools.openehr.org/designer/?code=39ddef9b1e993dc441ff#/designer/repos/num-2021-01-11
-        // https://simplifier.net/ForschungsnetzCovid-19/BodyHeight/~overview
-        // https://simplifier.net/forschungsnetzcovid-19/observation-example-body-height
-
+        
         KorpergrosseComposition result = new KorpergrosseComposition();
         GrosseLangeObservation grosseLangeObservation = new GrosseLangeObservation();
 
