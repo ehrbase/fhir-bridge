@@ -109,7 +109,7 @@
             },
             "value" : {
               "_type" : "DV_QUANTITY",
-              "units" : "cm",
+              "units" : "centimeter",
               "magnitude" : 167.0
             },
             "archetype_node_id" : "at0004"
