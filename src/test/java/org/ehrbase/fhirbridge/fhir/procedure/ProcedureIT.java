@@ -57,9 +57,6 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     @Test
     void createExtracorporealMembraneOxygenation() throws IOException {
         create("create-extracorporeal-membrane-oxygenation-in-progress.json");
-        create("create-extracorporeal-membrane-oxygenation-in-progress_ops_datetime.json");
-        create("create-extracorporeal-membrane-oxygenation-in-progress_ops_period.json");
-        create("create-extracorporeal-membrane-oxygenation-in-progress_ops_period_2.json");
         create("create-extracorporeal-membrane-oxygenation-in-progress_sct_datetime.json");
         create("create-extracorporeal-membrane-oxygenation-in-progress_sct_period.json");
         create("create-extracorporeal-membrane-oxygenation-in-progress_sct_period_2.json");
