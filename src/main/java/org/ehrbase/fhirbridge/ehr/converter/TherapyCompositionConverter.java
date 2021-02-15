@@ -10,15 +10,9 @@ import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.GECCOProzedurComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.KategorieDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NameDerProzedurDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeraetenameDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.KoerperstelleDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeccoProzedurKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.UnbekannteProzedurEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.MedizingeraetCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NichtDurchgefuehrteProzedurEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.*;
+import org.hl7.fhir.exceptions.FHIRException;
+import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Coding;
@@ -26,7 +20,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,6 +92,19 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         }
 
 
+        // Map Start Time
+        try {
+
+            if (!procedure.getExtension().isEmpty() && procedure.getExtension().get(0).getValue() instanceof DateTimeType) {
+                result.setStartTimeValue(((DateTimeType) procedure.getExtension().get(0).getValue()).getValueAsCalendar().toZonedDateTime());
+            } else {
+                result.setStartTimeValue(procedure.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime());
+            }
+
+        } catch (NullPointerException | FHIRException ex) {
+            result.setStartTimeValue(ZonedDateTime.now());
+        }
+
         switch (procedure.getStatus()) {
             case UNKNOWN:
                 mapUnknown(procedure, result);
@@ -108,15 +117,6 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
             default:
                 mapDone(procedure, result);
         }
-
-
-        // Map Start Time
-        if (procedure.getExtension().get(0).getValue() instanceof DateTimeType) {
-            result.setStartTimeValue(((DateTimeType) procedure.getExtension().get(0).getValue()).getValueAsCalendar().toZonedDateTime());
-        } else {
-            result.setStartTimeValue(procedure.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime());
-        }
-
 
         // ======================================================================================
         // Required fields by API
@@ -176,15 +176,24 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
             durchgefuehrteProzedur.setArtDerProzedurDefiningCode(composition.getKategorie().get(0).getValue());
 
 
-            if (procedure.getExtension().get(1).getValue() instanceof Coding) {
-                durchgefuehrteProzedur.setDurchfuehrungsabsichtValue(((Coding) procedure.getExtension().get(1).getValue()).getDisplay());
-            } else {
-                throw new UnprocessableEntityException("Could not find extension durchfuehrungsabsicht.");
+            if (!procedure.getExtension().isEmpty()) {
+                for (Extension extension : procedure.getExtension()) {
+                    if (extension.getValue() instanceof Coding) {
+                        durchgefuehrteProzedur.setDurchfuehrungsabsichtValue(((Coding) extension.getValue()).getDisplay());
+                        break;
+                    }
+                }
+
             }
 
             durchgefuehrteProzedur.setKommentarValue(procedure.getNote().toString());
 
-            durchgefuehrteProzedur.setTimeValue(procedure.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime());
+            if (procedure.getPerformedDateTimeType() != null && procedure.getPerformedDateTimeType().getValueAsCalendar() != null) {
+                durchgefuehrteProzedur.setTimeValue(procedure.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime());
+            } else {
+                durchgefuehrteProzedur.setTimeValue(composition.getStartTimeValue());
+            }
+
 
         } catch (Exception e) {
             throw new CompositionConversionException("Some parts of the present procedure did not contain the required elements. "
@@ -193,9 +202,9 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
         durchgefuehrteProzedur.setLanguage(Language.DE);
         durchgefuehrteProzedur.setSubject(new PartySelf());
-
+        durchgefuehrteProzedur.setCareflowStepDefiningCode(CareflowStepDefiningCode.PROZEDUR_DURCHGEFUEHRT);
+        durchgefuehrteProzedur.setCurrentStateDefiningCode(CurrentStateDefiningCode.COMPLETED);
         composition.setProzedur(durchgefuehrteProzedur);
-
     }
 
     private void mapNotDone(Procedure procedure, GECCOProzedurComposition composition) {
@@ -204,7 +213,6 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
         // TODO: Check whether this has to be an enum type
         nichtDurchgefuehrteProzedur.setAussageUeberDenAusschlussValue(procedure.getStatus().getDisplay());
-
         try {
             Coding coding = procedure.getCode().getCoding().get(0);
 
