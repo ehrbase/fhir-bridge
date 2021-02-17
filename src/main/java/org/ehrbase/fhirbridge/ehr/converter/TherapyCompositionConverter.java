@@ -212,8 +212,8 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
         durchgefuehrteProzedur.setLanguage(Language.DE);
         durchgefuehrteProzedur.setSubject(new PartySelf());
-        durchgefuehrteProzedur.setCareflowStepDefiningCode(CareflowStepDefiningCode.PROZEDUR_DURCHGEFUEHRT);
-        durchgefuehrteProzedur.setCurrentStateDefiningCode(CurrentStateDefiningCode.COMPLETED);
+        //durchgefuehrteProzedur.setCareflowStepDefiningCode(CareflowStepDefiningCode.GEPLANTE_PROZEDUR);
+        //durchgefuehrteProzedur.setCurrentStateDefiningCode(CurrentStateDefiningCode.PLANNED);
         composition.setProzedur(durchgefuehrteProzedur);
     }
 

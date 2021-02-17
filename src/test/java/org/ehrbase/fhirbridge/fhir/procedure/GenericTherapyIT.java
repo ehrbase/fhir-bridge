@@ -33,8 +33,8 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
     @Test
     void createApheresisProcedure() throws IOException {
         create("apheresis-example-1.json");
-        //create("apheresis-example-2.json");
-        //create("apheresis-example-3.json");
+        create("apheresis-example-2.json");
+        create("apheresis-example-3.json");
         create("apheresis-example-4.json");
         create("apheresis-example-5.json");
     }
@@ -43,8 +43,8 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
     void createDialysisProcedure() throws IOException {
         create("dialysis-example-1.json");
         create("dialysis-example-2.json");
-        //create("dialysis-example-3.json");
-        //create("dialysis-example-4.json");
+        create("dialysis-example-3.json");
+        create("dialysis-example-4.json");
         create("dialysis-example-5.json");
         create("dialysis-example-6.json");
     }
@@ -53,25 +53,25 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
     void createExtracorporealMembraneOxygenation() throws IOException {
         create("extracorporeal-membrane-oxygenation-example-1.json");
         create("extracorporeal-membrane-oxygenation-example-2.json");
-        //create("extracorporeal-membrane-oxygenation-example-3.json");
-        //create("extracorporeal-membrane-oxygenation-example-4.json");
+        create("extracorporeal-membrane-oxygenation-example-3.json");
+        create("extracorporeal-membrane-oxygenation-example-4.json");
     }
 
     @Test
     void createPronePosition() throws IOException {
         create("prone-position-example-1.json");
-        //create("prone-position-example-2.json");
-        //create("prone-position-example-3.json");
+        create("prone-position-example-2.json");
+        create("prone-position-example-3.json");
         create("prone-position-example-4.json");
     }
 
     @Test
     void createRadiologyProcedures() throws IOException {
-        /*create("radiology-example-1.json");
+        create("radiology-example-1.json");
         create("radiology-example-2.json");
         create("radiology-example-3.json");
         create("radiology-example-4.json");
-        */
+
     }
 
     @Test
