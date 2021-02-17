@@ -23,6 +23,11 @@
         "system": "http://snomed.info/sct",
         "code": "248334005",
         "display": "Length of body (observable entity)"
+      },
+      {
+        "system": "http://loinc.org",
+        "code": "8302-2",
+        "display": "Body height"
       }
     ],
     "text": "Body height"
