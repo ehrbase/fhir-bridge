@@ -34,7 +34,8 @@
     }
   },
   "effectivePeriod": {
-    "start": "2020-10-02"
+    "start": "2020-10-02",
+    "end": "2020-10-02"
   },
   "valueQuantity": {
     "value": 82,
