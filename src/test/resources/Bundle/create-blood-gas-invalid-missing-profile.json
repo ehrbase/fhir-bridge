@@ -1,0 +1,88 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-transaction-bga",
+  "meta": {
+    "lastUpdated": "2020-09-24T05:33:00Z"
+  },
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1c349d",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "OBI"
+                }
+              ]
+            },
+            "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+            "value": "24336-0_gasPanelBldA",
+            "assigner": {
+              "reference": "Organization/Charité"
+            }
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "26436-6"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "24336-0",
+              "display": "Gas panel (BldA)"
+            }
+          ],
+          "text": "Gas panel - Arterial blood"
+        },
+        "subject": {
+          "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+          }
+        },
+        "effectiveDateTime": "2020-09-21",
+        "hasMember": [
+          {
+            "reference": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd1"
+          },
+          {
+            "reference": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd2"
+          },
+          {
+            "reference": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd3"
+          },
+          {
+            "reference": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd4"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    }
+  ]
+}

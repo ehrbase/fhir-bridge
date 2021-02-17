@@ -29,6 +29,7 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
         resetAttributes();
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
             validateProfiles(entry);
+            System.out.println(entry.getResource().getMeta().getProfile().get(0).getValue());
         }
         checkIfAtLeastOneObservationContained();
     }
@@ -49,19 +50,19 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
                     setBloodGasPanel();
                     break;
                 case pHUrl:
-                    validatePhCount();
+                    phProfilesContained += 1;
                     break;
                 case carbonDioxidePartialPressureUrl:
-                    validateCarbonDioxideCount();
+                    carbonDioxideProfilesContained += 1;
                     break;
                 case oxygenPartialPressureUrl:
-                    validateOxygenPressureCount();
+                    oxygenPartialProfilesContained += 1;
                     break;
                 case oxygenSaturationUrl:
-                    validateOxygenSaturationCount();
+                    oxygenSaturationProfilesContained += 1;
                     break;
                 default:
-                    throw new InternalErrorException("Blood gas panel bundle needs to contain only the profiles for the blood gas panel. Please delete profile " + profileUrl + " from the Bundle.");
+                    throw new UnprocessableEntityException("Blood gas panel bundle needs to contain only the profiles for the blood gas panel. Please delete profile " + profileUrl + " from the Bundle.");
             }
 
         } catch (IndexOutOfBoundsException e) {
@@ -84,41 +85,11 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
     private void setBloodGasPanel() {
         bloodGasProfilesContained += 1;
         if (bloodGasProfilesContained != 1) {
-            throw new InternalErrorException("Blood gas Panel profile is duplicated within the bundle, please delete one of them");
+            throw new UnprocessableEntityException("Blood gas Panel profile is duplicated within the bundle, please delete one of them");
         }
 
     }
 
-    private void validatePhCount() {
-        phProfilesContained += 1;
-        if (phProfilesContained != 1) {
-            throw new InternalErrorException("PH profile is duplicated within the bundle, please delete one of them");
-        }
-    }
-
-    private void validateCarbonDioxideCount() {
-        carbonDioxideProfilesContained += 1;
-        if (carbonDioxideProfilesContained != 1) {
-            throw new InternalErrorException("Carbon Dioxide Partial Pressure profile is duplicated within the bundle, please delete one of them");
-        }
-
-    }
-
-    private void validateOxygenPressureCount() {
-        oxygenPartialProfilesContained += 1;
-        if (oxygenPartialProfilesContained != 1) {
-            throw new InternalErrorException("Oxygen partial pressure profile is duplicated within the bundle, please delete one of them");
-        }
-
-    }
-
-    private void validateOxygenSaturationCount() {
-        oxygenSaturationProfilesContained += 1;
-        if (oxygenSaturationProfilesContained != 1) {
-            throw new InternalErrorException("Oxygen saturation profile is duplicated within the bundle, please delete one of them");
-
-        }
-    }
 
 }
 
