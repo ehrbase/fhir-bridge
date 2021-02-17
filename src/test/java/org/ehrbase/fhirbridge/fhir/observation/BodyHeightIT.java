@@ -71,7 +71,7 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
         Diff diff =  compareCompositions(getJavers(), "paragon-body-height-loinc-period_2.json", mapped);
         assertEquals(0, diff.getChanges().size());
     }
-
+/*
     @Test
     void mapping_snomed_datetime() throws IOException {
         Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-snomed-datetime.json");
@@ -98,7 +98,7 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
         Diff diff =  compareCompositions(getJavers(), "paragon-body-height-snomed-period_2.json", mapped);
         assertEquals(0, diff.getChanges().size());
     }
-
+*/
     // plus eine invalide json erzeugen -> prüfen, dass jede erforderliche exception fliegt
 /*    @Test
     void createInvalidBefund() throws IOException {
