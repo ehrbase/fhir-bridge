@@ -132,13 +132,15 @@ get coronavirus lab results
 
 
 get heart rate results
-    &{resp}             POST 	${ehrbase_url}/query/aql/SELECT c FROM EHR e [ehr_id/value='${ehr_id}'] CONTAINS COMPOSITION c
+#    &{resp}            POST 	${ehrbase_url}/query/aql/    {"q": "SELECT c FROM COMPOSITION c [uid/value='${identifier_value}']"}
+	&{resp}				GET		${ehrbase_url}/ehr/${ehr_id_value}/composition/${identifier_value}::local.ehrbase.org::1
+						Output Debug Info To Console
                         Integer    response status    200
                         String     request method    GET
-                        String     response body id
-                        String     response body resourceType    Bundle
-                        String     response body entry 0 resource resourceType    Observation
-                        Output Debug Info To Console
+						String     response body uid value    pattern=${identifier_value}*
+#                       String     response body resourceType    Bundle
+                        String     response body content 0 _type    OBSERVATION
+                        
 
 
 #                                            .
@@ -421,6 +423,7 @@ POST /Observation with ehr reference
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
                         Output Debug Info To Console    ${payload}
                         POST /Observation    ${fhir_resource_name}    ${payload}
+						extract identifier_value from response
 
 
 POST /Observation with fake ehr reference
@@ -432,6 +435,7 @@ POST /Observation with fake ehr reference
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${{str(uuid.uuid4())}}
                         Output Debug Info To Console    ${payload}
                         POST /Observation    ${fhir_resource_name}    ${payload}
+						
 
 
 POST /Observation w/o ehr reference

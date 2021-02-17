@@ -45,4 +45,4 @@ create ehr
     &{resp}=            REST.POST    ${EHRBASE_URL}/ehr
                         Set Test Variable    ${response}    ${resp}
                         Output Debug Info To Console
-                        extract ehr_id from response
+                        

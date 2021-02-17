@@ -24,3 +24,4 @@ tests/report.html
 .vscode/**
 
 fhir-bridge.iml
+src/main/resources/MappingOutput.json
