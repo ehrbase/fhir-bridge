@@ -41,8 +41,7 @@
     }
   },
   "effectivePeriod": {
-    "start": "1999-07-02",
-    "end": "1997-07-02"
+    "start": "1999-07-02"
   },
   "valueQuantity": {
     "value": 60,
