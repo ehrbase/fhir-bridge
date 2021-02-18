@@ -81,7 +81,7 @@ Force Tags              observation_create    create
 	[Tags]             	heart-rate    valid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create heart rate    create-heart-rate.json
+	observation.create heart rate    Heart Rate    create-heart-rate.json
     observation.validate response - 201
 
 
@@ -111,35 +111,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-007 Create Observation Using Default Profile
-	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-observation-with-default-profile.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-    ...                 4. *POST* example JSON to observation endpoint\n\n
-	...                 5. *VALIDATE* the response status \n\n
-    ...                 6. *VALIDATE* outcome against diagnostic text
-	[Tags]             	invalid
-
-	ehr.create new ehr    000_ehr_status.json
-	observation.create observation    create-observation-with-default-profile.json
-    observation.validate response - 422 (default profile not supported)
-
-
-008 Create Observation Using Unsupported Profile
-	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-observation-with-unsupported-profile.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-    ...                 4. *POST* example JSON to observation endpoint\n\n
-	...                 5. *VALIDATE* the response status \n\n
-    ...                 6. *VALIDATE* outcome against diagnostic text
-	[Tags]             	invalid
-
-	ehr.create new ehr    000_ehr_status.json
-	observation.create observation    create-observation-with-unsupported-profile.json
-    observation.validate response - 422 (profile not supported)
-
-
-009 Create Coronavirus Lab Result
+007 Create Coronavirus Lab Result
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-coronavirus-nachweis-test.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -152,7 +124,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-010 Create Body Height
+008 Create Body Height
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-body-height.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -165,7 +137,7 @@ Force Tags              observation_create    create
 	observation.validate response - 201
 
 
-011 Create Pregnancy Status
+009 Create Pregnancy Status
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-pregnancy-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -178,7 +150,7 @@ Force Tags              observation_create    create
   	observation.validate response - 201
 
 
-012 Create Frailty Scale Score
+010 Create Frailty Scale Score
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-clinical-frailty-scale-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -191,7 +163,7 @@ Force Tags              observation_create    create
   	observation.validate response - 201
 
 
-013 Create Smoking Status
+011 Create Smoking Status
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-smoking-status.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -204,7 +176,7 @@ Force Tags              observation_create    create
   	observation.validate response - 201
 
 
-014 Create Body Weight
+012 Create Body Weight
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-body-weight.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -217,7 +189,7 @@ Force Tags              observation_create    create
   	observation.validate response - 201
 
 
-015 Create Patient in ICU
+013 Create Patient in ICU
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-patient-in-icu.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -230,7 +202,7 @@ Force Tags              observation_create    create
   	observation.validate response - 201
 
 
-016 Create Blood Gas Panel
+014 Create Blood Gas Panel
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-blood-gas-panel.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -243,7 +215,7 @@ Force Tags              observation_create    create
 	observation.validate response - 201
 
 
-017 Create Oxygen Saturation in Arterial Blood
+015 Create Oxygen Saturation in Arterial Blood
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-oxygen-saturation.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -256,7 +228,7 @@ Force Tags              observation_create    create
   	observation.validate response - 201
 
 
-018 Create History of Travel
+016 Create History of Travel
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-history-of-travel.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -269,7 +241,7 @@ Force Tags              observation_create    create
   	observation.validate response - 201
 
 
-019 Create Sex assigned at Birth (Divers)
+017 Create Sex assigned at Birth (Divers)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-sex-assigned-at-birth-divers.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -282,7 +254,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-020 Create Sex assigned at Birth (Female)
+018 Create Sex assigned at Birth (Female)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-sex-assigned-at-birth-female.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -295,7 +267,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-021 Create Sex assigned at Birth (Male)
+019 Create Sex assigned at Birth (Male)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-sex-assigned-at-birth-male.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -308,7 +280,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-022 Create Sex assigned at Birth (Unspecified)
+020 Create Sex assigned at Birth (Unspecified)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-sex-assigned-at-birth-unspecified.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -321,7 +293,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-023 Create Sex assigned at Birth (Unknown)
+021 Create Sex assigned at Birth (Unknown)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-sex-assigned-at-birth-unknown.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -334,7 +306,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-024 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Present)
+022 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Present)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-study-inclusion-due-to-covid-19-confirmed-diagnosis-present.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -347,7 +319,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-025 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Absent)
+023 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Absent)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-study-inclusion-due-to-covid-19-confirmed-diagnosis-absent.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -360,7 +332,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-026 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Unknown)
+024 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Unknown)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-study-inclusion-due-to-covid-19-confirmed-diagnosis-unknown.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -373,7 +345,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-027 Create Interventional Clinical Trial Participation (Present with EudraCT)
+025 Create Interventional Clinical Trial Participation (Present with EudraCT)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-interventional-clinical-trial-participation-present-with-EudraCT.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -386,7 +358,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-028 Create Interventional Clinical Trial Participation (Present with NCT)
+026 Create Interventional Clinical Trial Participation (Present with NCT)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-interventional-clinical-trial-participation-present-with-NCT.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -399,7 +371,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-029 Create Interventional Clinical Trial Participation (Present with EudraCT AND NCT)
+027 Create Interventional Clinical Trial Participation (Present with EudraCT AND NCT)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-interventional-clinical-trial-participation-present-with-EudraCT-AND-NCT.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -412,7 +384,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-030 Create Interventional Clinical Trial Participation (Absent)
+028 Create Interventional Clinical Trial Participation (Absent)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-interventional-clinical-trial-participation-absent.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -425,7 +397,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-031 Create Interventional Clinical Trial Participation (Not Applicable)
+029 Create Interventional Clinical Trial Participation (Not Applicable)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-interventional-clinical-trial-participation-not-applicable.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -438,7 +410,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-032 Create Interventional Clinical Trial Participation (Unknown)
+030 Create Interventional Clinical Trial Participation (Unknown)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-interventional-clinical-trial-participation-unknown.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -451,7 +423,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-033 Create Known Exposure to Covid-19 (Present)
+031 Create Known Exposure to Covid-19 (Present)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-known-exposure-to-covid-19-present.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -464,7 +436,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-034 Create Known Exposure to Covid-19 (Absent)
+032 Create Known Exposure to Covid-19 (Absent)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-known-exposure-to-covid-19-absent.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -477,7 +449,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-035 Create Known Exposure to Covid-19 (Unknown)
+033 Create Known Exposure to Covid-19 (Unknown)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-known-exposure-to-covid-19-unknown.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -490,7 +462,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-036 Create PaO2
+034 Create PaO2
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-PaO2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -503,7 +475,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-037 Create PaCO2
+035 Create PaCO2
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-PaCO2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -516,7 +488,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-038 Create Respiratory Rate
+036 Create Respiratory Rate
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-respiratory-rate.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -529,7 +501,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-039 Create Observation Lab - CRP
+037 Create Observation Lab - CRP
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-CRP.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -542,7 +514,7 @@ Force Tags              observation_create    create
 	observation.validate response - 201
 
 
-040 Create Observation Lab - Bilirubin
+038 Create Observation Lab - Bilirubin
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-bilirubin.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -555,7 +527,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-041 Create Observation Lab - Ferritin
+039 Create Observation Lab - Ferritin
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-ferritin.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -568,7 +540,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-042 Create Observation Lab - D-Dimer
+040 Create Observation Lab - D-Dimer
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-d-dimer.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -581,7 +553,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-043 Create Observation Lab - Gamma Glutamyl Transferase
+041 Create Observation Lab - Gamma Glutamyl Transferase
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-gamma-glutamyl-transferase.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -594,7 +566,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-044 Create Observation Lab - Lactate
+042 Create Observation Lab - Lactate
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-lactate.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -607,7 +579,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-045 Create Observation Lab - Leukocytes
+043 Create Observation Lab - Leukocytes
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-leukocytes.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -620,7 +592,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-046 Create Observation Lab - Lymphocytes
+044 Create Observation Lab - Lymphocytes
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-lymphocytes.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -633,7 +605,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-047 Create Observation Lab - Neutrophils
+045 Create Observation Lab - Neutrophils
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-neutrophils.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -646,7 +618,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-048 Create Observation Lab - Hemoglobin
+046 Create Observation Lab - Hemoglobin
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-hemoglobin.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -659,7 +631,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-049 Create pH of Arterial blood
+047 Create pH of Arterial blood
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-ph-of-arterial-blood.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -672,7 +644,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-050 Create Observation Lab - Cardiac Troponin
+048 Create Observation Lab - Cardiac Troponin
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-cardiac-troponin.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -685,7 +657,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-051 Create Observation Lab - Creatinine
+049 Create Observation Lab - Creatinine
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-creatinine.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -698,7 +670,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-052 Create Observation Lab - Lactate Dehydrogenase
+050 Create Observation Lab - Lactate Dehydrogenase
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-lactate-dehydrogenase.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -711,7 +683,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-053 Create Observation Lab - Procalcitonin
+051 Create Observation Lab - Procalcitonin
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-procalcitonin.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -724,7 +696,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-054 Create Observation Lab - Interleukin 6
+052 Create Observation Lab - Interleukin 6
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-interleukin-6.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -737,7 +709,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-055 Create Observation Lab - Natriuretic Peptide.b Prohormone N-Terminal
+053 Create Observation Lab - Natriuretic Peptide.b Prohormone N-Terminal
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-natriuretic-peptide.b-prohormone-n-terminal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -750,7 +722,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-056 Create Observation Lab - Partial thromboplastin time
+054 Create Observation Lab - Partial thromboplastin time
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-partial-thromboplastin-time.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -763,7 +735,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-057 Create Observation Lab - Albumin in serum
+055 Create Observation Lab - Albumin in serum
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-albumin-in.serum.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -776,7 +748,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-058 Create Observation Lab - Platelets
+056 Create Observation Lab - Platelets
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-platelets.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -789,7 +761,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-059 Create Observation Lab - Antithrombin
+057 Create Observation Lab - Antithrombin
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-antithrombin.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -802,7 +774,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-060 Create Observation Lab - Fibrinogen
+058 Create Observation Lab - Fibrinogen
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-fibrinogen.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -815,7 +787,7 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-061 Create Observation Lab - INR
+059 Create Observation Lab - INR
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-inr.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -828,7 +800,7 @@ Force Tags              observation_create    create
     observation.validate response - 201	
 
 
-062 Create Observation Lab - Aspartate aminotransferase
+060 Create Observation Lab - Aspartate aminotransferase
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab-aspartate-aminotransferase.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n

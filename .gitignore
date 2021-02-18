@@ -28,3 +28,4 @@ tests/report.html
 local*.http
 
 fhir-bridge.iml
+src/main/resources/MappingOutput.json

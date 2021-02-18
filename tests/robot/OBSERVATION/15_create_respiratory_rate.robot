@@ -222,7 +222,7 @@ ${randinteger}                  ${12345}
 
 
 
-Create Respiratory Rate (Invalid/Missing 'subject')
+006 Create Respiratory Rate (Invalid/Missing 'subject')
     [Documentation]     1. *LOAD* _create-respiratory-rate.json_ \n\n
 	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
     ...                 3. *POST* example JSON to observation endpoint \n\n

@@ -263,6 +263,21 @@ ${randinteger}                  ${12345}
 	
 	# comment: random uuid												
     $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
+
+
+007 Create Observation lab (invalid profile)
+    [Documentation]     1. *LOAD* _create-observation-with-default-profile.json_ \n\n
+    ...                 2. *POST* example JSON to observation endpoint \n\n
+	...                 3. *VALIDATE* the response status               
+	[Template]		    create Observation lab with ehr reference
+    [Tags]          	meta
+
+	# FIELD/PATH					VALUE							HTTP
+	# 																CODE
+    # invalid cases for value
+    $.meta.profile					missing							422
+
+
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
