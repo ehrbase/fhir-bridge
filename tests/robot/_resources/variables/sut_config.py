@@ -34,9 +34,7 @@ def get_variables(sut="LOCAL", auth_type="BASIC"):
         EHRBASE_USER = os.getenv('EHRBASE_USER')
         EHRBASE_PASS = os.getenv('EHRBASE_PASS')
 
-        userpass = f"{EHRBASE_USER}:{EHRBASE_PASS}"
-        userpassb64 = base64.b64encode(userpass.encode("utf-8"))
-        auth = str(userpassb64, "utf-8")
+        auth = str(base64.b64encode(f"{EHRBASE_USER}:{EHRBASE_PASS}".encode("utf-8")), "utf-8")
 
     # LOCAL CONFIG W/ BASIC AUTH
     if sut == "LOCAL":
@@ -47,10 +45,10 @@ def get_variables(sut="LOCAL", auth_type="BASIC"):
             "BASE_URL": "http://localhost:8888/fhir-bridge/fhir",
             "EHRBASE_URL": "http://localhost:8080/ehrbase/rest/openehr/v1",
             "HEARTBEAT_URL": "http://localhost:8080/ehrbase/",
-            "CREDENTIALS": ["ehrbase-user", "SuperSecretPassword"],
+            "CREDENTIALS": ["myuser", "myPassword432"],
             "SECURITY_AUTHTYPE": "BASIC",
             "AUTHORIZATION": {
-                "Authorization": "Basic ZWhyYmFzZS11c2VyOlN1cGVyU2VjcmV0UGFzc3dvcmQ="
+                "Authorization": "Basic " + str(base64.b64encode("myuser:myPassword432".encode("utf-8")), "utf-8")
             },
             "NODENAME": "local.execution.org",
             "CONTROL_MODE": "robot"
