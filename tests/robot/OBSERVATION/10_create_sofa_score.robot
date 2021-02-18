@@ -20,11 +20,11 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...															   Authorization=${AUTHORIZATION['Authorization']}
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Dave Petzold
-Force Tags              observation_create    sofa-score    invalid
+Force Tags              observation_create    sofa-score    invalid    create
 
 
 
