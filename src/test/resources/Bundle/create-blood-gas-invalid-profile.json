@@ -298,7 +298,6 @@
     "fullUrl": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd4",
     "resource": {
       "resourceType": "Observation",
-      "id": "c9f96dd3-a77a-4aa9-9b12-43cd1972d9a4",
       "meta": {
         "profile":  [
           "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/inhaled-oxygen-concentration"
@@ -351,7 +350,10 @@
         "text": "Inhaled oxygen concentration"
       },
       "subject": {
-        "reference": "urn:uuid:07f602e0-579e-4fe3-95af-381728bf0d49"
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
       },
       "effectiveDateTime": "2020-09-21",
       "valueQuantity": {
@@ -363,7 +365,7 @@
     },
     "request": {
       "method": "POST",
-      "url": "Observation/5d97ebb6-9508-4265-9622-2fc7c11cc32f"
+      "url": "Observation"
     }
     }
   ]

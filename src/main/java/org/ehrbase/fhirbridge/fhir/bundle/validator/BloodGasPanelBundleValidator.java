@@ -29,7 +29,6 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
         resetAttributes();
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
             validateProfiles(entry);
-            System.out.println(entry.getResource().getMeta().getProfile().get(0).getValue());
         }
         checkIfAtLeastOneObservationContained();
     }
