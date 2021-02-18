@@ -23,4 +23,8 @@ tests/report.html
 .settings/
 .vscode/**
 
+# VSCode REST Client
+# files for local usage only!
+local*.http
+
 fhir-bridge.iml
