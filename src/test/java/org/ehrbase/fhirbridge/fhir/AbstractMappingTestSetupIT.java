@@ -50,6 +50,6 @@ public abstract class AbstractMappingTestSetupIT extends AbstractSetupIT{
 
     public abstract Javers getJavers();
 
-    public abstract Exception executeMappingUnprocessableEntityException(IBaseResource questionnaireResponse);
+    public abstract Exception executeMappingException(String resource) throws IOException;
 
 }
