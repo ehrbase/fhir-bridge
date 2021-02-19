@@ -50,7 +50,7 @@ public class BloodGasPanel {
                     this.oxygenSaturation = Optional.of((Observation) resource);
                     break;
                 default:
-                    throw new InternalErrorException("Blood gas panel bundle needs to contain only the profiles for the blood gas panel. Please delete profile " + profileUrl + " from the Bundle.");
+                    throw new UnprocessableEntityException("Blood gas panel bundle needs to contain only the profiles for the blood gas panel. Please delete profile " + profileUrl + " from the Bundle.");
             }
 
         } catch (IndexOutOfBoundsException e) {
