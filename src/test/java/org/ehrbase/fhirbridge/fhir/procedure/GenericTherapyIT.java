@@ -71,7 +71,6 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
         create("radiology-example-2.json");
         create("radiology-example-3.json");
         create("radiology-example-4.json");
-
     }
 
     @Test
@@ -91,7 +90,7 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
 
 
     @Test
-    void mappingNormalFinding() throws IOException {
+    void mappingUnknownTherapy() throws IOException {
         Procedure procedure = (Procedure) super.testFileLoader.loadResource("mapping/mapping_unknown.json");
         TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
         GECCOProzedurComposition mappedProzedurComposition = therapyCompositionConverter.toComposition(procedure);
@@ -99,12 +98,41 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
         assertEquals(diff.getChanges().size(), 0);
     }
 
+    @Test
+    void mappingNotDoneTherapy() throws IOException {
+        Procedure procedure = (Procedure) super.testFileLoader.loadResource("mapping/mapping_not_done.json");
+        TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
+        GECCOProzedurComposition mappedProzedurComposition = therapyCompositionConverter.toComposition(procedure);
+        Diff diff = compareCompositions(getJavers(), "mapping/mapping_not_done_result.json", mappedProzedurComposition);
+        assertEquals(diff.getChanges().size(), 0);
+    }
+
+    @Test
+    void mappingDoneTherapy() throws IOException {
+        Procedure procedure = (Procedure) super.testFileLoader.loadResource("mapping/mapping_done.json");
+        TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
+        GECCOProzedurComposition mappedProzedurComposition = therapyCompositionConverter.toComposition(procedure);
+        Diff diff = compareCompositions(getJavers(), "mapping/mapping_done_result.json", mappedProzedurComposition);
+        assertEquals(diff.getChanges().size(), 0);
+    }
 
 
     @Test
     void createApheresisWithInvalidCode() throws IOException {
         Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("invalid/apheresis-invalid-code.json"));
         assertEquals("Some parts of the not present procedure did not contain the required elements. Invalid name of procedure", exception.getMessage());
+    }
+
+    @Test
+    void createRadiologyWithInvalidBodySite() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("invalid/radiology-example-invalid-body-site.json"));
+        assertEquals("Some parts of the present procedure did not contain the required elements. Invalid body site for PLAIN_RADIOGRAPHY", exception.getMessage());
+    }
+
+    @Test
+    void createRespiratoryTherapiesWithInvalidMedicalDevice() throws IOException {
+        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("invalid/respiratory-therapies-invalid-medical-device.json"));
+        assertEquals("Some parts of the present procedure did not contain the required elements. Invalid medical device code", exception.getMessage());
     }
 
 
