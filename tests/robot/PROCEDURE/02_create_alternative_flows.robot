@@ -21,9 +21,9 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...															   Authorization=${AUTHORIZATION['Authorization']}
 
-Force Tags              procedure_create
+Force Tags              procedure_create    create
 
 
 
