@@ -40,7 +40,7 @@ Force Tags              observation_search
     ...                 6. *VALIDATE* response status against 200
     [Tags]              body-temperature    valid    not-ready    not-implemented
 
-    observation.create body temperature    create-body-temp.json
+    observation.create body temperature  Body Temperature  create-body-temp.json
 	observation.get body temperature
 
 
@@ -80,6 +80,7 @@ Force Tags              observation_search
     [Tags]              heart-rate    valid    not-ready    not-implemented
 
     observation.create heart rate  Heart Rate  create-heart-rate.json
+	extract identifier_value from response
 	observation.get heart rate results
 
 
