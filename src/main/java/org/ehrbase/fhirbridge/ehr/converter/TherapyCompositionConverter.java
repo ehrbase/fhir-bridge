@@ -145,7 +145,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         Coding coding = procedure.getCode().getCoding().get(0);
 
         if (coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
-           return nameDerProzedurMap.get(coding.getCode());
+            return nameDerProzedurMap.get(coding.getCode());
         } else {
             throw new UnprocessableEntityException("Invalid name of procedure");
         }

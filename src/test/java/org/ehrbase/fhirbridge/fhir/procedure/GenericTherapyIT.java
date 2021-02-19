@@ -135,7 +135,6 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
         assertEquals("Some parts of the present procedure did not contain the required elements. Invalid medical device code", exception.getMessage());
     }
 
-
     @Override
     public Exception executeMappingUnprocessableEntityException(IBaseResource procedure) {
         return assertThrows(CompositionConversionException.class, () -> {
