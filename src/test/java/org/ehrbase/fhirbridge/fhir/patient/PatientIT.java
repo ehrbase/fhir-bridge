@@ -7,6 +7,7 @@ import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Patient;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
@@ -54,9 +55,10 @@ class PatientIT extends AbstractMappingTestSetupIT {
     }
 
     @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
+    public Exception executeMappingException(String path) throws IOException {
+        Patient patient = (Patient) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            // new YourConverter().toComposition(((YourResource) domainResource)));
+            // new YourConverter().toComposition(( patient)));
         });
     }
 

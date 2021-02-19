@@ -1,11 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.questionnaireresponse;
 
-import ca.uhn.fhir.parser.IParser;
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.apache.commons.io.IOUtils;
-import org.aspectj.lang.annotation.Before;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
@@ -18,14 +14,11 @@ import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
 import org.javers.core.metamodel.clazz.ValueObjectDefinition;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 
@@ -57,51 +50,51 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
     // ------ Anamnesis ------
     @Test
     void createWithInvalidLinkIdAnamnesis() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("anamnesis-invalid-linkid.json"));
+        Exception exception = executeMappingException("anamnesis-invalid-linkid.json");
         assertEquals("LinkId D8 undefined", exception.getMessage());
     }
 
     @Test
     void createAnamnesisInvalidVorhandenerDefiningCode() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("anamnesis-invalid-defining-code.json"));
+        Exception exception = executeMappingException("anamnesis-invalid-defining-code.json");
         assertEquals("The code LA32-123 for Question: definition cannot be mapped, please enter a valid code valid codes are: Yes (LA33-6), No (LA32-8), dont know (LA12688-0)", exception.getMessage());
     }
 
     // ------ General Information ------
     @Test
     void createGeneralInformationInvalidLinkId() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("general-information-invalid-linkid.json"));
+        Exception exception = executeMappingException("general-information-invalid-linkid.json");
         assertEquals("LinkId P12 undefined", exception.getMessage());
     }
 
     @Test
     void createGeneralInformationInvalidLinkIdKontakt() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("general-information-invalid-linkid-kontakt.json"));
+        Exception exception = executeMappingException("general-information-invalid-linkid-kontakt.json");
         assertEquals("LinkId CJ undefined", exception.getMessage());
     }
 
 
     @Test
     void createGeneralInformationInvalidAge() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("general-information-invalid-age.json"));
+        Exception exception = executeMappingException("general-information-invalid-age.json");
         assertEquals("The code for age:30-209202 cannot be mapped, plese enter a valid code e.g. 61-70", exception.getMessage());
     }
 
     @Test
     void createGeneralInformationInvalidWohnungssituation() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("general-information-invalid-wohnungssituation.json"));
+        Exception exception = executeMappingException("general-information-invalid-wohnungssituation.json");
         assertEquals("The code for Wohnungsituation:LA6255213-9 cannot be mapped, please enter a valid code e.g. Wohnt mit anderen zusammen (LOINC: LA9996-5)", exception.getMessage());
     }
 
     @Test
     void createGeneralInformationInvalidPregnancy() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("general-information-invalid-pregnancy.json"));
+        Exception exception = executeMappingException("general-information-invalid-pregnancy.json");
         assertEquals("The code for Pregnancy:LA266asd83-5 cannot be mapped, please enter a valid code e.g. pregnant (LA15173-0), not pregnant (LA26683-5) or unknown(LA4489-6) )", exception.getMessage());
     }
 
     @Test
     void createGeneralInformationInvalidKontakt() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("general-information-invalid-kontakt.json"));
+        Exception exception = executeMappingException("general-information-invalid-kontakt.json");
         assertEquals("\"LA3asd3-6\" cannot be mapped to boolean, has to be either LA33-6 or LA33-8", exception.getMessage());
     }
 
@@ -109,14 +102,14 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createMediactionInvalidLinkId() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("medication-invalid-linkid.json"));
+        Exception exception = executeMappingException("medication-invalid-linkid.json");
         assertEquals("LinkId M9 undefined", exception.getMessage());
     }
 
 
     @Test
     void createMediactionInvalidSteroid() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("medication-invalid-steroids.json"));
+        Exception exception = executeMappingException("medication-invalid-steroids.json");
         assertEquals("The code:LA3a2-8 cannot be mapped, please enter a valid code e.g. ja (LA33-6), nein (LA32-8), ich weiss es nicht (LA12688-0)", exception.getMessage());
     }
 
@@ -124,19 +117,19 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createSymptomsInvalidLinkId() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("symptoms-invalid-linkid.json"));
+        Exception exception = executeMappingException("symptoms-invalid-linkid.json");
         assertEquals("LinkId Sas undefined", exception.getMessage());
     }
 
     @Test
     void createSymptomsInvalidSchweregrad() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("symtoms-invalid-schweregrad.json"));
+        Exception exception = executeMappingException("symtoms-invalid-schweregrad.json");
         assertEquals("fewer max temperature: 4sa0C is not a valid code value !", exception.getMessage());
     }
 
     @Test
     void mapD4LQuestionnaireCompositionJavers() throws IOException, IntrospectionException, InvocationTargetException, IllegalAccessException {
-       QuestionnaireResponse resource = (QuestionnaireResponse) super.testFileLoader.loadResource("create-covapp-response.json");
+       QuestionnaireResponse resource = (QuestionnaireResponse)  super.testFileLoader.loadResource("create-covapp-response.json");
 
         D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter = new D4lQuestionnaireCompositionConverter();
         D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.toComposition(resource);
@@ -146,9 +139,10 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
     }
 
     @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource questionnaireResponse) {
+    public Exception executeMappingException(String path) throws IOException {
+        QuestionnaireResponse questionnaireResponse = (QuestionnaireResponse) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            new D4lQuestionnaireCompositionConverter().toComposition((QuestionnaireResponse) questionnaireResponse);
+            new D4lQuestionnaireCompositionConverter().toComposition(questionnaireResponse);
         });
     }
 
