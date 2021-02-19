@@ -25,7 +25,7 @@ Documentation           *NOTE:* The validation of error messages in the tables b
 ...                           Validation of English messages (if the system language is set to English), \n\n
 ...                           Validation of German messages (if the system language is set to German)
 ...						*Author:* Dave Petzold
-Force Tags              observation_create    heart-rate
+Force Tags              observation_create    heart-rate    invalid
 
 
 *** Variables ***

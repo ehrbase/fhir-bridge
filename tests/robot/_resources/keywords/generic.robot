@@ -101,6 +101,22 @@ extract subject_id from response
     ${subjectid}=       String      response body ehr_status subject external_ref id value
                         Log To Console    \n\tDEBUG OUTPUT - EHR_STATUS SUBJECT_ID: \n\t${subjectid}[0]
                         Set Suite Variable    ${subject_id}    ${subjectid}[0]
+
+
+extract identifier_value from response
+    [Documentation]     Extracts identifier.value from response of preceding request.
+
+    ${identifiervalue}=  String      response body identifier 0 value
+                        Log To Console    \n\tDEBUG OUTPUT - IDENTIFIER VALUE: \n\t${identifiervalue}[0]
+                        Set Suite Variable    ${identifier_value}    ${identifiervalue}[0]
+
+
+extract ehr_id from response
+    [Documentation]     Extracts ehr_id.value from response of preceding request.
+
+    ${ehridvalue}=  String      response body ehr_id value
+                        Log To Console    \n\tDEBUG OUTPUT - EHR_ID VALUE: \n\t${ehridvalue}[0]
+                        Set Suite Variable    ${ehr_id_value}    ${ehridvalue}[0]
     
 
 Output Debug Info To Console
