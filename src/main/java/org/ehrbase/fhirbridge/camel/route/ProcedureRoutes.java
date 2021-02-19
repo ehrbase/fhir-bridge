@@ -47,10 +47,10 @@ public class ProcedureRoutes extends RouteBuilder {
     public void configure() {
         // @formatter:off
         from("fhir-create-procedure:fhirConsumer?fhirContext=#fhirContext")
-            .onCompletion()
+                .onCompletion()
                 .process("auditCreateResourceProcessor")
-            .end()
-            .onException(Exception.class)
+                .end()
+                .onException(Exception.class)
                 .process(defaultExceptionHandler)
                 .end()
                 .process(requestValidator)
@@ -62,15 +62,15 @@ public class ProcedureRoutes extends RouteBuilder {
                 .process(new ResourceResponseProcessor());
 
         from("fhir-find-procedure:fhirConsumer?fhirContext=#fhirContext")
-            .onException(Exception.class)
+                .onException(Exception.class)
                 .process(defaultExceptionHandler)
-            .end()
-            .setHeader(AqlConstants.AQL_QUERY, () -> Query.buildNativeQuery(
-                "SELECT c " +
-                 "FROM EHR e CONTAINS COMPOSITION c " +
-                "WHERE c/archetype_details/template_id/value = 'Prozedur' " +
-                  "AND e/ehr_status/subject/external_ref/id/value = $subjectId", ProzedurComposition.class))
-            .to("ehr-aql:aqlProducer?rowMapper=#procedureRowMapper");
+                .end()
+                .setHeader(AqlConstants.AQL_QUERY, () -> Query.buildNativeQuery(
+                        "SELECT c " +
+                                "FROM EHR e CONTAINS COMPOSITION c " +
+                                "WHERE c/archetype_details/template_id/value = 'Prozedur' " +
+                                "AND e/ehr_status/subject/external_ref/id/value = $subjectId", ProzedurComposition.class))
+                .to("ehr-aql:aqlProducer?rowMapper=#procedureRowMapper");
         // @formatter:on
     }
 
