@@ -141,19 +141,23 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         return result;
     }
 
+    private NameDerProzedurDefiningCode mapNameDerProzedur(Procedure procedure) throws UnprocessableEntityException {
+        Coding coding = procedure.getCode().getCoding().get(0);
+
+        if (coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
+           return nameDerProzedurMap.get(coding.getCode());
+        } else {
+            throw new UnprocessableEntityException("Invalid name of procedure");
+        }
+    }
+
     private void mapDone(Procedure procedure, GECCOProzedurComposition composition) {
 
         ProzedurAction durchgefuehrteProzedur = new ProzedurAction();
 
         try {
 
-            Coding coding = procedure.getCode().getCoding().get(0);
-
-            if (coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
-                durchgefuehrteProzedur.setNameDerProzedurDefiningCode(nameDerProzedurMap.get(coding.getCode()));
-            } else {
-                throw new UnprocessableEntityException("Invalid name of procedure");
-            }
+            durchgefuehrteProzedur.setNameDerProzedurDefiningCode(mapNameDerProzedur(procedure));
 
             if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.PLAIN_RADIOGRAPHY)) {
                 // Map body site for PLAIN_RADIOGRAPHY
@@ -179,7 +183,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
                     durchgefuehrteProzedur.setMedizingeraet(new ArrayList<>());
                     durchgefuehrteProzedur.getMedizingeraet().add(medizingeraetCluster);
                 } else {
-                    throw new UnprocessableEntityException("Invalid used code");
+                    throw new UnprocessableEntityException("Invalid medical device code");
                 }
             }
 
@@ -213,7 +217,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         durchgefuehrteProzedur.setLanguage(Language.DE);
         durchgefuehrteProzedur.setSubject(new PartySelf());
         //durchgefuehrteProzedur.setCareflowStepDefiningCode(CareflowStepDefiningCode.GEPLANTE_PROZEDUR);
-        //durchgefuehrteProzedur.setCurrentStateDefiningCode(CurrentStateDefiningCode.PLANNED);
+        durchgefuehrteProzedur.setCurrentStateDefiningCode(CurrentStateDefiningCode.PLANNED);
         composition.setProzedur(durchgefuehrteProzedur);
     }
 
@@ -224,14 +228,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         // TODO: Check whether this has to be an enum type
         nichtDurchgefuehrteProzedur.setAussageUeberDenAusschlussValue(procedure.getStatus().getDisplay());
         try {
-            Coding coding = procedure.getCode().getCoding().get(0);
-
-            if (coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
-                nichtDurchgefuehrteProzedur.setEingriffDefiningCode(nameDerProzedurMap.get(coding.getCode()));
-            } else {
-                throw new UnprocessableEntityException("Invalid name of procedure");
-            }
-
+            nichtDurchgefuehrteProzedur.setEingriffDefiningCode(mapNameDerProzedur(procedure));
         } catch (Exception e) {
             throw new CompositionConversionException("Some parts of the not present procedure did not contain the required elements. "
                     + e.getMessage(), e);
@@ -252,14 +249,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         unbekannteProzedur.setAussageUeberDieFehlendeInformationValue(procedure.getStatus().getDisplay());
 
         try {
-            Coding coding = procedure.getCode().getCoding().get(0);
-
-            if (coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
-                unbekannteProzedur.setUnbekannteProzedurDefiningCode(nameDerProzedurMap.get(coding.getCode()));
-            } else {
-                throw new UnprocessableEntityException("Invalid name of procedure");
-            }
-
+            unbekannteProzedur.setUnbekannteProzedurDefiningCode(mapNameDerProzedur(procedure));
         } catch (Exception e) {
             throw new CompositionConversionException("Some parts of the unknown procedure did not contain the required elements. "
                     + e.getMessage(), e);
