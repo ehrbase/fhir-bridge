@@ -7,10 +7,10 @@ import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
+import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.mapper.ProcedureRowMapper;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
@@ -47,11 +47,10 @@ public class ProcedureRoutes extends RouteBuilder {
     public void configure() {
         // @formatter:off
         from("fhir-create-procedure:fhirConsumer?fhirContext=#fhirContext")
-                .setProperty("DebugMapping", simple("${properties:fhir-bridge.debug}"))
-                .onCompletion()
+            .onCompletion()
                 .process("auditCreateResourceProcessor")
-                .end()
-                .onException(Exception.class)
+            .end()
+            .onException(Exception.class)
                 .process(defaultExceptionHandler)
                 .end()
                 .process(requestValidator)
@@ -59,20 +58,19 @@ public class ProcedureRoutes extends RouteBuilder {
                 .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
                 .setBody(simple("${body.resource}"))
                 .process(ehrIdLookupProcessor)
-                .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
-                .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
+                .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#procedureCompositionConverter")
                 .process(new ResourceResponseProcessor());
 
         from("fhir-find-procedure:fhirConsumer?fhirContext=#fhirContext")
-                .onException(Exception.class)
+            .onException(Exception.class)
                 .process(defaultExceptionHandler)
-                .end()
-                .setHeader(AqlConstants.AQL_QUERY, () -> Query.buildNativeQuery(
-                        "SELECT c " +
-                                "FROM EHR e CONTAINS COMPOSITION c " +
-                                "WHERE c/archetype_details/template_id/value = 'Prozedur' " +
-                                "AND e/ehr_status/subject/external_ref/id/value = $subjectId", ProzedurComposition.class))
-                .to("ehr-aql:aqlProducer?rowMapper=#procedureRowMapper");
+            .end()
+            .setHeader(AqlConstants.AQL_QUERY, () -> Query.buildNativeQuery(
+                "SELECT c " +
+                 "FROM EHR e CONTAINS COMPOSITION c " +
+                "WHERE c/archetype_details/template_id/value = 'Prozedur' " +
+                  "AND e/ehr_status/subject/external_ref/id/value = $subjectId", ProzedurComposition.class))
+            .to("ehr-aql:aqlProducer?rowMapper=#procedureRowMapper");
         // @formatter:on
     }
 

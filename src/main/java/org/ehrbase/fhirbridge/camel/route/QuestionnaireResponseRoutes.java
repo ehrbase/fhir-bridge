@@ -31,17 +31,16 @@ public class QuestionnaireResponseRoutes extends RouteBuilder {
     public void configure() {
         // @formatter:off
         from("fhir-create-questionnaire-response:fhirConsumer?fhirContext=#fhirContext")
-                .setProperty("DebugMapping", simple("${properties:fhir-bridge.debug}"))
-                .onCompletion()
+            .onCompletion()
                 .process("auditCreateResourceProcessor")
-                .end()
-                .onException(Exception.class)
+            .end()
+            .onException(Exception.class)
                 .process("defaultExceptionHandler")
-                .end()
-                .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(questionnaireResponseDao, "create"))
-                .process(ehrIdLookupProcessor)
-                .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#d4lQuestionnaireCompositionConverter")
-                .process(resourceResponseProcessor);
+            .end()
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(questionnaireResponseDao, "create"))
+            .process(ehrIdLookupProcessor)
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#d4lQuestionnaireCompositionConverter")
+            .process(resourceResponseProcessor);
         // TODO Call Camel Composition component?
         // @formatter:on
     }
@@ -51,5 +50,4 @@ public class QuestionnaireResponseRoutes extends RouteBuilder {
     public D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter() {
         return new D4lQuestionnaireCompositionConverter();
     }
-
 }
