@@ -6,6 +6,7 @@ import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.BefundDerBlutgasanalyseComposition;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.*;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
@@ -129,6 +130,11 @@ public class BundleIT extends AbstractBundleMappingTestSetupIT {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(BefundDerBlutgasanalyseComposition.class, List.of("location")))
+                .registerValueObject(LaborergebnisObservation.class)
+                .registerValueObject(PhWertCluster.class)
+                .registerValueObject(SauerstoffpartialdruckCluster.class)
+                .registerValueObject(KohlendioxidpartialdruckCluster.class)
+                .registerValueObject(SauerstoffsattigungCluster.class)
                 .build();
     }
 
