@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
@@ -131,7 +132,8 @@ class ObservationIT extends AbstractMappingTestSetupIT {
 
 
     @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
+    public Exception executeMappingException(String path) throws IOException {
+        Observation observation = (Observation) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
             // new YourConverter().toComposition(((YourResource) domainResource)));
         });
