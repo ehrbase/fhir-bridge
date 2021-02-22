@@ -19,11 +19,11 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...															   Authorization=${AUTHORIZATION['Authorization']}
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Peter Wohlfarth
-Force Tags              observation_create    respiratory-rate   invalid
+Force Tags              observation_create    respiratory-rate    invalid    create
 
 
 *** Variables ***
@@ -222,7 +222,7 @@ ${randinteger}                  ${12345}
 
 
 
-Create Respiratory Rate (Invalid/Missing 'subject')
+006 Create Respiratory Rate (Invalid/Missing 'subject')
     [Documentation]     1. *LOAD* _create-respiratory-rate.json_ \n\n
 	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
     ...                 3. *POST* example JSON to observation endpoint \n\n
