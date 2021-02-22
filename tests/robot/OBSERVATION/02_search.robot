@@ -70,8 +70,21 @@ Force Tags              observation_search
 	observation.get coronavirus lab results
 
 
+004 Search Heart Rate Results
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-heart-rate.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *GET* ``POST {{ehrbase_url}}/query/aql WITH "q": "SELECT c FROM EHR e [ehr_id/value='{{ehr_id}}'] CONTAINS COMPOSITION c" `` \n\n
+    ...                 6. *VALIDATE* response status against 200
+    [Tags]              heart-rate    valid    not-ready    not-implemented
+
+    observation.create heart rate  Heart Rate  create-heart-rate.json
+	observation.get heart rate results
+
+
 *** Keywords ***
 establish preconditions
     generic.prepare new request session    Prefer=return=representation
-    ...									   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+    ...									   Authorization=${AUTHORIZATION['Authorization']}
     ehr.create new ehr    000_ehr_status.json
