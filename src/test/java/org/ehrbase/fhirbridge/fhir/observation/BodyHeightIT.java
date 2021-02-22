@@ -70,7 +70,7 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mapping_loinc_period_2() throws IOException {
-        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height_loinc-period_2.json");
+        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-loinc-period_2.json");
         BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
         KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
         Diff diff =  compareCompositions(getJavers(), "paragon-body-height-loinc-period_2.json", mapped);
@@ -85,7 +85,7 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
         Diff diff =  compareCompositions(getJavers(), "paragon-body-height-snomed-datetime.json", mapped);
         assertEquals(0, diff.getChanges().size());
     }
-/*
+
     @Test
     void mapping_snomed_period() throws IOException {
         Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-snomed-period.json");
@@ -97,14 +97,14 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mapping_snomed_period_2() throws IOException {
-        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height_snomed-period_2.json");
+        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-snomed-period_2.json");
         BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
         KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
         Diff diff =  compareCompositions(getJavers(), "paragon-body-height-snomed-period_2.json", mapped);
         assertEquals(0, diff.getChanges().size());
     }
-*/
-    // plus eine invalide json erzeugen -> prüfen, dass jede erforderliche exception fliegt
+
+   // plus eine invalide json erzeugen -> prüfen, dass jede erforderliche exception fliegt
 /*    @Test
     void createInvalidBefund() throws IOException {
         Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("create-radiology-report-invalid-befund.json"));
