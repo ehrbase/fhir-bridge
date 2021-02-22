@@ -463,7 +463,6 @@ Force Tags              observation_create
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body temperature  Body Temperature  create-body-temp-snomed-period.json
-	extract identifier_value from response
     observation.validate response - 201
 
 
