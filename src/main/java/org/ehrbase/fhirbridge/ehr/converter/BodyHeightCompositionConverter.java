@@ -52,8 +52,7 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
                 fhirEffectiveDateTime = observation.getEffectivePeriod().getStart().toInstant().atZone(ZoneId.systemDefault());
                 grosseLangeObservation.setTimeValue(fhirEffectiveDateTime);
                 grosseLangeObservation.setOriginValue(fhirEffectiveDateTime);
-            }
-            else {
+            } else {
                 throw new UnprocessableEntityException("No time is set");
             }
 
