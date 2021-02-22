@@ -48,19 +48,18 @@ public class ObservationRoutes extends RouteBuilder {
                 .process(defaultExceptionHandler);
 
         from("fhir-create-observation:fhirConsumer?fhirContext=#fhirContext")
-                .setProperty("DebugMapping", simple("${properties:fhir-bridge.debug}"))
-                .onCompletion()
+            .onCompletion()
                 .process("auditCreateResourceProcessor")
-                .end()
-                .process(requestValidator)
-                .to("direct:process-observation");
+            .end()
+            .process(requestValidator)
+            .to("direct:process-observation");
 
         from("direct:process-observation")
-                .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(observationDao, "create"))
-                .process(ehrIdLookupProcessor)
-                .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
-                .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
-                .process(resourceResponseProcessor);
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(observationDao, "create"))
+            .process(ehrIdLookupProcessor)
+            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
+            .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
+            .process(resourceResponseProcessor);
         // @formatter:on
     }
 }
