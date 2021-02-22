@@ -36,10 +36,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
         create("create-blood-pressure.json");
     }
 
-    @Test
-    void createBodyHeight() throws IOException {
-        create("create-body-height.json");
-    }
 
     @Test
     void createBodyTemp() throws IOException {
