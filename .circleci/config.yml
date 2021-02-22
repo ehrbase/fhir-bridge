@@ -47,7 +47,23 @@ workflows:
                     only:
                         - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
 
-
+  nightly_build:
+        triggers:
+            - schedule:
+                cron: "0 21 * * *"
+                filters:
+                    branches:
+                        only:
+                            - master
+        jobs:
+            - build-and-test-fhirbridge:
+               context:
+                   - org-global
+            - merge_to_nightly_build:
+                context:
+                   - org-global
+                requires:
+                      - build-and-test-fhirbridge
 
 
 
@@ -166,7 +182,17 @@ jobs:
                       docker push ehrbase/fhir-bridge:$TAG
 
 
-
+    merge_to_nightly_build:
+      docker:
+            - image: circleci/openjdk:stretch
+      steps:
+        - run:
+              name: Merge master to nightly-builds branch
+              command: |
+                      - git checkout master
+                      - git pull
+                      - git checkout nightly-builds
+                      - git merge master
 
 
 
