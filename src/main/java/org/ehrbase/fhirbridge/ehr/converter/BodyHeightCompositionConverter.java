@@ -41,7 +41,6 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         ZonedDateTime fhirEffectiveDateTime = null;
         try {
 
-
             if(observation.hasEffectiveDateTimeType()) {
 
                 // default for every observation
@@ -54,6 +53,9 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
                 grosseLangeObservation.setTimeValue(fhirEffectiveDateTime);
                 grosseLangeObservation.setOriginValue(fhirEffectiveDateTime);
             }
+            else {
+                throw new UnprocessableEntityException("No time is set");
+            }
 
             grosseLangeObservation.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
             grosseLangeObservation.setSubject(new PartySelf());
@@ -61,7 +63,6 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
             // special mapping content
             grosseLangeObservation.setGrosseLangeUnits(observation.getValueQuantity().getCode());
 
-            //BSa Hier ist nicht sichtbar, ob Körpergröße oder Geburt gesetzt wird -> woher die Info?
             grosseLangeObservation.setGrosseLangeMagnitude(observation.getValueQuantity().getValue().doubleValue());
 
         } catch (Exception e) {
@@ -71,7 +72,6 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         result.setGrosseLange(grosseLangeObservation);
 
         // Required fields by API
-        //BSa Wird hier noch was automatisiert?
         result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
         result.setLocation("test");
         result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);

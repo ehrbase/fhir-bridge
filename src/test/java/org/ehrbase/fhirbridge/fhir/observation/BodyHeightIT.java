@@ -24,8 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class BodyHeightIT extends AbstractMappingTestSetupIT {
 
     public BodyHeightIT() {
-        // directory of fhir-json-examples: /src/test/resources/Observation
-        // end the path with backslash!
         super("Observation/BodyHeight/", Observation.class); //fhir-Resource
     }
 
@@ -104,12 +102,11 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
         assertEquals(0, diff.getChanges().size());
     }
 
-   // plus eine invalide json erzeugen -> prüfen, dass jede erforderliche exception fliegt
-/*    @Test
+    @Test
     void createInvalidBefund() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("create-radiology-report-invalid-befund.json"));
-        assertEquals("The SNOMED code: asdasd, is not supported for radiology report !", exception.getMessage());
-    }*/
+        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("create-body-height-loinc-datetime_invalid.json"));
+        assertEquals("No time is set", exception.getMessage());
+    }
 
     // #####################################################################################
     // check exceptions
