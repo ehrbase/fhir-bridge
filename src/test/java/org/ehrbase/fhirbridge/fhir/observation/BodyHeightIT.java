@@ -3,10 +3,12 @@ package org.ehrbase.fhirbridge.fhir.observation;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.KorpergrosseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.definition.GrosseLangeObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
@@ -104,7 +106,7 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createInvalidBefund() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("create-body-height-loinc-datetime_invalid.json"));
+        Exception exception = executeMappingException("create-body-height-loinc-datetime_invalid.json");
         assertEquals("No time is set", exception.getMessage());
     }
 
@@ -125,10 +127,12 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
     }
 
     @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource bodyHeightResource) {
+    public Exception executeMappingException(String path) throws IOException {
+        Observation obs = (Observation) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            new BodyHeightCompositionConverter().toComposition((Observation) bodyHeightResource);
+            new BodyHeightCompositionConverter().toComposition(obs);
         });
     }
+
 
 }
