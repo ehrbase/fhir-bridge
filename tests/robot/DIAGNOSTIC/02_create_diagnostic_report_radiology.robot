@@ -23,7 +23,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Peter Wohlfarth
-Force Tags              diagnostic_report_create    diagnostic_report    diagnostic_report_radiology    invalid    create
+Force Tags              diagnostic_create    diagnostic-report    diagnostic-report-radiology    invalid    create
 
 
 *** Variables ***
@@ -33,20 +33,178 @@ ${randinteger}                  ${12345}
 
 *** Test Cases ***
 
-001 Resource type
-002 category
-003 code 
-004 conclusionCode
-005 conclusion
+001 Create Diagnostic Report Radiology (Invalid/Missing 'resourceType')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-report-normal-finding.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
+	...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n                
+	[Template]		    create Diagnostic Report Radiology with ehr reference
+	[Tags]          	resourceType
+
+	# FIELD/PATH					VALUE							HTTP
+	# 																CODE
+	$.resourceType					missing							422
+	$.resourceType					${randstring}					422
+	$.resourceType					EMPTY							422
+	$.resourceType					${randinteger}					422
+
+
+
+002 Create Diagnostic Report Radiology (Invalid/Missing 'category')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-report-normal-finding.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Category`` \n\n
+	...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n               
+	[Template]			create Diagnostic Report Radiology with ehr reference
+	[Tags]              category
+
+	# FIELD/PATH							VALUE					HTTP
+	# 																CODE
+
+	#invalid coding
+	$.category[0].coding    				missing					422
+	$.category[0].coding    				EMPTY					422
+	$.category[0].coding					${{ [] }}				422
+	$.category[0].coding					${{ {} }}				422
+	$.category[0].coding					${{ [{}] }}				422
+
+	#invalid code 0
+	$.category[0].coding[0].code    		EMPTY    	    		422
+	$.category[0].coding[0].code    		${randstring}	    	422
+	$.category[0].coding[0].code    		${randinteger}	    	422
+	$.category[0].coding[0].code 			${{ [] }}				422
+	$.category[0].coding[0].code 			${{ {} }}				422
+	$.category[0].coding[0].code 			${{ [{}] }}				422
+
+	# invaild system 0
+	$.category[0].coding[0].system    		EMPTY    	    		422
+	$.category[0].coding[0].system    		${randstring}	    	422
+	$.category[0].coding[0].system    		${randinteger}	    	422
+	$.category[0].coding[0].system    		http://foobar.de      	422
+	$.category[0].coding[0].system 			${{ [] }}				422
+	$.category[0].coding[0].system 			${{ {} }}				422
+	$.category[0].coding[0].system 			${{ [{}] }}				422
+
+
+
+003 Create Diagnostic Report Radiology (Invalid/Missing 'code')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-report-normal-finding.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Code`` \n\n
+	...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n                 
+	[Template]			create Diagnostic Report Radiology with ehr reference
+	[Tags]              code
+
+	# FIELD/PATH							VALUE					HTTP
+	# 																CODE
+
+	# invalid code
+	$.code									missing					422
+	$.code									EMPTY					422
+	$.code									${{ [] }}				422
+	$.code									${{ {} }}				422
+	$.code									${{ [{}] }}				422
+
+	# invalid coding
+	$.code.coding   	 					missing					422
+	$.code.coding	    					EMPTY					422
+	$.code.coding							${{ [] }}				422
+	$.code.coding							${{ {} }}				422
+	$.code.coding							${{ [{}] }}				422
+
+	# invalid Code Coding 0 System
+	$.code.coding[0].system					EMPTY					422
+	$.code.coding[0].system					${randstring}			422
+	$.code.coding[0].system					${randinteger}			422
+	$.code.coding[0].system      			${{ [] }}				422
+	$.code.coding[0].system      			${{ {} }}				422
+	$.code.coding[0].system      			${{ [{}] }}				422
+
+	# invalid Code Coding 0 Code
+	$.code.coding[0].code					EMPTY					422
+	$.code.coding[0].code					${randinteger}			422
+	$.code.coding[0].code      			    ${{ [] }}				422
+	$.code.coding[0].code      			    ${{ {} }}				422
+	$.code.coding[0].code      			    ${{ [{}] }}				422
+
+
+
+004 Create Diagnostic Report Radiology (Invalid/Missing 'conclusion')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-report-normal-finding.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``PARAMETER`` \n\n
+	...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n                
+	[Template]		    create Diagnostic Report Radiology with ehr reference
+	[Tags]          	conclusion    not-ready    not-ready_bug
+
+	# FIELD/PATH					VALUE							HTTP
+	# 																CODE
+	$.conclusion					missing							422
+	$.conclusion					${randstring}					422
+	$.conclusion					EMPTY							422
+	$.conclusion					${randinteger}					422
+	
+
+
+005 Create Diagnostic Report Radiology (Invalid/Missing 'conclusionCode')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-report-normal-finding.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``PARAMETER`` \n\n
+	...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n                
+	[Template]		    create Diagnostic Report Radiology with ehr reference
+	[Tags]          	conclusionCode    not-ready    not-ready_bug
+
+	# FIELD/PATH							VALUE					HTTP
+	# 																CODE
+
+	# invalid code
+	$.conclusionCode						missing					422
+	$.conclusionCode						EMPTY					422
+	$.conclusionCode						${{ [] }}				422
+	$.conclusionCode						${{ {} }}				422
+	$.conclusionCode						${{ [{}] }}				422
+
+	# invalid coding
+	$.conclusionCode.coding   	 			missing					422
+	$.conclusionCode.coding	    			EMPTY					422
+	$.conclusionCode.coding					${{ [] }}				422
+	$.conclusionCode.coding					${{ {} }}				422
+	$.conclusionCode.coding					${{ [{}] }}				422
+
+	# invalid Code Coding 0 System
+	$.conclusionCode.coding[0].system		EMPTY					422
+	$.conclusionCode.coding[0].system		${randstring}			422
+	$.conclusionCode.coding[0].system		${randinteger}			422
+	$.conclusionCode.coding[0].system      	${{ [] }}				422
+	$.conclusionCode.coding[0].system      	${{ {} }}				422
+	$.conclusionCode.coding[0].system      	${{ [{}] }}				422
+
+	# invalid Code Coding 0 Code
+	$.conclusionCode.coding[0].code			EMPTY					422
+	$.conclusionCode.coding[0].code			${randinteger}			422
+	$.conclusionCode.coding[0].code      	${{ [] }}				422
+	$.conclusionCode.coding[0].code      	${{ {} }}				422
+	$.conclusionCode.coding[0].code      	${{ [{}] }}				422
+
 
 
 
 006 Create Diagnostic Report Radiology (Invalid/Missing 'subject')
-    [Documentation]     1. *LOAD* _create-respiratory-rate.json_ \n\n
+    [Documentation]     1. *LOAD* _create-radiology-report-normal-finding.json_ \n\n
 	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
     ...                 3. *POST* example JSON to observation endpoint \n\n
 	...                 4. *VALIDATE* the response status              
-	[Template]		    create Respiratory Rate w/o ehr reference 
+	[Template]		    create Diagnostic Report Radiology w/o ehr reference 
     [Tags]          	subject
 
 	# FIELD/PATH					VALUE							HTTP
@@ -82,6 +240,14 @@ ${randinteger}                  ${12345}
 	
 	# comment: random uuid												
     $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
+
+
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# BUG TRACE
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BUG TRACE 01 Create Diagnostic Report Radiology (Invalid/Missing 'conclusion')
+BUG TRACE 02 Create Diagnostic Report Radiology (Invalid/Missing 'conclusionCode')
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
