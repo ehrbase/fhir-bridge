@@ -97,6 +97,11 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
+    void createSofaScore1() throws IOException {
+       create("create-sofa-score-cardiovuskular-score-1.json");
+    }
+
+    @Test
     void createSmokingStatus() throws IOException {
         create("create-smoking-status.json");
     }
