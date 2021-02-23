@@ -23,7 +23,9 @@ public class BildgebendesUntersuchungsergebnisConverter {
         bildgebendesUntersuchungsergebnisObservation.setSubject(new PartySelf());
 
         mapNameDerUntersuchung(bildgebendesUntersuchungsergebnisObservation, diagnosticReport.getCode().getCoding());
-        mapBefund(bildgebendesUntersuchungsergebnisObservation, diagnosticReport.getConclusion());
+        if(diagnosticReport.getConclusion() != null){
+            mapBefund(bildgebendesUntersuchungsergebnisObservation, diagnosticReport.getConclusion());
+        }
         return List.of(bildgebendesUntersuchungsergebnisObservation);
     }
 
