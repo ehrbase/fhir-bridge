@@ -1,12 +1,12 @@
-package org.ehrbase.fhirbridge.ehr.converter.sofascore;
+package org.ehrbase.fhirbridge.ehr.converter;
 
-public enum SofaScoreTerminologyIds {
+public enum TerminologyIdCode {
 
     LOCAL("local");
 
     private final String terminologyId;
 
-    SofaScoreTerminologyIds(String terminologyId){
+    TerminologyIdCode(String terminologyId){
         this.terminologyId = terminologyId;
     }
 
