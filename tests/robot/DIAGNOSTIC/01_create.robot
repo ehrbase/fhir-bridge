@@ -24,7 +24,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 ...                                                            Authorization=${AUTHORIZATION['Authorization']}
 # ...															   Authorization=${AUTHORIZATION['Authorization']}
 
-Force Tags              diagnostic-report_create    create
+Force Tags              diagnostic_create    create
 
 
 
