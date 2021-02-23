@@ -121,7 +121,7 @@ jobs:
             - save-jacoco-coverage-report
             - save-fhirbridge-workspace
             - sonarcloud/scan:
-                cache_version: 1
+                cache_version: 2
 
 
     tag-version:
