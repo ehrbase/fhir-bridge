@@ -180,8 +180,8 @@ create observation lab
 
 
 create sofa score
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Sofa Score    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create observation
