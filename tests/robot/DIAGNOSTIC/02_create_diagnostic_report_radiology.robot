@@ -38,7 +38,7 @@ ${randinteger}                  ${12345}
 	...                 2. *LOAD* _create-radiology-report-normal-finding.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
-	...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 5. *POST* example JSON to diagnostic endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
 	[Template]		    create Diagnostic Report Radiology with ehr reference
 	[Tags]          	resourceType
@@ -57,7 +57,7 @@ ${randinteger}                  ${12345}
 	...                 2. *LOAD* _create-radiology-report-normal-finding.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Category`` \n\n
-	...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 5. *POST* example JSON to diagnostic endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n               
 	[Template]			create Diagnostic Report Radiology with ehr reference
 	[Tags]              category
@@ -96,7 +96,7 @@ ${randinteger}                  ${12345}
 	...                 2. *LOAD* _create-radiology-report-normal-finding.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Code`` \n\n
-	...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 5. *POST* example JSON to diagnostic endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                 
 	[Template]			create Diagnostic Report Radiology with ehr reference
 	[Tags]              code
@@ -140,7 +140,7 @@ ${randinteger}                  ${12345}
 	...                 2. *LOAD* _create-radiology-report-normal-finding.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``PARAMETER`` \n\n
-	...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 5. *POST* example JSON to diagnostic endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
 	[Template]		    create Diagnostic Report Radiology with ehr reference
 	[Tags]          	conclusion    not-ready    not-ready_bug
@@ -159,7 +159,7 @@ ${randinteger}                  ${12345}
 	...                 2. *LOAD* _create-radiology-report-normal-finding.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``PARAMETER`` \n\n
-	...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 5. *POST* example JSON to diagnostic endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
 	[Template]		    create Diagnostic Report Radiology with ehr reference
 	[Tags]          	conclusionCode    not-ready    not-ready_bug
@@ -202,7 +202,7 @@ ${randinteger}                  ${12345}
 006 Create Diagnostic Report Radiology (Invalid/Missing 'subject')
     [Documentation]     1. *LOAD* _create-radiology-report-normal-finding.json_ \n\n
 	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
-    ...                 3. *POST* example JSON to observation endpoint \n\n
+    ...                 3. *POST* example JSON to diagnostic endpoint \n\n
 	...                 4. *VALIDATE* the response status              
 	[Template]		    create Diagnostic Report Radiology w/o ehr reference 
     [Tags]          	subject
