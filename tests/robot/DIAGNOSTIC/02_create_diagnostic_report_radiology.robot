@@ -167,34 +167,34 @@ ${randinteger}                  ${12345}
 	# FIELD/PATH							VALUE					HTTP
 	# 																CODE
 
-	# invalid code
+	# invalid conclusionCode
 	$.conclusionCode						missing					422
 	$.conclusionCode						EMPTY					422
 	$.conclusionCode						${{ [] }}				422
 	$.conclusionCode						${{ {} }}				422
 	$.conclusionCode						${{ [{}] }}				422
 
-	# invalid coding
-	$.conclusionCode.coding   	 			missing					422
-	$.conclusionCode.coding	    			EMPTY					422
-	$.conclusionCode.coding					${{ [] }}				422
-	$.conclusionCode.coding					${{ {} }}				422
-	$.conclusionCode.coding					${{ [{}] }}				422
+	# invalid conclusionCode coding
+	$.conclusionCode[0].coding   	 			missing					422
+	$.conclusionCode[0].coding	    			EMPTY					422
+	$.conclusionCode[0].coding					${{ [] }}				422
+	$.conclusionCode[0].coding					${{ {} }}				422
+	$.conclusionCode[0].coding					${{ [{}] }}				422
 
-	# invalid Code Coding 0 System
-	$.conclusionCode.coding[0].system		EMPTY					422
-	$.conclusionCode.coding[0].system		${randstring}			422
-	$.conclusionCode.coding[0].system		${randinteger}			422
-	$.conclusionCode.coding[0].system      	${{ [] }}				422
-	$.conclusionCode.coding[0].system      	${{ {} }}				422
-	$.conclusionCode.coding[0].system      	${{ [{}] }}				422
+	# invalid conclusionCode Coding 0 System
+	$.conclusionCode[0].coding[0].system		EMPTY					422
+	$.conclusionCode[0].coding[0].system		${randstring}			422
+	$.conclusionCode[0].coding[0].system		${randinteger}			422
+	$.conclusionCode[0].coding[0].system      	${{ [] }}				422
+	$.conclusionCode[0].coding[0].system      	${{ {} }}				422
+	$.conclusionCode[0].coding[0].system      	${{ [{}] }}				422
 
-	# invalid Code Coding 0 Code
-	$.conclusionCode.coding[0].code			EMPTY					422
-	$.conclusionCode.coding[0].code			${randinteger}			422
-	$.conclusionCode.coding[0].code      	${{ [] }}				422
-	$.conclusionCode.coding[0].code      	${{ {} }}				422
-	$.conclusionCode.coding[0].code      	${{ [{}] }}				422
+	# invalid conclusionCode Coding 0 Code
+	$.conclusionCode[0].coding[0].code			EMPTY					422
+	$.conclusionCode[0].coding[0].code			${randinteger}			422
+	$.conclusionCode[0].coding[0].code      	${{ [] }}				422
+	$.conclusionCode[0].coding[0].code      	${{ {} }}				422
+	$.conclusionCode[0].coding[0].code      	${{ [{}] }}				422
 
 
 
@@ -246,8 +246,7 @@ ${randinteger}                  ${12345}
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Diagnostic Report Radiology (Invalid/Missing 'conclusion')
-BUG TRACE 02 Create Diagnostic Report Radiology (Invalid/Missing 'conclusionCode')
+BUG TRACE 01 Create Diagnostic Report Radiology (Invalid/Missing 'conclusionCode')
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
