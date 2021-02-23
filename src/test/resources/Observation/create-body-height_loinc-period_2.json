@@ -1,0 +1,46 @@
+{
+  "resourceType": "Observation",
+  "id": "23499ea6-d046-4e91-b7ab-d9cf040add72",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"
+    ]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "vital-signs"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "8302-2",
+        "display": "Body height"
+      }
+    ],
+    "text": "Body height"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "effectivePeriod": {
+    "start": "2020-10-02",
+    "end": "2020-10-02"
+  },
+  "valueQuantity": {
+    "value": 167,
+    "unit": "centimeter",
+    "system": "http://unitsofmeasure.org",
+    "code": "cm"
+  }
+}

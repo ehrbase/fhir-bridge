@@ -6,7 +6,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
-import org.ehrbase.fhirbridge.fhir.util.ResourceUtils;
+import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r4.model.OperationOutcome.IssueSeverity;
 import org.hl7.fhir.r4.model.OperationOutcome.IssueType;
@@ -46,7 +46,7 @@ public class ResourceProfileValidator implements Processor, MessageSourceAware {
         OperationOutcome operationOutcome = new OperationOutcome();
         Class<? extends Resource> resourceType = resource.getClass();
 
-        List<String> profiles = ResourceUtils.getProfiles(resource);
+        List<String> profiles = Resources.getProfileUris(resource);
         if (profiles.isEmpty()) {
             Profile defaultProfile = Profile.getDefaultProfile(resourceType);
             if (defaultProfile == null) {

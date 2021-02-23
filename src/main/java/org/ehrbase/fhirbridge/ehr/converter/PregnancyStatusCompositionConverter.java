@@ -78,21 +78,26 @@ public class PregnancyStatusCompositionConverter implements CompositionConverter
 
 
         // map result status
-        Coding statusCode = observation.getValueCodeableConcept().getCoding().get(0);
+        if (!observation.getValueCodeableConcept().isEmpty() && !observation.getValueCodeableConcept().getCoding().isEmpty()) {
 
-        // TODO: this only considers LOINC cases
-        switch (statusCode.getCode()) {
-            case "LA15173-0": // pregnant
-                result.setStatusDefiningcode(StatusDefiningcode.SCHWANGER);
-                break;
-            case "LA26683-5": // not pregnant
-                result.setStatusDefiningcode(StatusDefiningcode.NICHT_SCHWANGER);
-                break;
-            case "LA4489-6": // unknown
-                result.setStatusDefiningcode(StatusDefiningcode.UNBEKANNT);
-                break;
-            default:
-                throw new UnprocessableEntityException("Status code " + statusCode.getCode() + " is not supported");
+            Coding statusCode = observation.getValueCodeableConcept().getCoding().get(0);
+
+            // TODO: this only considers LOINC cases
+            switch (statusCode.getCode()) {
+                case "LA15173-0": // pregnant
+                    result.setStatusDefiningcode(StatusDefiningcode.SCHWANGER);
+                    break;
+                case "LA26683-5": // not pregnant
+                    result.setStatusDefiningcode(StatusDefiningcode.NICHT_SCHWANGER);
+                    break;
+                case "LA4489-6": // unknown
+                    result.setStatusDefiningcode(StatusDefiningcode.UNBEKANNT);
+                    break;
+                default:
+                    throw new UnprocessableEntityException("Status code " + statusCode.getCode() + " is not supported");
+            }
+        } else {
+            result.setStatusDefiningcode(StatusDefiningcode.UNBEKANNT);
         }
 
         return result;

@@ -21,9 +21,10 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...                                                            Authorization=${AUTHORIZATION['Authorization']}
+# ...															   Authorization=${AUTHORIZATION['Authorization']}
 
-Force Tags              create
+Force Tags              diagnostic_create    create
 
 
 
@@ -39,8 +40,9 @@ Force Tags              create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to diagnostic endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diagnostic-report    valid
+    [Tags]              diagnostic-report    valid   xxx
 
+    Log Many    ${AUTHORIZATION}
     ehr.create new ehr                      000_ehr_status.json
     diagnostic.create diagnostic report     create-diagnosticReport.json 
     diagnostic.validate response - 201

@@ -38,6 +38,12 @@ validate response - 201
     String     response body meta versionId    1
 
 
+validate response - 422 (w/o error message)
+    [Arguments]     ${http_status_code}
+                    Integer     response status    ${http_status_code}
+                    String      response body resourceType    OperationOutcome
+
+
 #                                            .
 #                                          .o8
 #  .ooooo.  oooo d8b  .ooooo.   .oooo.   .o888oo  .ooooo.
@@ -85,6 +91,26 @@ create extracorporeal membrane oxygenation
 
 
 create extracorporeal membrane oxygenation with status change
+    [Arguments]         ${text}    ${status}    ${example_json}
+    POST /Procedure with ehr reference with status change    ${text}    ${status}    ${example_json}
+
+
+create respiratory therapies
+    [Arguments]         ${text}    ${example_json}
+    POST /Procedure with ehr reference    ${text}    ${example_json}
+
+
+create respiratory therapies with status change
+    [Arguments]         ${text}    ${status}    ${example_json}
+    POST /Procedure with ehr reference with status change    ${text}    ${status}    ${example_json}
+
+
+create apheresis
+    [Arguments]         ${text}    ${example_json}
+    POST /Procedure with ehr reference    ${text}    ${example_json}
+
+
+create apheresis with status change
     [Arguments]         ${text}    ${status}    ${example_json}
     POST /Procedure with ehr reference with status change    ${text}    ${status}    ${example_json}
 

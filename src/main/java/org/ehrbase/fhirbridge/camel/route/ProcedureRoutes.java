@@ -6,8 +6,9 @@ import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
+import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
+import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.mapper.ProcedureRowMapper;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
@@ -22,17 +23,17 @@ public class ProcedureRoutes extends RouteBuilder {
 
     private final ResourceProfileValidator requestValidator;
 
-    private final PatientIdProcessor patientIdProcessor;
+    private final EhrIdLookupProcessor ehrIdLookupProcessor;
 
     private final DefaultExceptionHandler defaultExceptionHandler;
 
     public ProcedureRoutes(IFhirResourceDao<Procedure> procedureDao,
                            ResourceProfileValidator requestValidator,
-                           PatientIdProcessor patientIdProcessor,
+                           EhrIdLookupProcessor ehrIdLookupProcessor,
                            DefaultExceptionHandler defaultExceptionHandler) {
         this.procedureDao = procedureDao;
         this.requestValidator = requestValidator;
-        this.patientIdProcessor = patientIdProcessor;
+        this.ehrIdLookupProcessor = ehrIdLookupProcessor;
         this.defaultExceptionHandler = defaultExceptionHandler;
     }
 
@@ -50,19 +51,19 @@ public class ProcedureRoutes extends RouteBuilder {
             .bean(procedureDao, "create(${body})")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
-            .process(patientIdProcessor)
+            .process(ehrIdLookupProcessor)
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#procedureCompositionConverter")
-            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+            .process(new ResourceResponseProcessor());
 
         from("fhir-find-procedure:fhirConsumer?fhirContext=#fhirContext")
             .onException(Exception.class)
                 .process(defaultExceptionHandler)
             .end()
             .setHeader(AqlConstants.AQL_QUERY, () -> Query.buildNativeQuery(
-                "SELECT c "+
-                "FROM EHR e CONTAINS COMPOSITION c " +
+                "SELECT c " +
+                 "FROM EHR e CONTAINS COMPOSITION c " +
                 "WHERE c/archetype_details/template_id/value = 'Prozedur' " +
-                    "AND e/ehr_status/subject/external_ref/id/value = $subjectId", ProzedurComposition.class))
+                  "AND e/ehr_status/subject/external_ref/id/value = $subjectId", ProzedurComposition.class))
             .to("ehr-aql:aqlProducer?rowMapper=#procedureRowMapper");
         // @formatter:on
     }

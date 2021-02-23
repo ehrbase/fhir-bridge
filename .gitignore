@@ -12,6 +12,9 @@ venv
 
 # Robot Tests
 **results**
+tests/log.html
+tests/output.xml
+tests/report.html
 
 # VSCode
 .classpath
@@ -20,4 +23,9 @@ venv
 .settings/
 .vscode/**
 
+# VSCode REST Client
+# files for local usage only!
+local*.http
+
 fhir-bridge.iml
+src/main/resources/MappingOutput.json
