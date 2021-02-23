@@ -61,106 +61,106 @@ class ConditionIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createDiagnoseChronicLiverDisease() throws IOException {
-        create("Condition/create-chronic-liver-disease.json");
-        create("Condition/create-chronic-liver-disease-autoimmune.json");
-        create("Condition/create-chronic-liver-disease-chronic-viral-hepatitis.json");
-        create("Condition/create-chronic-liver-disease-cirrhosis-of-liver.json");
-        create("Condition/create-chronic-liver-disease-steatosis-of-liver.json");
+        create("create-chronic-liver-disease.json");
+        create("create-chronic-liver-disease-autoimmune.json");
+        create("create-chronic-liver-disease-chronic-viral-hepatitis.json");
+        create("create-chronic-liver-disease-cirrhosis-of-liver.json");
+        create("create-chronic-liver-disease-steatosis-of-liver.json");
     }
 
     @Test
     void createDiagnoseChronicLungDisease() throws IOException {
-        create("Condition/create-chronic-lung-disease.json");
-        create("Condition/create-chronic-lung-disease-asthma.json");
-        create("Condition/create-chronic-lung-disease-fibrosis-of-lung.json");
-        create("Condition/create-chronic-lung-disease-obstructive-sleep-apnea.json");
-        create("Condition/create-chronic-lung-disease-pulmonary-hypertension.json");
-        create("Condition/create-chronic-lung-disease-sleep-apnea.json");
-        create("Condition/create-chronic-lung-disease-with-alveolar-hypoventilation.json");
-        create("Condition/create-chronic-obstructive-lung-disease.json");
+        create("create-chronic-lung-disease.json");
+        create("create-chronic-lung-disease-asthma.json");
+        create("create-chronic-lung-disease-fibrosis-of-lung.json");
+        create("create-chronic-lung-disease-obstructive-sleep-apnea.json");
+        create("create-chronic-lung-disease-pulmonary-hypertension.json");
+        create("create-chronic-lung-disease-sleep-apnea.json");
+        create("create-chronic-lung-disease-with-alveolar-hypoventilation.json");
+        create("create-chronic-obstructive-lung-disease.json");
     }
 
     @Test
     void createDiagnoseDiabetesMellitus() throws IOException {
-        create("Condition/create-diabetes-mellitus.json");
-        create("Condition/create-diabetes-mellitus-type-1.json");
-        create("Condition/create-diabetes-mellitus-type-2.json");
-        create("Condition/create-diabetes-mellitus-type-2-insulin-treated.json");
+        create("create-diabetes-mellitus.json");
+        create("create-diabetes-mellitus-type-1.json");
+        create("create-diabetes-mellitus-type-2.json");
+        create("create-diabetes-mellitus-type-2-insulin-treated.json");
     }
 
     @Test
     void createDiagnoseMalignantNeoplasticDisease() throws IOException {
-        create("Condition/create-malignant-neoplastic-disease-absent.json");
-        create("Condition/create-malignant-neoplastic-disease-present-active.json");
-        create("Condition/create-malignant-neoplastic-disease-present-remission.json");
-        create("Condition/create-malignant-neoplastic-disease-unknown.json");
+        create("create-malignant-neoplastic-disease-absent.json");
+        create("create-malignant-neoplastic-disease-present-active.json");
+        create("create-malignant-neoplastic-disease-present-remission.json");
+        create("create-malignant-neoplastic-disease-unknown.json");
     }
 
 
     @Test
     void createDiagnoseRheumatologicalImmunologicalDiseases() throws IOException {
-        create("Condition/create-rheumatological-immunological-diseases-rheumatism.json");
-        create("Condition/create-rheumatological-immunological-diseases-rheumatoid-arthritis.json");
+        create("create-rheumatological-immunological-diseases-rheumatism.json");
+        create("create-rheumatological-immunological-diseases-rheumatoid-arthritis.json");
     }
 
     @Test
     void createDiagnoseHIV() throws IOException {
-        create("Condition/example-human-immunodeficiency-virus-infection1.json");
-        create("Condition/example-human-immunodeficiency-virus-infection2.json");
-        create("Condition/example-human-immunodeficiency-virus-infection3.json");
+        create("example-human-immunodeficiency-virus-infection1.json");
+        create("example-human-immunodeficiency-virus-infection2.json");
+        create("example-human-immunodeficiency-virus-infection3.json");
     }
 
     @Test
     void createDiagnoseCardiovascularDiseases() throws IOException {
-        create("Condition/example-cardiovascular-diseases.json");
+        create("example-cardiovascular-diseases.json");
 
     }
 
     @Test
     void createDiagnoseChronicKidneyDisease() throws IOException {
-        create("Condition/example-chronic-kidney-diseases2.json");
-        create("Condition/example-chronic-kidney-diseases3.json");
-        create("Condition/example-chronic-kidney-diseases4.json");
-        create("Condition/example-chronic-kidney-diseases5.json");
+        create("example-chronic-kidney-diseases2.json");
+        create("example-chronic-kidney-diseases3.json");
+        create("example-chronic-kidney-diseases4.json");
+        create("example-chronic-kidney-diseases5.json");
     }
 
     @Test
     void createDiagnoseChronicNeurologicalMentalDiseases() throws IOException {
-        create("Condition/example-chronic-neurological-mental-diseases.json");
+        create("example-chronic-neurological-mental-diseases.json");
     }
 
     @Test
     void createDiagnoseComplicationsCovid19() throws IOException {
-        create("Condition/example-complications-covid19-0.json");
-        create("Condition/example-complications-covid19-1.json");
-        create("Condition/example-complications-covid19-2.json");
-        create("Condition/example-complications-covid19-3.json");
-        create("Condition/example-complications-covid19-4.json");
-        create("Condition/example-complications-covid19-5.json");
-        create("Condition/example-complications-covid19-6.json");
-        create("Condition/example-complications-covid19-7.json");
-        create("Condition/example-complications-covid19-8.json");
-        create("Condition/example-complications-covid19-9.json");
+        create("example-complications-covid19-0.json");
+        create("example-complications-covid19-1.json");
+        create("example-complications-covid19-2.json");
+        create("example-complications-covid19-3.json");
+        create("example-complications-covid19-4.json");
+        create("example-complications-covid19-5.json");
+        create("example-complications-covid19-6.json");
+        create("example-complications-covid19-7.json");
+        create("example-complications-covid19-8.json");
+        create("example-complications-covid19-9.json");
     }
 
     @Test
     void createDiagnoseOrganRecipient() throws IOException {
-        create("Condition/example-organ-recipient.json");
-        create("Condition/example-organ-recipient2.json");
-        create("Condition/example-organ-recipient3.json");
+        create("example-organ-recipient.json");
+        create("example-organ-recipient2.json");
+        create("example-organ-recipient3.json");
     }
 
     @Test
     void createDiagnoseGastrointerstinalUlcers() throws IOException {
-        create("Condition/example-gastrointestinal-ulcers.json");
-        create("Condition/example-gastrointestinal-ulcers2.json");
-        create("Condition/example-gastrointestinal-ulcers3.json");
+        create("example-gastrointestinal-ulcers.json");
+        create("example-gastrointestinal-ulcers2.json");
+        create("example-gastrointestinal-ulcers3.json");
     }
 
     @Test
     void createDiagnoseDependenceOnVentilator() throws IOException {
-        create("Condition/dependence-on-ventilator.json");
-        create("Condition/dependence-on-ventilator-2.json");
+        create("dependence-on-ventilator.json");
+        create("dependence-on-ventilator-2.json");
     }
 
     @Test
