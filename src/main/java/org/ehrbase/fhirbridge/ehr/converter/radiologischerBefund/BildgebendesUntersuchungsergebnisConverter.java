@@ -7,6 +7,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BefundeDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.NameDerUntersuchungDefiningCode;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 
@@ -23,7 +24,7 @@ public class BildgebendesUntersuchungsergebnisConverter {
         bildgebendesUntersuchungsergebnisObservation.setSubject(new PartySelf());
 
         mapNameDerUntersuchung(bildgebendesUntersuchungsergebnisObservation, diagnosticReport.getCode().getCoding());
-        mapBefund(bildgebendesUntersuchungsergebnisObservation, diagnosticReport.getConclusion());
+        mapBefund(bildgebendesUntersuchungsergebnisObservation, diagnosticReport.getConclusionCode().get(0).getCoding().get(0).getCode());
         return List.of(bildgebendesUntersuchungsergebnisObservation);
     }
 
@@ -36,11 +37,11 @@ public class BildgebendesUntersuchungsergebnisConverter {
     }
 
     private void mapBefund(BildgebendesUntersuchungsergebnisObservation bildgebendesUntersuchungsergebnisObservation, String conclusion){
-       if(conclusion.equals(BefundeDefiningCode.COVID19_TYPISCHER_BEFUND.getValue())){
+       if(conclusion.contains(BefundeDefiningCode.COVID19_TYPISCHER_BEFUND.getCode())){
             bildgebendesUntersuchungsergebnisObservation.setBefundeDefiningCode(BefundeDefiningCode.COVID19_TYPISCHER_BEFUND);
-       }else if(conclusion.equals(BefundeDefiningCode.NORMALBEFUND.getValue())){
+       }else if(conclusion.contains(BefundeDefiningCode.NORMALBEFUND.getCode())){
            bildgebendesUntersuchungsergebnisObservation.setBefundeDefiningCode(BefundeDefiningCode.NORMALBEFUND);
-       }else if(conclusion.equals(BefundeDefiningCode.UNSPEZIFISCHER_BEFUND.getValue())){
+       }else if(conclusion.contains(BefundeDefiningCode.UNSPEZIFISCHER_BEFUND.getCode())){
            bildgebendesUntersuchungsergebnisObservation.setBefundeDefiningCode(BefundeDefiningCode.UNSPEZIFISCHER_BEFUND);
        }else{
            throw new UnprocessableEntityException("The SNOMED code: "+conclusion+", is not supported for radiology report !");
