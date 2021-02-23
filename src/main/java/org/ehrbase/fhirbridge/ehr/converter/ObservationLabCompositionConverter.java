@@ -124,7 +124,9 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
         // cluster . time -> observation . effective_date
         temporal = cluster.getZeitpunktErgebnisStatusValue();
-        result.getEffectiveDateTimeType().setValue(Date.from(Instant.from(temporal)));
+        if (temporal != null) {
+            result.getEffectiveDateTimeType().setValue(Date.from(Instant.from(temporal)));
+        }
 
         // cluster . value -> observation . value
         ProLaboranalytAnalytResultatDvquantity value = ((ProLaboranalytAnalytResultatDvquantity) cluster.getAnalytResultat());
@@ -453,7 +455,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
 
             fhirEffectiveDateTime = fhirObservation.getEffectiveDateTimeType();
-            issuedDateTime = new DateTimeType(fhirObservation.getIssued());
+
         } catch (Exception e) {
             throw new UnprocessableEntityException(e.getMessage());
         }
@@ -491,10 +493,13 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         }
 
         laboranalyt.setZeitpunktValidationValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-        laboranalyt.setZeitpunktErgebnisStatusValue(issuedDateTime.getValueAsCalendar().toZonedDateTime());
+
+        if (!fhirObservation.getIssuedElement().isEmpty()) {
+            issuedDateTime = new DateTimeType(fhirObservation.getIssued());
+            laboranalyt.setZeitpunktErgebnisStatusValue(issuedDateTime.getValueAsCalendar().toZonedDateTime());
+        }
 
         return laboranalyt;
     }
-
 
 }

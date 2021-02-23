@@ -113,7 +113,21 @@ public enum UntersuchterAnalytDefiningcode implements EnumValueSet {
 
     VOLUME_IN_CEREBRAL_SPINAL_FLUID("Lactate [Mass/volume] in Cerebral spinal fluid", null, "LOINC", "27941-4"),
 
-    VOLUME_IN_MIXED_VENOUS_BLOOD_BY_OXIMETRY("Hemoglobin [Mass/volume] in Mixed venous blood by Oximetry", null, "LOINC", "76768-1");
+    VOLUME_IN_MIXED_VENOUS_BLOOD_BY_OXIMETRY("Hemoglobin [Mass/volume] in Mixed venous blood by Oximetry", null, "LOINC", "76768-1"),
+
+    BILIRUBIN_INDIRECT("Bilirubin.indirect [Mass/volume] in Serum or Plasma", null, "LOINC", "1971-1"),
+
+    FERRITIN("Ferritin [Mass/volume] in Serum or Plasma", null, "LOINC", "2276-4"),
+
+    GAMMA_GLUTAMYL("Gamma glutamyl transferase [Enzymatic activity/volume] in Serum or Plasma", null, "LOINC", "2324-2"),
+
+    LACTATE("Lactate [Moles/volume] in Venous blood", null, "LOINC", "2519-7"),
+
+    LYMPHOCYTES("Lymphocytes [#/volume] in Blood by Automated count", null, "LOINC", "731-0"),
+
+    LEUKOCYTES("Leukocytes [#/volume] in Blood by Automated count", null, "LOINC", "6690-2"),
+
+    C_REACTIVE_PROTEIN("C reactive protein [Mass/volume] in Serum or Plasma", null, "LOINC", "1988-5");
 
     private String value;
 

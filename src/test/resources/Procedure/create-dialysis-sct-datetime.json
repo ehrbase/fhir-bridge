@@ -1,0 +1,36 @@
+{
+  "resourceType": "Procedure",
+  "id": "21ed57e3-502d-4bb7-8538-906f6fff3e5a",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dialysis"
+    ]
+  },
+  "status": "not-done",
+  "category": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "277132007",
+        "display": "Therapeutic procedure (procedure)"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "182749009",
+        "display": "Extracorporeal blood irradiation (procedure)"
+      }
+    ],
+    "text": "Dialysis"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "performedDateTime": "2020-10-24"
+}
