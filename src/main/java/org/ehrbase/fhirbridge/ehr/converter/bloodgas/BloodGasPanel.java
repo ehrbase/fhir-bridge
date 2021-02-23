@@ -9,10 +9,6 @@ import org.hl7.fhir.r4.model.Resource;
 import java.util.Optional;
 
 public class BloodGasPanel {
-    private static final String pHUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH";
-    private static final String carbonDioxidePartialPressureUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure";
-    private static final String oxygenPartialPressureUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure";
-    private static final String oxygenSaturationUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation";
 
     private Optional<Observation> bloodGasPanel = Optional.empty();
     private Optional<Observation> pH = Optional.empty();
@@ -36,21 +32,16 @@ public class BloodGasPanel {
     private void setProfiles(Resource resource) {
         try {
             String profileUrl = resource.getMeta().getProfile().get(0).getValue();
-            switch (profileUrl) {
-                case pHUrl:
-                    this.pH = Optional.of((Observation) resource);
-                    break;
-                case carbonDioxidePartialPressureUrl:
-                    this.carbonDioxidePartialPressure = Optional.of((Observation) resource);
-                    break;
-                case oxygenPartialPressureUrl:
-                    this.oxygenPartialPressure = Optional.of((Observation) resource);
-                    break;
-                case oxygenSaturationUrl:
-                    this.oxygenSaturation = Optional.of((Observation) resource);
-                    break;
-                default:
-                    throw new UnprocessableEntityException("Blood gas panel bundle needs to contain only the profiles for the blood gas panel. Please delete profile " + profileUrl + " from the Bundle.");
+            if (BloogGasProfileUrl.PH.getUrl().equals(profileUrl)) {
+                this.pH = Optional.of((Observation) resource);
+            } else if (BloogGasProfileUrl.CARBONDIOXIDE_PARTIAL_PRESSURE.getUrl().equals(profileUrl)) {
+                this.carbonDioxidePartialPressure = Optional.of((Observation) resource);
+            } else if (BloogGasProfileUrl.OXYGENPARTIAL_PRESSURE.getUrl().equals(profileUrl)) {
+                this.oxygenPartialPressure = Optional.of((Observation) resource);
+            } else if (BloogGasProfileUrl.OXYGEN_SATURATION.getUrl().equals(profileUrl)) {
+                this.oxygenSaturation = Optional.of((Observation) resource);
+            } else {
+                throw new UnprocessableEntityException("Blood gas panel bundle needs to contain only the profiles for the blood gas panel. Please delete profile " + profileUrl + " from the Bundle.");
             }
 
         } catch (IndexOutOfBoundsException e) {
