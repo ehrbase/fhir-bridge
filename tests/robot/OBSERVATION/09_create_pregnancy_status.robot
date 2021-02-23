@@ -20,11 +20,11 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...															   Authorization=${AUTHORIZATION['Authorization']}
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Dave Petzold
-Force Tags              observation_create    pregnancy-status    invalid
+Force Tags              observation_create    pregnancy-status    invalid    create
 
 
 
@@ -222,14 +222,12 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	
 	#invalid code 0
 	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
-#	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
 	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
 	
 	#invalid system 0
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
 	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
-#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
 
 
 008 Create Pregnancy Status (Invalid/Missing 'code')
@@ -378,7 +376,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-pregnancy-status.json
-	observation.validate response - 422 (with error message NEW)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
 
@@ -481,23 +479,8 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Pregnancy Status (Invalid/Missing 'category')
-	[Documentation]		Belongs to TC 007! Remove separation when it's fixed!
-	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready    not-ready_bug
-
-	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																CODE
-
-	#invalid code 0
-	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
-	
-	# invalid system 0
-	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${pregnancy_status-url}					Observation.category.0.
-
-
 BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
-	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
+	[Documentation]		Belongs to TC 010! Remove separation when it's fixed! -> fixed that it has now 201 as respone and not 500 anymore
 	[Template]			create pregnancy status with ehr reference
     [Tags]              category    not-ready    not-ready_bug
 
@@ -556,7 +539,7 @@ create pregnancy status with ehr reference
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
 						observation.POST /Observation           Pregnancy Status            ${payload}
-						observation.validate response - 422 (with error message NEW)        ${http_status_code}
+						observation.validate response - 422 (with error message)        ${http_status_code}
 						...															        ${error_message}
 						...															        ${location}
 
@@ -569,7 +552,7 @@ create pregnancy status w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						observation.POST /Observation    Pregnancy Status    ${payload}
-						observation.validate response - 422 (with error message NEW)      ${http_status_code}
+						observation.validate response - 422 (with error message)      ${http_status_code}
 						...															      ${error_message}
 						...															      ${location}
 
@@ -619,7 +602,7 @@ create pregnancy status JSON
 						...    update vCC						${vCCavailabe}									${vCCCodingavailable}			${vCC0System}				${vCC0Code}				${vCC0Display}		AND
                         ...    POST    ${BASE_URL}/Observation    body=${payload}                               AND
                         ...    Output Debug Info To Console                                                     AND
-                        ...    observation.validate response - 422 (with error message NEW)						${http_status_code}    			${error_message}    		${location}
+                        ...    observation.validate response - 422 (with error message)						${http_status_code}    			${error_message}    		${location}
 
 
 generate payload from example json with data absentreason
@@ -652,7 +635,7 @@ create pregnancy status with ehr reference AND data absentreason
 						ehr.create new ehr    000_ehr_status.json
 	${payload}=    		generate payload from example json with data absentreason    ${json_path}    ${value}
 						observation.POST /Observation    pregnancy status    ${payload}
-						observation.validate response - 422 (with error message NEW)     ${http_status_code}
+						observation.validate response - 422 (with error message)     ${http_status_code}
 						...															     ${error_message}
 						...															     ${location}
 

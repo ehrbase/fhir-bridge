@@ -1,0 +1,39 @@
+version: '3'
+services:
+  ehrbase-db:
+    image: ehrbase/ehrbase-postgres:latest
+    ports:
+      - 5432:5432
+    networks:
+      - ehrbase-network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      EHRBASE_USER: ehrbase
+      EHRBASE_PASSWORD: ehrbase
+  ehrbase:
+    image: ehrbase/ehrbase:next
+    ports:
+      - 8080:8080
+    networks:
+      - ehrbase-network
+    environment:
+      DB_URL: jdbc:postgresql://ehrbase-db:5432/ehrbase
+      DB_USER: ehrbase
+      DB_PASS: ehrbase
+      AUTH_TYPE: NONE
+    depends_on:
+      - ehrbase-db
+  fhir-bridge:
+    image: ehrbase/fhir-bridge:next
+    ports:
+      - 8888:8888
+    networks:
+      - ehrbase-network
+    environment:
+      FHIR_BRIDGE_EHRBASE_BASE_URL: http://ehrbase:8080/ehrbase/rest/openehr/v1/
+      SPRING_PROFILES_ACTIVE: dev
+    depends_on:
+      - ehrbase
+networks:
+  ehrbase-network: { }
