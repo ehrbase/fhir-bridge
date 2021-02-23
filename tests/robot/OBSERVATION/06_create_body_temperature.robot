@@ -20,12 +20,13 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...															   Authorization=${AUTHORIZATION['Authorization']}
 Documentation           *NOTE:* The validation of error messages in the tables below depends on system language settings:\n\n
 ...                           Validation of English messages (if the system language is set to English), \n\n
-...                           Validation of German messages (if the system language is set to German)
+...                           Validation of German messages (if the system language is set to German) \n\n
+...                     *Author:* Peter Wohlfarth
 
-Force Tags              create    body-temperature
+Force Tags              observation_create    body-temperature    create
 
 
 *** Variables ***

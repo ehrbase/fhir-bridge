@@ -1,6 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
+import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -23,12 +25,15 @@ public class CompositionConverterResolver implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
+        //diagnostic reports
+        profiles.put(Profile.DIAGNOSTIC_REPORT_LAB, new DiagnosticReportLabCompositionConverter());
+        profiles.put(Profile.DIAGNOSTIC_REPORT_RADIOLOGY, new RadiologischerBefundConverter());
         // Conditions
         profiles.put(Profile.DEFAULT_CONDITION, new DiagnoseCompositionConverter());
         profiles.put(Profile.SYMPTOMS_COVID_19, new SymptomCompositionConverter());
         // Observations
-        profiles.put(Profile.DIAGNOSTIC_REPORT_LAB, new DiagnosticReportLabCompositionConverter());
         profiles.put(Profile.BODY_HEIGHT, new BodyHeightCompositionConverter());
+        profiles.put(Profile.BLOOD_GAS_PANEL, new BloodGasPanelCompositionConverter());
         profiles.put(Profile.BLOOD_PRESSURE, new BloodPressureCompositionConverter());
         profiles.put(Profile.BODY_TEMP, new BodyTemperatureCompositionConverter());
         profiles.put(Profile.BODY_WEIGHT, new BodyWeightCompositionConverter());

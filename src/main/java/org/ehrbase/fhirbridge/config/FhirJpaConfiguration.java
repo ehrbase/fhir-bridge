@@ -82,6 +82,7 @@ public class FhirJpaConfiguration extends BaseR4Config {
         entityManagerFactory.setPersistenceUnitName("HAPI_PU");
         entityManagerFactory.setDataSource(dataSource);
         entityManagerFactory.setJpaPropertyMap(jpaProperties.getProperties());
+        entityManagerFactory.setPackagesToScan("ca.uhn.fhir.jpa.model.entity", "ca.uhn.fhir.jpa.entity", "org.ehrbase.fhirbridge.fhir.support");
         return entityManagerFactory;
     }
 

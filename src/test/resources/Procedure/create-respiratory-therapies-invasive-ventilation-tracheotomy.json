@@ -1,0 +1,54 @@
+{
+    "resourceType": "Procedure",
+    "id": "cc098597-64e0-45c5-988e-fa49bb8d80f2",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"
+      ]
+    },
+    "status": "in-progress",
+    "category": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "277132007",
+          "display": "Therapeutic procedure (procedure)"
+        }
+      ]
+    },
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "40617009",
+          "display": "Artificial respiration (procedure)"
+        }
+      ],
+      "text": "Invasive ventilation (Tracheotomy)"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "performedDateTime": {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+          "valueCode": "unknown"
+        }
+      ]
+    },
+    "usedCode": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "129121000",
+            "display": "Tracheostomy tube, device (physical object)"
+          }
+        ]
+      }
+    ]
+  }

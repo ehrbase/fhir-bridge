@@ -74,6 +74,8 @@ $ docker-compose -f docker-compose-full.yml up
 | `fhir-bridge.fhir.jpa.allow-external-references`           | `true`                                           | Allow remote references.                                    |
 | `fhir-bridge.fhir.validation.terminology.mode`             | `none`                                           | Terminology validation mode: `embedded`, `server`, `none`   |
 | `fhir-bridge.fhir.validation.terminology.server-url`       |                                                  | Base URL of the server used for the terminology validation. |
+| `fhir-bridge.compositon.debug`                             | `false`                                          | Enables that the last executed Mapping is logged            |
+| `fhir-bridge.compositon.output-directory`                  |                                                  | Output directory where last mapping stored                  |
 | `ipf.atna.audit-enabled`                                   | `true`                                           | Whether auditing is enabled.                                |
 | `ipf.atna.audit-repository-host`                           | `localhost`                                      | Host of the ATNA repository to send the events to.          |
 | `ipf.atna.audit-repository-port`                           | `3001`                                           | Port of the ATNA repository to send the events to.          |
