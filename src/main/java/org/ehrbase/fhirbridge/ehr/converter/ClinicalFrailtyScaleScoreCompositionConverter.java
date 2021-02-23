@@ -83,7 +83,7 @@ public class ClinicalFrailtyScaleScoreCompositionConverter implements Compositio
     }
 
     private static class ClinicalFrailty_Mapping_Assessment {
-        private static String local = "local";
+        private static final String local = "local";
         private static final DvOrdinal ClinFrailty_Beurteilung_1_SEHR_FIT = new DvOrdinal(1L,
                 new DvCodedText("1", new CodePhrase(new TerminologyId(local), "at0005")));
         private static final DvOrdinal ClinFrailty_Beurteilung_2_DURCHSCHNITTLICH_AKTIV = new DvOrdinal(2L,
