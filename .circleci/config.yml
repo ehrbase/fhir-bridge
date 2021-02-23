@@ -354,7 +354,6 @@ commands:
                 command: |
                     cd tests/
                     robot -d results/0 -L TRACE \
-                            -i xxx \
                             --skip TODO --skip future \
                             --skiponfailure not-ready robot/
             - run:
