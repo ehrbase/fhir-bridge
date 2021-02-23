@@ -83,25 +83,25 @@ public class ClinicalFrailtyScaleScoreCompositionConverter implements Compositio
     }
 
     private static class ClinicalFrailty_Mapping_Assessment {
-
+        private static String local = "local";
         private static final DvOrdinal ClinFrailty_Beurteilung_1_SEHR_FIT = new DvOrdinal(1L,
-                new DvCodedText("1", new CodePhrase(new TerminologyId("local"), "at0005")));
+                new DvCodedText("1", new CodePhrase(new TerminologyId(local), "at0005")));
         private static final DvOrdinal ClinFrailty_Beurteilung_2_DURCHSCHNITTLICH_AKTIV = new DvOrdinal(2L,
-                new DvCodedText("2", new CodePhrase(new TerminologyId("local"), "at0006")));
+                new DvCodedText("2", new CodePhrase(new TerminologyId(local), "at0006")));
         private static final DvOrdinal ClinFrailty_Beurteilung_3_GUT_ZURECHTKOMMEND = new DvOrdinal(3L,
-                new DvCodedText("3", new CodePhrase(new TerminologyId("local"), "at0007")));
+                new DvCodedText("3", new CodePhrase(new TerminologyId(local), "at0007")));
         private static final DvOrdinal ClinFrailty_Beurteilung_4_VULNERABEL = new DvOrdinal(4L,
-                new DvCodedText("4", new CodePhrase(new TerminologyId("local"), "at0008")));
+                new DvCodedText("4", new CodePhrase(new TerminologyId(local), "at0008")));
         private static final DvOrdinal ClinFrailty_Beurteilung_5_GERINGGRADIG_FRAIL = new DvOrdinal(5L,
-                new DvCodedText("5", new CodePhrase(new TerminologyId("local"), "at0009")));
+                new DvCodedText("5", new CodePhrase(new TerminologyId(local), "at0009")));
         private static final DvOrdinal ClinFrailty_Beurteilung_6_MITTELGRADIG_FRAIL = new DvOrdinal(6L,
-                new DvCodedText("6", new CodePhrase(new TerminologyId("local"), "at0010")));
+                new DvCodedText("6", new CodePhrase(new TerminologyId(local), "at0010")));
         private static final DvOrdinal ClinFrailty_Beurteilung_7_AUSGEPRAGT_FRAIL = new DvOrdinal(7L,
-                new DvCodedText("7", new CodePhrase(new TerminologyId("local"), "at0011")));
+                new DvCodedText("7", new CodePhrase(new TerminologyId(local), "at0011")));
         private static final DvOrdinal ClinFrailty_Beurteilung_8_EXTREM_FRAIL = new DvOrdinal(8L,
-                new DvCodedText("8", new CodePhrase(new TerminologyId("local"), "at0012")));
+                new DvCodedText("8", new CodePhrase(new TerminologyId(local), "at0012")));
         private static final DvOrdinal ClinFrailty_Beurteilung_9_TERMINAL_ERKRANKT = new DvOrdinal(9L,
-                new DvCodedText("9", new CodePhrase(new TerminologyId("local"), "at0013")));
+                new DvCodedText("9", new CodePhrase(new TerminologyId(local), "at0013")));
 
         public DvOrdinal getDVOrdinal(int code) {
             DvOrdinal ret;
