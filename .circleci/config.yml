@@ -353,7 +353,7 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    robot -d results/0 -L TRACE \
+                    robot -v OUTPUT_LEVEL:minimal -d results/0 -L INFO \
                             --skip TODO --skip future \
                             --skiponfailure not-ready robot/
             - run:
@@ -365,7 +365,7 @@ commands:
                         -e obsolete -e libtest \
                         --removekeywords for \
                         --removekeywords wuks \
-                        --loglevel TRACE \
+                        --loglevel INFO \
                         --output NONE \
                         --log NONE \
                         --report NONE \
