@@ -30,7 +30,9 @@ public enum KategorieDefiningcode implements EnumValueSet {
 
   ONCOLOGY("Oncology", null, "SNOMED Clinical Terms", "394593009"),
 
-  GASTROENTEROLOGY("Gastroenterology", null, "SNOMED Clinical Terms", "394584008");
+  GASTROENTEROLOGY("Gastroenterology", null, "SNOMED Clinical Terms", "394584008"),
+
+  VENTILATION_STATUS ("Ventilation status", null, "SNOMED Clinical Terms", "404989005");
 
   private String value;
 
