@@ -105,7 +105,7 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
 
     /*
     @Test
-    void mapCompletedJavers() throws IOException {
+    void  () throws IOException {
         Condition resource = (Condition)  super.testFileLoader.loadResource("create-chronic-liver-disease.json");
 
         GECCODiagnoseCompositionConverter compositionConverter = new GECCODiagnoseCompositionConverter();
