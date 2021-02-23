@@ -94,7 +94,7 @@ Force Tags              observation_create    create
 	[Tags]             	sofa-score    valid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create sofa score    create-sofa-score.json
+	observation.create sofa score  Sofa Score  create-sofa-score-cardiovuskular-score-1.json
     observation.validate response - 201
 
 
