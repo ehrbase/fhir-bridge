@@ -1,0 +1,59 @@
+{
+  "resourceType": "Condition",
+  "id": "4d5600e0-adf9-4399-a773-6ac35e7d9632",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diabetes-mellitus"
+    ]
+  },
+  "clinicalStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+        "code": "active",
+        "display": "Active"
+      }
+    ]
+  },
+  "verificationStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+        "code": "confirmed",
+        "display": "Confirmed"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "410605003",
+        "display": "Confirmed present (qualifier value)"
+      }
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "408475000",
+          "display": "Diabetic medicine"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "73211009",
+        "display": "Diabetes mellitus"
+      }
+    ]
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "recordedDate": "2020-10-06"
+}
