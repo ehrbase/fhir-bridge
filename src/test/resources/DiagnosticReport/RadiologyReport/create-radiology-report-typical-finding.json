@@ -1,6 +1,5 @@
 {
     "resourceType": "DiagnosticReport",
-    "id": "ef35ac3c-da77-42d1-8d6b-284564adad43",
     "meta": {
         "profile": [
             "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnostic-report-radiology"
