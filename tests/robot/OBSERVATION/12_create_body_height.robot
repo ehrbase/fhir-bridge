@@ -448,7 +448,7 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 6. *VALIDATE* outcome against diagnostic text (english + german)
 
     [Tags]             multi
-    [Template]         create body-height    JSON
+    [Template]         create body-height JSON
 #|  resourceType   |          		ID   								|           meta         						|                              identifier                         |	  status  	|                         				category                           					        					   |                                        									code          								|         subject                    |	  DateTime	   | 								valueQuantity  													|  R.-Code  |                                                             diagnostics 							                                              	  |   location
 #|                 |                									|  available  | 			profile  			|  available  |        system         |             value         |             |  available  |  codingavailable  |  				system  									   |    	 code          |  available  |  coding available  |  			0.system	  		|  		0.code	  |    		   0.display 		    |  available  |   Identifier-value   |                 |  available  |		value	      |      unit    	 |  	system       |         code         |           |               				                                    ENG				                                                                  |
 
