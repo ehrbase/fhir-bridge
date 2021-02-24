@@ -227,3 +227,257 @@ Force Tags              observation_create    create
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  create-body-height_snomed-period_2.json
     observation.validate response - 201
+
+
+
+015 Create Heart Rate loinc datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-heart-rate-loinc-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	heart-rate    valid    alternative    datetime    loinc
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create heart rate  Heart Rate  create-heart-rate-loinc-datetime.json
+    observation.validate response - 201
+
+
+016 Create Heart Rate loinc period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-heart-rate-loinc-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	heart-rate    valid    alternative    period    loinc    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create heart rate  Heart Rate  create-heart-rate-loinc-period.json
+    observation.validate response - 201
+
+
+
+017 Create Heart Rate loinc period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-heart-rate-loinc-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	heart-rate    valid    alternative    period_2    loinc    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create heart rate  Heart Rate  create-heart-rate-loinc-period_2.json
+    observation.validate response - 201
+
+
+
+018 Create Heart Rate snomed datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-heart-rate-snomed-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	heart-rate    valid    alternative    datetime    snomed
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create heart rate  Heart Rate  create-heart-rate-snomed-datetime.json
+    observation.validate response - 201
+
+
+
+019 Create Heart Rate snomed period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-heart-rate-loinc-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	heart-rate    valid    alternative    period    snomed    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create heart rate  Heart Rate  create-heart-rate-loinc-period.json
+    observation.validate response - 201
+
+
+
+020 Create Heart Rate snomed period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-heart-rate-loinc-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	heart-rate    valid    alternative    period_2    snomed    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create heart rate  Heart Rate  create-heart-rate-loinc-period_2.json
+    observation.validate response - 201
+
+
+
+021 Create Body Weight loinc datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-weight-loinc-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-weight    valid    alternative    loinc    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body weight  Body Weight  create-body-weight-loinc-datetime.json
+    observation.validate response - 201
+
+
+
+022 Create Body Weight loinc period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-weight-loinc-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-weight    valid    alternative    loinc    period    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body weight  Body Weight  create-body-weight-loinc-period.json
+    observation.validate response - 201
+
+
+
+023 Create Body Weight loinc period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-weight-loinc-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-weight    valid    alternative   loinc    period_2     not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body weight  Body Weight  create-body-weight-loinc-period_2.json
+    observation.validate response - 201
+
+
+
+024 Create Body Weight snomed datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-weight    valid    alternative    snomed    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body weight  Body Weight  create-body-weight-snomed-datetime.json
+    observation.validate response - 201
+
+
+
+025 Create Body Weight snomed period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-weight-snomed-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-weight    valid    alternative    snomed    period    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body weight  Body Weight  create-body-weight-snomed-period.json
+    observation.validate response - 201
+
+
+
+026 Create Body Weight snomed period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-weight-snomed-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-weight    valid    alternative    snomed    period_2    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body weight  Body Weight  create-body-weight-snomed-period_2.json
+    observation.validate response - 201
+
+
+
+027 Create Body Temperature loinc datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-temp-loinc-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-temperature    valid    alternative    loinc    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body temperature  Body Temperature  create-body-temp-loinc-datetime.json
+    observation.validate response - 201
+
+
+
+028 Create Body Temperature loinc period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-temp-loinc-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-temperature    valid    alternative    loinc    period    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body temperature  Body Temperature  create-body-temp-loinc-period.json
+    observation.validate response - 201
+
+
+
+029 Create Body Temperature loinc period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-temp-loinc-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-temperature    valid    alternative    loinc    period_2    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body temperature  Body Temperature  create-body-temp-loinc-period_2.json
+    observation.validate response - 201
+
+
+
+030 Create Body Temperature snomed datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-temp-snomed-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-temperature    valid    alternative    snomed    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body temperature  Body Temperature  create-body-temp-snomed-datetime.json
+    observation.validate response - 201
+
+
+
+031 Create Body Temperature snomed period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-temp-snomed-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-temperature    valid    alternative    snomed    period    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body temperature  Body Temperature  create-body-temp-snomed-period.json
+    observation.validate response - 201
+
+
+
+032 Create Body Temperature snomed period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-body-temp-snomed-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	body-temperature    valid    alternative    snomed    period_2    not-ready    not-ready_bug
+
+    ehr.create new ehr    000_ehr_status.json
+    observation.create body temperature  Body Temperature  create-body-temp-snomed-period_2.json
+    observation.validate response - 201
+
+
+

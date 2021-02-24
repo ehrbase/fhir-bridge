@@ -42,7 +42,7 @@ Force Tags              observation_create    create
 	[Tags]             	body-temperature    valid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create body temperature    create-body-temp.json
+	observation.create body temperature  Body Temperature  create-body-temp.json    
     observation.validate response - 201
 
 
@@ -94,7 +94,7 @@ Force Tags              observation_create    create
 	[Tags]             	sofa-score    valid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create sofa score    create-sofa-score.json
+	observation.create sofa score  Sofa Score  create-sofa-score-cardiovuskular-score-1.json
     observation.validate response - 201
 
 
@@ -185,7 +185,7 @@ Force Tags              observation_create    create
 	[Tags]             	body-weight    valid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create body weight    create-body-weight.json
+	observation.create body weight  Body Weight  create-body-weight.json    
   	observation.validate response - 201
 
 

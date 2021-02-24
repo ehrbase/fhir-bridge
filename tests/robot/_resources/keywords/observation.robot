@@ -160,8 +160,8 @@ create blood pressure
 
 
 create body temperature
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Body Temperature    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create FIO2
@@ -180,8 +180,8 @@ create observation lab
 
 
 create sofa score
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Sofa Score    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create observation
@@ -215,8 +215,8 @@ create smoking status
 
 
 create body weight
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Body Weight    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create patient in icu
@@ -423,7 +423,7 @@ POST /Observation with ehr reference
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
                         Output Debug Info To Console    ${payload}
                         POST /Observation    ${fhir_resource_name}    ${payload}
-						extract identifier_value from response
+						
 
 
 POST /Observation with fake ehr reference
