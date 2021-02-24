@@ -29,81 +29,85 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createDiagnoseChronicLiverDisease() throws IOException {
+    void createChronicLiverDisease() throws IOException {
         create("create-chronic-liver-disease.json");
     }
 
     @Test
-    void createDiagnoseChronicLungDisease() throws IOException {
-        create("create-chronic-lung-disease.json");
-    }
-
-    @Test
-    void createDiagnoseDiabetesMellitus() throws IOException {
-        create("create-diabetes-mellitus.json");
-    }
-
-    @Test
-    void createDiagnoseMalignantNeoplasticDisease() throws IOException {
-        create("create-malignant-neoplastic-disease-absent.json");
-    }
-
-
-    @Test
-    void createDiagnoseRheumatologicalImmunologicalDiseases() throws IOException {
-        create("create-rheumatological-immunological-diseases-rheumatism.json");
-    }
-
-    @Test
-    void createDiagnoseHIV() throws IOException {
-        create("example-human-immunodeficiency-virus-infection1.json");
-    }
-
-    @Test
-    void createDiagnoseCardiovascularDiseases() throws IOException {
-        create("example-cardiovascular-diseases.json");
+    void createMappingChronicLungDisease() throws IOException {
+        testMapping("create-chronic-lung-disease.json", "paragon-create-chronic-lung-disease.json");
 
     }
 
     @Test
-    void createDiagnoseChronicKidneyDisease() throws IOException {
-        create("example-chronic-kidney-diseases2.json");
+    void createMappingDiabetesMellitus() throws IOException {
+        testMapping("create-diabetes-mellitus.json", "paragon-create-diabetes-mellitus.json");
+
     }
 
     @Test
-    void createDiagnoseChronicNeurologicalMentalDiseases() throws IOException {
-        create("example-chronic-neurological-mental-diseases.json");
+    void createMappingMalignantNeoplasticDisease() throws IOException {
+        testMapping("create-malignant-neoplastic-disease-absent.json", "paragon-create-malignant-neoplastic-disease-absent.json");
+
     }
 
     @Test
-    void createDiagnoseComplicationsCovid19() throws IOException {
-        create("example-complications-covid19-0.json");
+    void createMappingRheumatologicalImmunologicalDiseases() throws IOException {
+        testMapping("create-rheumatological-immunological-diseases-rheumatism.json", "paragon-create-rheumatological-immunological-diseases-rheumatism.json");
+
     }
 
     @Test
-    void createDiagnoseOrganRecipient() throws IOException {
-        create("example-organ-recipient.json");
+    void createMappingHIV() throws IOException {
+        testMapping("create-human-immunodeficiency-virus-infection1.json", "paragon-create-human-immunodeficiency-virus-infection1.json");
+
     }
 
     @Test
-    void createDiagnoseGastrointerstinalUlcers() throws IOException {
-        create("example-gastrointestinal-ulcers.json");
+    void createMappingCardiovascularDiseases() throws IOException {
+        testMapping("create-cardiovascular-diseases.json", "paragon-create-cardiovascular-diseases.json");
+
+
     }
 
     @Test
-    void createDiagnoseDependenceOnVentilator() throws IOException {
-        create("dependence-on-ventilator.json");
+    void createMappingChronicKidneyDisease() throws IOException {
+        testMapping("create-chronic-kidney-diseases2.json", "paragon-create-chronic-kidney-diseases2.json");
+
+    }
+
+    @Test
+    void createMappingChronicNeurologicalMentalDiseases() throws IOException {
+        testMapping("create-chronic-neurological-mental-diseases.json", "paragon-create-chronic-neurological-mental-diseases.json");
+
+    }
+
+    @Test
+    void createMappingComplicationsCovid19() throws IOException {
+        testMapping("create-complications-covid19-0.json", "paragon-create-complications-covid19-0.json");
+
+    }
+
+    @Test
+    void createMappingOrganRecipient() throws IOException {
+        testMapping("create-organ-recipient.json", "paragon-create-organ-recipient.json");
+
+    }
+
+    @Test
+    void createMappingGastrointerstinalUlcers() throws IOException {
+        testMapping("create-gastrointestinal-ulcers.json", "paragon-create-gastrointestinal-ulcers.json");
+    }
+
+    @Test
+    void createMappingDependenceOnVentilator() throws IOException {
+        testMapping("create-dependence-on-ventilator.json", "paragon-create-dependence-on-ventilator.json");
     }
 
 
     @Test
-    void  mapJaversComplete() throws IOException {
-        Condition resource = (Condition)  super.testFileLoader.loadResource("create-chronic-liver-disease.json");
-
-        GECCODiagnoseCompositionConverter compositionConverter = new GECCODiagnoseCompositionConverter();
-        GECCODiagnoseComposition composition = compositionConverter.toComposition(resource);
-        Diff diff = compareCompositions(getJavers(), "create-chronic-liver-disease-result.json", composition);
-        assertEquals(diff.getChanges().size(), 0);
+    void createMappingCreateChronicLiverDisease() throws IOException {
+        testMapping("create-chronic-liver-disease.json", "paragon-create-chronic-liver-disease.json");
     }
 
 
@@ -140,6 +144,15 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
     }
 
     @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        Condition resource = (Condition) super.testFileLoader.loadResource(resourcePath);
+        GECCODiagnoseCompositionConverter compositionConverter = new GECCODiagnoseCompositionConverter();
+        GECCODiagnoseComposition composition = compositionConverter.toComposition(resource);
+        Diff diff = compareCompositions(getJavers(), paragonPath, composition);
+        assertEquals(diff.getChanges().size(), 0);
+    }
+
+    @Override
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
@@ -147,6 +160,7 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(AusgeschlosseneDiagnoseEvaluation.class)
                 .registerValueObject(VorliegendeDiagnoseEvaluation.class)
                 .registerValueObject(UnbekannteDiagnoseEvaluation.class)
+                .registerValueObject(KoerperstelleCluster.class)
                 .build();
     }
 }
