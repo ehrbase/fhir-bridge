@@ -354,6 +354,7 @@ commands:
                 command: |
                     cd tests/
                     robot -v OUTPUT_LEVEL:minimal -d results/0 -L INFO \
+                            -i xxx \
                             --skip TODO --skip future \
                             --skiponfailure not-ready robot/
             - run:
