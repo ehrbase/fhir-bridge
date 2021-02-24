@@ -105,8 +105,4 @@ public class VorliegendeDiagnoseConverter {
             return vorliegendeDiagnoseEvaluationOptional.get();
         }
     }
-
-    public Optional<VorliegendeDiagnoseEvaluation> map() {
-        return null;
-    }
 }
