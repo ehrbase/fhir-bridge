@@ -3,20 +3,23 @@ package org.ehrbase.fhirbridge.ehr.converter.sofascore;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SOFAScoreObservation;
+import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class SofaScoreObservationConverter {
 
     public SOFAScoreObservation convert(Observation observation) {
         SOFAScoreObservation sofaScore = new SOFAScoreObservation();
-        DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
         mapCodes(sofaScore, observation);
         sofaScore.setSubject(new PartySelf());
         sofaScore.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-        sofaScore.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-        sofaScore.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        mapTimeDate(observation, sofaScore);
         return sofaScore;
     }
 
@@ -58,7 +61,7 @@ public class SofaScoreObservationConverter {
                 sofaScore.setNierenfunktion(SofaScoreCode.NIERENFUNKTIONS_SCORE_4.getValue());
                 break;
             default:
-                throw new UnprocessableEntityException("The code "+ nierenfunktionsCode + " is not valid for the Kidney Score");
+                throw new UnprocessableEntityException("The code " + nierenfunktionsCode + " is not valid for the Kidney Score");
         }
     }
 
@@ -79,7 +82,7 @@ public class SofaScoreObservationConverter {
                 sofaScore.setBlutgerinnung(SofaScoreCode.BLUTGERINNUNGS_SCORE_4.getValue());
                 break;
             default:
-                throw new UnprocessableEntityException("The code "+ blutgerinnungsCode + " is not valid for the Blood clotting score");
+                throw new UnprocessableEntityException("The code " + blutgerinnungsCode + " is not valid for the Blood clotting score");
         }
     }
 
@@ -100,7 +103,7 @@ public class SofaScoreObservationConverter {
                 sofaScore.setLeberfunktion(SofaScoreCode.LEBERFUNKTIONS_SCORE_4.getValue());
                 break;
             default:
-                throw new UnprocessableEntityException("The code "+ leberfunktionsCode + " is not valid for the Liver score");
+                throw new UnprocessableEntityException("The code " + leberfunktionsCode + " is not valid for the Liver score");
         }
     }
 
@@ -113,8 +116,8 @@ public class SofaScoreObservationConverter {
             sofaScore.setHerzKreislaufSystem(SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_3.getValue());
         } else if (nervensystemCode.equals("cvs4")) {
             sofaScore.setHerzKreislaufSystem(SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_4.getValue());
-        }else{
-            throw new UnprocessableEntityException("Either the code "+ herzKreislaufSystemCode + " or "+ nervensystemCode +" is not valid for the cardiovaskular score");
+        } else {
+            throw new UnprocessableEntityException("Either the code " + herzKreislaufSystemCode + " or " + nervensystemCode + " is not valid for the cardiovaskular score");
         }
 
     }
@@ -137,7 +140,7 @@ public class SofaScoreObservationConverter {
                 sofaScore.setAtemtatigkeit(SofaScoreCode.ATEMFREQUENZ_SCORE_4.getValue());
                 break;
             default:
-                throw new UnprocessableEntityException("The code "+ atemtaetigkeitCode + " is not valid for the Breath Score");
+                throw new UnprocessableEntityException("The code " + atemtaetigkeitCode + " is not valid for the Breath Score");
         }
     }
 
@@ -156,7 +159,52 @@ public class SofaScoreObservationConverter {
                 sofaScore.setZentralesNervensystem(SofaScoreCode.NERVENSYSTEM_SCORE_4.getValue());
                 break;
             default:
-                throw new UnprocessableEntityException("The code "+ nervensystemCode + " is not valid for the Nerves Score");
+                throw new UnprocessableEntityException("The code " + nervensystemCode + " is not valid for the Nerves Score");
         }
     }
+
+    private void mapTimeDate(Observation observation, SOFAScoreObservation result) {
+        tryEffectiveDateTime(observation, result);
+        tryEffectiveInstantType(observation, result);
+        tryEffectivePeriodType(observation, result);
+    }
+
+    private void tryEffectiveDateTime(Observation observation, SOFAScoreObservation result) {
+        try{
+            result.setTimeValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
+            result.setOriginValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
+        }catch (FHIRException fhirException){
+            if(isTimeTypeException(fhirException.toString())){
+                throw fhirException;
+            }
+        }
+    }
+
+    private void tryEffectiveInstantType(Observation observation, SOFAScoreObservation result) {
+        try{
+            result.setTimeValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
+            result.setOriginValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
+        }catch (FHIRException fhirException){
+            if(isTimeTypeException(fhirException.toString())){
+                throw fhirException;
+            }
+        }
+    }
+
+    private void tryEffectivePeriodType(Observation observation, SOFAScoreObservation result) {
+        try{
+            LocalDateTime dateTime = LocalDateTime.parse(observation.getEffectivePeriod().getEnd().toString());
+            result.setTimeValue(dateTime);
+            result.setOriginValue(dateTime);
+        }catch (FHIRException fhirException){
+            if(isTimeTypeException(fhirException.toString())){
+                throw fhirException;
+            }
+        }
+    }
+
+    private boolean isTimeTypeException(String exceptionMessage){
+        return !(exceptionMessage.contains("Type mismatch: the type") && exceptionMessage.contains("was expected,") && exceptionMessage.contains("was encountered"));
+    }
+
 }

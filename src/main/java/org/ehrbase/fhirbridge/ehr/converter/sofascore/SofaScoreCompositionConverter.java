@@ -1,13 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.sofascore;
 
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datatypes.CodePhrase;
-import com.nedap.archie.rm.datavalues.DvCodedText;
-import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import com.nedap.archie.rm.generic.PartySelf;
-import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
@@ -15,11 +10,12 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
-import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SOFAScoreObservation;
-import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.ZoneId;
 
 
 public class SofaScoreCompositionConverter implements CompositionConverter<SOFAComposition, Observation> {
@@ -44,13 +40,9 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
         FeederAudit fa = CommonData.constructFeederAudit(observation);
         result.setFeederAudit(fa);
 
-        DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
 
-        try {
-            result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
-        }catch (Exception e){
-            throw new UnprocessableEntityException(e.getMessage());
-        }
+        result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
+
 
         // ======================================================================================
         // Required fields by API
@@ -60,13 +52,52 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
         result.setTerritory(Territory.DE);
         result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
 
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        mapTimeDate(observation, result);
 
         result.setComposer(new PartySelf());
 
         return result;
     }
 
+    private void mapTimeDate(Observation observation, SOFAComposition result) {
+        tryEffectiveDateTime(observation, result);
+        tryEffectiveInstantType(observation, result);
+        tryEffectivePeriodType(observation, result);
+    }
 
+    private void tryEffectiveDateTime(Observation observation, SOFAComposition result) {
+        try{
+            result.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+        }catch (FHIRException fhirException){
+            if(isTimeTypeException(fhirException.toString())){
+                throw fhirException;
+            }
+        }
+    }
+
+    private void tryEffectiveInstantType(Observation observation, SOFAComposition result) {
+        try{
+            result.setStartTimeValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
+        }catch (FHIRException fhirException){
+            if(isTimeTypeException(fhirException.toString())){
+                throw fhirException;
+            }
+        }
+    }
+
+    private void tryEffectivePeriodType(Observation observation, SOFAComposition result) {
+        try{
+            result.setStartTimeValue(observation.getEffectivePeriod().getStart().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            result.setEndTimeValue(observation.getEffectivePeriod().getEnd().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        }catch (FHIRException fhirException){
+            if(isTimeTypeException(fhirException.toString())){
+                throw fhirException;
+            }
+        }
+    }
+
+    private boolean isTimeTypeException(String exceptionMessage){
+        return !(exceptionMessage.contains("Type mismatch: the type") && exceptionMessage.contains("was expected,") && exceptionMessage.contains("was encountered"));
+    }
 
 }
