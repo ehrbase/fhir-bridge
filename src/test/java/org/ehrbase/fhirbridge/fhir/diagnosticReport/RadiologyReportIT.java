@@ -35,32 +35,17 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mappingNormalFinding() throws IOException {
-        DiagnosticReport diagnosticReport = (DiagnosticReport) super.testFileLoader.loadResource("create-radiology-report-normal-finding.json");
-        RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
-        GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
-        Diff diff = compareCompositions(getJavers(), "paragon-radiology-report-normal-finding.json", mappedGeccoRadiologischerBefundComposition);
-
-        assertEquals(diff.getChanges().size(), 0);
+        testMapping("create-radiology-report-normal-finding.json","paragon-radiology-report-normal-finding.json" );
     }
 
     @Test
     void mappingTypicalFinding() throws IOException {
-        DiagnosticReport diagnosticReport = (DiagnosticReport) super.testFileLoader.loadResource("create-radiology-report-typical-finding.json");
-        RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
-        GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
-        Diff diff = compareCompositions(getJavers(), "paragon-radiology-report-typical-finding.json", mappedGeccoRadiologischerBefundComposition);
-
-        assertEquals(diff.getChanges().size(), 0);
+        testMapping("create-radiology-report-typical-finding.json","paragon-radiology-report-typical-finding.json" );
     }
 
     @Test
     void mappingUnspecificFinding() throws IOException {
-        DiagnosticReport diagnosticReport = (DiagnosticReport) super.testFileLoader.loadResource("create-radiology-report-unspecific-finding.json");
-        RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
-        GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
-        Diff diff = compareCompositions(getJavers(), "paragon-radiology-report-unspecific-finding.json", mappedGeccoRadiologischerBefundComposition);
-
-        assertEquals(diff.getChanges().size(), 0);
+        testMapping("create-radiology-report-unspecific-finding.json","paragon-radiology-report-unspecific-finding.json" );
     }
 
     @Test
@@ -96,6 +81,15 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
         return assertThrows(UnprocessableEntityException.class, () -> {
             new RadiologischerBefundConverter().toComposition( radiologyReport);
         });
+    }
+
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        DiagnosticReport diagnosticReport = (DiagnosticReport) super.testFileLoader.loadResource(resourcePath);
+        RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
+        GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
+        Diff diff = compareCompositions(getJavers(), paragonPath, mappedGeccoRadiologischerBefundComposition);
+        assertEquals(diff.getChanges().size(), 0);
     }
 
     @Override

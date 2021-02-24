@@ -105,42 +105,40 @@ class ConditionIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createDiagnoseHIV() throws IOException {
-        create("example-human-immunodeficiency-virus-infection1.json");
-        create("example-human-immunodeficiency-virus-infection2.json");
-        create("example-human-immunodeficiency-virus-infection3.json");
+        create("create-human-immunodeficiency-virus-infection-absent.json");
+        create("create-human-immunodeficiency-virus-infection-present.json");
+        create("create-human-immunodeficiency-virus-infection-unknown.json");
     }
 
     @Test
     void createDiagnoseCardiovascularDiseases() throws IOException {
-        create("example-cardiovascular-diseases.json");
+        create("create-cardiovascular-diseases-cardiac-arrhythmia.json");
 
     }
 
     @Test
     void createDiagnoseChronicKidneyDisease() throws IOException {
-        create("example-chronic-kidney-diseases2.json");
-        create("example-chronic-kidney-diseases3.json");
-        create("example-chronic-kidney-diseases4.json");
-        create("example-chronic-kidney-diseases5.json");
+        create("create-chronic-kidney-disease-absent.json");
+        create("create-chronic-kidney-disease-present.json");
+        create("create-chronic-kidney-disease-stage-5-dialysis.json");
     }
 
     @Test
     void createDiagnoseChronicNeurologicalMentalDiseases() throws IOException {
-        create("example-chronic-neurological-mental-diseases.json");
+        create("create-chronic-neurological-or-mental-disease-anxiety.json");
     }
 
     @Test
     void createDiagnoseComplicationsCovid19() throws IOException {
-        create("example-complications-covid19-0.json");
-        create("example-complications-covid19-1.json");
-        create("example-complications-covid19-2.json");
-        create("example-complications-covid19-3.json");
-        create("example-complications-covid19-4.json");
-        create("example-complications-covid19-5.json");
-        create("example-complications-covid19-6.json");
-        create("example-complications-covid19-7.json");
-        create("example-complications-covid19-8.json");
-        create("example-complications-covid19-9.json");
+        create("create-complications-of-covid-19-cerebrovascular-accident.json");
+        create("create-complications-of-covid-19-infectious-agent-in-bloodstream-absent.json");
+        create("create-complications-of-covid-19-infectious-agent-in-bloodstream-present.json");
+        create("create-complications-of-covid-19-infectious-disease-of-lung.json");
+        create("create-complications-of-covid-19-myocardial-infarction-present.json");
+        create("create-complications-of-covid-19-myocardial-infarction-unknown.json");
+        create("create-complications-of-covid-19-pre-renal-acute-kidney-injury.json");
+        create("create-complications-of-covid-19-pulmonary-embolism.json");
+        create("create-complications-of-covid-19-venous-thrombosis.json");
     }
 
     @Test
@@ -152,9 +150,9 @@ class ConditionIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createDiagnoseGastrointerstinalUlcers() throws IOException {
-        create("example-gastrointestinal-ulcers.json");
-        create("example-gastrointestinal-ulcers2.json");
-        create("example-gastrointestinal-ulcers3.json");
+        create("create-gastrointestinal-ulcer-absent.json");
+        create("create-gastrointestinal-ulcer-present.json");
+        create("create-gastrointestinal-ulcer-unknown.json");
     }
 
     @Test
@@ -247,6 +245,11 @@ class ConditionIT extends AbstractMappingTestSetupIT {
             // new YourConverter().toComposition((condition)));
                 });
             }
+
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        // your mapping compared to paragon file
+    }
 
     @Override
     public Javers getJavers() {

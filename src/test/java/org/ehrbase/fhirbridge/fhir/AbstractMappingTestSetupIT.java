@@ -37,7 +37,6 @@ public abstract class AbstractMappingTestSetupIT extends AbstractSetupIT{
         Flattener cut = new Flattener(resourceTemplateProvider);
         Composition paragonComposition = cut.flatten(composition, mappedComposition.getClass());
         Diff diff = javers.compare(paragonComposition, mappedComposition);
-        System.out.println(((GECCODiagnoseComposition) paragonComposition).getVorliegendeDiagnose());
         diff.getChanges().forEach(System.out::println);
         return diff;
     }
@@ -53,5 +52,7 @@ public abstract class AbstractMappingTestSetupIT extends AbstractSetupIT{
     public abstract Javers getJavers();
 
     public abstract Exception executeMappingException(String resource) throws IOException;
+
+    public abstract void testMapping(String resourcePath, String paragonPath) throws IOException;
 
 }

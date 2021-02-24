@@ -71,4 +71,9 @@ class DiagnosticReportIT extends AbstractMappingTestSetupIT {
            // new YourConverter().toComposition( radiologyReport);
         });
     }
+
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        // your mapping compared to paragon file
+    }
 }

@@ -64,6 +64,11 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     }
 
     @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        // your mapping compared to paragon file
+    }
+
+    @Override
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
