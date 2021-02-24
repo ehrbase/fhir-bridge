@@ -40,7 +40,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createInvalid() throws IOException {
-        String resource =super.testFileLoader.loadResourceToString("create-invalid.json");
+        String resource = super.testFileLoader.loadResourceToString("create-invalid.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
@@ -129,13 +129,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mapD4LQuestionnaireCompositionJavers() throws IOException, IntrospectionException, InvocationTargetException, IllegalAccessException {
-       QuestionnaireResponse resource = (QuestionnaireResponse)  super.testFileLoader.loadResource("create-covapp-response.json");
-
-        D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter = new D4lQuestionnaireCompositionConverter();
-        D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.toComposition(resource);
-
-        Diff diff = compareCompositions(getJavers(), "d4L-questionnaire-paragon-composition.json", mappedD4LQuestionnaireComposition);
-        assertEquals(diff.getChanges().size(), 0);
+        testMapping("create-covapp-response.json", "d4L-questionnaire-paragon-composition.json");
     }
 
     @Override
@@ -144,6 +138,17 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
         return assertThrows(UnprocessableEntityException.class, () -> {
             new D4lQuestionnaireCompositionConverter().toComposition(questionnaireResponse);
         });
+    }
+
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        QuestionnaireResponse resource = (QuestionnaireResponse) super.testFileLoader.loadResource(resourcePath);
+
+        D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter = new D4lQuestionnaireCompositionConverter();
+        D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.toComposition(resource);
+
+        Diff diff = compareCompositions(getJavers(), paragonPath, mappedD4LQuestionnaireComposition);
+        assertEquals(diff.getChanges().size(), 0);
     }
 
 

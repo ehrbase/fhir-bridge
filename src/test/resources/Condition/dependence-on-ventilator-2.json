@@ -1,0 +1,59 @@
+{
+  "resourceType": "Condition",
+  "id": "84f75240-befd-4501-89a3-231ccbbae44c",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dependence-on-ventilator"
+    ]
+  },
+  "clinicalStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+        "code": "active",
+        "display": "Active"
+      }
+    ]
+  },
+  "verificationStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+        "code": "confirmed",
+        "display": "Confirmed"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "410605003",
+        "display": "Confirmed present (qualifier value)"
+      }
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "404989005",
+          "display": "Ventilation status (observable entity)"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "444932008",
+        "display": "Dependence on ventilator (finding)"
+      }
+    ]
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "recordedDate": "2020-10-16T08:49:21+02:00"
+}

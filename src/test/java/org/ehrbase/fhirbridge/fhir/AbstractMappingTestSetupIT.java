@@ -7,6 +7,7 @@ import org.ehrbase.client.flattener.Flattener;
 import org.ehrbase.fhirbridge.TestFileLoader;
 import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
 import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.javers.core.Javers;
@@ -51,5 +52,7 @@ public abstract class AbstractMappingTestSetupIT extends AbstractSetupIT{
     public abstract Javers getJavers();
 
     public abstract Exception executeMappingException(String resource) throws IOException;
+
+    public abstract void testMapping(String resourcePath, String paragonPath) throws IOException;
 
 }
