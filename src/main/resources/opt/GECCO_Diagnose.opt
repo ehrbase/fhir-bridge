@@ -19,8 +19,9 @@
     <other_details id="original_namespace"/>
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
-    <other_details id="MD5-CAM-1.0.1">dc6a6836db2745ab6e4bc321147a058a</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">4f2775cebcd6b1626324b118ac8914c0</other_details>
+    <other_details id="MD5-CAM-1.0.1">36310c7656bcc20e9ab5c36a32072292</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="original_language">ISO_639-1::de</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -322,6 +323,7 @@
                         <code_list>394591006</code_list>
                         <code_list>394587001</code_list>
                         <code_list>394589003</code_list>
+                        <code_list>404989005</code_list>
                       </children>
                     </attributes>
                   </children>
@@ -497,7 +499,7 @@
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>ICD</value>
+                          <value>local_terms</value>
                         </terminology_id>
                         <code_list>I25.29</code_list>
                         <code_list>I10.90</code_list>
@@ -534,6 +536,15 @@
                         <code_list>I64</code_list>
                         <code_list>I21.9</code_list>
                         <code_list>N17.9</code_list>
+                        <code_list>840539006</code_list>
+                        <code_list>840544004</code_list>
+                        <code_list>882784691000119000</code_list>
+                        <code_list>674814021000119106</code_list>
+                        <code_list>880529761000119102</code_list>
+                        <code_list>138389411000119105</code_list>
+                        <code_list>866151004</code_list>
+                        <code_list>866152006</code_list>
+                        <code_list>444932008</code_list>
                       </children>
                     </attributes>
                   </children>
@@ -1624,6 +1635,33 @@ Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben is
         </term_definitions>
         <term_definitions code="N17.9">
           <items id="text">Akutes Nierenversagen, nicht näher bezeichnet</items>
+        </term_definitions>
+        <term_definitions code="840539006">
+          <items id="text">Disease caused by 2019 novel coronavirus (disorder)</items>
+        </term_definitions>
+        <term_definitions code="840544004">
+          <items id="text">Suspected disease caused by 2019 novel coronavirus (situation)</items>
+        </term_definitions>
+        <term_definitions code="882784691000119000">
+          <items id="text">Pneumonia caused by severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="674814021000119106">
+          <items id="text">Acute respiratory distress syndrome caused by severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="880529761000119102">
+          <items id="text">Lower respiratory infection caused by severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="138389411000119105">
+          <items id="text">Acute bronchitis caused by severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="866151004">
+          <items id="text">Lymphocytopenia associated with severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="866152006">
+          <items id="text">Thrombocytopenia associated with severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="444932008">
+          <items id="text">Dependence on ventilator (finding)</items>
         </term_definitions>
         <term_definitions code="255604002">
           <items id="text">Mild (qualifier value)</items>
@@ -2899,6 +2937,9 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
     </term_definitions>
     <term_definitions code="394589003">
       <items id="text">Nephrology (qualifier value)</items>
+    </term_definitions>
+    <term_definitions code="404989005">
+      <items id="text">Ventilation status (observable entity)</items>
     </term_definitions>
   </definition>
   <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-EVALUATION.problem_diagnosis.v1]">

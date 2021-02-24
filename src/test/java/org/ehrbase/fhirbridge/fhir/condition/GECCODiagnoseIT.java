@@ -1,28 +1,20 @@
 package org.ehrbase.fhirbridge.fhir.condition;
 
-import ca.uhn.fhir.rest.api.MethodOutcome;
-import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.GECCODiagnoseCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
 import org.javers.core.metamodel.clazz.ValueObjectDefinition;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.temporal.TemporalAccessor;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -103,18 +95,17 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
         create("dependence-on-ventilator.json");
     }
 
-    /*
+
     @Test
-    void  () throws IOException {
+    void  mapJaversComplete() throws IOException {
         Condition resource = (Condition)  super.testFileLoader.loadResource("create-chronic-liver-disease.json");
 
         GECCODiagnoseCompositionConverter compositionConverter = new GECCODiagnoseCompositionConverter();
         GECCODiagnoseComposition composition = compositionConverter.toComposition(resource);
-
         Diff diff = compareCompositions(getJavers(), "create-chronic-liver-disease-result.json", composition);
         assertEquals(diff.getChanges().size(), 0);
     }
-    */
+
 
     @Test
     void createDiagnoseInvalidVerificationStatus() throws IOException {
@@ -152,10 +143,10 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(GECCODiagnoseComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(GECCODiagnoseComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(AusgeschlosseneDiagnoseEvaluation.class)
-                .registerValueObject(UnbekannteDiagnoseEvaluation.class)
                 .registerValueObject(VorliegendeDiagnoseEvaluation.class)
+                .registerValueObject(UnbekannteDiagnoseEvaluation.class)
                 .build();
     }
 }

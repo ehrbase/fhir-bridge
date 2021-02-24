@@ -7,6 +7,7 @@ import org.ehrbase.client.flattener.Flattener;
 import org.ehrbase.fhirbridge.TestFileLoader;
 import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
 import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.javers.core.Javers;
@@ -36,6 +37,7 @@ public abstract class AbstractMappingTestSetupIT extends AbstractSetupIT{
         Flattener cut = new Flattener(resourceTemplateProvider);
         Composition paragonComposition = cut.flatten(composition, mappedComposition.getClass());
         Diff diff = javers.compare(paragonComposition, mappedComposition);
+        System.out.println(((GECCODiagnoseComposition) paragonComposition).getVorliegendeDiagnose());
         diff.getChanges().forEach(System.out::println);
         return diff;
     }
