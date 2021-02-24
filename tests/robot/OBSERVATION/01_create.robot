@@ -133,7 +133,7 @@ Force Tags              observation_create    create
 	[Tags]             	body-height    valid   226
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create body height    Body Height    BodyHeight/create-body-height-normal.json.json
+	observation.create body height    Body Height    BodyHeight/create-body-height-normal.json
 	observation.validate response - 201
 
 
