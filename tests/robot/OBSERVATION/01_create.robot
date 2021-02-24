@@ -172,7 +172,7 @@ Force Tags              observation_create    create
 	[Tags]             	smoking-status    valid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create smoking status    create-smoking-status.json
+	observation.create smoking status  Smoking Status  create-smoking-status.json    
   	observation.validate response - 201
 
 
@@ -224,7 +224,7 @@ Force Tags              observation_create    create
 	[Tags]             	oxygen-saturation   valid    not-ready    not-implemented
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create oxygen saturation    create-oxygen-saturation.json
+	observation.create oxygen saturation  Oxygen Saturation  create-oxygen-saturation.json
   	observation.validate response - 201
 
 
