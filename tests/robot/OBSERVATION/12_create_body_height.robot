@@ -554,7 +554,7 @@ generate payload from example json
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-body-height.json
+	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/BodyHeight/create-body-height-normal.json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 
@@ -582,7 +582,7 @@ create body-height JSON
 
     &{resp}             Run Keywords
                         ...    ehr.create new ehr               000_ehr_status.json                             AND
-                        ...    load JSON                        create-body-height.json				    AND
+                        ...    load JSON                        BodyHeight/create-body-height-nomal.json				    AND
                         ...    update Resource Type             ${resourceType}                                 AND
                         ...    update ID                        ${ID}                                           AND
                         ...    update Meta Profile              ${meta}                                         ${profile}                    	AND
@@ -604,7 +604,7 @@ generate payload from example json with data absentreason
 
 	${dict_dataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "body-height"} }}
 
-	${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/create-body-height.json
+	${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/BodyHeight/create-body-height-normal.json
                         Update Value To Json    	${payload}    $.subject.identifier.value    			${subject_id}
 						Delete Object From Json    	${payload}    $.text
 						Delete Object From Json    	${payload}    $.valueCodeableConcept
