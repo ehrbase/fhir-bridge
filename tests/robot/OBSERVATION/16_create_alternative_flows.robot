@@ -149,83 +149,83 @@ Force Tags              observation_create    create
 
 009 Create Observation Body Height loinc datetime
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-height_loinc-datetime.json_\n\n
+	...                 2. *LOAD* _create-body-height-loinc-datetime.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    loinc    datetime
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body height  Body Height  create-body-height_loinc-datetime.json
+    observation.create body height  Body Height  BodyHeight/create-body-height-loinc-datetime.json
     observation.validate response - 201
 
 
 010 Create Observation Body Height loinc period
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-height_loinc-period.json_\n\n
+	...                 2. *LOAD* _create-body-height-loinc-period.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    loinc    period    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body height  Body Height  create-body-height_loinc-period.json
+    observation.create body height  Body Height  BodyHeight/create-body-height-loinc-period.json
     observation.validate response - 201
 
 
 
 011 Create Observation Body Height loinc period_2
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-height_loinc-period_2.json_\n\n
+	...                 2. *LOAD* _create-body-height-loinc-period_2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    loinc    period_2    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body height  Body Height  create-body-height_loinc-period_2.json
+    observation.create body height  Body Height  BodyHeight/create-body-height-loinc-period_2.json
     observation.validate response - 201
 
 
 
 012 Create Observation Body Height snomed datetime
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-height_snomed-datetime.json_\n\n
+	...                 2. *LOAD* _create-body-height-snomed-datetime.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    snomed    datetime    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body height  Body Height  create-body-height_snomed-datetime.json
+    observation.create body height  Body Height  BodyHeight/create-body-height-snomed-datetime.json
     observation.validate response - 201
 
 
 
 013 Create Observation Body Height snomed period
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-height_snomed-period.json_\n\n
+	...                 2. *LOAD* _create-body-height-snomed-period.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    snomed    period    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body height  Body Height  create-body-height_snomed-period.json
+    observation.create body height  Body Height  BodyHeight/create-body-height-snomed-period.json
     observation.validate response - 201
 
 
 
 014 Create Observation Body Height snomed period_2
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-height_snomed-period_2.json_\n\n
+	...                 2. *LOAD* _create-body-height-snomed-period_2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    snomed    period_2    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body height  Body Height  create-body-height_snomed-period_2.json
+    observation.create body height  Body Height  BodyHeight/create-body-height-snomed-period_2.json
     observation.validate response - 201
 
 
