@@ -627,7 +627,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]              sofa-score    valid    alternative    value    datetime    not-ready    not-ready_bug
+	[Tags]              sofa-score    valid    alternative    value    datetime
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create sofa score   Sofa Score  create-sofa-score-value-datetime.json
