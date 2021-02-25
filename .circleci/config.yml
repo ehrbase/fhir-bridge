@@ -382,7 +382,7 @@ commands:
                 when: always
                 command: |
                     mkdir 00_robot_results
-                    cp tests/results/0/* 00_robot_results/
+                    cp -r tests/results/0/* 00_robot_results/
                     cp fhirbride_log 00_robot_results/fhirbride_test_log
 
 
