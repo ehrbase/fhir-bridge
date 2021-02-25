@@ -224,11 +224,6 @@ create patient in icu
     POST /Observation with ehr reference    Patient in Intensive Care Unit (ICU)    ${example_json}
 
 
-create blood gas panel
-    [Arguments]         ${text}    ${example_json}
-    POST /Observation with ehr reference    ${text}    ${example_json}
-
-
 create oxygen saturation
     [Arguments]         ${text}    ${example_json}
     POST /Observation with ehr reference    ${text}    ${example_json}
@@ -423,7 +418,6 @@ POST /Observation with ehr reference
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
                         Output Debug Info To Console    ${payload}
                         POST /Observation    ${fhir_resource_name}    ${payload}
-						
 
 
 POST /Observation with fake ehr reference
