@@ -224,11 +224,6 @@ create patient in icu
     POST /Observation with ehr reference    Patient in Intensive Care Unit (ICU)    ${example_json}
 
 
-create blood gas panel
-    [Arguments]         ${text}    ${example_json}
-    POST /Observation with ehr reference    ${text}    ${example_json}
-
-
 create oxygen saturation
     [Arguments]         ${example_json}
     POST /Observation with ehr reference    Oxygen Saturation in Arterial Blood    ${example_json}
@@ -416,14 +411,6 @@ POST /Observation
                         Output Debug Info To Console
 
 
-POST /Bundle
-    [Arguments]         ${fhir_resource_name}    ${payload}
-
-    Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' BUNDLE
-    &{resp}             POST    ${BASE_URL}/    body=${payload}
-                        Output Debug Info To Console
-
-
 POST /Observation with ehr reference
     [Arguments]         ${fhir_resource_name}    ${example_json}
 
@@ -431,15 +418,6 @@ POST /Observation with ehr reference
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
                         Output Debug Info To Console    ${payload}
                         POST /Observation    ${fhir_resource_name}    ${payload}
-
-
-POST /Bundle with ehr reference
-    [Arguments]         ${fhir_resource_name}    ${example_json}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${example_json}
-                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
-                        Output Debug Info To Console    ${payload}
-                        POST //Bundle    ${fhir_resource_name}    ${payload}
 
 
 POST /Observation with fake ehr reference
