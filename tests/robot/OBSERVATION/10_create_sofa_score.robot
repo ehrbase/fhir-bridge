@@ -932,11 +932,11 @@ BUG TRACE 01 Create Sofa Score (Invalid/Missing 'effectiveDateTime')
 	[Template]			create sofa score with ehr reference
     [Tags]              effectiveDateTime    not-ready    not-ready_bug
 
-	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
+	# FIELD/PATH							VALUE					HTTP
 	# 																CODE
 	
 	# missing attribute
-   $.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
+    $.effectiveDateTime						missing					422
 
 
 BUG TRACE 03 Create Sofa Score (Invalid/Missing 'component' for Array value 0)
@@ -1002,7 +1002,7 @@ BUG TRACE 06 Create Sofa Score (Invalid/Missing 'component' for Array value 3)
 BUG TRACE 07 Create Sofa Score (Invalid/Missing 'component' for Array value 4)
 	[Documentation]		Belongs to TC 014! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
+    [Tags]              valueCodeableConcept    not-ready    not-ready_bug    error07
 
    #invalid component 4 code coding system
 	$.component[4].code.coding[0].system						http://foobar.de		422
@@ -1017,7 +1017,7 @@ BUG TRACE 07 Create Sofa Score (Invalid/Missing 'component' for Array value 4)
 BUG TRACE 08 Create Sofa Score (Invalid/Missing 'component' for Array value 5)
 	[Documentation]		Belongs to TC 015! Remove separation when it's fixed!
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
+    [Tags]              valueCodeableConcept    not-ready    not-ready_bug    error08
 
    #invalid component 5 code coding system
 	$.component[5].code.coding[0].system						http://foobar.de		422
