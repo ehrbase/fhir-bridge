@@ -479,6 +479,7 @@ BUG TRACE 02 Create smoking status (Invalid/Missing 'valueCodeableConcept')
 
 	# invalid system
 	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
