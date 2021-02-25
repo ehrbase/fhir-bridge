@@ -339,11 +339,11 @@ commands:
                 name: Save fhirbridge starup log
                 command: |
                     mkdir -p /tmp/logs
-                    cp fhirbride_log /tmp/logs
-                    cat /tmp/logs/fhirbride_log
+                    cp fhirbride_log /tmp/logs/fhirbridge_startup_log
+                    cat /tmp/logs/fhirbridge_startup_log
                 when: always
             - store_artifacts:
-                path: /tmp/logs/fhirbride_log
+                path: /tmp/logs/fhirbridge_startup_log
 
 
     run-robot-integration-tests:
@@ -383,6 +383,7 @@ commands:
                 command: |
                     mkdir 00_robot_results
                     cp tests/results/0/* 00_robot_results/
+                    cp fhirbride_log 00_robot_results/fhirbride_test_log
 
 
     cache-out-fhirbridge-m2-dependencies:
