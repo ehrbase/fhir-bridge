@@ -457,7 +457,7 @@ ${randinteger}                  ${12345}
 BUG TRACE 01 Create smoking status (Invalid/Missing 'category')
 	[Documentation]		Belongs to TC 006! Remove separation when it's fixed!
 	[Template]			create smoking status with ehr reference
-    [Tags]              category    not-ready    not-ready_bug
+    [Tags]              category    not-ready    not-ready_bug    bugtrace1
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -472,7 +472,7 @@ BUG TRACE 01 Create smoking status (Invalid/Missing 'category')
 BUG TRACE 02 Create smoking status (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
 	[Template]			create smoking status with ehr reference
-    [Tags]              category    not-ready    not-ready_bug
+    [Tags]              category    not-ready    not-ready_bug    bugtrace2
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
