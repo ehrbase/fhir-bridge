@@ -210,8 +210,8 @@ create frailty scale score
 
 
 create smoking status
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Smoking Status    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create body weight
@@ -230,8 +230,8 @@ create blood gas panel
 
 
 create oxygen saturation
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Oxygen Saturation in Arterial Blood    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create history of travel
