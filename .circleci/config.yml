@@ -353,7 +353,7 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    robot -v OUTPUT_LEVEL:minimal -d results/0 -L INFO \
+                    pabot --testlevelsplit -v OUTPUT_LEVEL:minimal -d results/0 -L INFO \
                             --skip TODO --skip future \
                             --skiponfailure not-ready robot/
             - run:
