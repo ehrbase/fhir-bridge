@@ -308,7 +308,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 
 	[Template]			Create FiO2 with ehr reference
-    [Tags]              valueQuantity
+    [Tags]              valueQuantity    parallel_fail
 	#											HTTP	
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.valueQuantity			  	missing			422    	Observation.value.x.: minimum required = 1, but only found 0 .from ${profile url}

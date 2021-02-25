@@ -283,7 +283,7 @@ Force Tags              observation_create    heart-rate    create
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status \n\n
     ...                 6. *VALIDATE* outcome against diagnostic text
-    [Tags]             valueQuantity    invalid
+    [Tags]             valueQuantity    invalid    parallel_fail
     [Template]         create Observation Heart Rate JSON
 
 #|  resourceType   |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  |                      				category                           					        					|                                        									code          										                            	                                                                         |         subject                    |	  DateTime	   |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |
