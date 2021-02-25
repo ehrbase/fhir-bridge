@@ -558,6 +558,9 @@ executors:
         working_directory: ~/projects
         docker:
             - image: circleci/python:3.8.5-node-browsers
+              auth:
+                username: $DOCKER_USER
+                password: $DOCKER_HUB_PASSWORD
             - image: ehrbase/ehrbase-postgres:11.10
               auth:
                 username: $DOCKER_USER
@@ -570,4 +573,4 @@ executors:
             #   environment:
             #     POSTGRES_USER: fhir_bridge
             #     POSTGRES_PASSWORD: fhir_bridge
-        resource_class: xlarge
+        resource_class: large
