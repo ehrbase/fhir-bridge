@@ -8,7 +8,6 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
@@ -18,8 +17,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.Unbeka
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import java.util.Optional;
 
 public class GECCODiagnoseCompositionConverter implements CompositionConverter<GECCODiagnoseComposition, Condition> {

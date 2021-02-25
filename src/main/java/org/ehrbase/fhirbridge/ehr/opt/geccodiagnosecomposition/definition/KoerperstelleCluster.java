@@ -14,7 +14,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.anatomical_location.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-25T12:33:23.261957+01:00",
+    date = "2021-02-26T00:40:41.826556+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class KoerperstelleCluster implements LocatableEntity {
