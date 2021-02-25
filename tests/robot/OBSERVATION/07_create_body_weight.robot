@@ -282,7 +282,7 @@ ${body_weight_url}			https://www.netzwerk-universitaetsmedizin.de/fhir/Structure
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 
 	[Template]			Create Body Weight with ehr reference
-    [Tags]              valueQuantity    parallel_fail
+    [Tags]              valueQuantity    not-ready_parallel_fail    not-ready
 	#											HTTP	
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.valueQuantity			  	missing			422    	.*If there is no component or hasMember element then either a value.x. or a data absent reason must be present

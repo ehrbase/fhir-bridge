@@ -66,7 +66,7 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              symptoms-covid-19    valid    parallel_fail
+    [Tags]              symptoms-covid-19    valid    not-ready_parallel_fail    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create symptoms-covid-19    Symptoms-Covid-19    create-symptoms-covid-19-present.json
@@ -79,7 +79,7 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              symptoms-covid-19    valid    parallel_fail
+    [Tags]              symptoms-covid-19    valid    not-ready_parallel_fail    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create symptoms-covid-19    Symptoms-Covid-19    create-symptoms-covid-19-absent.json
@@ -92,7 +92,7 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              symptoms-covid-19    valid    parallel_fail
+    [Tags]              symptoms-covid-19    valid    not-ready_parallel_fail    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create symptoms-covid-19    Symptoms-Covid-19    create-symptoms-covid-19-unknown.json
