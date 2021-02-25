@@ -23,7 +23,7 @@ tests/report.html
 .factorypath
 .project
 .settings/
-.vscode/**
+.vscode/
 
 # VSCode REST Client
 # files for local usage only!
