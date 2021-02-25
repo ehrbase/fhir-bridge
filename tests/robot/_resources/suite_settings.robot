@@ -34,6 +34,7 @@ Resource    ${EXECDIR}/robot/_resources/keywords/medicationstatement.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/observation.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/procedure.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/questionnaire.robot
+Resource    ${EXECDIR}/robot/_resources/keywords/bundle.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/json-manipulation.robot
 Variables   ${EXECDIR}/robot/_resources/variables/sut_config.py
             ...    ${SUT}

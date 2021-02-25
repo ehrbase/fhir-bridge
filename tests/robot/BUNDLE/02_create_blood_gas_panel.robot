@@ -23,7 +23,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Peter Wohlfarth
-Force Tags              observation_create    blood-gas-panel    invalid    create
+Force Tags              bundle_create    blood-gas-panel    invalid    create
 
 
 *** Variables ***
@@ -225,8 +225,8 @@ create Blood Gas Panel with ehr reference
 
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Bundle    Blood Gas Panel            	${payload}
-						observation.validate response - 422 (w/o error message)  ${http_status_code}
+						bundle.POST /Bundle  Blood Gas Panel  ${payload}
+						bundle.validate response - 422 (w/o error message)  ${http_status_code}
 
 
 create Blood Gas Panel w/o ehr reference    
@@ -235,8 +235,8 @@ create Blood Gas Panel w/o ehr reference
 	${fake_ehr_ref}=	Evaluate    str(uuid.uuid4())    uuid
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Bundle    Blood Gas Panel            	${payload}
-						observation.validate response - 422 (w/o error message)  ${http_status_code}
+						bundle.POST /Bundle    Blood Gas Panel    ${payload}
+						bundle.validate response - 422 (w/o error message)  ${http_status_code}
 
 
 generate payload from example json
@@ -244,7 +244,11 @@ generate payload from example json
 	[Arguments]			${json_path}    ${value}
 
 	${payload}          Load JSON From File    ${DATA_SET_PATH_BUNDLE}/create-blood-gas.json
-                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
+                        Update Value To Json    ${payload}    $.entry[0].resource.subject.identifier.value    ${subject_id}
+						Update Value To Json    ${payload}    $.entry[1].resource.subject.identifier.value    ${subject_id}
+						Update Value To Json    ${payload}    $.entry[2].resource.subject.identifier.value    ${subject_id}
+						Update Value To Json    ${payload}    $.entry[3].resource.subject.identifier.value    ${subject_id}
+						Update Value To Json    ${payload}    $.entry[4].resource.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 
 						# comment: delete field/object that has value 'missing' in test case table 
