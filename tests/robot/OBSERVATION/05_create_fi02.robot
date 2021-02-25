@@ -308,7 +308,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 
 	[Template]			Create FiO2 with ehr reference
-    [Tags]              valueQuantity    not-ready_parallel_fail    not-ready
+    [Tags]              valueQuantity    not-ready_parallel_fail    not-ready    247
 	#											HTTP	
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.valueQuantity			  	missing			422    	Observation.value.x.: minimum required = 1, but only found 0 .from ${profile url}
@@ -345,7 +345,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.valueQuantity.code	  	${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
 	$.valueQuantity.code	  	${123}			422    	Error parsing JSON: the primitive value must be a string
 	$.valueQuantity.code	  	foobar			422    	Value is 'foobar' but must be '%'
-
+	[Teardown]          TRACE GITHUB ISSUE  247  bug
 
 
 

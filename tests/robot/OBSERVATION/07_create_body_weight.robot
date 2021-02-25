@@ -282,7 +282,7 @@ ${body_weight_url}			https://www.netzwerk-universitaetsmedizin.de/fhir/Structure
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 
 	[Template]			Create Body Weight with ehr reference
-    [Tags]              valueQuantity    not-ready_parallel_fail    not-ready
+    [Tags]              valueQuantity    not-ready_parallel_fail    not-ready    247
 	#											HTTP	
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.valueQuantity			  	missing			422    	.*If there is no component or hasMember element then either a value.x. or a data absent reason must be present
@@ -317,6 +317,7 @@ ${body_weight_url}			https://www.netzwerk-universitaetsmedizin.de/fhir/Structure
 	$.valueQuantity.code	  	${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_weight_url}
 	$.valueQuantity.code	  	${123}			422    	Error parsing JSON: the primitive value must be a string
 	$.valueQuantity.code	  	foobar			422    	.*No matching units for:foobar, expected units:kg.*Bad Request.*
+	[Teardown]          TRACE GITHUB ISSUE  247  bug
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
