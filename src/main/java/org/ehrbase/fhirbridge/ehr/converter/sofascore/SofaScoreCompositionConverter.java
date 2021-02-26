@@ -91,7 +91,6 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
     private void tryEffectivePeriodType(Observation observation, SOFAComposition result) {
         try{
             LocalDateTime date = LocalDateTime.ofInstant(observation.getEffectivePeriod().getStart().toInstant(), ZoneOffset.UTC);
-
             result.setStartTimeValue(date);
             result.setEndTimeValue(date);
         }catch (FHIRException fhirException){

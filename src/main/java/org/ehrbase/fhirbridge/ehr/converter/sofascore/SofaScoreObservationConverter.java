@@ -175,8 +175,8 @@ public class SofaScoreObservationConverter {
 
     private void tryEffectiveDateTime(Observation observation, SOFAScoreObservation result) {
         try{
-            result.setTimeValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
-            result.setOriginValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
+            result.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+            result.setOriginValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         }catch (FHIRException fhirException){
             if(isTimeTypeException(fhirException.toString())){
                 throw fhirException;
