@@ -4,6 +4,7 @@ import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
+import org.apache.tomcat.jni.Proc;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
@@ -55,10 +56,16 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     }
 
     @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
+    public Exception executeMappingException(String path) throws IOException {
+        Procedure procedure = (Procedure) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-             new ProcedureCompositionConverter().toComposition(((Procedure) baseResource));
+             new ProcedureCompositionConverter().toComposition(((Procedure) procedure));
         });
+    }
+
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        // your mapping compared to paragon file
     }
 
     @Override

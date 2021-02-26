@@ -14,6 +14,7 @@ robot -d results/ -L TRACE -i create  robot                     # runs all tests
 robot -d results/ -L TRACE -i createANDobservation  robot       # runs all tests which have the tag create and observation (test needs both tags)
 robot -d results/ -L TRACE -i createORobservation  robot        # runs all tests which have the tag create or observation (test needs at least one of the tag)
 robot -d results/ -L TRACE -i condition -i observation  robot   # runs all tests with tag condition and all tests with tag observation (same as OR)
+
 # command from CI
 robot -d results/0 -L TRACE --skip TODO --skip future --skiponfailure not-ready robot
 ```
@@ -57,3 +58,12 @@ To be more specific about why a TC is marked as `not-ready` we agreed on using s
 # docu command
 python3 -m robot.testdoc robot results/fhir-bridge-robot-testdocu.html
 ```
+
+# How to trigger Jenkins pipline to feed crr environments with test data
+1. login into Jenkins (VPN required)
+2. navigate to "Inject Test Data"
+3. click "Build with Parameters"
+4. select desired environment from dropdown menus
+5. provide EHRbase Basic Auth username and password for selected environent
+6. click "Build"
+7. When tests pass, selected environment should contain FHIR resources and EHR records with Compositions

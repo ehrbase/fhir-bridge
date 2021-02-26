@@ -60,6 +60,108 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
+    void createDiagnoseChronicLiverDisease() throws IOException {
+        create("create-chronic-liver-disease.json");
+        create("create-chronic-liver-disease-autoimmune.json");
+        create("create-chronic-liver-disease-chronic-viral-hepatitis.json");
+        create("create-chronic-liver-disease-cirrhosis-of-liver.json");
+        create("create-chronic-liver-disease-steatosis-of-liver.json");
+    }
+
+    @Test
+    void createDiagnoseChronicLungDisease() throws IOException {
+        create("create-chronic-lung-disease.json");
+        create("create-chronic-lung-disease-asthma.json");
+        create("create-chronic-lung-disease-fibrosis-of-lung.json");
+        create("create-chronic-lung-disease-obstructive-sleep-apnea.json");
+        create("create-chronic-lung-disease-pulmonary-hypertension.json");
+        create("create-chronic-lung-disease-sleep-apnea.json");
+        create("create-chronic-lung-disease-with-alveolar-hypoventilation.json");
+        create("create-chronic-obstructive-lung-disease.json");
+    }
+
+    @Test
+    void createDiagnoseDiabetesMellitus() throws IOException {
+        create("create-diabetes-mellitus.json");
+        create("create-diabetes-mellitus-type-1.json");
+        create("create-diabetes-mellitus-type-2.json");
+        create("create-diabetes-mellitus-type-2-insulin-treated.json");
+    }
+
+    @Test
+    void createDiagnoseMalignantNeoplasticDisease() throws IOException {
+        create("create-malignant-neoplastic-disease-absent.json");
+        create("create-malignant-neoplastic-disease-present-active.json");
+        create("create-malignant-neoplastic-disease-present-remission.json");
+        create("create-malignant-neoplastic-disease-unknown.json");
+    }
+
+
+    @Test
+    void createDiagnoseRheumatologicalImmunologicalDiseases() throws IOException {
+        create("create-rheumatological-immunological-diseases-rheumatism.json");
+        create("create-rheumatological-immunological-diseases-rheumatoid-arthritis.json");
+    }
+
+    @Test
+    void createDiagnoseHIV() throws IOException {
+        create("create-human-immunodeficiency-virus-infection-absent.json");
+        create("create-human-immunodeficiency-virus-infection-present.json");
+        create("create-human-immunodeficiency-virus-infection-unknown.json");
+    }
+
+    @Test
+    void createDiagnoseCardiovascularDiseases() throws IOException {
+        create("create-cardiovascular-diseases-cardiac-arrhythmia.json");
+
+    }
+
+    @Test
+    void createDiagnoseChronicKidneyDisease() throws IOException {
+        create("create-chronic-kidney-disease-absent.json");
+        create("create-chronic-kidney-disease-present.json");
+        create("create-chronic-kidney-disease-stage-5-dialysis.json");
+    }
+
+    @Test
+    void createDiagnoseChronicNeurologicalMentalDiseases() throws IOException {
+        create("create-chronic-neurological-or-mental-disease-anxiety.json");
+    }
+
+    @Test
+    void createDiagnoseComplicationsCovid19() throws IOException {
+        create("create-complications-of-covid-19-cerebrovascular-accident.json");
+        create("create-complications-of-covid-19-infectious-agent-in-bloodstream-absent.json");
+        create("create-complications-of-covid-19-infectious-agent-in-bloodstream-present.json");
+        create("create-complications-of-covid-19-infectious-disease-of-lung.json");
+        create("create-complications-of-covid-19-myocardial-infarction-present.json");
+        create("create-complications-of-covid-19-myocardial-infarction-unknown.json");
+        create("create-complications-of-covid-19-pre-renal-acute-kidney-injury.json");
+        create("create-complications-of-covid-19-pulmonary-embolism.json");
+        create("create-complications-of-covid-19-venous-thrombosis.json");
+    }
+
+    @Test
+    void createDiagnoseOrganRecipient() throws IOException {
+        create("example-organ-recipient.json");
+        create("example-organ-recipient2.json");
+        create("example-organ-recipient3.json");
+    }
+
+    @Test
+    void createDiagnoseGastrointerstinalUlcers() throws IOException {
+        create("create-gastrointestinal-ulcer-absent.json");
+        create("create-gastrointestinal-ulcer-present.json");
+        create("create-gastrointestinal-ulcer-unknown.json");
+    }
+
+    @Test
+    void createDiagnoseDependenceOnVentilator() throws IOException {
+        create("dependence-on-ventilator.json");
+        create("dependence-on-ventilator-2.json");
+    }
+
+    @Test
     void searchBySubject() throws IOException {
         createDefault();
 
@@ -137,11 +239,17 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     }
 
     @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
+    public Exception executeMappingException(String path) throws IOException {
+        Condition condition = (Condition) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            // new YourConverter().toComposition(((YourResource) domainResource)));
+            // new YourConverter().toComposition((condition)));
                 });
             }
+
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        // your mapping compared to paragon file
+    }
 
     @Override
     public Javers getJavers() {

@@ -20,11 +20,11 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...															   Authorization=${AUTHORIZATION['Authorization']}
 Documentation           *NOTE:* use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Dave Petzold
-Force Tags              observation_create    smoking-status    invalid
+Force Tags              observation_create    smoking-status    invalid    create
 
 
 
@@ -457,7 +457,7 @@ ${randinteger}                  ${12345}
 BUG TRACE 01 Create smoking status (Invalid/Missing 'category')
 	[Documentation]		Belongs to TC 006! Remove separation when it's fixed!
 	[Template]			create smoking status with ehr reference
-    [Tags]              category    not-ready    not-ready_bug
+    [Tags]              category    not-ready    not-ready_bug    bugtrace1
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
@@ -472,13 +472,14 @@ BUG TRACE 01 Create smoking status (Invalid/Missing 'category')
 BUG TRACE 02 Create smoking status (Invalid/Missing 'valueCodeableConcept')
 	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
 	[Template]			create smoking status with ehr reference
-    [Tags]              category    not-ready    not-ready_bug
+    [Tags]              category    not-ready    not-ready_bug    bugtrace2
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 
 	# invalid system
 	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
