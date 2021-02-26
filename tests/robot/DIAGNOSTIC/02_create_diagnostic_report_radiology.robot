@@ -148,8 +148,9 @@ ${randinteger}                  ${12345}
 	# FIELD/PATH					VALUE							HTTP
 	# 																CODE
 	#$.conclusion					missing							422
-	$.conclusion					${randstring}					422
-	$.conclusion					EMPTY							422
+	#$.conclusion					${randstring}					422
+	#$.conclusion					EMPTY							422
+	# .conclusion is 0..1 and an unchecked string, therefore no errors are to be expected when this parameter is empty or a random string
 	$.conclusion					${randinteger}					422
 	
 
@@ -190,7 +191,7 @@ ${randinteger}                  ${12345}
 	$.conclusionCode[0].coding[0].system    ${{ [{}] }}				422
 
 	# invalid conclusionCode Coding 0 Code
-	#$.conclusionCode[0].coding[0].code		EMPTY					422
+	$.conclusionCode[0].coding[0].code		EMPTY					422
 	$.conclusionCode[0].coding[0].code		${randinteger}			422
 	$.conclusionCode[0].coding[0].code      ${{ [] }}				422
 	$.conclusionCode[0].coding[0].code      ${{ {} }}				422
@@ -242,31 +243,6 @@ ${randinteger}                  ${12345}
     $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
 
 
-
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# BUG TRACE
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Diagnostic Report Radiology (Invalid/Missing 'conclusion')
-	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
-	[Template]			create Diagnostic Report Radiology with ehr reference
-    [Tags]              conclusion    not-ready    not-ready_bug
-
-	# FIELD/PATH							VALUE					HTTP
-	# 																CODE
-	
-	# missing attribute
-   $.conclusion								missing					422
-
-BUG TRACE 02 Create Diagnostic Report Radiology (Invalid/Missing 'conclusionCode')
-	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
-	[Template]			create Diagnostic Report Radiology with ehr reference
-    [Tags]              conclusionCode    not-ready    not-ready_bug
-
-	# FIELD/PATH							VALUE					HTTP
-	# 																CODE
-	
-	# empty attribute
-   $.conclusionCode[0].coding[0].code		EMPTY					422
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
