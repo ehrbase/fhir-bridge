@@ -23,7 +23,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Peter Wohlfarth
-Force Tags              observation_create    blood-gas-panel    invalid    create
+Force Tags              bundle_create    blood-gas-panel    invalid    create
 
 
 *** Variables ***
@@ -64,21 +64,21 @@ ${randinteger}                  ${12345}
 	[Template]			create Blood Gas Panel with ehr reference
     [Tags]              identifier
 
-	# FIELD/PATH					VALUE							HTTP																										Location
-	# 																CODE
-	$.identifier					${EMPTY}						422
-	$.identifier					${{ [] }}						422
-	$.identifier					${{ {} }}						422
-	$.identifier					${{ [{}] }}						422
+	# FIELD/PATH							VALUE							HTTP																										Location
+	# 																		CODE
+	$.entry[0].resource.identifier				${EMPTY}						422
+	$.entry[0].resource.identifier				${{ [] }}						422
+	$.entry[0].resource.identifier				${{ {} }}						422
+	$.entry[0].resource.identifier				${{ [{}] }}						422
 
 	# invalid system
-	$.identifier[0].system			${EMPTY}					 	422
-	$.identifier[0].system			${randinteger}				 	422
-	$.identifier[0].system			${randstring}				 	422
+	$.entry[0].resource.identifier[0].system	${EMPTY}					 	422
+	$.entry[0].resource.identifier[0].system	${randinteger}				 	422
+	$.entry[0].resource.identifier[0].system	${randstring}				 	422
 
 	# invalid value
-	$.identifier[0].value			${EMPTY}					 	422
-	$.identifier[0].value			${randinteger}				 	422
+	$.entry[0].resource.identifier[0].value		${EMPTY}					 	422
+	$.entry[0].resource.identifier[0].value		${randinteger}				 	422
 
 
 003 Create Blood Gas Panel (Invalid/Missing 'category')
@@ -91,32 +91,32 @@ ${randinteger}                  ${12345}
 	[Template]			create Blood Gas Panel with ehr reference
     [Tags]              category
 
-	# FIELD/PATH							VALUE					HTTP																									Location
-	# 																CODE
+	# FIELD/PATH											VALUE					HTTP																									Location
+	# 																				CODE
 
 	#invalid coding
-	$.category[0].coding    				missing					422
-	$.category[0].coding    				${EMPTY}				422
-	$.category[0].coding					${{ [] }}				422
-	$.category[0].coding					${{ {} }}				422
-	$.category[0].coding					${{ [{}] }}				422
+	$.entry[0].resource.category[0].coding    				missing					422
+	$.entry[0].resource.category[0].coding    				${EMPTY}				422
+	$.entry[0].resource.category[0].coding					${{ [] }}				422
+	$.entry[0].resource.category[0].coding					${{ {} }}				422
+	$.entry[0].resource.category[0].coding					${{ [{}] }}				422
 
 	#invalid code 0
-	$.category[0].coding[0].code    		${EMPTY}    	    	422
-	$.category[0].coding[0].code    		${randstring}	    	422
-	$.category[0].coding[0].code    		${randinteger}	    	422
-    $.category[0].coding[0].code 			${{ [] }}				422
-	$.category[0].coding[0].code 			${{ {} }}				422
-	$.category[0].coding[0].code 			${{ [{}] }}				422
+	$.entry[0].resource.category[0].coding[0].code  		EMPTY}    	    		422
+	$.entry[0].resource.category[0].coding[0].code  		randstring}	    		422
+	$.entry[0].resource.category[0].coding[0].code  		randinteger}	    	422
+    $.entry[0].resource.category[0].coding[0].code 			${{ [] }}				422
+	$.entry[0].resource.category[0].coding[0].code 			${{ {} }}				422
+	$.entry[0].resource.category[0].coding[0].code 			${{ [{}] }}				422
 
 	# invaild system 0
-	$.category[0].coding[0].system    		${EMPTY}    	    	422
-	$.category[0].coding[0].system    		${randstring}	    	422
-	$.category[0].coding[0].system    		${randinteger}	    	422
-	$.category[0].coding[0].system    		http://foobar.de      	422
-    $.category[0].coding[0].system 			${{ [] }}				422
-	$.category[0].coding[0].system 			${{ {} }}				422
-	$.category[0].coding[0].system 			${{ [{}] }}				422
+	$.entry[0].resource.category[0].coding[0].system 		${EMPTY}    	    	422
+	$.entry[0].resource.category[0].coding[0].system 		${randstring}	    	422
+	$.entry[0].resource.category[0].coding[0].system 		${randinteger}	    	422
+	$.entry[0].resource.category[0].coding[0].system 		http://foobar.de      	422
+    $.entry[0].resource.category[0].coding[0].system 	 	${{ [] }}				422
+	$.entry[0].resource.category[0].coding[0].system 	 	${{ {} }}				422
+	$.entry[0].resource.category[0].coding[0].system 	 	${{ [{}] }}				422
 
 
 
@@ -131,37 +131,37 @@ ${randinteger}                  ${12345}
 	[Template]			create Blood Gas Panel with ehr reference
     [Tags]              code
 
-	# FIELD/PATH							VALUE					HTTP																									Location
-	# 																CODE
+	# FIELD/PATH								VALUE					HTTP																									Location
+	# 																	CODE
 
 	# invalid code
-	$.code									missing					422
-	$.code									${EMPTY}				422
-	$.code									${{ [] }}				422
-	$.code									${{ {} }}				422
-	$.code									${{ [{}] }}				422
+	$.entry[0].resource.code					missing					422
+	$.entry[0].resource.code					${EMPTY}				422
+	$.entry[0].resource.code					${{ [] }}				422
+	$.entry[0].resource.code					${{ {} }}				422
+	$.entry[0].resource.code					${{ [{}] }}				422
 
 	# invalid coding
-	$.code.coding   	 					missing					422
-	$.code.coding	    					${EMPTY}				422
-	$.code.coding							${{ [] }}				422
-	$.code.coding							${{ {} }}				422
-	$.code.coding							${{ [{}] }}				422
+	$.entry[0].resource.code.coding   	 		missing					422
+	$.entry[0].resource.code.coding	    		${EMPTY}				422
+	$.entry[0].resource.code.coding				${{ [] }}				422
+	$.entry[0].resource.code.coding				${{ {} }}				422
+	$.entry[0].resource.code.coding				${{ [{}] }}				422
 
 	# invalid Code Coding 0 System
-	$.code.coding[0].system					${EMPTY}				422
-	$.code.coding[0].system					${randstring}			422
-	$.code.coding[0].system					${randinteger}			422
-    $.code.coding[0].system      			${{ [] }}				422
-	$.code.coding[0].system      			${{ {} }}				422
-	$.code.coding[0].system      			${{ [{}] }}				422
+	$.entry[0].resource.code.coding[0].system	${EMPTY}				422
+	$.entry[0].resource.code.coding[0].system	${randstring}			422
+	$.entry[0].resource.code.coding[0].system	${randinteger}			422
+    $.entry[0].resource.code.coding[0].system  	${{ [] }}				422
+	$.entry[0].resource.code.coding[0].system  	${{ {} }}				422
+	$.entry[0].resource.code.coding[0].system  	${{ [{}] }}				422
 
 	# invalid Code Coding 0 Code
-	$.code.coding[0].code					${EMPTY}				422
-	$.code.coding[0].code					${randinteger}			422
-    $.code.coding[0].code      			    ${{ [] }}				422
-	$.code.coding[0].code      			    ${{ {} }}				422
-	$.code.coding[0].code      			    ${{ [{}] }}				422
+	$.entry[0].resource.code.coding[0].code		${EMPTY}				422
+	$.entry[0].resource.code.coding[0].code		${randinteger}			422
+    $.entry[0].resource.code.coding[0].code    	${{ [] }}				422
+	$.entry[0].resource.code.coding[0].code    	${{ {} }}				422
+	$.entry[0].resource.code.coding[0].code    	${{ [{}] }}				422
 
 
 
@@ -174,58 +174,35 @@ ${randinteger}                  ${12345}
 	[Template]		    create Blood Gas Panel w/o ehr reference 
     [Tags]          	subject
 
-	# FIELD/PATH					VALUE							HTTP
-	# 																CODE
+	# FIELD/PATH									VALUE							HTTP
+	# 																				CODE
     # invalid cases for value
-    $.subject.identifier.value		${EMPTY}						422
-    $.subject.identifier.value		${{ [] }}						422
-    $.subject.identifier.value		${{ {} }}						422
-    $.subject.identifier.value		${123}							422
+    $.entry.resource.subject.identifier.value		${EMPTY}						422
+    $.entry.resource.subject.identifier.value		${{ [] }}						422
+    $.entry.resource.subject.identifier.value		${{ {} }}						422
+    $.entry.resource.subject.identifier.value		${123}							422
 
 	# invalid cases for system
-    $.subject.identifier.system		foobar							422
-    $.subject.identifier.system		${EMPTY}						422
-    $.subject.identifier.system		${{ [] }}						422
-    $.subject.identifier.system		${{ {} }}						422
-    $.subject.identifier.system		${123}							422
+    $.entry.resource.subject.identifier.system		foobar							422
+    $.entry.resource.subject.identifier.system		${EMPTY}						422
+    $.entry.resource.subject.identifier.system		${{ [] }}						422
+    $.entry.resource.subject.identifier.system		${{ {} }}						422
+    $.entry.resource.subject.identifier.system		${123}							422
 
 	# invalid cases for identifier
-    $.subject.identifier			missing							422
-    $.subject.identifier			${EMPTY}						422
-    $.subject.identifier			${{ [] }}						422
-    $.subject.identifier			${{ {} }}						422
-    $.subject.identifier			${123}							422
+    $.entry.resource.subject.identifier				missing							422
+    $.entry.resource.subject.identifier				${EMPTY}						422
+    $.entry.resource.subject.identifier				${{ [] }}						422
+    $.entry.resource.subject.identifier				${{ {} }}						422
+    $.entry.resource.subject.identifier				${123}							422
 
 	# invalid cases for subject
-    $.subject						${EMPTY}						422
-    $.subject						${{ [] }}						422
-    $.subject						${{ {} }}						422
-    $.subject						${123}							422
+    $.entry.resource.subject						${EMPTY}						422
+    $.entry.resource.subject						${{ [] }}						422
+    $.entry.resource.subject						${{ {} }}						422
+    $.entry.resource.subject						${123}							422
 	
 
-
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# BUG TRACE
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Blood Gas Panel (Invalid/Missing 'subject')
-	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
-	[Template]			create blood gas panel with ehr reference
-    [Tags]              subject    not-ready    not-ready_bug
-
-	# FIELD/PATH								VALUE					HTTP
-	# 																	CODE
-	
-	# missing subject.identifier.value
-	$.subject.identifier.value					missing					422
-
-	# foobar as subject.identifier.value
-	$.subject.identifier.value					foobar					422    
-
-	# missing subject
-	$.subject									missing					422
-
-	# Random UUID as subject.identifier.value
-	$.subject.identifier.value      			${{str(uuid.uuid4())}}  422
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -248,8 +225,8 @@ create Blood Gas Panel with ehr reference
 
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Observation           Blood Gas Panel            	${payload}
-						observation.validate response - 422 (w/o error message)  ${http_status_code}
+						bundle.POST /Bundle  Blood Gas Panel  ${payload}
+						bundle.validate response - 422 (w/o error message)  ${http_status_code}
 
 
 create Blood Gas Panel w/o ehr reference    
@@ -258,16 +235,20 @@ create Blood Gas Panel w/o ehr reference
 	${fake_ehr_ref}=	Evaluate    str(uuid.uuid4())    uuid
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Observation           Blood Gas Panel            	${payload}
-						observation.validate response - 422 (w/o error message)  ${http_status_code}
+						bundle.POST /Bundle    Blood Gas Panel    ${payload}
+						bundle.validate response - 422 (w/o error message)  ${http_status_code}
 
 
 generate payload from example json
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-blood-gas-panel.json
-                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
+	${payload}          Load JSON From File    ${DATA_SET_PATH_BUNDLE}/create-blood-gas.json
+                        Update Value To Json    ${payload}    $.entry[0].resource.subject.identifier.value    ${subject_id}
+						Update Value To Json    ${payload}    $.entry[1].resource.subject.identifier.value    ${subject_id}
+						Update Value To Json    ${payload}    $.entry[2].resource.subject.identifier.value    ${subject_id}
+						Update Value To Json    ${payload}    $.entry[3].resource.subject.identifier.value    ${subject_id}
+						Update Value To Json    ${payload}    $.entry[4].resource.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 
 						# comment: delete field/object that has value 'missing' in test case table 

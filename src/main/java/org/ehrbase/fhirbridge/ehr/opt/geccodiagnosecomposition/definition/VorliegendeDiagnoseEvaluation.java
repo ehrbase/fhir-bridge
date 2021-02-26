@@ -18,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.problem_diagnosis.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-24T11:52:01.964302+01:00",
+    date = "2021-02-26T00:40:41.813373+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class VorliegendeDiagnoseEvaluation implements EntryEntity {
