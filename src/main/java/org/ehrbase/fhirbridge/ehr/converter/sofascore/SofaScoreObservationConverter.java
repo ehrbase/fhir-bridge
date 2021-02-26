@@ -7,10 +7,14 @@ import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SOFAScoreObservation;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.InstantType;
 import org.hl7.fhir.r4.model.Observation;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 public class SofaScoreObservationConverter {
 
@@ -193,9 +197,9 @@ public class SofaScoreObservationConverter {
 
     private void tryEffectivePeriodType(Observation observation, SOFAScoreObservation result) {
         try{
-            LocalDateTime dateTime = LocalDateTime.parse(observation.getEffectivePeriod().getEnd().toString());
-            result.setTimeValue(dateTime);
-            result.setOriginValue(dateTime);
+            LocalDateTime date = LocalDateTime.ofInstant(observation.getEffectivePeriod().getEnd().toInstant(), ZoneOffset.UTC);
+            result.setTimeValue(date);
+            result.setOriginValue(date);
         }catch (FHIRException fhirException){
             if(isTimeTypeException(fhirException.toString())){
                 throw fhirException;
