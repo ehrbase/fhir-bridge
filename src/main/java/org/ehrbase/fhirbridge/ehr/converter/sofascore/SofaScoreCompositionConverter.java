@@ -15,7 +15,10 @@ import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 
 public class SofaScoreCompositionConverter implements CompositionConverter<SOFAComposition, Observation> {
@@ -87,8 +90,10 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
 
     private void tryEffectivePeriodType(Observation observation, SOFAComposition result) {
         try{
-            result.setStartTimeValue(observation.getEffectivePeriod().getStart().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            result.setEndTimeValue(observation.getEffectivePeriod().getEnd().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            LocalDateTime date = LocalDateTime.ofInstant(observation.getEffectivePeriod().getStart().toInstant(), ZoneOffset.UTC);
+
+            result.setStartTimeValue(date);
+            result.setEndTimeValue(date);
         }catch (FHIRException fhirException){
             if(isTimeTypeException(fhirException.toString())){
                 throw fhirException;
