@@ -48,5 +48,5 @@ Force Tags              condition_search
 *** Keywords ***
 establish preconditions
     generic.prepare new request session     Prefer=return=representation
-    ...									    Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+    ...									    Authorization=${AUTHORIZATION['Authorization']}
     ehr.create new ehr    000_ehr_status.json

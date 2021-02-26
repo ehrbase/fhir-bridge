@@ -1,0 +1,364 @@
+{
+  "resourceType": "Bundle",
+  "id": "bundle-transaction-bga",
+  "meta": {
+    "lastUpdated": "2020-09-24T05:33:00Z"
+  },
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1c349d",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "OBI"
+                }
+              ]
+            },
+            "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+            "value": "24336-0_gasPanelBldA",
+            "assigner": {
+              "reference": "Organization/Charité"
+            }
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "26436-6"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "24336-0",
+              "display": "Gas panel (BldA)"
+            }
+          ],
+          "text": "Gas panel - Arterial blood"
+        },
+        "subject": {
+          "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+          }
+        },
+        "effectiveDateTime": "2020-09-21",
+        "hasMember": [
+          {
+            "reference": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd1"
+          },
+          {
+            "reference": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd2"
+          },
+          {
+            "reference": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd3"
+          },
+          {
+            "reference": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd4"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd1",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "OBI"
+                }
+              ]
+            },
+            "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+            "value": "2744-1_pH",
+            "assigner": {
+              "reference": "Organization/Charité"
+            }
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "26436-6"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2744-1",
+              "display": "pH (BldA)"
+            }
+          ],
+          "text": "pH of Arterial blood"
+        },
+        "subject": {
+          "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+          }
+        },
+        "effectiveDateTime": "2020-09-21",
+        "valueQuantity": {
+          "value": 7.4,
+          "unit": "pH",
+          "system": "http://unitsofmeasure.org",
+          "code": "[pH]"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd2",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "OBI"
+                }
+              ]
+            },
+            "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+            "value": "2019-8_paCO2",
+            "assigner": {
+              "reference": "Organization/Charité"
+            }
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "26436-6"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2019-8",
+              "display": "CO2 (BldA) [Partial pressure]"
+            }
+          ],
+          "text": "Carbon dioxide [Partial pressure] in Arterial blood"
+        },
+        "subject": {
+          "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+          }
+        },
+        "effectiveDateTime": "2020-09-21",
+        "valueQuantity": {
+          "value": 44,
+          "unit": "mmHg",
+          "system": "http://unitsofmeasure.org",
+          "code": "mm[Hg]"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd3",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "OBI"
+                }
+              ]
+            },
+            "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+            "value": "2703-7_paO2",
+            "assigner": {
+              "reference": "Organization/Charité"
+            }
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "26436-6"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2703-7",
+              "display": "Oxygen (BldA) [Partial pressure]"
+            }
+          ],
+          "text": "Oxygen [Partial pressure] in Arterial blood"
+        },
+        "subject": {
+          "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+          }
+        },
+        "effectiveDateTime": "2020-09-21",
+        "valueQuantity": {
+          "value": 67,
+          "unit": "mmHg",
+          "system": "http://unitsofmeasure.org",
+          "code": "mm[Hg]"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl":  "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd4",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation"
+          ]
+        },
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "OBI"
+                }
+              ]
+            },
+            "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+            "value": "2708-6_oxygenSaturation",
+            "assigner": {
+              "reference": "Organization/Charité"
+            }
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2708-6",
+              "display": "Oxygen saturation in Arterial blood"
+            }
+          ],
+          "text": "Oxygen saturation in Arterial blood"
+        },
+        "subject": {
+          "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientasdId}}"
+          }
+        },
+        "effectiveDateTime": "2020-09-21",
+        "valueQuantity": {
+          "value": 98,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    }
+  ]
+}
