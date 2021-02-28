@@ -3,9 +3,12 @@ package org.ehrbase.fhirbridge.fhir.observation;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
+import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.KorpergrosseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.definition.GrosseLangeObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
+import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
@@ -40,75 +43,54 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
     // check payload
     @Test
     void mapping_normal() throws IOException {
-        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-normal.json");//fhir-beispiel
-        BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
-        KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
-        Diff diff =  compareCompositions(getJavers(), "paragon-body-height-normal.json", mapped);
-        assertEquals(0, diff.getChanges().size());
+        testMapping("create-body-height-normal.json",
+                "paragon-body-height-normal.json");
     }
 
     @Test
     void mapping_loinc_datetime() throws IOException {
-        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-loinc-datetime.json");
-        BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
-        KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
-        Diff diff =  compareCompositions(getJavers(), "paragon-body-height-loinc-datetime.json", mapped);
-        assertEquals(0, diff.getChanges().size());
+        testMapping("create-body-height-loinc-datetime.json",
+                "paragon-body-height-loinc-datetime.json");
     }
 
     @Test
     void mapping_loinc_period() throws IOException {
-        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-loinc-period.json");
-        BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
-        KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
-        Diff diff =  compareCompositions(getJavers(), "paragon-body-height-loinc-period.json", mapped);
-        assertEquals(0, diff.getChanges().size());
+        testMapping("create-body-height-loinc-period.json",
+                "paragon-body-height-loinc-period.json");
     }
 
     @Test
     void mapping_loinc_period_2() throws IOException {
-        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-loinc-period_2.json");
-        BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
-        KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
-        Diff diff =  compareCompositions(getJavers(), "paragon-body-height-loinc-period_2.json", mapped);
-        assertEquals(0, diff.getChanges().size());
+        testMapping("create-body-height-loinc-period_2.json",
+                "paragon-body-height-loinc-period_2.json");
     }
 
     @Test
     void mapping_snomed_datetime() throws IOException {
-        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-snomed-datetime.json");
-        BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
-        KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
-        Diff diff =  compareCompositions(getJavers(), "paragon-body-height-snomed-datetime.json", mapped);
-        assertEquals(0, diff.getChanges().size());
+        testMapping("create-body-height-snomed-datetime.json",
+                "paragon-body-height-snomed-datetime.json");
     }
 
     @Test
     void mapping_snomed_period() throws IOException {
-        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-snomed-period.json");
-        BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
-        KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
-        Diff diff =  compareCompositions(getJavers(), "paragon-body-height-snomed-period.json", mapped);
-        assertEquals(0, diff.getChanges().size());
+        testMapping("create-body-height-snomed-period.json",
+                "paragon-body-height-snomed-period.json");
     }
 
     @Test
     void mapping_snomed_period_2() throws IOException {
-        Observation observation = (Observation) super.testFileLoader.loadResource("create-body-height-snomed-period_2.json");
-        BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
-        KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
-        Diff diff =  compareCompositions(getJavers(), "paragon-body-height-snomed-period_2.json", mapped);
-        assertEquals(0, diff.getChanges().size());
+        testMapping("create-body-height-snomed-period_2.json",
+                "paragon-body-height-snomed-period_2.json");
     }
 
+
+    // #####################################################################################
+    // check exceptions
     @Test
     void createInvalidBefund() throws IOException {
         Exception exception = executeMappingException("create-body-height-loinc-datetime_invalid.json");
         assertEquals("No time is set", exception.getMessage());
     }
-
-    // #####################################################################################
-    // check exceptions
 
 
     // #####################################################################################
@@ -131,5 +113,12 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
         });
     }
 
-
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        Observation observation = (Observation)  super.testFileLoader.loadResource(resourcePath);
+        BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
+        KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
+        Diff diff = compareCompositions(getJavers(), paragonPath, mapped);
+        assertEquals(0, diff.getChanges().size());
+    }
 }
