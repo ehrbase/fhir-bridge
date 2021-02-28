@@ -33,14 +33,12 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
             return null;
         }
 
-        ZonedDateTime fhirEffectiveDateTime = getDateTime(observation);
-
         GrosseLangeObservation grosseLangeObservation = new GrosseLangeObservation();
-        setDateTime(grosseLangeObservation, fhirEffectiveDateTime);
+        setDateTime(grosseLangeObservation, getDateTime(observation));
         setDefault(grosseLangeObservation);
         setMappingContent(observation, grosseLangeObservation);
 
-        return createComposition(fhirEffectiveDateTime, grosseLangeObservation);
+        return createComposition(getDateTime(observation), grosseLangeObservation);
     }
 
     private KorpergrosseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GrosseLangeObservation grosseLangeObservation) {
