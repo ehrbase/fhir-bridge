@@ -14,7 +14,7 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
-import java.time.ZonedDateTime;
+import java.util.GregorianCalendar;
 
 public class SmokingStatusCompositionConverter implements CompositionConverter<RaucherstatusComposition, Observation> {
 
@@ -40,10 +40,12 @@ public class SmokingStatusCompositionConverter implements CompositionConverter<R
         RaucherstatusEvaluation evaluation = new RaucherstatusEvaluation();
 
         //map values of interest from FHIR observation
-        ZonedDateTime effectiveDateTime = null;
-        try {
-            effectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+        GregorianCalendar effectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar();
+        if (effectiveDateTime != null) {
+            result.setStartTimeValue(effectiveDateTime.toZonedDateTime());
+        }
 
+        try {
             Coding codin = observation.getValueCodeableConcept().getCoding().get(0);
 
             RauchverhaltenDefiningcode rauchverhaltenDefiningcode;
@@ -79,7 +81,6 @@ public class SmokingStatusCompositionConverter implements CompositionConverter<R
         result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
         result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
-        result.setStartTimeValue(effectiveDateTime);
         result.setComposer(new PartySelf()); //FIXME: sensible value
 
         return result;
