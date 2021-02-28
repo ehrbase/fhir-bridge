@@ -3,12 +3,9 @@ package org.ehrbase.fhirbridge.fhir.observation;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
-import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.KorpergrosseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.definition.GrosseLangeObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
@@ -42,43 +39,43 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
     // #####################################################################################
     // check payload
     @Test
-    void mapping_normal() throws IOException {
+    void mappingNormal() throws IOException {
         testMapping("create-body-height-normal.json",
                 "paragon-body-height-normal.json");
     }
 
     @Test
-    void mapping_loinc_datetime() throws IOException {
+    void mappingLoincDatetime() throws IOException {
         testMapping("create-body-height-loinc-datetime.json",
                 "paragon-body-height-loinc-datetime.json");
     }
 
     @Test
-    void mapping_loinc_period() throws IOException {
+    void mappingLoincPeriod() throws IOException {
         testMapping("create-body-height-loinc-period.json",
                 "paragon-body-height-loinc-period.json");
     }
 
     @Test
-    void mapping_loinc_period_2() throws IOException {
+    void mappingLoincPeriod2() throws IOException {
         testMapping("create-body-height-loinc-period_2.json",
                 "paragon-body-height-loinc-period_2.json");
     }
 
     @Test
-    void mapping_snomed_datetime() throws IOException {
+    void mappingSnomedDatetime() throws IOException {
         testMapping("create-body-height-snomed-datetime.json",
                 "paragon-body-height-snomed-datetime.json");
     }
 
     @Test
-    void mapping_snomed_period() throws IOException {
+    void mappingSnomedPeriod() throws IOException {
         testMapping("create-body-height-snomed-period.json",
                 "paragon-body-height-snomed-period.json");
     }
 
     @Test
-    void mapping_snomed_period_2() throws IOException {
+    void mappingSnomedPeriod2() throws IOException {
         testMapping("create-body-height-snomed-period_2.json",
                 "paragon-body-height-snomed-period_2.json");
     }
