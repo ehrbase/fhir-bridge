@@ -33,30 +33,27 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
             return null;
         }
 
-        ZonedDateTime fhirEffectiveDateTime = null;
-        fhirEffectiveDateTime = getDateTime(observation);
+        ZonedDateTime fhirEffectiveDateTime = getDateTime(observation);
 
         GrosseLangeObservation grosseLangeObservation = new GrosseLangeObservation();
         setDateTime(grosseLangeObservation, fhirEffectiveDateTime);
         setDefault(grosseLangeObservation);
         setMappingContent(observation, grosseLangeObservation);
 
-        KorpergrosseComposition composition = createComposition(fhirEffectiveDateTime, grosseLangeObservation);
-
-        return composition;
+        return createComposition(fhirEffectiveDateTime, grosseLangeObservation);
     }
 
     private KorpergrosseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GrosseLangeObservation grosseLangeObservation) {
         KorpergrosseComposition composition = new KorpergrosseComposition();
         composition.setGrosseLange(grosseLangeObservation);
         // Required fields by API
-        composition.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
+        composition.setLanguage(Language.DE);
         composition.setLocation("test");
         composition.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
         composition.setTerritory(Territory.DE);
         composition.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
         composition.setStartTimeValue(fhirEffectiveDateTime);
-        composition.setComposer(new PartySelf()); // FIXME: id ausdenken oder weglassen?
+        composition.setComposer(new PartySelf());
 
         return (composition);
     }
@@ -89,7 +86,7 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
     }
 
     private void setDefault(GrosseLangeObservation grosseLangeObservation) {
-        grosseLangeObservation.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
+        grosseLangeObservation.setLanguage(Language.DE);
         grosseLangeObservation.setSubject(new PartySelf());
     }
 }
