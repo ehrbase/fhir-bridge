@@ -17,13 +17,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.absence.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-11T14:34:48.658996+01:00",
+    date = "2021-03-01T10:46:46.885996+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class UnbekannteProzedurEvaluation implements EntryEntity {
   /**
    * Path: GECCO_Prozedur/Unbekannte Prozedur/Unbekannte Prozedur
    * Description: Positive Aussage, dass keine Informationen verfügbar sind.
+   * Comment: Zum Beispiel: "Es liegen keine Informationen über Nebenwirkungen vor"; "Es liegen keine Informationen über Probleme oder Diagnosen vor"; "Es liegen keine Informationen über vorangegangene Verfahren vor"; oder "Es liegen keine Informationen über verwendete Medikamente vor".
    */
   @Path("/data[at0001]/items[at0002 and name/value='Unbekannte Prozedur']/value|defining_code")
   private NameDerProzedurDefiningCode unbekannteProzedurDefiningCode;
@@ -37,6 +38,7 @@ public class UnbekannteProzedurEvaluation implements EntryEntity {
   /**
    * Path: GECCO_Prozedur/Unbekannte Prozedur/Aussage über die fehlende Information
    * Description: Beschreibung des Grundes, warum keine Informationen vorhanden sind.
+   * Comment: Zum Beispiel: Der Patient ist bewusstlos oder weigert sich Informationen preiszugeben. Die Codierung mit einer Terminologie wird empfohlen, wenn möglich.
    */
   @Path("/data[at0001]/items[at0005 and name/value='Aussage über die fehlende Information']/value|value")
   private String aussageUeberDieFehlendeInformationValue;

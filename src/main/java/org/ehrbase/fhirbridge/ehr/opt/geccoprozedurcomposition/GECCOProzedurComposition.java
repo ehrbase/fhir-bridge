@@ -30,11 +30,17 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.Unbeka
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-11T14:34:48.478675+01:00",
+    date = "2021-03-01T10:46:46.640243+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 @Template("GECCO_Prozedur")
-public class GECCOProzedurComposition implements CompositionEntity, Composition {
+public class GECCOProzedurComposition implements Composition, CompositionEntity {
+  /**
+   * Path: GECCO_Prozedur/category
+   */
+  @Path("/category|defining_code")
+  private Category categoryDefiningCode;
+
   /**
    * Path: GECCO_Prozedur/context/Erweiterung
    * Description: Ergänzende Angaben zum Registereintrag.
@@ -125,12 +131,6 @@ public class GECCOProzedurComposition implements CompositionEntity, Composition 
   private FeederAudit feederAudit;
 
   /**
-   * Path: GECCO_Prozedur/category
-   */
-  @Path("/category|defining_code")
-  private Category categoryDefiningCode;
-
-  /**
    * Path: GECCO_Prozedur/territory
    */
   @Path("/territory")
@@ -138,6 +138,14 @@ public class GECCOProzedurComposition implements CompositionEntity, Composition 
 
   @Id
   private VersionUid versionUid;
+
+  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+     this.categoryDefiningCode = categoryDefiningCode;
+  }
+
+  public Category getCategoryDefiningCode() {
+     return this.categoryDefiningCode ;
+  }
 
   public void setErweiterung(List<Cluster> erweiterung) {
      this.erweiterung = erweiterung;
@@ -250,14 +258,6 @@ public class GECCOProzedurComposition implements CompositionEntity, Composition 
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
-  }
-
-  public void setCategoryDefiningCode(Category categoryDefiningCode) {
-     this.categoryDefiningCode = categoryDefiningCode;
-  }
-
-  public Category getCategoryDefiningCode() {
-     return this.categoryDefiningCode ;
   }
 
   public void setTerritory(Territory territory) {

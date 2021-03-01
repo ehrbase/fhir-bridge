@@ -24,6 +24,8 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.Unbeka
 public class GECCOProzedurCompositionContainment extends Containment {
   public SelectAqlField<GECCOProzedurComposition> G_E_C_C_O_PROZEDUR_COMPOSITION = new AqlFieldImp<GECCOProzedurComposition>(GECCOProzedurComposition.class, "", "GECCOProzedurComposition", GECCOProzedurComposition.class, this);
 
+  public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(GECCOProzedurComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
+
   public ListSelectAqlField<Cluster> ERWEITERUNG = new ListAqlFieldImp<Cluster>(GECCOProzedurComposition.class, "/context/other_context[at0001]/items[at0002]", "erweiterung", Cluster.class, this);
 
   public ListSelectAqlField<GeccoProzedurKategorieElement> KATEGORIE = new ListAqlFieldImp<GeccoProzedurKategorieElement>(GECCOProzedurComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", GeccoProzedurKategorieElement.class, this);
@@ -51,8 +53,6 @@ public class GECCOProzedurCompositionContainment extends Containment {
   public SelectAqlField<Language> LANGUAGE = new AqlFieldImp<Language>(GECCOProzedurComposition.class, "/language", "language", Language.class, this);
 
   public SelectAqlField<FeederAudit> FEEDER_AUDIT = new AqlFieldImp<FeederAudit>(GECCOProzedurComposition.class, "/feeder_audit", "feederAudit", FeederAudit.class, this);
-
-  public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(GECCOProzedurComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
 
   public SelectAqlField<Territory> TERRITORY = new AqlFieldImp<Territory>(GECCOProzedurComposition.class, "/territory", "territory", Territory.class, this);
 

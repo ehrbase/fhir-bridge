@@ -31,7 +31,5 @@
       "value": "{{patientId}}"
     }
   },
-  "performedPeriod": {
-    "start": "2020-12-12"
-  }
+  "performedDateTime": "2020-12-12"
 }

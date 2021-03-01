@@ -19,13 +19,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 @Archetype("openEHR-EHR-ACTION.procedure.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-11T14:34:48.561114+01:00",
+    date = "2021-03-01T10:46:46.762932+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class ProzedurAction implements EntryEntity {
   /**
    * Path: GECCO_Prozedur/Prozedur/Name der Prozedur
    * Description: Identifizierung der Prozedur über den Namen.
+   * Comment: Wenn möglich wird die Kodierung der spezifischen Prozedur mit einer Terminologie bevorzugt.
    */
   @Path("/description[at0001]/items[at0002]/value|defining_code")
   private NameDerProzedurDefiningCode nameDerProzedurDefiningCode;
@@ -47,6 +48,7 @@ public class ProzedurAction implements EntryEntity {
   /**
    * Path: GECCO_Prozedur/Prozedur/Körperstelle
    * Description: Anatomische Lokalisation, an der die Prozedur durchgeführt wird.
+   * Comment: Das Vorkommen dieses Datenelements ist nicht eingeschränkt. Dies ermöglicht die Darstellung von klinischen Situationen, in denen alle Eigenschaften, ausgenommen die anatomische Lokalisation, identisch sind, wie z.B. das Entfernen mehrerer Hautläsionen an verschiedenen Stellen. Verwenden Sie dieses Datenelement, um einfache Begriffe oder präkoordinierte anatomische Lokalisationen aufzunehmen. Wenn die Anforderungen an die Erfassung der anatomischen Lokalisation zur Laufzeit durch die Anwendung festgelegt werden oder komplexere Modellierungen wie z.B. die relative Lokalisation erforderlich sind, verwenden Sie entweder CLUSTER.anatomical_location oder CLUSTER.relative_location innerhalb des Slots "Details zur Prozedur" in diesem Archetyp. Wird die anatomische Lokalisation über vordefinierte Codes in den Namen der Prozedur aufgenommen, wird dieses Datenelement redundant.
    */
   @Path("/description[at0001]/items[at0063]/value|defining_code")
   private KoerperstelleDefiningCode koerperstelleDefiningCode;
@@ -76,9 +78,10 @@ public class ProzedurAction implements EntryEntity {
   /**
    * Path: GECCO_Prozedur/Prozedur/Art der Prozedur
    * Description: Die Art der Prozedur.
+   * Comment: Dieses pragmatische Datenelement kann zur Unterstützung der Gliederung für die Benutzeroberfläche verwendet werden.
    */
   @Path("/description[at0001]/items[at0067]/value|defining_code")
-  private KategorieDefiningCode artDerProzedurDefiningCode;
+  private ArtDerProzedurDefiningCode artDerProzedurDefiningCode;
 
   /**
    * Path: GECCO_Prozedur/Prozedur/Tree/Art der Prozedur/null_flavour
@@ -89,6 +92,7 @@ public class ProzedurAction implements EntryEntity {
   /**
    * Path: GECCO_Prozedur/Prozedur/Durchführungsabsicht
    * Description: Grund, warum die angegebene Aktivität für diese Prozedur durchgeführt wurde.
+   * Comment: Zum Beispiel: der Grund für den Abbruch oder die Unterbrechung der Prozedur.
    */
   @Path("/description[at0001]/items[at0014 and name/value='Durchführungsabsicht']/value|value")
   private String durchfuehrungsabsichtValue;
@@ -235,11 +239,11 @@ public class ProzedurAction implements EntryEntity {
      return this.multimedia ;
   }
 
-  public void setArtDerProzedurDefiningCode(KategorieDefiningCode artDerProzedurDefiningCode) {
+  public void setArtDerProzedurDefiningCode(ArtDerProzedurDefiningCode artDerProzedurDefiningCode) {
      this.artDerProzedurDefiningCode = artDerProzedurDefiningCode;
   }
 
-  public KategorieDefiningCode getArtDerProzedurDefiningCode() {
+  public ArtDerProzedurDefiningCode getArtDerProzedurDefiningCode() {
      return this.artDerProzedurDefiningCode ;
   }
 

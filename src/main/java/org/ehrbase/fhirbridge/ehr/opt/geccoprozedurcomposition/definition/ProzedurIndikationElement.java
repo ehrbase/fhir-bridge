@@ -11,13 +11,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-11T14:34:48.581725+01:00",
+    date = "2021-03-01T10:46:46.784709+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class ProzedurIndikationElement implements LocatableEntity {
   /**
    * Path: GECCO_Prozedur/Prozedur/Indikation
    * Description: Der klinische oder prozessbezogene Grund für die Prozedur.
+   * Comment: Die Kodierung der Indikation mit einer Terminologie wird nach Möglichkeit bevorzugt. Dieses Datenelement ermöglicht mehrere Vorkommen. Zum Beispiel: "Fehlgeschlagenen Darmvorbereitung" oder "Darmkrebsvorsorge".
    */
   @Path("/value|value")
   private String value;
