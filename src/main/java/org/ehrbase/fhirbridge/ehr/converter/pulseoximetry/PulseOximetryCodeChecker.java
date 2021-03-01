@@ -38,13 +38,32 @@ public class PulseOximetryCodeChecker {
 
     private void matchCodes(List<Coding> codes) {
         for (Coding code : codes) {
-            if (!(CODING_3.getCode().get(0).get(0).equals(code.getSystem()) && CODING_3.getCode().get(0).get(1).equals(code.getCode())) &&
-                    !(CODING_3.getCode().get(1).get(0).equals(code.getSystem()) && CODING_3.getCode().get(1).get(1).equals(code.getCode())) ) {
-                throw new UnprocessableEntityException("The Code of code.coding not supported for the Fhir-Bridge");
-            }else if (!(CODING_4.getCode().get(0).get(0).equals(code.getSystem()) && CODING_4.getCode().get(0).get(1).equals(code.getCode())) &&
-                    !(CODING_4.getCode().get(1).get(0).equals(code.getSystem()) && CODING_4.getCode().get(1).get(1).equals(code.getCode())) ) {
+            if(!matchCode3(code) || !matchCode4(code)){
                 throw new UnprocessableEntityException("The Code of code.coding not supported for the Fhir-Bridge");
             }
         }
     }
+
+    private boolean matchCode4(Coding code) {
+        if (CODING_4.getCode().get(0).get(0).equals(code.getSystem()) && CODING_4.getCode().get(0).get(1).equals(code.getCode()) &&
+                CODING_4.getCode().get(1).get(0).equals(code.getSystem()) && CODING_4.getCode().get(1).get(1).equals(code.getCode())) {
+            return true;
+        }else {
+            throw new UnprocessableEntityException("The Code "+code.getCode()+" not supported for the Fhir-Bridge");
+        }
+
+    }
+
+
+    private boolean matchCode3(Coding code) {
+        if (CODING_3.getCode().get(0).get(0).equals(code.getSystem()) && CODING_3.getCode().get(0).get(1).equals(code.getCode()) &&
+                CODING_3.getCode().get(1).get(0).equals(code.getSystem()) && CODING_3.getCode().get(1).get(1).equals(code.getCode())) {
+            return true;
+        } else {
+            throw new UnprocessableEntityException("The Code "+code.getCode()+" not supported for the Fhir-Bridge");
+        }
+    }
+
 }
+
+
