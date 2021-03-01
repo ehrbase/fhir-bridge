@@ -22,9 +22,22 @@ public class SofaScoreObservationConverter {
     }
 
     private void mapCodes(SOFAScoreObservation sofaScore, Observation observation) {
-        // FIXME: I don't think JSON has an order in the components, instead of get(x) it should check the code to get the right component.
-        String nervensystemCode = getComponent(observation, "ns").getValueCodeableConcept().getCoding().get(0).getCode();
-        String herzKreislaufSystemCode = getComponent(observation, "cvs").getValueCodeableConcept().getCoding().get(0).getCode();
+
+        // all optional values should be checked to be present, there is no need of checking mandatory values
+        Observation.ObservationComponentComponent ns = getComponent(observation, "ns");
+
+        if (ns.getValueCodeableConcept().getCoding().isEmpty()) {
+            throw new UnprocessableEntityException("The component 'ns' doesn't have a code");
+        }
+
+        Observation.ObservationComponentComponent cvs = getComponent(observation, "cvs");
+
+        if (cvs.getValueCodeableConcept().getCoding().isEmpty()) {
+            throw new UnprocessableEntityException("The component 'cvs' doesn't have a code");
+        }
+
+        String nervensystemCode = ns.getValueCodeableConcept().getCoding().get(0).getCode();
+        String herzKreislaufSystemCode = cvs.getValueCodeableConcept().getCoding().get(0).getCode();
 
         mapAtemtaetigkeitCode(sofaScore, observation);
         mapNervenSystemCode(sofaScore, nervensystemCode);
@@ -43,14 +56,14 @@ public class SofaScoreObservationConverter {
     private Observation.ObservationComponentComponent getComponent(Observation o, String code) {
         for (Observation.ObservationComponentComponent component : o.getComponent()) {
             for (Coding coding: component.getCode().getCoding()) {
-                if (coding.getCode() == code) {
+                if (coding.getCode().equals(code)) {
                     return component;
                 }
             }
         }
 
         // not found
-        throw new UnprocessableEntityException("The component with code "+ code + " is not present");
+        throw new UnprocessableEntityException("The component with code '"+ code + "' is not present");
     }
 
     private void mapSofaScoreMagnitude(SOFAScoreObservation sofaScore, Observation observation) {
@@ -59,9 +72,17 @@ public class SofaScoreObservationConverter {
         sofaScore.setSofaScoreMagnitude(sofaScoreCodeLong);
     }
 
-
+    // kidney
     private void mapNierenFunktions(SOFAScoreObservation sofaScore, Observation observation) {
-        String nierenfunktionsCode = getComponent(observation,"kid").getValueCodeableConcept().getCoding().get(0).getCode();
+
+        Observation.ObservationComponentComponent kid = getComponent(observation, "kid");
+
+        if (kid.getValueCodeableConcept().getCoding().isEmpty()) {
+            throw new UnprocessableEntityException("The component 'kid' doesn't have a code");
+        }
+
+        String nierenfunktionsCode = kid.getValueCodeableConcept().getCoding().get(0).getCode();
+
         switch (nierenfunktionsCode) {
             case "kid1":
                 sofaScore.setNierenfunktion(SofaScoreCode.NIERENFUNKTIONS_SCORE_1.getValue());
@@ -80,8 +101,17 @@ public class SofaScoreObservationConverter {
         }
     }
 
+    // coagulation
     private void mapBlutgerinnungscode(SOFAScoreObservation sofaScore, Observation observation) {
-        String blutgerinnungsCode = getComponent(observation, "coa").getValueCodeableConcept().getCoding().get(0).getCode();
+
+        Observation.ObservationComponentComponent coa = getComponent(observation, "coa");
+
+        if (coa.getValueCodeableConcept().getCoding().isEmpty()) {
+            throw new UnprocessableEntityException("The component 'coa' doesn't have a code");
+        }
+
+        String blutgerinnungsCode = coa.getValueCodeableConcept().getCoding().get(0).getCode();
+
         switch (blutgerinnungsCode) {
             case "coa1":
                 sofaScore.setBlutgerinnung(SofaScoreCode.BLUTGERINNUNGS_SCORE_1.getValue());
@@ -100,8 +130,17 @@ public class SofaScoreObservationConverter {
         }
     }
 
+    // liver
     private void mapLeberfunktionsCode(SOFAScoreObservation sofaScore, Observation observation) {
-        String leberfunktionsCode = getComponent(observation, "liv").getValueCodeableConcept().getCoding().get(0).getCode();
+
+        Observation.ObservationComponentComponent liv = getComponent(observation, "liv");
+
+        if (liv.getValueCodeableConcept().getCoding().isEmpty()) {
+            throw new UnprocessableEntityException("The component 'liv' doesn't have a code");
+        }
+
+        String leberfunktionsCode = liv.getValueCodeableConcept().getCoding().get(0).getCode();
+
         switch (leberfunktionsCode) {
             case "liv1":
                 sofaScore.setLeberfunktion(SofaScoreCode.LEBERFUNKTIONS_SCORE_1.getValue());
@@ -120,6 +159,7 @@ public class SofaScoreObservationConverter {
         }
     }
 
+    // cardiovascular
     private void mapHerzKreislaufSystemCode(SOFAScoreObservation sofaScore, String herzKreislaufSystemCode, String nervensystemCode) {
         if (herzKreislaufSystemCode.equals("cvs1")) {
             sofaScore.setHerzKreislaufSystem(SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_1.getValue());
@@ -135,8 +175,16 @@ public class SofaScoreObservationConverter {
 
     }
 
+    // respiration
     private void mapAtemtaetigkeitCode(SOFAScoreObservation sofaScore, Observation observation) {
-        String atemtaetigkeitCode = getComponent(observation, "resp").getValueCodeableConcept().getCoding().get(0).getCode();
+
+        Observation.ObservationComponentComponent resp = getComponent(observation, "resp");
+
+        if (resp.getValueCodeableConcept().getCoding().isEmpty()) {
+            throw new UnprocessableEntityException("The component 'resp' doesn't have a code");
+        }
+
+        String atemtaetigkeitCode = resp.getValueCodeableConcept().getCoding().get(0).getCode();
 
         switch (atemtaetigkeitCode) {
             case "resp1":
@@ -156,6 +204,7 @@ public class SofaScoreObservationConverter {
         }
     }
 
+    // nervous system
     private void mapNervenSystemCode(SOFAScoreObservation sofaScore, String nervensystemCode) {
         switch (nervensystemCode) {
             case "ns1":
