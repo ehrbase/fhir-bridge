@@ -44,13 +44,11 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
         FeederAudit fa = CommonData.constructFeederAudit(observation);
         result.setFeederAudit(fa);
 
+        // FIXME: this will throw an error if we get something different than datetime (period, timing, instant are allowed!)
         DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
 
-        try {
-            result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
-        }catch (Exception e){
-            throw new UnprocessableEntityException(e.getMessage());
-        }
+        // this throws UnprocessableEntityException if there is a problem with the mapping
+        result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
 
         // ======================================================================================
         // Required fields by API
