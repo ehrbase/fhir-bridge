@@ -580,32 +580,32 @@ ${vCC_URL}		https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/frailty
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'effectiveDateTime')
-	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
-	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              effectiveDateTime    not-ready    not-ready_bug
+#BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'effectiveDateTime')
+	#[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
+	#[Template]			create clinical frailty scale score with ehr reference
+    #[Tags]              effectiveDateTime    not-ready    not-ready_bug
 
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 	
 	# missing attribute
-	$.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
-
-
-BUG TRACE 02 Create Clinical Frailty Scale Score (Invalid/Missing 'valueCodeableConcept')
-	[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
-	[Template]			create clinical frailty scale score with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
+	#$.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
+	# Throws a 422 and error message "Cannot invoke "java.util.GregorianCalendar.toZonedDateTime()" because the return value of "org.hl7.fhir.r4.model.DateTimeType.getValueAsCalendar()" is null"
+#BUG TRACE 02 Create Clinical Frailty Scale Score (Invalid/Missing 'valueCodeableConcept')
+	#[Documentation]		Belongs to TC 010! Remove separation when it's fixed!
+	#[Template]			create clinical frailty scale score with ehr reference
+    #[Tags]              valueCodeableConcept    not-ready    not-ready_bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 	
 	# invalid system
-	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+	#$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+	# value just have to be a valid url https://simplifier.net/forschungsnetzcovid-19/frailtyscore
 
 	# invalid code
-	$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
-
+	#$.valueCodeableConcept.coding[0].code		missing					422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..code
+	#parameter is 0..1 in simplifier https://simplifier.net/forschungsnetzcovid-19/frailtyscore
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
