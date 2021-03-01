@@ -20,7 +20,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.Unbeka
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.MedizingeraetCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NichtDurchgefuehrteProzedurEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.CurrentStateDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ArtDerProzedurDefiningCode;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Procedure;
@@ -43,7 +42,6 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
     private static final Map<String, KategorieDefiningCode> kategorieMap = new HashMap<>();
     private static final Map<String, NameDerProzedurDefiningCode> nameDerProzedurMap = new HashMap<>();
-    private static final Map<String, ArtDerProzedurDefiningCode> artDerProzedurMap = new HashMap<>();
     private static final Map<String, KoerperstelleDefiningCode> koerperstelleMap = new HashMap<>();
     private static final Map<String, GeraetenameDefiningCode> geraetenameMap = new HashMap<>();
 
@@ -65,10 +63,6 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
         for (GeraetenameDefiningCode geraetenameDefiningCode : GeraetenameDefiningCode.values()) {
             geraetenameMap.put(geraetenameDefiningCode.getCode(), geraetenameDefiningCode);
-        }
-
-        for (ArtDerProzedurDefiningCode artDerProzedurDefiningCode : ArtDerProzedurDefiningCode.values()) {
-            artDerProzedurMap.put(artDerProzedurDefiningCode.getCode(), artDerProzedurDefiningCode);
         }
     }
 
@@ -127,7 +121,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
                 mapMedizingerat(durchgefuehrteProzedur, procedure);
             }
 
-            durchgefuehrteProzedur.setArtDerProzedurDefiningCode(mapArtDerProzedur(procedure));
+            durchgefuehrteProzedur.setArtDerProzedurDefiningCode(composition.getKategorie().get(0).getValue());
             durchgefuehrteProzedur.setDurchfuehrungsabsichtValue(mapDurchfuhrungsabsicht(procedure));
 
             durchgefuehrteProzedur.setKommentarValue(procedure.getNote().toString());
@@ -232,18 +226,6 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         } else {
             throw new UnprocessableEntityException("Invalid name of procedure");
         }
-    }
-
-    private ArtDerProzedurDefiningCode mapArtDerProzedur(Procedure procedure) throws UnprocessableEntityException {
-        for (Coding coding : procedure.getCategory().getCoding()) {
-
-            if (coding.getSystem().equals(SNOMED_SYSTEM) && artDerProzedurMap.containsKey(coding.getCode())) {
-                return artDerProzedurMap.get(coding.getCode());
-            }
-
-        }
-
-        throw new UnprocessableEntityException("Invalid type of procedure");
     }
 
     private void mapBodySite(ProzedurAction durchgefuehrteProzedur, Procedure procedure) {

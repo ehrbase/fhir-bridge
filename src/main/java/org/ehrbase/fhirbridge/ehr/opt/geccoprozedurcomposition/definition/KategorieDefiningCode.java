@@ -8,17 +8,23 @@ public enum KategorieDefiningCode implements EnumValueSet {
 
   IMAGING("Imaging", "", "SNOMED Clinical Terms", "363679005"),
 
-  OTHER_CATEGORY("Other category", "", "SNOMED Clinical Terms", "394841004"),
+  THERAPEUTIC_PROCEDURE_PROCEDURE("Therapeutic procedure (procedure)", "", "SNOMED Clinical Terms", "277132007"),
 
-  THERAPEUTIC_PROCEDURE("Therapeutic procedure", "", "SNOMED Clinical Terms", "277132007"),
+  OTHER_CATEGORY("Other category", "", "SNOMED Clinical Terms", "394841004"),
 
   RESPIRATORY_THERAPY_PROCEDURE("Respiratory therapy (procedure)", "", "SNOMED Clinical Terms", "53950000"),
 
+  ARTIFICIAL_RESPIRATION_PROCEDURE("Artificial respiration (procedure)", "", "SNOMED Clinical Terms", "40617009"),
+
   SURGICAL_PROCEDURE("Surgical procedure", "", "SNOMED Clinical Terms", "387713003"),
+
+  OXYGEN_ADMINISTRATION_BY_NASAL_CANNULA_PROCEDURE("Oxygen administration by nasal cannula (procedure)", "", "SNOMED Clinical Terms", "371907003"),
 
   ADMINISTRATION_OF_MEDICINE("Administration of medicine", "", "SNOMED Clinical Terms", "18629005"),
 
-  PROCEDURES_RELATING_TO_POSITIONING_AND_SUPPORT_PROCEDURE("Procedures relating to positioning and support (procedure)", "", "SNOMED Clinical Terms", "225287004");
+  PROCEDURES_RELATING_TO_POSITIONING_AND_SUPPORT_PROCEDURE("Procedures relating to positioning and support (procedure)", "", "SNOMED Clinical Terms", "225287004"),
+
+  NONINVASIVE_VENTILATION_PROCEDURE("Noninvasive ventilation (procedure)", "", "SNOMED Clinical Terms", "428311008");
 
   private String value;
 
