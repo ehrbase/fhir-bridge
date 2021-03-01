@@ -30,7 +30,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.Unbeka
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-01T10:46:46.640243+01:00",
+    date = "2021-03-01T12:17:23.938964+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 @Template("GECCO_Prozedur")

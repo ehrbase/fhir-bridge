@@ -250,6 +250,9 @@
                         <code_list>394841004</code_list>
                         <code_list>225287004</code_list>
                         <code_list>53950000</code_list>
+                        <code_list>428311008</code_list>
+                        <code_list>371907003</code_list>
+                        <code_list>40617009</code_list>
                       </children>
                     </attributes>
                   </children>
@@ -3703,7 +3706,7 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
       <items id="text">Administration of medicine</items>
     </term_definitions>
     <term_definitions code="277132007">
-      <items id="text">Therapeutic procedure</items>
+      <items id="text">Therapeutic procedure (procedure)</items>
     </term_definitions>
     <term_definitions code="394841004">
       <items id="text">Other category</items>
@@ -3713,6 +3716,15 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
     </term_definitions>
     <term_definitions code="53950000">
       <items id="text">Respiratory therapy (procedure)</items>
+    </term_definitions>
+    <term_definitions code="428311008">
+      <items id="text">Noninvasive ventilation (procedure)</items>
+    </term_definitions>
+    <term_definitions code="371907003">
+      <items id="text">Oxygen administration by nasal cannula (procedure)</items>
+    </term_definitions>
+    <term_definitions code="40617009">
+      <items id="text">Artificial respiration (procedure)</items>
     </term_definitions>
   </definition>
   <view/>

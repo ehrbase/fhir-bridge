@@ -19,7 +19,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 @Archetype("openEHR-EHR-ACTION.procedure.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-01T10:46:46.762932+01:00",
+    date = "2021-03-01T12:17:24.146662+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class ProzedurAction implements EntryEntity {
@@ -81,7 +81,7 @@ public class ProzedurAction implements EntryEntity {
    * Comment: Dieses pragmatische Datenelement kann zur Unterstützung der Gliederung für die Benutzeroberfläche verwendet werden.
    */
   @Path("/description[at0001]/items[at0067]/value|defining_code")
-  private ArtDerProzedurDefiningCode artDerProzedurDefiningCode;
+  private KategorieDefiningCode artDerProzedurDefiningCode;
 
   /**
    * Path: GECCO_Prozedur/Prozedur/Tree/Art der Prozedur/null_flavour
@@ -239,11 +239,11 @@ public class ProzedurAction implements EntryEntity {
      return this.multimedia ;
   }
 
-  public void setArtDerProzedurDefiningCode(ArtDerProzedurDefiningCode artDerProzedurDefiningCode) {
+  public void setArtDerProzedurDefiningCode(KategorieDefiningCode artDerProzedurDefiningCode) {
      this.artDerProzedurDefiningCode = artDerProzedurDefiningCode;
   }
 
-  public ArtDerProzedurDefiningCode getArtDerProzedurDefiningCode() {
+  public KategorieDefiningCode getArtDerProzedurDefiningCode() {
      return this.artDerProzedurDefiningCode ;
   }
 

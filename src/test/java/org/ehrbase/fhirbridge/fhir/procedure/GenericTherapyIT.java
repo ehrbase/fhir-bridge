@@ -67,10 +67,10 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createRadiologyProcedures() throws IOException {
-        //create("radiology-example-1.json");
+        create("radiology-example-1.json");
         create("radiology-example-2.json");
-        //create("radiology-example-3.json");
-        //create("radiology-example-4.json");
+        create("radiology-example-3.json");
+        create("radiology-example-4.json");
     }
 
     @Test
