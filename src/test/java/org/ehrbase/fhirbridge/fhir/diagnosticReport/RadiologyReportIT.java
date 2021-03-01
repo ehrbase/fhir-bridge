@@ -54,6 +54,7 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
         assertEquals("The SNOMED code: 118247008:363713009=asd, is not supported for radiology report !", exception.getMessage());
     }
 
+    //BSa wieso hier die unterschiedliche Art die Exception entgegen zu nehmen?
     @Test
     void createInvalidNameDerUntersuchung() throws IOException {
         Exception exception = executeMappingException("create-radiology-report-invalid-kategorie.json");
