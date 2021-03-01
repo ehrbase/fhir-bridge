@@ -67,52 +67,48 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createRadiologyProcedures() throws IOException {
-        create("radiology-example-1.json");
+        //create("radiology-example-1.json");
         create("radiology-example-2.json");
-        create("radiology-example-3.json");
-        create("radiology-example-4.json");
+        //create("radiology-example-3.json");
+        //create("radiology-example-4.json");
     }
 
     @Test
     void createRespiratoryTherapies() throws IOException {
-        //create("respiratory-therapies-example-1.json");
-        //create("respiratory-therapies-example-2.json");
-        //create("respiratory-therapies-example-3.json"); // INVALID NAME
-        //create("respiratory-therapies-example-4.json"); // INVALID NAME
-        //create("respiratory-therapies-example-5.json");
-        //create("respiratory-therapies-example-6.json");
+        create("respiratory-therapies-example-1.json");
+        create("respiratory-therapies-example-2.json");
+        create("respiratory-therapies-example-3.json"); // INVALID NAME
+        create("respiratory-therapies-example-4.json"); // INVALID NAME
+        create("respiratory-therapies-example-5.json");
+        create("respiratory-therapies-example-6.json");
         create("respiratory-therapies-example-7.json");
         create("respiratory-therapies-example-8.json");
-        //create("respiratory-therapies-example-9.json");
-        //create("respiratory-therapies-example-10.json");
-        //create("respiratory-therapies-example-11.json");
+        create("respiratory-therapies-example-9.json");
+        create("respiratory-therapies-example-10.json");
+        create("respiratory-therapies-example-11.json");
     }
 
 
     @Test
     void mappingUnknownTherapy() throws IOException {
-        Procedure procedure = (Procedure) super.testFileLoader.loadResource("mapping/mapping_unknown.json");
-        TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
-        GECCOProzedurComposition mappedProzedurComposition = therapyCompositionConverter.toComposition(procedure);
-        Diff diff = compareCompositions(getJavers(), "mapping/mapping_unknown_result.json", mappedProzedurComposition);
-        assertEquals(diff.getChanges().size(), 0);
+        testMapping("mapping/mapping_unknown.json","mapping/mapping_unknown_result.json");
     }
 
     @Test
     void mappingNotDoneTherapy() throws IOException {
-        Procedure procedure = (Procedure) super.testFileLoader.loadResource("mapping/mapping_not_done.json");
-        TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
-        GECCOProzedurComposition mappedProzedurComposition = therapyCompositionConverter.toComposition(procedure);
-        Diff diff = compareCompositions(getJavers(), "mapping/mapping_not_done_result.json", mappedProzedurComposition);
-        assertEquals(diff.getChanges().size(), 0);
+        testMapping("mapping/mapping_not_done.json","mapping/mapping_not_done_result.json");
     }
 
     @Test
     void mappingDoneTherapy() throws IOException {
-        Procedure procedure = (Procedure) super.testFileLoader.loadResource("mapping/mapping_done.json");
+        testMapping("mapping/mapping_done.json", "mapping/mapping_done_result.json");
+    }
+
+    void testMapping(String resourcePath, String resultPath) throws IOException {
+        Procedure procedure = (Procedure) super.testFileLoader.loadResource(resourcePath);
         TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
         GECCOProzedurComposition mappedProzedurComposition = therapyCompositionConverter.toComposition(procedure);
-        Diff diff = compareCompositions(getJavers(), "mapping/mapping_done_result.json", mappedProzedurComposition);
+        Diff diff = compareCompositions(getJavers(), resultPath, mappedProzedurComposition);
         assertEquals(diff.getChanges().size(), 0);
     }
 

@@ -31,7 +31,7 @@ public class ProzedurActionContainment extends Containment {
 
   public ListSelectAqlField<Cluster> MULTIMEDIA = new ListAqlFieldImp<Cluster>(ProzedurAction.class, "/description[at0001]/items[at0062]", "multimedia", Cluster.class, this);
 
-  public SelectAqlField<KategorieDefiningCode> ART_DER_PROZEDUR_DEFINING_CODE = new AqlFieldImp<KategorieDefiningCode>(ProzedurAction.class, "/description[at0001]/items[at0067]/value|defining_code", "artDerProzedurDefiningCode", KategorieDefiningCode.class, this);
+  public SelectAqlField<ArtDerProzedurDefiningCode> ART_DER_PROZEDUR_DEFINING_CODE = new AqlFieldImp<ArtDerProzedurDefiningCode>(ProzedurAction.class, "/description[at0001]/items[at0067]/value|defining_code", "artDerProzedurDefiningCode", ArtDerProzedurDefiningCode.class, this);
 
   public SelectAqlField<NullFlavour> ART_DER_PROZEDUR_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProzedurAction.class, "/description[at0001]/items[at0067]/null_flavour|defining_code", "artDerProzedurNullFlavourDefiningCode", NullFlavour.class, this);
 

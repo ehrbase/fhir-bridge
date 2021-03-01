@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum KoerperstelleDefiningCode implements EnumValueSet {
-  LUNG_STRUCTURE_BODY_STRUCTURE("Lung structure (body structure)", "Lung structure (body structure)", "SNOMED Clinical Terms", "39607008");
+  LUNG_STRUCTURE_BODY_STRUCTURE("Lung structure (body structure)", "", "SNOMED Clinical Terms", "39607008");
 
   private String value;
 

@@ -14,7 +14,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.device.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-11T14:34:48.600023+01:00",
+    date = "2021-03-01T10:46:46.798272+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class MedizingeraetCluster implements LocatableEntity {
@@ -22,6 +22,7 @@ public class MedizingeraetCluster implements LocatableEntity {
    * Path: GECCO_Prozedur/Prozedur/Medizingerät/Gerätename
    * Description: Identifizierung des Medizingerätes, bevorzugt durch einen allgemein
    * gebräuchlichen Namen, einer formellen und vollständig beschreibenden Bezeichnung oder falls notwendig anhand einer Klasse oder Kategorie des Gerätes.
+   * Comment: Dieses Datenelement erfasst den Begriff, die Phrase oder die Kategorie, die in der klinischen Praxis verwendet werden. Zum Beispiel: <Markenname> <Maschine> (XYZ-Audiometer); <Markenname> (14G Jelco IV-Katheter); oder <Markenname / Typ> <Implantat>. Die Codierung mit einer Terminologie ist nach Möglichkeit wünschenswert, auch wenn dies lokal sein kann und von den verfügbaren lokalen Lieferungen abhängt.
    */
   @Path("/items[at0001]/value|defining_code")
   private GeraetenameDefiningCode geraetenameDefiningCode;

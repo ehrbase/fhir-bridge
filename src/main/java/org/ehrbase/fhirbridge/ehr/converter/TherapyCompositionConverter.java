@@ -19,8 +19,8 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.Prozed
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.UnbekannteProzedurEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.MedizingeraetCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NichtDurchgefuehrteProzedurEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.CareflowStepDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.CurrentStateDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ArtDerProzedurDefiningCode;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Procedure;
@@ -31,8 +31,8 @@ import org.slf4j.LoggerFactory;
 
 
 import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +43,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
     private static final Map<String, KategorieDefiningCode> kategorieMap = new HashMap<>();
     private static final Map<String, NameDerProzedurDefiningCode> nameDerProzedurMap = new HashMap<>();
+    private static final Map<String, ArtDerProzedurDefiningCode> artDerProzedurMap = new HashMap<>();
     private static final Map<String, KoerperstelleDefiningCode> koerperstelleMap = new HashMap<>();
     private static final Map<String, GeraetenameDefiningCode> geraetenameMap = new HashMap<>();
 
@@ -65,6 +66,10 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         for (GeraetenameDefiningCode geraetenameDefiningCode : GeraetenameDefiningCode.values()) {
             geraetenameMap.put(geraetenameDefiningCode.getCode(), geraetenameDefiningCode);
         }
+
+        for (ArtDerProzedurDefiningCode artDerProzedurDefiningCode : ArtDerProzedurDefiningCode.values()) {
+            artDerProzedurMap.put(artDerProzedurDefiningCode.getCode(), artDerProzedurDefiningCode);
+        }
     }
 
 
@@ -74,10 +79,9 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         return null;
     }
 
+
     @Override
     public GECCOProzedurComposition toComposition(Procedure procedure) throws CompositionConversionException {
-
-
         if (procedure == null) {
             return null;
         }
@@ -88,32 +92,8 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         FeederAudit fa = CommonData.constructFeederAudit(procedure);
         result.setFeederAudit(fa);
 
-        // Map Kategorie
-
-        result.setKategorie(new ArrayList<>());
-
-        for (Coding coding : procedure.getCategory().getCoding()) {
-            if (coding.getSystem().equals(SNOMED_SYSTEM) && kategorieMap.containsKey(coding.getCode())) {
-                GeccoProzedurKategorieElement element = new GeccoProzedurKategorieElement();
-                element.setValue(kategorieMap.get(coding.getCode()));
-
-                result.getKategorie().add(element);
-            }
-        }
-
-
-        // Map Start Time
-        try {
-
-            if (!procedure.getExtension().isEmpty() && procedure.getExtension().get(0).getValue() instanceof DateTimeType) {
-                result.setStartTimeValue(((DateTimeType) procedure.getExtension().get(0).getValue()).getValueAsCalendar().toZonedDateTime());
-            } else {
-                result.setStartTimeValue(procedure.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime());
-            }
-
-        } catch (NullPointerException | FHIRException ex) {
-            result.setStartTimeValue(ZonedDateTime.now());
-        }
+        mapCategory(result, procedure);
+        mapStartTime(result, procedure);
 
         switch (procedure.getStatus()) {
             case UNKNOWN:
@@ -128,27 +108,9 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
                 mapDone(procedure, result);
         }
 
-        // ======================================================================================
-        // Required fields by API
-
-        result.setLanguage(Language.DE);
-        result.setLocation("test");
-        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        result.setTerritory(Territory.DE);
-        result.setCategoryDefiningCode(Category.EVENT);
-        result.setComposer(new PartySelf());
+        setMandatoryFields(result);
 
         return result;
-    }
-
-    private NameDerProzedurDefiningCode mapNameDerProzedur(Procedure procedure) throws UnprocessableEntityException {
-        Coding coding = procedure.getCode().getCoding().get(0);
-
-        if (coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
-            return nameDerProzedurMap.get(coding.getCode());
-        } else {
-            throw new UnprocessableEntityException("Invalid name of procedure");
-        }
     }
 
     private void mapDone(Procedure procedure, GECCOProzedurComposition composition) {
@@ -160,63 +122,24 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
             durchgefuehrteProzedur.setNameDerProzedurDefiningCode(mapNameDerProzedur(procedure));
 
             if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.PLAIN_RADIOGRAPHY)) {
-                // Map body site for PLAIN_RADIOGRAPHY
-
-                Coding bodySiteCoding = procedure.getBodySite().get(0).getCoding().get(0);
-
-                if (bodySiteCoding.getSystem().equals(SNOMED_SYSTEM) &&
-                        koerperstelleMap.containsKey(bodySiteCoding.getCode())) {
-                    durchgefuehrteProzedur.setKoerperstelleDefiningCode(koerperstelleMap.get(bodySiteCoding.getCode()));
-                } else {
-                    throw new UnprocessableEntityException("Invalid body site for PLAIN_RADIOGRAPHY");
-                }
+                mapBodySite(durchgefuehrteProzedur, procedure);
             } else if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.ARTIFICIAL_RESPIRATION_PROCEDURE)) {
-                // Map Medizingeraet for RESP
-                Coding usedCodeCoding = procedure.getUsedCode().get(0).getCoding().get(0);
-
-                if (usedCodeCoding.getSystem().equals(SNOMED_SYSTEM) && geraetenameMap.containsKey(usedCodeCoding.getCode())) {
-
-                    MedizingeraetCluster medizingeraetCluster = new MedizingeraetCluster();
-
-                    medizingeraetCluster.setGeraetenameDefiningCode(geraetenameMap.get(usedCodeCoding.getCode()));
-
-                    durchgefuehrteProzedur.setMedizingeraet(new ArrayList<>());
-                    durchgefuehrteProzedur.getMedizingeraet().add(medizingeraetCluster);
-                } else {
-                    throw new UnprocessableEntityException("Invalid medical device code");
-                }
+                mapMedizingerat(durchgefuehrteProzedur, procedure);
             }
 
-            durchgefuehrteProzedur.setArtDerProzedurDefiningCode(composition.getKategorie().get(0).getValue());
-
-
-            if (!procedure.getExtension().isEmpty()) {
-                for (Extension extension : procedure.getExtension()) {
-                    if (extension.getValue() instanceof Coding) {
-                        durchgefuehrteProzedur.setDurchfuehrungsabsichtValue(((Coding) extension.getValue()).getDisplay());
-                        break;
-                    }
-                }
-
-            }
+            durchgefuehrteProzedur.setArtDerProzedurDefiningCode(mapArtDerProzedur(procedure));
+            durchgefuehrteProzedur.setDurchfuehrungsabsichtValue(mapDurchfuhrungsabsicht(procedure));
 
             durchgefuehrteProzedur.setKommentarValue(procedure.getNote().toString());
+            durchgefuehrteProzedur.setTimeValue(mapTimeValue(composition, procedure));
 
-            if (procedure.getPerformedDateTimeType() != null && procedure.getPerformedDateTimeType().getValueAsCalendar() != null) {
-                durchgefuehrteProzedur.setTimeValue(procedure.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime());
-            } else {
-                durchgefuehrteProzedur.setTimeValue(composition.getStartTimeValue());
-            }
-
-
-        } catch (Exception e) {
+        } catch (UnprocessableEntityException e) {
             throw new CompositionConversionException("Some parts of the present procedure did not contain the required elements. "
                     + e.getMessage(), e);
         }
 
         durchgefuehrteProzedur.setLanguage(Language.DE);
         durchgefuehrteProzedur.setSubject(new PartySelf());
-        //durchgefuehrteProzedur.setCareflowStepDefiningCode(CareflowStepDefiningCode.GEPLANTE_PROZEDUR);
         durchgefuehrteProzedur.setCurrentStateDefiningCode(CurrentStateDefiningCode.PLANNED);
         composition.setProzedur(durchgefuehrteProzedur);
     }
@@ -229,7 +152,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
         nichtDurchgefuehrteProzedur.setAussageUeberDenAusschlussValue(procedure.getStatus().getDisplay());
         try {
             nichtDurchgefuehrteProzedur.setEingriffDefiningCode(mapNameDerProzedur(procedure));
-        } catch (Exception e) {
+        } catch (UnprocessableEntityException e) {
             throw new CompositionConversionException("Some parts of the not present procedure did not contain the required elements. "
                     + e.getMessage(), e);
         }
@@ -250,7 +173,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
         try {
             unbekannteProzedur.setUnbekannteProzedurDefiningCode(mapNameDerProzedur(procedure));
-        } catch (Exception e) {
+        } catch (UnprocessableEntityException e) {
             throw new CompositionConversionException("Some parts of the unknown procedure did not contain the required elements. "
                     + e.getMessage(), e);
         }
@@ -260,5 +183,117 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
 
         composition.setUnbekannteProzedur(unbekannteProzedur);
+    }
+
+    private void mapCategory(GECCOProzedurComposition composition, Procedure procedure) {
+        // Map Kategorie
+        composition.setKategorie(new ArrayList<>());
+
+        for (Coding coding : procedure.getCategory().getCoding()) {
+            if (coding.getSystem().equals(SNOMED_SYSTEM) && kategorieMap.containsKey(coding.getCode())) {
+                GeccoProzedurKategorieElement element = new GeccoProzedurKategorieElement();
+                element.setValue(kategorieMap.get(coding.getCode()));
+
+                composition.getKategorie().add(element);
+            }
+        }
+    }
+
+    private void mapStartTime(GECCOProzedurComposition composition, Procedure procedure) {
+        // Map Start Time
+        try {
+
+            if (!procedure.getExtension().isEmpty() && procedure.getExtension().get(0).getValue() instanceof DateTimeType) {
+                composition.setStartTimeValue(((DateTimeType) procedure.getExtension().get(0).getValue()).getValueAsCalendar().toZonedDateTime());
+            } else {
+                composition.setStartTimeValue(procedure.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime());
+            }
+
+        } catch (NullPointerException | FHIRException ex) {
+            composition.setStartTimeValue(ZonedDateTime.now());
+        }
+    }
+
+
+    private void setMandatoryFields(GECCOProzedurComposition composition) {
+        composition.setLanguage(Language.DE);
+        composition.setLocation("test");
+        composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
+        composition.setTerritory(Territory.DE);
+        composition.setCategoryDefiningCode(Category.EVENT);
+        composition.setComposer(new PartySelf());
+    }
+
+    private NameDerProzedurDefiningCode mapNameDerProzedur(Procedure procedure) throws UnprocessableEntityException {
+        Coding coding = procedure.getCode().getCoding().get(0);
+
+        if (coding.getSystem().equals(SNOMED_SYSTEM) && nameDerProzedurMap.containsKey(coding.getCode())) {
+            return nameDerProzedurMap.get(coding.getCode());
+        } else {
+            throw new UnprocessableEntityException("Invalid name of procedure");
+        }
+    }
+
+    private ArtDerProzedurDefiningCode mapArtDerProzedur(Procedure procedure) throws UnprocessableEntityException {
+        for (Coding coding : procedure.getCategory().getCoding()) {
+
+            if (coding.getSystem().equals(SNOMED_SYSTEM) && artDerProzedurMap.containsKey(coding.getCode())) {
+                return artDerProzedurMap.get(coding.getCode());
+            }
+
+        }
+
+        throw new UnprocessableEntityException("Invalid type of procedure");
+    }
+
+    private void mapBodySite(ProzedurAction durchgefuehrteProzedur, Procedure procedure) {
+        // Map body site for PLAIN_RADIOGRAPHY
+
+        Coding bodySiteCoding = procedure.getBodySite().get(0).getCoding().get(0);
+
+        if (bodySiteCoding.getSystem().equals(SNOMED_SYSTEM) &&
+                koerperstelleMap.containsKey(bodySiteCoding.getCode())) {
+            durchgefuehrteProzedur.setKoerperstelleDefiningCode(koerperstelleMap.get(bodySiteCoding.getCode()));
+        } else {
+            throw new UnprocessableEntityException("Invalid body site for PLAIN_RADIOGRAPHY");
+        }
+    }
+
+    private void mapMedizingerat(ProzedurAction durchgefuehrteProzedur, Procedure procedure) {
+        // Map Medizingeraet for RESP
+        Coding usedCodeCoding = procedure.getUsedCode().get(0).getCoding().get(0);
+
+        if (usedCodeCoding.getSystem().equals(SNOMED_SYSTEM) && geraetenameMap.containsKey(usedCodeCoding.getCode())) {
+
+            MedizingeraetCluster medizingeraetCluster = new MedizingeraetCluster();
+
+            medizingeraetCluster.setGeraetenameDefiningCode(geraetenameMap.get(usedCodeCoding.getCode()));
+
+            durchgefuehrteProzedur.setMedizingeraet(new ArrayList<>());
+            durchgefuehrteProzedur.getMedizingeraet().add(medizingeraetCluster);
+        } else {
+            throw new UnprocessableEntityException("Invalid medical device code");
+        }
+    }
+
+    private String mapDurchfuhrungsabsicht(Procedure procedure) {
+        if (!procedure.getExtension().isEmpty()) {
+            for (Extension extension : procedure.getExtension()) {
+                if (extension.getValue() instanceof Coding) {
+                    return ((Coding) extension.getValue()).getDisplay();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private TemporalAccessor mapTimeValue(GECCOProzedurComposition composition, Procedure procedure) {
+        if (procedure.getPerformedDateTimeType() != null && procedure.getPerformedDateTimeType().isDateTime()
+                && procedure.getPerformedDateTimeType().getValueAsCalendar() != null) {
+            return procedure.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime();
+        } else {
+            return composition.getStartTimeValue();
+        }
     }
 }
