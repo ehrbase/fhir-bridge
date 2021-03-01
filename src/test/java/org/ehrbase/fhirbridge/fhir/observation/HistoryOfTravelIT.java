@@ -3,8 +3,12 @@ package org.ehrbase.fhirbridge.fhir.observation;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.HistoryOfTravelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.KorpergrosseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.definition.GrosseLangeObservation;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KeineReisehistorieEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -23,69 +27,39 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
 
     public HistoryOfTravelIT() {
-        super("Observation/BodyHeight/", Observation.class); //fhir-Resource
+        super("Observation/HistoryOfTravel/", Observation.class); //fhir-Resource
     }
 
     @Test
-    void createBodyHeightLoincPeriod() throws IOException {
-        create("create-body-height-loinc-period.json");
-    }
-
-    @Test
-    void createBodyHeightSnomedPeriod() throws IOException {
-        create("create-body-height-snomed-period.json");
+    void createHistoryOfTravel() throws IOException {
+        create("create-history-of-travel-no.json");
     }
 
     // #####################################################################################
     // check payload
     @Test
-    void mappingNormal() throws IOException {
-        testMapping("create-body-height-normal.json",
-                "paragon-body-height-normal.json");
+    void mappingNo() throws IOException {
+        testMapping("create-history-of-travel-no.json",
+                "paragon-history-of-travel-no.json");
     }
 
     @Test
-    void mappingLoincDatetime() throws IOException {
-        testMapping("create-body-height-loinc-datetime.json",
-                "paragon-body-height-loinc-datetime.json");
+    void mappingUnknown() throws IOException {
+        testMapping("create-history-of-travel-unknown.json",
+                "paragon-history-of-travel-unknown.json");
     }
 
     @Test
-    void mappingLoincPeriod() throws IOException {
-        testMapping("create-body-height-loinc-period.json",
-                "paragon-body-height-loinc-period.json");
+    void mappingYes() throws IOException {
+        testMapping("create-history-of-travel-yes.json",
+                "paragon-history-of-travel-yes.json");
     }
-
-    @Test
-    void mappingLoincPeriod2() throws IOException {
-        testMapping("create-body-height-loinc-period_2.json",
-                "paragon-body-height-loinc-period_2.json");
-    }
-
-    @Test
-    void mappingSnomedDatetime() throws IOException {
-        testMapping("create-body-height-snomed-datetime.json",
-                "paragon-body-height-snomed-datetime.json");
-    }
-
-    @Test
-    void mappingSnomedPeriod() throws IOException {
-        testMapping("create-body-height-snomed-period.json",
-                "paragon-body-height-snomed-period.json");
-    }
-
-    @Test
-    void mappingSnomedPeriod2() throws IOException {
-        testMapping("create-body-height-snomed-period_2.json",
-                "paragon-body-height-snomed-period_2.json");
-    }
-
 
     // #####################################################################################
     // check exceptions
     @Test
-    void createInvalidBefund() throws IOException {
-        Exception exception = executeMappingException("create-body-height-loinc-datetime_invalid.json");
+    void createInvalidMissingDateTime() throws IOException {
+        Exception exception = executeMappingException("create-history-of-travel-invalid.json");
         assertEquals("No time is set", exception.getMessage());
     }
 
@@ -97,8 +71,8 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(KorpergrosseComposition.class, List.of("location")))
-                .registerValueObject(GrosseLangeObservation.class)
+                .registerValueObject(new ValueObjectDefinition(ReisehistorieComposition.class, List.of("location")))
+                .registerValueObject(ReisehistorieAdminEntry.class)
                 .build();
     }
 
@@ -106,15 +80,15 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () ->
-                new BodyHeightCompositionConverter().toComposition(obs)
+                new HistoryOfTravelCompositionConverter().toComposition(obs)
         );
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Observation observation = (Observation)  super.testFileLoader.loadResource(resourcePath);
-        BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
-        KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
+        HistoryOfTravelCompositionConverter compositionConverter = new HistoryOfTravelCompositionConverter();
+        ReisehistorieComposition mapped = compositionConverter.toComposition(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mapped);
         assertEquals(0, diff.getChanges().size());
     }
