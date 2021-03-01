@@ -48,13 +48,6 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
         assertEquals(diff.getChanges().size(), 0);
     }
 
-    @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource baseResource) {
-        return assertThrows(UnprocessableEntityException.class, () -> {
-             new PulseOximetryConverter().toComposition(((Observation) baseResource));
-        });
-    }
-
 
     @Override
     public Javers getJavers() {
@@ -63,5 +56,15 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(new ValueObjectDefinition(PulsoxymetrieComposition.class, List.of("location")))
                 .registerValueObject(PulsoxymetrieObservation.class)
                 .build();
+    }
+
+    @Override
+    public Exception executeMappingException(String resource) throws IOException {
+        return null;
+    }
+
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+
     }
 }

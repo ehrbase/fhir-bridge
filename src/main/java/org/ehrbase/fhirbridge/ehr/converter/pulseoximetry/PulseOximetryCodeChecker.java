@@ -4,28 +4,47 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
+import java.util.List;
+
 import static org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOxymetryCode.CODING_1;
+import static org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOxymetryCode.CODING_2;
+import static org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOxymetryCode.CODING_3;
+import static org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOxymetryCode.CODING_4;
 
 public class PulseOximetryCodeChecker {
 
     void checkIfPulseOximetry(Observation observation) {
-        if(observation.getCode().getCoding().size()==1){
-
-        }else if(observation.getCode().getCoding().size()==1){
-
-        }else{
-            throw new UnprocessableEntityException("Too many Codes")
-        }
-        for (Coding code : observation.getCode().getCoding()){
-            if(CODING_1.getCode().get(0).get(0) == code.getSystem() && CODING_1.getCode().get(0).get(1) == code.getCode()){
-
-            }else if()
-        // was wenn mehr als ein code auftaucht ?
-            //2708-6
-            // was mit dem bloodgas panel soll ich das dann als einzel messung hier auch setzen ?
-        }
-
+        checkAmountOfCodes(observation);
     }
 
+    private void checkAmountOfCodes(Observation observation) {
+        if (observation.getCode().getCoding().size() == 1) {
+            matchCode(observation.getCode().getCoding());
+        } else if (observation.getCode().getCoding().size() == 2) {
+            matchCodes(observation.getCode().getCoding());
+        } else {
+            throw new UnprocessableEntityException("Too many Codes, for oxygen saturation a maximum combination of two codes is supported");
+        }
+    }
 
+    private void matchCode(List<Coding> codes) {
+        String codeSystem = codes.get(0).getSystem();
+        String code = codes.get(0).getCode();
+        if (!(codeSystem.equals(CODING_1.getCode().get(0).get(0)) && code.equals(CODING_1.getCode().get(0).get(1)))
+                && !(codeSystem.equals(CODING_2.getCode().get(0).get(0)) && code.equals(CODING_2.getCode().get(0).get(1)))) {
+            throw new UnprocessableEntityException("The Code of code.coding not supported for the Fhir-Bridge");
+        }
+    }
+
+    private void matchCodes(List<Coding> codes) {
+        for (Coding code : codes) {
+            if (!(CODING_3.getCode().get(0).get(0).equals(code.getSystem()) && CODING_3.getCode().get(0).get(1).equals(code.getCode())) &&
+                    !(CODING_3.getCode().get(1).get(0).equals(code.getSystem()) && CODING_3.getCode().get(1).get(1).equals(code.getCode())) ) {
+                throw new UnprocessableEntityException("The Code of code.coding not supported for the Fhir-Bridge");
+            }else if (!(CODING_4.getCode().get(0).get(0).equals(code.getSystem()) && CODING_4.getCode().get(0).get(1).equals(code.getCode())) &&
+                    !(CODING_4.getCode().get(1).get(0).equals(code.getSystem()) && CODING_4.getCode().get(1).get(1).equals(code.getCode())) ) {
+                throw new UnprocessableEntityException("The Code of code.coding not supported for the Fhir-Bridge");
+            }
+        }
+    }
 }

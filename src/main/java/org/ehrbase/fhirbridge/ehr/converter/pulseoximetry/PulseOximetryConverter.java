@@ -12,11 +12,8 @@ import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConvert
 import org.ehrbase.fhirbridge.ehr.converter.ContextConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PulseOximetryConverter implements CompositionConverter<PulsoxymetrieComposition, Observation> {
 
@@ -50,7 +47,7 @@ public class PulseOximetryConverter implements CompositionConverter<Pulsoxymetri
     private void mapKategorie(PulsoxymetrieComposition composition, Observation observation) {
         if (observation.getCategory().size() > 1) {
             throw new UnprocessableEntityException("Fhir-Bridge does not support more then one Category Code value");
-        }//TODO
+        }
         composition.setKategorieValue(observation.getCategory().get(0).getCoding()
                 .get(0).getCode());
     }
