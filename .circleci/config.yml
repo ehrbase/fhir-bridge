@@ -353,7 +353,8 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    robot -v OUTPUT_LEVEL:minimal -d results/0 -L INFO \
+                    robot -v OUTPUT_LEVEL:minimal -d results/0 -L TRACE \
+                            -i ci-test \
                             --skip TODO --skip future \
                             --skiponfailure not-ready robot/
             - run:
