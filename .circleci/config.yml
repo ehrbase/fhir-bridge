@@ -384,8 +384,8 @@ commands:
                 command: |
                     mkdir 00_robot_results
                     cp tests/results/0/* 00_robot_results/
-                    cat /tmp/logs/fhirbride_log
-                    cp /tmp/logs/fhirbride_log 00_robot_results/
+                    cat fhirbride_log
+                    cp fhirbride_log 00_robot_results/
 
     cache-out-fhirbridge-m2-dependencies:
         steps:
