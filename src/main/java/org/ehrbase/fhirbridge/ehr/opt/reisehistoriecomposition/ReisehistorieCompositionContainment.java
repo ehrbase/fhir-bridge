@@ -26,6 +26,8 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.Unbeka
 public class ReisehistorieCompositionContainment extends Containment {
   public SelectAqlField<ReisehistorieComposition> REISEHISTORIE_COMPOSITION = new AqlFieldImp<ReisehistorieComposition>(ReisehistorieComposition.class, "", "ReisehistorieComposition", ReisehistorieComposition.class, this);
 
+  public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(ReisehistorieComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
+
   public ListSelectAqlField<Cluster> ERWEITERUNG = new ListAqlFieldImp<Cluster>(ReisehistorieComposition.class, "/context/other_context[at0001]/items[at0002]", "erweiterung", Cluster.class, this);
 
   public SelectAqlField<StatusDefiningCode> STATUS_DEFINING_CODE = new AqlFieldImp<StatusDefiningCode>(ReisehistorieComposition.class, "/context/other_context[at0001]/items[at0004]/value|defining_code", "statusDefiningCode", StatusDefiningCode.class, this);
@@ -57,8 +59,6 @@ public class ReisehistorieCompositionContainment extends Containment {
   public SelectAqlField<Language> LANGUAGE = new AqlFieldImp<Language>(ReisehistorieComposition.class, "/language", "language", Language.class, this);
 
   public SelectAqlField<FeederAudit> FEEDER_AUDIT = new AqlFieldImp<FeederAudit>(ReisehistorieComposition.class, "/feeder_audit", "feederAudit", FeederAudit.class, this);
-
-  public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(ReisehistorieComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
 
   public SelectAqlField<Territory> TERRITORY = new AqlFieldImp<Territory>(ReisehistorieComposition.class, "/territory", "territory", Territory.class, this);
 

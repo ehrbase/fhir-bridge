@@ -27,18 +27,22 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.Reiseh
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.StatusDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-11T12:33:18.173735+01:00",
+    date = "2021-03-01T12:21:07.575312+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 @Template("Reisehistorie")
-public class ReisehistorieComposition implements Composition {
+public class ReisehistorieComposition implements CompositionEntity, Composition {
+  /**
+   * Path: Reisehistorie/category
+   */
+  @Path("/category|defining_code")
+  private Category categoryDefiningCode;
+
   /**
    * Path: Reisehistorie/context/Erweiterung
    * Description: Ergänzende Angaben zum Registereintrag.
@@ -142,12 +146,6 @@ public class ReisehistorieComposition implements Composition {
   private FeederAudit feederAudit;
 
   /**
-   * Path: Reisehistorie/category
-   */
-  @Path("/category|defining_code")
-  private Category categoryDefiningCode;
-
-  /**
    * Path: Reisehistorie/territory
    */
   @Path("/territory")
@@ -155,6 +153,14 @@ public class ReisehistorieComposition implements Composition {
 
   @Id
   private VersionUid versionUid;
+
+  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+     this.categoryDefiningCode = categoryDefiningCode;
+  }
+
+  public Category getCategoryDefiningCode() {
+     return this.categoryDefiningCode ;
+  }
 
   public void setErweiterung(List<Cluster> erweiterung) {
      this.erweiterung = erweiterung;
@@ -228,7 +234,7 @@ public class ReisehistorieComposition implements Composition {
      return this.healthCareFacility ;
   }
 
-  public void setSettingDefiningCode(SettingDefiningcode settingDefiningCode) {
+  public void setSettingDefiningCode(Setting settingDefiningCode) {
      this.settingDefiningCode = settingDefiningCode;
   }
 
@@ -283,14 +289,6 @@ public class ReisehistorieComposition implements Composition {
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
-  }
-
-  public void setCategoryDefiningCode(CategoryDefiningcode categoryDefiningCode) {
-     this.categoryDefiningCode = categoryDefiningCode;
-  }
-
-  public Category getCategoryDefiningCode() {
-     return this.categoryDefiningCode ;
   }
 
   public void setTerritory(Territory territory) {

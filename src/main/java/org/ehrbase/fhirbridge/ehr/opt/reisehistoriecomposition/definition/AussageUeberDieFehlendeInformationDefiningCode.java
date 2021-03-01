@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum AussageUeberDieFehlendeInformationDefiningCode implements EnumValueSet {
-  UNKNOWN_QUALIFIER_VALUE("Unknown (qualifier value)", "Unknown (qualifier value)", "SNOMED Clinical Terms", "261665006");
+  UNKNOWN_QUALIFIER_VALUE("Unknown (qualifier value)", "", "SNOMED Clinical Terms", "261665006");
 
   private String value;
 

@@ -11,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-11T12:33:18.200084+01:00",
+    date = "2021-03-01T12:21:07.676855+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class ReisehistorieKategorieElement implements LocatableEntity {

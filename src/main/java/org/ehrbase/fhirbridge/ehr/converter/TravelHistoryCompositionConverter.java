@@ -3,28 +3,33 @@ package org.ehrbase.fhirbridge.ehr.converter;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.IntensivmedizinischesMonitoringKorpertemperaturComposition;
-import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KorpertemperaturBeliebigesEreignisChoice;
-import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KorpertemperaturBeliebigesEreignisPointEvent;
-import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KorpertemperaturObservation;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.BundeslandRegionDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KeineReisehistorieEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.LandDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ProblemDiagnoseDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Quantity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
 import java.time.temporal.TemporalAccessor;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TravelHistoryCompositionConverter implements CompositionConverter<ReisehistorieComposition, Observation> {
     private static final Logger LOG = LoggerFactory.getLogger(TravelHistoryCompositionConverter.class);
@@ -79,8 +84,9 @@ public class TravelHistoryCompositionConverter implements CompositionConverter<R
                 composition = map_no(observation, AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE);
             } else if (code.equals(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE.getCode())) {
                 composition = map_unknown(observation, AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
-            } else
+            } else {
                 throw new UnprocessableEntityException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             throw new UnprocessableEntityException(e.getMessage());
@@ -99,9 +105,9 @@ public class TravelHistoryCompositionConverter implements CompositionConverter<R
         // Required fields by API
         composition.setLanguage(org.ehrbase.client.classgenerator.shareddefinition.Language.EN); // FIXME: we need to grab the language from the template
         composition.setLocation("test");
-        composition.setSettingDefiningCode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         composition.setTerritory(org.ehrbase.client.classgenerator.shareddefinition.Territory.DE);
-        composition.setCategoryDefiningCode(CategoryDefiningcode.EVENT);
+        composition.setCategoryDefiningCode(Category.EVENT);
 
         DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
         composition.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
@@ -190,16 +196,14 @@ public class TravelHistoryCompositionConverter implements CompositionConverter<R
     }
 
     private void checkForLoincSystem(String systemCode) {
-        if(!LOINC_SYSTEM.equals(systemCode))
-        {
+        if(!LOINC_SYSTEM.equals(systemCode)) {
             throw new UnprocessableEntityException("The system is not correct. "+
                     "It should be '"+LOINC_SYSTEM+"', but it was '"+systemCode+"'.");
         }
     }
 
     private void checkForSnomedSystem(String systemCode) {
-        if(!SNOMED_SYSTEM.equals(systemCode))
-        {
+        if(!SNOMED_SYSTEM.equals(systemCode)) {
             throw new UnprocessableEntityException("The system is not correct. "+
                     "It should be '"+SNOMED_SYSTEM+"', but it was '"+systemCode+"'.");
         }

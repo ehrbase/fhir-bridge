@@ -4,503 +4,503 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum LandDefiningCode implements EnumValueSet {
-  SWITZERLAND("Switzerland", "Switzerland", "urn:iso:std:iso:3166", "CH"),
+  CENTRAL_AFRICAN_REPUBLIC("Central African Republic", "", "urn:iso:std:iso:3166", "CF"),
 
-  WESTERN_SAHARA("Western Sahara", "Western Sahara", "urn:iso:std:iso:3166", "EH"),
+  BONAIRE_SINT_EUSTATIUS_AND_SABA("Bonaire, Sint Eustatius and Saba", "", "urn:iso:std:iso:3166", "BQ"),
 
-  ALGERIA("Algeria", "Algeria", "urn:iso:std:iso:3166", "DZ"),
+  ETHIOPIA("Ethiopia", "", "urn:iso:std:iso:3166", "ET"),
 
-  DENMARK("Denmark", "Denmark", "urn:iso:std:iso:3166", "DK"),
+  MAURITIUS("Mauritius", "", "urn:iso:std:iso:3166", "MU"),
 
-  UNITED_STATES_OF_AMERICA("United States of America", "United States of America", "urn:iso:std:iso:3166", "US"),
+  ANGOLA("Angola", "", "urn:iso:std:iso:3166", "AO"),
 
-  VENEZUELA_BOLIVARIAN_REPUBLIC_OF("Venezuela, Bolivarian Republic of", "Venezuela, Bolivarian Republic of", "urn:iso:std:iso:3166", "VE"),
+  ANTARCTICA("Antarctica", "", "urn:iso:std:iso:3166", "AQ"),
 
-  INDIA("India", "India", "urn:iso:std:iso:3166", "IN"),
+  LIECHTENSTEIN("Liechtenstein", "", "urn:iso:std:iso:3166", "LI"),
 
-  MARTINIQUE("Martinique", "Martinique", "urn:iso:std:iso:3166", "MQ"),
+  ANGUILLA("Anguilla", "", "urn:iso:std:iso:3166", "AI"),
 
-  GUINEA("Guinea", "Guinea", "urn:iso:std:iso:3166", "GN"),
+  NICARAGUA("Nicaragua", "", "urn:iso:std:iso:3166", "NI"),
 
-  MALAYSIA("Malaysia", "Malaysia", "urn:iso:std:iso:3166", "MY"),
+  UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND("United Kingdom of Great Britain and Northern Ireland", "", "urn:iso:std:iso:3166", "GB"),
 
-  VIRGIN_ISLANDS("Virgin Islands,", "Virgin Islands,", "urn:iso:std:iso:3166", "VI"),
+  SLOVAKIA("Slovakia", "", "urn:iso:std:iso:3166", "SK"),
 
-  MONTENEGRO("Montenegro", "Montenegro", "urn:iso:std:iso:3166", "ME"),
+  TOKELAU("Tokelau", "", "urn:iso:std:iso:3166", "TK"),
 
-  NIGERIA("Nigeria", "Nigeria", "urn:iso:std:iso:3166", "NG"),
+  PITCAIRN("Pitcairn", "", "urn:iso:std:iso:3166", "PN"),
 
-  SAINT_HELENA_ASCENSION_AND_TRISTAN_DA_CUNHA("Saint Helena, Ascension and Tristan da Cunha", "Saint Helena, Ascension and Tristan da Cunha", "urn:iso:std:iso:3166", "SH"),
+  WALLIS_AND_FUTUNA("Wallis and Futuna", "", "urn:iso:std:iso:3166", "WF"),
 
-  EGYPT("Egypt", "Egypt", "urn:iso:std:iso:3166", "EG"),
+  LESOTHO("Lesotho", "", "urn:iso:std:iso:3166", "LS"),
 
-  MYANMAR("Myanmar", "Myanmar", "urn:iso:std:iso:3166", "MM"),
+  ISLE_OF_MAN("Isle of Man", "", "urn:iso:std:iso:3166", "IM"),
 
-  LIBERIA("Liberia", "Liberia", "urn:iso:std:iso:3166", "LR"),
+  PUERTO_RICO("Puerto Rico", "", "urn:iso:std:iso:3166", "PR"),
 
-  ARUBA("Aruba", "Aruba", "urn:iso:std:iso:3166", "AW"),
+  BOUVET_ISLAND("Bouvet Island", "", "urn:iso:std:iso:3166", "BV"),
 
-  AUSTRALIA("Australia", "Australia", "urn:iso:std:iso:3166", "AU"),
+  CUBA("Cuba", "", "urn:iso:std:iso:3166", "CU"),
 
-  LEBANON("Lebanon", "Lebanon", "urn:iso:std:iso:3166", "LB"),
+  EQUATORIAL_GUINEA("Equatorial Guinea", "", "urn:iso:std:iso:3166", "GQ"),
 
-  GHANA("Ghana", "Ghana", "urn:iso:std:iso:3166", "GH"),
+  ICELAND("Iceland", "", "urn:iso:std:iso:3166", "IS"),
 
-  BURKINA_FASO("Burkina Faso", "Burkina Faso", "urn:iso:std:iso:3166", "BF"),
+  SAINT_LUCIA("Saint Lucia", "", "urn:iso:std:iso:3166", "LC"),
 
-  MONACO("Monaco", "Monaco", "urn:iso:std:iso:3166", "MC"),
+  CANADA("Canada", "", "urn:iso:std:iso:3166", "CA"),
 
-  FIJI("Fiji", "Fiji", "urn:iso:std:iso:3166", "FJ"),
+  GUATEMALA("Guatemala", "", "urn:iso:std:iso:3166", "GT"),
 
-  BONAIRE_SINT_EUSTATIUS_AND_SABA("Bonaire, Sint Eustatius and Saba", "Bonaire, Sint Eustatius and Saba", "urn:iso:std:iso:3166", "BQ"),
+  COOK_ISLANDS("Cook Islands", "", "urn:iso:std:iso:3166", "CK"),
 
-  KUWAIT("Kuwait", "Kuwait", "urn:iso:std:iso:3166", "KW"),
+  NAURU("Nauru", "", "urn:iso:std:iso:3166", "NR"),
 
-  CAYMAN_ISLANDS("Cayman Islands", "Cayman Islands", "urn:iso:std:iso:3166", "KY"),
+  CABO_VERDE("Cabo Verde", "", "urn:iso:std:iso:3166", "CV"),
 
-  NEW_CALEDONIA("New Caledonia", "New Caledonia", "urn:iso:std:iso:3166", "NC"),
+  BELIZE("Belize", "", "urn:iso:std:iso:3166", "BZ"),
 
-  ERITREA("Eritrea", "Eritrea", "urn:iso:std:iso:3166", "ER"),
+  PALESTINE_STATE_OF("Palestine, State of", "", "urn:iso:std:iso:3166", "PS"),
 
-  NORWAY("Norway", "Norway", "urn:iso:std:iso:3166", "NO"),
+  PAPUA_NEW_GUINEA("Papua New Guinea", "", "urn:iso:std:iso:3166", "PG"),
 
-  LUXEMBOURG("Luxembourg", "Luxembourg", "urn:iso:std:iso:3166", "LU"),
+  SWEDEN("Sweden", "", "urn:iso:std:iso:3166", "SE"),
 
-  GIBRALTAR("Gibraltar", "Gibraltar", "urn:iso:std:iso:3166", "GI"),
+  PERU("Peru", "", "urn:iso:std:iso:3166", "PE"),
 
-  BOUVET_ISLAND("Bouvet Island", "Bouvet Island", "urn:iso:std:iso:3166", "BV"),
+  TURKMENISTAN("Turkmenistan", "", "urn:iso:std:iso:3166", "TM"),
 
-  LIECHTENSTEIN("Liechtenstein", "Liechtenstein", "urn:iso:std:iso:3166", "LI"),
+  UNITED_STATES_OF_AMERICA("United States of America", "", "urn:iso:std:iso:3166", "US"),
 
-  SWEDEN("Sweden", "Sweden", "urn:iso:std:iso:3166", "SE"),
+  CAMBODIA("Cambodia", "", "urn:iso:std:iso:3166", "KH"),
 
-  SPAIN("Spain", "Spain", "urn:iso:std:iso:3166", "ES"),
+  MALTA("Malta", "", "urn:iso:std:iso:3166", "MT"),
 
-  BELIZE("Belize", "Belize", "urn:iso:std:iso:3166", "BZ"),
+  MADAGASCAR("Madagascar", "", "urn:iso:std:iso:3166", "MG"),
 
-  PALAU("Palau", "Palau", "urn:iso:std:iso:3166", "PW"),
+  KOREA_REPUBLIC_OF("Korea, Republic of", "", "urn:iso:std:iso:3166", "KR"),
 
-  SAMOA("Samoa", "Samoa", "urn:iso:std:iso:3166", "WS"),
+  LEBANON("Lebanon", "", "urn:iso:std:iso:3166", "LB"),
 
-  HEARD_ISLAND_AND_MCDONALD_ISLANDS("Heard Island and McDonald Islands", "Heard Island and McDonald Islands", "urn:iso:std:iso:3166", "HM"),
+  SAINT_KITTS_AND_NEVIS("Saint Kitts and Nevis", "", "urn:iso:std:iso:3166", "KN"),
 
-  TUNISIA("Tunisia", "Tunisia", "urn:iso:std:iso:3166", "TN"),
+  BURUNDI("Burundi", "", "urn:iso:std:iso:3166", "BI"),
 
-  PITCAIRN("Pitcairn", "Pitcairn", "urn:iso:std:iso:3166", "PN"),
+  NEW_ZEALAND("New Zealand", "", "urn:iso:std:iso:3166", "NZ"),
 
-  URUGUAY("Uruguay", "Uruguay", "urn:iso:std:iso:3166", "UY"),
+  COMOROS("Comoros", "", "urn:iso:std:iso:3166", "KM"),
 
-  ITALY("Italy", "Italy", "urn:iso:std:iso:3166", "IT"),
+  EGYPT("Egypt", "", "urn:iso:std:iso:3166", "EG"),
 
-  CUBA("Cuba", "Cuba", "urn:iso:std:iso:3166", "CU"),
+  KIRIBATI("Kiribati", "", "urn:iso:std:iso:3166", "KI"),
 
-  COMOROS("Comoros", "Comoros", "urn:iso:std:iso:3166", "KM"),
+  BHUTAN("Bhutan", "", "urn:iso:std:iso:3166", "BT"),
 
-  MACAO("Macao", "Macao", "urn:iso:std:iso:3166", "MO"),
+  SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS("South Georgia and the South Sandwich Islands", "", "urn:iso:std:iso:3166", "GS"),
 
-  BOSNIA_AND_HERZEGOVINA("Bosnia and Herzegovina", "Bosnia and Herzegovina", "urn:iso:std:iso:3166", "BA"),
+  CHAD("Chad", "", "urn:iso:std:iso:3166", "TD"),
 
-  MOROCCO("Morocco", "Morocco", "urn:iso:std:iso:3166", "MA"),
+  CROATIA("Croatia", "", "urn:iso:std:iso:3166", "HR"),
 
-  BHUTAN("Bhutan", "Bhutan", "urn:iso:std:iso:3166", "BT"),
+  QATAR("Qatar", "", "urn:iso:std:iso:3166", "QA"),
 
-  MEXICO("Mexico", "Mexico", "urn:iso:std:iso:3166", "MX"),
+  GERMANY("Germany", "", "urn:iso:std:iso:3166", "DE"),
 
-  JAMAICA("Jamaica", "Jamaica", "urn:iso:std:iso:3166", "JM"),
+  ARUBA("Aruba", "", "urn:iso:std:iso:3166", "AW"),
 
-  SAINT_LUCIA("Saint Lucia", "Saint Lucia", "urn:iso:std:iso:3166", "LC"),
+  BELGIUM("Belgium", "", "urn:iso:std:iso:3166", "BE"),
 
-  SAINT_KITTS_AND_NEVIS("Saint Kitts and Nevis", "Saint Kitts and Nevis", "urn:iso:std:iso:3166", "KN"),
+  BOSNIA_AND_HERZEGOVINA("Bosnia and Herzegovina", "", "urn:iso:std:iso:3166", "BA"),
 
-  PUERTO_RICO("Puerto Rico", "Puerto Rico", "urn:iso:std:iso:3166", "PR"),
+  KOREA_DEMOCRATIC_PEOPLE_S_REPUBLIC_OF("Korea, Democratic People''s Republic of", "", "urn:iso:std:iso:3166", "KP"),
 
-  SAINT_PIERRE_AND_MIQUELON("Saint Pierre and Miquelon", "Saint Pierre and Miquelon", "urn:iso:std:iso:3166", "PM"),
+  FRANCE("France", "", "urn:iso:std:iso:3166", "FR"),
 
-  BAHAMAS("Bahamas", "Bahamas", "urn:iso:std:iso:3166", "BS"),
+  VIRGIN_ISLANDS_BRITISH("Virgin Islands, British", "", "urn:iso:std:iso:3166", "VG"),
 
-  LIBYA("Libya", "Libya", "urn:iso:std:iso:3166", "LY"),
+  SINGAPORE("Singapore", "", "urn:iso:std:iso:3166", "SG"),
 
-  MAURITIUS("Mauritius", "Mauritius", "urn:iso:std:iso:3166", "MU"),
+  TRINIDAD_AND_TOBAGO("Trinidad and Tobago", "", "urn:iso:std:iso:3166", "TT"),
 
-  CHILE("Chile", "Chile", "urn:iso:std:iso:3166", "CL"),
+  SINT_MAARTEN_DUTCH_PART("Sint Maarten (Dutch part)", "", "urn:iso:std:iso:3166", "SX"),
 
-  MICRONESIA_FEDERATED_STATES_OF("Micronesia, Federated States of", "Micronesia, Federated States of", "urn:iso:std:iso:3166", "FM"),
+  ESTONIA("Estonia", "", "urn:iso:std:iso:3166", "EE"),
 
-  MALDIVES("Maldives", "Maldives", "urn:iso:std:iso:3166", "MV"),
+  GUADELOUPE("Guadeloupe", "", "urn:iso:std:iso:3166", "GP"),
 
-  RWANDA("Rwanda", "Rwanda", "urn:iso:std:iso:3166", "RW"),
+  DENMARK("Denmark", "", "urn:iso:std:iso:3166", "DK"),
 
-  COCOS_KEELING_ISLANDS("Cocos (Keeling) Islands", "Cocos (Keeling) Islands", "urn:iso:std:iso:3166", "CC"),
+  COCOS_KEELING_ISLANDS("Cocos (Keeling) Islands", "", "urn:iso:std:iso:3166", "CC"),
 
-  EL_SALVADOR("El Salvador", "El Salvador", "urn:iso:std:iso:3166", "SV"),
+  COSTA_RICA("Costa Rica", "", "urn:iso:std:iso:3166", "CR"),
 
-  CYPRUS("Cyprus", "Cyprus", "urn:iso:std:iso:3166", "CY"),
+  MACAO("Macao", "", "urn:iso:std:iso:3166", "MO"),
 
-  CHRISTMAS_ISLAND("Christmas Island", "Christmas Island", "urn:iso:std:iso:3166", "CX"),
+  PARAGUAY("Paraguay", "", "urn:iso:std:iso:3166", "PY"),
 
-  TRINIDAD_AND_TOBAGO("Trinidad and Tobago", "Trinidad and Tobago", "urn:iso:std:iso:3166", "TT"),
+  DJIBOUTI("Djibouti", "", "urn:iso:std:iso:3166", "DJ"),
 
-  SVALBARD_AND_JAN_MAYEN("Svalbard and Jan Mayen", "Svalbard and Jan Mayen", "urn:iso:std:iso:3166", "SJ"),
+  GAMBIA("Gambia", "", "urn:iso:std:iso:3166", "GM"),
 
-  BOTSWANA("Botswana", "Botswana", "urn:iso:std:iso:3166", "BW"),
+  ANTIGUA_AND_BARBUDA("Antigua and Barbuda", "", "urn:iso:std:iso:3166", "AG"),
 
-  NAURU("Nauru", "Nauru", "urn:iso:std:iso:3166", "NR"),
+  MARSHALL_ISLANDS("Marshall Islands", "", "urn:iso:std:iso:3166", "MH"),
 
-  VIET_NAM("Viet Nam", "Viet Nam", "urn:iso:std:iso:3166", "VN"),
+  VANUATU("Vanuatu", "", "urn:iso:std:iso:3166", "VU"),
 
-  BRAZIL("Brazil", "Brazil", "urn:iso:std:iso:3166", "BR"),
+  BERMUDA("Bermuda", "", "urn:iso:std:iso:3166", "BM"),
 
-  HUNGARY("Hungary", "Hungary", "urn:iso:std:iso:3166", "HU"),
+  SWITZERLAND("Switzerland", "", "urn:iso:std:iso:3166", "CH"),
 
-  MAURITANIA("Mauritania", "Mauritania", "urn:iso:std:iso:3166", "MR"),
+  MAURITANIA("Mauritania", "", "urn:iso:std:iso:3166", "MR"),
 
-  COLOMBIA("Colombia", "Colombia", "urn:iso:std:iso:3166", "CO"),
+  TIMOR_LESTE("Timor-Leste", "", "urn:iso:std:iso:3166", "TL"),
 
-  KENYA("Kenya", "Kenya", "urn:iso:std:iso:3166", "KE"),
+  BAHRAIN("Bahrain", "", "urn:iso:std:iso:3166", "BH"),
 
-  MAYOTTE("Mayotte", "Mayotte", "urn:iso:std:iso:3166", "YT"),
+  HAITI("Haiti", "", "urn:iso:std:iso:3166", "HT"),
 
-  SURINAME("Suriname", "Suriname", "urn:iso:std:iso:3166", "SR"),
+  TAIWAN_PROVINCE_OF_CHINA("Taiwan, Province of China", "", "urn:iso:std:iso:3166", "TW"),
 
-  SIERRA_LEONE("Sierra Leone", "Sierra Leone", "urn:iso:std:iso:3166", "SL"),
+  SAINT_VINCENT_AND_THE_GRENADINES("Saint Vincent and the Grenadines", "", "urn:iso:std:iso:3166", "VC"),
 
-  LATVIA("Latvia", "Latvia", "urn:iso:std:iso:3166", "LV"),
+  GRENADA("Grenada", "", "urn:iso:std:iso:3166", "GD"),
 
-  BURUNDI("Burundi", "Burundi", "urn:iso:std:iso:3166", "BI"),
+  KAZAKHSTAN("Kazakhstan", "", "urn:iso:std:iso:3166", "KZ"),
 
-  HOLY_SEE("Holy See", "Holy See", "urn:iso:std:iso:3166", "VA"),
+  MALI("Mali", "", "urn:iso:std:iso:3166", "ML"),
 
-  SRI_LANKA("Sri Lanka", "Sri Lanka", "urn:iso:std:iso:3166", "LK"),
+  AUSTRALIA("Australia", "", "urn:iso:std:iso:3166", "AU"),
 
-  FRANCE("France", "France", "urn:iso:std:iso:3166", "FR"),
+  PALAU("Palau", "", "urn:iso:std:iso:3166", "PW"),
 
-  SAN_MARINO("San Marino", "San Marino", "urn:iso:std:iso:3166", "SM"),
+  MACEDONIA_THE_FORMER_YUGOSLAV_REPUBLIC_OF("Macedonia, the former Yugoslav Republic of", "", "urn:iso:std:iso:3166", "MK"),
 
-  VIRGIN_ISLANDS_BRITISH("Virgin Islands, British", "Virgin Islands, British", "urn:iso:std:iso:3166", "VG"),
+  DOMINICAN_REPUBLIC("Dominican Republic", "", "urn:iso:std:iso:3166", "DO"),
 
-  INDONESIA("Indonesia", "Indonesia", "urn:iso:std:iso:3166", "ID"),
+  HEARD_ISLAND_AND_MCDONALD_ISLANDS("Heard Island and McDonald Islands", "", "urn:iso:std:iso:3166", "HM"),
 
-  LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC("Lao People''s Democratic Republic", "Lao People''s Democratic Republic", "urn:iso:std:iso:3166", "LA"),
+  JORDAN("Jordan", "", "urn:iso:std:iso:3166", "JO"),
 
-  SERBIA("Serbia", "Serbia", "urn:iso:std:iso:3166", "RS"),
+  SAINT_MARTIN_FRENCH_PART("Saint Martin (French part)", "", "urn:iso:std:iso:3166", "MF"),
 
-  TAJIKISTAN("Tajikistan", "Tajikistan", "urn:iso:std:iso:3166", "TJ"),
+  SWAZILAND("Swaziland", "", "urn:iso:std:iso:3166", "SZ"),
 
-  CHINA("China", "China", "urn:iso:std:iso:3166", "CN"),
+  TAJIKISTAN("Tajikistan", "", "urn:iso:std:iso:3166", "TJ"),
 
-  DOMINICA("Dominica", "Dominica", "urn:iso:std:iso:3166", "DM"),
+  ZIMBABWE("Zimbabwe", "", "urn:iso:std:iso:3166", "ZW"),
 
-  ALAND_ISLANDS("Åland Islands", "Åland Islands", "urn:iso:std:iso:3166", "AX"),
+  NIUE("Niue", "", "urn:iso:std:iso:3166", "NU"),
 
-  CAMEROON("Cameroon", "Cameroon", "urn:iso:std:iso:3166", "CM"),
+  AZERBAIJAN("Azerbaijan", "", "urn:iso:std:iso:3166", "AZ"),
 
-  WALLIS_AND_FUTUNA("Wallis and Futuna", "Wallis and Futuna", "urn:iso:std:iso:3166", "WF"),
+  GUINEA_BISSAU("Guinea-Bissau", "", "urn:iso:std:iso:3166", "GW"),
 
-  SENEGAL("Senegal", "Senegal", "urn:iso:std:iso:3166", "SN"),
+  UZBEKISTAN("Uzbekistan", "", "urn:iso:std:iso:3166", "UZ"),
 
-  SAINT_VINCENT_AND_THE_GRENADINES("Saint Vincent and the Grenadines", "Saint Vincent and the Grenadines", "urn:iso:std:iso:3166", "VC"),
+  UKRAINE("Ukraine", "", "urn:iso:std:iso:3166", "UA"),
 
-  ECUADOR("Ecuador", "Ecuador", "urn:iso:std:iso:3166", "EC"),
+  RUSSIAN_FEDERATION("Russian Federation", "", "urn:iso:std:iso:3166", "RU"),
 
-  ZAMBIA("Zambia", "Zambia", "urn:iso:std:iso:3166", "ZM"),
+  MONGOLIA("Mongolia", "", "urn:iso:std:iso:3166", "MN"),
 
-  PAKISTAN("Pakistan", "Pakistan", "urn:iso:std:iso:3166", "PK"),
+  VIET_NAM("Viet Nam", "", "urn:iso:std:iso:3166", "VN"),
 
-  AZERBAIJAN("Azerbaijan", "Azerbaijan", "urn:iso:std:iso:3166", "AZ"),
+  SIERRA_LEONE("Sierra Leone", "", "urn:iso:std:iso:3166", "SL"),
 
-  UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND("United Kingdom of Great Britain and Northern Ireland", "United Kingdom of Great Britain and Northern Ireland", "urn:iso:std:iso:3166", "GB"),
+  MAYOTTE("Mayotte", "", "urn:iso:std:iso:3166", "YT"),
 
-  FALKLAND_ISLANDS_MALVINAS("Falkland Islands (Malvinas)", "Falkland Islands (Malvinas)", "urn:iso:std:iso:3166", "FK"),
+  ZAMBIA("Zambia", "", "urn:iso:std:iso:3166", "ZM"),
 
-  NIGER("Niger", "Niger", "urn:iso:std:iso:3166", "NE"),
+  BANGLADESH("Bangladesh", "", "urn:iso:std:iso:3166", "BD"),
 
-  GAMBIA("Gambia", "Gambia", "urn:iso:std:iso:3166", "GM"),
+  EL_SALVADOR("El Salvador", "", "urn:iso:std:iso:3166", "SV"),
 
-  TAIWAN_PROVINCE_OF_CHINA("Taiwan, Province of China", "Taiwan, Province of China", "urn:iso:std:iso:3166", "TW"),
+  BAHAMAS("Bahamas", "", "urn:iso:std:iso:3166", "BS"),
 
-  OMAN("Oman", "Oman", "urn:iso:std:iso:3166", "OM"),
+  SENEGAL("Senegal", "", "urn:iso:std:iso:3166", "SN"),
 
-  GERMANY("Germany", "Germany", "urn:iso:std:iso:3166", "DE"),
+  MONTENEGRO("Montenegro", "", "urn:iso:std:iso:3166", "ME"),
 
-  CAMBODIA("Cambodia", "Cambodia", "urn:iso:std:iso:3166", "KH"),
+  SUDAN("Sudan", "", "urn:iso:std:iso:3166", "SD"),
 
-  TURKEY("Turkey", "Turkey", "urn:iso:std:iso:3166", "TR"),
+  NIGER("Niger", "", "urn:iso:std:iso:3166", "NE"),
 
-  UNITED_ARAB_EMIRATES("United Arab Emirates", "United Arab Emirates", "urn:iso:std:iso:3166", "AE"),
+  SAUDI_ARABIA("Saudi Arabia", "", "urn:iso:std:iso:3166", "SA"),
 
-  JAPAN("Japan", "Japan", "urn:iso:std:iso:3166", "JP"),
+  PAKISTAN("Pakistan", "", "urn:iso:std:iso:3166", "PK"),
 
-  BANGLADESH("Bangladesh", "Bangladesh", "urn:iso:std:iso:3166", "BD"),
+  ALAND_ISLANDS("Åland Islands", "", "urn:iso:std:iso:3166", "AX"),
 
-  SLOVENIA("Slovenia", "Slovenia", "urn:iso:std:iso:3166", "SI"),
+  GEORGIA("Georgia", "", "urn:iso:std:iso:3166", "GE"),
 
-  FRENCH_GUIANA("French Guiana", "French Guiana", "urn:iso:std:iso:3166", "GF"),
+  INDIA("India", "", "urn:iso:std:iso:3166", "IN"),
 
-  IRAQ("Iraq", "Iraq", "urn:iso:std:iso:3166", "IQ"),
+  VENEZUELA_BOLIVARIAN_REPUBLIC_OF("Venezuela, Bolivarian Republic of", "", "urn:iso:std:iso:3166", "VE"),
 
-  COSTA_RICA("Costa Rica", "Costa Rica", "urn:iso:std:iso:3166", "CR"),
+  HONDURAS("Honduras", "", "urn:iso:std:iso:3166", "HN"),
 
-  FRENCH_POLYNESIA("French Polynesia", "French Polynesia", "urn:iso:std:iso:3166", "PF"),
+  BURKINA_FASO("Burkina Faso", "", "urn:iso:std:iso:3166", "BF"),
 
-  NORTHERN_MARIANA_ISLANDS("Northern Mariana Islands", "Northern Mariana Islands", "urn:iso:std:iso:3166", "MP"),
+  JAPAN("Japan", "", "urn:iso:std:iso:3166", "JP"),
 
-  BAHRAIN("Bahrain", "Bahrain", "urn:iso:std:iso:3166", "BH"),
+  GREENLAND("Greenland", "", "urn:iso:std:iso:3166", "GL"),
 
-  ANGUILLA("Anguilla", "Anguilla", "urn:iso:std:iso:3166", "AI"),
+  FRENCH_SOUTHERN_TERRITORIES("French Southern Territories", "", "urn:iso:std:iso:3166", "TF"),
 
-  SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS("South Georgia and the South Sandwich Islands", "South Georgia and the South Sandwich Islands", "urn:iso:std:iso:3166", "GS"),
+  GUAM("Guam", "", "urn:iso:std:iso:3166", "GU"),
 
-  ARMENIA("Armenia", "Armenia", "urn:iso:std:iso:3166", "AM"),
+  BULGARIA("Bulgaria", "", "urn:iso:std:iso:3166", "BG"),
 
-  CROATIA("Croatia", "Croatia", "urn:iso:std:iso:3166", "HR"),
+  FRENCH_GUIANA("French Guiana", "", "urn:iso:std:iso:3166", "GF"),
 
-  ANDORRA("Andorra", "Andorra", "urn:iso:std:iso:3166", "AD"),
+  SURINAME("Suriname", "", "urn:iso:std:iso:3166", "SR"),
 
-  MALI("Mali", "Mali", "urn:iso:std:iso:3166", "ML"),
+  TANZANIA_UNITED_REPUBLIC_OF("Tanzania, United Republic of", "", "urn:iso:std:iso:3166", "TZ"),
 
-  ANTARCTICA("Antarctica", "Antarctica", "urn:iso:std:iso:3166", "AQ"),
+  CAYMAN_ISLANDS("Cayman Islands", "", "urn:iso:std:iso:3166", "KY"),
 
-  TURKS_AND_CAICOS_ISLANDS("Turks and Caicos Islands", "Turks and Caicos Islands", "urn:iso:std:iso:3166", "TC"),
+  ISRAEL("Israel", "", "urn:iso:std:iso:3166", "IL"),
 
-  POLAND("Poland", "Poland", "urn:iso:std:iso:3166", "PL"),
+  JAMAICA("Jamaica", "", "urn:iso:std:iso:3166", "JM"),
 
-  SOLOMON_ISLANDS("Solomon Islands", "Solomon Islands", "urn:iso:std:iso:3166", "SB"),
+  GHANA("Ghana", "", "urn:iso:std:iso:3166", "GH"),
 
-  BENIN("Benin", "Benin", "urn:iso:std:iso:3166", "BJ"),
+  SPAIN("Spain", "", "urn:iso:std:iso:3166", "ES"),
 
-  NETHERLANDS("Netherlands", "Netherlands", "urn:iso:std:iso:3166", "NL"),
+  MONTSERRAT("Montserrat", "", "urn:iso:std:iso:3166", "MS"),
 
-  PERU("Peru", "Peru", "urn:iso:std:iso:3166", "PE"),
+  CAMEROON("Cameroon", "", "urn:iso:std:iso:3166", "CM"),
 
-  PANAMA("Panama", "Panama", "urn:iso:std:iso:3166", "PA"),
+  PANAMA("Panama", "", "urn:iso:std:iso:3166", "PA"),
 
-  UKRAINE("Ukraine", "Ukraine", "urn:iso:std:iso:3166", "UA"),
+  LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC("Lao People''s Democratic Republic", "", "urn:iso:std:iso:3166", "LA"),
 
-  ICELAND("Iceland", "Iceland", "urn:iso:std:iso:3166", "IS"),
+  MALAWI("Malawi", "", "urn:iso:std:iso:3166", "MW"),
 
-  ESTONIA("Estonia", "Estonia", "urn:iso:std:iso:3166", "EE"),
+  UNITED_ARAB_EMIRATES("United Arab Emirates", "", "urn:iso:std:iso:3166", "AE"),
 
-  TURKMENISTAN("Turkmenistan", "Turkmenistan", "urn:iso:std:iso:3166", "TM"),
+  COLOMBIA("Colombia", "", "urn:iso:std:iso:3166", "CO"),
 
-  CANADA("Canada", "Canada", "urn:iso:std:iso:3166", "CA"),
+  DOMINICA("Dominica", "", "urn:iso:std:iso:3166", "DM"),
 
-  HONG_KONG("Hong Kong", "Hong Kong", "urn:iso:std:iso:3166", "HK"),
+  MOLDOVA_REPUBLIC_OF("Moldova, Republic of", "", "urn:iso:std:iso:3166", "MD"),
 
-  NIUE("Niue", "Niue", "urn:iso:std:iso:3166", "NU"),
+  FIJI("Fiji", "", "urn:iso:std:iso:3166", "FJ"),
 
-  ROMANIA("Romania", "Romania", "urn:iso:std:iso:3166", "RO"),
+  CONGO_THE_DEMOCRATIC_REPUBLIC_OF_THE("Congo, the Democratic Republic of the", "", "urn:iso:std:iso:3166", "CD"),
 
-  SAUDI_ARABIA("Saudi Arabia", "Saudi Arabia", "urn:iso:std:iso:3166", "SA"),
+  BRUNEI_DARUSSALAM("Brunei Darussalam", "", "urn:iso:std:iso:3166", "BN"),
 
-  DOMINICAN_REPUBLIC("Dominican Republic", "Dominican Republic", "urn:iso:std:iso:3166", "DO"),
+  BRAZIL("Brazil", "", "urn:iso:std:iso:3166", "BR"),
 
-  TUVALU("Tuvalu", "Tuvalu", "urn:iso:std:iso:3166", "TV"),
+  MALDIVES("Maldives", "", "urn:iso:std:iso:3166", "MV"),
 
-  BOLIVIA_PLURINATIONAL_STATE_OF("Bolivia, Plurinational State of", "Bolivia, Plurinational State of", "urn:iso:std:iso:3166", "BO"),
+  NIGERIA("Nigeria", "", "urn:iso:std:iso:3166", "NG"),
 
-  SOUTH_SUDAN("South Sudan", "South Sudan", "urn:iso:std:iso:3166", "SS"),
+  NORWAY("Norway", "", "urn:iso:std:iso:3166", "NO"),
 
-  NEW_ZEALAND("New Zealand", "New Zealand", "urn:iso:std:iso:3166", "NZ"),
+  IRAQ("Iraq", "", "urn:iso:std:iso:3166", "IQ"),
 
-  COOK_ISLANDS("Cook Islands", "Cook Islands", "urn:iso:std:iso:3166", "CK"),
+  UGANDA("Uganda", "", "urn:iso:std:iso:3166", "UG"),
 
-  MALAWI("Malawi", "Malawi", "urn:iso:std:iso:3166", "MW"),
+  NAMIBIA("Namibia", "", "urn:iso:std:iso:3166", "NA"),
 
-  AMERICAN_SAMOA("American Samoa", "American Samoa", "urn:iso:std:iso:3166", "AS"),
+  FINLAND("Finland", "", "urn:iso:std:iso:3166", "FI"),
 
-  NORFOLK_ISLAND("Norfolk Island", "Norfolk Island", "urn:iso:std:iso:3166", "NF"),
+  URUGUAY("Uruguay", "", "urn:iso:std:iso:3166", "UY"),
 
-  IRELAND("Ireland", "Ireland", "urn:iso:std:iso:3166", "IE"),
+  GIBRALTAR("Gibraltar", "", "urn:iso:std:iso:3166", "GI"),
 
-  TONGA("Tonga", "Tonga", "urn:iso:std:iso:3166", "TO"),
+  SOMALIA("Somalia", "", "urn:iso:std:iso:3166", "SO"),
 
-  ANGOLA("Angola", "Angola", "urn:iso:std:iso:3166", "AO"),
+  SVALBARD_AND_JAN_MAYEN("Svalbard and Jan Mayen", "", "urn:iso:std:iso:3166", "SJ"),
 
-  SINGAPORE("Singapore", "Singapore", "urn:iso:std:iso:3166", "SG"),
+  MOROCCO("Morocco", "", "urn:iso:std:iso:3166", "MA"),
 
-  EQUATORIAL_GUINEA("Equatorial Guinea", "Equatorial Guinea", "urn:iso:std:iso:3166", "GQ"),
+  TURKS_AND_CAICOS_ISLANDS("Turks and Caicos Islands", "", "urn:iso:std:iso:3166", "TC"),
 
-  AFGHANISTAN("Afghanistan", "Afghanistan", "urn:iso:std:iso:3166", "AF"),
+  GUINEA("Guinea", "", "urn:iso:std:iso:3166", "GN"),
 
-  MACEDONIA_THE_FORMER_YUGOSLAV_REPUBLIC_OF("Macedonia, the former Yugoslav Republic of", "Macedonia, the former Yugoslav Republic of", "urn:iso:std:iso:3166", "MK"),
+  IRAN_ISLAMIC_REPUBLIC_OF("Iran, Islamic Republic of", "", "urn:iso:std:iso:3166", "IR"),
 
-  THAILAND("Thailand", "Thailand", "urn:iso:std:iso:3166", "TH"),
+  SYRIAN_ARAB_REPUBLIC("Syrian Arab Republic", "", "urn:iso:std:iso:3166", "SY"),
 
-  ZIMBABWE("Zimbabwe", "Zimbabwe", "urn:iso:std:iso:3166", "ZW"),
+  YEMEN("Yemen", "", "urn:iso:std:iso:3166", "YE"),
 
-  SINT_MAARTEN_DUTCH_PART("Sint Maarten (Dutch part)", "Sint Maarten (Dutch part)", "urn:iso:std:iso:3166", "SX"),
+  CURACAO("Curaçao", "", "urn:iso:std:iso:3166", "CW"),
 
-  UGANDA("Uganda", "Uganda", "urn:iso:std:iso:3166", "UG"),
+  CZECHIA("Czechia", "", "urn:iso:std:iso:3166", "CZ"),
 
-  BELGIUM("Belgium", "Belgium", "urn:iso:std:iso:3166", "BE"),
+  SRI_LANKA("Sri Lanka", "", "urn:iso:std:iso:3166", "LK"),
 
-  MOLDOVA_REPUBLIC_OF("Moldova, Republic of", "Moldova, Republic of", "urn:iso:std:iso:3166", "MD"),
+  LIBERIA("Liberia", "", "urn:iso:std:iso:3166", "LR"),
 
-  SAINT_BARTHELEMY("Saint Barthélemy", "Saint Barthélemy", "urn:iso:std:iso:3166", "BL"),
+  SEYCHELLES("Seychelles", "", "urn:iso:std:iso:3166", "SC"),
 
-  TOKELAU("Tokelau", "Tokelau", "urn:iso:std:iso:3166", "TK"),
+  GUYANA("Guyana", "", "urn:iso:std:iso:3166", "GY"),
 
-  YEMEN("Yemen", "Yemen", "urn:iso:std:iso:3166", "YE"),
+  HUNGARY("Hungary", "", "urn:iso:std:iso:3166", "HU"),
 
-  CONGO_THE_DEMOCRATIC_REPUBLIC_OF_THE("Congo, the Democratic Republic of the", "Congo, the Democratic Republic of the", "urn:iso:std:iso:3166", "CD"),
+  KUWAIT("Kuwait", "", "urn:iso:std:iso:3166", "KW"),
 
-  JERSEY("Jersey", "Jersey", "urn:iso:std:iso:3166", "JE"),
+  TOGO("Togo", "", "urn:iso:std:iso:3166", "TG"),
 
-  TOGO("Togo", "Togo", "urn:iso:std:iso:3166", "TG"),
+  BENIN("Benin", "", "urn:iso:std:iso:3166", "BJ"),
 
-  ISRAEL("Israel", "Israel", "urn:iso:std:iso:3166", "IL"),
+  BOTSWANA("Botswana", "", "urn:iso:std:iso:3166", "BW"),
 
-  CABO_VERDE("Cabo Verde", "Cabo Verde", "urn:iso:std:iso:3166", "CV"),
+  ALGERIA("Algeria", "", "urn:iso:std:iso:3166", "DZ"),
 
-  MOZAMBIQUE("Mozambique", "Mozambique", "urn:iso:std:iso:3166", "MZ"),
+  IRELAND("Ireland", "", "urn:iso:std:iso:3166", "IE"),
 
-  TANZANIA_UNITED_REPUBLIC_OF("Tanzania, United Republic of", "Tanzania, United Republic of", "urn:iso:std:iso:3166", "TZ"),
+  CYPRUS("Cyprus", "", "urn:iso:std:iso:3166", "CY"),
 
-  CENTRAL_AFRICAN_REPUBLIC("Central African Republic", "Central African Republic", "urn:iso:std:iso:3166", "CF"),
+  UNITED_STATES_MINOR_OUTLYING_ISLANDS("United States Minor Outlying Islands", "", "urn:iso:std:iso:3166", "UM"),
 
-  BELARUS("Belarus", "Belarus", "urn:iso:std:iso:3166", "BY"),
+  AUSTRIA("Austria", "", "urn:iso:std:iso:3166", "AT"),
 
-  NEPAL("Nepal", "Nepal", "urn:iso:std:iso:3166", "NP"),
+  PHILIPPINES("Philippines", "", "urn:iso:std:iso:3166", "PH"),
 
-  KYRGYZSTAN("Kyrgyzstan", "Kyrgyzstan", "urn:iso:std:iso:3166", "KG"),
+  TUVALU("Tuvalu", "", "urn:iso:std:iso:3166", "TV"),
 
-  SUDAN("Sudan", "Sudan", "urn:iso:std:iso:3166", "SD"),
+  GUERNSEY("Guernsey", "", "urn:iso:std:iso:3166", "GG"),
 
-  NAMIBIA("Namibia", "Namibia", "urn:iso:std:iso:3166", "NA"),
+  NORTHERN_MARIANA_ISLANDS("Northern Mariana Islands", "", "urn:iso:std:iso:3166", "MP"),
 
-  GUATEMALA("Guatemala", "Guatemala", "urn:iso:std:iso:3166", "GT"),
+  KYRGYZSTAN("Kyrgyzstan", "", "urn:iso:std:iso:3166", "KG"),
 
-  REUNION("Réunion", "Réunion", "urn:iso:std:iso:3166", "RE"),
+  FRENCH_POLYNESIA("French Polynesia", "", "urn:iso:std:iso:3166", "PF"),
 
-  IRAN_ISLAMIC_REPUBLIC_OF("Iran, Islamic Republic of", "Iran, Islamic Republic of", "urn:iso:std:iso:3166", "IR"),
+  CHILE("Chile", "", "urn:iso:std:iso:3166", "CL"),
 
-  KOREA_DEMOCRATIC_PEOPLE_S_REPUBLIC_OF("Korea, Democratic People''s Republic of", "Korea, Democratic People''s Republic of", "urn:iso:std:iso:3166", "KP"),
+  RWANDA("Rwanda", "", "urn:iso:std:iso:3166", "RW"),
 
-  GUAM("Guam", "Guam", "urn:iso:std:iso:3166", "GU"),
+  ANDORRA("Andorra", "", "urn:iso:std:iso:3166", "AD"),
 
-  KOREA_REPUBLIC_OF("Korea, Republic of", "Korea, Republic of", "urn:iso:std:iso:3166", "KR"),
+  SAINT_PIERRE_AND_MIQUELON("Saint Pierre and Miquelon", "", "urn:iso:std:iso:3166", "PM"),
 
-  PHILIPPINES("Philippines", "Philippines", "urn:iso:std:iso:3166", "PH"),
+  BRITISH_INDIAN_OCEAN_TERRITORY("British Indian Ocean Territory", "", "urn:iso:std:iso:3166", "IO"),
 
-  AUSTRIA("Austria", "Austria", "urn:iso:std:iso:3166", "AT"),
+  SERBIA("Serbia", "", "urn:iso:std:iso:3166", "RS"),
 
-  SAINT_MARTIN_FRENCH_PART("Saint Martin (French part)", "Saint Martin (French part)", "urn:iso:std:iso:3166", "MF"),
+  BOLIVIA_PLURINATIONAL_STATE_OF("Bolivia, Plurinational State of", "", "urn:iso:std:iso:3166", "BO"),
 
-  MONTSERRAT("Montserrat", "Montserrat", "urn:iso:std:iso:3166", "MS"),
+  MONACO("Monaco", "", "urn:iso:std:iso:3166", "MC"),
 
-  ETHIOPIA("Ethiopia", "Ethiopia", "urn:iso:std:iso:3166", "ET"),
+  ALBANIA("Albania", "", "urn:iso:std:iso:3166", "AL"),
 
-  LESOTHO("Lesotho", "Lesotho", "urn:iso:std:iso:3166", "LS"),
+  PORTUGAL("Portugal", "", "urn:iso:std:iso:3166", "PT"),
 
-  ISLE_OF_MAN("Isle of Man", "Isle of Man", "urn:iso:std:iso:3166", "IM"),
+  SAN_MARINO("San Marino", "", "urn:iso:std:iso:3166", "SM"),
 
-  BRITISH_INDIAN_OCEAN_TERRITORY("British Indian Ocean Territory", "British Indian Ocean Territory", "urn:iso:std:iso:3166", "IO"),
+  MALAYSIA("Malaysia", "", "urn:iso:std:iso:3166", "MY"),
 
-  FINLAND("Finland", "Finland", "urn:iso:std:iso:3166", "FI"),
+  LATVIA("Latvia", "", "urn:iso:std:iso:3166", "LV"),
 
-  GABON("Gabon", "Gabon", "urn:iso:std:iso:3166", "GA"),
+  THAILAND("Thailand", "", "urn:iso:std:iso:3166", "TH"),
 
-  QATAR("Qatar", "Qatar", "urn:iso:std:iso:3166", "QA"),
+  VIRGIN_ISLANDS("Virgin Islands,", "", "urn:iso:std:iso:3166", "VI"),
 
-  CZECHIA("Czechia", "Czechia", "urn:iso:std:iso:3166", "CZ"),
+  BARBADOS("Barbados", "", "urn:iso:std:iso:3166", "BB"),
 
-  NICARAGUA("Nicaragua", "Nicaragua", "urn:iso:std:iso:3166", "NI"),
+  ARGENTINA("Argentina", "", "urn:iso:std:iso:3166", "AR"),
 
-  RUSSIAN_FEDERATION("Russian Federation", "Russian Federation", "urn:iso:std:iso:3166", "RU"),
+  TURKEY("Turkey", "", "urn:iso:std:iso:3166", "TR"),
 
-  UNITED_STATES_MINOR_OUTLYING_ISLANDS("United States Minor Outlying Islands", "United States Minor Outlying Islands", "urn:iso:std:iso:3166", "UM"),
+  KENYA("Kenya", "", "urn:iso:std:iso:3166", "KE"),
 
-  GUERNSEY("Guernsey", "Guernsey", "urn:iso:std:iso:3166", "GG"),
+  MEXICO("Mexico", "", "urn:iso:std:iso:3166", "MX"),
 
-  MALTA("Malta", "Malta", "urn:iso:std:iso:3166", "MT"),
+  SOUTH_AFRICA("South Africa", "", "urn:iso:std:iso:3166", "ZA"),
 
-  BERMUDA("Bermuda", "Bermuda", "urn:iso:std:iso:3166", "BM"),
+  WESTERN_SAHARA("Western Sahara", "", "urn:iso:std:iso:3166", "EH"),
 
-  SAO_TOME_AND_PRINCIPE("Sao Tome and Principe", "Sao Tome and Principe", "urn:iso:std:iso:3166", "ST"),
+  MYANMAR("Myanmar", "", "urn:iso:std:iso:3166", "MM"),
 
-  PARAGUAY("Paraguay", "Paraguay", "urn:iso:std:iso:3166", "PY"),
+  SOUTH_SUDAN("South Sudan", "", "urn:iso:std:iso:3166", "SS"),
 
-  BARBADOS("Barbados", "Barbados", "urn:iso:std:iso:3166", "BB"),
+  TONGA("Tonga", "", "urn:iso:std:iso:3166", "TO"),
 
-  CURACAO("Curaçao", "Curaçao", "urn:iso:std:iso:3166", "CW"),
+  BELARUS("Belarus", "", "urn:iso:std:iso:3166", "BY"),
 
-  KAZAKHSTAN("Kazakhstan", "Kazakhstan", "urn:iso:std:iso:3166", "KZ"),
+  AMERICAN_SAMOA("American Samoa", "", "urn:iso:std:iso:3166", "AS"),
 
-  HAITI("Haiti", "Haiti", "urn:iso:std:iso:3166", "HT"),
+  NORFOLK_ISLAND("Norfolk Island", "", "urn:iso:std:iso:3166", "NF"),
 
-  CONGO("Congo", "Congo", "urn:iso:std:iso:3166", "CG"),
+  INDONESIA("Indonesia", "", "urn:iso:std:iso:3166", "ID"),
 
-  COTE_D_IVOIRE("Côte d''Ivoire", "Côte d''Ivoire", "urn:iso:std:iso:3166", "CI"),
+  ERITREA("Eritrea", "", "urn:iso:std:iso:3166", "ER"),
 
-  GEORGIA("Georgia", "Georgia", "urn:iso:std:iso:3166", "GE"),
+  HOLY_SEE("Holy See", "", "urn:iso:std:iso:3166", "VA"),
 
-  SLOVAKIA("Slovakia", "Slovakia", "urn:iso:std:iso:3166", "SK"),
+  SAO_TOME_AND_PRINCIPE("Sao Tome and Principe", "", "urn:iso:std:iso:3166", "ST"),
 
-  HONDURAS("Honduras", "Honduras", "urn:iso:std:iso:3166", "HN"),
+  FALKLAND_ISLANDS_MALVINAS("Falkland Islands (Malvinas)", "", "urn:iso:std:iso:3166", "FK"),
 
-  GUADELOUPE("Guadeloupe", "Guadeloupe", "urn:iso:std:iso:3166", "GP"),
+  COTE_D_IVOIRE("Côte d''Ivoire", "", "urn:iso:std:iso:3166", "CI"),
 
-  SEYCHELLES("Seychelles", "Seychelles", "urn:iso:std:iso:3166", "SC"),
+  POLAND("Poland", "", "urn:iso:std:iso:3166", "PL"),
 
-  SWAZILAND("Swaziland", "Swaziland", "urn:iso:std:iso:3166", "SZ"),
+  SOLOMON_ISLANDS("Solomon Islands", "", "urn:iso:std:iso:3166", "SB"),
 
-  FRENCH_SOUTHERN_TERRITORIES("French Southern Territories", "French Southern Territories", "urn:iso:std:iso:3166", "TF"),
+  SAINT_HELENA_ASCENSION_AND_TRISTAN_DA_CUNHA("Saint Helena, Ascension and Tristan da Cunha", "", "urn:iso:std:iso:3166", "SH"),
 
-  GUYANA("Guyana", "Guyana", "urn:iso:std:iso:3166", "GY"),
+  CHRISTMAS_ISLAND("Christmas Island", "", "urn:iso:std:iso:3166", "CX"),
 
-  PORTUGAL("Portugal", "Portugal", "urn:iso:std:iso:3166", "PT"),
+  NEPAL("Nepal", "", "urn:iso:std:iso:3166", "NP"),
 
-  MONGOLIA("Mongolia", "Mongolia", "urn:iso:std:iso:3166", "MN"),
+  OMAN("Oman", "", "urn:iso:std:iso:3166", "OM"),
 
-  JORDAN("Jordan", "Jordan", "urn:iso:std:iso:3166", "JO"),
+  REUNION("Réunion", "", "urn:iso:std:iso:3166", "RE"),
 
-  GREECE("Greece", "Greece", "urn:iso:std:iso:3166", "GR"),
+  SAINT_BARTHELEMY("Saint Barthélemy", "", "urn:iso:std:iso:3166", "BL"),
 
-  BULGARIA("Bulgaria", "Bulgaria", "urn:iso:std:iso:3166", "BG"),
+  HONG_KONG("Hong Kong", "", "urn:iso:std:iso:3166", "HK"),
 
-  ALBANIA("Albania", "Albania", "urn:iso:std:iso:3166", "AL"),
+  FAROE_ISLANDS("Faroe Islands", "", "urn:iso:std:iso:3166", "FO"),
 
-  DJIBOUTI("Djibouti", "Djibouti", "urn:iso:std:iso:3166", "DJ"),
+  JERSEY("Jersey", "", "urn:iso:std:iso:3166", "JE"),
 
-  PALESTINE_STATE_OF("Palestine, State of", "Palestine, State of", "urn:iso:std:iso:3166", "PS"),
+  LIBYA("Libya", "", "urn:iso:std:iso:3166", "LY"),
 
-  LITHUANIA("Lithuania", "Lithuania", "urn:iso:std:iso:3166", "LT"),
+  GABON("Gabon", "", "urn:iso:std:iso:3166", "GA"),
 
-  SOUTH_AFRICA("South Africa", "South Africa", "urn:iso:std:iso:3166", "ZA"),
+  GREECE("Greece", "", "urn:iso:std:iso:3166", "GR"),
 
-  VANUATU("Vanuatu", "Vanuatu", "urn:iso:std:iso:3166", "VU"),
+  SAMOA("Samoa", "", "urn:iso:std:iso:3166", "WS"),
 
-  PAPUA_NEW_GUINEA("Papua New Guinea", "Papua New Guinea", "urn:iso:std:iso:3166", "PG"),
+  ITALY("Italy", "", "urn:iso:std:iso:3166", "IT"),
 
-  MARSHALL_ISLANDS("Marshall Islands", "Marshall Islands", "urn:iso:std:iso:3166", "MH"),
+  MOZAMBIQUE("Mozambique", "", "urn:iso:std:iso:3166", "MZ"),
 
-  ANTIGUA_AND_BARBUDA("Antigua and Barbuda", "Antigua and Barbuda", "urn:iso:std:iso:3166", "AG"),
+  ROMANIA("Romania", "", "urn:iso:std:iso:3166", "RO"),
 
-  FAROE_ISLANDS("Faroe Islands", "Faroe Islands", "urn:iso:std:iso:3166", "FO"),
+  ECUADOR("Ecuador", "", "urn:iso:std:iso:3166", "EC"),
 
-  CHAD("Chad", "Chad", "urn:iso:std:iso:3166", "TD"),
+  AFGHANISTAN("Afghanistan", "", "urn:iso:std:iso:3166", "AF"),
 
-  GRENADA("Grenada", "Grenada", "urn:iso:std:iso:3166", "GD"),
+  NETHERLANDS("Netherlands", "", "urn:iso:std:iso:3166", "NL"),
 
-  ARGENTINA("Argentina", "Argentina", "urn:iso:std:iso:3166", "AR"),
+  CHINA("China", "", "urn:iso:std:iso:3166", "CN"),
 
-  KIRIBATI("Kiribati", "Kiribati", "urn:iso:std:iso:3166", "KI"),
+  MICRONESIA_FEDERATED_STATES_OF("Micronesia, Federated States of", "", "urn:iso:std:iso:3166", "FM"),
 
-  UZBEKISTAN("Uzbekistan", "Uzbekistan", "urn:iso:std:iso:3166", "UZ"),
+  NEW_CALEDONIA("New Caledonia", "", "urn:iso:std:iso:3166", "NC"),
 
-  GUINEA_BISSAU("Guinea-Bissau", "Guinea-Bissau", "urn:iso:std:iso:3166", "GW"),
+  MARTINIQUE("Martinique", "", "urn:iso:std:iso:3166", "MQ"),
 
-  SYRIAN_ARAB_REPUBLIC("Syrian Arab Republic", "Syrian Arab Republic", "urn:iso:std:iso:3166", "SY"),
+  LUXEMBOURG("Luxembourg", "", "urn:iso:std:iso:3166", "LU"),
 
-  GREENLAND("Greenland", "Greenland", "urn:iso:std:iso:3166", "GL"),
+  ARMENIA("Armenia", "", "urn:iso:std:iso:3166", "AM"),
 
-  TIMOR_LESTE("Timor-Leste", "Timor-Leste", "urn:iso:std:iso:3166", "TL"),
+  LITHUANIA("Lithuania", "", "urn:iso:std:iso:3166", "LT"),
 
-  MADAGASCAR("Madagascar", "Madagascar", "urn:iso:std:iso:3166", "MG"),
+  SLOVENIA("Slovenia", "", "urn:iso:std:iso:3166", "SI"),
 
-  SOMALIA("Somalia", "Somalia", "urn:iso:std:iso:3166", "SO"),
+  TUNISIA("Tunisia", "", "urn:iso:std:iso:3166", "TN"),
 
-  BRUNEI_DARUSSALAM("Brunei Darussalam", "Brunei Darussalam", "urn:iso:std:iso:3166", "BN");
+  CONGO("Congo", "", "urn:iso:std:iso:3166", "CG");
 
   private String value;
 

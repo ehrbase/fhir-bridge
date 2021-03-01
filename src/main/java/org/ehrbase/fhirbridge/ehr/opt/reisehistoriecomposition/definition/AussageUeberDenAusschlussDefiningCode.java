@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum AussageUeberDenAusschlussDefiningCode implements EnumValueSet {
-  NO_QUALIFIER_VALUE("No (qualifier value)", "No (qualifier value)", "SNOMED Clinical Terms", "373067005");
+  NO_QUALIFIER_VALUE("No (qualifier value)", "", "SNOMED Clinical Terms", "373067005");
 
   private String value;
 

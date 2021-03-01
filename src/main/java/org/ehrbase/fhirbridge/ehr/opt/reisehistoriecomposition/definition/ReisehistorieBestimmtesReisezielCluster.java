@@ -14,7 +14,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-11T12:33:18.222992+01:00",
+    date = "2021-03-01T12:21:07.725290+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 public class ReisehistorieBestimmtesReisezielCluster implements LocatableEntity {
@@ -34,6 +34,7 @@ public class ReisehistorieBestimmtesReisezielCluster implements LocatableEntity 
   /**
    * Path: Reisehistorie/Reisehistorie/Bestimmtes Reiseziel/Bundesland / Region
    * Description: Die besuchte Region.
+   * Comment: Verschiedene Regionen innerhalb desselben Landes können benannt werden, wenn sie möglicherweise unterschiedliche Gesundheitsrisiken darstellen.
    */
   @Path("/items[at0012]/value|defining_code")
   private BundeslandRegionDefiningCode bundeslandRegionDefiningCode;
@@ -47,6 +48,7 @@ public class ReisehistorieBestimmtesReisezielCluster implements LocatableEntity 
   /**
    * Path: Reisehistorie/Reisehistorie/Bestimmtes Reiseziel/Stadt
    * Description: Die besuchte Stadt.
+   * Comment: Verschiedene Städte innerhalb desselben Landes oder derselben Region können benannt werden, wenn sie möglicherweise unterschiedliche Gesundheitsrisiken darstellen.
    */
   @Path("/items[at0013]/value|value")
   private String stadtValue;
