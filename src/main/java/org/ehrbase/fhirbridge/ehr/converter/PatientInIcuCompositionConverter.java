@@ -103,5 +103,4 @@ public class PatientInIcuCompositionConverter implements CompositionConverter<Pa
 
         throw new UnprocessableEntityException("Aktivität durchgeführt has invalid code " + coding.getCode());
     }
-
 }
