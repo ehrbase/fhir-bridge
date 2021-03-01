@@ -105,9 +105,9 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () -> {
-            new BodyHeightCompositionConverter().toComposition(obs);
-        });
+        return assertThrows(UnprocessableEntityException.class, () ->
+            new BodyHeightCompositionConverter().toComposition(obs)
+        );
     }
 
     @Override
