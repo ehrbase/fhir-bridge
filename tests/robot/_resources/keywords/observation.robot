@@ -131,6 +131,18 @@ get coronavirus lab results
                         Output Debug Info To Console
 
 
+get heart rate results
+#    &{resp}            POST 	${ehrbase_url}/query/aql/    {"q": "SELECT c FROM COMPOSITION c [uid/value='${identifier_value}']"}
+	&{resp}				GET		${ehrbase_url}/ehr/${ehr_id_value}/composition/${identifier_value}::local.ehrbase.org::1
+						Output Debug Info To Console
+                        Integer    response status    200
+                        String     request method    GET
+						String     response body uid value    pattern=${identifier_value}*
+#                       String     response body resourceType    Bundle
+                        String     response body content 0 _type    OBSERVATION
+                        
+
+
 #                                            .
 #                                          .o8
 #  .ooooo.  oooo d8b  .ooooo.   .oooo.   .o888oo  .ooooo.
@@ -143,13 +155,13 @@ get coronavirus lab results
 
 
 create blood pressure
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Blood Pressure    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create body temperature
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Body Temperature    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create FIO2
@@ -158,8 +170,8 @@ create FIO2
 
 
 create heart rate
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Hear Rate    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create observation lab
@@ -168,8 +180,8 @@ create observation lab
 
 
 create sofa score
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Sofa Score    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create observation
@@ -183,8 +195,8 @@ create coronavirus lab result
 
 
 create body height
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Body Height    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create pregnancy status
@@ -198,13 +210,13 @@ create frailty scale score
 
 
 create smoking status
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Smoking Status    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create body weight
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Body Weight    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create patient in icu
@@ -212,14 +224,9 @@ create patient in icu
     POST /Observation with ehr reference    Patient in Intensive Care Unit (ICU)    ${example_json}
 
 
-create blood gas panel
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Blood Gas Panel    ${example_json}
-
-
 create oxygen saturation
-    [Arguments]         ${example_json}
-    POST /Observation with ehr reference    Oxygen Saturation in Arterial Blood    ${example_json}
+    [Arguments]         ${text}    ${example_json}
+    POST /Observation with ehr reference    ${text}    ${example_json}
 
 
 create history of travel
@@ -422,6 +429,7 @@ POST /Observation with fake ehr reference
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${{str(uuid.uuid4())}}
                         Output Debug Info To Console    ${payload}
                         POST /Observation    ${fhir_resource_name}    ${payload}
+						
 
 
 POST /Observation w/o ehr reference

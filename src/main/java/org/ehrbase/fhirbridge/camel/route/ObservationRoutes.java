@@ -44,8 +44,8 @@ public class ObservationRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-         onException(Exception.class)
-            .process(defaultExceptionHandler);
+        onException(Exception.class)
+                .process(defaultExceptionHandler);
 
         from("fhir-create-observation:fhirConsumer?fhirContext=#fhirContext")
             .onCompletion()

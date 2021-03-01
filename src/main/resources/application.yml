@@ -7,6 +7,9 @@ fhir-bridge:
       password: myPassword432
     template:
       prefix: classpath:/opt/
+  composition:
+    debug: false
+    output-directory: "src/main/resources/"
 spring:
   application:
     name: FHIR Bridge

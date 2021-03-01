@@ -21,9 +21,10 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...                                                            Authorization=${AUTHORIZATION['Authorization']}
+# ...															   Authorization=${AUTHORIZATION['Authorization']}
 
-Force Tags              diagnostic-report_create
+Force Tags              diagnostic_create    create
 
 
 
@@ -41,6 +42,7 @@ Force Tags              diagnostic-report_create
 	...                 5. *VALIDATE* the response status
     [Tags]              diagnostic-report    valid
 
+    Log Many    ${AUTHORIZATION}
     ehr.create new ehr                      000_ehr_status.json
     diagnostic.create diagnostic report     create-diagnosticReport.json 
     diagnostic.validate response - 201

@@ -21,9 +21,9 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...															   Authorization=${AUTHORIZATION['Authorization']}
 
-Force Tags              condition_create
+Force Tags              condition_create    create
 
 
 
@@ -45,7 +45,7 @@ Force Tags              condition_create
 
     ehr.create new ehr    000_ehr_status.json
     condition.create symptoms-covid-19    Symptoms-Covid-19 sct    create-symptoms-covid-19-present_sct.json
-    procedure.validate response - 201
+    condition.validate response - 201
 
 
 
@@ -59,7 +59,7 @@ Force Tags              condition_create
 
     ehr.create new ehr    000_ehr_status.json
     condition.create symptoms-covid-19    Symptoms-Covid-19 icd10   create-symptoms-covid-19-present_icd10.json
-    procedure.validate response - 201
+    condition.validate response - 201
 
 
 
@@ -73,4 +73,4 @@ Force Tags              condition_create
 
     ehr.create new ehr    000_ehr_status.json
     condition.create symptoms-covid-19    Symptoms-Covid-19 alphaid    create-symptoms-covid-19-present_alphaid.json
-    procedure.validate response - 201
+    condition.validate response - 201

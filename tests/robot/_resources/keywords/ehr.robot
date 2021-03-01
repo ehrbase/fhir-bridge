@@ -30,11 +30,12 @@ create new ehr
                         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
 
     &{resp}=            POST    ${EHRBASE_URL}/ehr    ${ehr_status_json}
-                        Integer      response status    201
                         Output Debug Info To Console
+                        Integer      response status    201
 
                         Set Suite Variable    ${response}    ${resp}
                         extract subject_id from response
+						extract ehr_id from response
 
 
 create ehr
@@ -44,4 +45,4 @@ create ehr
     &{resp}=            REST.POST    ${EHRBASE_URL}/ehr
                         Set Test Variable    ${response}    ${resp}
                         Output Debug Info To Console
-                        extract ehr_id from response
+                        
