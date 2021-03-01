@@ -1,23 +1,17 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.temporal.TemporalAccessor;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -104,11 +98,11 @@ class ObservationIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createHistoryOfTravelYes() throws IOException {
-        create("Observation/create-history-of-travel_yes.json");
+        create("Observation/HistoryOfTravel/create-history-of-travel_yes.json");
     }
     @Test
     void createHistoryOfTravelNo() throws IOException {
-        create("Observation/create-history-of-travel_no.json");
+        create("Observation/HistoryOfTravel/create-history-of-travel_no.json");
     }
     @Test
     void createHistoryOfTravelUnknown() throws IOException {
