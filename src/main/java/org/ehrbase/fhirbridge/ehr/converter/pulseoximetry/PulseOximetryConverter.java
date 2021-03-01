@@ -12,7 +12,11 @@ import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConvert
 import org.ehrbase.fhirbridge.ehr.converter.ContextConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PulseOximetryConverter implements CompositionConverter<PulsoxymetrieComposition, Observation> {
 
@@ -24,6 +28,7 @@ public class PulseOximetryConverter implements CompositionConverter<Pulsoxymetri
     @Override
     public PulsoxymetrieComposition toComposition(Observation observation) throws CompositionConversionException {
         PulsoxymetrieComposition composition = new PulsoxymetrieComposition();
+        new PulseOximetryCodeChecker().checkIfPulseOximetry(observation);
         new ContextConverter().mapStatus(composition, observation);
         mapKategorie(composition, observation);
         mapPulsoxymetrieObservation(composition, observation);
@@ -52,7 +57,6 @@ public class PulseOximetryConverter implements CompositionConverter<Pulsoxymetri
 
     private void mapPulsoxymetrieObservation(PulsoxymetrieComposition composition, Observation observation) {
         PulsoxymetrieObservation pulsoxymetrieObservation = new PulsoxymetrieObservation();
-
         pulsoxymetrieObservation.setLanguage(Language.DE);
         pulsoxymetrieObservation.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         pulsoxymetrieObservation.setOriginValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
