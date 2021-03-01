@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum ReiseAngetretenDefiningCode implements EnumValueSet {
-  YES_QUALIFIER_VALUE("Yes (qualifier value)", "Yes (qualifier value)", "SNOMED Clinical Terms", "373066001");
+  YES_QUALIFIER_VALUE("Yes (qualifier value)", "", "SNOMED Clinical Terms", "373066001");
 
   private String value;
 

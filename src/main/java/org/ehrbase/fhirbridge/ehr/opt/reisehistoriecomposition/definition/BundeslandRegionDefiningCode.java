@@ -4,37 +4,37 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum BundeslandRegionDefiningCode implements EnumValueSet {
-  HESSEN("Hessen", "Hessen", "urn:iso:std:iso:3166-2:de", "DE-HE"),
+  HAMBURG("Hamburg", "", "urn:iso:std:iso:3166-2:de", "DE-HH"),
 
-  THUERINGEN("Thüringen", "Thüringen", "urn:iso:std:iso:3166-2:de", "DE-TH"),
+  BAYERN("Bayern", "", "urn:iso:std:iso:3166-2:de", "DE-BY"),
 
-  MECKLENBURG_VORPOMMERN("Mecklenburg-Vorpommern", "Mecklenburg-Vorpommern", "urn:iso:std:iso:3166-2:de", "DE-MV"),
+  BERLIN("Berlin", "", "urn:iso:std:iso:3166-2:de", "DE-BE"),
 
-  BAYERN("Bayern", "Bayern", "urn:iso:std:iso:3166-2:de", "DE-BY"),
+  HESSEN("Hessen", "", "urn:iso:std:iso:3166-2:de", "DE-HE"),
 
-  NIEDERSACHSEN("Niedersachsen", "Niedersachsen", "urn:iso:std:iso:3166-2:de", "DE-NI"),
+  BRANDENBURG("Brandenburg", "", "urn:iso:std:iso:3166-2:de", "DE-BB"),
 
-  BADEN_WUERTTEMBERG("Baden-Württemberg", "Baden-Württemberg", "urn:iso:std:iso:3166-2:de", "DE-BW"),
+  BREMEN("Bremen", "", "urn:iso:std:iso:3166-2:de", "DE-HB"),
 
-  HAMBURG("Hamburg", "Hamburg", "urn:iso:std:iso:3166-2:de", "DE-HH"),
+  BADEN_WUERTTEMBERG("Baden-Württemberg", "", "urn:iso:std:iso:3166-2:de", "DE-BW"),
 
-  SAARLAND("Saarland", "Saarland", "urn:iso:std:iso:3166-2:de", "DE-SL"),
+  MECKLENBURG_VORPOMMERN("Mecklenburg-Vorpommern", "", "urn:iso:std:iso:3166-2:de", "DE-MV"),
 
-  NORDRHEIN_WESTFALEN("Nordrhein-Westfalen", "Nordrhein-Westfalen", "urn:iso:std:iso:3166-2:de", "DE-NW"),
+  SCHLESWIG_HOLSTEIN("Schleswig-Holstein", "", "urn:iso:std:iso:3166-2:de", "DE-SH"),
 
-  BRANDENBURG("Brandenburg", "Brandenburg", "urn:iso:std:iso:3166-2:de", "DE-BB"),
+  RHEINLAND_PFALZ("Rheinland-Pfalz", "", "urn:iso:std:iso:3166-2:de", "DE-RP"),
 
-  SACHSEN("Sachsen", "Sachsen", "urn:iso:std:iso:3166-2:de", "DE-SN"),
+  SAARLAND("Saarland", "", "urn:iso:std:iso:3166-2:de", "DE-SL"),
 
-  SCHLESWIG_HOLSTEIN("Schleswig-Holstein", "Schleswig-Holstein", "urn:iso:std:iso:3166-2:de", "DE-SH"),
+  SACHSEN_ANHALT("Sachsen-Anhalt", "", "urn:iso:std:iso:3166-2:de", "DE-ST"),
 
-  RHEINLAND_PFALZ("Rheinland-Pfalz", "Rheinland-Pfalz", "urn:iso:std:iso:3166-2:de", "DE-RP"),
+  THUERINGEN("Thüringen", "", "urn:iso:std:iso:3166-2:de", "DE-TH"),
 
-  SACHSEN_ANHALT("Sachsen-Anhalt", "Sachsen-Anhalt", "urn:iso:std:iso:3166-2:de", "DE-ST"),
+  NORDRHEIN_WESTFALEN("Nordrhein-Westfalen", "", "urn:iso:std:iso:3166-2:de", "DE-NW"),
 
-  BREMEN("Bremen", "Bremen", "urn:iso:std:iso:3166-2:de", "DE-HB"),
+  SACHSEN("Sachsen", "", "urn:iso:std:iso:3166-2:de", "DE-SN"),
 
-  BERLIN("Berlin", "Berlin", "urn:iso:std:iso:3166-2:de", "DE-BE");
+  NIEDERSACHSEN("Niedersachsen", "", "urn:iso:std:iso:3166-2:de", "DE-NI");
 
   private String value;
 

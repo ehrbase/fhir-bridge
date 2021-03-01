@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum ProblemDiagnoseDefiningCode implements EnumValueSet {
-  HISTORY_OF_TRAVEL("History of Travel", "History of Travel", "LOINC", "8691-8");
+  HISTORY_OF_TRAVEL("History of Travel", "", "LOINC", "8691-8");
 
   private String value;
 
