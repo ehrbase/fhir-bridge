@@ -37,33 +37,27 @@ public class PulseOximetryCodeChecker {
     }
 
     private void matchCodes(List<Coding> codes) {
+        if (!matchCode3(codes) || !matchCode4(codes)) {
+            throw new UnprocessableEntityException("The Code of code.coding is not supported for the Fhir-Bridge");
+        }
+
+    }
+
+    private boolean matchCode3(List<Coding> codes) {
         for (Coding code : codes) {
-            if(!matchCode3(code) || !matchCode4(code)){
-                throw new UnprocessableEntityException("The Code of code.coding not supported for the Fhir-Bridge");
-            }
+            return code.getSystem().equals(CODING_3.getCode().get(0).get(0)) && code.getCode().equals(CODING_3.getCode().get(0).get(1)) ||
+                    code.getSystem().equals(CODING_3.getCode().get(1).get(0)) && code.getCode().equals(CODING_3.getCode().get(1).get(1));
         }
+        return false;
     }
 
-    private boolean matchCode4(Coding code) {
-        if (CODING_4.getCode().get(0).get(0).equals(code.getSystem()) && CODING_4.getCode().get(0).get(1).equals(code.getCode()) &&
-                CODING_4.getCode().get(1).get(0).equals(code.getSystem()) && CODING_4.getCode().get(1).get(1).equals(code.getCode())) {
-            return true;
-        }else {
-            throw new UnprocessableEntityException("The Code "+code.getCode()+" not supported for the Fhir-Bridge");
+    private boolean matchCode4(List<Coding> codes) {
+        for (Coding code : codes) {
+            return code.getSystem().equals(CODING_4.getCode().get(0).get(0)) && code.getCode().equals(CODING_4.getCode().get(0).get(1)) ||
+                    code.getSystem().equals(CODING_4.getCode().get(1).get(0)) && code.getCode().equals(CODING_4.getCode().get(1).get(1));
         }
-
+        return false;
     }
-
-
-    private boolean matchCode3(Coding code) {
-        if (CODING_3.getCode().get(0).get(0).equals(code.getSystem()) && CODING_3.getCode().get(0).get(1).equals(code.getCode()) &&
-                CODING_3.getCode().get(1).get(0).equals(code.getSystem()) && CODING_3.getCode().get(1).get(1).equals(code.getCode())) {
-            return true;
-        } else {
-            throw new UnprocessableEntityException("The Code "+code.getCode()+" not supported for the Fhir-Bridge");
-        }
-    }
-
 }
 
 
