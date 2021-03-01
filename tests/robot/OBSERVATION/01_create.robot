@@ -87,7 +87,7 @@ Force Tags              observation_create    create
 
 005 Create Sofa Score
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-sofa-score.json_\n\n
+	...                 2. *LOAD* _create-sofa-score-cardiovaskular-score-1.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
@@ -95,6 +95,19 @@ Force Tags              observation_create    create
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create sofa score  Sofa Score  create-sofa-score-cardiovuskular-score-1.json
+    observation.validate response - 201
+
+
+005.1 Create Sofa Score
+	[Documentation]     1. *CREATE* new EHR record\n\n
+	...                 2. *LOAD* _create-sofa-score.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	sofa-score    valid
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create sofa score  Sofa Score  create-sofa-score.json
     observation.validate response - 201
 
 
