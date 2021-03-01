@@ -56,11 +56,11 @@ public class Resources {
     }
 
     public static Optional<Identifier> getSubjectIdentifier(Resource resourceopenEhrClient) {
-        return getSubjectIdentifier(resourceopenEhrClient, Optional.empty());
+        return getSubjectIdentifier(resourceopenEhrClient, Optional.empty(), Optional.empty());
     }
 
 
-    public static Optional<Identifier> getSubjectIdentifier(Resource resource, Optional<OpenEhrClient> openEhrClient) {
+    public static Optional<Identifier> getSubjectIdentifier(Resource resource, Optional<OpenEhrClient> openEhrClient, Optional<PatientIdRepository> patientIdRepository) {
         Identifier subjectIdentifier = null;
 
         if (resource instanceof Condition) {
@@ -78,32 +78,37 @@ public class Resources {
         } else if (resource instanceof Procedure) {
             subjectIdentifier = ((Procedure) resource).getSubject().getIdentifier();
         } else if (resource instanceof QuestionnaireResponse) {
-            subjectIdentifier = getQuestionnaireId((QuestionnaireResponse) resource, openEhrClient);
+            subjectIdentifier = getQuestionnaireId((QuestionnaireResponse) resource, openEhrClient, patientIdRepository);
         }
 
         return Optional.ofNullable(subjectIdentifier);
     }
 
-    public static Identifier getQuestionnaireId(QuestionnaireResponse resource, Optional<OpenEhrClient> openEhrClient){
+    public static Identifier getQuestionnaireId(QuestionnaireResponse resource, Optional<OpenEhrClient> openEhrClient, Optional<PatientIdRepository> patientIdRepository){
         if(openEhrClient.isEmpty()){
             throw new InternalErrorException("getSubjectIdentifier was called without a confugred openEHRClient as parameter. Please add one.");
         }
+        if(patientIdRepository.isEmpty()){
+            throw new InternalErrorException("PatientIdRepository is required");
+        }
+
         if(resource.getQuestionnaire().contains("http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|")){
-            return createQuestionnaireEHRAndReturnPatientId(openEhrClient.get());
+            return createQuestionnaireEHRAndReturnPatientId(openEhrClient.get(), patientIdRepository.get());
         }else{
             return resource.getSubject().getIdentifier();
         }
     }
 
 
-    private static Identifier createQuestionnaireEHRAndReturnPatientId(OpenEhrClient openEhrClient){
+    private static Identifier createQuestionnaireEHRAndReturnPatientId(OpenEhrClient openEhrClient, PatientIdRepository patientIdRepository){
+        PatientId patientId = patientIdRepository.save(new PatientId());
         PartySelf subject = new PartySelf();
         PartyRef externalRef = new PartyRef();
         externalRef.setType("PARTY_REF");
         externalRef.setNamespace("patients");
         GenericId genericId = new GenericId();
         genericId.setScheme("id_scheme");
-        genericId.setValue("{{questionnaire_patient_id}}");
+        genericId.setValue(patientId.getUuidAsString());
         externalRef.setId(genericId);
         subject.setExternalRef(externalRef);
         DvText dvText = new DvText("any EHR status");

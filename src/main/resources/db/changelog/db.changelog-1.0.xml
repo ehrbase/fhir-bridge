@@ -1439,4 +1439,12 @@
         <addUniqueConstraint tableName="TRM_VALUESET_CONCEPT" columnNames="VALUESET_PID, SYSTEM_URL, SYSTEM_VER, CODEVAL"
                              constraintName="IDX_VS_CONCEPT_CS_CD"/>
     </changeSet>
+
+    <changeSet id="3" author="subigre">
+        <createTable tableName="FB_PATIENT_ID">
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

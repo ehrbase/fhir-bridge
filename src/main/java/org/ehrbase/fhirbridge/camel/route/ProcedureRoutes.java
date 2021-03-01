@@ -6,9 +6,9 @@ import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
+import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.mapper.ProcedureRowMapper;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
@@ -60,10 +60,10 @@ public class ProcedureRoutes extends RouteBuilder {
                 .process(defaultExceptionHandler)
             .end()
             .setHeader(AqlConstants.AQL_QUERY, () -> Query.buildNativeQuery(
-                "SELECT c "+
-                "FROM EHR e CONTAINS COMPOSITION c " +
+                "SELECT c " +
+                 "FROM EHR e CONTAINS COMPOSITION c " +
                 "WHERE c/archetype_details/template_id/value = 'Prozedur' " +
-                    "AND e/ehr_status/subject/external_ref/id/value = $subjectId", ProzedurComposition.class))
+                  "AND e/ehr_status/subject/external_ref/id/value = $subjectId", ProzedurComposition.class))
             .to("ehr-aql:aqlProducer?rowMapper=#procedureRowMapper");
         // @formatter:on
     }
