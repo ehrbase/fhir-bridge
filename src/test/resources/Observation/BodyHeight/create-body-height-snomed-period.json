@@ -23,6 +23,11 @@
         "system": "http://snomed.info/sct",
         "code": "248334005",
         "display": "Length of body (observable entity)"
+      },
+      {
+        "system": "http://loinc.org",
+        "code": "8302-2",
+        "display": "Body height"
       }
     ],
     "text": "Body height"
@@ -34,8 +39,7 @@
     }
   },
   "effectivePeriod": {
-    "start": "2020-10-02",
-    "end": "2020-10-02"
+    "start": "2020-10-02"
   },
   "valueQuantity": {
     "value": 167,
