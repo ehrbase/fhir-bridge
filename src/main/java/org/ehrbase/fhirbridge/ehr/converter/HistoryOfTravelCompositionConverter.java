@@ -18,8 +18,6 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseA
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
@@ -31,8 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TravelHistoryCompositionConverter implements CompositionConverter<ReisehistorieComposition, Observation> {
-    private static final Logger LOG = LoggerFactory.getLogger(TravelHistoryCompositionConverter.class);
+public class HistoryOfTravelCompositionConverter implements CompositionConverter<ReisehistorieComposition, Observation> {
+    private static final Logger LOG = LoggerFactory.getLogger(HistoryOfTravelCompositionConverter.class);
 
     private static final Map<String, String> loincTravelCodesMap = new HashMap<>();
     private static final Map<String, LandDefiningCode> countryMap = new HashMap<>();

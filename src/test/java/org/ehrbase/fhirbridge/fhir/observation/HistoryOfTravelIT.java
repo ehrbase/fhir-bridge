@@ -20,9 +20,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TravelHistoryIT extends AbstractMappingTestSetupIT {
+public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
 
-    public BodyHeightIT() {
+    public HistoryOfTravelIT() {
         super("Observation/BodyHeight/", Observation.class); //fhir-Resource
     }
 
