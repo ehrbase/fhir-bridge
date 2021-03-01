@@ -34,7 +34,7 @@ public enum PulseOxymetryCode {
             add("2708-6");
         }};
         new ArrayList<String>() {{
-            add("http://snomed.info/sct");
+            add("http://loinc.org/sct");
             add("59408-5");
         }};
     }});
