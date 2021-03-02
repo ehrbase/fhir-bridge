@@ -20,7 +20,10 @@ import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Group;
+import org.hl7.fhir.r4.model.Location;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
@@ -94,6 +97,47 @@ public class FhirJpaConfiguration extends BaseR4Config {
         return transactionManager;
     }
 
+    @Bean
+    public IFhirResourceDao<Device> deviceDao() {
+        JpaResourceDao<Device> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Device.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Group> groupDao() {
+        JpaResourceDao<Group> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Group.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Location> locationDao() {
+        JpaResourceDao<Location> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Location.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Observation> observationDao() {
+        JpaResourceDao<Observation> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Observation.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Patient> patientDao() {
+        JpaResourceDao<Patient> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Patient.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+
     @Bean(name = "myConditionDaoR4")
     public IFhirResourceDao<Condition> conditionReportDao() {
         JpaResourceDao<Condition> conditionReportDao = new JpaResourceDao<>();
@@ -110,14 +154,6 @@ public class FhirJpaConfiguration extends BaseR4Config {
         return diagnosticReportDao;
     }
 
-    @Bean(name = "myObservationDaoR4")
-    public IFhirResourceDao<Observation> observationDao() {
-        JpaResourceDao<Observation> observationDao = new JpaResourceDao<>();
-        observationDao.setResourceType(Observation.class);
-        observationDao.setContext(fhirContext());
-        return observationDao;
-    }
-
     @Bean(name = "myProcedureDaoR4")
     public IFhirResourceDao<Procedure> procedureDao() {
         JpaResourceDao<Procedure> procedureDao = new JpaResourceDao<>();
@@ -132,14 +168,6 @@ public class FhirJpaConfiguration extends BaseR4Config {
         auditEventDao.setResourceType(AuditEvent.class);
         auditEventDao.setContext(fhirContext());
         return auditEventDao;
-    }
-
-    @Bean(name = "myPatientDaoR4")
-    public IFhirResourceDao<Patient> patientDao() {
-        JpaResourceDao<Patient> patientDao = new JpaResourceDao<>();
-        patientDao.setResourceType(Patient.class);
-        patientDao.setContext(fhirContext());
-        return patientDao;
     }
 
     @Bean(name = "myQuestionnaireResponseDaoR4")

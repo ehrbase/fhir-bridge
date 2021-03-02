@@ -8,6 +8,11 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditStrategy;
 import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 
+/**
+ * Implementation of {@link org.openehealth.ipf.commons.ihe.fhir.audit.FhirAuditStrategy FhirAuditStrategy} for Find Condition transaction.
+ *
+ * @since 1.0.0
+ */
 public class FindConditionAuditStrategy extends FhirQueryAuditStrategy {
 
     public FindConditionAuditStrategy(boolean serverSide) {

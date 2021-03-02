@@ -1,54 +1,45 @@
 package org.ehrbase.fhirbridge.fhir.condition;
 
-import ca.uhn.fhir.rest.annotation.OptionalParam;
+import ca.uhn.fhir.jpa.searchparam.SearchParameterMap;
+import ca.uhn.fhir.rest.annotation.Count;
+import ca.uhn.fhir.rest.annotation.Offset;
 import ca.uhn.fhir.rest.annotation.RequiredParam;
 import ca.uhn.fhir.rest.annotation.Search;
+import ca.uhn.fhir.rest.annotation.Sort;
+import ca.uhn.fhir.rest.api.SortSpec;
+import ca.uhn.fhir.rest.api.server.IBundleProvider;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
-import ca.uhn.fhir.rest.param.DateRangeParam;
-import ca.uhn.fhir.rest.param.ReferenceParam;
-import ca.uhn.fhir.rest.param.TokenParam;
-import org.ehrbase.client.aql.parameter.ParameterValue;
+import ca.uhn.fhir.rest.param.ReferenceAndListParam;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Patient;
-import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.ResourceType;
 import org.openehealth.ipf.commons.ihe.fhir.AbstractPlainProvider;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+/**
+ * Implementation of {@link org.openehealth.ipf.commons.ihe.fhir.FhirProvider FhirProvider} for Find Condition transaction.
+ *
+ * @since 1.0.0
+ */
 public class FindConditionProvider extends AbstractPlainProvider {
 
-    @Search
-    public List<Condition> search(@RequiredParam(name = Condition.SP_SUBJECT, chainWhitelist = {Patient.SP_IDENTIFIER}) ReferenceParam subject,
-                                  @OptionalParam(name = Condition.SP_RECORDED_DATE) DateRangeParam recordedDate,
-                                  @OptionalParam(name = Condition.SP_CODE) TokenParam code,
+    @Search(type = Condition.class)
+    public IBundleProvider search(@RequiredParam(name = Condition.SP_SUBJECT, chainWhitelist = {Patient.SP_IDENTIFIER}) ReferenceAndListParam subject,
+                                  @Count Integer count,
+                                  @Offset Integer offset,
+                                  @Sort SortSpec sort,
                                   RequestDetails requestDetails,
                                   HttpServletRequest httpServletRequest,
                                   HttpServletResponse httpServletResponse) {
 
-        Map<String, ParameterValue<?>> parameters = new HashMap<>();
+        SearchParameterMap searchParams = new SearchParameterMap();
+        searchParams.add(Condition.SP_SUBJECT, subject);
+        searchParams.setCount(count);
+        searchParams.setOffset(offset);
+        searchParams.setSort(sort);
 
-        String chain = subject.getChain();
-        if (Patient.SP_IDENTIFIER.equals(chain)) {
-            TokenParam tokenSubject = subject.toTokenParam(getFhirContext());
-            parameters.put("subjectId", new ParameterValue<>("subjectId", tokenSubject.getValue()));
-        }
-        if (recordedDate != null) {
-            if (recordedDate.getLowerBound() != null) {
-                parameters.put("startTimeFrom", new ParameterValue<>("startTimeFrom", recordedDate.getLowerBound().getValueAsString()));
-            }
-            if (recordedDate.getUpperBound() != null) {
-                parameters.put("startTimeTo", new ParameterValue<>("startTimeTo", recordedDate.getUpperBound().getValueAsString()));
-            }
-        }
-        if (code != null) {
-            parameters.put("code", new ParameterValue<>("code", code.getValue()));
-        }
-
-        return this.requestBundle(parameters, null, ResourceType.Condition.name(), httpServletRequest, httpServletResponse, requestDetails);
+        return requestBundleProvider(searchParams, null, ResourceType.Condition.name(), httpServletRequest, httpServletResponse, requestDetails);
     }
 }

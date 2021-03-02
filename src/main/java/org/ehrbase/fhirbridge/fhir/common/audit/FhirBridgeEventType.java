@@ -16,13 +16,13 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     FindDiagnosticReport("fhir-find-diagnostic-report", "Find Diagnostic Report"),
 
-    CreateObservation("fhir-create-observation", "Create Observation"),
+    CreateObservation("observation-create", "Create Observation"),
 
-    FindObservation("fhir-find-observation", "Find Observation"),
+    FindObservation("observation-find", "Find Observation"),
 
-    CreatePatient("fhir-create-patient", "Create Patient"),
+    CreatePatient("patient-create", "Create Patient"),
 
-    FindPatient("fhir-find-patient", "Find Patient"),
+    FindPatient("patient-find", "Find Patient"),
 
     CreateProcedure("fhir-create-procedure", "Create Procedure"),
 

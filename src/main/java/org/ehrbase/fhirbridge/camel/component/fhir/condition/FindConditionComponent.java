@@ -4,7 +4,10 @@ import org.ehrbase.fhirbridge.fhir.condition.FindConditionTransaction;
 import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
-@SuppressWarnings({"java:S110"})
+/**
+ * Implementation of {@link org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent FhirComponent} for Find Condition transaction.
+ */
+@SuppressWarnings("java:S110")
 public class FindConditionComponent extends CustomFhirComponent<FhirQueryAuditDataset> {
 
     public FindConditionComponent() {
