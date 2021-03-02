@@ -12,6 +12,10 @@ public enum PulseOxymetryCode {
 
     CODING_2(new ArrayList<>() {{
         add(new ArrayList<String>() {{
+            add("http://loinc.org");
+            add("2708-6");
+        }});
+        add(new ArrayList<String>() {{
             add("http://snomed.info/sct");
             add("431314004");
         }});
@@ -23,21 +27,11 @@ public enum PulseOxymetryCode {
             add("2708-6");
         }});
         add(new ArrayList<String>() {{
-            add("http://snomed.info/sct");
-            add("431314004");
-        }});
-    }}),
-
-    CODING_4(new ArrayList<>() {{
-        add(new ArrayList<String>() {{
-            add("http://loinc.org");
-            add("2708-6");
-        }});
-        add(new ArrayList<String>() {{
             add("http://loinc.org/sct");
             add("59408-5");
         }});
     }});
+
 
     private final ArrayList<ArrayList<String>> code;
 

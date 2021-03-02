@@ -9,7 +9,6 @@ import java.util.List;
 import static org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOxymetryCode.CODING_1;
 import static org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOxymetryCode.CODING_2;
 import static org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOxymetryCode.CODING_3;
-import static org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOxymetryCode.CODING_4;
 
 public class PulseOximetryCodeChecker {
 
@@ -30,20 +29,27 @@ public class PulseOximetryCodeChecker {
     private void matchCode(List<Coding> codes) {
         String codeSystem = codes.get(0).getSystem();
         String code = codes.get(0).getCode();
-        if (!(codeSystem.equals(CODING_1.getCode().get(0).get(0)) && code.equals(CODING_1.getCode().get(0).get(1)))
-                && !(codeSystem.equals(CODING_2.getCode().get(0).get(0)) && code.equals(CODING_2.getCode().get(0).get(1)))) {
-            throw new UnprocessableEntityException("The Code of code.coding not supported for the Fhir-Bridge");
+        if (!(codeSystem.equals(CODING_1.getCode().get(0).get(0)) && code.equals(CODING_1.getCode().get(0).get(1)))) {
+                exceptionCode();
         }
     }
 
     private void matchCodes(List<Coding> codes) {
         if (!matchCode3(codes) || !matchCode4(codes)) {
-            throw new UnprocessableEntityException("The Code of code.coding is not supported for the Fhir-Bridge");
+            exceptionCode();
         }
 
     }
 
     private boolean matchCode3(List<Coding> codes) {
+        for (Coding code : codes) {
+            return code.getSystem().equals(CODING_2.getCode().get(0).get(0)) && code.getCode().equals(CODING_2.getCode().get(0).get(1)) ||
+                    code.getSystem().equals(CODING_2.getCode().get(1).get(0)) && code.getCode().equals(CODING_2.getCode().get(1).get(1));
+        }
+        return false;
+    }
+
+    private boolean matchCode4(List<Coding> codes) {
         for (Coding code : codes) {
             return code.getSystem().equals(CODING_3.getCode().get(0).get(0)) && code.getCode().equals(CODING_3.getCode().get(0).get(1)) ||
                     code.getSystem().equals(CODING_3.getCode().get(1).get(0)) && code.getCode().equals(CODING_3.getCode().get(1).get(1));
@@ -51,12 +57,10 @@ public class PulseOximetryCodeChecker {
         return false;
     }
 
-    private boolean matchCode4(List<Coding> codes) {
-        for (Coding code : codes) {
-            return code.getSystem().equals(CODING_4.getCode().get(0).get(0)) && code.getCode().equals(CODING_4.getCode().get(0).get(1)) ||
-                    code.getSystem().equals(CODING_4.getCode().get(1).get(0)) && code.getCode().equals(CODING_4.getCode().get(1).get(1));
-        }
-        return false;
+    private void exceptionCode(){
+        throw new UnprocessableEntityException("The Code of code.coding is not supported for the Fhir-Bridge. If the LOINC-code 20564-1 or 2708-6 AND 20564-1 was entered, " +
+                "the oxygen Saturation has to be send as part of a Blood gas panel. It can not be processed as a single resource in this cases.");
+
     }
 }
 
