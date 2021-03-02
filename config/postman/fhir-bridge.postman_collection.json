@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6747e903-4a10-42d1-bc91-bb96807c5b24",
+		"_postman_id": "d9f6a4ea-db6e-4816-986d-79b7d1f45886",
 		"name": "fhir-bridge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -56,7 +56,7 @@
 					"name": "Bundle",
 					"item": [
 						{
-							"name": "Create Condition Copy",
+							"name": "Create BloodGasPanel",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -73,7 +73,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"resourceType\": \"Condition\",\r\n    \"clinicalStatus\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\",\r\n                \"code\": \"active\"\r\n            }\r\n        ]\r\n    },\r\n    \"verificationStatus\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/condition-ver-status\",\r\n                \"code\": \"confirmed\"\r\n            }\r\n        ]\r\n    },\r\n    \"category\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/condition-category\",\r\n                    \"code\": \"encounter-diagnosis\",\r\n                    \"display\": \"Encounter Diagnosis\"\r\n                },\r\n                {\r\n                    \"system\": \"http://snomed.info/sct\",\r\n                    \"code\": \"439401001\",\r\n                    \"display\": \"Diagnosis\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"severity\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"24484000\",\r\n                \"display\": \"Severe\"\r\n            }\r\n        ]\r\n    },\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://fhir.de/CodeSystem/dimdi/icd-10-gm\",\r\n                \"code\": \"B97.2\",\r\n                \"display\": \"Coronavirus as the cause of diseases classified to other chapters\"\r\n            }\r\n        ],\r\n        \"text\": \"Coronavirus as the cause of diseases classified to other chapters\"\r\n    },\r\n    \"bodySite\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"system\": \"http://snomed.info/sct\",\r\n                    \"code\": \"49521004\",\r\n                    \"display\": \"Left external ear structure\"\r\n                }\r\n            ],\r\n            \"text\": \"Left Ear\"\r\n        }\r\n    ],\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"onsetDateTime\": \"2012-05-24\",\r\n    \"recorder\": {\r\n        \"reference\": \"http://external.fhir.server/Practitioner/f201\"\r\n    }\r\n}",
+									"raw": "{\r\n    \"resourceType\": \"Bundle\",\r\n    \"id\": \"bundle-transaction-bga\",\r\n    \"meta\": {\r\n        \"lastUpdated\": \"2020-09-24T05:33:00Z\"\r\n    },\r\n    \"type\": \"transaction\",\r\n    \"entry\": [\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f0a\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"24336-0_gasPanelBldA\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://loinc.org\",\r\n                                \"code\": \"26436-6\"\r\n                            },\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"laboratory\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"24336-0\",\r\n                            \"display\": \"Gas panel (BldA)\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Gas panel - Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"hasMember\": [\r\n                    {\r\n                        \"reference\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f01\"\r\n                    },\r\n                    {\r\n                        \"reference\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f02\"\r\n                    },\r\n                    {\r\n                        \"reference\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f03\"\r\n                    },\r\n                    {\r\n                        \"reference\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f04\"\r\n                    }\r\n                ]\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f01\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"2744-1_pH\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://loinc.org\",\r\n                                \"code\": \"26436-6\"\r\n                            },\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"laboratory\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2744-1\",\r\n                            \"display\": \"pH (BldA)\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"pH of Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"valueQuantity\": {\r\n                    \"value\": 7.4,\r\n                    \"unit\": \"pH\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"[pH]\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f02\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"2019-8_paCO2\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://loinc.org\",\r\n                                \"code\": \"26436-6\"\r\n                            },\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"laboratory\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2019-8\",\r\n                            \"display\": \"CO2 (BldA) [Partial pressure]\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Carbon dioxide [Partial pressure] in Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"valueQuantity\": {\r\n                    \"value\": 44,\r\n                    \"unit\": \"mmHg\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"mm[Hg]\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f03\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"2703-7_paO2\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://loinc.org\",\r\n                                \"code\": \"26436-6\"\r\n                            },\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"laboratory\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2703-7\",\r\n                            \"display\": \"Oxygen (BldA) [Partial pressure]\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Oxygen [Partial pressure] in Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"valueQuantity\": {\r\n                    \"value\": 67,\r\n                    \"unit\": \"mmHg\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"mm[Hg]\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f04\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"2708-6_oxygenSaturation\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"vital-signs\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2708-6\",\r\n                            \"display\": \"Oxygen saturation in Arterial blood\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Oxygen saturation in Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"valueQuantity\": {\r\n                    \"value\": 98,\r\n                    \"unit\": \"%\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"%\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -81,13 +81,50 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Condition",
+									"raw": "{{baseUrl}}/fhir",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create BloodGasPanel Copy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"resourceType\": \"Bundle\",\r\n    \"type\": \"transaction\",\r\n    \"entry\": [\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f0a\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"24336-0_gasPanelBldA\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://loinc.org\",\r\n                                \"code\": \"26436-6\"\r\n                            },\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"laboratory\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"24336-0\",\r\n                            \"display\": \"Gas panel (BldA)\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Gas panel - Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                 \"hasMember\": [\r\n                    {\r\n                        \"reference\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1c349d\"\r\n                    }\r\n                 ]\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"fhir",
-										"Condition"
+										""
 									]
 								}
 							},
@@ -329,6 +366,44 @@
 					"name": "Observation",
 					"item": [
 						{
+							"name": "Create BloodGasPannel",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"resourceType\": \"Observation\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel\"\r\n        ]\r\n    },\r\n    \"contained\": [\r\n        {\r\n            \"resourceType\": \"Observation\",\r\n            \"id\": \"obs-1\",\r\n            \"meta\": {\r\n                \"profile\": [\r\n                    \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH\"\r\n                ]\r\n            },\r\n            \"identifier\": [\r\n                {\r\n                    \"type\": {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                \"code\": \"OBI\"\r\n                            }\r\n                        ]\r\n                    },\r\n                    \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                    \"value\": \"2744-1_pH\",\r\n                    \"assigner\": {\r\n                        \"reference\": \"Organization/Charité\"\r\n                    }\r\n                }\r\n            ],\r\n            \"status\": \"final\",\r\n            \"category\": [\r\n                {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"26436-6\"\r\n                        },\r\n                        {\r\n                            \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                            \"code\": \"laboratory\"\r\n                        },\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"18767-4\"\r\n                        }\r\n                    ]\r\n                }\r\n            ],\r\n            \"code\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"system\": \"http://loinc.org\",\r\n                        \"code\": \"2744-1\",\r\n                        \"display\": \"pH of Arterial blood\"\r\n                    }\r\n                ],\r\n                \"text\": \"pH of Arterial blood\"\r\n            },\r\n            \"subject\": {\r\n                \"reference\": \"Patient/c786ac3c-0579-4aa2-adda-db784b214ad6\"\r\n            },\r\n            \"effectiveDateTime\": \"2020-09-21\",\r\n            \"valueQuantity\": {\r\n                \"value\": 7.4,\r\n                \"unit\": \"pH\",\r\n                \"system\": \"http://unitsofmeasure.org\",\r\n                \"code\": \"[pH]\"\r\n            }\r\n        }\r\n    ],\r\n    \"identifier\": [\r\n        {\r\n            \"type\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                        \"code\": \"OBI\"\r\n                    }\r\n                ]\r\n            },\r\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n            \"value\": \"24336-0_gasPanelBldA\",\r\n            \"assigner\": {\r\n                \"reference\": \"Organization/Charité\"\r\n            }\r\n        }\r\n    ],\r\n    \"status\": \"final\",\r\n    \"category\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"system\": \"http://loinc.org\",\r\n                    \"code\": \"26436-6\"\r\n                },\r\n                {\r\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                    \"code\": \"laboratory\"\r\n                },\r\n                {\r\n                    \"system\": \"http://loinc.org\",\r\n                    \"code\": \"18767-4\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://loinc.org\",\r\n                \"code\": \"24336-0\",\r\n                \"display\": \"Gas panel - Arterial blood\"\r\n            }\r\n        ],\r\n        \"text\": \"Gas panel - Arterial blood\"\r\n    },\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"effectiveDateTime\": \"2020-09-21\",\r\n    \"hasMember\": [\r\n        {\r\n            \"reference\": \"#obs-1\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Create BloodPressure",
 							"event": [
 								{
@@ -384,7 +459,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"23499ea6-d046-4e91-b7ab-d9cf040add72\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"OBI\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://www.charite.de/fhir/CodeSystem/observation-identifiers\",\r\n      \"value\": \"8302-2_BodyHeight\",\r\n      \"assigner\": {\r\n        \"reference\": \"Organization/Charité\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"8302-2\",\r\n        \"display\": \"Body height\"\r\n      },\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"50373000\",\r\n        \"display\": \"Body height measure (observable entity)\"\r\n      }\r\n    ],\r\n    \"text\": \"Body height\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-02\",\r\n  \"valueQuantity\": {\r\n    \"value\": 167,\r\n    \"unit\": \"centimeter\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"cm\"\r\n  }\r\n}",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"23499ea6-d046-4e91-b7ab-d9cf040add72\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"OBI\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://www.charite.de/fhir/CodeSystem/observation-identifiers\",\r\n      \"value\": \"8302-2_BodyHeight\",\r\n      \"assigner\": {\r\n        \"reference\": \"Organization/Charité\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"8302-2\",\r\n        \"display\": \"Body height\"\r\n      },\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"50373000\",\r\n        \"display\": \"Body height measure (observable entity)\"\r\n      }\r\n    ],\r\n    \"text\": \"Body height\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-02\",\r\n  \"valueQuantity\": {\r\n    \"value\": 1111111111111,\r\n    \"unit\": \"centimeter\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"cm\"\r\n  }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -688,7 +763,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"id\": \"cefe30c3-7597-421a-8509-8c15aa2a2d87\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu\"\r\n    ]\r\n  },\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"code\": \"survey\",\r\n          \"display\": \"Survey\",\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"code\": \"01\",\r\n        \"display\": \"Is the patient in the intensive care unit?\",\r\n        \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes\"\r\n      }\r\n    ]\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-14\",\r\n  \"status\": \"final\",\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"valueCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"code\": \"373067005\",\r\n        \"display\": \"No (qualifier value)\",\r\n        \"system\": \"http://snomed.info/sct\"\r\n      }\r\n    ]\r\n  },\r\n  \"resourceType\": \"Observation\"\r\n}",
+									"raw": "{\r\n  \"id\": \"cefe30c3-7597-421a-8509-8c15aa2a2d87\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu\"\r\n    ]\r\n  },\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"code\": \"survey\",\r\n          \"display\": \"Survey\",\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"code\": \"01\",\r\n        \"display\": \"Is the patient in the intensive care unit?\",\r\n        \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes\"\r\n      }\r\n    ]\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-14\",\r\n  \"status\": \"final\",\r\n  \"subject\": {\r\n    \"type\": \"Patient\",\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"valueCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"code\": \"373067005\",\r\n        \"display\": \"No (qualifier value)\",\r\n        \"system\": \"http://snomed.info/sct\"\r\n      }\r\n    ]\r\n  },\r\n  \"resourceType\": \"Observation\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -861,7 +936,7 @@
 							"response": []
 						},
 						{
-							"name": "Find Observation",
+							"name": "Find Observation: read",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -877,13 +952,97 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Observation",
+									"raw": "{{baseUrl}}/fhir/Observation/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Observation: vread",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation/:id/_history/:vid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation",
+										":id",
+										"_history",
+										":vid"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										},
+										{
+											"key": "vid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Observation: search",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation?subject:Patient.identifier={{patientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"fhir",
 										"Observation"
+									],
+									"query": [
+										{
+											"key": "subject:Patient.identifier",
+											"value": "{{patientId}}"
+										}
 									]
 								}
 							},
@@ -933,7 +1092,7 @@
 							"response": []
 						},
 						{
-							"name": "Find Patient",
+							"name": "Find Patient: read",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -949,19 +1108,91 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Patient?identifier={{patientId}}",
+									"raw": "{{baseUrl}}/fhir/Patient/:id",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"fhir",
-										"Patient"
+										"Patient",
+										":id"
 									],
-									"query": [
+									"variable": [
 										{
-											"key": "identifier",
-											"value": "{{patientId}}"
+											"key": "id",
+											"value": "52"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Patient: vread",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Patient/:id/_history/:vid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Patient",
+										":id",
+										"_history",
+										":vid"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "52"
+										},
+										{
+											"key": "vid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Patient: search",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
 									]
 								}
 							},
@@ -1071,13 +1302,24 @@
 					"name": "QuestionnaireResponse",
 					"item": [
 						{
-							"name": "Create D4L_Questionnaire",
+							"name": "Create QuestionnaireResponse",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"resourceType\": \"QuestionnaireResponse\",\n    \"questionnaire\": \"http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|3.0.0\",\n    \"status\": \"completed\",\n    \"authored\": \"2020-05-04T14:15:00-05:00\",\n    \"item\":  [\n        {\n            \"linkId\": \"P\",\n            \"text\": \"Persönliche Informationen\",\n            \"item\":  [\n                {\n                    \"linkId\": \"P0\",\n                    \"text\": \"Wie alt sind Sie?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://fhir.data4life.care/covid-19/r4/CodeSystem/age-group\",\n                                \"code\": \"61-70\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"P1\",\n                    \"text\": \"Sind Sie älter oder gleich 65 Jahre alt?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA33-6\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"P2\",\n                    \"text\": \"Wie ist Ihre aktuelle Wohnsituation?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA6255-9\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"P3\",\n                    \"text\": \"Pflegen oder unterstützen Sie privat mindestens einmal pro Woche eine oder mehrere Personen mit altersbedingten Beschwerden, chronischen Erkrankungen oder Gebrechlichkeit?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"P4\",\n                    \"text\": \"Sind Sie in einem der folgenden Bereiche tätig?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://fhir.data4life.care/covid-19/r4/CodeSystem/occupation-class\",\n                                \"code\": \"community\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"P5\",\n                    \"text\": \"Rauchen Sie?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"P6\",\n                    \"text\": \"Sind Sie schwanger?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA26683-5\"\n                            }\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"linkId\": \"C\",\n            \"text\": \"Kontakte zu COVID-19-Fällen\",\n            \"item\":  [\n                {\n                    \"linkId\": \"C0\",\n                    \"text\": \"Hatten Sie engen Kontakt zu einem bestätigten Fall?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA33-6\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"CZ\",\n                    \"text\": \"An welchem Tag war der letzte Kontakt?\",\n                    \"answer\":  [\n                        {\n                            \"valueDate\": \"2020-03-27\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"linkId\": \"S\",\n            \"text\": \"Symptome\",\n            \"item\":  [\n                {\n                    \"linkId\": \"S0\",\n                    \"text\": \"Hatten Sie in den letzten 24 Std. Fieber (über 38°C)?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"S1\",\n                    \"text\": \"Hatten Sie in den letzten 4 Tagen Fieber (über 38°C)?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA33-6\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"S2\",\n                    \"text\": \"Wie hoch war die höchste Temperatur ca.?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://fhir.data4life.care/covid-19/r4/CodeSystem/fever-class\",\n                                \"code\": \"40C\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"S3\",\n                    \"text\": \"Hatten Sie in den letzten 24 Std. Schüttelfrost?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"S4\",\n                    \"text\": \"Haben Sie sich in den letzten 24 Std. schlapp oder abgeschlagen gefühlt?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA33-6\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"S5\",\n                    \"text\": \"Hatten Sie in den letzten 24 Std. Gliederschmerzen?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"S6\",\n                    \"text\": \"Hatten Sie in den letzten 24 Std. anhaltenden Husten?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA33-6\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"S7\",\n                    \"text\": \"Hatten Sie in den letzten 24 Std. Schnupfen?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"S8\",\n                    \"text\": \"Hatten Sie in den letzten 24 Std. Durchfall?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"S9\",\n                    \"text\": \"Hatten Sie in den letzten 24 Std. Halsschmerzen?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA33-6\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"SA\",\n                    \"text\": \"Hatten Sie in den letzten 24 Std. Kopfschmerzen?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"SB\",\n                    \"text\": \"Sind Sie in den letzten 24 Std. schneller außer Atem als sonst?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"SC\",\n                    \"text\": \"Hatten Sie in den letzten 24 Std. Geschmacks- und/oder Geruchsverlust?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"SZ\",\n                    \"text\": \"Bezogen auf alle Fragen zu Symptomen: Seit wann haben Sie die von Ihnen angegebenen Symptome?\",\n                    \"answer\":  [\n                        {\n                            \"valueDate\": \"2020-03-30\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"linkId\": \"D\",\n            \"text\": \"Kronische Erkrankungen\",\n            \"item\":  [\n                {\n                    \"linkId\": \"D0\",\n                    \"text\": \"Wurde bei Ihnen durch einen Arzt/eine Ärztin eine chronische Lungenerkrankung festgestellt?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"D1\",\n                    \"text\": \"Wurde bei Ihnen durch einen Arzt/eine Ärztin Diabetes festgestellt?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA33-6\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"D2\",\n                    \"text\": \"Wurde bei Ihnen durch einen Arzt/eine Ärztin eine Herzerkrankung festgestellt?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"D3\",\n                    \"text\": \"Wurde bei Ihnen durch einen Arzt/eine Ärztin Adipositas (Fettsucht) festgestellt?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"linkId\": \"M\",\n            \"text\": \"Medikation\",\n            \"item\":  [\n                {\n                    \"linkId\": \"M0\",\n                    \"text\": \"Nehmen Sie aktuell Cortison ein (in Tablettenform)?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"M1\",\n                    \"text\": \"Nehmen Sie aktuell Immunsuppressiva?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA32-8\"\n                            }\n                        }\n                    ]\n                },\n                {\n                    \"linkId\": \"M2\",\n                    \"text\": \"Haben Sie sich im Zeitraum von Oktober 2019 bis heute gegen Grippe impfen lassen?\",\n                    \"answer\":  [\n                        {\n                            \"valueCoding\": {\n                                \"system\": \"http://loinc.org\",\n                                \"code\": \"LA33-6\"\n                            }\n                        }\n                    ]\n                }\n            ]\n        }\n    ],\n    \"language\": \"de\"\n}",
+									"raw": "{\r\n    \"resourceType\": \"QuestionnaireResponse\",\r\n    \"id\": \"3141\",\r\n    \"text\": {\r\n        \"status\": \"generated\",\r\n        \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">\\n      <pre>\\n            Comorbidity? YES\\n              Cardial Comorbidity? YES\\n                Angina? YES\\n                MI? NO\\n              Vascular Comorbidity?\\n                (no answers)\\n              ...\\n            Histopathology\\n              Abdominal\\n                pT category: 1a\\n              ...\\n          </pre>\\n    </div>\"\r\n    },\r\n    \"identifier\": {\r\n        \"system\": \"http://example.org/fhir/NamingSystem/questionnaire-ids\",\r\n        \"value\": \"Q12349876\"\r\n    },\r\n    \"status\": \"completed\",\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"authored\": \"2013-02-19T14:15:00-05:00\",\r\n    \"item\": [\r\n        {\r\n            \"linkId\": \"1\",\r\n            \"item\": [\r\n                {\r\n                    \"linkId\": \"1.1\",\r\n                    \"answer\": [\r\n                        {\r\n                            \"valueCoding\": {\r\n                                \"system\": \"http://cancer.questionnaire.org/system/code/yesno\",\r\n                                \"code\": \"1\",\r\n                                \"display\": \"Yes\"\r\n                            },\r\n                            \"item\": [\r\n                                {\r\n                                    \"linkId\": \"1.1.1\",\r\n                                    \"item\": [\r\n                                        {\r\n                                            \"linkId\": \"1.1.1.1\",\r\n                                            \"answer\": [\r\n                                                {\r\n                                                    \"valueCoding\": {\r\n                                                        \"system\": \"http://cancer.questionnaire.org/system/code/yesno\",\r\n                                                        \"code\": \"1\"\r\n                                                    }\r\n                                                }\r\n                                            ]\r\n                                        },\r\n                                        {\r\n                                            \"linkId\": \"1.1.1.2\",\r\n                                            \"answer\": [\r\n                                                {\r\n                                                    \"valueCoding\": {\r\n                                                        \"system\": \"http://cancer.questionnaire.org/system/code/yesno\",\r\n                                                        \"code\": \"1\"\r\n                                                    }\r\n                                                }\r\n                                            ]\r\n                                        },\r\n                                        {\r\n                                            \"linkId\": \"1.1.1.3\",\r\n                                            \"answer\": [\r\n                                                {\r\n                                                    \"valueCoding\": {\r\n                                                        \"system\": \"http://cancer.questionnaire.org/system/code/yesno\",\r\n                                                        \"code\": \"0\"\r\n                                                    }\r\n                                                }\r\n                                            ]\r\n                                        }\r\n                                    ]\r\n                                }\r\n                            ]\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1157,7 +1399,120 @@
 			"name": "Terminology",
 			"item": [
 				{
-					"name": "Create invalid ClinicalFrailtyScaleScore",
+					"name": "Fetch Profile: Clinical Frailty Scale Score",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://simplifier.net/forschungsnetzcovid-19/frailtyscore/$download?format=json",
+							"protocol": "https",
+							"host": [
+								"simplifier",
+								"net"
+							],
+							"path": [
+								"forschungsnetzcovid-19",
+								"frailtyscore",
+								"$download"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Profile: SOFA Score",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://simplifier.net/forschungsnetzcovid-19/sofa/$download?format=json",
+							"protocol": "https",
+							"host": [
+								"simplifier",
+								"net"
+							],
+							"path": [
+								"forschungsnetzcovid-19",
+								"sofa",
+								"$download"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Value",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://terminology-highmed.medic.medfak.uni-koeln.de/fhir/ValueSet?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/frailty-score",
+							"protocol": "https",
+							"host": [
+								"terminology-highmed",
+								"medic",
+								"medfak",
+								"uni-koeln",
+								"de"
+							],
+							"path": [
+								"fhir",
+								"ValueSet"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/frailty-score"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Extand ValueSet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://terminology-highmed.medic.medfak.uni-koeln.de/fhir/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/frailty-score",
+							"protocol": "https",
+							"host": [
+								"terminology-highmed",
+								"medic",
+								"medfak",
+								"uni-koeln",
+								"de"
+							],
+							"path": [
+								"fhir",
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/frailty-score"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Observation: Clinical Frailty Scale Score",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -1174,7 +1529,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"id\": \"4b5cfc04-0d92-47f6-8bd0-be820286db01\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"OBI\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://www.charite.de/fhir/CodeSystem/observation-identifiers\",\r\n      \"value\": \"763264000_FrailtyScaleScore\",\r\n      \"assigner\": {\r\n        \"reference\": \"Organization/Charité\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"survey\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"763264000\",\r\n        \"display\": \"Canadian Study of Health and Aging Clinical Frailty Scale score\"\r\n      }\r\n    ],\r\n    \"text\": \"Frailty Scale Score\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-02\",\r\n  \"valueCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/frailty-score\",\r\n        \"code\": \"999\",\r\n        \"display\": \"Severely Frail\"\r\n      }\r\n    ]\r\n  },\r\n  \"method\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"445414007\",\r\n        \"display\": \"Canadian Study of Health and Aging clinical frailty scale\"\r\n      }\r\n    ]\r\n  }\r\n}",
+							"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"SNO\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"https://www.charite.de/fhir/CodeSystem/observation-identifiers\",\r\n      \"value\": \"763264000_FrailtyScaleScore\",\r\n      \"assigner\": {\r\n        \"reference\": \"Organization/Charité\"\r\n      }\r\n    }\r\n  ],\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"survey\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"763264000\",\r\n        \"display\": \"Canadian Study of Health and Aging Clinical Frailty Scale score\"\r\n      }\r\n    ],\r\n    \"text\": \"Frailty Scale Score\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2021-01-15\",\r\n  \"valueCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/frailty-score\",\r\n        \"code\": \"7\",\r\n        \"display\": \"Severely Frail\"\r\n      }\r\n    ]\r\n  },\r\n  \"method\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"445414007\",\r\n        \"display\": \"Canadian Study of Health and Aging clinical frailty scale\"\r\n      }\r\n    ]\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1195,7 +1550,7 @@
 					"response": []
 				},
 				{
-					"name": "Create invalid SofaScore",
+					"name": "Observation: SOFA Score",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -1212,7 +1567,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"status\": \"final\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score\"\r\n    ]\r\n  },\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"survey\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes\",\r\n        \"code\": \"06\",\r\n        \"display\": \"SOFA-Score\"\r\n      }\r\n    ],\r\n    \"text\": \"Sepsis-related organ failure assessment score\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-09-16\",\r\n  \"component\": [\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"resp\",\r\n            \"display\": \"Respiratory system\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Respiratory system scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"resp3\",\r\n            \"display\": \"Respiratory system SOFA score 3\"\r\n          }\r\n        ],\r\n        \"text\": \"PaO2/FiO2 [mmHg (kPa)] < 200 (26.7) and mechanically ventilated\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"ns\",\r\n            \"display\": \"Nervous system\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Nervous system scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"ns4\",\r\n            \"display\": \"Nervous system SOFA score 4\"\r\n          }\r\n        ],\r\n        \"text\": \"Glasgow Coma Scale (GCS) < 6\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"cvs\",\r\n            \"display\": \"Cardiovascular system\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Cardiovascular system scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"cvs0\",\r\n            \"display\": \"Cardiovascular system SOFA score 0\"\r\n          }\r\n        ],\r\n        \"text\": \"Mean arterial pressure (MAP) ≥ 70 mmHg\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"liv-invalid\",\r\n            \"display\": \"Liver\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Liver scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"liv1\",\r\n            \"display\": \"Liver SOFA score 1\"\r\n          }\r\n        ],\r\n        \"text\": \"Bilirubin (mg/dl) [umol/L] 1.2-1.9 [20-32]\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"coaaaaa\",\r\n            \"display\": \"Coagulation\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Coagulation scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"coa2\",\r\n            \"display\": \"Coagulation SOFA score 2\"\r\n          }\r\n        ],\r\n        \"text\": \"Platelets×10^3/ul < 100\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"kid-invalid\",\r\n            \"display\": \"Kidneys\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Kidneys scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"kid4\",\r\n            \"display\": \"Kidneys SOFA score 4\"\r\n          }\r\n        ],\r\n        \"text\": \"Creatinine (mg/dl) [umol/L] (or urine output) > 5.0 [> 440] (or < 200 ml/d)\"\r\n      }\r\n    }\r\n  ]\r\n}",
+							"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"status\": \"final\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score\"\r\n    ]\r\n  },\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"survey\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes\",\r\n        \"code\": \"06\",\r\n        \"display\": \"SOFA-Score\"\r\n      }\r\n    ],\r\n    \"text\": \"Sepsis-related organ failure assessment score\"\r\n  },\r\n  \"subject\": {\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-09-16\",\r\n  \"component\": [\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"resp\",\r\n            \"display\": \"Respiratory system\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Respiratory system scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"resp3\",\r\n            \"display\": \"Respiratory system SOFA score 3\"\r\n          }\r\n        ],\r\n        \"text\": \"PaO2/FiO2 [mmHg (kPa)] < 200 (26.7) and mechanically ventilated\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"ns\",\r\n            \"display\": \"Nervous system\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Nervous system scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"ns4\",\r\n            \"display\": \"Nervous system SOFA score 4\"\r\n          }\r\n        ],\r\n        \"text\": \"Glasgow Coma Scale (GCS) < 6\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"cvs\",\r\n            \"display\": \"Cardiovascular system\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Cardiovascular system scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"cvs0\",\r\n            \"display\": \"Cardiovascular system SOFA score 0\"\r\n          }\r\n        ],\r\n        \"text\": \"Mean arterial pressure (MAP) ≥ 70 mmHg\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"liv\",\r\n            \"display\": \"Liver\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Liver scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"liv1\",\r\n            \"display\": \"Liver SOFA score 1\"\r\n          }\r\n        ],\r\n        \"text\": \"Bilirubin (mg/dl) [umol/L] 1.2-1.9 [20-32]\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"coa\",\r\n            \"display\": \"Coagulation\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Coagulation scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"coa2\",\r\n            \"display\": \"Coagulation SOFA score 2\"\r\n          }\r\n        ],\r\n        \"text\": \"Platelets×10^3/ul < 100\"\r\n      }\r\n    },\r\n    {\r\n      \"code\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"kid\",\r\n            \"display\": \"Kidneys\"\r\n          }\r\n        ],\r\n        \"text\": \"SOFA Kidneys scoring category\"\r\n      },\r\n      \"valueCodeableConcept\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score\",\r\n            \"code\": \"kid4\",\r\n            \"display\": \"Kidneys SOFA score 4\"\r\n          }\r\n        ],\r\n        \"text\": \"Creatinine (mg/dl) [umol/L] (or urine output) > 5.0 [> 440] (or < 200 ml/d)\"\r\n      }\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1233,26 +1588,6 @@
 					"response": []
 				}
 			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
 		}
 	]
 }
