@@ -2,7 +2,7 @@ version: 2.1
 
 # OVERVIEW - What this CI pipeline does:
 #
-# 1. So far this pipeline consists of one workflow only, which
+# 1. This pipeline consists of one workflow, which
 #    - clones ehrbase repo
 #    - builds ehrbase server from develop branch
 #    - starts ehrbase server (postgresql db is included in used docker executor,
@@ -13,6 +13,7 @@ version: 2.1
 #    - performes sonarcloud.io code analysis
 #    - creates a tag and pushes that to Git
 #    - Builds the Docker image and pushes that do DockerHub with appropriate tag
+#    - Deploys Robot Test Documentation to Github-Pages
 
 
 workflows:
@@ -20,32 +21,44 @@ workflows:
   # WORKFLOW 1/1 Build, Test & Analyze FHIR-bridge code
   build_and_test_fhirbridge:
     jobs:
-        - build-and-quicktest-fhirbridge:
+        - quick-test-fhirbridge:
             context: org-global
-            #   filters:
-            #     branches:
-            #       ignore:
-            #         - master
-            #         - develop
-            #         - release
-        - build-and-test-fhirbridge:
+            filters:
+              branches:
+                ignore: gh-pages
+                    # - master
+                    # - develop
+                    # - release
+        - full-test-fhirbridge:
             context: org-global
+            filters:
+              branches:
+                ignore: gh-pages
         - tag-version:
             context: org-global
             requires:
-                - build-and-test-fhirbridge
+                - full-test-fhirbridge
             filters:
                 branches:
                     only:
                         - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+)$/
-        - build_and_deploy:
+        - build-and-deploy:
             context: org-global
             requires:
-                - build-and-test-fhirbridge
+                - full-test-fhirbridge
             filters:
                 branches:
                     only:
                         - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
+
+        - deploy-testdocs-githup-pages:
+            context: org-global
+            requires:
+                - full-test-fhirbridge
+            filters:
+                branches:
+                    only:
+                        - develop
 
 
 
@@ -64,7 +77,7 @@ jobs:
     #    "Y8888P"     `"Y8888Y"'    88888888P"    "Y88888P"
 
 
-    build-and-quicktest-fhirbridge:
+    quick-test-fhirbridge:
         description: Build and test FHIR-bridge
         executor: docker-py3-java11-postgres
         steps:
@@ -83,7 +96,7 @@ jobs:
             - save-fhirbridge-test-results
 
 
-    build-and-test-fhirbridge:
+    full-test-fhirbridge:
         description: |
             Build and test FHIR-bridge, analyze code, collect code coverage metrics,
             upload results to sonarcloud.io
@@ -106,8 +119,9 @@ jobs:
             - collect-fhirbridge-integrationtest-results
             - save-fhirbridge-test-results
             - save-jacoco-coverage-report
+            - save-fhirbridge-workspace
             - sonarcloud/scan:
-                cache_version: 1
+                cache_version: 2
 
 
     tag-version:
@@ -135,7 +149,7 @@ jobs:
                       exit 0
 
 
-    build_and_deploy:
+    build-and-deploy:
         docker:
             - image: cimg/openjdk:11.0.8
               auth:
@@ -164,6 +178,30 @@ jobs:
                       mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ehrbase/fhir-bridge:$TAG -Dmaven.test.skip
                       docker tag ehrbase/fhir-bridge ehrbase/fhir-bridge:$TAG
                       docker push ehrbase/fhir-bridge:$TAG
+            
+
+    deploy-testdocs-githup-pages:
+        description: |
+            Deploy Robot Test Documentation to Github Pages
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - configure-git-for-ci-bot
+            - restore-fhirbridge-workspace
+            - run:
+                name: OVERWRITE OLD ROBOT FILES AND PUSH UPDATE TO GH-PAGES BRANCH
+                command: |
+                    # ls -la
+                    git checkout gh-pages
+                    # git status
+                    cp new_fhir-bridge-robot-testdocu.html fhir-bridge-robot-testdocu.html
+                    cp new_log.html log.html
+                    cp new_report.html report.html
+                    # ls -la
+                    # git status
+                    git commit -am "Updates Robot Test Documentation Github Page --> https://ehrbase.github.io/fhir-bridge/"
+                    git push --force --set-upstream origin gh-pages
+
 
 
 
@@ -258,18 +296,6 @@ commands:
 
     start-fhirbridge-application:
         steps:
-            # - run:
-            #     name: COPY APPLICATION-CI.yml to ./application.yml
-            #     description: |
-            #         This make Spring Boot load this config when starting fhirbridge .jar
-            #         And is required to start fhirbrige in CI pipeline.
-            #     command: |
-            #         cp src/test/resources/application-ci.yml ./application.yml
-            # - run:
-            #     name: WORKAROUND FOR ISSUE github.com/ehrbase/fhir-bridge/issues/60
-            #     command: |
-            #         rm -rf target/lib/
-            #         ls -la target/
             - run:
                 name: START FHIRBRIDGE APPLICATION
                 background: true
@@ -327,7 +353,7 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    robot -d results/0 -L TRACE \
+                    robot -v OUTPUT_LEVEL:minimal -d results/0 -L INFO \
                             --skip TODO --skip future \
                             --skiponfailure not-ready robot/
             - run:
@@ -339,13 +365,18 @@ commands:
                         -e obsolete -e libtest \
                         --removekeywords for \
                         --removekeywords wuks \
-                        --loglevel TRACE \
+                        --loglevel INFO \
                         --output NONE \
                         --log NONE \
                         --report NONE \
                         --xunit junit-output.xml --xunitskipnoncritical \
                         results/0/output.xml
-                
+            - run:
+                name: GENERATE ROBOT TEST DOCUMENTATION
+                command: |
+                    python3 -m robot.testdoc tests/robot new_fhir-bridge-robot-testdocu.html
+                    cp tests/results/0/log.html ./new_log.html
+                    cp tests/results/0/report.html ./new_report.html
             - run:
                 name: COPY ROBOT OUTPUT FILES
                 when: always
@@ -442,8 +473,10 @@ commands:
             - persist_to_workspace:
                 root: /home/circleci
                 paths:
-                    - .m2
-                    - projects
+                    # - .m2
+                    - projects/new_fhir-bridge-robot-testdocu.html
+                    - projects/new_log.html
+                    - projects/new_report.html
 
 
     restore-fhirbridge-workspace:
