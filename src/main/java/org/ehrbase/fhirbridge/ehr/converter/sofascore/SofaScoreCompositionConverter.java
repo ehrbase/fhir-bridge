@@ -1,0 +1,72 @@
+package org.ehrbase.fhirbridge.ehr.converter.sofascore;
+
+
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.archetyped.FeederAudit;
+import com.nedap.archie.rm.datatypes.CodePhrase;
+import com.nedap.archie.rm.datavalues.DvCodedText;
+import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
+import com.nedap.archie.rm.generic.PartySelf;
+import com.nedap.archie.rm.support.identification.TerminologyId;
+import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CommonData;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
+import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
+import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SOFAScoreObservation;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Observation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+public class SofaScoreCompositionConverter implements CompositionConverter<SOFAComposition, Observation> {
+    private static final Logger LOG = LoggerFactory.getLogger(SofaScoreCompositionConverter.class);
+
+
+    @Override
+    public Observation fromComposition(SOFAComposition composition) {
+        // TODO: Implement
+        return null;
+    }
+
+    @Override
+    public SOFAComposition toComposition(Observation observation) {
+        if (observation == null) {
+            return null;
+        }
+
+        SOFAComposition result = new SOFAComposition();
+
+        // set feeder audit
+        FeederAudit fa = CommonData.constructFeederAudit(observation);
+        result.setFeederAudit(fa);
+
+        DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
+
+        try {
+            result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
+        }catch (Exception e){
+            throw new UnprocessableEntityException(e.getMessage());
+        }
+
+        // ======================================================================================
+        // Required fields by API
+        result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
+        result.setLocation("test"); // FIXME: Location abfangen?
+        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        result.setTerritory(Territory.DE);
+        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+
+        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+
+        result.setComposer(new PartySelf());
+
+        return result;
+    }
+
+
+
+}

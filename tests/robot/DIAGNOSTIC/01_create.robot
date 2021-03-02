@@ -24,7 +24,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 ...                                                            Authorization=${AUTHORIZATION['Authorization']}
 # ...															   Authorization=${AUTHORIZATION['Authorization']}
 
-Force Tags              diagnostic-report_create    create
+Force Tags              diagnostic_create    create
 
 
 
@@ -40,7 +40,7 @@ Force Tags              diagnostic-report_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to diagnostic endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              diagnostic-report    valid   xxx
+    [Tags]              diagnostic-report    valid
 
     Log Many    ${AUTHORIZATION}
     ehr.create new ehr                      000_ehr_status.json
