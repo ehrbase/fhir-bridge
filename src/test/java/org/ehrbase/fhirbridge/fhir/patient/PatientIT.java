@@ -1,17 +1,12 @@
 package org.ehrbase.fhirbridge.fhir.patient;
 
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
-import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.PatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.GECCOPersonendatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Patient;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
@@ -19,10 +14,8 @@ import org.javers.core.diff.Diff;
 import org.javers.core.metamodel.clazz.ValueObjectDefinition;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.Period;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;

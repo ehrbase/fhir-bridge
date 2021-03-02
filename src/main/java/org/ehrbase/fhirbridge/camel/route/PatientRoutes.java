@@ -52,7 +52,7 @@ public class PatientRoutes extends RouteBuilder {
         // @formatter:on
     }
 
-    // TODO: Update when Apache Camel > 3.x
+    // Update when Apache Camel > 3.x
     @Bean
     public PatientCompositionConverter patientCompositionConverter() {
         return new PatientCompositionConverter();

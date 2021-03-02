@@ -30,7 +30,6 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
 
     @Override
     public Patient fromComposition(GECCOPersonendatenComposition composition) {
-        // TODO: Implement
         return null;
     }
 
@@ -64,11 +63,11 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
     private GECCOPersonendatenComposition setRequiredFields(GECCOPersonendatenComposition composition) {
         // Required fields by API
         composition.setLanguage(Language.DE);
-        composition.setLocation("test"); //FIXME: sensible value
+        composition.setLocation("test");
         composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         composition.setTerritory(Territory.DE);
         composition.setCategoryDefiningCode(Category.EVENT);
-        composition.setComposer(new PartySelf()); //FIXME: sensible value
+        composition.setComposer(new PartySelf());
         return composition;
     }
 
@@ -94,12 +93,12 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
             DateTimeType dateTimeOfDocumentationDt = (DateTimeType) extensionAge.getExtensionByUrl("dateTimeOfDocumentation").getValue();
             ZonedDateTime dateTimeOfDocumentation = dateTimeOfDocumentationDt.getValueAsCalendar().toZonedDateTime();
 
-            Age age_value = (Age) extensionAge.getExtensionByUrl("age").getValue();
+            Age ageValue = (Age) extensionAge.getExtensionByUrl("age").getValue();
 
             age.setOriginValue(dateTimeOfDocumentation);
             age.setTimeValue(dateTimeOfDocumentation);
             //age - Alter (ISO8601 duration e.g. P67Y)
-            age.setAlterValue(Period.ofYears(age_value.getValue().intValue()));
+            age.setAlterValue(Period.ofYears(ageValue.getValue().intValue()));
             age.setSubject(new PartySelf());
             age.setLanguage(Language.DE);
         } catch (Exception e) {
