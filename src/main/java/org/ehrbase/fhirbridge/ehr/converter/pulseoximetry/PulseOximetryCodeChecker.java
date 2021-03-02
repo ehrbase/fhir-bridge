@@ -35,13 +35,13 @@ public class PulseOximetryCodeChecker {
     }
 
     private void matchCodes(List<Coding> codes) {
-        if (!matchCode3(codes) || !matchCode4(codes)) {
+        if (!matchCode2(codes) || !matchCode3(codes)) {
             exceptionCode();
         }
 
     }
 
-    private boolean matchCode3(List<Coding> codes) {
+    private boolean matchCode2(List<Coding> codes) {
         for (Coding code : codes) {
             return code.getSystem().equals(CODING_2.getCode().get(0).get(0)) && code.getCode().equals(CODING_2.getCode().get(0).get(1)) ||
                     code.getSystem().equals(CODING_2.getCode().get(1).get(0)) && code.getCode().equals(CODING_2.getCode().get(1).get(1));
@@ -49,7 +49,7 @@ public class PulseOximetryCodeChecker {
         return false;
     }
 
-    private boolean matchCode4(List<Coding> codes) {
+    private boolean matchCode3(List<Coding> codes) {
         for (Coding code : codes) {
             return code.getSystem().equals(CODING_3.getCode().get(0).get(0)) && code.getCode().equals(CODING_3.getCode().get(0).get(1)) ||
                     code.getSystem().equals(CODING_3.getCode().get(1).get(0)) && code.getCode().equals(CODING_3.getCode().get(1).get(1));
