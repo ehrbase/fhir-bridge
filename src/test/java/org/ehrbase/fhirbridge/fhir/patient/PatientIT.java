@@ -59,8 +59,23 @@ class PatientIT extends AbstractMappingTestSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
         //NOTE why is my local message different from CI?
-        //assertEquals("HTTP 422 : https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age: mindestens erforderlich = Extension.extension, aber nur gefunden Extension.extension:dateTimeOfDocumentation", exception.getMessage());
         assertEquals("HTTP 422 : Extension.extension:dateTimeOfDocumentation: minimum required = 1, but only found 0 (from https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age)", exception.getMessage());
+    }
+
+    @Test
+    void createInvalidBirth() throws IOException {
+        String resource = super.testFileLoader.loadResourceToString("create-patient-invalid-birth.json");
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
+        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        assertEquals("HTTP 422 : Getting datenZurGeburt failed: null", exception.getMessage());
+    }
+
+    @Test
+    void createInvalidEthnic() throws IOException {
+        String resource = super.testFileLoader.loadResourceToString("create-patient-invalid-ethnic.json");
+        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
+        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        assertEquals("HTTP 422 : Getting ethnicGroup failed: null", exception.getMessage());
     }
 
     @Test
