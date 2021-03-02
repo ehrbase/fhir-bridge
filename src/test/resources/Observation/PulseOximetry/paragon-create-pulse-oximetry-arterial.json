@@ -42,11 +42,11 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2020-09-21T00:00:00+02:00"
+      "value" : "2020-10-11T00:00:00+02:00"
     },
     "end_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2020-09-21T00:00:00+02:00"
+      "value" : "2020-10-11T00:00:00+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -124,7 +124,7 @@
       },
       "origin" : {
         "_type" : "DV_DATE_TIME",
-        "value" : "2020-09-21T00:00:00+02:00"
+        "value" : "2020-10-11T00:00:00+02:00"
       },
       "events" : [ {
         "_type" : "POINT_EVENT",
@@ -134,7 +134,7 @@
         },
         "time" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2020-09-21T00:00:00+02:00"
+          "value" : "2020-10-11T00:00:00+02:00"
         },
         "data" : {
           "_type" : "ITEM_TREE",
