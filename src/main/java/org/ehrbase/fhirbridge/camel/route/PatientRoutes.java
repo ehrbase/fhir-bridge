@@ -7,7 +7,9 @@ import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.hl7.fhir.r4.model.Patient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.ehrbase.fhirbridge.ehr.converter.PatientCompositionConverter;
 
 @Component
 public class PatientRoutes extends RouteBuilder {

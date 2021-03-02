@@ -49,9 +49,9 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
         GECCOPersonendatenComposition composition = new GECCOPersonendatenComposition();
         PersonendatenAdminEntry person_data = new PersonendatenAdminEntry();
 
-        // set feeder audit
-        FeederAudit fa = CommonData.constructFeederAudit(fhir_patient);
-        composition.setFeederAudit(fa);
+        // don't set feeder audit - plans to generalize it exist (mapping doesn't need to deal with it and currently if throws a null pointer exception in mapping test)
+        //FeederAudit fa = CommonData.constructFeederAudit(fhir_patient);
+        //composition.setFeederAudit(fa);
 
         /* NOTE There are more fields included in the FHIR resource (but not marked as "support mandatory")
         which are also considered in the template. But the example does only include age, date of birth and ethnic group.*/
@@ -106,9 +106,7 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
             age.setOriginValue(date_time_of_documentation);
             age.setTimeValue(date_time_of_documentation);
             //age - Alter (ISO8601 duration e.g. P67Y)
-            LOG.info(age_value.getValue().toString());
             age.setAlterValue(Period.ofYears(age_value.getValue().intValue()));
-            LOG.info(age.getAlterValue().toString());
             age.setSubject(new PartySelf());
             age.setLanguage(Language.DE);
         } catch (Exception e) {
