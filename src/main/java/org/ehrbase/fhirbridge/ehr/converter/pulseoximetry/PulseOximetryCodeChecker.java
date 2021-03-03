@@ -44,14 +44,18 @@ public class PulseOximetryCodeChecker {
     private boolean matchCoding(List<Coding> codingList, PulseOxymetryCoding coding){
         int matchedCodes = 0;
         for (Coding code : codingList) {
-            if (code.getSystem().equals(coding.getCode().get(0).getSystem()) && code.getCode().equals(coding.getCode().get(0).getCode()) ||
-                    code.getSystem().equals(coding.getCode().get(1).getSystem()) && code.getCode().equals(coding.getCode().get(1).getCode())) {
+            if (isCoding(code, coding)) {
                 matchedCodes += 1;
             } else {
                 return false;
             }
         }
         return matchedCodes == 2;
+    }
+
+    private boolean isCoding(Coding code, PulseOxymetryCoding coding){
+        return code.getSystem().equals(coding.getCode().get(0).getSystem()) && code.getCode().equals(coding.getCode().get(0).getCode()) ||
+                code.getSystem().equals(coding.getCode().get(1).getSystem()) && code.getCode().equals(coding.getCode().get(1).getCode());
     }
 
     private void exceptionCode() {
