@@ -59,11 +59,7 @@ public class PulseOximetryConverter implements CompositionConverter<Pulsoxymetri
         pulsoxymetrieObservation.setOriginValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         pulsoxymetrieObservation.setSubject(new PartySelf());
 
-        DvProportion dvProportion = new DvProportion();
-        dvProportion.setNumerator(observation.getValueQuantity().getValue().doubleValue());
-        dvProportion.setDenominator(100.0);
-        dvProportion.setType(2L);
-
+        DvProportion dvProportion = new DvProportion(observation.getValueQuantity().getValue().doubleValue(),100.0, 2L);
         pulsoxymetrieObservation.setSpo(dvProportion);
         composition.setPulsoxymetrie(pulsoxymetrieObservation);
     }
