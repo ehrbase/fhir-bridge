@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.converterCodes;
+package org.ehrbase.fhirbridge.ehr.converter.convertercodes;
 
 public enum TerminologyIdCode {
 
