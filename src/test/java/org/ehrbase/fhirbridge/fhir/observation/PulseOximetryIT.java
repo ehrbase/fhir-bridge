@@ -56,7 +56,7 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
     @Test
     void mappingInvalid() throws IOException {
        Exception exception = executeMappingException("create-pulse-oximetry-invalid.json");
-       assertEquals("The Code of code.coding is not supported for the Fhir-Bridge. If the LOINC-code 20564-1 or 2708-6 AND 20564-1 was entered, the oxygen Saturation has to be send as part of a Blood gas panel. It can not be processed as a single resource in this cases.", exception.getMessage());
+       assertEquals("The Code of code.coding is not supported for the Fhir-Bridge, or duplicated within the resource. If the LOINC-code 20564-1 or 2708-6 AND 20564-1 was entered, the oxygen Saturation has to be send as part of a Blood gas panel. It can not be processed as a single resource in this cases.", exception.getMessage());
 
     }
 
