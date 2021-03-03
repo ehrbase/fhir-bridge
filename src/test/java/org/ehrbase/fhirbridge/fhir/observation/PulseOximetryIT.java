@@ -35,23 +35,23 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mappingArterial() throws IOException {
-        testMapping("create-pulse-oximetry-arterial.json","paragon-create-pulse-oximetry-arterial.json" );
+        testMapping("create-pulse-oximetry-arterial.json", "paragon-create-pulse-oximetry-arterial.json");
     }
 
     @Test
     void mappingByPulseOximetry() throws IOException {
-        testMapping("create-pulse-oximetry-by-oximetry.json","paragon-create-pulse-oximetry-by-oximetry.json" );
+        testMapping("create-pulse-oximetry-by-oximetry.json", "paragon-create-pulse-oximetry-by-oximetry.json");
     }
 
     @Test
     void mappingPheriperalSaturation() throws IOException {
-        testMapping("create-pulse-oximetry-pheriperal-saturation.json","paragon-create-pulse-oximetry-pheriperal-saturation.json" );
+        testMapping("create-pulse-oximetry-pheriperal-saturation.json", "paragon-create-pulse-oximetry-pheriperal-saturation.json");
     }
 
     @Test
     void mappingInvalid() throws IOException {
-       Exception exception = executeMappingException("create-pulse-oximetry-invalid.json");
-       assertEquals("The Code of code.coding is not supported for the Fhir-Bridge, or duplicated within the resource. If the LOINC-code 20564-1 or 2708-6 AND 20564-1 was entered, the oxygen Saturation has to be send as part of a Blood gas panel. It can not be processed as a single resource in this cases.", exception.getMessage());
+        Exception exception = executeMappingException("create-pulse-oximetry-invalid.json");
+        assertEquals("The Code of code.coding is not supported for the Fhir-Bridge, or duplicated within the resource. If the LOINC-code 20564-1 or 2708-6 AND 20564-1 was entered, the oxygen Saturation has to be send as part of a Blood gas panel. It can not be processed as a single resource in this cases.", exception.getMessage());
 
     }
 
@@ -67,9 +67,8 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String resource) throws IOException {
         Observation pulseOximetry = (Observation) testFileLoader.loadResource(resource);
-        return assertThrows(UnprocessableEntityException.class, () -> {
-            new PulseOximetryConverter().toComposition( pulseOximetry);
-        });    }
+        return assertThrows(UnprocessableEntityException.class, () -> new PulseOximetryConverter().toComposition(pulseOximetry));
+    }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
