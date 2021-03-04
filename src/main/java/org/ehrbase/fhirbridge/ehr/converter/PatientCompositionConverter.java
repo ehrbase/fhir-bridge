@@ -38,30 +38,20 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
         if (fhirPatient == null) {
             return null;
         }
-
-        //create composition and contained archetype objects
         GECCOPersonendatenComposition composition = new GECCOPersonendatenComposition();
         PersonendatenAdminEntry personData = new PersonendatenAdminEntry();
-
-        //assemble composition
         composition.setAlter(getAgeFromFhir(fhirPatient));
         personData.setDatenZurGeburt(getDataOnBirth(fhirPatient));
         personData.setEthnischerHintergrund(getEthnicBackgroundData(fhirPatient));
         personData.setSubject(new PartySelf());
         personData.setLanguage(Language.DE);
-
         composition.setPersonendaten(personData);
-
-        //NOTE not sure if this is the best value for composition startTime since it refers to the documentation of the age, but its the only info on time of documentation...
         composition.setStartTimeValue(composition.getAlter().getTimeValue());
-
         composition = setRequiredFields(composition);
-
         return composition;
     }
 
     private GECCOPersonendatenComposition setRequiredFields(GECCOPersonendatenComposition composition) {
-        // Required fields by API
         composition.setLanguage(Language.DE);
         composition.setLocation("test");
         composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
@@ -79,7 +69,7 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
             EthnischerHintergrundCluster ec = new EthnischerHintergrundCluster();
             ec.setEthnischerHintergrundDefiningCode(EthnischerHintergrundDefiningCode.get_by_SNOMED_code(ethnicGroup.getCode()));
             items.add(ec);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             throw new UnprocessableEntityException("Getting ethnicGroup failed: " + e.getMessage());
         }
         return items;
@@ -87,23 +77,17 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
 
     private AlterObservation getAgeFromFhir(Patient fhirPatient) {
         AlterObservation age = new AlterObservation();
-        try {
-            Extension extensionAge = fhirPatient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age");
+        Extension extensionAge = fhirPatient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age");
+        DateTimeType dateTimeOfDocumentationDt = (DateTimeType) extensionAge.getExtensionByUrl("dateTimeOfDocumentation").getValue();
+        ZonedDateTime dateTimeOfDocumentation = dateTimeOfDocumentationDt.getValueAsCalendar().toZonedDateTime();
+        Age ageValue = (Age) extensionAge.getExtensionByUrl("age").getValue();
+        age.setOriginValue(dateTimeOfDocumentation);
+        age.setTimeValue(dateTimeOfDocumentation);
+        //age - Alter (ISO8601 duration e.g. P67Y)
+        age.setAlterValue(Period.ofYears(ageValue.getValue().intValue()));
+        age.setSubject(new PartySelf());
+        age.setLanguage(Language.DE);
 
-            DateTimeType dateTimeOfDocumentationDt = (DateTimeType) extensionAge.getExtensionByUrl("dateTimeOfDocumentation").getValue();
-            ZonedDateTime dateTimeOfDocumentation = dateTimeOfDocumentationDt.getValueAsCalendar().toZonedDateTime();
-
-            Age ageValue = (Age) extensionAge.getExtensionByUrl("age").getValue();
-
-            age.setOriginValue(dateTimeOfDocumentation);
-            age.setTimeValue(dateTimeOfDocumentation);
-            //age - Alter (ISO8601 duration e.g. P67Y)
-            age.setAlterValue(Period.ofYears(ageValue.getValue().intValue()));
-            age.setSubject(new PartySelf());
-            age.setLanguage(Language.DE);
-        } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
-        }
         return age;
     }
 
@@ -112,7 +96,7 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
         try {
             //date of birth
             datenZurGeburtCluster.setGeburtsdatumValue(fhirPatient.getBirthDate().toInstant().atZone(ZoneId.of("Europe/Berlin")).toLocalDate());
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             throw new UnprocessableEntityException("Getting datenZurGeburt failed: " + e.getMessage());
         }
         return datenZurGeburtCluster;
