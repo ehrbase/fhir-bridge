@@ -71,7 +71,7 @@
     "_type" : "EVALUATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Keine Reisehistorie"
+      "value" : "Unbekannte Reisehistorie"
     },
     "language" : {
       "terminology_id" : {
@@ -92,30 +92,13 @@
       "_type" : "ITEM_TREE",
       "name" : {
         "_type" : "DV_TEXT",
-        "value" : "Tree"
+        "value" : "Baum"
       },
       "items" : [ {
         "_type" : "ELEMENT",
         "name" : {
           "_type" : "DV_TEXT",
-          "value" : "Aussage über den Ausschluss"
-        },
-        "value" : {
-          "_type" : "DV_CODED_TEXT",
-          "value" : "No (qualifier value)",
-          "defining_code" : {
-            "terminology_id" : {
-              "value" : "SNOMED Clinical Terms"
-            },
-            "code_string" : "373067005"
-          }
-        },
-        "archetype_node_id" : "at0002"
-      }, {
-        "_type" : "ELEMENT",
-        "name" : {
-          "_type" : "DV_TEXT",
-          "value" : "Problem/Diagnose"
+          "value" : "Fehlende Information"
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
@@ -127,11 +110,28 @@
             "code_string" : "8691-8"
           }
         },
-        "archetype_node_id" : "at0003"
+        "archetype_node_id" : "at0002"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Aussage über die fehlende Information"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Unknown (qualifier value)",
+          "defining_code" : {
+            "terminology_id" : {
+              "value" : "SNOMED Clinical Terms"
+            },
+            "code_string" : "261665006"
+          }
+        },
+        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
     },
-    "archetype_node_id" : "openEHR-EHR-EVALUATION.exclusion_specific.v1"
+    "archetype_node_id" : "openEHR-EHR-EVALUATION.absence.v2"
   } ],
   "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
 }

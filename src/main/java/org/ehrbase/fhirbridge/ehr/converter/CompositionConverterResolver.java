@@ -51,6 +51,7 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.SOFA_SCORE, new SofaScoreCompositionConverter());
         profiles.put(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
         profiles.put(Profile.PROCEDURE, new ProcedureCompositionConverter());
+        profiles.put(Profile.TRAVEL_HISTORY, new HistoryOfTravelCompositionConverter());
 
         profiles.put(Profile.DIAGNOSE_LIVER_DISEASE, new GECCODiagnoseCompositionConverter());
         profiles.put(Profile.DIAGNOSE_LUNG_DISEASE, new GECCODiagnoseCompositionConverter());

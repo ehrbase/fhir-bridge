@@ -9,6 +9,7 @@ import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.definition.GrosseL
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KeineReisehistorieEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -32,7 +33,7 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createHistoryOfTravel() throws IOException {
-        create("create-history-of-travel-no.json");
+        create("create-history-of-travel-yes.json");
     }
 
     // #####################################################################################
@@ -71,8 +72,10 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(ReisehistorieComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(ReisehistorieComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(ReisehistorieAdminEntry.class)
+                .registerValueObject(KeineReisehistorieEvaluation.class)
+                .registerValueObject(UnbekannteReisehistorieEvaluation.class)
                 .build();
     }
 
