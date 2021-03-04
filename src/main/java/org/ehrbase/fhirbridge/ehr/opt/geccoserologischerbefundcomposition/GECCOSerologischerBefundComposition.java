@@ -21,6 +21,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.GeccoSerologischerBefundKategorieLoincElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.KategorieDefiningCode;
@@ -34,7 +35,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.defini
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 @Template("GECCO_Serologischer Befund")
-public class GECCOSerologischerBefundComposition implements CompositionEntity {
+public class GECCOSerologischerBefundComposition implements CompositionEntity, Composition {
   /**
    * Path: GECCO_Serologischer Befund/category
    */
