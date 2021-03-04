@@ -451,35 +451,6 @@ ${randinteger}                  ${12345}
     Observation    	        smoking-status  			   true         ${smoking_status-url}             final  	     true             true           ${1234}                                                            ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                           true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Expected 1 but found 0 coding elements                                                                                                              Observation.code
 
 
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# BUG TRACE
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create smoking status (Invalid/Missing 'category')
-	[Documentation]		Belongs to TC 006! Remove separation when it's fixed!
-	[Template]			create smoking status with ehr reference
-    [Tags]              category    not-ready    not-ready_bug
-
-	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																CODE
-
-	#invalid code 0
-	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${smoking_status-url}					Observation.category.0.
-	
-	# invaild system 0
-	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${smoking_status-url}					Observation.category.0.
-
-
-BUG TRACE 02 Create smoking status (Invalid/Missing 'valueCodeableConcept')
-	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
-	[Template]			create smoking status with ehr reference
-    [Tags]              category    not-ready    not-ready_bug
-
-	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																	CODE
-
-	# invalid system
-	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
 

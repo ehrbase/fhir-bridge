@@ -12,10 +12,24 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.WurdeDieAktivitatDurchgefuhrtDefiningcode;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PatientInIcuCompositionConverter implements CompositionConverter<PatientAufICUComposition, Observation> {
+    private static final Map<String, WurdeDieAktivitatDurchgefuhrtDefiningcode> aktivitatDurchgefuehrtDefiningcodeMap
+            = new HashMap<>();
+
+    static {
+        for (WurdeDieAktivitatDurchgefuhrtDefiningcode code : WurdeDieAktivitatDurchgefuhrtDefiningcode.values()) {
+            if (code.getTerminologyId().equals("SNOMED Clinical Terms")) {
+                aktivitatDurchgefuehrtDefiningcodeMap.put(code.getCode(), code);
+            }
+        }
+    }
 
     @Override
     public Observation fromComposition(PatientAufICUComposition composition) {
@@ -29,61 +43,64 @@ public class PatientInIcuCompositionConverter implements CompositionConverter<Pa
             return null;
         }
 
-        PatientAufICUComposition result = new PatientAufICUComposition();
+        PatientAufICUComposition composition = new PatientAufICUComposition();
 
         // set feeder audit
         FeederAudit fa = CommonData.constructFeederAudit(observation);
-        result.setFeederAudit(fa);
+        composition.setFeederAudit(fa);
 
-        Observation.ObservationStatus status = observation.getStatus();
+        setStatus(composition, observation);
 
-        if (status.toCode().equals("final")) {
-            result.setStatusDefiningcode(StatusDefiningcode.FINAL);
+        composition.setPatientAufDerIntensivstation(mapPatientAufIntensivstation(observation));
+        composition.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+
+        setMandatoryFields(composition);
+
+        return composition;
+    }
+
+    private static void setStatus(PatientAufICUComposition composition, Observation fhirObservation) {
+        Observation.ObservationStatus status = fhirObservation.getStatus();
+
+        if (status.equals(Observation.ObservationStatus.FINAL)) {
+            composition.setStatusDefiningcode(StatusDefiningcode.FINAL);
         } else {
             throw new UnprocessableEntityException("Status has invalid code " + status.toCode());
         }
-
-        PatientAufDerIntensivstationObservation patientAufDerIntensivstationObservation = new PatientAufDerIntensivstationObservation();
-
-        patientAufDerIntensivstationObservation.setNameDerAktivitatValue("Behandlung auf der Intensivstation");
-
-
-        String code = observation.getValueCodeableConcept().getCoding().get(0).getCode();
-
-        if (code.equals("74964007")) {
-            patientAufDerIntensivstationObservation.setWurdeDieAktivitatDurchgefuhrtDefiningcode(WurdeDieAktivitatDurchgefuhrtDefiningcode.N74964007);
-        } else if (code.equals("373066001")) {
-            patientAufDerIntensivstationObservation.setWurdeDieAktivitatDurchgefuhrtDefiningcode(WurdeDieAktivitatDurchgefuhrtDefiningcode.N373066001);
-        } else if (code.equals("261665006")) {
-            patientAufDerIntensivstationObservation.setWurdeDieAktivitatDurchgefuhrtDefiningcode(WurdeDieAktivitatDurchgefuhrtDefiningcode.N261665006);
-        } else if (code.equals("385432009")) {
-            patientAufDerIntensivstationObservation.setWurdeDieAktivitatDurchgefuhrtDefiningcode(WurdeDieAktivitatDurchgefuhrtDefiningcode.N385432009);
-        } else if (code.equals("373067005")) {
-            patientAufDerIntensivstationObservation.setWurdeDieAktivitatDurchgefuhrtDefiningcode(WurdeDieAktivitatDurchgefuhrtDefiningcode.N373067005);
-        } else {
-            throw new UnprocessableEntityException("Aktivität durchgeführt has invalid code " + code);
-        }
-
-        DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
-
-        patientAufDerIntensivstationObservation.setLanguage(Language.DE);
-        patientAufDerIntensivstationObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-        patientAufDerIntensivstationObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-        patientAufDerIntensivstationObservation.setSubject(new PartySelf());
-
-
-        result.setPatientAufDerIntensivstation(patientAufDerIntensivstationObservation);
-
-
-        //obligatory stuff block
-        result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-        result.setLocation("test"); //FIXME: sensible value
-        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
-        result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-        result.setComposer(new PartySelf()); //FIXME: sensible value
-        return result;
     }
 
+    private static void setMandatoryFields(PatientAufICUComposition composition) {
+        composition.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
+        composition.setLocation("test"); //FIXME: sensible value
+        composition.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        composition.setTerritory(Territory.DE);
+        composition.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        composition.setComposer(new PartySelf()); //FIXME: sensible value
+    }
+
+    private static PatientAufDerIntensivstationObservation mapPatientAufIntensivstation(Observation fhirObservation) {
+        PatientAufDerIntensivstationObservation patientAufDerIntensivstation = new PatientAufDerIntensivstationObservation();
+        patientAufDerIntensivstation.setNameDerAktivitatValue("Behandlung auf der Intensivstation");
+
+        patientAufDerIntensivstation.setWurdeDieAktivitatDurchgefuhrtDefiningcode(mapWurdeDieAktivitatDurchgefuhrt(fhirObservation));
+
+        DateTimeType fhirEffectiveDateTime = fhirObservation.getEffectiveDateTimeType();
+
+        patientAufDerIntensivstation.setLanguage(Language.DE);
+        patientAufDerIntensivstation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        patientAufDerIntensivstation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        patientAufDerIntensivstation.setSubject(new PartySelf());
+
+        return patientAufDerIntensivstation;
+    }
+
+    private static WurdeDieAktivitatDurchgefuhrtDefiningcode mapWurdeDieAktivitatDurchgefuhrt(Observation fhirObservation) {
+        Coding coding = fhirObservation.getValueCodeableConcept().getCoding().get(0);
+
+        if (coding.getSystem().equals("http://snomed.info/sct") && aktivitatDurchgefuehrtDefiningcodeMap.containsKey(coding.getCode())) {
+            return aktivitatDurchgefuehrtDefiningcodeMap.get(coding.getCode());
+        }
+
+        throw new UnprocessableEntityException("Aktivität durchgeführt has invalid code " + coding.getCode());
+    }
 }
