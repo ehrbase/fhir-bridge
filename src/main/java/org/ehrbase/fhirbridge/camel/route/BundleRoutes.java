@@ -4,8 +4,8 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.processor.BundleResponseProcessor;
-import org.ehrbase.fhirbridge.ehr.converter.antibodypanel.AntiBodyPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.DiagnosticReportLabConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.AntiBodyPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.AntiBodyPanelBundleValidator;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.BloodGasPanelBundleValidator;
@@ -34,7 +34,7 @@ public class BundleRoutes extends RouteBuilder {
                 .to("direct:process-anti-body-panel-bundle")
                 .otherwise()
                 .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
-                        "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri()));
+                        "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri() + ", " + Profile.ANTI_BODY_PANEL));
 
         from("direct:process-anti-body-panel-bundle")
                 .bean(AntiBodyPanelBundleValidator.class)
