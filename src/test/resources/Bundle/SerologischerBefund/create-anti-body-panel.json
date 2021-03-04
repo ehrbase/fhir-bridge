@@ -57,12 +57,12 @@
           ],
           "text": "SARS-CoV-2 antibodies panel"
         },
-    "subject": {
-        "identifier": {
+        "subject": {
+          "identifier": {
             "system": "urn:ietf:rfc:4122",
             "value": "{{patientId}}"
-        }
-    },
+          }
+        },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "hasMember": [
           {
@@ -147,12 +147,12 @@
           ],
           "text": "SARS-CoV-2 antibodies qualitative"
         },
-    "subject": {
-        "identifier": {
+        "subject": {
+          "identifier": {
             "system": "urn:ietf:rfc:4122",
             "value": "{{patientId}}"
-        }
-    },
+          }
+        },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "valueCodeableConcept": {
           "coding": [
@@ -162,11 +162,11 @@
               "display": "Detected (qualifier value)"
             }
           ]
-        },
-        "request": {
-          "method": "POST",
-          "url": "Observation"
         }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
       }
     },
     {
@@ -220,23 +220,23 @@
           ],
           "text": "SARS-CoV-2 antibodies quantitative"
         },
-    "subject": {
-        "identifier": {
+        "subject": {
+          "identifier": {
             "system": "urn:ietf:rfc:4122",
             "value": "{{patientId}}"
-        }
-    },
+          }
+        },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "valueQuantity": {
           "value": 240,
           "unit": "[IU]/mL",
           "system": "http://unitsofmeasure.org",
           "code": "[IU]/mL"
-        },
-        "request": {
-          "method": "POST",
-          "url": "Observation"
         }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
       }
     },
     {
@@ -290,23 +290,23 @@
           ],
           "text": "SARS-CoV-2 IgA antibodies quantitative"
         },
-    "subject": {
-        "identifier": {
+        "subject": {
+          "identifier": {
             "system": "urn:ietf:rfc:4122",
             "value": "{{patientId}}"
-        }
-    },
+          }
+        },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "valueQuantity": {
           "value": "0.5",
           "unit": "[IU]/mL",
           "system": "http://unitsofmeasure.org",
           "code": "[IU]/mL"
-        },
-        "request": {
-          "method": "POST",
-          "url": "Observation"
         }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
       }
     },
     {
@@ -360,12 +360,12 @@
           ],
           "text": "SARS-CoV-2 IgA antibodies qualitative"
         },
-    "subject": {
-        "identifier": {
+        "subject": {
+          "identifier": {
             "system": "urn:ietf:rfc:4122",
             "value": "{{patientId}}"
-        }
-    },
+          }
+        },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "valueCodeableConcept": {
           "coding": [
@@ -433,12 +433,12 @@
           ],
           "text": "SARS-CoV-2 IgG antibodies quantitative"
         },
-    "subject": {
-        "identifier": {
+        "subject": {
+          "identifier": {
             "system": "urn:ietf:rfc:4122",
             "value": "{{patientId}}"
-        }
-    },
+          }
+        },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "valueQuantity": {
           "value": 20,
@@ -503,12 +503,12 @@
           ],
           "text": "SARS-CoV-2 IgG antibodies qualitative"
         },
-    "subject": {
-        "identifier": {
+        "subject": {
+          "identifier": {
             "system": "urn:ietf:rfc:4122",
             "value": "{{patientId}}"
-        }
-    },
+          }
+        },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "valueCodeableConcept": {
           "coding": [
@@ -518,11 +518,11 @@
               "display": "Detected (qualifier value)"
             }
           ]
-        },
-        "request": {
-          "method": "POST",
-          "url": "Observation"
         }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
       }
     },
     {
@@ -576,23 +576,23 @@
           ],
           "text": "SARS-CoV-2 IgM antibodies quantitative"
         },
-    "subject": {
-        "identifier": {
+        "subject": {
+          "identifier": {
             "system": "urn:ietf:rfc:4122",
             "value": "{{patientId}}"
-        }
-    },
+          }
+        },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "valueQuantity": {
           "value": "219.5",
           "unit": "[arb'U]/mL",
           "system": "http://unitsofmeasure.org",
           "code": "[arb'U]/mL"
-        },
-        "request": {
-          "method": "POST",
-          "url": "Observation"
         }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
       }
     },
     {
@@ -646,12 +646,12 @@
           ],
           "text": "SARS-CoV-2 IgM antibodies qualitative"
         },
-    "subject": {
-        "identifier": {
+        "subject": {
+          "identifier": {
             "system": "urn:ietf:rfc:4122",
             "value": "{{patientId}}"
-        }
-    },
+          }
+        },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "valueCodeableConcept": {
           "coding": [
@@ -661,11 +661,11 @@
               "display": "Detected (qualifier value)"
             }
           ]
-        },
-        "request": {
-          "method": "POST",
-          "url": "Observation"
         }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
       }
     }
   ]
