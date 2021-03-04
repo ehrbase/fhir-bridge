@@ -1,9 +1,9 @@
 {
   "resourceType": "Observation",
-  "id": "23499ea6-d046-4e91-b7ab-d9cf040add72",
+  "id": "6fa9e2be-d15a-4e77-81fc-056dda521875",
   "meta": {
     "profile": [
-      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation"
     ]
   },
   "status": "final",
@@ -20,12 +20,12 @@
   "code": {
     "coding": [
       {
-        "system": "http://snomed.info/sct",
-        "code": "248334005",
-        "display": "Length of body (observable entity)"
+        "system": "http://loinc.org",
+        "code": "2708-6",
+        "display": "Oxygen saturation in Arterial blood"
       }
     ],
-    "text": "Body height"
+    "text": "Oxygen saturation in Arterial blood"
   },
   "subject": {
     "identifier": {
@@ -33,14 +33,11 @@
       "value": "{{patientId}}"
     }
   },
-  "effectivePeriod": {
-    "start": "2020-10-02",
-    "end": "2020-10-02"
-  },
+  "effectiveDateTime": "2020-09-21",
   "valueQuantity": {
-    "value": 167,
-    "unit": "centimeter",
+    "value": 98,
+    "unit": "%",
     "system": "http://unitsofmeasure.org",
-    "code": "cm"
+    "code": "%"
   }
 }

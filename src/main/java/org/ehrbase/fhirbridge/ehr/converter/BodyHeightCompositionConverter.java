@@ -9,10 +9,12 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 
 public class BodyHeightCompositionConverter implements CompositionConverter<KorpergrosseComposition, Observation> {
@@ -31,47 +33,58 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
             return null;
         }
 
-        // references:
-        // https://ckm.highmed.org/ckm/templates/1246.169.1038
-        // https://tools.openehr.org/designer/?code=39ddef9b1e993dc441ff#/designer/repos/num-2021-01-11
-        // https://simplifier.net/ForschungsnetzCovid-19/BodyHeight/~overview
-        // https://simplifier.net/forschungsnetzcovid-19/observation-example-body-height
-
-        KorpergrosseComposition result = new KorpergrosseComposition();
         GrosseLangeObservation grosseLangeObservation = new GrosseLangeObservation();
+        setDateTime(grosseLangeObservation, getDateTime(observation));
+        setDefault(grosseLangeObservation);
+        setMappingContent(observation, grosseLangeObservation);
 
-        DateTimeType fhirEffectiveDateTime;
-        try {
-            // default for every observation
-            fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
+        return createComposition(getDateTime(observation), grosseLangeObservation);
+    }
 
-            //BSa Wie erscheint das im Mapping? Und wo finde ich das Referenzmodell mit diesen Infos zu openEHR?
-            grosseLangeObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-            grosseLangeObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
-            grosseLangeObservation.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-            grosseLangeObservation.setSubject(new PartySelf());
-
-            // special mapping content
-            grosseLangeObservation.setGrosseLangeUnits(observation.getValueQuantity().getCode());
-            //BSa Hier ist nicht sichtbar, ob Körpergröße oder Geburt gesetzt wird -> woher die Info?
-            grosseLangeObservation.setGrosseLangeMagnitude(observation.getValueQuantity().getValue().doubleValue());
-
-        } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
-        }
-
-        result.setGrosseLange(grosseLangeObservation);
-
+    private KorpergrosseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GrosseLangeObservation grosseLangeObservation) {
+        KorpergrosseComposition composition = new KorpergrosseComposition();
+        composition.setGrosseLange(grosseLangeObservation);
         // Required fields by API
-        //BSa Wird hier noch was automatisiert?
-        result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-        result.setLocation("test");
-        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
-        result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-        result.setComposer(new PartySelf()); // FIXME: id ausdenken oder weglassen?
+        composition.setLanguage(Language.DE);
+        composition.setLocation("test");
+        composition.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        composition.setTerritory(Territory.DE);
+        composition.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        composition.setStartTimeValue(fhirEffectiveDateTime);
+        composition.setComposer(new PartySelf());
 
-        return result;
+        return (composition);
+    }
+
+    private ZonedDateTime getDateTime(Observation observation) {
+        ZonedDateTime fhirEffectiveDateTime;
+        if(observation.hasEffectiveDateTimeType()) {
+
+            // default for every observation
+            fhirEffectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+
+
+        } else if(observation.hasEffectivePeriod()) {
+            fhirEffectiveDateTime = observation.getEffectivePeriod().getStart().toInstant().atZone(ZoneId.systemDefault());
+
+        } else {
+            throw new UnprocessableEntityException("No time is set");
+        }
+        return fhirEffectiveDateTime;
+    }
+
+    private void setDateTime(GrosseLangeObservation grosseLangeObservation, ZonedDateTime fhirEffectiveDateTime) {
+        grosseLangeObservation.setTimeValue(fhirEffectiveDateTime);
+        grosseLangeObservation.setOriginValue(fhirEffectiveDateTime);
+    }
+
+    private void setMappingContent(Observation observation, GrosseLangeObservation grosseLangeObservation) {
+        grosseLangeObservation.setGrosseLangeUnits(observation.getValueQuantity().getCode());
+        grosseLangeObservation.setGrosseLangeMagnitude(observation.getValueQuantity().getValue().doubleValue());
+    }
+
+    private void setDefault(GrosseLangeObservation grosseLangeObservation) {
+        grosseLangeObservation.setLanguage(Language.DE);
+        grosseLangeObservation.setSubject(new PartySelf());
     }
 }

@@ -38,7 +38,7 @@ ${vQSystem}						http://unitsofmeasure.org
 *** Test Cases ***
 
 001 Create Body Height (Invalid/Missing 'Subject')
-    [Documentation]     1. *LOAD* _create-body-height.json_ \n\n
+    [Documentation]     1. *LOAD* _create-body-height-normal.json_ \n\n
 	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
     ...                 3. *POST* example JSON to observation endpoint \n\n
 	...                 4. *VALIDATE* the response status \n\n
@@ -84,7 +84,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 002 Create Body Height (Invalid/Missing 'resourceType')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -103,7 +103,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 003 Create Body Height (Invalid/Missing 'ID')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``ID`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -120,7 +120,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 004 Create Body Height (Invalid/Missing 'meta')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``meta`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -148,7 +148,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 005 Create Body Height (Invalid/Missing 'identifier')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -177,7 +177,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 006 Create Body Height (Invalid/Missing 'Status')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Status`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -196,7 +196,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 007 Create Body Height (Invalid/Missing 'category')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Category`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -234,7 +234,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 008 Create Body Height (Invalid/Missing 'code')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Code`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -276,7 +276,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 009 Create Body Height (Invalid/Missing 'effectiveDateTime')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -320,7 +320,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 010 Create Body Height (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -329,7 +329,7 @@ ${vQSystem}						http://unitsofmeasure.org
 	[Tags]              DataAbsentReason
 
 	ehr.create new ehr    				  							000_ehr_status.json
-	create with DataAbsentReason		  							DataAbsentReason				create-body-height.json
+	create with DataAbsentReason		  							DataAbsentReason				BodyHeight/create-body-height-normal.json
 	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
 
 
@@ -337,7 +337,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 011 Create Body Height (Invalid/Missing 'DataAbsentReason')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -385,7 +385,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 012 Create Body Height (Invalid/Missing 'valueQuantity')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
@@ -441,7 +441,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 013 Create Body Height (invalid multi)
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-body-height.json_\n\n
+	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* values for attributes \n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status \n\n
@@ -554,7 +554,7 @@ generate payload from example json
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-body-height.json
+	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/BodyHeight/create-body-height-normal.json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 
@@ -582,7 +582,7 @@ create body-height JSON
 
     &{resp}             Run Keywords
                         ...    ehr.create new ehr               000_ehr_status.json                             AND
-                        ...    load JSON                        create-body-height.json				    AND
+                        ...    load JSON                        BodyHeight/create-body-height-normal.json				    AND
                         ...    update Resource Type             ${resourceType}                                 AND
                         ...    update ID                        ${ID}                                           AND
                         ...    update Meta Profile              ${meta}                                         ${profile}                    	AND
@@ -604,7 +604,7 @@ generate payload from example json with data absentreason
 
 	${dict_dataabsentreason}			Create Dictionary	dataAbsentReason=${{ {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/data-absent-reason", "code": "unknown", "display": "unknown"}], "text": "body-height"} }}
 
-	${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/create-body-height.json
+	${payload}          Load JSON From File    		${DATA_SET_PATH_OBSERVATION}/BodyHeight/create-body-height-normal.json
                         Update Value To Json    	${payload}    $.subject.identifier.value    			${subject_id}
 						Delete Object From Json    	${payload}    $.text
 						Delete Object From Json    	${payload}    $.valueCodeableConcept

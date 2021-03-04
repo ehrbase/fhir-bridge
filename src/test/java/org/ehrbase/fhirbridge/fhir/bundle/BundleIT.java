@@ -74,13 +74,7 @@ public class BundleIT extends AbstractBundleMappingTestSetupIT {
 
     @Test
     void createMappingBloodGas() throws IOException{
-        Bundle bundle = (Bundle) super.testFileLoader.loadResource("create-blood-gas.json");
-        BloodGasPanelConverter bloodGasPanelConverter = new BloodGasPanelConverter();
-        Observation observation = bloodGasPanelConverter.convert(bundle);
-        BloodGasPanelCompositionConverter bloodGasPanelCompositionConverter = new BloodGasPanelCompositionConverter();
-        BefundDerBlutgasanalyseComposition mappedBefundDerBlutgasanalyseComposition = bloodGasPanelCompositionConverter.toComposition(observation);
-        Diff diff = compareCompositions(getJavers(), "paragon-create-blood-gas.json", mappedBefundDerBlutgasanalyseComposition);
-        assertEquals(diff.getChanges().size(), 0);
+        testMapping("create-blood-gas.json", "paragon-create-blood-gas.json");
     }
 
     @Test
@@ -144,6 +138,18 @@ public class BundleIT extends AbstractBundleMappingTestSetupIT {
         return assertThrows(Exception.class, () -> {
             new BloodGasPanelCompositionConverter().toComposition(new BloodGasPanelConverter().convert( bundle));
         });
+    }
+
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        Bundle bundle = (Bundle) super.testFileLoader.loadResource(resourcePath);
+        BloodGasPanelConverter bloodGasPanelConverter = new BloodGasPanelConverter();
+        Observation observation = bloodGasPanelConverter.convert(bundle);
+        BloodGasPanelCompositionConverter bloodGasPanelCompositionConverter = new BloodGasPanelCompositionConverter();
+        BefundDerBlutgasanalyseComposition mappedBefundDerBlutgasanalyseComposition = bloodGasPanelCompositionConverter.toComposition(observation);
+        Diff diff = compareCompositions(getJavers(), paragonPath, mappedBefundDerBlutgasanalyseComposition);
+        assertEquals(diff.getChanges().size(), 0);
+
     }
 
     public Exception executeValidatorException(String path) throws IOException {
