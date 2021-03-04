@@ -7,9 +7,6 @@ import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanel;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.BefundDerBlutgasanalyseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.StatusDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.GECCOSerologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.StatusDefiningCode;
@@ -28,7 +25,10 @@ public class AntiBodyPanelCompositionConverter implements CompositionConverter<G
     @Override
     public GECCOSerologischerBefundComposition toComposition(Observation observation) throws CompositionConversionException {
         GECCOSerologischerBefundComposition geccoSerologischerBefundComposition = new GECCOSerologischerBefundComposition();
-        AntiBodyPanel antiBodyPanel = new AntiBodyPanel(observation);
+        setMandatoryFields(geccoSerologischerBefundComposition);
+        geccoSerologischerBefundComposition.setStatusDefiningCode(mapStatus(observation));
+        geccoSerologischerBefundComposition.setKategorieDefiningCode(mapKategorie(observation));
+        geccoSerologischerBefundComposition.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         return geccoSerologischerBefundComposition;
     }
 
@@ -48,17 +48,19 @@ public class AntiBodyPanelCompositionConverter implements CompositionConverter<G
         }
     }
 
-    private String mapKategorie(Observation fhirObservation) {
+    private KategorieDefiningCode mapKategorie(Observation fhirObservation) {
         Optional<String> categoryCode;
         for (CodeableConcept codingEntry : fhirObservation.getCategory()) {
             categoryCode = getObservationCategory(codingEntry);
-            if (categoryCode.isPresent()) {
-                return categoryCode.get();
+            if (categoryCode.isPresent() && isLabratory(categoryCode.get())) {
+                return KategorieDefiningCode.LABORATORY;
             }
-            KategorieDefiningCode
         }
-        throw new IllegalArgumentException("Category code is not defined in blood gas panel, therefore the bundle is incomplete. Please add category observation category to the panel");
+        throw new IllegalArgumentException("Category code is not defined in anti body panel, therefore the bundle is incomplete. Please add category observation category to the panel");
+    }
 
+    private boolean isLabratory(String code) {
+        return KategorieDefiningCode.LABORATORY.getCode().equals(code);
     }
 
     private Optional<String> getObservationCategory(CodeableConcept codings) {
@@ -84,13 +86,4 @@ public class AntiBodyPanelCompositionConverter implements CompositionConverter<G
         geccoSerologischerBefundComposition.setComposer(new PartySelf());
     }
 
-    public GECCOSerologischerBefundComposition convert(AntiBodyPanel antiBodyPanelBundle) {
-        Observation antiBodyPanel = antiBodyPanelBundle.getAntiBodyPanel();
-        GECCOSerologischerBefundComposition geccoSerologischerBefundComposition = new GECCOSerologischerBefundComposition();
-        setMandatoryFields(geccoSerologischerBefundComposition);
-        geccoSerologischerBefundComposition.setStatusDefiningCode(mapStatus(antiBodyPanel));
-        geccoSerologischerBefundComposition.setKategorieDefiningCode(mapKategorie(antiBodyPanel));
-        geccoSerologischerBefundComposition.setStartTimeValue(antiBodyPanel.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        return geccoSerologischerBefundComposition;
-    }
 }
