@@ -5,7 +5,7 @@ import org.ehrbase.fhirbridge.ehr.converter.clinicalFrailty.ClinicalFrailtyScale
 import org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.serologischerbefund.GeccoSerologischerBefundConverter;
+import org.ehrbase.fhirbridge.ehr.converter.antibodypanel.AntiBodyPanelConverter;
 import org.ehrbase.fhirbridge.ehr.converter.sofascore.SofaScoreCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.springframework.beans.factory.InitializingBean;
@@ -52,7 +52,7 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.SOFA_SCORE, new SofaScoreCompositionConverter());
         profiles.put(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
         profiles.put(Profile.PROCEDURE, new ProcedureCompositionConverter());
-        profiles.put(Profile.ANTI_BODY_PANEL, new GeccoSerologischerBefundConverter());
+        profiles.put(Profile.ANTI_BODY_PANEL, new AntiBodyPanelConverter());
 
         profiles.put(Profile.DIAGNOSE_LIVER_DISEASE, new GECCODiagnoseCompositionConverter());
         profiles.put(Profile.DIAGNOSE_LUNG_DISEASE, new GECCODiagnoseCompositionConverter());
