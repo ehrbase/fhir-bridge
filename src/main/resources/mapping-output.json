@@ -2,22 +2,34 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Körpergröße"
+    "value" : "Reisehistorie"
   },
   "archetype_details" : {
     "archetype_id" : {
       "value" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
     },
     "template_id" : {
-      "value" : "Körpergröße"
+      "value" : "Reisehistorie"
     },
     "rm_version" : "1.0.4"
+  },
+  "feeder_audit" : {
+    "_type" : "FEEDER_AUDIT",
+    "originating_system_item_ids" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "Observation/13/_history/1",
+      "type" : "fhir_logical_id"
+    } ],
+    "originating_system_audit" : {
+      "_type" : "FEEDER_AUDIT_DETAILS",
+      "system_id" : "FHIR-bridge"
+    }
   },
   "language" : {
     "terminology_id" : {
       "value" : "ISO_639-1"
     },
-    "code_string" : "de"
+    "code_string" : "en"
   },
   "territory" : {
     "terminology_id" : {
@@ -42,7 +54,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2020-10-02T00:00:00+02:00"
+      "value" : "2020-11-09T12:57:06+01:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -56,10 +68,10 @@
     }
   },
   "content" : [ {
-    "_type" : "OBSERVATION",
+    "_type" : "EVALUATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Größe/Länge"
+      "value" : "Keine Reisehistorie"
     },
     "language" : {
       "terminology_id" : {
@@ -77,50 +89,49 @@
       "_type" : "PARTY_SELF"
     },
     "data" : {
+      "_type" : "ITEM_TREE",
       "name" : {
         "_type" : "DV_TEXT",
-        "value" : "History"
+        "value" : "Tree"
       },
-      "origin" : {
-        "_type" : "DV_DATE_TIME",
-        "value" : "2020-10-02T00:00:00+02:00"
-      },
-      "events" : [ {
-        "_type" : "POINT_EVENT",
+      "items" : [ {
+        "_type" : "ELEMENT",
         "name" : {
           "_type" : "DV_TEXT",
-          "value" : "Beliebiges Ereignis"
+          "value" : "Aussage über den Ausschluss"
         },
-        "time" : {
-          "_type" : "DV_DATE_TIME",
-          "value" : "2020-10-02T00:00:00+02:00"
-        },
-        "data" : {
-          "_type" : "ITEM_TREE",
-          "name" : {
-            "_type" : "DV_TEXT",
-            "value" : "Simple"
-          },
-          "items" : [ {
-            "_type" : "ELEMENT",
-            "name" : {
-              "_type" : "DV_TEXT",
-              "value" : "Größe/Länge"
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "No (qualifier value)",
+          "defining_code" : {
+            "terminology_id" : {
+              "value" : "SNOMED Clinical Terms"
             },
-            "value" : {
-              "_type" : "DV_QUANTITY",
-              "units" : "cm",
-              "magnitude" : 167.0
-            },
-            "archetype_node_id" : "at0004"
-          } ],
-          "archetype_node_id" : "at0003"
+            "code_string" : "373067005"
+          }
         },
         "archetype_node_id" : "at0002"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Problem/Diagnose"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "History of Travel",
+          "defining_code" : {
+            "terminology_id" : {
+              "value" : "LOINC"
+            },
+            "code_string" : "8691-8"
+          }
+        },
+        "archetype_node_id" : "at0003"
       } ],
       "archetype_node_id" : "at0001"
     },
-    "archetype_node_id" : "openEHR-EHR-OBSERVATION.height.v2"
+    "archetype_node_id" : "openEHR-EHR-EVALUATION.exclusion_specific.v1"
   } ],
   "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
 }

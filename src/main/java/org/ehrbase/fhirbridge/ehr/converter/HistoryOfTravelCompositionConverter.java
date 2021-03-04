@@ -4,6 +4,7 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
@@ -42,9 +43,9 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
 
     private static String LOINC_DATE_TRAVEL_STARTED = "82752-7";
     private static String LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION = "91560-3";
-    private static String LOINC_CITY_OF_TRAVEL= "94653-3";
-    private static String LOINC_STATE_OF_TRAVEL="82754-3";
-    private static String LOINC_COUNTRY_OF_TRAVEL="94651-7";
+    private static String LOINC_CITY_OF_TRAVEL = "94653-3";
+    private static String LOINC_STATE_OF_TRAVEL = "82754-3";
+    private static String LOINC_COUNTRY_OF_TRAVEL = "94651-7";
 
     static {
 
@@ -75,22 +76,18 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
 
         String code = getSnomedCodeObservation(observation);
         // check for general travel state
-        try {
-            if (code.equals(ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE.getCode())) {
-                composition = map_yes(observation, ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE);
-            } else if (code.equals(AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE.getCode())) {
-                composition = map_no(observation, AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE);
-            } else if (code.equals(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE.getCode())) {
-                composition = map_unknown(observation, AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
-            } else {
-                throw new UnprocessableEntityException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new UnprocessableEntityException(e.getMessage());
+
+        if (code.equals(ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE.getCode())) {
+            composition = map_yes(observation, ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE);
+        } else if (code.equals(AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE.getCode())) {
+            composition = map_no(observation, AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE);
+        } else if (code.equals(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE.getCode())) {
+            composition = map_unknown(observation, AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
+        } else {
+            throw new UnprocessableEntityException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
         }
 
-        // BSa: What about system (loinc, snomed)
+
         // BSa: What about nullFlavour?
         // BSa: What about identifier?
         return (composition);
@@ -99,6 +96,7 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
 
     private ReisehistorieComposition createCompositionAndSetDefaults(Observation observation) {
         ReisehistorieComposition composition = new ReisehistorieComposition();
+
         // ======================================================================================
         // Required fields by API
         composition.setLanguage(org.ehrbase.client.classgenerator.shareddefinition.Language.EN); // FIXME: we need to grab the language from the template
@@ -141,7 +139,7 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
 
             Coding coding = observationComponent.getCode().getCoding().get(0);
             String system = coding.getSystem();
-            String code =   coding.getCode();
+            String code = coding.getCode();
 
             checkForSnomedSystem(system);
 
@@ -194,16 +192,16 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
     }
 
     private void checkForLoincSystem(String systemCode) {
-        if(!LOINC_SYSTEM.equals(systemCode)) {
-            throw new UnprocessableEntityException("The system is not correct. "+
-                    "It should be '"+LOINC_SYSTEM+"', but it was '"+systemCode+"'.");
+        if (!LOINC_SYSTEM.equals(systemCode)) {
+            throw new UnprocessableEntityException("The system is not correct. " +
+                    "It should be '" + LOINC_SYSTEM + "', but it was '" + systemCode + "'.");
         }
     }
 
     private void checkForSnomedSystem(String systemCode) {
-        if(!SNOMED_SYSTEM.equals(systemCode)) {
-            throw new UnprocessableEntityException("The system is not correct. "+
-                    "It should be '"+SNOMED_SYSTEM+"', but it was '"+systemCode+"'.");
+        if (!SNOMED_SYSTEM.equals(systemCode)) {
+            throw new UnprocessableEntityException("The system is not correct. " +
+                    "It should be '" + SNOMED_SYSTEM + "', but it was '" + systemCode + "'.");
         }
     }
 
@@ -234,6 +232,8 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
 
         evaluation.setProblemDiagnoseDefiningCode(ProblemDiagnoseDefiningCode.HISTORY_OF_TRAVEL);
         evaluation.setAussageUeberDenAusschlussDefiningCode(reiseCode);
+        evaluation.setLanguage(Language.DE);
+        evaluation.setSubject(new PartySelf());
 
         composition.setKeineReisehistorie(evaluation);
 
@@ -252,6 +252,8 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
 
         evaluation.setFehlendeInformationDefiningCode(ProblemDiagnoseDefiningCode.HISTORY_OF_TRAVEL);
         evaluation.setAussageUeberDieFehlendeInformationDefiningCode(reiseCode);
+        evaluation.setLanguage(Language.DE);
+        evaluation.setSubject(new PartySelf());
 
         composition.setUnbekannteReisehistorie(evaluation);
 

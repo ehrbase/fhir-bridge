@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.KorpergrosseComposition;
@@ -38,10 +39,10 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         setDefault(grosseLangeObservation);
         setMappingContent(observation, grosseLangeObservation);
 
-        return createComposition(getDateTime(observation), grosseLangeObservation);
+        return createComposition(getDateTime(observation), grosseLangeObservation, observation);
     }
 
-    private KorpergrosseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GrosseLangeObservation grosseLangeObservation) {
+    private KorpergrosseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GrosseLangeObservation grosseLangeObservation, Observation observation) {
         KorpergrosseComposition composition = new KorpergrosseComposition();
         composition.setGrosseLange(grosseLangeObservation);
         // Required fields by API
@@ -52,6 +53,10 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         composition.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
         composition.setStartTimeValue(fhirEffectiveDateTime);
         composition.setComposer(new PartySelf());
+
+        // set feeder audit
+        //FeederAudit fa = CommonData.constructFeederAudit(observation);
+        //composition.setFeederAudit(fa);
 
         return (composition);
     }
