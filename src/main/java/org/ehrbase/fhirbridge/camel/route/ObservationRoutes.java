@@ -29,7 +29,8 @@ import org.hl7.fhir.r4.model.Observation;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of {@link RouteBuilder} that provides route definitions for transactions linked to {@link Observation} resource.
+ * Implementation of {@link RouteBuilder} that provides route definitions for transactions
+ * linked to {@link Observation} resource.
  *
  * @since 1.0.0
  */

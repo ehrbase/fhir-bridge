@@ -26,7 +26,8 @@ import org.hl7.fhir.r4.model.Patient;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of {@link RouteBuilder} that provides route definitions for transactions linked to {@link Patient} resource.
+ * Implementation of {@link RouteBuilder} that provides route definitions for transactions
+ * linked to {@link Patient} resource.
  *
  * @since 1.0.0
  */
