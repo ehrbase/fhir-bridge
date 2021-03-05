@@ -1,6 +1,6 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient" />
-  <version value="0.9" />
+  <version value="1.0" />
   <name value="Patient" />
   <title value="Patient" />
   <status value="active" />
@@ -2477,13 +2477,6 @@
         <map value="n/a" />
       </mapping>
     </element>
-<!--    <element id="Patient.meta">-->
-<!--      <path value="Patient.meta" />-->
-<!--      <base>-->
-<!--        <path value="Patient.meta" />-->
-<!--      </base>-->
-<!--      <mustSupport value="true" />-->
-<!--    </element>-->
   </snapshot>
   <differential>
     <element id="Patient.extension">
@@ -2513,14 +2506,6 @@
         <code value="Extension" />
         <profile value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age" />
       </type>
-      <mustSupport value="true" />
-    </element>
-    <element id="Patient.meta">
-      <path value="Patient.meta" />
-      <mustSupport value="true" />
-    </element>
-    <element id="Patient.meta.profile">
-      <path value="Patient.meta.profile" />
       <mustSupport value="true" />
     </element>
     <element id="Patient.birthDate">
