@@ -332,7 +332,7 @@
 							"response": []
 						},
 						{
-							"name": "Find Diagnostic Report",
+							"name": "Find DiagnosticReport: read",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -348,13 +348,97 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/DiagnosticReport",
+									"raw": "{{baseUrl}}/fhir/DiagnosticReport/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"DiagnosticReport",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find DiagnosticReport: vread",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/DiagnosticReport/:id/_history/:vid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"DiagnosticReport",
+										":id",
+										"_history",
+										":vid"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										},
+										{
+											"key": "vid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find DiagnosticReport: search",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/DiagnosticReport?subject.identifier={{patientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"fhir",
 										"DiagnosticReport"
+									],
+									"query": [
+										{
+											"key": "subject.identifier",
+											"value": "{{patientId}}"
+										}
 									]
 								}
 							},

@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
-import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
@@ -13,7 +12,7 @@ import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DiagnosticReportRoutes extends RouteBuilder {
+public class DiagnosticReportRoutes extends AbstractRouteBuilder {
 
     private final IFhirResourceDao<DiagnosticReport> diagnosticReportDao;
 
@@ -49,12 +48,24 @@ public class DiagnosticReportRoutes extends RouteBuilder {
         onException(Exception.class)
             .process(defaultExceptionHandler);
 
-        from("fhir-create-diagnostic-report:fhirConsumer?fhirContext=#fhirContext")
+        from("diagnostic-report-create:fhirConsumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
             .process(requestValidator)
             .to("direct:process-diagnostic-report");
+
+        // 'Find Diagnostic Report' route definition
+
+        from("diagnostic-report-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
+            .choice()
+                .when(isSearchOperation())
+                    .to("bean:diagnosticReportDao?method=search(${body}, ${headers.FhirRequestDetails})")
+                    .process("bundleProviderResponseProcessor")
+                .otherwise()
+                    .to("bean:diagnosticReportDao?method=read(${body}, ${headers.FhirRequestDetails})");
+
+        // Internal routes definition
 
         from("direct:process-diagnostic-report")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(diagnosticReportDao, "create"))
@@ -62,8 +73,7 @@ public class DiagnosticReportRoutes extends RouteBuilder {
             .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .process(resourceResponseProcessor);
+
         // @formatter:on
     }
-
-
 }

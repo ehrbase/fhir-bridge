@@ -23,7 +23,8 @@ import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 import java.util.Optional;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy} for 'Create Patient' transaction.
+ * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
+ * for 'Create Patient' transaction.
  *
  * @since 1.0.0
  */

@@ -35,8 +35,8 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateObservationProvider extends AbstractPlainProvider {
 
     @Create
-    public MethodOutcome create(@ResourceParam Observation observation, RequestDetails requestDetails,
-                                HttpServletRequest request, HttpServletResponse response) {
+    public MethodOutcome createObservation(@ResourceParam Observation observation, RequestDetails requestDetails,
+                                           HttpServletRequest request, HttpServletResponse response) {
         return requestAction(observation, null, request, response, requestDetails);
     }
 }
