@@ -138,8 +138,9 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         CITY;
     }
 
-    private TravelInformation getTravelInformationType(String code)
-    {
+    private TravelInformation getTravelInformationType(Coding coding)  {
+
+        String code = coding.getCode();
         if (code.equals(LOINC_DATE_TRAVEL_STARTED.getCode())) {
             return TravelInformation.START;
         } else if (code.equals(LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION.getCode())) {
@@ -151,7 +152,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         } else if (code.equals(LOINC_COUNTRY_OF_TRAVEL.getCode())) {
             return TravelInformation.COUNTRY;
         } else {
-            throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + system + ":"+code+"' instead");
+            throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":"+code+"' instead");
         }
     }
 
@@ -163,12 +164,9 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
                 : observation.getComponent()) {
 
             Coding coding = observationComponent.getCode().getCoding().get(0);
-            String system = coding.getSystem();
-            String code = coding.getCode();
+            checkForLoincSystem(coding.getSystem());
 
-            checkForLoincSystem(system);
-
-            switch(getTravelInformationType(code)) {
+            switch(getTravelInformationType(coding)) {
                 case START:
                     travel.setEinreisedatumValue(getDate(observationComponent));
                     break;
@@ -184,6 +182,8 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
                 case COUNTRY:
                     travel.setLandDefiningCode(getLand(observationComponent));
                     break;
+                default:
+                    throw new UnprocessableEntityException("Can't process travel information. Did you forget to implement a case?");
             }
 
         }
