@@ -66,28 +66,28 @@
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "hasMember": [
           {
-            "reference": "Observation/22732de8-3eb6-477e-81d6-28fb906b3e4e"
+            "reference": "urn:uuid:22732de8-3eb6-477e-81d6-28fb906b3e4e"
           },
           {
-            "reference": "Observation/70ca7d00-0d8b-42bb-9508-a8fc76e5c7ad"
+            "reference": "urn:uuid:70ca7d00-0d8b-42bb-9508-a8fc76e5c7ad"
           },
           {
-            "reference": "Observation/7e746710-fad4-474b-8a28-422863f3a2b8"
+            "reference": "urn:uuid:7e746710-fad4-474b-8a28-422863f3a2b8"
           },
           {
-            "reference": "Observation/f35f17da-f642-402d-8cf4-ff70607713a7"
+            "reference": "urn:uuid:f35f17da-f642-402d-8cf4-ff70607713a7"
           },
           {
-            "reference": "Observation/7297b0fd-3be7-4b88-a63a-6ba651152c41"
+            "reference": "urn:uuid:7297b0fd-3be7-4b88-a63a-6ba651152c41"
           },
           {
-            "reference": "Observation/da1fa3fe-a8a3-44b6-94c6-3497269436ec"
+            "reference": "urn:uuid:da1fa3fe-a8a3-44b6-94c6-3497269436ec"
           },
           {
-            "reference": "Observation/b5adbc53-a1ee-4a57-9ede-fae4b4462bfb"
+            "reference": "urn:uuid:b5adbc53-a1ee-4a57-9ede-fae4b4462bfb"
           },
           {
-            "reference": "Observation/b08b1687-2ea1-4b14-9473-dd04389169ec"
+            "reference": "urn:uuid:b08b1687-2ea1-4b14-9473-dd04389169ec"
           }
         ]
       },
@@ -298,7 +298,7 @@
         },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "valueQuantity": {
-          "value": "0.5",
+          "value": 0.5,
           "unit": "[IU]/mL",
           "system": "http://unitsofmeasure.org",
           "code": "[IU]/mL"
@@ -584,7 +584,7 @@
         },
         "effectiveDateTime": "2020-10-19T08:43:33+02:00",
         "valueQuantity": {
-          "value": "219.5",
+          "value": 219.5,
           "unit": "[arb'U]/mL",
           "system": "http://unitsofmeasure.org",
           "code": "[arb'U]/mL"

@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 
 public class ContextConverter {
 
-    public Composition mapStatus(Composition composition, DomainResource domainResource) {
+    public static Composition mapStatus(Composition composition, DomainResource domainResource) {
         try {
             return mapStatusCode(composition, domainResource);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
@@ -18,7 +18,7 @@ public class ContextConverter {
         return composition;
     }
 
-    private Composition mapStatusCode(Composition composition, DomainResource resource) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private static Composition mapStatusCode(Composition composition, DomainResource resource) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         try {
             Method setStatusDefiningCode = composition.getClass().getDeclaredMethod("setStatusDefiningCode", StatusDefiningCode.class);
             String status = getStatus(resource);
@@ -46,7 +46,7 @@ public class ContextConverter {
     }
 
 
-    private String getStatus(DomainResource resource) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private static String getStatus(DomainResource resource) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         try {
             Method getStatusElement = resource.getClass().getDeclaredMethod("getStatusElement");
             Object statusElement = getStatusElement.invoke(resource);

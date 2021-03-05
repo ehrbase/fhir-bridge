@@ -28,10 +28,10 @@ public class BundleRoutes extends RouteBuilder {
                 .choice()
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
                 .to("direct:process-blood-gas-panel-bundle")
-                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
-                .to("direct:process-diagnostic-report-lab-bundle")
                 .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
                 .to("direct:process-anti-body-panel-bundle")
+                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
+                .to("direct:process-diagnostic-report-lab-bundle")
                 .otherwise()
                 .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
                         "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri() + ", " + Profile.ANTI_BODY_PANEL));

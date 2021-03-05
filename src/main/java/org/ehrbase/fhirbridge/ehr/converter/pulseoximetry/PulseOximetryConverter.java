@@ -26,7 +26,7 @@ public class PulseOximetryConverter implements CompositionConverter<Pulsoxymetri
     public PulsoxymetrieComposition toComposition(Observation observation) throws CompositionConversionException {
         PulsoxymetrieComposition composition = new PulsoxymetrieComposition();
         new PulseOximetryCodeChecker().checkIfPulseOximetry(observation);
-        new ContextConverter().mapStatus(composition, observation);
+        ContextConverter.mapStatus(composition, observation);
         mapKategorie(composition, observation);
         mapPulsoxymetrieObservation(composition, observation);
         setMandatoryFields(composition, observation);

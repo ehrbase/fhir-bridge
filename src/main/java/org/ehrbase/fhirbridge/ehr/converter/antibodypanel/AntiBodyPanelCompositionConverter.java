@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.antibodypanel;
 
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
@@ -7,11 +8,12 @@ import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CommonData;
+import org.ehrbase.fhirbridge.ehr.converter.ContextConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.GECCOSerologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.GeccoSerologischerBefundKategorieLoincElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.KategorieLoincDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
@@ -27,30 +29,15 @@ public class AntiBodyPanelCompositionConverter implements CompositionConverter<G
 
     @Override
     public GECCOSerologischerBefundComposition toComposition(Observation observation) throws CompositionConversionException {
+        FeederAudit feederAudit = CommonData.constructFeederAudit(observation);
         GECCOSerologischerBefundComposition geccoSerologischerBefundComposition = new GECCOSerologischerBefundComposition();
+        geccoSerologischerBefundComposition.setFeederAudit(feederAudit);
         setMandatoryFields(geccoSerologischerBefundComposition);
-        geccoSerologischerBefundComposition.setStatusDefiningCode(mapStatus(observation));
+        ContextConverter.mapStatus(geccoSerologischerBefundComposition, observation);
         mapKategorie(observation, geccoSerologischerBefundComposition);
         geccoSerologischerBefundComposition.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         geccoSerologischerBefundComposition.setBefund(new LabratoryTestResultConverter().convert(new AntiBodyPanel(observation)));
         return geccoSerologischerBefundComposition;
-    }
-
-
-    private StatusDefiningCode mapStatus(Observation fhirObservation) {
-        switch (fhirObservation.getStatusElement().getCode()) {
-            case "registered":
-                return StatusDefiningCode.REGISTRIERT;
-            case "final":
-                return StatusDefiningCode.FINAL;
-            case "amended":
-                return StatusDefiningCode.GEAENDERT;
-            case "preliminary":
-                return StatusDefiningCode.VORLAEUFIG;
-            default:
-                throw new IllegalStateException("Invalid Code " + fhirObservation.getStatusElement().getCode() + "" +
-                        " for mapping of 'status', valid codes are: registered, final, amended and preliminary");
-        }
     }
 
     private void mapKategorie(Observation fhirObservation, GECCOSerologischerBefundComposition geccoSerologischerBefundComposition) {
@@ -96,7 +83,7 @@ public class AntiBodyPanelCompositionConverter implements CompositionConverter<G
 
 
     private boolean isLoincCode(Coding code) {
-        return AntiBodyPanelCode.LABRATORY_STUDIES_CODE.getCode().equals(code.getCode()) && AntiBodyPanelCode.LABRATORY_STUDIES_CODE.getSystem().equals(code.getSystem());
+        return AntiBodyPanelCode.LABORATORY_STUDIES.getCode().equals(code.getCode()) && AntiBodyPanelCode.LABORATORY_STUDIES.getSystem().equals(code.getSystem());
     }
 
     private boolean isLabratory(String code) {
