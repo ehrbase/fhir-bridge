@@ -26,7 +26,11 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     CreateProcedure("procedure-create", "Create Procedure"),
 
-    FindProcedure("procedure-find", "Find Procedure");
+    FindProcedure("procedure-find", "Find Procedure"),
+
+    CreateQuestionnaireResponse("questionnaire-response-create", "Create Questionnaire Response"),
+
+    FindQuestionnaireResponse("questionnaire-response-find", "Find Questionnaire Response");
 
     private final EventType value;
 

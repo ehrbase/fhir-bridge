@@ -171,6 +171,14 @@ public class FhirJpaConfiguration extends BaseR4Config {
         return resourceDao;
     }
 
+    @Bean
+    public IFhirResourceDao<QuestionnaireResponse> questionnaireResponseDao() {
+        JpaResourceDao<QuestionnaireResponse> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(QuestionnaireResponse.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
     @Bean(name = "myConditionDaoR4")
     public IFhirResourceDao<Condition> conditionReportDao() {
         JpaResourceDao<Condition> conditionReportDao = new JpaResourceDao<>();
@@ -193,14 +201,6 @@ public class FhirJpaConfiguration extends BaseR4Config {
         auditEventDao.setResourceType(AuditEvent.class);
         auditEventDao.setContext(fhirContext());
         return auditEventDao;
-    }
-
-    @Bean(name = "myQuestionnaireResponseDaoR4")
-    public IFhirResourceDao<QuestionnaireResponse> questionnaireResponseDao() {
-        JpaResourceDao<QuestionnaireResponse> questionnaireResponseDao = new JpaResourceDao<>();
-        questionnaireResponseDao.setResourceType(QuestionnaireResponse.class);
-        questionnaireResponseDao.setContext(fhirContext());
-        return questionnaireResponseDao;
     }
 
     @Bean(name = "myCodeSystemDaoR4")

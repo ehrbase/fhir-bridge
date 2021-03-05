@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateProcedureProvider extends AbstractPlainProvider {
 
     @Create
+    @SuppressWarnings("unused")
     public MethodOutcome createProcedure(@ResourceParam Procedure procedure, RequestDetails requestDetails,
                                          HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         return requestAction(procedure, null, httpServletRequest, httpServletResponse, requestDetails);

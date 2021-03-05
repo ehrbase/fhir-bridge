@@ -68,6 +68,8 @@ public class ObservationRoutes extends AbstractRouteBuilder {
         onException(Exception.class)
                 .process(defaultExceptionHandler);
 
+        // 'Create Observation' route definition
+
         from("observation-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
@@ -75,14 +77,8 @@ public class ObservationRoutes extends AbstractRouteBuilder {
             .process(requestValidator)
             .to("direct:process-observation");
 
-        from("direct:process-observation")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(observationDao, "create(${body}, ${headers.FhirRequestDetails})"))
-            .process(ehrIdLookupProcessor)
-            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
-            .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
-            .process(resourceResponseProcessor);
+        // 'Find Observation' route definition
 
-        // Find Observation
         from("observation-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())
@@ -90,6 +86,15 @@ public class ObservationRoutes extends AbstractRouteBuilder {
                     .process("bundleProviderResponseProcessor")
                 .otherwise()
                     .to("bean:observationDao?method=read(${body}, ${headers.FhirRequestDetails})");
+
+        // Internal routes definition
+
+        from("direct:process-observation")
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(observationDao, "create(${body}, ${headers.FhirRequestDetails})"))
+            .process(ehrIdLookupProcessor)
+            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
+            .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
+            .process(resourceResponseProcessor);
 
         // @formatter:on
     }

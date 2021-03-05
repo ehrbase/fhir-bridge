@@ -16,19 +16,19 @@
 
 package org.ehrbase.fhirbridge.camel.component.fhir.questionnaireresponse;
 
-import org.ehrbase.fhirbridge.fhir.questionnaireresponse.CreateQuestionnaireResponseTransaction;
-import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
+import org.ehrbase.fhirbridge.fhir.questionnaireresponse.FindQuestionnaireResponseTransaction;
+import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
- * Camel {@link org.apache.camel.Component Component} that handles 'Create Questionnaire-Response' transaction.
+ * Camel {@link org.apache.camel.Component Component} that handles 'Find Questionnaire-Response' transaction.
  *
  * @since 1.0.0
  */
 @SuppressWarnings({"java:S110"})
-public class CreateQuestionnaireResponseComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
+public class FindQuestionnaireResponseComponent extends CustomFhirComponent<FhirQueryAuditDataset> {
 
-    public CreateQuestionnaireResponseComponent() {
-        super(new CreateQuestionnaireResponseTransaction());
+    public FindQuestionnaireResponseComponent() {
+        super(new FindQuestionnaireResponseTransaction());
     }
 }
