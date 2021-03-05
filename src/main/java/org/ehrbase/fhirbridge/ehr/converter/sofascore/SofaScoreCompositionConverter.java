@@ -43,8 +43,7 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
         // set feeder audit
         FeederAudit fa = CommonData.constructFeederAudit(observation);
         result.setFeederAudit(fa);
-
-        // FIXME: this will throw an error if we get something different than datetime (period, timing, instant are allowed!)
+        
         DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
 
         // this throws UnprocessableEntityException if there is a problem with the mapping
