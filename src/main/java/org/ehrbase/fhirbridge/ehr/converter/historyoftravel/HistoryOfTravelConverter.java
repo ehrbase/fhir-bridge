@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.historyoftravel;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
@@ -77,11 +76,11 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         // check for general travel state
 
         if (code.equals(ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE.getCode())) {
-            composition = map_yes(observation, ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE);
+            composition = mapYes(observation, ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE);
         } else if (code.equals(AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE.getCode())) {
-            composition = map_no(observation, AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE);
+            composition = mapNo(observation, AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE);
         } else if (code.equals(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE.getCode())) {
-            composition = map_unknown(observation, AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
+            composition = mapUnknown(observation, AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
         } else {
             throw new UnprocessableEntityException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
         }
@@ -98,7 +97,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
 
         // ======================================================================================
         // Required fields by API
-        composition.setLanguage(org.ehrbase.client.classgenerator.shareddefinition.Language.EN); // FIXME: we need to grab the language from the template
+        composition.setLanguage(org.ehrbase.client.classgenerator.shareddefinition.Language.EN);
         composition.setLocation("test");
         composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         composition.setTerritory(org.ehrbase.client.classgenerator.shareddefinition.Territory.DE);
@@ -113,7 +112,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         return composition;
     }
 
-    private ReisehistorieComposition map_yes(Observation observation, ReiseAngetretenDefiningCode reiseCode) {
+    private ReisehistorieComposition mapYes(Observation observation, ReiseAngetretenDefiningCode reiseCode) {
 
         ReisehistorieComposition composition = createCompositionAndSetDefaults(observation);
         ReisehistorieAdminEntry adminentry = new ReisehistorieAdminEntry();
@@ -143,17 +142,21 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         String code = coding.getCode();
         if (code.equals(LOINC_DATE_TRAVEL_STARTED.getCode())) {
             return TravelInformation.START;
-        } else if (code.equals(LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION.getCode())) {
-            return TravelInformation.END;
-        } else if (code.equals(LOINC_CITY_OF_TRAVEL.getCode())) {
-            return TravelInformation.CITY;
-        } else if (code.equals(LOINC_STATE_OF_TRAVEL.getCode())) {
-            return TravelInformation.REGION;
-        } else if (code.equals(LOINC_COUNTRY_OF_TRAVEL.getCode())) {
-            return TravelInformation.COUNTRY;
-        } else {
-            throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":"+code+"' instead");
         }
+        if (code.equals(LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION.getCode())) {
+            return TravelInformation.END;
+        }
+        if (code.equals(LOINC_CITY_OF_TRAVEL.getCode())) {
+            return TravelInformation.CITY;
+        }
+        if (code.equals(LOINC_STATE_OF_TRAVEL.getCode())) {
+            return TravelInformation.REGION;
+        }
+        if (code.equals(LOINC_COUNTRY_OF_TRAVEL.getCode())) {
+            return TravelInformation.COUNTRY;
+        }
+
+        throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":"+code+"' instead");
     }
 
     private ReisehistorieAdminEntry mapInternalEvents(ReisehistorieAdminEntry adminentry, Observation observation) {
@@ -195,8 +198,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
     private TemporalAccessor getDate(Observation.ObservationComponentComponent observationComponent) {
 
         Coding coding = observationComponent.getCode().getCoding().get(0);
-        TemporalAccessor date = observationComponent.getValueDateTimeType().getValueAsCalendar().toZonedDateTime();
-        return date;
+        return observationComponent.getValueDateTimeType().getValueAsCalendar().toZonedDateTime();
     }
 
     private String getCity(Observation.ObservationComponentComponent observationComponent) {
@@ -235,10 +237,6 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         return code.getCode();
     }
 
-    private String getCodeOfConcept(Observation.ObservationComponentComponent codingObject) {
-        return codingObject.getCode().getCoding().get(0).getCode();
-    }
-
     private Observation.ObservationComponentComponent getCodingObject(Observation observation, int i) {
         return observation.getComponent().get(i);
     }
@@ -246,7 +244,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
 
     //###################################################################################
 
-    private ReisehistorieComposition map_no(Observation observation, AussageUeberDenAusschlussDefiningCode reiseCode) {
+    private ReisehistorieComposition mapNo(Observation observation, AussageUeberDenAusschlussDefiningCode reiseCode) {
 
         ReisehistorieComposition composition = createCompositionAndSetDefaults(observation);
         KeineReisehistorieEvaluation evaluation = new KeineReisehistorieEvaluation();
@@ -267,7 +265,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
     }
     //###################################################################################
 
-    private ReisehistorieComposition map_unknown(Observation observation, AussageUeberDieFehlendeInformationDefiningCode reiseCode) {
+    private ReisehistorieComposition mapUnknown(Observation observation, AussageUeberDieFehlendeInformationDefiningCode reiseCode) {
 
         ReisehistorieComposition composition = createCompositionAndSetDefaults(observation);
         UnbekannteReisehistorieEvaluation evaluation = new UnbekannteReisehistorieEvaluation();

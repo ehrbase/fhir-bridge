@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.KorpergrosseComposition;
