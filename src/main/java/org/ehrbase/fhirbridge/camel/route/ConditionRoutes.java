@@ -7,7 +7,7 @@ import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
-import org.ehrbase.fhirbridge.camel.processor.IBundleProviderProcessor;
+import org.ehrbase.fhirbridge.camel.processor.BundleProviderResponseProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
@@ -65,7 +65,7 @@ public class ConditionRoutes extends RouteBuilder {
                 SearchParameterMap searchParams = exchange.getIn().getBody(SearchParameterMap.class);
                 exchange.getMessage().setBody(conditionDao.search(searchParams));
             })
-            .process(new IBundleProviderProcessor());
+            .process(new BundleProviderResponseProcessor());
         // @formatter:on
     }
 }

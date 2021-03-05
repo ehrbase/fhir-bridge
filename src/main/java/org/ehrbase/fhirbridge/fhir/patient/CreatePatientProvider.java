@@ -28,15 +28,15 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Implementation of {@link org.openehealth.ipf.commons.ihe.fhir.FhirProvider FhirProvider} that provides REST support
- * for 'Create Observation' transaction.
+ * for 'Create Patient' transaction.
  *
  * @since 1.0.0
  */
 public class CreatePatientProvider extends AbstractPlainProvider {
 
     @Create
-    public MethodOutcome create(@ResourceParam Patient patient, RequestDetails requestDetails,
-                                HttpServletRequest request, HttpServletResponse response) {
+    public MethodOutcome createPatient(@ResourceParam Patient patient, RequestDetails requestDetails,
+                                       HttpServletRequest request, HttpServletResponse response) {
         return requestAction(patient, null, request, response, requestDetails);
     }
 }

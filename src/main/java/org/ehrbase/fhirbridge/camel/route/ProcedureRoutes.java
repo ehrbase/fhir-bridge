@@ -1,23 +1,40 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.mapper.ProcedureRowMapper;
-import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
 import org.hl7.fhir.r4.model.Procedure;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implementation of {@link RouteBuilder} that provides route definitions for transactions linked to {@link Procedure} resource.
+ *
+ * @since 1.0.0
+ */
 @Component
-public class ProcedureRoutes extends RouteBuilder {
+public class ProcedureRoutes extends AbstractRouteBuilder {
 
     private final IFhirResourceDao<Procedure> procedureDao;
 
@@ -40,7 +57,7 @@ public class ProcedureRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("fhir-create-procedure:fhirConsumer?fhirContext=#fhirContext")
+        from("procedure-create:fhirConsumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
@@ -55,16 +72,15 @@ public class ProcedureRoutes extends RouteBuilder {
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#procedureCompositionConverter")
             .process(new ResourceResponseProcessor());
 
-        from("fhir-find-procedure:fhirConsumer?fhirContext=#fhirContext")
-            .onException(Exception.class)
-                .process(defaultExceptionHandler)
-            .end()
-            .setHeader(AqlConstants.AQL_QUERY, () -> Query.buildNativeQuery(
-                "SELECT c " +
-                 "FROM EHR e CONTAINS COMPOSITION c " +
-                "WHERE c/archetype_details/template_id/value = 'Prozedur' " +
-                  "AND e/ehr_status/subject/external_ref/id/value = $subjectId", ProzedurComposition.class))
-            .to("ehr-aql:aqlProducer?rowMapper=#procedureRowMapper");
+        // Find Procedure
+        from("procedure-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
+            .choice()
+                .when(isSearchOperation())
+                    .to("bean:procedureDao?method=search(${body}, ${headers.FhirRequestDetails})")
+                    .process("bundleProviderResponseProcessor")
+                .otherwise()
+                    .to("bean:procedureDao?method=read(${body}, ${headers.FhirRequestDetails})");
+
         // @formatter:on
     }
 
@@ -72,10 +88,5 @@ public class ProcedureRoutes extends RouteBuilder {
     @Bean
     public ProcedureCompositionConverter procedureCompositionConverter() {
         return new ProcedureCompositionConverter();
-    }
-
-    @Bean
-    public ProcedureRowMapper procedureRowMapper() {
-        return new ProcedureRowMapper();
     }
 }
