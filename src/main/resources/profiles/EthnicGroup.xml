@@ -1,6 +1,6 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group" />
-  <version value="0.9" />
+  <version value="1.0" />
   <name value="EthnicGroup" />
   <title value="Ethnic Group" />
   <status value="active" />

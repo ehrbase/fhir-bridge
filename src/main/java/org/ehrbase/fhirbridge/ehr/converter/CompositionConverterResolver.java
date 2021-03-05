@@ -5,7 +5,6 @@ import org.ehrbase.fhirbridge.ehr.converter.clinicalFrailty.ClinicalFrailtyScale
 import org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.antibodypanel.AntiBodyPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.sofascore.SofaScoreCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.springframework.beans.factory.InitializingBean;
@@ -53,6 +52,8 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
         profiles.put(Profile.PROCEDURE, new ProcedureCompositionConverter());
         profiles.put(Profile.ANTI_BODY_PANEL, new AntiBodyPanelCompositionConverter());
+        profiles.put(Profile.OXYGEN_SATURATION, new PulseOximetryConverter());
+
 
         profiles.put(Profile.DIAGNOSE_LIVER_DISEASE, new GECCODiagnoseCompositionConverter());
         profiles.put(Profile.DIAGNOSE_LUNG_DISEASE, new GECCODiagnoseCompositionConverter());
@@ -68,5 +69,7 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.DIAGNOSE_ORGAN_RECIPIENT, new GECCODiagnoseCompositionConverter());
         profiles.put(Profile.DIAGNOSE_COMPLICATIONS_COVID_19, new GECCODiagnoseCompositionConverter());
         profiles.put(Profile.DIAGNOSE_DEPENDENCE_ON_VENTILATOR, new GECCODiagnoseCompositionConverter());
+        // Patient
+        profiles.put(Profile.PATIENT, new PatientCompositionConverter());
     }
 }
