@@ -13,6 +13,18 @@
     },
     "rm_version" : "1.0.4"
   },
+  "feeder_audit" : {
+    "_type" : "FEEDER_AUDIT",
+    "originating_system_item_ids" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "Observation/27/_history/1",
+      "type" : "fhir_logical_id"
+    } ],
+    "originating_system_audit" : {
+      "_type" : "FEEDER_AUDIT_DETAILS",
+      "system_id" : "FHIR-bridge"
+    }
+  },
   "language" : {
     "terminology_id" : {
       "value" : "ISO_639-1"

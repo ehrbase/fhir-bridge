@@ -95,7 +95,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     void createSmokingStatus() throws IOException {
         create("create-smoking-status.json");
     }
-    
+
     @Test
     void createWithDefaultProfile() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-observation-with-default-profile.json");

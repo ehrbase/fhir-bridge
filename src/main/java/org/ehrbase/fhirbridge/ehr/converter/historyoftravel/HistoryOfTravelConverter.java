@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.historyOfTravel;
+package org.ehrbase.fhirbridge.ehr.converter.historyoftravel;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
@@ -23,11 +23,11 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.Unbeka
 
 import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.LOINC;
 import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.SNOMED;
-import static org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL;
-import static org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
-import static org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL;
-import static org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION;
-import static org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
+import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL;
+import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
+import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL;
+import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION;
+import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
@@ -42,7 +42,6 @@ import java.util.Map;
 public class HistoryOfTravelConverter implements CompositionConverter<ReisehistorieComposition, Observation> {
     private static final Logger LOG = LoggerFactory.getLogger(HistoryOfTravelConverter.class);
 
-    private static final Map<String, String> loincTravelCodesMap = new HashMap<>();
     private static final Map<String, LandDefiningCode> countryMap = new HashMap<>();
     private static final Map<String, BundeslandRegionDefiningCode> regionMap = new HashMap<>();
 
@@ -73,7 +72,8 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
 
         ReisehistorieComposition composition;
 
-        String code = getSnomedCodeObservation(observation);
+        String code = "";
+        code = getSnomedCodeObservation(observation);
         // check for general travel state
 
         if (code.equals(ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE.getCode())) {
@@ -108,10 +108,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         composition.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
 
         composition.setComposer(new PartySelf());
-
-        // set feeder audit
-        FeederAudit fa = CommonData.constructFeederAudit(observation);
-        composition.setFeederAudit(fa);
+        composition.setFeederAudit(CommonData.constructFeederAudit(observation));
 
         return composition;
     }
@@ -132,6 +129,32 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         return composition;
     }
 
+    private enum TravelInformation {
+
+        START,
+        END,
+        COUNTRY,
+        REGION,
+        CITY;
+    }
+
+    private TravelInformation getTravelInformationType(String code)
+    {
+        if (code.equals(LOINC_DATE_TRAVEL_STARTED.getCode())) {
+            return TravelInformation.START;
+        } else if (code.equals(LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION.getCode())) {
+            return TravelInformation.END;
+        } else if (code.equals(LOINC_CITY_OF_TRAVEL.getCode())) {
+            return TravelInformation.CITY;
+        } else if (code.equals(LOINC_STATE_OF_TRAVEL.getCode())) {
+            return TravelInformation.REGION;
+        } else if (code.equals(LOINC_COUNTRY_OF_TRAVEL.getCode())) {
+            return TravelInformation.COUNTRY;
+        } else {
+            throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + system + ":"+code+"' instead");
+        }
+    }
+
     private ReisehistorieAdminEntry mapInternalEvents(ReisehistorieAdminEntry adminentry, Observation observation) {
 
         ReisehistorieBestimmtesReisezielCluster travel = new ReisehistorieBestimmtesReisezielCluster();
@@ -145,19 +168,24 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
 
             checkForLoincSystem(system);
 
-            if (code.equals(LOINC_DATE_TRAVEL_STARTED.getCode())) {
-                travel.setEinreisedatumValue(getDate(observationComponent));
-            } else if (code.equals(LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION.getCode())) {
-                travel.setAbfahrtsdatumValue(getDate(observationComponent));
-            } else if (code.equals(LOINC_CITY_OF_TRAVEL.getCode())) {
-                travel.setStadtValue(getCity(observationComponent));
-            } else if (code.equals(LOINC_STATE_OF_TRAVEL.getCode())) {
-                travel.setBundeslandRegionDefiningCode(getBundeslandRegion(observationComponent));
-            } else if (code.equals(LOINC_COUNTRY_OF_TRAVEL.getCode())) {
-                travel.setLandDefiningCode(getLand(observationComponent));
-            } else {
-                throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + system + ":"+code+"' instead");
+            switch(getTravelInformationType(code)) {
+                case START:
+                    travel.setEinreisedatumValue(getDate(observationComponent));
+                    break;
+                case END:
+                    travel.setAbfahrtsdatumValue(getDate(observationComponent));
+                    break;
+                case CITY:
+                    travel.setStadtValue(getCity(observationComponent));
+                    break;
+                case REGION:
+                    travel.setBundeslandRegionDefiningCode(getBundeslandRegion(observationComponent));
+                    break;
+                case COUNTRY:
+                    travel.setLandDefiningCode(getLand(observationComponent));
+                    break;
             }
+
         }
         adminentry.setBestimmtesReiseziel(List.of(travel));
 
@@ -172,20 +200,17 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
     }
 
     private String getCity(Observation.ObservationComponentComponent observationComponent) {
-        String city = observationComponent.getValueStringType().getValue();
-        return city;
+        return observationComponent.getValueStringType().getValue();
     }
 
     private LandDefiningCode getLand(Observation.ObservationComponentComponent observationComponent) {
         Coding coding = observationComponent.getValueCodeableConcept().getCoding().get(0);
-        LandDefiningCode country = countryMap.get(coding.getCode());
-        return country;
+        return countryMap.get(coding.getCode());
     }
 
     private BundeslandRegionDefiningCode getBundeslandRegion(Observation.ObservationComponentComponent observationComponent) {
         Coding coding = observationComponent.getValueCodeableConcept().getCoding().get(0);
-        BundeslandRegionDefiningCode region = regionMap.get(coding.getCode());
-        return region;
+        return regionMap.get(coding.getCode());
     }
 
     private void checkForLoincSystem(String systemCode) {
