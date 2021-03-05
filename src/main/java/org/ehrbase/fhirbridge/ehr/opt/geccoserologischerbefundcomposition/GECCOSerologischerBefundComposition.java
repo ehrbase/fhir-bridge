@@ -31,7 +31,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.defini
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-05T16:00:09.127123+01:00",
+    date = "2021-03-05T16:13:41.609899+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("GECCO_Serologischer Befund")

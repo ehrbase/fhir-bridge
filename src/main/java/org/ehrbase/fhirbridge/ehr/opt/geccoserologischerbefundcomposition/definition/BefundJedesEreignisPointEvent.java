@@ -14,8 +14,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-04T12:46:24.567440+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-05T16:13:41.715157+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @OptionFor("POINT_EVENT")
 public class BefundJedesEreignisPointEvent implements PointEventEntity, BefundJedesEreignisChoice {

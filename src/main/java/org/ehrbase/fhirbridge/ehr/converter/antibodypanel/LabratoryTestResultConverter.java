@@ -36,10 +36,7 @@ public class LabratoryTestResultConverter {
         ProAnalytCluster proAnalytCluster = new ProAnalytCluster();
         proAnalytCluster.setVirusnachweistestDefiningCode(convertVirusNachweisTest(immunoassay));
         proAnalytCluster.setNachweisDefiningCode(convertNachweisDefiningCode(immunoassay.getObservation().getValueCodeableConcept().getCoding()));
-
      //   proAnalytCluster.setQuantitativesErgebnisNullFlavourDefiningCode();
-
-
         proAnalytCluster.setErgebnisStatusValue(immunoassay.getObservation().getStatusElement().getCode()); //TODO check if status is validated by hapi
         labortestPanelCluster.setProAnalyt(proAnalytCluster);
         return labortestPanelCluster;
