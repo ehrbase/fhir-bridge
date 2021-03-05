@@ -4,6 +4,8 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Resource;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class AntiBodyPanel {
@@ -65,39 +67,7 @@ public class AntiBodyPanel {
         }
     }
 
-    public Observation getAntiBodyPanel() {
-        return antiBodyPanel.get();
-    }
-
-    public Optional<Observation> getaBPresence() {
-        return aBPresence;
-    }
-
-    public Optional<Observation> getaBUnitsVolume() {
-        return aBUnitsVolume;
-    }
-
-    public Optional<Observation> getIgAAbPresence() {
-        return igAAbPresence;
-    }
-
-    public Optional<Observation> getIgAAbUnitVolume() {
-        return igAAbUnitVolume;
-    }
-
-    public Optional<Observation> getIgMAbPresence() {
-        return igMAbPresence;
-    }
-
-    public Optional<Observation> getIgMAbUnitsVolume() {
-        return igMAbUnitsVolume;
-    }
-
-    public Optional<Observation> getIgGAbPresence() {
-        return igGAbPresence;
-    }
-
-    public Optional<Observation> getIgGAbUnitsVolume() {
-        return igGAbUnitsVolume;
+    public List<Optional<Observation>> getAllNonPanel() {
+        return List.of(aBPresence, aBUnitsVolume, igAAbPresence, igAAbUnitVolume, igMAbPresence, igMAbUnitsVolume, igGAbPresence, igGAbUnitsVolume);
     }
 }
