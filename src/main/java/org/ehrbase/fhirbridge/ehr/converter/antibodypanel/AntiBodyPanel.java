@@ -1,24 +1,24 @@
 package org.ehrbase.fhirbridge.ehr.converter.antibodypanel;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.VirusnachweistestDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Resource;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class AntiBodyPanel {
 
     private Optional<Observation> antiBodyPanel = Optional.empty();
-    private Optional<Observation> aBPresence = Optional.empty();
-    private Optional<Observation> aBUnitsVolume = Optional.empty();
-    private Optional<Observation> igAAbPresence = Optional.empty();
-    private Optional<Observation> igAAbUnitVolume = Optional.empty();
-    private Optional<Observation> igMAbPresence = Optional.empty();
-    private Optional<Observation> igMAbUnitsVolume = Optional.empty();
-    private Optional<Observation> igGAbPresence = Optional.empty();
-    private Optional<Observation> igGAbUnitsVolume = Optional.empty();
+    private Optional<Immunoassay> aBPresence = Optional.empty();
+    private Optional<Immunoassay> aBUnitsVolume = Optional.empty();
+    private Optional<Immunoassay> igAAbPresence = Optional.empty();
+    private Optional<Immunoassay> igAAbUnitVolume = Optional.empty();
+    private Optional<Immunoassay> igMAbPresence = Optional.empty();
+    private Optional<Immunoassay> igMAbUnitsVolume = Optional.empty();
+    private Optional<Immunoassay> igGAbPresence = Optional.empty();
+    private Optional<Immunoassay> igGAbUnitsVolume = Optional.empty();
 
     public AntiBodyPanel(Observation observation) {
         setObservations(observation);
@@ -35,28 +35,28 @@ public class AntiBodyPanel {
         try {
             String profileUrl = resource.getMeta().getProfile().get(0).getValue();
             if (AntiBodyProfileUrl.AB_PRESENCE.getUrl().equals(profileUrl)) {
-                this.aBPresence = Optional.of((Observation) resource);
+                this.aBPresence = Optional.of(new Immunoassay((Observation) resource, VirusnachweistestDefiningCode.SARS_COV2_COVID19_AB_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY));
 
             } else if (AntiBodyProfileUrl.AB_UNITS_VOLUME.getUrl().equals(profileUrl)) {
-                this.aBUnitsVolume = Optional.of((Observation) resource);
+                this.aBUnitsVolume = Optional.of(new Immunoassay((Observation) resource, VirusnachweistestDefiningCode.SARS_COV2_COVID19_AB_UNITS_VOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY));
 
             } else if (AntiBodyProfileUrl.IGA_AB_PRESENCE.getUrl().equals(profileUrl)) {
-                this.igAAbPresence = Optional.of((Observation) resource);
+                this.igAAbPresence = Optional.of(new Immunoassay((Observation) resource, VirusnachweistestDefiningCode.SARS_COV2_COVID19_IGA_AB_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY));
 
             } else if (AntiBodyProfileUrl.IGA_AB_UNITS_VOLUME.getUrl().equals(profileUrl)) {
-                this.igAAbUnitVolume = Optional.of((Observation) resource);
+                this.igAAbUnitVolume = Optional.of(new Immunoassay((Observation) resource, VirusnachweistestDefiningCode.SARS_COV2_COVID19_IGA_AB_UNITS_VOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY));
 
             } else if (AntiBodyProfileUrl.IGM_AB_PRESENCE.getUrl().equals(profileUrl)) {
-                this.igMAbPresence = Optional.of((Observation) resource);
+                this.igMAbPresence = Optional.of(new Immunoassay((Observation) resource, VirusnachweistestDefiningCode.SARS_COV2_COVID19_IGM_AB_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY));
 
             } else if (AntiBodyProfileUrl.IGM_AB_UNITS_VOLUME.getUrl().equals(profileUrl)) {
-                this.igMAbUnitsVolume = Optional.of((Observation) resource);
+                this.igMAbUnitsVolume = Optional.of(new Immunoassay((Observation) resource, VirusnachweistestDefiningCode.SARS_COV2_COVID19_IGM_AB_UNITS_VOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY));
 
             } else if (AntiBodyProfileUrl.IGG_AB_PRESENCE.getUrl().equals(profileUrl)) {
-                this.igGAbPresence = Optional.of((Observation) resource);
+                this.igGAbPresence = Optional.of(new Immunoassay((Observation) resource, VirusnachweistestDefiningCode.SARS_COV2_COVID19_IGG_AB_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY));
 
             } else if (AntiBodyProfileUrl.IGG_AB_UNITS_VOLUME.getUrl().equals(profileUrl)) {
-                this.igGAbUnitsVolume = Optional.of((Observation) resource);
+                this.igGAbUnitsVolume = Optional.of(new Immunoassay((Observation) resource, VirusnachweistestDefiningCode.SARS_COV2_COVID19_IGG_AB_UNITS_VOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY));
 
             } else {
                 throw new UnprocessableEntityException("Anti body panel bundle needs to contain only the profiles for the Anti body panel. Please delete profile " + profileUrl + " from the Bundle.");
@@ -67,7 +67,7 @@ public class AntiBodyPanel {
         }
     }
 
-    public List<Optional<Observation>> getAllNonPanel() {
+    public List<Optional<Immunoassay>> getAllNonPanel() {
         return List.of(aBPresence, aBUnitsVolume, igAAbPresence, igAAbUnitVolume, igMAbPresence, igMAbUnitsVolume, igGAbPresence, igGAbUnitsVolume);
     }
 }

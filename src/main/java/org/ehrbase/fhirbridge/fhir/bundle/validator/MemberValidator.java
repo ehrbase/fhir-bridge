@@ -14,14 +14,14 @@ class MemberValidator {
         addListEntry(this.fullUrlList, fullUrl);
     }
 
-     void deleteFullUrl(String fullUrl) {
+    void deleteFullUrl(String fullUrl) {
         fullUrlList.remove(fullUrl);
     }
 
-    void addListEntry(List<String> list, String entry){
-        if(entry.startsWith("urn:uuid:")){
+    void addListEntry(List<String> list, String entry) {
+        if (entry.startsWith("urn:uuid:")) {
             list.add(entry);
-        }else{
+        } else {
             throw new UnprocessableEntityException(entry + " is not a valid format. The fullUrl has to be an UUID and start with: urn:uuid:, example urn:uuid:04121321-4af5-424c-a0e1-ed3aab1c349d");
         }
     }
@@ -42,8 +42,13 @@ class MemberValidator {
     }
 
     void validateMembers() {
-        if (!fullUrlList.equals(hasMembersList)) {
-            throw new UnprocessableEntityException("The urls of the entries within the Bundle are not matching the hasMember.references. Make sure that every Url contained in the observation with hasMembers is contained and correct.");
+        System.out.println(fullUrlList);
+        System.out.println(hasMembersList);
+        for (String fullUrl : fullUrlList) {
+            if (!hasMembersList.contains(fullUrl)) {
+                throw new UnprocessableEntityException("The url " + fullUrl + " within the Bundle is not matching the hasMember.references. Make sure that every Url contained in the observation with hasMembers is contained and correct.");
+
+            }
         }
     }
 }
