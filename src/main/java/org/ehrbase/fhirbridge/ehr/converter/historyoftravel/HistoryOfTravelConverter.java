@@ -196,8 +196,6 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
     }
 
     private TemporalAccessor getDate(Observation.ObservationComponentComponent observationComponent) {
-
-        Coding coding = observationComponent.getCode().getCoding().get(0);
         return observationComponent.getValueDateTimeType().getValueAsCalendar().toZonedDateTime();
     }
 
