@@ -22,12 +22,15 @@ spring:
     open-in-view: false
     properties:
       hibernate.dialect: org.hibernate.dialect.H2Dialect
-      hibernate.search.enabled: true
-      hibernate.search.backend.type: lucene
-      hibernate.search.backend.analysis.configurer: ca.uhn.fhir.jpa.search.HapiLuceneAnalysisConfigurer
-      hibernate.search.backend.directory.type: local-filesystem
-      hibernate.search.backend.directory.root: ${java.io.tmpdir}/fhir-bridge/lucenefiles
-      hibernate.search.backend.lucene_version: lucene_current
+      hibernate.jdbc.batch_size: 20
+      hibernate.cache.use_query_cache: false
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_structured_entries: false
+      hibernate.cache.use_minimal_puts: false
+      hibernate.search.default.indexBase: ${java.io.tmpdir}/fhir-bridge/lucenefiles
+      hibernate.search.model_mapping: ca.uhn.fhir.jpa.search.LuceneSearchMappingFactory
+      hibernate.search.default.directory_provider: filesystem
+      hibernate.search.lucene_version: LUCENE_CURRENT
   liquibase:
     database-change-log-table: DATABASE_CHANGELOG
     database-change-log-lock-table: DATABASE_CHANGELOG_LOCK
