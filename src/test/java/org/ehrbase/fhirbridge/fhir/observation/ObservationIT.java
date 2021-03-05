@@ -95,21 +95,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     void createSmokingStatus() throws IOException {
         create("create-smoking-status.json");
     }
-
-    @Test
-    void createHistoryOfTravelYes() throws IOException {
-        create("Observation/HistoryOfTravel/create-history-of-travel_yes.json");
-    }
-    @Test
-    void createHistoryOfTravelNo() throws IOException {
-        create("Observation/HistoryOfTravel/create-history-of-travel_no.json");
-    }
-    @Test
-    void createHistoryOfTravelUnknown() throws IOException {
-        create("Observation/create-history-of-travel_unknwon.json");
-    }
-
-
+    
     @Test
     void createWithDefaultProfile() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-observation-with-default-profile.json");
