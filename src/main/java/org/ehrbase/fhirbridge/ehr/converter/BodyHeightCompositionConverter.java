@@ -22,6 +22,7 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
 
     private static final Logger LOG = LoggerFactory.getLogger(BodyHeightCompositionConverter.class);
 
+
     @Override
     public Observation fromComposition(KorpergrosseComposition composition) {
         // TODO: Implement
@@ -54,9 +55,7 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         composition.setStartTimeValue(fhirEffectiveDateTime);
         composition.setComposer(new PartySelf());
 
-        // set feeder audit
-        //FeederAudit fa = CommonData.constructFeederAudit(observation);
-        //composition.setFeederAudit(fa);
+        composition.setFeederAudit(CommonData.constructFeederAudit(observation));
 
         return (composition);
     }

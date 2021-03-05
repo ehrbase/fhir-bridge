@@ -36,6 +36,7 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
         create("create-body-height-snomed-period.json");
     }
 
+
     // #####################################################################################
     // check payload
     @Test
@@ -97,7 +98,7 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(KorpergrosseComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(KorpergrosseComposition.class, List.of("location",  "feederAudit")))
                 .registerValueObject(GrosseLangeObservation.class)
                 .build();
     }
