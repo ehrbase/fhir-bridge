@@ -57,7 +57,10 @@ public class ProcedureRoutes extends AbstractRouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("procedure-create:fhirConsumer?fhirContext=#fhirContext")
+
+        // 'Create Procedure' route definition
+
+        from("procedure-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
@@ -72,7 +75,8 @@ public class ProcedureRoutes extends AbstractRouteBuilder {
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#procedureCompositionConverter")
             .process(new ResourceResponseProcessor());
 
-        // Find Procedure
+        // 'Find Procedure' route definition
+
         from("procedure-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())

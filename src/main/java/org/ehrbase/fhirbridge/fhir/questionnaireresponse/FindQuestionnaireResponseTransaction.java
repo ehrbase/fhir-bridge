@@ -19,23 +19,23 @@ package org.ehrbase.fhirbridge.fhir.questionnaireresponse;
 import ca.uhn.fhir.context.FhirVersionEnum;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionConfiguration;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
-import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
+import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 
 /**
- * Configuration for 'Create Questionnaire-Response' transaction.
+ * Configuration for 'Find Questionnaire-Response' transaction.
  *
  * @since 1.0.0
  */
-public class CreateQuestionnaireResponseTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class FindQuestionnaireResponseTransaction extends FhirTransactionConfiguration<FhirQueryAuditDataset> {
 
-    public CreateQuestionnaireResponseTransaction() {
-        super("questionnaire-response-create",
-                "Create Questionnaire-Response",
-                false,
+    public FindQuestionnaireResponseTransaction() {
+        super("questionnaire-response-find",
+                "Find Questionnaire-Response",
+                true,
                 null,
-                new CreateQuestionnaireResponseAuditStrategy(),
+                new FindQuestionnaireResponseAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreateQuestionnaireResponseProvider(),
+                new FindQuestionnaireResponseProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }

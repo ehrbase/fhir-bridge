@@ -54,7 +54,10 @@ public class PatientRoutes extends AbstractRouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("patient-create:fhirConsumer?fhirContext=#fhirContext")
+
+        // 'Create Patient' route definition
+
+        from("patient-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
@@ -69,7 +72,8 @@ public class PatientRoutes extends AbstractRouteBuilder {
 //            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
 
-        // Find Patient
+        // 'Find Patient' route definition
+
         from("patient-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())
