@@ -12,7 +12,7 @@
 					"name": "AuditEvent",
 					"item": [
 						{
-							"name": "Find AuditEvent",
+							"name": "Find AuditEvent: search",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -87,44 +87,6 @@
 									],
 									"path": [
 										"fhir"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create BloodGasPanel Copy",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"resourceType\": \"Bundle\",\r\n    \"type\": \"transaction\",\r\n    \"entry\": [\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f0a\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"24336-0_gasPanelBldA\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://loinc.org\",\r\n                                \"code\": \"26436-6\"\r\n                            },\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"laboratory\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"24336-0\",\r\n                            \"display\": \"Gas panel (BldA)\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Gas panel - Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                 \"hasMember\": [\r\n                    {\r\n                        \"reference\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1c349d\"\r\n                    }\r\n                 ]\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        }\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/fhir/",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"fhir",
-										""
 									]
 								}
 							},
