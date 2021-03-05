@@ -71,5 +71,7 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.DIAGNOSE_ORGAN_RECIPIENT, new GECCODiagnoseCompositionConverter());
         profiles.put(Profile.DIAGNOSE_COMPLICATIONS_COVID_19, new GECCODiagnoseCompositionConverter());
         profiles.put(Profile.DIAGNOSE_DEPENDENCE_ON_VENTILATOR, new GECCODiagnoseCompositionConverter());
+        // Patient
+        profiles.put(Profile.PATIENT, new PatientCompositionConverter());
     }
 }
