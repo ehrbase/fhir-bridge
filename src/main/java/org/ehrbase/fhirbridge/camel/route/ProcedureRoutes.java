@@ -29,7 +29,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of {@link RouteBuilder} that provides route definitions for transactions linked to {@link Procedure} resource.
+ * Implementation of {@link RouteBuilder} that provides route definitions for transactions
+ * linked to {@link Procedure} resource.
  *
  * @since 1.0.0
  */

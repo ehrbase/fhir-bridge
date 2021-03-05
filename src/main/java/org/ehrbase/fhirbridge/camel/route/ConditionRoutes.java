@@ -1,21 +1,25 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
-import ca.uhn.fhir.jpa.searchparam.SearchParameterMap;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
-import org.ehrbase.fhirbridge.camel.processor.BundleProviderResponseProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.hl7.fhir.r4.model.Condition;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implementation of {@link RouteBuilder} that provides route definitions for transactions
+ * linked to {@link Condition} resource.
+ *
+ * @since 1.0.0
+ */
 @Component
-public class ConditionRoutes extends RouteBuilder {
+public class ConditionRoutes extends AbstractRouteBuilder {
 
     private final IFhirResourceDao<Condition> conditionDao;
 
@@ -43,7 +47,10 @@ public class ConditionRoutes extends RouteBuilder {
     @Override
     public void configure() {
         // @formatter:off
-        from("fhir-create-condition:fhirConsumer?fhirContext=#fhirContext")
+
+        // 'Create Condition' route definition
+
+        from("condition-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
@@ -59,13 +66,16 @@ public class ConditionRoutes extends RouteBuilder {
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .process(new ResourceResponseProcessor());
 
-        // Route definition for Find Condition
-        from("fhir-find-condition:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .process(exchange -> {
-                SearchParameterMap searchParams = exchange.getIn().getBody(SearchParameterMap.class);
-                exchange.getMessage().setBody(conditionDao.search(searchParams));
-            })
-            .process(new BundleProviderResponseProcessor());
+        // 'Find Condition' route definition
+
+        from("condition-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
+            .choice()
+                .when(isSearchOperation())
+                    .to("bean:conditionDao?method=search(${body}, ${headers.FhirRequestDetails})")
+                    .process("bundleProviderResponseProcessor")
+                .otherwise()
+                    .to("bean:conditionDao?method=read(${body}, ${headers.FhirRequestDetails})");
+
         // @formatter:on
     }
 }

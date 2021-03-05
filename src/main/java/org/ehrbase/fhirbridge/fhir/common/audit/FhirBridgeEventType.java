@@ -8,9 +8,9 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     FindAuditEvent("fhir-find-audit-event", "Find Audit Event"),
 
-    CreateCondition("fhir-create-condition", "Create Condition"),
+    CreateCondition("condition-create", "Create Condition"),
 
-    FindCondition("fhir-find-condition", "Find Condition"),
+    FindCondition("condition-find", "Find Condition"),
 
     CreateDiagnosticReport("diagnostic-report-create", "Create Diagnostic Report"),
 

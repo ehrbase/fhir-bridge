@@ -38,7 +38,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Implementation of {@link org.openehealth.ipf.commons.ihe.fhir.FhirProvider FhirProvider} that provides REST support
- * for 'Find Observation' transaction.
+ * for 'Find Diagnostic Report' transaction.
  *
  * @since 1.0.0
  */
@@ -59,8 +59,8 @@ public class FindDiagnosticReportProvider extends AbstractPlainProvider {
 
     @Read(version = true)
     @SuppressWarnings("unused")
-    public DiagnosticReport readODiagnosticReport(@IdParam IdType id, RequestDetails requestDetails,
-                                                  HttpServletRequest request, HttpServletResponse response) {
+    public DiagnosticReport readDiagnosticReport(@IdParam IdType id, RequestDetails requestDetails,
+                                                 HttpServletRequest request, HttpServletResponse response) {
         return requestResource(id, null, DiagnosticReport.class, request, response, requestDetails);
     }
 }

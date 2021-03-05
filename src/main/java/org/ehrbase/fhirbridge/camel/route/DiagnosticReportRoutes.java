@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
+import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
@@ -9,8 +10,15 @@ import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Observation;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implementation of {@link RouteBuilder} that provides route definitions for transactions
+ * linked to {@link DiagnosticReport} resource.
+ *
+ * @since 1.0.0
+ */
 @Component
 public class DiagnosticReportRoutes extends AbstractRouteBuilder {
 
@@ -48,7 +56,9 @@ public class DiagnosticReportRoutes extends AbstractRouteBuilder {
         onException(Exception.class)
             .process(defaultExceptionHandler);
 
-        from("diagnostic-report-create:fhirConsumer?fhirContext=#fhirContext")
+        // 'Create Diagnostic Report' route definition
+
+        from("diagnostic-report-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
