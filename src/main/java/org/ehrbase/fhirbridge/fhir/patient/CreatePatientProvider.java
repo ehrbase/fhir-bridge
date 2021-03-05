@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CreatePatientProvider extends AbstractPlainProvider {
 
     @Create
+    @SuppressWarnings("unused")
     public MethodOutcome createPatient(@ResourceParam Patient patient, RequestDetails requestDetails,
                                        HttpServletRequest request, HttpServletResponse response) {
         return requestAction(patient, null, request, response, requestDetails);
