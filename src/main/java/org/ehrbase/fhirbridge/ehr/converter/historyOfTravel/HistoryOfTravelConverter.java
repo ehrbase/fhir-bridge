@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter;
+package org.ehrbase.fhirbridge.ehr.converter.historyOfTravel;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
@@ -8,6 +8,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
@@ -19,6 +20,14 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseA
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
+
+import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.LOINC;
+import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.SNOMED;
+import static org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL;
+import static org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
+import static org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL;
+import static org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION;
+import static org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
@@ -30,22 +39,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HistoryOfTravelCompositionConverter implements CompositionConverter<ReisehistorieComposition, Observation> {
-    private static final Logger LOG = LoggerFactory.getLogger(HistoryOfTravelCompositionConverter.class);
+public class HistoryOfTravelConverter implements CompositionConverter<ReisehistorieComposition, Observation> {
+    private static final Logger LOG = LoggerFactory.getLogger(HistoryOfTravelConverter.class);
 
     private static final Map<String, String> loincTravelCodesMap = new HashMap<>();
     private static final Map<String, LandDefiningCode> countryMap = new HashMap<>();
     private static final Map<String, BundeslandRegionDefiningCode> regionMap = new HashMap<>();
-
-    private static String SNOMED_SYSTEM = "http://snomed.info/sct";
-    private static String LOINC_SYSTEM = "http://loinc.org";
-
-
-    private static String LOINC_DATE_TRAVEL_STARTED = "82752-7";
-    private static String LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION = "91560-3";
-    private static String LOINC_CITY_OF_TRAVEL = "94653-3";
-    private static String LOINC_STATE_OF_TRAVEL = "82754-3";
-    private static String LOINC_COUNTRY_OF_TRAVEL = "94651-7";
 
     static {
 
@@ -125,6 +124,9 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
         adminentry.setReiseAngetretenDefiningCode(reiseCode);
         adminentry = mapInternalEvents(adminentry, observation);
 
+        adminentry.setLanguage(Language.DE);
+        adminentry.setSubject(new PartySelf());
+
         composition.setReisehistorie(adminentry);
 
         return composition;
@@ -132,7 +134,7 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
 
     private ReisehistorieAdminEntry mapInternalEvents(ReisehistorieAdminEntry adminentry, Observation observation) {
 
-        ReisehistorieBestimmtesReisezielCluster travel = null;
+        ReisehistorieBestimmtesReisezielCluster travel = new ReisehistorieBestimmtesReisezielCluster();
 
         for (Observation.ObservationComponentComponent observationComponent
                 : observation.getComponent()) {
@@ -141,20 +143,20 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
             String system = coding.getSystem();
             String code = coding.getCode();
 
-            checkForSnomedSystem(system);
+            checkForLoincSystem(system);
 
-            if (code.equals(LOINC_DATE_TRAVEL_STARTED)) {
+            if (code.equals(LOINC_DATE_TRAVEL_STARTED.getCode())) {
                 travel.setEinreisedatumValue(getDate(observationComponent));
-            } else if (code.equals(LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION)) {
+            } else if (code.equals(LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION.getCode())) {
                 travel.setAbfahrtsdatumValue(getDate(observationComponent));
-            } else if (code.equals(LOINC_CITY_OF_TRAVEL)) {
+            } else if (code.equals(LOINC_CITY_OF_TRAVEL.getCode())) {
                 travel.setStadtValue(getCity(observationComponent));
-            } else if (code.equals(LOINC_STATE_OF_TRAVEL)) {
+            } else if (code.equals(LOINC_STATE_OF_TRAVEL.getCode())) {
                 travel.setBundeslandRegionDefiningCode(getBundeslandRegion(observationComponent));
-            } else if (code.equals(LOINC_COUNTRY_OF_TRAVEL)) {
+            } else if (code.equals(LOINC_COUNTRY_OF_TRAVEL.getCode())) {
                 travel.setLandDefiningCode(getLand(observationComponent));
             } else {
-                throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + code + "' instead ");
+                throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + system + ":"+code+"' instead");
             }
         }
         adminentry.setBestimmtesReiseziel(List.of(travel));
@@ -165,43 +167,38 @@ public class HistoryOfTravelCompositionConverter implements CompositionConverter
     private TemporalAccessor getDate(Observation.ObservationComponentComponent observationComponent) {
 
         Coding coding = observationComponent.getCode().getCoding().get(0);
-        checkForLoincSystem(coding.getSystem());
         TemporalAccessor date = observationComponent.getValueDateTimeType().getValueAsCalendar().toZonedDateTime();
         return date;
     }
 
     private String getCity(Observation.ObservationComponentComponent observationComponent) {
-        Coding coding = observationComponent.getCode().getCoding().get(0);
-        checkForLoincSystem(coding.getSystem());
-        String city = coding.getCode();
+        String city = observationComponent.getValueStringType().getValue();
         return city;
     }
 
     private LandDefiningCode getLand(Observation.ObservationComponentComponent observationComponent) {
         Coding coding = observationComponent.getValueCodeableConcept().getCoding().get(0);
-        checkForLoincSystem(coding.getSystem());
         LandDefiningCode country = countryMap.get(coding.getCode());
         return country;
     }
 
     private BundeslandRegionDefiningCode getBundeslandRegion(Observation.ObservationComponentComponent observationComponent) {
         Coding coding = observationComponent.getValueCodeableConcept().getCoding().get(0);
-        checkForLoincSystem(coding.getSystem());
         BundeslandRegionDefiningCode region = regionMap.get(coding.getCode());
         return region;
     }
 
     private void checkForLoincSystem(String systemCode) {
-        if (!LOINC_SYSTEM.equals(systemCode)) {
+        if (!LOINC.getUrl().equals(systemCode)) {
             throw new UnprocessableEntityException("The system is not correct. " +
-                    "It should be '" + LOINC_SYSTEM + "', but it was '" + systemCode + "'.");
+                    "It should be '" + LOINC.getUrl() + "', but it was '" + systemCode + "'.");
         }
     }
 
     private void checkForSnomedSystem(String systemCode) {
-        if (!SNOMED_SYSTEM.equals(systemCode)) {
+        if (!SNOMED.getUrl().equals(systemCode)) {
             throw new UnprocessableEntityException("The system is not correct. " +
-                    "It should be '" + SNOMED_SYSTEM + "', but it was '" + systemCode + "'.");
+                    "It should be '" + SNOMED.getUrl() + "', but it was '" + systemCode + "'.");
         }
     }
 

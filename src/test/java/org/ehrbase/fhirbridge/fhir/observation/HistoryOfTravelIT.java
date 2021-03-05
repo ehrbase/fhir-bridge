@@ -2,13 +2,11 @@ package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.HistoryOfTravelCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.KorpergrosseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.definition.GrosseLangeObservation;
+import org.ehrbase.fhirbridge.ehr.converter.historyOfTravel.HistoryOfTravelConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KeineReisehistorieEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
@@ -33,7 +31,7 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createHistoryOfTravel() throws IOException {
-        create("create-history-of-travel-yes.json");
+        create("create-history-of-travel-no.json");
     }
 
     // #####################################################################################
@@ -59,9 +57,17 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
     // #####################################################################################
     // check exceptions
     @Test
-    void createInvalidMissingDateTime() throws IOException {
-        Exception exception = executeMappingException("create-history-of-travel-invalid.json");
-        assertEquals("No time is set", exception.getMessage());
+    void createInvalidSystem() throws IOException {
+        // copy of yes, manipulated line 143
+        Exception exception = executeMappingException("create-history-of-travel-invalid-system.json");
+        assertEquals("The system is not correct. It should be 'http://loinc.org', but it was 'http://snomed.info/sct'.", exception.getMessage());
+    }
+
+    @Test
+    void createInvalidCode() throws IOException {
+        // copy of yes, manipulated line 131
+        Exception exception = executeMappingException("create-history-of-travel-invalid-code.json");
+        assertEquals("Expected loinc-code for history of travel, but got 'http://loinc.org:94653-2' instead", exception.getMessage());
     }
 
 
@@ -76,6 +82,7 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(ReisehistorieAdminEntry.class)
                 .registerValueObject(KeineReisehistorieEvaluation.class)
                 .registerValueObject(UnbekannteReisehistorieEvaluation.class)
+                .registerValueObject(ReisehistorieBestimmtesReisezielCluster.class)
                 .build();
     }
 
@@ -83,14 +90,14 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () ->
-                new HistoryOfTravelCompositionConverter().toComposition(obs)
+                new HistoryOfTravelConverter().toComposition(obs)
         );
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Observation observation = (Observation)  super.testFileLoader.loadResource(resourcePath);
-        HistoryOfTravelCompositionConverter compositionConverter = new HistoryOfTravelCompositionConverter();
+        HistoryOfTravelConverter compositionConverter = new HistoryOfTravelConverter();
         ReisehistorieComposition mapped = compositionConverter.toComposition(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mapped);
         assertEquals(0, diff.getChanges().size());
