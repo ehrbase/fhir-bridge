@@ -9,7 +9,6 @@ public class DiagnosticReportLabConverter extends AbstractBundleConverter<Diagno
 
     @Override
     public DiagnosticReport convert(@NonNull Bundle bundle) {
-        DiagnosticReport diagnosticReport = getRoot(bundle, Profile.DIAGNOSTIC_REPORT_LAB);
-        return diagnosticReport;
+        return getRoot(bundle, Profile.DIAGNOSTIC_REPORT_LAB);
     }
 }
