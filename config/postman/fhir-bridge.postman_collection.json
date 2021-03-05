@@ -212,7 +212,7 @@
 							"response": []
 						},
 						{
-							"name": "Find Condition",
+							"name": "Find Condition: read",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -224,21 +224,81 @@
 									}
 								}
 							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"resourceType\": \"Condition\",\r\n  \"id\": \"example\",\r\n  \"text\": {\r\n    \"status\": \"generated\",\r\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">Severe burn of left ear (Date: 24-May 2012)</div>\"\r\n  },\r\n  \"clinicalStatus\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\",\r\n        \"code\": \"active\"\r\n      }\r\n    ]\r\n  },\r\n  \"verificationStatus\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://terminology.hl7.org/CodeSystem/condition-ver-status\",\r\n        \"code\": \"confirmed\"\r\n      }\r\n    ]\r\n  },\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/condition-category\",\r\n          \"code\": \"encounter-diagnosis\",\r\n          \"display\": \"Encounter Diagnosis\"\r\n        },\r\n        {\r\n          \"system\": \"http://snomed.info/sct\",\r\n          \"code\": \"439401001\",\r\n          \"display\": \"Diagnosis\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"severity\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"24484000\",\r\n        \"display\": \"Severe\"\r\n      }\r\n    ]\r\n  },\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"39065001\",\r\n        \"display\": \"Burn of ear\"\r\n      }\r\n    ],\r\n    \"text\": \"Burnt Ear\"\r\n  },\r\n  \"bodySite\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://snomed.info/sct\",\r\n          \"code\": \"49521004\",\r\n          \"display\": \"Left external ear structure\"\r\n        }\r\n      ],\r\n      \"text\": \"Left Ear\"\r\n    }\r\n  ],\r\n  \"subject\": {\r\n    \"reference\": \"Patien/123456\"\r\n  },\r\n  \"onsetDateTime\": \"2012-05-24\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Condition/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Condition",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Condition: read",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
 									}
-								},
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Condition/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Condition",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Condition: search",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
 								"url": {
 									"raw": "{{baseUrl}}/fhir/Condition?subject.identifier={{patientId}}",
 									"host": [
@@ -249,16 +309,6 @@
 										"Condition"
 									],
 									"query": [
-										{
-											"key": "code",
-											"value": "B97.2",
-											"disabled": true
-										},
-										{
-											"key": "recorded-date",
-											"value": "2012-05-24",
-											"disabled": true
-										},
 										{
 											"key": "subject.identifier",
 											"value": "{{patientId}}"
