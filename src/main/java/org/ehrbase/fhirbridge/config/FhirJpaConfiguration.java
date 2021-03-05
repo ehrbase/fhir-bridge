@@ -163,6 +163,13 @@ public class FhirJpaConfiguration extends BaseR4Config {
         return resourceDao;
     }
 
+    @Bean
+    public IFhirResourceDao<Procedure> procedureDao() {
+        JpaResourceDao<Procedure> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Procedure.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
 
     @Bean(name = "myConditionDaoR4")
     public IFhirResourceDao<Condition> conditionReportDao() {
@@ -178,14 +185,6 @@ public class FhirJpaConfiguration extends BaseR4Config {
         diagnosticReportDao.setResourceType(DiagnosticReport.class);
         diagnosticReportDao.setContext(fhirContext());
         return diagnosticReportDao;
-    }
-
-    @Bean(name = "myProcedureDaoR4")
-    public IFhirResourceDao<Procedure> procedureDao() {
-        JpaResourceDao<Procedure> procedureDao = new JpaResourceDao<>();
-        procedureDao.setResourceType(Procedure.class);
-        procedureDao.setContext(fhirContext());
-        return procedureDao;
     }
 
     @Bean(name = "myAuditEventDaoR4")

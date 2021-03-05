@@ -22,7 +22,6 @@ import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
-import org.ehrbase.fhirbridge.camel.processor.IBundleProviderProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
@@ -88,7 +87,7 @@ public class ObservationRoutes extends AbstractRouteBuilder {
             .choice()
                 .when(isSearchOperation())
                     .to("bean:observationDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process(new IBundleProviderProcessor())
+                    .process("bundleProviderResponseProcessor")
                 .otherwise()
                     .to("bean:observationDao?method=read(${body}, ${headers.FhirRequestDetails})");
 

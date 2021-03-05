@@ -21,7 +21,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
-import org.ehrbase.fhirbridge.camel.processor.IBundleProviderProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.hl7.fhir.r4.model.Patient;
 import org.springframework.stereotype.Component;
@@ -75,7 +74,7 @@ public class PatientRoutes extends AbstractRouteBuilder {
             .choice()
                 .when(isSearchOperation())
                     .to("bean:patientDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process(new IBundleProviderProcessor())
+                    .process("bundleProviderResponseProcessor")
                 .otherwise()
                     .to("bean:patientDao?method=read(${body}, ${headers.FhirRequestDetails})");
 
