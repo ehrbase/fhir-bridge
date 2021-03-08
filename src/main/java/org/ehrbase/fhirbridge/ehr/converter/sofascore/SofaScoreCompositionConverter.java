@@ -43,19 +43,16 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
         // set feeder audit
         FeederAudit fa = CommonData.constructFeederAudit(observation);
         result.setFeederAudit(fa);
-
+        
         DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
 
-        try {
-            result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
-        }catch (Exception e){
-            throw new UnprocessableEntityException(e.getMessage());
-        }
+        // this throws UnprocessableEntityException if there is a problem with the mapping
+        result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
 
         // ======================================================================================
         // Required fields by API
-        result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-        result.setLocation("test"); // FIXME: Location abfangen?
+        result.setLanguage(Language.DE);
+        result.setLocation("test");
         result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
         result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
