@@ -1,13 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.sofascore;
 
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datatypes.CodePhrase;
-import com.nedap.archie.rm.datavalues.DvCodedText;
-import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import com.nedap.archie.rm.generic.PartySelf;
-import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
@@ -20,9 +15,7 @@ import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 
@@ -32,7 +25,6 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
 
     @Override
     public Observation fromComposition(SOFAComposition composition) {
-        // TODO: Implement
         return null;
     }
 
