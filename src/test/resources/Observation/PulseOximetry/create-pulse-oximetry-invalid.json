@@ -1,15 +1,15 @@
 {
   "resourceType": "Observation",
-  "id": "23499ea6-d046-4e91-b7ab-d9cf040add72",
+  "id": "Example-observation-sauerstoffsaettigung",
   "meta": {
-    "profile": [
-      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"
+    "profile":  [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation"
     ]
   },
   "status": "final",
-  "category": [
+  "category":  [
     {
-      "coding": [
+      "coding":  [
         {
           "system": "http://terminology.hl7.org/CodeSystem/observation-category",
           "code": "vital-signs"
@@ -18,14 +18,13 @@
     }
   ],
   "code": {
-    "coding": [
+    "coding":  [
       {
-        "system": "http://snomed.info/sct",
-        "code": "248334005",
-        "display": "Length of body (observable entity)"
+        "system": "http://loinc.org",
+        "code": "20564-1"
       }
     ],
-    "text": "Body height"
+    "text": "Pulsoximetrische Sauerstoffsättigung"
   },
   "subject": {
     "identifier": {
@@ -33,11 +32,11 @@
       "value": "{{patientId}}"
     }
   },
-  "effectiveDateTime": "2020-10-02",
+  "effectiveDateTime": "2020-10-11",
   "valueQuantity": {
-    "value": 167,
-    "unit": "centimeter",
+    "value": 98,
+    "unit": "%",
     "system": "http://unitsofmeasure.org",
-    "code": "cm"
+    "code": "%"
   }
 }
