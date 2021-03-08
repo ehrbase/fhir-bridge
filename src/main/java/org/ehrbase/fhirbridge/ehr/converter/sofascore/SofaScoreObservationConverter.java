@@ -42,17 +42,25 @@ public class SofaScoreObservationConverter {
      * @param code which can be: cvs, liv, ns, resp, coa, kid
      * @return the correspondent component to the code
      */
-    private Observation.ObservationComponentComponent getComponent(Observation o, String code) {
-        for (Observation.ObservationComponentComponent component : o.getComponent()) {
-            for (Coding coding : component.getCode().getCoding()) {
-                if (coding.getCode().equals(code)) {
-                    checkIfEmpty(component, code);
-                    return component;
-                }
+    private Observation.ObservationComponentComponent getComponent(Observation observation, String code) {
+        for (Observation.ObservationComponentComponent component : observation.getComponent()) {
+            if (codeOfComponentMatchesCode(component, code)) {
+                return component;
             }
         }
         throw new UnprocessableEntityException("The component with code '" + code + "' is not present");
     }
+
+    private boolean codeOfComponentMatchesCode(Observation.ObservationComponentComponent component, String code) {
+        for (Coding coding : component.getCode().getCoding()) {
+            if (coding.getCode().equals(code)) {
+                checkIfEmpty(component, code);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private void mapSofaScoreMagnitude(SOFAScoreObservation sofaScore, Observation observation) {
         String sofaScoreCode = observation.getCode().getCoding().get(0).getCode();
@@ -61,7 +69,7 @@ public class SofaScoreObservationConverter {
     }
 
     private void mapNierenFunktions(SOFAScoreObservation sofaScore, Observation observation) {
-        String nierenfunktionsCode =getComponent(observation, "kid").getValueCodeableConcept().getCoding().get(0).getCode();
+        String nierenfunktionsCode = getComponent(observation, "kid").getValueCodeableConcept().getCoding().get(0).getCode();
         switch (nierenfunktionsCode) {
             case "kid1":
                 sofaScore.setNierenfunktion(SofaScoreCode.NIERENFUNKTIONS_SCORE_1.getValue());
@@ -182,46 +190,46 @@ public class SofaScoreObservationConverter {
     }
 
     private void tryEffectiveDateTime(Observation observation, SOFAScoreObservation result) {
-        try{
+        try {
             result.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
             result.setOriginValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        }catch (FHIRException fhirException){
-            if(isTimeTypeException(fhirException.toString())){
+        } catch (FHIRException fhirException) {
+            if (isTimeTypeException(fhirException.toString())) {
                 throw fhirException;
             }
         }
     }
 
     private void tryEffectiveInstantType(Observation observation, SOFAScoreObservation result) {
-        try{
+        try {
             result.setTimeValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
             result.setOriginValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
-        }catch (FHIRException fhirException){
-            if(isTimeTypeException(fhirException.toString())){
+        } catch (FHIRException fhirException) {
+            if (isTimeTypeException(fhirException.toString())) {
                 throw fhirException;
             }
         }
     }
 
     private void tryEffectivePeriodType(Observation observation, SOFAScoreObservation result) {
-        try{
+        try {
             LocalDateTime date = LocalDateTime.ofInstant(observation.getEffectivePeriod().getEnd().toInstant(), ZoneOffset.UTC);
             result.setTimeValue(date);
             result.setOriginValue(date);
-        }catch (FHIRException fhirException){
-            if(isTimeTypeException(fhirException.toString())){
+        } catch (FHIRException fhirException) {
+            if (isTimeTypeException(fhirException.toString())) {
                 throw fhirException;
             }
         }
     }
 
-    private boolean isTimeTypeException(String exceptionMessage){
+    private boolean isTimeTypeException(String exceptionMessage) {
         return !(exceptionMessage.contains("Type mismatch: the type") && exceptionMessage.contains("was expected,") && exceptionMessage.contains("was encountered"));
     }
 
     private void checkIfEmpty(Observation.ObservationComponentComponent component, String name) {
         if (component.getValueCodeableConcept().getCoding().isEmpty()) {
-            throw new UnprocessableEntityException("The component "+name+" doesn't have a code");
+            throw new UnprocessableEntityException("The component " + name + " doesn't have a code");
         }
 
     }
