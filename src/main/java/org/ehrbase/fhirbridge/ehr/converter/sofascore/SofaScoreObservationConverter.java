@@ -4,6 +4,8 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SOFAScoreObservation;
+import org.hl7.fhir.exceptions.FHIRException;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 
@@ -19,11 +21,8 @@ public class SofaScoreObservationConverter {
         SOFAScoreObservation sofaScore = new SOFAScoreObservation();
         mapCodes(sofaScore, observation);
         sofaScore.setSubject(new PartySelf());
-        sofaScore.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-        mapTimeDate(observation, sofaScore);
         sofaScore.setLanguage(Language.DE);
-        sofaScore.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-        sofaScore.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        mapTimeDate(observation, sofaScore);
         return sofaScore;
     }
 
