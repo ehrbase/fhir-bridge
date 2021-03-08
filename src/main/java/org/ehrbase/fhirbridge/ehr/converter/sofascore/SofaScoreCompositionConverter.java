@@ -51,8 +51,8 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
 
         // ======================================================================================
         // Required fields by API
-        result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-        result.setLocation("test"); // FIXME: Location abfangen?
+        result.setLanguage(Language.DE);
+        result.setLocation("test");
         result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
         result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
