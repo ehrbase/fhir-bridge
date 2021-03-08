@@ -1,10 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.diagnosticReport;
 
 import ca.uhn.fhir.parser.DataFormatException;
-import ca.uhn.fhir.parser.IParser;
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
@@ -18,10 +15,8 @@ import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
 import org.javers.core.metamodel.clazz.ValueObjectDefinition;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 
@@ -40,43 +35,29 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mappingNormalFinding() throws IOException {
-        DiagnosticReport diagnosticReport = (DiagnosticReport) super.testFileLoader.loadResource("create-radiology-report-normal-finding.json");
-        RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
-        GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
-        Diff diff = compareCompositions(getJavers(), "paragon-radiology-report-normal-finding.json", mappedGeccoRadiologischerBefundComposition);
-
-        assertEquals(diff.getChanges().size(), 0);
+        testMapping("create-radiology-report-normal-finding.json","paragon-radiology-report-normal-finding.json" );
     }
 
     @Test
     void mappingTypicalFinding() throws IOException {
-        DiagnosticReport diagnosticReport = (DiagnosticReport) super.testFileLoader.loadResource("create-radiology-report-typical-finding.json");
-        RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
-        GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
-        Diff diff = compareCompositions(getJavers(), "paragon-radiology-report-typical-finding.json", mappedGeccoRadiologischerBefundComposition);
-
-        assertEquals(diff.getChanges().size(), 0);
+        testMapping("create-radiology-report-typical-finding.json","paragon-radiology-report-typical-finding.json" );
     }
 
     @Test
     void mappingUnspecificFinding() throws IOException {
-        DiagnosticReport diagnosticReport = (DiagnosticReport) super.testFileLoader.loadResource("create-radiology-report-unspecific-finding.json");
-        RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
-        GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
-        Diff diff = compareCompositions(getJavers(), "paragon-radiology-report-unspecific-finding.json", mappedGeccoRadiologischerBefundComposition);
-
-        assertEquals(diff.getChanges().size(), 0);
+        testMapping("create-radiology-report-unspecific-finding.json","paragon-radiology-report-unspecific-finding.json" );
     }
 
     @Test
     void createInvalidBefund() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("create-radiology-report-invalid-befund.json"));
-        assertEquals("The SNOMED code: asdasd, is not supported for radiology report !", exception.getMessage());
+        Exception exception = executeMappingException("create-radiology-report-invalid-befund.json");
+        assertEquals("The SNOMED code: 118247008:363713009=asd, is not supported for radiology report !", exception.getMessage());
     }
 
+    //BSa wieso hier die unterschiedliche Art die Exception entgegen zu nehmen?
     @Test
     void createInvalidNameDerUntersuchung() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("create-radiology-report-invalid-kategorie.json"));
+        Exception exception = executeMappingException("create-radiology-report-invalid-kategorie.json");
         assertEquals("The LOINC code: safs-0 is not valid for radiology report!", exception.getMessage());
     }
 
@@ -91,15 +72,25 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createInvalidKategorie() throws IOException {
-        Exception exception = executeMappingUnprocessableEntityException(super.testFileLoader.loadResource("create-radiology-report-invalid-untersuchung.json"));
+        Exception exception = executeMappingException("create-radiology-report-invalid-untersuchung.json");
         assertEquals("The Loinc code sfds-4 is not supported for radiology report !", exception.getMessage());
     }
 
     @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource radiologyReport) {
+    public Exception executeMappingException(String path) throws IOException {
+        DiagnosticReport radiologyReport = (DiagnosticReport) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            new RadiologischerBefundConverter().toComposition((DiagnosticReport) radiologyReport);
+            new RadiologischerBefundConverter().toComposition( radiologyReport);
         });
+    }
+
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        DiagnosticReport diagnosticReport = (DiagnosticReport) super.testFileLoader.loadResource(resourcePath);
+        RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
+        GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
+        Diff diff = compareCompositions(getJavers(), paragonPath, mappedGeccoRadiologischerBefundComposition);
+        assertEquals(diff.getChanges().size(), 0);
     }
 
     @Override

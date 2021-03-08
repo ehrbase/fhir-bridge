@@ -5,6 +5,7 @@ import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.ehrbase.fhirbridge.fhir.AbstractSetupIT;
 import org.hl7.fhir.instance.model.api.IBaseResource;
@@ -19,8 +20,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.temporal.TemporalAccessor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.DiagnosticReport DiagnosticReport} resource.
@@ -65,7 +65,15 @@ class DiagnosticReportIT extends AbstractMappingTestSetupIT {
     }
 
     @Override
-    public Exception executeMappingUnprocessableEntityException(IBaseResource questionnaireResponse) {
-        return null;
+    public Exception executeMappingException(String path) throws IOException {
+        DiagnosticReport diagnosticReport = (DiagnosticReport) testFileLoader.loadResource(path);
+        return assertThrows(UnprocessableEntityException.class, () -> {
+           // new YourConverter().toComposition( radiologyReport);
+        });
+    }
+
+    @Override
+    public void testMapping(String resourcePath, String paragonPath) throws IOException {
+        // your mapping compared to paragon file
     }
 }

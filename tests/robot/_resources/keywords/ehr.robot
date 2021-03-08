@@ -30,8 +30,8 @@ create new ehr
                         ...    namespace_${{''.join(random.choices(string.digits, k=7))}}
 
     &{resp}=            POST    ${EHRBASE_URL}/ehr    ${ehr_status_json}
-                        Integer      response status    201
                         Output Debug Info To Console
+                        Integer      response status    201
 
                         Set Suite Variable    ${response}    ${resp}
                         extract subject_id from response

@@ -20,11 +20,11 @@
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
-...															   Authorization=Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+...															   Authorization=${AUTHORIZATION['Authorization']}
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Dave Petzold
-Force Tags              observation_create    pregnancy-status    invalid
+Force Tags              observation_create    pregnancy-status    invalid    create
 
 
 
@@ -479,43 +479,55 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
-	[Documentation]		Belongs to TC 010! Remove separation when it's fixed! -> fixed that it has now 201 as respone and not 500 anymore
-	[Template]			create pregnancy status with ehr reference
-    [Tags]              category    not-ready    not-ready_bug
+#BUG TRACE 02 Create Pregnancy Status (Invalid/Missing 'valueCodeableConcept')
+	#[Documentation]		Belongs to TC 010! Remove separation when it's fixed! -> fixed that it has now 201 as respone and not 500 anymore
+	#[Template]			create pregnancy status with ehr reference
+    #[Tags]              category    not-ready    not-ready_bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 	
 	# missing valueCodeableConcept
-	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
+	#$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
+	# parameter is 0..1 in simplifier https://simplifier.net/forschungsnetzcovid-19/pregnancystatus
 
+
+	
 	# missing coding
-	$.valueCodeableConcept.coding 				missing					422    	Index 0 out of bounds for length 0
+	#$.valueCodeableConcept.coding 				missing					422    	Index 0 out of bounds for length 0
+	# https://github.com/ehrbase/fhir-bridge/issues/95#issuecomment-776455834
+
+	
 
 	# invalid system
-	$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+	#$.valueCodeableConcept.coding[0].system		http://foobar.de		422    	This property must be an Array, not a primitive property													Observation.value.ofType.CodeableConcept..coding.0..system
+	# value just have to be a valid url https://simplifier.net/forschungsnetzcovid-19/pregnancystatus
 
 
-BUG TRACE 03 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
-	[Documentation]		Belongs to TC 012! Remove separation when it's fixed!
-	[Template]			create pregnancy status with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready    not-ready_bug
+#BUG TRACE 03 Create Pregnancy Status (Invalid/Missing 'DataAbsentReason')
+	#[Documentation]		Belongs to TC 012! Remove separation when it's fixed!
+	#[Template]			create pregnancy status with ehr reference AND data absentreason
+    #[Tags]              DataAbsentReason    not-ready    not-ready_bug
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 
 	# missing valueCodeableConcept
-	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+	# $.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+	# parameter is 0..1 in simplifier https://simplifier.net/forschungsnetzcovid-19/pregnancystatus
 
 	# missing coding
-	$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	#$.dataAbsentReason.coding					missing					422    	Index 0 out of bounds for length 0
+	# parameter is 0..1 in simplifier https://simplifier.net/forschungsnetzcovid-19/pregnancystatus
 
 	# invalid system
-	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
+	#$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
+	# value just have to be a valid url https://simplifier.net/forschungsnetzcovid-19/pregnancystatus
 
 	# invalid code
-	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+	#$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
+	# parameter is 0..1 in simplifier https://simplifier.net/forschungsnetzcovid-19/pregnancystatus
+
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
