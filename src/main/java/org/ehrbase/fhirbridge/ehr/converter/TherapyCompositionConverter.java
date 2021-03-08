@@ -25,8 +25,6 @@ import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Coding;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 import java.time.ZonedDateTime;
@@ -38,14 +36,12 @@ import java.util.Map;
 
 public class TherapyCompositionConverter implements CompositionConverter<GECCOProzedurComposition, Procedure> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(TherapyCompositionConverter.class);
-
     private static final Map<String, KategorieDefiningCode> kategorieMap = new HashMap<>();
     private static final Map<String, NameDerProzedurDefiningCode> nameDerProzedurMap = new HashMap<>();
     private static final Map<String, KoerperstelleDefiningCode> koerperstelleMap = new HashMap<>();
     private static final Map<String, GeraetenameDefiningCode> geraetenameMap = new HashMap<>();
 
-    private static String SNOMED_SYSTEM = "http://snomed.info/sct";
+    private static final String SNOMED_SYSTEM = "http://snomed.info/sct";
 
 
     static {
@@ -147,7 +143,6 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
         NichtDurchgefuehrteProzedurEvaluation nichtDurchgefuehrteProzedur = new NichtDurchgefuehrteProzedurEvaluation();
 
-        // TODO: Check whether this has to be an enum type
         nichtDurchgefuehrteProzedur.setAussageUeberDenAusschlussValue(procedure.getStatus().getDisplay());
         try {
             nichtDurchgefuehrteProzedur.setEingriffDefiningCode(mapNameDerProzedur(procedure));
@@ -167,7 +162,6 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
         UnbekannteProzedurEvaluation unbekannteProzedur = new UnbekannteProzedurEvaluation();
 
-        // TODO: Check whether this has to be an enum type
         unbekannteProzedur.setAussageUeberDieFehlendeInformationValue(procedure.getStatus().getDisplay());
 
         try {
@@ -249,29 +243,33 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
     private void mapMedizingerat(ProzedurAction durchgefuehrteProzedur, Procedure procedure) {
         // Map Medizingeraet for RESP
 
-        if (procedure.getUsedCode() != null && !procedure.getUsedCode().isEmpty()) {
-            Coding usedCodeCoding = procedure.getUsedCode().get(0).getCoding().get(0);
+        if (procedure.getUsedCode() == null || procedure.getUsedCode().isEmpty()) {
+            return;
+        }
 
-            if (usedCodeCoding.getSystem().equals(SNOMED_SYSTEM) && geraetenameMap.containsKey(usedCodeCoding.getCode())) {
+        Coding usedCodeCoding = procedure.getUsedCode().get(0).getCoding().get(0);
 
-                MedizingeraetCluster medizingeraetCluster = new MedizingeraetCluster();
+        if (usedCodeCoding.getSystem().equals(SNOMED_SYSTEM) && geraetenameMap.containsKey(usedCodeCoding.getCode())) {
 
-                medizingeraetCluster.setGeraetenameDefiningCode(geraetenameMap.get(usedCodeCoding.getCode()));
+            MedizingeraetCluster medizingeraetCluster = new MedizingeraetCluster();
 
-                durchgefuehrteProzedur.setMedizingeraet(new ArrayList<>());
-                durchgefuehrteProzedur.getMedizingeraet().add(medizingeraetCluster);
-            } else {
-                throw new UnprocessableEntityException("Invalid medical device code");
-            }
+            medizingeraetCluster.setGeraetenameDefiningCode(geraetenameMap.get(usedCodeCoding.getCode()));
+
+            durchgefuehrteProzedur.setMedizingeraet(new ArrayList<>());
+            durchgefuehrteProzedur.getMedizingeraet().add(medizingeraetCluster);
+        } else {
+            throw new UnprocessableEntityException("Invalid medical device code");
         }
     }
 
     private String mapDurchfuhrungsabsicht(Procedure procedure) {
-        if (!procedure.getExtension().isEmpty()) {
-            for (Extension extension : procedure.getExtension()) {
-                if (extension.getValue() instanceof Coding) {
-                    return ((Coding) extension.getValue()).getDisplay();
-                }
+        if (procedure.getExtension().isEmpty()) {
+            return null;
+        }
+
+        for (Extension extension : procedure.getExtension()) {
+            if (extension.getValue() instanceof Coding) {
+                return ((Coding) extension.getValue()).getDisplay();
             }
         }
 
