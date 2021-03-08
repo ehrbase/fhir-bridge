@@ -2,19 +2,15 @@ package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import com.nedap.archie.rm.RMObject;
-import org.apache.commons.io.IOUtils;
 import org.ehrbase.client.flattener.Flattener;
 import org.ehrbase.fhirbridge.TestFileLoader;
 import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.javers.core.Javers;
 import org.javers.core.diff.Diff;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -50,6 +46,8 @@ public abstract class AbstractMappingTestSetupIT extends AbstractSetupIT{
 
     public abstract Javers getJavers();
 
-    public abstract Exception executeMappingUnprocessableEntityException(IBaseResource questionnaireResponse);
+    public abstract Exception executeMappingException(String resource) throws IOException;
+
+    public abstract void testMapping(String resourcePath, String paragonPath) throws IOException;
 
 }

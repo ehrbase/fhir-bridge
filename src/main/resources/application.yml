@@ -9,6 +9,7 @@ fhir-bridge:
       prefix: classpath:/opt/
   composition:
     debug: false
+    output-directory: "src/main/resources/"
 spring:
   application:
     name: FHIR Bridge
