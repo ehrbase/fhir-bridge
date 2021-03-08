@@ -3,11 +3,8 @@ package org.ehrbase.fhirbridge.ehr.converter.sofascore;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SOFAScoreObservation;
-import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.DateTimeType;
-import org.hl7.fhir.r4.model.InstantType;
 import org.hl7.fhir.r4.model.Observation;
 
 import java.time.Instant;
@@ -24,14 +21,17 @@ public class SofaScoreObservationConverter {
         sofaScore.setSubject(new PartySelf());
         sofaScore.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
         mapTimeDate(observation, sofaScore);
+        sofaScore.setLanguage(Language.DE);
+        sofaScore.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        sofaScore.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
         return sofaScore;
     }
 
     private void mapCodes(SOFAScoreObservation sofaScore, Observation observation) {
-        String nervensystemCode = observation.getComponent().get(1)
-                .getValueCodeableConcept().getCoding().get(0).getCode();
-        String herzKreislaufSystemCode = observation.getComponent().get(2).getValueCodeableConcept().
-                getCoding().get(0).getCode();
+        Observation.ObservationComponentComponent ns = getComponent(observation, "ns");
+        Observation.ObservationComponentComponent cvs = getComponent(observation, "cvs");
+        String nervensystemCode = ns.getValueCodeableConcept().getCoding().get(0).getCode();
+        String herzKreislaufSystemCode = cvs.getValueCodeableConcept().getCoding().get(0).getCode();
         mapAtemtaetigkeitCode(sofaScore, observation);
         mapNervenSystemCode(sofaScore, nervensystemCode);
         mapHerzKreislaufSystemCode(sofaScore, herzKreislaufSystemCode, nervensystemCode);
@@ -41,16 +41,32 @@ public class SofaScoreObservationConverter {
         mapSofaScoreMagnitude(sofaScore, observation);
     }
 
+    /**
+     * Get component by code
+     *
+     * @param code which can be: cvs, liv, ns, resp, coa, kid
+     * @return the correspondent component to the code
+     */
+    private Observation.ObservationComponentComponent getComponent(Observation o, String code) {
+        for (Observation.ObservationComponentComponent component : o.getComponent()) {
+            for (Coding coding : component.getCode().getCoding()) {
+                if (coding.getCode().equals(code)) {
+                    checkIfEmpty(component, code);
+                    return component;
+                }
+            }
+        }
+        throw new UnprocessableEntityException("The component with code '" + code + "' is not present");
+    }
+
     private void mapSofaScoreMagnitude(SOFAScoreObservation sofaScore, Observation observation) {
         String sofaScoreCode = observation.getCode().getCoding().get(0).getCode();
         Long sofaScoreCodeLong = Long.parseLong(sofaScoreCode);
         sofaScore.setSofaScoreMagnitude(sofaScoreCodeLong);
     }
 
-
     private void mapNierenFunktions(SOFAScoreObservation sofaScore, Observation observation) {
-        String nierenfunktionsCode = observation.getComponent().get(5).getValueCodeableConcept().
-                getCoding().get(0).getCode();
+        String nierenfunktionsCode =getComponent(observation, "kid").getValueCodeableConcept().getCoding().get(0).getCode();
         switch (nierenfunktionsCode) {
             case "kid1":
                 sofaScore.setNierenfunktion(SofaScoreCode.NIERENFUNKTIONS_SCORE_1.getValue());
@@ -70,8 +86,7 @@ public class SofaScoreObservationConverter {
     }
 
     private void mapBlutgerinnungscode(SOFAScoreObservation sofaScore, Observation observation) {
-        String blutgerinnungsCode = observation.getComponent().get(4).getValueCodeableConcept().
-                getCoding().get(0).getCode();
+        String blutgerinnungsCode = getComponent(observation, "coa").getValueCodeableConcept().getCoding().get(0).getCode();
         switch (blutgerinnungsCode) {
             case "coa1":
                 sofaScore.setBlutgerinnung(SofaScoreCode.BLUTGERINNUNGS_SCORE_1.getValue());
@@ -91,8 +106,7 @@ public class SofaScoreObservationConverter {
     }
 
     private void mapLeberfunktionsCode(SOFAScoreObservation sofaScore, Observation observation) {
-        String leberfunktionsCode = observation.getComponent().get(3).getValueCodeableConcept().
-                getCoding().get(0).getCode();
+        String leberfunktionsCode = getComponent(observation, "liv").getValueCodeableConcept().getCoding().get(0).getCode();
         switch (leberfunktionsCode) {
             case "liv1":
                 sofaScore.setLeberfunktion(SofaScoreCode.LEBERFUNKTIONS_SCORE_1.getValue());
@@ -127,8 +141,7 @@ public class SofaScoreObservationConverter {
     }
 
     private void mapAtemtaetigkeitCode(SOFAScoreObservation sofaScore, Observation observation) {
-        String atemtaetigkeitCode = observation.getComponent().get(0).getValueCodeableConcept().
-                getCoding().get(0).getCode();
+        String atemtaetigkeitCode = getComponent(observation, "resp").getValueCodeableConcept().getCoding().get(0).getCode();
 
         switch (atemtaetigkeitCode) {
             case "resp1":
@@ -211,4 +224,11 @@ public class SofaScoreObservationConverter {
         return !(exceptionMessage.contains("Type mismatch: the type") && exceptionMessage.contains("was expected,") && exceptionMessage.contains("was encountered"));
     }
 
+
+    private void checkIfEmpty(Observation.ObservationComponentComponent component, String name) {
+        if (component.getValueCodeableConcept().getCoding().isEmpty()) {
+            throw new UnprocessableEntityException("The component  doesn't have a code");
+        }
+
+    }
 }
