@@ -85,9 +85,10 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
+# TODO: this should be using create-sofa-score.json even if it's currently failing
 005 Create Sofa Score
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-sofa-score.json_\n\n
+	...                 2. *LOAD* _create-sofa-score-cardiovaskular-score-1.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
