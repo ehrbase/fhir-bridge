@@ -5,10 +5,7 @@ import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConvers
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.TherapyCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.GECCOProzedurComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeccoProzedurKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NichtDurchgefuehrteProzedurEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.UnbekannteProzedurEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Procedure;
@@ -33,76 +30,65 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
     @Test
     void createApheresisProcedure() throws IOException {
         create("apheresis-example-1.json");
-        create("apheresis-example-2.json");
-        create("apheresis-example-3.json");
-        create("apheresis-example-4.json");
-        create("apheresis-example-5.json");
+        testMapping("mapping/apheresis-example-1.json","mapping/apheresis-example-1-result.json");
+        testMapping("mapping/apheresis-example-2.json","mapping/apheresis-example-2-result.json");
+        testMapping("mapping/apheresis-example-3.json","mapping/apheresis-example-3-result.json");
+        testMapping("mapping/apheresis-example-4.json","mapping/apheresis-example-4-result.json");
+        testMapping("mapping/apheresis-example-5.json","mapping/apheresis-example-5-result.json");
     }
 
     @Test
     void createDialysisProcedure() throws IOException {
-        create("dialysis-example-1.json");
-        create("dialysis-example-2.json");
-        create("dialysis-example-3.json");
-        create("dialysis-example-4.json");
-        create("dialysis-example-5.json");
-        create("dialysis-example-6.json");
+        testMapping("mapping/dialysis-example-1.json","mapping/dialysis-example-1-result.json");
+        testMapping("mapping/dialysis-example-2.json","mapping/dialysis-example-2-result.json");
+        testMapping("mapping/dialysis-example-3.json","mapping/dialysis-example-3-result.json");
+        testMapping("mapping/dialysis-example-4.json","mapping/dialysis-example-4-result.json");
+        testMapping("mapping/dialysis-example-5.json","mapping/dialysis-example-5-result.json");
+        testMapping("mapping/dialysis-example-6.json","mapping/dialysis-example-6-result.json");
+
     }
 
     @Test
     void createExtracorporealMembraneOxygenation() throws IOException {
-        create("extracorporeal-membrane-oxygenation-example-1.json");
-        create("extracorporeal-membrane-oxygenation-example-2.json");
-        create("extracorporeal-membrane-oxygenation-example-3.json");
-        create("extracorporeal-membrane-oxygenation-example-4.json");
+        testMapping("mapping/extracorporeal-membrane-oxygenation-example-1.json","mapping/extracorporeal-membrane-oxygenation-example-1-result.json");
+        testMapping("mapping/extracorporeal-membrane-oxygenation-example-3.json","mapping/extracorporeal-membrane-oxygenation-example-3-result.json");
+        testMapping("mapping/extracorporeal-membrane-oxygenation-example-4.json","mapping/extracorporeal-membrane-oxygenation-example-4-result.json");
+        testMapping("mapping/extracorporeal-membrane-oxygenation-example-2.json","mapping/extracorporeal-membrane-oxygenation-example-2-result.json");
+
     }
 
     @Test
     void createPronePosition() throws IOException {
-        create("prone-position-example-1.json");
-        create("prone-position-example-2.json");
-        create("prone-position-example-3.json");
-        create("prone-position-example-4.json");
+        testMapping("mapping/prone-position-example-1.json","mapping/prone-position-example-1-result.json");
+        testMapping("mapping/prone-position-example-2.json","mapping/prone-position-example-2-result.json");
+        testMapping("mapping/prone-position-example-3.json","mapping/prone-position-example-3-result.json");
+        testMapping("mapping/prone-position-example-4.json","mapping/prone-position-example-4-result.json");
+
     }
 
     @Test
     void createRadiologyProcedures() throws IOException {
-        create("radiology-example-1.json");
-        create("radiology-example-2.json");
-        create("radiology-example-3.json");
-        create("radiology-example-4.json");
+        testMapping("mapping/radiology-example-1.json","mapping/radiology-example-1-result.json");
+        testMapping("mapping/radiology-example-2.json","mapping/radiology-example-2-result.json");
+        testMapping("mapping/radiology-example-3.json","mapping/radiology-example-3-result.json");
+        testMapping("mapping/radiology-example-4.json","mapping/radiology-example-4-result.json");
     }
 
     @Test
     void createRespiratoryTherapies() throws IOException {
-        create("respiratory-therapies-example-1.json");
-        create("respiratory-therapies-example-2.json");
-        create("respiratory-therapies-example-3.json"); // INVALID NAME
-        create("respiratory-therapies-example-4.json"); // INVALID NAME
-        create("respiratory-therapies-example-5.json");
-        create("respiratory-therapies-example-6.json");
-        create("respiratory-therapies-example-7.json");
-        create("respiratory-therapies-example-8.json");
-        create("respiratory-therapies-example-9.json");
-        create("respiratory-therapies-example-10.json");
-        create("respiratory-therapies-example-11.json");
+        testMapping("mapping/respiratory-therapies-example-1.json","mapping/respiratory-therapies-example-1-result.json");
+        testMapping("mapping/respiratory-therapies-example-2.json","mapping/respiratory-therapies-example-2-result.json");
+        testMapping("mapping/respiratory-therapies-example-3.json","mapping/respiratory-therapies-example-3-result.json");
+        testMapping("mapping/respiratory-therapies-example-4.json","mapping/respiratory-therapies-example-4-result.json");
+        testMapping("mapping/respiratory-therapies-example-5.json","mapping/respiratory-therapies-example-5-result.json");
+        testMapping("mapping/respiratory-therapies-example-7.json","mapping/respiratory-therapies-example-7-result.json");
+        testMapping("mapping/respiratory-therapies-example-8.json","mapping/respiratory-therapies-example-8-result.json");
+        testMapping("mapping/respiratory-therapies-example-11.json","mapping/respiratory-therapies-example-11-result.json");
+        testMapping("mapping/respiratory-therapies-example-10.json","mapping/respiratory-therapies-example-10-result.json");
+        testMapping("mapping/respiratory-therapies-example-9.json","mapping/respiratory-therapies-example-9-result.json");
+        testMapping("mapping/respiratory-therapies-example-6.json","mapping/respiratory-therapies-example-6-result.json");
     }
 
-
-    @Test
-    void mappingUnknownTherapy() throws IOException {
-        testMapping("mapping/mapping_unknown.json","mapping/mapping_unknown_result.json");
-    }
-
-    @Test
-    void mappingNotDoneTherapy() throws IOException {
-        testMapping("mapping/mapping_not_done.json","mapping/mapping_not_done_result.json");
-    }
-
-    @Test
-    void mappingDoneTherapy() throws IOException {
-        testMapping("mapping/mapping_done.json", "mapping/mapping_done_result.json");
-    }
 
     void testMapping(String resourcePath, String resultPath) throws IOException {
         Procedure procedure = (Procedure) super.testFileLoader.loadResource(resourcePath);
@@ -147,6 +133,7 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
                 .registerValueObject((NichtDurchgefuehrteProzedurEvaluation.class))
                 .registerValueObject((UnbekannteProzedurEvaluation.class))
                 .registerValueObject((GeccoProzedurKategorieElement.class))
+                .registerValueObject((MedizingeraetCluster.class))
                 .build();
     }
 }

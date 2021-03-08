@@ -115,9 +115,14 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
             durchgefuehrteProzedur.setNameDerProzedurDefiningCode(mapNameDerProzedur(procedure));
 
-            if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.PLAIN_RADIOGRAPHY)) {
+            if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.PLAIN_RADIOGRAPHY) ||
+                durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.DIAGNOSTIC_ULTRASONOGRAPHY_PROCEDURE) ||
+                durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.COMPUTERIZED_AXIAL_TOMOGRAPHY_PROCEDURE)) {
                 mapBodySite(durchgefuehrteProzedur, procedure);
-            } else if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.ARTIFICIAL_RESPIRATION_PROCEDURE)) {
+            } else if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.ARTIFICIAL_RESPIRATION_PROCEDURE) ||
+                    durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.OXYGEN_ADMINISTRATION_BY_NASAL_CANNULA_PROCEDURE) ||
+                    durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.RESPIRATORY_THERAPY_PROCEDURE) ||
+                    durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.NONINVASIVE_VENTILATION_PROCEDURE)) {
                 mapMedizingerat(durchgefuehrteProzedur, procedure);
             }
 
@@ -243,18 +248,22 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
     private void mapMedizingerat(ProzedurAction durchgefuehrteProzedur, Procedure procedure) {
         // Map Medizingeraet for RESP
-        Coding usedCodeCoding = procedure.getUsedCode().get(0).getCoding().get(0);
 
-        if (usedCodeCoding.getSystem().equals(SNOMED_SYSTEM) && geraetenameMap.containsKey(usedCodeCoding.getCode())) {
+        if(procedure.getUsedCode()!= null && !procedure.getUsedCode().isEmpty())
+        {
+            Coding usedCodeCoding = procedure.getUsedCode().get(0).getCoding().get(0);
 
-            MedizingeraetCluster medizingeraetCluster = new MedizingeraetCluster();
+            if (usedCodeCoding.getSystem().equals(SNOMED_SYSTEM) && geraetenameMap.containsKey(usedCodeCoding.getCode())) {
 
-            medizingeraetCluster.setGeraetenameDefiningCode(geraetenameMap.get(usedCodeCoding.getCode()));
+                MedizingeraetCluster medizingeraetCluster = new MedizingeraetCluster();
 
-            durchgefuehrteProzedur.setMedizingeraet(new ArrayList<>());
-            durchgefuehrteProzedur.getMedizingeraet().add(medizingeraetCluster);
-        } else {
-            throw new UnprocessableEntityException("Invalid medical device code");
+                medizingeraetCluster.setGeraetenameDefiningCode(geraetenameMap.get(usedCodeCoding.getCode()));
+
+                durchgefuehrteProzedur.setMedizingeraet(new ArrayList<>());
+                durchgefuehrteProzedur.getMedizingeraet().add(medizingeraetCluster);
+            } else {
+                throw new UnprocessableEntityException("Invalid medical device code");
+            }
         }
     }
 

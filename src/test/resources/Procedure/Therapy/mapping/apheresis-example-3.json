@@ -1,0 +1,36 @@
+{
+  "resourceType": "Procedure",
+  "id": "b03c0583-c7fb-4077-b5ca-b4609746f3f6",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis"
+    ]
+  },
+  "status": "in-progress",
+  "category": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "277132007",
+        "display": "Therapeutic procedure (procedure)"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "127788007",
+        "display": "Apheresis (procedure)"
+      }
+    ],
+    "text": "Apheresis"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "performedDateTime": "2020-09-30"
+}
