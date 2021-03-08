@@ -219,7 +219,6 @@ public class SofaScoreObservationConverter {
         return !(exceptionMessage.contains("Type mismatch: the type") && exceptionMessage.contains("was expected,") && exceptionMessage.contains("was encountered"));
     }
 
-
     private void checkIfEmpty(Observation.ObservationComponentComponent component, String name) {
         if (component.getValueCodeableConcept().getCoding().isEmpty()) {
             throw new UnprocessableEntityException("The component  doesn't have a code");
