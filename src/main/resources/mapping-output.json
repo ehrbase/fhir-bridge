@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/17/_history/1",
+      "id" : "Observation/41/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {

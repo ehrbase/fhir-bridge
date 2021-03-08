@@ -45,6 +45,8 @@ public enum Profile {
 
     // Observation Profiles
 
+    TRAVEL_HISTORY(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/history-of-travel"),
+
     BODY_HEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"),
 
     BLOOD_GAS_PANEL(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel"),

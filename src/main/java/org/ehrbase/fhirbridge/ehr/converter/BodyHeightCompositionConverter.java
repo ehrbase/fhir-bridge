@@ -21,6 +21,7 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
 
     private static final Logger LOG = LoggerFactory.getLogger(BodyHeightCompositionConverter.class);
 
+
     @Override
     public Observation fromComposition(KorpergrosseComposition composition) {
         // TODO: Implement
@@ -38,10 +39,10 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         setDefault(grosseLangeObservation);
         setMappingContent(observation, grosseLangeObservation);
 
-        return createComposition(getDateTime(observation), grosseLangeObservation);
+        return createComposition(getDateTime(observation), grosseLangeObservation, observation);
     }
 
-    private KorpergrosseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GrosseLangeObservation grosseLangeObservation) {
+    private KorpergrosseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GrosseLangeObservation grosseLangeObservation, Observation observation) {
         KorpergrosseComposition composition = new KorpergrosseComposition();
         composition.setGrosseLange(grosseLangeObservation);
         // Required fields by API
@@ -52,6 +53,8 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Korp
         composition.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
         composition.setStartTimeValue(fhirEffectiveDateTime);
         composition.setComposer(new PartySelf());
+
+        composition.setFeederAudit(CommonData.constructFeederAudit(observation));
 
         return (composition);
     }
