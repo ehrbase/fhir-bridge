@@ -116,8 +116,8 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
             durchgefuehrteProzedur.setNameDerProzedurDefiningCode(mapNameDerProzedur(procedure));
 
             if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.PLAIN_RADIOGRAPHY) ||
-                durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.DIAGNOSTIC_ULTRASONOGRAPHY_PROCEDURE) ||
-                durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.COMPUTERIZED_AXIAL_TOMOGRAPHY_PROCEDURE)) {
+                    durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.DIAGNOSTIC_ULTRASONOGRAPHY_PROCEDURE) ||
+                    durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.COMPUTERIZED_AXIAL_TOMOGRAPHY_PROCEDURE)) {
                 mapBodySite(durchgefuehrteProzedur, procedure);
             } else if (durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.ARTIFICIAL_RESPIRATION_PROCEDURE) ||
                     durchgefuehrteProzedur.getNameDerProzedurDefiningCode().equals(NameDerProzedurDefiningCode.OXYGEN_ADMINISTRATION_BY_NASAL_CANNULA_PROCEDURE) ||
@@ -249,8 +249,7 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
     private void mapMedizingerat(ProzedurAction durchgefuehrteProzedur, Procedure procedure) {
         // Map Medizingeraet for RESP
 
-        if(procedure.getUsedCode()!= null && !procedure.getUsedCode().isEmpty())
-        {
+        if (procedure.getUsedCode() != null && !procedure.getUsedCode().isEmpty()) {
             Coding usedCodeCoding = procedure.getUsedCode().get(0).getCoding().get(0);
 
             if (usedCodeCoding.getSystem().equals(SNOMED_SYSTEM) && geraetenameMap.containsKey(usedCodeCoding.getCode())) {
