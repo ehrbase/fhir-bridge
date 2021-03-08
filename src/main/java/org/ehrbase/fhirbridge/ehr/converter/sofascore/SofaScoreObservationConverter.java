@@ -136,8 +136,7 @@ public class SofaScoreObservationConverter {
     }
 
     private void mapAtemtaetigkeitCode(SOFAScoreObservation sofaScore, Observation observation) {
-        Observation.ObservationComponentComponent resp = getComponent(observation, "resp");
-        String atemtaetigkeitCode = resp.getValueCodeableConcept().getCoding().get(0).getCode();
+        String atemtaetigkeitCode = getComponent(observation, "resp").getValueCodeableConcept().getCoding().get(0).getCode();
 
         switch (atemtaetigkeitCode) {
             case "resp1":
