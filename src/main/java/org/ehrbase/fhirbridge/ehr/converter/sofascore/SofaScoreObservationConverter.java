@@ -221,7 +221,7 @@ public class SofaScoreObservationConverter {
 
     private void checkIfEmpty(Observation.ObservationComponentComponent component, String name) {
         if (component.getValueCodeableConcept().getCoding().isEmpty()) {
-            throw new UnprocessableEntityException("The component  doesn't have a code");
+            throw new UnprocessableEntityException("The component "+name+" doesn't have a code");
         }
 
     }
