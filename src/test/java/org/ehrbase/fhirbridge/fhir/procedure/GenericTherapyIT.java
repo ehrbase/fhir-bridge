@@ -120,9 +120,7 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String resource) throws IOException {
         Procedure procedure = (Procedure) testFileLoader.loadResource(resource);
 
-        return assertThrows(CompositionConversionException.class, () -> {
-            new TherapyCompositionConverter().toComposition((Procedure) procedure);
-        });
+        return assertThrows(CompositionConversionException.class, () -> new TherapyCompositionConverter().toComposition(procedure));
     }
 
     @Override

@@ -65,7 +65,6 @@ public class TherapyCompositionConverter implements CompositionConverter<GECCOPr
 
     @Override
     public Procedure fromComposition(GECCOProzedurComposition composition) throws CompositionConversionException {
-        // TODO: Implement
         return null;
     }
 
