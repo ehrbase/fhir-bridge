@@ -16,31 +16,30 @@
 
 package org.ehrbase.fhirbridge.camel.processor;
 
-import ca.uhn.fhir.rest.api.MethodOutcome;
+import ca.uhn.fhir.rest.api.server.IBundleProvider;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.hl7.fhir.r4.model.Bundle;
-import org.hl7.fhir.r4.model.Resource;
+import org.openehealth.ipf.commons.ihe.fhir.Constants;
 import org.springframework.stereotype.Component;
 
 /**
- * Camel {@link Processor} that converts back the persisted resource with contained resources into a Bundle.
+ * Camel {@link Processor} that handles response messages using the {@link IBundleProvider} returned by search operations
  *
  * @since 1.0.0
  */
 @Component
-public class BundleResponseProcessor implements Processor {
+public class BundleProviderResponseProcessor implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        MethodOutcome methodOutcome = exchange.getIn().getMandatoryBody(MethodOutcome.class);
+        IBundleProvider bundleProvider = exchange.getIn().getMandatoryBody(IBundleProvider.class);
 
-        Bundle responseBundle = new Bundle()
-                .setType(Bundle.BundleType.TRANSACTIONRESPONSE)
-                .addEntry(
-                        new Bundle.BundleEntryComponent()
-                                .setResource((Resource) methodOutcome.getResource()));
-
-        exchange.getMessage().setBody(responseBundle);
+        if (exchange.getIn().getHeaders().containsKey(Constants.FHIR_REQUEST_SIZE_ONLY)) {
+            exchange.getMessage().setHeader(Constants.FHIR_REQUEST_SIZE_ONLY, bundleProvider.size());
+        } else {
+            Integer from = exchange.getIn().getHeader(Constants.FHIR_FROM_INDEX, Integer.class);
+            Integer to = exchange.getIn().getHeader(Constants.FHIR_TO_INDEX, Integer.class);
+            exchange.getMessage().setBody(bundleProvider.getResources(from, to));
+        }
     }
 }
