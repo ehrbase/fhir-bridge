@@ -1,42 +1,34 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.DiagnoseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.AnatomischeLokalisationCluster;
+import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.NameDesProblemsDerDiagnoseDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.ProblemDiagnoseEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.ProblemDiagnoseSchweregradDvCodedText;
+import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.SchweregradDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
+
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class DiagnoseCompositionConverter implements CompositionConverter<DiagnoseComposition, Condition> {
+public class DiagnoseCompositionConverter extends AbstractCompositionConverter<Condition, DiagnoseComposition> {
 
     private static final Logger LOG = LoggerFactory.getLogger(DiagnoseCompositionConverter.class);
 
     @Override
-    public Condition fromComposition(DiagnoseComposition composition) {
-        return new Condition();
-    }
-
-    @Override
-    public DiagnoseComposition toComposition(Condition condition) {
-        if (condition == null) {
-            return null;
-        }
+    public DiagnoseComposition convert(@NonNull Condition condition) {
         DiagnoseComposition result = new DiagnoseComposition();
-        FeederAudit fa = CommonData.constructFeederAudit(condition);
-        result.setFeederAudit(fa);
+
         DateTimeType fhirOnsetDateTime = condition.getOnsetDateTimeType();
         Coding fhirSeverity = condition.getSeverity().getCoding().get(0);
         Coding fhirDiagnosis = condition.getCode().getCoding().get(0);
@@ -106,13 +98,6 @@ public class DiagnoseCompositionConverter implements CompositionConverter<Diagno
 
         result.setProblemDiagnose(evaluation);
 
-        // ======================================================================================
-        // Required fields by API
-        result.setLanguage(Language.EN);
-        result.setLocation("test");
-        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        result.setTerritory(Territory.DE);
-        result.setCategoryDefiningCode(Category.EVENT);
 
         // check if the condition has a recorded date, if not, use the onset
         DateTimeType aDate = condition.getRecordedDateElement();

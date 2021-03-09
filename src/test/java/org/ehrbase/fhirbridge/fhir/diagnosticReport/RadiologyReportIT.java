@@ -8,7 +8,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCO
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
@@ -20,7 +19,8 @@ import java.io.IOException;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RadiologyReportIT extends AbstractMappingTestSetupIT {
 
@@ -35,17 +35,17 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mappingNormalFinding() throws IOException {
-        testMapping("create-radiology-report-normal-finding.json","paragon-radiology-report-normal-finding.json" );
+        testMapping("create-radiology-report-normal-finding.json", "paragon-radiology-report-normal-finding.json");
     }
 
     @Test
     void mappingTypicalFinding() throws IOException {
-        testMapping("create-radiology-report-typical-finding.json","paragon-radiology-report-typical-finding.json" );
+        testMapping("create-radiology-report-typical-finding.json", "paragon-radiology-report-typical-finding.json");
     }
 
     @Test
     void mappingUnspecificFinding() throws IOException {
-        testMapping("create-radiology-report-unspecific-finding.json","paragon-radiology-report-unspecific-finding.json" );
+        testMapping("create-radiology-report-unspecific-finding.json", "paragon-radiology-report-unspecific-finding.json");
     }
 
     @Test
@@ -63,9 +63,9 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createInvalidStatus() throws IOException {
-        try{
+        try {
             super.testFileLoader.loadResource("create-radiology-report-invalid-status.json");
-        }catch (DataFormatException dataFormatException){
+        } catch (DataFormatException dataFormatException) {
             assertEquals("[element=\"status\"] Invalid attribute value \"asd\": Unknown DiagnosticReportStatus code 'asd'", dataFormatException.getMessage());
         }
     }
@@ -80,7 +80,7 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         DiagnosticReport radiologyReport = (DiagnosticReport) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            new RadiologischerBefundConverter().toComposition( radiologyReport);
+            new RadiologischerBefundConverter().convert(radiologyReport);
         });
     }
 
