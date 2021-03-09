@@ -60,6 +60,7 @@ public class QuestionnaireResponseRoutes extends AbstractRouteBuilder {
             .onException(Exception.class)
                 .process("defaultExceptionHandler")
             .end()
+            .process("resourceProfileValidator")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(questionnaireResponseDao, "create"))
             .process(ehrIdLookupProcessor)
             .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
