@@ -7,8 +7,8 @@ import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2compos
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.KennzeichnungErregernachweisEvaluation;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
+import org.springframework.lang.NonNull;
 
-import javax.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 public class CoronavirusNachweisTestCompositionConverter extends AbstractCompositionConverter<Observation, KennzeichnungErregernachweisSARSCoV2Composition> {
 
     @Override
-    public KennzeichnungErregernachweisSARSCoV2Composition convert(@NotNull Observation observation) {
+    public KennzeichnungErregernachweisSARSCoV2Composition convert(@NonNull Observation observation) {
 
         KennzeichnungErregernachweisSARSCoV2Composition result = new KennzeichnungErregernachweisSARSCoV2Composition();
 
