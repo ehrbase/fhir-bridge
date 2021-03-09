@@ -56,13 +56,6 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
     }
 
     @Override
-    public Observation fromComposition(ReisehistorieComposition composition) throws CompositionConversionException {
-        //your mapping code
-        // return the mapped Observation of body temp
-        return null;
-    }
-
-    @Override
     public ReisehistorieComposition toComposition(Observation observation) throws CompositionConversionException {
 
         if (null == observation) {

@@ -1,11 +1,18 @@
-package org.ehrbase.fhirbridge.ehr.converter;
+package org.ehrbase.fhirbridge.ehr.converter.patientinicu;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.PatientAufICUComposition;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.PatientAufDerIntensivstationObservation;
+import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
@@ -13,7 +20,7 @@ import org.hl7.fhir.r4.model.Observation;
 import java.util.HashMap;
 
 public class PatientInIcuCompositionConverter implements CompositionConverter<PatientAufICUComposition, Observation> {
-    private static final Map<String, WurdeDieAktivitatDurchgefuhrtDefiningcode> aktivitatDurchgefuehrtDefiningcodeMap
+    private static final HashMap<String, WurdeDieAktivitatDurchgefuhrtDefiningcode> aktivitatDurchgefuehrtDefiningcodeMap
             = new HashMap<>();
 
 
@@ -23,12 +30,6 @@ public class PatientInIcuCompositionConverter implements CompositionConverter<Pa
                 aktivitatDurchgefuehrtDefiningcodeMap.put(code.getCode(), code);
             }
         }
-    }
-
-    @Override
-    public Observation fromComposition(PatientAufICUComposition composition) {
-        // TODO: Implement
-        return null;
     }
 
     @Override
@@ -57,26 +58,26 @@ public class PatientInIcuCompositionConverter implements CompositionConverter<Pa
         Observation.ObservationStatus status = fhirObservation.getStatus();
 
         if (status.equals(Observation.ObservationStatus.FINAL)) {
-            composition.setStatusDefiningcode(StatusDefiningcode.FINAL);
+            composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
         } else {
             throw new UnprocessableEntityException("Status has invalid code " + status.toCode());
         }
     }
 
     private static void setMandatoryFields(PatientAufICUComposition composition) {
-        composition.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-        composition.setLocation("test"); //FIXME: sensible value
-        composition.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        composition.setLanguage(Language.DE);
+        composition.setLocation("test");
+        composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         composition.setTerritory(Territory.DE);
-        composition.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
-        composition.setComposer(new PartySelf()); //FIXME: sensible value
+        composition.setCategoryDefiningCode(Category.EVENT);
+        composition.setComposer(new PartySelf());
     }
 
     private static PatientAufDerIntensivstationObservation mapPatientAufIntensivstation(Observation fhirObservation) {
         PatientAufDerIntensivstationObservation patientAufDerIntensivstation = new PatientAufDerIntensivstationObservation();
-        patientAufDerIntensivstation.setNameDerAktivitatValue("Behandlung auf der Intensivstation");
+        patientAufDerIntensivstation.setNameDerAktivitaetValue("Behandlung auf der Intensivstation");
 
-        patientAufDerIntensivstation.setWurdeDieAktivitatDurchgefuhrtDefiningcode(mapWurdeDieAktivitatDurchgefuhrt(fhirObservation));
+        patientAufDerIntensivstation.setWirdWurdeDieAktivitaetDurchgefuehrt(mapWurdeDieAktivitatDurchgefuhrt(fhirObservation));
 
         DateTimeType fhirEffectiveDateTime = fhirObservation.getEffectiveDateTimeType();
 
@@ -88,11 +89,11 @@ public class PatientInIcuCompositionConverter implements CompositionConverter<Pa
         return patientAufDerIntensivstation;
     }
 
-    private static WurdeDieAktivitatDurchgefuhrtDefiningcode mapWurdeDieAktivitatDurchgefuhrt(Observation fhirObservation) {
+    private static DvCodedText mapWurdeDieAktivitatDurchgefuhrt(Observation fhirObservation) {
         Coding coding = fhirObservation.getValueCodeableConcept().getCoding().get(0);
 
         if (coding.getSystem().equals("http://snomed.info/sct") && aktivitatDurchgefuehrtDefiningcodeMap.containsKey(coding.getCode())) {
-            return aktivitatDurchgefuehrtDefiningcodeMap.get(coding.getCode());
+            return aktivitatDurchgefuehrtDefiningcodeMap.get(coding.getCode()).toDvCodedText();
         }
 
         throw new UnprocessableEntityException("Aktivität durchgeführt has invalid code " + coding.getCode());
