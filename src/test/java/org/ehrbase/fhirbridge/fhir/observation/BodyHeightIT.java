@@ -98,7 +98,7 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(KorpergrosseComposition.class, List.of("location",  "feederAudit")))
+                .registerValueObject(new ValueObjectDefinition(KorpergrosseComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(GrosseLangeObservation.class)
                 .build();
     }
@@ -107,13 +107,13 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () ->
-            new BodyHeightCompositionConverter().toComposition(obs)
+                new BodyHeightCompositionConverter().convert(obs)
         );
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
-        Observation observation = (Observation)  super.testFileLoader.loadResource(resourcePath);
+        Observation observation = (Observation) super.testFileLoader.loadResource(resourcePath);
         BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
         KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mapped);

@@ -7,72 +7,27 @@ import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.IntensivmedizinischesMonitoringKorpertemperaturComposition;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturBeliebigesEreignisChoice;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturBeliebigesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturObservation;
-import org.ehrbase.fhirbridge.fhir.common.Profile;
-import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Quantity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import static java.util.Date.from;
-
-public class BodyTemperatureCompositionConverter implements CompositionConverter<IntensivmedizinischesMonitoringKorpertemperaturComposition, Observation> {
+public class BodyTemperatureCompositionConverter extends AbstractCompositionConverter<Observation, IntensivmedizinischesMonitoringKorpertemperaturComposition> {
 
     private static final Logger LOG = LoggerFactory.getLogger(BodyTemperatureCompositionConverter.class);
 
     @Override
-    public Observation fromComposition(IntensivmedizinischesMonitoringKorpertemperaturComposition composition) {
-        if (composition == null) {
-            return null;
-        }
-        Observation result = new Observation();
-        TemporalAccessor temporal;
-        KoerpertemperaturBeliebigesEreignisPointEvent event;
-        Coding coding;
-        // observations [0] . origin => effective_time
-        temporal = composition.getKoerpertemperatur().get(0).getOriginValue();
-        result.getEffectiveDateTimeType().setValue(Date.from(Instant.from(temporal)));
-        // observations [0] . events [0] . value -> result . value
-        event = (KoerpertemperaturBeliebigesEreignisPointEvent) composition.getKoerpertemperatur().get(0).getBeliebigesEreignis().get(0);
-        result.getValueQuantity().setValue(event.getTemperaturMagnitude());
-        result.getValueQuantity().setUnit(event.getTemperaturUnits());
-        result.getCategory().add(new CodeableConcept());
-        coding = result.getCategory().get(0).addCoding();
-        coding.setSystem("http://terminology.hl7.org/CodeSystem/result-category");
-        coding.setCode("vital-signs");
-
-        coding = result.getCode().addCoding();
-        coding.setSystem("http://loing.org");
-        coding.setCode("8310-5");
-
-        result.setStatus(Observation.ObservationStatus.FINAL);
-
-        result.getMeta().addProfile(Profile.BODY_TEMP.getUri());
-        result.setId(composition.getVersionUid().toString());
-
-        return result;
-    }
-
-    @Override
-    public IntensivmedizinischesMonitoringKorpertemperaturComposition toComposition(Observation observation) {
-        if (observation == null) {
-            return null;
-        }
-
+    public IntensivmedizinischesMonitoringKorpertemperaturComposition convert(@NonNull Observation observation) {
         IntensivmedizinischesMonitoringKorpertemperaturComposition result = new IntensivmedizinischesMonitoringKorpertemperaturComposition();
 
         // set feeder audit
