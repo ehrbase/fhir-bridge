@@ -1,40 +1,31 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestKategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 
 import java.util.List;
 
 import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.LOINC;
 
-public class DiagnosticReportLabCompositionConverter implements CompositionConverter<GECCOLaborbefundComposition, DiagnosticReport> {
+public class DiagnosticReportLabCompositionConverter extends AbstractCompositionConverter<DiagnosticReport, GECCOLaborbefundComposition> {
 
     private static final Logger LOG = LoggerFactory.getLogger(DiagnosticReportLabCompositionConverter.class);
 
     private final ObservationLabCompositionConverter observationConverter = new ObservationLabCompositionConverter();
 
     @Override
-    public DiagnosticReport fromComposition(GECCOLaborbefundComposition composition) {
-        if (composition == null) {
-            return null;
-        }
-        return new DiagnosticReport();
-    }
-
-    @Override
-    public GECCOLaborbefundComposition toComposition(DiagnosticReport diagnosticReport) {
-        if (diagnosticReport == null) {
-            return null;
-        }
-
+    public GECCOLaborbefundComposition convert(@NonNull DiagnosticReport diagnosticReport) {
         LOG.debug("Contained size: {}", diagnosticReport.getContained().size());
 
         // one contained Observation is expected
@@ -48,9 +39,6 @@ public class DiagnosticReportLabCompositionConverter implements CompositionConve
         Observation observation = (Observation) diagnosticReport.getContained().get(0);
 
         GECCOLaborbefundComposition result = observationConverter.toComposition(observation);
-
-        FeederAudit fa = CommonData.constructFeederAudit(diagnosticReport);
-        result.setFeederAudit(fa);
 
         LaborergebnisObservation laborbefund = result.getLaborergebnis();
 
@@ -66,9 +54,9 @@ public class DiagnosticReportLabCompositionConverter implements CompositionConve
 
     private LabortestKategorieDefiningCode getLabortestCode(CodeableConcept codeableConcept) {
         List<Coding> codings = codeableConcept.getCoding();
-        for(Coding coding: codings){
-            if(coding.getSystem().equals(LOINC.getUrl())){
-               return mapLabortest(coding.getCode());
+        for (Coding coding : codings) {
+            if (coding.getSystem().equals(LOINC.getUrl())) {
+                return mapLabortest(coding.getCode());
             }
         }
         throw new UnprocessableEntityException("The Category loinc code is missing");
@@ -87,21 +75,18 @@ public class DiagnosticReportLabCompositionConverter implements CompositionConve
             return LabortestKategorieDefiningCode.CHEMISTRY_STUDIES_SET;
         } else if (code.equals(LabortestKategorieDefiningCode.HEMATOLOGY_STUDIES_SET.getCode())) {
             return LabortestKategorieDefiningCode.HEMATOLOGY_STUDIES_SET;
-        }else if (code.equals(LabortestKategorieDefiningCode.SEROLOGY_AND_BLOOD_BANK_STUDIES_SET.getCode())) {
+        } else if (code.equals(LabortestKategorieDefiningCode.SEROLOGY_AND_BLOOD_BANK_STUDIES_SET.getCode())) {
             return LabortestKategorieDefiningCode.SEROLOGY_AND_BLOOD_BANK_STUDIES_SET;
-        }else if (code.equals(LabortestKategorieDefiningCode.URINALYSIS_STUDIES_SET.getCode())) {
+        } else if (code.equals(LabortestKategorieDefiningCode.URINALYSIS_STUDIES_SET.getCode())) {
             return LabortestKategorieDefiningCode.URINALYSIS_STUDIES_SET;
-        }else if (code.equals(LabortestKategorieDefiningCode.TOXICOLOGY_STUDIES_SET.getCode())) {
+        } else if (code.equals(LabortestKategorieDefiningCode.TOXICOLOGY_STUDIES_SET.getCode())) {
             return LabortestKategorieDefiningCode.TOXICOLOGY_STUDIES_SET;
-        }else if (code.equals(LabortestKategorieDefiningCode.LABORATORY_STUDIES_SET.getCode())) {
+        } else if (code.equals(LabortestKategorieDefiningCode.LABORATORY_STUDIES_SET.getCode())) {
             return LabortestKategorieDefiningCode.LABORATORY_STUDIES_SET;
-        }else if (code.equals(LabortestKategorieDefiningCode.COAGULATION_STUDIES_SET.getCode())) {
+        } else if (code.equals(LabortestKategorieDefiningCode.COAGULATION_STUDIES_SET.getCode())) {
             return LabortestKategorieDefiningCode.COAGULATION_STUDIES_SET;
-        }else{
-            throw new UnprocessableEntityException("The code" +code+"is not supported for category.coding");
+        } else {
+            throw new UnprocessableEntityException("The code" + code + "is not supported for category.coding");
         }
     }
-
-
-
 }
