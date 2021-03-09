@@ -33,6 +33,7 @@ public class D4lQuestionnaireCompositionConverter extends AbstractCompositionCon
         mapSections(questionnaireResponse);
         OffsetDateTime offsetDateTime = OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
         d4LQuestionnaireComposition.setStartTimeValue(offsetDateTime);
+        mapDefaultAttributes(questionnaireResponse, d4LQuestionnaireComposition);
         return populateD4lQuestionnaireComposition(d4LQuestionnaireComposition);
     }
 

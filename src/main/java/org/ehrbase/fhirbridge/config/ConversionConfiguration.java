@@ -16,6 +16,7 @@ import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.RespiratoryRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.clinicalFrailty.ClinicalFrailtyScaleScoreCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelConverter;
 import org.ehrbase.fhirbridge.ehr.converter.observationlab.ObservationLabCompositionConverter;
@@ -39,6 +40,7 @@ public class ConversionConfiguration {
         registerConditionConverters(conversionService);
         registerObservationConverters(conversionService);
         registerPatientConverters(conversionService);
+        registerQuestionnaireResponseConverter(conversionService);
         return conversionService;
     }
 
@@ -88,5 +90,9 @@ public class ConversionConfiguration {
 
     private void registerPatientConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.PATIENT, new PatientCompositionConverter());
+    }
+
+    private void registerQuestionnaireResponseConverter(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.DEFAULT_QUESTIONNAIRE_RESPONSE, new D4lQuestionnaireCompositionConverter());
     }
 }
