@@ -21,6 +21,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtObservation;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.StatusDefiningCode;
 
@@ -32,7 +33,7 @@ import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.Statu
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Körpergewicht")
-public class KoerpergewichtComposition implements CompositionEntity {
+public class KoerpergewichtComposition implements CompositionEntity, Composition {
   /**
    * Path: Körpergewicht/category
    */

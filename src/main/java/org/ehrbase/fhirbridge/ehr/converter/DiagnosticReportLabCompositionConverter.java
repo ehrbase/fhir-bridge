@@ -2,8 +2,10 @@ package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.LabortestBezeichnungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestKategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
@@ -45,25 +47,34 @@ public class DiagnosticReportLabCompositionConverter implements CompositionConve
 
         GECCOLaborbefundComposition result = observationConverter.toComposition(observation);
 
-
         LaborergebnisObservation laborbefund = result.getLaborergebnis();
 
         ProLaboranalytCluster laboranalytCluster = laborbefund.getProLaboranalyt();
 
         laborbefund.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        laborbefund.setLabortestBezeichnungValue(diagnosticReport.getCode().getText());
+   //TODO fix here     set LaborergebnisBefundConverter
+    //TODO fix here    laborbefund.setLabortestKategorieDefiningCode(getLabortestCode(diagnosticReport.getCode().getText()));
+
         laborbefund.setSchlussfolgerungValue(diagnosticReport.getConclusion());
 
-
         laborbefund.setProLaboranalyt(laboranalytCluster);
-
 
         //DvIdentifier receiverOrderIdentifier = new DvIdentifier();
         //receiverOrderIdentifier.setId(fhirDiagnosticReport.getIdentifier().get(0).getValue());
         //receiverOrderIdentifier.setType(fhirDiagnosticReport.getIdentifier().get(0).getSystem());
         //laborbefund.setLaborWelchesDenUntersuchungsauftragAnnimmt(receiverOrderIdentifier);
 
-
         return result;
     }
+
+/*
+    //TODO
+    private LabortestKategorieDefiningCode getLabortestCode(String text) {
+        if(text.equals(LabortestKategorieDefiningCode.)){
+
+        }
+    }
+*/
+
+
 }

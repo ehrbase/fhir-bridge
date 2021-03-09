@@ -2,8 +2,8 @@ package org.ehrbase.fhirbridge.ehr.converter.sofascore;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SOFAScoreObservation;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreObservation;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
@@ -13,8 +13,8 @@ import java.time.ZoneOffset;
 
 public class SofaScoreObservationConverter {
 
-    public SOFAScoreObservation convert(Observation observation) {
-        SOFAScoreObservation sofaScore = new SOFAScoreObservation();
+    public SofaScoreObservation convert(Observation observation) {
+        SofaScoreObservation sofaScore = new SofaScoreObservation();
         mapCodes(sofaScore, observation);
         sofaScore.setSubject(new PartySelf());
         sofaScore.setLanguage(Language.DE);
@@ -22,7 +22,7 @@ public class SofaScoreObservationConverter {
         return sofaScore;
     }
 
-    private void mapCodes(SOFAScoreObservation sofaScore, Observation observation) {
+    private void mapCodes(SofaScoreObservation sofaScore, Observation observation) {
         Observation.ObservationComponentComponent ns = getComponent(observation, "ns");
         Observation.ObservationComponentComponent cvs = getComponent(observation, "cvs");
         String nervensystemCode = ns.getValueCodeableConcept().getCoding().get(0).getCode();
@@ -62,13 +62,13 @@ public class SofaScoreObservationConverter {
     }
 
 
-    private void mapSofaScoreMagnitude(SOFAScoreObservation sofaScore, Observation observation) {
+    private void mapSofaScoreMagnitude(SofaScoreObservation sofaScore, Observation observation) {
         String sofaScoreCode = observation.getCode().getCoding().get(0).getCode();
         Long sofaScoreCodeLong = Long.parseLong(sofaScoreCode);
         sofaScore.setSofaScoreMagnitude(sofaScoreCodeLong);
     }
 
-    private void mapNierenFunktions(SOFAScoreObservation sofaScore, Observation observation) {
+    private void mapNierenFunktions(SofaScoreObservation sofaScore, Observation observation) {
         String nierenfunktionsCode = getComponent(observation, "kid").getValueCodeableConcept().getCoding().get(0).getCode();
         switch (nierenfunktionsCode) {
             case "kid1":
@@ -88,7 +88,7 @@ public class SofaScoreObservationConverter {
         }
     }
 
-    private void mapBlutgerinnungscode(SOFAScoreObservation sofaScore, Observation observation) {
+    private void mapBlutgerinnungscode(SofaScoreObservation sofaScore, Observation observation) {
         String blutgerinnungsCode = getComponent(observation, "coa").getValueCodeableConcept().getCoding().get(0).getCode();
         switch (blutgerinnungsCode) {
             case "coa1":
@@ -108,7 +108,7 @@ public class SofaScoreObservationConverter {
         }
     }
 
-    private void mapLeberfunktionsCode(SOFAScoreObservation sofaScore, Observation observation) {
+    private void mapLeberfunktionsCode(SofaScoreObservation sofaScore, Observation observation) {
         String leberfunktionsCode = getComponent(observation, "liv").getValueCodeableConcept().getCoding().get(0).getCode();
         switch (leberfunktionsCode) {
             case "liv1":
@@ -128,7 +128,7 @@ public class SofaScoreObservationConverter {
         }
     }
 
-    private void mapHerzKreislaufSystemCode(SOFAScoreObservation sofaScore, String herzKreislaufSystemCode, String nervensystemCode) {
+    private void mapHerzKreislaufSystemCode(SofaScoreObservation sofaScore, String herzKreislaufSystemCode, String nervensystemCode) {
         if (herzKreislaufSystemCode.equals("cvs1")) {
             sofaScore.setHerzKreislaufSystem(SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_1.getValue());
         } else if (nervensystemCode.equals("cvs2")) {
@@ -143,28 +143,28 @@ public class SofaScoreObservationConverter {
 
     }
 
-    private void mapAtemtaetigkeitCode(SOFAScoreObservation sofaScore, Observation observation) {
+    private void mapAtemtaetigkeitCode(SofaScoreObservation sofaScore, Observation observation) {
         String atemtaetigkeitCode = getComponent(observation, "resp").getValueCodeableConcept().getCoding().get(0).getCode();
 
         switch (atemtaetigkeitCode) {
             case "resp1":
-                sofaScore.setAtemtatigkeit(SofaScoreCode.ATEMFREQUENZ_SCORE_1.getValue());
+                sofaScore.setAtemtaetigkeit(SofaScoreCode.ATEMFREQUENZ_SCORE_1.getValue());
                 break;
             case "resp2":
-                sofaScore.setAtemtatigkeit(SofaScoreCode.ATEMFREQUENZ_SCORE_2.getValue());
+                sofaScore.setAtemtaetigkeit(SofaScoreCode.ATEMFREQUENZ_SCORE_2.getValue());
                 break;
             case "resp3":
-                sofaScore.setAtemtatigkeit(SofaScoreCode.ATEMFREQUENZ_SCORE_3.getValue());
+                sofaScore.setAtemtaetigkeit(SofaScoreCode.ATEMFREQUENZ_SCORE_3.getValue());
                 break;
             case "resp4":
-                sofaScore.setAtemtatigkeit(SofaScoreCode.ATEMFREQUENZ_SCORE_4.getValue());
+                sofaScore.setAtemtaetigkeit(SofaScoreCode.ATEMFREQUENZ_SCORE_4.getValue());
                 break;
             default:
                 throw new UnprocessableEntityException("The code " + atemtaetigkeitCode + " is not valid for the Breath Score");
         }
     }
 
-    private void mapNervenSystemCode(SOFAScoreObservation sofaScore, String nervensystemCode) {
+    private void mapNervenSystemCode(SofaScoreObservation sofaScore, String nervensystemCode) {
         switch (nervensystemCode) {
             case "ns1":
                 sofaScore.setZentralesNervensystem(SofaScoreCode.NERVENSYSTEM_SCORE_1.getValue());
@@ -183,13 +183,13 @@ public class SofaScoreObservationConverter {
         }
     }
 
-    private void mapTimeDate(Observation observation, SOFAScoreObservation result) {
+    private void mapTimeDate(Observation observation, SofaScoreObservation result) {
         tryEffectiveDateTime(observation, result);
         tryEffectiveInstantType(observation, result);
         tryEffectivePeriodType(observation, result);
     }
 
-    private void tryEffectiveDateTime(Observation observation, SOFAScoreObservation result) {
+    private void tryEffectiveDateTime(Observation observation, SofaScoreObservation result) {
         try {
             result.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
             result.setOriginValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
@@ -200,7 +200,7 @@ public class SofaScoreObservationConverter {
         }
     }
 
-    private void tryEffectiveInstantType(Observation observation, SOFAScoreObservation result) {
+    private void tryEffectiveInstantType(Observation observation, SofaScoreObservation result) {
         try {
             result.setTimeValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
             result.setOriginValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
@@ -211,7 +211,7 @@ public class SofaScoreObservationConverter {
         }
     }
 
-    private void tryEffectivePeriodType(Observation observation, SOFAScoreObservation result) {
+    private void tryEffectivePeriodType(Observation observation, SofaScoreObservation result) {
         try {
             LocalDateTime date = LocalDateTime.ofInstant(observation.getEffectivePeriod().getEnd().toInstant(), ZoneOffset.UTC);
             result.setTimeValue(date);

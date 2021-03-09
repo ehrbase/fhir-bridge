@@ -3,15 +3,15 @@ package org.ehrbase.fhirbridge.ehr.converter;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.IntensivmedizinischesMonitoringKorpertemperaturComposition;
-import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KorpertemperaturBeliebigesEreignisChoice;
-import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KorpertemperaturBeliebigesEreignisPointEvent;
-import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KorpertemperaturObservation;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
+import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturBeliebigesEreignisChoice;
+import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturBeliebigesEreignisPointEvent;
+import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturObservation;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,30 +39,17 @@ public class BodyTemperatureCompositionConverter implements CompositionConverter
         if (composition == null) {
             return null;
         }
-
         Observation result = new Observation();
-
         TemporalAccessor temporal;
-        KorpertemperaturBeliebigesEreignisPointEvent event;
+        KoerpertemperaturBeliebigesEreignisPointEvent event;
         Coding coding;
-
-
         // observations [0] . origin => effective_time
-        temporal = composition.getKorpertemperatur().get(0).getOriginValue();
+        temporal = composition.getKoerpertemperatur().get(0).getOriginValue();
         result.getEffectiveDateTimeType().setValue(Date.from(Instant.from(temporal)));
-
-
         // observations [0] . events [0] . value -> result . value
-        event = (KorpertemperaturBeliebigesEreignisPointEvent) composition.getKorpertemperatur().get(0).getBeliebigesEreignis().get(0);
+        event = (KoerpertemperaturBeliebigesEreignisPointEvent) composition.getKoerpertemperatur().get(0).getBeliebigesEreignis().get(0);
         result.getValueQuantity().setValue(event.getTemperaturMagnitude());
         result.getValueQuantity().setUnit(event.getTemperaturUnits());
-
-
-        // set patient
-        //result.getSubject().setReference("Patient/"+ subjectId.getValue());
-
-
-        // set codes that come hardcoded in the inbound resources
         result.getCategory().add(new CodeableConcept());
         coding = result.getCategory().get(0).addCoding();
         coding.setSystem("http://terminology.hl7.org/CodeSystem/result-category");
@@ -76,10 +62,6 @@ public class BodyTemperatureCompositionConverter implements CompositionConverter
         result.setStatus(Observation.ObservationStatus.FINAL);
 
         result.getMeta().addProfile(Profile.BODY_TEMP.getUri());
-
-
-        // FIXME: all FHIR resources need an ID, currently we are using the compo.uid as the resource ID,
-        // this is a workaround, might not work on all cases.
         result.setId(composition.getVersionUid().toString());
 
         return result;
@@ -118,36 +100,32 @@ public class BodyTemperatureCompositionConverter implements CompositionConverter
         }
 
         // mapping to openEHR
-        KorpertemperaturBeliebigesEreignisPointEvent tempEvent = new KorpertemperaturBeliebigesEreignisPointEvent();
+        KoerpertemperaturBeliebigesEreignisPointEvent tempEvent = new KoerpertemperaturBeliebigesEreignisPointEvent();
         tempEvent.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
         tempEvent.setTemperaturMagnitude(fhirValueNumeric.doubleValue());
         tempEvent.setTemperaturUnits(fhirValue.getUnit());
 
 
-        KorpertemperaturObservation tempObs = new KorpertemperaturObservation();
-        List<KorpertemperaturBeliebigesEreignisChoice> events = new ArrayList<>();
+        KoerpertemperaturObservation tempObs = new KoerpertemperaturObservation();
+        List<KoerpertemperaturBeliebigesEreignisChoice> events = new ArrayList<>();
         events.add(tempEvent);
         tempObs.setBeliebigesEreignis(events);
         tempObs.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
-        tempObs.setLanguage(Language.EN); // FIXME: we need to grab the language from the template
+        tempObs.setLanguage(Language.DE);
         tempObs.setSubject(new PartySelf());
 
-        List<KorpertemperaturObservation> observations = new ArrayList<>();
+        List<KoerpertemperaturObservation> observations = new ArrayList<>();
         observations.add(tempObs);
-        result.setKorpertemperatur(observations);
+        result.setKoerpertemperatur(observations);
 
         // ======================================================================================
         // Required fields by API
-        result.setLanguage(Language.EN); // FIXME: we need to grab the language from the template
+        result.setLanguage(Language.EN);
         result.setLocation("test");
-        result.setSettingDefiningcode(SettingDefiningcode.EMERGENCY_CARE);
+        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        result.setCategoryDefiningCode(Category.EVENT);
         result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-
-        // FIXME: https://github.com/ehrbase/ehrbase_client_library/issues/31
-        //        PartyProxy composer = new PartyIdentified();
-        //        result.setComposer(composer);
 
         result.setComposer(new PartySelf());
 

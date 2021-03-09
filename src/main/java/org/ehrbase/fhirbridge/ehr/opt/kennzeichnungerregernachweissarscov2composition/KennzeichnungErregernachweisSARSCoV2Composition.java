@@ -20,6 +20,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.FallidentifikationCluster;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.KennzeichnungErregernachweisEvaluation;
 
@@ -31,7 +32,7 @@ import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2compos
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Kennzeichnung Erregernachweis SARS-CoV-2")
-public class KennzeichnungErregernachweisSARSCoV2Composition implements CompositionEntity {
+public class KennzeichnungErregernachweisSARSCoV2Composition implements CompositionEntity, Composition {
   /**
    * Path: Kennzeichnung Erregernachweis SARS-CoV-2/category
    */

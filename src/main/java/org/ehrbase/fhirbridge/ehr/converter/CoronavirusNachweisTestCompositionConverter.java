@@ -2,15 +2,15 @@ package org.ehrbase.fhirbridge.ehr.converter;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KorpertemperaturBeliebigesEreignisPointEvent;
+import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturBeliebigesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.KennzeichnungErregernachweisSARSCoV2Composition;
+import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.ErregernameDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.KennzeichnungErregernachweisEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.ErregernameDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
@@ -35,7 +35,7 @@ public class CoronavirusNachweisTestCompositionConverter implements CompositionC
         Observation result = new Observation();
 
         TemporalAccessor temporal;
-        KorpertemperaturBeliebigesEreignisPointEvent event;
+        KoerpertemperaturBeliebigesEreignisPointEvent event;
         Coding coding;
 
         // evaluation time -> effective_time
@@ -57,10 +57,6 @@ public class CoronavirusNachweisTestCompositionConverter implements CompositionC
         result.setStatus(Observation.ObservationStatus.FINAL);
 
         result.getMeta().addProfile(Profile.CORONARIRUS_NACHWEIS_TEST.getUri());
-
-        // TODO: we are also not storing referenceRange
-
-        // FIXME: all FHIR resources need an ID, currently we are using the composition.uid as the resource ID,
         // this is a workaround, might not work on all cases.
         result.setId(composition.getVersionUid().toString()); // workaround
 
@@ -72,15 +68,9 @@ public class CoronavirusNachweisTestCompositionConverter implements CompositionC
         if (observation == null) {
             return null;
         }
-
         KennzeichnungErregernachweisSARSCoV2Composition result = new KennzeichnungErregernachweisSARSCoV2Composition();
-
-        // set feeder audit
         FeederAudit fa = CommonData.constructFeederAudit(observation);
         result.setFeederAudit(fa);
-
-        // TODO: I'm not sure this is a complete list of "positive" results in LOINC, these are just "SARS"+"presence" search
-        // https://search.loinc.org/searchLOINC/search.zul?query=sars+presence
         List<String> positiveResultLoincCodes = Arrays.asList(
                 "33972-1",
                 "33968-9",
@@ -100,15 +90,12 @@ public class CoronavirusNachweisTestCompositionConverter implements CompositionC
         );
 
         // ========================================================================================
-        // FHIR values
         DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
         String fhirValue = observation.getCode().getCoding().get(0).getDisplay(); // FIXME: the code and value should be assigned to the pathogen name node in the Compo, but the template binds just one specific value there (hardcoded)
         String fhirCode = observation.getCode().getCoding().get(0).getCode();
         String fhirTerminology = observation.getCode().getCoding().get(0).getSystem();
-
-        // mapping to openEHR
         KennzeichnungErregernachweisEvaluation evaluation = new KennzeichnungErregernachweisEvaluation();
-        evaluation.setLanguage(Language.EN);
+        evaluation.setLanguage(Language.DE);
         evaluation.setSubject(new PartySelf());
         evaluation.setZuletztAktualisiertValue(OffsetDateTime.now());
         evaluation.setZeitpunktDerKennzeichnungValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
@@ -119,8 +106,8 @@ public class CoronavirusNachweisTestCompositionConverter implements CompositionC
         evaluation.setErregernachweisInDerKlinikValue(false); // FIXME: FHIR don't have enough data to know if the pathogen was detected in the clinic.
 
         // FIXME: Can't map with the code from FHIR since the code in the openEHR template is fixed
-        ErregernameDefiningcode code = ErregernameDefiningcode.COV; //new ErregernameDefiningcode(fhirValue, null, fhirTerminology, fhirCode);
-        evaluation.setErregernameDefiningcode(code);
+        ErregernameDefiningCode code = ErregernameDefiningCode.SARS_COV2; //new ErregernameDefiningcode(fhirValue, null, fhirTerminology, fhirCode);
+        evaluation.setErregernameDefiningCode(code);
 
         result.setKennzeichnungErregernachweis(evaluation);
 
@@ -128,15 +115,10 @@ public class CoronavirusNachweisTestCompositionConverter implements CompositionC
         // Required fields by API
         result.setLanguage(Language.EN);
         result.setLocation("test");
-        result.setSettingDefiningcode(SettingDefiningcode.EMERGENCY_CARE);
+        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        result.setCategoryDefiningCode(Category.EVENT);
         result.setStartTimeValue(OffsetDateTime.now());
-
-        // FIXME: https://github.com/ehrbase/ehrbase_client_library/issues/31
-        //        PartyProxy composer = new PartyIdentified();
-        //        result.setComposer(composer);
-
         result.setComposer(new PartySelf());
 
         return result;

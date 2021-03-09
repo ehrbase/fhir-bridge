@@ -20,6 +20,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.FallidentifikationCluster;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturObservation;
 
@@ -31,7 +32,7 @@ import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertempe
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Intensivmedizinisches Monitoring Korpertemperatur")
-public class IntensivmedizinischesMonitoringKorpertemperaturComposition implements CompositionEntity {
+public class IntensivmedizinischesMonitoringKorpertemperaturComposition implements CompositionEntity, Composition {
   /**
    * Path: Bericht/category
    */
