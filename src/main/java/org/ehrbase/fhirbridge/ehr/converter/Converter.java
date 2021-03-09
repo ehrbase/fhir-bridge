@@ -16,10 +16,15 @@
 
 package org.ehrbase.fhirbridge.ehr.converter;
 
+import com.nedap.archie.rm.archetyped.FeederAudit;
+import com.nedap.archie.rm.archetyped.FeederAuditDetails;
+import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.apache.commons.lang3.StringUtils;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.hl7.fhir.r4.model.Resource;
 import org.springframework.lang.NonNull;
+
+import java.util.Collections;
 
 public interface Converter<R extends Resource, T> {
 
@@ -32,5 +37,24 @@ public interface Converter<R extends Resource, T> {
             }
         }
         return Language.DE;
+    }
+
+    default FeederAudit buildFeederAudit(R resource) {
+        FeederAudit audit = new FeederAudit();
+
+        FeederAuditDetails auditDetails = new FeederAuditDetails();
+        if (resource.getMeta().hasSource()) {
+            auditDetails.setSystemId(resource.getMeta().getSource());
+        } else {
+            auditDetails.setSystemId("FHIR-Bridge");
+        }
+        audit.setOriginatingSystemAudit(auditDetails);
+
+        DvIdentifier id = new DvIdentifier();
+        id.setId(resource.getId());
+        id.setType("fhir_logical_id");
+        audit.setOriginatingSystemItemIds(Collections.singletonList(id));
+
+        return audit;
     }
 }

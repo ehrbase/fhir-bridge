@@ -1,12 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.IntensivmedizinischesMonitoringKorpertemperaturComposition;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturBeliebigesEreignisChoice;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturBeliebigesEreignisPointEvent;
@@ -29,11 +24,6 @@ public class BodyTemperatureCompositionConverter extends AbstractCompositionConv
     @Override
     public IntensivmedizinischesMonitoringKorpertemperaturComposition convert(@NonNull Observation observation) {
         IntensivmedizinischesMonitoringKorpertemperaturComposition result = new IntensivmedizinischesMonitoringKorpertemperaturComposition();
-
-        // set feeder audit
-        FeederAudit fa = CommonData.constructFeederAudit(observation);
-        result.setFeederAudit(fa);
-
 
         // ========================================================================================
         // value quantity is expected
@@ -66,7 +56,6 @@ public class BodyTemperatureCompositionConverter extends AbstractCompositionConv
         events.add(tempEvent);
         tempObs.setBeliebigesEreignis(events);
         tempObs.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
-        tempObs.setLanguage(Language.DE);
         tempObs.setSubject(new PartySelf());
 
         List<KoerpertemperaturObservation> observations = new ArrayList<>();
@@ -75,14 +64,7 @@ public class BodyTemperatureCompositionConverter extends AbstractCompositionConv
 
         // ======================================================================================
         // Required fields by API
-        result.setLanguage(Language.EN);
-        result.setLocation("test");
-        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        result.setTerritory(Territory.DE);
-        result.setCategoryDefiningCode(Category.EVENT);
         result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-
-        result.setComposer(new PartySelf());
 
         return result;
     }
