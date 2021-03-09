@@ -10,6 +10,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
+import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.CareflowStepDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.CurrentStateDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.DetailsZurKoerperstelleCluster;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.ProzedurAction;
 import org.hl7.fhir.r4.model.Annotation;
@@ -22,17 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProcedureCompositionConverter implements CompositionConverter<ProzedurComposition, Procedure> {
-
-    @Override
-    public Procedure fromComposition(ProzedurComposition composition) {
-        if (composition == null) {
-            return null;
-        }
-
-        Procedure result = new Procedure();
-        result.setId(composition.getVersionUid().toString());
-        return result;
-    }
 
     @Override
     public ProzedurComposition toComposition(Procedure procedure) {
@@ -86,8 +77,8 @@ public class ProcedureCompositionConverter implements CompositionConverter<Proze
 
         // mandatory ism_transition
 
-        action.setProzedurBeendetDefiningcode(org.ehrbase.fhirbridge.ehr.opt.shareddefinition.ProzedurBeendetDefiningcode.COMPLETED);
-        action.setProzedurBeendetDefiningcodeCareflowStep(org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.ProzedurBeendetDefiningcode.PROZEDUR_BEENDET);
+        action.setCareflowStepDefiningCode(CareflowStepDefiningCode.PROZEDUR_BEENDET);
+        action.setCurrentStateDefiningCode(CurrentStateDefiningCode.COMPLETED);
 
         // mandatory subject
         action.setSubject(new PartySelf());
