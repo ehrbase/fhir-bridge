@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.clinicalFrailty.ClinicalFrailtyScaleScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelConverter;
@@ -8,7 +8,6 @@ import org.ehrbase.fhirbridge.ehr.converter.observationlab.ObservationLabComposi
 import org.ehrbase.fhirbridge.ehr.converter.patientinicu.PatientInIcuCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOximetryConverter;
 import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
-import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.smokingstatus.SmokingStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.sofascore.SofaScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.symptom.SymptomCompositionConverter;
@@ -21,11 +20,11 @@ import java.util.EnumMap;
 @Component
 public class CompositionConverterResolver implements InitializingBean {
 
-    private final EnumMap<Profile, CompositionConverter<?, ?>> profiles = new EnumMap<>(Profile.class);
+    private final EnumMap<Profile, Converter<?, ?>> profiles = new EnumMap<>(Profile.class);
 
     @SuppressWarnings("java:S1452")
-    public CompositionConverter<?, ?> resolve(Profile profile) {
-        CompositionConverter<?, ?> compositionConverter = profiles.get(profile);
+    public Converter<?, ?> resolve(Profile profile) {
+        Converter<?, ?> compositionConverter = profiles.get(profile);
         if (compositionConverter == null) {
             throw new IllegalArgumentException("No CompositionConverter defines for profile '" + profile + "'");
         }
