@@ -31,39 +31,6 @@ public class CoronavirusNachweisTestCompositionConverter implements CompositionC
     private static final Logger LOG = LoggerFactory.getLogger(CoronavirusNachweisTestCompositionConverter.class);
 
     @Override
-    public Observation fromComposition(KennzeichnungErregernachweisSARSCoV2Composition composition) {
-        Observation result = new Observation();
-
-        TemporalAccessor temporal;
-        KoerpertemperaturBeliebigesEreignisPointEvent event;
-        Coding coding;
-
-        // evaluation time -> effective_time
-        temporal = composition.getKennzeichnungErregernachweis().getZeitpunktDerKennzeichnungValue();
-        result.getEffectiveDateTimeType().setValue(Date.from(Instant.from(temporal)));
-
-        // FIXME: cant map the code back because the composition has a boolean derived from the code in the FHIR resource
-        if (composition.getKennzeichnungErregernachweis().isErregernachweisValue()) {
-            // This is not right, could not the value that came initially in the FHIR result
-            coding = result.getCode().addCoding();
-            coding.setSystem("http://loing.org");
-            coding.setCode("94532-9");
-            coding.setDisplay("SARS coronavirus+SARS-like coronavirus+SARS coronavirus 2+MERS coronavirus RNA [Presence] in Respiratory specimen by NAA with probe detection");
-        }
-
-        // set patient
-        //result.getSubject().setReference("Patient/"+ subjectId.getValue());
-
-        result.setStatus(Observation.ObservationStatus.FINAL);
-
-        result.getMeta().addProfile(Profile.CORONARIRUS_NACHWEIS_TEST.getUri());
-        // this is a workaround, might not work on all cases.
-        result.setId(composition.getVersionUid().toString()); // workaround
-
-        return result;
-    }
-
-    @Override
     public KennzeichnungErregernachweisSARSCoV2Composition toComposition(Observation observation) {
         if (observation == null) {
             return null;

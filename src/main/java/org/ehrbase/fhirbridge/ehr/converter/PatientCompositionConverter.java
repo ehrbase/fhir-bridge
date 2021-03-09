@@ -28,10 +28,6 @@ import org.hl7.fhir.r4.model.Patient;
 
 public class PatientCompositionConverter implements CompositionConverter<GECCOPersonendatenComposition, Patient> {
 
-    @Override
-    public Patient fromComposition(GECCOPersonendatenComposition composition) {
-        return null;
-    }
 
     @Override
     public GECCOPersonendatenComposition toComposition(Patient fhirPatient) {

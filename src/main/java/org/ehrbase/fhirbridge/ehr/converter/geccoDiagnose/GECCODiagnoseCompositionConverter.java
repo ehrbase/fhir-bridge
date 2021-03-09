@@ -28,12 +28,6 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
     private final String SNOMED_SYSTEM = "http://snomed.info/sct";
 
     @Override
-    public Condition fromComposition(GECCODiagnoseComposition composition) {
-        // TODO: Implement
-        return null;
-    }
-
-    @Override
     public GECCODiagnoseComposition toComposition(Condition condition) {
         GECCODiagnoseComposition composition = new GECCODiagnoseComposition();
         FeederAudit fa = CommonData.constructFeederAudit(condition);
