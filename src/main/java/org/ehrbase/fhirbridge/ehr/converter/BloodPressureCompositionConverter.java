@@ -13,6 +13,7 @@ public class BloodPressureCompositionConverter extends AbstractCompositionConver
     @Override
     public BlutdruckComposition convert(@NonNull Observation observation) {
         BlutdruckComposition result = new BlutdruckComposition();
+        mapCommonAttributes(observation, result);
 
         BlutdruckObservation bloodPressure = new BlutdruckObservation();
 

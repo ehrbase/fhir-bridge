@@ -27,6 +27,7 @@ public class PatientCompositionConverter extends AbstractCompositionConverter<Pa
     @Override
     public GECCOPersonendatenComposition convert(@NonNull Patient patient) {
         GECCOPersonendatenComposition composition = new GECCOPersonendatenComposition();
+        mapCommonAttributes(patient, composition);
         PersonendatenAdminEntry personData = new PersonendatenAdminEntry();
         composition.setAlter(getAgeFromFhir(patient));
         personData.setDatenZurGeburt(getDataOnBirth(patient));
@@ -35,7 +36,6 @@ public class PatientCompositionConverter extends AbstractCompositionConverter<Pa
         personData.setLanguage(Language.DE);
         composition.setPersonendaten(personData);
         composition.setStartTimeValue(composition.getAlter().getTimeValue());
-        mapDefaultAttributes(patient, composition);
         return composition;
     }
 

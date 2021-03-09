@@ -15,8 +15,9 @@ public class SofaScoreCompositionConverter extends AbstractCompositionConverter<
     public SOFAComposition convert(@NonNull Observation observation) {
 
         SOFAComposition result = new SOFAComposition();
-        result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
+        mapCommonAttributes(observation, result);
 
+        result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
 
         // ======================================================================================
         // Required fields by API

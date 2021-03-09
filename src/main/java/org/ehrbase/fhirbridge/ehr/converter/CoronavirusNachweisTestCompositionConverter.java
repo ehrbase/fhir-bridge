@@ -20,6 +20,7 @@ public class CoronavirusNachweisTestCompositionConverter extends AbstractComposi
     public KennzeichnungErregernachweisSARSCoV2Composition convert(@NonNull Observation observation) {
 
         KennzeichnungErregernachweisSARSCoV2Composition result = new KennzeichnungErregernachweisSARSCoV2Composition();
+        mapCommonAttributes(observation, result);
 
         List<String> positiveResultLoincCodes = Arrays.asList(
                 "33972-1",

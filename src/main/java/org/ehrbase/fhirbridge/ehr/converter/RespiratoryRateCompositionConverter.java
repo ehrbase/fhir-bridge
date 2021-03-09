@@ -16,6 +16,7 @@ public class RespiratoryRateCompositionConverter extends AbstractCompositionConv
     public AtemfrequenzComposition convert(@NonNull Observation observation) {
         //create result and observation objects
         AtemfrequenzComposition result = new AtemfrequenzComposition();
+        mapCommonAttributes(observation, result);
 
         AtemfrequenzObservation atemfrequenzObservation = new AtemfrequenzObservation();
 
@@ -37,7 +38,7 @@ public class RespiratoryRateCompositionConverter extends AbstractCompositionConv
 
         // Required fields by API
         result.setStartTimeValue(effectiveDateTime);
-        mapDefaultAttributes(observation, result);
+        mapCommonAttributes(observation, result);
         return result;
     }
 }

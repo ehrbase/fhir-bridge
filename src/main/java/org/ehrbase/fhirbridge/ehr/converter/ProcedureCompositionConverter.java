@@ -24,6 +24,7 @@ public class ProcedureCompositionConverter extends AbstractCompositionConverter<
     @Override
     public ProzedurComposition convert(@NonNull Procedure procedure) {
         ProzedurComposition result = new ProzedurComposition();
+        mapCommonAttributes(procedure, result);
 
         Coding code = procedure.getCode().getCoding().get(0);
 
@@ -89,7 +90,7 @@ public class ProcedureCompositionConverter extends AbstractCompositionConverter<
         composer.addIdentifier(identifier);
         result.setComposer(composer);
 
-        mapDefaultAttributes(procedure, result);
+        mapCommonAttributes(procedure, result);
 
         return result;
     }

@@ -29,11 +29,11 @@ public class D4lQuestionnaireCompositionConverter extends AbstractCompositionCon
     @Override
     public D4LQuestionnaireComposition convert(@NonNull QuestionnaireResponse questionnaireResponse) {
         D4LQuestionnaireComposition d4LQuestionnaireComposition = new D4LQuestionnaireComposition();
+        mapCommonAttributes(questionnaireResponse, d4LQuestionnaireComposition);
         initialiseSections(questionnaireResponse);
         mapSections(questionnaireResponse);
         OffsetDateTime offsetDateTime = OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
         d4LQuestionnaireComposition.setStartTimeValue(offsetDateTime);
-        mapDefaultAttributes(questionnaireResponse, d4LQuestionnaireComposition);
         return populateD4lQuestionnaireComposition(d4LQuestionnaireComposition);
     }
 

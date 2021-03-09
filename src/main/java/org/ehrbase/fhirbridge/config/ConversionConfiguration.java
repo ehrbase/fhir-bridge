@@ -72,20 +72,22 @@ public class ConversionConfiguration {
 
     private void registerConditionConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.DEFAULT_CONDITION, new DiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_LIVER_DISEASE, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_LUNG_DISEASE, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_DIABETES_MELLITUS, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_COVID_19, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_MALIGNANT_NEOPLASTIC_DISEASE, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_RHEUMATOLOGICAL_IMMUNOLOGICAL_DISEASE, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_CARDIOVASCULAR_DISEASE, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_CHRONIC_KIDNEY_DISEASE, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_CHRONIC_NEUROLOGICAL_MENTAL_DISEASE, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_GASTROINTESTINAL_ULCERS, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_HIV, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_ORGAN_RECIPIENT, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_COMPLICATIONS_COVID_19, new GECCODiagnoseCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSE_DEPENDENCE_ON_VENTILATOR, new GECCODiagnoseCompositionConverter());
+
+        GECCODiagnoseCompositionConverter converter = new GECCODiagnoseCompositionConverter();
+        conversionService.registerConverter(Profile.DIAGNOSE_LIVER_DISEASE, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_LUNG_DISEASE, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_DIABETES_MELLITUS, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_COVID_19, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_MALIGNANT_NEOPLASTIC_DISEASE, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_RHEUMATOLOGICAL_IMMUNOLOGICAL_DISEASE, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_CARDIOVASCULAR_DISEASE, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_CHRONIC_KIDNEY_DISEASE, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_CHRONIC_NEUROLOGICAL_MENTAL_DISEASE,converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_GASTROINTESTINAL_ULCERS, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_HIV, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_ORGAN_RECIPIENT, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_COMPLICATIONS_COVID_19, converter);
+        conversionService.registerConverter(Profile.DIAGNOSE_DEPENDENCE_ON_VENTILATOR, converter);
     }
 
     private void registerPatientConverters(ConversionService conversionService) {

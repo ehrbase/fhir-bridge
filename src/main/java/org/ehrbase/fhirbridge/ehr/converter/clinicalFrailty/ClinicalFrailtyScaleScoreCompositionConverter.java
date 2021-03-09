@@ -18,6 +18,7 @@ public class ClinicalFrailtyScaleScoreCompositionConverter extends AbstractCompo
     @Override
     public KlinischeFrailtySkalaComposition convert(@NonNull Observation observation) {
         KlinischeFrailtySkalaComposition result = new KlinischeFrailtySkalaComposition();
+        mapCommonAttributes(observation, result);
         KlinischeFrailtySkalaCfsObservation klinischeFrailtySkalaCfsObservation = new KlinischeFrailtySkalaCfsObservation();
 
         DateTimeType fhirEffectiveDateTime = null;

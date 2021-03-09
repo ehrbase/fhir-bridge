@@ -17,7 +17,7 @@ public class FiO2CompositionConverter extends AbstractCompositionConverter<Obser
     @Override
     public BeatmungswerteComposition convert(@NonNull Observation observation) {
         BeatmungswerteComposition result = new BeatmungswerteComposition();
-        mapDefaultAttributes(observation, result);
+        mapCommonAttributes(observation, result);
 
         BeobachtungenAmBeatmungsgeraetObservation beobachtungenAmBeatmungsgeraetObservation = new BeobachtungenAmBeatmungsgeraetObservation();
         ZonedDateTime effectiveDateTime = null;

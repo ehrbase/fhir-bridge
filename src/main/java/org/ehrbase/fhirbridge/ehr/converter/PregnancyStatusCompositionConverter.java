@@ -20,6 +20,7 @@ public class PregnancyStatusCompositionConverter extends AbstractCompositionConv
     @Override
     public SchwangerschaftsstatusComposition convert(@NonNull Observation observation) {
         SchwangerschaftsstatusComposition result = new SchwangerschaftsstatusComposition();
+        mapCommonAttributes(observation, result);
 
         // map start time
         DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
@@ -41,8 +42,6 @@ public class PregnancyStatusCompositionConverter extends AbstractCompositionConv
         identifier.setId(observation.getPerformer().get(0).getReference());
         composer.addIdentifier(identifier);
         result.setComposer(composer);
-
-        mapDefaultAttributes(observation, result);
 
         return result;
     }
