@@ -4,14 +4,14 @@ import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
-import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.DetailsZurKorperstelleCluster;
+import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.DetailsZurKoerperstelleCluster;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.ProzedurAction;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.hl7.fhir.r4.model.Annotation;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -75,16 +75,17 @@ public class ProcedureCompositionConverter implements CompositionConverter<Proze
 
         // anatomical location
         if (bodySite != null) {
-            DetailsZurKorperstelleCluster anatomicalLocationCluster = new DetailsZurKorperstelleCluster();
+            DetailsZurKoerperstelleCluster anatomicalLocationCluster = new DetailsZurKoerperstelleCluster();
 
             // mapping
-            anatomicalLocationCluster.setNameDerKorperstelleValue(bodySite.getDisplay());
+            anatomicalLocationCluster.setNameDerKoerperstelleValue(bodySite.getDisplay());
 
-            action.setDetailsZurKorperstelle(new ArrayList<>());
-            action.getDetailsZurKorperstelle().add(anatomicalLocationCluster);
+            action.setDetailsZurKoerperstelle(new ArrayList<>());
+            action.getDetailsZurKoerperstelle().add(anatomicalLocationCluster);
         }
 
         // mandatory ism_transition
+
         action.setProzedurBeendetDefiningcode(org.ehrbase.fhirbridge.ehr.opt.shareddefinition.ProzedurBeendetDefiningcode.COMPLETED);
         action.setProzedurBeendetDefiningcodeCareflowStep(org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.ProzedurBeendetDefiningcode.PROZEDUR_BEENDET);
 
@@ -101,9 +102,9 @@ public class ProcedureCompositionConverter implements CompositionConverter<Proze
         // Required fields by API
         result.setLanguage(Language.DE);
         result.setLocation("test");
-        result.setSettingDefiningcode(SettingDefiningcode.EMERGENCY_CARE);
+        result.setSettingDefiningCode(Setting.EMERGENCY_CARE);
         result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        result.setCategoryDefiningCode(Category.EVENT);
 
         result.setStartTimeValue(performed.getValueAsCalendar().toZonedDateTime());
 
