@@ -1,13 +1,14 @@
-package org.ehrbase.fhirbridge.ehr.converter;
+package org.ehrbase.fhirbridge.ehr.converter.symptom;
 
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.SymptomComposition;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.AusgeschlossenesSymptomEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.UnbekanntesSymptomEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomAnatomischeLokalisationElement;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomObservation;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.*;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
@@ -19,25 +20,19 @@ import java.util.Map;
 
 public class SymptomCompositionConverter implements CompositionConverter<SymptomComposition, Condition> {
 
-    private static final Map<String, ProblemDiagnoseDefiningcode> krankheitszeichenMap = new HashMap<>();
+    private static final Map<String, KrankheitsanzeichenCode> krankheitszeichenMap = new HashMap<>();
 
-    private static final Map<String, SchweregradDefiningcode> schweregradMap = new HashMap<>();
+    private static final Map<String, SchweregradSymptomCode> schweregradMap = new HashMap<>();
 
 
     static {
-        for (ProblemDiagnoseDefiningcode krankheitszeichen : ProblemDiagnoseDefiningcode.values()) {
+        for (KrankheitsanzeichenCode krankheitszeichen : KrankheitsanzeichenCode.values()) {
             krankheitszeichenMap.put(krankheitszeichen.getCode(), krankheitszeichen);
         }
 
-        for (SchweregradDefiningcode schweregrad : SchweregradDefiningcode.values()) {
+        for (SchweregradSymptomCode schweregrad : SchweregradSymptomCode.values()) {
             schweregradMap.put(schweregrad.getCode(), schweregrad);
         }
-    }
-
-    @Override
-    public Condition fromComposition(SymptomComposition composition) throws CompositionConversionException {
-        // TODO: Implement
-        return null;
     }
 
     @Override
@@ -62,14 +57,14 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
         // ======================================================================================
         // Required fields by API
 
-        result.setStatusDefiningcode(StatusDefiningcode.FINAL);
-        result.setKategorieDefiningcode(KategorieDefiningcode.N753251);
+        result.setStatusDefiningCode(StatusDefiningCode.FINAL);
+        result.setKategorie(KategorieDefiningCodeSymptom.N753251.toDvCodedText());
 
         result.setLanguage(Language.DE);
         result.setLocation("test");
-        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        result.setCategoryDefiningCode(Category.EVENT);
         result.setComposer(new PartySelf());
 
 
@@ -83,7 +78,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
 
             Coding coding = condition.getCode().getCoding().get(0);
 
-            ProblemDiagnoseDefiningcode krankheitszeichen = null;
+            KrankheitsanzeichenCode krankheitszeichen = null;
 
             // Neue Systeme werden eingepflegt sobald sie in KrankheitsanzeichenDefiningcode definiert sind.
             if (coding.getSystem().equals("http://snomed.info/sct")) {
@@ -94,7 +89,8 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
                 throw new CompositionConversionException("Unbekanntes Krankheitszeichen.");
             }
 
-            vorliegendesSymptom.setNameDesSymptomsKrankheitsanzeichensDefiningcode(krankheitszeichen);
+     //       vorliegendesSymptom.setNameDesSymptomsKrankheitsanzeichensDefiningcode(krankheitszeichen);
+            vorliegendesSymptom.setNameDesSymptomsKrankheitsanzeichens(krankheitszeichen.toDvCodedText());
 
 
             if (condition.getOnset() != null && !condition.getOnset().isEmpty()) {
@@ -105,7 +101,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
             vorliegendesSymptom.setTimeValue(condition.getRecordedDateElement().getValueAsCalendar().toZonedDateTime());
 
             if (condition.getAbatement() != null && !condition.getAbatement().isEmpty()) {
-                vorliegendesSymptom.setDatumUhrzeitDesRuckgangsValue(
+                vorliegendesSymptom.setDatumUhrzeitDesRueckgangsValue(
                         condition.getAbatementDateTimeType().getValueAsCalendar().toZonedDateTime());
             }
 
@@ -123,7 +119,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
 
             if (condition.getSeverity() != null && !condition.getSeverity().isEmpty()) {
 
-                SchweregradDefiningcode schweregrad = null;
+                SchweregradSymptomCode schweregrad = null;
 
                 if (condition.getSeverity().getCoding().get(0).getSystem().equals("http://snomed.info/sct")) {
                     schweregrad = schweregradMap.get(condition.getSeverity().getCoding().get(0).getCode());
@@ -133,7 +129,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
                     throw new CompositionConversionException("Schweregrad has unknown system");
                 }
 
-                vorliegendesSymptom.setSchweregradDefiningcode(schweregrad);
+                vorliegendesSymptom.setSchweregrad(schweregrad.toDvCodedText());
             }
 
 
@@ -158,7 +154,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
         try {
             Coding coding = condition.getCode().getCoding().get(0);
 
-            ProblemDiagnoseDefiningcode krankheitszeichen = null;
+            KrankheitsanzeichenCode krankheitszeichen = null;
 
             if (coding.getSystem().equals("http://snomed.info/sct")) {
                 krankheitszeichen = krankheitszeichenMap.get(coding.getCode());
@@ -168,7 +164,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
                 throw new CompositionConversionException("Unbekanntes Diagnose/Problem.");
             }
 
-            ausgeschlossenesSymptom.setProblemDiagnoseDefiningcode(krankheitszeichen);
+            ausgeschlossenesSymptom.setProblemDiagnose(krankheitszeichen.toDvCodedText());
         } catch (Exception e) {
             throw new CompositionConversionException("Some parts of the condition did not contain the required elements. "
                     + e.getMessage(), e);
@@ -176,7 +172,8 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
 
 
         // Only one value possible.
-        ausgeschlossenesSymptom.setAussageUberDenAusschlussDefiningcode(AussageUberDenAusschlussDefiningcode.N410594000);
+
+        ausgeschlossenesSymptom.setAussageUeberDenAusschluss(AussageUberDenAusschlussDefiningCode.N410594000.toDvCodedText());
 
 
         ausgeschlossenesSymptom.setSubject(new PartySelf());
@@ -193,7 +190,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
         try {
             Coding coding = condition.getCode().getCoding().get(0);
 
-            ProblemDiagnoseDefiningcode krankheitszeichen = null;
+            KrankheitsanzeichenCode krankheitszeichen = null;
 
             // Neue Systeme werden eingepflegt sobald sie in KrankheitsanzeichenDefiningcode definiert sind.
             if (coding.getSystem().equals("http://snomed.info/sct")) {
@@ -204,7 +201,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
                 throw new CompositionConversionException("Unbekanntes <unbekanntes Symptom>");
             }
 
-            unbekanntesSymptom.setUnbekanntesSymptomDefiningcode(krankheitszeichen);
+            unbekanntesSymptom.setUnbekanntesSymptom(krankheitszeichen.toDvCodedText());
 
         } catch (Exception e) {
             throw new CompositionConversionException("Some parts of the condition did not contain the required elements. "
@@ -212,15 +209,14 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
         }
 
         // UnbekanntesSymptomAussage can only have one value.
-        UnbekanntesSymptomAussageUberDieFehlendeInformationElement aussageUberDieFehlendeInformationElement = new UnbekanntesSymptomAussageUberDieFehlendeInformationElement();
-        aussageUberDieFehlendeInformationElement.setDefiningcode(Definingcode.N261665006);
+        UnbekanntesSymptomAussageUeberDieFehlendeInformationElement aussageUberDieFehlendeInformationElement = new UnbekanntesSymptomAussageUeberDieFehlendeInformationElement();
+        aussageUberDieFehlendeInformationElement.setValue(DefiningCode.N261665006.toDvCodedText());
 
-
-        if (unbekanntesSymptom.getAussageUberDieFehlendeInformation() == null) {
-            unbekanntesSymptom.setAussageUberDieFehlendeInformation(new ArrayList<>());
+        if (unbekanntesSymptom.getAussageUeberDieFehlendeInformation() == null) {
+            unbekanntesSymptom.setAussageUeberDieFehlendeInformation(new ArrayList<>());
         }
 
-        unbekanntesSymptom.getAussageUberDieFehlendeInformation().add(aussageUberDieFehlendeInformationElement);
+        unbekanntesSymptom.getAussageUeberDieFehlendeInformation().add(aussageUberDieFehlendeInformationElement);
         unbekanntesSymptom.setSubject(new PartySelf());
         unbekanntesSymptom.setLanguage(Language.DE);
 

@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter;
+package org.ehrbase.fhirbridge.ehr.converter.observationlab;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
@@ -8,28 +8,24 @@ import com.nedap.archie.rm.datavalues.quantity.DvInterval;
 import com.nedap.archie.rm.datavalues.quantity.datetime.DvDate;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.LabortestBezeichnungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.*;
-import org.ehrbase.fhirbridge.fhir.common.Profile;
-import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.DateTimeType;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Quantity;
-import org.hl7.fhir.r4.model.Reference;
-import org.hl7.fhir.r4.model.Specimen;
+import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.LOINC;
 
 public class ObservationLabCompositionConverter implements CompositionConverter<GECCOLaborbefundComposition, Observation> {
 
@@ -46,11 +42,11 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         }
     }
 
-    private static final Map<String, LabortestBezeichnungDefiningCode> labortestBezeichnungLOINCDefiningcodeMap
+    private static final Map<String, LabortestKategorieDefiningCode> labortestBezeichnungLOINCDefiningcodeMap
             = new HashMap<>();
 
     static {
-        for (LabortestBezeichnungDefiningCode code : LabortestBezeichnungDefiningCode.values()) {
+        for (LabortestKategorieDefiningCode code : LabortestKategorieDefiningCode.values()) {
             if (code.getTerminologyId().equals("LOINC")) {
                 labortestBezeichnungLOINCDefiningcodeMap.put(code.getCode(), code);
             }
@@ -58,14 +54,11 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
     }
 
 
-    private static final Map<String, ReferenzbereichsHinweiseDefiningcode> referenzBereichsHTTPDefiningcodeMap
-            = new HashMap<>();
-
-    private static final Map<String, ReferenzbereichsHinweiseDefiningcode> referenzBereichsHTTPDefiningcodeMap
+    private static final Map<String, InterpretationDefiningCode> referenzBereichsHTTPDefiningcodeMap
             = new HashMap<>();
 
     static {
-        for (ReferenzbereichsHinweiseDefiningcode code : ReferenzbereichsHinweiseDefiningcode.values()) {
+        for (InterpretationDefiningCode code : InterpretationDefiningCode.values()) {
             if (code.getTerminologyId().equals("http")) {
                 referenzBereichsHTTPDefiningcodeMap.put(code.getCode(), code);
             }
@@ -83,10 +76,6 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         }
     }
 
-    @Override
-    public Observation fromComposition(GECCOLaborbefundComposition composition) {
-        return new Observation();
-    }
 
     @Override
     public GECCOLaborbefundComposition toComposition(Observation observation) {
@@ -151,14 +140,14 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         // Map category, only LOINC part see https://github.com/ehrbase/num_platform/issues/33
         if (observation.getCategory().get(0).getCoding().get(0).getSystem().equals("http://loinc.org")) {
             String loincCode = observation.getCategory().get(0).getCoding().get(0).getCode();
-            LabortestBezeichnungDefiningCode categoryDefiningcode = labortestBezeichnungLOINCDefiningcodeMap.get(loincCode);
+            LabortestKategorieDefiningCode categoryDefiningcode = labortestBezeichnungLOINCDefiningcodeMap.get(loincCode);
 
             if (categoryDefiningcode == null) {
                 throw new UnprocessableEntityException("Unknown LOINC code in observation");
             }
 
             result.setKategorieValue(categoryDefiningcode.getValue());
-            laborergebnis.setLabortestBezeichnungDefiningCode(categoryDefiningcode);
+            laborergebnis.setLabortestKategorieDefiningCode(categoryDefiningcode);
         } else {
             throw new UnprocessableEntityException("No LOINC code in observation");
         }
@@ -199,11 +188,11 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
         // ======================================================================================
         // Required fields by API
-        result.setLanguage(Language.EN);
+        result.setLanguage(Language.DE);
         result.setLocation("test");
-        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        result.setCategoryDefiningCode(Category.EVENT);
         result.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         // FIXME: https://github.com/ehrbase/ehrbase_client_library/issues/31
         //        PartyProxy composer = new PartyIdentified();
@@ -234,7 +223,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
         // Map to Probenart
         if (!specimen.getType().getCoding().isEmpty()) {
-            ProbenartDefiningcode probenart = null;
+            ProbenartDefiningCode probenart = null;
 
             if (specimen.getType().getCoding().get(0).getSystem().equals("http://terminology.hl7.org/CodeSystem/v2-0487")) {
                 String code = specimen.getType().getCoding().get(0).getCode();
@@ -245,7 +234,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
                 throw new UnprocessableEntityException("Probenart not defined in specimen");
             }
 
-            probe.setProbenartDefiningcode(probenart);
+            probe.setProbenartDefiningCode(probenart);
         }
 
 
@@ -261,24 +250,10 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         if (specimen.getCollection().getCollectedPeriod().hasStart() && specimen.getCollection().getCollectedPeriod().hasEnd()) {
             Date start = specimen.getCollection().getCollectedPeriod().getStart();
             Date end = specimen.getCollection().getCollectedPeriod().getEnd();
-
-            ProbeZeitpunktDerProbenentnahmeDvinterval interval = new ProbeZeitpunktDerProbenentnahmeDvinterval();
-
-            DvInterval<DvDate> dateDvInterval = new DvInterval<>();
-
-            dateDvInterval.setLower(new DvDate((new DateTimeType(start)).getValueAsCalendar().toZonedDateTime()));
-            dateDvInterval.setUpper(new DvDate((new DateTimeType(end)).getValueAsCalendar().toZonedDateTime()));
-
-            interval.setZeitpunktDerProbenentnahme(dateDvInterval);
-
-            probe.setZeitpunktDerProbenentnahme(interval);
+            probe.setZeitpunktDerProbenentnahmeValue((new DateTimeType(start)).getValueAsCalendar().toZonedDateTime());
         } else {
             DateTimeType date = specimen.getCollection().getCollectedDateTimeType();
-
-            ProbeZeitpunktDerProbenentnahmeDvdatetime zeitpunkt = new ProbeZeitpunktDerProbenentnahmeDvdatetime();
-            zeitpunkt.setZeitpunktDerProbenentnahmeValue(date.getValueAsCalendar().toZonedDateTime());
-
-            probe.setZeitpunktDerProbenentnahme(zeitpunkt);
+            probe.setZeitpunktDerProbenentnahmeValue(date.getValueAsCalendar().toZonedDateTime());
         }
 
         // Map collection->collector to Identifikator des Probenentnehmers
@@ -286,10 +261,9 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
         // Map parents -> Identifikator der übergeordneten Probe
         for (Reference reference : specimen.getParent()) {
-            ProbeIdentifikatorDerUbergeordnetenProbeElement identifikator = new ProbeIdentifikatorDerUbergeordnetenProbeElement();
+            ProbeIdentifikatorDerUebergeordnetenProbeElement identifikator = new ProbeIdentifikatorDerUebergeordnetenProbeElement();
             identifikator.setValue(mapIdentifier(reference.getIdentifier()));
-
-            probe.getIdentifikatorDerUbergeordnetenProbe().add(identifikator);
+            probe.getIdentifikatorDerUebergeordnetenProbe().add(identifikator);
         }
 
         // Map Condition -> Probenentnahmebedingung
@@ -300,31 +274,28 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
                 probe.getProbenentahmebedingung().add(bedingung);
             }
         }
-
         // Map Collection -> Method to Probenentnahmemethode
         probe.setProbenentnahmemethodeValue(specimen.getCollection().getMethod().getText());
-
-        // TODO: What about setProbenentnahmestelleName?
-        probe.setProbenentnahmestelleValue(specimen.getCollection().getBodySite().getText());
+        probe.setProbenentnahmemethodeValue(specimen.getCollection().getBodySite().getText());
 
         // Map Status -> Eignung zum Testen
-        EignungZumTestenDefiningcode eignungZumTestenDefiningcode = EignungZumTestenDefiningcode.ZUFRIEDENSTELLEND;
+        EignungZumTestenDefiningCode eignungZumTestenDefiningcode = EignungZumTestenDefiningCode.ZUFRIEDENSTELLEND;
         // TODO: Check if these mappings are correct.
         switch (specimen.getStatus()) {
             case UNSATISFACTORY:
-                eignungZumTestenDefiningcode = EignungZumTestenDefiningcode.MANGELHAFT_VERARBEITET;
+                eignungZumTestenDefiningcode = EignungZumTestenDefiningCode.MANGELHAFT_VERARBEITET;
                 break;
             case ENTEREDINERROR:
             case UNAVAILABLE:
             case NULL:
-                eignungZumTestenDefiningcode = EignungZumTestenDefiningcode.MANGELHAFT_NICHT_VERARBEITET;
+                eignungZumTestenDefiningcode = EignungZumTestenDefiningCode.MANGELHAFT_NICHT_VERARBEITET;
                 break;
             default:
                 break;
         }
 
-        ProbeEignungZumTestenDvcodedtext eignungZumTesten = new ProbeEignungZumTestenDvcodedtext();
-        eignungZumTesten.setEignungZumTestenDefiningcode(eignungZumTestenDefiningcode);
+        ProbeEignungZumTestenDvCodedText eignungZumTesten = new ProbeEignungZumTestenDvCodedText();
+        eignungZumTesten.setEignungZumTestenDefiningCode(eignungZumTestenDefiningcode);
         probe.setEignungZumTesten(eignungZumTesten);
 
         if (!specimen.getNote().isEmpty()) {
@@ -350,7 +321,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         DateTimeType issuedDateTime = null;
 
         UntersuchterAnalytDefiningCode untersuchterAnalyt = null;
-        ReferenzbereichsHinweiseDefiningcode interpretationDefiningcode = null;
+        InterpretationDefiningCode interpretationDefiningcode = null;
 
         ProLaboranalytKommentarElement kommentarElement = new ProLaboranalytKommentarElement();
 
@@ -392,21 +363,21 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
 
         // mapping to openEHR
-        ProLaboranalytAnalytResultatDvquantity laboranalytResultat = new ProLaboranalytAnalytResultatDvquantity();
+       // ProLaboranalytMesswertChoice
+        ProLaboranalytMesswertDvQuantity laboranalytResultat = new ProLaboranalytMesswertDvQuantity();
 
         // map value to magnitude and unit
-        laboranalytResultat.setAnalytResultatMagnitude(fhirValueNumeric.doubleValue());
-        laboranalytResultat.setAnalytResultatUnits(fhirValue.getUnit());
+        laboranalytResultat.setMesswertMagnitude(fhirValueNumeric.doubleValue());
+        laboranalytResultat.setMesswertUnits(fhirValue.getUnit());
 
         // =======================================================================================
         // rest of the structure to build the composition with the value taken from FHIR
         ProLaboranalytCluster laboranalyt = new ProLaboranalytCluster();
 
-        laboranalyt.setAnalytResultat(laboranalytResultat);
-        laboranalyt.setAnalytResultatValue("result"); // this is the ELEMENT.name
+        laboranalyt.setMesswert(laboranalytResultat);
         laboranalyt.setUntersuchterAnalytDefiningCode(untersuchterAnalyt);
 
-        laboranalyt.setReferenzbereichsHinweiseDefiningcode(interpretationDefiningcode);
+        laboranalyt.setInterpretationDefiningCode(interpretationDefiningcode);
 
         if (kommentarElement.getValue() != null) {
             laboranalyt.getKommentar().add(kommentarElement);
@@ -421,5 +392,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
         return laboranalyt;
     }
+
+
 
 }
