@@ -6,22 +6,16 @@ import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.PatientAufICUComposition;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.PatientAufDerIntensivstationObservation;
-import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.StatusDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.WurdeDieAktivitatDurchgefuhrtDefiningcode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class PatientInIcuCompositionConverter implements CompositionConverter<PatientAufICUComposition, Observation> {
     private static final Map<String, WurdeDieAktivitatDurchgefuhrtDefiningcode> aktivitatDurchgefuehrtDefiningcodeMap
             = new HashMap<>();
+
 
     static {
         for (WurdeDieAktivitatDurchgefuhrtDefiningcode code : WurdeDieAktivitatDurchgefuhrtDefiningcode.values()) {

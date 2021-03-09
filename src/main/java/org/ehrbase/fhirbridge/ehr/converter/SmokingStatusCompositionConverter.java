@@ -3,14 +3,13 @@ package org.ehrbase.fhirbridge.ehr.converter;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.RaucherstatusComposition;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RauchverhaltenDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
@@ -67,7 +66,7 @@ public class SmokingStatusCompositionConverter implements CompositionConverter<R
             }
             evaluation.setRauchverhaltenDefiningcode(rauchverhaltenDefiningcode);
 
-            evaluation.setLanguage(Language.DE);// FIXME: we need to grab the language from the template
+            evaluation.setLanguage(Language.DE);
             evaluation.setSubject(new PartySelf());
         } catch (Exception e) {
             throw new UnprocessableEntityException(e.getMessage());
@@ -76,12 +75,12 @@ public class SmokingStatusCompositionConverter implements CompositionConverter<R
         result.setRaucherstatus(evaluation);
 
         // Required fields by API
-        result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-        result.setLocation("test"); //FIXME: sensible value
-        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        result.setLanguage(Language.DE);
+        result.setLocation("test");
+        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
-        result.setComposer(new PartySelf()); //FIXME: sensible value
+        result.setCategoryDefiningCode(Category.EVENT);
+        result.setComposer(new PartySelf());
 
         return result;
     }

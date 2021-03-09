@@ -4,14 +4,14 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datavalues.quantity.DvProportion;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.BeatmungswerteComposition;
-import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeobachtungenAmBeatmungsgeratObservation;
+import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeobachtungenAmBeatmungsgeraetObservation;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.EingeatmeterSauerstoffCluster;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.hl7.fhir.r4.model.Observation;
 
 import java.time.ZonedDateTime;
@@ -31,45 +31,34 @@ public class FiO2CompositionConverter implements CompositionConverter<Beatmungsw
         }
 
         BeatmungswerteComposition result = new BeatmungswerteComposition();
-
-        // set feeder audit
         FeederAudit fa = CommonData.constructFeederAudit(observation);
         result.setFeederAudit(fa);
 
-
-        BeobachtungenAmBeatmungsgeratObservation beobachtungenAmBeatmungsgeratObservation = new BeobachtungenAmBeatmungsgeratObservation();
+        BeobachtungenAmBeatmungsgeraetObservation beobachtungenAmBeatmungsgeraetObservation = new BeobachtungenAmBeatmungsgeraetObservation();
         ZonedDateTime effectiveDateTime = null;
         EingeatmeterSauerstoffCluster eingeatmeterSauerstoff = new EingeatmeterSauerstoffCluster();
         DvProportion inspiratorischeSauerstofffraktion = new DvProportion();
 
-        //map values of interest from FHIR observation
         try {
-            //obligatory stuff block
             effectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
-            beobachtungenAmBeatmungsgeratObservation.setOriginValue(effectiveDateTime); // mandatory
-            beobachtungenAmBeatmungsgeratObservation.setTimeValue(effectiveDateTime);
-            beobachtungenAmBeatmungsgeratObservation.setLanguage(Language.DE);// FIXME: we need to grab the language from the template
-            beobachtungenAmBeatmungsgeratObservation.setSubject(new PartySelf());
-
-            //inspiratorische Sauerstofffraktion numerator and denominator
+            beobachtungenAmBeatmungsgeraetObservation.setOriginValue(effectiveDateTime); // mandatory
+            beobachtungenAmBeatmungsgeraetObservation.setTimeValue(effectiveDateTime);
+            beobachtungenAmBeatmungsgeraetObservation.setLanguage(Language.DE);
+            beobachtungenAmBeatmungsgeraetObservation.setSubject(new PartySelf());
             inspiratorischeSauerstofffraktion.setNumerator(observation.getValueQuantity().getValue().doubleValue());
             inspiratorischeSauerstofffraktion.setDenominator(100.0);
             inspiratorischeSauerstofffraktion.setType((long) 2);//2=percent (https://specifications.openehr.org/releases/RM/latest/data_types.html#_proportion_kind_class)
             eingeatmeterSauerstoff.setInspiratorischeSauerstofffraktion(inspiratorischeSauerstofffraktion);
-
-            //compose result
-            beobachtungenAmBeatmungsgeratObservation.setEingeatmeterSauerstoff(eingeatmeterSauerstoff);
-            result.setBeobachtungenAmBeatmungsgerat(beobachtungenAmBeatmungsgeratObservation);
+            beobachtungenAmBeatmungsgeraetObservation.setEingeatmeterSauerstoff(eingeatmeterSauerstoff);
+            result.setBeobachtungenAmBeatmungsgeraet(beobachtungenAmBeatmungsgeraetObservation);
         } catch (Exception e) {
             throw new UnprocessableEntityException(e.getMessage());
         }
-
-        //obligatory stuff block
         result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
         result.setLocation("test"); //FIXME: sensible value
-        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        result.setCategoryDefiningCode(Category.EVENT);
         result.setStartTimeValue(effectiveDateTime);
         result.setComposer(new PartySelf()); //FIXME: sensible value
         return result;

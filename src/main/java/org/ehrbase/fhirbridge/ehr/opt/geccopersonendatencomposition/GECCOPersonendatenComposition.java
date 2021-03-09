@@ -21,6 +21,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AlterObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.GeccoPersonendatenKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.GeschlechtEvaluation;
@@ -35,7 +36,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.S
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("GECCO_Personendaten")
-public class GECCOPersonendatenComposition implements CompositionEntity {
+public class GECCOPersonendatenComposition implements CompositionEntity, Composition {
   /**
    * Path: GECCO_Personendaten/category
    */

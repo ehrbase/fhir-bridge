@@ -67,7 +67,7 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
             Extension extensionEthnicGroup = fhirPatient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group");
             Coding ethnicGroup = (Coding) extensionEthnicGroup.getValue();
             EthnischerHintergrundCluster ec = new EthnischerHintergrundCluster();
-            ec.setEthnischerHintergrundDefiningCode(EthnischerHintergrundDefiningCode.get_by_SNOMED_code(ethnicGroup.getCode()));
+            ec.setEthnischerHintergrundDefiningCode(EthnischerHintergrundDefiningCode.getBySNOMEDCode(ethnicGroup.getCode()));
             items.add(ec);
         } catch (NullPointerException e) {
             throw new UnprocessableEntityException("Getting ethnicGroup failed: " + e.getMessage());

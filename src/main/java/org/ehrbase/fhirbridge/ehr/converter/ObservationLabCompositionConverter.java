@@ -9,29 +9,9 @@ import com.nedap.archie.rm.datavalues.quantity.datetime.DvDate;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.LabortestBezeichnungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestBezeichnungDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytAnalytResultatDvquantity;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytErgebnisStatusDvcodedtext;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytKommentarElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeEignungZumTestenDvcodedtext;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeIdentifikatorDerUbergeordnetenProbeElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeProbenentahmebedingungElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeZeitpunktDerProbenentnahmeDvdatetime;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeZeitpunktDerProbenentnahmeDvinterval;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbenartDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ReferenzbereichsHinweiseDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.StatusDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.UntersuchterAnalytDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -46,39 +26,40 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.util.Date.from;
-
 public class ObservationLabCompositionConverter implements CompositionConverter<GECCOLaborbefundComposition, Observation> {
 
     private static final Logger LOG = LoggerFactory.getLogger(ObservationLabCompositionConverter.class);
 
-    private static final Map<String, UntersuchterAnalytDefiningcode> untersuchterAnalytLOINCDefiningcodeMap
+    private static final Map<String, UntersuchterAnalytDefiningCode> untersuchterAnalytLOINCDefiningcodeMap
             = new HashMap<>();
 
     static {
-        for (UntersuchterAnalytDefiningcode code : UntersuchterAnalytDefiningcode.values()) {
+        for (UntersuchterAnalytDefiningCode code : UntersuchterAnalytDefiningCode.values()) {
             if (code.getTerminologyId().equals("LOINC")) {
                 untersuchterAnalytLOINCDefiningcodeMap.put(code.getCode(), code);
             }
         }
     }
 
-    private static final Map<String, LabortestBezeichnungDefiningcode> labortestBezeichnungLOINCDefiningcodeMap
+    private static final Map<String, LabortestBezeichnungDefiningCode> labortestBezeichnungLOINCDefiningcodeMap
             = new HashMap<>();
 
     static {
-        for (LabortestBezeichnungDefiningcode code : LabortestBezeichnungDefiningcode.values()) {
+        for (LabortestBezeichnungDefiningCode code : LabortestBezeichnungDefiningCode.values()) {
             if (code.getTerminologyId().equals("LOINC")) {
                 labortestBezeichnungLOINCDefiningcodeMap.put(code.getCode(), code);
             }
         }
     }
+
+
+    private static final Map<String, ReferenzbereichsHinweiseDefiningcode> referenzBereichsHTTPDefiningcodeMap
+            = new HashMap<>();
 
     private static final Map<String, ReferenzbereichsHinweiseDefiningcode> referenzBereichsHTTPDefiningcodeMap
             = new HashMap<>();
@@ -91,11 +72,11 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         }
     }
 
-    private static final Map<String, ProbenartDefiningcode> probenartHTTPDefiningcodeMap
+    private static final Map<String, ProbenartDefiningCode> probenartHTTPDefiningcodeMap
             = new HashMap<>();
 
     static {
-        for (ProbenartDefiningcode code : ProbenartDefiningcode.values()) {
+        for (ProbenartDefiningCode code : ProbenartDefiningCode.values()) {
             if (code.getTerminologyId().equals("http")) {
                 probenartHTTPDefiningcodeMap.put(code.getCode(), code);
             }
@@ -104,67 +85,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
     @Override
     public Observation fromComposition(GECCOLaborbefundComposition composition) {
-        if (composition == null) {
-            return null;
-        }
-
-        // TODO: Do we have to map all possible values back to the observation?
-        Observation result = new Observation();
-
-        TemporalAccessor temporal;
-        Coding coding;
-
-        result.getIdentifier().add(new Identifier()); // analyseBefundCode
-        result.getIdentifier().get(0).getType().getCoding().add(new Coding());
-        result.getIdentifier().get(0).getType().getCoding().get(0).setSystem("http://terminology.hl7.org/CodeSystem/v2-0203");
-        result.getIdentifier().get(0).getType().getCoding().get(0).setCode("OBI");
-
-
-        ProLaboranalytCluster cluster = composition.getLaborergebnis().getProLaboranalyt();
-
-        // cluster . time -> observation . effective_date
-        temporal = cluster.getZeitpunktErgebnisStatusValue();
-        if (temporal != null) {
-            result.getEffectiveDateTimeType().setValue(Date.from(Instant.from(temporal)));
-        }
-
-        // cluster . value -> observation . value
-        ProLaboranalytAnalytResultatDvquantity value = ((ProLaboranalytAnalytResultatDvquantity) cluster.getAnalytResultat());
-        result.getValueQuantity().setValue(value.getAnalytResultatMagnitude());
-        result.getValueQuantity().setUnit(value.getAnalytResultatUnits());
-        result.getValueQuantity().setSystem("http://unitsofmeasure.org");
-        result.getValueQuantity().setCode(value.getAnalytResultatUnits());
-
-        // set codes that come hardcoded in the inbound resources
-
-        // observation . category
-        result.getCategory().add(new CodeableConcept());
-
-        coding = result.getCategory().get(0).addCoding();
-        coding.setSystem("http://loing.org");
-        coding.setCode("26436-6");
-
-        coding = result.getCategory().get(0).addCoding();
-        coding.setSystem("http://terminology.hl7.org/CodeSystem/observation-category");
-        coding.setCode("laboratory");
-
-        // observation . code
-        coding = result.getCode().addCoding();
-        coding.setSystem("http://loing.org");
-        coding.setCode("59826-8");
-        coding.setDisplay("Creatinine [Moles/volume] in Blood");
-        result.getCode().setText("Kreatinin");
-
-        // set patient
-        //observation.getSubject().setReference("Patient/"+ subjectId.getValue());
-
-        result.setStatus(Observation.ObservationStatus.FINAL);
-
-        result.getMeta().addProfile(Profile.OBSERVATION_LAB.getUri());
-
-        result.setId(composition.getVersionUid().toString());
-
-        return result;
+        return new Observation();
     }
 
     @Override
@@ -184,61 +105,60 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
 
         // Map Status to composition and laboranalyt
-        StatusDefiningcode registereintragStatus = StatusDefiningcode.REGISTRIERT;
-        ErgebnisStatusDefiningcode laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.UNVOLLSTANDIG;
+        StatusDefiningCode registereintragStatus = StatusDefiningCode.REGISTRIERT;
+        ErgebnisStatusDefiningCode laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.UNVOLLSTAENDIG;
 
-        // TODO: Check if corrected=changed and default=registered is correct.
         switch (observation.getStatus()) {
             case FINAL:
-                registereintragStatus = StatusDefiningcode.FINAL;
-                laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.ENDBEFUND;
+                registereintragStatus = StatusDefiningCode.FINAL;
+                laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.ENDBEFUND;
                 break;
             case REGISTERED:
-                registereintragStatus = StatusDefiningcode.REGISTRIERT;
-                laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.ERFASST;
+                registereintragStatus = StatusDefiningCode.REGISTRIERT;
+                laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.ERFASST;
                 break;
             case AMENDED:
-                laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.ENDBEFUND_GEANDERT;
+                laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.ENDBEFUND_GEAENDERT;
                 break;
             case CORRECTED:
-                registereintragStatus = StatusDefiningcode.GEANDERT;
-                laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.ENDBEFUND_KORRIGIERT;
+                registereintragStatus = StatusDefiningCode.GEAENDERT;
+                laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.ENDBEFUND_KORRIGIERT;
                 break;
             case CANCELLED:
-                laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.ENDBEFUND_WIDERRUFEN;
+                laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.ENDBEFUND_WIDERRUFEN;
                 break;
             case ENTEREDINERROR:
-                laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.UNVOLLSTANDIG;
+                laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.UNVOLLSTAENDIG;
                 break;
             case NULL:
-                laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.STORNIERT;
+                laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.STORNIERT;
                 break;
             case PRELIMINARY:
-                registereintragStatus = StatusDefiningcode.VORLAUFIG;
-                laboranalytStatusDefiningcode = ErgebnisStatusDefiningcode.VORLAUFIG;
+                registereintragStatus = StatusDefiningCode.VORLAEUFIG;
+                laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.VORLAEUFIG;
                 break;
             default:
                 break;
         }
 
-        result.setStatusDefiningcode(registereintragStatus);
+        result.setStatusDefiningCode(registereintragStatus);
 
-        ProLaboranalytErgebnisStatusDvcodedtext ergebnisStatus = new ProLaboranalytErgebnisStatusDvcodedtext();
-        ergebnisStatus.setErgebnisStatusDefiningcode(laboranalytStatusDefiningcode);
+        ProLaboranalytErgebnisStatusDvCodedText ergebnisStatus = new ProLaboranalytErgebnisStatusDvCodedText();
+        ergebnisStatus.setErgebnisStatusDefiningCode(laboranalytStatusDefiningcode);
         laboranalyt.setErgebnisStatus(ergebnisStatus);
 
 
         // Map category, only LOINC part see https://github.com/ehrbase/num_platform/issues/33
         if (observation.getCategory().get(0).getCoding().get(0).getSystem().equals("http://loinc.org")) {
             String loincCode = observation.getCategory().get(0).getCoding().get(0).getCode();
-            LabortestBezeichnungDefiningcode categoryDefiningcode = labortestBezeichnungLOINCDefiningcodeMap.get(loincCode);
+            LabortestBezeichnungDefiningCode categoryDefiningcode = labortestBezeichnungLOINCDefiningcodeMap.get(loincCode);
 
             if (categoryDefiningcode == null) {
                 throw new UnprocessableEntityException("Unknown LOINC code in observation");
             }
 
             result.setKategorieValue(categoryDefiningcode.getValue());
-            laborergebnis.setLabortestBezeichnungDefiningcode(categoryDefiningcode);
+            laborergebnis.setLabortestBezeichnungDefiningCode(categoryDefiningcode);
         } else {
             throw new UnprocessableEntityException("No LOINC code in observation");
         }
@@ -429,7 +349,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         DateTimeType fhirEffectiveDateTime = null;
         DateTimeType issuedDateTime = null;
 
-        UntersuchterAnalytDefiningcode untersuchterAnalyt = null;
+        UntersuchterAnalytDefiningCode untersuchterAnalyt = null;
         ReferenzbereichsHinweiseDefiningcode interpretationDefiningcode = null;
 
         ProLaboranalytKommentarElement kommentarElement = new ProLaboranalytKommentarElement();
@@ -484,7 +404,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
         laboranalyt.setAnalytResultat(laboranalytResultat);
         laboranalyt.setAnalytResultatValue("result"); // this is the ELEMENT.name
-        laboranalyt.setUntersuchterAnalytDefiningcode(untersuchterAnalyt);
+        laboranalyt.setUntersuchterAnalytDefiningCode(untersuchterAnalyt);
 
         laboranalyt.setReferenzbereichsHinweiseDefiningcode(interpretationDefiningcode);
 

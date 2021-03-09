@@ -4,14 +4,14 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.SchwangerschaftsstatusComposition;
 import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition.SchwangerschaftsstatusObservation;
-import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition.StatusDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
+import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition.StatusDefiningCode2;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
@@ -49,9 +49,9 @@ public class PregnancyStatusCompositionConverter implements CompositionConverter
         // Required fields by API
         result.setLanguage(Language.DE);
         result.setLocation("test");
-        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        result.setCategoryDefiningCode(Category.EVENT);
         result.setStartTimeValue(OffsetDateTime.now());
 
         PartyIdentified composer = new PartyIdentified();
@@ -85,19 +85,19 @@ public class PregnancyStatusCompositionConverter implements CompositionConverter
             // TODO: this only considers LOINC cases
             switch (statusCode.getCode()) {
                 case "LA15173-0": // pregnant
-                    result.setStatusDefiningcode(StatusDefiningcode.SCHWANGER);
+                    result.setStatusDefiningCode(StatusDefiningCode2.SCHWANGER);
                     break;
                 case "LA26683-5": // not pregnant
-                    result.setStatusDefiningcode(StatusDefiningcode.NICHT_SCHWANGER);
+                    result.setStatusDefiningCode(StatusDefiningCode2.NICHT_SCHWANGER);
                     break;
                 case "LA4489-6": // unknown
-                    result.setStatusDefiningcode(StatusDefiningcode.UNBEKANNT);
+                    result.setStatusDefiningCode(StatusDefiningCode2.UNBEKANNT);
                     break;
                 default:
                     throw new UnprocessableEntityException("Status code " + statusCode.getCode() + " is not supported");
             }
         } else {
-            result.setStatusDefiningcode(StatusDefiningcode.UNBEKANNT);
+            result.setStatusDefiningCode(StatusDefiningCode2.UNBEKANNT);
         }
 
         return result;
