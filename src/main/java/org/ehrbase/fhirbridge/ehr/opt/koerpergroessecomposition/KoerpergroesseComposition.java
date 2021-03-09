@@ -28,8 +28,8 @@ import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.definition.Statu
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-17T12:50:17.715201+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T11:54:47.011696+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Körpergröße")
 public class KoerpergroesseComposition implements CompositionEntity {

@@ -5,201 +5,285 @@ import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.generic.Participation;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.String;
+import java.time.temporal.TemporalAccessor;
+import java.util.List;
+import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
+import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.Composition;
-import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeobachtungenAmBeatmungsgeratObservation;
-import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.StatusDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-
-import java.time.temporal.TemporalAccessor;
-import java.util.List;
+import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeobachtungenAmBeatmungsgeraetObservation;
+import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.StatusDefiningCode;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
+@Generated(
+    value = "org.ehrbase.client.classgenerator.ClassGenerator",
+    date = "2021-03-09T11:51:09.712415+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+)
 @Template("Beatmungswerte")
-public class BeatmungswerteComposition implements Composition {
-    @Id
-    private VersionUid versionUid;
+public class BeatmungswerteComposition implements CompositionEntity {
+  /**
+   * Path: Beatmungswerte/category
+   */
+  @Path("/category|defining_code")
+  private Category categoryDefiningCode;
 
-    @Path("/context/end_time|value")
-    private TemporalAccessor endTimeValue;
+  /**
+   * Path: Beatmungswerte/context/Erweiterung
+   * Description: Ergänzende Angaben zum Registereintrag. 
+   */
+  @Path("/context/other_context[at0001]/items[at0002]")
+  private List<Cluster> erweiterung;
 
-    @Path("/context/participations")
-    private List<Participation> participations;
+  /**
+   * Path: Beatmungswerte/context/Status
+   * Description: Status der gelieferten Daten für den Registereintrag. Hinweis: Dies ist nicht der Status einzelner Komponenten.
+   */
+  @Path("/context/other_context[at0001]/items[at0004]/value|defining_code")
+  private StatusDefiningCode statusDefiningCode;
 
-    @Path("/language")
-    private Language language;
+  /**
+   * Path: Beatmungswerte/context/Baum/Status/null_flavour
+   */
+  @Path("/context/other_context[at0001]/items[at0004]/null_flavour|defining_code")
+  private NullFlavour statusNullFlavourDefiningCode;
 
-    @Path("/context/health_care_facility")
-    private PartyIdentified healthCareFacility;
+  /**
+   * Path: Beatmungswerte/context/Kategorie
+   * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
+   */
+  @Path("/context/other_context[at0001]/items[at0005]/value|value")
+  private String kategorieValue;
 
-    @Path("/context/other_context[at0001]/items[at0004]/value|defining_code")
-    private StatusDefiningcode statusDefiningcode;
+  /**
+   * Path: Beatmungswerte/context/Baum/Kategorie/null_flavour
+   */
+  @Path("/context/other_context[at0001]/items[at0005]/null_flavour|defining_code")
+  private NullFlavour kategorieNullFlavourDefiningCode;
 
-    @Path("/context/other_context[at0001]/items[at0005]/value|value")
-    private String kategorieValue;
+  /**
+   * Path: Beatmungswerte/context/start_time
+   */
+  @Path("/context/start_time|value")
+  private TemporalAccessor startTimeValue;
 
-    @Path("/territory")
-    private Territory territory;
+  /**
+   * Path: Beatmungswerte/context/participations
+   */
+  @Path("/context/participations")
+  private List<Participation> participations;
 
-    @Path("/context/start_time|value")
-    private TemporalAccessor startTimeValue;
+  /**
+   * Path: Beatmungswerte/context/end_time
+   */
+  @Path("/context/end_time|value")
+  private TemporalAccessor endTimeValue;
 
-    @Path("/content[openEHR-EHR-OBSERVATION.ventilator_vital_signs.v0]")
-    private BeobachtungenAmBeatmungsgeratObservation beobachtungenAmBeatmungsgerat;
+  /**
+   * Path: Beatmungswerte/context/location
+   */
+  @Path("/context/location")
+  private String location;
 
-    @Path("/composer")
-    private PartyProxy composer;
+  /**
+   * Path: Beatmungswerte/context/health_care_facility
+   */
+  @Path("/context/health_care_facility")
+  private PartyIdentified healthCareFacility;
 
-    @Path("/context/setting|defining_code")
-    private SettingDefiningcode settingDefiningcode;
+  /**
+   * Path: Beatmungswerte/context/setting
+   */
+  @Path("/context/setting|defining_code")
+  private Setting settingDefiningCode;
 
-    @Path("/feeder_audit")
-    private FeederAudit feederAudit;
+  /**
+   * Path: Beatmungswerte/Beobachtungen am Beatmungsgerät
+   * Description: Vom Beatmungsgerät zurückgegebene Beobachtungsergebnisse.
+   */
+  @Path("/content[openEHR-EHR-OBSERVATION.ventilator_vital_signs.v0]")
+  private BeobachtungenAmBeatmungsgeraetObservation beobachtungenAmBeatmungsgeraet;
 
-    @Path("/context/location")
-    private String location;
+  /**
+   * Path: Beatmungswerte/composer
+   */
+  @Path("/composer")
+  private PartyProxy composer;
 
-    @Path("/category|defining_code")
-    private CategoryDefiningcode categoryDefiningcode;
+  /**
+   * Path: Beatmungswerte/language
+   */
+  @Path("/language")
+  private Language language;
 
-    @Path("/context/other_context[at0001]/items[at0002]")
-    private List<Cluster> erweiterung;
+  /**
+   * Path: Beatmungswerte/feeder_audit
+   */
+  @Path("/feeder_audit")
+  private FeederAudit feederAudit;
 
-    public VersionUid getVersionUid() {
-        return this.versionUid;
-    }
+  /**
+   * Path: Beatmungswerte/territory
+   */
+  @Path("/territory")
+  private Territory territory;
 
-    public void setVersionUid(VersionUid versionUid) {
-        this.versionUid = versionUid;
-    }
+  @Id
+  private VersionUid versionUid;
 
-    public TemporalAccessor getEndTimeValue() {
-        return this.endTimeValue;
-    }
+  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+     this.categoryDefiningCode = categoryDefiningCode;
+  }
 
-    public void setEndTimeValue(TemporalAccessor endTimeValue) {
-        this.endTimeValue = endTimeValue;
-    }
+  public Category getCategoryDefiningCode() {
+     return this.categoryDefiningCode ;
+  }
 
-    public List<Participation> getParticipations() {
-        return this.participations;
-    }
+  public void setErweiterung(List<Cluster> erweiterung) {
+     this.erweiterung = erweiterung;
+  }
 
-    public void setParticipations(List<Participation> participations) {
-        this.participations = participations;
-    }
+  public List<Cluster> getErweiterung() {
+     return this.erweiterung ;
+  }
 
-    public Language getLanguage() {
-        return this.language;
-    }
+  public void setStatusDefiningCode(StatusDefiningCode statusDefiningCode) {
+     this.statusDefiningCode = statusDefiningCode;
+  }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
+  public StatusDefiningCode getStatusDefiningCode() {
+     return this.statusDefiningCode ;
+  }
 
-    public PartyIdentified getHealthCareFacility() {
-        return this.healthCareFacility;
-    }
+  public void setStatusNullFlavourDefiningCode(NullFlavour statusNullFlavourDefiningCode) {
+     this.statusNullFlavourDefiningCode = statusNullFlavourDefiningCode;
+  }
 
-    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
-        this.healthCareFacility = healthCareFacility;
-    }
+  public NullFlavour getStatusNullFlavourDefiningCode() {
+     return this.statusNullFlavourDefiningCode ;
+  }
 
-    public StatusDefiningcode getStatusDefiningcode() {
-        return this.statusDefiningcode;
-    }
+  public void setKategorieValue(String kategorieValue) {
+     this.kategorieValue = kategorieValue;
+  }
 
-    public void setStatusDefiningcode(StatusDefiningcode statusDefiningcode) {
-        this.statusDefiningcode = statusDefiningcode;
-    }
+  public String getKategorieValue() {
+     return this.kategorieValue ;
+  }
 
-    public String getKategorieValue() {
-        return this.kategorieValue;
-    }
+  public void setKategorieNullFlavourDefiningCode(NullFlavour kategorieNullFlavourDefiningCode) {
+     this.kategorieNullFlavourDefiningCode = kategorieNullFlavourDefiningCode;
+  }
 
-    public void setKategorieValue(String kategorieValue) {
-        this.kategorieValue = kategorieValue;
-    }
+  public NullFlavour getKategorieNullFlavourDefiningCode() {
+     return this.kategorieNullFlavourDefiningCode ;
+  }
 
-    public Territory getTerritory() {
-        return this.territory;
-    }
+  public void setStartTimeValue(TemporalAccessor startTimeValue) {
+     this.startTimeValue = startTimeValue;
+  }
 
-    public void setTerritory(Territory territory) {
-        this.territory = territory;
-    }
+  public TemporalAccessor getStartTimeValue() {
+     return this.startTimeValue ;
+  }
 
-    public TemporalAccessor getStartTimeValue() {
-        return this.startTimeValue;
-    }
+  public void setParticipations(List<Participation> participations) {
+     this.participations = participations;
+  }
 
-    public void setStartTimeValue(TemporalAccessor startTimeValue) {
-        this.startTimeValue = startTimeValue;
-    }
+  public List<Participation> getParticipations() {
+     return this.participations ;
+  }
 
-    public BeobachtungenAmBeatmungsgeratObservation getBeobachtungenAmBeatmungsgerat() {
-        return this.beobachtungenAmBeatmungsgerat;
-    }
+  public void setEndTimeValue(TemporalAccessor endTimeValue) {
+     this.endTimeValue = endTimeValue;
+  }
 
-    public void setBeobachtungenAmBeatmungsgerat(
-            BeobachtungenAmBeatmungsgeratObservation beobachtungenAmBeatmungsgerat) {
-        this.beobachtungenAmBeatmungsgerat = beobachtungenAmBeatmungsgerat;
-    }
+  public TemporalAccessor getEndTimeValue() {
+     return this.endTimeValue ;
+  }
 
-    public PartyProxy getComposer() {
-        return this.composer;
-    }
+  public void setLocation(String location) {
+     this.location = location;
+  }
 
-    public void setComposer(PartyProxy composer) {
-        this.composer = composer;
-    }
+  public String getLocation() {
+     return this.location ;
+  }
 
-    public SettingDefiningcode getSettingDefiningcode() {
-        return this.settingDefiningcode;
-    }
+  public void setHealthCareFacility(PartyIdentified healthCareFacility) {
+     this.healthCareFacility = healthCareFacility;
+  }
 
-    public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
-        this.settingDefiningcode = settingDefiningcode;
-    }
+  public PartyIdentified getHealthCareFacility() {
+     return this.healthCareFacility ;
+  }
 
-    public FeederAudit getFeederAudit() {
-        return this.feederAudit;
-    }
+  public void setSettingDefiningCode(Setting settingDefiningCode) {
+     this.settingDefiningCode = settingDefiningCode;
+  }
 
-    public void setFeederAudit(FeederAudit feederAudit) {
-        this.feederAudit = feederAudit;
-    }
+  public Setting getSettingDefiningCode() {
+     return this.settingDefiningCode ;
+  }
 
-    public String getLocation() {
-        return this.location;
-    }
+  public void setBeobachtungenAmBeatmungsgeraet(
+      BeobachtungenAmBeatmungsgeraetObservation beobachtungenAmBeatmungsgeraet) {
+     this.beobachtungenAmBeatmungsgeraet = beobachtungenAmBeatmungsgeraet;
+  }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+  public BeobachtungenAmBeatmungsgeraetObservation getBeobachtungenAmBeatmungsgeraet() {
+     return this.beobachtungenAmBeatmungsgeraet ;
+  }
 
-    public CategoryDefiningcode getCategoryDefiningcode() {
-        return this.categoryDefiningcode;
-    }
+  public void setComposer(PartyProxy composer) {
+     this.composer = composer;
+  }
 
-    public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
-        this.categoryDefiningcode = categoryDefiningcode;
-    }
+  public PartyProxy getComposer() {
+     return this.composer ;
+  }
 
-    public List<Cluster> getErweiterung() {
-        return this.erweiterung;
-    }
+  public void setLanguage(Language language) {
+     this.language = language;
+  }
 
-    public void setErweiterung(List<Cluster> erweiterung) {
-        this.erweiterung = erweiterung;
-    }
+  public Language getLanguage() {
+     return this.language ;
+  }
+
+  public void setFeederAudit(FeederAudit feederAudit) {
+     this.feederAudit = feederAudit;
+  }
+
+  public FeederAudit getFeederAudit() {
+     return this.feederAudit ;
+  }
+
+  public void setTerritory(Territory territory) {
+     this.territory = territory;
+  }
+
+  public Territory getTerritory() {
+     return this.territory ;
+  }
+
+  public VersionUid getVersionUid() {
+     return this.versionUid ;
+  }
+
+  public void setVersionUid(VersionUid versionUid) {
+     this.versionUid = versionUid;
+  }
 }

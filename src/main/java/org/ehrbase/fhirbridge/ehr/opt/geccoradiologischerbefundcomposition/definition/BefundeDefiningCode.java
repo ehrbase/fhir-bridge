@@ -4,11 +4,11 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum BefundeDefiningCode implements EnumValueSet {
-  COVID19_TYPISCHER_BEFUND("COVID-19-typischer Befund", "COVID-19-typischer Befund", "SNOMED-CT", "840539006"),
+  UNSPEZIFISCHER_BEFUND("Unspezifischer Befund", "", "SNOMED-CT", "373068000"),
 
-  NORMALBEFUND("Normalbefund", "Normalbefund", "SNOMED-CT", "17621005"),
+  COVID19_TYPISCHER_BEFUND("COVID-19-typischer Befund", "", "SNOMED-CT", "840539006"),
 
-  UNSPEZIFISCHER_BEFUND("Unspezifischer Befund", "Unspezifischer Befund", "SNOMED-CT", "373068000");
+  NORMALBEFUND("Normalbefund", "", "SNOMED-CT", "17621005");
 
   private String value;
 

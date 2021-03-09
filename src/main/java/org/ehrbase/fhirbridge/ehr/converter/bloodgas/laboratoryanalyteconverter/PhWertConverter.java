@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.bloodgas.laboratoryanalyteconverter;
 
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.PhWertCluster;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.UntersuchterAnalytDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.UntersuchterAnalytDefiningCode3;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
@@ -14,20 +14,20 @@ public class PhWertConverter extends LaboratoryTestAnalyteConverter {
     public PhWertCluster map() {
         PhWertCluster phWertCluster = new PhWertCluster();
         phWertCluster.setErgebnisStatusValue(mapErgebnisStatus());
-        phWertCluster.setUntersuchterAnalytDefiningcode(mapUntersuchterAnalyt());
+        phWertCluster.setUntersuchterAnalytDefiningCode(mapUntersuchterAnalyt());
         phWertCluster.setAnalytResultatUnits("pH");
         phWertCluster.setAnalytResultatMagnitude(mapValue());
         return phWertCluster;
     }
 
     @Override
-    UntersuchterAnalytDefiningcode mapUntersuchterAnalyt() {
-        UntersuchterAnalytDefiningcode phSerumOrPlasma = UntersuchterAnalytDefiningcode.PH_OF_SERUM_OR_PLASMA;
-        UntersuchterAnalytDefiningcode phVenousBlood= UntersuchterAnalytDefiningcode.PH_OF_VENOUS_BLOOD;
-        UntersuchterAnalytDefiningcode phCapillaryBlood = UntersuchterAnalytDefiningcode.PH_OF_CAPILLARY_BLOOD;
-        UntersuchterAnalytDefiningcode phArterialBlood = UntersuchterAnalytDefiningcode.PH_OF_ARTERIAL_BLOOD;
-        UntersuchterAnalytDefiningcode phMixedVenousBlood = UntersuchterAnalytDefiningcode.PH_OF_MIXED_VENOUS_BLOOD;
-        UntersuchterAnalytDefiningcode phBlood = UntersuchterAnalytDefiningcode.PH_OF_BLOOD;
+    UntersuchterAnalytDefiningCode3 mapUntersuchterAnalyt() {
+        UntersuchterAnalytDefiningCode3 phSerumOrPlasma = UntersuchterAnalytDefiningCode3.PH_OF_SERUM_OR_PLASMA;
+        UntersuchterAnalytDefiningCode3 phVenousBlood= UntersuchterAnalytDefiningCode3.PH_OF_VENOUS_BLOOD;
+        UntersuchterAnalytDefiningCode3 phCapillaryBlood = UntersuchterAnalytDefiningCode3.PH_OF_CAPILLARY_BLOOD;
+        UntersuchterAnalytDefiningCode3 phArterialBlood = UntersuchterAnalytDefiningCode3.PH_OF_ARTERIAL_BLOOD;
+        UntersuchterAnalytDefiningCode3 phMixedVenousBlood = UntersuchterAnalytDefiningCode3.PH_OF_MIXED_VENOUS_BLOOD;
+        UntersuchterAnalytDefiningCode3 phBlood = UntersuchterAnalytDefiningCode3.PH_OF_BLOOD;
 
         for (Coding coding : fhirObservation.getCode().getCoding()) {
             String code = coding.getCode();

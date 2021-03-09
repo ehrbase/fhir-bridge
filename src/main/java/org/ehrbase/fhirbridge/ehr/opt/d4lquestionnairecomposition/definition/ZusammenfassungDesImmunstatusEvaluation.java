@@ -17,13 +17,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.immunisation_summary.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-25T13:06:41.176640+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T12:09:15.831121+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class ZusammenfassungDesImmunstatusEvaluation implements EntryEntity {
   /**
    * Path: Selbstüberwachung/Medikamente / Impfungen/Zusammenfassung des Immunstatus/Infektionskrankheit oder Erreger
    * Description: Identifizierung der Infektionskrankheit oder des Erregers.
+   * Comment: Es kann mehrere Krankheiten oder Erreger geben, die zusammen geimpft werden - zum Beispiel: Diptherie, Tetanus und Keuchhusten oder Masern, Mumps und Röteln.
    */
   @Path("/data[at0001]/items[at0002 and name/value='Infektionskrankheit oder Erreger']/value|value")
   private String infektionskrankheitOderErregerValue;

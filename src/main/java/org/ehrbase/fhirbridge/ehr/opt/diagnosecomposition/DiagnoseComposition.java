@@ -4,195 +4,256 @@ import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.Participation;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.String;
+import java.time.temporal.TemporalAccessor;
+import java.util.List;
+import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
+import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.Composition;
-import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.DiagnoseEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.FallidentifikationCluster;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-
-import java.time.temporal.TemporalAccessor;
-import java.util.List;
-import java.util.Objects;
+import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.ProblemDiagnoseEvaluation;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.report.v1")
+@Generated(
+    value = "org.ehrbase.client.classgenerator.ClassGenerator",
+    date = "2021-03-09T11:52:54.796356+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+)
 @Template("Diagnose")
-public class DiagnoseComposition implements Composition {
-    @Id
-    private VersionUid versionUid;
+public class DiagnoseComposition implements CompositionEntity {
+  /**
+   * Path: COVID-19-Diagnose/category
+   */
+  @Path("/category|defining_code")
+  private Category categoryDefiningCode;
 
-    @Path("/context/end_time|value")
-    private TemporalAccessor endTimeValue;
+  /**
+   * Path: COVID-19-Diagnose/context/Bericht ID
+   * Description: Identifizierungsmerkmal des Berichts.
+   */
+  @Path("/context/other_context[at0001]/items[at0002]/value|value")
+  private String berichtIdValue;
 
-    @Path("/feeder_audit")
-    private FeederAudit feederAudit;
+  /**
+   * Path: COVID-19-Diagnose/context/Tree/Bericht ID/null_flavour
+   */
+  @Path("/context/other_context[at0001]/items[at0002]/null_flavour|defining_code")
+  private NullFlavour berichtIdNullFlavourDefiningCode;
 
-    @Path("/context/participations")
-    private List<Participation> participations;
+  /**
+   * Path: COVID-19-Diagnose/context/Fallidentifikation
+   * Description: Zur Erfassung von Details zur Identifikation eines Falls im Gesundheitswesen.
+   */
+  @Path("/context/other_context[at0001]/items[openEHR-EHR-CLUSTER.case_identification.v0]")
+  private FallidentifikationCluster fallidentifikation;
 
-    @Path("/content[openEHR-EHR-EVALUATION.problem_diagnosis.v1]")
-    private DiagnoseEvaluation diagnose;
+  /**
+   * Path: COVID-19-Diagnose/context/start_time
+   */
+  @Path("/context/start_time|value")
+  private TemporalAccessor startTimeValue;
 
-    @Path("/language")
-    private Language language;
+  /**
+   * Path: COVID-19-Diagnose/context/participations
+   */
+  @Path("/context/participations")
+  private List<Participation> participations;
 
-    @Path("/context/health_care_facility")
-    private PartyIdentified healthCareFacility;
+  /**
+   * Path: COVID-19-Diagnose/context/end_time
+   */
+  @Path("/context/end_time|value")
+  private TemporalAccessor endTimeValue;
 
-    @Path("/context/other_context[at0001]/items[at0002]/value|value")
-    private String berichtIdValue;
+  /**
+   * Path: COVID-19-Diagnose/context/location
+   */
+  @Path("/context/location")
+  private String location;
 
-    @Path("/territory")
-    private Territory territory;
+  /**
+   * Path: COVID-19-Diagnose/context/health_care_facility
+   */
+  @Path("/context/health_care_facility")
+  private PartyIdentified healthCareFacility;
 
-    @Path("/context/start_time|value")
-    private TemporalAccessor startTimeValue;
+  /**
+   * Path: COVID-19-Diagnose/context/setting
+   */
+  @Path("/context/setting|defining_code")
+  private Setting settingDefiningCode;
 
-    @Path("/context/other_context[at0001]/items[openEHR-EHR-CLUSTER.case_identification.v0]")
-    private FallidentifikationCluster fallidentifikation;
+  /**
+   * Path: COVID-19-Diagnose/Problem/Diagnose
+   * Description: Angaben über einen einzelnen identifizierten Gesundheitszustand, eine Verletzung, eine Behinderung oder ein Problem, welches das körperliche, geistige und/oder soziale Wohlergehen einer Einzelperson beeinträchtigt.
+   * Comment: Eine klare Abgrenzung zwischen Problem und Diagnose ist in der Praxis nicht einfach zu erreichen. Für die Zwecke der klinischen Dokumentation mit diesem Archetyp werden Problem und Diagnose als ein Kontinuum betrachtet, mit zunehmendem Detaillierungsgrad und unterstützenden Beweisen, die in der Regel dem Etikett "Diagnose" Gewicht verleihen.
+   */
+  @Path("/content[openEHR-EHR-EVALUATION.problem_diagnosis.v1]")
+  private ProblemDiagnoseEvaluation problemDiagnose;
 
-    @Path("/composer")
-    private PartyProxy composer;
+  /**
+   * Path: COVID-19-Diagnose/composer
+   */
+  @Path("/composer")
+  private PartyProxy composer;
 
-    @Path("/context/setting|defining_code")
-    private SettingDefiningcode settingDefiningcode;
+  /**
+   * Path: COVID-19-Diagnose/language
+   */
+  @Path("/language")
+  private Language language;
 
-    @Path("/context/location")
-    private String location;
+  /**
+   * Path: COVID-19-Diagnose/feeder_audit
+   */
+  @Path("/feeder_audit")
+  private FeederAudit feederAudit;
 
-    @Path("/category|defining_code")
-    private CategoryDefiningcode categoryDefiningcode;
+  /**
+   * Path: COVID-19-Diagnose/territory
+   */
+  @Path("/territory")
+  private Territory territory;
 
-    public void setFeederAudit(FeederAudit feederAudit) {
-        this.feederAudit = feederAudit;
-    }
+  @Id
+  private VersionUid versionUid;
 
-    public FeederAudit getFeederAudit() {
-        return this.feederAudit;
-    }
+  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+     this.categoryDefiningCode = categoryDefiningCode;
+  }
 
-    public VersionUid getVersionUid() {
-        return this.versionUid;
-    }
+  public Category getCategoryDefiningCode() {
+     return this.categoryDefiningCode ;
+  }
 
-    public void setVersionUid(VersionUid versionUid) {
-        this.versionUid = versionUid;
-    }
+  public void setBerichtIdValue(String berichtIdValue) {
+     this.berichtIdValue = berichtIdValue;
+  }
 
-    public void setEndTimeValue(TemporalAccessor endTimeValue) {
-        this.endTimeValue = endTimeValue;
-    }
+  public String getBerichtIdValue() {
+     return this.berichtIdValue ;
+  }
 
-    public TemporalAccessor getEndTimeValue() {
-        return this.endTimeValue;
-    }
+  public void setBerichtIdNullFlavourDefiningCode(NullFlavour berichtIdNullFlavourDefiningCode) {
+     this.berichtIdNullFlavourDefiningCode = berichtIdNullFlavourDefiningCode;
+  }
 
-    public void setParticipations(List<Participation> participations) {
-        this.participations = participations;
-    }
+  public NullFlavour getBerichtIdNullFlavourDefiningCode() {
+     return this.berichtIdNullFlavourDefiningCode ;
+  }
 
-    public List<Participation> getParticipations() {
-        return this.participations;
-    }
+  public void setFallidentifikation(FallidentifikationCluster fallidentifikation) {
+     this.fallidentifikation = fallidentifikation;
+  }
 
-    public void setDiagnose(DiagnoseEvaluation diagnose) {
-        this.diagnose = diagnose;
-    }
+  public FallidentifikationCluster getFallidentifikation() {
+     return this.fallidentifikation ;
+  }
 
-    public DiagnoseEvaluation getDiagnose() {
-        return this.diagnose;
-    }
+  public void setStartTimeValue(TemporalAccessor startTimeValue) {
+     this.startTimeValue = startTimeValue;
+  }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
+  public TemporalAccessor getStartTimeValue() {
+     return this.startTimeValue ;
+  }
 
-    public Language getLanguage() {
-        return this.language;
-    }
+  public void setParticipations(List<Participation> participations) {
+     this.participations = participations;
+  }
 
-    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
-        this.healthCareFacility = healthCareFacility;
-    }
+  public List<Participation> getParticipations() {
+     return this.participations ;
+  }
 
-    public PartyIdentified getHealthCareFacility() {
-        return this.healthCareFacility;
-    }
+  public void setEndTimeValue(TemporalAccessor endTimeValue) {
+     this.endTimeValue = endTimeValue;
+  }
 
-    public void setBerichtIdValue(String berichtIdValue) {
-        this.berichtIdValue = berichtIdValue;
-    }
+  public TemporalAccessor getEndTimeValue() {
+     return this.endTimeValue ;
+  }
 
-    public String getBerichtIdValue() {
-        return this.berichtIdValue;
-    }
+  public void setLocation(String location) {
+     this.location = location;
+  }
 
-    public void setTerritory(Territory territory) {
-        this.territory = territory;
-    }
+  public String getLocation() {
+     return this.location ;
+  }
 
-    public Territory getTerritory() {
-        return this.territory;
-    }
+  public void setHealthCareFacility(PartyIdentified healthCareFacility) {
+     this.healthCareFacility = healthCareFacility;
+  }
 
-    public void setStartTimeValue(TemporalAccessor startTimeValue) {
-        this.startTimeValue = startTimeValue;
-    }
+  public PartyIdentified getHealthCareFacility() {
+     return this.healthCareFacility ;
+  }
 
-    public TemporalAccessor getStartTimeValue() {
-        return this.startTimeValue;
-    }
+  public void setSettingDefiningCode(Setting settingDefiningCode) {
+     this.settingDefiningCode = settingDefiningCode;
+  }
 
-    public void setFallidentifikation(FallidentifikationCluster fallidentifikation) {
-        this.fallidentifikation = fallidentifikation;
-    }
+  public Setting getSettingDefiningCode() {
+     return this.settingDefiningCode ;
+  }
 
-    public FallidentifikationCluster getFallidentifikation() {
-        return this.fallidentifikation;
-    }
+  public void setProblemDiagnose(ProblemDiagnoseEvaluation problemDiagnose) {
+     this.problemDiagnose = problemDiagnose;
+  }
 
-    public void setComposer(PartyProxy composer) {
-        this.composer = composer;
-    }
+  public ProblemDiagnoseEvaluation getProblemDiagnose() {
+     return this.problemDiagnose ;
+  }
 
-    public PartyProxy getComposer() {
-        return this.composer;
-    }
+  public void setComposer(PartyProxy composer) {
+     this.composer = composer;
+  }
 
-    public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
-        this.settingDefiningcode = settingDefiningcode;
-    }
+  public PartyProxy getComposer() {
+     return this.composer ;
+  }
 
-    public SettingDefiningcode getSettingDefiningcode() {
-        return this.settingDefiningcode;
-    }
+  public void setLanguage(Language language) {
+     this.language = language;
+  }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+  public Language getLanguage() {
+     return this.language ;
+  }
 
-    public String getLocation() {
-        return this.location;
-    }
+  public void setFeederAudit(FeederAudit feederAudit) {
+     this.feederAudit = feederAudit;
+  }
 
-    public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
-        this.categoryDefiningcode = categoryDefiningcode;
-    }
+  public FeederAudit getFeederAudit() {
+     return this.feederAudit ;
+  }
 
-    public CategoryDefiningcode getCategoryDefiningcode() {
-        return this.categoryDefiningcode;
-    }
+  public void setTerritory(Territory territory) {
+     this.territory = territory;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(versionUid);
-    }
+  public Territory getTerritory() {
+     return this.territory ;
+  }
+
+  public VersionUid getVersionUid() {
+     return this.versionUid ;
+  }
+
+  public void setVersionUid(VersionUid versionUid) {
+     this.versionUid = versionUid;
+  }
 }

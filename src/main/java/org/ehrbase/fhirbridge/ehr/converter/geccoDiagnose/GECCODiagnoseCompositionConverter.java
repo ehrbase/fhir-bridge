@@ -37,13 +37,9 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
     @Override
     public GECCODiagnoseComposition toComposition(Condition condition) {
         GECCODiagnoseComposition composition = new GECCODiagnoseComposition();
-
-        // set feeder audit
         FeederAudit fa = CommonData.constructFeederAudit(condition);
         composition.setFeederAudit(fa);
-
         vorliegendeDiagnose = new VorliegendeDiagnoseConverter().map(condition);
-
         if (condition.getVerificationStatus().isEmpty()) {
             composition.setUnbekannteDiagnose(this.toUnbekannteDiagnose(condition));
         } else {
@@ -62,67 +58,49 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
         }
 
         Coding categoryCoding = condition.getCategory().get(0).getCoding().get(0);
-
         if (categoryCoding.getSystem().equals(SNOMED_SYSTEM) && GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().containsKey(categoryCoding.getCode())) {
             composition.setKategorieDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().get(categoryCoding.getCode()));
         } else {
             throw new UnprocessableEntityException("Category not present");
         }
 
-
         composition.setStartTimeValue(condition.getRecordedDateElement().getValueAsCalendar().toZonedDateTime());
-
-
         // ======================================================================================
         // Required fields by API
-        composition.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-        composition.setLocation("test"); // FIXME: Location abfangen?
+        composition.setLanguage(Language.DE);
+        composition.setLocation("test");
         composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         composition.setTerritory(Territory.DE);
         composition.setCategoryDefiningCode(Category.EVENT);
-
         composition.setComposer(new PartySelf());
-
         return composition;
     }
 
 
     private UnbekannteDiagnoseEvaluation toUnbekannteDiagnose(Condition condition) {
-
         UnbekannteDiagnoseEvaluation unbekannteDiagnose = new UnbekannteDiagnoseEvaluation();
-
         unbekannteDiagnose.setAussageUeberDieFehlendeInformationDefiningCode(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
-
-        // Map problem
         Coding problem = condition.getCode().getCoding().get(0);
         if (problem.getSystem().equals(SNOMED_SYSTEM) &&
                 GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().containsKey(problem.getCode())) {
             unbekannteDiagnose.setUnbekannteDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().get(problem.getCode()));
         }
-
         unbekannteDiagnose.setSubject(new PartySelf());
-        unbekannteDiagnose.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-
+        unbekannteDiagnose.setLanguage(Language.DE);
         return unbekannteDiagnose;
     }
 
 
     private AusgeschlosseneDiagnoseEvaluation toAusgeschlosseneDiagnose(Condition condition) {
-
         AusgeschlosseneDiagnoseEvaluation ausgeschlosseneDiagnose = new AusgeschlosseneDiagnoseEvaluation();
-
         ausgeschlosseneDiagnose.setAussageUeberDenAusschlussDefiningCode(AussageUeberDenAusschlussDefiningCode.KNOWN_ABSENT_QUALIFIER_VALUE);
-
-        // Map problem
         Coding problem = condition.getCode().getCoding().get(0);
         if (problem.getSystem().equals(SNOMED_SYSTEM) &&
                 GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().containsKey(problem.getCode())) {
-            ausgeschlosseneDiagnose.setProblemDiagnoseDefiningCode( GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().get(problem.getCode()));
+            ausgeschlosseneDiagnose.setProblemDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().get(problem.getCode()));
         }
-
         ausgeschlosseneDiagnose.setSubject(new PartySelf());
-        ausgeschlosseneDiagnose.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-
+        ausgeschlosseneDiagnose.setLanguage(Language.DE);
         return ausgeschlosseneDiagnose;
     }
 }

@@ -4,9 +4,9 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum KategorieDefiningCode implements EnumValueSet {
-  RADIOLOGY_STUDIES_SET("Radiology studies (set)", "Radiology studies (set)", "LOINC", "18726-0"),
+  RADIOLOGY_STUDIES_SET("Radiology studies (set)", "", "LOINC", "18726-0"),
 
-  RADIOLOGY("Radiology", "Radiology", "LOINC", "RAD");
+  RADIOLOGY("Radiology", "", "LOINC", "RAD");
 
   private String value;
 

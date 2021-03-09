@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum NameDerUntersuchungDefiningCode implements EnumValueSet {
-  DIAGNOSTIC_IMAGING_STUDY("Diagnostic imaging study", "Diagnostic imaging study", "LOINC", "18748-4");
+  DIAGNOSTIC_IMAGING_STUDY("Diagnostic imaging study", "", "LOINC", "18748-4");
 
   private String value;
 
