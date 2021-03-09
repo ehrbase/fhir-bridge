@@ -5,14 +5,14 @@ import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.HerzfrequenzComposition;
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.HerzfrequenzObservation;
 import org.hl7.fhir.r4.model.Observation;
+import org.springframework.lang.NonNull;
 
-import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 public class HeartRateCompositionConverter extends AbstractCompositionConverter<Observation, HerzfrequenzComposition> {
 
     @Override
-    public HerzfrequenzComposition convert(@NotNull Observation observation) {
+    public HerzfrequenzComposition convert(@NonNull Observation observation) {
         //create result and observation objects
         HerzfrequenzComposition result = new HerzfrequenzComposition();
 

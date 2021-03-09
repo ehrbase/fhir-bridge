@@ -2,12 +2,40 @@ package org.ehrbase.fhirbridge.fhir.questionnaireresponse;
 
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
-import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AdipositasEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AlterObservation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AtemproblemeCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AusschlussPflegetaetigkeitEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.BeschaeftigungCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ChronischeLungenkrankheitEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.DiabetesEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.DurchfallCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.EinwilligungserklaerungAction;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.FieberInDenLetzten24StundenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.FieberInDenLetzten4TagenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.GeschmacksUndOderGeruchsverlustCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.GliederschmerzenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.HalsschmerzenInDenLetzten24StundenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.HerzerkrankungEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.HustenInDenLetzten24StundenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ImmunsuppressivaEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.KontaktAction;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.KopfschmerzenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.KortisionEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.PflegetaetigkeitEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ProblemDiagnoseEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchlappheitAngeschlagenheitCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchnupfenInDenLetzten24StundenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchuettelfrostInDenLetzten24StundenCluster;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.SchwangerschaftsstatusObservation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.WohnsituationEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungDerBeschaeftigungEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungDesImmunstatusEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungRauchverhaltenEvaluation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
@@ -22,7 +50,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.QuestionnaireResponse QuestionnaireResponse} resource.
@@ -136,7 +165,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         QuestionnaireResponse questionnaireResponse = (QuestionnaireResponse) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            new D4lQuestionnaireCompositionConverter().toComposition(questionnaireResponse);
+            new D4lQuestionnaireCompositionConverter().convert( questionnaireResponse);
         });
     }
 
@@ -145,7 +174,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
         QuestionnaireResponse resource = (QuestionnaireResponse) super.testFileLoader.loadResource(resourcePath);
 
         D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter = new D4lQuestionnaireCompositionConverter();
-        D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.toComposition(resource);
+        D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.convert( resource);
 
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedD4LQuestionnaireComposition);
         assertEquals(diff.getChanges().size(), 0);

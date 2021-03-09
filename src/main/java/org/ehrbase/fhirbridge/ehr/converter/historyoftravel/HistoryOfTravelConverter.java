@@ -2,11 +2,8 @@ package org.ehrbase.fhirbridge.ehr.converter.historyoftravel;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
@@ -18,26 +15,27 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseA
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
-
-import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.LOINC;
-import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.SNOMED;
-import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL;
-import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
-import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL;
-import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION;
-import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 
 import java.time.temporal.TemporalAccessor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HistoryOfTravelConverter implements CompositionConverter<ReisehistorieComposition, Observation> {
+import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.LOINC;
+import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.SNOMED;
+import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL;
+import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL;
+import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION;
+import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
+import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
+
+public class HistoryOfTravelConverter extends AbstractCompositionConverter<Observation, ReisehistorieComposition> {
     private static final Logger LOG = LoggerFactory.getLogger(HistoryOfTravelConverter.class);
 
     private static final Map<String, LandDefiningCode> countryMap = new HashMap<>();
@@ -55,11 +53,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
     }
 
     @Override
-    public ReisehistorieComposition toComposition(Observation observation) throws CompositionConversionException {
-
-        if (null == observation) {
-            throw new UnprocessableEntityException("Observation is null. Couldn't proceed.");
-        }
+    public ReisehistorieComposition convert(@NonNull Observation observation) {
 
         ReisehistorieComposition composition;
 
@@ -77,6 +71,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
             throw new UnprocessableEntityException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
         }
 
+        mapDefaultAttributes(observation, composition);
 
         // BSa: What about nullFlavour?
         // BSa: What about identifier?
@@ -89,17 +84,9 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
 
         // ======================================================================================
         // Required fields by API
-        composition.setLanguage(org.ehrbase.client.classgenerator.shareddefinition.Language.EN);
-        composition.setLocation("test");
-        composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        composition.setTerritory(org.ehrbase.client.classgenerator.shareddefinition.Territory.DE);
-        composition.setCategoryDefiningCode(Category.EVENT);
 
         DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
         composition.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-
-        composition.setComposer(new PartySelf());
-        composition.setFeederAudit(CommonData.constructFeederAudit(observation));
 
         return composition;
     }
@@ -120,16 +107,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         return composition;
     }
 
-    private enum TravelInformation {
-
-        START,
-        END,
-        COUNTRY,
-        REGION,
-        CITY;
-    }
-
-    private TravelInformation getTravelInformationType(Coding coding)  {
+    private TravelInformation getTravelInformationType(Coding coding) {
 
         String code = coding.getCode();
         if (code.equals(LOINC_DATE_TRAVEL_STARTED.getCode())) {
@@ -148,7 +126,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
             return TravelInformation.COUNTRY;
         }
 
-        throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":"+code+"' instead");
+        throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":" + code + "' instead");
     }
 
     private ReisehistorieAdminEntry mapInternalEvents(ReisehistorieAdminEntry adminentry, Observation observation) {
@@ -161,7 +139,7 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
             Coding coding = observationComponent.getCode().getCoding().get(0);
             checkForLoincSystem(coding.getSystem());
 
-            switch(getTravelInformationType(coding)) {
+            switch (getTravelInformationType(coding)) {
                 case START:
                     travel.setEinreisedatumValue(getDate(observationComponent));
                     break;
@@ -231,9 +209,6 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         return observation.getComponent().get(i);
     }
 
-
-    //###################################################################################
-
     private ReisehistorieComposition mapNo(Observation observation, AussageUeberDenAusschlussDefiningCode reiseCode) {
 
         ReisehistorieComposition composition = createCompositionAndSetDefaults(observation);
@@ -253,6 +228,8 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
 
         return composition;
     }
+
+
     //###################################################################################
 
     private ReisehistorieComposition mapUnknown(Observation observation, AussageUeberDieFehlendeInformationDefiningCode reiseCode) {
@@ -268,5 +245,15 @@ public class HistoryOfTravelConverter implements CompositionConverter<Reisehisto
         composition.setUnbekannteReisehistorie(evaluation);
 
         return composition;
+    }
+    //###################################################################################
+
+    private enum TravelInformation {
+
+        START,
+        END,
+        COUNTRY,
+        REGION,
+        CITY;
     }
 }

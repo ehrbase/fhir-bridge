@@ -27,6 +27,7 @@ public class BodyHeightCompositionConverter extends AbstractCompositionConverter
         KoerpergroesseComposition composition = new KoerpergroesseComposition();
         composition.setGroesseLaenge(grosseLangeObservation);
         composition.setStartTimeValue(fhirEffectiveDateTime);
+        mapDefaultAttributes(observation, composition);
         return (composition);
     }
 

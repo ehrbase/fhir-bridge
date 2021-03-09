@@ -6,14 +6,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.KoerpergewichtComposition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtObservation;
 import org.hl7.fhir.r4.model.Observation;
+import org.springframework.lang.NonNull;
 
-import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 public class BodyWeightCompositionConverter extends AbstractCompositionConverter<Observation, KoerpergewichtComposition> {
 
     @Override
-    public KoerpergewichtComposition convert(@NotNull Observation observation) {
+    public KoerpergewichtComposition convert(@NonNull Observation observation) {
         KoerpergewichtComposition result = new KoerpergewichtComposition();
         KoerpergewichtObservation KoerpergewichtObservation = new KoerpergewichtObservation();
         ZonedDateTime effectiveDateTime = null;

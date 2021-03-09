@@ -59,7 +59,7 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Procedure procedure = (Procedure) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-             new ProcedureCompositionConverter().toComposition(((Procedure) procedure));
+             new ProcedureCompositionConverter().convert(((Procedure) procedure));
         });
     }
 

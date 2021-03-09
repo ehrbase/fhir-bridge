@@ -1,25 +1,19 @@
 package org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Anamnesis;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.GeneralInformation;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Medication;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Symptoms;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
+import org.springframework.lang.NonNull;
 
 import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 
-public class D4lQuestionnaireCompositionConverter implements CompositionConverter<D4LQuestionnaireComposition, QuestionnaireResponse> {
+public class D4lQuestionnaireCompositionConverter extends AbstractCompositionConverter<QuestionnaireResponse, D4LQuestionnaireComposition> {
     private static final String P = "P";
     private static final String C = "C";
     private static final String S = "S";
@@ -33,10 +27,8 @@ public class D4lQuestionnaireCompositionConverter implements CompositionConverte
 
 
     @Override
-    public D4LQuestionnaireComposition toComposition(QuestionnaireResponse questionnaireResponse) throws CompositionConversionException {
+    public D4LQuestionnaireComposition convert(@NonNull QuestionnaireResponse questionnaireResponse) {
         D4LQuestionnaireComposition d4LQuestionnaireComposition = new D4LQuestionnaireComposition();
-        FeederAudit feederAudit = CommonData.constructFeederAudit(questionnaireResponse);
-        d4LQuestionnaireComposition.setFeederAudit(feederAudit);
         initialiseSections(questionnaireResponse);
         mapSections(questionnaireResponse);
         OffsetDateTime offsetDateTime = OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
@@ -77,24 +69,11 @@ public class D4lQuestionnaireCompositionConverter implements CompositionConverte
         }
     }
 
-    private void setMandatoryFields(D4LQuestionnaireComposition d4LQuestionnaireComposition) {
-        //Mandatory Stuff
-        d4LQuestionnaireComposition.setLanguage(Language.DE);
-        d4LQuestionnaireComposition.setLocation("test");
-        d4LQuestionnaireComposition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        d4LQuestionnaireComposition.setTerritory(Territory.DE);
-        d4LQuestionnaireComposition.setCategoryDefiningCode(Category.EVENT);
-        d4LQuestionnaireComposition.setComposer(new PartySelf());
-    }
-
     private D4LQuestionnaireComposition populateD4lQuestionnaireComposition(D4LQuestionnaireComposition d4LQuestionnaireComposition) {
-        setMandatoryFields(d4LQuestionnaireComposition);
         d4LQuestionnaireComposition.setProblemDiagnose(symptoms.getProblemDiagnose());
         generalInformation.setGeneralInformation(d4LQuestionnaireComposition);
         anamnesis.setVorUndGrunderkrankungen(d4LQuestionnaireComposition);
         medication.setMedikamenteImpfungen(d4LQuestionnaireComposition);
         return d4LQuestionnaireComposition;
     }
-
-
 }

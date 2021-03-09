@@ -1,13 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AussageUeberDenAusschlussDefiningCode;
@@ -16,22 +12,22 @@ import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.Unbeka
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
+import org.springframework.lang.NonNull;
 
 import java.util.Optional;
 
-public class GECCODiagnoseCompositionConverter implements CompositionConverter<GECCODiagnoseComposition, Condition> {
-
-    private Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose = Optional.empty();
+public class GECCODiagnoseCompositionConverter extends AbstractCompositionConverter<Condition, GECCODiagnoseComposition> {
 
     private final String VERIFICATION_STATUS_PRESENT_CODE = "410605003";
     private final String VERIFICATION_STATUS_ABSENT_CODE = "410594000";
     private final String SNOMED_SYSTEM = "http://snomed.info/sct";
+    private Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose = Optional.empty();
 
     @Override
-    public GECCODiagnoseComposition toComposition(Condition condition) {
+    public GECCODiagnoseComposition convert(@NonNull Condition condition) {
         GECCODiagnoseComposition composition = new GECCODiagnoseComposition();
-        FeederAudit fa = CommonData.constructFeederAudit(condition);
-        composition.setFeederAudit(fa);
+        mapDefaultAttributes(condition, composition);
+
         vorliegendeDiagnose = new VorliegendeDiagnoseConverter().map(condition);
         if (condition.getVerificationStatus().isEmpty()) {
             composition.setUnbekannteDiagnose(this.toUnbekannteDiagnose(condition));
@@ -60,12 +56,6 @@ public class GECCODiagnoseCompositionConverter implements CompositionConverter<G
         composition.setStartTimeValue(condition.getRecordedDateElement().getValueAsCalendar().toZonedDateTime());
         // ======================================================================================
         // Required fields by API
-        composition.setLanguage(Language.DE);
-        composition.setLocation("test");
-        composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        composition.setTerritory(Territory.DE);
-        composition.setCategoryDefiningCode(Category.EVENT);
-        composition.setComposer(new PartySelf());
         return composition;
     }
 

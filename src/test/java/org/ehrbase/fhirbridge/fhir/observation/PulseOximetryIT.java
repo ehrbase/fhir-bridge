@@ -17,7 +17,8 @@ import java.io.IOException;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Integration tests for {@link Observation Observation} resource.
@@ -67,14 +68,14 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String resource) throws IOException {
         Observation pulseOximetry = (Observation) testFileLoader.loadResource(resource);
-        return assertThrows(UnprocessableEntityException.class, () -> new PulseOximetryConverter().toComposition(pulseOximetry));
+        return assertThrows(UnprocessableEntityException.class, () -> new PulseOximetryConverter().convert(pulseOximetry));
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Observation observation = (Observation) super.testFileLoader.loadResource(resourcePath);
         PulseOximetryConverter pulseOximetryConverter = new PulseOximetryConverter();
-        PulsoxymetrieComposition mappedPulsoxymetrieComposition = pulseOximetryConverter.toComposition(observation);
+        PulsoxymetrieComposition mappedPulsoxymetrieComposition = pulseOximetryConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedPulsoxymetrieComposition);
         assertEquals(diff.getChanges().size(), 0);
 

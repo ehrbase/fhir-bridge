@@ -68,7 +68,7 @@ class DiagnosticReportIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         DiagnosticReport diagnosticReport = (DiagnosticReport) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-           // new YourConverter().toComposition( radiologyReport);
+           // new YourConverter().convert(@NonNull  radiologyReport);
         });
     }
 

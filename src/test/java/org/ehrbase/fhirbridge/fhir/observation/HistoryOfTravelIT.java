@@ -90,15 +90,15 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () ->
-                new HistoryOfTravelConverter().toComposition(obs)
+                new HistoryOfTravelConverter().convert(obs)
         );
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
-        Observation observation = (Observation)  super.testFileLoader.loadResource(resourcePath);
+        Observation observation = (Observation) super.testFileLoader.loadResource(resourcePath);
         HistoryOfTravelConverter compositionConverter = new HistoryOfTravelConverter();
-        ReisehistorieComposition mapped = compositionConverter.toComposition(observation);
+        ReisehistorieComposition mapped = compositionConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mapped);
         assertEquals(0, diff.getChanges().size());
     }

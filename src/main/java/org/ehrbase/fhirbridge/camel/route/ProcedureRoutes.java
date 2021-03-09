@@ -23,9 +23,7 @@ import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
-import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.hl7.fhir.r4.model.Procedure;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -60,7 +58,6 @@ public class ProcedureRoutes extends AbstractRouteBuilder {
         // @formatter:off
 
         // 'Create Procedure' route definition
-
         from("procedure-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
@@ -73,11 +70,11 @@ public class ProcedureRoutes extends AbstractRouteBuilder {
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(ehrIdLookupProcessor)
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#procedureCompositionConverter")
+            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .process(new ResourceResponseProcessor());
 
         // 'Find Procedure' route definition
-
         from("procedure-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())
@@ -87,11 +84,5 @@ public class ProcedureRoutes extends AbstractRouteBuilder {
                     .to("bean:procedureDao?method=read(${body}, ${headers.FhirRequestDetails})");
 
         // @formatter:on
-    }
-
-    // TODO: Update when Apache Camel > 3.x
-    @Bean
-    public ProcedureCompositionConverter procedureCompositionConverter() {
-        return new ProcedureCompositionConverter();
     }
 }

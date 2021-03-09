@@ -1,34 +1,23 @@
 package org.ehrbase.fhirbridge.ehr.converter.smokingstatus;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.RaucherstatusComposition;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusEvaluation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
+import org.springframework.lang.NonNull;
 
 import java.util.GregorianCalendar;
 
-public class SmokingStatusCompositionConverter implements CompositionConverter<RaucherstatusComposition, Observation> {
+public class SmokingStatusCompositionConverter extends AbstractCompositionConverter<Observation, RaucherstatusComposition> {
 
     @Override
-    public RaucherstatusComposition toComposition(Observation observation) {
-        if (observation == null) {
-            return null;
-        }
-
+    public RaucherstatusComposition convert(@NonNull Observation observation) {
         //create composition and observation objects
         RaucherstatusComposition result = new RaucherstatusComposition();
-
-        // set feeder audit
-        FeederAudit fa = CommonData.constructFeederAudit(observation);
-        result.setFeederAudit(fa);
 
         RaucherstatusEvaluation evaluation = new RaucherstatusEvaluation();
 
@@ -68,15 +57,6 @@ public class SmokingStatusCompositionConverter implements CompositionConverter<R
 
         result.setRaucherstatus(evaluation);
 
-        // Required fields by API
-        result.setLanguage(Language.DE);
-        result.setLocation("test");
-        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        result.setTerritory(Territory.DE);
-        result.setCategoryDefiningCode(Category.EVENT);
-        result.setComposer(new PartySelf());
-
         return result;
     }
-
 }

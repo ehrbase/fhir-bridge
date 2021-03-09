@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.KategorieDefiningCode;
@@ -18,7 +17,7 @@ import java.util.List;
 public class RadiologischerBefundConverter extends AbstractCompositionConverter<DiagnosticReport, GECCORadiologischerBefundComposition> {
 
     @Override
-    public GECCORadiologischerBefundComposition convert(@NonNull DiagnosticReport diagnosticReport) throws CompositionConversionException {
+    public GECCORadiologischerBefundComposition convert(@NonNull DiagnosticReport diagnosticReport) {
         GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition = new GECCORadiologischerBefundComposition();
         geccoRadiologischerBefundComposition.setStartTimeValue(diagnosticReport.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         geccoRadiologischerBefundComposition.setEndTimeValue(diagnosticReport.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
