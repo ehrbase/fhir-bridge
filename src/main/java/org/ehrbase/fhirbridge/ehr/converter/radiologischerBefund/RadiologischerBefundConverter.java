@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
@@ -8,12 +9,11 @@ import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.StatusDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DiagnosticReport;
@@ -32,7 +32,8 @@ public class RadiologischerBefundConverter implements CompositionConverter<GECCO
     @Override
     public GECCORadiologischerBefundComposition toComposition(DiagnosticReport diagnosticReport) throws CompositionConversionException {
         GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition = new GECCORadiologischerBefundComposition();
-
+        FeederAudit feederAudit = CommonData.constructFeederAudit(diagnosticReport);
+        geccoRadiologischerBefundComposition.setFeederAudit(feederAudit);
         geccoRadiologischerBefundComposition.setLanguage(Language.DE);
         geccoRadiologischerBefundComposition.setCategoryDefiningCode(Category.EVENT);
         geccoRadiologischerBefundComposition.setComposer(new PartySelf());

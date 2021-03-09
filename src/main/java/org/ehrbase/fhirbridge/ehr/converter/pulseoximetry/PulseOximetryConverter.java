@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.pulseoximetry;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datavalues.quantity.DvProportion;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
@@ -9,6 +10,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.converter.ContextConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
@@ -25,6 +27,8 @@ public class PulseOximetryConverter implements CompositionConverter<Pulsoxymetri
     @Override
     public PulsoxymetrieComposition toComposition(Observation observation) throws CompositionConversionException {
         PulsoxymetrieComposition composition = new PulsoxymetrieComposition();
+        FeederAudit feederAudit = CommonData.constructFeederAudit(observation);
+        composition.setFeederAudit(feederAudit);
         new PulseOximetryCodeChecker().checkIfPulseOximetry(observation);
         new ContextConverter().mapStatus(composition, observation);
         mapKategorie(composition, observation);

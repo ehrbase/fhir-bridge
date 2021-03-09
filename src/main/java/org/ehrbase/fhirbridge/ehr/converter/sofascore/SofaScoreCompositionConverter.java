@@ -3,12 +3,12 @@ package org.ehrbase.fhirbridge.ehr.converter.sofascore;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.CommonData;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.Observation;
@@ -35,6 +35,8 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
         }
 
         SOFAComposition result = new SOFAComposition();
+        FeederAudit feederAudit = CommonData.constructFeederAudit(observation);
+        result.setFeederAudit(feederAudit);
 
         // set feeder audit
         FeederAudit fa = CommonData.constructFeederAudit(observation);
@@ -48,10 +50,9 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
         // Required fields by API
         result.setLanguage(Language.DE);
         result.setLocation("test");
-        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
-
+        result.setCategoryDefiningCode(Category.EVENT);
         mapTimeDate(observation, result);
 
         result.setComposer(new PartySelf());
