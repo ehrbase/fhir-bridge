@@ -21,12 +21,6 @@ import java.time.ZoneOffset;
 public class SofaScoreCompositionConverter implements CompositionConverter<SOFAComposition, Observation> {
     private static final Logger LOG = LoggerFactory.getLogger(SofaScoreCompositionConverter.class);
 
-
-    @Override
-    public Observation fromComposition(SOFAComposition composition) {
-        return null;
-    }
-
     @Override
     public SOFAComposition toComposition(Observation observation) {
         if (observation == null) {

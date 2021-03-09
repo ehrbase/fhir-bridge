@@ -21,12 +21,6 @@ import java.time.OffsetDateTime;
 public class PregnancyStatusCompositionConverter implements CompositionConverter<SchwangerschaftsstatusComposition, Observation> {
 
     @Override
-    public Observation fromComposition(SchwangerschaftsstatusComposition composition) {
-        // TODO: Implement
-        return null;
-    }
-
-    @Override
     public SchwangerschaftsstatusComposition toComposition(Observation observation) {
         if (observation == null) {
             return null;

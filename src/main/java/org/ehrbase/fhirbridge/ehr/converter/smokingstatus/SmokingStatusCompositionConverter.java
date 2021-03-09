@@ -18,12 +18,6 @@ import java.util.GregorianCalendar;
 public class SmokingStatusCompositionConverter implements CompositionConverter<RaucherstatusComposition, Observation> {
 
     @Override
-    public Observation fromComposition(RaucherstatusComposition composition) {
-        // TODO: Implement
-        return null;
-    }
-
-    @Override
     public RaucherstatusComposition toComposition(Observation observation) {
         if (observation == null) {
             return null;

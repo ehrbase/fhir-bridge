@@ -31,11 +31,6 @@ public class D4lQuestionnaireCompositionConverter implements CompositionConverte
     Anamnesis anamnesis;
     Medication medication;
 
-    @Override
-    public QuestionnaireResponse fromComposition(D4LQuestionnaireComposition composition) throws CompositionConversionException {
-        //TODO Implement
-        return null;
-    }
 
     @Override
     public D4LQuestionnaireComposition toComposition(QuestionnaireResponse questionnaireResponse) throws CompositionConversionException {

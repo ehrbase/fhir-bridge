@@ -19,11 +19,6 @@ import org.hl7.fhir.r4.model.Observation;
 public class PulseOximetryConverter implements CompositionConverter<PulsoxymetrieComposition, Observation> {
 
     @Override
-    public Observation fromComposition(PulsoxymetrieComposition composition) throws CompositionConversionException {
-        return null;
-    }
-
-    @Override
     public PulsoxymetrieComposition toComposition(Observation observation) throws CompositionConversionException {
         PulsoxymetrieComposition composition = new PulsoxymetrieComposition();
         FeederAudit feederAudit = CommonData.constructFeederAudit(observation);

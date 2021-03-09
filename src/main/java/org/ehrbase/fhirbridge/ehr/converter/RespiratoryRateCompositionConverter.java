@@ -17,12 +17,6 @@ import java.time.ZonedDateTime;
 public class RespiratoryRateCompositionConverter implements CompositionConverter<AtemfrequenzComposition, Observation> {
 
     @Override
-    public Observation fromComposition(AtemfrequenzComposition composition) {
-        // TODO: Implement
-        return null;
-    }
-
-    @Override
     public AtemfrequenzComposition toComposition(Observation observation) {
         if (observation == null) {
             return null;
