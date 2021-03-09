@@ -23,10 +23,6 @@ public class ProcedureCompositionConverter extends AbstractCompositionConverter<
 
     @Override
     public ProzedurComposition convert(@NonNull Procedure procedure) {
-        if (procedure == null) {
-            return null;
-        }
-
         ProzedurComposition result = new ProzedurComposition();
 
         Coding code = procedure.getCode().getCoding().get(0);
@@ -92,6 +88,8 @@ public class ProcedureCompositionConverter extends AbstractCompositionConverter<
         identifier.setId(procedure.getRecorder().getReference()); // TODO: if there is no recorder, try with the performer
         composer.addIdentifier(identifier);
         result.setComposer(composer);
+
+        mapDefaultAttributes(procedure, result);
 
         return result;
     }

@@ -42,6 +42,8 @@ public class PregnancyStatusCompositionConverter extends AbstractCompositionConv
         composer.addIdentifier(identifier);
         result.setComposer(composer);
 
+        mapDefaultAttributes(observation, result);
+
         return result;
     }
 

@@ -28,6 +28,7 @@ public class DiagnoseCompositionConverter extends AbstractCompositionConverter<C
     @Override
     public DiagnoseComposition convert(@NonNull Condition condition) {
         DiagnoseComposition result = new DiagnoseComposition();
+        mapDefaultAttributes(condition, result);
 
         DateTimeType fhirOnsetDateTime = condition.getOnsetDateTimeType();
         Coding fhirSeverity = condition.getSeverity().getCoding().get(0);
