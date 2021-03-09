@@ -25,6 +25,6 @@ public abstract class AbstractEntryEntityConverter<R extends Resource, E extends
     protected void convert(R resource, E entry) {
         entry.setLanguage(resolveLanguage(resource.getLanguage()));
         entry.setSubject(new PartySelf());
-        entry.setFeederAudit(CommonData.constructFeederAudit(resource));
+        entry.setFeederAudit(buildFeederAudit(resource));
     }
 }
