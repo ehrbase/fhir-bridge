@@ -21,11 +21,6 @@ import org.hl7.fhir.r4.model.Observation;
 public class ClinicalFrailtyScaleScoreCompositionConverter implements CompositionConverter<KlinischeFrailtySkalaComposition, Observation> {
 
     @Override
-    public Observation fromComposition(KlinischeFrailtySkalaComposition composition) {
-        return null;
-    }
-
-    @Override
     public KlinischeFrailtySkalaComposition toComposition(Observation observation) {
         if (observation == null) {
             return null;

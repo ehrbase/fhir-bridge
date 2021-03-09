@@ -10,11 +10,6 @@ import org.hl7.fhir.r4.model.Observation;
 public class BloodGasPanelCompositionConverter implements CompositionConverter<BefundDerBlutgasanalyseComposition, Observation> {
 
     @Override
-    public Observation fromComposition(BefundDerBlutgasanalyseComposition composition) {
-        return new Observation();
-    }
-
-    @Override
     public BefundDerBlutgasanalyseComposition toComposition(Observation observation) throws CompositionConversionException {
         BloodGasPanel bloodGasPanel = new BloodGasPanel(observation);
         BlutgasAnalyseConverter blutgasAnalyseMapper = new BlutgasAnalyseConverter();
