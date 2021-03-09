@@ -24,7 +24,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.hl7.fhir.r4.model.Resource;
 import org.springframework.lang.NonNull;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface Converter<S extends Resource, T> {
 
@@ -50,10 +51,12 @@ public interface Converter<S extends Resource, T> {
         }
         audit.setOriginatingSystemAudit(auditDetails);
 
-        DvIdentifier id = new DvIdentifier();
-        id.setId(resource.getId());
-        id.setType("fhir_logical_id");
-        audit.setOriginatingSystemItemIds(Collections.singletonList(id));
+        List<DvIdentifier> identifiers = new ArrayList<>();
+        DvIdentifier identifier = new DvIdentifier();
+        identifier.setId(resource.getId());
+        identifier.setType("fhir_logical_id");
+        identifiers.add(identifier);
+        audit.setOriginatingSystemItemIds(identifiers);
 
         return audit;
     }
