@@ -1,17 +1,19 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.LabortestBezeichnungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestKategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
-import org.hl7.fhir.r4.model.DiagnosticReport;
-import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.ResourceType;
+import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
+import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.LOINC;
 
 public class DiagnosticReportLabCompositionConverter implements CompositionConverter<GECCOLaborbefundComposition, DiagnosticReport> {
 
@@ -47,34 +49,59 @@ public class DiagnosticReportLabCompositionConverter implements CompositionConve
 
         GECCOLaborbefundComposition result = observationConverter.toComposition(observation);
 
+        FeederAudit fa = CommonData.constructFeederAudit(diagnosticReport);
+        result.setFeederAudit(fa);
+
         LaborergebnisObservation laborbefund = result.getLaborergebnis();
 
         ProLaboranalytCluster laboranalytCluster = laborbefund.getProLaboranalyt();
 
         laborbefund.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-   //TODO fix here     set LaborergebnisBefundConverter
-    //TODO fix here    laborbefund.setLabortestKategorieDefiningCode(getLabortestCode(diagnosticReport.getCode().getText()));
-
+        laborbefund.setLabortestKategorieDefiningCode(getLabortestCode(diagnosticReport.getCategory().get(0)));
         laborbefund.setSchlussfolgerungValue(diagnosticReport.getConclusion());
-
         laborbefund.setProLaboranalyt(laboranalytCluster);
-
-        //DvIdentifier receiverOrderIdentifier = new DvIdentifier();
-        //receiverOrderIdentifier.setId(fhirDiagnosticReport.getIdentifier().get(0).getValue());
-        //receiverOrderIdentifier.setType(fhirDiagnosticReport.getIdentifier().get(0).getSystem());
-        //laborbefund.setLaborWelchesDenUntersuchungsauftragAnnimmt(receiverOrderIdentifier);
-
         return result;
     }
 
-/*
-    //TODO
-    private LabortestKategorieDefiningCode getLabortestCode(String text) {
-        if(text.equals(LabortestKategorieDefiningCode.)){
 
+    private LabortestKategorieDefiningCode getLabortestCode(CodeableConcept codeableConcept) {
+        List<Coding> codings = codeableConcept.getCoding();
+        for(Coding coding: codings){
+            if(coding.getSystem().equals(LOINC.getUrl())){
+               return mapLabortest(coding.getCode());
+            }
+        }
+        throw new UnprocessableEntityException("The Category loinc code is missing");
+    }
+
+    private LabortestKategorieDefiningCode mapLabortest(String code) {
+        if (code.equals(LabortestKategorieDefiningCode.MICROBIOLOGY_STUDIES_SET.getCode())) {
+            return LabortestKategorieDefiningCode.MICROBIOLOGY_STUDIES_SET;
+        } else if (code.equals(LabortestKategorieDefiningCode.BLOOD_GAS_STUDIES_SET.getCode())) {
+            return LabortestKategorieDefiningCode.BLOOD_GAS_STUDIES_SET;
+        } else if (code.equals(LabortestKategorieDefiningCode.CALCULATED_AND_DERIVED_VALUES_SET.getCode())) {
+            return LabortestKategorieDefiningCode.CALCULATED_AND_DERIVED_VALUES_SET;
+        } else if (code.equals(LabortestKategorieDefiningCode.CARDIAC_BIOMARKERS_SET.getCode())) {
+            return LabortestKategorieDefiningCode.CARDIAC_BIOMARKERS_SET;
+        } else if (code.equals(LabortestKategorieDefiningCode.CHEMISTRY_STUDIES_SET.getCode())) {
+            return LabortestKategorieDefiningCode.CHEMISTRY_STUDIES_SET;
+        } else if (code.equals(LabortestKategorieDefiningCode.HEMATOLOGY_STUDIES_SET.getCode())) {
+            return LabortestKategorieDefiningCode.HEMATOLOGY_STUDIES_SET;
+        }else if (code.equals(LabortestKategorieDefiningCode.SEROLOGY_AND_BLOOD_BANK_STUDIES_SET.getCode())) {
+            return LabortestKategorieDefiningCode.SEROLOGY_AND_BLOOD_BANK_STUDIES_SET;
+        }else if (code.equals(LabortestKategorieDefiningCode.URINALYSIS_STUDIES_SET.getCode())) {
+            return LabortestKategorieDefiningCode.URINALYSIS_STUDIES_SET;
+        }else if (code.equals(LabortestKategorieDefiningCode.TOXICOLOGY_STUDIES_SET.getCode())) {
+            return LabortestKategorieDefiningCode.TOXICOLOGY_STUDIES_SET;
+        }else if (code.equals(LabortestKategorieDefiningCode.LABORATORY_STUDIES_SET.getCode())) {
+            return LabortestKategorieDefiningCode.LABORATORY_STUDIES_SET;
+        }else if (code.equals(LabortestKategorieDefiningCode.COAGULATION_STUDIES_SET.getCode())) {
+            return LabortestKategorieDefiningCode.COAGULATION_STUDIES_SET;
+        }else{
+            throw new UnprocessableEntityException("The code" +code+"is not supported for category.coding");
         }
     }
-*/
+
 
 
 }
