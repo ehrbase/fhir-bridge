@@ -21,6 +21,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeobachtungenAmBeatmungsgeraetObservation;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.StatusDefiningCode;
 
@@ -32,7 +33,7 @@ import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.Statu
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Beatmungswerte")
-public class BeatmungswerteComposition implements CompositionEntity {
+public class BeatmungswerteComposition implements CompositionEntity, Composition {
   /**
    * Path: Beatmungswerte/category
    */

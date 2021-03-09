@@ -21,6 +21,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.PatientAufDerIntensivstationObservation;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.StatusDefiningCode;
 
@@ -32,7 +33,7 @@ import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.Status
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Patient auf ICU")
-public class PatientAufICUComposition implements CompositionEntity {
+public class PatientAufICUComposition implements CompositionEntity, Composition {
   /**
    * Path: Patient auf der Intensivstation/category
    */

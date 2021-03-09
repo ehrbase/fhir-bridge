@@ -21,6 +21,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition.SchwangerschaftsstatusObservation;
 import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition.StatusDefiningCode;
 
@@ -32,7 +33,7 @@ import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definiti
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Schwangerschaftsstatus")
-public class SchwangerschaftsstatusComposition implements CompositionEntity {
+public class SchwangerschaftsstatusComposition implements CompositionEntity, Composition {
   /**
    * Path: Schwangerschaftsstatus/category
    */

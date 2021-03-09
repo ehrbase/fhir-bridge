@@ -20,6 +20,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.FallidentifikationCluster;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.ProzedurAction;
 
@@ -31,7 +32,7 @@ import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.ProzedurAct
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Prozedur")
-public class ProzedurComposition implements CompositionEntity {
+public class ProzedurComposition implements CompositionEntity, Composition {
   /**
    * Path: Prozedur/category
    */
