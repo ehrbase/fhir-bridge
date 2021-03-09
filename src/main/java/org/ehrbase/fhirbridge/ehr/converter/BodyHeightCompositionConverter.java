@@ -1,39 +1,19 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.KoerpergroesseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.definition.GroesseLaengeObservation;
 import org.hl7.fhir.r4.model.Observation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-
-public class BodyHeightCompositionConverter implements CompositionConverter<KoerpergroesseComposition, Observation> {
-
-    private static final Logger LOG = LoggerFactory.getLogger(BodyHeightCompositionConverter.class);
-
+public class BodyHeightCompositionConverter extends AbstractCompositionConverter<Observation, KoerpergroesseComposition> {
 
     @Override
-    public Observation fromComposition(KoerpergroesseComposition composition) {
-        // TODO: Implement
-        return null;
-    }
-
-    @Override
-    public KoerpergroesseComposition toComposition(Observation observation) {
-        if (observation == null) {
-            return null;
-        }
+    public KoerpergroesseComposition convert(@NonNull Observation observation) {
 
         GroesseLaengeObservation grosseLangeObservation = new GroesseLaengeObservation();
         setDateTime(grosseLangeObservation, getDateTime(observation));
@@ -45,25 +25,16 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Koer
 
     private KoerpergroesseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GroesseLaengeObservation grosseLangeObservation, Observation observation) {
         KoerpergroesseComposition composition = new KoerpergroesseComposition();
-        FeederAudit feederAudit = CommonData.constructFeederAudit(observation);
-        composition.setFeederAudit(feederAudit);
         composition.setGroesseLaenge(grosseLangeObservation);
-        composition.setLanguage(Language.DE);
-        composition.setLocation("test");
-        composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        composition.setTerritory(Territory.DE);
-        composition.setCategoryDefiningCode(Category.EVENT);
         composition.setStartTimeValue(fhirEffectiveDateTime);
-        composition.setComposer(new PartySelf());
-        composition.setFeederAudit(CommonData.constructFeederAudit(observation));
         return (composition);
     }
 
     private ZonedDateTime getDateTime(Observation observation) {
         ZonedDateTime fhirEffectiveDateTime;
-        if(observation.hasEffectiveDateTimeType()) {
+        if (observation.hasEffectiveDateTimeType()) {
             fhirEffectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
-        } else if(observation.hasEffectivePeriod()) {
+        } else if (observation.hasEffectivePeriod()) {
             fhirEffectiveDateTime = observation.getEffectivePeriod().getStart().toInstant().atZone(ZoneId.systemDefault());
         } else {
             throw new UnprocessableEntityException("No time is set");
@@ -82,7 +53,6 @@ public class BodyHeightCompositionConverter implements CompositionConverter<Koer
     }
 
     private void setDefault(GroesseLaengeObservation grosseLangeObservation) {
-        grosseLangeObservation.setLanguage(Language.DE);
         grosseLangeObservation.setSubject(new PartySelf());
     }
 }

@@ -3,14 +3,17 @@ package org.ehrbase.fhirbridge.ehr.converter;
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.archetyped.FeederAuditDetails;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
-import org.hl7.fhir.r4.model.DomainResource;
+import org.hl7.fhir.r4.model.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommonData {
 
-    public static FeederAudit constructFeederAudit(DomainResource fhirResource) {
+    private CommonData() {
+    }
+
+    public static FeederAudit constructFeederAudit(Resource fhirResource) {
         FeederAudit fa = new FeederAudit();
 
 
@@ -31,7 +34,7 @@ public class CommonData {
         List<DvIdentifier> ids = new ArrayList<>();
 
         DvIdentifier id = new DvIdentifier();
-        id.setId(fhirResource.getId().toString());
+        id.setId(fhirResource.getId());
         id.setType("fhir_logical_id");
 
         ids.add(id);
