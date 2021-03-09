@@ -14,28 +14,28 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.observation;
+package org.ehrbase.fhirbridge.fhir.questionnaireresponse;
 
 import ca.uhn.fhir.context.FhirVersionEnum;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionConfiguration;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
-import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
+import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 
 /**
- * Configuration for 'Create Observation' transaction.
+ * Configuration for 'Find Questionnaire-Response' transaction.
  *
  * @since 1.0.0
  */
-public class CreateObservationTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class FindQuestionnaireResponseTransaction extends FhirTransactionConfiguration<FhirQueryAuditDataset> {
 
-    public CreateObservationTransaction() {
-        super("observation-create",
-                "Create Observation",
-                false,
+    public FindQuestionnaireResponseTransaction() {
+        super("questionnaire-response-find",
+                "Find Questionnaire-Response",
+                true,
                 null,
-                new CreateObservationAuditStrategy(),
+                new FindQuestionnaireResponseAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreateObservationProvider(),
+                new FindQuestionnaireResponseProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }

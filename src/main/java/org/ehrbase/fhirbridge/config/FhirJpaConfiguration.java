@@ -1,3 +1,19 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.ehrbase.fhirbridge.config;
 
 import ca.uhn.fhir.jpa.api.config.DaoConfig;
@@ -20,7 +36,10 @@ import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Group;
+import org.hl7.fhir.r4.model.Location;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
@@ -40,7 +59,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 /**
- * {@link Configuration Configuration} for HAPI FHIR JPA server.
+ * {@link Configuration Configuration} for HAPI FHIR JPA Server module.
+ *
+ * @since 1.0.0
  */
 @Configuration
 @EnableConfigurationProperties(FhirJpaProperties.class)
@@ -60,7 +81,11 @@ public class FhirJpaConfiguration extends BaseR4Config {
 
     @Bean
     public DaoConfig daoConfig() {
-        return new DaoConfig();
+        DaoConfig daoConfig = new DaoConfig();
+        daoConfig.setAllowInlineMatchUrlReferences(fhirJpaProperties.isAllowInlineMatchUrlReferences());
+        daoConfig.setAutoCreatePlaceholderReferenceTargets(fhirJpaProperties.isAutoCreatePlaceholderReferences());
+        daoConfig.setPopulateIdentifierInAutoCreatedPlaceholderReferenceTargets(fhirJpaProperties.isPopulateIdentifierInAutoCreatedPlaceholderReferences());
+        return daoConfig;
     }
 
     @Bean
@@ -82,7 +107,11 @@ public class FhirJpaConfiguration extends BaseR4Config {
         entityManagerFactory.setPersistenceUnitName("HAPI_PU");
         entityManagerFactory.setDataSource(dataSource);
         entityManagerFactory.setJpaPropertyMap(jpaProperties.getProperties());
-        entityManagerFactory.setPackagesToScan("ca.uhn.fhir.jpa.model.entity", "ca.uhn.fhir.jpa.entity", "org.ehrbase.fhirbridge.fhir.support");
+        entityManagerFactory.setPackagesToScan(
+                "ca.uhn.fhir.jpa.model.entity",
+                "ca.uhn.fhir.jpa.entity",
+                "org.ehrbase.fhirbridge.fhir.support"
+        );
         return entityManagerFactory;
     }
 
@@ -94,60 +123,84 @@ public class FhirJpaConfiguration extends BaseR4Config {
         return transactionManager;
     }
 
-    @Bean(name = "myConditionDaoR4")
-    public IFhirResourceDao<Condition> conditionReportDao() {
-        JpaResourceDao<Condition> conditionReportDao = new JpaResourceDao<>();
-        conditionReportDao.setResourceType(Condition.class);
-        conditionReportDao.setContext(fhirContext());
-        return conditionReportDao;
-    }
-
-    @Bean(name = "myDiagnosticReportDaoR4")
-    public IFhirResourceDao<DiagnosticReport> diagnosticReportDao() {
-        JpaResourceDao<DiagnosticReport> diagnosticReportDao = new JpaResourceDao<>();
-        diagnosticReportDao.setResourceType(DiagnosticReport.class);
-        diagnosticReportDao.setContext(fhirContext());
-        return diagnosticReportDao;
-    }
-
-    @Bean(name = "myObservationDaoR4")
-    public IFhirResourceDao<Observation> observationDao() {
-        JpaResourceDao<Observation> observationDao = new JpaResourceDao<>();
-        observationDao.setResourceType(Observation.class);
-        observationDao.setContext(fhirContext());
-        return observationDao;
-    }
-
-    @Bean(name = "myProcedureDaoR4")
-    public IFhirResourceDao<Procedure> procedureDao() {
-        JpaResourceDao<Procedure> procedureDao = new JpaResourceDao<>();
-        procedureDao.setResourceType(Procedure.class);
-        procedureDao.setContext(fhirContext());
-        return procedureDao;
-    }
-
-    @Bean(name = "myAuditEventDaoR4")
+    @Bean
     public IFhirResourceDao<AuditEvent> auditEventDao() {
-        JpaResourceDao<AuditEvent> auditEventDao = new JpaResourceDao<>();
-        auditEventDao.setResourceType(AuditEvent.class);
-        auditEventDao.setContext(fhirContext());
-        return auditEventDao;
+        JpaResourceDao<AuditEvent> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(AuditEvent.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
     }
 
-    @Bean(name = "myPatientDaoR4")
+    @Bean
+    public IFhirResourceDao<Condition> conditionDao() {
+        JpaResourceDao<Condition> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Condition.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Device> deviceDao() {
+        JpaResourceDao<Device> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Device.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<DiagnosticReport> diagnosticReportDao() {
+        JpaResourceDao<DiagnosticReport> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(DiagnosticReport.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Group> groupDao() {
+        JpaResourceDao<Group> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Group.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Location> locationDao() {
+        JpaResourceDao<Location> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Location.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Observation> observationDao() {
+        JpaResourceDao<Observation> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Observation.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
     public IFhirResourceDao<Patient> patientDao() {
-        JpaResourceDao<Patient> patientDao = new JpaResourceDao<>();
-        patientDao.setResourceType(Patient.class);
-        patientDao.setContext(fhirContext());
-        return patientDao;
+        JpaResourceDao<Patient> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Patient.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
     }
 
-    @Bean(name = "myQuestionnaireResponseDaoR4")
+    @Bean
+    public IFhirResourceDao<Procedure> procedureDao() {
+        JpaResourceDao<Procedure> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Procedure.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
     public IFhirResourceDao<QuestionnaireResponse> questionnaireResponseDao() {
-        JpaResourceDao<QuestionnaireResponse> questionnaireResponseDao = new JpaResourceDao<>();
-        questionnaireResponseDao.setResourceType(QuestionnaireResponse.class);
-        questionnaireResponseDao.setContext(fhirContext());
-        return questionnaireResponseDao;
+        JpaResourceDao<QuestionnaireResponse> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(QuestionnaireResponse.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
     }
 
     @Bean(name = "myCodeSystemDaoR4")

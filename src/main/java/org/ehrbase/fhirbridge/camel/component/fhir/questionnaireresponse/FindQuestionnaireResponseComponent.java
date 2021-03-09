@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.component.fhir.auditevent;
+package org.ehrbase.fhirbridge.camel.component.fhir.questionnaireresponse;
 
-import org.ehrbase.fhirbridge.fhir.auditevent.FindAuditEventTransaction;
+import org.ehrbase.fhirbridge.fhir.questionnaireresponse.FindQuestionnaireResponseTransaction;
 import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
- * Camel {@link org.apache.camel.Component Component} that handles 'Find Audit Event' transaction.
+ * Camel {@link org.apache.camel.Component Component} that handles 'Find Questionnaire-Response' transaction.
  *
  * @since 1.0.0
  */
 @SuppressWarnings({"java:S110"})
-public class FindAuditEventComponent extends CustomFhirComponent<FhirQueryAuditDataset> {
+public class FindQuestionnaireResponseComponent extends CustomFhirComponent<FhirQueryAuditDataset> {
 
-    public FindAuditEventComponent() {
-        super(new FindAuditEventTransaction());
+    public FindQuestionnaireResponseComponent() {
+        super(new FindQuestionnaireResponseTransaction());
     }
 }
