@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.bloodgas.laboratoryanalyteconverter;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.StatusDefiningcode;
+import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
 
 abstract class LaboratoryTestAnalyteConverter {
@@ -14,13 +14,13 @@ abstract class LaboratoryTestAnalyteConverter {
     protected String mapErgebnisStatus() {
         switch (fhirObservation.getStatusElement().getCode()) {
             case "registered":
-                return StatusDefiningcode.REGISTRIERT.getValue();
+                return StatusDefiningCode.REGISTRIERT.getValue();
             case "final":
-                return StatusDefiningcode.FINAL.getValue();
+                return StatusDefiningCode.FINAL.getValue();
             case "amended":
-                return StatusDefiningcode.GEANDERT.getValue();
+                return StatusDefiningCode.GEAENDERT.getValue();
             case "preliminary":
-                return StatusDefiningcode.VORLAUFIG.getValue();
+                return StatusDefiningCode.VORLAEUFIG.getValue();
             default:
                 throw new IllegalStateException("Invalid Code " + fhirObservation.getStatusElement().getCode() + "" +
                         " for mapping of 'status', valid codes are: registered, final, amended and preliminary");

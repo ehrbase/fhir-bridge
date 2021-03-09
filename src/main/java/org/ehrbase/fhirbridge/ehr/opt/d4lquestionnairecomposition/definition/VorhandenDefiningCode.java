@@ -4,11 +4,11 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum VorhandenDefiningCode implements EnumValueSet {
-  ICH_WEISS_ES_NICHT("Ich weiß es nicht", "Ich weiß es nicht", "LOINC", "LA12688-0"),
+  NEIN("Nein", "", "LOINC", "LA32-8"),
 
-  NEIN("Nein", "Nein", "LOINC", "LA32-8"),
+  JA("Ja", "", "LOINC", "LA33-6"),
 
-  JA("Ja", "Ja", "LOINC", "LA33-6");
+  ICH_WEISS_ES_NICHT("Ich weiß es nicht", "", "LOINC", "LA12688-0");
 
   private String value;
 

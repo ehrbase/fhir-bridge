@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
@@ -8,6 +9,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Anamnesis;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.GeneralInformation;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Medication;
@@ -39,6 +41,8 @@ public class D4lQuestionnaireCompositionConverter implements CompositionConverte
     @Override
     public D4LQuestionnaireComposition toComposition(QuestionnaireResponse questionnaireResponse) throws CompositionConversionException {
         D4LQuestionnaireComposition d4LQuestionnaireComposition = new D4LQuestionnaireComposition();
+        FeederAudit feederAudit = CommonData.constructFeederAudit(questionnaireResponse);
+        d4LQuestionnaireComposition.setFeederAudit(feederAudit);
         initialiseSections(questionnaireResponse);
         mapSections(questionnaireResponse);
         OffsetDateTime offsetDateTime = OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());

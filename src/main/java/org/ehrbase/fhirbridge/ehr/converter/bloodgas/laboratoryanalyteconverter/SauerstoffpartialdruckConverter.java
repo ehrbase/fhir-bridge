@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.bloodgas.laboratoryanalyteconverter;
 
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffpartialdruckCluster;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.UntersuchterAnalytDefiningcode2;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.UntersuchterAnalytDefiningCode2;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
@@ -14,16 +14,16 @@ public class SauerstoffpartialdruckConverter extends LaboratoryTestAnalyteConver
         SauerstoffpartialdruckCluster sauerstoffpartialdruckCluster = new SauerstoffpartialdruckCluster();
         sauerstoffpartialdruckCluster.setErgebnisStatusValue(mapErgebnisStatus());
         sauerstoffpartialdruckCluster.setAnalytResultatUnits("mmHg");
-        sauerstoffpartialdruckCluster.setUntersuchterAnalytDefiningcode(mapUntersuchterAnalyt());
+        sauerstoffpartialdruckCluster.setUntersuchterAnalytDefiningCode(mapUntersuchterAnalyt());
         sauerstoffpartialdruckCluster.setAnalytResultatMagnitude(mapValue());
         return sauerstoffpartialdruckCluster;
     }
 
     @Override
-    protected UntersuchterAnalytDefiningcode2 mapUntersuchterAnalyt() {
-        UntersuchterAnalytDefiningcode2 oxygenBlood = UntersuchterAnalytDefiningcode2.OXYGEN_PARTIAL_PRESSURE_IN_BLOOD;
-        UntersuchterAnalytDefiningcode2 oxygenArterial= UntersuchterAnalytDefiningcode2.OXYGEN_PARTIAL_PRESSURE_IN_ARTERIAL_BLOOD;
-        UntersuchterAnalytDefiningcode2 oxygenCapillary = UntersuchterAnalytDefiningcode2.OXYGEN_PARTIAL_PRESSURE_IN_CAPILLARY_BLOOD;
+    protected UntersuchterAnalytDefiningCode2 mapUntersuchterAnalyt() {
+        UntersuchterAnalytDefiningCode2 oxygenBlood = UntersuchterAnalytDefiningCode2.OXYGEN_PARTIAL_PRESSURE_IN_BLOOD;
+        UntersuchterAnalytDefiningCode2 oxygenArterial= UntersuchterAnalytDefiningCode2.OXYGEN_PARTIAL_PRESSURE_IN_ARTERIAL_BLOOD;
+        UntersuchterAnalytDefiningCode2 oxygenCapillary = UntersuchterAnalytDefiningCode2.OXYGEN_PARTIAL_PRESSURE_IN_CAPILLARY_BLOOD;
 
         for (Coding coding : fhirObservation.getCode().getCoding()) {
             String code = coding.getCode();

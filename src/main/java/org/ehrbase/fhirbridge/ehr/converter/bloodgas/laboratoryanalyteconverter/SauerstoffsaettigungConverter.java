@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.bloodgas.laboratoryanalyteconverter;
 
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffsattigungCluster;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.UntersuchterAnalytDefiningcode4;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffsaettigungCluster;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.UntersuchterAnalytDefiningCode4;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
@@ -10,19 +10,19 @@ public class SauerstoffsaettigungConverter extends LaboratoryTestAnalyteConverte
         super(fhirObservation);
     }
 
-    public SauerstoffsattigungCluster map() {
-        SauerstoffsattigungCluster sauerstoffsattigungCluster = new SauerstoffsattigungCluster();
+    public SauerstoffsaettigungCluster map() {
+        SauerstoffsaettigungCluster sauerstoffsattigungCluster = new SauerstoffsaettigungCluster();
         sauerstoffsattigungCluster.setErgebnisStatusValue(mapErgebnisStatus());
-        sauerstoffsattigungCluster.setUntersuchterAnalytDefiningcode(mapUntersuchterAnalyt());
+        sauerstoffsattigungCluster.setUntersuchterAnalytDefiningCode(mapUntersuchterAnalyt());
         sauerstoffsattigungCluster.setAnalytResultatUnits("%");
         sauerstoffsattigungCluster.setAnalytResultatMagnitude(mapValue());
         return sauerstoffsattigungCluster;
     }
 
     @Override
-    UntersuchterAnalytDefiningcode4 mapUntersuchterAnalyt() {
-        UntersuchterAnalytDefiningcode4 oxygenSaturationInBlood = UntersuchterAnalytDefiningcode4.OXYGEN_SATURATION_IN_BLOOD;
-        UntersuchterAnalytDefiningcode4 oxygenSaturationInArterialBlood= UntersuchterAnalytDefiningcode4.OXYGEN_SATURATION_IN_ARTERIAL_BLOOD;
+    UntersuchterAnalytDefiningCode4 mapUntersuchterAnalyt() {
+        UntersuchterAnalytDefiningCode4 oxygenSaturationInBlood = UntersuchterAnalytDefiningCode4.OXYGEN_SATURATION_IN_BLOOD;
+        UntersuchterAnalytDefiningCode4 oxygenSaturationInArterialBlood= UntersuchterAnalytDefiningCode4.OXYGEN_SATURATION_IN_ARTERIAL_BLOOD;
 
         for (Coding coding : fhirObservation.getCode().getCoding()) {
             String code = coding.getCode();

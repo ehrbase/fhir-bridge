@@ -21,7 +21,6 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.StatusDefiningCode;
@@ -30,11 +29,17 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.defin
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-03T10:10:16.238434+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T11:53:47.209809+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("GECCO_Radiologischer Befund")
-public class GECCORadiologischerBefundComposition implements CompositionEntity, Composition {
+public class GECCORadiologischerBefundComposition implements CompositionEntity {
+  /**
+   * Path: Radiologischer Befund/category
+   */
+  @Path("/category|defining_code")
+  private Category categoryDefiningCode;
+
   /**
    * Path: Radiologischer Befund/context/Erweiterung
    * Description: Ergänzende Angaben zum Registereintrag.
@@ -124,12 +129,6 @@ public class GECCORadiologischerBefundComposition implements CompositionEntity, 
   private FeederAudit feederAudit;
 
   /**
-   * Path: Radiologischer Befund/category
-   */
-  @Path("/category|defining_code")
-  private Category categoryDefiningCode;
-
-  /**
    * Path: Radiologischer Befund/territory
    */
   @Path("/territory")
@@ -137,6 +136,14 @@ public class GECCORadiologischerBefundComposition implements CompositionEntity, 
 
   @Id
   private VersionUid versionUid;
+
+  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+     this.categoryDefiningCode = categoryDefiningCode;
+  }
+
+  public Category getCategoryDefiningCode() {
+     return this.categoryDefiningCode ;
+  }
 
   public void setErweiterung(List<Cluster> erweiterung) {
      this.erweiterung = erweiterung;
@@ -249,14 +256,6 @@ public class GECCORadiologischerBefundComposition implements CompositionEntity, 
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
-  }
-
-  public void setCategoryDefiningCode(Category categoryDefiningCode) {
-     this.categoryDefiningCode = categoryDefiningCode;
-  }
-
-  public Category getCategoryDefiningCode() {
-     return this.categoryDefiningCode ;
   }
 
   public void setTerritory(Territory territory) {

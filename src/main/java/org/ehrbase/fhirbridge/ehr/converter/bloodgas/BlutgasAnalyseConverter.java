@@ -1,12 +1,13 @@
 package org.ehrbase.fhirbridge.ehr.converter.bloodgas;
 
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.BefundDerBlutgasanalyseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.StatusDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
@@ -18,16 +19,16 @@ public class BlutgasAnalyseConverter {
     public BlutgasAnalyseConverter() {
     }
 
-    private StatusDefiningcode mapStatus(Observation fhirObservation) {
+    private StatusDefiningCode mapStatus(Observation fhirObservation) {
         switch (fhirObservation.getStatusElement().getCode()) {
             case "registered":
-                return StatusDefiningcode.REGISTRIERT;
+                return StatusDefiningCode.REGISTRIERT;
             case "final":
-                return StatusDefiningcode.FINAL;
+                return StatusDefiningCode.FINAL;
             case "amended":
-                return StatusDefiningcode.GEANDERT;
+                return StatusDefiningCode.GEAENDERT;
             case "preliminary":
-                return StatusDefiningcode.VORLAUFIG;
+                return StatusDefiningCode.VORLAEUFIG;
             default:
                 throw new IllegalStateException("Invalid Code " + fhirObservation.getStatusElement().getCode() + "" +
                         " for mapping of 'status', valid codes are: registered, final, amended and preliminary");
@@ -63,18 +64,19 @@ public class BlutgasAnalyseConverter {
     private void setMandatoryFields(BefundDerBlutgasanalyseComposition befundDerBlutgasanalyseComposition) {
         befundDerBlutgasanalyseComposition.setLanguage(Language.DE);
         befundDerBlutgasanalyseComposition.setLocation("test");
-        befundDerBlutgasanalyseComposition.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        befundDerBlutgasanalyseComposition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         befundDerBlutgasanalyseComposition.setTerritory(Territory.DE);
-        befundDerBlutgasanalyseComposition.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        befundDerBlutgasanalyseComposition.setCategoryDefiningCode(Category.EVENT);
         befundDerBlutgasanalyseComposition.setComposer(new PartySelf());
     }
 
-    public BefundDerBlutgasanalyseComposition convert(BloodGasPanel bloodGasPanelBundle) {
+    public BefundDerBlutgasanalyseComposition convert(BloodGasPanel bloodGasPanelBundle, FeederAudit feederAudit) {
         Observation bloodGasPanel = bloodGasPanelBundle.getBloodGasPanel();
         BefundDerBlutgasanalyseComposition befundDerBlutgasanalyseComposition = new BefundDerBlutgasanalyseComposition();
+        befundDerBlutgasanalyseComposition.setFeederAudit(feederAudit);
         setMandatoryFields(befundDerBlutgasanalyseComposition);
 
-        befundDerBlutgasanalyseComposition.setStatusDefiningcode(mapStatus(bloodGasPanel));
+        befundDerBlutgasanalyseComposition.setStatusDefiningCode(mapStatus(bloodGasPanel));
         befundDerBlutgasanalyseComposition.setKategorieValue(mapKategorie(bloodGasPanel));
         befundDerBlutgasanalyseComposition.setStartTimeValue(bloodGasPanel.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         befundDerBlutgasanalyseComposition.setLaborergebnis(LaborergebnisBefundConverter.map(bloodGasPanelBundle));

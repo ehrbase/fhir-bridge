@@ -1,18 +1,17 @@
 package org.ehrbase.fhirbridge.ehr.converter.clinicalFrailty;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.datatypes.CodePhrase;
-import com.nedap.archie.rm.datavalues.DvCodedText;
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import com.nedap.archie.rm.generic.PartySelf;
-import com.nedap.archie.rm.support.identification.TerminologyId;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.KlinischeFrailtySkalaComposition;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.KlinischeFrailtySkalaCfsObservation;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 
@@ -23,7 +22,6 @@ public class ClinicalFrailtyScaleScoreCompositionConverter implements Compositio
 
     @Override
     public Observation fromComposition(KlinischeFrailtySkalaComposition composition) {
-        // TODO: Implement
         return null;
     }
 
@@ -34,36 +32,21 @@ public class ClinicalFrailtyScaleScoreCompositionConverter implements Compositio
         }
 
         KlinischeFrailtySkalaComposition result = new KlinischeFrailtySkalaComposition();
+        FeederAudit fa = CommonData.constructFeederAudit(observation);
+        result.setFeederAudit(fa);
         KlinischeFrailtySkalaCfsObservation klinischeFrailtySkalaCfsObservation = new KlinischeFrailtySkalaCfsObservation();
 
         DateTimeType fhirEffectiveDateTime = null;
         try {
-
-            // default for every observation
             fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
             klinischeFrailtySkalaCfsObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
             klinischeFrailtySkalaCfsObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
-            klinischeFrailtySkalaCfsObservation.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-            klinischeFrailtySkalaCfsObservation.setSubject(new PartySelf());
-
-            // special mapping content
-
-            // is this the correct equivalent?
-            //Fhir-Example: Observation.valueCodeableConcept[0].coding[0].code[0]
-            // I tried to access the object, but it crashes during runtime:
+            klinischeFrailtySkalaCfsObservation.setLanguage(Language.DE);
             String string_assessment = observation.getValueCodeableConcept().getCoding().get(0).getCode();
             int assessment = Integer.parseInt(string_assessment);
-
-            // get the mapping to the DV_Ordinal from inner class
             ClinicalFrailtyMappingAssessment mapping = new ClinicalFrailtyMappingAssessment();
             DvOrdinal ord_assessment = mapping.getDVOrdinal(assessment);
-
             klinischeFrailtySkalaCfsObservation.setBeurteilung(ord_assessment);
-
-            //observation.setMesswertMagnitude(fhirValueNumeric.doubleValue());
-            //observation.setMesswertUnits(fhirValue.getUnit());
-
-
         } catch (Exception e) {
             throw new UnprocessableEntityException(e.getMessage());
         }
@@ -71,13 +54,13 @@ public class ClinicalFrailtyScaleScoreCompositionConverter implements Compositio
         result.setKlinischeFrailtySkalaCfs(klinischeFrailtySkalaCfsObservation);
 
         // Required fields by API
-        result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
+        result.setLanguage(Language.DE);
         result.setLocation("test");
-        result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
+        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
-        result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
+        result.setCategoryDefiningCode(Category.EVENT);
         result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-        result.setComposer(new PartySelf()); // FIXME: id ausdenken oder weglassen?
+        result.setComposer(new PartySelf());
 
         return result;
     }
