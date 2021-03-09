@@ -88,7 +88,7 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         DiagnosticReport diagnosticReport = (DiagnosticReport) super.testFileLoader.loadResource(resourcePath);
         RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
-        GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.toComposition(diagnosticReport);
+        GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.convert(diagnosticReport);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedGeccoRadiologischerBefundComposition);
         assertEquals(diff.getChanges().size(), 0);
     }

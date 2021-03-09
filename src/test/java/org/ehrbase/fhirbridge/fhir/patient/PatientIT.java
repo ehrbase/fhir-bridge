@@ -40,7 +40,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     void mappingPatient() throws IOException {
         Patient patient = (Patient) super.testFileLoader.loadResource("create-patient.json");
         PatientCompositionConverter patientCompositionConverterConverter = new PatientCompositionConverter();
-        GECCOPersonendatenComposition mappedGeccoPersonendatenComposition = patientCompositionConverterConverter.toComposition(patient);
+        GECCOPersonendatenComposition mappedGeccoPersonendatenComposition = patientCompositionConverterConverter.convert(patient);
         Diff diff = compareCompositions(getJavers(), "paragon-GECCO-patient-mapping-output.json", mappedGeccoPersonendatenComposition);
 
         assertEquals(0, diff.getChanges().size());
@@ -85,7 +85,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Patient patient = (Patient) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () ->
-            new PatientCompositionConverter().toComposition((patient))
+            new PatientCompositionConverter().convert((patient))
         );
     }
 

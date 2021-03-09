@@ -10,7 +10,6 @@ import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.Imm
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.KortisionEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.StatusDefiningCode2;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungDesImmunstatusEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ZusammenfassungDesImmunstatusInfektionskrankheitOderErregerElement;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.time.temporal.TemporalAccessor;
@@ -93,10 +92,10 @@ public class Medication extends QuestionnaireSection {
         zusammenfassungDesImmunstatusEvaluation.setLanguage(Language.DE);
         zusammenfassungDesImmunstatusEvaluation.setSubject(new PartySelf());
 
-        if(wasVaccinatedFlu){
+        if (wasVaccinatedFlu) {
             zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1Oktober2019BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
             zusammenfassungDesImmunstatusEvaluation.setImmunsstatusDefiningCode(ImmunsstatusDefiningCode.IMPFSTATUS_IST_AKUTELL);
-        }else{
+        } else {
             zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1Oktober2019BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
             zusammenfassungDesImmunstatusEvaluation.setImmunsstatusDefiningCode(ImmunsstatusDefiningCode.IMPFSTATUS_IST_NICHT_AKUTELL);
         }

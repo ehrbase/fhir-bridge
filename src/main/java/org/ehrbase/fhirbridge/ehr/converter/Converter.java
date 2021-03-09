@@ -26,9 +26,9 @@ import org.springframework.lang.NonNull;
 
 import java.util.Collections;
 
-public interface Converter<R extends Resource, T> {
+public interface Converter<S extends Resource, T> {
 
-    T convert(@NonNull R resource);
+    T convert(@NonNull S resource);
 
     default Language resolveLanguage(String languageCode) {
         for (Language language : Language.values()) {
@@ -39,7 +39,7 @@ public interface Converter<R extends Resource, T> {
         return Language.DE;
     }
 
-    default FeederAudit buildFeederAudit(R resource) {
+    default FeederAudit buildFeederAudit(S resource) {
         FeederAudit audit = new FeederAudit();
 
         FeederAuditDetails auditDetails = new FeederAuditDetails();

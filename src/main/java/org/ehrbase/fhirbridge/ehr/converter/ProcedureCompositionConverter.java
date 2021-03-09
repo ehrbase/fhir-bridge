@@ -1,14 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.ProzedurComposition;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.CareflowStepDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.prozedurcomposition.definition.CurrentStateDefiningCode;
@@ -19,23 +14,20 @@ import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Procedure;
+import org.springframework.lang.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProcedureCompositionConverter implements CompositionConverter<ProzedurComposition, Procedure> {
+public class ProcedureCompositionConverter extends AbstractCompositionConverter<Procedure, ProzedurComposition> {
 
     @Override
-    public ProzedurComposition toComposition(Procedure procedure) {
+    public ProzedurComposition convert(@NonNull Procedure procedure) {
         if (procedure == null) {
             return null;
         }
 
         ProzedurComposition result = new ProzedurComposition();
-
-        // set feeder audit
-        FeederAudit fa = CommonData.constructFeederAudit(procedure);
-        result.setFeederAudit(fa);
 
         Coding code = procedure.getCode().getCoding().get(0);
 
@@ -91,11 +83,6 @@ public class ProcedureCompositionConverter implements CompositionConverter<Proze
 
         // ======================================================================================
         // Required fields by API
-        result.setLanguage(Language.DE);
-        result.setLocation("test");
-        result.setSettingDefiningCode(Setting.EMERGENCY_CARE);
-        result.setTerritory(Territory.DE);
-        result.setCategoryDefiningCode(Category.EVENT);
 
         result.setStartTimeValue(performed.getValueAsCalendar().toZonedDateTime());
 

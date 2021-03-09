@@ -130,7 +130,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Observation observation = (Observation) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            // new YourConverter().toComposition(((YourResource) domainResource)));
+            // new YourConverter().convert(@NonNull ((YourResource) domainResource)));
         });
     }
 

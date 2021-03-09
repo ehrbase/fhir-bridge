@@ -1,43 +1,26 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturBeliebigesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.KennzeichnungErregernachweisSARSCoV2Composition;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.ErregernameDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.KennzeichnungErregernachweisEvaluation;
-import org.ehrbase.fhirbridge.fhir.common.Profile;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.time.Instant;
+import javax.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
-import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 
-public class CoronavirusNachweisTestCompositionConverter implements CompositionConverter<KennzeichnungErregernachweisSARSCoV2Composition, Observation> {
-
-    private static final Logger LOG = LoggerFactory.getLogger(CoronavirusNachweisTestCompositionConverter.class);
+public class CoronavirusNachweisTestCompositionConverter extends AbstractCompositionConverter<Observation, KennzeichnungErregernachweisSARSCoV2Composition> {
 
     @Override
-    public KennzeichnungErregernachweisSARSCoV2Composition toComposition(Observation observation) {
-        if (observation == null) {
-            return null;
-        }
+    public KennzeichnungErregernachweisSARSCoV2Composition convert(@NotNull Observation observation) {
+
         KennzeichnungErregernachweisSARSCoV2Composition result = new KennzeichnungErregernachweisSARSCoV2Composition();
-        FeederAudit fa = CommonData.constructFeederAudit(observation);
-        result.setFeederAudit(fa);
+
         List<String> positiveResultLoincCodes = Arrays.asList(
                 "33972-1",
                 "33968-9",
@@ -80,13 +63,7 @@ public class CoronavirusNachweisTestCompositionConverter implements CompositionC
 
         // ======================================================================================
         // Required fields by API
-        result.setLanguage(Language.EN);
-        result.setLocation("test");
-        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        result.setTerritory(Territory.DE);
-        result.setCategoryDefiningCode(Category.EVENT);
         result.setStartTimeValue(OffsetDateTime.now());
-        result.setComposer(new PartySelf());
 
         return result;
     }

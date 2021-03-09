@@ -25,13 +25,13 @@ import org.hl7.fhir.r4.model.Resource;
 
 public abstract class AbstractCompositionConverter<R extends Resource, C extends CompositionEntity> implements Converter<R, C> {
 
-    protected void convert(R resource, C composition) {
+    protected void mapDefaultAttributes(R resource, C composition) {
         composition.setFeederAudit(buildFeederAudit(resource));
         composition.setLanguage(resolveLanguage(resource.getLanguage()));
         composition.setTerritory(Territory.DE);
         composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         composition.setCategoryDefiningCode(Category.EVENT);
-        composition.setComposer(new PartySelf());
+        composition.setComposer(new PartySelf()); // FIXME: https://github.com/ehrbase/ehrbase_client_library/issues/31
         composition.setLocation("test");
     }
 }

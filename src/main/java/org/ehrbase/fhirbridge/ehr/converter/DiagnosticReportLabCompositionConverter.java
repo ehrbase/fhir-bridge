@@ -19,7 +19,7 @@ import java.util.List;
 
 import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.LOINC;
 
-public class DiagnosticReportLabCompositionConverter extends AbstractCompositionConverter<DiagnosticReport, GECCOLaborbefundComposition> {
+public class DiagnosticReportLabCompositionConverter extends AbstractCompositionConverter<DiagnosticReport, GECCOLaborbefundComposition> implements Converter<DiagnosticReport, GECCOLaborbefundComposition> {
 
     private static final Logger LOG = LoggerFactory.getLogger(DiagnosticReportLabCompositionConverter.class);
 
@@ -39,7 +39,7 @@ public class DiagnosticReportLabCompositionConverter extends AbstractComposition
 
         Observation observation = (Observation) diagnosticReport.getContained().get(0);
 
-        GECCOLaborbefundComposition result = observationConverter.toComposition(observation);
+        GECCOLaborbefundComposition result = observationConverter.convert(observation);
 
         LaborergebnisObservation laborbefund = result.getLaborergebnis();
 

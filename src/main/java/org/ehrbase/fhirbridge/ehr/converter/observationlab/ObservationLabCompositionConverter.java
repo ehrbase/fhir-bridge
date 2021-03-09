@@ -1,37 +1,54 @@
 package org.ehrbase.fhirbridge.ehr.converter.observationlab;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.datavalues.DvText;
-import com.nedap.archie.rm.datavalues.quantity.DvInterval;
-import com.nedap.archie.rm.datavalues.quantity.datetime.DvDate;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.*;
-import org.hl7.fhir.r4.model.*;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.InterpretationDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestKategorieDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytErgebnisStatusDvCodedText;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytKommentarElement;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytMesswertDvQuantity;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeEignungZumTestenDvCodedText;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeIdentifikatorDerUebergeordnetenProbeElement;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeProbenentahmebedingungElement;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbenartDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.StatusDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.UntersuchterAnalytDefiningCode;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Quantity;
+import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.Specimen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.LOINC;
-
-public class ObservationLabCompositionConverter implements CompositionConverter<GECCOLaborbefundComposition, Observation> {
-
-    private static final Logger LOG = LoggerFactory.getLogger(ObservationLabCompositionConverter.class);
+public class ObservationLabCompositionConverter extends AbstractCompositionConverter<Observation, GECCOLaborbefundComposition> {
 
     private static final Map<String, UntersuchterAnalytDefiningCode> untersuchterAnalytLOINCDefiningcodeMap
+            = new HashMap<>();
+    private static final Map<String, LabortestKategorieDefiningCode> labortestBezeichnungLOINCDefiningcodeMap
+            = new HashMap<>();
+    private static final Map<String, InterpretationDefiningCode> referenzBereichsHTTPDefiningcodeMap
+            = new HashMap<>();
+    private static final Map<String, ProbenartDefiningCode> probenartHTTPDefiningcodeMap
             = new HashMap<>();
 
     static {
@@ -42,9 +59,6 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         }
     }
 
-    private static final Map<String, LabortestKategorieDefiningCode> labortestBezeichnungLOINCDefiningcodeMap
-            = new HashMap<>();
-
     static {
         for (LabortestKategorieDefiningCode code : LabortestKategorieDefiningCode.values()) {
             if (code.getTerminologyId().equals("LOINC")) {
@@ -53,10 +67,6 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         }
     }
 
-
-    private static final Map<String, InterpretationDefiningCode> referenzBereichsHTTPDefiningcodeMap
-            = new HashMap<>();
-
     static {
         for (InterpretationDefiningCode code : InterpretationDefiningCode.values()) {
             if (code.getTerminologyId().equals("http")) {
@@ -64,9 +74,6 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
             }
         }
     }
-
-    private static final Map<String, ProbenartDefiningCode> probenartHTTPDefiningcodeMap
-            = new HashMap<>();
 
     static {
         for (ProbenartDefiningCode code : ProbenartDefiningCode.values()) {
@@ -78,16 +85,8 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
 
     @Override
-    public GECCOLaborbefundComposition toComposition(Observation observation) {
-        if (observation == null) {
-            return null;
-        }
-
+    public GECCOLaborbefundComposition convert(@NonNull Observation observation) {
         GECCOLaborbefundComposition result = new GECCOLaborbefundComposition();
-
-        // set feeder auhttps://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/ObservationLabdit
-        FeederAudit fa = CommonData.constructFeederAudit(observation);
-        result.setFeederAudit(fa);
 
         LaborergebnisObservation laborergebnis = new LaborergebnisObservation();
         ProLaboranalytCluster laboranalyt = mapToLaboranalyt(observation);
@@ -172,7 +171,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
         if (!observation.getMethod().isEmpty() && !observation.getMethod().getCoding().isEmpty()) {
             DvText testmethode = new DvText();
             testmethode.setValue(observation.getMethod().getCoding().get(0).getDisplay());
-            laborergebnis.setValue(testmethode);
+//            laborergebnis.setValue(testmethode);
         }
 
         laborergebnis.setProLaboranalyt(laboranalyt);
@@ -188,17 +187,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
         // ======================================================================================
         // Required fields by API
-        result.setLanguage(Language.DE);
-        result.setLocation("test");
-        result.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        result.setTerritory(Territory.DE);
-        result.setCategoryDefiningCode(Category.EVENT);
         result.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        // FIXME: https://github.com/ehrbase/ehrbase_client_library/issues/31
-        //        PartyProxy composer = new PartyIdentified();
-        //        composition.setComposer(composer);
-
-        result.setComposer(new PartySelf());
 
         return result;
     }
@@ -363,7 +352,7 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
 
         // mapping to openEHR
-       // ProLaboranalytMesswertChoice
+        // ProLaboranalytMesswertChoice
         ProLaboranalytMesswertDvQuantity laboranalytResultat = new ProLaboranalytMesswertDvQuantity();
 
         // map value to magnitude and unit
@@ -392,7 +381,6 @@ public class ObservationLabCompositionConverter implements CompositionConverter<
 
         return laboranalyt;
     }
-
 
 
 }

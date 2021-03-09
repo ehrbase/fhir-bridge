@@ -5,20 +5,26 @@ import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.SymptomComposition;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.AusgeschlossenesSymptomEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.StatusDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.UnbekanntesSymptomAussageUeberDieFehlendeInformationElement;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.UnbekanntesSymptomEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomAnatomischeLokalisationElement;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomObservation;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
+import org.springframework.lang.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class SymptomCompositionConverter implements CompositionConverter<SymptomComposition, Condition> {
+public class SymptomCompositionConverter extends AbstractCompositionConverter<Condition, SymptomComposition> {
 
     private static final Map<String, KrankheitsanzeichenCode> krankheitszeichenMap = new HashMap<>();
 
@@ -36,10 +42,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
     }
 
     @Override
-    public SymptomComposition toComposition(Condition condition) throws CompositionConversionException {
-        if (condition == null) {
-            return null;
-        }
+    public SymptomComposition convert(@NonNull Condition condition) {
 
         SymptomComposition result = new SymptomComposition();
 
@@ -86,10 +89,10 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
             }
 
             if (krankheitszeichen == null) {
-                throw new CompositionConversionException("Unbekanntes Krankheitszeichen.");
+                throw new ConversionException("Unbekanntes Krankheitszeichen.");
             }
 
-     //       vorliegendesSymptom.setNameDesSymptomsKrankheitsanzeichensDefiningcode(krankheitszeichen);
+            //       vorliegendesSymptom.setNameDesSymptomsKrankheitsanzeichensDefiningcode(krankheitszeichen);
             vorliegendesSymptom.setNameDesSymptomsKrankheitsanzeichens(krankheitszeichen.toDvCodedText());
 
 
@@ -126,7 +129,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
                 }
 
                 if (schweregrad == null) {
-                    throw new CompositionConversionException("Schweregrad has unknown system");
+                    throw new ConversionException("Schweregrad has unknown system");
                 }
 
                 vorliegendesSymptom.setSchweregrad(schweregrad.toDvCodedText());
@@ -136,7 +139,7 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
             vorliegendesSymptom.setOriginValue(condition.getRecordedDateElement().getValueAsCalendar().toZonedDateTime());
 
         } catch (Exception e) {
-            throw new CompositionConversionException("Some parts of the condition did not contain the required elements. "
+            throw new ConversionException("Some parts of the condition did not contain the required elements. "
                     + e.getMessage(), e);
         }
 
@@ -161,12 +164,12 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
             }
 
             if (krankheitszeichen == null) {
-                throw new CompositionConversionException("Unbekanntes Diagnose/Problem.");
+                throw new ConversionException("Unbekanntes Diagnose/Problem.");
             }
 
             ausgeschlossenesSymptom.setProblemDiagnose(krankheitszeichen.toDvCodedText());
         } catch (Exception e) {
-            throw new CompositionConversionException("Some parts of the condition did not contain the required elements. "
+            throw new ConversionException("Some parts of the condition did not contain the required elements. "
                     + e.getMessage(), e);
         }
 
@@ -198,13 +201,13 @@ public class SymptomCompositionConverter implements CompositionConverter<Symptom
             }
 
             if (krankheitszeichen == null) {
-                throw new CompositionConversionException("Unbekanntes <unbekanntes Symptom>");
+                throw new ConversionException("Unbekanntes <unbekanntes Symptom>");
             }
 
             unbekanntesSymptom.setUnbekanntesSymptom(krankheitszeichen.toDvCodedText());
 
         } catch (Exception e) {
-            throw new CompositionConversionException("Some parts of the condition did not contain the required elements. "
+            throw new ConversionException("Some parts of the condition did not contain the required elements. "
                     + e.getMessage(), e);
         }
 

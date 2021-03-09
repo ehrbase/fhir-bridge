@@ -2,19 +2,8 @@ package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
-
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.GECCOPersonendatenComposition;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.GECCOPersonendatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AlterObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.DatenZurGeburtCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EthnischerHintergrundCluster;
@@ -25,15 +14,18 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Patient;
+import org.springframework.lang.NonNull;
 
-public class PatientCompositionConverter implements CompositionConverter<GECCOPersonendatenComposition, Patient> {
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+public class PatientCompositionConverter extends AbstractCompositionConverter<Patient, GECCOPersonendatenComposition> {
 
     @Override
-    public GECCOPersonendatenComposition toComposition(Patient fhirPatient) {
-        if (fhirPatient == null) {
-            return null;
-        }
+    public GECCOPersonendatenComposition convert(@NonNull Patient fhirPatient) {
         GECCOPersonendatenComposition composition = new GECCOPersonendatenComposition();
         PersonendatenAdminEntry personData = new PersonendatenAdminEntry();
         composition.setAlter(getAgeFromFhir(fhirPatient));
@@ -43,17 +35,6 @@ public class PatientCompositionConverter implements CompositionConverter<GECCOPe
         personData.setLanguage(Language.DE);
         composition.setPersonendaten(personData);
         composition.setStartTimeValue(composition.getAlter().getTimeValue());
-        composition = setRequiredFields(composition);
-        return composition;
-    }
-
-    private GECCOPersonendatenComposition setRequiredFields(GECCOPersonendatenComposition composition) {
-        composition.setLanguage(Language.DE);
-        composition.setLocation("test");
-        composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        composition.setTerritory(Territory.DE);
-        composition.setCategoryDefiningCode(Category.EVENT);
-        composition.setComposer(new PartySelf());
         return composition;
     }
 
