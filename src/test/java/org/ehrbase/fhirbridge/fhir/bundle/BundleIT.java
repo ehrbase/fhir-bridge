@@ -119,7 +119,7 @@ public class BundleIT extends AbstractBundleMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(BefundDerBlutgasanalyseComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(BefundDerBlutgasanalyseComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(LaborergebnisObservation.class)
                 .registerValueObject(PhWertCluster.class)
                 .registerValueObject(SauerstoffpartialdruckCluster.class)

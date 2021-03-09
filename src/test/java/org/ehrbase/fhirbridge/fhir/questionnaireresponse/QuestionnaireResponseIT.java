@@ -185,7 +185,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(D4LQuestionnaireComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(D4LQuestionnaireComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject((ProblemDiagnoseEvaluation.class))
                 .registerValueObject(AlterObservation.class)
                 .registerValueObject(WohnsituationEvaluation.class)
