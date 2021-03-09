@@ -40,6 +40,7 @@ public class DiagnosticReportLabCompositionConverter extends AbstractComposition
         Observation observation = (Observation) diagnosticReport.getContained().get(0);
 
         GECCOLaborbefundComposition result = observationConverter.convert(observation);
+        mapDefaultAttributes(diagnosticReport, result);
 
         LaborergebnisObservation laborbefund = result.getLaborergebnis();
 

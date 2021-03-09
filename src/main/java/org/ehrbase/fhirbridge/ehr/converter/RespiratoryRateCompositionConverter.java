@@ -37,7 +37,7 @@ public class RespiratoryRateCompositionConverter extends AbstractCompositionConv
 
         // Required fields by API
         result.setStartTimeValue(effectiveDateTime);
-
+        mapDefaultAttributes(observation, result);
         return result;
     }
 }

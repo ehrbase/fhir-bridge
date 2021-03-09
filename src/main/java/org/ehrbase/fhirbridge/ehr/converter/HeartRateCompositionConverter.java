@@ -15,6 +15,7 @@ public class HeartRateCompositionConverter extends AbstractCompositionConverter<
     public HerzfrequenzComposition convert(@NonNull Observation observation) {
         //create result and observation objects
         HerzfrequenzComposition result = new HerzfrequenzComposition();
+        mapDefaultAttributes(observation, result);
 
         HerzfrequenzObservation herzfrequenzObservation = new HerzfrequenzObservation();
 

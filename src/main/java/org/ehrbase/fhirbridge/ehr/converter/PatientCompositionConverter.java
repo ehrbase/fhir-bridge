@@ -25,23 +25,24 @@ import java.util.List;
 public class PatientCompositionConverter extends AbstractCompositionConverter<Patient, GECCOPersonendatenComposition> {
 
     @Override
-    public GECCOPersonendatenComposition convert(@NonNull Patient fhirPatient) {
+    public GECCOPersonendatenComposition convert(@NonNull Patient patient) {
         GECCOPersonendatenComposition composition = new GECCOPersonendatenComposition();
         PersonendatenAdminEntry personData = new PersonendatenAdminEntry();
-        composition.setAlter(getAgeFromFhir(fhirPatient));
-        personData.setDatenZurGeburt(getDataOnBirth(fhirPatient));
-        personData.setEthnischerHintergrund(getEthnicBackgroundData(fhirPatient));
+        composition.setAlter(getAgeFromFhir(patient));
+        personData.setDatenZurGeburt(getDataOnBirth(patient));
+        personData.setEthnischerHintergrund(getEthnicBackgroundData(patient));
         personData.setSubject(new PartySelf());
         personData.setLanguage(Language.DE);
         composition.setPersonendaten(personData);
         composition.setStartTimeValue(composition.getAlter().getTimeValue());
+        mapDefaultAttributes(patient, composition);
         return composition;
     }
 
-    private List<EthnischerHintergrundCluster> getEthnicBackgroundData(Patient fhirPatient) {
+    private List<EthnischerHintergrundCluster> getEthnicBackgroundData(Patient patient) {
         List<EthnischerHintergrundCluster> items = new ArrayList<>();
         try {
-            Extension extensionEthnicGroup = fhirPatient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group");
+            Extension extensionEthnicGroup = patient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group");
             Coding ethnicGroup = (Coding) extensionEthnicGroup.getValue();
             EthnischerHintergrundCluster ec = new EthnischerHintergrundCluster();
             ec.setEthnischerHintergrundDefiningCode(EthnischerHintergrundDefiningCode.getBySNOMEDCode(ethnicGroup.getCode()));
