@@ -25,7 +25,7 @@ import org.hl7.fhir.r4.model.Resource;
 
 public abstract class AbstractCompositionConverter<R extends Resource, C extends CompositionEntity> implements Converter<R, C> {
 
-    protected void mapDefaultAttributes(R resource, C composition) {
+    protected void mapCommonAttributes(R resource, C composition) {
         composition.setFeederAudit(buildFeederAudit(resource));
         composition.setLanguage(resolveLanguage(resource.getLanguage()));
         composition.setTerritory(Territory.DE);

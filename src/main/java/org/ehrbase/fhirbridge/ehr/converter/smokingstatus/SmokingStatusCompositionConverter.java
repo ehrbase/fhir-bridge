@@ -18,6 +18,7 @@ public class SmokingStatusCompositionConverter extends AbstractCompositionConver
     public RaucherstatusComposition convert(@NonNull Observation observation) {
         //create composition and observation objects
         RaucherstatusComposition result = new RaucherstatusComposition();
+        mapCommonAttributes(observation, result);
 
         RaucherstatusEvaluation evaluation = new RaucherstatusEvaluation();
 

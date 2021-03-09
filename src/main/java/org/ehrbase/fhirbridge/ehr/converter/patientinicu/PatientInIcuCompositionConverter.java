@@ -67,6 +67,7 @@ public class PatientInIcuCompositionConverter extends AbstractCompositionConvert
     @Override
     public PatientAufICUComposition convert(@NonNull Observation observation) {
         PatientAufICUComposition composition = new PatientAufICUComposition();
+        mapCommonAttributes(observation, composition);
 
         setStatus(composition, observation);
 

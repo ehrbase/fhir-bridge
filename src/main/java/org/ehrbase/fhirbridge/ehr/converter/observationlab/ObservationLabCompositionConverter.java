@@ -87,6 +87,7 @@ public class ObservationLabCompositionConverter extends AbstractCompositionConve
     @Override
     public GECCOLaborbefundComposition convert(@NonNull Observation observation) {
         GECCOLaborbefundComposition result = new GECCOLaborbefundComposition();
+        mapCommonAttributes(observation, result);
 
         LaborergebnisObservation laborergebnis = new LaborergebnisObservation();
         ProLaboranalytCluster laboranalyt = mapToLaboranalyt(observation);

@@ -19,6 +19,7 @@ public class RadiologischerBefundConverter extends AbstractCompositionConverter<
     @Override
     public GECCORadiologischerBefundComposition convert(@NonNull DiagnosticReport diagnosticReport) {
         GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition = new GECCORadiologischerBefundComposition();
+        mapCommonAttributes(diagnosticReport, geccoRadiologischerBefundComposition);
         geccoRadiologischerBefundComposition.setStartTimeValue(diagnosticReport.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         geccoRadiologischerBefundComposition.setEndTimeValue(diagnosticReport.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
 

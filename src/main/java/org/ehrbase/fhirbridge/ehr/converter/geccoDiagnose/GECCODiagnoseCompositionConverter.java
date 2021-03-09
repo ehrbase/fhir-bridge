@@ -26,7 +26,7 @@ public class GECCODiagnoseCompositionConverter extends AbstractCompositionConver
     @Override
     public GECCODiagnoseComposition convert(@NonNull Condition condition) {
         GECCODiagnoseComposition composition = new GECCODiagnoseComposition();
-        mapDefaultAttributes(condition, composition);
+        mapCommonAttributes(condition, composition);
 
         vorliegendeDiagnose = new VorliegendeDiagnoseConverter().map(condition);
         if (condition.getVerificationStatus().isEmpty()) {

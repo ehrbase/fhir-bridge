@@ -16,6 +16,7 @@ public class PulseOximetryConverter extends AbstractCompositionConverter<Observa
     @Override
     public PulsoxymetrieComposition convert(@NonNull Observation observation) {
         PulsoxymetrieComposition composition = new PulsoxymetrieComposition();
+        mapCommonAttributes(observation, composition);
         new PulseOximetryCodeChecker().checkIfPulseOximetry(observation);
         new ContextConverter().mapStatus(composition, observation);
         mapKategorie(composition, observation);

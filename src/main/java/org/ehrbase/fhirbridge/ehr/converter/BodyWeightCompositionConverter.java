@@ -15,6 +15,8 @@ public class BodyWeightCompositionConverter extends AbstractCompositionConverter
     @Override
     public KoerpergewichtComposition convert(@NonNull Observation observation) {
         KoerpergewichtComposition result = new KoerpergewichtComposition();
+        mapCommonAttributes(observation, result);
+
         KoerpergewichtObservation KoerpergewichtObservation = new KoerpergewichtObservation();
         ZonedDateTime effectiveDateTime = null;
         try {

@@ -71,7 +71,7 @@ public class HistoryOfTravelConverter extends AbstractCompositionConverter<Obser
             throw new UnprocessableEntityException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
         }
 
-        mapDefaultAttributes(observation, composition);
+        mapCommonAttributes(observation, composition);
 
         // BSa: What about nullFlavour?
         // BSa: What about identifier?

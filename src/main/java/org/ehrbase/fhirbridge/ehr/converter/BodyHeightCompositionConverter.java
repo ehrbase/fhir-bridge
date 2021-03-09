@@ -25,9 +25,9 @@ public class BodyHeightCompositionConverter extends AbstractCompositionConverter
 
     private KoerpergroesseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GroesseLaengeObservation grosseLangeObservation, Observation observation) {
         KoerpergroesseComposition composition = new KoerpergroesseComposition();
+        mapCommonAttributes(observation, composition);
         composition.setGroesseLaenge(grosseLangeObservation);
         composition.setStartTimeValue(fhirEffectiveDateTime);
-        mapDefaultAttributes(observation, composition);
         return (composition);
     }
 

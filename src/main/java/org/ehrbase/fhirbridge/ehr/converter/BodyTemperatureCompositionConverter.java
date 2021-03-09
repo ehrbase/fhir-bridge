@@ -24,6 +24,7 @@ public class BodyTemperatureCompositionConverter extends AbstractCompositionConv
     @Override
     public IntensivmedizinischesMonitoringKorpertemperaturComposition convert(@NonNull Observation observation) {
         IntensivmedizinischesMonitoringKorpertemperaturComposition result = new IntensivmedizinischesMonitoringKorpertemperaturComposition();
+        mapCommonAttributes(observation, result);
 
         // ========================================================================================
         // value quantity is expected
