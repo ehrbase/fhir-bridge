@@ -60,7 +60,7 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(PulsoxymetrieComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(PulsoxymetrieComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(PulsoxymetrieObservation.class)
                 .build();
     }

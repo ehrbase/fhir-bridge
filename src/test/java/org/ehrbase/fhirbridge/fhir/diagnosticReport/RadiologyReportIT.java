@@ -97,7 +97,7 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(GECCORadiologischerBefundComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(GECCORadiologischerBefundComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject((BildgebendesUntersuchungsergebnisObservation.class))
                 .registerValueObject((RadiologischerBefundKategorieElement.class))
                 .build();

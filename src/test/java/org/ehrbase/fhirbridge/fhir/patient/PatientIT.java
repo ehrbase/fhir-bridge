@@ -98,7 +98,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(GECCOPersonendatenComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(GECCOPersonendatenComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject((PersonendatenAdminEntry.class))
                 .registerValueObject((AlterObservation.class))
                 .registerValueObject((EthnischerHintergrundCluster.class))
