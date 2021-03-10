@@ -230,7 +230,6 @@ jobs:
                 test-suite-path: "BUNDLE"
                 test-suite-name: "BUNDLE"
             - save-fhirbridge-robot-test-results
-            - save-fhirbridge-workspace
     
     CONDITION-tests:
         description: |
@@ -247,7 +246,6 @@ jobs:
                 test-suite-path: "CONDITION"
                 test-suite-name: "CONDITION"
             - save-fhirbridge-robot-test-results
-            - save-fhirbridge-workspace
 
     DIAGNOSTIC-tests:
         description: |
@@ -264,7 +262,6 @@ jobs:
                 test-suite-path: "DIAGNOSTIC"
                 test-suite-name: "DIAGNOSTIC"
             - save-fhirbridge-robot-test-results
-            - save-fhirbridge-workspace
 
     IMMUNIZATION-tests:
         description: |
@@ -281,7 +278,6 @@ jobs:
                 test-suite-path: "IMMUNIZATION"
                 test-suite-name: "IMMUNIZATION"
             - save-fhirbridge-robot-test-results
-            - save-fhirbridge-workspace
 
     MEDICATIONSTATEMENT-tests:
         description: |
@@ -298,7 +294,6 @@ jobs:
                 test-suite-path: "MEDICATIONSTATEMENT"
                 test-suite-name: "MEDICATIONSTATEMENT"
             - save-fhirbridge-robot-test-results
-            - save-fhirbridge-workspace
 
     # OBSERVATION-tests:
     #     description: |
@@ -315,7 +310,6 @@ jobs:
     #             test-suite-path: "OBSERVATION"
     #             test-suite-name: "OBSERVATION"
     #         - save-fhirbridge-robot-test-results
-    #         - save-fhirbridge-workspace
 
     PROCEDURE-tests:
         description: |
@@ -332,7 +326,6 @@ jobs:
                 test-suite-path: "PROCEDURE"
                 test-suite-name: "PROCEDURE"
             - save-fhirbridge-robot-test-results
-            - save-fhirbridge-workspace
 
     QUESTIONAIRE-tests:
         description: |
@@ -349,7 +342,6 @@ jobs:
                 test-suite-path: "QUESTIONNAIRE"
                 test-suite-name: "QUESTIONNAIRE"
             - save-fhirbridge-robot-test-results
-            - save-fhirbridge-workspace
 
     ROBOT-TEST-REPORT:
         description: |
@@ -663,6 +655,7 @@ commands:
                 name: POST PROCESS & MERGE TEST RESULTS
                 when: always
                 command: |
+                    cd tests/
                     # Create Log/Report with ALL DETAILS
                     rebot --outputdir results/0 \
                         --name FHIR-bridge \
@@ -678,6 +671,7 @@ commands:
                 name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
                 when: always
                 command: |
+                    cd tests/
                     # Create JUNIT report from merged results
                     rebot --outputdir results/2/robot-tests \
                         -e obsolete -e libtest \
@@ -765,6 +759,11 @@ commands:
                 path: ~/projects/tests/results/1
             - store_artifacts:
                 path: 00_robot_results/
+            - persist_to_workspace:
+                root: /home/circleci
+                paths:
+                    - 00_robot_results/
+                    - tests/results/0
 
 
     save-jacoco-coverage-report:
