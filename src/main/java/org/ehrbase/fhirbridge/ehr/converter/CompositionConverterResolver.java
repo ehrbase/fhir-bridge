@@ -4,6 +4,7 @@ import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConvert
 import org.ehrbase.fhirbridge.ehr.converter.clinicalFrailty.ClinicalFrailtyScaleScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelConverter;
+import org.ehrbase.fhirbridge.ehr.converter.knownexposure.KnownExposureConverter;
 import org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOximetryConverter;
 import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
@@ -46,6 +47,7 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.CORONARIRUS_NACHWEIS_TEST, new CoronavirusNachweisTestCompositionConverter());
         profiles.put(Profile.FIO2, new FiO2CompositionConverter());
         profiles.put(Profile.HEART_RATE, new HeartRateCompositionConverter());
+        profiles.put(Profile.KNOWN_EXPOSURE, new KnownExposureConverter());
         profiles.put(Profile.PATIENT_IN_ICU, new PatientInIcuCompositionConverter());
         profiles.put(Profile.PREGNANCY_STATUS, new PregnancyStatusCompositionConverter());
         profiles.put(Profile.OBSERVATION_LAB, new ObservationLabCompositionConverter());
