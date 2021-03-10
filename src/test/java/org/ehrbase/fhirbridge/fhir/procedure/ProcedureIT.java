@@ -27,13 +27,13 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ProcedureIT extends AbstractMappingTestSetupIT {
 
-    public ProcedureIT( ) {
+    public ProcedureIT() {
         super("Procedure/", Procedure.class);
     }
 
     @Test
     void createProcedure() throws IOException {
-       create("create-procedure.json");
+        create("create-procedure.json");
     }
 
     @Test
@@ -42,8 +42,15 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : Default profile is not supported for Procedure. One of the following profiles is expected: " +
-                "[https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure]", exception.getMessage());
+        assertEquals("HTTP 422 : Default profile is not supported for Procedure. " +
+                "One of the following profiles is expected: " +
+                "[https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dialysis, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/extracorporeal-membrane-oxygenation, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies]", exception.getMessage());
     }
 
     @Test

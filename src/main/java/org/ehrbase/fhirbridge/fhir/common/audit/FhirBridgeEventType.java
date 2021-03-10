@@ -6,27 +6,31 @@ import org.openehealth.ipf.commons.audit.types.EventType;
 @SuppressWarnings("java:S115")
 public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<EventType> {
 
-    FindAuditEvent("fhir-find-audit-event", "Find Audit Event"),
+    FindAuditEvent("audit-event-find", "Find Audit Event"),
 
-    CreateCondition("fhir-create-condition", "Create Condition"),
+    CreateCondition("condition-create", "Create Condition"),
 
-    FindCondition("fhir-find-condition", "Find Condition"),
+    FindCondition("condition-find", "Find Condition"),
 
-    CreateDiagnosticReport("fhir-create-diagnostic-report", "Create Diagnostic Report"),
+    CreateDiagnosticReport("diagnostic-report-create", "Create Diagnostic Report"),
 
-    FindDiagnosticReport("fhir-find-diagnostic-report", "Find Diagnostic Report"),
+    FindDiagnosticReport("diagnostic-report-find", "Find Diagnostic Report"),
 
-    CreateObservation("fhir-create-observation", "Create Observation"),
+    CreateObservation("observation-create", "Create Observation"),
 
-    FindObservation("fhir-find-observation", "Find Observation"),
+    FindObservation("observation-find", "Find Observation"),
 
-    CreatePatient("fhir-create-patient", "Create Patient"),
+    CreatePatient("patient-create", "Create Patient"),
 
-    FindPatient("fhir-find-patient", "Find Patient"),
+    FindPatient("patient-find", "Find Patient"),
 
-    CreateProcedure("fhir-create-procedure", "Create Procedure"),
+    CreateProcedure("procedure-create", "Create Procedure"),
 
-    FindProcedure("fhir-find-procedure", "Find Procedure");
+    FindProcedure("procedure-find", "Find Procedure"),
+
+    CreateQuestionnaireResponse("questionnaire-response-create", "Create Questionnaire Response"),
+
+    FindQuestionnaireResponse("questionnaire-response-find", "Find Questionnaire Response");
 
     private final EventType value;
 
