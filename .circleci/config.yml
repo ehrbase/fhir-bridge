@@ -199,8 +199,10 @@ jobs:
             - start-ehrbase-server
             - build-and-test-fhirbridge:
                 skip-javadoc: true
-                skip-jacoco: false
-                skip-tests: false
+                # skip-jacoco: false        #
+                # skip-tests: false         # TODO: undo this before mergin!!!!
+                skip-jacoco: true           #
+                skip-tests: true            #
             - cache-in-ehrbase-m2-dependencies
             - cache-in-fhirbridge-m2-dependencies
             # - start-fhirbridge-application
@@ -211,8 +213,8 @@ jobs:
             - save-fhirbridge-test-results
             - save-jacoco-coverage-report
             - save-fhirbridge-workspace
-            - sonarcloud/scan:
-                cache_version: 2
+            # - sonarcloud/scan:            # TODO: undo this before mergin!!!!
+            #     cache_version: 2          #
     
 
     BUNDLE-tests:
@@ -231,7 +233,6 @@ jobs:
                 test-suite-name: "BUNDLE"
                 # runner: pabot
                 # pabot-split: "--testlevelsplit"
-
             - save-fhirbridge-robot-test-results
     
     CONDITION-tests:
@@ -802,6 +803,7 @@ commands:
                     - projects/ehrbase/pom.xml
                     - projects/ehrbase/application/target/
                     - projects/target/
+                    - projects/tests/requirements.txt
 
 
     restore-fhirbridge-workspace:
@@ -832,11 +834,22 @@ commands:
     install-robot-dependencies:
         description: Install Python requirements
         steps:
+            - restore_cache:
+                key: pip-dep-v1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
             - run:
-                name: Install Python requirements
                 command: |
-                    python -c "import site; print(site.getsitepackages())"
+                    python3 -m venv venv
+                    . venv/bin/activate
                     pip install -r tests/requirements.txt
+            - save_cache:
+                key: pip-dep-v1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
+                paths:
+                    - "venv"
+            # - run:
+            #     name: Install Python requirements
+            #     command: |
+            #         python -c "import site; print(site.getsitepackages())"
+            #         pip install -r tests/requirements.txt
 
     configure-git-for-ci-bot:
         steps:
