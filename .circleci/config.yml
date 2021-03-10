@@ -81,13 +81,13 @@ workflows:
                     branches:
                         ignore: gh-pages
             
-            # - OBSERVATION-tests:
-            #     context: org-global
-            #     requires:
-            #         - build-test-analyse-fhirbridge
-            #     filters:
-            #         branches:
-            #             ignore: gh-pages
+            - OBSERVATION-tests:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        ignore: gh-pages
             
             - PROCEDURE-tests:
                 context: org-global
@@ -113,7 +113,7 @@ workflows:
                     - DIAGNOSTIC-tests
                     - IMMUNIZATION-tests
                     - MEDICATIONSTATEMENT-tests
-                    # - OBSERVATION-tests
+                    - OBSERVATION-tests
                     - PROCEDURE-tests
                     - QUESTIONAIRE-tests
 
@@ -231,8 +231,8 @@ jobs:
                 include-tags: "bundle"
                 test-suite-path: "BUNDLE"
                 test-suite-name: "BUNDLE"
-                # runner: pabot
-                # pabot-split: "--testlevelsplit"
+                runner: pabot
+                pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
     
     CONDITION-tests:
@@ -249,6 +249,8 @@ jobs:
                 include-tags: "condition"
                 test-suite-path: "CONDITION"
                 test-suite-name: "CONDITION"
+                runner: pabot
+                pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
     DIAGNOSTIC-tests:
@@ -265,6 +267,8 @@ jobs:
                 include-tags: "diagnostic-report"
                 test-suite-path: "DIAGNOSTIC"
                 test-suite-name: "DIAGNOSTIC"
+                runner: pabot
+                pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
     IMMUNIZATION-tests:
@@ -281,6 +285,8 @@ jobs:
                 include-tags: "immunization"
                 test-suite-path: "IMMUNIZATION"
                 test-suite-name: "IMMUNIZATION"
+                runner: pabot
+                pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
     MEDICATIONSTATEMENT-tests:
@@ -297,23 +303,27 @@ jobs:
                 include-tags: "medicationstatement"
                 test-suite-path: "MEDICATIONSTATEMENT"
                 test-suite-name: "MEDICATIONSTATEMENT"
+                runner: pabot
+                pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
-    # OBSERVATION-tests:
-    #     description: |
-    #         todo
-    #     executor: docker-py3-java11-postgres
-    #     steps:
-    #         - checkout
-    #         - install-maven
-    #         - restore-fhirbridge-workspace
-    #         - start-ehrbase-server
-    #         - start-fhirbridge-application
-    #         - run-robot-integration-tests:
-    #             include-tags: "observation"
-    #             test-suite-path: "OBSERVATION"
-    #             test-suite-name: "OBSERVATION"
-    #         - save-fhirbridge-robot-test-results
+    OBSERVATION-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "observation"
+                test-suite-path: "OBSERVATION"
+                test-suite-name: "OBSERVATION"
+                runner: pabot
+                pabot-split: "--testlevelsplit"
+            - save-fhirbridge-robot-test-results
 
     PROCEDURE-tests:
         description: |
@@ -329,6 +339,8 @@ jobs:
                 include-tags: "procedure"
                 test-suite-path: "PROCEDURE"
                 test-suite-name: "PROCEDURE"
+                runner: pabot
+                pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
     QUESTIONAIRE-tests:
@@ -345,6 +357,8 @@ jobs:
                 include-tags: "questionnaire"
                 test-suite-path: "QUESTIONNAIRE"
                 test-suite-name: "QUESTIONNAIRE"
+                runner: pabot
+                pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
     ROBOT-TEST-REPORT:
