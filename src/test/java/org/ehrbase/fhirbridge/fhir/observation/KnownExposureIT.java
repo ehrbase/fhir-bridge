@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
+import ca.uhn.fhir.parser.DataFormatException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelConverter;
 import org.ehrbase.fhirbridge.ehr.converter.knownexposure.KnownExposureConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.SARSCoV2ExpositionComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.SarsCov2ExpositionEvaluation;
@@ -61,6 +61,14 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
         assertEquals("The code '666' is unkown.", exception.getMessage());
     }
 
+    @Test
+    void createInvalidStatus() throws IOException {
+        try{
+            super.testFileLoader.loadResource("create-known-exposure-invalid-status.json");
+        }catch (DataFormatException dataFormatException){
+            assertEquals("[element=\"status\"] Invalid attribute value \"invalid\": Unknown DiagnosticReportStatus code 'asd'", dataFormatException.getMessage());
+        }
+    }
 
     // #####################################################################################
     // default
