@@ -621,6 +621,7 @@ commands:
             - run:
                 name: RUN ROBOT TESTS
                 command: |
+                    . /tmp/venv/bin/activate
                     cd tests/
                     << parameters.runner >> <<parameters.pabot-split >> -v OUTPUT_LEVEL:verbose -L TRACE \
                           --include << parameters.include-tags >> \
@@ -838,8 +839,7 @@ commands:
                 key: pip-dep-v1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
             - run:
                 command: |
-                    python3 -m venv venv
-                    . venv/bin/activate
+                    python3 -m venv /tmp/venv
                     pip install -r tests/requirements.txt
             - save_cache:
                 key: pip-dep-v1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
