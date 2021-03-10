@@ -617,7 +617,7 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    pabot --testlevelsplit -v OUTPUT_LEVEL:minimal -d results/0 -L INFO \
+                    robot -v OUTPUT_LEVEL:verbose -d results/0 -L TRACE \
                           --include << parameters.include-tags >> \
                           --outputdir results/0/<< parameters.test-suite-name >> \
                           --name << parameters.test-suite-name >> \
@@ -637,7 +637,7 @@ commands:
                         --output NONE \
                         --log NONE \
                         --report NONE \
-                        --xunit junit-output.xml \
+                        --xunit junit-output-<< parameters.test-suite-name >>.xml \
                         results/0/<< parameters.test-suite-name >>/output.xml
             # - run:
             #     name: GENERATE ROBOT TEST DOCUMENTATION
