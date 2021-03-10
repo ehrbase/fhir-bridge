@@ -682,7 +682,7 @@ commands:
                         --report FHIR-bridge-report.html \
                         results/0/*/*.xml
             - run:
-                name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
+                name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION (for all tests)
                 when: always
                 command: |
                     cd tests/
@@ -699,6 +699,15 @@ commands:
                     python3 -m robot.testdoc tests/robot new_fhir-bridge-robot-testdocu.html
                     cp tests/results/0/FHIR-bridge-log.html ./new_log.html
                     cp tests/results/0/FHIR-bridge-report.html ./new_report.html
+            - run:
+                name: COPY ROBOT OUTPUT FILES
+                when: always
+                command: |
+                    cp tests/results/0/FHIR-bridge-log.html 00_robot_results/
+                    cp tests/results/0/FHIR-bridge-report.html 00_robot_results/
+                    # cp tests/results/0/FHIR-bridge-output.xml 00_robot_results/
+                    cp new_fhir-bridge-robot-testdocu.html 00_robot_results/fhir-bridge-robot-testdocu.html
+
             - store_test_results:
                 path: ~/projects/tests/results/2
             - store_artifacts:
