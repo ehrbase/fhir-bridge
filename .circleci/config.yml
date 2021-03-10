@@ -229,8 +229,8 @@ jobs:
                 include-tags: "bundle"
                 test-suite-path: "BUNDLE"
                 test-suite-name: "BUNDLE"
-                runner: pabot
-                pabot-split: "--testlevelsplit"
+                # runner: pabot
+                # pabot-split: "--testlevelsplit"
 
             - save-fhirbridge-robot-test-results
     
