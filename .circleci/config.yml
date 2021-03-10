@@ -625,7 +625,7 @@ commands:
                           --skiponfailure not-ready \
                           robot/<< parameters.test-suite-path >>
             - run:
-                name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
+                name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION (per test suite)
                 when: always
                 command: |
                     cd tests/
@@ -652,6 +652,48 @@ commands:
                     mkdir 00_robot_results
                     cp -r tests/results/0/* 00_robot_results/
                     cp fhirbride_log 00_robot_results/fhirbride_test_log_<< parameters.test-suite-name >>
+
+
+    merge-robot-outputs:
+        description: Merge Robot Results from Parallel Tests
+        steps:
+            - install-robot-dependencies
+            - run:
+                name: POST PROCESS & MERGE TEST RESULTS
+                when: always
+                command: |
+                    # Create Log/Report with ALL DETAILS
+                    rebot --outputdir results/0 \
+                        --name FHIR-bridge \
+                        -e obsolete -e libtest \
+                        --removekeywords for \
+                        --removekeywords wuks \
+                        --loglevel TRACE \
+                        --output FHIR-bridge-output.xml \
+                        --log FHIR-bridge-log.html \
+                        --report FHIR-bridge-report.html \
+                        results/0/*/*.xml
+            - run:
+                name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
+                when: always
+                command: |
+                    # Create JUNIT report from merged results
+                    rebot --outputdir results/2/robot-tests \
+                        -e obsolete -e libtest \
+                        --xunit junit-output.xml \
+                        --log NONE \
+                        --report NONE \
+                        results/0/FHIR-bridge-output.xml
+            - run:
+                name: GENERATE ROBOT TEST DOCUMENTATION (for Github Pages deployment)
+                command: |
+                    python3 -m robot.testdoc tests/robot new_fhir-bridge-robot-testdocu.html
+                    cp tests/results/0/FHIR-bridge-log.html ./new_log.html
+                    cp tests/results/0/FHIR-bridge-report.html ./new_report.html
+            - store_test_results:
+                path: ~/projects/tests/results/2
+            - store_artifacts:
+                path: 00_robot_results/
 
 
     cache-out-fhirbridge-m2-dependencies:
