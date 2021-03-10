@@ -73,12 +73,14 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.DIAGNOSE_DEPENDENCE_ON_VENTILATOR, new GECCODiagnoseCompositionConverter());
         // Patient
         profiles.put(Profile.PATIENT, new PatientCompositionConverter());
-
+        // Procedures
         profiles.put(Profile.APHERESIS_PROCEDURE, new TherapyCompositionConverter());
         profiles.put(Profile.DIALYSIS_PROCEDURE, new TherapyCompositionConverter());
         profiles.put(Profile.RESPIRATORY_THERAPIES_PROCEDURE, new TherapyCompositionConverter());
         profiles.put(Profile.RADIOLOGY_PROCEDURE, new TherapyCompositionConverter());
         profiles.put(Profile.EXTRACORPOREAL_MEMBRANE_OXYGENATION_PROCEDURE, new TherapyCompositionConverter());
         profiles.put(Profile.PRONE_POSITION_PROCEDURE, new TherapyCompositionConverter());
+        //Consents
+        profiles.put(Profile.DNR_ORDER, new DNRAnordnungCompositionConverter());
     }
 }

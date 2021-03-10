@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.common;
 
 import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
@@ -100,6 +101,10 @@ public enum Profile {
     PRONE_POSITION_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position"),
     RADIOLOGY_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures"),
     RESPIRATORY_THERAPIES_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"),
+
+    // Consent profiles
+
+    DNR_ORDER(Consent.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order"),
 
     // QuestionnaireResponse Profiles
 
