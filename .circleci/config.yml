@@ -229,6 +229,7 @@ jobs:
                 include-tags: "bundle"
                 test-suite-path: "BUNDLE"
                 test-suite-name: "BUNDLE"
+                runner: pabot
             - save-fhirbridge-robot-test-results
     
     CONDITION-tests:
@@ -592,6 +593,10 @@ commands:
 
     run-robot-integration-tests:
         parameters:
+            runner:
+                description: Run tests with `robot` OR `pabot` command
+                type: string
+                default: robot
             include-tags:
                 description: Which tests to inclue by TAGs (Robot syntax applies!)
                 type: string
@@ -610,7 +615,7 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    robot -v OUTPUT_LEVEL:verbose -d results/0 -L TRACE \
+                    << parameters.runner >> -v OUTPUT_LEVEL:verbose -L TRACE \
                           --include << parameters.include-tags >> \
                           --outputdir results/0/<< parameters.test-suite-name >> \
                           --name << parameters.test-suite-name >> \
@@ -762,8 +767,8 @@ commands:
             - persist_to_workspace:
                 root: /home/circleci
                 paths:
-                    - 00_robot_results/
-                    - tests/results/0
+                    - projects/00_robot_results/
+                    - projects/tests/results/0/
 
 
     save-jacoco-coverage-report:
