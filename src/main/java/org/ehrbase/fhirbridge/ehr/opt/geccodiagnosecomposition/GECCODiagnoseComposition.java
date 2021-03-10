@@ -32,7 +32,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.Vorlie
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-25T12:33:23.195209+01:00",
+    date = "2021-02-26T00:40:41.764844+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
 )
 @Template("GECCO_Diagnose")
