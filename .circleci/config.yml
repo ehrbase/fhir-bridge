@@ -175,7 +175,8 @@ jobs:
             - cache-out-ehrbase-m2-dependencies
             - build-ehrbase
             - start-ehrbase-server
-            - build-and-test-fhirbridge
+            - build-and-test-fhirbridge:
+                skip-tests: false    # TODO: set to false if/then FHIRbrige gets some unit tests (at the moment *IT.java tests is all we have)
             - cache-in-ehrbase-m2-dependencies
             - cache-in-fhirbridge-m2-dependencies
             # - collect-fhirbridge-unittest-results
@@ -196,7 +197,10 @@ jobs:
             - cache-out-ehrbase-m2-dependencies
             - build-ehrbase
             - start-ehrbase-server
-            - build-and-test-fhirbridge
+            - build-and-test-fhirbridge:
+                skip-javadoc: true
+                skip-jacoco: false
+                skip-tests: false
             - cache-in-ehrbase-m2-dependencies
             - cache-in-fhirbridge-m2-dependencies
             # - start-fhirbridge-application
@@ -221,7 +225,10 @@ jobs:
             - restore-fhirbridge-workspace
             - start-ehrbase-server
             - start-fhirbridge-application
-            - run-robot-integration-tests
+            - run-robot-integration-tests:
+                include-tags: "bundle"
+                test-suite-path: "BUNDLE"
+                test-suite-name: "BUNDLE"
             - save-fhirbridge-robot-test-results
             - save-fhirbridge-workspace
     
@@ -230,49 +237,119 @@ jobs:
             todo
         executor: docker-py3-java11-postgres
         steps:
-            - run: echo DUMMY
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "condition"
+                test-suite-path: "CONDITION"
+                test-suite-name: "CONDITION"
+            - save-fhirbridge-robot-test-results
+            - save-fhirbridge-workspace
 
     DIAGNOSTIC-tests:
         description: |
             todo
         executor: docker-py3-java11-postgres
         steps:
-            - run: echo DUMMY
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "diagnostic-report"
+                test-suite-path: "DIAGNOSTIC"
+                test-suite-name: "DIAGNOSTIC"
+            - save-fhirbridge-robot-test-results
+            - save-fhirbridge-workspace
 
     IMMUNIZATION-tests:
         description: |
             todo
         executor: docker-py3-java11-postgres
         steps:
-            - run: echo DUMMY
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "immunization"
+                test-suite-path: "IMMUNIZATION"
+                test-suite-name: "IMMUNIZATION"
+            - save-fhirbridge-robot-test-results
+            - save-fhirbridge-workspace
 
     MEDICATIONSTATEMENT-tests:
         description: |
             todo
         executor: docker-py3-java11-postgres
         steps:
-            - run: echo DUMMY
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "medicationstatement"
+                test-suite-path: "MEDICATIONSTATEMENT"
+                test-suite-name: "MEDICATIONSTATEMENT"
+            - save-fhirbridge-robot-test-results
+            - save-fhirbridge-workspace
 
     OBSERVATION-tests:
         description: |
             todo
         executor: docker-py3-java11-postgres
         steps:
-            - run: echo DUMMY
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "observation"
+                test-suite-path: "OBSERVATION"
+                test-suite-name: "OBSERVATION"
+            - save-fhirbridge-robot-test-results
+            - save-fhirbridge-workspace
 
     PROCEDURE-tests:
         description: |
             todo
         executor: docker-py3-java11-postgres
         steps:
-            - run: echo DUMMY
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "procedure"
+                test-suite-path: "PROCEDURE"
+                test-suite-name: "PROCEDURE"
+            - save-fhirbridge-robot-test-results
+            - save-fhirbridge-workspace
 
     QUESTIONAIRE-tests:
         description: |
             todo
         executor: docker-py3-java11-postgres
         steps:
-            - run: echo DUMMY
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "questionnaire"
+                test-suite-path: "QUESTIONNAIRE"
+                test-suite-name: "QUESTIONNAIRE"
+            - save-fhirbridge-robot-test-results
+            - save-fhirbridge-workspace
 
     ROBOT-TEST-REPORT:
         description: |
@@ -417,6 +494,19 @@ commands:
     build-and-test-fhirbridge:
         description: |
             Executes `mvn clean verify`
+        parameters:
+            skip-jacoco:
+                description: Skip Jacoco's Code Instrumentation For Coverage Analysis
+                type: boolean
+                default: true 
+            skip-tests:
+                description: Do Not Compile And Do Not Run Test Code
+                type: boolean
+                default: true
+            skip-javadoc:
+                description: Skip Java Docs Generation
+                type: boolean
+                default: true
         steps:
             - run:
                 name: WAIT FOR EHRBASE SERVER TO BE READY
@@ -450,7 +540,9 @@ commands:
                 name: BUILD FHIR-BRIDGE
                 command: |
                     ls -la
-                    mvn clean verify -Dmaven.javadoc.skip=true -DskipITs=false
+                    mvn clean verify -Dmaven.javadoc.skip=<< parameters.skip-javadoc >> \
+                                     -DskipITs=<< parameters.skip-tests >> \
+                                     -Djacoco.skip=<< parameters.skip-jacoco >>
 
 
     start-fhirbridge-application:
@@ -506,6 +598,19 @@ commands:
 
 
     run-robot-integration-tests:
+        parameters:
+            include-tags:
+                description: Which tests to inclue by TAGs (Robot syntax applies!)
+                type: string
+
+            test-suite-path:
+                description: Target test-suite given by it's folder name e.g. COMPOSITION_TESTS
+                default: ""
+                type: string
+
+            test-suite-name:
+                description: Titel of generated Robot Log/Report.html
+                type: string
         steps:
             - install-robot-dependencies
             - run:
@@ -513,9 +618,12 @@ commands:
                 command: |
                     cd tests/
                     pabot --testlevelsplit -v OUTPUT_LEVEL:minimal -d results/0 -L INFO \
-                            -i ci-test \
-                            --skip TODO --skip future \
-                            --skiponfailure not-ready robot/
+                          --include << parameters.include-tags >> \
+                          --outputdir results/0/<< parameters.test-suite-name >> \
+                          --name << parameters.test-suite-name >> \
+                          --skip TODO --skip future \
+                          --skiponfailure not-ready \
+                          robot/<< parameters.test-suite-path >>
             - run:
                 name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
                 when: always
@@ -529,21 +637,21 @@ commands:
                         --output NONE \
                         --log NONE \
                         --report NONE \
-                        --xunit junit-output.xml --xunitskipnoncritical \
-                        results/0/output.xml
-            - run:
-                name: GENERATE ROBOT TEST DOCUMENTATION
-                command: |
-                    python3 -m robot.testdoc tests/robot new_fhir-bridge-robot-testdocu.html
-                    cp tests/results/0/log.html ./new_log.html
-                    cp tests/results/0/report.html ./new_report.html
+                        --xunit junit-output.xml \
+                        results/0/<< parameters.test-suite-name >>/output.xml
+            # - run:
+            #     name: GENERATE ROBOT TEST DOCUMENTATION
+            #     command: |
+            #         python3 -m robot.testdoc tests/robot new_fhir-bridge-robot-testdocu.html
+            #         cp tests/results/0/log.html ./new_log.html
+            #         cp tests/results/0/report.html ./new_report.html
             - run:
                 name: COPY ROBOT OUTPUT FILES
                 when: always
                 command: |
                     mkdir 00_robot_results
                     cp -r tests/results/0/* 00_robot_results/
-                    cp fhirbride_log 00_robot_results/fhirbride_test_log
+                    cp fhirbride_log 00_robot_results/fhirbride_test_log_<< parameters.test-suite-name >>
 
 
     cache-out-fhirbridge-m2-dependencies:
