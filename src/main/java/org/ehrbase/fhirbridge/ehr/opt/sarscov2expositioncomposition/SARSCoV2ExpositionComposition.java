@@ -21,6 +21,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.SarsCov2ExpositionEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.StatusDefiningCode;
 
@@ -32,7 +33,7 @@ import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.S
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("SARS-CoV-2 Exposition")
-public class SARSCoV2ExpositionComposition implements CompositionEntity {
+public class SARSCoV2ExpositionComposition implements CompositionEntity, Composition {
   /**
    * Path: SARS-CoV-2 Exposition/category
    */
