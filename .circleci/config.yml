@@ -230,6 +230,8 @@ jobs:
                 test-suite-path: "BUNDLE"
                 test-suite-name: "BUNDLE"
                 runner: pabot
+                pabot-split: "--testlevelsplit"
+
             - save-fhirbridge-robot-test-results
     
     CONDITION-tests:
@@ -597,6 +599,10 @@ commands:
                 description: Run tests with `robot` OR `pabot` command
                 type: string
                 default: robot
+            pabot-split:
+                description: Only when `pabot` command is used add `--testlevelsplit` option
+                type: string
+                default: ""
             include-tags:
                 description: Which tests to inclue by TAGs (Robot syntax applies!)
                 type: string
@@ -615,7 +621,7 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    << parameters.runner >> -v OUTPUT_LEVEL:verbose -L TRACE \
+                    << parameters.runner >> <<parameters.pabot-split >> -v OUTPUT_LEVEL:verbose -L TRACE \
                           --include << parameters.include-tags >> \
                           --outputdir results/0/<< parameters.test-suite-name >> \
                           --name << parameters.test-suite-name >> \
