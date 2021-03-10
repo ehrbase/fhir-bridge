@@ -638,6 +638,7 @@ commands:
                     - projects/new_fhir-bridge-robot-testdocu.html
                     - projects/new_log.html
                     - projects/new_report.html
+                    - projects/ehrbase/pom.xml
                     - projects/ehrbase/application/target/
                     - projects/target/
 
