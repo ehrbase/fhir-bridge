@@ -352,6 +352,7 @@ jobs:
             todo
         executor: docker-python3-java11
         steps:
+            - checkout
             - restore-fhirbridge-workspace
             - merge-robot-outputs
 
@@ -804,7 +805,8 @@ commands:
                     - projects/ehrbase/pom.xml
                     - projects/ehrbase/application/target/
                     - projects/target/
-                    - projects/tests/requirements.txt
+                    # - projects/tests/robot/
+                    # - projects/tests/requirements.txt
 
 
     restore-fhirbridge-workspace:
