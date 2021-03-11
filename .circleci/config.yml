@@ -649,6 +649,7 @@ commands:
                 name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION (per test suite)
                 when: always
                 command: |
+                    . venv/bin/activate
                     cd tests/
                     rebot --outputdir results/1/robot-tests \
                         -e obsolete -e libtest \
@@ -683,6 +684,7 @@ commands:
                 name: POST PROCESS & MERGE TEST RESULTS
                 when: always
                 command: |
+                    . venv/bin/activate
                     cd tests/
                     # Create Log/Report with ALL DETAILS
                     rebot --outputdir results/0 \
@@ -699,6 +701,7 @@ commands:
                 name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION (for all tests)
                 when: always
                 command: |
+                    . venv/bin/activate
                     cd tests/
                     # Create JUNIT report from merged results
                     rebot --outputdir results/2/robot-tests \
@@ -710,6 +713,7 @@ commands:
             - run:
                 name: GENERATE ROBOT TEST DOCUMENTATION (for Github Pages deployment)
                 command: |
+                    . venv/bin/activate
                     python3 -m robot.testdoc tests/robot new_fhir-bridge-robot-testdocu.html
                     cp tests/results/0/FHIR-bridge-log.html ./new_log.html
                     cp tests/results/0/FHIR-bridge-report.html ./new_report.html
