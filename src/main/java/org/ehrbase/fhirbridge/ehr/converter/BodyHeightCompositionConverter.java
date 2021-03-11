@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.KoerpergroesseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.definition.GroesseLaengeObservation;
 import org.hl7.fhir.r4.model.Observation;
@@ -26,6 +27,7 @@ public class BodyHeightCompositionConverter extends AbstractCompositionConverter
     private KoerpergroesseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GroesseLaengeObservation grosseLangeObservation, Observation observation) {
         KoerpergroesseComposition composition = new KoerpergroesseComposition();
         mapCommonAttributes(observation, composition);
+
         composition.setGroesseLaenge(grosseLangeObservation);
         composition.setStartTimeValue(fhirEffectiveDateTime);
         return (composition);
@@ -54,6 +56,7 @@ public class BodyHeightCompositionConverter extends AbstractCompositionConverter
     }
 
     private void setDefault(GroesseLaengeObservation grosseLangeObservation) {
+        grosseLangeObservation.setLanguage(Language.DE);
         grosseLangeObservation.setSubject(new PartySelf());
     }
 }

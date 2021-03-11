@@ -25,6 +25,7 @@ import org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOximetryConverter
 import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.ehr.converter.smokingstatus.SmokingStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.sofascore.SofaScoreCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.symptom.SymptomCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,13 +36,40 @@ public class ConversionConfiguration {
     @Bean(name = "fhirResourceConversionService")
     public ConversionService conversionService() {
         ConversionService conversionService = new ConversionService();
-        // Register Converters
-        registerDiagnosticReportConverters(conversionService);
+
+        // Register Resource Converters
         registerConditionConverters(conversionService);
+        registerConsentConverters(conversionService);
+        registerDiagnosticReportConverters(conversionService);
         registerObservationConverters(conversionService);
         registerPatientConverters(conversionService);
         registerQuestionnaireResponseConverter(conversionService);
+
         return conversionService;
+    }
+
+    private void registerConditionConverters(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.DEFAULT_CONDITION, new DiagnoseCompositionConverter());
+        conversionService.registerConverter(Profile.SYMPTOMS_COVID_19, new SymptomCompositionConverter());
+        GECCODiagnoseCompositionConverter diagnoseCommonConverter = new GECCODiagnoseCompositionConverter();
+        conversionService.registerConverter(Profile.DIAGNOSE_LIVER_DISEASE, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_LUNG_DISEASE, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_DIABETES_MELLITUS, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_COVID_19, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_MALIGNANT_NEOPLASTIC_DISEASE, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_RHEUMATOLOGICAL_IMMUNOLOGICAL_DISEASE, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_CARDIOVASCULAR_DISEASE, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_CHRONIC_KIDNEY_DISEASE, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_CHRONIC_NEUROLOGICAL_MENTAL_DISEASE, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_GASTROINTESTINAL_ULCERS, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_HIV, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_ORGAN_RECIPIENT, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_COMPLICATIONS_COVID_19, diagnoseCommonConverter);
+        conversionService.registerConverter(Profile.DIAGNOSE_DEPENDENCE_ON_VENTILATOR, diagnoseCommonConverter);
+    }
+
+    private void registerConsentConverters(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.DO_NOT_RESUSCITATE_ORDER, null); // TODO: @ErikTute, add your converter
     }
 
     private void registerDiagnosticReportConverters(ConversionService conversionService) {
@@ -68,26 +96,6 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.PROCEDURE, new ProcedureCompositionConverter());
         conversionService.registerConverter(Profile.TRAVEL_HISTORY, new HistoryOfTravelConverter());
         conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryConverter());
-    }
-
-    private void registerConditionConverters(ConversionService conversionService) {
-        conversionService.registerConverter(Profile.DEFAULT_CONDITION, new DiagnoseCompositionConverter());
-
-        GECCODiagnoseCompositionConverter converter = new GECCODiagnoseCompositionConverter();
-        conversionService.registerConverter(Profile.DIAGNOSE_LIVER_DISEASE, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_LUNG_DISEASE, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_DIABETES_MELLITUS, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_COVID_19, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_MALIGNANT_NEOPLASTIC_DISEASE, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_RHEUMATOLOGICAL_IMMUNOLOGICAL_DISEASE, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_CARDIOVASCULAR_DISEASE, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_CHRONIC_KIDNEY_DISEASE, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_CHRONIC_NEUROLOGICAL_MENTAL_DISEASE,converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_GASTROINTESTINAL_ULCERS, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_HIV, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_ORGAN_RECIPIENT, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_COMPLICATIONS_COVID_19, converter);
-        conversionService.registerConverter(Profile.DIAGNOSE_DEPENDENCE_ON_VENTILATOR, converter);
     }
 
     private void registerPatientConverters(ConversionService conversionService) {

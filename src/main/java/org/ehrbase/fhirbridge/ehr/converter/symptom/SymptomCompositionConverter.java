@@ -43,8 +43,8 @@ public class SymptomCompositionConverter extends AbstractCompositionConverter<Co
 
     @Override
     public SymptomComposition convert(@NonNull Condition condition) {
-
         SymptomComposition result = new SymptomComposition();
+        mapCommonAttributes(condition, result);
 
         if (condition.getVerificationStatus().isEmpty()) {
             mapUnknown(condition, result);
