@@ -1,32 +1,43 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.ehrbase.fhirbridge.camel.route;
 
-import ca.uhn.fhir.jpa.search.PersistedJpaBundleProvider;
-import ca.uhn.fhir.rest.api.server.IBundleProvider;
 import org.apache.camel.builder.RouteBuilder;
-import org.openehealth.ipf.commons.ihe.fhir.Constants;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
+/**
+ * Implementation of {@link RouteBuilder} that provides route definitions for transactions
+ * linked to {@link org.hl7.fhir.r4.model.AuditEvent AuditEvent} resource.
+ *
+ * @since 1.0.0
+ */
 @Component
-public class AuditEventRoutes extends RouteBuilder {
+public class AuditEventRoutes extends AbstractRouteBuilder {
 
     @Override
     public void configure() throws Exception {
         // @formatter:off
-        from("fhir-find-audit-event:fhirConsumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .to("bean:myAuditEventDaoR4?method=search(${body})")
-                .process(exchange -> {
-                    IBundleProvider bundleProvider = exchange.getIn().getBody(PersistedJpaBundleProvider.class);
-                    Map<String, Object> headers = exchange.getIn().getHeaders();
-                    if (headers.containsKey(Constants.FHIR_REQUEST_SIZE_ONLY)) {
-                        exchange.getMessage().setHeader(Constants.FHIR_REQUEST_SIZE_ONLY, bundleProvider.size());
-                    } else {
-                        Integer from = exchange.getIn().getHeader(Constants.FHIR_FROM_INDEX, Integer.class);
-                        Integer to = exchange.getIn().getHeader(Constants.FHIR_TO_INDEX, Integer.class);
-                        exchange.getMessage().setBody(bundleProvider.getResources(from, to));
-                    }
-                });
+
+        // 'Find Audit Event' route definition
+
+        from("audit-event-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
+            .to("bean:auditEventDao?method=search(${body}, ${headers.FhirRequestDetails})")
+            .process("bundleProviderResponseProcessor");
+
         // @formatter:on
     }
 }
