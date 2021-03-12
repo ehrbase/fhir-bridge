@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.clinicalFrailty;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
+import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.KlinischeFrailtySkalaComposition;
@@ -27,6 +28,7 @@ public class ClinicalFrailtyScaleScoreCompositionConverter extends AbstractCompo
             klinischeFrailtySkalaCfsObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
             klinischeFrailtySkalaCfsObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
             klinischeFrailtySkalaCfsObservation.setLanguage(Language.DE);
+            klinischeFrailtySkalaCfsObservation.setSubject(new PartySelf());
             String string_assessment = observation.getValueCodeableConcept().getCoding().get(0).getCode();
             int assessment = Integer.parseInt(string_assessment);
             ClinicalFrailtyMappingAssessment mapping = new ClinicalFrailtyMappingAssessment();
