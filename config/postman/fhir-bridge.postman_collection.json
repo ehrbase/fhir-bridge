@@ -1931,7 +1931,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Patient?identifier={{patientId}}",
+									"raw": "{{baseUrl}}/fhir/Patient?_profile=https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1941,8 +1941,158 @@
 									],
 									"query": [
 										{
+											"key": "_id",
+											"value": "5",
+											"disabled": true
+										},
+										{
+											"key": "_language",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_profile",
+											"value": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient"
+										},
+										{
+											"key": "_source",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_security",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_content",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_text",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_filter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "active",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "address",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "address-city",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "address-country",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "address-postalcode",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "address-state",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "address-use",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "birthdate",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "death-date",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "deceased",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "family",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "gender",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "general-practitioner",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "given",
+											"value": null,
+											"disabled": true
+										},
+										{
 											"key": "identifier",
-											"value": "{{patientId}}"
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "language",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "link",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "organization",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "phone",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "phonetic",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "telecom",
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
