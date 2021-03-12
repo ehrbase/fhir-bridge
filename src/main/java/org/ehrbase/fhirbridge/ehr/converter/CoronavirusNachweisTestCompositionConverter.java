@@ -14,14 +14,12 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class CoronavirusNachweisTestCompositionConverter extends AbstractCompositionConverter<Observation, KennzeichnungErregernachweisSARSCoV2Composition> {
+public class CoronavirusNachweisTestCompositionConverter extends CompositionConverter<Observation, KennzeichnungErregernachweisSARSCoV2Composition> {
 
     @Override
-    public KennzeichnungErregernachweisSARSCoV2Composition convert(@NonNull Observation observation) {
+    public KennzeichnungErregernachweisSARSCoV2Composition convertInternal(@NonNull Observation resource) {
 
-        KennzeichnungErregernachweisSARSCoV2Composition result = new KennzeichnungErregernachweisSARSCoV2Composition();
-        mapCommonAttributes(observation, result);
-
+        KennzeichnungErregernachweisSARSCoV2Composition composition = new KennzeichnungErregernachweisSARSCoV2Composition();
         List<String> positiveResultLoincCodes = Arrays.asList(
                 "33972-1",
                 "33968-9",
@@ -41,10 +39,10 @@ public class CoronavirusNachweisTestCompositionConverter extends AbstractComposi
         );
 
         // ========================================================================================
-        DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
-        String fhirValue = observation.getCode().getCoding().get(0).getDisplay(); // FIXME: the code and value should be assigned to the pathogen name node in the Compo, but the template binds just one specific value there (hardcoded)
-        String fhirCode = observation.getCode().getCoding().get(0).getCode();
-        String fhirTerminology = observation.getCode().getCoding().get(0).getSystem();
+        DateTimeType fhirEffectiveDateTime = resource.getEffectiveDateTimeType();
+        String fhirValue = resource.getCode().getCoding().get(0).getDisplay(); // FIXME: the code and value should be assigned to the pathogen name node in the Compo, but the template binds just one specific value there (hardcoded)
+        String fhirCode = resource.getCode().getCoding().get(0).getCode();
+        String fhirTerminology = resource.getCode().getCoding().get(0).getSystem();
         KennzeichnungErregernachweisEvaluation evaluation = new KennzeichnungErregernachweisEvaluation();
         evaluation.setLanguage(Language.DE);
         evaluation.setSubject(new PartySelf());
@@ -60,12 +58,12 @@ public class CoronavirusNachweisTestCompositionConverter extends AbstractComposi
         ErregernameDefiningCode code = ErregernameDefiningCode.SARS_COV2; //new ErregernameDefiningcode(fhirValue, null, fhirTerminology, fhirCode);
         evaluation.setErregernameDefiningCode(code);
 
-        result.setKennzeichnungErregernachweis(evaluation);
+        composition.setKennzeichnungErregernachweis(evaluation);
 
         // ======================================================================================
         // Required fields by API
-        result.setStartTimeValue(OffsetDateTime.now());
+        composition.setStartTimeValue(OffsetDateTime.now());
 
-        return result;
+        return composition;
     }
 }

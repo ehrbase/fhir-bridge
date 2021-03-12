@@ -1,37 +1,36 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.KoerpergewichtComposition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtObservation;
 import org.hl7.fhir.r4.model.Observation;
-import org.springframework.lang.NonNull;
 
 import java.time.ZonedDateTime;
 
-public class BodyWeightCompositionConverter extends AbstractCompositionConverter<Observation, KoerpergewichtComposition> {
+public class BodyWeightCompositionConverter extends CompositionConverter<Observation, KoerpergewichtComposition> {
 
     @Override
-    public KoerpergewichtComposition convert(@NonNull Observation observation) {
-        KoerpergewichtComposition result = new KoerpergewichtComposition();
-        mapCommonAttributes(observation, result);
+    protected KoerpergewichtComposition convertInternal(Observation resource) {
+        KoerpergewichtComposition composition = new KoerpergewichtComposition();
+        KoerpergewichtObservation observation = new KoerpergewichtObservation();
 
-        KoerpergewichtObservation KoerpergewichtObservation = new KoerpergewichtObservation();
-        ZonedDateTime effectiveDateTime = null;
+        ZonedDateTime effectiveDateTime;
         try {
-            effectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
-            KoerpergewichtObservation.setOriginValue(effectiveDateTime); // mandatory#
-            KoerpergewichtObservation.setGewichtMagnitude(observation.getValueQuantity().getValue().doubleValue());
-            KoerpergewichtObservation.setGewichtUnits(observation.getValueQuantity().getCode());//note that the textual value that openEHR template expects as unit is stored in code for this entity
-            KoerpergewichtObservation.setTimeValue(effectiveDateTime);
-            KoerpergewichtObservation.setLanguage(Language.DE);
-            KoerpergewichtObservation.setSubject(new PartySelf());
+            effectiveDateTime = resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+            observation.setOriginValue(effectiveDateTime); // mandatory#
+            observation.setGewichtMagnitude(resource.getValueQuantity().getValue().doubleValue());
+            observation.setGewichtUnits(resource.getValueQuantity().getCode());//note that the textual value that openEHR template expects as unit is stored in code for this entity
+            observation.setTimeValue(effectiveDateTime);
+            observation.setLanguage(Language.DE);
+            observation.setSubject(new PartySelf());
         } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
+            throw new ConversionException(e.getMessage());
         }
-        result.setKoerpergewicht(KoerpergewichtObservation);
-        result.setStartTimeValue(effectiveDateTime);
-        return result;
+
+        composition.setKoerpergewicht(observation);
+        composition.setStartTimeValue(effectiveDateTime);
+
+        return composition;
     }
 }

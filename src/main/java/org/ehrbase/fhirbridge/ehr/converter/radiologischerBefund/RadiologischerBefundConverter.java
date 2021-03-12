@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
@@ -14,19 +14,18 @@ import org.springframework.lang.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RadiologischerBefundConverter extends AbstractCompositionConverter<DiagnosticReport, GECCORadiologischerBefundComposition> {
+public class RadiologischerBefundConverter extends CompositionConverter<DiagnosticReport, GECCORadiologischerBefundComposition> {
 
     @Override
-    public GECCORadiologischerBefundComposition convert(@NonNull DiagnosticReport diagnosticReport) {
-        GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition = new GECCORadiologischerBefundComposition();
-        mapCommonAttributes(diagnosticReport, geccoRadiologischerBefundComposition);
-        geccoRadiologischerBefundComposition.setStartTimeValue(diagnosticReport.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        geccoRadiologischerBefundComposition.setEndTimeValue(diagnosticReport.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+    public GECCORadiologischerBefundComposition convertInternal(@NonNull DiagnosticReport resource) {
+        GECCORadiologischerBefundComposition composition = new GECCORadiologischerBefundComposition();
+        composition.setStartTimeValue(resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+        composition.setEndTimeValue(resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
 
-        mapStatus(geccoRadiologischerBefundComposition, diagnosticReport);
-        mapKategorie(geccoRadiologischerBefundComposition, diagnosticReport);
-        geccoRadiologischerBefundComposition.setBildgebendesUntersuchungsergebnis(new BildgebendesUntersuchungsergebnisConverter().map(diagnosticReport));
-        return geccoRadiologischerBefundComposition;
+        mapStatus(composition, resource);
+        mapKategorie(composition, resource);
+        composition.setBildgebendesUntersuchungsergebnis(new BildgebendesUntersuchungsergebnisConverter().map(resource));
+        return composition;
     }
 
     private void mapStatus(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition, DiagnosticReport diagnosticReport) {
@@ -40,7 +39,7 @@ public class RadiologischerBefundConverter extends AbstractCompositionConverter<
         } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
             geccoRadiologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
         } else {
-            throw new UnprocessableEntityException("The status " + diagnosticReport.getStatus().toString() + " is not valid for radiology report.");
+            throw new ConversionException("The status " + diagnosticReport.getStatus().toString() + " is not valid for radiology report.");
         }
     }
 
@@ -62,7 +61,7 @@ public class RadiologischerBefundConverter extends AbstractCompositionConverter<
         } else if (coding.getCode().equals(KategorieDefiningCode.RADIOLOGY_STUDIES_SET.getCode())) {
             radiologischerBefundKategorieElement.setValue(KategorieDefiningCode.RADIOLOGY_STUDIES_SET);
         } else {
-            throw new UnprocessableEntityException("The LOINC code: " + coding.getCode() + " is not valid for radiology report!");
+            throw new ConversionException("The LOINC code: " + coding.getCode() + " is not valid for radiology report!");
         }
         radiologischerBefundKategorieElementList.add(radiologischerBefundKategorieElement);
         geccoRadiologischerBefundComposition.setKategorie(radiologischerBefundKategorieElementList);

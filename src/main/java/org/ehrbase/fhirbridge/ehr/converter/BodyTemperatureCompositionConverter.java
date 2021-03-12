@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.IntensivmedizinischesMonitoringKorpertemperaturComposition;
@@ -18,32 +17,30 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BodyTemperatureCompositionConverter extends AbstractCompositionConverter<Observation, IntensivmedizinischesMonitoringKorpertemperaturComposition> {
+public class BodyTemperatureCompositionConverter extends CompositionConverter<Observation, IntensivmedizinischesMonitoringKorpertemperaturComposition> {
 
     private static final Logger LOG = LoggerFactory.getLogger(BodyTemperatureCompositionConverter.class);
 
     @Override
-    public IntensivmedizinischesMonitoringKorpertemperaturComposition convert(@NonNull Observation observation) {
-        IntensivmedizinischesMonitoringKorpertemperaturComposition result = new IntensivmedizinischesMonitoringKorpertemperaturComposition();
-        mapCommonAttributes(observation, result);
+    public IntensivmedizinischesMonitoringKorpertemperaturComposition convertInternal(@NonNull Observation resource) {
+        IntensivmedizinischesMonitoringKorpertemperaturComposition composition = new IntensivmedizinischesMonitoringKorpertemperaturComposition();
 
         // ========================================================================================
         // value quantity is expected
-        Quantity fhirValue = null;
-        BigDecimal fhirValueNumeric = null;
-        DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
-
+        Quantity fhirValue;
+        BigDecimal fhirValueNumeric;
+        DateTimeType fhirEffectiveDateTime = resource.getEffectiveDateTimeType();
 
         try {
-            fhirValue = observation.getValueQuantity();
+            fhirValue = resource.getValueQuantity();
             fhirValueNumeric = fhirValue.getValue();
             LOG.debug("Value numeric: {}", fhirValueNumeric);
         } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
+            throw new ConversionException(e.getMessage());
         }
 
         if (fhirValueNumeric == null) {
-            throw new UnprocessableEntityException("Value is required in FHIR Observation and should be Quantity");
+            throw new ConversionException("Value is required in FHIR Observation and should be Quantity");
         }
 
         // mapping to openEHR
@@ -63,12 +60,12 @@ public class BodyTemperatureCompositionConverter extends AbstractCompositionConv
 
         List<KoerpertemperaturObservation> observations = new ArrayList<>();
         observations.add(tempObs);
-        result.setKoerpertemperatur(observations);
+        composition.setKoerpertemperatur(observations);
 
         // ======================================================================================
         // Required fields by API
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        composition.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
 
-        return result;
+        return composition;
     }
 }

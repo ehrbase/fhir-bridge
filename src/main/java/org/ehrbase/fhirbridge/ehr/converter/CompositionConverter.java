@@ -22,16 +22,27 @@ import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.hl7.fhir.r4.model.Resource;
+import org.springframework.lang.NonNull;
 
-public abstract class AbstractCompositionConverter<R extends Resource, C extends CompositionEntity> implements Converter<R, C> {
+/**
+ * @param <R> FHIR resource type
+ * @param <C> openEHR Composition type
+ * @since 1.0.0
+ */
+public abstract class CompositionConverter<R extends Resource, C extends CompositionEntity> extends AbstractConverter<R, C> {
 
-    protected void mapCommonAttributes(R resource, C composition) {
-        composition.setFeederAudit(buildFeederAudit(resource));
-        composition.setLanguage(resolveLanguage(resource.getLanguage()));
-        composition.setTerritory(Territory.DE);
-        composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
+    @Override
+    public C convert(@NonNull R resource) {
+        C composition = convertInternal(resource);
         composition.setCategoryDefiningCode(Category.EVENT);
         composition.setComposer(new PartySelf()); // FIXME: https://github.com/ehrbase/ehrbase_client_library/issues/31
+        composition.setFeederAudit(buildFeederAudit(resource));
+        composition.setLanguage(resolveLanguageOrDefault(resource));
         composition.setLocation("test");
+        composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
+        composition.setTerritory(Territory.DE);
+        return composition;
     }
+
+    protected abstract C convertInternal(R resource);
 }

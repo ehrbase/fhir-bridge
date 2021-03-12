@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.AtemfrequenzComposition;
@@ -10,35 +9,32 @@ import org.springframework.lang.NonNull;
 
 import java.time.ZonedDateTime;
 
-public class RespiratoryRateCompositionConverter extends AbstractCompositionConverter<Observation, AtemfrequenzComposition> {
+public class RespiratoryRateCompositionConverter extends CompositionConverter<Observation, AtemfrequenzComposition> {
 
     @Override
-    public AtemfrequenzComposition convert(@NonNull Observation observation) {
+    public AtemfrequenzComposition convertInternal(@NonNull Observation resource) {
         //create result and observation objects
-        AtemfrequenzComposition result = new AtemfrequenzComposition();
-        mapCommonAttributes(observation, result);
-
-        AtemfrequenzObservation atemfrequenzObservation = new AtemfrequenzObservation();
+        AtemfrequenzComposition composition = new AtemfrequenzComposition();
+        AtemfrequenzObservation observation = new AtemfrequenzObservation();
 
         //map values of interest from FHIR observation
-        ZonedDateTime effectiveDateTime = null;
+        ZonedDateTime effectiveDateTime;
         try {
-            effectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
-            atemfrequenzObservation.setOriginValue(effectiveDateTime); // mandatory#
-            atemfrequenzObservation.setMesswertMagnitude(observation.getValueQuantity().getValue().doubleValue());
-            atemfrequenzObservation.setMesswertUnits(observation.getValueQuantity().getCode());//note that the textual value that openEHR template expects as unit is stored in code for this entity
-            atemfrequenzObservation.setTimeValue(effectiveDateTime);
-            atemfrequenzObservation.setLanguage(Language.DE);
-            atemfrequenzObservation.setSubject(new PartySelf());
+            effectiveDateTime = resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+            observation.setOriginValue(effectiveDateTime); // mandatory#
+            observation.setMesswertMagnitude(resource.getValueQuantity().getValue().doubleValue());
+            observation.setMesswertUnits(resource.getValueQuantity().getCode());//note that the textual value that openEHR template expects as unit is stored in code for this entity
+            observation.setTimeValue(effectiveDateTime);
+            observation.setLanguage(Language.DE);
+            observation.setSubject(new PartySelf());
         } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
+            throw new ConversionException(e.getMessage());
         }
 
-        result.setAtemfrequenz(atemfrequenzObservation);
+        composition.setAtemfrequenz(observation);
 
         // Required fields by API
-        result.setStartTimeValue(effectiveDateTime);
-        mapCommonAttributes(observation, result);
-        return result;
+        composition.setStartTimeValue(effectiveDateTime);
+        return composition;
     }
 }

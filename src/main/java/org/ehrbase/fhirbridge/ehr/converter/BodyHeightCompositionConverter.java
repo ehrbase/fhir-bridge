@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.KoerpergroesseComposition;
@@ -11,23 +10,21 @@ import org.springframework.lang.NonNull;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class BodyHeightCompositionConverter extends AbstractCompositionConverter<Observation, KoerpergroesseComposition> {
+public class BodyHeightCompositionConverter extends CompositionConverter<Observation, KoerpergroesseComposition> {
 
     @Override
-    public KoerpergroesseComposition convert(@NonNull Observation observation) {
+    public KoerpergroesseComposition convertInternal(@NonNull Observation resource) {
 
-        GroesseLaengeObservation grosseLangeObservation = new GroesseLaengeObservation();
-        setDateTime(grosseLangeObservation, getDateTime(observation));
-        setDefault(grosseLangeObservation);
-        setMappingContent(observation, grosseLangeObservation);
+        GroesseLaengeObservation observation = new GroesseLaengeObservation();
+        setDateTime(observation, getDateTime(resource));
+        setDefault(observation);
+        setMappingContent(resource, observation);
 
-        return createComposition(getDateTime(observation), grosseLangeObservation, observation);
+        return createComposition(getDateTime(resource), observation, resource);
     }
 
     private KoerpergroesseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GroesseLaengeObservation grosseLangeObservation, Observation observation) {
         KoerpergroesseComposition composition = new KoerpergroesseComposition();
-        mapCommonAttributes(observation, composition);
-
         composition.setGroesseLaenge(grosseLangeObservation);
         composition.setStartTimeValue(fhirEffectiveDateTime);
         return (composition);
@@ -40,7 +37,7 @@ public class BodyHeightCompositionConverter extends AbstractCompositionConverter
         } else if (observation.hasEffectivePeriod()) {
             fhirEffectiveDateTime = observation.getEffectivePeriod().getStart().toInstant().atZone(ZoneId.systemDefault());
         } else {
-            throw new UnprocessableEntityException("No time is set");
+            throw new ConversionException("No time is set");
         }
         return fhirEffectiveDateTime;
     }

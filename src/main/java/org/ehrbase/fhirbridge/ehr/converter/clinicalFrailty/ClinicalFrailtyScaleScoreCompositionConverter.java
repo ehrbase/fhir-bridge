@@ -1,50 +1,44 @@
 package org.ehrbase.fhirbridge.ehr.converter.clinicalFrailty;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.KlinischeFrailtySkalaComposition;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.KlinischeFrailtySkalaCfsObservation;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
-import org.springframework.lang.NonNull;
 
 /**
  * FHIR 2 openEHR - respiration rate
  */
-public class ClinicalFrailtyScaleScoreCompositionConverter extends AbstractCompositionConverter<Observation, KlinischeFrailtySkalaComposition> {
+public class ClinicalFrailtyScaleScoreCompositionConverter extends CompositionConverter<Observation, KlinischeFrailtySkalaComposition> {
 
     @Override
-    public KlinischeFrailtySkalaComposition convert(@NonNull Observation observation) {
-        KlinischeFrailtySkalaComposition result = new KlinischeFrailtySkalaComposition();
-        mapCommonAttributes(observation, result);
-        KlinischeFrailtySkalaCfsObservation klinischeFrailtySkalaCfsObservation = new KlinischeFrailtySkalaCfsObservation();
+    protected KlinischeFrailtySkalaComposition convertInternal(Observation resource) {
+        KlinischeFrailtySkalaComposition composition = new KlinischeFrailtySkalaComposition();
+        KlinischeFrailtySkalaCfsObservation observation = new KlinischeFrailtySkalaCfsObservation();
 
-        DateTimeType fhirEffectiveDateTime = null;
+        DateTimeType fhirEffectiveDateTime;
         try {
-            fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
-            klinischeFrailtySkalaCfsObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-            klinischeFrailtySkalaCfsObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
-            klinischeFrailtySkalaCfsObservation.setLanguage(Language.DE);
-            klinischeFrailtySkalaCfsObservation.setSubject(new PartySelf());
-            String string_assessment = observation.getValueCodeableConcept().getCoding().get(0).getCode();
-            int assessment = Integer.parseInt(string_assessment);
+            fhirEffectiveDateTime = resource.getEffectiveDateTimeType();
+            observation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+            observation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
+            observation.setLanguage(Language.DE);
+            observation.setSubject(new PartySelf());
+            int assessment = Integer.parseInt(resource.getValueCodeableConcept().getCoding().get(0).getCode());
             ClinicalFrailtyMappingAssessment mapping = new ClinicalFrailtyMappingAssessment();
-            DvOrdinal ord_assessment = mapping.getDVOrdinal(assessment);
-            klinischeFrailtySkalaCfsObservation.setBeurteilung(ord_assessment);
+            observation.setBeurteilung(mapping.getDVOrdinal(assessment));
         } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
+            throw new ConversionException(e.getMessage());
         }
 
-        result.setKlinischeFrailtySkalaCfs(klinischeFrailtySkalaCfsObservation);
+        composition.setKlinischeFrailtySkalaCfs(observation);
 
         // Required fields by API
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        composition.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
 
-        return result;
+        return composition;
     }
-
 }
 

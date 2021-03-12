@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter.historyoftravel;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
@@ -35,7 +35,7 @@ import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTrav
 import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
 import static org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
 
-public class HistoryOfTravelConverter extends AbstractCompositionConverter<Observation, ReisehistorieComposition> {
+public class HistoryOfTravelConverter extends CompositionConverter<Observation, ReisehistorieComposition> {
     private static final Logger LOG = LoggerFactory.getLogger(HistoryOfTravelConverter.class);
 
     private static final Map<String, LandDefiningCode> countryMap = new HashMap<>();
@@ -53,25 +53,22 @@ public class HistoryOfTravelConverter extends AbstractCompositionConverter<Obser
     }
 
     @Override
-    public ReisehistorieComposition convert(@NonNull Observation observation) {
+    public ReisehistorieComposition convertInternal(@NonNull Observation resource) {
 
         ReisehistorieComposition composition;
 
-        String code = "";
-        code = getSnomedCodeObservation(observation);
+        String code = getSnomedCodeObservation(resource);
         // check for general travel state
 
         if (code.equals(ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE.getCode())) {
-            composition = mapYes(observation, ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE);
+            composition = mapYes(resource, ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE);
         } else if (code.equals(AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE.getCode())) {
-            composition = mapNo(observation, AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE);
+            composition = mapNo(resource, AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE);
         } else if (code.equals(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE.getCode())) {
-            composition = mapUnknown(observation, AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
+            composition = mapUnknown(resource, AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
         } else {
             throw new UnprocessableEntityException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
         }
-
-        mapCommonAttributes(observation, composition);
 
         // BSa: What about nullFlavour?
         // BSa: What about identifier?

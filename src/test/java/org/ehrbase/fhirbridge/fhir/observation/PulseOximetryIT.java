@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOximetryConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
@@ -68,7 +68,7 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String resource) throws IOException {
         Observation pulseOximetry = (Observation) testFileLoader.loadResource(resource);
-        return assertThrows(UnprocessableEntityException.class, () -> new PulseOximetryConverter().convert(pulseOximetry));
+        return assertThrows(ConversionException.class, () -> new PulseOximetryConverter().convert(pulseOximetry));
     }
 
     @Override

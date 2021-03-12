@@ -1,55 +1,52 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.BlutdruckComposition;
 import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.BlutdruckObservation;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-public class BloodPressureCompositionConverter extends AbstractCompositionConverter<Observation, BlutdruckComposition> {
+public class BloodPressureCompositionConverter extends CompositionConverter<Observation, BlutdruckComposition> {
 
     @Override
-    public BlutdruckComposition convert(@NonNull Observation observation) {
-        BlutdruckComposition result = new BlutdruckComposition();
-        mapCommonAttributes(observation, result);
+    public BlutdruckComposition convertInternal(@NonNull Observation resource) {
+        BlutdruckComposition composition = new BlutdruckComposition();
+        BlutdruckObservation observation = new BlutdruckObservation();
 
-        BlutdruckObservation bloodPressure = new BlutdruckObservation();
-
-        DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
+        DateTimeType fhirEffectiveDateTime = resource.getEffectiveDateTimeType();
 
         try {
-            double systolicBPValue = observation.getComponent().get(0).getValueQuantity().getValue().doubleValue();
-            String systolicBPUnit = observation.getComponent().get(0).getValueQuantity().getCode(); //mmHg, mm[Hg]
+            double systolicBPValue = resource.getComponent().get(0).getValueQuantity().getValue().doubleValue();
+            String systolicBPUnit = resource.getComponent().get(0).getValueQuantity().getCode(); //mmHg, mm[Hg]
 
-            bloodPressure.setSystolischMagnitude(systolicBPValue);
-            bloodPressure.setSystolischUnits(systolicBPUnit);
+            observation.setSystolischMagnitude(systolicBPValue);
+            observation.setSystolischUnits(systolicBPUnit);
 
-            double diastolicBPValue = observation.getComponent().get(1).getValueQuantity().getValue().doubleValue();
-            String diastolicBPUnit = observation.getComponent().get(1).getValueQuantity().getCode();
+            double diastolicBPValue = resource.getComponent().get(1).getValueQuantity().getValue().doubleValue();
+            String diastolicBPUnit = resource.getComponent().get(1).getValueQuantity().getCode();
 
-            bloodPressure.setDiastolischMagnitude(diastolicBPValue);
-            bloodPressure.setDiastolischUnits(diastolicBPUnit);
+            observation.setDiastolischMagnitude(diastolicBPValue);
+            observation.setDiastolischUnits(diastolicBPUnit);
 
 
         } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
+            throw new ConversionException(e.getMessage());
         }
 
-        bloodPressure.setSubject(new PartySelf());
+        observation.setSubject(new PartySelf());
+        observation.setLanguage(Language.DE);
+        observation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        observation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
 
-        bloodPressure.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-        bloodPressure.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-
-
-        result.setBlutdruck(bloodPressure);
+        composition.setBlutdruck(observation);
 
         // ======================================================================================
         // Required fields by API
 
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        composition.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
 
-        return result;
+        return composition;
     }
 }

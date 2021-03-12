@@ -4,7 +4,7 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.PatientAufICUComposition;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.PatientAufDerIntensivstationObservation;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.StatusDefiningCode;
@@ -15,7 +15,7 @@ import org.springframework.lang.NonNull;
 
 import java.util.HashMap;
 
-public class PatientInIcuCompositionConverter extends AbstractCompositionConverter<Observation, PatientAufICUComposition> {
+public class PatientInIcuCompositionConverter extends CompositionConverter<Observation, PatientAufICUComposition> {
     private static final HashMap<String, WurdeDieAktivitatDurchgefuhrtDefiningcode> aktivitatDurchgefuehrtDefiningcodeMap
             = new HashMap<>();
 
@@ -65,14 +65,13 @@ public class PatientInIcuCompositionConverter extends AbstractCompositionConvert
     }
 
     @Override
-    public PatientAufICUComposition convert(@NonNull Observation observation) {
+    public PatientAufICUComposition convertInternal(@NonNull Observation resource) {
         PatientAufICUComposition composition = new PatientAufICUComposition();
-        mapCommonAttributes(observation, composition);
 
-        setStatus(composition, observation);
+        setStatus(composition, resource);
 
-        composition.setPatientAufDerIntensivstation(mapPatientAufIntensivstation(observation));
-        composition.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+        composition.setPatientAufDerIntensivstation(mapPatientAufIntensivstation(resource));
+        composition.setStartTimeValue(resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
 
         return composition;
     }

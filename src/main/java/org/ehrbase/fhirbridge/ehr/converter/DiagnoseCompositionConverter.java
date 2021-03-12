@@ -21,18 +21,17 @@ import org.springframework.lang.NonNull;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class DiagnoseCompositionConverter extends AbstractCompositionConverter<Condition, DiagnoseComposition> {
+public class DiagnoseCompositionConverter extends CompositionConverter<Condition, DiagnoseComposition> {
 
     private static final Logger LOG = LoggerFactory.getLogger(DiagnoseCompositionConverter.class);
 
     @Override
-    public DiagnoseComposition convert(@NonNull Condition condition) {
-        DiagnoseComposition result = new DiagnoseComposition();
-        mapCommonAttributes(condition, result);
+    public DiagnoseComposition convertInternal(@NonNull Condition resource) {
+        DiagnoseComposition composition = new DiagnoseComposition();
 
-        DateTimeType fhirOnsetDateTime = condition.getOnsetDateTimeType();
-        Coding fhirSeverity = condition.getSeverity().getCoding().get(0);
-        Coding fhirDiagnosis = condition.getCode().getCoding().get(0);
+        DateTimeType fhirOnsetDateTime = resource.getOnsetDateTimeType();
+        Coding fhirSeverity = resource.getSeverity().getCoding().get(0);
+        Coding fhirDiagnosis = resource.getCode().getCoding().get(0);
         ProblemDiagnoseEvaluation evaluation = new ProblemDiagnoseEvaluation();
         evaluation.setLanguage(Language.EN);
         evaluation.setSubject(new PartySelf());
@@ -54,7 +53,7 @@ public class DiagnoseCompositionConverter extends AbstractCompositionConverter<C
                 openEHRSeverity = SchweregradDefiningCode.LEICHT;
                 break;
             default:
-                throw new UnprocessableEntityException("Unexpected value: " + fhirSeverity.getCode());
+                throw new ConversionException("Unexpected value: " + fhirSeverity.getCode());
         }
         ProblemDiagnoseSchweregradDvCodedText severityCoded = new ProblemDiagnoseSchweregradDvCodedText();
         severityCoded.setSchweregradDefiningCode(openEHRSeverity);
@@ -66,7 +65,7 @@ public class DiagnoseCompositionConverter extends AbstractCompositionConverter<C
         // https://www.hl7.org/fhir/icd.html
         NameDesProblemsDerDiagnoseDefiningCode openEHRDiagnosis;
         if (!fhirDiagnosis.getSystem().equalsIgnoreCase("http://fhir.de/CodeSystem/dimdi/icd-10-gm")) {
-            throw new UnprocessableEntityException("code.system should be http://fhir.de/CodeSystem/dimdi/icd-10-gm but found" + fhirDiagnosis.getSystem());
+            throw new ConversionException("code.system should be http://fhir.de/CodeSystem/dimdi/icd-10-gm but found" + fhirDiagnosis.getSystem());
         }
         switch (fhirDiagnosis.getCode()) {
             case "B97.2":
@@ -82,14 +81,14 @@ public class DiagnoseCompositionConverter extends AbstractCompositionConverter<C
                 openEHRDiagnosis = NameDesProblemsDerDiagnoseDefiningCode.INFEKTION_DURCH_KORONAVIREN_NICHT_NAEHER_BEZEICHNETER_LOKALISATION;
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + fhirDiagnosis.getCode());
+                throw new ConversionException("Unexpected value: " + fhirDiagnosis.getCode());
         }
         evaluation.setNameDesProblemsDerDiagnoseDefiningCode(openEHRDiagnosis);
         // date onset
         evaluation.setDatumDesAuftretensDerErstdiagnoseValue(fhirOnsetDateTime.getValueAsCalendar().toZonedDateTime());
         // body site
-        if (condition.getBodySite().size() == 1) {
-            String bodySiteName = condition.getBodySite().get(0).getCoding().get(0).getDisplay();
+        if (resource.getBodySite().size() == 1) {
+            String bodySiteName = resource.getBodySite().get(0).getCoding().get(0).getDisplay();
             evaluation.setLokalisationValue("body site");
             AnatomischeLokalisationCluster anatomischeLokalisationCluster = new AnatomischeLokalisationCluster();
             anatomischeLokalisationCluster.setNameDerKoerperstelleValue(bodySiteName);
@@ -97,29 +96,29 @@ public class DiagnoseCompositionConverter extends AbstractCompositionConverter<C
         }
 
 
-        result.setProblemDiagnose(evaluation);
+        composition.setProblemDiagnose(evaluation);
 
 
         // check if the condition has a recorded date, if not, use the onset
-        DateTimeType aDate = condition.getRecordedDateElement();
+        DateTimeType aDate = resource.getRecordedDateElement();
         LOG.debug("recorded is {}", aDate);
         if (aDate.isEmpty()) {
             LOG.debug("recorded date is null trying onset");
-            aDate = condition.getOnsetDateTimeType();
+            aDate = resource.getOnsetDateTimeType();
             LOG.debug("onset is {}", aDate);
         }
-        result.setStartTimeValue(aDate.getValueAsCalendar().toZonedDateTime());
+        composition.setStartTimeValue(aDate.getValueAsCalendar().toZonedDateTime());
 
         // https://github.com/ehrbase/ehrbase_client_library/issues/31
         PartyIdentified composer = new PartyIdentified();
         DvIdentifier identifier = new DvIdentifier();
-        identifier.setId(condition.getRecorder().getReference());
+        identifier.setId(resource.getRecorder().getReference());
         composer.addIdentifier(identifier);
-        result.setComposer(composer);
+        composition.setComposer(composer);
 
         //composition.setComposer(new PartySelf());
 
-        return result;
+        return composition;
 
     }
 }

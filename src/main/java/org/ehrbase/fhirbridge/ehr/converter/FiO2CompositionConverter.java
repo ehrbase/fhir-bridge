@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.quantity.DvProportion;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
@@ -12,35 +11,34 @@ import org.springframework.lang.NonNull;
 
 import java.time.ZonedDateTime;
 
-public class FiO2CompositionConverter extends AbstractCompositionConverter<Observation, BeatmungswerteComposition> {
+public class FiO2CompositionConverter extends CompositionConverter<Observation, BeatmungswerteComposition> {
 
     @Override
-    public BeatmungswerteComposition convert(@NonNull Observation observation) {
-        BeatmungswerteComposition result = new BeatmungswerteComposition();
-        mapCommonAttributes(observation, result);
+    public BeatmungswerteComposition convertInternal(@NonNull Observation resource) {
+        BeatmungswerteComposition composition = new BeatmungswerteComposition();
 
-        BeobachtungenAmBeatmungsgeraetObservation beobachtungenAmBeatmungsgeraetObservation = new BeobachtungenAmBeatmungsgeraetObservation();
-        ZonedDateTime effectiveDateTime = null;
+        BeobachtungenAmBeatmungsgeraetObservation observation = new BeobachtungenAmBeatmungsgeraetObservation();
+        ZonedDateTime effectiveDateTime;
         EingeatmeterSauerstoffCluster eingeatmeterSauerstoff = new EingeatmeterSauerstoffCluster();
         DvProportion inspiratorischeSauerstofffraktion = new DvProportion();
 
         try {
-            effectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
-            beobachtungenAmBeatmungsgeraetObservation.setOriginValue(effectiveDateTime); // mandatory
-            beobachtungenAmBeatmungsgeraetObservation.setTimeValue(effectiveDateTime);
-            beobachtungenAmBeatmungsgeraetObservation.setLanguage(Language.DE);
-            beobachtungenAmBeatmungsgeraetObservation.setSubject(new PartySelf());
-            inspiratorischeSauerstofffraktion.setNumerator(observation.getValueQuantity().getValue().doubleValue());
+            effectiveDateTime = resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+            observation.setOriginValue(effectiveDateTime); // mandatory
+            observation.setTimeValue(effectiveDateTime);
+            observation.setLanguage(Language.DE);
+            observation.setSubject(new PartySelf());
+            inspiratorischeSauerstofffraktion.setNumerator(resource.getValueQuantity().getValue().doubleValue());
             inspiratorischeSauerstofffraktion.setDenominator(100.0);
             inspiratorischeSauerstofffraktion.setType((long) 2);//2=percent (https://specifications.openehr.org/releases/RM/latest/data_types.html#_proportion_kind_class)
             eingeatmeterSauerstoff.setInspiratorischeSauerstofffraktion(inspiratorischeSauerstofffraktion);
-            beobachtungenAmBeatmungsgeraetObservation.setEingeatmeterSauerstoff(eingeatmeterSauerstoff);
-            result.setBeobachtungenAmBeatmungsgeraet(beobachtungenAmBeatmungsgeraetObservation);
+            observation.setEingeatmeterSauerstoff(eingeatmeterSauerstoff);
+            composition.setBeobachtungenAmBeatmungsgeraet(observation);
         } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
+            throw new ConversionException(e.getMessage());
         }
 
-        result.setStartTimeValue(effectiveDateTime);
-        return result;
+        composition.setStartTimeValue(effectiveDateTime);
+        return composition;
     }
 }

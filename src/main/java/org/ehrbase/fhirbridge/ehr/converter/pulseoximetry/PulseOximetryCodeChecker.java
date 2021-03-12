@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.pulseoximetry;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
@@ -22,7 +22,7 @@ public class PulseOximetryCodeChecker {
         } else if (observation.getCode().getCoding().size() == 2) {
             matchCoding2And3(observation.getCode().getCoding());
         } else {
-            throw new UnprocessableEntityException("Too many Codes, for oxygen saturation a maximum combination of two codes is supported");
+            throw new ConversionException("Too many Codes, for oxygen saturation a maximum combination of two codes is supported");
         }
     }
 
@@ -41,7 +41,7 @@ public class PulseOximetryCodeChecker {
 
     }
 
-    private boolean matchCoding(List<Coding> codingList, PulseOxymetryCoding coding){
+    private boolean matchCoding(List<Coding> codingList, PulseOxymetryCoding coding) {
         int matchedCodes = 0;
         for (Coding code : codingList) {
             if (isCoding(code, coding)) {
@@ -53,13 +53,13 @@ public class PulseOximetryCodeChecker {
         return matchedCodes == 2;
     }
 
-    private boolean isCoding(Coding code, PulseOxymetryCoding coding){
+    private boolean isCoding(Coding code, PulseOxymetryCoding coding) {
         return code.getSystem().equals(coding.getCode().get(0).getSystem()) && code.getCode().equals(coding.getCode().get(0).getCode()) ||
                 code.getSystem().equals(coding.getCode().get(1).getSystem()) && code.getCode().equals(coding.getCode().get(1).getCode());
     }
 
     private void exceptionCode() {
-        throw new UnprocessableEntityException("The Code of code.coding is not supported for the Fhir-Bridge, or duplicated within the resource. If the LOINC-code 20564-1 or 2708-6 AND 20564-1 was entered, " +
+        throw new ConversionException("The Code of code.coding is not supported for the Fhir-Bridge, or duplicated within the resource. If the LOINC-code 20564-1 or 2708-6 AND 20564-1 was entered, " +
                 "the oxygen Saturation has to be send as part of a Blood gas panel. It can not be processed as a single resource in this cases.");
 
     }

@@ -5,7 +5,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.SymptomComposition;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.AusgeschlossenesSymptomEvaluation;
@@ -23,8 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class SymptomCompositionConverter extends AbstractCompositionConverter<Condition, SymptomComposition> {
+public class SymptomCompositionConverter extends CompositionConverter<Condition, SymptomComposition> {
 
     private static final Map<String, KrankheitsanzeichenCode> krankheitszeichenMap = new HashMap<>();
 
@@ -42,19 +41,18 @@ public class SymptomCompositionConverter extends AbstractCompositionConverter<Co
     }
 
     @Override
-    public SymptomComposition convert(@NonNull Condition condition) {
+    public SymptomComposition convertInternal(@NonNull Condition resource) {
         SymptomComposition result = new SymptomComposition();
-        mapCommonAttributes(condition, result);
 
-        if (condition.getVerificationStatus().isEmpty()) {
-            mapUnknown(condition, result);
-        } else if (condition.getVerificationStatus().getCoding().get(0).getCode().equals("confirmed")) {
-            mapPresent(condition, result);
+        if (resource.getVerificationStatus().isEmpty()) {
+            mapUnknown(resource, result);
+        } else if (resource.getVerificationStatus().getCoding().get(0).getCode().equals("confirmed")) {
+            mapPresent(resource, result);
         } else {
-            mapAbsent(condition, result);
+            mapAbsent(resource, result);
         }
 
-        result.setStartTimeValue(condition.getRecordedDateElement().getValueAsCalendar().toZonedDateTime());
+        result.setStartTimeValue(resource.getRecordedDateElement().getValueAsCalendar().toZonedDateTime());
 
 
         // ======================================================================================

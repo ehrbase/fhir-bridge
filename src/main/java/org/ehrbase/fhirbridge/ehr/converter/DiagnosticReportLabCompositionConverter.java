@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.observationlab.ObservationLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
@@ -13,42 +12,40 @@ import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.lang.NonNull;
 
 import java.util.List;
 
 import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.LOINC;
 
-public class DiagnosticReportLabCompositionConverter extends AbstractCompositionConverter<DiagnosticReport, GECCOLaborbefundComposition> implements Converter<DiagnosticReport, GECCOLaborbefundComposition> {
+public class DiagnosticReportLabCompositionConverter extends CompositionConverter<DiagnosticReport, GECCOLaborbefundComposition> {
 
     private static final Logger LOG = LoggerFactory.getLogger(DiagnosticReportLabCompositionConverter.class);
 
     private final ObservationLabCompositionConverter observationConverter = new ObservationLabCompositionConverter();
 
     @Override
-    public GECCOLaborbefundComposition convert(@NonNull DiagnosticReport diagnosticReport) {
-        LOG.debug("Contained size: {}", diagnosticReport.getContained().size());
+    protected GECCOLaborbefundComposition convertInternal(DiagnosticReport resource) {
+        LOG.debug("Contained size: {}", resource.getContained().size());
 
         // one contained Observation is expected
-        if (diagnosticReport.getContained().size() != 1) {
-            throw new UnprocessableEntityException("One contained Observation was expected " + diagnosticReport.getContained().size() + " were received in DiagnosticReport " + diagnosticReport.getId());
+        if (resource.getContained().size() != 1) {
+            throw new ConversionException("One contained Observation was expected " + resource.getContained().size() + " were received in DiagnosticReport " + resource.getId());
         }
-        if (diagnosticReport.getContained().get(0).getResourceType() != ResourceType.Observation) {
-            throw new UnprocessableEntityException("One contained Observation was expected, contained is there but is not Observation, it is " + diagnosticReport.getContained().get(0).getResourceType().toString());
+        if (resource.getContained().get(0).getResourceType() != ResourceType.Observation) {
+            throw new ConversionException("One contained Observation was expected, contained is there but is not Observation, it is " + resource.getContained().get(0).getResourceType().toString());
         }
 
-        Observation observation = (Observation) diagnosticReport.getContained().get(0);
+        Observation observation = (Observation) resource.getContained().get(0);
 
         GECCOLaborbefundComposition result = observationConverter.convert(observation);
-        mapCommonAttributes(diagnosticReport, result);
 
         LaborergebnisObservation laborbefund = result.getLaborergebnis();
 
         ProLaboranalytCluster laboranalytCluster = laborbefund.getProLaboranalyt();
 
         laborbefund.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        laborbefund.setLabortestKategorieDefiningCode(getLabortestCode(diagnosticReport.getCategory().get(0)));
-        laborbefund.setSchlussfolgerungValue(diagnosticReport.getConclusion());
+        laborbefund.setLabortestKategorieDefiningCode(getLabortestCode(resource.getCategory().get(0)));
+        laborbefund.setSchlussfolgerungValue(resource.getConclusion());
         laborbefund.setProLaboranalyt(laboranalytCluster);
         return result;
     }
@@ -61,7 +58,7 @@ public class DiagnosticReportLabCompositionConverter extends AbstractComposition
                 return mapLabortest(coding.getCode());
             }
         }
-        throw new UnprocessableEntityException("The Category loinc code is missing");
+        throw new ConversionException("The Category loinc code is missing");
     }
 
     private LabortestKategorieDefiningCode mapLabortest(String code) {
@@ -88,7 +85,7 @@ public class DiagnosticReportLabCompositionConverter extends AbstractComposition
         } else if (code.equals(LabortestKategorieDefiningCode.COAGULATION_STUDIES_SET.getCode())) {
             return LabortestKategorieDefiningCode.COAGULATION_STUDIES_SET;
         } else {
-            throw new UnprocessableEntityException("The code" + code + "is not supported for category.coding");
+            throw new ConversionException("The code" + code + "is not supported for category.coding");
         }
     }
 }

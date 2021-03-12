@@ -19,19 +19,17 @@ import org.springframework.lang.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProcedureCompositionConverter extends AbstractCompositionConverter<Procedure, ProzedurComposition> {
+public class ProcedureCompositionConverter extends CompositionConverter<Procedure, ProzedurComposition> {
 
     @Override
-    public ProzedurComposition convert(@NonNull Procedure procedure) {
-        ProzedurComposition result = new ProzedurComposition();
-        mapCommonAttributes(procedure, result);
+    public ProzedurComposition convertInternal(@NonNull Procedure resource) {
+        ProzedurComposition composition = new ProzedurComposition();
+        Coding code = resource.getCode().getCoding().get(0);
 
-        Coding code = procedure.getCode().getCoding().get(0);
-
-        DateTimeType performed = procedure.getPerformedDateTimeType();
+        DateTimeType performed = resource.getPerformedDateTimeType();
 
         Coding bodySite = null;
-        List<CodeableConcept> bodySites = procedure.getBodySite();
+        List<CodeableConcept> bodySites = resource.getBodySite();
         if (!bodySites.isEmpty()) {
             CodeableConcept bodySiteCodes = bodySites.get(0); // could be empty
             if (bodySiteCodes != null) {
@@ -40,9 +38,9 @@ public class ProcedureCompositionConverter extends AbstractCompositionConverter<
         }
 
         Annotation note = null;
-        List<Annotation> notes = procedure.getNote();
+        List<Annotation> notes = resource.getNote();
         if (!notes.isEmpty()) {
-            note = procedure.getNote().get(0); // could be empty
+            note = resource.getNote().get(0); // could be empty
         }
 
         ProzedurAction action = new ProzedurAction();
@@ -76,22 +74,20 @@ public class ProcedureCompositionConverter extends AbstractCompositionConverter<
         action.setLanguage(Language.DE);
 
 
-        result.setProzedur(action);
+        composition.setProzedur(action);
 
         // ======================================================================================
         // Required fields by API
 
-        result.setStartTimeValue(performed.getValueAsCalendar().toZonedDateTime());
+        composition.setStartTimeValue(performed.getValueAsCalendar().toZonedDateTime());
 
         // https://github.com/ehrbase/ehrbase_client_library/issues/31
         PartyIdentified composer = new PartyIdentified();
         DvIdentifier identifier = new DvIdentifier();
-        identifier.setId(procedure.getRecorder().getReference()); // TODO: if there is no recorder, try with the performer
+        identifier.setId(resource.getRecorder().getReference()); // TODO: if there is no recorder, try with the performer
         composer.addIdentifier(identifier);
-        result.setComposer(composer);
+        composition.setComposer(composer);
 
-        mapCommonAttributes(procedure, result);
-
-        return result;
+        return composition;
     }
 }

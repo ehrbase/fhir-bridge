@@ -6,7 +6,8 @@ import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningCode;
@@ -31,8 +32,6 @@ import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Quantity;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Specimen;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 
 import java.math.BigDecimal;
@@ -40,7 +39,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ObservationLabCompositionConverter extends AbstractCompositionConverter<Observation, GECCOLaborbefundComposition> {
+public class ObservationLabCompositionConverter extends CompositionConverter<Observation, GECCOLaborbefundComposition> {
 
     private static final Map<String, UntersuchterAnalytDefiningCode> untersuchterAnalytLOINCDefiningcodeMap
             = new HashMap<>();
@@ -85,19 +84,16 @@ public class ObservationLabCompositionConverter extends AbstractCompositionConve
 
 
     @Override
-    public GECCOLaborbefundComposition convert(@NonNull Observation observation) {
-        GECCOLaborbefundComposition result = new GECCOLaborbefundComposition();
-        mapCommonAttributes(observation, result);
-
-        LaborergebnisObservation laborergebnis = new LaborergebnisObservation();
-        ProLaboranalytCluster laboranalyt = mapToLaboranalyt(observation);
-
+    public GECCOLaborbefundComposition convertInternal(@NonNull Observation resource) {
+        GECCOLaborbefundComposition composition = new GECCOLaborbefundComposition();
+        LaborergebnisObservation observation = new LaborergebnisObservation();
+        ProLaboranalytCluster laboranalyt = mapToLaboranalyt(resource);
 
         // Map Status to composition and laboranalyt
         StatusDefiningCode registereintragStatus = StatusDefiningCode.REGISTRIERT;
         ErgebnisStatusDefiningCode laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.UNVOLLSTAENDIG;
 
-        switch (observation.getStatus()) {
+        switch (resource.getStatus()) {
             case FINAL:
                 registereintragStatus = StatusDefiningCode.FINAL;
                 laboranalytStatusDefiningcode = ErgebnisStatusDefiningCode.ENDBEFUND;
@@ -130,7 +126,7 @@ public class ObservationLabCompositionConverter extends AbstractCompositionConve
                 break;
         }
 
-        result.setStatusDefiningCode(registereintragStatus);
+        composition.setStatusDefiningCode(registereintragStatus);
 
         ProLaboranalytErgebnisStatusDvCodedText ergebnisStatus = new ProLaboranalytErgebnisStatusDvCodedText();
         ergebnisStatus.setErgebnisStatusDefiningCode(laboranalytStatusDefiningcode);
@@ -138,59 +134,59 @@ public class ObservationLabCompositionConverter extends AbstractCompositionConve
 
 
         // Map category, only LOINC part see https://github.com/ehrbase/num_platform/issues/33
-        if (observation.getCategory().get(0).getCoding().get(0).getSystem().equals("http://loinc.org")) {
-            String loincCode = observation.getCategory().get(0).getCoding().get(0).getCode();
+        if (resource.getCategory().get(0).getCoding().get(0).getSystem().equals("http://loinc.org")) {
+            String loincCode = resource.getCategory().get(0).getCoding().get(0).getCode();
             LabortestKategorieDefiningCode categoryDefiningcode = labortestBezeichnungLOINCDefiningcodeMap.get(loincCode);
 
             if (categoryDefiningcode == null) {
-                throw new UnprocessableEntityException("Unknown LOINC code in observation");
+                throw new ConversionException("Unknown LOINC code in observation");
             }
 
-            result.setKategorieValue(categoryDefiningcode.getValue());
-            laborergebnis.setLabortestKategorieDefiningCode(categoryDefiningcode);
+            composition.setKategorieValue(categoryDefiningcode.getValue());
+            observation.setLabortestKategorieDefiningCode(categoryDefiningcode);
         } else {
-            throw new UnprocessableEntityException("No LOINC code in observation");
+            throw new ConversionException("No LOINC code in observation");
         }
 
         // Map performer to health care facility
-        if (!observation.getPerformer().isEmpty()) {
+        if (!resource.getPerformer().isEmpty()) {
             PartyIdentified healthCareFacility = new PartyIdentified();
-            DvIdentifier identifier = mapIdentifier(observation.getPerformer().get(0).getIdentifier());
+            DvIdentifier identifier = mapIdentifier(resource.getPerformer().get(0).getIdentifier());
             healthCareFacility.addIdentifier(identifier);
-            healthCareFacility.setName(observation.getPerformer().get(0).getDisplay());
-            result.setHealthCareFacility(healthCareFacility);
+            healthCareFacility.setName(resource.getPerformer().get(0).getDisplay());
+            composition.setHealthCareFacility(healthCareFacility);
         }
 
         // Map speciment to Probe
-        if (!observation.getSpecimen().isEmpty()) {
-            laborergebnis.getProbe().add(mapSpecimen(observation.getSpecimenTarget()));
+        if (!resource.getSpecimen().isEmpty()) {
+            observation.getProbe().add(mapSpecimen(resource.getSpecimenTarget()));
         }
 
 
         // Map method to Testmethode
 
-        if (!observation.getMethod().isEmpty() && !observation.getMethod().getCoding().isEmpty()) {
+        if (!resource.getMethod().isEmpty() && !resource.getMethod().getCoding().isEmpty()) {
             DvText testmethode = new DvText();
-            testmethode.setValue(observation.getMethod().getCoding().get(0).getDisplay());
+            testmethode.setValue(resource.getMethod().getCoding().get(0).getDisplay());
 //            laborergebnis.setValue(testmethode);
         }
 
-        laborergebnis.setProLaboranalyt(laboranalyt);
+        observation.setProLaboranalyt(laboranalyt);
 
 
-        laborergebnis.setOriginValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime()); // mandatory
-        laborergebnis.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        laborergebnis.setLanguage(Language.EN);
-        laborergebnis.setSubject(new PartySelf());
+        observation.setOriginValue(resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime()); // mandatory
+        observation.setTimeValue(resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+        observation.setLanguage(Language.EN);
+        observation.setSubject(new PartySelf());
 
 
-        result.setLaborergebnis(laborergebnis);
+        composition.setLaborergebnis(observation);
 
         // ======================================================================================
         // Required fields by API
-        result.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+        composition.setStartTimeValue(resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
 
-        return result;
+        return composition;
     }
 
     private DvIdentifier mapIdentifier(Identifier identifier) {
@@ -221,7 +217,7 @@ public class ObservationLabCompositionConverter extends AbstractCompositionConve
             }
 
             if (probenart == null) {
-                throw new UnprocessableEntityException("Probenart not defined in specimen");
+                throw new ConversionException("Probenart not defined in specimen");
             }
 
             probe.setProbenartDefiningCode(probenart);
@@ -338,17 +334,17 @@ public class ObservationLabCompositionConverter extends AbstractCompositionConve
             fhirEffectiveDateTime = fhirObservation.getEffectiveDateTimeType();
 
         } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
+            throw new ConversionException(e.getMessage());
         }
 
         if (fhirValueNumeric == null) {
-            throw new UnprocessableEntityException("Value is required in FHIR Observation and should be Quantity");
+            throw new ConversionException("Value is required in FHIR Observation and should be Quantity");
         }
         if (fhirEffectiveDateTime == null) {
-            throw new UnprocessableEntityException("effectiveDateTime is required in FHIR Observation");
+            throw new ConversionException("effectiveDateTime is required in FHIR Observation");
         }
         if (untersuchterAnalyt == null) {
-            throw new UnprocessableEntityException("untersuchterAnalyt is required in FHIR Observation");
+            throw new ConversionException("untersuchterAnalyt is required in FHIR Observation");
         }
 
 
