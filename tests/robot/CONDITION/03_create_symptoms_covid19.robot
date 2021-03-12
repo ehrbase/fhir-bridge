@@ -93,8 +93,7 @@ ${randinteger}                  ${12345}
 	
     $.code.coding[0].code					missing					422
     $.code.coding[0].code					${EMPTY}				422
-	#$.code.coding[0].code					${randstring}			422
-	# See BUG TRACE 01 further down.
+	#$.code.coding[0].code					${randstring}			422     # See BUG TRACE 01 further down.
     $.code.coding[0].code					${randinteger}			422
     $.code.coding[0].code      			    ${{ [] }}				422
 	$.code.coding[0].code      			    ${{ {} }}				422
@@ -360,8 +359,8 @@ ${randinteger}                  ${12345}
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Symptoms-Covid-19 (Present) (invalid/missing 'code')
-	[Documentation]		Belongs to TC 007! Remove separation when it's fixed! 
+002 (BUG TRACE) - Create Symptoms-Covid-19 (Present) (invalid/missing 'code')
+	[Documentation]		Belongs to TC 002! Remove separation when it's fixed! 
     ...                 https://github.com/ehrbase/fhir-bridge/issues/262
 	...                 1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-symptoms-covid-19-present.json_\n\n
@@ -370,16 +369,17 @@ BUG TRACE 01 Create Symptoms-Covid-19 (Present) (invalid/missing 'code')
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
 	[Template]		    create Symptoms Covid 19 with ehr reference
-    [Tags]          	code    not-ready    not-ready_bug
+    [Tags]          	262    code    not-ready    not-ready_bug
 
     # FIELD/PATH							VALUE					HTTP
 	# 																CODE
     # invalid Code Coding 0 Code
     $.code.coding[0].code                   ${randstring}           422
+    [Teardown]          TRACE GITHUB ISSUE    262
 
 
 
-BUG TRACE 02 Create Symptoms-Covid-19 (Present) (invalid/missing 'severity')
+007 (BUG TRACE) - Create Symptoms-Covid-19 (Present) (invalid/missing 'severity')
 	[Documentation]		Belongs to TC 007! Remove separation when it's fixed! 
     ...                 https://github.com/ehrbase/fhir-bridge/issues/261
 	...                 1. *CREATE* new an EHR record\n\n 
@@ -389,7 +389,7 @@ BUG TRACE 02 Create Symptoms-Covid-19 (Present) (invalid/missing 'severity')
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
 	[Template]		    create Symptoms Covid 19 with ehr reference
-    [Tags]          	severity    not-ready    not-ready_bug
+    [Tags]          	261    severity    not-ready    not-ready_bug
 
 	# FIELD/PATH							VALUE					HTTP
 	# 																CODE
@@ -401,6 +401,7 @@ BUG TRACE 02 Create Symptoms-Covid-19 (Present) (invalid/missing 'severity')
 	#invalid severity.coding[0].system 
 	$.severity.coding[0].system             missing                 422
     $.severity.coding[0].system             http://foobar.de        422
+    [Teardown]          TRACE GITHUB ISSUE  261
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
