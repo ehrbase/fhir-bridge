@@ -1552,7 +1552,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Observation?category=vital-signs&code=8310-5&value-quantity=37.5",
+									"raw": "{{baseUrl}}/fhir/Observation?patient.identifier=07f602e0-579e-4fe3-95af-381728bf0d46",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1613,11 +1613,13 @@
 										},
 										{
 											"key": "category",
-											"value": "vital-signs"
+											"value": "vital-signs",
+											"disabled": true
 										},
 										{
 											"key": "code",
-											"value": "8310-5"
+											"value": "8310-5",
+											"disabled": true
 										},
 										{
 											"key": "code-value-concept",
@@ -1750,9 +1752,8 @@
 											"disabled": true
 										},
 										{
-											"key": "patient",
-											"value": null,
-											"disabled": true
+											"key": "patient.identifier",
+											"value": "07f602e0-579e-4fe3-95af-381728bf0d46"
 										},
 										{
 											"key": "performer",
@@ -1786,7 +1787,8 @@
 										},
 										{
 											"key": "value-quantity",
-											"value": "37.5"
+											"value": "37.5",
+											"disabled": true
 										},
 										{
 											"key": "value-string",
@@ -2543,7 +2545,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/QuestionnaireResponse?subject:Patient.identifier={{patientId}}",
+									"raw": "{{baseUrl}}/fhir/QuestionnaireResponse?_language=de&patient=07f602e0-579e-4fe3-95af-381728bf0d46",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -2553,8 +2555,102 @@
 									],
 									"query": [
 										{
-											"key": "subject:Patient.identifier",
-											"value": "{{patientId}}"
+											"key": "_id",
+											"value": "12",
+											"disabled": true
+										},
+										{
+											"key": "_language",
+											"value": "de"
+										},
+										{
+											"key": "_profile",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "_source",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_security",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_tag",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_content",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_text",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_filter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "author",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "authored",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "based-on",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "encounter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "identifier",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "part-of",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "patient",
+											"value": "07f602e0-579e-4fe3-95af-381728bf0d46"
+										},
+										{
+											"key": "questionnaire",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "source",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "subject.identifier",
+											"value": "",
+											"disabled": true
 										}
 									]
 								}

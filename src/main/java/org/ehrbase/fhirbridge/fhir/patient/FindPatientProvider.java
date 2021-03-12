@@ -90,7 +90,7 @@ public class FindPatientProvider extends AbstractPlainProvider {
 
         SearchParameterMap searchParams = new SearchParameterMap();
         searchParams.add(IAnyResource.SP_RES_ID, id);
-        searchParams.add(IAnyResource.SP_RES_LANGUAGE, language);
+        searchParams.add(IAnyResource.SP_RES_LANGUAGE, resourceLanguage);
 
         searchParams.add(Constants.PARAM_PROFILE, profile);
         searchParams.add(Constants.PARAM_SOURCE, source);
