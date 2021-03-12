@@ -354,7 +354,6 @@ commands:
                 command: |
                     cd tests/
                     robot -v OUTPUT_LEVEL:verbose -d results/0 -L TRACE \
-                            -i ci-test \
                             --skip TODO --skip future \
                             --skiponfailure not-ready robot/
             - run:
