@@ -1552,7 +1552,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Observation?subject.identifier={{patientId}}",
+									"raw": "{{baseUrl}}/fhir/Observation?category=vital-signs&code=8310-5&value-quantity=37.5",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1562,8 +1562,231 @@
 									],
 									"query": [
 										{
-											"key": "subject.identifier",
-											"value": "{{patientId}}"
+											"key": "_id",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "_language",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_profile",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_source",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_security",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_content",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "_text",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "_filter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "based-on",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": "vital-signs"
+										},
+										{
+											"key": "code",
+											"value": "8310-5"
+										},
+										{
+											"key": "code-value-concept",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "code-value-date",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "code-value-quantity",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "code-value-string",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "combo-code",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "combo-code-value-concept",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "combo-code-value-quantity",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "combo-data-absent-reason",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "combo-value-concept",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "combo-value-quantity",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "component-code",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "component-code-value-concept",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "component-code-value-quantity",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "component-data-absent-reason",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "component-value-concept",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "component-value-quantity",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "data-absent-reason",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "date",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "derived-from",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "device",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "encounter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "focus",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "has-member",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "identifier",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "method",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "part-of",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "patient",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "performer",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "specimen",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "subject",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "value-concept",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "value-date",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "value-quantity",
+											"value": "37.5"
+										},
+										{
+											"key": "value-string",
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
