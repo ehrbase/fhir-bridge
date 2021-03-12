@@ -113,7 +113,6 @@ public class FindConsentProvider extends AbstractPlainProvider {
         searchParams.setOffset(offset);
         searchParams.setSort(sort);
 
-
         return requestBundleProvider(searchParams, null, ResourceType.Consent.name(), request, response, requestDetails);
     }
 
