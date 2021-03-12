@@ -1,9 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AussageUeberDenAusschlussDefiningCode;
@@ -16,44 +16,44 @@ import org.springframework.lang.NonNull;
 
 import java.util.Optional;
 
-public class GECCODiagnoseCompositionConverter extends AbstractCompositionConverter<Condition, GECCODiagnoseComposition> {
+public class GECCODiagnoseCompositionConverter extends CompositionConverter<Condition, GECCODiagnoseComposition> {
 
-    private final String VERIFICATION_STATUS_PRESENT_CODE = "410605003";
-    private final String VERIFICATION_STATUS_ABSENT_CODE = "410594000";
-    private final String SNOMED_SYSTEM = "http://snomed.info/sct";
-    private Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose = Optional.empty();
+    private static final String VERIFICATION_STATUS_PRESENT_CODE = "410605003";
+
+    private static final String VERIFICATION_STATUS_ABSENT_CODE = "410594000";
+
+    private static final String SNOMED_SYSTEM = "http://snomed.info/sct";
 
     @Override
-    public GECCODiagnoseComposition convert(@NonNull Condition condition) {
+    public GECCODiagnoseComposition convertInternal(@NonNull Condition resource) {
         GECCODiagnoseComposition composition = new GECCODiagnoseComposition();
-        mapCommonAttributes(condition, composition);
 
-        vorliegendeDiagnose = new VorliegendeDiagnoseConverter().map(condition);
-        if (condition.getVerificationStatus().isEmpty()) {
-            composition.setUnbekannteDiagnose(this.toUnbekannteDiagnose(condition));
+        Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose = new VorliegendeDiagnoseConverter().map(resource);
+        if (resource.getVerificationStatus().isEmpty()) {
+            composition.setUnbekannteDiagnose(this.toUnbekannteDiagnose(resource));
         } else {
-            Coding verficiationStatus = condition.getVerificationStatus().getCoding().get(
-                    condition.getVerificationStatus().getCoding().size() - 1); // snomed code is the last element
+            Coding verficiationStatus = resource.getVerificationStatus().getCoding().get(
+                    resource.getVerificationStatus().getCoding().size() - 1); // snomed code is the last element
 
             if (verficiationStatus.getSystem().equals(SNOMED_SYSTEM) &&
                     verficiationStatus.getCode().equals(VERIFICATION_STATUS_PRESENT_CODE)) {
                 vorliegendeDiagnose.ifPresent(composition::setVorliegendeDiagnose);
             } else if (verficiationStatus.getSystem().equals(SNOMED_SYSTEM) &&
                     verficiationStatus.getCode().equals(VERIFICATION_STATUS_ABSENT_CODE)) {
-                composition.setAusgeschlosseneDiagnose(this.toAusgeschlosseneDiagnose(condition));
+                composition.setAusgeschlosseneDiagnose(this.toAusgeschlosseneDiagnose(resource));
             } else {
-                throw new UnprocessableEntityException("Cant identify the verification status");
+                throw new ConversionException("Cant identify the verification status");
             }
         }
 
-        Coding categoryCoding = condition.getCategory().get(0).getCoding().get(0);
+        Coding categoryCoding = resource.getCategory().get(0).getCoding().get(0);
         if (categoryCoding.getSystem().equals(SNOMED_SYSTEM) && GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().containsKey(categoryCoding.getCode())) {
             composition.setKategorieDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().get(categoryCoding.getCode()));
         } else {
-            throw new UnprocessableEntityException("Category not present");
+            throw new ConversionException("Category not present");
         }
 
-        composition.setStartTimeValue(condition.getRecordedDateElement().getValueAsCalendar().toZonedDateTime());
+        composition.setStartTimeValue(resource.getRecordedDateElement().getValueAsCalendar().toZonedDateTime());
         // ======================================================================================
         // Required fields by API
         return composition;

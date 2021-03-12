@@ -16,15 +16,9 @@
 
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.hl7.fhir.r4.model.Resource;
 
-public abstract class AbstractEntryEntityConverter<R extends Resource, E extends EntryEntity> implements Converter<R, E> {
+public abstract class EntryConverter<R extends Resource, E extends EntryEntity> implements Converter<R, E> {
 
-    protected void mapCommonAttributes(R resource, E entry) {
-        entry.setLanguage(resolveLanguage(resource.getLanguage()));
-        entry.setSubject(new PartySelf());
-        entry.setFeederAudit(buildFeederAudit(resource));
-    }
 }

@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Anamnesis;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.GeneralInformation;
 import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.sections.Medication;
@@ -13,7 +13,7 @@ import org.springframework.lang.NonNull;
 import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 
-public class D4lQuestionnaireCompositionConverter extends AbstractCompositionConverter<QuestionnaireResponse, D4LQuestionnaireComposition> {
+public class D4lQuestionnaireCompositionConverter extends CompositionConverter<QuestionnaireResponse, D4LQuestionnaireComposition> {
     private static final String P = "P";
     private static final String C = "C";
     private static final String S = "S";
@@ -27,19 +27,17 @@ public class D4lQuestionnaireCompositionConverter extends AbstractCompositionCon
 
 
     @Override
-    public D4LQuestionnaireComposition convert(@NonNull QuestionnaireResponse questionnaireResponse) {
+    public D4LQuestionnaireComposition convertInternal(@NonNull QuestionnaireResponse resource) {
         D4LQuestionnaireComposition d4LQuestionnaireComposition = new D4LQuestionnaireComposition();
-        mapCommonAttributes(questionnaireResponse, d4LQuestionnaireComposition);
-        initialiseSections(questionnaireResponse);
-        mapSections(questionnaireResponse);
-        OffsetDateTime offsetDateTime = OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
+        initialiseSections(resource);
+        mapSections(resource);
+        OffsetDateTime offsetDateTime = OffsetDateTime.from(resource.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
         d4LQuestionnaireComposition.setStartTimeValue(offsetDateTime);
         return populateD4lQuestionnaireComposition(d4LQuestionnaireComposition);
     }
 
     private void initialiseSections(QuestionnaireResponse questionnaireResponse) {
-        OffsetDateTime offsetDateTime = OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
-        TemporalAccessor authored = offsetDateTime;
+        TemporalAccessor authored = OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
         this.generalInformation = new GeneralInformation(authored);
         this.symptoms = new Symptoms(authored);
         this.anamnesis = new Anamnesis(authored);
@@ -65,7 +63,7 @@ public class D4lQuestionnaireCompositionConverter extends AbstractCompositionCon
                     medication.map(item.getItem());
                     break;
                 default:
-                    throw new UnprocessableEntityException("LinkId " + item.getLinkId() + " undefined");
+                    throw new ConversionException("LinkId " + item.getLinkId() + " undefined");
             }
         }
     }

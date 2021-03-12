@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.sofascore;
 
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.Observation;
@@ -9,21 +9,19 @@ import org.springframework.lang.NonNull;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-public class SofaScoreCompositionConverter extends AbstractCompositionConverter<Observation, SOFAComposition> {
+public class SofaScoreCompositionConverter extends CompositionConverter<Observation, SOFAComposition> {
 
     @Override
-    public SOFAComposition convert(@NonNull Observation observation) {
+    public SOFAComposition convertInternal(@NonNull Observation resource) {
 
-        SOFAComposition result = new SOFAComposition();
-        mapCommonAttributes(observation, result);
-
-        result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
+        SOFAComposition composition = new SOFAComposition();
+        composition.setSofaScore(new SofaScoreObservationConverter().convert(resource));
 
         // ======================================================================================
         // Required fields by API
-        mapTimeDate(observation, result);
+        mapTimeDate(resource, composition);
 
-        return result;
+        return composition;
     }
 
     private void mapTimeDate(Observation observation, SOFAComposition result) {

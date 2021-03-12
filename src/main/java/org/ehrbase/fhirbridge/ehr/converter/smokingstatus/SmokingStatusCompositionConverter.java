@@ -1,9 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.smokingstatus;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.RaucherstatusComposition;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusEvaluation;
 import org.hl7.fhir.r4.model.Coding;
@@ -12,24 +12,23 @@ import org.springframework.lang.NonNull;
 
 import java.util.GregorianCalendar;
 
-public class SmokingStatusCompositionConverter extends AbstractCompositionConverter<Observation, RaucherstatusComposition> {
+public class SmokingStatusCompositionConverter extends CompositionConverter<Observation, RaucherstatusComposition> {
 
     @Override
-    public RaucherstatusComposition convert(@NonNull Observation observation) {
+    public RaucherstatusComposition convertInternal(@NonNull Observation resource) {
         //create composition and observation objects
-        RaucherstatusComposition result = new RaucherstatusComposition();
-        mapCommonAttributes(observation, result);
+        RaucherstatusComposition composition = new RaucherstatusComposition();
 
         RaucherstatusEvaluation evaluation = new RaucherstatusEvaluation();
 
         //map values of interest from FHIR observation
-        GregorianCalendar effectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar();
+        GregorianCalendar effectiveDateTime = resource.getEffectiveDateTimeType().getValueAsCalendar();
         if (effectiveDateTime != null) {
-            result.setStartTimeValue(effectiveDateTime.toZonedDateTime());
+            composition.setStartTimeValue(effectiveDateTime.toZonedDateTime());
         }
 
         try {
-            Coding codin = observation.getValueCodeableConcept().getCoding().get(0);
+            Coding codin = resource.getValueCodeableConcept().getCoding().get(0);
 
             RauchverhaltenDefiningCode rauchverhaltenDefiningcode;
             switch (codin.getCode()) {
@@ -46,18 +45,18 @@ public class SmokingStatusCompositionConverter extends AbstractCompositionConver
                     rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA189805;
                     break;
                 default:
-                    throw new UnprocessableEntityException("Unexpected value: " + codin.getCode());
+                    throw new ConversionException("Unexpected value: " + codin.getCode());
             }
             evaluation.setRauchverhalten(rauchverhaltenDefiningcode.toDvCodedText());
 
             evaluation.setLanguage(Language.DE);
             evaluation.setSubject(new PartySelf());
         } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
+            throw new ConversionException(e.getMessage());
         }
 
-        result.setRaucherstatus(evaluation);
+        composition.setRaucherstatus(evaluation);
 
-        return result;
+        return composition;
     }
 }

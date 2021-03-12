@@ -1,27 +1,26 @@
 package org.ehrbase.fhirbridge.ehr.converter.pulseoximetry;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.quantity.DvProportion;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.AbstractCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ContextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-public class PulseOximetryConverter extends AbstractCompositionConverter<Observation, PulsoxymetrieComposition> {
+public class PulseOximetryConverter extends CompositionConverter<Observation, PulsoxymetrieComposition> {
 
     @Override
-    public PulsoxymetrieComposition convert(@NonNull Observation observation) {
+    public PulsoxymetrieComposition convertInternal(@NonNull Observation resource) {
         PulsoxymetrieComposition composition = new PulsoxymetrieComposition();
-        mapCommonAttributes(observation, composition);
-        new PulseOximetryCodeChecker().checkIfPulseOximetry(observation);
-        new ContextConverter().mapStatus(composition, observation);
-        mapKategorie(composition, observation);
-        mapPulsoxymetrieObservation(composition, observation);
-        setMandatoryFields(composition, observation);
+        new PulseOximetryCodeChecker().checkIfPulseOximetry(resource);
+        new ContextConverter().mapStatus(composition, resource);
+        mapKategorie(composition, resource);
+        mapPulsoxymetrieObservation(composition, resource);
+        setMandatoryFields(composition, resource);
         return composition;
     }
 
@@ -32,7 +31,7 @@ public class PulseOximetryConverter extends AbstractCompositionConverter<Observa
 
     private void mapKategorie(PulsoxymetrieComposition composition, Observation observation) {
         if (observation.getCategory().size() > 1) {
-            throw new UnprocessableEntityException("Fhir-Bridge does not support more then one Category Code value");
+            throw new ConversionException("Fhir-Bridge does not support more then one Category Code value");
         }
         composition.setKategorieValue(observation.getCategory().get(0).getCoding()
                 .get(0).getCode());

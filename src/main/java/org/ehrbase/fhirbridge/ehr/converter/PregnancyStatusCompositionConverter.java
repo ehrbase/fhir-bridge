@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
@@ -15,35 +14,33 @@ import org.springframework.lang.NonNull;
 
 import java.time.OffsetDateTime;
 
-public class PregnancyStatusCompositionConverter extends AbstractCompositionConverter<Observation, SchwangerschaftsstatusComposition> {
+public class PregnancyStatusCompositionConverter extends CompositionConverter<Observation, SchwangerschaftsstatusComposition> {
 
     @Override
-    public SchwangerschaftsstatusComposition convert(@NonNull Observation observation) {
-        SchwangerschaftsstatusComposition result = new SchwangerschaftsstatusComposition();
-        mapCommonAttributes(observation, result);
+    public SchwangerschaftsstatusComposition convertInternal(@NonNull Observation resource) {
+        SchwangerschaftsstatusComposition composition = new SchwangerschaftsstatusComposition();
 
         // map start time
-        DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
+        DateTimeType fhirEffectiveDateTime = resource.getEffectiveDateTimeType();
 
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        composition.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
 
         // FIXME: map other context status
         // Can't map because of https://github.com/ehrbase/openEHR_SDK/issues/84
 
-        result.setSchwangerschaftsstatus(mapObservation(observation));
-
+        composition.setSchwangerschaftsstatus(mapObservation(resource));
 
         // ======================================================================================
         // Required fields by API
-        result.setStartTimeValue(OffsetDateTime.now());
+        composition.setStartTimeValue(OffsetDateTime.now());
 
         PartyIdentified composer = new PartyIdentified();
         DvIdentifier identifier = new DvIdentifier();
-        identifier.setId(observation.getPerformer().get(0).getReference());
+        identifier.setId(resource.getPerformer().get(0).getReference());
         composer.addIdentifier(identifier);
-        result.setComposer(composer);
+        composition.setComposer(composer);
 
-        return result;
+        return composition;
     }
 
     private SchwangerschaftsstatusObservation mapObservation(Observation observation) {
@@ -77,7 +74,7 @@ public class PregnancyStatusCompositionConverter extends AbstractCompositionConv
                     result.setStatusDefiningCode(StatusDefiningCode2.UNBEKANNT);
                     break;
                 default:
-                    throw new UnprocessableEntityException("Status code " + statusCode.getCode() + " is not supported");
+                    throw new ConversionException("Status code " + statusCode.getCode() + " is not supported");
             }
         } else {
             result.setStatusDefiningCode(StatusDefiningCode2.UNBEKANNT);

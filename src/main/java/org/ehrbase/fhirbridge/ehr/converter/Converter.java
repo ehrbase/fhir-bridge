@@ -16,48 +16,17 @@
 
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.archetyped.FeederAuditDetails;
-import com.nedap.archie.rm.datavalues.DvIdentifier;
-import org.apache.commons.lang3.StringUtils;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 import org.hl7.fhir.r4.model.Resource;
 import org.springframework.lang.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public interface Converter<S extends Resource, T> {
+/**
+ * @param <S> source type
+ * @param <T> target type
+ * @since 1.0.0
+ */
+@FunctionalInterface
+public interface Converter<S extends Resource, T extends RMEntity> {
 
     T convert(@NonNull S resource);
-
-    default Language resolveLanguage(String languageCode) {
-        for (Language language : Language.values()) {
-            if (StringUtils.equalsIgnoreCase(language.getCode(), languageCode)) {
-                return language;
-            }
-        }
-        return Language.DE;
-    }
-
-    default FeederAudit buildFeederAudit(S resource) {
-        FeederAudit audit = new FeederAudit();
-
-        FeederAuditDetails auditDetails = new FeederAuditDetails();
-        if (resource.getMeta().hasSource()) {
-            auditDetails.setSystemId(resource.getMeta().getSource());
-        } else {
-            auditDetails.setSystemId("FHIR-Bridge");
-        }
-        audit.setOriginatingSystemAudit(auditDetails);
-
-        List<DvIdentifier> identifiers = new ArrayList<>();
-        DvIdentifier identifier = new DvIdentifier();
-        identifier.setId(resource.getId());
-        identifier.setType("fhir_logical_id");
-        identifiers.add(identifier);
-        audit.setOriginatingSystemItemIds(identifiers);
-
-        return audit;
-    }
 }

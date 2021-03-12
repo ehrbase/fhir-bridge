@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.GECCOPersonendatenComposition;
@@ -22,16 +21,15 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientCompositionConverter extends AbstractCompositionConverter<Patient, GECCOPersonendatenComposition> {
+public class PatientCompositionConverter extends CompositionConverter<Patient, GECCOPersonendatenComposition> {
 
     @Override
-    public GECCOPersonendatenComposition convert(@NonNull Patient patient) {
+    public GECCOPersonendatenComposition convertInternal(@NonNull Patient resource) {
         GECCOPersonendatenComposition composition = new GECCOPersonendatenComposition();
-        mapCommonAttributes(patient, composition);
         PersonendatenAdminEntry personData = new PersonendatenAdminEntry();
-        composition.setAlter(getAgeFromFhir(patient));
-        personData.setDatenZurGeburt(getDataOnBirth(patient));
-        personData.setEthnischerHintergrund(getEthnicBackgroundData(patient));
+        composition.setAlter(getAgeFromFhir(resource));
+        personData.setDatenZurGeburt(getDataOnBirth(resource));
+        personData.setEthnischerHintergrund(getEthnicBackgroundData(resource));
         personData.setSubject(new PartySelf());
         personData.setLanguage(Language.DE);
         composition.setPersonendaten(personData);
@@ -48,7 +46,7 @@ public class PatientCompositionConverter extends AbstractCompositionConverter<Pa
             ec.setEthnischerHintergrundDefiningCode(EthnischerHintergrundDefiningCode.getBySNOMEDCode(ethnicGroup.getCode()));
             items.add(ec);
         } catch (NullPointerException e) {
-            throw new UnprocessableEntityException("Getting ethnicGroup failed: " + e.getMessage());
+            throw new ConversionException("Getting ethnicGroup failed: " + e.getMessage());
         }
         return items;
     }
@@ -75,7 +73,7 @@ public class PatientCompositionConverter extends AbstractCompositionConverter<Pa
             //date of birth
             datenZurGeburtCluster.setGeburtsdatumValue(fhirPatient.getBirthDate().toInstant().atZone(ZoneId.of("Europe/Berlin")).toLocalDate());
         } catch (NullPointerException e) {
-            throw new UnprocessableEntityException("Getting datenZurGeburt failed: " + e.getMessage());
+            throw new ConversionException("Getting datenZurGeburt failed: " + e.getMessage());
         }
         return datenZurGeburtCluster;
     }
