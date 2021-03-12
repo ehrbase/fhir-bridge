@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.clinicalFrailty.ClinicalFrailtyScaleScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose.GECCODiagnoseCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.historyoftravel.HistoryOfTravelConverter;
 import org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOximetryConverter;
 import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
@@ -52,6 +53,7 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.SOFA_SCORE, new SofaScoreCompositionConverter());
         profiles.put(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
         profiles.put(Profile.PROCEDURE, new ProcedureCompositionConverter());
+        profiles.put(Profile.TRAVEL_HISTORY, new HistoryOfTravelConverter());
         profiles.put(Profile.OXYGEN_SATURATION, new PulseOximetryConverter());
 
 
@@ -69,5 +71,14 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.DIAGNOSE_ORGAN_RECIPIENT, new GECCODiagnoseCompositionConverter());
         profiles.put(Profile.DIAGNOSE_COMPLICATIONS_COVID_19, new GECCODiagnoseCompositionConverter());
         profiles.put(Profile.DIAGNOSE_DEPENDENCE_ON_VENTILATOR, new GECCODiagnoseCompositionConverter());
+        // Patient
+        profiles.put(Profile.PATIENT, new PatientCompositionConverter());
+
+        profiles.put(Profile.APHERESIS_PROCEDURE, new TherapyCompositionConverter());
+        profiles.put(Profile.DIALYSIS_PROCEDURE, new TherapyCompositionConverter());
+        profiles.put(Profile.RESPIRATORY_THERAPIES_PROCEDURE, new TherapyCompositionConverter());
+        profiles.put(Profile.RADIOLOGY_PROCEDURE, new TherapyCompositionConverter());
+        profiles.put(Profile.EXTRACORPOREAL_MEMBRANE_OXYGENATION_PROCEDURE, new TherapyCompositionConverter());
+        profiles.put(Profile.PRONE_POSITION_PROCEDURE, new TherapyCompositionConverter());
     }
 }

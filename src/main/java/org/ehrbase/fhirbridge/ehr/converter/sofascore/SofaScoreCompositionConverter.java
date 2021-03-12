@@ -1,13 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.sofascore;
 
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datatypes.CodePhrase;
-import com.nedap.archie.rm.datavalues.DvCodedText;
-import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import com.nedap.archie.rm.generic.PartySelf;
-import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
@@ -15,11 +10,13 @@ import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
 import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
-import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SOFAScoreObservation;
-import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 
 public class SofaScoreCompositionConverter implements CompositionConverter<SOFAComposition, Observation> {
@@ -28,7 +25,6 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
 
     @Override
     public Observation fromComposition(SOFAComposition composition) {
-        // TODO: Implement
         return null;
     }
 
@@ -44,29 +40,65 @@ public class SofaScoreCompositionConverter implements CompositionConverter<SOFAC
         FeederAudit fa = CommonData.constructFeederAudit(observation);
         result.setFeederAudit(fa);
 
-        DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
 
-        try {
-            result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
-        }catch (Exception e){
-            throw new UnprocessableEntityException(e.getMessage());
-        }
+        result.setSofaScore(new SofaScoreObservationConverter().convert(observation));
+
 
         // ======================================================================================
         // Required fields by API
-        result.setLanguage(Language.DE); // FIXME: we need to grab the language from the template
-        result.setLocation("test"); // FIXME: Location abfangen?
+        result.setLanguage(Language.DE);
+        result.setLocation("test");
         result.setSettingDefiningcode(SettingDefiningcode.SECONDARY_MEDICAL_CARE);
         result.setTerritory(Territory.DE);
         result.setCategoryDefiningcode(CategoryDefiningcode.EVENT);
 
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
+        mapTimeDate(observation, result);
 
         result.setComposer(new PartySelf());
 
         return result;
     }
 
+    private void mapTimeDate(Observation observation, SOFAComposition result) {
+        tryEffectiveDateTime(observation, result);
+        tryEffectiveInstantType(observation, result);
+        tryEffectivePeriodType(observation, result);
+    }
 
+    private void tryEffectiveDateTime(Observation observation, SOFAComposition result) {
+        try{
+            result.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+        }catch (FHIRException fhirException){
+            if(isTimeTypeException(fhirException.toString())){
+                throw fhirException;
+            }
+        }
+    }
+
+    private void tryEffectiveInstantType(Observation observation, SOFAComposition result) {
+        try{
+            result.setStartTimeValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
+        }catch (FHIRException fhirException){
+            if(isTimeTypeException(fhirException.toString())){
+                throw fhirException;
+            }
+        }
+    }
+
+    private void tryEffectivePeriodType(Observation observation, SOFAComposition result) {
+        try{
+            LocalDateTime date = LocalDateTime.ofInstant(observation.getEffectivePeriod().getStart().toInstant(), ZoneOffset.UTC);
+            result.setStartTimeValue(date);
+            result.setEndTimeValue(date);
+        }catch (FHIRException fhirException){
+            if(isTimeTypeException(fhirException.toString())){
+                throw fhirException;
+            }
+        }
+    }
+
+    private boolean isTimeTypeException(String exceptionMessage){
+        return !(exceptionMessage.contains("Type mismatch: the type") && exceptionMessage.contains("was expected,") && exceptionMessage.contains("was encountered"));
+    }
 
 }

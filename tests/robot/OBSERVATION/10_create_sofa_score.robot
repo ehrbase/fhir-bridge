@@ -302,7 +302,7 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference
-    [Tags]              valueCodeableConcept
+    [Tags]              valueCodeableConcept    ci-test
 
 
 	# FIELD/PATH								                VALUE					HTTP
@@ -729,7 +729,7 @@ ${randinteger}                  ${12345}
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create sofa score with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason
+    [Tags]              DataAbsentReason    ci-test
 
 	# FIELD/PATH											VALUE					HTTP
 	# 																				CODE
