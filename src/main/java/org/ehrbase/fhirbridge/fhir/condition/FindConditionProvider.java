@@ -49,7 +49,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @since 1.0.0
  */
-@SuppressWarnings({"unused", "java:S107"})
+@SuppressWarnings({"unused", "java:S107", "DuplicatedCode"})
 public class FindConditionProvider extends AbstractPlainProvider {
 
     @Search(type = Condition.class)

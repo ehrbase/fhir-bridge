@@ -744,7 +744,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/DiagnosticReport?subject.identifier={{patientId}}",
+									"raw": "{{baseUrl}}/fhir/DiagnosticReport?status=error",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -754,8 +754,128 @@
 									],
 									"query": [
 										{
-											"key": "subject.identifier",
-											"value": "{{patientId}}"
+											"key": "_id",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "_language",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_profile",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_source",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_security",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_tag",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_content",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_text",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_filter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "based-on",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "code",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "conclusion",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "date",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "encounter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "identifier",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "issued",
+											"value": "test",
+											"disabled": true
+										},
+										{
+											"key": "media",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "patient",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "performer",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "result",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "results-interpreter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "specimen",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "error"
+										},
+										{
+											"key": "subject",
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
