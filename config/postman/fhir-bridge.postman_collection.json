@@ -1587,6 +1587,11 @@
 											"disabled": true
 										},
 										{
+											"key": "_tag",
+											"value": null,
+											"disabled": true
+										},
+										{
 											"key": "_content",
 											"value": "",
 											"disabled": true
@@ -1965,6 +1970,11 @@
 											"disabled": true
 										},
 										{
+											"key": "_tag",
+											"value": null,
+											"disabled": true
+										},
+										{
 											"key": "_content",
 											"value": null,
 											"disabled": true
@@ -2237,7 +2247,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Procedure?subject.identifier={{patientId}}",
+									"raw": "{{baseUrl}}/fhir/Procedure?code=80146002",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -2247,8 +2257,128 @@
 									],
 									"query": [
 										{
-											"key": "subject.identifier",
-											"value": "{{patientId}}"
+											"key": "_id",
+											"value": "5",
+											"disabled": true
+										},
+										{
+											"key": "_language",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_profile",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_source",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_security",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_tag",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_content",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_text",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_filter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "based-on",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "code",
+											"value": "80146002"
+										},
+										{
+											"key": "date",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "encounter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "identifier",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "instantiates-canonical",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "instantiates-uri",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "location",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "part-of",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "patient",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "performer",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "reason-code",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "reason-reference",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "subject",
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
