@@ -28,7 +28,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/AuditEvent?date=gt2020-12-07&entity=DiagnosticReport/13/_history/1",
+									"raw": "{{baseUrl}}/fhir/AuditEvent?outcome",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -38,12 +38,138 @@
 									],
 									"query": [
 										{
+											"key": "_id",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_language",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_profile",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_source",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_security",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_tag",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_content",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_text",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_filter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "action",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "address",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "agent",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "agent-name",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "agent-role",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "altid",
+											"value": null,
+											"disabled": true
+										},
+										{
 											"key": "date",
-											"value": "gt2020-12-07"
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "entity",
-											"value": "DiagnosticReport/13/_history/1"
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "entity-name",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "entity-role",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "entity-type",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "outcome",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "outcome",
+											"value": null
+										},
+										{
+											"key": "policy",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "site",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "source",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "subtype",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "type",
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
