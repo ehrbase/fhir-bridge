@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KoerperstelleCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
 import org.hl7.fhir.r4.model.Annotation;
@@ -58,7 +58,7 @@ public class VorliegendeDiagnoseConverter {
             if (severity.getSystem().equals(SNOMED_SYSTEM) && GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().containsKey(severity.getCode())) {
                 getVorliegendeDiagnose().setSchweregradDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().get(severity.getCode()));
             } else {
-                throw new UnprocessableEntityException("Severity not processable.");
+                throw new ConversionException("Severity not processable.");
             }
         }
     }
@@ -71,7 +71,7 @@ public class VorliegendeDiagnoseConverter {
                     korperstelleCluster.setNameDerKoerperstelleDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKoerperstelleMap().get(bodySite.getCode()));
                     addKoerperstelleCluster(korperstelleCluster);
                 } else {
-                    throw new UnprocessableEntityException("Body site not processable.");
+                    throw new ConversionException("Body site not processable.");
                 }
             }
         }
