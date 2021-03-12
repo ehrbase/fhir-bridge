@@ -22,12 +22,16 @@ import ca.uhn.fhir.rest.annotation.Offset;
 import ca.uhn.fhir.rest.annotation.OptionalParam;
 import ca.uhn.fhir.rest.annotation.Search;
 import ca.uhn.fhir.rest.annotation.Sort;
+import ca.uhn.fhir.rest.api.Constants;
 import ca.uhn.fhir.rest.api.SortSpec;
 import ca.uhn.fhir.rest.api.server.IBundleProvider;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import ca.uhn.fhir.rest.param.DateRangeParam;
 import ca.uhn.fhir.rest.param.ReferenceAndListParam;
+import ca.uhn.fhir.rest.param.StringAndListParam;
 import ca.uhn.fhir.rest.param.TokenAndListParam;
+import ca.uhn.fhir.rest.param.UriAndListParam;
+import org.hl7.fhir.instance.model.api.IAnyResource;
 import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.ResourceType;
 import org.openehealth.ipf.commons.ihe.fhir.AbstractPlainProvider;
@@ -41,22 +45,77 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @since 1.0.0
  */
+@SuppressWarnings({"unused", "java:S107", "DuplicatedCode"})
 public class FindAuditEventProvider extends AbstractPlainProvider {
 
     @Search(type = AuditEvent.class)
-    @SuppressWarnings({"unused", "java:S107"})
-    public IBundleProvider searchAuditEvent(@OptionalParam(name = AuditEvent.SP_DATE) DateRangeParam interval,
+    public IBundleProvider searchAuditEvent(@OptionalParam(name = IAnyResource.SP_RES_ID) TokenAndListParam id,
+                                            @OptionalParam(name = IAnyResource.SP_RES_LANGUAGE) StringAndListParam language,
+                                            @OptionalParam(name = Constants.PARAM_LASTUPDATED) DateRangeParam lastUpdated,
+                                            @OptionalParam(name = Constants.PARAM_PROFILE) UriAndListParam profile,
+                                            @OptionalParam(name = Constants.PARAM_SOURCE) UriAndListParam resourceSource,
+                                            @OptionalParam(name = Constants.PARAM_SECURITY) TokenAndListParam security,
+                                            @OptionalParam(name = Constants.PARAM_TAG) TokenAndListParam tag,
+                                            @OptionalParam(name = Constants.PARAM_CONTENT) StringAndListParam content,
+                                            @OptionalParam(name = Constants.PARAM_TEXT) StringAndListParam text,
+                                            @OptionalParam(name = Constants.PARAM_FILTER) StringAndListParam filter,
+                                            @OptionalParam(name = AuditEvent.SP_ACTION) TokenAndListParam action,
+                                            @OptionalParam(name = AuditEvent.SP_ADDRESS) StringAndListParam address,
+                                            @OptionalParam(name = AuditEvent.SP_AGENT) ReferenceAndListParam agent,
+                                            @OptionalParam(name = AuditEvent.SP_AGENT_NAME) StringAndListParam agentName,
+                                            @OptionalParam(name = AuditEvent.SP_AGENT_ROLE) TokenAndListParam agentRole,
+                                            @OptionalParam(name = AuditEvent.SP_ALTID) TokenAndListParam altId,
+                                            @OptionalParam(name = AuditEvent.SP_DATE) DateRangeParam date,
                                             @OptionalParam(name = AuditEvent.SP_ENTITY) ReferenceAndListParam entity,
+                                            @OptionalParam(name = AuditEvent.SP_ENTITY_NAME) StringAndListParam entityName,
+                                            @OptionalParam(name = AuditEvent.SP_ENTITY_ROLE) TokenAndListParam entityRole,
+                                            @OptionalParam(name = AuditEvent.SP_ENTITY_TYPE) TokenAndListParam entityType,
                                             @OptionalParam(name = AuditEvent.SP_OUTCOME) TokenAndListParam outcome,
+                                            @OptionalParam(name = AuditEvent.SP_PATIENT) ReferenceAndListParam patient,
+                                            @OptionalParam(name = AuditEvent.SP_POLICY) UriAndListParam policy,
+                                            @OptionalParam(name = AuditEvent.SP_SITE) TokenAndListParam site,
+                                            @OptionalParam(name = AuditEvent.SP_SOURCE) ReferenceAndListParam source,
+                                            @OptionalParam(name = AuditEvent.SP_SUBTYPE) TokenAndListParam subtype,
+                                            @OptionalParam(name = AuditEvent.SP_TYPE) TokenAndListParam type,
                                             @Count Integer count, @Offset Integer offset, @Sort SortSpec sort,
                                             RequestDetails requestDetails, HttpServletRequest request, HttpServletResponse response) {
+
         SearchParameterMap searchParams = new SearchParameterMap();
-        searchParams.add(AuditEvent.SP_DATE, interval);
+        searchParams.add(IAnyResource.SP_RES_ID, id);
+        searchParams.add(IAnyResource.SP_RES_LANGUAGE, language);
+
+        searchParams.add(Constants.PARAM_PROFILE, profile);
+        searchParams.add(Constants.PARAM_SOURCE, resourceSource);
+        searchParams.add(Constants.PARAM_SECURITY, security);
+        searchParams.add(Constants.PARAM_TAG, tag);
+        searchParams.add(Constants.PARAM_CONTENT, content);
+        searchParams.add(Constants.PARAM_TEXT, text);
+        searchParams.add(Constants.PARAM_FILTER, filter);
+
+        searchParams.add(AuditEvent.SP_ACTION, action);
+        searchParams.add(AuditEvent.SP_ADDRESS, address);
+        searchParams.add(AuditEvent.SP_AGENT, agent);
+        searchParams.add(AuditEvent.SP_AGENT_NAME, agentName);
+        searchParams.add(AuditEvent.SP_AGENT_ROLE, agentRole);
+        searchParams.add(AuditEvent.SP_ALTID, altId);
+        searchParams.add(AuditEvent.SP_DATE, date);
         searchParams.add(AuditEvent.SP_ENTITY, entity);
+        searchParams.add(AuditEvent.SP_ENTITY_NAME, entityName);
+        searchParams.add(AuditEvent.SP_ENTITY_ROLE, entityRole);
+        searchParams.add(AuditEvent.SP_ENTITY_TYPE, entityType);
         searchParams.add(AuditEvent.SP_OUTCOME, outcome);
+        searchParams.add(AuditEvent.SP_PATIENT, patient);
+        searchParams.add(AuditEvent.SP_POLICY, policy);
+        searchParams.add(AuditEvent.SP_SITE, site);
+        searchParams.add(AuditEvent.SP_SOURCE, source);
+        searchParams.add(AuditEvent.SP_SUBTYPE, subtype);
+        searchParams.add(AuditEvent.SP_TYPE, type);
+
+        searchParams.setLastUpdated(lastUpdated);
         searchParams.setCount(count);
         searchParams.setOffset(offset);
         searchParams.setSort(sort);
+
         return requestBundleProvider(searchParams, null, ResourceType.AuditEvent.name(), request, response, requestDetails);
     }
 }
