@@ -222,8 +222,6 @@ public class SymptomCompositionConverter extends AbstractCompositionConverter<Co
         unbekanntesSymptom.getAussageUeberDieFehlendeInformation().add(aussageUberDieFehlendeInformationElement);
         unbekanntesSymptom.setSubject(new PartySelf());
         unbekanntesSymptom.setLanguage(Language.DE);
-
-
         composition.setUnbekanntesSymptom(unbekanntesSymptom);
     }
 }

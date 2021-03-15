@@ -1,15 +1,15 @@
 package org.ehrbase.fhirbridge.config;
 
-import org.ehrbase.fhirbridge.ehr.converter.BloodPressureCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.bloodpressure.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.BodyTemperatureCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.bodytemperature.BodyTemperatureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.BodyWeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionService;
 import org.ehrbase.fhirbridge.ehr.converter.CoronavirusNachweisTestCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.DiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.DiagnosticReportLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.FiO2CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.HeartRateCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.heartrate.HeartRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.PatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.PregnancyStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;

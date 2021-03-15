@@ -19,28 +19,9 @@ public class ClinicalFrailtyScaleScoreCompositionConverter extends AbstractCompo
     public KlinischeFrailtySkalaComposition convert(@NonNull Observation observation) {
         KlinischeFrailtySkalaComposition result = new KlinischeFrailtySkalaComposition();
         mapCommonAttributes(observation, result);
-        KlinischeFrailtySkalaCfsObservation klinischeFrailtySkalaCfsObservation = new KlinischeFrailtySkalaCfsObservation();
-
-        DateTimeType fhirEffectiveDateTime = null;
-        try {
-            fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
-            klinischeFrailtySkalaCfsObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-            klinischeFrailtySkalaCfsObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
-            klinischeFrailtySkalaCfsObservation.setLanguage(Language.DE);
-            String string_assessment = observation.getValueCodeableConcept().getCoding().get(0).getCode();
-            int assessment = Integer.parseInt(string_assessment);
-            ClinicalFrailtyMappingAssessment mapping = new ClinicalFrailtyMappingAssessment();
-            DvOrdinal ord_assessment = mapping.getDVOrdinal(assessment);
-            klinischeFrailtySkalaCfsObservation.setBeurteilung(ord_assessment);
-        } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
-        }
-
-        result.setKlinischeFrailtySkalaCfs(klinischeFrailtySkalaCfsObservation);
-
-        // Required fields by API
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-
+        result.setKlinischeFrailtySkalaCfs(new KlinischeFrailtySkalaObservationConverter().convert(observation));
+        //TODO refactor
+        result.setStartTimeValue((observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime()));
         return result;
     }
 
