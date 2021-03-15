@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
