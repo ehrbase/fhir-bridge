@@ -7,7 +7,6 @@ import org.springframework.lang.NonNull;
 
 import java.time.Instant;
 import java.time.ZonedDateTime;
-import java.util.Calendar;
 
 /**
  * @param <C> openEHR Composition type
@@ -24,7 +23,7 @@ public abstract class ObservationToCompositionConverter<C extends CompositionEnt
         } else {
             composition.setStartTimeValue(Instant.now());
         }
-        composition.setComposer(new PartyIdentified());
         return composition;
     }
+
 }
