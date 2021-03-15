@@ -135,11 +135,10 @@ Output Debug Info To Console
 TRACE GITHUB ISSUE
     [Arguments]     ${GITHUB_ISSUE}
     ...             ${not-ready}=
-    ...             ${message}=Next step fails due to a bug!
-    ...             ${loglevel}=ERROR
+    ...             ${message}=This test has a related bug ticket!
+    ...             ${loglevel}=WARN
 
-                                                        # TODO: RENAME TO   fhir-bridge when migration finished
-                    Log    ${message} | <a href="https://github.com/ehrbase/fhir-bridge-poc/issues/${GITHUB_ISSUE}">Github ISSUE #${GITHUB_ISSUE}</a>
+                    Log    ${message} | <a href="https://github.com/ehrbase/fhir-bridge/issues/${GITHUB_ISSUE}">Github ISSUE #${GITHUB_ISSUE}</a>
                     ...    level=${loglevel}    html=True
 
                     Set Tags    bug    GITHUB ISSUE ${GITHUB_ISSUE}
