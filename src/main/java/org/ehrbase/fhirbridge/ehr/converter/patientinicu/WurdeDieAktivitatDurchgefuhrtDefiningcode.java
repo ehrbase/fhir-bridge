@@ -37,7 +37,7 @@ public enum WurdeDieAktivitatDurchgefuhrtDefiningcode implements EnumValueSet {
         DvCodedText dvCodedText = new DvCodedText();
         CodePhrase codePhrase = new CodePhrase();
         codePhrase.setCodeString(code);
-        codePhrase.setTerminologyId(new TerminologyId(terminologyId, "1.0"));
+        codePhrase.setTerminologyId(new TerminologyId(terminologyId));
         dvCodedText.setDefiningCode(codePhrase);
         dvCodedText.setValue(value);
         return dvCodedText;

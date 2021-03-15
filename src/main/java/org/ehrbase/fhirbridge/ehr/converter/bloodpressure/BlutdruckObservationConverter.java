@@ -1,22 +1,17 @@
-package org.ehrbase.fhirbridge.ehr.converter;
+package org.ehrbase.fhirbridge.ehr.converter.bloodpressure;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.BlutdruckComposition;
+import org.ehrbase.fhirbridge.ehr.converter.AbstractEntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.BlutdruckObservation;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
-import org.springframework.lang.NonNull;
 
-public class BloodPressureCompositionConverter extends AbstractCompositionConverter<Observation, BlutdruckComposition> {
-
+public class BlutdruckObservationConverter extends AbstractEntryEntityConverter<Observation, BlutdruckObservation> {
     @Override
-    public BlutdruckComposition convert(@NonNull Observation observation) {
-        BlutdruckComposition result = new BlutdruckComposition();
-        mapCommonAttributes(observation, result);
-
+    public BlutdruckObservation convert(Observation observation) {
         BlutdruckObservation bloodPressure = new BlutdruckObservation();
-
+        mapCommonAttributes(observation, bloodPressure);
         DateTimeType fhirEffectiveDateTime = observation.getEffectiveDateTimeType();
 
         try {
@@ -37,19 +32,10 @@ public class BloodPressureCompositionConverter extends AbstractCompositionConver
             throw new UnprocessableEntityException(e.getMessage());
         }
 
-        bloodPressure.setSubject(new PartySelf());
-
+        //TODO refactor
         bloodPressure.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
         bloodPressure.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
 
-
-        result.setBlutdruck(bloodPressure);
-
-        // ======================================================================================
-        // Required fields by API
-
-        result.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-
-        return result;
+        return bloodPressure;
     }
 }
