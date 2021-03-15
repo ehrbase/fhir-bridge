@@ -26,7 +26,7 @@ import java.util.Map;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ConversionService {
 
-    private final Map<Profile, Converter> converters = new EnumMap<>(Profile.class);
+    private final Map<Profile, RMEntityConverter> converters = new EnumMap<>(Profile.class);
 
     public boolean canConvert(Profile profile) {
         return converters.containsKey(profile);
@@ -40,7 +40,7 @@ public class ConversionService {
                 .convert(resource);
     }
 
-    public void registerConverter(Profile profile, Converter<?, ?> converter) {
+    public void registerConverter(Profile profile, RMEntityConverter<?, ?> converter) {
         converters.put(profile, converter);
     }
 }

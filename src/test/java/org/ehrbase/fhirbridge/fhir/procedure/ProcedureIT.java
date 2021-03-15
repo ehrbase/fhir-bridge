@@ -1,23 +1,17 @@
 package org.ehrbase.fhirbridge.fhir.procedure;
 
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.apache.commons.io.IOUtils;
-import org.apache.tomcat.jni.Proc;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specificconverters.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Procedure;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.temporal.TemporalAccessor;
 
 import static org.junit.jupiter.api.Assertions.*;
