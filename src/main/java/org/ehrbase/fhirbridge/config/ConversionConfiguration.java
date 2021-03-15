@@ -10,7 +10,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specificconverters.DiagnoseCompositi
 import org.ehrbase.fhirbridge.ehr.converter.specificconverters.DiagnosticReportLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specificconverters.FiO2CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specificconverters.heartrate.HeartRateCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specificconverters.PatientCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specificconverters.patient.PatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specificconverters.PregnancyStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specificconverters.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specificconverters.RespiratoryRateCompositionConverter;
