@@ -14,7 +14,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.ethnischer_hintergrund.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:53:36.997712+01:00",
+    date = "2021-03-15T15:57:50.616598+01:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class EthnischerHintergrundCluster implements LocatableEntity {
