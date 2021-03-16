@@ -6,8 +6,8 @@ import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningCode;
@@ -39,7 +39,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ObservationLabCompositionConverter extends CompositionConverter<Observation, GECCOLaborbefundComposition> {
+public class ObservationLabCompositionConverter extends ObservationToCompositionConverter<GECCOLaborbefundComposition> {
 
     private static final Map<String, UntersuchterAnalytDefiningCode> untersuchterAnalytLOINCDefiningcodeMap
             = new HashMap<>();
@@ -181,10 +181,6 @@ public class ObservationLabCompositionConverter extends CompositionConverter<Obs
 
 
         composition.setLaborergebnis(observation);
-
-        // ======================================================================================
-        // Required fields by API
-        composition.setStartTimeValue(resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
 
         return composition;
     }
