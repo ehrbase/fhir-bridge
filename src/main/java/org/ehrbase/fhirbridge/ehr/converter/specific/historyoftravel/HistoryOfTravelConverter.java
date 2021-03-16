@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
@@ -35,10 +35,10 @@ import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.Hist
 import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
 import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
 
-public class HistoryOfTravelConverter extends CompositionConverter<Observation, ReisehistorieComposition> {
-    private static final Logger LOG = LoggerFactory.getLogger(HistoryOfTravelConverter.class);
+public class HistoryOfTravelConverter extends ObservationToCompositionConverter<ReisehistorieComposition> {
 
     private static final Map<String, LandDefiningCode> countryMap = new HashMap<>();
+
     private static final Map<String, BundeslandRegionDefiningCode> regionMap = new HashMap<>();
 
     static {

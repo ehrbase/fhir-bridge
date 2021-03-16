@@ -1,11 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific;
 
-import com.nedap.archie.rm.datavalues.DvIdentifier;
-import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.SchwangerschaftsstatusComposition;
 import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition.SchwangerschaftsstatusObservation;
 import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition.StatusDefiningCode2;
@@ -14,28 +12,12 @@ import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-public class PregnancyStatusCompositionConverter extends CompositionConverter<Observation, SchwangerschaftsstatusComposition> {
+public class PregnancyStatusCompositionConverter extends ObservationToCompositionConverter<SchwangerschaftsstatusComposition> {
 
     @Override
     public SchwangerschaftsstatusComposition convertInternal(@NonNull Observation resource) {
         SchwangerschaftsstatusComposition composition = new SchwangerschaftsstatusComposition();
-
-        // map start time
-        DateTimeType fhirEffectiveDateTime = resource.getEffectiveDateTimeType();
-
-        composition.setStartTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-
-        // FIXME: map other context status
-        // Can't map because of https://github.com/ehrbase/openEHR_SDK/issues/84
-
         composition.setSchwangerschaftsstatus(mapObservation(resource));
-
-        PartyIdentified composer = new PartyIdentified();
-        DvIdentifier identifier = new DvIdentifier();
-        identifier.setId(resource.getPerformer().get(0).getReference());
-        composer.addIdentifier(identifier);
-        composition.setComposer(composer);
-
         return composition;
     }
 
