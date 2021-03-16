@@ -13,7 +13,6 @@ public class ClinicalFrailtyScaleScoreCompositionConverter extends ObservationTo
     public KlinischeFrailtySkalaComposition convertInternal(Observation resource) {
         KlinischeFrailtySkalaComposition result = new KlinischeFrailtySkalaComposition();
         result.setKlinischeFrailtySkalaCfs(new KlinischeFrailtySkalaObservationConverter().convert(resource));
-        //TODO refactor
         return result;
     }
 }

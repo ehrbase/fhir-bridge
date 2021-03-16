@@ -25,12 +25,12 @@ public class D4lQuestionnaireCompositionConverter extends CompositionConverter<Q
     Anamnesis anamnesis;
     Medication medication;
 
-
     @Override
     public D4LQuestionnaireComposition convertInternal(@NonNull QuestionnaireResponse resource) {
         D4LQuestionnaireComposition d4LQuestionnaireComposition = new D4LQuestionnaireComposition();
         initialiseSections(resource);
         mapSections(resource);
+        //TODO renaud
         OffsetDateTime offsetDateTime = OffsetDateTime.from(resource.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
         d4LQuestionnaireComposition.setStartTimeValue(offsetDateTime);
         return populateD4lQuestionnaireComposition(d4LQuestionnaireComposition);
