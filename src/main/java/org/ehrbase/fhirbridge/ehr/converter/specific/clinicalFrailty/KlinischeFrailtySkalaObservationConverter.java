@@ -13,13 +13,7 @@ public class KlinischeFrailtySkalaObservationConverter extends ObservationToObse
     @Override
     protected KlinischeFrailtySkalaCfsObservation convertInternal(Observation resource) {
         KlinischeFrailtySkalaCfsObservation klinischeFrailtySkalaCfsObservation = new KlinischeFrailtySkalaCfsObservation();
-        DateTimeType fhirEffectiveDateTime = null;
         try {
-            //TODO refactor
-            fhirEffectiveDateTime = resource.getEffectiveDateTimeType();
-            klinischeFrailtySkalaCfsObservation.setTimeValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-            klinischeFrailtySkalaCfsObservation.setOriginValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime()); // mandatory
-            klinischeFrailtySkalaCfsObservation.setLanguage(Language.DE);
             String string_assessment = resource.getValueCodeableConcept().getCoding().get(0).getCode();
             int assessment = Integer.parseInt(string_assessment);
             org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty.ClinicalFrailtyMappingAssessment mapping = new org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty.ClinicalFrailtyMappingAssessment();
