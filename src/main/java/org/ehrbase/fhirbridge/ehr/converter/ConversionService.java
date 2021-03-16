@@ -16,6 +16,7 @@
 
 package org.ehrbase.fhirbridge.ehr.converter;
 
+import org.ehrbase.fhirbridge.ehr.converter.generic.RMEntityConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.Resource;
 

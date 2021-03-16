@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.specificconverters.pulseoximetry.PulseOximetryConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseOximetryConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
