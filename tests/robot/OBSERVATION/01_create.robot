@@ -1253,7 +1253,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]              oxygen-saturation    valid    alternative    loinc    datetime    dataabsentreason    not-ready    not-implemented
+	[Tags]              oxygen-saturation    valid    alternative    loinc    datetime    dataabsentreason
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create oxygen saturation    Oxygen Saturation  create-oxygen-saturation-loinc-datetime-dataAbsentReason.json
@@ -1267,7 +1267,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]              oxygen-saturation    valid    alternative    loinc    datetime    value    not-ready    not-implemented
+	[Tags]              oxygen-saturation    valid    alternative    loinc    datetime    value
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create oxygen saturation   Oxygen Saturation  create-oxygen-saturation-loinc-datetime-value.json
@@ -1281,7 +1281,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]              oxygen-saturation    valid    alternative    loinc    period    dataabsentreason    not-ready    not-implemented
+	[Tags]              oxygen-saturation    valid    alternative    loinc    period    dataabsentreason
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create oxygen saturation    Oxygen Saturation  create-oxygen-saturation-loinc-period-dataAbsentReason.json
@@ -1295,7 +1295,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]              oxygen-saturation    valid    alternative    loinc    period    value    not-ready    not-implemented
+	[Tags]              oxygen-saturation    valid    alternative    loinc    period    value
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create oxygen saturation   Oxygen Saturation  create-oxygen-saturation-loinc-period-value.json
@@ -1309,7 +1309,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]              oxygen-saturation    valid    alternative    snomed    datetime    dataabsentreason    not-ready    not-implemented
+	[Tags]              oxygen-saturation    valid    alternative    snomed    datetime    dataabsentreason
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create oxygen saturation   Oxygen Saturation  create-oxygen-saturation-snomed-datetime-dataAbsentReason.json
@@ -1323,7 +1323,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]              oxygen-saturation    valid    alternative    snomed    datetime    value    not-ready    not-implemented
+	[Tags]              oxygen-saturation    valid    alternative    snomed    datetime    value
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create oxygen saturation   Oxygen Saturation  create-oxygen-saturation-snomed-datetime-value.json
@@ -1337,7 +1337,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]              oxygen-saturation    valid    alternative    snomed    period    dataabsentreason    not-ready    not-implemented
+	[Tags]              oxygen-saturation    valid    alternative    snomed    period    dataabsentreason
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create oxygen saturation   Oxygen Saturation  create-oxygen-saturation-snomed-period-dataAbsentReason.json
@@ -1351,7 +1351,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]              oxygen-saturation    valid    alternative    snomed    period    value    not-ready    not-implemented
+	[Tags]              oxygen-saturation    valid    alternative    snomed    period    value
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create oxygen saturation   Oxygen Saturation  create-oxygen-saturation-snomed-period-value.json
