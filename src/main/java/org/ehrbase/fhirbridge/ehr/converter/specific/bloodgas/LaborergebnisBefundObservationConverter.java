@@ -1,8 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas;
 
 
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyteconverter.KohlendioxidpartialdruckConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyteconverter.PhWertConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyteconverter.SauerstoffpartialdruckConverter;
@@ -14,30 +13,20 @@ import org.hl7.fhir.r4.model.Observation;
 
 import java.util.Optional;
 
-class LaborergebnisBefundConverter {
+class LaborergebnisBefundObservationConverter extends ObservationToObservationConverter<LaborergebnisObservation> {
 
-
-    private LaborergebnisBefundConverter() {
-    }
-
-    public static LaborergebnisObservation map(BloodGasPanel bloodGasPanelBundle) {
+    @Override
+    protected LaborergebnisObservation convertInternal(Observation resource) {
         LaborergebnisObservation laborergebnisObservation = new LaborergebnisObservation();
+        BloodGasPanel bloodGasPanelBundle = new BloodGasPanel(resource);
         laborergebnisObservation.setLabortestBezeichnungDefiningCode(mapLabortestBezeichnung(bloodGasPanelBundle.getBloodGasPanel()));
-        laborergebnisObservation.setLanguage(Language.DE);
-        laborergebnisObservation.setOriginValue(bloodGasPanelBundle.getBloodGasPanel().getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        laborergebnisObservation.setTimeValue(bloodGasPanelBundle.getBloodGasPanel().getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        laborergebnisObservation.setSubject(new PartySelf());
-
         mapCarbonDioxidePartialPressureIfPresent(laborergebnisObservation, bloodGasPanelBundle.getCarbonDioxidePartialPressure());
-
         mapOxygenPartialPressureIfPresent(laborergebnisObservation, bloodGasPanelBundle.getOxygenPartialPressure());
-
         mapPhIfPresent(laborergebnisObservation, bloodGasPanelBundle.getpH());
-
         mapOxygenSaturationIfPresent(laborergebnisObservation, bloodGasPanelBundle.getOxygenSaturation());
-
         return laborergebnisObservation;
     }
+
 
     private static void mapOxygenPartialPressureIfPresent(LaborergebnisObservation laborergebnisObservation, Optional<Observation> oxygenPartialPressure) {
         oxygenPartialPressure.ifPresent(observation -> laborergebnisObservation.setSauerstoffpartialdruck(new SauerstoffpartialdruckConverter(observation).map()));
@@ -71,8 +60,6 @@ class LaborergebnisBefundConverter {
         throw new IllegalArgumentException("The coding of the LabortestBezeichnung: "+fhirObservation.getCode().getCoding()+" cannot be mapped, needs to be either blood (LOINC code 24338-6)" +
                 ", arterial blood (24336-0) or capillary blood (24337-8), check JSON at path Observation.code.coding");
     }
-
-
 
 }
 
