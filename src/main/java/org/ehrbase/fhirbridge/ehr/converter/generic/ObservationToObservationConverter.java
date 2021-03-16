@@ -8,8 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.temporal.TemporalAccessor;
 
-
-public abstract class ObservationToObservationConverter <E extends EntryEntity> extends EntryEntityConverter<Observation, E> {
+public abstract class ObservationToObservationConverter<E extends EntryEntity> extends EntryEntityConverter<Observation, E> {
 
     @Override
     public E convert(@NonNull Observation resource) {

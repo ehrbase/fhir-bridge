@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire;
 
-import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.Anamnesis;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.GeneralInformation;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.Medication;
