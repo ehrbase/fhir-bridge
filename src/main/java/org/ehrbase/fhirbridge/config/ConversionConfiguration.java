@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.config;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionService;
 import org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel.GECCOSerologischerBefundCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.PatientenAufenthalt.PatientenAufenthaltCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodpressure.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight.BodyHeightCompositionConverter;
@@ -30,6 +31,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund.Radiol
 import org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate.RespiratoryRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus.SmokingStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.sofascore.SofaScoreCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.stationaererversorgungsfall.StationaererVersorgungsfallCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.SymptomCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.virologischerBefund.PCRCompositionConverter;
@@ -53,6 +55,7 @@ public class ConversionConfiguration {
         registerProcedureConverters(conversionService);
         registerQuestionnaireResponseConverter(conversionService);
         registerMedicationStatementConverter(conversionService);
+        registerEncounterConverter(conversionService);
 
         return conversionService;
     }
@@ -138,5 +141,10 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_ACE_INHIBITORS, converter);
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_ANTICOAGULANTS, converter);
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_IMMUNOGLOBULINS, converter);
+    }
+
+    private void registerEncounterConverter(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.STATIONAERER_VERSORGUNGSFALL, new StationaererVersorgungsfallCompositionConverter());
+        conversionService.registerConverter(Profile.PATIENTEN_AUFENTHALT, new PatientenAufenthaltCompositionConverter());
     }
 }
