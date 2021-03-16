@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 
 public class KoerpertemperaturBeliebigesEreignisPointEventConverter extends ObservationToPointEventConverter<KoerpertemperaturBeliebigesEreignisPointEvent> {
-    private static final Logger LOG = LoggerFactory.getLogger(BodyTemperatureCompositionConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KoerpertemperaturBeliebigesEreignisPointEventConverter.class);
 
     @Override
     protected KoerpertemperaturBeliebigesEreignisPointEvent convertInternal(Observation resource) {

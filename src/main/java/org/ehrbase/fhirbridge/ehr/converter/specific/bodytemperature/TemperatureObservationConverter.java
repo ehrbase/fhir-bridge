@@ -11,10 +11,10 @@ import java.util.List;
 public class TemperatureObservationConverter extends ObservationToObservationConverter<KoerpertemperaturObservation> {
     @Override
     protected KoerpertemperaturObservation convertInternal(Observation resource) {
-        KoerpertemperaturObservation tempObs = new KoerpertemperaturObservation();
+        KoerpertemperaturObservation koerpertemperaturObservation = new KoerpertemperaturObservation();
         List<KoerpertemperaturBeliebigesEreignisChoice> events = new ArrayList<>();
         events.add(new KoerpertemperaturBeliebigesEreignisPointEventConverter().convert(resource));
-        tempObs.setBeliebigesEreignis(events);
-        return tempObs;
+        koerpertemperaturObservation.setBeliebigesEreignis(events);
+        return koerpertemperaturObservation;
     }
 }

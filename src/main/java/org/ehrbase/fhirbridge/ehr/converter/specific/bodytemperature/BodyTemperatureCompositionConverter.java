@@ -17,7 +17,6 @@ public class BodyTemperatureCompositionConverter extends ObservationToCompositio
         List<KoerpertemperaturObservation> observations = new ArrayList<>();
         observations.add(new TemperatureObservationConverter().convert(resource));
         composition.setKoerpertemperatur(observations);
-        composition.setComposer(new PartySelf());
         return composition;
     }
 }

@@ -19,13 +19,29 @@ public abstract class ObservationToObservationConverter <E extends EntryEntity> 
     }
 
     protected void invokeTimeValues(E entryEntity, Observation resource) {
+        invokeOriginValue(entryEntity, resource);
+        invokeSetTimeValue(entryEntity, resource);
+    }
+
+    protected void invokeSetTimeValue(E entryEntity, Observation resource){
         try {
             Method setOriginValue = entryEntity.getClass().getMethod("setOriginValue", TemporalAccessor.class);
-            Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setOriginValue.invoke(entryEntity, resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+        } catch (IllegalAccessException | InvocationTargetException exception) {
+            exception.printStackTrace();
+        } catch (NoSuchMethodException ignored){
+            //ignored
+        }
+    }
+
+    protected void invokeOriginValue(E entryEntity, Observation resource){
+        try {
+            Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException noSuchMethodException) {
-            noSuchMethodException.printStackTrace();
+        } catch ( IllegalAccessException | InvocationTargetException exception) {
+            exception.printStackTrace();
+        }catch (NoSuchMethodException ignored){
+            //ignored
         }
     }
 }
