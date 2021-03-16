@@ -2,60 +2,39 @@ package org.ehrbase.fhirbridge.ehr.converter.specific;
 
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.KoerpergroesseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.definition.GroesseLaengeObservation;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class BodyHeightCompositionConverter extends CompositionConverter<Observation, KoerpergroesseComposition> {
+public class BodyHeightCompositionConverter extends ObservationToCompositionConverter<KoerpergroesseComposition> {
 
     @Override
     public KoerpergroesseComposition convertInternal(@NonNull Observation resource) {
-
+        KoerpergroesseComposition composition = new KoerpergroesseComposition();
         GroesseLaengeObservation observation = new GroesseLaengeObservation();
-        setDateTime(observation, getDateTime(resource));
+        setDateTime(observation, getStartTime(resource));
         setDefault(observation);
         setMappingContent(resource, observation);
-
-        return createComposition(getDateTime(resource), observation, resource);
+        composition.setGroesseLaenge(observation);
+        return composition;
     }
 
-    private KoerpergroesseComposition createComposition(ZonedDateTime fhirEffectiveDateTime, GroesseLaengeObservation grosseLangeObservation, Observation observation) {
-        KoerpergroesseComposition composition = new KoerpergroesseComposition();
-        composition.setGroesseLaenge(grosseLangeObservation);
-        composition.setStartTimeValue(fhirEffectiveDateTime);
-        return (composition);
+    private void setDateTime(GroesseLaengeObservation observation, ZonedDateTime startTime) {
+        observation.setTimeValue(startTime);
+        observation.setOriginValue(startTime);
     }
 
-    private ZonedDateTime getDateTime(Observation observation) {
-        ZonedDateTime fhirEffectiveDateTime;
-        if (observation.hasEffectiveDateTimeType()) {
-            fhirEffectiveDateTime = observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
-        } else if (observation.hasEffectivePeriod()) {
-            fhirEffectiveDateTime = observation.getEffectivePeriod().getStart().toInstant().atZone(ZoneId.systemDefault());
-        } else {
-            throw new ConversionException("No time is set");
-        }
-        return fhirEffectiveDateTime;
+    private void setMappingContent(Observation resource, GroesseLaengeObservation observation) {
+        observation.setGroesseLaengeUnits(resource.getValueQuantity().getCode());
+        observation.setGroesseLaengeMagnitude(resource.getValueQuantity().getValue().doubleValue());
     }
 
-    private void setDateTime(GroesseLaengeObservation grosseLangeObservation, ZonedDateTime fhirEffectiveDateTime) {
-        grosseLangeObservation.setTimeValue(fhirEffectiveDateTime);
-        grosseLangeObservation.setOriginValue(fhirEffectiveDateTime);
-    }
-
-    private void setMappingContent(Observation observation, GroesseLaengeObservation grosseLangeObservation) {
-        grosseLangeObservation.setGroesseLaengeUnits(observation.getValueQuantity().getCode());
-        grosseLangeObservation.setGroesseLaengeMagnitude(observation.getValueQuantity().getValue().doubleValue());
-    }
-
-    private void setDefault(GroesseLaengeObservation grosseLangeObservation) {
-        grosseLangeObservation.setLanguage(Language.DE);
-        grosseLangeObservation.setSubject(new PartySelf());
+    private void setDefault(GroesseLaengeObservation observation) {
+        observation.setLanguage(Language.DE);
+        observation.setSubject(new PartySelf());
     }
 }

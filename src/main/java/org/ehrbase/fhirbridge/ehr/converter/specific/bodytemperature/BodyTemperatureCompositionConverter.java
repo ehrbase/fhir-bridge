@@ -6,6 +6,7 @@ import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertempe
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturObservation;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 

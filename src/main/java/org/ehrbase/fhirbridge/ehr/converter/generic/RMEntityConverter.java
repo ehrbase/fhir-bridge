@@ -30,11 +30,12 @@ import org.springframework.lang.NonNull;
  */
 @FunctionalInterface
 public interface RMEntityConverter<S extends Resource, T extends RMEntity> extends Converter<S, T> {
-     static final Language DEFAULT_LANGUAGE = Language.DE;
+
+    Language DEFAULT_LANGUAGE = Language.DE;
 
     T convert(@NonNull S resource);
 
-     default Language resolveLanguageOrDefault(@NonNull S resource) {
+    default Language resolveLanguageOrDefault(@NonNull S resource) {
         for (Language language : Language.values()) {
             if (StringUtils.equalsIgnoreCase(language.getCode(), resource.getLanguage())) {
                 return language;

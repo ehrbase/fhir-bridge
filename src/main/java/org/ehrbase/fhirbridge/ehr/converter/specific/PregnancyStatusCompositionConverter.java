@@ -14,8 +14,6 @@ import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-import java.time.OffsetDateTime;
-
 public class PregnancyStatusCompositionConverter extends CompositionConverter<Observation, SchwangerschaftsstatusComposition> {
 
     @Override
@@ -31,10 +29,6 @@ public class PregnancyStatusCompositionConverter extends CompositionConverter<Ob
         // Can't map because of https://github.com/ehrbase/openEHR_SDK/issues/84
 
         composition.setSchwangerschaftsstatus(mapObservation(resource));
-
-        // ======================================================================================
-        // Required fields by API
-        composition.setStartTimeValue(OffsetDateTime.now());
 
         PartyIdentified composer = new PartyIdentified();
         DvIdentifier identifier = new DvIdentifier();

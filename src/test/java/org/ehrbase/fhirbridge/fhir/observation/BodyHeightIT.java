@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.specific.BodyHeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.specific.BodyHeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.KoerpergroesseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.definition.GroesseLaengeObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
@@ -87,7 +87,7 @@ class BodyHeightIT extends AbstractMappingTestSetupIT {
     @Test
     void createInvalidBefund() throws IOException {
         Exception exception = executeMappingException("create-body-height-loinc-datetime_invalid.json");
-        assertEquals("No time is set", exception.getMessage());
+        assertEquals("Start time is not defined in resource", exception.getMessage());
     }
 
 

@@ -3,15 +3,16 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry;
 import com.nedap.archie.rm.datavalues.quantity.DvProportion;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ContextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-public class PulseOximetryConverter extends CompositionConverter<Observation, PulsoxymetrieComposition> {
+public class PulseOximetryConverter extends ObservationToCompositionConverter<PulsoxymetrieComposition> {
 
     @Override
     public PulsoxymetrieComposition convertInternal(@NonNull Observation resource) {
@@ -20,13 +21,7 @@ public class PulseOximetryConverter extends CompositionConverter<Observation, Pu
         new ContextConverter().mapStatus(composition, resource);
         mapKategorie(composition, resource);
         mapPulsoxymetrieObservation(composition, resource);
-        setMandatoryFields(composition, resource);
         return composition;
-    }
-
-    private void setMandatoryFields(PulsoxymetrieComposition composition, Observation observation) {
-        composition.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        composition.setEndTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
     }
 
     private void mapKategorie(PulsoxymetrieComposition composition, Observation observation) {

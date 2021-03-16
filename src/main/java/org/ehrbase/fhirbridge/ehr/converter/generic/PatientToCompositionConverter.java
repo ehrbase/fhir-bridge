@@ -9,7 +9,7 @@ import org.springframework.lang.NonNull;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 
-public abstract class PatientToCompositionConverter <C extends CompositionEntity> extends CompositionConverter<Patient, C> {
+public abstract class PatientToCompositionConverter<C extends CompositionEntity> extends CompositionConverter<Patient, C> {
 
     @Override
     public C convert(@NonNull Patient resource) {
