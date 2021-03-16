@@ -65,7 +65,6 @@ public class ProcedureCompositionConverter extends CompositionConverter<Procedur
 
         // mandatory ism_transition
 
-        action.setCareflowStepDefiningCode(CareflowStepDefiningCode.PROZEDUR_BEENDET);
         action.setCurrentStateDefiningCode(CurrentStateDefiningCode.COMPLETED);
 
         // mandatory subject
