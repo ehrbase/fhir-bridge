@@ -820,7 +820,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative   loinc    instant    not-ready_bug    not-ready
+	[Tags]             	blood-pressure    valid    alternative   loinc    instant    not-ready_bug    not-ready    194
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_loinc-instant.json
@@ -834,7 +834,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    loinc    period    not-ready_bug    not-ready
+	[Tags]             	blood-pressure    valid    alternative    loinc    period    not-ready_bug    not-ready    194
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_loinc-period.json
@@ -848,7 +848,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    loinc    timing    not-ready_bug    not-ready
+	[Tags]             	blood-pressure    valid    alternative    loinc    timing    not-ready_bug    not-ready    194
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_loinc-timing.json
@@ -862,7 +862,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    snomed    datetime    not-ready_bug    not-ready
+	[Tags]             	blood-pressure    valid    alternative    snomed    datetime    not-ready_bug    not-ready    194
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_snomed-datetime.json
@@ -876,7 +876,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    snomed    instant    not-ready_bug    not-ready
+	[Tags]             	blood-pressure    valid    alternative    snomed    instant    not-ready_bug    not-ready    194
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_snomed-instant.json
@@ -890,7 +890,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    snomed    period    not-ready_bug    not-ready
+	[Tags]             	blood-pressure    valid    alternative    snomed    period    not-ready_bug    not-ready    194
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_snomed-period.json
@@ -904,7 +904,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    snomed    timing    not-ready_bug    not-ready
+	[Tags]             	blood-pressure    valid    alternative    snomed    timing    not-ready_bug    not-ready    194
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_snomed-timing.json
@@ -932,7 +932,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-height    valid    alternative    loinc    period    not-ready_bug    not-ready
+	[Tags]             	body-height    valid    alternative    loinc    period    not-ready_bug    not-ready    193
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-loinc-period.json
@@ -946,7 +946,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-height    valid    alternative    loinc    period_2    not-ready_bug    not-ready
+	[Tags]             	body-height    valid    alternative    loinc    period_2    not-ready_bug    not-ready    193
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-loinc-period_2.json
@@ -960,7 +960,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-height    valid    alternative    snomed    datetime    not-ready_bug    not-ready
+	[Tags]             	body-height    valid    alternative    snomed    datetime    not-ready_bug    not-ready    193
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-snomed-datetime.json
@@ -974,7 +974,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-height    valid    alternative    snomed    period    not-ready_bug    not-ready
+	[Tags]             	body-height    valid    alternative    snomed    period    not-ready_bug    not-ready    193
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-snomed-period.json
@@ -988,7 +988,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-height    valid    alternative    snomed    period_2    not-ready_bug    not-ready
+	[Tags]             	body-height    valid    alternative    snomed    period_2    not-ready_bug    not-ready    193
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-snomed-period_2.json
@@ -1015,7 +1015,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	heart-rate    valid    alternative    period    loinc    not-ready    not-ready_bug
+	[Tags]             	heart-rate    valid    alternative    period    loinc    not-ready    not-ready_bug    212
 
     ehr.create new ehr    000_ehr_status.json
     observation.create heart rate  Heart Rate  create-heart-rate-loinc-period.json
@@ -1029,7 +1029,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	heart-rate    valid    alternative    period_2    loinc    not-ready    not-ready_bug
+	[Tags]             	heart-rate    valid    alternative    period_2    loinc    not-ready    not-ready_bug    212
 
     ehr.create new ehr    000_ehr_status.json
     observation.create heart rate  Heart Rate  create-heart-rate-loinc-period_2.json
@@ -1057,7 +1057,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	heart-rate    valid    alternative    period    snomed    not-ready    not-ready_bug
+	[Tags]             	heart-rate    valid    alternative    period    snomed    not-ready    not-ready_bug    212
 
     ehr.create new ehr    000_ehr_status.json
     observation.create heart rate  Heart Rate  create-heart-rate-loinc-period.json
@@ -1071,7 +1071,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	heart-rate    valid    alternative    period_2    snomed    not-ready    not-ready_bug
+	[Tags]             	heart-rate    valid    alternative    period_2    snomed    not-ready    not-ready_bug    212
 
     ehr.create new ehr    000_ehr_status.json
     observation.create heart rate  Heart Rate  create-heart-rate-loinc-period_2.json
@@ -1099,7 +1099,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-weight    valid    alternative    loinc    period    not-ready    not-ready_bug
+	[Tags]             	body-weight    valid    alternative    loinc    period    not-ready    not-ready_bug    218
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body weight  Body Weight  create-body-weight-loinc-period.json
@@ -1113,7 +1113,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-weight    valid    alternative   loinc    period_2     not-ready    not-ready_bug
+	[Tags]             	body-weight    valid    alternative   loinc    period_2     not-ready    not-ready_bug    218
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body weight  Body Weight  create-body-weight-loinc-period_2.json
@@ -1141,7 +1141,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-weight    valid    alternative    snomed    period    not-ready    not-ready_bug
+	[Tags]             	body-weight    valid    alternative    snomed    period    not-ready    not-ready_bug    218
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body weight  Body Weight  create-body-weight-snomed-period.json
@@ -1155,7 +1155,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-weight    valid    alternative    snomed    period_2    not-ready    not-ready_bug
+	[Tags]             	body-weight    valid    alternative    snomed    period_2    not-ready    not-ready_bug    218
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body weight  Body Weight  create-body-weight-snomed-period_2.json
@@ -1183,7 +1183,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-temperature    valid    alternative    loinc    period    not-ready    not-ready_bug
+	[Tags]             	body-temperature    valid    alternative    loinc    period    not-ready    not-ready_bug    217
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body temperature  Body Temperature  create-body-temp-loinc-period.json
@@ -1197,7 +1197,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-temperature    valid    alternative    loinc    period_2    not-ready    not-ready_bug
+	[Tags]             	body-temperature    valid    alternative    loinc    period_2    not-ready    not-ready_bug    217
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body temperature  Body Temperature  create-body-temp-loinc-period_2.json
@@ -1225,7 +1225,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-temperature    valid    alternative    snomed    period    not-ready    not-ready_bug
+	[Tags]             	body-temperature    valid    alternative    snomed    period    not-ready    not-ready_bug    217
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body temperature  Body Temperature  create-body-temp-snomed-period.json
@@ -1239,7 +1239,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-temperature    valid    alternative    snomed    period_2    not-ready    not-ready_bug
+	[Tags]             	body-temperature    valid    alternative    snomed    period_2    not-ready    not-ready_bug    217
 
     ehr.create new ehr    000_ehr_status.json
     observation.create body temperature  Body Temperature  create-body-temp-snomed-period_2.json
@@ -1435,7 +1435,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]              sofa-score    valid    alternative    value    timing    not-ready    not-ready_bug
+	[Tags]              sofa-score    valid    alternative    value    timing    not-ready    not-ready_bug    269
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create sofa score   Sofa Score  create-sofa-score-value-timing.json
