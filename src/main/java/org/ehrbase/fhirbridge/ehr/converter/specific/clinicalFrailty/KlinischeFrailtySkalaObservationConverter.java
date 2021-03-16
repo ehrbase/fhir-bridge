@@ -2,10 +2,8 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.KlinischeFrailtySkalaCfsObservation;
-import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 
 public class KlinischeFrailtySkalaObservationConverter extends ObservationToObservationConverter<KlinischeFrailtySkalaCfsObservation> {
@@ -22,6 +20,7 @@ public class KlinischeFrailtySkalaObservationConverter extends ObservationToObse
         } catch (Exception e) {
             throw new UnprocessableEntityException(e.getMessage());
         }
-        return klinischeFrailtySkalaCfsObservation;    }
+        return klinischeFrailtySkalaCfsObservation;
+    }
 
 }

@@ -19,8 +19,7 @@ public class BloodGasPanelCompositionConverter extends ObservationToCompositionC
         BefundDerBlutgasanalyseComposition befundDerBlutgasanalyseComposition = new BefundDerBlutgasanalyseComposition();
         befundDerBlutgasanalyseComposition.setStatusDefiningCode(mapStatus(bloodGasPanel));
         befundDerBlutgasanalyseComposition.setKategorieValue(mapKategorie(bloodGasPanel));
-        befundDerBlutgasanalyseComposition.setStartTimeValue(bloodGasPanel.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        befundDerBlutgasanalyseComposition.setLaborergebnis(LaborergebnisBefundConverter.map(bloodGasPanelBundle));
+        befundDerBlutgasanalyseComposition.setLaborergebnis(new LaborergebnisBefundObservationConverter().convert(resource));
         return befundDerBlutgasanalyseComposition;
     }
 

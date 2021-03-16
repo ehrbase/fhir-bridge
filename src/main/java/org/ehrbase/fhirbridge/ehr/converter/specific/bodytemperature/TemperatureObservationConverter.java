@@ -12,8 +12,6 @@ public class TemperatureObservationConverter extends ObservationToObservationCon
     @Override
     protected KoerpertemperaturObservation convertInternal(Observation resource) {
         KoerpertemperaturObservation tempObs = new KoerpertemperaturObservation();
-        //TODO refactor
-        tempObs.setOriginValue(resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
         List<KoerpertemperaturBeliebigesEreignisChoice> events = new ArrayList<>();
         events.add(new KoerpertemperaturBeliebigesEreignisPointEventConverter().convert(resource));
         tempObs.setBeliebigesEreignis(events);

@@ -11,7 +11,6 @@ import java.time.temporal.TemporalAccessor;
 
 public abstract class ObservationToObservationConverter <E extends EntryEntity> extends EntryEntityConverter<Observation, E> {
 
-
     @Override
     public E convert(@NonNull Observation resource) {
         E entryEntity = super.convert(resource);
