@@ -48,6 +48,7 @@ import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.SearchParameter;
 import org.hl7.fhir.r4.model.ValueSet;
+import org.hl7.fhir.r4.model.Encounter;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -217,6 +218,14 @@ public class FhirJpaConfiguration extends BaseR4Config {
     public IFhirResourceDao<QuestionnaireResponse> questionnaireResponseDao() {
         JpaResourceDao<QuestionnaireResponse> resourceDao = new JpaResourceDao<>();
         resourceDao.setResourceType(QuestionnaireResponse.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Encounter> encounterDao() {
+        JpaResourceDao<Encounter> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Encounter.class);
         resourceDao.setContext(fhirContext());
         return resourceDao;
     }

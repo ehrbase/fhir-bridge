@@ -6,6 +6,9 @@ import com.nedap.archie.rm.ehr.EhrStatus;
 import com.nedap.archie.rm.generic.PartySelf;
 import com.nedap.archie.rm.support.identification.GenericId;
 import com.nedap.archie.rm.support.identification.PartyRef;
+import org.ehrbase.client.aql.parameter.ParameterValue;
+import org.ehrbase.client.aql.query.Query;
+import org.ehrbase.client.aql.record.Record1;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.CanonicalType;
@@ -20,6 +23,7 @@ import org.hl7.fhir.r4.model.PrimitiveType;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.Encounter;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -86,9 +90,59 @@ public class Resources {
             subjectIdentifier = ((Procedure) resource).getSubject().getIdentifier();
         } else if (resource instanceof QuestionnaireResponse) {
             subjectIdentifier = getQuestionnaireId((QuestionnaireResponse) resource, openEhrClient, patientIdRepository);
+        } else if (resource instanceof Encounter) {
+            subjectIdentifier = getEncounterIdentifier((Encounter) resource, openEhrClient, patientIdRepository);
         }
 
         return Optional.ofNullable(subjectIdentifier);
+    }
+
+    private static Identifier getEncounterIdentifier(Encounter resource, Optional<OpenEhrClient> openEhrClient, Optional<PatientIdRepository> patientIdRepository) {
+
+        if (openEhrClient.isEmpty()) {
+            throw new InternalErrorException("getSubjectIdentifier by Encounter was called without a configured openEHRClient as parameter. Please add one.");
+        }
+        if (patientIdRepository.isEmpty()) {
+            throw new InternalErrorException("PatientIdRepository is required by Encounter in getSubjectIdentifier()");
+        }
+
+        // @formatter:off
+        Query<Record1<UUID>> query = Query.buildNativeQuery(
+                "SELECT e/ehr_id/value " +
+                        "FROM ehr e " +
+                        "WHERE e/ehr_status/subject/external_ref/id/value = $subject", UUID.class);
+        // @formatter:on
+
+        List<Record1<UUID>> result = openEhrClient.get().aqlEndpoint().execute(query, new ParameterValue<>("subject", resource.getSubject().getIdentifier().getValue()));
+
+        System.out.println("Subject ID from Encounter: " + resource.getSubject().getIdentifier().getValue());
+
+        // create ehr if patient not exist
+        if (result.isEmpty()) {
+            return createEHRWithSubjectID(openEhrClient.get(), patientIdRepository.get(), resource.getSubject().getIdentifier().getValue());
+        } else {
+            return resource.getSubject().getIdentifier();
+        }
+    }
+
+    private static Identifier createEHRWithSubjectID(OpenEhrClient openEhrClient, PatientIdRepository patientIdRepository, String patientID) {
+
+        PartySelf subject = new PartySelf();
+        PartyRef externalRef = new PartyRef();
+        externalRef.setType("PERSON");
+        externalRef.setNamespace("SmICSTests");
+        GenericId genericId = new GenericId();
+        genericId.setScheme("id_scheme");
+        genericId.setValue(patientID);
+        externalRef.setId(genericId);
+        subject.setExternalRef(externalRef);
+        DvText dvText = new DvText("any EHR status");
+        EhrStatus ehrStatus = new EhrStatus("openEHR-EHR-ITEM_TREE.generic.v1", dvText, subject, true, true, null);
+        UUID ehrId = openEhrClient.ehrEndpoint().createEhr(ehrStatus);
+        System.out.println("created EhrID from Encounter: " + ehrId.toString());
+        Identifier identifier = new Identifier();
+        identifier.setValue(genericId.getValue());
+        return identifier;
     }
 
     public static Identifier getQuestionnaireId(QuestionnaireResponse resource, Optional<OpenEhrClient> openEhrClient, Optional<PatientIdRepository> patientIdRepository) {

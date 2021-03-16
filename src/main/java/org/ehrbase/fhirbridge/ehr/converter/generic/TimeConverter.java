@@ -6,6 +6,7 @@ import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.MedicationStatement;
+import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
@@ -142,5 +143,18 @@ public class TimeConverter {
         }
         DateTimeType dateTimeOfDocumentationDt = (DateTimeType) dataTimeOfDocumentationExtension.getValue();
         return dateTimeOfDocumentationDt.getValueAsCalendar().toZonedDateTime();
+    }
+    
+    static TemporalAccessor convertEncounterTime(Encounter encounter) {
+        return OffsetDateTime.from(encounter.getPeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+    }
+
+    static Optional<TemporalAccessor> convertEncounterEndTime(Encounter encounter) {
+
+        if (encounter.getPeriod().hasEndElement()) {
+            return Optional.of(OffsetDateTime.from(encounter.getPeriod().getEndElement().getValueAsCalendar().toZonedDateTime()));
+        } else {
+            return Optional.empty();
+        }
     }
 }
