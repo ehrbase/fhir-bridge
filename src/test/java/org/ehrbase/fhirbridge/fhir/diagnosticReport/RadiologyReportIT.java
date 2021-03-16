@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.fhir.diagnosticReport;
 import ca.uhn.fhir.parser.DataFormatException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.specificconverters.radiologischerBefund.RadiologischerBefundConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;

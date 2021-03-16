@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.specificconverters.historyoftravel.HistoryOfTravelConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KeineReisehistorieEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
