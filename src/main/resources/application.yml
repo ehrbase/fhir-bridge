@@ -1,6 +1,6 @@
 fhir-bridge:
   ehrbase:
-    base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
+    base-url: http://localhost:8091/ehrbase/rest/openehr/v1/
     security:
       type: basic_auth
       username: myuser
@@ -21,6 +21,11 @@ spring:
   batch:
     job:
       enabled: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${keycloak.url}/auth/realms/master/protocol/openid-connect/certs
   jpa:
     hibernate:
       ddl-auto: validate
@@ -65,3 +70,5 @@ logging:
     org.quartz: warn
     org.springframework: warn
     org.springframework.boot: warn
+keycloak:
+  url: http://localhost:8088
