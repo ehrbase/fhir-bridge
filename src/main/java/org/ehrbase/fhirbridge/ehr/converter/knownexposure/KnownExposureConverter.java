@@ -8,9 +8,19 @@ import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.CommonData;
+import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.BildgebendesUntersuchungsergebnisConverter;
+import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
+import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.KategorieDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.SARSCoV2ExpositionComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.StatusDefiningCode;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
+
+import java.util.List;
 
 public class KnownExposureConverter  implements CompositionConverter<SARSCoV2ExpositionComposition, Observation> {
 
@@ -19,15 +29,17 @@ public class KnownExposureConverter  implements CompositionConverter<SARSCoV2Exp
         return null;
     }
 
+    //FHIR-Profile: https://simplifier.net/forschungsnetzcovid-19/knownexposure
+    //Template: https://ckm.highmed.org/ckm/templates/1246.169.1186
+
     @Override
-    public SARSCoV2ExpositionComposition toComposition(Observation object) throws CompositionConversionException {
+    public SARSCoV2ExpositionComposition toComposition(Observation fhirObserv) throws CompositionConversionException {
         SARSCoV2ExpositionComposition composition = new SARSCoV2ExpositionComposition();
 
-        composition = setCompositionDefaults(object, composition);
+        composition = setCompositionDefaults(fhirObserv, composition);
 
-        //mapStatus(composition, object);
-        //mapKategorie(composition, object);
-        //composition.setBildgebendesUntersuchungsergebnis(new BildgebendesUntersuchungsergebnisConverter().map(object));
+        mapStatus(composition, fhirObserv);
+        composition.setSarsCov2Exposition(new SarsCov2ExpositionConverter().map(fhirObserv));
         return composition;
     }
 
@@ -40,6 +52,9 @@ public class KnownExposureConverter  implements CompositionConverter<SARSCoV2Exp
         composition.setLocation("test");
         composition.setTerritory(Territory.DE);
         composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
+
+        composition.setComposer(new PartySelf());
+        composition.setFeederAudit(CommonData.constructFeederAudit(object));
         return (composition);
     }
 
@@ -57,4 +72,6 @@ public class KnownExposureConverter  implements CompositionConverter<SARSCoV2Exp
             throw new UnprocessableEntityException("The status " + obs.getStatus().toString() + " is not valid for known exposure.");
         }
     }
+
+
 }

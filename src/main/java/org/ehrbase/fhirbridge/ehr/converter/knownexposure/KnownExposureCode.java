@@ -1,0 +1,29 @@
+package org.ehrbase.fhirbridge.ehr.converter.knownexposure;
+
+import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.SNOMED;
+
+    public enum KnownExposureCode {
+
+        KNOWN_EXPOSURE(SNOMED.getUrl(), "840546002"),
+        NO_EXPOSURE(SNOMED.getUrl(),"373067005"),
+        UNKNOWN_EXPOSURE(SNOMED.getUrl(), "unknown");
+
+
+        private final String system;
+        private final String code;
+
+        KnownExposureCode(String system, String code) {
+            this.code = code;
+            this.system = system;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getSystem() {
+            return system;
+        }
+    }
+
+}
