@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific;
+package org.ehrbase.fhirbridge.ehr.converter.specific.procedure;
 
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.generic.PartyIdentified;
