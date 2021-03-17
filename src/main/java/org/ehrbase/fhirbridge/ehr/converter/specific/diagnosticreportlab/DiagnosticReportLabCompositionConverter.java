@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific;
+package org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;

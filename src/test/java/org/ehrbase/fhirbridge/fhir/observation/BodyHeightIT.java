@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.specific.BodyHeightCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight.BodyHeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.KoerpergroesseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.definition.GroesseLaengeObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;

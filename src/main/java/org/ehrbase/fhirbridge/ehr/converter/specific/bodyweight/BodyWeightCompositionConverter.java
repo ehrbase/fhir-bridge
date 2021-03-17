@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific;
+package org.ehrbase.fhirbridge.ehr.converter.specific.bodyweight;
 
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
@@ -14,17 +14,7 @@ public class BodyWeightCompositionConverter extends ObservationToCompositionConv
     @Override
     protected KoerpergewichtComposition convertInternal(Observation resource) {
         KoerpergewichtComposition composition = new KoerpergewichtComposition();
-
-        KoerpergewichtObservation observation = new KoerpergewichtObservation();
-        ZonedDateTime startTime = getStartTime(resource);
-        observation.setOriginValue(startTime); // mandatory#
-        observation.setTimeValue(startTime);
-        observation.setGewichtMagnitude(resource.getValueQuantity().getValue().doubleValue());
-        observation.setGewichtUnits(resource.getValueQuantity().getCode());//note that the textual value that openEHR template expects as unit is stored in code for this entity
-        observation.setLanguage(Language.DE);
-        observation.setSubject(new PartySelf());
-
-        composition.setKoerpergewicht(observation);
+        composition.setKoerpergewicht(new KoerpergewichtObservationConverter().convert(resource));
         return composition;
     }
 }

@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific;
+package org.ehrbase.fhirbridge.ehr.converter.specific.coronavirusnachweistest;
 
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;

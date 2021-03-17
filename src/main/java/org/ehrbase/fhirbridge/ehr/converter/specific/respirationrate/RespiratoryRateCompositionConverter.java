@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific;
+package org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate;
 
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
