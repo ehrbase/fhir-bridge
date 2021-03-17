@@ -37,25 +37,25 @@ public class SarsCov2ExpositionConverter {
 
     private void mapExpositionVorhanden(SarsCov2ExpositionEvaluation eval, Observation fhirObserv) {
 
-        //BSa valueCodeableConcept can be not existing -> how to deal with that?
-        Optional<CodeableConcept> valueCodeableConcept;
-        valueCodeableConcept = Optional.ofNullable(fhirObserv.getValueCodeableConcept());
+        try {
+            String code = fhirObserv.getValueCodeableConcept().getCoding().get(0).getCode();
 
-        if (valueCodeableConcept.isPresent()) {
-            return;
+            if (code.equals(KnownExposureCode.KNOWN_EXPOSURE.getCode())) {
+                eval.setExpositionVorhandenDefiningCode(ExpositionVorhandenDefiningCode.EXPOSURE_TO_SEVERE_ACUTE_RESPIRATORY_SYNDROME_CORONAVIRUS2_EVENT);
+            } else if (code.equals(KnownExposureCode.NO_EXPOSURE.getCode())) {
+                eval.setExpositionVorhandenDefiningCode(ExpositionVorhandenDefiningCode.NO_QUALIFIER_VALUE);
+            } else if (code.equals(KnownExposureCode.UNKNOWN_EXPOSURE.getCode())) {
+                eval.setExpositionVorhandenDefiningCode(ExpositionVorhandenDefiningCode.UNKNOWN);
+            } else {
+                throw new UnprocessableEntityException("The SNOMED code " + code + " is not supported for known SarsCov2ExpositionConverter !");
+            }
+
+        }catch(IndexOutOfBoundsException ignore){
+            // ignored
+            //eval.setExpositionVorhandenNullFlavourDefiningCode(NullFlavourDefinition);
         }
 
-        String code = fhirObserv.getValueCodeableConcept().getCoding().get(0).getCode();
 
-        if (code.equals(KnownExposureCode.KNOWN_EXPOSURE.getCode())) {
-            eval.setExpositionVorhandenDefiningCode(ExpositionVorhandenDefiningCode.EXPOSURE_TO_SEVERE_ACUTE_RESPIRATORY_SYNDROME_CORONAVIRUS2_EVENT);
-        } else if (code.equals(KnownExposureCode.NO_EXPOSURE.getCode())) {
-            eval.setExpositionVorhandenDefiningCode(ExpositionVorhandenDefiningCode.NO_QUALIFIER_VALUE);
-        } else if (code.equals(KnownExposureCode.UNKNOWN_EXPOSURE.getCode())) {
-            eval.setExpositionVorhandenDefiningCode(ExpositionVorhandenDefiningCode.UNKNOWN);
-        } else {
-            throw new UnprocessableEntityException("The SNOMED code " + code + " is not supported for known SarsCov2ExpositionConverter !");
-        }
     }
 
 }
