@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 
-import static org.ehrbase.fhirbridge.ehr.converter.specific.convertercodes.CodeSystem.LOINC;
+import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
 
 public enum HistoryOfTravelCode {
 

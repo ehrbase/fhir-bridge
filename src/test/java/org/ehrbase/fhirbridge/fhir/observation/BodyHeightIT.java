@@ -87,7 +87,7 @@ class BodyHeightIT extends AbstractMappingTestSetupIT {
     @Test
     void createInvalidBefund() throws IOException {
         Exception exception = executeMappingException("create-body-height-loinc-datetime_invalid.json");
-        assertEquals("Start time is not defined in resource", exception.getMessage());
+        assertEquals("Start time is not defined in observation", exception.getMessage());
     }
 
 

@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry;
 
-import static org.ehrbase.fhirbridge.ehr.converter.specific.convertercodes.CodeSystem.LOINC;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.convertercodes.CodeSystem.SNOMED;
+import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
+import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.SNOMED;
 
 public enum PulseOxtimetryCode {
 

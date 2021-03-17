@@ -17,7 +17,7 @@ public abstract class QuestionnaireSection {
         this.authored = authored;
     }
 
-    Optional<Object> getValueCode(QuestionnaireResponse.QuestionnaireResponseItemComponent value) {
+    protected Optional<Object> getValueCode(QuestionnaireResponse.QuestionnaireResponseItemComponent value) {
         Optional<Object> code = Optional.empty();
         try {
             code = Optional.of(value.getAnswer().get(0).getValueCoding().getCode());
@@ -31,7 +31,7 @@ public abstract class QuestionnaireSection {
         return Optional.of(LocalDate.parse(value.getAnswer().get(0).getValueDateType().getValueAsString()));
     }
 
-    String getQuestionValueCodeToString(QuestionnaireResponse.QuestionnaireResponseItemComponent question) {
+    protected String getQuestionValueCodeToString(QuestionnaireResponse.QuestionnaireResponseItemComponent question) {
         return getValueCode(question).get().toString();
     }
 
