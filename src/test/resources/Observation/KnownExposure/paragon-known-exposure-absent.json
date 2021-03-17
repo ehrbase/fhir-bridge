@@ -2,14 +2,14 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Reisehistorie"
+    "value" : "SARS-CoV-2 Exposition"
   },
   "archetype_details" : {
     "archetype_id" : {
       "value" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
     },
     "template_id" : {
-      "value" : "Reisehistorie"
+      "value" : "SARS-CoV-2 Exposition"
     },
     "rm_version" : "1.0.4"
   },
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1/_history/1",
+      "id" : "Observation/3/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -29,7 +29,7 @@
     "terminology_id" : {
       "value" : "ISO_639-1"
     },
-    "code_string" : "en"
+    "code_string" : "de"
   },
   "territory" : {
     "terminology_id" : {
@@ -54,7 +54,11 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2020-09-28T00:00:00+02:00"
+      "value" : "2020-10-04T00:00:00+02:00"
+    },
+    "end_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2020-10-04T00:00:00+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -65,13 +69,39 @@
         },
         "code_string" : "232"
       }
+    },
+    "other_context" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Baum"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Status"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "final",
+          "defining_code" : {
+            "terminology_id" : {
+              "value" : "local"
+            },
+            "code_string" : "at0012"
+          }
+        },
+        "archetype_node_id" : "at0004"
+      } ],
+      "archetype_node_id" : "at0001"
     }
   },
   "content" : [ {
-    "_type" : "ADMIN_ENTRY",
+    "_type" : "EVALUATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Reisehistorie"
+      "value" : "SARS-CoV-2 Exposition"
     },
     "language" : {
       "terminology_id" : {
@@ -92,104 +122,70 @@
       "_type" : "ITEM_TREE",
       "name" : {
         "_type" : "DV_TEXT",
-        "value" : "Item tree"
+        "value" : "Tree"
       },
       "items" : [ {
         "_type" : "ELEMENT",
         "name" : {
           "_type" : "DV_TEXT",
-          "value" : "Reise angetreten?"
+          "value" : "Infektionserreger"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "SARS-CoV-2"
+        },
+        "archetype_node_id" : "at0002"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Exposition vorhanden?"
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Yes (qualifier value)",
+          "value" : "No (qualifier value)",
           "defining_code" : {
             "terminology_id" : {
-              "value" : "SNOMED Clinical Terms"
+              "value" : "SNOMED-CT"
             },
-            "code_string" : "373066001"
+            "code_string" : "373067005"
           }
         },
-        "archetype_node_id" : "at0022"
+        "archetype_node_id" : "at0003"
       }, {
         "_type" : "CLUSTER",
         "name" : {
           "_type" : "DV_TEXT",
-          "value" : "Bestimmtes Reiseziel"
+          "value" : "Spezifische Details zur Exposition"
         },
         "items" : [ {
           "_type" : "ELEMENT",
           "name" : {
             "_type" : "DV_TEXT",
-            "value" : "Land"
+            "value" : "Beschreibung der Exposition"
           },
           "value" : {
-            "_type" : "DV_CODED_TEXT",
-            "value" : "Germany",
-            "defining_code" : {
-              "terminology_id" : {
-                "value" : "urn:iso:std:iso:3166"
-              },
-              "code_string" : "DE"
-            }
+            "_type" : "DV_TEXT",
+            "value" : "Kontakt zu COVID-19 erkrankter Person"
           },
-          "archetype_node_id" : "at0011"
+          "archetype_node_id" : "at0006"
         }, {
           "_type" : "ELEMENT",
           "name" : {
             "_type" : "DV_TEXT",
-            "value" : "Bundesland / Region"
-          },
-          "value" : {
-            "_type" : "DV_CODED_TEXT",
-            "value" : "Nordrhein-Westfalen",
-            "defining_code" : {
-              "terminology_id" : {
-                "value" : "urn:iso:std:iso:3166-2:de"
-              },
-              "code_string" : "DE-NW"
-            }
-          },
-          "archetype_node_id" : "at0012"
-        }, {
-          "_type" : "ELEMENT",
-          "name" : {
-            "_type" : "DV_TEXT",
-            "value" : "Stadt"
-          },
-          "value" : {
-            "_type" : "DV_TEXT",
-            "value" : "Essen"
-          },
-          "archetype_node_id" : "at0013"
-        }, {
-          "_type" : "ELEMENT",
-          "name" : {
-            "_type" : "DV_TEXT",
-            "value" : "Einreisedatum"
+            "value" : "Datum/Uhrzeit der Exposition"
           },
           "value" : {
             "_type" : "DV_DATE_TIME",
-            "value" : "2020-09-17T00:00:00+02:00"
+            "value" : "2020-10-04T00:00:00+02:00"
           },
-          "archetype_node_id" : "at0014"
-        }, {
-          "_type" : "ELEMENT",
-          "name" : {
-            "_type" : "DV_TEXT",
-            "value" : "Abfahrtsdatum"
-          },
-          "value" : {
-            "_type" : "DV_DATE_TIME",
-            "value" : "2020-09-19T00:00:00+02:00"
-          },
-          "archetype_node_id" : "at0015"
+          "archetype_node_id" : "at0007"
         } ],
-        "archetype_node_id" : "at0010"
+        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
     },
-    "archetype_node_id" : "openEHR-EHR-ADMIN_ENTRY.travel_event.v0"
+    "archetype_node_id" : "openEHR-EHR-EVALUATION.infectious_exposure.v0"
   } ],
   "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
 }

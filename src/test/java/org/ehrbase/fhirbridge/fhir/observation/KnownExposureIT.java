@@ -28,8 +28,8 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createKnownExposure() throws IOException {
-        create("create-known-exposure-absent.json");
+    void createExposureOutput() throws IOException {
+        create("create-known-exposure-unknown.json");
     }
 
     // #####################################################################################
@@ -58,7 +58,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
     void createInvalidCode() throws IOException {
         // copy of absent, manipulated line 58 to contain invalid snomed code
         Exception exception = executeMappingException("create-known-exposure-invalid.json");
-        assertEquals("The code '666' is unkown.", exception.getMessage());
+        assertEquals("The SNOMED code 666 is not supported for known SarsCov2ExpositionConverter !", exception.getMessage());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
         try{
             super.testFileLoader.loadResource("create-known-exposure-invalid-status.json");
         }catch (DataFormatException dataFormatException){
-            assertEquals("[element=\"status\"] Invalid attribute value \"invalid\": Unknown DiagnosticReportStatus code 'asd'", dataFormatException.getMessage());
+            assertEquals("[element=\"status\"] Invalid attribute value \"invalidTestCode\": Unknown ObservationStatus code 'invalidTestCode'", dataFormatException.getMessage());
         }
     }
 
