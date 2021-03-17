@@ -3,6 +3,8 @@ package org.ehrbase.fhirbridge.fhir;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
+import ca.uhn.fhir.rest.client.api.ServerValidationModeEnum;
+import ca.uhn.fhir.rest.client.interceptor.BearerTokenAuthInterceptor;
 import com.nedap.archie.rm.RMObject;
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.ehr.EhrStatus;
@@ -45,11 +47,15 @@ public abstract class AbstractSetupIT {
     protected final FhirContext context;
 
     protected final IGenericClient client;
+    private static final String BEARER_TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJWN1pCbU9MTFFSWmtDVHFxS2J4djFMNHFTVzFyS280WnJ1eEpKUkFQUjNNIn0.eyJleHAiOjE2MTU5MjEwNzAsImlhdCI6MTYxNTkxNzQ3MCwianRpIjoiNjJkNmY3YmYtMWY4NC00YTZiLWI1MTktMjkwYTUzZmQxNzUxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg4L2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJjMmZlYjU5OS0yMmJmLTQzODgtOGJjOS0xNjYxZWVkN2YyNmEiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJTT0YtdGVzdCIsInNlc3Npb25fc3RhdGUiOiI2MGI5NjcwMS05OWE4LTQ1OWYtYWM5Mi1hYjNhYzBhOGZlN2QiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwYXRpZW50IjoiNTciLCJuYW1lIjoic2VyZWYgc2VyZWYiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJlZiIsImdpdmVuX25hbWUiOiJzZXJlZiIsImZhbWlseV9uYW1lIjoic2VyZWYiLCJlbWFpbCI6InNlcmVmMUB4aW5vLmlvIn0.fYG8FCic24MmG291bh8hLg0FZjLIqUt9kpUXV8-BUs_28YSNFay8CjQkHALw-8L1-uM891NVnDqd6wYtU-1_vGf9Ifm36jhjTvZv7XNNrKmx27aWn3PJ3KpGqoweSJivzPiWul80tOiRrx6gGS-ktg0RZkhdGDplEon91a5W_mo43OJfBGigTQ3_V5puHfW16z0qx-mSmOFRfLLBZwmeK4Frmj310s7W5pQZ3GOtj_u0BUF3jnT9_12vdHjsJi_xlIMdL-Re07RCPqHNBPiIYq-OCMtwc6qzazCGunCee1b-PP8fNe4sdLX1hUPzZ6ys7oek5DkOMKAs5u8mEe98eA";
 
     public AbstractSetupIT() {
         context = FhirContext.forR4();
         context.getRestfulClientFactory().setSocketTimeout(60 * 1000);
         client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge/fhir/");
+
+        BearerTokenAuthInterceptor tokenInterceptor = new BearerTokenAuthInterceptor(BEARER_TOKEN);
+        client.registerInterceptor(tokenInterceptor);
     }
 
     @BeforeAll
@@ -62,7 +68,7 @@ public abstract class AbstractSetupIT {
                 .build();
 
         DefaultRestClient client = new DefaultRestClient(
-                new OpenEhrClientConfig(new URI("http://localhost:8080/ehrbase/rest/openehr/v1/")),
+                new OpenEhrClientConfig(new URI("http://localhost:8091/ehrbase/rest/openehr/v1/")),
                 new ResourceTemplateProvider("classpath:/opt/*.opt"),
                 httpClient);
 
