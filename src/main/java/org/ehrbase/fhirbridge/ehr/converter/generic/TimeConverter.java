@@ -2,12 +2,18 @@ package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
+import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
 
 class TimeConverter {
+
+    static TemporalAccessor convertQuestionnaireResponseTime(QuestionnaireResponse questionnaireResponse){
+        return  OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
+    }
 
     static TemporalAccessor convertObservationTime(Observation observation){
         if (observation.hasEffectiveDateTimeType()) { // EffectiveDateTime

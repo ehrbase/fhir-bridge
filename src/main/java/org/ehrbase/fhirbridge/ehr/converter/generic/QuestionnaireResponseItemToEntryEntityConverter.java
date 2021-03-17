@@ -1,24 +1,30 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections;
+package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.generic.PartySelf;
+import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.ElementConverter;
 import org.hl7.fhir.exceptions.FHIRException;
+import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 import java.time.temporal.TemporalAccessor;
-import java.util.List;
 import java.util.Optional;
 
-public abstract class QuestionnaireSection {
+public abstract class QuestionnaireResponseItemToEntryEntityConverter<E extends EntryEntity> implements ElementConverter<QuestionnaireResponse.QuestionnaireResponseItemComponent, E> {
 
-    protected final Language language;
-
-    public QuestionnaireSection(Language language) {
-        this.language = language;
+    @Override
+    public E convert(@NonNull QuestionnaireResponse.QuestionnaireResponseItemComponent questionnaireResponseItemComponent, Language language) {
+        E entity = convertInternal(questionnaireResponseItemComponent);
+        entity.setLanguage(language);
+        entity.setSubject(new PartySelf());
+        return entity;
     }
 
-    public abstract void map(List<QuestionnaireResponse.QuestionnaireResponseItemComponent> item);
+    protected abstract E convertInternal(QuestionnaireResponse.QuestionnaireResponseItemComponent questionnaireResponseItemComponent);
 
     protected Optional<Object> getValueCode(QuestionnaireResponse.QuestionnaireResponseItemComponent value) {
         Optional<Object> code = Optional.empty();
@@ -30,7 +36,7 @@ public abstract class QuestionnaireSection {
         }
     }
 
-    protected Optional<TemporalAccessor> getValueAsDate(QuestionnaireResponse.QuestionnaireResponseItemComponent value) {
+    Optional<TemporalAccessor> getValueAsDate(QuestionnaireResponse.QuestionnaireResponseItemComponent value) {
         return Optional.of(LocalDate.parse(value.getAnswer().get(0).getValueDateType().getValueAsString()));
     }
 

@@ -10,6 +10,6 @@ import org.springframework.lang.NonNull;
  * @since 1.0.0
  */
 @FunctionalInterface
-public interface Converter<S extends Resource, T> {
+public interface ResourceConverter<S extends Resource, T> {
     T convert(@NonNull S resource);
 }

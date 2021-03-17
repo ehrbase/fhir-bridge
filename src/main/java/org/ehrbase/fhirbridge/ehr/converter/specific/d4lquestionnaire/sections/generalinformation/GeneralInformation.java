@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections;
+package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.generalinformation;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datatypes.CodePhrase;
@@ -6,6 +6,7 @@ import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartySelf;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.QuestionnaireSection;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AelterOderGleich65JahreAltDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AlterObservation;
@@ -52,8 +53,8 @@ public class GeneralInformation extends QuestionnaireSection {
     private Optional<SchwangerschaftsstatusObservation> schwangerschaftsstatusObservationQuestion = Optional.empty();
     private Optional<KontaktAction> contactWithInfectedQuestion = Optional.empty();
 
-    public GeneralInformation(TemporalAccessor authored) {
-        super(authored);
+    public GeneralInformation(Language language) {
+        super(language);
     }
 
 
@@ -67,29 +68,27 @@ public class GeneralInformation extends QuestionnaireSection {
         }
     }
 
-
     private void mapGeneralInformationQuestions(QuestionnaireResponse.QuestionnaireResponseItemComponent question) {
+        AlterObservationConverter alterObservationConverter = new AlterObservationConverter();
         switch (question.getLinkId()) {
             case P0:
-                mapAge(getQuestionValueCodeToString(question));
-                break;
             case P1:
-                mapAgeOver60(getQuestionLoincYesNoToBoolean(question));
+                alterObservationQuestion = Optional.of(alterObservationConverter.convert(question, language));
                 break;
             case P2:
-                mapWohnsituationEvaluation(getQuestionValueCodeToString(question));
+                wohnsituationEvaluationQuestion = Optional.of(new WohnungsEvaluationConverter().convert(question, language));
                 break;
             case P3:
-                mapPrivateCaregiver(getQuestionLoincYesNoToBoolean(question));
+                pflegetatigkeitEvaluationQuestion = Optional.of(new PflegetaetigkeitEvaluationConverter().convert(question, language));
                 break;
             case P4:
-                mapOccupation(getQuestionValueCodeToString(question));
+                zusammenfassungDerBeschaftigungEvaluationQuestion = Optional.of(new ZusammenfassungDerBeschaeftigungEvaluationConverter().convert(question, language));
                 break;
             case P5:
-                mapSmoker(getQuestionLoincYesNoToBoolean(question));
+                zusammenfassungRauchverhaltenEvaluationQuestion = Optional.of(new ZusammenfassungRauchverhaltenEvaluationConverter().convert(question, language));
                 break;
             case P6:
-                mapPregnant(getQuestionValueCodeToString(question));
+                schwangerschaftsstatusObservationQuestion = Optional.of(new SchwangerschaftsstatusObservationConverter().convert(question, language));
                 break;
             default:
                 throw new UnprocessableEntityException("LinkId " + question.getLinkId() + " undefined");
@@ -97,112 +96,6 @@ public class GeneralInformation extends QuestionnaireSection {
         }
     }
 
-    private AlterObservation getAlterObservation(){
-        if(alterObservationQuestion.isEmpty()){
-            AlterObservation alterObservation = new AlterObservation();
-            alterObservation.setLanguage(Language.DE);
-            alterObservation.setSubject(new PartySelf());
-            alterObservation.setTimeValue(super.authored);
-            alterObservation.setOriginValue(super.authored);
-            return alterObservation;
-        }else{
-            return alterObservationQuestion.get();
-        }
-    }
-
-    private void mapAgeOver60(Boolean over60) {
-        AlterObservation alterObservation = getAlterObservation();
-        if (over60) {
-            alterObservation.setAelterOderGleich65JahreAltDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
-        } else {
-            alterObservation.setAelterOderGleich65JahreAltDefiningCode(AelterOderGleich65JahreAltDefiningCode.NEIN);
-        }
-    }
-
-    protected void mapAge(String age) {
-        AlterObservation alterObservation = getAlterObservation();
-        if (age.equals(AltersklasseDefiningCode.JUENGER_ALS40.getCode())) {
-            alterObservation.setAltersklasseDefiningCode(AltersklasseDefiningCode.JUENGER_ALS40);
-        } else if (age.equals(AltersklasseDefiningCode.N6170.getCode())) {
-            alterObservation.setAltersklasseDefiningCode(AltersklasseDefiningCode.N6170);
-        } else if (age.equals(AltersklasseDefiningCode.UEBER80.getCode())) {
-            alterObservation.setAltersklasseDefiningCode(AltersklasseDefiningCode.UEBER80);
-        } else if (age.equals(AltersklasseDefiningCode.N7180.getCode())) {
-            alterObservation.setAltersklasseDefiningCode(AltersklasseDefiningCode.N7180);
-        } else if (age.equals(AltersklasseDefiningCode.N4050.getCode())) {
-            alterObservation.setAltersklasseDefiningCode(AltersklasseDefiningCode.N4050);
-        } else if (age.equals(AltersklasseDefiningCode.N5160.getCode())) {
-            alterObservation.setAltersklasseDefiningCode(AltersklasseDefiningCode.N5160);
-        } else if (!age.equals("")) {
-            throw new UnprocessableEntityException("The code for age:" + age + " cannot be mapped, plese enter a valid code e.g. 61-70");
-        }
-        alterObservationQuestion = Optional.of(alterObservation);
-    }
-
-    protected void mapWohnsituationEvaluation(String housingSituation) {
-        WohnsituationEvaluation wohnsituationEvaluation = new WohnsituationEvaluation();
-        if (housingSituation.equals(WohnsituationDefiningCode.WOHNT_MIT_ANDEREN_ZUSAMMEN.getCode())) {
-            wohnsituationEvaluation.setWohnsituationDefiningCode(WohnsituationDefiningCode.WOHNT_MIT_ANDEREN_ZUSAMMEN);
-        } else if (housingSituation.equals(WohnsituationDefiningCode.ALLEIN_WOHNEND.getCode())) {
-            wohnsituationEvaluation.setWohnsituationDefiningCode(WohnsituationDefiningCode.ALLEIN_WOHNEND);
-        } else if (!housingSituation.equals("")) {
-            throw new UnprocessableEntityException("The code for Wohnungsituation:" + housingSituation + " cannot be mapped, please enter a valid code e.g. Wohnt mit anderen zusammen (LOINC: LA9996-5)");
-        }
-        wohnsituationEvaluation.setLanguage(Language.DE);
-        wohnsituationEvaluation.setSubject(new PartySelf());
-
-        wohnsituationEvaluationQuestion = Optional.of(wohnsituationEvaluation);
-    }
-
-    protected void mapPrivateCaregiver(Boolean isPrivateCaregiver) {
-        PflegetaetigkeitEvaluation pflegetatigkeitEvaluation = getPflegetatigkeitEvaluation();
-        pflegetatigkeitEvaluation.setPrivatValue(isPrivateCaregiver);
-        pflegetatigkeitEvaluationQuestion = Optional.of(pflegetatigkeitEvaluation);
-    }
-
-
-    protected void mapOccupation(String occupationClass) {
-        ZusammenfassungDerBeschaeftigungEvaluation zusammenfassungDerBeschaftigungEvaluation = new ZusammenfassungDerBeschaeftigungEvaluation();
-        zusammenfassungDerBeschaftigungEvaluation.setLanguage(Language.DE);
-        zusammenfassungDerBeschaftigungEvaluation.setSubject(new PartySelf());
-        BeschaeftigungCluster beschaftigungCluster = new BeschaeftigungCluster();
-        switch (occupationClass) {
-            case "community":
-                beschaftigungCluster.setBerufsbereichDefiningCode(BerufsbereichDefiningCode.GEMEINSCHAFTSEINRICHTUNG_SCHULE_KITA_UNIVERSITAET_HEIM_ETC);
-                break;
-            case "medical":
-                beschaftigungCluster.setBerufsbereichDefiningCode(BerufsbereichDefiningCode.MEDIZINISCHEN_BEREICH_PFLEGE_ARZTPRAXIS_ODER_KRANKENHAUS);
-                break;
-            case "LA46-8":
-                beschaftigungCluster.setBerufsbereichDefiningCode(BerufsbereichDefiningCode.SONSTIGES);
-                break;
-            default:
-                throw new UnprocessableEntityException();
-        }
-
-        zusammenfassungDerBeschaftigungEvaluation.setBeschaeftigung(beschaftigungCluster);
-        zusammenfassungDerBeschaftigungEvaluationQuestion = Optional.of(zusammenfassungDerBeschaftigungEvaluation);
-
-    }
-
-    private PflegetaetigkeitEvaluation getPflegetatigkeitEvaluation() {
-        return pflegetatigkeitEvaluationQuestion.orElseGet(this::createPflegetatigkeitEvaluation);
-    }
-
-    protected PflegetaetigkeitEvaluation createPflegetatigkeitEvaluation() {
-        PflegetaetigkeitEvaluation pflegetatigkeitEvaluation = new PflegetaetigkeitEvaluation();
-        pflegetatigkeitEvaluation.setLanguage(Language.DE);
-        pflegetatigkeitEvaluation.setSubject(new PartySelf());
-
-        pflegetatigkeitEvaluation.setAnzahlDerGepflegtenPersonenValue("Mindestens eine Person");
-        pflegetatigkeitEvaluation.setFrequenzDerPflegeValue("Mindestens einmal die Woche");
-
-        PflegetaetigkeitGrundFuerDieTaetigkeitElement pflegetatigkeitGrundFurDieTatigkeitElement = new PflegetaetigkeitGrundFuerDieTaetigkeitElement();
-        pflegetatigkeitGrundFurDieTatigkeitElement.setValue("alterbedingten Beschwerden, chronischen Erkrankungen oder Gebrechlichkeit");
-
-        pflegetatigkeitEvaluation.setGrundFuerDieTaetigkeit(List.of(pflegetatigkeitGrundFurDieTatigkeitElement));
-        return pflegetatigkeitEvaluation;
-    }
 
     private void checkPflegetatigkeitAusschluss() {
         if (pflegetatigkeitEvaluationQuestion.isPresent()) {
@@ -226,18 +119,6 @@ public class GeneralInformation extends QuestionnaireSection {
     }
 
 
-    protected void mapSmoker(Boolean isSmoker) {
-        ZusammenfassungRauchverhaltenEvaluation zusammenfassungRauchverhaltenEvaluation = new ZusammenfassungRauchverhaltenEvaluation();
-        zusammenfassungRauchverhaltenEvaluation.setLanguage(Language.DE);
-        zusammenfassungRauchverhaltenEvaluation.setSubject(new PartySelf());
-        if (isSmoker) {
-            zusammenfassungRauchverhaltenEvaluation.setRaucherDefiningCode(RaucherDefiningCode.JA);
-        } else {
-            zusammenfassungRauchverhaltenEvaluation.setRaucherDefiningCode(RaucherDefiningCode.NEIN);
-        }
-        zusammenfassungRauchverhaltenEvaluationQuestion = Optional.of(zusammenfassungRauchverhaltenEvaluation);
-    }
-
     private StatusDefiningCode pregnantLoincToStatusCode(String pregnantCode) {
         switch (pregnantCode) {
             case "LA15173-0":
@@ -249,16 +130,6 @@ public class GeneralInformation extends QuestionnaireSection {
             default:
                 throw new UnprocessableEntityException("The code for Pregnancy:" + pregnantCode + " cannot be mapped, please enter a valid code e.g. pregnant (LA15173-0), not pregnant (LA26683-5) or unknown(LA4489-6) )");
         }
-    }
-
-    protected void mapPregnant(String pregnantLoincCode) {
-        SchwangerschaftsstatusObservation stillzeitEvaluation = new SchwangerschaftsstatusObservation();
-        stillzeitEvaluation.setStatusDefiningCode(pregnantLoincToStatusCode(pregnantLoincCode));
-        stillzeitEvaluation.setLanguage(Language.DE);
-        stillzeitEvaluation.setSubject(new PartySelf());
-        stillzeitEvaluation.setOriginValue(this.authored);
-        stillzeitEvaluation.setTimeValue(this.authored);
-        schwangerschaftsstatusObservationQuestion = Optional.of(stillzeitEvaluation);
     }
 
 
