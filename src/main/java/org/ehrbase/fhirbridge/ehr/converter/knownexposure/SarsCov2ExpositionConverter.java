@@ -16,11 +16,10 @@ import org.hl7.fhir.r4.model.Observation;
 import java.util.List;
 
 public class SarsCov2ExpositionConverter {
-    
+
     public SarsCov2ExpositionEvaluation  map(Observation fhirObserv) {
         SarsCov2ExpositionEvaluation eval = new SarsCov2ExpositionEvaluation();
 
-        //? Wieso habe ich kein Time hier? braucht evaluation das nicht?
         eval.setLanguage(Language.DE);
         eval.setSubject(new PartySelf());
 
@@ -32,18 +31,12 @@ public class SarsCov2ExpositionConverter {
     }
 
     private void mapSpezifischeDetailsZurExposition(SarsCov2ExpositionEvaluation eval, Observation fhirObserv) {
-        eval.setBeschreibungDerExpositionValue();
-        eval.setDatumUhrzeitDerExpositionValue();
+        eval.setBeschreibungDerExpositionValue("Kontakt zu COVID-19 erkrankter Person");
+        eval.setDatumUhrzeitDerExpositionValue(fhirObserv.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
     }
 
     private void mapInfektionserreger(SarsCov2ExpositionEvaluation eval, Observation fhirObserv) {
-        //? Woher kenne ich genau den Pfad in Fhir? Der ist so "generisch" beschrieben -> ich debugge und hole mir den code, aber wo ist string?
-        String code = fhirObserv.
-        if(coding.get(0).getCode().equals("???")){
-            eval.setInfektionserregerValue(String);
-        }else{
-            throw new UnprocessableEntityException("The Loinc code "+code()+" is not supported for SarsCov2ExpositionConverter !");
-        }
+            eval.setInfektionserregerValue("SARS-CoV-2");
     }
 
     private void mapExpositionVorhanden(SarsCov2ExpositionEvaluation eval, Observation fhirObserv) {
