@@ -32,6 +32,11 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
         create("create-known-exposure-unknown.json");
     }
 
+    @Test
+    void createExposureOutputSuccess() throws IOException {
+        create("create-known-exposure-present.json");
+    }
+
     // #####################################################################################
     // check payload
     @Test

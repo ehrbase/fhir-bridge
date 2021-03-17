@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/3/_history/1",
+      "id" : "Observation/1/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -135,23 +135,6 @@
           "value" : "SARS-CoV-2"
         },
         "archetype_node_id" : "at0002"
-      }, {
-        "_type" : "ELEMENT",
-        "name" : {
-          "_type" : "DV_TEXT",
-          "value" : "Exposition vorhanden?"
-        },
-        "value" : {
-          "_type" : "DV_CODED_TEXT",
-          "value" : "No (qualifier value)",
-          "defining_code" : {
-            "terminology_id" : {
-              "value" : "SNOMED-CT"
-            },
-            "code_string" : "373067005"
-          }
-        },
-        "archetype_node_id" : "at0003"
       }, {
         "_type" : "CLUSTER",
         "name" : {
