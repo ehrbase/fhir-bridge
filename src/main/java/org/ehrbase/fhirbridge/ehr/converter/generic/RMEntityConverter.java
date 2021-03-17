@@ -19,7 +19,7 @@ package org.ehrbase.fhirbridge.ehr.converter.generic;
 import org.apache.commons.lang3.StringUtils;
 import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.Converter;
+import org.ehrbase.fhirbridge.ehr.converter.ResourceConverter;
 import org.hl7.fhir.r4.model.Resource;
 import org.springframework.lang.NonNull;
 
@@ -29,7 +29,7 @@ import org.springframework.lang.NonNull;
  * @since 1.0.0
  */
 @FunctionalInterface
-public interface RMEntityConverter<S extends Resource, T extends RMEntity> extends Converter<S, T> {
+public interface RMEntityConverter<S extends Resource, T extends RMEntity> extends ResourceConverter<S, T> {
 
     Language DEFAULT_LANGUAGE = Language.DE;
 

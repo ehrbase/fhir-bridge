@@ -1,8 +1,9 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections;
+package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.medication;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.QuestionnaireSection;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AelterOderGleich65JahreAltDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ImmunsstatusDefiningCode;
@@ -27,7 +28,7 @@ public class Medication extends QuestionnaireSection {
     private Optional<ImmunsuppressivaEvaluation> immunsuppressivaEvaluationQuestion = Optional.empty();
     private Optional<KortisionEvaluation> kortisonEvaluationQuestion = Optional.empty();
 
-    public Medication(TemporalAccessor authored) {
+    public Medication(Language authored) {
         super(authored);
     }
 

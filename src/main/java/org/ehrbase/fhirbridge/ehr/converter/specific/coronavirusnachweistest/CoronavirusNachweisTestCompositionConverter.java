@@ -19,48 +19,8 @@ public class CoronavirusNachweisTestCompositionConverter extends ObservationToCo
 
     @Override
     public KennzeichnungErregernachweisSARSCoV2Composition convertInternal(@NonNull Observation resource) {
-
         KennzeichnungErregernachweisSARSCoV2Composition composition = new KennzeichnungErregernachweisSARSCoV2Composition();
-        List<String> positiveResultLoincCodes = Arrays.asList(
-                "33972-1",
-                "33968-9",
-                "33970-5",
-                "33966-3",
-                "33967-1",
-                "33975-4",
-                "33965-5",
-                "33964-8",
-                "41459-9",
-                "42956-3",
-                "41991-1",
-                "60275-5",
-                "60534-5",
-                "41458-1",
-                "94532-9"
-        );
-
-        // ========================================================================================
-        DateTimeType fhirEffectiveDateTime = resource.getEffectiveDateTimeType();
-        String fhirValue = resource.getCode().getCoding().get(0).getDisplay(); // FIXME: the code and value should be assigned to the pathogen name node in the Compo, but the template binds just one specific value there (hardcoded)
-        String fhirCode = resource.getCode().getCoding().get(0).getCode();
-        String fhirTerminology = resource.getCode().getCoding().get(0).getSystem();
-        KennzeichnungErregernachweisEvaluation evaluation = new KennzeichnungErregernachweisEvaluation();
-        evaluation.setLanguage(Language.DE);
-        evaluation.setSubject(new PartySelf());
-        evaluation.setZuletztAktualisiertValue(OffsetDateTime.now());
-        evaluation.setZeitpunktDerKennzeichnungValue(fhirEffectiveDateTime.getValueAsCalendar().toZonedDateTime());
-
-        boolean pathogenDetection = positiveResultLoincCodes.contains(fhirCode);
-        evaluation.setErregernachweisValue(pathogenDetection); // FIXME: this needs to come from positive or negative result code from FHIR, I didn't validate the list of positive result codes.
-
-        evaluation.setErregernachweisInDerKlinikValue(false); // FIXME: FHIR don't have enough data to know if the pathogen was detected in the clinic.
-
-        // FIXME: Can't map with the code from FHIR since the code in the openEHR template is fixed
-        ErregernameDefiningCode code = ErregernameDefiningCode.SARS_COV2; //new ErregernameDefiningcode(fhirValue, null, fhirTerminology, fhirCode);
-        evaluation.setErregernameDefiningCode(code);
-
-        composition.setKennzeichnungErregernachweis(evaluation);
-
+        composition.setKennzeichnungErregernachweis(new KennzeichnungErregernachweisEvaluationConverter().convert(resource));
         return composition;
     }
 }

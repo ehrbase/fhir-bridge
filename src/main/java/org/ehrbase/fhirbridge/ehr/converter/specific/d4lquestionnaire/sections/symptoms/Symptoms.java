@@ -1,8 +1,9 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections;
+package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.symptoms;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.QuestionnaireSection;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.FieberInDenLetzten24StundenCluster;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.FieberInDenLetzten4TagenCluster;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ProblemDiagnoseEvaluation;
@@ -43,8 +44,8 @@ public class Symptoms extends QuestionnaireSection {
 
     private Optional<ProblemDiagnoseEvaluation> problemDiagnoseEvaluationQuestion = Optional.empty();
 
-    public Symptoms(TemporalAccessor authored) {
-        super(authored);
+    public Symptoms(Language language) {
+        super(language);
     }
 
     @Override
