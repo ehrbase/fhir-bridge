@@ -9,18 +9,9 @@ import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.CommonData;
-import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.BildgebendesUntersuchungsergebnisConverter;
-import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.KategorieDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.SARSCoV2ExpositionComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.StatusDefiningCode;
-import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
-
-import java.util.List;
 
 public class KnownExposureConverter  implements CompositionConverter<SARSCoV2ExpositionComposition, Observation> {
 
@@ -36,14 +27,14 @@ public class KnownExposureConverter  implements CompositionConverter<SARSCoV2Exp
     public SARSCoV2ExpositionComposition toComposition(Observation fhirObserv) throws CompositionConversionException {
         SARSCoV2ExpositionComposition composition = new SARSCoV2ExpositionComposition();
 
-        composition = setCompositionDefaults(fhirObserv, composition);
+        setCompositionDefaults(fhirObserv, composition);
 
         mapStatus(composition, fhirObserv);
         composition.setSarsCov2Exposition(new SarsCov2ExpositionConverter().map(fhirObserv));
         return composition;
     }
 
-    private SARSCoV2ExpositionComposition setCompositionDefaults(Observation object, SARSCoV2ExpositionComposition composition) {
+    private void setCompositionDefaults(Observation object, SARSCoV2ExpositionComposition composition) {
         composition.setLanguage(Language.DE);
         composition.setCategoryDefiningCode(Category.EVENT);
         composition.setComposer(new PartySelf());
@@ -52,10 +43,7 @@ public class KnownExposureConverter  implements CompositionConverter<SARSCoV2Exp
         composition.setLocation("test");
         composition.setTerritory(Territory.DE);
         composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-
-        composition.setComposer(new PartySelf());
         composition.setFeederAudit(CommonData.constructFeederAudit(object));
-        return (composition);
     }
 
     private void mapStatus(SARSCoV2ExpositionComposition composition, Observation obs) {
@@ -72,6 +60,4 @@ public class KnownExposureConverter  implements CompositionConverter<SARSCoV2Exp
             throw new UnprocessableEntityException("The status " + obs.getStatus().toString() + " is not valid for known exposure.");
         }
     }
-
-
 }
