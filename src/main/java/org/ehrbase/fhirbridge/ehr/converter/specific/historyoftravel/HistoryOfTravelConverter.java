@@ -18,8 +18,6 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.Unbeka
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 
 import java.time.temporal.TemporalAccessor;
@@ -27,8 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.ehrbase.fhirbridge.ehr.converter.specific.convertercodes.CodeSystem.LOINC;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.convertercodes.CodeSystem.SNOMED;
+import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
+import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.SNOMED;
 import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL;
 import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL;
 import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION;

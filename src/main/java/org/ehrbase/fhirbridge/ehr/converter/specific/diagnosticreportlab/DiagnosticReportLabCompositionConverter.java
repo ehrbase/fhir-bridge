@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-import static org.ehrbase.fhirbridge.ehr.converter.specific.convertercodes.CodeSystem.LOINC;
+import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
 
 public class DiagnosticReportLabCompositionConverter extends CompositionConverter<DiagnosticReport, GECCOLaborbefundComposition> {
 

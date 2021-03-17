@@ -5,12 +5,8 @@ import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
-
-import java.time.ZonedDateTime;
-import java.util.Optional;
 
 /**
  * @param <C> openEHR Composition type
@@ -23,39 +19,13 @@ public abstract class ObservationToCompositionConverter<C extends CompositionEnt
         C composition = super.convert(resource);
 
         // Mandatory
-        composition.setStartTimeValue(getStartTime(resource)); // StartTimeValue
+        composition.setStartTimeValue(TimeConverter.convertObservationTime(resource)); // StartTimeValue
         composition.setComposer(getComposerOrDefault(resource)); // Composer
 
         // Optional
-        getEndTime(resource).ifPresent(composition::setEndTimeValue); // EndTimeValue
+        TimeConverter.convertObservationEndTime(resource).ifPresent(composition::setEndTimeValue); // EndTimeValue
 
         return composition;
-    }
-
-    protected ZonedDateTime getStartTime(Observation resource) {
-        if (resource.hasEffectiveDateTimeType()) { // EffectiveDateTime
-            return resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
-        } else if (resource.hasEffectivePeriod() && resource.getEffectivePeriod().hasStart()) { // EffectivePeriod
-            return resource.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
-        } else if (resource.hasEffectiveTiming()) { // EffectiveTiming
-            return resource.getEffectiveTiming().getEvent()
-                    .stream()
-                    .map(dateTime -> dateTime.getValueAsCalendar().toZonedDateTime())
-                    .findFirst()
-                    .orElse(ZonedDateTime.now());
-        } else if (resource.hasEffectiveInstantType()) { // EffectiveInstant
-            return resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
-        } else {
-            throw new ConversionException("Start time is not defined in resource");
-        }
-    }
-
-    protected Optional<ZonedDateTime> getEndTime(Observation resource) {
-        if (resource.hasEffectivePeriod() && resource.getEffectivePeriod().hasEnd()) { // EffectivePeriod
-            return Optional.of(resource.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
-        } else {
-            return Optional.empty();
-        }
     }
 
     protected PartyProxy getComposerOrDefault(Observation resource) {

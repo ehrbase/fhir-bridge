@@ -13,19 +13,8 @@ public class RespiratoryRateCompositionConverter extends ObservationToCompositio
 
     @Override
     public AtemfrequenzComposition convertInternal(@NonNull Observation resource) {
-        //create result and observation objects
         AtemfrequenzComposition composition = new AtemfrequenzComposition();
-        //map values of interest from FHIR observation
-        ZonedDateTime effectiveDateTime = getStartTime(resource);
-        AtemfrequenzObservation observation = new AtemfrequenzObservation();
-        observation.setOriginValue(effectiveDateTime); // mandatory#
-        observation.setMesswertMagnitude(resource.getValueQuantity().getValue().doubleValue());
-        observation.setMesswertUnits(resource.getValueQuantity().getCode());//note that the textual value that openEHR template expects as unit is stored in code for this entity
-        observation.setTimeValue(effectiveDateTime);
-        observation.setLanguage(resolveLanguageOrDefault(resource));
-        observation.setSubject(new PartySelf());
-        composition.setAtemfrequenz(observation);
-
+        composition.setAtemfrequenz(new AtemfrequenzObservationConverter().convert(resource));
         return composition;
     }
 }

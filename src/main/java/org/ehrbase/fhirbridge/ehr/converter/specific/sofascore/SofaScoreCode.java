@@ -4,7 +4,7 @@ import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import com.nedap.archie.rm.support.identification.TerminologyId;
-import org.ehrbase.fhirbridge.ehr.converter.specific.convertercodes.TerminologyIdCode;
+import org.ehrbase.fhirbridge.ehr.converter.specific.TerminologyIdCode;
 
 public enum SofaScoreCode {
 

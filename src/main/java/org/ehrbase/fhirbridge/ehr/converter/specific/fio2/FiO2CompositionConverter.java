@@ -17,23 +17,7 @@ public class FiO2CompositionConverter extends ObservationToCompositionConverter<
     @Override
     public BeatmungswerteComposition convertInternal(@NonNull Observation resource) {
         BeatmungswerteComposition composition = new BeatmungswerteComposition();
-
-        BeobachtungenAmBeatmungsgeraetObservation observation = new BeobachtungenAmBeatmungsgeraetObservation();
-        EingeatmeterSauerstoffCluster eingeatmeterSauerstoff = new EingeatmeterSauerstoffCluster();
-        DvProportion inspiratorischeSauerstofffraktion = new DvProportion();
-
-        ZonedDateTime effectiveDateTime = getStartTime(resource);
-
-        observation.setOriginValue(effectiveDateTime); // mandatory
-        observation.setTimeValue(effectiveDateTime);
-        observation.setLanguage(Language.DE);
-        observation.setSubject(new PartySelf());
-        inspiratorischeSauerstofffraktion.setNumerator(resource.getValueQuantity().getValue().doubleValue());
-        inspiratorischeSauerstofffraktion.setDenominator(100.0);
-        inspiratorischeSauerstofffraktion.setType((long) 2);//2=percent (https://specifications.openehr.org/releases/RM/latest/data_types.html#_proportion_kind_class)
-        eingeatmeterSauerstoff.setInspiratorischeSauerstofffraktion(inspiratorischeSauerstofffraktion);
-        observation.setEingeatmeterSauerstoff(eingeatmeterSauerstoff);
-        composition.setBeobachtungenAmBeatmungsgeraet(observation);
+        composition.setBeobachtungenAmBeatmungsgeraet(new BeobachtungenAmBeatmungsgeraetObservationConverter().convert(resource));
         return composition;
     }
 }
