@@ -1,15 +1,13 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.generalinformation;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.ehr.converter.generic.QuestionnaireResponseItemToEntryEntityConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.QuestionnaireResponseItemToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AelterOderGleich65JahreAltDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AlterObservation;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AltersklasseDefiningCode;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
-import java.util.Optional;
-
-public class AlterObservationConverter extends QuestionnaireResponseItemToEntryEntityConverter<AlterObservation> {
+public class AlterObservationConverter extends QuestionnaireResponseItemToObservationConverter<AlterObservation> {
     AlterObservation alterObservation = new AlterObservation();
 
     @Override

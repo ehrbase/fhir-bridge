@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.temporal.TemporalAccessor;
 
-public abstract class ObservationToObservationConverter<E extends EntryEntity> extends EntryEntityConverter<Observation, E> {
+public abstract class ObservationToObservationConverter<E extends EntryEntity> extends EntryEntityConverter<Observation, E>  {
 
     @Override
     public E convert(@NonNull Observation resource) {
@@ -17,12 +17,12 @@ public abstract class ObservationToObservationConverter<E extends EntryEntity> e
         return entryEntity;
     }
 
-    protected void invokeTimeValues(E entryEntity, Observation resource) {
+     public void invokeTimeValues(E entryEntity, Observation resource) {
         invokeOriginValue(entryEntity, resource);
         invokeSetTimeValue(entryEntity, resource);
     }
 
-    protected void invokeSetTimeValue(E entryEntity, Observation resource){
+     public void invokeSetTimeValue(E entryEntity, Observation resource){
         try {
             Method setOriginValue = entryEntity.getClass().getMethod("setOriginValue", TemporalAccessor.class);
             setOriginValue.invoke(entryEntity, TimeConverter.convertObservationTime(resource));
@@ -33,7 +33,7 @@ public abstract class ObservationToObservationConverter<E extends EntryEntity> e
         }
     }
 
-    protected void invokeOriginValue(E entryEntity, Observation resource){
+     public void invokeOriginValue(E entryEntity, Observation resource){
         try {
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, TimeConverter.convertObservationTime(resource));
@@ -43,4 +43,5 @@ public abstract class ObservationToObservationConverter<E extends EntryEntity> e
             //ignored
         }
     }
+
 }

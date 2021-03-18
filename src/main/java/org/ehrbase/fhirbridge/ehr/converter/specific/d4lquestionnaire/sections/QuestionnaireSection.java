@@ -13,9 +13,11 @@ import java.util.Optional;
 public abstract class QuestionnaireSection {
 
     protected final Language language;
+    protected final TemporalAccessor authored;
 
-    public QuestionnaireSection(Language language) {
+    public QuestionnaireSection(Language language, TemporalAccessor authored) {
         this.language = language;
+        this.authored = authored;
     }
 
     public abstract void map(List<QuestionnaireResponse.QuestionnaireResponseItemComponent> item);

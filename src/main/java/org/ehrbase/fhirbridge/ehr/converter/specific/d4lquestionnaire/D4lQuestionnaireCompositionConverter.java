@@ -31,10 +31,10 @@ public class D4lQuestionnaireCompositionConverter extends QuestionnaireResponseT
     }
 
     private void initialiseSections(D4LQuestionnaireComposition d4LQuestionnaireComposition) {
-        this.generalInformation = new GeneralInformation(d4LQuestionnaireComposition.getLanguage());
-        this.symptoms = new Symptoms(d4LQuestionnaireComposition.getLanguage());
-        this.anamnesis = new Anamnesis(d4LQuestionnaireComposition.getLanguage());
-        this.medication = new Medication(d4LQuestionnaireComposition.getLanguage());
+        this.generalInformation = new GeneralInformation(d4LQuestionnaireComposition.getLanguage(), d4LQuestionnaireComposition.getStartTimeValue());
+        this.symptoms = new Symptoms(d4LQuestionnaireComposition.getLanguage(), d4LQuestionnaireComposition.getStartTimeValue());
+        this.anamnesis = new Anamnesis(d4LQuestionnaireComposition.getLanguage(), d4LQuestionnaireComposition.getStartTimeValue());
+        this.medication = new Medication(d4LQuestionnaireComposition.getLanguage(), d4LQuestionnaireComposition.getStartTimeValue());
     }
 
     private void mapSections(QuestionnaireResponse questionnaireResponse) {

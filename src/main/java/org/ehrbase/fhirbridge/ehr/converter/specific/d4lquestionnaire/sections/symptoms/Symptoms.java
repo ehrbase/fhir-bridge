@@ -44,8 +44,8 @@ public class Symptoms extends QuestionnaireSection {
 
     private Optional<ProblemDiagnoseEvaluation> problemDiagnoseEvaluationQuestion = Optional.empty();
 
-    public Symptoms(Language language) {
-        super(language);
+    public Symptoms(Language language, TemporalAccessor startTimeValue) {
+        super(language, startTimeValue);
     }
 
     @Override

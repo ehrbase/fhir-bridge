@@ -17,7 +17,7 @@ import java.util.Optional;
 public abstract class QuestionnaireResponseItemToEntryEntityConverter<E extends EntryEntity> implements ElementConverter<QuestionnaireResponse.QuestionnaireResponseItemComponent, E> {
 
     @Override
-    public E convert(@NonNull QuestionnaireResponse.QuestionnaireResponseItemComponent questionnaireResponseItemComponent, Language language) {
+    public E convert(@NonNull QuestionnaireResponse.QuestionnaireResponseItemComponent questionnaireResponseItemComponent, Language language, TemporalAccessor temporalAccessor) {
         E entity = convertInternal(questionnaireResponseItemComponent);
         entity.setLanguage(language);
         entity.setSubject(new PartySelf());
@@ -36,7 +36,7 @@ public abstract class QuestionnaireResponseItemToEntryEntityConverter<E extends 
         }
     }
 
-    Optional<TemporalAccessor> getValueAsDate(QuestionnaireResponse.QuestionnaireResponseItemComponent value) {
+    protected Optional<TemporalAccessor> getValueAsDate(QuestionnaireResponse.QuestionnaireResponseItemComponent value) {
         return Optional.of(LocalDate.parse(value.getAnswer().get(0).getValueDateType().getValueAsString()));
     }
 
