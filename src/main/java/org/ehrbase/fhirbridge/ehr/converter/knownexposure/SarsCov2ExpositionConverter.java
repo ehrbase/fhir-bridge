@@ -15,7 +15,7 @@ public class SarsCov2ExpositionConverter {
         eval.setLanguage(Language.DE);
         eval.setSubject(new PartySelf());
 
-        mapInfektionserreger(eval, fhirObserv);
+        mapInfektionserreger(eval);
         mapExpositionVorhanden(eval, fhirObserv);
         mapSpezifischeDetailsZurExposition(eval, fhirObserv);
 
@@ -27,15 +27,15 @@ public class SarsCov2ExpositionConverter {
         eval.setDatumUhrzeitDerExpositionValue(fhirObserv.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
     }
 
-    private void mapInfektionserreger(SarsCov2ExpositionEvaluation eval, Observation fhirObserv) {
+    private void mapInfektionserreger(SarsCov2ExpositionEvaluation eval) {
         eval.setInfektionserregerValue("SARS-CoV-2");
     }
 
     private void mapExpositionVorhanden(SarsCov2ExpositionEvaluation eval, Observation fhirObserv) {
 
-        Boolean CodeForExpositionExists = isCodeForKnownExpositionExistent(fhirObserv);
+        Boolean codeForExpositionExists = isCodeForKnownExpositionExistent(fhirObserv);
 
-        if (CodeForExpositionExists) {
+        if (Boolean.TRUE.equals(codeForExpositionExists)) {
             mapExpositionCode(eval, fhirObserv);
         } else {
             mapDataAbsentReasonAsUnknownExposition(eval, fhirObserv);
