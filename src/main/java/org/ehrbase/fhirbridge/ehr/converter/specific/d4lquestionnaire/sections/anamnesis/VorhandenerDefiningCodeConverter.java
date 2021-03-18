@@ -1,7 +1,11 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.anamnesis;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AdipositasEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.ChronischeLungenkrankheitEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.DiabetesEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.HerzerkrankungEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.VorhandenDefiningCode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
