@@ -28,8 +28,8 @@ public class Medication extends QuestionnaireSection {
     private Optional<ImmunsuppressivaEvaluation> immunsuppressivaEvaluationQuestion = Optional.empty();
     private Optional<KortisionEvaluation> kortisonEvaluationQuestion = Optional.empty();
 
-    public Medication(Language authored) {
-        super(authored);
+    public Medication(Language language, TemporalAccessor authored) {
+        super(language, authored);
     }
 
 
