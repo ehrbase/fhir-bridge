@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1/_history/1",
+      "id" : "Observation/5/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -26,13 +26,17 @@
     }
   },
   "language" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_639-1"
     },
     "code_string" : "de"
   },
   "territory" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_3166-1"
     },
     "code_string" : "DE"
@@ -41,7 +45,9 @@
     "_type" : "DV_CODED_TEXT",
     "value" : "event",
     "defining_code" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "openehr"
       },
       "code_string" : "433"
@@ -64,7 +70,9 @@
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
       "defining_code" : {
+        "_type" : "CODE_PHRASE",
         "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
           "value" : "openehr"
         },
         "code_string" : "232"
@@ -86,7 +94,9 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "final",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
               "value" : "local"
             },
             "code_string" : "at0012"
@@ -104,13 +114,17 @@
       "value" : "SARS-CoV-2 Exposition"
     },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"
@@ -135,6 +149,25 @@
           "value" : "SARS-CoV-2"
         },
         "archetype_node_id" : "at0002"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Exposition vorhanden?"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Unknown",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "SNOMED-CT"
+            },
+            "code_string" : "unknown"
+          }
+        },
+        "archetype_node_id" : "at0003"
       }, {
         "_type" : "CLUSTER",
         "name" : {
