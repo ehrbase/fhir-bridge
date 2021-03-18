@@ -1,12 +1,13 @@
 package org.ehrbase.fhirbridge.ehr.converter.knownexposure;
 
+import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.HL7_DATA_ABSENT_REASON;
 import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.SNOMED;
 
 public enum KnownExposureCode {
 
         KNOWN_EXPOSURE(SNOMED.getUrl(), "840546002"),
         NO_EXPOSURE(SNOMED.getUrl(), "373067005"),
-        UNKNOWN_EXPOSURE(SNOMED.getUrl(), "unknown");
+        UNKNOWN_EXPOSURE(HL7_DATA_ABSENT_REASON.getUrl(), "unknown");
 
         private final String system;
         private final String code;

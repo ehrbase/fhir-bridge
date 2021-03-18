@@ -3,8 +3,10 @@ package org.ehrbase.fhirbridge.fhir.observation;
 import ca.uhn.fhir.parser.DataFormatException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.converter.knownexposure.KnownExposureCode;
 import org.ehrbase.fhirbridge.ehr.converter.knownexposure.KnownExposureConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.SARSCoV2ExpositionComposition;
+import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.ExpositionVorhandenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.SarsCov2ExpositionEvaluation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
@@ -32,11 +34,6 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
         create("create-known-exposure-unknown.json");
     }
 
-    @Test
-    void createExposureOutputSuccess() throws IOException {
-        create("create-known-exposure-present.json");
-    }
-
     // #####################################################################################
     // check payload
     @Test
@@ -58,14 +55,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
     }
 
     // #####################################################################################
-    // check exceptions
-    @Test
-    void createInvalidCode() throws IOException {
-        // copy of absent, manipulated line 58 to contain invalid snomed code
-        Exception exception = executeMappingException("create-known-exposure-invalid.json");
-        assertEquals("The SNOMED code 666 is not supported for known SarsCov2ExpositionConverter !", exception.getMessage());
-    }
-
+    // check exception
     @Test
     void createInvalidStatus() throws IOException {
         try{
@@ -74,6 +64,63 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
             assertEquals("[element=\"status\"] Invalid attribute value \"invalidTestCode\": Unknown ObservationStatus code 'invalidTestCode'", dataFormatException.getMessage());
         }
     }
+    @Test
+    void createMultipleKnownReasons() throws IOException {
+        try{
+            super.testFileLoader.loadResource("create-known-exposure-present-multiple.json");
+        }catch (DataFormatException dataFormatException){
+            assertEquals("Multiple known expositions reasons are not possible in SarsCov2ExpositionConverter!", dataFormatException.getMessage());
+        }
+    }
+    @Test
+    void createWithoutKnownReasonMissingDataAbsent() throws IOException {
+        try{
+            super.testFileLoader.loadResource("create-known-exposure-unknown-zero.json");
+        }catch (DataFormatException dataFormatException){
+            assertEquals("Zero or Multiple data absent reasons are not possible in SarsCov2ExpositionConverter with no valid exposition information!", dataFormatException.getMessage());
+        }
+    }
+    @Test
+    void createWithoutKnownReasonMultipleDataAbsent() throws IOException {
+        try{
+            super.testFileLoader.loadResource("create-known-exposure-unknown-multiple.json");
+        }catch (DataFormatException dataFormatException){
+            assertEquals("Zero or Multiple data absent reasons are not possible in SarsCov2ExpositionConverter with no valid exposition information!", dataFormatException.getMessage());
+        }
+    }
+    @Test
+    void createWithWrongSystemInDataAbsent() throws IOException {
+        try{
+            super.testFileLoader.loadResource("create-known-exposure-present-wrong-system.json");
+        }catch (DataFormatException dataFormatException){
+            assertEquals("Cannot set 'unknown' in SarsCov2ExpositionConverter with no valid data absent reason coding!", dataFormatException.getMessage());
+        }
+    }
+    @Test
+    void createWithWrongCodeInDataAbsent() throws IOException {
+        try{
+            super.testFileLoader.loadResource("create-known-exposure-present-wrong-code.json");
+        }catch (DataFormatException dataFormatException){
+            assertEquals("Cannot set 'unknown' in SarsCov2ExpositionConverter with no valid data absent reason coding!", dataFormatException.getMessage());
+        }
+    }
+    @Test
+    void createWithWrongSystem() throws IOException {
+        try{
+            super.testFileLoader.loadResource("create-known-exposure-unknown-wrong-system.json");
+        }catch (DataFormatException dataFormatException){
+            assertEquals("\"The SNOMED code '\" + code + \"' in system '\" + system + \"' is not supported for known SarsCov2ExpositionConverter!", dataFormatException.getMessage());
+        }
+    }
+    @Test
+    void createWithWrongCode() throws IOException {
+        try{
+            super.testFileLoader.loadResource("create-known-exposure-unknown-wrong-code.json");
+        }catch (DataFormatException dataFormatException){
+            assertEquals("\"The SNOMED code '\" + code + \"' in system '\" + system + \"' is not supported for known SarsCov2ExpositionConverter!", dataFormatException.getMessage());
+        }
+    }
+
 
     // #####################################################################################
     // default
