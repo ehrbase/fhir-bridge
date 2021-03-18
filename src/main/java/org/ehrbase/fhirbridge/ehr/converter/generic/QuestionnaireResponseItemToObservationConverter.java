@@ -1,11 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
-import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
-import org.hl7.fhir.r4.model.Resource;
 import org.springframework.lang.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,7 +12,7 @@ import java.time.temporal.TemporalAccessor;
 public abstract class QuestionnaireResponseItemToObservationConverter<E extends EntryEntity> extends QuestionnaireResponseItemToEntryEntityConverter<E> {
 
     @Override
-    public E convert(@NonNull QuestionnaireResponse.QuestionnaireResponseItemComponent questionnaireResponseItemComponent, Language language, TemporalAccessor authored) {
+    public E convert(@NonNull QuestionnaireResponse.QuestionnaireResponseItemComponent questionnaireResponseItemComponent, @NonNull Language language,@NonNull TemporalAccessor authored) {
         E entryEntity = super.convert(questionnaireResponseItemComponent, language, authored);
         invokeTimeValues(entryEntity, authored);
         return entryEntity;

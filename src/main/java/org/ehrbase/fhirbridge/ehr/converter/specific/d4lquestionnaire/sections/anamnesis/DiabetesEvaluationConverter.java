@@ -8,7 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 
 public class DiabetesEvaluationConverter extends QuestionnaireResponseItemToEntryEntityConverter<DiabetesEvaluation> {
 
-
     @Override
     protected DiabetesEvaluation convertInternal(QuestionnaireResponse.QuestionnaireResponseItemComponent questionnaireResponseItemComponent) {
         DiabetesEvaluation diabetesEvaluation = new DiabetesEvaluation();

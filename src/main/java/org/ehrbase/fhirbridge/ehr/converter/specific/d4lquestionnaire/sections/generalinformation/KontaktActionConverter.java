@@ -4,7 +4,7 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
-import org.ehrbase.fhirbridge.ehr.converter.generic.QuestionnaireResponseItemToEntryEntityConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.QuestionnaireResponseItemToActionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AelterOderGleich65JahreAltDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.KontaktAction;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAccessor;
 
-public class KontaktActionConverter extends QuestionnaireResponseItemToEntryEntityConverter<KontaktAction> {
+public class KontaktActionConverter extends QuestionnaireResponseItemToActionConverter<KontaktAction> {
     KontaktAction kontaktAction = new KontaktAction();
 
     private static final String C0 = "C0";

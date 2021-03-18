@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire;
 
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.QuestionnaireResponseToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.anamnesis.Anamnesis;
@@ -9,6 +10,9 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.s
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.springframework.lang.NonNull;
+
+import java.time.OffsetDateTime;
+import java.time.temporal.TemporalAccessor;
 
 public class D4lQuestionnaireCompositionConverter extends QuestionnaireResponseToCompositionConverter<D4LQuestionnaireComposition> {
     private static final String P = "P";
@@ -25,16 +29,19 @@ public class D4lQuestionnaireCompositionConverter extends QuestionnaireResponseT
     @Override
     public D4LQuestionnaireComposition convertInternal(@NonNull QuestionnaireResponse resource) {
         D4LQuestionnaireComposition d4LQuestionnaireComposition = new D4LQuestionnaireComposition();
-        initialiseSections(d4LQuestionnaireComposition);
+        //TODO Renaud can´t think of another solution than this bad one maybe you have another idea ?, the language and time are both only contained within the response "main" and need to be given to the specific converters.
+        Language language = resolveLanguageOrDefault(resource);
+        TemporalAccessor authored = super.getStartTime(resource);
+        initialiseSections(language, authored);
         mapSections(resource);
         return populateD4lQuestionnaireComposition(d4LQuestionnaireComposition);
     }
 
-    private void initialiseSections(D4LQuestionnaireComposition d4LQuestionnaireComposition) {
-        this.generalInformation = new GeneralInformation(d4LQuestionnaireComposition.getLanguage(), d4LQuestionnaireComposition.getStartTimeValue());
-        this.symptoms = new Symptoms(d4LQuestionnaireComposition.getLanguage(), d4LQuestionnaireComposition.getStartTimeValue());
-        this.anamnesis = new Anamnesis(d4LQuestionnaireComposition.getLanguage(), d4LQuestionnaireComposition.getStartTimeValue());
-        this.medication = new Medication(d4LQuestionnaireComposition.getLanguage(), d4LQuestionnaireComposition.getStartTimeValue());
+    private void initialiseSections(Language language, TemporalAccessor authored) {
+        this.generalInformation = new GeneralInformation(language, authored);
+        this.symptoms = new Symptoms(language, authored);
+        this.anamnesis = new Anamnesis(language, authored);
+        this.medication = new Medication(language, authored);
     }
 
     private void mapSections(QuestionnaireResponse questionnaireResponse) {
