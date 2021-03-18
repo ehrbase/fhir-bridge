@@ -9,11 +9,16 @@ import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 public class AlterObservationConverter extends QuestionnaireResponseItemToObservationConverter<AlterObservation> {
     AlterObservation alterObservation = new AlterObservation();
+    private static final String P0 = "P0";
+    private static final String P1 = "P1";
 
     @Override
     protected AlterObservation convertInternal(QuestionnaireResponse.QuestionnaireResponseItemComponent questionnaireResponseItemComponent) {
-        convertAge(questionnaireResponseItemComponent);
-        convertAgeOver60(getQuestionLoincYesNoToBoolean(questionnaireResponseItemComponent));
+        if(questionnaireResponseItemComponent.getLinkId().equals(P0)){
+            convertAge(questionnaireResponseItemComponent);
+        }else if(questionnaireResponseItemComponent.getLinkId().equals(P1)){
+            convertAgeOver60(getQuestionLoincYesNoToBoolean(questionnaireResponseItemComponent));
+        }
         return alterObservation;
     }
 

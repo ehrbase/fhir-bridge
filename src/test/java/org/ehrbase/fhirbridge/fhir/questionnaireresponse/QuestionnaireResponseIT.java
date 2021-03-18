@@ -165,7 +165,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         QuestionnaireResponse questionnaireResponse = (QuestionnaireResponse) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            new D4lQuestionnaireCompositionConverter().convert( questionnaireResponse);
+            new D4lQuestionnaireCompositionConverter().convert(questionnaireResponse);
         });
     }
 

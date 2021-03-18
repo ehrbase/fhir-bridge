@@ -10,7 +10,7 @@ import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.Vor
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class VorhandenerDefiningCodeConverter {
+class VorhandenerDefiningCodeConverter {
 
     static void setVorhandenerDefiningCode(String code, Object evaluationObject) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method vorhandenerDefiningCodeSetter = getSetMethodForVorhandenDefiningCode(evaluationObject);

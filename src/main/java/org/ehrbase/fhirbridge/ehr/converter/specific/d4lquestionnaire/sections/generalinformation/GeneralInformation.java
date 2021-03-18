@@ -48,9 +48,9 @@ public class GeneralInformation extends QuestionnaireSection {
 
     @Override
     public void map(List<QuestionnaireResponse.QuestionnaireResponseItemComponent> item) {
+        AlterObservationConverter alterObservationConverter = new AlterObservationConverter();
         for (QuestionnaireResponse.QuestionnaireResponseItemComponent question : item) {
             if (getValueCode(question).isPresent() || getValueAsDate(question).isPresent()) {
-                AlterObservationConverter alterObservationConverter = new AlterObservationConverter();
                 mapGeneralInformationQuestions(question, alterObservationConverter);
             }
 
