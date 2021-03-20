@@ -3,7 +3,7 @@ services:
   ehrbase:
     image: ehrbase/ehrbase:next
     ports:
-      - 8091:8080
+      - 8080:8080
     networks:
       - ehrbase-network
     environment:
@@ -22,7 +22,7 @@ services:
   ehrbase-db:
     image: ehrbase/ehrbase-postgres:latest
     ports:
-      - 5438:5432
+      - 5432:5432
     networks:
       - ehrbase-network
     environment:
