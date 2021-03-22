@@ -23,7 +23,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Peter Wohlfarth
-Force Tags              observation_create    observation-lab    invalid    create
+Force Tags              observation_create    oxygen-saturation    invalid    create
 
 
 *** Variables ***
@@ -31,20 +31,20 @@ ${randstring}                   foobar
 ${randinteger}                  ${12345}
 
 
+
 *** Test Cases ***
 
-
-001 Create Observation lab (Invalid/Missing 'resourceType')
+001 Create Oxygen Saturation (Invalid/Missing 'resourceType')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 2. *LOAD* _create-oxygen-saturation.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
-	[Template]		    create Observation lab with ehr reference
+	[Template]		    create Oxygen Saturation with ehr reference
     [Tags]          	resourceType
 
-	# FIELD/PATH					VALUE							HTTP
+	# FIELD/PATH					VALUE							HTTP																		            Location
 	# 																CODE
     $.resourceType					missing							422
     $.resourceType					${randstring}					422
@@ -53,72 +53,77 @@ ${randinteger}                  ${12345}
 
 
 
-002 Create Observation lab (Invalid/Missing 'identifier')
+002 Create Oxygen Saturation (Invalid/Missing 'identifier')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 2. *LOAD* _create-oxygen-saturation.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 
-	[Template]			create Observation lab with ehr reference
+	[Template]			create Oxygen Saturation with ehr reference
     [Tags]              identifier
 
-	# FIELD/PATH									VALUE							HTTP
-	# invalid identifier
-	$.identifier									${EMPTY}						422
-	$.identifier									${{ [] }}						422
-	$.identifier									${{ {} }}						422
-	$.identifier									${{ [{}] }}						422
+	# FIELD/PATH	                				VALUE							HTTP																										Location
+    # invalid identifier
+    $.identifier									${EMPTY}						422
+    $.identifier									${{ [] }}						422
+    $.identifier									${{ {} }}						422
+    $.identifier									${{ [{}] }}						422
 
-	# invalid type
-	$.identifier[0].type							${EMPTY}						422
-	$.identifier[0].type							${{ [] }}						422
-	$.identifier[0].type							${{ {} }}						422
-	$.identifier[0].type							${{ [{}] }}						422
+    # invalid type
+    $.identifier[0].type							${EMPTY}						422
+    $.identifier[0].type							${{ [] }}						422
+    $.identifier[0].type							${{ {} }}						422
+    $.identifier[0].type							${{ [{}] }}						422
 
-	# invalid type coding
-	$.identifier[0].type.coding						${EMPTY}						422
-	$.identifier[0].type.coding						${{ [] }}						422
-	$.identifier[0].type.coding						${{ {} }}						422
-	$.identifier[0].type.coding						${{ [{}] }}						422
+    # invalid type coding
+    $.identifier[0].type.coding						${EMPTY}						422
+    $.identifier[0].type.coding						${{ [] }}						422
+    $.identifier[0].type.coding						${{ {} }}						422
+    $.identifier[0].type.coding						${{ [{}] }}						422
 
-	# invalid type coding system
-	$.identifier[0].type.coding[0].system			${EMPTY}					 	422
-	$.identifier[0].type.coding[0].system			${randinteger}				 	422
-	$.identifier[0].type.coding[0].system			${randstring}				 	422
+    # invalid type coding system
+    $.identifier[0].type.coding[0].system			${EMPTY}					 	422
+    $.identifier[0].type.coding[0].system			${randinteger}				 	422
+    $.identifier[0].type.coding[0].system			${randstring}				 	422
 
-	# invalid type coding code
-	$.identifier[0].type.coding[0].code				${EMPTY}					 	422
-	$.identifier[0].type.coding[0].code				${randinteger}				 	422
+    # invalid type coding code
+    $.identifier[0].type.coding[0].code				${EMPTY}					 	422
+    $.identifier[0].type.coding[0].code				${randinteger}				 	422
 
-	# invalid system
-	$.identifier[0].system							${EMPTY}					 	422
-	$.identifier[0].system							${randinteger}				 	422
-	$.identifier[0].system							${randstring}				 	422
+    # invalid system
+    $.identifier[0].system							${EMPTY}					 	422
+    $.identifier[0].system							${randinteger}				 	422
+    $.identifier[0].system							${randstring}				 	422
 
-	# invalid value
-	$.identifier[0].value							${EMPTY}					 	422
-	$.identifier[0].value							${randinteger}				 	422
+    # invalid value
+    $.identifier[0].value							${EMPTY}					 	422
+    $.identifier[0].value							${randinteger}				 	422
 
-	# invalid assigner
-	$.identifier[0].assigner						${EMPTY}						422
-	$.identifier[0].assigner						${{ [] }}						422
-	$.identifier[0].assigner						${{ {} }}						422
-	$.identifier[0].assigner						${{ [{}] }}						422
+    # invalid assigner
+    $.identifier[0].assigner						${EMPTY}						422
+    $.identifier[0].assigner						${{ [] }}						422
+    $.identifier[0].assigner						${{ {} }}						422
+    $.identifier[0].assigner						${{ [{}] }}						422
+
+    # invalid assigner reference
+    $.identifier[0].assigner.reference				${EMPTY}					 	422
+    $.identifier[0].assigner.reference				${randinteger}				 	422
 
 
-003 Create Observation lab (Invalid/Missing 'category')
+
+003 Create Oxygen Saturation (Invalid/Missing 'category')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 2. *LOAD* _create-oxygen-saturation.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Category`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n               
-	[Template]			create Observation lab with ehr reference
+	[Template]			create Oxygen Saturation with ehr reference
     [Tags]              category
 
-	# FIELD/PATH							VALUE					HTTP
+	# FIELD/PATH							VALUE					HTTP																									Location
 	# 																CODE
 
 	#invalid coding
@@ -148,17 +153,17 @@ ${randinteger}                  ${12345}
 
 
 
-004 Create Observation lab (Invalid/Missing 'code')
+004 Create Oxygen Saturation (Invalid/Missing 'code')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 2. *LOAD* _create-oxygen-saturation.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Code`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                 
-	[Template]			create Observation lab with ehr reference
+	[Template]			create Oxygen Saturation with ehr reference
     [Tags]              code
 
-	# FIELD/PATH							VALUE					HTTP
+	# FIELD/PATH							VALUE					HTTP																									Location
 	# 																CODE
 
 	# invalid code
@@ -197,17 +202,17 @@ ${randinteger}                  ${12345}
 
 
 
-005 Create Observation lab (Invalid/Missing 'valueQuantity')
+005 Create Oxygen Saturation (Invalid/Missing 'valueQuantity')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-observation-lab.json_\n\n
+	...                 2. *LOAD* _create-oxygen-saturation.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                 
-	[Template]			create Observation lab with ehr reference
+	[Template]			create Oxygen Saturation with ehr reference
     [Tags]              valueQuantity
 
-	# FIELD/PATH								VALUE				HTTP
+	# FIELD/PATH								VALUE				HTTP																									Location
 	# 																CODE
 
 	# invalid/missing valueQuantity
@@ -246,15 +251,15 @@ ${randinteger}                  ${12345}
 	$.valueQuantity.code	  					${EMPTY}			422
 	$.valueQuantity.code	  					${None}				422
 	$.valueQuantity.code	  					${123}				422
-	
 
 
-006 Create Observation lab (Invalid/Missing 'subject')
-    [Documentation]     1. *LOAD* _create-observation-lab.json_ \n\n
+
+006 Create Oxygen Saturation (Invalid/Missing 'subject')
+    [Documentation]     1. *LOAD* _create-oxygen-saturation.json_ \n\n
 	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
     ...                 3. *POST* example JSON to observation endpoint \n\n
-	...                 4. *VALIDATE* the response status               
-	[Template]		    create Observation lab w/o ehr reference 
+	...                 4. *VALIDATE* the response status              
+	[Template]		    create Oxygen Saturation w/o ehr reference 
     [Tags]          	subject
 
 	# FIELD/PATH					VALUE							HTTP
@@ -292,19 +297,6 @@ ${randinteger}                  ${12345}
     $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
 
 
-007 Create Observation lab (invalid profile)
-    [Documentation]     1. *LOAD* _create-observation-with-default-profile.json_ \n\n
-    ...                 2. *POST* example JSON to observation endpoint \n\n
-	...                 3. *VALIDATE* the response status               
-	[Template]		    create Observation lab with ehr reference
-    [Tags]          	meta
-
-	# FIELD/PATH					VALUE							HTTP
-	# 																CODE
-    # invalid cases for value
-    $.meta.profile					missing							422
-
-
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***
@@ -321,31 +313,30 @@ ${randinteger}                  ${12345}
 
 
 
-create Observation lab with ehr reference
+create Oxygen Saturation with ehr reference
 	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
 
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Observation           Observation lab            	${payload}
+						observation.POST /Observation           Oxygen Saturation            	${payload}
 						observation.validate response - 422 (w/o error message)  ${http_status_code}
 
 
-create Observation lab w/o ehr reference    
+create Oxygen Saturation w/o ehr reference    
 	[Arguments]         ${json_path}        ${value}                ${http_status_code}
 
 	${fake_ehr_ref}=	Evaluate    str(uuid.uuid4())    uuid
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Observation           Observation lab            	${payload}
+						observation.POST /Observation           Oxygen Saturation            	${payload}
 						observation.validate response - 422 (w/o error message)  ${http_status_code}
-
 
 
 generate payload from example json
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-observation-lab.json
+	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-oxygen-saturation.json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 

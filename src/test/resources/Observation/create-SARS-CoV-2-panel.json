@@ -1,0 +1,84 @@
+{
+  "resourceType": "Observation",
+  "id": "220767b9-5760-40b8-8741-8772dae04c3f",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-pnl-ser-pl-ia"
+    ]
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "OBI"
+          }
+        ]
+      },
+      "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+      "value": "94504-8_SARS-CoV-2-Ab-Panel",
+      "assigner": {
+        "reference": "Organization/Charité"
+      }
+    }
+  ],
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "26436-6"
+        },
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "laboratory"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "94504-8",
+        "display": "SARS-CoV-2 (COVID-19) Ab panel - Serum or Plasma by Immunoassay"
+      }
+    ],
+    "text": "SARS-CoV-2 antibodies panel"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "effectiveDateTime": "2020-10-19T08:43:33+02:00",
+  "hasMember": [
+    {
+      "reference": "Observation/22732de8-3eb6-477e-81d6-28fb906b3e4e"
+    },
+    {
+      "reference": "Observation/70ca7d00-0d8b-42bb-9508-a8fc76e5c7ad"
+    },
+    {
+      "reference": "Observation/7e746710-fad4-474b-8a28-422863f3a2b8"
+    },
+    {
+      "reference": "Observation/f35f17da-f642-402d-8cf4-ff70607713a7"
+    },
+    {
+      "reference": "Observation/7297b0fd-3be7-4b88-a63a-6ba651152c41"
+    },
+    {
+      "reference": "Observation/da1fa3fe-a8a3-44b6-94c6-3497269436ec"
+    },
+    {
+      "reference": "Observation/b5adbc53-a1ee-4a57-9ede-fae4b4462bfb"
+    },
+    {
+      "reference": "Observation/b08b1687-2ea1-4b14-9473-dd04389169ec"
+    }
+  ]
+}
