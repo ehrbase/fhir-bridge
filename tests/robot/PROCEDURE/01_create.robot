@@ -52,7 +52,7 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-implemented
+	[Tags]             	radiology-procedures    chest-x-ray    valid
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Chest X-Ray    create-radiology-procedures-chest-x-ray.json
@@ -65,7 +65,7 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	radiology-procedures    computed-tomography    valid    not-ready    not-implemented
+	[Tags]             	radiology-procedures    computed-tomography    valid
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Computed Tomography    create-radiology-procedures-computed-tomography.json
@@ -78,7 +78,7 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	radiology-procedures    ultrasound    valid    not-ready    not-implemented
+	[Tags]             	radiology-procedures    ultrasound    valid
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create radiology procedures    Radiology Procedures - Ultrasound    create-radiology-procedures-ultrasound.json
@@ -91,7 +91,7 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-implemented
+	[Tags]             	generic-therapy    dialysis    valid
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create dialysis    Generic Therapy - Dialysis with not performed "performedPeriod"    create-dialysis-with-performedPeriod-not-performed.json
@@ -359,7 +359,7 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	generic-therapy    respiratory-therapies    valid    not-ready    not-implemented
+	[Tags]             	generic-therapy    respiratory-therapies    valid
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create respiratory therapies    Generic Therapy - Respiratory Therapies with valid performedDateTime (Status: In-Progress)    create-respiratory-therapies-with-valid-performeddatetime.json
@@ -547,7 +547,7 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    sct    datetime
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    alternative    sct    datetime
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration sct datetime     create-respiratory-therapies-artificial-respiration_sct-datetime.json
@@ -713,7 +713,7 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	generic-therapy    extracorporeal    membrane     oxygenation    valid    not-ready    not-ready_not-implemented    alternative    sct    datetime
+	[Tags]             	generic-therapy    extracorporeal    membrane     oxygenation    valid    alternative    sct    datetime
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create extracorporeal membrane oxygenation  Generic Therapy - Extracorporeal Membrane Oxygenation sct datetime  create-extracorporeal-membrane-oxygenation-in-progress_sct_datetime.json
@@ -878,7 +878,7 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-implemented    alternative    sct    datetime
+	[Tags]             	generic-therapy    prone-position    valid    alternative    sct    datetime
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create prone position    Generic Therapy - Prone Position sct datetime    create-prone-position-in-progress_sct-datetime.json

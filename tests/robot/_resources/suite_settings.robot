@@ -36,6 +36,7 @@ Resource    ${EXECDIR}/robot/_resources/keywords/procedure.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/questionnaire.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/bundle.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/json-manipulation.robot
+Resource    ${EXECDIR}/robot/_resources/keywords/patient.robot
 Variables   ${EXECDIR}/robot/_resources/variables/sut_config.py
             ...    ${SUT}
 
@@ -53,6 +54,7 @@ ${DATA_SET_PATH_OBSERVATION}            ${EXECDIR}/../src/test/resources/Observa
 ${DATA_SET_PATH_PROCEDURE}              ${EXECDIR}/../src/test/resources/Procedure
 ${DATA_SET_PATH_QUESTIONAIRE}           ${EXECDIR}/../src/test/resources/QuestionnaireResponse
 ${DATA_SET_PATH_BUNDLE}          	    ${EXECDIR}/../src/test/resources/Bundle
+${DATA_SET_PATH_PATIENT}          	    ${EXECDIR}/../src/test/resources/Patient
 ${VALID EHR DATA SETS}                  ${EXECDIR}/robot/_resources/test_data/ehr/valid
 ${OUTPUT_LEVEL}                         verbose
 

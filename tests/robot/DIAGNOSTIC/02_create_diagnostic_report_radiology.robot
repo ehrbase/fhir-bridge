@@ -266,7 +266,7 @@ create Diagnostic Report Radiology with ehr reference
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						diagnostic.POST /Diagnostic  Diagnostic Report Radiology    ${payload}
-						observation.validate response - 422 (w/o error message)    ${http_status_code}
+						diagnostic.validate response - 422 (w/o error message)    ${http_status_code}
 
 
 create Diagnostic Report Radiology w/o ehr reference    
@@ -276,7 +276,7 @@ create Diagnostic Report Radiology w/o ehr reference
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json    ${json_path}    ${value}
 						diagnostic.POST /Diagnostic  Diagnostic Report Radiology    ${payload}
-						observation.validate response - 422 (w/o error message)    ${http_status_code}
+						diagnostic.validate response - 422 (w/o error message)    ${http_status_code}
 
 
 generate payload from example json
