@@ -78,7 +78,7 @@ public class CompositionProducer extends DefaultProducer {
     }
 
     private void writeToFile(String compositionJson) {
-        File output = new File(endpoint.getProperties().getOutputDirectory() + "/mapping-output.json");
+        File output = new File(endpoint.getProperties().getOutputDirectory() + "/Observation/PCR/mapping-output.json");
         try {
             FileUtils.writeStringToFile(output, compositionJson, StandardCharsets.UTF_8);
         } catch (IOException e) {
