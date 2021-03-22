@@ -143,7 +143,7 @@ ${randinteger}                  ${12345}
 	...                 5. *POST* example JSON to diagnostic endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
 	[Template]		    create Diagnostic Report Radiology with ehr reference
-	[Tags]          	conclusion    not-ready    not-ready_bug
+	[Tags]          	conclusion
 
 	# FIELD/PATH					VALUE							HTTP
 	# 																CODE
@@ -163,7 +163,7 @@ ${randinteger}                  ${12345}
 	...                 5. *POST* example JSON to diagnostic endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                
 	[Template]		    create Diagnostic Report Radiology with ehr reference
-	[Tags]          	conclusionCode    not-ready    not-ready_bug
+	[Tags]          	conclusionCode
 
 	# FIELD/PATH							VALUE					HTTP
 	# 																CODE
