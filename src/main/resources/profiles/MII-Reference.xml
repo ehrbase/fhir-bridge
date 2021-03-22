@@ -52,13 +52,13 @@
         <xpath value="not(starts-with(f:reference/@value, '#')) or exists(ancestor::*[self::f:entry or self::f:parameter]/f:resource/f:*/f:contained/f:*[f:id/@value=substring-after(current()/f:reference/@value, '#')]|/*/f:contained/f:*[f:id/@value=substring-after(current()/f:reference/@value, '#')])" />
         <source value="http://hl7.org/fhir/StructureDefinition/Reference" />
       </constraint>
-      <constraint>
-        <key value="mii-reference-1" />
-        <severity value="error" />
-        <human value="Either reference.reference XOR reference.identifier exists" />
-        <expression value="$this.reference.exists() xor ($this.identifier.value.exists() and $this.identifier.system.exists())" />
-        <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />
-      </constraint>
+<!--      <constraint>-->
+<!--        <key value="mii-reference-1" />-->
+<!--        <severity value="error" />-->
+<!--        <human value="Either reference.reference XOR reference.identifier exists" />-->
+<!--        <expression value="$this.reference.exists() xor ($this.identifier.value.exists() and $this.identifier.system.exists())" />-->
+<!--        <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />-->
+<!--      </constraint>-->
       <mapping>
         <identity value="rim" />
         <map value="n/a" />
@@ -787,12 +787,12 @@
   <differential>
     <element id="Reference">
       <path value="Reference" />
-      <constraint>
-        <key value="mii-reference-1" />
-        <severity value="error" />
-        <human value="Either reference.reference XOR reference.identifier exists" />
-        <expression value="$this.reference.exists() xor ($this.identifier.value.exists() and $this.identifier.system.exists())" />
-      </constraint>
+<!--      <constraint>-->
+<!--        <key value="mii-reference-1" />-->
+<!--        <severity value="error" />-->
+<!--        <human value="Either reference.reference XOR reference.identifier exists" />-->
+<!--        <expression value="$this.reference.exists() xor ($this.identifier.value.exists() and $this.identifier.system.exists())" />-->
+<!--      </constraint>-->
     </element>
     <element id="Reference.reference">
       <path value="Reference.reference" />

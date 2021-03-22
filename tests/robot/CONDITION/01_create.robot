@@ -453,7 +453,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 # TODO: CLARIFY IF UNKNOW STATUS FOR DIAGNOSIS MAKES SENSE
-032 Create Diagnosis Covid-19 (Unknown)
+033 Create Diagnosis Covid-19 (Unknown)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-diagnosis-covid-19-unknown.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -466,7 +466,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-033 Create Chronic Kidney Disease (Disorder - Present)
+034 Create Chronic Kidney Disease (Disorder - Present)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-kidney-disease-present.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -479,7 +479,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-034 Create Chronic Kidney Disease (Disorder - Absent)
+035 Create Chronic Kidney Disease (Disorder - Absent)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-kidney-disease-absent.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -492,7 +492,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-035 Create Chronic Kidney Disease (Disorder - Unknown)
+036 Create Chronic Kidney Disease (Disorder - Unknown)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-kidney-disease-unknown.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -505,7 +505,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-036 Create Chronic Kidney Disease (Disorder - stage 5 on dialysis)
+037 Create Chronic Kidney Disease (Disorder - stage 5 on dialysis)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-kidney-disease-stage-5-dialysis.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -518,7 +518,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-037 Create Chronic Neurological or Mental Diseases (Anxiety Disorder)
+038 Create Chronic Neurological or Mental Diseases (Anxiety Disorder)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-anxiety.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -531,7 +531,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-038 Create Chronic Neurological or Mental Diseases (Chronic Nervous System Disorder)
+039 Create Chronic Neurological or Mental Diseases (Chronic Nervous System Disorder)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-chronic-nervous-system.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -544,7 +544,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-039 Create Chronic Neurological or Mental Diseases (Combined disorder of muscle AND peripheral nerve)
+040 Create Chronic Neurological or Mental Diseases (Combined disorder of muscle AND peripheral nerve)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-muscle-and-peripheral-nerve.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -557,7 +557,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-040 Create Chronic Neurological or Mental Diseases (Dementia)
+041 Create Chronic Neurological or Mental Diseases (Dementia)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-dementia.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -570,7 +570,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-041 Create Chronic Neurological or Mental Diseases (Depressive Disorder)
+042 Create Chronic Neurological or Mental Diseases (Depressive Disorder)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-depressive.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -583,7 +583,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-042 Create Chronic Neurological or Mental Diseases (Epilepsy)
+043 Create Chronic Neurological or Mental Diseases (Epilepsy)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-epilepsy.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -596,7 +596,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-043 Create Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident with Residual Deficits)
+044 Create Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident with Residual Deficits)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-history-of-cerebrovascular-accident-with.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -609,7 +609,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-044 Create Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident without Residual Deficits)
+045 Create Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident without Residual Deficits)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-history-of-cerebrovascular-accident-without.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -622,7 +622,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-045 Create Chronic Neurological or Mental Diseases (Mental Disorder)
+046 Create Chronic Neurological or Mental Diseases (Mental Disorder)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-mental-diseases.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -635,7 +635,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-046 Create Chronic Neurological or Mental Diseases (Migraine)
+047 Create Chronic Neurological or Mental Diseases (Migraine)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-migraine.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -648,7 +648,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-047 Create Chronic Neurological or Mental Diseases (Multiple Sclerosis)
+048 Create Chronic Neurological or Mental Diseases (Multiple Sclerosis)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-multiple-sclerosis.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -661,7 +661,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-048 Create Chronic Neurological or Mental Diseases (Parkinson's Disease)
+049 Create Chronic Neurological or Mental Diseases (Parkinson's Disease)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-parkinsons.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -674,7 +674,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-048 Create Chronic Neurological or Mental Diseases (Psychotic Disorder)
+050 Create Chronic Neurological or Mental Diseases (Psychotic Disorder)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-chronic-neurological-or-mental-disease-psychotic-disorder.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -687,7 +687,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-049 Create Cardiovascular Diseases (Cardiac Arrhythmia)
+051 Create Cardiovascular Diseases (Cardiac Arrhythmia)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-cardiovascular-diseases-cardiac-arrhythmia.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -700,7 +700,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-050 Create Cardiovascular Diseases (Cardiovascular Disease)
+052 Create Cardiovascular Diseases (Cardiovascular Disease)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-cardiovascular-diseases-cardiovascular-disease.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -713,7 +713,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-051 Create Cardiovascular Diseases (Carotid Artery Stenosis)
+053 Create Cardiovascular Diseases (Carotid Artery Stenosis)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-cardiovascular-diseases-carotid-artery-stenosis.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -726,7 +726,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-052 Create Cardiovascular Diseases (Coronary Arteriosclerosis)
+054 Create Cardiovascular Diseases (Coronary Arteriosclerosis)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-cardiovascular-diseases-coronary-arteriosclerosis.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -739,7 +739,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-053 Create Cardiovascular Diseases (Heart Failure)
+055 Create Cardiovascular Diseases (Heart Failure)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-cardiovascular-diseases-heart-failure.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -752,7 +752,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-054 Create Cardiovascular Diseases (History of Heart Revascularization)
+056 Create Cardiovascular Diseases (History of Heart Revascularization)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-cardiovascular-diseases-history-of-heart-revascularization.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -765,7 +765,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-055 Create Cardiovascular Diseases (History of Myocardial Infarction)
+057 Create Cardiovascular Diseases (History of Myocardial Infarction)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-cardiovascular-diseases-history-of-myocardial-infarction.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -778,7 +778,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-056 Create Cardiovascular Diseases (Hypertensive Disorder)
+058 Create Cardiovascular Diseases (Hypertensive Disorder)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-cardiovascular-diseases-hypertensive-disorder.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -791,7 +791,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-057 Create Cardiovascular Diseases (Peripheral Arterial Occlusive Disease)
+059 Create Cardiovascular Diseases (Peripheral Arterial Occlusive Disease)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-cardiovascular-diseases-peripheral-arterial-occlusive-disease.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -804,7 +804,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-058 Create Human Immunodeficiency Virus Infection (Present)
+060 Create Human Immunodeficiency Virus Infection (Present)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-human-immunodeficiency-virus-infection-present.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -817,7 +817,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-059 Create Human Immunodeficiency Virus Infection (Absent)
+061 Create Human Immunodeficiency Virus Infection (Absent)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-human-immunodeficiency-virus-infection-absent.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -830,7 +830,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-060 Create Human Immunodeficiency Virus Infection (Unknown)
+062 Create Human Immunodeficiency Virus Infection (Unknown)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-human-immunodeficiency-virus-infection-unknown.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -843,7 +843,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-061 Create Gastrointestinal Ulcer (Present)
+063 Create Gastrointestinal Ulcer (Present)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-gastrointestinal-ulcer-present.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -856,7 +856,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-062 Create Gastrointestinal Ulcer (Absent)
+064 Create Gastrointestinal Ulcer (Absent)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-gastrointestinal-ulcer-absent.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -869,7 +869,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-063 Create Gastrointestinal Ulcer (Unknown)
+065 Create Gastrointestinal Ulcer (Unknown)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-gastrointestinal-ulcer-unknown.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -882,7 +882,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-064 Create History of Organ Recipient (Present)
+066 Create History of Organ Recipient (Present)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-history-of-organ-recipient-present.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -895,7 +895,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-065 Create History of Organ Recipient (Absent)
+067 Create History of Organ Recipient (Absent)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-history-of-organ-recipient-absent.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -908,7 +908,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-066 Create History of Organ Recipient (Unknown)
+068 Create History of Organ Recipient (Unknown)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-history-of-organ-recipient-unknown.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -921,7 +921,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-067 Create Complications of Covid-19 - Cerebrovascular Accident (Disorder)
+069 Create Complications of Covid-19 - Cerebrovascular Accident (Disorder)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-complications-of-covid-19-cerebrovascular-accident.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -934,7 +934,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-068 Create Complications of Covid-19 - Infectious Agent in Bloodstream (Finding - Present)
+070 Create Complications of Covid-19 - Infectious Agent in Bloodstream (Finding - Present)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-complications-of-covid-19-infectious-agent-in-bloodstream-present.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -947,7 +947,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-069 Create Complications of Covid-19 - Infectious Agent in Bloodstream (Finding - Absent)
+071 Create Complications of Covid-19 - Infectious Agent in Bloodstream (Finding - Absent)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-complications-of-covid-19-infectious-agent-in-bloodstream-absent.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -960,7 +960,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-070 Create Complications of Covid-19 - Infectious Disease of Lung
+072 Create Complications of Covid-19 - Infectious Disease of Lung
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-complications-of-covid-19-infectious-disease-of-lung.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -973,7 +973,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-071 Create Complications of Covid-19 - Myocardial Infarction (Disorder - Present)
+073 Create Complications of Covid-19 - Myocardial Infarction (Disorder - Present)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-complications-of-covid-19-myocardial-infarction-present.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -986,7 +986,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-072 Create Complications of Covid-19 - Myocardial Infarction (Disorder - Unknown)
+074 Create Complications of Covid-19 - Myocardial Infarction (Disorder - Unknown)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-complications-of-covid-19-myocardial-infarction-unknown.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -999,7 +999,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-073 Create Complications of Covid-19 - Pre-Renal acute Kidney Injury
+075 Create Complications of Covid-19 - Pre-Renal acute Kidney Injury
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-complications-of-covid-19-pre-renal-acute-kidney-injury.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -1012,7 +1012,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-074 Create Complications of Covid-19 - Pulmonary Embolism
+076 Create Complications of Covid-19 - Pulmonary Embolism
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-complications-of-covid-19-pulmonary-embolism.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -1025,7 +1025,7 @@ Force Tags              condition_create    create
     condition.validate response - 201
 
 
-075 Create Complications of Covid-19 - Venous Thrombosis
+077 Create Complications of Covid-19 - Venous Thrombosis
 	[Documentation]     1. *CREATE* new EHR record\n\n 
 	...                 2. *LOAD* _create-complications-of-covid-19-venous-thrombosis.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -1035,4 +1035,46 @@ Force Tags              condition_create    create
 
     ehr.create new ehr    000_ehr_status.json
     condition.create complications of covid-19    Complications of Covid-19 - Venous Thrombosis    create-complications-of-covid-19-venous-thrombosis.json
+    condition.validate response - 201
+
+
+
+078 Create Condition Symptoms-Covid-19 sct
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-symptoms-covid-19-present_sct.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	symptoms-covid-19    valid    alternative    sct
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create symptoms-covid-19    Symptoms-Covid-19 sct    create-symptoms-covid-19-present_sct.json
+    condition.validate response - 201
+
+
+
+079 Create Condition Symptoms-Covid-19 icd10
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-symptoms-covid-19-present_icd10.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	symptoms-covid-19    valid    alternative    icd10    not-ready    not-ready_bug    190
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create symptoms-covid-19    Symptoms-Covid-19 icd10   create-symptoms-covid-19-present_icd10.json
+    condition.validate response - 201
+
+
+
+080 Create Condition Symptoms-Covid-19 alphaid
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-symptoms-covid-19-present_alphaid.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to condition endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	symptoms-covid-19    valid    alternative    alphaid    not-ready    not-ready_bug    190
+
+    ehr.create new ehr    000_ehr_status.json
+    condition.create symptoms-covid-19    Symptoms-Covid-19 alphaid    create-symptoms-covid-19-present_alphaid.json
     condition.validate response - 201
