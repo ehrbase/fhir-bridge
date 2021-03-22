@@ -1501,7 +1501,7 @@ Force Tags              observation_create    create
 
 110 Create SARS-CoV-2 IgG
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _.json_\n\n
+	...                 2. *LOAD* _create-SARS-CoV-2-IgG.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
 	...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
