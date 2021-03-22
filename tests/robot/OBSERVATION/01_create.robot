@@ -131,7 +131,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-height    valid   226
+	[Tags]             	body-height    valid
 
 	ehr.create new ehr    000_ehr_status.json
 	observation.create body height    Body Height    BodyHeight/create-body-height-normal.json
@@ -1440,3 +1440,88 @@ Force Tags              observation_create    create
 	ehr.create new ehr    000_ehr_status.json
 	observation.create sofa score   Sofa Score  create-sofa-score-value-timing.json
 	observation.validate response - 201
+
+
+
+106 Create SARS-CoV-2 Antibodies Quantitative
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-SARS-CoV-2-antibodies-quantitative.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]				SARS-CoV-2    valid    antibodies-quantitative    not-ready    not-implemented
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create observation sars-cov-2 antibodies quantitative  SARS-CoV-2 Antibodies Quantitative  create-SARS-CoV-2-antibodies-quantitative.json
+	observation.validate response - 201
+
+
+
+107 Create SARS-CoV-2 PCR
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-SARS-CoV-2-PCR.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]				SARS-CoV-2    valid    pcr    not-ready    not-implemented
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create observation sars-cov-2 pcr  SARS-CoV-2 PCR  create-SARS-CoV-2-PCR.json
+	observation.validate response - 201
+
+
+
+108 Create SARS-CoV-2 Panel
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-SARS-CoV-2-panel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]				SARS-CoV-2    valid    panel    not-ready    not-implemented
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create observation sars-cov-2 panel  SARS-CoV-2 Panel  create-SARS-CoV-2-panel.json
+	observation.validate response - 201
+
+
+
+109 Create SARS-CoV-2 IgA
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-SARS-CoV-2-IgA.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]				SARS-CoV-2    valid    iga    not-ready    not-implemented
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create observation sars-cov-2 iga  SARS-CoV-2 IgA  create-SARS-CoV-2-IgA.json
+	observation.validate response - 201
+
+
+
+110 Create SARS-CoV-2 IgG
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-SARS-CoV-2-IgG.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]				SARS-CoV-2    valid    igg    not-ready    not-implemented
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create observation sars-cov-2 igg  SARS-CoV-2 IgG  create-SARS-CoV-2-IgG.json
+	observation.validate response - 201
+
+
+
+111 Create SARS-CoV-2 IgM
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-SARS-CoV-2-IgM.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ subject_id which was created in EHR record\n\n
+	...                 4. *POST* example JSON to observation endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]				SARS-CoV-2    valid    igm    not-ready    not-implemented
+
+	ehr.create new ehr    000_ehr_status.json
+	observation.create observation sars-cov-2 igm  SARS-CoV-2 IgM  create-SARS-CoV-2-IgM.json
+	observation.validate response - 201
+
