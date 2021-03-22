@@ -47,6 +47,7 @@ public class CompositionConverterResolver implements InitializingBean {
         profiles.put(Profile.FIO2, new FiO2CompositionConverter());
         profiles.put(Profile.HEART_RATE, new HeartRateCompositionConverter());
         profiles.put(Profile.PATIENT_IN_ICU, new PatientInIcuCompositionConverter());
+        profiles.put(Profile.PCR, new PCRCompositionConverter());
         profiles.put(Profile.PREGNANCY_STATUS, new PregnancyStatusCompositionConverter());
         profiles.put(Profile.OBSERVATION_LAB, new ObservationLabCompositionConverter());
         profiles.put(Profile.RESPIRATORY_RATE, new RespiratoryRateCompositionConverter());
