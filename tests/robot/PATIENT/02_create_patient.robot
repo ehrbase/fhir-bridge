@@ -258,6 +258,7 @@ BUG TRACE 01 Create Patient (Invalid/Missing 'extension')
     $.extension[1]                                      missing	                422
     # invalid extension[1].url
     $.extension[1].url                                  ${randurl}              422
+    [Teardown]  TRACE GITHUB ISSUE  281
 
 
 
@@ -270,6 +271,7 @@ BUG TRACE 02 Create Patient (Invalid/Missing 'extension')
 	# 																            CODE
     # invalid extension[1].extension[1].valueAge.value
     $.extension[1].extension[1].valueAge.value          missing                 422
+    [Teardown]  TRACE GITHUB ISSUE  282
     
  
 
