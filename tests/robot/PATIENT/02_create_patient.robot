@@ -62,46 +62,31 @@ ${randurl}                      http://foobar.com
 	[Template]		    create patient w/o ehr reference
     [Tags]              identifier
 
-	# FIELD/PATH						VALUE							HTTP
-    #WIE SUBJECT.IDENTIFIER!!!!!
+	# FIELD/PATH			    VALUE					HTTP
+    # invalid cases for value
+    $.identifier.value		    missing					422
+    $.identifier.value		    foobar					422
+    $.identifier.value		    ${EMPTY}				422
+    $.identifier.value		    ${{ [] }}				422
+    $.identifier.value		    ${{ {} }}				422
+    $.identifier.value		    ${123}					422
+    
+    # invalid cases for system
+    $.identifier.system		    foobar					422
+    $.identifier.system		    ${EMPTY}				422
+    $.identifier.system		    ${{ [] }}				422
+    $.identifier.system		    ${{ {} }}				422
+    $.identifier.system		    ${123}					422
+
+    # invalid cases for identifier
+    $.identifier			    missing					422
+    $.identifier			    ${EMPTY}				422
+    $.identifier			    ${{ [] }}				422
+    $.identifier			    ${{ {} }}				422
+    $.identifier			    ${123}					422
 
 
-
-003 Create Patient (invalid/missing 'birthdate')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-patient-2.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``birthdate`` \n\n
-    ...                 5. *POST* example JSON to observation endpoint\n\n
-	...                 6. *VALIDATE* the response status \n\n                
-	[Template]		    create patient with ehr reference
-    [Tags]              birthdate
-
-	# FIELD/PATH			VALUE					HTTP
-    # missing value
-    §.birthdate             missing					422
-    §.birthdate             ${EMPTY}				422
-    §.birthdate             ${{ [] }}				422
-    §.birthdate             ${{ {} }}				422
-    §.birthdate             ${{ [{}] }}				422
-
-    # invalid value
-    $.birthdate             2020-09-00				422
-    $.birthdate             2020-09-32				422
-    $.birthdate             2020-09-dd				422
-    $.birthdate             2020-00-21				422
-    $.birthdate             2020-13-21				422
-    $.birthdate             2020-mm-21				422
-    $.birthdate             0000-09-21				422
-    $.birthdate             10000-09-21				422
-    $.birthdate             yyyy-09-21				422
-    $.birthdate             21.09.2020				422
-    $.birthdate             ${randstring}			422
-    $.birthdate             ${randinteger}			422
-
-
-
-004 Create Patient (invalid/missing 'extension')
+003 Create Patient (invalid/missing 'extension')
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-patient-2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -136,32 +121,27 @@ ${randurl}                      http://foobar.com
     $.extension[0].valueCoding              ${{ [{}] }}             422
 
     # invalid extension[0].valueCoding.system
-    $.extension[0].valueCoding.system       missing					422
     $.extension[0].valueCoding.system       ${None}                 422
     $.extension[0].valueCoding.system       ${EMPTY}				422
-    $.extension[0].valueCoding.system       ${randurl}      		422
     $.extension[0].valueCoding.system       ${randstring}			422
     $.extension[0].valueCoding.system       ${randinteger}			422
     $.extension[0].valueCoding.system       ${{ {} }}				422
 
     # invalid extension[0].valueCoding.code
-    $.extension[0].valueCoding.code         missing					422
     $.extension[0].valueCoding.code         ${EMPTY}				422
-    $.extension[0].valueCoding.code         ${randstring}			422
     $.extension[0].valueCoding.code         ${randinteger}			422
     $.extension[0].valueCoding.code         ${{ {} }}				422
     $.extension[0].valueCoding.code         ${{ [{}] }}				422
     
     #invalid extension[0].valueCoding.display
-    $.extension[0].valueCoding.display      missing                 422
     $.extension[0].valueCoding.display      ${EMPTY}				422
-    $.extension[0].valueCoding.display      ${randstring}           422
     $.extension[0].valueCoding.display      ${randinteger}			422
     $.extension[0].valueCoding.display      ${{ {} }}				422
     $.extension[0].valueCoding.display      ${{ [{}] }}				422   
 
     # invalid extension[1]
-    $.extension[1]                          missing	                422
+    # $.extension[1]                          missing	                422
+    # see Bug Trace 01
     $.extension[1]                          ${None}	                422
     $.extension[1]                          ${{ {} }}               422
     $.extension[1]                          ${{ [] }}               422
@@ -174,7 +154,8 @@ ${randurl}                      http://foobar.com
     $.extension[1].url                      ${randinteger}          422
     $.extension[1].url                      ${randfloat}            422
     $.extension[1].url                      ${{ {} }}               422
-    $.extension[1].url                      ${randurl}              422
+    # $.extension[1].url                      ${randurl}              422
+    # see Bug Trace 01
 
     # invalid extension[1].extension[0]
     $.extension[1].extension[0]             missing                 422
@@ -193,11 +174,11 @@ ${randurl}                      http://foobar.com
 
 
     # invalid extension[1].extension[0].valueDateTime
-    §.extension[1].extension[0].valueDateTime             missing					422
-    §.extension[1].extension[0].valueDateTime             ${EMPTY}				    422
-    §.extension[1].extension[0].valueDateTime             ${{ [] }}				    422
-    §.extension[1].extension[0].valueDateTime             ${{ {} }}				    422
-    §.extension[1].extension[0].valueDateTime             ${{ [{}] }}				422
+    $.extension[1].extension[0].valueDateTime             missing					422
+    $.extension[1].extension[0].valueDateTime             ${EMPTY}				    422
+    $.extension[1].extension[0].valueDateTime             ${{ [] }}				    422
+    $.extension[1].extension[0].valueDateTime             ${{ {} }}				    422
+    $.extension[1].extension[0].valueDateTime             ${{ [{}] }}				422
     $.extension[1].extension[0].valueDateTime             2020-09-00				422
     $.extension[1].extension[0].valueDateTime             2020-09-32				422
     $.extension[1].extension[0].valueDateTime             2020-09-dd				422
@@ -234,21 +215,18 @@ ${randurl}                      http://foobar.com
 
     # invalid extension[1].extension[1].valueAge.value
     
-    $.extension[1].extension[1].valueAge.value          missing             422
+    # $.extension[1].extension[1].valueAge.value          missing             422
+    # see Bug Trace 01
     $.extension[1].extension[1].valueAge.value          ${EMPTY}            422
     $.extension[1].extension[1].valueAge.value          ${None}             422
-    $.extension[1].extension[1].valueAge.value          ${randinteger}		422
-    $.extension[1].extension[1].valueAge.value          ${randfloat}        422
     $.extension[1].extension[1].valueAge.value          ${-1}               422
     $.extension[1].extension[1].valueAge.value          ${randstring}       422
 
     # invalid extension[1].extension[1].valueAge.unit
     
-    $.extension[1].extension[1].valueAge.unit           missing             422
     $.extension[1].extension[1].valueAge.unit           ${EMPTY}            422
     $.extension[1].extension[1].valueAge.unit           ${None}		        422
     $.extension[1].extension[1].valueAge.unit           ${123}              422
-    $.extension[1].extension[1].valueAge.unit           ${randstring}       422
 
     # invalid extension[1].extension[1].valueAge.system
     
@@ -264,8 +242,39 @@ ${randurl}                      http://foobar.com
     $.extension[1].extension[1].valueAge.code           ${EMPTY}	        422
     $.extension[1].extension[1].valueAge.code           ${None}		        422
     $.extension[1].extension[1].valueAge.code           ${123}		        422
-    $.extension[1].extension[1].valueAge.code           ${randstring}       422
-    	
+
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# BUG TRACE
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BUG TRACE 01 Create Patient (Invalid/Missing 'extension')
+	[Documentation]		Belongs to TC 003! Remove separation when it's fixed!
+	[Template]			create patient with ehr reference
+    [Tags]              extension    not-ready    not-ready_bug    281
+
+    # FIELD/PATH							            VALUE					HTTP
+	# 																            CODE
+    # invalid extension[1]
+    $.extension[1]                                      missing	                422
+    # invalid extension[1].url
+    $.extension[1].url                                  ${randurl}              422
+
+
+
+BUG TRACE 02 Create Patient (Invalid/Missing 'extension')
+	[Documentation]		Belongs to TC 003! Remove separation when it's fixed!
+	[Template]			create patient with ehr reference
+    [Tags]              extension    not-ready    not-ready_bug    282
+
+    # FIELD/PATH							            VALUE					HTTP
+	# 																            CODE
+    # invalid extension[1].extension[1].valueAge.value
+    $.extension[1].extension[1].valueAge.value          missing                 422
+    
+ 
+
+
+
 
 
 *** Keywords ***
