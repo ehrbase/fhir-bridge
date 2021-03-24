@@ -217,7 +217,6 @@ ${randinteger}                  ${12345}
 	# invalid/missing valueQuantity
 	$.valueQuantity			  					missing				422
 	$.valueQuantity			  					${None}				422
-	$.valueQuantity			  					${{ {} }}			422
 	
 	# missing parameters
 	$.valueQuantity.value	  					missing				422
