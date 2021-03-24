@@ -47,15 +47,11 @@ public abstract class AbstractSetupIT {
     protected final FhirContext context;
 
     protected final IGenericClient client;
-    private static final String BEARER_TOKEN = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJWN1pCbU9MTFFSWmtDVHFxS2J4djFMNHFTVzFyS280WnJ1eEpKUkFQUjNNIn0.eyJleHAiOjE2MTYwMjY2MTIsImlhdCI6MTYxNTk5MDYxMiwianRpIjoiMDk4MDkxYjQtZTYxZS00MTI0LWIzMDYtOWY4ZGQxMTI3MzNhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg4L2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIwYzFkMzc1NS1iZmUwLTQ5MmYtOTE1Mi1hZGZmODk4NzliZGMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJDTEktdGVzdCIsInNlc3Npb25fc3RhdGUiOiIxNTUyYzJlYy0xYWY1LTQzNjctOTMzYS05ZDVlZGZmOWE4OTMiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoic2VyZWYgc2VyZWYiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJlZiIsImdpdmVuX25hbWUiOiJzZXJlZiIsImZhbWlseV9uYW1lIjoic2VyZWYiLCJlbWFpbCI6InNlcmVmMUB4aW5vLmlvIn0.LUfgs18CcrX8Vj9jlt84nAVCtGhqJGxTGeQLrrPMsqjEJv4MWDnVtozrP_PyHrxgQ0rfq5rjL8ROFKx15oUEHHe0FSQ0xwze1BXpkUlhFFtpQExHy-fTRyWOoqsHoyiJ9AceP05Lix3uRmY9mtrPSA1ZDWluoDuj9l1NeA8VuOS14wWgWLGxPr3MLqwBLAztJIFZ0eVMtsav9jg38o7MmHXwcavGlImTa_cNaO12uNNnRPsixWV-mB9dIF6KkjT2xvCohbczGb9XUcOJUHakz5zyoCRr8tqgSUTHBg_hDk9fta3yCp8HGX7e1nxLFYidny_xK-2tRAY9NiuH2JZw9A";
 
     public AbstractSetupIT() {
         context = FhirContext.forR4();
         context.getRestfulClientFactory().setSocketTimeout(60 * 1000);
         client = context.newRestfulGenericClient("http://localhost:8888/fhir-bridge/fhir/");
-
-        BearerTokenAuthInterceptor tokenInterceptor = new BearerTokenAuthInterceptor(BEARER_TOKEN);
-        client.registerInterceptor(tokenInterceptor);
     }
 
     @BeforeAll
@@ -68,7 +64,7 @@ public abstract class AbstractSetupIT {
                 .build();
 
         DefaultRestClient client = new DefaultRestClient(
-                new OpenEhrClientConfig(new URI("http://localhost:8091/ehrbase/rest/openehr/v1/")),
+                new OpenEhrClientConfig(new URI("http://localhost:8080/ehrbase/rest/openehr/v1/")),
                 new ResourceTemplateProvider("classpath:/opt/*.opt"),
                 httpClient);
 
