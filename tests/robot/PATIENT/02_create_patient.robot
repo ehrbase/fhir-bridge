@@ -216,7 +216,7 @@ ${randurl}                      http://foobar.com
     # invalid extension[1].extension[1].valueAge.value
     
     # $.extension[1].extension[1].valueAge.value          missing             422
-    # see Bug Trace 01
+    # see Bug Trace 02
     $.extension[1].extension[1].valueAge.value          ${EMPTY}            422
     $.extension[1].extension[1].valueAge.value          ${None}             422
     $.extension[1].extension[1].valueAge.value          ${-1}               422
