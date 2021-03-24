@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.ehrbase.fhirbridge;
 
 import ca.uhn.fhir.interceptor.api.Interceptor;
@@ -15,6 +30,12 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 
 import java.util.*;
 
+/**
+ * This interceptor changes the behavior of a @{@link ca.uhn.fhir.rest.server.RestfulServer}
+ * instance by adding authorisation rules based on the existence of OAuth claims as defined
+ * by SMART on FHIR specifications.
+ * See HAPI FHIR project documentation to understand how this access control mechanism works.
+ */
 @Interceptor
 public class SmartOnFhirAuthzInterceptor extends AuthorizationInterceptor {
 
@@ -50,6 +71,15 @@ public class SmartOnFhirAuthzInterceptor extends AuthorizationInterceptor {
         return rules;
     }
 
+    /**
+     * Allos read and write access to all Patients resources for a particular patient Id
+     * In FHIR terms, if the resource's Patient compartment matches the provided id, then
+     * read and write operations can take place.
+     * @param pSmartOnFhirPatientId The patient identifier a resource should have to be allowed
+     *                              for read or write access.
+     * @param rules A list of rules to add to. Rules based on the provided patient id will be
+     *              added to this collection.
+     */
     private void addSmartOFPatientRules(String pSmartOnFhirPatientId, List<IAuthRule> rules) {
         //no create rule -> should be done by keycloak registration at the moment
         IdType sofId = new IdType(Patient.class.getSimpleName(), pSmartOnFhirPatientId);
