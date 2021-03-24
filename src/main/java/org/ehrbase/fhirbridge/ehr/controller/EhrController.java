@@ -1,10 +1,24 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.ehrbase.fhirbridge.ehr.controller;
 
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.ehr.EhrStatus;
 import com.nedap.archie.rm.generic.PartySelf;
 import com.nedap.archie.rm.support.identification.GenericId;
-import com.nedap.archie.rm.support.identification.HierObjectId;
 import com.nedap.archie.rm.support.identification.PartyRef;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -14,7 +28,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.ehrbase.client.openehrclient.OpenEhrClientConfig;
 import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
+import org.ehrbase.fhirbridge.config.SmartOnFhirConfig;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +38,16 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+@EnableConfigurationProperties({SmartOnFhirConfig.class})
 @RestController
 @RequestMapping("/ehradmin")
 public class EhrController {
+
+    private final SmartOnFhirConfig _smartOnFhirConfig  ;
+
+    public EhrController(SmartOnFhirConfig pConfig) {
+        _smartOnFhirConfig = pConfig;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
@@ -38,7 +61,7 @@ public class EhrController {
                 .build();
 
             DefaultRestClient client = new DefaultRestClient(
-                new OpenEhrClientConfig(new URI("http://localhost:8091/ehrbase/rest/openehr/v1/")),
+                new OpenEhrClientConfig(new URI(_smartOnFhirConfig.getEhrBaseUrl())),
                 new ResourceTemplateProvider("classpath:/opt/*.opt"),
                 httpClient);
 
