@@ -44,9 +44,7 @@ public abstract class AbstractConverter<S extends Resource, T extends RMEntity> 
         identifier.setType("fhir_logical_id");
         List<DvIdentifier> identifiers = new ArrayList<>();
         identifiers.add(identifier);
-        result.setFeederSystemItemIds(identifiers);
+        result.setOriginatingSystemItemIds(identifiers);
         return result;
     }
-
-
 }

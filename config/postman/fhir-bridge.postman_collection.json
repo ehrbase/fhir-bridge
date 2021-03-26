@@ -28,7 +28,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/AuditEvent?outcome=4",
+									"raw": "{{baseUrl}}/fhir/AuditEvent?outcome",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -139,7 +139,12 @@
 										},
 										{
 											"key": "outcome",
-											"value": "4"
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "outcome",
+											"value": null
 										},
 										{
 											"key": "policy",
@@ -709,7 +714,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Consent",
+									"raw": "{{baseUrl}}/fhir/Consent?patient.identifier={{patientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -719,129 +724,8 @@
 									],
 									"query": [
 										{
-											"key": "_id",
-											"value": "5",
-											"disabled": true
-										},
-										{
-											"key": "_language",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "_lastUpdated",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "_profile",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "_source",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "_security",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "_tag",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "_content",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "_text",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "_filter",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "action",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "actor",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "category",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "consentor",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "data",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "date",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "identifier",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "organization",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "patient",
-											"value": "{{patientId}}",
-											"disabled": true
-										},
-										{
-											"key": "period",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "purpose",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "scope",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "security-label",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "source-reference",
-											"value": null,
-											"disabled": true
-										},
-										{
-											"key": "status",
-											"value": null,
-											"disabled": true
+											"key": "patient.identifier",
+											"value": "{{patientId}}"
 										}
 									]
 								}

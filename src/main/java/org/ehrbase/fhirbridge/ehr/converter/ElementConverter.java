@@ -6,8 +6,8 @@ import org.springframework.lang.NonNull;
 
 import java.time.temporal.TemporalAccessor;
 
-
 @FunctionalInterface
-public interface ElementConverter<E extends Element, T>  {
+public interface ElementConverter<E extends Element, T> {
+
     T convert(@NonNull E element, Language language, TemporalAccessor authored);
 }

@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 import org.hl7.fhir.r4.model.Resource;
 import org.springframework.lang.NonNull;
 
@@ -11,5 +10,6 @@ import org.springframework.lang.NonNull;
  */
 @FunctionalInterface
 public interface ResourceConverter<S extends Resource, T> {
+
     T convert(@NonNull S resource);
 }
