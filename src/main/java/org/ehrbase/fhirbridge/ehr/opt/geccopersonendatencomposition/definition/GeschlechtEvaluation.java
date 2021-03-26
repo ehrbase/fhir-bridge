@@ -16,13 +16,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.gender.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-04T14:52:22.446443800+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-15T15:57:50.628643+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class GeschlechtEvaluation implements EntryEntity {
   /**
    * Path: GECCO_Personendaten/Geschlecht/Administratives Geschlecht
    * Description: Das Geschlecht einer Person, das für administrative Zwecke verwendet wird.
+   * Comment: Dieses Element beschreibt das, was die meisten Systeme heutzutage als "Geschlecht" (vgl. engl.: "Sex" oder "Gender") bezeichnen. Zum Beispiel "Männlich", "Weiblich", "Divers". Dieser Archetyp entspricht dem HL7 FHIR Element "Person.gender"'. Die Kodierung mit einer Terminologie wird empfohlen, wenn möglich.
    */
   @Path("/data[at0002]/items[at0022]/value|defining_code")
   private AdministrativesGeschlechtDefiningCode administrativesGeschlechtDefiningCode;
@@ -36,6 +37,7 @@ public class GeschlechtEvaluation implements EntryEntity {
   /**
    * Path: GECCO_Personendaten/Geschlecht/Geschlecht bei der Geburt
    * Description: Das Geschlecht einer Person, bestimmt durch anatomische Merkmale, welches bei der Geburt festgestellt und eingetragen wurden.
+   * Comment: Zum Beispiel: "Männlich", "Weiblich", "Divers". Die Kodierung mit einer Terminologie wird empfohlen, wenn möglich. Falls notwendig, benutzen Sie das Element "Kommentar" oder den SLOT "Details" um genauere Angaben zum Geschlecht der Person zu machen.
    */
   @Path("/data[at0002]/items[at0019 and name/value='Geschlecht bei der Geburt']/value|defining_code")
   private GeschlechtBeiDerGeburtDefiningCode geschlechtBeiDerGeburtDefiningCode;

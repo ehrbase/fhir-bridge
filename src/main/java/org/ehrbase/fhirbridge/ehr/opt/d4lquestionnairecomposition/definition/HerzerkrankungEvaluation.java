@@ -17,13 +17,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.problem_diagnosis.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-25T13:06:41.144036+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T12:09:15.803987+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class HerzerkrankungEvaluation implements EntryEntity {
   /**
    * Path: Selbstüberwachung/Vor-/Grunderkrankungen/Herzerkrankung/Name des Problems/ der Diagnose
    * Description: Namentliche Identifikation des Problems oder der Diagnose.
+   * Comment: Wo möglich, ist die Kodierung des Problems oder der Diagnose über eine Terminologie zu bevorzugen.
    */
   @Path("/data[at0001]/items[at0002]/value|value")
   private String nameDesProblemsDerDiagnoseValue;
@@ -37,6 +38,7 @@ public class HerzerkrankungEvaluation implements EntryEntity {
   /**
    * Path: Selbstüberwachung/Vor-/Grunderkrankungen/Herzerkrankung/Vorhanden?
    * Description: Beschreibung des Problems oder der Diagnose.
+   * Comment: Wird verwendet, um Hintergrund und Kontext, einschließlich Entwicklung, Episoden oder Verschlechterungen, Fortschritt und andere relevante Details über das Problem oder die Diagnose zu liefern.
    */
   @Path("/data[at0001]/items[at0009 and name/value='Vorhanden?']/value|defining_code")
   private VorhandenDefiningCode vorhandenDefiningCode;
