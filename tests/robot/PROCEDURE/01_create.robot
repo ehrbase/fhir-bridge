@@ -892,11 +892,12 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-implemented    alternative    sct    period
+	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-ready_bug    alternative    sct    period    287
 
     ehr.create new ehr    000_ehr_status.json
-    procedure.create prone position    Generic Therapy - Prone Position sct period   create-prone-position-in-progress_sct-period
+    procedure.create prone position    Generic Therapy - Prone Position sct period   create-prone-position-in-progress_sct-period.json
     procedure.validate response - 201
+	[Teardown]	TRACE GITHUB ISSUE  287
 
 
 
@@ -906,9 +907,10 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-implemented    alternative    sct    period_2
+	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-ready_bug    alternative    sct    period_2    287
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create prone position    Generic Therapy - Prone Position sct period_2    create-prone-position-in-progress_sct-period2.json
     procedure.validate response - 201
+	[Teardown]	TRACE GITHUB ISSUE  287
 

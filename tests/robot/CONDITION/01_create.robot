@@ -495,12 +495,12 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-kidney-disease    valid
+    [Tags]              chronic-kidney-disease    valid    288    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic kidney diseases    Chronic Kidney Disease (Disorder - Unknown)    create-chronic-kidney-disease-unknown.json
     condition.validate response - 201
-
+    [Teardown]  TRACE GITHUB ISSUE    288
 
 037 Create Chronic Kidney Disease (Disorder - stage 5 on dialysis)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
@@ -547,12 +547,12 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid
+    [Tags]              chronic-neurological-or-mental-disease    valid    288    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Combined disorder of muscle AND peripheral nerve)    create-chronic-neurological-or-mental-disease-muscle-and-peripheral-nerve.json
     condition.validate response - 201
-
+    [Teardown]  TRACE GITHUB ISSUE    288 
 
 041 Create Chronic Neurological or Mental Diseases (Dementia)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
@@ -560,12 +560,12 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid
+    [Tags]              chronic-neurological-or-mental-disease    valid    288    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Dementia)    create-chronic-neurological-or-mental-disease-dementia.json
     condition.validate response - 201
-
+    [Teardown]  TRACE GITHUB ISSUE    288  
 
 042 Create Chronic Neurological or Mental Diseases (Depressive Disorder)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
@@ -586,12 +586,12 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid
+    [Tags]              chronic-neurological-or-mental-disease    valid    288    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Epilepsy)    create-chronic-neurological-or-mental-disease-epilepsy.json
     condition.validate response - 201
-
+    [Teardown]  TRACE GITHUB ISSUE    288  
 
 044 Create Chronic Neurological or Mental Diseases (History of Cerebrovascular Accident with Residual Deficits)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
@@ -651,12 +651,12 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid
+    [Tags]              chronic-neurological-or-mental-disease    valid    288    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Multiple Sclerosis)    create-chronic-neurological-or-mental-disease-multiple-sclerosis.json
     condition.validate response - 201
-
+    [Teardown]  TRACE GITHUB ISSUE    288  
 
 049 Create Chronic Neurological or Mental Diseases (Parkinson's Disease)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
@@ -664,12 +664,12 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              chronic-neurological-or-mental-disease    valid
+    [Tags]              chronic-neurological-or-mental-disease    valid    288    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create chronic neurological or mental diseases    Chronic Neurological or Mental Diseases (Parkinson's Disease)    create-chronic-neurological-or-mental-disease-parkinsons.json
     condition.validate response - 201
-
+    [Teardown]  TRACE GITHUB ISSUE    288  
 
 050 Create Chronic Neurological or Mental Diseases (Psychotic Disorder)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
@@ -716,12 +716,12 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid
+    [Tags]              cardiovascular-diseases    valid    288    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (Carotid Artery Stenosis)    create-cardiovascular-diseases-carotid-artery-stenosis.json
     condition.validate response - 201
-
+    [Teardown]  TRACE GITHUB ISSUE    288  
 
 054 Create Cardiovascular Diseases (Coronary Arteriosclerosis)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
@@ -729,12 +729,12 @@ Force Tags              condition_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to condition endpoint\n\n
 	...                 5. *VALIDATE* the response status
-    [Tags]              cardiovascular-diseases    valid
+    [Tags]              cardiovascular-diseases    valid    288    not-ready_bug    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     condition.create cardiovascular diseases    Cardiovascular Diseases (Coronary Arteriosclerosis)    create-cardiovascular-diseases-coronary-arteriosclerosis.json
     condition.validate response - 201
-
+    [Teardown]  TRACE GITHUB ISSUE    288  
 
 055 Create Cardiovascular Diseases (Heart Failure)
 	[Documentation]     1. *CREATE* new EHR record\n\n 
