@@ -19,25 +19,27 @@ package org.ehrbase.fhirbridge.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * {@link ConfigurationProperties ConfigurationProperties} to configure HAPI FHIR.
+ * {@link ConfigurationProperties ConfigurationProperties} to configure CORS.
  *
  * @since 1.0.0
  */
-@ConfigurationProperties(prefix = "fhir-bridge.fhir.cors")
-public class FhirCorsProperties {
-
-    private String allowedHeaders;
-
-    private String allowedMethods;
+@ConfigurationProperties(prefix = "fhir-bridge.cors")
+public class CorsProperties {
 
     private String allowedOrigins;
 
-    public String getAllowedHeaders() {
-        return allowedHeaders;
+    private String allowedMethods;
+
+    private String allowedHeaders;
+
+    private boolean allowCredentials;
+
+    public String getAllowedOrigins() {
+        return allowedOrigins;
     }
 
-    public void setAllowedHeaders(String allowedHeaders) {
-        this.allowedHeaders = allowedHeaders;
+    public void setAllowedOrigins(String allowedOrigins) {
+        this.allowedOrigins = allowedOrigins;
     }
 
     public String getAllowedMethods() {
@@ -48,11 +50,19 @@ public class FhirCorsProperties {
         this.allowedMethods = allowedMethods;
     }
 
-    public String getAllowedOrigins() {
-        return allowedOrigins;
+    public String getAllowedHeaders() {
+        return allowedHeaders;
     }
 
-    public void setAllowedOrigins(String allowedOrigins) {
-        this.allowedOrigins = allowedOrigins;
+    public void setAllowedHeaders(String allowedHeaders) {
+        this.allowedHeaders = allowedHeaders;
+    }
+
+    public boolean isAllowCredentials() {
+        return allowCredentials;
+    }
+
+    public void setAllowCredentials(boolean allowCredentials) {
+        this.allowCredentials = allowCredentials;
     }
 }

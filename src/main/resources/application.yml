@@ -10,11 +10,11 @@ fhir-bridge:
   composition:
     debug: true
     output-directory: "src/main/resources/"
-  fhir:
-    cors:
-      allowed-headers: '*'
-      allowed-methods: '*'
-      allowed-origins: '*'
+  cors:
+    allowed-headers: '*'
+    allowed-methods: '*'
+    allowed-origins: '*'
+    allow-credentials: false
 spring:
   application:
     name: FHIR Bridge

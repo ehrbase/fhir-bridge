@@ -12,7 +12,6 @@ import org.openehealth.ipf.boot.fhir.IpfBootFhirServlet;
 import org.openehealth.ipf.boot.fhir.IpfFhirConfigurationProperties;
 import org.openehealth.ipf.commons.ihe.fhir.IpfFhirServlet;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -21,7 +20,6 @@ import org.springframework.web.cors.CorsConfiguration;
  * {@link Configuration Configuration} for IPF FHIR Servlet.
  */
 @Configuration
-@EnableConfigurationProperties(FhirCorsProperties.class)
 public class IpfFhirConfiguration {
 
     @Bean
@@ -58,11 +56,12 @@ public class IpfFhirConfiguration {
     }
 
     @Bean
-    public CorsInterceptor corsInterceptor(FhirCorsProperties properties) {
+    public CorsInterceptor corsInterceptor(CorsProperties properties) {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedHeader(properties.getAllowedHeaders());
         configuration.addAllowedOrigin(properties.getAllowedOrigins());
         configuration.addAllowedMethod(properties.getAllowedMethods());
+        configuration.setAllowCredentials(properties.isAllowCredentials());
         CorsInterceptor interceptor = new CorsInterceptor(configuration);
         interceptor.setConfig(configuration);
         return interceptor;
