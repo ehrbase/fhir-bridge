@@ -222,10 +222,10 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	history-of-travel   valid    not-ready    not-implemented
+	[Tags]             	history-of-travel   valid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create history of travel    create-history-of-travel.json
+	observation.create history of travel    create-history-of-travel-yes.json
   	observation.validate response - 201
 
 

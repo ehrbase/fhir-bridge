@@ -36,7 +36,6 @@ validate response - 201
     String     response body resourceType    DiagnosticReport
     String     response body id
     String     response body meta versionId    1
-    string     response body contained 0 resourceType    Observation
 
 
 validate response - 422 (missing observation)
