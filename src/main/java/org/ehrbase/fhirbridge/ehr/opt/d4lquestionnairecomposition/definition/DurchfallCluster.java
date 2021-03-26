@@ -16,13 +16,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.symptom_sign.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-25T13:06:41.072181+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T12:09:15.745852+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class DurchfallCluster implements LocatableEntity {
   /**
    * Path: Selbstüberwachung/Symptome/Problem/Diagnose/Durchfall/Name des Symptoms/Krankheitsanzeichens
    * Description: Der Name des berichteten Symptoms/Krankheitsanzeichens.
+   * Comment: Der Name des Symptoms sollte, wenn möglich, mit einer Terminologie kodiert werden.
    */
   @Path("/items[at0001]/value|value")
   private String nameDesSymptomsKrankheitsanzeichensValue;
@@ -36,6 +37,7 @@ public class DurchfallCluster implements LocatableEntity {
   /**
    * Path: Selbstüberwachung/Symptome/Problem/Diagnose/Durchfall/Vorhanden?
    * Description: Das identifizierte Symptom/Krankheitsanzeichen wurde als nicht signifikant gemeldet.
+   * Comment: Dokumentieren Sie diesen Wert als "wahr", wenn der Patient das Symptom als nicht signifikant gemeldet hat. Zum Beispiel: Wenn die Person das Symptom noch nie erlebt hat, ist es angebracht "nicht signifikant" zu erfassen; oder wenn die Person das Symptom gewöhnlich erlebt, kann es unter bestimmten Umständen als angemessen erachtet werden, "nicht signifikant" zu erfassen, wenn die Person dieses nicht als Abweichung von ihrem Normalzustand empfindet.
    */
   @Path("/items[at0035 and name/value='Vorhanden?']/value|value")
   private Boolean vorhandenValue;

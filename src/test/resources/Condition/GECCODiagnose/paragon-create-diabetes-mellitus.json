@@ -22,7 +22,7 @@
     } ],
     "originating_system_audit" : {
       "_type" : "FEEDER_AUDIT_DETAILS",
-      "system_id" : "FHIR-bridge"
+      "system_id" : "FHIR-Bridge"
     }
   },
   "language" : {

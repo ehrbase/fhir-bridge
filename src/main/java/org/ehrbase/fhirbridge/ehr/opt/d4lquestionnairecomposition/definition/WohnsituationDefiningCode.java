@@ -4,9 +4,9 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum WohnsituationDefiningCode implements EnumValueSet {
-  ALLEIN_WOHNEND("Allein wohnend", "Allein wohnend", "LOINC", "LA6255-9"),
+  WOHNT_MIT_ANDEREN_ZUSAMMEN("Wohnt mit anderen zusammen", "", "LOINC", "LA9996-5"),
 
-  WOHNT_MIT_ANDEREN_ZUSAMMEN("Wohnt mit anderen zusammen", "Wohnt mit anderen zusammen", "LOINC", "LA9996-5");
+  ALLEIN_WOHNEND("Allein wohnend", "", "LOINC", "LA6255-9");
 
   private String value;
 
