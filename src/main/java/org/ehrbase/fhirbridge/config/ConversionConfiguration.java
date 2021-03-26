@@ -1,31 +1,32 @@
 package org.ehrbase.fhirbridge.config;
 
+import org.ehrbase.fhirbridge.ehr.converter.ConversionService;
+import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodpressure.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight.BodyHeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodytemperature.BodyTemperatureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyweight.BodyWeightCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionService;
+import org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty.ClinicalFrailtyScaleScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.coronavirusnachweistest.CoronavirusNachweisTestCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.diagnose.DiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab.DiagnosticReportLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.fio2.FiO2CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HeartRateCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.pregnancystatus.PregnancyStatusCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.procedure.ProcedureCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate.RespiratoryRateCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty.ClinicalFrailtyScaleScoreCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccoDiagnose.GECCODiagnoseCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HeartRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.ObservationLabCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu.PatientInIcuCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.pregnancystatus.PregnancyStatusCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.procedure.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseOximetryConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund.RadiologischerBefundConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate.RespiratoryRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus.SmokingStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.sofascore.SofaScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.SymptomCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +44,7 @@ public class ConversionConfiguration {
         registerDiagnosticReportConverters(conversionService);
         registerObservationConverters(conversionService);
         registerPatientConverters(conversionService);
+        registerProcedureConverters(conversionService);
         registerQuestionnaireResponseConverter(conversionService);
 
         return conversionService;
@@ -93,13 +95,25 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.RESPIRATORY_RATE, new RespiratoryRateCompositionConverter());
         conversionService.registerConverter(Profile.SOFA_SCORE, new SofaScoreCompositionConverter());
         conversionService.registerConverter(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
-        conversionService.registerConverter(Profile.PROCEDURE, new ProcedureCompositionConverter());
+
         conversionService.registerConverter(Profile.TRAVEL_HISTORY, new HistoryOfTravelConverter());
         conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryConverter());
     }
 
     private void registerPatientConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.PATIENT, new PatientCompositionConverter());
+    }
+
+    private void registerProcedureConverters(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.PROCEDURE, new ProcedureCompositionConverter());
+
+        TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
+        conversionService.registerConverter(Profile.APHERESIS_PROCEDURE, therapyCompositionConverter);
+        conversionService.registerConverter(Profile.DIALYSIS_PROCEDURE, therapyCompositionConverter);
+        conversionService.registerConverter(Profile.EXTRACORPOREAL_MEMBRANE_OXYGENATION_PROCEDURE, therapyCompositionConverter);
+        conversionService.registerConverter(Profile.PRONE_POSITION_PROCEDURE, therapyCompositionConverter);
+        conversionService.registerConverter(Profile.RADIOLOGY_PROCEDURE, therapyCompositionConverter);
+        conversionService.registerConverter(Profile.RESPIRATORY_THERAPIES_PROCEDURE, therapyCompositionConverter);
     }
 
     private void registerQuestionnaireResponseConverter(ConversionService conversionService) {

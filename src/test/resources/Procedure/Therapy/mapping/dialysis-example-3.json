@@ -1,0 +1,36 @@
+{
+  "resourceType": "Procedure",
+  "id": "3def6ffd-45de-4b02-a98f-f0ba54a3adcd",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dialysis"
+    ]
+  },
+  "status": "completed",
+  "category": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "277132007",
+        "display": "Therapeutic procedure (procedure)"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "108241001",
+        "display": "Dialysis procedure (procedure)"
+      }
+    ],
+    "text": "Dialysis"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "performedDateTime": "2020-09-30"
+}

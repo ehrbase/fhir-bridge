@@ -44,7 +44,7 @@ ${randinteger}                  ${12345}
 	[Template]		    create Observation lab with ehr reference
     [Tags]          	resourceType
 
-	# FIELD/PATH					VALUE							HTTP																		            Location
+	# FIELD/PATH					VALUE							HTTP
 	# 																CODE
     $.resourceType					missing							422
     $.resourceType					${randstring}					422
@@ -64,21 +64,48 @@ ${randinteger}                  ${12345}
 	[Template]			create Observation lab with ehr reference
     [Tags]              identifier
 
-	# FIELD/PATH					VALUE							HTTP																										Location
-	# 																CODE
-	$.identifier					${EMPTY}						422
-	$.identifier					${{ [] }}						422
-	$.identifier					${{ {} }}						422
-	$.identifier					${{ [{}] }}						422
+	# FIELD/PATH									VALUE							HTTP
+	# invalid identifier
+	$.identifier									${EMPTY}						422
+	$.identifier									${{ [] }}						422
+	$.identifier									${{ {} }}						422
+	$.identifier									${{ [{}] }}						422
+
+	# invalid type
+	$.identifier[0].type							${EMPTY}						422
+	$.identifier[0].type							${{ [] }}						422
+	$.identifier[0].type							${{ {} }}						422
+	$.identifier[0].type							${{ [{}] }}						422
+
+	# invalid type coding
+	$.identifier[0].type.coding						${EMPTY}						422
+	$.identifier[0].type.coding						${{ [] }}						422
+	$.identifier[0].type.coding						${{ {} }}						422
+	$.identifier[0].type.coding						${{ [{}] }}						422
+
+	# invalid type coding system
+	$.identifier[0].type.coding[0].system			${EMPTY}					 	422
+	$.identifier[0].type.coding[0].system			${randinteger}				 	422
+	$.identifier[0].type.coding[0].system			${randstring}				 	422
+
+	# invalid type coding code
+	$.identifier[0].type.coding[0].code				${EMPTY}					 	422
+	$.identifier[0].type.coding[0].code				${randinteger}				 	422
 
 	# invalid system
-	$.identifier[0].system			${EMPTY}					 	422
-	$.identifier[0].system			${randinteger}				 	422
-	$.identifier[0].system			${randstring}				 	422
+	$.identifier[0].system							${EMPTY}					 	422
+	$.identifier[0].system							${randinteger}				 	422
+	$.identifier[0].system							${randstring}				 	422
 
 	# invalid value
-	$.identifier[0].value			${EMPTY}					 	422
-	$.identifier[0].value			${randinteger}				 	422
+	$.identifier[0].value							${EMPTY}					 	422
+	$.identifier[0].value							${randinteger}				 	422
+
+	# invalid assigner
+	$.identifier[0].assigner						${EMPTY}						422
+	$.identifier[0].assigner						${{ [] }}						422
+	$.identifier[0].assigner						${{ {} }}						422
+	$.identifier[0].assigner						${{ [{}] }}						422
 
 
 003 Create Observation lab (Invalid/Missing 'category')
@@ -91,7 +118,7 @@ ${randinteger}                  ${12345}
 	[Template]			create Observation lab with ehr reference
     [Tags]              category
 
-	# FIELD/PATH							VALUE					HTTP																									Location
+	# FIELD/PATH							VALUE					HTTP
 	# 																CODE
 
 	#invalid coding
@@ -131,7 +158,7 @@ ${randinteger}                  ${12345}
 	[Template]			create Observation lab with ehr reference
     [Tags]              code
 
-	# FIELD/PATH							VALUE					HTTP																									Location
+	# FIELD/PATH							VALUE					HTTP
 	# 																CODE
 
 	# invalid code
@@ -180,7 +207,7 @@ ${randinteger}                  ${12345}
 	[Template]			create Observation lab with ehr reference
     [Tags]              valueQuantity
 
-	# FIELD/PATH								VALUE				HTTP																									Location
+	# FIELD/PATH								VALUE				HTTP
 	# 																CODE
 
 	# invalid/missing valueQuantity
