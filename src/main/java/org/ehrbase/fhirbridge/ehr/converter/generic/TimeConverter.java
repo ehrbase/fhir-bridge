@@ -13,11 +13,11 @@ import java.util.Optional;
 
 class TimeConverter {
 
-    static TemporalAccessor convertQuestionnaireResponseTime(QuestionnaireResponse questionnaireResponse){
-        return  OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
+    static TemporalAccessor convertQuestionnaireResponseTime(QuestionnaireResponse questionnaireResponse) {
+        return OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
     }
 
-    static TemporalAccessor convertObservationTime(Observation observation){
+    static TemporalAccessor convertObservationTime(Observation observation) {
         if (observation.hasEffectiveDateTimeType()) { // EffectiveDateTime
             return observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
         } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) { // EffectivePeriod
@@ -35,24 +35,24 @@ class TimeConverter {
         }
     }
 
-    static Optional<TemporalAccessor> convertObservationEndTime(Observation observation){
-            if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasEnd()) { // EffectivePeriod
-                return Optional.of(observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
-            } else {
-                return Optional.empty();
+    static Optional<TemporalAccessor> convertObservationEndTime(Observation observation) {
+        if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasEnd()) { // EffectivePeriod
+            return Optional.of(observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+        } else {
+            return Optional.empty();
         }
     }
 
     public static TemporalAccessor convertConditionTime(Condition condition) {
-         if(condition.hasRecordedDateElement()){
+        if (condition.hasRecordedDateElement()) {
             return condition.getRecordedDateElement().getValueAsCalendar().toZonedDateTime();
-         }else if(condition.hasOnset() && condition.hasOnsetDateTimeType()){
+        } else if (condition.hasOnset() && condition.hasOnsetDateTimeType()) {
             return condition.getOnsetDateTimeType().getValueAsCalendar().toZonedDateTime();
-        }else if(condition.hasOnset() && condition.hasOnsetPeriod()){
-             return condition.getOnsetPeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
-        }else {
-             throw new ConversionException("Start time is not defined in condition");
-         }
+        } else if (condition.hasOnset() && condition.hasOnsetPeriod()) {
+            return condition.getOnsetPeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
+        } else {
+            throw new ConversionException("Start time is not defined in condition");
+        }
     }
 
     public static Optional<TemporalAccessor> convertConditionEndTime(Condition condition) {

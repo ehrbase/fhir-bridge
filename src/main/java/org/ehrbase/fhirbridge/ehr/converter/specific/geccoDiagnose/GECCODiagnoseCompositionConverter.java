@@ -4,6 +4,7 @@ import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
@@ -17,7 +18,7 @@ import org.springframework.lang.NonNull;
 
 import java.util.Optional;
 
-public class GECCODiagnoseCompositionConverter extends CompositionConverter<Condition, GECCODiagnoseComposition> {
+public class GECCODiagnoseCompositionConverter extends ConditionToCompositionConverter<GECCODiagnoseComposition> {
 
     private static final String VERIFICATION_STATUS_PRESENT_CODE = "410605003";
 
