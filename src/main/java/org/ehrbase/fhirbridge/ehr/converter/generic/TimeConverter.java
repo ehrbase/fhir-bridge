@@ -11,13 +11,13 @@ import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
 
-class TimeConverter {
+public class TimeConverter {
 
     static TemporalAccessor convertQuestionnaireResponseTime(QuestionnaireResponse questionnaireResponse) {
         return OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
     }
 
-    static TemporalAccessor convertObservationTime(Observation observation) {
+    public static TemporalAccessor convertObservationTime(Observation observation) {
         if (observation.hasEffectiveDateTimeType()) { // EffectiveDateTime
             return observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
         } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) { // EffectivePeriod
