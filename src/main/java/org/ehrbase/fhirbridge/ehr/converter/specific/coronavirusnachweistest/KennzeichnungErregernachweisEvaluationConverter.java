@@ -1,12 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.coronavirusnachweistest;
 
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToEvaluationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.ErregernameDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.kennzeichnungerregernachweissarscov2composition.definition.KennzeichnungErregernachweisEvaluation;
-import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 
 import java.time.OffsetDateTime;
