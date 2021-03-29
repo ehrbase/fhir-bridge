@@ -95,6 +95,7 @@ public class VorliegendeDiagnoseConverter {
     }
 
     private VorliegendeDiagnoseEvaluation getVorliegendeDiagnose() {
+        //TODO fix
         if (vorliegendeDiagnoseEvaluationOptional.isEmpty()) {
             VorliegendeDiagnoseEvaluation vorliegendeDiagnose = new VorliegendeDiagnoseEvaluation();
             vorliegendeDiagnose.setLanguage(Language.DE);

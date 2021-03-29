@@ -1,15 +1,16 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
+import io.micrometer.core.lang.NonNull;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.hl7.fhir.r4.model.Condition;
 
-public class ConditionToCompositionConverter<C extends CompositionEntity>  extends CompositionConverter<Condition, C>{
+public abstract class ConditionToCompositionConverter<C extends CompositionEntity>  extends CompositionConverter<Condition, C>{
 
     @Override
-    protected C convertInternal(Condition resource) {
+    public C convert(@NonNull Condition resource) {
         C composition = super.convert(resource);
-        composition.setStartTimeValue(TimeConverter.convertConditionTime(resource)); // StartTimeValue
-        TimeConverter.convertConditionEndTime(resource).ifPresent(composition::setEndTimeValue); // EndTimeValue
+        composition.setStartTimeValue(TimeConverter.convertConditionTime(resource));
+        TimeConverter.convertConditionEndTime(resource).ifPresent(composition::setEndTimeValue);
         return composition;
     }
 
