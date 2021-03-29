@@ -19,7 +19,7 @@ public class LaborergebnisObservationConverter extends ObservationToObservationC
     @Override
     protected LaborergebnisObservation convertInternal(Observation resource) {
         LaborergebnisObservation laborergebnisObservation = new LaborergebnisObservation();
-        initialiseLabortestBezeichnungMap(resource);
+        initialiseLabortestBezeichnungMap();
         ProLaboranalytCluster laboranalyt = new LaborAnalytConverter().convert(resource);
         setLaborergebnisKategorieDefiningCode(laborergebnisObservation, resource);
         setProbe(resource, laborergebnisObservation);
@@ -28,7 +28,7 @@ public class LaborergebnisObservationConverter extends ObservationToObservationC
         return laborergebnisObservation;
     }
 
-    private void initialiseLabortestBezeichnungMap(Observation resource) {
+    private void initialiseLabortestBezeichnungMap() {
         for (LabortestKategorieDefiningCode code : LabortestKategorieDefiningCode.values()) {
             if (code.getTerminologyId().equals("LOINC")) {
                 labortestBezeichnungLOINCDefiningcodeMap.put(code.getCode(), code);
