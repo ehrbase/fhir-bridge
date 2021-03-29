@@ -28,7 +28,7 @@ public class GECCODiagnoseCompositionConverter extends ConditionToCompositionCon
     public GECCODiagnoseComposition convertInternal(@NonNull Condition resource) {
         GECCODiagnoseComposition composition = new GECCODiagnoseComposition();
 
-        Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose = new VorliegendeDiagnoseConverter().map(resource);
+        Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose = Optional.of(new VorliegendeDiagnoseConverter().convert(resource));
         if (resource.getVerificationStatus().isEmpty()) {
             composition.setUnbekannteDiagnose(new UnbekannteDiagnoseEvaluationConverter().convert(resource));
         } else {
