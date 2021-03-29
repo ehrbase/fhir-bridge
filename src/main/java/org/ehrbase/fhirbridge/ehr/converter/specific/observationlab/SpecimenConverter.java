@@ -41,7 +41,7 @@ public class SpecimenConverter {
     }
 
     private ProbeEignungZumTestenChoice getEignungZumTesten(Specimen specimenTarget) {
-        EignungZumTestenDefiningCode eignungZumTestenDefiningcode = EignungZumTestenDefiningCode.ZUFRIEDENSTELLEND;
+        EignungZumTestenDefiningCode eignungZumTestenDefiningcode;
         switch (specimenTarget.getStatus()) {
             case UNSATISFACTORY:
                 eignungZumTestenDefiningcode = EignungZumTestenDefiningCode.MANGELHAFT_VERARBEITET;
@@ -52,6 +52,7 @@ public class SpecimenConverter {
                 eignungZumTestenDefiningcode = EignungZumTestenDefiningCode.MANGELHAFT_NICHT_VERARBEITET;
                 break;
             default:
+                eignungZumTestenDefiningcode = EignungZumTestenDefiningCode.ZUFRIEDENSTELLEND;
                 break;
         }
 
