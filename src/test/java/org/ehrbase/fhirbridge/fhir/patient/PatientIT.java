@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.fhir.patient;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.PatientCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.GECCOPersonendatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
@@ -40,7 +40,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     void mappingPatient() throws IOException {
         Patient patient = (Patient) super.testFileLoader.loadResource("create-patient.json");
         PatientCompositionConverter patientCompositionConverterConverter = new PatientCompositionConverter();
-        GECCOPersonendatenComposition mappedGeccoPersonendatenComposition = patientCompositionConverterConverter.toComposition(patient);
+        GECCOPersonendatenComposition mappedGeccoPersonendatenComposition = patientCompositionConverterConverter.convert(patient);
         Diff diff = compareCompositions(getJavers(), "paragon-GECCO-patient-mapping-output.json", mappedGeccoPersonendatenComposition);
 
         assertEquals(0, diff.getChanges().size());
@@ -85,7 +85,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Patient patient = (Patient) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () ->
-            new PatientCompositionConverter().toComposition((patient))
+            new PatientCompositionConverter().convert((patient))
         );
     }
 
@@ -98,7 +98,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(GECCOPersonendatenComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(GECCOPersonendatenComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject((PersonendatenAdminEntry.class))
                 .registerValueObject((AlterObservation.class))
                 .registerValueObject((EthnischerHintergrundCluster.class))

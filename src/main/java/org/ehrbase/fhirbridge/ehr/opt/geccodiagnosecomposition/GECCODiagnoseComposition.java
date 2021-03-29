@@ -32,11 +32,17 @@ import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.Vorlie
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-26T00:40:41.764844+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T11:53:07.573814+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("GECCO_Diagnose")
 public class GECCODiagnoseComposition implements CompositionEntity, Composition {
+  /**
+   * Path: GECCO_Diagnose/category
+   */
+  @Path("/category|defining_code")
+  private Category categoryDefiningCode;
+
   /**
    * Path: GECCO_Diagnose/context/Erweiterung
    * Description: Ergänzende Angaben zum Registereintrag.
@@ -147,12 +153,6 @@ public class GECCODiagnoseComposition implements CompositionEntity, Composition 
   private FeederAudit feederAudit;
 
   /**
-   * Path: GECCO_Diagnose/category
-   */
-  @Path("/category|defining_code")
-  private Category categoryDefiningCode;
-
-  /**
    * Path: GECCO_Diagnose/territory
    */
   @Path("/territory")
@@ -160,6 +160,14 @@ public class GECCODiagnoseComposition implements CompositionEntity, Composition 
 
   @Id
   private VersionUid versionUid;
+
+  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+     this.categoryDefiningCode = categoryDefiningCode;
+  }
+
+  public Category getCategoryDefiningCode() {
+     return this.categoryDefiningCode ;
+  }
 
   public void setErweiterung(List<Cluster> erweiterung) {
      this.erweiterung = erweiterung;
@@ -296,14 +304,6 @@ public class GECCODiagnoseComposition implements CompositionEntity, Composition 
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
-  }
-
-  public void setCategoryDefiningCode(Category categoryDefiningCode) {
-     this.categoryDefiningCode = categoryDefiningCode;
-  }
-
-  public Category getCategoryDefiningCode() {
-     return this.categoryDefiningCode ;
   }
 
   public void setTerritory(Territory territory) {

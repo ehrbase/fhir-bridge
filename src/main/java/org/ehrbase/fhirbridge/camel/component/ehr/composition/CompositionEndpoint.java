@@ -22,9 +22,6 @@ public class CompositionEndpoint extends DefaultEndpoint {
     @UriParam
     private CompositionOperation operation;
 
-    @UriParam
-    private CompositionConverter<Composition, Object> compositionConverter;
-
     private Class<?> expectedType;
 
     @UriParam
@@ -66,14 +63,6 @@ public class CompositionEndpoint extends DefaultEndpoint {
 
     public void setOperation(CompositionOperation operation) {
         this.operation = operation;
-    }
-
-    public CompositionConverter<Composition, Object> getCompositionConverter() {
-        return compositionConverter;
-    }
-
-    public void setCompositionConverter(CompositionConverter<Composition, Object> compositionConverter) {
-        this.compositionConverter = compositionConverter;
     }
 
     public Class<?> getExpectedType() {
