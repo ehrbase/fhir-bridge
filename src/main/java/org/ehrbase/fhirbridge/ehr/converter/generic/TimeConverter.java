@@ -1,6 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
@@ -38,6 +40,26 @@ class TimeConverter {
                 return Optional.of(observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
             } else {
                 return Optional.empty();
+        }
+    }
+
+    public static TemporalAccessor convertConditionTime(Condition condition) {
+         if(condition.hasRecordedDateElement()){
+            return condition.getRecordedDateElement().getValueAsCalendar().toZonedDateTime();
+         }else if(condition.hasOnset() && condition.hasOnsetDateTimeType()){
+            return condition.getOnsetDateTimeType().getValueAsCalendar().toZonedDateTime();
+        }else if(condition.hasOnset() && condition.hasOnsetPeriod()){
+             return condition.getOnsetPeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
+        }else {
+             throw new ConversionException("Start time is not defined in condition");
+         }
+    }
+
+    public static Optional<TemporalAccessor> convertConditionEndTime(Condition condition) {
+        if (condition.hasOnsetPeriod() && condition.getOnsetPeriod().hasEnd()) { // EffectivePeriod
+            return Optional.of(condition.getOnsetPeriod().getEndElement().getValueAsCalendar().toZonedDateTime());
+        } else {
+            return Optional.empty();
         }
     }
 }
