@@ -23,7 +23,7 @@ Test Setup              generic.prepare new request session    Prefer=return=rep
 Documentation           *NOTE:* Use Regular Expressions to replace braces () as described here:
 ...                	    https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example \n\n
 ...						*Author:* Peter Wohlfarth
-Force Tags              observation_create    oxygen-saturation    invalid    create
+Force Tags              observation_create    history-of-travel    invalid    create
 
 
 *** Variables ***
@@ -33,12 +33,258 @@ ${randinteger}                  ${12345}
 
 *** Test Cases ***
 001 Create History of Travel (invalid/missing 'resourceType')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n                
+	[Template]		    create History of Travel with ehr reference
+    [Tags]          	resourceType
+
+	# FIELD/PATH					VALUE							HTTP																		            Location
+	# 																CODE
+    $.resourceType					missing							422
+    $.resourceType					${randstring}					422
+    $.resourceType					${EMPTY}						422
+    $.resourceType					${randinteger}					422
+
+
+
 002 Create History of Travel (invalid/missing 'identifier')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+    ...                 
+	[Template]			create History of Travel with ehr reference
+    [Tags]              identifier
+
+	# FIELD/PATH	                				VALUE							HTTP																										Location
+    # invalid identifier
+    $.identifier									${EMPTY}						422
+    $.identifier									${{ [] }}						422
+    $.identifier									${{ {} }}						422
+    $.identifier									${{ [{}] }}						422
+
+    # invalid type
+    $.identifier[0].type							${EMPTY}						422
+    $.identifier[0].type							${{ [] }}						422
+    $.identifier[0].type							${{ {} }}						422
+    $.identifier[0].type							${{ [{}] }}						422
+
+    # invalid type coding
+    $.identifier[0].type.coding						${EMPTY}						422
+    $.identifier[0].type.coding						${{ [] }}						422
+    $.identifier[0].type.coding						${{ {} }}						422
+    $.identifier[0].type.coding						${{ [{}] }}						422
+
+    # invalid type coding system
+    $.identifier[0].type.coding[0].system			${EMPTY}					 	422
+    $.identifier[0].type.coding[0].system			${randinteger}				 	422
+    $.identifier[0].type.coding[0].system			${randstring}				 	422
+
+    # invalid type coding code
+    $.identifier[0].type.coding[0].code				${EMPTY}					 	422
+    $.identifier[0].type.coding[0].code				${randinteger}				 	422
+
+    # invalid system
+    $.identifier[0].system							${EMPTY}					 	422
+    $.identifier[0].system							${randinteger}				 	422
+    $.identifier[0].system							${randstring}				 	422
+
+    # invalid value
+    $.identifier[0].value							${EMPTY}					 	422
+    $.identifier[0].value							${randinteger}				 	422
+
+    # invalid assigner
+    $.identifier[0].assigner						${EMPTY}						422
+    $.identifier[0].assigner						${{ [] }}						422
+    $.identifier[0].assigner						${{ {} }}						422
+    $.identifier[0].assigner						${{ [{}] }}						422
+
+    # invalid assigner reference
+    $.identifier[0].assigner.reference				${EMPTY}					 	422
+    $.identifier[0].assigner.reference				${randinteger}				 	422
+
+
+
 003 Create History of Travel (invalid/missing 'category')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Category`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n               
+	[Template]			create History of Travel with ehr reference
+    [Tags]              category
+
+	# FIELD/PATH							VALUE					HTTP
+	# 																CODE
+
+	#invalid coding
+	$.category[0].coding    				missing					422
+	$.category[0].coding    				${EMPTY}				422
+	$.category[0].coding					${{ [] }}				422
+	$.category[0].coding					${{ {} }}				422
+	$.category[0].coding					${{ [{}] }}				422
+
+	#invalid code 0
+	$.category[0].coding[0].code    		${EMPTY}    	    	422
+	$.category[0].coding[0].code    		${randstring}	    	422
+	$.category[0].coding[0].code    		${randinteger}	    	422
+    $.category[0].coding[0].code 			${{ [] }}				422
+	$.category[0].coding[0].code 			${{ {} }}				422
+	$.category[0].coding[0].code 			${{ [{}] }}				422
+
+	# invaild system 0
+	$.category[0].coding[0].system    		${EMPTY}    	    	422
+	$.category[0].coding[0].system    		${randstring}	    	422
+	$.category[0].coding[0].system    		${randinteger}	    	422
+	$.category[0].coding[0].system    		http://foobar.de      	422
+    $.category[0].coding[0].system 			${{ [] }}				422
+	$.category[0].coding[0].system 			${{ {} }}				422
+	$.category[0].coding[0].system 			${{ [{}] }}				422
+
+
+
 004 Create History of Travel (invalid/missing 'code')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``Code`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n                 
+	[Template]			create History of Travel with ehr reference
+    [Tags]              code
+
+	# FIELD/PATH							VALUE					HTTP																									Location
+	# 																CODE
+
+	# invalid code
+	$.code									missing					422
+	$.code									${EMPTY}				422
+	$.code									${{ [] }}				422
+	$.code									${{ {} }}				422
+	$.code									${{ [{}] }}				422
+
+	# invalid coding 0
+	$.code.coding[0]   	 					missing					422
+	$.code.coding[0]	    				${EMPTY}				422
+	$.code.coding[0]						${{ [] }}				422
+	$.code.coding[0]						${{ {} }}				422
+	$.code.coding[0]						${{ [{}] }}				422
+
+	# invalid Code Coding 0 System
+	$.code.coding[0].system					missing					422
+	$.code.coding[0].system					${EMPTY}				422
+	$.code.coding[0].system					http://foobar.de		422
+	$.code.coding[0].system					${randstring}			422
+	$.code.coding[0].system					${randinteger}			422
+    $.code.coding[0].system      			${{ [] }}				422
+	$.code.coding[0].system      			${{ {} }}				422
+	$.code.coding[0].system      			${{ [{}] }}				422
+
+	# invalid Code Coding 0 Code
+	$.code.coding[0].code					missing					422
+	$.code.coding[0].code					${EMPTY}				422
+	$.code.coding[0].code					${randstring}			422
+	$.code.coding[0].code					${randinteger}			422
+    $.code.coding[0].code      			    ${{ [] }}				422
+	$.code.coding[0].code      			    ${{ {} }}				422
+	$.code.coding[0].code      			    ${{ [{}] }}				422
+
+	# invalid coding 1
+	# $.code.coding[1]   	 					missing					422
+	# parameter code.coding is 1..1 in https://simplifier.net/ForschungsnetzCovid-19/HistoryOfTravel/ 
+	# If one valid coding array is present, the example stays valid.
+	$.code.coding[1]	    				${EMPTY}				422
+	$.code.coding[1]						${{ [] }}				422
+	$.code.coding[1]						${{ {} }}				422
+	$.code.coding[1]						${{ [{}] }}				422
+
+	# invalid Code Coding 1 System
+	# $.code.coding[1].system					missing					422
+	# parameter code.coding is 1..1 in https://simplifier.net/ForschungsnetzCovid-19/HistoryOfTravel/ 
+	# If one valid coding array is present, the example stays valid.	
+	$.code.coding[1].system					${EMPTY}				422
+	# $.code.coding[1].system					http://foobar.de		422
+	# parameter code.coding is 1..1 in https://simplifier.net/ForschungsnetzCovid-19/HistoryOfTravel/ 
+	# If one valid coding array is present, the example stays valid. FHIR-bridge takes the valid parameter from code.coding[0].system	
+	$.code.coding[1].system					${randstring}			422
+	$.code.coding[1].system					${randinteger}			422
+    $.code.coding[1].system      			${{ [] }}				422
+	$.code.coding[1].system      			${{ {} }}				422
+	$.code.coding[1].system      			${{ [{}] }}				422
+
+	# invalid Code Coding 1 Code
+	# $.code.coding[1].code					missing					422
+	# parameter code.coding is 1..1 in https://simplifier.net/ForschungsnetzCovid-19/HistoryOfTravel/ 
+	# If one valid coding array is present, the example stays valid.
+	$.code.coding[1].code					${EMPTY}				422
+	# $.code.coding[1].code					${randstring}			422
+	# parameter code.coding is 1..1 in https://simplifier.net/ForschungsnetzCovid-19/HistoryOfTravel/ 
+	# If one valid coding array is present, the example stays valid. FHIR-bridge takes the valid parameter from code.coding[0].code
+	$.code.coding[1].code					${randinteger}			422
+    $.code.coding[1].code      			    ${{ [] }}				422
+	$.code.coding[1].code      			    ${{ {} }}				422
+	$.code.coding[1].code      			    ${{ [{}] }}				422
+
+
+
 005 Create History of Travel (invalid/missing 'subject')
+	[Documentation]     1. *LOAD* _create-history-of-travel.json_ \n\n
+	...                 2. *UPDATE* values for attribute ``Subject`` \n\n
+    ...                 3. *POST* example JSON to observation endpoint \n\n
+	...                 4. *VALIDATE* the response status              
+	[Template]		    create History of Travel w/o ehr reference 
+    [Tags]          	subject
+
+	# FIELD/PATH					VALUE							HTTP
+	# 																CODE
+    # invalid cases for value
+    $.subject.identifier.value		missing							422
+    $.subject.identifier.value		foobar							422
+    $.subject.identifier.value		${EMPTY}						422
+    $.subject.identifier.value		${{ [] }}						422
+    $.subject.identifier.value		${{ {} }}						422
+    $.subject.identifier.value		${123}							422
+
+	# invalid cases for system
+    $.subject.identifier.system		foobar							422
+    $.subject.identifier.system		${EMPTY}						422
+    $.subject.identifier.system		${{ [] }}						422
+    $.subject.identifier.system		${{ {} }}						422
+    $.subject.identifier.system		${123}							422
+
+	# invalid cases for identifier
+    $.subject.identifier			missing							422
+    $.subject.identifier			${EMPTY}						422
+    $.subject.identifier			${{ [] }}						422
+    $.subject.identifier			${{ {} }}						422
+    $.subject.identifier			${123}							422
+
+	# invalid cases for subject
+    $.subject						missing							422
+    $.subject						${EMPTY}						422
+    $.subject						${{ [] }}						422
+    $.subject						${{ {} }}						422
+    $.subject						${123}							422
+	
+	# comment: random uuid												
+    $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
+
+
+
 006 Create History of Travel (invalid/missing 'valueCodeableConcept')
 007 Create History of Travel (invalid/missing 'component')
+008 Create History of Travel (invalid/missing 'component[0] start date')
+009 Create History of Travel (invalid/missing 'component[1] country')
+010 Create History of Travel (invalid/missing 'component[2] state')
+011 Create History of Travel (invalid/missing 'component[3] city')
+012 Create History of Travel (invalid/missing 'component[4] end date')
 
 
 
@@ -58,22 +304,22 @@ ${randinteger}                  ${12345}
 
 
 
-create Oxygen Saturation with ehr reference
+create History of Travel with ehr reference
 	[Arguments]         ${json_path}        ${value}                 ${http_status_code}
 
 						ehr.create new ehr                      000_ehr_status.json
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Observation           Oxygen Saturation            	${payload}
+						observation.POST /Observation           History of Travel            	${payload}
 						observation.validate response - 422 (w/o error message)  ${http_status_code}
 
 
-create Oxygen Saturation w/o ehr reference    
+create History of Travel w/o ehr reference    
 	[Arguments]         ${json_path}        ${value}                ${http_status_code}
 
 	${fake_ehr_ref}=	Evaluate    str(uuid.uuid4())    uuid
 						Set Test Variable    ${subject_id}    ${fake_ehr_ref}
 	${payload}=    		generate payload from example json      ${json_path}                ${value}
-						observation.POST /Observation           Oxygen Saturation            	${payload}
+						observation.POST /Observation           History of Travel            	${payload}
 						observation.validate response - 422 (w/o error message)  ${http_status_code}
 
 
@@ -81,7 +327,7 @@ generate payload from example json
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-oxygen-saturation.json
+	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-history-of-travel.json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 
