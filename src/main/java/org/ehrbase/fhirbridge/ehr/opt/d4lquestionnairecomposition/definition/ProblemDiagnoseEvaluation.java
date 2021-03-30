@@ -18,13 +18,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.problem_diagnosis.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-25T13:06:40.938814+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T12:09:15.674103+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class ProblemDiagnoseEvaluation implements EntryEntity {
   /**
    * Path: Selbstüberwachung/Symptome/Problem/Diagnose/Name des Problems/ der Diagnose
    * Description: Namentliche Identifikation des Problems oder der Diagnose.
+   * Comment: Wo möglich, ist die Kodierung des Problems oder der Diagnose über eine Terminologie zu bevorzugen.
    */
   @Path("/data[at0001]/items[at0002]/value|value")
   private String nameDesProblemsDerDiagnoseValue;
@@ -46,6 +47,7 @@ public class ProblemDiagnoseEvaluation implements EntryEntity {
   /**
    * Path: Selbstüberwachung/Symptome/Problem/Diagnose/Datum/ Zeitpunkt des Auftretens/ der Erstdiagnose
    * Description: Geschätzte oder exakte Zeit (bzw. Datum), zu der die Krankheitsanzeichen oder Symptome zum ersten mal beobachtet wurden.
+   * Comment: Datumswerte, die als "Alter zu Beginn" erfasst/importiert werden, sollten anhand des Geburtsdatums der Person in ein Datum umgewandelt werden.
    */
   @Path("/data[at0001]/items[at0077]/value|value")
   private TemporalAccessor datumZeitpunktDesAuftretensDerErstdiagnoseValue;

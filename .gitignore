@@ -1,4 +1,5 @@
 .idea
+*.iml
 
 target
 
@@ -27,7 +28,5 @@ tests/report.html
 # files for local usage only!
 local*.http
 
-fhir-bridge.iml
-src/main/resources/MappingOutput.json
 
 mapping-output.json

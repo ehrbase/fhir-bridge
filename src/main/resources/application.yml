@@ -8,8 +8,13 @@ fhir-bridge:
     template:
       prefix: classpath:/opt/
   composition:
-    debug: false
+    debug: true
     output-directory: "src/main/resources/"
+  fhir:
+    cors:
+      allowed-headers: '*'
+      allowed-methods: '*'
+      allowed-origins: '*'
 spring:
   application:
     name: FHIR Bridge
