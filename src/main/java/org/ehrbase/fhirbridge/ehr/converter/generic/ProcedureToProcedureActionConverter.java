@@ -26,7 +26,9 @@ public abstract class ProcedureToProcedureActionConverter <E extends EntryEntity
     public void invokeSetTimeValue(E entryEntity, Procedure resource){
         try {
             Method setOriginValue = entryEntity.getClass().getMethod("setOriginValue", TemporalAccessor.class);
-            setOriginValue.invoke(entryEntity, TimeConverter.convertProcedureTime(resource));
+            if(TimeConverter.convertProcedureTime(resource).isPresent()){
+                setOriginValue.invoke(entryEntity, TimeConverter.convertProcedureTime(resource).get());
+            }
         } catch (IllegalAccessException | InvocationTargetException exception) {
             exception.printStackTrace();
         } catch (NoSuchMethodException ignored){
@@ -37,7 +39,9 @@ public abstract class ProcedureToProcedureActionConverter <E extends EntryEntity
     public void invokeOriginValue(E entryEntity, Procedure resource){
         try {
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
-            setTimeValue.invoke(entryEntity, TimeConverter.convertProcedureTime(resource));
+            if(TimeConverter.convertProcedureTime(resource).isPresent()){
+                setTimeValue.invoke(entryEntity, TimeConverter.convertProcedureTime(resource).get());
+            }
         } catch ( IllegalAccessException | InvocationTargetException exception) {
             exception.printStackTrace();
         }catch (NoSuchMethodException ignored){
