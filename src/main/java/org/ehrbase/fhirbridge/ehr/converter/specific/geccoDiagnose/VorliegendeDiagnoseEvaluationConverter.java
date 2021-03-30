@@ -12,11 +12,13 @@ import org.hl7.fhir.r4.model.Condition;
 import java.util.List;
 import java.util.Optional;
 
-public class VorliegendeDiagnoseConverter extends EntryEntityConverter<Condition, VorliegendeDiagnoseEvaluation> {
-    private Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnoseEvaluationOptional = Optional.empty();
+public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter<Condition, VorliegendeDiagnoseEvaluation> {
+
+    boolean isEmpty = true;
 
     @Override
     protected VorliegendeDiagnoseEvaluation convertInternal(Condition resource) {
+        isEmpty = true;
         VorliegendeDiagnoseEvaluation vorliegendeDiagnose = new VorliegendeDiagnoseEvaluation();
         mapNameDesProblemsDerDiagnose(resource, vorliegendeDiagnose);
         mapBodySite(resource, vorliegendeDiagnose);
@@ -26,14 +28,15 @@ public class VorliegendeDiagnoseConverter extends EntryEntityConverter<Condition
         return vorliegendeDiagnose;
     }
 
+
     private void mapKommentar(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         if (!condition.getNote().isEmpty()) {
             StringBuilder kommentar = new StringBuilder();
-
             for (Annotation annotation : condition.getNote()) {
                 kommentar.append(annotation.getText());
             }
             vorliegendeDiagnose.setKommentarValue(kommentar.toString());
+            isEmpty=false;
         }
 
     }
@@ -41,10 +44,12 @@ public class VorliegendeDiagnoseConverter extends EntryEntityConverter<Condition
     private void mapDates(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         if (condition.getOnsetDateTimeType() != null && condition.getOnsetDateTimeType().getValueAsCalendar() != null) {
             vorliegendeDiagnose.setDatumZeitpunktDesAuftretensDerErstdiagnoseValue(condition.getOnsetDateTimeType().getValueAsCalendar().toZonedDateTime());
+            isEmpty=false;
         }
 
         if (condition.getAbatementDateTimeType() != null && condition.getAbatementDateTimeType().getValueAsCalendar() != null) {
             vorliegendeDiagnose.setDatumZeitpunktDerGenesungValue(condition.getAbatementDateTimeType().getValueAsCalendar().toZonedDateTime());
+            isEmpty=false;
         }
 
     }
@@ -52,9 +57,9 @@ public class VorliegendeDiagnoseConverter extends EntryEntityConverter<Condition
     private void mapSeverity(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         if (!condition.getSeverity().isEmpty()) {
             Coding severity = condition.getSeverity().getCoding().get(0);
-
             if (severity.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().containsKey(severity.getCode())) {
                 vorliegendeDiagnose.setSchweregradDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().get(severity.getCode()));
+                isEmpty=false;
             } else {
                 throw new ConversionException("Severity not processable.");
             }
@@ -78,8 +83,11 @@ public class VorliegendeDiagnoseConverter extends EntryEntityConverter<Condition
     private void addKoerperstelleCluster(KoerperstelleCluster korperstelleCluster, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         if (vorliegendeDiagnose.getKoerperstelle() == null || vorliegendeDiagnose.getKoerperstelle().size() == 0) {
             vorliegendeDiagnose.setKoerperstelle(List.of(korperstelleCluster));
+            isEmpty=false;
+
         } else {
             vorliegendeDiagnose.getKoerperstelle().add(korperstelleCluster);
+            isEmpty=false;
         }
     }
 
@@ -88,7 +96,12 @@ public class VorliegendeDiagnoseConverter extends EntryEntityConverter<Condition
         if (problem.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
                 GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().containsKey(problem.getCode())) {
             vorliegendeDiagnose.setNameDesProblemsDerDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getNameDesProblemDiagnoseMap().get(problem.getCode()));
+            isEmpty=false;
         }
+    }
+
+    public boolean getIsEmpty(){
+        return isEmpty;
     }
 }
 

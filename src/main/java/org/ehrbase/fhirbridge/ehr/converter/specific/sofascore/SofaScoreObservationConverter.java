@@ -16,9 +16,6 @@ public class SofaScoreObservationConverter {
     public SofaScoreObservation convert(Observation observation) {
         SofaScoreObservation sofaScore = new SofaScoreObservation();
         mapCodes(sofaScore, observation);
-        sofaScore.setSubject(new PartySelf());
-        sofaScore.setLanguage(Language.DE);
-        mapTimeDate(observation, sofaScore);
         return sofaScore;
     }
 
@@ -183,49 +180,7 @@ public class SofaScoreObservationConverter {
         }
     }
 
-    private void mapTimeDate(Observation observation, SofaScoreObservation result) {
-        tryEffectiveDateTime(observation, result);
-        tryEffectiveInstantType(observation, result);
-        tryEffectivePeriodType(observation, result);
-    }
 
-    private void tryEffectiveDateTime(Observation observation, SofaScoreObservation result) {
-        try {
-            result.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-            result.setOriginValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        } catch (FHIRException fhirException) {
-            if (isTimeTypeException(fhirException.toString())) {
-                throw fhirException;
-            }
-        }
-    }
-
-    private void tryEffectiveInstantType(Observation observation, SofaScoreObservation result) {
-        try {
-            result.setTimeValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
-            result.setOriginValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
-        } catch (FHIRException fhirException) {
-            if (isTimeTypeException(fhirException.toString())) {
-                throw fhirException;
-            }
-        }
-    }
-
-    private void tryEffectivePeriodType(Observation observation, SofaScoreObservation result) {
-        try {
-            LocalDateTime date = LocalDateTime.ofInstant(observation.getEffectivePeriod().getEnd().toInstant(), ZoneOffset.UTC);
-            result.setTimeValue(date);
-            result.setOriginValue(date);
-        } catch (FHIRException fhirException) {
-            if (isTimeTypeException(fhirException.toString())) {
-                throw fhirException;
-            }
-        }
-    }
-
-    private boolean isTimeTypeException(String exceptionMessage) {
-        return !(exceptionMessage.contains("Type mismatch: the type") && exceptionMessage.contains("was expected,") && exceptionMessage.contains("was encountered"));
-    }
 
     private void checkIfEmpty(Observation.ObservationComponentComponent component, String name) {
         if (component.getValueCodeableConcept().getCoding().isEmpty()) {

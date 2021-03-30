@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.ObservationLabCompositionConverter;
@@ -16,7 +17,7 @@ import java.util.List;
 
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
 
-public class LaborergebnisObservationConverter extends EntryEntityConverter<DiagnosticReport, LaborergebnisObservation> {
+public class LaborergebnisObservationConverter extends DiagnosticReportToObservationConverter<LaborergebnisObservation> {
 
     @Override
     protected LaborergebnisObservation convertInternal(DiagnosticReport diagnosticReport) {

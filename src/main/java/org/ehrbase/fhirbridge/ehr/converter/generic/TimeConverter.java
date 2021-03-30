@@ -2,8 +2,9 @@ package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.hl7.fhir.r4.model.Condition;
-import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.time.OffsetDateTime;
@@ -58,6 +59,42 @@ public class TimeConverter {
     public static Optional<TemporalAccessor> convertConditionEndTime(Condition condition) {
         if (condition.hasOnsetPeriod() && condition.getOnsetPeriod().hasEnd()) { // EffectivePeriod
             return Optional.of(condition.getOnsetPeriod().getEndElement().getValueAsCalendar().toZonedDateTime());
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public static TemporalAccessor convertDiagnosticReportTime(DiagnosticReport resource) {
+        if (resource.hasEffectiveDateTimeType()) { // EffectiveDateTime
+            return resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+        } else if (resource.hasEffectivePeriod() && resource.getEffectivePeriod().hasStart()) { // EffectivePeriod
+            return resource.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
+        } else {
+            throw new ConversionException("Start time is not defined in DiagnosticReport");
+        }
+    }
+
+    public static Optional<TemporalAccessor> convertDiagnosticReportEndTime(DiagnosticReport resource) {
+        if (resource.hasEffectivePeriod() && resource.getEffectivePeriod().hasEnd()) { // EffectivePeriod
+            return Optional.of(resource.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public static TemporalAccessor convertProcedureTime(Procedure resource) {
+        if (resource.hasPerformedDateTimeType()) { // EffectiveDateTime
+            return resource.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime();
+        } else if (resource.hasPerformedPeriod() && resource.getPerformedPeriod().hasStart()) { // EffectivePeriod
+            return resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
+        } else {
+            throw new ConversionException("Start time is not defined in Procedure");
+        }
+    }
+
+    public static Optional<TemporalAccessor> convertProcedureEndTime(Procedure resource) {
+        if (resource.hasPerformedPeriod() && resource.getPerformedPeriod().hasEnd()) { // EffectivePeriod
+            return Optional.of(resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
         } else {
             return Optional.empty();
         }

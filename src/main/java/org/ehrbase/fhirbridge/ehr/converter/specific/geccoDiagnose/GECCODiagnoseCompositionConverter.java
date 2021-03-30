@@ -1,21 +1,16 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccoDiagnose;
 
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
+import org.checkerframework.checker.nullness.Opt;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AussageUeberDenAusschlussDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.UnbekannteDiagnoseEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
 import org.springframework.lang.NonNull;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public class GECCODiagnoseCompositionConverter extends ConditionToCompositionConverter<GECCODiagnoseComposition> {
@@ -28,7 +23,7 @@ public class GECCODiagnoseCompositionConverter extends ConditionToCompositionCon
     public GECCODiagnoseComposition convertInternal(@NonNull Condition resource) {
         GECCODiagnoseComposition composition = new GECCODiagnoseComposition();
 
-        Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose = Optional.of(new VorliegendeDiagnoseConverter().convert(resource));
+        Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose =  getVorliegendeDiagnose(resource);
         if (resource.getVerificationStatus().isEmpty()) {
             composition.setUnbekannteDiagnose(new UnbekannteDiagnoseEvaluationConverter().convert(resource));
         } else {
@@ -53,6 +48,15 @@ public class GECCODiagnoseCompositionConverter extends ConditionToCompositionCon
             throw new ConversionException("Category not present");
         }
         return composition;
+    }
+
+    private Optional<VorliegendeDiagnoseEvaluation> getVorliegendeDiagnose(Condition resource) {
+        VorliegendeDiagnoseEvaluationConverter vorliegendeDiagnoseEvaluationConverter = new VorliegendeDiagnoseEvaluationConverter();
+        VorliegendeDiagnoseEvaluation vorliegendeDiagnose = vorliegendeDiagnoseEvaluationConverter.convert(resource);
+        if(vorliegendeDiagnoseEvaluationConverter.getIsEmpty()){
+            return Optional.empty();
+        }
+        return Optional.of(vorliegendeDiagnose);
     }
 
 }
