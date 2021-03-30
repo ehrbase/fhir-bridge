@@ -12,10 +12,6 @@ import java.util.Map;
 
 public class LaborergebnisObservationConverter extends ObservationToObservationConverter<LaborergebnisObservation> {
 
-    private static final Map<String, LabortestKategorieDefiningCode> labortestBezeichnungLOINCDefiningcodeMap
-            = new HashMap<>();
-
-
     @Override
     protected LaborergebnisObservation convertInternal(Observation resource) {
         LaborergebnisObservation laborergebnisObservation = new LaborergebnisObservation();
@@ -31,7 +27,7 @@ public class LaborergebnisObservationConverter extends ObservationToObservationC
     private void initialiseLabortestBezeichnungMap() {
         for (LabortestKategorieDefiningCode code : LabortestKategorieDefiningCode.values()) {
             if (code.getTerminologyId().equals("LOINC")) {
-                labortestBezeichnungLOINCDefiningcodeMap.put(code.getCode(), code);
+                LabortestKategorieDefiningCode.getCodesAsMap().put(code.getCode(), code);
             }
         }
     }
@@ -45,7 +41,7 @@ public class LaborergebnisObservationConverter extends ObservationToObservationC
     private void setLaborergebnisKategorieDefiningCode(LaborergebnisObservation laborergebnisObservation, Observation resource) {
         if (resource.getCategory().get(0).getCoding().get(0).getSystem().equals(CodeSystem.LOINC.getUrl())) {
             String loincCode = resource.getCategory().get(0).getCoding().get(0).getCode();
-            LabortestKategorieDefiningCode categoryDefiningcode = labortestBezeichnungLOINCDefiningcodeMap.get(loincCode);
+            LabortestKategorieDefiningCode categoryDefiningcode = LabortestKategorieDefiningCode.getCodesAsMap().get(loincCode);
             if (categoryDefiningcode == null) {
                 throw new ConversionException("Unknown LOINC code in observation");
             }

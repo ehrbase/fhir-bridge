@@ -1,12 +1,12 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
+package org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum DefiningCode implements EnumValueSet {
-    N261665006("261665006", "261665006", "SNOMED Clinical Terms", "261665006");
+public enum AussageUberDenAusschlussDefiningCode implements EnumValueSet {
+    N410594000("410594000", "410594000", "SNOMED Clinical Terms", "410594000");
 
     private String value;
 
@@ -16,7 +16,8 @@ public enum DefiningCode implements EnumValueSet {
 
     private String code;
 
-    DefiningCode(String value, String description, String terminologyId, String code) {
+    AussageUberDenAusschlussDefiningCode(String value, String description, String terminologyId,
+                                         String code) {
         this.value = value;
         this.description = description;
         this.terminologyId = terminologyId;

@@ -18,18 +18,11 @@ import java.util.Map;
 
 public class LaborAnalytConverter {
 
-    private static final Map<String, InterpretationDefiningCode> referenzBereichsHTTPDefiningcodeMap
-            = new HashMap<>();
-
-    private static final Map<String, UntersuchterAnalytDefiningCode> untersuchterAnalytLOINCDefiningcodeMap
-            = new HashMap<>();
-
     public ProLaboranalytCluster convert(Observation observation) {
         ProLaboranalytCluster proLaboranalytCluster = new ProLaboranalytCluster();
         ProLaboranalytErgebnisStatusDvCodedText ergebnisStatus = new ProLaboranalytErgebnisStatusDvCodedText();
         ergebnisStatus.setErgebnisStatusDefiningCode(getLaboranalyteStatusDefiningCode(observation));
         proLaboranalytCluster.setErgebnisStatus(ergebnisStatus);
-        initialiseMaps();
         setKommentarElement(proLaboranalytCluster, observation);
         setMesswert(observation, proLaboranalytCluster);
         proLaboranalytCluster.setUntersuchterAnalytDefiningCode(getUntersuchterAnalyt(observation));
@@ -51,14 +44,14 @@ public class LaborAnalytConverter {
     private void setInterpretationDefiningCode(Observation observation, ProLaboranalytCluster proLaboranalytCluster) {
         if (!observation.getInterpretation().isEmpty() && observation.getInterpretation().get(0).getCoding().get(0).getSystem().equals("http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation")) {
             String code = observation.getInterpretation().get(0).getCoding().get(0).getCode();
-            proLaboranalytCluster.setInterpretationDefiningCode(referenzBereichsHTTPDefiningcodeMap.get(code));
+            proLaboranalytCluster.setInterpretationDefiningCode(InterpretationDefiningCode.getCodesAsMap().get(code));
         }
     }
 
     private UntersuchterAnalytDefiningCode getUntersuchterAnalyt(Observation observation) {
         if (observation.getCode().getCoding().get(0).getSystem().equals("http://loinc.org")) {
             String code = observation.getCode().getCoding().get(0).getCode();
-            return  untersuchterAnalytLOINCDefiningcodeMap.get(code);
+            return  UntersuchterAnalytDefiningCode.getCodesAsMap().get(code);
         }else{
             throw new ConversionException("untersuchterAnalyt is required in FHIR Observation");
         }
@@ -87,20 +80,6 @@ public class LaborAnalytConverter {
         }
     }
 
-    private void initialiseMaps() {
-        for (UntersuchterAnalytDefiningCode code : UntersuchterAnalytDefiningCode.values()) {
-            if (code.getTerminologyId().equals("LOINC")) {
-                untersuchterAnalytLOINCDefiningcodeMap.put(code.getCode(), code);
-            }
-        }
-
-        for (InterpretationDefiningCode code : InterpretationDefiningCode.values()) {
-            if (code.getTerminologyId().equals("http")) {
-                referenzBereichsHTTPDefiningcodeMap.put(code.getCode(), code);
-            }
-        }
-
-    }
 
     private ErgebnisStatusDefiningCode getLaboranalyteStatusDefiningCode(Observation observation) {
         switch (observation.getStatus()) {
