@@ -22,13 +22,8 @@ import java.util.Map;
 
 public class SpecimenConverter {
 
-    private static final Map<String, ProbenartDefiningCode> probenartHTTPDefiningcodeMap
-            = new HashMap<>();
-
-
     public ProbeCluster convert(Specimen specimenTarget) {
         ProbeCluster probe = new ProbeCluster();
-        initialiseProbenartMap();
         setProbenart(probe, specimenTarget);
         probe.setLaborprobenidentifikator(mapIdentifier(specimenTarget.getAccessionIdentifier()));
         probe.setExternerIdentifikator(mapIdentifier(specimenTarget.getIdentifier().get(0)));
@@ -104,22 +99,13 @@ public class SpecimenConverter {
 
             if (specimenTarget.getType().getCoding().get(0).getSystem().equals("http://terminology.hl7.org/CodeSystem/v2-0487")) {
                 String code = specimenTarget.getType().getCoding().get(0).getCode();
-                probenart = probenartHTTPDefiningcodeMap.get(code);
+                probenart = ProbenartDefiningCode.getCodesAsMap().get(code);
             }
-
             if (probenart == null) {
                 throw new ConversionException("Probenart not defined in specimen");
             }
 
             probe.setProbenartDefiningCode(probenart);
-        }
-    }
-
-    private void initialiseProbenartMap() {
-        for (ProbenartDefiningCode code : ProbenartDefiningCode.values()) {
-            if (code.getTerminologyId().equals("http")) {
-                probenartHTTPDefiningcodeMap.put(code.getCode(), code);
-            }
         }
     }
 

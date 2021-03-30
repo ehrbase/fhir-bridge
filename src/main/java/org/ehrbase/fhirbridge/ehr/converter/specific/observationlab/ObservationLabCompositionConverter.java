@@ -13,8 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ObservationLabCompositionConverter extends ObservationToCompositionConverter<GECCOLaborbefundComposition> {
-    private static final Map<String, LabortestKategorieDefiningCode> labortestBezeichnungLOINCDefiningcodeMap
-            = new HashMap<>();
 
     @Override
     public GECCOLaborbefundComposition convertInternal(@NonNull Observation resource) {
@@ -33,7 +31,7 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
     private void initialiseLabortestBezeichnungMap(Observation resource) {
         for (LabortestKategorieDefiningCode code : LabortestKategorieDefiningCode.values()) {
             if (code.getTerminologyId().equals("LOINC")) {
-                labortestBezeichnungLOINCDefiningcodeMap.put(code.getCode(), code);
+                LabortestKategorieDefiningCode.getCodesAsMap().put(code.getCode(), code);
             }
         }
     }
@@ -41,7 +39,7 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
     private void setKategorieValue(Observation resource, GECCOLaborbefundComposition composition) {
         if (resource.getCategory().get(0).getCoding().get(0).getSystem().equals("http://loinc.org")) {
             String loincCode = resource.getCategory().get(0).getCoding().get(0).getCode();
-            LabortestKategorieDefiningCode categoryDefiningcode = labortestBezeichnungLOINCDefiningcodeMap.get(loincCode);
+            LabortestKategorieDefiningCode categoryDefiningcode = LabortestKategorieDefiningCode.getCodesAsMap().get(loincCode);
 
             if (categoryDefiningcode == null) {
                 throw new ConversionException("Unknown LOINC code in observation");

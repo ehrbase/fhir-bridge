@@ -1,12 +1,12 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
+package org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum KategorieDefiningCodeSymptom implements EnumValueSet {
-    N753251("75325-1", "75325-1", "LOINC", "75325-1");
+public enum DefiningCode implements EnumValueSet {
+    N261665006("261665006", "261665006", "SNOMED Clinical Terms", "261665006");
 
     private String value;
 
@@ -16,7 +16,7 @@ public enum KategorieDefiningCodeSymptom implements EnumValueSet {
 
     private String code;
 
-    KategorieDefiningCodeSymptom(String value, String description, String terminologyId, String code) {
+    DefiningCode(String value, String description, String terminologyId, String code) {
         this.value = value;
         this.description = description;
         this.terminologyId = terminologyId;

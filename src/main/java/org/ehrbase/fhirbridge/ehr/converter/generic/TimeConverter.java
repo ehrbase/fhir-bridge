@@ -8,6 +8,7 @@ import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.time.OffsetDateTime;
+import java.time.OffsetTime;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
@@ -82,11 +83,14 @@ public class TimeConverter {
         }
     }
 
-    public static TemporalAccessor convertProcedureTime(Procedure resource) {
-        if (resource.hasPerformedDateTimeType()) { // EffectiveDateTime
-            return resource.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime();
-        } else if (resource.hasPerformedPeriod() && resource.getPerformedPeriod().hasStart()) { // EffectivePeriod
-            return resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
+    public static Optional<TemporalAccessor> convertProcedureTime(Procedure resource) {
+        if (resource.hasPerformedDateTimeType() && resource.getPerformedDateTimeType().getExtension().size()==0) { // EffectiveDateTime
+            return Optional.ofNullable(resource.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime());
+        } else if(resource.hasPerformedDateTimeType() && resource.getPerformedDateTimeType().hasExtension()  && resource.getPerformedDateTimeType().getExtension().get(0).getValue().toString().equals("not-performed")){
+          //TODO wait until Template is fixed  return Optional.empty();
+          return Optional.of(OffsetDateTime.now());
+        }else if (resource.hasPerformedPeriod() && resource.getPerformedPeriod().hasStart()) { // EffectivePeriod
+            return Optional.ofNullable(resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
         } else {
             throw new ConversionException("Start time is not defined in Procedure");
         }

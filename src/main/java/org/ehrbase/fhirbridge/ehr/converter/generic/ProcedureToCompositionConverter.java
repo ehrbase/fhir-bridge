@@ -15,7 +15,7 @@ public abstract class ProcedureToCompositionConverter<C extends CompositionEntit
         C composition = super.convert(resource);
 
         // Mandatory
-        composition.setStartTimeValue(TimeConverter.convertProcedureTime(resource)); // StartTimeValue
+        TimeConverter.convertProcedureTime(resource).ifPresent(composition::setStartTimeValue); // EndTimeValue
         composition.setComposer(getComposerOrDefault(resource)); // Composer
 
         // Optional
