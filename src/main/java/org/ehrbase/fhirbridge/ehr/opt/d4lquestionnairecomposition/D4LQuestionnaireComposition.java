@@ -43,11 +43,17 @@ import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.Zus
 @Archetype("openEHR-EHR-COMPOSITION.self_monitoring.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-25T13:06:40.732275+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T12:09:15.533194+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("D4L_questionnaire")
 public class D4LQuestionnaireComposition implements CompositionEntity, Composition {
+  /**
+   * Path: Selbstüberwachung/category
+   */
+  @Path("/category|defining_code")
+  private Category categoryDefiningCode;
+
   /**
    * Path: Selbstüberwachung/context/Tree
    * Description: @ internal @
@@ -235,12 +241,6 @@ public class D4LQuestionnaireComposition implements CompositionEntity, Compositi
   private FeederAudit feederAudit;
 
   /**
-   * Path: Selbstüberwachung/category
-   */
-  @Path("/category|defining_code")
-  private Category categoryDefiningCode;
-
-  /**
    * Path: Selbstüberwachung/territory
    */
   @Path("/territory")
@@ -248,6 +248,14 @@ public class D4LQuestionnaireComposition implements CompositionEntity, Compositi
 
   @Id
   private VersionUid versionUid;
+
+  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+     this.categoryDefiningCode = categoryDefiningCode;
+  }
+
+  public Category getCategoryDefiningCode() {
+     return this.categoryDefiningCode ;
+  }
 
   public void setTree(ItemTree tree) {
      this.tree = tree;
@@ -468,14 +476,6 @@ public class D4LQuestionnaireComposition implements CompositionEntity, Compositi
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
-  }
-
-  public void setCategoryDefiningCode(Category categoryDefiningCode) {
-     this.categoryDefiningCode = categoryDefiningCode;
-  }
-
-  public Category getCategoryDefiningCode() {
-     return this.categoryDefiningCode ;
   }
 
   public void setTerritory(Territory territory) {
