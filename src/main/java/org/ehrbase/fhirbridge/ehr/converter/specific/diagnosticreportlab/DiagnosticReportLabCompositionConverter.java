@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.ObservationLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
@@ -12,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class DiagnosticReportLabCompositionConverter extends CompositionConverter<DiagnosticReport, GECCOLaborbefundComposition> {
+public class DiagnosticReportLabCompositionConverter extends DiagnosticReportToCompositionConverter<GECCOLaborbefundComposition> {
 
     private static final Logger LOG = LoggerFactory.getLogger(DiagnosticReportLabCompositionConverter.class);
 
