@@ -279,13 +279,443 @@ ${randinteger}                  ${12345}
 
 
 006 Create History of Travel (invalid/missing 'valueCodeableConcept')
-007 Create History of Travel (invalid/missing 'component')
-008 Create History of Travel (invalid/missing 'component[0] start date')
-009 Create History of Travel (invalid/missing 'component[1] country')
-010 Create History of Travel (invalid/missing 'component[2] state')
-011 Create History of Travel (invalid/missing 'component[3] city')
-012 Create History of Travel (invalid/missing 'component[4] end date')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``valueCodeableConcept`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+	[Template]			create History of Travel with ehr reference
+    [Tags]              valueCodeableConcept
 
+	# FIELD/PATH								VALUE					HTTP
+	# 																	CODE
+	# missing valueCodeableConcept
+	$.valueCodeableConcept						${EMPTY}				422
+	
+	# wrong format
+	$.valueCodeableConcept						${{ [] }}				422
+	$.valueCodeableConcept						${{ {} }}				422
+	$.valueCodeableConcept						${{ [{}] }}				422
+	
+	# missing coding
+	$.valueCodeableConcept.coding 				missing					422
+	$.valueCodeableConcept.coding				${EMPTY}				422
+	$.valueCodeableConcept.coding				${{ [] }}				422
+	$.valueCodeableConcept.coding				${{ {} }}				422
+	$.valueCodeableConcept.coding				${{ [{}] }}				422
+	
+	# invalid system
+	$.valueCodeableConcept.coding[0].system		missing					422
+	$.valueCodeableConcept.coding[0].system		${EMPTY}				422
+	$.valueCodeableConcept.coding[0].system		http://foobar.de		422
+	$.valueCodeableConcept.coding[0].system		${randstring}			422
+	$.valueCodeableConcept.coding[0].system		${randinteger}			422
+	$.valueCodeableConcept.coding[0].system		${{ [] }}				422
+	$.valueCodeableConcept.coding[0].system		${{ {} }}				422
+	$.valueCodeableConcept.coding[0].system		${{ [{}] }}				422
+	
+	# invalid code
+	$.valueCodeableConcept.coding[0].code		missing					422
+	$.valueCodeableConcept.coding[0].code		${EMPTY}				422
+	$.valueCodeableConcept.coding[0].code		${randstring}			422
+	$.valueCodeableConcept.coding[0].code		${randinteger}			422
+	$.valueCodeableConcept.coding[0].code		${{ [] }}				422
+	$.valueCodeableConcept.coding[0].code		${{ {} }}				422
+	$.valueCodeableConcept.coding[0].code		${{ [{}] }}				422
+	
+	# invalid display
+	$.valueCodeableConcept.coding[0].display	${EMPTY}				422
+	$.valueCodeableConcept.coding[0].display	${randinteger}			422
+	$.valueCodeableConcept.coding[0].display	${{ [] }}				422
+	$.valueCodeableConcept.coding[0].display	${{ {} }}				422
+	$.valueCodeableConcept.coding[0].display	${{ [{}] }}				422
+
+
+
+007 Create History of Travel (invalid/missing 'component')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+	[Template]			create History of Travel with ehr reference
+    [Tags]              component
+
+	# FIELD/PATH			VALUE					HTTP
+	# 												CODE
+	$.component				missing					422
+	$.component				${EMPTY}				422
+	$.component				${{ [] }}				422
+	$.component				${{ {} }}				422
+	$.component				${{ [{}] }}				422
+
+
+
+008 Create History of Travel (invalid/missing 'component[0] start date')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[0]`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+	[Template]			create History of Travel with ehr reference
+    [Tags]              component-travel-start-date
+
+	# FIELD/PATH							VALUE					HTTP
+	# 																CODE
+	$.component[0]							${EMPTY}				422
+	$.component[0]							${{ [] }}				422
+	$.component[0]							${{ {} }}				422
+	$.component[0]							${{ [{}] }}				422
+
+	# invalid code
+	$.component[0].code						missing					422
+	$.component[0].code						${EMPTY}				422
+	$.component[0].code						${{ [] }}				422
+	$.component[0].code						${{ {} }}				422
+	$.component[0].code						${{ [{}] }}				422
+
+	# invalid coding 0
+	$.component[0].code.coding[0]   	 	missing					422
+	$.component[0].code.coding[0]	    	${EMPTY}				422
+	$.component[0].code.coding[0]			${{ [] }}				422
+	$.component[0].code.coding[0]			${{ {} }}				422
+	$.component[0].code.coding[0]			${{ [{}] }}				422
+
+	# invalid Code Coding 0 System
+	$.component[0].code.coding[0].system	missing					422
+	$.component[0].code.coding[0].system	${EMPTY}				422
+	$.component[0].code.coding[0].system	http://foobar.de		422
+	$.component[0].code.coding[0].system	${randstring}			422
+	$.component[0].code.coding[0].system	${randinteger}			422
+	$.component[0].code.coding[0].system    ${{ [] }}				422
+	$.component[0].code.coding[0].system    ${{ {} }}				422
+	$.component[0].code.coding[0].system    ${{ [{}] }}				422
+
+	# invalid Code Coding 0 Code
+	$.component[0].code.coding[0].code		missing					422
+	$.component[0].code.coding[0].code		${EMPTY}				422
+	$.component[0].code.coding[0].code		${randstring}			422
+	$.component[0].code.coding[0].code		${randinteger}			422
+	$.component[0].code.coding[0].code      ${{ [] }}				422
+	$.component[0].code.coding[0].code      ${{ {} }}				422
+	$.component[0].code.coding[0].code      ${{ [{}] }}				422
+
+	# invalid valueDateTime
+	$.component[0].valueDateTime			missing					422
+	$.component[0].valueDateTime			${EMPTY}				422
+	$.component[0].valueDateTime			${{ [] }}				422
+	$.component[0].valueDateTime			${{ {} }}				422
+	$.component[0].valueDateTime			${{ [{}] }}				422
+	$.component[0].valueDateTime			2020-09-00				422
+	$.component[0].valueDateTime			2020-09-32				422
+	$.component[0].valueDateTime			2020-09-dd				422
+	$.component[0].valueDateTime			2020-00-21				422
+	$.component[0].valueDateTime			2020-13-21				422
+	$.component[0].valueDateTime			2020-mm-21				422
+	$.component[0].valueDateTime			0000-09-21				422
+	$.component[0].valueDateTime			10000-09-21				422
+	$.component[0].valueDateTime			yyyy-09-21				422
+	$.component[0].valueDateTime			21.09.2020				422
+	$.component[0].valueDateTime			${randstring}			422
+	$.component[0].valueDateTime			${randinteger}			422
+
+
+
+009 Create History of Travel (invalid/missing 'component[1] country')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[1]`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+	[Template]			create History of Travel with ehr reference
+    [Tags]              component-country
+
+	# FIELD/PATH												VALUE					HTTP
+	# 															CODE
+	$.component[1]												${EMPTY}				422
+	$.component[1]												${{ [] }}				422
+	$.component[1]												${{ {} }}				422
+	$.component[1]												${{ [{}] }}				422
+
+	# invalid code
+	$.component[1].code											missing					422
+	$.component[1].code											${EMPTY}				422
+	$.component[1].code											${{ [] }}				422
+	$.component[1].code											${{ {} }}				422
+	$.component[1].code											${{ [{}] }}				422
+
+	# invalid coding 1
+	$.component[1].code.coding[0]   	 						missing					422
+	$.component[1].code.coding[0]	    						${EMPTY}				422
+	$.component[1].code.coding[0]								${{ [] }}				422
+	$.component[1].code.coding[0]								${{ {} }}				422
+	$.component[1].code.coding[0]								${{ [{}] }}				422
+
+	# invalid Code Coding 1 System
+	$.component[1].code.coding[0].system						missing					422
+	$.component[1].code.coding[0].system						${EMPTY}				422
+	$.component[1].code.coding[0].system						http://foobar.de		422
+	$.component[1].code.coding[0].system						${randstring}			422
+	$.component[1].code.coding[0].system						${randinteger}			422
+	$.component[1].code.coding[0].system    					${{ [] }}				422
+	$.component[1].code.coding[0].system    					${{ {} }}				422
+	$.component[1].code.coding[0].system    					${{ [{}] }}				422
+
+	# invalid Code Coding 1 Code
+	$.component[1].code.coding[0].code							missing					422
+	$.component[1].code.coding[0].code							${EMPTY}				422
+	$.component[1].code.coding[0].code							${randstring}			422
+	$.component[1].code.coding[0].code							${randinteger}			422
+	$.component[1].code.coding[0].code      					${{ [] }}				422
+	$.component[1].code.coding[0].code      					${{ {} }}				422
+	$.component[1].code.coding[0].code      					${{ [{}] }}				422
+
+	# empty
+	$.component[1].valueCodeableConcept							${EMPTY}				422
+	
+	# wrong format
+	$.component[1].valueCodeableConcept							${{ [] }}				422
+	$.component[1].valueCodeableConcept							${{ {} }}				422
+	$.component[1].valueCodeableConcept							${{ [{}] }}				422
+
+	# missing coding
+	$.component[1].valueCodeableConcept.coding 					missing					422
+	$.component[1].valueCodeableConcept.coding					${EMPTY}				422
+	$.component[1].valueCodeableConcept.coding					${{ [] }}				422
+	$.component[1].valueCodeableConcept.coding					${{ {} }}				422
+	$.component[1].valueCodeableConcept.coding					${{ [{}] }}				422
+
+	# invalid system
+	$.component[1].valueCodeableConcept.coding[0].system		missing					422
+	$.component[1].valueCodeableConcept.coding[0].system		${EMPTY}				422
+	$.component[1].valueCodeableConcept.coding[0].system		http://foobar.de		422
+	$.component[1].valueCodeableConcept.coding[0].system		${randstring}			422
+	$.component[1].valueCodeableConcept.coding[0].system		${randinteger}			422
+	$.component[1].valueCodeableConcept.coding[0].system		${{ [] }}				422
+	$.component[1].valueCodeableConcept.coding[0].system		${{ {} }}				422
+	$.component[1].valueCodeableConcept.coding[0].system		${{ [{}] }}				422
+
+	# invalid code
+	$.component[1].valueCodeableConcept.coding[0].code			missing					422
+	$.component[1].valueCodeableConcept.coding[0].code			${EMPTY}				422
+	$.component[1].valueCodeableConcept.coding[0].code			${randstring}			422
+	$.component[1].valueCodeableConcept.coding[0].code			${randinteger}			422
+	$.component[1].valueCodeableConcept.coding[0].code			${{ [] }}				422
+	$.component[1].valueCodeableConcept.coding[0].code			${{ {} }}				422
+	$.component[1].valueCodeableConcept.coding[0].code			${{ [{}] }}				422
+
+
+
+010 Create History of Travel (invalid/missing 'component[2] state')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[2]`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+	[Template]			create History of Travel with ehr reference
+    [Tags]              component-state
+	
+	# FIELD/PATH												VALUE					HTTP
+	# 															CODE
+	$.component[2]												${EMPTY}				422
+	$.component[2]												${{ [] }}				422
+	$.component[2]												${{ {} }}				422
+	$.component[2]												${{ [{}] }}				422
+
+	# invalid code
+	$.component[2].code											missing					422
+	$.component[2].code											${EMPTY}				422
+	$.component[2].code											${{ [] }}				422
+	$.component[2].code											${{ {} }}				422
+	$.component[2].code											${{ [{}] }}				422
+
+	# invalid coding 2
+	$.component[2].code.coding[0]   	 						missing					422
+	$.component[2].code.coding[0]	    						${EMPTY}				422
+	$.component[2].code.coding[0]								${{ [] }}				422
+	$.component[2].code.coding[0]								${{ {} }}				422
+	$.component[2].code.coding[0]								${{ [{}] }}				422
+
+	# invalid Code Coding 2 System
+	$.component[2].code.coding[0].system						missing					422
+	$.component[2].code.coding[0].system						${EMPTY}				422
+	$.component[2].code.coding[0].system						http://foobar.de		422
+	$.component[2].code.coding[0].system						${randstring}			422
+	$.component[2].code.coding[0].system						${randinteger}			422
+	$.component[2].code.coding[0].system    					${{ [] }}				422
+	$.component[2].code.coding[0].system    					${{ {} }}				422
+	$.component[2].code.coding[0].system    					${{ [{}] }}				422
+
+	# invalid Code Coding 2 Code
+	$.component[2].code.coding[0].code							missing					422
+	$.component[2].code.coding[0].code							${EMPTY}				422
+	$.component[2].code.coding[0].code							${randstring}			422
+	$.component[2].code.coding[0].code							${randinteger}			422
+	$.component[2].code.coding[0].code      					${{ [] }}				422
+	$.component[2].code.coding[0].code      					${{ {} }}				422
+	$.component[2].code.coding[0].code      					${{ [{}] }}				422
+
+	# empty
+	$.component[2].valueCodeableConcept							${EMPTY}				422
+	
+	# wrong format
+	$.component[2].valueCodeableConcept							${{ [] }}				422
+	$.component[2].valueCodeableConcept							${{ {} }}				422
+	$.component[2].valueCodeableConcept							${{ [{}] }}				422
+
+	# missing coding
+	$.component[2].valueCodeableConcept.coding 					missing					422
+	$.component[2].valueCodeableConcept.coding					${EMPTY}				422
+	$.component[2].valueCodeableConcept.coding					${{ [] }}				422
+	$.component[2].valueCodeableConcept.coding					${{ {} }}				422
+	$.component[2].valueCodeableConcept.coding					${{ [{}] }}				422
+
+	# invalid system
+	$.component[2].valueCodeableConcept.coding[0].system		missing					422
+	$.component[2].valueCodeableConcept.coding[0].system		${EMPTY}				422
+	$.component[2].valueCodeableConcept.coding[0].system		http://foobar.de		422
+	$.component[2].valueCodeableConcept.coding[0].system		${randstring}			422
+	$.component[2].valueCodeableConcept.coding[0].system		${randinteger}			422
+	$.component[2].valueCodeableConcept.coding[0].system		${{ [] }}				422
+	$.component[2].valueCodeableConcept.coding[0].system		${{ {} }}				422
+	$.component[2].valueCodeableConcept.coding[0].system		${{ [{}] }}				422
+
+	# invalid code
+	$.component[2].valueCodeableConcept.coding[0].code			missing					422
+	$.component[2].valueCodeableConcept.coding[0].code			${EMPTY}				422
+	$.component[2].valueCodeableConcept.coding[0].code			${randstring}			422
+	$.component[2].valueCodeableConcept.coding[0].code			${randinteger}			422
+	$.component[2].valueCodeableConcept.coding[0].code			${{ [] }}				422
+	$.component[2].valueCodeableConcept.coding[0].code			${{ {} }}				422
+	$.component[2].valueCodeableConcept.coding[0].code			${{ [{}] }}				422
+
+
+
+011 Create History of Travel (invalid/missing 'component[3] city')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[3]`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+	[Template]			create History of Travel with ehr reference
+    [Tags]              component-start-city
+	
+	# FIELD/PATH												VALUE					HTTP
+	# 															CODE
+	$.component[3]												${EMPTY}				422
+	$.component[3]												${{ [] }}				422
+	$.component[3]												${{ {} }}				422
+	$.component[3]												${{ [{}] }}				422
+
+	# invalid code
+	$.component[3].code											missing					422
+	$.component[3].code											${EMPTY}				422
+	$.component[3].code											${{ [] }}				422
+	$.component[3].code											${{ {} }}				422
+	$.component[3].code											${{ [{}] }}				422
+
+	# invalid coding 2
+	$.component[3].code.coding[0]   	 						missing					422
+	$.component[3].code.coding[0]	    						${EMPTY}				422
+	$.component[3].code.coding[0]								${{ [] }}				422
+	$.component[3].code.coding[0]								${{ {} }}				422
+	$.component[3].code.coding[0]								${{ [{}] }}				422
+
+	# invalid Code Coding 2 System
+	$.component[3].code.coding[0].system						missing					422
+	$.component[3].code.coding[0].system						${EMPTY}				422
+	$.component[3].code.coding[0].system						http://foobar.de		422
+	$.component[3].code.coding[0].system						${randstring}			422
+	$.component[3].code.coding[0].system						${randinteger}			422
+	$.component[3].code.coding[0].system    					${{ [] }}				422
+	$.component[3].code.coding[0].system    					${{ {} }}				422
+	$.component[3].code.coding[0].system    					${{ [{}] }}				422
+
+	# invalid Code Coding 2 Code
+	$.component[3].code.coding[0].code							missing					422
+	$.component[3].code.coding[0].code							${EMPTY}				422
+	$.component[3].code.coding[0].code							${randstring}			422
+	$.component[3].code.coding[0].code							${randinteger}			422
+	$.component[3].code.coding[0].code      					${{ [] }}				422
+	$.component[3].code.coding[0].code      					${{ {} }}				422
+	$.component[3].code.coding[0].code      					${{ [{}] }}				422
+
+
+
+012 Create History of Travel (invalid/missing 'component[4] end date')
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	...                 2. *LOAD* _create-history-of-travel.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+	...                 4. *UPDATE* values for attribute ``component[4]`` \n\n
+    ...                 5. *POST* example JSON to observation endpoint\n\n
+	...                 6. *VALIDATE* the response status \n\n
+	[Template]			create History of Travel with ehr reference
+    [Tags]              component-travel-end-date
+	
+	# FIELD/PATH									VALUE					HTTP
+	# 												CODE
+	$.component[4]									${EMPTY}				422
+	$.component[4]									${{ [] }}				422
+	$.component[4]									${{ {} }}				422
+	$.component[4]									${{ [{}] }}				422
+
+	# invalid code
+	$.component[4].code								missing					422
+	$.component[4].code								${EMPTY}				422
+	$.component[4].code								${{ [] }}				422
+	$.component[4].code								${{ {} }}				422
+	$.component[4].code								${{ [{}] }}				422
+
+	# invalid coding 2
+	$.component[4].code.coding[0]   	 			missing					422
+	$.component[4].code.coding[0]	    			${EMPTY}				422
+	$.component[4].code.coding[0]					${{ [] }}				422
+	$.component[4].code.coding[0]					${{ {} }}				422
+	$.component[4].code.coding[0]					${{ [{}] }}				422
+
+	# invalid Code Coding 2 System
+	$.component[4].code.coding[0].system			missing					422
+	$.component[4].code.coding[0].system			${EMPTY}				422
+	$.component[4].code.coding[0].system			http://foobar.de		422
+	$.component[4].code.coding[0].system			${randstring}			422
+	$.component[4].code.coding[0].system			${randinteger}			422
+	$.component[4].code.coding[0].system    		${{ [] }}				422
+	$.component[4].code.coding[0].system    		${{ {} }}				422
+	$.component[4].code.coding[0].system    		${{ [{}] }}				422
+
+	# invalid Code Coding 2 Code
+	$.component[4].code.coding[0].code				missing					422
+	$.component[4].code.coding[0].code				${EMPTY}				422
+	$.component[4].code.coding[0].code				${randstring}			422
+	$.component[4].code.coding[0].code				${randinteger}			422
+	$.component[4].code.coding[0].code      		${{ [] }}				422
+	$.component[4].code.coding[0].code      		${{ {} }}				422
+	$.component[4].code.coding[0].code      		${{ [{}] }}				422
+	
+	# invalid valueDateTime
+	$.component[4].valueDateTime					missing					422
+	$.component[4].valueDateTime					${EMPTY}				422
+	$.component[4].valueDateTime					${{ [] }}				422
+	$.component[4].valueDateTime					${{ {} }}				422
+	$.component[4].valueDateTime					${{ [{}] }}				422
+	$.component[4].valueDateTime					2020-09-00				422
+	$.component[4].valueDateTime					2020-09-32				422
+	$.component[4].valueDateTime					2020-09-dd				422
+	$.component[4].valueDateTime					2020-00-21				422
+	$.component[4].valueDateTime					2020-13-21				422
+	$.component[4].valueDateTime					2020-mm-21				422
+	$.component[4].valueDateTime					0000-09-21				422
+	$.component[4].valueDateTime					10000-09-21				422
+	$.component[4].valueDateTime					yyyy-09-21				422
+	$.component[4].valueDateTime					21.09.2020				422
+	$.component[4].valueDateTime					${randstring}			422
+	$.component[4].valueDateTime					${randinteger}			422
 
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
