@@ -42,7 +42,7 @@ ${randinteger}                  ${12345}
 	[Template]		    create History of Travel with ehr reference
     [Tags]          	resourceType
 
-	# FIELD/PATH					VALUE							HTTP																		            Location
+	# FIELD/PATH					VALUE							HTTP
 	# 																CODE
     $.resourceType					missing							422
     $.resourceType					${randstring}					422
@@ -62,8 +62,8 @@ ${randinteger}                  ${12345}
 	[Template]			create History of Travel with ehr reference
     [Tags]              identifier
 
-	# FIELD/PATH	                				VALUE							HTTP																										Location
-    # invalid identifier
+	# FIELD/PATH	                				VALUE							HTTP
+    # invalid identifier															CODE
     $.identifier									${EMPTY}						422
     $.identifier									${{ [] }}						422
     $.identifier									${{ {} }}						422
@@ -345,7 +345,8 @@ ${randinteger}                  ${12345}
 
 	# FIELD/PATH			VALUE					HTTP
 	# 												CODE
-	$.component				missing					422
+	# $.component				missing					422
+	# See Bug Trace 04
 	$.component				${EMPTY}				422
 	$.component				${{ [] }}				422
 	$.component				${{ {} }}				422
@@ -395,7 +396,8 @@ ${randinteger}                  ${12345}
 	$.component[0].code.coding[0].system    ${{ [{}] }}				422
 
 	# invalid Code Coding 0 Code
-	$.component[0].code.coding[0].code		missing					422
+	# $.component[0].code.coding[0].code		missing					422
+	# See Bug Trace 01
 	$.component[0].code.coding[0].code		${EMPTY}				422
 	$.component[0].code.coding[0].code		${randstring}			422
 	$.component[0].code.coding[0].code		${randinteger}			422
@@ -404,7 +406,8 @@ ${randinteger}                  ${12345}
 	$.component[0].code.coding[0].code      ${{ [{}] }}				422
 
 	# invalid valueDateTime
-	$.component[0].valueDateTime			missing					422
+	# $.component[0].valueDateTime			missing					422
+	# See Bug Trace 03
 	$.component[0].valueDateTime			${EMPTY}				422
 	$.component[0].valueDateTime			${{ [] }}				422
 	$.component[0].valueDateTime			${{ {} }}				422
@@ -466,7 +469,8 @@ ${randinteger}                  ${12345}
 	$.component[1].code.coding[0].system    					${{ [{}] }}				422
 
 	# invalid Code Coding 1 Code
-	$.component[1].code.coding[0].code							missing					422
+	# $.component[1].code.coding[0].code							missing					422
+	# See Bug Trace 01
 	$.component[1].code.coding[0].code							${EMPTY}				422
 	$.component[1].code.coding[0].code							${randstring}			422
 	$.component[1].code.coding[0].code							${randinteger}			422
@@ -483,16 +487,19 @@ ${randinteger}                  ${12345}
 	$.component[1].valueCodeableConcept							${{ [{}] }}				422
 
 	# missing coding
-	$.component[1].valueCodeableConcept.coding 					missing					422
+	# $.component[1].valueCodeableConcept.coding 					missing					422
+	# See Bug Trace 02
 	$.component[1].valueCodeableConcept.coding					${EMPTY}				422
 	$.component[1].valueCodeableConcept.coding					${{ [] }}				422
 	$.component[1].valueCodeableConcept.coding					${{ {} }}				422
 	$.component[1].valueCodeableConcept.coding					${{ [{}] }}				422
 
 	# invalid system
-	$.component[1].valueCodeableConcept.coding[0].system		missing					422
+	# $.component[1].valueCodeableConcept.coding[0].system		missing					422
+	# See Bug Trace 05
 	$.component[1].valueCodeableConcept.coding[0].system		${EMPTY}				422
-	$.component[1].valueCodeableConcept.coding[0].system		http://foobar.de		422
+	# $.component[1].valueCodeableConcept.coding[0].system		http://foobar.de		422
+	# See Bug Trace 05
 	$.component[1].valueCodeableConcept.coding[0].system		${randstring}			422
 	$.component[1].valueCodeableConcept.coding[0].system		${randinteger}			422
 	$.component[1].valueCodeableConcept.coding[0].system		${{ [] }}				422
@@ -500,9 +507,11 @@ ${randinteger}                  ${12345}
 	$.component[1].valueCodeableConcept.coding[0].system		${{ [{}] }}				422
 
 	# invalid code
-	$.component[1].valueCodeableConcept.coding[0].code			missing					422
+	# $.component[1].valueCodeableConcept.coding[0].code			missing					422
+	# # See Bug Trace 05
 	$.component[1].valueCodeableConcept.coding[0].code			${EMPTY}				422
-	$.component[1].valueCodeableConcept.coding[0].code			${randstring}			422
+	# $.component[1].valueCodeableConcept.coding[0].code			${randstring}			422
+	# # See Bug Trace 05
 	$.component[1].valueCodeableConcept.coding[0].code			${randinteger}			422
 	$.component[1].valueCodeableConcept.coding[0].code			${{ [] }}				422
 	$.component[1].valueCodeableConcept.coding[0].code			${{ {} }}				422
@@ -552,7 +561,8 @@ ${randinteger}                  ${12345}
 	$.component[2].code.coding[0].system    					${{ [{}] }}				422
 
 	# invalid Code Coding 2 Code
-	$.component[2].code.coding[0].code							missing					422
+	# $.component[2].code.coding[0].code							missing					422
+	# See Bug Trace 01
 	$.component[2].code.coding[0].code							${EMPTY}				422
 	$.component[2].code.coding[0].code							${randstring}			422
 	$.component[2].code.coding[0].code							${randinteger}			422
@@ -569,16 +579,19 @@ ${randinteger}                  ${12345}
 	$.component[2].valueCodeableConcept							${{ [{}] }}				422
 
 	# missing coding
-	$.component[2].valueCodeableConcept.coding 					missing					422
+	# $.component[2].valueCodeableConcept.coding 					missing					422
+	# See Bug Trace 02
 	$.component[2].valueCodeableConcept.coding					${EMPTY}				422
 	$.component[2].valueCodeableConcept.coding					${{ [] }}				422
 	$.component[2].valueCodeableConcept.coding					${{ {} }}				422
 	$.component[2].valueCodeableConcept.coding					${{ [{}] }}				422
 
 	# invalid system
-	$.component[2].valueCodeableConcept.coding[0].system		missing					422
+	# $.component[2].valueCodeableConcept.coding[0].system		missing					422
+	# See Bug Trace 05
 	$.component[2].valueCodeableConcept.coding[0].system		${EMPTY}				422
-	$.component[2].valueCodeableConcept.coding[0].system		http://foobar.de		422
+	# $.component[2].valueCodeableConcept.coding[0].system		http://foobar.de		422
+	# See Bug Trace 05
 	$.component[2].valueCodeableConcept.coding[0].system		${randstring}			422
 	$.component[2].valueCodeableConcept.coding[0].system		${randinteger}			422
 	$.component[2].valueCodeableConcept.coding[0].system		${{ [] }}				422
@@ -586,9 +599,11 @@ ${randinteger}                  ${12345}
 	$.component[2].valueCodeableConcept.coding[0].system		${{ [{}] }}				422
 
 	# invalid code
-	$.component[2].valueCodeableConcept.coding[0].code			missing					422
+	# $.component[2].valueCodeableConcept.coding[0].code			missing					422
+	# See Bug Trace 05
 	$.component[2].valueCodeableConcept.coding[0].code			${EMPTY}				422
-	$.component[2].valueCodeableConcept.coding[0].code			${randstring}			422
+	# $.component[2].valueCodeableConcept.coding[0].code			${randstring}			422
+	# See Bug Trace 05
 	$.component[2].valueCodeableConcept.coding[0].code			${randinteger}			422
 	$.component[2].valueCodeableConcept.coding[0].code			${{ [] }}				422
 	$.component[2].valueCodeableConcept.coding[0].code			${{ {} }}				422
@@ -638,7 +653,8 @@ ${randinteger}                  ${12345}
 	$.component[3].code.coding[0].system    					${{ [{}] }}				422
 
 	# invalid Code Coding 2 Code
-	$.component[3].code.coding[0].code							missing					422
+	# $.component[3].code.coding[0].code							missing					422
+	# See Bug Trace 01
 	$.component[3].code.coding[0].code							${EMPTY}				422
 	$.component[3].code.coding[0].code							${randstring}			422
 	$.component[3].code.coding[0].code							${randinteger}			422
@@ -659,7 +675,7 @@ ${randinteger}                  ${12345}
     [Tags]              component-travel-end-date
 	
 	# FIELD/PATH									VALUE					HTTP
-	# 												CODE
+	# 																		CODE
 	$.component[4]									${EMPTY}				422
 	$.component[4]									${{ [] }}				422
 	$.component[4]									${{ {} }}				422
@@ -690,7 +706,8 @@ ${randinteger}                  ${12345}
 	$.component[4].code.coding[0].system    		${{ [{}] }}				422
 
 	# invalid Code Coding 2 Code
-	$.component[4].code.coding[0].code				missing					422
+	# $.component[4].code.coding[0].code				missing					422
+	# See Bug Trace 01
 	$.component[4].code.coding[0].code				${EMPTY}				422
 	$.component[4].code.coding[0].code				${randstring}			422
 	$.component[4].code.coding[0].code				${randinteger}			422
@@ -699,7 +716,8 @@ ${randinteger}                  ${12345}
 	$.component[4].code.coding[0].code      		${{ [{}] }}				422
 	
 	# invalid valueDateTime
-	$.component[4].valueDateTime					missing					422
+	# $.component[4].valueDateTime					missing					422
+	# See Bug Trace 03
 	$.component[4].valueDateTime					${EMPTY}				422
 	$.component[4].valueDateTime					${{ [] }}				422
 	$.component[4].valueDateTime					${{ {} }}				422
@@ -716,6 +734,74 @@ ${randinteger}                  ${12345}
 	$.component[4].valueDateTime					21.09.2020				422
 	$.component[4].valueDateTime					${randstring}			422
 	$.component[4].valueDateTime					${randinteger}			422
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# BUG TRACE
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+01 Bug Trace component[x].code.coding[0].code = missing
+	[Documentation]		Bug Trace tests for component[x].code.coding[0].code = missing
+	[Template]			create History of Travel with ehr reference
+	[Tags]    			not-ready    not-ready_bug    component    code
+
+	# FIELD/PATH									VALUE					HTTP
+	# 																		CODE
+	$.component[0].code.coding[0].code				missing					422
+	$.component[1].code.coding[0].code				missing					422
+	$.component[2].code.coding[0].code				missing					422
+	$.component[3].code.coding[0].code				missing					422
+	$.component[4].code.coding[0].code				missing					422
+
+
+02 Bug Trace component[x].valueCodeableConcept.coding = missing
+	[Documentation]		Bug Trace tests for component[x].valueCodeableConcept.coding = missing
+	[Template]			create History of Travel with ehr reference
+	[Tags]    			not-ready    not-ready_bug    valueCodeableConcept
+	
+	# FIELD/PATH									VALUE					HTTP
+	# 																		CODE
+	$.component[1].valueCodeableConcept.coding		missing					422
+	$.component[2].valueCodeableConcept.coding		missing					422
+
+
+03 Bug Trace component[x].valueDateTime = missing
+	[Documentation]		Bug Trace tests for component[x].valueDatetime = missing
+	[Template]			create History of Travel with ehr reference
+	[Tags]    			not-ready    not-ready_bug   valueDateTime
+	
+	# FIELD/PATH									VALUE					HTTP
+	# 																		CODE
+	$.component[0].valueDateTime					missing					422
+	$.component[4].valueDateTime					missing					422
+
+
+04 Bug Trace component = missing
+	[Documentation]		Bug Trace tests for component = missing
+	[Template]			create History of Travel with ehr reference
+	[Tags]    			not-ready    not-ready_bug   component
+
+	# FIELD/PATH									VALUE					HTTP
+	# 																		CODE
+	$.component										missing					422
+
+
+05 Bug Trace component[x].valueCodeableConcept unexpected 201
+	[Documentation]		Bug Trace tests for component[x].valueCodeableConcept unexpected 201 validations
+	[Template]			create History of Travel with ehr reference
+	[Tags]    			not-ready    not-ready_bug   valueCodeableConcept
+
+	# FIELD/PATH											VALUE					HTTP
+	# 																				CODE
+	$.component[1].valueCodeableConcept.coding[0].system 	missing					422
+	$.component[1].valueCodeableConcept.coding[0].system 	http://foobar.de		422
+	$.component[1].valueCodeableConcept.coding[0].code 		missing					422
+	$.component[1].valueCodeableConcept.coding[0].code 		${randstring}			422
+	$.component[2].valueCodeableConcept.coding[0].system 	missing					422
+	$.component[2].valueCodeableConcept.coding[0].system 	http://foobar.de		422
+	$.component[2].valueCodeableConcept.coding[0].code 		missing					422
+	$.component[2].valueCodeableConcept.coding[0].code 		${randstring}			422
+
+
 
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
