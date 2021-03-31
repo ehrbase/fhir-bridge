@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.sofascore;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreObservation;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.Coding;
@@ -11,11 +12,14 @@ import org.hl7.fhir.r4.model.Observation;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-public class SofaScoreObservationConverter {
+public class SofaScoreObservationConverter extends ObservationToObservationConverter<SofaScoreObservation> {
 
-    public SofaScoreObservation convert(Observation observation) {
+
+
+    @Override
+    protected SofaScoreObservation convertInternal(Observation resource) {
         SofaScoreObservation sofaScore = new SofaScoreObservation();
-        mapCodes(sofaScore, observation);
+        mapCodes(sofaScore, resource);
         return sofaScore;
     }
 
