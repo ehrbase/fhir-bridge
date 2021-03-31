@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.fhir.diagnosticReport;
 import ca.uhn.fhir.parser.DataFormatException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund.RadiologischerBefundConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund.RadiologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
@@ -80,14 +80,14 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         DiagnosticReport radiologyReport = (DiagnosticReport) testFileLoader.loadResource(path);
         return assertThrows(ConversionException.class, () -> {
-            new RadiologischerBefundConverter().convert(radiologyReport);
+            new RadiologischerBefundCompositionConverter().convert(radiologyReport);
         });
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         DiagnosticReport diagnosticReport = (DiagnosticReport) super.testFileLoader.loadResource(resourcePath);
-        RadiologischerBefundConverter radiologischerBefundConverter = new RadiologischerBefundConverter();
+        RadiologischerBefundCompositionConverter radiologischerBefundConverter = new RadiologischerBefundCompositionConverter();
         GECCORadiologischerBefundComposition mappedGeccoRadiologischerBefundComposition = radiologischerBefundConverter.convert(diagnosticReport);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedGeccoRadiologischerBefundComposition);
         assertEquals(diff.getChanges().size(), 0);

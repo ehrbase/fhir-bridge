@@ -1,6 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum KoerperstelleDefiningCode implements EnumValueSet {
@@ -19,6 +22,15 @@ public enum KoerperstelleDefiningCode implements EnumValueSet {
     this.description = description;
     this.terminologyId = terminologyId;
     this.code = code;
+  }
+
+
+  public static Map<String, KoerperstelleDefiningCode> getCodesAsMap(){
+    Map<String, KoerperstelleDefiningCode> koerperstelleDefiningCodeHashMap= new HashMap<>();
+    for (KoerperstelleDefiningCode koerperstelleDefiningCode : KoerperstelleDefiningCode.values()) {
+      koerperstelleDefiningCodeHashMap.put(koerperstelleDefiningCode.getCode(), koerperstelleDefiningCode);
+    }
+    return koerperstelleDefiningCodeHashMap;
   }
 
   public String getValue() {
