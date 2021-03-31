@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.sofascore;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreObservation;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.Coding;
@@ -11,14 +12,14 @@ import org.hl7.fhir.r4.model.Observation;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-public class SofaScoreObservationConverter {
+public class SofaScoreObservationConverter extends ObservationToObservationConverter<SofaScoreObservation> {
 
-    public SofaScoreObservation convert(Observation observation) {
+
+
+    @Override
+    protected SofaScoreObservation convertInternal(Observation resource) {
         SofaScoreObservation sofaScore = new SofaScoreObservation();
-        mapCodes(sofaScore, observation);
-        sofaScore.setSubject(new PartySelf());
-        sofaScore.setLanguage(Language.DE);
-        mapTimeDate(observation, sofaScore);
+        mapCodes(sofaScore, resource);
         return sofaScore;
     }
 
@@ -183,49 +184,7 @@ public class SofaScoreObservationConverter {
         }
     }
 
-    private void mapTimeDate(Observation observation, SofaScoreObservation result) {
-        tryEffectiveDateTime(observation, result);
-        tryEffectiveInstantType(observation, result);
-        tryEffectivePeriodType(observation, result);
-    }
 
-    private void tryEffectiveDateTime(Observation observation, SofaScoreObservation result) {
-        try {
-            result.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-            result.setOriginValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        } catch (FHIRException fhirException) {
-            if (isTimeTypeException(fhirException.toString())) {
-                throw fhirException;
-            }
-        }
-    }
-
-    private void tryEffectiveInstantType(Observation observation, SofaScoreObservation result) {
-        try {
-            result.setTimeValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
-            result.setOriginValue(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
-        } catch (FHIRException fhirException) {
-            if (isTimeTypeException(fhirException.toString())) {
-                throw fhirException;
-            }
-        }
-    }
-
-    private void tryEffectivePeriodType(Observation observation, SofaScoreObservation result) {
-        try {
-            LocalDateTime date = LocalDateTime.ofInstant(observation.getEffectivePeriod().getEnd().toInstant(), ZoneOffset.UTC);
-            result.setTimeValue(date);
-            result.setOriginValue(date);
-        } catch (FHIRException fhirException) {
-            if (isTimeTypeException(fhirException.toString())) {
-                throw fhirException;
-            }
-        }
-    }
-
-    private boolean isTimeTypeException(String exceptionMessage) {
-        return !(exceptionMessage.contains("Type mismatch: the type") && exceptionMessage.contains("was expected,") && exceptionMessage.contains("was encountered"));
-    }
 
     private void checkIfEmpty(Observation.ObservationComponentComponent component, String name) {
         if (component.getValueCodeableConcept().getCoding().isEmpty()) {
