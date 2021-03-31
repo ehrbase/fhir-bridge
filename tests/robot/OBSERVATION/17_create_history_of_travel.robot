@@ -756,7 +756,7 @@ ${randinteger}                  ${12345}
 02 Bug Trace component[x].valueCodeableConcept.coding = missing
 	[Documentation]		Bug Trace tests for component[x].valueCodeableConcept.coding = missing
 	[Template]			create History of Travel with ehr reference
-	[Tags]    			not-ready    not-ready_bug    valueCodeableConcept
+	[Tags]    			not-ready    not-ready_bug    valueCodeableConcept    500
 	
 	# FIELD/PATH									VALUE					HTTP
 	# 																		CODE
@@ -788,7 +788,7 @@ ${randinteger}                  ${12345}
 05 Bug Trace component[x].valueCodeableConcept unexpected 201
 	[Documentation]		Bug Trace tests for component[x].valueCodeableConcept unexpected 201 validations
 	[Template]			create History of Travel with ehr reference
-	[Tags]    			not-ready    not-ready_bug   valueCodeableConcept
+	[Tags]    			not-ready    not-ready_bug   valueCodeableConcept    201
 
 	# FIELD/PATH											VALUE					HTTP
 	# 																				CODE
