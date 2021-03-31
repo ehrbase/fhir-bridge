@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.InterpretationDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
@@ -13,8 +14,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.Unt
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Quantity;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LaborAnalytConverter {
 
@@ -49,11 +48,26 @@ public class LaborAnalytConverter {
     }
 
     private UntersuchterAnalytDefiningCode getUntersuchterAnalyt(Observation observation) {
-        if (observation.getCode().getCoding().get(0).getSystem().equals("http://loinc.org")) {
-            String code = observation.getCode().getCoding().get(0).getCode();
-            return  UntersuchterAnalytDefiningCode.getCodesAsMap().get(code);
-        }else{
-            throw new ConversionException("untersuchterAnalyt is required in FHIR Observation");
+        if (codingAndSystemExist(observation) && checkUrlAndCode(observation)) {
+            return getCode(observation.getCode().getCoding().get(0).getCode());
+        } else {
+            throw new ConversionException("untersuchterAnalyt is required in FHIR Observation, add a valid code.coding");
+        }
+    }
+
+    private boolean checkUrlAndCode(Observation observation) {
+        return observation.getCode().getCoding().get(0).getSystem().equals(CodeSystem.LOINC.getUrl()) && observation.getCode().getCoding().get(0).hasCode();
+    }
+
+    private boolean codingAndSystemExist(Observation observation){
+        return observation.getCode().hasCoding() && observation.getCode().getCoding().get(0).hasSystem();
+    }
+
+    private UntersuchterAnalytDefiningCode getCode(String code) {
+        if (UntersuchterAnalytDefiningCode.getCodesAsMap().containsKey(code)) {
+            return UntersuchterAnalytDefiningCode.getCodesAsMap().get(code);
+        } else {
+            throw new ConversionException("code.coding.code value is not valid");
         }
     }
 
