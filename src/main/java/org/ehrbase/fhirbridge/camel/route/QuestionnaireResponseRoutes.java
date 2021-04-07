@@ -21,9 +21,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
-import org.ehrbase.fhirbridge.ehr.converter.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -62,9 +60,11 @@ public class QuestionnaireResponseRoutes extends AbstractRouteBuilder {
             .onException(Exception.class)
                 .process("defaultExceptionHandler")
             .end()
+            .process("resourceProfileValidator")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(questionnaireResponseDao, "create"))
             .process(ehrIdLookupProcessor)
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#d4lQuestionnaireCompositionConverter")
+            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .process(resourceResponseProcessor);
 
         // 'Find Questionnaire-Response' route definition
@@ -78,11 +78,5 @@ public class QuestionnaireResponseRoutes extends AbstractRouteBuilder {
                     .to("bean:questionnaireResponseDao?method=read(${body}, ${headers.FhirRequestDetails})");
 
         // @formatter:on
-    }
-
-    // TODO: Update when Apache Camel > 3.x
-    @Bean
-    public D4lQuestionnaireCompositionConverter d4lQuestionnaireCompositionConverter() {
-        return new D4lQuestionnaireCompositionConverter();
     }
 }

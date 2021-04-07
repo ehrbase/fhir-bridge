@@ -1,23 +1,16 @@
 package org.ehrbase.fhirbridge.fhir.diagnosticReport;
 
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.ehrbase.fhirbridge.fhir.AbstractSetupIT;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.temporal.TemporalAccessor;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -68,7 +61,7 @@ class DiagnosticReportIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         DiagnosticReport diagnosticReport = (DiagnosticReport) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-           // new YourConverter().toComposition( radiologyReport);
+           // new YourConverter().convert(@NonNull  radiologyReport);
         });
     }
 
