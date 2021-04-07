@@ -80,7 +80,7 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(ReisehistorieComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(ReisehistorieAdminEntry.class)
-                //.registerValueObject(KeineReisehistorieEvaluation.class)
+                .registerValueObject(KeineReisehistorieEvaluation.class)
                 .registerValueObject(UnbekannteReisehistorieEvaluation.class)
                 .registerValueObject(ReisehistorieBestimmtesReisezielCluster.class)
                 .build();
