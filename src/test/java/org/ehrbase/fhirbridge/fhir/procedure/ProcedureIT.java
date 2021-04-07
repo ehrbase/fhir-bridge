@@ -1,23 +1,17 @@
 package org.ehrbase.fhirbridge.fhir.procedure;
 
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.apache.commons.io.IOUtils;
-import org.apache.tomcat.jni.Proc;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.procedure.ProcedureCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Procedure;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.temporal.TemporalAccessor;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,13 +21,13 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ProcedureIT extends AbstractMappingTestSetupIT {
 
-    public ProcedureIT( ) {
+    public ProcedureIT() {
         super("Procedure/", Procedure.class);
     }
 
     @Test
     void createProcedure() throws IOException {
-       create("create-procedure.json");
+        create("create-procedure.json");
     }
 
     @Test
@@ -42,8 +36,15 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : Default profile is not supported for Procedure. One of the following profiles is expected: " +
-                "[https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure]", exception.getMessage());
+        assertEquals("HTTP 422 : Default profile is not supported for Procedure. " +
+                "One of the following profiles is expected: " +
+                "[https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dialysis, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/extracorporeal-membrane-oxygenation, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures, " +
+                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies]", exception.getMessage());
     }
 
     @Test
@@ -59,7 +60,7 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Procedure procedure = (Procedure) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-             new ProcedureCompositionConverter().toComposition(((Procedure) procedure));
+             new ProcedureCompositionConverter().convert(((Procedure) procedure));
         });
     }
 

@@ -457,3 +457,458 @@ Force Tags              procedure_create    create
     ehr.create new ehr    000_ehr_status.json
     procedure.create apheresis with status change    Apheresis with unknown performedDateTime (Status: In-Progress)    in-progress    create-apheresis-with-not-unknown-performedDateTime.json
     procedure.validate response - 201
+
+
+033 Create Radiology Procedures - Chest X-Ray Alternative dcm datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-procedures-chest-x-ray_dcm_datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented    alternative    dcm    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create radiology procedures    Radiology Procedures - Chest X-Ray dcm datetime    create-radiology-procedures-chest-x-ray_dcm_datetime.json
+    procedure.validate response - 201
+
+
+034 Create Radiology Procedures - Chest X-Ray Alternative dcm period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-procedures-chest-x-ray_dcm_period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented   alternative    dcm    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create radiology procedures    Radiology Procedures - Chest X-Ray dcm period    create-radiology-procedures-chest-x-ray_dcm_period.json
+    procedure.validate response - 201
+
+
+
+035 Create Radiology Procedures - Chest X-Ray Alternative dcm period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-procedures-chest-x-ray_dcm_period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented   alternative    dcm    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create radiology procedures    Radiology Procedures - Chest X-Ray dcm period_2   create-radiology-procedures-chest-x-ray_dcm_period_2.json
+    procedure.validate response - 201
+
+
+
+036 Create Radiology Procedures - Chest X-Ray Alternative sct datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-procedures-chest-x-ray_sct_datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented   alternative    sct    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create radiology procedures    Radiology Procedures - Chest X-Ray sct datetime    create-radiology-procedures-chest-x-ray_sct_datetime.json
+    procedure.validate response - 201
+
+
+
+037 Create Radiology Procedures - Chest X-Ray sct period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-procedures-chest-x-ray_sct_period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented   alternative    sct    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create radiology procedures    Radiology Procedures - Chest X-Ray sct period    create-radiology-procedures-chest-x-ray_sct_period.json
+    procedure.validate response - 201
+
+
+
+038 Create Radiology Procedures - Chest X-Ray sct period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-radiology-procedures-chest-x-ray_sct_period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	radiology-procedures    chest-x-ray    valid    not-ready    not-ready_not-implemented   alternative    sct    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create radiology procedures    Radiology Procedures - Chest X-Ray sct period_2    create-radiology-procedures-chest-x-ray_sct_period_2.json
+    procedure.validate response - 201
+
+
+039 Create Respiratory Therapies - Artificial Respiration Alternative sct datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_sct-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    sct    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration sct datetime     create-respiratory-therapies-artificial-respiration_sct-datetime.json
+    procedure.validate response - 201
+
+
+040 Create Respiratory Therapies - Artificial Respiration Alternative sct period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_sct-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    sct    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration sct period    create-respiratory-therapies-artificial-respiration_sct-period.json
+    procedure.validate response - 201
+
+
+
+041 Create Respiratory Therapies - Artificial Respiration Alternative sct period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_sct-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    sct    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration sct period_2    create-respiratory-therapies-artificial-respiration_sct-period_2.json
+    procedure.validate response - 201
+
+
+
+042 Create Respiratory Therapies - Artificial Respiration Alternative ops datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_ops-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    ops    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration ops datetime    create-respiratory-therapies-artificial-respiration_ops-datetime.json
+    procedure.validate response - 201
+
+
+
+043 Create Respiratory Therapies - Artificial Respiration Alternative ops period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_ops-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    ops    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration ops period    create-respiratory-therapies-artificial-respiration_ops-period.json
+    procedure.validate response - 201
+
+
+
+044 Create Respiratory Therapies - Artificial Respiration Alternative ops period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-respiratory-therapies-artificial-respiration_ops-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	respiratory-therapies    artificial-respiration    valid    not-ready    not-ready_not-implemented    alternative    ops    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create respiratory therapies    Respiratory Therapies - Artificial Respiration ops period_2    create-respiratory-therapies-artificial-respiration_ops-period_2.json
+    procedure.validate response - 201
+
+
+
+045 Create Generic Therapy - Dialysis sct datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-sct-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-ready_not-implemented    alternative    sct    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generic Therapy - Dialysis sct datetime  create-dialysis-sct-datetime.json
+    procedure.validate response - 201
+
+
+046 Create Generic Therapy - Dialysis sct period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-sct-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-ready_not-implemented    alternative    sct    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generic Therapy - Dialysis sct period  create-dialysis-sct-period.json
+    procedure.validate response - 201
+
+
+
+047 Create Generic Therapy - Dialysis sct period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-sct-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-ready_not-implemented    alternative    sct    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generic Therapy - Dialysis sct period_2  create-dialysis-sct-period_2.json
+    procedure.validate response - 201
+
+
+
+048 Create Generic Therapy - Dialysis ops datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-ops-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-ready_not-implemented    alternative    ops    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generiy Therapy - Dialysis ops datetime  create-dialysis-ops-datetime.json
+    procedure.validate response - 201
+
+
+
+049 Create Generic Therapy - Dialysis ops period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-ops-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-ready_not-implemented    alternative    ops    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generic Therapy - Dialysis ops period  create-dialysis-ops-period.json
+    procedure.validate response - 201
+
+
+
+050 Create Generic Therapy - Dialysis ops period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-dialysis-ops-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    dialysis    valid    not-ready    not-ready_not-implemented    alternative    ops    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create dialysis  Generic Therapy - Dialysis ops period_2  create-dialysis-ops-period_2.json
+    procedure.validate response - 201
+
+
+
+051 Create Generic Therapy - Extracorporeal Membrane Oxygenation sct datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-extracorporeal-membrane-oxygenation-in-progress_sct_datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    extracorporeal    membrane     oxygenation    valid    not-ready    not-ready_not-implemented    alternative    sct    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create extracorporeal membrane oxygenation  Generic Therapy - Extracorporeal Membrane Oxygenation sct datetime  create-extracorporeal-membrane-oxygenation-in-progress_sct_datetime.json
+    procedure.validate response - 201
+
+
+052 Create Generic Therapy - Extracorporeal Membrane Oxygenation sct period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-create-extracorporeal-membrane-oxygenation-in-progress-sct_period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    extracorporeal    membrane     oxygenation    valid    not-ready    not-ready_not-implemented    alternative    sct    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create extracorporeal membrane oxygenation  Generic Therapy - Extracorporeal Membrane Oxygenation sct datetime  create-extracorporeal-membrane-oxygenation-in-progress_sct_period.json
+    procedure.validate response - 201
+
+
+
+053 Create Generic Therapy - Extracorporeal Membrane Oxygenation sct period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-extracorporeal-membrane-oxygenation-in-progress_sct_period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    extracorporeal    membrane     oxygenation    valid    not-ready    not-ready_not-implemented    alternative    sct    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create extracorporeal membrane oxygenation  Generic Therapy - Extracorporeal Membrane Oxygenation sct datetime  create-extracorporeal-membrane-oxygenation-in-progress_sct_period_2.json
+    procedure.validate response - 201
+
+
+
+054 Create Generic Therapy - Extracorporeal Membrane Oxygenation ops datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-extracorporeal-membrane-oxygenation-in-progress_ops_datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    extracorporeal    membrane     oxygenation    valid    not-ready    not-ready_not-implemented    alternative    ops    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create extracorporeal membrane oxygenation  Generic Therapy - Extracorporeal Membrane Oxygenation sct datetime  create-extracorporeal-membrane-oxygenation-in-progress_ops_datetime.json
+    procedure.validate response - 201
+
+
+
+055 Create Generic Therapy - Extracorporeal Membrane Oxygenation ops period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-extracorporeal-membrane-oxygenation-in-progress_ops_period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    extracorporeal    membrane     oxygenation    valid    not-ready    not-ready_not-implemented    alternative    ops    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create extracorporeal membrane oxygenation  Generic Therapy - Extracorporeal Membrane Oxygenation sct datetime  create-extracorporeal-membrane-oxygenation-in-progress_ops_period.json
+    procedure.validate response - 201
+
+
+
+056 Create Generic Therapy - Extracorporeal Membrane Oxygenation ops period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-extracorporeal-membrane-oxygenation-in-progress_ops_period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    extracorporeal    membrane     oxygenation    valid    not-ready    not-ready_not-implemented    alternative    ops    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create extracorporeal membrane oxygenation  Generic Therapy - Extracorporeal Membrane Oxygenation sct datetime  create-extracorporeal-membrane-oxygenation-in-progress_ops_period_2.json
+    procedure.validate response - 201
+
+
+057 Create Generic Therapy - Apheresis sct datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-apheresis-sct-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    apheresis    valid    not-ready    not-ready_not-implemented    alternative    sct    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+	procedure.create apheresis  Generic Therapy - Apheresis sct datetime  create-apheresis-sct-datetime.json
+	procedure.validate response - 201
+
+
+058 Create Generic Therapy - Apheresis sct period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-apheresis-sct-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    apheresis    valid    not-ready    not-ready_not-implemented    alternative    sct    period
+
+    ehr.create new ehr    000_ehr_status.json
+	procedure.create apheresis  Generic Therapy - Apheresis sct period  create-apheresis-sct-period.json
+	procedure.validate response - 201
+	
+
+
+059 Create Generic Therapy - Apheresis sct period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-apheresis-sct-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    apheresis    valid    not-ready    not-ready_not-implemented    alternative    sct    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+	procedure.create apheresis  Generic Therapy - Apheresis sct period_2  create-apheresis-sct-period_2.json
+	procedure.validate response - 201
+
+
+
+060 Create Generic Therapy - Apheresis ops datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-apheresis-ops-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    apheresis    valid    not-ready    not-ready_not-implemented    alternative    ops    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+	procedure.create apheresis  Generic Therapy - Apheresis ops datetime  create-apheresis-ops-datetime.json
+	procedure.validate response - 201
+
+
+
+061 Create Generic Therapy - Apheresis ops period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-apheresis-ops-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    apheresis    valid    not-ready    not-ready_not-implemented    alternative    ops    period
+
+    ehr.create new ehr    000_ehr_status.json
+	procedure.create apheresis  Generic Therapy - Apheresis ops period  create-apheresis-ops-period.json
+	procedure.validate response - 201
+
+
+
+062 Create Generic Therapy - Apheresis ops period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-apheresis-ops-period_2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    apheresis    valid    not-ready    not-ready_not-implemented    alternative    ops    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+	procedure.create apheresis  Generic Therapy - Apheresis ops period_2  create-apheresis-ops-period_2.json
+	procedure.validate response - 201
+
+
+
+063 Create Generic Therapy - Prone Position sct datetime
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-prone-position-in-progress_sct-datetime.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-implemented    alternative    sct    datetime
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create prone position    Generic Therapy - Prone Position sct datetime    create-prone-position-in-progress_sct-datetime.json
+    procedure.validate response - 201
+
+
+
+064 Create Generic Therapy - Prone Position sct period
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-prone-position-in-progress_sct-period.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-implemented    alternative    sct    period
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create prone position    Generic Therapy - Prone Position sct period   create-prone-position-in-progress_sct-period
+    procedure.validate response - 201
+
+
+
+065 Create Generic Therapy - Prone Position sct period_2
+	[Documentation]     1. *CREATE* new EHR record\n\n 
+	...                 2. *LOAD* _create-prone-position-in-progress_sct-period2.json_\n\n
+	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+    ...                 4. *POST* example JSON to procedure endpoint\n\n
+	...                 5. *VALIDATE* the response status
+	[Tags]             	generic-therapy    prone-position    valid    not-ready    not-implemented    alternative    sct    period_2
+
+    ehr.create new ehr    000_ehr_status.json
+    procedure.create prone position    Generic Therapy - Prone Position sct period_2    create-prone-position-in-progress_sct-period2.json
+    procedure.validate response - 201
+

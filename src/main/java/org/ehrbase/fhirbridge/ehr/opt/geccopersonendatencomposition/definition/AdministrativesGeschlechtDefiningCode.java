@@ -4,13 +4,13 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum AdministrativesGeschlechtDefiningCode implements EnumValueSet {
-  FEMALE("Female", "Female", "http://hl7.org/fhir/administrative-gender", "female"),
+  UNKNOWN("Unknown", "", "http://hl7.org/fhir/administrative-gender", "unknown"),
 
-  MALE("Male", "Male", "http://hl7.org/fhir/administrative-gender", "male"),
+  MALE("Male", "", "http://hl7.org/fhir/administrative-gender", "male"),
 
-  UNKNOWN("Unknown", "Unknown", "http://hl7.org/fhir/administrative-gender", "unknown"),
+  FEMALE("Female", "", "http://hl7.org/fhir/administrative-gender", "female"),
 
-  OTHER("Other", "Other", "http://hl7.org/fhir/administrative-gender", "other");
+  OTHER("Other", "", "http://hl7.org/fhir/administrative-gender", "other");
 
   private String value;
 

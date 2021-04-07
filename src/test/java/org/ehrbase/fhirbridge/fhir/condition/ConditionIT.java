@@ -1,25 +1,25 @@
 package org.ehrbase.fhirbridge.fhir.condition;
 
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.apache.commons.io.IOUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Patient;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Condition Condition} resource.
@@ -162,6 +162,7 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
+    @Disabled("Disable until find condition is reimplemented")
     void searchBySubject() throws IOException {
         createDefault();
 
@@ -174,6 +175,7 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
+    @Disabled("Disable until find condition is reimplemented")
     void searchByInvalidSubject() throws IOException {
         createDefault();
 
@@ -186,6 +188,7 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
+    @Disabled("Disable until find condition is reimplemented")
     void searchBySubjectAndCode() throws IOException {
         createDefault();
 
@@ -199,6 +202,7 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
+    @Disabled("Disable until find condition is reimplemented")
     void searchBySubjectAndInvalidCode() throws IOException {
         createDefault();
 
@@ -212,6 +216,7 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
+    @Disabled("Disable until find condition is reimplemented")
     void searchBySubjectAndStartTime() throws IOException {
         createDefault();
 
@@ -226,6 +231,7 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
+    @Disabled("Disable until find condition is reimplemented")
     void searchBySubjectAndInvalidStartTime() throws IOException {
         createDefault();
 
@@ -242,9 +248,9 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Condition condition = (Condition) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            // new YourConverter().toComposition((condition)));
-                });
-            }
+            // new YourConverter().convert(@NonNull (condition)));
+        });
+    }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
@@ -255,7 +261,7 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-               // .registerValueObject(new ValueObjectDefinition(YourComposition.class, List.of("location")))
+                // .registerValueObject(new ValueObjectDefinition(YourComposition.class, List.of("location")))
                 .build();
     }
 }

@@ -16,13 +16,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.living_arrangement.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-25T13:06:40.787045+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T12:09:15.576693+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class WohnsituationEvaluation implements EntryEntity {
   /**
    * Path: Selbstüberwachung/Allgemeine Angaben/Wohnsituation/Wohnsituation
    * Description: Einzelnes Word oder Satz, um zu beschreiben, ob eine Person für gewöhnlich allein oder mit anderen zusammen wohnt.
+   * Comment: Kodierung der Wohnsituation mit einer Terminologie ist, wo möglich, zu bevorzugen. Die Wertemengen für diese Datenelement können zwischen Zusätndigkeitsbereichen variieren - es wird erwartet, dass diese üblicherweise innerhalb Use-Case spezifischer Templates platziert werden. Zum Beispiel: 'lebt allein'; 'lebt mit der Familie'; oder 'lebt mit Anderen'.
    */
   @Path("/data[at0001]/items[at0004]/value|defining_code")
   private WohnsituationDefiningCode wohnsituationDefiningCode;

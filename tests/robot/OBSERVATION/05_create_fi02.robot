@@ -44,10 +44,11 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	[Template]			Create FiO2 w/o ehr reference
 	[Tags]				Subject
 
-	#												HTTP	
+	#												HTTP
 	# FIELD/PATH 					VALUE			CODE	ERROR MESSAGE
-	$.subject.identifier.value		missing			422		mii-reference-1: Either reference.reference XOR reference.identifier exists ..this.reference.exists.. xor ..this.identifier.value.exists.. and .this.identifier.system.exists
-	$.subject.identifier.system		missing			422		mii-reference-1: Either reference.reference XOR reference.identifier exists ..this.reference.exists.. xor ..this.identifier.value.exists.. and .this.identifier.system.exists
+	# FIXME: The two following tests have to be review after that MII-Reference is updated
+	# $.subject.identifier.value		missing			422		mii-reference-1: Either reference.reference XOR reference.identifier exists ..this.reference.exists.. xor ..this.identifier.value.exists.. and .this.identifier.system.exists
+	# $.subject.identifier.system		missing			422		mii-reference-1: Either reference.reference XOR reference.identifier exists ..this.reference.exists.. xor ..this.identifier.value.exists.. and .this.identifier.system.exists
 	$.subject.identifier.value		foobar			422		EhrId not found for subject 'foobar'
 	$.subject.identifier.value		${EMPTY}		422		@value cannot be empty    Observation.subject.identifier.value
 	$.subject.identifier.value		${{ [] }}		422		This property must be an simple value, not an array    Observation.subject.identifier.value
@@ -66,20 +67,20 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 	# comment: random uuid																			 regex for uuid
 	$.subject.identifier.value    ${{str(uuid.uuid4())}}    422    EhrId not found for subject '([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'
-	
+
 
 002 Create FiO2 (Invalid/Missing 'resourceType')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-fio2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	
+
 	[Template]			Create FiO2 with ehr reference
     [Tags]          	resourceType
-	#									HTTP	
+	#									HTTP
 	# FIELD/PATH 		VALUE			CODE	ERROR MESSAGE
 	$.resourceType		missing			422		Unable to find resourceType property
 	$.resourceType		foobar			422		This does not appear to be a FHIR resource .unknown name 'foobar'.
@@ -89,33 +90,33 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 003 Create FiO2 (Invalid/Missing 'ID')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-fio2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``ID`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	
+
 	[Template]			Create FiO2 with ehr reference
     [Tags]   			ID
 
-	# $.id				missing			201		
-	$.id				${EMPTY}		422		@value cannot be empty		
+	# $.id				missing			201
+	$.id				${EMPTY}		422		@value cannot be empty
 
 
 004 Create FiO2 (Invalid/Missing 'identifier')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-fio2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Identifier`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	
+
 	[Template]			Create FiO2 with ehr reference
     [Tags]   			identifier
-	#									   HTTP	
+	#									   HTTP
 	# FIELD/PATH 			VALUE		   CODE		ERROR MESSAGE
 	$.identifier			missing		   422     Observation.identifier:analyseBefundCode: minimum required = 1, but only found 0 .from ${profile url}
 	$.identifier			${EMPTY}	   422     This property must be an Array, not a primitive property
@@ -132,7 +133,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.identifier[0].type	${{ [] }}	   422     This property must be an Object, not an array
 	$.identifier[0].type	${{ {} }}	   422     Object must have some content
 	$.identifier[0].type	${None}		   422     This property must be an Object, not null
-	
+
 	$.identifier[0].type.coding    			 missing		   422    Object must have some content
 	$.identifier[0].type.coding[0].system	 missing    	   422    A code with no system has no defined meaning. A system should be provided
 	$.identifier[0].type.coding[0].system	 ${None}    	   422    This property must be an simple value, not null
@@ -144,13 +145,13 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.identifier[0].type.coding[0].code    	 ${EMPTY}    	   422    @value cannot be empty
 	$.identifier[0].type.coding[0].code    	 ${123}    	   	   422    Error parsing JSON: the primitive value must be a string
 	$.identifier[0].type.coding[0].code    	 foo    	       422    This element does not match any known slice defined in the profile ${profile url}
-	$.identifier[0].system					 missing		   422	   Observation.identifier:analyseBefundCode.system: minimum required = 1, but only found 0				
-	$.identifier[0].value					 missing		   422	   Observation.identifier:analyseBefundCode.value: minimum required = 1, but only found 0				
-	$.identifier[0].assigner				 missing		   422	   Observation.identifier:analyseBefundCode.assigner: minimum required = 1, but only found 0				
+	$.identifier[0].system					 missing		   422	   Observation.identifier:analyseBefundCode.system: minimum required = 1, but only found 0
+	$.identifier[0].value					 missing		   422	   Observation.identifier:analyseBefundCode.value: minimum required = 1, but only found 0
+	$.identifier[0].assigner				 missing		   422	   Observation.identifier:analyseBefundCode.assigner: minimum required = 1, but only found 0
 
 
 005 Create FiO2 (Invalid/Missing 'meta')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-fio2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Meta`` \n\n
@@ -160,7 +161,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 	[Template]			Create FiO2 with ehr reference
     [Tags]             	meta
-	#												HTTP	
+	#												HTTP
 	# FIELD/PATH 		VALUE						CODE	ERROR MESSAGE
 	$.meta				missing						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	$.meta.profile		missing						422    	Object must have some content
@@ -169,10 +170,10 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.meta.profile		${EMPTY}					422    	This property must be an Array, not a a primitive property
 	$.meta.profile		${123}						422    	This property must be an Array, not a a primitive property
 	$.meta.profile		${None}						422    	This property must be an Array, not a null
-	
+
 	# comment: the next one sets the value to an empty list/array []
 	$.meta.profile		${{ [] }}					422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
-	
+
 	# comment: the next one sets value to an empty object {}
 	$.meta.profile		${{ {} }}					422    	This property must be an Array, not a an object
 
@@ -187,37 +188,37 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 006 Create FiO2 (Invalid/Missing 'code')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-fio2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Code`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
-	
+
 	[Template]			Create FiO2 with ehr reference
     [Tags]              code
-	#											HTTP	
+	#											HTTP
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.code						missing			422    	Observation.code: minimum required = 1, but only found 0 .from ${profile url}
-	
+
 	# comment: code:loinc
 	$.code.coding[0].code		missing			422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
 	$.code.coding[0].code		${EMPTY}		422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
 	$.code.coding[0].code		${None}			422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
 	$.code.coding[0].code		${123}			422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
 	$.code.coding[0].code		foo			 	422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
-	
+
 	$.code.coding[0].system		missing			422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
 	$.code.coding[0].system		${EMPTY}		422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
 	$.code.coding[0].system		${None}			422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
 	$.code.coding[0].system		${123}			422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
 	$.code.coding[0].system		foo			 	422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
 	$.code.coding[0].system		http://foo	 	422    	Observation.code.coding:loinc: minimum required = 1, but only found 0 .from ${profile url}
-	
+
 
 007 Create FiO2 (Invalid/Missing 'category')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-fio2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Category`` \n\n
@@ -227,7 +228,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 	[Template]			Create FiO2 with ehr reference
     [Tags]    			category
-	#														HTTP	
+	#														HTTP
 	# FIELD/PATH 						VALUE				CODE	ERROR MESSAGE				... LOCATION
 	$.category						  	missing				422    	Observation.category: minimum required = 1, but only found 0 .from ${profile url}
 	$.category						  	${{ [] }}			422    	Array cannot be empty - the property should not be present if it has no values
@@ -235,7 +236,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.category						  	${{ [{}] }}			422    	Object must have some content
 	$.category[0].coding    		  	missing				422    	Object must have some content
 	$.category[0].coding    		  	${EMPTY}			422    	This property must be an Array, not a primitive property
-	
+
 	# comment: category:loinc-observation
 	$.category[0].coding[0].code      	missing    			422    	This element does not match any known slice defined in the profile ${profile url}
 	$.category[0].coding[0].code      	${EMPTY}    		422    	@value cannot be empty
@@ -262,7 +263,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
 	[Template]			Create FiO2 with ehr reference
 	[Tags]				TODO: ADD GITHUB ISSUE    not-ready    bug
-	#														HTTP	
+	#														HTTP
 	# FIELD/PATH 						VALUE				CODE	ERROR MESSAGE
 	# comment: category:blood-gas-studies
 	$.category[0].coding[2].code      	missing    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
@@ -278,7 +279,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 008 Create FiO2 (Invalid/Missing 'effectiveDateTime')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-fio2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``effective DateTime`` \n\n
@@ -288,7 +289,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 	[Template]			Create FiO2 with ehr reference
     [Tags]  			DateTime
-	#											HTTP	
+	#											HTTP
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.effectiveDateTime 		missing			422		Observation.effective.x.: minimum required = 1, but only found 0 .from ${profile url}
 	$.effectiveDateTime 		${EMPTY}		422		@value cannot be empty    Observation.effective.ofType.dateTime
@@ -299,7 +300,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 
 009 Create FiO2 (Invalid/Missing 'valueQuantity')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-fio2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``valueQuantity`` \n\n
@@ -309,7 +310,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 
 	[Template]			Create FiO2 with ehr reference
     [Tags]              valueQuantity
-	#											HTTP	
+	#											HTTP
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.valueQuantity			  	missing			422    	Observation.value.x.: minimum required = 1, but only found 0 .from ${profile url}
 	$.valueQuantity			  	${EMPTY}		422    	Observation.value.x.: minimum required = 1, but only found 0 .from ${profile url}
@@ -322,7 +323,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.valueQuantity.unit	  	missing			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
 	$.valueQuantity.system	  	missing			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
 	$.valueQuantity.code	  	missing			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
-	
+
 	$.valueQuantity.value	  	${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
 	$.valueQuantity.value	  	${None}			422    	This property must be an simple value, not null
 	$.valueQuantity.value	  	113				422    	Error parsing JSON: the primitive value must be a number
@@ -331,16 +332,16 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.valueQuantity.value	  	${-1}			422    	.*value is not within interval, expected:0.0 <= -1.0 <= 100.0.*Bad Request.*
 	$.valueQuantity.value	  	100,7			422    	The value '100,7' is not a valid decimal    Observation.value.ofType.Quantity..value
 	$.valueQuantity.value	  	foobar			422    	Error parsing JSON: the primitive value must be a number
-	
+
 	$.valueQuantity.unit	  	${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..unit
 	$.valueQuantity.unit	  	${None}			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
 	$.valueQuantity.unit	  	${123}			422    	Error parsing JSON: the primitive value must be a string
-	
+
 	$.valueQuantity.system	  	${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..system
 	$.valueQuantity.system	  	${None}			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
 	$.valueQuantity.system	  	foobar			422    	Value is 'foobar' but must be 'http://unitsofmeasure.org'
 	$.valueQuantity.system	  	${123}			422    	Error parsing JSON: the primitive value must be a string
-	
+
 	$.valueQuantity.code	  	${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..code
 	$.valueQuantity.code	  	${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
 	$.valueQuantity.code	  	${123}			422    	Error parsing JSON: the primitive value must be a string
@@ -396,7 +397,7 @@ generate payload from example json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 
-						# comment: delete field/object that has value 'missing' in test case table 
+						# comment: delete field/object that has value 'missing' in test case table
 						Run Keyword And Return If   $value=="missing"
 						...    	Run Keyword    Delete Object From Json    ${payload}    ${json_path}
 

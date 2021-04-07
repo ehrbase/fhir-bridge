@@ -353,7 +353,7 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    robot -v OUTPUT_LEVEL:minimal -d results/0 -L INFO \
+                    robot -v OUTPUT_LEVEL:verbose -d results/0 -L TRACE \
                             --skip TODO --skip future \
                             --skiponfailure not-ready robot/
             - run:
@@ -383,7 +383,8 @@ commands:
                 command: |
                     mkdir 00_robot_results
                     cp tests/results/0/* 00_robot_results/
-
+                    cat fhirbride_log
+                    cp fhirbride_log 00_robot_results/
 
     cache-out-fhirbridge-m2-dependencies:
         steps:
