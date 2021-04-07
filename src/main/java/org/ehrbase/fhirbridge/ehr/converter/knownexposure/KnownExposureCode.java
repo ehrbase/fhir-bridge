@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.knownexposure;
 
-import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.HL7_DATA_ABSENT_REASON;
-import static org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem.SNOMED;
+import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.SNOMED;
+import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.HL7_DATA_ABSENT_REASON;
 
 public enum KnownExposureCode {
 
