@@ -12,13 +12,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-04T14:52:22.399440400+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-15T15:57:50.594512+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class EinzelheitenDerKommunikationInternetKommunikationCluster implements LocatableEntity {
   /**
    * Path: GECCO_Personendaten/Personendaten/Einzelheiten der Kommunikation/Internet-Kommunikation/Sender
    * Description: Die Art des verwendeten Kommunikationsmediums oder Dienstes.
+   * Comment: Zum Beispiel E-Mail, SIP, Skype oder andere Arten von synchronen oder asynchronen internetbasierten Kommunikationsmitteln.
    */
   @Path("/items[at0021]/value|value")
   private String senderValue;
@@ -42,7 +43,8 @@ public class EinzelheitenDerKommunikationInternetKommunikationCluster implements
   private FeederAudit feederAudit;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Einzelheiten der Kommunikation/Internet-Kommunikation/value
+   * Path: GECCO_Personendaten/Personendaten/Einzelheiten der Kommunikation/Internet-Kommunikation/Adresse
+   * Description: Die Adresse oder Kennung, die zur Kommunikation auf dem angegebenen Kommunikationsweg verwendet wird.
    */
   @Path("/items[at0009]/value")
   @Choice

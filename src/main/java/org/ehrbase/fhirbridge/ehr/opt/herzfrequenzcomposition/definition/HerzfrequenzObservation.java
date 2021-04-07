@@ -1,114 +1,185 @@
 package org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition;
 
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.Double;
+import java.lang.String;
+import java.time.temporal.TemporalAccessor;
+import java.util.List;
+import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-
-import java.time.temporal.TemporalAccessor;
-import java.util.List;
+import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Entity
 @Archetype("openEHR-EHR-OBSERVATION.pulse.v2")
-public class HerzfrequenzObservation {
-    @Path("/protocol[at0010]/items[at1056]")
-    private List<Cluster> erweiterung;
+@Generated(
+    value = "org.ehrbase.client.classgenerator.ClassGenerator",
+    date = "2021-03-09T11:53:58.182515+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+)
+public class HerzfrequenzObservation implements EntryEntity {
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/Jedes Ereignis/Frequenz
+   * Description: Die Frequenz, gemessen in Schlägen pro Minute.
+   */
+  @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|magnitude")
+  private Double frequenzMagnitude;
 
-    @Path("/language")
-    private Language language;
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/Jedes Ereignis/Frequenz
+   * Description: Die Frequenz, gemessen in Schlägen pro Minute.
+   */
+  @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|units")
+  private String frequenzUnits;
 
-    @Path("/protocol[at0010]/items[at1013]")
-    private Cluster gerat;
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/History/Jedes Ereignis/Structure/Frequenz/null_flavour
+   */
+  @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/null_flavour|defining_code")
+  private NullFlavour frequenzNullFlavourDefiningCode;
 
-    @Path("/data[at0002]/origin|value")
-    private TemporalAccessor originValue;
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/Jedes Ereignis/Anstrengung
+   * Description: Details über die körperliche Anstrengung, die der Patient während der Untersuchung ausgesetzt war.
+   */
+  @Path("/data[at0002]/events[at0003]/state[at0012]/items[at1017]")
+  private List<Cluster> anstrengung;
 
-    @Path("/data[at0002]/events[at0003]/state[at0012]/items[at1017]")
-    private List<Cluster> anstrengung;
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/Jedes Ereignis/time
+   */
+  @Path("/data[at0002]/events[at0003]/time|value")
+  private TemporalAccessor timeValue;
 
-    @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|magnitude")
-    private Double frequenzMagnitude;
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/origin
+   */
+  @Path("/data[at0002]/origin|value")
+  private TemporalAccessor originValue;
 
-    @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|units")
-    private String frequenzUnits;
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/Gerät
+   * Description: Informationen zu dem Gerät, welches zur Messung der Puls- oder der Herzfrequenz verwendet wurde.
+   */
+  @Path("/protocol[at0010]/items[at1013]")
+  private Cluster geraet;
 
-    @Path("/subject")
-    private PartyProxy subject;
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/Erweiterung
+   * Description: Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.
+   * Comment: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.
+   */
+  @Path("/protocol[at0010]/items[at1056]")
+  private List<Cluster> erweiterung;
 
-    @Path("/data[at0002]/events[at0003]/time|value")
-    private TemporalAccessor timeValue;
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/subject
+   */
+  @Path("/subject")
+  private PartyProxy subject;
 
-    public void setErweiterung(List<Cluster> erweiterung) {
-        this.erweiterung = erweiterung;
-    }
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/language
+   */
+  @Path("/language")
+  private Language language;
 
-    public List<Cluster> getErweiterung() {
-        return this.erweiterung;
-    }
+  /**
+   * Path: Herzfrequenz/Herzfrequenz/feeder_audit
+   */
+  @Path("/feeder_audit")
+  private FeederAudit feederAudit;
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
+  public void setFrequenzMagnitude(Double frequenzMagnitude) {
+     this.frequenzMagnitude = frequenzMagnitude;
+  }
 
-    public Language getLanguage() {
-        return this.language;
-    }
+  public Double getFrequenzMagnitude() {
+     return this.frequenzMagnitude ;
+  }
 
-    public void setGerat(Cluster gerat) {
-        this.gerat = gerat;
-    }
+  public void setFrequenzUnits(String frequenzUnits) {
+     this.frequenzUnits = frequenzUnits;
+  }
 
-    public Cluster getGerat() {
-        return this.gerat;
-    }
+  public String getFrequenzUnits() {
+     return this.frequenzUnits ;
+  }
 
-    public void setOriginValue(TemporalAccessor originValue) {
-        this.originValue = originValue;
-    }
+  public void setFrequenzNullFlavourDefiningCode(NullFlavour frequenzNullFlavourDefiningCode) {
+     this.frequenzNullFlavourDefiningCode = frequenzNullFlavourDefiningCode;
+  }
 
-    public TemporalAccessor getOriginValue() {
-        return this.originValue;
-    }
+  public NullFlavour getFrequenzNullFlavourDefiningCode() {
+     return this.frequenzNullFlavourDefiningCode ;
+  }
 
-    public void setAnstrengung(List<Cluster> anstrengung) {
-        this.anstrengung = anstrengung;
-    }
+  public void setAnstrengung(List<Cluster> anstrengung) {
+     this.anstrengung = anstrengung;
+  }
 
-    public List<Cluster> getAnstrengung() {
-        return this.anstrengung;
-    }
+  public List<Cluster> getAnstrengung() {
+     return this.anstrengung ;
+  }
 
-    public void setFrequenzMagnitude(Double frequenzMagnitude) {
-        this.frequenzMagnitude = frequenzMagnitude;
-    }
+  public void setTimeValue(TemporalAccessor timeValue) {
+     this.timeValue = timeValue;
+  }
 
-    public Double getFrequenzMagnitude() {
-        return this.frequenzMagnitude;
-    }
+  public TemporalAccessor getTimeValue() {
+     return this.timeValue ;
+  }
 
-    public void setFrequenzUnits(String frequenzUnits) {
-        this.frequenzUnits = frequenzUnits;
-    }
+  public void setOriginValue(TemporalAccessor originValue) {
+     this.originValue = originValue;
+  }
 
-    public String getFrequenzUnits() {
-        return this.frequenzUnits;
-    }
+  public TemporalAccessor getOriginValue() {
+     return this.originValue ;
+  }
 
-    public void setSubject(PartyProxy subject) {
-        this.subject = subject;
-    }
+  public void setGeraet(Cluster geraet) {
+     this.geraet = geraet;
+  }
 
-    public PartyProxy getSubject() {
-        return this.subject;
-    }
+  public Cluster getGeraet() {
+     return this.geraet ;
+  }
 
-    public void setTimeValue(TemporalAccessor timeValue) {
-        this.timeValue = timeValue;
-    }
+  public void setErweiterung(List<Cluster> erweiterung) {
+     this.erweiterung = erweiterung;
+  }
 
-    public TemporalAccessor getTimeValue() {
-        return this.timeValue;
-    }
+  public List<Cluster> getErweiterung() {
+     return this.erweiterung ;
+  }
+
+  public void setSubject(PartyProxy subject) {
+     this.subject = subject;
+  }
+
+  public PartyProxy getSubject() {
+     return this.subject ;
+  }
+
+  public void setLanguage(Language language) {
+     this.language = language;
+  }
+
+  public Language getLanguage() {
+     return this.language ;
+  }
+
+  public void setFeederAudit(FeederAudit feederAudit) {
+     this.feederAudit = feederAudit;
+  }
+
+  public FeederAudit getFeederAudit() {
+     return this.feederAudit ;
+  }
 }

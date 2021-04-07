@@ -4,9 +4,9 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum AelterOderGleich65JahreAltDefiningCode implements EnumValueSet {
-  NEIN("Nein", "Nein", "LOINC", "LA32-8"),
+  NEIN("Nein", "", "LOINC", "LA32-8"),
 
-  JA("Ja", "Ja", "LOINC", "LA33-6");
+  JA("Ja", "", "LOINC", "LA33-6");
 
   private String value;
 

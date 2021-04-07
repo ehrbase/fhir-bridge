@@ -5,200 +5,272 @@ import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.generic.Participation;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.String;
+import java.time.temporal.TemporalAccessor;
+import java.util.List;
+import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
+import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
 import org.ehrbase.fhirbridge.ehr.Composition;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SOFAScoreObservation;
-import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.StatusDefiningcode;
-
-import java.time.temporal.TemporalAccessor;
-import java.util.List;
+import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreObservation;
+import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.StatusDefiningCode;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
+@Generated(
+    value = "org.ehrbase.client.classgenerator.ClassGenerator",
+    date = "2021-04-01T12:01:13.757064+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+)
 @Template("SOFA")
-public class SOFAComposition implements Composition {
-    @Id
-    private VersionUid versionUid;
+public class SOFAComposition implements CompositionEntity, Composition {
+  /**
+   * Path: SOFA-Score/category
+   */
+  @Path("/category|defining_code")
+  private Category categoryDefiningCode;
 
-    @Path("/feeder_audit")
-    private FeederAudit feederAudit;
+  /**
+   * Path: SOFA-Score/context/Erweiterung
+   * Description: Ergänzende Angaben zum Registereintrag.
+   */
+  @Path("/context/other_context[at0001]/items[at0002]")
+  private List<Cluster> erweiterung;
 
-    @Path("/context/end_time|value")
-    private TemporalAccessor endTimeValue;
+  /**
+   * Path: SOFA-Score/context/Status
+   * Description: Status der gelieferten Daten für den Registereintrag. Hinweis: Dies ist nicht der Status einzelner Komponenten.
+   */
+  @Path("/context/other_context[at0001]/items[at0004]/value|defining_code")
+  private StatusDefiningCode statusDefiningCode;
 
-    @Path("/context/participations")
-    private List<Participation> participations;
+  /**
+   * Path: SOFA-Score/context/Baum/Status/null_flavour
+   */
+  @Path("/context/other_context[at0001]/items[at0004]/null_flavour|defining_code")
+  private NullFlavour statusNullFlavourDefiningCode;
 
-    @Path("/language")
-    private Language language;
+  /**
+   * Path: SOFA-Score/context/Kategorie
+   * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
+   */
+  @Path("/context/other_context[at0001]/items[at0005]")
+  private List<SofaScoreKategorieElement> kategorie;
 
-    @Path("/context/health_care_facility")
-    private PartyIdentified healthCareFacility;
+  /**
+   * Path: SOFA-Score/context/start_time
+   */
+  @Path("/context/start_time|value")
+  private TemporalAccessor startTimeValue;
 
-    @Path("/context/other_context[at0001]/items[at0004]/value|defining_code")
-    private StatusDefiningcode statusDefiningcode;
+  /**
+   * Path: SOFA-Score/context/participations
+   */
+  @Path("/context/participations")
+  private List<Participation> participations;
 
-    @Path("/context/other_context[at0001]/items[at0005]/value|value")
-    private String kategorieValue;
+  /**
+   * Path: SOFA-Score/context/end_time
+   */
+  @Path("/context/end_time|value")
+  private TemporalAccessor endTimeValue;
 
-    @Path("/content[openEHR-EHR-OBSERVATION.sofa_score.v0]")
-    private SOFAScoreObservation sofaScore;
+  /**
+   * Path: SOFA-Score/context/location
+   */
+  @Path("/context/location")
+  private String location;
 
-    @Path("/territory")
-    private Territory territory;
+  /**
+   * Path: SOFA-Score/context/health_care_facility
+   */
+  @Path("/context/health_care_facility")
+  private PartyIdentified healthCareFacility;
 
-    @Path("/context/start_time|value")
-    private TemporalAccessor startTimeValue;
+  /**
+   * Path: SOFA-Score/context/setting
+   */
+  @Path("/context/setting|defining_code")
+  private Setting settingDefiningCode;
 
-    @Path("/composer")
-    private PartyProxy composer;
+  /**
+   * Path: SOFA-Score/SOFA score
+   * Description: Ein Scoring-System zur Bewertung und Verfolgung der Entwicklung von Organdysfunktion in sechs lebenswichtigen Organsystemen. Zuvor bekannt als "Sepsis related Organ Failure Assessment".
+   */
+  @Path("/content[openEHR-EHR-OBSERVATION.sofa_score.v0]")
+  private SofaScoreObservation sofaScore;
 
-    @Path("/context/setting|defining_code")
-    private SettingDefiningcode settingDefiningcode;
+  /**
+   * Path: SOFA-Score/composer
+   */
+  @Path("/composer")
+  private PartyProxy composer;
 
-    @Path("/context/location")
-    private String location;
+  /**
+   * Path: SOFA-Score/language
+   */
+  @Path("/language")
+  private Language language;
 
-    @Path("/category|defining_code")
-    private CategoryDefiningcode categoryDefiningcode;
+  /**
+   * Path: SOFA-Score/feeder_audit
+   */
+  @Path("/feeder_audit")
+  private FeederAudit feederAudit;
 
-    @Path("/context/other_context[at0001]/items[at0002]")
-    private List<Cluster> erweiterung;
+  /**
+   * Path: SOFA-Score/territory
+   */
+  @Path("/territory")
+  private Territory territory;
 
-    public VersionUid getVersionUid() {
-        return this.versionUid;
-    }
+  @Id
+  private VersionUid versionUid;
 
-    public void setVersionUid(VersionUid versionUid) {
-        this.versionUid = versionUid;
-    }
+  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+     this.categoryDefiningCode = categoryDefiningCode;
+  }
 
-    public FeederAudit getFeederAudit() {
-        return this.feederAudit;
-    }
+  public Category getCategoryDefiningCode() {
+     return this.categoryDefiningCode ;
+  }
 
-    public void setFeederAudit(FeederAudit feederAudit) {
-        this.feederAudit = feederAudit;
-    }
+  public void setErweiterung(List<Cluster> erweiterung) {
+     this.erweiterung = erweiterung;
+  }
 
-    public TemporalAccessor getEndTimeValue() {
-        return this.endTimeValue;
-    }
+  public List<Cluster> getErweiterung() {
+     return this.erweiterung ;
+  }
 
-    public void setEndTimeValue(TemporalAccessor endTimeValue) {
-        this.endTimeValue = endTimeValue;
-    }
+  public void setStatusDefiningCode(StatusDefiningCode statusDefiningCode) {
+     this.statusDefiningCode = statusDefiningCode;
+  }
 
-    public List<Participation> getParticipations() {
-        return this.participations;
-    }
+  public StatusDefiningCode getStatusDefiningCode() {
+     return this.statusDefiningCode ;
+  }
 
-    public void setParticipations(List<Participation> participations) {
-        this.participations = participations;
-    }
+  public void setStatusNullFlavourDefiningCode(NullFlavour statusNullFlavourDefiningCode) {
+     this.statusNullFlavourDefiningCode = statusNullFlavourDefiningCode;
+  }
 
-    public Language getLanguage() {
-        return this.language;
-    }
+  public NullFlavour getStatusNullFlavourDefiningCode() {
+     return this.statusNullFlavourDefiningCode ;
+  }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
+  public void setKategorie(List<SofaScoreKategorieElement> kategorie) {
+     this.kategorie = kategorie;
+  }
 
-    public PartyIdentified getHealthCareFacility() {
-        return this.healthCareFacility;
-    }
+  public List<SofaScoreKategorieElement> getKategorie() {
+     return this.kategorie ;
+  }
 
-    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
-        this.healthCareFacility = healthCareFacility;
-    }
+  public void setStartTimeValue(TemporalAccessor startTimeValue) {
+     this.startTimeValue = startTimeValue;
+  }
 
-    public StatusDefiningcode getStatusDefiningcode() {
-        return this.statusDefiningcode;
-    }
+  public TemporalAccessor getStartTimeValue() {
+     return this.startTimeValue ;
+  }
 
-    public void setStatusDefiningcode(StatusDefiningcode statusDefiningcode) {
-        this.statusDefiningcode = statusDefiningcode;
-    }
+  public void setParticipations(List<Participation> participations) {
+     this.participations = participations;
+  }
 
-    public String getKategorieValue() {
-        return this.kategorieValue;
-    }
+  public List<Participation> getParticipations() {
+     return this.participations ;
+  }
 
-    public void setKategorieValue(String kategorieValue) {
-        this.kategorieValue = kategorieValue;
-    }
+  public void setEndTimeValue(TemporalAccessor endTimeValue) {
+     this.endTimeValue = endTimeValue;
+  }
 
-    public SOFAScoreObservation getSofaScore() {
-        return this.sofaScore;
-    }
+  public TemporalAccessor getEndTimeValue() {
+     return this.endTimeValue ;
+  }
 
-    public void setSofaScore(SOFAScoreObservation sofaScore) {
-        this.sofaScore = sofaScore;
-    }
+  public void setLocation(String location) {
+     this.location = location;
+  }
 
-    public Territory getTerritory() {
-        return this.territory;
-    }
+  public String getLocation() {
+     return this.location ;
+  }
 
-    public void setTerritory(Territory territory) {
-        this.territory = territory;
-    }
+  public void setHealthCareFacility(PartyIdentified healthCareFacility) {
+     this.healthCareFacility = healthCareFacility;
+  }
 
-    public TemporalAccessor getStartTimeValue() {
-        return this.startTimeValue;
-    }
+  public PartyIdentified getHealthCareFacility() {
+     return this.healthCareFacility ;
+  }
 
-    public void setStartTimeValue(TemporalAccessor startTimeValue) {
-        this.startTimeValue = startTimeValue;
-    }
+  public void setSettingDefiningCode(Setting settingDefiningCode) {
+     this.settingDefiningCode = settingDefiningCode;
+  }
 
-    public PartyProxy getComposer() {
-        return this.composer;
-    }
+  public Setting getSettingDefiningCode() {
+     return this.settingDefiningCode ;
+  }
 
-    public void setComposer(PartyProxy composer) {
-        this.composer = composer;
-    }
+  public void setSofaScore(SofaScoreObservation sofaScore) {
+     this.sofaScore = sofaScore;
+  }
 
-    public SettingDefiningcode getSettingDefiningcode() {
-        return this.settingDefiningcode;
-    }
+  public SofaScoreObservation getSofaScore() {
+     return this.sofaScore ;
+  }
 
-    public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
-        this.settingDefiningcode = settingDefiningcode;
-    }
+  public void setComposer(PartyProxy composer) {
+     this.composer = composer;
+  }
 
-    public String getLocation() {
-        return this.location;
-    }
+  public PartyProxy getComposer() {
+     return this.composer ;
+  }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+  public void setLanguage(Language language) {
+     this.language = language;
+  }
 
-    public CategoryDefiningcode getCategoryDefiningcode() {
-        return this.categoryDefiningcode;
-    }
+  public Language getLanguage() {
+     return this.language ;
+  }
 
-    public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
-        this.categoryDefiningcode = categoryDefiningcode;
-    }
+  public void setFeederAudit(FeederAudit feederAudit) {
+     this.feederAudit = feederAudit;
+  }
 
-    public List<Cluster> getErweiterung() {
-        return this.erweiterung;
-    }
+  public FeederAudit getFeederAudit() {
+     return this.feederAudit ;
+  }
 
-    public void setErweiterung(List<Cluster> erweiterung) {
-        this.erweiterung = erweiterung;
-    }
+  public void setTerritory(Territory territory) {
+     this.territory = territory;
+  }
+
+  public Territory getTerritory() {
+     return this.territory ;
+  }
+
+  public VersionUid getVersionUid() {
+     return this.versionUid ;
+  }
+
+  public void setVersionUid(VersionUid versionUid) {
+     this.versionUid = versionUid;
+  }
 }
