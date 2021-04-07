@@ -18,13 +18,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.imaging_exam_result.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-03T10:10:16.298539+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T11:53:47.260318+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class BildgebendesUntersuchungsergebnisObservation implements EntryEntity {
   /**
    * Path: Radiologischer Befund/Bildgebendes Untersuchungsergebnis/Beliebiges Ereignis/Name der Untersuchung
    * Description: Name der/des durchgeführten bildgebenden Untersuchung oder Verfahrens.
+   * Comment: Eine Codierung mit einer Terminologie, möglicherweise einem vorkoordinierten Begriff, der sowohl die Modalität als auch die anatomische Körperstelle angibt, ist nach Möglichkeit wünschenswert. Mögliche Kandidatenterminologien: LOINC, SNOMED CT oder RadLex.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value|defining_code")
   private NameDerUntersuchungDefiningCode nameDerUntersuchungDefiningCode;

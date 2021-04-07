@@ -12,6 +12,10 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     FindCondition("condition-find", "Find Condition"),
 
+    CreateConsent("consent-create", "Create Consent"),
+
+    FindConsent("consent-find", "Find Consent"),
+
     CreateDiagnosticReport("diagnostic-report-create", "Create Diagnostic Report"),
 
     FindDiagnosticReport("diagnostic-report-find", "Find Diagnostic Report"),

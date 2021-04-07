@@ -248,7 +248,7 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Condition condition = (Condition) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-            // new YourConverter().toComposition((condition)));
+            // new YourConverter().convert(@NonNull (condition)));
         });
     }
 

@@ -1,11 +1,15 @@
 package org.ehrbase.fhirbridge.fhir.procedure;
 
 
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.TherapyCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.GECCOProzedurComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeccoProzedurKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.MedizingeraetCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NichtDurchgefuehrteProzedurEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.UnbekannteProzedurEvaluation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Procedure;
 import org.javers.core.Javers;
@@ -18,7 +22,8 @@ import java.io.IOException;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GenericTherapyIT extends AbstractMappingTestSetupIT {
 
@@ -92,7 +97,7 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Procedure procedure = (Procedure) super.testFileLoader.loadResource(resourcePath);
         TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
-        GECCOProzedurComposition mappedProzedurComposition = therapyCompositionConverter.toComposition(procedure);
+        GECCOProzedurComposition mappedProzedurComposition = therapyCompositionConverter.convert(procedure);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedProzedurComposition);
         assertEquals(diff.getChanges().size(), 0);
     }
@@ -120,7 +125,7 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String resource) throws IOException {
         Procedure procedure = (Procedure) testFileLoader.loadResource(resource);
 
-        return assertThrows(CompositionConversionException.class, () -> new TherapyCompositionConverter().toComposition(procedure));
+        return assertThrows(ConversionException.class, () -> new TherapyCompositionConverter().convert(procedure));
     }
 
     @Override

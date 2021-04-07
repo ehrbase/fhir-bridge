@@ -8,7 +8,7 @@ fhir-bridge:
     template:
       prefix: classpath:/opt/
   composition:
-    debug: false
+    debug: true
     output-directory: "src/main/resources/"
   fhir:
     cors:

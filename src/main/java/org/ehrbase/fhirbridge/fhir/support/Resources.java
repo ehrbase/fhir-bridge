@@ -10,6 +10,7 @@ import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.CanonicalType;
 import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Observation;
@@ -18,6 +19,7 @@ import org.hl7.fhir.r4.model.PrimitiveType;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Resource;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -65,6 +67,8 @@ public class Resources {
 
         if (resource instanceof Condition) {
             subjectIdentifier = ((Condition) resource).getSubject().getIdentifier();
+        } else if (resource instanceof Consent) {
+            subjectIdentifier = ((Consent) resource).getPatient().getIdentifier();
         } else if (resource instanceof DiagnosticReport) {
             subjectIdentifier = ((DiagnosticReport) resource).getSubject().getIdentifier();
         } else if (resource instanceof Observation) {
@@ -84,23 +88,23 @@ public class Resources {
         return Optional.ofNullable(subjectIdentifier);
     }
 
-    public static Identifier getQuestionnaireId(QuestionnaireResponse resource, Optional<OpenEhrClient> openEhrClient, Optional<PatientIdRepository> patientIdRepository){
-        if(openEhrClient.isEmpty()){
+    public static Identifier getQuestionnaireId(QuestionnaireResponse resource, Optional<OpenEhrClient> openEhrClient, Optional<PatientIdRepository> patientIdRepository) {
+        if (openEhrClient.isEmpty()) {
             throw new InternalErrorException("getSubjectIdentifier was called without a confugred openEHRClient as parameter. Please add one.");
         }
-        if(patientIdRepository.isEmpty()){
+        if (patientIdRepository.isEmpty()) {
             throw new InternalErrorException("PatientIdRepository is required");
         }
 
-        if(resource.getQuestionnaire().contains("http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|")){
+        if (resource.getQuestionnaire().contains("http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|")) {
             return createQuestionnaireEHRAndReturnPatientId(openEhrClient.get(), patientIdRepository.get());
-        }else{
+        } else {
             return resource.getSubject().getIdentifier();
         }
     }
 
 
-    private static Identifier createQuestionnaireEHRAndReturnPatientId(OpenEhrClient openEhrClient, PatientIdRepository patientIdRepository){
+    private static Identifier createQuestionnaireEHRAndReturnPatientId(OpenEhrClient openEhrClient, PatientIdRepository patientIdRepository) {
         PatientId patientId = patientIdRepository.save(new PatientId());
         PartySelf subject = new PartySelf();
         PartyRef externalRef = new PartyRef();
@@ -112,7 +116,7 @@ public class Resources {
         externalRef.setId(genericId);
         subject.setExternalRef(externalRef);
         DvText dvText = new DvText("any EHR status");
-        EhrStatus ehrStatus = new EhrStatus("openEHR-EHR-ITEM_TREE.generic.v1", dvText, subject ,true, true, null);
+        EhrStatus ehrStatus = new EhrStatus("openEHR-EHR-ITEM_TREE.generic.v1", dvText, subject, true, true, null);
         UUID ehrId = openEhrClient.ehrEndpoint().createEhr(ehrStatus);
         System.out.println("EhrID: " + ehrId.toString());
         Identifier identifier = new Identifier();
