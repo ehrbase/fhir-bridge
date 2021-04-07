@@ -12,7 +12,7 @@ import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.Pulsox
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-public class PulseOximetryConverter extends ObservationToCompositionConverter<PulsoxymetrieComposition> {
+public class PulseOximetryCompositionConverter extends ObservationToCompositionConverter<PulsoxymetrieComposition> {
 
     @Override
     public PulsoxymetrieComposition convertInternal(@NonNull Observation resource) {
@@ -20,7 +20,8 @@ public class PulseOximetryConverter extends ObservationToCompositionConverter<Pu
         new PulseOximetryCodeChecker().checkIfPulseOximetry(resource);
         new ContextConverter().mapStatus(composition, resource);
         mapKategorie(composition, resource);
-        mapPulsoxymetrieObservation(composition, resource);
+
+        composition.setPulsoxymetrie(new PulsoxymetrieObservationConverter().convert(resource));
         return composition;
     }
 
@@ -32,15 +33,4 @@ public class PulseOximetryConverter extends ObservationToCompositionConverter<Pu
                 .get(0).getCode());
     }
 
-    private void mapPulsoxymetrieObservation(PulsoxymetrieComposition composition, Observation observation) {
-        PulsoxymetrieObservation pulsoxymetrieObservation = new PulsoxymetrieObservation();
-        pulsoxymetrieObservation.setLanguage(Language.DE);
-        pulsoxymetrieObservation.setTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        pulsoxymetrieObservation.setOriginValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        pulsoxymetrieObservation.setSubject(new PartySelf());
-
-        DvProportion dvProportion = new DvProportion(observation.getValueQuantity().getValue().doubleValue(), 100.0, 2L);
-        pulsoxymetrieObservation.setSpo(dvProportion);
-        composition.setPulsoxymetrie(pulsoxymetrieObservation);
-    }
 }

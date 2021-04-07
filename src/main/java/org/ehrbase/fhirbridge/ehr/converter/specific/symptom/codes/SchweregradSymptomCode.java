@@ -1,9 +1,12 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
+package org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.client.classgenerator.EnumValueSet;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public enum SchweregradSymptomCode implements EnumValueSet {
     N442452003("442452003", "442452003", "SNOMED Clinical Terms", "442452003"),
@@ -27,6 +30,14 @@ public enum SchweregradSymptomCode implements EnumValueSet {
         this.description = description;
         this.terminologyId = terminologyId;
         this.code = code;
+    }
+
+    public static Map<String, SchweregradSymptomCode> getCodesAsMap(){
+        Map<String, SchweregradSymptomCode> stringSchweregradSymptomCodeHashMap = new HashMap<>();
+        for (SchweregradSymptomCode schweregradSymptomCode : SchweregradSymptomCode.values()) {
+            stringSchweregradSymptomCodeHashMap.put(schweregradSymptomCode.getCode(), schweregradSymptomCode);
+        }
+        return stringSchweregradSymptomCodeHashMap;
     }
 
     public String getValue() {
