@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseOximetryConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseOximetryCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
@@ -68,13 +68,13 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String resource) throws IOException {
         Observation pulseOximetry = (Observation) testFileLoader.loadResource(resource);
-        return assertThrows(ConversionException.class, () -> new PulseOximetryConverter().convert(pulseOximetry));
+        return assertThrows(ConversionException.class, () -> new PulseOximetryCompositionConverter().convert(pulseOximetry));
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Observation observation = (Observation) super.testFileLoader.loadResource(resourcePath);
-        PulseOximetryConverter pulseOximetryConverter = new PulseOximetryConverter();
+        PulseOximetryCompositionConverter pulseOximetryConverter = new PulseOximetryCompositionConverter();
         PulsoxymetrieComposition mappedPulsoxymetrieComposition = pulseOximetryConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedPulsoxymetrieComposition);
         assertEquals(diff.getChanges().size(), 0);

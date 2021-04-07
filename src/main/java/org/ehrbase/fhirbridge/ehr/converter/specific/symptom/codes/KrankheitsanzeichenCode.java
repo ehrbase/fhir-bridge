@@ -1,9 +1,12 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
+package org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.client.classgenerator.EnumValueSet;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public enum KrankheitsanzeichenCode implements EnumValueSet {
     N49727002("49727002", "49727002", "SNOMED Clinical Terms", "49727002"),
@@ -117,6 +120,13 @@ public enum KrankheitsanzeichenCode implements EnumValueSet {
         return this.code ;
     }
 
+    public static Map<String, KrankheitsanzeichenCode> getCodesAsMap(){
+        Map<String, KrankheitsanzeichenCode> krankheitszeichenMap = new HashMap<>();
+        for (KrankheitsanzeichenCode krankheitszeichen : KrankheitsanzeichenCode.values()) {
+            krankheitszeichenMap.put(krankheitszeichen.getCode(), krankheitszeichen);
+        }
+        return krankheitszeichenMap;
+    }
 
     public DvCodedText toDvCodedText(){
         DvCodedText dvCodedText = new DvCodedText();

@@ -1,7 +1,11 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
+import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes.KrankheitsanzeichenCode;
 
 public enum ProbenartDefiningCode implements EnumValueSet {
   CYST_BAKER_S("Cyst, Baker's", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BCYST"),
@@ -146,6 +150,15 @@ public enum ProbenartDefiningCode implements EnumValueSet {
     this.terminologyId = terminologyId;
     this.code = code;
   }
+
+  public static Map<String, ProbenartDefiningCode> getCodesAsMap(){
+    Map<String, ProbenartDefiningCode> probenartDefiningCodeHashMap = new HashMap<>();
+    for (ProbenartDefiningCode probenartDefiningCode : ProbenartDefiningCode.values()) {
+      probenartDefiningCodeHashMap.put(probenartDefiningCode.getCode(), probenartDefiningCode);
+    }
+    return probenartDefiningCodeHashMap;
+  }
+
 
   public String getValue() {
      return this.value ;
