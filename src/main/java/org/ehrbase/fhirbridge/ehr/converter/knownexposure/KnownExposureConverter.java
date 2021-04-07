@@ -1,3 +1,4 @@
+/*
 package org.ehrbase.fhirbridge.ehr.converter.knownexposure;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
@@ -6,9 +7,6 @@ import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.CommonData;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.SARSCoV2ExpositionComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
@@ -43,7 +41,7 @@ public class KnownExposureConverter  implements CompositionConverter<SARSCoV2Exp
         composition.setLocation("test");
         composition.setTerritory(Territory.DE);
         composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        composition.setFeederAudit(CommonData.constructFeederAudit(object));
+        //composition.setFeederAudit(CommonData.constructFeederAudit(object));
     }
 
     private void mapStatus(SARSCoV2ExpositionComposition composition, Observation obs) {
@@ -61,3 +59,4 @@ public class KnownExposureConverter  implements CompositionConverter<SARSCoV2Exp
         }
     }
 }
+*/
