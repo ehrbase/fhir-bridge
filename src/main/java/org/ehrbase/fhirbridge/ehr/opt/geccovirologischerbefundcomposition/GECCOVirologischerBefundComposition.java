@@ -14,6 +14,7 @@ import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
+import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
@@ -34,7 +35,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.defini
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("GECCO_Virologischer Befund")
-public class GECCOVirologischerBefundComposition implements Composition {
+public class GECCOVirologischerBefundComposition implements Composition, CompositionEntity {
   /**
    * Path: GECCO_Virologischer Befund/category
    */
