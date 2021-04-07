@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.antibodypanel;
+package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.VirusnachweistestDefiningCode;
 import org.hl7.fhir.r4.model.Observation;

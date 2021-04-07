@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.config;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionService;
+import org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel.GECCOSerologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodpressure.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight.BodyHeightCompositionConverter;
@@ -82,6 +83,7 @@ public class ConversionConfiguration {
     private void registerObservationConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.BODY_HEIGHT, new BodyHeightCompositionConverter());
         conversionService.registerConverter(Profile.BLOOD_GAS_PANEL, new BloodGasPanelCompositionConverter());
+        conversionService.registerConverter(Profile.ANTI_BODY_PANEL, new GECCOSerologischerBefundCompositionConverter());
         conversionService.registerConverter(Profile.BLOOD_PRESSURE, new BloodPressureCompositionConverter());
         conversionService.registerConverter(Profile.BODY_TEMP, new BodyTemperatureCompositionConverter());
         conversionService.registerConverter(Profile.BODY_WEIGHT, new BodyWeightCompositionConverter());

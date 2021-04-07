@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.antibodypanel;
+package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.VirusnachweistestDefiningCode;

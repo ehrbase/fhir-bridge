@@ -1,6 +1,7 @@
-package org.ehrbase.fhirbridge.ehr.converter.antibodypanel;
+package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
-import org.ehrbase.fhirbridge.ehr.converter.convertercodes.CodeSystem;
+
+import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 
 public enum AntiBodyPanelCode {
     LABORATORY_STUDIES(CodeSystem.LOINC.getUrl(), "26436-6");

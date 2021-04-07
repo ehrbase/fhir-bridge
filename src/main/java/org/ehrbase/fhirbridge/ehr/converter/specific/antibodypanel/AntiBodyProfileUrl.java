@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.antibodypanel;
+package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
 
 public enum AntiBodyProfileUrl {
