@@ -32,8 +32,8 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.Unbeka
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-01T12:21:07.575312+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T11:56:41.486888+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Reisehistorie")
 public class ReisehistorieComposition implements CompositionEntity, Composition {

@@ -4,15 +4,15 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum GeschlechtBeiDerGeburtDefiningCode implements EnumValueSet {
-  UNBESTIMMT("Unbestimmt", "Unbestimmt", "http://hl7.org/fhir/administrative-gender", "X"),
+  UNKNOWN("Unknown", "", "http://hl7.org/fhir/administrative-gender", "unknown"),
 
-  FEMALE("Female", "Female", "http://hl7.org/fhir/administrative-gender", "female"),
+  DIVERS("Divers", "", "http://hl7.org/fhir/administrative-gender", "D"),
 
-  MALE("Male", "Male", "http://hl7.org/fhir/administrative-gender", "male"),
+  MALE("Male", "", "http://hl7.org/fhir/administrative-gender", "male"),
 
-  UNKNOWN("Unknown", "Unknown", "http://hl7.org/fhir/administrative-gender", "unknown"),
+  FEMALE("Female", "", "http://hl7.org/fhir/administrative-gender", "female"),
 
-  DIVERS("Divers", "Divers", "http://hl7.org/fhir/administrative-gender", "D");
+  UNBESTIMMT("Unbestimmt", "", "http://hl7.org/fhir/administrative-gender", "X");
 
   private String value;
 

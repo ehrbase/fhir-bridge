@@ -12,8 +12,8 @@ import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
 @Archetype("openEHR-EHR-CLUSTER.telecom_details.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-04T14:52:22.375439700+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-15T15:57:50.576812+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class EinzelheitenDerKommunikationCluster implements LocatableEntity {
   /**

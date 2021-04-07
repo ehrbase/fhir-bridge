@@ -26,6 +26,8 @@ import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.Vorlie
 public class GECCODiagnoseCompositionContainment extends Containment {
   public SelectAqlField<GECCODiagnoseComposition> G_E_C_C_O_DIAGNOSE_COMPOSITION = new AqlFieldImp<GECCODiagnoseComposition>(GECCODiagnoseComposition.class, "", "GECCODiagnoseComposition", GECCODiagnoseComposition.class, this);
 
+  public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(GECCODiagnoseComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
+
   public ListSelectAqlField<Cluster> ERWEITERUNG = new ListAqlFieldImp<Cluster>(GECCODiagnoseComposition.class, "/context/other_context[at0001]/items[at0002]", "erweiterung", Cluster.class, this);
 
   public SelectAqlField<StatusDefiningCode> STATUS_DEFINING_CODE = new AqlFieldImp<StatusDefiningCode>(GECCODiagnoseComposition.class, "/context/other_context[at0001]/items[at0004]/value|defining_code", "statusDefiningCode", StatusDefiningCode.class, this);
@@ -59,8 +61,6 @@ public class GECCODiagnoseCompositionContainment extends Containment {
   public SelectAqlField<Language> LANGUAGE = new AqlFieldImp<Language>(GECCODiagnoseComposition.class, "/language", "language", Language.class, this);
 
   public SelectAqlField<FeederAudit> FEEDER_AUDIT = new AqlFieldImp<FeederAudit>(GECCODiagnoseComposition.class, "/feeder_audit", "feederAudit", FeederAudit.class, this);
-
-  public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(GECCODiagnoseComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
 
   public SelectAqlField<Territory> TERRITORY = new AqlFieldImp<Territory>(GECCODiagnoseComposition.class, "/territory", "territory", Territory.class, this);
 
