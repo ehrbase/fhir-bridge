@@ -29,7 +29,7 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">ddcbf3f81db43e39569876f2ea8eb0af</other_details>
+    <other_details id="MD5-CAM-1.0.1">ce8fe1711575bef21b7ef507e0299634</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
@@ -1111,6 +1111,29 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                                     </attributes>
                                   </children>
                                 </attributes>
+                                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+                                  <rm_attribute_name>value</rm_attribute_name>
+                                  <existence>
+                                    <lower_included>true</lower_included>
+                                    <upper_included>true</upper_included>
+                                    <lower_unbounded>false</lower_unbounded>
+                                    <upper_unbounded>false</upper_unbounded>
+                                    <lower>0</lower>
+                                    <upper>1</upper>
+                                  </existence>
+                                  <children xsi:type="C_DV_QUANTITY">
+                                    <rm_type_name>DV_QUANTITY</rm_type_name>
+                                    <occurrences>
+                                      <lower_included>true</lower_included>
+                                      <upper_included>true</upper_included>
+                                      <lower_unbounded>false</lower_unbounded>
+                                      <upper_unbounded>false</upper_unbounded>
+                                      <lower>1</lower>
+                                      <upper>1</upper>
+                                    </occurrences>
+                                    <node_id/>
+                                  </children>
+                                </attributes>
                               </children>
                               <children xsi:type="ARCHETYPE_SLOT">
                                 <rm_type_name>CLUSTER</rm_type_name>
@@ -1285,13 +1308,12 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                               <value>openEHR-EHR-CLUSTER.laboratory_test_analyte.v1</value>
                             </archetype_id>
                             <term_definitions code="at0000">
-                              <items id="comment">Beispiele: "Natrium", "Leukozytenzahl", "T3". Üblicherweise über eine externe Terminologie codiert.</items>
                               <items id="description">Ergebnis einer Laboranalyse für einen bestimmten Analytwert.</items>
                               <items id="text">Laboranalyt-Ergebnis</items>
                             </term_definitions>
                             <term_definitions code="at0001">
-                              <items id="comment">z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .</items>
-                              <items id="description">(Mess-)Wert des Analyt-Resultats.</items>
+                              <items id="comment">Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .</items>
+                              <items id="description">(Mess-)Wert des Analyt-Ergebnisses.</items>
                               <items id="fhir_mapping">Observation.value[x]</items>
                               <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
                               <items id="text">Analyt-Ergebnis</items>
@@ -1304,12 +1326,14 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                             </term_definitions>
                             <term_definitions code="at0004">
                               <items id="comment">z.B.: 'im Referenzbereich, bezogen auf Alter und Geschlecht'.</items>
-                              <items id="description">Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Resultat im Referenzbereich ist oder nicht.</items>
+                              <items id="description">Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Ergebnis im Referenzbereich ist oder nicht.</items>
                               <items id="text">Referenzbereichs-Hinweise</items>
                             </term_definitions>
                             <term_definitions code="at0005">
-                              <items id="comment">Die Werte wurden analog zum HL7 FHIR Diagnostic Report gewählt, die wiederum aus der HL7-Praxis stammen. Andere Codes/Ausdrücke können über den Text 'choice' verwendet werden.</items>
-                              <items id="description">Status des Analyseergebnisses.</items>
+                              <items id="comment">Die Werte wurden speziell so ausgewählt, dass sie mit denen im HL7 FHIR-Diagnosebericht übereinstimmen, der ursprünglich aus der HL7v2-Praxis abgeleitet wurde. Andere lokale Codes / Begriffe können über die Textauswahl verwendet werden.
+
+Dieses Element ermöglicht mehrere Vorkommen, um Anwendungsfälle zu unterstützen, wo mehr als eine Art von Status implementiert werden muss.</items>
+                              <items id="description">Status des Analyt-Ergebniswertes.</items>
                               <items id="fhir_mapping">Observation.status</items>
                               <items id="hl7v2_mapping">OBX.11</items>
                               <items id="text">Ergebnis-Status</items>
@@ -1322,14 +1346,14 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                             </term_definitions>
                             <term_definitions code="at0014">
                               <items id="description">Weitere Details zu einem einzelnen Ergebnis.</items>
-                              <items id="text">Analyseergebnis-Details</items>
+                              <items id="text">Analyseergebnis-Detail</items>
                             </term_definitions>
                             <term_definitions code="at0015">
-                              <items id="description">Der Test ist im Laborinformationssystem erfasst, aber noch kein Ergebnis verfügbar.</items>
-                              <items id="text">Erfasst</items>
+                              <items id="description">Der Test ist im Laborinformationssystem registriert, aber noch kein Ergebnis verfügbar.</items>
+                              <items id="text">Registriert</items>
                             </term_definitions>
                             <term_definitions code="at0016">
-                              <items id="description">Das Testresultat ist ein Anfangs- oder Interimswert, vorläufig oder nicht verifiziert/validiert.</items>
+                              <items id="description">Das Testergebnis ist ein Anfangs- oder Interimswert: Daten im Testergebnis können unvollständig oder nicht verifiziert/validiert sein.</items>
                               <items id="text">Unvollständig</items>
                             </term_definitions>
                             <term_definitions code="at0017">
@@ -1341,23 +1365,23 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                               <items id="text">Endbefund</items>
                             </term_definitions>
                             <term_definitions code="at0019">
-                              <items id="description">Das Ergebnis wurde nach dem endgültigen Ergebnis korrigiert und vom zuständigen Laborwissenschaftler vervollständigt und verifiziert. Dies ist eine Unterkategorie von "Endbefund, geändert".</items>
-                              <items id="text">Endbefund, korrigiert</items>
+                              <items id="description">Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und wird von einer autorisierten Person überprüft. Dies ist eine Sub-Kategorie von "Geändert".</items>
+                              <items id="text">Korrigiert</items>
                             </term_definitions>
                             <term_definitions code="at0020">
-                              <items id="description">Das Ergebnis wurde nach dem endgültigen Ergebnis geändert und vom zuständigen Laborwissenschaftler vervollständigt und verifiziert. Die Ergebnisdaten wurden geändert.</items>
-                              <items id="text">Endbefund, geändert</items>
+                              <items id="description">Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und von einer autorisierten Person überprüft. Die Ergebnisdaten wurden geändert.</items>
+                              <items id="text">Geändert</items>
                             </term_definitions>
                             <term_definitions code="at0021">
-                              <items id="description">Nach Abschluss wurde der Bericht durch das Hinzufügen neuer Inhalte abgeändert. Die vorhandene Inhalte sind unverändert. Dies ist eine Unterkategorie von "Endbefund, geändert".</items>
-                              <items id="text">Endbefund, ergänzt</items>
+                              <items id="description">Nach Abschluss wurde der Bericht durch das Hinzufügen neuer Inhalte abgeändert. Die vorhandene Inhalte sind unverändert. Dies ist eine Sub-Kategorie von "Geändert".</items>
+                              <items id="text">Ergänzt</items>
                             </term_definitions>
                             <term_definitions code="at0022">
                               <items id="description">Das Testergebnis wurde nach Endbefundung zurückgezogen.</items>
                               <items id="text">Endbefund, widerrufen</items>
                             </term_definitions>
                             <term_definitions code="at0023">
-                              <items id="description">Das Testergebnis ist nicht verfügbar, weil der Test nicht (vollständig) durchgeführt oder abgebrochen wurde.</items>
+                              <items id="description">Das Testergebnis ist nicht verfügbar, weil der Test nicht gestartet oder nicht abgeschlossen wurde (manchmal auch als "abgebrochen" bezeichnet).</items>
                               <items id="text">Storniert</items>
                             </term_definitions>
                             <term_definitions code="at0024">
@@ -1366,11 +1390,11 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                               <items id="description">Der Name des untersuchten Analyts.</items>
                               <items id="fhir_mapping">Observation.code</items>
                               <items id="hl7v2_mapping">OBX.3</items>
-                              <items id="text">Untersuchter Analyt</items>
+                              <items id="text">Bezeichnung des Analyts</items>
                             </term_definitions>
                             <term_definitions code="at0025">
-                              <items id="comment">In vielen Gerichtsbarkeiten wird angenommen, dass der 'Ergebnisstatus' die medizinische Validierung einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet.</items>
-                              <items id="description">Datum und Zeit, an dem das Analyseergebnis im Labor medizinisch validiert wurde.</items>
+                              <items id="comment">In vielen Gerichtsbarkeiten wird angenommen, dass der "Ergebnis-Status" die medizinische Validierung einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet.</items>
+                              <items id="description">Datum und Uhrzeit der Validierung des Analyt-Ergebnisses im Labor durch einen Arzt.</items>
                               <items id="text">Zeitpunkt der Validierung</items>
                             </term_definitions>
                             <term_definitions code="at0026">

@@ -1,19 +1,11 @@
-package org.ehrbase.fhirbridge.ehr.converter.antibodypanel;
+package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
-import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Category;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.client.classgenerator.shareddefinition.Setting;
-import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConversionException;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.CommonData;
-import org.ehrbase.fhirbridge.ehr.converter.ContextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.GECCOSerologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.GeccoSerologischerBefundKategorieLoincElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.KategorieLoincDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
@@ -21,23 +13,36 @@ import org.hl7.fhir.r4.model.Observation;
 import java.util.List;
 import java.util.Optional;
 
-public class AntiBodyPanelCompositionConverter implements CompositionConverter<GECCOSerologischerBefundComposition, Observation> {
-    @Override
-    public Observation fromComposition(GECCOSerologischerBefundComposition composition) throws CompositionConversionException {
-        return null;
-    }
+public class GECCOSerologischerBefundCompositionConverter extends ObservationToCompositionConverter<GECCOSerologischerBefundComposition> {
 
     @Override
-    public GECCOSerologischerBefundComposition toComposition(Observation observation) throws CompositionConversionException {
-        FeederAudit feederAudit = CommonData.constructFeederAudit(observation);
+    protected GECCOSerologischerBefundComposition convertInternal(Observation resource) {
         GECCOSerologischerBefundComposition geccoSerologischerBefundComposition = new GECCOSerologischerBefundComposition();
-        geccoSerologischerBefundComposition.setFeederAudit(feederAudit);
-        setMandatoryFields(geccoSerologischerBefundComposition);
-        ContextConverter.mapStatus(geccoSerologischerBefundComposition, observation);
-        mapKategorie(observation, geccoSerologischerBefundComposition);
-        geccoSerologischerBefundComposition.setStartTimeValue(observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        geccoSerologischerBefundComposition.setBefund(new LabratoryTestResultConverter().convert(new AntiBodyPanel(observation)));
+        mapStatus(geccoSerologischerBefundComposition, resource);
+        mapKategorie(resource, geccoSerologischerBefundComposition);
+        geccoSerologischerBefundComposition.setBefund(new LabratoryTestResultConverter().convert(resource));
         return geccoSerologischerBefundComposition;
+    }
+
+    private void mapStatus(GECCOSerologischerBefundComposition geccoSerologischerBefundComposition, Observation resource) {
+        String status = resource.getStatusElement().getCode();
+        switch (status) {
+            case "registered":
+                geccoSerologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
+                break;
+            case "final":
+                geccoSerologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.FINAL);
+                break;
+            case "amended":
+                geccoSerologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
+                break;
+            case "preliminary":
+                geccoSerologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
+                break;
+            default:
+                throw new IllegalStateException("Invalid Code " + status + "" +
+                        " for mapping of 'status', valid codes are: registered, final, amended and preliminary");
+        }
     }
 
     private void mapKategorie(Observation fhirObservation, GECCOSerologischerBefundComposition geccoSerologischerBefundComposition) {
@@ -81,7 +86,6 @@ public class AntiBodyPanelCompositionConverter implements CompositionConverter<G
         geccoSerologischerBefundComposition.setKategorieDefiningCode(KategorieDefiningCode.LABORATORY);
     }
 
-
     private boolean isLoincCode(Coding code) {
         return AntiBodyPanelCode.LABORATORY_STUDIES.getCode().equals(code.getCode()) && AntiBodyPanelCode.LABORATORY_STUDIES.getSystem().equals(code.getSystem());
     }
@@ -90,19 +94,8 @@ public class AntiBodyPanelCompositionConverter implements CompositionConverter<G
         return KategorieDefiningCode.LABORATORY.getCode().equals(code);
     }
 
-
     private boolean isObservationCategory(Coding categories) {
         return categories.getSystem().equals("http://terminology.hl7.org/CodeSystem/observation-category");
-    }
-
-
-    private void setMandatoryFields(GECCOSerologischerBefundComposition geccoSerologischerBefundComposition) {
-        geccoSerologischerBefundComposition.setLanguage(Language.DE);
-        geccoSerologischerBefundComposition.setLocation("test");
-        geccoSerologischerBefundComposition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
-        geccoSerologischerBefundComposition.setTerritory(Territory.DE);
-        geccoSerologischerBefundComposition.setCategoryDefiningCode(Category.EVENT);
-        geccoSerologischerBefundComposition.setComposer(new PartySelf());
     }
 
 }

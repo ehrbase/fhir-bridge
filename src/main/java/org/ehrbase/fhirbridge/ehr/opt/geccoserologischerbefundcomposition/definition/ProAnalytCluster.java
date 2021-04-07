@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.defin
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import java.lang.Double;
 import java.lang.String;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -15,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.laboratory_test_analyte.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-05T16:13:41.696910+01:00",
+    date = "2021-04-07T15:42:10.496712+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class ProAnalytCluster implements LocatableEntity {
@@ -36,8 +37,8 @@ public class ProAnalytCluster implements LocatableEntity {
 
   /**
    * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Nachweis
-   * Description: (Mess-)Wert des Analyt-Resultats.
-   * Comment: z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
+   * Description: (Mess-)Wert des Analyt-Ergebnisses.
+   * Comment: Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
    */
   @Path("/items[at0001 and name/value='Nachweis']/value|defining_code")
   private NachweisDefiningCode nachweisDefiningCode;
@@ -49,17 +50,33 @@ public class ProAnalytCluster implements LocatableEntity {
   private NullFlavour nachweisNullFlavourDefiningCode;
 
   /**
+   * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Quantitatives Ergebnis
+   * Description: (Mess-)Wert des Analyt-Ergebnisses.
+   * Comment: Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
+   */
+  @Path("/items[at0001 and name/value='Quantitatives Ergebnis']/value|magnitude")
+  private Double quantitativesErgebnisMagnitude;
+
+  /**
+   * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Quantitatives Ergebnis
+   * Description: (Mess-)Wert des Analyt-Ergebnisses.
+   * Comment: Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
+   */
+  @Path("/items[at0001 and name/value='Quantitatives Ergebnis']/value|units")
+  private String quantitativesErgebnisUnits;
+
+  /**
    * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Tree/Labortest-Panel/Pro Analyt/Quantitatives Ergebnis/null_flavour
    */
   @Path("/items[at0001 and name/value='Quantitatives Ergebnis']/null_flavour|defining_code")
   private NullFlavour quantitativesErgebnisNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Analyseergebnis-Details
+   * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Analyseergebnis-Detail
    * Description: Weitere Details zu einem einzelnen Ergebnis.
    */
   @Path("/items[at0014]")
-  private List<Cluster> analyseergebnisDetails;
+  private List<Cluster> analyseergebnisDetail;
 
   /**
    * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Tree/Labortest-Panel/Pro Analyt/Testmethode/null_flavour
@@ -69,8 +86,10 @@ public class ProAnalytCluster implements LocatableEntity {
 
   /**
    * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Ergebnis-Status
-   * Description: Status des Analyseergebnisses.
-   * Comment: Die Werte wurden analog zum HL7 FHIR Diagnostic Report gewählt, die wiederum aus der HL7-Praxis stammen. Andere Codes/Ausdrücke können über den Text 'choice' verwendet werden.
+   * Description: Status des Analyt-Ergebniswertes.
+   * Comment: Die Werte wurden speziell so ausgewählt, dass sie mit denen im HL7 FHIR-Diagnosebericht übereinstimmen, der ursprünglich aus der HL7v2-Praxis abgeleitet wurde. Andere lokale Codes / Begriffe können über die Textauswahl verwendet werden.
+   *
+   * Dieses Element ermöglicht mehrere Vorkommen, um Anwendungsfälle zu unterstützen, wo mehr als eine Art von Status implementiert werden muss.
    */
   @Path("/items[at0005]/value|value")
   private String ergebnisStatusValue;
@@ -121,6 +140,22 @@ public class ProAnalytCluster implements LocatableEntity {
      return this.nachweisNullFlavourDefiningCode ;
   }
 
+  public void setQuantitativesErgebnisMagnitude(Double quantitativesErgebnisMagnitude) {
+     this.quantitativesErgebnisMagnitude = quantitativesErgebnisMagnitude;
+  }
+
+  public Double getQuantitativesErgebnisMagnitude() {
+     return this.quantitativesErgebnisMagnitude ;
+  }
+
+  public void setQuantitativesErgebnisUnits(String quantitativesErgebnisUnits) {
+     this.quantitativesErgebnisUnits = quantitativesErgebnisUnits;
+  }
+
+  public String getQuantitativesErgebnisUnits() {
+     return this.quantitativesErgebnisUnits ;
+  }
+
   public void setQuantitativesErgebnisNullFlavourDefiningCode(
       NullFlavour quantitativesErgebnisNullFlavourDefiningCode) {
      this.quantitativesErgebnisNullFlavourDefiningCode = quantitativesErgebnisNullFlavourDefiningCode;
@@ -130,12 +165,12 @@ public class ProAnalytCluster implements LocatableEntity {
      return this.quantitativesErgebnisNullFlavourDefiningCode ;
   }
 
-  public void setAnalyseergebnisDetails(List<Cluster> analyseergebnisDetails) {
-     this.analyseergebnisDetails = analyseergebnisDetails;
+  public void setAnalyseergebnisDetail(List<Cluster> analyseergebnisDetail) {
+     this.analyseergebnisDetail = analyseergebnisDetail;
   }
 
-  public List<Cluster> getAnalyseergebnisDetails() {
-     return this.analyseergebnisDetails ;
+  public List<Cluster> getAnalyseergebnisDetail() {
+     return this.analyseergebnisDetail ;
   }
 
   public void setTestmethodeNullFlavourDefiningCode(

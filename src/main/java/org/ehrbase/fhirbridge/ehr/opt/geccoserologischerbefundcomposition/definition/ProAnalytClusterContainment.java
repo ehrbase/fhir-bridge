@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.defin
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import java.lang.Double;
 import java.lang.String;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -21,9 +22,13 @@ public class ProAnalytClusterContainment extends Containment {
 
   public SelectAqlField<NullFlavour> NACHWEIS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProAnalytCluster.class, "/items[at0001]/null_flavour|defining_code", "nachweisNullFlavourDefiningCode", NullFlavour.class, this);
 
+  public SelectAqlField<Double> QUANTITATIVES_ERGEBNIS_MAGNITUDE = new AqlFieldImp<Double>(ProAnalytCluster.class, "/items[at0001]/value|magnitude", "quantitativesErgebnisMagnitude", Double.class, this);
+
+  public SelectAqlField<String> QUANTITATIVES_ERGEBNIS_UNITS = new AqlFieldImp<String>(ProAnalytCluster.class, "/items[at0001]/value|units", "quantitativesErgebnisUnits", String.class, this);
+
   public SelectAqlField<NullFlavour> QUANTITATIVES_ERGEBNIS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProAnalytCluster.class, "/items[at0001]/null_flavour|defining_code", "quantitativesErgebnisNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public ListSelectAqlField<Cluster> ANALYSEERGEBNIS_DETAILS = new ListAqlFieldImp<Cluster>(ProAnalytCluster.class, "/items[at0014]", "analyseergebnisDetails", Cluster.class, this);
+  public ListSelectAqlField<Cluster> ANALYSEERGEBNIS_DETAIL = new ListAqlFieldImp<Cluster>(ProAnalytCluster.class, "/items[at0014]", "analyseergebnisDetail", Cluster.class, this);
 
   public SelectAqlField<NullFlavour> TESTMETHODE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProAnalytCluster.class, "/items[at0028]/null_flavour|defining_code", "testmethodeNullFlavourDefiningCode", NullFlavour.class, this);
 
