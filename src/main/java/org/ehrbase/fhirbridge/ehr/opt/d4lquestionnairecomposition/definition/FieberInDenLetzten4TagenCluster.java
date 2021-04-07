@@ -16,13 +16,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.symptom_sign.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-25T13:06:40.969408+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T12:09:15.688875+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class FieberInDenLetzten4TagenCluster implements LocatableEntity {
   /**
    * Path: Selbstüberwachung/Symptome/Problem/Diagnose/Fieber in den letzten 4 Tagen/Name des Symptoms/Krankheitsanzeichens
    * Description: Der Name des berichteten Symptoms/Krankheitsanzeichens.
+   * Comment: Der Name des Symptoms sollte, wenn möglich, mit einer Terminologie kodiert werden.
    */
   @Path("/items[at0001]/value|value")
   private String nameDesSymptomsKrankheitsanzeichensValue;
@@ -36,6 +37,7 @@ public class FieberInDenLetzten4TagenCluster implements LocatableEntity {
   /**
    * Path: Selbstüberwachung/Symptome/Problem/Diagnose/Fieber in den letzten 4 Tagen/Vorhanden?
    * Description: Das identifizierte Symptom/Krankheitsanzeichen wurde als nicht signifikant gemeldet.
+   * Comment: Dokumentieren Sie diesen Wert als "wahr", wenn der Patient das Symptom als nicht signifikant gemeldet hat. Zum Beispiel: Wenn die Person das Symptom noch nie erlebt hat, ist es angebracht "nicht signifikant" zu erfassen; oder wenn die Person das Symptom gewöhnlich erlebt, kann es unter bestimmten Umständen als angemessen erachtet werden, "nicht signifikant" zu erfassen, wenn die Person dieses nicht als Abweichung von ihrem Normalzustand empfindet.
    */
   @Path("/items[at0035 and name/value='Vorhanden?']/value|value")
   private Boolean vorhandenValue;
@@ -57,6 +59,7 @@ public class FieberInDenLetzten4TagenCluster implements LocatableEntity {
   /**
    * Path: Selbstüberwachung/Symptome/Problem/Diagnose/Fieber in den letzten 4 Tagen/Schweregrad
    * Description: Kategorie, die den allgemeinen Schweregrad des Symptoms/Krankheitsanzeichens beschreibt.
+   * Comment: Werte wie leicht, moderat oder schwer so zu definieren, dass sie auf mehrere Symptome/Befunde anwendbar sind und von verschiedenen Benutzern interpretiert und einheitlich dokumentiert werden können, ist nicht einfach. Einige Organisationen erweitern die Wertemenge, indem sie zusätzliche Werte, wie z.B. "trivial", "sehr stark", "leicht-moderat" oder "moderat-schwer", miteinbeziehen, was zu Definitionsschwierigkeiten führt und auch die Zuverlässigkeit von Aufzeichnungen von verschiedenen Protokollanten verschlechtern kann. Die Verwendung von "lebensbedrohlich" und "tödlich" wird ebenfalls oft als Teil dieser Wertemenge betrachtet, obwohl sie eher ein Ergebnis als einen Schweregrad widerspiegelt. In Anbetracht dessen wird die Einhaltung einer gut definierten, aber kürzeren Liste bevorzugt, so dass der leichte/mittlere/schwere Wertebereich angeboten wird. Die Wahl eines anderen Textes wird durch die Aufnahme anderer Wertebereiche für dieses Datenelement im Template ermöglicht. Hinweis: Eine spezifischere Einstufung des Schweregrads kann mit Hilfe der Slots "Spezifische Details" vorgenommen werden.
    */
   @Path("/items[at0021]/value|defining_code")
   private SchweregradDefiningCode schweregradDefiningCode;

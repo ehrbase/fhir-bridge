@@ -1,10 +1,10 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.BodyHeightCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.KorpergrosseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.korpergrossecomposition.definition.GrosseLangeObservation;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight.BodyHeightCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.KoerpergroesseComposition;
+import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.definition.GroesseLaengeObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -20,7 +20,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class BodyHeightIT extends AbstractMappingTestSetupIT {
+class BodyHeightIT extends AbstractMappingTestSetupIT {
 
     public BodyHeightIT() {
         super("Observation/BodyHeight/", Observation.class); //fhir-Resource
@@ -87,7 +87,7 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
     @Test
     void createInvalidBefund() throws IOException {
         Exception exception = executeMappingException("create-body-height-loinc-datetime_invalid.json");
-        assertEquals("No time is set", exception.getMessage());
+        assertEquals("Start time is not defined in observation", exception.getMessage());
     }
 
 
@@ -98,24 +98,24 @@ public class BodyHeightIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(KorpergrosseComposition.class, List.of("location",  "feederAudit")))
-                .registerValueObject(GrosseLangeObservation.class)
+                .registerValueObject(new ValueObjectDefinition(KoerpergroesseComposition.class, List.of("location", "feederAudit")))
+                .registerValueObject(GroesseLaengeObservation.class)
                 .build();
     }
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () ->
-            new BodyHeightCompositionConverter().toComposition(obs)
+        return assertThrows(ConversionException.class, () ->
+                new BodyHeightCompositionConverter().convert(obs)
         );
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
-        Observation observation = (Observation)  super.testFileLoader.loadResource(resourcePath);
+        Observation observation = (Observation) super.testFileLoader.loadResource(resourcePath);
         BodyHeightCompositionConverter bodyHeightCompositionConverter = new BodyHeightCompositionConverter();
-        KorpergrosseComposition mapped = bodyHeightCompositionConverter.toComposition(observation);
+        KoerpergroesseComposition mapped = bodyHeightCompositionConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mapped);
         assertEquals(0, diff.getChanges().size());
     }

@@ -1,12 +1,15 @@
 package org.ehrbase.fhirbridge.fhir.condition;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.geccoDiagnose.GECCODiagnoseCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.specific.geccoDiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KoerperstelleCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.UnbekannteDiagnoseEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.Condition;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
@@ -17,7 +20,8 @@ import java.io.IOException;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Condition Condition} resource.
@@ -138,8 +142,8 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Condition condition = (Condition) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () -> {
-            (new GECCODiagnoseCompositionConverter()).toComposition(condition);
+        return assertThrows(ConversionException.class, () -> {
+            (new GECCODiagnoseCompositionConverter()).convert(condition);
         });
     }
 
@@ -147,7 +151,7 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Condition resource = (Condition) super.testFileLoader.loadResource(resourcePath);
         GECCODiagnoseCompositionConverter compositionConverter = new GECCODiagnoseCompositionConverter();
-        GECCODiagnoseComposition composition = compositionConverter.toComposition(resource);
+        GECCODiagnoseComposition composition = compositionConverter.convert(resource);
         Diff diff = compareCompositions(getJavers(), paragonPath, composition);
         assertEquals(diff.getChanges().size(), 0);
     }

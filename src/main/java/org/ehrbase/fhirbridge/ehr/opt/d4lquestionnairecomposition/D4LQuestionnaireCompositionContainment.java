@@ -37,6 +37,8 @@ import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.Zus
 public class D4LQuestionnaireCompositionContainment extends Containment {
   public SelectAqlField<D4LQuestionnaireComposition> D4_L_QUESTIONNAIRE_COMPOSITION = new AqlFieldImp<D4LQuestionnaireComposition>(D4LQuestionnaireComposition.class, "", "D4LQuestionnaireComposition", D4LQuestionnaireComposition.class, this);
 
+  public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(D4LQuestionnaireComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
+
   public SelectAqlField<ItemTree> TREE = new AqlFieldImp<ItemTree>(D4LQuestionnaireComposition.class, "/context/other_context[at0001]", "tree", ItemTree.class, this);
 
   public SelectAqlField<TemporalAccessor> START_TIME_VALUE = new AqlFieldImp<TemporalAccessor>(D4LQuestionnaireComposition.class, "/context/start_time|value", "startTimeValue", TemporalAccessor.class, this);
@@ -90,8 +92,6 @@ public class D4LQuestionnaireCompositionContainment extends Containment {
   public SelectAqlField<Language> LANGUAGE = new AqlFieldImp<Language>(D4LQuestionnaireComposition.class, "/language", "language", Language.class, this);
 
   public SelectAqlField<FeederAudit> FEEDER_AUDIT = new AqlFieldImp<FeederAudit>(D4LQuestionnaireComposition.class, "/feeder_audit", "feederAudit", FeederAudit.class, this);
-
-  public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(D4LQuestionnaireComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
 
   public SelectAqlField<Territory> TERRITORY = new AqlFieldImp<Territory>(D4LQuestionnaireComposition.class, "/territory", "territory", Territory.class, this);
 

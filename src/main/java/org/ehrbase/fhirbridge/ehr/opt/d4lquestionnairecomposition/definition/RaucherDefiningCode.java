@@ -6,13 +6,13 @@ import org.ehrbase.client.classgenerator.EnumValueSet;
 public enum RaucherDefiningCode implements EnumValueSet {
   DERZEITIGER_RAUCHER("Derzeitiger Raucher", "Die Person ist derzeitiger Tabakraucher.", "LOINC", "at0003"),
 
+  NEIN("Nein", "", "LOINC", "LA32-8"),
+
   NIEMALS_GERAUCHT("Niemals geraucht", "Die Person hat niemals Tabak geraucht.", "LOINC", "at0006"),
 
-  NEIN("Nein", "Nein", "LOINC", "LA32-8"),
+  EHEMALIGER_RAUCHER("Ehemaliger Raucher", "Die Person hat früher Tabak geraucht, raucht derzeitig aber keinen Tabak.", "LOINC", "at0005"),
 
-  JA("Ja", "Ja", "LOINC", "LA33-6"),
-
-  EHEMALIGER_RAUCHER("Ehemaliger Raucher", "Die Person hat früher Tabak geraucht, raucht derzeitig aber keinen Tabak.", "LOINC", "at0005");
+  JA("Ja", "", "LOINC", "LA33-6");
 
   private String value;
 
