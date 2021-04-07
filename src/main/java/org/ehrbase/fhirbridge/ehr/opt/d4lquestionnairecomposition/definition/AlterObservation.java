@@ -17,13 +17,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.age.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-25T13:06:40.762116+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T12:09:15.558551+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class AlterObservation implements EntryEntity {
   /**
    * Path: Selbstüberwachung/Allgemeine Angaben/Alter/Ereigniszeitpunkt/Altersklasse
    * Description: Zeitdauer seit der Geburt, ausgedrückt als festgelegte Altersspanne oder Gruppierung.
+   * Comment: Kategorien für jeden spezifischen Anwendungsfall werden in einem Template definiert.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0007]/value|defining_code")
   private AltersklasseDefiningCode altersklasseDefiningCode;

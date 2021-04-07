@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.common;
 
 import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
@@ -37,6 +38,10 @@ public enum Profile {
     DIAGNOSE_COMPLICATIONS_COVID_19(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/complications-covid-19"),
     DIAGNOSE_DEPENDENCE_ON_VENTILATOR(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dependence-on-ventilator"),
 
+    // Consent Profiles
+
+    DO_NOT_RESUSCITATE_ORDER(Consent.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order"),
+
     // DiagnosticReport Profiles
 
     DIAGNOSTIC_REPORT_LAB(DiagnosticReport.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab"),
@@ -44,6 +49,8 @@ public enum Profile {
     DIAGNOSTIC_REPORT_RADIOLOGY(DiagnosticReport.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnostic-report-radiology"),
 
     // Observation Profiles
+
+    TRAVEL_HISTORY(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/history-of-travel"),
 
     BODY_HEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"),
 
@@ -92,6 +99,14 @@ public enum Profile {
     // Procedure Profiles
 
     PROCEDURE(Procedure.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure"),
+
+
+    APHERESIS_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis"),
+    DIALYSIS_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dialysis"),
+    EXTRACORPOREAL_MEMBRANE_OXYGENATION_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/extracorporeal-membrane-oxygenation"),
+    PRONE_POSITION_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position"),
+    RADIOLOGY_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures"),
+    RESPIRATORY_THERAPIES_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"),
 
     // QuestionnaireResponse Profiles
 

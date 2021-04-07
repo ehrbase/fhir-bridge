@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.pulseoximetry.PulseOximetryConverter;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseOximetryCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
@@ -17,7 +17,8 @@ import java.io.IOException;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Integration tests for {@link Observation Observation} resource.
@@ -59,7 +60,7 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(PulsoxymetrieComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(PulsoxymetrieComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(PulsoxymetrieObservation.class)
                 .build();
     }
@@ -67,14 +68,14 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String resource) throws IOException {
         Observation pulseOximetry = (Observation) testFileLoader.loadResource(resource);
-        return assertThrows(UnprocessableEntityException.class, () -> new PulseOximetryConverter().toComposition(pulseOximetry));
+        return assertThrows(ConversionException.class, () -> new PulseOximetryCompositionConverter().convert(pulseOximetry));
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Observation observation = (Observation) super.testFileLoader.loadResource(resourcePath);
-        PulseOximetryConverter pulseOximetryConverter = new PulseOximetryConverter();
-        PulsoxymetrieComposition mappedPulsoxymetrieComposition = pulseOximetryConverter.toComposition(observation);
+        PulseOximetryCompositionConverter pulseOximetryConverter = new PulseOximetryCompositionConverter();
+        PulsoxymetrieComposition mappedPulsoxymetrieComposition = pulseOximetryConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedPulsoxymetrieComposition);
         assertEquals(diff.getChanges().size(), 0);
 

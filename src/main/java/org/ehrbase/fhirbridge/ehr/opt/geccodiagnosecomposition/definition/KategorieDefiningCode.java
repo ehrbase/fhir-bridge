@@ -4,35 +4,35 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum KategorieDefiningCode implements EnumValueSet {
-  PULMONARYMEDICINE("pulmonaryMedicine", "pulmonaryMedicine", "SNOMED Clinical Terms", "418112009"),
+  PULMONARYMEDICINE("pulmonaryMedicine", "", "SNOMED Clinical Terms", "418112009"),
 
-  ONCOLOGY("Oncology", "Oncology", "SNOMED Clinical Terms", "394593009"),
+  TRANSPLANT_MEDICINE("Transplant medicine", "", "SNOMED Clinical Terms", "788415003"),
 
-  IMMUNOLOGY("immunology", "immunology", "SNOMED Clinical Terms", "408480009"),
+  PSYCHIATRY("Psychiatry", "", "SNOMED Clinical Terms", "394587001"),
 
-  NEPHROLOGY_QUALIFIER_VALUE("Nephrology (qualifier value)", "Nephrology (qualifier value)", "SNOMED Clinical Terms", "394589003"),
+  RHEUMATOLOTY("rheumatoloty", "", "SNOMED Clinical Terms", "394810000"),
 
-  COMPLICATION_DISORDER("Complication (disorder)", "Complication (disorder)", "SNOMED Clinical Terms", "116223007"),
+  DIABETIC_MEDICINE("Diabetic Medicine", "", "SNOMED Clinical Terms", "408475000"),
 
-  HEPATOLOGY("hepatology", "hepatology", "SNOMED Clinical Terms", "408472002"),
+  INFECTIOUSDISEASES("infectiousDiseases", "", "SNOMED Clinical Terms", "394807007"),
 
-  TRANSPLANT_MEDICINE("Transplant medicine", "Transplant medicine", "SNOMED Clinical Terms", "788415003"),
+  IMMUNOLOGY("immunology", "", "SNOMED Clinical Terms", "408480009"),
 
-  GASTROENTEROLOGY("Gastroenterology", "Gastroenterology", "SNOMED Clinical Terms", "394584008"),
+  NEUROLOGY("Neurology", "", "SNOMED Clinical Terms", "394591006"),
 
-  INFECTIOUSDISEASES("infectiousDiseases", "infectiousDiseases", "SNOMED Clinical Terms", "394807007"),
+  VASCULARMEDICINE("vascularMedicine", "", "SNOMED Clinical Terms", "722414000"),
 
-  PSYCHIATRY("Psychiatry", "Psychiatry", "SNOMED Clinical Terms", "394587001"),
+  NEPHROLOGY_QUALIFIER_VALUE("Nephrology (qualifier value)", "", "SNOMED Clinical Terms", "394589003"),
 
-  RHEUMATOLOTY("rheumatoloty", "rheumatoloty", "SNOMED Clinical Terms", "394810000"),
+  COMPLICATION_DISORDER("Complication (disorder)", "", "SNOMED Clinical Terms", "116223007"),
 
-  VENTILATION_STATUS_OBSERVABLE_ENTITY("Ventilation status (observable entity)", "Ventilation status (observable entity)", "SNOMED Clinical Terms", "404989005"),
+  HEPATOLOGY("hepatology", "", "SNOMED Clinical Terms", "408472002"),
 
-  VASCULARMEDICINE("vascularMedicine", "vascularMedicine", "SNOMED Clinical Terms", "722414000"),
+  ONCOLOGY("Oncology", "", "SNOMED Clinical Terms", "394593009"),
 
-  DIABETIC_MEDICINE("Diabetic Medicine", "Diabetic Medicine", "SNOMED Clinical Terms", "408475000"),
+  GASTROENTEROLOGY("Gastroenterology", "", "SNOMED Clinical Terms", "394584008"),
 
-  NEUROLOGY("Neurology", "Neurology", "SNOMED Clinical Terms", "394591006");
+  VENTILATION_STATUS_OBSERVABLE_ENTITY("Ventilation status (observable entity)", "", "SNOMED Clinical Terms", "404989005");
 
   private String value;
 
