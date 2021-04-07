@@ -38,6 +38,10 @@ public enum Profile {
     DIAGNOSE_COMPLICATIONS_COVID_19(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/complications-covid-19"),
     DIAGNOSE_DEPENDENCE_ON_VENTILATOR(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dependence-on-ventilator"),
 
+    // Consent Profiles
+
+    DO_NOT_RESUSCITATE_ORDER(Consent.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order"),
+
     // DiagnosticReport Profiles
 
     DIAGNOSTIC_REPORT_LAB(DiagnosticReport.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab"),

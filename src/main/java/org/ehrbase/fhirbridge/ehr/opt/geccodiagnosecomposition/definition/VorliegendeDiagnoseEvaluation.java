@@ -18,13 +18,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.problem_diagnosis.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-26T00:40:41.813373+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T11:53:07.616265+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class VorliegendeDiagnoseEvaluation implements EntryEntity {
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Name des Problems/ der Diagnose
    * Description: Namentliche Identifikation des Problems oder der Diagnose.
+   * Comment: Wo möglich, ist die Kodierung des Problems oder der Diagnose über eine Terminologie zu bevorzugen.
    */
   @Path("/data[at0001]/items[at0002]/value|defining_code")
   private NameDesProblemsDerDiagnoseDefiningCode nameDesProblemsDerDiagnoseDefiningCode;
@@ -45,6 +46,7 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Datum/ Zeitpunkt des Auftretens/ der Erstdiagnose
    * Description: Geschätzte oder exakte Zeit (bzw. Datum), zu der die Krankheitsanzeichen oder Symptome zum ersten mal beobachtet wurden.
+   * Comment: Datumswerte, die als "Alter zu Beginn" erfasst/importiert werden, sollten anhand des Geburtsdatums der Person in ein Datum umgewandelt werden.
    */
   @Path("/data[at0001]/items[at0077]/value|value")
   private TemporalAccessor datumZeitpunktDesAuftretensDerErstdiagnoseValue;
@@ -58,6 +60,7 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Schweregrad
    * Description: Eine Gesamtbeurteilung des Schweregrades des Problems oder der Diagnose.
+   * Comment: Ist der Schweregrad über vordefinierte Codes im Element "Name des Problems/ der Diagnose" enthalten, wird dieses Datenelement überflüssig. Hinweis: Eine spezifischere Einstufung des Schweregrads kann mit Hilfe des SLOTs "Spezifische Angaben" angegeben werden.
    */
   @Path("/data[at0001]/items[at0005]/value|defining_code")
   private SchweregradDefiningCode schweregradDefiningCode;
@@ -79,6 +82,7 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Datum/Zeitpunkt der Genesung
    * Description: Geschätzte oder exakte Zeit (bzw. Datum), zu der von einer medizinischen Fachkraft die Genesung oder die Remission des Problems oder der Diagnose festgestellt wurde.
+   * Comment: Unvollständige Datumsangaben sind zulässig. Wenn der Patient unter einem Jahr alt ist, dann ist das vollständige Datum oder ein Minimum von Monat und Jahr notwendig, um genaue Altersberechnungen zu ermöglichen - z.B. wenn es zur Entscheidungsunterstützung verwendet wird. Datumswerte, die als "Alter zum Zeitpunkt der Genesung" erfasst/importiert werden, sollten anhand des Geburtsdatums der Person in ein Datum umgewandelt werden.
    */
   @Path("/data[at0001]/items[at0030]/value|value")
   private TemporalAccessor datumZeitpunktDerGenesungValue;

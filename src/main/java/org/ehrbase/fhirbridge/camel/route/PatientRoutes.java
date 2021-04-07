@@ -23,9 +23,7 @@ import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.hl7.fhir.r4.model.Patient;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.ehrbase.fhirbridge.ehr.converter.PatientCompositionConverter;
 
 /**
  * Implementation of {@link RouteBuilder} that provides route definitions for transactions
@@ -72,7 +70,8 @@ public class PatientRoutes extends AbstractRouteBuilder {
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
             .process(ehrIdLookupProcessor)
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#patientCompositionConverter")
+            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
 
         // 'Find Patient' route definition
@@ -86,11 +85,5 @@ public class PatientRoutes extends AbstractRouteBuilder {
                     .to("bean:patientDao?method=read(${body}, ${headers.FhirRequestDetails})");
 
         // @formatter:on
-    }
-
-    // Update when Apache Camel > 3.x
-    @Bean
-    public PatientCompositionConverter patientCompositionConverter() {
-        return new PatientCompositionConverter();
     }
 }
