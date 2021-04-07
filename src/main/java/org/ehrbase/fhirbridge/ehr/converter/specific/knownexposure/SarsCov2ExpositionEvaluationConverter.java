@@ -4,6 +4,7 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToEvaluationConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.ExpositionVorhandenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.SarsCov2ExpositionEvaluation;
 import org.hl7.fhir.r4.model.Observation;
@@ -23,7 +24,7 @@ public class SarsCov2ExpositionEvaluationConverter  extends ObservationToEvaluat
 
     private void mapSpezifischeDetailsZurExposition(SarsCov2ExpositionEvaluation eval, Observation fhirObserv) {
         eval.setBeschreibungDerExpositionValue("Kontakt zu COVID-19 erkrankter Person");
-        eval.setDatumUhrzeitDerExpositionValue(fhirObserv.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
+        eval.setDatumUhrzeitDerExpositionValue(TimeConverter.convertObservationTime(fhirObserv));
     }
 
     private void mapInfektionserreger(SarsCov2ExpositionEvaluation eval) {
