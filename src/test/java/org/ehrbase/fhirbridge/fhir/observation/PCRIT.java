@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.PCRCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.virologischerBefund.PCRCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.GECCOVirologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
@@ -90,7 +90,7 @@ public class PCRIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () ->
-            new PCRCompositionConverter().toComposition(obs)
+            new PCRCompositionConverter().convert(obs)
         );
     }
 
@@ -98,7 +98,7 @@ public class PCRIT extends AbstractMappingTestSetupIT {
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Observation observation = (Observation)  super.testFileLoader.loadResource(resourcePath);
         PCRCompositionConverter pcrCompositionConverter = new PCRCompositionConverter();
-        GECCOVirologischerBefundComposition mapped = pcrCompositionConverter.toComposition(observation);
+        GECCOVirologischerBefundComposition mapped = pcrCompositionConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mapped);
         assertEquals(0, diff.getChanges().size());
     }
