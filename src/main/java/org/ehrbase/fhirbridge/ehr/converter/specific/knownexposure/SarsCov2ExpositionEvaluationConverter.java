@@ -1,19 +1,18 @@
-package org.ehrbase.fhirbridge.ehr.converter.knownexposure;
+package org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToEvaluationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.ExpositionVorhandenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.SarsCov2ExpositionEvaluation;
 import org.hl7.fhir.r4.model.Observation;
 
-public class SarsCov2ExpositionConverter {
+public class SarsCov2ExpositionEvaluationConverter  extends ObservationToEvaluationConverter<SarsCov2ExpositionEvaluation> {
 
-    public SarsCov2ExpositionEvaluation map(Observation fhirObserv) {
+    @Override
+    protected SarsCov2ExpositionEvaluation convertInternal(Observation fhirObserv) {
         SarsCov2ExpositionEvaluation eval = new SarsCov2ExpositionEvaluation();
-
-        eval.setLanguage(Language.DE);
-        eval.setSubject(new PartySelf());
 
         mapInfektionserreger(eval);
         mapExpositionVorhanden(eval, fhirObserv);
@@ -54,7 +53,7 @@ public class SarsCov2ExpositionConverter {
             default:
                 throw new UnprocessableEntityException("Multiple known expositions reasons are not possible in SarsCov2ExpositionConverter!");
         }
-}
+    }
 
     private void mapDataAbsentReasonAsUnknownExposition(SarsCov2ExpositionEvaluation eval, Observation fhirObserv) {
         int numElements = fhirObserv.getDataAbsentReason().getCoding().size();
@@ -66,7 +65,7 @@ public class SarsCov2ExpositionConverter {
         String system = fhirObserv.getDataAbsentReason().getCoding().get(0).getSystem();
 
         if (code.equals(KnownExposureCode.UNKNOWN_EXPOSURE.getCode()) &&
-            system.equals(KnownExposureCode.UNKNOWN_EXPOSURE.getSystem())) {
+                system.equals(KnownExposureCode.UNKNOWN_EXPOSURE.getSystem())) {
             eval.setExpositionVorhandenDefiningCode(ExpositionVorhandenDefiningCode.UNKNOWN);
         } else {
             throw new UnprocessableEntityException("Cannot set 'unknown' in SarsCov2ExpositionConverter with no valid data absent reason coding!");
@@ -88,5 +87,5 @@ public class SarsCov2ExpositionConverter {
             throw new UnprocessableEntityException("The SNOMED code '" + code + "' in system '"+system+"' is not supported for known SarsCov2ExpositionConverter!");
         }
     }
-
 }
+

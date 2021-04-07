@@ -1,12 +1,16 @@
-/*
+
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.parser.DataFormatException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund.RadiologischerBefundCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.SARSCoV2ExpositionComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.SarsCov2ExpositionEvaluation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
+import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
@@ -137,17 +141,19 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () ->
-                new KnownExposureConverter().toComposition(obs)
+                new SarsCov2KnownExposureCompositionConverter().convert(obs)
         );
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Observation observation = (Observation)  super.testFileLoader.loadResource(resourcePath);
-        KnownExposureConverter compositionConverter = new KnownExposureConverter();
-        SARSCoV2ExpositionComposition mapped = compositionConverter.toComposition(observation);
+        SarsCov2KnownExposureCompositionConverter compositionConverter = new SarsCov2KnownExposureCompositionConverter();
+        SARSCoV2ExpositionComposition mapped = compositionConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mapped);
         assertEquals(0, diff.getChanges().size());
     }
+
+
 }
-*/
+

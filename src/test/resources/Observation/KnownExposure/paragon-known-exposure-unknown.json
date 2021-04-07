@@ -62,10 +62,6 @@
       "_type" : "DV_DATE_TIME",
       "value" : "2020-10-04T00:00:00+02:00"
     },
-    "end_time" : {
-      "_type" : "DV_DATE_TIME",
-      "value" : "2020-10-04T00:00:00+02:00"
-    },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
