@@ -45,7 +45,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     }
 
     private NachweisDefiningCode convertNachweisDefiningCode() {
-        if(immunoassay.getObservation().hasValueCodeableConcept() && immunoassay.getObservation().getValueCodeableConcept().hasCoding()){
+        if(immunoassay.getObservation().hasValueCodeableConcept() && immunoassay.getObservation().getValueCodeableConcept().hasCoding() && immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0).hasCode()){
             List<Coding> codingList = immunoassay.getObservation().getValueCodeableConcept().getCoding();
             Coding coding = codingList.get(0);
             if (coding.getCode().equals(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
@@ -58,7 +58,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
                 throw new UnprocessableEntityException("The code in valueCodeableConcept.coding.code is not supported");
             }
         }else{
-            throw new UnprocessableEntityException("ValueCodeableConcept.coding.code is missing");
+            throw new UnprocessableEntityException("ValueCodeableConcept.coding or code is missing");
         }
     }
 
