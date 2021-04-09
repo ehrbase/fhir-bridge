@@ -29,10 +29,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Bundle Bundle} resource.
  */
-public class BundleIT extends AbstractBundleMappingTestSetupIT {
+public class BloodGasIT extends AbstractBundleMappingTestSetupIT {
 
 
-    public BundleIT() {
+    public BloodGasIT() {
         super("Bundle/", Bundle.class);
     }
 
