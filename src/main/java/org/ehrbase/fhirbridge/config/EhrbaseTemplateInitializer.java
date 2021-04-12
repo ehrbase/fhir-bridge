@@ -1,15 +1,5 @@
 package org.ehrbase.fhirbridge.config;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.xmlbeans.XmlOptions;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.config.ehrbase.AuthorizationType;
@@ -18,11 +8,13 @@ import org.openehr.schemas.v1.OPERATIONALTEMPLATE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.client.ExchangeFilterFunctions;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.xml.namespace.QName;
-import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
 
@@ -36,13 +28,13 @@ public class EhrbaseTemplateInitializer implements InitializingBean {
 
     private final OpenEhrClient openEhrClient;
 
-    private final HttpClient httpClient;
+    private final WebClient webClient;
 
     public EhrbaseTemplateInitializer(EhrbaseProperties properties, ResourceTemplateProvider templateProvider, OpenEhrClient openEhrClient) {
         this.properties = properties;
         this.templateProvider = templateProvider;
         this.openEhrClient = openEhrClient;
-        this.httpClient = adminHttpClient();
+        this.webClient = adminWebClient();
     }
 
     @Override
@@ -69,36 +61,34 @@ public class EhrbaseTemplateInitializer implements InitializingBean {
         OPERATIONALTEMPLATE fhirBridgeTemplate = templateProvider.find(templateId)
                 .orElseThrow(() -> new IllegalStateException("Failed to load template with id " + templateId));
 
-        HttpResponse response;
+        XmlOptions options = new XmlOptions();
+        options.setSaveSyntheticDocumentElement(new QName("http://schemas.openehr.org/v1", "template"));
+
+        URI uri = UriComponentsBuilder.fromHttpUrl(properties.getBaseUrl())
+                .path("/admin/template/{templateId}")
+                .build(templateId);
+
         try {
-            URI uri = UriComponentsBuilder.fromHttpUrl(properties.getBaseUrl())
-                    .path("/admin/template/{templateId}")
-                    .build(templateId);
-
-            XmlOptions options = new XmlOptions();
-            options.setSaveSyntheticDocumentElement(new QName("http://schemas.openehr.org/v1", "template"));
-
-            HttpPut request = new HttpPut(uri);
-            request.setEntity(new StringEntity(fhirBridgeTemplate.xmlText(options), ContentType.APPLICATION_XML));
-            response = httpClient.execute(request);
-        } catch (IOException e) {
-            throw new IllegalStateException("An error occurred while sending the template with id " + templateId);
-        }
-
-        HttpStatus status = HttpStatus.valueOf(response.getStatusLine().getStatusCode());
-        if (status.isError()) {
-            throw new IllegalStateException("An error occurred in EHRbase while updating the template with id " + templateId);
+            webClient.put()
+                    .uri(uri)
+                    .contentType(MediaType.APPLICATION_XML)
+                    .bodyValue(fhirBridgeTemplate.xmlText(options))
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+        } catch (WebClientException e) {
+            throw new IllegalStateException("An error occurred while updating the template with id " + templateId + " in EHRbase");
         }
     }
 
-    private HttpClient adminHttpClient() {
-        HttpClientBuilder builder = HttpClientBuilder.create();
+    private WebClient adminWebClient() {
+        WebClient.Builder builder = WebClient.builder();
+
         EhrbaseProperties.Security security = properties.getSecurity();
         if (security.getType() == AuthorizationType.BASIC_AUTH) {
-            CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(security.getAdminUser(), security.getAdminPassword()));
-            builder.setDefaultCredentialsProvider(credentialsProvider);
+            builder.filter(ExchangeFilterFunctions.basicAuthentication(security.getAdminUser(), security.getAdminPassword()));
         }
+
         return builder.build();
     }
 }
