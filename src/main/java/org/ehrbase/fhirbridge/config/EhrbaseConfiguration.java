@@ -54,7 +54,7 @@ public class EhrbaseConfiguration {
         EhrbaseProperties.Security security = properties.getSecurity();
         if (security.getType() == AuthorizationType.BASIC_AUTH) {
             CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(security.getUsername(), security.getPassword()));
+            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(security.getUser(), security.getPassword()));
             builder.setDefaultCredentialsProvider(credentialsProvider);
         }
 

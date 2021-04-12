@@ -35,9 +35,13 @@ public class EhrbaseProperties {
 
         private AuthorizationType type;
 
-        private String username;
+        private String user;
 
         private String password;
+
+        private String adminUser;
+
+        private String adminPassword;
 
         public AuthorizationType getType() {
             return type;
@@ -47,12 +51,12 @@ public class EhrbaseProperties {
             this.type = type;
         }
 
-        public String getUsername() {
-            return username;
+        public String getUser() {
+            return user;
         }
 
-        public void setUsername(String username) {
-            this.username = username;
+        public void setUser(String user) {
+            this.user = user;
         }
 
         public String getPassword() {
@@ -61,6 +65,22 @@ public class EhrbaseProperties {
 
         public void setPassword(String password) {
             this.password = password;
+        }
+
+        public String getAdminUser() {
+            return adminUser;
+        }
+
+        public void setAdminUser(String adminUser) {
+            this.adminUser = adminUser;
+        }
+
+        public String getAdminPassword() {
+            return adminPassword;
+        }
+
+        public void setAdminPassword(String adminPassword) {
+            this.adminPassword = adminPassword;
         }
     }
 
