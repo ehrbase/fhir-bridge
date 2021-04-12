@@ -84,11 +84,12 @@ class BodyHeightIT extends AbstractMappingTestSetupIT {
 
     // #####################################################################################
     // check exceptions
-    @Test
-    void createInvalidBefund() throws IOException {
-        Exception exception = executeMappingException("create-body-height-loinc-datetime_invalid.json");
-        assertEquals("Start time is not defined in observation", exception.getMessage());
-    }
+    // TODO: Deprecated https://github.com/ehrbase/fhir-bridge/issues/273
+//    @Test
+//    void createInvalidBefund() throws IOException {
+//        Exception exception = executeMappingException("create-body-height-loinc-datetime_invalid.json");
+//        assertEquals("Start time is not defined in observation", exception.getMessage());
+//    }
 
 
     // #####################################################################################
