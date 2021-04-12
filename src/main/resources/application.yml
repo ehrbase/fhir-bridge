@@ -3,8 +3,10 @@ fhir-bridge:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
     security:
       type: basic_auth
-      username: myuser
+      user: myuser
       password: myPassword432
+      admin-user: myadmin
+      admin-password: mySuperAwesomePassword123
     template:
       prefix: classpath:/opt/
   composition:

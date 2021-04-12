@@ -38,7 +38,7 @@ public abstract class AbstractConverter<S extends Resource, T extends RMEntity> 
     protected FeederAudit buildFeederAudit(@NonNull S resource) {
         FeederAudit result = new FeederAudit();
         String systemId = resource.getMeta().hasSource() ? resource.getMeta().getSource() : DEFAULT_SYSTEM_ID;
-        result.setOriginatingSystemAudit(new FeederAuditDetails(systemId, null, null, null, null, null));
+        result.setOriginatingSystemAudit(new FeederAuditDetails(systemId, null, null, null, null, null, null));
         DvIdentifier identifier = new DvIdentifier();
         identifier.setId(resource.getId());
         identifier.setType("fhir_logical_id");
