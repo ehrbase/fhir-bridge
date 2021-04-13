@@ -1,4 +1,7 @@
 fhir-bridge:
+  debug:
+    enabled: false
+    mapping-output-directory: ${java.io.tmpdir}/mappings
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
     security:
@@ -7,9 +10,6 @@ fhir-bridge:
       password: myPassword432
     template:
       prefix: classpath:/opt/
-  composition:
-    debug: true
-    output-directory: "src/main/resources/"
   fhir:
     cors:
       allowed-headers: '*'
