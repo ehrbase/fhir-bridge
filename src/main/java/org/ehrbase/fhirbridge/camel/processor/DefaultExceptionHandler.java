@@ -2,8 +2,9 @@ package org.ehrbase.fhirbridge.camel.processor;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.Exchange;
-import org.apache.camel.processor.ErrorHandler;
+import org.apache.camel.Processor;
 import org.ehrbase.client.exception.WrongStatusCodeException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -12,7 +13,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DefaultExceptionHandler implements ErrorHandler, MessageSourceAware {
+public class DefaultExceptionHandler implements Processor, MessageSourceAware {
 
     private MessageSourceAccessor messages;
 
@@ -22,12 +23,18 @@ public class DefaultExceptionHandler implements ErrorHandler, MessageSourceAware
 
         if (ex instanceof WrongStatusCodeException) {
             handleWrongStatusCode((WrongStatusCodeException) ex);
+        } else if (ex instanceof ConversionException) {
+            handleConversionException((ConversionException) ex);
         }
     }
 
     private void handleWrongStatusCode(WrongStatusCodeException ex) {
         HttpStatus status = HttpStatus.valueOf(ex.getActualStatusCode());
         throw new UnprocessableEntityException(messages.getMessage("ehrbase.wrongStatusCode", new Object[]{status.value(), status.getReasonPhrase(), ex.getMessage()}), ex);
+    }
+
+    private void handleConversionException(ConversionException ex) {
+        throw new UnprocessableEntityException(ex.getMessage());
     }
 
     @Override

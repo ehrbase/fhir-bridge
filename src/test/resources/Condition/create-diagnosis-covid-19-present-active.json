@@ -1,0 +1,82 @@
+{
+    "resourceType": "Condition",
+    "id": "018ed637-c0b3-4b6d-8b8f-e8686949cc7f",
+    "meta": {
+        "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnosis-covid-19"
+        ]
+    },
+    "clinicalStatus": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active",
+                "display": "Active"
+            }
+        ]
+    },
+    "verificationStatus": {
+        "coding": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                "code": "confirmed",
+                "display": "Confirmed"
+            },
+            {
+                "system": "http://snomed.info/sct",
+                "code": "410605003",
+                "display": "Confirmed present (qualifier value)"
+            }
+        ]
+    },
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "394807007",
+                    "display": "Infectious diseases (specialty) (qualifier value)"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "840539006",
+                "display": "Disease caused by Severe acute respiratory syndrome coronavirus 2 (disorder)"
+            }
+        ]
+    },
+    "subject": {
+        "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+        }
+    },
+    "recordedDate": "2020-10-23T12:48:23+02:00",
+    "stage": [
+        {
+            "summary": {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "24484000",
+                        "display": "Severe (severity modifier) (qualifier value)"
+                    }
+                ],
+                "text": "Critical phase"
+            },
+            "type": {
+                "coding": [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "88859-4",
+                        "display": "Disease stage score for risk calculation"
+                    }
+                ]
+            }
+        }
+    ]
+}

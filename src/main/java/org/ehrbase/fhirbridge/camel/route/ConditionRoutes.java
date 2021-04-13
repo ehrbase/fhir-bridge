@@ -1,50 +1,69 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.client.aql.parameter.ParameterValue;
-import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.component.ehr.aql.AqlConstants;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
-import org.ehrbase.fhirbridge.camel.processor.DefaultCreateResourceRequestValidator;
 import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.PatientIdProcessor;
-import org.ehrbase.fhirbridge.ehr.converter.DiagnoseCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.mapper.DiagnoseRowMapper;
-import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.DiagnoseComposition;
+import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
+import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
+import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.hl7.fhir.r4.model.Condition;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
+/**
+ * Implementation of {@link RouteBuilder} that provides route definitions for transactions
+ * linked to {@link Condition} resource.
+ *
+ * @since 1.0.0
+ */
 @Component
-public class ConditionRoutes extends RouteBuilder {
+public class ConditionRoutes extends AbstractRouteBuilder {
 
     private final IFhirResourceDao<Condition> conditionDao;
 
-    private final DefaultCreateResourceRequestValidator requestValidator;
+    private final ResourceProfileValidator requestValidator;
 
-    private final PatientIdProcessor patientIdProcessor;
+    private final EhrIdLookupProcessor ehrIdLookupProcessor;
 
     private final DefaultExceptionHandler defaultExceptionHandler;
 
     public ConditionRoutes(IFhirResourceDao<Condition> conditionDao,
-                           DefaultCreateResourceRequestValidator requestValidator,
-                           PatientIdProcessor patientIdProcessor,
+                           ResourceProfileValidator requestValidator,
+                           EhrIdLookupProcessor ehrIdLookupProcessor,
                            DefaultExceptionHandler defaultExceptionHandler) {
+
         this.conditionDao = conditionDao;
         this.requestValidator = requestValidator;
-        this.patientIdProcessor = patientIdProcessor;
+        this.ehrIdLookupProcessor = ehrIdLookupProcessor;
         this.defaultExceptionHandler = defaultExceptionHandler;
     }
 
     @Override
     public void configure() {
-
         // @formatter:off
-        from("fhir-create-condition:fhirConsumer?fhirContext=#fhirContext")
+
+        // 'Create Condition' route definition
+
+        from("condition-create:consumer?fhirContext=#fhirContext")
+            .onCompletion()
+                .process("auditCreateResourceProcessor")
+            .end()
             .onException(Exception.class)
                 .process(defaultExceptionHandler)
             .end()
@@ -52,48 +71,21 @@ public class ConditionRoutes extends RouteBuilder {
             .bean(conditionDao, "create(${body})")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
             .setBody(simple("${body.resource}"))
-            .process(patientIdProcessor)
-            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, constant(new DiagnoseCompositionConverter()))
+            .process(ehrIdLookupProcessor)
+            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+            .process(new ResourceResponseProcessor());
 
-        from("fhir-find-condition:fhirConsumer?fhirContext=#fhirContext")
-            .onException(Exception.class)
-                .process(defaultExceptionHandler)
-            .end()
-            .process(buildAqlQuery())
-            .setHeader(AqlConstants.ROW_MAPPER, constant(new DiagnoseRowMapper()))
-            .to("ehr-aql:aqlProducer");
+        // 'Find Condition' route definition
+
+        from("condition-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
+            .choice()
+                .when(isSearchOperation())
+                    .to("bean:conditionDao?method=search(${body}, ${headers.FhirRequestDetails})")
+                    .process("bundleProviderResponseProcessor")
+                .otherwise()
+                    .to("bean:conditionDao?method=read(${body}, ${headers.FhirRequestDetails})");
+
         // @formatter:on
-    }
-
-    @SuppressWarnings("unchecked")
-    private Processor buildAqlQuery() {
-        return exchange -> {
-            // @formatter:off
-            String aql =
-                    "SELECT c " +
-                    "FROM EHR e " +
-                        "CONTAINS COMPOSITION c " +
-                        "CONTAINS EVALUATION eval[openEHR-EHR-EVALUATION.problem_diagnosis.v1] " +
-                    "WHERE c/archetype_details/template_id/value = 'Diagnose' " +
-                        "AND e/ehr_status/subject/external_ref/id/value = $subjectId";
-            // @formatter:on
-
-            Map<String, ParameterValue<?>> parameters = exchange.getIn().getBody(Map.class);
-
-            if (parameters.get("startTimeFrom") != null) {
-                aql += " AND c/context/start_time/value >= $startTimeFrom";
-            }
-            if (parameters.get("startTimeTo") != null) {
-                aql += " AND c/context/start_time/value <= $startTimeTo";
-            }
-            if (parameters.get("code") != null) {
-                aql += " AND eval/data[at0001]/items[at0002]/value/defining_code/code_string = $code";
-            }
-
-            exchange.getMessage().setHeader(AqlConstants.AQL_QUERY, Query.buildNativeQuery(aql, DiagnoseComposition.class));
-            exchange.getMessage().setBody(parameters.values());
-        };
     }
 }

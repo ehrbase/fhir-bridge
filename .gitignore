@@ -1,10 +1,32 @@
 .idea
+*.iml
 
 target
 
 *-local.yml
+keystore/
 
+# Python
+venv
+*.venv
 .pytest_cache
 
 # Robot Tests
 **results**
+tests/log.html
+tests/output.xml
+tests/report.html
+
+# VSCode
+.classpath
+.factorypath
+.project
+.settings/
+.vscode/**
+
+# VSCode REST Client
+# files for local usage only!
+local*.http
+
+
+mapping-output.json

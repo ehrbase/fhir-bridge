@@ -1,0 +1,57 @@
+{
+    "resourceType": "Procedure",
+    "id": "7d07f267-e38e-4a4d-bd4d-24c08e4290bf",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures"
+      ]
+    },
+    "status": "completed",
+    "category": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "103693007",
+          "display": "Diagnostic procedure (procedure)"
+        }
+      ]
+    },
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "16310003",
+          "display": "Diagnostic ultrasonography (procedure)"
+        },
+        {
+          "system": "http://dicom.nema.org/resources/ontology/DCM",
+          "code": "US",
+          "display": "Ultrasound"
+        }
+      ],
+      "text": "Ultrasound"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "performedDateTime": "2020-09-30",
+    "bodySite": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "39607008",
+            "display": "Lung structure (body structure)"
+          }
+        ]
+      }
+    ],
+    "report": [
+      {
+        "reference": "DiagnosticReport/example"
+      }
+    ]
+  }

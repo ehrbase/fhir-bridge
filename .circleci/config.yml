@@ -2,7 +2,7 @@ version: 2.1
 
 # OVERVIEW - What this CI pipeline does:
 #
-# 1. So far this pipeline consists of one workflow only, which
+# 1. This pipeline consists of one workflow, which
 #    - clones ehrbase repo
 #    - builds ehrbase server from develop branch
 #    - starts ehrbase server (postgresql db is included in used docker executor,
@@ -13,6 +13,7 @@ version: 2.1
 #    - performes sonarcloud.io code analysis
 #    - creates a tag and pushes that to Git
 #    - Builds the Docker image and pushes that do DockerHub with appropriate tag
+#    - Deploys Robot Test Documentation to Github-Pages
 
 
 workflows:
@@ -20,32 +21,44 @@ workflows:
   # WORKFLOW 1/1 Build, Test & Analyze FHIR-bridge code
   build_and_test_fhirbridge:
     jobs:
-        - build-and-quicktest-fhirbridge:
+        - quick-test-fhirbridge:
             context: org-global
-            #   filters:
-            #     branches:
-            #       ignore:
-            #         - master
-            #         - develop
-            #         - release
-        - build-and-test-fhirbridge:
+            filters:
+              branches:
+                ignore: gh-pages
+                    # - master
+                    # - develop
+                    # - release
+        - full-test-fhirbridge:
             context: org-global
+            filters:
+              branches:
+                ignore: gh-pages
         - tag-version:
             context: org-global
             requires:
-                - build-and-test-fhirbridge
+                - full-test-fhirbridge
             filters:
                 branches:
                     only:
                         - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+)$/
-        - build_and_deploy:
+        - build-and-deploy:
             context: org-global
             requires:
-                - build-and-test-fhirbridge
+                - full-test-fhirbridge
             filters:
                 branches:
                     only:
                         - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
+
+        - deploy-testdocs-githup-pages:
+            context: org-global
+            requires:
+                - full-test-fhirbridge
+            filters:
+                branches:
+                    only:
+                        - develop
 
 
 
@@ -62,9 +75,9 @@ jobs:
     #           88  Y8,        ,8P  88      `8b          `8b
     #   88,   ,d88   Y8a.    .a8P   88      a8P  Y8a     a8P
     #    "Y8888P"     `"Y8888Y"'    88888888P"    "Y88888P"
-    
-    
-    build-and-quicktest-fhirbridge:
+
+
+    quick-test-fhirbridge:
         description: Build and test FHIR-bridge
         executor: docker-py3-java11-postgres
         steps:
@@ -83,7 +96,7 @@ jobs:
             - save-fhirbridge-test-results
 
 
-    build-and-test-fhirbridge:
+    full-test-fhirbridge:
         description: |
             Build and test FHIR-bridge, analyze code, collect code coverage metrics,
             upload results to sonarcloud.io
@@ -106,8 +119,9 @@ jobs:
             - collect-fhirbridge-integrationtest-results
             - save-fhirbridge-test-results
             - save-jacoco-coverage-report
+            - save-fhirbridge-workspace
             - sonarcloud/scan:
-                cache_version: 1
+                cache_version: 2
 
 
     tag-version:
@@ -135,7 +149,7 @@ jobs:
                       exit 0
 
 
-    build_and_deploy:
+    build-and-deploy:
         docker:
             - image: cimg/openjdk:11.0.8
               auth:
@@ -160,10 +174,34 @@ jobs:
                       echo "Publishing Docker image with following tag: ${TAG}"
                       echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
                       #   ./mvnw clean install -DskipTests -Djdk.tls.client.protocols=TLSv1.2
-                      #   docker build -t ehrbaseorg/fhir-bridge-poc:$TAG .
-                      mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ehrbaseorg/fhir-bridge:$TAG -Dmaven.test.skip
-                      docker tag ehrbaseorg/fhir-bridge ehrbaseorg/fhir-bridge:$TAG
-                      docker push ehrbaseorg/fhir-bridge:$TAG
+                      #   docker build -t ehrbase/fhir-bridge:$TAG .
+                      mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ehrbase/fhir-bridge:$TAG -Dmaven.test.skip
+                      docker tag ehrbase/fhir-bridge ehrbase/fhir-bridge:$TAG
+                      docker push ehrbase/fhir-bridge:$TAG
+            
+
+    deploy-testdocs-githup-pages:
+        description: |
+            Deploy Robot Test Documentation to Github Pages
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - configure-git-for-ci-bot
+            - restore-fhirbridge-workspace
+            - run:
+                name: OVERWRITE OLD ROBOT FILES AND PUSH UPDATE TO GH-PAGES BRANCH
+                command: |
+                    # ls -la
+                    git checkout gh-pages
+                    # git status
+                    cp new_fhir-bridge-robot-testdocu.html fhir-bridge-robot-testdocu.html
+                    cp new_log.html log.html
+                    cp new_report.html report.html
+                    # ls -la
+                    # git status
+                    git commit -am "Updates Robot Test Documentation Github Page --> https://ehrbase.github.io/fhir-bridge/"
+                    git push --force --set-upstream origin gh-pages
+
 
 
 
@@ -179,7 +217,7 @@ commands:
     #   Y8,           Y8,        ,8P  88   `8b d8'   88  88   `8b d8'   88    d8""""""""8b    88    `8b 88  88         8P          `8b
     #    Y8a.    .a8P  Y8a.    .a8P   88    `888'    88  88    `888'    88   d8'        `8b   88     `8888  88      .a8P   Y8a     a8P
     #     `"Y8888Y"'    `"Y8888Y"'    88     `8'     88  88     `8'     88  d8'          `8b  88      `888  88888888Y"'     "Y88888P"
-    
+
 
     git-clone-ehrbase-repo:
         steps:
@@ -212,18 +250,20 @@ commands:
                                              -Dexec.args='${project.version}' \
                                              --non-recursive exec:exec)
                     echo ${EHRbase_VERSION}
-                    java -jar "application/target/application-${EHRbase_VERSION}.jar" > log
+                    java -jar "application/target/application-${EHRbase_VERSION}.jar" --security.authType="BASIC" \
+                                                                                      --security.authUser="myuser" \
+                                                                                      --security.authPassword="myPassword432" > log
 
 
     build-and-test-fhirbridge:
-        description: | 
+        description: |
             Executes `mvn clean verify`
         steps:
             - run:
                 name: WAIT FOR EHRBASE SERVER TO BE READY
                 command: |
                     ls -la
-                    timeout=30
+                    timeout=180
                     while [ ! -f ehrbase/log ];
                         do
                             echo "Waiting for file ehrbase/log ..."
@@ -238,7 +278,8 @@ commands:
                         do
                             echo "waiting for EHRbase to be ready ...";
                             if [ "$timeout" == 0 ]; then
-                                echo "WARNING: Did not see a startup message even after waiting 30s"
+                                echo "WARNING: Did not see a startup message even after waiting 180s"
+                                cat ehrbase/log
                                 exit 1
                             fi
                             sleep 1;
@@ -255,18 +296,6 @@ commands:
 
     start-fhirbridge-application:
         steps:
-            # - run:
-            #     name: COPY APPLICATION-CI.yml to ./application.yml
-            #     description: |
-            #         This make Spring Boot load this config when starting fhirbridge .jar
-            #         And is required to start fhirbrige in CI pipeline.
-            #     command: |
-            #         cp src/test/resources/application-ci.yml ./application.yml
-            # - run:
-            #     name: WORKAROUND FOR ISSUE github.com/ehrbase/fhir-bridge/issues/60
-            #     command: |
-            #         rm -rf target/lib/
-            #         ls -la target/
             - run:
                 name: START FHIRBRIDGE APPLICATION
                 background: true
@@ -282,7 +311,7 @@ commands:
                 name: WAIT FOR FHIRBRIDE TO BE READY
                 command: |
                     ls -la
-                    timeout=60
+                    timeout=180
                     while [ ! -f fhirbride_log ];
                         do
                             echo "Waiting for file fhirbride_log ..."
@@ -297,7 +326,8 @@ commands:
                         do
                             echo "waiting for FHIR-Bridge to be ready ...";
                             if [ "$timeout" == 0 ]; then
-                                echo "WARNING: Did not see a startup message even after waiting 60s"
+                                echo "WARNING: Did not see a startup message even after waiting 180s"
+                                cat fhirbride_log
                                 exit 1
                             fi
                             sleep 1;
@@ -314,7 +344,7 @@ commands:
                 when: always
             - store_artifacts:
                 path: /tmp/logs/fhirbride_log
-      
+
 
     run-robot-integration-tests:
         steps:
@@ -323,26 +353,39 @@ commands:
                 name: RUN ROBOT TESTS
                 command: |
                     cd tests/
-                    robot -d results/0 -L TRACE -e todo --noncritical not-ready robot/
+                    robot -v OUTPUT_LEVEL:verbose -d results/0 -L TRACE \
+                            --skip TODO --skip future \
+                            --skiponfailure not-ready robot/
             - run:
                 name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
+                when: always
                 command: |
                     cd tests/
                     rebot --outputdir results/1/robot-tests \
-                        --exclude TODO -e future -e obsolete -e libtest \
-                        --noncritical not-ready \
+                        -e obsolete -e libtest \
                         --removekeywords for \
                         --removekeywords wuks \
-                        --loglevel TRACE \
+                        --loglevel INFO \
                         --output NONE \
                         --log NONE \
                         --report NONE \
                         --xunit junit-output.xml --xunitskipnoncritical \
                         results/0/output.xml
-                    mkdir ../00_robot_results
-                    cp results/0/* ../00_robot_results/
+            - run:
+                name: GENERATE ROBOT TEST DOCUMENTATION
+                command: |
+                    python3 -m robot.testdoc tests/robot new_fhir-bridge-robot-testdocu.html
+                    cp tests/results/0/log.html ./new_log.html
+                    cp tests/results/0/report.html ./new_report.html
+            - run:
+                name: COPY ROBOT OUTPUT FILES
+                when: always
+                command: |
+                    mkdir 00_robot_results
+                    cp tests/results/0/* 00_robot_results/
+                    cat fhirbride_log
+                    cp fhirbride_log 00_robot_results/
 
-            
     cache-out-fhirbridge-m2-dependencies:
         steps:
             - run:
@@ -358,7 +401,7 @@ commands:
                 key: fhirbridge-v1-{{ checksum "/tmp/fhirbridge_maven_cache_seed" }}
                 paths:
                 - ~/.m2
-    
+
     cache-out-ehrbase-m2-dependencies:
         steps:
             - run:
@@ -366,7 +409,7 @@ commands:
                 command: find ~/projects/ehrbase -name 'pom.xml' | sort | xargs cat > /tmp/ehrbase_maven_cache_seed
             - restore_cache:
                 key: EHRbase-v1-
-    
+
     cache-in-ehrbase-m2-dependencies:
         steps:
             - save_cache:
@@ -431,10 +474,12 @@ commands:
             - persist_to_workspace:
                 root: /home/circleci
                 paths:
-                    - .m2
-                    - projects
-    
-    
+                    # - .m2
+                    - projects/new_fhir-bridge-robot-testdocu.html
+                    - projects/new_log.html
+                    - projects/new_report.html
+
+
     restore-fhirbridge-workspace:
         description: |
             Restores any file / folder that was previously persisted w/ 'persist_to_workspace'.
@@ -453,7 +498,7 @@ commands:
     install-maven:
         description: Installs Maven tool (but only if it's not already installed)
         steps:
-            - run: 
+            - run:
                 name: Install Maven tool
                 command: |
                     sudo killall -9 apt-get || true
@@ -468,7 +513,7 @@ commands:
                 command: |
                     python -c "import site; print(site.getsitepackages())"
                     pip install -r tests/requirements.txt
-    
+
     configure-git-for-ci-bot:
         steps:
             - add_ssh_keys:
@@ -493,7 +538,7 @@ commands:
 orbs:
     openjdk-install: cloudesire/openjdk-install@1.2.3
     sonarcloud: sonarsource/sonarcloud@1.0.2
-  
+
 
 executors:
     docker-python3-java11:
@@ -510,7 +555,7 @@ executors:
         working_directory: ~/projects
         docker:
             - image: circleci/python:3.8.5-node-browsers
-            - image: ehrbaseorg/ehrbase-postgres:10
+            - image: ehrbase/ehrbase-postgres:11.10
               environment:
                 POSTGRES_USER: postgres
                 POSTGRES_PASSWORD: postgres

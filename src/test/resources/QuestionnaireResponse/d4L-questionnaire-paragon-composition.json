@@ -1,0 +1,1344 @@
+{
+  "_type": "COMPOSITION",
+  "name": {
+    "_type": "DV_TEXT",
+    "value": "Selbstüberwachung"
+  },
+  "archetype_details": {
+    "archetype_id": {
+      "value": "openEHR-EHR-COMPOSITION.self_monitoring.v0"
+    },
+    "template_id": {
+      "value": "D4L_questionnaire"
+    },
+    "rm_version": "1.0.4"
+  },
+  "language": {
+    "terminology_id": {
+      "value": "ISO_639-1"
+    },
+    "code_string": "de"
+  },
+  "territory": {
+    "terminology_id": {
+      "value": "ISO_3166-1"
+    },
+    "code_string": "DE"
+  },
+  "category": {
+    "_type": "DV_CODED_TEXT",
+    "value": "event",
+    "defining_code": {
+      "terminology_id": {
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_SELF"
+  },
+  "context": {
+    "_type": "EVENT_CONTEXT",
+    "start_time": {
+      "_type": "DV_DATE_TIME",
+      "value": "2020-05-04T14:15:00-05:00"
+    },
+    "setting": {
+      "_type": "DV_CODED_TEXT",
+      "value": "secondary medical care",
+      "defining_code": {
+        "terminology_id": {
+          "value": "openehr"
+        },
+        "code_string": "232"
+      }
+    }
+  },
+  "content": [
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Allgemeine Angaben"
+      },
+      "items": [
+        {
+          "_type": "ACTION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Kontakt"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "time": {
+            "_type": "DV_DATE_TIME",
+            "value": "2020-05-04T14:15:00-05:00"
+          },
+          "description": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Baum"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Beginn"
+                },
+                "value": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2020-03-27T01:00:00"
+                },
+                "archetype_node_id": "at0006"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Kontakt zu einem bestätigten Fall"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Ja",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "LOINC"
+                    },
+                    "code_string": "LA33-6"
+                  }
+                },
+                "archetype_node_id": "at0009"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Ende"
+                },
+                "value": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2020-03-27T01:00:00"
+                },
+                "archetype_node_id": "at0016"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "ism_transition": {
+            "_type": "ISM_TRANSITION",
+            "current_state": {
+              "_type": "DV_CODED_TEXT",
+              "value": "Done",
+              "defining_code": {
+                "terminology_id": {
+                  "value": "local"
+                },
+                "code_string": "at0016"
+              }
+            }
+          },
+          "archetype_node_id": "openEHR-EHR-ACTION.contact.v0"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Alter"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Event Series"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2020-05-04T14:15:00-05:00"
+            },
+            "events": [
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Ereigniszeitpunkt"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2020-05-04T14:15:00-05:00"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Älter oder gleich 65 Jahre alt?"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "Ja",
+                        "defining_code": {
+                          "terminology_id": {
+                            "value": "LOINC"
+                          },
+                          "code_string": "LA33-6"
+                        }
+                      },
+                      "archetype_node_id": "at0006"
+                    },
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Altersklasse"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "61-70",
+                        "defining_code": {
+                          "terminology_id": {
+                            "value": "http://fhir.data4life.care/covid-19/r4/CodeSystem/age-group"
+                          },
+                          "code_string": "61-70"
+                        }
+                      },
+                      "archetype_node_id": "at0007"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.age.v0"
+        },
+        {
+          "_type": "OBSERVATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Schwangerschaftsstatus"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "History"
+            },
+            "origin": {
+              "_type": "DV_DATE_TIME",
+              "value": "2020-05-04T14:15:00-05:00"
+            },
+            "events": [
+              {
+                "_type": "POINT_EVENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Beliebiges Ereignis"
+                },
+                "time": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2020-05-04T14:15:00-05:00"
+                },
+                "data": {
+                  "_type": "ITEM_TREE",
+                  "name": {
+                    "_type": "DV_TEXT",
+                    "value": "Tree"
+                  },
+                  "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Status"
+                      },
+                      "value": {
+                        "_type": "DV_CODED_TEXT",
+                        "value": "nicht schwanger",
+                        "defining_code": {
+                          "terminology_id": {
+                            "value": "LOINC"
+                          },
+                          "code_string": "LA26683-5"
+                        }
+                      },
+                      "archetype_node_id": "at0011"
+                    }
+                  ],
+                  "archetype_node_id": "at0003"
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-OBSERVATION.pregnancy_status.v0"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Ausschluss - Pflegetätigkeit"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Aussage über den Ausschluss"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Pflegetätigkeit"
+                },
+                "archetype_node_id": "at0002"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.exclusion_specific.v1"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Wohnsituation"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Item tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Wohnsituation"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Allein wohnend",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "LOINC"
+                    },
+                    "code_string": "LA6255-9"
+                  }
+                },
+                "archetype_node_id": "at0004"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.living_arrangement.v0"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Zusammenfassung der Beschäftigung"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Beschäftigung"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Berufsbereich"
+                    },
+                    "value": {
+                      "_type": "DV_CODED_TEXT",
+                      "value": "Gemeinschaftseinrichtung (Schule, Kita, Universität, Heim etc.)",
+                      "defining_code": {
+                        "terminology_id": {
+                          "value": "http://fhir.data4life.care/covid-19/r4/CodeSystem/occupation-class"
+                        },
+                        "code_string": "community"
+                      }
+                    },
+                    "archetype_node_id": "at0005"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.occupation_record.v1"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.occupation_summary.v1"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Zusammenfassung Rauchverhalten"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Raucher?"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Nein",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "LOINC"
+                    },
+                    "code_string": "LA32-8"
+                  }
+                },
+                "archetype_node_id": "at0089"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.tobacco_smoking_summary.v1"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    },
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Symptome"
+      },
+      "items": [
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Problem/Diagnose"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Structure"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Name des Problems/ der Diagnose"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "COVID-19 Fragebogen"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Datum/ Zeitpunkt des Auftretens/ der Erstdiagnose"
+                },
+                "value": {
+                  "_type": "DV_DATE_TIME",
+                  "value": "2020-05-04T14:15:00-05:00"
+                },
+                "archetype_node_id": "at0077"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Fieber in den letzten 24 Stunden"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": false
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Fieber in den letzten 4 Tagen"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Schweregrad"
+                    },
+                    "value": {
+                      "_type": "DV_CODED_TEXT",
+                      "value": "40 °C",
+                      "defining_code": {
+                        "terminology_id": {
+                          "value": "http://fhir.data4life.care/covid-19/r4/CodeSystem/fever-class"
+                        },
+                        "code_string": "40C"
+                      }
+                    },
+                    "archetype_node_id": "at0021"
+                  },
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": true
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Schüttelfrost in den letzten 24 Stunden"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": false
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Husten in den letzten 24 Stunden"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": true
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Schnupfen  in den letzten 24 Stunden"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": false
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Halsschmerzen in den letzten 24 Stunden"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": true
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Atemprobleme"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": false
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Schlappheit / Angeschlagenheit"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": true
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Gliederschmerzen"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": false
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Durchfall"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": false
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Kopfschmerzen"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": false
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              },
+              {
+                "_type": "CLUSTER",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Geschmacks- und/oder Geruchsverlust"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "name": {
+                      "_type": "DV_TEXT",
+                      "value": "Vorhanden?"
+                    },
+                    "value": {
+                      "_type": "DV_BOOLEAN",
+                      "value": false
+                    },
+                    "archetype_node_id": "at0035"
+                  }
+                ],
+                "archetype_node_id": "openEHR-EHR-CLUSTER.symptom_sign.v1"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.problem_diagnosis.v1"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    },
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Vor-/Grunderkrankungen"
+      },
+      "items": [
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Chronische Lungenkrankheit"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Structure"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Name des Problems/ der Diagnose"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Chronische Lungenkrankheit"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Vorhanden?"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Nein",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "LOINC"
+                    },
+                    "code_string": "LA32-8"
+                  }
+                },
+                "archetype_node_id": "at0009"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.problem_diagnosis.v1"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Diabetes"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Structure"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Name des Problems/ der Diagnose"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Diabetes"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Vorhanden?"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Ja",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "LOINC"
+                    },
+                    "code_string": "LA33-6"
+                  }
+                },
+                "archetype_node_id": "at0009"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.problem_diagnosis.v1"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Herzerkrankung"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Structure"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Name des Problems/ der Diagnose"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Herzerkrankung"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Vorhanden?"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Nein",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "LOINC"
+                    },
+                    "code_string": "LA32-8"
+                  }
+                },
+                "archetype_node_id": "at0009"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.problem_diagnosis.v1"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Adipositas"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Structure"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Name des Problems/ der Diagnose"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Adipositas"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Vorhanden?"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Nein",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "LOINC"
+                    },
+                    "code_string": "LA32-8"
+                  }
+                },
+                "archetype_node_id": "at0009"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.problem_diagnosis.v1"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    },
+    {
+      "_type": "SECTION",
+      "name": {
+        "_type": "DV_TEXT",
+        "value": "Medikamente / Impfungen"
+      },
+      "items": [
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Kortision"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Status"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Nein",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "LOINC"
+                    },
+                    "code_string": "LA32-8"
+                  }
+                },
+                "archetype_node_id": "at0023"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.medication_summary.v0"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Immunsuppressiva"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Status"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Nein",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "LOINC"
+                    },
+                    "code_string": "LA32-8"
+                  }
+                },
+                "archetype_node_id": "at0023"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.medication_summary.v0"
+        },
+        {
+          "_type": "EVALUATION",
+          "name": {
+            "_type": "DV_TEXT",
+            "value": "Zusammenfassung des Immunstatus"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "de"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA_character-sets"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "data": {
+            "_type": "ITEM_TREE",
+            "name": {
+              "_type": "DV_TEXT",
+              "value": "Tree"
+            },
+            "items": [
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Infektionskrankheit oder Erreger"
+                },
+                "value": {
+                  "_type": "DV_TEXT",
+                  "value": "Grippe"
+                },
+                "archetype_node_id": "at0002"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Immunsstatus"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Impfstatus ist akutell",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "local"
+                    },
+                    "code_string": "at0011"
+                  }
+                },
+                "archetype_node_id": "at0010"
+              },
+              {
+                "_type": "ELEMENT",
+                "name": {
+                  "_type": "DV_TEXT",
+                  "value": "Haben Sie sich im Zeitraum vom 1. Oktober 2019 bis heute gegen Grippe impfen lassen?"
+                },
+                "value": {
+                  "_type": "DV_CODED_TEXT",
+                  "value": "Ja",
+                  "defining_code": {
+                    "terminology_id": {
+                      "value": "LOINC"
+                    },
+                    "code_string": "LA33-6"
+                  }
+                },
+                "archetype_node_id": "at0016"
+              }
+            ],
+            "archetype_node_id": "at0001"
+          },
+          "archetype_node_id": "openEHR-EHR-EVALUATION.immunisation_summary.v0"
+        }
+      ],
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1"
+    }
+  ]
+}

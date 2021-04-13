@@ -1,9 +1,17 @@
-# FHIR Bridge [![CircleCI Status](https://circleci.com/gh/ehrbase/fhir-bridge-poc.svg?style=shield)](https://circleci.com/gh/ehrbase/fhir-bridge-poc)
+# FHIR Bridge [![CircleCI Status](https://circleci.com/gh/ehrbase/fhir-bridge.svg?style=shield)](https://circleci.com/gh/ehrbase/fhir-bridge)
 
 FHIR Bridge is an official component of [EHRbase](https://ehrbase.org/).
 The purpose of the application is to act as a broker between an HL7 FHIR client and an openEHR server.
 
 The implementation is based on [Apache Camel](https://camel.apache.org/) and [Open eHealth Integration Platform](https://github.com/oehf/ipf).
+
+## Releases
+
+##### 2021, April 13
+v1.1.0-RC1 - Release candidate that includes major refactoring of the Conversion API and adds support for new FHIR resources and profiles.
+
+##### 2020, November 29
+v1.0.0 - First release of the FHIR Bridge application.
 
 ## Getting Started
 
@@ -52,7 +60,7 @@ $ mvn clean spring-boot:build-image
 
 ```bash
 $ docker run -p 8888:8888 -e "FHIR_BRIDGE_EHRBASE_BASE_URL=http://172.17.0.1:8080/ehrbase/rest/openehr/v1/" \
-             --name=fhir-bridge ehrbaseorg/fhir-bridge
+             --name=fhir-bridge ehrbase/fhir-bridge
 ```
 
 ### Setup a full environment using Docker Compose
@@ -67,10 +75,15 @@ $ docker-compose -f docker-compose-full.yml up
 | Key                                                        | Default Value                                    | Description                                                 |
 | :--------------------------------------------------------- | :----------------------------------------------- | :---------------------------------------------------------- |
 | `fhir-bridge.ehrbase.base-url`                             | `http://localhost:8080/ehrbase/rest/openehr/v1/` | Base URL for the EHRbase running instance.                  |
+| `fhir-bridge.ehrbase.security.type`                        | `basic_auth`                                     | HTTP authorization type used by EHRbase.                    |
+| `fhir-bridge.ehrbase.security.username`                    | `myuser`                                         | Basic Auth username.                                        |
+| `fhir-bridge.ehrbase.security.password`                    | `myPassword432`                                  | Basic Auth password.                                        |
 | `fhir-bridge.ehrbase.template.prefix`                      | `classpath:/opt/`                                | Prefix to apply to template names.                          |
 | `fhir-bridge.fhir.jpa.allow-external-references`           | `true`                                           | Allow remote references.                                    |
 | `fhir-bridge.fhir.validation.terminology.mode`             | `none`                                           | Terminology validation mode: `embedded`, `server`, `none`   |
 | `fhir-bridge.fhir.validation.terminology.server-url`       |                                                  | Base URL of the server used for the terminology validation. |
+| `fhir-bridge.compositon.debug`                             | `false`                                          | Enables that the last executed Mapping is logged            |
+| `fhir-bridge.compositon.output-directory`                  |                                                  | Output directory where last mapping stored                  |
 | `ipf.atna.audit-enabled`                                   | `true`                                           | Whether auditing is enabled.                                |
 | `ipf.atna.audit-repository-host`                           | `localhost`                                      | Host of the ATNA repository to send the events to.          |
 | `ipf.atna.audit-repository-port`                           | `3001`                                           | Port of the ATNA repository to send the events to.          |
@@ -78,6 +91,7 @@ $ docker-compose -f docker-compose-full.yml up
 | `spring.datasource.password`                               |                                                  | Login password of the database.                             |
 | `spring.datasource.url`                                    |                                                  | JDBC URL of the database.                                   |
 | `spring.datasource.username`                               |                                                  | Login username of the database.                             |
+| `spring.jpa.properties.hibernate.dialect`                  | `org.hibernate.dialect.H2Dialect`                | Tells Hibernate to generate the appropriate SQL statements. |
 | `spring.jpa.properties.hibernate.search.default.indexBase` | `${java.io.tmpdir}/fhir-bridge-poc/indexes`      | Default base directory for the indexes.                     |
 | `server.port`                                              | `8888`                                           | Server HTTP port.                                           |
 | `server.servlet.context-path`                              | `/fhir-bridge-poc`                               | Context path of the application.                            |

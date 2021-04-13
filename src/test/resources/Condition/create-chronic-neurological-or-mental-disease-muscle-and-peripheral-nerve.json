@@ -1,0 +1,56 @@
+{
+    "resourceType": "Condition",
+    "id": "d07d0964-5757-49ef-b118-ff396db131d3",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-neurological-mental-diseases"
+      ]
+    },
+    "extension": [
+      {
+        "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "261665006",
+              "display": "Unknown (qualifier value)"
+            }
+          ],
+          "text": "Presence of condition is unknown."
+        }
+      }
+    ],
+    "category": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "394591006",
+            "display": "Neurology"
+          },
+          {
+            "system": "http://snomed.info/sct",
+            "code": "394587001",
+            "display": "Psychiatry"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "257277002",
+          "display": "Combined disorder of muscle AND peripheral nerve"
+        }
+      ]
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "recordedDate": "2020-10-06"
+  }

@@ -1,0 +1,170 @@
+#
+# Use this with REST Client for Visual Studio Code by Huachao Mao
+# search for "rest client" in VSCode's extensions marketplace
+# KEYBOARD SHORTCUT: Ctrl + Alt + R (trigger request focused by cursor)
+
+
+
+@ehrbase_url = http://localhost:8080/ehrbase/rest/openehr/v1
+@base_url = http://localhost:8888/fhir-bridge/fhir
+@uuid = {{$guid}}
+@subject_namespace = {{$randomInt 001 10000}}
+@subject_id = {{create_ehr.response.body.ehr_status.subject.external_ref.id.value}}
+@ehr_id = {{create_ehr.response.body.ehr_id.value}}
+
+
+
+#///////////////////////////////
+#// CREATE EHR              ///
+#/////////////////////////////
+
+# @name create_ehr
+POST {{ehrbase_url}}/ehr HTTP/1.1
+content-type: application/json
+Prefer: return=representation
+Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+
+{
+  "_type": "EHR_STATUS",
+  "archetype_node_id": "openEHR-EHR-EHR_STATUS.generic.v1",
+  "name": {
+    "value": "EHR Status"
+  },
+  "subject": {
+    "external_ref": {
+      "id": {
+        "_type": "GENERIC_ID",
+        "value": "{{uuid}}",
+        "scheme": "id_scheme"
+      },
+      "namespace": "wlad_{{subject_namespace}}",
+      "type": "PERSON"
+    }
+  },
+  "is_modifiable": true,
+  "is_queryable": true
+}
+
+###
+
+
+
+#/////////////////////////////////////////////////
+#// OBSERVATION / FiO2                        ///
+#///////////////////////////////////////////////
+
+POST {{base_url}}/Observation
+Content-Type: application/json
+# Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+
+# expected: 201
+
+# src/test/resources/Observation/create-fio2.json
+{
+  "resourceType": "Observation",
+  "id": "c9f96dd3-a77a-4aa9-9b12-43cd1972d9a4",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/inhaled-oxygen-concentration"
+    ]
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "OBI"
+          }
+        ]
+      },
+      "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+      "value": "3150-0_FiO2",
+      "assigner": {
+        "reference": "Organization/Charité"
+      }
+    }
+  ],
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "26436-6"
+        },
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "laboratory"
+        },
+        {
+          "system": "http://loinc.org",
+          "code": "18767-4"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "3150-0",
+        "display": "Inhaled oxygen concentration"
+      }
+    ],
+    "text": "Inhaled oxygen concentration"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{subject_id}}"
+    }
+  },
+  "effectiveDateTime": "2020-09-21",
+  "valueQuantity": {
+    "value": 21,
+    "unit": "%",
+    "system": "http://unitsofmeasure.org",
+    "code": "%"
+  }
+}
+
+###
+
+
+
+
+#/////////////////////////////////////////////////
+#// GET COMPOSITION BY UID                    ///
+#///////////////////////////////////////////////
+
+GET {{ehrbase_url}}/ehr/{{ehr_id}}/composition/32c12782-ddca-4fba-86ee-b45cdfe62c34::local.ehrbase.org::1
+Accept: application/json
+Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI= 
+
+###
+
+
+
+#/////////////////////////////////////////////////
+#// GET COMPOSITION VIA AQL                   ///
+#///////////////////////////////////////////////
+
+POST {{ehrbase_url}}/query/aql
+Content-Type: application/json
+Authorization: Basic bXl1c2VyOm15UGFzc3dvcmQ0MzI=
+
+{
+  "q": "SELECT c FROM EHR e [ehr_id/value='{{ehr_id}}'] CONTAINS COMPOSITION c"
+}
+
+###
+
+
+#//////////////////////////////
+#// AUDITEVENT             ///
+#////////////////////////////
+
+GET {{base_url}}/AuditEvent
+    ?entity=1
+content-type: application/json

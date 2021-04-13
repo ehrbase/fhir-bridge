@@ -1,0 +1,51 @@
+{
+    "id": "ce34b58f-6b77-4eb3-9c42-11224bd310fc",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-kidney-diseases"
+      ]
+    },
+    "extension": [
+      {
+        "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "261665006",
+              "display": "Unknown (qualifier value)",
+              "system": "http://snomed.info/sct"
+            }
+          ],
+          "text": "Presence of condition is unknown."
+        }
+      }
+    ],
+    "category": [
+      {
+        "coding": [
+          {
+            "code": "394589003",
+            "display": "Nephrology (qualifier value)",
+            "system": "http://snomed.info/sct"
+          }
+        ]
+      }
+    ],
+    "code": {
+      "coding": [
+        {
+          "code": "709044004",
+          "display": "Chronic kidney disease (disorder)",
+          "system": "http://snomed.info/sct"
+        }
+      ]
+    },
+    "recordedDate": "2020-10-28T17:01:09+01:00",
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "resourceType": "Condition"
+  }
