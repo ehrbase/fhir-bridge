@@ -48,7 +48,7 @@ public class CompositionComponent extends DefaultComponent {
 
     @Override
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
-        DebugProperties properties = getCamelContext().getRegistry().lookupByNameAndType("compositionProperties", DebugProperties.class);
+        DebugProperties properties = getCamelContext().getRegistry().lookupByNameAndType("debugProperties", DebugProperties.class);
         final EhrConfiguration newConfiguration = configuration.copy();
         CompositionEndpoint endpoint = new CompositionEndpoint(uri, this, newConfiguration);
         endpoint.setProperties(properties);
