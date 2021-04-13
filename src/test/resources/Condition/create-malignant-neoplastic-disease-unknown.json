@@ -1,0 +1,51 @@
+{
+    "resourceType": "Condition",
+    "id": "31b5aa8f-a59a-41c8-97a4-a1d48867549c",
+    "meta": {
+        "profile": [
+            "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/malignant-neoplastic-disease"
+        ]
+    },
+    "modifierExtension": [
+        {
+            "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence",
+            "valueCodeableConcept": {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "261665006",
+                        "display": "Unknown (qualifier value)"
+                    }
+                ],
+                "text": "Presence of condition is unknown."
+            }
+        }
+    ],
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "394593009",
+                    "display": "Medical oncology (qualifier value)"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "363346000",
+                "display": "Malignant neoplastic disease"
+            }
+        ]
+    },
+    "subject": {
+        "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+        }
+    },
+    "recordedDate": "2020-10-06"
+}

@@ -2,6 +2,8 @@ package org.ehrbase.fhirbridge.camel.component.ehr.composition;
 
 public final class CompositionConstants {
 
+    public static final String VERSION_UID = "CompositionVersionUid";
+
     public static final String COMPOSITION_CONVERTER = "CamelEhrCompositionConverter";
 
     public static final String COMPOSITION_ID = "CamelEhrCompositionCompositionId";

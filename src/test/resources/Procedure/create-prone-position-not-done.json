@@ -1,0 +1,43 @@
+{
+    "resourceType": "Procedure",
+    "id": "65fc4ea4-bff2-4708-a0ad-95f96d9a29d0",
+    "meta": {
+      "profile": [
+        "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position"
+      ]
+    },
+    "status": "not-done",
+    "category": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "225287004",
+          "display": "Procedures relating to positioning and support (procedure)"
+        }
+      ]
+    },
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "431182000",
+          "display": "Placing subject in prone position (procedure)"
+        }
+      ],
+      "text": "Prone position"
+    },
+    "subject": {
+        "identifier": {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      },
+    "performedDateTime": {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+          "valueCode": "not-performed"
+        }
+      ]
+    }
+  }

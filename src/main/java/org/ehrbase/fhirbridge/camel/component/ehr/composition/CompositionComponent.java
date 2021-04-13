@@ -2,9 +2,10 @@ package org.ehrbase.fhirbridge.camel.component.ehr.composition;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
-import org.apache.camel.impl.DefaultComponent;
+import org.apache.camel.support.DefaultComponent;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.component.ehr.EhrConfiguration;
+import org.ehrbase.fhirbridge.config.CompositionProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +33,7 @@ public class CompositionComponent extends DefaultComponent {
     }
 
     @Override
-    protected void doStart() throws Exception {
+    protected void doInit() throws Exception {
         if (configuration.getOpenEhrClient() == null && isAllowAutoWiredOpenEhrClient()) {
             Set<OpenEhrClient> beans = getCamelContext().getRegistry().findByType(OpenEhrClient.class);
             if (beans.size() == 1) {
@@ -47,9 +48,10 @@ public class CompositionComponent extends DefaultComponent {
 
     @Override
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
+        CompositionProperties properties = getCamelContext().getRegistry().lookupByNameAndType("compositionProperties", CompositionProperties.class);
         final EhrConfiguration newConfiguration = configuration.copy();
-
         CompositionEndpoint endpoint = new CompositionEndpoint(uri, this, newConfiguration);
+        endpoint.setProperties(properties);
         setProperties(endpoint, parameters);
         return endpoint;
     }
