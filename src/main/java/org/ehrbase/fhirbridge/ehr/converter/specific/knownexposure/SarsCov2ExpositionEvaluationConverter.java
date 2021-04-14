@@ -57,8 +57,8 @@ public class SarsCov2ExpositionEvaluationConverter  extends ObservationToEvaluat
     private void mapDataAbsentReasonAsUnknownExposition(SarsCov2ExpositionEvaluation eval, Observation fhirObserv) {
 
 
-        if (fhirObserv.hasValueCodeableConcept() && fhirObserv.hasCoding())
-        int num Elements = fhirObserv.getDataAbsentReason().getCoding().size();
+        //if (fhirObserv.hasValueCodeableConcept() && fhirObserv.hasCoding())
+        int numElements = fhirObserv.getDataAbsentReason().getCoding().size();
 
         if (1 != numElements) {
             throw new UnprocessableEntityException("Zero or Multiple data absent reasons are not possible in SarsCov2ExpositionConverter with no valid exposition information!");
