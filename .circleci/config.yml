@@ -231,7 +231,7 @@ jobs:
                 include-tags: "bundle"
                 test-suite-path: "BUNDLE"
                 test-suite-name: "BUNDLE"
-                runner: pabot
+                runner: robot
                 pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
     
@@ -249,7 +249,7 @@ jobs:
                 include-tags: "condition"
                 test-suite-path: "CONDITION"
                 test-suite-name: "CONDITION"
-                runner: pabot
+                runner: robot
                 pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
@@ -267,7 +267,7 @@ jobs:
                 include-tags: "diagnostic-report"
                 test-suite-path: "DIAGNOSTIC"
                 test-suite-name: "DIAGNOSTIC"
-                runner: pabot
+                runner: robot
                 pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
@@ -285,7 +285,7 @@ jobs:
                 include-tags: "immunization"
                 test-suite-path: "IMMUNIZATION"
                 test-suite-name: "IMMUNIZATION"
-                runner: pabot
+                runner: robot
                 pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
@@ -303,7 +303,7 @@ jobs:
                 include-tags: "medicationstatement"
                 test-suite-path: "MEDICATIONSTATEMENT"
                 test-suite-name: "MEDICATIONSTATEMENT"
-                runner: pabot
+                runner: robot
                 pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
@@ -321,7 +321,7 @@ jobs:
                 include-tags: "observation"
                 test-suite-path: "OBSERVATION"
                 test-suite-name: "OBSERVATION"
-                runner: pabot
+                runner: robot
                 pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
@@ -339,7 +339,7 @@ jobs:
                 include-tags: "procedure"
                 test-suite-path: "PROCEDURE"
                 test-suite-name: "PROCEDURE"
-                runner: pabot
+                runner: robot
                 pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
@@ -357,7 +357,7 @@ jobs:
                 include-tags: "questionnaire"
                 test-suite-path: "QUESTIONNAIRE"
                 test-suite-name: "QUESTIONNAIRE"
-                runner: pabot
+                runner: robot
                 pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
