@@ -8,9 +8,9 @@ public enum StatusDefiningCode implements EnumValueSet {
 
   MOEGLICHE_SCHWANGERSCHAFT("Mögliche Schwangerschaft", "Die Person glaubt, dass sie schwanger sein könnte.", "LOINC", "at0024"),
 
-  NICHT_SCHWANGER("nicht schwanger", "nicht schwanger", "LOINC", "LA26683-5"),
+  NICHT_SCHWANGER("nicht schwanger", "", "LOINC", "LA26683-5"),
 
-  UNBEKANNT("Unbekannt", "Unbekannt", "LOINC", "LA4489-6");
+  UNBEKANNT("Unbekannt", "Es ist nicht bekannt, ob die Person schwanger ist oder nicht.", "LOINC", "at0014");
 
   private String value;
 
