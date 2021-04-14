@@ -22,6 +22,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
 import org.ehrbase.fhirbridge.ehr.Composition;
+import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreObservation;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.StatusDefiningCode;
 
@@ -29,7 +30,7 @@ import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.StatusDefiningC
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:57:09.513670+01:00",
+    date = "2021-04-01T12:01:13.757064+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("SOFA")
@@ -42,7 +43,7 @@ public class SOFAComposition implements CompositionEntity, Composition {
 
   /**
    * Path: SOFA-Score/context/Erweiterung
-   * Description: Ergänzende Angaben zum Registereintrag. 
+   * Description: Ergänzende Angaben zum Registereintrag.
    */
   @Path("/context/other_context[at0001]/items[at0002]")
   private List<Cluster> erweiterung;
@@ -64,14 +65,8 @@ public class SOFAComposition implements CompositionEntity, Composition {
    * Path: SOFA-Score/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
-  @Path("/context/other_context[at0001]/items[at0005]/value|value")
-  private String kategorieValue;
-
-  /**
-   * Path: SOFA-Score/context/Baum/Kategorie/null_flavour
-   */
-  @Path("/context/other_context[at0001]/items[at0005]/null_flavour|defining_code")
-  private NullFlavour kategorieNullFlavourDefiningCode;
+  @Path("/context/other_context[at0001]/items[at0005]")
+  private List<SofaScoreKategorieElement> kategorie;
 
   /**
    * Path: SOFA-Score/context/start_time
@@ -110,8 +105,8 @@ public class SOFAComposition implements CompositionEntity, Composition {
   private Setting settingDefiningCode;
 
   /**
-   * Path: SOFA-Score/SOFA-Score
-   * Description: Der SOFA-Score ist ein Score, der in der Medizin für die Beurteilung von Patienten auf der Intensivstation verwendet wird. Der SOFA-Score bewertet den Grad der Organdysfunktion und hilft bei der Bestimmung des Mortalitätsrisikos eines Patienten. SOFA steht für Sequential Organ Failure Assessment.
+   * Path: SOFA-Score/SOFA score
+   * Description: Ein Scoring-System zur Bewertung und Verfolgung der Entwicklung von Organdysfunktion in sechs lebenswichtigen Organsystemen. Zuvor bekannt als "Sepsis related Organ Failure Assessment".
    */
   @Path("/content[openEHR-EHR-OBSERVATION.sofa_score.v0]")
   private SofaScoreObservation sofaScore;
@@ -175,20 +170,12 @@ public class SOFAComposition implements CompositionEntity, Composition {
      return this.statusNullFlavourDefiningCode ;
   }
 
-  public void setKategorieValue(String kategorieValue) {
-     this.kategorieValue = kategorieValue;
+  public void setKategorie(List<SofaScoreKategorieElement> kategorie) {
+     this.kategorie = kategorie;
   }
 
-  public String getKategorieValue() {
-     return this.kategorieValue ;
-  }
-
-  public void setKategorieNullFlavourDefiningCode(NullFlavour kategorieNullFlavourDefiningCode) {
-     this.kategorieNullFlavourDefiningCode = kategorieNullFlavourDefiningCode;
-  }
-
-  public NullFlavour getKategorieNullFlavourDefiningCode() {
-     return this.kategorieNullFlavourDefiningCode ;
+  public List<SofaScoreKategorieElement> getKategorie() {
+     return this.kategorie ;
   }
 
   public void setStartTimeValue(TemporalAccessor startTimeValue) {
