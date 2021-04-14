@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.symptoms;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.QuestionnaireSection;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.FieberInDenLetzten24StundenCluster;
@@ -61,59 +60,59 @@ public class Symptoms extends QuestionnaireSection {
         switch (question.getLinkId()) {
             case S0:
                 //TODO Strategy Pattern
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapFever24h(getQuestionLoincYesNoToBoolean(question));
                 break;
             case S1:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapFever4days(getQuestionLoincYesNoToBoolean(question));
                 break;
             case S2:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapFeverTemperature(getQuestionValueCodeToString(question));
                 break;
             case S3:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapChills(getQuestionLoincYesNoToBoolean(question));
                 break;
             case S4:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapTired(getQuestionLoincYesNoToBoolean(question));
                 break;
             case S5:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapBodyAches(getQuestionLoincYesNoToBoolean(question));
                 break;
             case S6:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapPersistentCoughing(getQuestionLoincYesNoToBoolean(question));
                 break;
             case S7:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapRhinitis(getQuestionLoincYesNoToBoolean(question));
                 break;
             case S8:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapDiarrhea(getQuestionLoincYesNoToBoolean(question));
                 break;
             case S9:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapSoreThroat(getQuestionLoincYesNoToBoolean(question));
                 break;
             case SA:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapHeadache(getQuestionLoincYesNoToBoolean(question));
                 break;
             case SB:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapProblemsWhenBreathing(getQuestionLoincYesNoToBoolean(question));
                 break;
             case SC:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapTasteSmellLoss(getQuestionLoincYesNoToBoolean(question));
                 break;
             case SZ:
-                setProblemDiagnoseEvaluationIfNotSet();
+                setProblemDiagnoseEvaluationIfNotSet(question);
                 this.mapWhenSymptomsAppear(getValueAsDate(question).get());
                 break;
             default:
@@ -121,13 +120,11 @@ public class Symptoms extends QuestionnaireSection {
         }
     }
 
-    private void setProblemDiagnoseEvaluationIfNotSet() {
+    private void setProblemDiagnoseEvaluationIfNotSet(QuestionnaireResponse.QuestionnaireResponseItemComponent question) {
         if (problemDiagnoseEvaluationQuestion.isEmpty()) {
-            ProblemDiagnoseEvaluation problemDiagnoseEvaluation = new ProblemDiagnoseEvaluation();
-            problemDiagnoseEvaluation.setDatumZeitpunktDesAuftretensDerErstdiagnoseValue(authored);
-            problemDiagnoseEvaluation.setNameDesProblemsDerDiagnoseValue("COVID-19 Fragebogen");
-            problemDiagnoseEvaluation.setLanguage(Language.DE);
-            problemDiagnoseEvaluation.setSubject(new PartySelf());
+            ProblemDiagnoseEvaluationConverter problemDiagnoseEvaluationConverter = new ProblemDiagnoseEvaluationConverter();
+            ProblemDiagnoseEvaluation problemDiagnoseEvaluation = problemDiagnoseEvaluationConverter.convert(question, language, authored);
+            problemDiagnoseEvaluation.setDatumZeitpunktDesAuftretensDerErstdiagnoseValue(authored); //Bad code
             problemDiagnoseEvaluationQuestion = Optional.of(problemDiagnoseEvaluation);
         }
 

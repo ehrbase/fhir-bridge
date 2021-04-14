@@ -1,7 +1,11 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
+import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes.KrankheitsanzeichenCode;
 
 public enum UntersuchterAnalytDefiningCode implements EnumValueSet {
   FERRITIN_MASS_VOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("Ferritin [Mass/volume] in Serum or Plasma by Immunoassay", "", "LOINC", "20567-4"),
@@ -263,6 +267,15 @@ public enum UntersuchterAnalytDefiningCode implements EnumValueSet {
     this.terminologyId = terminologyId;
     this.code = code;
   }
+
+  public static Map<String, UntersuchterAnalytDefiningCode> getCodesAsMap(){
+    Map<String, UntersuchterAnalytDefiningCode> untersuchterAnalytDefiningCodeHashMap = new HashMap<>();
+    for (UntersuchterAnalytDefiningCode untersuchterAnalytDefiningCode : UntersuchterAnalytDefiningCode.values()) {
+      untersuchterAnalytDefiningCodeHashMap.put(untersuchterAnalytDefiningCode.getCode(), untersuchterAnalytDefiningCode);
+    }
+    return untersuchterAnalytDefiningCodeHashMap;
+  }
+
 
   public String getValue() {
      return this.value ;

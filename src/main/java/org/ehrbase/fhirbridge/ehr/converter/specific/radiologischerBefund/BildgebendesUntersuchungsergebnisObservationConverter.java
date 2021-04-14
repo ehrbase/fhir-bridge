@@ -1,8 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund;
 
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BefundeDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.NameDerUntersuchungDefiningCode;
@@ -11,19 +10,14 @@ import org.hl7.fhir.r4.model.DiagnosticReport;
 
 import java.util.List;
 
-public class BildgebendesUntersuchungsergebnisConverter {
+public class BildgebendesUntersuchungsergebnisObservationConverter extends DiagnosticReportToObservationConverter<BildgebendesUntersuchungsergebnisObservation> {
 
-    public List<BildgebendesUntersuchungsergebnisObservation> map(DiagnosticReport diagnosticReport) {
+    @Override
+    protected BildgebendesUntersuchungsergebnisObservation convertInternal(DiagnosticReport resource) {
         BildgebendesUntersuchungsergebnisObservation bildgebendesUntersuchungsergebnisObservation = new BildgebendesUntersuchungsergebnisObservation();
-
-        bildgebendesUntersuchungsergebnisObservation.setLanguage(Language.DE);
-        bildgebendesUntersuchungsergebnisObservation.setTimeValue(diagnosticReport.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        bildgebendesUntersuchungsergebnisObservation.setOriginValue(diagnosticReport.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        bildgebendesUntersuchungsergebnisObservation.setSubject(new PartySelf());
-
-        mapNameDerUntersuchung(bildgebendesUntersuchungsergebnisObservation, diagnosticReport.getCode().getCoding());
-        mapBefund(bildgebendesUntersuchungsergebnisObservation, diagnosticReport.getConclusionCode().get(0).getCoding().get(0).getCode());
-        return List.of(bildgebendesUntersuchungsergebnisObservation);
+        mapNameDerUntersuchung(bildgebendesUntersuchungsergebnisObservation, resource.getCode().getCoding());
+        mapBefund(bildgebendesUntersuchungsergebnisObservation, resource.getConclusionCode().get(0).getCoding().get(0).getCode());
+        return bildgebendesUntersuchungsergebnisObservation;
     }
 
     private void mapNameDerUntersuchung(BildgebendesUntersuchungsergebnisObservation bildgebendesUntersuchungsergebnisObservation, List<Coding> coding) {
@@ -45,4 +39,7 @@ public class BildgebendesUntersuchungsergebnisConverter {
             throw new ConversionException("The SNOMED code: " + conclusion + ", is not supported for radiology report !");
         }
     }
+
+
+
 }
