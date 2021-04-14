@@ -18,13 +18,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.pulse_oximetry.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-15T13:32:13.298254+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T11:56:12.194246+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class PulsoxymetrieObservation implements EntryEntity {
   /**
    * Path: Pulsoxymetrie/Pulsoxymetrie/Beliebiges Ereignis/SpO₂
    * Description: Die Sättigung des Sauerstoffs im peripheren Blut, mittels Pulsoxymetrie gemessen.
+   * Comment: SpO₂ ist definiert als der prozentuale Anteil von Oxyhämoglobin (HbO₂) an der Gesamtkonzentration von Hämoglobin (HbO₂ + Deoxyhämoglobin) im peripheren Blut.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value")
   private DvProportion spo;

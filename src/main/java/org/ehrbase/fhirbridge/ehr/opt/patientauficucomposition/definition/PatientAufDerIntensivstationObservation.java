@@ -1,116 +1,188 @@
 package org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition;
 
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.String;
+import java.time.temporal.TemporalAccessor;
+import java.util.List;
+import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.WurdeDieAktivitatDurchgefuhrtDefiningcode;
-
-import java.time.temporal.TemporalAccessor;
-import java.util.List;
+import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Entity
 @Archetype("openEHR-EHR-OBSERVATION.management_screening.v0")
-public class PatientAufDerIntensivstationObservation {
-    @Path("/language")
-    private Language language;
+@Generated(
+    value = "org.ehrbase.client.classgenerator.ClassGenerator",
+    date = "2021-03-09T11:55:47.622453+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+)
+public class PatientAufDerIntensivstationObservation implements EntryEntity {
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/Beliebiges Ereignis/Management-/Behandlungsaktivität/Name der Aktivität
+   * Description: Name der geprüften Management- oder Behandlungsaktivität.
+   */
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0004]/value|value")
+  private String nameDerAktivitaetValue;
 
-    @Path("/protocol[at0007]/items[at0021]")
-    private List<Cluster> erweiterung;
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/History/Beliebiges Ereignis/Tree/Management-/Behandlungsaktivität/Name der Aktivität/null_flavour
+   */
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0004]/null_flavour|defining_code")
+  private NullFlavour nameDerAktivitaetNullFlavourDefiningCode;
 
-    @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0004]/value|value")
-    private String nameDerAktivitatValue;
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/Beliebiges Ereignis/Management-/Behandlungsaktivität/Wird/Wurde die Aktivität durchgeführt?
+   * Description: Aktueller Status der spezifischen Aktivität.
+   */
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005 and name/value='Wird/Wurde die Aktivität durchgeführt?']/value")
+  private DvCodedText wirdWurdeDieAktivitaetDurchgefuehrt;
 
-    @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005]/value|defining_code")
-    private WurdeDieAktivitatDurchgefuhrtDefiningcode wurdeDieAktivitatDurchgefuhrtDefiningcode;
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/History/Beliebiges Ereignis/Tree/Management-/Behandlungsaktivität/Wird/Wurde die Aktivität durchgeführt?/null_flavour
+   */
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005 and name/value='Wird/Wurde die Aktivität durchgeführt?']/null_flavour|defining_code")
+  private NullFlavour wirdWurdeDieAktivitaetDurchgefuehrtNullFlavourDefiningCode;
 
-    @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0036]")
-    private List<Cluster> detaillierteAngabenZurAktivitat;
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/Beliebiges Ereignis/Management-/Behandlungsaktivität/Detaillierte Angaben zur Aktivität
+   * Description: Zusätzliche detaillierte Angaben zu der spezifischen Aktivität.
+   * Comment: Zum Beispiel: Details zur Sauerstofftherapie.
+   */
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0036]")
+  private List<Cluster> detaillierteAngabenZurAktivitaet;
 
-    @Path("/data[at0001]/events[at0002]/time|value")
-    private TemporalAccessor timeValue;
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/Beliebiges Ereignis/time
+   */
+  @Path("/data[at0001]/events[at0002]/time|value")
+  private TemporalAccessor timeValue;
 
-    @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005]/name|value")
-    private String wurdeDieAktivitatDurchgefuhrtValue;
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/origin
+   */
+  @Path("/data[at0001]/origin|value")
+  private TemporalAccessor originValue;
 
-    @Path("/subject")
-    private PartyProxy subject;
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/Erweiterung
+   * Description: Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.
+   * Comment: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.
+   */
+  @Path("/protocol[at0007]/items[at0021]")
+  private List<Cluster> erweiterung;
 
-    @Path("/data[at0001]/origin|value")
-    private TemporalAccessor originValue;
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/subject
+   */
+  @Path("/subject")
+  private PartyProxy subject;
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/language
+   */
+  @Path("/language")
+  private Language language;
 
-    public Language getLanguage() {
-        return this.language;
-    }
+  /**
+   * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/feeder_audit
+   */
+  @Path("/feeder_audit")
+  private FeederAudit feederAudit;
 
-    public void setErweiterung(List<Cluster> erweiterung) {
-        this.erweiterung = erweiterung;
-    }
+  public void setNameDerAktivitaetValue(String nameDerAktivitaetValue) {
+     this.nameDerAktivitaetValue = nameDerAktivitaetValue;
+  }
 
-    public List<Cluster> getErweiterung() {
-        return this.erweiterung;
-    }
+  public String getNameDerAktivitaetValue() {
+     return this.nameDerAktivitaetValue ;
+  }
 
-    public void setNameDerAktivitatValue(String nameDerAktivitatValue) {
-        this.nameDerAktivitatValue = nameDerAktivitatValue;
-    }
+  public void setNameDerAktivitaetNullFlavourDefiningCode(
+      NullFlavour nameDerAktivitaetNullFlavourDefiningCode) {
+     this.nameDerAktivitaetNullFlavourDefiningCode = nameDerAktivitaetNullFlavourDefiningCode;
+  }
 
-    public String getNameDerAktivitatValue() {
-        return this.nameDerAktivitatValue;
-    }
+  public NullFlavour getNameDerAktivitaetNullFlavourDefiningCode() {
+     return this.nameDerAktivitaetNullFlavourDefiningCode ;
+  }
 
-    public void setWurdeDieAktivitatDurchgefuhrtDefiningcode(
-            WurdeDieAktivitatDurchgefuhrtDefiningcode wurdeDieAktivitatDurchgefuhrtDefiningcode) {
-        this.wurdeDieAktivitatDurchgefuhrtDefiningcode = wurdeDieAktivitatDurchgefuhrtDefiningcode;
-    }
+  public void setWirdWurdeDieAktivitaetDurchgefuehrt(
+      DvCodedText wirdWurdeDieAktivitaetDurchgefuehrt) {
+     this.wirdWurdeDieAktivitaetDurchgefuehrt = wirdWurdeDieAktivitaetDurchgefuehrt;
+  }
 
-    public WurdeDieAktivitatDurchgefuhrtDefiningcode getWurdeDieAktivitatDurchgefuhrtDefiningcode() {
-        return this.wurdeDieAktivitatDurchgefuhrtDefiningcode;
-    }
+  public DvCodedText getWirdWurdeDieAktivitaetDurchgefuehrt() {
+     return this.wirdWurdeDieAktivitaetDurchgefuehrt ;
+  }
 
-    public void setDetaillierteAngabenZurAktivitat(List<Cluster> detaillierteAngabenZurAktivitat) {
-        this.detaillierteAngabenZurAktivitat = detaillierteAngabenZurAktivitat;
-    }
+  public void setWirdWurdeDieAktivitaetDurchgefuehrtNullFlavourDefiningCode(
+      NullFlavour wirdWurdeDieAktivitaetDurchgefuehrtNullFlavourDefiningCode) {
+     this.wirdWurdeDieAktivitaetDurchgefuehrtNullFlavourDefiningCode = wirdWurdeDieAktivitaetDurchgefuehrtNullFlavourDefiningCode;
+  }
 
-    public List<Cluster> getDetaillierteAngabenZurAktivitat() {
-        return this.detaillierteAngabenZurAktivitat;
-    }
+  public NullFlavour getWirdWurdeDieAktivitaetDurchgefuehrtNullFlavourDefiningCode() {
+     return this.wirdWurdeDieAktivitaetDurchgefuehrtNullFlavourDefiningCode ;
+  }
 
-    public void setTimeValue(TemporalAccessor timeValue) {
-        this.timeValue = timeValue;
-    }
+  public void setDetaillierteAngabenZurAktivitaet(List<Cluster> detaillierteAngabenZurAktivitaet) {
+     this.detaillierteAngabenZurAktivitaet = detaillierteAngabenZurAktivitaet;
+  }
 
-    public TemporalAccessor getTimeValue() {
-        return this.timeValue;
-    }
+  public List<Cluster> getDetaillierteAngabenZurAktivitaet() {
+     return this.detaillierteAngabenZurAktivitaet ;
+  }
 
-    public void setWurdeDieAktivitatDurchgefuhrtValue(String wurdeDieAktivitatDurchgefuhrtValue) {
-        this.wurdeDieAktivitatDurchgefuhrtValue = wurdeDieAktivitatDurchgefuhrtValue;
-    }
+  public void setTimeValue(TemporalAccessor timeValue) {
+     this.timeValue = timeValue;
+  }
 
-    public String getWurdeDieAktivitatDurchgefuhrtValue() {
-        return this.wurdeDieAktivitatDurchgefuhrtValue;
-    }
+  public TemporalAccessor getTimeValue() {
+     return this.timeValue ;
+  }
 
-    public void setSubject(PartyProxy subject) {
-        this.subject = subject;
-    }
+  public void setOriginValue(TemporalAccessor originValue) {
+     this.originValue = originValue;
+  }
 
-    public PartyProxy getSubject() {
-        return this.subject;
-    }
+  public TemporalAccessor getOriginValue() {
+     return this.originValue ;
+  }
 
-    public void setOriginValue(TemporalAccessor originValue) {
-        this.originValue = originValue;
-    }
+  public void setErweiterung(List<Cluster> erweiterung) {
+     this.erweiterung = erweiterung;
+  }
 
-    public TemporalAccessor getOriginValue() {
-        return this.originValue;
-    }
+  public List<Cluster> getErweiterung() {
+     return this.erweiterung ;
+  }
+
+  public void setSubject(PartyProxy subject) {
+     this.subject = subject;
+  }
+
+  public PartyProxy getSubject() {
+     return this.subject ;
+  }
+
+  public void setLanguage(Language language) {
+     this.language = language;
+  }
+
+  public Language getLanguage() {
+     return this.language ;
+  }
+
+  public void setFeederAudit(FeederAudit feederAudit) {
+     this.feederAudit = feederAudit;
+  }
+
+  public FeederAudit getFeederAudit() {
+     return this.feederAudit ;
+  }
 }

@@ -1,26 +1,22 @@
 package org.ehrbase.fhirbridge.fhir.bundle;
 
-import ca.uhn.fhir.rest.gclient.ITransactionTyped;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.bloodgas.BloodGasPanelCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.radiologischerBefund.RadiologischerBefundConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.BefundDerBlutgasanalyseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.*;
-import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
-import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.KohlendioxidpartialdruckCluster;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.LaborergebnisObservation;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.PhWertCluster;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffpartialdruckCluster;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffsaettigungCluster;
 import org.ehrbase.fhirbridge.fhir.AbstractBundleMappingTestSetupIT;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.BloodGasPanelBundleValidator;
 import org.hl7.fhir.r4.model.Bundle;
-import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
 import org.javers.core.metamodel.clazz.ValueObjectDefinition;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -73,7 +69,7 @@ public class BundleIT extends AbstractBundleMappingTestSetupIT {
     }*/
 
     @Test
-    void createMappingBloodGas() throws IOException{
+    void createMappingBloodGas() throws IOException {
         testMapping("create-blood-gas.json", "paragon-create-blood-gas.json");
     }
 
@@ -99,7 +95,7 @@ public class BundleIT extends AbstractBundleMappingTestSetupIT {
     void createInvalidSubjectId() throws IOException {
         Exception exception = executeValidatorException("create-bloodgas-invalid-subject-ids.json");
         assertEquals("subject.reference ids all have to be equal! A Fhir Bridge Bundle cannot reference to different Patients !", exception.getMessage());
-        }
+    }
 
     @Test
     void createInvalidWithPanelMissing() throws IOException {
@@ -123,12 +119,12 @@ public class BundleIT extends AbstractBundleMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(BefundDerBlutgasanalyseComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(BefundDerBlutgasanalyseComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(LaborergebnisObservation.class)
                 .registerValueObject(PhWertCluster.class)
                 .registerValueObject(SauerstoffpartialdruckCluster.class)
                 .registerValueObject(KohlendioxidpartialdruckCluster.class)
-                .registerValueObject(SauerstoffsattigungCluster.class)
+                .registerValueObject(SauerstoffsaettigungCluster.class)
                 .build();
     }
 
@@ -136,7 +132,7 @@ public class BundleIT extends AbstractBundleMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Bundle bundle = (Bundle) testFileLoader.loadResource(path);
         return assertThrows(Exception.class, () -> {
-            new BloodGasPanelCompositionConverter().toComposition(new BloodGasPanelConverter().convert( bundle));
+            new BloodGasPanelCompositionConverter().convert(new BloodGasPanelConverter().convert(bundle));
         });
     }
 
@@ -146,7 +142,7 @@ public class BundleIT extends AbstractBundleMappingTestSetupIT {
         BloodGasPanelConverter bloodGasPanelConverter = new BloodGasPanelConverter();
         Observation observation = bloodGasPanelConverter.convert(bundle);
         BloodGasPanelCompositionConverter bloodGasPanelCompositionConverter = new BloodGasPanelCompositionConverter();
-        BefundDerBlutgasanalyseComposition mappedBefundDerBlutgasanalyseComposition = bloodGasPanelCompositionConverter.toComposition(observation);
+        BefundDerBlutgasanalyseComposition mappedBefundDerBlutgasanalyseComposition = bloodGasPanelCompositionConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedBefundDerBlutgasanalyseComposition);
         assertEquals(diff.getChanges().size(), 0);
 

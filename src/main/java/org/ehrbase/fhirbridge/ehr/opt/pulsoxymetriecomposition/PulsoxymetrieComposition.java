@@ -29,11 +29,17 @@ import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.Status
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-15T13:32:13.243779+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T11:56:12.153073+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Pulsoxymetrie")
 public class PulsoxymetrieComposition implements CompositionEntity, Composition {
+  /**
+   * Path: Pulsoxymetrie/category
+   */
+  @Path("/category|defining_code")
+  private Category categoryDefiningCode;
+
   /**
    * Path: Pulsoxymetrie/context/Erweiterung
    * Description: Ergänzende Angaben zum Registereintrag.
@@ -129,12 +135,6 @@ public class PulsoxymetrieComposition implements CompositionEntity, Composition 
   private FeederAudit feederAudit;
 
   /**
-   * Path: Pulsoxymetrie/category
-   */
-  @Path("/category|defining_code")
-  private Category categoryDefiningCode;
-
-  /**
    * Path: Pulsoxymetrie/territory
    */
   @Path("/territory")
@@ -142,6 +142,14 @@ public class PulsoxymetrieComposition implements CompositionEntity, Composition 
 
   @Id
   private VersionUid versionUid;
+
+  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+     this.categoryDefiningCode = categoryDefiningCode;
+  }
+
+  public Category getCategoryDefiningCode() {
+     return this.categoryDefiningCode ;
+  }
 
   public void setErweiterung(List<Cluster> erweiterung) {
      this.erweiterung = erweiterung;
@@ -261,14 +269,6 @@ public class PulsoxymetrieComposition implements CompositionEntity, Composition 
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
-  }
-
-  public void setCategoryDefiningCode(Category categoryDefiningCode) {
-     this.categoryDefiningCode = categoryDefiningCode;
-  }
-
-  public Category getCategoryDefiningCode() {
-     return this.categoryDefiningCode ;
   }
 
   public void setTerritory(Territory territory) {

@@ -36,6 +36,7 @@ import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Group;
@@ -135,6 +136,14 @@ public class FhirJpaConfiguration extends BaseR4Config {
     public IFhirResourceDao<Condition> conditionDao() {
         JpaResourceDao<Condition> resourceDao = new JpaResourceDao<>();
         resourceDao.setResourceType(Condition.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Consent> consentDao() {
+        JpaResourceDao<Consent> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Consent.class);
         resourceDao.setContext(fhirContext());
         return resourceDao;
     }
