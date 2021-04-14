@@ -142,10 +142,10 @@ workflows:
                 context: org-global
                 requires:
                     - ROBOT-TEST-REPORT
-                # filters:                # TODO: uncomment before merging into develop!!!
-                #     branches:
-                #         only:
-                #             - develop
+                filters:
+                    branches:
+                        only:
+                            - develop
 
 
 
