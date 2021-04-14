@@ -176,7 +176,7 @@ jobs:
             - build-ehrbase
             - start-ehrbase-server
             - build-and-test-fhirbridge:
-                skip-tests: false    # TODO: set to false if/then FHIRbrige gets some unit tests (at the moment *IT.java tests is all we have)
+                skip-tests: false    # TODO: set to true if/when FHIRbrige gets some unit tests (at the moment *IT.java tests is all we have)
             - cache-in-ehrbase-m2-dependencies
             - cache-in-fhirbridge-m2-dependencies
             # - collect-fhirbridge-unittest-results
@@ -199,10 +199,8 @@ jobs:
             - start-ehrbase-server
             - build-and-test-fhirbridge:
                 skip-javadoc: true
-                # skip-jacoco: false        #
-                # skip-tests: false         # TODO: undo this before mergin!!!!
-                skip-jacoco: true           #
-                skip-tests: true            #
+                skip-jacoco: false
+                skip-tests: false
             - cache-in-ehrbase-m2-dependencies
             - cache-in-fhirbridge-m2-dependencies
             # - start-fhirbridge-application
@@ -213,8 +211,8 @@ jobs:
             - save-fhirbridge-test-results
             - save-jacoco-coverage-report
             - save-fhirbridge-workspace
-            # - sonarcloud/scan:            # TODO: undo this before mergin!!!!
-            #     cache_version: 2          #
+            - sonarcloud/scan:
+                cache_version: 2
     
 
     BUNDLE-tests:
@@ -432,6 +430,18 @@ jobs:
     deploy-testdocs-githup-pages:
         description: |
             Deploy Robot Test Documentation to Github Pages
+
+            How This Works
+            ==============
+
+            1. All files required for the Github Pages are generated in the job 'ROBOT-TEST-REPORT'.
+            2. The command 'merge-robot-outputs' persists copies of these files to workspace (prefixing them with 'new_').
+            3. In this job the files (new_testdocu.html, new_log.html, new_report.html) are attached back
+               to workspace.
+            4. After checking out gh-pages branch the new_ files are copied over the old files
+            5. Changes are commited and force-pushed back to origin
+            6. Updated testdocs are served via Github Pages @https://ehrbase.github.io/fhir-bridge/
+
         executor: docker-py3-java11-postgres
         steps:
             - checkout
@@ -662,12 +672,6 @@ commands:
                         --report NONE \
                         --xunit junit-output-<< parameters.test-suite-name >>.xml \
                         results/0/<< parameters.test-suite-name >>/output.xml
-            # - run:
-            #     name: GENERATE ROBOT TEST DOCUMENTATION
-            #     command: |
-            #         python3 -m robot.testdoc tests/robot new_fhir-bridge-robot-testdocu.html
-            #         cp tests/results/0/log.html ./new_log.html
-            #         cp tests/results/0/report.html ./new_report.html
             - run:
                 name: COPY ROBOT OUTPUT FILES
                 when: always
@@ -731,6 +735,12 @@ commands:
                 path: ~/projects/tests/results/2
             - store_artifacts:
                 path: 00_robot_results/
+            - persist_to_workspace:
+                root: /home/circleci
+                paths:
+                    - projects/new_fhir-bridge-robot-testdocu.html
+                    - projects/new_log.html
+                    - projects/new_report.html
 
 
     cache-out-fhirbridge-m2-dependencies:
