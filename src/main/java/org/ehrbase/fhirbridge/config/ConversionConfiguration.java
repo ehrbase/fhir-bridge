@@ -20,8 +20,8 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionC
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu.PatientInIcuCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.pregnancystatus.PregnancyStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.procedure.ProcedureCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseOximetryConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund.RadiologischerBefundConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseOximetryCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund.RadiologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate.RespiratoryRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus.SmokingStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.sofascore.SofaScoreCompositionConverter;
@@ -76,7 +76,7 @@ public class ConversionConfiguration {
 
     private void registerDiagnosticReportConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.DIAGNOSTIC_REPORT_LAB, new DiagnosticReportLabCompositionConverter());
-        conversionService.registerConverter(Profile.DIAGNOSTIC_REPORT_RADIOLOGY, new RadiologischerBefundConverter());
+        conversionService.registerConverter(Profile.DIAGNOSTIC_REPORT_RADIOLOGY, new RadiologischerBefundCompositionConverter());
     }
 
     private void registerObservationConverters(ConversionService conversionService) {
@@ -97,7 +97,7 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
 
         conversionService.registerConverter(Profile.TRAVEL_HISTORY, new HistoryOfTravelConverter());
-        conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryConverter());
+        conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
     }
 
     private void registerPatientConverters(ConversionService conversionService) {

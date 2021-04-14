@@ -17,6 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
+import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreObservation;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.StatusDefiningCode;
 
@@ -31,9 +32,7 @@ public class SOFACompositionContainment extends Containment {
 
   public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(SOFAComposition.class, "/context/other_context[at0001]/items[at0004]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<String> KATEGORIE_VALUE = new AqlFieldImp<String>(SOFAComposition.class, "/context/other_context[at0001]/items[at0005]/value|value", "kategorieValue", String.class, this);
-
-  public SelectAqlField<NullFlavour> KATEGORIE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(SOFAComposition.class, "/context/other_context[at0001]/items[at0005]/null_flavour|defining_code", "kategorieNullFlavourDefiningCode", NullFlavour.class, this);
+  public ListSelectAqlField<SofaScoreKategorieElement> KATEGORIE = new ListAqlFieldImp<SofaScoreKategorieElement>(SOFAComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", SofaScoreKategorieElement.class, this);
 
   public SelectAqlField<TemporalAccessor> START_TIME_VALUE = new AqlFieldImp<TemporalAccessor>(SOFAComposition.class, "/context/start_time|value", "startTimeValue", TemporalAccessor.class, this);
 

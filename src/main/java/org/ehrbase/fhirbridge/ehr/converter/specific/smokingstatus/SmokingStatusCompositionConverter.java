@@ -14,35 +14,7 @@ public class SmokingStatusCompositionConverter extends ObservationToCompositionC
     @Override
     public RaucherstatusComposition convertInternal(@NonNull Observation resource) {
         RaucherstatusComposition composition = new RaucherstatusComposition();
-        RaucherstatusEvaluation evaluation = new RaucherstatusEvaluation();
-
-        try {
-            Coding codin = resource.getValueCodeableConcept().getCoding().get(0);
-            RauchverhaltenDefiningCode rauchverhaltenDefiningcode;
-            switch (codin.getCode()) {
-                case "LA18976-3":
-                    rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA189763;
-                    break;
-                case "LA18978-9":
-                    rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA189789;
-                    break;
-                case "LA15920-4":
-                    rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA159204;
-                    break;
-                case "LA18980-5":
-                    rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA189805;
-                    break;
-                default:
-                    throw new ConversionException("Unexpected value: " + codin.getCode());
-            }
-            evaluation.setRauchverhalten(rauchverhaltenDefiningcode.toDvCodedText());
-            evaluation.setLanguage(resolveLanguageOrDefault(resource));
-            evaluation.setSubject(new PartySelf());
-        } catch (Exception e) {
-            throw new ConversionException(e.getMessage());
-        }
-        composition.setRaucherstatus(evaluation);
-
+        composition.setRaucherstatus(new RaucherstatusEvaluationConverter().convert(resource));
         return composition;
     }
 }

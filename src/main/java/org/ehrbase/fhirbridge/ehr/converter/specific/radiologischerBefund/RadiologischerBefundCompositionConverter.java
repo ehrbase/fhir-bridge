@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund;
 
-import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
@@ -14,17 +14,14 @@ import org.springframework.lang.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RadiologischerBefundConverter extends CompositionConverter<DiagnosticReport, GECCORadiologischerBefundComposition> {
+public class RadiologischerBefundCompositionConverter extends DiagnosticReportToCompositionConverter<GECCORadiologischerBefundComposition> {
 
     @Override
     public GECCORadiologischerBefundComposition convertInternal(@NonNull DiagnosticReport resource) {
         GECCORadiologischerBefundComposition composition = new GECCORadiologischerBefundComposition();
-        composition.setStartTimeValue(resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-        composition.setEndTimeValue(resource.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime());
-
         mapStatus(composition, resource);
         mapKategorie(composition, resource);
-        composition.setBildgebendesUntersuchungsergebnis(new BildgebendesUntersuchungsergebnisConverter().map(resource));
+        composition.setBildgebendesUntersuchungsergebnis(List.of(new BildgebendesUntersuchungsergebnisObservationConverter().convert(resource)));
         return composition;
     }
 
