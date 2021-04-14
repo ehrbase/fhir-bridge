@@ -91,11 +91,12 @@ Force Tags              procedure_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to procedure endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	generic-therapy    dialysis    valid
+	[Tags]             	generic-therapy    dialysis    valid   301    not-ready
 
     ehr.create new ehr    000_ehr_status.json
     procedure.create dialysis    Generic Therapy - Dialysis with not performed "performedPeriod"    create-dialysis-with-performedPeriod-not-performed.json
     procedure.validate response - 201
+	[Teardown]          TRACE GITHUB ISSUE    301
 
 
 006 Create Generic Therapy - Dialysis with not performed "performedDateTime"
