@@ -141,7 +141,7 @@ workflows:
             - deploy-testdocs-githup-pages:
                 context: org-global
                 requires:
-                    - build-test-analyse-fhirbridge
+                    - ROBOT-TEST-REPORT
                 filters:
                     branches:
                         only:
