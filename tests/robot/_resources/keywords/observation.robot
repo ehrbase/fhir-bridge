@@ -448,15 +448,16 @@ POST /Observation with ehr reference
                         POST /Observation    ${fhir_resource_name}    ${payload}
 
 
-POST /Observation with fake ehr reference
-    [Documentation]     Injects random uuid as ehr reference into example_json. Since it does not exist
-    ...                 in EHRbase it can be considered fake reference.
-    [Arguments]         ${fhir_resource_name}    ${example_json}
-
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${example_json}
-                        Update Value To Json    ${payload}    $.subject.identifier.value    ${{str(uuid.uuid4())}}
-                        Output Debug Info To Console    ${payload}
-                        POST /Observation    ${fhir_resource_name}    ${payload}
+#POST /Observation with fake ehr reference
+#    [Documentation]     Injects random uuid as ehr reference into example_json. Since it does not exist
+#    ...                 in EHRbase it can be considered fake reference.
+#    [Arguments]         ${fhir_resource_name}    ${example_json}
+#
+#    ${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/${example_json}
+#                        Update Value To Json    ${payload}    $.subject.identifier.value    ${{str(uuid.uuid4())}}
+#                        Output Debug Info To Console    ${payload}
+#                        POST /Observation    ${fhir_resource_name}    ${payload}
+# Not being used
 						
 
 
