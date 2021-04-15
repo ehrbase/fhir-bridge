@@ -123,7 +123,7 @@ ${randinteger}                  ${12345}
 	[Template]			create Oxygen Saturation with ehr reference
     [Tags]              category
 
-	# FIELD/PATH							VALUE					HTTP																									Location
+	# FIELD/PATH							VALUE					HTTP
 	# 																CODE
 
 	#invalid coding
