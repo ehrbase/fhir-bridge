@@ -77,7 +77,7 @@ Force Tags              observation_search
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *GET* ``POST {{ehrbase_url}}/query/aql WITH "q": "SELECT c FROM EHR e [ehr_id/value='{{ehr_id}}'] CONTAINS COMPOSITION c" `` \n\n
     ...                 6. *VALIDATE* response status against 200
-    [Tags]              heart-rate    valid    not-ready    not-implemented
+    [Tags]              heart-rate    valid
 
     observation.create heart rate  Heart Rate  create-heart-rate.json
 	extract identifier_value from response
