@@ -76,6 +76,8 @@ public enum Profile {
 
     PATIENT_IN_ICU(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu"),
 
+    PCR(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-rt-pcr"),
+
     PH(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH"),
 
     PREGNANCY_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pregnancy-status"),
