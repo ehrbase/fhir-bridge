@@ -37,12 +37,6 @@ class DnrIT extends AbstractMappingTestSetupIT {
 
     // #####################################################################################
     // check exceptions
-    @Test
-    void createInvalidDnr() throws IOException {
-        Exception exception = executeMappingException("consent-example-invalid-status.json");
-        assertEquals("Oh noes, this should never happen", exception.getMessage());
-    }
-
 
     // #####################################################################################
     // default

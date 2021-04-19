@@ -14,7 +14,9 @@ import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.StatusD
 import org.hl7.fhir.r4.model.Consent;
 import org.springframework.lang.NonNull;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DnrAnordnungCompositionConverter extends ConsentToCompositionConverter<DNRAnordnungComposition> {
@@ -25,6 +27,7 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
         composition.setStatusDefiningCode(createStatusDefiningCode(resource.getStatus()));
         composition.setKategorie(createDnrAnordnungKategorieElement());
         composition.setDnrAnordnung(createDnrAnordnung(resource.getProvision()));
+        composition.setStartTimeValue(Instant.now());//TODO remove, just tested if this can stop the startTime error
         return composition;
     }
 
@@ -55,7 +58,7 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
         return items;
     }
 
-    private DnrAnordnungEvaluation createDnrAnordnung(Consent.provisionComponent provision) {
+    private DnrAnordnungEvaluation createDnrAnordnung(@NonNull Consent.provisionComponent provision) {
         DnrAnordnungEvaluation dnrAnordnung = new DnrAnordnungEvaluation();
         dnrAnordnung.setLanguage(Language.DE);
         dnrAnordnung.setSubject(new PartySelf());
