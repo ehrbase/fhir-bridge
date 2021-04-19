@@ -1,5 +1,5 @@
-# Copyright (c) 2019 Wladislaw Wagner (Vitasystems GmbH), Peter Wohlfarth (Appsfactory GmbH), 
-# Dave Petzold (Appsfactory GmbH)
+# Copyright (c) 2021 Wladislaw Wagner (Vitasystems GmbH), Peter Wohlfarth (Appsfactory GmbH), 
+# Mathias Lenz (Appsfactory GmbH)
 #
 # This file is part of Project EHRbase
 #
@@ -33,30 +33,16 @@
 validate response - 201
     Integer    response status    201
 
-    String     response body resourceType    DiagnosticReport
+    String     response body resourceType    Patient
     String     response body id
     String     response body meta versionId    1
-
-
-validate response - 422 (missing observation)
-    Integer    response status    422
-
-    # String     response body issue 0 diagnostics
-    String     $.issue[0].diagnostics    # same as line above but in JSONPath syntax
-    ...        pattern=One contained Observation was expected 0 were received in DiagnosticReport
-    
-    
-validate response - 422 (profile not supported)
-    Integer    response status    422
-
-    String     $.issue[0].diagnostics 
-    ...        pattern=One of the following profiles is expected:
 
 
 validate response - 422 (w/o error message)
     [Arguments]     ${http_status_code}
                     Integer     response status    ${http_status_code}
                     String      response body resourceType    OperationOutcome
+
 
 
 
@@ -71,14 +57,10 @@ validate response - 422 (w/o error message)
 # [ SUCEED CREATING ]
 
 
-create diagnostic report
-    [Arguments]         ${example_json}
-    POST /Diagnostic with ehr reference    Diagnostic Report    ${example_json}
-
-
-create diagnostic report radiology
+create Patient
     [Arguments]         ${text}    ${example_json}
-    POST /Diagnostic with ehr reference    ${text}    ${example_json}
+    POST /Patient with ehr reference    ${text}    ${example_json}
+
 
 
 #                                   .                    
@@ -94,18 +76,30 @@ create diagnostic report radiology
 # [ VALIDATE POST RESPONSES ]
 
 
-POST /Diagnostic
+# MAIN HTTP METHOD AND ENDPOINT
+POST /Patient
     [Arguments]         ${fhir_resource_name}    ${payload}
 
-    Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' DIAGNOSTICREPORT
-    &{resp}             POST    ${BASE_URL}/DiagnosticReport    body=${payload}
+    Log To Console      POSTING '${{ $fhir_resource_name.upper() }}' Patient
+    &{resp}             POST    ${BASE_URL}/Patient    body=${payload}
                         Output Debug Info To Console
 
 
-POST /Diagnostic with ehr reference
+POST /Patient with ehr reference
     [Arguments]         ${fhir_resource_name}    ${example_json}
 
-    ${payload}          Load JSON From File    ${DATA_SET_PATH_DIAGNOSTIC}/${example_json}
-                        Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
+    ${payload}          Load JSON From File    ${DATA_SET_PATH_PATIENT}/${example_json}
+                        Update Value To Json    ${payload}    $.identifier[0].value    ${subject_id}
                         Output Debug Info To Console    ${payload}
-                        POST /Diagnostic    ${fhir_resource_name}    ${payload}
+                        POST /Patient    ${fhir_resource_name}    ${payload}
+
+
+POST /Patient w/o ehr reference
+    [Documentation]     Deletes subject property form example_json before posting the payload.
+    ...                 This makes the payload invalid since it doesn't have an ehr reference.
+    [Arguments]         ${fhir_resource_name}    ${example_json}
+
+    ${payload}          Load JSON From File    ${DATA_SET_PATH_PATIENT}/${example_json}
+                        Delete Object From Json    ${payload}    $.subject
+                        Output Debug Info To Console    ${payload}
+                        POST /Patient    ${fhir_resource_name}    ${payload}
