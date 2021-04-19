@@ -33,12 +33,12 @@ public enum BeschreibungDefiningCode implements EnumValueSet {
     public static BeschreibungDefiningCode get_by_SNOMED_code(List<CodeableConcept> code) {
       CodeableConcept fhir_code = code.get(0);
       for(BeschreibungDefiningCode bc : values()) {
-        if(bc.code.equals(fhir_code)) {
+        if(bc.code.equals(fhir_code.getCoding().get(0).getCode())) {
           return bc;
         }
       }
-      //TODO Test
-      throw new UnprocessableEntityException("Getting BeschreibungDefiningCode failed. Code not found for: " + fhir_code.toString());
+      //TODO Test - hier gehts weiter: das oben scheint jetzt gefixed, schauen wo der nächste Fehler liegt
+      throw new UnprocessableEntityException("Getting BeschreibungDefiningCode failed. Code not found for: " + fhir_code.getCoding().get(0).toString());
     }
 
     public String getValue() {

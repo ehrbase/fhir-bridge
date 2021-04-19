@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.config;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionService;
+import org.ehrbase.fhirbridge.ehr.converter.specific.DnrAnordnung.DnrAnordnungCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodpressure.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight.BodyHeightCompositionConverter;
@@ -71,7 +72,7 @@ public class ConversionConfiguration {
     }
 
     private void registerConsentConverters(ConversionService conversionService) {
-        conversionService.registerConverter(Profile.DO_NOT_RESUSCITATE_ORDER, null); // TODO: @ErikTute, add your converter
+        conversionService.registerConverter(Profile.DO_NOT_RESUSCITATE_ORDER, new DnrAnordnungCompositionConverter());
     }
 
     private void registerDiagnosticReportConverters(ConversionService conversionService) {
