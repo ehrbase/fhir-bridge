@@ -5,6 +5,14 @@ The purpose of the application is to act as a broker between an HL7 FHIR client 
 
 The implementation is based on [Apache Camel](https://camel.apache.org/) and [Open eHealth Integration Platform](https://github.com/oehf/ipf).
 
+## Releases
+
+##### 2021, April 13
+v1.1.0-RC1 - Release candidate that includes major refactoring of the Conversion API and adds support for new FHIR resources and profiles.
+
+##### 2020, November 29
+v1.0.0 - First release of the FHIR Bridge application.
+
 ## Getting Started
 
 ### Prerequisites
