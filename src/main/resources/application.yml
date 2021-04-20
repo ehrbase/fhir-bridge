@@ -31,6 +31,7 @@ fhir-bridge:
 #      password:
 #    oauth2:
 #      jwk-set-uri:
+#      jws-algorithm: RS256
 
 #
 # Spring Properties
