@@ -4,211 +4,286 @@ import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.generic.Participation;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.String;
+import java.time.temporal.TemporalAccessor;
+import java.util.List;
+import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Id;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.annotations.Template;
+import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
+import org.ehrbase.client.classgenerator.shareddefinition.Category;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.client.classgenerator.shareddefinition.Setting;
+import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
 import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.FallidentifikationCluster;
-import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KorpertemperaturObservation;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.CategoryDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.SettingDefiningcode;
-import org.ehrbase.fhirbridge.ehr.opt.shareddefinition.Territory;
-
-import java.time.temporal.TemporalAccessor;
-import java.util.List;
+import org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition.KoerpertemperaturObservation;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.report.v1")
+@Generated(
+    value = "org.ehrbase.client.classgenerator.ClassGenerator",
+    date = "2021-03-09T11:54:08.533114+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+)
 @Template("Intensivmedizinisches Monitoring Korpertemperatur")
-public class IntensivmedizinischesMonitoringKorpertemperaturComposition implements Composition {
-    @Id
-    private VersionUid versionUid;
+public class IntensivmedizinischesMonitoringKorpertemperaturComposition implements CompositionEntity, Composition {
+  /**
+   * Path: Bericht/category
+   */
+  @Path("/category|defining_code")
+  private Category categoryDefiningCode;
 
-    @Path("/feeder_audit")
-    private FeederAudit feederAudit;
+  /**
+   * Path: Bericht/context/Bericht Name
+   * Description: Identifizierungsmerkmal des Berichts.
+   */
+  @Path("/context/other_context[at0001]/items[at0002 and name/value='Bericht Name']/value|value")
+  private String berichtNameValue;
 
-    @Path("/context/end_time|value")
-    private TemporalAccessor endTimeValue;
+  /**
+   * Path: Bericht/context/Tree/Bericht Name/null_flavour
+   */
+  @Path("/context/other_context[at0001]/items[at0002 and name/value='Bericht Name']/null_flavour|defining_code")
+  private NullFlavour berichtNameNullFlavourDefiningCode;
 
-    @Path("/context/participations")
-    private List<Participation> participations;
+  /**
+   * Path: Bericht/context/Status
+   * Description: Der Status des gesamten Berichts. Hinweis: Dies ist nicht der Status einer Berichtskomponente.
+   */
+  @Path("/context/other_context[at0001]/items[at0005]/value|value")
+  private String statusValue;
 
-    @Path("/language")
-    private Language language;
+  /**
+   * Path: Bericht/context/Tree/Status/null_flavour
+   */
+  @Path("/context/other_context[at0001]/items[at0005]/null_flavour|defining_code")
+  private NullFlavour statusNullFlavourDefiningCode;
 
-    @Path("/context/health_care_facility")
-    private PartyIdentified healthCareFacility;
+  /**
+   * Path: Bericht/context/Fallidentifikation
+   * Description: Zur Erfassung von Details zur Identifikation eines Falls im Gesundheitswesen.
+   */
+  @Path("/context/other_context[at0001]/items[openEHR-EHR-CLUSTER.case_identification.v0]")
+  private FallidentifikationCluster fallidentifikation;
 
-    @Path("/context/other_context[at0001]/items[at0005]/value|value")
-    private String statusValue;
+  /**
+   * Path: Bericht/context/start_time
+   */
+  @Path("/context/start_time|value")
+  private TemporalAccessor startTimeValue;
 
-    @Path("/context/other_context[at0001]/items[at0002]/value|value")
-    private String berichtIdValue;
+  /**
+   * Path: Bericht/context/participations
+   */
+  @Path("/context/participations")
+  private List<Participation> participations;
 
-    @Path("/territory")
-    private Territory territory;
+  /**
+   * Path: Bericht/context/end_time
+   */
+  @Path("/context/end_time|value")
+  private TemporalAccessor endTimeValue;
 
-    @Path("/context/start_time|value")
-    private TemporalAccessor startTimeValue;
+  /**
+   * Path: Bericht/context/location
+   */
+  @Path("/context/location")
+  private String location;
 
-    @Path("/context/other_context[at0001]/items[openEHR-EHR-CLUSTER.case_identification.v0]")
-    private FallidentifikationCluster fallidentifikation;
+  /**
+   * Path: Bericht/context/health_care_facility
+   */
+  @Path("/context/health_care_facility")
+  private PartyIdentified healthCareFacility;
 
-    @Path("/composer")
-    private PartyProxy composer;
+  /**
+   * Path: Bericht/context/setting
+   */
+  @Path("/context/setting|defining_code")
+  private Setting settingDefiningCode;
 
-    @Path("/context/setting|defining_code")
-    private SettingDefiningcode settingDefiningcode;
+  /**
+   * Path: Bericht/Körpertemperatur
+   * Description: Eine Messung der Körpertemperatur an einer bestimmten Stelle als Surrogat für den gesamten Körper der Person.
+   */
+  @Path("/content[openEHR-EHR-OBSERVATION.body_temperature.v2]")
+  private List<KoerpertemperaturObservation> koerpertemperatur;
 
-    @Path("/content[openEHR-EHR-OBSERVATION.body_temperature.v2]")
-    private List<KorpertemperaturObservation> korpertemperatur;
+  /**
+   * Path: Bericht/composer
+   */
+  @Path("/composer")
+  private PartyProxy composer;
 
-    @Path("/context/location")
-    private String location;
+  /**
+   * Path: Bericht/language
+   */
+  @Path("/language")
+  private Language language;
 
-    @Path("/category|defining_code")
-    private CategoryDefiningcode categoryDefiningcode;
+  /**
+   * Path: Bericht/feeder_audit
+   */
+  @Path("/feeder_audit")
+  private FeederAudit feederAudit;
 
-    @Path("/context/other_context[at0001]/items[at0002]/name|value")
-    private String berichtIdValueTree;
+  /**
+   * Path: Bericht/territory
+   */
+  @Path("/territory")
+  private Territory territory;
 
-    public VersionUid getVersionUid() {
-        return this.versionUid;
-    }
+  @Id
+  private VersionUid versionUid;
 
-    public void setVersionUid(VersionUid versionUid) {
-        this.versionUid = versionUid;
-    }
+  public void setCategoryDefiningCode(Category categoryDefiningCode) {
+     this.categoryDefiningCode = categoryDefiningCode;
+  }
 
-    public FeederAudit getFeederAudit() {
-        return this.feederAudit;
-    }
+  public Category getCategoryDefiningCode() {
+     return this.categoryDefiningCode ;
+  }
 
-    public void setFeederAudit(FeederAudit feederAudit) {
-        this.feederAudit = feederAudit;
-    }
+  public void setBerichtNameValue(String berichtNameValue) {
+     this.berichtNameValue = berichtNameValue;
+  }
 
-    public TemporalAccessor getEndTimeValue() {
-        return this.endTimeValue;
-    }
+  public String getBerichtNameValue() {
+     return this.berichtNameValue ;
+  }
 
-    public void setEndTimeValue(TemporalAccessor endTimeValue) {
-        this.endTimeValue = endTimeValue;
-    }
+  public void setBerichtNameNullFlavourDefiningCode(
+      NullFlavour berichtNameNullFlavourDefiningCode) {
+     this.berichtNameNullFlavourDefiningCode = berichtNameNullFlavourDefiningCode;
+  }
 
-    public List<Participation> getParticipations() {
-        return this.participations;
-    }
+  public NullFlavour getBerichtNameNullFlavourDefiningCode() {
+     return this.berichtNameNullFlavourDefiningCode ;
+  }
 
-    public void setParticipations(List<Participation> participations) {
-        this.participations = participations;
-    }
+  public void setStatusValue(String statusValue) {
+     this.statusValue = statusValue;
+  }
 
-    public Language getLanguage() {
-        return this.language;
-    }
+  public String getStatusValue() {
+     return this.statusValue ;
+  }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
+  public void setStatusNullFlavourDefiningCode(NullFlavour statusNullFlavourDefiningCode) {
+     this.statusNullFlavourDefiningCode = statusNullFlavourDefiningCode;
+  }
 
-    public PartyIdentified getHealthCareFacility() {
-        return this.healthCareFacility;
-    }
+  public NullFlavour getStatusNullFlavourDefiningCode() {
+     return this.statusNullFlavourDefiningCode ;
+  }
 
-    public void setHealthCareFacility(PartyIdentified healthCareFacility) {
-        this.healthCareFacility = healthCareFacility;
-    }
+  public void setFallidentifikation(FallidentifikationCluster fallidentifikation) {
+     this.fallidentifikation = fallidentifikation;
+  }
 
-    public String getStatusValue() {
-        return this.statusValue;
-    }
+  public FallidentifikationCluster getFallidentifikation() {
+     return this.fallidentifikation ;
+  }
 
-    public void setStatusValue(String statusValue) {
-        this.statusValue = statusValue;
-    }
+  public void setStartTimeValue(TemporalAccessor startTimeValue) {
+     this.startTimeValue = startTimeValue;
+  }
 
-    public String getBerichtIdValue() {
-        return this.berichtIdValue;
-    }
+  public TemporalAccessor getStartTimeValue() {
+     return this.startTimeValue ;
+  }
 
-    public void setBerichtIdValue(String berichtIdValue) {
-        this.berichtIdValue = berichtIdValue;
-    }
+  public void setParticipations(List<Participation> participations) {
+     this.participations = participations;
+  }
 
-    public Territory getTerritory() {
-        return this.territory;
-    }
+  public List<Participation> getParticipations() {
+     return this.participations ;
+  }
 
-    public void setTerritory(Territory territory) {
-        this.territory = territory;
-    }
+  public void setEndTimeValue(TemporalAccessor endTimeValue) {
+     this.endTimeValue = endTimeValue;
+  }
 
-    public TemporalAccessor getStartTimeValue() {
-        return this.startTimeValue;
-    }
+  public TemporalAccessor getEndTimeValue() {
+     return this.endTimeValue ;
+  }
 
-    public void setStartTimeValue(TemporalAccessor startTimeValue) {
-        this.startTimeValue = startTimeValue;
-    }
+  public void setLocation(String location) {
+     this.location = location;
+  }
 
-    public FallidentifikationCluster getFallidentifikation() {
-        return this.fallidentifikation;
-    }
+  public String getLocation() {
+     return this.location ;
+  }
 
-    public void setFallidentifikation(FallidentifikationCluster fallidentifikation) {
-        this.fallidentifikation = fallidentifikation;
-    }
+  public void setHealthCareFacility(PartyIdentified healthCareFacility) {
+     this.healthCareFacility = healthCareFacility;
+  }
 
-    public PartyProxy getComposer() {
-        return this.composer;
-    }
+  public PartyIdentified getHealthCareFacility() {
+     return this.healthCareFacility ;
+  }
 
-    public void setComposer(PartyProxy composer) {
-        this.composer = composer;
-    }
+  public void setSettingDefiningCode(Setting settingDefiningCode) {
+     this.settingDefiningCode = settingDefiningCode;
+  }
 
-    public SettingDefiningcode getSettingDefiningcode() {
-        return this.settingDefiningcode;
-    }
+  public Setting getSettingDefiningCode() {
+     return this.settingDefiningCode ;
+  }
 
-    public void setSettingDefiningcode(SettingDefiningcode settingDefiningcode) {
-        this.settingDefiningcode = settingDefiningcode;
-    }
+  public void setKoerpertemperatur(List<KoerpertemperaturObservation> koerpertemperatur) {
+     this.koerpertemperatur = koerpertemperatur;
+  }
 
-    public List<KorpertemperaturObservation> getKorpertemperatur() {
-        return this.korpertemperatur;
-    }
+  public List<KoerpertemperaturObservation> getKoerpertemperatur() {
+     return this.koerpertemperatur ;
+  }
 
-    public void setKorpertemperatur(List<KorpertemperaturObservation> korpertemperatur) {
-        this.korpertemperatur = korpertemperatur;
-    }
+  public void setComposer(PartyProxy composer) {
+     this.composer = composer;
+  }
 
-    public String getLocation() {
-        return this.location;
-    }
+  public PartyProxy getComposer() {
+     return this.composer ;
+  }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+  public void setLanguage(Language language) {
+     this.language = language;
+  }
 
-    public CategoryDefiningcode getCategoryDefiningcode() {
-        return this.categoryDefiningcode;
-    }
+  public Language getLanguage() {
+     return this.language ;
+  }
 
-    public void setCategoryDefiningcode(CategoryDefiningcode categoryDefiningcode) {
-        this.categoryDefiningcode = categoryDefiningcode;
-    }
+  public void setFeederAudit(FeederAudit feederAudit) {
+     this.feederAudit = feederAudit;
+  }
 
-    public String getBerichtIdValueTree() {
-        return this.berichtIdValueTree;
-    }
+  public FeederAudit getFeederAudit() {
+     return this.feederAudit ;
+  }
 
-    public void setBerichtIdValueTree(String berichtIdValueTree) {
-        this.berichtIdValueTree = berichtIdValueTree;
-    }
+  public void setTerritory(Territory territory) {
+     this.territory = territory;
+  }
+
+  public Territory getTerritory() {
+     return this.territory ;
+  }
+
+  public VersionUid getVersionUid() {
+     return this.versionUid ;
+  }
+
+  public void setVersionUid(VersionUid versionUid) {
+     this.versionUid = versionUid;
+  }
 }

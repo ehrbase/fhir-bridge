@@ -4,17 +4,17 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum EthnischerHintergrundDefiningCode implements EnumValueSet {
-  CAUCASIAN("Caucasian", "Caucasian", "SNOMED Clinical Terms", "14045001"),
+  OTHER_ETHNIC_MIXED_ORIGIN("Other ethnic, mixed origin", "", "SNOMED Clinical Terms", "186019001"),
 
-  OTHER_ETHNIC_MIXED_ORIGIN("Other ethnic, mixed origin", "Other ethnic, mixed origin", "SNOMED Clinical Terms", "186019001"),
+  ARABS("Arabs", "", "SNOMED Clinical Terms", "90027003"),
 
-  ASIAN("Asian", "Asian", "SNOMED Clinical Terms", "315280000"),
+  CAUCASIAN("Caucasian", "", "SNOMED Clinical Terms", "14045001"),
 
-  ARABS("Arabs", "Arabs", "SNOMED Clinical Terms", "90027003"),
+  BLACK_AFRICAN("Black African", "", "SNOMED Clinical Terms", "18167009"),
 
-  BLACK_AFRICAN("Black African", "Black African", "SNOMED Clinical Terms", "18167009"),
+  ASIAN("Asian", "", "SNOMED Clinical Terms", "315280000"),
 
-  HISPANIC_OR_LATINO("Hispanic or Latino", "Hispanic or Latino", "SNOMED Clinical Terms", "2135-2");
+  HISPANIC_OR_LATINO("Hispanic or Latino", "", "SNOMED Clinical Terms", "2135-2");
 
   private String value;
 
@@ -32,7 +32,7 @@ public enum EthnischerHintergrundDefiningCode implements EnumValueSet {
     this.code = code;
   }
 
-  public static EthnischerHintergrundDefiningCode get_by_SNOMED_code(String SNOMED_code) {
+  public static EthnischerHintergrundDefiningCode getBySNOMEDCode(String SNOMED_code) {
     for(EthnischerHintergrundDefiningCode ehc : values()) {
       if(ehc.code.equals(SNOMED_code)) {
         return ehc;

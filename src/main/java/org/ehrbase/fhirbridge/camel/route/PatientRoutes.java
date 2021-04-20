@@ -16,16 +16,10 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
-import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.hl7.fhir.r4.model.Patient;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.ehrbase.fhirbridge.ehr.converter.PatientCompositionConverter;
 
 /**
  * Implementation of {@link RouteBuilder} that provides route definitions for transactions
@@ -36,47 +30,24 @@ import org.ehrbase.fhirbridge.ehr.converter.PatientCompositionConverter;
 @Component
 public class PatientRoutes extends AbstractRouteBuilder {
 
-    private final IFhirResourceDao<Patient> patientDao;
-
-    private final ResourceProfileValidator requestValidator;
-
-    private final EhrIdLookupProcessor ehrIdLookupProcessor;
-
-    private final DefaultExceptionHandler defaultExceptionHandler;
-
-    public PatientRoutes(IFhirResourceDao<Patient> patientDao,
-                         ResourceProfileValidator requestValidator,
-                         EhrIdLookupProcessor ehrIdLookupProcessor,
-                         DefaultExceptionHandler defaultExceptionHandler) {
-        this.patientDao = patientDao;
-        this.requestValidator = requestValidator;
-        this.ehrIdLookupProcessor = ehrIdLookupProcessor;
-        this.defaultExceptionHandler = defaultExceptionHandler;
-    }
-
     @Override
-    public void configure() {
+    public void configure() throws Exception {
         // @formatter:off
+        super.configure();
 
         // 'Create Patient' route definition
-
         from("patient-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
-            .onException(Exception.class)
-                .process(defaultExceptionHandler)
-            .end()
-            .process(requestValidator)
-            .bean(patientDao, "create(${body})")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
-            .setBody(simple("${body.resource}"))
-            .process(ehrIdLookupProcessor)
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity&compositionConverter=#patientCompositionConverter")
+            .process("resourceProfileValidator")
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("patientDao", "create(${body}, ${headers.FhirRequestDetails})"))
+            .process("ehrIdLookupProcessor")
+            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
 
         // 'Find Patient' route definition
-
         from("patient-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())
@@ -86,11 +57,5 @@ public class PatientRoutes extends AbstractRouteBuilder {
                     .to("bean:patientDao?method=read(${body}, ${headers.FhirRequestDetails})");
 
         // @formatter:on
-    }
-
-    // Update when Apache Camel > 3.x
-    @Bean
-    public PatientCompositionConverter patientCompositionConverter() {
-        return new PatientCompositionConverter();
     }
 }

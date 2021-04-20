@@ -16,18 +16,10 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
-import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
-import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
-import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
-import org.ehrbase.fhirbridge.ehr.converter.ProcedureCompositionConverter;
 import org.hl7.fhir.r4.model.Procedure;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -39,51 +31,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProcedureRoutes extends AbstractRouteBuilder {
 
-    private final IFhirResourceDao<Procedure> procedureDao;
-
-    private final ResourceProfileValidator requestValidator;
-
-    private final CompositionConverterResolver compositionConverterResolver;
-
-    private final EhrIdLookupProcessor ehrIdLookupProcessor;
-
-    private final DefaultExceptionHandler defaultExceptionHandler;
-
-    public ProcedureRoutes(IFhirResourceDao<Procedure> procedureDao,
-                           ResourceProfileValidator requestValidator,
-                           EhrIdLookupProcessor ehrIdLookupProcessor,
-                           CompositionConverterResolver compositionConverterResolver,
-                           DefaultExceptionHandler defaultExceptionHandler) {
-        this.procedureDao = procedureDao;
-        this.requestValidator = requestValidator;
-        this.ehrIdLookupProcessor = ehrIdLookupProcessor;
-        this.defaultExceptionHandler = defaultExceptionHandler;
-        this.compositionConverterResolver = compositionConverterResolver;
-    }
-
     @Override
-    public void configure() {
+    public void configure() throws Exception {
         // @formatter:off
-        // 'Create Procedure' route definition
+        super.configure();
 
+        // 'Create Procedure' route definition
         from("procedure-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
-                .end()
-                .onException(Exception.class)
-                .process(defaultExceptionHandler)
-                .end()
-                .process(requestValidator)
-                .bean(procedureDao, "create(${body})")
-                .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
-                .setBody(simple("${body.resource}"))
-                .process(ehrIdLookupProcessor)
-                .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
-                .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-                .process(new ResourceResponseProcessor());
+            .end()
+            .process("resourceProfileValidator")
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("procedureDao", "create(${body}, ${headers.FhirRequestDetails})"))
+            .process("ehrIdLookupProcessor")
+            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
+            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
+            .process(new ResourceResponseProcessor());
 
         // 'Find Procedure' route definition
-
         from("procedure-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())
@@ -93,11 +58,5 @@ public class ProcedureRoutes extends AbstractRouteBuilder {
                     .to("bean:procedureDao?method=read(${body}, ${headers.FhirRequestDetails})");
 
         // @formatter:on
-    }
-
-    // TODO: Update when Apache Camel > 3.x
-    @Bean
-    public ProcedureCompositionConverter procedureCompositionConverter() {
-        return new ProcedureCompositionConverter();
     }
 }

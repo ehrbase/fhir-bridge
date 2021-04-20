@@ -14,13 +14,18 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.anatomical_location.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-02-26T00:40:41.826556+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T11:53:07.627942+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class KoerperstelleCluster implements LocatableEntity {
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Körperstelle/Name der Körperstelle
    * Description: Identifikation einer einzelnen physischen Stelle entweder am oder innerhalb des menschlichen Körpers.
+   * Comment: Dieses Datenelement ist der einzige verpflichtend auszufüllende Datenpunkt in diesem Archetypen und sollte als primärer Datenpunkt verwendet werden, um eine anatomische Lokalisation mit einem häufig verwendeten Namen aufzuzeichnen. Es wird dringend empfohlen, dass der Name der Körperstelle so genau aufgezeichnet wird, wie es anatomisch möglich ist. Zum Beispiel: zeichne "oberes Augenlid" auf und nicht "Augenlid" mit "oberer" als Qualifier; "fünfte Rippe" statt "Rippe" mit einem numerischen Qualifier. Verwenden Sie die anderen Datenelemente für Lateralität, Sichtweise, Region und anatomische Linie, um mehr Details anzugeben. 
+   *
+   * Dieses Datenelement sollte mit einer Terminologie kodiert werden, die nach Möglichkeit Entscheidungsunterstützung auslösen kann - ein geeignetes Termset für die Verwendung hier könnte aus einzelnen Konzepten oder einer Liste von vorab abgestimmten Begriffen zusammengesetzt sein. Freitext sollte nur verwendet werden, wenn keine entsprechende Terminologie vorhanden ist. 
+   *
+   * Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben ist, kann dieses Datenelement redundant sein. Alternativ wurde ein Anwendungsfall ermittelt, bei dem der Wert in dieses Element dupliziert sein könnte, um semantische Abfragen unter Verwendung dieses Archetyps und nicht das Datenelement innerhalb des übergeordneten Elements zu unterstützen.
    */
   @Path("/items[at0001]/value|defining_code")
   private NameDerKoerperstelleDefiningCode nameDerKoerperstelleDefiningCode;
@@ -34,6 +39,7 @@ public class KoerperstelleCluster implements LocatableEntity {
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Körperstelle/Lateralität
    * Description: Die Seite des Körpers, an der sich die identifizierte Körperstelle befindet.
+   * Comment: Wenn die identifizierte Körperstelle keine Seitenlage aufweist, sollte dieses Datenelement keinen Wert haben. Wenn das Datenelement "Name der Körperstelle" präkoordinierte Bezeichnungen verwendet, die eine Seitenlokalisation einschließt, dann ist dieses Datenelement redundant.
    */
   @Path("/items[at0002]/value|defining_code")
   private LateralitaetDefiningCode lateralitaetDefiningCode;
