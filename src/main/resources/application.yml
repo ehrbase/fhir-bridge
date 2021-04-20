@@ -1,4 +1,9 @@
+# @formatter:off
+#
+# FHIR Bridge Properties
+#
 fhir-bridge:
+  # EHRbase Properties
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
     security:
@@ -7,6 +12,12 @@ fhir-bridge:
       password: myPassword432
     template:
       prefix: classpath:/opt/
+  # Security Properties
+  security:
+    authentication-type: none
+#    basic:
+#      username:
+#      password:
   composition:
     debug: true
     output-directory: "src/main/resources/"
@@ -15,9 +26,19 @@ fhir-bridge:
       allowed-headers: '*'
       allowed-methods: '*'
       allowed-origins: '*'
+#
+# Spring Properties
+#
 spring:
   application:
     name: FHIR Bridge
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration
+      - org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      - org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
   batch:
     job:
       enabled: false
