@@ -2,18 +2,18 @@ package org.ehrbase.fhirbridge.config;
 
 import org.ehrbase.fhirbridge.security.SmartOnFhirAuthorizationInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * {@link Configuration Configuration} for security.
@@ -75,8 +75,8 @@ public class SecurityConfiguration {
     @Configuration(proxyBeanMethods = false)
     @EnableWebSecurity
     @ConditionalOnProperty(value = "fhir-bridge.security.authentication-type", havingValue = "oauth2")
-    @Import({OAuth2ResourceServerAutoConfiguration.class})
-    protected static class Oauth2AuthenticationConfiguration extends WebSecurityConfigurerAdapter {
+//    @Import({OAuth2ResourceServerAutoConfiguration.class})
+    protected static class Oauth2AuthenticationConfiguration {
 
         private final SecurityProperties properties;
 
@@ -90,6 +90,13 @@ public class SecurityConfiguration {
                     .withJwkSetUri(properties.getOauth2().getJwkSetUri())
                     .jwsAlgorithm(SignatureAlgorithm.from(properties.getOauth2().getJwsAlgorithm()))
                     .build();
+        }
+
+        @Bean
+        SecurityFilterChain jwtSecurityFilterChain(HttpSecurity http) throws Exception {
+            http.authorizeRequests((requests) -> requests.anyRequest().authenticated());
+            http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+            return http.build();
         }
 
         @Bean
