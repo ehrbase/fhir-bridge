@@ -6,6 +6,7 @@
 fhir-bridge:
   # CORS Properties
   cors:
+    allow-credentials: false
     allowed-headers: '*'
     allowed-methods: '*'
     allowed-origins: '*'

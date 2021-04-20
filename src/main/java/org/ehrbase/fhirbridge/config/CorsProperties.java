@@ -28,7 +28,7 @@ import java.util.List;
 @ConfigurationProperties(prefix = "fhir-bridge.cors")
 public class CorsProperties {
 
-    private boolean allowCredentials;
+    private boolean allowCredentials = false;
 
     private List<String> allowedHeaders;
 
