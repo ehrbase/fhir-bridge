@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.ehrbase.fhirbridge.security;
 
 import ca.uhn.fhir.rest.api.RestOperationTypeEnum;

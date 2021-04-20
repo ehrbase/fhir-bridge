@@ -75,7 +75,6 @@ public class SecurityConfiguration {
     @Configuration(proxyBeanMethods = false)
     @EnableWebSecurity
     @ConditionalOnProperty(value = "fhir-bridge.security.authentication-type", havingValue = "oauth2")
-//    @Import({OAuth2ResourceServerAutoConfiguration.class})
     protected static class Oauth2AuthenticationConfiguration {
 
         private final SecurityProperties properties;
@@ -93,8 +92,8 @@ public class SecurityConfiguration {
         }
 
         @Bean
-        SecurityFilterChain jwtSecurityFilterChain(HttpSecurity http) throws Exception {
-            http.authorizeRequests((requests) -> requests.anyRequest().authenticated());
+        public SecurityFilterChain jwtSecurityFilterChain(HttpSecurity http) throws Exception {
+            http.authorizeRequests(requests -> requests.anyRequest().authenticated());
             http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
             return http.build();
         }
