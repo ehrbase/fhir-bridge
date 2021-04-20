@@ -1,4 +1,9 @@
+# @formatter:off
+#
+# FHIR Bridge Properties
+#
 fhir-bridge:
+  # EHRbase Properties
   debug:
     enabled: false
     mapping-output-directory: ${java.io.tmpdir}/mappings
@@ -10,14 +15,30 @@ fhir-bridge:
       password: myPassword432
     template:
       prefix: classpath:/opt/
+  # Security Properties
+  security:
+    authentication-type: none
+#    basic:
+#      username:
+#      password:
   fhir:
     cors:
       allowed-headers: '*'
       allowed-methods: '*'
       allowed-origins: '*'
+#
+# Spring Properties
+#
 spring:
   application:
     name: FHIR Bridge
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration
+      - org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      - org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
   batch:
     job:
       enabled: false
