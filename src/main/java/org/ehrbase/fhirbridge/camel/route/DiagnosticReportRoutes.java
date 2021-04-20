@@ -16,15 +16,8 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
-import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
-import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
-import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
-import org.ehrbase.fhirbridge.ehr.converter.CompositionConverterResolver;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.springframework.stereotype.Component;
 
@@ -37,51 +30,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class DiagnosticReportRoutes extends AbstractRouteBuilder {
 
-    private final IFhirResourceDao<DiagnosticReport> diagnosticReportDao;
-
-    private final EhrIdLookupProcessor ehrIdLookupProcessor;
-
-    private final ResourceResponseProcessor resourceResponseProcessor;
-
-    private final CompositionConverterResolver compositionConverterResolver;
-
-    private final ResourceProfileValidator requestValidator;
-
-    private final DefaultExceptionHandler defaultExceptionHandler;
-
-
-    public DiagnosticReportRoutes(IFhirResourceDao<DiagnosticReport> diagnosticReportDao,
-                                  EhrIdLookupProcessor ehrIdLookupProcessor,
-                                  ResourceResponseProcessor resourceResponseProcessor,
-                                  CompositionConverterResolver compositionConverterResolver,
-                                  ResourceProfileValidator requestValidator,
-                                  DefaultExceptionHandler defaultExceptionHandler) {
-        this.diagnosticReportDao = diagnosticReportDao;
-        this.ehrIdLookupProcessor = ehrIdLookupProcessor;
-        this.resourceResponseProcessor = resourceResponseProcessor;
-        this.requestValidator = requestValidator;
-        this.defaultExceptionHandler = defaultExceptionHandler;
-        this.compositionConverterResolver = compositionConverterResolver;
-    }
-
-
     @Override
-    public void configure() {
+    public void configure() throws Exception {
         // @formatter:off
-        onException(Exception.class)
-            .process(defaultExceptionHandler);
+        super.configure();
 
         // 'Create Diagnostic Report' route definition
-
         from("diagnostic-report-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
-            .process(requestValidator)
+            .process("resourceProfileValidator")
             .to("direct:process-diagnostic-report");
 
         // 'Find Diagnostic Report' route definition
-
         from("diagnostic-report-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())
@@ -91,13 +53,12 @@ public class DiagnosticReportRoutes extends AbstractRouteBuilder {
                     .to("bean:diagnosticReportDao?method=read(${body}, ${headers.FhirRequestDetails})");
 
         // Internal routes definition
-
         from("direct:process-diagnostic-report")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method(diagnosticReportDao, "create"))
-            .process(ehrIdLookupProcessor)
-            .setHeader(CompositionConstants.COMPOSITION_CONVERTER, method(compositionConverterResolver, "resolve(${header.FhirBridgeProfile})"))
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("diagnosticReportDao", "create(${body}, ${headers.FhirRequestDetails})"))
+            .process("ehrIdLookupProcessor")
+            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .process(resourceResponseProcessor);
+            .process("resourceResponseProcessor");
 
         // @formatter:on
     }

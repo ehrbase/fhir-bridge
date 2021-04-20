@@ -50,20 +50,13 @@ public class CompositionProducer extends DefaultProducer {
             throw new IllegalArgumentException("Body must not be null");
         }
 
-        CompositionConverter<Composition, Object> compositionConverter = determineCompositionConverter(exchange);
-        if (compositionConverter != null) {
-            body = compositionConverter.toComposition(body);
-        }
-        if (endpoint.getProperties().isDebug()) {
+        if (endpoint.getProperties().isEnabled()) {
             debugMapping((Composition) body);
         }
 
         Object mergedComposition = endpoint.getOpenEhrClient().compositionEndpoint(ehrId).mergeCompositionEntity(body);
         exchange.getMessage().setHeader(CompositionConstants.VERSION_UID, ((Composition) mergedComposition).getVersionUid());
 
-        if (compositionConverter != null) {
-            mergedComposition = compositionConverter.fromComposition((Composition) mergedComposition);
-        }
         exchange.getMessage().setBody(mergedComposition);
     }
 
@@ -78,7 +71,7 @@ public class CompositionProducer extends DefaultProducer {
     }
 
     private void writeToFile(String compositionJson) {
-        File output = new File(endpoint.getProperties().getOutputDirectory() + "/mapping-output.json");
+        File output = new File(endpoint.getProperties().getMappingOutputDirectory() + "/mapping-output.json");
         try {
             FileUtils.writeStringToFile(output, compositionJson, StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -93,13 +86,7 @@ public class CompositionProducer extends DefaultProducer {
         Object result = endpoint.getOpenEhrClient().compositionEndpoint(ehrId)
                 .find(compositionId, expectedType)
                 .orElse(null);
-
-        CompositionConverter<Composition, Object> compositionConverter = determineCompositionConverter(exchange);
-        if (compositionConverter != null) {
-            exchange.getMessage().setBody(compositionConverter.fromComposition((Composition) result));
-        } else {
-            exchange.getMessage().setBody(result);
-        }
+        exchange.getMessage().setBody(result);
     }
 
     private CompositionOperation determineOperation(Exchange exchange) {
@@ -109,16 +96,4 @@ public class CompositionProducer extends DefaultProducer {
         }
         return operation;
     }
-
-    @SuppressWarnings("unchecked")
-    private CompositionConverter<Composition, Object> determineCompositionConverter(Exchange exchange) {
-        CompositionConverter<Composition, Object> compositionConverter =
-                exchange.getIn().getHeader(CompositionConstants.COMPOSITION_CONVERTER, CompositionConverter.class);
-        if (compositionConverter == null) {
-            compositionConverter = endpoint.getCompositionConverter();
-        }
-        return compositionConverter;
-    }
-
-
 }

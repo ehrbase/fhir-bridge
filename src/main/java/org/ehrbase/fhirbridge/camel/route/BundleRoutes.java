@@ -34,14 +34,14 @@ import org.springframework.stereotype.Component;
  * @since 1.0.0
  */
 @Component
-public class BundleRoutes extends RouteBuilder {
+public class BundleRoutes extends AbstractRouteBuilder {
 
     @Override
-    public void configure() {
+    public void configure() throws Exception {
         // @formatter:off
+        super.configure();
 
         // 'Provide Bundle' route definition
-
         from("bundle-provide:consumer?fhirContext=#fhirContext")
             .setHeader(FhirBridgeConstants.PROFILE, method(Bundles.class, "getTransactionProfile"))
             .choice()
@@ -54,7 +54,6 @@ public class BundleRoutes extends RouteBuilder {
                         "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri()));
 
         // Internal routes definition
-
         from("direct:process-blood-gas-panel-bundle")
             .bean(BloodGasPanelBundleValidator.class)
             .bean(BloodGasPanelConverter.class, "convert")

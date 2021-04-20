@@ -41,6 +41,11 @@ validate response - 422 (Unprocessable Entity)
                         ...        Specified profile type was 'Observation', but found type 'Condition'
 
 
+validate response - 422 (w/o error message)
+    [Arguments]     ${http_status_code}
+                    Integer     response status    ${http_status_code}
+                    String      response body resourceType    OperationOutcome
+
 #                                                 oooo                     
 #                                                 `888                     
 #  .oooo.o  .ooooo.   .oooo.   oooo d8b  .ooooo.   888 .oo.                

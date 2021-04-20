@@ -1,5 +1,6 @@
 .idea
 *.iml
+
 target
 
 *-local.yml
@@ -9,25 +10,26 @@ keystore/
 venv
 *.venv
 .pytest_cache
+*.pyc
+__pycache__/
 
 # Robot Tests
 **results**
 tests/log.html
 tests/output.xml
 tests/report.html
+.pabotsuitenames
 
 # VSCode
 .classpath
 .factorypath
 .project
 .settings/
-.vscode/**
+.vscode/
 
 # VSCode REST Client
 # files for local usage only!
 local*.http
 
-fhir-bridge.iml
-src/main/resources/MappingOutput.json
 
 mapping-output.json

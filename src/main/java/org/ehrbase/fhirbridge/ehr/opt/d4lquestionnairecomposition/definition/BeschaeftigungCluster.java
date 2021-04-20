@@ -14,13 +14,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.occupation_record.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-01-25T13:06:40.844533+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-03-09T12:09:15.608241+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class BeschaeftigungCluster implements LocatableEntity {
   /**
    * Path: Selbstüberwachung/Allgemeine Angaben/Zusammenfassung der Beschäftigung/Beschäftigung/Berufsbereich
    * Description: Die Hauptberufsbezeichnung oder die Rolle der Person.
+   * Comment: Zum Beispiel: Geschäftsführer, Pflegekraft oder Student. Jede dieser Berufsbezeichnungen oder Rollen kann aus mehreren Aufgaben bestehen.
    */
   @Path("/items[at0005 and name/value='Berufsbereich']/value|defining_code")
   private BerufsbereichDefiningCode berufsbereichDefiningCode;

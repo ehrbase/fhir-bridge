@@ -1,151 +1,282 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
+import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import java.time.temporal.TemporalAccessor;
+import java.util.List;
+import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
-
-import java.time.temporal.TemporalAccessor;
-import java.util.List;
+import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Entity
 @Archetype("openEHR-EHR-CLUSTER.laboratory_test_analyte.v1")
-public class ProLaboranalytCluster {
-    @Path("/items[at0005]/value")
-    @Choice
-    private ProLaboranalytErgebnisStatusChoice ergebnisStatus;
+@Generated(
+    value = "org.ehrbase.client.classgenerator.ClassGenerator",
+    date = "2021-03-09T11:53:24.142486+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+)
+public class ProLaboranalytCluster implements LocatableEntity {
+  /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/untersuchter Analyt
+   * Description: Der Name des untersuchten Analyts.
+   * Comment: Der Wert dieses Elements wird normalerweise meist durch eine Spezialisierung, durch einer Vorlage oder zur Laufzeit geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum','Hämoglobin'. 
+   * Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.
+   */
+  @Path("/items[at0024]/value|defining_code")
+  private UntersuchterAnalytDefiningCode untersuchterAnalytDefiningCode;
 
-    @Path("/items[at0006]/value|value")
-    private TemporalAccessor zeitpunktErgebnisStatusValue;
+  /**
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/untersuchter Analyt/null_flavour
+   */
+  @Path("/items[at0024]/null_flavour|defining_code")
+  private NullFlavour untersuchterAnalytNullFlavourDefiningCode;
 
-    @Path("/items[at0024]/value|defining_code")
-    private UntersuchterAnalytDefiningcode untersuchterAnalytDefiningcode;
+  /**
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Messwert/null_flavour
+   */
+  @Path("/items[at0001 and name/value='Messwert']/null_flavour|defining_code")
+  private NullFlavour messwertNullFlavourDefiningCode;
 
-    @Path("/items[at0004]/value|defining_code")
-    private ReferenzbereichsHinweiseDefiningcode referenzbereichsHinweiseDefiningcode;
+  /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Analyseergebnis-Details
+   * Description: Weitere Details zu einem einzelnen Ergebnis.
+   */
+  @Path("/items[at0014]")
+  private List<Cluster> analyseergebnisDetails;
 
-    @Path("/items[at0001]/value")
-    @Choice
-    private ProLaboranalytAnalytResultatChoice analytResultat;
+  /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Interpretation
+   * Description: Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Resultat im Referenzbereich ist oder nicht.
+   * Comment: z.B.: 'im Referenzbereich, bezogen auf Alter und Geschlecht'.
+   */
+  @Path("/items[at0004 and name/value='Interpretation']/value|defining_code")
+  private InterpretationDefiningCode interpretationDefiningCode;
 
-    @Path("/items[at0026]/value")
-    @Choice
-    private ProLaboranalytProbeChoice probe;
+  /**
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Interpretation/null_flavour
+   */
+  @Path("/items[at0004 and name/value='Interpretation']/null_flavour|defining_code")
+  private NullFlavour interpretationNullFlavourDefiningCode;
 
-    @Path("/items[at0026]/name|value")
-    private String probeValue;
+  /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Zeitpunkt Validation
+   * Description: Datum und Zeit, an dem das Analyseergebnis im Labor medizinisch validiert wurde.
+   * Comment: In vielen Gerichtsbarkeiten wird angenommen, dass der 'Ergebnisstatus' die medizinische Validation einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet
+   */
+  @Path("/items[at0025]/value|value")
+  private TemporalAccessor zeitpunktValidationValue;
 
-    @Path("/items[at0004]/name|value")
-    private String referenzbereichsHinweiseValue;
+  /**
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Zeitpunkt Validation/null_flavour
+   */
+  @Path("/items[at0025]/null_flavour|defining_code")
+  private NullFlavour zeitpunktValidationNullFlavourDefiningCode;
 
-    @Path("/items[at0025]/value|value")
-    private TemporalAccessor zeitpunktValidationValue;
+  /**
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Ergebnis-Status/null_flavour
+   */
+  @Path("/items[at0005]/null_flavour|defining_code")
+  private NullFlavour ergebnisStatusNullFlavourDefiningCode;
 
-    @Path("/items[at0014]")
-    private List<Cluster> analyseergebnisDetails;
+  /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Zeitpunkt Ergebnis-Status
+   * Description: Datum und/oder Zeitpunkt an dem der Status für das Analyseergebnis gesetzt wurde.
+   */
+  @Path("/items[at0006]/value|value")
+  private TemporalAccessor zeitpunktErgebnisStatusValue;
 
-    @Path("/items[at0003]")
-    private List<ProLaboranalytKommentarElement> kommentar;
+  /**
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Zeitpunkt Ergebnis-Status/null_flavour
+   */
+  @Path("/items[at0006]/null_flavour|defining_code")
+  private NullFlavour zeitpunktErgebnisStatusNullFlavourDefiningCode;
 
-    @Path("/items[at0001]/name|value")
-    private String analytResultatValue;
+  /**
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Probe ID/null_flavour
+   */
+  @Path("/items[at0026 and name/value='Probe ID']/null_flavour|defining_code")
+  private NullFlavour probeIdNullFlavourDefiningCode;
 
-    public void setErgebnisStatus(ProLaboranalytErgebnisStatusChoice ergebnisStatus) {
-        this.ergebnisStatus = ergebnisStatus;
-    }
+  /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Kommentar
+   * Description: Kommentar zum Analyt-Resultat, soweit noch nicht in anderen Feldern erfasst.
+   */
+  @Path("/items[at0003]")
+  private List<ProLaboranalytKommentarElement> kommentar;
 
-    public ProLaboranalytErgebnisStatusChoice getErgebnisStatus() {
-        return this.ergebnisStatus;
-    }
+  /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/feeder_audit
+   */
+  @Path("/feeder_audit")
+  private FeederAudit feederAudit;
 
-    public void setZeitpunktErgebnisStatusValue(TemporalAccessor zeitpunktErgebnisStatusValue) {
-        this.zeitpunktErgebnisStatusValue = zeitpunktErgebnisStatusValue;
-    }
+  /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Probe ID
+   * Description: Kennung der Probe, die für das Analyseergebnis verwendet wurde.
+   */
+  @Path("/items[at0026 and name/value='Probe ID']/value")
+  @Choice
+  private ProLaboranalytProbeIdChoice probeId;
 
-    public TemporalAccessor getZeitpunktErgebnisStatusValue() {
-        return this.zeitpunktErgebnisStatusValue;
-    }
+  /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Ergebnis-Status
+   * Description: Status des Analyseergebnisses.
+   */
+  @Path("/items[at0005]/value")
+  @Choice
+  private ProLaboranalytErgebnisStatusChoice ergebnisStatus;
 
-    public void setUntersuchterAnalytDefiningcode(
-            UntersuchterAnalytDefiningcode untersuchterAnalytDefiningcode) {
-        this.untersuchterAnalytDefiningcode = untersuchterAnalytDefiningcode;
-    }
+  /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Messwert
+   * Description: (Mess-)Wert des Analyt-Resultats.
+   */
+  @Path("/items[at0001 and name/value='Messwert']/value")
+  @Choice
+  private ProLaboranalytMesswertChoice messwert;
 
-    public UntersuchterAnalytDefiningcode getUntersuchterAnalytDefiningcode() {
-        return this.untersuchterAnalytDefiningcode;
-    }
+  public void setUntersuchterAnalytDefiningCode(
+      UntersuchterAnalytDefiningCode untersuchterAnalytDefiningCode) {
+     this.untersuchterAnalytDefiningCode = untersuchterAnalytDefiningCode;
+  }
 
-    public void setReferenzbereichsHinweiseDefiningcode(
-            ReferenzbereichsHinweiseDefiningcode referenzbereichsHinweiseDefiningcode) {
-        this.referenzbereichsHinweiseDefiningcode = referenzbereichsHinweiseDefiningcode;
-    }
+  public UntersuchterAnalytDefiningCode getUntersuchterAnalytDefiningCode() {
+     return this.untersuchterAnalytDefiningCode ;
+  }
 
-    public ReferenzbereichsHinweiseDefiningcode getReferenzbereichsHinweiseDefiningcode() {
-        return this.referenzbereichsHinweiseDefiningcode;
-    }
+  public void setUntersuchterAnalytNullFlavourDefiningCode(
+      NullFlavour untersuchterAnalytNullFlavourDefiningCode) {
+     this.untersuchterAnalytNullFlavourDefiningCode = untersuchterAnalytNullFlavourDefiningCode;
+  }
 
-    public void setAnalytResultat(ProLaboranalytAnalytResultatChoice analytResultat) {
-        this.analytResultat = analytResultat;
-    }
+  public NullFlavour getUntersuchterAnalytNullFlavourDefiningCode() {
+     return this.untersuchterAnalytNullFlavourDefiningCode ;
+  }
 
-    public ProLaboranalytAnalytResultatChoice getAnalytResultat() {
-        return this.analytResultat;
-    }
+  public void setMesswertNullFlavourDefiningCode(NullFlavour messwertNullFlavourDefiningCode) {
+     this.messwertNullFlavourDefiningCode = messwertNullFlavourDefiningCode;
+  }
 
-    public void setProbe(ProLaboranalytProbeChoice probe) {
-        this.probe = probe;
-    }
+  public NullFlavour getMesswertNullFlavourDefiningCode() {
+     return this.messwertNullFlavourDefiningCode ;
+  }
 
-    public ProLaboranalytProbeChoice getProbe() {
-        return this.probe;
-    }
+  public void setAnalyseergebnisDetails(List<Cluster> analyseergebnisDetails) {
+     this.analyseergebnisDetails = analyseergebnisDetails;
+  }
 
-    public void setProbeValue(String probeValue) {
-        this.probeValue = probeValue;
-    }
+  public List<Cluster> getAnalyseergebnisDetails() {
+     return this.analyseergebnisDetails ;
+  }
 
-    public String getProbeValue() {
-        return this.probeValue;
-    }
+  public void setInterpretationDefiningCode(InterpretationDefiningCode interpretationDefiningCode) {
+     this.interpretationDefiningCode = interpretationDefiningCode;
+  }
 
-    public void setReferenzbereichsHinweiseValue(String referenzbereichsHinweiseValue) {
-        this.referenzbereichsHinweiseValue = referenzbereichsHinweiseValue;
-    }
+  public InterpretationDefiningCode getInterpretationDefiningCode() {
+     return this.interpretationDefiningCode ;
+  }
 
-    public String getReferenzbereichsHinweiseValue() {
-        return this.referenzbereichsHinweiseValue;
-    }
+  public void setInterpretationNullFlavourDefiningCode(
+      NullFlavour interpretationNullFlavourDefiningCode) {
+     this.interpretationNullFlavourDefiningCode = interpretationNullFlavourDefiningCode;
+  }
 
-    public void setZeitpunktValidationValue(TemporalAccessor zeitpunktValidationValue) {
-        this.zeitpunktValidationValue = zeitpunktValidationValue;
-    }
+  public NullFlavour getInterpretationNullFlavourDefiningCode() {
+     return this.interpretationNullFlavourDefiningCode ;
+  }
 
-    public TemporalAccessor getZeitpunktValidationValue() {
-        return this.zeitpunktValidationValue;
-    }
+  public void setZeitpunktValidationValue(TemporalAccessor zeitpunktValidationValue) {
+     this.zeitpunktValidationValue = zeitpunktValidationValue;
+  }
 
-    public void setAnalyseergebnisDetails(List<Cluster> analyseergebnisDetails) {
-        this.analyseergebnisDetails = analyseergebnisDetails;
-    }
+  public TemporalAccessor getZeitpunktValidationValue() {
+     return this.zeitpunktValidationValue ;
+  }
 
-    public List<Cluster> getAnalyseergebnisDetails() {
-        return this.analyseergebnisDetails;
-    }
+  public void setZeitpunktValidationNullFlavourDefiningCode(
+      NullFlavour zeitpunktValidationNullFlavourDefiningCode) {
+     this.zeitpunktValidationNullFlavourDefiningCode = zeitpunktValidationNullFlavourDefiningCode;
+  }
 
-    public void setKommentar(List<ProLaboranalytKommentarElement> kommentar) {
-        this.kommentar = kommentar;
-    }
+  public NullFlavour getZeitpunktValidationNullFlavourDefiningCode() {
+     return this.zeitpunktValidationNullFlavourDefiningCode ;
+  }
 
-    public List<ProLaboranalytKommentarElement> getKommentar() {
-        return this.kommentar;
-    }
+  public void setErgebnisStatusNullFlavourDefiningCode(
+      NullFlavour ergebnisStatusNullFlavourDefiningCode) {
+     this.ergebnisStatusNullFlavourDefiningCode = ergebnisStatusNullFlavourDefiningCode;
+  }
 
-    public void setAnalytResultatValue(String analytResultatValue) {
-        this.analytResultatValue = analytResultatValue;
-    }
+  public NullFlavour getErgebnisStatusNullFlavourDefiningCode() {
+     return this.ergebnisStatusNullFlavourDefiningCode ;
+  }
 
-    public String getAnalytResultatValue() {
-        return this.analytResultatValue;
-    }
+  public void setZeitpunktErgebnisStatusValue(TemporalAccessor zeitpunktErgebnisStatusValue) {
+     this.zeitpunktErgebnisStatusValue = zeitpunktErgebnisStatusValue;
+  }
+
+  public TemporalAccessor getZeitpunktErgebnisStatusValue() {
+     return this.zeitpunktErgebnisStatusValue ;
+  }
+
+  public void setZeitpunktErgebnisStatusNullFlavourDefiningCode(
+      NullFlavour zeitpunktErgebnisStatusNullFlavourDefiningCode) {
+     this.zeitpunktErgebnisStatusNullFlavourDefiningCode = zeitpunktErgebnisStatusNullFlavourDefiningCode;
+  }
+
+  public NullFlavour getZeitpunktErgebnisStatusNullFlavourDefiningCode() {
+     return this.zeitpunktErgebnisStatusNullFlavourDefiningCode ;
+  }
+
+  public void setProbeIdNullFlavourDefiningCode(NullFlavour probeIdNullFlavourDefiningCode) {
+     this.probeIdNullFlavourDefiningCode = probeIdNullFlavourDefiningCode;
+  }
+
+  public NullFlavour getProbeIdNullFlavourDefiningCode() {
+     return this.probeIdNullFlavourDefiningCode ;
+  }
+
+  public void setKommentar(List<ProLaboranalytKommentarElement> kommentar) {
+     this.kommentar = kommentar;
+  }
+
+  public List<ProLaboranalytKommentarElement> getKommentar() {
+     return this.kommentar ;
+  }
+
+  public void setFeederAudit(FeederAudit feederAudit) {
+     this.feederAudit = feederAudit;
+  }
+
+  public FeederAudit getFeederAudit() {
+     return this.feederAudit ;
+  }
+
+  public void setProbeId(ProLaboranalytProbeIdChoice probeId) {
+     this.probeId = probeId;
+  }
+
+  public ProLaboranalytProbeIdChoice getProbeId() {
+     return this.probeId ;
+  }
+
+  public void setErgebnisStatus(ProLaboranalytErgebnisStatusChoice ergebnisStatus) {
+     this.ergebnisStatus = ergebnisStatus;
+  }
+
+  public ProLaboranalytErgebnisStatusChoice getErgebnisStatus() {
+     return this.ergebnisStatus ;
+  }
+
+  public void setMesswert(ProLaboranalytMesswertChoice messwert) {
+     this.messwert = messwert;
+  }
+
+  public ProLaboranalytMesswertChoice getMesswert() {
+     return this.messwert ;
+  }
 }

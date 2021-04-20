@@ -1,7 +1,11 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
+import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes.KrankheitsanzeichenCode;
 
 public enum KategorieDefiningCode implements EnumValueSet {
   DIAGNOSTIC_PROCEDURE("Diagnostic procedure", "", "SNOMED Clinical Terms", "103693007"),
@@ -40,6 +44,15 @@ public enum KategorieDefiningCode implements EnumValueSet {
     this.terminologyId = terminologyId;
     this.code = code;
   }
+
+  public static Map<String, KategorieDefiningCode> getCodesAsMap(){
+    Map<String, KategorieDefiningCode> kategorieDefiningCodeHashMap = new HashMap<>();
+    for (KategorieDefiningCode kategorieDefiningCode : KategorieDefiningCode.values()) {
+      kategorieDefiningCodeHashMap.put(kategorieDefiningCode.getCode(), kategorieDefiningCode);
+    }
+    return kategorieDefiningCodeHashMap;
+  }
+
 
   public String getValue() {
      return this.value ;
