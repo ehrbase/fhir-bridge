@@ -1,25 +1,8 @@
-fhir-bridge:
-  ehrbase:
-    base-url: http://localhost:8091/ehrbase/rest/openehr/v1/
-    security:
-      type: basic_auth
-      username: myuser
-      password: myPassword432
-    template:
-      prefix: classpath:/opt/
-  composition:
-    debug: false
-    output-directory: "src/main/resources/"
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: ${keycloak.url}/auth/realms/master/protocol/openid-connect/certs
   jpa:
     properties:
-      hibernate.show_sql: false
-      hibernate.format_sql: false
+      hibernate.show_sql: true
+      hibernate.format_sql: true
 logging:
   level:
     ca.uhn.fhir: info
@@ -30,12 +13,3 @@ logging:
     org.quartz: info
     org.springframework: info
     org.springframework.boot: info
-ipf:
-  atna:
-    audit-enabled: false
-    audit-repository-host: localhost
-    audit-repository-port: 3001
-  fhir:
-    fhir-version: r4
-keycloak:
-  url: http://localhost:8088

@@ -1,12 +1,19 @@
 # @formatter:off
+
 #
 # FHIR Bridge Properties
 #
 fhir-bridge:
-  # EHRbase Properties
+  # CORS Properties
+  cors:
+    allowed-headers: '*'
+    allowed-methods: '*'
+    allowed-origins: '*'
+  # Debug Properties
   debug:
     enabled: false
     mapping-output-directory: ${java.io.tmpdir}/mappings
+  # EHRbase Properties
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
     security:
@@ -21,11 +28,9 @@ fhir-bridge:
 #    basic:
 #      username:
 #      password:
-  fhir:
-    cors:
-      allowed-headers: '*'
-      allowed-methods: '*'
-      allowed-origins: '*'
+#    oauth2:
+#      jwk-set-uri:
+
 #
 # Spring Properties
 #
@@ -36,17 +41,15 @@ spring:
     exclude:
       - org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration
       - org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration
+      - org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration
       - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
       - org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration
       - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
+  # Batch Properties
   batch:
     job:
       enabled: false
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          jwk-set-uri: ${keycloak.url}/auth/realms/master/protocol/openid-connect/certs
+  # JPA Properties
   jpa:
     hibernate:
       ddl-auto: validate
@@ -62,6 +65,7 @@ spring:
       hibernate.search.model_mapping: ca.uhn.fhir.jpa.search.LuceneSearchMappingFactory
       hibernate.search.default.directory_provider: filesystem
       hibernate.search.lucene_version: LUCENE_CURRENT
+  # Liquibase Properties
   liquibase:
     database-change-log-table: DATABASE_CHANGELOG
     database-change-log-lock-table: DATABASE_CHANGELOG_LOCK
@@ -71,9 +75,9 @@ spring:
     use-code-as-default-message: true
 ipf:
   atna:
-    audit-enabled: true
-    audit-repository-host: localhost
-    audit-repository-port: 3001
+    audit-enabled: false
+#    audit-repository-host:
+#    audit-repository-port:
   fhir:
     fhir-version: r4
 server:
@@ -91,5 +95,3 @@ logging:
     org.quartz: warn
     org.springframework: warn
     org.springframework.boot: warn
-keycloak:
-  url: http://localhost:8088

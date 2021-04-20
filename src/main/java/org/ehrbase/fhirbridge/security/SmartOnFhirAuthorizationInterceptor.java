@@ -15,7 +15,6 @@
  */
 package org.ehrbase.fhirbridge.security;
 
-import ca.uhn.fhir.interceptor.api.Interceptor;
 import ca.uhn.fhir.rest.api.RestOperationTypeEnum;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import ca.uhn.fhir.rest.server.interceptor.auth.AuthorizationInterceptor;
@@ -23,12 +22,17 @@ import ca.uhn.fhir.rest.server.interceptor.auth.IAuthRule;
 import ca.uhn.fhir.rest.server.interceptor.auth.RuleBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.IdType;
+import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.UrlType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This interceptor changes the behavior of a @{@link ca.uhn.fhir.rest.server.RestfulServer}
@@ -36,24 +40,22 @@ import java.util.*;
  * by SMART on FHIR specifications.
  * See HAPI FHIR project documentation to understand how this access control mechanism works.
  */
-@Interceptor
-public class SmartOnFhirAuthzInterceptor extends AuthorizationInterceptor {
-
+public class SmartOnFhirAuthorizationInterceptor extends AuthorizationInterceptor {
 
     @Override
     public List<IAuthRule> buildRuleList(RequestDetails theRequestDetails) {
         List<IAuthRule> rules = new ArrayList<>();
 
         //allow unconditional access to metadata requests
-        if(theRequestDetails.getRestOperationType() == RestOperationTypeEnum.METADATA){
+        if (theRequestDetails.getRestOperationType() == RestOperationTypeEnum.METADATA) {
             return new RuleBuilder().allowAll("SOF_allow_all").build();
         }
 
         Jwt jwt =
-            ((JwtAuthenticationToken)SecurityContextHolder
-                .getContext()
-                .getAuthentication())
-                .getToken();
+                ((JwtAuthenticationToken) SecurityContextHolder
+                        .getContext()
+                        .getAuthentication())
+                        .getToken();
 
         //no jwt: no rules that would allow authorisation
         //we cannot even arrive at this point if spring oauth support is enabled:
@@ -64,7 +66,7 @@ public class SmartOnFhirAuthzInterceptor extends AuthorizationInterceptor {
                 addSmartOFPatientRules(smartOnFhirPatientId, rules);
                 addSmartOFWildcardAccess(smartOnFhirPatientId, rules, Condition.class);
                 rules.addAll(new RuleBuilder().denyAll("rule_deny_resource_if_no_SOF_patId_claim").build());
-            }else{ //non smart on fhir logic
+            } else { //non smart on fhir logic
                 rules.addAll(new RuleBuilder().allowAll("allow_all_operations_for_all_resources").build());
             }
         }
@@ -75,10 +77,11 @@ public class SmartOnFhirAuthzInterceptor extends AuthorizationInterceptor {
      * Allos read and write access to all Patients resources for a particular patient Id
      * In FHIR terms, if the resource's Patient compartment matches the provided id, then
      * read and write operations can take place.
+     *
      * @param pSmartOnFhirPatientId The patient identifier a resource should have to be allowed
      *                              for read or write access.
-     * @param rules A list of rules to add to. Rules based on the provided patient id will be
-     *              added to this collection.
+     * @param rules                 A list of rules to add to. Rules based on the provided patient id will be
+     *                              added to this collection.
      */
     private void addSmartOFPatientRules(String pSmartOnFhirPatientId, List<IAuthRule> rules) {
         //no create rule -> should be done by keycloak registration at the moment
@@ -102,33 +105,33 @@ public class SmartOnFhirAuthzInterceptor extends AuthorizationInterceptor {
         //you MUST use an UrlType, or search will be blocked.
         IdType sofId = new IdType(new UrlType("http://localhost:8082/fhir/Patient/" + pSmartOnFhirPatientId));
         rules
-            .addAll(
-                buildCreateRule(
-                    "rule_create_own_sof_" + pResourceType.getSimpleName() + "_resource",
-                    pResourceType,
-                    Patient.class.getSimpleName(),
-                    sofId));
+                .addAll(
+                        buildCreateRule(
+                                "rule_create_own_sof_" + pResourceType.getSimpleName() + "_resource",
+                                pResourceType,
+                                Patient.class.getSimpleName(),
+                                sofId));
         rules
-            .addAll(
-                buildReadRule(
-                    "rule_read_own_sof_" + pResourceType.getSimpleName() + "_resource",
-                    pResourceType,
-                    Patient.class.getSimpleName(),
-                    sofId));
+                .addAll(
+                        buildReadRule(
+                                "rule_read_own_sof_" + pResourceType.getSimpleName() + "_resource",
+                                pResourceType,
+                                Patient.class.getSimpleName(),
+                                sofId));
         rules
-            .addAll(
-                buildWriteRule(
-                    "rule_write_own_sof_" + pResourceType.getSimpleName() + "_resource",
-                    pResourceType,
-                    Patient.class.getSimpleName(),
-                    sofId));
+                .addAll(
+                        buildWriteRule(
+                                "rule_write_own_sof_" + pResourceType.getSimpleName() + "_resource",
+                                pResourceType,
+                                Patient.class.getSimpleName(),
+                                sofId));
         rules
-            .addAll(
-                buildDeleteRule(
-                    "rule_delete_own_sof_" + pResourceType.getSimpleName() + "_resource",
-                    pResourceType,
-                    Patient.class.getSimpleName(),
-                    sofId));
+                .addAll(
+                        buildDeleteRule(
+                                "rule_delete_own_sof_" + pResourceType.getSimpleName() + "_resource",
+                                pResourceType,
+                                Patient.class.getSimpleName(),
+                                sofId));
     }
 
     private List<IAuthRule> buildReadRule(String name,
@@ -136,11 +139,11 @@ public class SmartOnFhirAuthzInterceptor extends AuthorizationInterceptor {
                                           String compartmentName,
                                           IdType compartmentId) {
         return new RuleBuilder()
-            .allow(name)
-            .read()
-            .resourcesOfType(resource)
-            .inCompartment("Patient", compartmentId)
-            .build();
+                .allow(name)
+                .read()
+                .resourcesOfType(resource)
+                .inCompartment("Patient", compartmentId)
+                .build();
     }
 
     private List<IAuthRule> buildCreateRule(String name,
@@ -148,34 +151,34 @@ public class SmartOnFhirAuthzInterceptor extends AuthorizationInterceptor {
                                             String pCompartmentName,
                                             IdType pCompartmentId) {
         return new RuleBuilder()
-            .allow(name)
-            .create()
-            .resourcesOfType(resource)
-            .inCompartment(pCompartmentName, pCompartmentId)
-            .build();
+                .allow(name)
+                .create()
+                .resourcesOfType(resource)
+                .inCompartment(pCompartmentName, pCompartmentId)
+                .build();
     }
 
     private List<IAuthRule> buildWriteRule(String name,
                                            Class<? extends IBaseResource> resource,
                                            String pCompartmentName,
-                                            IdType pCompartmentId) {
+                                           IdType pCompartmentId) {
         return new RuleBuilder()
-            .allow(name)
-            .write()
-            .resourcesOfType(resource)
-            .inCompartment(pCompartmentName, pCompartmentId)
-            .build();
+                .allow(name)
+                .write()
+                .resourcesOfType(resource)
+                .inCompartment(pCompartmentName, pCompartmentId)
+                .build();
     }
 
     private List<IAuthRule> buildDeleteRule(String name,
-                                           Class<? extends IBaseResource> resource,
-                                           String pCompartmentName,
+                                            Class<? extends IBaseResource> resource,
+                                            String pCompartmentName,
                                             IdType pCompartmentId) {
         return new RuleBuilder()
-            .allow(name)
-            .delete()
-            .resourcesOfType(resource)
-            .inCompartment(pCompartmentName, pCompartmentId)
-            .build();
+                .allow(name)
+                .delete()
+                .resourcesOfType(resource)
+                .inCompartment(pCompartmentName, pCompartmentId)
+                .build();
     }
 }
