@@ -16,12 +16,8 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
-import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.hl7.fhir.r4.model.Procedure;
 import org.springframework.stereotype.Component;
@@ -35,41 +31,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProcedureRoutes extends AbstractRouteBuilder {
 
-    private final IFhirResourceDao<Procedure> procedureDao;
-
-    private final ResourceProfileValidator requestValidator;
-
-    private final EhrIdLookupProcessor ehrIdLookupProcessor;
-
-    private final DefaultExceptionHandler defaultExceptionHandler;
-
-    public ProcedureRoutes(IFhirResourceDao<Procedure> procedureDao,
-                           ResourceProfileValidator requestValidator,
-                           EhrIdLookupProcessor ehrIdLookupProcessor,
-                           DefaultExceptionHandler defaultExceptionHandler) {
-        this.procedureDao = procedureDao;
-        this.requestValidator = requestValidator;
-        this.ehrIdLookupProcessor = ehrIdLookupProcessor;
-        this.defaultExceptionHandler = defaultExceptionHandler;
-    }
-
     @Override
-    public void configure() {
+    public void configure() throws Exception {
         // @formatter:off
+        super.configure();
 
         // 'Create Procedure' route definition
         from("procedure-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
-            .onException(Exception.class)
-                .process(defaultExceptionHandler)
-            .end()
-            .process(requestValidator)
-            .bean(procedureDao, "create(${body})")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, body())
-            .setBody(simple("${body.resource}"))
-            .process(ehrIdLookupProcessor)
+            .process("resourceProfileValidator")
+            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("procedureDao", "create(${body}, ${headers.FhirRequestDetails})"))
+            .process("ehrIdLookupProcessor")
             .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .process(new ResourceResponseProcessor());
