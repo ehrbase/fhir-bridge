@@ -8,7 +8,6 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.ehrbase.client.openehrclient.OpenEhrClientConfig;
 import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
-import org.ehrbase.fhirbridge.config.ehrbase.AuthorizationType;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.ehrbase.webtemplate.templateprovider.TemplateProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -52,7 +51,7 @@ public class EhrbaseConfiguration {
         HttpClientBuilder builder = HttpClientBuilder.create();
 
         EhrbaseProperties.Security security = properties.getSecurity();
-        if (security.getType() == AuthorizationType.BASIC_AUTH) {
+        if (security.getType() == EhrbaseProperties.AuthorizationType.BASIC_AUTH) {
             CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(security.getUsername(), security.getPassword()));
             builder.setDefaultCredentialsProvider(credentialsProvider);
