@@ -19,7 +19,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * {@link Configuration Configuration} for EHRbase SDK.
+ * {@link Configuration} for EHRbase SDK.
  */
 @Configuration
 @EnableConfigurationProperties(EhrbaseProperties.class)

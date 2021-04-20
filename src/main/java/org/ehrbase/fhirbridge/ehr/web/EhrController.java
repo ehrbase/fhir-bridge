@@ -13,58 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ehrbase.fhirbridge.ehr.controller;
+package org.ehrbase.fhirbridge.ehr.web;
 
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.ehr.EhrStatus;
 import com.nedap.archie.rm.generic.PartySelf;
 import com.nedap.archie.rm.support.identification.GenericId;
 import com.nedap.archie.rm.support.identification.PartyRef;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.ehrbase.client.openehrclient.OpenEhrClientConfig;
-import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
-import org.ehrbase.fhirbridge.config.SmartOnFhirConfig;
-import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
-@EnableConfigurationProperties({SmartOnFhirConfig.class})
 @RestController
 @RequestMapping("/ehradmin")
 public class EhrController {
 
-    private final SmartOnFhirConfig _smartOnFhirConfig  ;
+    private final OpenEhrClient openEhrClient;
 
-    public EhrController(SmartOnFhirConfig pConfig) {
-        _smartOnFhirConfig = pConfig;
+    public EhrController(OpenEhrClient openEhrClient) {
+        this.openEhrClient = openEhrClient;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
+    @PostMapping
     public ResponseEntity<String> createEHR(@RequestParam String pPatientId) {
         try {
-            CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("myuser", "myPassword432"));
-
-            CloseableHttpClient httpClient = HttpClientBuilder.create()
-                .setDefaultCredentialsProvider(credentialsProvider)
-                .build();
-
-            DefaultRestClient client = new DefaultRestClient(
-                new OpenEhrClientConfig(new URI(_smartOnFhirConfig.getEhrBaseUrl())),
-                new ResourceTemplateProvider("classpath:/opt/*.opt"),
-                httpClient);
-
             //taken from EhrBase tests
             PartySelf subject = new PartySelf();
             PartyRef externalRef = new PartyRef();
@@ -78,14 +54,11 @@ public class EhrController {
             DvText dvText = new DvText("any EHR status");
             EhrStatus ehrStatus = new EhrStatus("openEHR-EHR-ITEM_TREE.generic.v1", dvText, subject, true, true, null);
 
-            return new ResponseEntity<>(
-                client.ehrEndpoint().createEhr(ehrStatus).toString(),
-                HttpStatus.OK
-            );
+            return ResponseEntity.ok(openEhrClient.ehrEndpoint().createEhr(ehrStatus).toString());
         } catch (Exception ex) {
             return new ResponseEntity<>(
-                "Error while creating an EHR for patient id " + pPatientId,
-                HttpStatus.INTERNAL_SERVER_ERROR);
+                    "Error while creating an EHR for patient id " + pPatientId,
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

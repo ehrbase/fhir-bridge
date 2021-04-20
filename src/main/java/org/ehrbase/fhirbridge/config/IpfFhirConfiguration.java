@@ -5,8 +5,8 @@ import ca.uhn.fhir.narrative.INarrativeGenerator;
 import ca.uhn.fhir.rest.server.IPagingProvider;
 import ca.uhn.fhir.rest.server.IServerAddressStrategy;
 import ca.uhn.fhir.rest.server.IServerConformanceProvider;
-import ca.uhn.fhir.rest.server.interceptor.CorsInterceptor;
 import ca.uhn.fhir.rest.server.interceptor.RequestValidatingInterceptor;
+import org.ehrbase.fhirbridge.security.SmartOnFhirAuthorizationInterceptor;
 import org.hl7.fhir.r4.model.CapabilityStatement;
 import org.openehealth.ipf.boot.fhir.IpfBootFhirServlet;
 import org.openehealth.ipf.boot.fhir.IpfFhirConfigurationProperties;
@@ -15,13 +15,12 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
 
 /**
  * {@link Configuration Configuration} for IPF FHIR Servlet.
  */
 @Configuration
-@EnableConfigurationProperties(FhirCorsProperties.class)
+@EnableConfigurationProperties(CorsProperties.class)
 public class IpfFhirConfiguration {
 
     @Bean
@@ -33,8 +32,7 @@ public class IpfFhirConfiguration {
                                       IServerAddressStrategy serverAddressStrategy,
                                       INarrativeGenerator narrativeGenerator,
                                       RequestValidatingInterceptor requestValidatingInterceptor,
-                                      CorsInterceptor corsInterceptor) {
-
+                                      ObjectProvider<SmartOnFhirAuthorizationInterceptor> authorizationInterceptors) {
         IpfFhirServlet fhirServlet = new IpfBootFhirServlet(fhirContext, pagingProvider);
         IpfFhirConfigurationProperties.Servlet servletProperties = properties.getServlet();
         fhirServlet.setLogging(servletProperties.isLogging());
@@ -52,19 +50,7 @@ public class IpfFhirConfiguration {
 
         // Register interceptors
         fhirServlet.registerInterceptor(requestValidatingInterceptor);
-        fhirServlet.registerInterceptor(corsInterceptor);
-
+        authorizationInterceptors.ifAvailable(fhirServlet::registerInterceptor);
         return fhirServlet;
-    }
-
-    @Bean
-    public CorsInterceptor corsInterceptor(FhirCorsProperties properties) {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedHeader(properties.getAllowedHeaders());
-        configuration.addAllowedOrigin(properties.getAllowedOrigins());
-        configuration.addAllowedMethod(properties.getAllowedMethods());
-        CorsInterceptor interceptor = new CorsInterceptor(configuration);
-        interceptor.setConfig(configuration);
-        return interceptor;
     }
 }
