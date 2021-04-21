@@ -19,7 +19,7 @@
     <other_details id="original_namespace"/>
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
-    <other_details id="MD5-CAM-1.0.1">36310c7656bcc20e9ab5c36a32072292</other_details>
+    <other_details id="MD5-CAM-1.0.1">f54a93b50397d62c402d2e223150bc8b</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
@@ -499,52 +499,77 @@
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>local_terms</value>
+                          <value>SNOMED Clinical Terms</value>
                         </terminology_id>
-                        <code_list>I25.29</code_list>
-                        <code_list>I10.90</code_list>
-                        <code_list>I73.9</code_list>
-                        <code_list>I49.9</code_list>
-                        <code_list>I50.9</code_list>
-                        <code_list>I25.1</code_list>
-                        <code_list>I65.2</code_list>
-                        <code_list>Z95.1</code_list>
-                        <code_list>Z95.5</code_list>
-                        <code_list>B20</code_list>
-                        <code_list>B21</code_list>
-                        <code_list>B22</code_list>
-                        <code_list>B24</code_list>
-                        <code_list>K28.9</code_list>
-                        <code_list>Z94.1</code_list>
-                        <code_list>Z94.2</code_list>
-                        <code_list>Z94.4</code_list>
-                        <code_list>Z94.0</code_list>
-                        <code_list>Z94.88</code_list>
-                        <code_list>Z94.5</code_list>
-                        <code_list>Z94.7</code_list>
-                        <code_list>Z95.5</code_list>
-                        <code_list>Z95.88</code_list>
-                        <code_list>Z94.6</code_list>
-                        <code_list>Z94.9</code_list>
-                        <code_list>Z94.80</code_list>
-                        <code_list>Z94.81</code_list>
-                        <code_list>Z94.3</code_list>
-                        <code_list>J18.9</code_list>
-                        <code_list>A41.9</code_list>
-                        <code_list>I82.9</code_list>
-                        <code_list>I26.9</code_list>
-                        <code_list>I64</code_list>
-                        <code_list>I21.9</code_list>
-                        <code_list>N17.9</code_list>
-                        <code_list>840539006</code_list>
-                        <code_list>840544004</code_list>
-                        <code_list>882784691000119000</code_list>
-                        <code_list>674814021000119106</code_list>
-                        <code_list>880529761000119102</code_list>
-                        <code_list>138389411000119105</code_list>
-                        <code_list>866151004</code_list>
-                        <code_list>866152006</code_list>
-                        <code_list>444932008</code_list>
+                        <code_list>195967001</code_list>
+                        <code_list>13645005</code_list>
+                        <code_list>51615001</code_list>
+                        <code_list>70995007</code_list>
+                        <code_list>190966007</code_list>
+                        <code_list>73430006</code_list>
+                        <code_list>78275009</code_list>
+                        <code_list>190905008</code_list>
+                        <code_list>38341003</code_list>
+                        <code_list>417662000:246090004=22298006</code_list>
+                        <code_list>698247007</code_list>
+                        <code_list>84114007</code_list>
+                        <code_list>399957001</code_list>
+                        <code_list>416940007:363589002=81266008</code_list>
+                        <code_list>53741008</code_list>
+                        <code_list>64586002</code_list>
+                        <code_list>197321007</code_list>
+                        <code_list>19943007</code_list>
+                        <code_list>10295004</code_list>
+                        <code_list>235890007</code_list>
+                        <code_list>24526004</code_list>
+                        <code_list>69896004</code_list>
+                        <code_list>105969002</code_list>
+                        <code_list>31996006</code_list>
+                        <code_list>36138009</code_list>
+                        <code_list>302509004</code_list>
+                        <code_list>181216001</code_list>
+                        <code_list>181268008</code_list>
+                        <code_list>181414000</code_list>
+                        <code_list>181277001</code_list>
+                        <code_list>113276009</code_list>
+                        <code_list>181250005</code_list>
+                        <code_list>181254001</code_list>
+                        <code_list>119181002</code_list>
+                        <code_list>181162001</code_list>
+                        <code_list>41845008</code_list>
+                        <code_list>181285005</code_list>
+                        <code_list>119206002</code_list>
+                        <code_list>8935007</code_list>
+                        <code_list>3138006</code_list>
+                        <code_list>309312004</code_list>
+                        <code_list>13024002</code_list>
+                        <code_list>46635009</code_list>
+                        <code_list>44054006</code_list>
+                        <code_list>237599002</code_list>
+                        <code_list>8801005</code_list>
+                        <code_list>128283000</code_list>
+                        <code_list>74732009</code_list>
+                        <code_list>197480006</code_list>
+                        <code_list>35489007</code_list>
+                        <code_list>69322001</code_list>
+                        <code_list>49049000</code_list>
+                        <code_list>52448006</code_list>
+                        <code_list>24700007</code_list>
+                        <code_list>257277002</code_list>
+                        <code_list>84757009</code_list>
+                        <code_list>37796009</code_list>
+                        <code_list>440140008</code_list>
+                        <code_list>429993008</code_list>
+                        <code_list>714152005</code_list>
+                        <code_list>431855005</code_list>
+                        <code_list>431856006</code_list>
+                        <code_list>433144002</code_list>
+                        <code_list>431857002</code_list>
+                        <code_list>433146000</code_list>
+                        <code_list>709044004</code_list>
+                        <code_list>86406008</code_list>
+                        <code_list>363346000</code_list>
+                        <code_list>40845000</code_list>
                       </children>
                     </attributes>
                   </children>
@@ -1534,134 +1559,212 @@ Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben is
           <items id="description">Geschätzte oder exakte Zeit (bzw. Datum), zu der die Krankheitsanzeichen oder Symptome zum ersten mal beobachtet wurden.</items>
           <items id="text">Datum/ Zeitpunkt des Auftretens/ der Erstdiagnose</items>
         </term_definitions>
-        <term_definitions code="I25.29">
-          <items id="text">Alter Myokardinfarkt Nicht näher bezeichnet</items>
+        <term_definitions code="195967001">
+          <items id="text">Asthma (disorder)</items>
         </term_definitions>
-        <term_definitions code="I10.90">
-          <items id="text">Essentielle Hypertonie, nicht näher bezeichnet : Ohne Angabe einer hypertensiven Krise</items>
+        <term_definitions code="13645005">
+          <items id="text">Chronic obstructive lung disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="I73.9">
-          <items id="text">Periphere Gefäßkrankheit, nicht näher bezeichnet</items>
+        <term_definitions code="51615001">
+          <items id="text">Fibrosis of lung (disorder) Lungenfibrose</items>
         </term_definitions>
-        <term_definitions code="I49.9">
-          <items id="text">Kardiale Arrhythmie, nicht näher bezeichnet</items>
+        <term_definitions code="70995007">
+          <items id="text">Pulmonary hypertension (disorder)</items>
         </term_definitions>
-        <term_definitions code="I50.9">
-          <items id="text">Herzinsuffizienz, nicht näher bezeichnet</items>
+        <term_definitions code="190966007">
+          <items id="text">Extreme obesity with alveolar hypoventilation (disorder)</items>
         </term_definitions>
-        <term_definitions code="I25.1">
-          <items id="text">Atherosklerotische Herzkrankheit</items>
+        <term_definitions code="73430006">
+          <items id="text">Sleep apnea (disorder)</items>
         </term_definitions>
-        <term_definitions code="I65.2">
-          <items id="text">Verschluss und Stenose der A. carotis</items>
+        <term_definitions code="78275009">
+          <items id="text">Obstructive sleep apnea syndrome (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z95.1">
-          <items id="text">Vorhandensein eines aortokoronaren Bypasses</items>
+        <term_definitions code="190905008">
+          <items id="text">Cystic fibrosis (disorder) Cystische Fibrose</items>
         </term_definitions>
-        <term_definitions code="Z95.5">
-          <items id="text">Vorhandensein eines Implantates oder Transplantates nach koronarer Gefäßplastik</items>
+        <term_definitions code="38341003">
+          <items id="text">Hypertensive disorder, systemic arterial (disorder)</items>
         </term_definitions>
-        <term_definitions code="B20">
-          <items id="text">Infektiöse und parasitäre Krankheiten infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="417662000:246090004=22298006">
+          <items id="text">|History of clinical finding in subject (situation)|:|Associated finding (attribute)|=|Myocardial infarction (disorder)| Zustand nach Herzinfarkt</items>
         </term_definitions>
-        <term_definitions code="B21">
-          <items id="text">Bösartige Neubildungen infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="698247007">
+          <items id="text">Cardiac arrhythmia (disorder) Herzrhythmusstörungen</items>
         </term_definitions>
-        <term_definitions code="B22">
-          <items id="text">Sonstige näher bezeichnete Krankheiten infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="84114007">
+          <items id="text">Heart failure (disorder) Herzinsuffizienz</items>
         </term_definitions>
-        <term_definitions code="B24">
-          <items id="text">Nicht näher bezeichnete HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="399957001">
+          <items id="text">Peripheral arterial occlusive disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="K28.9">
-          <items id="text">Ulcus pepticum jejuni : Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation</items>
+        <term_definitions code="416940007:363589002=81266008">
+          <items id="text">|Past history of procedure (situation)|:|Associated procedure (attribute)|=|Heart revascularization (procedure)|</items>
         </term_definitions>
-        <term_definitions code="Z94.1">
-          <items id="text">Zustand nach Herztransplantation</items>
+        <term_definitions code="53741008">
+          <items id="text">Coronary arteriosclerosis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.2">
-          <items id="text">Zustand nach Lungentransplantation</items>
+        <term_definitions code="64586002">
+          <items id="text">Carotid artery stenosis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.4">
-          <items id="text">Zustand nach Lebertransplantation</items>
+        <term_definitions code="197321007">
+          <items id="text">Steatosis of liver (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.0">
-          <items id="text">Zustand nach Nierentransplantation</items>
+        <term_definitions code="19943007">
+          <items id="text">Cirrhosis of liver (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.88">
-          <items id="text">Zustand nach sonstiger Organ- oder Gewebetransplantation Inkl.: Darm Pankreas</items>
+        <term_definitions code="10295004">
+          <items id="text">Chronic viral hepatitis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.5">
-          <items id="text">Zustand nach Hauttransplantation</items>
+        <term_definitions code="235890007">
+          <items id="text">Autoimmune liver disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.7">
-          <items id="text">Zustand nach Keratoplastik</items>
+        <term_definitions code="24526004">
+          <items id="text">Inflammatory bowel disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z95.88">
-          <items id="text">Vorhandensein von sonstigen kardialen oder vaskulären Implantaten oder Transplantaten</items>
+        <term_definitions code="69896004">
+          <items id="text">Rheumatoid arthritis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.6">
-          <items id="text">Zustand nach Knochentransplantation</items>
+        <term_definitions code="105969002">
+          <items id="text">Disorder of connective tissue (disorder</items>
         </term_definitions>
-        <term_definitions code="Z94.9">
-          <items id="text">Zustand nach Organ- oder Gewebetransplantation, nicht näher bezeichnet</items>
+        <term_definitions code="31996006">
+          <items id="text">Vasculitis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.80">
-          <items id="text">Zustand nach hämatopoetischer Stammzelltransplantation ohne gegenwärtige Immunsuppression</items>
+        <term_definitions code="36138009">
+          <items id="text">Congenital immunodeficiency disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.81">
-          <items id="text">Zustand nach hämatopoetischer Stammzelltransplantation mit gegenwärtiger Immunsuppression</items>
+        <term_definitions code="302509004">
+          <items id="text">Entire heart (body structure)</items>
         </term_definitions>
-        <term_definitions code="Z94.3">
-          <items id="text">Zustand nach Herz-Lungen-Transplantation</items>
+        <term_definitions code="181216001">
+          <items id="text">Entire lung (body structure)</items>
         </term_definitions>
-        <term_definitions code="J18.9">
-          <items id="text">Pneumonie, nicht näher bezeichnet</items>
+        <term_definitions code="181268008">
+          <items id="text">Entire liver (body structure)</items>
         </term_definitions>
-        <term_definitions code="A41.9">
-          <items id="text">Sepsis, nicht näher bezeichnet</items>
+        <term_definitions code="181414000">
+          <items id="text">Entire kidney (body structure)</items>
         </term_definitions>
-        <term_definitions code="I82.9">
-          <items id="text">Embolie und Thrombose nicht näher bezeichneter Vene</items>
+        <term_definitions code="181277001">
+          <items id="text">Entire pancreas (body structure)</items>
         </term_definitions>
-        <term_definitions code="I26.9">
-          <items id="text">Lungenembolie ohne Angabe eines akuten Cor pulmonale</items>
+        <term_definitions code="113276009">
+          <items id="text">Intestinal structure (body structure)</items>
         </term_definitions>
-        <term_definitions code="I64">
-          <items id="text">Schlaganfall, nicht als Blutung oder Infarkt bezeichnet</items>
+        <term_definitions code="181250005">
+          <items id="text">Entire small intestine (body structure)</items>
         </term_definitions>
-        <term_definitions code="I21.9">
-          <items id="text">Akuter Myokardinfarkt, nicht näher bezeichnet</items>
+        <term_definitions code="181254001">
+          <items id="text">Entire large intestine (body structure)</items>
         </term_definitions>
-        <term_definitions code="N17.9">
-          <items id="text">Akutes Nierenversagen, nicht näher bezeichnet</items>
+        <term_definitions code="119181002">
+          <items id="text">Skin part (body structure)</items>
         </term_definitions>
-        <term_definitions code="840539006">
-          <items id="text">Disease caused by 2019 novel coronavirus (disorder)</items>
+        <term_definitions code="181162001">
+          <items id="text">Entire cornea (body structure)</items>
         </term_definitions>
-        <term_definitions code="840544004">
-          <items id="text">Suspected disease caused by 2019 novel coronavirus (situation)</items>
+        <term_definitions code="41845008">
+          <items id="text">Ear ossicle structure (body structure)</items>
         </term_definitions>
-        <term_definitions code="882784691000119000">
-          <items id="text">Pneumonia caused by severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        <term_definitions code="181285005">
+          <items id="text">Entire heart valve (body structure)</items>
         </term_definitions>
-        <term_definitions code="674814021000119106">
-          <items id="text">Acute respiratory distress syndrome caused by severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        <term_definitions code="119206002">
+          <items id="text">Blood vessel part (body structure)</items>
         </term_definitions>
-        <term_definitions code="880529761000119102">
-          <items id="text">Lower respiratory infection caused by severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        <term_definitions code="8935007">
+          <items id="text">Cerebral meninges structure (body structure)</items>
         </term_definitions>
-        <term_definitions code="138389411000119105">
-          <items id="text">Acute bronchitis caused by severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        <term_definitions code="3138006">
+          <items id="text">Bone (tissue) structure (body structure)</items>
         </term_definitions>
-        <term_definitions code="866151004">
-          <items id="text">Lymphocytopenia associated with severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        <term_definitions code="309312004">
+          <items id="text">Cartilage tissue (body structure)</items>
         </term_definitions>
-        <term_definitions code="866152006">
-          <items id="text">Thrombocytopenia associated with severe acute respiratory syndrome coronavirus 2 (disorder)</items>
+        <term_definitions code="13024002">
+          <items id="text">Tendon structure (body structure)</items>
         </term_definitions>
-        <term_definitions code="444932008">
-          <items id="text">Dependence on ventilator (finding)</items>
+        <term_definitions code="46635009">
+          <items id="text">Diabetes mellitus type 1 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="44054006">
+          <items id="text">Diabetes mellitus type 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="237599002">
+          <items id="text">Insulin treated type 2 diabetes mellitus (disorder)</items>
+        </term_definitions>
+        <term_definitions code="8801005">
+          <items id="text">Secondary diabetes mellitus (disorder)</items>
+        </term_definitions>
+        <term_definitions code="128283000">
+          <items id="text">Chronic nervous system disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="74732009">
+          <items id="text">Mental disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="197480006">
+          <items id="text">Anxiety disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="35489007">
+          <items id="text">Depressive disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="69322001">
+          <items id="text">Psychotic disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="49049000">
+          <items id="text">Parkinson's disease (disorder)</items>
+        </term_definitions>
+        <term_definitions code="52448006">
+          <items id="text">Dementia (disorder)</items>
+        </term_definitions>
+        <term_definitions code="24700007">
+          <items id="text">Multiple sclerosis (disorder)</items>
+        </term_definitions>
+        <term_definitions code="257277002">
+          <items id="text">Combined disorder of muscle AND peripheral nerve (disorder)</items>
+        </term_definitions>
+        <term_definitions code="84757009">
+          <items id="text">Epilepsy (disorder)</items>
+        </term_definitions>
+        <term_definitions code="37796009">
+          <items id="text">Migraine (disorder)</items>
+        </term_definitions>
+        <term_definitions code="440140008">
+          <items id="text">History of cerebrovascular accident with residual deficit (situation)</items>
+        </term_definitions>
+        <term_definitions code="429993008">
+          <items id="text">History of cerebrovascular accident without residual deficits (situation</items>
+        </term_definitions>
+        <term_definitions code="714152005">
+          <items id="text">Chronic kidney disease stage 5 on dialysis (disorder)</items>
+        </term_definitions>
+        <term_definitions code="431855005">
+          <items id="text">Chronic kidney disease stage 1 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="431856006">
+          <items id="text">Chronic kidney disease stage 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="433144002">
+          <items id="text">Chronic kidney disease stage 3 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="431857002">
+          <items id="text">Chronic kidney disease stage 4 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="433146000">
+          <items id="text">Chronic kidney disease stage 5 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="709044004">
+          <items id="text">Chronic kidney disease (disorder)</items>
+        </term_definitions>
+        <term_definitions code="86406008">
+          <items id="text">Human immunodeficiency virus infection</items>
+        </term_definitions>
+        <term_definitions code="363346000">
+          <items id="text">Malignant neoplastic disease</items>
+        </term_definitions>
+        <term_definitions code="40845000">
+          <items id="text">Gastrointestinal ulcer</items>
         </term_definitions>
         <term_definitions code="255604002">
           <items id="text">Mild (qualifier value)</items>
@@ -1925,43 +2028,77 @@ Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben is
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>ICD</value>
+                          <value>SNOMED Clinical Terms</value>
                         </terminology_id>
-                        <code_list>I25.29</code_list>
-                        <code_list>I10.90</code_list>
-                        <code_list>I73.9</code_list>
-                        <code_list>I49.9</code_list>
-                        <code_list>I50.9</code_list>
-                        <code_list>I25.1</code_list>
-                        <code_list>I65.2</code_list>
-                        <code_list>Z95.1</code_list>
-                        <code_list>Z95.5</code_list>
-                        <code_list>B20</code_list>
-                        <code_list>B21</code_list>
-                        <code_list>B22</code_list>
-                        <code_list>B24</code_list>
-                        <code_list>K28.9</code_list>
-                        <code_list>Z94.1</code_list>
-                        <code_list>Z94.2</code_list>
-                        <code_list>Z94.4</code_list>
-                        <code_list>Z94.0</code_list>
-                        <code_list>Z94.88</code_list>
-                        <code_list>Z94.5</code_list>
-                        <code_list>Z94.7</code_list>
-                        <code_list>Z95.5</code_list>
-                        <code_list>Z95.88</code_list>
-                        <code_list>Z94.6</code_list>
-                        <code_list>Z94.9</code_list>
-                        <code_list>Z94.80</code_list>
-                        <code_list>Z94.81</code_list>
-                        <code_list>Z94.3</code_list>
-                        <code_list>J18.9</code_list>
-                        <code_list>A41.9</code_list>
-                        <code_list>I82.9</code_list>
-                        <code_list>I26.9</code_list>
-                        <code_list>I64</code_list>
-                        <code_list>I21.9</code_list>
-                        <code_list>N17.9</code_list>
+                        <code_list>195967001</code_list>
+                        <code_list>13645005</code_list>
+                        <code_list>51615001</code_list>
+                        <code_list>70995007</code_list>
+                        <code_list>190966007</code_list>
+                        <code_list>73430006</code_list>
+                        <code_list>78275009</code_list>
+                        <code_list>190905008</code_list>
+                        <code_list>38341003</code_list>
+                        <code_list>417662000:246090004=22298006</code_list>
+                        <code_list>698247007</code_list>
+                        <code_list>84114007</code_list>
+                        <code_list>399957001</code_list>
+                        <code_list>416940007:363589002=81266008</code_list>
+                        <code_list>53741008</code_list>
+                        <code_list>64586002</code_list>
+                        <code_list>197321007</code_list>
+                        <code_list>19943007</code_list>
+                        <code_list>10295004</code_list>
+                        <code_list>235890007</code_list>
+                        <code_list>24526004</code_list>
+                        <code_list>69896004</code_list>
+                        <code_list>105969002</code_list>
+                        <code_list>31996006</code_list>
+                        <code_list>36138009</code_list>
+                        <code_list>302509004</code_list>
+                        <code_list>181216001</code_list>
+                        <code_list>181268008</code_list>
+                        <code_list>181414000</code_list>
+                        <code_list>181277001</code_list>
+                        <code_list>113276009</code_list>
+                        <code_list>181250005</code_list>
+                        <code_list>181254001</code_list>
+                        <code_list>119181002</code_list>
+                        <code_list>181162001</code_list>
+                        <code_list>41845008</code_list>
+                        <code_list>181285005</code_list>
+                        <code_list>119206002</code_list>
+                        <code_list>8935007</code_list>
+                        <code_list>3138006</code_list>
+                        <code_list>309312004</code_list>
+                        <code_list>13024002</code_list>
+                        <code_list>46635009</code_list>
+                        <code_list>44054006</code_list>
+                        <code_list>237599002</code_list>
+                        <code_list>8801005</code_list>
+                        <code_list>128283000</code_list>
+                        <code_list>74732009</code_list>
+                        <code_list>197480006</code_list>
+                        <code_list>35489007</code_list>
+                        <code_list>69322001</code_list>
+                        <code_list>49049000</code_list>
+                        <code_list>52448006</code_list>
+                        <code_list>24700007</code_list>
+                        <code_list>257277002</code_list>
+                        <code_list>84757009</code_list>
+                        <code_list>37796009</code_list>
+                        <code_list>440140008</code_list>
+                        <code_list>429993008</code_list>
+                        <code_list>714152005</code_list>
+                        <code_list>431855005</code_list>
+                        <code_list>431856006</code_list>
+                        <code_list>433144002</code_list>
+                        <code_list>431857002</code_list>
+                        <code_list>433146000</code_list>
+                        <code_list>709044004</code_list>
+                        <code_list>86406008</code_list>
+                        <code_list>363346000</code_list>
+                        <code_list>40845000</code_list>
                       </children>
                     </attributes>
                   </children>
@@ -2167,107 +2304,212 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
         <term_definitions code="410594000">
           <items id="text">Known absent (qualifier value)</items>
         </term_definitions>
-        <term_definitions code="I25.29">
-          <items id="text">Alter Myokardinfarkt Nicht näher bezeichnet</items>
+        <term_definitions code="195967001">
+          <items id="text">Asthma (disorder)</items>
         </term_definitions>
-        <term_definitions code="I10.90">
-          <items id="text">Essentielle Hypertonie, nicht näher bezeichnet :  Ohne Angabe einer hypertensiven Krise</items>
+        <term_definitions code="13645005">
+          <items id="text">Chronic obstructive lung disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="I73.9">
-          <items id="text">Periphere Gefäßkrankheit, nicht näher bezeichnet</items>
+        <term_definitions code="51615001">
+          <items id="text">Fibrosis of lung (disorder) Lungenfibrose</items>
         </term_definitions>
-        <term_definitions code="I49.9">
-          <items id="text">Kardiale Arrhythmie, nicht näher bezeichnet</items>
+        <term_definitions code="70995007">
+          <items id="text">Pulmonary hypertension (disorder)</items>
         </term_definitions>
-        <term_definitions code="I50.9">
-          <items id="text">Herzinsuffizienz, nicht näher bezeichnet</items>
+        <term_definitions code="190966007">
+          <items id="text">Extreme obesity with alveolar hypoventilation (disorder)</items>
         </term_definitions>
-        <term_definitions code="I25.1">
-          <items id="text">Atherosklerotische Herzkrankheit</items>
+        <term_definitions code="73430006">
+          <items id="text">Sleep apnea (disorder)</items>
         </term_definitions>
-        <term_definitions code="I65.2">
-          <items id="text">Verschluss und Stenose der A. carotis</items>
+        <term_definitions code="78275009">
+          <items id="text">Obstructive sleep apnea syndrome (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z95.1">
-          <items id="text">Vorhandensein eines aortokoronaren Bypasses</items>
+        <term_definitions code="190905008">
+          <items id="text">Cystic fibrosis (disorder) Cystische Fibrose</items>
         </term_definitions>
-        <term_definitions code="Z95.5">
-          <items id="text">Vorhandensein eines Implantates oder Transplantates nach koronarer Gefäßplastik</items>
+        <term_definitions code="38341003">
+          <items id="text">Hypertensive disorder, systemic arterial (disorder)</items>
         </term_definitions>
-        <term_definitions code="B20">
-          <items id="text">Infektiöse und parasitäre Krankheiten infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="417662000:246090004=22298006">
+          <items id="text">|History of clinical finding in subject (situation)|:|Associated finding (attribute)|=|Myocardial infarction (disorder)| Zustand nach Herzinfarkt</items>
         </term_definitions>
-        <term_definitions code="B21">
-          <items id="text">Bösartige Neubildungen infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="698247007">
+          <items id="text">Cardiac arrhythmia (disorder) Herzrhythmusstörungen</items>
         </term_definitions>
-        <term_definitions code="B22">
-          <items id="text">Sonstige näher bezeichnete Krankheiten infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="84114007">
+          <items id="text">Heart failure (disorder) Herzinsuffizienz</items>
         </term_definitions>
-        <term_definitions code="B24">
-          <items id="text">Nicht näher bezeichnete HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="399957001">
+          <items id="text">Peripheral arterial occlusive disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="K28.9">
-          <items id="text">Ulcus pepticum jejuni :  Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation</items>
+        <term_definitions code="416940007:363589002=81266008">
+          <items id="text">|Past history of procedure (situation)|:|Associated procedure (attribute)|=|Heart revascularization (procedure)|</items>
         </term_definitions>
-        <term_definitions code="Z94.1">
-          <items id="text">Zustand nach Herztransplantation</items>
+        <term_definitions code="53741008">
+          <items id="text">Coronary arteriosclerosis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.2">
-          <items id="text">Zustand nach Lungentransplantation</items>
+        <term_definitions code="64586002">
+          <items id="text">Carotid artery stenosis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.4">
-          <items id="text">Zustand nach Lebertransplantation</items>
+        <term_definitions code="197321007">
+          <items id="text">Steatosis of liver (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.0">
-          <items id="text">Zustand nach Nierentransplantation</items>
+        <term_definitions code="19943007">
+          <items id="text">Cirrhosis of liver (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.88">
-          <items id="text">Zustand nach sonstiger Organ- oder Gewebetransplantation Inkl.: Darm Pankreas</items>
+        <term_definitions code="10295004">
+          <items id="text">Chronic viral hepatitis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.5">
-          <items id="text">Zustand nach Hauttransplantation</items>
+        <term_definitions code="235890007">
+          <items id="text">Autoimmune liver disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.7">
-          <items id="text">Zustand nach Keratoplastik</items>
+        <term_definitions code="24526004">
+          <items id="text">Inflammatory bowel disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z95.88">
-          <items id="text">Vorhandensein von sonstigen kardialen oder vaskulären Implantaten oder Transplantaten</items>
+        <term_definitions code="69896004">
+          <items id="text">Rheumatoid arthritis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.6">
-          <items id="text">Zustand nach Knochentransplantation</items>
+        <term_definitions code="105969002">
+          <items id="text">Disorder of connective tissue (disorder</items>
         </term_definitions>
-        <term_definitions code="Z94.9">
-          <items id="text">Zustand nach Organ- oder Gewebetransplantation, nicht näher bezeichnet</items>
+        <term_definitions code="31996006">
+          <items id="text">Vasculitis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.80">
-          <items id="text">Zustand nach hämatopoetischer Stammzelltransplantation ohne gegenwärtige Immunsuppression</items>
+        <term_definitions code="36138009">
+          <items id="text">Congenital immunodeficiency disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.81">
-          <items id="text">Zustand nach hämatopoetischer Stammzelltransplantation mit gegenwärtiger Immunsuppression</items>
+        <term_definitions code="302509004">
+          <items id="text">Entire heart (body structure)</items>
         </term_definitions>
-        <term_definitions code="Z94.3">
-          <items id="text">Zustand nach Herz-Lungen-Transplantation</items>
+        <term_definitions code="181216001">
+          <items id="text">Entire lung (body structure)</items>
         </term_definitions>
-        <term_definitions code="J18.9">
-          <items id="text">Pneumonie, nicht näher bezeichnet</items>
+        <term_definitions code="181268008">
+          <items id="text">Entire liver (body structure)</items>
         </term_definitions>
-        <term_definitions code="A41.9">
-          <items id="text">Sepsis, nicht näher bezeichnet</items>
+        <term_definitions code="181414000">
+          <items id="text">Entire kidney (body structure)</items>
         </term_definitions>
-        <term_definitions code="I82.9">
-          <items id="text">Embolie und Thrombose nicht näher bezeichneter Vene</items>
+        <term_definitions code="181277001">
+          <items id="text">Entire pancreas (body structure)</items>
         </term_definitions>
-        <term_definitions code="I26.9">
-          <items id="text">Lungenembolie ohne Angabe eines akuten Cor pulmonale</items>
+        <term_definitions code="113276009">
+          <items id="text">Intestinal structure (body structure)</items>
         </term_definitions>
-        <term_definitions code="I64">
-          <items id="text">Schlaganfall, nicht als Blutung oder Infarkt bezeichnet</items>
+        <term_definitions code="181250005">
+          <items id="text">Entire small intestine (body structure)</items>
         </term_definitions>
-        <term_definitions code="I21.9">
-          <items id="text">Akuter Myokardinfarkt, nicht näher bezeichnet</items>
+        <term_definitions code="181254001">
+          <items id="text">Entire large intestine (body structure)</items>
         </term_definitions>
-        <term_definitions code="N17.9">
-          <items id="text">Akutes Nierenversagen, nicht näher bezeichnet</items>
+        <term_definitions code="119181002">
+          <items id="text">Skin part (body structure)</items>
+        </term_definitions>
+        <term_definitions code="181162001">
+          <items id="text">Entire cornea (body structure)</items>
+        </term_definitions>
+        <term_definitions code="41845008">
+          <items id="text">Ear ossicle structure (body structure)</items>
+        </term_definitions>
+        <term_definitions code="181285005">
+          <items id="text">Entire heart valve (body structure)</items>
+        </term_definitions>
+        <term_definitions code="119206002">
+          <items id="text">Blood vessel part (body structure)</items>
+        </term_definitions>
+        <term_definitions code="8935007">
+          <items id="text">Cerebral meninges structure (body structure)</items>
+        </term_definitions>
+        <term_definitions code="3138006">
+          <items id="text">Bone (tissue) structure (body structure)</items>
+        </term_definitions>
+        <term_definitions code="309312004">
+          <items id="text">Cartilage tissue (body structure)</items>
+        </term_definitions>
+        <term_definitions code="13024002">
+          <items id="text">Tendon structure (body structure)</items>
+        </term_definitions>
+        <term_definitions code="46635009">
+          <items id="text">Diabetes mellitus type 1 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="44054006">
+          <items id="text">Diabetes mellitus type 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="237599002">
+          <items id="text">Insulin treated type 2 diabetes mellitus (disorder)</items>
+        </term_definitions>
+        <term_definitions code="8801005">
+          <items id="text">Secondary diabetes mellitus (disorder)</items>
+        </term_definitions>
+        <term_definitions code="128283000">
+          <items id="text">Chronic nervous system disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="74732009">
+          <items id="text">Mental disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="197480006">
+          <items id="text">Anxiety disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="35489007">
+          <items id="text">Depressive disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="69322001">
+          <items id="text">Psychotic disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="49049000">
+          <items id="text">Parkinson's disease (disorder)</items>
+        </term_definitions>
+        <term_definitions code="52448006">
+          <items id="text">Dementia (disorder)</items>
+        </term_definitions>
+        <term_definitions code="24700007">
+          <items id="text">Multiple sclerosis (disorder)</items>
+        </term_definitions>
+        <term_definitions code="257277002">
+          <items id="text">Combined disorder of muscle AND peripheral nerve (disorder)</items>
+        </term_definitions>
+        <term_definitions code="84757009">
+          <items id="text">Epilepsy (disorder)</items>
+        </term_definitions>
+        <term_definitions code="37796009">
+          <items id="text">Migraine (disorder)</items>
+        </term_definitions>
+        <term_definitions code="440140008">
+          <items id="text">History of cerebrovascular accident with residual deficit (situation)</items>
+        </term_definitions>
+        <term_definitions code="429993008">
+          <items id="text">History of cerebrovascular accident without residual deficits (situation</items>
+        </term_definitions>
+        <term_definitions code="714152005">
+          <items id="text">Chronic kidney disease stage 5 on dialysis (disorder)</items>
+        </term_definitions>
+        <term_definitions code="431855005">
+          <items id="text">Chronic kidney disease stage 1 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="431856006">
+          <items id="text">Chronic kidney disease stage 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="433144002">
+          <items id="text">Chronic kidney disease stage 3 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="431857002">
+          <items id="text">Chronic kidney disease stage 4 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="433146000">
+          <items id="text">Chronic kidney disease stage 5 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="709044004">
+          <items id="text">Chronic kidney disease (disorder)</items>
+        </term_definitions>
+        <term_definitions code="86406008">
+          <items id="text">Human immunodeficiency virus infection</items>
+        </term_definitions>
+        <term_definitions code="363346000">
+          <items id="text">Malignant neoplastic disease</items>
+        </term_definitions>
+        <term_definitions code="40845000">
+          <items id="text">Gastrointestinal ulcer</items>
         </term_definitions>
       </children>
       <children xsi:type="C_ARCHETYPE_ROOT">
@@ -2366,43 +2608,77 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>ICD</value>
+                          <value>SNOMED Clinical Terms</value>
                         </terminology_id>
-                        <code_list>I25.29</code_list>
-                        <code_list>I10.90</code_list>
-                        <code_list>I73.9</code_list>
-                        <code_list>I49.9</code_list>
-                        <code_list>I50.9</code_list>
-                        <code_list>I25.1</code_list>
-                        <code_list>I65.2</code_list>
-                        <code_list>Z95.1</code_list>
-                        <code_list>Z95.5</code_list>
-                        <code_list>B20</code_list>
-                        <code_list>B21</code_list>
-                        <code_list>B22</code_list>
-                        <code_list>B24</code_list>
-                        <code_list>K28.9</code_list>
-                        <code_list>Z94.1</code_list>
-                        <code_list>Z94.2</code_list>
-                        <code_list>Z94.4</code_list>
-                        <code_list>Z94.0</code_list>
-                        <code_list>Z94.88</code_list>
-                        <code_list>Z94.5</code_list>
-                        <code_list>Z94.7</code_list>
-                        <code_list>Z95.5</code_list>
-                        <code_list>Z95.88</code_list>
-                        <code_list>Z94.6</code_list>
-                        <code_list>Z94.9</code_list>
-                        <code_list>Z94.80</code_list>
-                        <code_list>Z94.81</code_list>
-                        <code_list>Z94.3</code_list>
-                        <code_list>J18.9</code_list>
-                        <code_list>A41.9</code_list>
-                        <code_list>I82.9</code_list>
-                        <code_list>I26.9</code_list>
-                        <code_list>I64</code_list>
-                        <code_list>I21.9</code_list>
-                        <code_list>N17.9</code_list>
+                        <code_list>195967001</code_list>
+                        <code_list>13645005</code_list>
+                        <code_list>51615001</code_list>
+                        <code_list>70995007</code_list>
+                        <code_list>190966007</code_list>
+                        <code_list>73430006</code_list>
+                        <code_list>78275009</code_list>
+                        <code_list>190905008</code_list>
+                        <code_list>38341003</code_list>
+                        <code_list>417662000:246090004=22298006</code_list>
+                        <code_list>698247007</code_list>
+                        <code_list>84114007</code_list>
+                        <code_list>399957001</code_list>
+                        <code_list>416940007:363589002=81266008</code_list>
+                        <code_list>53741008</code_list>
+                        <code_list>64586002</code_list>
+                        <code_list>197321007</code_list>
+                        <code_list>19943007</code_list>
+                        <code_list>10295004</code_list>
+                        <code_list>235890007</code_list>
+                        <code_list>24526004</code_list>
+                        <code_list>69896004</code_list>
+                        <code_list>105969002</code_list>
+                        <code_list>31996006</code_list>
+                        <code_list>36138009</code_list>
+                        <code_list>302509004</code_list>
+                        <code_list>181216001</code_list>
+                        <code_list>181268008</code_list>
+                        <code_list>181414000</code_list>
+                        <code_list>181277001</code_list>
+                        <code_list>113276009</code_list>
+                        <code_list>181250005</code_list>
+                        <code_list>181254001</code_list>
+                        <code_list>119181002</code_list>
+                        <code_list>181162001</code_list>
+                        <code_list>41845008</code_list>
+                        <code_list>181285005</code_list>
+                        <code_list>119206002</code_list>
+                        <code_list>8935007</code_list>
+                        <code_list>3138006</code_list>
+                        <code_list>309312004</code_list>
+                        <code_list>13024002</code_list>
+                        <code_list>46635009</code_list>
+                        <code_list>44054006</code_list>
+                        <code_list>237599002</code_list>
+                        <code_list>8801005</code_list>
+                        <code_list>128283000</code_list>
+                        <code_list>74732009</code_list>
+                        <code_list>197480006</code_list>
+                        <code_list>35489007</code_list>
+                        <code_list>69322001</code_list>
+                        <code_list>49049000</code_list>
+                        <code_list>52448006</code_list>
+                        <code_list>24700007</code_list>
+                        <code_list>257277002</code_list>
+                        <code_list>84757009</code_list>
+                        <code_list>37796009</code_list>
+                        <code_list>440140008</code_list>
+                        <code_list>429993008</code_list>
+                        <code_list>714152005</code_list>
+                        <code_list>431855005</code_list>
+                        <code_list>431856006</code_list>
+                        <code_list>433144002</code_list>
+                        <code_list>431857002</code_list>
+                        <code_list>433146000</code_list>
+                        <code_list>709044004</code_list>
+                        <code_list>86406008</code_list>
+                        <code_list>363346000</code_list>
+                        <code_list>40845000</code_list>
                       </children>
                     </attributes>
                   </children>
@@ -2737,107 +3013,212 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
           <items id="description">Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.</items>
           <items id="text">Erweiterung</items>
         </term_definitions>
-        <term_definitions code="I25.29">
-          <items id="text">Alter Myokardinfarkt Nicht näher bezeichnet</items>
+        <term_definitions code="195967001">
+          <items id="text">Asthma (disorder)</items>
         </term_definitions>
-        <term_definitions code="I10.90">
-          <items id="text">Essentielle Hypertonie, nicht näher bezeichnet :  Ohne Angabe einer hypertensiven Krise</items>
+        <term_definitions code="13645005">
+          <items id="text">Chronic obstructive lung disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="I73.9">
-          <items id="text">Periphere Gefäßkrankheit, nicht näher bezeichnet</items>
+        <term_definitions code="51615001">
+          <items id="text">Fibrosis of lung (disorder) Lungenfibrose</items>
         </term_definitions>
-        <term_definitions code="I49.9">
-          <items id="text">Kardiale Arrhythmie, nicht näher bezeichnet</items>
+        <term_definitions code="70995007">
+          <items id="text">Pulmonary hypertension (disorder)</items>
         </term_definitions>
-        <term_definitions code="I50.9">
-          <items id="text">Herzinsuffizienz, nicht näher bezeichnet</items>
+        <term_definitions code="190966007">
+          <items id="text">Extreme obesity with alveolar hypoventilation (disorder)</items>
         </term_definitions>
-        <term_definitions code="I25.1">
-          <items id="text">Atherosklerotische Herzkrankheit</items>
+        <term_definitions code="73430006">
+          <items id="text">Sleep apnea (disorder)</items>
         </term_definitions>
-        <term_definitions code="I65.2">
-          <items id="text">Verschluss und Stenose der A. carotis</items>
+        <term_definitions code="78275009">
+          <items id="text">Obstructive sleep apnea syndrome (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z95.1">
-          <items id="text">Vorhandensein eines aortokoronaren Bypasses</items>
+        <term_definitions code="190905008">
+          <items id="text">Cystic fibrosis (disorder) Cystische Fibrose</items>
         </term_definitions>
-        <term_definitions code="Z95.5">
-          <items id="text">Vorhandensein eines Implantates oder Transplantates nach koronarer Gefäßplastik</items>
+        <term_definitions code="38341003">
+          <items id="text">Hypertensive disorder, systemic arterial (disorder)</items>
         </term_definitions>
-        <term_definitions code="B20">
-          <items id="text">Infektiöse und parasitäre Krankheiten infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="417662000:246090004=22298006">
+          <items id="text">|History of clinical finding in subject (situation)|:|Associated finding (attribute)|=|Myocardial infarction (disorder)| Zustand nach Herzinfarkt</items>
         </term_definitions>
-        <term_definitions code="B21">
-          <items id="text">Bösartige Neubildungen infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="698247007">
+          <items id="text">Cardiac arrhythmia (disorder) Herzrhythmusstörungen</items>
         </term_definitions>
-        <term_definitions code="B22">
-          <items id="text">Sonstige näher bezeichnete Krankheiten infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="84114007">
+          <items id="text">Heart failure (disorder) Herzinsuffizienz</items>
         </term_definitions>
-        <term_definitions code="B24">
-          <items id="text">Nicht näher bezeichnete HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]</items>
+        <term_definitions code="399957001">
+          <items id="text">Peripheral arterial occlusive disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="K28.9">
-          <items id="text">Ulcus pepticum jejuni :  Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation</items>
+        <term_definitions code="416940007:363589002=81266008">
+          <items id="text">|Past history of procedure (situation)|:|Associated procedure (attribute)|=|Heart revascularization (procedure)|</items>
         </term_definitions>
-        <term_definitions code="Z94.1">
-          <items id="text">Zustand nach Herztransplantation</items>
+        <term_definitions code="53741008">
+          <items id="text">Coronary arteriosclerosis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.2">
-          <items id="text">Zustand nach Lungentransplantation</items>
+        <term_definitions code="64586002">
+          <items id="text">Carotid artery stenosis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.4">
-          <items id="text">Zustand nach Lebertransplantation</items>
+        <term_definitions code="197321007">
+          <items id="text">Steatosis of liver (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.0">
-          <items id="text">Zustand nach Nierentransplantation</items>
+        <term_definitions code="19943007">
+          <items id="text">Cirrhosis of liver (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.88">
-          <items id="text">Zustand nach sonstiger Organ- oder Gewebetransplantation Inkl.: Darm Pankreas</items>
+        <term_definitions code="10295004">
+          <items id="text">Chronic viral hepatitis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.5">
-          <items id="text">Zustand nach Hauttransplantation</items>
+        <term_definitions code="235890007">
+          <items id="text">Autoimmune liver disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.7">
-          <items id="text">Zustand nach Keratoplastik</items>
+        <term_definitions code="24526004">
+          <items id="text">Inflammatory bowel disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z95.88">
-          <items id="text">Vorhandensein von sonstigen kardialen oder vaskulären Implantaten oder Transplantaten</items>
+        <term_definitions code="69896004">
+          <items id="text">Rheumatoid arthritis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.6">
-          <items id="text">Zustand nach Knochentransplantation</items>
+        <term_definitions code="105969002">
+          <items id="text">Disorder of connective tissue (disorder</items>
         </term_definitions>
-        <term_definitions code="Z94.9">
-          <items id="text">Zustand nach Organ- oder Gewebetransplantation, nicht näher bezeichnet</items>
+        <term_definitions code="31996006">
+          <items id="text">Vasculitis (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.80">
-          <items id="text">Zustand nach hämatopoetischer Stammzelltransplantation ohne gegenwärtige Immunsuppression</items>
+        <term_definitions code="36138009">
+          <items id="text">Congenital immunodeficiency disease (disorder)</items>
         </term_definitions>
-        <term_definitions code="Z94.81">
-          <items id="text">Zustand nach hämatopoetischer Stammzelltransplantation mit gegenwärtiger Immunsuppression</items>
+        <term_definitions code="302509004">
+          <items id="text">Entire heart (body structure)</items>
         </term_definitions>
-        <term_definitions code="Z94.3">
-          <items id="text">Zustand nach Herz-Lungen-Transplantation</items>
+        <term_definitions code="181216001">
+          <items id="text">Entire lung (body structure)</items>
         </term_definitions>
-        <term_definitions code="J18.9">
-          <items id="text">Pneumonie, nicht näher bezeichnet</items>
+        <term_definitions code="181268008">
+          <items id="text">Entire liver (body structure)</items>
         </term_definitions>
-        <term_definitions code="A41.9">
-          <items id="text">Sepsis, nicht näher bezeichnet</items>
+        <term_definitions code="181414000">
+          <items id="text">Entire kidney (body structure)</items>
         </term_definitions>
-        <term_definitions code="I82.9">
-          <items id="text">Embolie und Thrombose nicht näher bezeichneter Vene</items>
+        <term_definitions code="181277001">
+          <items id="text">Entire pancreas (body structure)</items>
         </term_definitions>
-        <term_definitions code="I26.9">
-          <items id="text">Lungenembolie ohne Angabe eines akuten Cor pulmonale</items>
+        <term_definitions code="113276009">
+          <items id="text">Intestinal structure (body structure)</items>
         </term_definitions>
-        <term_definitions code="I64">
-          <items id="text">Schlaganfall, nicht als Blutung oder Infarkt bezeichnet</items>
+        <term_definitions code="181250005">
+          <items id="text">Entire small intestine (body structure)</items>
         </term_definitions>
-        <term_definitions code="I21.9">
-          <items id="text">Akuter Myokardinfarkt, nicht näher bezeichnet</items>
+        <term_definitions code="181254001">
+          <items id="text">Entire large intestine (body structure)</items>
         </term_definitions>
-        <term_definitions code="N17.9">
-          <items id="text">Akutes Nierenversagen, nicht näher bezeichnet</items>
+        <term_definitions code="119181002">
+          <items id="text">Skin part (body structure)</items>
+        </term_definitions>
+        <term_definitions code="181162001">
+          <items id="text">Entire cornea (body structure)</items>
+        </term_definitions>
+        <term_definitions code="41845008">
+          <items id="text">Ear ossicle structure (body structure)</items>
+        </term_definitions>
+        <term_definitions code="181285005">
+          <items id="text">Entire heart valve (body structure)</items>
+        </term_definitions>
+        <term_definitions code="119206002">
+          <items id="text">Blood vessel part (body structure)</items>
+        </term_definitions>
+        <term_definitions code="8935007">
+          <items id="text">Cerebral meninges structure (body structure)</items>
+        </term_definitions>
+        <term_definitions code="3138006">
+          <items id="text">Bone (tissue) structure (body structure)</items>
+        </term_definitions>
+        <term_definitions code="309312004">
+          <items id="text">Cartilage tissue (body structure)</items>
+        </term_definitions>
+        <term_definitions code="13024002">
+          <items id="text">Tendon structure (body structure)</items>
+        </term_definitions>
+        <term_definitions code="46635009">
+          <items id="text">Diabetes mellitus type 1 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="44054006">
+          <items id="text">Diabetes mellitus type 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="237599002">
+          <items id="text">Insulin treated type 2 diabetes mellitus (disorder)</items>
+        </term_definitions>
+        <term_definitions code="8801005">
+          <items id="text">Secondary diabetes mellitus (disorder)</items>
+        </term_definitions>
+        <term_definitions code="128283000">
+          <items id="text">Chronic nervous system disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="74732009">
+          <items id="text">Mental disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="197480006">
+          <items id="text">Anxiety disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="35489007">
+          <items id="text">Depressive disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="69322001">
+          <items id="text">Psychotic disorder (disorder)</items>
+        </term_definitions>
+        <term_definitions code="49049000">
+          <items id="text">Parkinson's disease (disorder)</items>
+        </term_definitions>
+        <term_definitions code="52448006">
+          <items id="text">Dementia (disorder)</items>
+        </term_definitions>
+        <term_definitions code="24700007">
+          <items id="text">Multiple sclerosis (disorder)</items>
+        </term_definitions>
+        <term_definitions code="257277002">
+          <items id="text">Combined disorder of muscle AND peripheral nerve (disorder)</items>
+        </term_definitions>
+        <term_definitions code="84757009">
+          <items id="text">Epilepsy (disorder)</items>
+        </term_definitions>
+        <term_definitions code="37796009">
+          <items id="text">Migraine (disorder)</items>
+        </term_definitions>
+        <term_definitions code="440140008">
+          <items id="text">History of cerebrovascular accident with residual deficit (situation)</items>
+        </term_definitions>
+        <term_definitions code="429993008">
+          <items id="text">History of cerebrovascular accident without residual deficits (situation</items>
+        </term_definitions>
+        <term_definitions code="714152005">
+          <items id="text">Chronic kidney disease stage 5 on dialysis (disorder)</items>
+        </term_definitions>
+        <term_definitions code="431855005">
+          <items id="text">Chronic kidney disease stage 1 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="431856006">
+          <items id="text">Chronic kidney disease stage 2 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="433144002">
+          <items id="text">Chronic kidney disease stage 3 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="431857002">
+          <items id="text">Chronic kidney disease stage 4 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="433146000">
+          <items id="text">Chronic kidney disease stage 5 (disorder)</items>
+        </term_definitions>
+        <term_definitions code="709044004">
+          <items id="text">Chronic kidney disease (disorder)</items>
+        </term_definitions>
+        <term_definitions code="86406008">
+          <items id="text">Human immunodeficiency virus infection</items>
+        </term_definitions>
+        <term_definitions code="363346000">
+          <items id="text">Malignant neoplastic disease</items>
+        </term_definitions>
+        <term_definitions code="40845000">
+          <items id="text">Gastrointestinal ulcer</items>
         </term_definitions>
         <term_definitions code="Unknown (qualifier value)">
           <items id="text">Unknown (qualifier value)</items>
