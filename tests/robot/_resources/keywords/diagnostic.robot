@@ -36,7 +36,6 @@ validate response - 201
     String     response body resourceType    DiagnosticReport
     String     response body id
     String     response body meta versionId    1
-    string     response body contained 0 resourceType    Observation
 
 
 validate response - 422 (missing observation)
@@ -52,6 +51,12 @@ validate response - 422 (profile not supported)
 
     String     $.issue[0].diagnostics 
     ...        pattern=One of the following profiles is expected:
+
+
+validate response - 422 (w/o error message)
+    [Arguments]     ${http_status_code}
+                    Integer     response status    ${http_status_code}
+                    String      response body resourceType    OperationOutcome
 
 
 

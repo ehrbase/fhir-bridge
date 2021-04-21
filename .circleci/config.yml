@@ -17,48 +17,135 @@ version: 2.1
 
 
 workflows:
+    version: 2
 
-  # WORKFLOW 1/1 Build, Test & Analyze FHIR-bridge code
-  build_and_test_fhirbridge:
-    jobs:
-        - quick-test-fhirbridge:
-            context: org-global
-            filters:
-              branches:
-                ignore: gh-pages
-                    # - master
-                    # - develop
-                    # - release
-        - full-test-fhirbridge:
-            context: org-global
-            filters:
-              branches:
-                ignore: gh-pages
-        - tag-version:
-            context: org-global
-            requires:
-                - full-test-fhirbridge
-            filters:
-                branches:
-                    only:
-                        - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+)$/
-        - build-and-deploy:
-            context: org-global
-            requires:
-                - full-test-fhirbridge
-            filters:
-                branches:
-                    only:
-                        - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
+    # WORKFLOW 1/2 Build & Quickly Test FHIR-bridge code
+    QUALITY-GATE-I:
+        jobs:
+            - quick-test-fhirbridge:
+                context: org-global
+                filters:
+                    branches:
+                        ignore: gh-pages
+                            # - master
+                            # - develop
+                            # - release
 
-        - deploy-testdocs-githup-pages:
-            context: org-global
-            requires:
-                - full-test-fhirbridge
-            filters:
-                branches:
-                    only:
-                        - develop
+    # WORKFLOW 2/2 Build, Fully Test & Analyze FHIR-bridge code
+    QUALITY-GATE-II:
+        jobs:
+            - build-test-analyse-fhirbridge:
+                context: org-global
+                filters:
+                    branches:
+                        ignore: gh-pages
+
+            # Execute Robot Integration Tests (Parallel Execution)
+            - BUNDLE-tests:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        ignore: gh-pages
+
+            - CONDITION-tests:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        ignore: gh-pages
+            
+            - DIAGNOSTIC-tests:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        ignore: gh-pages
+            
+            - IMMUNIZATION-tests:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        ignore: gh-pages
+
+            - MEDICATIONSTATEMENT-tests:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        ignore: gh-pages
+            
+            - OBSERVATION-tests:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        ignore: gh-pages
+            
+            - PROCEDURE-tests:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        ignore: gh-pages
+            
+            - QUESTIONAIRE-tests:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        ignore: gh-pages
+            
+            - ROBOT-TEST-REPORT:
+                context: org-global
+                requires:
+                    - BUNDLE-tests
+                    - CONDITION-tests
+                    - DIAGNOSTIC-tests
+                    - IMMUNIZATION-tests
+                    - MEDICATIONSTATEMENT-tests
+                    - OBSERVATION-tests
+                    - PROCEDURE-tests
+                    - QUESTIONAIRE-tests
+
+
+            - tag-version:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        only:
+                            - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+)$/
+
+
+            - build-and-deploy:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        only:
+                            - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
+
+
+            - deploy-testdocs-githup-pages:
+                context: org-global
+                requires:
+                    - ROBOT-TEST-REPORT
+                filters:
+                    branches:
+                        only:
+                            - develop
 
 
 
@@ -88,7 +175,8 @@ jobs:
             - cache-out-ehrbase-m2-dependencies
             - build-ehrbase
             - start-ehrbase-server
-            - build-and-test-fhirbridge
+            - build-and-test-fhirbridge:
+                skip-tests: false    # TODO: set to true if/when FHIRbrige gets some unit tests (at the moment *IT.java tests is all we have)
             - cache-in-ehrbase-m2-dependencies
             - cache-in-fhirbridge-m2-dependencies
             # - collect-fhirbridge-unittest-results
@@ -96,7 +184,7 @@ jobs:
             - save-fhirbridge-test-results
 
 
-    full-test-fhirbridge:
+    build-test-analyse-fhirbridge:
         description: |
             Build and test FHIR-bridge, analyze code, collect code coverage metrics,
             upload results to sonarcloud.io
@@ -109,12 +197,15 @@ jobs:
             - cache-out-ehrbase-m2-dependencies
             - build-ehrbase
             - start-ehrbase-server
-            - build-and-test-fhirbridge
+            - build-and-test-fhirbridge:
+                skip-javadoc: true
+                skip-jacoco: false
+                skip-tests: false
             - cache-in-ehrbase-m2-dependencies
             - cache-in-fhirbridge-m2-dependencies
-            - start-fhirbridge-application
-            - run-robot-integration-tests
-            - save-fhirbridge-robot-test-results
+            # - start-fhirbridge-application
+            # - run-robot-integration-tests
+            # - save-fhirbridge-robot-test-results
             # - collect-fhirbridge-unittest-results
             - collect-fhirbridge-integrationtest-results
             - save-fhirbridge-test-results
@@ -122,6 +213,162 @@ jobs:
             - save-fhirbridge-workspace
             - sonarcloud/scan:
                 cache_version: 2
+    
+
+    BUNDLE-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "bundle"
+                test-suite-path: "BUNDLE"
+                test-suite-name: "BUNDLE"
+                runner: robot
+                # pabot-split: "--testlevelsplit"
+                pabot-split: ""
+            - save-fhirbridge-robot-test-results
+    
+    CONDITION-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "condition"
+                test-suite-path: "CONDITION"
+                test-suite-name: "CONDITION"
+                runner: robot
+                pabot-split: ""
+            - save-fhirbridge-robot-test-results
+
+    DIAGNOSTIC-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "diagnostic-report"
+                test-suite-path: "DIAGNOSTIC"
+                test-suite-name: "DIAGNOSTIC"
+                runner: robot
+                pabot-split: ""
+            - save-fhirbridge-robot-test-results
+
+    IMMUNIZATION-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "immunization"
+                test-suite-path: "IMMUNIZATION"
+                test-suite-name: "IMMUNIZATION"
+                runner: robot
+                pabot-split: ""
+            - save-fhirbridge-robot-test-results
+
+    MEDICATIONSTATEMENT-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "medicationstatement"
+                test-suite-path: "MEDICATIONSTATEMENT"
+                test-suite-name: "MEDICATIONSTATEMENT"
+                runner: robot
+                pabot-split: ""
+            - save-fhirbridge-robot-test-results
+
+    OBSERVATION-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "observation"
+                test-suite-path: "OBSERVATION"
+                test-suite-name: "OBSERVATION"
+                runner: robot
+                pabot-split: ""
+            - save-fhirbridge-robot-test-results
+
+    PROCEDURE-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "procedure"
+                test-suite-path: "PROCEDURE"
+                test-suite-name: "PROCEDURE"
+                runner: robot
+                pabot-split: ""
+            - save-fhirbridge-robot-test-results
+
+    QUESTIONAIRE-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                include-tags: "questionnaire"
+                test-suite-path: "QUESTIONNAIRE"
+                test-suite-name: "QUESTIONNAIRE"
+                runner: robot
+                pabot-split: ""
+            - save-fhirbridge-robot-test-results
+
+    ROBOT-TEST-REPORT:
+        description: |
+            todo
+        executor: docker-python3-java11
+        steps:
+            - checkout
+            - restore-fhirbridge-workspace
+            - merge-robot-outputs
+
 
 
     tag-version:
@@ -183,6 +430,18 @@ jobs:
     deploy-testdocs-githup-pages:
         description: |
             Deploy Robot Test Documentation to Github Pages
+
+            How This Works
+            ==============
+
+            1. All files required for the Github Pages are generated in the job 'ROBOT-TEST-REPORT'.
+            2. The command 'merge-robot-outputs' persists copies of these files to workspace (prefixing them with 'new_').
+            3. In this job the files (new_testdocu.html, new_log.html, new_report.html) are attached back
+               to workspace.
+            4. After checking out gh-pages branch the new_ files are copied over the old files
+            5. Changes are commited and force-pushed back to origin
+            6. Updated testdocs are served via Github Pages @https://ehrbase.github.io/fhir-bridge/
+
         executor: docker-py3-java11-postgres
         steps:
             - checkout
@@ -258,6 +517,19 @@ commands:
     build-and-test-fhirbridge:
         description: |
             Executes `mvn clean verify`
+        parameters:
+            skip-jacoco:
+                description: Skip Jacoco's Code Instrumentation For Coverage Analysis
+                type: boolean
+                default: true 
+            skip-tests:
+                description: Do Not Compile And Do Not Run Test Code
+                type: boolean
+                default: true
+            skip-javadoc:
+                description: Skip Java Docs Generation
+                type: boolean
+                default: true
         steps:
             - run:
                 name: WAIT FOR EHRBASE SERVER TO BE READY
@@ -291,7 +563,9 @@ commands:
                 name: BUILD FHIR-BRIDGE
                 command: |
                     ls -la
-                    mvn clean verify -Dmaven.javadoc.skip=true -DskipITs=false
+                    mvn clean verify -Dmaven.javadoc.skip=<< parameters.skip-javadoc >> \
+                                     -DskipITs=<< parameters.skip-tests >> \
+                                     -Djacoco.skip=<< parameters.skip-jacoco >>
 
 
     start-fhirbridge-application:
@@ -339,27 +613,54 @@ commands:
                 name: Save fhirbridge starup log
                 command: |
                     mkdir -p /tmp/logs
-                    cp fhirbride_log /tmp/logs
-                    cat /tmp/logs/fhirbride_log
+                    cp fhirbride_log /tmp/logs/fhirbridge_startup_log
+                    cat /tmp/logs/fhirbridge_startup_log
                 when: always
             - store_artifacts:
-                path: /tmp/logs/fhirbride_log
+                path: /tmp/logs/fhirbridge_startup_log
 
 
     run-robot-integration-tests:
+        parameters:
+            runner:
+                description: Run tests with `robot` OR `pabot` command
+                type: string
+                default: robot
+            pabot-split:
+                description: Only when `pabot` command is used add `--testlevelsplit` option
+                type: string
+                default: ""
+            include-tags:
+                description: Which tests to inclue by TAGs (Robot syntax applies!)
+                type: string
+
+            test-suite-path:
+                description: Target test-suite given by it's folder name e.g. COMPOSITION_TESTS
+                default: ""
+                type: string
+
+            test-suite-name:
+                description: Titel of generated Robot Log/Report.html
+                type: string
         steps:
             - install-robot-dependencies
             - run:
                 name: RUN ROBOT TESTS
                 command: |
+                    . venv/bin/activate
                     cd tests/
-                    robot -v OUTPUT_LEVEL:verbose -d results/0 -L TRACE \
-                            --skip TODO --skip future \
-                            --skiponfailure not-ready robot/
+                    << parameters.runner >> <<parameters.pabot-split >> -v OUTPUT_LEVEL:verbose -L TRACE \
+                          --include << parameters.include-tags >> \
+                          --outputdir results/0/<< parameters.test-suite-name >> \
+                          --name << parameters.test-suite-name >> \
+                          --skip TODO --skip future \
+                          --skiponfailure not-ready \
+                          robot/<< parameters.test-suite-path >>
             - run:
-                name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION
+                name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION (per test suite)
                 when: always
                 command: |
+                    . venv/bin/activate
                     cd tests/
                     rebot --outputdir results/1/robot-tests \
                         -e obsolete -e libtest \
@@ -369,22 +670,78 @@ commands:
                         --output NONE \
                         --log NONE \
                         --report NONE \
-                        --xunit junit-output.xml --xunitskipnoncritical \
-                        results/0/output.xml
-            - run:
-                name: GENERATE ROBOT TEST DOCUMENTATION
-                command: |
-                    python3 -m robot.testdoc tests/robot new_fhir-bridge-robot-testdocu.html
-                    cp tests/results/0/log.html ./new_log.html
-                    cp tests/results/0/report.html ./new_report.html
+                        --xunit junit-output-<< parameters.test-suite-name >>.xml \
+                        results/0/<< parameters.test-suite-name >>/output.xml
             - run:
                 name: COPY ROBOT OUTPUT FILES
                 when: always
                 command: |
                     mkdir 00_robot_results
-                    cp tests/results/0/* 00_robot_results/
-                    cat fhirbride_log
-                    cp fhirbride_log 00_robot_results/
+                    cp -r tests/results/0/* 00_robot_results/
+                    cp fhirbride_log 00_robot_results/fhirbride_test_log_<< parameters.test-suite-name >>
+
+
+    merge-robot-outputs:
+        description: Merge Robot Results from Parallel Tests
+        steps:
+            - install-robot-dependencies
+            - run:
+                name: POST PROCESS & MERGE TEST RESULTS
+                when: always
+                command: |
+                    . venv/bin/activate
+                    cd tests/
+                    # Create Log/Report with ALL DETAILS
+                    rebot --outputdir results/0 \
+                        --name FHIR-bridge \
+                        -e obsolete -e libtest \
+                        --removekeywords for \
+                        --removekeywords wuks \
+                        --loglevel TRACE \
+                        --output FHIR-bridge-output.xml \
+                        --log FHIR-bridge-log.html \
+                        --report FHIR-bridge-report.html \
+                        results/0/*/*.xml
+            - run:
+                name: GENERATE XUNIT REPORT FOR CIRCLECI UI INTEGRATION (for all tests)
+                when: always
+                command: |
+                    . venv/bin/activate
+                    cd tests/
+                    # Create JUNIT report from merged results
+                    rebot --outputdir results/2/robot-tests \
+                        -e obsolete -e libtest \
+                        --xunit junit-output.xml \
+                        --log NONE \
+                        --report NONE \
+                        results/0/FHIR-bridge-output.xml
+            - run:
+                name: GENERATE ROBOT TEST DOCUMENTATION (for Github Pages deployment)
+                command: |
+                    . venv/bin/activate
+                    python3 -m robot.testdoc tests/robot new_fhir-bridge-robot-testdocu.html
+                    cp tests/results/0/FHIR-bridge-log.html ./new_log.html
+                    cp tests/results/0/FHIR-bridge-report.html ./new_report.html
+            - run:
+                name: COPY ROBOT OUTPUT FILES
+                when: always
+                command: |
+                    cp tests/results/0/FHIR-bridge-log.html 00_robot_results/
+                    cp tests/results/0/FHIR-bridge-report.html 00_robot_results/
+                    # cp tests/results/0/FHIR-bridge-output.xml 00_robot_results/
+                    cp new_fhir-bridge-robot-testdocu.html 00_robot_results/fhir-bridge-robot-testdocu.html
+
+            - store_test_results:
+                path: ~/projects/tests/results/2
+            - store_artifacts:
+                path: 00_robot_results/
+            - persist_to_workspace:
+                root: /home/circleci
+                paths:
+                    - projects/new_fhir-bridge-robot-testdocu.html
+                    - projects/new_log.html
+                    - projects/new_report.html
+
 
     cache-out-fhirbridge-m2-dependencies:
         steps:
@@ -454,6 +811,11 @@ commands:
                 path: ~/projects/tests/results/1
             - store_artifacts:
                 path: 00_robot_results/
+            - persist_to_workspace:
+                root: /home/circleci
+                paths:
+                    - projects/00_robot_results/
+                    - projects/tests/results/0/
 
 
     save-jacoco-coverage-report:
@@ -478,6 +840,11 @@ commands:
                     - projects/new_fhir-bridge-robot-testdocu.html
                     - projects/new_log.html
                     - projects/new_report.html
+                    - projects/ehrbase/pom.xml
+                    - projects/ehrbase/application/target/
+                    - projects/target/
+                    # - projects/tests/robot/
+                    # - projects/tests/requirements.txt
 
 
     restore-fhirbridge-workspace:
@@ -508,11 +875,22 @@ commands:
     install-robot-dependencies:
         description: Install Python requirements
         steps:
+            - restore_cache:
+                key: pip-dep-v1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
             - run:
-                name: Install Python requirements
                 command: |
-                    python -c "import site; print(site.getsitepackages())"
+                    python3 -m venv venv
+                    . venv/bin/activate
                     pip install -r tests/requirements.txt
+            - save_cache:
+                key: pip-dep-v1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}
+                paths:
+                    - "venv"
+            # - run:
+            #     name: Install Python requirements
+            #     command: |
+            #         python -c "import site; print(site.getsitepackages())"
+            #         pip install -r tests/requirements.txt
 
     configure-git-for-ci-bot:
         steps:
@@ -545,6 +923,9 @@ executors:
         working_directory: ~/projects
         docker:
             - image: circleci/python:3.8.5-node-browsers
+              auth:
+                username: $DOCKER_USER
+                password: $DOCKER_HUB_PASSWORD
 
     docker-py3-java11-postgres:
         description: |
@@ -555,7 +936,13 @@ executors:
         working_directory: ~/projects
         docker:
             - image: circleci/python:3.8.5-node-browsers
+              auth:
+                username: $DOCKER_USER
+                password: $DOCKER_HUB_PASSWORD
             - image: ehrbase/ehrbase-postgres:11.10
+              auth:
+                username: $DOCKER_USER
+                password: $DOCKER_HUB_PASSWORD
               environment:
                 POSTGRES_USER: postgres
                 POSTGRES_PASSWORD: postgres
@@ -564,3 +951,4 @@ executors:
             #   environment:
             #     POSTGRES_USER: fhir_bridge
             #     POSTGRES_PASSWORD: fhir_bridge
+        resource_class: large
