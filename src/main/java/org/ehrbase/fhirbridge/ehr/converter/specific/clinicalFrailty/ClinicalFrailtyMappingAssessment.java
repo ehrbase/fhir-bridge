@@ -11,31 +11,31 @@ public class ClinicalFrailtyMappingAssessment {
         DvOrdinal ret;
         switch (code) {
             case 1:
-                ret = ClinicalFrailtyBerurteilung.SEHR_FIT.getBerurteilung();
+                ret = ClinicalFrailtyBeurteilung.SEHR_FIT.getBerurteilung();
                 break;
             case 2:
-                ret = ClinicalFrailtyBerurteilung.DURCHSCHNITTLICH_AKTIV.getBerurteilung();
+                ret = ClinicalFrailtyBeurteilung.DURCHSCHNITTLICH_AKTIV.getBerurteilung();
                 break;
             case 3:
-                ret = ClinicalFrailtyBerurteilung.GUT_ZURECHTKOMMEND.getBerurteilung();
+                ret = ClinicalFrailtyBeurteilung.GUT_ZURECHTKOMMEND.getBerurteilung();
                 break;
             case 4:
-                ret = ClinicalFrailtyBerurteilung.VULNERABEL.getBerurteilung();
+                ret = ClinicalFrailtyBeurteilung.VULNERABEL.getBerurteilung();
                 break;
             case 5:
-                ret = ClinicalFrailtyBerurteilung.GERINGGRADIG_FRAIL.getBerurteilung();
+                ret = ClinicalFrailtyBeurteilung.GERINGGRADIG_FRAIL.getBerurteilung();
                 break;
             case 6:
-                ret = ClinicalFrailtyBerurteilung.MITTELGRADIG_FRAIL.getBerurteilung();
+                ret = ClinicalFrailtyBeurteilung.MITTELGRADIG_FRAIL.getBerurteilung();
                 break;
             case 7:
-                ret = ClinicalFrailtyBerurteilung.AUSGEPRAEGT_FRAIL.getBerurteilung();
+                ret = ClinicalFrailtyBeurteilung.AUSGEPRAEGT_FRAIL.getBerurteilung();
                 break;
             case 8:
-                ret = ClinicalFrailtyBerurteilung.EXTREM_FRAIL.getBerurteilung();
+                ret = ClinicalFrailtyBeurteilung.EXTREM_FRAIL.getBerurteilung();
                 break;
             case 9:
-                ret = ClinicalFrailtyBerurteilung.TERMINAL_ERKRANKT.getBerurteilung();
+                ret = ClinicalFrailtyBeurteilung.TERMINAL_ERKRANKT.getBerurteilung();
                 break;
             default:
                 throw new UnprocessableEntityException("Cannot match beurteilung\"" + code + "\"");
