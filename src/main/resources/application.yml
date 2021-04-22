@@ -12,8 +12,8 @@ fhir-bridge:
     allowed-origins: '*'
   # Debug Properties
   debug:
-    enabled: false
-    mapping-output-directory: ${java.io.tmpdir}/mappings
+    enabled: true
+    mapping-output-directory: "src/main/resources/"
   # EHRbase Properties
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
