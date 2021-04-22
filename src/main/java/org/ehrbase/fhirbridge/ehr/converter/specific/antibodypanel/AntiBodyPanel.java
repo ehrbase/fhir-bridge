@@ -70,7 +70,6 @@ public class AntiBodyPanel {
         }
     }
 
-
     public List<Optional<Immunoassay>> getAllNonPanel() {
         return List.of(aBPresence, aBUnitsVolume, igAAbPresence, igAAbUnitVolume, igMAbPresence, igMAbUnitsVolume, igGAbPresence, igGAbUnitsVolume);
     }

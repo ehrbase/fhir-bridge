@@ -42,12 +42,9 @@ class MemberValidator {
     }
 
     void validateMembers() {
-        System.out.println(fullUrlList);
-        System.out.println(hasMembersList);
         for (String fullUrl : fullUrlList) {
-            if (!hasMembersList.contains(fullUrl)) {
+            if (!hasMembersList.contains(fullUrl) && hasMembersList.size()>0 ) {
                 throw new UnprocessableEntityException("The url " + fullUrl + " within the Bundle is not matching the hasMember.references. Make sure that every Url contained in the observation with hasMembers is contained and correct.");
-
             }
         }
     }
