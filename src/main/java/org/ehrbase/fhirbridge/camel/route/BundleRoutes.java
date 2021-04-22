@@ -38,6 +38,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class BundleRoutes extends AbstractRouteBuilder {
 
+    private final String CONVERT = "convert";
+    private final String BUNDLE_RESPONSE_PROCESSOR = "bundleResponseProcessor";
+
     @Override
     public void configure() throws Exception {
         // @formatter:off
@@ -60,21 +63,21 @@ public class BundleRoutes extends AbstractRouteBuilder {
 
         from("direct:process-anti-body-panel-bundle")
                 .bean(AntiBodyPanelBundleValidator.class)
-                .bean(AntiBodyPanelConverter.class, "convert")
+                .bean(AntiBodyPanelConverter.class, CONVERT)
                 .to("direct:process-observation")
-                .process("bundleResponseProcessor");
+                .process(BUNDLE_RESPONSE_PROCESSOR);
 
         from("direct:process-blood-gas-panel-bundle")
                 .bean(BloodGasPanelBundleValidator.class)
-                .bean(BloodGasPanelConverter.class, "convert")
+                .bean(BloodGasPanelConverter.class, CONVERT)
                 .to("direct:process-observation")
-                .process("bundleResponseProcessor");
+                .process(BUNDLE_RESPONSE_PROCESSOR);
 
         from("direct:process-diagnostic-report-lab-bundle")
                 .bean(DiagnosticReportLabBundleValidator.class)
-                .bean(DiagnosticReportLabConverter.class, "convert")
+                .bean(DiagnosticReportLabConverter.class, CONVERT)
                 .to("direct:process-diagnostic-report")
-                .process("bundleResponseProcessor");
+                .process(BUNDLE_RESPONSE_PROCESSOR);
 
         // @formatter:on
     }

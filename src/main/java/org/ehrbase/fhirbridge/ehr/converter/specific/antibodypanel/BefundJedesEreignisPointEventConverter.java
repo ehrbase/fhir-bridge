@@ -39,7 +39,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         }else{
             proAnalytCluster.setNachweisDefiningCode(convertNachweisDefiningCode());
         }
-        proAnalytCluster.setErgebnisStatusValue(immunoassay.getObservation().getStatusElement().getCode()); //TODO check if status is validated by hapi
+        proAnalytCluster.setErgebnisStatusValue(immunoassay.getObservation().getStatusElement().getCode());
         labortestPanelCluster.setProAnalyt(proAnalytCluster);
         return labortestPanelCluster;
     }
@@ -48,17 +48,21 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         if(immunoassay.getObservation().hasValueCodeableConcept() && immunoassay.getObservation().getValueCodeableConcept().hasCoding() && immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0).hasCode()){
             List<Coding> codingList = immunoassay.getObservation().getValueCodeableConcept().getCoding();
             Coding coding = codingList.get(0);
-            if (coding.getCode().equals(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
-                return NachweisDefiningCode.DETECTED_QUALIFIER_VALUE;
-            } else if (coding.getCode().equals(NachweisDefiningCode.INCONCLUSIVE_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-                return NachweisDefiningCode.INCONCLUSIVE_QUALIFIER_VALUE;
-            } else if (coding.getCode().equals(NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-                return NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE;
-            } else {
-                throw new UnprocessableEntityException("The code in valueCodeableConcept.coding.code is not supported");
-            }
+            return resolveNachweisDefiningCode(coding);
         }else{
             throw new UnprocessableEntityException("ValueCodeableConcept.coding or code is missing");
+        }
+    }
+
+    private NachweisDefiningCode resolveNachweisDefiningCode(Coding coding) {
+        if (coding.getCode().equals(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
+            return NachweisDefiningCode.DETECTED_QUALIFIER_VALUE;
+        } else if (coding.getCode().equals(NachweisDefiningCode.INCONCLUSIVE_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
+            return NachweisDefiningCode.INCONCLUSIVE_QUALIFIER_VALUE;
+        } else if (coding.getCode().equals(NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
+            return NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE;
+        } else {
+            throw new UnprocessableEntityException("The code in valueCodeableConcept.coding.code is not supported");
         }
     }
 
