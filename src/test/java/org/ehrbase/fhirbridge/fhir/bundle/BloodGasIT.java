@@ -58,7 +58,7 @@ public class BloodGasIT extends AbstractBundleMappingTestSetupIT {
     @Test
     void createInvalidReference() throws IOException {
         Exception exception = executeValidatorException("create-blood-gas-invalid-reference.json");
-        assertEquals("The urls of the entries within the Bundle are not matching the hasMember.references. Make sure that every Url contained in the observation with hasMembers is contained and correct.", exception.getMessage());
+        assertEquals("The url urn:uuid:04121321-4af5-424c-a0e1-ed3aab1cad3 within the Bundle is not matching the hasMember.references. Make sure that every Url contained in the observation with hasMembers is contained and correct.", exception.getMessage());
     }
 
     /*HAPI FHir Bug
