@@ -10,7 +10,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-04-07T15:42:10.453985+02:00",
+    date = "2021-04-22T17:35:13.457719+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class GeccoSerologischerBefundKategorieLoincElement implements LocatableEntity {
