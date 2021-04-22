@@ -7,6 +7,12 @@ The implementation is based on [Apache Camel](https://camel.apache.org/) and [Op
 
 ## Releases
 
+##### 2021, April 22
+v1.1.0-RC3 - Add support for Basic and OAuth 2.0 Authentication.
+
+##### 2021, April 21
+v1.1.0-RC2 - Release Candidate 2
+
 ##### 2021, April 13
 v1.1.0-RC1 - Release candidate that includes major refactoring of the Conversion API and adds support for new FHIR resources and profiles.
 
