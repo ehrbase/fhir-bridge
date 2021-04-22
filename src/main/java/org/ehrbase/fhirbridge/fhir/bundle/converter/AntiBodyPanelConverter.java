@@ -33,13 +33,8 @@ public class AntiBodyPanelConverter extends AbstractBundleConverter<Observation>
             contains.add(resource);
         }
 
-        // TODO: Do we have to process all elements here?
         observation.setContained(contains);
         return observation;
     }
 
-    @Override
-    public <U> Converter<Bundle, U> andThen(Converter<? super Observation, ? extends U> after) {
-        return null;
-    }
 }
