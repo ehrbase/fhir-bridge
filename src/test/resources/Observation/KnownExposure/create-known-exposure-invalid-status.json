@@ -1,6 +1,6 @@
 {
     "resourceType": "Observation",
-    "id": "eb602464-bf4a-47ed-8558-0507474d24d1",
+    "id": "3d42736a-9e47-491e-8d06-d884e90060c7",
     "meta": {
       "profile": [
         "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/known-exposure"
@@ -23,7 +23,7 @@
         }
       }
     ],
-    "status": "final",
+    "status": "invalidTestCode",
     "category": [
       {
         "coding": [
@@ -51,12 +51,12 @@
         }
       },
     "effectiveDateTime": "2020-10-04",
-    "dataAbsentReason": {
+    "valueCodeableConcept": {
       "coding": [
         {
-          "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
-          "code": "unknown",
-          "display": "Unknown"
+          "system": "http://snomed.info/sct",
+          "code": "840546002",
+          "display": "Exposure to severe acute respiratory syndrome coronavirus 2 (event)"
         }
       ]
     }
