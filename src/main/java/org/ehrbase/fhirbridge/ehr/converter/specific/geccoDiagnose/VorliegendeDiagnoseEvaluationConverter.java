@@ -94,7 +94,7 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
     private void mapNameDesProblemsDerDiagnose(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         Coding problem = condition.getCode().getCoding().get(0);
         if (problem.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
-                GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().containsKey(problem.getCode())) {
+                GeccoDiagnoseCodeDefiningCodeMaps.getNameDesProblemDiagnoseMap().containsKey(problem.getCode())) {
             vorliegendeDiagnose.setNameDesProblemsDerDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getNameDesProblemDiagnoseMap().get(problem.getCode()));
             isEmpty=false;
         }

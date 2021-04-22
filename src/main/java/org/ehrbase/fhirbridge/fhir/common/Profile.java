@@ -70,11 +70,15 @@ public enum Profile {
 
     HEART_RATE(Observation.class, "http://hl7.org/fhir/StructureDefinition/heartrate"),
 
+    KNOWN_EXPOSURE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/known-exposure"),
+
     PACO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure"),
 
     PAO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure"),
 
     PATIENT_IN_ICU(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu"),
+
+    PCR(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-rt-pcr"),
 
     PH(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH"),
 
