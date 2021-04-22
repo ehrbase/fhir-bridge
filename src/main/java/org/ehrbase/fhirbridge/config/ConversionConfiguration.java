@@ -18,6 +18,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTr
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.ObservationLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.patientdischarge.PatientDischargeCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu.PatientInIcuCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.pregnancystatus.PregnancyStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.procedure.ProcedureCompositionConverter;
@@ -92,6 +93,7 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.FIO2, new FiO2CompositionConverter());
         conversionService.registerConverter(Profile.HEART_RATE, new HeartRateCompositionConverter());
         conversionService.registerConverter(Profile.KNOWN_EXPOSURE, new SarsCov2KnownExposureCompositionConverter());
+        conversionService.registerConverter(Profile.PATIENT_DISCHARGE, new PatientDischargeCompositionConverter());
         conversionService.registerConverter(Profile.PATIENT_IN_ICU, new PatientInIcuCompositionConverter());
         conversionService.registerConverter(Profile.PCR, new PCRCompositionConverter());
         conversionService.registerConverter(Profile.PREGNANCY_STATUS, new PregnancyStatusCompositionConverter());

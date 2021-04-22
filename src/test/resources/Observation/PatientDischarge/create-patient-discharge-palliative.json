@@ -1,0 +1,63 @@
+{
+  "id": "f5e75865-0907-4842-bfa5-5d0cec8b2769",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/discharge-disposition"
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "social-history",
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "55128-3",
+        "display": "Discharge disposition",
+        "system": "http://loinc.org"
+      }
+    ],
+    "text": "Type of discharge"
+  },
+  "effectiveDateTime": "2020-10-16T08:49:21+02:00",
+  "identifier": [
+    {
+      "assigner": {
+        "reference": "Organization/Charité"
+      },
+      "system": "https://www.charite.de/fhir/CodeSystem/observation-identifiers",
+      "type": {
+        "coding": [
+          {
+            "code": "OBI",
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203"
+          }
+        ]
+      },
+      "value": "55128-3_DischargeDisposition"
+    }
+  ],
+  "status": "final",
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "code": "306237005",
+        "display": "Referral to palliative care service (procedure)",
+        "system": "http://snomed.info/sct"
+      }
+    ]
+  },
+  "resourceType": "Observation"
+}
