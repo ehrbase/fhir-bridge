@@ -18,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.care_activity.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T12:09:15.595010+01:00",
+    date = "2021-04-22T17:20:48.013279+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class PflegetaetigkeitEvaluation implements EntryEntity {
