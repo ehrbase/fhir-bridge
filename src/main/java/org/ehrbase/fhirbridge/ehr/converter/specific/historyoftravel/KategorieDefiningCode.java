@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 
-import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 

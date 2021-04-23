@@ -39,7 +39,12 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     void createBodyWeight() throws IOException {
         create("create-body-weight.json");
     }
-    
+
+    @Test
+    void createClinicalFrailtyScaleScore() throws IOException {
+        create("create-clinical-frailty-scale-score.json");
+    }
+
     @Test
     void createCoronavirusNachweisTest() throws IOException {
         create("create-coronavirus-nachweis-test.json");
