@@ -4,6 +4,7 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty.ClinicalFrailtyScaleScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.KlinischeFrailtySkalaComposition;
+import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.KlinischeFrailtySkalaCfsObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -32,22 +33,23 @@ public class ClinicalFrailtyIT extends AbstractMappingTestSetupIT {
 
     // #####################################################################################
     // check payload
-    //@Test
-    //void mappingAbsent() throws IOException {
-    //    testMapping("create-known-exposure-absent.json",
-    //           "paragon-known-exposure-absent.json");
-    //}
+    @Test
+    void mappingSeven() throws IOException {
+        testMapping("create-clinical-frailty-scale-score.json",
+               "paragon-clinical-frailty-scale-score.json");
+    }
 
     // #####################################################################################
     // check exception
-//    @Test
-//    void createInvalidStatus() throws IOException {
-//        try{
-//            super.testFileLoader.loadResource("create-known-exposure-invalid-status.json");
-//        }catch (DataFormatException dataFormatException){
-//            assertEquals("[element=\"status\"] Invalid attribute value \"invalidTestCode\": Unknown ObservationStatus code 'invalidTestCode'", dataFormatException.getMessage());
-//        }
-//    }
+
+    @Test
+    void createInvalidStatus() throws IOException {
+        try{
+            super.testFileLoader.loadResource("create-clinical-frailty-scale-score-invalid.json");
+        }catch (UnprocessableEntityException exception){
+            assertEquals("Cannot match beurteilung\"99\"", exception.getMessage());
+        }
+    }
 
     // #####################################################################################
     // default
@@ -58,7 +60,7 @@ public class ClinicalFrailtyIT extends AbstractMappingTestSetupIT {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(KlinischeFrailtySkalaComposition.class, List.of("location", "feederAudit")))
-                .registerValueObject(KlinischeFrailtySkalaComposition.class)
+                .registerValueObject(KlinischeFrailtySkalaCfsObservation.class)
                 .build();
     }
 
