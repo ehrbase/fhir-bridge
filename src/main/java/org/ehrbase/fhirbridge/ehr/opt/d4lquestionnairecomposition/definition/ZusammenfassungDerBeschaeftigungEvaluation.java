@@ -15,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 @Archetype("openEHR-EHR-EVALUATION.occupation_summary.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T12:09:15.606176+01:00",
+    date = "2021-04-22T17:20:48.024106+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class ZusammenfassungDerBeschaeftigungEvaluation implements EntryEntity {

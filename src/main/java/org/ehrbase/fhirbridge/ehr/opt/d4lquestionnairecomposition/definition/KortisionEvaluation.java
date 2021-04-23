@@ -18,13 +18,13 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.medication_summary.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T12:09:15.817653+01:00",
+    date = "2021-04-22T17:20:48.220547+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 public class KortisionEvaluation implements EntryEntity {
   /**
    * Path: Selbstüberwachung/Medikamente / Impfungen/Kortision/Name des Medikaments
-   * Description: Name des Medikaments oder der Medikamentenklasse.
+   * Description: Name des verabreichten oder eingenommenen Medikaments oder der Medikamentengruppe.
    */
   @Path("/data[at0001]/items[at0002]/value|value")
   private String nameDesMedikamentsValue;
@@ -37,7 +37,7 @@ public class KortisionEvaluation implements EntryEntity {
 
   /**
    * Path: Selbstüberwachung/Medikamente / Impfungen/Kortision/Status
-   * Description: Status über den vergangenen und aktuellen Gebrauch eines Medikaments oder einer Medikamentenklasse.
+   * Description: Status über den vergangenen und aktuellen Gebrauch eines Medikaments oder einer Medikamentengruppe.
    */
   @Path("/data[at0001]/items[at0023]/value|defining_code")
   private StatusDefiningCode2 statusDefiningCode;
@@ -49,8 +49,21 @@ public class KortisionEvaluation implements EntryEntity {
   private NullFlavour statusNullFlavourDefiningCode;
 
   /**
+   * Path: Selbstüberwachung/Medikamente / Impfungen/Kortision/Klinische Indikation
+   * Description: Die allgemeine klinische Indikation für die Anrwendung des Medikaments.
+   */
+  @Path("/data[at0001]/items[at0028]/value|value")
+  private String klinischeIndikationValue;
+
+  /**
+   * Path: Selbstüberwachung/Medikamente / Impfungen/Kortision/Tree/Klinische Indikation/null_flavour
+   */
+  @Path("/data[at0001]/items[at0028]/null_flavour|defining_code")
+  private NullFlavour klinischeIndikationNullFlavourDefiningCode;
+
+  /**
    * Path: Selbstüberwachung/Medikamente / Impfungen/Kortision/Datum der letzten Aktualisierung
-   * Description: Das Datum der letzten Aktualisierung der Zusammenfassung
+   * Description: Das Datum der letzten Aktualisierung der Zusammenfassung.
    */
   @Path("/protocol[at0005]/items[at0006]/value|value")
   private TemporalAccessor datumDerLetztenAktualisierungValue;
@@ -118,6 +131,23 @@ public class KortisionEvaluation implements EntryEntity {
 
   public NullFlavour getStatusNullFlavourDefiningCode() {
      return this.statusNullFlavourDefiningCode ;
+  }
+
+  public void setKlinischeIndikationValue(String klinischeIndikationValue) {
+     this.klinischeIndikationValue = klinischeIndikationValue;
+  }
+
+  public String getKlinischeIndikationValue() {
+     return this.klinischeIndikationValue ;
+  }
+
+  public void setKlinischeIndikationNullFlavourDefiningCode(
+      NullFlavour klinischeIndikationNullFlavourDefiningCode) {
+     this.klinischeIndikationNullFlavourDefiningCode = klinischeIndikationNullFlavourDefiningCode;
+  }
+
+  public NullFlavour getKlinischeIndikationNullFlavourDefiningCode() {
+     return this.klinischeIndikationNullFlavourDefiningCode ;
   }
 
   public void setDatumDerLetztenAktualisierungValue(
