@@ -19,8 +19,10 @@ package org.ehrbase.fhirbridge.camel.route;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.AntiBodyPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.DiagnosticReportLabConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.validator.AntiBodyPanelBundleValidator;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.BloodGasPanelBundleValidator;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.DiagnosticReportLabBundleValidator;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
@@ -36,6 +38,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class BundleRoutes extends AbstractRouteBuilder {
 
+    private final String CONVERT = "convert";
+    private final String BUNDLE_RESPONSE_PROCESSOR = "bundleResponseProcessor";
+
     @Override
     public void configure() throws Exception {
         // @formatter:off
@@ -43,29 +48,39 @@ public class BundleRoutes extends AbstractRouteBuilder {
 
         // 'Provide Bundle' route definition
         from("bundle-provide:consumer?fhirContext=#fhirContext")
-            .setHeader(FhirBridgeConstants.PROFILE, method(Bundles.class, "getTransactionProfile"))
-            .choice()
-                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
-                    .to("direct:process-blood-gas-panel-bundle")
-                .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
-                    .to("direct:process-diagnostic-report-lab-bundle")
-                .otherwise()
-                    .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
-                        "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri()));
+                .setHeader(FhirBridgeConstants.PROFILE, method(Bundles.class, "getTransactionProfile"))
+                .choice()
+                    .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
+                        .to("direct:process-blood-gas-panel-bundle")
+                    .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
+                        .to("direct:process-anti-body-panel-bundle")
+                    .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
+                        .to("direct:process-diagnostic-report-lab-bundle")
+                    .otherwise()
+                        .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
+                                "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri()));
 
-        // Internal routes definition
+
+        from("direct:process-anti-body-panel-bundle")
+                .bean(AntiBodyPanelBundleValidator.class)
+                .bean(AntiBodyPanelConverter.class, CONVERT)
+                .to("direct:process-observation")
+                .process(BUNDLE_RESPONSE_PROCESSOR);
+
         from("direct:process-blood-gas-panel-bundle")
-            .bean(BloodGasPanelBundleValidator.class)
-            .bean(BloodGasPanelConverter.class, "convert")
-            .to("direct:process-observation")
-            .process("bundleResponseProcessor");
+                .bean(BloodGasPanelBundleValidator.class)
+                .bean(BloodGasPanelConverter.class, CONVERT)
+                .to("direct:process-observation")
+                .process(BUNDLE_RESPONSE_PROCESSOR);
 
         from("direct:process-diagnostic-report-lab-bundle")
-            .bean(DiagnosticReportLabBundleValidator.class)
-            .bean(DiagnosticReportLabConverter.class, "convert")
-            .to("direct:process-diagnostic-report")
-            .process("bundleResponseProcessor");
+                .bean(DiagnosticReportLabBundleValidator.class)
+                .bean(DiagnosticReportLabConverter.class, CONVERT)
+                .to("direct:process-diagnostic-report")
+                .process(BUNDLE_RESPONSE_PROCESSOR);
 
         // @formatter:on
     }
 }
+
+
