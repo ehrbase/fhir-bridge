@@ -85,16 +85,13 @@ public class TimeConverter {
         }
     }
 
-    public static Optional<TemporalAccessor> convertProcedureTime(Procedure resource) {
+    public static TemporalAccessor convertProcedureTime(Procedure resource) {
         if (resource.hasPerformedDateTimeType() && resource.getPerformedDateTimeType().getExtension().isEmpty()) { // EffectiveDateTime
-            return Optional.ofNullable(resource.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime());
-        } else if (resource.hasPerformedDateTimeType() && resource.getPerformedDateTimeType().hasExtension() && resource.getPerformedDateTimeType().getExtension().get(0).getValue().toString().equals("not-performed")) {
-            //TODO wait until Template is fixed  return Optional.empty();
-            return Optional.of(OffsetDateTime.now());
+            return resource.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime();
         } else if (resource.hasPerformedPeriod() && resource.getPerformedPeriod().hasStart()) { // EffectivePeriod
-            return Optional.ofNullable(resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+            return resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
         } else {
-            return Optional.empty();
+            return ZonedDateTime.now();
         }
     }
 
