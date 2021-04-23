@@ -1,43 +1,26 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.BundeslandRegionDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KeineReisehistorieEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.LandDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ProblemDiagnoseDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-import java.time.temporal.TemporalAccessor;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.SNOMED;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
 
-public class HistoryOfTravelConverter extends ObservationToCompositionConverter<ReisehistorieComposition> {
+public class HistoryOfTravelCompositionConverter extends ObservationToCompositionConverter<ReisehistorieComposition> {
 
     @Override
     public ReisehistorieComposition convertInternal(@NonNull Observation resource) {
         ReisehistorieComposition composition = new ReisehistorieComposition();
+
+        mapStatus(composition, resource);
 
         String code = getSnomedCodeObservation(resource);
         // check for general travel state
@@ -67,4 +50,18 @@ public class HistoryOfTravelConverter extends ObservationToCompositionConverter<
         return code.getCode();
     }
 
+    private void mapStatus(ReisehistorieComposition composition, Observation resource) {
+        String status = resource.getStatusElement().getCode();
+        if (status.equals(StatusDefiningCode.FINAL.getValue())) {
+            composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
+        } else if (status.equals(StatusDefiningCode.GEAENDERT.getValue())) {
+            composition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
+        } else if (status.equals(StatusDefiningCode.REGISTRIERT.getValue())) {
+            composition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
+        } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
+            composition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
+        } else {
+            throw new ConversionException("The status " + resource.getStatus().toString() + " is not valid for reisehistorie.");
+        }
+    }
 }
