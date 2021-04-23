@@ -91,6 +91,17 @@
           }
         },
         "archetype_node_id" : "at0004"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "Social History"
+        },
+        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
     }

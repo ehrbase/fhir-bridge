@@ -4,10 +4,7 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KeineReisehistorieEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -31,7 +28,7 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createHistoryOfTravel() throws IOException {
-        create("create-history-of-travel-no.json");
+        create("create-history-of-travel-yes.json");
     }
 
     // #####################################################################################
@@ -83,6 +80,7 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(KeineReisehistorieEvaluation.class)
                 .registerValueObject(UnbekannteReisehistorieEvaluation.class)
                 .registerValueObject(ReisehistorieBestimmtesReisezielCluster.class)
+                .registerValueObject(ReisehistorieKategorieElement.class)
                 .build();
     }
 
