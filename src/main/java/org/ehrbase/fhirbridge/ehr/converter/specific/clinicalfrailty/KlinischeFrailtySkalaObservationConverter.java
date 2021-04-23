@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty;
+package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
@@ -14,7 +14,7 @@ public class KlinischeFrailtySkalaObservationConverter extends ObservationToObse
         try {
             String string_assessment = resource.getValueCodeableConcept().getCoding().get(0).getCode();
             int assessment = Integer.parseInt(string_assessment);
-            org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty.ClinicalFrailtyMappingAssessment mapping = new org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty.ClinicalFrailtyMappingAssessment();
+            org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty.ClinicalFrailtyMappingAssessment mapping = new org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty.ClinicalFrailtyMappingAssessment();
             DvOrdinal ord_assessment = mapping.getDVOrdinal(assessment);
             klinischeFrailtySkalaCfsObservation.setBeurteilung(ord_assessment);
         } catch (Exception e) {
