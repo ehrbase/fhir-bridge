@@ -29,7 +29,6 @@ public class GECCODiagnoseCompositionConverter extends ConditionToCompositionCon
         } else {
             Coding verficiationStatus = resource.getVerificationStatus().getCoding().get(
                     resource.getVerificationStatus().getCoding().size() - 1); // snomed code is the last element
-
             if (verficiationStatus.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
                     verficiationStatus.getCode().equals(VERIFICATION_STATUS_PRESENT_CODE)) {
                 vorliegendeDiagnose.ifPresent(composition::setVorliegendeDiagnose);
