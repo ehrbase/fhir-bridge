@@ -7,10 +7,14 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComp
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.SNOMED;
 
@@ -21,6 +25,7 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         ReisehistorieComposition composition = new ReisehistorieComposition();
 
         mapStatus(composition, resource);
+        mapKategorie(composition, resource);
 
         String code = getSnomedCodeObservation(resource);
         // check for general travel state
@@ -63,5 +68,29 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         } else {
             throw new ConversionException("The status " + resource.getStatus().toString() + " is not valid for reisehistorie.");
         }
+    }
+
+    private void mapKategorie(ReisehistorieComposition composition, Observation resource) {
+
+        ReisehistorieKategorieElement element = new ReisehistorieKategorieElement();
+
+        Coding coding = resource.getCategory().get(0).getCoding().get(0);
+        String code = coding.getCode();
+        String system = coding.getSystem();
+
+        KategorieDefiningCode expectedKategorie = KategorieDefiningCode.SOCIAL_HISTORY;
+        if (!system.equals(expectedKategorie.getTerminologyId())) {
+            throw new UnprocessableEntityException("Categorie can't be set. Wrong terminology! Expected " + expectedKategorie.getTerminologyId() + ". Received" + system + "' instead");
+        }
+
+        if (!code.equals(expectedKategorie.getCode())) {
+            throw new UnprocessableEntityException("Categorie can't be set. Wrong code! Expected " + expectedKategorie.getCode() + ". Received" + code + "' instead");
+        }
+
+        element.setValue(expectedKategorie.getValue());
+
+        List<ReisehistorieKategorieElement> kategorieList = new ArrayList<>();
+        kategorieList.add(element);
+        composition.setKategorie(kategorieList);
     }
 }
