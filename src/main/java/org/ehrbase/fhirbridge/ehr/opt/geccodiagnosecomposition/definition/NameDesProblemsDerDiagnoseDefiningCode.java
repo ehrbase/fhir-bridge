@@ -4,91 +4,145 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum NameDesProblemsDerDiagnoseDefiningCode implements EnumValueSet {
-  VORHANDENSEIN_EINES_AORTOKORONAREN_BYPASSES("Vorhandensein eines aortokoronaren Bypasses", "", "local_terms", "Z95.1"),
+  BONE_TISSUE_STRUCTURE_BODY_STRUCTURE("Bone (tissue) structure (body structure)", "", "SNOMED Clinical Terms", "3138006"),
 
-  HERZINSUFFIZIENZ_NICHT_NAEHER_BEZEICHNET("Herzinsuffizienz, nicht näher bezeichnet", "", "local_terms", "I50.9"),
+  DEMENTIA_DISORDER("Dementia (disorder)", "", "SNOMED Clinical Terms", "52448006"),
 
-  KARDIALE_ARRHYTHMIE_NICHT_NAEHER_BEZEICHNET("Kardiale Arrhythmie, nicht näher bezeichnet", "", "local_terms", "I49.9"),
+  CHRONIC_VIRAL_HEPATITIS_DISORDER("Chronic viral hepatitis (disorder)", "", "SNOMED Clinical Terms", "10295004"),
 
-  AKUTES_NIERENVERSAGEN_NICHT_NAEHER_BEZEICHNET("Akutes Nierenversagen, nicht näher bezeichnet", "", "local_terms", "N17.9"),
+  ENTIRE_SMALL_INTESTINE_BODY_STRUCTURE("Entire small intestine (body structure)", "", "SNOMED Clinical Terms", "181250005"),
 
-  VERSCHLUSS_UND_STENOSE_DER_A_CAROTIS("Verschluss und Stenose der A. carotis", "", "local_terms", "I65.2"),
+  MULTIPLE_SCLEROSIS_DISORDER("Multiple sclerosis (disorder)", "", "SNOMED Clinical Terms", "24700007"),
 
-  LYMPHOCYTOPENIA_ASSOCIATED_WITH_SEVERE_ACUTE_RESPIRATORY_SYNDROME_CORONAVIRUS2_DISORDER("Lymphocytopenia associated with severe acute respiratory syndrome coronavirus 2 (disorder)", "", "local_terms", "866151004"),
+  MALIGNANT_NEOPLASTIC_DISEASE("Malignant neoplastic disease", "", "SNOMED Clinical Terms", "363346000"),
 
-  PERIPHERE_GEFAESSKRANKHEIT_NICHT_NAEHER_BEZEICHNET("Periphere Gefäßkrankheit, nicht näher bezeichnet", "", "local_terms", "I73.9"),
+  PULMONARY_HYPERTENSION_DISORDER("Pulmonary hypertension (disorder)", "", "SNOMED Clinical Terms", "70995007"),
 
-  DEPENDENCE_ON_VENTILATOR_FINDING("Dependence on ventilator (finding)", "", "local_terms", "444932008"),
+  CIRRHOSIS_OF_LIVER_DISORDER("Cirrhosis of liver (disorder)", "", "SNOMED Clinical Terms", "19943007"),
 
-  VORHANDENSEIN_EINES_IMPLANTATES_ODER_TRANSPLANTATES_NACH_KORONARER_GEFAESSPLASTIK("Vorhandensein eines Implantates oder Transplantates nach koronarer Gefäßplastik", "", "local_terms", "Z95.5"),
+  FIBROSIS_OF_LUNG_DISORDER_LUNGENFIBROSE("Fibrosis of lung (disorder) Lungenfibrose", "", "SNOMED Clinical Terms", "51615001"),
 
-  ZUSTAND_NACH_KERATOPLASTIK("Zustand nach Keratoplastik", "", "local_terms", "Z94.7"),
+  OBSTRUCTIVE_SLEEP_APNEA_SYNDROME_DISORDER("Obstructive sleep apnea syndrome (disorder)", "", "SNOMED Clinical Terms", "78275009"),
 
-  ZUSTAND_NACH_NIERENTRANSPLANTATION("Zustand nach Nierentransplantation", "", "local_terms", "Z94.0"),
+  DIABETES_MELLITUS_TYPE1_DISORDER("Diabetes mellitus type 1 (disorder)", "", "SNOMED Clinical Terms", "46635009"),
 
-  ZUSTAND_NACH_HAUTTRANSPLANTATION("Zustand nach Hauttransplantation", "", "local_terms", "Z94.5"),
+  N_HISTORY_OF_CLINICAL_FINDING_IN_SUBJECT_SITUATION_ASSOCIATED_FINDING_ATTRIBUTE_MYOCARDIAL_INFARCTION_DISORDER_ZUSTAND_NACH_HERZINFARKT("|History of clinical finding in subject (situation)|:|Associated finding (attribute)|=|Myocardial infarction (disorder)| Zustand nach Herzinfarkt", "", "SNOMED Clinical Terms", "417662000:246090004=22298006"),
 
-  ZUSTAND_NACH_HAEMATOPOETISCHER_STAMMZELLTRANSPLANTATION_OHNE_GEGENWAERTIGE_IMMUNSUPPRESSION("Zustand nach hämatopoetischer Stammzelltransplantation ohne gegenwärtige Immunsuppression", "", "local_terms", "Z94.80"),
+  EXTREME_OBESITY_WITH_ALVEOLAR_HYPOVENTILATION_DISORDER("Extreme obesity with alveolar hypoventilation (disorder)", "", "SNOMED Clinical Terms", "190966007"),
 
-  PNEUMONIE_NICHT_NAEHER_BEZEICHNET("Pneumonie, nicht näher bezeichnet", "", "local_terms", "J18.9"),
+  DIABETES_MELLITUS_TYPE2_DISORDER("Diabetes mellitus type 2 (disorder)", "", "SNOMED Clinical Terms", "44054006"),
 
-  PNEUMONIA_CAUSED_BY_SEVERE_ACUTE_RESPIRATORY_SYNDROME_CORONAVIRUS2_DISORDER("Pneumonia caused by severe acute respiratory syndrome coronavirus 2 (disorder)", "", "local_terms", "882784691000119000"),
+  ASTHMA_DISORDER("Asthma (disorder)", "", "SNOMED Clinical Terms", "195967001"),
 
-  AKUTER_MYOKARDINFARKT_NICHT_NAEHER_BEZEICHNET("Akuter Myokardinfarkt, nicht näher bezeichnet", "", "local_terms", "I21.9"),
+  CHRONIC_KIDNEY_DISEASE_STAGE4_DISORDER("Chronic kidney disease stage 4 (disorder)", "", "SNOMED Clinical Terms", "431857002"),
 
-  ZUSTAND_NACH_KNOCHENTRANSPLANTATION("Zustand nach Knochentransplantation", "", "local_terms", "Z94.6"),
+  HYPERTENSIVE_DISORDER_SYSTEMIC_ARTERIAL_DISORDER("Hypertensive disorder, systemic arterial (disorder)", "", "SNOMED Clinical Terms", "38341003"),
 
-  ATHEROSKLEROTISCHE_HERZKRANKHEIT("Atherosklerotische Herzkrankheit", "", "local_terms", "I25.1"),
+  EPILEPSY_DISORDER("Epilepsy (disorder)", "", "SNOMED Clinical Terms", "84757009"),
 
-  ALTER_MYOKARDINFARKT_NICHT_NAEHER_BEZEICHNET("Alter Myokardinfarkt Nicht näher bezeichnet", "", "local_terms", "I25.29"),
+  HISTORY_OF_CEREBROVASCULAR_ACCIDENT_WITHOUT_RESIDUAL_DEFICITS_SITUATION("History of cerebrovascular accident without residual deficits (situation", "", "SNOMED Clinical Terms", "429993008"),
 
-  EMBOLIE_UND_THROMBOSE_NICHT_NAEHER_BEZEICHNETER_VENE("Embolie und Thrombose nicht näher bezeichneter Vene", "", "local_terms", "I82.9"),
+  CORONARY_ARTERIOSCLEROSIS_DISORDER("Coronary arteriosclerosis (disorder)", "", "SNOMED Clinical Terms", "53741008"),
 
-  LUNGENEMBOLIE_OHNE_ANGABE_EINES_AKUTEN_COR_PULMONALE("Lungenembolie ohne Angabe eines akuten Cor pulmonale", "", "local_terms", "I26.9"),
+  ENTIRE_LARGE_INTESTINE_BODY_STRUCTURE("Entire large intestine (body structure)", "", "SNOMED Clinical Terms", "181254001"),
 
-  INFEKTIOESE_UND_PARASITAERE_KRANKHEITEN_INFOLGE_HIV_KRANKHEIT_HUMANE_IMMUNDEFIZIENZ_VIRUSKRANKHEIT("Infektiöse und parasitäre Krankheiten infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]", "", "local_terms", "B20"),
+  VASCULITIS_DISORDER("Vasculitis (disorder)", "", "SNOMED Clinical Terms", "31996006"),
 
-  ZUSTAND_NACH_HAEMATOPOETISCHER_STAMMZELLTRANSPLANTATION_MIT_GEGENWAERTIGER_IMMUNSUPPRESSION("Zustand nach hämatopoetischer Stammzelltransplantation mit gegenwärtiger Immunsuppression", "", "local_terms", "Z94.81"),
+  ENTIRE_LUNG_BODY_STRUCTURE("Entire lung (body structure)", "", "SNOMED Clinical Terms", "181216001"),
 
-  SEPSIS_NICHT_NAEHER_BEZEICHNET("Sepsis, nicht näher bezeichnet", "", "local_terms", "A41.9"),
+  PSYCHOTIC_DISORDER_DISORDER("Psychotic disorder (disorder)", "", "SNOMED Clinical Terms", "69322001"),
 
-  ESSENTIELLE_HYPERTONIE_NICHT_NAEHER_BEZEICHNET_OHNE_ANGABE_EINER_HYPERTENSIVEN_KRISE("Essentielle Hypertonie, nicht näher bezeichnet : Ohne Angabe einer hypertensiven Krise", "", "local_terms", "I10.90"),
+  CHRONIC_KIDNEY_DISEASE_DISORDER("Chronic kidney disease (disorder)", "", "SNOMED Clinical Terms", "709044004"),
 
-  SCHLAGANFALL_NICHT_ALS_BLUTUNG_ODER_INFARKT_BEZEICHNET("Schlaganfall, nicht als Blutung oder Infarkt bezeichnet", "", "local_terms", "I64"),
+  SECONDARY_DIABETES_MELLITUS_DISORDER("Secondary diabetes mellitus (disorder)", "", "SNOMED Clinical Terms", "8801005"),
 
-  ZUSTAND_NACH_ORGAN_ODER_GEWEBETRANSPLANTATION_NICHT_NAEHER_BEZEICHNET("Zustand nach Organ- oder Gewebetransplantation, nicht näher bezeichnet", "", "local_terms", "Z94.9"),
+  MENTAL_DISORDER_DISORDER("Mental disorder (disorder)", "", "SNOMED Clinical Terms", "74732009"),
 
-  ULCUS_PEPTICUM_JEJUNI_WEDER_ALS_AKUT_NOCH_ALS_CHRONISCH_BEZEICHNET_OHNE_BLUTUNG_ODER_PERFORATION("Ulcus pepticum jejuni : Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation", "", "local_terms", "K28.9"),
+  HEART_FAILURE_DISORDER_HERZINSUFFIZIENZ("Heart failure (disorder) Herzinsuffizienz", "", "SNOMED Clinical Terms", "84114007"),
 
-  NICHT_NAEHER_BEZEICHNETE_HIV_KRANKHEIT_HUMANE_IMMUNDEFIZIENZ_VIRUSKRANKHEIT("Nicht näher bezeichnete HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]", "", "local_terms", "B24"),
+  CHRONIC_KIDNEY_DISEASE_STAGE5_ON_DIALYSIS_DISORDER("Chronic kidney disease stage 5 on dialysis (disorder)", "", "SNOMED Clinical Terms", "714152005"),
 
-  LOWER_RESPIRATORY_INFECTION_CAUSED_BY_SEVERE_ACUTE_RESPIRATORY_SYNDROME_CORONAVIRUS2_DISORDER("Lower respiratory infection caused by severe acute respiratory syndrome coronavirus 2 (disorder)", "", "local_terms", "880529761000119102"),
+  CHRONIC_KIDNEY_DISEASE_STAGE1_DISORDER("Chronic kidney disease stage 1 (disorder)", "", "SNOMED Clinical Terms", "431855005"),
 
-  ZUSTAND_NACH_HERZTRANSPLANTATION("Zustand nach Herztransplantation", "", "local_terms", "Z94.1"),
+  CYSTIC_FIBROSIS_DISORDER_CYSTISCHE_FIBROSE("Cystic fibrosis (disorder) Cystische Fibrose", "", "SNOMED Clinical Terms", "190905008"),
 
-  ZUSTAND_NACH_LEBERTRANSPLANTATION("Zustand nach Lebertransplantation", "", "local_terms", "Z94.4"),
+  CHRONIC_KIDNEY_DISEASE_STAGE2_DISORDER("Chronic kidney disease stage 2 (disorder)", "", "SNOMED Clinical Terms", "431856006"),
 
-  SUSPECTED_DISEASE_CAUSED_BY2019_NOVEL_CORONAVIRUS_SITUATION("Suspected disease caused by 2019 novel coronavirus (situation)", "", "local_terms", "840544004"),
+  PARKINSON_S_DISEASE_DISORDER("Parkinson's disease (disorder)", "", "SNOMED Clinical Terms", "49049000"),
 
-  VORHANDENSEIN_VON_SONSTIGEN_KARDIALEN_ODER_VASKULAEREN_IMPLANTATEN_ODER_TRANSPLANTATEN("Vorhandensein von sonstigen kardialen oder vaskulären Implantaten oder Transplantaten", "", "local_terms", "Z95.88"),
+  ENTIRE_KIDNEY_BODY_STRUCTURE("Entire kidney (body structure)", "", "SNOMED Clinical Terms", "181414000"),
 
-  ACUTE_BRONCHITIS_CAUSED_BY_SEVERE_ACUTE_RESPIRATORY_SYNDROME_CORONAVIRUS2_DISORDER("Acute bronchitis caused by severe acute respiratory syndrome coronavirus 2 (disorder)", "", "local_terms", "138389411000119105"),
+  CHRONIC_KIDNEY_DISEASE_STAGE3_DISORDER("Chronic kidney disease stage 3 (disorder)", "", "SNOMED Clinical Terms", "433144002"),
 
-  THROMBOCYTOPENIA_ASSOCIATED_WITH_SEVERE_ACUTE_RESPIRATORY_SYNDROME_CORONAVIRUS2_DISORDER("Thrombocytopenia associated with severe acute respiratory syndrome coronavirus 2 (disorder)", "", "local_terms", "866152006"),
+  SKIN_PART_BODY_STRUCTURE("Skin part (body structure)", "", "SNOMED Clinical Terms", "119181002"),
 
-  ZUSTAND_NACH_SONSTIGER_ORGAN_ODER_GEWEBETRANSPLANTATION_INKL_DARM_PANKREAS("Zustand nach sonstiger Organ- oder Gewebetransplantation Inkl.: Darm Pankreas", "", "local_terms", "Z94.88"),
+  PERIPHERAL_ARTERIAL_OCCLUSIVE_DISEASE_DISORDER("Peripheral arterial occlusive disease (disorder)", "", "SNOMED Clinical Terms", "399957001"),
 
-  ZUSTAND_NACH_HERZ_LUNGEN_TRANSPLANTATION("Zustand nach Herz-Lungen-Transplantation", "", "local_terms", "Z94.3"),
+  HISTORY_OF_CEREBROVASCULAR_ACCIDENT_WITH_RESIDUAL_DEFICIT_SITUATION("History of cerebrovascular accident with residual deficit (situation)", "", "SNOMED Clinical Terms", "440140008"),
 
-  ACUTE_RESPIRATORY_DISTRESS_SYNDROME_CAUSED_BY_SEVERE_ACUTE_RESPIRATORY_SYNDROME_CORONAVIRUS2_DISORDER("Acute respiratory distress syndrome caused by severe acute respiratory syndrome coronavirus 2 (disorder)", "", "local_terms", "674814021000119106"),
+  MIGRAINE_DISORDER("Migraine (disorder)", "", "SNOMED Clinical Terms", "37796009"),
 
-  SONSTIGE_NAEHER_BEZEICHNETE_KRANKHEITEN_INFOLGE_HIV_KRANKHEIT_HUMANE_IMMUNDEFIZIENZ_VIRUSKRANKHEIT("Sonstige näher bezeichnete Krankheiten infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]", "", "local_terms", "B22"),
+  INFLAMMATORY_BOWEL_DISEASE_DISORDER("Inflammatory bowel disease (disorder)", "", "SNOMED Clinical Terms", "24526004"),
 
-  DISEASE_CAUSED_BY2019_NOVEL_CORONAVIRUS_DISORDER("Disease caused by 2019 novel coronavirus (disorder)", "", "local_terms", "840539006"),
+  CONGENITAL_IMMUNODEFICIENCY_DISEASE_DISORDER("Congenital immunodeficiency disease (disorder)", "", "SNOMED Clinical Terms", "36138009"),
 
-  ZUSTAND_NACH_LUNGENTRANSPLANTATION("Zustand nach Lungentransplantation", "", "local_terms", "Z94.2"),
+  CHRONIC_KIDNEY_DISEASE_STAGE5_DISORDER("Chronic kidney disease stage 5 (disorder)", "", "SNOMED Clinical Terms", "433146000"),
 
-  BOESARTIGE_NEUBILDUNGEN_INFOLGE_HIV_KRANKHEIT_HUMANE_IMMUNDEFIZIENZ_VIRUSKRANKHEIT("Bösartige Neubildungen infolge HIV-Krankheit [Humane Immundefizienz-Viruskrankheit]", "", "local_terms", "B21");
+  CHRONIC_NERVOUS_SYSTEM_DISORDER_DISORDER("Chronic nervous system disorder (disorder)", "", "SNOMED Clinical Terms", "128283000"),
+
+  COMBINED_DISORDER_OF_MUSCLE_AND_PERIPHERAL_NERVE_DISORDER("Combined disorder of muscle AND peripheral nerve (disorder)", "", "SNOMED Clinical Terms", "257277002"),
+
+  CARDIAC_ARRHYTHMIA_DISORDER_HERZRHYTHMUSSTOERUNGEN("Cardiac arrhythmia (disorder) Herzrhythmusstörungen", "", "SNOMED Clinical Terms", "698247007"),
+
+  STEATOSIS_OF_LIVER_DISORDER("Steatosis of liver (disorder)", "", "SNOMED Clinical Terms", "197321007"),
+
+  BLOOD_VESSEL_PART_BODY_STRUCTURE("Blood vessel part (body structure)", "", "SNOMED Clinical Terms", "119206002"),
+
+  GASTROINTESTINAL_ULCER("Gastrointestinal ulcer", "", "SNOMED Clinical Terms", "40845000"),
+
+  HUMAN_IMMUNODEFICIENCY_VIRUS_INFECTION("Human immunodeficiency virus infection", "", "SNOMED Clinical Terms", "86406008"),
+
+  CHRONIC_OBSTRUCTIVE_LUNG_DISEASE_DISORDER("Chronic obstructive lung disease (disorder)", "", "SNOMED Clinical Terms", "13645005"),
+
+  ENTIRE_HEART_BODY_STRUCTURE("Entire heart (body structure)", "", "SNOMED Clinical Terms", "302509004"),
+
+  CEREBRAL_MENINGES_STRUCTURE_BODY_STRUCTURE("Cerebral meninges structure (body structure)", "", "SNOMED Clinical Terms", "8935007"),
+
+  DEPRESSIVE_DISORDER_DISORDER("Depressive disorder (disorder)", "", "SNOMED Clinical Terms", "35489007"),
+
+  AUTOIMMUNE_LIVER_DISEASE_DISORDER("Autoimmune liver disease (disorder)", "", "SNOMED Clinical Terms", "235890007"),
+
+  ENTIRE_LIVER_BODY_STRUCTURE("Entire liver (body structure)", "", "SNOMED Clinical Terms", "181268008"),
+
+  ENTIRE_PANCREAS_BODY_STRUCTURE("Entire pancreas (body structure)", "", "SNOMED Clinical Terms", "181277001"),
+
+  TENDON_STRUCTURE_BODY_STRUCTURE("Tendon structure (body structure)", "", "SNOMED Clinical Terms", "13024002"),
+
+  ANXIETY_DISORDER_DISORDER("Anxiety disorder (disorder)", "", "SNOMED Clinical Terms", "197480006"),
+
+  SLEEP_APNEA_DISORDER("Sleep apnea (disorder)", "", "SNOMED Clinical Terms", "73430006"),
+
+  DISORDER_OF_CONNECTIVE_TISSUE_DISORDER("Disorder of connective tissue (disorder", "", "SNOMED Clinical Terms", "105969002"),
+
+  INTESTINAL_STRUCTURE_BODY_STRUCTURE("Intestinal structure (body structure)", "", "SNOMED Clinical Terms", "113276009"),
+
+  ENTIRE_HEART_VALVE_BODY_STRUCTURE("Entire heart valve (body structure)", "", "SNOMED Clinical Terms", "181285005"),
+
+  INSULIN_TREATED_TYPE2_DIABETES_MELLITUS_DISORDER("Insulin treated type 2 diabetes mellitus (disorder)", "", "SNOMED Clinical Terms", "237599002"),
+
+  CAROTID_ARTERY_STENOSIS_DISORDER("Carotid artery stenosis (disorder)", "", "SNOMED Clinical Terms", "64586002"),
+
+  ENTIRE_CORNEA_BODY_STRUCTURE("Entire cornea (body structure)", "", "SNOMED Clinical Terms", "181162001"),
+
+  RHEUMATOID_ARTHRITIS_DISORDER("Rheumatoid arthritis (disorder)", "", "SNOMED Clinical Terms", "69896004"),
+
+  N_PAST_HISTORY_OF_PROCEDURE_SITUATION_ASSOCIATED_PROCEDURE_ATTRIBUTE_HEART_REVASCULARIZATION_PROCEDURE("|Past history of procedure (situation)|:|Associated procedure (attribute)|=|Heart revascularization (procedure)|", "", "SNOMED Clinical Terms", "416940007:363589002=81266008"),
+
+  CARTILAGE_TISSUE_BODY_STRUCTURE("Cartilage tissue (body structure)", "", "SNOMED Clinical Terms", "309312004"),
+
+  CARDIOVASCULAR_DISEASE("Cardiovascular disease","", "SNOMED Clinical Terms", "49601007"),
+
+  EAR_OSSICLE_STRUCTURE_BODY_STRUCTURE("Ear ossicle structure (body structure)", "", "SNOMED Clinical Terms", "41845008");
 
   private String value;
 
@@ -99,7 +153,7 @@ public enum NameDesProblemsDerDiagnoseDefiningCode implements EnumValueSet {
   private String code;
 
   NameDesProblemsDerDiagnoseDefiningCode(String value, String description, String terminologyId,
-      String code) {
+                                         String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;
@@ -107,18 +161,18 @@ public enum NameDesProblemsDerDiagnoseDefiningCode implements EnumValueSet {
   }
 
   public String getValue() {
-     return this.value ;
+    return this.value ;
   }
 
   public String getDescription() {
-     return this.description ;
+    return this.description ;
   }
 
   public String getTerminologyId() {
-     return this.terminologyId ;
+    return this.terminologyId ;
   }
 
   public String getCode() {
-     return this.code ;
+    return this.code ;
   }
 }

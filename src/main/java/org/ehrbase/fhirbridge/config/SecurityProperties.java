@@ -12,6 +12,8 @@ public class SecurityProperties {
 
     private final Basic basic = new Basic();
 
+    private final OAuth2 oauth2 = new OAuth2();
+
     public AuthenticationType getAuthenticationType() {
         return authenticationType;
     }
@@ -22,6 +24,10 @@ public class SecurityProperties {
 
     public Basic getBasic() {
         return basic;
+    }
+
+    public OAuth2 getOauth2() {
+        return oauth2;
     }
 
     public enum AuthenticationType {
@@ -62,6 +68,35 @@ public class SecurityProperties {
 
         public void setPassword(String password) {
             this.password = password;
+        }
+    }
+
+    public static class OAuth2 {
+
+        /**
+         * JSON Web Key URI to use to verify the JWT token.
+         */
+        private String jwkSetUri;
+
+        /**
+         * JSON Web Algorithm used for verifying the digital signatures.
+         */
+        private String jwsAlgorithm = "RS256";
+
+        public String getJwkSetUri() {
+            return jwkSetUri;
+        }
+
+        public void setJwkSetUri(String jwkSetUri) {
+            this.jwkSetUri = jwkSetUri;
+        }
+
+        public String getJwsAlgorithm() {
+            return jwsAlgorithm;
+        }
+
+        public void setJwsAlgorithm(String jwsAlgorithm) {
+            this.jwsAlgorithm = jwsAlgorithm;
         }
     }
 }

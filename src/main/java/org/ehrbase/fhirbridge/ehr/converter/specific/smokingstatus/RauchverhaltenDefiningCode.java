@@ -6,13 +6,13 @@ import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum RauchverhaltenDefiningCode implements EnumValueSet {
-    LA189763("LA18976-3", "LA18976-3", "LOINC", "LA18976-3"),
+    LA189763("Current every day smoker", "Current every day smoker", "LOINC", "LA18976-3"),
 
-    LA189789("LA18978-9", "LA18978-9", "LOINC", "LA18978-9"),
+    LA189789("Never smoker", "Never smoker", "LOINC", "LA18978-9"),
 
-    LA159204("LA15920-4", "LA15920-4", "LOINC", "LA15920-4"),
+    LA159204("Former smoker", "Former smoker", "LOINC", "LA15920-4"),
 
-    LA189805("LA18980-5", "LA18980-5", "LOINC", "LA18980-5");
+    LA189805("Unknown if ever smoked", "Unknown if ever smoked", "LOINC", "LA18980-5");
 
     private String value;
 
