@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty;
+package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
