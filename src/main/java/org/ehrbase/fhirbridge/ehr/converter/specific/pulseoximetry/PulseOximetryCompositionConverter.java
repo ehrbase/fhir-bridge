@@ -1,14 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry;
 
-import com.nedap.archie.rm.datavalues.quantity.DvProportion;
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.ContextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
-import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
+import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
@@ -18,11 +13,31 @@ public class PulseOximetryCompositionConverter extends ObservationToCompositionC
     public PulsoxymetrieComposition convertInternal(@NonNull Observation resource) {
         PulsoxymetrieComposition composition = new PulsoxymetrieComposition();
         new PulseOximetryCodeChecker().checkIfPulseOximetry(resource);
-        new ContextConverter().mapStatus(composition, resource);
+        mapStatus(composition, resource);
         mapKategorie(composition, resource);
-
         composition.setPulsoxymetrie(new PulsoxymetrieObservationConverter().convert(resource));
         return composition;
+    }
+
+    private void mapStatus(PulsoxymetrieComposition composition, Observation resource) {
+        String status = resource.getStatusElement().getCode();
+        switch (status) {
+            case "registered":
+                composition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
+                break;
+            case "final":
+                composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
+                break;
+            case "amended":
+                composition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
+                break;
+            case "preliminary":
+                composition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
+                break;
+            default:
+                throw new IllegalStateException("Invalid Code " + status + "" +
+                        " for mapping of 'status', valid codes are: registered, final, amended and preliminary");
+        }
     }
 
     private void mapKategorie(PulsoxymetrieComposition composition, Observation observation) {
