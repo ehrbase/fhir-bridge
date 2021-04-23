@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty;
+package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
