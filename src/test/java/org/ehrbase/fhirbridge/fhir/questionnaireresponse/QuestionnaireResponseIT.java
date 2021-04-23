@@ -158,7 +158,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mapD4LQuestionnaireCompositionJavers() throws IOException, IntrospectionException, InvocationTargetException, IllegalAccessException {
-        testMapping("create-covapp-response.json", "d4L-questionnaire-paragon-composition.json");
+        testMapping("create-covapp-response.json", "paragon-d4L-questionnaire.json");
     }
 
     @Override
