@@ -19,16 +19,13 @@ fhir-bridge:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
     security:
       type: basic_auth
-      username: ehrbase-user
-      password: SuperSecretPassword
+      username: myuser
+      password: myPassword432
     template:
       prefix: classpath:/opt/
   # Security Properties
   security:
-    authentication-type: oauth2
-    oauth2:
-      jwk-set-uri: https://keycloak.dev.num-codex.de/auth/realms/ctr/protocol/openid-connect/certs
-      jws-algorithm: RS256
+    authentication-type: none
 #    basic:
 #      username:
 #      password:
@@ -103,4 +100,3 @@ logging:
     org.quartz: warn
     org.springframework: warn
     org.springframework.boot: warn
-    org.springframework.security: trace
