@@ -4,8 +4,6 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 
 public class ClinicalFrailtyMappingAssessment {
-    private static final String local = "local";
-
 
     public DvOrdinal getDVOrdinal(int code) {
         DvOrdinal ret;
