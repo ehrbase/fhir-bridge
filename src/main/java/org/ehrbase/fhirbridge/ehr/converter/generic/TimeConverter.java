@@ -33,7 +33,7 @@ public class TimeConverter {
                     .findFirst()
                     .orElse(ZonedDateTime.now());
         } else if (observation.hasEffectiveInstantType()) { // EffectiveInstant
-            return observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+            return observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime();
         } else {
             return ZonedDateTime.now();
         }
