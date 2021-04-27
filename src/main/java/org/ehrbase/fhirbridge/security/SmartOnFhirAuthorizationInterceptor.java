@@ -28,6 +28,7 @@ import org.hl7.fhir.r4.model.IdType;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Resource;
 import org.hl7.fhir.r4.model.UrlType;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -42,6 +43,11 @@ import java.util.List;
  * See HAPI FHIR project documentation to understand how this access control mechanism works.
  */
 public class SmartOnFhirAuthorizationInterceptor extends AuthorizationInterceptor {
+
+    private static final String RESOURCE_POSTFIX = "_resource";
+
+    @Value("${demographics.patient.url}")
+    private String patientUrl;
 
     @Override
     public List<IAuthRule> buildRuleList(RequestDetails theRequestDetails) {
@@ -102,34 +108,32 @@ public class SmartOnFhirAuthorizationInterceptor extends AuthorizationIntercepto
     private void addSmartOFWildcardAccess(String pSmartOnFhirPatientId,
                                           List<IAuthRule> rules,
                                           Class<? extends Resource> pResourceType) {
-        //TODO: HARDCODED BASE DEMOGRAPHIC URL, USE ACCESS TOKEN
-        //you MUST use an UrlType, or search will be blocked.
-        IdType sofId = new IdType(new UrlType("http://localhost:8082/fhir/Patient/" + pSmartOnFhirPatientId));
+        IdType sofId = new IdType(new UrlType(patientUrl + pSmartOnFhirPatientId));
         rules
                 .addAll(
                         buildCreateRule(
-                                "rule_create_own_sof_" + pResourceType.getSimpleName() + "_resource",
+                                "rule_create_own_sof_" + pResourceType.getSimpleName() + RESOURCE_POSTFIX,
                                 pResourceType,
                                 Patient.class.getSimpleName(),
                                 sofId));
         rules
                 .addAll(
                         buildReadRule(
-                                "rule_read_own_sof_" + pResourceType.getSimpleName() + "_resource",
+                                "rule_read_own_sof_" + pResourceType.getSimpleName() + RESOURCE_POSTFIX,
                                 pResourceType,
                                 Patient.class.getSimpleName(),
                                 sofId));
         rules
                 .addAll(
                         buildWriteRule(
-                                "rule_write_own_sof_" + pResourceType.getSimpleName() + "_resource",
+                                "rule_write_own_sof_" + pResourceType.getSimpleName() + RESOURCE_POSTFIX,
                                 pResourceType,
                                 Patient.class.getSimpleName(),
                                 sofId));
         rules
                 .addAll(
                         buildDeleteRule(
-                                "rule_delete_own_sof_" + pResourceType.getSimpleName() + "_resource",
+                                "rule_delete_own_sof_" + pResourceType.getSimpleName() + RESOURCE_POSTFIX,
                                 pResourceType,
                                 Patient.class.getSimpleName(),
                                 sofId));
@@ -143,7 +147,7 @@ public class SmartOnFhirAuthorizationInterceptor extends AuthorizationIntercepto
                 .allow(name)
                 .read()
                 .resourcesOfType(resource)
-                .inCompartment("Patient", compartmentId)
+                .inCompartment(compartmentName, compartmentId)
                 .build();
     }
 
