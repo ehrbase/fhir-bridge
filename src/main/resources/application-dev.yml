@@ -5,12 +5,11 @@ spring:
       hibernate.format_sql: true
 logging:
   level:
-    ca.uhn.fhir: warn
-    org.apache.camel: warn
-    org.ehrbase.fhirbridge: warn
-    org.hibernate: warn
-    org.openehealth.ipf: warn
-    org.quartz: warn
-    org.springframework: warn
-    org.springframework.boot: warn
-    org.springframework.security: trace
+    ca.uhn.fhir: info
+    org.apache.camel: info
+    org.ehrbase.fhirbridge: debug
+    org.hibernate: info
+    org.openehealth.ipf: info
+    org.quartz: info
+    org.springframework: info
+    org.springframework.boot: info
