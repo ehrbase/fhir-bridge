@@ -24,6 +24,10 @@ public class KortisionEvaluationContainment extends Containment {
 
   public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(KortisionEvaluation.class, "/data[at0001]/items[at0023]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
 
+  public SelectAqlField<String> KLINISCHE_INDIKATION_VALUE = new AqlFieldImp<String>(KortisionEvaluation.class, "/data[at0001]/items[at0028]/value|value", "klinischeIndikationValue", String.class, this);
+
+  public SelectAqlField<NullFlavour> KLINISCHE_INDIKATION_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(KortisionEvaluation.class, "/data[at0001]/items[at0028]/null_flavour|defining_code", "klinischeIndikationNullFlavourDefiningCode", NullFlavour.class, this);
+
   public SelectAqlField<TemporalAccessor> DATUM_DER_LETZTEN_AKTUALISIERUNG_VALUE = new AqlFieldImp<TemporalAccessor>(KortisionEvaluation.class, "/protocol[at0005]/items[at0006]/value|value", "datumDerLetztenAktualisierungValue", TemporalAccessor.class, this);
 
   public SelectAqlField<NullFlavour> DATUM_DER_LETZTEN_AKTUALISIERUNG_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(KortisionEvaluation.class, "/protocol[at0005]/items[at0006]/null_flavour|defining_code", "datumDerLetztenAktualisierungNullFlavourDefiningCode", NullFlavour.class, this);
