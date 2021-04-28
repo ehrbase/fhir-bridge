@@ -5,13 +5,11 @@ import org.ehrbase.client.classgenerator.interfaces.PointEventEntity;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToPointEventConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.GrundDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.StatusDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.StatusDefiningCode2;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.springframework.lang.NonNull;
 
-import javax.swing.text.html.Option;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Optional;
