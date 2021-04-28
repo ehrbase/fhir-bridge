@@ -1,7 +1,11 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.InterpretationDefiningCode;
 
 public enum ArzneimittelNameDefiningCode implements EnumValueSet {
   PRODUCT_CONTAINING_ATAZANAVIR_MEDICINAL_PRODUCT("Product containing atazanavir (medicinal product)", "", "SNOMED CT", "413591007"),
@@ -62,6 +66,14 @@ public enum ArzneimittelNameDefiningCode implements EnumValueSet {
     this.description = description;
     this.terminologyId = terminologyId;
     this.code = code;
+  }
+
+  public static Map<String, ArzneimittelNameDefiningCode> getCodesAsMap(){
+    Map<String, ArzneimittelNameDefiningCode> arzneimittelNameDefiningCodeHashMap = new HashMap<>();
+    for (ArzneimittelNameDefiningCode arzneimittelNameDefiningCode : ArzneimittelNameDefiningCode.values()) {
+      arzneimittelNameDefiningCodeHashMap.put(arzneimittelNameDefiningCode.getCode(), arzneimittelNameDefiningCode);
+    }
+    return arzneimittelNameDefiningCodeHashMap;
   }
 
   public String getValue() {
