@@ -1,6 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum ArzneimittelNameDefiningCode3 implements EnumValueSet {
@@ -78,7 +81,15 @@ public enum ArzneimittelNameDefiningCode3 implements EnumValueSet {
     this.code = code;
   }
 
-  public String getValue() {
+  public static Map<String, ArzneimittelNameDefiningCode3> getCodesAsMap() {
+      Map<String, ArzneimittelNameDefiningCode3> arzneimittelNameDefiningCodeHashMap = new HashMap<>();
+      for (ArzneimittelNameDefiningCode3 arzneimittelNameDefiningCode : ArzneimittelNameDefiningCode3.values()) {
+        arzneimittelNameDefiningCodeHashMap.put(arzneimittelNameDefiningCode.getCode(), arzneimittelNameDefiningCode);
+      }
+      return arzneimittelNameDefiningCodeHashMap;
+  }
+
+    public String getValue() {
      return this.value ;
   }
 
