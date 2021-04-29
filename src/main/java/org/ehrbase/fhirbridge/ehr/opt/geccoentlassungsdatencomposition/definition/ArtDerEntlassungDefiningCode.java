@@ -7,12 +7,12 @@ import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 
 public enum ArtDerEntlassungDefiningCode implements EnumValueSet {
-  UNKNOWN_QUALIFIER_VALUE("Unknown (qualifier value)", "", "SNOMED Clinical Terms", "261665006"),
-  HOSPITAL_ADMISSION_PROCEDURE("Hospital admission (procedure)","","SNOMED Clinical Terms","32485007"),
-  DEAD_FINDING("Dead (finding)","", "SNOMED Clinical Terms", "419099009"),
-  PATIENT_DISCHARGED_ALIVE_FINDING("Patient discharged alive (finding)", "", "SNOMED Clinical Terms", "371827001"),
-  PATIENT_REFERRAL_PROCEDURE("Patient referral (procedure)", "", "SNOMED Clinical Terms", "3457005"),
-  REFERRAL_TO_PALLIATIVE_CARE_SERVICE_PROCEDURE("Referral to palliative care service (procedure)", "", "SNOMED Clinical Terms", "306237005");
+  UNKNOWN_QUALIFIER_VALUE("Unknown (qualifier value)", "", "SNOMED-CT", "261665006"),
+  HOSPITAL_ADMISSION_PROCEDURE("Hospital admission (procedure)","","SNOMED-CT","32485007"),
+  DEAD_FINDING("Dead (finding)","", "SNOMED-CT", "419099009"),
+  PATIENT_DISCHARGED_ALIVE_FINDING("Patient discharged alive (finding)", "", "SNOMED-CT", "371827001"),
+  PATIENT_REFERRAL_PROCEDURE("Patient referral (procedure)", "", "SNOMED-CT", "3457005"),
+  REFERRAL_TO_PALLIATIVE_CARE_SERVICE_PROCEDURE("Referral to palliative care service (procedure)", "", "SNOMED-CT", "306237005");
 
   private String value;
 
