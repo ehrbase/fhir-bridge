@@ -18,7 +18,7 @@ public class PatientDischargeCompositionConverter extends ObservationToCompositi
 
         mapStatus(composition, resource);
 
-        composition.setEntlassungsart(new PatientDischargeAdminEntryConverter().convertInternal(resource));
+        composition.setEntlassungsart(new PatientDischargeAdminEntryConverter().convert(resource));
 
         return composition;
     }
