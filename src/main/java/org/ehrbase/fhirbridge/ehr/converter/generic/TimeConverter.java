@@ -1,10 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
-import org.hl7.fhir.r4.model.Condition;
-import org.hl7.fhir.r4.model.DiagnosticReport;
-import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Procedure;
-import org.hl7.fhir.r4.model.QuestionnaireResponse;
+import org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab.DiagnosticReportLabCompositionConverter;
+import org.hl7.fhir.r4.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
@@ -12,6 +11,7 @@ import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
 
 public class TimeConverter {
+    private static final Logger LOG = LoggerFactory.getLogger(TimeConverter.class);
 
     private TimeConverter() {
         throw new IllegalStateException("Utility class");
@@ -100,6 +100,15 @@ public class TimeConverter {
             return Optional.of(resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
         } else {
             return Optional.empty();
+        }
+    }
+
+    public static TemporalAccessor convertImmunizationTime(Immunization immunization) {
+        if (immunization.hasOccurrenceDateTimeType() && !immunization.getOccurrenceDateTimeType().hasExtension()) {
+            return immunization.getOccurrenceDateTimeType().getValueAsCalendar().toZonedDateTime();
+        } else {
+            LOG.warn("No occurrence Date Time was given, as default the current time is now taken. This date time should better be added to the resource");
+            return ZonedDateTime.now();
         }
     }
 }

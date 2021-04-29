@@ -8,6 +8,7 @@ public enum CodeSystem {
 
     HL7_DATA_ABSENT_REASON("http://terminology.hl7.org/CodeSystem/data-absent-reason");
 
+
     private final String url;
 
     CodeSystem(String url){
