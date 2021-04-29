@@ -116,6 +116,9 @@ public enum Profile {
 
     DEFAULT_QUESTIONNAIRE_RESPONSE(QuestionnaireResponse.class, null);
 
+    //Immunization
+    
+
     private final Class<? extends Resource> resourceType;
 
     private final String uri;
