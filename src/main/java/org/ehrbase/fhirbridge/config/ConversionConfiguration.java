@@ -73,6 +73,10 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.DIAGNOSE_DEPENDENCE_ON_VENTILATOR, diagnoseCommonConverter);
     }
 
+    private void registerImmunizationConverters(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.DO_NOT_RESUSCITATE_ORDER, null); // TODO: @ErikTute, add your converter
+    }
+
     private void registerConsentConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.DO_NOT_RESUSCITATE_ORDER, null); // TODO: @ErikTute, add your converter
     }
