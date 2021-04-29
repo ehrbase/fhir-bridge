@@ -7,8 +7,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoentlassungsdatencomposition.definitio
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.SNOMED;
-
 public class PatientDischargeCompositionConverter extends ObservationToCompositionConverter<GECCOEntlassungsdatenComposition> {
 
     @Override
