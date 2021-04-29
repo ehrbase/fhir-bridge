@@ -535,7 +535,7 @@ commands:
                 name: WAIT FOR EHRBASE SERVER TO BE READY
                 command: |
                     ls -la
-                    timeout=300
+                    timeout=600
                     while [ ! -f ehrbase/log ];
                         do
                             echo "Waiting for file ehrbase/log ..."
@@ -550,7 +550,7 @@ commands:
                         do
                             echo "waiting for EHRbase to be ready ...";
                             if [ "$timeout" == 0 ]; then
-                                echo "WARNING: Did not see a startup message even after waiting 180s"
+                                echo "WARNING: Did not see a startup message even after waiting 600s"
                                 cat ehrbase/log
                                 exit 1
                             fi
@@ -585,7 +585,7 @@ commands:
                 name: WAIT FOR FHIRBRIDE TO BE READY
                 command: |
                     ls -la
-                    timeout=300
+                    timeout=600
                     while [ ! -f fhirbride_log ];
                         do
                             echo "Waiting for file fhirbride_log ..."
@@ -600,7 +600,7 @@ commands:
                         do
                             echo "waiting for FHIR-Bridge to be ready ...";
                             if [ "$timeout" == 0 ]; then
-                                echo "WARNING: Did not see a startup message even after waiting 180s"
+                                echo "WARNING: Did not see a startup message even after waiting 600s"
                                 cat fhirbride_log
                                 exit 1
                             fi
