@@ -535,7 +535,7 @@ commands:
                 name: WAIT FOR EHRBASE SERVER TO BE READY
                 command: |
                     ls -la
-                    timeout=180
+                    timeout=300
                     while [ ! -f ehrbase/log ];
                         do
                             echo "Waiting for file ehrbase/log ..."
@@ -585,7 +585,7 @@ commands:
                 name: WAIT FOR FHIRBRIDE TO BE READY
                 command: |
                     ls -la
-                    timeout=180
+                    timeout=300
                     while [ ! -f fhirbride_log ];
                         do
                             echo "Waiting for file fhirbride_log ..."
