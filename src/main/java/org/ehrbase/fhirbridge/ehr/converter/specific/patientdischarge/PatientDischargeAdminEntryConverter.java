@@ -18,7 +18,6 @@ public class PatientDischargeAdminEntryConverter extends EntryEntityConverter<Ob
 
         String code = getSnomedCodeObservation(resource);
 
-        //switch (resource.getValueCodeableConcept().getCoding().get(0).getCode()) {
         switch(code) {
             case "261665006":
                 adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.UNKNOWN_QUALIFIER_VALUE.toDvCodedText());
