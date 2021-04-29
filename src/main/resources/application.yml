@@ -13,7 +13,7 @@ fhir-bridge:
   # Debug Properties
   debug:
     enabled: true
-    mapping-output-directory: ${java.io.tmpdir}/mappings/
+    mapping-output-directory: ${java.io.tmpdir}/mappings
   # EHRbase Properties
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
@@ -33,6 +33,9 @@ fhir-bridge:
 #      jwk-set-uri:
 #      jws-algorithm: RS256
 
+demographics:
+  patient:
+    url: https://demographics-service.ctr.dev.num-codex.de/fhir/Patient/
 #
 # Spring Properties
 #

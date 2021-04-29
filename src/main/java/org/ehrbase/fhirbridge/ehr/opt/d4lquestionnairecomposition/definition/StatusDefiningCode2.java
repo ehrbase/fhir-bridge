@@ -6,13 +6,13 @@ import org.ehrbase.client.classgenerator.EnumValueSet;
 public enum StatusDefiningCode2 implements EnumValueSet {
   NEIN("Nein", "", "LOINC", "LA32-8"),
 
-  ZURZEIT_VERWENDET("Zurzeit verwendet", "Die Person verwendet derzeit das Medikament oder die Medikamentenklasse.", "LOINC", "at0025"),
+  NIE_VERWENDET("Nie verwendet", "Die Person hat das Medikament oder die Medikamentengruppe noch nie verwendet.", "LOINC", "at0024"),
 
-  IN_DER_VERGANGENHEIT_VERWENDET("In der Vergangenheit verwendet", "Die Person hat das Medikament oder die Medikamentenklasse in der Vergangenheit verwendet, aber verwendet es zurzeit nicht.", "LOINC", "at0026"),
+  IN_DER_VERGANGENHEIT_VERWENDET("In der Vergangenheit verwendet", "Die Person hat das Medikament oder die Medikamentengruppe in der Vergangenheit verwendet, aber verwendet es zurzeit nicht.", "LOINC", "at0026"),
 
   JA("Ja", "", "LOINC", "LA33-6"),
 
-  NIE_VERWENDET("Nie verwendet", "Die Person hat das Medikament oder die Medikamentenklasse noch nie verwendet.", "LOINC", "at0024"),
+  ZURZEIT_VERWENDET("Zurzeit verwendet", "Die Person verwendet derzeit das Medikament oder die Medikamentengruppe.", "LOINC", "at0025"),
 
   ICH_WEISS_ES_NICHT("Ich weiß es nicht", "", "LOINC", "LA12688-0");
 
