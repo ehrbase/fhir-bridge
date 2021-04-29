@@ -546,6 +546,7 @@ commands:
                             sleep 1
                         ((timeout--))
                     done
+                    echo "REMAINING TIMEOUT: $timeout"
                     while ! (cat ehrbase/log | grep -m 1 "Started EhrBase in");
                         do
                             echo "waiting for EHRbase to be ready ...";
