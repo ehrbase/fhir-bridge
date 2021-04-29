@@ -12,6 +12,8 @@ public class Bundles {
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
             if (Resources.hasProfile(entry.getResource(), Profile.BLOOD_GAS_PANEL)) {
                 return Profile.BLOOD_GAS_PANEL;
+            } else if (Resources.hasProfile(entry.getResource(), Profile.ANTI_BODY_PANEL)) {
+                return Profile.ANTI_BODY_PANEL;
             } else if (Resources.hasProfile(entry.getResource(), Profile.DIAGNOSTIC_REPORT_LAB)) {
                 return Profile.DIAGNOSTIC_REPORT_LAB;
             }

@@ -22,7 +22,7 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">fac88cebaeea99a6ed72b4e6dd42585a</other_details>
+    <other_details id="MD5-CAM-1.0.1">75bd91ccd3bfc8e5fc7fb137baa93fd8</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">BE6703111625895423C2D6A31DE8E723</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
@@ -3938,16 +3938,14 @@ Zum Beispiel: Vertriebsleiter oder Softwareentwickler.</items>
                                 </occurrences>
                                 <node_id/>
                                 <terminology_id>
-                                  <value>http://fhir.data4life.care/covid-19/r4/CodeSystem/fever-class</value>
+                                  <value>local</value>
                                 </terminology_id>
-                                <code_list>at0023</code_list>
-                                <code_list>at0024</code_list>
-                                <code_list>at0025</code_list>
                                 <code_list>38C</code_list>
                                 <code_list>39C</code_list>
                                 <code_list>40C</code_list>
                                 <code_list>41C</code_list>
                                 <code_list>42C</code_list>
+                                <code_list>>42C</code_list>
                                 <code_list>LA12688-0</code_list>
                               </children>
                             </attributes>
@@ -4346,6 +4344,9 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                     <term_definitions code="42C">
                       <items id="text">42 °C</items>
                     </term_definitions>
+                    <term_definitions code=">42C">
+                      <items id="text">>42 °C</items>
+                    </term_definitions>
                     <term_definitions code="LA12688-0">
                       <items id="text">Ich weiß es nicht</items>
                     </term_definitions>
@@ -4703,16 +4704,14 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                                 </occurrences>
                                 <node_id/>
                                 <terminology_id>
-                                  <value>http://fhir.data4life.care/covid-19/r4/CodeSystem/fever-class</value>
+                                  <value>local</value>
                                 </terminology_id>
-                                <code_list>at0023</code_list>
-                                <code_list>at0024</code_list>
-                                <code_list>at0025</code_list>
                                 <code_list>38C</code_list>
                                 <code_list>39C</code_list>
                                 <code_list>40C</code_list>
                                 <code_list>41C</code_list>
                                 <code_list>42C</code_list>
+                                <code_list>>42C</code_list>
                                 <code_list>LA12688-0</code_list>
                               </children>
                             </attributes>
@@ -5110,6 +5109,9 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                     </term_definitions>
                     <term_definitions code="42C">
                       <items id="text">42 °C</items>
+                    </term_definitions>
+                    <term_definitions code=">42C">
+                      <items id="text">>42 °C</items>
                     </term_definitions>
                     <term_definitions code="LA12688-0">
                       <items id="text">Ich weiß es nicht</items>
@@ -14754,6 +14756,41 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                       </children>
                     </attributes>
                   </children>
+                  <children xsi:type="C_COMPLEX_OBJECT">
+                    <rm_type_name>ELEMENT</rm_type_name>
+                    <occurrences>
+                      <lower_included>true</lower_included>
+                      <upper_included>true</upper_included>
+                      <lower_unbounded>false</lower_unbounded>
+                      <upper_unbounded>false</upper_unbounded>
+                      <lower>0</lower>
+                      <upper>1</upper>
+                    </occurrences>
+                    <node_id>at0028</node_id>
+                    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+                      <rm_attribute_name>value</rm_attribute_name>
+                      <existence>
+                        <lower_included>true</lower_included>
+                        <upper_included>true</upper_included>
+                        <lower_unbounded>false</lower_unbounded>
+                        <upper_unbounded>false</upper_unbounded>
+                        <lower>0</lower>
+                        <upper>1</upper>
+                      </existence>
+                      <children xsi:type="C_COMPLEX_OBJECT">
+                        <rm_type_name>DV_TEXT</rm_type_name>
+                        <occurrences>
+                          <lower_included>true</lower_included>
+                          <upper_included>true</upper_included>
+                          <lower_unbounded>false</lower_unbounded>
+                          <upper_unbounded>false</upper_unbounded>
+                          <lower>1</lower>
+                          <upper>1</upper>
+                        </occurrences>
+                        <node_id/>
+                      </children>
+                    </attributes>
+                  </children>
                   <cardinality>
                     <is_ordered>false</is_ordered>
                     <is_unique>false</is_unique>
@@ -14928,7 +14965,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <value>openEHR-EHR-EVALUATION.medication_summary.v0</value>
             </archetype_id>
             <term_definitions code="at0000">
-              <items id="description">Zusammenfassende Informationen über die Verabreichungs- oder Verbrauchshistorie für ein bestimmtes Medikament oder eine bestimmte Medikamentenklasse über die Lebenszeit der Person.</items>
+              <items id="description">Zusammenfassende Informationen zur Verwendung eines bestimmten Medikaments oder einer bestimmten Medikamentengruppe.</items>
               <items id="text">Zusammenfassung der Medikation</items>
             </term_definitions>
             <term_definitions code="at0001">
@@ -14936,7 +14973,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Tree</items>
             </term_definitions>
             <term_definitions code="at0002">
-              <items id="description">Name des Medikaments oder der Medikamentenklasse.</items>
+              <items id="description">Name des verabreichten oder eingenommenen Medikaments oder der Medikamentengruppe.</items>
               <items id="text">Name des Medikaments</items>
             </term_definitions>
             <term_definitions code="at0005">
@@ -14944,7 +14981,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Tree</items>
             </term_definitions>
             <term_definitions code="at0006">
-              <items id="description">Das Datum der letzten Aktualisierung der Zusammenfassung</items>
+              <items id="description">Das Datum der letzten Aktualisierung der Zusammenfassung.</items>
               <items id="text">Datum der letzten Aktualisierung</items>
             </term_definitions>
             <term_definitions code="at0007">
@@ -14952,15 +14989,15 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Klinische Beschreibung</items>
             </term_definitions>
             <term_definitions code="at0008">
-              <items id="description">Details zu jedem Zeitraum der Anwendung.</items>
+              <items id="description">Details zu jedem Zeitraum der Anwendung des Medikaments oder der Medikamentengruppe.</items>
               <items id="text">Anwendungszeitraum</items>
             </term_definitions>
             <term_definitions code="at0009">
-              <items id="description">Erster Tag der ersten Anwendung.</items>
+              <items id="description">Erste Anwendung des Medikamentes.</items>
               <items id="text">Beginn der Anwendung</items>
             </term_definitions>
             <term_definitions code="at0010">
-              <items id="description">Datum der letzten Anwendung.</items>
+              <items id="description">Das Datum, an dem das Medikament oder die Medikamentengruppe zuletzt angewendet wurde.</items>
               <items id="text">Ende der Anwendung</items>
             </term_definitions>
             <term_definitions code="at0011">
@@ -14968,7 +15005,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Beginn des Anwendungszeitraums</items>
             </term_definitions>
             <term_definitions code="at0012">
-              <items id="description">Das Datum der letzten Anwendung im Anwendungszeitraum.</items>
+              <items id="description">Das Datum der letzten Anwendung in dem Anwendungszeitraum.</items>
               <items id="text">Ende des Anwendungszeitraums</items>
             </term_definitions>
             <term_definitions code="at0013">
@@ -14980,7 +15017,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Beschreibung</items>
             </term_definitions>
             <term_definitions code="at0015">
-              <items id="description">Gesamtmenge, die jemals verabreicht wurde.</items>
+              <items id="description">Gesamtmenge der über die Lebenszeit der Person verwendeten Medikaments.</items>
               <items id="text">Gesamtdosis</items>
             </term_definitions>
             <term_definitions code="at0016">
@@ -14988,8 +15025,8 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Dosis innerhalb des Anwendungszeitraums</items>
             </term_definitions>
             <term_definitions code="at0018">
-              <items id="description">Die klinische Indikation für die Verabreichung oder die Einnahme des Medikaments.</items>
-              <items id="text">Klinische Indikation</items>
+              <items id="description">Die klinische Indikation für die Anwendung des Medikaments in dem Anwendungszeitraum, insbesondere wenn dieser spezifischer ist oder von der „Klinischen Indikation“ abweicht oder es keine klinische Indikation gibt, die für alle Anwendungszeiträume gilt.</items>
+              <items id="text">Indikation für den Anwendungszeitraum</items>
             </term_definitions>
             <term_definitions code="at0019">
               <items id="comment">Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.</items>
@@ -15002,33 +15039,37 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Intention</items>
             </term_definitions>
             <term_definitions code="at0021">
-              <items id="comment">Dient der Identifizierung des Medikaments, wenn unter "Name des Medikaments" eine Medikamentenklasse angegeben wurde. Bitte tragen Sie hier die tatsächliche Medikationsbezeichnung ein. Falls bei "Name des Medikaments" bereits die genaue Bezeichnung angegeben wurde, ist dieser Eintrag hier redundant.</items>
+              <items id="comment">Dient der Identifizierung des Medikaments, wenn unter "Name des Medikaments" eine Medikamentengruppe angegeben wurde. Falls bei "Name des Medikaments" bereits die genaue Bezeichnung angegeben wurde, ist dieser Eintrag hier redundant.</items>
               <items id="description">Genaue Bezeichnung des Medikaments.</items>
               <items id="text">Genaue Bezeichnung</items>
             </term_definitions>
             <term_definitions code="at0022">
-              <items id="description">Das Ansprechen der Person auf die Behandlung mit diesem Medikament während dieser Episode.</items>
+              <items id="description">Das Ansprechen der Person auf die Behandlung mit diesem Medikament während des Anwendungszeitraums.</items>
               <items id="text">Ansprechen auf die Behandlung</items>
             </term_definitions>
             <term_definitions code="at0023">
-              <items id="description">Status über den vergangenen und aktuellen Gebrauch eines Medikaments oder einer Medikamentenklasse.</items>
+              <items id="description">Status über den vergangenen und aktuellen Gebrauch eines Medikaments oder einer Medikamentengruppe.</items>
               <items id="text">Status</items>
             </term_definitions>
             <term_definitions code="at0024">
-              <items id="description">Die Person hat das Medikament oder die Medikamentenklasse noch nie verwendet.</items>
+              <items id="description">Die Person hat das Medikament oder die Medikamentengruppe noch nie verwendet.</items>
               <items id="text">Nie verwendet</items>
             </term_definitions>
             <term_definitions code="at0025">
-              <items id="description">Die Person verwendet derzeit das Medikament oder die Medikamentenklasse.</items>
+              <items id="description">Die Person verwendet derzeit das Medikament oder die Medikamentengruppe.</items>
               <items id="text">Zurzeit verwendet</items>
             </term_definitions>
             <term_definitions code="at0026">
-              <items id="description">Die Person hat das Medikament oder die Medikamentenklasse in der Vergangenheit verwendet, aber verwendet es zurzeit nicht.</items>
+              <items id="description">Die Person hat das Medikament oder die Medikamentengruppe in der Vergangenheit verwendet, aber verwendet es zurzeit nicht.</items>
               <items id="text">In der Vergangenheit verwendet</items>
             </term_definitions>
             <term_definitions code="at0027">
-              <items id="description">Die Gesamtdauer der Episoden, in denen das Medikament verwendet wurde.</items>
-              <items id="text">Kumulative Dauer der Nutzung</items>
+              <items id="description">Die kumulative Anwendungsdauer des Medikaments über die Lebenszeit der Person.</items>
+              <items id="text">Dauer der Anwendung</items>
+            </term_definitions>
+            <term_definitions code="at0028">
+              <items id="description">Die allgemeine klinische Indikation für die Anrwendung des Medikaments.</items>
+              <items id="text">Klinische Indikation</items>
             </term_definitions>
             <term_definitions code="LA33-6">
               <items id="text">Ja</items>
@@ -15210,6 +15251,41 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                       </children>
                     </attributes>
                   </children>
+                  <children xsi:type="C_COMPLEX_OBJECT">
+                    <rm_type_name>ELEMENT</rm_type_name>
+                    <occurrences>
+                      <lower_included>true</lower_included>
+                      <upper_included>true</upper_included>
+                      <lower_unbounded>false</lower_unbounded>
+                      <upper_unbounded>false</upper_unbounded>
+                      <lower>0</lower>
+                      <upper>1</upper>
+                    </occurrences>
+                    <node_id>at0028</node_id>
+                    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+                      <rm_attribute_name>value</rm_attribute_name>
+                      <existence>
+                        <lower_included>true</lower_included>
+                        <upper_included>true</upper_included>
+                        <lower_unbounded>false</lower_unbounded>
+                        <upper_unbounded>false</upper_unbounded>
+                        <lower>0</lower>
+                        <upper>1</upper>
+                      </existence>
+                      <children xsi:type="C_COMPLEX_OBJECT">
+                        <rm_type_name>DV_TEXT</rm_type_name>
+                        <occurrences>
+                          <lower_included>true</lower_included>
+                          <upper_included>true</upper_included>
+                          <lower_unbounded>false</lower_unbounded>
+                          <upper_unbounded>false</upper_unbounded>
+                          <lower>1</lower>
+                          <upper>1</upper>
+                        </occurrences>
+                        <node_id/>
+                      </children>
+                    </attributes>
+                  </children>
                   <cardinality>
                     <is_ordered>false</is_ordered>
                     <is_unique>false</is_unique>
@@ -15384,7 +15460,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <value>openEHR-EHR-EVALUATION.medication_summary.v0</value>
             </archetype_id>
             <term_definitions code="at0000">
-              <items id="description">Zusammenfassende Informationen über die Verabreichungs- oder Verbrauchshistorie für ein bestimmtes Medikament oder eine bestimmte Medikamentenklasse über die Lebenszeit der Person.</items>
+              <items id="description">Zusammenfassende Informationen zur Verwendung eines bestimmten Medikaments oder einer bestimmten Medikamentengruppe.</items>
               <items id="text">Zusammenfassung der Medikation</items>
             </term_definitions>
             <term_definitions code="at0001">
@@ -15392,7 +15468,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Tree</items>
             </term_definitions>
             <term_definitions code="at0002">
-              <items id="description">Name des Medikaments oder der Medikamentenklasse.</items>
+              <items id="description">Name des verabreichten oder eingenommenen Medikaments oder der Medikamentengruppe.</items>
               <items id="text">Name des Medikaments</items>
             </term_definitions>
             <term_definitions code="at0005">
@@ -15400,7 +15476,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Tree</items>
             </term_definitions>
             <term_definitions code="at0006">
-              <items id="description">Das Datum der letzten Aktualisierung der Zusammenfassung</items>
+              <items id="description">Das Datum der letzten Aktualisierung der Zusammenfassung.</items>
               <items id="text">Datum der letzten Aktualisierung</items>
             </term_definitions>
             <term_definitions code="at0007">
@@ -15408,15 +15484,15 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Klinische Beschreibung</items>
             </term_definitions>
             <term_definitions code="at0008">
-              <items id="description">Details zu jedem Zeitraum der Anwendung.</items>
+              <items id="description">Details zu jedem Zeitraum der Anwendung des Medikaments oder der Medikamentengruppe.</items>
               <items id="text">Anwendungszeitraum</items>
             </term_definitions>
             <term_definitions code="at0009">
-              <items id="description">Erster Tag der ersten Anwendung.</items>
+              <items id="description">Erste Anwendung des Medikamentes.</items>
               <items id="text">Beginn der Anwendung</items>
             </term_definitions>
             <term_definitions code="at0010">
-              <items id="description">Datum der letzten Anwendung.</items>
+              <items id="description">Das Datum, an dem das Medikament oder die Medikamentengruppe zuletzt angewendet wurde.</items>
               <items id="text">Ende der Anwendung</items>
             </term_definitions>
             <term_definitions code="at0011">
@@ -15424,7 +15500,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Beginn des Anwendungszeitraums</items>
             </term_definitions>
             <term_definitions code="at0012">
-              <items id="description">Das Datum der letzten Anwendung im Anwendungszeitraum.</items>
+              <items id="description">Das Datum der letzten Anwendung in dem Anwendungszeitraum.</items>
               <items id="text">Ende des Anwendungszeitraums</items>
             </term_definitions>
             <term_definitions code="at0013">
@@ -15436,7 +15512,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Beschreibung</items>
             </term_definitions>
             <term_definitions code="at0015">
-              <items id="description">Gesamtmenge, die jemals verabreicht wurde.</items>
+              <items id="description">Gesamtmenge der über die Lebenszeit der Person verwendeten Medikaments.</items>
               <items id="text">Gesamtdosis</items>
             </term_definitions>
             <term_definitions code="at0016">
@@ -15444,8 +15520,8 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Dosis innerhalb des Anwendungszeitraums</items>
             </term_definitions>
             <term_definitions code="at0018">
-              <items id="description">Die klinische Indikation für die Verabreichung oder die Einnahme des Medikaments.</items>
-              <items id="text">Klinische Indikation</items>
+              <items id="description">Die klinische Indikation für die Anwendung des Medikaments in dem Anwendungszeitraum, insbesondere wenn dieser spezifischer ist oder von der „Klinischen Indikation“ abweicht oder es keine klinische Indikation gibt, die für alle Anwendungszeiträume gilt.</items>
+              <items id="text">Indikation für den Anwendungszeitraum</items>
             </term_definitions>
             <term_definitions code="at0019">
               <items id="comment">Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.</items>
@@ -15458,33 +15534,37 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
               <items id="text">Intention</items>
             </term_definitions>
             <term_definitions code="at0021">
-              <items id="comment">Dient der Identifizierung des Medikaments, wenn unter "Name des Medikaments" eine Medikamentenklasse angegeben wurde. Bitte tragen Sie hier die tatsächliche Medikationsbezeichnung ein. Falls bei "Name des Medikaments" bereits die genaue Bezeichnung angegeben wurde, ist dieser Eintrag hier redundant.</items>
+              <items id="comment">Dient der Identifizierung des Medikaments, wenn unter "Name des Medikaments" eine Medikamentengruppe angegeben wurde. Falls bei "Name des Medikaments" bereits die genaue Bezeichnung angegeben wurde, ist dieser Eintrag hier redundant.</items>
               <items id="description">Genaue Bezeichnung des Medikaments.</items>
               <items id="text">Genaue Bezeichnung</items>
             </term_definitions>
             <term_definitions code="at0022">
-              <items id="description">Das Ansprechen der Person auf die Behandlung mit diesem Medikament während dieser Episode.</items>
+              <items id="description">Das Ansprechen der Person auf die Behandlung mit diesem Medikament während des Anwendungszeitraums.</items>
               <items id="text">Ansprechen auf die Behandlung</items>
             </term_definitions>
             <term_definitions code="at0023">
-              <items id="description">Status über den vergangenen und aktuellen Gebrauch eines Medikaments oder einer Medikamentenklasse.</items>
+              <items id="description">Status über den vergangenen und aktuellen Gebrauch eines Medikaments oder einer Medikamentengruppe.</items>
               <items id="text">Status</items>
             </term_definitions>
             <term_definitions code="at0024">
-              <items id="description">Die Person hat das Medikament oder die Medikamentenklasse noch nie verwendet.</items>
+              <items id="description">Die Person hat das Medikament oder die Medikamentengruppe noch nie verwendet.</items>
               <items id="text">Nie verwendet</items>
             </term_definitions>
             <term_definitions code="at0025">
-              <items id="description">Die Person verwendet derzeit das Medikament oder die Medikamentenklasse.</items>
+              <items id="description">Die Person verwendet derzeit das Medikament oder die Medikamentengruppe.</items>
               <items id="text">Zurzeit verwendet</items>
             </term_definitions>
             <term_definitions code="at0026">
-              <items id="description">Die Person hat das Medikament oder die Medikamentenklasse in der Vergangenheit verwendet, aber verwendet es zurzeit nicht.</items>
+              <items id="description">Die Person hat das Medikament oder die Medikamentengruppe in der Vergangenheit verwendet, aber verwendet es zurzeit nicht.</items>
               <items id="text">In der Vergangenheit verwendet</items>
             </term_definitions>
             <term_definitions code="at0027">
-              <items id="description">Die Gesamtdauer der Episoden, in denen das Medikament verwendet wurde.</items>
-              <items id="text">Kumulative Dauer der Nutzung</items>
+              <items id="description">Die kumulative Anwendungsdauer des Medikaments über die Lebenszeit der Person.</items>
+              <items id="text">Dauer der Anwendung</items>
+            </term_definitions>
+            <term_definitions code="at0028">
+              <items id="description">Die allgemeine klinische Indikation für die Anrwendung des Medikaments.</items>
+              <items id="text">Klinische Indikation</items>
             </term_definitions>
             <term_definitions code="LA33-6">
               <items id="text">Ja</items>

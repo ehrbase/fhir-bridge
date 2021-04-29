@@ -96,6 +96,8 @@ public enum Profile {
 
     SMOKING_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status"),
 
+    ANTI_BODY_PANEL(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-pnl-ser-pl-ia"),
+
     // Patient Profiles
 
     PATIENT(Patient.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient"),
