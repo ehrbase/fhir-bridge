@@ -5,7 +5,6 @@ import org.ehrbase.client.classgenerator.EnumValueSet;
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
-//import org.ehrbase.validation.terminology.validator.DvCodedText;
 
 public enum ArtDerEntlassungDefiningCode implements EnumValueSet {
   UNKNOWN_QUALIFIER_VALUE("Unknown (qualifier value)", "", "SNOMED Clinical Terms", "261665006"),

@@ -12,7 +12,6 @@ import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
-//import org.ehrbase.validation.terminology.validator.DvCodedText;
 
 @Entity
 @Archetype("openEHR-EHR-ADMIN_ENTRY.discharge_summary.v0")
