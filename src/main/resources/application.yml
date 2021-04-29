@@ -13,7 +13,8 @@ fhir-bridge:
   # Debug Properties
   debug:
     enabled: true
-    mapping-output-directory: ${java.io.tmpdir}/mappings
+    #mapping-output-directory: ${java.io.tmpdir}/mappings/
+    mapping-output-directory: /src/main/resources/mappings/
   # EHRbase Properties
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
