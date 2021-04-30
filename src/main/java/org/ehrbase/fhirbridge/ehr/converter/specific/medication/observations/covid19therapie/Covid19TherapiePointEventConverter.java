@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.co
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedicationPointEventConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedikationPointEventConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ArzneimittelNameDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.Covid19TherapieBeliebigesEreignisPointEvent;
 import org.hl7.fhir.r4.model.Coding;
@@ -10,7 +10,7 @@ import org.hl7.fhir.r4.model.MedicationStatement;
 
 import java.util.Map;
 
-public class Covid19TherapiePointEventConverter extends GeccoMedicationPointEventConverter<Covid19TherapieBeliebigesEreignisPointEvent> {
+public class Covid19TherapiePointEventConverter extends GeccoMedikationPointEventConverter<Covid19TherapieBeliebigesEreignisPointEvent> {
     @Override
     protected Covid19TherapieBeliebigesEreignisPointEvent convertInternal(MedicationStatement resource) {
         Covid19TherapieBeliebigesEreignisPointEvent covid19TherapieBeliebigesEreignisPointEvent = new Covid19TherapieBeliebigesEreignisPointEvent();
@@ -32,7 +32,7 @@ public class Covid19TherapiePointEventConverter extends GeccoMedicationPointEven
        if(arzneimittelNameDefiningCodeMap.containsKey(coding.getCode())){
            return arzneimittelNameDefiningCodeMap.get(coding.getCode());
        }
-        throw new UnprocessableEntityException("Invalid Arzneimittel code  " + coding.getCode());
+        throw new UnprocessableEntityException("Invalid Arzneimittel code " + coding.getCode());
     }
 
 }

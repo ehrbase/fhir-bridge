@@ -1,6 +1,11 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.MedicationStatement;
+import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Procedure;
+import org.hl7.fhir.r4.model.QuestionnaireResponse;
 
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;

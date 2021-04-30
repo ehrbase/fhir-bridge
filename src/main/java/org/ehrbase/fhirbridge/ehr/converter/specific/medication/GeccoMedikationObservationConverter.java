@@ -11,7 +11,7 @@ import org.springframework.lang.NonNull;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public abstract class GeccoMedicationObservationConverter<E extends EntryEntity> extends MedicationStatementToObservationConverter<E> {
+public abstract class GeccoMedikationObservationConverter<E extends EntryEntity> extends MedicationStatementToObservationConverter<E> {
 
     @Override
     public E convert(@NonNull MedicationStatement resource) {
