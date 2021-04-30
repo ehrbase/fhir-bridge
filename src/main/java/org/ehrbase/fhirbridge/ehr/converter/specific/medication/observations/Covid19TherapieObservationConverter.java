@@ -8,7 +8,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.Covi
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.MedicationStatement;
 
-import java.util.List;
 import java.util.Map;
 
 public class Covid19TherapieObservationConverter extends GeccoMedikationObservationConverter<Covid19TherapieObservation> {
@@ -19,8 +18,9 @@ public class Covid19TherapieObservationConverter extends GeccoMedikationObservat
         covid19TherapieObservation.setArzneimittelNameDefiningCode(getArzneimittelName(resource));
         return covid19TherapieObservation;
     }
+
     private ArzneimittelNameDefiningCode getArzneimittelName(MedicationStatement resource) {
-        for (Coding coding:resource.getMedicationCodeableConcept().getCoding()) {
+        for (Coding coding : resource.getMedicationCodeableConcept().getCoding()) {
             if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.DIMDI_ATC.getUrl())) {
                 return mapArzneimittelName(coding);
             }
@@ -30,7 +30,7 @@ public class Covid19TherapieObservationConverter extends GeccoMedikationObservat
 
     private ArzneimittelNameDefiningCode mapArzneimittelName(Coding coding) {
         Map<String, ArzneimittelNameDefiningCode> arzneimittelNameDefiningCodeMap = ArzneimittelNameDefiningCode.getCodesAsMap();
-        if(arzneimittelNameDefiningCodeMap.containsKey(coding.getCode())){
+        if (arzneimittelNameDefiningCodeMap.containsKey(coding.getCode())) {
             return arzneimittelNameDefiningCodeMap.get(coding.getCode());
         }
         throw new UnprocessableEntityException("Invalid Arzneimittel code " + coding.getCode());
