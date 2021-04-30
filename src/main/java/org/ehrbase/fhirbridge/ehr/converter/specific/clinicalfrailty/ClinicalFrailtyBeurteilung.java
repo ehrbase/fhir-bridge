@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalFrailty;
+package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
@@ -6,7 +6,7 @@ import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.ehr.converter.specific.TerminologyIdCode;
 
-public enum ClinicalFrailtyBerurteilung {
+public enum ClinicalFrailtyBeurteilung {
 
     SEHR_FIT(new DvOrdinal(1L,
             new DvCodedText("1", new CodePhrase(new TerminologyId(TerminologyIdCode.LOCAL.getTerminologyId()), "at0005")))),
@@ -29,7 +29,7 @@ public enum ClinicalFrailtyBerurteilung {
 
     private final DvOrdinal berurteilung;
 
-    ClinicalFrailtyBerurteilung(DvOrdinal berurteilung) {
+    ClinicalFrailtyBeurteilung(DvOrdinal berurteilung) {
         this.berurteilung = berurteilung;
     }
 
