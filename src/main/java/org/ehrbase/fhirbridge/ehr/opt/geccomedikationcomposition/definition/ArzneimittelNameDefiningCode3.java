@@ -82,14 +82,14 @@ public enum ArzneimittelNameDefiningCode3 implements EnumValueSet {
   }
 
   public static Map<String, ArzneimittelNameDefiningCode3> getCodesAsMap() {
-      Map<String, ArzneimittelNameDefiningCode3> arzneimittelNameDefiningCodeHashMap = new HashMap<>();
-      for (ArzneimittelNameDefiningCode3 arzneimittelNameDefiningCode : ArzneimittelNameDefiningCode3.values()) {
-        arzneimittelNameDefiningCodeHashMap.put(arzneimittelNameDefiningCode.getCode(), arzneimittelNameDefiningCode);
-      }
-      return arzneimittelNameDefiningCodeHashMap;
+    Map<String, ArzneimittelNameDefiningCode3> arzneimittelNameDefiningCodeHashMap = new HashMap<>();
+    for (ArzneimittelNameDefiningCode3 arzneimittelNameDefiningCode : ArzneimittelNameDefiningCode3.values()) {
+      arzneimittelNameDefiningCodeHashMap.put(arzneimittelNameDefiningCode.getCode(), arzneimittelNameDefiningCode);
+    }
+    return arzneimittelNameDefiningCodeHashMap;
   }
 
-    public String getValue() {
+  public String getValue() {
      return this.value ;
   }
 
