@@ -10,7 +10,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class StatusClusterContainment extends Containment {
   public SelectAqlField<StatusCluster> STATUS_CLUSTER = new AqlFieldImp<StatusCluster>(StatusCluster.class, "", "StatusCluster", StatusCluster.class, this);
 
-  public SelectAqlField<StatusDefiningCode> STATUS_DEFINING_CODE = new AqlFieldImp<StatusDefiningCode>(StatusCluster.class, "/items[at0001]/value|defining_code", "statusDefiningCode", StatusDefiningCode.class, this);
+  public SelectAqlField<StatusDefiningCode2> STATUS_DEFINING_CODE = new AqlFieldImp<StatusDefiningCode2>(StatusCluster.class, "/items[at0001]/value|defining_code", "statusDefiningCode", StatusDefiningCode2.class, this);
 
   public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(StatusCluster.class, "/items[at0001]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
 

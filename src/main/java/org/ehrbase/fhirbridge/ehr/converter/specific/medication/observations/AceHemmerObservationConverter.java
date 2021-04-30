@@ -1,23 +1,24 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.acehemmer;
+package org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedikationPointEventConverter;
-import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.AceHemmerBeliebigesEreignisPointEvent;
+import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedikationObservationConverter;
+import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.AceHemmerObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ArzneimittelNameDefiningCode2;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.MedicationStatement;
 
+import java.util.List;
 import java.util.Map;
 
-public class AceHemmerPointEventConverter extends GeccoMedikationPointEventConverter<AceHemmerBeliebigesEreignisPointEvent> {
-    @Override
-    protected AceHemmerBeliebigesEreignisPointEvent convertInternal(MedicationStatement resource) {
-        AceHemmerBeliebigesEreignisPointEvent aceHemmerBeliebigesEreignisPointEvent = new AceHemmerBeliebigesEreignisPointEvent();
-        aceHemmerBeliebigesEreignisPointEvent.setArzneimittelNameDefiningCode(getArzneimittelName(resource));
-        return aceHemmerBeliebigesEreignisPointEvent;
-    }
+public class AceHemmerObservationConverter extends GeccoMedikationObservationConverter<AceHemmerObservation> {
 
+    @Override
+    protected AceHemmerObservation convertInternal(MedicationStatement resource) {
+        AceHemmerObservation aceHemmerObservation = new AceHemmerObservation();
+        aceHemmerObservation.setArzneimittelNameDefiningCode(getArzneimittelName(resource));
+        return aceHemmerObservation;
+    }
     private ArzneimittelNameDefiningCode2 getArzneimittelName(MedicationStatement resource) {
         for (Coding coding:resource.getMedicationCodeableConcept().getCoding()) {
             if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.DIMDI_ATC.getUrl())) {

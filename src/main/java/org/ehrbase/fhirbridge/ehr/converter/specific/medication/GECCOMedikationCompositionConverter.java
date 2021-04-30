@@ -2,10 +2,10 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.medication;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.acehemmer.AceHemmerObservationConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.antikoagulanzien.AntikoagulanzienObservationConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.covid19therapie.Covid19TherapieObservationConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.immunoglobuline.ImmunglobulineObservationConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.AceHemmerObservationConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.AntikoagulanzienObservationConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.Covid19TherapieObservationConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.ImmunglobulineObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.GECCOMedikationComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.KategorieDefiningCode;
 import org.hl7.fhir.r4.model.MedicationStatement;
