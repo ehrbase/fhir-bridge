@@ -8,7 +8,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.Arzn
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.MedicationStatement;
 
-import java.util.List;
 import java.util.Map;
 
 public class AceHemmerObservationConverter extends GeccoMedikationObservationConverter<AceHemmerObservation> {
@@ -19,8 +18,9 @@ public class AceHemmerObservationConverter extends GeccoMedikationObservationCon
         aceHemmerObservation.setArzneimittelNameDefiningCode(getArzneimittelName(resource));
         return aceHemmerObservation;
     }
+
     private ArzneimittelNameDefiningCode2 getArzneimittelName(MedicationStatement resource) {
-        for (Coding coding:resource.getMedicationCodeableConcept().getCoding()) {
+        for (Coding coding : resource.getMedicationCodeableConcept().getCoding()) {
             if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.DIMDI_ATC.getUrl())) {
                 return mapArzneimittelName(coding);
             }
@@ -30,7 +30,7 @@ public class AceHemmerObservationConverter extends GeccoMedikationObservationCon
 
     private ArzneimittelNameDefiningCode2 mapArzneimittelName(Coding coding) {
         Map<String, ArzneimittelNameDefiningCode2> arzneimittelNameDefiningCodeMap = ArzneimittelNameDefiningCode2.getCodesAsMap();
-        if(arzneimittelNameDefiningCodeMap.containsKey(coding.getCode())){
+        if (arzneimittelNameDefiningCodeMap.containsKey(coding.getCode())) {
             return arzneimittelNameDefiningCodeMap.get(coding.getCode());
         }
         throw new UnprocessableEntityException("Invalid Arzneimittel code  " + coding.getCode());
