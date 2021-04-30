@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.fhir.common;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
@@ -114,10 +115,11 @@ public enum Profile {
 
     // QuestionnaireResponse Profiles
 
-    DEFAULT_QUESTIONNAIRE_RESPONSE(QuestionnaireResponse.class, null);
+    DEFAULT_QUESTIONNAIRE_RESPONSE(QuestionnaireResponse.class, null),
 
     //Immunization
-    
+
+    VACCINATION(Immunization.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization");
 
     private final Class<? extends Resource> resourceType;
 

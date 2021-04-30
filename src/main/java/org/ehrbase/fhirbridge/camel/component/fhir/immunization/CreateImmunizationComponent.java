@@ -6,7 +6,7 @@ import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirCompone
 
 @SuppressWarnings({"java:S110"})
 /**
- * Camel {@link org.apache.camel.Component Component} that handles 'Create Diagnostic Report' transaction.
+ * Camel {@link org.apache.camel.Component Component} that handles 'Create Immunization' transaction.
  *
  * @since 1.0.0
  */

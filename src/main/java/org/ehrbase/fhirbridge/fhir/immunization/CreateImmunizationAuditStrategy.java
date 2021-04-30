@@ -25,7 +25,7 @@ import java.util.Optional;
 
 /**
  * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
- * for 'Create Diagnostic Report' transaction.
+ * for 'Create Immunization' transaction.
  *
  * @since 1.0.0
  */

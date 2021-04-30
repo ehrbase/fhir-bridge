@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Implementation of {@link org.openehealth.ipf.commons.ihe.fhir.FhirProvider FhirProvider} that provides REST support
- * for 'Create Diagnostic Report' transaction.
+ * for 'Create Immunization' transaction.
  *
  * @since 1.0.0
  */
