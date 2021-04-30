@@ -22,7 +22,7 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * Configuration for 'Create Observation' transaction.
+ * Configuration for 'Create Immunization' transaction.
  *
  * @since 1.0.0
  */

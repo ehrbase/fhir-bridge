@@ -16,6 +16,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.fio2.FiO2CompositionConvert
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccoDiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HeartRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus.ImpfstatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.ObservationLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
@@ -49,6 +50,7 @@ public class ConversionConfiguration {
         registerPatientConverters(conversionService);
         registerProcedureConverters(conversionService);
         registerQuestionnaireResponseConverter(conversionService);
+        registerImmunizationConverter(conversionService);
 
         return conversionService;
     }
@@ -71,10 +73,6 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.DIAGNOSE_ORGAN_RECIPIENT, diagnoseCommonConverter);
         conversionService.registerConverter(Profile.DIAGNOSE_COMPLICATIONS_COVID_19, diagnoseCommonConverter);
         conversionService.registerConverter(Profile.DIAGNOSE_DEPENDENCE_ON_VENTILATOR, diagnoseCommonConverter);
-    }
-
-    private void registerImmunizationConverters(ConversionService conversionService) {
-        conversionService.registerConverter(Profile.DO_NOT_RESUSCITATE_ORDER, null); // TODO: @ErikTute, add your converter
     }
 
     private void registerConsentConverters(ConversionService conversionService) {
@@ -128,5 +126,9 @@ public class ConversionConfiguration {
 
     private void registerQuestionnaireResponseConverter(ConversionService conversionService) {
         conversionService.registerConverter(Profile.DEFAULT_QUESTIONNAIRE_RESPONSE, new D4lQuestionnaireCompositionConverter());
+    }
+
+    private void registerImmunizationConverter(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.VACCINATION, new ImpfstatusCompositionConverter());
     }
 }

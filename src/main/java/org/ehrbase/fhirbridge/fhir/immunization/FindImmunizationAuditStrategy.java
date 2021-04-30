@@ -26,7 +26,7 @@ import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 
 /**
  * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
- * for 'Find Diagnostic Report' transaction.
+ * for 'Find Immunization' transaction.
  *
  * @since 1.0.0
  */
