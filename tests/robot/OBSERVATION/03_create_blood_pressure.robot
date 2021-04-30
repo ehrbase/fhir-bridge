@@ -54,12 +54,12 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.subject.identifier.value		${{ {} }}		0		422		This property must be an simple value, not an object    Observation.subject.identifier.value
 	$.subject.identifier.value		${123}			0		422		Error parsing JSON: the primitive value must be a string    Observation.subject.identifier.value
 	$.subject.identifier			missing			0		422		Object must have some content    Observation.subject
-    $.subject.identifier			${EMPTY}		0		422		This property must be an Object, not a primitive property    Observation.subject.identifier
-    $.subject.identifier			${{ [] }}		0		422		This property must be an Object, not an array    Observation.subject.identifier
+    $.subject.identifier			${EMPTY}		0		422		The property identifier must be an Object, not a primitive property (at Observation.subject.identifier)    Observation.subject.identifier
+    $.subject.identifier			${{ [] }}		0		422		The property identifier must be an Object, not an array (at Observation.subject.identifier)    Observation.subject.identifier
     $.subject.identifier			${{ {} }}		0		422		Object must have some content    Observation.subject.identifier
     $.subject.identifier			${123}			0		422		This property must be an Object, not a primitive property    Observation.subject.identifier
     $.subject						missing			0		422		Observation.subject: minimum required = 1, but only found 0 .from ${profile url}
-	$.subject						${EMPTY}		0		422		This property must be an Object, not a primitive property    Observation.subject
+	$.subject						${EMPTY}		0		422		The property subject must be an Object, not a primitive property (at Observation.subject)    Observation.subject
     $.subject						${{ [] }}		0		422		This property must be an Object, not an array    Observation.subject
     $.subject						${{ {} }}		0		422		Object must have some content    Observation.subject
     $.subject						${123}			0		422		This property must be an Object, not a primitive property    Observation.subject
@@ -205,10 +205,10 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	
 	$.component[0].code.coding[0].code    	foobar    		1    	422    	Observation.component.SystolicBP: minimum required = 1, but only found 0 .from ${profile url}
 
-	$.component[0].valueQuantity			missing			0		422    	vs-3: If there is no a value a data absent reason must be present .value.exists.. or dataAbsentReason.exists...
+	$.component[0].valueQuantity			missing			0		422    	vs-3: 'If there is no a value a data absent reason must be present' failed
 	...																		Observation.component[0]
 	
-	$.component[0].valueQuantity			${EMPTY}		0		422    	This property must be an Object, not a primitive property
+	$.component[0].valueQuantity			${EMPTY}		0		422    	The property valueQuantity must be an Object, not a primitive property (at Observation.component[0].value[x])
 	...																		Observation.component[0].value[x]
 	
 	$.component[0].valueQuantity			${{ {} }}		0		422    	Object must have some content
@@ -303,10 +303,10 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	
 	$.component[1].code.coding[0].code    	foobar    		1    	422		Observation.component.DiastolicBP: minimum required = 1, but only found 0 .from ${profile url}
 
-	$.component[1].valueQuantity			missing			1		422		vs-3: If there is no a value a data absent reason must be present .value.exists.. or dataAbsentReason.exists...
+	$.component[1].valueQuantity			missing			1		422		vs-3: 'If there is no a value a data absent reason must be present' failed
 	...																		Observation.component[1]
 	
-	$.component[1].valueQuantity			${EMPTY}		0		422		This property must be an Object, not a primitive property
+	$.component[1].valueQuantity			${EMPTY}		0		422		The property valueQuantity must be an Object, not a primitive property (at Observation.component[1].value[x])
 	...																		Observation.component[1].value[x]
 	
 	$.component[1].valueQuantity			${{{}}}			0		422		Object must have some content
