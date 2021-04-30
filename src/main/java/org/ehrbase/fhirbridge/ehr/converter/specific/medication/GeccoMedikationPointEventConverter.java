@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Optional;
 
-public abstract class GeccoMedicationPointEventConverter<P extends PointEventEntity> extends MedicationStatementToPointEventConverter<P> {
+public abstract class GeccoMedikationPointEventConverter<P extends PointEventEntity> extends MedicationStatementToPointEventConverter<P> {
 
     @Override
     public P convert(@NonNull MedicationStatement resource) {

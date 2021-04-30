@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.im
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedicationPointEventConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedikationPointEventConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ArzneimittelNameDefiningCode3;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ImmunglobulineBeliebigesEreignisPointEvent;
 import org.hl7.fhir.r4.model.Coding;
@@ -10,7 +10,7 @@ import org.hl7.fhir.r4.model.MedicationStatement;
 
 import java.util.Map;
 
-public class ImmunglobulinePointEventConverter extends GeccoMedicationPointEventConverter<ImmunglobulineBeliebigesEreignisPointEvent> {
+public class ImmunglobulinePointEventConverter extends GeccoMedikationPointEventConverter<ImmunglobulineBeliebigesEreignisPointEvent> {
     @Override
     protected ImmunglobulineBeliebigesEreignisPointEvent convertInternal(MedicationStatement resource) {
         ImmunglobulineBeliebigesEreignisPointEvent immunglobulineBeliebigesEreignisPointEvent = new ImmunglobulineBeliebigesEreignisPointEvent();

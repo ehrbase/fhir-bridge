@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.an
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedicationPointEventConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedikationPointEventConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.AntikoagulanzienBeliebigesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ArzneimittelNameDefiningCode4;
 import org.hl7.fhir.r4.model.Coding;
@@ -10,7 +10,7 @@ import org.hl7.fhir.r4.model.MedicationStatement;
 
 import java.util.Map;
 
-public class AntikoagulanzienPointEventConverter extends GeccoMedicationPointEventConverter<AntikoagulanzienBeliebigesEreignisPointEvent> {
+public class AntikoagulanzienPointEventConverter extends GeccoMedikationPointEventConverter<AntikoagulanzienBeliebigesEreignisPointEvent> {
     @Override
     protected AntikoagulanzienBeliebigesEreignisPointEvent convertInternal(MedicationStatement resource) {
         AntikoagulanzienBeliebigesEreignisPointEvent antikoagulanzienBeliebigesEreignisPointEvent = new AntikoagulanzienBeliebigesEreignisPointEvent();

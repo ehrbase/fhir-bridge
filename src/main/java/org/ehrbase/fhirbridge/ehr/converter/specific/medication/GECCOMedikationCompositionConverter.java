@@ -7,7 +7,10 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.ant
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.covid19therapie.Covid19TherapieObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.immunoglobuline.ImmunglobulineObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.GECCOMedikationComposition;
+import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.KategorieDefiningCode;
 import org.hl7.fhir.r4.model.MedicationStatement;
+
+import java.util.Optional;
 
 public class GECCOMedikationCompositionConverter extends MedicationStatementToCompositionConverter<GECCOMedikationComposition> {
 
@@ -20,7 +23,27 @@ public class GECCOMedikationCompositionConverter extends MedicationStatementToCo
     protected GECCOMedikationComposition convertInternal(MedicationStatement resource) {
         GECCOMedikationComposition geccoMedikationComposition = new GECCOMedikationComposition();
         setObservation(resource, geccoMedikationComposition);
+        getKategorieDefiningCode(resource).ifPresent(geccoMedikationComposition::setKategorieDefiningCode);
         return geccoMedikationComposition;
+    }
+
+    private Optional<KategorieDefiningCode> getKategorieDefiningCode(MedicationStatement resource) {
+        if(resource.hasCategory()){
+            String category = resource.getCategory().getCoding().get(0).getCode();
+            if (KategorieDefiningCode.COMMUNITY.getCode().equals(category)) {
+                return Optional.of(KategorieDefiningCode.COMMUNITY);
+            }else if (KategorieDefiningCode.INPATIENT.getCode().equals(category)){
+                return Optional.of(KategorieDefiningCode.INPATIENT);
+            }else if(KategorieDefiningCode.OUTPATIENT.getCode().equals(category)){
+                return Optional.of(KategorieDefiningCode.OUTPATIENT);
+            }else if(KategorieDefiningCode.PATIENT_SPECIFIED.getCode().equals(category)){
+                return Optional.of(KategorieDefiningCode.PATIENT_SPECIFIED);
+            }else{
+                throw new UnprocessableEntityException("The category code" +category+ "is not supported by the Fhir bridge");
+            }
+        }else {
+            return Optional.empty();
+        }
     }
 
     private void setObservation(MedicationStatement resource, GECCOMedikationComposition geccoMedikationComposition) {
