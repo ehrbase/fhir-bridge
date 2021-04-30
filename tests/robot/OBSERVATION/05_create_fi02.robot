@@ -129,7 +129,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.identifier[0].type	missing		   422     Observation.identifier:analyseBefundCode: minimum required = 1, but only found 0 .from ${profile url}
 	$.identifier[0].type	${EMPTY}	   422     The property type must be an Object, not a primitive property
 	$.identifier[0].type	${123}		   422     The property type must be an Object, not a primitive property
-	$.identifier[0].type	foobar		   422     This property must be an Object, not a primitive property
+	$.identifier[0].type	foobar		   422     The property type must be an Object, not a primitive property
 	$.identifier[0].type	${{ [] }}	   422     The property type must be an Object, not an array
 	$.identifier[0].type	${{ {} }}	   422     Object must have some content
 	$.identifier[0].type	${None}		   422     The property type must be an Object, not null

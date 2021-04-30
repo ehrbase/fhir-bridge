@@ -132,7 +132,7 @@ ${randinteger}                  ${12345}
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
-	$.meta							missing							422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
+	$.meta							missing							422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*        Observation.meta
 	$.meta.profile					missing							422    	Object must have some content																					Observation.meta
 	$.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.						Observation.meta.profile.0.
 	$.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.						Observation.meta.profile.0.
@@ -347,7 +347,7 @@ ${randinteger}                  ${12345}
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-smoking-status.json
-	observation.validate response - 422 (with error message)	422								obs-6: 'dataAbsentReason SHALL only be present if Observation.value[x] is not present			Observation
+	observation.validate response - 422 (with error message)	422								obs-6: 'dataAbsentReason SHALL only be present if Observation.value[x] is not present' failed			Observation
 
 
 
