@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
+import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedikationObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ArzneimittelNameDefiningCode3;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ImmunglobulineObservation;
 import org.hl7.fhir.r4.model.Coding;
@@ -10,7 +10,7 @@ import org.hl7.fhir.r4.model.MedicationStatement;
 
 import java.util.Map;
 
-public class ImmunglobulineObservationConverter extends MedicationStatementToObservationConverter<ImmunglobulineObservation> {
+public class ImmunglobulineObservationConverter extends GeccoMedikationObservationConverter<ImmunglobulineObservation> {
     @Override
     protected ImmunglobulineObservation convertInternal(MedicationStatement resource) {
         ImmunglobulineObservation immunglobulineObservation = new ImmunglobulineObservation();
