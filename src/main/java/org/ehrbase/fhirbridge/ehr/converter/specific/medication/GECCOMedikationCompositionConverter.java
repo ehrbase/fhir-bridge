@@ -29,20 +29,24 @@ public class GECCOMedikationCompositionConverter extends MedicationStatementToCo
 
     private Optional<KategorieDefiningCode> getKategorieDefiningCode(MedicationStatement resource) {
         if(resource.hasCategory()){
-            String category = resource.getCategory().getCoding().get(0).getCode();
-            if (KategorieDefiningCode.COMMUNITY.getCode().equals(category)) {
-                return Optional.of(KategorieDefiningCode.COMMUNITY);
-            }else if (KategorieDefiningCode.INPATIENT.getCode().equals(category)){
-                return Optional.of(KategorieDefiningCode.INPATIENT);
-            }else if(KategorieDefiningCode.OUTPATIENT.getCode().equals(category)){
-                return Optional.of(KategorieDefiningCode.OUTPATIENT);
-            }else if(KategorieDefiningCode.PATIENT_SPECIFIED.getCode().equals(category)){
-                return Optional.of(KategorieDefiningCode.PATIENT_SPECIFIED);
-            }else{
-                throw new UnprocessableEntityException("The category code" +category+ "is not supported by the Fhir bridge");
-            }
+         return mapCategory(resource);
         }else {
             return Optional.empty();
+        }
+    }
+
+    private Optional<KategorieDefiningCode> mapCategory(MedicationStatement resource) {
+        String category = resource.getCategory().getCoding().get(0).getCode();
+        if (KategorieDefiningCode.COMMUNITY.getCode().equals(category)) {
+            return Optional.of(KategorieDefiningCode.COMMUNITY);
+        }else if (KategorieDefiningCode.INPATIENT.getCode().equals(category)){
+            return Optional.of(KategorieDefiningCode.INPATIENT);
+        }else if(KategorieDefiningCode.OUTPATIENT.getCode().equals(category)){
+            return Optional.of(KategorieDefiningCode.OUTPATIENT);
+        }else if(KategorieDefiningCode.PATIENT_SPECIFIED.getCode().equals(category)){
+            return Optional.of(KategorieDefiningCode.PATIENT_SPECIFIED);
+        }else{
+            throw new UnprocessableEntityException("The category code" +category+ "is not supported by the Fhir bridge");
         }
     }
 

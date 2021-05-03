@@ -3,18 +3,13 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.medication;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToObservationConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.GrundDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.StatusCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.StatusDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.StatusDefiningCode2;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.springframework.lang.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Optional;
 
 public abstract class GeccoMedikationObservationConverter<E extends EntryEntity> extends MedicationStatementToObservationConverter<E> {
 
