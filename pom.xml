@@ -7,7 +7,7 @@
 
     <groupId>org.ehrbase.fhirbridge</groupId>
     <artifactId>fhir-bridge</artifactId>
-    <version>1.1.0-RC3</version>
+    <version>1.1.0</version>
 
     <name>FHIR Bridge</name>
 
@@ -42,7 +42,8 @@
         <profile>
             <id>circleci</id>
             <properties>
-                <commandLineArguments>--logging.level.root=error --logging.level.org.apache.camel=off</commandLineArguments>
+                <commandLineArguments>--logging.level.root=error --logging.level.org.apache.camel=off
+                </commandLineArguments>
             </properties>
         </profile>
     </profiles>
