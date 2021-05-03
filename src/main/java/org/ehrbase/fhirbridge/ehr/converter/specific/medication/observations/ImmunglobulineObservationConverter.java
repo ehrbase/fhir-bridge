@@ -8,7 +8,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.Immu
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.MedicationStatement;
 
-import java.util.List;
 import java.util.Map;
 
 public class ImmunglobulineObservationConverter extends MedicationStatementToObservationConverter<ImmunglobulineObservation> {
