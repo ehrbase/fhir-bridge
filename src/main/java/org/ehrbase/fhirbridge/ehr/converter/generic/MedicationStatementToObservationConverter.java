@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.hl7.fhir.r4.model.MedicationStatement;
-import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
