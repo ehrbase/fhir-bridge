@@ -19,6 +19,7 @@ public class AceHemmerObservationConverter extends GeccoMedikationObservationCon
         aceHemmerObservation.setArzneimittelNameDefiningCode(getArzneimittelName(resource));
         return aceHemmerObservation;
     }
+    
     private ArzneimittelNameDefiningCode2 getArzneimittelName(MedicationStatement resource) {
         for (Coding coding:resource.getMedicationCodeableConcept().getCoding()) {
             if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.DIMDI_ATC.getUrl())) {
