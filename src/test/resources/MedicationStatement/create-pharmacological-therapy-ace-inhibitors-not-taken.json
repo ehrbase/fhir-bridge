@@ -6,7 +6,7 @@
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-ace-inhibitors"
     ]
   },
-  "status": "active",
+  "status": "not-taken",
   "medicationCodeableConcept": {
     "coding":  [
       {

@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.fhir.diagnosticReport;
+package org.ehrbase.fhirbridge.fhir.diagnosticreport;
 
 import ca.uhn.fhir.parser.DataFormatException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
