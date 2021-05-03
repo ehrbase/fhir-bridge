@@ -62,7 +62,7 @@ public class GECCOMedikationCompositionConverter extends MedicationStatementToCo
                 geccoMedikationComposition.setImmunglobuline(new ImmunglobulineObservationConverter().convert(resource));
                 break;
             default:
-                throw new UnprocessableEntityException("The profile " + resourceUrl + " is not supported by the FHIR bridge for MedicationStatements  ");
+                throw new UnprocessableEntityException("The profile " + resourceUrl + " is not supported by the FHIR bridge for MedicationStatements");
         }
     }
 }

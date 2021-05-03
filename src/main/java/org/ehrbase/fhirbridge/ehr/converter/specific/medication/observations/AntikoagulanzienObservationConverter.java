@@ -36,7 +36,7 @@ public class AntikoagulanzienObservationConverter extends GeccoMedikationObserva
         if(arzneimittelNameDefiningCodeMap.containsKey(coding.getCode())){
             return arzneimittelNameDefiningCodeMap.get(coding.getCode());
         }
-        throw new UnprocessableEntityException("Invalid Arzneimittel code  " + coding.getCode());
+        throw new UnprocessableEntityException("Invalid medicationCodeableConcept code " + coding.getCode());
     }
 
     protected Optional<GrundDefiningCode> getGrundDefiningCode(MedicationStatement resource) {

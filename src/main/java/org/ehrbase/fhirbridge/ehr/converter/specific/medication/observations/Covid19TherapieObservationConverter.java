@@ -21,7 +21,7 @@ public class Covid19TherapieObservationConverter extends GeccoMedikationObservat
 
     private ArzneimittelNameDefiningCode getArzneimittelName(MedicationStatement resource) {
         for (Coding coding : resource.getMedicationCodeableConcept().getCoding()) {
-            if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.DIMDI_ATC.getUrl())) {
+            if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
                 return mapArzneimittelName(coding);
             }
         }
@@ -33,7 +33,7 @@ public class Covid19TherapieObservationConverter extends GeccoMedikationObservat
         if (arzneimittelNameDefiningCodeMap.containsKey(coding.getCode())) {
             return arzneimittelNameDefiningCodeMap.get(coding.getCode());
         }
-        throw new UnprocessableEntityException("Invalid Arzneimittel code " + coding.getCode());
+        throw new UnprocessableEntityException("Invalid medicationCodeableConcept code " + coding.getCode());
     }
 
 }

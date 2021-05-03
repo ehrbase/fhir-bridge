@@ -32,6 +32,6 @@ public class ImmunglobulineObservationConverter extends GeccoMedikationObservati
         if(arzneimittelNameDefiningCodeMap.containsKey(coding.getCode())){
             return arzneimittelNameDefiningCodeMap.get(coding.getCode());
         }
-        throw new UnprocessableEntityException("Invalid Arzneimittel code  " + coding.getCode());
+        throw new UnprocessableEntityException("Invalid medicationCodeableConcept code " + coding.getCode());
     }
 }
