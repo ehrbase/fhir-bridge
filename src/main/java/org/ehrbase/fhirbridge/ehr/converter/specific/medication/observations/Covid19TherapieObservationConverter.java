@@ -19,6 +19,7 @@ public class Covid19TherapieObservationConverter extends GeccoMedikationObservat
         covid19TherapieObservation.setArzneimittelNameDefiningCode(getArzneimittelName(resource));
         return covid19TherapieObservation;
     }
+
     private ArzneimittelNameDefiningCode getArzneimittelName(MedicationStatement resource) {
         for (Coding coding:resource.getMedicationCodeableConcept().getCoding()) {
             if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.DIMDI_ATC.getUrl())) {
