@@ -1,16 +1,17 @@
 {
   "resourceType": "MedicationStatement",
+  "id": "a85311b0-0489-484f-8ee2-1d6257299ded",
   "meta": {
-    "profile": [
+    "profile":  [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy"
     ]
   },
   "status": "active",
   "medicationCodeableConcept": {
-    "coding": [
+    "coding":  [
       {
         "system": "http://snomed.info/sct",
-        "code": "413591007",
+        "code": "41359100asd7",
         "display": "Product containing atazanavir (medicinal product)"
       },
       {

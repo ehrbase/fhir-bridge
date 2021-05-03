@@ -20,6 +20,10 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     FindDiagnosticReport("diagnostic-report-find", "Find Diagnostic Report"),
 
+    CreateMedicationStatement("medication-statement-create", "Create Medication Statement"),
+
+    FindMedicationStatement("medication-statement-find", "Find Medication Statement"),
+
     CreateObservation("observation-create", "Create Observation"),
 
     FindObservation("observation-find", "Find Observation"),
