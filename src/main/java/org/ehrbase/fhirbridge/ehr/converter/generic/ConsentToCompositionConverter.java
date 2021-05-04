@@ -11,7 +11,7 @@ public abstract class ConsentToCompositionConverter<C extends CompositionEntity>
     @Override
     public C convert(@NonNull Consent resource) {
         C composition = super.convert(resource);
-        //composition.setStartTimeValue(Instant.now());
+        composition.setStartTimeValue(TimeConverter.convertConsentTime(resource));
         return composition;
     }
 }
