@@ -65,6 +65,15 @@ class DnrIT extends AbstractMappingTestSetupIT {
                 .build();
     }
 
+    public Javers getJaversIgnoreStartTime() {
+        return JaversBuilder.javers()
+                .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
+                .registerValueObject(new ValueObjectDefinition(DNRAnordnungComposition.class, List.of("location", "feederAudit", "startTimeValue")))
+                .registerValueObject(DnrAnordnungEvaluation.class)
+                .registerValueObject(DnrAnordnungKategorieElement.class)
+                .build();
+    }
+
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Consent csnt = (Consent) testFileLoader.loadResource(path);
@@ -78,7 +87,7 @@ class DnrIT extends AbstractMappingTestSetupIT {
         Consent consent = (Consent) super.testFileLoader.loadResource(resourcePath);
         DnrAnordnungCompositionConverter dnrAnordnungCompositionConverter = new DnrAnordnungCompositionConverter();
         DNRAnordnungComposition mapped = dnrAnordnungCompositionConverter.convert(consent);
-        Diff diff = compareCompositions(getJavers(), paragonPath, mapped);
+        Diff diff = compareCompositions(getJaversIgnoreStartTime(), paragonPath, mapped);
         assertEquals(0, diff.getChanges().size());
     }
 }
