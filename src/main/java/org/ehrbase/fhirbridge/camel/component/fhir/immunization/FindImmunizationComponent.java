@@ -16,18 +16,19 @@
 
 package org.ehrbase.fhirbridge.camel.component.fhir.immunization;
 
-import org.ehrbase.fhirbridge.fhir.diagnosticreport.FindDiagnosticReportTransaction;
+import org.ehrbase.fhirbridge.fhir.immunization.FindImmunizationTransaction;
 import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
- * Camel {@link org.apache.camel.Component Component} that handles 'Find Immunization' transaction.
+ * {@link CustomFhirComponent} that handles 'Find Immunization' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
 @SuppressWarnings({"java:S110"})
 public class FindImmunizationComponent extends CustomFhirComponent<FhirQueryAuditDataset> {
+
     public FindImmunizationComponent() {
-        super(new FindDiagnosticReportTransaction());
+        super(new FindImmunizationTransaction());
     }
 }

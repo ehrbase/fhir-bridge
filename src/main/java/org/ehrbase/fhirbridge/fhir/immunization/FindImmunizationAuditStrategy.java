@@ -25,10 +25,9 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditStrategy;
 import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
- * for 'Find Immunization' transaction.
+ * Custom implementation of  {@link FhirQueryAuditStrategy} for 'Find Immunization' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
 public class FindImmunizationAuditStrategy extends FhirQueryAuditStrategy {
 

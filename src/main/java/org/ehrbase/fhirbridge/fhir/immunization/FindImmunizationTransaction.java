@@ -22,9 +22,9 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 
 /**
- * Configuration for 'Find Immunization' transaction.
+ * {@link FhirTransactionConfiguration} for 'Find Immunization'.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
 public class FindImmunizationTransaction extends FhirTransactionConfiguration<FhirQueryAuditDataset> {
 

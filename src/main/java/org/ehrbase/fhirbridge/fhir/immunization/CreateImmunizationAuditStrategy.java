@@ -16,7 +16,6 @@
 
 package org.ehrbase.fhirbridge.fhir.immunization;
 
-import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Immunization;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditStrategy;
 import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
@@ -24,10 +23,9 @@ import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 import java.util.Optional;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
- * for 'Create Immunization' transaction.
+ * Custom implementation of  {@link GenericFhirAuditStrategy} for 'Create Immunization' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
 public class CreateImmunizationAuditStrategy extends GenericFhirAuditStrategy<Immunization> {
 
