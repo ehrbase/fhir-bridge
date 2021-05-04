@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.fhir.diagnosticReport;
+package org.ehrbase.fhirbridge.fhir.diagnosticreport;
 
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;

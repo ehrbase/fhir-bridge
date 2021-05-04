@@ -22,14 +22,14 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * Configuration for 'Create Immunization' transaction.
+ * {@link FhirTransactionConfiguration} for 'Create Immunization'.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
 public class CreateImmunizationTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
     public CreateImmunizationTransaction() {
-        super("immunization-report-create",
+        super("immunization-create",
                 "Create Immunization",
                 false,
                 null,

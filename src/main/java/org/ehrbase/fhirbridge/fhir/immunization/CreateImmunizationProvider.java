@@ -27,17 +27,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.fhir.FhirProvider FhirProvider} that provides REST support
+ * Concrete implementation of {@link AbstractPlainProvider} that provides REST support
  * for 'Create Immunization' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
 public class CreateImmunizationProvider extends AbstractPlainProvider {
 
     @Create
-    @SuppressWarnings("unused")
-    public MethodOutcome createImmunization(@ResourceParam Immunization immunization, RequestDetails requestDetails,
-                                                HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        return requestAction(immunization, null, httpServletRequest, httpServletResponse, requestDetails);
+    public MethodOutcome create(@ResourceParam Immunization observation, RequestDetails requestDetails,
+                                HttpServletRequest request, HttpServletResponse response) {
+        return requestAction(observation, null, request, response, requestDetails);
     }
 }
