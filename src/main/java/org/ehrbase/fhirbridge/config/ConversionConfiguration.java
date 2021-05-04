@@ -16,6 +16,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.fio2.FiO2CompositionConvert
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccoDiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HeartRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus.ImpfstatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GECCOMedikationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.ObservationLabCompositionConverter;
@@ -137,6 +138,6 @@ public class ConversionConfiguration {
     }
 
     private void registerImmunizationConverters(ConversionService conversionService) {
-        conversionService.registerConverter(Profile.HISTORY_OF_VACCINATION, null); // TODO: @SevKohler
+        conversionService.registerConverter(Profile.HISTORY_OF_VACCINATION, new ImpfstatusCompositionConverter());
     }
 }

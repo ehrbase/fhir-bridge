@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.InterpretationDefiningCode;
 
 public enum ImpfungGegenDefiningCode implements EnumValueSet {
   DISEASE_CAUSED_BY_SEVERE_ACUTE_RESPIRATORY_SYNDROME_CORONAVIRUS2_DISORDER("Disease caused by Severe acute respiratory syndrome coronavirus 2 (disorder)", "", "SNOMED Clinical Terms", "840539006"),

@@ -38,7 +38,7 @@ public class ImpfstatusCompositionContainment extends Containment {
 
   public SelectAqlField<Setting> SETTING_DEFINING_CODE = new AqlFieldImp<Setting>(ImpfstatusComposition.class, "/context/setting|defining_code", "settingDefiningCode", Setting.class, this);
 
-  public SelectAqlField<ImpfungAction> IMPFUNG = new AqlFieldImp<ImpfungAction>(ImpfstatusComposition.class, "/content[openEHR-EHR-ACTION.medication.v1]", "impfung", ImpfungAction.class, this);
+  public ListSelectAqlField<ImpfungAction> IMPFUNG = new ListAqlFieldImp<ImpfungAction>(ImpfstatusComposition.class, "/content[openEHR-EHR-ACTION.medication.v1]", "impfung", ImpfungAction.class, this);
 
   public SelectAqlField<UnbekannterImpfstatusEvaluation> UNBEKANNTER_IMPFSTATUS = new AqlFieldImp<UnbekannterImpfstatusEvaluation>(ImpfstatusComposition.class, "/content[openEHR-EHR-EVALUATION.absence.v2]", "unbekannterImpfstatus", UnbekannterImpfstatusEvaluation.class, this);
 
