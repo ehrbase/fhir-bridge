@@ -37,7 +37,6 @@ public enum BeschreibungDefiningCode implements EnumValueSet {
           return bc;
         }
       }
-      //TODO Test - hier gehts weiter: das oben scheint jetzt gefixed, schauen wo der nächste Fehler liegt
       throw new UnprocessableEntityException("Getting BeschreibungDefiningCode failed. Code not found for: " + fhir_code.getCoding().get(0).toString());
     }
 
