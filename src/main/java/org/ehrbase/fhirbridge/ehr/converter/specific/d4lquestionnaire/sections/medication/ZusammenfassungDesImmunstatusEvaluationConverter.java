@@ -15,8 +15,6 @@ public class ZusammenfassungDesImmunstatusEvaluationConverter extends Questionna
     protected ZusammenfassungDesImmunstatusEvaluation convertInternal(QuestionnaireResponse.QuestionnaireResponseItemComponent questionnaireResponseItemComponent) {
         ZusammenfassungDesImmunstatusEvaluation zusammenfassungDesImmunstatusEvaluation = new ZusammenfassungDesImmunstatusEvaluation();
         zusammenfassungDesImmunstatusEvaluation.setInfektionskrankheitOderErregerValue("Grippe");
-        zusammenfassungDesImmunstatusEvaluation.setLanguage(Language.DE);
-        zusammenfassungDesImmunstatusEvaluation.setSubject(new PartySelf());
 
         if (getQuestionLoincYesNoToBoolean(questionnaireResponseItemComponent)) {
             zusammenfassungDesImmunstatusEvaluation.setHabenSieSichImZeitraumVom1Oktober2019BisHeuteGegenGrippeImpfenLassenDefiningCode(AelterOderGleich65JahreAltDefiningCode.JA);
