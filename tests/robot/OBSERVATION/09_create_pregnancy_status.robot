@@ -376,7 +376,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-pregnancy-status.json
-	observation.validate response - 422 (with error message)	422								obs-6: 'dataAbsentReason SHALL only be present if Observation.value[x] is not present' failed			Observation
+	observation.validate response - 422 (with error message)	    422								obs-6: 'dataAbsentReason SHALL only be present if Observation.value.x. is not present'  Observation
 
 
 
