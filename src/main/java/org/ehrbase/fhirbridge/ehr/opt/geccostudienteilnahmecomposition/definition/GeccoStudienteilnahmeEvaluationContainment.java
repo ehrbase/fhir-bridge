@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -12,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class GeccoStudienteilnahmeEvaluationContainment extends Containment {
   public SelectAqlField<GeccoStudienteilnahmeEvaluation> GECCO_STUDIENTEILNAHME_EVALUATION = new AqlFieldImp<GeccoStudienteilnahmeEvaluation>(GeccoStudienteilnahmeEvaluation.class, "", "GeccoStudienteilnahmeEvaluation", GeccoStudienteilnahmeEvaluation.class, this);
 
-  public SelectAqlField<DvCodedText> BEREITS_AN_INTERVENTIONELLEN_KLINISCHEN_STUDIEN_TEILGENOMMEN = new AqlFieldImp<DvCodedText>(GeccoStudienteilnahmeEvaluation.class, "/data[at0001]/items[at0002]/value", "bereitsAnInterventionellenKlinischenStudienTeilgenommen", DvCodedText.class, this);
+  public SelectAqlField<BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode> BEREITS_AN_INTERVENTIONELLEN_KLINISCHEN_STUDIEN_TEILGENOMMEN_DEFINING_CODE = new AqlFieldImp<BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode>(GeccoStudienteilnahmeEvaluation.class, "/data[at0001]/items[at0002]/value|defining_code", "bereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode", BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode.class, this);
 
   public SelectAqlField<NullFlavour> BEREITS_AN_INTERVENTIONELLEN_KLINISCHEN_STUDIEN_TEILGENOMMEN_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(GeccoStudienteilnahmeEvaluation.class, "/data[at0001]/items[at0002]/null_flavour|defining_code", "bereitsAnInterventionellenKlinischenStudienTeilgenommenNullFlavourDefiningCode", NullFlavour.class, this);
 

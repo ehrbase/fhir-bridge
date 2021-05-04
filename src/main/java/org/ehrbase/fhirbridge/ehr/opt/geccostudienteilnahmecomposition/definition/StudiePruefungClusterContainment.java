@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definiti
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.lang.String;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -14,7 +13,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class StudiePruefungClusterContainment extends Containment {
   public SelectAqlField<StudiePruefungCluster> STUDIE_PRUEFUNG_CLUSTER = new AqlFieldImp<StudiePruefungCluster>(StudiePruefungCluster.class, "", "StudiePruefungCluster", StudiePruefungCluster.class, this);
 
-  public SelectAqlField<DvCodedText> TITEL_DER_STUDIE_PRUEFUNG = new AqlFieldImp<DvCodedText>(StudiePruefungCluster.class, "/items[at0001]/value", "titelDerStudiePruefung", DvCodedText.class, this);
+  public SelectAqlField<TitelDerStudiePruefungDefiningCode> TITEL_DER_STUDIE_PRUEFUNG_DEFINING_CODE = new AqlFieldImp<TitelDerStudiePruefungDefiningCode>(StudiePruefungCluster.class, "/items[at0001]/value|defining_code", "titelDerStudiePruefungDefiningCode", TitelDerStudiePruefungDefiningCode.class, this);
 
   public SelectAqlField<NullFlavour> TITEL_DER_STUDIE_PRUEFUNG_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(StudiePruefungCluster.class, "/items[at0001]/null_flavour|defining_code", "titelDerStudiePruefungNullFlavourDefiningCode", NullFlavour.class, this);
 

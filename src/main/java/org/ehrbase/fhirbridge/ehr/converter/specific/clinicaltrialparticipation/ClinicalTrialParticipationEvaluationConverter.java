@@ -1,2 +1,5 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation;public class ClinicalTrialParticipationEvaluationConverter {
+package org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation;
+
+public class ClinicalTrialParticipationEvaluationConverter {
+
 }
