@@ -17,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.dosage.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-04T14:02:53.963468+02:00",
+    date = "2021-05-04T16:32:17.149315+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class VerabreichteDosenCluster implements LocatableEntity {
