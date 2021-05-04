@@ -395,7 +395,7 @@ ${vCC_URL}		                http://snomed.info/sct
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-patient-in-icu.json
-	observation.validate response - 422 (with error message)	    422								obs-6: dataAbsentReason SHALL only be present if Observation.value[x] is not present			Observation
+	observation.validate response - 422 (with error message)	    422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present			Observation
 
 
 

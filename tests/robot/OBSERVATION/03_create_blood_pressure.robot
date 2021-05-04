@@ -103,7 +103,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.meta				missing						0		422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	$.meta.profile		missing						0		422    	Object must have some content
 	$.meta.profile    	${{ ["invalid_url"] }}		0   	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.
-	$.meta.profile    	${{ ["http://wrong.url"] }} 0    	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked
+	$.meta.profile      ${{ ["http://wrong.url"] }}     0       422     Profile reference 'http://wrong.url' could not be resolved, so has not been checked
 	$.meta.profile		${EMPTY}					0		422    	This property must be an Array, not a a primitive property
 	
 	# comment: the next one sets the value to an empty list/array []
