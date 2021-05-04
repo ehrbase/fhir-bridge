@@ -136,7 +136,7 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.						Observation.meta.profile.0.
 	$.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.						Observation.meta.profile.0.
 	$.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.							Observation.meta.profile.0.
-	$.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked								Observation.meta.profile.0.
+	$.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	The resource does not contain any supported profile. One of the following profiles is expected
 	$.meta.profile					${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.meta.profile
 	
 	# comment: the next one sets the value to an empty list/array []
@@ -330,7 +330,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				BodyHeight/create-body-height-normal.json
-	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value[x] is not present    			Observation
+	observation.validate response - 422 (with error message)	    422								obs-6: 'dataAbsentReason SHALL only be present if Observation.value.x. is not present'  			Observation
 
 
 
@@ -484,7 +484,7 @@ ${vQSystem}						http://unitsofmeasure.org
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}              true			   true 			 ${1234}          		  		  ${1234}         	${1234}                         false    	 	    valid      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Observation.subject: minimum required = 1, but only found 0 .from ${body_height-url}.                                                            	Observation
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}              true			   false		     ${1234}          		  		  ${1234}         	${1234}                         true    		 	test      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                           Observation.code
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}              true			   false			 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  ${12345}		      true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Not a valid date/time .12345.                                                                                                                      Observation.effective.ofType.dateTime.
-    Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}              true			   false			 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  false		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          vs-2: If there is no component or hasMember element then either a value.x. or a data absent reason must be present.*                               Observation
+    Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}              true			   false			 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  false		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          vs-2: 'If there is no component or hasMember element then either a value.x. or a data absent reason must be present.'                               Observation
 
 
 

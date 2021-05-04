@@ -151,7 +151,7 @@ ${vCC_URL}		                http://snomed.info/sct
     $.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.						Observation.meta.profile.0.
     $.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.						Observation.meta.profile.0.
     $.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.							Observation.meta.profile.0.
-    $.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	The resource does not contain any supported profile                             								Observation.meta.profile.0.
+    $.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	The resource does not contain any supported profile
     $.meta.profile[0]				${EMPTY}						422    	@value cannot be empty                                  														Observation.meta.profile.0.
 	
 	# comment: the next one sets the value to an empty list/array []
@@ -395,7 +395,7 @@ ${vCC_URL}		                http://snomed.info/sct
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-patient-in-icu.json
-	observation.validate response - 422 (with error message)	    422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present			Observation
+	observation.validate response - 422 (with error message)	    422								obs-6: 'dataAbsentReason SHALL only be present if Observation.value.x. is not present'  Observation
 
 
 
