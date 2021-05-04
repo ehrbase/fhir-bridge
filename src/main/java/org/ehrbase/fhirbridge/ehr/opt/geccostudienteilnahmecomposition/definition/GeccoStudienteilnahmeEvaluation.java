@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
@@ -15,15 +14,16 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.gecco_study_participation.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-04T11:17:24.266245900+02:00",
+    date = "2021-05-04T16:51:43.100661+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class GeccoStudienteilnahmeEvaluation implements EntryEntity {
   /**
    * Path: GECCO_Studienteilnahme/GECCO_Studienteilnahme/Bereits an interventionellen klinischen Studien teilgenommen?
+   * Description: *
    */
-  @Path("/data[at0001]/items[at0002]/value")
-  private DvCodedText bereitsAnInterventionellenKlinischenStudienTeilgenommen;
+  @Path("/data[at0001]/items[at0002]/value|defining_code")
+  private BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode bereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode;
 
   /**
    * Path: GECCO_Studienteilnahme/GECCO_Studienteilnahme/Item tree/Bereits an interventionellen klinischen Studien teilgenommen?/null_flavour
@@ -56,13 +56,14 @@ public class GeccoStudienteilnahmeEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setBereitsAnInterventionellenKlinischenStudienTeilgenommen(
-      DvCodedText bereitsAnInterventionellenKlinischenStudienTeilgenommen) {
-     this.bereitsAnInterventionellenKlinischenStudienTeilgenommen = bereitsAnInterventionellenKlinischenStudienTeilgenommen;
+  public void setBereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode(
+      BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode bereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode) {
+     this.bereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode = bereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode;
   }
 
-  public DvCodedText getBereitsAnInterventionellenKlinischenStudienTeilgenommen() {
-     return this.bereitsAnInterventionellenKlinischenStudienTeilgenommen ;
+  public BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode getBereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode(
+      ) {
+     return this.bereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode ;
   }
 
   public void setBereitsAnInterventionellenKlinischenStudienTeilgenommenNullFlavourDefiningCode(

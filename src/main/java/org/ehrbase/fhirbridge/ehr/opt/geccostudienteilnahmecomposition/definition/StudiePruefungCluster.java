@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definiti
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.lang.String;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.study_details.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-04T11:17:24.280244800+02:00",
+    date = "2021-05-04T16:51:43.112959+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class StudiePruefungCluster implements LocatableEntity {
@@ -25,8 +24,8 @@ public class StudiePruefungCluster implements LocatableEntity {
    * Description: Titel des Forschungsvorhabens.
    * Comment: Zum Beispiel: "Eine randomisierte Phase-II-Studie mit nal-Iri plus 5-Fluorouracil im Vergleich zu 5-Fluorouracil bei stationären Patienten mit Cholangio- und Gallenblasenkarzinom, die zuvor mit Gemcitabin oder Gemcitabin-haltigen Therapien behandelt wurden."
    */
-  @Path("/items[at0001]/value")
-  private DvCodedText titelDerStudiePruefung;
+  @Path("/items[at0001]/value|defining_code")
+  private TitelDerStudiePruefungDefiningCode titelDerStudiePruefungDefiningCode;
 
   /**
    * Path: GECCO_Studienteilnahme/GECCO_Studienteilnahme/Item tree/Studienteilnahme/Studie/Prüfung/Titel der Studie/Prüfung/null_flavour
@@ -52,7 +51,7 @@ public class StudiePruefungCluster implements LocatableEntity {
    * Path: GECCO_Studienteilnahme/GECCO_Studienteilnahme/Studienteilnahme/Studie/Prüfung/Registrierung
    * Description: Registrierung der Studie in Registern.
    * Comment: Wenn die Studie auf der Webseite Clinicaltrials.gov registriert ist, besitzt sie eine US NCT-Nummer. Zum Beispiel: NCT03772405. 
-   * Eine EudraCT Nummer wird von der Europäischen Arzneimittelagentur vergeben. Wenn die klinische Prüfung auf der Webseite Current Controlled Trials registriert ist, besitzt sie eine ISRCTN-Nummer (International Standard Randomised Controlled Trial Number). 
+   * Eine EudraCT Nummer wird von der Europäischen Arzneimittelagentur vergeben. Wenn die klinische Prüfung auf der Webseite Current Controlled Trials registriert ist, besitzt sie eine ISRCTN-Nummer (International Standard Randomised Controlled Trial Number).
    */
   @Path("/items[at0033]")
   private List<StudiePruefungRegistrierungCluster> registrierung;
@@ -60,7 +59,7 @@ public class StudiePruefungCluster implements LocatableEntity {
   /**
    * Path: GECCO_Studienteilnahme/GECCO_Studienteilnahme/Studienteilnahme/Studie/Prüfung/Studienzentrum
    * Description: Detailangaben über die teilnehmende medizinische Einrichtung wie Klinik oder Praxis, die Patienten gemäß den Studienvorgaben rekrutiert und die Daten erhebt.
-   * Comment: Zum Beispiel: Name der Einrichtung, Adresse, Name des Prüfers, Kontaktdetails, zuständige Ethikkommission, Datum der Genehmigung der Teilnahme, beteiligte Personen und weitere Details. Hier können auch demographische Archetypen eingefügt werden. 
+   * Comment: Zum Beispiel: Name der Einrichtung, Adresse, Name des Prüfers, Kontaktdetails, zuständige Ethikkommission, Datum der Genehmigung der Teilnahme, beteiligte Personen und weitere Details. Hier können auch demographische Archetypen eingefügt werden.
    */
   @Path("/items[at0023]")
   private List<Cluster> studienzentrum;
@@ -79,12 +78,13 @@ public class StudiePruefungCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setTitelDerStudiePruefung(DvCodedText titelDerStudiePruefung) {
-     this.titelDerStudiePruefung = titelDerStudiePruefung;
+  public void setTitelDerStudiePruefungDefiningCode(
+      TitelDerStudiePruefungDefiningCode titelDerStudiePruefungDefiningCode) {
+     this.titelDerStudiePruefungDefiningCode = titelDerStudiePruefungDefiningCode;
   }
 
-  public DvCodedText getTitelDerStudiePruefung() {
-     return this.titelDerStudiePruefung ;
+  public TitelDerStudiePruefungDefiningCode getTitelDerStudiePruefungDefiningCode() {
+     return this.titelDerStudiePruefungDefiningCode ;
   }
 
   public void setTitelDerStudiePruefungNullFlavourDefiningCode(

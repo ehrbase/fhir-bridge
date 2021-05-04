@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.lang.String;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Entity;
@@ -12,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-04T11:17:24.286246+02:00",
+    date = "2021-05-04T16:51:43.121198+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class StudiePruefungRegistrierungCluster implements LocatableEntity {
@@ -21,8 +20,8 @@ public class StudiePruefungRegistrierungCluster implements LocatableEntity {
    * Description: Studienregister, wo die Studie registriert ist und eine eindeutige Identifikationsnummer besitzt.
    * Comment: Zum Beispiel: Europäischen Arzneimittelagentur (EudraCT) oder Webseite Clinicaltrials.gov (US NCT-Nummer).
    */
-  @Path("/items[at0035]/value")
-  private DvCodedText registername;
+  @Path("/items[at0035]/value|defining_code")
+  private RegisternameDefiningCode registernameDefiningCode;
 
   /**
    * Path: GECCO_Studienteilnahme/GECCO_Studienteilnahme/Item tree/Studienteilnahme/Studie/Prüfung/Registrierung/Registername/null_flavour
@@ -51,12 +50,12 @@ public class StudiePruefungRegistrierungCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setRegistername(DvCodedText registername) {
-     this.registername = registername;
+  public void setRegisternameDefiningCode(RegisternameDefiningCode registernameDefiningCode) {
+     this.registernameDefiningCode = registernameDefiningCode;
   }
 
-  public DvCodedText getRegistername() {
-     return this.registername ;
+  public RegisternameDefiningCode getRegisternameDefiningCode() {
+     return this.registernameDefiningCode ;
   }
 
   public void setRegisternameNullFlavourDefiningCode(

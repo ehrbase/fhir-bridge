@@ -11,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-04T11:17:24.242245500+02:00",
+    date = "2021-05-04T16:51:43.075078+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class GeccoStudienteilnahmeKategorieElement implements LocatableEntity {
