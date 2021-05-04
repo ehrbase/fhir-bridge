@@ -3,9 +3,11 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ImmunizationToActionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
+import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.CurrentStateDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfstoffDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungAction;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungGegenDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungImpfungGegenElement;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.VerabreichteDosenCluster;
 import org.hl7.fhir.r4.model.Immunization;
 
@@ -20,8 +22,22 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
     protected ImpfungAction convertInternal(Immunization resource) {
         ImpfungAction impfungAction = new ImpfungAction();
         impfungAction.setImpfstoffDefiningCode(mapImpstoffDefiningCode(resource));
+        impfungAction.setCurrentStateDefiningCode(mapCurentState(resource));
         mapImpfungGegenAndDosis(resource, impfungAction);
         return impfungAction;
+    }
+
+    private CurrentStateDefiningCode mapCurentState(Immunization resource) {
+        String statusCode = resource.getStatus().toCode();
+        if (statusCode.equals(CurrentStateDefiningCode.ABORTED.getValue())) {
+            return CurrentStateDefiningCode.ABORTED;
+        }else if (statusCode.equals(CurrentStateDefiningCode.COMPLETED.getValue())) {
+            return CurrentStateDefiningCode.COMPLETED;
+        }else if (statusCode.equals(CurrentStateDefiningCode.ACTIVE.getValue())) {
+            return CurrentStateDefiningCode.ACTIVE;
+        }else{
+            throw new UnprocessableEntityException("The status code" + statusCode+ " is wrong or not supported by the fhir-bridge. Supported are: aborted, completed and active");
+        }
     }
 
     private void mapImpfungGegenAndDosis(Immunization resource, ImpfungAction impfungAction) {
@@ -48,14 +64,16 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
                 && resource.getProtocolApplied().get(0).getTargetDisease().get(0).getCoding().get(0).getSystem().equals(CodeSystem.SNOMED.getUrl())) {
             impfungAction.setImpfungGegen(List.of(mapImpfungGegen(resource)));
         } else {
-            throw new UnprocessableEntityException("Target Disease code");
+            throw new UnprocessableEntityException("Target Disease System is wrong, has to be SNOMED.");
         }
     }
 
-    private ImpfungGegenDefiningCode mapImpfungGegen(Immunization resource) {
+    private ImpfungImpfungGegenElement mapImpfungGegen(Immunization resource) {
+        ImpfungImpfungGegenElement impfungImpfungGegenElement = new ImpfungImpfungGegenElement();
         String snomedCode = resource.getProtocolApplied().get(0).getTargetDisease().get(0).getCoding().get(0).getCode();
         if (ImpfungGegenDefiningCode.getCodesAsMap().containsKey(snomedCode)) {
-            return ImpfungGegenDefiningCode.getCodesAsMap().get(snomedCode);
+            impfungImpfungGegenElement.setValue(ImpfungGegenDefiningCode.getCodesAsMap().get(snomedCode));
+            return impfungImpfungGegenElement;
         } else {
             throw new UnprocessableEntityException("Invalid Snomed Code " + snomedCode + " entered");
         }
