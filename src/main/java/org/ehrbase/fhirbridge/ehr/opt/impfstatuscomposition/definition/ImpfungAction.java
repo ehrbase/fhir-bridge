@@ -18,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 @Archetype("openEHR-EHR-ACTION.medication.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-04T16:32:17.107654+02:00",
+    date = "2021-05-04T17:09:24.124296+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class ImpfungAction implements EntryEntity {

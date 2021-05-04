@@ -502,16 +502,16 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
     this.code = code;
   }
 
-  public String getValue() {
-     return this.value ;
-  }
-
   public static Map<String, ImpfstoffDefiningCode> getCodesAsMap(){
     Map<String, ImpfstoffDefiningCode> impfstoffDefiningCodeHashMap = new HashMap<>();
     for (ImpfstoffDefiningCode impfstoffDefiningCode : ImpfstoffDefiningCode.values()) {
       impfstoffDefiningCodeHashMap.put(impfstoffDefiningCode.getCode(), impfstoffDefiningCode);
     }
     return impfstoffDefiningCodeHashMap;
+  }
+
+  public String getValue() {
+     return this.value ;
   }
 
   public String getDescription() {
