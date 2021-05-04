@@ -143,7 +143,7 @@ ${vCC_URL}		https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/frailty
     $.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.						Observation.meta.profile.0.
     $.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.						Observation.meta.profile.0.
     $.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.							Observation.meta.profile.0.
-    $.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked								Observation.meta.profile.0.
+    $.meta.profile    				${{ ["http://wrong.url"] }}	   	422     The resource does not contain any supported profile. One of the following profiles is expected
     $.meta.profile					${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.meta.profile
 	
 	# comment: the next one sets the value to an empty list/array []
