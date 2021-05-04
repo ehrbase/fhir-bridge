@@ -7,6 +7,9 @@ The implementation is based on [Apache Camel](https://camel.apache.org/) and [Op
 
 ## Releases
 
+##### 2021, May 04
+v1.1.1 - Add system scope for SMART on FHIR.
+
 ##### 2021, April 27
 v1.1.0 - Final release 1.1.0 including the fix for SMART on FHIR.
 
