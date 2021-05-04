@@ -21,7 +21,6 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.GeccoStudienteilnahmeEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.GeccoStudienteilnahmeKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.StatusDefiningCode;
@@ -30,11 +29,11 @@ import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definitio
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-04T16:51:43.036290+02:00",
+    date = "2021-05-04T17:37:36.490444500+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 @Template("GECCO_Studienteilnahme")
-public class GECCOStudienteilnahmeComposition implements CompositionEntity, Composition {
+public class GECCOStudienteilnahmeComposition implements CompositionEntity {
   /**
    * Path: GECCO_Studienteilnahme/category
    */
