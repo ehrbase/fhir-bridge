@@ -132,19 +132,19 @@ ${randinteger}                  ${12345}
 
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
-	$.meta							missing							422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*        Observation.meta
-	$.meta.profile					missing							422    	Object must have some content																					Observation.meta
-	$.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.						Observation.meta.profile.0.
-	$.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.						Observation.meta.profile.0.
-	$.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.							Observation.meta.profile.0.
-	$.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	The resource does not contain any supported profile                             								Observation.meta.profile.0.
-	$.meta.profile					${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.meta.profile
+	$.meta							missing							422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
+	$.meta.profile					missing							422    	Object must have some content                                                                                   Observation.meta
+	$.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.                       Observation.meta.profile.0.
+	$.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.                        Observation.meta.profile.0.
+	$.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.                          Observation.meta.profile.0.
+	$.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	The resource does not contain any supported profile. One of the following profiles is expected
+	$.meta.profile					${EMPTY}						422    	This property must be an Array, not a primitive property
 	
 	# comment: the next one sets the value to an empty list/array []
 	$.meta.profile					${{ [] }}						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	
 	# comment: the next one sets value to an empty object {}
-	$.meta.profile					${{ {} }}						422    	This property must be an Array, not an object
+	$.meta.profile					${{ {} }}						422    	This property must be an Array, not an object                                                                   Observation.meta
 
 
 005 Create Smoking Status (Invalid/Missing 'Status')
