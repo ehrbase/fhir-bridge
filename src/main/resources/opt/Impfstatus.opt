@@ -25,10 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">fc002bbb4956b50235b9740dd4ef29c6</other_details>
+    <other_details id="MD5-CAM-1.0.1">8c7a42798bb1bad99ec062b723c014ca</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="sem_ver">3.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -279,7 +279,7 @@
           <lower_included>true</lower_included>
           <lower_unbounded>false</lower_unbounded>
           <upper_unbounded>true</upper_unbounded>
-          <lower>0</lower>
+          <lower>1</lower>
         </occurrences>
         <node_id>at0000</node_id>
         <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -975,7 +975,7 @@
                   <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>false</upper_unbounded>
-                  <lower>0</lower>
+                  <lower>1</lower>
                   <upper>1</upper>
                 </occurrences>
                 <node_id>at0020</node_id>
@@ -1356,7 +1356,7 @@
                   <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
+                  <lower>0</lower>
                   <upper>1</upper>
                 </occurrences>
                 <node_id>at0000</node_id>

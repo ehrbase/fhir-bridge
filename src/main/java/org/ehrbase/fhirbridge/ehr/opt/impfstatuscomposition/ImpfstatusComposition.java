@@ -20,6 +20,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungAction;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.UnbekannterImpfstatusEvaluation;
 
@@ -27,11 +28,11 @@ import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.Unbekannt
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-04T14:02:53.881839+02:00",
+    date = "2021-05-04T16:32:17.077142+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 @Template("Impfstatus")
-public class ImpfstatusComposition implements CompositionEntity {
+public class ImpfstatusComposition implements CompositionEntity, Composition {
   /**
    * Path: Impfstatus/category
    */
