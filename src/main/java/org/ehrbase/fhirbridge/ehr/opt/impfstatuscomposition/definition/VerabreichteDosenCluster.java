@@ -17,8 +17,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.dosage.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-04-29T13:40:23.902029+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-05-04T14:02:53.963468+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class VerabreichteDosenCluster implements LocatableEntity {
   /**
@@ -61,7 +61,7 @@ public class VerabreichteDosenCluster implements LocatableEntity {
   /**
    * Path: Impfstatus/Impfung/Verabreichte Dosen/Tägliche Verabreichungszeiten
    * Description: Strukturierte Details des Musters für Verabreichungszeiten innerhalb eines Tages.
-   * Comment: Zum Beispiel: 'Morgens', 'um 06:00, 14:00, 21:00'.
+   * Comment: Zum Beispiel: "Morgens", "Um 06:00, 14:00, 21:00"'.
    */
   @Path("/items[at0037]")
   private List<Cluster> taeglicheVerabreichungszeiten;

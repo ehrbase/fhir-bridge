@@ -18,8 +18,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 @Archetype("openEHR-EHR-ACTION.medication.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-04-29T13:40:23.862565+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-05-04T14:02:53.930005+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class ImpfungAction implements EntryEntity {
   /**
@@ -58,14 +58,8 @@ public class ImpfungAction implements EntryEntity {
    * Description: Begründung, warum der Prozessschritt für das identifizierte Arzneimittel durchgeführt wurde.
    * Comment: Zum Beispiel: "Verschoben - Patient war zum Zeitpunkt der Arzneimittelgabe nicht verfügbar", "abgesagt - Nebenwirkung". Merke: Dies ist nicht der Grund für die Arzneimittelverordnung, sondern der spezifische Grund, warum ein Behandlungsschritt durchgeführt wurde. Wird oft verwendet, um Abweichungen von der ursprünglichen Verordnung zu dokumentieren.
    */
-  @Path("/description[at0017]/items[at0021 and name/value='Impfung gegen']/value|defining_code")
-  private ImpfungGegenDefiningCode impfungGegenDefiningCode;
-
-  /**
-   * Path: Impfstatus/Impfung/Tree/Impfung gegen/null_flavour
-   */
-  @Path("/description[at0017]/items[at0021 and name/value='Impfung gegen']/null_flavour|defining_code")
-  private NullFlavour impfungGegenNullFlavourDefiningCode;
+  @Path("/description[at0017]/items[at0021 and name/value='Impfung gegen']")
+  private List<ImpfungImpfungGegenElement> impfungGegen;
 
   /**
    * Path: Impfstatus/Impfung/Zusätzliche Details
@@ -156,21 +150,12 @@ public class ImpfungAction implements EntryEntity {
      return this.verabreichteDosen ;
   }
 
-  public void setImpfungGegenDefiningCode(ImpfungGegenDefiningCode impfungGegenDefiningCode) {
-     this.impfungGegenDefiningCode = impfungGegenDefiningCode;
+  public void setImpfungGegen(List<ImpfungImpfungGegenElement> impfungGegen) {
+     this.impfungGegen = impfungGegen;
   }
 
-  public ImpfungGegenDefiningCode getImpfungGegenDefiningCode() {
-     return this.impfungGegenDefiningCode ;
-  }
-
-  public void setImpfungGegenNullFlavourDefiningCode(
-      NullFlavour impfungGegenNullFlavourDefiningCode) {
-     this.impfungGegenNullFlavourDefiningCode = impfungGegenNullFlavourDefiningCode;
-  }
-
-  public NullFlavour getImpfungGegenNullFlavourDefiningCode() {
-     return this.impfungGegenNullFlavourDefiningCode ;
+  public List<ImpfungImpfungGegenElement> getImpfungGegen() {
+     return this.impfungGegen ;
   }
 
   public void setZusaetzlicheDetails(List<Cluster> zusaetzlicheDetails) {

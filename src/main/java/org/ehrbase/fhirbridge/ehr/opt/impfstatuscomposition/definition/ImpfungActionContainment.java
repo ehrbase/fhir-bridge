@@ -24,9 +24,7 @@ public class ImpfungActionContainment extends Containment {
 
   public SelectAqlField<VerabreichteDosenCluster> VERABREICHTE_DOSEN = new AqlFieldImp<VerabreichteDosenCluster>(ImpfungAction.class, "/description[at0017]/items[openEHR-EHR-CLUSTER.dosage.v1]", "verabreichteDosen", VerabreichteDosenCluster.class, this);
 
-  public SelectAqlField<ImpfungGegenDefiningCode> IMPFUNG_GEGEN_DEFINING_CODE = new AqlFieldImp<ImpfungGegenDefiningCode>(ImpfungAction.class, "/description[at0017]/items[at0021]/value|defining_code", "impfungGegenDefiningCode", ImpfungGegenDefiningCode.class, this);
-
-  public SelectAqlField<NullFlavour> IMPFUNG_GEGEN_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ImpfungAction.class, "/description[at0017]/items[at0021]/null_flavour|defining_code", "impfungGegenNullFlavourDefiningCode", NullFlavour.class, this);
+  public ListSelectAqlField<ImpfungImpfungGegenElement> IMPFUNG_GEGEN = new ListAqlFieldImp<ImpfungImpfungGegenElement>(ImpfungAction.class, "/description[at0017]/items[at0021]", "impfungGegen", ImpfungImpfungGegenElement.class, this);
 
   public ListSelectAqlField<Cluster> ZUSAETZLICHE_DETAILS = new ListAqlFieldImp<Cluster>(ImpfungAction.class, "/description[at0017]/items[at0053]", "zusaetzlicheDetails", Cluster.class, this);
 

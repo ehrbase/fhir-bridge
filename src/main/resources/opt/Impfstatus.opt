@@ -25,9 +25,11 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">dede7b805905a1ff811408523dff835d</other_details>
+    <other_details id="MD5-CAM-1.0.1">fc002bbb4956b50235b9740dd4ef29c6</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -275,11 +277,9 @@
         <rm_type_name>ACTION</rm_type_name>
         <occurrences>
           <lower_included>true</lower_included>
-          <upper_included>true</upper_included>
           <lower_unbounded>false</lower_unbounded>
-          <upper_unbounded>false</upper_unbounded>
-          <lower>1</lower>
-          <upper>1</upper>
+          <upper_unbounded>true</upper_unbounded>
+          <lower>0</lower>
         </occurrences>
         <node_id>at0000</node_id>
         <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -1022,7 +1022,7 @@
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>local_terms</value>
+                          <value>SNOMED Clinical Terms</value>
                         </terminology_id>
                         <code_list>421245007</code_list>
                         <code_list>787859002</code_list>
@@ -1586,7 +1586,7 @@
                   <items id="text">Dosierung</items>
                 </term_definitions>
                 <term_definitions code="at0037">
-                  <items id="comment">Zum Beispiel: 'Morgens', 'um 06:00, 14:00, 21:00'.</items>
+                  <items id="comment">Zum Beispiel: "Morgens", "Um 06:00, 14:00, 21:00"'.</items>
                   <items id="description">Strukturierte Details des Musters für Verabreichungszeiten innerhalb eines Tages.</items>
                   <items id="text">Tägliche Verabreichungszeiten</items>
                 </term_definitions>
@@ -1633,18 +1633,16 @@ Wenn mehrere Dosierungen angegeben werden, gibt die 'Dosierungsreihenfolge' die 
                 <term_definitions code="at0178">
                   <items id="comment">Zum Beispiel: "Salbe auf die betroffene Stelle auftragen, bis sie glänzt". Dieses Element soll den Entwicklern ermöglichen, die Strukturen zum Erhöhen / Verringern von Dosierungen zu verwenden, ohne die Dosierungen notwendigerweise auf strukturierte Weise spezifizieren zu müssen.</items>
                   <items id="description">Textbeschreibung der Dosis.</items>
-                  <items id="text">Dosisberschreibung</items>
+                  <items id="text">Dosisbeschreibung</items>
                 </term_definitions>
               </children>
               <children xsi:type="C_COMPLEX_OBJECT">
                 <rm_type_name>ELEMENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
+                  <upper_unbounded>true</upper_unbounded>
+                  <lower>0</lower>
                 </occurrences>
                 <node_id>at0021</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">

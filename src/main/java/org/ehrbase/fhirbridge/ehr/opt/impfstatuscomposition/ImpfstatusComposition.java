@@ -20,7 +20,6 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungAction;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.UnbekannterImpfstatusEvaluation;
 
@@ -28,11 +27,11 @@ import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.Unbekannt
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-04-29T13:40:23.832151+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-05-04T14:02:53.881839+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 @Template("Impfstatus")
-public class ImpfstatusComposition implements CompositionEntity, Composition {
+public class ImpfstatusComposition implements CompositionEntity {
   /**
    * Path: Impfstatus/category
    */
@@ -88,7 +87,7 @@ public class ImpfstatusComposition implements CompositionEntity, Composition {
    * Comment: Dies beschränkt sich nicht nur auf Aktivitäten, die auf der Grundlage von Arzneimittelverordnungen von Ärzten durchgeführt werden, sondern kann sich auch z.B. auf die Einnahme von freiverkäuflichen Medikamenten beziehen.
    */
   @Path("/content[openEHR-EHR-ACTION.medication.v1 and name/value='Impfung']")
-  private ImpfungAction impfung;
+  private List<ImpfungAction> impfung;
 
   /**
    * Path: Impfstatus/Unbekannter Impfstatus
@@ -188,11 +187,11 @@ public class ImpfstatusComposition implements CompositionEntity, Composition {
      return this.settingDefiningCode ;
   }
 
-  public void setImpfung(ImpfungAction impfung) {
+  public void setImpfung(List<ImpfungAction> impfung) {
      this.impfung = impfung;
   }
 
-  public ImpfungAction getImpfung() {
+  public List<ImpfungAction> getImpfung() {
      return this.impfung ;
   }
 

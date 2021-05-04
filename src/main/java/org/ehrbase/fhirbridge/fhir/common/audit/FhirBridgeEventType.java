@@ -42,11 +42,8 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     CreateQuestionnaireResponse("questionnaire-response-create", "Create Questionnaire Response"),
 
-    FindQuestionnaireResponse("questionnaire-response-find", "Find Questionnaire Response"),
+    FindQuestionnaireResponse("questionnaire-response-find", "Find Questionnaire Response");
 
-    CreateImmunization("immunization-create", "Create Immunization"),
-
-    FindImmunization("immunization-find", "Find Immunization");
 
     private final EventType value;
 

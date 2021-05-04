@@ -9,6 +9,7 @@ import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungGe
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.VerabreichteDosenCluster;
 import org.hl7.fhir.r4.model.Immunization;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ImpfungActionConverter extends ImmunizationToActionConverter<ImpfungAction> {
@@ -45,7 +46,7 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
         if (resource.getProtocolApplied().get(0).getTargetDisease().get(0).hasCoding()
                 && resource.getProtocolApplied().get(0).getTargetDisease().get(0).getCoding().get(0).hasSystem()
                 && resource.getProtocolApplied().get(0).getTargetDisease().get(0).getCoding().get(0).getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-            impfungAction.setImpfungGegenDefiningCode(mapImpfungGegen(resource));
+            impfungAction.setImpfungGegen(List.of(mapImpfungGegen(resource)));
         } else {
             throw new UnprocessableEntityException("Target Disease code");
         }
