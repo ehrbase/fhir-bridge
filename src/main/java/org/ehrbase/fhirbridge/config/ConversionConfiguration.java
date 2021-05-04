@@ -40,17 +40,18 @@ public class ConversionConfiguration {
 
     @Bean(name = "fhirResourceConversionService")
     public ConversionService conversionService() {
-        ConversionService conversionService = new ConversionService();
+        var conversionService = new ConversionService();
 
         // Register Resource Converters
         registerConditionConverters(conversionService);
         registerConsentConverters(conversionService);
         registerDiagnosticReportConverters(conversionService);
+        registerImmunizationConverters(conversionService);
+        registerMedicationStatementConverter(conversionService);
         registerObservationConverters(conversionService);
         registerPatientConverters(conversionService);
         registerProcedureConverters(conversionService);
         registerQuestionnaireResponseConverter(conversionService);
-        registerMedicationStatementConverter(conversionService);
 
         return conversionService;
     }
@@ -85,10 +86,10 @@ public class ConversionConfiguration {
     }
 
     private void registerObservationConverters(ConversionService conversionService) {
-        conversionService.registerConverter(Profile.BODY_HEIGHT, new BodyHeightCompositionConverter());
-        conversionService.registerConverter(Profile.BLOOD_GAS_PANEL, new BloodGasPanelCompositionConverter());
         conversionService.registerConverter(Profile.ANTI_BODY_PANEL, new GECCOSerologischerBefundCompositionConverter());
+        conversionService.registerConverter(Profile.BLOOD_GAS_PANEL, new BloodGasPanelCompositionConverter());
         conversionService.registerConverter(Profile.BLOOD_PRESSURE, new BloodPressureCompositionConverter());
+        conversionService.registerConverter(Profile.BODY_HEIGHT, new BodyHeightCompositionConverter());
         conversionService.registerConverter(Profile.BODY_TEMP, new BodyTemperatureCompositionConverter());
         conversionService.registerConverter(Profile.BODY_WEIGHT, new BodyWeightCompositionConverter());
         conversionService.registerConverter(Profile.CLINICAL_FRAILTY_SCALE, new ClinicalFrailtyScaleScoreCompositionConverter());
@@ -100,12 +101,11 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.PCR, new PCRCompositionConverter());
         conversionService.registerConverter(Profile.PREGNANCY_STATUS, new PregnancyStatusCompositionConverter());
         conversionService.registerConverter(Profile.OBSERVATION_LAB, new ObservationLabCompositionConverter());
+        conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
         conversionService.registerConverter(Profile.RESPIRATORY_RATE, new RespiratoryRateCompositionConverter());
         conversionService.registerConverter(Profile.SOFA_SCORE, new SofaScoreCompositionConverter());
         conversionService.registerConverter(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
-
         conversionService.registerConverter(Profile.TRAVEL_HISTORY, new HistoryOfTravelCompositionConverter());
-        conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
     }
 
     private void registerPatientConverters(ConversionService conversionService) {
@@ -115,7 +115,7 @@ public class ConversionConfiguration {
     private void registerProcedureConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.PROCEDURE, new ProcedureCompositionConverter());
 
-        TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
+        var therapyCompositionConverter = new TherapyCompositionConverter();
         conversionService.registerConverter(Profile.APHERESIS_PROCEDURE, therapyCompositionConverter);
         conversionService.registerConverter(Profile.DIALYSIS_PROCEDURE, therapyCompositionConverter);
         conversionService.registerConverter(Profile.EXTRACORPOREAL_MEMBRANE_OXYGENATION_PROCEDURE, therapyCompositionConverter);
@@ -129,10 +129,14 @@ public class ConversionConfiguration {
     }
 
     private void registerMedicationStatementConverter(ConversionService conversionService) {
-        GECCOMedikationCompositionConverter converter = new GECCOMedikationCompositionConverter();
+        var converter = new GECCOMedikationCompositionConverter();
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY, converter);
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_ACE_INHIBITORS, converter);
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_ANTICOAGULANTS, converter);
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_IMMUNOGLOBULINS, converter);
+    }
+
+    private void registerImmunizationConverters(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.HISTORY_OF_VACCINATION, null); // TODO: @SevKohler
     }
 }

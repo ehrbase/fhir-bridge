@@ -14,28 +14,28 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.medicationstatement;
+package org.ehrbase.fhirbridge.fhir.immunization;
 
 import ca.uhn.fhir.rest.annotation.Create;
 import ca.uhn.fhir.rest.annotation.ResourceParam;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
-import org.hl7.fhir.r4.model.MedicationStatement;
+import org.hl7.fhir.r4.model.Immunization;
 import org.openehealth.ipf.commons.ihe.fhir.AbstractPlainProvider;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.fhir.FhirProvider FhirProvider} that provides REST support
- * for 'Create Medication Statement' transaction.
+ * Concrete implementation of {@link AbstractPlainProvider} that provides REST support
+ * for 'Create Immunization' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateMedicationStatementProvider extends AbstractPlainProvider {
+public class CreateImmunizationProvider extends AbstractPlainProvider {
 
     @Create
-    public MethodOutcome create(@ResourceParam MedicationStatement observation, RequestDetails requestDetails,
+    public MethodOutcome create(@ResourceParam Immunization observation, RequestDetails requestDetails,
                                 HttpServletRequest request, HttpServletResponse response) {
         return requestAction(observation, null, request, response, requestDetails);
     }

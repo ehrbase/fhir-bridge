@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.component.fhir.medicationstatement;
+package org.ehrbase.fhirbridge.camel.component.fhir.immunization;
 
-import org.ehrbase.fhirbridge.fhir.medicationstatement.FindMedicationStatementTransaction;
-import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
+import org.ehrbase.fhirbridge.fhir.immunization.CreateImmunizationTransaction;
+import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
- * Camel {@link org.apache.camel.Component Component} that handles 'Find MedicationStatement' transaction.
+ * {@link CustomFhirComponent} that handles 'Create Immunization' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
 @SuppressWarnings({"java:S110"})
-public class FindMedicationStatementComponent extends CustomFhirComponent<FhirQueryAuditDataset> {
+public class CreateImmunizationComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
 
-    public FindMedicationStatementComponent() {
-        super(new FindMedicationStatementTransaction());
+    public CreateImmunizationComponent() {
+        super(new CreateImmunizationTransaction());
     }
 }

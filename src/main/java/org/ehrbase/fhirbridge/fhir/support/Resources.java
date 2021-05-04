@@ -13,6 +13,7 @@ import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
@@ -72,6 +73,8 @@ public class Resources {
             subjectIdentifier = ((Consent) resource).getPatient().getIdentifier();
         } else if (resource instanceof DiagnosticReport) {
             subjectIdentifier = ((DiagnosticReport) resource).getSubject().getIdentifier();
+        } else if (resource instanceof Immunization) {
+            subjectIdentifier = ((Immunization) resource).getPatient().getIdentifier();
         } else if (resource instanceof MedicationStatement) {
             subjectIdentifier = ((MedicationStatement) resource).getSubject().getIdentifier();
         } else if (resource instanceof Observation) {
