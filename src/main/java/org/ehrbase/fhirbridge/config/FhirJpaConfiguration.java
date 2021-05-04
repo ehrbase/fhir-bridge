@@ -40,6 +40,7 @@ import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Group;
+import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.Location;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
@@ -169,6 +170,14 @@ public class FhirJpaConfiguration extends BaseR4Config {
     public IFhirResourceDao<Group> groupDao() {
         JpaResourceDao<Group> resourceDao = new JpaResourceDao<>();
         resourceDao.setResourceType(Group.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Immunization> immunizationDao() {
+        JpaResourceDao<Immunization> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Immunization.class);
         resourceDao.setContext(fhirContext());
         return resourceDao;
     }
