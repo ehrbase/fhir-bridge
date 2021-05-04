@@ -94,14 +94,6 @@ public enum ImpfungGegenDefiningCode implements EnumValueSet {
     this.code = code;
   }
 
-  public String getValue() {
-     return this.value ;
-  }
-
-  public String getDescription() {
-     return this.description ;
-  }
-
   public static Map<String, ImpfungGegenDefiningCode> getCodesAsMap(){
     Map<String, ImpfungGegenDefiningCode> impfungGegenDefiningCodeHashMap = new HashMap<>();
     for (ImpfungGegenDefiningCode impfungGegenDefiningCode : ImpfungGegenDefiningCode.values()) {
@@ -110,6 +102,13 @@ public enum ImpfungGegenDefiningCode implements EnumValueSet {
     return impfungGegenDefiningCodeHashMap;
   }
 
+  public String getValue() {
+     return this.value ;
+  }
+
+  public String getDescription() {
+     return this.description ;
+  }
 
   public String getTerminologyId() {
      return this.terminologyId ;
