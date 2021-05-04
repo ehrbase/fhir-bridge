@@ -4,6 +4,8 @@ import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.DnrAnordnung.DnrAnordnungCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.DNRAnordnungComposition;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Consent;
 import org.javers.core.Javers;
@@ -34,6 +36,18 @@ class DnrIT extends AbstractMappingTestSetupIT {
                 "paragon-consent-dnr-normal.json");
     }
 
+    @Test
+    void mappingNormal_2() throws IOException {
+        testMapping("consent-example-duplicate-2.json",
+                "paragon-consent-dnr-normal-2.json");
+    }
+
+    @Test
+    void mappingNormal_3() throws IOException {
+        testMapping("consent-example-duplicate-3.json",
+                "paragon-consent-dnr-normal-3.json");
+    }
+
 
     // #####################################################################################
     // check exceptions
@@ -46,7 +60,8 @@ class DnrIT extends AbstractMappingTestSetupIT {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(DNRAnordnungComposition.class, List.of("location", "feederAudit")))
-                //.registerValueObject(GroesseLaengeObservation.class)
+                .registerValueObject(DnrAnordnungEvaluation.class)
+                .registerValueObject(DnrAnordnungKategorieElement.class)
                 .build();
     }
 

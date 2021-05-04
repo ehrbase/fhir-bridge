@@ -60,7 +60,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-05-04T14:37:55,4500188+02:00"
+      "value" : "2021-05-04T15:16:37,2783706+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -180,14 +180,14 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "For resuscitation (finding)",
+          "value" : "Not for resuscitation (finding)",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
               "value" : "SNOMED Clinical Terms"
             },
-            "code_string" : "304252001"
+            "code_string" : "304253006"
           }
         },
         "archetype_node_id" : "at0006"
