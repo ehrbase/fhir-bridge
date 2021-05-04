@@ -399,7 +399,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 	# invalid/missing valueQuantity
 	$.valueQuantity			  					missing			422    	.*If there is no component or hasMember element then either a value.x. or a data absent reason must be present
-	$.valueQuantity			  					${None}			422    	This property must be an Object, not null
+	$.valueQuantity			  					${None}			422    	The property valueQuantity must be an Object, not null
 	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
@@ -413,7 +413,7 @@ ${vQSystem}						http://unitsofmeasure.org
 	
 	# invalid value
 	$.valueQuantity.value	  					${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
-	$.valueQuantity.value	  					${None}			422    	The property valueQuantity must be an Object, not null
+	$.valueQuantity.value	  					${None}			422    	This property must be an simple value, not null
 	$.valueQuantity.value	  					113				422    	Error parsing JSON: the primitive value must be a number
 	$.valueQuantity.value	  					${1001}			422    	.*value is not within interval, expected:0.0 <= 1001.0 <= 1000.0.*Bad Request.*
 	$.valueQuantity.value	  					${1000.09}		422    	.*value is not within interval, expected:0.0 <= 1000.09 <= 1000.0.*Bad Request.*
