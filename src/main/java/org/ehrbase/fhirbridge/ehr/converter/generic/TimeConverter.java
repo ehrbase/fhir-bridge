@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
@@ -119,6 +120,14 @@ public class TimeConverter {
             return Optional.of(medicationStatement.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
         } else {
             return Optional.empty();
+        }
+    }
+
+    public static TemporalAccessor convertConsentTime(Consent resource) {
+        if (resource.hasDateTime()) {
+            return resource.getDateTime().toInstant();
+        } else {
+            return OffsetDateTime.now();
         }
     }
 }
