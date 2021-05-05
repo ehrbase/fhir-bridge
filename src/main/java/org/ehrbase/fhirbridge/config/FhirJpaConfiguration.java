@@ -41,6 +41,7 @@ import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Group;
 import org.hl7.fhir.r4.model.Location;
+import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
@@ -176,6 +177,14 @@ public class FhirJpaConfiguration extends BaseR4Config {
     public IFhirResourceDao<Location> locationDao() {
         JpaResourceDao<Location> resourceDao = new JpaResourceDao<>();
         resourceDao.setResourceType(Location.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<MedicationStatement> medicationStatementDao() {
+        JpaResourceDao<MedicationStatement> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(MedicationStatement.class);
         resourceDao.setContext(fhirContext());
         return resourceDao;
     }

@@ -2,12 +2,9 @@ package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KeineReisehistorieEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.UnbekannteReisehistorieEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -31,7 +28,7 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createHistoryOfTravel() throws IOException {
-        create("create-history-of-travel-no.json");
+        create("create-history-of-travel-yes.json");
     }
 
     // #####################################################################################
@@ -83,6 +80,7 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(KeineReisehistorieEvaluation.class)
                 .registerValueObject(UnbekannteReisehistorieEvaluation.class)
                 .registerValueObject(ReisehistorieBestimmtesReisezielCluster.class)
+                .registerValueObject(ReisehistorieKategorieElement.class)
                 .build();
     }
 
@@ -90,14 +88,14 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () ->
-                new HistoryOfTravelConverter().convert(obs)
+                new HistoryOfTravelCompositionConverter().convert(obs)
         );
     }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Observation observation = (Observation) super.testFileLoader.loadResource(resourcePath);
-        HistoryOfTravelConverter compositionConverter = new HistoryOfTravelConverter();
+        HistoryOfTravelCompositionConverter compositionConverter = new HistoryOfTravelCompositionConverter();
         ReisehistorieComposition mapped = compositionConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mapped);
         assertEquals(0, diff.getChanges().size());

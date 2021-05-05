@@ -9,8 +9,7 @@ import org.apache.camel.spi.UriPath;
 import org.apache.camel.support.DefaultEndpoint;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.component.ehr.EhrConfiguration;
-import org.ehrbase.fhirbridge.config.CompositionProperties;
-import org.ehrbase.fhirbridge.ehr.Composition;
+import org.ehrbase.fhirbridge.config.DebugProperties;
 
 @UriEndpoint(firstVersion = "1.0.0", scheme = "ehr-composition", title = "EHR Composition", syntax = "ehr-composition:name", producerOnly = true)
 @SuppressWarnings({"java:S2160", "java:S1452"})
@@ -27,7 +26,7 @@ public class CompositionEndpoint extends DefaultEndpoint {
     @UriParam
     private EhrConfiguration configuration;
 
-    private CompositionProperties properties;
+    private DebugProperties properties;
 
     public CompositionEndpoint(String uri, CompositionComponent component, EhrConfiguration configuration) {
         super(uri, component);
@@ -89,11 +88,11 @@ public class CompositionEndpoint extends DefaultEndpoint {
         getConfiguration().setOpenEhrClient(openEhrClient);
     }
 
-    public CompositionProperties getProperties() {
+    public DebugProperties getProperties() {
         return properties;
     }
 
-    public void setProperties(CompositionProperties properties) {
+    public void setProperties(DebugProperties properties) {
         this.properties = properties;
     }
 }
