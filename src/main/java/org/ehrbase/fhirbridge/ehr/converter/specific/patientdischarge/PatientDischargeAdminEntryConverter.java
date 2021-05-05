@@ -16,29 +16,32 @@ public class PatientDischargeAdminEntryConverter extends EntryEntityConverter<Ob
 
         EntlassungsartAdminEntry adminEntry = new EntlassungsartAdminEntry();
 
-        String code = getSnomedCodeObservation(resource);
+        if(resource.hasValueCodeableConcept()){
 
-        switch(code) {
-            case "261665006":
-                adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.UNKNOWN_QUALIFIER_VALUE.toDvCodedText());
-                break;
-            case "32485007":
-                adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.HOSPITAL_ADMISSION_PROCEDURE.toDvCodedText());
-                break;
-            case "419099009":
-                adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.DEAD_FINDING.toDvCodedText());
-                break;
-            case "371827001":
-                adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.PATIENT_DISCHARGED_ALIVE_FINDING.toDvCodedText());
-                break;
-            case "3457005":
-                adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.PATIENT_REFERRAL_PROCEDURE.toDvCodedText());
-                break;
-            case "306237005":
-                adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.REFERRAL_TO_PALLIATIVE_CARE_SERVICE_PROCEDURE.toDvCodedText());
-                break;
-            default:
-                throw new UnprocessableEntityException("Value code " + resource.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
+            String code = getSnomedCodeObservation(resource);
+
+            switch(code) {
+                case "261665006":
+                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.UNKNOWN_QUALIFIER_VALUE.toDvCodedText());
+                    break;
+                case "32485007":
+                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.HOSPITAL_ADMISSION_PROCEDURE.toDvCodedText());
+                    break;
+                case "419099009":
+                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.DEAD_FINDING.toDvCodedText());
+                    break;
+                case "371827001":
+                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.PATIENT_DISCHARGED_ALIVE_FINDING.toDvCodedText());
+                    break;
+                case "3457005":
+                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.PATIENT_REFERRAL_PROCEDURE.toDvCodedText());
+                    break;
+                case "306237005":
+                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.REFERRAL_TO_PALLIATIVE_CARE_SERVICE_PROCEDURE.toDvCodedText());
+                    break;
+                default:
+                    throw new UnprocessableEntityException("Value code " + resource.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
+            }
         }
 
         return adminEntry;
