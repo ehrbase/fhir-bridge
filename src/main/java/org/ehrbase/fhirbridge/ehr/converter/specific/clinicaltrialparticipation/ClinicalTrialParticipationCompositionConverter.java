@@ -5,11 +5,12 @@ import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConv
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.GECCOStudienteilnahmeComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
+import org.springframework.lang.NonNull;
 
 public class ClinicalTrialParticipationCompositionConverter extends ObservationToCompositionConverter<GECCOStudienteilnahmeComposition> {
 
     @Override
-    protected GECCOStudienteilnahmeComposition convertInternal(Observation resource) {
+    protected GECCOStudienteilnahmeComposition convertInternal(@NonNull Observation resource) {
         GECCOStudienteilnahmeComposition composition = new GECCOStudienteilnahmeComposition();
         mapStatus(composition, resource);
         composition.setGeccoStudienteilnahme(new ClinicalTrialParticipationEvaluationConverter().convert(resource));
