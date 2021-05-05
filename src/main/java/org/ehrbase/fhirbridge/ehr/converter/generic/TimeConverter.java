@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
@@ -98,6 +99,24 @@ public class TimeConverter {
     public static Optional<TemporalAccessor> convertProcedureEndTime(Procedure resource) {
         if (resource.hasPerformedPeriod() && resource.getPerformedPeriod().hasEnd()) { // EffectivePeriod
             return Optional.of(resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public static TemporalAccessor convertMedicationStatmentTime(MedicationStatement medicationStatement){
+        if (medicationStatement.hasEffectiveDateTimeType()) { // EffectiveDateTime
+            return medicationStatement.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+        } else if (medicationStatement.hasEffectivePeriod() && medicationStatement.getEffectivePeriod().hasStart()) { // EffectivePeriod
+            return medicationStatement.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
+        }else{
+            return ZonedDateTime.now();
+        }
+    }
+
+    public static  Optional<TemporalAccessor>  convertMedicationStatementEndTime(MedicationStatement medicationStatement){
+        if (medicationStatement.hasEffectivePeriod() && medicationStatement.getEffectivePeriod().hasEnd()) { // EffectivePeriod
+            return Optional.of(medicationStatement.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
         } else {
             return Optional.empty();
         }
