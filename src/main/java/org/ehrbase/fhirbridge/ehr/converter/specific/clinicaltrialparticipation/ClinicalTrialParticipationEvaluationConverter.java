@@ -23,14 +23,11 @@ public class ClinicalTrialParticipationEvaluationConverter extends ObservationTo
 
         GeccoStudienteilnahmeEvaluation geccoStudienteilnahmeEvaluation = new GeccoStudienteilnahmeEvaluation();
 
-        String code_participated = getSnomedCodeObservation(resource);
+        String codeParticipated = getSnomedCodeObservation(resource);
 
-        boolean hasStudy = false;
-
-        switch(code_participated){
+        switch(codeParticipated){
             case "373066001":
                 geccoStudienteilnahmeEvaluation.setBereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode(BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode.YES_QUALIFIER_VALUE);
-                hasStudy = true;
                 break;
             case "373067005":
                 geccoStudienteilnahmeEvaluation.setBereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode(BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode.NO_QUALIFIER_VALUE);
@@ -48,29 +45,35 @@ public class ClinicalTrialParticipationEvaluationConverter extends ObservationTo
                 throw new UnprocessableEntityException("Value code " + resource.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
         }
 
-        if(hasStudy){
+        if(geccoStudienteilnahmeEvaluation.getBereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode().equals(BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode.YES_QUALIFIER_VALUE)){
 
-            StudienteilnahmeCluster studienteilnahmeCluster = new StudienteilnahmeCluster();
-            geccoStudienteilnahmeEvaluation.setStudienteilnahme(studienteilnahmeCluster);
-
-            StudiePruefungCluster studiePruefungCluster = new StudiePruefungCluster();
-            studienteilnahmeCluster.setStudiePruefung(studiePruefungCluster);
-
-            studiePruefungCluster.setTitelDerStudiePruefungDefiningCode(TitelDerStudiePruefungDefiningCode.PARTICIPATION_IN_INTERVENTIONAL_CLINICAL_TRIALS);
-
-            if(!resource.getCode().getText().isEmpty()){
-                studiePruefungCluster.setBeschreibungValue(resource.getCode().getText());
-            }
-
-            if(!resource.getComponent().isEmpty()){
-                studiePruefungCluster.setRegistrierung(convertInternalEvents(resource));
-            }
+            geccoStudienteilnahmeEvaluation.setStudienteilnahme(createStudyCluster(resource));
         }
 
         return geccoStudienteilnahmeEvaluation;
     }
 
-    private List<StudiePruefungRegistrierungCluster> convertInternalEvents(Observation resource) {
+    private StudienteilnahmeCluster createStudyCluster(Observation resource){
+
+        StudienteilnahmeCluster studienteilnahmeCluster = new StudienteilnahmeCluster();
+
+        StudiePruefungCluster studiePruefungCluster = new StudiePruefungCluster();
+        studienteilnahmeCluster.setStudiePruefung(studiePruefungCluster);
+
+        studiePruefungCluster.setTitelDerStudiePruefungDefiningCode(TitelDerStudiePruefungDefiningCode.PARTICIPATION_IN_INTERVENTIONAL_CLINICAL_TRIALS);
+
+        if(resource.getCode().hasText()){
+            studiePruefungCluster.setBeschreibungValue(resource.getCode().getText());
+        }
+
+        if(resource.hasComponent()){
+            studiePruefungCluster.setRegistrierung(createRegistryCluster(resource));
+        }
+
+        return studienteilnahmeCluster;
+    }
+
+    private List<StudiePruefungRegistrierungCluster> createRegistryCluster(Observation resource) {
 
         StudiePruefungRegistrierungCluster studiePruefungRegistrierungCluster = new StudiePruefungRegistrierungCluster();
 
