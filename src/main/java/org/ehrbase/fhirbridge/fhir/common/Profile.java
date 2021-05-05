@@ -120,6 +120,10 @@ public enum Profile {
     RADIOLOGY_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures"),
     RESPIRATORY_THERAPIES_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"),
 
+    // Consent profiles
+
+    DNR_ORDER(Consent.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order"),
+
     // QuestionnaireResponse Profiles
 
     DEFAULT_QUESTIONNAIRE_RESPONSE(QuestionnaireResponse.class, null);
