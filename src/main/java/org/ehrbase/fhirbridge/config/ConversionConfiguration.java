@@ -17,6 +17,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.geccoDiagnose.GECCODiagnose
 import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HeartRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GECCOMedikationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.ObservationLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientdischarge.PatientDischargeCompositionConverter;
@@ -50,6 +51,7 @@ public class ConversionConfiguration {
         registerPatientConverters(conversionService);
         registerProcedureConverters(conversionService);
         registerQuestionnaireResponseConverter(conversionService);
+        registerMedicationStatementConverter(conversionService);
 
         return conversionService;
     }
@@ -126,5 +128,13 @@ public class ConversionConfiguration {
 
     private void registerQuestionnaireResponseConverter(ConversionService conversionService) {
         conversionService.registerConverter(Profile.DEFAULT_QUESTIONNAIRE_RESPONSE, new D4lQuestionnaireCompositionConverter());
+    }
+
+    private void registerMedicationStatementConverter(ConversionService conversionService) {
+        GECCOMedikationCompositionConverter converter = new GECCOMedikationCompositionConverter();
+        conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY, converter);
+        conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_ACE_INHIBITORS, converter);
+        conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_ANTICOAGULANTS, converter);
+        conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_IMMUNOGLOBULINS, converter);
     }
 }

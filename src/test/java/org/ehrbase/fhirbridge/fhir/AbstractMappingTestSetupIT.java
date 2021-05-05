@@ -15,12 +15,12 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public abstract class AbstractMappingTestSetupIT extends AbstractSetupIT{
+public abstract class AbstractMappingTestSetupIT extends AbstractSetupIT {
     protected TestFileLoader testFileLoader;
 
     public AbstractMappingTestSetupIT(String directory, Class clazz) {
         super();
-        this.testFileLoader = new TestFileLoader(directory,clazz, super.context);
+        this.testFileLoader = new TestFileLoader(directory, clazz, super.context);
     }
 
     public Diff compareCompositions(Javers javers, String paragonFilePath, Composition mappedComposition)

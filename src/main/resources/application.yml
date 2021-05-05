@@ -13,7 +13,7 @@ fhir-bridge:
   # Debug Properties
   debug:
     enabled: false
-    mapping-output-directory: ${java.io.tmpdir}/mappings/
+    mapping-output-directory: ${java.io.tmpdir}/mappings
   # EHRbase Properties
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
@@ -33,9 +33,6 @@ fhir-bridge:
 #      jwk-set-uri:
 #      jws-algorithm: RS256
 
-demographics:
-  patient:
-    url: https://demographics-service.ctr.dev.num-codex.de/fhir/Patient/
 #
 # Spring Properties
 #
@@ -59,17 +56,15 @@ spring:
     hibernate:
       ddl-auto: validate
     open-in-view: false
+    # Hibernate Properties
     properties:
       hibernate.dialect: org.hibernate.dialect.H2Dialect
-      hibernate.jdbc.batch_size: 20
-      hibernate.cache.use_query_cache: false
-      hibernate.cache.use_second_level_cache: false
-      hibernate.cache.use_structured_entries: false
-      hibernate.cache.use_minimal_puts: false
-      hibernate.search.default.indexBase: ${java.io.tmpdir}/fhir-bridge/lucenefiles
-      hibernate.search.model_mapping: ca.uhn.fhir.jpa.search.LuceneSearchMappingFactory
-      hibernate.search.default.directory_provider: filesystem
-      hibernate.search.lucene_version: LUCENE_CURRENT
+      hibernate.search.enabled: true
+      hibernate.search.backend.type: lucene
+      hibernate.search.backend.analysis.configurer: ca.uhn.fhir.jpa.search.HapiLuceneAnalysisConfigurer
+      hibernate.search.backend.directory.type: local-filesystem
+      hibernate.search.backend.directory.root: ${java.io.tmpdir}/fhir-bridge/lucenefiles
+      hibernate.search.backend.lucene_version: lucene_current
   # Liquibase Properties
   liquibase:
     database-change-log-table: DATABASE_CHANGELOG
@@ -78,17 +73,33 @@ spring:
   messages:
     basename: messages/messages
     use-code-as-default-message: true
+
+#
+# IPF Properties
+#
 ipf:
+  # Audit Properties
   atna:
     audit-enabled: false
 #    audit-repository-host:
 #    audit-repository-port:
+#    audit-source-id:
+#    audit-value-if-missing:
+  # FHIR Properties
   fhir:
     fhir-version: r4
+
+#
+# Server Properties
+#
 server:
   port: 8888
   servlet:
     context-path: /fhir-bridge
+
+#
+# Logging Properties
+#
 logging:
   level:
     ca.uhn.fhir: warn
@@ -100,3 +111,7 @@ logging:
     org.quartz: warn
     org.springframework: warn
     org.springframework.boot: warn
+
+demographics:
+  patient:
+    url: https://demographics-service.ctr.dev.num-codex.de/fhir/Patient/
