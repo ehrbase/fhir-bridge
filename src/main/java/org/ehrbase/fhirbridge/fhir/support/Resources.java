@@ -7,6 +7,8 @@ import com.nedap.archie.rm.generic.PartySelf;
 import com.nedap.archie.rm.support.identification.GenericId;
 import com.nedap.archie.rm.support.identification.PartyRef;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
+import org.ehrbase.fhirbridge.core.domain.PatientId;
+import org.ehrbase.fhirbridge.core.repository.PatientIdRepository;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.CanonicalType;
 import org.hl7.fhir.r4.model.Condition;

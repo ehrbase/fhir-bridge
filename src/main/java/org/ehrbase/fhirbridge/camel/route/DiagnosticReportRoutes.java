@@ -17,7 +17,7 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
+import org.ehrbase.fhirbridge.camel.Constants;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +40,7 @@ public class DiagnosticReportRoutes extends AbstractRouteBuilder {
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
-            .process("resourceProfileValidator")
+            .process("fhirProfileValidator")
             .to("direct:process-diagnostic-report");
 
         // 'Find Diagnostic Report' route definition
@@ -54,7 +54,7 @@ public class DiagnosticReportRoutes extends AbstractRouteBuilder {
 
         // Internal routes definition
         from("direct:process-diagnostic-report")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("diagnosticReportDao", "create(${body}, ${headers.FhirRequestDetails})"))
+            .setHeader(Constants.METHOD_OUTCOME, method("diagnosticReportDao", "create(${body}, ${headers.FhirRequestDetails})"))
             .process("ehrIdLookupProcessor")
             .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")

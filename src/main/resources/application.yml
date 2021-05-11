@@ -106,6 +106,7 @@ logging:
     com.zaxxer.hikari: warn
     liquibase: warn
     org.apache.camel: warn
+    org.ehrbase.fhirbridge: debug
     org.hibernate: warn
     org.openehealth.ipf: warn
     org.quartz: warn

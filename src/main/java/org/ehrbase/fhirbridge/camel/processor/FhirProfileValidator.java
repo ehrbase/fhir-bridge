@@ -4,7 +4,7 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
+import org.ehrbase.fhirbridge.camel.Constants;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.OperationOutcome;
@@ -24,20 +24,19 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class ResourceProfileValidator implements Processor, MessageSourceAware {
+public class FhirProfileValidator implements Processor, MessageSourceAware {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ResourceProfileValidator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FhirProfileValidator.class);
 
     private final FhirContext fhirContext;
 
     private MessageSourceAccessor messages;
 
-    public ResourceProfileValidator(FhirContext fhirContext) {
+    public FhirProfileValidator(FhirContext fhirContext) {
         this.fhirContext = fhirContext;
     }
 
     @Override
-    @SuppressWarnings("java:S1192")
     public void process(Exchange exchange) {
         Resource resource = exchange.getIn().getBody(Resource.class);
 
@@ -58,7 +57,7 @@ public class ResourceProfileValidator implements Processor, MessageSourceAware {
                 throw new UnprocessableEntityException(fhirContext, operationOutcome);
             }
 
-            exchange.getMessage().setHeader(FhirBridgeConstants.PROFILE, defaultProfile);
+            exchange.getMessage().setHeader(Constants.PROFILE, defaultProfile);
         } else {
             Set<Profile> supportedProfiles = Profile.resolveAll(resource);
             if (supportedProfiles.isEmpty()) {
@@ -79,12 +78,11 @@ public class ResourceProfileValidator implements Processor, MessageSourceAware {
                 throw new UnprocessableEntityException(fhirContext, operationOutcome);
             }
 
-            exchange.getMessage().setHeader(FhirBridgeConstants.PROFILE, supportedProfiles.iterator().next());
+            exchange.getMessage().setHeader(Constants.PROFILE, supportedProfiles.iterator().next());
         }
 
         LOG.info("{} resource validated", resource.getResourceType());
     }
-
 
     @Override
     public void setMessageSource(@NonNull MessageSource messageSource) {
