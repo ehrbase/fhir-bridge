@@ -17,7 +17,7 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
+import org.ehrbase.fhirbridge.camel.Constants;
 import org.springframework.stereotype.Component;
 
 /**
@@ -39,8 +39,8 @@ public class ConsentRoutes extends AbstractRouteBuilder {
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
-            .process("resourceProfileValidator")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("consentDao", "create(${body}, ${headers.FhirRequestDetails})"))
+            .process("fhirProfileValidator")
+            .setHeader(Constants.METHOD_OUTCOME, method("consentDao", "create(${body}, ${headers.FhirRequestDetails})"))
             .process("ehrIdLookupProcessor")
             .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")

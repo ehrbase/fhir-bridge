@@ -1,42 +1,26 @@
 package org.ehrbase.fhirbridge.fhir;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
-import ca.uhn.fhir.rest.client.api.ServerValidationModeEnum;
-import ca.uhn.fhir.rest.client.interceptor.BearerTokenAuthInterceptor;
-import com.nedap.archie.rm.RMObject;
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.ehr.EhrStatus;
 import com.nedap.archie.rm.generic.PartySelf;
 import com.nedap.archie.rm.support.identification.HierObjectId;
 import com.nedap.archie.rm.support.identification.PartyRef;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.ehrbase.client.flattener.Flattener;
 import org.ehrbase.client.openehrclient.OpenEhrClientConfig;
 import org.ehrbase.client.openehrclient.defaultrestclient.DefaultRestClient;
-import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
-import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
-import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.javers.core.Javers;
-import org.javers.core.diff.Diff;
 import org.junit.jupiter.api.BeforeAll;
-import org.springframework.core.io.ClassPathResource;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractSetupIT {
 
@@ -76,8 +60,6 @@ public abstract class AbstractSetupIT {
         ehrStatus.setName(new DvText("Integration tests status"));
         client.ehrEndpoint().createEhr(ehrStatus);
     }
-
-
 
 
 }

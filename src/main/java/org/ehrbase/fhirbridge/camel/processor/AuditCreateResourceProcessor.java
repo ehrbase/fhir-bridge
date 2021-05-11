@@ -5,12 +5,11 @@ import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
+import org.ehrbase.fhirbridge.camel.Constants;
 import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Reference;
-import org.openehealth.ipf.commons.ihe.fhir.Constants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -79,10 +78,10 @@ public class AuditCreateResourceProcessor implements Processor {
     }
 
     private MethodOutcome extractMethodOutcome(Exchange exchange) {
-        return exchange.getIn().getHeader(FhirBridgeConstants.METHOD_OUTCOME, MethodOutcome.class);
+        return exchange.getIn().getHeader(Constants.METHOD_OUTCOME, MethodOutcome.class);
     }
 
     private RequestDetails extractRequestDetails(Exchange exchange) {
-        return exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
+        return exchange.getIn().getHeader(org.openehealth.ipf.commons.ihe.fhir.Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
     }
 }

@@ -19,12 +19,12 @@ package org.ehrbase.fhirbridge.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * {@link ConfigurationProperties ConfigurationProperties} to configure HAPI FHIR JPA Server module.
+ * {@link ConfigurationProperties ConfigurationProperties} to configure HAPI FHIR JPA Server.
  *
  * @since 1.0.0
  */
 @ConfigurationProperties(prefix = "fhir-bridge.fhir.jpa")
-public class FhirJpaProperties {
+public class HapiFhirJpaProperties {
 
     private boolean allowExternalReferences = true;
 

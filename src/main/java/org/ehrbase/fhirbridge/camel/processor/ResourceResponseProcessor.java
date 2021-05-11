@@ -5,7 +5,7 @@ import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
+import org.ehrbase.fhirbridge.camel.Constants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Identifier;
@@ -33,7 +33,7 @@ public class ResourceResponseProcessor implements Processor {
     }
 
     private MethodOutcome getMethodOutcome(Exchange exchange) {
-        MethodOutcome methodOutcome = exchange.getIn().getHeader(FhirBridgeConstants.METHOD_OUTCOME, MethodOutcome.class);
+        MethodOutcome methodOutcome = exchange.getIn().getHeader(Constants.METHOD_OUTCOME, MethodOutcome.class);
         if (methodOutcome == null) {
             throw new InternalErrorException("MethodOutcome must not be null");
         }
