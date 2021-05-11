@@ -84,6 +84,8 @@ public enum Profile {
 
     PAO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure"),
 
+    PATIENT_DISCHARGE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/discharge-disposition"),
+
     PATIENT_IN_ICU(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu"),
 
     PCR(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-rt-pcr"),
