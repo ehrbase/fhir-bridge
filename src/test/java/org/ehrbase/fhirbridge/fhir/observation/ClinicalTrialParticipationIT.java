@@ -67,12 +67,6 @@ public class ClinicalTrialParticipationIT extends AbstractMappingTestSetupIT {
                 "paragon-clinical-trial-participation-unknown.json");
     }
 
-    /* Beispiel existiert nicht (selber generieren?)
-    @Test
-    void mappingOther() throws  IOException {
-
-    }*/
-
     @Test
     void mappingNotApplicable() throws IOException {
         testMapping("create-clinical-trial-participation-notapplicable.json",

@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation;
 
+import ca.uhn.fhir.parser.DataFormatException;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.GECCOStudienteilnahmeComposition;
@@ -28,7 +29,7 @@ public class ClinicalTrialParticipationCompositionConverter extends ObservationT
         } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
             composition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
         } else {
-            throw new ConversionException("The status " + obs.getStatus().toString() + " is not valid for body height.");
+            throw new ConversionException("The status " + obs.getStatus().toString() + " is not valid for clinical trial participation.");
         }
     }
 }
