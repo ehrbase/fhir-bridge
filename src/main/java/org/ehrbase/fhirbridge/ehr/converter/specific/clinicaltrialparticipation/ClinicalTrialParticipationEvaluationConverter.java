@@ -2,13 +2,8 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToEvaluationConverter;
-import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.GeccoStudienteilnahmeEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.StudiePruefungCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.StudienteilnahmeCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.StudiePruefungRegistrierungCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.TitelDerStudiePruefungDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.RegisternameDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.GECCOStudienteilnahmeComposition;
+import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.*;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
@@ -20,9 +15,16 @@ public class ClinicalTrialParticipationEvaluationConverter extends ObservationTo
 
     @Override
     protected GeccoStudienteilnahmeEvaluation convertInternal(Observation resource) {
-
         GeccoStudienteilnahmeEvaluation geccoStudienteilnahmeEvaluation = new GeccoStudienteilnahmeEvaluation();
+        mapParticipated(geccoStudienteilnahmeEvaluation, resource);
 
+        if(geccoStudienteilnahmeEvaluation.getBereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode().equals(BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode.YES_QUALIFIER_VALUE))
+            geccoStudienteilnahmeEvaluation.setStudienteilnahme(createStudyCluster(resource));
+
+        return geccoStudienteilnahmeEvaluation;
+    }
+
+    private void mapParticipated(GeccoStudienteilnahmeEvaluation geccoStudienteilnahmeEvaluation, Observation resource) {
         String codeParticipated = getSnomedCodeObservation(resource);
 
         switch(codeParticipated){
@@ -44,61 +46,48 @@ public class ClinicalTrialParticipationEvaluationConverter extends ObservationTo
             default:
                 throw new UnprocessableEntityException("Value code " + resource.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
         }
-
-        if(geccoStudienteilnahmeEvaluation.getBereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode().equals(BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode.YES_QUALIFIER_VALUE)){
-
-            geccoStudienteilnahmeEvaluation.setStudienteilnahme(createStudyCluster(resource));
-        }
-
-        return geccoStudienteilnahmeEvaluation;
     }
 
     private StudienteilnahmeCluster createStudyCluster(Observation resource){
-
         StudienteilnahmeCluster studienteilnahmeCluster = new StudienteilnahmeCluster();
-
         StudiePruefungCluster studiePruefungCluster = new StudiePruefungCluster();
         studienteilnahmeCluster.setStudiePruefung(studiePruefungCluster);
-
         studiePruefungCluster.setTitelDerStudiePruefungDefiningCode(TitelDerStudiePruefungDefiningCode.PARTICIPATION_IN_INTERVENTIONAL_CLINICAL_TRIALS);
 
-        if(resource.getCode().hasText()){
+        if(resource.getCode().hasText())
             studiePruefungCluster.setBeschreibungValue(resource.getCode().getText());
-        }
 
-        if(resource.hasComponent()){
+        if(resource.hasComponent())
             studiePruefungCluster.setRegistrierung(createRegistryCluster(resource));
-        }
 
         return studienteilnahmeCluster;
     }
 
     private List<StudiePruefungRegistrierungCluster> createRegistryCluster(Observation resource) {
-
         StudiePruefungRegistrierungCluster studiePruefungRegistrierungCluster = new StudiePruefungRegistrierungCluster();
 
         for (Observation.ObservationComponentComponent observationComponent
                 : resource.getComponent()) {
-
-            if(observationComponent.getCode().getCoding().get(0).getCode().equals("04")) {
-                studiePruefungRegistrierungCluster.setRegisternameDefiningCode(RegisternameDefiningCode.EUDRACT_NUMBER);
-            }else if(observationComponent.getCode().getCoding().get(0).getCode().equals("05")) {
-                studiePruefungRegistrierungCluster.setRegisternameDefiningCode(RegisternameDefiningCode.NCT_NUMBER);
-            }else{
-                throw new UnprocessableEntityException("value code " + observationComponent.getCode().getCoding().get(0).getCode() + " is not supported");
-            }
-
+            mapRegistername(observationComponent, studiePruefungRegistrierungCluster);
             studiePruefungRegistrierungCluster.setRegistrierungsnummerValue(observationComponent.getValueStringType().getValue());
         }
-
         return List.of(studiePruefungRegistrierungCluster);
     }
 
+    private void mapRegistername(Observation.ObservationComponentComponent observationComponent, StudiePruefungRegistrierungCluster studiePruefungRegistrierungCluster) {
+        if(observationComponent.getCode().getCoding().get(0).getCode().equals("04")) {
+            studiePruefungRegistrierungCluster.setRegisternameDefiningCode(RegisternameDefiningCode.EUDRACT_NUMBER);
+        }else if(observationComponent.getCode().getCoding().get(0).getCode().equals("05")) {
+            studiePruefungRegistrierungCluster.setRegisternameDefiningCode(RegisternameDefiningCode.NCT_NUMBER);
+        }else{
+            throw new UnprocessableEntityException("value code " + observationComponent.getCode().getCoding().get(0).getCode() + " is not supported");
+        }
+    }
+
     private void checkForSnomedSystem(String systemCode) {
-        if (!SNOMED.getUrl().equals(systemCode)) {
+        if (!SNOMED.getUrl().equals(systemCode))
             throw new UnprocessableEntityException("The system is not correct. " +
                     "It should be '" + SNOMED.getUrl() + "', but it was '" + systemCode + "'.");
-        }
     }
 
     private String getSnomedCodeObservation(Observation fhirObservation) {
