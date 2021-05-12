@@ -30,7 +30,7 @@ public class ClinicalTrialParticipationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void ClinicalTrialParticipation() throws IOException {
+    void createClinicalTrialParticipation() throws IOException {
         create("create-clinical-trial-participation-yes-eudract.json");
     }
 
