@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AlterObservation;
 
 import org.hl7.fhir.r4.model.Age;
@@ -11,6 +12,7 @@ import org.hl7.fhir.r4.model.Patient;
 
 import java.time.Period;
 import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAccessor;
 
 public class AlterObservationConverter extends EntryEntityConverter<Patient, AlterObservation> {
 
@@ -18,14 +20,12 @@ public class AlterObservationConverter extends EntryEntityConverter<Patient, Alt
     protected AlterObservation convertInternal(Patient resource) {
         AlterObservation age = new AlterObservation();
         Extension extensionAge = resource.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age");
-        DateTimeType dateTimeOfDocumentationDt = (DateTimeType) extensionAge.getExtensionByUrl("dateTimeOfDocumentation").getValue();
-        ZonedDateTime dateTimeOfDocumentation = dateTimeOfDocumentationDt.getValueAsCalendar().toZonedDateTime();
-
-        //TODO refactor
-        age.setOriginValue(dateTimeOfDocumentation);
-        age.setTimeValue(dateTimeOfDocumentation);
-        //age - Alter (ISO8601 duration e.g. P67Y)
-        age.setAlterValue(getAge(extensionAge));
+        if (extensionAge != null) {
+            TemporalAccessor time = TimeConverter.convertAgeExtensionTime(extensionAge); //should be sth. generic in TimeConverter?
+            age.setOriginValue(time);
+            age.setTimeValue(time);
+            age.setAlterValue(getAge(extensionAge));
+        }
         return age;
     }
 
