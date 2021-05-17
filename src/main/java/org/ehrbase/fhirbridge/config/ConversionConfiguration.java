@@ -8,6 +8,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight.BodyHeightCompos
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodytemperature.BodyTemperatureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyweight.BodyWeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty.ClinicalFrailtyScaleScoreCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation.ClinicalTrialParticipationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.coronavirusnachweistest.CoronavirusNachweisTestCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.diagnose.DiagnoseCompositionConverter;
@@ -93,6 +94,7 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.BODY_TEMP, new BodyTemperatureCompositionConverter());
         conversionService.registerConverter(Profile.BODY_WEIGHT, new BodyWeightCompositionConverter());
         conversionService.registerConverter(Profile.CLINICAL_FRAILTY_SCALE, new ClinicalFrailtyScaleScoreCompositionConverter());
+        conversionService.registerConverter(Profile.CLINICAL_TRIAL_PARTICIPATION, new ClinicalTrialParticipationCompositionConverter());
         conversionService.registerConverter(Profile.CORONARIRUS_NACHWEIS_TEST, new CoronavirusNachweisTestCompositionConverter());
         conversionService.registerConverter(Profile.FIO2, new FiO2CompositionConverter());
         conversionService.registerConverter(Profile.HEART_RATE, new HeartRateCompositionConverter());
