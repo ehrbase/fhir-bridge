@@ -38,7 +38,7 @@ public class FindConsentAuditStrategy extends FhirQueryAuditStrategy {
 
     @Override
     public AuditMessage[] makeAuditMessage(AuditContext auditContext, FhirQueryAuditDataset auditDataset) {
-        return new QueryInformationBuilder<>(auditContext, auditDataset, FhirBridgeEventType.FindConsent)
+        return new QueryInformationBuilder<>(auditContext, auditDataset, FhirBridgeEventType.FIND_CONSENT)
                 .addPatients(auditDataset.getPatientIds())
                 .getMessages();
     }
