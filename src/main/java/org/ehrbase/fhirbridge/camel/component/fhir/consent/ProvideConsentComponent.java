@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.component.fhir.medicationstatement;
+package org.ehrbase.fhirbridge.camel.component.fhir.consent;
 
-import org.ehrbase.fhirbridge.fhir.medicationstatement.CreateMedicationStatementTransaction;
+import org.ehrbase.fhirbridge.fhir.consent.ProvideConsentTransaction;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
- * Camel {@link org.apache.camel.Component Component} that handles 'Create Medication Statement' transaction.
+ * {@link org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent FhirComponent} for 'Provide Consent' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-@SuppressWarnings({"java:S110"})
-public class CreateMedicationStatementComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
+@SuppressWarnings("java:S110")
+public class ProvideConsentComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
 
-    public CreateMedicationStatementComponent() {
-        super(new CreateMedicationStatementTransaction());
+    public ProvideConsentComponent() {
+        super(new ProvideConsentTransaction());
     }
 }

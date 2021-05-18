@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.medicationstatement;
+package org.ehrbase.fhirbridge.fhir.condition;
 
-import org.hl7.fhir.r4.model.MedicationStatement;
+import org.hl7.fhir.r4.model.Condition;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditStrategy;
 import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 
 import java.util.Optional;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
- * for 'Create Medication Statement' transaction.
+ * Custom implementation of {@link GenericFhirAuditStrategy} for 'Provide Condition' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateMedicationStatementAuditStrategy extends GenericFhirAuditStrategy<MedicationStatement> {
+public class ProvideConditionAuditStrategy extends GenericFhirAuditStrategy<Condition> {
 
-    public CreateMedicationStatementAuditStrategy() {
-        super(true, OperationOutcomeOperations.INSTANCE, medicationStatement -> Optional.of(medicationStatement.getSubject()));
+    public ProvideConditionAuditStrategy() {
+        super(true, OperationOutcomeOperations.INSTANCE, condition -> Optional.of(condition.getSubject()));
     }
 }

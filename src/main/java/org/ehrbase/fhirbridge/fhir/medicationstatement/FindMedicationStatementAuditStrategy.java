@@ -38,7 +38,7 @@ public class FindMedicationStatementAuditStrategy extends FhirQueryAuditStrategy
 
     @Override
     public AuditMessage[] makeAuditMessage(AuditContext auditContext, FhirQueryAuditDataset auditDataset) {
-        return new QueryInformationBuilder<>(auditContext, auditDataset, FhirBridgeEventType.FindMedicationStatement)
+        return new QueryInformationBuilder<>(auditContext, auditDataset, FhirBridgeEventType.FIND_MEDICATION_STATEMENT)
                 .addPatients(auditDataset.getPatientIds())
                 .getMessages();
     }

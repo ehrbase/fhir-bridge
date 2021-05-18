@@ -16,14 +16,11 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.CamelConstants;
-import org.hl7.fhir.r4.model.Condition;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of {@link RouteBuilder} that provides route definitions for transactions
- * linked to {@link Condition} resource.
+ * Implementation of {@link org.apache.camel.builder.RouteBuilder RouteBuilder} that defines routes for transactions
+ * related to {@link org.hl7.fhir.r4.model.Condition Condition} resource.
  *
  * @since 1.0.0
  */
@@ -35,20 +32,16 @@ public class ConditionRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // 'Create Condition' route definition
-        from("condition-create:consumer?fhirContext=#fhirContext")
-            .onCompletion()
-                .process("auditCreateResourceProcessor")
-            .end()
+        // Route: Provide Condition
+        from("condition-provide:consumer?fhirContext=#fhirContext")
+            .routeId("provide-condition-route")
             .process("fhirProfileValidator")
-            .setHeader(CamelConstants.METHOD_OUTCOME, method("conditionDao", "create(${body}, ${headers.FhirRequestDetails})"))
-            .process("ehrIdLookupProcessor")
-            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .process("resourceResponseProcessor");
+            .process("provideConditionPersistenceProcessor")
+            .to("direct:internal-provide-resource");
 
-        // 'Find Condition' route definition
+        // Route: Find Condition
         from("condition-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
+            .routeId("find-condition-route")
             .choice()
                 .when(isSearchOperation())
                     .to("bean:conditionDao?method=search(${body}, ${headers.FhirRequestDetails})")

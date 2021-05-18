@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.consent;
+package org.ehrbase.fhirbridge.fhir.observation;
 
-import org.hl7.fhir.r4.model.Consent;
+import org.hl7.fhir.r4.model.Observation;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditStrategy;
 import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 
 import java.util.Optional;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
- * for 'Create Consent' transaction.
+ * Custom implementation of {@link GenericFhirAuditStrategy} for 'Provide Observation' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateConsentAuditStrategy extends GenericFhirAuditStrategy<Consent> {
+public class ProvideObservationAuditStrategy extends GenericFhirAuditStrategy<Observation> {
 
-    public CreateConsentAuditStrategy() {
-        super(true, OperationOutcomeOperations.INSTANCE, consent -> Optional.of(consent.getPatient()));
+    public ProvideObservationAuditStrategy() {
+        super(true, OperationOutcomeOperations.INSTANCE, observation -> Optional.of(observation.getSubject()));
     }
 }

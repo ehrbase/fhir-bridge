@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.observation;
+package org.ehrbase.fhirbridge.fhir.patient;
 
 import ca.uhn.fhir.rest.annotation.ConditionalUrlParam;
 import ca.uhn.fhir.rest.annotation.Create;
@@ -24,7 +24,7 @@ import ca.uhn.fhir.rest.annotation.Update;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import org.hl7.fhir.r4.model.IdType;
-import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Patient;
 import org.openehealth.ipf.commons.ihe.fhir.AbstractPlainProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,32 +33,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Implementation of {@link AbstractPlainProvider} that handles 'Provide Observation' transaction
+ * Implementation of {@link AbstractPlainProvider} that handles 'Provide Patient' transaction
  * using {@link Create} and {@link Update} operations.
  *
  * @since 1.2.0
  */
-public class ProvideObservationProvider extends AbstractPlainProvider {
+@SuppressWarnings("unused")
+public class ProvidePatientProvider extends AbstractPlainProvider {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ProvideObservationProvider.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProvidePatientProvider.class);
 
     @Create
-    public MethodOutcome create(@ResourceParam Observation observation,
+    public MethodOutcome create(@ResourceParam Patient patient,
                                 RequestDetails requestDetails,
                                 HttpServletRequest request,
                                 HttpServletResponse response) {
-        LOG.trace("Executing 'Provide Observation' transaction using 'create' operation...");
-        return requestAction(observation, null, request, response, requestDetails);
+        LOG.trace("Executing 'Provide Patient' transaction using 'create' operation...");
+        return requestAction(patient, null, request, response, requestDetails);
     }
 
     @Update
-    public MethodOutcome update(@ResourceParam Observation observation,
+    public MethodOutcome update(@ResourceParam Patient patient,
                                 @IdParam IdType id,
                                 @ConditionalUrlParam String conditionalUrl,
                                 RequestDetails requestDetails,
                                 HttpServletRequest request,
                                 HttpServletResponse response) {
-        LOG.trace("Executing 'Provide Observation' transaction using 'update' operation...");
-        return requestAction(observation, null, request, response, requestDetails);
+        LOG.trace("Executing 'Provide Patient' transaction using 'update' operation...");
+        return requestAction(patient, null, request, response, requestDetails);
     }
 }

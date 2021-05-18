@@ -16,13 +16,11 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of {@link RouteBuilder} that provides route definitions for transactions
- * linked to {@link org.hl7.fhir.r4.model.Consent Consent} resource.
+ * Implementation of {@link org.apache.camel.builder.RouteBuilder RouteBuilder} that defines routes for transactions
+ * related to {@link org.hl7.fhir.r4.model.Consent Consent} resource.
  *
  * @since 1.0.0
  */
@@ -32,22 +30,22 @@ public class ConsentRoutes extends AbstractRouteBuilder {
     @Override
     public void configure() throws Exception {
         // @formatter:off
-        super.configure();
+        errorHandler(
+            defaultErrorHandler()
+                .logStackTrace(false));
+//        onException(Exception.class)
+//                .process("defaultExceptionHandler");
 
-        // 'Create Consent' route definition
-        from("consent-create:consumer?fhirContext=#fhirContext")
-            .onCompletion()
-                .process("auditCreateResourceProcessor")
-            .end()
+        // Route: Provide Consent
+        from("consent-provide:consumer?fhirContext=#fhirContext")
+            .routeId("provide-consent-route")
             .process("fhirProfileValidator")
-            .setHeader(CamelConstants.METHOD_OUTCOME, method("consentDao", "create(${body}, ${headers.FhirRequestDetails})"))
-            .process("ehrIdLookupProcessor")
-            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .process("resourceResponseProcessor");
+            .process("provideConsentPersistenceProcessor")
+            .to("direct:internal-provide-resource");
 
-        // 'Find Consent' route definition
+        // Route: Find Consent
         from("consent-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
+            .routeId("find-consent-route")
             .choice()
                 .when(isSearchOperation())
                     .to("bean:consentDao?method=search(${body}, ${headers.FhirRequestDetails})")

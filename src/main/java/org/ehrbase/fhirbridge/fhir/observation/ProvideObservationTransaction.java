@@ -22,9 +22,9 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * Configuration for 'Provide Observation' transaction.
+ * 'Provide Observation' {@link org.openehealth.ipf.commons.ihe.core.TransactionConfiguration TransactionConfiguration}.
  * <p>
- * Note: Server-side only.
+ * Note: Server-side only
  *
  * @since 1.2.0
  */
@@ -35,7 +35,7 @@ public class ProvideObservationTransaction extends FhirTransactionConfiguration<
                 "Provide Observation",
                 false,
                 null,
-                new CreateObservationAuditStrategy(),
+                new ProvideObservationAuditStrategy(),
                 FhirVersionEnum.R4,
                 new ProvideObservationProvider(),
                 null,

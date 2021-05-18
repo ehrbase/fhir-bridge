@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.patient;
+package org.ehrbase.fhirbridge.fhir.consent;
 
-import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.Consent;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditStrategy;
 import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 
 import java.util.Optional;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
- * for 'Create Patient' transaction.
+ * Custom implementation of {@link GenericFhirAuditStrategy} for 'Provide Consent' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreatePatientAuditStrategy extends GenericFhirAuditStrategy<Patient> {
+public class ProvideConsentAuditStrategy extends GenericFhirAuditStrategy<Consent> {
 
-    public CreatePatientAuditStrategy() {
-        super(true, OperationOutcomeOperations.INSTANCE, patient -> Optional.empty());
+    public ProvideConsentAuditStrategy() {
+        super(true, OperationOutcomeOperations.INSTANCE, consent -> Optional.of(consent.getPatient()));
     }
 }
