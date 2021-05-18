@@ -1,12 +1,14 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Consent;
+import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
-
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
@@ -120,5 +122,25 @@ public class TimeConverter {
         } else {
             return Optional.empty();
         }
+    }
+
+    public static TemporalAccessor convertConsentTime(Consent resource) {
+        if (resource.hasDateTime()) {
+            return resource.getDateTime().toInstant();
+        } else {
+            return OffsetDateTime.now();
+        }
+    }
+
+    public static TemporalAccessor convertAgeExtensionTime(Extension extension) {
+        if (extension == null) {
+            return OffsetDateTime.now();
+        }
+        Extension dataTimeOfDocumentationExtension = extension.getExtensionByUrl("dateTimeOfDocumentation");
+        if (dataTimeOfDocumentationExtension == null) {
+            return OffsetDateTime.now();
+        }
+        DateTimeType dateTimeOfDocumentationDt = (DateTimeType) dataTimeOfDocumentationExtension.getValue();
+        return dateTimeOfDocumentationDt.getValueAsCalendar().toZonedDateTime();
     }
 }
