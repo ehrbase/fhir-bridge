@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.condition;
+package org.ehrbase.fhirbridge.fhir.medicationstatement;
 
 import ca.uhn.fhir.context.FhirVersionEnum;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionConfiguration;
@@ -22,20 +22,22 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * Configuration for 'Create Condition' transaction.
+ * 'Provide Medication Statement' {@link org.openehealth.ipf.commons.ihe.core.TransactionConfiguration TransactionConfiguration}.
+ * <p>
+ * Note: Server-side only
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateConditionTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class ProvideMedicationStatementTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public CreateConditionTransaction() {
-        super("condition-create",
-                "Create Condition",
+    public ProvideMedicationStatementTransaction() {
+        super("medication-statement-provide",
+                "Provide Medication Statement Transaction",
                 false,
                 null,
-                new CreateConditionAuditStrategy(),
+                new ProvideMedicationStatementAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreateConditionProvider(),
+                new ProvideMedicationStatementProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }

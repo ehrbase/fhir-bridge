@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.component.fhir.condition;
+package org.ehrbase.fhirbridge.camel.component.fhir.patient;
 
-import org.ehrbase.fhirbridge.fhir.condition.CreateConditionTransaction;
+import org.ehrbase.fhirbridge.fhir.patient.ProvidePatientTransaction;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
- * Camel {@link org.apache.camel.Component Component} that handles 'Create Condition' transaction.
+ * {@link org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent FhirComponent} for
+ * 'Provide Patient' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-@SuppressWarnings({"java:S110"})
-public class CreateConditionComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
+@SuppressWarnings("java:S110")
+public class ProvidePatientComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
 
-    public CreateConditionComponent() {
-        super(new CreateConditionTransaction());
+    public ProvidePatientComponent() {
+        super(new ProvidePatientTransaction());
     }
 }

@@ -6,23 +6,31 @@ import org.openehealth.ipf.commons.audit.types.EventType;
 @SuppressWarnings("java:S115")
 public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<EventType> {
 
+    // Condition
+
+    PROVIDE_CONDITION("condition-provide", "Provide Condition"),
+
+    FIND_CONDITION("condition-find", "Find Condition"),
+
+    // Consent
+
+    PROVIDE_CONSENT("consent-provide", "Provide Consent"),
+
+    FIND_CONSENT("consent-find", "Find Consent"),
+
+    // MedicationStatement
+
+    PROVIDE_MEDICATION_STATEMENT("medication-statement-provide", "Provide Medication Statement"),
+
+    FIND_MEDICATION_STATEMENT("medication-statement-find", "Find Medication Statement"),
+
+    // Review
+
     FindAuditEvent("audit-event-find", "Find Audit Event"),
-
-    CreateCondition("condition-create", "Create Condition"),
-
-    FindCondition("condition-find", "Find Condition"),
-
-    CreateConsent("consent-create", "Create Consent"),
-
-    FindConsent("consent-find", "Find Consent"),
 
     CreateDiagnosticReport("diagnostic-report-create", "Create Diagnostic Report"),
 
     FindDiagnosticReport("diagnostic-report-find", "Find Diagnostic Report"),
-
-    CreateMedicationStatement("medication-statement-create", "Create Medication Statement"),
-
-    FindMedicationStatement("medication-statement-find", "Find Medication Statement"),
 
     CreateObservation("observation-create", "Create Observation"),
 

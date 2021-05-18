@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.condition;
+package org.ehrbase.fhirbridge.fhir.patient;
 
-import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Patient;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditStrategy;
 import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 
 import java.util.Optional;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
- * for 'Create Condition' transaction.
+ * Custom implementation of {@link GenericFhirAuditStrategy} for 'Provide Patient' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateConditionAuditStrategy extends GenericFhirAuditStrategy<Condition> {
+public class ProvidePatientAuditStrategy extends GenericFhirAuditStrategy<Patient> {
 
-    public CreateConditionAuditStrategy() {
-        super(true, OperationOutcomeOperations.INSTANCE, condition -> Optional.of(condition.getSubject()));
+    public ProvidePatientAuditStrategy() {
+        super(true, OperationOutcomeOperations.INSTANCE, patient -> Optional.empty());
     }
 }

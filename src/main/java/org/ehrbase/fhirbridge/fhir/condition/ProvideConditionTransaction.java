@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.patient;
+package org.ehrbase.fhirbridge.fhir.condition;
 
 import ca.uhn.fhir.context.FhirVersionEnum;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionConfiguration;
@@ -22,20 +22,22 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * Configuration for 'Create Patient' transaction.
+ * 'Provide Condition' {@link org.openehealth.ipf.commons.ihe.core.TransactionConfiguration TransactionConfiguration}.
+ * <p>
+ * Note: Server-side only
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreatePatientTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class ProvideConditionTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public CreatePatientTransaction() {
-        super("patient-create",
-                "Create Patient",
+    public ProvideConditionTransaction() {
+        super("condition-provide",
+                "Provide Condition Transaction",
                 false,
                 null,
-                new CreatePatientAuditStrategy(),
+                new ProvideConditionAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreatePatientProvider(),
+                new ProvideConditionProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }

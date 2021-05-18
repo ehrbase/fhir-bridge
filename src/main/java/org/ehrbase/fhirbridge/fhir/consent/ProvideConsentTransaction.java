@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.medicationstatement;
+package org.ehrbase.fhirbridge.fhir.consent;
 
 import ca.uhn.fhir.context.FhirVersionEnum;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionConfiguration;
@@ -22,20 +22,22 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * Configuration for 'Create Medication Statement' transaction.
+ * 'Provide Consent' {@link org.openehealth.ipf.commons.ihe.core.TransactionConfiguration TransactionConfiguration}.
+ * <p>
+ * Note: Server-side only
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateMedicationStatementTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class ProvideConsentTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public CreateMedicationStatementTransaction() {
-        super("medication-statement-create",
-                "Create Medication Statement",
+    public ProvideConsentTransaction() {
+        super("consent-provide",
+                "Provide Consent Transaction",
                 false,
                 null,
-                new CreateMedicationStatementAuditStrategy(),
+                new ProvideConsentAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreateMedicationStatementProvider(),
+                new ProvideConsentProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }

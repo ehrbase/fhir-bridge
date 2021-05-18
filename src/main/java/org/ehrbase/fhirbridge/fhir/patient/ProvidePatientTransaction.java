@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.consent;
+package org.ehrbase.fhirbridge.fhir.patient;
 
 import ca.uhn.fhir.context.FhirVersionEnum;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionConfiguration;
@@ -22,20 +22,22 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * Configuration for 'Create Consent' transaction.
+ * 'Provide Patient' {@link org.openehealth.ipf.commons.ihe.core.TransactionConfiguration TransactionConfiguration}.
+ * <p>
+ * Note: Server-side only
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateConsentTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class ProvidePatientTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public CreateConsentTransaction() {
-        super("consent-create",
-                "Create Consent",
+    public ProvidePatientTransaction() {
+        super("patient-provide",
+                "Provide Patient Transaction",
                 false,
                 null,
-                new CreateConsentAuditStrategy(),
+                new ProvidePatientAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreateConsentProvider(),
+                new ProvidePatientProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }
