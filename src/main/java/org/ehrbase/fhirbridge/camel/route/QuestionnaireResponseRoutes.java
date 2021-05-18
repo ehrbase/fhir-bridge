@@ -17,7 +17,7 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.Constants;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +41,7 @@ public class QuestionnaireResponseRoutes extends AbstractRouteBuilder {
                 .process("auditCreateResourceProcessor")
             .end()
             .process("fhirProfileValidator")
-            .setHeader(Constants.METHOD_OUTCOME, method("questionnaireResponseDao", "create(${body}, ${headers.FhirRequestDetails})"))
+            .setHeader(CamelConstants.METHOD_OUTCOME, method("questionnaireResponseDao", "create(${body}, ${headers.FhirRequestDetails})"))
             .process("ehrIdLookupProcessor")
             .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")

@@ -17,7 +17,7 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.Constants;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.hl7.fhir.r4.model.Patient;
 import org.springframework.stereotype.Component;
 
@@ -41,11 +41,11 @@ public class PatientRoutes extends AbstractRouteBuilder {
                 .process("auditCreateResourceProcessor")
             .end()
             .process("fhirProfileValidator")
-            .setHeader(Constants.METHOD_OUTCOME, method("patientDao", "create(${body}, ${headers.FhirRequestDetails})"))
+            .setHeader(CamelConstants.METHOD_OUTCOME, method("patientDao", "create(${body}, ${headers.FhirRequestDetails})"))
             .process("ehrIdLookupProcessor")
             .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .setBody(header(Constants.METHOD_OUTCOME));
+            .setBody(header(CamelConstants.METHOD_OUTCOME));
 
         // 'Find Patient' route definition
         from("patient-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")

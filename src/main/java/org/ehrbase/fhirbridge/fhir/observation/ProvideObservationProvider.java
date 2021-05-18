@@ -43,19 +43,22 @@ public class ProvideObservationProvider extends AbstractPlainProvider {
     private static final Logger LOG = LoggerFactory.getLogger(ProvideObservationProvider.class);
 
     @Create
-    public MethodOutcome create(@ResourceParam Observation observation, RequestDetails requestDetails,
-                                HttpServletRequest request, HttpServletResponse response) {
-        LOG.debug("Executing 'Provide Observation' using Create operation...");
-
+    public MethodOutcome create(@ResourceParam Observation observation,
+                                RequestDetails requestDetails,
+                                HttpServletRequest request,
+                                HttpServletResponse response) {
+        LOG.trace("Executing 'Provide Observation' transaction using 'create' operation...");
         return requestAction(observation, null, request, response, requestDetails);
     }
 
     @Update
-    public MethodOutcome update(@ResourceParam Observation observation, @IdParam IdType theId,
-                                @ConditionalUrlParam String theConditional, RequestDetails requestDetails,
-                                HttpServletRequest request, HttpServletResponse response) {
-        LOG.debug("Executing 'Provide Observation' using Update operation...");
-
+    public MethodOutcome update(@ResourceParam Observation observation,
+                                @IdParam IdType id,
+                                @ConditionalUrlParam String conditionalUrl,
+                                RequestDetails requestDetails,
+                                HttpServletRequest request,
+                                HttpServletResponse response) {
+        LOG.trace("Executing 'Provide Observation' transaction using 'update' operation...");
         return requestAction(observation, null, request, response, requestDetails);
     }
 }

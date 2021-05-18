@@ -22,21 +22,18 @@ import ca.uhn.fhir.rest.api.RestOperationTypeEnum;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.ehrbase.fhirbridge.camel.Constants;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.core.repository.ResourceMapRepository;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Camel {@link Processor} that handles creation or modification of the submitted FHIR resource
- * into the internal database.
- *
  * @since 1.2.0
  */
-public class FhirResourcePersistenceProcessor<T extends IBaseResource> implements Processor {
+public class ProvideResourcePersistenceProcessor<T extends IBaseResource> implements Processor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FhirResourcePersistenceProcessor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProvideResourcePersistenceProcessor.class);
 
     private final IFhirResourceDao<T> resourceDao;
 
@@ -44,8 +41,8 @@ public class FhirResourcePersistenceProcessor<T extends IBaseResource> implement
 
     private final ResourceMapRepository resourceMapRepository;
 
-    public FhirResourcePersistenceProcessor(IFhirResourceDao<T> resourceDao, Class<T> resourceType,
-                                            ResourceMapRepository resourceMapRepository) {
+    public ProvideResourcePersistenceProcessor(IFhirResourceDao<T> resourceDao, Class<T> resourceType,
+                                               ResourceMapRepository resourceMapRepository) {
         this.resourceDao = resourceDao;
         this.resourceType = resourceType;
         this.resourceMapRepository = resourceMapRepository;
@@ -56,23 +53,24 @@ public class FhirResourcePersistenceProcessor<T extends IBaseResource> implement
      */
     @Override
     public void process(Exchange exchange) throws Exception {
-        LOG.debug("FHIR resource persistence processing...");
+        LOG.trace("Processing...");
 
         var resource = exchange.getIn().getBody(resourceType);
-        var requestDetails = exchange.getIn().getHeader(org.openehealth.ipf.commons.ihe.fhir.Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
+        var requestDetails = exchange.getIn().getHeader(CamelConstants.FHIR_REQUEST_DETAILS, RequestDetails.class);
 
         MethodOutcome outcome;
         if (requestDetails.getRestOperationType() == RestOperationTypeEnum.CREATE) {
             outcome = handleCreateResource(resource, requestDetails);
         } else if (requestDetails.getRestOperationType() == RestOperationTypeEnum.UPDATE) {
             outcome = handleUpdateResource(resource, requestDetails);
-            resourceMapRepository.findById(outcome.getId().getValue())
-                    .ifPresent(resourceMap -> exchange.getMessage().setHeader(Constants.VERSION_UID, resourceMap.getVersionUid()));
+            resourceMapRepository.findById(outcome.getId().getIdPart())
+                    .ifPresent(resourceMap -> exchange.getMessage().setHeader(CamelConstants.COMPOSITION_VERSION_UID, resourceMap.getCompositionVersionUid()));
         } else {
             throw new UnsupportedOperationException("Only 'Create' and 'Update' operations are supported");
         }
 
-        exchange.setProperty(Constants.METHOD_OUTCOME, outcome);
+        exchange.getMessage().setHeader(CamelConstants.RESOURCE_ID, outcome.getId().getIdPart());
+        exchange.setProperty(CamelConstants.METHOD_OUTCOME, outcome);
     }
 
     /**
@@ -90,7 +88,7 @@ public class FhirResourcePersistenceProcessor<T extends IBaseResource> implement
     }
 
     /**
-     * Updates the existing resource.
+     * Updates an existing resource.
      *
      * @param resource       the updated resource
      * @param requestDetails the context of the current request
