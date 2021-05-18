@@ -108,10 +108,10 @@
 
     <changeSet id="3" author="subigre">
         <createTable tableName="FB_RESOURCE_MAP">
-            <column name="RES_ID" type="varchar(255)">
+            <column name="RESOURCE_ID" type="varchar(255)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="VERSION_UID" type="varchar(36)">
+            <column name="COMPOSITION_VERSION_UID" type="varchar(255)">
                 <constraints nullable="false" unique="true"/>
             </column>
         </createTable>

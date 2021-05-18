@@ -4,7 +4,7 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.ehrbase.fhirbridge.camel.Constants;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.OperationOutcome;
@@ -57,7 +57,7 @@ public class FhirProfileValidator implements Processor, MessageSourceAware {
                 throw new UnprocessableEntityException(fhirContext, operationOutcome);
             }
 
-            exchange.getMessage().setHeader(Constants.PROFILE, defaultProfile);
+            exchange.getMessage().setHeader(CamelConstants.PROFILE, defaultProfile);
         } else {
             Set<Profile> supportedProfiles = Profile.resolveAll(resource);
             if (supportedProfiles.isEmpty()) {
@@ -78,7 +78,7 @@ public class FhirProfileValidator implements Processor, MessageSourceAware {
                 throw new UnprocessableEntityException(fhirContext, operationOutcome);
             }
 
-            exchange.getMessage().setHeader(Constants.PROFILE, supportedProfiles.iterator().next());
+            exchange.getMessage().setHeader(CamelConstants.PROFILE, supportedProfiles.iterator().next());
         }
 
         LOG.info("{} resource validated", resource.getResourceType());

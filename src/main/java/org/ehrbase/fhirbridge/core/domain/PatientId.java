@@ -26,7 +26,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * PatientId JPA Entity.
+ * PatientId Entity.
  *
  * @since 1.0.0
  */

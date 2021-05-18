@@ -21,10 +21,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
- * ResourceMap JPA Entity.
+ * ResourceMap Entity.
  *
  * @since 1.2.0
  */
@@ -33,26 +32,33 @@ import java.util.UUID;
 public class ResourceMap {
 
     @Id
-    @Column(name = "RES_ID")
-    private String id;
+    @Column(name = "RESOURCE_ID")
+    private String resourceId;
 
-    @Column(name = "VERSION_UID")
-    private UUID versionUid;
+    @Column(name = "COMPOSITION_VERSION_UID")
+    private String compositionVersionUid;
 
-    public String getId() {
-        return id;
+    public ResourceMap() {
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public ResourceMap(String resourceId) {
+        this.resourceId = resourceId;
     }
 
-    public UUID getVersionUid() {
-        return versionUid;
+    public String getResourceId() {
+        return resourceId;
     }
 
-    public void setVersionUid(UUID versionUid) {
-        this.versionUid = versionUid;
+    public void setResourceId(String id) {
+        this.resourceId = id;
+    }
+
+    public String getCompositionVersionUid() {
+        return compositionVersionUid;
+    }
+
+    public void setCompositionVersionUid(String versionUid) {
+        this.compositionVersionUid = versionUid;
     }
 
     @Override
@@ -64,19 +70,19 @@ public class ResourceMap {
             return false;
         }
         ResourceMap that = (ResourceMap) o;
-        return Objects.equals(id, that.id) && Objects.equals(versionUid, that.versionUid);
+        return Objects.equals(resourceId, that.resourceId) && Objects.equals(compositionVersionUid, that.compositionVersionUid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, versionUid);
+        return Objects.hash(resourceId, compositionVersionUid);
     }
 
     @Override
     public String toString() {
         return "ResourceMap{" +
-                "id='" + id + '\'' +
-                ", versionUid=" + versionUid +
+                "resourceId='" + resourceId + '\'' +
+                ", compositionVersionUid='" + compositionVersionUid + '\'' +
                 '}';
     }
 }

@@ -18,7 +18,7 @@ package org.ehrbase.fhirbridge.camel.route;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.Constants;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.AntiBodyPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.DiagnosticReportLabConverter;
@@ -48,13 +48,13 @@ public class BundleRoutes extends AbstractRouteBuilder {
 
         // 'Provide Bundle' route definition
         from("bundle-provide:consumer?fhirContext=#fhirContext")
-                .setHeader(Constants.PROFILE, method(Bundles.class, "getTransactionProfile"))
+                .setHeader(CamelConstants.PROFILE, method(Bundles.class, "getTransactionProfile"))
                 .choice()
-                    .when(header(Constants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
                         .to("direct:process-blood-gas-panel-bundle")
-                    .when(header(Constants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
                         .to("direct:process-anti-body-panel-bundle")
-                    .when(header(Constants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
                         .to("direct:process-diagnostic-report-lab-bundle")
                     .otherwise()
                         .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +

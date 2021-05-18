@@ -5,7 +5,7 @@ import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.ehrbase.fhirbridge.camel.Constants;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Identifier;
@@ -78,7 +78,7 @@ public class AuditCreateResourceProcessor implements Processor {
     }
 
     private MethodOutcome extractMethodOutcome(Exchange exchange) {
-        return exchange.getIn().getHeader(Constants.METHOD_OUTCOME, MethodOutcome.class);
+        return exchange.getIn().getHeader(CamelConstants.METHOD_OUTCOME, MethodOutcome.class);
     }
 
     private RequestDetails extractRequestDetails(Exchange exchange) {
