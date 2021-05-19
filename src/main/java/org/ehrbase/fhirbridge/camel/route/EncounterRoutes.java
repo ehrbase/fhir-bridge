@@ -52,7 +52,7 @@ public class EncounterRoutes extends AbstractRouteBuilder {
                         .to("bean:fhirResourceConversionService?method=convertDefaultEncounter(${body})")
                         .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
                         .process("resourceResponseProcessor");
-        
+
         // @formatter:on
     }
 }

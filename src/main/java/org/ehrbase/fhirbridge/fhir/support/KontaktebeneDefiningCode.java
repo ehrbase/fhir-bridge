@@ -8,7 +8,7 @@ public enum KontaktebeneDefiningCode implements EnumValueSet {
 
     ABTEILUNGS_KONTAKT("Abteilungskontakt","Beschreibt den Kontakt zur Abteilung.","","abteilungskontakt"),
 
-    VERSORGUNGS_STELLEN_KONTAKT("Versorgungsstellenkontakt","Beschreibt den Kontakt zur Versorgungsstelle.\n","","versorgungsstellenkontakt");
+    VERSORGUNGS_STELLEN_KONTAKT("Versorgungsstellenkontakt","Beschreibt den Kontakt zur Versorgungsstelle.","","versorgungsstellenkontakt");
 
     private String value;
 

@@ -8,6 +8,10 @@ import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.KONTAKT_E
 
 public class Encounters {
 
+    private Encounters() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static Profile getProfileByKontaktEbene(Encounter encounter) {
 
         if (encounter.getType() != null && encounter.getType().size() > 0 ) {
