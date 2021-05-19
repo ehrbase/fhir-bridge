@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.PatientenAufenthalt;
+package org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.PatientenaufenthaltComposition;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class PatientenAufenthaltCompositionConverter extends EncounterToCompositionConverter<PatientenaufenthaltComposition> {
 
-    private final String FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel";
+    private static final String FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel";
 
     @Override
     public PatientenaufenthaltComposition convertInternal(@NonNull Encounter encounter) {
@@ -61,7 +61,13 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
             }
         }
 
-        // Mapping for Versorgungsaufenthalt
+        retVal.setVersorgungsaufenthalt(convertAdminEntry(encounter));
+
+        return retVal;
+    }
+
+    private VersorgungsaufenthaltAdminEntry convertAdminEntry(Encounter encounter) {
+
         VersorgungsaufenthaltAdminEntry versorgungsaufenthaltAdminEntry = new VersorgungsaufenthaltAdminEntry();
 
         versorgungsaufenthaltAdminEntry.setSubject(new PartySelf());
@@ -82,54 +88,57 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
                 }
             }
 
-            // location physical type / name -> standort
-            String locationPhysicalType = location.getPhysicalType().getCoding().get(0).getCode();
-            //String locationName = location.getLocationTarget().getName(); // todo: get Location from Reference
-            String locationName = location.getPhysicalType().getText();
-            StandortCluster standortCluster = new StandortCluster();
-
-            if (locationName != null && !locationName.isEmpty()) {
-
-                switch (locationPhysicalType) {
-                    case "si":
-                        standortCluster.setCampusValue(locationName);
-                        break;
-                    case "bu":
-                        standortCluster.setGebaeudegruppeValue(locationName);
-                        break;
-                    case "lvl":
-                        standortCluster.setEbeneValue(locationName);
-                        break;
-                    case "wa":
-                        standortCluster.setStationValue(locationName);
-                        break;
-                    case "ro":
-                        standortCluster.setZimmerValue(locationName);
-                        break;
-                    case "bd":
-                        standortCluster.setBettplatzValue(locationName);
-                        break;
-                    default: // other types aren't needed by EHR Composition
-                        throw new IllegalStateException("unexpected location physical type " + locationPhysicalType +
-                                " by EHR composition.");
-                }
-            }
-
-            /* TODO: get Location from Reference
-            if (location.getLocationTarget().getDescription() != null
-                    && !location.getLocationTarget().getDescription().isEmpty()) {
-
-                standortCluster.setZusaetzlicheBeschreibungValue(location.getLocationTarget().getDescription());
-            }*/
-
-            versorgungsaufenthaltAdminEntry.setStandort(standortCluster);
+            versorgungsaufenthaltAdminEntry.setStandort(convertStandortCluster(location));
 
             versorgungsaufenthaltAdminEntry.setKommentarValue(location.getLocation().getDisplay());
         }
 
-        if (versorgungsaufenthaltAdminEntry.getFachlicheOrganisationseinheit() == null) {
-            versorgungsaufenthaltAdminEntry.setFachlicheOrganisationseinheit(new ArrayList<>());
+        versorgungsaufenthaltAdminEntry.setFachlicheOrganisationseinheit(createFachlicheOrganisationseinheitClusterList(encounter));
+
+        return versorgungsaufenthaltAdminEntry;
+    }
+
+    private StandortCluster convertStandortCluster(Encounter.EncounterLocationComponent location) {
+
+        // location physical type / name -> standort
+        String locationPhysicalType = location.getPhysicalType().getCoding().get(0).getCode();
+
+        String locationName = location.getPhysicalType().getText();
+        StandortCluster standortCluster = new StandortCluster();
+
+        if (locationName != null && !locationName.isEmpty()) {
+
+            switch (locationPhysicalType) {
+                case "si":
+                    standortCluster.setCampusValue(locationName);
+                    break;
+                case "bu":
+                    standortCluster.setGebaeudegruppeValue(locationName);
+                    break;
+                case "lvl":
+                    standortCluster.setEbeneValue(locationName);
+                    break;
+                case "wa":
+                    standortCluster.setStationValue(locationName);
+                    break;
+                case "ro":
+                    standortCluster.setZimmerValue(locationName);
+                    break;
+                case "bd":
+                    standortCluster.setBettplatzValue(locationName);
+                    break;
+                default: // other types aren't needed by EHR Composition
+                    throw new IllegalStateException("unexpected location physical type " + locationPhysicalType +
+                            " by EHR composition.");
+            }
         }
+
+        return standortCluster;
+    }
+
+    private ArrayList<FachlicheOrganisationseinheitCluster> createFachlicheOrganisationseinheitClusterList(Encounter encounter) {
+
+        ArrayList<FachlicheOrganisationseinheitCluster> retVal = new ArrayList<>();
 
         if (encounter.getServiceType() != null
                 && encounter.getServiceType().getCoding() != null) {
@@ -147,11 +156,9 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
                             " or Code System for 'Fachabteilungsschlüssel'.");
                 }
 
-                versorgungsaufenthaltAdminEntry.getFachlicheOrganisationseinheit().add(fachlicheOrganisationseinheitCluster);
+                retVal.add(fachlicheOrganisationseinheitCluster);
             }
         }
-
-        retVal.setVersorgungsaufenthalt(versorgungsaufenthaltAdminEntry);
 
         return retVal;
     }

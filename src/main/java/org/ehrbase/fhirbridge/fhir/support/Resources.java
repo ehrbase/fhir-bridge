@@ -24,6 +24,8 @@ import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Resource;
 import org.hl7.fhir.r4.model.Encounter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,6 +39,8 @@ import java.util.stream.Collectors;
 public class Resources {
 
     public static final String RFC_4122_SYSTEM = "urn:ietf:rfc:4122";
+
+    private static final Logger LOG = LoggerFactory.getLogger(Resources.class);
 
     private Resources() {
     }
@@ -91,19 +95,16 @@ public class Resources {
         } else if (resource instanceof QuestionnaireResponse) {
             subjectIdentifier = getQuestionnaireId((QuestionnaireResponse) resource, openEhrClient, patientIdRepository);
         } else if (resource instanceof Encounter) {
-            subjectIdentifier = getEncounterIdentifier((Encounter) resource, openEhrClient, patientIdRepository);
+            subjectIdentifier = getEncounterIdentifier((Encounter) resource, openEhrClient);
         }
 
         return Optional.ofNullable(subjectIdentifier);
     }
 
-    private static Identifier getEncounterIdentifier(Encounter resource, Optional<OpenEhrClient> openEhrClient, Optional<PatientIdRepository> patientIdRepository) {
+    private static Identifier getEncounterIdentifier(Encounter resource, Optional<OpenEhrClient> openEhrClient) {
 
         if (openEhrClient.isEmpty()) {
             throw new InternalErrorException("getSubjectIdentifier by Encounter was called without a configured openEHRClient as parameter. Please add one.");
-        }
-        if (patientIdRepository.isEmpty()) {
-            throw new InternalErrorException("PatientIdRepository is required by Encounter in getSubjectIdentifier()");
         }
 
         // @formatter:off
@@ -115,17 +116,17 @@ public class Resources {
 
         List<Record1<UUID>> result = openEhrClient.get().aqlEndpoint().execute(query, new ParameterValue<>("subject", resource.getSubject().getIdentifier().getValue()));
 
-        System.out.println("Subject ID from Encounter: " + resource.getSubject().getIdentifier().getValue());
+        LOG.debug("Subject ID from Encounter: " + resource.getSubject().getIdentifier().getValue());
 
         // create ehr if patient not exist
         if (result.isEmpty()) {
-            return createEHRWithSubjectID(openEhrClient.get(), patientIdRepository.get(), resource.getSubject().getIdentifier().getValue());
+            return createEHRWithSubjectID(openEhrClient.get(), resource.getSubject().getIdentifier().getValue());
         } else {
             return resource.getSubject().getIdentifier();
         }
     }
 
-    private static Identifier createEHRWithSubjectID(OpenEhrClient openEhrClient, PatientIdRepository patientIdRepository, String patientID) {
+    private static Identifier createEHRWithSubjectID(OpenEhrClient openEhrClient, String patientID) {
 
         PartySelf subject = new PartySelf();
         PartyRef externalRef = new PartyRef();
@@ -139,7 +140,6 @@ public class Resources {
         DvText dvText = new DvText("any EHR status");
         EhrStatus ehrStatus = new EhrStatus("openEHR-EHR-ITEM_TREE.generic.v1", dvText, subject, true, true, null);
         UUID ehrId = openEhrClient.ehrEndpoint().createEhr(ehrStatus);
-        System.out.println("created EhrID from Encounter: " + ehrId.toString());
         Identifier identifier = new Identifier();
         identifier.setValue(genericId.getValue());
         return identifier;
@@ -175,7 +175,7 @@ public class Resources {
         DvText dvText = new DvText("any EHR status");
         EhrStatus ehrStatus = new EhrStatus("openEHR-EHR-ITEM_TREE.generic.v1", dvText, subject, true, true, null);
         UUID ehrId = openEhrClient.ehrEndpoint().createEhr(ehrStatus);
-        System.out.println("EhrID: " + ehrId.toString());
+        LOG.debug("EhrID: " + ehrId.toString());
         Identifier identifier = new Identifier();
         identifier.setValue(genericId.getValue());
         return identifier;

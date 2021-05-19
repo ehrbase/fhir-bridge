@@ -18,6 +18,10 @@ class StationaererVersorgungsfallDefiningCodeMaps {
     private static final Map<String, KlinischerZustandDesPatientenDefiningCode> klinischerZustandMap = new HashMap<>();
     private static final Map<String, FallstatusDefiningCode> fallStatusMap = new HashMap<>();
 
+    private StationaererVersorgungsfallDefiningCodeMaps() {
+        throw new IllegalStateException("Utility class");
+    }
+
     static {
 
         for(AufnahmegrundDefiningCode aufnahmegrundDefiningCode : AufnahmegrundDefiningCode.values()) {
