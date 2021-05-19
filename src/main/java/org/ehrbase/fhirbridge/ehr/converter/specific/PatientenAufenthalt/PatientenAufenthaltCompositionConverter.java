@@ -9,11 +9,13 @@ import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsfallCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungstellenkontaktCluster;
 import org.ehrbase.fhirbridge.fhir.support.KontaktebeneDefiningCode;
+import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.KONTAKT_EBENE;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Identifier;
 import org.springframework.lang.NonNull;
+import com.nedap.archie.rm.generic.PartySelf;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -61,6 +63,9 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
 
         // Mapping for Versorgungsaufenthalt
         VersorgungsaufenthaltAdminEntry versorgungsaufenthaltAdminEntry = new VersorgungsaufenthaltAdminEntry();
+
+        versorgungsaufenthaltAdminEntry.setSubject(new PartySelf());
+        versorgungsaufenthaltAdminEntry.setLanguage(Language.DE);
 
         if(encounter.getLocation() != null
                 && encounter.getLocation().size() > 0) {
