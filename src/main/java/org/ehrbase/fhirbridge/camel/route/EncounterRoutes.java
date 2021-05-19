@@ -46,10 +46,12 @@ public class EncounterRoutes extends AbstractRouteBuilder {
                 .choice()
                     .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.PATIENTEN_AUFENTHALT))
                         .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
+                        .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
+                        .process("resourceResponseProcessor")
                     .otherwise()
                         .to("bean:fhirResourceConversionService?method=convertDefaultEncounter(${body})")
-                .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
-                .process("resourceResponseProcessor");
+                        .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
+                        .process("resourceResponseProcessor");
 
         // @formatter:on
     }
