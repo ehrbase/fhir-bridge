@@ -140,6 +140,7 @@ public class Resources {
         DvText dvText = new DvText("any EHR status");
         EhrStatus ehrStatus = new EhrStatus("openEHR-EHR-ITEM_TREE.generic.v1", dvText, subject, true, true, null);
         UUID ehrId = openEhrClient.ehrEndpoint().createEhr(ehrStatus);
+        LOG.debug("created EhrID: " + ehrId.toString());
         Identifier identifier = new Identifier();
         identifier.setValue(genericId.getValue());
         return identifier;
