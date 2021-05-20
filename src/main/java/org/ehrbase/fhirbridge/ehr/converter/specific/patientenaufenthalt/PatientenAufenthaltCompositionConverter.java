@@ -39,24 +39,33 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
 
                 String typeCode = encounter.getType().get(0).getCoding().get(0).getCode();
 
-                if (typeCode.equals(KontaktebeneDefiningCode.EINRICHTUNGS_KONTAKT.getCode())) {
+                switch (typeCode) {
 
-                    VersorgungsfallCluster versorgungsfallCluster = new VersorgungsfallCluster();
-                    versorgungsfallCluster.setZugehoerigerVersorgungsfallKennungValue(encounterIdentifier.getValue());
-                    retVal.setVersorgungsfall(versorgungsfallCluster);
-                } else if (typeCode.equals(KontaktebeneDefiningCode.ABTEILUNGS_KONTAKT.getCode())) {
-
-                    AbteilungsfallCluster abteilungsfallCluster = new AbteilungsfallCluster();
-                    abteilungsfallCluster.setZugehoerigerAbteilungsfallKennungValue(encounterIdentifier.getValue());
-                    retVal.setAbteilungsfall(abteilungsfallCluster);
-                } else if (typeCode.equals(KontaktebeneDefiningCode.VERSORGUNGS_STELLEN_KONTAKT.getCode())) {
-
-                    VersorgungstellenkontaktCluster versorgungstellenkontaktCluster = new VersorgungstellenkontaktCluster();
-                    versorgungstellenkontaktCluster.setZugehoerigerVersorgungsstellenkontaktKennungValue(encounterIdentifier.getValue());
-                    retVal.setVersorgungstellenkontakt(versorgungstellenkontaktCluster);
-                } else{
-                    throw new IllegalStateException("Invalid Code " + typeCode +
-                            " or Code System as 'Kontaktebene', valid codes are einrichtungskontakt, abteilungskontakt, versorgungsstellenkontakt.");
+                    case "Einrichtungskontakt":
+                    {
+                        VersorgungsfallCluster versorgungsfallCluster = new VersorgungsfallCluster();
+                        versorgungsfallCluster.setZugehoerigerVersorgungsfallKennungValue(encounterIdentifier.getValue());
+                        retVal.setVersorgungsfall(versorgungsfallCluster);
+                        break;
+                    }
+                    case "Abteilungskontakt":
+                    {
+                        AbteilungsfallCluster abteilungsfallCluster = new AbteilungsfallCluster();
+                        abteilungsfallCluster.setZugehoerigerAbteilungsfallKennungValue(encounterIdentifier.getValue());
+                        retVal.setAbteilungsfall(abteilungsfallCluster);
+                        break;
+                    }
+                    case "Versorgungsstellenkontakt":
+                    {
+                        VersorgungstellenkontaktCluster versorgungstellenkontaktCluster = new VersorgungstellenkontaktCluster();
+                        versorgungstellenkontaktCluster.setZugehoerigerVersorgungsstellenkontaktKennungValue(encounterIdentifier.getValue());
+                        retVal.setVersorgungstellenkontakt(versorgungstellenkontaktCluster);
+                    }
+                    default:
+                    {
+                        throw new IllegalStateException("Invalid Code " + typeCode +
+                                " or Code System as 'Kontaktebene', valid codes are einrichtungskontakt, abteilungskontakt, versorgungsstellenkontakt.");
+                    }
                 }
             }
         }
