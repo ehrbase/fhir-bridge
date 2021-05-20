@@ -41,28 +41,25 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
 
                 switch (typeCode) {
 
-                    case "Einrichtungskontakt":
-                    {
+                    case "Einrichtungskontakt": {
                         VersorgungsfallCluster versorgungsfallCluster = new VersorgungsfallCluster();
                         versorgungsfallCluster.setZugehoerigerVersorgungsfallKennungValue(encounterIdentifier.getValue());
                         retVal.setVersorgungsfall(versorgungsfallCluster);
                         break;
                     }
-                    case "Abteilungskontakt":
-                    {
+                    case "Abteilungskontakt": {
                         AbteilungsfallCluster abteilungsfallCluster = new AbteilungsfallCluster();
                         abteilungsfallCluster.setZugehoerigerAbteilungsfallKennungValue(encounterIdentifier.getValue());
                         retVal.setAbteilungsfall(abteilungsfallCluster);
                         break;
                     }
-                    case "Versorgungsstellenkontakt":
-                    {
+                    case "Versorgungsstellenkontakt": {
                         VersorgungstellenkontaktCluster versorgungstellenkontaktCluster = new VersorgungstellenkontaktCluster();
                         versorgungstellenkontaktCluster.setZugehoerigerVersorgungsstellenkontaktKennungValue(encounterIdentifier.getValue());
                         retVal.setVersorgungstellenkontakt(versorgungstellenkontaktCluster);
+                        break;
                     }
-                    default:
-                    {
+                    default: {
                         throw new IllegalStateException("Invalid Code " + typeCode +
                                 " or Code System as 'Kontaktebene', valid codes are einrichtungskontakt, abteilungskontakt, versorgungsstellenkontakt.");
                     }
