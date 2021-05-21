@@ -78,7 +78,7 @@ public enum Profile {
 
     FIO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/inhaled-oxygen-concentration"),
 
-    HEART_RATE(Observation.class, "http://hl7.org/fhir/StructureDefinition/heartrate"),
+    HEART_RATE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/heart-rate"),
 
     KNOWN_EXPOSURE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/known-exposure"),
 

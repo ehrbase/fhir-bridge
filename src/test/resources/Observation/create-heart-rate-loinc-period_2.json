@@ -3,7 +3,7 @@
   "id": "heart-rate",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/heartrate"
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/heart-rate"
     ]
   },
   "status": "final",
@@ -37,7 +37,7 @@
   },
   "effectivePeriod": {
     "start": "1999-07-02",
-    "end": "1997-07-02"
+    "end": "1999-07-02"
   },
   "valueQuantity": {
     "value": 60,
