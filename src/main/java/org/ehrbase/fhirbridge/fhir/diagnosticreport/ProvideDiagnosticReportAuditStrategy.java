@@ -23,14 +23,13 @@ import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 import java.util.Optional;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
- * for 'Create Diagnostic Report' transaction.
+ * Custom implementation of {@link GenericFhirAuditStrategy} for 'Provide Diagnostic Report' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateDiagnosticReportAuditStrategy extends GenericFhirAuditStrategy<DiagnosticReport> {
+public class ProvideDiagnosticReportAuditStrategy extends GenericFhirAuditStrategy<DiagnosticReport> {
 
-    public CreateDiagnosticReportAuditStrategy() {
+    public ProvideDiagnosticReportAuditStrategy() {
         super(true, OperationOutcomeOperations.INSTANCE, diagnosticReport -> Optional.of(diagnosticReport.getSubject()));
     }
 }
