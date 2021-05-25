@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.component.fhir.questionnaireresponse;
+package org.ehrbase.fhirbridge.camel.component.fhir.procedure;
 
-import org.ehrbase.fhirbridge.fhir.questionnaireresponse.CreateQuestionnaireResponseTransaction;
+import org.ehrbase.fhirbridge.fhir.procedure.ProvideProcedureTransaction;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
- * Camel {@link org.apache.camel.Component Component} that handles 'Create Questionnaire-Response' transaction.
+ * {@link org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent FhirComponent}
+ * for 'Provide Procedure' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-@SuppressWarnings({"java:S110"})
-public class CreateQuestionnaireResponseComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
+@SuppressWarnings("java:S110")
+public class ProvideProcedureComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
 
-    public CreateQuestionnaireResponseComponent() {
-        super(new CreateQuestionnaireResponseTransaction());
+    public ProvideProcedureComponent() {
+        super(new ProvideProcedureTransaction());
     }
 }

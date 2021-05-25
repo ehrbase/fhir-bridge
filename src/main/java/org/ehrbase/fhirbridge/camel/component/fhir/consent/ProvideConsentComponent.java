@@ -21,7 +21,8 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
- * {@link org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent FhirComponent} for 'Provide Consent' transaction.
+ * {@link org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent FhirComponent}
+ * for 'Provide Consent' transaction.
  *
  * @since 1.2.0
  */

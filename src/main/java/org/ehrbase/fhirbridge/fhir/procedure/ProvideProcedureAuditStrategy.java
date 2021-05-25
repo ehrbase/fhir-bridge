@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.component.fhir.procedure;
+package org.ehrbase.fhirbridge.fhir.procedure;
 
-import org.ehrbase.fhirbridge.fhir.procedure.CreateProcedureTransaction;
-import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
-import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
+import org.hl7.fhir.r4.model.Procedure;
+import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditStrategy;
+import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
+
+import java.util.Optional;
 
 /**
- * Camel {@link org.apache.camel.Component Component} that handles 'Create Procedure' transaction.
+ * Custom implementation of {@link GenericFhirAuditStrategy} for 'Provide Procedure' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-@SuppressWarnings({"java:S110"})
-public class CreateProcedureComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
+public class ProvideProcedureAuditStrategy extends GenericFhirAuditStrategy<Procedure> {
 
-    public CreateProcedureComponent() {
-        super(new CreateProcedureTransaction());
+    public ProvideProcedureAuditStrategy() {
+        super(true, OperationOutcomeOperations.INSTANCE, procedure -> Optional.of(procedure.getSubject()));
     }
 }

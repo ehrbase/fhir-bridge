@@ -24,6 +24,24 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     FIND_MEDICATION_STATEMENT("medication-statement-find", "Find Medication Statement"),
 
+    // Patient
+
+    PROVIDE_PATIENT("patient-provide", "Provide Patient"),
+
+    FIND_PATIENT("patient-find", "Find Patient"),
+
+    // Procedure
+
+    PROVIDE_PROCEDURE("procedure-provide", "Provide Procedure"),
+
+    FIND_PROCEDURE("procedure-find", "Find Procedure"),
+
+    // Questionnaire-Response
+
+    PROVIDE_QUESTIONNAIRE_RESPONSE("questionnaire-response-provide", "Provide Questionnaire Response"),
+
+    FIND_QUESTIONNAIRE_RESPONSE("questionnaire-response-find", "Find Questionnaire Response"),
+
     // Review
 
     FindAuditEvent("audit-event-find", "Find Audit Event"),
@@ -34,19 +52,7 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     CreateObservation("observation-create", "Create Observation"),
 
-    FindObservation("observation-find", "Find Observation"),
-
-    CreatePatient("patient-create", "Create Patient"),
-
-    FindPatient("patient-find", "Find Patient"),
-
-    CreateProcedure("procedure-create", "Create Procedure"),
-
-    FindProcedure("procedure-find", "Find Procedure"),
-
-    CreateQuestionnaireResponse("questionnaire-response-create", "Create Questionnaire Response"),
-
-    FindQuestionnaireResponse("questionnaire-response-find", "Find Questionnaire Response");
+    FindObservation("observation-find", "Find Observation");
 
     private final EventType value;
 

@@ -22,20 +22,22 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * Configuration for 'Create Questionnaire-Response' transaction.
+ * 'Provide Patient' {@link org.openehealth.ipf.commons.ihe.core.TransactionConfiguration TransactionConfiguration}.
+ * <p>
+ * Note: Server-side only
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateQuestionnaireResponseTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class ProvideQuestionnaireResponseTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public CreateQuestionnaireResponseTransaction() {
-        super("questionnaire-response-create",
-                "Create Questionnaire-Response",
+    public ProvideQuestionnaireResponseTransaction() {
+        super("questionnaire-response-provide",
+                "Provide Questionnaire-Response Transaction",
                 false,
                 null,
-                new CreateQuestionnaireResponseAuditStrategy(),
+                new ProvideQuestionnaireResponseAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreateQuestionnaireResponseProvider(),
+                new ProvideQuestionnaireResponseProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }

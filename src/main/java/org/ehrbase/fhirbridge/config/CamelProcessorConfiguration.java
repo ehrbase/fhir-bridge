@@ -8,6 +8,8 @@ import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.Procedure;
+import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,5 +45,15 @@ public class CamelProcessorConfiguration {
     @Bean
     public ProvideResourcePersistenceProcessor<Patient> providePatientPersistenceProcessor(IFhirResourceDao<Patient> patientDao) {
         return new ProvideResourcePersistenceProcessor<>(patientDao, Patient.class, resourceMapRepository);
+    }
+
+    @Bean
+    public ProvideResourcePersistenceProcessor<Procedure> provideProcedurePersistenceProcessor(IFhirResourceDao<Procedure> procedureDao) {
+        return new ProvideResourcePersistenceProcessor<>(procedureDao, Procedure.class, resourceMapRepository);
+    }
+
+    @Bean
+    public ProvideResourcePersistenceProcessor<QuestionnaireResponse> provideQuestionnaireResponsePersistenceProcessor(IFhirResourceDao<QuestionnaireResponse> questionnaireResponseDao) {
+        return new ProvideResourcePersistenceProcessor<>(questionnaireResponseDao, QuestionnaireResponse.class, resourceMapRepository);
     }
 }
