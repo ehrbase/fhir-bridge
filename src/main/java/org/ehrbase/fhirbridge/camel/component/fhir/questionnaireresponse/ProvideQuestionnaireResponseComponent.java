@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.component.fhir.medicationstatement;
+package org.ehrbase.fhirbridge.camel.component.fhir.questionnaireresponse;
 
-import org.ehrbase.fhirbridge.fhir.medicationstatement.ProvideMedicationStatementTransaction;
+import org.ehrbase.fhirbridge.fhir.questionnaireresponse.ProvideQuestionnaireResponseTransaction;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
  * {@link org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent FhirComponent}
- * for 'Provide Medication Statement' transaction.
+ * for 'Provide Questionnaire-Response' transaction.
  *
  * @since 1.2.0
  */
 @SuppressWarnings("java:S110")
-public class ProvideMedicationStatementComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
+public class ProvideQuestionnaireResponseComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
 
-    public ProvideMedicationStatementComponent() {
-        super(new ProvideMedicationStatementTransaction());
+    public ProvideQuestionnaireResponseComponent() {
+        super(new ProvideQuestionnaireResponseTransaction());
     }
 }

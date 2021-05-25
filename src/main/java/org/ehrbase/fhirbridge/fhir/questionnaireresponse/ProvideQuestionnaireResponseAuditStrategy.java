@@ -23,20 +23,13 @@ import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
 import java.util.Optional;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.core.atna.AuditStrategy AuditStrategy}
- * for 'Create Procedure' transaction.
+ * Custom implementation of {@link GenericFhirAuditStrategy} for 'Provide Questionnaire-Response' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateQuestionnaireResponseAuditStrategy extends GenericFhirAuditStrategy<QuestionnaireResponse> {
+public class ProvideQuestionnaireResponseAuditStrategy extends GenericFhirAuditStrategy<QuestionnaireResponse> {
 
-    public CreateQuestionnaireResponseAuditStrategy() {
-        super(true, OperationOutcomeOperations.INSTANCE, questionnaireResponse -> {
-            if (questionnaireResponse.hasSubject()) {
-                return Optional.of(questionnaireResponse.getSubject());
-            } else {
-                return Optional.empty();
-            }
-        });
+    public ProvideQuestionnaireResponseAuditStrategy() {
+        super(true, OperationOutcomeOperations.INSTANCE, questionnaireResponse -> Optional.of(questionnaireResponse.getSubject()));
     }
 }

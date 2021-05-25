@@ -38,7 +38,7 @@ public class FindPatientAuditStrategy extends FhirQueryAuditStrategy {
 
     @Override
     public AuditMessage[] makeAuditMessage(AuditContext auditContext, FhirQueryAuditDataset auditDataset) {
-        return new QueryInformationBuilder<>(auditContext, auditDataset, FhirBridgeEventType.FindPatient)
+        return new QueryInformationBuilder<>(auditContext, auditDataset, FhirBridgeEventType.FIND_PATIENT)
                 .addPatients(auditDataset.getPatientIds())
                 .getMessages();
     }

@@ -30,6 +30,7 @@ public class PatientRoutes extends AbstractRouteBuilder {
     @Override
     public void configure() throws Exception {
         // @formatter:off
+        super.configure();
 
         // Route: Provide Patient
         from("patient-provide:consumer?fhirContext=#fhirContext")

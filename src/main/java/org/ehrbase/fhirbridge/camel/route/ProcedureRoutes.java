@@ -17,8 +17,6 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.CamelConstants;
-import org.ehrbase.fhirbridge.camel.processor.ResourceResponseProcessor;
 import org.hl7.fhir.r4.model.Procedure;
 import org.springframework.stereotype.Component;
 
@@ -36,19 +34,14 @@ public class ProcedureRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // 'Create Procedure' route definition
-        from("procedure-create:consumer?fhirContext=#fhirContext")
-            .onCompletion()
-                .process("auditCreateResourceProcessor")
-            .end()
+        // Route: Provide Procedure
+        from("procedure-provide:consumer?fhirContext=#fhirContext")
+            .routeId("provide-procedure-route")
             .process("fhirProfileValidator")
-            .setHeader(CamelConstants.METHOD_OUTCOME, method("procedureDao", "create(${body}, ${headers.FhirRequestDetails})"))
-            .process("ehrIdLookupProcessor")
-            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .process(new ResourceResponseProcessor());
+            .process("provideProcedurePersistenceProcessor")
+            .to("direct:internal-provide-resource");
 
-        // 'Find Procedure' route definition
+        // Route: 'Find Procedure'
         from("procedure-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())

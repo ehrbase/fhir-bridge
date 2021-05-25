@@ -22,20 +22,22 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * Configuration for 'Create Procedure' transaction.
+ * 'Provide Patient' {@link org.openehealth.ipf.commons.ihe.core.TransactionConfiguration TransactionConfiguration}.
+ * <p>
+ * Note: Server-side only
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateProcedureTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class ProvideProcedureTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public CreateProcedureTransaction() {
-        super("procedure-create",
-                "Create Procedure",
+    public ProvideProcedureTransaction() {
+        super("procedure-provide",
+                "Provide Procedure Transaction",
                 false,
                 null,
-                new CreateProcedureAuditStrategy(),
+                new ProvideProcedureAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreateProcedureProvider(),
+                new ProvideProcedureProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }
