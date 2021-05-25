@@ -35,6 +35,9 @@ public class MedicationStatementRoutes extends AbstractRouteBuilder {
         // Route: Provide Medication Statement
         from("medication-statement-provide:consumer?fhirContext=#fhirContext")
             .routeId("provide-medication-statement-route")
+            .onCompletion()
+                .process("provideResourceAuditHandler")
+            .end()
             .process("fhirProfileValidator")
             .process("provideMedicationStatementPersistenceProcessor")
             .to("direct:internal-provide-resource");

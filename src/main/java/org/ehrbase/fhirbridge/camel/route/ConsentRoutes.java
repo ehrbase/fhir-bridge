@@ -30,15 +30,14 @@ public class ConsentRoutes extends AbstractRouteBuilder {
     @Override
     public void configure() throws Exception {
         // @formatter:off
-        errorHandler(
-            defaultErrorHandler()
-                .logStackTrace(false));
-//        onException(Exception.class)
-//                .process("defaultExceptionHandler");
+        super.configure();
 
         // Route: Provide Consent
         from("consent-provide:consumer?fhirContext=#fhirContext")
             .routeId("provide-consent-route")
+            .onCompletion()
+                .process("provideResourceAuditHandler")
+            .end()
             .process("fhirProfileValidator")
             .process("provideConsentPersistenceProcessor")
             .to("direct:internal-provide-resource");

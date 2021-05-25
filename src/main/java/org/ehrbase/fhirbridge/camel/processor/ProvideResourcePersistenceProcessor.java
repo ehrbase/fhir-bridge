@@ -25,6 +25,7 @@ import org.apache.camel.Processor;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.core.repository.ResourceMapRepository;
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.openehealth.ipf.commons.ihe.fhir.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,25 +49,26 @@ public class ProvideResourcePersistenceProcessor<T extends IBaseResource> implem
         this.resourceMapRepository = resourceMapRepository;
     }
 
-    /**
-     * @see Processor#process(Exchange)
-     */
     @Override
     public void process(Exchange exchange) throws Exception {
         LOG.trace("Processing...");
 
         var resource = exchange.getIn().getBody(resourceType);
-        var requestDetails = exchange.getIn().getHeader(CamelConstants.FHIR_REQUEST_DETAILS, RequestDetails.class);
+        var requestDetails = exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
 
         MethodOutcome outcome;
-        if (requestDetails.getRestOperationType() == RestOperationTypeEnum.CREATE) {
-            outcome = handleCreateResource(resource, requestDetails);
-        } else if (requestDetails.getRestOperationType() == RestOperationTypeEnum.UPDATE) {
-            outcome = handleUpdateResource(resource, requestDetails);
-            resourceMapRepository.findById(outcome.getId().getIdPart())
-                    .ifPresent(resourceMap -> exchange.getMessage().setHeader(CamelConstants.COMPOSITION_VERSION_UID, resourceMap.getCompositionVersionUid()));
-        } else {
-            throw new UnsupportedOperationException("Only 'Create' and 'Update' operations are supported");
+        switch (requestDetails.getRestOperationType()) {
+            case CREATE:
+            case TRANSACTION:
+                outcome = handleCreateResource(resource, requestDetails);
+                break;
+            case UPDATE:
+                outcome = handleUpdateResource(resource, requestDetails);
+                resourceMapRepository.findById(outcome.getId().getIdPart())
+                        .ifPresent(resourceMap -> exchange.getMessage().setHeader(CamelConstants.COMPOSITION_VERSION_UID, resourceMap.getCompositionVersionUid()));
+                break;
+            default:
+                throw new UnsupportedOperationException("Only 'Create', 'Transaction' or 'Update' operations are supported");
         }
 
         exchange.getMessage().setHeader(CamelConstants.RESOURCE_ID, outcome.getId().getIdPart());

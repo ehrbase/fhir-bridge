@@ -16,14 +16,12 @@
 
 package org.ehrbase.fhirbridge.camel;
 
-import org.openehealth.ipf.commons.ihe.fhir.Constants;
-
 /**
  * Constants used in the FHIR Bridge.
  *
  * @since 1.0.0
  */
-public final class CamelConstants implements Constants {
+public final class CamelConstants {
 
     public static final String COMPOSITION_VERSION_UID = "FhirBridgeCompositionVersionUid";
 

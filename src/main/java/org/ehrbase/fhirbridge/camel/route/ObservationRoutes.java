@@ -16,15 +16,8 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
-import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.camel.CamelConstants;
-import org.ehrbase.fhirbridge.camel.processor.ProvideResourcePersistenceProcessor;
-import org.ehrbase.fhirbridge.core.repository.ResourceMapRepository;
 import org.hl7.fhir.r4.model.Observation;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -41,32 +34,20 @@ public class ObservationRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // 'Provide Observation' route definition
+        // Route: Provide Observation
         from("observation-provide:consumer?fhirContext=#fhirContext")
-//            .onCompletion()
-//                .process("auditEventProcessor")
-//            .end()
-            .process("fhirProfileValidator")
-            .process("observationPersistenceProcessor")
-            .process("ehrIdLookupProcessor")
-            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-            .choice()
-                .when(header(CamelConstants.COMPOSITION_VERSION_UID).isNotNull())
-                    .process(exchange -> {
-                        CompositionEntity composition = exchange.getIn().getMandatoryBody(CompositionEntity.class);
-                        composition.setVersionUid(new VersionUid(exchange.getIn().getHeader(CamelConstants.COMPOSITION_VERSION_UID, String.class)));
-                    })
-                .end()
-            .to("ehr-composition:producer?operation=mergeCompositionEntity")
-            .process("provideResourceResponseProcessor");
-
-        // 'Create Observation' route definition
-        from("observation-create:consumer?fhirContext=#fhirContext")
+            .routeId("provide-observation-route")
             .onCompletion()
-                .process("auditCreateResourceProcessor")
+                .process("provideResourceAuditHandler")
             .end()
             .process("fhirProfileValidator")
-            .to("direct:process-observation");
+            .to("direct:internal-provide-observation");
+
+        // Route: Internal Provide Observation
+        from("direct:internal-provide-observation")
+            .routeId("internal-provide-observation-route")
+            .process("provideObservationPersistenceProcessor")
+            .to("direct:internal-provide-resource");
 
         // 'Find Observation' route definition
         from("observation-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
@@ -76,21 +57,6 @@ public class ObservationRoutes extends AbstractRouteBuilder {
                     .process("bundleProviderResponseProcessor")
                 .otherwise()
                     .to("bean:observationDao?method=read(${body}, ${headers.FhirRequestDetails})");
-
-        // Internal routes definition
-        from("direct:process-observation")
-            .setHeader(CamelConstants.METHOD_OUTCOME, method("observationDao", "create(${body}, ${headers.FhirRequestDetails})"))
-            .process("ehrIdLookupProcessor")
-            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-            .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
-            .process("resourceResponseProcessor");
-
         // @formatter:on
-    }
-
-    @Bean
-    public ProvideResourcePersistenceProcessor<Observation> observationPersistenceProcessor(IFhirResourceDao<Observation> observationDao,
-                                                                                            ResourceMapRepository resourceMapRepository) {
-        return new ProvideResourcePersistenceProcessor<>(observationDao, Observation.class, resourceMapRepository);
     }
 }
