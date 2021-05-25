@@ -22,20 +22,23 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * Configuration for 'Create Observation' transaction.
+ * 'Provide Diagnostic Report'
+ * {@link org.openehealth.ipf.commons.ihe.core.TransactionConfiguration TransactionConfiguration}.
+ * <p>
+ * Note: Server-side only
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-public class CreateDiagnosticReportTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class ProvideDiagnosticReportTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public CreateDiagnosticReportTransaction() {
-        super("diagnostic-report-create",
-                "Create DiagnosticReport",
+    public ProvideDiagnosticReportTransaction() {
+        super("diagnostic-report-provide",
+                "Provide Diagnostic Report Transaction",
                 false,
                 null,
-                new CreateDiagnosticReportAuditStrategy(),
+                new ProvideDiagnosticReportAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreateDiagnosticReportProvider(),
+                new ProvideDiagnosticReportProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }

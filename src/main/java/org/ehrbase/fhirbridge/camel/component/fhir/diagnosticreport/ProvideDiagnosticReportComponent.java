@@ -16,19 +16,20 @@
 
 package org.ehrbase.fhirbridge.camel.component.fhir.diagnosticreport;
 
-import org.ehrbase.fhirbridge.fhir.diagnosticreport.CreateDiagnosticReportTransaction;
+import org.ehrbase.fhirbridge.fhir.diagnosticreport.ProvideDiagnosticReportTransaction;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
- * Camel {@link org.apache.camel.Component Component} that handles 'Create Diagnostic Report' transaction.
+ * {@link org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent FhirComponent}
+ * for 'Provide Diagnostic Report' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
-@SuppressWarnings({"java:S110"})
-public class CreateDiagnosticReportComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
+@SuppressWarnings("java:S110")
+public class ProvideDiagnosticReportComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
 
-    public CreateDiagnosticReportComponent() {
-        super(new CreateDiagnosticReportTransaction());
+    public ProvideDiagnosticReportComponent() {
+        super(new ProvideDiagnosticReportTransaction());
     }
 }

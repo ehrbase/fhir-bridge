@@ -1,10 +1,13 @@
-package org.ehrbase.fhirbridge.fhir.common.audit;
+package org.ehrbase.fhirbridge.fhir;
 
 import org.openehealth.ipf.commons.audit.types.EnumeratedCodedValue;
 import org.openehealth.ipf.commons.audit.types.EventType;
 
-@SuppressWarnings("java:S115")
 public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<EventType> {
+
+    // AuditEvent
+
+    FIND_AUDIT_EVENT("audit-event-find", "Find Audit Event"),
 
     // Condition
 
@@ -18,11 +21,23 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     FIND_CONSENT("consent-find", "Find Consent"),
 
+    // DiagnosticReport
+
+    PROVIDE_DIAGNOSTIC_REPORT("diagnostic-report-provide", "Provide Diagnostic Report"),
+
+    FIND_DIAGNOSTIC_REPORT("diagnostic-report-find", "Find Diagnostic Report"),
+
     // MedicationStatement
 
     PROVIDE_MEDICATION_STATEMENT("medication-statement-provide", "Provide Medication Statement"),
 
     FIND_MEDICATION_STATEMENT("medication-statement-find", "Find Medication Statement"),
+
+    // Observation
+
+    PROVIDE_OBSERVATION("observation-create", "Provide Observation"),
+
+    FIND_OBSERVATION("observation-find", "Find Observation"),
 
     // Patient
 
@@ -40,19 +55,7 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     PROVIDE_QUESTIONNAIRE_RESPONSE("questionnaire-response-provide", "Provide Questionnaire Response"),
 
-    FIND_QUESTIONNAIRE_RESPONSE("questionnaire-response-find", "Find Questionnaire Response"),
-
-    // Review
-
-    FindAuditEvent("audit-event-find", "Find Audit Event"),
-
-    CreateDiagnosticReport("diagnostic-report-create", "Create Diagnostic Report"),
-
-    FindDiagnosticReport("diagnostic-report-find", "Find Diagnostic Report"),
-
-    CreateObservation("observation-create", "Create Observation"),
-
-    FindObservation("observation-find", "Find Observation");
+    FIND_QUESTIONNAIRE_RESPONSE("questionnaire-response-find", "Find Questionnaire Response");
 
     private final EventType value;
 

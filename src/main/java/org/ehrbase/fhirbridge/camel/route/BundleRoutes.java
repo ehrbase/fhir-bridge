@@ -76,7 +76,7 @@ public class BundleRoutes extends AbstractRouteBuilder {
         from("direct:process-diagnostic-report-lab-bundle")
                 .bean(DiagnosticReportLabBundleValidator.class)
                 .bean(DiagnosticReportLabConverter.class, CONVERT)
-                .to("direct:process-diagnostic-report")
+                .to("direct:internal-provide-diagnostic-report")
                 .process(BUNDLE_RESPONSE_PROCESSOR);
 
         // @formatter:on

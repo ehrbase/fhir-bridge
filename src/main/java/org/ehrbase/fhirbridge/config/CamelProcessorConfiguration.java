@@ -5,6 +5,7 @@ import org.ehrbase.fhirbridge.camel.processor.ProvideResourcePersistenceProcesso
 import org.ehrbase.fhirbridge.core.repository.ResourceMapRepository;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
+import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
@@ -30,6 +31,11 @@ public class CamelProcessorConfiguration {
     @Bean
     public ProvideResourcePersistenceProcessor<Consent> provideConsentPersistenceProcessor(IFhirResourceDao<Consent> consentDao) {
         return new ProvideResourcePersistenceProcessor<>(consentDao, Consent.class, resourceMapRepository);
+    }
+
+    @Bean
+    public ProvideResourcePersistenceProcessor<DiagnosticReport> provideDiagnosticReportPersistenceProcessor(IFhirResourceDao<DiagnosticReport> diagnosticReportDao) {
+        return new ProvideResourcePersistenceProcessor<>(diagnosticReportDao, DiagnosticReport.class, resourceMapRepository);
     }
 
     @Bean
