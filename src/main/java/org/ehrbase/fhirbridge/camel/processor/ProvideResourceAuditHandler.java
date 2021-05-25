@@ -10,28 +10,27 @@ import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Reference;
+import org.openehealth.ipf.commons.ihe.fhir.Constants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
-public class AuditCreateResourceProcessor implements Processor {
+public class ProvideResourceAuditHandler implements Processor {
 
     private final IFhirResourceDao<AuditEvent> auditEventDao;
 
     @Value("${spring.application.name}")
     private String applicationName;
 
-    public AuditCreateResourceProcessor(IFhirResourceDao<AuditEvent> auditEventDao) {
+    public ProvideResourceAuditHandler(IFhirResourceDao<AuditEvent> auditEventDao) {
         this.auditEventDao = auditEventDao;
     }
 
     @Override
     public void process(Exchange exchange) throws Exception {
-
-
-        AuditEvent auditEvent = new AuditEvent()
+        var auditEvent = new AuditEvent()
                 .setType(new Coding("http://terminology.hl7.org/CodeSystem/audit-event-type", "rest", "RESTful Operation"))
                 .addSubtype(new Coding("http://hl7.org/fhir/restful-interaction", "create", "create"))
                 .setAction(AuditEvent.AuditEventAction.C)
@@ -47,9 +46,7 @@ public class AuditCreateResourceProcessor implements Processor {
         }
 
         auditEvent.setSource(source());
-        if (extractMethodOutcome(exchange) != null) {
-            auditEvent.addEntity(entity(exchange));
-        }
+        auditEvent.addEntity(entity(exchange));
 
         auditEventDao.create(auditEvent);
     }
@@ -66,22 +63,14 @@ public class AuditCreateResourceProcessor implements Processor {
     }
 
     private AuditEvent.AuditEventEntityComponent entity(Exchange exchange) {
-        MethodOutcome methodOutcome = extractMethodOutcome(exchange);
-        RequestDetails requestDetails = extractRequestDetails(exchange);
+        var outcome = exchange.getProperty(CamelConstants.METHOD_OUTCOME, MethodOutcome.class);
+        var requestDetails = exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
 
         return new AuditEvent.AuditEventEntityComponent()
-                .setWhat(new Reference(methodOutcome.getId()))
+                .setWhat(new Reference(outcome.getId()))
                 .setType(new Coding()
                         .setSystem("http://hl7.org/fhir/resource-types")
                         .setCode(requestDetails.getResourceName())
                         .setDisplay(requestDetails.getResourceName()));
-    }
-
-    private MethodOutcome extractMethodOutcome(Exchange exchange) {
-        return exchange.getIn().getHeader(CamelConstants.METHOD_OUTCOME, MethodOutcome.class);
-    }
-
-    private RequestDetails extractRequestDetails(Exchange exchange) {
-        return exchange.getIn().getHeader(org.openehealth.ipf.commons.ihe.fhir.Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
     }
 }

@@ -37,6 +37,9 @@ public class DiagnosticReportRoutes extends AbstractRouteBuilder {
         // Route: Provide Diagnostic Report
         from("diagnostic-report-provide:consumer?fhirContext=#fhirContext")
             .routeId("provide-diagnostic-report-route")
+            .onCompletion()
+                .process("provideResourceAuditHandler")
+            .end()
             .process("fhirProfileValidator")
             .to("direct:internal-provide-diagnostic-report");
 

@@ -37,6 +37,9 @@ public class QuestionnaireResponseRoutes extends AbstractRouteBuilder {
         // Route: Provide Questionnaire-Response
         from("questionnaire-response-provide:consumer?fhirContext=#fhirContext")
             .routeId("provide-questionnaire-response-route")
+            .onCompletion()
+                .process("provideResourceAuditHandler")
+            .end()
             .process("fhirProfileValidator")
             .process("provideQuestionnaireResponsePersistenceProcessor")
             .to("direct:internal-provide-resource");

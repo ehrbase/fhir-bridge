@@ -21,7 +21,8 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
 /**
- * Camel component that enables 'Provide Observation' transaction.
+ * {@link org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent FhirComponent}
+ * for 'Provide Observation' transaction.
  *
  * @since 1.2.0
  */

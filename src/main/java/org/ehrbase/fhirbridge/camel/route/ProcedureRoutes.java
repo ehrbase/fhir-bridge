@@ -37,6 +37,9 @@ public class ProcedureRoutes extends AbstractRouteBuilder {
         // Route: Provide Procedure
         from("procedure-provide:consumer?fhirContext=#fhirContext")
             .routeId("provide-procedure-route")
+            .onCompletion()
+                .process("provideResourceAuditHandler")
+            .end()
             .process("fhirProfileValidator")
             .process("provideProcedurePersistenceProcessor")
             .to("direct:internal-provide-resource");

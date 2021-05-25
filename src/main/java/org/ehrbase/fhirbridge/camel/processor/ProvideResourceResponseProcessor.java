@@ -46,7 +46,7 @@ public class ProvideResourceResponseProcessor implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        LOG.trace("Processing Exchange: {}", exchange);
+        LOG.trace("Processing exchange...");
 
         var composition = exchange.getIn().getMandatoryBody(CompositionEntity.class);
         var resourceId = exchange.getIn().getHeader(CamelConstants.RESOURCE_ID, String.class);

@@ -35,6 +35,9 @@ public class PatientRoutes extends AbstractRouteBuilder {
         // Route: Provide Patient
         from("patient-provide:consumer?fhirContext=#fhirContext")
             .routeId("provide-patient-route")
+            .onCompletion()
+                .process("provideResourceAuditHandler")
+            .end()
             .process("fhirProfileValidator")
             .process("providePatientPersistenceProcessor")
             .to("direct:internal-provide-resource");

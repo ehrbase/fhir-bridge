@@ -64,13 +64,13 @@ public class BundleRoutes extends AbstractRouteBuilder {
         from("direct:process-anti-body-panel-bundle")
                 .bean(AntiBodyPanelBundleValidator.class)
                 .bean(AntiBodyPanelConverter.class, CONVERT)
-                .to("direct:process-observation")
+                .to("direct:internal-provide-observation")
                 .process(BUNDLE_RESPONSE_PROCESSOR);
 
         from("direct:process-blood-gas-panel-bundle")
                 .bean(BloodGasPanelBundleValidator.class)
                 .bean(BloodGasPanelConverter.class, CONVERT)
-                .to("direct:process-observation")
+                .to("direct:internal-provide-observation")
                 .process(BUNDLE_RESPONSE_PROCESSOR);
 
         from("direct:process-diagnostic-report-lab-bundle")

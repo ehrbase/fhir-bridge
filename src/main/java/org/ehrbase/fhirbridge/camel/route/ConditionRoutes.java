@@ -35,6 +35,9 @@ public class ConditionRoutes extends AbstractRouteBuilder {
         // Route: Provide Condition
         from("condition-provide:consumer?fhirContext=#fhirContext")
             .routeId("provide-condition-route")
+            .onCompletion()
+                .process("provideResourceAuditHandler")
+            .end()
             .process("fhirProfileValidator")
             .process("provideConditionPersistenceProcessor")
             .to("direct:internal-provide-resource");
