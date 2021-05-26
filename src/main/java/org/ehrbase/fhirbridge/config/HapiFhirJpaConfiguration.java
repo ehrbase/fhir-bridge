@@ -37,7 +37,10 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
+import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Group;
+import org.hl7.fhir.r4.model.Location;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
@@ -104,6 +107,14 @@ public class HapiFhirJpaConfiguration extends BaseR4Config {
     }
 
     @Bean
+    public IFhirResourceDao<Device> deviceDao() {
+        JpaResourceDao<Device> deviceDao = new JpaResourceDao<>();
+        deviceDao.setResourceType(Device.class);
+        deviceDao.setContext(fhirContext());
+        return deviceDao;
+    }
+
+    @Bean
     public IFhirResourceDao<DiagnosticReport> diagnosticReportDao() {
         JpaResourceDao<DiagnosticReport> diagnosticReportDao = new JpaResourceDao<>();
         diagnosticReportDao.setResourceType(DiagnosticReport.class);
@@ -111,30 +122,21 @@ public class HapiFhirJpaConfiguration extends BaseR4Config {
         return diagnosticReportDao;
     }
 
-//
-//    @Bean
-//    public IFhirResourceDao<Device> deviceDao() {
-//        JpaResourceDao<Device> resourceDao = new JpaResourceDao<>();
-//        resourceDao.setResourceType(Device.class);
-//        resourceDao.setContext(fhirContext());
-//        return resourceDao;
-//    }
-//
-//    @Bean
-//    public IFhirResourceDao<Group> groupDao() {
-//        JpaResourceDao<Group> resourceDao = new JpaResourceDao<>();
-//        resourceDao.setResourceType(Group.class);
-//        resourceDao.setContext(fhirContext());
-//        return resourceDao;
-//    }
-//
-//    @Bean
-//    public IFhirResourceDao<Location> locationDao() {
-//        JpaResourceDao<Location> resourceDao = new JpaResourceDao<>();
-//        resourceDao.setResourceType(Location.class);
-//        resourceDao.setContext(fhirContext());
-//        return resourceDao;
-//    }
+    @Bean
+    public IFhirResourceDao<Group> groupDao() {
+        JpaResourceDao<Group> groupDao = new JpaResourceDao<>();
+        groupDao.setResourceType(Group.class);
+        groupDao.setContext(fhirContext());
+        return groupDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Location> locationDao() {
+        JpaResourceDao<Location> locationDao = new JpaResourceDao<>();
+        locationDao.setResourceType(Location.class);
+        locationDao.setContext(fhirContext());
+        return locationDao;
+    }
 
     @Bean
     public IFhirResourceDao<MedicationStatement> medicationStatementDao() {
