@@ -1176,7 +1176,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"resourceType\": \"MedicationStatement\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy\"\r\n    ]\r\n  },\r\n  \"status\": \"active\",\r\n  \"medicationCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"413591007\",\r\n        \"display\": \"Product containing atazanavir (medicinal product)\"\r\n      },\r\n      {\r\n        \"system\": \"http://fhir.de/CodeSystem/dimdi/atc\",\r\n        \"code\": \"J05AE08\",\r\n        \"display\": \"Atazanavir\"\r\n      }\r\n    ],\r\n    \"text\": \"Atazanavir\"\r\n  },\r\n  \"subject\": {\r\n    \"reference\": \"/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}\",\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\"\r\n}",
+									"raw": "{\r\n    \"resourceType\": \"MedicationStatement\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy\"\r\n        ]\r\n    },\r\n    \"status\": \"active\",\r\n    \"medicationCodeableConcept\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"413591007\",\r\n                \"display\": \"Product containing atazanavir (medicinal product)\"\r\n            },\r\n            {\r\n                \"system\": \"http://fhir.de/CodeSystem/dimdi/atc\",\r\n                \"code\": \"J05AE08\",\r\n                \"display\": \"Atazanavir\"\r\n            }\r\n        ],\r\n        \"text\": \"Atazanavir\"\r\n    },\r\n    \"subject\": {\r\n        \"reference\": \"/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}\",\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1293,13 +1293,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/DiagnosticReport/:id/_history/:vid",
+									"raw": "{{baseUrl}}/fhir/MedicationStatement/:id/_history/:vid",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"fhir",
-										"DiagnosticReport",
+										"MedicationStatement",
 										":id",
 										"_history",
 										":vid"
@@ -2464,7 +2464,50 @@
 					"name": "Patient",
 					"item": [
 						{
-							"name": "Create Patient",
+							"name": "Profiles",
+							"item": [
+								{
+									"name": "Provide Patient - Invalid",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"resourceType\": \"Patient\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient\"\r\n    ]\r\n  },\r\n  \"extension\": [\r\n    {\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group\",\r\n      \"valueCoding\": {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"186019001\",\r\n        \"display\": \"Other ethnic, mixed origin\"\r\n      }\r\n    },\r\n    {\r\n      \"extension\": [\r\n        {\r\n          \"url\": \"dateTimeOfDocumentation\",\r\n          \"valueDateTime\": \"2020-10-01\"\r\n        },\r\n        {\r\n          \"url\": \"age\",\r\n          \"valueAge\": {\r\n            \"value\": 67,\r\n            \"unit\": \"years\",\r\n            \"system\": \"http://unitsofmeasure.org\",\r\n            \"code\": \"a\"\r\n          }\r\n        }\r\n      ],\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age\"\r\n    }\r\n  ],\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  ],\r\n  \"birthDate\": \"1953-09-30\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/fhir/Patient",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"fhir",
+												"Patient"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Provide Patient - create",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2481,7 +2524,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"resourceType\": \"Patient\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient\"\r\n    ]\r\n  },\r\n  \"extension\": [\r\n    {\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group\",\r\n      \"valueCoding\": {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"186019001\",\r\n        \"display\": \"Other ethnic, mixed origin\"\r\n      }\r\n    },\r\n    {\r\n      \"extension\": [\r\n        {\r\n          \"url\": \"dateTimeOfDocumentation\",\r\n          \"valueDateTime\": \"2020-10-01\"\r\n        },\r\n        {\r\n          \"url\": \"age\",\r\n          \"valueAge\": {\r\n            \"value\": 67,\r\n            \"unit\": \"years\",\r\n            \"system\": \"http://unitsofmeasure.org\",\r\n            \"code\": \"a\"\r\n          }\r\n        }\r\n      ],\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age\"\r\n    }\r\n  ],\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  ]\r\n}\r\n",
+									"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient\"\r\n        ]\r\n    },\r\n    \"extension\": [\r\n        {\r\n            \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group\",\r\n            \"valueCoding\": {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"186019001\",\r\n                \"display\": \"Other ethnic, mixed origin\"\r\n            }\r\n        },\r\n        {\r\n            \"extension\": [\r\n                {\r\n                    \"url\": \"dateTimeOfDocumentation\",\r\n                    \"valueDateTime\": \"2020-10-01\"\r\n                },\r\n                {\r\n                    \"url\": \"age\",\r\n                    \"valueAge\": {\r\n                        \"value\": 68,\r\n                        \"unit\": \"years\",\r\n                        \"system\": \"http://unitsofmeasure.org\",\r\n                        \"code\": \"a\"\r\n                    }\r\n                }\r\n            ],\r\n            \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age\"\r\n        }\r\n    ],\r\n    \"identifier\": [\r\n        {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    ],\r\n    \"birthDate\": \"1952-09-30\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2502,7 +2545,7 @@
 							"response": []
 						},
 						{
-							"name": "Provide Patient - Invalid",
+							"name": "Provide Patient - update",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2515,11 +2558,11 @@
 								}
 							],
 							"request": {
-								"method": "POST",
+								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"resourceType\": \"Patient\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient\"\r\n    ]\r\n  },\r\n  \"extension\": [\r\n    {\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group\",\r\n      \"valueCoding\": {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"186019001\",\r\n        \"display\": \"Other ethnic, mixed origin\"\r\n      }\r\n    },\r\n    {\r\n      \"extension\": [\r\n        {\r\n          \"url\": \"dateTimeOfDocumentation\",\r\n          \"valueDateTime\": \"2020-10-01\"\r\n        },\r\n        {\r\n          \"url\": \"age\",\r\n          \"valueAge\": {\r\n            \"value\": 67,\r\n            \"unit\": \"years\",\r\n            \"system\": \"http://unitsofmeasure.org\",\r\n            \"code\": \"a\"\r\n          }\r\n        }\r\n      ],\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age\"\r\n    }\r\n  ],\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  ],\r\n  \"birthDate\": \"1953-09-30\"\r\n}",
+									"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient\"\r\n        ]\r\n    },\r\n    \"extension\": [\r\n        {\r\n            \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group\",\r\n            \"valueCoding\": {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"186019001\",\r\n                \"display\": \"Other ethnic, mixed origin\"\r\n            }\r\n        },\r\n        {\r\n            \"extension\": [\r\n                {\r\n                    \"url\": \"dateTimeOfDocumentation\",\r\n                    \"valueDateTime\": \"2020-10-01\"\r\n                },\r\n                {\r\n                    \"url\": \"age\",\r\n                    \"valueAge\": {\r\n                        \"value\": 67,\r\n                        \"unit\": \"years\",\r\n                        \"system\": \"http://unitsofmeasure.org\",\r\n                        \"code\": \"a\"\r\n                    }\r\n                }\r\n            ],\r\n            \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age\"\r\n        }\r\n    ],\r\n    \"identifier\": [\r\n        {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    ],\r\n    \"birthDate\": \"1953-09-30\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2527,20 +2570,26 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Patient",
+									"raw": "{{baseUrl}}/fhir/Patient?identifier={{patientId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"fhir",
 										"Patient"
+									],
+									"query": [
+										{
+											"key": "identifier",
+											"value": "{{patientId}}"
+										}
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Find Patient: read",
+							"name": "Find Patient - read",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2576,7 +2625,7 @@
 							"response": []
 						},
 						{
-							"name": "Find Patient: vread",
+							"name": "Find Patient - vread",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2618,7 +2667,7 @@
 							"response": []
 						},
 						{
-							"name": "Find Patient: search",
+							"name": "Find Patient - Search",
 							"event": [
 								{
 									"listen": "prerequest",
