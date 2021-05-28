@@ -1156,6 +1156,327 @@
 					]
 				},
 				{
+					"name": "MedicationStatement",
+					"item": [
+						{
+							"name": "Provide Medication Statement - create",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"MedicationStatement\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy\"\r\n    ]\r\n  },\r\n  \"status\": \"active\",\r\n  \"medicationCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"413591007\",\r\n        \"display\": \"Product containing atazanavir (medicinal product)\"\r\n      },\r\n      {\r\n        \"system\": \"http://fhir.de/CodeSystem/dimdi/atc\",\r\n        \"code\": \"J05AE08\",\r\n        \"display\": \"Atazanavir\"\r\n      }\r\n    ],\r\n    \"text\": \"Atazanavir\"\r\n  },\r\n  \"subject\": {\r\n    \"reference\": \"/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}\",\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/MedicationStatement",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"MedicationStatement"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Provide Medication Statement - update",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"MedicationStatement\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy\"\r\n    ]\r\n  },\r\n  \"status\": \"on-hold\",\r\n  \"medicationCodeableConcept\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"413591007\",\r\n        \"display\": \"Product containing atazanavir (medicinal product)\"\r\n      },\r\n      {\r\n        \"system\": \"http://fhir.de/CodeSystem/dimdi/atc\",\r\n        \"code\": \"J05AE08\",\r\n        \"display\": \"Atazanavir\"\r\n      }\r\n    ],\r\n    \"text\": \"Atazanavir\"\r\n  },\r\n  \"subject\": {\r\n    \"reference\": \"/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}\",\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/MedicationStatement?subject.identifier={{patientId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"MedicationStatement"
+									],
+									"query": [
+										{
+											"key": "subject.identifier",
+											"value": "{{patientId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Medication Statement - read",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/MedicationStatement/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"MedicationStatement",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Medication Statement - vread",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/DiagnosticReport/:id/_history/:vid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"DiagnosticReport",
+										":id",
+										"_history",
+										":vid"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										},
+										{
+											"key": "vid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Medication Statement - search",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/MedicationStatement",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"MedicationStatement"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "_language",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_profile",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_source",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_security",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_tag",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_content",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_text",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_filter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "based-on",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "code",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "conclusion",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "date",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "encounter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "identifier",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "issued",
+											"value": "test",
+											"disabled": true
+										},
+										{
+											"key": "media",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "patient",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "performer",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "result",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "results-interpreter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "specimen",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "error",
+											"disabled": true
+										},
+										{
+											"key": "subject",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Observation",
 					"item": [
 						{

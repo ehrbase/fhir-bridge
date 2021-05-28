@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Integration Tests that validate "Provide DiagnosticReport" transaction.
+ * Integration Tests that validate "Provide Diagnostic Report" transaction.
  */
 class ProvideDiagnosticReportTransactionIT extends AbstractTransactionIT {
 
