@@ -2862,7 +2862,7 @@
 					"name": "Procedure",
 					"item": [
 						{
-							"name": "Create Procedure",
+							"name": "Provide Procedure - create",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2900,7 +2900,51 @@
 							"response": []
 						},
 						{
-							"name": "Find Procedure: read",
+							"name": "Provide Procedure - update",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"resourceType\": \"Procedure\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure\"\r\n        ]\r\n    },\r\n    \"status\": \"on-hold\",\r\n    \"category\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"387713003\",\r\n                \"display\": \"Surgical procedure (procedure)\"\r\n            }\r\n        ]\r\n    },\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"80146002\",\r\n                \"display\": \"Excision of appendix (procedure)\"\r\n            },\r\n            {\r\n                \"system\": \"http://fhir.de/CodeSystem/dimdi/ops\",\r\n                \"version\": \"2020\",\r\n                \"code\": \"5-470\",\r\n                \"display\": \"Appendektomie\"\r\n            }\r\n        ]\r\n    },\r\n    \"performedDateTime\": \"2020-04-23\",\r\n    \"subject\": {\r\n        \"reference\": \"/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}\",\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"note\": [\r\n        {\r\n            \"text\": \"This is a note about the procedure\"\r\n        }\r\n    ],\r\n    \"recorder\": {\r\n        \"reference\": \"http://external.fhir.server/Practitioner/f201\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Procedure?subject.identifier={{patientId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Procedure"
+									],
+									"query": [
+										{
+											"key": "subject.identifier",
+											"value": "{{patientId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Procedure - read",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2936,7 +2980,7 @@
 							"response": []
 						},
 						{
-							"name": "Find Procedure: vread",
+							"name": "Find Procedure - vread",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2978,7 +3022,7 @@
 							"response": []
 						},
 						{
-							"name": "Find Procedure: search",
+							"name": "Find Procedure - search",
 							"event": [
 								{
 									"listen": "prerequest",
