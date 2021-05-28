@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 /**
- * Integration Tests that validate "Find DiagnosticReport" transaction.
+ * Integration Tests that validate "Find Diagnostic Report" transaction.
  */
 class FindDiagnosticReportTransactionIT extends AbstractTransactionIT {
 
