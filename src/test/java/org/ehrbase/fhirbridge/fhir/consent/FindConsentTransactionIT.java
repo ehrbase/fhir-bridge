@@ -47,7 +47,7 @@ class FindConsentTransactionIT extends AbstractTransactionIT {
         create("Consent/transactions/find-consent-search.json");
         create("Consent/transactions/find-consent-search.json");
 
-        Bundle bundle = search("Consent?subject.identifier=" + PATIENT_ID + "&status=rejected");
+        Bundle bundle = search("Consent?patient.identifier=" + PATIENT_ID + "&status=rejected");
 
         Assertions.assertEquals(3, bundle.getTotal());
 
