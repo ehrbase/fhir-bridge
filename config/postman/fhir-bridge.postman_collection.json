@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d9f6a4ea-db6e-4816-986d-79b7d1f45886",
+		"_postman_id": "758479b8-b438-4a2a-a129-c12ee29d8d51",
 		"name": "fhir-bridge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -28,7 +28,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/AuditEvent?outcome",
+									"raw": "{{baseUrl}}/fhir/AuditEvent",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -143,10 +143,6 @@
 											"disabled": true
 										},
 										{
-											"key": "outcome",
-											"value": null
-										},
-										{
 											"key": "policy",
 											"value": null,
 											"disabled": true
@@ -224,7 +220,50 @@
 					"name": "Condition",
 					"item": [
 						{
-							"name": "Create Condition",
+							"name": "Profiles",
+							"item": [
+								{
+									"name": "Create SymptomsCovid19",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": \"8cb12ab0-3563-4154-bfeb-25aa897c2105\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/symptoms-covid-19\"\r\n        ]\r\n    },\r\n    \"modifierExtension\": [\r\n        {\r\n            \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence\",\r\n            \"valueCodeableConcept\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"code\": \"261665006\",\r\n                        \"display\": \"Unknown (qualifier value)\",\r\n                        \"system\": \"http://snomed.info/sct\"\r\n                    }\r\n                ],\r\n                \"text\": \"Presence of symptom is unknown.\"\r\n            }\r\n        }\r\n    ],\r\n    \"category\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"code\": \"75325-1\",\r\n                    \"display\": \"Symptom\",\r\n                    \"system\": \"http://loinc.org\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"code\": \"36955009\",\r\n                \"display\": \"Loss of taste\",\r\n                \"system\": \"http://snomed.info/sct\"\r\n            },\r\n            {\r\n                \"system\": \"http://fhir.de/CodeSystem/dimdi/icd-10-gm\",\r\n                \"version\": \"2020\",\r\n                \"code\": \"B97.2\",\r\n                \"display\": \"Coronavirus as the cause of diseases classified to other chapters\"\r\n            }\r\n        ]\r\n    },\r\n    \"recordedDate\": \"2020-10-05\",\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"resourceType\": \"Condition\",\r\n    \"verificationStatus\": {\r\n        \"coding\": [\r\n            {\r\n                \"code\": \"confirmed\",\r\n                \"display\": \"Confirmed\",\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/condition-ver-status\"\r\n            },\r\n            {\r\n                \"code\": \"410605003\",\r\n                \"display\": \"Confirmed present (qualifier value)\",\r\n                \"system\": \"http://snomed.info/sct\"\r\n            }\r\n        ]\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/fhir/Condition",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"fhir",
+												"Condition"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Provide Condition - create",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -262,7 +301,7 @@
 							"response": []
 						},
 						{
-							"name": "Create SymptomsCovid19",
+							"name": "Provide Condition - update",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -275,11 +314,11 @@
 								}
 							],
 							"request": {
-								"method": "POST",
+								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": \"8cb12ab0-3563-4154-bfeb-25aa897c2105\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/symptoms-covid-19\"\r\n        ]\r\n    },\r\n    \"modifierExtension\": [\r\n        {\r\n            \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence\",\r\n            \"valueCodeableConcept\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"code\": \"261665006\",\r\n                        \"display\": \"Unknown (qualifier value)\",\r\n                        \"system\": \"http://snomed.info/sct\"\r\n                    }\r\n                ],\r\n                \"text\": \"Presence of symptom is unknown.\"\r\n            }\r\n        }\r\n    ],\r\n    \"category\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"code\": \"75325-1\",\r\n                    \"display\": \"Symptom\",\r\n                    \"system\": \"http://loinc.org\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"code\": \"36955009\",\r\n                \"display\": \"Loss of taste\",\r\n                \"system\": \"http://snomed.info/sct\"\r\n            },\r\n            {\r\n                \"system\": \"http://fhir.de/CodeSystem/dimdi/icd-10-gm\",\r\n                \"version\": \"2020\",\r\n                \"code\": \"B97.2\",\r\n                \"display\": \"Coronavirus as the cause of diseases classified to other chapters\"\r\n            }\r\n        ]\r\n    },\r\n    \"recordedDate\": \"2020-10-05\",\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"resourceType\": \"Condition\",\r\n    \"verificationStatus\": {\r\n        \"coding\": [\r\n            {\r\n                \"code\": \"confirmed\",\r\n                \"display\": \"Confirmed\",\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/condition-ver-status\"\r\n            },\r\n            {\r\n                \"code\": \"410605003\",\r\n                \"display\": \"Confirmed present (qualifier value)\",\r\n                \"system\": \"http://snomed.info/sct\"\r\n            }\r\n        ]\r\n    }\r\n}",
+									"raw": "{\r\n    \"resourceType\": \"Condition\",\r\n    \"clinicalStatus\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\",\r\n                \"code\": \"active\"\r\n            }\r\n        ]\r\n    },\r\n    \"verificationStatus\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/condition-ver-status\",\r\n                \"code\": \"confirmed\"\r\n            }\r\n        ]\r\n    },\r\n    \"category\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/condition-category\",\r\n                    \"code\": \"encounter-diagnosis\",\r\n                    \"display\": \"Encounter Diagnosis\"\r\n                },\r\n                {\r\n                    \"system\": \"http://snomed.info/sct\",\r\n                    \"code\": \"439401001\",\r\n                    \"display\": \"Diagnosis\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"severity\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"24484000\",\r\n                \"display\": \"Severe\"\r\n            }\r\n        ]\r\n    },\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://fhir.de/CodeSystem/dimdi/icd-10-gm\",\r\n                \"version\": \"2020\",\r\n                \"code\": \"B97.2\",\r\n                \"display\": \"Coronavirus as the cause of diseases classified to other chapters\"\r\n            }\r\n        ],\r\n        \"text\": \"Coronavirus as the cause of diseases classified to other chapters\"\r\n    },\r\n    \"bodySite\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"system\": \"http://snomed.info/sct\",\r\n                    \"code\": \"49521004\",\r\n                    \"display\": \"Left external ear structure\"\r\n                }\r\n            ],\r\n            \"text\": \"Left Ear\"\r\n        }\r\n    ],\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"onsetDateTime\": \"2012-05-24\",\r\n    \"recorder\": {\r\n        \"reference\": \"http://external.fhir.server/Practitioner/f201\"\r\n    }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -287,108 +326,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Condition",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"fhir",
-										"Condition"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find Condition: read",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/fhir/Condition/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"fhir",
-										"Condition",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find Condition: read",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/fhir/Condition/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"fhir",
-										"Condition",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Find Condition: search",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/fhir/Condition?verification-status=confirmed",
+									"raw": "{{baseUrl}}/fhir/Condition?_id=1",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -399,8 +337,125 @@
 									"query": [
 										{
 											"key": "_id",
-											"value": "1",
+											"value": "1"
+										},
+										{
+											"key": "subject.identifier",
+											"value": null,
 											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Condition - read",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Condition/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Condition",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Condition - vread",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Condition/:id/_history/:vid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Condition",
+										":id",
+										"_history",
+										":vid"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										},
+										{
+											"key": "vid",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Condition - search",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Condition?_id=70",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Condition"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "70"
 										},
 										{
 											"key": "_language",
@@ -543,13 +598,14 @@
 											"disabled": true
 										},
 										{
-											"key": "subject",
-											"value": null,
+											"key": "verification-status",
+											"value": "confirmed",
 											"disabled": true
 										},
 										{
-											"key": "verification-status",
-											"value": "confirmed"
+											"key": "subject.identifier",
+											"value": "123",
+											"disabled": true
 										}
 									]
 								}
@@ -1678,7 +1734,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/fhir/Observation?patient.identifier=07f602e0-579e-4fe3-95af-381728bf0d46",
+									"raw": "{{baseUrl}}/fhir/Observation",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -1879,7 +1935,8 @@
 										},
 										{
 											"key": "patient.identifier",
-											"value": "07f602e0-579e-4fe3-95af-381728bf0d46"
+											"value": "07f602e0-579e-4fe3-95af-381728bf0d46",
+											"disabled": true
 										},
 										{
 											"key": "performer",
@@ -1925,6 +1982,33 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Provide Observation - PUT",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"resourceType\": \"Observation\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure\"\r\n        ]\r\n    },\r\n    \"identifier\": [\r\n        {\r\n            \"system\": \"urn:ietf:rfc:3986\",\r\n            \"value\": \"urn:uuid:187e0c12-8dd2-67e2-99b2-bf273c878281\"\r\n        }\r\n    ],\r\n    \"basedOn\": [\r\n        {\r\n            \"identifier\": {\r\n                \"system\": \"https://acme.org/identifiers\",\r\n                \"value\": \"1234\"\r\n            }\r\n        }\r\n    ],\r\n    \"status\": \"unknown\",\r\n    \"category\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                    \"code\": \"vital-signs\",\r\n                    \"display\": \"Vital Signs\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"code\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://loinc.org\",\r\n                \"code\": \"85354-9\",\r\n                \"display\": \"Blood pressure panel with all children optional\"\r\n            }\r\n        ],\r\n        \"text\": \"Blood pressure systolic & diastolic\"\r\n    },\r\n    \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"07f602e0-579e-4fe3-95af-381728bf0d49\"\r\n        }\r\n    },\r\n    \"effectiveDateTime\": \"2012-09-17\",\r\n    \"performer\": [\r\n        {\r\n            \"reference\": \"http://external.fhir.server/Practitioner/example\"\r\n        }\r\n    ],\r\n    \"interpretation\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n                    \"code\": \"L\",\r\n                    \"display\": \"low\"\r\n                }\r\n            ],\r\n            \"text\": \"Below low normal\"\r\n        }\r\n    ],\r\n    \"bodySite\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"368209003\",\r\n                \"display\": \"Right arm\"\r\n            }\r\n        ]\r\n    },\r\n    \"component\": [\r\n        {\r\n            \"code\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"system\": \"http://loinc.org\",\r\n                        \"code\": \"8480-6\",\r\n                        \"display\": \"Systolic blood pressure\"\r\n                    },\r\n                    {\r\n                        \"system\": \"http://snomed.info/sct\",\r\n                        \"code\": \"271649006\",\r\n                        \"display\": \"Systolic blood pressure\"\r\n                    },\r\n                    {\r\n                        \"system\": \"http://acme.org/devices/clinical-codes\",\r\n                        \"code\": \"bp-s\",\r\n                        \"display\": \"Systolic Blood pressure\"\r\n                    }\r\n                ]\r\n            },\r\n            \"valueQuantity\": {\r\n                \"value\": 107,\r\n                \"unit\": \"mmHg\",\r\n                \"system\": \"http://unitsofmeasure.org\",\r\n                \"code\": \"mm[Hg]\"\r\n            },\r\n            \"interpretation\": [\r\n                {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n                            \"code\": \"N\",\r\n                            \"display\": \"normal\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Normal\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"code\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"system\": \"http://loinc.org\",\r\n                        \"code\": \"8462-4\",\r\n                        \"display\": \"Diastolic blood pressure\"\r\n                    }\r\n                ]\r\n            },\r\n            \"valueQuantity\": {\r\n                \"value\": 107,\r\n                \"unit\": \"mmHg\",\r\n                \"system\": \"http://unitsofmeasure.org\",\r\n                \"code\": \"mm[Hg]\"\r\n            },\r\n            \"interpretation\": [\r\n                {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation\",\r\n                            \"code\": \"L\",\r\n                            \"display\": \"low\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Below low normal\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Observation",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Observation"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1933,6 +2017,44 @@
 					"item": [
 						{
 							"name": "Create Patient",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Patient\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient\"\r\n    ]\r\n  },\r\n  \"extension\": [\r\n    {\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group\",\r\n      \"valueCoding\": {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"186019001\",\r\n        \"display\": \"Other ethnic, mixed origin\"\r\n      }\r\n    },\r\n    {\r\n      \"extension\": [\r\n        {\r\n          \"url\": \"dateTimeOfDocumentation\",\r\n          \"valueDateTime\": \"2020-10-01\"\r\n        },\r\n        {\r\n          \"url\": \"age\",\r\n          \"valueAge\": {\r\n            \"value\": 67,\r\n            \"unit\": \"years\",\r\n            \"system\": \"http://unitsofmeasure.org\",\r\n            \"code\": \"a\"\r\n          }\r\n        }\r\n      ],\r\n      \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age\"\r\n    }\r\n  ],\r\n  \"identifier\": [\r\n    {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Patient",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Patient"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Provide Patient - Invalid",
 							"event": [
 								{
 									"listen": "prerequest",
