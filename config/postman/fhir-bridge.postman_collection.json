@@ -416,11 +416,11 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "70"
 										},
 										{
 											"key": "vid",
-											"value": "3"
+											"value": "1"
 										}
 									]
 								}
@@ -638,7 +638,7 @@
 					"name": "Consent",
 					"item": [
 						{
-							"name": "Create Consent",
+							"name": "Provide Consent - create",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -676,7 +676,45 @@
 							"response": []
 						},
 						{
-							"name": "Find Consent: read",
+							"name": "Provide Consent - update",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"resourceType\": \"Consent\",\r\n    \"id\": \"e1c90e84-aa7b-4999-8036-27f88dd7b60e\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order\"\r\n        ]\r\n    },\r\n    \"status\": \"active\",\r\n    \"scope\": {\r\n        \"coding\": [\r\n            {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/consentscope\",\r\n                \"code\": \"adr\",\r\n                \"display\": \"Advanced Care Directive\"\r\n            }\r\n        ]\r\n    },\r\n    \"category\": [\r\n        {\r\n            \"coding\": [\r\n                {\r\n                    \"system\": \"http://terminology.hl7.org/CodeSystem/consentcategorycodes\",\r\n                    \"code\": \"dnr\",\r\n                    \"display\": \"Do Not Resuscitate\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"patient\": {\r\n        \"reference\": \"/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}\",\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n    \"policy\": [\r\n        {\r\n            \"uri\": \"https://www.aerzteblatt.de/archiv/65440/DNR-Anordnungen-Das-fehlende-Bindeglied\"\r\n        }\r\n    ],\r\n    \"provision\": {\r\n        \"code\": [\r\n            {\r\n                \"coding\": [\r\n                    {\r\n                        \"system\": \"http://snomed.info/sct\",\r\n                        \"code\": \"304252001\",\r\n                        \"display\": \"For resuscitation\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Consent",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Consent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Consent - read",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -712,7 +750,7 @@
 							"response": []
 						},
 						{
-							"name": "Find Consent: vread",
+							"name": "Find Consent - vread",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -754,7 +792,7 @@
 							"response": []
 						},
 						{
-							"name": "Find Consent: search",
+							"name": "Find Consent - search",
 							"event": [
 								{
 									"listen": "prerequest",
