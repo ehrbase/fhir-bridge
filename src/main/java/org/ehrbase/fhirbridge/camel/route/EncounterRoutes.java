@@ -44,7 +44,7 @@ public class EncounterRoutes extends AbstractRouteBuilder {
                 .process("ehrIdLookupProcessor")
                 .setHeader(FhirBridgeConstants.PROFILE, method(Encounters.class, "getProfileByKontaktEbene"))
                 .choice()
-                    .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.PATIENTEN_AUFENTHALT))
+                    .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.KONTAKT_GESUNDHEIT_ABTEILUNG))
                         .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
                         .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
                         .process("resourceResponseProcessor")
