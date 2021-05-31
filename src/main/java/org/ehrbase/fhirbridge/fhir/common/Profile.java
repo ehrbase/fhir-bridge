@@ -56,9 +56,11 @@ public enum Profile {
     PHARMACOLOGICAL_THERAPY_ACE_INHIBITORS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-ace-inhibitors"),
     PHARMACOLOGICAL_THERAPY_ANTICOAGULANTS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-anticoagulants"),
     PHARMACOLOGICAL_THERAPY_IMMUNOGLOBULINS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-immunoglobulins"),
+
     // Encounter Profiles
-    STATIONAERER_VERSORGUNGSFALL(Encounter.class, null), // as default, has the same link like PATIENTEN_AUFENTHALT
-    PATIENTEN_AUFENTHALT(Encounter.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/StructureDefinition/KontaktGesundheitseinrichtung"),
+    KONTAKT_GESUNDHEIT_EINRICHTUNG(Encounter.class, null), // as default, has the same link like KONTAKT_GESUNDHEIT_ABTEILUNG
+
+    KONTAKT_GESUNDHEIT_ABTEILUNG(Encounter.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/StructureDefinition/KontaktGesundheitseinrichtung"),
 
     // Observation Profiles
 

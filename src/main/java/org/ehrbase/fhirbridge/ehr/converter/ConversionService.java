@@ -43,11 +43,11 @@ public class ConversionService {
 
     public Object convertDefaultEncounter(Resource resource) {
 
-        if(!converters.containsKey(Profile.STATIONAERER_VERSORGUNGSFALL)) {
+        if(!converters.containsKey(Profile.KONTAKT_GESUNDHEIT_EINRICHTUNG)) {
             throw new ConversionException("No converter available for encounter with profile stationär Versorgungsfall" );
         }
 
-        return converters.get(Profile.STATIONAERER_VERSORGUNGSFALL)
+        return converters.get(Profile.KONTAKT_GESUNDHEIT_EINRICHTUNG)
                 .convert(resource);
     }
 

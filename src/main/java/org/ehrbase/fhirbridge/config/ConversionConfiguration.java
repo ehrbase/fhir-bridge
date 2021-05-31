@@ -144,7 +144,7 @@ public class ConversionConfiguration {
     }
 
     private void registerEncounterConverter(ConversionService conversionService) {
-        conversionService.registerConverter(Profile.STATIONAERER_VERSORGUNGSFALL, new StationaererVersorgungsfallCompositionConverter());
-        conversionService.registerConverter(Profile.PATIENTEN_AUFENTHALT, new PatientenAufenthaltCompositionConverter());
+        conversionService.registerConverter(Profile.KONTAKT_GESUNDHEIT_EINRICHTUNG, new StationaererVersorgungsfallCompositionConverter());
+        conversionService.registerConverter(Profile.KONTAKT_GESUNDHEIT_ABTEILUNG, new PatientenAufenthaltCompositionConverter());
     }
 }

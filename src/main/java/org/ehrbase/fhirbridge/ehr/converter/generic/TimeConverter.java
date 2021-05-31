@@ -145,16 +145,38 @@ public class TimeConverter {
         return dateTimeOfDocumentationDt.getValueAsCalendar().toZonedDateTime();
     }
     
-    static TemporalAccessor convertEncounterTime(Encounter encounter) {
+    public static TemporalAccessor convertEncounterTime(Encounter encounter) {
         return OffsetDateTime.from(encounter.getPeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
     }
 
-    static Optional<TemporalAccessor> convertEncounterEndTime(Encounter encounter) {
+    public static Optional<TemporalAccessor> convertEncounterEndTime(Encounter encounter) {
 
         if (encounter.getPeriod().hasEndElement()) {
             return Optional.of(OffsetDateTime.from(encounter.getPeriod().getEndElement().getValueAsCalendar().toZonedDateTime()));
         } else {
             return Optional.empty();
         }
+    }
+
+    public static Optional<TemporalAccessor> convertEncounterLocationTime(Encounter.EncounterLocationComponent location) {
+
+        if (location.getPeriod() == null) {
+            return Optional.empty();
+        }
+
+        return Optional.of(OffsetDateTime.from(location.getPeriod().getStartElement().getValueAsCalendar().toZonedDateTime()));
+    }
+
+    public static Optional<TemporalAccessor> convertEncounterLocationEndTime(Encounter.EncounterLocationComponent location) {
+
+        if (location.getPeriod() == null) {
+            return Optional.empty();
+        }
+
+        if (!location.getPeriod().hasEndElement()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(OffsetDateTime.from(location.getPeriod().getEndElement().getValueAsCalendar().toZonedDateTime()));
     }
 }
