@@ -17,7 +17,6 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.springframework.stereotype.Component;
 
@@ -35,19 +34,17 @@ public class QuestionnaireResponseRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // 'Create Questionnaire-Response' route definition
-        from("questionnaire-response-create:consumer?fhirContext=#fhirContext")
+        // Route: Provide Questionnaire-Response
+        from("questionnaire-response-provide:consumer?fhirContext=#fhirContext")
+            .routeId("provide-questionnaire-response-route")
             .onCompletion()
-                .process("auditCreateResourceProcessor")
+                .process("provideResourceAuditHandler")
             .end()
-            .process("resourceProfileValidator")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("questionnaireResponseDao", "create(${body}, ${headers.FhirRequestDetails})"))
-            .process("ehrIdLookupProcessor")
-            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .process("resourceResponseProcessor");
+            .process("fhirProfileValidator")
+            .process("provideQuestionnaireResponsePersistenceProcessor")
+            .to("direct:internal-provide-resource");
 
-        // 'Find Questionnaire-Response' route definition
+        // Route: Find Questionnaire-Response
         from("questionnaire-response-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())

@@ -8,7 +8,7 @@ import org.ehrbase.client.aql.query.Query;
 import org.ehrbase.client.aql.record.Record1;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
-import org.ehrbase.fhirbridge.fhir.support.PatientIdRepository;
+import org.ehrbase.fhirbridge.core.repository.PatientIdRepository;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Resource;
