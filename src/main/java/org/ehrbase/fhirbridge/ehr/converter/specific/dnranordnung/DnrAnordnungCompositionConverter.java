@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.DnrAnordnung;
+package org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.generic.PartySelf;

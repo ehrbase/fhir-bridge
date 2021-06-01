@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerBefund;
+package org.ehrbase.fhirbridge.ehr.converter.specific.geccoVirologischerbefund;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.archetyped.FeederAudit;
