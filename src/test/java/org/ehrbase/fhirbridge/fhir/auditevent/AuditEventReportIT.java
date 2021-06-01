@@ -2,23 +2,15 @@ package org.ehrbase.fhirbridge.fhir.auditevent;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.apache.commons.io.IOUtils;
-import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
 import org.ehrbase.fhirbridge.fhir.AbstractSetupIT;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.Bundle;
-import org.javers.core.Javers;
-import org.javers.core.JaversBuilder;
-import org.javers.core.metamodel.clazz.ValueObjectDefinition;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.time.temporal.TemporalAccessor;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -27,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Integration tests for {@link org.hl7.fhir.r4.model.AuditEvent AuditEvent} resource.
  */
 class AuditEventReportIT extends AbstractSetupIT {
+
     @Test
     void createResourceAndSearchAuditEvent() throws IOException {
         Date now = new Date();
