@@ -14,7 +14,7 @@ import java.io.IOException;
 class FindObservationTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void findObservationRead() throws Exception {
+    void findObservationRead() throws IOException {
         var outcome = create("Observation/transactions/provide-observation-create.json");
         var id = outcome.getId();
 
@@ -26,7 +26,7 @@ class FindObservationTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void findObservationVRead() throws Exception {
+    void findObservationVRead() throws IOException {
         var outcome = create("Observation/transactions/provide-observation-create.json");
         var id = outcome.getId();
 
@@ -39,9 +39,9 @@ class FindObservationTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findObservationSearch() throws IOException {
-        create("Observation/transactions/find-observation-search.json");
-        create("Observation/transactions/find-observation-search.json");
-        create("Observation/transactions/find-observation-search.json");
+        for (int i = 0; i < 3; i++) {
+            create("Observation/transactions/find-observation-search.json");
+        }
 
         Bundle bundle = search("Observation?subject.identifier=" + PATIENT_ID + "&status=preliminary");
 

@@ -14,7 +14,7 @@ import java.io.IOException;
 class FindDiagnosticReportTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void findDiagnosticReportRead() throws Exception {
+    void findDiagnosticReportRead() throws IOException {
         var outcome = create("DiagnosticReport/transactions/provide-diagnostic-report-create.json");
         var id = outcome.getId();
 
@@ -26,7 +26,7 @@ class FindDiagnosticReportTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void findDiagnosticReportVRead() throws Exception {
+    void findDiagnosticReportVRead() throws IOException {
         var outcome = create("DiagnosticReport/transactions/provide-diagnostic-report-create.json");
         var id = outcome.getId();
 
@@ -39,9 +39,9 @@ class FindDiagnosticReportTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findDiagnosticReportSearch() throws IOException {
-        create("DiagnosticReport/transactions/find-diagnostic-report-search.json");
-        create("DiagnosticReport/transactions/find-diagnostic-report-search.json");
-        create("DiagnosticReport/transactions/find-diagnostic-report-search.json");
+        for (int i = 0; i < 3; i++) {
+            create("DiagnosticReport/transactions/find-diagnostic-report-search.json");
+        }
 
         Bundle bundle = search("DiagnosticReport?subject.identifier=" + PATIENT_ID + "&status=registered");
 

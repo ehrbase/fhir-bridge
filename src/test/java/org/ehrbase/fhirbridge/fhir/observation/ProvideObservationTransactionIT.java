@@ -6,13 +6,15 @@ import org.hl7.fhir.r4.model.Observation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 /**
  * Integration Tests that validate "Provide Observation" transaction.
  */
 class ProvideObservationTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void provideObservationCreate() throws Exception {
+    void provideObservationCreate() throws IOException {
         var outcome = create("Observation/transactions/provide-observation-create.json");
 
         Assertions.assertEquals(true, outcome.getCreated());
@@ -20,7 +22,7 @@ class ProvideObservationTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void provideObservationConditionalUpdate() throws Exception {
+    void provideObservationConditionalUpdate() throws IOException {
         MethodOutcome outcome;
 
         outcome = create("Observation/transactions/provide-observation-create.json");

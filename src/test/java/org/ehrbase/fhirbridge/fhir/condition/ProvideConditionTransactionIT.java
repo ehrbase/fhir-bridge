@@ -6,13 +6,15 @@ import org.hl7.fhir.r4.model.Condition;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 /**
  * Integration Tests that validate "Provide Condition" transaction.
  */
 class ProvideConditionTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void provideConditionCreate() throws Exception {
+    void provideConditionCreate() throws IOException {
         var outcome = create("Condition/transactions/provide-condition-create.json");
 
         Assertions.assertEquals(true, outcome.getCreated());
@@ -20,7 +22,7 @@ class ProvideConditionTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void provideConditionConditionalUpdate() throws Exception {
+    void provideConditionConditionalUpdate() throws IOException {
         MethodOutcome outcome;
 
         outcome = create("Condition/transactions/provide-condition-create.json");

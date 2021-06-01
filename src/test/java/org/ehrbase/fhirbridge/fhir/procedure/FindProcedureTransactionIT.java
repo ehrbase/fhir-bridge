@@ -6,13 +6,15 @@ import org.hl7.fhir.r4.model.Procedure;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 /**
  * Integration Tests that validate "Find Procedure" transaction.
  */
 class FindProcedureTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void findProcedureRead() throws Exception {
+    void findProcedureRead() throws IOException {
         var outcome = create("Procedure/transactions/provide-procedure-create.json");
         var id = outcome.getId();
 
@@ -24,7 +26,7 @@ class FindProcedureTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void findProcedureVRead() throws Exception {
+    void findProcedureVRead() throws IOException {
         var outcome = create("Procedure/transactions/provide-procedure-create.json");
         var id = outcome.getId();
 
@@ -36,10 +38,10 @@ class FindProcedureTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void findProcedureSearch() throws Exception {
-        create("Procedure/transactions/find-procedure-search.json");
-        create("Procedure/transactions/find-procedure-search.json");
-        create("Procedure/transactions/find-procedure-search.json");
+    void findProcedureSearch() throws IOException {
+        for (int i = 0; i < 3; i++) {
+            create("Procedure/transactions/find-procedure-search.json");
+        }
 
         Bundle bundle = search("Procedure?subject.identifier=" + PATIENT_ID + "&status=entered-in-error");
 

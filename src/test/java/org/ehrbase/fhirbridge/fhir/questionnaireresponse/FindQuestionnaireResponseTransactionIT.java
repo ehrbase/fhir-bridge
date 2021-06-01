@@ -6,13 +6,15 @@ import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 /**
  * Integration Tests that validate "Find Questionnaire Response" transaction.
  */
 class FindQuestionnaireResponseTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void findQuestionnaireResponseRead() throws Exception {
+    void findQuestionnaireResponseRead() throws IOException {
         var outcome = create("QuestionnaireResponse/transactions/provide-questionnaire-response-create.json");
         var id = outcome.getId();
 
@@ -24,7 +26,7 @@ class FindQuestionnaireResponseTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void findQuestionnaireResponseVRead() throws Exception {
+    void findQuestionnaireResponseVRead() throws IOException {
         var outcome = create("QuestionnaireResponse/transactions/provide-questionnaire-response-create.json");
         var id = outcome.getId();
 
@@ -36,10 +38,10 @@ class FindQuestionnaireResponseTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void findQuestionnaireResponseSearch() throws Exception {
-        create("QuestionnaireResponse/transactions/find-questionnaire-response-search.json");
-        create("QuestionnaireResponse/transactions/find-questionnaire-response-search.json");
-        create("QuestionnaireResponse/transactions/find-questionnaire-response-search.json");
+    void findQuestionnaireResponseSearch() throws IOException {
+        for (int i = 0; i < 3; i++) {
+            create("QuestionnaireResponse/transactions/find-questionnaire-response-search.json");
+        }
 
         Bundle bundle = search("QuestionnaireResponse?patient.identifier=" + PATIENT_ID + "&status=entered-in-error");
 

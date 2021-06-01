@@ -6,13 +6,15 @@ import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 /**
  * Integration Tests that validate "Provide Questionnaire Response" transaction.
  */
 class ProvideQuestionnaireResponseTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void provideQuestionnaireResponseCreate() throws Exception {
+    void provideQuestionnaireResponseCreate() throws IOException {
         var outcome = create("QuestionnaireResponse/transactions/provide-questionnaire-response-create.json");
 
         Assertions.assertEquals(true, outcome.getCreated());
@@ -20,7 +22,7 @@ class ProvideQuestionnaireResponseTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void provideQuestionnaireResponseConditionalUpdate() throws Exception {
+    void provideQuestionnaireResponseConditionalUpdate() throws IOException {
         MethodOutcome outcome;
 
         outcome = create("QuestionnaireResponse/transactions/provide-questionnaire-response-create.json");
