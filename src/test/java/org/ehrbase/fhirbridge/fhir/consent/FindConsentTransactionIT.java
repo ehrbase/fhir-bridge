@@ -16,7 +16,7 @@ class FindConsentTransactionIT extends AbstractTransactionIT {
 
     @Disabled("Converter not yet implemented")
     @Test
-    void findConsentRead() throws Exception {
+    void findConsentRead() throws IOException {
         var outcome = create("Consent/transactions/provide-consent-create.json");
         var id = outcome.getId();
 
@@ -29,7 +29,7 @@ class FindConsentTransactionIT extends AbstractTransactionIT {
 
     @Disabled("Converter not yet implemented")
     @Test
-    void findConsentVRead() throws Exception {
+    void findConsentVRead() throws IOException {
         var outcome = create("Consent/transactions/provide-consent-create.json");
         var id = outcome.getId();
 
@@ -43,9 +43,9 @@ class FindConsentTransactionIT extends AbstractTransactionIT {
     @Disabled("Converter not yet implemented")
     @Test
     void findConsentSearch() throws IOException {
-        create("Consent/transactions/find-consent-search.json");
-        create("Consent/transactions/find-consent-search.json");
-        create("Consent/transactions/find-consent-search.json");
+        for (int i = 0; i < 3; i++) {
+            create("Consent/transactions/find-consent-search.json");
+        }
 
         Bundle bundle = search("Consent?patient.identifier=" + PATIENT_ID + "&status=rejected");
 

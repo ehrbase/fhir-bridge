@@ -6,6 +6,8 @@ import org.hl7.fhir.r4.model.Patient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,7 +17,7 @@ import java.util.Date;
 class FindPatientTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void findPatientRead() throws Exception {
+    void findPatientRead() throws IOException {
         var outcome = create("Patient/transactions/provide-patient-create.json");
         var id = outcome.getId();
 
@@ -27,7 +29,7 @@ class FindPatientTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void findPatientVRead() throws Exception {
+    void findPatientVRead() throws IOException {
         var outcome = create("Patient/transactions/provide-patient-create.json");
         var id = outcome.getId();
 
@@ -39,10 +41,10 @@ class FindPatientTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void findPatientSearch() throws Exception {
-        create("Patient/transactions/find-patient-search.json");
-        create("Patient/transactions/find-patient-search.json");
-        create("Patient/transactions/find-patient-search.json");
+    void findPatientSearch() throws IOException, ParseException {
+        for (int i = 0; i < 3; i++) {
+            create("Patient/transactions/find-patient-search.json");
+        }
 
         Bundle bundle = search("Patient?identifier=" + PATIENT_ID + "&birthdate=2000-09-30");
 

@@ -14,7 +14,7 @@ import java.io.IOException;
 class FindMedicationStatementTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void findMedicationStatementRead() throws Exception {
+    void findMedicationStatementRead() throws IOException {
         var outcome = create("MedicationStatement/transactions/provide-medication-statement-create.json");
         var id = outcome.getId();
 
@@ -26,7 +26,7 @@ class FindMedicationStatementTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void findMedicationStatementVRead() throws Exception {
+    void findMedicationStatementVRead() throws IOException {
         var outcome = create("MedicationStatement/transactions/provide-medication-statement-create.json");
         var id = outcome.getId();
 
@@ -39,9 +39,9 @@ class FindMedicationStatementTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findMedicationStatementSearch() throws IOException {
-        create("MedicationStatement/transactions/find-medication-statement-search.json");
-        create("MedicationStatement/transactions/find-medication-statement-search.json");
-        create("MedicationStatement/transactions/find-medication-statement-search.json");
+        for (int i = 0; i < 3; i++) {
+            create("MedicationStatement/transactions/find-medication-statement-search.json");
+        }
 
         Bundle bundle = search("MedicationStatement?subject.identifier=" + PATIENT_ID + "&status=not-taken");
 

@@ -14,7 +14,7 @@ import java.io.IOException;
 class FindConditionTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void findConditionRead() throws Exception {
+    void findConditionRead() throws IOException {
         var outcome = create("Condition/transactions/provide-condition-create.json");
         var id = outcome.getId();
 
@@ -26,7 +26,7 @@ class FindConditionTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void findConditionVRead() throws Exception {
+    void findConditionVRead() throws IOException {
         var outcome = create("Condition/transactions/provide-condition-create.json");
         var id = outcome.getId();
 
@@ -39,9 +39,9 @@ class FindConditionTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findConditionSearch() throws IOException {
-        create("Condition/transactions/find-condition-search.json");
-        create("Condition/transactions/find-condition-search.json");
-        create("Condition/transactions/find-condition-search.json");
+        for (int i = 0; i < 3; i++) {
+            create("Condition/transactions/find-condition-search.json");
+        }
 
         Bundle bundle = search("Condition?subject.identifier=" + PATIENT_ID + "&clinical-status=recurrence&verification-status=refuted");
 

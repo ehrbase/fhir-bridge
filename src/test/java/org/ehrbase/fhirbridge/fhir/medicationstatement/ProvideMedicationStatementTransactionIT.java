@@ -6,13 +6,15 @@ import org.hl7.fhir.r4.model.MedicationStatement;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 /**
  * Integration Tests that validate "Provide Medication Statement" transaction.
  */
 class ProvideMedicationStatementTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void provideMedicationStatementCreate() throws Exception {
+    void provideMedicationStatementCreate() throws IOException {
         var outcome = create("MedicationStatement/transactions/provide-medication-statement-create.json");
 
         Assertions.assertEquals(true, outcome.getCreated());
@@ -20,7 +22,7 @@ class ProvideMedicationStatementTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void provideMedicationStatementConditionalUpdate() throws Exception {
+    void provideMedicationStatementConditionalUpdate() throws IOException {
         MethodOutcome outcome;
 
         outcome = create("MedicationStatement/transactions/provide-medication-statement-create.json");

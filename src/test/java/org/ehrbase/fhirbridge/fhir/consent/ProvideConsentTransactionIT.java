@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 /**
  * Integration Tests that validate "Provide Consent" transaction.
  */
@@ -14,7 +16,7 @@ class ProvideConsentTransactionIT extends AbstractTransactionIT {
 
     @Disabled("Converter not yet implemented")
     @Test
-    void provideConsentCreate() throws Exception {
+    void provideConsentCreate() throws IOException {
         var outcome = create("Consent/transactions/provide-consent-create.json");
 
         Assertions.assertEquals(true, outcome.getCreated());
@@ -23,7 +25,7 @@ class ProvideConsentTransactionIT extends AbstractTransactionIT {
 
     @Disabled("Converter not yet implemented")
     @Test
-    void provideConsentConditionalUpdate() throws Exception {
+    void provideConsentConditionalUpdate() throws IOException {
         MethodOutcome outcome;
 
         outcome = create("Consent/transactions/provide-consent-create.json");

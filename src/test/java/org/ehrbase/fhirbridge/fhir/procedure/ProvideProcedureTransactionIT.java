@@ -6,13 +6,15 @@ import org.hl7.fhir.r4.model.Procedure;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 /**
  * Integration Tests that validate "Provide Procedure" transaction.
  */
 class ProvideProcedureTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void provideProcedureCreate() throws Exception {
+    void provideProcedureCreate() throws IOException {
         var outcome = create("Procedure/transactions/provide-procedure-create.json");
 
         Assertions.assertEquals(true, outcome.getCreated());
@@ -20,7 +22,7 @@ class ProvideProcedureTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void provideProcedureConditionalUpdate() throws Exception {
+    void provideProcedureConditionalUpdate() throws IOException {
         MethodOutcome outcome;
 
         outcome = create("Procedure/transactions/provide-procedure-create.json");

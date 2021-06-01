@@ -6,13 +6,15 @@ import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 /**
  * Integration Tests that validate "Provide Diagnostic Report" transaction.
  */
 class ProvideDiagnosticReportTransactionIT extends AbstractTransactionIT {
 
     @Test
-    void provideDiagnosticReportCreate() throws Exception {
+    void provideDiagnosticReportCreate() throws IOException {
         var outcome = create("DiagnosticReport/transactions/provide-diagnostic-report-create.json");
 
         Assertions.assertEquals(true, outcome.getCreated());
@@ -20,7 +22,7 @@ class ProvideDiagnosticReportTransactionIT extends AbstractTransactionIT {
     }
 
     @Test
-    void provideDiagnosticReportConditionalUpdate() throws Exception {
+    void provideDiagnosticReportConditionalUpdate() throws IOException {
         MethodOutcome outcome;
 
         outcome = create("DiagnosticReport/transactions/provide-diagnostic-report-create.json");
