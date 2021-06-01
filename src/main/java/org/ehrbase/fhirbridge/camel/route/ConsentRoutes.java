@@ -18,9 +18,6 @@ package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.ehrbase.fhirbridge.camel.processor.DefaultExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.EhrIdLookupProcessor;
-import org.ehrbase.fhirbridge.camel.processor.ResourceProfileValidator;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,41 +29,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConsentRoutes extends AbstractRouteBuilder {
 
-    private final EhrIdLookupProcessor ehrIdLookupProcessor;
-
-    private final ResourceProfileValidator requestValidator;
-
-    private final DefaultExceptionHandler defaultExceptionHandler;
-
-    public ConsentRoutes(EhrIdLookupProcessor ehrIdLookupProcessor,
-                         ResourceProfileValidator requestValidator,
-                         DefaultExceptionHandler defaultExceptionHandler) {
-        this.ehrIdLookupProcessor = ehrIdLookupProcessor;
-        this.requestValidator = requestValidator;
-        this.defaultExceptionHandler = defaultExceptionHandler;
-    }
-
     @Override
-    public void configure() {
+    public void configure() throws Exception {
         // @formatter:off
-        onException(Exception.class)
-                .process(defaultExceptionHandler);
+        super.configure();
 
         // 'Create Consent' route definition
-
         from("consent-create:consumer?fhirContext=#fhirContext")
             .onCompletion()
                 .process("auditCreateResourceProcessor")
             .end()
-            .process(requestValidator)
+            .process("resourceProfileValidator")
             .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("consentDao", "create(${body}, ${headers.FhirRequestDetails})"))
-            .process(ehrIdLookupProcessor)
+            .process("ehrIdLookupProcessor")
             .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
             .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
             .process("resourceResponseProcessor");
 
         // 'Find Consent' route definition
-
         from("consent-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())

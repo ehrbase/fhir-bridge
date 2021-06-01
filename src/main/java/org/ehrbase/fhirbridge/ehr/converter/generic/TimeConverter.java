@@ -1,19 +1,24 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Consent;
+import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Extension;
+import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
-
 import java.time.OffsetDateTime;
-import java.time.OffsetTime;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
 
 public class TimeConverter {
+
+    private TimeConverter() {
+        throw new IllegalStateException("Utility class");
+    }
 
     static TemporalAccessor convertQuestionnaireResponseTime(QuestionnaireResponse questionnaireResponse) {
         return OffsetDateTime.from(questionnaireResponse.getAuthoredElement().getValueAsCalendar().toZonedDateTime());
@@ -31,9 +36,9 @@ public class TimeConverter {
                     .findFirst()
                     .orElse(ZonedDateTime.now());
         } else if (observation.hasEffectiveInstantType()) { // EffectiveInstant
-            return observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+            return observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime();
         } else {
-            throw new ConversionException("Start time is not defined in observation");
+            return ZonedDateTime.now();
         }
     }
 
@@ -53,7 +58,7 @@ public class TimeConverter {
         } else if (condition.hasOnset() && condition.hasOnsetPeriod()) {
             return condition.getOnsetPeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
         } else {
-            throw new ConversionException("Start time is not defined in condition");
+            return ZonedDateTime.now();
         }
     }
 
@@ -71,7 +76,7 @@ public class TimeConverter {
         } else if (resource.hasEffectivePeriod() && resource.getEffectivePeriod().hasStart()) { // EffectivePeriod
             return resource.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
         } else {
-            throw new ConversionException("Start time is not defined in DiagnosticReport");
+            return ZonedDateTime.now();
         }
     }
 
@@ -83,16 +88,13 @@ public class TimeConverter {
         }
     }
 
-    public static Optional<TemporalAccessor> convertProcedureTime(Procedure resource) {
-        if (resource.hasPerformedDateTimeType() && resource.getPerformedDateTimeType().getExtension().size()==0) { // EffectiveDateTime
-            return Optional.ofNullable(resource.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime());
-        } else if(resource.hasPerformedDateTimeType() && resource.getPerformedDateTimeType().hasExtension()  && resource.getPerformedDateTimeType().getExtension().get(0).getValue().toString().equals("not-performed")){
-          //TODO wait until Template is fixed  return Optional.empty();
-          return Optional.of(OffsetDateTime.now());
-        }else if (resource.hasPerformedPeriod() && resource.getPerformedPeriod().hasStart()) { // EffectivePeriod
-            return Optional.ofNullable(resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+    public static TemporalAccessor convertProcedureTime(Procedure resource) {
+        if (resource.hasPerformedDateTimeType() && resource.getPerformedDateTimeType().getExtension().isEmpty()) { // EffectiveDateTime
+            return resource.getPerformedDateTimeType().getValueAsCalendar().toZonedDateTime();
+        } else if (resource.hasPerformedPeriod() && resource.getPerformedPeriod().hasStart()) { // EffectivePeriod
+            return resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
         } else {
-            throw new ConversionException("Start time is not defined in Procedure");
+            return ZonedDateTime.now();
         }
     }
 
@@ -102,5 +104,43 @@ public class TimeConverter {
         } else {
             return Optional.empty();
         }
+    }
+
+    public static TemporalAccessor convertMedicationStatmentTime(MedicationStatement medicationStatement){
+        if (medicationStatement.hasEffectiveDateTimeType()) { // EffectiveDateTime
+            return medicationStatement.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
+        } else if (medicationStatement.hasEffectivePeriod() && medicationStatement.getEffectivePeriod().hasStart()) { // EffectivePeriod
+            return medicationStatement.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
+        }else{
+            return ZonedDateTime.now();
+        }
+    }
+
+    public static  Optional<TemporalAccessor>  convertMedicationStatementEndTime(MedicationStatement medicationStatement){
+        if (medicationStatement.hasEffectivePeriod() && medicationStatement.getEffectivePeriod().hasEnd()) { // EffectivePeriod
+            return Optional.of(medicationStatement.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public static TemporalAccessor convertConsentTime(Consent resource) {
+        if (resource.hasDateTime()) {
+            return resource.getDateTime().toInstant();
+        } else {
+            return OffsetDateTime.now();
+        }
+    }
+
+    public static TemporalAccessor convertAgeExtensionTime(Extension extension) {
+        if (extension == null) {
+            return OffsetDateTime.now();
+        }
+        Extension dataTimeOfDocumentationExtension = extension.getExtensionByUrl("dateTimeOfDocumentation");
+        if (dataTimeOfDocumentationExtension == null) {
+            return OffsetDateTime.now();
+        }
+        DateTimeType dateTimeOfDocumentationDt = (DateTimeType) dataTimeOfDocumentationExtension.getValue();
+        return dateTimeOfDocumentationDt.getValueAsCalendar().toZonedDateTime();
     }
 }

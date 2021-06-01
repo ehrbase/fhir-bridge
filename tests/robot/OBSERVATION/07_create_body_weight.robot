@@ -54,15 +54,15 @@ ${body_weight_url}			https://www.netzwerk-universitaetsmedizin.de/fhir/Structure
 	$.subject.identifier.value		${{ {} }}		422		This property must be an simple value, not an object    Observation.subject.identifier.value
 	$.subject.identifier.value		${123}			422		Error parsing JSON: the primitive value must be a string    Observation.subject.identifier.value
 	$.subject.identifier			missing			422		Object must have some content    Observation.subject
-    $.subject.identifier			${EMPTY}		422		This property must be an Object, not a primitive property    Observation.subject.identifier
-    $.subject.identifier			${{ [] }}		422		This property must be an Object, not an array    Observation.subject.identifier
+    $.subject.identifier			${EMPTY}		422		The property identifier must be an Object, not a primitive property    Observation.subject.identifier
+    $.subject.identifier			${{ [] }}		422		The property identifier must be an Object, not an array    Observation.subject.identifier
     $.subject.identifier			${{ {} }}		422		Object must have some content    Observation.subject.identifier
-    $.subject.identifier			${123}			422		This property must be an Object, not a primitive property    Observation.subject.identifier
+    $.subject.identifier			${123}			422		The property identifier must be an Object, not a primitive property    Observation.subject.identifier
     $.subject						missing			422		Observation.subject: minimum required = 1, but only found 0 .from ${body_weight_url}
-	$.subject						${EMPTY}		422		This property must be an Object, not a primitive property    Observation.subject
-    $.subject						${{ [] }}		422		This property must be an Object, not an array    Observation.subject
+	$.subject						${EMPTY}		422		The property subject must be an Object, not a primitive property    Observation.subject
+    $.subject						${{ [] }}		422		The property subject must be an Object, not an array    Observation.subject
     $.subject						${{ {} }}		422		Object must have some content    Observation.subject
-    $.subject						${123}			422		This property must be an Object, not a primitive property    Observation.subject
+    $.subject						${123}			422		The property subject must be an Object, not a primitive property    Observation.subject
 
 
 002 Create Body Weight (Invalid/Missing 'resourceType')
@@ -127,12 +127,12 @@ ${body_weight_url}			https://www.netzwerk-universitaetsmedizin.de/fhir/Structure
 	$.identifier			${{ [{}] }}	   422     Object must have some content
 	$.identifier			${None}		   422     This property must be an Array, not a Null
 	#$.identifier[0].type	missing		   422     Observation.identifier:analyseBefundCode: minimum required = 1, but only found 0 .from  ${body_weight_url}
-	$.identifier[0].type	${EMPTY}	   422     This property must be an Object, not a primitive property
-	$.identifier[0].type	${123}		   422     This property must be an Object, not a primitive property
-	$.identifier[0].type	foobar		   422     This property must be an Object, not a primitive property
-	$.identifier[0].type	${{ [] }}	   422     This property must be an Object, not an array
+	$.identifier[0].type	${EMPTY}	   422     The property type must be an Object, not a primitive property
+	$.identifier[0].type	${123}		   422     The property type must be an Object, not a primitive property
+	$.identifier[0].type	foobar		   422     The property type must be an Object, not a primitive property
+	$.identifier[0].type	${{ [] }}	   422     The property type must be an Object, not an array
 	$.identifier[0].type	${{ {} }}	   422     Object must have some content
-	$.identifier[0].type	${None}		   422     This property must be an Object, not null
+	$.identifier[0].type	${None}		   422     The property type must be an Object, not null
 	
 	$.identifier[0].type.coding    			 missing		   422    Object must have some content
 	#$.identifier[0].type.coding[0].system	 missing    	   422    A code with no system has no defined meaning. A system should be provided
@@ -166,16 +166,16 @@ ${body_weight_url}			https://www.netzwerk-universitaetsmedizin.de/fhir/Structure
 	$.meta				missing						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	$.meta.profile		missing						422    	Object must have some content
 	$.meta.profile    	${{ ["invalid_url"] }}		422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.
-	$.meta.profile    	${{ ["http://wrong.url"] }}	422  	Profile reference 'http://wrong.url' could not be resolved, so has not been checked
-	$.meta.profile		${EMPTY}					422    	This property must be an Array, not a a primitive property
-	$.meta.profile		${123}						422    	This property must be an Array, not a a primitive property
-	$.meta.profile		${None}						422    	This property must be an Array, not a null
+	$.meta.profile    	${{ ["http://wrong.url"] }}	422  	The resource does not contain any supported profile.
+	$.meta.profile		${EMPTY}					422    	This property must be an Array, not a primitive property
+	$.meta.profile		${123}						422     This property must be an Array, not a primitive property
+	$.meta.profile		${None}						422    	This property must be an Array, not null
 	
 	# comment: the next one sets the value to an empty list/array []
 	$.meta.profile		${{ [] }}					422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	
 	# comment: the next one sets value to an empty object {}
-	$.meta.profile		${{ {} }}					422    	This property must be an Array, not a an object
+	$.meta.profile		${{ {} }}					422    	This property must be an Array, not an object
 
 
 006 Create Body Weight (Invalid/Missing 'code')
@@ -282,7 +282,7 @@ ${body_weight_url}			https://www.netzwerk-universitaetsmedizin.de/fhir/Structure
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 
 	[Template]			Create Body Weight with ehr reference
-    [Tags]              valueQuantity
+    [Tags]              valueQuantity    not-ready_parallel_fail    not-ready    247
 	#											HTTP	
 	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
 	$.valueQuantity			  	missing			422    	.*If there is no component or hasMember element then either a value.x. or a data absent reason must be present
@@ -317,6 +317,7 @@ ${body_weight_url}			https://www.netzwerk-universitaetsmedizin.de/fhir/Structure
 	$.valueQuantity.code	  	${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_weight_url}
 	$.valueQuantity.code	  	${123}			422    	Error parsing JSON: the primitive value must be a string
 	$.valueQuantity.code	  	foobar			422    	.*No matching units for:foobar, expected units:kg.*Bad Request.*
+	[Teardown]          TRACE GITHUB ISSUE  247  bug
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE

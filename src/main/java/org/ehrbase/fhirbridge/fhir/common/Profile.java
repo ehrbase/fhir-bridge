@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.fhir.common;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
@@ -48,6 +49,13 @@ public enum Profile {
 
     DIAGNOSTIC_REPORT_RADIOLOGY(DiagnosticReport.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnostic-report-radiology"),
 
+
+    // MedicationStatement Profiles
+    PHARMACOLOGICAL_THERAPY(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy"),
+    PHARMACOLOGICAL_THERAPY_ACE_INHIBITORS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-ace-inhibitors"),
+    PHARMACOLOGICAL_THERAPY_ANTICOAGULANTS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-anticoagulants"),
+    PHARMACOLOGICAL_THERAPY_IMMUNOGLOBULINS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-immunoglobulins"),
+
     // Observation Profiles
 
     TRAVEL_HISTORY(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/history-of-travel"),
@@ -64,17 +72,25 @@ public enum Profile {
 
     CLINICAL_FRAILTY_SCALE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score"),
 
+    CLINICAL_TRIAL_PARTICIPATION(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/interventional-clinical-trial-participation"),
+
     CORONARIRUS_NACHWEIS_TEST(Observation.class, "https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest"),
 
     FIO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/inhaled-oxygen-concentration"),
 
-    HEART_RATE(Observation.class, "http://hl7.org/fhir/StructureDefinition/heartrate"),
+    HEART_RATE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/heart-rate"),
+
+    KNOWN_EXPOSURE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/known-exposure"),
 
     PACO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure"),
 
     PAO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure"),
 
+    PATIENT_DISCHARGE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/discharge-disposition"),
+
     PATIENT_IN_ICU(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu"),
+
+    PCR(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-rt-pcr"),
 
     PH(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH"),
 
@@ -89,6 +105,8 @@ public enum Profile {
     SOFA_SCORE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score"),
 
     SMOKING_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status"),
+
+    ANTI_BODY_PANEL(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-pnl-ser-pl-ia"),
 
     // Patient Profiles
 
@@ -105,6 +123,10 @@ public enum Profile {
     PRONE_POSITION_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position"),
     RADIOLOGY_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures"),
     RESPIRATORY_THERAPIES_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"),
+
+    // Consent profiles
+
+    DNR_ORDER(Consent.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order"),
 
     // QuestionnaireResponse Profiles
 

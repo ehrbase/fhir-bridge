@@ -50,7 +50,7 @@ public class CompositionProducer extends DefaultProducer {
             throw new IllegalArgumentException("Body must not be null");
         }
 
-        if (endpoint.getProperties().isDebug()) {
+        if (endpoint.getProperties().isEnabled()) {
             debugMapping((Composition) body);
         }
 
@@ -71,7 +71,7 @@ public class CompositionProducer extends DefaultProducer {
     }
 
     private void writeToFile(String compositionJson) {
-        File output = new File(endpoint.getProperties().getOutputDirectory() + "/mapping-output.json");
+        File output = new File(endpoint.getProperties().getMappingOutputDirectory() + "/mapping-output.json");
         try {
             FileUtils.writeStringToFile(output, compositionJson, StandardCharsets.UTF_8);
         } catch (IOException e) {

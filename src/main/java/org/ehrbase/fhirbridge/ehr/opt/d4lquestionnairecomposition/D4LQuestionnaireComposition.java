@@ -43,7 +43,7 @@ import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.Zus
 @Archetype("openEHR-EHR-COMPOSITION.self_monitoring.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T12:09:15.533194+01:00",
+    date = "2021-04-22T17:20:47.938412+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("D4L_questionnaire")
@@ -196,14 +196,14 @@ public class D4LQuestionnaireComposition implements CompositionEntity, Compositi
 
   /**
    * Path: Selbstüberwachung/Medikamente / Impfungen/Kortision
-   * Description: Zusammenfassende Informationen über die Verabreichungs- oder Verbrauchshistorie für ein bestimmtes Medikament oder eine bestimmte Medikamentenklasse über die Lebenszeit der Person.
+   * Description: Zusammenfassende Informationen zur Verwendung eines bestimmten Medikaments oder einer bestimmten Medikamentengruppe.
    */
   @Path("/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Medikamente / Impfungen']/items[openEHR-EHR-EVALUATION.medication_summary.v0 and name/value='Kortision']")
   private KortisionEvaluation kortision;
 
   /**
    * Path: Selbstüberwachung/Medikamente / Impfungen/Immunsuppressiva
-   * Description: Zusammenfassende Informationen über die Verabreichungs- oder Verbrauchshistorie für ein bestimmtes Medikament oder eine bestimmte Medikamentenklasse über die Lebenszeit der Person.
+   * Description: Zusammenfassende Informationen zur Verwendung eines bestimmten Medikaments oder einer bestimmten Medikamentengruppe.
    */
   @Path("/content[openEHR-EHR-SECTION.adhoc.v1 and name/value='Medikamente / Impfungen']/items[openEHR-EHR-EVALUATION.medication_summary.v0 and name/value='Immunsuppressiva']")
   private ImmunsuppressivaEvaluation immunsuppressiva;
