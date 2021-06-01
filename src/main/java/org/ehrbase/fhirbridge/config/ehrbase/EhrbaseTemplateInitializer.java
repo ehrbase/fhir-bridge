@@ -1,8 +1,23 @@
-package org.ehrbase.fhirbridge.config;
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.ehrbase.fhirbridge.config.ehrbase;
 
 import org.apache.xmlbeans.XmlOptions;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
-import org.ehrbase.fhirbridge.config.ehrbase.AuthorizationType;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.openehr.schemas.v1.OPERATIONALTEMPLATE;
 import org.slf4j.Logger;
@@ -15,9 +30,13 @@ import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.xml.namespace.QName;
-import java.net.URI;
 import java.util.Optional;
 
+/**
+ * {@link InitializingBean} used to trigger template initialization in the remote EHRbase instance.
+ *
+ * @since 1.0.0
+ */
 public class EhrbaseTemplateInitializer implements InitializingBean {
 
     private static final Logger LOG = LoggerFactory.getLogger(EhrbaseTemplateInitializer.class);
@@ -39,32 +58,35 @@ public class EhrbaseTemplateInitializer implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
+        LOG.info("Initializing templates...");
+
         for (String templateId : templateProvider.getTemplateIds()) {
-            LOG.info("Initializing template '{}'", templateId);
 
             Optional<OPERATIONALTEMPLATE> ehrbaseTemplate = openEhrClient.templateEndpoint()
                     .findTemplate(templateId);
 
             if (ehrbaseTemplate.isEmpty()) {
                 createTemplate(templateId);
-            } else {
+            } else if (properties.getTemplate().isForceUpdate()) {
                 updateTemplate(templateId);
             }
         }
     }
 
     private void createTemplate(String templateId) {
+        LOG.info("Create template '{}'", templateId);
         openEhrClient.templateEndpoint().ensureExistence(templateId);
     }
 
     private void updateTemplate(String templateId) {
+        LOG.info("Update template '{}'", templateId);
         OPERATIONALTEMPLATE fhirBridgeTemplate = templateProvider.find(templateId)
                 .orElseThrow(() -> new IllegalStateException("Failed to load template with id " + templateId));
 
-        XmlOptions options = new XmlOptions();
+        var options = new XmlOptions();
         options.setSaveSyntheticDocumentElement(new QName("http://schemas.openehr.org/v1", "template"));
 
-        URI uri = UriComponentsBuilder.fromHttpUrl(properties.getBaseUrl())
+        var uri = UriComponentsBuilder.fromHttpUrl(properties.getBaseUrl())
                 .path("/admin/template/{templateId}")
                 .build(templateId);
 
@@ -82,13 +104,13 @@ public class EhrbaseTemplateInitializer implements InitializingBean {
     }
 
     private WebClient adminWebClient() {
-        WebClient.Builder builder = WebClient.builder();
+        var webClientBuilder = WebClient.builder();
 
-        EhrbaseProperties.Security security = properties.getSecurity();
-        if (security.getType() == AuthorizationType.BASIC_AUTH) {
-            builder.filter(ExchangeFilterFunctions.basicAuthentication(security.getAdminUser(), security.getAdminPassword()));
+        var security = properties.getSecurity();
+        if (security.getType() == EhrbaseProperties.AuthorizationType.BASIC_AUTH) {
+            webClientBuilder.filter(ExchangeFilterFunctions.basicAuthentication(security.getAdminUser(), security.getAdminPassword()));
         }
 
-        return builder.build();
+        return webClientBuilder.build();
     }
 }

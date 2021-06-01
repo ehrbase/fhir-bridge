@@ -25,6 +25,7 @@ fhir-bridge:
       admin-password: mySuperAwesomePassword123
     template:
       prefix: classpath:/opt/
+#      force-update: false
   # Security Properties
   security:
     authentication-type: none
