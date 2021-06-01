@@ -46,12 +46,8 @@ public class QuestionnaireResponseRoutes extends AbstractRouteBuilder {
 
         // Route: Find Questionnaire-Response
         from("questionnaire-response-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:questionnaireResponseDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:questionnaireResponseDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .routeId("find-questionnaire-response-route")
+            .process("findQuestionnaireResponseProcessor");
 
         // @formatter:on
     }
