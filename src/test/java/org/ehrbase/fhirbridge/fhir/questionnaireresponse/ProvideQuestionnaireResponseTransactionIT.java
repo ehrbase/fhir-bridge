@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.fhir.questionnaireresponse;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.ehrbase.fhirbridge.fhir.AbstractTransactionIT;
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class ProvideQuestionnaireResponseTransactionIT extends AbstractTransactionIT {
 
     @Test
     void provideQuestionnaireResponseCreate() throws IOException {
-        var outcome = create("QuestionnaireResponse/transactions/provide-questionnaire-response-create.json");
+        MethodOutcome outcome = create("QuestionnaireResponse/transactions/provide-questionnaire-response-create.json");
 
         Assertions.assertEquals(true, outcome.getCreated());
         Assertions.assertNotNull(outcome.getId().getValue());
@@ -26,14 +27,14 @@ class ProvideQuestionnaireResponseTransactionIT extends AbstractTransactionIT {
         MethodOutcome outcome;
 
         outcome = create("QuestionnaireResponse/transactions/provide-questionnaire-response-create.json");
-        var id = outcome.getId();
+        IIdType id = outcome.getId();
 
         outcome = update("QuestionnaireResponse/transactions/provide-questionnaire-response-update.json", "QuestionnaireResponse?_id=" + id.getIdPart() + "&patient.identifier=" + PATIENT_ID);
 
         Assertions.assertEquals(id.getIdPart(), outcome.getId().getIdPart());
         Assertions.assertEquals(id.getVersionIdPartAsLong() + 1, outcome.getId().getVersionIdPartAsLong());
 
-        var questionnaireResponse = (QuestionnaireResponse) outcome.getResource();
+        QuestionnaireResponse questionnaireResponse = (QuestionnaireResponse) outcome.getResource();
 
         Assertions.assertEquals(PATIENT_ID, questionnaireResponse.getSubject().getIdentifier().getValue());
         Assertions.assertEquals(QuestionnaireResponse.QuestionnaireResponseStatus.AMENDED, questionnaireResponse.getStatus());

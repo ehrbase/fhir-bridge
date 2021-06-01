@@ -1,6 +1,8 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.ehrbase.fhirbridge.fhir.AbstractTransactionIT;
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Observation;
 import org.junit.jupiter.api.Assertions;
@@ -15,10 +17,10 @@ class FindObservationTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findObservationRead() throws IOException {
-        var outcome = create("Observation/transactions/provide-observation-create.json");
-        var id = outcome.getId();
+        MethodOutcome outcome = create("Observation/transactions/provide-observation-create.json");
+        IIdType id = outcome.getId();
 
-        var observation = read(id.getIdPart(), Observation.class);
+        Observation observation = read(id.getIdPart(), Observation.class);
 
         Assertions.assertNotNull(observation);
         Assertions.assertNotNull(observation.getId(), id.getIdPart());
@@ -27,10 +29,10 @@ class FindObservationTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findObservationVRead() throws IOException {
-        var outcome = create("Observation/transactions/provide-observation-create.json");
-        var id = outcome.getId();
+        MethodOutcome outcome = create("Observation/transactions/provide-observation-create.json");
+        IIdType id = outcome.getId();
 
-        var observation = vread(id.getIdPart(), id.getVersionIdPart(), Observation.class);
+        Observation observation = vread(id.getIdPart(), id.getVersionIdPart(), Observation.class);
         Assertions.assertNotNull(observation);
         Assertions.assertNotNull(observation.getId(), id.getIdPart());
         Assertions.assertNotNull(observation.getMeta().getVersionId(), id.getVersionIdPart());
@@ -48,7 +50,7 @@ class FindObservationTransactionIT extends AbstractTransactionIT {
         Assertions.assertEquals(3, bundle.getTotal());
 
         bundle.getEntry().forEach(entry -> {
-            var observation = (Observation) entry.getResource();
+            Observation observation = (Observation) entry.getResource();
 
             Assertions.assertEquals(PATIENT_ID, observation.getSubject().getIdentifier().getValue());
             Assertions.assertEquals(Observation.ObservationStatus.PRELIMINARY, observation.getStatus());
