@@ -7,7 +7,7 @@
 
     <groupId>org.ehrbase.fhirbridge</groupId>
     <artifactId>fhir-bridge</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.1</version>
 
     <name>FHIR Bridge</name>
 
@@ -29,7 +29,7 @@
         <ehrbase-sdk.version>develop-SNAPSHOT</ehrbase-sdk.version>
         <findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
         <guava.version>30.1-jre</guava.version>
-        <hapi-fhir.version>5.2.0</hapi-fhir.version>
+        <hapi-fhir.version>5.3.0</hapi-fhir.version>
         <ipf.version>4.0.0</ipf.version>
         <javassist.version>3.27.0-GA</javassist.version>
         <jaxb-core.version>2.3.0.1</jaxb-core.version>
@@ -215,22 +215,8 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>org.javers</groupId>
-            <artifactId>javers-core</artifactId>
-            <version>5.14.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.classgraph</groupId>
-            <artifactId>classgraph</artifactId>
-            <version>4.8.97</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -238,12 +224,20 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.openehealth.ipf.boot</groupId>
@@ -295,9 +289,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.3.2</version>
+            <groupId>org.javers</groupId>
+            <artifactId>javers-core</artifactId>
+            <version>5.14.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.classgraph</groupId>
+            <artifactId>classgraph</artifactId>
+            <version>4.8.97</version>
         </dependency>
     </dependencies>
 

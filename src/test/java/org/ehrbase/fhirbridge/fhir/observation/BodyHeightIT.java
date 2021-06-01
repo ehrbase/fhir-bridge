@@ -81,16 +81,6 @@ class BodyHeightIT extends AbstractMappingTestSetupIT {
                 "paragon-body-height-snomed-period_2.json");
     }
 
-
-    // #####################################################################################
-    // check exceptions
-    @Test
-    void createInvalidBefund() throws IOException {
-        Exception exception = executeMappingException("create-body-height-loinc-datetime_invalid.json");
-        assertEquals("Start time is not defined in observation", exception.getMessage());
-    }
-
-
     // #####################################################################################
     // default
 

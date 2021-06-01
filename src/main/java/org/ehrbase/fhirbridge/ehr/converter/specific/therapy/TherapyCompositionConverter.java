@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ProcedureToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
@@ -9,6 +10,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.Katego
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Procedure;
+
 import java.util.ArrayList;
 
 public class TherapyCompositionConverter extends ProcedureToCompositionConverter<GECCOProzedurComposition> {

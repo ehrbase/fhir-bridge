@@ -170,7 +170,7 @@ public class Symptoms extends QuestionnaireSection {
             return SchweregradDefiningCode.N40_C;
         } else if (schweregrad.equals(SchweregradDefiningCode.N41_C.getCode())) {
             return SchweregradDefiningCode.N41_C;
-        } else if (schweregrad.equals(SchweregradDefiningCode.N42_C.getCode())) {
+        } else if (schweregrad.equals("above-42C")) {
             return SchweregradDefiningCode.N42_C;
         } else if (schweregrad.equals(SchweregradDefiningCode.ICH_WEISS_ES_NICHT.getCode())) {
             return SchweregradDefiningCode.ICH_WEISS_ES_NICHT;

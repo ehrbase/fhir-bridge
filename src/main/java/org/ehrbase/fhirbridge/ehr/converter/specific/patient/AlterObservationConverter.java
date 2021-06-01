@@ -1,6 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AlterObservation;
 
 import org.hl7.fhir.r4.model.Age;
@@ -10,6 +12,7 @@ import org.hl7.fhir.r4.model.Patient;
 
 import java.time.Period;
 import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAccessor;
 
 public class AlterObservationConverter extends EntryEntityConverter<Patient, AlterObservation> {
 
@@ -17,15 +20,32 @@ public class AlterObservationConverter extends EntryEntityConverter<Patient, Alt
     protected AlterObservation convertInternal(Patient resource) {
         AlterObservation age = new AlterObservation();
         Extension extensionAge = resource.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age");
-        DateTimeType dateTimeOfDocumentationDt = (DateTimeType) extensionAge.getExtensionByUrl("dateTimeOfDocumentation").getValue();
-        ZonedDateTime dateTimeOfDocumentation = dateTimeOfDocumentationDt.getValueAsCalendar().toZonedDateTime();
-        Age ageValue = (Age) extensionAge.getExtensionByUrl("age").getValue();
-        //TODO refactor
-        age.setOriginValue(dateTimeOfDocumentation);
-        age.setTimeValue(dateTimeOfDocumentation);
-        //age - Alter (ISO8601 duration e.g. P67Y)
-        age.setAlterValue(Period.ofYears(ageValue.getValue().intValue()));
+        if (extensionAge != null) {
+            TemporalAccessor time = TimeConverter.convertAgeExtensionTime(extensionAge); //should be sth. generic in TimeConverter?
+            age.setOriginValue(time);
+            age.setTimeValue(time);
+            age.setAlterValue(getAge(extensionAge));
+        }
         return age;
+    }
+
+    private Period getAge(Extension extensionAge){
+        Age ageValue = (Age) extensionAge.getExtensionByUrl("age").getValue();
+        if(ageValue.hasValue()){
+            return Period.ofYears(ageValue.getValue().intValue());
+        }else if(ageValue.hasCode()){
+          return getCodeAsInt(ageValue.getCode());
+        }else{
+            throw new UnprocessableEntityException("No age value for the Patient was found");
+        }
+    }
+
+    private Period getCodeAsInt(String code) {
+        try{
+            return Period.ofYears(Integer.parseInt(code));
+        }catch (NumberFormatException numberFormatException){
+            throw new UnprocessableEntityException("The code " + code + " is not a valid age. Please enter an integer");
+        }
     }
 }
 

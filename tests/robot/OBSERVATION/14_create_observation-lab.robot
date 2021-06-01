@@ -201,7 +201,7 @@ ${randinteger}                  ${12345}
 	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-observation-lab.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
+	...                 4. *UPDATE* values for attribute ``valueQuantity`` \n\n
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                 
 	[Template]			create Observation lab with ehr reference
@@ -213,10 +213,6 @@ ${randinteger}                  ${12345}
 	# invalid/missing valueQuantity
 	$.valueQuantity			  					missing				422
 	$.valueQuantity			  					${None}				422
-	$.valueQuantity			  					${{ {} }}			422
-	$.valueQuantity			  					${{ {} }}			422
-	$.valueQuantity			  					${{ {} }}			422
-	$.valueQuantity			  					${{ {} }}			422
 	
 	# missing parameters
 	$.valueQuantity.value	  					missing				422

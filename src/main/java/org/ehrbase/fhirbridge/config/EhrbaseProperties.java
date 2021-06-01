@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.config;
 
-import org.ehrbase.fhirbridge.config.ehrbase.AuthorizationType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -95,5 +94,10 @@ public class EhrbaseProperties {
         public void setPrefix(String prefix) {
             this.prefix = prefix;
         }
+    }
+
+    public enum AuthorizationType {
+
+        BASIC_AUTH, NONE
     }
 }
