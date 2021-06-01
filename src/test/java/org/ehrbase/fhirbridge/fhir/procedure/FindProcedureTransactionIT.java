@@ -1,6 +1,8 @@
 package org.ehrbase.fhirbridge.fhir.procedure;
 
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.ehrbase.fhirbridge.fhir.AbstractTransactionIT;
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Procedure;
 import org.junit.jupiter.api.Assertions;
@@ -15,10 +17,10 @@ class FindProcedureTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findProcedureRead() throws IOException {
-        var outcome = create("Procedure/transactions/provide-procedure-create.json");
-        var id = outcome.getId();
+        MethodOutcome outcome = create("Procedure/transactions/provide-procedure-create.json");
+        IIdType id = outcome.getId();
 
-        var procedure = read(id.getIdPart(), Procedure.class);
+        Procedure procedure = read(id.getIdPart(), Procedure.class);
 
         Assertions.assertNotNull(procedure);
         Assertions.assertNotNull(procedure.getId(), id.getIdPart());
@@ -27,10 +29,10 @@ class FindProcedureTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findProcedureVRead() throws IOException {
-        var outcome = create("Procedure/transactions/provide-procedure-create.json");
-        var id = outcome.getId();
+        MethodOutcome outcome = create("Procedure/transactions/provide-procedure-create.json");
+        IIdType id = outcome.getId();
 
-        var procedure = vread(id.getIdPart(), id.getVersionIdPart(), Procedure.class);
+        Procedure procedure = vread(id.getIdPart(), id.getVersionIdPart(), Procedure.class);
         Assertions.assertNotNull(procedure);
         Assertions.assertNotNull(procedure.getId(), id.getIdPart());
         Assertions.assertNotNull(procedure.getMeta().getVersionId(), id.getVersionIdPart());
@@ -48,7 +50,7 @@ class FindProcedureTransactionIT extends AbstractTransactionIT {
         Assertions.assertEquals(3, bundle.getTotal());
 
         bundle.getEntry().forEach(entry -> {
-            var procedure = (Procedure) entry.getResource();
+            Procedure procedure = (Procedure) entry.getResource();
 
             Assertions.assertEquals(PATIENT_ID, procedure.getSubject().getIdentifier().getValue());
             Assertions.assertEquals(Procedure.ProcedureStatus.ENTEREDINERROR, procedure.getStatus());

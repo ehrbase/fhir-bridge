@@ -1,6 +1,8 @@
 package org.ehrbase.fhirbridge.fhir.consent;
 
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.ehrbase.fhirbridge.fhir.AbstractTransactionIT;
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Consent;
 import org.junit.jupiter.api.Assertions;
@@ -17,10 +19,10 @@ class FindConsentTransactionIT extends AbstractTransactionIT {
     @Disabled("Converter not yet implemented")
     @Test
     void findConsentRead() throws IOException {
-        var outcome = create("Consent/transactions/provide-consent-create.json");
-        var id = outcome.getId();
+        MethodOutcome outcome = create("Consent/transactions/provide-consent-create.json");
+        IIdType id = outcome.getId();
 
-        var consent = read(id.getIdPart(), Consent.class);
+        Consent consent = read(id.getIdPart(), Consent.class);
 
         Assertions.assertNotNull(consent);
         Assertions.assertNotNull(consent.getId(), id.getIdPart());
@@ -30,10 +32,10 @@ class FindConsentTransactionIT extends AbstractTransactionIT {
     @Disabled("Converter not yet implemented")
     @Test
     void findConsentVRead() throws IOException {
-        var outcome = create("Consent/transactions/provide-consent-create.json");
-        var id = outcome.getId();
+        MethodOutcome outcome = create("Consent/transactions/provide-consent-create.json");
+        IIdType id = outcome.getId();
 
-        var consent = vread(id.getIdPart(), id.getVersionIdPart(), Consent.class);
+        Consent consent = vread(id.getIdPart(), id.getVersionIdPart(), Consent.class);
         Assertions.assertNotNull(consent);
         Assertions.assertNotNull(consent.getId(), id.getIdPart());
         Assertions.assertNotNull(consent.getMeta().getVersionId(), id.getVersionIdPart());

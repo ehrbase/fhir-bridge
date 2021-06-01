@@ -30,7 +30,7 @@ public class ProvideResourceAuditHandler implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        var auditEvent = new AuditEvent()
+        AuditEvent auditEvent = new AuditEvent()
                 .setType(new Coding("http://terminology.hl7.org/CodeSystem/audit-event-type", "rest", "RESTful Operation"))
                 .addSubtype(new Coding("http://hl7.org/fhir/restful-interaction", "create", "create"))
                 .setAction(AuditEvent.AuditEventAction.C)
@@ -63,8 +63,8 @@ public class ProvideResourceAuditHandler implements Processor {
     }
 
     private AuditEvent.AuditEventEntityComponent entity(Exchange exchange) {
-        var outcome = exchange.getProperty(CamelConstants.METHOD_OUTCOME, MethodOutcome.class);
-        var requestDetails = exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
+        MethodOutcome outcome = exchange.getProperty(CamelConstants.METHOD_OUTCOME, MethodOutcome.class);
+        RequestDetails requestDetails = exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
 
         return new AuditEvent.AuditEventEntityComponent()
                 .setWhat(new Reference(outcome.getId()))

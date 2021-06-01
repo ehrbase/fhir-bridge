@@ -1,6 +1,8 @@
 package org.ehrbase.fhirbridge.fhir.diagnosticreport;
 
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.ehrbase.fhirbridge.fhir.AbstractTransactionIT;
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.junit.jupiter.api.Assertions;
@@ -15,10 +17,10 @@ class FindDiagnosticReportTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findDiagnosticReportRead() throws IOException {
-        var outcome = create("DiagnosticReport/transactions/provide-diagnostic-report-create.json");
-        var id = outcome.getId();
+        MethodOutcome outcome = create("DiagnosticReport/transactions/provide-diagnostic-report-create.json");
+        IIdType id = outcome.getId();
 
-        var diagnosticReport = read(id.getIdPart(), DiagnosticReport.class);
+        DiagnosticReport diagnosticReport = read(id.getIdPart(), DiagnosticReport.class);
 
         Assertions.assertNotNull(diagnosticReport);
         Assertions.assertNotNull(diagnosticReport.getId(), id.getIdPart());
@@ -27,10 +29,10 @@ class FindDiagnosticReportTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findDiagnosticReportVRead() throws IOException {
-        var outcome = create("DiagnosticReport/transactions/provide-diagnostic-report-create.json");
-        var id = outcome.getId();
+        MethodOutcome outcome = create("DiagnosticReport/transactions/provide-diagnostic-report-create.json");
+        IIdType id = outcome.getId();
 
-        var diagnosticReport = vread(id.getIdPart(), id.getVersionIdPart(), DiagnosticReport.class);
+        DiagnosticReport diagnosticReport = vread(id.getIdPart(), id.getVersionIdPart(), DiagnosticReport.class);
         Assertions.assertNotNull(diagnosticReport);
         Assertions.assertNotNull(diagnosticReport.getId(), id.getIdPart());
         Assertions.assertNotNull(diagnosticReport.getMeta().getVersionId(), id.getVersionIdPart());
@@ -48,7 +50,7 @@ class FindDiagnosticReportTransactionIT extends AbstractTransactionIT {
         Assertions.assertEquals(3, bundle.getTotal());
 
         bundle.getEntry().forEach(entry -> {
-            var diagnosticReport = (DiagnosticReport) entry.getResource();
+            DiagnosticReport diagnosticReport = (DiagnosticReport) entry.getResource();
 
             Assertions.assertEquals(PATIENT_ID, diagnosticReport.getSubject().getIdentifier().getValue());
             Assertions.assertEquals(DiagnosticReport.DiagnosticReportStatus.REGISTERED, diagnosticReport.getStatus());

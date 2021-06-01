@@ -53,8 +53,8 @@ public class ProvideResourcePersistenceProcessor<T extends IBaseResource> implem
     public void process(Exchange exchange) throws Exception {
         LOG.trace("Processing...");
 
-        var resource = exchange.getIn().getBody(resourceType);
-        var requestDetails = exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
+        T resource = exchange.getIn().getBody(resourceType);
+        RequestDetails requestDetails = exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
 
         MethodOutcome outcome;
         switch (requestDetails.getRestOperationType()) {

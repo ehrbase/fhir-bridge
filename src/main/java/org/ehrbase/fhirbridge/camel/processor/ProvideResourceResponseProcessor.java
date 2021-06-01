@@ -48,10 +48,10 @@ public class ProvideResourceResponseProcessor implements Processor {
     public void process(Exchange exchange) throws Exception {
         LOG.trace("Processing exchange...");
 
-        var composition = exchange.getIn().getMandatoryBody(CompositionEntity.class);
-        var resourceId = exchange.getIn().getHeader(CamelConstants.RESOURCE_ID, String.class);
+        CompositionEntity composition = exchange.getIn().getMandatoryBody(CompositionEntity.class);
+        String resourceId = exchange.getIn().getHeader(CamelConstants.RESOURCE_ID, String.class);
 
-        var resourceMap = resourceMapRepository.findById(resourceId)
+        ResourceMap resourceMap = resourceMapRepository.findById(resourceId)
                 .orElse(new ResourceMap(resourceId));
         resourceMap.setCompositionVersionUid(composition.getVersionUid().toString());
 

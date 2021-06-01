@@ -40,48 +40,61 @@ public class FhirProfileValidator implements Processor, MessageSourceAware {
     public void process(Exchange exchange) {
         Resource resource = exchange.getIn().getBody(Resource.class);
 
-        LOG.debug("Start validating {} resource...", resource.getResourceType());
-
-        OperationOutcome operationOutcome = new OperationOutcome();
-        Class<? extends Resource> resourceType = resource.getClass();
+        LOG.debug("Validating {} resource...", resource.getResourceType());
 
         List<String> profiles = Resources.getProfileUris(resource);
         if (profiles.isEmpty()) {
-            Profile defaultProfile = Profile.getDefaultProfile(resourceType);
-            if (defaultProfile == null) {
-                operationOutcome.addIssue(new OperationOutcomeIssueComponent()
-                        .setSeverity(IssueSeverity.FATAL)
-                        .setCode(IssueType.VALUE)
-                        .setDiagnostics(messages.getMessage("validation.profile.defaultNotSupported", new Object[]{resource.getResourceType(), Profile.getSupportedProfiles(resourceType)}))
-                        .addExpression(resource.getResourceType() + ".meta.profile[]"));
-                throw new UnprocessableEntityException(fhirContext, operationOutcome);
-            }
-
-            exchange.getMessage().setHeader(CamelConstants.PROFILE, defaultProfile);
+            validateDefault(resource, exchange);
         } else {
-            Set<Profile> supportedProfiles = Profile.resolveAll(resource);
-            if (supportedProfiles.isEmpty()) {
-                operationOutcome.addIssue(new OperationOutcomeIssueComponent()
-                        .setSeverity(IssueSeverity.FATAL)
-                        .setCode(IssueType.VALUE)
-                        .setDiagnostics(messages.getMessage("validation.profile.missingSupported", new Object[]{resourceType, Profile.getSupportedProfiles(resourceType)}))
-                        .addExpression(resource.getResourceType() + ".meta.profile[]"));
-            } else if (supportedProfiles.size() > 1) {
-                operationOutcome.addIssue(new OperationOutcomeIssueComponent()
-                        .setSeverity(IssueSeverity.FATAL)
-                        .setCode(IssueType.VALUE)
-                        .setDiagnostics(messages.getMessage("validation.profile.moreThanOneSupported"))
-                        .addExpression(resource.getResourceType() + ".meta.profile[]"));
-            }
-
-            if (operationOutcome.hasIssue()) {
-                throw new UnprocessableEntityException(fhirContext, operationOutcome);
-            }
-
-            exchange.getMessage().setHeader(CamelConstants.PROFILE, supportedProfiles.iterator().next());
+            validateProfiles(resource, exchange);
         }
 
         LOG.info("{} resource validated", resource.getResourceType());
+    }
+
+    private void validateDefault(Resource resource, Exchange exchange) {
+        Class<? extends Resource> clazz = resource.getClass();
+        Profile profile = Profile.getDefaultProfile(clazz);
+
+        if (profile == null) {
+            OperationOutcome outcome = new OperationOutcome()
+                    .addIssue(new OperationOutcomeIssueComponent()
+                            .setSeverity(IssueSeverity.FATAL)
+                            .setCode(IssueType.VALUE)
+                            .setDiagnostics(messages.getMessage("validation.profile.defaultNotSupported", new Object[]{resource.getResourceType(), Profile.getSupportedProfiles(clazz)}))
+                            .addExpression(profileExpression(resource)));
+            throw new UnprocessableEntityException(fhirContext, outcome);
+        }
+        exchange.getMessage().setHeader(CamelConstants.PROFILE, profile);
+    }
+
+    private void validateProfiles(Resource resource, Exchange exchange) {
+        Set<Profile> supportedProfiles = Profile.resolveAll(resource);
+        Class<? extends Resource> resourceType = resource.getClass();
+
+        OperationOutcome outcome = new OperationOutcome();
+        if (supportedProfiles.isEmpty()) {
+            outcome.addIssue(new OperationOutcomeIssueComponent()
+                    .setSeverity(IssueSeverity.FATAL)
+                    .setCode(IssueType.VALUE)
+                    .setDiagnostics(messages.getMessage("validation.profile.missingSupported", new Object[]{resourceType, Profile.getSupportedProfiles(resourceType)}))
+                    .addExpression(profileExpression(resource)));
+        } else if (supportedProfiles.size() > 1) {
+            outcome.addIssue(new OperationOutcomeIssueComponent()
+                    .setSeverity(IssueSeverity.FATAL)
+                    .setCode(IssueType.VALUE)
+                    .setDiagnostics(messages.getMessage("validation.profile.moreThanOneSupported"))
+                    .addExpression(profileExpression(resource)));
+        }
+
+        if (outcome.hasIssue()) {
+            throw new UnprocessableEntityException(fhirContext, outcome);
+        }
+        exchange.getMessage().setHeader(CamelConstants.PROFILE, supportedProfiles.iterator().next());
+    }
+
+    private String profileExpression(Resource resource) {
+        return resource.getResourceType() + ".meta.profile[]";
     }
 
     @Override

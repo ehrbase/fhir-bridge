@@ -1,6 +1,8 @@
 package org.ehrbase.fhirbridge.fhir.condition;
 
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.ehrbase.fhirbridge.fhir.AbstractTransactionIT;
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Condition;
 import org.junit.jupiter.api.Assertions;
@@ -15,10 +17,10 @@ class FindConditionTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findConditionRead() throws IOException {
-        var outcome = create("Condition/transactions/provide-condition-create.json");
-        var id = outcome.getId();
+        MethodOutcome outcome = create("Condition/transactions/provide-condition-create.json");
+        IIdType id = outcome.getId();
 
-        var condition = read(id.getIdPart(), Condition.class);
+        Condition condition = read(id.getIdPart(), Condition.class);
 
         Assertions.assertNotNull(condition);
         Assertions.assertNotNull(condition.getId(), id.getIdPart());
@@ -27,10 +29,10 @@ class FindConditionTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findConditionVRead() throws IOException {
-        var outcome = create("Condition/transactions/provide-condition-create.json");
-        var id = outcome.getId();
+        MethodOutcome outcome = create("Condition/transactions/provide-condition-create.json");
+        IIdType id = outcome.getId();
 
-        var condition = vread(id.getIdPart(), id.getVersionIdPart(), Condition.class);
+        Condition condition = vread(id.getIdPart(), id.getVersionIdPart(), Condition.class);
         Assertions.assertNotNull(condition);
         Assertions.assertNotNull(condition.getId(), id.getIdPart());
         Assertions.assertNotNull(condition.getMeta().getVersionId(), id.getVersionIdPart());
