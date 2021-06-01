@@ -160,23 +160,19 @@ public class TimeConverter {
 
     public static Optional<TemporalAccessor> convertEncounterLocationTime(Encounter.EncounterLocationComponent location) {
 
-        if (location.getPeriod() == null) {
+        if (location.hasPeriod()) {
+            return Optional.of(OffsetDateTime.from(location.getPeriod().getStartElement().getValueAsCalendar().toZonedDateTime()));
+        } else {
             return Optional.empty();
         }
-
-        return Optional.of(OffsetDateTime.from(location.getPeriod().getStartElement().getValueAsCalendar().toZonedDateTime()));
     }
 
     public static Optional<TemporalAccessor> convertEncounterLocationEndTime(Encounter.EncounterLocationComponent location) {
 
-        if (location.getPeriod() == null) {
+        if (location.hasPeriod() && location.getPeriod().hasEndElement()) {
+            return Optional.of(OffsetDateTime.from(location.getPeriod().getEndElement().getValueAsCalendar().toZonedDateTime()));
+        } else {
             return Optional.empty();
         }
-
-        if (!location.getPeriod().hasEndElement()) {
-            return Optional.empty();
-        }
-
-        return Optional.of(OffsetDateTime.from(location.getPeriod().getEndElement().getValueAsCalendar().toZonedDateTime()));
     }
 }

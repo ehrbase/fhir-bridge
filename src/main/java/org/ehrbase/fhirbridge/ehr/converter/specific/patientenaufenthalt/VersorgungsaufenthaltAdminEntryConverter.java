@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt;
 
-import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToAdminEntryConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsaufenthaltAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.FachlicheOrganisationseinheitCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.StandortCluster;
@@ -11,7 +10,7 @@ import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Coding;
 import java.util.ArrayList;
 
-public class VersorgungsaufenthaltAdminEntryConverter extends EntryEntityConverter<Encounter, VersorgungsaufenthaltAdminEntry> {
+public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEntryConverter<VersorgungsaufenthaltAdminEntry> {
 
     private static final String FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel";
 
@@ -22,9 +21,6 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EntryEntityConvert
         if(Encounters.isNotEmpty(encounter.getLocation())) {
 
             Encounter.EncounterLocationComponent location = encounter.getLocation().get(0);
-
-            TimeConverter.convertEncounterLocationTime(location).ifPresent(versorgungsaufenthaltAdminEntry::setBeginnValue);
-            TimeConverter.convertEncounterLocationEndTime(location).ifPresent(versorgungsaufenthaltAdminEntry::setEndeValue);
 
             versorgungsaufenthaltAdminEntry.setStandort(convertStandortCluster(location));
 
@@ -76,26 +72,31 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EntryEntityConvert
 
     private ArrayList<FachlicheOrganisationseinheitCluster> createFachlicheOrganisationseinheitClusterList(Encounter encounter) {
 
+        if (encounter.hasServiceType() && encounter.getServiceType().getCoding() != null) {
+            return createFachlicheOrganisationseinheitClusterListFromCoding(encounter);
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    private ArrayList<FachlicheOrganisationseinheitCluster> createFachlicheOrganisationseinheitClusterListFromCoding(Encounter encounter) {
+
         ArrayList<FachlicheOrganisationseinheitCluster> retVal = new ArrayList<>();
 
-        if (encounter.getServiceType() != null
-                && encounter.getServiceType().getCoding() != null) {
+        for(Coding fachAbteilungsSchluessel : encounter.getServiceType().getCoding()) {
 
-            for(Coding fachAbteilungsSchluessel : encounter.getServiceType().getCoding()) {
+            FachlicheOrganisationseinheitCluster fachlicheOrganisationseinheitCluster = new FachlicheOrganisationseinheitCluster();
 
-                FachlicheOrganisationseinheitCluster fachlicheOrganisationseinheitCluster = new FachlicheOrganisationseinheitCluster();
+            if (fachAbteilungsSchluessel.getSystem().equals(FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM)
+                    && FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().containsKey(fachAbteilungsSchluessel.getCode())) {
 
-                if (fachAbteilungsSchluessel.getSystem().equals(FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM)
-                        && FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().containsKey(fachAbteilungsSchluessel.getCode())) {
-
-                    fachlicheOrganisationseinheitCluster.setFachabteilungsschluesselDefiningCode(FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().get(fachAbteilungsSchluessel.getCode()));
-                } else {
-                    throw new UnprocessableEntityException("Invalid Code " + fachAbteilungsSchluessel.getCode() +
-                            " or Code System for 'Fachabteilungsschlüssel'.");
-                }
-
-                retVal.add(fachlicheOrganisationseinheitCluster);
+                fachlicheOrganisationseinheitCluster.setFachabteilungsschluesselDefiningCode(FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().get(fachAbteilungsSchluessel.getCode()));
+            } else {
+                throw new UnprocessableEntityException("Invalid Code " + fachAbteilungsSchluessel.getCode() +
+                        " or Code System for 'Fachabteilungsschlüssel'.");
             }
+
+            retVal.add(fachlicheOrganisationseinheitCluster);
         }
 
         return retVal;

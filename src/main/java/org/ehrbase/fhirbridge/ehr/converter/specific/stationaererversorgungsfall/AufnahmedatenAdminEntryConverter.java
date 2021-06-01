@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.stationaererversorgungsfall;
 
-import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToAdminEntryConverter;
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.AufnahmedatenAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.AufnahmeanlassDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.AufnahmegrundDefiningCode;
@@ -11,7 +10,7 @@ import org.hl7.fhir.r4.model.Coding;
 import java.util.Optional;
 
 
-public class AufnahmedatenAdminEntryConverter extends EntryEntityConverter<Encounter, AufnahmedatenAdminEntry> {
+public class AufnahmedatenAdminEntryConverter extends EncounterToAdminEntryConverter<AufnahmedatenAdminEntry> {
 
     private static final String AUFNAHME_GRUND_CODE_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/modul-fall/core/CodeSystem/Aufnahmegrund";
     private static final String AUFNAHME_ANLASS_CODE_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Aufnahmeanlass";
@@ -22,8 +21,6 @@ public class AufnahmedatenAdminEntryConverter extends EntryEntityConverter<Encou
 
         AufnahmedatenAdminEntry aufnahmedatenAdminEntry = new AufnahmedatenAdminEntry();
 
-        aufnahmedatenAdminEntry.setDatumUhrzeitDerAufnahmeValue(TimeConverter.convertEncounterTime(encounter));
-
         convertAufnahmegrundDefiningCode(encounter).ifPresent(aufnahmedatenAdminEntry::setAufnahmegrundDefiningCode);
 
         convertAufnahmeanlassDefiningCode(encounter).ifPresent(aufnahmedatenAdminEntry::setAufnahmeanlassDefiningCode);
@@ -33,7 +30,7 @@ public class AufnahmedatenAdminEntryConverter extends EntryEntityConverter<Encou
 
     private Optional<AufnahmegrundDefiningCode> convertAufnahmegrundDefiningCode(Encounter encounter) {
 
-        if (encounter.getReasonCode() == null) {
+        if (!encounter.hasReasonCode()) {
             return Optional.empty();
         }
 
@@ -55,7 +52,7 @@ public class AufnahmedatenAdminEntryConverter extends EntryEntityConverter<Encou
 
     private Optional<AufnahmeanlassDefiningCode> convertAufnahmeanlassDefiningCode(Encounter encounter) {
 
-        if (encounter.getHospitalization() == null) {
+        if (!encounter.hasHospitalization()) {
             return Optional.empty();
         }
 
