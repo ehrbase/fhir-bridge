@@ -21,12 +21,9 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
 
         PatientenaufenthaltComposition retVal = new PatientenaufenthaltComposition();
 
-        if (Encounters.isNotEmpty(encounter.getIdentifier())) {
+        if (Encounters.isNotEmpty(encounter.getIdentifier()) && Encounters.isNotEmpty(encounter.getType())) {
 
-            if (Encounters.isNotEmpty(encounter.getType())) {
-
-                setFallCluster(retVal, encounter);
-            }
+            setFallCluster(retVal, encounter);
         }
 
         retVal.setVersorgungsaufenthalt(new VersorgungsaufenthaltAdminEntryConverter().convert(encounter));
