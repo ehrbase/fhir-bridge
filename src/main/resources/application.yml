@@ -19,10 +19,13 @@ fhir-bridge:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
     security:
       type: basic_auth
-      username: myuser
+      user: myuser
       password: myPassword432
+      admin-user: myadmin
+      admin-password: mySuperAwesomePassword123
     template:
       prefix: classpath:/opt/
+#      force-update: false
   # Security Properties
   security:
     authentication-type: none
@@ -106,6 +109,7 @@ logging:
     com.zaxxer.hikari: warn
     liquibase: warn
     org.apache.camel: warn
+    org.ehrbase.fhirbridge: debug
     org.hibernate: warn
     org.openehealth.ipf: warn
     org.quartz: warn

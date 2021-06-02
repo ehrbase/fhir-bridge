@@ -16,14 +16,11 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.hl7.fhir.r4.model.Patient;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of {@link RouteBuilder} that provides route definitions for transactions
- * linked to {@link Patient} resource.
+ * Implementation of {@link org.apache.camel.builder.RouteBuilder RouteBuilder} that defines routes for transactions
+ * related to {@link org.hl7.fhir.r4.model.Patient Patient} resource.
  *
  * @since 1.0.0
  */
@@ -35,19 +32,17 @@ public class PatientRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // 'Create Patient' route definition
-        from("patient-create:consumer?fhirContext=#fhirContext")
+        // Route: Provide Patient
+        from("patient-provide:consumer?fhirContext=#fhirContext")
+            .routeId("provide-patient-route")
             .onCompletion()
-                .process("auditCreateResourceProcessor")
+                .process("provideResourceAuditHandler")
             .end()
-            .process("resourceProfileValidator")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("patientDao", "create(${body}, ${headers.FhirRequestDetails})"))
-            .process("ehrIdLookupProcessor")
-            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .setBody(header(FhirBridgeConstants.METHOD_OUTCOME));
+            .process("fhirProfileValidator")
+            .process("providePatientPersistenceProcessor")
+            .to("direct:internal-provide-resource");
 
-        // 'Find Patient' route definition
+        // Route: Find Patient
         from("patient-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .choice()
                 .when(isSearchOperation())
@@ -55,7 +50,6 @@ public class PatientRoutes extends AbstractRouteBuilder {
                     .process("bundleProviderResponseProcessor")
                 .otherwise()
                     .to("bean:patientDao?method=read(${body}, ${headers.FhirRequestDetails})");
-
         // @formatter:on
     }
 }

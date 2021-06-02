@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
 
     <!-- HAPI FHIR 5.3.0 -->
@@ -104,5 +104,16 @@
         <addColumn tableName="HFJ_RES_LINK">
             <column name="TARGET_RESOURCE_VERSION" type="bigint"/>
         </addColumn>
+    </changeSet>
+
+    <changeSet id="3" author="subigre">
+        <createTable tableName="FB_RESOURCE_MAP">
+            <column name="RESOURCE_ID" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="COMPOSITION_VERSION_UID" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
     </changeSet>
 </databaseChangeLog>
