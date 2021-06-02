@@ -16,7 +16,7 @@
 
 package org.ehrbase.fhirbridge.camel.component.fhir.medicationstatement;
 
-import org.ehrbase.fhirbridge.fhir.observation.FindObservationTransaction;
+import org.ehrbase.fhirbridge.fhir.medicationstatement.FindMedicationStatementTransaction;
 import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
@@ -29,6 +29,6 @@ import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirCompone
 public class FindMedicationStatementComponent extends CustomFhirComponent<FhirQueryAuditDataset> {
 
     public FindMedicationStatementComponent() {
-        super(new FindObservationTransaction());
+        super(new FindMedicationStatementTransaction());
     }
 }

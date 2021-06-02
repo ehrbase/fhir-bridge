@@ -3,7 +3,7 @@
   "id": "heart-rate",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/heartrate"
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/heart-rate"
     ]
   },
   "text": {
