@@ -45,12 +45,7 @@ public class ConditionRoutes extends AbstractRouteBuilder {
         // Route: Find Condition
         from("condition-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .routeId("find-condition-route")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:conditionDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:conditionDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .process("findConditionProcessor");
 
         // @formatter:on
     }
