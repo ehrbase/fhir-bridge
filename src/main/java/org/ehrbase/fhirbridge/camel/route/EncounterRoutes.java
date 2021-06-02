@@ -32,16 +32,7 @@ public class EncounterRoutes extends AbstractRouteBuilder {
             .process("fhirProfileValidator")
             .to("direct:internal-provide-encounter");
 
-        // 'Find Encounter' route definition
-        from("encounter-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:encounterDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:encounterDao?method=read(${body}, ${headers.FhirRequestDetails})");
-
-        // Internal routes definition
+       // Internal routes definition
         from("direct:internal-provide-encounter")
             .routeId("internal-provide-encounter-route")
             .process("provideEncounterPersistenceProcessor")
@@ -58,6 +49,11 @@ public class EncounterRoutes extends AbstractRouteBuilder {
                 .throwException(UnprocessableEntityException.class, "${exception.message}")
             .end()
             .to("direct:internal-provide-resource-after-converter");
+
+        // 'Find Encounter' route definition
+        from("encounter-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
+                .routeId("find-encounter-route")
+                .process("findEncounterProcessor");
 
         // @formatter:on
     }
