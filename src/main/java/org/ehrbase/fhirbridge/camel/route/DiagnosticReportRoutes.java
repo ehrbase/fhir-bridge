@@ -51,12 +51,8 @@ public class DiagnosticReportRoutes extends AbstractRouteBuilder {
 
         // 'Find Diagnostic Report' route definition
         from("diagnostic-report-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:diagnosticReportDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:diagnosticReportDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .routeId("find-diagnostic-report-route")
+            .process("findDiagnosticReportProcessor");
         // @formatter:on
     }
 }

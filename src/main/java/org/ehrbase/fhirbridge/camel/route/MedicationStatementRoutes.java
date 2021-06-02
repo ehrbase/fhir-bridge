@@ -45,12 +45,7 @@ public class MedicationStatementRoutes extends AbstractRouteBuilder {
         // Route: Find Medication Statement
         from("medication-statement-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .routeId("find-medication-statement-route")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:medicationStatementDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:medicationStatementDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .process("findMedicationStatementProcessor");
 
         // @formatter:on
     }

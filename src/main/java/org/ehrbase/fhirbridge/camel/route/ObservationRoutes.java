@@ -51,12 +51,8 @@ public class ObservationRoutes extends AbstractRouteBuilder {
 
         // 'Find Observation' route definition
         from("observation-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:observationDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:observationDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .routeId("find-observation-route")
+            .process("findObservationProcessor");
         // @formatter:on
     }
 }
