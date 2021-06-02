@@ -41,6 +41,16 @@ public class ConversionService {
                 .convert(resource);
     }
 
+    public Object convertDefaultEncounter(Resource resource) {
+
+        if(!converters.containsKey(Profile.KONTAKT_GESUNDHEIT_EINRICHTUNG)) {
+            throw new ConversionException("No converter available for encounter with profile stationär Versorgungsfall" );
+        }
+
+        return converters.get(Profile.KONTAKT_GESUNDHEIT_EINRICHTUNG)
+                .convert(resource);
+    }
+
     public void registerConverter(Profile profile, RMEntityConverter<?, ?> converter) {
         converters.put(profile, converter);
     }
