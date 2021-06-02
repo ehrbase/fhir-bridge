@@ -25,7 +25,6 @@ import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.def
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.EntlassungsdatenAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.FachlicheOrganisationseinheitCluster;
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.FallstatusDefiningCode;
-import org.ehrbase.fhirbridge.ehr.Composition;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.fall.v1")
@@ -35,7 +34,7 @@ import org.ehrbase.fhirbridge.ehr.Composition;
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Stationärer Versorgungsfall")
-public class StationaererVersorgungsfallComposition implements CompositionEntity, Composition {
+public class StationaererVersorgungsfallComposition implements CompositionEntity {
   /**
    * Path: Stationärer Versorgungsfall/category
    */

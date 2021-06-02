@@ -12,9 +12,9 @@ import java.util.Optional;
  *
  * @since 1.0.0
  */
-public class CreateEncounterAuditStrategy extends GenericFhirAuditStrategy<Encounter> {
+public class ProvideEncounterAuditStrategy extends GenericFhirAuditStrategy<Encounter> {
 
-    public CreateEncounterAuditStrategy() {
+    public ProvideEncounterAuditStrategy() {
         super(true, OperationOutcomeOperations.INSTANCE, encounter -> Optional.of(encounter.getSubject()));
     }
 }

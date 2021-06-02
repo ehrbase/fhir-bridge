@@ -24,17 +24,21 @@ public class CommonRoutes extends RouteBuilder {
             .doCatch(ConversionException.class)
                 .throwException(UnprocessableEntityException.class, "${exception.message}")
             .end()
+            .to("direct:internal-provide-resource-after-converter");
+
+       from("direct:internal-provide-resource-after-converter")
+            .routeId("internal-provide-resource-after-converter-route")
             .choice()
                 .when(header(CamelConstants.COMPOSITION_VERSION_UID).isNotNull())
                     .process(exchange -> {
                         var composition = exchange.getIn().getMandatoryBody(CompositionEntity.class);
                         composition.setVersionUid(new VersionUid(exchange.getIn().getHeader(CamelConstants.COMPOSITION_VERSION_UID, String.class)));
                     })
-                .end()
+               .end()
             .doTry()
-                .to("ehr-composition:producer?operation=mergeCompositionEntity")
+               .to("ehr-composition:producer?operation=mergeCompositionEntity")
             .doCatch(WrongStatusCodeException.class)
-                .throwException(UnprocessableEntityException.class, "${exception.message}")
+               .throwException(UnprocessableEntityException.class, "${exception.message}")
             .end()
             .process("provideResourceResponseProcessor");
 

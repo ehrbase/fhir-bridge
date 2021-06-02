@@ -1,11 +1,13 @@
 package org.ehrbase.fhirbridge.camel.route;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.fhir.support.Encounters;
 import org.hl7.fhir.r4.model.Encounter;
 import org.springframework.stereotype.Component;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 
 /**
  * Implementation of {@link RouteBuilder} that provides route definitions for transactions
@@ -21,37 +23,41 @@ public class EncounterRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // 'Create Encounter' route definition
-        from("encounter-create:consumer?fhirContext=#fhirContext")
-                .onCompletion()
-                    .process("auditCreateResourceProcessor")
-                .end()
-                .process("resourceProfileValidator")
-                .to("direct:process-encounter");
+        // 'Provide Encounter' route definition
+        from("encounter-provide:consumer?fhirContext=#fhirContext")
+            .routeId("provide-encounter-route")
+            .onCompletion()
+                .process("provideResourceAuditHandler")
+            .end()
+            .process("fhirProfileValidator")
+            .to("direct:internal-provide-encounter");
 
         // 'Find Encounter' route definition
         from("encounter-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .choice()
-                    .when(isSearchOperation())
-                        .to("bean:encounterDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                        .process("bundleProviderResponseProcessor")
-                    .otherwise()
-                        .to("bean:encounterDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .choice()
+                .when(isSearchOperation())
+                    .to("bean:encounterDao?method=search(${body}, ${headers.FhirRequestDetails})")
+                    .process("bundleProviderResponseProcessor")
+                .otherwise()
+                    .to("bean:encounterDao?method=read(${body}, ${headers.FhirRequestDetails})");
 
         // Internal routes definition
-        from("direct:process-encounter")
-                .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("encounterDao", "create(${body}, ${headers.FhirRequestDetails})"))
-                .process("ehrIdLookupProcessor")
-                .setHeader(FhirBridgeConstants.PROFILE, method(Encounters.class, "getProfileByKontaktEbene"))
+        from("direct:internal-provide-encounter")
+            .routeId("internal-provide-encounter-route")
+            .process("provideEncounterPersistenceProcessor")
+            .process("ehrIdLookupProcessor")
+            .setHeader(CamelConstants.PROFILE, method(Encounters.class, "getProfileByKontaktEbene"))
+            .doTry()
                 .choice()
-                    .when(header(FhirBridgeConstants.PROFILE).isEqualTo(Profile.KONTAKT_GESUNDHEIT_ABTEILUNG))
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.KONTAKT_GESUNDHEIT_ABTEILUNG))
                         .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-                        .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
-                        .process("resourceResponseProcessor")
                     .otherwise()
                         .to("bean:fhirResourceConversionService?method=convertDefaultEncounter(${body})")
-                        .to("ehr-composition:compositionEndpoint?operation=mergeCompositionEntity")
-                        .process("resourceResponseProcessor");
+            .endDoTry()
+            .doCatch(ConversionException.class)
+                .throwException(UnprocessableEntityException.class, "${exception.message}")
+            .end()
+            .to("direct:internal-provide-resource-after-converter");
 
         // @formatter:on
     }

@@ -23,7 +23,6 @@ import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsaufenthaltAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsfallCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungstellenkontaktCluster;
-import org.ehrbase.fhirbridge.ehr.Composition;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.event_summary.v0")
@@ -33,7 +32,7 @@ import org.ehrbase.fhirbridge.ehr.Composition;
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
 )
 @Template("Patientenaufenthalt")
-public class PatientenaufenthaltComposition implements CompositionEntity, Composition {
+public class PatientenaufenthaltComposition implements CompositionEntity {
   /**
    * Path: Patientenaufenthalt/category
    */
