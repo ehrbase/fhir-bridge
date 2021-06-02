@@ -92,6 +92,11 @@ public class ProcessorConfiguration {
     }
 
     @Bean
+    public FindResourceProcessor<Encounter> findEncounterProcessor(IFhirResourceDao<Encounter> encounterDao) {
+        return new FindResourceProcessor<>(encounterDao);
+    }
+
+    @Bean
     public FindResourceProcessor<Observation> findObservationProcessor(IFhirResourceDao<Observation> observationDao) {
         return new FindResourceProcessor<>(observationDao);
     }
