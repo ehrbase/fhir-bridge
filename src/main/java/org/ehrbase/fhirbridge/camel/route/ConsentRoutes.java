@@ -45,12 +45,7 @@ public class ConsentRoutes extends AbstractRouteBuilder {
         // Route: Find Consent
         from("consent-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
             .routeId("find-consent-route")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:consentDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:consentDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .process("findConsentProcessor");
 
         // @formatter:on
     }

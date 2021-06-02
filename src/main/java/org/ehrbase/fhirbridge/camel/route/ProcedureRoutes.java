@@ -46,12 +46,8 @@ public class ProcedureRoutes extends AbstractRouteBuilder {
 
         // Route: 'Find Procedure'
         from("procedure-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:procedureDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:procedureDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .routeId("find-procedure-route")
+            .process("findProcedureProcessor");
 
         // @formatter:on
     }
