@@ -10,6 +10,7 @@ import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
@@ -38,6 +39,11 @@ public class ProcessorConfiguration {
     @Bean
     public ProvideResourcePersistenceProcessor<DiagnosticReport> provideDiagnosticReportPersistenceProcessor(IFhirResourceDao<DiagnosticReport> diagnosticReportDao) {
         return new ProvideResourcePersistenceProcessor<>(diagnosticReportDao, DiagnosticReport.class, resourceMapRepository);
+    }
+
+    @Bean
+    public ProvideResourcePersistenceProcessor<Encounter> provideEncounterPersistenceProcessor(IFhirResourceDao<Encounter> encounterDao) {
+        return new ProvideResourcePersistenceProcessor<>(encounterDao, Encounter.class, resourceMapRepository);
     }
 
     @Bean
@@ -83,6 +89,11 @@ public class ProcessorConfiguration {
     @Bean
     public FindResourceProcessor<DiagnosticReport> findDiagnosticReportProcessor(IFhirResourceDao<DiagnosticReport> diagnosticReportDao) {
         return new FindResourceProcessor<>(diagnosticReportDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<Encounter> findEncounterProcessor(IFhirResourceDao<Encounter> encounterDao) {
+        return new FindResourceProcessor<>(encounterDao);
     }
 
     @Bean

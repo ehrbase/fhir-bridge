@@ -9,6 +9,7 @@ import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.Encounter;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -55,6 +56,11 @@ public enum Profile {
     PHARMACOLOGICAL_THERAPY_ACE_INHIBITORS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-ace-inhibitors"),
     PHARMACOLOGICAL_THERAPY_ANTICOAGULANTS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-anticoagulants"),
     PHARMACOLOGICAL_THERAPY_IMMUNOGLOBULINS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-immunoglobulins"),
+
+    // Encounter Profiles
+    KONTAKT_GESUNDHEIT_EINRICHTUNG(Encounter.class, null), // as default, has the same link like KONTAKT_GESUNDHEIT_ABTEILUNG
+
+    KONTAKT_GESUNDHEIT_ABTEILUNG(Encounter.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/StructureDefinition/KontaktGesundheitseinrichtung"),
 
     // Observation Profiles
 
