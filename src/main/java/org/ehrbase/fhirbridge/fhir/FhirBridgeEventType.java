@@ -27,6 +27,11 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     FIND_DIAGNOSTIC_REPORT("diagnostic-report-find", "Find Diagnostic Report"),
 
+    // Encounter
+    PROVIDE_ENCOUNTER("encounter-provide", "Provide Encounter"),
+
+    FIND_ENCOUNTER("encounter-find", "Find Encounter"),
+
     // MedicationStatement
 
     PROVIDE_MEDICATION_STATEMENT("medication-statement-provide", "Provide Medication Statement"),

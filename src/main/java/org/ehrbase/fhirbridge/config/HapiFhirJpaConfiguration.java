@@ -39,6 +39,7 @@ import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Group;
 import org.hl7.fhir.r4.model.Location;
 import org.hl7.fhir.r4.model.MedicationStatement;
@@ -120,6 +121,14 @@ public class HapiFhirJpaConfiguration extends BaseR4Config {
         diagnosticReportDao.setResourceType(DiagnosticReport.class);
         diagnosticReportDao.setContext(fhirContext());
         return diagnosticReportDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Encounter> encounterDao() {
+        JpaResourceDao<Encounter> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Encounter.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
     }
 
     @Bean

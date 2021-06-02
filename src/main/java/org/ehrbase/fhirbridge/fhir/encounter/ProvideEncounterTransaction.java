@@ -10,16 +10,16 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
  *
  * @since 1.0.0
  */
-public class CreateEncounterTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class ProvideEncounterTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public CreateEncounterTransaction() {
-        super("encounter-create",
-                "Create Encounter",
+    public ProvideEncounterTransaction() {
+        super("encounter-provide",
+                "Provide Encounter",
                 false,
                 null,
-                new CreateEncounterAuditStrategy(),
+                new ProvideEncounterAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreateEncounterProvider(),
+                new ProvideEncounterProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }
