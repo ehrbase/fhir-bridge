@@ -1,13 +1,16 @@
-package org.ehrbase.fhirbridge.config;
+package org.ehrbase.fhirbridge.config.camel;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
+import org.ehrbase.fhirbridge.camel.processor.FindResourceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourcePersistenceProcessor;
 import org.ehrbase.fhirbridge.core.repository.ResourceMapRepository;
+import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
@@ -15,11 +18,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CamelProcessorConfiguration {
+public class ProcessorConfiguration {
 
     private final ResourceMapRepository resourceMapRepository;
 
-    public CamelProcessorConfiguration(ResourceMapRepository resourceMapRepository) {
+    public ProcessorConfiguration(ResourceMapRepository resourceMapRepository) {
         this.resourceMapRepository = resourceMapRepository;
     }
 
@@ -36,6 +39,11 @@ public class CamelProcessorConfiguration {
     @Bean
     public ProvideResourcePersistenceProcessor<DiagnosticReport> provideDiagnosticReportPersistenceProcessor(IFhirResourceDao<DiagnosticReport> diagnosticReportDao) {
         return new ProvideResourcePersistenceProcessor<>(diagnosticReportDao, DiagnosticReport.class, resourceMapRepository);
+    }
+
+    @Bean
+    public ProvideResourcePersistenceProcessor<Encounter> provideEncounterPersistenceProcessor(IFhirResourceDao<Encounter> encounterDao) {
+        return new ProvideResourcePersistenceProcessor<>(encounterDao, Encounter.class, resourceMapRepository);
     }
 
     @Bean
@@ -61,5 +69,55 @@ public class CamelProcessorConfiguration {
     @Bean
     public ProvideResourcePersistenceProcessor<QuestionnaireResponse> provideQuestionnaireResponsePersistenceProcessor(IFhirResourceDao<QuestionnaireResponse> questionnaireResponseDao) {
         return new ProvideResourcePersistenceProcessor<>(questionnaireResponseDao, QuestionnaireResponse.class, resourceMapRepository);
+    }
+
+    @Bean
+    public FindResourceProcessor<AuditEvent> findAuditEventProcessor(IFhirResourceDao<AuditEvent> auditEventDao) {
+        return new FindResourceProcessor<>(auditEventDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<Condition> findConditionProcessor(IFhirResourceDao<Condition> conditionDao) {
+        return new FindResourceProcessor<>(conditionDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<Consent> findConsentProcessor(IFhirResourceDao<Consent> consentDao) {
+        return new FindResourceProcessor<>(consentDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<DiagnosticReport> findDiagnosticReportProcessor(IFhirResourceDao<DiagnosticReport> diagnosticReportDao) {
+        return new FindResourceProcessor<>(diagnosticReportDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<Encounter> findEncounterProcessor(IFhirResourceDao<Encounter> encounterDao) {
+        return new FindResourceProcessor<>(encounterDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<Observation> findObservationProcessor(IFhirResourceDao<Observation> observationDao) {
+        return new FindResourceProcessor<>(observationDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<MedicationStatement> findMedicationStatementProcessor(IFhirResourceDao<MedicationStatement> medicationStatementDao) {
+        return new FindResourceProcessor<>(medicationStatementDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<Patient> findPatientProcessor(IFhirResourceDao<Patient> patientDao) {
+        return new FindResourceProcessor<>(patientDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<Procedure> findProcedureProcessor(IFhirResourceDao<Procedure> procedureDao) {
+        return new FindResourceProcessor<>(procedureDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<QuestionnaireResponse> findQuestionnaireResponseProcessor(IFhirResourceDao<QuestionnaireResponse> questionnaireResponseDao) {
+        return new FindResourceProcessor<>(questionnaireResponseDao);
     }
 }
