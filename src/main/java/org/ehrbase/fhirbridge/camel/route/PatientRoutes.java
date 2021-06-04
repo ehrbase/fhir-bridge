@@ -44,12 +44,9 @@ public class PatientRoutes extends AbstractRouteBuilder {
 
         // Route: Find Patient
         from("patient-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:patientDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:patientDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .routeId("find-patient-route")
+            .process("findPatientProcessor");
+
         // @formatter:on
     }
 }

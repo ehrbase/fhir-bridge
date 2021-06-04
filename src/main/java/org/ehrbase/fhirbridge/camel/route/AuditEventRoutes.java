@@ -35,8 +35,8 @@ public class AuditEventRoutes extends AbstractRouteBuilder {
 
         // 'Find AuditEvent' route definition
         from("audit-event-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .to("bean:auditEventDao?method=search(${body}, ${headers.FhirRequestDetails})")
-            .process("bundleProviderResponseProcessor");
+            .routeId("find-audit-event-route")
+            .process("findAuditEventProcessor");
 
         // @formatter:on
     }
