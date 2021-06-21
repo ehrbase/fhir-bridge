@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
-import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes.KrankheitsanzeichenCode;
 
 public enum UntersuchterAnalytDefiningCode implements EnumValueSet {
   FERRITIN_MASS_VOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("Ferritin [Mass/volume] in Serum or Plasma by Immunoassay", "", "LOINC", "20567-4"),
@@ -275,7 +274,6 @@ public enum UntersuchterAnalytDefiningCode implements EnumValueSet {
     }
     return untersuchterAnalytDefiningCodeHashMap;
   }
-
 
   public String getValue() {
      return this.value ;

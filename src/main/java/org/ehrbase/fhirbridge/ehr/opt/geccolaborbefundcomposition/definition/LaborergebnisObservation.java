@@ -19,8 +19,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.laboratory_test_result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:53:24.059101+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-06-21T14:47:54.203209+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class LaborergebnisObservation implements EntryEntity {
   /**
@@ -48,8 +48,8 @@ public class LaborergebnisObservation implements EntryEntity {
 
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt
-   * Description: Ergebnis eines Labortests für einen bestimmten Analytwert.
-   * Comment: Beispiele: 'Natrium', 'Leukozytenzahl', 'T3'. Üblicherweise über eine externe Terminologie codiert.
+   * Description: Ergebnis einer Laboranalyse für einen bestimmten Analytwert.
+   * Comment: Beispiele: "Natrium", "Leukozytenzahl", "T3". Üblicherweise über eine externe Terminologie codiert.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1 and name/value='Pro Laboranalyt']")
   private ProLaboranalytCluster proLaboranalyt;

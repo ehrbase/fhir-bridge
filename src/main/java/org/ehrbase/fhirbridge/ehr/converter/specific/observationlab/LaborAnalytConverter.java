@@ -26,7 +26,7 @@ public class LaborAnalytConverter {
         setMesswert(observation, proLaboranalytCluster);
         proLaboranalytCluster.setUntersuchterAnalytDefiningCode(getUntersuchterAnalyt(observation));
         setInterpretationDefiningCode(observation, proLaboranalytCluster);
-        proLaboranalytCluster.setZeitpunktValidationValue(TimeConverter.convertObservationTime(observation));
+        proLaboranalytCluster.setZeitpunktDerValidierungValue(TimeConverter.convertObservationTime(observation));
         setZeitpunktErgebnisStatus(observation, proLaboranalytCluster);
         return proLaboranalytCluster;
     }

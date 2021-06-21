@@ -25,9 +25,11 @@ public class ProLaboranalytClusterContainment extends Containment {
 
   public SelectAqlField<NullFlavour> INTERPRETATION_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProLaboranalytCluster.class, "/items[at0004]/null_flavour|defining_code", "interpretationNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<TemporalAccessor> ZEITPUNKT_VALIDATION_VALUE = new AqlFieldImp<TemporalAccessor>(ProLaboranalytCluster.class, "/items[at0025]/value|value", "zeitpunktValidationValue", TemporalAccessor.class, this);
+  public SelectAqlField<NullFlavour> TESTMETHODE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProLaboranalytCluster.class, "/items[at0028]/null_flavour|defining_code", "testmethodeNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<NullFlavour> ZEITPUNKT_VALIDATION_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProLaboranalytCluster.class, "/items[at0025]/null_flavour|defining_code", "zeitpunktValidationNullFlavourDefiningCode", NullFlavour.class, this);
+  public SelectAqlField<TemporalAccessor> ZEITPUNKT_DER_VALIDIERUNG_VALUE = new AqlFieldImp<TemporalAccessor>(ProLaboranalytCluster.class, "/items[at0025]/value|value", "zeitpunktDerValidierungValue", TemporalAccessor.class, this);
+
+  public SelectAqlField<NullFlavour> ZEITPUNKT_DER_VALIDIERUNG_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProLaboranalytCluster.class, "/items[at0025]/null_flavour|defining_code", "zeitpunktDerValidierungNullFlavourDefiningCode", NullFlavour.class, this);
 
   public SelectAqlField<NullFlavour> ERGEBNIS_STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProLaboranalytCluster.class, "/items[at0005]/null_flavour|defining_code", "ergebnisStatusNullFlavourDefiningCode", NullFlavour.class, this);
 
