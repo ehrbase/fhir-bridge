@@ -16,21 +16,21 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.laboratory_test_analyte.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:53:24.142486+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-06-21T14:47:54.258914+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class ProLaboranalytCluster implements LocatableEntity {
   /**
-   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/untersuchter Analyt
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Untersuchter Analyt
    * Description: Der Name des untersuchten Analyts.
-   * Comment: Der Wert dieses Elements wird normalerweise meist durch eine Spezialisierung, durch einer Vorlage oder zur Laufzeit geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum','Hämoglobin'. 
+   * Comment: Der Wert dieses Elements wird normalerweise, meist durch eine Spezialisierung, in einem Template oder zur Laufzeit der Anwendung geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum', 'Hämoglobin'. 
    * Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.
    */
   @Path("/items[at0024]/value|defining_code")
   private UntersuchterAnalytDefiningCode untersuchterAnalytDefiningCode;
 
   /**
-   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/untersuchter Analyt/null_flavour
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Untersuchter Analyt/null_flavour
    */
   @Path("/items[at0024]/null_flavour|defining_code")
   private NullFlavour untersuchterAnalytNullFlavourDefiningCode;
@@ -63,18 +63,24 @@ public class ProLaboranalytCluster implements LocatableEntity {
   private NullFlavour interpretationNullFlavourDefiningCode;
 
   /**
-   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Zeitpunkt Validation
-   * Description: Datum und Zeit, an dem das Analyseergebnis im Labor medizinisch validiert wurde.
-   * Comment: In vielen Gerichtsbarkeiten wird angenommen, dass der 'Ergebnisstatus' die medizinische Validation einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Testmethode/null_flavour
    */
-  @Path("/items[at0025]/value|value")
-  private TemporalAccessor zeitpunktValidationValue;
+  @Path("/items[at0028]/null_flavour|defining_code")
+  private NullFlavour testmethodeNullFlavourDefiningCode;
 
   /**
-   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Zeitpunkt Validation/null_flavour
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Zeitpunkt der Validierung
+   * Description: Datum und Zeit, an dem das Analyseergebnis im Labor medizinisch validiert wurde.
+   * Comment: In vielen Gerichtsbarkeiten wird angenommen, dass der 'Ergebnisstatus' die medizinische Validierung einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet.
+   */
+  @Path("/items[at0025]/value|value")
+  private TemporalAccessor zeitpunktDerValidierungValue;
+
+  /**
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Zeitpunkt der Validierung/null_flavour
    */
   @Path("/items[at0025]/null_flavour|defining_code")
-  private NullFlavour zeitpunktValidationNullFlavourDefiningCode;
+  private NullFlavour zeitpunktDerValidierungNullFlavourDefiningCode;
 
   /**
    * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Ergebnis-Status/null_flavour
@@ -103,7 +109,7 @@ public class ProLaboranalytCluster implements LocatableEntity {
 
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Kommentar
-   * Description: Kommentar zum Analyt-Resultat, soweit noch nicht in anderen Feldern erfasst.
+   * Description: Kommentar zum Analyt-Ergebnis, soweit noch nicht in anderen Feldern erfasst.
    */
   @Path("/items[at0003]")
   private List<ProLaboranalytKommentarElement> kommentar;
@@ -189,21 +195,30 @@ public class ProLaboranalytCluster implements LocatableEntity {
      return this.interpretationNullFlavourDefiningCode ;
   }
 
-  public void setZeitpunktValidationValue(TemporalAccessor zeitpunktValidationValue) {
-     this.zeitpunktValidationValue = zeitpunktValidationValue;
+  public void setTestmethodeNullFlavourDefiningCode(
+      NullFlavour testmethodeNullFlavourDefiningCode) {
+     this.testmethodeNullFlavourDefiningCode = testmethodeNullFlavourDefiningCode;
   }
 
-  public TemporalAccessor getZeitpunktValidationValue() {
-     return this.zeitpunktValidationValue ;
+  public NullFlavour getTestmethodeNullFlavourDefiningCode() {
+     return this.testmethodeNullFlavourDefiningCode ;
   }
 
-  public void setZeitpunktValidationNullFlavourDefiningCode(
-      NullFlavour zeitpunktValidationNullFlavourDefiningCode) {
-     this.zeitpunktValidationNullFlavourDefiningCode = zeitpunktValidationNullFlavourDefiningCode;
+  public void setZeitpunktDerValidierungValue(TemporalAccessor zeitpunktDerValidierungValue) {
+     this.zeitpunktDerValidierungValue = zeitpunktDerValidierungValue;
   }
 
-  public NullFlavour getZeitpunktValidationNullFlavourDefiningCode() {
-     return this.zeitpunktValidationNullFlavourDefiningCode ;
+  public TemporalAccessor getZeitpunktDerValidierungValue() {
+     return this.zeitpunktDerValidierungValue ;
+  }
+
+  public void setZeitpunktDerValidierungNullFlavourDefiningCode(
+      NullFlavour zeitpunktDerValidierungNullFlavourDefiningCode) {
+     this.zeitpunktDerValidierungNullFlavourDefiningCode = zeitpunktDerValidierungNullFlavourDefiningCode;
+  }
+
+  public NullFlavour getZeitpunktDerValidierungNullFlavourDefiningCode() {
+     return this.zeitpunktDerValidierungNullFlavourDefiningCode ;
   }
 
   public void setErgebnisStatusNullFlavourDefiningCode(

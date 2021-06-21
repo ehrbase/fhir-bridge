@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
-import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes.KrankheitsanzeichenCode;
 
 public enum InterpretationDefiningCode implements EnumValueSet {
   CARRIER("Carrier", "", "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation", "CAR"),
