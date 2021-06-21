@@ -4,6 +4,7 @@ import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
@@ -50,17 +51,24 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
     }
 
     void validateEqualPatientIds(Bundle bundle) {
-        List<Reference> subjects = new ArrayList<>();
+        List<Identifier> patientIds = new ArrayList<>();
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
-            Resources.getSubject(entry.getResource())
-                    .ifPresent(subjects::add);
+            patientIds.add(Resources.getSubject(entry.getResource())
+                    .map(Reference::getIdentifier)
+                    .orElseThrow(() -> new UnprocessableEntityException("Ensure that the subject id has the following format :         " +
+                            "\"subject\": {\n" +
+                            "          \"identifier\": {\n" +
+                            "            \"system\": \"urn:ietf:rfc:4122\",\n" +
+                            "            \"value\": \"example\"\n" +
+                            "          }\n" +
+                            "        },")));
         }
-        checkPatientIdsIdentical(subjects);
+        checkPatientIdsIdentical(patientIds);
     }
 
-    private void checkPatientIdsIdentical(List<Reference> subjects) {
-        for (Reference reference : subjects) {
-            if (!reference.equals(subjects.get(0))) {
+    private void checkPatientIdsIdentical(List<Identifier> patientIds) {
+        for (Identifier id : patientIds) {
+            if (!id.getValue().equals(patientIds.get(0).getValue())) {
                 throw new InternalErrorException("subject.reference ids all have to be equal! A Fhir Bridge Bundle cannot reference to different Patients !");
             }
         }
