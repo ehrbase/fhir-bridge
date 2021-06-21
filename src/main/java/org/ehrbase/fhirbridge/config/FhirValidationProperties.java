@@ -17,6 +17,8 @@ public class FhirValidationProperties {
 
     private boolean errorForUnknownProfiles = false;
 
+    private boolean optionalIdentifier = false;
+
     @NestedConfigurationProperty
     private final Terminology terminology = new Terminology();
 
@@ -42,6 +44,14 @@ public class FhirValidationProperties {
 
     public void setErrorForUnknownProfiles(boolean errorForUnknownProfiles) {
         this.errorForUnknownProfiles = errorForUnknownProfiles;
+    }
+
+    public boolean isOptionalIdentifier() {
+        return optionalIdentifier;
+    }
+
+    public void setOptionalIdentifier(boolean optionalIdentifier) {
+        this.optionalIdentifier = optionalIdentifier;
     }
 
     public Terminology getTerminology() {

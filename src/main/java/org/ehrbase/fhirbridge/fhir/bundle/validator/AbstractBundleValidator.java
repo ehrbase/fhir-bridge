@@ -5,10 +5,10 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,29 +50,18 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
     }
 
     void validateEqualPatientIds(Bundle bundle) {
-        List<String> patientIds = new ArrayList<>();
+        List<Reference> subjects = new ArrayList<>();
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
-            Resources.getSubjectIdentifier(entry.getResource())
-                    .ifPresent(identifier -> patientIds.add(identifier.getValue()));
+            Resources.getSubject(entry.getResource())
+                    .ifPresent(subjects::add);
         }
-        checkPatientIdsIdentical(patientIds);
+        checkPatientIdsIdentical(subjects);
     }
 
-    private void checkPatientIdsIdentical(List<String> patientIds) {
-        for (String id : patientIds) {
-            try {
-                if (!id.equals(patientIds.get(0))) {
-                    throw new InternalErrorException("subject.reference ids all have to be equal! A Fhir Bridge Bundle cannot reference to different Patients !");
-                }
-            }catch (NullPointerException nullPointerException) {
-                throw new UnprocessableEntityException("Ensure that the subject id has the following format :         " +
-                        "\"subject\": {\n" +
-                        "          \"identifier\": {\n" +
-                        "            \"system\": \"urn:ietf:rfc:4122\",\n" +
-                        "            \"value\": \"example\"\n" +
-                        "          }\n" +
-                        "        },");
-
+    private void checkPatientIdsIdentical(List<Reference> subjects) {
+        for (Reference reference : subjects) {
+            if (!reference.equals(subjects.get(0))) {
+                throw new InternalErrorException("subject.reference ids all have to be equal! A Fhir Bridge Bundle cannot reference to different Patients !");
             }
         }
     }
