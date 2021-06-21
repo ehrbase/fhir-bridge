@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.procedure;
 
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
@@ -50,10 +51,10 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     @Test
     void createWithNonExistingSubject() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-procedure-with-non-existing-subject.json");
-        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
 
-        assertEquals("HTTP 422 : EhrId not found for subject '123456789'", exception.getMessage());
+        assertNotNull(outcome.getId());
+        assertEquals(true, outcome.getCreated());
     }
 
     @Override
