@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+@SuppressWarnings("java:S6212")
 public abstract class AbstractBundleValidator implements FhirTransactionValidator {
 
     @Override
@@ -43,7 +44,7 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
         memberValidator.addFullUrls(entry.getFullUrl());
         if (isObservation(entry)) {
             Observation observation = (Observation) entry.getResource();
-            if (observation.getHasMember().size() > 0) {
+            if (!observation.getHasMember().isEmpty()) {
                 memberValidator.setHasMembersList(observation.getHasMember());
                 memberValidator.deleteFullUrl(entry.getFullUrl()); //Since the Observation is not a Member of itself
             }
@@ -53,7 +54,7 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
     void validateEqualPatientIds(Bundle bundle) {
         List<Identifier> patientIds = new ArrayList<>();
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
-            patientIds.add(Resources.getSubject(entry.getResource())
+            Identifier identifier = Resources.getSubject(entry.getResource())
                     .map(Reference::getIdentifier)
                     .orElseThrow(() -> new UnprocessableEntityException("Ensure that the subject id has the following format :         " +
                             "\"subject\": {\n" +
@@ -61,7 +62,9 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
                             "            \"system\": \"urn:ietf:rfc:4122\",\n" +
                             "            \"value\": \"example\"\n" +
                             "          }\n" +
-                            "        },")));
+                            "        },"));
+
+            patientIds.add(identifier);
         }
         checkPatientIdsIdentical(patientIds);
     }
