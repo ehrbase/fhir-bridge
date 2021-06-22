@@ -62,6 +62,10 @@ public class EhrIdLookupProcessor implements Processor, MessageSourceAware {
             identifier = handleOtherResourceIdentifier(resource);
         }
 
+        if (!identifier.hasSystem() || !identifier.hasValue()) {
+            throw new UnprocessableEntityException(messages.getMessage("validation.subject.identifierRequired"));
+        }
+
         UUID ehrId = findEhrId(identifier)
                 .orElseGet(() -> createEhr(identifier));
 
