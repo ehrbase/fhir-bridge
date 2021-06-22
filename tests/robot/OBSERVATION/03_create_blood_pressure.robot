@@ -47,7 +47,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	# FIELD/PATH					VALUE			ISSUE	HTTP	ERROR MESSAGE
 	# 												INDEX	CODE
 	$.subject.identifier.value		missing			0		422		Subject identifier is required
-	$.subject.identifier.system		missing			0		422		EhrId not found for subject '[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+	$.subject.identifier.system		missing			0		422		Subject identifier is required
 	# Deprecated: $.subject.identifier.value		foobar			0		422		EhrId not found for subject 'foobar'
 	$.subject.identifier.value		${EMPTY}		0		422		@value cannot be empty    Observation.subject.identifier.value
 	$.subject.identifier.value		${{ [] }}		0		422		This property must be an simple value, not an array    Observation.subject.identifier.value
