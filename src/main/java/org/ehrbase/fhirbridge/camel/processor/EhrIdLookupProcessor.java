@@ -18,7 +18,6 @@ import org.ehrbase.fhirbridge.core.repository.PatientIdRepository;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Patient;
-import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
 import org.springframework.context.MessageSource;
@@ -56,13 +55,13 @@ public class EhrIdLookupProcessor implements Processor, MessageSourceAware {
         Identifier identifier;
         if (Resources.isPatient(resource)) {
             identifier = handlePatientIdentifier((Patient) resource);
-        } else if (Resources.isQuestionnaireResponse(resource) && Resources.isCovid19Questionnaire((QuestionnaireResponse) resource)) {
+        } else if (Resources.isCovid19Questionnaire(resource)) {
             identifier = generateRandomIdentifier();
         } else {
             identifier = handleOtherResourceIdentifier(resource);
         }
 
-        if (!identifier.hasSystem() || !identifier.hasValue()) {
+        if (!isValidIdentifier(identifier)) {
             throw new UnprocessableEntityException(messages.getMessage("validation.subject.identifierRequired"));
         }
 
@@ -121,6 +120,10 @@ public class EhrIdLookupProcessor implements Processor, MessageSourceAware {
         PartySelf subject = new PartySelf(externalRef);
         EhrStatus ehrStatus = new EhrStatus("openEHR-EHR-EHR_STATUS.generic.v1", new DvText("EHR Status"), subject, true, true, null);
         return openEhrClient.ehrEndpoint().createEhr(ehrStatus);
+    }
+
+    private boolean isValidIdentifier(Identifier identifier) {
+        return identifier.hasValue() && identifier.hasSystem();
     }
 
     @Override
