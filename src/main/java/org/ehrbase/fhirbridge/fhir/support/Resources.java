@@ -42,8 +42,9 @@ public class Resources {
         return resource != null && resource.getResourceType() == ResourceType.QuestionnaireResponse;
     }
 
-    public static boolean isCovid19Questionnaire(QuestionnaireResponse questionnaireResponse) {
-        return questionnaireResponse != null && StringUtils.contains(questionnaireResponse.getQuestionnaire(), COVID_19_QUESTIONNAIRE_URL);
+    public static boolean isCovid19Questionnaire(Resource resource) {
+        return isQuestionnaireResponse(resource) &&
+                StringUtils.contains(((QuestionnaireResponse) resource).getQuestionnaire(), COVID_19_QUESTIONNAIRE_URL);
     }
 
     public static Optional<Reference> getSubject(Resource resource) {

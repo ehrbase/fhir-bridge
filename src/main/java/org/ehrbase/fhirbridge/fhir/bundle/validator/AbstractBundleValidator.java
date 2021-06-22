@@ -4,9 +4,7 @@ import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Bundle;
-import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 
@@ -15,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-@SuppressWarnings("java:S6212")
 public abstract class AbstractBundleValidator implements FhirTransactionValidator {
 
     @Override
@@ -52,27 +49,29 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
     }
 
     void validateEqualPatientIds(Bundle bundle) {
-        List<Identifier> patientIds = new ArrayList<>();
+        List<String> patientIds = new ArrayList<>();
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
-            Identifier identifier = Resources.getSubject(entry.getResource())
-                    .map(Reference::getIdentifier)
-                    .orElseThrow(() -> new UnprocessableEntityException("Ensure that the subject id has the following format :         " +
-                            "\"subject\": {\n" +
-                            "          \"identifier\": {\n" +
-                            "            \"system\": \"urn:ietf:rfc:4122\",\n" +
-                            "            \"value\": \"example\"\n" +
-                            "          }\n" +
-                            "        },"));
-
-            patientIds.add(identifier);
+            Resources.getSubject(entry.getResource())
+                    .ifPresent(identifier -> patientIds.add(identifier.getIdentifier().getValue()));
         }
         checkPatientIdsIdentical(patientIds);
     }
 
-    private void checkPatientIdsIdentical(List<Identifier> patientIds) {
-        for (Identifier id : patientIds) {
-            if (!id.getValue().equals(patientIds.get(0).getValue())) {
-                throw new InternalErrorException("subject.reference ids all have to be equal! A Fhir Bridge Bundle cannot reference to different Patients !");
+    private void checkPatientIdsIdentical(List<String> patientIds) {
+        for (String id : patientIds) {
+            try {
+                if (!id.equals(patientIds.get(0))) {
+                    throw new InternalErrorException("subject.reference ids all have to be equal! A Fhir Bridge Bundle cannot reference to different Patients !");
+                }
+            } catch (NullPointerException nullPointerException) {
+                throw new UnprocessableEntityException("Ensure that the subject id has the following format :         " +
+                        "\"subject\": {\n" +
+                        "          \"identifier\": {\n" +
+                        "            \"system\": \"urn:ietf:rfc:4122\",\n" +
+                        "            \"value\": \"example\"\n" +
+                        "          }\n" +
+                        "        },");
+
             }
         }
     }

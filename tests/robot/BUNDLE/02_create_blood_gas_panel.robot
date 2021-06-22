@@ -177,30 +177,30 @@ ${randinteger}                  ${12345}
 	# FIELD/PATH									VALUE							HTTP
 	# 																				CODE
     # invalid cases for value
-    $.entry.resource.subject.identifier.value		${EMPTY}						422
-    $.entry.resource.subject.identifier.value		${{ [] }}						422
-    $.entry.resource.subject.identifier.value		${{ {} }}						422
-    $.entry.resource.subject.identifier.value		${123}							422
+    $.entry[0].resource.subject.identifier.value		${EMPTY}						422
+    $.entry[0].resource.subject.identifier.value		${{ [] }}						422
+    $.entry[0].resource.subject.identifier.value		${{ {} }}						422
+    $.entry[0].resource.subject.identifier.value		${123}							422
 
 	# invalid cases for system
-    $.entry.resource.subject.identifier.system		foobar							422
-    $.entry.resource.subject.identifier.system		${EMPTY}						422
-    $.entry.resource.subject.identifier.system		${{ [] }}						422
-    $.entry.resource.subject.identifier.system		${{ {} }}						422
-    $.entry.resource.subject.identifier.system		${123}							422
+    $.entry[0].resource.subject.identifier.system		foobar							422
+    $.entry[0].resource.subject.identifier.system		${EMPTY}						422
+    $.entry[0].resource.subject.identifier.system		${{ [] }}						422
+    $.entry[0].resource.subject.identifier.system		${{ {} }}						422
+    $.entry[0].resource.subject.identifier.system		${123}							422
 
 	# invalid cases for identifier
-    $.entry.resource.subject.identifier				missing							422
-    $.entry.resource.subject.identifier				${EMPTY}						422
-    $.entry.resource.subject.identifier				${{ [] }}						422
-    $.entry.resource.subject.identifier				${{ {} }}						422
-    $.entry.resource.subject.identifier				${123}							422
+    $.entry[0].resource.subject.identifier				missing							422
+    $.entry[0].resource.subject.identifier				${EMPTY}						422
+    $.entry[0].resource.subject.identifier				${{ [] }}						422
+    $.entry[0].resource.subject.identifier				${{ {} }}						422
+    $.entry[0].resource.subject.identifier				${123}							422
 
 	# invalid cases for subject
-    $.entry.resource.subject						${EMPTY}						422
-    $.entry.resource.subject						${{ [] }}						422
-    $.entry.resource.subject						${{ {} }}						422
-    $.entry.resource.subject						${123}							422
+    $.entry[0].resource.subject						${EMPTY}						422
+    $.entry[0].resource.subject						${{ [] }}						422
+    $.entry[0].resource.subject						${{ {} }}						422
+    $.entry[0].resource.subject						${123}							422
 	
 
 
