@@ -48,7 +48,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	# 												INDEX	CODE
 	$.subject.identifier.value		missing			0		422		Subject identifier is required
 	$.subject.identifier.system		missing			0		422		EhrId not found for subject '[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
-	$.subject.identifier.value		foobar			0		422		EhrId not found for subject 'foobar'
+	# Deprecated: $.subject.identifier.value		foobar			0		422		EhrId not found for subject 'foobar'
 	$.subject.identifier.value		${EMPTY}		0		422		@value cannot be empty    Observation.subject.identifier.value
 	$.subject.identifier.value		${{ [] }}		0		422		This property must be an simple value, not an array    Observation.subject.identifier.value
 	$.subject.identifier.value		${{ {} }}		0		422		This property must be an simple value, not an object    Observation.subject.identifier.value
@@ -65,7 +65,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
     $.subject						${123}			0		422		The property subject must be an Object, not a primitive property    Observation.subject
 
 	# comment: random uuid																			 regex for uuid
-	$.subject.identifier.value    ${{str(uuid.uuid4())}}    0    422    EhrId not found for subject '[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+	# Deprecated: $.subject.identifier.value    ${{str(uuid.uuid4())}}    0    422    EhrId not found for subject '[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 	
 
 002 Create Blood Pressure (Invalid/Missing 'resourceType')
