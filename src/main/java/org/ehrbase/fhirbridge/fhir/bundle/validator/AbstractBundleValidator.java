@@ -13,6 +13,7 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @SuppressWarnings("java:S6212")
 public abstract class AbstractBundleValidator implements FhirTransactionValidator {
@@ -51,7 +52,7 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
     }
 
     void validateEqualPatientIds(Bundle bundle) {
-        Identifier subject = null;
+        Optional<Identifier> subject = Optional.empty();
 
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
             Identifier current = Resources.getSubject(entry.getResource())
@@ -64,11 +65,11 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
                             "          }\n" +
                             "        },"));
 
-            if (subject == null) {
-                subject = current;
-            } else if (!StringUtils.equals(subject.getValue(), current.getValue())) {
+            if (subject.isPresent() && !StringUtils.equals(subject.get().getValue(), current.getValue())) {
                 throw new InternalErrorException("subject.reference ids all have to be equal! A Fhir Bridge Bundle cannot reference to different Patients !");
             }
+
+            subject = Optional.of(current);
         }
     }
 
