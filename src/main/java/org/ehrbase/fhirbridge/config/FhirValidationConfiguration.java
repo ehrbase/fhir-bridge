@@ -15,6 +15,7 @@ import org.hl7.fhir.common.hapi.validation.support.PrePopulatedValidationSupport
 import org.hl7.fhir.common.hapi.validation.support.RemoteTerminologyServiceValidationSupport;
 import org.hl7.fhir.common.hapi.validation.support.ValidationSupportChain;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
+import org.hl7.fhir.r4.model.ElementDefinition;
 import org.hl7.fhir.r4.model.StructureDefinition;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +24,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * {@link Configuration Configuration} for FHIR validation.
@@ -71,6 +74,9 @@ public class FhirValidationConfiguration {
         try {
             for (Resource resource : applicationContext.getResources("classpath:/profiles/*")) {
                 StructureDefinition profile = parser.parseResource(StructureDefinition.class, resource.getInputStream());
+                if (properties.isOptionalIdentifier()) {
+                    modifyProfile(profile);
+                }
                 prePopulatedValidationSupport.addStructureDefinition(profile);
             }
         } catch (IOException e) {
@@ -93,6 +99,14 @@ public class FhirValidationConfiguration {
         }
 
         return new CachingValidationSupport(validationSupportChain);
+    }
+
+    private void modifyProfile(StructureDefinition profile) {
+        Predicate<? super ElementDefinition> modPredicate = e -> e.hasPath() && e.getPath().endsWith(".identifier") && e.getMin() > 0;
+        Consumer<? super ElementDefinition> modAction = e -> e.setMin(0);
+
+        profile.getSnapshot().getElement().stream().filter(modPredicate).forEach(modAction);
+        profile.getDifferential().getElement().stream().filter(modPredicate).forEach(modAction);
     }
 
     private boolean isTerminologyValidationEnabled() {

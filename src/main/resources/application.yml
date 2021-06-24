@@ -38,6 +38,7 @@ fhir-bridge:
 #      any-extensions-allowed:
 #      error-for-unknown-profiles:
 #      failed-on-severity:
+#      optional-identifier:
 #      terminology:
 #        mode:
 #        server-base-url:
