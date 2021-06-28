@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4a3b60bc-e061-4b50-80a7-67bca2a95dcb",
+		"_postman_id": "758479b8-b438-4a2a-a129-c12ee29d8d51",
 		"name": "fhir-bridge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -195,7 +195,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"resourceType\": \"Bundle\",\r\n    \"id\": \"bundle-transaction-bga\",\r\n    \"meta\": {\r\n        \"lastUpdated\": \"2020-09-24T05:33:00Z\"\r\n    },\r\n    \"type\": \"transaction\",\r\n    \"entry\": [\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f0a\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"24336-0_gasPanelBldA\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://loinc.org\",\r\n                                \"code\": \"26436-6\"\r\n                            },\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"laboratory\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"24336-0\",\r\n                            \"display\": \"Gas panel (BldA)\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Gas panel - Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"hasMember\": [\r\n                    {\r\n                        \"reference\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f01\"\r\n                    },\r\n                    {\r\n                        \"reference\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f02\"\r\n                    },\r\n                    {\r\n                        \"reference\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f03\"\r\n                    },\r\n                    {\r\n                        \"reference\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f04\"\r\n                    }\r\n                ]\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f01\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"2744-1_pH\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://loinc.org\",\r\n                                \"code\": \"26436-6\"\r\n                            },\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"laboratory\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2744-1\",\r\n                            \"display\": \"pH (BldA)\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"pH of Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"valueQuantity\": {\r\n                    \"value\": 7.4,\r\n                    \"unit\": \"pH\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"[pH]\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f02\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"2019-8_paCO2\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://loinc.org\",\r\n                                \"code\": \"26436-6\"\r\n                            },\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"laboratory\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2019-8\",\r\n                            \"display\": \"CO2 (BldA) [Partial pressure]\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Carbon dioxide [Partial pressure] in Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"valueQuantity\": {\r\n                    \"value\": 44,\r\n                    \"unit\": \"mmHg\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"mm[Hg]\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f03\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"2703-7_paO2\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://loinc.org\",\r\n                                \"code\": \"26436-6\"\r\n                            },\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"laboratory\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2703-7\",\r\n                            \"display\": \"Oxygen (BldA) [Partial pressure]\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Oxygen [Partial pressure] in Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"valueQuantity\": {\r\n                    \"value\": 67,\r\n                    \"unit\": \"mmHg\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"mm[Hg]\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:61ebe359-bfdc-4613-8bf2-c5e300945f04\",\r\n            \"resource\": {\r\n                \"resourceType\": \"Observation\",\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation\"\r\n                    ]\r\n                },\r\n                \"identifier\": [\r\n                    {\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n                                    \"code\": \"OBI\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"value\": \"2708-6_oxygenSaturation\",\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        }\r\n                    }\r\n                ],\r\n                \"status\": \"final\",\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                                \"code\": \"vital-signs\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"system\": \"http://loinc.org\",\r\n                            \"code\": \"2708-6\",\r\n                            \"display\": \"Oxygen saturation in Arterial blood\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Oxygen saturation in Arterial blood\"\r\n                },\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"{{patientId}}\"\r\n                    }\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"valueQuantity\": {\r\n                    \"value\": 98,\r\n                    \"unit\": \"%\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"code\": \"%\"\r\n                }\r\n            },\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            }\r\n        }\r\n    ]\r\n}",
+									"raw": "{\r\n    \"entry\": [\r\n        {\r\n            \"fullUrl\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1c349d\",\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            },\r\n            \"resource\": {\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"code\": \"26436-6\",\r\n                                \"system\": \"http://loinc.org\"\r\n                            },\r\n                            {\r\n                                \"code\": \"laboratory\",\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"code\": \"24336-0\",\r\n                            \"display\": \"Gas panel (BldA)\",\r\n                            \"system\": \"http://loinc.org\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Gas panel - Arterial blood\"\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"hasMember\": [\r\n                    {\r\n                        \"reference\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd1\"\r\n                    },\r\n                    {\r\n                        \"reference\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd2\"\r\n                    },\r\n                    {\r\n                        \"reference\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd3\"\r\n                    },\r\n                    {\r\n                        \"reference\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd4\"\r\n                    }\r\n                ],\r\n                \"identifier\": [\r\n                    {\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"code\": \"OBI\",\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"value\": \"24336-0_gasPanelBldA\"\r\n                    }\r\n                ],\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel\"\r\n                    ]\r\n                },\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"4c7d0173-7378-42b2-a9fa-64cd2664674f\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd1\",\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            },\r\n            \"resource\": {\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"code\": \"26436-6\",\r\n                                \"system\": \"http://loinc.org\"\r\n                            },\r\n                            {\r\n                                \"code\": \"laboratory\",\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"code\": \"2744-1\",\r\n                            \"display\": \"pH (BldA)\",\r\n                            \"system\": \"http://loinc.org\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"pH of Arterial blood\"\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"identifier\": [\r\n                    {\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"code\": \"OBI\",\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"value\": \"2744-1_pH\"\r\n                    }\r\n                ],\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH\"\r\n                    ]\r\n                },\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"4c7d0173-7378-42b2-a9fa-64cd2664674f\"\r\n                    }\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"code\": \"[pH]\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"unit\": \"pH\",\r\n                    \"value\": 7.4\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd2\",\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            },\r\n            \"resource\": {\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"code\": \"26436-6\",\r\n                                \"system\": \"http://loinc.org\"\r\n                            },\r\n                            {\r\n                                \"code\": \"laboratory\",\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"code\": \"2019-8\",\r\n                            \"display\": \"CO2 (BldA) [Partial pressure]\",\r\n                            \"system\": \"http://loinc.org\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Carbon dioxide [Partial pressure] in Arterial blood\"\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"identifier\": [\r\n                    {\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"code\": \"OBI\",\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"value\": \"2019-8_paCO2\"\r\n                    }\r\n                ],\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure\"\r\n                    ]\r\n                },\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"4c7d0173-7378-42b2-a9fa-64cd2664674f\"\r\n                    }\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"code\": \"mm[Hg]\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"unit\": \"mmHg\",\r\n                    \"value\": 44\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd3\",\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            },\r\n            \"resource\": {\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"code\": \"26436-6\",\r\n                                \"system\": \"http://loinc.org\"\r\n                            },\r\n                            {\r\n                                \"code\": \"laboratory\",\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"code\": \"2703-7\",\r\n                            \"display\": \"Oxygen (BldA) [Partial pressure]\",\r\n                            \"system\": \"http://loinc.org\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Oxygen [Partial pressure] in Arterial blood\"\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"identifier\": [\r\n                    {\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"code\": \"OBI\",\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"value\": \"2703-7_paO2\"\r\n                    }\r\n                ],\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure\"\r\n                    ]\r\n                },\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"subject\": {\r\n                    \"identifier\": {\r\n                        \"system\": \"urn:ietf:rfc:4122\",\r\n                        \"value\": \"4c7d0173-7378-42b2-a9fa-64cd2664674f\"\r\n                    }\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"code\": \"mm[Hg]\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"unit\": \"mmHg\",\r\n                    \"value\": 67\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"fullUrl\": \"urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd4\",\r\n            \"request\": {\r\n                \"method\": \"POST\",\r\n                \"url\": \"Observation\"\r\n            },\r\n            \"resource\": {\r\n                \"category\": [\r\n                    {\r\n                        \"coding\": [\r\n                            {\r\n                                \"code\": \"vital-signs\",\r\n                                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\"\r\n                            }\r\n                        ]\r\n                    }\r\n                ],\r\n                \"code\": {\r\n                    \"coding\": [\r\n                        {\r\n                            \"code\": \"2708-6\",\r\n                            \"display\": \"Oxygen saturation in Arterial blood\",\r\n                            \"system\": \"http://loinc.org\"\r\n                        }\r\n                    ],\r\n                    \"text\": \"Oxygen saturation in Arterial blood\"\r\n                },\r\n                \"effectiveDateTime\": \"2020-09-21\",\r\n                \"identifier\": [\r\n                    {\r\n                        \"assigner\": {\r\n                            \"reference\": \"Organization/Charité\"\r\n                        },\r\n                        \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\r\n                        \"type\": {\r\n                            \"coding\": [\r\n                                {\r\n                                    \"code\": \"OBI\",\r\n                                    \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\"\r\n                                }\r\n                            ]\r\n                        },\r\n                        \"value\": \"2708-6_oxygenSaturation\"\r\n                    }\r\n                ],\r\n                \"meta\": {\r\n                    \"profile\": [\r\n                        \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation\"\r\n                    ]\r\n                },\r\n                \"resourceType\": \"Observation\",\r\n                \"status\": \"final\",\r\n                \"subject\": {\r\n                   \"reference\": \"Patient/123\"\r\n                },\r\n                \"valueQuantity\": {\r\n                    \"code\": \"%\",\r\n                    \"system\": \"http://unitsofmeasure.org\",\r\n                    \"unit\": \"%\",\r\n                    \"value\": 98\r\n                }\r\n            }\r\n        }\r\n    ],\r\n    \"id\": \"bundle-transaction-bga\",\r\n    \"meta\": {\r\n        \"lastUpdated\": \"2020-09-24T05:33:00Z\"\r\n    },\r\n    \"resourceType\": \"Bundle\",\r\n    \"type\": \"transaction\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1273,7 +1273,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "78"
 										}
 									]
 								}
@@ -2091,7 +2091,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"http://hl7.org/fhir/StructureDefinition/bodytemp\"\r\n    ]\r\n  },\r\n  \"status\": \"corrected\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"8310-5\"\r\n      }\r\n    ]\r\n  },\r\n  \"subject\": {\r\n    \"reference\": \"/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}\",\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-04-30T12:00:00+01:00\",\r\n  \"valueQuantity\": {\r\n    \"value\": 37.5,\r\n    \"unit\": \"Cel\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"Cel\"\r\n  }\r\n}",
+									"raw": "{\r\n  \"resourceType\": \"Observation\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"http://hl7.org/fhir/StructureDefinition/bodytemp\"\r\n    ]\r\n  },\r\n  \"status\": \"final\",\r\n  \"category\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n          \"code\": \"vital-signs\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"code\": {\r\n    \"coding\": [\r\n      {\r\n        \"system\": \"http://loinc.org\",\r\n        \"code\": \"8310-5\"\r\n      }\r\n    ]\r\n  },\r\n  \"subject\": {\r\n    \"reference\": \"/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}\",\r\n    \"identifier\": {\r\n      \"system\": \"urn:ietf:rfc:4122\",\r\n      \"value\": \"{{patientId}}\"\r\n    }\r\n  },\r\n  \"effectiveDateTime\": \"2020-04-30T12:00:00+01:00\",\r\n  \"valueQuantity\": {\r\n    \"value\": 37.5,\r\n    \"unit\": \"Cel\",\r\n    \"system\": \"http://unitsofmeasure.org\",\r\n    \"code\": \"Cel\"\r\n  }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2531,7 +2531,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient\"\r\n        ]\r\n    },\r\n    \"extension\": [\r\n        {\r\n            \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group\",\r\n            \"valueCoding\": {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"186019001\",\r\n                \"display\": \"Other ethnic, mixed origin\"\r\n            }\r\n        },\r\n        {\r\n            \"extension\": [\r\n                {\r\n                    \"url\": \"dateTimeOfDocumentation\",\r\n                    \"valueDateTime\": \"2020-10-01\"\r\n                },\r\n                {\r\n                    \"url\": \"age\",\r\n                    \"valueAge\": {\r\n                        \"value\": 68,\r\n                        \"unit\": \"years\",\r\n                        \"system\": \"http://unitsofmeasure.org\",\r\n                        \"code\": \"a\"\r\n                    }\r\n                }\r\n            ],\r\n            \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age\"\r\n        }\r\n    ],\r\n    \"identifier\": [\r\n        {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    ],\r\n    \"birthDate\": \"1952-09-30\"\r\n}",
+									"raw": "{\r\n    \"resourceType\": \"Patient\",\r\n    \"meta\": {\r\n        \"profile\": [\r\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient\"\r\n        ]\r\n    },\r\n    \"extension\": [\r\n        {\r\n            \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group\",\r\n            \"valueCoding\": {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"186019001\",\r\n                \"display\": \"Other ethnic, mixed origin\"\r\n            }\r\n        },\r\n        {\r\n            \"extension\": [\r\n                {\r\n                    \"url\": \"dateTimeOfDocumentation\",\r\n                    \"valueDateTime\": \"2020-10-01\"\r\n                },\r\n                {\r\n                    \"url\": \"age\",\r\n                    \"valueAge\": {\r\n                        \"value\": 68,\r\n                        \"unit\": \"years\",\r\n                        \"system\": \"http://unitsofmeasure.org\",\r\n                        \"code\": \"a\"\r\n                    }\r\n                }\r\n            ],\r\n            \"url\": \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age\"\r\n        }\r\n    ],\r\n    \"identifier\": [\r\n        {\r\n            \"system\": \"http://www.netzwerk-universitaetsmedizin.de/sid/crr-pseudonym\",\r\n            \"value\": \"codex_6348Q7\"\r\n        }\r\n    ],\r\n    \"birthDate\": \"1952-09-30\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3494,67 +3494,6 @@
 							"response": []
 						}
 					]
-				},
-				{
-					"name": "Encounter",
-					"item": [
-						{
-							"name": "Create Stat. Versorgunsfall",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"resourceType\": \"Encounter\",\r\n  \"id\": \"5844e89b-c8f3-4e26-bc0f-502e00293874\",\r\n  \"status\": \"finished\",\r\n  \"subject\": {\r\n        \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n    },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"VN\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus\",\r\n      \"value\": \"F_0000002\",\r\n      \"period\": {\r\n            \"start\": \"2021-02-13T03:04:00+01:00\",\r\n            \"end\": \"2021-03-01T20:42:00+01:00\"\r\n          }\r\n    }\r\n  ],\r\n  \"class\": {\r\n    \"code\": \"IMP\",\r\n    \"display\": \"stationär\",\r\n    \"system\": \"http://hl7.org/fhir/v3/ActCode/cs.html\"\r\n  },\r\n  \"serviceType\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel\",\r\n            \"code\": \"3700\",\r\n            \"userSelected\": false\r\n          }\r\n        ]\r\n    },\r\n  \"serviceProvider\": {\r\n    \"identifier\": {\r\n      \"system\": \"http://medizininformatik-initiative.de/fhir/NamingSystem/Einrichtungsidentifikator/MusterKrankenhaus\",\r\n      \"value\": \"260123451_MusterKrankenhaus\"\r\n    }\r\n  },\r\n  \"diagnosis\": [\r\n    {\r\n      \"condition\": {\r\n        \"reference\": \"Condition/e6b6895c-549b-47c5-a842-41100761385d\"\r\n      }\r\n    }\r\n  ],\r\n  \"hospitalization\": {\r\n    \"admitSource\": {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Aufnahmeanlass\",\r\n          \"code\": \"N\"\r\n        }\r\n      ]\r\n    },\r\n    \"dischargeDisposition\": {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Entlassungsgrund\",\r\n          \"code\": \"12\"\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  \"reasonCode\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"https://www.medizininformatik-initiative.de/fhir/modul-fall/core/CodeSystem/Aufnahmegrund\",\r\n          \"code\": \"07\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"period\": {\r\n    \"start\": \"2021-02-13T03:04:00+01:00\",\r\n    \"end\": \"2021-03-01T20:42:00+01:00\"\r\n  }\r\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/fhir/Encounter",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"fhir",
-										"Encounter"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Create Patienten Aufenthalt",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"resourceType\": \"Encounter\",\r\n  \"id\": \"28436186-b5b3-4881-b000-8a89abf659b7\",\r\n  \"meta\": {\r\n    \"profile\": [\r\n      \"https://www.medizininformatik-initiative.de/fhir/core/modul-fall/StructureDefinition/KontaktGesundheitseinrichtung\"\r\n    ]\r\n  },\r\n  \"identifier\": [\r\n    {\r\n      \"type\": {\r\n        \"coding\": [\r\n          {\r\n            \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\r\n            \"code\": \"VN\"\r\n          }\r\n        ]\r\n      },\r\n      \"system\": \"http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus\",\r\n      \"value\": \"F_0000001\",\r\n      \"period\": {\r\n            \"start\": \"2021-02-13T03:04:00+01:00\",\r\n            \"end\": \"2021-03-01T20:42:00+01:00\"\r\n          }\r\n    }\r\n  ],\r\n  \"status\": \"finished\",\r\n  \"class\": {\r\n    \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/EncounterClassAdditionsDE\",\r\n    \"code\": \"operation\",\r\n    \"display\": \"Operation\"\r\n  },\r\n  \"type\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Kontaktebene\",\r\n          \"code\": \"abteilungskontakt\",\r\n          \"display\": \"Abteilungskontakt\",\r\n          \"userSelected\": false\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"subject\": {\r\n    \"identifier\": {\r\n            \"system\": \"urn:ietf:rfc:4122\",\r\n            \"value\": \"{{patientId}}\"\r\n        }\r\n  },\r\n  \"diagnosis\": [\r\n    {\r\n      \"condition\": {\r\n        \"reference\": \"Condition/e6b6895c-549b-47c5-a842-41100761385d\"\r\n      }\r\n    }\r\n  ],\r\n  \"period\": {\r\n    \"start\": \"2021-02-13T03:04:00+01:00\",\r\n    \"end\": \"2021-03-01T20:42:00+01:00\"\r\n  },\r\n  \"reasonCode\": [\r\n    {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"https://www.medizininformatik-initiative.de/fhir/modul-fall/core/CodeSystem/Aufnahmegrund\",\r\n          \"code\": \"01\",\r\n          \"display\": \"Krankenhausbehandlung, vollstationär\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"hospitalization\": {\r\n    \"admitSource\": {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Aufnahmeanlass\",\r\n          \"code\": \"E\",\r\n          \"display\": \"Einweisung durch einen Arzt\"\r\n        }\r\n      ]\r\n    },\r\n    \"dischargeDisposition\": {\r\n      \"coding\": [\r\n        {\r\n          \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Entlassungsgrund\",\r\n          \"code\": \"019\",\r\n          \"display\": \"Behandlung regulär beendet, arbeitsfähig entlassen\"\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  \"location\": [\r\n        {\r\n          \"location\": {\r\n            \"reference\": \"Location/FD7DF5FD052E1CBCF7F41B12804D596C71FFBE1958B58EF06401DD781B2A53D3\"\r\n          },\r\n          \"status\": \"active\",\r\n          \"physicalType\": {\r\n            \"coding\": [\r\n              {\r\n                \"system\": \"https://www.hl7.org/fhir/valueset-location-physical-type.html\",\r\n                \"code\": \"bd\",\r\n                \"userSelected\": false\r\n              }\r\n            ],\r\n            \"text\": \"Bett\"\r\n          },\r\n          \"period\": {\r\n            \"start\": \"2021-02-13T03:04:00+01:00\",\r\n            \"end\": \"2021-03-01T20:42:00+01:00\"\r\n          }\r\n        }\r\n    ],\r\n  \"serviceType\": {\r\n        \"coding\": [\r\n            {\r\n            \"system\": \"https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel\",\r\n            \"code\": \"3700\",\r\n            \"userSelected\": false\r\n            }\r\n        ]\r\n  },\r\n  \"serviceProvider\": {\r\n    \"identifier\": {\r\n      \"system\": \"http://medizininformatik-initiative.de/fhir/NamingSystem/Abteilungsidentifikator/MusterKrankenhaus\",\r\n      \"value\": \"1500_ACHI\"\r\n    }\r\n  }\r\n}"
-								},
-								"url": {
-									"raw": "{{baseUrl}}/fhir/Encounter",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"fhir",
-										"Encounter"
-									]
-								}
-							},
-							"response": []
-						}
-					]
 				}
 			]
 		},
@@ -3562,51 +3501,257 @@
 			"name": "EHRbase",
 			"item": [
 				{
-					"name": "Create EHR",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "myPassword432",
-									"type": "string"
+					"name": "OAuth2",
+					"item": [
+						{
+							"name": "Create EHR",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_type\": \"EHR_STATUS\",\r\n    \"name\": {\r\n      \"_type\": \"DV_TEXT\",\r\n      \"value\": \"EHR Status\"\r\n    },\r\n    \"subject\": {\r\n        \"external_ref\": {\r\n\t\t\t\t\"namespace\": \"DEMOGRAPHIC\",\r\n\t\t\t\t\"type\": \"PERSON\",\r\n\t\t\t\t\"id\": {\r\n\t\t\t\t\t\"_type\": \"HIER_OBJECT_ID\",\r\n\t\t\t\t\t\"value\": \"codex_6348Q7\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n    },\r\n    \"archetype_node_id\": \"openEHR-EHR-EHR_STATUS.generic.v1\",\r\n    \"uid\": {\r\n      \"_type\": \"HIER_OBJECT_ID\",\r\n      \"value\": \"8e2abf44-ad74-47eb-ab53-79ec8cd0fd16::local.ehrbase.org::1\"\r\n    },\r\n    \"is_modifiable\": true,\r\n    \"is_queryable\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
-								{
-									"key": "username",
-									"value": "myuser",
-									"type": "string"
+								"url": {
+									"raw": "http://localhost:8080/ehrbase/rest/openehr/v1/ehr",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ehrbase",
+										"rest",
+										"openehr",
+										"v1",
+										"ehr"
+									]
 								}
-							]
+							},
+							"response": []
 						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"_type\": \"EHR_STATUS\",\r\n    \"name\": {\r\n      \"_type\": \"DV_TEXT\",\r\n      \"value\": \"EHR Status\"\r\n    },\r\n    \"subject\": {\r\n      \"_type\": \"PARTY_SELF\",\r\n\t\t\t\"external_ref\": {\r\n\t\t\t\t\"namespace\": \"DEMOGRAPHIC\",\r\n\t\t\t\t\"type\": \"PERSON\",\r\n\t\t\t\t\"id\": {\r\n\t\t\t\t\t\"_type\": \"HIER_OBJECT_ID\",\r\n\t\t\t\t\t\"value\": \"{{patientId}}\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n    },\r\n    \"archetype_node_id\": \"openEHR-EHR-EHR_STATUS.generic.v1\",\r\n    \"uid\": {\r\n      \"_type\": \"HIER_OBJECT_ID\",\r\n      \"value\": \"8e2abf44-ad74-47eb-ab53-79ec8cd0fd16::local.ehrbase.org::1\"\r\n    },\r\n    \"is_modifiable\": true,\r\n    \"is_queryable\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "AQL Query",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"q\": \"SELECT c FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_status/subject/external_ref/id/value = '{{patientId}}'\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/ehrbase/rest/openehr/v1/query/aql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ehrbase",
+										"rest",
+										"openehr",
+										"v1",
+										"query",
+										"aql"
+									]
 								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{access_token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var clientId = pm.environment.get(\"clientId\");",
+									"var clientSecret = pm.environment.get(\"clientSecret\");",
+									"var tokenUrl = pm.environment.get(\"tokenUrl\");",
+									"",
+									"var details = {",
+									"    \"grant_type\": \"client_credentials\"",
+									"}",
+									"",
+									"var formBody = [];",
+									"for (var property in details) {",
+									"    var encodedKey = encodeURIComponent(property);",
+									"    var encodedValue = encodeURIComponent(details[property]);",
+									"    formBody.push(encodedKey + \"=\" + encodedValue);",
+									"}",
+									"",
+									"formBody = formBody.join(\"&\");",
+									"",
+									"pm.sendRequest({",
+									"    url: tokenUrl,",
+									"    method: 'POST',",
+									"    header: {",
+									"        'Content-Type': 'application/x-www-form-urlencoded',",
+									"        'Authorization': 'Basic ' + btoa(clientId + \":\" + clientSecret)",
+									"    },",
+									"    body: formBody",
+									"}, function (err, response) {",
+									"    const json = response.json();",
+									"    pm.environment.set(\"access_token\", json.access_token);",
+									"}); "
+								]
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/ehrbase/rest/openehr/v1/ehr",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"ehrbase",
-								"rest",
-								"openehr",
-								"v1",
-								"ehr"
-							]
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
 						}
+					]
+				},
+				{
+					"name": "Basic",
+					"item": [
+						{
+							"name": "Create EHR",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_type\": \"EHR_STATUS\",\r\n    \"name\": {\r\n      \"_type\": \"DV_TEXT\",\r\n      \"value\": \"EHR Status\"\r\n    },\r\n    \"subject\": {\r\n        \"external_ref\": {\r\n\t\t\t\t\"namespace\": \"DEMOGRAPHIC\",\r\n\t\t\t\t\"type\": \"PERSON\",\r\n\t\t\t\t\"id\": {\r\n\t\t\t\t\t\"_type\": \"HIER_OBJECT_ID\",\r\n\t\t\t\t\t\"value\": \"codex_6348Q7\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n    },\r\n    \"archetype_node_id\": \"openEHR-EHR-EHR_STATUS.generic.v1\",\r\n    \"uid\": {\r\n      \"_type\": \"HIER_OBJECT_ID\",\r\n      \"value\": \"8e2abf44-ad74-47eb-ab53-79ec8cd0fd16::local.ehrbase.org::1\"\r\n    },\r\n    \"is_modifiable\": true,\r\n    \"is_queryable\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/ehrbase/rest/openehr/v1/ehr",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ehrbase",
+										"rest",
+										"openehr",
+										"v1",
+										"ehr"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AQL Query",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"q\": \"SELECT c FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_status/subject/external_ref/id/value = '{{patientId}}'\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/ehrbase/rest/openehr/v1/query/aql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"ehrbase",
+										"rest",
+										"openehr",
+										"v1",
+										"query",
+										"aql"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "basic",
+						"basic": [
+							{
+								"key": "password",
+								"value": "myPassword432",
+								"type": "string"
+							},
+							{
+								"key": "username",
+								"value": "myuser",
+								"type": "string"
+							}
+						]
 					},
-					"response": []
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
