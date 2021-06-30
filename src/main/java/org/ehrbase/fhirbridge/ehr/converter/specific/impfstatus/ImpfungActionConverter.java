@@ -31,12 +31,12 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
         String statusCode = resource.getStatus().toCode();
         if (statusCode.equals(CurrentStateDefiningCode.ABORTED.getValue())) {
             return CurrentStateDefiningCode.ABORTED;
-        }else if (statusCode.equals(CurrentStateDefiningCode.COMPLETED.getValue())) {
+        } else if (statusCode.equals(CurrentStateDefiningCode.COMPLETED.getValue())) {
             return CurrentStateDefiningCode.COMPLETED;
-        }else if (statusCode.equals(CurrentStateDefiningCode.ACTIVE.getValue())) {
+        } else if (statusCode.equals(CurrentStateDefiningCode.ACTIVE.getValue())) {
             return CurrentStateDefiningCode.ACTIVE;
-        }else{
-            throw new UnprocessableEntityException("The status code" + statusCode+ " is wrong or not supported by the fhir-bridge. Supported are: aborted, completed and active");
+        } else {
+            throw new UnprocessableEntityException("The status code" + statusCode + " is wrong or not supported by the fhir-bridge. Supported are: aborted, completed and active");
         }
     }
 
