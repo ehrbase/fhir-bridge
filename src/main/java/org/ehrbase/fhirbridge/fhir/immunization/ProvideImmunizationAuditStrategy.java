@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.component.fhir.immunization;
+package org.ehrbase.fhirbridge.fhir.immunization;
 
-import org.ehrbase.fhirbridge.fhir.immunization.CreateImmunizationTransaction;
-import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
-import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
+import org.hl7.fhir.r4.model.Immunization;
+import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditStrategy;
+import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
+
+import java.util.Optional;
 
 /**
- * {@link CustomFhirComponent} that handles 'Create Immunization' transaction.
+ * Custom implementation of {@link GenericFhirAuditStrategy} for 'Provide Immunization' transaction.
  *
  * @since 1.2.0
  */
-@SuppressWarnings({"java:S110"})
-public class CreateImmunizationComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
+public class ProvideImmunizationAuditStrategy extends GenericFhirAuditStrategy<Immunization> {
 
-    public CreateImmunizationComponent() {
-        super(new CreateImmunizationTransaction());
+    public ProvideImmunizationAuditStrategy() {
+        super(true, OperationOutcomeOperations.INSTANCE, immunization -> Optional.of(immunization.getPatient()));
     }
 }

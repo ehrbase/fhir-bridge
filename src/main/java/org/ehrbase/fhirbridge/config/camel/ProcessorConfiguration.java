@@ -4,16 +4,7 @@ import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.ehrbase.fhirbridge.camel.processor.FindResourceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourcePersistenceProcessor;
 import org.ehrbase.fhirbridge.core.repository.ResourceMapRepository;
-import org.hl7.fhir.r4.model.AuditEvent;
-import org.hl7.fhir.r4.model.Condition;
-import org.hl7.fhir.r4.model.Consent;
-import org.hl7.fhir.r4.model.DiagnosticReport;
-import org.hl7.fhir.r4.model.MedicationStatement;
-import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Encounter;
-import org.hl7.fhir.r4.model.Patient;
-import org.hl7.fhir.r4.model.Procedure;
-import org.hl7.fhir.r4.model.QuestionnaireResponse;
+import org.hl7.fhir.r4.model.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -44,6 +35,11 @@ public class ProcessorConfiguration {
     @Bean
     public ProvideResourcePersistenceProcessor<Encounter> provideEncounterPersistenceProcessor(IFhirResourceDao<Encounter> encounterDao) {
         return new ProvideResourcePersistenceProcessor<>(encounterDao, Encounter.class, resourceMapRepository);
+    }
+
+    @Bean
+    public ProvideResourcePersistenceProcessor<Immunization> provideImmunizationPersistenceProcessor(IFhirResourceDao<Immunization> immunizationDao) {
+        return new ProvideResourcePersistenceProcessor<>(immunizationDao, Immunization.class, resourceMapRepository);
     }
 
     @Bean
@@ -94,6 +90,11 @@ public class ProcessorConfiguration {
     @Bean
     public FindResourceProcessor<Encounter> findEncounterProcessor(IFhirResourceDao<Encounter> encounterDao) {
         return new FindResourceProcessor<>(encounterDao);
+    }
+
+    @Bean
+    public FindResourceProcessor<Immunization> findImmunizationProcessor(IFhirResourceDao<Immunization> immunizationDao) {
+        return new FindResourceProcessor<>(immunizationDao);
     }
 
     @Bean
