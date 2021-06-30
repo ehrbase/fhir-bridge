@@ -1,34 +1,50 @@
 {
   "resourceType": "Immunization",
-  "id": "b7db30a0-4ffd-4dd6-b3e5-53e2730789e6",
+  "id": "c17f192c-f765-4729-818a-4ee55be5c87b",
   "meta": {
     "profile":  [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization"
     ]
   },
-  "status": "not-done",
+  "status": "completed",
   "vaccineCode": {
     "coding":  [
       {
-        "system": "http://hl7.org/fhir/uv/ips/CodeSystem/absent-unknown-uv-ips",
-        "code": "no-known-immunizations",
-        "display": "No known immunizations"
+        "system": "http://snomed.info/sct",
+        "code": "1119349007",
+        "display": "Vaccine product containing only Severe acute respiratory syndrome coronavirus 2 messenger ribonucleic acid (medicinal product)"
       }
     ]
   },
   "patient": {
-    "reference": "Patient/c786ac3c-0579-4aa2-adda-db784b214ad6",
+    "reference": "Patient/21acfc9c-1fd6-43e6-a8fe-c6b6341b0fab",
     "identifier": {
       "system": "urn:ietf:rfc:4122",
       "value": "{{patientId}}"
     }
   },
-  "_occurrenceDateTime": {
-    "extension":  [
-      {
-        "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
-        "valueCode": "unknown"
+  "occurrenceDateTime": "2020-12-27",
+  "protocolApplied":  [
+    {
+      "targetDisease":  [
+        {
+          "coding":  [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "840539006",
+              "display": "Disease caused by Severe acute respiratory syndrome coronavirus 2 (disorder)"
+            }
+          ]
+        }
+      ],
+      "_doseNumberString": {
+        "extension":  [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+            "valueCode": "unknown"
+          }
+        ]
       }
-    ]
-  }
+    }
+  ]
 }

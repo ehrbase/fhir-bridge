@@ -15,7 +15,7 @@ public class ImpfstatusCompositionConverter extends ImmunizationToCompositionCon
     @Override
     protected ImpfstatusComposition convertInternal(Immunization resource) {
         ImpfstatusComposition impfstatusComposition = new ImpfstatusComposition();
-        if(!resource.getOccurrenceDateTimeType().hasExtension() || resource.getVaccineCode().getCoding().get(0).getSystem().equals("http://hl7.org/fhir/uv/ips/CodeSystem/absent-unknown-uv-ips")){
+        if(!resource.getOccurrenceDateTimeType().hasExtension() || !resource.getVaccineCode().getCoding().get(0).getSystem().equals("http://hl7.org/fhir/uv/ips/CodeSystem/absent-unknown-uv-ips")){
             impfstatusComposition.setImpfung(List.of(new ImpfungActionConverter().convert(resource)));
         }else{
             impfstatusComposition.setUnbekannterImpfstatus(new UnbekannterImpfstatusEvaluationConverter().convert(resource));
