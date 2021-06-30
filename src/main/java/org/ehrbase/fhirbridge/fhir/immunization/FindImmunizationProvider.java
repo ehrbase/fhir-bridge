@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.fhir.medicationstatement;
+package org.ehrbase.fhirbridge.fhir.immunization;
 
 import ca.uhn.fhir.jpa.searchparam.SearchParameterMap;
 import ca.uhn.fhir.rest.annotation.Count;
@@ -35,7 +35,7 @@ import ca.uhn.fhir.rest.param.TokenAndListParam;
 import ca.uhn.fhir.rest.param.UriAndListParam;
 import org.hl7.fhir.instance.model.api.IAnyResource;
 import org.hl7.fhir.r4.model.IdType;
-import org.hl7.fhir.r4.model.MedicationStatement;
+import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.ResourceType;
 import org.openehealth.ipf.commons.ihe.fhir.AbstractPlainProvider;
 
@@ -43,15 +43,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Implementation of {@link org.openehealth.ipf.commons.ihe.fhir.FhirProvider FhirProvider} that provides REST support
- * for 'Find Medication Statement' transaction.
+ * Concrete implementation of {@link AbstractPlainProvider} that provides REST support
+ * for 'Find Immunization' transaction.
  *
- * @since 1.0.0
+ * @since 1.2.0
  */
 @SuppressWarnings({"unused", "java:S107", "DuplicatedCode"})
-public class FindMedicationStatementProvider extends AbstractPlainProvider {
+public class FindImmunizationProvider extends AbstractPlainProvider {
 
-    @Search(type = MedicationStatement.class)
+    @Search(type = Immunization.class)
     public IBundleProvider search(@OptionalParam(name = IAnyResource.SP_RES_ID) TokenAndListParam id,
                                   @OptionalParam(name = IAnyResource.SP_RES_LANGUAGE) StringAndListParam language,
                                   @OptionalParam(name = Constants.PARAM_LASTUPDATED) DateRangeParam lastUpdated,
@@ -62,21 +62,26 @@ public class FindMedicationStatementProvider extends AbstractPlainProvider {
                                   @OptionalParam(name = Constants.PARAM_CONTENT) StringAndListParam content,
                                   @OptionalParam(name = Constants.PARAM_TEXT) StringAndListParam text,
                                   @OptionalParam(name = Constants.PARAM_FILTER) StringAndListParam filter,
-                                  @OptionalParam(name = MedicationStatement.SP_CATEGORY) TokenAndListParam category,
-                                  @OptionalParam(name = MedicationStatement.SP_CODE) TokenAndListParam code,
-                                  @OptionalParam(name = MedicationStatement.SP_CONTEXT) ReferenceAndListParam context,
-                                  @OptionalParam(name = MedicationStatement.SP_EFFECTIVE) DateRangeParam effective,
-                                  @OptionalParam(name = MedicationStatement.SP_IDENTIFIER) TokenAndListParam identifier,
-                                  @OptionalParam(name = MedicationStatement.SP_MEDICATION) ReferenceAndListParam medication,
-                                  @OptionalParam(name = MedicationStatement.SP_PART_OF) ReferenceAndListParam partOf,
-                                  @OptionalParam(name = MedicationStatement.SP_PATIENT) ReferenceAndListParam patient,
-                                  @OptionalParam(name = MedicationStatement.SP_SOURCE) ReferenceAndListParam source,
-                                  @OptionalParam(name = MedicationStatement.SP_STATUS) TokenAndListParam status,
-                                  @OptionalParam(name = MedicationStatement.SP_SUBJECT) ReferenceAndListParam subject,
+                                  @OptionalParam(name = Immunization.SP_DATE) DateRangeParam date,
+                                  @OptionalParam(name = Immunization.SP_IDENTIFIER) TokenAndListParam identifier,
+                                  @OptionalParam(name = Immunization.SP_LOCATION) ReferenceAndListParam location,
+                                  @OptionalParam(name = Immunization.SP_LOT_NUMBER) StringAndListParam lotNumber,
+                                  @OptionalParam(name = Immunization.SP_MANUFACTURER) ReferenceAndListParam manufacturer,
+                                  @OptionalParam(name = Immunization.SP_PATIENT) ReferenceAndListParam patient,
+                                  @OptionalParam(name = Immunization.SP_PERFORMER) ReferenceAndListParam performer,
+                                  @OptionalParam(name = Immunization.SP_REACTION) ReferenceAndListParam reaction,
+                                  @OptionalParam(name = Immunization.SP_REACTION_DATE) DateRangeParam reactionDate,
+                                  @OptionalParam(name = Immunization.SP_REASON_CODE) TokenAndListParam reasonCode,
+                                  @OptionalParam(name = Immunization.SP_REASON_REFERENCE) ReferenceAndListParam reasonReference,
+                                  @OptionalParam(name = Immunization.SP_SERIES) StringAndListParam series,
+                                  @OptionalParam(name = Immunization.SP_STATUS) TokenAndListParam status,
+                                  @OptionalParam(name = Immunization.SP_STATUS_REASON) TokenAndListParam statusReason,
+                                  @OptionalParam(name = Immunization.SP_TARGET_DISEASE) TokenAndListParam targetDisease,
+                                  @OptionalParam(name = Immunization.SP_VACCINE_CODE) TokenAndListParam vaccineCode,
                                   @Count Integer count, @Offset Integer offset, @Sort SortSpec sort,
                                   RequestDetails requestDetails, HttpServletRequest request, HttpServletResponse response) {
 
-        SearchParameterMap searchParams = new SearchParameterMap();
+        var searchParams = new SearchParameterMap();
         searchParams.add(IAnyResource.SP_RES_ID, id);
         searchParams.add(IAnyResource.SP_RES_LANGUAGE, language);
 
@@ -88,29 +93,34 @@ public class FindMedicationStatementProvider extends AbstractPlainProvider {
         searchParams.add(Constants.PARAM_TEXT, text);
         searchParams.add(Constants.PARAM_FILTER, filter);
 
-        searchParams.add(MedicationStatement.SP_CATEGORY, category);
-        searchParams.add(MedicationStatement.SP_CODE, code);
-        searchParams.add(MedicationStatement.SP_CONTEXT, context);
-        searchParams.add(MedicationStatement.SP_EFFECTIVE, effective);
-        searchParams.add(MedicationStatement.SP_IDENTIFIER, identifier);
-        searchParams.add(MedicationStatement.SP_MEDICATION, medication);
-        searchParams.add(MedicationStatement.SP_PART_OF, partOf);
-        searchParams.add(MedicationStatement.SP_PATIENT, patient);
-        searchParams.add(MedicationStatement.SP_SOURCE, source);
-        searchParams.add(MedicationStatement.SP_STATUS, status);
-        searchParams.add(MedicationStatement.SP_SUBJECT, subject);
+        searchParams.add(Immunization.SP_DATE, date);
+        searchParams.add(Immunization.SP_IDENTIFIER, identifier);
+        searchParams.add(Immunization.SP_LOCATION, location);
+        searchParams.add(Immunization.SP_LOT_NUMBER, lotNumber);
+        searchParams.add(Immunization.SP_MANUFACTURER, manufacturer);
+        searchParams.add(Immunization.SP_PATIENT, patient);
+        searchParams.add(Immunization.SP_PERFORMER, performer);
+        searchParams.add(Immunization.SP_REACTION, reaction);
+        searchParams.add(Immunization.SP_REACTION_DATE, reactionDate);
+        searchParams.add(Immunization.SP_REASON_CODE, reasonCode);
+        searchParams.add(Immunization.SP_REASON_CODE, reasonCode);
+        searchParams.add(Immunization.SP_SERIES, series);
+        searchParams.add(Immunization.SP_STATUS, status);
+        searchParams.add(Immunization.SP_STATUS_REASON, statusReason);
+        searchParams.add(Immunization.SP_TARGET_DISEASE, targetDisease);
+        searchParams.add(Immunization.SP_VACCINE_CODE, vaccineCode);
 
         searchParams.setLastUpdated(lastUpdated);
         searchParams.setCount(count);
         searchParams.setOffset(offset);
         searchParams.setSort(sort);
 
-        return requestBundleProvider(searchParams, null, ResourceType.MedicationStatement.name(), request, response, requestDetails);
+        return requestBundleProvider(searchParams, null, ResourceType.Immunization.name(), request, response, requestDetails);
     }
 
     @Read(version = true)
-    public MedicationStatement read(@IdParam IdType id, RequestDetails requestDetails,
-                                    HttpServletRequest request, HttpServletResponse response) {
-        return requestResource(id, null, MedicationStatement.class, request, response, requestDetails);
+    public Immunization read(@IdParam IdType id, RequestDetails requestDetails,
+                             HttpServletRequest request, HttpServletResponse response) {
+        return requestResource(id, null, Immunization.class, request, response, requestDetails);
     }
 }
