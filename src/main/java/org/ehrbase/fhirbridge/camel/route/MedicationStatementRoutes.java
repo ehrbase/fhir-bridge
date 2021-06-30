@@ -16,15 +16,13 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of {@link RouteBuilder} that provides route definitions for transactions
- * linked to {@link org.hl7.fhir.r4.model.MedicationStatement MedicationStatement} resource.
+ * Implementation of {@link org.apache.camel.builder.RouteBuilder RouteBuilder} that defines routes for transactions
+ * related to {@link org.hl7.fhir.r4.model.MedicationStatement MedicationStatement} resource.
  *
- * @since 1.0.0
+ * @since 1.1.0
  */
 @Component
 public class MedicationStatementRoutes extends AbstractRouteBuilder {
@@ -34,26 +32,20 @@ public class MedicationStatementRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // 'Create Medication Statement' route definition
-        from("medication-statement-create:consumer?fhirContext=#fhirContext")
+        // Route: Provide Medication Statement
+        from("medication-statement-provide:consumer?fhirContext=#fhirContext")
+            .routeId("provide-medication-statement-route")
             .onCompletion()
-                .process("auditCreateResourceProcessor")
+                .process("provideResourceAuditHandler")
             .end()
-            .process("resourceProfileValidator")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("medicationStatementDao", "create(${body}, ${headers.FhirRequestDetails})"))
-            .process("ehrIdLookupProcessor")
-            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .process("resourceResponseProcessor");
+            .process("fhirProfileValidator")
+            .process("provideMedicationStatementPersistenceProcessor")
+            .to("direct:internal-provide-resource");
 
-        // 'Find Medication Statement' route definition
+        // Route: Find Medication Statement
         from("medication-statement-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:medicationStatementDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:medicationStatementDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .routeId("find-medication-statement-route")
+            .process("findMedicationStatementProcessor");
 
         // @formatter:on
     }

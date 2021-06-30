@@ -2,12 +2,14 @@ package org.ehrbase.fhirbridge.config;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionService;
 import org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel.GECCOSerologischerBefundCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt.PatientenAufenthaltCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodpressure.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight.BodyHeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodytemperature.BodyTemperatureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyweight.BodyWeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty.ClinicalFrailtyScaleScoreCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation.ClinicalTrialParticipationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.coronavirusnachweistest.CoronavirusNachweisTestCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.diagnose.DiagnoseCompositionConverter;
@@ -21,6 +23,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2Known
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GECCOMedikationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.ObservationLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.patientdischarge.PatientDischargeCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu.PatientInIcuCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.pregnancystatus.PregnancyStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.procedure.ProcedureCompositionConverter;
@@ -29,9 +32,10 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund.Radiol
 import org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate.RespiratoryRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus.SmokingStatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.sofascore.SofaScoreCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.stationaererversorgungsfall.StationaererVersorgungsfallCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.SymptomCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.virologischerBefund.PCRCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.geccoVirologischerbefund.PCRCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,18 +45,19 @@ public class ConversionConfiguration {
 
     @Bean(name = "fhirResourceConversionService")
     public ConversionService conversionService() {
-        var conversionService = new ConversionService();
+        ConversionService conversionService = new ConversionService();
 
         // Register Resource Converters
         registerConditionConverters(conversionService);
         registerConsentConverters(conversionService);
         registerDiagnosticReportConverters(conversionService);
-        registerImmunizationConverters(conversionService);
-        registerMedicationStatementConverter(conversionService);
         registerObservationConverters(conversionService);
         registerPatientConverters(conversionService);
         registerProcedureConverters(conversionService);
         registerQuestionnaireResponseConverter(conversionService);
+        registerMedicationStatementConverter(conversionService);
+        registerEncounterConverter(conversionService);
+        registerImmunizationConverters(conversionService);
 
         return conversionService;
     }
@@ -87,26 +92,29 @@ public class ConversionConfiguration {
     }
 
     private void registerObservationConverters(ConversionService conversionService) {
-        conversionService.registerConverter(Profile.ANTI_BODY_PANEL, new GECCOSerologischerBefundCompositionConverter());
-        conversionService.registerConverter(Profile.BLOOD_GAS_PANEL, new BloodGasPanelCompositionConverter());
-        conversionService.registerConverter(Profile.BLOOD_PRESSURE, new BloodPressureCompositionConverter());
         conversionService.registerConverter(Profile.BODY_HEIGHT, new BodyHeightCompositionConverter());
+        conversionService.registerConverter(Profile.BLOOD_GAS_PANEL, new BloodGasPanelCompositionConverter());
+        conversionService.registerConverter(Profile.ANTI_BODY_PANEL, new GECCOSerologischerBefundCompositionConverter());
+        conversionService.registerConverter(Profile.BLOOD_PRESSURE, new BloodPressureCompositionConverter());
         conversionService.registerConverter(Profile.BODY_TEMP, new BodyTemperatureCompositionConverter());
         conversionService.registerConverter(Profile.BODY_WEIGHT, new BodyWeightCompositionConverter());
         conversionService.registerConverter(Profile.CLINICAL_FRAILTY_SCALE, new ClinicalFrailtyScaleScoreCompositionConverter());
+        conversionService.registerConverter(Profile.CLINICAL_TRIAL_PARTICIPATION, new ClinicalTrialParticipationCompositionConverter());
         conversionService.registerConverter(Profile.CORONARIRUS_NACHWEIS_TEST, new CoronavirusNachweisTestCompositionConverter());
         conversionService.registerConverter(Profile.FIO2, new FiO2CompositionConverter());
         conversionService.registerConverter(Profile.HEART_RATE, new HeartRateCompositionConverter());
         conversionService.registerConverter(Profile.KNOWN_EXPOSURE, new SarsCov2KnownExposureCompositionConverter());
+        conversionService.registerConverter(Profile.PATIENT_DISCHARGE, new PatientDischargeCompositionConverter());
         conversionService.registerConverter(Profile.PATIENT_IN_ICU, new PatientInIcuCompositionConverter());
         conversionService.registerConverter(Profile.PCR, new PCRCompositionConverter());
         conversionService.registerConverter(Profile.PREGNANCY_STATUS, new PregnancyStatusCompositionConverter());
         conversionService.registerConverter(Profile.OBSERVATION_LAB, new ObservationLabCompositionConverter());
-        conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
         conversionService.registerConverter(Profile.RESPIRATORY_RATE, new RespiratoryRateCompositionConverter());
         conversionService.registerConverter(Profile.SOFA_SCORE, new SofaScoreCompositionConverter());
         conversionService.registerConverter(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
+
         conversionService.registerConverter(Profile.TRAVEL_HISTORY, new HistoryOfTravelCompositionConverter());
+        conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
     }
 
     private void registerPatientConverters(ConversionService conversionService) {
@@ -116,7 +124,7 @@ public class ConversionConfiguration {
     private void registerProcedureConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.PROCEDURE, new ProcedureCompositionConverter());
 
-        var therapyCompositionConverter = new TherapyCompositionConverter();
+        TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
         conversionService.registerConverter(Profile.APHERESIS_PROCEDURE, therapyCompositionConverter);
         conversionService.registerConverter(Profile.DIALYSIS_PROCEDURE, therapyCompositionConverter);
         conversionService.registerConverter(Profile.EXTRACORPOREAL_MEMBRANE_OXYGENATION_PROCEDURE, therapyCompositionConverter);
@@ -130,11 +138,16 @@ public class ConversionConfiguration {
     }
 
     private void registerMedicationStatementConverter(ConversionService conversionService) {
-        var converter = new GECCOMedikationCompositionConverter();
+        GECCOMedikationCompositionConverter converter = new GECCOMedikationCompositionConverter();
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY, converter);
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_ACE_INHIBITORS, converter);
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_ANTICOAGULANTS, converter);
         conversionService.registerConverter(Profile.PHARMACOLOGICAL_THERAPY_IMMUNOGLOBULINS, converter);
+    }
+
+    private void registerEncounterConverter(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.KONTAKT_GESUNDHEIT_EINRICHTUNG, new StationaererVersorgungsfallCompositionConverter());
+        conversionService.registerConverter(Profile.KONTAKT_GESUNDHEIT_ABTEILUNG, new PatientenAufenthaltCompositionConverter());
     }
 
     private void registerImmunizationConverters(ConversionService conversionService) {

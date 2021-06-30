@@ -55,15 +55,15 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.subject.identifier.value		${{ {} }}		422		This property must be an simple value, not an object    Observation.subject.identifier.value
 	$.subject.identifier.value		${123}			422		Error parsing JSON: the primitive value must be a string    Observation.subject.identifier.value
 	$.subject.identifier			missing			422		Object must have some content    Observation.subject
-    $.subject.identifier			${EMPTY}		422		This property must be an Object, not a primitive property    Observation.subject.identifier
-    $.subject.identifier			${{ [] }}		422		This property must be an Object, not an array    Observation.subject.identifier
+    $.subject.identifier			${EMPTY}		422		The property identifier must be an Object, not a primitive property    Observation.subject.identifier
+    $.subject.identifier			${{ [] }}		422		The property identifier must be an Object, not an array    Observation.subject.identifier
     $.subject.identifier			${{ {} }}		422		Object must have some content    Observation.subject.identifier
-    $.subject.identifier			${123}			422		This property must be an Object, not a primitive property    Observation.subject.identifier
+    $.subject.identifier			${123}			422		The property identifier must be an Object, not a primitive property    Observation.subject.identifier
     $.subject						missing			422		Observation.subject: minimum required = 1, but only found 0 .from ${profile url}
-	$.subject						${EMPTY}		422		This property must be an Object, not a primitive property    Observation.subject
-    $.subject						${{ [] }}		422		This property must be an Object, not an array    Observation.subject
+	$.subject						${EMPTY}		422		The property subject must be an Object, not a primitive property    Observation.subject
+    $.subject						${{ [] }}		422		The property subject must be an Object, not an array    Observation.subject
     $.subject						${{ {} }}		422		Object must have some content    Observation.subject
-    $.subject						${123}			422		This property must be an Object, not a primitive property    Observation.subject
+    $.subject						${123}			422		The property subject must be an Object, not a primitive property    Observation.subject
 
 	# comment: random uuid																			 regex for uuid
 	$.subject.identifier.value    ${{str(uuid.uuid4())}}    422    EhrId not found for subject '([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'
@@ -127,12 +127,12 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.identifier			${{ [{}] }}	   422     Observation.identifier:analyseBefundCode: minimum required = 1, but only found 0 .from ${profile url}
 	$.identifier			${None}		   422     This property must be an Array, not a Null
 	$.identifier[0].type	missing		   422     Observation.identifier:analyseBefundCode: minimum required = 1, but only found 0 .from ${profile url}
-	$.identifier[0].type	${EMPTY}	   422     This property must be an Object, not a primitive property
-	$.identifier[0].type	${123}		   422     This property must be an Object, not a primitive property
-	$.identifier[0].type	foobar		   422     This property must be an Object, not a primitive property
-	$.identifier[0].type	${{ [] }}	   422     This property must be an Object, not an array
+	$.identifier[0].type	${EMPTY}	   422     The property type must be an Object, not a primitive property
+	$.identifier[0].type	${123}		   422     The property type must be an Object, not a primitive property
+	$.identifier[0].type	foobar		   422     The property type must be an Object, not a primitive property
+	$.identifier[0].type	${{ [] }}	   422     The property type must be an Object, not an array
 	$.identifier[0].type	${{ {} }}	   422     Object must have some content
-	$.identifier[0].type	${None}		   422     This property must be an Object, not null
+	$.identifier[0].type	${None}		   422     The property type must be an Object, not null
 
 	$.identifier[0].type.coding    			 missing		   422    Object must have some content
 	$.identifier[0].type.coding[0].system	 missing    	   422    A code with no system has no defined meaning. A system should be provided
@@ -166,16 +166,16 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.meta				missing						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	$.meta.profile		missing						422    	Object must have some content
 	$.meta.profile    	${{ ["invalid_url"] }}		422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.
-	$.meta.profile    	${{ ["http://wrong.url"] }}   422  	Profile reference 'http://wrong.url' could not be resolved, so has not been checked
-	$.meta.profile		${EMPTY}					422    	This property must be an Array, not a a primitive property
-	$.meta.profile		${123}						422    	This property must be an Array, not a a primitive property
-	$.meta.profile		${None}						422    	This property must be an Array, not a null
+	$.meta.profile    	${{ ["http://wrong.url"] }}   422  	The resource does not contain any supported profile
+	$.meta.profile		${EMPTY}					422    	This property must be an Array, not a primitive property
+	$.meta.profile		${123}						422    	This property must be an Array, not a primitive property
+	$.meta.profile		${None}						422    	This property must be an Array, not null
 
 	# comment: the next one sets the value to an empty list/array []
 	$.meta.profile		${{ [] }}					422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 
 	# comment: the next one sets value to an empty object {}
-	$.meta.profile		${{ {} }}					422    	This property must be an Array, not a an object
+	$.meta.profile		${{ {} }}					422    	This property must be an Array, not an object
 
 
 005 Create FiO2 (Invalid/Missing 'meta') - BUG TRACE TEST
