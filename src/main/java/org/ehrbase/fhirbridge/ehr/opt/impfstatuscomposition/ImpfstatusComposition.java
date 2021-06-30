@@ -28,7 +28,7 @@ import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.Unbekannt
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-04T17:09:24.092597+02:00",
+    date = "2021-06-30T11:44:02.722457+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 @Template("Impfstatus")
