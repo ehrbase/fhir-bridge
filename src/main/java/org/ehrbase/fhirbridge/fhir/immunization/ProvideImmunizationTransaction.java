@@ -22,20 +22,22 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
 /**
- * {@link FhirTransactionConfiguration} for 'Create Immunization'.
+ * 'Provide Immunization' {@link org.openehealth.ipf.commons.ihe.core.TransactionConfiguration TransactionConfiguration}.
+ * <p>
+ * Note: Server-side only
  *
  * @since 1.2.0
  */
-public class CreateImmunizationTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class ProvideImmunizationTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public CreateImmunizationTransaction() {
-        super("immunization-create",
-                "Create Immunization",
+    public ProvideImmunizationTransaction() {
+        super("immunization-provide",
+                "Provide Immunization Transaction",
                 false,
                 null,
-                new CreateImmunizationAuditStrategy(),
+                new ProvideImmunizationAuditStrategy(),
                 FhirVersionEnum.R4,
-                new CreateImmunizationProvider(),
+                new ProvideImmunizationProvider(),
                 null,
                 FhirTransactionValidator.NO_VALIDATION);
     }

@@ -17,11 +17,7 @@
 package org.ehrbase.fhirbridge.config;
 
 import ca.uhn.fhir.jpa.api.config.DaoConfig;
-import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
-import ca.uhn.fhir.jpa.api.dao.IFhirResourceDaoCodeSystem;
-import ca.uhn.fhir.jpa.api.dao.IFhirResourceDaoConceptMap;
-import ca.uhn.fhir.jpa.api.dao.IFhirResourceDaoSearchParameter;
-import ca.uhn.fhir.jpa.api.dao.IFhirResourceDaoValueSet;
+import ca.uhn.fhir.jpa.api.dao.*;
 import ca.uhn.fhir.jpa.config.r4.BaseR4Config;
 import ca.uhn.fhir.jpa.dao.JpaResourceDao;
 import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoCodeSystemR4;
@@ -30,25 +26,7 @@ import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoSearchParameterR4;
 import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoValueSetR4;
 import ca.uhn.fhir.jpa.model.config.PartitionSettings;
 import ca.uhn.fhir.jpa.model.entity.ModelConfig;
-import org.hl7.fhir.r4.model.AuditEvent;
-import org.hl7.fhir.r4.model.CodeSystem;
-import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.ConceptMap;
-import org.hl7.fhir.r4.model.Condition;
-import org.hl7.fhir.r4.model.Consent;
-import org.hl7.fhir.r4.model.Device;
-import org.hl7.fhir.r4.model.DiagnosticReport;
-import org.hl7.fhir.r4.model.Encounter;
-import org.hl7.fhir.r4.model.Group;
-import org.hl7.fhir.r4.model.Location;
-import org.hl7.fhir.r4.model.MedicationStatement;
-import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Patient;
-import org.hl7.fhir.r4.model.Procedure;
-import org.hl7.fhir.r4.model.QuestionnaireResponse;
-import org.hl7.fhir.r4.model.SearchParameter;
-import org.hl7.fhir.r4.model.ValueSet;
+import org.hl7.fhir.r4.model.*;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -137,6 +115,14 @@ public class HapiFhirJpaConfiguration extends BaseR4Config {
         groupDao.setResourceType(Group.class);
         groupDao.setContext(fhirContext());
         return groupDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Immunization> immunizationDao() {
+        JpaResourceDao<Immunization> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Immunization.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
     }
 
     @Bean

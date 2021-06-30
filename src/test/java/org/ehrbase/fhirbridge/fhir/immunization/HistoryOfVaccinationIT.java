@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Integration tests for {@link Immunization} using History of Vaccination profile.
  */
-public class HistoryOfVaccinationIT extends AbstractMappingTestSetupIT {
+class HistoryOfVaccinationIT extends AbstractMappingTestSetupIT {
     public HistoryOfVaccinationIT() {
         super("Immunization/", Immunization.class);
     }
@@ -113,7 +113,7 @@ public class HistoryOfVaccinationIT extends AbstractMappingTestSetupIT {
         ImpfstatusCompositionConverter impfstatusCompositionConverter = new ImpfstatusCompositionConverter();
         ImpfstatusComposition mappedImpfstatusComposition = impfstatusCompositionConverter.convert(immunization);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedImpfstatusComposition);
-        assertEquals(diff.getChanges().size(), 0);
+        assertEquals(0, diff.getChanges().size());
     }
 
 

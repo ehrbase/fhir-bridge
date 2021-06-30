@@ -17,7 +17,6 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.springframework.stereotype.Component;
 
 /**
@@ -35,22 +34,19 @@ public class ImmunizationRoutes extends AbstractRouteBuilder {
         super.configure();
 
         // 'Create Immunization' route definition
-        from("immunization-create:consumer?fhirContext=#fhirContext")
+        from("immunization-provide:consumer?fhirContext=#fhirContext")
+            .routeId("provide-immunization-route")
             .onCompletion()
-                .process("auditCreateResourceProcessor")
+                .process("provideResourceAuditHandler")
             .end()
-            .process("resourceProfileValidator")
-            .setHeader(CamelConstants.METHOD_OUTCOME, method("immunizationDao", "create(${body}, ${headers.FhirRequestDetails})"))
-            .process("ehrIdLookupProcessor")
-            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .process("resourceResponseProcessor");
+            .process("fhirProfileValidator")
+            .process("provideImmunizationPersistenceProcessor")
+            .to("direct:internal-provide-resource");
 
         // 'Find Immunization' route definition
         from("immunization-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .routeId("find-immunization-route")
-                .process("findImmunizationProcessor");
-     
+            .routeId("find-immunization-route")
+            .process("findImmunizationProcessor");
         // @formatter:on
     }
 }
