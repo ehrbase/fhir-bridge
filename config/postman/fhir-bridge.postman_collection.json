@@ -213,6 +213,32 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "AntiBodyPanel",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"bundle-transaction-bga\",\n  \"meta\": {\n    \"lastUpdated\": \"2020-09-24T05:33:00Z\"\n  },\n  \"type\": \"transaction\",\n  \"entry\": [\n    {\n      \"fullUrl\": \"urn:uuid:220767b9-5760-40b8-8741-8772dae04c3f\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-pnl-ser-pl-ia\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94504-8_SARS-CoV-2-Ab-Panel\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94504-8\",\n              \"display\": \"SARS-CoV-2 (COVID-19) Ab panel - Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 antibodies panel\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"hasMember\": [\n          {\n            \"reference\": \"urn:uuid:22732de8-3eb6-477e-81d6-28fb906b3e4e\"\n          },\n          {\n            \"reference\": \"urn:uuid:70ca7d00-0d8b-42bb-9508-a8fc76e5c7ad\"\n          },\n          {\n            \"reference\": \"urn:uuid:7e746710-fad4-474b-8a28-422863f3a2b8\"\n          },\n          {\n            \"reference\": \"urn:uuid:f35f17da-f642-402d-8cf4-ff70607713a7\"\n          },\n          {\n            \"reference\": \"urn:uuid:7297b0fd-3be7-4b88-a63a-6ba651152c41\"\n          },\n          {\n            \"reference\": \"urn:uuid:da1fa3fe-a8a3-44b6-94c6-3497269436ec\"\n          },\n          {\n            \"reference\": \"urn:uuid:b5adbc53-a1ee-4a57-9ede-fae4b4462bfb\"\n          },\n          {\n            \"reference\": \"urn:uuid:b08b1687-2ea1-4b14-9473-dd04389169ec\"\n          }\n        ]\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:70ca7d00-0d8b-42bb-9508-a8fc76e5c7ad\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-ser-pl-ql-ia\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94762-2_SARS-CoV-2-Ab-Ql\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94762-2\",\n              \"display\": \"SARS-CoV-2 (COVID-19) Ab [Presence] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 antibodies qualitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueCodeableConcept\": {\n          \"coding\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"260373001\",\n              \"display\": \"Detected (qualifier value)\"\n            }\n          ]\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:22732de8-3eb6-477e-81d6-28fb906b3e4e\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-ser-pl-ia-acnc\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94769-7_SARS-CoV-2-Ab-Qn\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94769-7\",\n              \"display\": \"SARS-CoV-2 (COVID-19) Ab [Units/volume] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 antibodies quantitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueQuantity\": {\n          \"value\": 240,\n          \"unit\": \"[IU]/mL\",\n          \"system\": \"http://unitsofmeasure.org\",\n          \"code\": \"[IU]/mL\"\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:7e746710-fad4-474b-8a28-422863f3a2b8\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-iga-ser-pl-ia-acnc\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94720-0_SARS-CoV-2-IgA-Qn\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94720-0\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgA Ab [Units/volume] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgA antibodies quantitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueQuantity\": {\n          \"value\": 0.5,\n          \"unit\": \"[IU]/mL\",\n          \"system\": \"http://unitsofmeasure.org\",\n          \"code\": \"[IU]/mL\"\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:f35f17da-f642-402d-8cf4-ff70607713a7\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-iga-ser-pl-ql-ia\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94562-6_SARS-CoV-2-IgA-Ql\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94562-6\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgA Ab [Presence] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgA antibodies qualitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueCodeableConcept\": {\n          \"coding\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"260373001\",\n              \"display\": \"Detected (qualifier value)\"\n            }\n          ]\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:7297b0fd-3be7-4b88-a63a-6ba651152c41\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-igg-ser-pl-ia-acnc\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94505-5_SARS-CoV-2-IgG-Qn\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94505-5\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgG Ab [Units/volume] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgG antibodies quantitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueQuantity\": {\n          \"value\": 20,\n          \"unit\": \"[arb'U]/mL\",\n          \"system\": \"http://unitsofmeasure.org\",\n          \"code\": \"[arb'U]/mL\"\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:da1fa3fe-a8a3-44b6-94c6-3497269436ec\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-igg-ser-pl-ql-ia\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94563-4_SARS-CoV-2-IgG-Ql\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94563-4\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgG Ab [Presence] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgG antibodies qualitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueCodeableConcept\": {\n          \"coding\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"260373001\",\n              \"display\": \"Detected (qualifier value)\"\n            }\n          ]\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:b5adbc53-a1ee-4a57-9ede-fae4b4462bfb\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-igm-ser-pl-ia-acnc\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94505-5_SARS-CoV-2-IgM-Qn\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94506-3\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgM Ab [Units/volume] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgM antibodies quantitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueQuantity\": {\n          \"value\": 219.5,\n          \"unit\": \"[arb'U]/mL\",\n          \"system\": \"http://unitsofmeasure.org\",\n          \"code\": \"[arb'U]/mL\"\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:b08b1687-2ea1-4b14-9473-dd04389169ec\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-igm-ser-pl-ql-ia\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94564-2_SARS-CoV-2-IgM-Ql\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94564-2\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgM Ab [Presence] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgM antibodies qualitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueCodeableConcept\": {\n          \"coding\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"260373001\",\n              \"display\": \"Detected (qualifier value)\"\n            }\n          ]\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -3926,6 +3952,33 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Create D4L_Questionnaire",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"resourceType\": \"QuestionnaireResponse\",\n  \"questionnaire\": \"http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation|3.0.0\",\n  \"status\": \"completed\",\n  \"authored\": \"2020-05-04T14:15:00-05:00\",\n  \"subject\": {\n    \"identifier\": {\n      \"system\": \"urn:ietf:rfc:4122\",\n      \"value\": \"{{patientId}}\"\n    }\n  },\n  \"item\":  [\n    {\n      \"linkId\": \"P\",\n      \"text\": \"Persönliche Informationen\",\n      \"item\":  [\n        {\n          \"linkId\": \"P0\",\n          \"text\": \"Wie alt sind Sie?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://fhir.data4life.care/covid-19/r4/CodeSystem/age-group\",\n                \"code\": \"61-70\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"P1\",\n          \"text\": \"Sind Sie älter oder gleich 65 Jahre alt?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA33-6\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"P2\",\n          \"text\": \"Wie ist Ihre aktuelle Wohnsituation?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA6255-9\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"P3\",\n          \"text\": \"Pflegen oder unterstützen Sie privat mindestens einmal pro Woche eine oder mehrere Personen mit altersbedingten Beschwerden, chronischen Erkrankungen oder Gebrechlichkeit?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"P4\",\n          \"text\": \"Sind Sie in einem der folgenden Bereiche tätig?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://fhir.data4life.care/covid-19/r4/CodeSystem/occupation-class\",\n                \"code\": \"community\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"P5\",\n          \"text\": \"Rauchen Sie?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"P6\",\n          \"text\": \"Sind Sie schwanger?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA26683-5\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"linkId\": \"C\",\n      \"text\": \"Kontakte zu COVID-19-Fällen\",\n      \"item\":  [\n        {\n          \"linkId\": \"C0\",\n          \"text\": \"Hatten Sie engen Kontakt zu einem bestätigten Fall?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA33-6\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"CZ\",\n          \"text\": \"An welchem Tag war der letzte Kontakt?\",\n          \"answer\":  [\n            {\n              \"valueDate\": \"2020-03-27\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"linkId\": \"S\",\n      \"text\": \"Symptome\",\n      \"item\":  [\n        {\n          \"linkId\": \"S0\",\n          \"text\": \"Hatten Sie in den letzten 24 Std. Fieber (über 38°C)?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"S1\",\n          \"text\": \"Hatten Sie in den letzten 4 Tagen Fieber (über 38°C)?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA33-6\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"S2\",\n          \"text\": \"Wie hoch war die höchste Temperatur ca.?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://fhir.data4life.care/covid-19/r4/CodeSystem/fever-class\",\n                \"code\": \"40C\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"S3\",\n          \"text\": \"Hatten Sie in den letzten 24 Std. Schüttelfrost?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"S4\",\n          \"text\": \"Haben Sie sich in den letzten 24 Std. schlapp oder abgeschlagen gefühlt?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA33-6\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"S5\",\n          \"text\": \"Hatten Sie in den letzten 24 Std. Gliederschmerzen?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"S6\",\n          \"text\": \"Hatten Sie in den letzten 24 Std. anhaltenden Husten?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA33-6\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"S7\",\n          \"text\": \"Hatten Sie in den letzten 24 Std. Schnupfen?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"S8\",\n          \"text\": \"Hatten Sie in den letzten 24 Std. Durchfall?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"S9\",\n          \"text\": \"Hatten Sie in den letzten 24 Std. Halsschmerzen?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA33-6\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"SA\",\n          \"text\": \"Hatten Sie in den letzten 24 Std. Kopfschmerzen?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"SB\",\n          \"text\": \"Sind Sie in den letzten 24 Std. schneller außer Atem als sonst?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"SC\",\n          \"text\": \"Hatten Sie in den letzten 24 Std. Geschmacks- und/oder Geruchsverlust?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"SZ\",\n          \"text\": \"Bezogen auf alle Fragen zu Symptomen: Seit wann haben Sie die von Ihnen angegebenen Symptome?\",\n          \"answer\":  [\n            {\n              \"valueDate\": \"2020-03-30\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"linkId\": \"D\",\n      \"text\": \"Kronische Erkrankungen\",\n      \"item\":  [\n        {\n          \"linkId\": \"D0\",\n          \"text\": \"Wurde bei Ihnen durch einen Arzt/eine Ärztin eine chronische Lungenerkrankung festgestellt?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"D1\",\n          \"text\": \"Wurde bei Ihnen durch einen Arzt/eine Ärztin Diabetes festgestellt?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA33-6\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"D2\",\n          \"text\": \"Wurde bei Ihnen durch einen Arzt/eine Ärztin eine Herzerkrankung festgestellt?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"D3\",\n          \"text\": \"Wurde bei Ihnen durch einen Arzt/eine Ärztin Adipositas (Fettsucht) festgestellt?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"linkId\": \"M\",\n      \"text\": \"Medikation\",\n      \"item\":  [\n        {\n          \"linkId\": \"M0\",\n          \"text\": \"Nehmen Sie aktuell Cortison ein (in Tablettenform)?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"M1\",\n          \"text\": \"Nehmen Sie aktuell Immunsuppressiva?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA32-8\"\n              }\n            }\n          ]\n        },\n        {\n          \"linkId\": \"M2\",\n          \"text\": \"Haben Sie sich im Zeitraum von Oktober 2019 bis heute gegen Grippe impfen lassen?\",\n          \"answer\":  [\n            {\n              \"valueCoding\": {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"LA33-6\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"language\": \"de\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/QuestionnaireResponse",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"QuestionnaireResponse"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
@@ -4062,6 +4115,384 @@
 						}
 					]
 				},
+				{
+					"name": "Immunization",
+					"item": [
+						{
+							"name": "Find Immunization: read",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Immunization/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Immunization",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Immunization: vread",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Immunization/:id/_history/:vid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Immunization",
+										":id",
+										"_history",
+										":vid"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										},
+										{
+											"key": "vid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Immunization: search",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Immunization?status=error",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Immunization"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "_language",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_profile",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_source",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_security",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_tag",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_content",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_text",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "_filter",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "date",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "identifier",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "location",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "lot-number",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "manufacturer",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "patient",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "performer",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "reaction",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "reaction-date",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "reason-code",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "reason-reference",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "series",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "error"
+										},
+										{
+											"key": "status-reason",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "target-disease",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "vaccine-code",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Immunization",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"b7db30a0-4ffd-4dd6-b3e5-53e2730789e6\",\n  \"meta\": {\n    \"profile\": [\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization\"\n    ]\n  },\n  \"_occurrenceDateTime\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/data-absent-reason\",\n        \"valueCode\": \"unknown\"\n      }\n    ]\n  },\n  \"patient\": {\n    \"reference\": \"Patient/c786ac3c-0579-4aa2-adda-db784b214ad6\",\n        \"identifier\": {\n      \"system\": \"urn:ietf:rfc:4122\",\n      \"value\": \"{{patientId}}\"\n    }\n  },\n  \"status\": \"not-done\",\n  \"vaccineCode\": {\n    \"coding\": [\n      {\n        \"code\": \"no-known-immunizations\",\n        \"display\": \"No known immunizations\",\n        \"system\": \"http://hl7.org/fhir/uv/ips/CodeSystem/absent-unknown-uv-ips\"\n      }\n    ]\n  },\n  \"resourceType\": \"Immunization\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Immunization",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Immunization"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Immunization 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"resourceType\": \"Immunization\",\n  \"id\": \"c17f192c-f765-4729-818a-4ee55be5c87b\",\n  \"meta\": {\n    \"profile\":  [\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization\"\n    ]\n  },\n  \"status\": \"completed\",\n  \"vaccineCode\": {\n    \"coding\":  [\n      {\n        \"system\": \"http://snomed.info/sct\",\n        \"code\": \"1119349007\",\n        \"display\": \"Vaccine product containing only Severe acute respiratory syndrome coronavirus 2 messenger ribonucleic acid (medicinal product)\"\n      }\n    ]\n  },\n  \"patient\": {\n    \"reference\": \"Patient/21acfc9c-1fd6-43e6-a8fe-c6b6341b0fab\",\n    \"identifier\": {\n      \"system\": \"urn:ietf:rfc:4122\",\n      \"value\": \"{{patientId}}\"\n    }\n  },\n  \"occurrenceDateTime\": \"2020-12-27\",\n  \"protocolApplied\":  [\n    {\n      \"targetDisease\":  [\n        {\n          \"coding\":  [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"840539006\",\n              \"display\": \"Disease caused by Severe acute respiratory syndrome coronavirus 2 (disorder)\"\n            }\n          ]\n        }\n      ],\n      \"_doseNumberString\": {\n        \"extension\":  [\n          {\n            \"url\": \"http://hl7.org/fhir/StructureDefinition/data-absent-reason\",\n            \"valueCode\": \"unknown\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Immunization",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Immunization"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Immunization 3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"resourceType\": \"Immunization\",\n  \"id\": \"85bd2fab-256b-43d6-9671-4f97c1407d0f\",\n  \"meta\": {\n    \"profile\":  [\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization\"\n    ]\n  },\n  \"status\": \"completed\",\n  \"vaccineCode\": {\n    \"coding\":  [\n      {\n        \"system\": \"http://snomed.info/sct\",\n        \"code\": \"333598008\",\n        \"display\": \"Pneumococcal vaccine\"\n      }\n    ]\n  },\n  \"patient\": {\n    \"reference\": \"Patient/c786ac3c-0579-4aa2-adda-db784b214ad6\",\n    \"identifier\": {\n      \"system\": \"urn:ietf:rfc:4122\",\n      \"value\": \"{{patientId}}\"\n    }\n  },\n  \"occurrenceDateTime\": \"2020-10-06\",\n  \"protocolApplied\":  [\n    {\n      \"targetDisease\":  [\n        {\n          \"coding\":  [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"16814004\",\n              \"display\": \"Pneumococcal infectious disease\"\n            }\n          ]\n        }\n      ],\n      \"_doseNumberString\": {\n        \"extension\":  [\n          {\n            \"url\": \"http://hl7.org/fhir/StructureDefinition/data-absent-reason\",\n            \"valueCode\": \"unknown\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Immunization",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Immunization"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Immunization 4",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"resourceType\": \"Immunization\",\n  \"id\": \"c17f192c-f765-4729-818a-4ee55be5c87b\",\n  \"meta\": {\n    \"profile\":  [\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization\"\n    ]\n  },\n  \"status\": \"completed\",\n  \"vaccineCode\": {\n    \"coding\":  [\n      {\n        \"system\": \"http://snomed.info/sct\",\n        \"code\": \"1119349007\",\n        \"display\": \"Vaccine product containing only Severe acute respiratory syndrome coronavirus 2 messenger ribonucleic acid (medicinal product)\"\n      }\n    ]\n  },\n  \"patient\": {\n    \"reference\": \"Patient/21acfc9c-1fd6-43e6-a8fe-c6b6341b0fab\",\n    \"identifier\": {\n      \"system\": \"urn:ietf:rfc:4122\",\n      \"value\": \"{{patientId}}\"\n    }\n  },\n  \"occurrenceDateTime\": \"2020-12-27\",\n  \"protocolApplied\":  [\n    {\n      \"targetDisease\":  [\n        {\n          \"coding\":  [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"840539006\",\n              \"display\": \"Disease caused by Severe acute respiratory syndrome coronavirus 2 (disorder)\"\n            }\n          ]\n        }\n      ],\n      \"_doseNumberString\": {\n        \"extension\":  [\n          {\n            \"url\": \"http://hl7.org/fhir/StructureDefinition/data-absent-reason\",\n            \"valueCode\": \"unknown\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Immunization",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Immunization"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Immunization not done",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"b7db30a0-4ffd-4dd6-b3e5-53e2730789e6\",\n  \"meta\": {\n    \"profile\": [\n      \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization\"\n    ]\n  },\n  \"_occurrenceDateTime\": {\n    \"extension\": [\n      {\n        \"url\": \"http://hl7.org/fhir/StructureDefinition/data-absent-reason\",\n        \"valueCode\": \"unknown\"\n      }\n    ]\n  },\n  \"patient\": {\n    \"reference\": \"Patient/c786ac3c-0579-4aa2-adda-db784b214ad6\",\n    \"identifier\": {\n      \"system\": \"urn:ietf:rfc:4122\",\n      \"value\": \"{{patientId}}\"\n    }\n  },\n  \"status\": \"not-done\",\n  \"vaccineCode\": {\n    \"coding\": [\n      {\n        \"code\": \"no-known-immunizations\",\n        \"display\": \"No known immunizations\",\n        \"system\": \"http://hl7.org/fhir/uv/ips/CodeSystem/absent-unknown-uv-ips\"\n      }\n    ]\n  },\n  \"resourceType\": \"Immunization\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir/Immunization",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir",
+										"Immunization"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "EHRbase",
+			"item": [
 				{
 					"name": "Basic",
 					"item": [
