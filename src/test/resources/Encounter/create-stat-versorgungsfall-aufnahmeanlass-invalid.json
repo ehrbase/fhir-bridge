@@ -1,0 +1,88 @@
+{
+  "resourceType": "Encounter",
+  "id": "5844e89b-c8f3-4e26-bc0f-502e00293874",
+  "status": "finished",
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "VN"
+          }
+        ]
+      },
+      "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus",
+      "value": "F_0000002",
+      "period": {
+        "start": "2021-02-13T03:04:00+01:00",
+        "end": "2021-03-01T20:42:00+01:00"
+      }
+    }
+  ],
+  "class": {
+    "code": "IMP",
+    "display": "stationär",
+    "system": "http://hl7.org/fhir/v3/ActCode/cs.html"
+  },
+  "serviceType": {
+    "coding": [
+      {
+        "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel",
+        "code": "3700",
+        "userSelected": false
+      }
+    ]
+  },
+  "serviceProvider": {
+    "identifier": {
+      "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Einrichtungsidentifikator/MusterKrankenhaus",
+      "value": "260123451_MusterKrankenhaus"
+    }
+  },
+  "diagnosis": [
+    {
+      "condition": {
+        "reference": "Condition/e6b6895c-549b-47c5-a842-41100761385d"
+      }
+    }
+  ],
+  "hospitalization": {
+    "admitSource": {
+      "coding": [
+        {
+          "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Aufnahmeanlass",
+          "code": "25"
+        }
+      ]
+    },
+    "dischargeDisposition": {
+      "coding": [
+        {
+          "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Entlassungsgrund",
+          "code": "12"
+        }
+      ]
+    }
+  },
+  "reasonCode": [
+    {
+      "coding": [
+        {
+          "system": "https://www.medizininformatik-initiative.de/fhir/modul-fall/core/CodeSystem/Aufnahmegrund",
+          "code": "07"
+        }
+      ]
+    }
+  ],
+  "period": {
+    "start": "2021-02-13T03:04:00+01:00",
+    "end": "2021-03-01T20:42:00+01:00"
+  }
+}

@@ -72,17 +72,17 @@ ${vCC_URL}		                http://snomed.info/sct
 
 	# invalid cases for identifier
     $.subject.identifier			missing							422		 Object must have some content                                 					                                            Observation.subject
-    $.subject.identifier			${EMPTY}						422		 This property must be an Object, not a primitive property     					                                            Observation.subject.identifier
-    $.subject.identifier			${{ [] }}						422		 This property must be an Object, not an array                 					                                            Observation.subject.identifier
+    $.subject.identifier			${EMPTY}						422		 The property identifier must be an Object, not a primitive property    		                                            Observation.subject.identifier
+    $.subject.identifier			${{ [] }}						422		 The property identifier must be an Object, not an array       					                                            Observation.subject.identifier
     $.subject.identifier			${{ {} }}						422		 Object must have some content                                 					                                            Observation.subject.identifier
-    $.subject.identifier			${123}							422		 This property must be an Object, not a primitive property     					                                            Observation.subject.identifier
+    $.subject.identifier			${123}							422		 The property identifier must be an Object, not a primitive property    		                                            Observation.subject.identifier
 
 	# invalid cases for subject
     $.subject						missing							422		 Observation.subject: minimum required = 1, but only found 0 .from ${patient-ICU-url}
-    $.subject						${EMPTY}						422		 This property must be an Object, not a primitive property     					                                            Observation.subject
-    $.subject						${{ [] }}						422		 This property must be an Object, not an array                 					                                            Observation.subject
+    $.subject						${EMPTY}						422		 The property subject must be an Object, not a primitive property				                                            Observation.subject
+    $.subject						${{ [] }}						422		 The property subject must be an Object, not an array          					                                            Observation.subject
     $.subject						${{ {} }}						422		 Object must have some content                                 					                                            Observation.subject
-    $.subject						${123}							422		 This property must be an Object, not a primitive property     					                                            Observation.subject
+    $.subject						${123}							422		 The property subject must be an Object, not a primitive property				                                            Observation.subject
 	
 	# comment: random uuid																			 regex for uuid
     $.subject.identifier.value    ${{str(uuid.uuid4())}}    		422     EhrId not found for subject '([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'
@@ -147,18 +147,18 @@ ${vCC_URL}		                http://snomed.info/sct
 
     #invalid profil
     $.meta.profile					missing							422    	Object must have some content																					Observation.meta
-    $.meta.profile					${EMPTY}						422    	This property must be an Array, not a a primitive property														Observation.meta.profile
+    $.meta.profile					${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.meta.profile
     $.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.						Observation.meta.profile.0.
     $.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.						Observation.meta.profile.0.
     $.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.							Observation.meta.profile.0.
-    $.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked								Observation.meta.profile.0.
+    $.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	The resource does not contain any supported profile
     $.meta.profile[0]				${EMPTY}						422    	@value cannot be empty                                  														Observation.meta.profile.0.
 	
 	# comment: the next one sets the value to an empty list/array []
     $.meta.profile					${{ [] }}						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	
 	# comment: the next one sets value to an empty object {}
-    $.meta.profile					${{ {} }}						422    	This property must be an Array, not a an object
+    $.meta.profile					${{ {} }}						422     This property must be an Array, not an object
 
 
 005 Create Patient in ICU (Invalid/Missing 'Status')
@@ -247,7 +247,7 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.code									${EMPTY}				422    	Observation.code: minimum required = 1, but only found 0 .from ${patient-ICU-url}							Observation
 	$.code									${{ [] }}				422    	Observation.code: minimum required = 1, but only found 0 .from ${patient-ICU-url}							Observation
 	$.code									${{ {} }}				422    	Object must have some content																				Observation.code
-	$.code									${{ [{}] }}				422    	This property must be an Object, not an array																Observation.code
+	$.code									${{ [{}] }}				422    	The property code must be an Object, not an array   														Observation.code
 
 	# invalid coding
 	$.code.coding   	 					missing					422    	Observation.code.coding: minimum required = 1, but only found 0												Observation.code
@@ -342,12 +342,12 @@ ${vCC_URL}		                http://snomed.info/sct
 	# 																	CODE
 	
 	# missing valueCodeableConcept
-	$.valueCodeableConcept						${EMPTY}				422    	This property must be an Object, not a primitive property												    	Observation.value.x.
+	$.valueCodeableConcept						${EMPTY}				422    	The property valueCodeableConcept must be an Object, not a primitive property							    	Observation.value.x.
 
 	# wrong format
-	$.valueCodeableConcept						${{ [] }}				422    	This property must be an Object, not an array													    			Observation.value.x.
+	$.valueCodeableConcept						${{ [] }}				422    	The property valueCodeableConcept must be an Object, not an array			            		    			Observation.value.x.
 	$.valueCodeableConcept						${{ {} }}				422    	Object must have some content																		    		Observation.value.x.
-	$.valueCodeableConcept						${{ [{}] }}				422    	This property must be an Object, not an array															    	Observation.value.x.
+	$.valueCodeableConcept						${{ [{}] }}				422    	The property valueCodeableConcept must be an Object, not an array										    	Observation.value.x.
 
 	# missing coding
 	$.valueCodeableConcept.coding 				missing					422    	Object must have some content																			    	Observation.value.x.
@@ -395,7 +395,7 @@ ${vCC_URL}		                http://snomed.info/sct
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				create-patient-in-icu.json
-	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	observation.validate response - 422 (with error message)	    422								obs-6: 'dataAbsentReason SHALL only be present if Observation.value.x. is not present'  Observation
 
 
 
@@ -416,12 +416,12 @@ ${vCC_URL}		                http://snomed.info/sct
 
 	# missing valueCodeableConcept
 #	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.dataAbsentReason
+	$.dataAbsentReason							${EMPTY}				422    	The property dataAbsentReason must be an Object, not a primitive property									Observation.dataAbsentReason
 
 	# wrong format valueCodeableConcept
-	$.dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.dataAbsentReason
+	$.dataAbsentReason							${{ [] }}				422    	The property dataAbsentReason must be an Object, not an array   											Observation.dataAbsentReason
 	$.dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.dataAbsentReason
-	$.dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array                                                               Observation.dataAbsentReason
+	$.dataAbsentReason							${{ [{}] }}				422    	The property dataAbsentReason must be an Object, not an array                                               Observation.dataAbsentReason
 
 	# missing coding
 	$.dataAbsentReason.coding					${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.dataAbsentReason.coding
@@ -472,7 +472,7 @@ ${vCC_URL}		                http://snomed.info/sct
 # all attributes invalid for valueCodeableConcept
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	               ${EMPTY}    	        ${EMPTY}		    		422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..display
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true           ${1234}	               test      	        ${1234}		        		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..display    
-	Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	             http://google.com      test   		        		422          ele-1: All FHIR elements must have a @value or children                                                                                             Observation.value.ofType.CodeableConcept..coding.0..system
+	Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${EMPTY}	             http://google.com      test   		        		422          ele-1: 'All FHIR elements must have a @value or children'                                                                                             Observation.value.ofType.CodeableConcept..coding.0..system
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       missing	               ${EMPTY}             missing		        		422          @value cannot be empty                                                                                                                              Observation.value.ofType.CodeableConcept..coding.0..code
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final		     true             true           ${category_URL}         survey			         true			   true		  		 ${code_URL}			  		  01		       ${code_display}            		  true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               missing 	            test   		        		422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.value.x..coding.0..system
 
@@ -495,7 +495,7 @@ ${vCC_URL}		                http://snomed.info/sct
     ${1234}      	        ${ID}		 	  			   true         ${patient-ICU-url}			  final		     true             true           ${1234}                 ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          This does not appear to be a FHIR resource .unknown name '1234'.                                                                                    1234
     Observation    	        ${1234}      				   true         ${patient-ICU-url}			  final		     true             true           ${1234}                 ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.id
     Observation    	        ${ID}		 	  			   false        ${patient-ICU-url}			  final		     true             true           ${1234}                 ${1234}                 true			   true			  	 ${1234}          		  	      ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Coding.system must be an absolute reference, not a local reference                                                                                  Observation.value.ofType.CodeableConcept..coding.0.
-    Observation    	        ${ID}		 	  			   true         ${1234}                		  final		     true             true           ${1234}                 ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Profile reference '1234' could not be resolved, so has not been checked                                                                             Observation.meta.profile.0.
+    Observation    	        ${ID}		 	  			   true         ${1234}                		  final		     true             true           ${1234}                 ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Profile reference '1234' has not been checked because it is unknown                                                                                 Observation.meta.profile.0.
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      ${1234}	     true             true           ${1234}                 ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.status
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final  	     false            true           ${1234}                 ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                            Observation.code.coding.0..system
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final  	     true             false          ${1234}                 ${1234}                 true			   true			  	 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    true	       ${1234}	               ${1234}              ${1234}		        422          Object must have some content                                                                                                                       Observation.category.0.

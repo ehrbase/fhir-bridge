@@ -4,8 +4,8 @@ import com.nedap.archie.rm.RMObject;
 import org.apache.camel.Exchange;
 import org.apache.camel.support.DefaultProducer;
 import org.apache.commons.io.FileUtils;
+import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.client.flattener.Unflattener;
-import org.ehrbase.fhirbridge.ehr.Composition;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
 import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
 import org.slf4j.Logger;
@@ -51,16 +51,16 @@ public class CompositionProducer extends DefaultProducer {
         }
 
         if (endpoint.getProperties().isEnabled()) {
-            debugMapping((Composition) body);
+            debugMapping((CompositionEntity) body);
         }
 
         Object mergedComposition = endpoint.getOpenEhrClient().compositionEndpoint(ehrId).mergeCompositionEntity(body);
-        exchange.getMessage().setHeader(CompositionConstants.VERSION_UID, ((Composition) mergedComposition).getVersionUid());
+        exchange.getMessage().setHeader(CompositionConstants.VERSION_UID, ((CompositionEntity) mergedComposition).getVersionUid());
 
         exchange.getMessage().setBody(mergedComposition);
     }
 
-    private void debugMapping(Composition composition) {
+    private void debugMapping(CompositionEntity composition) {
         ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
         resourceTemplateProvider.afterPropertiesSet();
         Unflattener unflattener = new Unflattener(resourceTemplateProvider);

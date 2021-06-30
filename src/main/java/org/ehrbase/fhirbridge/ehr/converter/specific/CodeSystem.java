@@ -6,6 +6,8 @@ public enum CodeSystem {
 
     SNOMED("http://snomed.info/sct"),
 
+    KONTAKT_EBENE("https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Kontaktebene"),
+
     HL7_DATA_ABSENT_REASON("http://terminology.hl7.org/CodeSystem/data-absent-reason"),
 
     DIMDI_ATC("http://fhir.de/CodeSystem/dimdi/atc");

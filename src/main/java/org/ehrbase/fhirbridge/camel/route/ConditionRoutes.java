@@ -16,14 +16,11 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.FhirBridgeConstants;
-import org.hl7.fhir.r4.model.Condition;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of {@link RouteBuilder} that provides route definitions for transactions
- * linked to {@link Condition} resource.
+ * Implementation of {@link org.apache.camel.builder.RouteBuilder RouteBuilder} that defines routes for transactions
+ * related to {@link org.hl7.fhir.r4.model.Condition Condition} resource.
  *
  * @since 1.0.0
  */
@@ -35,26 +32,20 @@ public class ConditionRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // 'Create Condition' route definition
-        from("condition-create:consumer?fhirContext=#fhirContext")
+        // Route: Provide Condition
+        from("condition-provide:consumer?fhirContext=#fhirContext")
+            .routeId("provide-condition-route")
             .onCompletion()
-                .process("auditCreateResourceProcessor")
+                .process("provideResourceAuditHandler")
             .end()
-            .process("resourceProfileValidator")
-            .setHeader(FhirBridgeConstants.METHOD_OUTCOME, method("conditionDao", "create(${body}, ${headers.FhirRequestDetails})"))
-            .process("ehrIdLookupProcessor")
-            .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
-            .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .process("resourceResponseProcessor");
+            .process("fhirProfileValidator")
+            .process("provideConditionPersistenceProcessor")
+            .to("direct:internal-provide-resource");
 
-        // 'Find Condition' route definition
+        // Route: Find Condition
         from("condition-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .choice()
-                .when(isSearchOperation())
-                    .to("bean:conditionDao?method=search(${body}, ${headers.FhirRequestDetails})")
-                    .process("bundleProviderResponseProcessor")
-                .otherwise()
-                    .to("bean:conditionDao?method=read(${body}, ${headers.FhirRequestDetails})");
+            .routeId("find-condition-route")
+            .process("findConditionProcessor");
 
         // @formatter:on
     }

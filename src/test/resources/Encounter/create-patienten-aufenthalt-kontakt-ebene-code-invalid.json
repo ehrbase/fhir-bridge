@@ -1,0 +1,130 @@
+{
+  "resourceType": "Encounter",
+  "id": "28436186-b5b3-4881-b000-8a89abf659b7",
+  "meta": {
+    "profile": [
+      "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/StructureDefinition/KontaktGesundheitseinrichtung"
+    ]
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "VN"
+          }
+        ]
+      },
+      "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus",
+      "value": "F_0000001",
+      "period": {
+        "start": "2021-02-13T03:04:00+01:00",
+        "end": "2021-03-01T20:42:00+01:00"
+      }
+    }
+  ],
+  "status": "finished",
+  "class": {
+    "system": "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/EncounterClassAdditionsDE",
+    "code": "operation",
+    "display": "Operation"
+  },
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Kontaktebene",
+          "code": "abteilung",
+          "display": "Abteilung",
+          "userSelected": false
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "diagnosis": [
+    {
+      "condition": {
+        "reference": "Condition/e6b6895c-549b-47c5-a842-41100761385d"
+      }
+    }
+  ],
+  "period": {
+    "start": "2021-02-13T03:04:00+01:00",
+    "end": "2021-03-01T20:42:00+01:00"
+  },
+  "reasonCode": [
+    {
+      "coding": [
+        {
+          "system": "https://www.medizininformatik-initiative.de/fhir/modul-fall/core/CodeSystem/Aufnahmegrund",
+          "code": "01",
+          "display": "Krankenhausbehandlung, vollstationär"
+        }
+      ]
+    }
+  ],
+  "hospitalization": {
+    "admitSource": {
+      "coding": [
+        {
+          "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Aufnahmeanlass",
+          "code": "E",
+          "display": "Einweisung durch einen Arzt"
+        }
+      ]
+    },
+    "dischargeDisposition": {
+      "coding": [
+        {
+          "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Entlassungsgrund",
+          "code": "019",
+          "display": "Behandlung regulär beendet, arbeitsfähig entlassen"
+        }
+      ]
+    }
+  },
+  "location": [
+    {
+      "location": {
+        "reference": "Location/FD7DF5FD052E1CBCF7F41B12804D596C71FFBE1958B58EF06401DD781B2A53D3"
+      },
+      "status": "active",
+      "physicalType": {
+        "coding": [
+          {
+            "system": "https://www.hl7.org/fhir/valueset-location-physical-type.html",
+            "code": "bd",
+            "userSelected": false
+          }
+        ],
+        "text": "Bett"
+      },
+      "period": {
+        "start": "2021-02-13T03:04:00+01:00",
+        "end": "2021-03-01T20:42:00+01:00"
+      }
+    }
+  ],
+  "serviceType": {
+    "coding": [
+      {
+        "system": "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel",
+        "code": "3700",
+        "userSelected": false
+      }
+    ]
+  },
+  "serviceProvider": {
+    "identifier": {
+      "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Abteilungsidentifikator/MusterKrankenhaus",
+      "value": "1500_ACHI"
+    }
+  }
+}
