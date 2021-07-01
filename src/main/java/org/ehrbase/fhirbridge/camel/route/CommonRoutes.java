@@ -20,7 +20,7 @@ public class CommonRoutes extends RouteBuilder {
             .routeId("internal-provide-resource")
             .process("ehrIdLookupProcessor")
             .doTry()
-                .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
+                .to("bean:fhirResourceConversionService?method=convert(${headers.CamelFhirBridgeProfile}, ${body})")
             .doCatch(ConversionException.class)
                 .throwException(UnprocessableEntityException.class, "${exception.message}")
             .end()
@@ -29,10 +29,10 @@ public class CommonRoutes extends RouteBuilder {
        from("direct:internal-provide-resource-after-converter")
             .routeId("internal-provide-resource-after-converter-route")
             .choice()
-                .when(header(CamelConstants.COMPOSITION_VERSION_UID).isNotNull())
+                .when(header(CamelConstants.COMPOSITION_ID).isNotNull())
                     .process(exchange -> {
                         var composition = exchange.getIn().getMandatoryBody(CompositionEntity.class);
-                        composition.setVersionUid(new VersionUid(exchange.getIn().getHeader(CamelConstants.COMPOSITION_VERSION_UID, String.class)));
+                        composition.setVersionUid(new VersionUid(exchange.getIn().getHeader(CamelConstants.COMPOSITION_ID, String.class)));
                     })
                .end()
             .doTry()

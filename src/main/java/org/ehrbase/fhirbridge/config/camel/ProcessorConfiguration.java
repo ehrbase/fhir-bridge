@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.config.camel;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.ehrbase.fhirbridge.camel.processor.FindResourceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourcePersistenceProcessor;
-import org.ehrbase.fhirbridge.core.repository.ResourceMapRepository;
+import org.ehrbase.fhirbridge.core.repository.ResourceCompositionRepository;
 import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
@@ -21,60 +21,60 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ProcessorConfiguration {
 
-    private final ResourceMapRepository resourceMapRepository;
+    private final ResourceCompositionRepository resourceCompositionRepository;
 
-    public ProcessorConfiguration(ResourceMapRepository resourceMapRepository) {
-        this.resourceMapRepository = resourceMapRepository;
+    public ProcessorConfiguration(ResourceCompositionRepository resourceCompositionRepository) {
+        this.resourceCompositionRepository = resourceCompositionRepository;
     }
 
     @Bean
     public ProvideResourcePersistenceProcessor<Condition> provideConditionPersistenceProcessor(IFhirResourceDao<Condition> conditionDao) {
-        return new ProvideResourcePersistenceProcessor<>(conditionDao, Condition.class, resourceMapRepository);
+        return new ProvideResourcePersistenceProcessor<>(conditionDao, Condition.class, resourceCompositionRepository);
     }
 
     @Bean
     public ProvideResourcePersistenceProcessor<Consent> provideConsentPersistenceProcessor(IFhirResourceDao<Consent> consentDao) {
-        return new ProvideResourcePersistenceProcessor<>(consentDao, Consent.class, resourceMapRepository);
+        return new ProvideResourcePersistenceProcessor<>(consentDao, Consent.class, resourceCompositionRepository);
     }
 
     @Bean
     public ProvideResourcePersistenceProcessor<DiagnosticReport> provideDiagnosticReportPersistenceProcessor(IFhirResourceDao<DiagnosticReport> diagnosticReportDao) {
-        return new ProvideResourcePersistenceProcessor<>(diagnosticReportDao, DiagnosticReport.class, resourceMapRepository);
+        return new ProvideResourcePersistenceProcessor<>(diagnosticReportDao, DiagnosticReport.class, resourceCompositionRepository);
     }
 
     @Bean
     public ProvideResourcePersistenceProcessor<Encounter> provideEncounterPersistenceProcessor(IFhirResourceDao<Encounter> encounterDao) {
-        return new ProvideResourcePersistenceProcessor<>(encounterDao, Encounter.class, resourceMapRepository);
+        return new ProvideResourcePersistenceProcessor<>(encounterDao, Encounter.class, resourceCompositionRepository);
     }
 
     @Bean
     public ProvideResourcePersistenceProcessor<Immunization> provideImmunizationPersistenceProcessor(IFhirResourceDao<Immunization> immunizationDao) {
-        return new ProvideResourcePersistenceProcessor<>(immunizationDao, Immunization.class, resourceMapRepository);
+        return new ProvideResourcePersistenceProcessor<>(immunizationDao, Immunization.class, resourceCompositionRepository);
     }
 
     @Bean
     public ProvideResourcePersistenceProcessor<Observation> provideObservationPersistenceProcessor(IFhirResourceDao<Observation> observationDao) {
-        return new ProvideResourcePersistenceProcessor<>(observationDao, Observation.class, resourceMapRepository);
+        return new ProvideResourcePersistenceProcessor<>(observationDao, Observation.class, resourceCompositionRepository);
     }
 
     @Bean
     public ProvideResourcePersistenceProcessor<MedicationStatement> provideMedicationStatementPersistenceProcessor(IFhirResourceDao<MedicationStatement> medicationStatementDao) {
-        return new ProvideResourcePersistenceProcessor<>(medicationStatementDao, MedicationStatement.class, resourceMapRepository);
+        return new ProvideResourcePersistenceProcessor<>(medicationStatementDao, MedicationStatement.class, resourceCompositionRepository);
     }
 
     @Bean
     public ProvideResourcePersistenceProcessor<Patient> providePatientPersistenceProcessor(IFhirResourceDao<Patient> patientDao) {
-        return new ProvideResourcePersistenceProcessor<>(patientDao, Patient.class, resourceMapRepository);
+        return new ProvideResourcePersistenceProcessor<>(patientDao, Patient.class, resourceCompositionRepository);
     }
 
     @Bean
     public ProvideResourcePersistenceProcessor<Procedure> provideProcedurePersistenceProcessor(IFhirResourceDao<Procedure> procedureDao) {
-        return new ProvideResourcePersistenceProcessor<>(procedureDao, Procedure.class, resourceMapRepository);
+        return new ProvideResourcePersistenceProcessor<>(procedureDao, Procedure.class, resourceCompositionRepository);
     }
 
     @Bean
     public ProvideResourcePersistenceProcessor<QuestionnaireResponse> provideQuestionnaireResponsePersistenceProcessor(IFhirResourceDao<QuestionnaireResponse> questionnaireResponseDao) {
-        return new ProvideResourcePersistenceProcessor<>(questionnaireResponseDao, QuestionnaireResponse.class, resourceMapRepository);
+        return new ProvideResourcePersistenceProcessor<>(questionnaireResponseDao, QuestionnaireResponse.class, resourceCompositionRepository);
     }
 
     @Bean
