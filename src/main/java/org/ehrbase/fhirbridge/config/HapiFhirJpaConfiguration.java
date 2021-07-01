@@ -61,11 +61,13 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties(HapiFhirJpaProperties.class)
+@SuppressWarnings("java:S6212")
 public class HapiFhirJpaConfiguration extends BaseR4Config {
 
     @Bean
     public DaoConfig daoConfig(HapiFhirJpaProperties properties) {
-        var config = new DaoConfig();
+        DaoConfig config = new DaoConfig();
+        config.setResourceServerIdStrategy(DaoConfig.IdStrategyEnum.UUID);
         config.setAllowInlineMatchUrlReferences(properties.isAllowInlineMatchUrlReferences());
         config.setAutoCreatePlaceholderReferenceTargets(properties.isAutoCreatePlaceholderReferences());
         config.setPopulateIdentifierInAutoCreatedPlaceholderReferenceTargets(properties.isPopulateIdentifierInAutoCreatedPlaceholderReferences());

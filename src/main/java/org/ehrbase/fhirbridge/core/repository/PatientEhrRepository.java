@@ -16,13 +16,8 @@
 
 package org.ehrbase.fhirbridge.core.repository;
 
-import org.ehrbase.fhirbridge.core.domain.ResourceMap;
+import org.ehrbase.fhirbridge.core.domain.PatientEhr;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- * Spring Data JPA Repository for {@link ResourceMap}.
- *
- * @since 1.2.0
- */
-public interface ResourceMapRepository extends JpaRepository<ResourceMap, String> {
+public interface PatientEhrRepository extends JpaRepository<PatientEhr, String> {
 }

@@ -21,43 +21,41 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
-import org.ehrbase.fhirbridge.core.domain.ResourceMap;
-import org.ehrbase.fhirbridge.core.repository.ResourceMapRepository;
+import org.ehrbase.fhirbridge.core.domain.ResourceComposition;
+import org.ehrbase.fhirbridge.core.repository.ResourceCompositionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-/**
- * {@link Processor} that handles the persistence of the {@link ResourceMap} entity and
- * returns the {@link MethodOutcome} stored in the exchange properties.
- *
- * @since 1.2.0
- */
 @Component
+@SuppressWarnings("java:S6212")
 public class ProvideResourceResponseProcessor implements Processor {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProvideResourceResponseProcessor.class);
 
-    private final ResourceMapRepository resourceMapRepository;
+    private final ResourceCompositionRepository resourceCompositionRepository;
 
-    public ProvideResourceResponseProcessor(ResourceMapRepository resourceMapRepository) {
-        this.resourceMapRepository = resourceMapRepository;
+    public ProvideResourceResponseProcessor(ResourceCompositionRepository resourceCompositionRepository) {
+        this.resourceCompositionRepository = resourceCompositionRepository;
     }
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        LOG.trace("Processing exchange...");
+        CompositionEntity composition = exchange.getIn().getBody(CompositionEntity.class);
+        MethodOutcome outcome = exchange.getProperty(CamelConstants.OUTCOME, MethodOutcome.class);
 
-        CompositionEntity composition = exchange.getIn().getMandatoryBody(CompositionEntity.class);
-        String resourceId = exchange.getIn().getHeader(CamelConstants.RESOURCE_ID, String.class);
+        String resourceId = outcome.getId().getIdPart();
 
-        ResourceMap resourceMap = resourceMapRepository.findById(resourceId)
-                .orElse(new ResourceMap(resourceId));
-        resourceMap.setCompositionVersionUid(composition.getVersionUid().toString());
+        ResourceComposition resourceComposition = resourceCompositionRepository.findById(resourceId)
+                .orElse(new ResourceComposition(resourceId));
+        resourceComposition.setCompositionId(getCompositionId(composition));
+        resourceCompositionRepository.save(resourceComposition);
+        LOG.debug("Created/Updated ResourceComposition: {}", resourceComposition);
 
-        resourceMapRepository.save(resourceMap);
-        LOG.debug("Saved ResourceMap: {}", resourceMap);
+        exchange.getMessage().setBody(outcome);
+    }
 
-        exchange.getMessage().setBody(exchange.getProperty(CamelConstants.METHOD_OUTCOME, MethodOutcome.class));
+    private String getCompositionId(CompositionEntity composition) {
+        return composition.getVersionUid().toString();
     }
 }

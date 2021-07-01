@@ -23,7 +23,7 @@ import ca.uhn.fhir.rest.api.server.RequestDetails;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
-import org.ehrbase.fhirbridge.core.repository.ResourceMapRepository;
+import org.ehrbase.fhirbridge.core.repository.ResourceCompositionRepository;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.openehealth.ipf.commons.ihe.fhir.Constants;
 import org.slf4j.Logger;
@@ -40,13 +40,13 @@ public class ProvideResourcePersistenceProcessor<T extends IBaseResource> implem
 
     private final Class<T> resourceType;
 
-    private final ResourceMapRepository resourceMapRepository;
+    private final ResourceCompositionRepository resourceCompositionRepository;
 
     public ProvideResourcePersistenceProcessor(IFhirResourceDao<T> resourceDao, Class<T> resourceType,
-                                               ResourceMapRepository resourceMapRepository) {
+                                               ResourceCompositionRepository resourceCompositionRepository) {
         this.resourceDao = resourceDao;
         this.resourceType = resourceType;
-        this.resourceMapRepository = resourceMapRepository;
+        this.resourceCompositionRepository = resourceCompositionRepository;
     }
 
     @Override
@@ -64,15 +64,15 @@ public class ProvideResourcePersistenceProcessor<T extends IBaseResource> implem
                 break;
             case UPDATE:
                 outcome = handleUpdateResource(resource, requestDetails);
-                resourceMapRepository.findById(outcome.getId().getIdPart())
-                        .ifPresent(resourceMap -> exchange.getMessage().setHeader(CamelConstants.COMPOSITION_VERSION_UID, resourceMap.getCompositionVersionUid()));
+                resourceCompositionRepository.findById(outcome.getId().getIdPart())
+                        .ifPresent(resourceMap -> exchange.getMessage().setHeader(CamelConstants.COMPOSITION_ID, resourceMap.getCompositionId()));
                 break;
             default:
                 throw new UnsupportedOperationException("Only 'Create', 'Transaction' or 'Update' operations are supported");
         }
 
         exchange.getMessage().setHeader(CamelConstants.RESOURCE_ID, outcome.getId().getIdPart());
-        exchange.setProperty(CamelConstants.METHOD_OUTCOME, outcome);
+        exchange.setProperty(CamelConstants.OUTCOME, outcome);
     }
 
     /**

@@ -41,7 +41,7 @@ public class EncounterRoutes extends AbstractRouteBuilder {
             .doTry()
                 .choice()
                     .when(header(CamelConstants.PROFILE).isEqualTo(Profile.KONTAKT_GESUNDHEIT_ABTEILUNG))
-                        .to("bean:fhirResourceConversionService?method=convert(${headers.FhirBridgeProfile}, ${body})")
+                        .to("bean:fhirResourceConversionService?method=convert(${headers.CamelFhirBridgeProfile}, ${body})")
                     .otherwise()
                         .to("bean:fhirResourceConversionService?method=convertDefaultEncounter(${body})")
             .endDoTry()

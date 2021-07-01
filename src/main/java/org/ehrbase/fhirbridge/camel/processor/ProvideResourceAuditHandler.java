@@ -63,7 +63,7 @@ public class ProvideResourceAuditHandler implements Processor {
     }
 
     private AuditEvent.AuditEventEntityComponent entity(Exchange exchange) {
-        MethodOutcome outcome = exchange.getProperty(CamelConstants.METHOD_OUTCOME, MethodOutcome.class);
+        MethodOutcome outcome = exchange.getProperty(CamelConstants.OUTCOME, MethodOutcome.class);
         RequestDetails requestDetails = exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
 
         return new AuditEvent.AuditEventEntityComponent()

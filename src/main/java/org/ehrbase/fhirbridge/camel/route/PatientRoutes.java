@@ -16,6 +16,12 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.apache.camel.util.ObjectHelper;
+import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
+import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,15 +38,25 @@ public class PatientRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // Route: Provide Patient
+        // Provide patient: create, update
         from("patient-provide:consumer?fhirContext=#fhirContext")
             .routeId("provide-patient-route")
-            .onCompletion()
-                .process("provideResourceAuditHandler")
-            .end()
             .process("fhirProfileValidator")
-            .process("providePatientPersistenceProcessor")
-            .to("direct:internal-provide-resource");
+            .process("providePatientProcessor")
+            .doTry()
+                .to("bean:fhirResourceConversionService?method=convert(${headers.CamelFhirBridgeProfile}, ${body})")
+                .process(exchange -> {
+                    if (ObjectHelper.isNotEmpty(exchange.getIn().getHeader(CamelConstants.COMPOSITION_ID))) {
+                        String compositionId = exchange.getIn().getHeader(CamelConstants.COMPOSITION_ID, String.class);
+                        exchange.getIn().getBody(CompositionEntity.class).setVersionUid(new VersionUid(compositionId));
+                    }
+                })
+                .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
+            .doCatch(ConversionException.class)
+                .throwException(UnprocessableEntityException.class, "${exception.message}")
+            .end()
+            .process("provideResourceResponseProcessor");
+
 
         // Route: Find Patient
         from("patient-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
