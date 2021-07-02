@@ -34,25 +34,10 @@ public class DiagnosticReportRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // Route: Provide Diagnostic Report
-        from("diagnostic-report-provide:consumer?fhirContext=#fhirContext")
-            .routeId("provide-diagnostic-report-route")
-            .onCompletion()
-                .process("provideResourceAuditHandler")
-            .end()
-            .process("fhirProfileValidator")
-            .to("direct:internal-provide-diagnostic-report");
-
-        // Route: Internal Provide Diagnostic Report
         from("direct:internal-provide-diagnostic-report")
             .routeId("internal-provide-diagnostic-report-route")
             .process("provideDiagnosticReportPersistenceProcessor")
             .to("direct:internal-provide-resource");
-
-        // 'Find Diagnostic Report' route definition
-        from("diagnostic-report-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .routeId("find-diagnostic-report-route")
-            .process("findDiagnosticReportProcessor");
         // @formatter:on
     }
 }

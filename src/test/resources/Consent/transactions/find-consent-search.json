@@ -27,7 +27,6 @@
     }
   ],
   "patient": {
-    "reference": "/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}",
     "identifier": {
       "system": "urn:ietf:rfc:4122",
       "value": "{{patientId}}"

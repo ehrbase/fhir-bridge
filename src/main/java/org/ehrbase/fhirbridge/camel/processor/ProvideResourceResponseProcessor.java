@@ -45,12 +45,12 @@ public class ProvideResourceResponseProcessor implements Processor {
         MethodOutcome outcome = exchange.getProperty(CamelConstants.OUTCOME, MethodOutcome.class);
 
         String resourceId = outcome.getId().getIdPart();
-
         ResourceComposition resourceComposition = resourceCompositionRepository.findById(resourceId)
                 .orElse(new ResourceComposition(resourceId));
         resourceComposition.setCompositionId(getCompositionId(composition));
         resourceCompositionRepository.save(resourceComposition);
-        LOG.debug("Created/Updated ResourceComposition: {}", resourceComposition);
+        LOG.debug("Saved ResourceComposition: resourceId={}, compositionId={}",
+                resourceComposition.getResourceId(), resourceComposition.getCompositionId());
 
         exchange.getMessage().setBody(outcome);
     }

@@ -34,25 +34,11 @@ public class ObservationRoutes extends AbstractRouteBuilder {
         // @formatter:off
         super.configure();
 
-        // Route: Provide Observation
-        from("observation-provide:consumer?fhirContext=#fhirContext")
-            .routeId("provide-observation-route")
-            .onCompletion()
-                .process("provideResourceAuditHandler")
-            .end()
-            .process("fhirProfileValidator")
-            .to("direct:internal-provide-observation");
-
         // Route: Internal Provide Observation
         from("direct:internal-provide-observation")
             .routeId("internal-provide-observation-route")
             .process("provideObservationPersistenceProcessor")
             .to("direct:internal-provide-resource");
-
-        // 'Find Observation' route definition
-        from("observation-find:consumer?fhirContext=#fhirContext&lazyLoadBundles=true")
-            .routeId("find-observation-route")
-            .process("findObservationProcessor");
         // @formatter:on
     }
 }
