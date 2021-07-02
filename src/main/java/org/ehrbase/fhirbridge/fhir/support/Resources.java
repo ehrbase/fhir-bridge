@@ -53,13 +53,13 @@ public class Resources {
             case Condition:
                 return getSubject((Condition) resource);
             case Consent:
-                return getSubject((Consent) resource);
+                return getPatient((Consent) resource);
             case DiagnosticReport:
                 return getSubject((DiagnosticReport) resource);
             case Encounter:
                 return getSubject((Encounter) resource);
             case Immunization:
-                    return getSubject((Immunization) resource);
+                return getPatient((Immunization) resource);
             case MedicationStatement:
                 return getSubject((MedicationStatement) resource);
             case Observation:
@@ -73,40 +73,38 @@ public class Resources {
         }
     }
 
-    public static Optional<Reference> getSubject(Condition condition) {
-        return condition.hasSubject() ? Optional.of(condition.getSubject()) : Optional.empty();
-    }
-
-    public static Optional<Reference> getSubject(Consent consent) {
-        return consent.hasPatient() ? Optional.of(consent.getPatient()) : Optional.empty();
-    }
-
-    public static Optional<Reference> getSubject(Immunization immunization) {
-        return immunization.hasPatient() ? Optional.of(immunization.getPatient()) : Optional.empty();
-    }
-
-    public static Optional<Reference> getSubject(DiagnosticReport diagnosticReport) {
-        return diagnosticReport.hasSubject() ? Optional.of(diagnosticReport.getSubject()) : Optional.empty();
-    }
-
-    public static Optional<Reference> getSubject(Encounter encounter) {
-        return encounter.hasSubject() ? Optional.of(encounter.getSubject()) : Optional.empty();
-    }
-
-    public static Optional<Reference> getSubject(MedicationStatement medicationStatement) {
-        return medicationStatement.hasSubject() ? Optional.of(medicationStatement.getSubject()) : Optional.empty();
-    }
-
-    public static Optional<Reference> getSubject(Observation observation) {
-        return observation.hasSubject() ? Optional.of(observation.getSubject()) : Optional.empty();
-    }
-
-    public static Optional<Reference> getSubject(Procedure procedure) {
-        return procedure.hasSubject() ? Optional.of(procedure.getSubject()) : Optional.empty();
-    }
-
-    public static Optional<Reference> getSubject(QuestionnaireResponse questionnaireResponse) {
-        return questionnaireResponse.hasSubject() ? Optional.of(questionnaireResponse.getSubject()) : Optional.empty();
+    public static void setSubject(Resource resource, Reference subject) {
+        switch (resource.getResourceType()) {
+            case Condition:
+                ((Condition) resource).setSubject(subject);
+                break;
+            case Consent:
+                ((Consent) resource).setPatient(subject);
+                break;
+            case DiagnosticReport:
+                ((DiagnosticReport) resource).setSubject(subject);
+                break;
+            case Encounter:
+                ((Encounter) resource).setSubject(subject);
+                break;
+            case Immunization:
+                ((Immunization) resource).setPatient(subject);
+                break;
+            case MedicationStatement:
+                ((MedicationStatement) resource).setSubject(subject);
+                break;
+            case Observation:
+                ((Observation) resource).setSubject(subject);
+                break;
+            case Procedure:
+                ((Procedure) resource).setSubject(subject);
+                break;
+            case QuestionnaireResponse:
+                ((QuestionnaireResponse) resource).setSubject(subject);
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported resource type: " + resource.getResourceType());
+        }
     }
 
     public static List<String> getProfileUris(Resource resource) {
@@ -130,5 +128,41 @@ public class Resources {
                 .collect(Collectors.toSet());
 
         return !Collections.disjoint(c1, c2);
+    }
+
+    private static Optional<Reference> getSubject(Condition condition) {
+        return condition.hasSubject() ? Optional.of(condition.getSubject()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getPatient(Consent consent) {
+        return consent.hasPatient() ? Optional.of(consent.getPatient()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getSubject(DiagnosticReport diagnosticReport) {
+        return diagnosticReport.hasSubject() ? Optional.of(diagnosticReport.getSubject()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getSubject(Encounter encounter) {
+        return encounter.hasSubject() ? Optional.of(encounter.getSubject()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getPatient(Immunization immunization) {
+        return immunization.hasPatient() ? Optional.of(immunization.getPatient()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getSubject(MedicationStatement medicationStatement) {
+        return medicationStatement.hasSubject() ? Optional.of(medicationStatement.getSubject()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getSubject(Observation observation) {
+        return observation.hasSubject() ? Optional.of(observation.getSubject()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getSubject(Procedure procedure) {
+        return procedure.hasSubject() ? Optional.of(procedure.getSubject()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getSubject(QuestionnaireResponse questionnaireResponse) {
+        return questionnaireResponse.hasSubject() ? Optional.of(questionnaireResponse.getSubject()) : Optional.empty();
     }
 }

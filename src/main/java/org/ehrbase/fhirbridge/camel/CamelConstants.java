@@ -27,6 +27,8 @@ public final class CamelConstants {
 
     public static final String OUTCOME = "CamelFhirBridgeOutcome";
 
+    public static final String PATIENT_ID = "CamelFhirPatientId";
+
     public static final String PROFILE = "CamelFhirBridgeProfile";
 
     public static final String RESOURCE_ID = "FhirBridgeResourceId";

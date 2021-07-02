@@ -67,10 +67,9 @@ public class HapiFhirJpaConfiguration extends BaseR4Config {
     @Bean
     public DaoConfig daoConfig(HapiFhirJpaProperties properties) {
         DaoConfig config = new DaoConfig();
-        config.setResourceServerIdStrategy(DaoConfig.IdStrategyEnum.UUID);
         config.setAllowInlineMatchUrlReferences(properties.isAllowInlineMatchUrlReferences());
-        config.setAutoCreatePlaceholderReferenceTargets(properties.isAutoCreatePlaceholderReferences());
-        config.setPopulateIdentifierInAutoCreatedPlaceholderReferenceTargets(properties.isPopulateIdentifierInAutoCreatedPlaceholderReferences());
+        config.setReuseCachedSearchResultsForMillis(null);
+        config.setResourceServerIdStrategy(DaoConfig.IdStrategyEnum.UUID);
         return config;
     }
 

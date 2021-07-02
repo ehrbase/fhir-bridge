@@ -49,7 +49,6 @@
     ]
   },
   "subject": {
-    "reference": "/Patient?identifier=http://www.netzwerk-universitaetsmedizin.de/sid/crr-pseudonym|{{patientIdentifier}}",
     "identifier": {
       "system": "http://www.netzwerk-universitaetsmedizin.de/sid/crr-pseudonym",
       "value": "{{patientIdentifier}}"

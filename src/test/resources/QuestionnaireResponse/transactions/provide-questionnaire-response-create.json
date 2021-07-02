@@ -4,7 +4,6 @@
   "status": "completed",
   "authored": "2020-05-04T14:15:00-05:00",
   "subject": {
-    "reference": "/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}",
     "identifier": {
       "system": "urn:ietf:rfc:4122",
       "value": "{{patientId}}"
