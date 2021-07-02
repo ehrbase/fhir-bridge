@@ -51,7 +51,7 @@
   "diagnosis": [
     {
       "condition": {
-        "reference": "Condition/e6b6895c-549b-47c5-a842-41100761385d"
+        "reference": "http://external/Condition/123"
       }
     }
   ],
@@ -93,7 +93,7 @@
   "location": [
     {
       "location": {
-        "reference": "Location/FD7DF5FD052E1CBCF7F41B12804D596C71FFBE1958B58EF06401DD781B2A53D3"
+        "reference": "http://external/Location/123"
       },
       "status": "active",
       "physicalType": {
