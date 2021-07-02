@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.fhir.condition;
 
-import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
@@ -9,7 +8,6 @@ import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Patient;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -33,15 +31,6 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     @Test
     void createDefault() throws IOException {
         create("create-condition-default.json");
-    }
-
-    @Test
-    void createWithInvalidSubject() throws IOException {
-        String resource = super.testFileLoader.loadResourceToString("create-condition-with-invalid-subject.json");
-        ICreateTyped createTyped = client.create().resource(resource);
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
-
-        assertEquals("HTTP 422 : Subject identifier is required", exception.getMessage());
     }
 
     @Test
