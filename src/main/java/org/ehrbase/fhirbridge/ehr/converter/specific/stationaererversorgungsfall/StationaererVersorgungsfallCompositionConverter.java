@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.stationaererversorgungsfal
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.StationaererVersorgungsfallComposition;
-import org.ehrbase.fhirbridge.fhir.support.KontaktebeneDefiningCode;
+import org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt.KontaktebeneDefiningCode;
 import org.hl7.fhir.r4.model.Encounter;
 import org.springframework.lang.NonNull;
 

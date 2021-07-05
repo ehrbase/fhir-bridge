@@ -18,14 +18,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("HttpUrlsUsage")
 public enum Profile {
 
-    // Condition Profiles
-
-    DEFAULT_CONDITION(Condition.class, null),
-
-    SYMPTOMS_COVID_19(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/symptoms-covid-19"),
-
+    // Condition
+    CONDITION_DEFAULT(Condition.class, null),
     DIAGNOSE_LIVER_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-liver-diseases"),
     DIAGNOSE_LUNG_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-lung-diseases"),
     DIAGNOSE_DIABETES_MELLITUS(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diabetes-mellitus"),
@@ -40,107 +37,69 @@ public enum Profile {
     DIAGNOSE_ORGAN_RECIPIENT(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/organ-recipient"),
     DIAGNOSE_COMPLICATIONS_COVID_19(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/complications-covid-19"),
     DIAGNOSE_DEPENDENCE_ON_VENTILATOR(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dependence-on-ventilator"),
+    SYMPTOMS_COVID_19(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/symptoms-covid-19"),
 
-    // Immunization Profiles
-
-    HISTORY_OF_VACCINATION(Immunization.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization"),
-    // Consent Profiles
-
+    // Consent
     DO_NOT_RESUSCITATE_ORDER(Consent.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order"),
 
-    // DiagnosticReport Profiles
+    // Immunization
+    HISTORY_OF_VACCINATION(Immunization.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization"),
 
+    // DiagnosticReport
     DIAGNOSTIC_REPORT_LAB(DiagnosticReport.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab"),
-
     DIAGNOSTIC_REPORT_RADIOLOGY(DiagnosticReport.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnostic-report-radiology"),
 
+    // Encounter
+    ENCOUNTER_DEFAULT(Encounter.class, null),
+    KONTAKT_GESUNDHEIT_ABTEILUNG(Encounter.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/StructureDefinition/KontaktGesundheitseinrichtung"),
 
-    // MedicationStatement Profiles
+    // MedicationStatement
     PHARMACOLOGICAL_THERAPY(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy"),
     PHARMACOLOGICAL_THERAPY_ACE_INHIBITORS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-ace-inhibitors"),
     PHARMACOLOGICAL_THERAPY_ANTICOAGULANTS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-anticoagulants"),
     PHARMACOLOGICAL_THERAPY_IMMUNOGLOBULINS(MedicationStatement.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-immunoglobulins"),
 
-    // Encounter Profiles
-    KONTAKT_GESUNDHEIT_EINRICHTUNG(Encounter.class, null), // as default, has the same link like KONTAKT_GESUNDHEIT_ABTEILUNG
-
-    KONTAKT_GESUNDHEIT_ABTEILUNG(Encounter.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/StructureDefinition/KontaktGesundheitseinrichtung"),
-
-    // Observation Profiles
-
+    // Observation
     TRAVEL_HISTORY(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/history-of-travel"),
-
     BODY_HEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"),
-
     BLOOD_GAS_PANEL(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel"),
-
     BLOOD_PRESSURE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure"),
-
     BODY_TEMP(Observation.class, "http://hl7.org/fhir/StructureDefinition/bodytemp"),
-
     BODY_WEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-weight"),
-
     CLINICAL_FRAILTY_SCALE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score"),
-
     CLINICAL_TRIAL_PARTICIPATION(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/interventional-clinical-trial-participation"),
-
     CORONARIRUS_NACHWEIS_TEST(Observation.class, "https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest"),
-
     FIO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/inhaled-oxygen-concentration"),
-
     HEART_RATE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/heart-rate"),
-
     KNOWN_EXPOSURE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/known-exposure"),
-
     PACO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure"),
-
     PAO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure"),
-
     PATIENT_DISCHARGE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/discharge-disposition"),
-
     PATIENT_IN_ICU(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu"),
-
     PCR(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-rt-pcr"),
-
     PH(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH"),
-
     PREGNANCY_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pregnancy-status"),
-
     OBSERVATION_LAB(Observation.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab"),
-
     OXYGEN_SATURATION(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation"),
-
     RESPIRATORY_RATE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-rate"),
-
     SOFA_SCORE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score"),
-
     SMOKING_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status"),
-
     ANTI_BODY_PANEL(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-pnl-ser-pl-ia"),
 
-    // Patient Profiles
-
+    // Patient
     PATIENT(Patient.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient"),
 
-    // Procedure Profiles
-
-    PROCEDURE(Procedure.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure"),
-
-
+    // Procedure
     APHERESIS_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis"),
     DIALYSIS_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dialysis"),
     EXTRACORPOREAL_MEMBRANE_OXYGENATION_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/extracorporeal-membrane-oxygenation"),
+    PROCEDURE(Procedure.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure"),
     PRONE_POSITION_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position"),
     RADIOLOGY_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures"),
     RESPIRATORY_THERAPIES_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"),
 
-    // Consent profiles
-
-    DNR_ORDER(Consent.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order"),
-
-    // QuestionnaireResponse Profiles
-
-    DEFAULT_QUESTIONNAIRE_RESPONSE(QuestionnaireResponse.class, null);
+    // QuestionnaireResponse
+    QUESTIONNAIRE_RESPONSE_DEFAULT(QuestionnaireResponse.class, null);
 
     private final Class<? extends Resource> resourceType;
 
