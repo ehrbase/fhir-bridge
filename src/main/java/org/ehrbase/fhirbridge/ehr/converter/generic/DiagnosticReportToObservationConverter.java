@@ -32,7 +32,7 @@ public abstract class DiagnosticReportToObservationConverter<E extends EntryEnti
             Method setOriginValue = entryEntity.getClass().getMethod("setOriginValue", TemporalAccessor.class);
             setOriginValue.invoke(entryEntity, TimeConverter.convertDiagnosticReportTime(resource));
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method" + exception.toString());
+            LOG.error("Exception occured when invoking method, error: " + exception.toString());
         } catch (NoSuchMethodException ignored){
             //ignored
         }
@@ -43,7 +43,7 @@ public abstract class DiagnosticReportToObservationConverter<E extends EntryEnti
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, TimeConverter.convertDiagnosticReportTime(resource));
         } catch ( IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method" + exception.toString());
+            LOG.error("Exception occured when invoking method, error: " + exception.toString());
         }catch (NoSuchMethodException ignored){
             //ignored
         }

@@ -27,7 +27,7 @@ public abstract class QuestionnaireResponseItemToActionConverter<E extends Entry
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, authored);
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method" + exception.toString());
+            LOG.error("Exception occured when invoking method, error: " + exception.toString());
         } catch (NoSuchMethodException ignored){
             //ignored
         }

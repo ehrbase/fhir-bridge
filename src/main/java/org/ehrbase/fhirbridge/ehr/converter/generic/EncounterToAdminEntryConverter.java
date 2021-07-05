@@ -48,7 +48,7 @@ public abstract class EncounterToAdminEntryConverter <E extends EntryEntity> ext
                 setEndValue.invoke(entryEntity, TimeConverter.convertEncounterLocationEndTime(location).get());
             }
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method" + exception.toString());
+            LOG.error("Exception occured when invoking method, error: " + exception.toString());
         } catch (NoSuchMethodException ignored){
             //ignored
         }
@@ -59,7 +59,7 @@ public abstract class EncounterToAdminEntryConverter <E extends EntryEntity> ext
             Method setDatumUhrzeitDerAufnahmeValue = entryEntity.getClass().getMethod("setDatumUhrzeitDerAufnahmeValue", TemporalAccessor.class);
             setDatumUhrzeitDerAufnahmeValue.invoke(entryEntity, TimeConverter.convertEncounterTime(resource));
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method" + exception.toString());
+            LOG.error("Exception occured when invoking method, error: " + exception.toString());
         } catch (NoSuchMethodException ignored){
             //ignored
         }
@@ -74,7 +74,7 @@ public abstract class EncounterToAdminEntryConverter <E extends EntryEntity> ext
             }
 
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method" + exception.toString());
+            LOG.error("Exception occured when invoking method, error: " + exception.toString());
         } catch (NoSuchMethodException ignored){
             //ignored
         }
