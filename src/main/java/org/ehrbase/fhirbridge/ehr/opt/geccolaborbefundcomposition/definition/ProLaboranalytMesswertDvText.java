@@ -10,14 +10,14 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:53:24.167205+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-05T14:12:01.341290+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 @OptionFor("DV_TEXT")
 public class ProLaboranalytMesswertDvText implements RMEntity, ProLaboranalytMesswertChoice {
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Messwert/Messwert
-   * Description: (Mess-)Wert des Analyt-Resultats.
+   * Description: (Mess-)Wert des Analyt-Ergebnisses.
    */
   @Path("|value")
   private String messwertValue;
