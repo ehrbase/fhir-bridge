@@ -28,8 +28,10 @@ import org.springframework.stereotype.Component;
  *
  * @since 1.0.0
  */
-@Component
+@Component(BundleResponseProcessor.BEAN_ID)
 public class BundleResponseProcessor implements Processor {
+
+    public static final String BEAN_ID = "bundleResponseProcessor";
 
     @Override
     public void process(Exchange exchange) throws Exception {

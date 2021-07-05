@@ -17,7 +17,6 @@
 package org.ehrbase.fhirbridge.camel.processor;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
-import ca.uhn.fhir.rest.api.server.RequestDetails;
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.ehr.EhrStatus;
 import com.nedap.archie.rm.generic.PartySelf;
@@ -29,6 +28,7 @@ import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.core.domain.PatientEhr;
 import org.ehrbase.fhirbridge.core.repository.PatientEhrRepository;
+import org.hl7.fhir.r4.model.Resource;
 import org.hl7.fhir.r4.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,10 +65,9 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
     }
 
     private String getPatientId(Exchange exchange) {
-        RequestDetails requestDetails = getRequestDetails(exchange);
-        ResourceType resourceType = ResourceType.valueOf(requestDetails.getResourceName());
+        Resource resource = exchange.getIn().getBody(Resource.class);
 
-        if (resourceType == ResourceType.Patient) {
+        if (resource.getResourceType() == ResourceType.Patient) {
             return exchange.getProperty(CamelConstants.OUTCOME, MethodOutcome.class).getId().getIdPart();
         } else {
             return exchange.getIn().getHeader(CamelConstants.PATIENT_ID, String.class);

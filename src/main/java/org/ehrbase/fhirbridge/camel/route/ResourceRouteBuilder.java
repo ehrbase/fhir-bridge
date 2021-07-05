@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @SuppressWarnings("java:S1192")
-public class FhirRouteBuilder extends RouteBuilder {
+public class ResourceRouteBuilder extends RouteBuilder {
 
     @Value("${fhir-bridge.debug.enabled:false}")
     private boolean debug;
