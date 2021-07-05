@@ -71,7 +71,7 @@ public class PatientReferenceProcessor implements FhirRequestProcessor {
             IIdType patientId;
             if (subject.hasReference()) {
                 patientId = subject.getReferenceElement();
-            } else if (subject.hasIdentifier() && subject.getIdentifier().hasSystem() && subject.getIdentifier().hasValue()) {
+            } else if (hasIdentifier(subject)) {
                 patientId = handleSubjectIdentifier(subject, requestDetails);
             } else {
                 throw new UnprocessableEntityException("Subject identifier is required");
@@ -124,5 +124,11 @@ public class PatientReferenceProcessor implements FhirRequestProcessor {
         IIdType id = patientDao.create(new Patient().addIdentifier(identifier), requestDetails).getId();
         LOG.debug("Created Patient: id={}", id);
         return id;
+    }
+
+    private boolean hasIdentifier(Reference subject) {
+        return subject.hasIdentifier() &&
+                subject.getIdentifier().hasSystem() &&
+                subject.getIdentifier().hasValue();
     }
 }
