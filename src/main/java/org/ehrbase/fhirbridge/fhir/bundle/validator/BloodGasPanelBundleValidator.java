@@ -6,7 +6,6 @@ import org.hl7.fhir.r4.model.Bundle;
 import java.util.Map;
 
 public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
-
     private static final String BLOOD_GAS_URL = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel";
     private static final String PH_URL = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH";
     private static final String CARBON_DIOXIDE_PARTIAL_PRESSURE_URL = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure";

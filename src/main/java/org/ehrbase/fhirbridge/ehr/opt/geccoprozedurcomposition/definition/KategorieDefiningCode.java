@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
-import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes.KrankheitsanzeichenCode;
 
 public enum KategorieDefiningCode implements EnumValueSet {
   DIAGNOSTIC_PROCEDURE("Diagnostic procedure", "", "SNOMED Clinical Terms", "103693007"),

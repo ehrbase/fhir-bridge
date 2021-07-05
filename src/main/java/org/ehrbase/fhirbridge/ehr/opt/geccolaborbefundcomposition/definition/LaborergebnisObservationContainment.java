@@ -60,6 +60,8 @@ public class LaborergebnisObservationContainment extends Containment {
 
   public SelectAqlField<LaborergebnisIdentifikationDerLaboranforderungChoice> IDENTIFIKATION_DER_LABORANFORDERUNG = new AqlFieldImp<LaborergebnisIdentifikationDerLaboranforderungChoice>(LaborergebnisObservation.class, "/protocol[at0004]/items[at0094]/items[at0062]/value", "identifikationDerLaboranforderung", LaborergebnisIdentifikationDerLaboranforderungChoice.class, this);
 
+  public SelectAqlField<LaborergebnisTestmethodeChoice> TESTMETHODE = new AqlFieldImp<LaborergebnisTestmethodeChoice>(LaborergebnisObservation.class, "/protocol[at0004]/items[at0121]/value", "testmethode", LaborergebnisTestmethodeChoice.class, this);
+
   private LaborergebnisObservationContainment() {
     super("openEHR-EHR-OBSERVATION.laboratory_test_result.v1");
   }
