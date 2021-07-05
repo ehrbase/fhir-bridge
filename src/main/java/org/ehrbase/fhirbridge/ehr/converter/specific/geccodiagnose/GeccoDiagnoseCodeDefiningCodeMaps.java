@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.geccoDiagnose;
+package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.NameDerKoerperstelleDefiningCode;

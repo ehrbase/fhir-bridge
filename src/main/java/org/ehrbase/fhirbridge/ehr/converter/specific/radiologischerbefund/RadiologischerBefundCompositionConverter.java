@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerBefund;
+package org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerbefund;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToCompositionConverter;
