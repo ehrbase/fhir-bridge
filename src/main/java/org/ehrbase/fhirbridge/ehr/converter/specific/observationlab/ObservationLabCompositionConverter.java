@@ -4,13 +4,13 @@ import com.nedap.archie.rm.datavalues.DvText;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborbefundKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestKategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class ObservationLabCompositionConverter extends ObservationToCompositionConverter<GECCOLaborbefundComposition> {
 
@@ -45,7 +45,10 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
                 throw new ConversionException("Unknown LOINC code in observation");
             }
 
-            composition.setKategorieValue(categoryDefiningcode.getValue());
+            LaborbefundKategorieElement labortestKategorieElement = new LaborbefundKategorieElement();
+            labortestKategorieElement.setValue(categoryDefiningcode.getValue());
+            composition.setKategorie(List.of(labortestKategorieElement));
+
         } else {
             throw new ConversionException("No LOINC code in observation");
         }
