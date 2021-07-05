@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes.KategorieDefiningCodeSymptom;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.KategorieDefiningCodeSymptom;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.SymptomComposition;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.StatusDefiningCode;
 
