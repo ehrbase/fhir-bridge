@@ -5,6 +5,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.lang.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
@@ -14,6 +15,8 @@ import java.time.temporal.TemporalAccessor;
 public abstract class QuestionnaireResponseItemToActionConverter<E extends EntryEntity> extends QuestionnaireResponseItemToEntryEntityConverter<E> {
 
     private static final Logger LOG = LoggerFactory.getLogger(QuestionnaireResponseItemToActionConverter.class);
+
+    private MessageSourceAccessor messages;
 
     @Override
     public E convert(@NonNull QuestionnaireResponse.QuestionnaireResponseItemComponent questionnaireResponseItemComponent, @NonNull Language language, @NonNull TemporalAccessor authored) {
@@ -27,7 +30,8 @@ public abstract class QuestionnaireResponseItemToActionConverter<E extends Entry
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, authored);
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method, error: " + exception.toString());
+            LOG.error(messages.getMessage("fhir-bridge.invokeError", exception.toString()));
+
         } catch (NoSuchMethodException ignored){
             //ignored
         }

@@ -5,6 +5,7 @@ import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.lang.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
@@ -14,6 +15,8 @@ import java.time.temporal.TemporalAccessor;
 public abstract class ImmunizationToActionConverter<E extends EntryEntity> extends EntryEntityConverter<Immunization, E>{
 
     private static final Logger LOG = LoggerFactory.getLogger(ImmunizationToActionConverter.class);
+
+    private MessageSourceAccessor messages;
 
     @Override
     public E convert(@NonNull Immunization resource) {
@@ -27,7 +30,8 @@ public abstract class ImmunizationToActionConverter<E extends EntryEntity> exten
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, TimeConverter.convertImmunizationTime(resource));
         } catch ( IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method, error: " + exception.toString());
+            LOG.error(messages.getMessage("fhir-bridge.invokeError", exception.toString()));
+
         }catch (NoSuchMethodException ignored){
             //ignored
         }
