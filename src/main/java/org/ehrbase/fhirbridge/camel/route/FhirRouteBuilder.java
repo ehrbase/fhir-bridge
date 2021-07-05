@@ -17,14 +17,25 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 @SuppressWarnings("java:S1192")
 public class FhirRouteBuilder extends RouteBuilder {
 
+    @Value("${fhir-bridge.debug.enabled:false}")
+    private boolean debug;
+
     @Override
     public void configure() throws Exception {
+        errorHandler(defaultErrorHandler()
+                .logStackTrace(debug)
+                .logExhaustedMessageHistory(debug));
+
+        onException(Exception.class)
+                .process("defaultExceptionHandler");
+
         configureAuditEvent();
         configureCondition();
         configureConsent();
@@ -83,6 +94,9 @@ public class FhirRouteBuilder extends RouteBuilder {
      * Configures available endpoints for {@link org.hl7.fhir.r4.model.Encounter Encounter} resource.
      */
     private void configureEncounter() {
+        from("encounter-provide:encounterEndpoint?fhirContext=#fhirContext")
+                .to("direct:provideResource");
+
         from("encounter-find:encounterEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
                 .process("resourcePersistenceProcessor");
     }

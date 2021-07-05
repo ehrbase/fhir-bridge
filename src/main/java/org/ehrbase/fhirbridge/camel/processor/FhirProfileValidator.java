@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
+@SuppressWarnings("java:S6212")
 public class FhirProfileValidator implements Processor, MessageSourceAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirProfileValidator.class);
@@ -39,8 +40,7 @@ public class FhirProfileValidator implements Processor, MessageSourceAware {
     @Override
     public void process(Exchange exchange) {
         Resource resource = exchange.getIn().getBody(Resource.class);
-
-        LOG.debug("Validating {} resource...", resource.getResourceType());
+        LOG.trace("Validating {} resource...", resource.getResourceType());
 
         List<String> profiles = Resources.getProfileUris(resource);
         if (profiles.isEmpty()) {

@@ -75,6 +75,8 @@ public class ResourcePersistenceProcessor implements FhirRequestProcessor {
     }
 
     private void handleCreateOperation(Exchange exchange, RequestDetails requestDetails, IFhirResourceDao resourceDao) {
+        LOG.trace("Creating {} resource...", requestDetails.getResourceName());
+
         Resource resource = exchange.getIn().getBody(Resource.class);
         String ifNoneExist = requestDetails.getConditionalUrl(RestOperationTypeEnum.CREATE);
 
@@ -85,6 +87,8 @@ public class ResourcePersistenceProcessor implements FhirRequestProcessor {
     }
 
     private void handleReadOperation(Exchange exchange, RequestDetails requestDetails, IFhirResourceDao resourceDao) {
+        LOG.trace("Reading {} resource...", requestDetails.getResourceName());
+
         IIdType id = exchange.getIn().getBody(IIdType.class);
         IBaseResource resource = resourceDao.read(id, requestDetails);
         exchange.getMessage().setBody(resource);

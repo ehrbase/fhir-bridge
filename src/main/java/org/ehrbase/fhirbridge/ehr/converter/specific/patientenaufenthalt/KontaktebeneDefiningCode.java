@@ -1,14 +1,14 @@
-package org.ehrbase.fhirbridge.fhir.support;
+package org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum KontaktebeneDefiningCode implements EnumValueSet {
 
-    EINRICHTUNGS_KONTAKT("Einrichtungskontakt","Beschreibt den Kontakt zur Einrichtung.","","einrichtungskontakt"),
+    EINRICHTUNGS_KONTAKT("Einrichtungskontakt", "Beschreibt den Kontakt zur Einrichtung.", "", "einrichtungskontakt"),
 
-    ABTEILUNGS_KONTAKT("Abteilungskontakt","Beschreibt den Kontakt zur Abteilung.","","abteilungskontakt"),
+    ABTEILUNGS_KONTAKT("Abteilungskontakt", "Beschreibt den Kontakt zur Abteilung.", "", "abteilungskontakt"),
 
-    VERSORGUNGS_STELLEN_KONTAKT("Versorgungsstellenkontakt","Beschreibt den Kontakt zur Versorgungsstelle.","","versorgungsstellenkontakt");
+    VERSORGUNGS_STELLEN_KONTAKT("Versorgungsstellenkontakt", "Beschreibt den Kontakt zur Versorgungsstelle.", "", "versorgungsstellenkontakt");
 
     private String value;
 
@@ -26,18 +26,18 @@ public enum KontaktebeneDefiningCode implements EnumValueSet {
     }
 
     public String getValue() {
-        return this.value ;
+        return this.value;
     }
 
     public String getDescription() {
-        return this.description ;
+        return this.description;
     }
 
     public String getTerminologyId() {
-        return this.terminologyId ;
+        return this.terminologyId;
     }
 
     public String getCode() {
-        return this.code ;
+        return this.code;
     }
 }
