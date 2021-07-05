@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus;
+package org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
