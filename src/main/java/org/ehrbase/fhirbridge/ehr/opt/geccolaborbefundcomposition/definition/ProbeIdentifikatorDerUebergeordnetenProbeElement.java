@@ -11,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-06-21T14:47:54.237589+02:00",
+    date = "2021-07-05T14:12:01.253232+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class ProbeIdentifikatorDerUebergeordnetenProbeElement implements LocatableEntity {
