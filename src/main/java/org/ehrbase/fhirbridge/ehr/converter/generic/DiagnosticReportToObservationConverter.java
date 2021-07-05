@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
+import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
@@ -15,8 +16,6 @@ import java.time.temporal.TemporalAccessor;
 public abstract class DiagnosticReportToObservationConverter<E extends EntryEntity> extends EntryEntityConverter<DiagnosticReport, E>  {
 
     private static final Logger LOG = LoggerFactory.getLogger(DiagnosticReportToObservationConverter.class);
-
-    private MessageSourceAccessor messages;
 
     @Override
     public E convert(@NonNull DiagnosticReport resource) {
@@ -35,8 +34,7 @@ public abstract class DiagnosticReportToObservationConverter<E extends EntryEnti
             Method setOriginValue = entryEntity.getClass().getMethod("setOriginValue", TemporalAccessor.class);
             setOriginValue.invoke(entryEntity, TimeConverter.convertDiagnosticReportTime(resource));
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            LOG.error(messages.getMessage("fhir-bridge.invokeError", exception.toString()));
-
+            LOG.error(LoggerMessages.printInvokeError(exception));
         } catch (NoSuchMethodException ignored){
             //ignored
         }
@@ -47,8 +45,7 @@ public abstract class DiagnosticReportToObservationConverter<E extends EntryEnti
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, TimeConverter.convertDiagnosticReportTime(resource));
         } catch ( IllegalAccessException | InvocationTargetException exception) {
-            LOG.error(messages.getMessage("fhir-bridge.invokeError", exception.toString()));
-
+            LOG.error(LoggerMessages.printInvokeError(exception));
         }catch (NoSuchMethodException ignored){
             //ignored
         }
