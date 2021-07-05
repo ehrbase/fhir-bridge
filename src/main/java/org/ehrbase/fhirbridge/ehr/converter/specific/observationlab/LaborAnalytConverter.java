@@ -10,7 +10,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.Pro
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytKommentarElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytMesswertChoice;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytMesswertDvQuantity;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.UntersuchterAnalytDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.BezeichnungDesAnalytsDefiningCode;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Quantity;
@@ -24,9 +24,9 @@ public class LaborAnalytConverter {
         proLaboranalytCluster.setErgebnisStatus(ergebnisStatus);
         setKommentarElement(proLaboranalytCluster, observation);
         setMesswert(observation, proLaboranalytCluster);
-        proLaboranalytCluster.setUntersuchterAnalytDefiningCode(getUntersuchterAnalyt(observation));
+        proLaboranalytCluster.setBezeichnungDesAnalytsDefiningCode(getUntersuchterAnalyt(observation));
         setInterpretationDefiningCode(observation, proLaboranalytCluster);
-        proLaboranalytCluster.setZeitpunktValidationValue(TimeConverter.convertObservationTime(observation));
+        proLaboranalytCluster.setZeitpunktDerValidierungValue(TimeConverter.convertObservationTime(observation));
         setZeitpunktErgebnisStatus(observation, proLaboranalytCluster);
         return proLaboranalytCluster;
     }
@@ -47,7 +47,7 @@ public class LaborAnalytConverter {
         }
     }
 
-    private UntersuchterAnalytDefiningCode getUntersuchterAnalyt(Observation observation) {
+    private BezeichnungDesAnalytsDefiningCode getUntersuchterAnalyt(Observation observation) {
         if (codingAndSystemExist(observation) && checkUrlAndCode(observation)) {
             return getCode(observation.getCode().getCoding().get(0).getCode());
         } else {
@@ -63,9 +63,9 @@ public class LaborAnalytConverter {
         return observation.getCode().hasCoding() && observation.getCode().getCoding().get(0).hasSystem();
     }
 
-    private UntersuchterAnalytDefiningCode getCode(String code) {
-        if (UntersuchterAnalytDefiningCode.getCodesAsMap().containsKey(code)) {
-            return UntersuchterAnalytDefiningCode.getCodesAsMap().get(code);
+    private BezeichnungDesAnalytsDefiningCode getCode(String code) {
+        if (BezeichnungDesAnalytsDefiningCode.getCodesAsMap().containsKey(code)) {
+            return BezeichnungDesAnalytsDefiningCode.getCodesAsMap().get(code);
         } else {
             throw new ConversionException("code.coding.code value is not valid");
         }
@@ -100,11 +100,11 @@ public class LaborAnalytConverter {
             case FINAL:
                 return ErgebnisStatusDefiningCode.ENDBEFUND;
             case REGISTERED:
-                return ErgebnisStatusDefiningCode.ERFASST;
+                return ErgebnisStatusDefiningCode.REGISTRIERT;
             case AMENDED:
-                return ErgebnisStatusDefiningCode.ENDBEFUND_GEAENDERT;
+                return ErgebnisStatusDefiningCode.GEAENDERT;
             case CORRECTED:
-                return ErgebnisStatusDefiningCode.ENDBEFUND_KORRIGIERT;
+                return ErgebnisStatusDefiningCode.KORRIGIERT;
             case CANCELLED:
                 return ErgebnisStatusDefiningCode.ENDBEFUND_WIDERRUFEN;
             case NULL:

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
-import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes.KrankheitsanzeichenCode;
 
 public enum ProbenartDefiningCode implements EnumValueSet {
   CYST_BAKER_S("Cyst, Baker's", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BCYST"),
@@ -158,7 +157,6 @@ public enum ProbenartDefiningCode implements EnumValueSet {
     }
     return probenartDefiningCodeHashMap;
   }
-
 
   public String getValue() {
      return this.value ;
