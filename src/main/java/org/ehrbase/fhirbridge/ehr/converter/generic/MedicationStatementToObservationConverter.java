@@ -31,7 +31,7 @@ public abstract class MedicationStatementToObservationConverter<E extends EntryE
             Method setOriginValue = entryEntity.getClass().getMethod("setOriginValue", TemporalAccessor.class);
             setOriginValue.invoke(entryEntity, TimeConverter.convertMedicationStatmentTime(resource));
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method" + exception.toString());
+            LOG.error("Exception occured when invoking method, error: " + exception.toString());
         } catch (NoSuchMethodException ignored){
             //ignored
         }
@@ -42,7 +42,7 @@ public abstract class MedicationStatementToObservationConverter<E extends EntryE
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, TimeConverter.convertMedicationStatmentTime(resource));
         } catch ( IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method" + exception.toString());
+            LOG.error("Exception occured when invoking method, error: " + exception.toString());
         }catch (NoSuchMethodException ignored){
             //ignored
         }

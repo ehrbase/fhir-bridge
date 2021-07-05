@@ -32,7 +32,7 @@ public abstract class ConditionToObservationConverter<E extends EntryEntity> ext
             Method setOriginValue = entryEntity.getClass().getMethod("setOriginValue", TemporalAccessor.class);
             setOriginValue.invoke(entryEntity, TimeConverter.convertConditionTime(resource));
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method" + exception.toString());
+            LOG.error("Exception occured when invoking method, error: " + exception.toString());
         } catch (NoSuchMethodException ignored){
             //ignored
         }
@@ -43,7 +43,7 @@ public abstract class ConditionToObservationConverter<E extends EntryEntity> ext
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, TimeConverter.convertConditionTime(resource));
         } catch ( IllegalAccessException | InvocationTargetException exception) {
-            LOG.error("Exception occured when invoking method" + exception.toString());
+            LOG.error("Exception occured when invoking method, error: " + exception.toString());
         }catch (NoSuchMethodException ignored){
             //ignored
         }
