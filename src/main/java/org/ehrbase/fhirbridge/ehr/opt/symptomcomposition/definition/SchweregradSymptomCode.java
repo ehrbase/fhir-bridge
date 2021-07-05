@@ -1,12 +1,21 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes;
+package org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum KategorieDefiningCodeSymptom implements EnumValueSet {
-    N753251("75325-1", "75325-1", "LOINC", "75325-1");
+import java.util.HashMap;
+import java.util.Map;
+
+public enum SchweregradSymptomCode implements EnumValueSet {
+    N442452003("442452003", "442452003", "SNOMED Clinical Terms", "442452003"),
+
+    N24484000("24484000", "24484000", "SNOMED Clinical Terms", "24484000"),
+
+    N255604002("255604002", "255604002", "SNOMED Clinical Terms", "255604002"),
+
+    N6736007("6736007", "6736007", "SNOMED Clinical Terms", "6736007");
 
     private String value;
 
@@ -16,11 +25,19 @@ public enum KategorieDefiningCodeSymptom implements EnumValueSet {
 
     private String code;
 
-    KategorieDefiningCodeSymptom(String value, String description, String terminologyId, String code) {
+    SchweregradSymptomCode(String value, String description, String terminologyId, String code) {
         this.value = value;
         this.description = description;
         this.terminologyId = terminologyId;
         this.code = code;
+    }
+
+    public static Map<String, SchweregradSymptomCode> getCodesAsMap(){
+        Map<String, SchweregradSymptomCode> stringSchweregradSymptomCodeHashMap = new HashMap<>();
+        for (SchweregradSymptomCode schweregradSymptomCode : SchweregradSymptomCode.values()) {
+            stringSchweregradSymptomCodeHashMap.put(schweregradSymptomCode.getCode(), schweregradSymptomCode);
+        }
+        return stringSchweregradSymptomCodeHashMap;
     }
 
     public String getValue() {

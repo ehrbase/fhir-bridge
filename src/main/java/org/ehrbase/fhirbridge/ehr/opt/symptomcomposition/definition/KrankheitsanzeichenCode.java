@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes;
+package org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
