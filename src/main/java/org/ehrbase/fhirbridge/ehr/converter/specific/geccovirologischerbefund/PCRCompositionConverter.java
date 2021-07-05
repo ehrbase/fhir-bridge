@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.geccoVirologischerbefund;
+package org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
