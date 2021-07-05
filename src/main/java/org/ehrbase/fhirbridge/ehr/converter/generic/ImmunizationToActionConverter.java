@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
+import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
 import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
@@ -16,8 +17,6 @@ public abstract class ImmunizationToActionConverter<E extends EntryEntity> exten
 
     private static final Logger LOG = LoggerFactory.getLogger(ImmunizationToActionConverter.class);
 
-    private MessageSourceAccessor messages;
-
     @Override
     public E convert(@NonNull Immunization resource) {
         E entryEntity = super.convert(resource);
@@ -30,8 +29,7 @@ public abstract class ImmunizationToActionConverter<E extends EntryEntity> exten
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, TimeConverter.convertImmunizationTime(resource));
         } catch ( IllegalAccessException | InvocationTargetException exception) {
-            LOG.error(messages.getMessage("fhir-bridge.invokeError", exception.toString()));
-
+            LOG.error(LoggerMessages.printInvokeError(exception));
         }catch (NoSuchMethodException ignored){
             //ignored
         }
