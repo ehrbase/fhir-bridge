@@ -1,11 +1,11 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu;
+package org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum WurdeDieAktivitatDurchgefuhrtDefiningcode implements EnumValueSet {
+public enum WurdeDieAktivitatDurchgefuhrtDefiningCode implements EnumValueSet {
     N74964007("Other", "Other", "SNOMED Clinical Terms", "74964007"),
 
     N373066001("Yes", "Yes", "SNOMED Clinical Terms", "373066001"),
@@ -25,7 +25,7 @@ public enum WurdeDieAktivitatDurchgefuhrtDefiningcode implements EnumValueSet {
     private String code;
 
 
-    WurdeDieAktivitatDurchgefuhrtDefiningcode(String value, String description, String terminologyId,
+    WurdeDieAktivitatDurchgefuhrtDefiningCode(String value, String description, String terminologyId,
                                               String code) {
         this.value = value;
         this.description = description;
