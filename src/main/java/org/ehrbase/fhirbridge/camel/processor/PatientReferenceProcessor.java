@@ -39,9 +39,17 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Set;
 
-@Component
+/**
+ * {@link org.apache.camel.Processor Processor} that retrieves the patient associated to the submitted resource.
+ * If no patient is found, a new one is created.
+ *
+ * @since 1.2.0
+ */
+@Component(PatientReferenceProcessor.BEAN_ID)
 @SuppressWarnings("java:S6212")
 public class PatientReferenceProcessor implements FhirRequestProcessor {
+
+    public static final String BEAN_ID = "patientReferenceProcessor";
 
     private static final Logger LOG = LoggerFactory.getLogger(PatientReferenceProcessor.class);
 
@@ -58,36 +66,60 @@ public class PatientReferenceProcessor implements FhirRequestProcessor {
 
         if (!Resources.isPatient(resource)) {
             Reference subject = Resources.getSubject(resource)
-                    .orElseThrow(() -> new UnprocessableEntityException("Resource should have one patient"));
+                    .orElseThrow(() -> new UnprocessableEntityException(requestDetails.getResourceName() + " should be linked to a subject/patient"));
 
             IIdType patientId;
             if (subject.hasReference()) {
                 patientId = subject.getReferenceElement();
+            } else if (subject.hasIdentifier() && subject.getIdentifier().hasSystem() && subject.getIdentifier().hasValue()) {
+                patientId = handleSubjectIdentifier(subject, requestDetails);
             } else {
-                Identifier identifier = subject.getIdentifier();
-                SearchParameterMap parameters = new SearchParameterMap();
-                parameters.add(Patient.SP_IDENTIFIER, new TokenParam(identifier.getSystem(), identifier.getValue()));
-                Set<ResourcePersistentId> ids = patientDao.searchForIds(parameters, requestDetails);
-
-                if (ids.isEmpty()) {
-                    patientId = createPatient(identifier, requestDetails);
-                } else if (ids.size() == 1) {
-                    IBundleProvider bundleProvider = patientDao.search(parameters, requestDetails);
-                    List<IBaseResource> result = bundleProvider.getResources(0, 1);
-                    Patient patient = (Patient) result.get(0);
-                    patientId = patient.getIdElement();
-                    LOG.debug("Resolved existing Patient: id={}", patientId);
-                } else {
-                    throw new UnprocessableEntityException("More than one patient");
-                }
-
-                subject.setReferenceElement(patientId);
+                throw new UnprocessableEntityException("Subject identifier is required");
             }
 
             exchange.getIn().setHeader(CamelConstants.PATIENT_ID, patientId.getIdPart());
         }
     }
 
+    /**
+     * Retrieves the patient ID corresponding the given subject. If there is no matching {@link Patient} exist,
+     * a new one is created.
+     *
+     * @param subject        the current subject
+     * @param requestDetails the current request details
+     * @return the patient ID
+     */
+    private IIdType handleSubjectIdentifier(Reference subject, RequestDetails requestDetails) {
+        Identifier identifier = subject.getIdentifier();
+        SearchParameterMap parameters = new SearchParameterMap();
+        parameters.add(Patient.SP_IDENTIFIER, new TokenParam(identifier.getSystem(), identifier.getValue()));
+        Set<ResourcePersistentId> ids = patientDao.searchForIds(parameters, requestDetails);
+
+        IIdType patientId;
+        if (ids.isEmpty()) {
+            patientId = createPatient(identifier, requestDetails);
+        } else if (ids.size() == 1) {
+            IBundleProvider bundleProvider = patientDao.search(parameters, requestDetails);
+            List<IBaseResource> result = bundleProvider.getResources(0, 1);
+            Patient patient = (Patient) result.get(0);
+            patientId = patient.getIdElement();
+            LOG.debug("Resolved existing Patient: id={}", patientId);
+        } else {
+            throw new UnprocessableEntityException("More than one patient");
+        }
+
+        subject.setReferenceElement(patientId);
+
+        return patientId;
+    }
+
+    /**
+     * Creates a new dummy patient with the given identifier system and value.
+     *
+     * @param identifier     the identifier of the new patient.
+     * @param requestDetails the current request details
+     * @return the patient ID
+     */
     private IIdType createPatient(Identifier identifier, RequestDetails requestDetails) {
         IIdType id = patientDao.create(new Patient().addIdentifier(identifier), requestDetails).getId();
         LOG.debug("Created Patient: id={}", id);

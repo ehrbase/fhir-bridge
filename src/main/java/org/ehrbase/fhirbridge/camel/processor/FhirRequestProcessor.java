@@ -22,8 +22,17 @@ import org.apache.camel.Processor;
 import org.apache.camel.util.ObjectHelper;
 import org.openehealth.ipf.commons.ihe.fhir.Constants;
 
+/**
+ * @since 1.2.0
+ */
 public interface FhirRequestProcessor extends Processor {
 
+    /**
+     * Returns the current request details.
+     *
+     * @param exchange the current exchange
+     * @return the request details
+     */
     default RequestDetails getRequestDetails(Exchange exchange) {
         if (ObjectHelper.isEmpty(exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS))) {
             throw new IllegalArgumentException("RequestDetails must not be null");

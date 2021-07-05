@@ -17,9 +17,15 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.ehrbase.fhirbridge.camel.processor.ResourcePersistenceProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * {@link RouteBuilder} implementation that configures the routes for FHIR resources.
+ *
+ * @since 1.2.0
+ */
 @Component
 @SuppressWarnings("java:S1192")
 public class ResourceRouteBuilder extends RouteBuilder {
@@ -54,7 +60,7 @@ public class ResourceRouteBuilder extends RouteBuilder {
      */
     private void configureAuditEvent() {
         from("audit-event-find:auditEventEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 
     /**
@@ -65,7 +71,7 @@ public class ResourceRouteBuilder extends RouteBuilder {
                 .to("direct:provideResource");
 
         from("condition-find:conditionEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 
     /**
@@ -76,7 +82,7 @@ public class ResourceRouteBuilder extends RouteBuilder {
                 .throwException(UnsupportedOperationException.class, "Not yet implemented");
 
         from("consent-find:consentEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 
     /**
@@ -87,7 +93,7 @@ public class ResourceRouteBuilder extends RouteBuilder {
                 .to("direct:provideResource");
 
         from("diagnostic-report-find:diagnosticReportEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 
     /**
@@ -98,7 +104,7 @@ public class ResourceRouteBuilder extends RouteBuilder {
                 .to("direct:provideResource");
 
         from("encounter-find:encounterEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 
     /**
@@ -109,7 +115,7 @@ public class ResourceRouteBuilder extends RouteBuilder {
                 .to("direct:provideResource");
 
         from("immunization-find:immunizationEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 
     /**
@@ -120,7 +126,7 @@ public class ResourceRouteBuilder extends RouteBuilder {
                 .to("direct:provideResource");
 
         from("medication-statement-find:medicationStatementEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 
     /**
@@ -131,7 +137,7 @@ public class ResourceRouteBuilder extends RouteBuilder {
                 .to("direct:provideResource");
 
         from("observation-find:observationEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 
     /**
@@ -142,7 +148,7 @@ public class ResourceRouteBuilder extends RouteBuilder {
                 .to("direct:provideResource");
 
         from("patient-find:patientEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 
     /**
@@ -153,7 +159,7 @@ public class ResourceRouteBuilder extends RouteBuilder {
                 .to("direct:provideResource");
 
         from("procedure-find:procedureEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 
     /**
@@ -165,6 +171,6 @@ public class ResourceRouteBuilder extends RouteBuilder {
                 .to("direct:provideResource");
 
         from("questionnaire-response-find:questionnaireResponseEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
-                .process("resourcePersistenceProcessor");
+                .process(ResourcePersistenceProcessor.BEAN_ID);
     }
 }

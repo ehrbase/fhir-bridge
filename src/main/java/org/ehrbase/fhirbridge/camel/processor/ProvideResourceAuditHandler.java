@@ -16,8 +16,17 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-@Component
+/**
+ * {@link Processor} that registers an {@link AuditEvent} in the database for each "Provide [resource type]"
+ * transaction.
+ *
+ * @since 1.0.0
+ */
+@Component(ProvideResourceAuditHandler.BEAN_ID)
+@SuppressWarnings("java:S6212")
 public class ProvideResourceAuditHandler implements Processor {
+
+    public static final String BEAN_ID = "provideResourceAuditHandler";
 
     private final IFhirResourceDao<AuditEvent> auditEventDao;
 
