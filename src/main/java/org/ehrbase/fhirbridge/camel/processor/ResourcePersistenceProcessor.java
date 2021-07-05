@@ -53,10 +53,11 @@ public class ResourcePersistenceProcessor implements FhirRequestProcessor {
     @Override
     public void process(Exchange exchange) throws Exception {
         RequestDetails requestDetails = getRequestDetails(exchange);
-        IFhirResourceDao resourceDao = getResourceDao(requestDetails.getResourceName());
+        IFhirResourceDao resourceDao = getResourceDao(exchange, requestDetails);
 
         switch (requestDetails.getRestOperationType()) {
             case CREATE:
+            case TRANSACTION:
                 handleCreateOperation(exchange, requestDetails, resourceDao);
                 break;
             case READ:
@@ -126,7 +127,15 @@ public class ResourcePersistenceProcessor implements FhirRequestProcessor {
         }
     }
 
-    private IFhirResourceDao getResourceDao(String resourceName) {
+    private IFhirResourceDao getResourceDao(Exchange exchange, RequestDetails requestDetails) {
+        String resourceName;
+        if (requestDetails.getRestOperationType() == RestOperationTypeEnum.TRANSACTION) {
+            Resource resource = exchange.getIn().getBody(Resource.class);
+            resourceName = resource.getResourceType().name();
+        } else {
+            resourceName = requestDetails.getResourceName();
+        }
+
         return daoRegistry.getResourceDao(resourceName);
     }
 }
