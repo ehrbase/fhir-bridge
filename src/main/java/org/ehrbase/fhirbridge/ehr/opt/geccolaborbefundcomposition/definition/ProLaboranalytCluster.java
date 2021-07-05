@@ -16,24 +16,24 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.laboratory_test_analyte.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-06-21T14:47:54.258914+02:00",
+    date = "2021-07-05T14:12:01.286221+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class ProLaboranalytCluster implements LocatableEntity {
   /**
-   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Untersuchter Analyt
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Bezeichnung des Analyts
    * Description: Der Name des untersuchten Analyts.
    * Comment: Der Wert dieses Elements wird normalerweise, meist durch eine Spezialisierung, in einem Template oder zur Laufzeit der Anwendung geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum', 'Hämoglobin'. 
    * Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.
    */
   @Path("/items[at0024]/value|defining_code")
-  private UntersuchterAnalytDefiningCode untersuchterAnalytDefiningCode;
+  private BezeichnungDesAnalytsDefiningCode bezeichnungDesAnalytsDefiningCode;
 
   /**
-   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Untersuchter Analyt/null_flavour
+   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Bezeichnung des Analyts/null_flavour
    */
   @Path("/items[at0024]/null_flavour|defining_code")
-  private NullFlavour untersuchterAnalytNullFlavourDefiningCode;
+  private NullFlavour bezeichnungDesAnalytsNullFlavourDefiningCode;
 
   /**
    * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Messwert/null_flavour
@@ -42,15 +42,15 @@ public class ProLaboranalytCluster implements LocatableEntity {
   private NullFlavour messwertNullFlavourDefiningCode;
 
   /**
-   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Analyseergebnis-Details
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Analyseergebnis-Detail
    * Description: Weitere Details zu einem einzelnen Ergebnis.
    */
   @Path("/items[at0014]")
-  private List<Cluster> analyseergebnisDetails;
+  private List<Cluster> analyseergebnisDetail;
 
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Interpretation
-   * Description: Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Resultat im Referenzbereich ist oder nicht.
+   * Description: Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Ergebnis im Referenzbereich ist oder nicht.
    * Comment: z.B.: 'im Referenzbereich, bezogen auf Alter und Geschlecht'.
    */
   @Path("/items[at0004 and name/value='Interpretation']/value|defining_code")
@@ -70,8 +70,8 @@ public class ProLaboranalytCluster implements LocatableEntity {
 
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Zeitpunkt der Validierung
-   * Description: Datum und Zeit, an dem das Analyseergebnis im Labor medizinisch validiert wurde.
-   * Comment: In vielen Gerichtsbarkeiten wird angenommen, dass der 'Ergebnisstatus' die medizinische Validierung einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet.
+   * Description: Datum und Uhrzeit der Validierung des Analyt-Ergebnisses im Labor durch einen Arzt.
+   * Comment: In vielen Gerichtsbarkeiten wird angenommen, dass der "Ergebnis-Status" die medizinische Validierung einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet.
    */
   @Path("/items[at0025]/value|value")
   private TemporalAccessor zeitpunktDerValidierungValue;
@@ -121,6 +121,14 @@ public class ProLaboranalytCluster implements LocatableEntity {
   private FeederAudit feederAudit;
 
   /**
+   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Testmethode
+   * Description: Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.
+   */
+  @Path("/items[at0028]/value")
+  @Choice
+  private ProLaboranalytTestmethodeChoice testmethode;
+
+  /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Probe ID
    * Description: Kennung der Probe, die für das Analyseergebnis verwendet wurde.
    */
@@ -130,7 +138,7 @@ public class ProLaboranalytCluster implements LocatableEntity {
 
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Ergebnis-Status
-   * Description: Status des Analyseergebnisses.
+   * Description: Status des Analyt-Ergebniswertes.
    */
   @Path("/items[at0005]/value")
   @Choice
@@ -138,28 +146,28 @@ public class ProLaboranalytCluster implements LocatableEntity {
 
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Messwert
-   * Description: (Mess-)Wert des Analyt-Resultats.
+   * Description: (Mess-)Wert des Analyt-Ergebnisses.
    */
   @Path("/items[at0001 and name/value='Messwert']/value")
   @Choice
   private ProLaboranalytMesswertChoice messwert;
 
-  public void setUntersuchterAnalytDefiningCode(
-      UntersuchterAnalytDefiningCode untersuchterAnalytDefiningCode) {
-     this.untersuchterAnalytDefiningCode = untersuchterAnalytDefiningCode;
+  public void setBezeichnungDesAnalytsDefiningCode(
+      BezeichnungDesAnalytsDefiningCode bezeichnungDesAnalytsDefiningCode) {
+     this.bezeichnungDesAnalytsDefiningCode = bezeichnungDesAnalytsDefiningCode;
   }
 
-  public UntersuchterAnalytDefiningCode getUntersuchterAnalytDefiningCode() {
-     return this.untersuchterAnalytDefiningCode ;
+  public BezeichnungDesAnalytsDefiningCode getBezeichnungDesAnalytsDefiningCode() {
+     return this.bezeichnungDesAnalytsDefiningCode ;
   }
 
-  public void setUntersuchterAnalytNullFlavourDefiningCode(
-      NullFlavour untersuchterAnalytNullFlavourDefiningCode) {
-     this.untersuchterAnalytNullFlavourDefiningCode = untersuchterAnalytNullFlavourDefiningCode;
+  public void setBezeichnungDesAnalytsNullFlavourDefiningCode(
+      NullFlavour bezeichnungDesAnalytsNullFlavourDefiningCode) {
+     this.bezeichnungDesAnalytsNullFlavourDefiningCode = bezeichnungDesAnalytsNullFlavourDefiningCode;
   }
 
-  public NullFlavour getUntersuchterAnalytNullFlavourDefiningCode() {
-     return this.untersuchterAnalytNullFlavourDefiningCode ;
+  public NullFlavour getBezeichnungDesAnalytsNullFlavourDefiningCode() {
+     return this.bezeichnungDesAnalytsNullFlavourDefiningCode ;
   }
 
   public void setMesswertNullFlavourDefiningCode(NullFlavour messwertNullFlavourDefiningCode) {
@@ -170,12 +178,12 @@ public class ProLaboranalytCluster implements LocatableEntity {
      return this.messwertNullFlavourDefiningCode ;
   }
 
-  public void setAnalyseergebnisDetails(List<Cluster> analyseergebnisDetails) {
-     this.analyseergebnisDetails = analyseergebnisDetails;
+  public void setAnalyseergebnisDetail(List<Cluster> analyseergebnisDetail) {
+     this.analyseergebnisDetail = analyseergebnisDetail;
   }
 
-  public List<Cluster> getAnalyseergebnisDetails() {
-     return this.analyseergebnisDetails ;
+  public List<Cluster> getAnalyseergebnisDetail() {
+     return this.analyseergebnisDetail ;
   }
 
   public void setInterpretationDefiningCode(InterpretationDefiningCode interpretationDefiningCode) {
@@ -269,6 +277,14 @@ public class ProLaboranalytCluster implements LocatableEntity {
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
+  }
+
+  public void setTestmethode(ProLaboranalytTestmethodeChoice testmethode) {
+     this.testmethode = testmethode;
+  }
+
+  public ProLaboranalytTestmethodeChoice getTestmethode() {
+     return this.testmethode ;
   }
 
   public void setProbeId(ProLaboranalytProbeIdChoice probeId) {

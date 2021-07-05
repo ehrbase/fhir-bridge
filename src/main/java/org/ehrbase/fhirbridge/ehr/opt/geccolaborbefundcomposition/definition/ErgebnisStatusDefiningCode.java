@@ -6,17 +6,17 @@ import org.ehrbase.client.classgenerator.EnumValueSet;
 public enum ErgebnisStatusDefiningCode implements EnumValueSet {
   ENDBEFUND("Endbefund", "Das Analyseergebnis ist vollständig und durch eine autorisierte Person verifiziert.", "local", "at0018"),
 
-  ERFASST("Erfasst", "Der Test ist im Laborinformationssystem erfasst, aber noch kein Ergebnis verfügbar.", "local", "at0015"),
+  REGISTRIERT("Registriert", "Der Test ist im Laborinformationssystem registriert, aber noch kein Ergebnis verfügbar.", "local", "at0015"),
 
-  ENDBEFUND_ERGAENZT("Endbefund, ergänzt", "Nach Abschluss wurde der Bericht durch das Hinzufügen neuer Inhalte abgeändert. Die vorhandene Inhalte sind unverändert. Dies ist eine Unterkategorie von \"Endbefund, geändert\".", "local", "at0021"),
+  KORRIGIERT("Korrigiert", "Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und wird von einer autorisierten Person überprüft. Dies ist eine Sub-Kategorie von \"Geändert\".", "local", "at0019"),
 
-  ENDBEFUND_KORRIGIERT("Endbefund, korrigiert", "Das Ergebnis wurde nach dem endgültigen Ergebnis korrigiert und vom zuständigen Laborwissenschaftler vervollständigt und verifiziert. Dies ist eine Unterkategorie von \"Endbefund, geändert\".", "local", "at0019"),
+  UNVOLLSTAENDIG("Unvollständig", "Das Testergebnis ist ein Anfangs- oder Interimswert: Daten im Testergebnis können unvollständig oder nicht verifiziert/validiert sein.", "local", "at0016"),
 
-  ENDBEFUND_GEAENDERT("Endbefund, geändert", "Das Ergebnis wurde nach dem endgültigen Ergebnis geändert und vom zuständigen Laborwissenschaftler vervollständigt und verifiziert. Die Ergebnisdaten wurden geändert.", "local", "at0020"),
+  GEAENDERT("Geändert", "Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und von einer autorisierten Person überprüft. Die Ergebnisdaten wurden geändert.", "local", "at0020"),
 
-  STORNIERT("Storniert", "Das Testergebnis ist nicht verfügbar, weil der Test nicht (vollständig) durchgeführt oder abgebrochen wurde.", "local", "at0023"),
+  ERGAENZT("Ergänzt", "Nach Abschluss wurde der Bericht durch das Hinzufügen neuer Inhalte abgeändert. Die vorhandene Inhalte sind unverändert. Dies ist eine Sub-Kategorie von \"Geändert\".", "local", "at0021"),
 
-  UNVOLLSTAENDIG("Unvollständig", "Das Testresultat ist ein Anfangs- oder Interimswert, vorläufig oder nicht verifiziert/validiert.", "local", "at0016"),
+  STORNIERT("Storniert", "Das Testergebnis ist nicht verfügbar, weil der Test nicht gestartet oder nicht abgeschlossen wurde (manchmal auch als \"abgebrochen\" bezeichnet).", "local", "at0023"),
 
   VORLAEUFIG("Vorläufig", "Erste, verifizierte Resultate sind vorhanden, der Test ist aber noch nicht abgeschlossen (Sub-Kategorie von 'Unvollständig').", "local", "at0017"),
 

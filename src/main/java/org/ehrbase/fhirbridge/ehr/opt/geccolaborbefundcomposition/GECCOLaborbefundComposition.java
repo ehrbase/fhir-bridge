@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.Sta
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-06-21T14:47:54.161008+02:00",
+    date = "2021-07-05T14:12:01.164754+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 @Template("GECCO_Laborbefund")

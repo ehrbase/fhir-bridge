@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum UntersuchterAnalytDefiningCode implements EnumValueSet {
+public enum BezeichnungDesAnalytsDefiningCode implements EnumValueSet {
   FERRITIN_MASS_VOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("Ferritin [Mass/volume] in Serum or Plasma by Immunoassay", "", "LOINC", "20567-4"),
 
   LYMPHOCYTES_VOLUME_IN_BLOOD_BY_AUTOMATED_COUNT("Lymphocytes [#/volume] in Blood by Automated count", "", "LOINC", "731-0"),
@@ -58,6 +58,8 @@ public enum UntersuchterAnalytDefiningCode implements EnumValueSet {
   APTT_IN_BLOOD_BY_COAGULATION_ASSAY("aPTT in Blood by Coagulation assay", "", "LOINC", "3173-2"),
 
   INR_IN_PLATELET_POOR_PLASMA_BY_COAGULATION_ASSAY("INR in Platelet poor plasma by Coagulation assay", "", "LOINC", "6301-6"),
+
+  ANTITHROMBIN_ACTUAL_NORMAL_IN_PLATELET_POOR_PLASMA_BY_CHROMOGENIC_METHOD("Antithrombin actual/normal in Platelet poor plasma by Chromogenic method", "", "LOINC", "27811-9"),
 
   APTT_IN_PLATELET_POOR_PLASMA_BY_COAGULATION_ASSAY("aPTT in Platelet poor plasma by Coagulation assay", "", "LOINC", "14979-9"),
 
@@ -259,20 +261,20 @@ public enum UntersuchterAnalytDefiningCode implements EnumValueSet {
 
   private String code;
 
-  UntersuchterAnalytDefiningCode(String value, String description, String terminologyId,
+  BezeichnungDesAnalytsDefiningCode(String value, String description, String terminologyId,
       String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;
     this.code = code;
   }
-
-  public static Map<String, UntersuchterAnalytDefiningCode> getCodesAsMap(){
-    Map<String, UntersuchterAnalytDefiningCode> untersuchterAnalytDefiningCodeHashMap = new HashMap<>();
-    for (UntersuchterAnalytDefiningCode untersuchterAnalytDefiningCode : UntersuchterAnalytDefiningCode.values()) {
-      untersuchterAnalytDefiningCodeHashMap.put(untersuchterAnalytDefiningCode.getCode(), untersuchterAnalytDefiningCode);
+  
+  public static Map<String, BezeichnungDesAnalytsDefiningCode> getCodesAsMap(){
+    Map<String, BezeichnungDesAnalytsDefiningCode> bezeichnungDesAnalytsDefiningCodeHashMap = new HashMap<>();
+    for (BezeichnungDesAnalytsDefiningCode bezeichnungDesAnalytsDefiningCode : BezeichnungDesAnalytsDefiningCode.values()) {
+      bezeichnungDesAnalytsDefiningCodeHashMap.put(bezeichnungDesAnalytsDefiningCode.getCode(), bezeichnungDesAnalytsDefiningCode);
     }
-    return untersuchterAnalytDefiningCodeHashMap;
+    return bezeichnungDesAnalytsDefiningCodeHashMap;
   }
 
   public String getValue() {

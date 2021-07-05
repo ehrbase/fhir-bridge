@@ -19,7 +19,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.laboratory_test_result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-06-21T14:47:54.203209+02:00",
+    date = "2021-07-05T14:12:01.211666+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class LaborergebnisObservation implements EntryEntity {
@@ -49,7 +49,6 @@ public class LaborergebnisObservation implements EntryEntity {
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt
    * Description: Ergebnis einer Laboranalyse für einen bestimmten Analytwert.
-   * Comment: Beispiele: "Natrium", "Leukozytenzahl", "T3". Üblicherweise über eine externe Terminologie codiert.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1 and name/value='Pro Laboranalyt']")
   private ProLaboranalytCluster proLaboranalyt;
@@ -182,6 +181,14 @@ public class LaborergebnisObservation implements EntryEntity {
   @Path("/protocol[at0004]/items[at0094]/items[at0062 and name/value='Identifikation der Laboranforderung']/value")
   @Choice
   private LaborergebnisIdentifikationDerLaboranforderungChoice identifikationDerLaboranforderung;
+
+  /**
+   * Path: Laborbefund/Laborergebnis/Testmethode
+   * Description: Die Beschreibung der Methode, mit dem der Test durchgeführt wurde.
+   */
+  @Path("/protocol[at0004]/items[at0121]/value")
+  @Choice
+  private LaborergebnisTestmethodeChoice testmethode;
 
   public void setLabortestKategorieDefiningCode(
       LabortestKategorieDefiningCode labortestKategorieDefiningCode) {
@@ -366,5 +373,13 @@ public class LaborergebnisObservation implements EntryEntity {
   public LaborergebnisIdentifikationDerLaboranforderungChoice getIdentifikationDerLaboranforderung(
       ) {
      return this.identifikationDerLaboranforderung ;
+  }
+
+  public void setTestmethode(LaborergebnisTestmethodeChoice testmethode) {
+     this.testmethode = testmethode;
+  }
+
+  public LaborergebnisTestmethodeChoice getTestmethode() {
+     return this.testmethode ;
   }
 }
