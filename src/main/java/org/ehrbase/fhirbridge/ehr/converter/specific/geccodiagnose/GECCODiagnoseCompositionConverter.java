@@ -1,6 +1,5 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.geccoDiagnose;
+package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
-import org.checkerframework.checker.nullness.Opt;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
@@ -10,7 +9,6 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
 import org.springframework.lang.NonNull;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public class GECCODiagnoseCompositionConverter extends ConditionToCompositionConverter<GECCODiagnoseComposition> {

@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.geccoDiagnose;
+package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
