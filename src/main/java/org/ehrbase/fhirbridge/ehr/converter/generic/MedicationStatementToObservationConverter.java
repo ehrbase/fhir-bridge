@@ -1,7 +1,11 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
+import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
 import org.hl7.fhir.r4.model.MedicationStatement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.lang.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
@@ -9,6 +13,8 @@ import java.lang.reflect.Method;
 import java.time.temporal.TemporalAccessor;
 
 public abstract class MedicationStatementToObservationConverter<E extends EntryEntity> extends EntryEntityConverter<MedicationStatement, E> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(MedicationStatementToObservationConverter.class);
 
     @Override
     public E convert(@NonNull MedicationStatement resource) {
@@ -27,7 +33,7 @@ public abstract class MedicationStatementToObservationConverter<E extends EntryE
             Method setOriginValue = entryEntity.getClass().getMethod("setOriginValue", TemporalAccessor.class);
             setOriginValue.invoke(entryEntity, TimeConverter.convertMedicationStatmentTime(resource));
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            exception.printStackTrace();
+            LOG.error(LoggerMessages.printInvokeError(exception));
         } catch (NoSuchMethodException ignored){
             //ignored
         }
@@ -38,7 +44,7 @@ public abstract class MedicationStatementToObservationConverter<E extends EntryE
             Method setTimeValue = entryEntity.getClass().getMethod("setTimeValue", TemporalAccessor.class);
             setTimeValue.invoke(entryEntity, TimeConverter.convertMedicationStatmentTime(resource));
         } catch ( IllegalAccessException | InvocationTargetException exception) {
-            exception.printStackTrace();
+            LOG.error(LoggerMessages.printInvokeError(exception));
         }catch (NoSuchMethodException ignored){
             //ignored
         }
