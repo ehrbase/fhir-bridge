@@ -2,10 +2,9 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToObservationConverter;
-import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes.KrankheitsanzeichenCode;
-import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.codes.SchweregradSymptomCode;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.KrankheitsanzeichenCode;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.SchweregradSymptomCode;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomAnatomischeLokalisationElement;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomObservation;
 import org.hl7.fhir.r4.model.CodeableConcept;
