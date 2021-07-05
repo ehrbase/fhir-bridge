@@ -31,19 +31,17 @@ import org.ehrbase.fhirbridge.fhir.support.Bundles;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of {@link RouteBuilder} that provides route definitions for transactions
- * linked to {@link org.hl7.fhir.r4.model.Bundle Bundle} resource.
+ * Implementation of {@link RouteBuilder} that configures the route definitions for transaction.
  *
  * @since 1.0.0
  */
 @Component
 @SuppressWarnings("java:S1192")
-public class TransactionRouteBuilder extends AbstractRouteBuilder {
+public class TransactionRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
         // @formatter:off
-        super.configure();
 
         from("bundle-provide:consumer?fhirContext=#fhirContext")
                 .setHeader(CamelConstants.PROFILE, method(Bundles.class, "getTransactionProfile"))

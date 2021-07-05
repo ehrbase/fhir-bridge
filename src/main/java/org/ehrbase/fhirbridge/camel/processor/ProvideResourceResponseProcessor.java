@@ -27,9 +27,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@Component
+/**
+ * {@link Processor} that stores the link between the FHIR resource and the openEHR composition.
+ *
+ * @since 1.0.0
+ */
+@Component(ProvideResourceResponseProcessor.BEAN_ID)
 @SuppressWarnings("java:S6212")
 public class ProvideResourceResponseProcessor implements Processor {
+
+    public static final String BEAN_ID = "provideResourceResponseProcessor";
 
     private static final Logger LOG = LoggerFactory.getLogger(ProvideResourceResponseProcessor.class);
 

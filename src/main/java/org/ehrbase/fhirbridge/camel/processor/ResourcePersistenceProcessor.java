@@ -35,9 +35,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@Component
+/**
+ * {@link org.apache.camel.Processor Processor} that handles FHIR operations using DAOs from HAPI FHIR JPA module.
+ *
+ * @since 1.2.0
+ */
+@Component(ResourcePersistenceProcessor.BEAN_ID)
 @SuppressWarnings({"java:S6212", "rawtypes", "unchecked"})
 public class ResourcePersistenceProcessor implements FhirRequestProcessor {
+
+    public static final String BEAN_ID = "resourcePersistenceProcessor";
 
     private static final Logger LOG = LoggerFactory.getLogger(ResourcePersistenceProcessor.class);
 

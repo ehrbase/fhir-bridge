@@ -36,9 +36,17 @@ import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-@Component
+/**
+ * {@link org.apache.camel.Processor Processor} that retrieves the EHR ID of the patient involved in the current
+ * exchange. If the patient does not have an EHR, a new one is created and the EHR ID is stored in the database.
+ *
+ * @since 1.2.0
+ */
+@Component(EhrLookupProcessor.BEAN_ID)
 @SuppressWarnings("java:S6212")
 public class EhrLookupProcessor implements FhirRequestProcessor {
+
+    public static final String BEAN_ID = "ehrLookupProcessor";
 
     private static final Logger LOG = LoggerFactory.getLogger(EhrLookupProcessor.class);
 
@@ -64,6 +72,12 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
         exchange.getMessage().setHeader(CompositionConstants.EHR_ID, ehrId);
     }
 
+    /**
+     * Gets the current patient ID.
+     *
+     * @param exchange the current exchange
+     * @return the patient ID
+     */
     private String getPatientId(Exchange exchange) {
         Resource resource = exchange.getIn().getBody(Resource.class);
 
@@ -74,6 +88,12 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
         }
     }
 
+    /**
+     * Creates an EHR for the given patient ID.
+     *
+     * @param patientId the given patient ID
+     * @return the EHR ID
+     */
     private UUID createEhr(String patientId) {
         PartySelf subject = new PartySelf(new PartyRef(new HierObjectId(patientId), "DEMOGRAPHIC", "PERSON"));
         EhrStatus ehrStatus = new EhrStatus(ARCHETYPE_NODE_ID, new DvText("EHR Status"), subject, true, true, null);

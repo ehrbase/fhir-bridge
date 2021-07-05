@@ -24,24 +24,24 @@ import org.hl7.fhir.r4.model.Resource;
 import org.springframework.stereotype.Component;
 
 /**
- * Camel {@link Processor} that converts back the persisted resource with contained resources into a Bundle.
+ * {@link Processor} that transforms a {@link MethodOutcome} in a {@link Bundle} with type
+ * <code>transaction-response</code>.
  *
  * @since 1.0.0
  */
 @Component(BundleResponseProcessor.BEAN_ID)
+@SuppressWarnings("java:S6212")
 public class BundleResponseProcessor implements Processor {
 
     public static final String BEAN_ID = "bundleResponseProcessor";
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        MethodOutcome methodOutcome = exchange.getIn().getMandatoryBody(MethodOutcome.class);
-
+        MethodOutcome methodOutcome = exchange.getIn().getBody(MethodOutcome.class);
         Bundle responseBundle = new Bundle()
                 .setType(Bundle.BundleType.TRANSACTIONRESPONSE)
-                .addEntry(
-                        new Bundle.BundleEntryComponent()
-                                .setResource((Resource) methodOutcome.getResource()));
+                .addEntry(new Bundle.BundleEntryComponent()
+                        .setResource((Resource) methodOutcome.getResource()));
 
         exchange.getMessage().setBody(responseBundle);
     }
