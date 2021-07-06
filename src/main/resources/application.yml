@@ -1,29 +1,64 @@
 # @formatter:off
 
-#
-# FHIR Bridge Properties
-#
+################################################################################
+# FHIR Bridge Properties                                                       #
+################################################################################
+
 fhir-bridge:
-  # CORS Properties
+# CORS Properties
   cors:
     allow-credentials: false
     allowed-headers: '*'
     allowed-methods: '*'
     allowed-origins: '*'
-  # Debug Properties
+# Debug Properties
   debug:
-    enabled: false
+    enabled: true
     mapping-output-directory: ${java.io.tmpdir}/mappings
-  # EHRbase Properties
+# EHRbase Properties
   ehrbase:
     base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
     security:
-      type: basic_auth
-      username: myuser
-      password: myPassword432
+      type: basic
+      user:
+        name: myuser
+        password: myPassword432
+        admin-name: myadmin
+        admin-password: mySuperAwesomePassword123
+#      oauth2:
+#        token-url:
+#        client-id:
+#        client-secret:
     template:
       prefix: classpath:/opt/
-  # Security Properties
+      force-update: false
+# FHIR Properties
+#  fhir:
+#    jpa:
+#      allow-external-references:
+#      allow-inline-match-url-references:
+#      auto-create-placeholder-references:
+#      populate-identifier-in-auto-created-placeholder-references:
+#    validation:
+#      any-extensions-allowed:
+#      error-for-unknown-profiles:
+#      failed-on-severity:
+#      optional-identifier:
+#      terminology:
+#        mode:
+#        server-base-url:
+# HTTP Client Properties
+#  http-client:
+#    ssl:
+#      enabled:
+#      key-password:
+#      key-store:
+#      key-store-password:
+#      key-store-type:
+#      trust-store:
+#      trust-store-password:
+#      trust-store-type:
+# Security Properties
   security:
     authentication-type: none
 #    basic:
@@ -33,12 +68,10 @@ fhir-bridge:
 #      jwk-set-uri:
 #      jws-algorithm: RS256
 
-demographics:
-  patient:
-    url: https://demographics-service.ctr.dev.num-codex.de/fhir/Patient/
-#
-# Spring Properties
-#
+################################################################################
+# Spring Properties                                                            #
+################################################################################
+
 spring:
   application:
     name: FHIR Bridge
@@ -50,27 +83,24 @@ spring:
       - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
       - org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration
       - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
-  # Batch Properties
+# Batch Properties
   batch:
     job:
       enabled: false
-  # JPA Properties
+# JPA Properties
   jpa:
     hibernate:
       ddl-auto: validate
     open-in-view: false
     properties:
       hibernate.dialect: org.hibernate.dialect.H2Dialect
-      hibernate.jdbc.batch_size: 20
-      hibernate.cache.use_query_cache: false
-      hibernate.cache.use_second_level_cache: false
-      hibernate.cache.use_structured_entries: false
-      hibernate.cache.use_minimal_puts: false
-      hibernate.search.default.indexBase: ${java.io.tmpdir}/fhir-bridge/lucenefiles
-      hibernate.search.model_mapping: ca.uhn.fhir.jpa.search.LuceneSearchMappingFactory
-      hibernate.search.default.directory_provider: filesystem
-      hibernate.search.lucene_version: LUCENE_CURRENT
-  # Liquibase Properties
+      hibernate.search.enabled: true
+      hibernate.search.backend.type: lucene
+      hibernate.search.backend.analysis.configurer: ca.uhn.fhir.jpa.search.HapiLuceneAnalysisConfigurer
+      hibernate.search.backend.directory.type: local-filesystem
+      hibernate.search.backend.directory.root: ${java.io.tmpdir}/fhir-bridge/lucenefiles
+      hibernate.search.backend.lucene_version: lucene_current
+# Liquibase Properties
   liquibase:
     database-change-log-table: DATABASE_CHANGELOG
     database-change-log-lock-table: DATABASE_CHANGELOG_LOCK
@@ -78,25 +108,42 @@ spring:
   messages:
     basename: messages/messages
     use-code-as-default-message: true
-ipf:
-  atna:
-    audit-enabled: false
-#    audit-repository-host:
-#    audit-repository-port:
-  fhir:
-    fhir-version: r4
+# Server Properties
 server:
   port: 8888
   servlet:
     context-path: /fhir-bridge
+# Logging Properties
 logging:
   level:
     ca.uhn.fhir: warn
     com.zaxxer.hikari: warn
-    liquibase: warn
+    liquibase: error
     org.apache.camel: warn
+    org.ehrbase.fhirbridge: debug
     org.hibernate: warn
     org.openehealth.ipf: warn
     org.quartz: warn
     org.springframework: warn
     org.springframework.boot: warn
+
+################################################################################
+# Open eHealth Integration Platform Properties                                 #
+################################################################################
+
+ipf:
+  # Audit Properties
+  atna:
+    audit-enabled: false
+#    audit-repository-host:
+#    audit-repository-port:
+#    audit-source-id:
+#    audit-value-if-missing:
+  # FHIR Properties
+  fhir:
+    fhir-version: r4
+
+
+demographics:
+  patient:
+    url: https://demographics-service.ctr.dev.num-codex.de/fhir/Patient/

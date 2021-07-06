@@ -4,23 +4,23 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum ErgebnisStatusDefiningCode implements EnumValueSet {
-  ERFASST("Erfasst", "Der Test ist im Laborinformationssystem erfasst, aber noch kein Resultat verfügbar.", "local", "at0015"),
+  ENDBEFUND("Endbefund", "Das Analyseergebnis ist vollständig und durch eine autorisierte Person verifiziert.", "local", "at0018"),
 
-  ENDBEFUND_KORRIGIERT("Endbefund, korrigiert", "Der Endbefund wurde erneut modifiziert, ist vollständig und wurde durch den verantwortlichen Pathologen verifiziert. Dies ist eine Unterkategorie von \"Endbefund, geändert\".", "local", "at0019"),
+  REGISTRIERT("Registriert", "Der Test ist im Laborinformationssystem registriert, aber noch kein Ergebnis verfügbar.", "local", "at0015"),
 
-  ENDBEFUND("Endbefund", "Das Testresultat ist vollständig und durch eine autorisierte Person verifiziert.", "local", "at0018"),
+  KORRIGIERT("Korrigiert", "Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und wird von einer autorisierten Person überprüft. Dies ist eine Sub-Kategorie von \"Geändert\".", "local", "at0019"),
 
-  STORNIERT("Storniert", "Das Testresultat ist nicht verfügbar, weil der Test nicht (vollständig) durchgeführt oder abgebrochen wurde.", "local", "at0023"),
+  UNVOLLSTAENDIG("Unvollständig", "Das Testergebnis ist ein Anfangs- oder Interimswert: Daten im Testergebnis können unvollständig oder nicht verifiziert/validiert sein.", "local", "at0016"),
 
-  ENDBEFUND_ERGAENZT("Endbefund, ergänzt", "Nach Abschluss wurde der Bericht durch Hinzufügen neuer Inhalte abgeändert. Der vorhandenen Inhalte sind unverändert. Dies ist eine Unterkategorie von \"Endbefund, geändert\".", "local", "at0021"),
+  GEAENDERT("Geändert", "Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und von einer autorisierten Person überprüft. Die Ergebnisdaten wurden geändert.", "local", "at0020"),
 
-  ENDBEFUND_WIDERRUFEN("Endbefund, widerrufen", "Das Testresultat wurde nach Endbefundung zurückgezogen.", "local", "at0022"),
+  ERGAENZT("Ergänzt", "Nach Abschluss wurde der Bericht durch das Hinzufügen neuer Inhalte abgeändert. Die vorhandene Inhalte sind unverändert. Dies ist eine Sub-Kategorie von \"Geändert\".", "local", "at0021"),
 
-  ENDBEFUND_GEAENDERT("Endbefund, geändert", "Der Endbefund wurde erneut modifiziert, ist vollständig und wurde durch den verantwortlichen Pathologen verifiziert. Des Weiteren haben sich die Ergebnisdaten hierdurch verändert.", "local", "at0020"),
+  STORNIERT("Storniert", "Das Testergebnis ist nicht verfügbar, weil der Test nicht gestartet oder nicht abgeschlossen wurde (manchmal auch als \"abgebrochen\" bezeichnet).", "local", "at0023"),
 
-  UNVOLLSTAENDIG("Unvollständig", "Das Testresultat ist ein Anfangs- oder Interimswert, vorläufig oder nicht verifiziert/validiert.", "local", "at0016"),
+  VORLAEUFIG("Vorläufig", "Erste, verifizierte Resultate sind vorhanden, der Test ist aber noch nicht abgeschlossen (Sub-Kategorie von 'Unvollständig').", "local", "at0017"),
 
-  VORLAEUFIG("Vorläufig", "Erste, verifizierte Resultate sind vorhanden, der Test ist aber noch nicht abgeschlossen (Sub-Kategorie von 'Unvollständig').", "local", "at0017");
+  ENDBEFUND_WIDERRUFEN("Endbefund, widerrufen", "Das Testergebnis wurde nach Endbefundung zurückgezogen.", "local", "at0022");
 
   private String value;
 

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <!-- HAPI FHIR 5.3.0 -->
+    <changeSet id="1" author="subigre">
+        <addColumn tableName="MPI_LINK">
+            <column name="GOLDEN_RESOURCE_PID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RULE_COUNT" type="bigint"/>
+        </addColumn>
+
+        <addForeignKeyConstraint baseTableName="MPI_LINK"
+                                 baseColumnNames="GOLDEN_RESOURCE_PID"
+                                 constraintName="FK_EMPI_LINK_GOLDEN_RESOURCE"
+                                 referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+    </changeSet>
+
+    <changeSet id="2" author="subigre">
+        <dropUniqueConstraint tableName="TRM_VALUESET_CONCEPT"
+                              constraintName="IDX_VS_CONCEPT_CS_CD"/>
+
+        <addUniqueConstraint tableName="TRM_VALUESET_CONCEPT"
+                             columnNames="VALUESET_PID, SYSTEM_URL, CODEVAL"
+                             constraintName="IDX_VS_CONCEPT_CSCD"/>
+
+        <createSequence sequenceName="SEQ_SPIDX_QUANTITY_NRML"
+                        startValue="1" incrementBy="50"/>
+
+        <createTable tableName="HFJ_SPIDX_QUANTITY_NRML">
+            <column name="RES_ID" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RES_TYPE" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_UPDATED" type="timestamp"/>
+            <column name="SP_MISSING" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_NAME" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SP_ID" type="bigint">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="HFJ_SPIDX_QTY_NRML_PKEY"/>
+            </column>
+            <column name="SP_SYSTEM" type="varchar(200)"/>
+            <column name="SP_UNITS" type="varchar(200)"/>
+            <column name="HASH_IDENTITY_AND_UNITS" type="bigint"/>
+            <column name="HASH_IDENTITY_SYS_UNITS" type="bigint"/>
+            <column name="HASH_IDENTITY" type="bigint"/>
+            <column name="SP_VALUE" type="float"/>
+        </createTable>
+
+        <createIndex indexName="IDX_SP_QNTY_NRML_HASH"
+                     tableName="HFJ_SPIDX_QUANTITY_NRML">
+            <column name="HASH_IDENTITY"/>
+            <column name="SP_VALUE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_QNTY_NRML_HASH_UN"
+                     tableName="HFJ_SPIDX_QUANTITY_NRML">
+            <column name="HASH_IDENTITY_AND_UNITS"/>
+            <column name="SP_VALUE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_QNTY_NRML_HASH_SYSUN"
+                     tableName="HFJ_SPIDX_QUANTITY_NRML">
+            <column name="HASH_IDENTITY_SYS_UNITS"/>
+            <column name="SP_VALUE"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_QNTY_NRML_UPDATED"
+                     tableName="HFJ_SPIDX_QUANTITY_NRML">
+            <column name="SP_UPDATED"/>
+        </createIndex>
+
+        <createIndex indexName="IDX_SP_QNTY_NRML_RESID"
+                     tableName="HFJ_SPIDX_QUANTITY_NRML">
+            <column name="RES_ID"/>
+        </createIndex>
+
+        <addColumn tableName="HFJ_RESOURCE">
+            <column name="SP_QUANTITY_NRML_PRESENT" type="boolean"/>
+        </addColumn>
+
+        <addColumn tableName="HFJ_SPIDX_QUANTITY_NRML">
+            <column name="PARTITION_ID" type="integer"/>
+            <column name="PARTITION_DATE" type="date"/>
+        </addColumn>
+
+        <addForeignKeyConstraint
+                baseTableName="HFJ_SPIDX_QUANTITY_NRML" baseColumnNames="RES_ID"
+                constraintName="FKRCJOVMUH5KC0O6FVBLE319PYV"
+                referencedTableName="HFJ_RESOURCE" referencedColumnNames="RES_ID"/>
+
+        <modifyDataType tableName="HFJ_SPIDX_QUANTITY"
+                        columnName="SP_VALUE" newDataType="double"/>
+
+        <addColumn tableName="HFJ_RES_LINK">
+            <column name="TARGET_RESOURCE_VERSION" type="bigint"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="3" author="subigre">
+        <createTable tableName="FB_RESOURCE_MAP">
+            <column name="RESOURCE_ID" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="COMPOSITION_VERSION_UID" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="subigre">
+        <createTable tableName="FB_PATIENT_EHR">
+            <column name="PATIENT_ID" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="EHR_ID" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <renameTable oldTableName="FB_RESOURCE_MAP" newTableName="FB_RESOURCE_COMPOSITION"/>
+
+        <renameColumn tableName="FB_RESOURCE_COMPOSITION" oldColumnName="COMPOSITION_VERSION_UID"
+                      newColumnName="COMPOSITION_ID"/>
+    </changeSet>
+</databaseChangeLog>

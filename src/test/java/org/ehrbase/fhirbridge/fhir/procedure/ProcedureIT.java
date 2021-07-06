@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.procedure;
 
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
@@ -14,7 +15,9 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.time.temporal.TemporalAccessor;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Procedure Procedure} resource.
@@ -38,10 +41,10 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
 
         assertEquals("HTTP 422 : Default profile is not supported for Procedure. " +
                 "One of the following profiles is expected: " +
-                "[https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure, " +
-                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis, " +
+                "[https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis, " +
                 "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dialysis, " +
                 "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/extracorporeal-membrane-oxygenation, " +
+                "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure, " +
                 "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position, " +
                 "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures, " +
                 "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies]", exception.getMessage());
@@ -50,17 +53,17 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     @Test
     void createWithNonExistingSubject() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-procedure-with-non-existing-subject.json");
-        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        MethodOutcome outcome = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
 
-        assertEquals("HTTP 422 : EhrId not found for subject '123456789'", exception.getMessage());
+        assertNotNull(outcome.getId());
+        assertEquals(true, outcome.getCreated());
     }
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Procedure procedure = (Procedure) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-             new ProcedureCompositionConverter().convert(((Procedure) procedure));
+            new ProcedureCompositionConverter().convert(((Procedure) procedure));
         });
     }
 

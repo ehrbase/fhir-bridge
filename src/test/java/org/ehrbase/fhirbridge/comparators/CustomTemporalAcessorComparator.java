@@ -27,7 +27,6 @@ public class CustomTemporalAcessorComparator  implements CustomValueComparator<T
         return (LocalDateTime) temporalAccessor;
     }
 
-
     @Override
     public String toString(TemporalAccessor temporalAccessor) {
         return temporalAccessor.toString();
