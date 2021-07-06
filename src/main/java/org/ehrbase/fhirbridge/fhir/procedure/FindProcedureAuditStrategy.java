@@ -16,7 +16,7 @@
 
 package org.ehrbase.fhirbridge.fhir.procedure;
 
-import org.ehrbase.fhirbridge.fhir.common.audit.FhirBridgeEventType;
+import org.ehrbase.fhirbridge.fhir.FhirBridgeEventType;
 import org.openehealth.ipf.commons.audit.AuditContext;
 import org.openehealth.ipf.commons.audit.model.AuditMessage;
 import org.openehealth.ipf.commons.ihe.core.atna.event.QueryInformationBuilder;
@@ -38,7 +38,7 @@ public class FindProcedureAuditStrategy extends FhirQueryAuditStrategy {
 
     @Override
     public AuditMessage[] makeAuditMessage(AuditContext auditContext, FhirQueryAuditDataset auditDataset) {
-        return new QueryInformationBuilder<>(auditContext, auditDataset, FhirBridgeEventType.FindPatient)
+        return new QueryInformationBuilder<>(auditContext, auditDataset, FhirBridgeEventType.FIND_PROCEDURE)
                 .addPatients(auditDataset.getPatientIds())
                 .getMessages();
     }

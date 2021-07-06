@@ -51,7 +51,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 	# invalid cases for value
     $.subject.identifier.value		missing							422		 Subject identifier is required
-    $.subject.identifier.value		foobar							422		 EhrId not found for subject 'foobar'
+    # Deprecated: $.subject.identifier.value		foobar							422		 EhrId not found for subject 'foobar'
     $.subject.identifier.value		${EMPTY}						422		 @value cannot be empty                                        					Observation.subject.identifier.value
     $.subject.identifier.value		${{ [] }}						422		 This property must be an simple value, not an array           					Observation.subject.identifier.value
     $.subject.identifier.value		${{ {} }}						422		 This property must be an simple value, not an object          					Observation.subject.identifier.value
@@ -66,20 +66,20 @@ ${vQSystem}						http://unitsofmeasure.org
 
 	# invalid cases for identifier
     $.subject.identifier			missing							422		 Object must have some content                                 					Observation.subject
-    $.subject.identifier			${EMPTY}						422		 This property must be an Object, not a primitive property     					Observation.subject.identifier
-    $.subject.identifier			${{ [] }}						422		 This property must be an Object, not an array                 					Observation.subject.identifier
+    $.subject.identifier			${EMPTY}						422		 The property identifier must be an Object, not a primitive property			Observation.subject.identifier
+    $.subject.identifier			${{ [] }}						422		 The property identifier must be an Object, not an array       					Observation.subject.identifier
     $.subject.identifier			${{ {} }}						422		 Object must have some content                                 					Observation.subject.identifier
-    $.subject.identifier			${123}							422		 This property must be an Object, not a primitive property     					Observation.subject.identifier
+    $.subject.identifier			${123}							422		 The property identifier must be an Object, not a primitive property        	Observation.subject.identifier
 
 	# invalid cases for subject
     $.subject						missing							422		 Observation.subject: minimum required = 1, but only found 0 .from ${body_height-url}
-    $.subject						${EMPTY}						422		 This property must be an Object, not a primitive property     					Observation.subject
-    $.subject						${{ [] }}						422		 This property must be an Object, not an array                 					Observation.subject
+    $.subject						${EMPTY}						422		 The property subject must be an Object, not a primitive property				Observation.subject
+    $.subject						${{ [] }}						422		 The property subject must be an Object, not an array          					Observation.subject
     $.subject						${{ {} }}						422		 Object must have some content                                 					Observation.subject
-    $.subject						${123}							422		 This property must be an Object, not a primitive property     					Observation.subject
+    $.subject						${123}							422		 The property subject must be an Object, not a primitive property     		    Observation.subject
 	
 	# comment: random uuid																			 regex for uuid
-    $.subject.identifier.value    ${{str(uuid.uuid4())}}    		422     EhrId not found for subject
+    # Deprecated: $.subject.identifier.value    ${{str(uuid.uuid4())}}    		422     EhrId not found for subject
 	
 
 002 Create Body Height (Invalid/Missing 'resourceType')
@@ -136,14 +136,14 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.meta.profile[0]				${randinteger}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randinteger}.						Observation.meta.profile.0.
 	$.meta.profile[0]				${randstring}					422    	Canonical URLs must be absolute URLs if they are not fragment references .${randstring}.						Observation.meta.profile.0.
 	$.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.							Observation.meta.profile.0.
-	$.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	Profile reference 'http://wrong.url' could not be resolved, so has not been checked								Observation.meta.profile.0.
-	$.meta.profile					${EMPTY}						422    	This property must be an Array, not a a primitive property														Observation.meta.profile
+	$.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	The resource does not contain any supported profile. One of the following profiles is expected
+	$.meta.profile					${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.meta.profile
 	
 	# comment: the next one sets the value to an empty list/array []
 	$.meta.profile					${{ [] }}						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
 	
 	# comment: the next one sets value to an empty object {}
-	$.meta.profile					${{ {} }}						422    	This property must be an Array, not a an object
+	$.meta.profile					${{ {} }}						422    	This property must be an Array, not an object
 
 
 005 Create Body Height (Invalid/Missing 'identifier')
@@ -250,7 +250,7 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.code									missing					422    	Observation.code: minimum required = 1, but only found 0 .from ${body_height-url}							Observation
 	$.code									${{ [] }}				422    	Observation.code: minimum required = 1, but only found 0 .from ${body_height-url}							Observation
 	$.code									${{ {} }}				422    	Object must have some content																				Observation.code
-	$.code									${{ [{}] }}				422    	This property must be an Object, not an array																Observation.code
+	$.code									${{ [{}] }}				422    	The property code must be an Object, not an array															Observation.code
 
 	# invalid coding
 	$.code.coding   	 					missing					422    	Observation.code.coding:BodyHeightCode: minimum required = 1, but only found 0 .from ${body_height-url}		Observation.code
@@ -330,7 +330,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				BodyHeight/create-body-height-normal.json
-	observation.validate response - 422 (with error message)	422								obs-6: dataAbsentReason SHALL only be present if Observation.value.x. is not present .dataAbsentReason.empty.. or value.empty...			Observation
+	observation.validate response - 422 (with error message)	    422								obs-6: 'dataAbsentReason SHALL only be present if Observation.value.x. is not present'  			Observation
 
 
 
@@ -351,12 +351,12 @@ ${vQSystem}						http://unitsofmeasure.org
 
 	# missing valueCodeableConcept
 	#$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
-	$.dataAbsentReason							${EMPTY}				422    	This property must be an Object, not a primitive property													Observation.dataAbsentReason
+	$.dataAbsentReason							${EMPTY}				422    	The property dataAbsentReason must be an Object, not a primitive property									Observation.dataAbsentReason
 
 	# wrong format
-	$.dataAbsentReason							${{ [] }}				422    	This property must be an Object, not an array																Observation.dataAbsentReason
+	$.dataAbsentReason							${{ [] }}				422    	The property dataAbsentReason must be an Object, not an array												Observation.dataAbsentReason
 	$.dataAbsentReason							${{ {} }}				422    	Object must have some content																				Observation.dataAbsentReason
-	$.dataAbsentReason							${{ [{}] }}				422    	This property must be an Object, not an array
+	$.dataAbsentReason							${{ [{}] }}				422    	The property dataAbsentReason must be an Object, not an array
 
 	# missing coding
 	$.dataAbsentReason.coding					missing					422    	.*dataAbsentReason SHALL only be present if Observation.value.x. is not present
@@ -399,7 +399,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 	# invalid/missing valueQuantity
 	$.valueQuantity			  					missing			422    	.*If there is no component or hasMember element then either a value.x. or a data absent reason must be present
-	$.valueQuantity			  					${None}			422    	This property must be an Object, not null
+	$.valueQuantity			  					${None}			422    	The property valueQuantity must be an Object, not null
 	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
@@ -474,7 +474,7 @@ ${vQSystem}						http://unitsofmeasure.org
     ${1234}      	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final		     true             true           	${1234}                                                            ${1234}              true			   true			  	 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          This does not appear to be a FHIR resource .unknown name '1234'.                                                                                   1234
     Observation    	        ${1234}      				   					   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final		     true             true           	${1234}                                                            ${1234}              true			   true			  	 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                           Observation.id
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   false        ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final		     true             true           	${1234}                                                            ${1234}              true			   true			  	 ${1234}          		  	      ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Coding.system must be an absolute reference, not a local reference                                                                                 Observation.identifier.0.
-    Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${1234}           			  	  true       ${randinteger}     	 ${randinteger}               final		     true             true           	${1234}                                                            ${1234}              true			   true			  	 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Profile reference '1234' could not be resolved, so has not been checked                                                                            Observation.meta.profile.0.
+    Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${1234}           			  	  true       ${randinteger}     	 ${randinteger}               final		     true             true           	${1234}                                                            ${1234}              true			   true			  	 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Profile reference '1234' has not been checked because it is unknown                                                                                Observation.meta.profile.0.
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  false      ${randinteger}     	 ${randinteger}               final		     true             true           	${1234}                                                            ${1234}              true			   true			  	 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                           Observation.category.0..coding.0..system
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               ${1234}	     true             true           	${1234}                                                            ${1234}              true			   true			  	 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                           Observation.status
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     false            true           	${1234}                                                            ${1234}              true			   true			  	 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                           Observation.code.coding.0..system
@@ -484,7 +484,7 @@ ${vQSystem}						http://unitsofmeasure.org
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}              true			   true 			 ${1234}          		  		  ${1234}         	${1234}                         false    	 	    valid      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Observation.subject: minimum required = 1, but only found 0 .from ${body_height-url}.                                                            	Observation
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}              true			   false		     ${1234}          		  		  ${1234}         	${1234}                         true    		 	test      		  2020-02-25		  true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Error parsing JSON: the primitive value must be a string                                                                                           Observation.code
     Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}              true			   false			 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  ${12345}		      true		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          Not a valid date/time .12345.                                                                                                                      Observation.effective.ofType.dateTime.
-    Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}              true			   false			 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  false		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          vs-2: If there is no component or hasMember element then either a value.x. or a data absent reason must be present.*                               Observation
+    Observation    	        23499ea6-d046-4e91-b7ab-d9cf040add72  			   true         ${body_height-url}			  	  true       ${randinteger}     	 ${randinteger}               final  	     true             true           	${1234}                                                            ${1234}              true			   false			 ${1234}          		  		  ${1234}         	${1234}                         true    		 	valid      		  2020-02-25		  false		${randstring}	   ${1234}	               ${1234}              ${1234}		        422          vs-2: 'If there is no component or hasMember element then either a value.x. or a data absent reason must be present.'                               Observation
 
 
 

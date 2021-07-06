@@ -21,7 +21,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.Composition;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborbefundKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.StatusDefiningCode;
 
@@ -29,11 +29,11 @@ import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.Sta
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:53:24.000636+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-05T14:12:01.164754+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 @Template("GECCO_Laborbefund")
-public class GECCOLaborbefundComposition implements CompositionEntity, Composition {
+public class GECCOLaborbefundComposition implements CompositionEntity {
   /**
    * Path: Laborbefund/category
    */
@@ -64,14 +64,8 @@ public class GECCOLaborbefundComposition implements CompositionEntity, Compositi
    * Path: Laborbefund/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
-  @Path("/context/other_context[at0001]/items[at0005]/value|value")
-  private String kategorieValue;
-
-  /**
-   * Path: Laborbefund/context/Baum/Kategorie/null_flavour
-   */
-  @Path("/context/other_context[at0001]/items[at0005]/null_flavour|defining_code")
-  private NullFlavour kategorieNullFlavourDefiningCode;
+  @Path("/context/other_context[at0001]/items[at0005]")
+  private List<LaborbefundKategorieElement> kategorie;
 
   /**
    * Path: Laborbefund/context/start_time
@@ -175,20 +169,12 @@ public class GECCOLaborbefundComposition implements CompositionEntity, Compositi
      return this.statusNullFlavourDefiningCode ;
   }
 
-  public void setKategorieValue(String kategorieValue) {
-     this.kategorieValue = kategorieValue;
+  public void setKategorie(List<LaborbefundKategorieElement> kategorie) {
+     this.kategorie = kategorie;
   }
 
-  public String getKategorieValue() {
-     return this.kategorieValue ;
-  }
-
-  public void setKategorieNullFlavourDefiningCode(NullFlavour kategorieNullFlavourDefiningCode) {
-     this.kategorieNullFlavourDefiningCode = kategorieNullFlavourDefiningCode;
-  }
-
-  public NullFlavour getKategorieNullFlavourDefiningCode() {
-     return this.kategorieNullFlavourDefiningCode ;
+  public List<LaborbefundKategorieElement> getKategorie() {
+     return this.kategorie ;
   }
 
   public void setStartTimeValue(TemporalAccessor startTimeValue) {

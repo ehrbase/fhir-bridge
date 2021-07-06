@@ -14,7 +14,9 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.time.temporal.TemporalAccessor;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Observation Observation} resource.
@@ -82,12 +84,12 @@ class ObservationIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createSofaScore() throws IOException {
-      //TODO The template does not support cvs0 yet  create("create-sofa-score.json");
+        //TODO The template does not support cvs0 yet  create("create-sofa-score.json");
     }
 
     @Test
     void createSofaScore1() throws IOException {
-   //    create("create-sofa-score-cardiovuskular-score-1.json");
+        //    create("create-sofa-score-cardiovuskular-score-1.json");
     }
 
     @Test
@@ -111,7 +113,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertTrue(StringUtils.startsWith(exception.getMessage(), "HTTP 422 : HTTP status '400 Bad Request' was returned by EHRbase while trying to save the composition. Details: Wrong Status code. "));
+        assertTrue(StringUtils.startsWith(exception.getMessage(), "HTTP 422 : Wrong Status code. Expected: [200, 201, 204]. Got: 400."));
     }
 
 

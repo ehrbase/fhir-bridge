@@ -1,0 +1,48 @@
+{
+  "resourceType": "Procedure",
+  "meta": {
+    "profile": [
+      "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure"
+    ]
+  },
+  "status": "completed",
+  "category": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "387713003",
+        "display": "Surgical procedure (procedure)"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "80146002",
+        "display": "Excision of appendix (procedure)"
+      },
+      {
+        "system": "http://fhir.de/CodeSystem/dimdi/ops",
+        "version": "2020",
+        "code": "5-470",
+        "display": "Appendektomie"
+      }
+    ]
+  },
+  "performedDateTime": "2020-04-23",
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "note": [
+    {
+      "text": "This is a note about the procedure"
+    }
+  ],
+  "recorder": {
+    "reference": "http://external.fhir.server/Practitioner/f201"
+  }
+}
