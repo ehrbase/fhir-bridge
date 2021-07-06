@@ -26,14 +26,12 @@ public class BlutdruckObservationConverter extends ObservationToObservationConve
     }
 
     private void mapSystolicAndDiastolic(Coding coding, BlutdruckObservation bloodPressure, Observation.ObservationComponentComponent component) {
-        if (coding.getSystem().equals(CodeSystem.LOINC.getUrl()) &&  coding.getCode().equals("8480-6")){
+        if (coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.getCode().equals("8480-6")){
             getValue(component).ifPresent(bloodPressure::setSystolischMagnitude);
             getUnit(component).ifPresent(bloodPressure::setSystolischUnits);
-        }else if(coding.getSystem().equals(CodeSystem.LOINC.getUrl()) &&  coding.getCode().equals("8462-4")){
+        }else if(coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.getCode().equals("8462-4")){
             getValue(component).ifPresent(bloodPressure::setDiastolischMagnitude);
             getUnit(component).ifPresent(bloodPressure::setDiastolischUnits);
-        }else{
-            throw new UnprocessableEntityException("Component.coding.code has to contain the correct LOINC codes");
         }
     }
 
