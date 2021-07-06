@@ -147,19 +147,6 @@
       "_type" : "DV_TEXT",
       "value" : "Befund"
     },
-    "feeder_audit" : {
-      "_type" : "FEEDER_AUDIT",
-      "originating_system_item_ids" : [ {
-        "_type" : "DV_IDENTIFIER",
-        "assigner" : "Organization/Charité",
-        "id" : "94500-6_SARS-CoV-2-RNA-Presence-in-Respiratory-specimen",
-        "type" : "org.hl7.fhir.r4.model.CodeableConcept"
-      } ],
-      "originating_system_audit" : {
-        "_type" : "FEEDER_AUDIT_DETAILS",
-        "system_id" : "https://www.charite.de/fhir/CodeSystem/lab-identifiers"
-      }
-    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
