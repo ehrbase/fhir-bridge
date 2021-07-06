@@ -34,7 +34,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createBodyTemp() throws IOException {
-        create("create-body-temp.json");
+        create("create-body-temp-0.json");
     }
 
     @Test
