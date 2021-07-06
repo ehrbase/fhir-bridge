@@ -1,8 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.BefundObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
@@ -10,12 +8,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.defini
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.NachweisDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.ProAnalytCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.VirusnachweistestDefiningCode;
-import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Reference;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SuppressWarnings("java:S6212")
 public class PCRObservationConverter extends ObservationToObservationConverter<BefundObservation> {
@@ -25,32 +18,7 @@ public class PCRObservationConverter extends ObservationToObservationConverter<B
         BefundObservation befundObservation = new BefundObservation();
         befundObservation.setLabortestBezeichnungDefiningCode(LabortestBezeichnungDefiningCode.DETECTION_OF_VIRUS_PROCEDURE);
         befundObservation.setLabortestPanel(createLabortestPanel(resource));
-
-        if (resource.hasIdentifier()) {
-            befundObservation.setFeederAudit(createIdentifierSection(resource));
-        }
         return befundObservation;
-    }
-
-    private FeederAudit createIdentifierSection(Observation observation) {
-        FeederAudit feederAudit = new FeederAudit();
-        List<DvIdentifier> identifierList = new ArrayList<>();
-        DvIdentifier e = new DvIdentifier();
-        Identifier identifier = observation.getIdentifierFirstRep();
-        Reference assigner = identifier.getAssigner();
-        if (assigner.hasReference()) {
-            e.setAssigner(assigner.getReference());
-        } else {
-            e.setAssigner(assigner.getIdentifier().getValue());
-        }
-        e.setType(identifier.getType().toString().split("@")[0]);
-        e.setId(identifier.getValue());
-        identifierList.add(e);
-        feederAudit.setOriginatingSystemItemIds(identifierList);
-        com.nedap.archie.rm.archetyped.FeederAuditDetails originatingSystemAudit = new com.nedap.archie.rm.archetyped.FeederAuditDetails();
-        originatingSystemAudit.setSystemId(identifier.getSystem());
-        feederAudit.setOriginatingSystemAudit(originatingSystemAudit);
-        return feederAudit;
     }
 
     private LabortestPanelCluster createLabortestPanel(Observation observation) {
