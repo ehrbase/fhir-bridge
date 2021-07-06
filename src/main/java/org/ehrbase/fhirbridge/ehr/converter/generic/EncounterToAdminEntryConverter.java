@@ -1,7 +1,10 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
+import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
 import org.hl7.fhir.r4.model.Encounter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
@@ -9,6 +12,8 @@ import java.lang.reflect.Method;
 import java.time.temporal.TemporalAccessor;
 
 public abstract class EncounterToAdminEntryConverter<E extends EntryEntity> extends EntryEntityConverter<Encounter, E> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(EncounterToAdminEntryConverter.class);
 
     @Override
     public E convert(@NonNull Encounter resource) {
@@ -44,7 +49,7 @@ public abstract class EncounterToAdminEntryConverter<E extends EntryEntity> exte
                 setEndValue.invoke(entryEntity, TimeConverter.convertEncounterLocationEndTime(location).get());
             }
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            exception.printStackTrace();
+            LOG.error(LoggerMessages.printInvokeError(exception));
         } catch (NoSuchMethodException ignored) {
             //ignored
         }
@@ -55,7 +60,7 @@ public abstract class EncounterToAdminEntryConverter<E extends EntryEntity> exte
             Method setDatumUhrzeitDerAufnahmeValue = entryEntity.getClass().getMethod("setDatumUhrzeitDerAufnahmeValue", TemporalAccessor.class);
             setDatumUhrzeitDerAufnahmeValue.invoke(entryEntity, TimeConverter.convertEncounterTime(resource));
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            exception.printStackTrace();
+            LOG.error(LoggerMessages.printInvokeError(exception));
         } catch (NoSuchMethodException ignored) {
             //ignored
         }
@@ -70,7 +75,7 @@ public abstract class EncounterToAdminEntryConverter<E extends EntryEntity> exte
             }
 
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            exception.printStackTrace();
+            LOG.error(LoggerMessages.printInvokeError(exception));
         } catch (NoSuchMethodException ignored) {
             //ignored
         }
