@@ -5,7 +5,6 @@ import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
 import org.hl7.fhir.r4.model.Procedure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.lang.NonNull;
 
 import java.lang.reflect.InvocationTargetException;

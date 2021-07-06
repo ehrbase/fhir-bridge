@@ -6,12 +6,12 @@ import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.Patientenau
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.AbteilungsfallCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsfallCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungstellenkontaktCluster;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.KONTAKT_EBENE;
-import org.ehrbase.fhirbridge.fhir.support.Encounters;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Identifier;
 import org.springframework.lang.NonNull;
+
+import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.KONTAKT_EBENE;
 
 
 public class PatientenAufenthaltCompositionConverter extends EncounterToCompositionConverter<PatientenaufenthaltComposition> {
@@ -21,7 +21,7 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
 
         PatientenaufenthaltComposition retVal = new PatientenaufenthaltComposition();
 
-        if (Encounters.isNotEmpty(encounter.getIdentifier()) && Encounters.isNotEmpty(encounter.getType())) {
+        if (!encounter.getIdentifier().isEmpty() && !encounter.getType().isEmpty()) {
 
             setFallCluster(retVal, encounter);
         }
