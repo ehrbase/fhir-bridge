@@ -66,7 +66,10 @@ public class FhirValidationConfiguration {
         ValidationSupportChain validationSupportChain = new ValidationSupportChain();
 
         // Validates core structure definitions
-        validationSupportChain.addValidationSupport(new DefaultProfileValidationSupport(fhirContext));
+        DefaultProfileValidationSupport defaultProfileValidationSupport = new DefaultProfileValidationSupport(fhirContext);
+        defaultProfileValidationSupport.fetchAllStructureDefinitions();
+        defaultProfileValidationSupport.fetchCodeSystem("");
+        validationSupportChain.addValidationSupport(defaultProfileValidationSupport);
 
         // Validates custom profiles (loaded from classpath)
         PrePopulatedValidationSupport prePopulatedValidationSupport = new PrePopulatedValidationSupport(fhirContext);
@@ -82,6 +85,8 @@ public class FhirValidationConfiguration {
         } catch (IOException e) {
             throw new FhirBridgeException("An I/O exception occurred while loading custom profiles");
         }
+        validationSupportChain.fetchAllStructureDefinitions();
+        defaultProfileValidationSupport.fetchCodeSystem("");
         validationSupportChain.addValidationSupport(prePopulatedValidationSupport);
 
         // Validates terminology: CodeSystems and ValueSets (using the internal and/or remote terminology service)

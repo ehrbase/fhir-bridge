@@ -118,7 +118,7 @@ logging:
   level:
     ca.uhn.fhir: warn
     com.zaxxer.hikari: warn
-    liquibase: warn
+    liquibase: error
     org.apache.camel: warn
     org.ehrbase.fhirbridge: debug
     org.hibernate: warn

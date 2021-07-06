@@ -15,7 +15,9 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.time.temporal.TemporalAccessor;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Procedure Procedure} resource.
@@ -39,10 +41,10 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
 
         assertEquals("HTTP 422 : Default profile is not supported for Procedure. " +
                 "One of the following profiles is expected: " +
-                "[https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure, " +
-                "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis, " +
+                "[https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis, " +
                 "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/dialysis, " +
                 "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/extracorporeal-membrane-oxygenation, " +
+                "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure, " +
                 "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/prone-position, " +
                 "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/radiology-procedures, " +
                 "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies]", exception.getMessage());
@@ -61,7 +63,7 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Procedure procedure = (Procedure) testFileLoader.loadResource(path);
         return assertThrows(UnprocessableEntityException.class, () -> {
-             new ProcedureCompositionConverter().convert(((Procedure) procedure));
+            new ProcedureCompositionConverter().convert(((Procedure) procedure));
         });
     }
 

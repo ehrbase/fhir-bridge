@@ -3,10 +3,8 @@ package org.ehrbase.fhirbridge.ehr.converter.generic;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
 import org.hl7.fhir.r4.model.DiagnosticReport;
-import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.lang.NonNull;
 
 import java.lang.reflect.InvocationTargetException;

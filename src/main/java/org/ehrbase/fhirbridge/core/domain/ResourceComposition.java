@@ -20,28 +20,22 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Objects;
 
-/**
- * ResourceMap Entity.
- *
- * @since 1.2.0
- */
 @Entity
-@Table(name = "FB_RESOURCE_MAP")
-public class ResourceMap {
+@Table(name = "FB_RESOURCE_COMPOSITION")
+public class ResourceComposition {
 
     @Id
     @Column(name = "RESOURCE_ID")
     private String resourceId;
 
-    @Column(name = "COMPOSITION_VERSION_UID")
-    private String compositionVersionUid;
+    @Column(name = "COMPOSITION_ID")
+    private String compositionId;
 
-    public ResourceMap() {
+    public ResourceComposition() {
     }
 
-    public ResourceMap(String resourceId) {
+    public ResourceComposition(String resourceId) {
         this.resourceId = resourceId;
     }
 
@@ -53,36 +47,19 @@ public class ResourceMap {
         this.resourceId = id;
     }
 
-    public String getCompositionVersionUid() {
-        return compositionVersionUid;
+    public String getCompositionId() {
+        return compositionId;
     }
 
-    public void setCompositionVersionUid(String versionUid) {
-        this.compositionVersionUid = versionUid;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ResourceMap that = (ResourceMap) o;
-        return Objects.equals(resourceId, that.resourceId) && Objects.equals(compositionVersionUid, that.compositionVersionUid);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(resourceId, compositionVersionUid);
+    public void setCompositionId(String versionUid) {
+        this.compositionId = versionUid;
     }
 
     @Override
     public String toString() {
-        return "ResourceMap{" +
+        return "ResourceComposition{" +
                 "resourceId='" + resourceId + '\'' +
-                ", compositionVersionUid='" + compositionVersionUid + '\'' +
+                ", compositionId='" + compositionId + '\'' +
                 '}';
     }
 }

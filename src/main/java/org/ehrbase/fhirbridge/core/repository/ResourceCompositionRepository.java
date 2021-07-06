@@ -14,25 +14,10 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel;
+package org.ehrbase.fhirbridge.core.repository;
 
-/**
- * Constants used by the FHIR Bridge.
- *
- * @since 1.0.0
- */
-public final class CamelConstants {
+import org.ehrbase.fhirbridge.core.domain.ResourceComposition;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    public static final String COMPOSITION_ID = "CamelFhirBridgeCompositionId";
-
-    public static final String OUTCOME = "CamelFhirBridgeOutcome";
-
-    public static final String PATIENT_ID = "CamelFhirPatientId";
-
-    public static final String PROFILE = "CamelFhirBridgeProfile";
-
-    public static final String RESOURCE_ID = "FhirBridgeResourceId";
-
-    private CamelConstants() {
-    }
+public interface ResourceCompositionRepository extends JpaRepository<ResourceComposition, String> {
 }

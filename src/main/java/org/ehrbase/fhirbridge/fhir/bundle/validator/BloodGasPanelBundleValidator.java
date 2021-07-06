@@ -77,7 +77,7 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
     }
 
     private boolean checkIfOneProfileIsPresent() {
-        return oxygenPartialProfilesContained==1 || carbonDioxideProfilesContained==1|| phProfilesContained==1 || oxygenSaturationProfilesContained ==1;
+        return oxygenPartialProfilesContained == 1 || carbonDioxideProfilesContained == 1 || phProfilesContained == 1 || oxygenSaturationProfilesContained == 1;
     }
 
     private void setBloodGasPanel() {
