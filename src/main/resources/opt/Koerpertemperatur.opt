@@ -8,11 +8,14 @@
     <code_string>de</code_string>
   </language>
   <description>
-    <original_author id="date">2020-04-06</original_author>
-    <original_author id="email">rehberg.alina@mh-hannover.de</original_author>
-    <original_author id="organisation">Medizinische Hochschule Hannover</original_author>
-    <original_author id="name">Alina Rehberg</original_author>
-    <lifecycle_state>Initial</lifecycle_state>
+    <original_author id="Name">Sarah Ballout</original_author>
+    <original_author id="Email">ballout.sarah@mh-hannover.de</original_author>
+    <original_author id="Organisation">Peter L. Reichertz Institut für Medizinische Informatik</original_author>
+    <original_author id="name">Sarah Ballout</original_author>
+    <original_author id="organisation">Peter L. Reichertz Institut für Medizinische Informatik</original_author>
+    <original_author id="email">sarah.ballout@plri.de</original_author>
+    <other_contributors>Antje Wulff</other_contributors>
+    <lifecycle_state>in_development</lifecycle_state>
     <other_details id="MetaDataSet:Sample Set ">Template metadata sample set</other_details>
     <other_details id="Acknowledgements"/>
     <other_details id="Business Process Level"/>
@@ -25,6 +28,11 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
+    <other_details id="MD5-CAM-1.0.1">82c53186e84a9341ea96d39e3bb715cd</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="build_uid">50eadcb5-32ca-4541-860e-470700edd845</other_details>
+    <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
         <terminology_id>
@@ -32,17 +40,18 @@
         </terminology_id>
         <code_string>de</code_string>
       </language>
-      <purpose>Zur Darstellung der Körpertemperatur innerhalb eines intensivmedizinischen Monitorings eines an COVID-19 erkrankten Patienten.</purpose>
-      <use>Dieses Template wird verwendet, um die Körpertemperatur innerhalb eines intensivmedizinischen Monitorings eines Patienten mit COVID-19 aufzuzeichnen.</use>
+      <purpose>Zur Repräsentation des Koerpertemperatur im Rahmen des NUM-Projektes / GECCO-Datensatzes.</purpose>
+      <keywords>GECCO; NUM; Koerpertemperatur</keywords>
+      <use>Für die Abbildung des Koerpertemperatur-Wertes für die Speicherung im Rahmen des NUM-Projektes / GECCO-Datensatzes.</use>
     </details>
   </description>
   <uid>
-    <value>34e8b782-6cec-4b07-b967-b46775fb59ec</value>
+    <value>a02d5081-d6cb-4793-ab2d-c6675d82e1a6</value>
   </uid>
   <template_id>
-    <value>Intensivmedizinisches Monitoring Korpertemperatur</value>
+    <value>Koerpertemperatur</value>
   </template_id>
-  <concept>Intensivmedizinisches Monitoring Körpertemperatur</concept>
+  <concept>Koerpertemperatur</concept>
   <definition>
     <rm_type_name>COMPOSITION</rm_type_name>
     <occurrences>
@@ -156,6 +165,35 @@
                 <lower>0</lower>
                 <upper>1</upper>
               </existence>
+              <children xsi:type="ARCHETYPE_SLOT">
+                <rm_type_name>CLUSTER</rm_type_name>
+                <occurrences>
+                  <lower_included>true</lower_included>
+                  <lower_unbounded>false</lower_unbounded>
+                  <upper_unbounded>true</upper_unbounded>
+                  <lower>0</lower>
+                </occurrences>
+                <node_id>at0002</node_id>
+                <includes>
+                  <expression xsi:type="EXPR_BINARY_OPERATOR">
+                    <type>Boolean</type>
+                    <operator>2007</operator>
+                    <precedence_overridden>false</precedence_overridden>
+                    <left_operand xsi:type="EXPR_LEAF">
+                      <type>String</type>
+                      <item xsi:type="xsd:string">archetype_id/value</item>
+                      <reference_type>attribute</reference_type>
+                    </left_operand>
+                    <right_operand xsi:type="EXPR_LEAF">
+                      <type>C_STRING</type>
+                      <item xsi:type="C_STRING">
+                        <pattern>.*</pattern>
+                      </item>
+                      <reference_type>constraint</reference_type>
+                    </right_operand>
+                  </expression>
+                </includes>
+              </children>
               <children xsi:type="C_COMPLEX_OBJECT">
                 <rm_type_name>ELEMENT</rm_type_name>
                 <occurrences>
@@ -163,10 +201,10 @@
                   <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
+                  <lower>0</lower>
                   <upper>1</upper>
                 </occurrences>
-                <node_id>at0002</node_id>
+                <node_id>at0004</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
                   <rm_attribute_name>value</rm_attribute_name>
                   <existence>
@@ -178,7 +216,7 @@
                     <upper>1</upper>
                   </existence>
                   <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>DV_TEXT</rm_type_name>
+                    <rm_type_name>DV_CODED_TEXT</rm_type_name>
                     <occurrences>
                       <lower_included>true</lower_included>
                       <upper_included>true</upper_included>
@@ -189,7 +227,7 @@
                     </occurrences>
                     <node_id/>
                     <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                      <rm_attribute_name>value</rm_attribute_name>
+                      <rm_attribute_name>defining_code</rm_attribute_name>
                       <existence>
                         <lower_included>true</lower_included>
                         <upper_included>true</upper_included>
@@ -198,8 +236,8 @@
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_PRIMITIVE_OBJECT">
-                        <rm_type_name>STRING</rm_type_name>
+                      <children xsi:type="C_CODE_PHRASE">
+                        <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
                           <upper_included>true</upper_included>
@@ -209,58 +247,13 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <item xsi:type="C_STRING">
-                          <list>Intensivmedizinisches Monitoring</list>
-                        </item>
-                      </children>
-                    </attributes>
-                  </children>
-                </attributes>
-                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                  <rm_attribute_name>name</rm_attribute_name>
-                  <existence>
-                    <lower_included>true</lower_included>
-                    <upper_included>true</upper_included>
-                    <lower_unbounded>false</lower_unbounded>
-                    <upper_unbounded>false</upper_unbounded>
-                    <lower>1</lower>
-                    <upper>1</upper>
-                  </existence>
-                  <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>DV_TEXT</rm_type_name>
-                    <occurrences>
-                      <lower_included>true</lower_included>
-                      <upper_included>true</upper_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>false</upper_unbounded>
-                      <lower>1</lower>
-                      <upper>1</upper>
-                    </occurrences>
-                    <node_id/>
-                    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                      <rm_attribute_name>value</rm_attribute_name>
-                      <existence>
-                        <lower_included>true</lower_included>
-                        <upper_included>true</upper_included>
-                        <lower_unbounded>false</lower_unbounded>
-                        <upper_unbounded>false</upper_unbounded>
-                        <lower>1</lower>
-                        <upper>1</upper>
-                      </existence>
-                      <children xsi:type="C_PRIMITIVE_OBJECT">
-                        <rm_type_name>STRING</rm_type_name>
-                        <occurrences>
-                          <lower_included>true</lower_included>
-                          <upper_included>true</upper_included>
-                          <lower_unbounded>false</lower_unbounded>
-                          <upper_unbounded>false</upper_unbounded>
-                          <lower>1</lower>
-                          <upper>1</upper>
-                        </occurrences>
-                        <node_id/>
-                        <item xsi:type="C_STRING">
-                          <list>Bericht Name</list>
-                        </item>
+                        <terminology_id>
+                          <value>local</value>
+                        </terminology_id>
+                        <code_list>at0010</code_list>
+                        <code_list>at0011</code_list>
+                        <code_list>at0012</code_list>
+                        <code_list>at0013</code_list>
                       </children>
                     </attributes>
                   </children>
@@ -270,11 +263,9 @@
                 <rm_type_name>ELEMENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
+                  <upper_unbounded>true</upper_unbounded>
                   <lower>0</lower>
-                  <upper>1</upper>
                 </occurrences>
                 <node_id>at0005</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -288,7 +279,7 @@
                     <upper>1</upper>
                   </existence>
                   <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>DV_TEXT</rm_type_name>
+                    <rm_type_name>DV_CODED_TEXT</rm_type_name>
                     <occurrences>
                       <lower_included>true</lower_included>
                       <upper_included>true</upper_included>
@@ -298,53 +289,18 @@
                       <upper>1</upper>
                     </occurrences>
                     <node_id/>
-                  </children>
-                </attributes>
-              </children>
-              <children xsi:type="C_ARCHETYPE_ROOT">
-                <rm_type_name>CLUSTER</rm_type_name>
-                <occurrences>
-                  <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
-                  <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
-                </occurrences>
-                <node_id>at0000</node_id>
-                <attributes xsi:type="C_MULTIPLE_ATTRIBUTE">
-                  <rm_attribute_name>items</rm_attribute_name>
-                  <existence>
-                    <lower_included>true</lower_included>
-                    <upper_included>true</upper_included>
-                    <lower_unbounded>false</lower_unbounded>
-                    <upper_unbounded>false</upper_unbounded>
-                    <lower>1</lower>
-                    <upper>1</upper>
-                  </existence>
-                  <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>ELEMENT</rm_type_name>
-                    <occurrences>
-                      <lower_included>true</lower_included>
-                      <upper_included>true</upper_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>false</upper_unbounded>
-                      <lower>1</lower>
-                      <upper>1</upper>
-                    </occurrences>
-                    <node_id>at0001</node_id>
                     <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                      <rm_attribute_name>value</rm_attribute_name>
+                      <rm_attribute_name>defining_code</rm_attribute_name>
                       <existence>
                         <lower_included>true</lower_included>
                         <upper_included>true</upper_included>
                         <lower_unbounded>false</lower_unbounded>
                         <upper_unbounded>false</upper_unbounded>
-                        <lower>0</lower>
+                        <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_COMPLEX_OBJECT">
-                        <rm_type_name>DV_TEXT</rm_type_name>
+                      <children xsi:type="C_CODE_PHRASE">
+                        <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
                           <upper_included>true</upper_included>
@@ -354,53 +310,14 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
+                        <terminology_id>
+                          <value>http://terminology.hl7.org/CodeSystem/observation-category</value>
+                        </terminology_id>
+                        <code_list>vital-signs</code_list>
                       </children>
                     </attributes>
                   </children>
-                  <cardinality>
-                    <is_ordered>false</is_ordered>
-                    <is_unique>false</is_unique>
-                    <interval>
-                      <lower_included>true</lower_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>true</upper_unbounded>
-                      <lower>1</lower>
-                    </interval>
-                  </cardinality>
                 </attributes>
-                <archetype_id>
-                  <value>openEHR-EHR-CLUSTER.case_identification.v0</value>
-                </archetype_id>
-                <term_definitions code="at0000">
-                  <items id="description">Zur Erfassung von Details zur Identifikation eines Falls im Gesundheitswesen.</items>
-                  <items id="text">Fallidentifikation</items>
-                </term_definitions>
-                <term_definitions code="at0001">
-                  <items id="description">Der Bezeichner/die Kennung dieses Falls.</items>
-                  <items id="text">Fall-Kennung</items>
-                </term_definitions>
-                <term_definitions code="at0002">
-                  <items id="description">Das Datum, an dem der Fall begann/eröffnet wurde.</items>
-                  <items id="text">Fall-Beginn</items>
-                </term_definitions>
-                <term_definitions code="at0003">
-                  <items id="description">Der Status des Falls. 
-Der Status "abgeschlossen" bedeutet, dass dem Patienten die entsprechende Fallnummer zugeordnet wurde. 
-Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnummer fälschlicherweise zugeordnet wurde.</items>
-                  <items id="text">Status</items>
-                </term_definitions>
-                <term_definitions code="at0004">
-                  <items id="description">Dem Patienten wurde die entsprechende Fallkennung zugeordnet.</items>
-                  <items id="text">Abgeschlossen</items>
-                </term_definitions>
-                <term_definitions code="at0005">
-                  <items id="description">Dem Patienten wurde die entsprechende Fallkennung fälschlicherweise zugeordnet.</items>
-                  <items id="text">Abgebrochen</items>
-                </term_definitions>
-                <term_definitions code="at0006">
-                  <items id="description">Bezeichnung oder kodierter Text zur Bezeichnung des Falls.</items>
-                  <items id="text">identifizierter Fall</items>
-                </term_definitions>
               </children>
               <cardinality>
                 <is_ordered>false</is_ordered>
@@ -413,6 +330,55 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
                 </interval>
               </cardinality>
             </attributes>
+          </children>
+        </attributes>
+      </children>
+    </attributes>
+    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+      <rm_attribute_name>name</rm_attribute_name>
+      <existence>
+        <lower_included>true</lower_included>
+        <upper_included>true</upper_included>
+        <lower_unbounded>false</lower_unbounded>
+        <upper_unbounded>false</upper_unbounded>
+        <lower>1</lower>
+        <upper>1</upper>
+      </existence>
+      <children xsi:type="C_COMPLEX_OBJECT">
+        <rm_type_name>DV_TEXT</rm_type_name>
+        <occurrences>
+          <lower_included>true</lower_included>
+          <upper_included>true</upper_included>
+          <lower_unbounded>false</lower_unbounded>
+          <upper_unbounded>false</upper_unbounded>
+          <lower>1</lower>
+          <upper>1</upper>
+        </occurrences>
+        <node_id/>
+        <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+          <rm_attribute_name>value</rm_attribute_name>
+          <existence>
+            <lower_included>true</lower_included>
+            <upper_included>true</upper_included>
+            <lower_unbounded>false</lower_unbounded>
+            <upper_unbounded>false</upper_unbounded>
+            <lower>1</lower>
+            <upper>1</upper>
+          </existence>
+          <children xsi:type="C_PRIMITIVE_OBJECT">
+            <rm_type_name>STRING</rm_type_name>
+            <occurrences>
+              <lower_included>true</lower_included>
+              <upper_included>true</upper_included>
+              <lower_unbounded>false</lower_unbounded>
+              <upper_unbounded>false</upper_unbounded>
+              <lower>1</lower>
+              <upper>1</upper>
+            </occurrences>
+            <node_id/>
+            <item xsi:type="C_STRING">
+              <list>GECCO_Koerpertemperatur</list>
+            </item>
           </children>
         </attributes>
       </children>
@@ -431,9 +397,11 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
         <rm_type_name>OBSERVATION</rm_type_name>
         <occurrences>
           <lower_included>true</lower_included>
+          <upper_included>true</upper_included>
           <lower_unbounded>false</lower_unbounded>
-          <upper_unbounded>true</upper_unbounded>
-          <lower>0</lower>
+          <upper_unbounded>false</upper_unbounded>
+          <lower>1</lower>
+          <upper>1</upper>
         </occurrences>
         <node_id>at0000</node_id>
         <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -471,9 +439,11 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
                 <rm_type_name>EVENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
+                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>true</upper_unbounded>
-                  <lower>0</lower>
+                  <upper_unbounded>false</upper_unbounded>
+                  <lower>1</lower>
+                  <upper>1</upper>
                 </occurrences>
                 <node_id>at0003</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -539,12 +509,6 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
                               <upper>1</upper>
                             </occurrences>
                             <node_id/>
-                            <property>
-                              <terminology_id>
-                                <value>openehr</value>
-                              </terminology_id>
-                              <code_string>127</code_string>
-                            </property>
                             <list>
                               <magnitude>
                                 <lower_included>true</lower_included>
@@ -583,41 +547,6 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
                               </precision>
                               <units>[degF]</units>
                             </list>
-                          </children>
-                        </attributes>
-                      </children>
-                      <children xsi:type="C_COMPLEX_OBJECT">
-                        <rm_type_name>ELEMENT</rm_type_name>
-                        <occurrences>
-                          <lower_included>true</lower_included>
-                          <upper_included>true</upper_included>
-                          <lower_unbounded>false</lower_unbounded>
-                          <upper_unbounded>false</upper_unbounded>
-                          <lower>0</lower>
-                          <upper>1</upper>
-                        </occurrences>
-                        <node_id>at0063</node_id>
-                        <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                          <rm_attribute_name>value</rm_attribute_name>
-                          <existence>
-                            <lower_included>true</lower_included>
-                            <upper_included>true</upper_included>
-                            <lower_unbounded>false</lower_unbounded>
-                            <upper_unbounded>false</upper_unbounded>
-                            <lower>0</lower>
-                            <upper>1</upper>
-                          </existence>
-                          <children xsi:type="C_COMPLEX_OBJECT">
-                            <rm_type_name>DV_TEXT</rm_type_name>
-                            <occurrences>
-                              <lower_included>true</lower_included>
-                              <upper_included>true</upper_included>
-                              <lower_unbounded>false</lower_unbounded>
-                              <upper_unbounded>false</upper_unbounded>
-                              <lower>1</lower>
-                              <upper>1</upper>
-                            </occurrences>
-                            <node_id/>
                           </children>
                         </attributes>
                       </children>
@@ -665,190 +594,6 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
                         <lower>0</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_COMPLEX_OBJECT">
-                        <rm_type_name>ELEMENT</rm_type_name>
-                        <occurrences>
-                          <lower_included>true</lower_included>
-                          <upper_included>true</upper_included>
-                          <lower_unbounded>false</lower_unbounded>
-                          <upper_unbounded>false</upper_unbounded>
-                          <lower>0</lower>
-                          <upper>1</upper>
-                        </occurrences>
-                        <node_id>at0030</node_id>
-                        <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                          <rm_attribute_name>value</rm_attribute_name>
-                          <existence>
-                            <lower_included>true</lower_included>
-                            <upper_included>true</upper_included>
-                            <lower_unbounded>false</lower_unbounded>
-                            <upper_unbounded>false</upper_unbounded>
-                            <lower>0</lower>
-                            <upper>1</upper>
-                          </existence>
-                          <children xsi:type="C_COMPLEX_OBJECT">
-                            <rm_type_name>DV_CODED_TEXT</rm_type_name>
-                            <occurrences>
-                              <lower_included>true</lower_included>
-                              <upper_included>true</upper_included>
-                              <lower_unbounded>false</lower_unbounded>
-                              <upper_unbounded>false</upper_unbounded>
-                              <lower>1</lower>
-                              <upper>1</upper>
-                            </occurrences>
-                            <node_id/>
-                            <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                              <rm_attribute_name>defining_code</rm_attribute_name>
-                              <existence>
-                                <lower_included>true</lower_included>
-                                <upper_included>true</upper_included>
-                                <lower_unbounded>false</lower_unbounded>
-                                <upper_unbounded>false</upper_unbounded>
-                                <lower>1</lower>
-                                <upper>1</upper>
-                              </existence>
-                              <children xsi:type="C_CODE_PHRASE">
-                                <rm_type_name>CODE_PHRASE</rm_type_name>
-                                <occurrences>
-                                  <lower_included>true</lower_included>
-                                  <upper_included>true</upper_included>
-                                  <lower_unbounded>false</lower_unbounded>
-                                  <upper_unbounded>false</upper_unbounded>
-                                  <lower>1</lower>
-                                  <upper>1</upper>
-                                </occurrences>
-                                <node_id/>
-                                <assumed_value>
-                                  <terminology_id>
-                                    <value>local</value>
-                                  </terminology_id>
-                                  <code_string>at0033</code_string>
-                                </assumed_value>
-                                <terminology_id>
-                                  <value>local</value>
-                                </terminology_id>
-                                <code_list>at0031</code_list>
-                                <code_list>at0032</code_list>
-                                <code_list>at0033</code_list>
-                                <code_list>at0034</code_list>
-                              </children>
-                            </attributes>
-                          </children>
-                          <children xsi:type="C_COMPLEX_OBJECT">
-                            <rm_type_name>DV_TEXT</rm_type_name>
-                            <occurrences>
-                              <lower_included>true</lower_included>
-                              <upper_included>true</upper_included>
-                              <lower_unbounded>false</lower_unbounded>
-                              <upper_unbounded>false</upper_unbounded>
-                              <lower>1</lower>
-                              <upper>1</upper>
-                            </occurrences>
-                            <node_id/>
-                          </children>
-                        </attributes>
-                      </children>
-                      <children xsi:type="C_COMPLEX_OBJECT">
-                        <rm_type_name>ELEMENT</rm_type_name>
-                        <occurrences>
-                          <lower_included>true</lower_included>
-                          <upper_included>true</upper_included>
-                          <lower_unbounded>false</lower_unbounded>
-                          <upper_unbounded>false</upper_unbounded>
-                          <lower>0</lower>
-                          <upper>1</upper>
-                        </occurrences>
-                        <node_id>at0041</node_id>
-                        <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                          <rm_attribute_name>value</rm_attribute_name>
-                          <existence>
-                            <lower_included>true</lower_included>
-                            <upper_included>true</upper_included>
-                            <lower_unbounded>false</lower_unbounded>
-                            <upper_unbounded>false</upper_unbounded>
-                            <lower>0</lower>
-                            <upper>1</upper>
-                          </existence>
-                          <children xsi:type="C_COMPLEX_OBJECT">
-                            <rm_type_name>DV_TEXT</rm_type_name>
-                            <occurrences>
-                              <lower_included>true</lower_included>
-                              <upper_included>true</upper_included>
-                              <lower_unbounded>false</lower_unbounded>
-                              <upper_unbounded>false</upper_unbounded>
-                              <lower>1</lower>
-                              <upper>1</upper>
-                            </occurrences>
-                            <node_id/>
-                          </children>
-                        </attributes>
-                      </children>
-                      <children xsi:type="C_COMPLEX_OBJECT">
-                        <rm_type_name>ELEMENT</rm_type_name>
-                        <occurrences>
-                          <lower_included>true</lower_included>
-                          <upper_included>true</upper_included>
-                          <lower_unbounded>false</lower_unbounded>
-                          <upper_unbounded>false</upper_unbounded>
-                          <lower>0</lower>
-                          <upper>1</upper>
-                        </occurrences>
-                        <node_id>at0065</node_id>
-                        <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                          <rm_attribute_name>value</rm_attribute_name>
-                          <existence>
-                            <lower_included>true</lower_included>
-                            <upper_included>true</upper_included>
-                            <lower_unbounded>false</lower_unbounded>
-                            <upper_unbounded>false</upper_unbounded>
-                            <lower>0</lower>
-                            <upper>1</upper>
-                          </existence>
-                          <children xsi:type="C_COMPLEX_OBJECT">
-                            <rm_type_name>DV_COUNT</rm_type_name>
-                            <occurrences>
-                              <lower_included>true</lower_included>
-                              <upper_included>true</upper_included>
-                              <lower_unbounded>false</lower_unbounded>
-                              <upper_unbounded>false</upper_unbounded>
-                              <lower>1</lower>
-                              <upper>1</upper>
-                            </occurrences>
-                            <node_id/>
-                            <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                              <rm_attribute_name>magnitude</rm_attribute_name>
-                              <existence>
-                                <lower_included>true</lower_included>
-                                <upper_included>true</upper_included>
-                                <lower_unbounded>false</lower_unbounded>
-                                <upper_unbounded>false</upper_unbounded>
-                                <lower>1</lower>
-                                <upper>1</upper>
-                              </existence>
-                              <children xsi:type="C_PRIMITIVE_OBJECT">
-                                <rm_type_name>INTEGER</rm_type_name>
-                                <occurrences>
-                                  <lower_included>true</lower_included>
-                                  <upper_included>true</upper_included>
-                                  <lower_unbounded>false</lower_unbounded>
-                                  <upper_unbounded>false</upper_unbounded>
-                                  <lower>1</lower>
-                                  <upper>1</upper>
-                                </occurrences>
-                                <node_id/>
-                                <item xsi:type="C_INTEGER">
-                                  <range>
-                                    <lower_included>true</lower_included>
-                                    <lower_unbounded>false</lower_unbounded>
-                                    <upper_unbounded>true</upper_unbounded>
-                                    <lower>1</lower>
-                                  </range>
-                                </item>
-                              </children>
-                            </attributes>
-                          </children>
-                        </attributes>
-                      </children>
                       <children xsi:type="ARCHETYPE_SLOT">
                         <rm_type_name>CLUSTER</rm_type_name>
                         <occurrences>
@@ -871,7 +616,7 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
                             <right_operand xsi:type="EXPR_LEAF">
                               <type>C_STRING</type>
                               <item xsi:type="C_STRING">
-                                <pattern>openEHR-EHR-CLUSTER\.environmental_conditions\.v1|openEHR-EHR-CLUSTER\.environmental_conditions\.v0|openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v1</pattern>
+                                <pattern>openEHR-EHR-CLUSTER\.environmental_conditions\.v1|openEHR-EHR-CLUSTER\.environmental_conditions\.v0</pattern>
                               </item>
                               <reference_type>constraint</reference_type>
                             </right_operand>
@@ -967,92 +712,6 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
                 <lower>0</lower>
                 <upper>1</upper>
               </existence>
-              <children xsi:type="C_COMPLEX_OBJECT">
-                <rm_type_name>ELEMENT</rm_type_name>
-                <occurrences>
-                  <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
-                  <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>0</lower>
-                  <upper>1</upper>
-                </occurrences>
-                <node_id>at0021</node_id>
-                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                  <rm_attribute_name>value</rm_attribute_name>
-                  <existence>
-                    <lower_included>true</lower_included>
-                    <upper_included>true</upper_included>
-                    <lower_unbounded>false</lower_unbounded>
-                    <upper_unbounded>false</upper_unbounded>
-                    <lower>0</lower>
-                    <upper>1</upper>
-                  </existence>
-                  <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>DV_CODED_TEXT</rm_type_name>
-                    <occurrences>
-                      <lower_included>true</lower_included>
-                      <upper_included>true</upper_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>false</upper_unbounded>
-                      <lower>1</lower>
-                      <upper>1</upper>
-                    </occurrences>
-                    <node_id/>
-                    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                      <rm_attribute_name>defining_code</rm_attribute_name>
-                      <existence>
-                        <lower_included>true</lower_included>
-                        <upper_included>true</upper_included>
-                        <lower_unbounded>false</lower_unbounded>
-                        <upper_unbounded>false</upper_unbounded>
-                        <lower>1</lower>
-                        <upper>1</upper>
-                      </existence>
-                      <children xsi:type="C_CODE_PHRASE">
-                        <rm_type_name>CODE_PHRASE</rm_type_name>
-                        <occurrences>
-                          <lower_included>true</lower_included>
-                          <upper_included>true</upper_included>
-                          <lower_unbounded>false</lower_unbounded>
-                          <upper_unbounded>false</upper_unbounded>
-                          <lower>1</lower>
-                          <upper>1</upper>
-                        </occurrences>
-                        <node_id/>
-                        <terminology_id>
-                          <value>local</value>
-                        </terminology_id>
-                        <code_list>at0025</code_list>
-                        <code_list>at0024</code_list>
-                        <code_list>at0023</code_list>
-                        <code_list>at0061</code_list>
-                        <code_list>at0022</code_list>
-                        <code_list>at0026</code_list>
-                        <code_list>at0027</code_list>
-                        <code_list>at0028</code_list>
-                        <code_list>at0043</code_list>
-                        <code_list>at0051</code_list>
-                        <code_list>at0054</code_list>
-                        <code_list>at0055</code_list>
-                        <code_list>at0060</code_list>
-                      </children>
-                    </attributes>
-                  </children>
-                  <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>DV_TEXT</rm_type_name>
-                    <occurrences>
-                      <lower_included>true</lower_included>
-                      <upper_included>true</upper_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>false</upper_unbounded>
-                      <lower>1</lower>
-                      <upper>1</upper>
-                    </occurrences>
-                    <node_id/>
-                  </children>
-                </attributes>
-              </children>
               <children xsi:type="ARCHETYPE_SLOT">
                 <rm_type_name>CLUSTER</rm_type_name>
                 <occurrences>
@@ -1075,7 +734,7 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
                     <right_operand xsi:type="EXPR_LEAF">
                       <type>C_STRING</type>
                       <item xsi:type="C_STRING">
-                        <pattern>openEHR-EHR-CLUSTER\.anatomical_location(-[a-zA-Z0-9_]+)*\.v1</pattern>
+                        <pattern>openEHR-EHR-CLUSTER\.anatomical_location(-[a-zA-Z0-9_]+)*\.v1|openEHR-EHR-CLUSTER\.anatomical_location_relative\.v1</pattern>
                       </item>
                       <reference_type>constraint</reference_type>
                     </right_operand>
@@ -1122,25 +781,6 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
                   <lower>0</lower>
                 </occurrences>
                 <node_id>at0062</node_id>
-                <includes>
-                  <expression xsi:type="EXPR_BINARY_OPERATOR">
-                    <type>Boolean</type>
-                    <operator>2007</operator>
-                    <precedence_overridden>false</precedence_overridden>
-                    <left_operand xsi:type="EXPR_LEAF">
-                      <type>String</type>
-                      <item xsi:type="xsd:string">archetype_id/value</item>
-                      <reference_type>attribute</reference_type>
-                    </left_operand>
-                    <right_operand xsi:type="EXPR_LEAF">
-                      <type>C_STRING</type>
-                      <item xsi:type="C_STRING">
-                        <pattern>.*</pattern>
-                      </item>
-                      <reference_type>constraint</reference_type>
-                    </right_operand>
-                  </expression>
-                </includes>
               </children>
               <cardinality>
                 <is_ordered>true</is_ordered>
@@ -1155,11 +795,60 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
             </attributes>
           </children>
         </attributes>
+        <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+          <rm_attribute_name>name</rm_attribute_name>
+          <existence>
+            <lower_included>true</lower_included>
+            <upper_included>true</upper_included>
+            <lower_unbounded>false</lower_unbounded>
+            <upper_unbounded>false</upper_unbounded>
+            <lower>1</lower>
+            <upper>1</upper>
+          </existence>
+          <children xsi:type="C_COMPLEX_OBJECT">
+            <rm_type_name>DV_TEXT</rm_type_name>
+            <occurrences>
+              <lower_included>true</lower_included>
+              <upper_included>true</upper_included>
+              <lower_unbounded>false</lower_unbounded>
+              <upper_unbounded>false</upper_unbounded>
+              <lower>1</lower>
+              <upper>1</upper>
+            </occurrences>
+            <node_id/>
+            <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+              <rm_attribute_name>value</rm_attribute_name>
+              <existence>
+                <lower_included>true</lower_included>
+                <upper_included>true</upper_included>
+                <lower_unbounded>false</lower_unbounded>
+                <upper_unbounded>false</upper_unbounded>
+                <lower>1</lower>
+                <upper>1</upper>
+              </existence>
+              <children xsi:type="C_PRIMITIVE_OBJECT">
+                <rm_type_name>STRING</rm_type_name>
+                <occurrences>
+                  <lower_included>true</lower_included>
+                  <upper_included>true</upper_included>
+                  <lower_unbounded>false</lower_unbounded>
+                  <upper_unbounded>false</upper_unbounded>
+                  <lower>1</lower>
+                  <upper>1</upper>
+                </occurrences>
+                <node_id/>
+                <item xsi:type="C_STRING">
+                  <list>Koerpertemperatur</list>
+                </item>
+              </children>
+            </attributes>
+          </children>
+        </attributes>
         <archetype_id>
           <value>openEHR-EHR-OBSERVATION.body_temperature.v2</value>
         </archetype_id>
         <term_definitions code="at0000">
-          <items id="description">Eine Messung der Körpertemperatur an einer bestimmten Stelle als Surrogat für den gesamten Körper der Person.</items>
+          <items id="description">Eine Messung der Körpertemperatur, als Surrogat für die Temperatur des gesamten Körper der Person.</items>
           <items id="text">Körpertemperatur</items>
         </term_definitions>
         <term_definitions code="at0001">
@@ -1175,7 +864,7 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
           <items id="text">Beliebiges Ereignis</items>
         </term_definitions>
         <term_definitions code="at0004">
-          <items id="description">Die gemessene Körpertemperatur (als Surrogat für den gesamten Körper).</items>
+          <items id="description">Die gemessene Körpertemperatur.</items>
           <items id="text">Temperatur</items>
         </term_definitions>
         <term_definitions code="at0020">
@@ -1183,7 +872,7 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
           <items id="text">Protocol</items>
         </term_definitions>
         <term_definitions code="at0021">
-          <items id="description">Der anatomische Lokalisation der Temperaturmessung.</items>
+          <items id="description">Einfache Beschreibung der Stelle der Messung.</items>
           <items id="text">Lokalisation der Messung</items>
         </term_definitions>
         <term_definitions code="at0022">
@@ -1192,7 +881,7 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
         </term_definitions>
         <term_definitions code="at0023">
           <items id="description">Messung der Temperatur innerhalb des äußeren Gehörgangs.</items>
-          <items id="text">Ohrenkanal</items>
+          <items id="text">Ohrkanal</items>
         </term_definitions>
         <term_definitions code="at0024">
           <items id="description">Messung der Temperatur an der Haut der Achselhöhle mit seitlich angelegtem Arm.</items>
@@ -1215,11 +904,11 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
           <items id="text">Intravaskulär</items>
         </term_definitions>
         <term_definitions code="at0029">
-          <items id="description">Statusinformationen über die Person.</items>
+          <items id="description">Statusinformationen über den Patienten.</items>
           <items id="text">Status</items>
         </term_definitions>
         <term_definitions code="at0030">
-          <items id="description">Die thermale Situation der Person, deren Temperatur gemessen wird.</items>
+          <items id="description">Der Expositionsgrad der Person, deren Temperatur gemessen wird.</items>
           <items id="text">Körperexposition</items>
         </term_definitions>
         <term_definitions code="at0031">
@@ -1228,7 +917,7 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
         </term_definitions>
         <term_definitions code="at0032">
           <items id="description">Die Person wird bedeckt von einer geringeren Menge an Kleidung oder Bettzeug als für die Umgebungsbedingungen angemessen erscheint.</items>
-          <items id="text">Verminderte Kleidung/Bettzeug</items>
+          <items id="text">Reduzierte Kleidung/Bettzeug</items>
         </term_definitions>
         <term_definitions code="at0033">
           <items id="description">Die Person wird bedeckt von einer Menge an Kleidung oder Bettzeug, die den Umgebungsbedingungen angemessen erscheint.</items>
@@ -1259,8 +948,8 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
           <items id="text">Inguinale Hautfalte</items>
         </term_definitions>
         <term_definitions code="at0056">
-          <items id="description">Details über die Umweltbedingungen zum Zeitpunkt der Temperaturmessung</items>
-          <items id="text">Umweltbedingungen</items>
+          <items id="description">Details über die Umgebungsbedingungen zum Zeitpunkt der Temperaturmessung</items>
+          <items id="text">Umgebungsbedingungen</items>
         </term_definitions>
         <term_definitions code="at0057">
           <items id="description">Details über die Betätigung der Person zum Zeitpunkt der Messung der Temperatur.</items>
@@ -1279,7 +968,7 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
           <items id="text">Stirn</items>
         </term_definitions>
         <term_definitions code="at0062">
-          <items id="comment">Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.</items>
+          <items id="comment">Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen.</items>
           <items id="description">Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.</items>
           <items id="text">Erweiterung</items>
         </term_definitions>
@@ -1292,16 +981,31 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
           <items id="text">Strukturierte Lokalisation der Messung</items>
         </term_definitions>
         <term_definitions code="at0065">
-          <items id="description">Anzahl der Tage seit Beginn der letzten normalen Menstruation.</items>
-          <items id="text">Aktueller Tag des Menstruationszyklus</items>
+          <items id="comment">Der erste Tag der Menstruation gilt als Tag 1 jedes Menstruationszyklus.</items>
+          <items id="description">Aktueller Tag des Menstruationszyklus.</items>
+          <items id="text">Tag des Menstruationszyklus</items>
+        </term_definitions>
+        <term_definitions code="at0066">
+          <items id="description">Zusätzliche Probleme oder Faktoren, die sich auf die Messung der Körpertemperatur auswirken können und in anderen Bereichen nicht dargestellt werden.</items>
+          <items id="text">Störfaktoren</items>
         </term_definitions>
         <term_bindings terminology="LNC205">
-          <items code="/data[at0002]/events[at0003]/data[at0001]/items[at0004]">
+          <items code="at0004">
             <value>
               <terminology_id>
                 <value>LNC205</value>
               </terminology_id>
               <code_string>8310-5</code_string>
+            </value>
+          </items>
+        </term_bindings>
+        <term_bindings terminology="SNOMED-CT">
+          <items code="at0004">
+            <value>
+              <terminology_id>
+                <value>SNOMED-CT</value>
+              </terminology_id>
+              <code_string>386725007</code_string>
             </value>
           </items>
         </term_bindings>
@@ -1318,32 +1022,58 @@ Der Status "abgebrochen" bedeutet, dass dem Patienten die entsprechende Fallnumm
       </cardinality>
     </attributes>
     <archetype_id>
-      <value>openEHR-EHR-COMPOSITION.report.v1</value>
+      <value>openEHR-EHR-COMPOSITION.registereintrag.v1</value>
     </archetype_id>
     <template_id>
-      <value>Intensivmedizinisches Monitoring Körpertemperatur</value>
+      <value>Koerpertemperatur</value>
     </template_id>
     <term_definitions code="at0000">
-      <items id="description">Ein Dokument zur Übermittlung von Informationen an andere, meist als Antwort auf eine Anfrage.</items>
-      <items id="text">Bericht</items>
+      <items id="description">Generische Zusammenstellung zur Darstellung eines Datensatzes für Forschungszwecke.</items>
+      <items id="text">Registereintrag</items>
     </term_definitions>
     <term_definitions code="at0001">
       <items id="description">@ internal @</items>
-      <items id="text">Tree</items>
+      <items id="text">Baum</items>
     </term_definitions>
     <term_definitions code="at0002">
-      <items id="description">Identifizierungsmerkmal des Berichts.</items>
-      <items id="text">Bericht ID</items>
-    </term_definitions>
-    <term_definitions code="at0005">
-      <items id="description">Der Status des gesamten Berichts. Hinweis: Dies ist nicht der Status einer Berichtskomponente.</items>
-      <items id="text">Status</items>
-    </term_definitions>
-    <term_definitions code="at0006">
-      <items id="comment">Zum Beispiel: lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.</items>
-      <items id="description">Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.</items>
+      <items id="description">Ergänzende Angaben zum Registereintrag.</items>
       <items id="text">Erweiterung</items>
     </term_definitions>
+    <term_definitions code="at0004">
+      <items id="description">Status der gelieferten Daten für den Registereintrag. Hinweis: Dies ist nicht der Status einzelner Komponenten.</items>
+      <items id="text">Status</items>
+    </term_definitions>
+    <term_definitions code="at0005">
+      <items id="description">Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).</items>
+      <items id="text">Kategorie</items>
+    </term_definitions>
+    <term_definitions code="at0010">
+      <items id="description">*</items>
+      <items id="text">registriert</items>
+    </term_definitions>
+    <term_definitions code="at0011">
+      <items id="description">*</items>
+      <items id="text">vorläufig</items>
+    </term_definitions>
+    <term_definitions code="at0012">
+      <items id="description">*</items>
+      <items id="text">final</items>
+    </term_definitions>
+    <term_definitions code="at0013">
+      <items id="description">*</items>
+      <items id="text">geändert</items>
+    </term_definitions>
+    <term_definitions code="vital-signs">
+      <items id="text">Vital Signs</items>
+    </term_definitions>
   </definition>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.body_temperature.v2]/data[at0002]/events[at0003]/data[at0001]/items[at0004]">
+    <items id="386725007">Body temperature (observable entity)</items>
+    <items id="8310-5">Body temperature</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.body_temperature.v2]">
+    <items id="386725007">Body temperature (observable entity)</items>
+    <items id="8310-5">Body temperature</items>
+  </annotations>
   <view/>
 </template>

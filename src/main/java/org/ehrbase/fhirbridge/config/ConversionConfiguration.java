@@ -21,7 +21,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel.GECCOSerologi
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodpressure.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight.BodyHeightCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.bodytemperature.BodyTemperatureCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.bodytemperature.KoerpertemperaturCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyweight.BodyWeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty.ClinicalFrailtyScaleScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation.ClinicalTrialParticipationCompositionConverter;
@@ -119,7 +119,7 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.BLOOD_GAS_PANEL, new BloodGasPanelCompositionConverter());
         conversionService.registerConverter(Profile.ANTI_BODY_PANEL, new GECCOSerologischerBefundCompositionConverter());
         conversionService.registerConverter(Profile.BLOOD_PRESSURE, new BloodPressureCompositionConverter());
-        conversionService.registerConverter(Profile.BODY_TEMP, new BodyTemperatureCompositionConverter());
+        conversionService.registerConverter(Profile.BODY_TEMP, new KoerpertemperaturCompositionConverter());
         conversionService.registerConverter(Profile.BODY_WEIGHT, new BodyWeightCompositionConverter());
         conversionService.registerConverter(Profile.CLINICAL_FRAILTY_SCALE, new ClinicalFrailtyScaleScoreCompositionConverter());
         conversionService.registerConverter(Profile.CLINICAL_TRIAL_PARTICIPATION, new ClinicalTrialParticipationCompositionConverter());
