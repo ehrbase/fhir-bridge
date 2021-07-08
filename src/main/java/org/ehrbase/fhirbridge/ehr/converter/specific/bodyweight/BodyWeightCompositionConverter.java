@@ -14,7 +14,9 @@ public class BodyWeightCompositionConverter extends ObservationToCompositionConv
     @Override
     protected KoerpergewichtComposition convertInternal(Observation resource) {
         KoerpergewichtComposition composition = new KoerpergewichtComposition();
-        composition.setKoerpergewicht(new KoerpergewichtObservationConverter().convert(resource));
+        if(resource.hasValueQuantity()){
+            composition.setKoerpergewicht(new KoerpergewichtObservationConverter().convert(resource));
+        }
         return composition;
     }
 }
