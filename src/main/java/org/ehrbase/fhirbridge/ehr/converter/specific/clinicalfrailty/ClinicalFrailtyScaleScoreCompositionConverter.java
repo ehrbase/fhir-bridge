@@ -15,7 +15,9 @@ public class ClinicalFrailtyScaleScoreCompositionConverter extends ObservationTo
     public KlinischeFrailtySkalaComposition convertInternal(Observation resource) {
         KlinischeFrailtySkalaComposition result = new KlinischeFrailtySkalaComposition();
         mapStatus(result, resource);
-        result.setKlinischeFrailtySkalaCfs(new KlinischeFrailtySkalaObservationConverter().convert(resource));
+        if(resource.hasValueCodeableConcept()){
+            result.setKlinischeFrailtySkalaCfs(new KlinischeFrailtySkalaObservationConverter().convert(resource));
+        }
         return result;
     }
 

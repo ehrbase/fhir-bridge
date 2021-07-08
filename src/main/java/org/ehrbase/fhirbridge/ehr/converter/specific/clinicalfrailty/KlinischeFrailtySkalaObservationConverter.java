@@ -11,16 +11,36 @@ public class KlinischeFrailtySkalaObservationConverter extends ObservationToObse
     @Override
     protected KlinischeFrailtySkalaCfsObservation convertInternal(Observation resource) {
         KlinischeFrailtySkalaCfsObservation klinischeFrailtySkalaCfsObservation = new KlinischeFrailtySkalaCfsObservation();
-        try {
-            String stringAssessment = resource.getValueCodeableConcept().getCoding().get(0).getCode();
-            int assessment = Integer.parseInt(stringAssessment);
-            org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty.ClinicalFrailtyMappingAssessment mapping = new org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty.ClinicalFrailtyMappingAssessment();
-            DvOrdinal ordAssessment = mapping.getDVOrdinal(assessment);
+        if (resource.hasValueCodeableConcept() && resource.getValueCodeableConcept().hasCoding() && resource.getValueCodeableConcept().getCoding().get(0).hasCode()) {
+            DvOrdinal ordAssessment = convertFrailtyBeurteilung(Integer.parseInt(resource.getValueCodeableConcept().getCoding().get(0).getCode()));
             klinischeFrailtySkalaCfsObservation.setBeurteilung(ordAssessment);
-        } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
         }
         return klinischeFrailtySkalaCfsObservation;
     }
 
+    private DvOrdinal convertFrailtyBeurteilung(int code) {
+        switch (code) {
+            case 1:
+                return ClinicalFrailtyBeurteilung.SEHR_FIT.getBerurteilung();
+            case 2:
+                return ClinicalFrailtyBeurteilung.DURCHSCHNITTLICH_AKTIV.getBerurteilung();
+            case 3:
+                return ClinicalFrailtyBeurteilung.GUT_ZURECHTKOMMEND.getBerurteilung();
+            case 4:
+                return ClinicalFrailtyBeurteilung.VULNERABEL.getBerurteilung();
+            case 5:
+                return ClinicalFrailtyBeurteilung.GERINGGRADIG_FRAIL.getBerurteilung();
+            case 6:
+                return ClinicalFrailtyBeurteilung.MITTELGRADIG_FRAIL.getBerurteilung();
+            case 7:
+                return ClinicalFrailtyBeurteilung.AUSGEPRAEGT_FRAIL.getBerurteilung();
+            case 8:
+                return ClinicalFrailtyBeurteilung.EXTREM_FRAIL.getBerurteilung();
+            case 9:
+                return ClinicalFrailtyBeurteilung.TERMINAL_ERKRANKT.getBerurteilung();
+            default:
+                throw new UnprocessableEntityException("Cannot match beurteilung\"" + code + "\"");
+        }
+    }
 }
+
