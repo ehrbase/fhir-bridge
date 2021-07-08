@@ -123,7 +123,7 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.BODY_WEIGHT, new BodyWeightCompositionConverter());
         conversionService.registerConverter(Profile.CLINICAL_FRAILTY_SCALE, new ClinicalFrailtyScaleScoreCompositionConverter());
         conversionService.registerConverter(Profile.CLINICAL_TRIAL_PARTICIPATION, new ClinicalTrialParticipationCompositionConverter());
-        conversionService.registerConverter(Profile.CORONARIRUS_NACHWEIS_TEST, new CoronavirusNachweisTestCompositionConverter());
+        conversionService.registerConverter(Profile.CORONAVIRUS_NACHWEIS_TEST, new CoronavirusNachweisTestCompositionConverter());
         conversionService.registerConverter(Profile.FIO2, new FiO2CompositionConverter());
         conversionService.registerConverter(Profile.HEART_RATE, new HeartRateCompositionConverter());
         conversionService.registerConverter(Profile.KNOWN_EXPOSURE, new SarsCov2KnownExposureCompositionConverter());
