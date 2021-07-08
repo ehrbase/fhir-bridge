@@ -6,17 +6,27 @@ import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.Beoba
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.EingeatmeterSauerstoffCluster;
 import org.hl7.fhir.r4.model.Observation;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 public class BeobachtungenAmBeatmungsgeraetObservationConverter extends ObservationToObservationConverter<BeobachtungenAmBeatmungsgeraetObservation> {
     @Override
     protected BeobachtungenAmBeatmungsgeraetObservation convertInternal(Observation resource) {
         BeobachtungenAmBeatmungsgeraetObservation observation = new BeobachtungenAmBeatmungsgeraetObservation();
         EingeatmeterSauerstoffCluster eingeatmeterSauerstoff = new EingeatmeterSauerstoffCluster();
-        DvProportion inspiratorischeSauerstofffraktion = new DvProportion();
-        inspiratorischeSauerstofffraktion.setNumerator(resource.getValueQuantity().getValue().doubleValue());
-        inspiratorischeSauerstofffraktion.setDenominator(100.0);
-        inspiratorischeSauerstofffraktion.setType((long) 2);//2=percent (https://specifications.openehr.org/releases/RM/latest/data_types.html#_proportion_kind_class)
-        eingeatmeterSauerstoff.setInspiratorischeSauerstofffraktion(inspiratorischeSauerstofffraktion);
+        mapNumerator(resource).ifPresent(eingeatmeterSauerstoff::setInspiratorischeSauerstofffraktion);
         observation.setEingeatmeterSauerstoff(eingeatmeterSauerstoff);
         return observation;
+    }
+
+    private Optional<DvProportion> mapNumerator(Observation resource) {
+        if (resource.hasValueQuantity()) {
+            DvProportion inspiratorischeSauerstofffraktion = new DvProportion();
+            inspiratorischeSauerstofffraktion.setNumerator(resource.getValueQuantity().getValue().doubleValue());
+            inspiratorischeSauerstofffraktion.setDenominator(100.0);
+            inspiratorischeSauerstofffraktion.setType((long) 2);//2=percent (https://specifications.openehr.org/releases/RM/latest/data_types.html#_proportion_kind_class)
+            return Optional.of(inspiratorischeSauerstofffraktion);
+        }
+        return Optional.empty();
     }
 }
