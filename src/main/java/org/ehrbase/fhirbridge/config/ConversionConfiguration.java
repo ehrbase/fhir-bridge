@@ -29,6 +29,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.coronavirusnachweistest.Cor
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.diagnose.DiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab.DiagnosticReportLabCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung.DnrAnordnungCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.fio2.FiO2CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund.PCRCompositionConverter;
@@ -98,7 +99,7 @@ public class ConversionConfiguration {
     }
 
     private void registerConsentConverters(ConversionService conversionService) {
-        conversionService.registerConverter(Profile.DO_NOT_RESUSCITATE_ORDER, null); // TODO: @ErikTute, add your converter
+        conversionService.registerConverter(Profile.DO_NOT_RESUSCITATE_ORDER, new DnrAnordnungCompositionConverter());
     }
 
     private void registerDiagnosticReportConverters(ConversionService conversionService) {
