@@ -33,11 +33,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createBodyTemp() throws IOException {
-        create("create-body-temp-0.json");
-    }
-
-    @Test
     void createBodyWeight() throws IOException {
         create("create-body-weight.json");
     }
@@ -80,16 +75,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     @Test
     void createRespiratoryRate() throws IOException {
         create("create-respiratory-rate.json");
-    }
-
-    @Test
-    void createSofaScore() throws IOException {
-        //TODO The template does not support cvs0 yet  create("create-sofa-score.json");
-    }
-
-    @Test
-    void createSofaScore1() throws IOException {
-        //    create("create-sofa-score-cardiovuskular-score-1.json");
     }
 
     @Test
