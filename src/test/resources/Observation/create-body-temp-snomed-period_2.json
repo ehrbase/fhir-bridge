@@ -3,7 +3,7 @@
   "id": "bodytemp",
   "meta": {
     "profile": [
-      "http://hl7.org/fhir/StructureDefinition/bodytemp"
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-temperature"
     ]
   },
   "status": "final",
