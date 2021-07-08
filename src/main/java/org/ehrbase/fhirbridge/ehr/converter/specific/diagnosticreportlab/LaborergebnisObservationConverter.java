@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
@@ -21,13 +22,23 @@ public class LaborergebnisObservationConverter extends DiagnosticReportToObserva
 
     @Override
     protected LaborergebnisObservation convertInternal(DiagnosticReport diagnosticReport) {
-        Observation observation = (Observation) diagnosticReport.getContained().get(0);
-        LaborergebnisObservation laborbefund = new ObservationLabCompositionConverter().convert(observation).getLaborergebnis();
-        ProLaboranalytCluster laboranalytCluster = laborbefund.getProLaboranalyt();
-        laborbefund.setLabortestKategorieDefiningCode(getLabortestCode(observation.getCategory().get(0)));
-        laborbefund.setSchlussfolgerungValue(diagnosticReport.getConclusion());
-        laborbefund.setProLaboranalyt(laboranalytCluster);
-        return laborbefund;
+        if(diagnosticReport.hasContained()){
+            Observation observation = (Observation) diagnosticReport.getContained().get(0);
+            LaborergebnisObservation laborbefund = new ObservationLabCompositionConverter().convert(observation).getLaborergebnis();
+            ProLaboranalytCluster laboranalytCluster = laborbefund.getProLaboranalyt();
+            laborbefund.setLabortestKategorieDefiningCode(getLabortestCode(observation.getCategory().get(0)));
+            mapSchlussfolgerung(laborbefund, diagnosticReport);
+            laborbefund.setProLaboranalyt(laboranalytCluster);
+            return laborbefund;
+        }else{
+            throw new UnprocessableEntityException("The diagnositc report has to contain an observation with the lab values.");
+        }
+    }
+
+    private void mapSchlussfolgerung(LaborergebnisObservation laborbefund, DiagnosticReport diagnosticReport) {
+        if(diagnosticReport.hasConclusion()){
+            laborbefund.setSchlussfolgerungValue(diagnosticReport.getConclusion());
+        }
     }
 
     private LabortestKategorieDefiningCode getLabortestCode(CodeableConcept codeableConcept) {
