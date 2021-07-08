@@ -1,11 +1,13 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.ObservationLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.ResourceType;
@@ -19,19 +21,18 @@ public class DiagnosticReportLabCompositionConverter extends DiagnosticReportToC
 
     @Override
     protected GECCOLaborbefundComposition convertInternal(DiagnosticReport resource) {
-        LOG.debug("Contained size: {}", resource.getContained().size());
-        // one contained Observation is expected
-        if (resource.getContained().size() != 1) {
-            throw new ConversionException("One contained Observation was expected " + resource.getContained().size() + " were received in DiagnosticReport " + resource.getId());
+        if(resource.hasContained()){
+            if (resource.getContained().get(0).getResourceType() != ResourceType.Observation) {
+                throw new ConversionException("One contained Observation was expected, contained is there but is not Observation, it is " + resource.getContained().get(0).getResourceType().toString());
+            }
+            Observation observation = (Observation) resource.getContained().get(0);
+            GECCOLaborbefundComposition result = new ObservationLabCompositionConverter().convert(observation);
+            LaborergebnisObservation laborbefund = new LaborergebnisObservationConverter().convertInternal(resource);
+            result.setLaborergebnis(laborbefund);
+            return result;
+        }else{
+            throw new UnprocessableEntityException("One contained Observation was expected " + resource.getContained().size() + " were received in DiagnosticReport " + resource.getId());
         }
-        if (resource.getContained().get(0).getResourceType() != ResourceType.Observation) {
-            throw new ConversionException("One contained Observation was expected, contained is there but is not Observation, it is " + resource.getContained().get(0).getResourceType().toString());
-        }
-        Observation observation = (Observation) resource.getContained().get(0);
-        GECCOLaborbefundComposition result = new ObservationLabCompositionConverter().convert(observation);
-        LaborergebnisObservation laborbefund = new LaborergebnisObservationConverter().convertInternal(resource);
-        result.setLaborergebnis(laborbefund);
-        return result;
     }
 
 }
