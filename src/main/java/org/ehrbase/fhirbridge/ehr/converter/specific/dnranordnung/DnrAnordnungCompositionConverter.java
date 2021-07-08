@@ -55,6 +55,7 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
         return items;
     }
 
+    // Not an Resource so just leave it as it is
     private DnrAnordnungEvaluation createDnrAnordnung(@NonNull Consent.provisionComponent provision) {
         DnrAnordnungEvaluation dnrAnordnung = new DnrAnordnungEvaluation();
         dnrAnordnung.setLanguage(Language.DE);
