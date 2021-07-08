@@ -68,7 +68,7 @@ public enum Profile {
     BODY_WEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-weight"),
     CLINICAL_FRAILTY_SCALE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score"),
     CLINICAL_TRIAL_PARTICIPATION(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/interventional-clinical-trial-participation"),
-    CORONARIRUS_NACHWEIS_TEST(Observation.class, "https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest"),
+    CORONAVIRUS_NACHWEIS_TEST(Observation.class, "https://charite.infectioncontrol.de/fhir/core/StructureDefinition/CoronavirusNachweisTest"),
     FIO2(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/inhaled-oxygen-concentration"),
     HEART_RATE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/heart-rate"),
     KNOWN_EXPOSURE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/known-exposure"),
