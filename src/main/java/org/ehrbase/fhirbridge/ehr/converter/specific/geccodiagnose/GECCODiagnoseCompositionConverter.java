@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
@@ -20,37 +21,43 @@ public class GECCODiagnoseCompositionConverter extends ConditionToCompositionCon
     @Override
     public GECCODiagnoseComposition convertInternal(@NonNull Condition resource) {
         GECCODiagnoseComposition composition = new GECCODiagnoseComposition();
-
-        Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose =  getVorliegendeDiagnose(resource);
+        Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose = getVorliegendeDiagnose(resource);
         if (resource.getVerificationStatus().isEmpty()) {
             composition.setUnbekannteDiagnose(new UnbekannteDiagnoseEvaluationConverter().convert(resource));
         } else {
-            Coding verficiationStatus = resource.getVerificationStatus().getCoding().get(
-                    resource.getVerificationStatus().getCoding().size() - 1); // snomed code is the last element
-            if (verficiationStatus.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
-                    verficiationStatus.getCode().equals(VERIFICATION_STATUS_PRESENT_CODE)) {
-                vorliegendeDiagnose.ifPresent(composition::setVorliegendeDiagnose);
-            } else if (verficiationStatus.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
-                    verficiationStatus.getCode().equals(VERIFICATION_STATUS_ABSENT_CODE)) {
-                composition.setAusgeschlosseneDiagnose( new AusgeschlosseneDiagnoseConverter().convert(resource));
-            } else {
-                throw new ConversionException("Cant identify the verification status");
-            }
+            mapVerficationStatus(resource, vorliegendeDiagnose, composition);
         }
+        mapCategoryCoding(resource, composition);
+        return composition;
+    }
 
+    private void mapCategoryCoding(Condition resource, GECCODiagnoseComposition composition) {
         Coding categoryCoding = resource.getCategory().get(0).getCoding().get(0);
         if (categoryCoding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().containsKey(categoryCoding.getCode())) {
             composition.setKategorieDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().get(categoryCoding.getCode()));
         } else {
-            throw new ConversionException("Category not present");
+            throw new UnprocessableEntityException("Category has either no or an unsupported SNOMED code");
         }
-        return composition;
+    }
+
+    private void mapVerficationStatus(Condition resource, Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose, GECCODiagnoseComposition composition) {
+        for (Coding coding : resource.getVerificationStatus().getCoding()) {
+            if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
+                if (coding.getCode().equals(VERIFICATION_STATUS_PRESENT_CODE)) {
+                    vorliegendeDiagnose.ifPresent(composition::setVorliegendeDiagnose);
+                } else if (coding.getCode().equals(VERIFICATION_STATUS_ABSENT_CODE)) {
+                    composition.setAusgeschlosseneDiagnose(new AusgeschlosseneDiagnoseConverter().convert(resource));
+                } else {
+                    throw new UnprocessableEntityException("SNOMED code is invalid in VerificationStatus.coding.code");
+                }
+            }
+        }
     }
 
     private Optional<VorliegendeDiagnoseEvaluation> getVorliegendeDiagnose(Condition resource) {
         VorliegendeDiagnoseEvaluationConverter vorliegendeDiagnoseEvaluationConverter = new VorliegendeDiagnoseEvaluationConverter();
         VorliegendeDiagnoseEvaluation vorliegendeDiagnose = vorliegendeDiagnoseEvaluationConverter.convert(resource);
-        if(vorliegendeDiagnoseEvaluationConverter.getIsEmpty()){
+        if (vorliegendeDiagnoseEvaluationConverter.getIsEmpty()) {
             return Optional.empty();
         }
         return Optional.of(vorliegendeDiagnose);
