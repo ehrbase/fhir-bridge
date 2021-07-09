@@ -2,11 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.BundeslandRegionDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.LandDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.*;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
@@ -63,15 +59,15 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
         Coding coding = observationComponent.getCode().getCoding().get(0);
         validateCodeSystemLOINC(coding.getSystem());
         String code = coding.getCode();
-        if (code.equals(LOINC_DATE_TRAVEL_STARTED.getCode())) {
+        if (code.equals(HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED.getCode())) {
             travel.setEinreisedatumValue(getDate(observationComponent));
-        } else if (code.equals(LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION.getCode())) {
+        } else if (code.equals( HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION.getCode())) {
             travel.setAbfahrtsdatumValue(getDate(observationComponent));
-        } else if (code.equals(LOINC_CITY_OF_TRAVEL.getCode())) {
+        } else if (code.equals( HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL.getCode())) {
             travel.setStadtValue(getCity(observationComponent));
-        } else if (code.equals(LOINC_STATE_OF_TRAVEL.getCode())) {
+        } else if (code.equals( HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL.getCode())) {
             travel.setBundeslandRegionDefiningCode(getBundeslandRegion(observationComponent));
-        } else if (code.equals(LOINC_COUNTRY_OF_TRAVEL.getCode())) {
+        } else if (code.equals( HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL.getCode())) {
             travel.setLandDefiningCode(getLand(observationComponent));
         } else {
             throw new ConversionException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":" + code + "' instead");
