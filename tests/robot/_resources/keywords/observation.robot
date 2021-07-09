@@ -102,7 +102,7 @@ validate response - 422 (w/o error message)
 
 
 get body temperature
-    &{resp}             GET    ${BASE_URL}/Observation?subject.identifier=${subject_id}&_profile=http://hl7.org/fhir/StructureDefinition/bodytemp
+    &{resp}             GET    ${BASE_URL}/Observation?subject.identifier=${subject_id}&_profile=https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-temperature
                         Integer    response status    200
                         String     request method    GET
                         String     response body id

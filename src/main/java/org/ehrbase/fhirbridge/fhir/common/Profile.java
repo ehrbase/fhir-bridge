@@ -64,7 +64,7 @@ public enum Profile {
     BODY_HEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"),
     BLOOD_GAS_PANEL(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel"),
     BLOOD_PRESSURE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-pressure"),
-    BODY_TEMP(Observation.class, "http://hl7.org/fhir/StructureDefinition/bodytemp"),
+    BODY_TEMP(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-temperature"),
     BODY_WEIGHT(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-weight"),
     CLINICAL_FRAILTY_SCALE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/frailty-score"),
     CLINICAL_TRIAL_PARTICIPATION(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/interventional-clinical-trial-participation"),

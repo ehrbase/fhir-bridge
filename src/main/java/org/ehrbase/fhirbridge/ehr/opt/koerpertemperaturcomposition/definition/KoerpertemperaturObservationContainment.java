@@ -1,8 +1,10 @@
-package org.ehrbase.fhirbridge.ehr.opt.intensivmedizinischesmonitoringkorpertemperaturcomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.generic.PartyProxy;
+import java.lang.Double;
+import java.lang.String;
 import java.time.temporal.TemporalAccessor;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -15,9 +17,19 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class KoerpertemperaturObservationContainment extends Containment {
   public SelectAqlField<KoerpertemperaturObservation> KOERPERTEMPERATUR_OBSERVATION = new AqlFieldImp<KoerpertemperaturObservation>(KoerpertemperaturObservation.class, "", "KoerpertemperaturObservation", KoerpertemperaturObservation.class, this);
 
-  public SelectAqlField<TemporalAccessor> ORIGIN_VALUE = new AqlFieldImp<TemporalAccessor>(KoerpertemperaturObservation.class, "/data[at0002]/origin|value", "originValue", TemporalAccessor.class, this);
+  public SelectAqlField<Double> TEMPERATUR_MAGNITUDE = new AqlFieldImp<Double>(KoerpertemperaturObservation.class, "/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|magnitude", "temperaturMagnitude", Double.class, this);
 
-  public SelectAqlField<NullFlavour> LOKALISATION_DER_MESSUNG_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(KoerpertemperaturObservation.class, "/protocol[at0020]/items[at0021]/null_flavour|defining_code", "lokalisationDerMessungNullFlavourDefiningCode", NullFlavour.class, this);
+  public SelectAqlField<String> TEMPERATUR_UNITS = new AqlFieldImp<String>(KoerpertemperaturObservation.class, "/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|units", "temperaturUnits", String.class, this);
+
+  public SelectAqlField<NullFlavour> TEMPERATUR_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(KoerpertemperaturObservation.class, "/data[at0002]/events[at0003]/data[at0001]/items[at0004]/null_flavour|defining_code", "temperaturNullFlavourDefiningCode", NullFlavour.class, this);
+
+  public ListSelectAqlField<Cluster> UMGEBUNGSBEDINGUNGEN = new ListAqlFieldImp<Cluster>(KoerpertemperaturObservation.class, "/data[at0002]/events[at0003]/state[at0029]/items[at0056]", "umgebungsbedingungen", Cluster.class, this);
+
+  public SelectAqlField<Cluster> BETAETIGUNG = new AqlFieldImp<Cluster>(KoerpertemperaturObservation.class, "/data[at0002]/events[at0003]/state[at0029]/items[at0057]", "betaetigung", Cluster.class, this);
+
+  public SelectAqlField<TemporalAccessor> TIME_VALUE = new AqlFieldImp<TemporalAccessor>(KoerpertemperaturObservation.class, "/data[at0002]/events[at0003]/time|value", "timeValue", TemporalAccessor.class, this);
+
+  public SelectAqlField<TemporalAccessor> ORIGIN_VALUE = new AqlFieldImp<TemporalAccessor>(KoerpertemperaturObservation.class, "/data[at0002]/origin|value", "originValue", TemporalAccessor.class, this);
 
   public ListSelectAqlField<Cluster> STRUKTURIERTE_LOKALISATION_DER_MESSUNG = new ListAqlFieldImp<Cluster>(KoerpertemperaturObservation.class, "/protocol[at0020]/items[at0064]", "strukturierteLokalisationDerMessung", Cluster.class, this);
 
@@ -30,10 +42,6 @@ public class KoerpertemperaturObservationContainment extends Containment {
   public SelectAqlField<Language> LANGUAGE = new AqlFieldImp<Language>(KoerpertemperaturObservation.class, "/language", "language", Language.class, this);
 
   public SelectAqlField<FeederAudit> FEEDER_AUDIT = new AqlFieldImp<FeederAudit>(KoerpertemperaturObservation.class, "/feeder_audit", "feederAudit", FeederAudit.class, this);
-
-  public SelectAqlField<KoerpertemperaturLokalisationDerMessungChoice> LOKALISATION_DER_MESSUNG = new AqlFieldImp<KoerpertemperaturLokalisationDerMessungChoice>(KoerpertemperaturObservation.class, "/protocol[at0020]/items[at0021]/value", "lokalisationDerMessung", KoerpertemperaturLokalisationDerMessungChoice.class, this);
-
-  public ListSelectAqlField<KoerpertemperaturBeliebigesEreignisChoice> BELIEBIGES_EREIGNIS = new ListAqlFieldImp<KoerpertemperaturBeliebigesEreignisChoice>(KoerpertemperaturObservation.class, "/data[at0002]/events[at0003]", "beliebigesEreignis", KoerpertemperaturBeliebigesEreignisChoice.class, this);
 
   private KoerpertemperaturObservationContainment() {
     super("openEHR-EHR-OBSERVATION.body_temperature.v2");
