@@ -23,6 +23,3 @@ public class ImpfstatusCompositionConverter extends ImmunizationToCompositionCon
         return impfstatusComposition;
     }
 }
-
-
-

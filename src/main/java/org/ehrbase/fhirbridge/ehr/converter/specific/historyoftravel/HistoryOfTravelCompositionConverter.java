@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
@@ -37,14 +37,14 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         } else if (code.equals(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE.getCode())) {
             composition.setUnbekannteReisehistorie(new UnbekannteReisehistorieEvaluationConverter().convert(resource));
         } else {
-            throw new UnprocessableEntityException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
+            throw new ConversionException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
         }
         return (composition);
     }
 
     private void checkForSnomedSystem(String systemCode) {
         if (!SNOMED.getUrl().equals(systemCode)) {
-            throw new UnprocessableEntityException("The system is not correct. " +
+            throw new ConversionException("The system is not correct. " +
                     "It should be '" + SNOMED.getUrl() + "', but it was '" + systemCode + "'.");
         }
     }
@@ -80,11 +80,11 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
 
         KategorieDefiningCode expectedKategorie = KategorieDefiningCode.SOCIAL_HISTORY;
         if (!system.equals(expectedKategorie.getTerminologyId())) {
-            throw new UnprocessableEntityException("Categorie can't be set. Wrong terminology! Expected " + expectedKategorie.getTerminologyId() + ". Received" + system + "' instead");
+            throw new ConversionException("Categorie can't be set. Wrong terminology! Expected " + expectedKategorie.getTerminologyId() + ". Received" + system + "' instead");
         }
 
         if (!code.equals(expectedKategorie.getCode())) {
-            throw new UnprocessableEntityException("Categorie can't be set. Wrong code! Expected " + expectedKategorie.getCode() + ". Received" + code + "' instead");
+            throw new ConversionException("Categorie can't be set. Wrong code! Expected " + expectedKategorie.getCode() + ". Received" + code + "' instead");
         }
 
         element.setValue(expectedKategorie.getValue());

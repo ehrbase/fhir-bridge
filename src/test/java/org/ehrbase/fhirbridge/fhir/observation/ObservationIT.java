@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.apache.commons.lang3.StringUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
@@ -87,7 +87,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
         String resource = super.testFileLoader.loadResourceToString("create-observation-with-default-profile.json");
 
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        Exception exception = Assertions.assertThrows(ConversionException.class, createTyped::execute);
 
         assertTrue(StringUtils.startsWith(exception.getMessage(), "HTTP 422 : Default profile is not supported for Observation. One of the following profiles is expected:"));
     }
@@ -96,7 +96,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     void createWithInvalidQuantity() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-observation-with-invalid-quantity.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        Exception exception = Assertions.assertThrows(ConversionException.class, createTyped::execute);
 
         assertTrue(StringUtils.startsWith(exception.getMessage(), "HTTP 422 : Wrong Status code. Expected: [200, 201, 204]. Got: 400."));
     }
@@ -106,7 +106,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     void createWithInvalidQuantityDatatype() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-observation-with-invalid-quantity-datatype.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        Exception exception = Assertions.assertThrows(ConversionException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : Error parsing JSON: the primitive value must be a number", exception.getMessage());
     }
@@ -115,7 +115,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation observation = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () -> {
+        return assertThrows(ConversionException.class, () -> {
             // new YourConverter().convert(@NonNull ((YourResource) domainResource)));
         });
     }

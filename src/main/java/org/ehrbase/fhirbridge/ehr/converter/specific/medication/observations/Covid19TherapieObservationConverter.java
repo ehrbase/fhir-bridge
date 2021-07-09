@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedikationObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ArzneimittelNameDefiningCode;
@@ -25,7 +25,7 @@ public class Covid19TherapieObservationConverter extends GeccoMedikationObservat
                 return mapArzneimittelName(coding);
             }
         }
-        throw new UnprocessableEntityException("The MedicationStatement is missing the medication");
+        throw new ConversionException("The MedicationStatement is missing the medication");
     }
 
     private ArzneimittelNameDefiningCode mapArzneimittelName(Coding coding) {
@@ -33,7 +33,7 @@ public class Covid19TherapieObservationConverter extends GeccoMedikationObservat
         if (arzneimittelNameDefiningCodeMap.containsKey(coding.getCode())) {
             return arzneimittelNameDefiningCodeMap.get(coding.getCode());
         }
-        throw new UnprocessableEntityException("Invalid medicationCodeableConcept code " + coding.getCode());
+        throw new ConversionException("Invalid medicationCodeableConcept code " + coding.getCode());
     }
 
 }

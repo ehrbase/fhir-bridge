@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.PatientAufDerIntensivstationObservation;
@@ -36,6 +36,6 @@ public class PatientAufDerIntensivstationObservationConverter extends Observatio
             return aktivitatDurchgefuehrtDefiningcodeMap.get(coding.getCode()).toDvCodedText();
         }
 
-        throw new UnprocessableEntityException("Aktivität durchgeführt has invalid code " + coding.getCode());
+        throw new ConversionException("Aktivität durchgeführt has invalid code " + coding.getCode());
     }
 }

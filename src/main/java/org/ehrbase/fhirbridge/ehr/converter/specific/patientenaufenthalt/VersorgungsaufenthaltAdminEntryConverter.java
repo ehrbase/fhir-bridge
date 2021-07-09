@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToAdminEntryConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.FachlicheOrganisationseinheitCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.StandortCluster;
@@ -62,7 +62,7 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
                     standortCluster.setBettplatzValue(locationName);
                     break;
                 default: // other types aren't needed by EHR Composition
-                    throw new UnprocessableEntityException("unexpected location physical type " + locationPhysicalType +
+                    throw new ConversionException("unexpected location physical type " + locationPhysicalType +
                             " by EHR composition.");
             }
         }
@@ -92,7 +92,7 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
 
                 fachlicheOrganisationseinheitCluster.setFachabteilungsschluesselDefiningCode(FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().get(fachAbteilungsSchluessel.getCode()));
             } else {
-                throw new UnprocessableEntityException("Invalid Code " + fachAbteilungsSchluessel.getCode() +
+                throw new ConversionException("Invalid Code " + fachAbteilungsSchluessel.getCode() +
                         " or Code System for 'Fachabteilungsschlüssel'.");
             }
 

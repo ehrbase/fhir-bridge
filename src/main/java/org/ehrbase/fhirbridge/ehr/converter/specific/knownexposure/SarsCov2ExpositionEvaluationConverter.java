@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToEvaluationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.ExpositionVorhandenDefiningCode;
@@ -53,7 +53,7 @@ public class SarsCov2ExpositionEvaluationConverter extends ObservationToEvaluati
             case 1:
                 return true;
             default:
-                throw new UnprocessableEntityException("Multiple known expositions reasons are not possible in SarsCov2ExpositionConverter!");
+                throw new ConversionException("Multiple known expositions reasons are not possible in SarsCov2ExpositionConverter!");
         }
     }
 
@@ -68,7 +68,7 @@ public class SarsCov2ExpositionEvaluationConverter extends ObservationToEvaluati
                 system.equals(KnownExposureCode.UNKNOWN_EXPOSURE.getSystem())) {
             eval.setExpositionVorhandenDefiningCode(ExpositionVorhandenDefiningCode.UNKNOWN);
         } else {
-            throw new UnprocessableEntityException("Cannot set 'unknown' in SarsCov2ExpositionConverter with no valid data absent reason coding!");
+            throw new ConversionException("Cannot set 'unknown' in SarsCov2ExpositionConverter with no valid data absent reason coding!");
         }
     }
 
@@ -76,7 +76,7 @@ public class SarsCov2ExpositionEvaluationConverter extends ObservationToEvaluati
         Optional<CodeableConcept> optionalCC = Optional.ofNullable(fhirObserv.getDataAbsentReason());
 
         if (!optionalCC.isPresent()) {
-            throw new UnprocessableEntityException("Zero data absent reasons are not possible in SarsCov2ExpositionConverter with no valid exposition information!");
+            throw new ConversionException("Zero data absent reasons are not possible in SarsCov2ExpositionConverter with no valid exposition information!");
         }
 
         if (fhirObserv.hasValueCodeableConcept() && optionalCC.get().hasCoding()) {
@@ -89,7 +89,7 @@ public class SarsCov2ExpositionEvaluationConverter extends ObservationToEvaluati
         int numElements = fhirObserv.getDataAbsentReason().getCoding().size();
 
         if (1 != numElements) {
-            throw new UnprocessableEntityException("Multiple data absent reasons are not possible in SarsCov2ExpositionConverter with no valid exposition information!");
+            throw new ConversionException("Multiple data absent reasons are not possible in SarsCov2ExpositionConverter with no valid exposition information!");
         }
     }
 
@@ -105,7 +105,7 @@ public class SarsCov2ExpositionEvaluationConverter extends ObservationToEvaluati
                 system.equals(KnownExposureCode.NO_EXPOSURE.getSystem())) {
             eval.setExpositionVorhandenDefiningCode(ExpositionVorhandenDefiningCode.NO_QUALIFIER_VALUE);
         } else {
-            throw new UnprocessableEntityException("The SNOMED code '" + code + "' in system '" + system + "' is not supported for known SarsCov2ExpositionConverter!");
+            throw new ConversionException("The SNOMED code '" + code + "' in system '" + system + "' is not supported for known SarsCov2ExpositionConverter!");
         }
     }
 }

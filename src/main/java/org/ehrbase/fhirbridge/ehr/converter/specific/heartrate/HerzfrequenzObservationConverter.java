@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.heartrate;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.HerzfrequenzObservation;
@@ -17,7 +17,7 @@ public class HerzfrequenzObservationConverter extends ObservationToObservationCo
             herzfrequenzObservation.setFrequenzMagnitude(resource.getValueQuantity().getValue().doubleValue());
             herzfrequenzObservation.setFrequenzUnits(resource.getValueQuantity().getCode());//note that the textual value that openEHR template expects as unit is stored in code for this entity
         } catch (Exception e) {
-            throw new UnprocessableEntityException(e.getMessage());
+            throw new ConversionException(e.getMessage());
         }
         return herzfrequenzObservation;
     }
