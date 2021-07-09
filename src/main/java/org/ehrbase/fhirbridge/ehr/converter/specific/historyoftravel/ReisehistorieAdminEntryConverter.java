@@ -17,11 +17,11 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
+import static org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL;
+import static org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL;
+import static org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION;
+import static org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
+import static org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
 
 public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Observation, ReisehistorieAdminEntry> {
 

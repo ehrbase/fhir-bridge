@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
+package org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
