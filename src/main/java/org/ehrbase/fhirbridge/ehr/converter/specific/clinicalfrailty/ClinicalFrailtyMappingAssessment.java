@@ -1,7 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
+
 
 public class ClinicalFrailtyMappingAssessment {
 
@@ -36,7 +37,7 @@ public class ClinicalFrailtyMappingAssessment {
                 ret = ClinicalFrailtyBeurteilung.TERMINAL_ERKRANKT.getBerurteilung();
                 break;
             default:
-                throw new UnprocessableEntityException("Cannot match beurteilung\"" + code + "\"");
+                throw new ConversionException("Cannot match beurteilung\"" + code + "\"");
         }
         return ret;
     }

@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.fhir.diagnosticreport;
 
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.DiagnosticReport;
@@ -60,7 +61,7 @@ class DiagnosticReportIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         DiagnosticReport diagnosticReport = (DiagnosticReport) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () -> {
+        return assertThrows(ConversionException.class, () -> {
            // new YourConverter().convert(@NonNull  radiologyReport);
         });
     }

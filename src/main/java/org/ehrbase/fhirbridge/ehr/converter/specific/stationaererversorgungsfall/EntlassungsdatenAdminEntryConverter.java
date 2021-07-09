@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.stationaererversorgungsfal
 import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToAdminEntryConverter;
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.EntlassungsdatenAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.ArtDerEntlassungDefiningCode;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Coding;
 import java.util.Optional;
@@ -40,7 +40,7 @@ public class EntlassungsdatenAdminEntryConverter extends EncounterToAdminEntryCo
 
             return Optional.of(StationaererVersorgungsfallDefiningCodeMaps.getArtDerEntlassungMap().get(artDerEntlassung.getCode()));
         } else {
-            throw new UnprocessableEntityException("Invalid Code " + artDerEntlassung.getCode() +
+            throw new ConversionException("Invalid Code " + artDerEntlassung.getCode() +
                     " or Code System for mapping of 'art der Entlassung'.");
         }
     }

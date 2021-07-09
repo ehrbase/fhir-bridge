@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningCode;
@@ -112,7 +112,7 @@ public class SpecimenConverter {
 
     private DvIdentifier mapIdentifier(Identifier identifier) {
         if (identifier == null) {
-            throw new UnprocessableEntityException("Unknown identifier");
+            throw new ConversionException("Unknown identifier");
         }
 
         DvIdentifier dvIdentifier = new DvIdentifier();

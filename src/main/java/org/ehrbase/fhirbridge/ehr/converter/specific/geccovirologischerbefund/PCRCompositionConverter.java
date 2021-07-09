@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.GECCOVirologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.GeccoVirologischerBefundKategorieLoincElement;
@@ -36,7 +36,7 @@ public class PCRCompositionConverter extends ObservationToCompositionConverter<G
             case "amended":
                 return StatusDefiningCode.GEAENDERT;
             default:
-                throw new UnprocessableEntityException("createStatusDefiningCode failed. Code not found for: " + fhirStatus.toString());
+                throw new ConversionException("createStatusDefiningCode failed. Code not found for: " + fhirStatus.toString());
         }
     }
 

@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.BefundObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
@@ -36,7 +36,7 @@ public class PCRObservationConverter extends ObservationToObservationConverter<B
                 analyt.setNachweisDefiningCode(NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE);
                 break;
             default:
-                throw new UnprocessableEntityException("Value code " + observation.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
+                throw new ConversionException("Value code " + observation.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
         }
         analyt.setErgebnisStatusValue(observation.getStatus().toCode());
         labortestPanel.setProAnalyt(analyt);
