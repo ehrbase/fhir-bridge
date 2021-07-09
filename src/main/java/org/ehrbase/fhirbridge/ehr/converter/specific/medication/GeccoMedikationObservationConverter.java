@@ -42,7 +42,7 @@ public abstract class GeccoMedikationObservationConverter<E extends EntryEntity>
     }
 
     protected Optional<GrundDefiningCode> getGrundDefiningCode(MedicationStatement resource) {
-        if (resource.hasReasonCode() && resource.getReasonCode().size()>1 && resource.getReasonCode().get(0).hasCoding()) {
+        if (resource.hasReasonCode() && resource.getReasonCode().size()>0 && resource.getReasonCode().get(0).hasCoding()) {
             for (Coding coding : resource.getReasonCode().get(0).getCoding()) {
                 if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
                     return mapGrundDefiningCode(coding);
