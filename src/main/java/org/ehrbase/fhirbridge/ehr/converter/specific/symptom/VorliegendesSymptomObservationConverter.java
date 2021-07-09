@@ -19,6 +19,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToObservationConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.KrankheitsanzeichenCode;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.SchweregradSymptomCode;
@@ -39,9 +40,9 @@ public class VorliegendesSymptomObservationConverter extends ConditionToObservat
         VorliegendesSymptomObservation result = new VorliegendesSymptomObservation();
         result.setNameDesSymptomsKrankheitsanzeichens(convertCode(condition));
         result.setAnatomischeLokalisation(convertBodySites(condition));
-//        result.setBeginnDerEpisodeValue(convertOnSet(condition));
+        result.setBeginnDerEpisodeValue(TimeConverter.convertConditionOnset(condition));
         convertSeverity(condition).ifPresent(result::setSchweregrad);
-//        result.setDatumUhrzeitDesRueckgangsValue(convertAbatement(condition));
+        TimeConverter.convertConditionAbatementTime(condition).ifPresent(result::setDatumUhrzeitDesRueckgangsValue);
         return result;
     }
 
