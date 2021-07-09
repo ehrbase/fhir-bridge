@@ -4,7 +4,7 @@ import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConv
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.HerzfrequenzComposition;
 import org.hl7.fhir.r4.model.Observation;
 
-public class HeartRateCompositionConverter extends ObservationToCompositionConverter<HerzfrequenzComposition> {
+public class HerzfrequenzCompositionConverter extends ObservationToCompositionConverter<HerzfrequenzComposition> {
     @Override
     protected HerzfrequenzComposition convertInternal(Observation resource) {
         HerzfrequenzComposition result = new HerzfrequenzComposition();

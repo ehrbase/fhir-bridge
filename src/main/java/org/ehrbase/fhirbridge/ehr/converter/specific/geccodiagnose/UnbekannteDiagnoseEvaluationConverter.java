@@ -13,11 +13,17 @@ public class UnbekannteDiagnoseEvaluationConverter extends EntryEntityConverter<
     protected UnbekannteDiagnoseEvaluation convertInternal(Condition condition) {
         UnbekannteDiagnoseEvaluation unbekannteDiagnose = new UnbekannteDiagnoseEvaluation();
         unbekannteDiagnose.setAussageUeberDieFehlendeInformationDefiningCode(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
-        Coding problem = condition.getCode().getCoding().get(0);
-        if (problem.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
-                GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().containsKey(problem.getCode())) {
-            unbekannteDiagnose.setUnbekannteDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().get(problem.getCode()));
-        }
+        mapProblem(condition, unbekannteDiagnose);
+
         return unbekannteDiagnose;
+    }
+
+    private void mapProblem(Condition condition, UnbekannteDiagnoseEvaluation unbekannteDiagnose) {
+        for(Coding coding : condition.getCode().getCoding()){
+            if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
+                    GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().containsKey(coding.getCode())) {
+                unbekannteDiagnose.setUnbekannteDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().get(coding.getCode()));
+            }
+        }
     }
 }
