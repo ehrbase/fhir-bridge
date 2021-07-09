@@ -29,27 +29,35 @@ public class HeartRateIT extends AbstractMappingTestSetupIT {
         super("Observation/HeartRate/", Observation.class);
     }
 
-    @Test
-    void mappingYesEudraCT() throws  IOException {
-        testMapping("create-clinical-trial-participation-yes-eudract.json",
-                "paragon-clinical-trial-participation-yes-eudract.json");
-    }
-
-    // #####################################################################################
-    // check exceptions
 
     @Test
-    void createInvalidSystem() throws IOException {
-        // copy of yes-eudract, manipulated line 71
-        Exception exception = executeMappingException("create-clinical-trial-participation-yes-eudract-invalid-system.json");
-        assertEquals("The system is not correct. It should be 'http://snomed.info/sct', but it was 'http://loinc.org'.", exception.getMessage());
+    void create() throws IOException {
+        create("create-heart-rate.json");
     }
 
     @Test
-    void createInvalidCode() throws IOException {
-        // copy of yes-eudract, manipulated line 70
-        Exception exception = executeMappingException("create-clinical-trial-participation-yes-eudract-invalid-code.json");
-        assertEquals("value code 99 is not supported", exception.getMessage());
+    void mappingCreateHeartRate() throws  IOException {
+        testMapping("create-heart-rate.json",
+                "paragon-create-heart-rate.json");
+    }
+
+    @Test
+    void mappingCreateHeartRateDateTime() throws  IOException {
+        testMapping("create-heart-rate-loinc-datetime.json",
+                "paragon-create-heart-rate-loinc-datetime.json");
+    }
+
+    @Test
+    void mappingCreateHeartRatePeriod1() throws  IOException {
+        testMapping("create-heart-rate-loinc-period.json",
+                "paragon-create-heart-rate-loinc-period.json");
+    }
+
+
+    @Test
+    void mappingCreateHeartRatePeriod2() throws  IOException {
+        testMapping("create-heart-rate-loinc-period_2.json",
+                "paragon-create-heart-rate-loinc-period_2.json");
     }
 
     // #####################################################################################

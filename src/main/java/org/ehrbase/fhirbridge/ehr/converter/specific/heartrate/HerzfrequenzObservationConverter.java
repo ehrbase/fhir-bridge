@@ -15,6 +15,7 @@ public class HerzfrequenzObservationConverter extends ObservationToObservationCo
     protected HerzfrequenzObservation convertInternal(Observation resource) {
         HerzfrequenzObservation herzfrequenzObservation = new HerzfrequenzObservation();
         getValue(resource).ifPresent(herzfrequenzObservation::setFrequenzMagnitude);
+        getUnit(resource).ifPresent(herzfrequenzObservation::setFrequenzUnits);
         return herzfrequenzObservation;
     }
 
