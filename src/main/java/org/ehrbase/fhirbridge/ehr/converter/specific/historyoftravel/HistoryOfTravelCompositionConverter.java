@@ -4,11 +4,17 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KategorieDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.SNOMED;
@@ -76,6 +82,10 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         if (!code.equals(expectedKategorie.getCode())) {
             throw new UnprocessableEntityException("Categorie can't be set. Wrong code! Expected " + expectedKategorie.getCode() + ". Received" + code + "' instead");
         }
-        composition.setKategorie(List.of(element));
+        element.setValue(expectedKategorie.getValue());
+
+        List<ReisehistorieKategorieElement> kategorieList = new ArrayList<>();
+        kategorieList.add(element);
+        composition.setKategorie(kategorieList);
     }
 }
