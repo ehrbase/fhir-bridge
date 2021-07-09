@@ -54,13 +54,17 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
     private void mapSeverity(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         if (condition.hasSeverity()) {
             for (Coding coding : condition.getSeverity().getCoding()) {
-                if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().containsKey(coding.getCode())) {
-                    vorliegendeDiagnose.setSchweregradDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().get(coding.getCode()));
-                    isEmpty = false;
-                } else {
-                    throw new UnprocessableEntityException("Severity contains either a wrong code or code system.");
-                }
+                convertSevertiy(coding, vorliegendeDiagnose);
             }
+        }
+    }
+
+    private void convertSevertiy(Coding coding, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
+        if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().containsKey(coding.getCode())) {
+            vorliegendeDiagnose.setSchweregradDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().get(coding.getCode()));
+            isEmpty = false;
+        } else {
+            throw new UnprocessableEntityException("Severity contains either a wrong code or code system.");
         }
     }
 

@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
@@ -43,14 +42,18 @@ public class GECCODiagnoseCompositionConverter extends ConditionToCompositionCon
     private void mapVerficationStatus(Condition resource, Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose, GECCODiagnoseComposition composition) {
         for (Coding coding : resource.getVerificationStatus().getCoding()) {
             if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-                if (coding.getCode().equals(VERIFICATION_STATUS_PRESENT_CODE)) {
-                    vorliegendeDiagnose.ifPresent(composition::setVorliegendeDiagnose);
-                } else if (coding.getCode().equals(VERIFICATION_STATUS_ABSENT_CODE)) {
-                    composition.setAusgeschlosseneDiagnose(new AusgeschlosseneDiagnoseConverter().convert(resource));
-                } else {
-                    throw new UnprocessableEntityException("SNOMED code is invalid in VerificationStatus.coding.code");
-                }
+               determineIfDiagnosePresent(coding, vorliegendeDiagnose, composition, resource);
             }
+        }
+    }
+
+    private void determineIfDiagnosePresent(Coding coding, Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose, GECCODiagnoseComposition composition, Condition resource) {
+        if (coding.getCode().equals(VERIFICATION_STATUS_PRESENT_CODE)) {
+            vorliegendeDiagnose.ifPresent(composition::setVorliegendeDiagnose);
+        } else if (coding.getCode().equals(VERIFICATION_STATUS_ABSENT_CODE)) {
+            composition.setAusgeschlosseneDiagnose(new AusgeschlosseneDiagnoseConverter().convert(resource));
+        } else {
+            throw new UnprocessableEntityException("SNOMED code is invalid in VerificationStatus.coding.code");
         }
     }
 
