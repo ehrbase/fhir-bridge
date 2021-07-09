@@ -1,15 +1,15 @@
 {
   "resourceType": "Observation",
-  "id": "162918dc-dc70-4767-a6d5-34c7d67e280a",
+  "id": "example-observation-bladder-temperature",
   "meta": {
-    "profile": [
+    "profile":  [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-temperature"
     ]
   },
-  "identifier": [
+  "identifier":  [
     {
       "type": {
-        "coding": [
+        "coding":  [
           {
             "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
             "code": "OBI"
@@ -23,10 +23,10 @@
       }
     }
   ],
-  "status": "corrected",
-  "category": [
+  "status": "final",
+  "category":  [
     {
-      "coding": [
+      "coding":  [
         {
           "system": "http://terminology.hl7.org/CodeSystem/observation-category",
           "code": "vital-signs"
@@ -35,16 +35,26 @@
     }
   ],
   "code": {
-    "coding": [
+    "coding":  [
       {
         "system": "http://loinc.org",
         "code": "8310-5",
         "display": "Body temperature"
       },
       {
+        "system": "http://loinc.org",
+        "code": "8334-5",
+        "display": "Body temperature - Urinary bladder"
+      },
+      {
         "system": "http://snomed.info/sct",
         "code": "386725007",
         "display": "Body temperature (observable entity)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "698832009",
+        "display": "Core body temperature measured at urinary bladder (observable entity)"
       }
     ],
     "text": "Body temperature"
@@ -55,11 +65,20 @@
       "value": "{{patientId}}"
     }
   },
-  "effectiveDateTime": "2020-09-25",
+  "effectiveDateTime": "2021-04-14",
   "valueQuantity": {
     "value": 36.8,
     "unit": "°C",
     "system": "http://unitsofmeasure.org",
     "code": "Cel"
+  },
+  "bodySite": {
+    "coding":  [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "89837001",
+        "display": "Urinary bladder structure (body structure)"
+      }
+    ]
   }
 }
