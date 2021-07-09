@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.medication;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.AceHemmerObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.AntikoagulanzienObservationConverter;
@@ -46,7 +46,7 @@ public class GECCOMedikationCompositionConverter extends MedicationStatementToCo
         }else if(KategorieDefiningCode.PATIENT_SPECIFIED.getCode().equals(category)){
             return Optional.of(KategorieDefiningCode.PATIENT_SPECIFIED);
         }else{
-            throw new UnprocessableEntityException("The category code" +category+ "is not supported by the Fhir bridge");
+            throw new ConversionException("The category code" +category+ "is not supported by the Fhir bridge");
         }
     }
 
@@ -66,7 +66,7 @@ public class GECCOMedikationCompositionConverter extends MedicationStatementToCo
                 geccoMedikationComposition.setImmunglobuline(new ImmunglobulineObservationConverter().convert(resource));
                 break;
             default:
-                throw new UnprocessableEntityException("The profile " + resourceUrl + " is not supported by the FHIR bridge for MedicationStatements");
+                throw new ConversionException("The profile " + resourceUrl + " is not supported by the FHIR bridge for MedicationStatements");
         }
     }
 }

@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.generalinformation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
@@ -26,7 +26,7 @@ public class KontaktActionConverter extends QuestionnaireResponseItemToActionCon
         }else if(questionnaireResponseItemComponent.getLinkId().equals(CZ)){
             mapDateOfContactInfected(getValueAsDate(questionnaireResponseItemComponent).get());
         } else {
-            throw new UnprocessableEntityException("LinkId " + questionnaireResponseItemComponent.getLinkId() + " undefined");
+            throw new ConversionException("LinkId " + questionnaireResponseItemComponent.getLinkId() + " undefined");
         }
         return kontaktAction;
     }

@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.sofascore;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreObservation;
 import org.hl7.fhir.r4.model.Coding;
@@ -43,7 +43,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 return component;
             }
         }
-        throw new UnprocessableEntityException("The component with code '" + code + "' is not present");
+        throw new ConversionException("The component with code '" + code + "' is not present");
     }
 
     private boolean codeOfComponentMatchesCode(Observation.ObservationComponentComponent component, String code) {
@@ -82,7 +82,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 sofaScore.setNierenfunktion(SofaScoreCode.NIERENFUNKTIONS_SCORE_4.getValue());
                 break;
             default:
-                throw new UnprocessableEntityException("The code " + nierenfunktionsCode + " is not valid for the Kidney Score");
+                throw new ConversionException("The code " + nierenfunktionsCode + " is not valid for the Kidney Score");
         }
     }
 
@@ -105,7 +105,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 sofaScore.setBlutgerinnung(SofaScoreCode.BLUTGERINNUNGS_SCORE_4.getValue());
                 break;
             default:
-                throw new UnprocessableEntityException("The code " + blutgerinnungsCode + " is not valid for the Blood clotting score");
+                throw new ConversionException("The code " + blutgerinnungsCode + " is not valid for the Blood clotting score");
         }
     }
 
@@ -128,7 +128,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 sofaScore.setLeberfunktion(SofaScoreCode.LEBERFUNKTIONS_SCORE_4.getValue());
                 break;
             default:
-                throw new UnprocessableEntityException("The code " + leberfunktionsCode + " is not valid for the Liver score");
+                throw new ConversionException("The code " + leberfunktionsCode + " is not valid for the Liver score");
         }
     }
 
@@ -144,7 +144,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
         } else if (nervensystemCode.equals("cvs4")) {
             sofaScore.setKardiovaskulaeresSystem(SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_4.getValue());
         } else {
-            throw new UnprocessableEntityException("Either the code " + herzKreislaufSystemCode + " or " + nervensystemCode + " is not valid for the cardiovaskular score");
+            throw new ConversionException("Either the code " + herzKreislaufSystemCode + " or " + nervensystemCode + " is not valid for the cardiovaskular score");
         }
 
     }
@@ -169,7 +169,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 sofaScore.setRespiration(SofaScoreCode.ATEMFREQUENZ_SCORE_4.getValue());
                 break;
             default:
-                throw new UnprocessableEntityException("The code " + atemtaetigkeitCode + " is not valid for the Breath Score");
+                throw new ConversionException("The code " + atemtaetigkeitCode + " is not valid for the Breath Score");
         }
     }
 
@@ -191,7 +191,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 sofaScore.setZentralesNervensystem(SofaScoreCode.NERVENSYSTEM_SCORE_4.getValue());
                 break;
             default:
-                throw new UnprocessableEntityException("The code " + nervensystemCode + " is not valid for the Nerves Score");
+                throw new ConversionException("The code " + nervensystemCode + " is not valid for the Nerves Score");
         }
     }
 
@@ -199,7 +199,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
 
     private void checkIfEmpty(Observation.ObservationComponentComponent component, String name) {
         if (component.getValueCodeableConcept().getCoding().isEmpty()) {
-            throw new UnprocessableEntityException("The component " + name + " doesn't have a code");
+            throw new ConversionException("The component " + name + " doesn't have a code");
         }
 
     }

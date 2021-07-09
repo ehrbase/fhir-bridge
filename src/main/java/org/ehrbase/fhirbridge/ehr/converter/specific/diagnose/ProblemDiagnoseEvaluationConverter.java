@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.diagnose;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.AnatomischeLokalisationCluster;
@@ -64,7 +63,7 @@ public class ProblemDiagnoseEvaluationConverter extends EntryEntityConverter<Con
     private ProblemDiagnoseSchweregradChoice getSchweregrad(Coding fhirSeverity) {
         SchweregradDefiningCode openEHRSeverity;
         if (!fhirSeverity.getSystem().equalsIgnoreCase("http://snomed.info/sct")) {
-            throw new UnprocessableEntityException("severity code system should be http://snomed.info/sct, found " + fhirSeverity.getSystem());
+            throw new ConversionException("severity code system should be http://snomed.info/sct, found " + fhirSeverity.getSystem());
         }
         switch (fhirSeverity.getCode()) {
             case "24484000":

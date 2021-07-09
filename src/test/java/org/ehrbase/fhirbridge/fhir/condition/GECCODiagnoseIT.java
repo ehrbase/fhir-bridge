@@ -118,31 +118,31 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
     @Test
     void createDiagnoseInvalidVerificationStatus() throws IOException {
         Exception exception = executeMappingException("invalid/invalid-verification-status.json");
-        assertEquals("Cant identify the verification status", exception.getMessage());
+        assertEquals("SNOMED code is invalid in VerificationStatus.coding.code", exception.getMessage());
     }
 
     @Test
     void createDiagnoseInvalidKategorie() throws IOException {
         Exception exception = executeMappingException("invalid/invalid-kategorie.json");
-        assertEquals("Category not present", exception.getMessage());
+        assertEquals("Category has either no or an unsupported SNOMED code", exception.getMessage());
     }
 
     @Test
     void createDiagnoseInvalidBodySite() throws IOException {
         Exception exception = executeMappingException("invalid/invalid-body-site.json");
-        assertEquals("Body site not processable.", exception.getMessage());
+        assertEquals("Bodysite contains either a wrong code or code system.", exception.getMessage());
     }
 
     @Test
     void createDiagnoseInvalidSeverity() throws IOException {
         Exception exception = executeMappingException("invalid/invalid-severity.json");
-        assertEquals("Severity not processable.", exception.getMessage());
+        assertEquals("Severity contains either a wrong code or code system.", exception.getMessage());
     }
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Condition condition = (Condition) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () -> {
+        return assertThrows(Exception.class, () -> {
             (new GECCODiagnoseCompositionConverter()).convert(condition);
         });
     }

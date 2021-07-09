@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.medication;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.StatusCluster;
@@ -52,7 +52,7 @@ public abstract class GeccoMedikationObservationConverter<E extends EntryEntity>
         } else if (fhirStatus.equals(StatusDefiningCode2.UNBEKANNT.getValue()) || fhirStatus.equals("unknown")) {
             statusCluster.setStatusDefiningCode(StatusDefiningCode2.UNBEKANNT);
         } else {
-            throw new UnprocessableEntityException("Invalid Status code " + fhirStatus);
+            throw new ConversionException("Invalid Status code " + fhirStatus);
         }
         return statusCluster;
     }
