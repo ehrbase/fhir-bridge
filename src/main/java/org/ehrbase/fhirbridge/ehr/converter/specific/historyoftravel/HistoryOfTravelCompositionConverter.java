@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
@@ -23,13 +22,14 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
     @Override
     public ReisehistorieComposition convertInternal(@NonNull Observation resource) {
         ReisehistorieComposition composition = new ReisehistorieComposition();
-
         mapStatus(composition, resource);
         mapKategorie(composition, resource);
+        setReisehistorieType(composition, resource);
+        return (composition);
+    }
 
+    private void setReisehistorieType(ReisehistorieComposition composition, Observation resource) {
         String code = getSnomedCodeObservation(resource);
-        // check for general travel state
-
         if (code.equals(ReiseAngetretenDefiningCode.YES_QUALIFIER_VALUE.getCode())) {
             composition.setReisehistorie(new ReisehistorieAdminEntryConverter().convert(resource));
         } else if (code.equals(AussageUeberDenAusschlussDefiningCode.NO_QUALIFIER_VALUE.getCode())) {
@@ -39,20 +39,16 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         } else {
             throw new ConversionException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
         }
-        return (composition);
     }
 
-    private void checkForSnomedSystem(String systemCode) {
-        if (!SNOMED.getUrl().equals(systemCode)) {
-            throw new ConversionException("The system is not correct. " +
-                    "It should be '" + SNOMED.getUrl() + "', but it was '" + systemCode + "'.");
-        }
-    }
 
     private String getSnomedCodeObservation(Observation fhirObservation) {
-        Coding code = fhirObservation.getValueCodeableConcept().getCoding().get(0);
-        checkForSnomedSystem(code.getSystem());
-        return code.getCode();
+        if (fhirObservation.getValueCodeableConcept().getCoding().get(0).getSystem().equals(SNOMED.getUrl())) {
+            return fhirObservation.getValueCodeableConcept().getCoding().get(0).getCode();
+        } else {
+            throw new ConversionException("The system is not correct. " +
+                    "It should be '" + SNOMED.getUrl() + "', but it was '" + fhirObservation.getValueCodeableConcept().getCoding().get(0).getSystem() + "'.");
+        }
     }
 
     private void mapStatus(ReisehistorieComposition composition, Observation resource) {
@@ -71,9 +67,7 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
     }
 
     private void mapKategorie(ReisehistorieComposition composition, Observation resource) {
-
         ReisehistorieKategorieElement element = new ReisehistorieKategorieElement();
-
         Coding coding = resource.getCategory().get(0).getCoding().get(0);
         String code = coding.getCode();
         String system = coding.getSystem();
@@ -86,7 +80,6 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         if (!code.equals(expectedKategorie.getCode())) {
             throw new ConversionException("Categorie can't be set. Wrong code! Expected " + expectedKategorie.getCode() + ". Received" + code + "' instead");
         }
-
         element.setValue(expectedKategorie.getValue());
 
         List<ReisehistorieKategorieElement> kategorieList = new ArrayList<>();
