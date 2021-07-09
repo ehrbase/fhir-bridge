@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
@@ -57,6 +58,8 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
                 if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().containsKey(coding.getCode())) {
                     vorliegendeDiagnose.setSchweregradDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().get(coding.getCode()));
                     isEmpty = false;
+                } else {
+                    throw new UnprocessableEntityException("Severity contains either a wrong code or code system.");
                 }
             }
         }
@@ -70,6 +73,8 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
                     korperstelleCluster.setNameDerKoerperstelleDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKoerperstelleMap().get(bodySite.getCode()));
                     addKoerperstelleCluster(korperstelleCluster, vorliegendeDiagnose);
                     isEmpty = false;
+                } else {
+                    throw new UnprocessableEntityException("Bodysite contains either a wrong code or code system.");
                 }
             }
         }
