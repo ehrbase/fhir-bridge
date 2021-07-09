@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
+package org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition;
 
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
 
