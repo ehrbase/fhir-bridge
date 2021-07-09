@@ -53,11 +53,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createHeartRate() throws IOException {
-        create("create-heart-rate.json");
-    }
-
-    @Test
     void createPatientInIcu() throws IOException {
         create("create-patient-in-icu.json");
     }
