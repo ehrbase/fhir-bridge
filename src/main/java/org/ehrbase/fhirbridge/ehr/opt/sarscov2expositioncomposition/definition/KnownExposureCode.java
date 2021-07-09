@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure;
+package org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition;
 
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.SNOMED;
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.HL7_DATA_ABSENT_REASON;
