@@ -16,6 +16,7 @@ public class Covid19TherapieObservationConverter extends GeccoMedikationObservat
     protected Covid19TherapieObservation convertInternal(MedicationStatement resource) {
         Covid19TherapieObservation covid19TherapieObservation = new Covid19TherapieObservation();
         covid19TherapieObservation.setArzneimittelNameDefiningCode(getArzneimittelName(resource));
+        getGrundDefiningCode(resource).ifPresent(covid19TherapieObservation::setGrundDefiningCode);
         return covid19TherapieObservation;
     }
 
