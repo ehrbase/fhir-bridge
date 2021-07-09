@@ -64,7 +64,7 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
                 && resource.getProtocolApplied().get(0).getTargetDisease().get(0).getCoding().get(0).getSystem().equals(CodeSystem.SNOMED.getUrl())) {
             impfungAction.setImpfungGegen(List.of(mapImpfungGegen(resource)));
         } else {
-            throw new ConversionException("Target Disease System is wrong, has to be SNOMED.");
+            throw new ConversionException("Target disease system is wrong, has to be SNOMED.");
         }
     }
 
@@ -75,7 +75,7 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
             impfungImpfungGegenElement.setValue(ImpfungGegenDefiningCode.getCodesAsMap().get(snomedCode));
             return impfungImpfungGegenElement;
         } else {
-            throw new ConversionException("Invalid Snomed Code " + snomedCode + " entered");
+            throw new ConversionException("Invalid Snomed code " + snomedCode + " entered");
         }
     }
 
