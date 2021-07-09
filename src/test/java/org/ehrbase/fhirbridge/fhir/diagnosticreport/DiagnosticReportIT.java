@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.diagnosticreport;
 
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.DiagnosticReport;
@@ -33,7 +33,7 @@ class DiagnosticReportIT extends AbstractMappingTestSetupIT {
     void createWithDefaultProfile() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-diagnosticReport-with-default-profile.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        Exception exception = Assertions.assertThrows(ConversionException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : Default profile is not supported for DiagnosticReport. One of the following profiles is expected: " +
                 "[https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnostic-report-radiology]", exception.getMessage());
@@ -44,7 +44,7 @@ class DiagnosticReportIT extends AbstractMappingTestSetupIT {
         String resource = super.testFileLoader.loadResourceToString("create-diagnosticReport-with-invalid-code.json");
 
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        Exception exception = Assertions.assertThrows(ConversionException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : This element does not match any known slice defined in the profile https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab", exception.getMessage());
     }
@@ -60,7 +60,7 @@ class DiagnosticReportIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         DiagnosticReport diagnosticReport = (DiagnosticReport) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () -> {
+        return assertThrows(ConversionException.class, () -> {
            // new YourConverter().convert(@NonNull  radiologyReport);
         });
     }

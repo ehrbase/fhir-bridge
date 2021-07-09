@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation.ClinicalTrialParticipationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.GECCOStudienteilnahmeComposition;
@@ -108,7 +108,7 @@ public class ClinicalTrialParticipationIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () ->
+        return assertThrows(ConversionException.class, () ->
                 new ClinicalTrialParticipationCompositionConverter().convert(obs)
         );
     }

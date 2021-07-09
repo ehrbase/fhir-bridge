@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.questionnaireresponse;
 
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
@@ -71,7 +71,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
     void createInvalid() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-invalid.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        Exception exception = Assertions.assertThrows(ConversionException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : QuestionnaireResponse.status: minimum required = 1, but only found 0 (from http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse)", exception.getMessage());
     }
@@ -164,7 +164,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         QuestionnaireResponse questionnaireResponse = (QuestionnaireResponse) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () -> {
+        return assertThrows(ConversionException.class, () -> {
             new D4lQuestionnaireCompositionConverter().convert(questionnaireResponse);
         });
     }

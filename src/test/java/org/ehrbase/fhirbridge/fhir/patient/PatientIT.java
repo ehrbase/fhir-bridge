@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.patient;
 
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.GECCOPersonendatenComposition;
@@ -50,7 +50,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     void createInvalid() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-patient-invalid.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        Exception exception = Assertions.assertThrows(ConversionException.class, createTyped::execute);
         //NOTE why is my local message different from CI?
         assertEquals("HTTP 422 : Extension.extension:dateTimeOfDocumentation: minimum required = 1, but only found 0 (from https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age)", exception.getMessage());
     }
@@ -59,7 +59,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     void createInvalidBirth() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-patient-invalid-birth.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        Exception exception = Assertions.assertThrows(ConversionException.class, createTyped::execute);
         assertEquals("HTTP 422 : Getting datenZurGeburt failed: null", exception.getMessage());
     }
 
@@ -67,7 +67,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     void createInvalidEthnic() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-patient-invalid-ethnic.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        Exception exception = Assertions.assertThrows(ConversionException.class, createTyped::execute);
         assertEquals("HTTP 422 : Getting ethnicGroup failed: null", exception.getMessage());
     }
 
@@ -75,7 +75,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     void createWithDefaultProfile() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-patient-with-default-profile.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
+        Exception exception = Assertions.assertThrows(ConversionException.class, createTyped::execute);
 
         assertEquals("HTTP 422 : Default profile is not supported for Patient. One of the following profiles is expected: " +
                 "[https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient]", exception.getMessage());
@@ -84,7 +84,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Patient patient = (Patient) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () ->
+        return assertThrows(ConversionException.class, () ->
             new PatientCompositionConverter().convert((patient))
         );
     }

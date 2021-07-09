@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ImmunizationToActionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.CurrentStateDefiningCode;
@@ -36,7 +36,7 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
         } else if (statusCode.equals(CurrentStateDefiningCode.ACTIVE.getValue())) {
             return CurrentStateDefiningCode.ACTIVE;
         } else {
-            throw new UnprocessableEntityException("The status code" + statusCode + " is wrong or not supported by the fhir-bridge. Supported are: aborted, completed and active");
+            throw new ConversionException("The status code" + statusCode + " is wrong or not supported by the fhir-bridge. Supported are: aborted, completed and active");
         }
     }
 
@@ -44,7 +44,7 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
         if (resource.hasProtocolApplied()) {
             determineAndSet(resource, impfungAction);
         } else {
-            throw new UnprocessableEntityException("Target Disease code and dose missing");
+            throw new ConversionException("Target Disease code and dose missing");
         }
     }
 
@@ -64,7 +64,7 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
                 && resource.getProtocolApplied().get(0).getTargetDisease().get(0).getCoding().get(0).getSystem().equals(CodeSystem.SNOMED.getUrl())) {
             impfungAction.setImpfungGegen(List.of(mapImpfungGegen(resource)));
         } else {
-            throw new UnprocessableEntityException("Target Disease System is wrong, has to be SNOMED.");
+            throw new ConversionException("Target Disease System is wrong, has to be SNOMED.");
         }
     }
 
@@ -75,7 +75,7 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
             impfungImpfungGegenElement.setValue(ImpfungGegenDefiningCode.getCodesAsMap().get(snomedCode));
             return impfungImpfungGegenElement;
         } else {
-            throw new UnprocessableEntityException("Invalid Snomed Code " + snomedCode + " entered");
+            throw new ConversionException("Invalid Snomed Code " + snomedCode + " entered");
         }
     }
 
@@ -114,7 +114,7 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
         if (ImpfstoffDefiningCode.getCodesAsMap().containsKey(code)) {
             return ImpfstoffDefiningCode.getCodesAsMap().get(code);
         } else {
-            throw new UnprocessableEntityException("Invalid Code or vaccineCode" + code + " entered");
+            throw new ConversionException("Invalid Code or vaccineCode" + code + " entered");
         }
     }
 }

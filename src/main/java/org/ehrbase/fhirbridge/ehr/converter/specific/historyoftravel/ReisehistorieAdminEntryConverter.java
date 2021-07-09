@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.BundeslandRegionDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.LandDefiningCode;
@@ -68,7 +68,7 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
             } else if (code.equals(LOINC_COUNTRY_OF_TRAVEL.getCode())) {
                 travel.setLandDefiningCode(getLand(observationComponent));
             } else {
-                throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":" + code + "' instead");
+                throw new ConversionException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":" + code + "' instead");
             }
         }
         return List.of(travel);
@@ -94,7 +94,7 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
 
     private void checkForLoincSystem(String systemCode) {
         if (!LOINC.getUrl().equals(systemCode)) {
-            throw new UnprocessableEntityException("The system is not correct. " +
+            throw new ConversionException("The system is not correct. " +
                     "It should be '" + LOINC.getUrl() + "', but it was '" + systemCode + "'.");
         }
     }
