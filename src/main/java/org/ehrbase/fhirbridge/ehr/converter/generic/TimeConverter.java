@@ -62,7 +62,13 @@ public class TimeConverter {
     public static TemporalAccessor convertConditionTime(Condition condition) {
         if (condition.hasRecordedDateElement()) {
             return condition.getRecordedDateElement().getValueAsCalendar().toZonedDateTime();
-        } else if (condition.hasOnset() && condition.hasOnsetDateTimeType()) {
+        } else {
+            return convertConditionOnset(condition);
+        }
+    }
+
+    public static TemporalAccessor convertConditionOnset(Condition condition) {
+        if (condition.hasOnset() && condition.hasOnsetDateTimeType()) {
             return condition.getOnsetDateTimeType().getValueAsCalendar().toZonedDateTime();
         } else if (condition.hasOnset() && condition.hasOnsetPeriod()) {
             return condition.getOnsetPeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
@@ -90,12 +96,12 @@ public class TimeConverter {
     }
 
     private static Optional<TemporalAccessor> parseConditionAge(Condition condition) {
-        try{
-        double yearToday = ZonedDateTime.now().getYear();
-        double age = condition.getAbatementAge().getValue().doubleValue();
-        double abatement = yearToday - age;
-        return Optional.of(ZonedDateTime.now().toLocalDateTime().withYear((int) abatement));
-        }catch(Exception exception){
+        try {
+            double yearToday = ZonedDateTime.now().getYear();
+            double age = condition.getAbatementAge().getValue().doubleValue();
+            double abatement = yearToday - age;
+            return Optional.of(ZonedDateTime.now().toLocalDateTime().withYear((int) abatement));
+        } catch (Exception exception) {
             LOG.warn("The mapping of Age failed, instead nothing is used for abatement, for precise mappings please use a real date time the DateTimeType");
             return Optional.empty();
         }

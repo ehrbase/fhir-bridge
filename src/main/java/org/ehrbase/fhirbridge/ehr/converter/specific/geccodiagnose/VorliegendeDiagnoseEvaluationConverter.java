@@ -49,7 +49,6 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
             vorliegendeDiagnose.setDatumZeitpunktDerGenesungValue(TimeConverter.convertConditionAbatementTime(condition).get());
             isEmpty = false;
         }
-
     }
 
     private void mapSeverity(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
