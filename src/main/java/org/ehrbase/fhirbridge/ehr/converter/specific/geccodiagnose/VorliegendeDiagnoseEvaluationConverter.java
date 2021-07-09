@@ -1,8 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KoerperstelleCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
@@ -41,12 +40,12 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
     }
 
     private void mapDates(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
-        if (condition.getOnsetDateTimeType() != null && condition.getOnsetDateTimeType().getValueAsCalendar() != null) {
-            vorliegendeDiagnose.setDatumZeitpunktDesAuftretensDerErstdiagnoseValue(condition.getOnsetDateTimeType().getValueAsCalendar().toZonedDateTime());
+        if (condition.hasOnset()) {
+            vorliegendeDiagnose.setDatumZeitpunktDesAuftretensDerErstdiagnoseValue(TimeConverter.convertConditionTime(condition));
             isEmpty = false;
         }
-        if (condition.getAbatementDateTimeType() != null && condition.getAbatementDateTimeType().getValueAsCalendar() != null) {
-            vorliegendeDiagnose.setDatumZeitpunktDerGenesungValue(condition.getAbatementDateTimeType().getValueAsCalendar().toZonedDateTime());
+        if (condition.hasAbatement() && TimeConverter.convertConditionAbatementTime(condition).isPresent()) {
+            vorliegendeDiagnose.setDatumZeitpunktDerGenesungValue(TimeConverter.convertConditionAbatementTime(condition).get());
             isEmpty = false;
         }
 
