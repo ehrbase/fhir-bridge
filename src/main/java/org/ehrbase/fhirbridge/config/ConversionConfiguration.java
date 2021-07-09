@@ -33,7 +33,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung.DnrAnordnungCo
 import org.ehrbase.fhirbridge.ehr.converter.specific.fio2.FiO2CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund.PCRCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HeartRateCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HerzfrequenzCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus.ImpfstatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
@@ -126,7 +126,7 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.CLINICAL_TRIAL_PARTICIPATION, new ClinicalTrialParticipationCompositionConverter());
         conversionService.registerConverter(Profile.CORONAVIRUS_NACHWEIS_TEST, new CoronavirusNachweisTestCompositionConverter());
         conversionService.registerConverter(Profile.FIO2, new FiO2CompositionConverter());
-        conversionService.registerConverter(Profile.HEART_RATE, new HeartRateCompositionConverter());
+        conversionService.registerConverter(Profile.HEART_RATE, new HerzfrequenzCompositionConverter());
         conversionService.registerConverter(Profile.KNOWN_EXPOSURE, new SarsCov2KnownExposureCompositionConverter());
         conversionService.registerConverter(Profile.PATIENT_DISCHARGE, new PatientDischargeCompositionConverter());
         conversionService.registerConverter(Profile.PATIENT_IN_ICU, new PatientInIcuCompositionConverter());
