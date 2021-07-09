@@ -15,6 +15,7 @@ public class ImmunglobulineObservationConverter extends GeccoMedikationObservati
     protected ImmunglobulineObservation convertInternal(MedicationStatement resource) {
         ImmunglobulineObservation immunglobulineObservation = new ImmunglobulineObservation();
         immunglobulineObservation.setArzneimittelNameDefiningCode(getArzneimittelName(resource));
+        getGrundDefiningCode(resource).ifPresent(immunglobulineObservation::setGrundDefiningCode);
         return immunglobulineObservation;
     }
 
