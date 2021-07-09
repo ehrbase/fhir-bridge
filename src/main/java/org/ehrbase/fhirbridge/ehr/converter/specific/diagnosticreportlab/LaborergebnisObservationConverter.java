@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
@@ -31,7 +31,7 @@ public class LaborergebnisObservationConverter extends DiagnosticReportToObserva
             laborbefund.setProLaboranalyt(laboranalytCluster);
             return laborbefund;
         }else{
-            throw new UnprocessableEntityException("The diagnositc report has to contain an observation with the lab values.");
+            throw new ConversionException("The diagnositc report has to contain an observation with the lab values.");
         }
     }
 

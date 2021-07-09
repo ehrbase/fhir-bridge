@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToEvaluationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.GeccoStudienteilnahmeEvaluation;
@@ -50,7 +50,7 @@ public class ClinicalTrialParticipationEvaluationConverter extends ObservationTo
                 geccoStudienteilnahmeEvaluation.setBereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode(BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode.NOT_APPLICABLE_QUALIFIER_VALUE);
                 break;
             default:
-                throw new UnprocessableEntityException("Value code " + resource.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
+                throw new ConversionException("Value code " + resource.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
         }
     }
 
@@ -88,13 +88,13 @@ public class ClinicalTrialParticipationEvaluationConverter extends ObservationTo
         }else if(observationComponent.getCode().getCoding().get(0).getCode().equals("05")) {
             studiePruefungRegistrierungCluster.setRegisternameDefiningCode(RegisternameDefiningCode.NCT_NUMBER);
         }else{
-            throw new UnprocessableEntityException("value code " + observationComponent.getCode().getCoding().get(0).getCode() + " is not supported");
+            throw new ConversionException("value code " + observationComponent.getCode().getCoding().get(0).getCode() + " is not supported");
         }
     }
 
     private void checkForSnomedSystem(String systemCode) {
         if (!SNOMED.getUrl().equals(systemCode)) {
-            throw new UnprocessableEntityException("The system is not correct. " +
+            throw new ConversionException("The system is not correct. " +
                     "It should be '" + SNOMED.getUrl() + "', but it was '" + systemCode + "'.");
         }
     }

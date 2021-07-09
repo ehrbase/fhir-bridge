@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.medicationstatement;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GECCOMedikationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.GECCOMedikationComposition;
@@ -117,7 +117,7 @@ class MedicationStatementIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         MedicationStatement medicationStatement = (MedicationStatement) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () ->
+        return assertThrows(ConversionException.class, () ->
                 new GECCOMedikationCompositionConverter().convert(medicationStatement));
     }
 

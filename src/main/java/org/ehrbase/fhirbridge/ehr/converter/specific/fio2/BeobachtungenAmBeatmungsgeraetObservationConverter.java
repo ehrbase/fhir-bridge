@@ -6,7 +6,6 @@ import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.Beoba
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.EingeatmeterSauerstoffCluster;
 import org.hl7.fhir.r4.model.Observation;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public class BeobachtungenAmBeatmungsgeraetObservationConverter extends ObservationToObservationConverter<BeobachtungenAmBeatmungsgeraetObservation> {

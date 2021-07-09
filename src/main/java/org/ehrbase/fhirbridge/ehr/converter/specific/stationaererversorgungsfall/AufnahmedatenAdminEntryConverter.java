@@ -4,7 +4,7 @@ import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToAdminEntryConvert
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.AufnahmedatenAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.AufnahmeanlassDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.stationaererversorgungsfallcomposition.definition.AufnahmegrundDefiningCode;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Coding;
 import java.util.Optional;
@@ -45,7 +45,7 @@ public class AufnahmedatenAdminEntryConverter extends EncounterToAdminEntryConve
 
             return Optional.of(StationaererVersorgungsfallDefiningCodeMaps.getAufnahmeGrundMap().get(aufnahmeGrund.getCode()));
         } else {
-            throw new UnprocessableEntityException(INVALID_CODE + aufnahmeGrund.getCode() +
+            throw new ConversionException(INVALID_CODE + aufnahmeGrund.getCode() +
                     " or Code System for mapping of 'Aufnahmegrund', valid codes are: 01, 02, 03, 04, 05, 06, 07, 08, 10.");
         }
     }
@@ -67,7 +67,7 @@ public class AufnahmedatenAdminEntryConverter extends EncounterToAdminEntryConve
 
             return Optional.of(StationaererVersorgungsfallDefiningCodeMaps.getAufnahmeAnlassMap().get(aufnahmeAnlass.getCode()));
         } else {
-            throw new UnprocessableEntityException(INVALID_CODE + aufnahmeAnlass.getCode() +
+            throw new ConversionException(INVALID_CODE + aufnahmeAnlass.getCode() +
                     " or Code System for mapping of 'Aufnahmeanlass', valid codes are: N, G, E, A, V, Z, B, R.");
         }
     }
