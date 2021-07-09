@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ProcedureToProcedureActionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
@@ -37,7 +37,7 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
             durchgefuehrteProzedur.setDurchfuehrungsabsichtValue(mapDurchfuhrungsabsicht(procedure));
             durchgefuehrteProzedur.setKommentarValue(procedure.getNote().toString());
 
-        } catch (UnprocessableEntityException e) {
+        } catch (ConversionException e) {
             throw new ConversionException("Some parts of the present procedure did not contain the required elements. "
                     + e.getMessage(), e);
         }
@@ -51,7 +51,7 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
                 KoerperstelleDefiningCode.getCodesAsMap().containsKey(bodySiteCoding.getCode())) {
             durchgefuehrteProzedur.setKoerperstelleDefiningCode(KoerperstelleDefiningCode.getCodesAsMap().get(bodySiteCoding.getCode()));
         } else {
-            throw new UnprocessableEntityException("Invalid body site for PLAIN_RADIOGRAPHY");
+            throw new ConversionException("Invalid body site for PLAIN_RADIOGRAPHY");
         }
     }
 
@@ -66,7 +66,7 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
             durchgefuehrteProzedur.setMedizingeraet(new ArrayList<>());
             durchgefuehrteProzedur.getMedizingeraet().add(medizingeraetCluster);
         } else {
-            throw new UnprocessableEntityException("Invalid medical device code");
+            throw new ConversionException("Invalid medical device code");
         }
     }
 
@@ -82,13 +82,13 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
         return null;
     }
 
-    private NameDerProzedurDefiningCode mapNameDerProzedur(Procedure procedure) throws UnprocessableEntityException {
+    private NameDerProzedurDefiningCode mapNameDerProzedur(Procedure procedure) throws ConversionException {
         Coding coding = procedure.getCode().getCoding().get(0);
 
         if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && NameDerProzedurDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
             return NameDerProzedurDefiningCode.getCodesAsMap().get(coding.getCode());
         } else {
-            throw new UnprocessableEntityException("Invalid name of procedure");
+            throw new ConversionException("Invalid name of procedure");
         }
     }
 }

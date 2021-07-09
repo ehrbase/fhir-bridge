@@ -2,7 +2,7 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.parser.DataFormatException;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.SARSCoV2ExpositionComposition;
@@ -143,7 +143,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () ->
+        return assertThrows(ConversionException.class, () ->
                 new SarsCov2KnownExposureCompositionConverter().convert(obs)
         );
     }

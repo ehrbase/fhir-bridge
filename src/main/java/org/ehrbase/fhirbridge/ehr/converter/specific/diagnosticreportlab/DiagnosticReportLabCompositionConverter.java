@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToCompositionConverter;
@@ -31,7 +31,7 @@ public class DiagnosticReportLabCompositionConverter extends DiagnosticReportToC
             result.setLaborergebnis(laborbefund);
             return result;
         }else{
-            throw new UnprocessableEntityException("One contained Observation was expected " + resource.getContained().size() + " were received in DiagnosticReport " + resource.getId());
+            throw new ConversionException("One contained Observation was expected " + resource.getContained().size() + " were received in DiagnosticReport " + resource.getId());
         }
     }
 
