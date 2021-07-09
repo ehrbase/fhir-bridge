@@ -16,6 +16,7 @@ public class AceHemmerObservationConverter extends GeccoMedikationObservationCon
     protected AceHemmerObservation convertInternal(MedicationStatement resource) {
         AceHemmerObservation aceHemmerObservation = new AceHemmerObservation();
         aceHemmerObservation.setArzneimittelNameDefiningCode(getArzneimittelName(resource));
+        getGrundDefiningCode(resource).ifPresent(aceHemmerObservation::setGrundDefiningCode);
         return aceHemmerObservation;
     }
 
