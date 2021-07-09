@@ -12,9 +12,7 @@ public class SarsCov2KnownExposureCompositionConverter extends ObservationToComp
     @Override
     public SARSCoV2ExpositionComposition  convertInternal(@NonNull Observation resource) {
         SARSCoV2ExpositionComposition composition = new SARSCoV2ExpositionComposition();
-
         mapStatus(composition, resource);
-
         composition.setSarsCov2Exposition(new SarsCov2ExpositionEvaluationConverter().convert(resource));
         return composition;
     }
