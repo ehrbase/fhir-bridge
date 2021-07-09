@@ -5,7 +5,6 @@ import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToEvaluationConve
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.ExpositionVorhandenDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.KnownExposureCode;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.SarsCov2ExpositionEvaluation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
