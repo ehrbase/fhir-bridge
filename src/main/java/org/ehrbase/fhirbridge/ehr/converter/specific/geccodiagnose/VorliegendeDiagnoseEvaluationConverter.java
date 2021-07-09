@@ -1,7 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KoerperstelleCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
@@ -27,53 +28,56 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
         return vorliegendeDiagnose;
     }
 
-
     private void mapKommentar(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
-        if (!condition.getNote().isEmpty()) {
+        if (condition.hasNote()) {
             StringBuilder kommentar = new StringBuilder();
             for (Annotation annotation : condition.getNote()) {
                 kommentar.append(annotation.getText());
             }
             vorliegendeDiagnose.setKommentarValue(kommentar.toString());
-            isEmpty=false;
+            isEmpty = false;
         }
 
     }
 
     private void mapDates(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
-        if (condition.getOnsetDateTimeType() != null && condition.getOnsetDateTimeType().getValueAsCalendar() != null) {
-            vorliegendeDiagnose.setDatumZeitpunktDesAuftretensDerErstdiagnoseValue(condition.getOnsetDateTimeType().getValueAsCalendar().toZonedDateTime());
-            isEmpty=false;
+        if (condition.hasOnset()) {
+            vorliegendeDiagnose.setDatumZeitpunktDesAuftretensDerErstdiagnoseValue(TimeConverter.convertConditionTime(condition));
+            isEmpty = false;
         }
-
-        if (condition.getAbatementDateTimeType() != null && condition.getAbatementDateTimeType().getValueAsCalendar() != null) {
-            vorliegendeDiagnose.setDatumZeitpunktDerGenesungValue(condition.getAbatementDateTimeType().getValueAsCalendar().toZonedDateTime());
-            isEmpty=false;
+        if (condition.hasAbatement() && TimeConverter.convertConditionAbatementTime(condition).isPresent()) {
+            vorliegendeDiagnose.setDatumZeitpunktDerGenesungValue(TimeConverter.convertConditionAbatementTime(condition).get());
+            isEmpty = false;
         }
-
     }
 
     private void mapSeverity(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
-        if (!condition.getSeverity().isEmpty()) {
-            Coding severity = condition.getSeverity().getCoding().get(0);
-            if (severity.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().containsKey(severity.getCode())) {
-                vorliegendeDiagnose.setSchweregradDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().get(severity.getCode()));
-                isEmpty=false;
-            } else {
-                throw new ConversionException("Severity not processable.");
+        if (condition.hasSeverity()) {
+            for (Coding coding : condition.getSeverity().getCoding()) {
+                convertSevertiy(coding, vorliegendeDiagnose);
             }
         }
     }
 
+    private void convertSevertiy(Coding coding, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
+        if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().containsKey(coding.getCode())) {
+            vorliegendeDiagnose.setSchweregradDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().get(coding.getCode()));
+            isEmpty = false;
+        } else {
+            throw new UnprocessableEntityException("Severity contains either a wrong code or code system.");
+        }
+    }
+
     private void mapBodySite(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
-        if (!condition.getBodySite().isEmpty()) {
+        if (condition.hasBodySite()) {
             for (Coding bodySite : condition.getBodySite().get(0).getCoding()) {
                 if (bodySite.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getKoerperstelleMap().containsKey(bodySite.getCode())) {
                     KoerperstelleCluster korperstelleCluster = new KoerperstelleCluster();
                     korperstelleCluster.setNameDerKoerperstelleDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKoerperstelleMap().get(bodySite.getCode()));
                     addKoerperstelleCluster(korperstelleCluster, vorliegendeDiagnose);
+                    isEmpty = false;
                 } else {
-                    throw new ConversionException("Body site not processable.");
+                    throw new UnprocessableEntityException("Bodysite contains either a wrong code or code system.");
                 }
             }
         }
@@ -82,24 +86,23 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
     private void addKoerperstelleCluster(KoerperstelleCluster korperstelleCluster, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         if (vorliegendeDiagnose.getKoerperstelle() == null || vorliegendeDiagnose.getKoerperstelle().size() == 0) {
             vorliegendeDiagnose.setKoerperstelle(List.of(korperstelleCluster));
-            isEmpty=false;
-
         } else {
             vorliegendeDiagnose.getKoerperstelle().add(korperstelleCluster);
-            isEmpty=false;
         }
+        isEmpty = false;
     }
 
     private void mapNameDesProblemsDerDiagnose(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
-        Coding problem = condition.getCode().getCoding().get(0);
-        if (problem.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
-                GeccoDiagnoseCodeDefiningCodeMaps.getNameDesProblemDiagnoseMap().containsKey(problem.getCode())) {
-            vorliegendeDiagnose.setNameDesProblemsDerDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getNameDesProblemDiagnoseMap().get(problem.getCode()));
-            isEmpty=false;
+        for (Coding coding : condition.getCode().getCoding()) {
+            if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
+                    GeccoDiagnoseCodeDefiningCodeMaps.getNameDesProblemDiagnoseMap().containsKey(coding.getCode())) {
+                vorliegendeDiagnose.setNameDesProblemsDerDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getNameDesProblemDiagnoseMap().get(coding.getCode()));
+                isEmpty = false;
+            }
         }
     }
 
-    public boolean getIsEmpty(){
+    public boolean getIsEmpty() {
         return isEmpty;
     }
 }
