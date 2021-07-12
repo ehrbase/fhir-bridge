@@ -309,7 +309,6 @@ ${randinteger}                  ${12345}
 	# 																	                CODE
 	
 	# missing valueCodeableConcept
-    $.component						                            missing					422
     $.component        						                    ${EMPTY}				422
 
 	# wrong format
@@ -318,13 +317,7 @@ ${randinteger}                  ${12345}
     $.component         						                ${{ [{}] }}				422
 
 	# missing array value
-    $.component[0] 				                                missing					422
-    $.component[1] 				                                missing					422
-    $.component[2] 				                                missing					422
-    $.component[3] 				                                missing					422
-    $.component[4] 				                                missing					422
-    $.component[5] 				                                missing					422
-    
+
     # empty array
     $.component[0] 				                                ${EMPTY}				422
     $.component[1] 				                                ${EMPTY}				422
@@ -348,14 +341,6 @@ ${randinteger}                  ${12345}
     $.component[3].code 				                        ${EMPTY}				422
     $.component[4].code 				                        ${EMPTY}				422
     $.component[5].code 				                        ${EMPTY}				422
-
-    # missing component x valueCodableConcept
-    $.component[0].valueCodeableConcept 				        missing					422
-    $.component[1].valueCodeableConcept 				        missing					422
-    $.component[2].valueCodeableConcept 				        missing					422
-    $.component[3].valueCodeableConcept 				        missing					422
-    $.component[4].valueCodeableConcept 				        missing					422
-    $.component[5].valueCodeableConcept				            missing					422
 
     # empty component x valueCodableConcept
     $.component[0].valueCodeableConcept 				        ${EMPTY}				422
@@ -735,12 +720,6 @@ ${randinteger}                  ${12345}
 	# 																				CODE
 
 	# missing valueCodeableConcept
-	$.component[0].dataAbsentReason							missing					422
-	$.component[1].dataAbsentReason							missing					422
-	$.component[2].dataAbsentReason							missing					422
-	$.component[3].dataAbsentReason							missing					422
-	$.component[4].dataAbsentReason							missing					422
-	$.component[5].dataAbsentReason							missing					422
 	$.component[0].dataAbsentReason							${EMPTY}				422
 	$.component[1].dataAbsentReason							${EMPTY}				422
 	$.component[2].dataAbsentReason							${EMPTY}				422
@@ -769,12 +748,6 @@ ${randinteger}                  ${12345}
 	$.component[5].dataAbsentReason							${{ [{}] }}				422
 
 	# missing coding
-	$.component[0].dataAbsentReason.coding					missing					422
-	$.component[1].dataAbsentReason.coding					missing					422
-	$.component[2].dataAbsentReason.coding					missing					422
-	$.component[3].dataAbsentReason.coding					missing					422
-	$.component[4].dataAbsentReason.coding					missing					422
-	$.component[5].dataAbsentReason.coding					missing					422
 	$.component[0].dataAbsentReason							${EMPTY}				422
 	$.component[1].dataAbsentReason							${EMPTY}				422
 	$.component[2].dataAbsentReason							${EMPTY}				422
@@ -783,11 +756,6 @@ ${randinteger}                  ${12345}
 	$.component[5].dataAbsentReason							${EMPTY}				422
 
 	# invalid system
-	$.component[0].dataAbsentReason.coding[0].system		missing					422
-	$.component[1].dataAbsentReason.coding[0].system		missing					422
-	$.component[2].dataAbsentReason.coding[0].system		missing					422
-	$.component[3].dataAbsentReason.coding[0].system		missing					422
-	$.component[4].dataAbsentReason.coding[0].system		missing					422
 	$.component[5].dataAbsentReason.coding[0].system		missing					422
 	$.component[0].dataAbsentReason.coding[0].system		${EMPTY}				422
 	$.component[1].dataAbsentReason.coding[0].system		${EMPTY}				422
@@ -807,20 +775,8 @@ ${randinteger}                  ${12345}
 	$.component[3].dataAbsentReason.coding[0].system		${randinteger}			422
 	$.component[4].dataAbsentReason.coding[0].system		${randinteger}			422
 	$.component[5].dataAbsentReason.coding[0].system		${randinteger}			422
-	$.component[0].dataAbsentReason.coding[0].system		http://foobar.de		422
-	$.component[1].dataAbsentReason.coding[0].system		http://foobar.de		422
-	$.component[2].dataAbsentReason.coding[0].system		http://foobar.de		422
-	$.component[3].dataAbsentReason.coding[0].system		http://foobar.de		422
-	$.component[4].dataAbsentReason.coding[0].system		http://foobar.de		422
-	$.component[5].dataAbsentReason.coding[0].system		http://foobar.de		422
 
 	# invalid code
-	$.component[0].dataAbsentReason.coding[0].code			missing					422
-	$.component[1].dataAbsentReason.coding[0].code			missing					422
-	$.component[2].dataAbsentReason.coding[0].code			missing					422
-	$.component[3].dataAbsentReason.coding[0].code			missing					422
-	$.component[4].dataAbsentReason.coding[0].code			missing					422
-	$.component[5].dataAbsentReason.coding[0].code			missing					422
 	$.component[0].dataAbsentReason.coding[0].code			${EMPTY}				422
 	$.component[1].dataAbsentReason.coding[0].code			${EMPTY}				422
 	$.component[2].dataAbsentReason.coding[0].code			${EMPTY}				422
@@ -847,12 +803,6 @@ ${randinteger}                  ${12345}
 	$.component[3].dataAbsentReason.coding[0].display		${EMPTY}				422
 	$.component[4].dataAbsentReason.coding[0].display		${EMPTY}				422
 	$.component[5].dataAbsentReason.coding[0].display		${EMPTY}				422
-	$.component[0].dataAbsentReason.coding[0].display		${randinteger}			422
-	$.component[1].dataAbsentReason.coding[0].display		${randinteger}			422
-	$.component[2].dataAbsentReason.coding[0].display		${randinteger}			422
-	$.component[3].dataAbsentReason.coding[0].display		${randinteger}			422
-	$.component[4].dataAbsentReason.coding[0].display		${randinteger}			422
-	$.component[5].dataAbsentReason.coding[0].display		${randinteger}			422
 
 	# invalid text
 	$.component[0].dataAbsentReason.text					${EMPTY}				422
