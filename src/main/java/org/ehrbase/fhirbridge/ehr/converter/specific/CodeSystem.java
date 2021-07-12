@@ -2,6 +2,8 @@ package org.ehrbase.fhirbridge.ehr.converter.specific;
 
 public enum CodeSystem {
 
+    ECRF_PARAMETERS("https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes"),
+
     LOINC("http://loinc.org"),
 
     SNOMED("http://snomed.info/sct"),
@@ -15,11 +17,11 @@ public enum CodeSystem {
 
     private final String url;
 
-    CodeSystem(String url){
+    CodeSystem(String url) {
         this.url = url;
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return url;
     }
 

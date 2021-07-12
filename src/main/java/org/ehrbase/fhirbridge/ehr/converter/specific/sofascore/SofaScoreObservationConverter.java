@@ -1,206 +1,210 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.sofascore;
 
+import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreObservation;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
+import java.util.Objects;
+import java.util.Optional;
+
+@SuppressWarnings({"java:S1192", "java:S6212"})
 public class SofaScoreObservationConverter extends ObservationToObservationConverter<SofaScoreObservation> {
 
+    private static final String RESP_0 = "resp0";
+    private static final String RESP_1 = "resp1";
+    private static final String RESP_2 = "resp2";
+    private static final String RESP_3 = "resp3";
+    private static final String RESP_4 = "resp4";
 
+    private static final String CVS_0 = "cvs0";
+    private static final String CVS_1 = "cvs1";
+    private static final String CVS_2 = "cvs2";
+    private static final String CVS_3 = "cvs3";
+    private static final String CVS_4 = "cvs4";
+
+    private static final String NS_0 = "ns0";
+    private static final String NS_1 = "ns1";
+    private static final String NS_2 = "ns2";
+    private static final String NS_3 = "ns3";
+    private static final String NS_4 = "ns4";
+
+    private static final String KID_0 = "kid0";
+    private static final String KID_1 = "kid1";
+    private static final String KID_2 = "kid2";
+    private static final String KID_3 = "kid3";
+    private static final String KID_4 = "kid4";
+
+    private static final String LIV_0 = "liv0";
+    private static final String LIV_1 = "liv1";
+    private static final String LIV_2 = "liv2";
+    private static final String LIV_3 = "liv3";
+    private static final String LIV_4 = "liv4";
+
+    private static final String COA_0 = "coa0";
+    private static final String COA_1 = "coa1";
+    private static final String COA_2 = "coa2";
+    private static final String COA_3 = "coa3";
+    private static final String COA_4 = "coa4";
 
     @Override
-    protected SofaScoreObservation convertInternal(Observation resource) {
-        SofaScoreObservation sofaScore = new SofaScoreObservation();
-        mapCodes(sofaScore, resource);
-        return sofaScore;
+    protected SofaScoreObservation convertInternal(Observation observation) {
+        SofaScoreObservation result = new SofaScoreObservation();
+        convertRespirationSystem(observation).ifPresent(result::setRespiration);
+        convertCardiovascularSystem(observation).ifPresent(result::setKardiovaskulaeresSystem);
+        convertNervousSystem(observation).ifPresent(result::setZentralesNervensystem);
+        convertKidneys(observation).ifPresent(result::setNierenfunktion);
+        convertLiver(observation).ifPresent(result::setLeberfunktion);
+        convertCoagulation(observation).ifPresent(result::setBlutgerinnung);
+        convertValue(observation).ifPresent(value -> result.setGesamtergebnisMagnitude(value.longValue()));
+        return result;
     }
 
-    private void mapCodes(SofaScoreObservation sofaScore, Observation observation) {
-        Observation.ObservationComponentComponent ns = getComponent(observation, "ns");
-        Observation.ObservationComponentComponent cvs = getComponent(observation, "cvs");
-        String nervensystemCode = ns.getValueCodeableConcept().getCoding().get(0).getCode();
-        String herzKreislaufSystemCode = cvs.getValueCodeableConcept().getCoding().get(0).getCode();
-        mapAtemtaetigkeitCode(sofaScore, observation);
-        mapNervenSystemCode(sofaScore, nervensystemCode);
-        mapHerzKreislaufSystemCode(sofaScore, herzKreislaufSystemCode, nervensystemCode);
-        mapLeberfunktionsCode(sofaScore, observation);
-        mapBlutgerinnungscode(sofaScore, observation);
-        mapNierenFunktions(sofaScore, observation);
-        mapSofaScoreMagnitude(sofaScore, observation);
+    private Optional<DvOrdinal> convertRespirationSystem(Observation observation) {
+        return getComponent(observation, "resp")
+                .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
+                .map(component -> {
+                    String code = component.getValueCodeableConcept().getCoding().get(0).getCode();
+                    switch (code) {
+                        case RESP_0:
+                            return SofaScoreCode.ATEMFREQUENZ_SCORE_0.getValue();
+                        case RESP_1:
+                            return SofaScoreCode.ATEMFREQUENZ_SCORE_1.getValue();
+                        case RESP_2:
+                            return SofaScoreCode.ATEMFREQUENZ_SCORE_2.getValue();
+                        case RESP_3:
+                            return SofaScoreCode.ATEMFREQUENZ_SCORE_3.getValue();
+                        case RESP_4:
+                            return SofaScoreCode.ATEMFREQUENZ_SCORE_4.getValue();
+                        default:
+                            throw new ConversionException("Code " + code + " is not valid");
+                    }
+                });
     }
 
-    /**
-     * Get component by code
-     *
-     * @param code which can be: cvs, liv, ns, resp, coa, kid
-     * @return the correspondent component to the code
-     */
-    private Observation.ObservationComponentComponent getComponent(Observation observation, String code) {
-        for (Observation.ObservationComponentComponent component : observation.getComponent()) {
-            if (codeOfComponentMatchesCode(component, code)) {
-                return component;
-            }
+    private Optional<DvOrdinal> convertCardiovascularSystem(Observation observation) {
+        return getComponent(observation, "cvs")
+                .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
+                .map(component -> {
+                    String code = component.getValueCodeableConcept().getCoding().get(0).getCode();
+                    switch (code) {
+                        case CVS_0:
+                            return SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_0.getValue();
+                        case CVS_1:
+                            return SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_1.getValue();
+                        case CVS_2:
+                            return SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_2.getValue();
+                        case CVS_3:
+                            return SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_3.getValue();
+                        case CVS_4:
+                            return SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_4.getValue();
+                        default:
+                            throw new ConversionException("Code " + code + " is not valid for the cardiovaskular score");
+                    }
+                });
+    }
+
+    private Optional<DvOrdinal> convertNervousSystem(Observation observation) {
+        return getComponent(observation, "ns")
+                .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
+                .map(component -> {
+                    String code = component.getValueCodeableConcept().getCoding().get(0).getCode();
+                    switch (code) {
+                        case NS_0:
+                            return SofaScoreCode.NERVENSYSTEM_SCORE_0.getValue();
+                        case NS_1:
+                            return SofaScoreCode.NERVENSYSTEM_SCORE_1.getValue();
+                        case NS_2:
+                            return SofaScoreCode.NERVENSYSTEM_SCORE_2.getValue();
+                        case NS_3:
+                            return SofaScoreCode.NERVENSYSTEM_SCORE_3.getValue();
+                        case NS_4:
+                            return SofaScoreCode.NERVENSYSTEM_SCORE_4.getValue();
+                        default:
+                            throw new ConversionException("Code " + code + " is not valid");
+                    }
+                });
+    }
+
+    private Optional<DvOrdinal> convertKidneys(Observation observation) {
+        return getComponent(observation, "kid")
+                .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
+                .map(component -> {
+                    String code = component.getValueCodeableConcept().getCoding().get(0).getCode();
+                    switch (code) {
+                        case KID_0:
+                            return SofaScoreCode.NIERENFUNKTIONS_SCORE_0.getValue();
+                        case KID_1:
+                            return SofaScoreCode.NIERENFUNKTIONS_SCORE_1.getValue();
+                        case KID_2:
+                            return SofaScoreCode.NIERENFUNKTIONS_SCORE_2.getValue();
+                        case KID_3:
+                            return SofaScoreCode.NIERENFUNKTIONS_SCORE_3.getValue();
+                        case KID_4:
+                            return SofaScoreCode.NIERENFUNKTIONS_SCORE_4.getValue();
+                        default:
+                            throw new ConversionException("The code " + code + " is not valid for the Kidney Score");
+                    }
+                });
+    }
+
+    private Optional<DvOrdinal> convertLiver(Observation observation) {
+        return getComponent(observation, "liv")
+                .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
+                .map(component -> {
+                    String code = component.getValueCodeableConcept().getCoding().get(0).getCode();
+                    switch (code) {
+                        case LIV_0:
+                            return SofaScoreCode.LEBERFUNKTIONS_SCORE_0.getValue();
+                        case LIV_1:
+                            return SofaScoreCode.LEBERFUNKTIONS_SCORE_1.getValue();
+                        case LIV_2:
+                            return SofaScoreCode.LEBERFUNKTIONS_SCORE_2.getValue();
+                        case LIV_3:
+                            return SofaScoreCode.LEBERFUNKTIONS_SCORE_3.getValue();
+                        case LIV_4:
+                            return SofaScoreCode.LEBERFUNKTIONS_SCORE_4.getValue();
+                        default:
+                            throw new ConversionException("The code " + code + " is not valid for the Liver score");
+                    }
+                });
+    }
+
+    private Optional<DvOrdinal> convertCoagulation(Observation observation) {
+        return getComponent(observation, "coa")
+                .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
+                .map(component -> {
+                    String code = component.getValueCodeableConcept().getCoding().get(0).getCode();
+                    switch (code) {
+                        case COA_0:
+                            return SofaScoreCode.BLUTGERINNUNGS_SCORE_0.getValue();
+                        case COA_1:
+                            return SofaScoreCode.BLUTGERINNUNGS_SCORE_1.getValue();
+                        case COA_2:
+                            return SofaScoreCode.BLUTGERINNUNGS_SCORE_2.getValue();
+                        case COA_3:
+                            return SofaScoreCode.BLUTGERINNUNGS_SCORE_3.getValue();
+                        case COA_4:
+                            return SofaScoreCode.BLUTGERINNUNGS_SCORE_4.getValue();
+                        default:
+                            throw new ConversionException("The code " + code + " is not valid for the Blood clotting score");
+                    }
+                });
+    }
+
+    private Optional<Integer> convertValue(Observation observation) {
+        if (!observation.hasValueIntegerType()) {
+            return Optional.empty();
         }
-        throw new ConversionException("The component with code '" + code + "' is not present");
-    }
-
-    private boolean codeOfComponentMatchesCode(Observation.ObservationComponentComponent component, String code) {
-        for (Coding coding : component.getCode().getCoding()) {
-            if (coding.getCode().equals(code)) {
-                checkIfEmpty(component, code);
-                return true;
-            }
-        }
-        return false;
+        return Optional.of(observation.getValueIntegerType().getValue());
     }
 
 
-    private void mapSofaScoreMagnitude(SofaScoreObservation sofaScore, Observation observation) {
-        String sofaScoreCode = observation.getCode().getCoding().get(0).getCode();
-        Long sofaScoreCodeLong = Long.parseLong(sofaScoreCode);
-        sofaScore.setGesamtergebnisMagnitude(sofaScoreCodeLong);
-    }
-
-    private void mapNierenFunktions(SofaScoreObservation sofaScore, Observation observation) {
-        String nierenfunktionsCode = getComponent(observation, "kid").getValueCodeableConcept().getCoding().get(0).getCode();
-        switch (nierenfunktionsCode) {
-            case "kid0":
-                sofaScore.setNierenfunktion(SofaScoreCode.NIERENFUNKTIONS_SCORE_0.getValue());
-                break;
-            case "kid1":
-                sofaScore.setNierenfunktion(SofaScoreCode.NIERENFUNKTIONS_SCORE_1.getValue());
-                break;
-            case "kid2":
-                sofaScore.setNierenfunktion(SofaScoreCode.NIERENFUNKTIONS_SCORE_2.getValue());
-                break;
-            case "kid3":
-                sofaScore.setNierenfunktion(SofaScoreCode.NIERENFUNKTIONS_SCORE_3.getValue());
-                break;
-            case "kid4":
-                sofaScore.setNierenfunktion(SofaScoreCode.NIERENFUNKTIONS_SCORE_4.getValue());
-                break;
-            default:
-                throw new ConversionException("The code " + nierenfunktionsCode + " is not valid for the Kidney Score");
-        }
-    }
-
-    private void mapBlutgerinnungscode(SofaScoreObservation sofaScore, Observation observation) {
-        String blutgerinnungsCode = getComponent(observation, "coa").getValueCodeableConcept().getCoding().get(0).getCode();
-        switch (blutgerinnungsCode) {
-            case "coa0":
-                sofaScore.setBlutgerinnung(SofaScoreCode.BLUTGERINNUNGS_SCORE_0.getValue());
-                break;
-            case "coa1":
-                sofaScore.setBlutgerinnung(SofaScoreCode.BLUTGERINNUNGS_SCORE_1.getValue());
-                break;
-            case "coa2":
-                sofaScore.setBlutgerinnung(SofaScoreCode.BLUTGERINNUNGS_SCORE_2.getValue());
-                break;
-            case "coa3":
-                sofaScore.setBlutgerinnung(SofaScoreCode.BLUTGERINNUNGS_SCORE_3.getValue());
-                break;
-            case "coa4":
-                sofaScore.setBlutgerinnung(SofaScoreCode.BLUTGERINNUNGS_SCORE_4.getValue());
-                break;
-            default:
-                throw new ConversionException("The code " + blutgerinnungsCode + " is not valid for the Blood clotting score");
-        }
-    }
-
-    private void mapLeberfunktionsCode(SofaScoreObservation sofaScore, Observation observation) {
-        String leberfunktionsCode = getComponent(observation, "liv").getValueCodeableConcept().getCoding().get(0).getCode();
-        switch (leberfunktionsCode) {
-            case "liv0":
-                sofaScore.setLeberfunktion(SofaScoreCode.LEBERFUNKTIONS_SCORE_0.getValue());
-                break;
-            case "liv1":
-                sofaScore.setLeberfunktion(SofaScoreCode.LEBERFUNKTIONS_SCORE_1.getValue());
-                break;
-            case "liv2":
-                sofaScore.setLeberfunktion(SofaScoreCode.LEBERFUNKTIONS_SCORE_2.getValue());
-                break;
-            case "liv3":
-                sofaScore.setLeberfunktion(SofaScoreCode.LEBERFUNKTIONS_SCORE_3.getValue());
-                break;
-            case "liv4":
-                sofaScore.setLeberfunktion(SofaScoreCode.LEBERFUNKTIONS_SCORE_4.getValue());
-                break;
-            default:
-                throw new ConversionException("The code " + leberfunktionsCode + " is not valid for the Liver score");
-        }
-    }
-
-    private void mapHerzKreislaufSystemCode(SofaScoreObservation sofaScore, String herzKreislaufSystemCode, String nervensystemCode) {
-        if (herzKreislaufSystemCode.equals("cvs0")) {
-            sofaScore.setKardiovaskulaeresSystem(SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_0.getValue());
-        } else if (herzKreislaufSystemCode.equals("cvs1")) {
-            sofaScore.setKardiovaskulaeresSystem(SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_1.getValue());
-        } else if (nervensystemCode.equals("cvs2")) {
-            sofaScore.setKardiovaskulaeresSystem(SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_2.getValue());
-        } else if (nervensystemCode.equals("cvs3")) {
-            sofaScore.setKardiovaskulaeresSystem(SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_3.getValue());
-        } else if (nervensystemCode.equals("cvs4")) {
-            sofaScore.setKardiovaskulaeresSystem(SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_4.getValue());
-        } else {
-            throw new ConversionException("Either the code " + herzKreislaufSystemCode + " or " + nervensystemCode + " is not valid for the cardiovaskular score");
-        }
-
-    }
-
-    private void mapAtemtaetigkeitCode(SofaScoreObservation sofaScore, Observation observation) {
-        String atemtaetigkeitCode = getComponent(observation, "resp").getValueCodeableConcept().getCoding().get(0).getCode();
-
-        switch (atemtaetigkeitCode) {
-            case "resp0":
-                sofaScore.setRespiration(SofaScoreCode.ATEMFREQUENZ_SCORE_0.getValue());
-                break;
-            case "resp1":
-                sofaScore.setRespiration(SofaScoreCode.ATEMFREQUENZ_SCORE_1.getValue());
-                break;
-            case "resp2":
-                sofaScore.setRespiration(SofaScoreCode.ATEMFREQUENZ_SCORE_2.getValue());
-                break;
-            case "resp3":
-                sofaScore.setRespiration(SofaScoreCode.ATEMFREQUENZ_SCORE_3.getValue());
-                break;
-            case "resp4":
-                sofaScore.setRespiration(SofaScoreCode.ATEMFREQUENZ_SCORE_4.getValue());
-                break;
-            default:
-                throw new ConversionException("The code " + atemtaetigkeitCode + " is not valid for the Breath Score");
-        }
-    }
-
-    private void mapNervenSystemCode(SofaScoreObservation sofaScore, String nervensystemCode) {
-        switch (nervensystemCode) {
-            case "ns0":
-                sofaScore.setZentralesNervensystem(SofaScoreCode.NERVENSYSTEM_SCORE_0.getValue());
-                break;
-            case "ns1":
-                sofaScore.setZentralesNervensystem(SofaScoreCode.NERVENSYSTEM_SCORE_1.getValue());
-                break;
-            case "ns2":
-                sofaScore.setZentralesNervensystem(SofaScoreCode.NERVENSYSTEM_SCORE_2.getValue());
-                break;
-            case "ns3":
-                sofaScore.setZentralesNervensystem(SofaScoreCode.NERVENSYSTEM_SCORE_3.getValue());
-                break;
-            case "ns4":
-                sofaScore.setZentralesNervensystem(SofaScoreCode.NERVENSYSTEM_SCORE_4.getValue());
-                break;
-            default:
-                throw new ConversionException("The code " + nervensystemCode + " is not valid for the Nerves Score");
-        }
-    }
-
-
-
-    private void checkIfEmpty(Observation.ObservationComponentComponent component, String name) {
-        if (component.getValueCodeableConcept().getCoding().isEmpty()) {
-            throw new ConversionException("The component " + name + " doesn't have a code");
-        }
-
+    private Optional<Observation.ObservationComponentComponent> getComponent(Observation observation, String code) {
+        return observation.getComponent()
+                .stream()
+                .filter(component -> Objects.equals(component.getCode().getCoding().get(0).getCode(), code))
+                .findFirst();
     }
 }
