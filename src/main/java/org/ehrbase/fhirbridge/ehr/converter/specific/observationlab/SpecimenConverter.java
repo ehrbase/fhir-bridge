@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningCode;
@@ -10,11 +9,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.Pro
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeIdentifikatorDerUebergeordnetenProbeElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeProbenentahmebedingungElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbenartDefiningCode;
-import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.DateTimeType;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Reference;
-import org.hl7.fhir.r4.model.Specimen;
+import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,10 +26,9 @@ public class SpecimenConverter {
         mapIdentifier(specimenTarget).ifPresent(probe::setExternerIdentifikator);
         mapReceivedTime(specimenTarget).ifPresent(probe::setZeitpunktDesProbeneingangsValue);
         mapZeitpunktDerEntnahme(specimenTarget).ifPresent(probe::setZeitpunktDerProbenentnahmeValue);
+        mapIdentifikatorDesProbennehmers(specimenTarget).ifPresent(probe::setIdentifikatorDesProbennehmers);
 
 
-
-//        probe.setIdentifikatorDesProbennehmers(mapIdentifier(specimenTarget.getCollection().getCollector().getIdentifier()));
         mapParentsOfProbe(probe, specimenTarget);
         setProbeEntnahmeBedingung(probe, specimenTarget);
         probe.setProbenentnahmemethodeValue(specimenTarget.getCollection().getMethod().getText());
@@ -45,21 +39,26 @@ public class SpecimenConverter {
         return probe;
     }
 
+
+
     private Optional<ProbenartDefiningCode> mapProbenart(Specimen specimenTarget) {
-        if (!specimenTarget.getType().getCoding().isEmpty()) {
-            ProbenartDefiningCode probenart = null;
-
-            if (specimenTarget.getType().getCoding().get(0).getSystem().equals("http://terminology.hl7.org/CodeSystem/v2-0487")) {
-                String code = specimenTarget.getType().getCoding().get(0).getCode();
-                probenart = ProbenartDefiningCode.getCodesAsMap().get(code);
+        if (specimenTarget.hasType() && specimenTarget.getType().hasCoding()) {
+            for (Coding coding : specimenTarget.getType().getCoding()) {
+                return convertProbenArtDefiningCode(coding);
             }
-            if (probenart == null) {
-                throw new ConversionException("Probenart not defined in specimen");
-            }
-
-            probe.setProbenartDefiningCode(probenart);
         }
+        return Optional.empty();
     }
+
+    private Optional<ProbenartDefiningCode> convertProbenArtDefiningCode(Coding coding) {
+        if (coding.hasSystem() && coding.getSystem().equals("http://terminology.hl7.org/CodeSystem/v2-0487") && coding.hasCode()) {
+            if (ProbenartDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
+                return Optional.of(ProbenartDefiningCode.getCodesAsMap().get(coding.getCode()));
+            }
+        }
+        return Optional.empty();
+    }
+
 
     private Optional<DvIdentifier> mapAccessionIdentifier(Specimen specimenTarget) {
         if (specimenTarget.hasAccessionIdentifier()) {
@@ -71,7 +70,7 @@ public class SpecimenConverter {
 
     private Optional<DvIdentifier> mapIdentifier(Specimen specimenTarget) {
         if (specimenTarget.hasIdentifier()) {
-            if(specimenTarget.getIdentifier().size()>1){
+            if (specimenTarget.getIdentifier().size() > 1) {
                 LOG.warn("The fhir-bridge supports only one external identifier, therefore only the first one is mapped.");
             }
             return Optional.of(parseDvIdentifier(specimenTarget.getIdentifier().get(0)));
@@ -89,9 +88,9 @@ public class SpecimenConverter {
     }
 
     private Optional<TemporalAccessor> mapZeitpunktDerEntnahme(Specimen specimenTarget) {
-        if(specimenTarget.hasCollection() && specimenTarget.getCollection().hasCollected()){
+        if (specimenTarget.hasCollection() && specimenTarget.getCollection().hasCollected()) {
             return TimeConverter.convertSpecimanCollection(specimenTarget.getCollection());
-        }else{
+        } else {
             return Optional.empty();
         }
     }
@@ -137,16 +136,41 @@ public class SpecimenConverter {
 
     private DvIdentifier parseDvIdentifier(Identifier identifier) {
         DvIdentifier dvIdentifier = new DvIdentifier();
-        if (identifier.hasAssigner()) {
-            dvIdentifier.setAssigner(identifier.getAssigner().getDisplay());
-        }
-        if (identifier.hasId()) {
-            dvIdentifier.setId(identifier.getId());
-        }
-        if (identifier.hasType()) {
-            dvIdentifier.setType(identifier.getType().getText());
-        }
+        setDvIdentifierAssinger(dvIdentifier, identifier);
+        setDvIdentifierId(dvIdentifier, identifier);
+        setDvIdentifierType(dvIdentifier, identifier);
         return dvIdentifier;
     }
 
+    private void setDvIdentifierType(DvIdentifier dvIdentifier, Identifier identifier) {
+        if (identifier.hasAssigner()) {
+            dvIdentifier.setAssigner(identifier.getAssigner().getDisplay());
+        }else{
+            dvIdentifier.setAssigner("");
+        }
+    }
+
+    private void setDvIdentifierId(DvIdentifier dvIdentifier, Identifier identifier) {
+        if (identifier.hasId()) {
+            dvIdentifier.setId(identifier.getId());
+        }else{
+            dvIdentifier.setId("");
+        }
+    }
+
+    private void setDvIdentifierAssinger(DvIdentifier dvIdentifier, Identifier identifier) {
+        if (identifier.hasType()) {
+            dvIdentifier.setType(identifier.getType().getText());
+        }else{
+            dvIdentifier.setType("");
+        }
+    }
+
+    private Optional<DvIdentifier> mapIdentifikatorDesProbennehmers(Specimen specimenTarget) {
+        if(specimenTarget.hasCollection() && specimenTarget.getCollection().hasCollector()){
+            return Optional.of(parseDvIdentifier(specimenTarget.getCollection().getCollector().getIdentifier()));
+        }else{
+           return Optional.empty();
+        }
+    }
 }
