@@ -376,7 +376,7 @@ ${randinteger}                  ${12345}
 
 
 010 Create Sofa Score (Invalid/Missing 'component' for Array value 0)
-	[Documentation]     1. *CREATE* new an EHR record\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``component[0]`` \n\n
@@ -431,7 +431,7 @@ ${randinteger}                  ${12345}
 
 
 011 Create Sofa Score (Invalid/Missing 'component' for Array value 1)
-	[Documentation]     1. *CREATE* new an EHR record\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``component[1]`` \n\n
@@ -486,7 +486,7 @@ ${randinteger}                  ${12345}
 
 
 012 Create Sofa Score (Invalid/Missing 'component' for Array value 2)
-	[Documentation]     1. *CREATE* new an EHR record\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``component[2]`` \n\n
@@ -540,7 +540,7 @@ ${randinteger}                  ${12345}
 
 
 013 Create Sofa Score (Invalid/Missing 'component' for Array value 3)
-	[Documentation]     1. *CREATE* new an EHR record\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``component[3]`` \n\n
@@ -595,7 +595,7 @@ ${randinteger}                  ${12345}
 
 
 014 Create Sofa Score (Invalid/Missing 'component' for Array value 4)
-	[Documentation]     1. *CREATE* new an EHR record\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``component[4]`` \n\n
@@ -610,7 +610,7 @@ ${randinteger}                  ${12345}
 
     #invalid component 4 code coding system
 	$.component[4].code.coding[0].system						${EMPTY}				422
-#	$.component[4].code.coding[0].system						http://foobar.de		422
+#	$.component[4].code.coding[0].system						http://foobar.de		422 
 	$.component[4].code.coding[0].system						${randstring}			422
 	$.component[4].code.coding[0].system						${randinteger}			422
 
@@ -650,7 +650,7 @@ ${randinteger}                  ${12345}
 
 
 015 Create Sofa Score (Invalid/Missing 'component' for Array value 5)
-	[Documentation]     1. *CREATE* new an EHR record\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``component[5]`` \n\n
@@ -706,7 +706,7 @@ ${randinteger}                  ${12345}
 
 
 016 Create Sofa Score (Invalid/Missing 'DataAbsentReason')
-	[Documentation]     1. *CREATE* new an EHR record\n\n
+	[Documentation]     1. *CREATE* new an EHR record\n\n 
 	...                 2. *LOAD* _create-sofa-score.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n

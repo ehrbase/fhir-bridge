@@ -158,18 +158,7 @@
           }
         },
         "archetype_node_id" : "at0067"
-      }, {
-        "_type" : "ELEMENT",
-        "name" : {
-          "_type" : "DV_TEXT",
-          "value" : "Kommentar"
-        },
-        "value" : {
-          "_type" : "DV_TEXT",
-          "value" : "[]"
-        },
-        "archetype_node_id" : "at0005"
-      } ],
+      }],
       "archetype_node_id" : "at0001"
     },
     "ism_transition" : {

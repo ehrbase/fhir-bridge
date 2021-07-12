@@ -5,6 +5,7 @@ target
 
 *-local.yml
 keystore/
+logs/
 
 # Python
 venv
