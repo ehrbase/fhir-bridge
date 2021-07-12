@@ -6,6 +6,8 @@ import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KoerperstelleCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText;
 import org.hl7.fhir.r4.model.Annotation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
@@ -61,7 +63,7 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
 
     private void convertSevertiy(Coding coding, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().containsKey(coding.getCode())) {
-            vorliegendeDiagnose.setSchweregradDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().get(coding.getCode()));
+            vorliegendeDiagnose.setSchweregrad(DvCodedTextParser.parseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getSchweregradMap().get(coding.getCode())));
             isEmpty = false;
         } else {
             throw new UnprocessableEntityException("Severity contains either a wrong code or code system.");
@@ -73,7 +75,7 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
             for (Coding bodySite : condition.getBodySite().get(0).getCoding()) {
                 if (bodySite.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getKoerperstelleMap().containsKey(bodySite.getCode())) {
                     KoerperstelleCluster korperstelleCluster = new KoerperstelleCluster();
-                    korperstelleCluster.setNameDerKoerperstelleDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKoerperstelleMap().get(bodySite.getCode()));
+                    korperstelleCluster.setNameDerKoerperstelle(DvCodedTextParser.parseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKoerperstelleMap().get(bodySite.getCode())));
                     addKoerperstelleCluster(korperstelleCluster, vorliegendeDiagnose);
                     isEmpty = false;
                 } else {
@@ -94,10 +96,13 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
 
     private void mapNameDesProblemsDerDiagnose(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         for (Coding coding : condition.getCode().getCoding()) {
-            if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
-                    GeccoDiagnoseCodeDefiningCodeMaps.getNameDesProblemDiagnoseMap().containsKey(coding.getCode())) {
-                vorliegendeDiagnose.setNameDesProblemsDerDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getNameDesProblemDiagnoseMap().get(coding.getCode()));
-                isEmpty = false;
+            if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
+                if(DvCodedTextParser.parseFHIRCoding(coding).isPresent()){
+                    VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText vorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText = new VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText();
+                    vorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText.setNameDesProblemsDerDiagnose(DvCodedTextParser.parseFHIRCoding(coding).get());
+                    vorliegendeDiagnose.setNameDesProblemsDerDiagnose(vorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText);
+                    isEmpty = false;
+                }
             }
         }
     }

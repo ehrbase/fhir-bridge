@@ -12,7 +12,7 @@ public class UnbekannteDiagnoseEvaluationConverter extends EntryEntityConverter<
     @Override
     protected UnbekannteDiagnoseEvaluation convertInternal(Condition condition) {
         UnbekannteDiagnoseEvaluation unbekannteDiagnose = new UnbekannteDiagnoseEvaluation();
-        unbekannteDiagnose.setAussageUeberDieFehlendeInformationDefiningCode(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
+        unbekannteDiagnose.setAussageUeberDieFehlendeInformation(DvCodedTextParser.parseDefiningCode(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE));
         mapProblem(condition, unbekannteDiagnose);
 
         return unbekannteDiagnose;
@@ -22,7 +22,7 @@ public class UnbekannteDiagnoseEvaluationConverter extends EntryEntityConverter<
         for(Coding coding : condition.getCode().getCoding()){
             if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
                     GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().containsKey(coding.getCode())) {
-                unbekannteDiagnose.setUnbekannteDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().get(coding.getCode()));
+                unbekannteDiagnose.setUnbekannteDiagnose(DvCodedTextParser.parseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().get(coding.getCode())));
             }
         }
     }
