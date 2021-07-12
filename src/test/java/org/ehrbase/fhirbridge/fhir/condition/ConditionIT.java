@@ -33,20 +33,6 @@ class ConditionIT extends AbstractMappingTestSetupIT {
         create("create-condition-default.json");
     }
 
-    @Test
-    void createSymptomCovidAbsent() throws IOException {
-        create("create-symptoms-covid-19-absent.json");
-    }
-
-    @Test
-    void createSymptomCovidPresent() throws IOException {
-        create("create-symptoms-covid-19-present.json");
-    }
-
-    @Test
-    void createSymptomCovidUnknown() throws IOException {
-        create("create-symptoms-covid-19-unknown.json");
-    }
 
     @Test
     void createDiagnoseChronicLiverDisease() throws IOException {
