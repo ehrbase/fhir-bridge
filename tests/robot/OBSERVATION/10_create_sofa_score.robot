@@ -756,7 +756,6 @@ ${randinteger}                  ${12345}
 	$.component[5].dataAbsentReason							${EMPTY}				422
 
 	# invalid system
-	$.component[5].dataAbsentReason.coding[0].system		missing					422
 	$.component[0].dataAbsentReason.coding[0].system		${EMPTY}				422
 	$.component[1].dataAbsentReason.coding[0].system		${EMPTY}				422
 	$.component[2].dataAbsentReason.coding[0].system		${EMPTY}				422
@@ -783,12 +782,6 @@ ${randinteger}                  ${12345}
 	$.component[3].dataAbsentReason.coding[0].code			${EMPTY}				422
 	$.component[4].dataAbsentReason.coding[0].code			${EMPTY}				422
 	$.component[5].dataAbsentReason.coding[0].code			${EMPTY}				422
-	$.component[0].dataAbsentReason.coding[0].code			${randstring}			422
-	$.component[1].dataAbsentReason.coding[0].code			${randstring}			422
-	$.component[2].dataAbsentReason.coding[0].code			${randstring}			422
-	$.component[3].dataAbsentReason.coding[0].code			${randstring}			422
-	$.component[4].dataAbsentReason.coding[0].code			${randstring}			422
-	$.component[5].dataAbsentReason.coding[0].code			${randstring}			422
 	$.component[0].dataAbsentReason.coding[0].code			${randinteger}			422
 	$.component[1].dataAbsentReason.coding[0].code			${randinteger}			422
 	$.component[2].dataAbsentReason.coding[0].code			${randinteger}			422
