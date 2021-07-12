@@ -1,13 +1,9 @@
 package org.ehrbase.fhirbridge.fhir.condition;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KoerperstelleCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.UnbekannteDiagnoseEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Condition;
 import org.javers.core.Javers;
@@ -164,6 +160,7 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(AusgeschlosseneDiagnoseEvaluation.class)
                 .registerValueObject(VorliegendeDiagnoseEvaluation.class)
                 .registerValueObject(UnbekannteDiagnoseEvaluation.class)
+                .registerValueObject(VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText.class)
                 .registerValueObject(KoerperstelleCluster.class)
                 .build();
     }

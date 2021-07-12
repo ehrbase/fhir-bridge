@@ -11,11 +11,11 @@ public class AusgeschlosseneDiagnoseConverter extends EntryEntityConverter<Condi
     @Override
     protected AusgeschlosseneDiagnoseEvaluation convertInternal(Condition resource) {
         AusgeschlosseneDiagnoseEvaluation ausgeschlosseneDiagnose = new AusgeschlosseneDiagnoseEvaluation();
-        ausgeschlosseneDiagnose.setAussageUeberDenAusschlussDefiningCode(AussageUeberDenAusschlussDefiningCode.KNOWN_ABSENT_QUALIFIER_VALUE);
+        ausgeschlosseneDiagnose.setAussageUeberDenAusschluss(DvCodedTextParser.parseDefiningCode(AussageUeberDenAusschlussDefiningCode.KNOWN_ABSENT_QUALIFIER_VALUE));
         Coding problem = resource.getCode().getCoding().get(0);
         if (problem.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
                 GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().containsKey(problem.getCode())) {
-            ausgeschlosseneDiagnose.setProblemDiagnoseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().get(problem.getCode()));
+            ausgeschlosseneDiagnose.setProblemDiagnose(DvCodedTextParser.parseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getProblemDiagnoseMap().get(problem.getCode())));
         }
         return ausgeschlosseneDiagnose;
     }
