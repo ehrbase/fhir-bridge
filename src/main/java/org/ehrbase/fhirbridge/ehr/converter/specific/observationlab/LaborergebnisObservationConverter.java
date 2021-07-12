@@ -1,13 +1,16 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
+import com.nedap.archie.rm.datavalues.DvText;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestKategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeCluster;
 import org.hl7.fhir.r4.model.Observation;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LaborergebnisObservationConverter extends ObservationToObservationConverter<LaborergebnisObservation> {
@@ -19,10 +22,21 @@ public class LaborergebnisObservationConverter extends ObservationToObservationC
         ProLaboranalytCluster laboranalyt = new LaborAnalytConverter().convert(resource);
         setLaborergebnisKategorieDefiningCode(laborergebnisObservation, resource);
         setProbe(resource, laborergebnisObservation);
-
         laborergebnisObservation.setProLaboranalyt(laboranalyt);
         return laborergebnisObservation;
     }
+
+/*    private void mapMethod(Observation resource, LaborergebnisObservation laborergebnisObservation) {
+        if (resource.hasMethod() && resource.getMethod().hasCoding()) {
+            if(!laborergebnisObservation.getProbe().isEmpty()){
+                laborergebnisObservation.getProbe().get(0).setProbenentnahmemethodeValue(resource.getMethod().getCoding().get(0).getDisplay());
+            }else{
+                ProbeCluster probe = new ProbeCluster();
+                probe.setProbenentnahmemethodeValue(resource.getMethod().getCoding().get(0).getDisplay());
+                laborergebnisObservation.setProbe(List.of(probe));
+            }
+        }
+    }*/
 
     private void initialiseLabortestBezeichnungMap() {
         for (LabortestKategorieDefiningCode code : LabortestKategorieDefiningCode.values()) {
