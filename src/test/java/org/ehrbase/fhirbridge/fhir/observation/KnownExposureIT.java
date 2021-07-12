@@ -2,7 +2,7 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.parser.DataFormatException;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.SARSCoV2ExpositionComposition;
@@ -55,6 +55,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
 
     // #####################################################################################
     // check exception
+
     @Test
     void createInvalidStatus() throws IOException {
         try{
@@ -63,6 +64,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
             assertEquals("[element=\"status\"] Invalid attribute value \"invalidTestCode\": Unknown ObservationStatus code 'invalidTestCode'", dataFormatException.getMessage());
         }
     }
+
     @Test
     void createMultipleKnownReasons() throws IOException {
         try{
@@ -71,6 +73,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
             assertEquals("Multiple known expositions reasons are not possible in SarsCov2ExpositionConverter!", dataFormatException.getMessage());
         }
     }
+
     @Test
     void createWithoutKnownReasonMissingDataAbsent() throws IOException {
         try{
@@ -79,6 +82,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
             assertEquals("Zero or Multiple data absent reasons are not possible in SarsCov2ExpositionConverter with no valid exposition information!", dataFormatException.getMessage());
         }
     }
+
     @Test
     void createWithoutKnownReasonMultipleDataAbsent() throws IOException {
         try{
@@ -87,6 +91,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
             assertEquals("Zero or Multiple data absent reasons are not possible in SarsCov2ExpositionConverter with no valid exposition information!", dataFormatException.getMessage());
         }
     }
+
     @Test
     void createWithWrongSystemInDataAbsent() throws IOException {
         try{
@@ -95,6 +100,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
             assertEquals("Cannot set 'unknown' in SarsCov2ExpositionConverter with no valid data absent reason coding!", dataFormatException.getMessage());
         }
     }
+
     @Test
     void createWithWrongCodeInDataAbsent() throws IOException {
         try{
@@ -103,6 +109,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
             assertEquals("Cannot set 'unknown' in SarsCov2ExpositionConverter with no valid data absent reason coding!", dataFormatException.getMessage());
         }
     }
+
     @Test
     void createWithWrongSystem() throws IOException {
         try{
@@ -111,6 +118,7 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
             assertEquals("\"The SNOMED code '\" + code + \"' in system '\" + system + \"' is not supported for known SarsCov2ExpositionConverter!", dataFormatException.getMessage());
         }
     }
+
     @Test
     void createWithWrongCode() throws IOException {
         try{
@@ -119,7 +127,6 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
             assertEquals("\"The SNOMED code '\" + code + \"' in system '\" + system + \"' is not supported for known SarsCov2ExpositionConverter!", dataFormatException.getMessage());
         }
     }
-
 
     // #####################################################################################
     // default
@@ -130,14 +137,13 @@ public class KnownExposureIT extends AbstractMappingTestSetupIT {
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(SARSCoV2ExpositionComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(SarsCov2ExpositionEvaluation.class)
-
                 .build();
     }
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () ->
+        return assertThrows(ConversionException.class, () ->
                 new SarsCov2KnownExposureCompositionConverter().convert(obs)
         );
     }

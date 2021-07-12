@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.KlinischeFrailtySkalaCfsObservation;
@@ -39,7 +39,7 @@ public class KlinischeFrailtySkalaObservationConverter extends ObservationToObse
             case 9:
                 return ClinicalFrailtyBeurteilung.TERMINAL_ERKRANKT.getBerurteilung();
             default:
-                throw new UnprocessableEntityException("Cannot match beurteilung\"" + code + "\"");
+                throw new ConversionException("Cannot match beurteilung\"" + code + "\"");
         }
     }
 }

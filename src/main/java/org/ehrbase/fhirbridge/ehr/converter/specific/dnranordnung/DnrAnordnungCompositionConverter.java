@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConsentToCompositionConverter;
@@ -43,7 +43,7 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
             case "entered-in-error":
                 return StatusDefiningCode.EINGABEFEHLER;
             default:
-                throw new UnprocessableEntityException("createStatusDefiningCode failed. Code not found for: " + fhirStatus.toString());
+                throw new ConversionException("createStatusDefiningCode failed. Code not found for: " + fhirStatus.toString());
         }
     }
 

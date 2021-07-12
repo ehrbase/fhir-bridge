@@ -1,6 +1,6 @@
 {
   "resourceType": "Condition",
-  "id": "74962b89-f656-4f05-83af-2356667b45e4",
+  "id": "eb010879-b54b-42d1-8e01-ec42ba61e7d8",
   "meta": {
     "profile": [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/symptoms-covid-19"
@@ -17,16 +17,35 @@
       ]
     }
   ],
+  "clinicalStatus": {
+    "coding": [
+      {
+        "code": "active",
+        "display": "Active",
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+      }
+    ]
+  },
   "code": {
     "coding": [
       {
-        "code": "40917007",
-        "display": "Clouded consciousness",
+        "code": "49727002",
+        "display": "Cough",
         "system": "http://snomed.info/sct"
       }
     ]
   },
   "recordedDate": "2020-10-05",
+  "severity": {
+    "coding": [
+      {
+        "code": "24484000",
+        "display": "Severe",
+        "system": "http://snomed.info/sct"
+      }
+    ]
+  },
+  "onsetDateTime": "2020-10-05",
   "subject": {
     "identifier": {
       "system": "urn:ietf:rfc:4122",
@@ -36,13 +55,13 @@
   "verificationStatus": {
     "coding": [
       {
-        "code": "refuted",
-        "display": "Refuted",
+        "code": "confirmed",
+        "display": "Confirmed",
         "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
       },
       {
-        "code": "410594000",
-        "display": "Definitely NOT present (qualifier value)",
+        "code": "410605003",
+        "display": "Confirmed present (qualifier value)",
         "system": "http://snomed.info/sct"
       }
     ]

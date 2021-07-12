@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.symptoms;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.QuestionnaireSection;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.FieberInDenLetzten24StundenCluster;
@@ -116,7 +116,7 @@ public class Symptoms extends QuestionnaireSection {
                 this.mapWhenSymptomsAppear(getValueAsDate(question).get());
                 break;
             default:
-                throw new UnprocessableEntityException("LinkId " + question.getLinkId() + " undefined");
+                throw new ConversionException("LinkId " + question.getLinkId() + " undefined");
         }
     }
 
@@ -175,7 +175,7 @@ public class Symptoms extends QuestionnaireSection {
         } else if (schweregrad.equals(SchweregradDefiningCode.ICH_WEISS_ES_NICHT.getCode())) {
             return SchweregradDefiningCode.ICH_WEISS_ES_NICHT;
         } else {
-            throw new UnprocessableEntityException("fewer max temperature: " + schweregrad + " is not a valid code value !");
+            throw new ConversionException("fewer max temperature: " + schweregrad + " is not a valid code value !");
         }
     }
 

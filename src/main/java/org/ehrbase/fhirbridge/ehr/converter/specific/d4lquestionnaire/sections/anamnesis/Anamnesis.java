@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.anamnesis;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.QuestionnaireSection;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnaireComposition;
@@ -53,7 +53,7 @@ public class Anamnesis extends QuestionnaireSection {
                     adipositasEvaluationQuestion = Optional.of(new AdipositasEvaluationConverter().convert(question, language, authored));
                     break;
                 default:
-                    throw new UnprocessableEntityException("LinkId " + question.getLinkId() + " undefined");
+                    throw new ConversionException("LinkId " + question.getLinkId() + " undefined");
             }
     }
 
