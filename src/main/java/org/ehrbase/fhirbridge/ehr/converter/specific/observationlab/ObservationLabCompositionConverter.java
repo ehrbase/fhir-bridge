@@ -3,10 +3,12 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 import com.nedap.archie.rm.datavalues.DvText;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborbefundKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestKategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.StatusDefiningCode;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
@@ -14,6 +16,12 @@ import org.springframework.lang.NonNull;
 import java.util.List;
 
 public class ObservationLabCompositionConverter extends ObservationToCompositionConverter<GECCOLaborbefundComposition> {
+
+    String conclusion;
+
+    public ObservationLabCompositionConverter(String conclusion) {
+        this.conclusion = conclusion;
+    }
 
     @Override
     public GECCOLaborbefundComposition convertInternal(@NonNull Observation resource) {
@@ -25,7 +33,6 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
         return composition;
     }
 
-
     private void initialiseLabortestBezeichnungMap() {
         for (LabortestKategorieDefiningCode code : LabortestKategorieDefiningCode.values()) {
             if (code.getTerminologyId().equals("LOINC")) {
@@ -35,16 +42,19 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
     }
 
     private void setKategorieValue(Observation resource, GECCOLaborbefundComposition composition) {
-        for(Coding coding : resource.getCategory().get(0).getCoding()){
-            if (coding.getSystem().equals("http://loinc.org")) {
-                if (LabortestKategorieDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
-                    throw new ConversionException("Unknown LOINC code in observation");
-                }
+        for(CodeableConcept codeableConcept : resource.getCategory()){
+            convertKategorieValue(codeableConcept, composition);
+        }
+    }
+
+    private void convertKategorieValue(CodeableConcept codeableConcept, GECCOLaborbefundComposition composition) {
+        for(Coding coding : codeableConcept.getCoding()){
+            if (coding.getSystem().equals(CodeSystem.HL7_OBSERVATI0N_CATEGORY.getUrl())) {
                 LaborbefundKategorieElement labortestKategorieElement = new LaborbefundKategorieElement();
-                labortestKategorieElement.setValue(LabortestKategorieDefiningCode.getCodesAsMap().get(coding.getCode()).getValue());
+                labortestKategorieElement.setValue(coding.getCode());
                 composition.setKategorie(List.of(labortestKategorieElement));
             } else {
-                throw new ConversionException("No LOINC code in observation");
+                throw new ConversionException("No HL7 or a wrong Observation Category Code provided");
             }
         }
     }
