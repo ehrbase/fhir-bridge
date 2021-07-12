@@ -24,7 +24,7 @@ public class LaborergebnisObservationConverter extends DiagnosticReportToObserva
     protected LaborergebnisObservation convertInternal(DiagnosticReport diagnosticReport) {
         if(diagnosticReport.hasContained()){
             Observation observation = (Observation) diagnosticReport.getContained().get(0);
-            LaborergebnisObservation laborbefund = new ObservationLabCompositionConverter().convert(observation).getLaborergebnis();
+            LaborergebnisObservation laborbefund = new ObservationLabCompositionConverter("").convert(observation).getLaborergebnis();
             ProLaboranalytCluster laboranalytCluster = laborbefund.getProLaboranalyt();
             laborbefund.setLabortestKategorieDefiningCode(getLabortestCode(observation.getCategory().get(0)));
             mapSchlussfolgerung(laborbefund, diagnosticReport);
