@@ -1,52 +1,73 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ProcedureToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.GECCOProzedurComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeccoProzedurKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.KategorieDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Procedure;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+@SuppressWarnings("java:S6212")
 public class TherapyCompositionConverter extends ProcedureToCompositionConverter<GECCOProzedurComposition> {
 
+    private final UnbekannteProzedurEvaluationConverter unknownConverter = new UnbekannteProzedurEvaluationConverter();
+
+    private final NichtDurchgefuehrteProzedurEvaluationConverter notDoneConverter = new NichtDurchgefuehrteProzedurEvaluationConverter();
+
+    private final ProzedurActionConverter actionConverter = new ProzedurActionConverter();
+
     @Override
-    protected GECCOProzedurComposition convertInternal(Procedure resource) {
+    protected GECCOProzedurComposition convertInternal(Procedure procedure) {
         GECCOProzedurComposition result = new GECCOProzedurComposition();
-        mapCategory(result, resource);
-        switch (resource.getStatus()) {
-            case UNKNOWN:
-                result.setUnbekannteProzedur(new UnbekannteProzedurEvaluationConverter().convert(resource));
-                break;
-            case NOTDONE:
-                result.setNichtDurchgefuehrteProzedur(new NichtDurchgefuehrteProzedurEvaluationConverter().convert(resource));
-                break;
-            case ENTEREDINERROR:
-                throw new ConversionException("Invalid status");
-            default:
-                ProzedurAction prozedurAction = new ProzedurActionConverter().convert(resource);
-                prozedurAction.setArtDerProzedurDefiningCode(result.getKategorie().get(0).getValue());
-                result.setProzedur(prozedurAction);
+
+        List<GeccoProzedurKategorieElement> categories = convertCategory(procedure);
+        result.setKategorie(categories);
+
+        if (procedure.getStatus() == Procedure.ProcedureStatus.UNKNOWN) {
+            result.setUnbekannteProzedur(unknownConverter.convert(procedure));
+        } else if (procedure.getStatus() == Procedure.ProcedureStatus.NOTDONE) {
+            result.setNichtDurchgefuehrteProzedur(notDoneConverter.convert(procedure));
+        } else {
+            result.setProzedur(actionConverter.convert(procedure));
         }
 
         return result;
     }
 
-    private void mapCategory(GECCOProzedurComposition composition, Procedure procedure) {
-        // Map Kategorie
-        composition.setKategorie(new ArrayList<>());
-        for (Coding coding : procedure.getCategory().getCoding()) {
-            if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && KategorieDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
-                GeccoProzedurKategorieElement element = new GeccoProzedurKategorieElement();
-                element.setValue(KategorieDefiningCode.getCodesAsMap().get(coding.getCode()));
-                composition.getKategorie().add(element);
-            }
+    private List<GeccoProzedurKategorieElement> convertCategory(Procedure procedure) {
+        if (!procedure.hasCategory()) {
+            return new ArrayList<>();
         }
-    }
 
+        return procedure.getCategory()
+                .getCoding()
+                .stream()
+                .filter(coding -> coding.getSystem().equals(CodeSystem.SNOMED.getUrl()))
+                .map(coding -> {
+                    GeccoProzedurKategorieElement element = new GeccoProzedurKategorieElement();
+                    element.setValue(KategorieDefiningCode.getCodesAsMap().get(coding.getCode()));
+                    return element;
+                })
+                .collect(Collectors.toList());
+    }
 }
