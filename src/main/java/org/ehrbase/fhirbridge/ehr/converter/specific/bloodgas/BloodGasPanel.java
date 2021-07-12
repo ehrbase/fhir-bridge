@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Resource;
 
@@ -39,11 +39,11 @@ public class BloodGasPanel {
             } else if (BloogGasProfileUrl.OXYGEN_SATURATION.getUrl().equals(profileUrl)) {
                 this.oxygenSaturation = Optional.of((Observation) resource);
             } else {
-                throw new UnprocessableEntityException("Blood gas panel bundle needs to contain only the profiles for the blood gas panel. Please delete profile " + profileUrl + " from the Bundle.");
+                throw new ConversionException("Blood gas panel bundle needs to contain only the profiles for the blood gas panel. Please delete profile " + profileUrl + " from the Bundle.");
             }
 
         } catch (IndexOutOfBoundsException e) {
-            throw new UnprocessableEntityException("Make sure only the for Blood Gas Panel supported Profiles are contained in the Bundle these are: blood gas panel, oxygen saturation, carbon dioxide saturation, ph, oxygen partaial pressure");
+            throw new ConversionException("Make sure only the for Blood Gas Panel supported Profiles are contained in the Bundle these are: blood gas panel, oxygen saturation, carbon dioxide saturation, ph, oxygen partaial pressure");
         }
     }
 

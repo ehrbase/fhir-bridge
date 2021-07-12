@@ -1,8 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.BundeslandRegionDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.LandDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
@@ -17,11 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
-import static org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL;
-import static org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL;
-import static org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION;
-import static org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED;
-import static org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL;
+
 
 public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Observation, ReisehistorieAdminEntry> {
 
@@ -67,18 +64,18 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
         Coding coding = observationComponent.getCode().getCoding().get(0);
         validateCodeSystemLOINC(coding.getSystem());
         String code = coding.getCode();
-        if (code.equals(LOINC_DATE_TRAVEL_STARTED.getCode())) {
+        if (code.equals(HistoryOfTravelCode.LOINC_DATE_TRAVEL_STARTED.getCode())) {
             travel.setEinreisedatumValue(getDate(observationComponent));
-        } else if (code.equals(LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION.getCode())) {
+        } else if (code.equals( HistoryOfTravelCode.LOINC_DATE_OF_DEPARTURE_FROM_TRAVEL_DESTINATION.getCode())) {
             travel.setAbfahrtsdatumValue(getDate(observationComponent));
-        } else if (code.equals(LOINC_CITY_OF_TRAVEL.getCode())) {
+        } else if (code.equals( HistoryOfTravelCode.LOINC_CITY_OF_TRAVEL.getCode())) {
             travel.setStadtValue(getCity(observationComponent));
-        } else if (code.equals(LOINC_STATE_OF_TRAVEL.getCode())) {
+        } else if (code.equals( HistoryOfTravelCode.LOINC_STATE_OF_TRAVEL.getCode())) {
             travel.setBundeslandRegionDefiningCode(getBundeslandRegion(observationComponent));
-        } else if (code.equals(LOINC_COUNTRY_OF_TRAVEL.getCode())) {
+        } else if (code.equals( HistoryOfTravelCode.LOINC_COUNTRY_OF_TRAVEL.getCode())) {
             travel.setLandDefiningCode(getLand(observationComponent));
         } else {
-            throw new UnprocessableEntityException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":" + code + "' instead");
+            throw new ConversionException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":" + code + "' instead");
         }
     }
 
@@ -102,7 +99,7 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
 
     private void validateCodeSystemLOINC(String systemCode) {
         if (!LOINC.getUrl().equals(systemCode)) {
-            throw new UnprocessableEntityException("The system is not correct. " +
+            throw new ConversionException("The system is not correct. " +
                     "It should be '" + LOINC.getUrl() + "', but it was '" + systemCode + "'.");
         }
     }

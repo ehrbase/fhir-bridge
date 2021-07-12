@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.condition;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Bundle;
@@ -33,20 +33,6 @@ class ConditionIT extends AbstractMappingTestSetupIT {
         create("create-condition-default.json");
     }
 
-    @Test
-    void createSymptomCovidAbsent() throws IOException {
-        create("create-symptoms-covid-19-absent.json");
-    }
-
-    @Test
-    void createSymptomCovidPresent() throws IOException {
-        create("create-symptoms-covid-19-present.json");
-    }
-
-    @Test
-    void createSymptomCovidUnknown() throws IOException {
-        create("create-symptoms-covid-19-unknown.json");
-    }
 
     @Test
     void createDiagnoseChronicLiverDisease() throws IOException {
@@ -236,7 +222,7 @@ class ConditionIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Condition condition = (Condition) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () -> {
+        return assertThrows(ConversionException.class, () -> {
             // new YourConverter().convert(@NonNull (condition)));
         });
     }

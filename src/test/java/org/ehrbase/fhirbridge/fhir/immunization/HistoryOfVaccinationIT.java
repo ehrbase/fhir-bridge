@@ -83,14 +83,14 @@ class HistoryOfVaccinationIT extends AbstractMappingTestSetupIT {
     @Test
     void createInvalidDiseaseSnomedCode() throws IOException {
         Exception exception = executeMappingException("invalid-target-disease-snomed-code.json");
-        assertEquals("Invalid Snomed Code 16814asd004 entered", exception.getMessage());
+        assertEquals("Invalid Snomed code 16814asd004 entered", exception.getMessage());
     }
 
 
     @Test
     void createInvalidTargetDiseaseSystem() throws IOException {
         Exception exception = executeMappingException("invalid-target-disease-system.json");
-        assertEquals("Target Disease System is wrong, has to be SNOMED.", exception.getMessage());
+        assertEquals("Target disease system is wrong, has to be SNOMED.", exception.getMessage());
     }
 
     @Override

@@ -443,7 +443,7 @@ generate payload from example json
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_CONDITION}/create-symptoms-covid-19-present.json
+	${payload}          Load JSON From File    ${DATA_SET_PATH_CONDITION}/Symptom/create-symptoms-covid-19-present.json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 

@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas;
 
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyteconverter.KohlendioxidpartialdruckConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyteconverter.PhWertConverter;
@@ -58,7 +58,7 @@ class LaborergebnisBefundObservationConverter extends ObservationToObservationCo
                 return LabortestBezeichnungDefiningCode.GAS_PANEL_CAPILLARY_BLOOD;
             }
         }
-        throw new UnprocessableEntityException("The coding of the LabortestBezeichnung: "+fhirObservation.getCode().getCoding()+" cannot be mapped, needs to be either blood (LOINC code 24338-6)" +
+        throw new ConversionException("The coding of the LabortestBezeichnung: "+fhirObservation.getCode().getCoding()+" cannot be mapped, needs to be either blood (LOINC code 24338-6)" +
                 ", arterial blood (24336-0) or capillary blood (24337-8), check JSON at path Observation.code.coding");
     }
 
