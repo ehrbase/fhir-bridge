@@ -115,17 +115,34 @@ server:
     context-path: /fhir-bridge
 # Logging Properties
 logging:
+  file:
+    name: ./logs/fhir-bridge.log
+  logback:
+    rollingpolicy:
+      max-history: 30
+      max-file-size: 100MB
   level:
-    ca.uhn.fhir: warn
-    com.zaxxer.hikari: warn
+    ca.uhn.fhir: error
+    com.zaxxer.hikari: error
     liquibase: error
-    org.apache.camel: warn
-    org.ehrbase.fhirbridge: debug
-    org.hibernate: warn
-    org.openehealth.ipf: warn
-    org.quartz: warn
-    org.springframework: warn
-    org.springframework.boot: warn
+    org.apache.camel: error
+    org.ehrbase.client: warn
+    org.ehrbase.fhirbridge: info
+    org.hibernate: error
+    org.openehealth.ipf: error
+    org.quartz: error
+    org.springframework: error
+    org.springframework.boot: error
+# Management Properties
+management:
+  endpoints:
+    web:
+      cors:
+        allowed-origins: '*'
+        allowed-methods: '*'
+        allowed-headers: '*'
+      exposure:
+        include: env, health, info, liquibase, logfile, loggers
 
 ################################################################################
 # Open eHealth Integration Platform Properties                                 #
