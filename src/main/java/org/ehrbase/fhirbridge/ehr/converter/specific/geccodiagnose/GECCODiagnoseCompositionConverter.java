@@ -33,7 +33,7 @@ public class GECCODiagnoseCompositionConverter extends ConditionToCompositionCon
     private void mapCategoryCoding(Condition resource, GECCODiagnoseComposition composition) {
         Coding categoryCoding = resource.getCategory().get(0).getCoding().get(0);
         if (categoryCoding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().containsKey(categoryCoding.getCode())) {
-            composition.setKategorieDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().get(categoryCoding.getCode()));
+            composition.setKategorie(DvCodedTextParser.parseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().get(categoryCoding.getCode())));
         } else {
             throw new UnprocessableEntityException("Category has either no or an unsupported SNOMED code");
         }

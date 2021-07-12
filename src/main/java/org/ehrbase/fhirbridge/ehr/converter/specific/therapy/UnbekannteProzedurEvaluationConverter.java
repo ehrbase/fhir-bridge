@@ -1,36 +1,34 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NameDerProzedurDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.UnbekannteProzedurEvaluation;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Procedure;
 
-public class UnbekannteProzedurEvaluationConverter extends EntryEntityConverter<Procedure, UnbekannteProzedurEvaluation> {
-    @Override
-    protected UnbekannteProzedurEvaluation convertInternal(Procedure resource) {
-        UnbekannteProzedurEvaluation unbekannteProzedur = new UnbekannteProzedurEvaluation();
-        unbekannteProzedur.setAussageUeberDieFehlendeInformationValue(resource.getStatus().getDisplay());
-        try {
-            unbekannteProzedur.setUnbekannteProzedurDefiningCode(mapNameDerProzedur(resource));
-        } catch (ConversionException e) {
-            throw new ConversionException("Some parts of the unknown procedure did not contain the required elements. "
-                    + e.getMessage(), e);
-        }
-        return unbekannteProzedur;
-    }
+@SuppressWarnings("java:S6212")
+public class UnbekannteProzedurEvaluationConverter extends EntryEntityConverter<Procedure, UnbekannteProzedurEvaluation>
+        implements TherapyConverter {
 
-    private NameDerProzedurDefiningCode mapNameDerProzedur(Procedure procedure) throws ConversionException {
-        Coding coding = procedure.getCode().getCoding().get(0);
-        if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && NameDerProzedurDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
-            return NameDerProzedurDefiningCode.getCodesAsMap().get(coding.getCode());
-        } else {
-            throw new ConversionException("Invalid name of procedure");
-        }
+    @Override
+    protected UnbekannteProzedurEvaluation convertInternal(Procedure procedure) {
+        UnbekannteProzedurEvaluation result = new UnbekannteProzedurEvaluation();
+        result.setAussageUeberDieFehlendeInformationValue(Procedure.ProcedureStatus.UNKNOWN.getDisplay());
+        result.setUnbekannteProzedurDefiningCode(convertCode(procedure));
+        return result;
     }
 }
