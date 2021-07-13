@@ -17,12 +17,6 @@ import java.util.List;
 
 public class ObservationLabCompositionConverter extends ObservationToCompositionConverter<GECCOLaborbefundComposition> {
 
-    String conclusion;
-
-    public ObservationLabCompositionConverter(String conclusion) {
-        this.conclusion = conclusion;
-    }
-
     @Override
     public GECCOLaborbefundComposition convertInternal(@NonNull Observation resource) {
         GECCOLaborbefundComposition composition = new GECCOLaborbefundComposition();

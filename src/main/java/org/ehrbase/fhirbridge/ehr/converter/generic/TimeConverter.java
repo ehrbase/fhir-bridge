@@ -1,6 +1,17 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Consent;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Encounter;
+import org.hl7.fhir.r4.model.Extension;
+import org.hl7.fhir.r4.model.Immunization;
+import org.hl7.fhir.r4.model.MedicationStatement;
+import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Procedure;
+import org.hl7.fhir.r4.model.QuestionnaireResponse;
+import org.hl7.fhir.r4.model.Specimen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

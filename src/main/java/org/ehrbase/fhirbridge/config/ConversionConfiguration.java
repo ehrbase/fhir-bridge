@@ -132,7 +132,7 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.PATIENT_IN_ICU, new PatientInIcuCompositionConverter());
         conversionService.registerConverter(Profile.PCR, new PCRCompositionConverter());
         conversionService.registerConverter(Profile.PREGNANCY_STATUS, new PregnancyStatusCompositionConverter());
-        conversionService.registerConverter(Profile.OBSERVATION_LAB, new ObservationLabCompositionConverter(""));
+        conversionService.registerConverter(Profile.OBSERVATION_LAB, new ObservationLabCompositionConverter());
         conversionService.registerConverter(Profile.RESPIRATORY_RATE, new RespiratoryRateCompositionConverter());
         conversionService.registerConverter(Profile.SOFA_SCORE, new SofaScoreCompositionConverter());
         conversionService.registerConverter(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());

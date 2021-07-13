@@ -1,17 +1,15 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
-import com.nedap.archie.rm.datavalues.DvText;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestKategorieDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 public class LaborergebnisObservationConverter extends ObservationToObservationConverter<LaborergebnisObservation> {
 
