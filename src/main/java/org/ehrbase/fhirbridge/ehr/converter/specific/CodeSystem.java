@@ -12,7 +12,9 @@ public enum CodeSystem {
 
     DIMDI_ATC("http://fhir.de/CodeSystem/dimdi/atc"),
 
-    HL7_OBSERVATI0N_CATEGORY("http://terminology.hl7.org/CodeSystem/observation-category");
+    HL7_OBSERVATI0N_CATEGORY("http://terminology.hl7.org/CodeSystem/observation-category"),
+
+    HL7_OBSERVATI0N_INTERPRETATION("http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation");
 
     private final String url;
 
