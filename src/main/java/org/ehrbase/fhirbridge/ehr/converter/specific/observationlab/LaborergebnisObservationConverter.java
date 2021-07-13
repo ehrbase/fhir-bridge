@@ -16,6 +16,7 @@ public class LaborergebnisObservationConverter extends ObservationToObservationC
     @Override
     protected LaborergebnisObservation convertInternal(Observation resource) {
         LaborergebnisObservation laborergebnisObservation = new LaborergebnisObservation();
+       // laborergebnisObservation.setTestDetails();
         initialiseLabortestBezeichnungMap();
         ProLaboranalytCluster laboranalyt = new LaborAnalytConverter().convert(resource);
         setKategorieValue(laborergebnisObservation, resource);
@@ -48,8 +49,8 @@ public class LaborergebnisObservationConverter extends ObservationToObservationC
         for(Coding coding : codeableConcept.getCoding()){
             if (coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && LabortestKategorieDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
                 observation.setLabortestKategorieDefiningCode(LabortestKategorieDefiningCode.getCodesAsMap().get(coding.getCode()));
-            } else {
-                throw new ConversionException("No LOINC Code or unsupported LOINC Code in Observation");
+            } else if(coding.getSystem().equals(CodeSystem.LOINC.getUrl())){
+                throw new ConversionException("Unsupported LOINC Code in Category.Coding.Loinc-observation Observation");
             }
         }
     }

@@ -47,8 +47,6 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
                 LaborbefundKategorieElement labortestKategorieElement = new LaborbefundKategorieElement();
                 labortestKategorieElement.setValue(coding.getCode());
                 composition.setKategorie(List.of(labortestKategorieElement));
-            } else {
-                throw new ConversionException("No HL7 or a wrong Observation Category Code provided");
             }
         }
     }
