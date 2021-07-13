@@ -26,6 +26,8 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
 
@@ -198,7 +200,8 @@ public class LaborAnalytConverter {
 
     private Optional<TemporalAccessor> mapZeitpunktDesErgebnisStatuses(Observation observation) {
         if (observation.hasIssued()) {
-            return Optional.of(observation.getEffectiveInstantType().getValueAsCalendar().toZonedDateTime());
+            return Optional.of(ZonedDateTime.ofInstant(observation.getIssued().toInstant(),
+                    ZoneId.systemDefault()));
         }
         return Optional.empty();
     }
