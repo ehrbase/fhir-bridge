@@ -33,7 +33,7 @@ class PersonenNameConverter {
         mapWeitereVornamen(name).ifPresent(personennameCluster::setWeitererVorname);
         mapNachname(name).ifPresent(personennameCluster::setNachnameValue);
         mapSuffix(name).ifPresent(personennameCluster::setSuffixValue);
-        if(personennameCluster.equals(new PersonennameCluster())){
+        if(personennameCluster.equals(new PersonennameCluster())){ // TODO implement equals or find other solution
             return Optional.empty();
         }else{
             return Optional.of(personennameCluster);
