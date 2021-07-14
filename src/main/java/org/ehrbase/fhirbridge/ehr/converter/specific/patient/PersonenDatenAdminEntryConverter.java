@@ -2,50 +2,63 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.DatenZurGeburtCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EthnischerHintergrundCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EthnischerHintergrundDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.PersonendatenAdminEntry;
+import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.*;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Extension;
+import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Patient;
 
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patient, PersonendatenAdminEntry> {
+
+    @SuppressWarnings("FieldCanBeLocal")
+    private final String ethnischerHintergrundExtensionUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group";
 
     @Override
     protected PersonendatenAdminEntry convertInternal(Patient resource) {
         PersonendatenAdminEntry personData = new PersonendatenAdminEntry();
-        personData.setDatenZurGeburt(getDataOnBirth(resource));
-        personData.setEthnischerHintergrund(getEthnicBackgroundData(resource));
+        mapDataOnBirth(resource).ifPresent(personData::setDatenZurGeburt);
+        mapEthnischerHintergrund(resource).ifPresent(personData::setEthnischerHintergrund);
+        List<PersonennameCluster> list = new PersonenNameConverter().convert(resource);
+        if (!list.isEmpty()) {
+            personData.setPersonenname(list);
+        }
         return personData;
     }
 
-    private List<EthnischerHintergrundCluster> getEthnicBackgroundData(Patient patient) {
-        List<EthnischerHintergrundCluster> items = new ArrayList<>();
-        try {
-            Extension extensionEthnicGroup = patient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group");
-            Coding ethnicGroup = (Coding) extensionEthnicGroup.getValue();
-            EthnischerHintergrundCluster ec = new EthnischerHintergrundCluster();
-            ec.setEthnischerHintergrundDefiningCode(EthnischerHintergrundDefiningCode.getBySNOMEDCode(ethnicGroup.getCode()));
-            items.add(ec);
-        } catch (NullPointerException e) {
-            throw new ConversionException("Getting ethnicGroup failed: " + e.getMessage());
+    private Optional<List<EthnischerHintergrundCluster>> mapEthnischerHintergrund(Patient patient) {
+        if (patient.hasExtension(ethnischerHintergrundExtensionUrl) && patient.getExtensionByUrl(ethnischerHintergrundExtensionUrl).hasValue()) {
+            if (((Coding) patient.getExtensionByUrl(ethnischerHintergrundExtensionUrl).getValue()).hasCode()) {
+                return convertEthnischerHintergrund(patient);
+            }
         }
-        return items;
+        return Optional.empty();
     }
 
-    private DatenZurGeburtCluster getDataOnBirth(Patient fhirPatient) {
-        DatenZurGeburtCluster datenZurGeburtCluster = new DatenZurGeburtCluster();
-        try {
-            //date of birth
-            datenZurGeburtCluster.setGeburtsdatumValue(fhirPatient.getBirthDate().toInstant().atZone(ZoneId.of("Europe/Berlin")).toLocalDate());
-        } catch (NullPointerException e) {
-            throw new ConversionException("Getting datenZurGeburt failed: " + e.getMessage());
+    private Optional<List<EthnischerHintergrundCluster>> convertEthnischerHintergrund(Patient patient) {
+        List<EthnischerHintergrundCluster> ethnischerHintergrundClusterList = new ArrayList<>();
+        Coding codig = (Coding) patient.getExtensionByUrl(ethnischerHintergrundExtensionUrl).getValue();
+        EthnischerHintergrundCluster ethnischerHintergrundCluster = new EthnischerHintergrundCluster();
+        if (EthnischerHintergrundDefiningCode.getBySNOMEDCode(codig.getCode()) != null) {
+            ethnischerHintergrundCluster.setEthnischerHintergrundDefiningCode(EthnischerHintergrundDefiningCode.getBySNOMEDCode(codig.getCode()));
+            ethnischerHintergrundClusterList.add(ethnischerHintergrundCluster);
+            return Optional.of(ethnischerHintergrundClusterList);
+        } else {
+            throw new ConversionException("The SNOMED code is not supported for this entry");
         }
-        return datenZurGeburtCluster;
+    }
+
+    private Optional<DatenZurGeburtCluster> mapDataOnBirth(Patient fhirPatient) {
+        if (fhirPatient.hasBirthDate()) {
+            DatenZurGeburtCluster datenZurGeburtCluster = new DatenZurGeburtCluster();
+            datenZurGeburtCluster.setGeburtsdatumValue(fhirPatient.getBirthDate().toInstant().atZone(ZoneId.of("Europe/Berlin")).toLocalDate());
+            return Optional.of(datenZurGeburtCluster);
+        } else {
+            return Optional.empty();
+        }
     }
 }
