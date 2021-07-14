@@ -2,23 +2,26 @@ package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import java.lang.Long;
 import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalAmount;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.OptionFor;
 import org.ehrbase.client.annotations.Path;
-import org.ehrbase.client.classgenerator.interfaces.PointEventEntity;
+import org.ehrbase.client.classgenerator.interfaces.IntervalEventEntity;
+import org.ehrbase.client.classgenerator.shareddefinition.MathFunction;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-14T14:30:10.580077200+02:00",
+    date = "2021-07-14T14:30:10.495411200+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-@OptionFor("POINT_EVENT")
-public class BefundJedesEreignisPointEvent implements PointEventEntity, BefundJedesEreignisChoice {
+@OptionFor("INTERVAL_EVENT")
+public class BefundJedesEreignisIntervalEvent implements IntervalEventEntity, BefundJedesEreignisChoice {
   /**
    * Path: Virologischer Befund/Befund/Jedes Ereignis/Labortest-Bezeichnung
    * Description: Name der Laboruntersuchung, die an der/den Probe(n) durchgeführt wurde.
@@ -91,6 +94,24 @@ public class BefundJedesEreignisPointEvent implements PointEventEntity, BefundJe
    */
   @Path("/time|value")
   private TemporalAccessor timeValue;
+
+  /**
+   * Path: Virologischer Befund/Befund/Jedes Ereignis/width
+   */
+  @Path("/width|value")
+  private TemporalAmount widthValue;
+
+  /**
+   * Path: Virologischer Befund/Befund/Jedes Ereignis/math_function
+   */
+  @Path("/math_function|defining_code")
+  private MathFunction mathFunctionDefiningCode;
+
+  /**
+   * Path: Virologischer Befund/Befund/Jedes Ereignis/sample_count
+   */
+  @Path("/sample_count")
+  private Long sampleCount;
 
   public void setLabortestBezeichnungDefiningCode(
       LabortestBezeichnungDefiningCode labortestBezeichnungDefiningCode) {
@@ -173,5 +194,29 @@ public class BefundJedesEreignisPointEvent implements PointEventEntity, BefundJe
 
   public TemporalAccessor getTimeValue() {
      return this.timeValue ;
+  }
+
+  public void setWidthValue(TemporalAmount widthValue) {
+     this.widthValue = widthValue;
+  }
+
+  public TemporalAmount getWidthValue() {
+     return this.widthValue ;
+  }
+
+  public void setMathFunctionDefiningCode(MathFunction mathFunctionDefiningCode) {
+     this.mathFunctionDefiningCode = mathFunctionDefiningCode;
+  }
+
+  public MathFunction getMathFunctionDefiningCode() {
+     return this.mathFunctionDefiningCode ;
+  }
+
+  public void setSampleCount(Long sampleCount) {
+     this.sampleCount = sampleCount;
+  }
+
+  public Long getSampleCount() {
+     return this.sampleCount ;
   }
 }

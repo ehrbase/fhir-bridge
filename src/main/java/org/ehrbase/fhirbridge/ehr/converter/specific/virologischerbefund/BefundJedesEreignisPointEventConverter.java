@@ -7,6 +7,8 @@ import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProbeCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.AnatomischeLokalisationCluster;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.NameDerKoerperstelleDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
 
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.DateTimeType;
@@ -43,7 +45,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     private void mapLabortestbezeichnung(Observation observation, BefundJedesEreignisPointEvent befundevent) {
 
         if(observation.getCategory().get(0).getCoding().get(2).getCode().equals("122442008")) {
-            befundevent.setLabortestBezeichnung(LabortestBezeichnungDefiningCode.DETECTION_OF_VIRUS_PROCEDURE.toDvCodedText());
+            befundevent.setLabortestBezeichnungDefiningCode(LabortestBezeichnungDefiningCode.DETECTION_OF_VIRUS_PROCEDURE);
         }else{
             throw new UnprocessableEntityException("createLabortestBezeichnungDefiningCode failed.");
         }
@@ -72,28 +74,28 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         switch (specimen.getCollection().getBodySite().getCoding().get(0).getCode()) {
 
             case "367592002":
-                anatomischeLokalisationCluster.setNameDerKoerperstelle(NameDerKoerperstelleDefiningCode.STRUCTURE_OF_POSTERIOR_NASOPHARYNX_BODY_STRUCTURE.toDvCodedText());
+                anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.STRUCTURE_OF_POSTERIOR_NASOPHARYNX_BODY_STRUCTURE);
                 break;
             case "12999009":
-                anatomischeLokalisationCluster.setNameDerKoerperstelle(NameDerKoerperstelleDefiningCode.STRUCTURE_OF_POSTERIOR_WALL_OF_OROPHARYNX_BODY_STRUCTURE.toDvCodedText());
+                anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.STRUCTURE_OF_POSTERIOR_WALL_OF_OROPHARYNX_BODY_STRUCTURE);
                 break;
             case "700016008":
-                anatomischeLokalisationCluster.setNameDerKoerperstelle(NameDerKoerperstelleDefiningCode.STRUCTURE_OF_INTERNAL_PART_OF_MOUTH.toDvCodedText());
+                anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.STRUCTURE_OF_INTERNAL_PART_OF_MOUTH_BODY_STRUCTURE);
                 break;
             case "44567001":
-                anatomischeLokalisationCluster.setNameDerKoerperstelle(NameDerKoerperstelleDefiningCode.TRACHEAL_STRUCTURE_BODY_STRUCTURE.toDvCodedText());
+                anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.TRACHEAL_STRUCTURE_BODY_STRUCTURE);
                 break;
             case "82094008":
-                anatomischeLokalisationCluster.setNameDerKoerperstelle(NameDerKoerperstelleDefiningCode.LOWER_RESPIRATORY_TRACT_STRUCTURE_BODY_STRUCTURE.toDvCodedText());
+                anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.LOWER_RESPIRATORY_TRACT_STRUCTURE_BODY_STRUCTURE);
                 break;
             case "91724006":
-                anatomischeLokalisationCluster.setNameDerKoerperstelle(NameDerKoerperstelleDefiningCode.TRACHEOBRONCHIAL_STRUCTURE_BODY_STRUCTURE.toDvCodedText());
+                anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.TRACHEOBRONCHIAL_STRUCTURE_BODY_STRUCTURE);
                 break;
             case "955009":
-                anatomischeLokalisationCluster.setNameDerKoerperstelle(NameDerKoerperstelleDefiningCode.BRONCHIAL_STRUCTURE_BODY_STRUCTURE.toDvCodedText());
+                anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.BRONCHIAL_STRUCTURE_BODY_STRUCTURE);
                 break;
             case "113253006":
-                anatomischeLokalisationCluster.setNameDerKoerperstelle(NameDerKoerperstelleDefiningCode.PULMONARY_ALVEOLAR_STRUCTURE_BODY_STRUCTURE.toDvCodedText());
+                anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.PULMONARY_ALVEOLAR_STRUCTURE_BODY_STRUCTURE);
                 break;
             default:
                 throw new UnprocessableEntityException("createNameDerKoerperstelleDefiningCode failed. Code not found for: " + specimen.getCollection().getBodySite().getCoding().get(0).getCode());
