@@ -62,7 +62,6 @@
           ]
         },
         "subject": {
-          "reference": "/Patient?identifier=urn:ietf:rfc:4122|{{patientId}}"
         },
         "encounter": {
           "reference": "http://external.fhir.server/Encounter/555"
@@ -154,7 +153,12 @@
             "http://highmed.org/StructureDefinition/Specimen"
           ]
         },
-
+        "subject": {
+          "identifier": {
+            "system": "urn:ietf:rfc:4122",
+            "value": "{{patientId}}"
+          }
+        },
         "collection":{
           "collectedDateTime" : "2011-08-16T06:15:00Z",
           "bodySite":{

@@ -18,7 +18,7 @@
     "originating_system_item_ids": [
       {
         "_type": "DV_IDENTIFIER",
-        "id": "Observation/3/_history/1",
+        "id": "Observation/d7893746-e2f9-4da2-a223-64d7607391f1/_history/1",
         "type": "fhir_logical_id"
       }
     ],
