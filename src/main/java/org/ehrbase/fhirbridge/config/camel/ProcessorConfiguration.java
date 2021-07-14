@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.config.camel;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
+import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.processor.FindPatientOpenehrProcessor;
 import org.ehrbase.fhirbridge.camel.processor.FindResourceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourcePersistenceProcessor;
@@ -128,12 +129,6 @@ public class ProcessorConfiguration {
     @Bean
     public FindResourceProcessor<Patient> findPatientProcessor(IFhirResourceDao<Patient> patientDao) {
         return new FindResourceProcessor<>(patientDao);
-    }
-
-    // TEST
-    @Bean
-    public FindPatientOpenehrProcessor findPatientOpenehrProcessor(IFhirResourceDao<Patient> patientDao) {
-        return new FindPatientOpenehrProcessor();
     }
 
     @Bean

@@ -16,19 +16,21 @@
 
 package org.ehrbase.fhirbridge.camel.processor;
 
-import ca.uhn.fhir.jpa.searchparam.SearchParameterMap;
-import ca.uhn.fhir.model.api.IQueryParameterType;
 import ca.uhn.fhir.rest.api.RestOperationTypeEnum;
-import ca.uhn.fhir.rest.api.server.IBundleProvider;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import ca.uhn.fhir.rest.param.HasParam;
+import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
+import ca.uhn.fhir.rest.server.exceptions.NotImplementedOperationException;
 import org.apache.camel.Exchange;
 import org.apache.camel.InvalidPayloadException;
 import org.apache.camel.Processor;
 import org.ehrbase.client.annotations.Template;
+import org.ehrbase.client.aql.record.Record1;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
+import org.ehrbase.client.openehrclient.AqlEndpoint;
+import org.ehrbase.client.openehrclient.OpenEhrClient;
+
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.Patient;
 import org.openehealth.ipf.commons.ihe.fhir.Constants;
 import org.reflections.Reflections;
@@ -37,27 +39,28 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Set;
 
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.List;
-import java.util.Map;
-import java.util.Arrays;
-import java.util.HashSet;
 
+import org.ehrbase.client.aql.query.Query;
+import org.springframework.stereotype.Component;
 
 
 /**
  * Test to find Patient in openEHR.
  *
  */
+@Component
 public class FindPatientOpenehrProcessor implements Processor {
 
     private static final Logger LOG = LoggerFactory.getLogger(FindPatientOpenehrProcessor.class);
 
-    public FindPatientOpenehrProcessor() {
-            }
+    private final OpenEhrClient openEhrClient;
+
+    public FindPatientOpenehrProcessor(OpenEhrClient openEhrClient) {
+        this.openEhrClient = openEhrClient;
+    }
 
     @Override
     public void process(Exchange exchange) throws Exception {
@@ -73,53 +76,144 @@ public class FindPatientOpenehrProcessor implements Processor {
     private void handleSearchOperation(Exchange exchange) throws Exception {
         LOG.debug("Execute 'search' operation");
 
-        /*
-        SearchParameterMap parameters = exchange.getIn().getMandatoryBody(SearchParameterMap.class);
-
-        // getting parameters this way gives empty...
-        for (String param : parameters.keySet()) {
-            System.out.println(param);
-
-            for (List<IQueryParameterType> complexValue : parameters.get(param)) {
-                for (IQueryParameterType simpleValue : complexValue) {
-                    System.out.println(simpleValue);
-                    System.out.println(simpleValue.getClass().getSimpleName());
-                }
-            }
-            System.out.println("");
-        }
-        */
-
         boolean isCount = false;
-        List<HasParam> hasParams = new ArrayList<>();
+
+        List<String> codeValues;
         HasParam tmpParam;
 
         RequestDetails request = extractRequestDetails(exchange);
-        Map<String, String[]> params = request.getParameters();
-        for (String key : params.keySet()) {
+        Map<String, String[]> inParams = request.getParameters();
 
-            //System.out.println(key + ": "); // _has:Encounter:patient:date // _summary // _has:Encounter:patient:date
+        // Gather all the information for the parameters including the templateId lookup result for the code params
+        List<HasParamTemplate> outParams = new ArrayList<>();
 
-            String[] values = params.get(key);
+        // aux structure to simplify creation of AQL queries based on templates
+        // templateId => list of params which values will be included in the same AQL query
+        Map<String, List<HasParamTemplate>> templateParamMap = new LinkedHashMap<>();
 
-            if (key.startsWith("_summary") && values.length > 0) {
+        for (String paramName : inParams.keySet()) {
 
-                isCount = values[0].equals("count");
+            // paramName: _has:Encounter:patient:date or _summary or _has:Encounter:patient:date
 
-            } else if (key.startsWith("_has")) {
+            String[] paramValues = inParams.get(paramName);
 
-                for (int i = 0; i < values.length; i++) { // multiple values if the same param was submitted twice
+            if (paramName.startsWith("_summary") && paramValues.length > 0) {
+
+                isCount = paramValues[0].equals("count");
+
+            } else if (paramName.startsWith("_has")) {
+
+                for (int i = 0; i < paramValues.length; i++) { // multiple values if the same param was submitted twice
 
                     tmpParam = new HasParam();
-                    tmpParam.setValueAsQueryToken(null, ca.uhn.fhir.rest.api.Constants.PARAM_HAS, key.substring(4), values[i]); // 3rd param is the key without the _has
-                    hasParams.add(tmpParam);
+
+                    // 3rd param is the key without the _has
+                    tmpParam.setValueAsQueryToken(null, ca.uhn.fhir.rest.api.Constants.PARAM_HAS, paramName.substring(4), paramValues[i]);
+
+                    // if any of the codes in getParameterValue() matches a template, all the codes will be compared to a path in that template
+                    // it might be semantically incorrect to have codes in the same list matching different templates
+                    // so one match is enough to know the template
+                    // but then we need an extra piece of metadata to know which path corresponds to the getTargetResourceType() . getParameterName() FHIR attribute,
+                    // which could be Observation.code or Condition.code.
+                    // if the getParameterName() is not "code" then it should be processed separately, for instance Encounter.date
+                    //System.out.println(param.getTargetResourceType() + "." + param.getParameterName() + "=" + param.getParameterValue());
+
+                    // process only the values of the 'code' attribute from the TargetResourceType (Observation, Condition, etc.)
+                    if (tmpParam.getParameterName().equals("code")) {
+
+                        // process each code in the code list individually because we can't be sure the
+                        // query parameter codes are consistent (all match the same template/path)
+                        codeValues = Arrays.stream(tmpParam.getParameterValue().split(","))
+                                .map(String::trim)
+                                .collect(Collectors.toList());
+
+                        Set<String> templateIds;
+
+                        for (String code : codeValues) {
+
+                            templateIds = this.findMatchingTemplates(code);
+
+                            // one outParam for each code in the list
+                            // if the matching template is the same, all the codes could be joined in the query, but just for that template
+                            // if there are many matching templates for each code, then different codes can be joined per template and there
+                            // will be one query per template, so if we have:
+                            // code1 | template1, template2
+                            // code2 | template2, template3
+                            //
+                            // there should be 3 aql queries: (pathX is defined in templateX)
+                            // SELECT .. FROM ... WHERE path1 = code1
+                            // SELECT .. FROM ... WHERE path2 matches {code1, code2}
+                            // SELECT .. FROM ... WHERE path3 = code2
+                            HasParamTemplate outParam = new HasParamTemplate(
+                                 tmpParam.getTargetResourceType(),
+                                 tmpParam.getParameterName(),
+                                 code,
+                                 templateIds
+                            );
+
+                            // build aux structure to join all params that will be used ont the AQL query for the same templateId
+                            List<HasParamTemplate> templateParams;
+                            boolean isTemplateParam = false;
+
+                            for (String templateId : templateIds) {
+
+                                templateParams = templateParamMap.get(templateId);
+
+                                if (templateParams == null) { // initialize the list for the current templateId key
+
+                                    templateParams = new ArrayList<>();
+                                    templateParams.add(outParam);
+                                    templateParamMap.put(templateId, templateParams);
+
+                                } else {
+
+                                    templateParams.add(outParam);
+                                }
+
+                                // true only if there are matching templates for the code value
+                                isTemplateParam = true;
+                            }
+
+                            // outParams has all the params that are not going to be used in queries based on templateIds
+                            if (!isTemplateParam) {
+                                outParams.add(outParam);
+                            }
+                        }
+                    } else if (tmpParam.getParameterName().equals("date")) {
+
+                        HasParamTemplate outParam = new HasParamTemplate(
+                            tmpParam.getTargetResourceType(),
+                            tmpParam.getParameterName(),
+                            tmpParam.getParameterValue(), // should be a single value
+                            null
+                        );
+
+                        outParams.add(outParam);
+                    }
                 }
             }
-
-            System.out.println("");
         }
 
-        /* TODO: How to get the parsed params from Camel?
+        // process queries not based on templates
+        for (HasParamTemplate outParam : outParams) {
+
+            // execute the query for this template and param and gather the resulting ehr ids
+            // TODO: need to accumulate the results in a Set to avoid duplicates
+
+            // TODO: the rest of the templates should have a method
+        }
+
+        // process queries based on templates
+        for (Map.Entry<String, List<HasParamTemplate>> templateParamsEntry : templateParamMap.entrySet() ) {
+
+            if (templateParamsEntry.getKey().equals("GECCO_Laborbefund")) {
+                handleQueryForGECCO_Laborbefund(templateParamsEntry.getValue());
+            }
+        }
+
+        /*
+        Sample paramName and values:
+
         _summary:
         count
 
@@ -135,40 +229,11 @@ public class FindPatientOpenehrProcessor implements Processor {
         */
 
 
+        // TODO: build one AQL per hasParam
+        // For the code ones, check the mappings to get the path where the code is mapped to
+        // For teh encounter date, check the mappings to ghet the path of the date
 
-        List<String> codeValues;
-        for (HasParam param : hasParams) {
 
-            // if any of the codes in getParameterValue() matches a template, all the codes will be compared to a path in that template
-            // it might be semantically incorrect to have codes in the same list matching different templates
-            // so one match is enough to know the template
-            // but then we need an extra piece of metadata to know which path corresponds to the getTargetResourceType() . getParameterName() FHIR attribute,
-            // which could be Observation.code or Condition.code.
-            // if the getParameterName() is not "code" then it should be processed separately, for instance Encounter.date
-            System.out.println(param.getTargetResourceType() + "." + param.getParameterName() + "=" + param.getParameterValue());
-
-            if (param.getParameterName().equals("code")) {
-
-                codeValues = Arrays.stream(param.getParameterValue().split(","))
-                        .map(String::trim)
-                        .collect(Collectors.toList());
-
-                // accumulates all unique matching templates for this FHIR parameter
-                Set<String> allTemplates = new HashSet<>();
-
-                for (String code : codeValues) {
-
-                    allTemplates.addAll(this.findMatchingTemplates(code));
-                }
-
-                for (String template : allTemplates) {
-
-                    System.out.println("Template found: " + template);
-                }
-
-                System.out.println("");
-            }
-        }
 
         //IBundleProvider bundleProvider = resourceDao.search(parameters, extractRequestDetails(exchange));
 
@@ -190,7 +255,7 @@ public class FindPatientOpenehrProcessor implements Processor {
         if (isCount) {
             exchange.getMessage().setHeader(Constants.FHIR_REQUEST_SIZE_ONLY, result.size()); // required if param _summary=count
         } else {
-            throw new Exception("_summary should be equals to 'count'");
+            throw new NotImplementedOperationException("_summary should be equals to 'count'");
         }
     }
 
@@ -214,9 +279,9 @@ public class FindPatientOpenehrProcessor implements Processor {
         return requestDetails;
     }
 
-    private List<String> findMatchingTemplates(String code) {
+    private Set<String> findMatchingTemplates(String code) {
 
-        List<String> templates = new ArrayList<>();
+        Set<String> templateIds = new HashSet<>();
 
         Reflections reflections = new Reflections("org.ehrbase.fhirbridge.ehr.opt");
         Set<Class<? extends Enum>> enumClasses = reflections.getSubTypesOf(Enum.class);
@@ -281,10 +346,97 @@ public class FindPatientOpenehrProcessor implements Processor {
             for (Class<? extends CompositionEntity> compoClass : compoClasses) {
 
                 Template templateAnnotation = compoClass.getAnnotation(Template.class);
-                templates.add(templateAnnotation.value());
+                templateIds.add(templateAnnotation.value());
             }
         }
 
-        return templates;
+        return templateIds;
+    }
+
+    private void handleQueryForGECCO_Laborbefund(List<HasParamTemplate> params) {
+
+        // Prepare AQL
+        // "a, b, c" => "\"a\",\"b\",\"c\""
+        String adlParams = ""; /*String.join(
+            ",",
+            Arrays.stream(param.getParameterValue().split(","))
+            .map(String::trim)
+            .map(s -> "'" + s + "'")
+            .collect(Collectors.toList())
+        );*/
+
+        String.join(
+            ",",
+            Arrays.stream(params)
+                .map(HasParamTemplate::getValue)
+                .map(s -> "'" + s + "'")
+                .collect(Collectors.toList())
+        );
+
+
+        String aql = "SELECT e/ehr_id/value "+
+                "FROM EHR e "+
+                //"CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.laboratory_test_result.v1] "+ // it works without this contains
+                "CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1] "+
+                "WHERE c/items[at0024]/value/defining_code/code_string matches{"+ adlParams +"}";
+
+        LOG.info(aql);
+
+        // Execute the AQL
+        Query<Record1<String>> query = Query.buildNativeQuery(aql, String.class);
+
+        List<Record1<String>> results = new ArrayList<>();
+
+        try {
+            results = this.openEhrClient.aqlEndpoint().execute(query);
+
+            for (Record1<String> record : results) {
+
+                LOG.info(record.value1()); // TODO: gather results in a set
+            }
+
+        } catch (Exception e) {
+            throw new InternalErrorException("There was a problem retrieving the result", e);
+        }
+
+
+        // TODO: get the results in a set and return
+
+
+    }
+
+    /**
+     * Represents one code matching a set of templateIds (the same code could be referenced by
+     * different paths on different templates)
+     */
+    private class HasParamTemplate {
+
+        private String targetResource;   // Observation, Encounter, Condition
+        private String targetParamName;  // code, date
+        private String value;            // code value or value of the single param name
+        private Set<String> templateIds; // template_ids matching any of the codes, can be empty if there are no matches or if the paramName is not a code, or multiple if different codes in the list match different templates
+
+        public HasParamTemplate(String targetResource, String targetParamName, String value, Set<String> templateIds) {
+            this.targetResource = targetResource;
+            this.targetParamName = targetParamName;
+            this.value = value;
+            this.templateIds = templateIds;
+        }
+
+        public String getTargetResource() {
+            return targetResource;
+        }
+
+        public String getTargetParamName() {
+            return targetParamName;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public Set<String> getTemplateIds() {
+            return templateIds;
+        }
     }
 }
