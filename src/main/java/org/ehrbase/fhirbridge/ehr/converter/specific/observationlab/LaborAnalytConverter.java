@@ -52,21 +52,22 @@ public class LaborAnalytConverter {
 
     private BezeichnungDesAnalytsDefiningCode mapUntersuchterAnalyt(Observation observation) {
         if (observation.getCode().hasCoding()) {
-            for (Coding coding : observation.getCode().getCoding()) {
-                return converUntersuchterAnalyt(coding);
-            }
+            converUntersuchterAnalyt(observation);
         } else {
             throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
         }
         throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
     }
 
-    private BezeichnungDesAnalytsDefiningCode converUntersuchterAnalyt(Coding coding) {
-        if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.hasCode()) {
-            return getCode(coding.getCode());
-        } else {
-            throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
+    private BezeichnungDesAnalytsDefiningCode converUntersuchterAnalyt(Observation observation) {
+        for (Coding coding : observation.getCode().getCoding()) {
+            if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.hasCode()) {
+                return getCode(coding.getCode());
+            } else {
+                throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
+            }
         }
+        throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
     }
 
     private BezeichnungDesAnalytsDefiningCode getCode(String code) {
@@ -135,18 +136,18 @@ public class LaborAnalytConverter {
     private Optional<InterpretationDefiningCode> mapInterpretation(Observation observation) {
         if (observation.hasInterpretation()) {
             for (CodeableConcept interpretations : observation.getInterpretation()) {
-                return convertInterpretationDefiningCode(interpretations);
+                if (interpretations.hasCoding()) {
+                    return convertInterpretationDefiningCode(interpretations);
+                }
             }
         }
         return Optional.empty();
     }
 
     private Optional<InterpretationDefiningCode> convertInterpretationDefiningCode(CodeableConcept interpretations) {
-        if (interpretations.hasCoding()) {
-            for (Coding coding : interpretations.getCoding()) {
-                if (verifyCodingAndSystemInterpretation(coding)) {
-                    return Optional.of(InterpretationDefiningCode.getCodesAsMap().get(coding.getCode()));
-                }
+        for (Coding coding : interpretations.getCoding()) {
+            if (verifyCodingAndSystemInterpretation(coding)) {
+                return Optional.of(InterpretationDefiningCode.getCodesAsMap().get(coding.getCode()));
             }
         }
         return Optional.empty();

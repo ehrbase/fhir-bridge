@@ -46,18 +46,23 @@ public class SpecimenConverter {
 
     private Optional<ProbenartDefiningCode> mapProbenart(Specimen specimenTarget) {
         if (specimenTarget.hasType() && specimenTarget.getType().hasCoding()) {
-            for (Coding coding : specimenTarget.getType().getCoding()) {
-                return convertProbenArtDefiningCode(coding);
+            return convertProbenArtDefiningCode(specimenTarget);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<ProbenartDefiningCode> convertProbenArtDefiningCode(Specimen specimenTarget) {
+        for (Coding coding : specimenTarget.getType().getCoding()) {
+            if (coding.hasSystem() && coding.getSystem().equals("http://terminology.hl7.org/CodeSystem/v2-0487") && coding.hasCode()) {
+                return convertProbenartIfKeyPresent(coding);
             }
         }
         return Optional.empty();
     }
 
-    private Optional<ProbenartDefiningCode> convertProbenArtDefiningCode(Coding coding) {
-        if (coding.hasSystem() && coding.getSystem().equals("http://terminology.hl7.org/CodeSystem/v2-0487") && coding.hasCode()) {
-            if (ProbenartDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
-                return Optional.of(ProbenartDefiningCode.getCodesAsMap().get(coding.getCode()));
-            }
+    private Optional<ProbenartDefiningCode> convertProbenartIfKeyPresent(Coding coding) {
+        if (ProbenartDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
+            return Optional.of(ProbenartDefiningCode.getCodesAsMap().get(coding.getCode()));
         }
         return Optional.empty();
     }
