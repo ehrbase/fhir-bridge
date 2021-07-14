@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.lang.Long;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAmount;
@@ -18,8 +17,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-18T14:46:29.652117800+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-14T14:30:10.495411200+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @OptionFor("INTERVAL_EVENT")
 public class BefundJedesEreignisIntervalEvent implements IntervalEventEntity, BefundJedesEreignisChoice {
@@ -29,8 +28,8 @@ public class BefundJedesEreignisIntervalEvent implements IntervalEventEntity, Be
    * Comment: Ein Laborergebnis kann sich auf ein einzelnes Analyt oder eine Analytgruppe beziehen. Dazu zählen auch komplette Panel an Parametern. 
    * Es wird dringend empfohlen, die "Labortest-Bezeichnung" anhand einer Terminologie zu kodiereren, wie zum Beispiel LOINC oder SNOMED CT. Beispiel: "Glukose", "Harnstoff", "Abstrich", "Cortisol", "Leberbiopsie". Der Name kann u.U. auch das Probenmaterial oder den Patientenstatus (z.B. "Blutzuckerspiegel nüchtern") oder andere Informationen beinhalten wie "Kalium (Blutgas)".
    */
-  @Path("/data[at0003]/items[at0005]/value")
-  private DvCodedText labortestBezeichnung;
+  @Path("/data[at0003]/items[at0005]/value|defining_code")
+  private LabortestBezeichnungDefiningCode labortestBezeichnungDefiningCode;
 
   /**
    * Path: Virologischer Befund/Befund/Jedes Ereignis/Tree/Labortest-Bezeichnung/null_flavour
@@ -114,12 +113,13 @@ public class BefundJedesEreignisIntervalEvent implements IntervalEventEntity, Be
   @Path("/sample_count")
   private Long sampleCount;
 
-  public void setLabortestBezeichnung(DvCodedText labortestBezeichnung) {
-     this.labortestBezeichnung = labortestBezeichnung;
+  public void setLabortestBezeichnungDefiningCode(
+      LabortestBezeichnungDefiningCode labortestBezeichnungDefiningCode) {
+     this.labortestBezeichnungDefiningCode = labortestBezeichnungDefiningCode;
   }
 
-  public DvCodedText getLabortestBezeichnung() {
-     return this.labortestBezeichnung ;
+  public LabortestBezeichnungDefiningCode getLabortestBezeichnungDefiningCode() {
+     return this.labortestBezeichnungDefiningCode ;
   }
 
   public void setLabortestBezeichnungNullFlavourDefiningCode(

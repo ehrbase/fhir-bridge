@@ -27,8 +27,8 @@ import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.
 @Archetype("openEHR-EHR-COMPOSITION.report-result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-18T14:46:29.511487400+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-14T14:30:10.341722300+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Virologischer Befund")
 public class VirologischerBefundComposition implements CompositionEntity {

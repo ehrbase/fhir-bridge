@@ -2,24 +2,20 @@ package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import com.nedap.archie.rm.generic.PartyProxy;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.OptionFor;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.PointEventEntity;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-18T14:46:29.745332800+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-14T14:30:10.580077200+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @OptionFor("POINT_EVENT")
 public class BefundJedesEreignisPointEvent implements PointEventEntity, BefundJedesEreignisChoice {
@@ -29,8 +25,8 @@ public class BefundJedesEreignisPointEvent implements PointEventEntity, BefundJe
    * Comment: Ein Laborergebnis kann sich auf ein einzelnes Analyt oder eine Analytgruppe beziehen. Dazu zählen auch komplette Panel an Parametern. 
    * Es wird dringend empfohlen, die "Labortest-Bezeichnung" anhand einer Terminologie zu kodiereren, wie zum Beispiel LOINC oder SNOMED CT. Beispiel: "Glukose", "Harnstoff", "Abstrich", "Cortisol", "Leberbiopsie". Der Name kann u.U. auch das Probenmaterial oder den Patientenstatus (z.B. "Blutzuckerspiegel nüchtern") oder andere Informationen beinhalten wie "Kalium (Blutgas)".
    */
-  @Path("/data[at0003]/items[at0005]/value")
-  private DvCodedText labortestBezeichnung;
+  @Path("/data[at0003]/items[at0005]/value|defining_code")
+  private LabortestBezeichnungDefiningCode labortestBezeichnungDefiningCode;
 
   /**
    * Path: Virologischer Befund/Befund/Jedes Ereignis/Tree/Labortest-Bezeichnung/null_flavour
@@ -85,18 +81,6 @@ public class BefundJedesEreignisPointEvent implements PointEventEntity, BefundJe
   private List<Cluster> strukturierteErfassungDerStoerfaktoren;
 
   /**
-   * Path: Virologischer Befund/Befund/subject
-   */
-  @Path("/subject")
-  private PartyProxy subject;
-
-  /**
-   * Path: Virologischer Befund/Befund/language
-   */
-  @Path("/language")
-  private Language language;
-
-  /**
    * Path: Virologischer Befund/Befund/Jedes Ereignis/feeder_audit
    */
   @Path("/feeder_audit")
@@ -108,12 +92,13 @@ public class BefundJedesEreignisPointEvent implements PointEventEntity, BefundJe
   @Path("/time|value")
   private TemporalAccessor timeValue;
 
-  public void setLabortestBezeichnung(DvCodedText labortestBezeichnung) {
-     this.labortestBezeichnung = labortestBezeichnung;
+  public void setLabortestBezeichnungDefiningCode(
+      LabortestBezeichnungDefiningCode labortestBezeichnungDefiningCode) {
+     this.labortestBezeichnungDefiningCode = labortestBezeichnungDefiningCode;
   }
 
-  public DvCodedText getLabortestBezeichnung() {
-     return this.labortestBezeichnung ;
+  public LabortestBezeichnungDefiningCode getLabortestBezeichnungDefiningCode() {
+     return this.labortestBezeichnungDefiningCode ;
   }
 
   public void setLabortestBezeichnungNullFlavourDefiningCode(
@@ -189,21 +174,4 @@ public class BefundJedesEreignisPointEvent implements PointEventEntity, BefundJe
   public TemporalAccessor getTimeValue() {
      return this.timeValue ;
   }
-
-  public void setSubject(PartyProxy subject) {
-      this.subject = subject;
-  }
-
-  public PartyProxy getSubject() {
-      return this.subject ;
-  }
-
-  public void setLanguage(Language language) {
-      this.language = language;
-  }
-
-  public Language getLanguage() {
-        return this.language ;
-    }
-
 }

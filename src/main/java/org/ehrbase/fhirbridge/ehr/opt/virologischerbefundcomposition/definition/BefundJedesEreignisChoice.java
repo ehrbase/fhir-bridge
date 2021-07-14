@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -10,8 +9,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-18T14:46:29.745332800+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-14T14:30:10.595708400+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public interface BefundJedesEreignisChoice {
   NullFlavour getLabortestBezeichnungNullFlavourDefiningCode();
@@ -32,10 +31,6 @@ public interface BefundJedesEreignisChoice {
 
   void setProbe(ProbeCluster probe);
 
-  DvCodedText getLabortestBezeichnung();
-
-  void setLabortestBezeichnung(DvCodedText labortestBezeichnung);
-
   FeederAudit getFeederAudit();
 
   void setFeederAudit(FeederAudit feederAudit);
@@ -55,4 +50,9 @@ public interface BefundJedesEreignisChoice {
   LabortestPanelCluster getLabortestPanel();
 
   void setLabortestPanel(LabortestPanelCluster labortestPanel);
+
+  LabortestBezeichnungDefiningCode getLabortestBezeichnungDefiningCode();
+
+  void setLabortestBezeichnungDefiningCode(
+      LabortestBezeichnungDefiningCode labortestBezeichnungDefiningCode);
 }

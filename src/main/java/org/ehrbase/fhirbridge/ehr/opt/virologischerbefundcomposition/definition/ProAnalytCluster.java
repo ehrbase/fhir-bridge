@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.lang.Long;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -19,8 +18,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.laboratory_test_analyte.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-18T14:46:29.710449700+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-14T14:30:10.542291200+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProAnalytCluster implements LocatableEntity {
   /**
@@ -43,8 +42,8 @@ public class ProAnalytCluster implements LocatableEntity {
    * Comment: Der Wert dieses Elements wird normalerweise, meist durch eine Spezialisierung, in einem Template oder zur Laufzeit der Anwendung geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum', 'Hämoglobin'. 
    * Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.
    */
-  @Path("/items[at0024 and name/value='Virusnachweistest']/value")
-  private DvCodedText virusnachweistest;
+  @Path("/items[at0024 and name/value='Virusnachweistest']/value|defining_code")
+  private VirusnachweistestDefiningCode virusnachweistestDefiningCode;
 
   /**
    * Path: Virologischer Befund/Befund/Jedes Ereignis/Tree/Labortest-Panel/Pro Analyt/Virusnachweistest/null_flavour
@@ -57,8 +56,8 @@ public class ProAnalytCluster implements LocatableEntity {
    * Description: (Mess-)Wert des Analyt-Resultats.
    * Comment: z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
    */
-  @Path("/items[at0001 and name/value='Nachweis']/value")
-  private DvCodedText nachweis;
+  @Path("/items[at0001 and name/value='Nachweis']/value|defining_code")
+  private NachweisDefiningCode nachweisDefiningCode;
 
   /**
    * Path: Virologischer Befund/Befund/Jedes Ereignis/Tree/Labortest-Panel/Pro Analyt/Nachweis/null_flavour
@@ -162,6 +161,14 @@ public class ProAnalytCluster implements LocatableEntity {
   private FeederAudit feederAudit;
 
   /**
+   * Path: Virologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Testmethode
+   * Description: Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.
+   */
+  @Path("/items[at0028]/value")
+  @Choice
+  private ProAnalytTestmethodeChoice testmethode;
+
+  /**
    * Path: Virologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Zugehörige Laborprobe
    * Description: Kennung der Probe, die für das Analyseergebnis verwendet wurde.
    */
@@ -186,12 +193,13 @@ public class ProAnalytCluster implements LocatableEntity {
      return this.analyseergebnisReihenfolgeNullFlavourDefiningCode ;
   }
 
-  public void setVirusnachweistest(DvCodedText virusnachweistest) {
-     this.virusnachweistest = virusnachweistest;
+  public void setVirusnachweistestDefiningCode(
+      VirusnachweistestDefiningCode virusnachweistestDefiningCode) {
+     this.virusnachweistestDefiningCode = virusnachweistestDefiningCode;
   }
 
-  public DvCodedText getVirusnachweistest() {
-     return this.virusnachweistest ;
+  public VirusnachweistestDefiningCode getVirusnachweistestDefiningCode() {
+     return this.virusnachweistestDefiningCode ;
   }
 
   public void setVirusnachweistestNullFlavourDefiningCode(
@@ -203,12 +211,12 @@ public class ProAnalytCluster implements LocatableEntity {
      return this.virusnachweistestNullFlavourDefiningCode ;
   }
 
-  public void setNachweis(DvCodedText nachweis) {
-     this.nachweis = nachweis;
+  public void setNachweisDefiningCode(NachweisDefiningCode nachweisDefiningCode) {
+     this.nachweisDefiningCode = nachweisDefiningCode;
   }
 
-  public DvCodedText getNachweis() {
-     return this.nachweis ;
+  public NachweisDefiningCode getNachweisDefiningCode() {
+     return this.nachweisDefiningCode ;
   }
 
   public void setNachweisNullFlavourDefiningCode(NullFlavour nachweisNullFlavourDefiningCode) {
@@ -335,6 +343,14 @@ public class ProAnalytCluster implements LocatableEntity {
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
+  }
+
+  public void setTestmethode(ProAnalytTestmethodeChoice testmethode) {
+     this.testmethode = testmethode;
+  }
+
+  public ProAnalytTestmethodeChoice getTestmethode() {
+     return this.testmethode ;
   }
 
   public void setZugehoerigeLaborprobe(ProAnalytZugehoerigeLaborprobeChoice zugehoerigeLaborprobe) {

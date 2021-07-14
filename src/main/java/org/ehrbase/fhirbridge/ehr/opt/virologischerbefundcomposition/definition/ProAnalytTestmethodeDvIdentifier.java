@@ -14,19 +14,19 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @OptionFor("DV_IDENTIFIER")
-public class ProAnalytZugehoerigeLaborprobeDvIdentifier implements RMEntity, ProAnalytZugehoerigeLaborprobeChoice {
+public class ProAnalytTestmethodeDvIdentifier implements RMEntity, ProAnalytTestmethodeChoice {
   /**
-   * Path: Virologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Zugehörige Laborprobe/Zugehörige Laborprobe
-   * Description: Kennung der Probe, die für das Analyseergebnis verwendet wurde.
+   * Path: Virologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Testmethode/Testmethode
+   * Description: Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.
    */
   @Path("")
-  private DvIdentifier zugehoerigeLaborprobe;
+  private DvIdentifier testmethode;
 
-  public void setZugehoerigeLaborprobe(DvIdentifier zugehoerigeLaborprobe) {
-     this.zugehoerigeLaborprobe = zugehoerigeLaborprobe;
+  public void setTestmethode(DvIdentifier testmethode) {
+     this.testmethode = testmethode;
   }
 
-  public DvIdentifier getZugehoerigeLaborprobe() {
-     return this.zugehoerigeLaborprobe ;
+  public DvIdentifier getTestmethode() {
+     return this.testmethode ;
   }
 }

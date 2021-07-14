@@ -10,23 +10,23 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-14T14:30:10.564435800+02:00",
+    date = "2021-07-14T14:30:10.580077200+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @OptionFor("DV_TEXT")
-public class ProAnalytErgebnisStatusDvText implements RMEntity, ProAnalytErgebnisStatusChoice {
+public class ProAnalytTestmethodeDvText implements RMEntity, ProAnalytTestmethodeChoice {
   /**
-   * Path: Virologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Ergebnis-Status/Ergebnis-Status
-   * Description: Status des Analyseergebnisses.
+   * Path: Virologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Testmethode/Testmethode
+   * Description: Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.
    */
   @Path("|value")
-  private String ergebnisStatusValue;
+  private String testmethodeValue;
 
-  public void setErgebnisStatusValue(String ergebnisStatusValue) {
-     this.ergebnisStatusValue = ergebnisStatusValue;
+  public void setTestmethodeValue(String testmethodeValue) {
+     this.testmethodeValue = testmethodeValue;
   }
 
-  public String getErgebnisStatusValue() {
-     return this.ergebnisStatusValue ;
+  public String getTestmethodeValue() {
+     return this.testmethodeValue ;
   }
 }

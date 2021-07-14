@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -18,8 +17,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.specimen.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-18T14:46:29.667735500+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-14T14:30:10.511039900+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProbeCluster implements LocatableEntity {
   /**
@@ -27,8 +26,8 @@ public class ProbeCluster implements LocatableEntity {
    * Description: Die Art der Probe.
    * Comment: Zum Beispiel: Venöses Blut, Bakterienkultur, Zytologie oder Prostatabiopsie. Nach Möglichkeit wird die Kodierung der Probenart mit einer Terminologie bevorzugt.
    */
-  @Path("/items[at0029]/value")
-  private DvCodedText probenart;
+  @Path("/items[at0029]/value|defining_code")
+  private ProbenartDefiningCode probenartDefiningCode;
 
   /**
    * Path: Virologischer Befund/Befund/Jedes Ereignis/Tree/Probe/Probenart/null_flavour
@@ -210,12 +209,12 @@ public class ProbeCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setProbenart(DvCodedText probenart) {
-     this.probenart = probenart;
+  public void setProbenartDefiningCode(ProbenartDefiningCode probenartDefiningCode) {
+     this.probenartDefiningCode = probenartDefiningCode;
   }
 
-  public DvCodedText getProbenart() {
-     return this.probenart ;
+  public ProbenartDefiningCode getProbenartDefiningCode() {
+     return this.probenartDefiningCode ;
   }
 
   public void setProbenartNullFlavourDefiningCode(NullFlavour probenartNullFlavourDefiningCode) {

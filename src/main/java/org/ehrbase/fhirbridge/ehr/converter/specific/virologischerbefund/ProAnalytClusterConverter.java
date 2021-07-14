@@ -6,6 +6,8 @@ import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytErgebnisStatusElement;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisElement;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytZugehoerigeLaborprobeChoice;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.NachweisDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.VirusnachweistestDefiningCode;
 
 
 import org.hl7.fhir.exceptions.FHIRException;
@@ -28,7 +30,7 @@ public class ProAnalytClusterConverter {
             List<ProAnalytQuantitativesErgebnisElement>  proAnalytQuantitativesErgebnisElementList = new ArrayList<>();
             proAnalytQuantitativesErgebnisElementList.add(new ProAnalytQuantitativesErgebnisElementConverter().convert(observation));
             proAnalytCluster.setQuantitativesErgebnis(proAnalytQuantitativesErgebnisElementList);
-            proAnalytCluster.setNachweis(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE.toDvCodedText());
+            proAnalytCluster.setNachweisDefiningCode(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE);
         } else{
             throw new UnprocessableEntityException ("Observation needs either ValueCodeableConcept or ValueQuantity.");
         }
@@ -51,13 +53,13 @@ public class ProAnalytClusterConverter {
 
         switch (observation.getCode().getCoding().get(0).getCode()){
             case "94500-6":
-                proAnalytCluster.setVirusnachweistest(VirusnachweistestDefiningCode.SARS_COV2_COVID19_RNA_PRESENCE_IN_RESPIRATORY_SPECIMEN_BY_NAA_WITH_PROBE_DETECTION.toDvCodedText());
+                proAnalytCluster.setVirusnachweistestDefiningCode(VirusnachweistestDefiningCode.SARS_COV2_COVID19_RNA_PRESENCE_IN_RESPIRATORY_SPECIMEN_BY_NAA_WITH_PROBE_DETECTION);
                 break;
             case "94558-4":
-                proAnalytCluster.setVirusnachweistest(VirusnachweistestDefiningCode.SARS_COV2_AG.toDvCodedText());
+                proAnalytCluster.setVirusnachweistestDefiningCode(VirusnachweistestDefiningCode.SARS_COV2_AG);
                 break;
             case "94745-7":
-                proAnalytCluster.setVirusnachweistest(VirusnachweistestDefiningCode.SARS_COV2_COVID19_RNA_CYCLE_THRESHOLD_IN_RESPIRATORY_SPECIMEN_BY_NAA_WITH_PROBE_DETECTION.toDvCodedText());
+                proAnalytCluster.setVirusnachweistestDefiningCode(VirusnachweistestDefiningCode.SARS_COV2_COVID19_RNA_CYCLE_THRESHOLD_IN_RESPIRATORY_SPECIMEN_BY_NAA_WITH_PROBE_DETECTION);
                 break;
             default:
                 throw new UnprocessableEntityException("Value code Virusnachweistest " + observation.getCode().getCoding().get(0).getCode() + " is not supported");
@@ -67,13 +69,13 @@ public class ProAnalytClusterConverter {
     private void mapNachweistest(Observation observation, ProAnalytCluster proAnalytCluster) throws FHIRException {
         switch(observation.getValueCodeableConcept().getCoding().get(0).getCode()){
             case "260373001":
-                proAnalytCluster.setNachweis(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE.toDvCodedText());
+                proAnalytCluster.setNachweisDefiningCode(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE);
                 break;
             case "419984006":
-                proAnalytCluster.setNachweis(NachweisDefiningCode.INCONCLUSIVE_QUALIFIER_VALUE.toDvCodedText());
+                proAnalytCluster.setNachweisDefiningCode(NachweisDefiningCode.INCONCLUSIVE_QUALIFIER_VALUE);
                 break;
             case "260415000":
-                proAnalytCluster.setNachweis(NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE.toDvCodedText());
+                proAnalytCluster.setNachweisDefiningCode(NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE);
                 break;
             default:
                 throw new UnprocessableEntityException("Value code Nachweistest " + observation.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
