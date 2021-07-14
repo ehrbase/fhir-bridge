@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.fhir.procedure;
 
-
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
@@ -25,15 +24,19 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class GenericTherapyIT extends AbstractMappingTestSetupIT {
+class GenericTherapyIT extends AbstractMappingTestSetupIT {
 
     public GenericTherapyIT() {
         super("Procedure/Therapy/", Procedure.class);
     }
 
     @Test
-    void createApheresisProcedure() throws IOException {
+    void testCreate() throws IOException {
         create("apheresis-example-1.json");
+    }
+
+    @Test
+    void createApheresisProcedure() throws IOException {
         testMapping("mapping/apheresis-example-1.json", "mapping/apheresis-example-1-result.json");
         testMapping("mapping/apheresis-example-2.json", "mapping/apheresis-example-2-result.json");
         testMapping("mapping/apheresis-example-3.json", "mapping/apheresis-example-3-result.json");
@@ -106,19 +109,19 @@ public class GenericTherapyIT extends AbstractMappingTestSetupIT {
     @Test
     void createApheresisWithInvalidCode() throws IOException {
         Exception exception = executeMappingException("invalid/apheresis-invalid-code.json");
-        assertEquals("Some parts of the not present procedure did not contain the required elements. Invalid name of procedure", exception.getMessage());
+        assertEquals("Invalid name of procedure", exception.getMessage());
     }
 
     @Test
     void createRadiologyWithInvalidBodySite() throws IOException {
         Exception exception = executeMappingException("invalid/radiology-example-invalid-body-site.json");
-        assertEquals("Some parts of the present procedure did not contain the required elements. Invalid body site for PLAIN_RADIOGRAPHY", exception.getMessage());
+        assertEquals("Invalid body site", exception.getMessage());
     }
 
     @Test
     void createRespiratoryTherapiesWithInvalidMedicalDevice() throws IOException {
         Exception exception = executeMappingException("invalid/respiratory-therapies-invalid-medical-device.json");
-        assertEquals("Some parts of the present procedure did not contain the required elements. Invalid medical device code", exception.getMessage());
+        assertEquals("Invalid medical device code", exception.getMessage());
     }
 
     @Override

@@ -1,17 +1,17 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.PatientenaufenthaltComposition;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.AbteilungsfallCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsfallCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungstellenkontaktCluster;
-import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.KONTAKT_EBENE;
-import org.ehrbase.fhirbridge.fhir.support.Encounters;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Identifier;
 import org.springframework.lang.NonNull;
+
+import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.KONTAKT_EBENE;
 
 
 public class PatientenAufenthaltCompositionConverter extends EncounterToCompositionConverter<PatientenaufenthaltComposition> {
@@ -21,7 +21,7 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
 
         PatientenaufenthaltComposition retVal = new PatientenaufenthaltComposition();
 
-        if (Encounters.isNotEmpty(encounter.getIdentifier()) && Encounters.isNotEmpty(encounter.getType())) {
+        if (!encounter.getIdentifier().isEmpty() && !encounter.getType().isEmpty()) {
 
             setFallCluster(retVal, encounter);
         }
@@ -37,7 +37,7 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
 
         if (!coding.getSystem().equals(KONTAKT_EBENE.getUrl())) {
 
-            throw new UnprocessableEntityException("Invalid Code system " + coding.getSystem() +
+            throw new ConversionException("Invalid Code system " + coding.getSystem() +
                     " valid code system: " + KONTAKT_EBENE.getUrl());
         }
 
@@ -66,7 +66,7 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
                 break;
             }
             default: {
-                throw new UnprocessableEntityException("Invalid Code " + typeCode +
+                throw new ConversionException("Invalid Code " + typeCode +
                         " or Code System as 'Kontaktebene', valid codes are einrichtungskontakt, abteilungskontakt, versorgungsstellenkontakt.");
             }
         }

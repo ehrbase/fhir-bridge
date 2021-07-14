@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AlterObservation;
@@ -36,7 +36,7 @@ public class AlterObservationConverter extends EntryEntityConverter<Patient, Alt
         }else if(ageValue.hasCode()){
           return getCodeAsInt(ageValue.getCode());
         }else{
-            throw new UnprocessableEntityException("No age value for the Patient was found");
+            throw new ConversionException("No age value for the Patient was found");
         }
     }
 
@@ -44,7 +44,7 @@ public class AlterObservationConverter extends EntryEntityConverter<Patient, Alt
         try{
             return Period.ofYears(Integer.parseInt(code));
         }catch (NumberFormatException numberFormatException){
-            throw new UnprocessableEntityException("The code " + code + " is not a valid age. Please enter an integer");
+            throw new ConversionException("The code " + code + " is not a valid age. Please enter an integer");
         }
     }
 }

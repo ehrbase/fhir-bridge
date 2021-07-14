@@ -1,13 +1,9 @@
 package org.ehrbase.fhirbridge.fhir.condition;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.specific.geccoDiagnose.GECCODiagnoseCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KoerperstelleCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.UnbekannteDiagnoseEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Condition;
 import org.javers.core.Javers;
@@ -118,31 +114,31 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
     @Test
     void createDiagnoseInvalidVerificationStatus() throws IOException {
         Exception exception = executeMappingException("invalid/invalid-verification-status.json");
-        assertEquals("Cant identify the verification status", exception.getMessage());
+        assertEquals("SNOMED code is invalid in VerificationStatus.coding.code", exception.getMessage());
     }
 
     @Test
     void createDiagnoseInvalidKategorie() throws IOException {
         Exception exception = executeMappingException("invalid/invalid-kategorie.json");
-        assertEquals("Category not present", exception.getMessage());
+        assertEquals("Category has either no or an unsupported SNOMED code", exception.getMessage());
     }
 
     @Test
     void createDiagnoseInvalidBodySite() throws IOException {
         Exception exception = executeMappingException("invalid/invalid-body-site.json");
-        assertEquals("Body site not processable.", exception.getMessage());
+        assertEquals("Bodysite contains either a wrong code or code system.", exception.getMessage());
     }
 
     @Test
     void createDiagnoseInvalidSeverity() throws IOException {
         Exception exception = executeMappingException("invalid/invalid-severity.json");
-        assertEquals("Severity not processable.", exception.getMessage());
+        assertEquals("Severity contains either a wrong code or code system.", exception.getMessage());
     }
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Condition condition = (Condition) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () -> {
+        return assertThrows(Exception.class, () -> {
             (new GECCODiagnoseCompositionConverter()).convert(condition);
         });
     }
@@ -164,6 +160,7 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(AusgeschlosseneDiagnoseEvaluation.class)
                 .registerValueObject(VorliegendeDiagnoseEvaluation.class)
                 .registerValueObject(UnbekannteDiagnoseEvaluation.class)
+                .registerValueObject(VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText.class)
                 .registerValueObject(KoerperstelleCluster.class)
                 .build();
     }

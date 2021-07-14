@@ -153,7 +153,7 @@ ${randinteger}                  ${12345}
 	# 																CODE
     # invalid cases for value
     $.subject.identifier.value		missing							422
-    $.subject.identifier.value		foobar							422
+    # Deprecated: $.subject.identifier.value		foobar							422
     $.subject.identifier.value		${EMPTY}						422
     $.subject.identifier.value		${{ [] }}						422
     $.subject.identifier.value		${{ {} }}						422
@@ -181,7 +181,7 @@ ${randinteger}                  ${12345}
     $.subject						${123}							422
 	
 	# comment: random uuid												
-    $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
+    # Deprecated: $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
 
 
 005 Create Symptoms-Covid-19 (Present) (invalid/missing 'verificationStatus')
@@ -443,7 +443,7 @@ generate payload from example json
 	[Documentation]		Generates actual request payload using example json as a starting point.
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_CONDITION}/create-symptoms-covid-19-present.json
+	${payload}          Load JSON From File    ${DATA_SET_PATH_CONDITION}/Symptom/create-symptoms-covid-19-present.json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 

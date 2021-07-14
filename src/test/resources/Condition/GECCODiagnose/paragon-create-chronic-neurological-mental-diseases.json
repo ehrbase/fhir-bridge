@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Condition/11/_history/1",
+      "id" : "Condition/7d8fc136-bffb-4781-8f5e-ed43fe7a76ee/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -142,7 +142,7 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Mental disorder (disorder)",
+          "value" : "Mental disorder",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {

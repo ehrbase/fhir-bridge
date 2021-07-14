@@ -2,12 +2,14 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
+import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
@@ -18,18 +20,10 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.problem_diagnosis.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:53:07.616265+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-12T18:58:20.557483+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class VorliegendeDiagnoseEvaluation implements EntryEntity {
-  /**
-   * Path: GECCO_Diagnose/Vorliegende Diagnose/Name des Problems/ der Diagnose
-   * Description: Namentliche Identifikation des Problems oder der Diagnose.
-   * Comment: Wo möglich, ist die Kodierung des Problems oder der Diagnose über eine Terminologie zu bevorzugen.
-   */
-  @Path("/data[at0001]/items[at0002]/value|defining_code")
-  private NameDesProblemsDerDiagnoseDefiningCode nameDesProblemsDerDiagnoseDefiningCode;
-
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Structure/Name des Problems/ der Diagnose/null_flavour
    */
@@ -62,8 +56,8 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
    * Description: Eine Gesamtbeurteilung des Schweregrades des Problems oder der Diagnose.
    * Comment: Ist der Schweregrad über vordefinierte Codes im Element "Name des Problems/ der Diagnose" enthalten, wird dieses Datenelement überflüssig. Hinweis: Eine spezifischere Einstufung des Schweregrads kann mit Hilfe des SLOTs "Spezifische Angaben" angegeben werden.
    */
-  @Path("/data[at0001]/items[at0005]/value|defining_code")
-  private SchweregradDefiningCode schweregradDefiningCode;
+  @Path("/data[at0001]/items[at0005]/value")
+  private DvCodedText schweregrad;
 
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Structure/Schweregrad/null_flavour
@@ -140,14 +134,13 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setNameDesProblemsDerDiagnoseDefiningCode(
-      NameDesProblemsDerDiagnoseDefiningCode nameDesProblemsDerDiagnoseDefiningCode) {
-     this.nameDesProblemsDerDiagnoseDefiningCode = nameDesProblemsDerDiagnoseDefiningCode;
-  }
-
-  public NameDesProblemsDerDiagnoseDefiningCode getNameDesProblemsDerDiagnoseDefiningCode() {
-     return this.nameDesProblemsDerDiagnoseDefiningCode ;
-  }
+  /**
+   * Path: GECCO_Diagnose/Vorliegende Diagnose/Name des Problems/ der Diagnose
+   * Description: Namentliche Identifikation des Problems oder der Diagnose.
+   */
+  @Path("/data[at0001]/items[at0002]/value")
+  @Choice
+  private VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice nameDesProblemsDerDiagnose;
 
   public void setNameDesProblemsDerDiagnoseNullFlavourDefiningCode(
       NullFlavour nameDesProblemsDerDiagnoseNullFlavourDefiningCode) {
@@ -184,12 +177,12 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
      return this.datumZeitpunktDesAuftretensDerErstdiagnoseNullFlavourDefiningCode ;
   }
 
-  public void setSchweregradDefiningCode(SchweregradDefiningCode schweregradDefiningCode) {
-     this.schweregradDefiningCode = schweregradDefiningCode;
+  public void setSchweregrad(DvCodedText schweregrad) {
+     this.schweregrad = schweregrad;
   }
 
-  public SchweregradDefiningCode getSchweregradDefiningCode() {
-     return this.schweregradDefiningCode ;
+  public DvCodedText getSchweregrad() {
+     return this.schweregrad ;
   }
 
   public void setSchweregradNullFlavourDefiningCode(
@@ -280,5 +273,14 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
+  }
+
+  public void setNameDesProblemsDerDiagnose(
+      VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice nameDesProblemsDerDiagnose) {
+     this.nameDesProblemsDerDiagnose = nameDesProblemsDerDiagnose;
+  }
+
+  public VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice getNameDesProblemsDerDiagnose() {
+     return this.nameDesProblemsDerDiagnose ;
   }
 }

@@ -1,14 +1,19 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
+import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
 import org.hl7.fhir.r4.model.Encounter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
-import org.ehrbase.fhirbridge.fhir.support.Encounters;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.temporal.TemporalAccessor;
 
-public abstract class EncounterToAdminEntryConverter <E extends EntryEntity> extends EntryEntityConverter<Encounter, E> {
+public abstract class EncounterToAdminEntryConverter<E extends EntryEntity> extends EntryEntityConverter<Encounter, E> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(EncounterToAdminEntryConverter.class);
 
     @Override
     public E convert(@NonNull Encounter resource) {
@@ -18,7 +23,7 @@ public abstract class EncounterToAdminEntryConverter <E extends EntryEntity> ext
     }
 
     public void invokeTimeValues(E entryEntity, Encounter resource) {
-        if(Encounters.isNotEmpty(resource.getLocation())) {
+        if (!resource.getLocation().isEmpty()) {
             invokeSetBeginEndValue(entryEntity, resource);
         }
 
@@ -26,7 +31,7 @@ public abstract class EncounterToAdminEntryConverter <E extends EntryEntity> ext
         invokeSetEntlassungValue(entryEntity, resource);
     }
 
-    public void invokeSetBeginEndValue(E entryEntity, Encounter resource){
+    public void invokeSetBeginEndValue(E entryEntity, Encounter resource) {
 
         try {
             Encounter.EncounterLocationComponent location = resource.getLocation().get(0);
@@ -44,8 +49,8 @@ public abstract class EncounterToAdminEntryConverter <E extends EntryEntity> ext
                 setEndValue.invoke(entryEntity, TimeConverter.convertEncounterLocationEndTime(location).get());
             }
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            exception.printStackTrace();
-        } catch (NoSuchMethodException ignored){
+            LOG.error(LoggerMessages.printInvokeError(exception));
+        } catch (NoSuchMethodException ignored) {
             //ignored
         }
     }
@@ -55,8 +60,8 @@ public abstract class EncounterToAdminEntryConverter <E extends EntryEntity> ext
             Method setDatumUhrzeitDerAufnahmeValue = entryEntity.getClass().getMethod("setDatumUhrzeitDerAufnahmeValue", TemporalAccessor.class);
             setDatumUhrzeitDerAufnahmeValue.invoke(entryEntity, TimeConverter.convertEncounterTime(resource));
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            exception.printStackTrace();
-        } catch (NoSuchMethodException ignored){
+            LOG.error(LoggerMessages.printInvokeError(exception));
+        } catch (NoSuchMethodException ignored) {
             //ignored
         }
     }
@@ -70,8 +75,8 @@ public abstract class EncounterToAdminEntryConverter <E extends EntryEntity> ext
             }
 
         } catch (IllegalAccessException | InvocationTargetException exception) {
-            exception.printStackTrace();
-        } catch (NoSuchMethodException ignored){
+            LOG.error(LoggerMessages.printInvokeError(exception));
+        } catch (NoSuchMethodException ignored) {
             //ignored
         }
     }

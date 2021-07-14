@@ -21,43 +21,48 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
-import org.ehrbase.fhirbridge.core.domain.ResourceMap;
-import org.ehrbase.fhirbridge.core.repository.ResourceMapRepository;
+import org.ehrbase.fhirbridge.core.domain.ResourceComposition;
+import org.ehrbase.fhirbridge.core.repository.ResourceCompositionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * {@link Processor} that handles the persistence of the {@link ResourceMap} entity and
- * returns the {@link MethodOutcome} stored in the exchange properties.
+ * {@link Processor} that stores the link between the FHIR resource and the openEHR composition.
  *
- * @since 1.2.0
+ * @since 1.0.0
  */
-@Component
+@Component(ProvideResourceResponseProcessor.BEAN_ID)
+@SuppressWarnings("java:S6212")
 public class ProvideResourceResponseProcessor implements Processor {
+
+    public static final String BEAN_ID = "provideResourceResponseProcessor";
 
     private static final Logger LOG = LoggerFactory.getLogger(ProvideResourceResponseProcessor.class);
 
-    private final ResourceMapRepository resourceMapRepository;
+    private final ResourceCompositionRepository resourceCompositionRepository;
 
-    public ProvideResourceResponseProcessor(ResourceMapRepository resourceMapRepository) {
-        this.resourceMapRepository = resourceMapRepository;
+    public ProvideResourceResponseProcessor(ResourceCompositionRepository resourceCompositionRepository) {
+        this.resourceCompositionRepository = resourceCompositionRepository;
     }
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        LOG.trace("Processing exchange...");
+        CompositionEntity composition = exchange.getIn().getBody(CompositionEntity.class);
+        MethodOutcome outcome = exchange.getProperty(CamelConstants.OUTCOME, MethodOutcome.class);
 
-        CompositionEntity composition = exchange.getIn().getMandatoryBody(CompositionEntity.class);
-        String resourceId = exchange.getIn().getHeader(CamelConstants.RESOURCE_ID, String.class);
+        String resourceId = outcome.getId().getIdPart();
+        ResourceComposition resourceComposition = resourceCompositionRepository.findById(resourceId)
+                .orElse(new ResourceComposition(resourceId));
+        resourceComposition.setCompositionId(getCompositionId(composition));
+        resourceCompositionRepository.save(resourceComposition);
+        LOG.debug("Saved ResourceComposition: resourceId={}, compositionId={}",
+                resourceComposition.getResourceId(), resourceComposition.getCompositionId());
 
-        ResourceMap resourceMap = resourceMapRepository.findById(resourceId)
-                .orElse(new ResourceMap(resourceId));
-        resourceMap.setCompositionVersionUid(composition.getVersionUid().toString());
+        exchange.getMessage().setBody(outcome);
+    }
 
-        resourceMapRepository.save(resourceMap);
-        LOG.debug("Saved ResourceMap: {}", resourceMap);
-
-        exchange.getMessage().setBody(exchange.getProperty(CamelConstants.METHOD_OUTCOME, MethodOutcome.class));
+    private String getCompositionId(CompositionEntity composition) {
+        return composition.getVersionUid().toString();
     }
 }

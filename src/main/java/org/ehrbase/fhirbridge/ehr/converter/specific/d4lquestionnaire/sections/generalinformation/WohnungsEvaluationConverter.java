@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.generalinformation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.generic.QuestionnaireResponseItemToEntryEntityConverter;
@@ -20,7 +20,7 @@ public class WohnungsEvaluationConverter extends QuestionnaireResponseItemToEntr
         } else if (housingSituation.equals(WohnsituationDefiningCode.ALLEIN_WOHNEND.getCode())) {
             wohnsituationEvaluation.setWohnsituationDefiningCode(WohnsituationDefiningCode.ALLEIN_WOHNEND);
         } else if (!housingSituation.equals("")) {
-            throw new UnprocessableEntityException("The code for Wohnungsituation:" + housingSituation + " cannot be mapped, please enter a valid code e.g. Wohnt mit anderen zusammen (LOINC: LA9996-5)");
+            throw new ConversionException("The code for Wohnungsituation:" + housingSituation + " cannot be mapped, please enter a valid code e.g. Wohnt mit anderen zusammen (LOINC: LA9996-5)");
         }
         wohnsituationEvaluation.setLanguage(Language.DE);
         wohnsituationEvaluation.setSubject(new PartySelf());

@@ -49,7 +49,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	# FIXME: The two following tests have to be review after that MII-Reference is updated
 	# $.subject.identifier.value		missing			422		mii-reference-1: Either reference.reference XOR reference.identifier exists ..this.reference.exists.. xor ..this.identifier.value.exists.. and .this.identifier.system.exists
 	# $.subject.identifier.system		missing			422		mii-reference-1: Either reference.reference XOR reference.identifier exists ..this.reference.exists.. xor ..this.identifier.value.exists.. and .this.identifier.system.exists
-	$.subject.identifier.value		foobar			422		EhrId not found for subject 'foobar'
+	# Deprecated: $.subject.identifier.value		foobar			422		EhrId not found for subject 'foobar'
 	$.subject.identifier.value		${EMPTY}		422		@value cannot be empty    Observation.subject.identifier.value
 	$.subject.identifier.value		${{ [] }}		422		This property must be an simple value, not an array    Observation.subject.identifier.value
 	$.subject.identifier.value		${{ {} }}		422		This property must be an simple value, not an object    Observation.subject.identifier.value
@@ -66,7 +66,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
     $.subject						${123}			422		The property subject must be an Object, not a primitive property    Observation.subject
 
 	# comment: random uuid																			 regex for uuid
-	$.subject.identifier.value    ${{str(uuid.uuid4())}}    422    EhrId not found for subject '([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'
+	# Deprecated: $.subject.identifier.value    ${{str(uuid.uuid4())}}    422    EhrId not found for subject '([0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'
 
 
 002 Create FiO2 (Invalid/Missing 'resourceType')

@@ -45,7 +45,6 @@ public enum LabortestKategorieDefiningCode implements EnumValueSet {
     this.code = code;
   }
 
-
   public static Map<String, LabortestKategorieDefiningCode> getCodesAsMap(){
     Map<String, LabortestKategorieDefiningCode> labortestKategorieDefiningCodeHashMap = new HashMap<>();
     for (LabortestKategorieDefiningCode labortestKategorieDefiningCode : LabortestKategorieDefiningCode.values()) {
@@ -53,7 +52,6 @@ public enum LabortestKategorieDefiningCode implements EnumValueSet {
     }
     return labortestKategorieDefiningCodeHashMap;
   }
-
 
   public String getValue() {
      return this.value ;

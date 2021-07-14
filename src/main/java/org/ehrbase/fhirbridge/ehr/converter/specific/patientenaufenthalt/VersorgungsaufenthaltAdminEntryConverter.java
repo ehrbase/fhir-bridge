@@ -1,13 +1,13 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt;
 
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToAdminEntryConverter;
-import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsaufenthaltAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.FachlicheOrganisationseinheitCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.StandortCluster;
-import org.ehrbase.fhirbridge.fhir.support.Encounters;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.hl7.fhir.r4.model.Encounter;
+import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsaufenthaltAdminEntry;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Encounter;
+
 import java.util.ArrayList;
 
 public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEntryConverter<VersorgungsaufenthaltAdminEntry> {
@@ -18,7 +18,7 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
     protected VersorgungsaufenthaltAdminEntry convertInternal(Encounter encounter) {
         VersorgungsaufenthaltAdminEntry versorgungsaufenthaltAdminEntry = new VersorgungsaufenthaltAdminEntry();
 
-        if(Encounters.isNotEmpty(encounter.getLocation())) {
+        if (!encounter.getLocation().isEmpty()) {
 
             Encounter.EncounterLocationComponent location = encounter.getLocation().get(0);
 
@@ -62,7 +62,7 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
                     standortCluster.setBettplatzValue(locationName);
                     break;
                 default: // other types aren't needed by EHR Composition
-                    throw new UnprocessableEntityException("unexpected location physical type " + locationPhysicalType +
+                    throw new ConversionException("unexpected location physical type " + locationPhysicalType +
                             " by EHR composition.");
             }
         }
@@ -83,7 +83,7 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
 
         ArrayList<FachlicheOrganisationseinheitCluster> retVal = new ArrayList<>();
 
-        for(Coding fachAbteilungsSchluessel : encounter.getServiceType().getCoding()) {
+        for (Coding fachAbteilungsSchluessel : encounter.getServiceType().getCoding()) {
 
             FachlicheOrganisationseinheitCluster fachlicheOrganisationseinheitCluster = new FachlicheOrganisationseinheitCluster();
 
@@ -92,7 +92,7 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
 
                 fachlicheOrganisationseinheitCluster.setFachabteilungsschluesselDefiningCode(FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().get(fachAbteilungsSchluessel.getCode()));
             } else {
-                throw new UnprocessableEntityException("Invalid Code " + fachAbteilungsSchluessel.getCode() +
+                throw new ConversionException("Invalid Code " + fachAbteilungsSchluessel.getCode() +
                         " or Code System for 'Fachabteilungsschlüssel'.");
             }
 

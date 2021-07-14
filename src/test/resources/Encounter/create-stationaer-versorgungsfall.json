@@ -49,7 +49,7 @@
   "diagnosis": [
     {
       "condition": {
-        "reference": "Condition/e6b6895c-549b-47c5-a842-41100761385d"
+        "reference": "http//external/Condition/123"
       }
     }
   ],

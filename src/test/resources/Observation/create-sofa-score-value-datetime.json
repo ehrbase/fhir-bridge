@@ -168,5 +168,6 @@
 		  "text": "Creatinine (mg/dl) [umol/L] (or urine output) > 5.0 [> 440] (or < 200 ml/d)"
 		}
 	  }
-	]
+	],
+	"valueInteger": 15
   }

@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
@@ -50,7 +50,7 @@ public abstract class QuestionnaireSection {
         } else if (code.equals("LA32-8")) {
             return false;
         } else {
-            throw new UnprocessableEntityException("\"" + code + "\" cannot be mapped to boolean, has to be either LA33-6 or LA33-8");
+            throw new ConversionException("\"" + code + "\" cannot be mapped to boolean, has to be either LA33-6 or LA33-8");
         }
     }
 

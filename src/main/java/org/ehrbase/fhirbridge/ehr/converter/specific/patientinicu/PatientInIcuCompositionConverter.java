@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.PatientAufICUComposition;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.StatusDefiningCode;
@@ -17,7 +17,7 @@ public class PatientInIcuCompositionConverter extends CompositionConverter<Obser
         if (status.equals(Observation.ObservationStatus.FINAL)) {
             composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
         } else {
-            throw new UnprocessableEntityException("Status has invalid code " + status.toCode());
+            throw new ConversionException("Status has invalid code " + status.toCode());
         }
     }
 

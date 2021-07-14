@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.generalinformation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.QuestionnaireResponseItemToEntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.BerufsbereichDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.BeschaeftigungCluster;
@@ -24,7 +24,7 @@ public class ZusammenfassungDerBeschaeftigungEvaluationConverter extends Questio
                 beschaftigungCluster.setBerufsbereichDefiningCode(BerufsbereichDefiningCode.SONSTIGES);
                 break;
             default:
-                throw new UnprocessableEntityException();
+                throw new ConversionException("The Value Code is not supported, supported ones are community, medical, LA46-8");
         }
         zusammenfassungDerBeschaftigungEvaluation.setBeschaeftigung(beschaftigungCluster);
         return zusammenfassungDerBeschaftigungEvaluation;

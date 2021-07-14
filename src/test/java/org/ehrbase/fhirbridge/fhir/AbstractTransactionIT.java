@@ -55,7 +55,7 @@ public class AbstractTransactionIT extends AbstractSetupIT {
                 .execute();
     }
 
-    private String getResourceAsString(String resourceLocation) throws IOException {
+    protected String getResourceAsString(String resourceLocation) throws IOException {
         Reader reader = new InputStreamReader(new ClassPathResource(resourceLocation).getInputStream(), StandardCharsets.UTF_8);
         String resource = FileCopyUtils.copyToString(reader);
         return resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID);

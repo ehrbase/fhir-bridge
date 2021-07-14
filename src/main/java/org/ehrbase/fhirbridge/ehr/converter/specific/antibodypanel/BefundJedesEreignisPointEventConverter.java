@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
@@ -50,7 +50,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
             Coding coding = codingList.get(0);
             return resolveNachweisDefiningCode(coding);
         }else{
-            throw new UnprocessableEntityException("ValueCodeableConcept.coding or code is missing");
+            throw new ConversionException("ValueCodeableConcept.coding or code is missing");
         }
     }
 
@@ -62,7 +62,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         } else if (coding.getCode().equals(NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
             return NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE;
         } else {
-            throw new UnprocessableEntityException("The code in valueCodeableConcept.coding.code is not supported");
+            throw new ConversionException("The code in valueCodeableConcept.coding.code is not supported");
         }
     }
 
@@ -71,7 +71,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
                 immunoassay.getObservation().getCode().getCoding().get(0).getSystem().equals(CodeSystem.LOINC.getUrl())) {
             return immunoassay.getVirusnachweistestDefiningCode();
         } else {
-            throw new UnprocessableEntityException("The Loinc code in code.coding is not supported in this profile");
+            throw new ConversionException("The Loinc code in code.coding is not supported in this profile");
         }
     }
 }

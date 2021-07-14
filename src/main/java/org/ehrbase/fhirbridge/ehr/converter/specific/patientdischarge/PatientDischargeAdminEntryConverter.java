@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patientdischarge;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoentlassungsdatencomposition.definition.ArtDerEntlassungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoentlassungsdatencomposition.definition.EntlassungsartAdminEntry;
@@ -40,7 +40,7 @@ public class PatientDischargeAdminEntryConverter extends EntryEntityConverter<Ob
                     adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.REFERRAL_TO_PALLIATIVE_CARE_SERVICE_PROCEDURE.toDvCodedText());
                     break;
                 default:
-                    throw new UnprocessableEntityException("Value code " + resource.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
+                    throw new ConversionException("Value code " + resource.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
             }
         }
 
@@ -49,7 +49,7 @@ public class PatientDischargeAdminEntryConverter extends EntryEntityConverter<Ob
 
     private void checkForSnomedSystem(String systemCode) {
         if (!SNOMED.getUrl().equals(systemCode)) {
-            throw new UnprocessableEntityException("The system is not correct. " +
+            throw new ConversionException("The system is not correct. " +
                     "It should be '" + SNOMED.getUrl() + "', but it was '" + systemCode + "'.");
         }
     }

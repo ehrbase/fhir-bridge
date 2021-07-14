@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AntiBodyPanelConverter extends AbstractBundleConverter<Observation>{
+public class AntiBodyPanelConverter extends AbstractBundleConverter<Observation> {
 
     @Override
     public Observation convert(@NonNull Bundle bundle) {
@@ -35,5 +35,4 @@ public class AntiBodyPanelConverter extends AbstractBundleConverter<Observation>
         observation.setContained(contains);
         return observation;
     }
-
 }

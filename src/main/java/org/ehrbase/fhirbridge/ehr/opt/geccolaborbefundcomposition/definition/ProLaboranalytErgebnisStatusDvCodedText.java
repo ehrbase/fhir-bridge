@@ -9,14 +9,14 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:53:24.164618+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-05T14:12:01.337115+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 @OptionFor("DV_CODED_TEXT")
 public class ProLaboranalytErgebnisStatusDvCodedText implements RMEntity, ProLaboranalytErgebnisStatusChoice {
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Ergebnis-Status/Ergebnis-Status
-   * Description: Status des Analyseergebnisses.
+   * Description: Status des Analyt-Ergebniswertes.
    */
   @Path("|defining_code")
   private ErgebnisStatusDefiningCode ergebnisStatusDefiningCode;

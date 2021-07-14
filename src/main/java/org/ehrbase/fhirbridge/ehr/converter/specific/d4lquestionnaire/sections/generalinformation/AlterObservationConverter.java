@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.generalinformation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.QuestionnaireResponseItemToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AelterOderGleich65JahreAltDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.definition.AlterObservation;
@@ -45,7 +45,7 @@ public class AlterObservationConverter extends QuestionnaireResponseItemToObserv
         } else if (age.equals(AltersklasseDefiningCode.N5160.getCode())) {
             alterObservation.setAltersklasseDefiningCode(AltersklasseDefiningCode.N5160);
         } else if (!age.equals("")) {
-            throw new UnprocessableEntityException("The code for age:" + age + " cannot be mapped, plese enter a valid code e.g. 61-70");
+            throw new ConversionException("The code for age:" + age + " cannot be mapped, plese enter a valid code e.g. 61-70");
         }
     }
 }

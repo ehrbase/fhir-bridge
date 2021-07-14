@@ -41,6 +41,7 @@ import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Group;
+import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.Location;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
@@ -60,14 +61,15 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties(HapiFhirJpaProperties.class)
+@SuppressWarnings("java:S6212")
 public class HapiFhirJpaConfiguration extends BaseR4Config {
 
     @Bean
     public DaoConfig daoConfig(HapiFhirJpaProperties properties) {
-        var config = new DaoConfig();
+        DaoConfig config = new DaoConfig();
         config.setAllowInlineMatchUrlReferences(properties.isAllowInlineMatchUrlReferences());
-        config.setAutoCreatePlaceholderReferenceTargets(properties.isAutoCreatePlaceholderReferences());
-        config.setPopulateIdentifierInAutoCreatedPlaceholderReferenceTargets(properties.isPopulateIdentifierInAutoCreatedPlaceholderReferences());
+        config.setReuseCachedSearchResultsForMillis(null);
+        config.setResourceServerIdStrategy(DaoConfig.IdStrategyEnum.UUID);
         return config;
     }
 
@@ -137,6 +139,14 @@ public class HapiFhirJpaConfiguration extends BaseR4Config {
         groupDao.setResourceType(Group.class);
         groupDao.setContext(fhirContext());
         return groupDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Immunization> immunizationDao() {
+        JpaResourceDao<Immunization> resourceDao = new JpaResourceDao<>();
+        resourceDao.setResourceType(Immunization.class);
+        resourceDao.setContext(fhirContext());
+        return resourceDao;
     }
 
     @Bean

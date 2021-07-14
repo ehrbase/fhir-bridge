@@ -16,18 +16,16 @@
 
 package org.ehrbase.fhirbridge.ehr.converter;
 
-import org.ehrbase.fhirbridge.ehr.converter.generic.RMEntityConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.Resource;
 
 import java.util.EnumMap;
 import java.util.Map;
 
-// TODO: Review
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ConversionService {
 
-    private final Map<Profile, RMEntityConverter> converters = new EnumMap<>(Profile.class);
+    private final Map<Profile, ResourceConverter> converters = new EnumMap<>(Profile.class);
 
     public boolean canConvert(Profile profile) {
         return converters.containsKey(profile);
@@ -37,21 +35,10 @@ public class ConversionService {
         if (!canConvert(profile)) {
             throw new ConversionException("No converter available for " + resource.getResourceType() + " with profile " + profile);
         }
-        return converters.get(profile)
-                .convert(resource);
+        return converters.get(profile).convert(resource);
     }
 
-    public Object convertDefaultEncounter(Resource resource) {
-
-        if(!converters.containsKey(Profile.KONTAKT_GESUNDHEIT_EINRICHTUNG)) {
-            throw new ConversionException("No converter available for encounter with profile stationär Versorgungsfall" );
-        }
-
-        return converters.get(Profile.KONTAKT_GESUNDHEIT_EINRICHTUNG)
-                .convert(resource);
-    }
-
-    public void registerConverter(Profile profile, RMEntityConverter<?, ?> converter) {
+    public void registerConverter(Profile profile, ResourceConverter converter) {
         converters.put(profile, converter);
     }
 }

@@ -47,8 +47,8 @@ ${body_weight_url}			https://www.netzwerk-universitaetsmedizin.de/fhir/Structure
 	#												HTTP	
 	# FIELD/PATH 					VALUE			CODE	ERROR MESSAGE
 	$.subject.identifier.value		missing			422		Subject identifier is required
-	$.subject.identifier.system		missing			422		EhrId not found for subject
-	$.subject.identifier.value		foobar			422		EhrId not found for subject 'foobar'
+	$.subject.identifier.system		missing			422		Subject identifier is required
+	# Deprecated: $.subject.identifier.value		foobar			422		EhrId not found for subject 'foobar'
 	$.subject.identifier.value		${EMPTY}		422		@value cannot be empty    Observation.subject.identifier.value
 	$.subject.identifier.value		${{ [] }}		422		This property must be an simple value, not an array    Observation.subject.identifier.value
 	$.subject.identifier.value		${{ {} }}		422		This property must be an simple value, not an object    Observation.subject.identifier.value

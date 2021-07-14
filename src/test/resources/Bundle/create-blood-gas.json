@@ -295,7 +295,7 @@
       }
     },
     {
-      "fullUrl":  "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd4",
+      "fullUrl": "urn:uuid:04121321-4af5-424c-a0e1-ed3aab1casd4",
       "resource": {
         "resourceType": "Observation",
         "meta": {

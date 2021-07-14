@@ -116,4 +116,20 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="4" author="subigre">
+        <createTable tableName="FB_PATIENT_EHR">
+            <column name="PATIENT_ID" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="EHR_ID" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <renameTable oldTableName="FB_RESOURCE_MAP" newTableName="FB_RESOURCE_COMPOSITION"/>
+
+        <renameColumn tableName="FB_RESOURCE_COMPOSITION" oldColumnName="COMPOSITION_VERSION_UID"
+                      newColumnName="COMPOSITION_ID"/>
+    </changeSet>
 </databaseChangeLog>

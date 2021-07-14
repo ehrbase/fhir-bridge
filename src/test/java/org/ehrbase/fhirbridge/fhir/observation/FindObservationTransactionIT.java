@@ -45,7 +45,7 @@ class FindObservationTransactionIT extends AbstractTransactionIT {
             create("Observation/transactions/find-observation-search.json");
         }
 
-        Bundle bundle = search("Observation?subject.identifier=" + PATIENT_ID + "&status=preliminary");
+        Bundle bundle = search("Observation?subject.identifier=" + PATIENT_ID + "&status=final");
 
         Assertions.assertEquals(3, bundle.getTotal());
 
@@ -53,7 +53,7 @@ class FindObservationTransactionIT extends AbstractTransactionIT {
             Observation observation = (Observation) entry.getResource();
 
             Assertions.assertEquals(PATIENT_ID, observation.getSubject().getIdentifier().getValue());
-            Assertions.assertEquals(Observation.ObservationStatus.PRELIMINARY, observation.getStatus());
+            Assertions.assertEquals(Observation.ObservationStatus.FINAL, observation.getStatus());
         });
     }
 }

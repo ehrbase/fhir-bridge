@@ -11,13 +11,13 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:53:24.159979+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-05T14:12:01.309377+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
 )
 public class ProLaboranalytKommentarElement implements LocatableEntity {
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Kommentar
-   * Description: Kommentar zum Analyt-Resultat, soweit noch nicht in anderen Feldern erfasst.
+   * Description: Kommentar zum Analyt-Ergebnis, soweit noch nicht in anderen Feldern erfasst.
    */
   @Path("/value|value")
   private String value;

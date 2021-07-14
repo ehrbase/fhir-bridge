@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.generalinformation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.sections.QuestionnaireSection;
@@ -79,7 +79,7 @@ public class GeneralInformation extends QuestionnaireSection {
                 schwangerschaftsstatusObservationQuestion = Optional.of(new SchwangerschaftsstatusObservationConverter().convert(question, language, authored));
                 break;
             default:
-                throw new UnprocessableEntityException("LinkId " + question.getLinkId() + " undefined");
+                throw new ConversionException("LinkId " + question.getLinkId() + " undefined");
 
         }
     }

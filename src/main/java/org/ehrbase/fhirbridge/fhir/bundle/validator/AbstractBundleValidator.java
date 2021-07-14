@@ -2,18 +2,20 @@ package org.ehrbase.fhirbridge.fhir.bundle.validator;
 
 import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.apache.commons.lang3.StringUtils;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 
-import javax.validation.constraints.Null;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
+@SuppressWarnings("java:S6212")
 public abstract class AbstractBundleValidator implements FhirTransactionValidator {
 
     @Override
@@ -42,7 +44,7 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
         memberValidator.addFullUrls(entry.getFullUrl());
         if (isObservation(entry)) {
             Observation observation = (Observation) entry.getResource();
-            if (observation.getHasMember().size() > 0) {
+            if (!observation.getHasMember().isEmpty()) {
                 memberValidator.setHasMembersList(observation.getHasMember());
                 memberValidator.deleteFullUrl(entry.getFullUrl()); //Since the Observation is not a Member of itself
             }
@@ -50,30 +52,24 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
     }
 
     void validateEqualPatientIds(Bundle bundle) {
-        List<String> patientIds = new ArrayList<>();
+        Optional<Identifier> subject = Optional.empty();
+
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
-            Resources.getSubjectIdentifier(entry.getResource())
-                    .ifPresent(identifier -> patientIds.add(identifier.getValue()));
-        }
-        checkPatientIdsIdentical(patientIds);
-    }
+            Identifier current = Resources.getSubject(entry.getResource())
+                    .map(Reference::getIdentifier)
+                    .orElseThrow(() -> new UnprocessableEntityException("Ensure that the subject id has the following format :         " +
+                            "\"subject\": {\n" +
+                            "          \"identifier\": {\n" +
+                            "            \"system\": \"urn:ietf:rfc:4122\",\n" +
+                            "            \"value\": \"example\"\n" +
+                            "          }\n" +
+                            "        },"));
 
-    private void checkPatientIdsIdentical(List<String> patientIds) {
-        for (String id : patientIds) {
-            try {
-                if (!id.equals(patientIds.get(0))) {
-                    throw new InternalErrorException("subject.reference ids all have to be equal! A Fhir Bridge Bundle cannot reference to different Patients !");
-                }
-            }catch (NullPointerException nullPointerException) {
-                throw new UnprocessableEntityException("Ensure that the subject id has the following format :         " +
-                        "\"subject\": {\n" +
-                        "          \"identifier\": {\n" +
-                        "            \"system\": \"urn:ietf:rfc:4122\",\n" +
-                        "            \"value\": \"example\"\n" +
-                        "          }\n" +
-                        "        },");
-
+            if (subject.isPresent() && !StringUtils.equals(subject.get().getValue(), current.getValue())) {
+                throw new InternalErrorException("subject.reference ids all have to be equal! A Fhir Bridge Bundle cannot reference to different Patients !");
             }
+
+            subject = Optional.of(current);
         }
     }
 

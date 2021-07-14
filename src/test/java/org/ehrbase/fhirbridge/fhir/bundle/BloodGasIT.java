@@ -29,15 +29,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Integration tests for {@link org.hl7.fhir.r4.model.Bundle Bundle} resource.
  */
-public class BloodGasIT extends AbstractBundleMappingTestSetupIT {
-
+class BloodGasIT extends AbstractBundleMappingTestSetupIT {
 
     public BloodGasIT() {
         super("Bundle/", Bundle.class);
     }
 
     @Test
-    public void createBloodGas() throws IOException {
+    void createBloodGas() throws IOException {
         create("create-blood-gas.json");
     }
 

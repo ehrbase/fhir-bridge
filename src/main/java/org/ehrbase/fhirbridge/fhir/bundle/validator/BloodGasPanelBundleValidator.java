@@ -1,17 +1,16 @@
 package org.ehrbase.fhirbridge.fhir.bundle.validator;
 
-import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.hl7.fhir.r4.model.Bundle;
 
 import java.util.Map;
 
 public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
-    private static final String bloodGasUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel";
-    private static final String pHUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH";
-    private static final String carbonDioxidePartialPressureUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure";
-    private static final String oxygenPartialPressureUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure";
-    private static final String oxygenSaturationUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation";
+    private static final String BLOOD_GAS_URL = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel";
+    private static final String PH_URL = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pH";
+    private static final String CARBON_DIOXIDE_PARTIAL_PRESSURE_URL = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/carbon-dioxide-partial-pressure";
+    private static final String OXYGEN_PARTIAL_PRESSURE_URL = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-partial-pressure";
+    private static final String OXYGEN_SATURATION_URL = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation";
 
     private int bloodGasProfilesContained = 0;
     private int phProfilesContained = 0;
@@ -45,19 +44,19 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
         try {
             String profileUrl = entry.getResource().getMeta().getProfile().get(0).getValue();
             switch (profileUrl) {
-                case bloodGasUrl:
+                case BLOOD_GAS_URL:
                     setBloodGasPanel();
                     break;
-                case pHUrl:
+                case PH_URL:
                     phProfilesContained += 1;
                     break;
-                case carbonDioxidePartialPressureUrl:
+                case CARBON_DIOXIDE_PARTIAL_PRESSURE_URL:
                     carbonDioxideProfilesContained += 1;
                     break;
-                case oxygenPartialPressureUrl:
+                case OXYGEN_PARTIAL_PRESSURE_URL:
                     oxygenPartialProfilesContained += 1;
                     break;
-                case oxygenSaturationUrl:
+                case OXYGEN_SATURATION_URL:
                     oxygenSaturationProfilesContained += 1;
                     break;
                 default:
@@ -78,7 +77,7 @@ public class BloodGasPanelBundleValidator extends AbstractBundleValidator {
     }
 
     private boolean checkIfOneProfileIsPresent() {
-        return oxygenPartialProfilesContained==1 || carbonDioxideProfilesContained==1|| phProfilesContained==1 || oxygenSaturationProfilesContained ==1;
+        return oxygenPartialProfilesContained == 1 || carbonDioxideProfilesContained == 1 || phProfilesContained == 1 || oxygenSaturationProfilesContained == 1;
     }
 
     private void setBloodGasPanel() {

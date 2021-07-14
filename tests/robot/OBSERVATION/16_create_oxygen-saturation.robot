@@ -262,7 +262,7 @@ ${randinteger}                  ${12345}
 	# 																CODE
     # invalid cases for value
     $.subject.identifier.value		missing							422
-    $.subject.identifier.value		foobar							422
+    # Deprecated: $.subject.identifier.value		foobar							422
     $.subject.identifier.value		${EMPTY}						422
     $.subject.identifier.value		${{ [] }}						422
     $.subject.identifier.value		${{ {} }}						422
@@ -290,7 +290,7 @@ ${randinteger}                  ${12345}
     $.subject						${123}							422
 	
 	# comment: random uuid												
-    $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
+    # Deprecated: $.subject.identifier.value      ${{str(uuid.uuid4())}}    		422
 
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------

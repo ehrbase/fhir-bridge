@@ -52,7 +52,7 @@ ${randinteger}                  ${12345}
 
 	# invalid cases for value
     $.subject.identifier.value		missing							422		 Subject identifier is required
-    $.subject.identifier.value		foobar							422		 EhrId not found for subject 'foobar'
+    # Deprecated: $.subject.identifier.value		foobar							422		 EhrId not found for subject 'foobar'
     $.subject.identifier.value		${EMPTY}						422		 @value cannot be empty                                        					Observation.subject.identifier.value
     $.subject.identifier.value		${{ [] }}						422		 This property must be an simple value, not an array           					Observation.subject.identifier.value
     $.subject.identifier.value		${{ {} }}						422		 This property must be an simple value, not an object          					Observation.subject.identifier.value
@@ -80,7 +80,7 @@ ${randinteger}                  ${12345}
     $.subject						${123}							422		 The property subject must be an Object, not a primitive property   			Observation.subject
 	
 	# comment: random uuid																			 regex for uuid
-    $.subject.identifier.value    ${{str(uuid.uuid4())}}    		422     EhrId not found for subject
+    # Deprecated: $.subject.identifier.value    ${{str(uuid.uuid4())}}    		422     EhrId not found for subject
 	
 
 002 Create Smoking Status (Invalid/Missing 'resourceType')

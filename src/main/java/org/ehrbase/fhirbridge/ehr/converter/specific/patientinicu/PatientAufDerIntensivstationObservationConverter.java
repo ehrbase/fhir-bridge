@@ -1,20 +1,21 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.PatientAufDerIntensivstationObservation;
+import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.WurdeDieAktivitatDurchgefuhrtDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
 import java.util.HashMap;
 
 public class PatientAufDerIntensivstationObservationConverter extends ObservationToObservationConverter<PatientAufDerIntensivstationObservation> {
-    private static final HashMap<String, WurdeDieAktivitatDurchgefuhrtDefiningcode> aktivitatDurchgefuehrtDefiningcodeMap
+    private static final HashMap<String, WurdeDieAktivitatDurchgefuhrtDefiningCode> aktivitatDurchgefuehrtDefiningcodeMap
             = new HashMap<>();
 
     static {
-        for (WurdeDieAktivitatDurchgefuhrtDefiningcode code : WurdeDieAktivitatDurchgefuhrtDefiningcode.values()) {
+        for (WurdeDieAktivitatDurchgefuhrtDefiningCode code : WurdeDieAktivitatDurchgefuhrtDefiningCode.values()) {
             if (code.getTerminologyId().equals("SNOMED Clinical Terms")) {
                 aktivitatDurchgefuehrtDefiningcodeMap.put(code.getCode(), code);
             }
@@ -35,6 +36,6 @@ public class PatientAufDerIntensivstationObservationConverter extends Observatio
             return aktivitatDurchgefuehrtDefiningcodeMap.get(coding.getCode()).toDvCodedText();
         }
 
-        throw new UnprocessableEntityException("Aktivität durchgeführt has invalid code " + coding.getCode());
+        throw new ConversionException("Aktivität durchgeführt has invalid code " + coding.getCode());
     }
 }

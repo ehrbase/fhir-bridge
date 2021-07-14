@@ -4,7 +4,7 @@ import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.PatientenaufenthaltComposition;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.*;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt.PatientenAufenthaltCompositionConverter;
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Encounter;
 import org.javers.core.Javers;
@@ -73,7 +73,7 @@ public class KontaktGesundheitAbteilingIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Encounter encounter = (Encounter) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () -> {
+        return assertThrows(ConversionException.class, () -> {
             new PatientenAufenthaltCompositionConverter().convert(encounter);
         });
     }

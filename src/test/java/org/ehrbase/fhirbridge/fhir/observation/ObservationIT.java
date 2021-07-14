@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.fhir.observation;
 
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.apache.commons.lang3.StringUtils;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
@@ -33,11 +34,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createBodyTemp() throws IOException {
-        create("create-body-temp.json");
-    }
-
-    @Test
     void createBodyWeight() throws IOException {
         create("create-body-weight.json");
     }
@@ -55,11 +51,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     @Test
     void createFiO2() throws IOException {
         create("create-fio2.json");
-    }
-
-    @Test
-    void createHeartRate() throws IOException {
-        create("create-heart-rate.json");
     }
 
     @Test
@@ -83,16 +74,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createSofaScore() throws IOException {
-        //TODO The template does not support cvs0 yet  create("create-sofa-score.json");
-    }
-
-    @Test
-    void createSofaScore1() throws IOException {
-        //    create("create-sofa-score-cardiovuskular-score-1.json");
-    }
-
-    @Test
     void createSmokingStatus() throws IOException {
         create("create-smoking-status.json");
     }
@@ -112,7 +93,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
         String resource = super.testFileLoader.loadResourceToString("create-observation-with-invalid-quantity.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
-
         assertTrue(StringUtils.startsWith(exception.getMessage(), "HTTP 422 : Wrong Status code. Expected: [200, 201, 204]. Got: 400."));
     }
 
@@ -122,7 +102,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
         String resource = super.testFileLoader.loadResourceToString("create-observation-with-invalid-quantity-datatype.json");
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
-
         assertEquals("HTTP 422 : Error parsing JSON: the primitive value must be a number", exception.getMessage());
     }
 
@@ -130,7 +109,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation observation = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () -> {
+        return assertThrows(ConversionException.class, () -> {
             // new YourConverter().convert(@NonNull ((YourResource) domainResource)));
         });
     }

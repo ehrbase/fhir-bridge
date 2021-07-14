@@ -16,8 +16,17 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-@Component
+/**
+ * {@link Processor} that registers an {@link AuditEvent} in the database for each "Provide [resource type]"
+ * transaction.
+ *
+ * @since 1.0.0
+ */
+@Component(ProvideResourceAuditHandler.BEAN_ID)
+@SuppressWarnings("java:S6212")
 public class ProvideResourceAuditHandler implements Processor {
+
+    public static final String BEAN_ID = "provideResourceAuditHandler";
 
     private final IFhirResourceDao<AuditEvent> auditEventDao;
 
@@ -63,7 +72,7 @@ public class ProvideResourceAuditHandler implements Processor {
     }
 
     private AuditEvent.AuditEventEntityComponent entity(Exchange exchange) {
-        MethodOutcome outcome = exchange.getProperty(CamelConstants.METHOD_OUTCOME, MethodOutcome.class);
+        MethodOutcome outcome = exchange.getProperty(CamelConstants.OUTCOME, MethodOutcome.class);
         RequestDetails requestDetails = exchange.getIn().getHeader(Constants.FHIR_REQUEST_DETAILS, RequestDetails.class);
 
         return new AuditEvent.AuditEventEntityComponent()

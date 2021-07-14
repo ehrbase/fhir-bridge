@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.VirusnachweistestDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Resource;
@@ -36,7 +36,7 @@ public class AntiBodyPanel {
             String profileUrl = resource.getMeta().getProfile().get(0).getValue();
             resoulveProfile(resource, profileUrl);
         } catch (IndexOutOfBoundsException e) {
-            throw new UnprocessableEntityException("Make sure only the for Anti body panel supported Profiles are contained in the Bundle");
+            throw new ConversionException("Make sure only the for Anti body panel supported Profiles are contained in the Bundle");
         }
     }
 
@@ -66,7 +66,7 @@ public class AntiBodyPanel {
             this.igGAbUnitsVolume = Optional.of(new Immunoassay((Observation) resource, VirusnachweistestDefiningCode.SARS_COV2_COVID19_IGG_AB_UNITS_VOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY));
 
         } else {
-            throw new UnprocessableEntityException("Anti body panel bundle needs to contain only the profiles for the Anti body panel. Please delete profile " + profileUrl + " from the Bundle.");
+            throw new ConversionException("Anti body panel bundle needs to contain only the profiles for the Anti body panel. Please delete profile " + profileUrl + " from the Bundle.");
         }
     }
 

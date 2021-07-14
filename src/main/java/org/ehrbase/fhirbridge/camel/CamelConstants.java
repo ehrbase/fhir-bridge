@@ -17,17 +17,19 @@
 package org.ehrbase.fhirbridge.camel;
 
 /**
- * Constants used in the FHIR Bridge.
+ * Constants used by the FHIR Bridge.
  *
  * @since 1.0.0
  */
 public final class CamelConstants {
 
-    public static final String COMPOSITION_VERSION_UID = "FhirBridgeCompositionVersionUid";
+    public static final String COMPOSITION_ID = "CamelFhirBridgeCompositionId";
 
-    public static final String METHOD_OUTCOME = "FhirBridgeMethodOutcome";
+    public static final String OUTCOME = "CamelFhirBridgeOutcome";
 
-    public static final String PROFILE = "FhirBridgeProfile";
+    public static final String PATIENT_ID = "CamelFhirPatientId";
+
+    public static final String PROFILE = "CamelFhirBridgeProfile";
 
     public static final String RESOURCE_ID = "FhirBridgeResourceId";
 
