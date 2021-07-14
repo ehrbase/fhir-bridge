@@ -1,22 +1,20 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.DiagnosticReport;
-import org.hl7.fhir.r4.model.Immunization;
-import org.hl7.fhir.r4.model.Extension;
-import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Encounter;
+import org.hl7.fhir.r4.model.Extension;
+import org.hl7.fhir.r4.model.Immunization;
+import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
+import org.hl7.fhir.r4.model.Specimen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
@@ -226,5 +224,16 @@ public class TimeConverter {
         } else {
             return Optional.empty();
         }
+    }
+
+    public static Optional<TemporalAccessor> convertSpecimanCollection(Specimen.SpecimenCollectionComponent collection) {
+        if (collection.hasCollectedDateTimeType()) {
+            return Optional.of(collection.getCollectedDateTimeType().getValueAsCalendar().toZonedDateTime());
+        } else if (collection.hasCollectedPeriod() && collection.getCollectedPeriod().hasStart()) {
+            return Optional.of(collection.getCollectedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+        } else if (collection.hasCollectedPeriod() && collection.getCollectedPeriod().hasEnd()) {
+            return Optional.of(collection.getCollectedPeriod().getEndElement().getValueAsCalendar().toZonedDateTime());
+        }
+        return Optional.empty();
     }
 }
