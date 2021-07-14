@@ -952,4 +952,4 @@ executors:
             #   environment:
             #     POSTGRES_USER: fhir_bridge
             #     POSTGRES_PASSWORD: fhir_bridge
-        resource_class: large
+        # resource_class: large
