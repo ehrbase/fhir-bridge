@@ -21,6 +21,10 @@
   "code": {
     "coding": [
       {
+        "system": "http://loinc.org",
+        "code": "85354-9"
+      },
+      {
         "system": "http://snomed.info/sct",
         "code": "75367002",
         "display": "Blood pressure panel with all children optional"
@@ -40,6 +44,10 @@
       "code": {
         "coding": [
           {
+            "system": "http://loinc.org",
+            "code": "8480-6"
+          },
+          {
             "system": "http://snomed.info/sct",
             "code": "271649006",
             "display": "Systolic blood pressure"
@@ -56,6 +64,10 @@
     {
       "code": {
         "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "8462-4"
+          },
           {
             "system": "http://snomed.info/sct",
             "code": "271650006",
