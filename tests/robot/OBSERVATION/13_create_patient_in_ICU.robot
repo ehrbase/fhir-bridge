@@ -212,7 +212,6 @@ ${vCC_URL}		                http://snomed.info/sct
 
 	#invalid code 0
 	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
-#	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
 	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
     $.category[0].coding[0].code 			${{ [] }}				422    	This property must be an simple value, not an array                                							Observation.category.0..coding.0..code
 	$.category[0].coding[0].code 			${{ {} }}				422    	This property must be an simple value, not an object														Observation.category.0..coding.0..code
@@ -222,7 +221,6 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
 	$.category[0].coding[0].system    		${randstring}	    	422    	Coding.system must be an absolute reference, not a local reference											Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..system
-#	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
     $.category[0].coding[0].system 			${{ [] }}				422    	This property must be an simple value, not an array                                							Observation.category.0..coding.0..system
 	$.category[0].coding[0].system 			${{ {} }}				422    	This property must be an simple value, not an object														Observation.category.0..coding.0..system
 	$.category[0].coding[0].system 			${{ [{}] }}				422    	This property must be an simple value, not an array															Observation.category.0..coding.0..system
@@ -415,7 +413,6 @@ ${vCC_URL}		                http://snomed.info/sct
 	# 																	CODE
 
 	# missing valueCodeableConcept
-#	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason							${EMPTY}				422    	The property dataAbsentReason must be an Object, not a primitive property									Observation.dataAbsentReason
 
 	# wrong format valueCodeableConcept
@@ -435,14 +432,12 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.dataAbsentReason.coding[0].system			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..system
 	$.dataAbsentReason.coding[0].system			${randstring}			422    	Coding.system must be an absolute reference, not a local reference											Observation.dataAbsentReason.coding.0.
 	$.dataAbsentReason.coding[0].system			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..system
-#	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
     $.dataAbsentReason.coding[0].system 		${{ [] }}				422    	This property must be an simple value, not an array                         								Observation.dataAbsentReason.coding.0..system
 	$.dataAbsentReason.coding[0].system 		${{ {} }}				422    	This property must be an simple value, not an object														Observation.dataAbsentReason.coding.0..system
 	$.dataAbsentReason.coding[0].system 		${{ [{}] }}				422    	This property must be an simple value, not an array 														Observation.dataAbsentReason.coding.0..system
 
 	# invalid code
 	$.dataAbsentReason.coding[0].code			${EMPTY}				422    	@value cannot be empty																						Observation.dataAbsentReason.coding.0..code
-#	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
 	$.dataAbsentReason.coding[0].code			${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.dataAbsentReason.coding.0..code
     $.dataAbsentReason.coding[0].code   		${{ [] }}				422    	This property must be an simple value, not an array                         								Observation.dataAbsentReason.coding.0..code
 	$.dataAbsentReason.coding[0].code   		${{ {} }}				422    	This property must be an simple value, not an object														Observation.dataAbsentReason.coding.0..code
@@ -506,51 +501,6 @@ ${vCC_URL}		                http://snomed.info/sct
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final  	     true             true           ${1234}                 ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  ${12345}		      true		    true	       ${1234}	               ${1234}              ${1234}		        422          Not a valid date/time .12345.                                                                                                                       Observation.effective.ofType.dateTime.
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final  	     true             true           ${1234}                 ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  false		    true	       ${1234}	               ${1234}              ${1234}		        422          Observation.code.coding: minimum required = 1, but only found 0 .from ${patient-ICU-url}. 			                                             Observation.code
     Observation    	        ${ID}		 	  			   true         ${patient-ICU-url}		      final  	     true             true           ${1234}                 ${1234}                 true			   false			 ${1234}          		  		  ${1234}         ${1234}                             true    		 	valid      		  2020-02-25		  true		    false	       ${1234}	               ${1234}         	    ${1234}		        422          Observation.code.coding: minimum required = 1, but only found 0 .from ${patient-ICU-url}. 			                                             Observation.code
-
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# BUG TRACE
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 02 Create Patient in ICU (Invalid/Missing 'category')
-	[Documentation]		Belongs to TC 006! Remove separation when it's fixed!
-	[Template]			create patient in ICU with ehr reference
-    [Tags]              category    not-ready    not-ready_bug
-
-	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																CODE
-
-	#invalid code 0
-	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
-
-	# invaild system 0
-	$.category[0].coding[0].system    		http://foobar.de      	422    	This element does not match any known slice defined in the profile ${patient-ICU-url}						Observation.category.0..coding.0.
-
-
-BUG TRACE 03 Create Patient in ICU (Invalid/Missing 'valueCodeableConcept')
-	[Documentation]		Belongs to TC 009! Remove separation when it's fixed!
-	[Template]			create patient in ICU with ehr reference
-    [Tags]              valueCodeableConcept    not-ready    not-ready_bug
-
-	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								    Location
-	# 																	CODE
-	$.valueCodeableConcept						missing					422    	Index 0 out of bounds for length 0
-
-
-BUG TRACE 04 Create Patient in ICU (Invalid/Missing 'DataAbsentReason')
-	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
-	[Template]			create patient in ICU with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready    not-ready_bug
-
-	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																	CODE
-
-	# missing valueCodeableConcept
-	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
-
-	# invalid system
-	$.dataAbsentReason.coding[0].system			http://foobar.de		422    	Index 0 out of bounds for length 0
-
-	# invalid code
-	$.dataAbsentReason.coding[0].code			${randstring}			422    	Index 0 out of bounds for length 0
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
