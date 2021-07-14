@@ -52,11 +52,10 @@ public class LaborAnalytConverter {
 
     private BezeichnungDesAnalytsDefiningCode mapUntersuchterAnalyt(Observation observation) {
         if (observation.getCode().hasCoding()) {
-            converUntersuchterAnalyt(observation);
+            return converUntersuchterAnalyt(observation);
         } else {
             throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
         }
-        throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
     }
 
     private BezeichnungDesAnalytsDefiningCode converUntersuchterAnalyt(Observation observation) {
