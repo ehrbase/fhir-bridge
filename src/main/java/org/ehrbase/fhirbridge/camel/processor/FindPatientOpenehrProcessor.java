@@ -40,7 +40,13 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.ehrbase.client.aql.query.Query;
@@ -76,11 +82,28 @@ public class FindPatientOpenehrProcessor implements Processor {
     private void handleSearchOperation(Exchange exchange) throws Exception {
         LOG.debug("Execute 'search' operation");
 
-        boolean isCount = false;
-
         List<String> codeValues;
         HasParam tmpParam;
 
+        // these are all the inbound parameters as they come from the client
+        /*
+        Sample paramName and values:
+
+        _summary:
+        count
+
+        _has:Encounter:patient:date:
+        2020
+
+        # if the same parameter name appears twice in the request, here we have just one name with two values
+        # note for the 'code' attribute we can have a string value that represents a list of values, but it comes as a single string
+        _has:Observation:patient:code:
+        2160-0,14682-9,3091-6,22664-7
+        1743-4,1742-6,30239-8,1920-8,88112-8
+
+        _has:Condition:patient:code:
+        C34.0,C34.1,C34.2,C34.3,C34.8,C34.9
+        */
         RequestDetails request = extractRequestDetails(exchange);
         Map<String, String[]> inParams = request.getParameters();
 
@@ -89,21 +112,25 @@ public class FindPatientOpenehrProcessor implements Processor {
 
         // aux structure to simplify creation of AQL queries based on templates
         // templateId => list of params which values will be included in the same AQL query
+        // because of how this is constructed, only parameters for the 'code' attribute will
+        // be in this map, so based on the template, resource type and attribute name (code),
+        // we know which path to use in the AQL
         Map<String, List<HasParamTemplate>> templateParamMap = new LinkedHashMap<>();
 
         for (String paramName : inParams.keySet()) {
 
             // paramName: _has:Encounter:patient:date or _summary or _has:Encounter:patient:date
-
             String[] paramValues = inParams.get(paramName);
 
             if (paramName.startsWith("_summary") && paramValues.length > 0) {
 
-                isCount = paramValues[0].equals("count");
+                // this will be handled below by the headers of the camel message
+                // paramValues[0].equals("count") means we should return only the count
+                continue;
 
             } else if (paramName.startsWith("_has")) {
 
-                for (int i = 0; i < paramValues.length; i++) { // multiple values if the same param was submitted twice
+                for (int i = 0; i < paramValues.length; i++) { // multiple values if the same param was submitted more than once
 
                     tmpParam = new HasParam();
 
@@ -194,48 +221,31 @@ public class FindPatientOpenehrProcessor implements Processor {
             }
         }
 
+        // execute queries based on the processed paramters and join results
+        Set<String> ehrIds = new HashSet<>();
+
         // process queries not based on templates
         for (HasParamTemplate outParam : outParams) {
 
-            // execute the query for this template and param and gather the resulting ehr ids
-            // TODO: need to accumulate the results in a Set to avoid duplicates
-
-            // TODO: the rest of the templates should have a method
+            // TODO: execute queries based on resource type and attribute name, no template lookupt here because
+            // the attribute is not 'code', so we need to search manually for the possible matching templates
+            // and hardcode them here.
+            //
+            // Encounter => Patientenaufenthalt (openEHR-EHR-COMPOSITION.event_sumary.v1)
+            // Encounter => Stationärer Versorgungsfall (openEHR-EHR-COMPOSITION.fall.v1)
+            System.out.println(outParam.getValue());
         }
 
         // process queries based on templates
         for (Map.Entry<String, List<HasParamTemplate>> templateParamsEntry : templateParamMap.entrySet() ) {
 
             if (templateParamsEntry.getKey().equals("GECCO_Laborbefund")) {
-                handleQueryForGECCO_Laborbefund(templateParamsEntry.getValue());
+                ehrIds.addAll(handleQueryForGECCO_Laborbefund(templateParamsEntry.getValue()));
+            } else if (templateParamsEntry.getKey().equals("GECCO_Laborbefund")) {
+                ehrIds.addAll(handleQueryForGECCO_Diagnose(templateParamsEntry.getValue()));
             }
         }
 
-        /*
-        Sample paramName and values:
-
-        _summary:
-        count
-
-        _has:Encounter:patient:date:
-        2020
-
-        _has:Observation:patient:code: <<< there are 2 parameters with the same name so there are 2 values that should be processed independently
-        2160-0,14682-9,3091-6,22664-7
-        1743-4,1742-6,30239-8,1920-8,88112-8
-
-        _has:Condition:patient:code:
-        C34.0,C34.1,C34.2,C34.3,C34.8,C34.9
-        */
-
-
-        // TODO: build one AQL per hasParam
-        // For the code ones, check the mappings to get the path where the code is mapped to
-        // For teh encounter date, check the mappings to ghet the path of the date
-
-
-
-        //IBundleProvider bundleProvider = resourceDao.search(parameters, extractRequestDetails(exchange));
 
         /*
         if (exchange.getIn().getHeaders().containsKey(Constants.FHIR_REQUEST_SIZE_ONLY)) {
@@ -247,15 +257,21 @@ public class FindPatientOpenehrProcessor implements Processor {
         }
         */
 
-        // TEST: simulate output bundle
-        List<IBaseResource> result = new ArrayList<>();
-        result.add(new Patient().setId("ID-12345"));
+        // TODO: use the subject id instead of the ehr id
+        List<IBaseResource> result = ehrIds.stream()
+            .map(ehrId -> new Patient().setId(ehrId))
+            .collect(Collectors.toList());
+
+        //result.add(new Patient().setId("ID-12345"));
         exchange.getMessage().setBody(result);
 
-        if (isCount) {
+        if (exchange.getIn().getHeaders().containsKey(Constants.FHIR_REQUEST_SIZE_ONLY)) {
             exchange.getMessage().setHeader(Constants.FHIR_REQUEST_SIZE_ONLY, result.size()); // required if param _summary=count
         } else {
-            throw new NotImplementedOperationException("_summary should be equals to 'count'");
+            //throw new NotImplementedOperationException("_summary should be equals to 'count'");
+            // FIXME: this is not paginated, could be big
+            exchange.getMessage().setBody(result);
+            exchange.getMessage().setHeader(Constants.FHIR_REQUEST_SIZE_ONLY, result.size());
         }
     }
 
@@ -353,32 +369,34 @@ public class FindPatientOpenehrProcessor implements Processor {
         return templateIds;
     }
 
-    private void handleQueryForGECCO_Laborbefund(List<HasParamTemplate> params) {
 
-        // Prepare AQL
-        // "a, b, c" => "\"a\",\"b\",\"c\""
-        String adlParams = ""; /*String.join(
-            ",",
-            Arrays.stream(param.getParameterValue().split(","))
-            .map(String::trim)
-            .map(s -> "'" + s + "'")
-            .collect(Collectors.toList())
-        );*/
+    private Set<String> handleQueryForGECCO_Laborbefund(List<HasParamTemplate> params) {
 
-        String.join(
-            ",",
-            Arrays.stream(params)
-                .map(HasParamTemplate::getValue)
-                .map(s -> "'" + s + "'")
-                .collect(Collectors.toList())
-        );
-
+        Set<String> ehrIds = new HashSet<>();
 
         String aql = "SELECT e/ehr_id/value "+
                 "FROM EHR e "+
-                //"CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.laboratory_test_result.v1] "+ // it works without this contains
-                "CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1] "+
-                "WHERE c/items[at0024]/value/defining_code/code_string matches{"+ adlParams +"}";
+                "CONTAINS CLUSTER c[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1] ";
+
+        // we know which path to use in the query because all the params are for the 'code' attribute of the same resource type
+        switch (params.size()) {
+            case 0:
+                // error
+                break;
+            case 1:
+                aql += "WHERE c/items[at0024]/value/defining_code/code_string = '"+ params.get(0).getValue() +"'";
+                break;
+            default:
+                String values = String.join(
+                    ",",
+                    params.stream()
+                        .map(HasParamTemplate::getValue)
+                        .map(s -> "'" + s + "'")
+                        .collect(Collectors.toList())
+                );
+                aql += "WHERE c/items[at0024]/value/defining_code/code_string matches{"+ values +"}";
+                break;
+        }
 
         LOG.info(aql);
 
@@ -392,17 +410,65 @@ public class FindPatientOpenehrProcessor implements Processor {
 
             for (Record1<String> record : results) {
 
-                LOG.info(record.value1()); // TODO: gather results in a set
+                ehrIds.add(record.value1());
             }
-
         } catch (Exception e) {
             throw new InternalErrorException("There was a problem retrieving the result", e);
         }
 
+        return ehrIds;
+    }
 
-        // TODO: get the results in a set and return
+    private Set<String> handleQueryForGECCO_Diagnose(List<HasParamTemplate> params) {
 
+        // openEHR-EHR-EVALUATION.problem_diagnosis.v1
+        // /data[at0001]/items[at0002]/value
 
+        Set<String> ehrIds = new HashSet<>();
+
+        String aql = "SELECT e/ehr_id/value "+
+                "FROM EHR e "+
+                "CONTAINS EVALUATION e[openEHR-EHR-EVALUATION.problem_diagnosis.v1] ";
+
+        // we know which path to use in the query because all the params are for the 'code' attribute of the same resource type
+        switch (params.size()) {
+            case 0:
+                // error
+                break;
+            case 1:
+                aql += "WHERE e/data[at0001]/items[at0002]/value/defining_code/code_string = '"+ params.get(0).getValue() +"'";
+                break;
+            default:
+                String values = String.join(
+                    ",",
+                    params.stream()
+                        .map(HasParamTemplate::getValue)
+                        .map(s -> "'" + s + "'")
+                        .collect(Collectors.toList())
+                );
+                aql += "WHERE e/data[at0001]/items[at0002]/value/defining_code/code_string matches{"+ values +"}";
+                break;
+        }
+
+        LOG.info(aql);
+
+        // Execute the AQL
+        Query<Record1<String>> query = Query.buildNativeQuery(aql, String.class);
+
+        List<Record1<String>> results = new ArrayList<>();
+
+        try {
+            results = this.openEhrClient.aqlEndpoint().execute(query);
+
+            for (Record1<String> record : results) {
+
+                ehrIds.add(record.value1());
+            }
+        } catch (Exception e) {
+            throw new InternalErrorException("There was a problem retrieving the result", e);
+        }
+
+        return ehrIds;
     }
 
     /**
