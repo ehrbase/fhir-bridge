@@ -1,7 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
 
-import liquibase.pro.packaged.E;
-import org.checkerframework.checker.nullness.Opt;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.*;
 import org.hl7.fhir.r4.model.ContactPoint;
 import org.hl7.fhir.r4.model.Patient;
@@ -31,20 +29,17 @@ public class EinzelheitenDerKommunikationConverter {
     private Optional<EinzelheitenDerKommunikationCluster> convertEinzelheitenDerKommunikationCluster(ContactPoint telecom) {
         EinzelheitenDerKommunikationCluster einzelheitenDerKommunikationCluster = new EinzelheitenDerKommunikationCluster();
         mapModus(telecom).ifPresent(einzelheitenDerKommunikationCluster::setModus);
-        KontaktDatenConverter.convert(telecom).ifPresent(einzelheitenDerKommunikationCluster::setKontaktdaten);
-        InternetKommunikationConverter.convert(telecom).ifPresent(einzelheitenDerKommunikationCluster::setInternetKommunikation);
+        if(telecom.hasSystem() && telecom.getSystemElement().getCode().equals("url") || telecom.getSystemElement().getCode().equals("email")){
+            InternetKommunikationConverter.convert(telecom).ifPresent(einzelheitenDerKommunikationCluster::setInternetKommunikation);
+        }else{
+            KontaktDatenConverter.convert(telecom).ifPresent(einzelheitenDerKommunikationCluster::setKontaktdaten);
+        }
         if (!getJavers().compare(einzelheitenDerKommunikationCluster, new EinzelheitenDerKommunikationCluster()).hasChanges()) {
             return Optional.of(einzelheitenDerKommunikationCluster);
         } else {
             return Optional.empty();
         }
     }
-
-    private Optional<List<EinzelheitenDerKommunikationInternetKommunikationCluster>> mapInternetKommunikation(ContactPoint telecom) {
-
-    }
-
-
 
     private Optional<List<EinzelheitenDerKommunikationModusElement>> mapModus(ContactPoint telecom) {
         if(telecom.hasUse()){
