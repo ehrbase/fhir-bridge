@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.PatientToCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten.PersonenDatenAdminEntryConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.GECCOPersonendatenComposition;
 import org.hl7.fhir.r4.model.Patient;
 import org.springframework.lang.NonNull;

@@ -10,8 +10,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-15T15:57:50.577924+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-15T13:49:30.086318+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class EinzelheitenDerKommunikationModusElement implements LocatableEntity {
   /**
