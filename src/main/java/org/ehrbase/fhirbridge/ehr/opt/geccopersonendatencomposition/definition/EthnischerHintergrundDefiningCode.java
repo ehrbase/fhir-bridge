@@ -1,6 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition;
 
 import java.lang.String;
+import java.util.Optional;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum EthnischerHintergrundDefiningCode implements EnumValueSet {
@@ -32,14 +34,15 @@ public enum EthnischerHintergrundDefiningCode implements EnumValueSet {
     this.code = code;
   }
 
-  public static EthnischerHintergrundDefiningCode getBySNOMEDCode(String SNOMED_code) {
+  public static Optional<EthnischerHintergrundDefiningCode> getBySNOMEDCode(String SNOMED_code) {
     for(EthnischerHintergrundDefiningCode ehc : values()) {
       if(ehc.code.equals(SNOMED_code)) {
-        return ehc;
+        return Optional.of(ehc);
       }
     }
-    return null;
+    return Optional.empty();
   }
+
 
   public String getValue() {
      return this.value ;

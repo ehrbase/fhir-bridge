@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
