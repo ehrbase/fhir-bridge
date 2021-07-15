@@ -1,10 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
 
-import org.checkerframework.checker.nullness.Opt;
-import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.NamensartDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.PersonennameCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.PersonennameWeitererVornameElement;
 import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Patient;
 
@@ -30,51 +27,42 @@ class PersonenNameConverter {
         mapNameUnstructured(name).ifPresent(personennameCluster::setNameUnstrukturiertValue);
         mapTitel(name).ifPresent(personennameCluster::setTitelValue);
         mapVorname(name).ifPresent(personennameCluster::setVornameValue);
-        mapWeitereVornamen(name).ifPresent(personennameCluster::setWeitererVorname);
         mapNachname(name).ifPresent(personennameCluster::setNachnameValue);
         mapSuffix(name).ifPresent(personennameCluster::setSuffixValue);
-        if(personennameCluster.equals(new PersonennameCluster())){ // TODO implement equals or find other solution
+        if (personennameCluster.equals(new PersonennameCluster())) { // TODO implement equals or find other solution
             return Optional.empty();
-        }else{
+        } else {
             return Optional.of(personennameCluster);
         }
     }
 
     private Optional<String> mapSuffix(HumanName name) {
-        if (name.hasText()) {
-            return Optional.of(name.getText());
+        if (name.hasSuffix()) {
+            return Optional.of(name.getSuffixAsSingleString());
         } else {
             return Optional.empty();
         }
     }
 
     private Optional<String> mapNachname(HumanName name) {
-        if (name.hasText()) {
-            return Optional.of(name.getText());
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    private Optional<List<PersonennameWeitererVornameElement>> mapWeitereVornamen(HumanName name) {
-        if (name.hasText()) {
-            return Optional.of(name.getText());
+        if (name.hasFamily()) {
+            return Optional.of(name.getFamily());
         } else {
             return Optional.empty();
         }
     }
 
     private Optional<String> mapVorname(HumanName name) {
-        if (name.hasText()) {
-            return Optional.of(name.getText());
+        if (name.hasGiven()) {
+            return Optional.of(name.getGivenAsSingleString());
         } else {
             return Optional.empty();
         }
     }
 
     private Optional<String> mapTitel(HumanName name) {
-        if (name.hasText()) {
-            return Optional.of(name.getText());
+        if (name.hasPrefix()) {
+            return Optional.of(name.getPrefixAsSingleString());
         } else {
             return Optional.empty();
         }

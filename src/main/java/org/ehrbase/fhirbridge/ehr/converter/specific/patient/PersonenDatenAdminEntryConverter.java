@@ -1,6 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
 
+import com.nedap.archie.rm.datavalues.DvCodedText;
+import org.checkerframework.checker.nullness.Opt;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.*;
 import org.hl7.fhir.r4.model.Coding;
@@ -23,6 +26,7 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
         PersonendatenAdminEntry personData = new PersonendatenAdminEntry();
         mapDataOnBirth(resource).ifPresent(personData::setDatenZurGeburt);
         mapEthnischerHintergrund(resource).ifPresent(personData::setEthnischerHintergrund);
+        mapAngabenZumTod(resource).ifPresent(personData::setAngabenZumTod);
         List<PersonennameCluster> list = new PersonenNameConverter().convert(resource);
         if (!list.isEmpty()) {
             personData.setPersonenname(list);
@@ -56,8 +60,21 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
         if (fhirPatient.hasBirthDate()) {
             DatenZurGeburtCluster datenZurGeburtCluster = new DatenZurGeburtCluster();
             datenZurGeburtCluster.setGeburtsdatumValue(fhirPatient.getBirthDate().toInstant().atZone(ZoneId.of("Europe/Berlin")).toLocalDate());
+            mapMehrereGeburten(fhirPatient).ifPresent(datenZurGeburtCluster::setKodierungFuerMehrlingsgeburten);
             return Optional.of(datenZurGeburtCluster);
         } else {
+            return Optional.empty();
+        }
+    }
+
+    private Optional<DvCodedText> mapMehrereGeburten(Patient fhirPatient) {
+        if(fhirPatient.hasMultipleBirth()){
+            if(fhirPatient.hasMultipleBirthBooleanType()){
+                return Optional.of(DvCodedTextParser.parseBoolean(fhirPatient.getMultipleBirthBooleanType()));
+            }else{
+                return Optional.of(DvCodedTextParser.parseInteger(fhirPatient.getMultipleBirthIntegerType()));
+            }
+        }else{
             return Optional.empty();
         }
     }

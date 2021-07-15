@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeCluster;
@@ -14,7 +15,6 @@ import org.hl7.fhir.r4.model.Annotation;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DateTimeType;
-import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Specimen;
 import org.slf4j.Logger;
@@ -70,7 +70,7 @@ public class SpecimenConverter {
 
     private Optional<DvIdentifier> mapAccessionIdentifier(Specimen specimenTarget) {
         if (specimenTarget.hasAccessionIdentifier()) {
-            return Optional.of(parseIntoDvIdentifier(specimenTarget.getAccessionIdentifier()));
+            return Optional.of(DvIdentifierParser.parseIdentifierIntoDvIdentifier(specimenTarget.getAccessionIdentifier()));
         } else {
             return Optional.empty();
         }
@@ -81,7 +81,7 @@ public class SpecimenConverter {
             if (specimenTarget.getIdentifier().size() > 1) {
                 LOG.warn("The fhir-bridge supports only one external identifier, therefore only the first one is mapped.");
             }
-            return Optional.of(parseIntoDvIdentifier(specimenTarget.getIdentifier().get(0)));
+            return Optional.of(DvIdentifierParser.parseIdentifierIntoDvIdentifier(specimenTarget.getIdentifier().get(0)));
         } else {
             return Optional.empty();
         }
@@ -108,48 +108,16 @@ public class SpecimenConverter {
             for (Reference reference : specimenTarget.getParent()) {
                 if (reference.hasIdentifier()) {
                     ProbeIdentifikatorDerUebergeordnetenProbeElement identifikator = new ProbeIdentifikatorDerUebergeordnetenProbeElement();
-                    identifikator.setValue(parseIntoDvIdentifier(reference.getIdentifier()));
+                    identifikator.setValue(DvIdentifierParser.parseIdentifierIntoDvIdentifier(reference.getIdentifier()));
                     probe.getIdentifikatorDerUebergeordnetenProbe().add(identifikator);
                 }
             }
         }
     }
 
-    private DvIdentifier parseIntoDvIdentifier(Identifier identifier) {
-        DvIdentifier dvIdentifier = new DvIdentifier();
-        setDvIdentifierAssinger(dvIdentifier, identifier);
-        setDvIdentifierId(dvIdentifier, identifier);
-        setDvIdentifierType(dvIdentifier, identifier);
-        return dvIdentifier;
-    }
-
-    private void setDvIdentifierType(DvIdentifier dvIdentifier, Identifier identifier) {
-        if (identifier.hasAssigner()) {
-            dvIdentifier.setAssigner(identifier.getAssigner().getDisplay());
-        } else {
-            dvIdentifier.setAssigner("");
-        }
-    }
-
-    private void setDvIdentifierId(DvIdentifier dvIdentifier, Identifier identifier) {
-        if (identifier.hasId()) {
-            dvIdentifier.setId(identifier.getId());
-        } else {
-            dvIdentifier.setId("");
-        }
-    }
-
-    private void setDvIdentifierAssinger(DvIdentifier dvIdentifier, Identifier identifier) {
-        if (identifier.hasType()) {
-            dvIdentifier.setType(identifier.getType().getText());
-        } else {
-            dvIdentifier.setType("");
-        }
-    }
-
     private Optional<DvIdentifier> mapIdentifikatorDesProbennehmers(Specimen specimenTarget) {
         if (specimenTarget.hasCollection() && specimenTarget.getCollection().hasCollector()) {
-            return Optional.of(parseIntoDvIdentifier(specimenTarget.getCollection().getCollector().getIdentifier()));
+            return Optional.of(DvIdentifierParser.parseIdentifierIntoDvIdentifier(specimenTarget.getCollection().getCollector().getIdentifier()));
         } else {
             return Optional.empty();
         }

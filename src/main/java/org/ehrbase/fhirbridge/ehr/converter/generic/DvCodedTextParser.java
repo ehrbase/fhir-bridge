@@ -1,11 +1,14 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
+package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
+import org.hl7.fhir.r4.model.BooleanType;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.IntegerType;
+
 import java.util.Optional;
 
 public class DvCodedTextParser {
@@ -23,4 +26,14 @@ public class DvCodedTextParser {
             return Optional.empty();
         }
     }
+
+    public static DvCodedText parseInteger(IntegerType multipleBirthIntegerType){
+        return new DvCodedText("amount of multiple births", new CodePhrase(new TerminologyId("", ""), multipleBirthIntegerType.toString()));
+    }
+
+    public static DvCodedText parseBoolean(BooleanType multipleBirthBoolean){
+        return new DvCodedText("multiple births present", new CodePhrase(new TerminologyId("", ""), multipleBirthBoolean.toString()));
+    }
+
+
 }
