@@ -46,6 +46,18 @@ validate response - 422 (w/o error message)
                     Integer     response status    ${http_status_code}
                     String      response body resourceType    OperationOutcome
 
+validate response - 422 (with error message)
+    [Arguments]     ${http_status_code}    ${error_message}    ${location}=${None}
+                    Integer     response status    ${http_status_code}
+                    String      response body resourceType    OperationOutcome
+    ${issues}=      String      $.issue[*].diagnostics
+                    Should Contain Match    ${issues}    regexp=${error_message}
+
+    IF    $location != None
+            ${locations}=   String      $.issue[*].location[0]
+            Should Contain Match    ${locations}    regexp=${location}
+    END
+
 #                                                 oooo                     
 #                                                 `888                     
 #  .oooo.o  .ooooo.   .oooo.   oooo d8b  .ooooo.   888 .oo.                
