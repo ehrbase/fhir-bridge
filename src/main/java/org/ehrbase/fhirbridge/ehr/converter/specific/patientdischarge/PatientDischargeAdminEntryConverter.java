@@ -13,38 +13,39 @@ public class PatientDischargeAdminEntryConverter extends EntryEntityConverter<Ob
 
     @Override
     protected EntlassungsartAdminEntry convertInternal(Observation resource) {
-
         EntlassungsartAdminEntry adminEntry = new EntlassungsartAdminEntry();
+        convertArtDerEntlassung(resource, adminEntry);
+        return adminEntry;
+    }
 
+    private void convertArtDerEntlassung(Observation resource, EntlassungsartAdminEntry adminEntry) {
         if(resource.hasValueCodeableConcept()){
-
             String code = getSnomedCodeObservation(resource);
-
             switch(code) {
                 case "261665006":
-                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.UNKNOWN_QUALIFIER_VALUE.toDvCodedText());
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.UNKNOWN_QUALIFIER_VALUE);
                     break;
                 case "32485007":
-                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.HOSPITAL_ADMISSION_PROCEDURE.toDvCodedText());
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.HOSPITAL_ADMISSION_PROCEDURE);
                     break;
                 case "419099009":
-                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.DEAD_FINDING.toDvCodedText());
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.DEAD_FINDING);
                     break;
                 case "371827001":
-                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.PATIENT_DISCHARGED_ALIVE_FINDING.toDvCodedText());
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.PATIENT_DISCHARGED_ALIVE_FINDING);
                     break;
                 case "3457005":
-                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.PATIENT_REFERRAL_PROCEDURE.toDvCodedText());
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.PATIENT_REFERRAL_PROCEDURE);
                     break;
                 case "306237005":
-                    adminEntry.setArtDerEntlassung(ArtDerEntlassungDefiningCode.REFERRAL_TO_PALLIATIVE_CARE_SERVICE_PROCEDURE.toDvCodedText());
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.REFERRAL_TO_PALLIATIVE_CARE_SERVICE_PROCEDURE);
                     break;
                 default:
                     throw new ConversionException("Value code " + resource.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
             }
+        }else{
+            throw new ConversionException("ValueCodeableConcept missing but is required by the FHIR-Bridge.");
         }
-
-        return adminEntry;
     }
 
     private void checkForSnomedSystem(String systemCode) {
