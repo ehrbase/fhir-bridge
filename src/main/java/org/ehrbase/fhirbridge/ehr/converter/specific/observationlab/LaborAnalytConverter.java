@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
-import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.generic.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.BezeichnungDesAnalytsDefiningCode;
@@ -18,7 +18,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.Pro
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytProbeIdDvUri;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Quantity;
 import org.slf4j.Logger;
@@ -156,38 +155,7 @@ public class LaborAnalytConverter {
         return coding.hasSystem() && coding.getSystem().equals(CodeSystem.HL7_OBSERVATI0N_INTERPRETATION.getUrl()) && coding.hasCode() && InterpretationDefiningCode.getCodesAsMap().containsKey(coding.getCode());
     }
 
-    private DvIdentifier parseIntoDvIdentifier(Identifier identifier) { //TODO duplicate needs to be fixed when bug is fixed from SDK
-        DvIdentifier dvIdentifier = new DvIdentifier();
-        setDvIdentifierAssinger(dvIdentifier, identifier);
-        setDvIdentifierId(dvIdentifier, identifier);
-        setDvIdentifierType(dvIdentifier, identifier);
-        return dvIdentifier;
-    }
 
-
-    private void setDvIdentifierType(DvIdentifier dvIdentifier, Identifier identifier) {
-        if (identifier.hasAssigner()) {
-            dvIdentifier.setAssigner(identifier.getAssigner().getDisplay());
-        } else {
-            dvIdentifier.setAssigner("");
-        }
-    }
-
-    private void setDvIdentifierId(DvIdentifier dvIdentifier, Identifier identifier) {
-        if (identifier.hasId()) {
-            dvIdentifier.setId(identifier.getId());
-        } else {
-            dvIdentifier.setId("");
-        }
-    }
-
-    private void setDvIdentifierAssinger(DvIdentifier dvIdentifier, Identifier identifier) {
-        if (identifier.hasType()) {
-            dvIdentifier.setType(identifier.getType().getText());
-        } else {
-            dvIdentifier.setType("");
-        }
-    }
 
 
     private Optional<TemporalAccessor> mapZeitpunktderValidierung(Observation observation) {
@@ -217,7 +185,7 @@ public class LaborAnalytConverter {
 
     private Optional<ProLaboranalytProbeIdChoice> mapProAnalytProbeIdentifier(Observation observation) {
         ProLaboranalytProbeIdDvIdentifier proLaboranalytProbeIdDvIdentifier = new ProLaboranalytProbeIdDvIdentifier();
-        proLaboranalytProbeIdDvIdentifier.setProbeId(parseIntoDvIdentifier(observation.getSpecimen().getIdentifier()));
+        proLaboranalytProbeIdDvIdentifier.setProbeId(DvIdentifierParser.parseIdentifierIntoDvIdentifier(observation.getSpecimen().getIdentifier()));
         return Optional.of(proLaboranalytProbeIdDvIdentifier);
     }
 
