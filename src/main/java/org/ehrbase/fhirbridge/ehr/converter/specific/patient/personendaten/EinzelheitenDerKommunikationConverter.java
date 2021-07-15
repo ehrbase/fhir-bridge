@@ -1,6 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
 
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EinzelheitenDerKommunikationCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EinzelheitenDerKommunikationModusElement;
+import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.ModusDefiningCode;
 import org.hl7.fhir.r4.model.ContactPoint;
 import org.hl7.fhir.r4.model.Patient;
 import org.javers.core.Javers;

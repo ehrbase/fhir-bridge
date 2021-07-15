@@ -1,7 +1,10 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AdresseCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AdresseZeileElement;
+import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.TypDerAdresseDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.VerwendungDefiningCode;
 import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.StringType;
