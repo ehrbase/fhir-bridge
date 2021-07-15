@@ -11,8 +11,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-04-22T10:43:11.554380100+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-07-15T17:43:34.136301+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class EntlassungsdatenKategorieElement implements LocatableEntity {
   /**
