@@ -1,9 +1,13 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
+package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
 
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.NamensartDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.PersonennameCluster;
 import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Patient;
+import org.javers.core.Javers;
+import org.javers.core.JaversBuilder;
+import org.javers.core.diff.Diff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +33,7 @@ class PersonenNameConverter {
         mapVorname(name).ifPresent(personennameCluster::setVornameValue);
         mapNachname(name).ifPresent(personennameCluster::setNachnameValue);
         mapSuffix(name).ifPresent(personennameCluster::setSuffixValue);
-        if (personennameCluster.equals(new PersonennameCluster())) { // TODO implement equals or find other solution
+        if (!getJavers().compare(personennameCluster, new PersonennameCluster()).hasChanges()) { // not necessary since HAPI does not allow empty arrays. Nevertheless double checks do no harm.
             return Optional.empty();
         } else {
             return Optional.of(personennameCluster);
@@ -93,9 +97,17 @@ class PersonenNameConverter {
                     return Optional.of(NamensartDefiningCode.FRUEHERER_NAME);
                 case "maiden":
                     return Optional.of(NamensartDefiningCode.MAEDCHENNAME);
+                default:
+                    throw new ConversionException("The name.use.code code is not supported by the Fhir-bridge");
             }
         }
         return Optional.empty();
+    }
+
+    public Javers getJavers() {
+        return JaversBuilder.javers()
+                .registerValueObject(PersonennameCluster.class)
+                .build();
     }
 
 }

@@ -1,14 +1,14 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
+package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
-import org.checkerframework.checker.nullness.Opt;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten.AdresseConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten.EinzelheitenDerKommunikationConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten.PersonenNameConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.*;
 import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Extension;
-import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Patient;
 
 import java.time.ZoneId;
@@ -18,7 +18,6 @@ import java.util.Optional;
 
 public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patient, PersonendatenAdminEntry> {
 
-    @SuppressWarnings("FieldCanBeLocal")
     private final String ethnischerHintergrundExtensionUrl = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group";
 
     @Override
@@ -26,12 +25,45 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
         PersonendatenAdminEntry personData = new PersonendatenAdminEntry();
         mapDataOnBirth(resource).ifPresent(personData::setDatenZurGeburt);
         mapEthnischerHintergrund(resource).ifPresent(personData::setEthnischerHintergrund);
-        mapAngabenZumTod(resource).ifPresent(personData::setAngabenZumTod);
+        mapAngabenZumTod(resource, personData);
+        setPersonenName(resource, personData);
+        setAdresse(resource, personData);
+        setEinzelheitenZurKommunikation(resource, personData);
+        return personData;
+    }
+
+    private void setEinzelheitenZurKommunikation(Patient resource, PersonendatenAdminEntry personData) {
+        List<EinzelheitenDerKommunikationCluster> list = new EinzelheitenDerKommunikationConverter().convert(resource);
+        if (!list.isEmpty()) {
+            personData.setEinzelheitenDerKommunikation(list);
+        }
+    }
+
+    private void setAdresse(Patient resource, PersonendatenAdminEntry personData) {
+        List<AdresseCluster> list = new AdresseConverter().convert(resource);
+        if (!list.isEmpty()) {
+            personData.setAdresse(list);
+        }
+    }
+
+    private void setPersonenName(Patient resource, PersonendatenAdminEntry personData) {
         List<PersonennameCluster> list = new PersonenNameConverter().convert(resource);
         if (!list.isEmpty()) {
             personData.setPersonenname(list);
         }
-        return personData;
+    }
+
+    private void mapAngabenZumTod(Patient resource, PersonendatenAdminEntry personData) {
+        AngabenZumTodCluster angabenZumTodCluster = new AngabenZumTodCluster();
+        if(resource.hasDeceased()){
+            if(resource.hasDeceasedBooleanType()){
+                personData.setVerstorbenValue(true);
+            }
+            if (resource.hasDeceasedDateTimeType()) {
+                personData.setVerstorbenValue(true);
+                angabenZumTodCluster.setSterbedatumValue(resource.getDeceasedDateTimeType().getValueAsCalendar().toZonedDateTime());
+            }
+        }
     }
 
     private Optional<List<EthnischerHintergrundCluster>> mapEthnischerHintergrund(Patient patient) {
@@ -47,8 +79,8 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
         List<EthnischerHintergrundCluster> ethnischerHintergrundClusterList = new ArrayList<>();
         Coding codig = (Coding) patient.getExtensionByUrl(ethnischerHintergrundExtensionUrl).getValue();
         EthnischerHintergrundCluster ethnischerHintergrundCluster = new EthnischerHintergrundCluster();
-        if (EthnischerHintergrundDefiningCode.getBySNOMEDCode(codig.getCode()) != null) {
-            ethnischerHintergrundCluster.setEthnischerHintergrundDefiningCode(EthnischerHintergrundDefiningCode.getBySNOMEDCode(codig.getCode()));
+        if (EthnischerHintergrundDefiningCode.getBySNOMEDCode(codig.getCode()).isPresent()) {
+            EthnischerHintergrundDefiningCode.getBySNOMEDCode(codig.getCode()).ifPresent(ethnischerHintergrundCluster::setEthnischerHintergrundDefiningCode);
             ethnischerHintergrundClusterList.add(ethnischerHintergrundCluster);
             return Optional.of(ethnischerHintergrundClusterList);
         } else {
@@ -78,4 +110,5 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
             return Optional.empty();
         }
     }
+
 }
