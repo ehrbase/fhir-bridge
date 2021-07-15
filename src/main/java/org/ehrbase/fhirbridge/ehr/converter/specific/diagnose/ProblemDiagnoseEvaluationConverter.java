@@ -19,13 +19,21 @@ public class ProblemDiagnoseEvaluationConverter extends EntryEntityConverter<Con
 
     @Override
     protected ProblemDiagnoseEvaluation convertInternal(Condition resource) {
-        DateTimeType fhirOnsetDateTime = resource.getOnsetDateTimeType();
 
         ProblemDiagnoseEvaluation evaluation = new ProblemDiagnoseEvaluation();
         evaluation.setLetztesDokumentationsdatumValue(OffsetDateTime.now());
-        evaluation.setSchweregrad(getSchweregrad(resource.getSeverity().getCoding().get(0)));
-        evaluation.setNameDesProblemsDerDiagnoseDefiningCode(getNameDesProblemsDerDiagnose(resource.getCode().getCoding().get(0)));
-        evaluation.setDatumDesAuftretensDerErstdiagnoseValue(fhirOnsetDateTime.getValueAsCalendar().toZonedDateTime());
+
+        if(resource.hasSeverity() && resource.getSeverity().hasCoding()){
+            evaluation.setSchweregrad(getSchweregrad(resource.getSeverity().getCoding().get(0)));
+        }
+        if(resource.hasCode() && resource.getCode().hasCoding()){
+            evaluation.setNameDesProblemsDerDiagnoseDefiningCode(getNameDesProblemsDerDiagnose(resource.getCode().getCoding().get(0)));
+        }
+        if(resource.hasOnset()){
+            DateTimeType fhirOnsetDateTime = resource.getOnsetDateTimeType();
+            evaluation.setDatumDesAuftretensDerErstdiagnoseValue(fhirOnsetDateTime.getValueAsCalendar().toZonedDateTime());
+        }
+        
         if (resource.getBodySite().size() == 1) {
             String bodySiteName = resource.getBodySite().get(0).getCoding().get(0).getDisplay();
             evaluation.setLokalisationValue("body site");
