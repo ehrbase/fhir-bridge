@@ -820,11 +820,11 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative   loinc    instant    not-ready_bug    not-ready    194
+	[Tags]             	blood-pressure    invalid    instant not-ready_bug
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_loinc-instant.json
-    observation.validate response - 201
+    observation.validate response - 422 (with error message)        422         The type of element effectiveInstant is not known, which is illegal
 
 
 
@@ -848,11 +848,11 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    loinc    timing    not-ready_bug    not-ready    194
+	[Tags]             	blood-pressure    invalid    timing
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_loinc-timing.json
-    observation.validate response - 201
+    observation.validate response - 422 (with error message)        422         The type of element effectiveTiming is not known, which is illegal
 
 
 
@@ -862,7 +862,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    snomed    datetime    not-ready_bug    not-ready    194
+	[Tags]             	blood-pressure    valid    alternative    snomed    datetime
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_snomed-datetime.json
@@ -876,11 +876,11 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    snomed    instant    not-ready_bug    not-ready    194
+	[Tags]             	blood-pressure    invalid    instant
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_snomed-instant.json
-    observation.validate response - 201
+    observation.validate response - 422 (with error message)        422         The type of element effectiveInstant is not known, which is illegal
 
 
 
@@ -890,7 +890,7 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    snomed    period    not-ready_bug    not-ready    194
+	[Tags]             	blood-pressure    valid    alternative    snomed    period
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_snomed-period.json
@@ -904,11 +904,11 @@ Force Tags              observation_create    create
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	blood-pressure    valid    alternative    snomed    timing    not-ready_bug    not-ready    194
+	[Tags]             	blood-pressure    invalid    timing
 
     ehr.create new ehr    000_ehr_status.json
     observation.create blood pressure  Blood Pressure  create-blood-pressure_snomed-timing.json
-    observation.validate response - 201
+    observation.validate response - 422 (with error message)        422         The type of element effectiveTiming is not known, which is illegal
 
 
 

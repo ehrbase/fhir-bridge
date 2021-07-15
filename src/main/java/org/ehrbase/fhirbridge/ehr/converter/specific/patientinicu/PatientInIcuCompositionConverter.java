@@ -7,8 +7,6 @@ import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.Status
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-import java.util.HashMap;
-
 public class PatientInIcuCompositionConverter extends CompositionConverter<Observation, PatientAufICUComposition> {
 
     private  void setStatus(PatientAufICUComposition composition, Observation fhirObservation) {
