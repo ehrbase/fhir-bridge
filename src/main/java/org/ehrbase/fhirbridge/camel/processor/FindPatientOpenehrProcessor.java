@@ -492,7 +492,8 @@ public class FindPatientOpenehrProcessor implements Processor {
             String dateValue = param.getValue();
             String dateQuery = "";
             if (dateValue.length() == 4) { // year only
-                dateQuery += "WHERE c/context/start_time >= '"+ dateValue +"-01-01' AND c/context/start_time <= '"+ dateValue +"-12-31' ";
+                dateQuery += "WHERE c1/context/start_time >= '"+ dateValue +"-01-01' AND c1/context/start_time <= '"+ dateValue +"-12-31' ";
+                dateQuery += "OR c2/context/start_time >= '"+ dateValue +"-01-01' AND c2/context/start_time <= '"+ dateValue +"-12-31' ";
             }
 
             aql += dateQuery;
