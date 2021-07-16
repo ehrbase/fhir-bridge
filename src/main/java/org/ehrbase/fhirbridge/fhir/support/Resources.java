@@ -16,6 +16,7 @@ import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
 import org.hl7.fhir.r4.model.ResourceType;
+import org.hl7.fhir.r4.model.Specimen;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -68,6 +69,8 @@ public class Resources {
                 return getSubject((Procedure) resource);
             case QuestionnaireResponse:
                 return getSubject((QuestionnaireResponse) resource);
+            case Specimen:
+                return getSubject((Specimen) resource);
             default:
                 throw new IllegalArgumentException("Unsupported resource type: " + resource.getResourceType());
         }
@@ -101,6 +104,9 @@ public class Resources {
                 break;
             case QuestionnaireResponse:
                 ((QuestionnaireResponse) resource).setSubject(subject);
+                break;
+            case Specimen:
+                ((Specimen) resource).setSubject(subject);
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported resource type: " + resource.getResourceType());
@@ -164,5 +170,9 @@ public class Resources {
 
     private static Optional<Reference> getSubject(QuestionnaireResponse questionnaireResponse) {
         return questionnaireResponse.hasSubject() ? Optional.of(questionnaireResponse.getSubject()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getSubject(Specimen specimen) {
+        return specimen.hasSubject() ? Optional.of(specimen.getSubject()) : Optional.empty();
     }
 }
