@@ -38,7 +38,7 @@ Force Tags              observation_search
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *GET* ``${BASE_URL}/Observation?subject.identifier=${subject_id}`` \n\n
     ...                 6. *VALIDATE* response status against 200
-    [Tags]              body-temperature    valid    not-ready    not-implemented
+    [Tags]              body-temperature    valid    search
 
     observation.create body temperature  Body Temperature  create-body-temp.json
 	observation.get body temperature
@@ -51,7 +51,7 @@ Force Tags              observation_search
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *GET* ``${BASE_URL}/Observation?subject.identifier=${subject_id}`` \n\n
     ...                 6. *VALIDATE* response status against 200
-    [Tags]              observation-lab    valid    not-ready    not-implemented
+    [Tags]              observation-lab    valid    search
 
     observation.create observation lab    create-observation-lab.json
 	observation.get observation lab
@@ -64,7 +64,7 @@ Force Tags              observation_search
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *GET* ``${BASE_URL}/Observation?subject.identifier=${subject_id}`` \n\n
     ...                 6. *VALIDATE* response status against 200
-    [Tags]              coronavirus-lab-result    valid    not-ready    not-implemented
+    [Tags]              coronavirus-lab-result    valid    search
 
     observation.create coronavirus lab result    create-coronavirus-nachweis-test.json
 	observation.get coronavirus lab results
@@ -75,13 +75,12 @@ Force Tags              observation_search
 	...                 2. *LOAD* _create-heart-rate.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
-	...                 5. *GET* ``POST {{ehrbase_url}}/query/aql WITH "q": "SELECT c FROM EHR e [ehr_id/value='{{ehr_id}}'] CONTAINS COMPOSITION c" `` \n\n
+	...                 5. *GET* ``${BASE_URL}/Observation?subject.identifier=${subject_id}`` \n\n
     ...                 6. *VALIDATE* response status against 200
-    [Tags]              heart-rate    valid     not-ready    not-implemented
+    [Tags]              heart-rate    valid     search
 
-    observation.create heart rate  Heart Rate  create-heart-rate.json
-	extract identifier_value from response
-	observation.get heart rate results
+    observation.create heart rate   Heart Rate  create-heart-rate.json
+	observation.get Heart Rate Results
 
 
 *** Keywords ***
