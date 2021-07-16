@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund;
 
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.VirologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.FallidentifikationCluster;
@@ -36,6 +37,12 @@ public class VirologischerBefundCompositionConverter extends ObservationToCompos
 
     private void mapFallIdentifikation(VirologischerBefundComposition composition, DiagnosticReport diagnosticReport) {
         FallidentifikationCluster fallidentifikationCluster = new FallidentifikationCluster();
+        if (!diagnosticReport.hasEncounter()){
+            throw new ConversionException("Diagnostic Report needs to have an Encounter.");
+        }
+        if (!diagnosticReport.getEncounter().hasReference()){
+            throw new ConversionException("The Encounter of the Diagnostic Report needs to have a Reference.");
+        }
         String codeString = diagnosticReport.getEncounter().getReference();
         fallidentifikationCluster.setFallKennungValue(codeString);
         composition.setFallidentifikation(fallidentifikationCluster);

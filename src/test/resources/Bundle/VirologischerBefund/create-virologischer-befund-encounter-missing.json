@@ -133,10 +133,6 @@
             "value": "{{patientId}}"
           }
         },
-        "encounter":
-        {
-          "reference": "http://external.fhir.server/Encounter/555"
-        },
         "result": [
           {
             "reference": "Observation/1"

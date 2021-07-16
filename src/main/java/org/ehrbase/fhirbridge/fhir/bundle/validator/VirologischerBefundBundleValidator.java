@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class VirologischerBefundBundleValidator extends AbstractBundleValidator {
 
-    private static final String VirologischerBefundUrl = "http://highmed.org/StructureDefinition/VirologischerBefund";
-    private static final String SpecimenUrl = "http://highmed.org/StructureDefinition/Specimen";
-    private static final String DiagnosticReportUrl ="http://highmed.org/fhir/StructureDefinition/ic/DiagnosticReportLab";
+    private static final String VirologischerBefundUrl = "https://simplifier.net/medizininformatikinitiative-highmed-ic/virologischerbefund";
+    private static final String SpecimenUrl = "https://simplifier.net/medizininformatikinitiative-highmed-ic/specimen-duplicate-5";
+    private static final String DiagnosticReportUrl ="https://simplifier.net/medizininformatikinitiative-highmed-ic/highmedicdiagnosticreport";
 
     private int VirologischerBefundProfilesContained = 0;
     private int SpecimenProfilesContained = 0;

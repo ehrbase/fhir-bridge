@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestPanelCluster;
@@ -47,7 +47,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         if(observation.getCategory().get(0).getCoding().get(2).getCode().equals("122442008")) {
             befundevent.setLabortestBezeichnungDefiningCode(LabortestBezeichnungDefiningCode.DETECTION_OF_VIRUS_PROCEDURE);
         }else{
-            throw new UnprocessableEntityException("createLabortestBezeichnungDefiningCode failed.");
+            throw new ConversionException("createLabortestBezeichnungDefiningCode failed as snomedct-subcategory Code (3rd entry in Observation-Category-Coding) was not 122442008.");
         }
     }
 
@@ -55,7 +55,16 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
 
         ProbeCluster probecluster = new ProbeCluster();
 
-        AnatomischeLokalisationCluster anatomischeLokalisationCluster = new AnatomischeLokalisationCluster();
+        if (!specimen.hasCollection()){
+            throw new ConversionException("Specimen resource needs to have a Collection.");
+        }
+        mapZeitpunktDerProbenentnahme(probecluster, specimen);
+        mapNameDerKoerperstelle(probecluster, specimen);
+
+        befundevent.setProbe(probecluster);
+    }
+
+    private void mapZeitpunktDerProbenentnahme(ProbeCluster probecluster, Specimen specimen) throws FHIRException {
 
         if (specimen.getCollection().hasCollectedPeriod()){
             if (specimen.getCollection().getCollectedPeriod().hasStart() && specimen.getCollection().getCollectedPeriod().hasEnd()) {
@@ -63,16 +72,22 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
                 Date end = specimen.getCollection().getCollectedPeriod().getEnd();
                 probecluster.setZeitpunktDesProbeneingangsValue((new DateTimeType(start)).getValueAsCalendar().toZonedDateTime());
                 probecluster.setZeitpunktDesProbeneingangsValue((new DateTimeType(end)).getValueAsCalendar().toZonedDateTime());
-                befundevent.setProbe(probecluster);
             }
-        } else {
+        } else if (specimen.getCollection().hasCollectedDateTimeType()) {
             DateTimeType date = specimen.getCollection().getCollectedDateTimeType();
             probecluster.setZeitpunktDerProbenentnahmeValue(date.getValueAsCalendar().toZonedDateTime());
-            befundevent.setProbe(probecluster);
+        } else{
+            throw new ConversionException("Collection of Specimen resource needs to either have CollectedDateTimeType or CollectedPeriod.");
         }
+    }
 
+    private void mapNameDerKoerperstelle(ProbeCluster probecluster, Specimen specimen) throws FHIRException {
+
+        AnatomischeLokalisationCluster anatomischeLokalisationCluster = new AnatomischeLokalisationCluster();
+        if (!specimen.getCollection().getBodySite().hasCoding() || specimen.getCollection().getBodySite().getCoding().size() != 1){
+            throw new ConversionException("Body Site of Specimen resource needs to have exactly one instance of Coding.");
+        }
         switch (specimen.getCollection().getBodySite().getCoding().get(0).getCode()) {
-
             case "367592002":
                 anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.STRUCTURE_OF_POSTERIOR_NASOPHARYNX_BODY_STRUCTURE);
                 break;
@@ -98,11 +113,10 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
                 anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.PULMONARY_ALVEOLAR_STRUCTURE_BODY_STRUCTURE);
                 break;
             default:
-                throw new UnprocessableEntityException("createNameDerKoerperstelleDefiningCode failed. Code not found for: " + specimen.getCollection().getBodySite().getCoding().get(0).getCode());
+                throw new ConversionException("createNameDerKoerperstelleDefiningCode failed. Code not found for: " + specimen.getCollection().getBodySite().getCoding().get(0).getCode());
 
         }
         probecluster.setAnatomischeLokalisation(anatomischeLokalisationCluster);
-        befundevent.setProbe(probecluster);
     }
 
 }

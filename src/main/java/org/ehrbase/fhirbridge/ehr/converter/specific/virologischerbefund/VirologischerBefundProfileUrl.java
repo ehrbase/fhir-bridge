@@ -2,8 +2,8 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund;
 
 public enum VirologischerBefundProfileUrl {
 
-    DIAGNOSTIC_REPORT("http://highmed.org/fhir/StructureDefinition/ic/DiagnosticReportLab"),
-    SPECIMEN("http://highmed.org/StructureDefinition/Specimen");
+    DIAGNOSTIC_REPORT("https://simplifier.net/medizininformatikinitiative-highmed-ic/highmedicdiagnosticreport"),
+    SPECIMEN("https://simplifier.net/medizininformatikinitiative-highmed-ic/specimen-duplicate-5");
 
     private final String url;
 
