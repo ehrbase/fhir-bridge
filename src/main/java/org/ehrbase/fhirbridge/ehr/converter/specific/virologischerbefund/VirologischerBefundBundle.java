@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.Specimen;
@@ -34,11 +34,11 @@ public class VirologischerBefundBundle {
                 this.specimen = (Specimen) resource;
 
             } else {
-                throw new UnprocessableEntityException("Virologischer Befund bundle needs to contain only the profiles for the Virologischer Befund. Please delete profile " + profileUrl + " from the Bundle.");
+                throw new ConversionException("Virologischer Befund bundle needs to contain only the profiles for the Virologischer Befund. Please delete profile " + profileUrl + " from the Bundle.");
             }
 
         } catch (IndexOutOfBoundsException e) {
-            throw new UnprocessableEntityException("Make sure only the for Virologischer Befund supported Profiles are contained in the Bundle these are: Virologischer Befund, Diagnostic Report and Specimen");
+            throw new ConversionException("Make sure only the for Virologischer Befund supported Profiles are contained in the Bundle these are: Virologischer Befund, Diagnostic Report and Specimen");
         }
     }
 

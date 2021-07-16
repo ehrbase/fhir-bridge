@@ -110,8 +110,17 @@ public class VirologischerBefundIT extends AbstractBundleMappingTestSetupIT {
         assertEquals("Virologischer Befund needs to contain at least one profile of VirologischerBefund, DiagnosticReport and Specimen.", exception.getMessage());
     }
 
+    @Test
+    void createMissingEncounterProfiles() throws IOException {
+        Exception exception = executeMappingException("create-virologischer-befund-encounter-missing.json");
+        assertEquals("Diagnostic Report needs to have an Encounter.", exception.getMessage());
+    }
 
-
+    @Test
+    void createInvalidCodingProfiles() throws IOException {
+        Exception exception = executeMappingException("create-virologischer-befund-invalid-coding.json");
+        assertEquals("Body Site of Specimen resource needs to have exactly one instance of Coding.", exception.getMessage());
+    }
 
     @Override
     public Javers getJavers() {

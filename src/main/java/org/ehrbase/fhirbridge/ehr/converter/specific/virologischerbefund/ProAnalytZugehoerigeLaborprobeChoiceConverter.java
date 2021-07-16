@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytZugehoerigeLaborprobeChoice;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytZugehoerigeLaborprobeDvUri;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytZugehoerigeLaborprobeDvIdentifier;
@@ -14,11 +14,20 @@ public class ProAnalytZugehoerigeLaborprobeChoiceConverter {
 
         ProAnalytZugehoerigeLaborprobeDvIdentifier proAnalytZugehoerigeLaborprobeDvIdentifier = new ProAnalytZugehoerigeLaborprobeDvIdentifier();
 
-        if(observation.getSpecimen().getIdentifier() == null){
-            throw new UnprocessableEntityException("Unknown identifier");
-        }
-
         DvIdentifier dvIdentifier = new DvIdentifier();
+
+        if(observation.getSpecimen().getIdentifier() == null){
+            throw new ConversionException("Unknown specimen identifier");
+        }
+        if (!observation.getSpecimen().getIdentifier().hasAssigner() || !observation.getSpecimen().getIdentifier().hasId() || !observation.getSpecimen().getIdentifier().hasType()){
+            throw new ConversionException("If Identifier of Specimen of Observation is present, it needs Assigner, Id and Type.");
+        }
+        if (!observation.getSpecimen().getIdentifier().getAssigner().hasDisplay()){
+            throw new ConversionException("Assigner of Identifier of Specimen of Observation needs a Display.");
+        }
+        if (!observation.getSpecimen().getIdentifier().getType().hasText()){
+            throw new ConversionException("Type of Identifier of Specimen of Observation needs Text.");
+        }
 
         dvIdentifier.setAssigner(observation.getSpecimen().getIdentifier().getAssigner().getDisplay());
 
