@@ -221,7 +221,9 @@ public class FindPatientOpenehrProcessor implements Processor {
             }
         }
 
-        // execute queries based on the processed paramters and join results
+        // execute queries based on the processed parameters and join results
+        // note for unsupported parameters, or for codes that don't have a matching template, no AQL will be
+        // executed without throwing an exception
         Set<String> ehrIds = new HashSet<>();
 
         // process queries not based on templates
@@ -231,9 +233,13 @@ public class FindPatientOpenehrProcessor implements Processor {
             // the attribute is not 'code', so we need to search manually for the possible matching templates
             // and hardcode them here.
             //
-            // Encounter => Patientenaufenthalt (openEHR-EHR-COMPOSITION.event_sumary.v1)
+            // Encounter => Patientenaufenthalt (openEHR-EHR-COMPOSITION.event_summary.v0)
             // Encounter => Stationärer Versorgungsfall (openEHR-EHR-COMPOSITION.fall.v1)
             System.out.println(outParam.getValue());
+
+            if (outParam.getTargetResource().equals("Encounter")) {
+                ehrIds.addAll(handleQueryForEncounter(outParam));
+            }
         }
 
         // process queries based on templates
@@ -471,6 +477,52 @@ public class FindPatientOpenehrProcessor implements Processor {
         return ehrIds;
     }
 
+    private Set<String> handleQueryForEncounter(HasParamTemplate param) {
+
+        Set<String> ehrIds = new HashSet<>();
+
+        // in the query, the hardcoded archetype IDs are the ones that are mapped from fhir encounters
+        String aql = "SELECT e/ehr_id/value "+
+            "FROM EHR e "+
+            "CONTAINS (COMPOSITION c1[openEHR-EHR-COMPOSITION.event_sumary.v1] OR COMPOSITION c2[openEHR-EHR-COMPOSITION.fall.v1]) ";
+
+        // processing _has:Encounter:patient:date=2020
+        if (param.targetParamName.equals("date")) {
+
+            String dateValue = param.getValue();
+            String dateQuery = "";
+            if (dateValue.length() == 4) { // year only
+                dateQuery += "WHERE c/context/start_time >= '"+ dateValue +"-01-01' AND c/context/start_time <= '"+ dateValue +"-12-31' ";
+            }
+
+            aql += dateQuery;
+        }
+
+        LOG.info(aql);
+
+        // execute query only if there is a matching supported param
+        if (aql.contains("WHERE")) {
+
+            // Execute the AQL
+            Query<Record1<String>> query = Query.buildNativeQuery(aql, String.class);
+
+            List<Record1<String>> results = new ArrayList<>();
+
+            try {
+                results = this.openEhrClient.aqlEndpoint().execute(query);
+
+                for (Record1<String> record : results) {
+
+                    ehrIds.add(record.value1());
+                }
+            } catch (Exception e) {
+                throw new InternalErrorException("There was a problem retrieving the result", e);
+            }
+        }
+
+        return ehrIds;
+    }
+
     /**
      * Represents one code matching a set of templateIds (the same code could be referenced by
      * different paths on different templates)
@@ -479,7 +531,7 @@ public class FindPatientOpenehrProcessor implements Processor {
 
         private String targetResource;   // Observation, Encounter, Condition
         private String targetParamName;  // code, date
-        private String value;            // code value or value of the single param name
+        private String value;            // code value or single value of the param name
         private Set<String> templateIds; // template_ids matching any of the codes, can be empty if there are no matches or if the paramName is not a code, or multiple if different codes in the list match different templates
 
         public HasParamTemplate(String targetResource, String targetParamName, String value, Set<String> templateIds) {
