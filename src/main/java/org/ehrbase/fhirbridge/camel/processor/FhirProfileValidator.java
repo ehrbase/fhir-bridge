@@ -112,7 +112,7 @@ public class FhirProfileValidator implements Processor, MessageSourceAware {
             outcome.addIssue(new OperationOutcomeIssueComponent()
                     .setSeverity(IssueSeverity.FATAL)
                     .setCode(IssueType.VALUE)
-                    .setDiagnostics(messages.getMessage("validation.profile.missingSupported", new Object[]{resourceType, Profile.getSupportedProfiles(resourceType)}))
+                    .setDiagnostics(messages.getMessage("validation.profile.missingSupported", new Object[]{Profile.getSupportedProfiles(resourceType)}))
                     .addExpression(profileExpression(resource)));
         } else if (supportedProfiles.size() > 1) {
             outcome.addIssue(new OperationOutcomeIssueComponent()
