@@ -40,46 +40,46 @@ workflows:
                     branches:
                         ignore: gh-pages
 
-            # Execute Robot Integration Tests (Parallel Execution)
-            - BUNDLE-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
+            # # Execute Robot Integration Tests (Parallel Execution)
+            # - BUNDLE-tests:
+            #     context: org-global
+            #     requires:
+            #         - build-test-analyse-fhirbridge
+            #     filters:
+            #         branches:
+            #             ignore: gh-pages
 
-            - CONDITION-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
+            # - CONDITION-tests:
+            #     context: org-global
+            #     requires:
+            #         - build-test-analyse-fhirbridge
+            #     filters:
+            #         branches:
+            #             ignore: gh-pages
             
-            - DIAGNOSTIC-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
+            # - DIAGNOSTIC-tests:
+            #     context: org-global
+            #     requires:
+            #         - build-test-analyse-fhirbridge
+            #     filters:
+            #         branches:
+            #             ignore: gh-pages
             
-            - IMMUNIZATION-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
+            # - IMMUNIZATION-tests:
+            #     context: org-global
+            #     requires:
+            #         - build-test-analyse-fhirbridge
+            #     filters:
+            #         branches:
+            #             ignore: gh-pages
 
-            - MEDICATIONSTATEMENT-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
+            # - MEDICATIONSTATEMENT-tests:
+            #     context: org-global
+            #     requires:
+            #         - build-test-analyse-fhirbridge
+            #     filters:
+            #         branches:
+            #             ignore: gh-pages
             
             - OBSERVATION-tests:
                 context: org-global
@@ -89,33 +89,33 @@ workflows:
                     branches:
                         ignore: gh-pages
             
-            - PROCEDURE-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
+            # - PROCEDURE-tests:
+            #     context: org-global
+            #     requires:
+            #         - build-test-analyse-fhirbridge
+            #     filters:
+            #         branches:
+            #             ignore: gh-pages
             
-            - QUESTIONAIRE-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
+            # - QUESTIONAIRE-tests:
+            #     context: org-global
+            #     requires:
+            #         - build-test-analyse-fhirbridge
+            #     filters:
+            #         branches:
+            #             ignore: gh-pages
             
             - ROBOT-TEST-REPORT:
                 context: org-global
                 requires:
-                    - BUNDLE-tests
-                    - CONDITION-tests
-                    - DIAGNOSTIC-tests
-                    - IMMUNIZATION-tests
-                    - MEDICATIONSTATEMENT-tests
+                    # - BUNDLE-tests
+                    # - CONDITION-tests
+                    # - DIAGNOSTIC-tests
+                    # - IMMUNIZATION-tests
+                    # - MEDICATIONSTATEMENT-tests
                     - OBSERVATION-tests
-                    - PROCEDURE-tests
-                    - QUESTIONAIRE-tests
+                    # - PROCEDURE-tests
+                    # - QUESTIONAIRE-tests
 
 
             - tag-version:
@@ -309,7 +309,8 @@ jobs:
     OBSERVATION-tests:
         description: |
             todo
-        executor: docker-py3-java11-postgres
+        # executor: docker-py3-java11-postgres
+        executor: machine-ubuntu-2004
         steps:
             - checkout
             - install-maven
@@ -320,8 +321,8 @@ jobs:
                 include-tags: "observation"
                 test-suite-path: "OBSERVATION"
                 test-suite-name: "OBSERVATION"
-                runner: robot
-                pabot-split: ""
+                runner: pabot
+                pabot-split: "--testlevelsplit"
             - save-fhirbridge-robot-test-results
 
     PROCEDURE-tests:
@@ -952,4 +953,36 @@ executors:
             #   environment:
             #     POSTGRES_USER: fhir_bridge
             #     POSTGRES_PASSWORD: fhir_bridge
-        # resource_class: large
+        resource_class: large
+
+    machine-ubuntu-2004:
+        description: |
+            Ubuntu 20.04 VM (machine executor)
+            - openjdk 1.8
+            - openjdk 11.0.8 (default)
+            - maven 3.6.3
+            - gradle 6.6
+            - python 2.7.17
+            - python 3.8.5
+            - pip/pip3
+            - docker 19.03.12
+            - docker-compose 1.26.2
+            - aws-cli 2.0.43
+            - google cloud sdk 307.0.0
+            - heroku 7.42.12
+            - chrome 85.0.4183
+            - chromedriver 85.0.4183
+            - firefox 80.0.0
+            - go 1.15
+            - leiningen 2.9.4
+            - node 12.18.3 (default)
+            - node 14.8.0
+            - ruby 2.7.1
+            - sbt 1.3.13
+            - yarn 1.22.4
+        working_directory: ~/projects
+        environment:
+            PIPELINE_ID: << pipeline.id >>
+            BRANCH_NAME: << pipeline.git.branch >>
+        machine:
+            image: ubuntu-2004:202008-01
