@@ -138,14 +138,14 @@ workflows:
                             - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
 
 
-            - deploy-testdocs-githup-pages:
-                context: org-global
-                requires:
-                    - ROBOT-TEST-REPORT
-                filters:
-                    branches:
-                        only:
-                            - develop
+#            - deploy-testdocs-githup-pages:
+#                context: org-global
+#                requires:
+#                    - ROBOT-TEST-REPORT
+#                filters:
+#                    branches:
+#                        only:
+#                            - develop
 
 
 
@@ -427,39 +427,39 @@ jobs:
                       docker push ehrbase/fhir-bridge:$TAG
             
 
-    deploy-testdocs-githup-pages:
-        description: |
-            Deploy Robot Test Documentation to Github Pages
-
-            How This Works
-            ==============
-
-            1. All files required for the Github Pages are generated in the job 'ROBOT-TEST-REPORT'.
-            2. The command 'merge-robot-outputs' persists copies of these files to workspace (prefixing them with 'new_').
-            3. In this job the files (new_testdocu.html, new_log.html, new_report.html) are attached back
-               to workspace.
-            4. After checking out gh-pages branch the new_ files are copied over the old files
-            5. Changes are commited and force-pushed back to origin
-            6. Updated testdocs are served via Github Pages @https://ehrbase.github.io/fhir-bridge/
-
-        executor: docker-py3-java11-postgres
-        steps:
-            - checkout
-            - configure-git-for-ci-bot
-            - restore-fhirbridge-workspace
-            - run:
-                name: OVERWRITE OLD ROBOT FILES AND PUSH UPDATE TO GH-PAGES BRANCH
-                command: |
-                    # ls -la
-                    git checkout gh-pages
-                    # git status
-                    cp new_fhir-bridge-robot-testdocu.html fhir-bridge-robot-testdocu.html
-                    cp new_log.html log.html
-                    cp new_report.html report.html
-                    # ls -la
-                    # git status
-                    git commit -am "Updates Robot Test Documentation Github Page --> https://ehrbase.github.io/fhir-bridge/"
-                    git push --force --set-upstream origin gh-pages
+#    deploy-testdocs-githup-pages:
+#        description: |
+#            Deploy Robot Test Documentation to Github Pages
+#
+#            How This Works
+#            ==============
+#
+#            1. All files required for the Github Pages are generated in the job 'ROBOT-TEST-REPORT'.
+#            2. The command 'merge-robot-outputs' persists copies of these files to workspace (prefixing them with 'new_').
+#            3. In this job the files (new_testdocu.html, new_log.html, new_report.html) are attached back
+#               to workspace.
+#            4. After checking out gh-pages branch the new_ files are copied over the old files
+#            5. Changes are commited and force-pushed back to origin
+#            6. Updated testdocs are served via Github Pages @https://ehrbase.github.io/fhir-bridge/
+#
+#        executor: docker-py3-java11-postgres
+#        steps:
+#            - checkout
+#            - configure-git-for-ci-bot
+#            - restore-fhirbridge-workspace
+#            - run:
+#                name: OVERWRITE OLD ROBOT FILES AND PUSH UPDATE TO GH-PAGES BRANCH
+#                command: |
+#                    # ls -la
+#                    git checkout gh-pages
+#                    # git status
+#                    cp new_fhir-bridge-robot-testdocu.html fhir-bridge-robot-testdocu.html
+#                    cp new_log.html log.html
+#                    cp new_report.html report.html
+#                    # ls -la
+#                    # git status
+#                    git commit -am "Updates Robot Test Documentation Github Page --> https://ehrbase.github.io/fhir-bridge/"
+#                    git push --force --set-upstream origin gh-pages
 
 
 
