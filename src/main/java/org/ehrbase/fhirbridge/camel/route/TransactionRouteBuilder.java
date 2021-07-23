@@ -39,7 +39,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @SuppressWarnings("java:S1192")
-public class TransactionRouteBuilder extends AbstractRouteBuilder {
+public class TransactionRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {

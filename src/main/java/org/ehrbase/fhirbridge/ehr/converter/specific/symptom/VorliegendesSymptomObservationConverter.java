@@ -29,7 +29,6 @@ import org.hl7.fhir.r4.model.Condition;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -82,7 +81,7 @@ public class VorliegendesSymptomObservationConverter extends ConditionToObservat
         return condition.getSeverity()
                 .getCoding()
                 .stream()
-                .filter(coding -> Objects.equals(coding.getSystem(), CodeSystem.SNOMED.getUrl()))
+                .filter(coding -> coding.getSystem().equals(CodeSystem.SNOMED.getUrl()))
                 .findFirst()
                 .map(coding -> SchweregradSymptomCode.getCodesAsMap().get(coding.getCode()))
                 .map(SchweregradSymptomCode::toDvCodedText);

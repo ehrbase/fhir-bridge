@@ -7,9 +7,6 @@ target
 keystore/
 logs/
 
-*.log
-.attach_pid*
-
 # Python
 venv
 *.venv

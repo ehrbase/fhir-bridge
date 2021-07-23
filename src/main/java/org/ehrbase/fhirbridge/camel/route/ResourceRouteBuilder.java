@@ -16,20 +16,9 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.util.ObjectHelper;
-import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
-import org.ehrbase.client.exception.ClientException;
-import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.camel.CamelConstants;
-import org.ehrbase.fhirbridge.camel.processor.EhrLookupProcessor;
-import org.ehrbase.fhirbridge.camel.processor.FhirProfileValidator;
-import org.ehrbase.fhirbridge.camel.processor.OpenEhrClientExceptionHandler;
-import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
-import org.ehrbase.fhirbridge.camel.processor.ProvideResourceAuditHandler;
-import org.ehrbase.fhirbridge.camel.processor.ProvideResourceResponseProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourcePersistenceProcessor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -39,40 +28,19 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @SuppressWarnings("java:S1192")
-public class ResourceRouteBuilder extends AbstractRouteBuilder {
+public class ResourceRouteBuilder extends RouteBuilder {
+
+    @Value("${fhir-bridge.debug.enabled:false}")
+    private boolean debug;
 
     @Override
     public void configure() throws Exception {
-        super.configure();
+        errorHandler(defaultErrorHandler()
+                .logStackTrace(debug)
+                .logExhaustedMessageHistory(debug));
 
-        // @formatter:off
-        from("direct:provideResource")
-            .routeId("provideResourceRoute")
-            .onCompletion()
-                .process(ProvideResourceAuditHandler.BEAN_ID)
-            .end()
-            .process(FhirProfileValidator.BEAN_ID)
-            .process(PatientReferenceProcessor.BEAN_ID)
-            .process(ResourcePersistenceProcessor.BEAN_ID)
-            .process(EhrLookupProcessor.BEAN_ID)
-            .doTry()
-                .to("bean:fhirResourceConversionService?method=convert(${headers.CamelFhirBridgeProfile}, ${body})")
-            .doCatch(Exception.class) // TODO: ConversionException
-                .throwException(UnprocessableEntityException.class, "${exception.message}")
-            .end()
-            .process(exchange -> {
-                if (ObjectHelper.isNotEmpty(exchange.getIn().getHeader(CamelConstants.COMPOSITION_ID))) {
-                    String compositionId = exchange.getIn().getHeader(CamelConstants.COMPOSITION_ID, String.class);
-                    exchange.getIn().getBody(CompositionEntity.class).setVersionUid(new VersionUid(compositionId));
-                }
-            })
-            .doTry()
-                .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .doCatch(ClientException.class)
-                .process(new OpenEhrClientExceptionHandler())
-            .end()
-            .process(ProvideResourceResponseProcessor.BEAN_ID);
-        // @formatter:on
+        onException(Exception.class)
+                .process("defaultExceptionHandler");
 
         configureAuditEvent();
         configureCondition();
