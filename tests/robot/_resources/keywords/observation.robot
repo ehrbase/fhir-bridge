@@ -132,14 +132,13 @@ get coronavirus lab results
 
 
 get heart rate results
-#    &{resp}            POST 	${ehrbase_url}/query/aql/    {"q": "SELECT c FROM COMPOSITION c [uid/value='${identifier_value}']"}
-	&{resp}				GET		${ehrbase_url}/ehr/${ehr_id_value}/composition/${identifier_value}::local.ehrbase.org::1
-						Output Debug Info To Console
-                        Integer    response status    200
-                        String     request method    GET
-						String     response body uid value    pattern=${identifier_value}*
-#                       String     response body resourceType    Bundle
-                        String     response body content 0 _type    OBSERVATION
+    &{resp}            GET    ${BASE_URL}/Observation?subject.identifier=${subject_id}&_profile=https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/heart-rate
+                       Integer    response status    200
+                       String     request method    GET
+                       String     response body id
+                       String     response body resourceType    Bundle
+                       String     response body entry 0 resource resourceType    Observation
+                       Output Debug Info To Console
                         
 
 

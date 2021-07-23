@@ -22,7 +22,7 @@ $ mvn clean install
 
 ### Build the application and execute integration tests
 
-```shell script
+```shell
 $ mvn clean install -DskipITs=false
 ```
 
