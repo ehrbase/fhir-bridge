@@ -8,14 +8,15 @@ import java.util.Map;
 
 public class VirologischerBefundBundleValidator extends AbstractBundleValidator {
 
-    private static final String VirologischerBefundUrl = "https://simplifier.net/medizininformatikinitiative-highmed-ic/virologischerbefund";
-    private static final String SpecimenUrl = "https://simplifier.net/medizininformatikinitiative-highmed-ic/specimen-duplicate-5";
-    private static final String DiagnosticReportUrl ="https://simplifier.net/medizininformatikinitiative-highmed-ic/highmedicdiagnosticreport";
+    private static final String VIROLOGISCHER_BEFUND_URL = "https://simplifier.net/medizininformatikinitiative-highmed-ic/virologischerbefund";
+    private static final String SPECIMEN_URL = "https://simplifier.net/medizininformatikinitiative-highmed-ic/specimen-duplicate-5";
+    private static final String DIAGNOSTIC_REPORT_URL ="https://simplifier.net/medizininformatikinitiative-highmed-ic/highmedicdiagnosticreport";
 
-    private int VirologischerBefundProfilesContained = 0;
-    private int SpecimenProfilesContained = 0;
-    private int DiagnosticReportProfilesContained = 0;
+    private int virologischerBefundProfilesContained = 0;
+    private int specimenProfilesContained = 0;
+    private int diagnosticReportProfilesContained = 0;
 
+    @Override
     public void validateRequest(Object bundle, Map<String, Object> parameters) {
         super.validateRequest(bundle, parameters);
         validateVirologischerBefund((Bundle) bundle);
@@ -31,23 +32,23 @@ public class VirologischerBefundBundleValidator extends AbstractBundleValidator 
 
 
     private void resetAttributes() {
-        VirologischerBefundProfilesContained = 0;
-        SpecimenProfilesContained = 0;
-        DiagnosticReportProfilesContained = 0;
+        virologischerBefundProfilesContained = 0;
+        specimenProfilesContained = 0;
+        diagnosticReportProfilesContained = 0;
     }
 
     private void validateProfiles(Bundle.BundleEntryComponent entry) {
         try {
             String profileUrl = entry.getResource().getMeta().getProfile().get(0).getValue();
             switch (profileUrl) {
-                case VirologischerBefundUrl:
+                case VIROLOGISCHER_BEFUND_URL:
                     setVirologischerBefund();
                     break;
-                case SpecimenUrl:
-                    SpecimenProfilesContained += 1;
+                case SPECIMEN_URL:
+                    specimenProfilesContained += 1;
                     break;
-                case DiagnosticReportUrl:
-                    DiagnosticReportProfilesContained += 1;
+                case DIAGNOSTIC_REPORT_URL:
+                    diagnosticReportProfilesContained += 1;
                     break;
                 default:
                     throw new UnprocessableEntityException("Virologischer Befund bundle needs to contain only the profiles for the Virologischer Befund. Please delete profile " + profileUrl + " from the Bundle.");
@@ -68,12 +69,12 @@ public class VirologischerBefundBundleValidator extends AbstractBundleValidator 
 
 
     private boolean checkIfOneProfileIsPresent() {
-        return VirologischerBefundProfilesContained==1 && SpecimenProfilesContained==1 && DiagnosticReportProfilesContained==1;
+        return virologischerBefundProfilesContained ==1 && specimenProfilesContained ==1 && diagnosticReportProfilesContained ==1;
     }
 
     private void setVirologischerBefund() {
-        VirologischerBefundProfilesContained += 1;
-        if (VirologischerBefundProfilesContained != 1) {
+        virologischerBefundProfilesContained += 1;
+        if (virologischerBefundProfilesContained != 1) {
             throw new UnprocessableEntityException("Virologischer Befund profile is duplicated within the bundle, please delete one of them");
         }
     }

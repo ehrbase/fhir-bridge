@@ -6,9 +6,6 @@ import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ErgebnisStatusDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
 
-import java.lang.String;
-
-
 public class ProAnalytErgebnisStatusChoiceConverter {
 
     public ProAnalytErgebnisStatusChoice convertDvText(Observation observation){

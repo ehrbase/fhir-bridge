@@ -66,13 +66,11 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
 
     private void mapZeitpunktDerProbenentnahme(ProbeCluster probecluster, Specimen specimen) throws FHIRException {
 
-        if (specimen.getCollection().hasCollectedPeriod()){
-            if (specimen.getCollection().getCollectedPeriod().hasStart() && specimen.getCollection().getCollectedPeriod().hasEnd()) {
+        if (specimen.getCollection().hasCollectedPeriod() && specimen.getCollection().getCollectedPeriod().hasStart() && specimen.getCollection().getCollectedPeriod().hasEnd()){
                 Date start = specimen.getCollection().getCollectedPeriod().getStart();
                 Date end = specimen.getCollection().getCollectedPeriod().getEnd();
                 probecluster.setZeitpunktDesProbeneingangsValue((new DateTimeType(start)).getValueAsCalendar().toZonedDateTime());
                 probecluster.setZeitpunktDesProbeneingangsValue((new DateTimeType(end)).getValueAsCalendar().toZonedDateTime());
-            }
         } else if (specimen.getCollection().hasCollectedDateTimeType()) {
             DateTimeType date = specimen.getCollection().getCollectedDateTimeType();
             probecluster.setZeitpunktDerProbenentnahmeValue(date.getValueAsCalendar().toZonedDateTime());

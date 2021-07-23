@@ -150,9 +150,9 @@ public class VirologischerBefundIT extends AbstractBundleMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Bundle bundle = (Bundle) testFileLoader.loadResource(path);
-        return assertThrows(Exception.class, () -> {
-            new VirologischerBefundCompositionConverter().convert(new VirologischerBefundConverter().convert(bundle));
-        });
+        return assertThrows(Exception.class, () ->
+            new VirologischerBefundCompositionConverter().convert(new VirologischerBefundConverter().convert(bundle))
+        );
     }
 
     @Override
@@ -178,9 +178,9 @@ public class VirologischerBefundIT extends AbstractBundleMappingTestSetupIT {
 
     public Exception executeValidatorException(String path) throws IOException {
         Bundle bundle = (Bundle) testFileLoader.loadResource(path);
-        return assertThrows(Exception.class, () -> {
-           new VirologischerBefundBundleValidator().validateRequest(bundle, null);
-        });
+        return assertThrows(Exception.class, () ->
+           new VirologischerBefundBundleValidator().validateRequest(bundle, null)
+        );
     }
 
 }
