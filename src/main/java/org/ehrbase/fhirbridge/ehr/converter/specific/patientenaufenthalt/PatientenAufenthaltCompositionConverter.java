@@ -28,19 +28,18 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
     }
 
     private void mapFallKennung(PatientenaufenthaltComposition patientenaufenthaltComposition, Encounter encounter) {
-        if(encounter.hasType() && encounter.hasIdentifier()){
-            for(CodeableConcept codeableConcept : encounter.getType()){
+        if (encounter.hasType() && encounter.hasIdentifier()) {
+            for (CodeableConcept codeableConcept : encounter.getType()) {
                 iterateFallKennungAndConvert(codeableConcept, patientenaufenthaltComposition, encounter);
             }
         }
-
     }
 
     private void iterateFallKennungAndConvert(CodeableConcept codeableConcept, PatientenaufenthaltComposition patientenaufenthaltComposition, Encounter encounter) {
-        for(Coding coding: codeableConcept.getCoding()){
-            if(coding.hasSystem() && coding.getSystem().equals(KONTAKT_EBENE.getUrl())){
+        for (Coding coding : codeableConcept.getCoding()) {
+            if (coding.hasSystem() && coding.getSystem().equals(KONTAKT_EBENE.getUrl())) {
                 convertFallKennung(patientenaufenthaltComposition, coding, encounter);
-            }else{
+            } else {
                 throw new ConversionException("Invalid Code system " + coding.getSystem() +
                         " valid code system: " + KONTAKT_EBENE.getUrl());
             }
