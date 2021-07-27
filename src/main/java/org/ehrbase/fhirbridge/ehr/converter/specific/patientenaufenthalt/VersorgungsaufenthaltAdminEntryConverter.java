@@ -2,9 +2,11 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToAdminEntryConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.FachlicheOrganisationseinheitCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.StandortCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsaufenthaltAdminEntry;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Encounter;
 
@@ -92,14 +94,29 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
     }
 
     private Optional<String> mapGrundDesAufenthalts(Encounter encounter) {
-        return null;
+        if (!encounter.hasReasonCode()) {
+            return Optional.empty();
+        }
+
+        return encounter.getReasonCode()
+                .stream()
+                .filter(CodeableConcept::hasCoding)
+                .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
+                .map(Coding::getCode)
+                .findFirst();
     }
 
-    private Optional<TemporalAccessor> mapEnde(Encounter encounter) {
-        return null;
+    private Optional<TemporalAccessor> mapEnde(Encounter encounter) { //Exceptions in Timeconversion should not be moved to abstract converter
+        if (encounter.hasPeriod()) {
+            return Optional.of(TimeConverter.convertEncounterTime(encounter));
+        }
+        return Optional.empty();
     }
 
-    private Optional<TemporalAccessor> mapBeginn(Encounter encounter) {
-        return null;
+    private Optional<TemporalAccessor> mapBeginn(Encounter encounter) { //Exceptions should in Timeconversion not be moved to abstract converter
+        if (encounter.hasPeriod()) {
+            return TimeConverter.convertEncounterEndTime(encounter);
+        }
+        return Optional.empty();
     }
 }
