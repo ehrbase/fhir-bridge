@@ -13,9 +13,9 @@ import java.util.Optional;
 
 public class FachlicheOrganisationseinheitConverter {
 
-    private static final String FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel";
+    private final String FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel";
 
-    public static Optional<List<FachlicheOrganisationseinheitCluster>> convert(Encounter encounter) {
+    public Optional<List<FachlicheOrganisationseinheitCluster>> convert(Encounter encounter) {
         List<FachlicheOrganisationseinheitCluster> fachlicheOrganisationseinheitClusters = new ArrayList<>();
         if (encounter.hasServiceType() && encounter.getServiceType().hasCoding()) {
             fachlicheOrganisationseinheitClusters.add(convertFachlicheOrganisationsEinheit(encounter));
@@ -26,7 +26,7 @@ public class FachlicheOrganisationseinheitConverter {
 
     }
 
-    private static FachlicheOrganisationseinheitCluster convertFachlicheOrganisationsEinheit(Encounter encounter) {
+    private FachlicheOrganisationseinheitCluster convertFachlicheOrganisationsEinheit(Encounter encounter) {
         FachlicheOrganisationseinheitCluster fachlicheOrganisationseinheitCluster = new FachlicheOrganisationseinheitCluster();
         mapFachabteilungsSchluessel(encounter).ifPresent(fachlicheOrganisationseinheitCluster::setFachabteilungsschluesselDefiningCode);
         mapZusaetzlicheBeschreibung(encounter).ifPresent(fachlicheOrganisationseinheitCluster::setZusaetzlicheBeschreibungValue);
@@ -37,7 +37,7 @@ public class FachlicheOrganisationseinheitConverter {
         return fachlicheOrganisationseinheitCluster;
     }
 
-    private static Optional<Boolean> mapAktiv(Encounter encounter) {
+    private Optional<Boolean> mapAktiv(Encounter encounter) {
         if (encounter.hasServiceProvider() && encounter.getServiceProviderTarget().hasActive()) {
             return Optional.of(encounter.getServiceProviderTarget().getActive());
         } else {
@@ -45,7 +45,7 @@ public class FachlicheOrganisationseinheitConverter {
         }
     }
 
-    private static Optional<String> mapName(Encounter encounter) {
+    private Optional<String> mapName(Encounter encounter) {
         if (encounter.hasServiceProvider() && encounter.getServiceProviderTarget().hasName()) {
             return Optional.of(encounter.getServiceProviderTarget().getName());
         } else {
@@ -53,7 +53,7 @@ public class FachlicheOrganisationseinheitConverter {
         }
     }
 
-    private static Optional<String> mapTyp(Encounter encounter) {
+    private Optional<String> mapTyp(Encounter encounter) {
         if (encounter.hasServiceProvider() && encounter.getServiceProviderTarget().hasType()) {
             return encounter.getServiceProviderTarget().getType().stream()
                     .filter(CodeableConcept::hasCoding)
@@ -65,33 +65,36 @@ public class FachlicheOrganisationseinheitConverter {
         }
     }
 
-    private static Optional<String> mapZusaetzlicheBeschreibung(Encounter encounter) {
+    private Optional<String> mapZusaetzlicheBeschreibung(Encounter encounter) {
         if (encounter.hasServiceType() && encounter.getServiceType().hasText()) {
             return Optional.of(encounter.getServiceType().getText());
         }
         return Optional.empty();
     }
 
-    private static Optional<FachabteilungsschluesselDefiningCode> mapFachabteilungsSchluessel(Encounter encounter) {
+    private Optional<FachabteilungsschluesselDefiningCode> mapFachabteilungsSchluessel(Encounter encounter) {
         if (encounter.hasServiceType() && encounter.getServiceType().hasCoding()) {
-            for (Coding coding : encounter.getServiceType().getCoding()) {
-                return convertFachabteilungsSchluessel(coding);
-            }
-        }
-        return Optional.empty();
-    }
-
-    private static Optional<FachabteilungsschluesselDefiningCode> convertFachabteilungsSchluessel(Coding coding) {
-        if (coding.hasSystem() && coding.hasCode() && coding.getSystem().equals(FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM)) {
-            if(FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().containsKey(coding.getCode())){
-                return Optional.of(FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().get(coding.getCode()));
-            }else{
-                throw new ConversionException("Invalid Code "+coding.getCode()+" or Code System for 'Fachabteilungsschlüssel'.");
-            }
+            return convertFachabteilungsSchluessel(encounter);
         } else {
             return Optional.empty();
         }
     }
 
+    private Optional<FachabteilungsschluesselDefiningCode> convertFachabteilungsSchluessel(Encounter encounter) {
+        for (Coding coding : encounter.getServiceType().getCoding()) {
+            if (coding.hasSystem() && coding.hasCode() && coding.getSystem().equals(FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM)) {
+                return convertFachabteilungsschluesselDefiningCode(coding);
+            }
+        }
+        return Optional.empty();
+    }
+
+    private Optional<FachabteilungsschluesselDefiningCode> convertFachabteilungsschluesselDefiningCode(Coding coding) {
+        if (FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().containsKey(coding.getCode())) {
+            return Optional.of(FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().get(coding.getCode()));
+        } else {
+            throw new ConversionException("Invalid Code " + coding.getCode() + " or Code System for 'Fachabteilungsschlüssel'.");
+        }
+    }
 
 }
