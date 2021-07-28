@@ -64,11 +64,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createPregnancyStatus() throws IOException {
-        create("create-pregnancy-status.json");
-    }
-
-    @Test
     void createRespiratoryRate() throws IOException {
         create("create-respiratory-rate.json");
     }
