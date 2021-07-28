@@ -1,6 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum NameDerKoerperstelleDefiningCode implements EnumValueSet {
@@ -34,6 +37,14 @@ public enum NameDerKoerperstelleDefiningCode implements EnumValueSet {
     this.description = description;
     this.terminologyId = terminologyId;
     this.code = code;
+  }
+
+  public static Map<String, NameDerKoerperstelleDefiningCode> getCodesAsMap(){
+    Map<String, NameDerKoerperstelleDefiningCode> DefiningCodeHashMap = new HashMap<>();
+    for (NameDerKoerperstelleDefiningCode DefiningCode : NameDerKoerperstelleDefiningCode.values()) {
+      DefiningCodeHashMap.put(DefiningCode.getCode(), DefiningCode);
+    }
+    return DefiningCodeHashMap;
   }
 
   public String getValue() {
