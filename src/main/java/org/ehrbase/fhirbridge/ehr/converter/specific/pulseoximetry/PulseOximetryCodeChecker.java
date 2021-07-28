@@ -12,7 +12,7 @@ import static org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseO
 
 public class PulseOximetryCodeChecker {
 
-    void checkIfPulseOximetry(Observation observation) {
+    void checkIsPulsOximetry(Observation observation) {
         checkAmountOfCodes(observation);
     }
 

@@ -11,8 +11,8 @@ public class PulseOximetryCompositionConverter extends ObservationToCompositionC
 
     @Override
     public PulsoxymetrieComposition convertInternal(@NonNull Observation resource) {
+        new PulseOximetryCodeChecker().checkIsPulsOximetry(resource);
         PulsoxymetrieComposition composition = new PulsoxymetrieComposition();
-        new PulseOximetryCodeChecker().checkIfPulseOximetry(resource);
         mapStatus(composition, resource);
         mapKategorie(composition, resource);
         composition.setPulsoxymetrie(new PulsoxymetrieObservationConverter().convert(resource));
