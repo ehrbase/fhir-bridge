@@ -29,16 +29,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createBloodPressure() throws IOException {
-        create("create-blood-pressure.json");
-    }
-
-    @Test
-    void createBodyWeight() throws IOException {
-        create("create-body-weight.json");
-    }
-
-    @Test
     void createClinicalFrailtyScaleScore() throws IOException {
         create("create-clinical-frailty-scale-score.json");
     }
@@ -46,16 +36,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     @Test
     void createCoronavirusNachweisTest() throws IOException {
         create("create-coronavirus-nachweis-test.json");
-    }
-
-    @Test
-    void createFiO2() throws IOException {
-        create("create-fio2.json");
-    }
-
-    @Test
-    void createPatientInIcu() throws IOException {
-        create("create-patient-in-icu.json");
     }
 
     @Test
