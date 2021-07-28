@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.VirologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.FallidentifikationCluster;
@@ -8,6 +7,8 @@ import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+
+import java.util.Optional;
 
 public class VirologischerBefundCompositionConverter extends ObservationToCompositionConverter<VirologischerBefundComposition> {
 
@@ -24,7 +25,9 @@ public class VirologischerBefundCompositionConverter extends ObservationToCompos
             observation.setSpecimenTarget(virologischerBefundBundle.getSpecimen());
 
             mapStatus(composition, diagnosticReport);
-            mapFallIdentifikation(composition, diagnosticReport);
+
+            mapFallIdentifikation(diagnosticReport).ifPresent(composition::setFallidentifikation);
+
             composition.setBefund(new VirologischerBefundObservationConverter().convert(observation));
 
             return composition;
@@ -35,17 +38,18 @@ public class VirologischerBefundCompositionConverter extends ObservationToCompos
         composition.setStatusValue(codeString);
     }
 
-    private void mapFallIdentifikation(VirologischerBefundComposition composition, DiagnosticReport diagnosticReport) {
+    private Optional<FallidentifikationCluster> mapFallIdentifikation(DiagnosticReport diagnosticReport) {
+
         FallidentifikationCluster fallidentifikationCluster = new FallidentifikationCluster();
-        if (!diagnosticReport.hasEncounter()){
-            throw new ConversionException("Diagnostic Report needs to have an Encounter.");
+
+        if (diagnosticReport.hasEncounter() && diagnosticReport.getEncounter().hasReference()){
+            String codeString = diagnosticReport.getEncounter().getReference();
+            fallidentifikationCluster.setFallKennungValue(codeString);
+            return Optional.of(fallidentifikationCluster);
+        } else{
+            return Optional.empty();
         }
-        if (!diagnosticReport.getEncounter().hasReference()){
-            throw new ConversionException("The Encounter of the Diagnostic Report needs to have a Reference.");
-        }
-        String codeString = diagnosticReport.getEncounter().getReference();
-        fallidentifikationCluster.setFallKennungValue(codeString);
-        composition.setFallidentifikation(fallidentifikationCluster);
+
     }
 
 }

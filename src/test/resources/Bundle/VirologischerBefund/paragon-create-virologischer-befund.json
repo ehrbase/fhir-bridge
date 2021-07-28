@@ -18,7 +18,7 @@
     "originating_system_item_ids": [
       {
         "_type": "DV_IDENTIFIER",
-        "id": "Observation/9aa4cfae-f19a-41d3-b180-a5f8439491be/_history/1",
+        "id": "Observation/5228ac83-5bda-4871-95e5-aa56df566301/_history/1",
         "type": "fhir_logical_id"
       }
     ],
@@ -119,6 +119,9 @@
         }
       ],
       "archetype_node_id": "at0001"
+    },
+    "health_care_facility": {
+      "_type": "PARTY_IDENTIFIED"
     }
   },
   "content": [
@@ -146,6 +149,9 @@
       },
       "subject": {
         "_type": "PARTY_SELF"
+      },
+      "provider": {
+        "_type": "PARTY_IDENTIFIED"
       },
       "data": {
         "name": {
