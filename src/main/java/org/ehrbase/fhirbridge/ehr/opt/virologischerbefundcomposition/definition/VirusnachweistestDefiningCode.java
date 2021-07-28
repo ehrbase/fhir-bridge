@@ -1,9 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition;
 
 import java.lang.String;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum VirusnachweistestDefiningCode implements EnumValueSet {
@@ -27,14 +24,6 @@ public enum VirusnachweistestDefiningCode implements EnumValueSet {
     this.description = description;
     this.terminologyId = terminologyId;
     this.code = code;
-  }
-
-  public static Map<String, VirusnachweistestDefiningCode> getCodesAsMap(){
-    Map<String, VirusnachweistestDefiningCode> DefiningCodeHashMap = new HashMap<>();
-    for (VirusnachweistestDefiningCode DefiningCode : VirusnachweistestDefiningCode.values()) {
-      DefiningCodeHashMap.put(DefiningCode.getCode(), DefiningCode);
-    }
-    return DefiningCodeHashMap;
   }
 
   public String getValue() {

@@ -110,6 +110,18 @@ public class VirologischerBefundIT extends AbstractBundleMappingTestSetupIT {
         assertEquals("Virologischer Befund needs to contain at least one profile of VirologischerBefund, DiagnosticReport and Specimen.", exception.getMessage());
     }
 
+    @Test
+    void createMissingEncounterProfiles() throws IOException {
+        Exception exception = executeMappingException("create-virologischer-befund-encounter-missing.json");
+        assertEquals("Diagnostic Report needs to have an Encounter.", exception.getMessage());
+    }
+
+    @Test
+    void createInvalidCodingProfiles() throws IOException {
+        Exception exception = executeMappingException("create-virologischer-befund-invalid-coding.json");
+        assertEquals("Body Site of Specimen resource needs to have exactly one instance of Coding.", exception.getMessage());
+    }
+
     @Override
     public Javers getJavers() {
         return JaversBuilder.javers()
@@ -151,7 +163,7 @@ public class VirologischerBefundIT extends AbstractBundleMappingTestSetupIT {
         VirologischerBefundCompositionConverter virologischerBefundCompositionConverter = new VirologischerBefundCompositionConverter();
         VirologischerBefundComposition mappedVirologischerBefundComposition = virologischerBefundCompositionConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedVirologischerBefundComposition);
-        assertEquals(diff.getChanges().size(), 4);
+        assertEquals(diff.getChanges().size(), 2);
     }
 
     public void testMappingQuantity(String resourcePath, String paragonPath) throws IOException{
@@ -161,7 +173,7 @@ public class VirologischerBefundIT extends AbstractBundleMappingTestSetupIT {
         VirologischerBefundCompositionConverter virologischerBefundCompositionConverter = new VirologischerBefundCompositionConverter();
         VirologischerBefundComposition mappedVirologischerBefundComposition = virologischerBefundCompositionConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedVirologischerBefundComposition);
-        assertEquals(diff.getChanges().size(), 4);
+        assertEquals(diff.getChanges().size(), 2);
     }
 
     public Exception executeValidatorException(String path) throws IOException {

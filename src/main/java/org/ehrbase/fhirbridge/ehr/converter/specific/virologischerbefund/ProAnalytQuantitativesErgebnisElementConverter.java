@@ -13,9 +13,6 @@ public class ProAnalytQuantitativesErgebnisElementConverter {
 
         ProAnalytQuantitativesErgebnisElement proAnalytQuantitativesErgebnisElement = new ProAnalytQuantitativesErgebnisElement();
         List <ProAnalytQuantitativesErgebnisChoice> proAnalytQuantitativesErgebnisChoiceList = new ArrayList<>();
-        /**
-         *  Unit is 1..1 so observation.getValueQuantity().hasUnit() should be true. The other option is still implemented.
-         */
         if (observation.getValueQuantity().hasUnit()){
             proAnalytQuantitativesErgebnisChoiceList.add(new ProAnalytQuantitativesErgebnisChoiceConverter().convertDvQuantity(observation));
         }else {
