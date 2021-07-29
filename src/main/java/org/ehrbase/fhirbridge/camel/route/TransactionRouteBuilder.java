@@ -37,31 +37,29 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @SuppressWarnings("java:S1192")
-public class TransactionRouteBuilder extends RouteBuilder {
+public class TransactionRouteBuilder extends AbstractRouteBuilder {
 
     @Override
     public void configure() throws Exception {
         // @formatter:off
-
         from("bundle-provide:consumer?fhirContext=#fhirContext")
-                .setHeader(CamelConstants.PROFILE, method(Bundles.class, "getTransactionProfile"))
-                .choice()
-                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
-                        .bean(AntiBodyPanelBundleValidator.class)
-                        .bean(AntiBodyPanelConverter.class, "convert")
-                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
-                        .bean(BloodGasPanelBundleValidator.class)
-                        .bean(BloodGasPanelConverter.class, "convert")
-                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
-                        .bean(DiagnosticReportLabBundleValidator.class)
-                        .bean(DiagnosticReportLabConverter.class,"convert")
-                    .otherwise()
-                        .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
-                                "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri()))
-                .end()
-                .to("direct:provideResource")
-                .process(BundleResponseProcessor.BEAN_ID);
-
+            .setHeader(CamelConstants.PROFILE, method(Bundles.class, "getTransactionProfile"))
+            .choice()
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
+                    .bean(AntiBodyPanelBundleValidator.class)
+                    .bean(AntiBodyPanelConverter.class, "convert")
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
+                    .bean(BloodGasPanelBundleValidator.class)
+                    .bean(BloodGasPanelConverter.class, "convert")
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
+                    .bean(DiagnosticReportLabBundleValidator.class)
+                    .bean(DiagnosticReportLabConverter.class,"convert")
+                .otherwise()
+                    .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
+                            "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri()))
+            .end()
+            .to("direct:provideResource")
+            .process(BundleResponseProcessor.BEAN_ID);
         // @formatter:on
     }
 }
