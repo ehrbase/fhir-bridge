@@ -33,10 +33,8 @@ public class ProAnalytZugehoerigeLaborprobeChoiceConverter {
     }
 
     private Optional<String> mapAssigner (Observation observation){
-        if(hasAssigner(observation)){
-            if(hasDisplay(observation)){
-                return Optional.of(observation.getSpecimen().getIdentifier().getAssigner().getDisplay());
-            }
+        if(hasAssigner(observation) && hasDisplay(observation)){
+            return Optional.of(observation.getSpecimen().getIdentifier().getAssigner().getDisplay());
         }
         return Optional.empty();
     }
@@ -49,10 +47,8 @@ public class ProAnalytZugehoerigeLaborprobeChoiceConverter {
     }
 
     private Optional<String> mapType (Observation observation){
-        if(hasType(observation)){
-            if(hasText(observation)){
-                return Optional.of(observation.getSpecimen().getIdentifier().getType().getText());
-            }
+        if(hasType(observation) && hasText(observation)){
+            return Optional.of(observation.getSpecimen().getIdentifier().getType().getText());
         }
         return Optional.empty();
     }

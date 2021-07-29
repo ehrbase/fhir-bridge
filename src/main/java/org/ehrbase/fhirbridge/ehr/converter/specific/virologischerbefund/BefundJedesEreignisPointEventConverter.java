@@ -50,10 +50,18 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
 
     private boolean checkLabortestbezeichnung(Observation observation) {
         for (CodeableConcept loop1 : observation.getCategory()){
-            for (Coding loop2 : loop1.getCoding()) {
-                if(loop2.getCode().equals("122442008")) {
-                    return true;
-                }
+            boolean result = checkLabortestbezeichnungcode(loop1);
+            if(result){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkLabortestbezeichnungcode(CodeableConcept loop1){
+        for (Coding loop2 : loop1.getCoding()) {
+            if(loop2.getCode().equals("122442008")) {
+                return true;
             }
         }
         return false;
@@ -75,15 +83,19 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         AnatomischeLokalisationCluster anatomischeLokalisationCluster = new AnatomischeLokalisationCluster();
         if (specimen.getCollection().hasBodySite()){
             if (specimen.getCollection().getBodySite().hasCoding()){
-                for (Coding loop : specimen.getCollection().getBodySite().getCoding()){
-                    anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(getNameDerKoerperstelleCode(loop.getCode()));
-                    return Optional.of(anatomischeLokalisationCluster);
-                }
+                return Optional.of(mapBodySiteCoding(specimen,anatomischeLokalisationCluster));
             } else{
                 return Optional.empty();
             }
         }
         return Optional.empty();
+    }
+
+    private AnatomischeLokalisationCluster mapBodySiteCoding (Specimen specimen, AnatomischeLokalisationCluster anatomischeLokalisationCluster){
+        for (Coding loop : specimen.getCollection().getBodySite().getCoding()){
+            anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(getNameDerKoerperstelleCode(loop.getCode()));
+        }
+        return anatomischeLokalisationCluster;
     }
 
     private Optional<TemporalAccessor> mapZeitpunktDerProbenentnahme(Specimen specimen) {
