@@ -48,7 +48,7 @@ public abstract class AbstractSetupIT {
                 .build();
 
         DefaultRestClient client = new DefaultRestClient(
-                new OpenEhrClientConfig(new URI("http://localhost:8080/ehrbase/rest/openehr/v1/")),
+                new OpenEhrClientConfig(new URI("http://localhost:8080/ehrbase/")),
                 new ResourceTemplateProvider("classpath:/opt/*.opt"),
                 httpClient);
 
