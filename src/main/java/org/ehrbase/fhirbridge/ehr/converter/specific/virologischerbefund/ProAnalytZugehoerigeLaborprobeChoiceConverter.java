@@ -21,7 +21,7 @@ public class ProAnalytZugehoerigeLaborprobeChoiceConverter {
 
     }
 
-    public Optional<DvIdentifier> mapDvIdentifier(Observation observation){
+    private Optional<DvIdentifier> mapDvIdentifier(Observation observation){
 
         DvIdentifier dvIdentifier = new DvIdentifier();
 
@@ -32,7 +32,7 @@ public class ProAnalytZugehoerigeLaborprobeChoiceConverter {
         return Optional.of(dvIdentifier);
     }
 
-    public Optional<String> mapAssigner (Observation observation){
+    private Optional<String> mapAssigner (Observation observation){
         if(hasAssigner(observation)){
             if(hasDisplay(observation)){
                 return Optional.of(observation.getSpecimen().getIdentifier().getAssigner().getDisplay());
@@ -41,14 +41,14 @@ public class ProAnalytZugehoerigeLaborprobeChoiceConverter {
         return Optional.empty();
     }
 
-    public Optional<String> mapId (Observation observation){
+    private Optional<String> mapId (Observation observation){
         if(hasId(observation)){
             return Optional.of(observation.getSpecimen().getIdentifier().getId());
         }
         return Optional.empty();
     }
 
-    public Optional<String> mapType (Observation observation){
+    private Optional<String> mapType (Observation observation){
         if(hasType(observation)){
             if(hasText(observation)){
                 return Optional.of(observation.getSpecimen().getIdentifier().getType().getText());
@@ -57,23 +57,23 @@ public class ProAnalytZugehoerigeLaborprobeChoiceConverter {
         return Optional.empty();
     }
 
-    public boolean hasAssigner (Observation observation){
+    private boolean hasAssigner (Observation observation){
         return observation.getSpecimen().getIdentifier().hasAssigner();
     }
 
-    public boolean hasDisplay (Observation observation){
+    private boolean hasDisplay (Observation observation){
         return observation.getSpecimen().getIdentifier().getAssigner().hasDisplay();
     }
 
-    public boolean hasId (Observation observation){
+    private boolean hasId (Observation observation){
         return observation.getSpecimen().getIdentifier().hasId();
     }
 
-    public boolean hasType (Observation observation){
+    private boolean hasType (Observation observation){
         return observation.getSpecimen().getIdentifier().hasType();
     }
 
-    public boolean hasText (Observation observation){
+    private boolean hasText (Observation observation){
         return observation.getSpecimen().getIdentifier().getType().hasText();
     }
 

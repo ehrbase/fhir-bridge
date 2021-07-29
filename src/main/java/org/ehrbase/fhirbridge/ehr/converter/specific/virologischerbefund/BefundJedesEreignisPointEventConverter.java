@@ -12,6 +12,7 @@ import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 
 import org.hl7.fhir.exceptions.FHIRException;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Specimen;
@@ -48,9 +49,11 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     }
 
     private boolean checkLabortestbezeichnung(Observation observation) {
-        for (Coding loop : observation.getCategory().get(0).getCoding()){
-            if(loop.getCode().equals("122442008")) {
-                return true;
+        for (CodeableConcept loop1 : observation.getCategory()){
+            for (Coding loop2 : loop1.getCoding()) {
+                if(loop2.getCode().equals("122442008")) {
+                    return true;
+                }
             }
         }
         return false;
@@ -60,17 +63,27 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         ProbeCluster probecluster = new ProbeCluster();
         if (specimen.hasCollection()){
             mapZeitpunktDerProbenentnahme(specimen).ifPresent(probecluster::setZeitpunktDerProbenentnahmeValue);
-
-            AnatomischeLokalisationCluster anatomischeLokalisationCluster = new AnatomischeLokalisationCluster();
-            for (Coding loop : specimen.getCollection().getBodySite().getCoding()){
-                anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(getNameDerKoerperstelleCode(loop.getCode()));
-            }
-            probecluster.setAnatomischeLokalisation(anatomischeLokalisationCluster);
-
+            mapAnatomischeLokalisation(specimen).ifPresent(probecluster::setAnatomischeLokalisation);
             return Optional.of(probecluster);
         } else {
             return Optional.empty();
         }
+    }
+
+    private  Optional<AnatomischeLokalisationCluster> mapAnatomischeLokalisation (Specimen specimen){
+
+        AnatomischeLokalisationCluster anatomischeLokalisationCluster = new AnatomischeLokalisationCluster();
+        if (specimen.getCollection().hasBodySite()){
+            if (specimen.getCollection().getBodySite().hasCoding()){
+                for (Coding loop : specimen.getCollection().getBodySite().getCoding()){
+                    anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(getNameDerKoerperstelleCode(loop.getCode()));
+                    return Optional.of(anatomischeLokalisationCluster);
+                }
+            } else{
+                return Optional.empty();
+            }
+        }
+        return Optional.empty();
     }
 
     private Optional<TemporalAccessor> mapZeitpunktDerProbenentnahme(Specimen specimen) {
