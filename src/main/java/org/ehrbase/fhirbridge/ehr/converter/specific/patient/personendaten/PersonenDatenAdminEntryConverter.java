@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.generic.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AdresseCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AngabenZumTodCluster;

@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.generic;
+package org.ehrbase.fhirbridge.ehr.converter.parser;
 
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.hl7.fhir.r4.model.Identifier;

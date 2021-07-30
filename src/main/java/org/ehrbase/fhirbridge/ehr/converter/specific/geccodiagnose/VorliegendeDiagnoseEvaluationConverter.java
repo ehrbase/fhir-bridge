@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.ehr.converter.generic.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
