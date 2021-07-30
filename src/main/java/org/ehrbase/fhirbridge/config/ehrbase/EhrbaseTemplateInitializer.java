@@ -92,7 +92,7 @@ public class EhrbaseTemplateInitializer implements InitializingBean {
         options.setSaveSyntheticDocumentElement(new QName("http://schemas.openehr.org/v1", "template"));
 
         var uri = UriComponentsBuilder.fromHttpUrl(properties.getBaseUrl())
-                .path("/admin/template/{templateId}")
+                .path("rest/admin/template/{templateId}")
                 .build(templateId);
 
         try {
@@ -104,7 +104,7 @@ public class EhrbaseTemplateInitializer implements InitializingBean {
                     .bodyToMono(String.class)
                     .block();
         } catch (WebClientException e) {
-            throw new IllegalStateException("An error occurred while updating the template with id " + templateId + " in EHRbase");
+            throw new IllegalStateException("An error occurred while updating the template with id " + templateId + " in EHRbase", e);
         }
     }
 
