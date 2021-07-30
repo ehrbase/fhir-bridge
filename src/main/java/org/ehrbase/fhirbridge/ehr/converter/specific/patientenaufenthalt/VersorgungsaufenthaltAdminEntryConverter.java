@@ -3,7 +3,6 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToAdminEntryConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
-import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.FachlicheOrganisationseinheitCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.StandortCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsaufenthaltAdminEntry;
 import org.hl7.fhir.r4.model.CodeableConcept;
@@ -11,8 +10,6 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Encounter;
 
 import java.time.temporal.TemporalAccessor;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEntryConverter<VersorgungsaufenthaltAdminEntry> {
@@ -26,37 +23,56 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
         mapBeginn(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setBeginnValue);
         mapEnde(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setEndeValue);
         mapGrundDesAufenthalts(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setGrundDesAufenthaltesValue);
-        FachlicheOrganisationseinheitConverter.convert(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setFachlicheOrganisationseinheit);
+        new FachlicheOrganisationseinheitConverter().convert(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setFachlicheOrganisationseinheit);
         return versorgungsaufenthaltAdminEntry;
     }
 
 
     private Optional<String> mapKommentar(Encounter encounter) {
         if (encounter.hasLocation()) {
-            for (Encounter.EncounterLocationComponent location : encounter.getLocation()) {
-                if (location.hasLocation() && location.getLocation().hasDisplay()) {
-                    return Optional.of(location.getLocation().getDisplay());
-                }
+          return convertKommentar(encounter);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<String> convertKommentar(Encounter encounter) {
+        for (Encounter.EncounterLocationComponent location : encounter.getLocation()) {
+            if (hasLocationWithDisplay(location)) {
+                return Optional.of(location.getLocation().getDisplay());
             }
         }
         return Optional.empty();
     }
 
+    private boolean hasLocationWithDisplay(Encounter.EncounterLocationComponent location) {
+        return location.hasLocation() && location.getLocation().hasDisplay();
+    }
+
     private Optional<StandortCluster> mapStandort(Encounter encounter) {
         if (encounter.hasLocation()) {
-            for (Encounter.EncounterLocationComponent location : encounter.getLocation()) {
+           return iterateComponentsAndConvert(encounter);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<StandortCluster> iterateComponentsAndConvert(Encounter encounter) {
+        for (Encounter.EncounterLocationComponent location : encounter.getLocation()) {
+            if (hasPhysicalTypeWithCoding(location)) {
                 return convertStandort(location);
             }
         }
         return Optional.empty();
     }
 
+    private boolean hasPhysicalTypeWithCoding(Encounter.EncounterLocationComponent location) {
+        return location.hasPhysicalType() && location.getPhysicalType().hasCoding();
+    }
+
+
     private Optional<StandortCluster> convertStandort(Encounter.EncounterLocationComponent location) {
-        if (location.hasPhysicalType() && location.getPhysicalType().hasCoding()) {
-            for (Coding coding : location.getPhysicalType().getCoding()) {
-                if (coding.hasCode() && location.getPhysicalType().hasText()) {
-                    return Optional.of(mapLocationToStandortCluster(location));
-                }
+        for (Coding coding : location.getPhysicalType().getCoding()) {
+            if (coding.hasCode() && location.getPhysicalType().hasText()) {
+                return Optional.of(mapLocationToStandortCluster(location));
             }
         }
         return Optional.empty();
