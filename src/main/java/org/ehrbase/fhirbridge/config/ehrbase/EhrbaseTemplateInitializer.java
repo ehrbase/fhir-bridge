@@ -104,7 +104,7 @@ public class EhrbaseTemplateInitializer implements InitializingBean {
                     .bodyToMono(String.class)
                     .block();
         } catch (WebClientException e) {
-            throw new IllegalStateException("An error occurred while updating the template with id " + templateId + " in EHRbase");
+            throw new IllegalStateException("An error occurred while updating the template with id " + templateId + " in EHRbase", e);
         }
     }
 

@@ -73,7 +73,7 @@ public class KontaktGesundheitAbteilingIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Encounter encounter = (Encounter) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () -> {
+        return assertThrows(Exception.class, () -> {
             new PatientenAufenthaltCompositionConverter().convert(encounter);
         });
     }

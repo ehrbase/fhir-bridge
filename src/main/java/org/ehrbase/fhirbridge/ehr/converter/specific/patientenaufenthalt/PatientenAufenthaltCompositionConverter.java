@@ -6,6 +6,7 @@ import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.Patientenau
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.AbteilungsfallCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsfallCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungstellenkontaktCluster;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Identifier;
@@ -19,50 +20,52 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
     @Override
     public PatientenaufenthaltComposition convertInternal(@NonNull Encounter encounter) {
 
-        PatientenaufenthaltComposition retVal = new PatientenaufenthaltComposition();
+        PatientenaufenthaltComposition patientenaufenthaltComposition = new PatientenaufenthaltComposition();
+        mapFallKennung(patientenaufenthaltComposition, encounter);
+        patientenaufenthaltComposition.setVersorgungsaufenthalt(new VersorgungsaufenthaltAdminEntryConverter().convert(encounter));
 
-        if (!encounter.getIdentifier().isEmpty() && !encounter.getType().isEmpty()) {
-
-            setFallCluster(retVal, encounter);
-        }
-
-        retVal.setVersorgungsaufenthalt(new VersorgungsaufenthaltAdminEntryConverter().convert(encounter));
-
-        return retVal;
+        return patientenaufenthaltComposition;
     }
 
-    private void setFallCluster(PatientenaufenthaltComposition composition, Encounter encounter) {
-
-        Coding coding = encounter.getType().get(0).getCoding().get(0);
-
-        if (!coding.getSystem().equals(KONTAKT_EBENE.getUrl())) {
-
-            throw new ConversionException("Invalid Code system " + coding.getSystem() +
-                    " valid code system: " + KONTAKT_EBENE.getUrl());
+    private void mapFallKennung(PatientenaufenthaltComposition patientenaufenthaltComposition, Encounter encounter) {
+        if (encounter.hasType() && encounter.hasIdentifier()) {
+            for (CodeableConcept codeableConcept : encounter.getType()) {
+                iterateFallKennungAndConvert(codeableConcept, patientenaufenthaltComposition, encounter);
+            }
         }
+    }
 
+    private void iterateFallKennungAndConvert(CodeableConcept codeableConcept, PatientenaufenthaltComposition patientenaufenthaltComposition, Encounter encounter) {
+        for (Coding coding : codeableConcept.getCoding()) {
+            if (coding.hasSystem() && coding.getSystem().equals(KONTAKT_EBENE.getUrl())) {
+                convertFallKennung(patientenaufenthaltComposition, coding, encounter);
+            } else {
+                throw new ConversionException("Invalid Code system " + coding.getSystem() +
+                        " valid code system: " + KONTAKT_EBENE.getUrl());
+            }
+        }
+    }
+
+    private void convertFallKennung(PatientenaufenthaltComposition patientenaufenthaltComposition, Coding coding, Encounter encounter) {
         Identifier encounterIdentifier = encounter.getIdentifier().get(0);
-
         String typeCode = coding.getCode();
-
         switch (typeCode) {
-
             case "einrichtungskontakt": {
                 VersorgungsfallCluster versorgungsfallCluster = new VersorgungsfallCluster();
                 versorgungsfallCluster.setZugehoerigerVersorgungsfallKennungValue(encounterIdentifier.getValue());
-                composition.setVersorgungsfall(versorgungsfallCluster);
+                patientenaufenthaltComposition.setVersorgungsfall(versorgungsfallCluster);
                 break;
             }
             case "abteilungskontakt": {
                 AbteilungsfallCluster abteilungsfallCluster = new AbteilungsfallCluster();
                 abteilungsfallCluster.setZugehoerigerAbteilungsfallKennungValue(encounterIdentifier.getValue());
-                composition.setAbteilungsfall(abteilungsfallCluster);
+                patientenaufenthaltComposition.setAbteilungsfall(abteilungsfallCluster);
                 break;
             }
             case "versorgungsstellenkontakt": {
                 VersorgungstellenkontaktCluster versorgungstellenkontaktCluster = new VersorgungstellenkontaktCluster();
                 versorgungstellenkontaktCluster.setZugehoerigerVersorgungsstellenkontaktKennungValue(encounterIdentifier.getValue());
-                composition.setVersorgungstellenkontakt(versorgungstellenkontaktCluster);
+                patientenaufenthaltComposition.setVersorgungstellenkontakt(versorgungstellenkontaktCluster);
                 break;
             }
             default: {
@@ -71,5 +74,6 @@ public class PatientenAufenthaltCompositionConverter extends EncounterToComposit
             }
         }
     }
+
 
 }

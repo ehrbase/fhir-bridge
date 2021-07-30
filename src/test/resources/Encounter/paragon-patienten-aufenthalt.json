@@ -1,232 +1,229 @@
 {
-  "_type": "COMPOSITION",
-  "name": {
-    "_type": "DV_TEXT",
-    "value": "Patientenaufenthalt"
+  "_type" : "COMPOSITION",
+  "name" : {
+    "_type" : "DV_TEXT",
+    "value" : "Patientenaufenthalt"
   },
-  "archetype_details": {
-    "archetype_id": {
-      "value": "openEHR-EHR-COMPOSITION.event_summary.v0"
+  "archetype_details" : {
+    "archetype_id" : {
+      "value" : "openEHR-EHR-COMPOSITION.event_summary.v0"
     },
-    "template_id": {
-      "value": "Patientenaufenthalt"
+    "template_id" : {
+      "value" : "Patientenaufenthalt"
     },
-    "rm_version": "1.0.4"
+    "rm_version" : "1.0.4"
   },
-  "feeder_audit": {
-    "_type": "FEEDER_AUDIT",
-    "originating_system_item_ids": [
-      {
-        "_type": "DV_IDENTIFIER",
-        "id": "Encounter/3/_history/1",
-        "type": "fhir_logical_id"
-      }
-    ],
-    "originating_system_audit": {
-      "_type": "FEEDER_AUDIT_DETAILS",
-      "system_id": "FHIR-Bridge"
+  "feeder_audit" : {
+    "_type" : "FEEDER_AUDIT",
+    "originating_system_item_ids" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "Encounter/7feb979b-d0e9-42dc-b573-eebbed60a0f4/_history/1",
+      "type" : "fhir_logical_id"
+    } ],
+    "originating_system_audit" : {
+      "_type" : "FEEDER_AUDIT_DETAILS",
+      "system_id" : "FHIR-Bridge"
     }
   },
-  "language": {
-    "_type": "CODE_PHRASE",
-    "terminology_id": {
-      "_type": "TERMINOLOGY_ID",
-      "value": "ISO_639-1"
+  "language" : {
+    "_type" : "CODE_PHRASE",
+    "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
+      "value" : "ISO_639-1"
     },
-    "code_string": "de"
+    "code_string" : "de"
   },
-  "territory": {
-    "_type": "CODE_PHRASE",
-    "terminology_id": {
-      "_type": "TERMINOLOGY_ID",
-      "value": "ISO_3166-1"
+  "territory" : {
+    "_type" : "CODE_PHRASE",
+    "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
+      "value" : "ISO_3166-1"
     },
-    "code_string": "DE"
+    "code_string" : "DE"
   },
-  "category": {
-    "_type": "DV_CODED_TEXT",
-    "value": "event",
-    "defining_code": {
-      "_type": "CODE_PHRASE",
-      "terminology_id": {
-        "_type": "TERMINOLOGY_ID",
-        "value": "openehr"
+  "category" : {
+    "_type" : "DV_CODED_TEXT",
+    "value" : "event",
+    "defining_code" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "openehr"
       },
-      "code_string": "433"
+      "code_string" : "433"
     }
   },
-  "composer": {
-    "_type": "PARTY_SELF"
+  "composer" : {
+    "_type" : "PARTY_SELF"
   },
-  "context": {
-    "_type": "EVENT_CONTEXT",
-    "start_time": {
-      "_type": "DV_DATE_TIME",
-      "value": "2021-02-13T03:04:00+01:00"
+  "context" : {
+    "_type" : "EVENT_CONTEXT",
+    "start_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2021-02-13T03:04:00+01:00"
     },
-    "end_time": {
-      "_type": "DV_DATE_TIME",
-      "value": "2021-03-01T20:42:00+01:00"
+    "end_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2021-03-01T20:42:00+01:00"
     },
-    "setting": {
-      "_type": "DV_CODED_TEXT",
-      "value": "secondary medical care",
-      "defining_code": {
-        "_type": "CODE_PHRASE",
-        "terminology_id": {
-          "_type": "TERMINOLOGY_ID",
-          "value": "openehr"
+    "setting" : {
+      "_type" : "DV_CODED_TEXT",
+      "value" : "secondary medical care",
+      "defining_code" : {
+        "_type" : "CODE_PHRASE",
+        "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
+          "value" : "openehr"
         },
-        "code_string": "232"
+        "code_string" : "232"
       }
     },
-    "other_context": {
-      "_type": "ITEM_TREE",
-      "name": {
-        "_type": "DV_TEXT",
-        "value": "Tree"
+    "other_context" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Tree"
       },
-      "items": [
-        {
-          "_type": "CLUSTER",
-          "name": {
-            "_type": "DV_TEXT",
-            "value": "Abteilungsfall"
+      "items" : [ {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Abteilungsfall"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Zugehöriger Abteilungsfall (Kennung)"
           },
-          "items": [
-            {
-              "_type": "ELEMENT",
-              "name": {
-                "_type": "DV_TEXT",
-                "value": "Zugehöriger Abteilungsfall (Kennung)"
+          "value" : {
+            "_type" : "DV_TEXT",
+            "value" : "F_0000001"
+          },
+          "archetype_node_id" : "at0001"
+        } ],
+        "archetype_node_id" : "openEHR-EHR-CLUSTER.case_identification.v0"
+      } ],
+      "archetype_node_id" : "at0001"
+    }
+  },
+  "content" : [ {
+    "_type" : "ADMIN_ENTRY",
+    "name" : {
+      "_type" : "DV_TEXT",
+      "value" : "Versorgungsaufenthalt"
+    },
+    "language" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "ISO_639-1"
+      },
+      "code_string" : "de"
+    },
+    "encoding" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "IANA_character-sets"
+      },
+      "code_string" : "UTF-8"
+    },
+    "subject" : {
+      "_type" : "PARTY_SELF"
+    },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
+    },
+    "data" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Baum"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Beginn"
+        },
+        "value" : {
+          "_type" : "DV_DATE_TIME",
+          "value" : "2021-02-13T03:04:00+01:00"
+        },
+        "archetype_node_id" : "at0004"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Ende"
+        },
+        "value" : {
+          "_type" : "DV_DATE_TIME",
+          "value" : "2021-03-01T20:42:00+01:00"
+        },
+        "archetype_node_id" : "at0005"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Grund des Aufenthaltes"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "01"
+        },
+        "archetype_node_id" : "at0006"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Standort"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Bettplatz"
+          },
+          "value" : {
+            "_type" : "DV_TEXT",
+            "value" : "Bett"
+          },
+          "archetype_node_id" : "at0034"
+        } ],
+        "archetype_node_id" : "openEHR-EHR-CLUSTER.location.v1"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Fachliche Organisationseinheit"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Fachabteilungsschlüssel"
+          },
+          "value" : {
+            "_type" : "DV_CODED_TEXT",
+            "value" : "Sonstige Fachabteilung",
+            "defining_code" : {
+              "_type" : "CODE_PHRASE",
+              "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "Anhang 1 der BPflV (31.12.2003)"
               },
-              "value": {
-                "_type": "DV_TEXT",
-                "value": "F_0000001"
-              },
-              "archetype_node_id": "at0001"
+              "code_string" : "3700"
             }
-          ],
-          "archetype_node_id": "openEHR-EHR-CLUSTER.case_identification.v0"
-        }
-      ],
-      "archetype_node_id": "at0001"
-    }
-  },
-  "content": [
-    {
-      "_type": "ADMIN_ENTRY",
-      "name": {
-        "_type": "DV_TEXT",
-        "value": "Versorgungsaufenthalt"
-      },
-      "language": {
-        "_type": "CODE_PHRASE",
-        "terminology_id": {
-          "_type": "TERMINOLOGY_ID",
-          "value": "ISO_639-1"
-        },
-        "code_string": "de"
-      },
-      "encoding": {
-        "_type": "CODE_PHRASE",
-        "terminology_id": {
-          "_type": "TERMINOLOGY_ID",
-          "value": "IANA_character-sets"
-        },
-        "code_string": "UTF-8"
-      },
-      "subject": {
-        "_type": "PARTY_SELF"
-      },
-      "data": {
-        "_type": "ITEM_TREE",
-        "name": {
-          "_type": "DV_TEXT",
-          "value": "Baum"
-        },
-        "items": [
-          {
-            "_type": "ELEMENT",
-            "name": {
-              "_type": "DV_TEXT",
-              "value": "Beginn"
-            },
-            "value": {
-              "_type": "DV_DATE_TIME",
-              "value": "2021-02-13T03:04:00+01:00"
-            },
-            "archetype_node_id": "at0004"
           },
-          {
-            "_type": "ELEMENT",
-            "name": {
-              "_type": "DV_TEXT",
-              "value": "Ende"
-            },
-            "value": {
-              "_type": "DV_DATE_TIME",
-              "value": "2021-03-01T20:42:00+01:00"
-            },
-            "archetype_node_id": "at0005"
-          },
-          {
-            "_type": "CLUSTER",
-            "name": {
-              "_type": "DV_TEXT",
-              "value": "Standort"
-            },
-            "items": [
-              {
-                "_type": "ELEMENT",
-                "name": {
-                  "_type": "DV_TEXT",
-                  "value": "Bettplatz"
-                },
-                "value": {
-                  "_type": "DV_TEXT",
-                  "value": "Bett"
-                },
-                "archetype_node_id": "at0034"
-              }
-            ],
-            "archetype_node_id": "openEHR-EHR-CLUSTER.location.v1"
-          },
-          {
-            "_type": "CLUSTER",
-            "name": {
-              "_type": "DV_TEXT",
-              "value": "Fachliche Organisationseinheit"
-            },
-            "items": [
-              {
-                "_type": "ELEMENT",
-                "name": {
-                  "_type": "DV_TEXT",
-                  "value": "Fachabteilungsschlüssel"
-                },
-                "value": {
-                  "_type": "DV_CODED_TEXT",
-                  "value": "Sonstige Fachabteilung",
-                  "defining_code": {
-                    "_type": "CODE_PHRASE",
-                    "terminology_id": {
-                      "_type": "TERMINOLOGY_ID",
-                      "value": "Anhang 1 der BPflV (31.12.2003)"
-                    },
-                    "code_string": "3700"
-                  }
-                },
-                "archetype_node_id": "at0024"
-              }
-            ],
-            "archetype_node_id": "openEHR-EHR-CLUSTER.organization.v0"
-          }
-        ],
-        "archetype_node_id": "at0001"
-      },
-      "archetype_node_id": "openEHR-EHR-ADMIN_ENTRY.hospitalization.v0"
-    }
-  ],
-  "archetype_node_id": "openEHR-EHR-COMPOSITION.event_summary.v0"
+          "archetype_node_id" : "at0024"
+        } ],
+        "archetype_node_id" : "openEHR-EHR-CLUSTER.organization.v0"
+      } ],
+      "archetype_node_id" : "at0001"
+    },
+    "archetype_node_id" : "openEHR-EHR-ADMIN_ENTRY.hospitalization.v0"
+  } ],
+  "archetype_node_id" : "openEHR-EHR-COMPOSITION.event_summary.v0"
 }
