@@ -32,7 +32,7 @@ public class TimeConverter {
     }
 
     public static TemporalAccessor convertObservationTime(Observation observation) {
-        if (observation.hasEffectiveDateTimeType()) { // EffectiveDateTime
+      if (observation.hasEffectiveDateTimeType() && !observation.getEffectiveDateTimeType().hasExtension()) { // EffectiveDateTime & no extension (data absent)
             return observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
         } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) { // EffectivePeriod
             return observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
@@ -48,6 +48,7 @@ public class TimeConverter {
             return ZonedDateTime.now();
         }
     }
+
 
     static Optional<TemporalAccessor> convertObservationEndTime(Observation observation) {
         if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasEnd()) { // EffectivePeriod

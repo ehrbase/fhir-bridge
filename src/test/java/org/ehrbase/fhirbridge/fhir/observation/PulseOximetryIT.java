@@ -78,6 +78,5 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
         PulsoxymetrieComposition mappedPulsoxymetrieComposition = pulseOximetryConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedPulsoxymetrieComposition);
         assertEquals(diff.getChanges().size(), 0);
-
     }
 }
