@@ -23,9 +23,11 @@ import org.ehrbase.fhirbridge.camel.processor.BundleResponseProcessor;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.AntiBodyPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.DiagnosticReportLabConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.VirologischerBefundConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.AntiBodyPanelBundleValidator;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.BloodGasPanelBundleValidator;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.DiagnosticReportLabBundleValidator;
+import org.ehrbase.fhirbridge.fhir.bundle.validator.VirologischerBefundBundleValidator;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.fhir.support.Bundles;
 import org.springframework.stereotype.Component;
@@ -54,6 +56,9 @@ public class TransactionRouteBuilder extends AbstractRouteBuilder {
                 .when(header(CamelConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
                     .bean(DiagnosticReportLabBundleValidator.class)
                     .bean(DiagnosticReportLabConverter.class,"convert")
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.VIROLOGISCHER_BEFUND))
+                    .bean(VirologischerBefundBundleValidator.class)
+                    .bean(VirologischerBefundConverter.class,"convert")
                 .otherwise()
                     .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
                             "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri()))
