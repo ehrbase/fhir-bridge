@@ -30,10 +30,15 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
 
     private Optional<String> mapKommentar(Encounter encounter) {
         if (encounter.hasLocation()) {
-            for (Encounter.EncounterLocationComponent location : encounter.getLocation()) {
-                if (hasLocationWithDisplay(location)) {
-                    return Optional.of(location.getLocation().getDisplay());
-                }
+          return convertKommentar(encounter);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<String> convertKommentar(Encounter encounter) {
+        for (Encounter.EncounterLocationComponent location : encounter.getLocation()) {
+            if (hasLocationWithDisplay(location)) {
+                return Optional.of(location.getLocation().getDisplay());
             }
         }
         return Optional.empty();
@@ -45,10 +50,15 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
 
     private Optional<StandortCluster> mapStandort(Encounter encounter) {
         if (encounter.hasLocation()) {
-            for (Encounter.EncounterLocationComponent location : encounter.getLocation()) {
-                if (hasPhysicalTypeWithCoding(location)) {
-                    return convertStandort(location);
-                }
+           return iterateComponentsAndConvert(encounter);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<StandortCluster> iterateComponentsAndConvert(Encounter encounter) {
+        for (Encounter.EncounterLocationComponent location : encounter.getLocation()) {
+            if (hasPhysicalTypeWithCoding(location)) {
+                return convertStandort(location);
             }
         }
         return Optional.empty();
