@@ -18,10 +18,15 @@ public class SchwangerschaftsstatusObservationConverter extends ObservationToObs
 
     private StatusDefiningCode2 converStatus(Observation resource) {
         if (resource.hasValueCodeableConcept() && resource.getValueCodeableConcept().hasCoding()) {
-            for (Coding coding : resource.getValueCodeableConcept().getCoding()) {
-                if (coding.hasCode()) {
-                    return convertStatusCode(coding);
-                }
+            return mapStatus(resource);
+        }
+        return StatusDefiningCode2.UNBEKANNT;
+    }
+
+    private StatusDefiningCode2 mapStatus(Observation resource) {
+        for (Coding coding : resource.getValueCodeableConcept().getCoding()) {
+            if (coding.hasCode()) {
+                return convertStatusCode(coding);
             }
         }
         return StatusDefiningCode2.UNBEKANNT;

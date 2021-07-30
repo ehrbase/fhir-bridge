@@ -40,10 +40,8 @@ public class PregnancyStatusCompositionConverter extends ObservationToCompositio
                 break;
             case"cancelled":
             case"entered-in-error":
-                composition.setStatusNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE); //TODO not sure if this is good
-                break;
             case"unknown":
-                composition.setStatusNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+                composition.setStatusNullFlavourDefiningCode(NullFlavour.UNKNOWN); //TODO needs to be changed after remodeling
                 break;
             default:
                 throw new ConversionException("Invalid Code " + resource.getStatusElement().getCode() + "" +
