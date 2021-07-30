@@ -19,8 +19,6 @@ public class ProAnalytZugehoerigeLaborprobeChoiceConverter {
 
     }
 
-
-
     public ProAnalytZugehoerigeLaborprobeChoice convertDvUri(Observation observation){
 
         ProAnalytZugehoerigeLaborprobeDvUri proAnalytZugehoerigeLaborprobeDvUri = new ProAnalytZugehoerigeLaborprobeDvUri();
@@ -30,7 +28,4 @@ public class ProAnalytZugehoerigeLaborprobeChoiceConverter {
         return proAnalytZugehoerigeLaborprobeDvUri;
 
     }
-
-
-
 }
