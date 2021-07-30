@@ -1,7 +1,11 @@
 package org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeraetenameDefiningCode;
 
 public enum StatusDefiningCode implements EnumValueSet {
   VORLAEUFIG("vorläufig", "*", "local", "at0011"),
