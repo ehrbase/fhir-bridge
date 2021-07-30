@@ -17,7 +17,7 @@ fhir-bridge:
     mapping-output-directory: ${java.io.tmpdir}/mappings
 # EHRbase Properties
   ehrbase:
-    base-url: http://localhost:8080/ehrbase/rest/openehr/v1/
+    base-url: http://localhost:8080/ehrbase/
     security:
       type: basic
       user:
