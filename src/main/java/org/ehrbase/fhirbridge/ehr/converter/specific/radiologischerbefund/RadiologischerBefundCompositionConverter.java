@@ -41,17 +41,19 @@ public class RadiologischerBefundCompositionConverter extends DiagnosticReportTo
     }
 
     private void mapKategorie(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition, DiagnosticReport diagnosticReport) {
+        List<RadiologischerBefundKategorieElement> radiologischerBefundKategorieElementList = getRadiologischerBefundKategorieElementsList(geccoRadiologischerBefundComposition);
         for (CodeableConcept codeableConcept : diagnosticReport.getCategory()
         ) {
             for (Coding coding : codeableConcept.getCoding()
             ) {
-                mapCode(geccoRadiologischerBefundComposition, coding);
+                radiologischerBefundKategorieElementList.add(mapKategorieCode(coding));
             }
+            geccoRadiologischerBefundComposition.setKategorie(radiologischerBefundKategorieElementList);
+
         }
     }
 
-    private void mapCode(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition, Coding coding) {
-        List<RadiologischerBefundKategorieElement> radiologischerBefundKategorieElementList = getRadiologischerBefundKategorieElementsList(geccoRadiologischerBefundComposition);
+    private RadiologischerBefundKategorieElement mapKategorieCode(Coding coding) {
         RadiologischerBefundKategorieElement radiologischerBefundKategorieElement = new RadiologischerBefundKategorieElement();
         if (coding.getCode().equals(KategorieDefiningCode.RADIOLOGY.getCode())) {
             radiologischerBefundKategorieElement.setValue(KategorieDefiningCode.RADIOLOGY);
@@ -60,13 +62,12 @@ public class RadiologischerBefundCompositionConverter extends DiagnosticReportTo
         } else {
             throw new ConversionException("The LOINC code: " + coding.getCode() + " is not valid for radiology report!");
         }
-        radiologischerBefundKategorieElementList.add(radiologischerBefundKategorieElement);
-        geccoRadiologischerBefundComposition.setKategorie(radiologischerBefundKategorieElementList);
+        return radiologischerBefundKategorieElement;
     }
 
-    private List getRadiologischerBefundKategorieElementsList(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition) {
+    private List<RadiologischerBefundKategorieElement> getRadiologischerBefundKategorieElementsList(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition) {
         if (geccoRadiologischerBefundComposition.getKategorie() == null) {
-            return new ArrayList();
+            return new ArrayList<>();
         }
         return geccoRadiologischerBefundComposition.getKategorie();
     }
