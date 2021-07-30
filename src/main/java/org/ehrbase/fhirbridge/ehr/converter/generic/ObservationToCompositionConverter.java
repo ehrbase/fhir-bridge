@@ -17,11 +17,9 @@ public abstract class ObservationToCompositionConverter<C extends CompositionEnt
     @Override
     public C convert(@NonNull Observation resource) {
         C composition = super.convert(resource);
-
         // Mandatory
         composition.setStartTimeValue(TimeConverter.convertObservationTime(resource)); // StartTimeValue
         composition.setComposer(getComposerOrDefault(resource)); // Composer
-
         // Optional
         TimeConverter.convertObservationEndTime(resource).ifPresent(composition::setEndTimeValue); // EndTimeValue
 
