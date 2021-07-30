@@ -2,103 +2,137 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EncounterToAdminEntryConverter;
-import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.FachlicheOrganisationseinheitCluster;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.StandortCluster;
 import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.VersorgungsaufenthaltAdminEntry;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Encounter;
 
-import java.util.ArrayList;
+import java.time.temporal.TemporalAccessor;
+import java.util.Optional;
 
 public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEntryConverter<VersorgungsaufenthaltAdminEntry> {
 
-    private static final String FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/core/modul-fall/CodeSystem/Fachabteilungsschluessel";
 
     @Override
     protected VersorgungsaufenthaltAdminEntry convertInternal(Encounter encounter) {
         VersorgungsaufenthaltAdminEntry versorgungsaufenthaltAdminEntry = new VersorgungsaufenthaltAdminEntry();
-
-        if (!encounter.getLocation().isEmpty()) {
-
-            Encounter.EncounterLocationComponent location = encounter.getLocation().get(0);
-
-            versorgungsaufenthaltAdminEntry.setStandort(convertStandortCluster(location));
-
-            versorgungsaufenthaltAdminEntry.setKommentarValue(location.getLocation().getDisplay());
-        }
-
-        versorgungsaufenthaltAdminEntry.setFachlicheOrganisationseinheit(createFachlicheOrganisationseinheitClusterList(encounter));
-
+        mapStandort(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setStandort);
+        mapKommentar(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setKommentarValue);
+        mapBeginn(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setBeginnValue);
+        mapEnde(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setEndeValue);
+        mapGrundDesAufenthalts(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setGrundDesAufenthaltesValue);
+        new FachlicheOrganisationseinheitConverter().convert(encounter).ifPresent(versorgungsaufenthaltAdminEntry::setFachlicheOrganisationseinheit);
         return versorgungsaufenthaltAdminEntry;
     }
 
-    private StandortCluster convertStandortCluster(Encounter.EncounterLocationComponent location) {
 
-        // location physical type / name -> standort
+    private Optional<String> mapKommentar(Encounter encounter) {
+        if (encounter.hasLocation()) {
+          return convertKommentar(encounter);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<String> convertKommentar(Encounter encounter) {
+        for (Encounter.EncounterLocationComponent location : encounter.getLocation()) {
+            if (hasLocationWithDisplay(location)) {
+                return Optional.of(location.getLocation().getDisplay());
+            }
+        }
+        return Optional.empty();
+    }
+
+    private boolean hasLocationWithDisplay(Encounter.EncounterLocationComponent location) {
+        return location.hasLocation() && location.getLocation().hasDisplay();
+    }
+
+    private Optional<StandortCluster> mapStandort(Encounter encounter) {
+        if (encounter.hasLocation()) {
+           return iterateComponentsAndConvert(encounter);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<StandortCluster> iterateComponentsAndConvert(Encounter encounter) {
+        for (Encounter.EncounterLocationComponent location : encounter.getLocation()) {
+            if (hasPhysicalTypeWithCoding(location)) {
+                return convertStandort(location);
+            }
+        }
+        return Optional.empty();
+    }
+
+    private boolean hasPhysicalTypeWithCoding(Encounter.EncounterLocationComponent location) {
+        return location.hasPhysicalType() && location.getPhysicalType().hasCoding();
+    }
+
+
+    private Optional<StandortCluster> convertStandort(Encounter.EncounterLocationComponent location) {
+        for (Coding coding : location.getPhysicalType().getCoding()) {
+            if (coding.hasCode() && location.getPhysicalType().hasText()) {
+                return Optional.of(mapLocationToStandortCluster(location));
+            }
+        }
+        return Optional.empty();
+    }
+
+    private StandortCluster mapLocationToStandortCluster(Encounter.EncounterLocationComponent location) {
         String locationPhysicalType = location.getPhysicalType().getCoding().get(0).getCode();
-
         String locationName = location.getPhysicalType().getText();
         StandortCluster standortCluster = new StandortCluster();
-
-        if (locationName != null && !locationName.isEmpty()) {
-
-            switch (locationPhysicalType) {
-                case "si":
-                    standortCluster.setCampusValue(locationName);
-                    break;
-                case "bu":
-                    standortCluster.setGebaeudegruppeValue(locationName);
-                    break;
-                case "lvl":
-                    standortCluster.setEbeneValue(locationName);
-                    break;
-                case "wa":
-                    standortCluster.setStationValue(locationName);
-                    break;
-                case "ro":
-                    standortCluster.setZimmerValue(locationName);
-                    break;
-                case "bd":
-                    standortCluster.setBettplatzValue(locationName);
-                    break;
-                default: // other types aren't needed by EHR Composition
-                    throw new ConversionException("unexpected location physical type " + locationPhysicalType +
-                            " by EHR composition.");
-            }
+        switch (locationPhysicalType) {
+            case "si":
+                standortCluster.setCampusValue(locationName);
+                break;
+            case "bu":
+                standortCluster.setGebaeudegruppeValue(locationName);
+                break;
+            case "lvl":
+                standortCluster.setEbeneValue(locationName);
+                break;
+            case "wa":
+                standortCluster.setStationValue(locationName);
+                break;
+            case "ro":
+                standortCluster.setZimmerValue(locationName);
+                break;
+            case "bd":
+                standortCluster.setBettplatzValue(locationName);
+                break;
+            default: // other types aren't needed by EHR Composition
+                throw new ConversionException("unexpected location physical type " + locationPhysicalType +
+                        " by EHR composition.");
         }
 
         return standortCluster;
     }
 
-    private ArrayList<FachlicheOrganisationseinheitCluster> createFachlicheOrganisationseinheitClusterList(Encounter encounter) {
-
-        if (encounter.hasServiceType() && encounter.getServiceType().getCoding() != null) {
-            return createFachlicheOrganisationseinheitClusterListFromCoding(encounter);
-        } else {
-            return new ArrayList<>();
+    private Optional<String> mapGrundDesAufenthalts(Encounter encounter) {
+        if (!encounter.hasReasonCode()) {
+            return Optional.empty();
         }
+
+        return encounter.getReasonCode()
+                .stream()
+                .filter(CodeableConcept::hasCoding)
+                .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
+                .map(Coding::getCode)
+                .findFirst();
     }
 
-    private ArrayList<FachlicheOrganisationseinheitCluster> createFachlicheOrganisationseinheitClusterListFromCoding(Encounter encounter) {
-
-        ArrayList<FachlicheOrganisationseinheitCluster> retVal = new ArrayList<>();
-
-        for (Coding fachAbteilungsSchluessel : encounter.getServiceType().getCoding()) {
-
-            FachlicheOrganisationseinheitCluster fachlicheOrganisationseinheitCluster = new FachlicheOrganisationseinheitCluster();
-
-            if (fachAbteilungsSchluessel.getSystem().equals(FACH_ABTEILUNGS_SCHLUESSEL_CODE_SYSTEM)
-                    && FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().containsKey(fachAbteilungsSchluessel.getCode())) {
-
-                fachlicheOrganisationseinheitCluster.setFachabteilungsschluesselDefiningCode(FachAbteilungsSchluesselDefiningCodeMap.getFachAbteilungsSchluesselMap().get(fachAbteilungsSchluessel.getCode()));
-            } else {
-                throw new ConversionException("Invalid Code " + fachAbteilungsSchluessel.getCode() +
-                        " or Code System for 'Fachabteilungsschlüssel'.");
-            }
-
-            retVal.add(fachlicheOrganisationseinheitCluster);
+    private Optional<TemporalAccessor> mapEnde(Encounter encounter) { //Exceptions in Timeconversion should not be moved to abstract converter
+        if (encounter.hasPeriod()) {
+            return Optional.of(TimeConverter.convertEncounterTime(encounter));
         }
+        return Optional.empty();
+    }
 
-        return retVal;
+    private Optional<TemporalAccessor> mapBeginn(Encounter encounter) { //Exceptions should in Timeconversion not be moved to abstract converter
+        if (encounter.hasPeriod()) {
+            return TimeConverter.convertEncounterEndTime(encounter);
+        }
+        return Optional.empty();
     }
 }
