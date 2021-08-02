@@ -27,7 +27,7 @@ public class RespirationRateIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createRespiration() throws IOException {
-        create("create-respiration-rate");
+        create("create-respiratory-rate.json");
     }
 
     @Test

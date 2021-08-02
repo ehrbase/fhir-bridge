@@ -112,9 +112,6 @@
         "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
-    },
-    "health_care_facility" : {
-      "_type" : "PARTY_IDENTIFIED"
     }
   },
   "content" : [ {
