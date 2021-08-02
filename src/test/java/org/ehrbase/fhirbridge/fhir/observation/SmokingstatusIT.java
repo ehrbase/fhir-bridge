@@ -34,17 +34,17 @@ public class SmokingstatusIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createSmokingStatusMapping() throws IOException {
-        testMapping("create-smoking-status.json","");
+        testMapping("create-smoking-status.json","paragon-create-smoking-status.json");
     }
 
     @Test
     void createSmokingStatusMappingDateTime() throws IOException {
-        testMapping("create-smoking-status-datetime.json","");
+        testMapping("create-smoking-status-datetime.json","paragon-create-smoking-status-datetime.json");
     }
 
     @Test
     void createSmokingStatusMappingEffectiveAbsent() throws IOException {
-        testMapping("create-smoking-status-effective-absent.json","");
+        testMapping("create-smoking-status-effective-absent.json","paragon-create-smoking-status-effective-absent.json");
     }
 
     @Override
