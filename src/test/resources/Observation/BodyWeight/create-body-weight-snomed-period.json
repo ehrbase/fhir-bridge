@@ -1,0 +1,50 @@
+{
+  "resourceType": "Observation",
+  "id": "80ac4908-3637-476d-a416-9ab7ed7474e6",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-weight"
+    ]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "vital-signs"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "29463-7",
+        "display": "Body weight"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "27113001",
+        "display": "Body weight (observable entity)"
+      }
+    ],
+    "text": "Body weight"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "effectivePeriod": {
+    "start": "2020-10-02"
+  },
+  "valueQuantity": {
+    "value": 82,
+    "unit": "kilogram",
+    "system": "http://unitsofmeasure.org",
+    "code": "kg"
+  }
+}
