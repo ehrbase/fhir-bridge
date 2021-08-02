@@ -35,7 +35,6 @@ public class PatientAufDerIntensivstationObservationConverter extends Observatio
         if (coding.getSystem().equals("http://snomed.info/sct") && aktivitatDurchgefuehrtDefiningcodeMap.containsKey(coding.getCode())) {
             return aktivitatDurchgefuehrtDefiningcodeMap.get(coding.getCode()).toDvCodedText();
         }
-
         throw new ConversionException("Aktivität durchgeführt has invalid code " + coding.getCode());
     }
 }
