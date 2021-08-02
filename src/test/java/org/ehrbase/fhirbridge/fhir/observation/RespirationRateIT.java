@@ -32,12 +32,12 @@ public class RespirationRateIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createRespirationrate() throws IOException {
-        testMapping("create-respiration-rate", "paragon-create-respiratory-rate.json");
+        testMapping("create-respiratory-rate.json", "paragon-create-respiratory-rate.json");
     }
 
     @Test
     void createRespirationrate_2() throws IOException {
-        testMapping("create-respiration-rate-2", "paragon-create-respiratory-rate-2.json");
+        testMapping("create-respiratory-rate-2.json", "paragon-create-respiratory-rate-2.json");
     }
 
     @Test
