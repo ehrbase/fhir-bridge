@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry;
 import com.nedap.archie.rm.datavalues.quantity.DvProportion;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
 import org.hl7.fhir.r4.model.Observation;
@@ -13,7 +14,12 @@ public class PulsoxymetrieObservationConverter extends ObservationToObservationC
     @Override
     protected PulsoxymetrieObservation convertInternal(Observation resource) {
         PulsoxymetrieObservation pulsoxymetrieObservation = new PulsoxymetrieObservation();
-        mapSpo(resource).ifPresent(pulsoxymetrieObservation::setSpo);
+        mapSpo(resource).ifPresentOrElse(
+                pulsoxymetrieObservation::setSpo,
+                () -> {
+                    pulsoxymetrieObservation.setSpoNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+                }
+        );
         return pulsoxymetrieObservation;
     }
 
