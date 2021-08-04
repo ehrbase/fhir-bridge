@@ -12,13 +12,14 @@ public class RaucherstatusEvaluationConverter extends EntryEntityConverter<Obser
     @Override
     protected RaucherstatusEvaluation convertInternal(Observation resource) {
         RaucherstatusEvaluation evaluation = new RaucherstatusEvaluation();
-        if (resource.hasValueCodeableConcept()) {
+        if (resource.hasValueCodeableConcept() && resource.getValueCodeableConcept().hasCoding()) {
             for (Coding coding : resource.getValueCodeableConcept().getCoding()) {
                 convertRaucherStatusDefiningCode(coding, evaluation);
             }
             return evaluation;
+        } else {
+            evaluation.setRauchverhaltenNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
-        evaluation.setRauchverhaltenNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         return evaluation;
     }
 
