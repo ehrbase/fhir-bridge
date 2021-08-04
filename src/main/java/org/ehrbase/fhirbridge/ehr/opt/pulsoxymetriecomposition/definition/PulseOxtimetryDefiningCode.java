@@ -1,9 +1,9 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry;
+package org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition;
 
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.SNOMED;
 
-public enum PulseOxtimetryCode {
+public enum PulseOxtimetryDefiningCode {
 
     LOINC_OXYGEN_SATURATION_IN_ARTERIAL_BLOOD(LOINC.getUrl(), "2708-6"),
     LOINC_OXYGEN_SATURATION_IN_ARTERIAL_BLOOD_BY_PULSE_OXIMETRY(LOINC.getUrl(), "59408-5"),
@@ -12,7 +12,7 @@ public enum PulseOxtimetryCode {
     private final String system;
     private final String code;
 
-    PulseOxtimetryCode(String system, String code) {
+    PulseOxtimetryDefiningCode(String system, String code) {
         this.code = code;
         this.system = system;
     }

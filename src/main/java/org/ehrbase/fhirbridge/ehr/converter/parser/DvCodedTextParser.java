@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.generic;
+package org.ehrbase.fhirbridge.ehr.converter.parser;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
