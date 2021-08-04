@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0b1 (Python 3.9.6 on linux)" generated="20210802 14:55:14.321" rpa="false">
+<suite id="s1" name="08 Create Smoking Status" source="/home/severink/repos/fhir-bridge/tests/robot/OBSERVATION/08_create_smoking_status.robot">
+<test id="s1-t1" name="001 Create Smoking Status (Invalid/Missing 'Subject')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.350" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.350" endtime="20210802 14:55:14.350"></status>
+</kw>
+<doc>1. *LOAD* _create-smoking-status.json_ 
+
+2. *UPDATE* values for attribute ``Subject`` 
+
+3. *POST* example JSON to observation endpoint 
+
+4. *VALIDATE* the response status 
+
+5. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+<tag>subject</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.348" endtime="20210802 14:55:14.351">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t2" name="002 Create Smoking Status (Invalid/Missing 'resourceType')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.353" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.353" endtime="20210802 14:55:14.353"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``resourceType`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>resourceType</tag>
+<tag>smoking-status</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.351" endtime="20210802 14:55:14.353">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t3" name="003 Create Smoking Status (Invalid/Missing 'ID')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.356" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.355" endtime="20210802 14:55:14.356"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``ID`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>create</tag>
+<tag>ID</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.354" endtime="20210802 14:55:14.356">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t4" name="004 Create Smoking Status (Invalid/Missing 'meta')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.361" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.360" endtime="20210802 14:55:14.361"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record
+
+4. *UPDATE* values for attribute ``meta`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>meta</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.358" endtime="20210802 14:55:14.361">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t5" name="005 Create Smoking Status (Invalid/Missing 'Status')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.363" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.363" endtime="20210802 14:55:14.363"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``Status`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+<tag>status</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.362" endtime="20210802 14:55:14.363">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t6" name="006 Create Smoking Status (Invalid/Missing 'category')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.366" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.366" endtime="20210802 14:55:14.366"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``Category`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>category</tag>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.364" endtime="20210802 14:55:14.366">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t7" name="007 Create Smoking Status (Invalid/Missing 'code')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.374" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.373" endtime="20210802 14:55:14.374"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``Code`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>code</tag>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.367" endtime="20210802 14:55:14.374">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t8" name="008 Create Smoking Status (Invalid/Missing 'effectiveDateTime')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.378" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.378" endtime="20210802 14:55:14.378"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``effectiveDateTime`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>create</tag>
+<tag>effectiveDateTime</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.375" endtime="20210802 14:55:14.378">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t9" name="009 Create Smoking Status (Invalid/Missing 'valueCodeableConcept')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.381" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.380" endtime="20210802 14:55:14.381"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``valueCodeableConcept`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+<tag>valueCodeableConcept</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.379" endtime="20210802 14:55:14.381">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t10" name="010 Create Smoking Status (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.383" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.383" endtime="20210802 14:55:14.383"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``DataAbsentReason`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>create</tag>
+<tag>DataAbsentReason</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.381" endtime="20210802 14:55:14.383">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t11" name="011 Create Smoking Status (Invalid/Missing 'DataAbsentReason')">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.386" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.386" endtime="20210802 14:55:14.386"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``DataAbsentReason`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tags>
+<tag>create</tag>
+<tag>DataAbsentReason</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.384" endtime="20210802 14:55:14.386">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t12" name="012 Create Smoking Status (invalid multi)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210802 14:55:14.388" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210802 14:55:14.388" endtime="20210802 14:55:14.389"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-smoking-status.json_
+
+3. *UPDATE* values for attributes 
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text (english + german)</doc>
+<tags>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>multi</tag>
+<tag>observation_create</tag>
+<tag>smoking-status</tag>
+</tags>
+<status status="FAIL" starttime="20210802 14:55:14.387" endtime="20210802 14:55:14.389">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<doc>*NOTE:* use Regular Expressions to replace braces () as described here:
+https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example 
+
+*Author:* Dave Petzold</doc>
+<status status="FAIL" starttime="20210802 14:55:14.322" endtime="20210802 14:55:14.389"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="12" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">category</stat>
+<stat pass="0" fail="1" skip="0">code</stat>
+<stat pass="0" fail="12" skip="0">create</stat>
+<stat pass="0" fail="2" skip="0">DataAbsentReason</stat>
+<stat pass="0" fail="1" skip="0">effectiveDateTime</stat>
+<stat pass="0" fail="1" skip="0">ID</stat>
+<stat pass="0" fail="12" skip="0">invalid</stat>
+<stat pass="0" fail="1" skip="0">meta</stat>
+<stat pass="0" fail="1" skip="0">multi</stat>
+<stat pass="0" fail="12" skip="0">observation_create</stat>
+<stat pass="0" fail="1" skip="0">resourceType</stat>
+<stat pass="0" fail="12" skip="0">smoking-status</stat>
+<stat pass="0" fail="1" skip="0">status</stat>
+<stat pass="0" fail="1" skip="0">subject</stat>
+<stat pass="0" fail="1" skip="0">valueCodeableConcept</stat>
+</tag>
+<suite>
+<stat pass="0" fail="12" skip="0" id="s1" name="08 Create Smoking Status">08 Create Smoking Status</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20210802 14:55:14.347" level="ERROR">Error in file '/home/severink/repos/fhir-bridge/tests/robot/OBSERVATION/08_create_smoking_status.robot' on line 20: Resource file '/home/severink/repos/fhir-bridge/tests/robot/OBSERVATION/robot/_resources/suite_settings.robot' does not exist.</msg>
+</errors>
+</robot>
