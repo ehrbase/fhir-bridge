@@ -10,7 +10,6 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Procedure;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class ProcedureActionConverter extends ProcedureToProcedureActionConverter<ProzedurAction> {
