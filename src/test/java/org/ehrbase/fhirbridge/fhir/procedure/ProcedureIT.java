@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ProcedureIT extends AbstractMappingTestSetupIT {
 
     public ProcedureIT() {
-        super("Procedure/", Procedure.class);
+        super("Procedure/Procedure/", Procedure.class);
     }
 
     @Test
@@ -64,7 +64,7 @@ class ProcedureIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Procedure procedure = (Procedure) testFileLoader.loadResource(path);
         return assertThrows(Exception.class, () -> {
-            new ProcedureCompositionConverter().convert(((Procedure) procedure));
+            new ProcedureCompositionConverter().convert(procedure);
         });
     }
 
