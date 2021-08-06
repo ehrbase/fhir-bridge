@@ -1,6 +1,5 @@
 {
   "resourceType": "Procedure",
-  "id": "example",
   "meta": {
     "profile": [
       "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure"
@@ -22,6 +21,12 @@
         "system": "http://snomed.info/sct",
         "code": "80146002",
         "display": "Excision of appendix (procedure)"
+      },
+      {
+        "system": "http://fhir.de/CodeSystem/dimdi/ops",
+        "version": "2020",
+        "code": "5-470",
+        "display": "Appendektomie"
       }
     ]
   },
