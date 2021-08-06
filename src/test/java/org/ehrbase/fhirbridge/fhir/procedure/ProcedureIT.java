@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ProcedureIT extends AbstractMappingTestSetupIT {
 
     public ProcedureIT() {
-        super("Procedure/Procedure/", Procedure.class);
+        super("Procedure/", Procedure.class);
     }
 
     @Test
