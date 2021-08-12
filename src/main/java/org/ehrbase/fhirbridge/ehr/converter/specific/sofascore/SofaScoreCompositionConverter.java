@@ -37,26 +37,9 @@ public class SofaScoreCompositionConverter extends ObservationToCompositionConve
     @Override
     public SOFAComposition convertInternal(@NonNull Observation observation) {
         SOFAComposition result = new SOFAComposition();
-        result.setStatusDefiningCode(convertStatus(observation));
         result.setKategorie(convertCategory(observation));
         result.setSofaScore(sofaScoreObservationConverter.convert(observation));
         return result;
-    }
-
-    public StatusDefiningCode convertStatus(Observation observation) {
-        Observation.ObservationStatus status = observation.getStatus();
-        switch (status) {
-            case PRELIMINARY:
-                return StatusDefiningCode.VORLAEUFIG;
-            case FINAL:
-                return StatusDefiningCode.FINAL;
-            case REGISTERED:
-                return StatusDefiningCode.REGISTRIERT;
-            case AMENDED:
-                return StatusDefiningCode.GEAENDERT;
-            default:
-                throw new ConversionException("Invalid Code " + status + "" + " for mapping of 'status', valid codes are: registered, final, amended and preliminary");
-        }
     }
 
     public List<SofaScoreKategorieElement> convertCategory(Observation observation) {

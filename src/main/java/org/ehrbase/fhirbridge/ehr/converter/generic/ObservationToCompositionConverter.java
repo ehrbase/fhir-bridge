@@ -4,6 +4,9 @@ import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
 import com.nedap.archie.rm.generic.PartySelf;
+import kotlin.reflect.jvm.internal.impl.resolve.constants.EnumValue;
+import liquibase.pro.packaged.T;
+import org.ehrbase.client.classgenerator.EnumValueSet;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
@@ -15,7 +18,7 @@ import org.springframework.lang.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.time.temporal.TemporalAccessor;
+import java.util.Arrays;
 
 /**
  * @param <C> openEHR Composition type
@@ -37,15 +40,20 @@ public abstract class ObservationToCompositionConverter<C extends CompositionEnt
         return composition;
     }
 
-    protected void invokeStatus(C composition, Observation resource){
+    @SuppressWarnings("unchecked")
+    protected void invokeStatus(C composition, Observation resource) {
+        if (resource.hasStatusElement()) {
             try {
-                Method setStatus = composition.getClass().getMethod("setStatus", TemporalAccessor.class);
-                setStatus.invoke(mapStatus(resource));
+                Method getStatus = composition.getClass().getMethod("getStatusDefiningCode");
+                Class<? extends Enum> clazz = (Class<? extends Enum>) getStatus.getReturnType();
+                Method setStatus = composition.getClass().getMethod("setStatusDefiningCode", clazz);
+                setStatus.invoke(composition, mapStatus(resource, clazz));
             } catch (IllegalAccessException | InvocationTargetException exception) {
                 LOG.error(LoggerMessages.printInvokeError(exception));
-            } catch (NoSuchMethodException ignored){
+            } catch (NoSuchMethodException ignored) {
                 //ignored
             }
+        }
     }
 
     protected PartyProxy getComposerOrDefault(Observation resource) {
@@ -67,18 +75,19 @@ public abstract class ObservationToCompositionConverter<C extends CompositionEnt
                 .orElse(new PartySelf());
     }
 
-    private StatusDefiningCode mapStatus(Observation resource) {
+    @SuppressWarnings("unchecked")
+    private <T extends Enum>T  mapStatus(Observation resource, Class<? extends Enum> clazz) {
         switch (resource.getStatusElement().getCode()) {
             case "final":
-                return StatusDefiningCode.FINAL;
+                return (T) Enum.valueOf(clazz, "FINAL");
             case "amended":
-                return StatusDefiningCode.GEAENDERT;
+                return (T) Enum.valueOf(clazz, "GEANDERT");
             case "registered":
-                return StatusDefiningCode.REGISTRIERT;
+                return (T) Enum.valueOf(clazz, "REGISTRIERT");
             case "preliminary":
-                return StatusDefiningCode.VORLAEUFIG;
+                return (T) Enum.valueOf(clazz, "VORLAEUFIG");
             default:
-                throw new ConversionException("The status " + resource.getStatus().toString() + " is not valid for radiology report. Please enter either final, amended, registered or preliminary");
+                throw new ConversionException("The status " + resource.getStatus().toString() + " is not supported by the fhir bridge, since it does not accept unfinished entered-in-error or corrected instances. If an fix is necessary, please contact the administrator of the Bridge. Supported is either final, amended, registered or preliminary");
         }
     }
 }

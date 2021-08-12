@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
+import org.ehrbase.client.classgenerator.EnumValueSet;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.GECCOSerologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.GeccoSerologischerBefundKategorieLoincElement;

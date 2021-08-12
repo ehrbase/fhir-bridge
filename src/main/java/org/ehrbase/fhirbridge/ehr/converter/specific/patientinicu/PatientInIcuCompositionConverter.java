@@ -13,18 +13,8 @@ public class PatientInIcuCompositionConverter extends ObservationToCompositionCo
     @Override
     public PatientAufICUComposition convertInternal(@NonNull Observation resource) {
         PatientAufICUComposition composition = new PatientAufICUComposition();
-        setStatus(composition, resource);
         composition.setPatientAufDerIntensivstation(new PatientAufDerIntensivstationObservationConverter().convert(resource));
         return composition;
-    }
-
-    private void setStatus(PatientAufICUComposition composition, Observation fhirObservation) {
-        Observation.ObservationStatus status = fhirObservation.getStatus();
-        if (status.equals(Observation.ObservationStatus.FINAL)) {
-            composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
-        } else {
-            throw new ConversionException("Status has invalid code " + status.toCode());
-        }
     }
 
 }

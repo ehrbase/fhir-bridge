@@ -15,7 +15,6 @@ public class RespiratoryRateCompositionConverter extends ObservationToCompositio
     @Override
     public AtemfrequenzComposition convertInternal(@NonNull Observation resource) {
         AtemfrequenzComposition composition = new AtemfrequenzComposition();
-        mapStatus(composition, resource);
         mapKategorie(resource).ifPresent(composition::setKategorieValue);
         composition.setAtemfrequenz(new AtemfrequenzObservationConverter().convert(resource));
         return composition;
@@ -27,22 +26,4 @@ public class RespiratoryRateCompositionConverter extends ObservationToCompositio
                 .findFirst();
         }
 
-    private void mapStatus(AtemfrequenzComposition composition, Observation resource) {
-        switch(resource.getStatusElement().getCode()){
-            case "final":
-                composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
-                break;
-            case "amended":
-                composition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
-                break;
-            case "registered":
-                composition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
-                break;
-            case "preliminary":
-                composition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
-                break;
-            default:
-                throw new ConversionException("The status " + resource.getStatus().toString() + " is not valid for radiology report. Please enter either final, amended, registered or preliminary");
-        }
-    }
 }
