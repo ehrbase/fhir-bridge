@@ -18,31 +18,9 @@ public class GECCOSerologischerBefundCompositionConverter extends ObservationToC
     @Override
     protected GECCOSerologischerBefundComposition convertInternal(Observation resource) {
         GECCOSerologischerBefundComposition geccoSerologischerBefundComposition = new GECCOSerologischerBefundComposition();
-        mapStatus(geccoSerologischerBefundComposition, resource);
         mapKategorie(resource, geccoSerologischerBefundComposition);
         geccoSerologischerBefundComposition.setBefund(new LabratoryTestResultConverter().convert(resource));
         return geccoSerologischerBefundComposition;
-    }
-
-    private void mapStatus(GECCOSerologischerBefundComposition geccoSerologischerBefundComposition, Observation resource) {
-        String status = resource.getStatusElement().getCode();
-        switch (status) {
-            case "registered":
-                geccoSerologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
-                break;
-            case "final":
-                geccoSerologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.FINAL);
-                break;
-            case "amended":
-                geccoSerologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
-                break;
-            case "preliminary":
-                geccoSerologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
-                break;
-            default:
-                throw new IllegalStateException("Invalid Code " + status + "" +
-                        " for mapping of 'status', valid codes are: registered, final, amended and preliminary");
-        }
     }
 
     private void mapKategorie(Observation fhirObservation, GECCOSerologischerBefundComposition geccoSerologischerBefundComposition) {
