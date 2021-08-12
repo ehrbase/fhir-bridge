@@ -15,15 +15,20 @@ public class RespiratoryRateCompositionConverter extends ObservationToCompositio
     @Override
     public AtemfrequenzComposition convertInternal(@NonNull Observation resource) {
         AtemfrequenzComposition composition = new AtemfrequenzComposition();
-        mapKategorie(resource).ifPresent(composition::setKategorieValue);
+        if (resource.getCategory().get(0).hasCoding()) {
+            composition.setKategorie(mapKategorie(resource));
+        }
         composition.setAtemfrequenz(new AtemfrequenzObservationConverter().convert(resource));
         return composition;
     }
 
-    private Optional<String> mapKategorie( Observation resource) {
-        return resource.getCategory().get(0).getCoding().stream()
-                .map(Coding::getCode)
-                .findFirst();
+    private List<RegistereintragKategorieElement> mapKategorie(Observation resource) {
+        List<RegistereintragKategorieElement> registereintragKategorieElements = new ArrayList<>();
+        for (Coding coding : resource.getCategory().get(0).getCoding()) {
+            RegistereintragKategorieElement registereintragKategorieElement = new RegistereintragKategorieElement();
+            registereintragKategorieElement.setValue(coding.getCode());
+            registereintragKategorieElements.add(registereintragKategorieElement);
         }
-
+        return registereintragKategorieElements;
+    }
 }

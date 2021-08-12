@@ -294,7 +294,7 @@
                           },
                           "value": {
                             "_type": "DV_QUANTITY",
-                            "units": "µmol/l",
+                            "units": "umol/L",
                             "magnitude": 72
                           },
                           "archetype_node_id": "at0001"
