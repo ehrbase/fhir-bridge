@@ -127,7 +127,7 @@ public class LaborAnalytConverter {
     private ProLaboranalytMesswertChoice getLaborAnalytResultat(Quantity quantity) {
         ProLaboranalytMesswertDvQuantity laboranalytResultat = new ProLaboranalytMesswertDvQuantity();
         laboranalytResultat.setMesswertMagnitude(quantity.getValue().doubleValue());
-        laboranalytResultat.setMesswertUnits(quantity.getUnit());
+        laboranalytResultat.setMesswertUnits(quantity.getCode());
         return laboranalytResultat;
     }
 
