@@ -19,25 +19,9 @@ public class PCRCompositionConverter extends ObservationToCompositionConverter<G
     public GECCOVirologischerBefundComposition convertInternal(@NonNull Observation resource) {
         GECCOVirologischerBefundComposition composition = new GECCOVirologischerBefundComposition();
         composition.setBefund(new PCRObservationConverter().convert(resource));
-        composition.setStatusDefiningCode(createStatusDefiningCode(resource.getStatus()));
         composition.setKategorieDefiningCode(KategorieDefiningCode.LABORATORY);
         composition.setKategorieLoinc(createKategorieLoinc());
         return composition;
-    }
-
-    private StatusDefiningCode createStatusDefiningCode(Observation.ObservationStatus fhirStatus) {
-        switch(fhirStatus.toCode()) {
-            case "registered":
-                return StatusDefiningCode.REGISTRIERT;
-            case "preliminary":
-                return StatusDefiningCode.VORLAEUFIG;
-            case "final":
-                return StatusDefiningCode.FINAL;
-            case "amended":
-                return StatusDefiningCode.GEAENDERT;
-            default:
-                throw new ConversionException("createStatusDefiningCode failed. Code not found for: " + fhirStatus.toString());
-        }
     }
 
     private List<GeccoVirologischerBefundKategorieLoincElement> createKategorieLoinc() {

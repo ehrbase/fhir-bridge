@@ -15,32 +15,9 @@ public class PulseOximetryCompositionConverter extends ObservationToCompositionC
     public PulsoxymetrieComposition convertInternal(@NonNull Observation resource) {
         new PulseOximetryCodeChecker().checkIsPulsOximetry(resource);
         PulsoxymetrieComposition composition = new PulsoxymetrieComposition();
-        mapStatus(composition, resource);
         mapKategorie(resource).ifPresent(composition::setKategorieValue);
         composition.setPulsoxymetrie(new PulsoxymetrieObservationConverter().convert(resource));
         return composition;
-    }
-
-    private void mapStatus(PulsoxymetrieComposition composition, Observation resource) {
-        String status = resource.getStatusElement().getCode();
-        switch (status) {
-            case "registered":
-                composition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
-                break;
-            case "final":
-                composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
-                break;
-            case "amended":
-                composition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
-                break;
-            case "preliminary":
-                composition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
-                break;
-            default:
-                composition.setStatusDefiningCode(StatusDefiningCode.FINAL); //TODO wait until status modeling is done to cover all status codes
-                //          throw new IllegalStateException("Invalid Code " + status + "" +
-        //                " for mapping of 'status', valid codes are: registered, final, amended and preliminary");
-        }
     }
 
     private Optional<String> mapKategorie(Observation observation) {

@@ -36,6 +36,6 @@ class ProvideObservationTransactionIT extends AbstractTransactionIT {
         var observation = (Observation) outcome.getResource();
 
         Assertions.assertEquals(PATIENT_ID, observation.getSubject().getIdentifier().getValue());
-        Assertions.assertEquals(Observation.ObservationStatus.CORRECTED, observation.getStatus());
+        Assertions.assertEquals(Observation.ObservationStatus.AMENDED, observation.getStatus());
     }
 }

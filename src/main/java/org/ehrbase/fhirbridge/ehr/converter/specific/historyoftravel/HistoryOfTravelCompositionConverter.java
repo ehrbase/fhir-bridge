@@ -23,7 +23,6 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
     @Override
     public ReisehistorieComposition convertInternal(@NonNull Observation resource) {
         ReisehistorieComposition composition = new ReisehistorieComposition();
-        mapStatus(composition, resource);
         mapKategorie(composition, resource);
         setReisehistorieType(composition, resource);
         return (composition);
@@ -49,21 +48,6 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         } else {
             throw new ConversionException("The system is not correct. " +
                     "It should be '" + SNOMED.getUrl() + "', but it was '" + fhirObservation.getValueCodeableConcept().getCoding().get(0).getSystem() + "'.");
-        }
-    }
-
-    private void mapStatus(ReisehistorieComposition composition, Observation resource) {
-        String status = resource.getStatusElement().getCode();
-        if (status.equals(StatusDefiningCode.FINAL.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
-        } else if (status.equals(StatusDefiningCode.GEAENDERT.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
-        } else if (status.equals(StatusDefiningCode.REGISTRIERT.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
-        } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
-        } else {
-            throw new ConversionException("The status " + resource.getStatus().toString() + " is not valid for reisehistorie.");
         }
     }
 

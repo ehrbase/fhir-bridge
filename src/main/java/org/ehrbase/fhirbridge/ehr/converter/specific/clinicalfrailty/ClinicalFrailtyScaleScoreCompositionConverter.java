@@ -14,26 +14,10 @@ public class ClinicalFrailtyScaleScoreCompositionConverter extends ObservationTo
     @Override
     public KlinischeFrailtySkalaComposition convertInternal(Observation resource) {
         KlinischeFrailtySkalaComposition result = new KlinischeFrailtySkalaComposition();
-        mapStatus(result, resource);
         if(resource.hasValueCodeableConcept()){
             result.setKlinischeFrailtySkalaCfs(new KlinischeFrailtySkalaObservationConverter().convert(resource));
         }
         return result;
-    }
-
-    private void mapStatus(KlinischeFrailtySkalaComposition composition, Observation resource) {
-        String status = resource.getStatusElement().getCode();
-        if (status.equals(StatusDefiningCode.FINAL.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
-        } else if (status.equals(StatusDefiningCode.GEAENDERT.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
-        } else if (status.equals(StatusDefiningCode.REGISTRIERT.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
-        } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
-        } else {
-            throw new ConversionException("The status " + resource.getStatus().toString() + " is not valid for clinical frailty.");
-        }
     }
 
 }
