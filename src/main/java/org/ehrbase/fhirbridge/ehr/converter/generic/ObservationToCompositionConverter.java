@@ -81,7 +81,7 @@ public abstract class ObservationToCompositionConverter<C extends CompositionEnt
             case "final":
                 return (T) Enum.valueOf(clazz, "FINAL");
             case "amended":
-                return (T) Enum.valueOf(clazz, "GEANDERT");
+                return (T) Enum.valueOf(clazz, "GEAENDERT");
             case "registered":
                 return (T) Enum.valueOf(clazz, "REGISTRIERT");
             case "preliminary":
