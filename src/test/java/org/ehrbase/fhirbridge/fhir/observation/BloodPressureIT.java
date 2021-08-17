@@ -33,7 +33,7 @@ public class BloodPressureIT extends AbstractMappingTestSetupIT {
     // #####################################################################################
     // check payload
 
-    @Test
+/*    @Test
     void testStatusVorlaeufig() throws IOException {
         testMapping("create-blood-pressure_status-preliminary.json",
                 "paragon-blood-pressure_status-preliminary-vorlaeufig.json");
@@ -55,7 +55,7 @@ public class BloodPressureIT extends AbstractMappingTestSetupIT {
     void testStatusGeaendert() throws IOException {
         testMapping("create-blood-pressure_status-amended.json",
                 "paragon-blood-pressure_status-amended_geaendert.json");
-    }
+    }*/
 
     @Test
     void testBloodPressureSystolicMagnitudeMin() throws IOException {
@@ -84,11 +84,11 @@ public class BloodPressureIT extends AbstractMappingTestSetupIT {
     // #####################################################################################
     // check exceptions
 
-    @Test
+/*    @Test
     void testInvalidStatus() throws IOException {
         Exception exception = executeMappingException("test-blood-pressure_status-invalid.json");
         assertEquals("The status CORRECTED is not valid for known exposure.", exception.getMessage());
-    }
+    }*/
 
     // #####################################################################################
     // default
