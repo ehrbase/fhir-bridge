@@ -12,23 +12,8 @@ public class ClinicalTrialParticipationCompositionConverter extends ObservationT
     @Override
     protected GECCOStudienteilnahmeComposition convertInternal(@NonNull Observation resource) {
         GECCOStudienteilnahmeComposition composition = new GECCOStudienteilnahmeComposition();
-        mapStatus(composition, resource);
         composition.setGeccoStudienteilnahme(new ClinicalTrialParticipationEvaluationConverter().convert(resource));
         return composition;
     }
 
-    private void mapStatus(GECCOStudienteilnahmeComposition composition, Observation obs) {
-        String status = obs.getStatusElement().getCode();
-        if (status.equals(StatusDefiningCode.FINAL.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
-        } else if (status.equals(StatusDefiningCode.GEAENDERT.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
-        } else if (status.equals(StatusDefiningCode.REGISTRIERT.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
-        } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
-        } else {
-            throw new ConversionException("The status " + obs.getStatus().toString() + " is not valid for clinical trial participation.");
-        }
-    }
 }

@@ -17,7 +17,6 @@ public class RaucherstatusCompositionConverter extends ObservationToCompositionC
     @Override
     public RaucherstatusComposition convertInternal(@NonNull Observation resource) {
         RaucherstatusComposition composition = new RaucherstatusComposition();
-        mapStatus(resource, composition);
         mapCategory(resource).ifPresent(composition::setKategorieValue);
         mapEffectiveTimeDateAbsent(resource, composition).ifPresent(composition::setStatusNullFlavourDefiningCode); //introduce reflection to set nullflavour
         composition.setRaucherstatus(new RaucherstatusEvaluationConverter().convert(resource));
@@ -51,25 +50,6 @@ public class RaucherstatusCompositionConverter extends ObservationToCompositionC
                     .findFirst();
         }
         return Optional.empty();
-    }
-
-    private void mapStatus(Observation resource, RaucherstatusComposition composition) {
-        switch (resource.getStatusElement().getCode()) {
-            case "registered":
-                composition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
-                break;
-            case "preliminary":
-                composition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
-                break;
-            case "final":
-                composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
-                break;
-            case "amended":
-                composition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
-                break;
-            default:
-                composition.setStatusNullFlavourDefiningCode(NullFlavour.UNKNOWN);
-        }
     }
 
 }
