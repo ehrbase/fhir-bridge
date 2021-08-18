@@ -64,7 +64,7 @@ class BodyTemperatureIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () ->
+        return assertThrows(Exception.class, () ->
                 new KoerpertemperaturCompositionConverter().convert(obs)
         );
     }
