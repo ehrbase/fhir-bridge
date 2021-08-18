@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/dd104233-36e9-49b8-a5af-f60b45f878ad/_history/1",
+      "id" : "Observation/4994928a-23fd-48b1-a857-ad45cb39c15a/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -60,7 +60,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-04-14T00:00:00+02:00"
+      "value" : "2020-09-25T00:00:00+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -99,6 +99,25 @@
           }
         },
         "archetype_node_id" : "at0004"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Vital Signs",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://terminology.hl7.org/CodeSystem/observation-category"
+            },
+            "code_string" : "vital-signs"
+          }
+        },
+        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
     }
@@ -138,7 +157,7 @@
       },
       "origin" : {
         "_type" : "DV_DATE_TIME",
-        "value" : "2021-04-14T00:00:00+02:00"
+        "value" : "2020-09-25T00:00:00+02:00"
       },
       "events" : [ {
         "_type" : "POINT_EVENT",
@@ -148,7 +167,7 @@
         },
         "time" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2021-04-14T00:00:00+02:00"
+          "value" : "2020-09-25T00:00:00+02:00"
         },
         "data" : {
           "_type" : "ITEM_TREE",
@@ -165,7 +184,7 @@
             "value" : {
               "_type" : "DV_QUANTITY",
               "units" : "Cel",
-              "magnitude" : 36.8
+              "magnitude" : 99.0
             },
             "archetype_node_id" : "at0004"
           } ],
