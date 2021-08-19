@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/5/_history/1",
+      "id" : "Observation/de7f7d7e-877a-4481-b0cd-b70460d23962/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -99,6 +99,17 @@
           }
         },
         "archetype_node_id" : "at0004"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "survey"
+        },
+        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
     }
@@ -127,6 +138,9 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
+    },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "name" : {
@@ -163,17 +177,17 @@
               "_type" : "DV_ORDINAL",
               "symbol" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "7",
+                "value" : "9",
                 "defining_code" : {
                   "_type" : "CODE_PHRASE",
                   "terminology_id" : {
                     "_type" : "TERMINOLOGY_ID",
                     "value" : "local"
                   },
-                  "code_string" : "at0011"
+                  "code_string" : "at0013"
                 }
               },
-              "value" : 7
+              "value" : 9
             },
             "archetype_node_id" : "at0004"
           } ],

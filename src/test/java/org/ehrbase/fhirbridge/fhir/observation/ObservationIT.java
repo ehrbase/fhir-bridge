@@ -30,7 +30,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createClinicalFrailtyScaleScore() throws IOException {
-        create("create-clinical-frailty-scale-score.json");
+        create("create-clinical-frailty-score.json");
     }
 
     @Test
