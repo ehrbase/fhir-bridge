@@ -14,7 +14,7 @@ public class KoerpergewichtObservationConverter extends ObservationToObservation
         return observation;
     }
 
-    private Optional<String>  mapGewichtUnit(Observation resource) {
+    private Optional<String> mapGewichtUnit(Observation resource) {
         if(resource.hasValueQuantity()){
             return Optional.of(resource.getValueQuantity().getCode());
         }else{

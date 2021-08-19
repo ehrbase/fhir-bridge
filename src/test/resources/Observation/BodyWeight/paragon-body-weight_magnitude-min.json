@@ -2,7 +2,7 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Körpergewicht"
+    "value" : "Körpergewicht_Test"
   },
   "archetype_details" : {
     "archetype_id" : {
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/b8d0c210-c14d-4b42-a26e-4848f81514dc/_history/1",
+      "id" : "Observation/ec79b82f-be63-4738-ab05-46861b718c72/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -62,10 +62,6 @@
       "_type" : "DV_DATE_TIME",
       "value" : "2020-10-02T00:00:00+02:00"
     },
-    "end_time" : {
-      "_type" : "DV_DATE_TIME",
-      "value" : "2020-10-02T00:00:00+02:00"
-    },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
@@ -103,6 +99,17 @@
           }
         },
         "archetype_node_id" : "at0004"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "vital-signs"
+        },
+        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
     }
@@ -169,7 +176,7 @@
             "value" : {
               "_type" : "DV_QUANTITY",
               "units" : "kg",
-              "magnitude" : 82.0
+              "magnitude" : 0.0
             },
             "archetype_node_id" : "at0004"
           } ],
