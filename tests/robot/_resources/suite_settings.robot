@@ -37,6 +37,7 @@ Resource    ${EXECDIR}/robot/_resources/keywords/questionnaire.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/bundle.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/json-manipulation.robot
 Resource    ${EXECDIR}/robot/_resources/keywords/patient.robot
+Resource    ${EXECDIR}/robot/_resources/keywords/consent.robot
 Variables   ${EXECDIR}/robot/_resources/variables/sut_config.py
             ...    ${SUT}
 
@@ -55,6 +56,7 @@ ${DATA_SET_PATH_PROCEDURE}              ${EXECDIR}/../src/test/resources/Procedu
 ${DATA_SET_PATH_QUESTIONAIRE}           ${EXECDIR}/../src/test/resources/QuestionnaireResponse
 ${DATA_SET_PATH_BUNDLE}          	    ${EXECDIR}/../src/test/resources/Bundle
 ${DATA_SET_PATH_PATIENT}          	    ${EXECDIR}/../src/test/resources/Patient
+${DATA_SET_PATH_CONSENT}          	    ${EXECDIR}/../src/test/resources/Consent
 ${VALID EHR DATA SETS}                  ${EXECDIR}/robot/_resources/test_data/ehr/valid
 ${OUTPUT_LEVEL}                         verbose
 

@@ -56,7 +56,15 @@ workflows:
                 filters:
                     branches:
                         ignore: gh-pages
-            
+
+            - CONSENT-tests:
+                  context: org-global
+                  requires:
+                      - build-test-analyse-fhirbridge
+                  filters:
+                      branches:
+                          ignore: gh-pages
+
             - DIAGNOSTIC-tests:
                 context: org-global
                 requires:
@@ -104,12 +112,13 @@ workflows:
                 filters:
                     branches:
                         ignore: gh-pages
-            
+
             - ROBOT-TEST-REPORT:
                 context: org-global
                 requires:
                     - BUNDLE-tests
                     - CONDITION-tests
+                    - CONSENT-tests
                     - DIAGNOSTIC-tests
                     - IMMUNIZATION-tests
                     - MEDICATIONSTATEMENT-tests
@@ -250,6 +259,24 @@ jobs:
                 test-suite-name: "CONDITION"
                 runner: robot
                 pabot-split: ""
+            - save-fhirbridge-robot-test-results
+
+    CONSENT-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                  include-tags: "consent"
+                  test-suite-path: "CONSENT"
+                  test-suite-name: "CONSENT"
+                  runner: robot
+                  pabot-split: ""
             - save-fhirbridge-robot-test-results
 
     DIAGNOSTIC-tests:
