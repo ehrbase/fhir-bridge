@@ -3,6 +3,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ehrbase.fhirbridge</groupId>
@@ -215,23 +216,8 @@
             </plugin>
         </plugins>
     </build>
+
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -242,17 +228,34 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.openehealth.ipf.boot</groupId>
-            <artifactId>ipf-fhir-r4-spring-boot-starter</artifactId>
+            <artifactId>ipf-atna-spring-boot-starter</artifactId>
             <version>${ipf.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openehealth.ipf.boot</groupId>
-            <artifactId>ipf-atna-spring-boot-starter</artifactId>
+            <artifactId>ipf-fhir-r4-spring-boot-starter</artifactId>
             <version>${ipf.version}</version>
         </dependency>
         <dependency>
@@ -261,10 +264,22 @@
             <version>${ipf.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.openehealth.ipf.boot</groupId>
+            <artifactId>ipf-hl7-spring-boot-starter</artifactId>
+            <version>${ipf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openehealth.ipf.platform-camel</groupId>
+            <artifactId>ipf-platform-camel-ihe-mllp</artifactId>
+            <version>${ipf.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-jpaserver-base</artifactId>
             <version>${hapi-fhir.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.github.ehrbase</groupId>
             <artifactId>openEHR_SDK</artifactId>
@@ -276,6 +291,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
@@ -288,10 +304,12 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
         </dependency>
+
         <!-- Test Dependencies-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
