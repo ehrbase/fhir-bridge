@@ -1,22 +1,36 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bodyweight;
 
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.KoerpergewichtComposition;
-import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtObservation;
+import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtTestKategorieElement;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
-import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BodyWeightCompositionConverter extends ObservationToCompositionConverter<KoerpergewichtComposition> {
 
     @Override
     protected KoerpergewichtComposition convertInternal(Observation resource) {
         KoerpergewichtComposition composition = new KoerpergewichtComposition();
+        mapKategorie(composition, resource);
         if(resource.hasValueQuantity()){
             composition.setKoerpergewicht(new KoerpergewichtObservationConverter().convert(resource));
         }
         return composition;
+    }
+
+    private void mapKategorie(KoerpergewichtComposition composition, Observation resource) {
+        List<KoerpergewichtTestKategorieElement> list = new ArrayList<>();
+        for (CodeableConcept category : resource.getCategory()) {
+            for (Coding coding : category.getCoding()) {
+                KoerpergewichtTestKategorieElement koerpergewichtTestKategorieElement = new KoerpergewichtTestKategorieElement();
+                koerpergewichtTestKategorieElement.setValue(coding.getCode());
+                list.add(koerpergewichtTestKategorieElement);
+            }
+        }
+        composition.setKategorie(list);
     }
 }
