@@ -30,20 +30,14 @@
   "subject": {
     "reference": "Patient/0b63ab84-8df0-4e18-bce9-b84067005c7b"
   },
-  "_effectiveDateTime": {
-    "extension": [{
-      "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
-      "valueCode": "unknown"
-    }]
-  },
-  "valueCodeableConcept": {
+  "effectiveDateTime": "2020-09-21",
+  "dataAbsentReason": {
     "coding": [
       {
-        "system": "http://loinc.org",
-        "code": "LA18978-9",
-        "display": "Never smoker"
+        "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+        "code": "unknown",
+        "display": "Unknown"
       }
-    ],
-    "text": "Patient is nonsmoker"
+    ]
   }
 }

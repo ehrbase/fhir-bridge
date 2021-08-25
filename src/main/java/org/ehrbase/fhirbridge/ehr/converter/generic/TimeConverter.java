@@ -14,6 +14,7 @@ import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Specimen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.parameters.P;
 
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
@@ -32,7 +33,9 @@ public class TimeConverter {
     }
 
     public static TemporalAccessor convertObservationTime(Observation observation) {
-      if (observation.hasEffectiveDateTimeType() && !observation.getEffectiveDateTimeType().hasExtension()) { // EffectiveDateTime & no extension (data absent)
+        if (hasDataAbsentForEffective(observation)) {
+            return null;
+        }else if (observation.hasEffectiveDateTimeType()) {
             return observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
         } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) { // EffectivePeriod
             return observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
@@ -47,6 +50,16 @@ public class TimeConverter {
         } else {
             return ZonedDateTime.now();
         }
+    }
+
+
+    private static boolean hasDataAbsentForEffective(Observation resource) {
+        for (Extension extension : resource.getEffectiveDateTimeType().getExtension()) {
+            if (extension.hasUrl() && extension.getUrl().equals("http://hl7.org/fhir/StructureDefinition/data-absent-reason")) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

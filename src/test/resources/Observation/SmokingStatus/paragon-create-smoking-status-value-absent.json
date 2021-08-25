@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/2196c5ec-ad4e-468c-91d6-38e039348f35/_history/1",
+      "id" : "Observation/4aeaa428-68a3-4227-a8da-1b8cf92baa10/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -58,6 +58,10 @@
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
+    "start_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2020-09-21T00:00:00+02:00"
+    },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
@@ -150,16 +154,16 @@
           "_type" : "DV_TEXT",
           "value" : "Rauchverhalten"
         },
-        "value" : {
+        "null_flavour" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Never smoker",
+          "value" : "unknown",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "LOINC"
+              "value" : "openehr"
             },
-            "code_string" : "LA18978-9"
+            "code_string" : "253"
           }
         },
         "archetype_node_id" : "at0043"

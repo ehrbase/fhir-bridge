@@ -27,20 +27,20 @@ public class RaucherstatusEvaluationConverter extends EntryEntityConverter<Obser
         RauchverhaltenDefiningCode rauchverhaltenDefiningcode;
         switch (coding.getCode()) {
             case "LA18976-3":
-                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA189763;
+                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.JA;
                 break;
             case "LA18978-9":
-                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA189789;
+                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.NICHTRAUCHER;
                 break;
             case "LA15920-4":
-                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA159204;
+                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.EHEMALIGER_RAUCHER;
                 break;
             case "LA18980-5":
-                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA189805;
+                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.UNBEKANNT;
                 break;
             default:
                 throw new ConversionException("Unexpected value: " + coding.getCode());
         }
-        evaluation.setRauchverhalten(rauchverhaltenDefiningcode.toDvCodedText());
+        evaluation.setRauchverhaltenDefiningCode(rauchverhaltenDefiningcode);
     }
 }

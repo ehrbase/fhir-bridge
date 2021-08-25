@@ -1,8 +1,11 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="gecco-observation-smoking-status" />
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status" />
+  <version value="1.0" />
   <name value="SmokingStatus" />
   <title value="Smoking Status" />
   <status value="active" />
+  <date value="2020-10-29" />
   <publisher value="Charité" />
   <contact>
     <telecom>
@@ -177,12 +180,6 @@
       </mapping>
     </element>
     <element id="Observation.implicitRules">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.implicitRules" />
       <short value="A set of rules under which this content was created" />
       <definition value="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc." />
@@ -215,12 +212,6 @@
       </mapping>
     </element>
     <element id="Observation.language">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.language" />
       <short value="Language of the resource content" />
       <definition value="The base language in which the resource is written." />
@@ -654,12 +645,6 @@
       </mapping>
     </element>
     <element id="Observation.status">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint">
         <valueString value="default: final" />
       </extension>
@@ -1028,17 +1013,11 @@
       </mapping>
     </element>
     <element id="Observation.subject.reference">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.subject.reference" />
       <short value="Literal reference, Relative, internal or absolute URL" />
       <definition value="A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources." />
       <comment value="Using absolute URLs provides a stable scalable approach suitable for a cloud/web context, while using relative/logical references provides a flexible approach suitable for use when trading across closed eco-system boundaries.   Absolute URLs do not need to point to a FHIR RESTful server, though this is the preferred approach. If the URL conforms to the structure &quot;/[type]/[id]&quot; then it should be assumed that the reference is to a FHIR RESTful server." />
-      <min value="0" />
+      <min value="1" />
       <max value="1" />
       <base>
         <path value="Reference.reference" />
@@ -1070,12 +1049,6 @@
       </mapping>
     </element>
     <element id="Observation.subject.type">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.subject.type" />
       <short value="Type the reference refers to (e.g. &quot;Patient&quot;)" />
       <definition value="The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.&#xA;&#xA;The type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. &quot;Patient&quot; is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources)." />
@@ -1170,12 +1143,6 @@
       </mapping>
     </element>
     <element id="Observation.subject.display">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
         <valueBoolean value="true" />
       </extension>
@@ -1345,12 +1312,6 @@
       </mapping>
     </element>
     <element id="Observation.effective[x]">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.effective[x]" />
       <short value="Clinically relevant time/time-period for observation" />
       <definition value="The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the &quot;physiologically relevant time&quot;. This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself." />
@@ -1558,12 +1519,6 @@
       </type>
     </element>
     <element id="Observation.issued">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.issued" />
       <short value="Date/Time this version was made available" />
       <definition value="The date and time this version of the observation was made available to providers, typically after the results have been reviewed and verified." />
@@ -1689,6 +1644,7 @@
           <type value="type" />
           <path value="$this" />
         </discriminator>
+        <rules value="open" />
       </slicing>
       <short value="Actual result" />
       <definition value="The information determined as a result of making the observation, if the information has a simple value." />
@@ -1702,37 +1658,7 @@
         <max value="1" />
       </base>
       <type>
-        <code value="Quantity" />
-      </type>
-      <type>
         <code value="CodeableConcept" />
-      </type>
-      <type>
-        <code value="string" />
-      </type>
-      <type>
-        <code value="boolean" />
-      </type>
-      <type>
-        <code value="integer" />
-      </type>
-      <type>
-        <code value="Range" />
-      </type>
-      <type>
-        <code value="Ratio" />
-      </type>
-      <type>
-        <code value="SampledData" />
-      </type>
-      <type>
-        <code value="time" />
-      </type>
-      <type>
-        <code value="dateTime" />
-      </type>
-      <type>
-        <code value="Period" />
       </type>
       <condition value="ele-1" />
       <condition value="obs-7" />
@@ -1752,6 +1678,7 @@
         <xpath value="not(exists(f:code)) or exists(f:system)" />
         <source value="http://hl7.org/fhir/StructureDefinition/Observation" />
       </constraint>
+      <mustSupport value="true" />
       <isSummary value="true" />
       <mapping>
         <identity value="rim" />
@@ -1826,7 +1753,8 @@
       <isSummary value="true" />
       <binding>
         <strength value="required" />
-        <valueSet value="http://hl7.org/fhir/uv/ips/ValueSet/current-smoking-status-uv-ips" />
+        <description value="Smoking status codes" />
+        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/smoking-status" />
       </binding>
       <mapping>
         <identity value="rim" />
@@ -2830,12 +2758,6 @@
       </mapping>
     </element>
     <element id="Observation.referenceRange.text">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.referenceRange.text" />
       <short value="Text based reference range in an observation" />
       <definition value="Text based reference range in an observation which may be used when a quantitative range is not appropriate for an observation.  An example would be a reference value of &quot;Negative&quot; or a list or table of &quot;normals&quot;." />
@@ -3525,6 +3447,15 @@
     <element id="Observation.subject">
       <path value="Observation.subject" />
       <min value="1" />
+      <type>
+        <code value="Reference" />
+        <targetProfile value="http://hl7.org/fhir/StructureDefinition/Patient" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Observation.subject.reference">
+      <path value="Observation.subject.reference" />
+      <min value="1" />
       <mustSupport value="true" />
     </element>
     <element id="Observation.effective[x]">
@@ -3563,17 +3494,23 @@
           <type value="type" />
           <path value="$this" />
         </discriminator>
+        <rules value="open" />
       </slicing>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <mustSupport value="true" />
     </element>
     <element id="Observation.value[x]:valueCodeableConcept">
-      <path value="Observation.valueCodeableConcept" />
+      <path value="Observation.value[x]" />
       <sliceName value="valueCodeableConcept" />
       <type>
         <code value="CodeableConcept" />
       </type>
       <binding>
         <strength value="required" />
-        <valueSet value="http://hl7.org/fhir/uv/ips/ValueSet/current-smoking-status-uv-ips" />
+        <description value="Smoking status codes" />
+        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/smoking-status" />
       </binding>
     </element>
     <element id="Observation.component">
