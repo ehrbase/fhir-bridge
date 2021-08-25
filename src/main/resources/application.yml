@@ -5,6 +5,10 @@
 ################################################################################
 
 fhir-bridge:
+  minio:
+    access-key: admin
+    secret-key: admin123456
+
 # CORS Properties
   cors:
     allow-credentials: false
@@ -159,7 +163,6 @@ ipf:
   # FHIR Properties
   fhir:
     fhir-version: r4
-
 
 demographics:
   patient:

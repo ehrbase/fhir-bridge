@@ -22,6 +22,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 /**
+ * @author Renaud Subiger
  * @since 1.3.0
  */
 @Component
@@ -29,6 +30,11 @@ public class DocumentRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+        from("documentreference-create:consumer?fhirContext=#fhirContext")
+                .process(exchange -> {
+                    System.out.println("TEST");
+                });
+
         from("mllp://0.0.0.0:8889?hl7TransactionConfig=#transactionConfiguration")
                 .process(exchange -> {
                     MDM_T02 message = exchange.getIn().getBody(MDM_T02.class);
