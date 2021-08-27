@@ -2139,6 +2139,13 @@
         <xpath value="@value|f:*|h:div" />
         <source value="http://hl7.org/fhir/StructureDefinition/Element" />
       </constraint>
+      <constraint>
+        <key value="vs-1" />
+        <severity value="error" />
+        <human value="Datetime must be at least to day" />
+        <expression value="($this as dateTime).hasValue() implies ($this as dateTime).toString().length() &gt;= 8" />
+        <source value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/vital-signs-base" />
+      </constraint>
       <mustSupport value="true" />
       <isSummary value="true" />
       <mapping>

@@ -8,7 +8,7 @@ public class HerzfrequenzCompositionConverter extends ObservationToCompositionCo
     @Override
     protected HerzfrequenzComposition convertInternal(Observation resource) {
         HerzfrequenzComposition result = new HerzfrequenzComposition();
-        result.setHerzfrequenz(new HerzfrequenzObservationConverter().convert(resource));
+        result.setPulsfrequenzHerzfrequenz(new PulsfrequenzHerzfrequenzObservationConverter().convert(resource));
         return result;
     }
 }

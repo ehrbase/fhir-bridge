@@ -2,7 +2,7 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Herzfrequenz"
+    "value" : "Registereintrag"
   },
   "archetype_details" : {
     "archetype_id" : {
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/6d3a675a-bc42-4867-af50-f88a2e9740c6/_history/1",
+      "id" : "Observation/a4982829-076b-4b7c-93d9-2c76214cdfea/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -73,13 +73,41 @@
         },
         "code_string" : "232"
       }
+    },
+    "other_context" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Baum"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Status"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "final",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "local"
+            },
+            "code_string" : "at0012"
+          }
+        },
+        "archetype_node_id" : "at0004"
+      } ],
+      "archetype_node_id" : "at0001"
     }
   },
   "content" : [ {
     "_type" : "OBSERVATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Herzfrequenz"
+      "value" : "Pulsfrequenz/Herzfrequenz"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -99,6 +127,9 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
+    },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "name" : {
