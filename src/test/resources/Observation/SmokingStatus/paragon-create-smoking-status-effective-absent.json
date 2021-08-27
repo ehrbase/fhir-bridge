@@ -2,7 +2,7 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Raucherstatus"
+    "value" : "Registereintrag"
   },
   "archetype_details" : {
     "archetype_id" : {
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/2196c5ec-ad4e-468c-91d6-38e039348f35/_history/1",
+      "id" : "Observation/3fe65522-d6e5-4e92-a40c-b6d658a23ca8/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -58,6 +58,10 @@
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
+    "start_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2021-08-27T13:51:58,357937+02:00"
+    },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
@@ -108,6 +112,9 @@
         "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
+    },
+    "health_care_facility" : {
+      "_type" : "PARTY_IDENTIFIED"
     }
   },
   "content" : [ {
@@ -152,7 +159,7 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Never smoker",
+          "value" : "Nichtraucher",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {

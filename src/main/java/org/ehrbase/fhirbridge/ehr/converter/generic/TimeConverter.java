@@ -33,9 +33,7 @@ public class TimeConverter {
     }
 
     public static TemporalAccessor convertObservationTime(Observation observation) {
-        if (hasDataAbsentForEffective(observation)) {
-            return null;
-        }else if (observation.hasEffectiveDateTimeType()) {
+        if (observation.hasEffectiveDateTimeType() && !observation.getEffectiveDateTimeType().hasExtension()) {
             return observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
         } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) { // EffectivePeriod
             return observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime();
@@ -51,17 +49,6 @@ public class TimeConverter {
             return ZonedDateTime.now();
         }
     }
-
-
-    private static boolean hasDataAbsentForEffective(Observation resource) {
-        for (Extension extension : resource.getEffectiveDateTimeType().getExtension()) {
-            if (extension.hasUrl() && extension.getUrl().equals("http://hl7.org/fhir/StructureDefinition/data-absent-reason")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     static Optional<TemporalAccessor> convertObservationEndTime(Observation observation) {
         if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasEnd()) { // EffectivePeriod

@@ -44,11 +44,6 @@ public class SmokingstatusIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createSmokingStatusMappingEffectiveAbsent() throws IOException {
-        testMapping("create-smoking-status-effective-absent.json","paragon-create-smoking-status-effective-absent.json");
-    }
-
-    @Test
     void createSmokingStatusMappingValueAbsent() throws IOException {
         testMapping("create-smoking-status-value-absent.json","paragon-create-smoking-status-value-absent.json");
     }
