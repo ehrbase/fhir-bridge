@@ -28,7 +28,7 @@ public class SmokingstatusIT extends AbstractMappingTestSetupIT {
     }
 
 
-/*    @Test requires patient reference which requires to create a patient, integrations tests are anyways covered by the robot tests, so we leave this blank
+/*   requires patient reference which requires to create a patient, integrations tests are anyways covered by the robot tests, so we leave this blank
     void createSmokingStatus() throws IOException {
         create("create-smoking-status.json");
     }*/
