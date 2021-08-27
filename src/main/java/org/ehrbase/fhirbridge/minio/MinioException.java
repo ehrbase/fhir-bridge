@@ -14,16 +14,11 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.component.fhir.documentreference;
+package org.ehrbase.fhirbridge.minio;
 
-import org.ehrbase.fhirbridge.fhir.documentreference.CreateDocumentReferenceTransactionConfiguration;
-import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
-import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
+public class MinioException extends RuntimeException {
 
-@SuppressWarnings("java:S110")
-public class CreateDocumentReferenceComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
-
-    public CreateDocumentReferenceComponent() {
-        super(new CreateDocumentReferenceTransactionConfiguration());
+    public MinioException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

@@ -34,6 +34,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.fio2.FiO2CompositionConvert
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund.PCRCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HerzfrequenzCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.hipdocument.DocumentReferenceToHipDocumentConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus.ImpfstatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
@@ -65,6 +66,7 @@ public class ConversionConfiguration {
     @Bean(name = "fhirResourceConversionService")
     public ConversionService conversionService() {
         ConversionService conversionService = new ConversionService();
+        registerDocumentReference(conversionService);
         registerConditionConverters(conversionService);
         registerConsentConverters(conversionService);
         registerDiagnosticReportConverters(conversionService);
@@ -76,6 +78,10 @@ public class ConversionConfiguration {
         registerProcedureConverters(conversionService);
         registerQuestionnaireResponseConverters(conversionService);
         return conversionService;
+    }
+
+    private void registerDocumentReference(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.DOCUMENT_REFERENCE_DEFAULT, new DocumentReferenceToHipDocumentConverter());
     }
 
     private void registerConditionConverters(ConversionService conversionService) {

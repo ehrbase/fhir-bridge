@@ -18,25 +18,27 @@ package org.ehrbase.fhirbridge.fhir.documentreference;
 
 import ca.uhn.fhir.context.FhirVersionEnum;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionConfiguration;
-import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
 
-/**
- * @author Renaud Subiger
- * @since 1.3.0
- */
-public class CreateDocumentReferenceTransaction extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
+public class CreateDocumentReferenceTransactionConfiguration extends FhirTransactionConfiguration<GenericFhirAuditDataset> {
 
-    public CreateDocumentReferenceTransaction() {
+    public CreateDocumentReferenceTransactionConfiguration() {
         super(
                 "documentreference-create",
-                "Create a DocumentReference",
+                "Create DocumentReference",
                 false,
                 null,
                 null,
                 FhirVersionEnum.R4,
                 new CreateDocumentReferenceProvider(),
                 null,
-                FhirTransactionValidator.NO_VALIDATION);
+                CreateDocumentReferenceValidator::new);
+    }
+
+    @Override
+    public void setSupportsLazyLoading(boolean supportsLazyLoading) {
+        if (supportsLazyLoading) {
+            throw new IllegalArgumentException("Lazy loading is not supported");
+        }
     }
 }
