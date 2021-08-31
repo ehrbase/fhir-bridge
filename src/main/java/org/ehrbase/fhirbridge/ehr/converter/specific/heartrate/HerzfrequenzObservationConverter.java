@@ -1,21 +1,18 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.heartrate;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.HerzfrequenzObservation;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.PulseHeartBeatObservation;
 import org.hl7.fhir.r4.model.Observation;
 
-import java.time.ZonedDateTime;
 import java.util.Optional;
 
-public class HerzfrequenzObservationConverter extends ObservationToObservationConverter<HerzfrequenzObservation> {
+public class HerzfrequenzObservationConverter extends ObservationToObservationConverter<PulseHeartBeatObservation> {
 
     @Override
-    protected HerzfrequenzObservation convertInternal(Observation resource) {
-        HerzfrequenzObservation herzfrequenzObservation = new HerzfrequenzObservation();
-        getValue(resource).ifPresent(herzfrequenzObservation::setFrequenzMagnitude);
-        getUnit(resource).ifPresent(herzfrequenzObservation::setFrequenzUnits);
+    protected PulseHeartBeatObservation convertInternal(Observation resource) {
+        PulseHeartBeatObservation herzfrequenzObservation = new PulseHeartBeatObservation();
+        getValue(resource).ifPresent(herzfrequenzObservation::setRateMagnitude);
+        getUnit(resource).ifPresent(herzfrequenzObservation::setRateUnits);
         return herzfrequenzObservation;
     }
 

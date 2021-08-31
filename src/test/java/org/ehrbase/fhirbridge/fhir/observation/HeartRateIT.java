@@ -1,12 +1,10 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation.ClinicalTrialParticipationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HerzfrequenzCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.GECCOStudienteilnahmeComposition;
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.HerzfrequenzComposition;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.HerzfrequenzObservation;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.PulseHeartBeatObservation;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.RegisterEntryCategoryElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -24,40 +22,29 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HeartRateIT extends AbstractMappingTestSetupIT {
 
-
     public HeartRateIT() {
         super("Observation/HeartRate/", Observation.class);
     }
 
 
     @Test
-    void create() throws IOException {
+    void createHeartRate() throws IOException {
         create("create-heart-rate.json");
     }
 
+    // #####################################################################################
+    // check payload
+
     @Test
-    void mappingCreateHeartRate() throws  IOException {
-        testMapping("create-heart-rate.json",
-                "paragon-create-heart-rate.json");
+    void testHeartRateMagnitudeMin() throws  IOException {
+        testMapping("create-heart-rate_magnitude-min.json",
+                "paragon-heart-rate_magnitude-min.json");
     }
 
     @Test
-    void mappingCreateHeartRateDateTime() throws  IOException {
-        testMapping("create-heart-rate-loinc-datetime.json",
-                "paragon-create-heart-rate-loinc-datetime.json");
-    }
-
-    @Test
-    void mappingCreateHeartRatePeriod1() throws  IOException {
-        testMapping("create-heart-rate-loinc-period.json",
-                "paragon-create-heart-rate-loinc-period.json");
-    }
-
-
-    @Test
-    void mappingCreateHeartRatePeriod2() throws  IOException {
-        testMapping("create-heart-rate-loinc-period_2.json",
-                "paragon-create-heart-rate-loinc-period_2.json");
+    void testHeartRateMagnitudeMax() throws  IOException {
+        testMapping("create-heart-rate_magnitude-max.json",
+                "paragon-heart-rate_magnitude-max.json");
     }
 
     // #####################################################################################
@@ -68,14 +55,15 @@ public class HeartRateIT extends AbstractMappingTestSetupIT {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(HerzfrequenzComposition.class, List.of("location", "feederAudit")))
-                .registerValueObject(HerzfrequenzObservation.class)
+                .registerValueObject(PulseHeartBeatObservation.class)
+                .registerValueObject(RegisterEntryCategoryElement.class)
                 .build();
     }
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(UnprocessableEntityException.class, () ->
+        return assertThrows(Exception.class, () ->
                 new HerzfrequenzCompositionConverter().convert(obs)
         );
     }
