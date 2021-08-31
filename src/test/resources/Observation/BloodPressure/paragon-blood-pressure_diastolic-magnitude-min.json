@@ -192,7 +192,7 @@
             "value" : {
               "_type" : "DV_QUANTITY",
               "units" : "mm[Hg]",
-              "magnitude" : 0.0
+              "magnitude" : 1.0
             },
             "archetype_node_id" : "at0005"
           } ],
