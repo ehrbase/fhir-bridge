@@ -4,10 +4,9 @@ import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.fio2.FiO2CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu.PatientInIcuCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.BeatmungswerteComposition;
+import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeatmungswerteKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeobachtungenAmBeatmungsgeraetObservation;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.EingeatmeterSauerstoffCluster;
-import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.PatientAufICUComposition;
-import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.PatientAufDerIntensivstationObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -34,11 +33,23 @@ public class FioIT extends AbstractMappingTestSetupIT {
         create("create-fio2.json");
     }
 
+    // #####################################################################################
+    // check payload
+
     @Test
-    void mappingPatientInIcu() throws IOException {
-        testMapping("create-fio2.json",
-                "paragon-create-fio2.json");
+    void testFioMagnitudeMin() throws IOException {
+        testMapping("create-fio2_magnitude-min.json",
+                "paragon-fio2_magnitude-min.json");
     }
+
+    @Test
+    void testFioMagnitudeMax() throws IOException {
+        testMapping("create-fio2_magnitude-max.json",
+                "paragon-fio2_magnitude-max.json");
+    }
+
+    // #####################################################################################
+    // default
 
     @Override
     public Javers getJavers() {
@@ -47,6 +58,7 @@ public class FioIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(new ValueObjectDefinition(BeatmungswerteComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(BeobachtungenAmBeatmungsgeraetObservation.class)
                 .registerValueObject(EingeatmeterSauerstoffCluster.class)
+                .registerValueObject(BeatmungswerteKategorieElement.class)
                 .build();
     }
 

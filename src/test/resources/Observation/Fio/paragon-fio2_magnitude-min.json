@@ -2,14 +2,14 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Entlassungsdaten"
+    "value" : "Beatmungswerte"
   },
   "archetype_details" : {
     "archetype_id" : {
       "value" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
     },
     "template_id" : {
-      "value" : "GECCO_Entlassungsdaten"
+      "value" : "Beatmungswerte"
     },
     "rm_version" : "1.0.4"
   },
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1/_history/1",
+      "id" : "Observation/f220863a-5d7f-4f79-99d1-6c2d55ccc44d/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -60,7 +60,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2020-10-16T08:49:21+02:00"
+      "value" : "2020-09-21T00:00:00+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -99,15 +99,48 @@
           }
         },
         "archetype_node_id" : "at0004"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "26436-6"
+        },
+        "archetype_node_id" : "at0005"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "laboratory"
+        },
+        "archetype_node_id" : "at0005"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "18767-4"
+        },
+        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
     }
   },
   "content" : [ {
-    "_type" : "ADMIN_ENTRY",
+    "_type" : "OBSERVATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Entlassungsart"
+      "value" : "Beobachtungen am Beatmungsgerät"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -128,35 +161,63 @@
     "subject" : {
       "_type" : "PARTY_SELF"
     },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
+    },
     "data" : {
-      "_type" : "ITEM_TREE",
       "name" : {
         "_type" : "DV_TEXT",
-        "value" : "Tree"
+        "value" : "Event Series"
       },
-      "items" : [ {
-        "_type" : "ELEMENT",
+      "origin" : {
+        "_type" : "DV_DATE_TIME",
+        "value" : "2020-09-21T00:00:00+02:00"
+      },
+      "events" : [ {
+        "_type" : "POINT_EVENT",
         "name" : {
           "_type" : "DV_TEXT",
-          "value" : "Art der Entlassung"
+          "value" : "Jedes Ereignis"
         },
-        "value" : {
-          "_type" : "DV_CODED_TEXT",
-          "value" : "Patient discharged alive (finding)",
-          "defining_code" : {
-            "_type" : "CODE_PHRASE",
-            "terminology_id" : {
-              "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED-CT"
+        "time" : {
+          "_type" : "DV_DATE_TIME",
+          "value" : "2020-09-21T00:00:00+02:00"
+        },
+        "data" : {
+          "_type" : "ITEM_TREE",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Tree"
+          },
+          "items" : [ {
+            "_type" : "CLUSTER",
+            "name" : {
+              "_type" : "DV_TEXT",
+              "value" : "Eingeatmeter Sauerstoff"
             },
-            "code_string" : "371827001"
-          }
+            "items" : [ {
+              "_type" : "ELEMENT",
+              "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Inspiratorische Sauerstofffraktion"
+              },
+              "value" : {
+                "_type" : "DV_PROPORTION",
+                "numerator" : 0.0,
+                "denominator" : 100.0,
+                "type" : 2
+              },
+              "archetype_node_id" : "at0053"
+            } ],
+            "archetype_node_id" : "openEHR-EHR-CLUSTER.inspired_oxygen.v1"
+          } ],
+          "archetype_node_id" : "at0003"
         },
-        "archetype_node_id" : "at0040"
+        "archetype_node_id" : "at0002"
       } ],
       "archetype_node_id" : "at0001"
     },
-    "archetype_node_id" : "openEHR-EHR-ADMIN_ENTRY.discharge_summary.v0"
+    "archetype_node_id" : "openEHR-EHR-OBSERVATION.ventilator_vital_signs.v0"
   } ],
   "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
 }
