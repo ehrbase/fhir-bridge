@@ -72,7 +72,7 @@ workflows:
                 filters:
                     branches:
                         ignore: gh-pages
-            
+
             - IMMUNIZATION-tests:
                 context: org-global
                 requires:
@@ -88,7 +88,7 @@ workflows:
                 filters:
                     branches:
                         ignore: gh-pages
-            
+
             - OBSERVATION-tests:
                 context: org-global
                 requires:
@@ -96,7 +96,7 @@ workflows:
                 filters:
                     branches:
                         ignore: gh-pages
-            
+
             - PROCEDURE-tests:
                 context: org-global
                 requires:
@@ -104,7 +104,7 @@ workflows:
                 filters:
                     branches:
                         ignore: gh-pages
-            
+
             - QUESTIONAIRE-tests:
                 context: org-global
                 requires:
@@ -222,7 +222,7 @@ jobs:
             - save-fhirbridge-workspace
             - sonarcloud/scan:
                 cache_version: 2
-    
+
 
     BUNDLE-tests:
         description: |
@@ -242,7 +242,7 @@ jobs:
                 # pabot-split: "--testlevelsplit"
                 pabot-split: ""
             - save-fhirbridge-robot-test-results
-    
+
     CONDITION-tests:
         description: |
             todo
@@ -452,7 +452,7 @@ jobs:
                       mvn spring-boot:build-image -Dspring-boot.build-image.imageName=ehrbase/fhir-bridge:$TAG -Dmaven.test.skip
                       docker tag ehrbase/fhir-bridge ehrbase/fhir-bridge:$TAG
                       docker push ehrbase/fhir-bridge:$TAG
-            
+
 
 #    deploy-testdocs-githup-pages:
 #        description: |
@@ -548,7 +548,7 @@ commands:
             skip-jacoco:
                 description: Skip Jacoco's Code Instrumentation For Coverage Analysis
                 type: boolean
-                default: true 
+                default: true
             skip-tests:
                 description: Do Not Compile And Do Not Run Test Code
                 type: boolean
@@ -974,9 +974,9 @@ executors:
               environment:
                 POSTGRES_USER: postgres
                 POSTGRES_PASSWORD: postgres
-            # - image: postgres:11.5-alpine
-            #   name: fhirdb
-            #   environment:
-            #     POSTGRES_USER: fhir_bridge
-            #     POSTGRES_PASSWORD: fhir_bridge
+            - image: minio/minio
+              environment:
+                  MINIO_ROOT_USER: minio
+                  MINIO_ROOT_PASSWORD: minio123456
+              command: server /data --console-address ":9001"
         # resource_class: large
