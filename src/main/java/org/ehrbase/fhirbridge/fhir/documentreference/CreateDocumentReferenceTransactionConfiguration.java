@@ -28,7 +28,7 @@ public class CreateDocumentReferenceTransactionConfiguration extends FhirTransac
                 "Create DocumentReference",
                 false,
                 null,
-                null,
+                new CreateDocumentReferenceAuditStrategy(),
                 FhirVersionEnum.R4,
                 new CreateDocumentReferenceProvider(),
                 null,

@@ -27,7 +27,6 @@ import org.ehrbase.fhirbridge.ehr.opt.hipdocumentcomposition.definition.HipMetad
 import org.ehrbase.fhirbridge.ehr.opt.hipdocumentcomposition.definition.HipMetadataIdentifikatorElement;
 import org.ehrbase.fhirbridge.ehr.opt.hipdocumentcomposition.definition.MediendateiCluster;
 import org.hl7.fhir.r4.model.Attachment;
-import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DocumentReference;
 
@@ -85,16 +84,15 @@ public class DocumentReferenceToHipDocumentConverter extends CompositionConverte
     }
 
     private Optional<String> getType(DocumentReference documentReference) {
-        if (!documentReference.hasType() || (!documentReference.getType().hasCoding() && !documentReference.getType().hasText())) {
+        if (!documentReference.hasType() || !documentReference.getType().hasCoding()) {
             return Optional.empty();
         }
 
-        CodeableConcept type = documentReference.getType();
-        if (type.hasCoding() && type.getCodingFirstRep().hasCode()) {
-            Coding coding = type.getCodingFirstRep();
-            return Optional.of(coding.getCode());
-        } else if (type.hasText()) {
-            return Optional.of(type.getText());
+        Coding coding = documentReference.getType().getCodingFirstRep();
+        if (coding.hasDisplay()) {
+            return Optional.of(coding.getDisplay());
+        } else if (coding.hasSystem() && coding.hasCode()) {
+            return Optional.of(coding.getSystem() + "|" + coding.getCode());
         } else {
             return Optional.empty();
         }

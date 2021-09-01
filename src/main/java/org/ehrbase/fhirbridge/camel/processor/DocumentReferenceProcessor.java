@@ -16,9 +16,13 @@
 
 package org.ehrbase.fhirbridge.camel.processor;
 
+import ca.uhn.fhir.rest.api.MethodOutcome;
+import io.minio.ObjectWriteResponse;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.minio.MinioService;
+import org.hl7.fhir.r4.model.Attachment;
 import org.hl7.fhir.r4.model.DocumentReference;
 import org.springframework.stereotype.Component;
 
@@ -37,10 +41,10 @@ public class DocumentReferenceProcessor implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        var documentReference = exchange.getIn().getMandatoryBody(DocumentReference.class);
-        var attachment = documentReference.getContentFirstRep().getAttachment();
+        DocumentReference documentReference = exchange.getIn().getMandatoryBody(DocumentReference.class);
+        Attachment attachment = documentReference.getContentFirstRep().getAttachment();
 
-        var response = minioService.uploadObject(new ByteArrayInputStream(attachment.getData()),
+        ObjectWriteResponse response = minioService.uploadObject(new ByteArrayInputStream(attachment.getData()),
                 attachment.getContentType());
 
         if (!attachment.hasSize()) {
@@ -48,5 +52,11 @@ public class DocumentReferenceProcessor implements Processor {
         }
         attachment.setUrl(minioService.getObjectUrl(response.object()));
         attachment.setData(null);
+
+        exchange.getMessage().setHeader(CamelConstants.MINIO_OBJECT, response.object());
+
+        MethodOutcome outcome = new MethodOutcome()
+                .setResource(documentReference);
+        exchange.setProperty(CamelConstants.OUTCOME, outcome);
     }
 }
