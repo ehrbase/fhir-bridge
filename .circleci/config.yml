@@ -279,6 +279,24 @@ jobs:
                   pabot-split: ""
             - save-fhirbridge-robot-test-results
 
+    DOCUMENTREFERENCE-tests:
+        description: |
+            todo
+        executor: docker-py3-java11-postgres
+        steps:
+            - checkout
+            - install-maven
+            - restore-fhirbridge-workspace
+            - start-ehrbase-server
+            - start-fhirbridge-application
+            - run-robot-integration-tests:
+                  include-tags: "document-reference"
+                  test-suite-path: "DOCUMENTREFERENCE"
+                  test-suite-name: "DOCUMENTREFERENCE"
+                  runner: robot
+                  pabot-split: ""
+            - save-fhirbridge-robot-test-results
+
     DIAGNOSTIC-tests:
         description: |
             todo
