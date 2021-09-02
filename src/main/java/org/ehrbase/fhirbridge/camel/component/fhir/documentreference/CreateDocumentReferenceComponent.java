@@ -14,27 +14,16 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel;
+package org.ehrbase.fhirbridge.camel.component.fhir.documentreference;
 
-/**
- * Constants used by the FHIR Bridge.
- *
- * @since 1.0.0
- */
-public final class CamelConstants {
+import org.ehrbase.fhirbridge.fhir.documentreference.CreateDocumentReferenceTransactionConfiguration;
+import org.openehealth.ipf.commons.ihe.fhir.audit.GenericFhirAuditDataset;
+import org.openehealth.ipf.platform.camel.ihe.fhir.core.custom.CustomFhirComponent;
 
-    public static final String MINIO_OBJECT = "CamelMinioObject";
+@SuppressWarnings("java:S110")
+public class CreateDocumentReferenceComponent extends CustomFhirComponent<GenericFhirAuditDataset> {
 
-    public static final String COMPOSITION_ID = "CamelFhirBridgeCompositionId";
-
-    public static final String OUTCOME = "CamelFhirBridgeOutcome";
-
-    public static final String PATIENT_ID = "CamelFhirPatientId";
-
-    public static final String PROFILE = "CamelFhirBridgeProfile";
-
-    public static final String RESOURCE_ID = "FhirBridgeResourceId";
-
-    private CamelConstants() {
+    public CreateDocumentReferenceComponent() {
+        super(new CreateDocumentReferenceTransactionConfiguration());
     }
 }

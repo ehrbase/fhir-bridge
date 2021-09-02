@@ -14,27 +14,11 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel;
+package org.ehrbase.fhirbridge.minio;
 
-/**
- * Constants used by the FHIR Bridge.
- *
- * @since 1.0.0
- */
-public final class CamelConstants {
+public class MinioException extends RuntimeException {
 
-    public static final String MINIO_OBJECT = "CamelMinioObject";
-
-    public static final String COMPOSITION_ID = "CamelFhirBridgeCompositionId";
-
-    public static final String OUTCOME = "CamelFhirBridgeOutcome";
-
-    public static final String PATIENT_ID = "CamelFhirPatientId";
-
-    public static final String PROFILE = "CamelFhirBridgeProfile";
-
-    public static final String RESOURCE_ID = "FhirBridgeResourceId";
-
-    private CamelConstants() {
+    public MinioException(String message, Throwable cause) {
+        super(message, cause);
     }
 }
