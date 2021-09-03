@@ -67,5 +67,14 @@ services:
       - elasticsearch
     networks:
       - ehrbase-network
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123456
+    command: server /data --console-address ":9001"
 networks:
   ehrbase-network: { }
