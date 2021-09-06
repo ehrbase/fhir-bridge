@@ -1,6 +1,6 @@
 {
   "resourceType": "Observation",
-  "id": "example-observation-bladder-temperature",
+  "id": "162918dc-dc70-4767-a6d5-34c7d67e280a",
   "meta": {
     "profile":  [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-temperature"
@@ -42,19 +42,9 @@
         "display": "Body temperature"
       },
       {
-        "system": "http://loinc.org",
-        "code": "8334-5",
-        "display": "Body temperature - Urinary bladder"
-      },
-      {
         "system": "http://snomed.info/sct",
         "code": "386725007",
         "display": "Body temperature (observable entity)"
-      },
-      {
-        "system": "http://snomed.info/sct",
-        "code": "698832009",
-        "display": "Core body temperature measured at urinary bladder (observable entity)"
       }
     ],
     "text": "Body temperature"
@@ -65,20 +55,11 @@
       "value": "{{patientId}}"
     }
   },
-  "effectiveDateTime": "2021-04-14",
+  "effectiveDateTime": "2020-09-25",
   "valueQuantity": {
-    "value": 36.8,
+    "value": 99,
     "unit": "°C",
     "system": "http://unitsofmeasure.org",
     "code": "Cel"
-  },
-  "bodySite": {
-    "coding":  [
-      {
-        "system": "http://snomed.info/sct",
-        "code": "89837001",
-        "display": "Urinary bladder structure (body structure)"
-      }
-    ]
   }
 }
