@@ -10,25 +10,25 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-18T17:12:11.980675600+02:00",
+    date = "2021-09-06T14:20:39.057858+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class GeccoKoerpertemperaturKategorieElement implements LocatableEntity {
+public class RegistereintragKategorieElement implements LocatableEntity {
   /**
-   * Path: GECCO_Koerpertemperatur/context/Kategorie
+   * Path: Registereintrag/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/value|defining_code")
   private KategorieDefiningCode value;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/Baum/Kategorie/null_flavour
+   * Path: Registereintrag/context/Baum/Kategorie/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/feeder_audit
+   * Path: Registereintrag/context/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
