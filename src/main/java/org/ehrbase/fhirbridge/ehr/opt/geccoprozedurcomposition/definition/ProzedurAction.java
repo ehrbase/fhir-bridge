@@ -19,12 +19,12 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 @Archetype("openEHR-EHR-ACTION.procedure.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-01T12:17:24.146662+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-09-06T16:23:11.803250+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProzedurAction implements EntryEntity {
   /**
-   * Path: GECCO_Prozedur/Prozedur/Name der Prozedur
+   * Path: Registereintrag/Prozedur/Name der Prozedur
    * Description: Identifizierung der Prozedur über den Namen.
    * Comment: Wenn möglich wird die Kodierung der spezifischen Prozedur mit einer Terminologie bevorzugt.
    */
@@ -32,13 +32,13 @@ public class ProzedurAction implements EntryEntity {
   private NameDerProzedurDefiningCode nameDerProzedurDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Tree/Name der Prozedur/null_flavour
+   * Path: Registereintrag/Prozedur/Tree/Name der Prozedur/null_flavour
    */
   @Path("/description[at0001]/items[at0002]/null_flavour|defining_code")
   private NullFlavour nameDerProzedurNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Indikation
+   * Path: Registereintrag/Prozedur/Indikation
    * Description: Der klinische oder prozessbezogene Grund für die Prozedur.
    * Comment: Die Kodierung der Indikation mit einer Terminologie wird nach Möglichkeit bevorzugt. Dieses Datenelement ermöglicht mehrere Vorkommen. Zum Beispiel: "Fehlgeschlagenen Darmvorbereitung" oder "Darmkrebsvorsorge".
    */
@@ -46,7 +46,7 @@ public class ProzedurAction implements EntryEntity {
   private List<ProzedurIndikationElement> indikation;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Körperstelle
+   * Path: Registereintrag/Prozedur/Körperstelle
    * Description: Anatomische Lokalisation, an der die Prozedur durchgeführt wird.
    * Comment: Das Vorkommen dieses Datenelements ist nicht eingeschränkt. Dies ermöglicht die Darstellung von klinischen Situationen, in denen alle Eigenschaften, ausgenommen die anatomische Lokalisation, identisch sind, wie z.B. das Entfernen mehrerer Hautläsionen an verschiedenen Stellen. Verwenden Sie dieses Datenelement, um einfache Begriffe oder präkoordinierte anatomische Lokalisationen aufzunehmen. Wenn die Anforderungen an die Erfassung der anatomischen Lokalisation zur Laufzeit durch die Anwendung festgelegt werden oder komplexere Modellierungen wie z.B. die relative Lokalisation erforderlich sind, verwenden Sie entweder CLUSTER.anatomical_location oder CLUSTER.relative_location innerhalb des Slots "Details zur Prozedur" in diesem Archetyp. Wird die anatomische Lokalisation über vordefinierte Codes in den Namen der Prozedur aufgenommen, wird dieses Datenelement redundant.
    */
@@ -54,13 +54,13 @@ public class ProzedurAction implements EntryEntity {
   private KoerperstelleDefiningCode koerperstelleDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Tree/Körperstelle/null_flavour
+   * Path: Registereintrag/Prozedur/Tree/Körperstelle/null_flavour
    */
   @Path("/description[at0001]/items[at0063]/null_flavour|defining_code")
   private NullFlavour koerperstelleNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Medizingerät
+   * Path: Registereintrag/Prozedur/Medizingerät
    * Description: Ein Instrument, ein Gerät, ein Implantat, ein Material oder ähnliches, das für die Bereitstellung von Gesundheitsleistungen verwendet wird. In diesem Zusammenhang umfasst ein medizinisches Gerät eine breite Palette von Geräten, die auf verschiedene physikalische, mechanische, thermische oder ähnliche Weise wirken, schließt jedoch insbesondere Geräte aus, die auf medizinischem Wege wirken, wie zum Beispiel pharmakologische, metabolische oder immunologische Methoden. Der Geltungsbereich umfasst
    * Einweggeräte sowie langlebige oder dauerhafte Geräte, die nachverfolgt,
    * gewartet oder regelmäßig kalibriert werden müssen, wobei zu berücksichtigen ist, dass für jeden Gerätetyp bestimmte Datenaufzeichnungsanforderungen gelten.
@@ -69,14 +69,14 @@ public class ProzedurAction implements EntryEntity {
   private List<MedizingeraetCluster> medizingeraet;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Multimedia
+   * Path: Registereintrag/Prozedur/Multimedia
    * Description: Multimediale Darstellung der durchgeführten Prozedur.
    */
   @Path("/description[at0001]/items[at0062]")
   private List<Cluster> multimedia;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Art der Prozedur
+   * Path: Registereintrag/Prozedur/Art der Prozedur
    * Description: Die Art der Prozedur.
    * Comment: Dieses pragmatische Datenelement kann zur Unterstützung der Gliederung für die Benutzeroberfläche verwendet werden.
    */
@@ -84,13 +84,13 @@ public class ProzedurAction implements EntryEntity {
   private KategorieDefiningCode artDerProzedurDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Tree/Art der Prozedur/null_flavour
+   * Path: Registereintrag/Prozedur/Tree/Art der Prozedur/null_flavour
    */
   @Path("/description[at0001]/items[at0067]/null_flavour|defining_code")
   private NullFlavour artDerProzedurNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Durchführungsabsicht
+   * Path: Registereintrag/Prozedur/Durchführungsabsicht
    * Description: Grund, warum die angegebene Aktivität für diese Prozedur durchgeführt wurde.
    * Comment: Zum Beispiel: der Grund für den Abbruch oder die Unterbrechung der Prozedur.
    */
@@ -98,40 +98,40 @@ public class ProzedurAction implements EntryEntity {
   private String durchfuehrungsabsichtValue;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Tree/Durchführungsabsicht/null_flavour
+   * Path: Registereintrag/Prozedur/Tree/Durchführungsabsicht/null_flavour
    */
   @Path("/description[at0001]/items[at0014 and name/value='Durchführungsabsicht']/null_flavour|defining_code")
   private NullFlavour durchfuehrungsabsichtNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Kommentar
+   * Path: Registereintrag/Prozedur/Kommentar
    * Description: Zusätzliche Beschreibung der Aktivität oder der "Pathway"-Verlaufsschritte, die in anderen Bereichen nicht erfasst wurden.
    */
   @Path("/description[at0001]/items[at0005]/value|value")
   private String kommentarValue;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Tree/Kommentar/null_flavour
+   * Path: Registereintrag/Prozedur/Tree/Kommentar/null_flavour
    */
   @Path("/description[at0001]/items[at0005]/null_flavour|defining_code")
   private NullFlavour kommentarNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Antragsteller
+   * Path: Registereintrag/Prozedur/Antragsteller
    * Description: Angaben über den Gesundheitsdienstleister oder die Organisation, die die Leistung anfordert.
    */
   @Path("/protocol[at0053]/items[at0055]")
   private Cluster antragsteller;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Empfänger
+   * Path: Registereintrag/Prozedur/Empfänger
    * Description: Angaben über den Gesundheitsdienstleister oder die Organisation, die die Leistungsanforderung erhält.
    */
   @Path("/protocol[at0053]/items[at0057]")
   private List<Cluster> empfaenger;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Erweiterung
+   * Path: Registereintrag/Prozedur/Erweiterung
    * Description: Zusätzliche Informationen, die erforderlich sind, um lokale Inhalte zu erfassen oder mit anderen Referenzmodellen/Formalismen abzugleichen.
    * Comment: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR- oder CIMI-Äquivalente.
    */
@@ -139,43 +139,43 @@ public class ProzedurAction implements EntryEntity {
   private List<Cluster> erweiterung;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/subject
+   * Path: Registereintrag/Prozedur/subject
    */
   @Path("/subject")
   private PartyProxy subject;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/language
+   * Path: Registereintrag/Prozedur/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/feeder_audit
+   * Path: Registereintrag/Prozedur/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/time
+   * Path: Registereintrag/Prozedur/time
    */
   @Path("/time|value")
   private TemporalAccessor timeValue;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/ism_transition/Careflow_step
+   * Path: Registereintrag/Prozedur/ism_transition/Careflow_step
    */
   @Path("/ism_transition/careflow_step|defining_code")
   private CareflowStepDefiningCode careflowStepDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/ism_transition/Current_state
+   * Path: Registereintrag/Prozedur/ism_transition/Current_state
    */
   @Path("/ism_transition/current_state|defining_code")
   private CurrentStateDefiningCode currentStateDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/ism_transition/transition
+   * Path: Registereintrag/Prozedur/ism_transition/transition
    */
   @Path("/ism_transition/transition|defining_code")
   private Transition transitionDefiningCode;

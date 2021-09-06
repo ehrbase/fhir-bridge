@@ -4,11 +4,7 @@ import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.GECCOProzedurComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeccoProzedurKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.MedizingeraetCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NichtDurchgefuehrteProzedurEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.UnbekannteProzedurEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Procedure;
 import org.javers.core.Javers;
@@ -96,7 +92,6 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
         testMapping("mapping/respiratory-therapies-example-6.json", "mapping/respiratory-therapies-example-6-result.json");
     }
 
-
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Procedure procedure = (Procedure) super.testFileLoader.loadResource(resourcePath);
         TherapyCompositionConverter therapyCompositionConverter = new TherapyCompositionConverter();
@@ -139,7 +134,7 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
                 .registerValueObject((ProzedurAction.class))
                 .registerValueObject((NichtDurchgefuehrteProzedurEvaluation.class))
                 .registerValueObject((UnbekannteProzedurEvaluation.class))
-                .registerValueObject((GeccoProzedurKategorieElement.class))
+                .registerValueObject((RegistereintragKategorieElement.class))
                 .registerValueObject((MedizingeraetCluster.class))
                 .build();
     }

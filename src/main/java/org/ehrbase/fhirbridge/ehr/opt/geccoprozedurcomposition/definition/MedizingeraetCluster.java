@@ -14,12 +14,12 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.device.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-01T12:17:24.214022+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-09-06T16:23:11.822507+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class MedizingeraetCluster implements LocatableEntity {
   /**
-   * Path: GECCO_Prozedur/Prozedur/Medizingerät/Gerätename
+   * Path: Registereintrag/Prozedur/Medizingerät/Gerätename
    * Description: Identifizierung des Medizingerätes, bevorzugt durch einen allgemein
    * gebräuchlichen Namen, einer formellen und vollständig beschreibenden Bezeichnung oder falls notwendig anhand einer Klasse oder Kategorie des Gerätes.
    * Comment: Dieses Datenelement erfasst den Begriff, die Phrase oder die Kategorie, die in der klinischen Praxis verwendet werden. Zum Beispiel: <Markenname> <Maschine> (XYZ-Audiometer); <Markenname> (14G Jelco IV-Katheter); oder <Markenname / Typ> <Implantat>. Die Codierung mit einer Terminologie ist nach Möglichkeit wünschenswert, auch wenn dies lokal sein kann und von den verfügbaren lokalen Lieferungen abhängt.
@@ -28,20 +28,20 @@ public class MedizingeraetCluster implements LocatableEntity {
   private GeraetenameDefiningCode geraetenameDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Tree/Medizingerät/Gerätename/null_flavour
+   * Path: Registereintrag/Prozedur/Tree/Medizingerät/Gerätename/null_flavour
    */
   @Path("/items[at0001]/null_flavour|defining_code")
   private NullFlavour geraetenameNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Medizingerät/Eigenschaften
+   * Path: Registereintrag/Prozedur/Medizingerät/Eigenschaften
    * Description: Weitere Details zu bestimmten Eigenschaften des Medizingerätes.
    */
   @Path("/items[at0009]")
   private List<Cluster> eigenschaften;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Medizingerät/Geräteverwaltung
+   * Path: Registereintrag/Prozedur/Medizingerät/Geräteverwaltung
    * Description: Weitere Details zur Verwaltung und Wartung des Geräts.
    * Comment: Zum Beispiel: Eigentümer, Kontaktdaten, Standort, Netzwerkadresse, Ersetzungsdatum, Kalibrierungsdetails usw.
    */
@@ -49,14 +49,14 @@ public class MedizingeraetCluster implements LocatableEntity {
   private List<Cluster> geraeteverwaltung;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Medizingerät/Komponenten
+   * Path: Registereintrag/Prozedur/Medizingerät/Komponenten
    * Description: Zusätzliche strukturierte Informationen zu identifizierten Komponenten des Geräts.
    */
   @Path("/items[at0018]")
   private List<Cluster> komponenten;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Medizingerät/Erweiterung
+   * Path: Registereintrag/Prozedur/Medizingerät/Erweiterung
    * Description: Zusätzliche Informationen, die zur Erfassung des lokalen Kontexts oder
    * zur Angleichung an andere Referenzmodelle/Formalismen erforderlich sind.
    */
@@ -64,7 +64,7 @@ public class MedizingeraetCluster implements LocatableEntity {
   private List<Cluster> erweiterung;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Medizingerät/Multimedia
+   * Path: Registereintrag/Prozedur/Medizingerät/Multimedia
    * Description: Digitale Repräsentation des Gerätes.
    * Comment: Zum Beispiel: ein technisches Diagramm eines Geräts oder ein digitales Bild.
    */
@@ -72,7 +72,7 @@ public class MedizingeraetCluster implements LocatableEntity {
   private List<Cluster> multimedia;
 
   /**
-   * Path: GECCO_Prozedur/Prozedur/Medizingerät/feeder_audit
+   * Path: Registereintrag/Prozedur/Medizingerät/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;

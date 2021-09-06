@@ -17,12 +17,12 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.absence.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-01T12:17:24.438422+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-09-06T16:23:11.852486+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class UnbekannteProzedurEvaluation implements EntryEntity {
   /**
-   * Path: GECCO_Prozedur/Unbekannte Prozedur/Unbekannte Prozedur
+   * Path: Registereintrag/Unbekannte Prozedur/Unbekannte Prozedur
    * Description: Positive Aussage, dass keine Informationen verfügbar sind.
    * Comment: Zum Beispiel: "Es liegen keine Informationen über Nebenwirkungen vor"; "Es liegen keine Informationen über Probleme oder Diagnosen vor"; "Es liegen keine Informationen über vorangegangene Verfahren vor"; oder "Es liegen keine Informationen über verwendete Medikamente vor".
    */
@@ -30,13 +30,13 @@ public class UnbekannteProzedurEvaluation implements EntryEntity {
   private NameDerProzedurDefiningCode unbekannteProzedurDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Unbekannte Prozedur/Baum/Unbekannte Prozedur/null_flavour
+   * Path: Registereintrag/Unbekannte Prozedur/Baum/Unbekannte Prozedur/null_flavour
    */
   @Path("/data[at0001]/items[at0002 and name/value='Unbekannte Prozedur']/null_flavour|defining_code")
   private NullFlavour unbekannteProzedurNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Unbekannte Prozedur/Aussage über die fehlende Information
+   * Path: Registereintrag/Unbekannte Prozedur/Aussage über die fehlende Information
    * Description: Beschreibung des Grundes, warum keine Informationen vorhanden sind.
    * Comment: Zum Beispiel: Der Patient ist bewusstlos oder weigert sich Informationen preiszugeben. Die Codierung mit einer Terminologie wird empfohlen, wenn möglich.
    */
@@ -44,13 +44,13 @@ public class UnbekannteProzedurEvaluation implements EntryEntity {
   private String aussageUeberDieFehlendeInformationValue;
 
   /**
-   * Path: GECCO_Prozedur/Unbekannte Prozedur/Baum/Aussage über die fehlende Information/null_flavour
+   * Path: Registereintrag/Unbekannte Prozedur/Baum/Aussage über die fehlende Information/null_flavour
    */
   @Path("/data[at0001]/items[at0005 and name/value='Aussage über die fehlende Information']/null_flavour|defining_code")
   private NullFlavour aussageUeberDieFehlendeInformationNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Prozedur/Unbekannte Prozedur/Erweiterung
+   * Path: Registereintrag/Unbekannte Prozedur/Erweiterung
    * Description: Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.
    * Comment: Kommentar: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.
    */
@@ -58,19 +58,19 @@ public class UnbekannteProzedurEvaluation implements EntryEntity {
   private List<Cluster> erweiterung;
 
   /**
-   * Path: GECCO_Prozedur/Unbekannte Prozedur/subject
+   * Path: Registereintrag/Unbekannte Prozedur/subject
    */
   @Path("/subject")
   private PartyProxy subject;
 
   /**
-   * Path: GECCO_Prozedur/Unbekannte Prozedur/language
+   * Path: Registereintrag/Unbekannte Prozedur/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: GECCO_Prozedur/Unbekannte Prozedur/feeder_audit
+   * Path: Registereintrag/Unbekannte Prozedur/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;

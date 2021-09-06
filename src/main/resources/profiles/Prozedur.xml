@@ -1,7 +1,9 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="Profile-MII-Procedure-Prozedur" />
   <url value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure" />
-  <version value="1.0" />
-  <name value="Prozedur" />
+  <version value="2.0.0" />
+  <name value="Profile_MII_ProcedureProzedur" />
+  <title value="Profile - MI-I - Procedure - Prozedur" />
   <status value="active" />
   <description value="Dieses Profil beschreibt eine Prozedur in der Medizininformatik-Initiative." />
   <fhirVersion value="4.0.1" />
@@ -250,12 +252,6 @@
       </mapping>
     </element>
     <element id="Procedure.meta.versionId">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.meta.versionId" />
       <short value="Version specific identifier" />
       <definition value="The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted." />
@@ -286,12 +282,6 @@
       </mapping>
     </element>
     <element id="Procedure.meta.lastUpdated">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.meta.lastUpdated" />
       <short value="When the resource version last changed" />
       <definition value="When the resource last changed - e.g. when the version changed." />
@@ -322,12 +312,6 @@
       </mapping>
     </element>
     <element id="Procedure.meta.source">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.meta.source" />
       <short value="Identifies where the resource comes from" />
       <definition value="A uri that identifies the source system of the resource. This provides a minimal amount of [Provenance](provenance.html#) information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc." />
@@ -359,12 +343,6 @@
       </mapping>
     </element>
     <element id="Procedure.meta.profile">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.meta.profile" />
       <short value="Profiles this resource claims to conform to" />
       <definition value="A list of profiles (references to [StructureDefinition](structuredefinition.html#) resources) that this resource claims to conform to. The URL is a reference to [StructureDefinition.url](structuredefinition-definitions.html#StructureDefinition.url)." />
@@ -512,12 +490,6 @@
       </mapping>
     </element>
     <element id="Procedure.implicitRules">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.implicitRules" />
       <short value="A set of rules under which this content was created" />
       <definition value="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc." />
@@ -550,12 +522,6 @@
       </mapping>
     </element>
     <element id="Procedure.language">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.language" />
       <short value="Language of the resource content" />
       <definition value="The base language in which the resource is written." />
@@ -729,7 +695,7 @@
         <map value="N/A" />
       </mapping>
     </element>
-    <element id="Procedure.extension:recordedDate">
+    <element id="Procedure.extension:Dokumentationsdatum">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -737,7 +703,7 @@
         <valueCode value="4.0.0" />
       </extension>
       <path value="Procedure.extension" />
-      <sliceName value="recordedDate" />
+      <sliceName value="Dokumentationsdatum" />
       <short value="Dokumentationsdatum der Prozedur" />
       <definition value="Dokumentationsdatum der Prozedur, falls abweichend vom Durchführungsdatum" />
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
@@ -752,7 +718,7 @@
       </base>
       <type>
         <code value="Extension" />
-        <profile value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/procedure-recordedDate" />
+        <profile value="http://fhir.de/StructureDefinition/ProzedurDokumentationsdatum" />
       </type>
       <condition value="ele-1" />
       <constraint>
@@ -959,12 +925,6 @@
       </mapping>
     </element>
     <element id="Procedure.instantiatesCanonical">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.instantiatesCanonical" />
       <short value="Instantiates FHIR protocol or definition" />
       <definition value="The URL pointing to a FHIR-defined protocol, guideline, order set or other definition that is adhered to in whole or in part by this Procedure." />
@@ -1008,12 +968,6 @@
       </mapping>
     </element>
     <element id="Procedure.instantiatesUri">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.instantiatesUri" />
       <short value="Instantiates external protocol or definition" />
       <definition value="The URL pointing to an externally maintained protocol, guideline, order set or other definition that is adhered to in whole or in part by this Procedure." />
@@ -1171,12 +1125,6 @@
       </mapping>
     </element>
     <element id="Procedure.status">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.status" />
       <short value="preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown" />
       <definition value="A code specifying the state of the procedure. Generally, this will be the in-progress or completed state." />
@@ -1451,7 +1399,7 @@
       <slicing>
         <discriminator>
           <type value="pattern" />
-          <path value="system" />
+          <path value="$this" />
         </discriminator>
         <rules value="open" />
       </slicing>
@@ -1531,6 +1479,9 @@
       <type>
         <code value="Coding" />
       </type>
+      <patternCoding>
+        <system value="http://snomed.info/sct" />
+      </patternCoding>
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -1542,6 +1493,10 @@
       </constraint>
       <mustSupport value="true" />
       <isSummary value="true" />
+      <binding>
+        <strength value="preferred" />
+        <valueSet value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/ValueSet/procedures-category-sct" />
+      </binding>
       <mapping>
         <identity value="rim" />
         <map value="n/a" />
@@ -1652,12 +1607,6 @@
       </mapping>
     </element>
     <element id="Procedure.category.coding:sct.system">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.category.coding.system" />
       <short value="Identity of the terminology system" />
       <definition value="The identification of the code system that defines the meaning of the symbol in the code." />
@@ -1673,7 +1622,6 @@
       <type>
         <code value="uri" />
       </type>
-      <patternUri value="http://snomed.info/sct" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -1703,12 +1651,6 @@
       </mapping>
     </element>
     <element id="Procedure.category.coding:sct.version">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.category.coding.version" />
       <short value="Version of the system - if relevant" />
       <definition value="The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged." />
@@ -1751,12 +1693,6 @@
       </mapping>
     </element>
     <element id="Procedure.category.coding:sct.code">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.category.coding.code" />
       <short value="Symbol in syntax defined by the system" />
       <definition value="A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)." />
@@ -1801,12 +1737,6 @@
       </mapping>
     </element>
     <element id="Procedure.category.coding:sct.display">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
         <valueBoolean value="true" />
       </extension>
@@ -1853,12 +1783,6 @@
       </mapping>
     </element>
     <element id="Procedure.category.coding:sct.userSelected">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.category.coding.userSelected" />
       <short value="If this coding was chosen directly by the user" />
       <definition value="Indicates that this coding was chosen by a user directly - e.g. off a pick list of available items (codes or displays)." />
@@ -1902,12 +1826,6 @@
       </mapping>
     </element>
     <element id="Procedure.category.text">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
         <valueBoolean value="true" />
       </extension>
@@ -1990,7 +1908,7 @@
         <severity value="error" />
         <human value="Entweder wird die Prozedur mit OPS oder SNOMED-CT kodiert." />
         <expression value="coding.where(system = 'http://snomed.info/sct').exists() or coding.where(system = 'http://fhir.de/CodeSystem/dimdi/ops').exists()" />
-        <source value="Procedure" />
+        <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/Procedure" />
       </constraint>
       <mustSupport value="true" />
       <isSummary value="true" />
@@ -2193,9 +2111,9 @@
       </extension>
       <path value="Procedure.code.coding" />
       <sliceName value="ops" />
-      <short value="Code defined by a terminology system" />
+      <short value="A reference to a code defined by a terminology system" />
       <definition value="A reference to a code defined by a terminology system." />
-      <comment value="Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true." />
+      <comment value="Codes may be defined very casually in enumerations or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information." />
       <requirements value="Allows for alternative encodings within a code system, and translations to other code systems." />
       <min value="0" />
       <max value="1" />
@@ -2206,6 +2124,7 @@
       </base>
       <type>
         <code value="Coding" />
+        <profile value="http://fhir.de/StructureDefinition/CodingOPS" />
       </type>
       <condition value="ele-1" />
       <constraint>
@@ -2384,14 +2303,8 @@
       </mapping>
     </element>
     <element id="Procedure.code.coding:ops.system">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.code.coding.system" />
-      <short value="Identity of the terminology system" />
+      <short value="Canonische CodeSystem URL für OPS" />
       <definition value="The identification of the code system that defines the meaning of the symbol in the code." />
       <comment value="The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously." />
       <requirements value="Need to be unambiguous about the source of the definition of the symbol." />
@@ -2405,7 +2318,7 @@
       <type>
         <code value="uri" />
       </type>
-      <patternUri value="http://fhir.de/CodeSystem/dimdi/ops" />
+      <fixedUri value="http://fhir.de/CodeSystem/bfarm/ops" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -2435,15 +2348,9 @@
       </mapping>
     </element>
     <element id="Procedure.code.coding:ops.version">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.code.coding.version" />
-      <short value="Version of the system - if relevant" />
-      <definition value="The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged." />
+      <short value="Die Jahresversion des OPS Kataloges. Angegeben wird immer die vierstellige Jahreszahl (z.B. &quot;2017&quot;)" />
+      <definition value="Bie Verwendung von OPS ist die Angabe der Version zwingend erforderlich.&#xD;&#xA;Hierdurch wird der Tatsache Rechnung getragen, dass jede der jährlich neu erscheinenden Fassung von OPS ein neues Codesystem darstellt." />
       <comment value="Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date." />
       <min value="1" />
       <max value="1" />
@@ -2484,14 +2391,8 @@
       </mapping>
     </element>
     <element id="Procedure.code.coding:ops.code">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.code.coding.code" />
-      <short value="Symbol in syntax defined by the system" />
+      <short value="Der OPS-Code" />
       <definition value="A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)." />
       <comment value="Note that FHIR strings SHALL NOT exceed 1MB in size" />
       <requirements value="Need to refer to a particular code in the system." />
@@ -2505,6 +2406,10 @@
       <type>
         <code value="code" />
       </type>
+      <example>
+        <label value="Einfacher OPS-Code" />
+        <valueCode value="5-470" />
+      </example>
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -2534,12 +2439,6 @@
       </mapping>
     </element>
     <element id="Procedure.code.coding:ops.display">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
         <valueBoolean value="true" />
       </extension>
@@ -2586,12 +2485,6 @@
       </mapping>
     </element>
     <element id="Procedure.code.coding:ops.userSelected">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.code.coding.userSelected" />
       <short value="If this coding was chosen directly by the user" />
       <definition value="Indicates that this coding was chosen by a user directly - e.g. off a pick list of available items (codes or displays)." />
@@ -2782,12 +2675,6 @@
       </mapping>
     </element>
     <element id="Procedure.code.coding:sct.system">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.code.coding.system" />
       <short value="Identity of the terminology system" />
       <definition value="The identification of the code system that defines the meaning of the symbol in the code." />
@@ -2833,12 +2720,6 @@
       </mapping>
     </element>
     <element id="Procedure.code.coding:sct.version">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.code.coding.version" />
       <short value="Version of the system - if relevant" />
       <definition value="The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged." />
@@ -2881,12 +2762,6 @@
       </mapping>
     </element>
     <element id="Procedure.code.coding:sct.code">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.code.coding.code" />
       <short value="Symbol in syntax defined by the system" />
       <definition value="A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)." />
@@ -2931,12 +2806,6 @@
       </mapping>
     </element>
     <element id="Procedure.code.coding:sct.display">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
         <valueBoolean value="true" />
       </extension>
@@ -2983,12 +2852,6 @@
       </mapping>
     </element>
     <element id="Procedure.code.coding:sct.userSelected">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.code.coding.userSelected" />
       <short value="If this coding was chosen directly by the user" />
       <definition value="Indicates that this coding was chosen by a user directly - e.g. off a pick list of available items (codes or displays)." />
@@ -3032,12 +2895,6 @@
       </mapping>
     </element>
     <element id="Procedure.code.text">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
         <valueBoolean value="true" />
       </extension>
@@ -3128,8 +2985,8 @@
       <constraint>
         <key value="mii-reference-1" />
         <severity value="error" />
-        <human value="Either reference.reference XOR reference.identifier exists" />
-        <expression value="$this.reference.exists() xor ($this.identifier.value.exists() and $this.identifier.system.exists()) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
+        <human value="Either reference.reference OR reference.identifier exists" />
+        <expression value="($this.reference.exists() or ($this.identifier.value.exists() and $this.identifier.system.exists())) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
         <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />
       </constraint>
       <isSummary value="true" />
@@ -3228,12 +3085,6 @@
       </mapping>
     </element>
     <element id="Procedure.performed[x]">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Procedure.performed[x]" />
       <short value="When the procedure was performed" />
       <definition value="Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured." />
@@ -4805,13 +4656,13 @@
         <rules value="open" />
       </slicing>
     </element>
-    <element id="Procedure.extension:recordedDate">
+    <element id="Procedure.extension:Dokumentationsdatum">
       <path value="Procedure.extension" />
-      <sliceName value="recordedDate" />
+      <sliceName value="Dokumentationsdatum" />
       <max value="1" />
       <type>
         <code value="Extension" />
-        <profile value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/procedure-recordedDate" />
+        <profile value="http://fhir.de/StructureDefinition/ProzedurDokumentationsdatum" />
       </type>
       <mustSupport value="true" />
     </element>
@@ -4838,7 +4689,7 @@
       <slicing>
         <discriminator>
           <type value="pattern" />
-          <path value="system" />
+          <path value="$this" />
         </discriminator>
         <rules value="open" />
       </slicing>
@@ -4849,12 +4700,18 @@
       <sliceName value="sct" />
       <min value="0" />
       <max value="1" />
+      <patternCoding>
+        <system value="http://snomed.info/sct" />
+      </patternCoding>
       <mustSupport value="true" />
+      <binding>
+        <strength value="preferred" />
+        <valueSet value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/ValueSet/procedures-category-sct" />
+      </binding>
     </element>
     <element id="Procedure.category.coding:sct.system">
       <path value="Procedure.category.coding.system" />
       <min value="1" />
-      <patternUri value="http://snomed.info/sct" />
       <mustSupport value="true" />
     </element>
     <element id="Procedure.category.coding:sct.code">
@@ -4870,7 +4727,7 @@
         <severity value="error" />
         <human value="Entweder wird die Prozedur mit OPS oder SNOMED-CT kodiert." />
         <expression value="coding.where(system = 'http://snomed.info/sct').exists() or coding.where(system = 'http://fhir.de/CodeSystem/dimdi/ops').exists()" />
-        <source value="Procedure" />
+        <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/Procedure" />
       </constraint>
       <mustSupport value="true" />
     </element>
@@ -4890,6 +4747,10 @@
       <path value="Procedure.code.coding" />
       <sliceName value="ops" />
       <max value="1" />
+      <type>
+        <code value="Coding" />
+        <profile value="http://fhir.de/StructureDefinition/CodingOPS" />
+      </type>
       <mustSupport value="true" />
       <binding>
         <strength value="required" />
@@ -4918,18 +4779,14 @@
     </element>
     <element id="Procedure.code.coding:ops.system">
       <path value="Procedure.code.coding.system" />
-      <min value="1" />
-      <patternUri value="http://fhir.de/CodeSystem/dimdi/ops" />
       <mustSupport value="true" />
     </element>
     <element id="Procedure.code.coding:ops.version">
       <path value="Procedure.code.coding.version" />
-      <min value="1" />
       <mustSupport value="true" />
     </element>
     <element id="Procedure.code.coding:ops.code">
       <path value="Procedure.code.coding.code" />
-      <min value="1" />
       <mustSupport value="true" />
     </element>
     <element id="Procedure.code.coding:sct">
