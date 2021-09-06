@@ -18,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtObservation;
-import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtTestKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.StatusDefiningCode;
 
 public class KoerpergewichtCompositionContainment extends Containment {
@@ -32,7 +32,7 @@ public class KoerpergewichtCompositionContainment extends Containment {
 
   public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(KoerpergewichtComposition.class, "/context/other_context[at0001]/items[at0004]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public ListSelectAqlField<KoerpergewichtTestKategorieElement> KATEGORIE = new ListAqlFieldImp<KoerpergewichtTestKategorieElement>(KoerpergewichtComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", KoerpergewichtTestKategorieElement.class, this);
+  public ListSelectAqlField<RegistereintragKategorieElement> KATEGORIE = new ListAqlFieldImp<RegistereintragKategorieElement>(KoerpergewichtComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", RegistereintragKategorieElement.class, this);
 
   public SelectAqlField<TemporalAccessor> START_TIME_VALUE = new AqlFieldImp<TemporalAccessor>(KoerpergewichtComposition.class, "/context/start_time|value", "startTimeValue", TemporalAccessor.class, this);
 

@@ -11,25 +11,25 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-19T13:33:29.956904+02:00",
+    date = "2021-09-06T15:23:36.524324+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class KoerpergewichtTestKategorieElement implements LocatableEntity {
+public class RegistereintragKategorieElement implements LocatableEntity {
   /**
-   * Path: Körpergewicht_Test/context/Kategorie
+   * Path: Registereintrag/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/value|value")
   private String value;
 
   /**
-   * Path: Körpergewicht_Test/context/Baum/Kategorie/null_flavour
+   * Path: Registereintrag/context/Baum/Kategorie/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: Körpergewicht_Test/context/feeder_audit
+   * Path: Registereintrag/context/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;

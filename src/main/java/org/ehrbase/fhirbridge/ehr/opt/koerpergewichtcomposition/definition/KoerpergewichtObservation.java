@@ -20,58 +20,58 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.body_weight.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-19T13:33:29.961978100+02:00",
+    date = "2021-09-06T15:23:36.534804+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class KoerpergewichtObservation implements EntryEntity {
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/Beliebiges Ereignis/Gewicht
+   * Path: Registereintrag/Körpergewicht/Beliebiges Ereignis/Gewicht
    * Description: Das Gewicht eines Individuums.
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|magnitude")
   private Double gewichtMagnitude;
 
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/Beliebiges Ereignis/Gewicht
+   * Path: Registereintrag/Körpergewicht/Beliebiges Ereignis/Gewicht
    * Description: Das Gewicht eines Individuums.
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|units")
   private String gewichtUnits;
 
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/History/Beliebiges Ereignis/Simple/Gewicht/null_flavour
+   * Path: Registereintrag/Körpergewicht/History/Beliebiges Ereignis/Simple/Gewicht/null_flavour
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/null_flavour|defining_code")
   private NullFlavour gewichtNullFlavourDefiningCode;
 
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/Beliebiges Ereignis/State structure
+   * Path: Registereintrag/Körpergewicht/Beliebiges Ereignis/State structure
    * Description: @ internal @
    */
   @Path("/data[at0002]/events[at0003]/state[at0008]")
   private ItemTree stateStructure;
 
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/Beliebiges Ereignis/time
+   * Path: Registereintrag/Körpergewicht/Beliebiges Ereignis/time
    */
   @Path("/data[at0002]/events[at0003]/time|value")
   private TemporalAccessor timeValue;
 
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/origin
+   * Path: Registereintrag/Körpergewicht/origin
    */
   @Path("/data[at0002]/origin|value")
   private TemporalAccessor originValue;
 
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/Gerät
+   * Path: Registereintrag/Körpergewicht/Gerät
    * Description: Details über die benutzte Waage.
    */
   @Path("/protocol[at0015]/items[at0020]")
   private Cluster geraet;
 
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/Erweiterung
+   * Path: Registereintrag/Körpergewicht/Erweiterung
    * Description: Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.
    * Comment: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.
    */
@@ -79,19 +79,19 @@ public class KoerpergewichtObservation implements EntryEntity {
   private List<Cluster> erweiterung;
 
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/subject
+   * Path: Registereintrag/Körpergewicht/subject
    */
   @Path("/subject")
   private PartyProxy subject;
 
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/language
+   * Path: Registereintrag/Körpergewicht/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: Körpergewicht_Test/Körpergewicht/feeder_audit
+   * Path: Registereintrag/Körpergewicht/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
