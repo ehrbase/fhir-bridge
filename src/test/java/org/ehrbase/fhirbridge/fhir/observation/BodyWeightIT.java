@@ -3,8 +3,8 @@ package org.ehrbase.fhirbridge.fhir.observation;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyweight.BodyWeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.KoerpergewichtComposition;
+import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtObservation;
-import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -55,7 +55,7 @@ public class BodyWeightIT extends AbstractMappingTestSetupIT {
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(KoerpergewichtComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(KoerpergewichtObservation.class)
-                .registerValueObject(RegistereintragKategorieElement.class)
+                .registerValueObject(KoerpergewichtKategorieElement.class)
                 .build();
     }
 
