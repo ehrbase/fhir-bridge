@@ -1,11 +1,10 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodytemperature.KoerpertemperaturCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.KoerpertemperaturComposition;
-import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.GeccoKoerpertemperaturKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.KoerpertemperaturObservation;
+import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -56,7 +55,7 @@ class BodyTemperatureIT extends AbstractMappingTestSetupIT {
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(KoerpertemperaturComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(KoerpertemperaturObservation.class)
-                .registerValueObject(GeccoKoerpertemperaturKategorieElement.class)
+                .registerValueObject(RegistereintragKategorieElement.class)
                 .build();
     }
 
