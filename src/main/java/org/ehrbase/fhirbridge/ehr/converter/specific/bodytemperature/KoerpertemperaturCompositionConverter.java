@@ -15,12 +15,12 @@ public class KoerpertemperaturCompositionConverter extends ObservationToComposit
     @Override
     public KoerpertemperaturComposition convertInternal(@NonNull Observation resource) {
         KoerpertemperaturComposition composition = new KoerpertemperaturComposition();
-        mapKategorie(composition, resource);
+        mapKategorie(composition);
         composition.setKoerpertemperatur(new KoerpertemperaturObservationConverter().convert(resource));
         return composition;
     }
 
-    private void mapKategorie(KoerpertemperaturComposition composition, Observation resource) {
+    private void mapKategorie(KoerpertemperaturComposition composition) {
         List<RegistereintragKategorieElement> list = new ArrayList<>();
         RegistereintragKategorieElement geccoKoerpertemperaturKategorieElement = new RegistereintragKategorieElement();
         geccoKoerpertemperaturKategorieElement.setValue(KategorieDefiningCode.VITAL_SIGNS);

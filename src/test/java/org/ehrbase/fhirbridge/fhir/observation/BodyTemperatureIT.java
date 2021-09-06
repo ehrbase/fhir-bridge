@@ -46,6 +46,12 @@ class BodyTemperatureIT extends AbstractMappingTestSetupIT {
                 "paragon-body-temp_magnitude-max.json");
     }
 
+    @Test
+    void testValueAbsent() throws IOException {
+        testMapping("create-body-temp-absent.json",
+                "paragon-create-body-temp-absent.json");
+    }
+
     // #####################################################################################
     // default
 
