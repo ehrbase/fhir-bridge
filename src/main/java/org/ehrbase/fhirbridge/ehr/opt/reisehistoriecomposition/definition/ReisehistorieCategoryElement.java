@@ -10,19 +10,19 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-06T14:30:59.944589+02:00",
+    date = "2021-09-06T14:29:47.126460400+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class ReisehistorieKategorieElement implements LocatableEntity {
+public class ReisehistorieCategoryElement implements LocatableEntity {
   /**
-   * Path: Reisehistorie/context/Kategorie
-   * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
+   * Path: Reisehistorie/context/Category
+   * Description: The classification of the register entry (e.g. type of observation of the FHIR profile).
    */
   @Path("/value|defining_code")
-  private KategorieDefiningCode value;
+  private CategoryDefiningCode value;
 
   /**
-   * Path: Reisehistorie/context/Baum/Kategorie/null_flavour
+   * Path: Reisehistorie/context/Baum/Category/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
@@ -33,11 +33,11 @@ public class ReisehistorieKategorieElement implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setValue(KategorieDefiningCode value) {
+  public void setValue(CategoryDefiningCode value) {
      this.value = value;
   }
 
-  public KategorieDefiningCode getValue() {
+  public CategoryDefiningCode getValue() {
      return this.value ;
   }
 

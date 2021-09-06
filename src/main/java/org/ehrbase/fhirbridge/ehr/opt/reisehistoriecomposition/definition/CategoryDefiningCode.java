@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition;
 import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum KategorieDefiningCode implements EnumValueSet {
+public enum CategoryDefiningCode implements EnumValueSet {
   SOCIAL_HISTORY("Social History", "", "[http://terminology.hl7.org/CodeSystem/observation-category]", "social-history");
 
   private String value;
@@ -14,7 +14,7 @@ public enum KategorieDefiningCode implements EnumValueSet {
 
   private String code;
 
-  KategorieDefiningCode(String value, String description, String terminologyId, String code) {
+  CategoryDefiningCode(String value, String description, String terminologyId, String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;
