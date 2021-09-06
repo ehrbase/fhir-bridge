@@ -1,10 +1,12 @@
 # @formatter:off
 
-################################################################################
-# FHIR Bridge Properties                                                       #
-################################################################################
-
 fhir-bridge:
+  minio:
+    url: http://localhost:9000
+    access-key: minio
+    secret-key: minio123456
+    bucket-name: fhir-bridge-bucket
+
 # CORS Properties
   cors:
     allow-credentials: false
@@ -143,6 +145,10 @@ management:
         allowed-headers: '*'
       exposure:
         include: env, health, info, liquibase, logfile, loggers
+  metrics:
+    export:
+      elastic:
+        auto-create-index:
 
 ################################################################################
 # Open eHealth Integration Platform Properties                                 #
@@ -159,7 +165,6 @@ ipf:
   # FHIR Properties
   fhir:
     fhir-version: r4
-
 
 demographics:
   patient:

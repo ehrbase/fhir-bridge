@@ -57,7 +57,7 @@
   },
   "effectiveDateTime": "2020-09-25",
   "valueQuantity": {
-    "value": 36.8,
+    "value": 0,
     "unit": "°C",
     "system": "http://unitsofmeasure.org",
     "code": "Cel"

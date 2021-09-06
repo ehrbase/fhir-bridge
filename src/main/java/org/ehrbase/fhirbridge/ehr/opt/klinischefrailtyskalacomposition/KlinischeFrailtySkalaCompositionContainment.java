@@ -18,6 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.KlinischeFrailtySkalaCfsObservation;
+import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.KlinischeFrailtySkalaKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.StatusDefiningCode;
 
 public class KlinischeFrailtySkalaCompositionContainment extends Containment {
@@ -31,9 +32,7 @@ public class KlinischeFrailtySkalaCompositionContainment extends Containment {
 
   public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(KlinischeFrailtySkalaComposition.class, "/context/other_context[at0001]/items[at0004]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<String> KATEGORIE_VALUE = new AqlFieldImp<String>(KlinischeFrailtySkalaComposition.class, "/context/other_context[at0001]/items[at0005]/value|value", "kategorieValue", String.class, this);
-
-  public SelectAqlField<NullFlavour> KATEGORIE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(KlinischeFrailtySkalaComposition.class, "/context/other_context[at0001]/items[at0005]/null_flavour|defining_code", "kategorieNullFlavourDefiningCode", NullFlavour.class, this);
+  public ListSelectAqlField<KlinischeFrailtySkalaKategorieElement> KATEGORIE = new ListAqlFieldImp<KlinischeFrailtySkalaKategorieElement>(KlinischeFrailtySkalaComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", KlinischeFrailtySkalaKategorieElement.class, this);
 
   public SelectAqlField<TemporalAccessor> START_TIME_VALUE = new AqlFieldImp<TemporalAccessor>(KlinischeFrailtySkalaComposition.class, "/context/start_time|value", "startTimeValue", TemporalAccessor.class, this);
 

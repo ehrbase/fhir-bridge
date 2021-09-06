@@ -29,8 +29,8 @@ import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.St
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-06T17:04:45.306134+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-08-18T17:12:11.959704200+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Koerpertemperatur")
 public class KoerpertemperaturComposition implements CompositionEntity {
