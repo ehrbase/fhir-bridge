@@ -43,7 +43,7 @@ public class TherapyCompositionConverter extends ProcedureToCompositionConverter
         List<RegistereintragKategorieElement> categories = convertCategory(procedure);
         result.setKategorie(categories);
 
-        if (procedure.getStatus() == Procedure.ProcedureStatus.UNKNOWN && !procedure.hasCategory()) {
+        if (procedure.getStatus() == Procedure.ProcedureStatus.UNKNOWN || !procedure.hasCategory()) {
             result.setUnbekannteProzedur(unknownConverter.convert(procedure));
         } else if (procedure.getStatus() == Procedure.ProcedureStatus.NOTDONE) {
             result.setNichtDurchgefuehrteProzedur(notDoneConverter.convert(procedure));
