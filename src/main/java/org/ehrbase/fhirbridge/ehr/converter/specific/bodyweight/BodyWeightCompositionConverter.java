@@ -1,12 +1,12 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bodyweight;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
+
 import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.KoerpergewichtComposition;
-import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtTestKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.KoerpergewichtKategorieElement;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +23,10 @@ public class BodyWeightCompositionConverter extends ObservationToCompositionConv
     }
 
     private void mapKategorie(KoerpergewichtComposition composition, Observation resource) {
-        List<KoerpergewichtTestKategorieElement> list = new ArrayList<>();
+        List<KoerpergewichtKategorieElement> list = new ArrayList<>();
         for (CodeableConcept category : resource.getCategory()) {
             for (Coding coding : category.getCoding()) {
-                KoerpergewichtTestKategorieElement koerpergewichtTestKategorieElement = new KoerpergewichtTestKategorieElement();
+                KoerpergewichtKategorieElement koerpergewichtTestKategorieElement = new KoerpergewichtKategorieElement();
                 koerpergewichtTestKategorieElement.setValue(coding.getCode());
                 list.add(koerpergewichtTestKategorieElement);
             }
