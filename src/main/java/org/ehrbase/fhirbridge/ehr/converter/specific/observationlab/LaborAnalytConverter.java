@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
@@ -41,7 +42,10 @@ public class LaborAnalytConverter {
         proLaboranalytCluster.setBezeichnungDesAnalytsDefiningCode(mapUntersuchterAnalyt(observation));
         proLaboranalytCluster.setErgebnisStatus(mapErgebnisStatus(observation));
         mapKommentar(proLaboranalytCluster, observation);
-        mapMesswert(observation).ifPresent(proLaboranalytCluster::setMesswert);
+        mapMesswert(observation).ifPresentOrElse(proLaboranalytCluster::setMesswert,
+                () -> {
+                    proLaboranalytCluster.setMesswertNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+                });
         mapInterpretation(observation).ifPresent(proLaboranalytCluster::setInterpretationDefiningCode);
         mapProbeId(observation).ifPresent(proLaboranalytCluster::setProbeId);
         mapZeitpunktderValidierung(observation).ifPresent(proLaboranalytCluster::setZeitpunktDerValidierungValue);
@@ -117,7 +121,7 @@ public class LaborAnalytConverter {
             Quantity valueQuantity = observation.getValueQuantity();
             return Optional.of(getLaborAnalytResultat(valueQuantity));
         } else if (observation.hasValueCodeableConcept()) {
-            LOG.warn("Entering only value[x].ValueCodeableConcept makes mapping an value impossible, therefore nothing is mapped. Please enter a value and unit in order to perform a mapping.");
+            LOG.warn("Entering only value[x].ValueCodeableConcept makes mapping an value impossible, since the resource does not statically define what coding represents a unit or value. Therefore nothing is mapped. Please enter a value and unit in order to perform a mapping.");
             return Optional.empty();
         } else {
             return Optional.empty();
