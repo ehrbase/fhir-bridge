@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/8e6cc54c-a8f3-40e4-9f17-ef615fb58fbd/_history/1",
+      "id" : "Observation/99b7306f-e126-4865-982e-9454c4c35f53/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -166,16 +166,16 @@
               "_type" : "DV_TEXT",
               "value" : "Status"
             },
-            "value" : {
+            "null_flavour" : {
               "_type" : "DV_CODED_TEXT",
-              "value" : "Nicht schwanger",
+              "value" : "unknown",
               "defining_code" : {
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "local"
+                  "value" : "openehr"
                 },
-                "code_string" : "at0013"
+                "code_string" : "253"
               }
             },
             "archetype_node_id" : "at0011"

@@ -28,8 +28,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">246be69248ce22ef50b9389a1cffede2</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">137DCA7D21FA274494054E1B81B67FC5</other_details>
+    <other_details id="MD5-CAM-1.0.1">19d673490cca9f17df46ee198c6dc648</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
+    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -265,11 +267,9 @@
                 <rm_type_name>ELEMENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
+                  <upper_unbounded>true</upper_unbounded>
                   <lower>0</lower>
-                  <upper>1</upper>
                 </occurrences>
                 <node_id>at0005</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -377,7 +377,7 @@
           <upper_included>true</upper_included>
           <lower_unbounded>false</lower_unbounded>
           <upper_unbounded>false</upper_unbounded>
-          <lower>1</lower>
+          <lower>0</lower>
           <upper>1</upper>
         </occurrences>
         <node_id>at0000</node_id>
@@ -419,7 +419,7 @@
                   <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
+                  <lower>0</lower>
                   <upper>1</upper>
                 </occurrences>
                 <node_id>at0002</node_id>
@@ -823,5 +823,8 @@
       <items id="text">geändert</items>
     </term_definitions>
   </definition>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.pregnancy_status.v0]">
+    <items id="82810-3">Pregnancy status</items>
+  </annotations>
   <view/>
 </template>
