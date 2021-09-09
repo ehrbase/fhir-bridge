@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/5/_history/1",
+      "id" : "Observation/9e1e954b-d35e-4d64-8add-d3766983ed38/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -77,6 +77,34 @@
         },
         "code_string" : "232"
       }
+    },
+    "other_context" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Baum"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Status"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "final",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "local"
+            },
+            "code_string" : "at0012"
+          }
+        },
+        "archetype_node_id" : "at0004"
+      } ],
+      "archetype_node_id" : "at0001"
     }
   },
   "content" : [ {
@@ -103,6 +131,9 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
+    },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "name" : {
