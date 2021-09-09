@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum KategorieDefiningCode implements EnumValueSet {
-  SOCIAL_HISTORY("Social History", "", "http://terminology.hl7.org/CodeSystem/observation-category", "social-history");
+  SOCIAL_HISTORY("Social History", "", "[http://terminology.hl7.org/CodeSystem/observation-category]", "social-history");
 
   private String value;
 
