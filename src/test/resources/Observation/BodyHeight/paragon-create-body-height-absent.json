@@ -2,14 +2,14 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Schwangerschaftsstatus"
+    "value" : "Körpergröße"
   },
   "archetype_details" : {
     "archetype_id" : {
       "value" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
     },
     "template_id" : {
-      "value" : "Schwangerschaftsstatus"
+      "value" : "Körpergröße"
     },
     "rm_version" : "1.0.4"
   },
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/8e6cc54c-a8f3-40e4-9f17-ef615fb58fbd/_history/1",
+      "id" : "Observation/e5231d25-0a4a-4c5b-8566-5c91d00553ae/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -54,17 +54,13 @@
     }
   },
   "composer" : {
-    "_type" : "PARTY_IDENTIFIED",
-    "identifiers" : [ {
-      "_type" : "DV_IDENTIFIER",
-      "id" : "http://external.fhir.server/Practitioner/f201"
-    } ]
+    "_type" : "PARTY_SELF"
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2012-09-17T00:00:00+02:00"
+      "value" : "2020-10-02T00:00:00+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -111,7 +107,7 @@
     "_type" : "OBSERVATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Schwangerschaftsstatus"
+      "value" : "Größe/Länge"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -142,7 +138,7 @@
       },
       "origin" : {
         "_type" : "DV_DATE_TIME",
-        "value" : "2012-09-17T00:00:00+02:00"
+        "value" : "2020-10-02T00:00:00+02:00"
       },
       "events" : [ {
         "_type" : "POINT_EVENT",
@@ -152,33 +148,33 @@
         },
         "time" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2012-09-17T00:00:00+02:00"
+          "value" : "2020-10-02T00:00:00+02:00"
         },
         "data" : {
           "_type" : "ITEM_TREE",
           "name" : {
             "_type" : "DV_TEXT",
-            "value" : "Tree"
+            "value" : "Simple"
           },
           "items" : [ {
             "_type" : "ELEMENT",
             "name" : {
               "_type" : "DV_TEXT",
-              "value" : "Status"
+              "value" : "Größe/Länge"
             },
-            "value" : {
+            "null_flavour" : {
               "_type" : "DV_CODED_TEXT",
-              "value" : "Nicht schwanger",
+              "value" : "unknown",
               "defining_code" : {
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "local"
+                  "value" : "openehr"
                 },
-                "code_string" : "at0013"
+                "code_string" : "253"
               }
             },
-            "archetype_node_id" : "at0011"
+            "archetype_node_id" : "at0004"
           } ],
           "archetype_node_id" : "at0003"
         },
@@ -186,7 +182,7 @@
       } ],
       "archetype_node_id" : "at0001"
     },
-    "archetype_node_id" : "openEHR-EHR-OBSERVATION.pregnancy_status.v0"
+    "archetype_node_id" : "openEHR-EHR-OBSERVATION.height.v2"
   } ],
   "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
 }

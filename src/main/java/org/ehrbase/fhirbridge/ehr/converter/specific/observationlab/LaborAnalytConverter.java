@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
@@ -41,7 +42,10 @@ public class LaborAnalytConverter {
         proLaboranalytCluster.setBezeichnungDesAnalytsDefiningCode(mapUntersuchterAnalyt(observation));
         proLaboranalytCluster.setErgebnisStatus(mapErgebnisStatus(observation));
         mapKommentar(proLaboranalytCluster, observation);
-        mapMesswert(observation).ifPresent(proLaboranalytCluster::setMesswert);
+        mapMesswert(observation).ifPresentOrElse(proLaboranalytCluster::setMesswert,
+                () -> {
+                    proLaboranalytCluster.setMesswertNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+                });
         mapInterpretation(observation).ifPresent(proLaboranalytCluster::setInterpretationDefiningCode);
         mapProbeId(observation).ifPresent(proLaboranalytCluster::setProbeId);
         mapZeitpunktderValidierung(observation).ifPresent(proLaboranalytCluster::setZeitpunktDerValidierungValue);
@@ -117,7 +121,7 @@ public class LaborAnalytConverter {
             Quantity valueQuantity = observation.getValueQuantity();
             return Optional.of(getLaborAnalytResultat(valueQuantity));
         } else if (observation.hasValueCodeableConcept()) {
-            LOG.warn("Entering only value[x].ValueCodeableConcept makes mapping of an value impossible, since not static coding is defined by the fhir resource. Please use ValueQuantity instead. Therefore an empty field is mapped");
+            LOG.warn("Entering only value[x].ValueCodeableConcept makes mapping of an value impossible, since the resource does not statically define what coding represents a unit or value. Please use ValueQuantity instead. The bridge will now map an empty field for value and unit.");
             return Optional.empty();
         } else {
             return Optional.empty();

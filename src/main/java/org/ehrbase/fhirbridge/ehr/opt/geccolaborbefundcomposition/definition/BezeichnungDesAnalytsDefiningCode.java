@@ -133,6 +133,8 @@ public enum BezeichnungDesAnalytsDefiningCode implements EnumValueSet {
 
   LEUKOCYTES_VOLUME_IN_BLOOD_BY_MANUAL_COUNT("Leukocytes [#/volume] in Blood by Manual count", "", "LOINC", "804-5"),
 
+  ANTITHROMBIN_AG_ACTUAL_NORMAL_IN_PLATELET_POOR_PLASMA_BY_IMMUNOASSAY("Antithrombin Ag actual/normal in Platelet poor plasma by Immunoassay", "", "LOINC", "27812-7"),
+
   ALBUMIN_MOLES_VOLUME_IN_SERUM_OR_PLASMA_BY_BROMOCRESOL_PURPLE_BCP_DYE_BINDING_METHOD("Albumin [Moles/volume] in Serum or Plasma by Bromocresol purple (BCP) dye binding method", "", "LOINC", "62234-0"),
 
   GAMMA_GLUTAMYL_TRANSFERASE_ASPARTATE_AMINOTRANSFERASE_ENZYMATIC_ACTIVITY_RATIO_IN_SERUM_OR_PLASMA("Gamma glutamyl transferase/Aspartate aminotransferase [Enzymatic activity ratio] in Serum or Plasma", "", "LOINC", "2325-9"),
@@ -207,6 +209,8 @@ public enum BezeichnungDesAnalytsDefiningCode implements EnumValueSet {
 
   CREATININE_MASS_VOLUME_IN_ARTERIAL_BLOOD("Creatinine [Mass/volume] in Arterial blood", "", "LOINC", "21232-4"),
 
+  FIBRIN_D_DIMER_FEU_MASS_VOLUME_IN_PLATELET_POOR_PLASMA("Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma", "", "LOINC", "48065-7"),
+
   CREATININE_MOLES_VOLUME_IN_BLOOD("Creatinine [Moles/volume] in Blood", "", "LOINC", "59826-8"),
 
   LYMPHOCYTES_VOLUME_IN_BLOOD_BY_MANUAL_COUNT("Lymphocytes [#/volume] in Blood by Manual count", "", "LOINC", "732-8"),
@@ -268,7 +272,7 @@ public enum BezeichnungDesAnalytsDefiningCode implements EnumValueSet {
     this.terminologyId = terminologyId;
     this.code = code;
   }
-  
+
   public static Map<String, BezeichnungDesAnalytsDefiningCode> getCodesAsMap(){
     Map<String, BezeichnungDesAnalytsDefiningCode> bezeichnungDesAnalytsDefiningCodeHashMap = new HashMap<>();
     for (BezeichnungDesAnalytsDefiningCode bezeichnungDesAnalytsDefiningCode : BezeichnungDesAnalytsDefiningCode.values()) {

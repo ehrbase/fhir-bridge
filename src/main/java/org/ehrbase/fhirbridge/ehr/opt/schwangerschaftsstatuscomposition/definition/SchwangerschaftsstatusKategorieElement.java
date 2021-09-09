@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import java.lang.String;
@@ -11,25 +11,25 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-08T14:37:11.013611+02:00",
+    date = "2021-09-08T15:45:00.260027+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class ProLaboranalytKommentarElement implements LocatableEntity {
+public class SchwangerschaftsstatusKategorieElement implements LocatableEntity {
   /**
-   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/Kommentar
-   * Description: Kommentar zum Analyt-Ergebnis, soweit noch nicht in anderen Feldern erfasst.
+   * Path: Schwangerschaftsstatus/context/Kategorie
+   * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/value|value")
   private String value;
 
   /**
-   * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Kommentar/null_flavour
+   * Path: Schwangerschaftsstatus/context/Baum/Kategorie/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Pro Laboranalyt/feeder_audit
+   * Path: Schwangerschaftsstatus/context/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
