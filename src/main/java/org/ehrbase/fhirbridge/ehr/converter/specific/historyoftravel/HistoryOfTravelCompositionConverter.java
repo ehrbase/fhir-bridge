@@ -65,7 +65,7 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         if (!code.equals(expectedKategorie.getCode())) {
             throw new ConversionException("Categorie can't be set. Wrong code! Expected " + expectedKategorie.getCode() + ". Received" + code + "' instead");
         }
-        element.setValue(expectedKategorie.getValue());
+        element.setValue(expectedKategorie);
 
         List<ReisehistorieKategorieElement> kategorieList = new ArrayList<>();
         kategorieList.add(element);

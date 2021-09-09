@@ -185,7 +185,6 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.component								missing			1		422    	Observation.component: minimum required = 2, but only found 0 .from ${profile url}
 	$.component[0]							missing			0		422    	Observation.component: minimum required = 2, but only found 1 .from ${profile url}
 	$.component[1]							missing			0		422    	Observation.component: minimum required = 2, but only found 1 .from ${profile url}
-	$.component[1]							missing			1		422    	Observation.component.DiastolicBP: minimum required = 1, but only found 0 .from ${profile url}
 	
 	$.component[0].code  					missing			2		422    	Observation.component.code: minimum required = 1, but only found 0 .from ${profile url}
 	$.component[0].code.coding[0].system    missing    		2    	422    	A code with no system has no defined meaning. A system should be provided

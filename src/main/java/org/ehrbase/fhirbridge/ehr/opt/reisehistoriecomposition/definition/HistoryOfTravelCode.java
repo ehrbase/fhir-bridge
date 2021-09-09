@@ -26,3 +26,4 @@ public enum HistoryOfTravelCode {
         return system;
     }
 }
+
