@@ -117,7 +117,7 @@ public class LaborAnalytConverter {
             Quantity valueQuantity = observation.getValueQuantity();
             return Optional.of(getLaborAnalytResultat(valueQuantity));
         } else if (observation.hasValueCodeableConcept()) {
-            LOG.warn("Entering only value[x].ValueCodeableConcept makes mapping an value impossible, therefore nothing is mapped. Please enter a value and unit in order to perform a mapping.");
+            LOG.warn("Entering only value[x].ValueCodeableConcept makes mapping of an value impossible, since not static coding is defined by the fhir resource. Please use ValueQuantity instead. Therefore an empty field is mapped");
             return Optional.empty();
         } else {
             return Optional.empty();
