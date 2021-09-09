@@ -6,8 +6,6 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu.PatientInIcuCo
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.BeatmungswerteComposition;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeobachtungenAmBeatmungsgeraetObservation;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.EingeatmeterSauerstoffCluster;
-import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.PatientAufICUComposition;
-import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.PatientAufDerIntensivstationObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -40,6 +38,11 @@ public class FioIT extends AbstractMappingTestSetupIT {
                 "paragon-create-fio2.json");
     }
 
+    @Test
+    void mapingOnlyValueCodeableConcept() throws IOException {
+        testMapping("create-fio2-valueCodeableConcept.json",
+                "paragon-create-fio2-valueCodeableConcept.json");
+    }
     @Override
     public Javers getJavers() {
         return JaversBuilder.javers()

@@ -121,7 +121,7 @@ public class LaborAnalytConverter {
             Quantity valueQuantity = observation.getValueQuantity();
             return Optional.of(getLaborAnalytResultat(valueQuantity));
         } else if (observation.hasValueCodeableConcept()) {
-            LOG.warn("Entering only value[x].ValueCodeableConcept makes mapping an value impossible, since the resource does not statically define what coding represents a unit or value. Therefore nothing is mapped. Please enter a value and unit in order to perform a mapping.");
+            LOG.warn("Entering only value[x].ValueCodeableConcept makes mapping of an value impossible, since the resource does not statically define what coding represents a unit or value. Please use ValueQuantity instead. The bridge will now map an empty field for value and unit.");
             return Optional.empty();
         } else {
             return Optional.empty();
