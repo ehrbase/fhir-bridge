@@ -81,6 +81,12 @@ class BodyHeightIT extends AbstractMappingTestSetupIT {
                 "paragon-body-height-snomed-period_2.json");
     }
 
+    @Test
+    void mappingDataAbsent() throws IOException {
+        testMapping("create-body-height-absent.json",
+                "paragon-create-body-height-absent.json");
+    }
+
     // #####################################################################################
     // default
 
