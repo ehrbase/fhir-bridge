@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/7207757b-1920-422a-97f5-c44343350489/_history/1",
+      "id" : "Observation/bb16f013-f6a7-4be1-be84-2b89d78c4313/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {

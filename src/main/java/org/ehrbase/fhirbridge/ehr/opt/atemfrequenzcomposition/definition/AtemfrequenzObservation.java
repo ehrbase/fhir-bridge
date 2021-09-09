@@ -19,7 +19,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.respiration.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T11:21:30.288848+02:00",
+    date = "2021-09-09T16:21:32.683100200+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class AtemfrequenzObservation implements EntryEntity {

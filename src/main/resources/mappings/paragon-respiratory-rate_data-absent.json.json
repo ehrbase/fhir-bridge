@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/cdd801e5-610f-4876-bfc0-d48a69b4d0b9/_history/1",
+      "id" : "Observation/bb16f013-f6a7-4be1-be84-2b89d78c4313/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -112,6 +112,9 @@
         "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
+    },
+    "health_care_facility" : {
+      "_type" : "PARTY_IDENTIFIED"
     }
   },
   "content" : [ {
@@ -173,10 +176,17 @@
               "_type" : "DV_TEXT",
               "value" : "Messwert"
             },
-            "value" : {
-              "_type" : "DV_QUANTITY",
-              "units" : "/min",
-              "magnitude" : 22.0
+            "null_flavour" : {
+              "_type" : "DV_CODED_TEXT",
+              "value" : "unknown",
+              "defining_code" : {
+                "_type" : "CODE_PHRASE",
+                "terminology_id" : {
+                  "_type" : "TERMINOLOGY_ID",
+                  "value" : "openehr"
+                },
+                "code_string" : "253"
+              }
             },
             "archetype_node_id" : "at0004"
           } ],
