@@ -57,7 +57,7 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         String system = coding.getSystem();
 
         KategorieDefiningCode expectedKategorie = KategorieDefiningCode.SOCIAL_HISTORY;
-        if (!system.equals(expectedKategorie.getTerminologyId().replace("[","").replace("]",""))) {
+        if (!system.equals(expectedKategorie.getTerminologyId())) {
             throw new ConversionException("Categorie can't be set. Wrong terminology! Expected " + expectedKategorie.getTerminologyId() + ". Received" + system + "' instead");
         }
 
