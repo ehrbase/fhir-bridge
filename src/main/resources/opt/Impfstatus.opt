@@ -25,10 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">8c7a42798bb1bad99ec062b723c014ca</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="MD5-CAM-1.0.1">5eaf6bec4486b4a929f4af01cb5593a3</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">3.0.0</other_details>
+    <other_details id="sem_ver">5.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -198,6 +198,104 @@
                     </right_operand>
                   </expression>
                 </includes>
+              </children>
+              <children xsi:type="C_COMPLEX_OBJECT">
+                <rm_type_name>ELEMENT</rm_type_name>
+                <occurrences>
+                  <lower_included>true</lower_included>
+                  <upper_included>true</upper_included>
+                  <lower_unbounded>false</lower_unbounded>
+                  <upper_unbounded>false</upper_unbounded>
+                  <lower>0</lower>
+                  <upper>1</upper>
+                </occurrences>
+                <node_id>at0004</node_id>
+                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+                  <rm_attribute_name>value</rm_attribute_name>
+                  <existence>
+                    <lower_included>true</lower_included>
+                    <upper_included>true</upper_included>
+                    <lower_unbounded>false</lower_unbounded>
+                    <upper_unbounded>false</upper_unbounded>
+                    <lower>0</lower>
+                    <upper>1</upper>
+                  </existence>
+                  <children xsi:type="C_COMPLEX_OBJECT">
+                    <rm_type_name>DV_CODED_TEXT</rm_type_name>
+                    <occurrences>
+                      <lower_included>true</lower_included>
+                      <upper_included>true</upper_included>
+                      <lower_unbounded>false</lower_unbounded>
+                      <upper_unbounded>false</upper_unbounded>
+                      <lower>1</lower>
+                      <upper>1</upper>
+                    </occurrences>
+                    <node_id/>
+                    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+                      <rm_attribute_name>defining_code</rm_attribute_name>
+                      <existence>
+                        <lower_included>true</lower_included>
+                        <upper_included>true</upper_included>
+                        <lower_unbounded>false</lower_unbounded>
+                        <upper_unbounded>false</upper_unbounded>
+                        <lower>1</lower>
+                        <upper>1</upper>
+                      </existence>
+                      <children xsi:type="C_CODE_PHRASE">
+                        <rm_type_name>CODE_PHRASE</rm_type_name>
+                        <occurrences>
+                          <lower_included>true</lower_included>
+                          <upper_included>true</upper_included>
+                          <lower_unbounded>false</lower_unbounded>
+                          <upper_unbounded>false</upper_unbounded>
+                          <lower>1</lower>
+                          <upper>1</upper>
+                        </occurrences>
+                        <node_id/>
+                        <terminology_id>
+                          <value>local</value>
+                        </terminology_id>
+                        <code_list>at0010</code_list>
+                        <code_list>at0011</code_list>
+                        <code_list>at0012</code_list>
+                        <code_list>at0013</code_list>
+                      </children>
+                    </attributes>
+                  </children>
+                </attributes>
+              </children>
+              <children xsi:type="C_COMPLEX_OBJECT">
+                <rm_type_name>ELEMENT</rm_type_name>
+                <occurrences>
+                  <lower_included>true</lower_included>
+                  <lower_unbounded>false</lower_unbounded>
+                  <upper_unbounded>true</upper_unbounded>
+                  <lower>1</lower>
+                </occurrences>
+                <node_id>at0005</node_id>
+                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+                  <rm_attribute_name>value</rm_attribute_name>
+                  <existence>
+                    <lower_included>true</lower_included>
+                    <upper_included>true</upper_included>
+                    <lower_unbounded>false</lower_unbounded>
+                    <upper_unbounded>false</upper_unbounded>
+                    <lower>0</lower>
+                    <upper>1</upper>
+                  </existence>
+                  <children xsi:type="C_COMPLEX_OBJECT">
+                    <rm_type_name>DV_TEXT</rm_type_name>
+                    <occurrences>
+                      <lower_included>true</lower_included>
+                      <upper_included>true</upper_included>
+                      <lower_unbounded>false</lower_unbounded>
+                      <upper_unbounded>false</upper_unbounded>
+                      <lower>1</lower>
+                      <upper>1</upper>
+                    </occurrences>
+                    <node_id/>
+                  </children>
+                </attributes>
               </children>
               <cardinality>
                 <is_ordered>false</is_ordered>
@@ -403,55 +501,6 @@
                 </attributes>
               </children>
             </attributes>
-            <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-              <rm_attribute_name>name</rm_attribute_name>
-              <existence>
-                <lower_included>true</lower_included>
-                <upper_included>true</upper_included>
-                <lower_unbounded>false</lower_unbounded>
-                <upper_unbounded>false</upper_unbounded>
-                <lower>1</lower>
-                <upper>1</upper>
-              </existence>
-              <children xsi:type="C_COMPLEX_OBJECT">
-                <rm_type_name>DV_TEXT</rm_type_name>
-                <occurrences>
-                  <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
-                  <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
-                </occurrences>
-                <node_id/>
-                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                  <rm_attribute_name>value</rm_attribute_name>
-                  <existence>
-                    <lower_included>true</lower_included>
-                    <upper_included>true</upper_included>
-                    <lower_unbounded>false</lower_unbounded>
-                    <upper_unbounded>false</upper_unbounded>
-                    <lower>1</lower>
-                    <upper>1</upper>
-                  </existence>
-                  <children xsi:type="C_PRIMITIVE_OBJECT">
-                    <rm_type_name>STRING</rm_type_name>
-                    <occurrences>
-                      <lower_included>true</lower_included>
-                      <upper_included>true</upper_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>false</upper_unbounded>
-                      <lower>1</lower>
-                      <upper>1</upper>
-                    </occurrences>
-                    <node_id/>
-                    <item xsi:type="C_STRING">
-                      <list>not-done</list>
-                    </item>
-                  </children>
-                </attributes>
-              </children>
-            </attributes>
           </children>
           <children xsi:type="C_COMPLEX_OBJECT">
             <rm_type_name>ISM_TRANSITION</rm_type_name>
@@ -560,55 +609,6 @@
                       <value>local</value>
                     </terminology_id>
                     <code_list>at0015</code_list>
-                  </children>
-                </attributes>
-              </children>
-            </attributes>
-            <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-              <rm_attribute_name>name</rm_attribute_name>
-              <existence>
-                <lower_included>true</lower_included>
-                <upper_included>true</upper_included>
-                <lower_unbounded>false</lower_unbounded>
-                <upper_unbounded>false</upper_unbounded>
-                <lower>1</lower>
-                <upper>1</upper>
-              </existence>
-              <children xsi:type="C_COMPLEX_OBJECT">
-                <rm_type_name>DV_TEXT</rm_type_name>
-                <occurrences>
-                  <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
-                  <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
-                </occurrences>
-                <node_id/>
-                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                  <rm_attribute_name>value</rm_attribute_name>
-                  <existence>
-                    <lower_included>true</lower_included>
-                    <upper_included>true</upper_included>
-                    <lower_unbounded>false</lower_unbounded>
-                    <upper_unbounded>false</upper_unbounded>
-                    <lower>1</lower>
-                    <upper>1</upper>
-                  </existence>
-                  <children xsi:type="C_PRIMITIVE_OBJECT">
-                    <rm_type_name>STRING</rm_type_name>
-                    <occurrences>
-                      <lower_included>true</lower_included>
-                      <upper_included>true</upper_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>false</upper_unbounded>
-                      <lower>1</lower>
-                      <upper>1</upper>
-                    </occurrences>
-                    <node_id/>
-                    <item xsi:type="C_STRING">
-                      <list>stopped</list>
-                    </item>
                   </children>
                 </attributes>
               </children>
@@ -725,55 +725,6 @@
                 </attributes>
               </children>
             </attributes>
-            <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-              <rm_attribute_name>name</rm_attribute_name>
-              <existence>
-                <lower_included>true</lower_included>
-                <upper_included>true</upper_included>
-                <lower_unbounded>false</lower_unbounded>
-                <upper_unbounded>false</upper_unbounded>
-                <lower>1</lower>
-                <upper>1</upper>
-              </existence>
-              <children xsi:type="C_COMPLEX_OBJECT">
-                <rm_type_name>DV_TEXT</rm_type_name>
-                <occurrences>
-                  <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
-                  <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
-                </occurrences>
-                <node_id/>
-                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                  <rm_attribute_name>value</rm_attribute_name>
-                  <existence>
-                    <lower_included>true</lower_included>
-                    <upper_included>true</upper_included>
-                    <lower_unbounded>false</lower_unbounded>
-                    <upper_unbounded>false</upper_unbounded>
-                    <lower>1</lower>
-                    <upper>1</upper>
-                  </existence>
-                  <children xsi:type="C_PRIMITIVE_OBJECT">
-                    <rm_type_name>STRING</rm_type_name>
-                    <occurrences>
-                      <lower_included>true</lower_included>
-                      <upper_included>true</upper_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>false</upper_unbounded>
-                      <lower>1</lower>
-                      <upper>1</upper>
-                    </occurrences>
-                    <node_id/>
-                    <item xsi:type="C_STRING">
-                      <list>entered-in error</list>
-                    </item>
-                  </children>
-                </attributes>
-              </children>
-            </attributes>
           </children>
           <children xsi:type="C_COMPLEX_OBJECT">
             <rm_type_name>ISM_TRANSITION</rm_type_name>
@@ -886,55 +837,6 @@
                 </attributes>
               </children>
             </attributes>
-            <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-              <rm_attribute_name>name</rm_attribute_name>
-              <existence>
-                <lower_included>true</lower_included>
-                <upper_included>true</upper_included>
-                <lower_unbounded>false</lower_unbounded>
-                <upper_unbounded>false</upper_unbounded>
-                <lower>1</lower>
-                <upper>1</upper>
-              </existence>
-              <children xsi:type="C_COMPLEX_OBJECT">
-                <rm_type_name>DV_TEXT</rm_type_name>
-                <occurrences>
-                  <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
-                  <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
-                </occurrences>
-                <node_id/>
-                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                  <rm_attribute_name>value</rm_attribute_name>
-                  <existence>
-                    <lower_included>true</lower_included>
-                    <upper_included>true</upper_included>
-                    <lower_unbounded>false</lower_unbounded>
-                    <upper_unbounded>false</upper_unbounded>
-                    <lower>1</lower>
-                    <upper>1</upper>
-                  </existence>
-                  <children xsi:type="C_PRIMITIVE_OBJECT">
-                    <rm_type_name>STRING</rm_type_name>
-                    <occurrences>
-                      <lower_included>true</lower_included>
-                      <upper_included>true</upper_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>false</upper_unbounded>
-                      <lower>1</lower>
-                      <upper>1</upper>
-                    </occurrences>
-                    <node_id/>
-                    <item xsi:type="C_STRING">
-                      <list>completed</list>
-                    </item>
-                  </children>
-                </attributes>
-              </children>
-            </attributes>
           </children>
         </attributes>
         <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -1022,10 +924,9 @@
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
+                          <value>SNOMED CT</value>
                         </terminology_id>
                         <code_list>421245007</code_list>
-                        <code_list>787859002</code_list>
                         <code_list>37146000</code_list>
                         <code_list>407746005</code_list>
                         <code_list>787859002:127489000=412300006</code_list>
@@ -1234,6 +1135,62 @@
                         <code_list>836499004</code_list>
                         <code_list>836493003</code_list>
                         <code_list>836502000</code_list>
+                        <code_list>836398006+836380007</code_list>
+                        <code_list>836500008</code_list>
+                        <code_list>836380007+601000221108</code_list>
+                        <code_list>836383009+836390004</code_list>
+                        <code_list>836378001</code_list>
+                        <code_list>836403007</code_list>
+                        <code_list>871738001</code_list>
+                        <code_list>1031000221108</code_list>
+                        <code_list>836387005</code_list>
+                        <code_list>836393002</code_list>
+                        <code_list>836495005</code_list>
+                        <code_list>836389008</code_list>
+                        <code_list>836379009</code_list>
+                        <code_list>836385002</code_list>
+                        <code_list>836388000</code_list>
+                        <code_list>836382004</code_list>
+                        <code_list>836375003</code_list>
+                        <code_list>836374004</code_list>
+                        <code_list>836377006</code_list>
+                        <code_list>836390004</code_list>
+                        <code_list>836402002</code_list>
+                        <code_list>863911006</code_list>
+                        <code_list>836398006</code_list>
+                        <code_list>840549009</code_list>
+                        <code_list>601000221108</code_list>
+                        <code_list>836401009</code_list>
+                        <code_list>836380007</code_list>
+                        <code_list>836381006</code_list>
+                        <code_list>836383009</code_list>
+                        <code_list>836384003</code_list>
+                        <code_list>1119305005</code_list>
+                        <code_list>1119349007</code_list>
+                        <code_list>871875004</code_list>
+                        <code_list>787859002</code_list>
+                        <code_list>37146000</code_list>
+                        <code_list>2221000221107</code_list>
+                        <code_list>836498007+836388000</code_list>
+                        <code_list>871729003+836380007+601000221108+863911006+836374004+871871008</code_list>
+                        <code_list>871891001</code_list>
+                        <code_list>871729003+836380007+601000221108+863911006+836374004</code_list>
+                        <code_list>871804001</code_list>
+                        <code_list>871895005</code_list>
+                        <code_list>871806004</code_list>
+                        <code_list>871729003+836374004+863911006</code_list>
+                        <code_list>871887006</code_list>
+                        <code_list>863911006+836374004+601000221108+836381006</code_list>
+                        <code_list>836380007+1031000221108</code_list>
+                        <code_list>871729003+836388000+863911006</code_list>
+                        <code_list>871878002</code_list>
+                        <code_list>871837004</code_list>
+                        <code_list>871908002</code_list>
+                        <code_list>836382004+836388000</code_list>
+                        <code_list>871831003</code_list>
+                        <code_list>836498007+836382004</code_list>
+                        <code_list>871803007</code_list>
+                        <code_list>871826000</code_list>
                         <code_list>836398006+836380007</code_list>
                         <code_list>836500008</code_list>
                         <code_list>836380007+601000221108</code_list>
@@ -2182,9 +2139,6 @@ Es wird dringend empfohlen, dass das Element "Arzneimittel" mit einer Terminolog
         <term_definitions code="421245007">
           <items id="text">Diphtheria + pertussis + tetanus vaccine (product)</items>
         </term_definitions>
-        <term_definitions code="787859002">
-          <items id="text">Vaccine product (product)</items>
-        </term_definitions>
         <term_definitions code="37146000">
           <items id="text">Typhus vaccine (product)</items>
         </term_definitions>
@@ -2898,6 +2852,54 @@ Es wird dringend empfohlen, dass das Element "Arzneimittel" mit einer Terminolog
         </term_definitions>
         <term_definitions code="836384003">
           <items id="text">Vaccine product containing Bacillus anthracis antigen (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871875004">
+          <items id="text">Vaccine product containing only Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="787859002">
+          <items id="text">Vaccine product (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="836498007+836388000">
+          <items id="text">Vaccine product containing Mumps orthorubulavirus antigen (medicinal product) + Vaccine product containing Rubella virus antigen (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871891001">
+          <items id="text">Vaccine product containing only acellular Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Hepatitis B virus and inactivated whole Human poliovirus antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871804001">
+          <items id="text">Vaccine product containing only Hepatitis A virus and Salmonella enterica subspecies enterica serovar Typhi antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871895005">
+          <items id="text">Vaccine product containing only Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Haemophilus influenzae type B and Hepatitis B virus and Human poliovirus antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871806004">
+          <items id="text">Vaccine product containing only Haemophilus influenzae type B and Hepatitis B virus antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871887006">
+          <items id="text">Vaccine product containing only Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Haemophilus influenzae type B and Human poliovirus antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="863911006+836374004+601000221108+836381006">
+          <items id="text">Vaccine product containing Clostridium tetani antigen (medicinal product) + Vaccine product containing Hepatitis B virus antigen (medicinal product) + Vaccine product containing Bordetella pertussis antigen (medicinal product) + Vaccine product containing Corynebacterium diphtheriae antigen (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871878002">
+          <items id="text">Vaccine product containing only Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871837004">
+          <items id="text">Vaccine product containing only Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871908002">
+          <items id="text">Vaccine product containing only Human alphaherpesvirus 3 and Measles morbillivirus and Mumps orthorubulavirus and Rubella virus antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871831003">
+          <items id="text">Vaccine product containing only Measles morbillivirus and Mumps orthorubulavirus and Rubella virus antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="836498007+836382004">
+          <items id="text">Vaccine product containing Mumps orthorubulavirus antigen (medicinal product) + Vaccine product containing Measles morbillivirus antigen (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871803007">
+          <items id="text">Vaccine product containing only Hepatitis A and Hepatitis B virus antigens (medicinal product)</items>
+        </term_definitions>
+        <term_definitions code="871826000">
+          <items id="text">Vaccine product containing only Clostridium tetani and Corynebacterium diphtheriae antigens (medicinal product)</items>
         </term_definitions>
         <term_definitions code="840539006">
           <items id="text">Disease caused by Severe acute respiratory syndrome coronavirus 2 (disorder)</items>

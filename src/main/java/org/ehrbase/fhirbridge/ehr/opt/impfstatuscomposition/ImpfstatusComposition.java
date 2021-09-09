@@ -17,18 +17,21 @@ import org.ehrbase.client.annotations.Template;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfstatusKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungAction;
+import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.StatusDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.UnbekannterImpfstatusEvaluation;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-06-30T11:44:02.722457+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-09-09T15:56:45.025569+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Impfstatus")
 public class ImpfstatusComposition implements CompositionEntity {
@@ -44,6 +47,26 @@ public class ImpfstatusComposition implements CompositionEntity {
    */
   @Path("/context/other_context[at0001]/items[at0002]")
   private List<Cluster> erweiterung;
+
+  /**
+   * Path: Impfstatus/context/Status
+   * Description: Status der gelieferten Daten für den Registereintrag. Hinweis: Dies ist nicht der Status einzelner Komponenten.
+   */
+  @Path("/context/other_context[at0001]/items[at0004]/value|defining_code")
+  private StatusDefiningCode statusDefiningCode;
+
+  /**
+   * Path: Impfstatus/context/Baum/Status/null_flavour
+   */
+  @Path("/context/other_context[at0001]/items[at0004]/null_flavour|defining_code")
+  private NullFlavour statusNullFlavourDefiningCode;
+
+  /**
+   * Path: Impfstatus/context/Kategorie
+   * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
+   */
+  @Path("/context/other_context[at0001]/items[at0005]")
+  private List<ImpfstatusKategorieElement> kategorie;
 
   /**
    * Path: Impfstatus/context/start_time
@@ -137,6 +160,30 @@ public class ImpfstatusComposition implements CompositionEntity {
 
   public List<Cluster> getErweiterung() {
      return this.erweiterung ;
+  }
+
+  public void setStatusDefiningCode(StatusDefiningCode statusDefiningCode) {
+     this.statusDefiningCode = statusDefiningCode;
+  }
+
+  public StatusDefiningCode getStatusDefiningCode() {
+     return this.statusDefiningCode ;
+  }
+
+  public void setStatusNullFlavourDefiningCode(NullFlavour statusNullFlavourDefiningCode) {
+     this.statusNullFlavourDefiningCode = statusNullFlavourDefiningCode;
+  }
+
+  public NullFlavour getStatusNullFlavourDefiningCode() {
+     return this.statusNullFlavourDefiningCode ;
+  }
+
+  public void setKategorie(List<ImpfstatusKategorieElement> kategorie) {
+     this.kategorie = kategorie;
+  }
+
+  public List<ImpfstatusKategorieElement> getKategorie() {
+     return this.kategorie ;
   }
 
   public void setStartTimeValue(TemporalAccessor startTimeValue) {
