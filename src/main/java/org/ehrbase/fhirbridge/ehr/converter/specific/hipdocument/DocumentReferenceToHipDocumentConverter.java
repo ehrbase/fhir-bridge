@@ -20,8 +20,12 @@ import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.datavalues.DvURI;
 import com.nedap.archie.rm.datavalues.encapsulated.DvMultimedia;
+import com.nedap.archie.rm.generic.PartyIdentified;
+import com.nedap.archie.rm.generic.PartyProxy;
+import com.nedap.archie.rm.generic.PartySelf;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ReferenceToPartyIdentifiedConverter;
 import org.ehrbase.fhirbridge.ehr.opt.hipdocumentcomposition.HIPDocumentComposition;
 import org.ehrbase.fhirbridge.ehr.opt.hipdocumentcomposition.definition.HipMetadataCluster;
 import org.ehrbase.fhirbridge.ehr.opt.hipdocumentcomposition.definition.HipMetadataIdentifikatorElement;
@@ -40,6 +44,8 @@ import java.util.Optional;
  */
 public class DocumentReferenceToHipDocumentConverter extends CompositionConverter<DocumentReference, HIPDocumentComposition> {
 
+    private final ReferenceToPartyIdentifiedConverter converter = new ReferenceToPartyIdentifiedConverter();
+
     @Override
     protected HIPDocumentComposition convertInternal(DocumentReference documentReference) {
         HIPDocumentComposition composition = new HIPDocumentComposition();
@@ -47,6 +53,22 @@ public class DocumentReferenceToHipDocumentConverter extends CompositionConverte
         getMetadata(documentReference).ifPresent(composition::setHipMetadata);
         composition.setMediendatei(getMultimedia(documentReference));
         return composition;
+    }
+
+    @Override
+    protected PartyProxy convertComposer(DocumentReference resource) {
+        if (!resource.hasAuthor()) {
+            return new PartySelf();
+        }
+        return converter.convert(resource.getAuthorFirstRep());
+    }
+
+    @Override
+    protected Optional<PartyIdentified> convertHealthCareFacility(DocumentReference resource) {
+        if (!resource.hasCustodian()) {
+            return Optional.empty();
+        }
+        return Optional.of(converter.convert(resource.getCustodian()));
     }
 
     private ZonedDateTime getStartTime(DocumentReference documentReference) {
