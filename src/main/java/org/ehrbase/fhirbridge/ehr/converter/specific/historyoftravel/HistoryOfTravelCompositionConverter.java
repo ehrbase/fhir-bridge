@@ -8,7 +8,6 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.Aussag
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;

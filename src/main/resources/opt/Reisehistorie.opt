@@ -28,6 +28,8 @@
     <other_details id="MD5-CAM-1.0.1">96740da32262d61bb93b69e1e97da196</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -312,7 +314,7 @@
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>[http://terminology.hl7.org/CodeSystem/observation-category]</value>
+                          <value>http://terminology.hl7.org/CodeSystem/observation-category</value>
                         </terminology_id>
                         <code_list>social-history</code_list>
                       </children>
