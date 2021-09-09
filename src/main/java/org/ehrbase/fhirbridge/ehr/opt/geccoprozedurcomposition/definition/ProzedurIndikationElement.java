@@ -11,12 +11,12 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-06T16:23:11.808748+02:00",
+    date = "2021-09-09T16:13:25.781045+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProzedurIndikationElement implements LocatableEntity {
   /**
-   * Path: Registereintrag/Prozedur/Indikation
+   * Path: GECCO_Prozedur/Prozedur/Indikation
    * Description: Der klinische oder prozessbezogene Grund für die Prozedur.
    * Comment: Die Kodierung der Indikation mit einer Terminologie wird nach Möglichkeit bevorzugt. Dieses Datenelement ermöglicht mehrere Vorkommen. Zum Beispiel: "Fehlgeschlagenen Darmvorbereitung" oder "Darmkrebsvorsorge".
    */
@@ -24,13 +24,13 @@ public class ProzedurIndikationElement implements LocatableEntity {
   private String value;
 
   /**
-   * Path: Registereintrag/Prozedur/Tree/Indikation/null_flavour
+   * Path: GECCO_Prozedur/Prozedur/Tree/Indikation/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: Registereintrag/Prozedur/feeder_audit
+   * Path: GECCO_Prozedur/Prozedur/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;

@@ -17,9 +17,9 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeccoProzedurKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NichtDurchgefuehrteProzedurEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.StatusDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.UnbekannteProzedurEvaluation;
 
@@ -34,7 +34,7 @@ public class GECCOProzedurCompositionContainment extends Containment {
 
   public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(GECCOProzedurComposition.class, "/context/other_context[at0001]/items[at0004]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public ListSelectAqlField<RegistereintragKategorieElement> KATEGORIE = new ListAqlFieldImp<RegistereintragKategorieElement>(GECCOProzedurComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", RegistereintragKategorieElement.class, this);
+  public ListSelectAqlField<GeccoProzedurKategorieElement> KATEGORIE = new ListAqlFieldImp<GeccoProzedurKategorieElement>(GECCOProzedurComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", GeccoProzedurKategorieElement.class, this);
 
   public SelectAqlField<TemporalAccessor> START_TIME_VALUE = new AqlFieldImp<TemporalAccessor>(GECCOProzedurComposition.class, "/context/start_time|value", "startTimeValue", TemporalAccessor.class, this);
 

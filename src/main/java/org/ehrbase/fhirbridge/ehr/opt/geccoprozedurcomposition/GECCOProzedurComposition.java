@@ -21,9 +21,9 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeccoProzedurKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NichtDurchgefuehrteProzedurEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.StatusDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.UnbekannteProzedurEvaluation;
 
@@ -31,121 +31,121 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.Unbeka
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-06T16:23:11.754298+02:00",
+    date = "2021-09-09T16:13:25.731943+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("GECCO_Prozedur")
 public class GECCOProzedurComposition implements CompositionEntity {
   /**
-   * Path: Registereintrag/category
+   * Path: GECCO_Prozedur/category
    */
   @Path("/category|defining_code")
   private Category categoryDefiningCode;
 
   /**
-   * Path: Registereintrag/context/Erweiterung
+   * Path: GECCO_Prozedur/context/Erweiterung
    * Description: Ergänzende Angaben zum Registereintrag.
    */
   @Path("/context/other_context[at0001]/items[at0002]")
   private List<Cluster> erweiterung;
 
   /**
-   * Path: Registereintrag/context/Status
+   * Path: GECCO_Prozedur/context/Status
    * Description: Status der gelieferten Daten für den Registereintrag. Hinweis: Dies ist nicht der Status einzelner Komponenten.
    */
   @Path("/context/other_context[at0001]/items[at0004]/value|defining_code")
   private StatusDefiningCode statusDefiningCode;
 
   /**
-   * Path: Registereintrag/context/Baum/Status/null_flavour
+   * Path: GECCO_Prozedur/context/Baum/Status/null_flavour
    */
   @Path("/context/other_context[at0001]/items[at0004]/null_flavour|defining_code")
   private NullFlavour statusNullFlavourDefiningCode;
 
   /**
-   * Path: Registereintrag/context/Kategorie
+   * Path: GECCO_Prozedur/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/context/other_context[at0001]/items[at0005]")
-  private List<RegistereintragKategorieElement> kategorie;
+  private List<GeccoProzedurKategorieElement> kategorie;
 
   /**
-   * Path: Registereintrag/context/start_time
+   * Path: GECCO_Prozedur/context/start_time
    */
   @Path("/context/start_time|value")
   private TemporalAccessor startTimeValue;
 
   /**
-   * Path: Registereintrag/context/participations
+   * Path: GECCO_Prozedur/context/participations
    */
   @Path("/context/participations")
   private List<Participation> participations;
 
   /**
-   * Path: Registereintrag/context/end_time
+   * Path: GECCO_Prozedur/context/end_time
    */
   @Path("/context/end_time|value")
   private TemporalAccessor endTimeValue;
 
   /**
-   * Path: Registereintrag/context/location
+   * Path: GECCO_Prozedur/context/location
    */
   @Path("/context/location")
   private String location;
 
   /**
-   * Path: Registereintrag/context/health_care_facility
+   * Path: GECCO_Prozedur/context/health_care_facility
    */
   @Path("/context/health_care_facility")
   private PartyIdentified healthCareFacility;
 
   /**
-   * Path: Registereintrag/context/setting
+   * Path: GECCO_Prozedur/context/setting
    */
   @Path("/context/setting|defining_code")
   private Setting settingDefiningCode;
 
   /**
-   * Path: Registereintrag/Prozedur
+   * Path: GECCO_Prozedur/Prozedur
    * Description: Eine klinische Aktivität, die zur Früherkennung, Untersuchung, Diagnose, Heilung, Therapie, Bewertung oder in Hinsicht auf palliative Maßnahmen durchgeführt wird.
    */
   @Path("/content[openEHR-EHR-ACTION.procedure.v1]")
   private ProzedurAction prozedur;
 
   /**
-   * Path: Registereintrag/Nicht durchgeführte Prozedur
+   * Path: GECCO_Prozedur/Nicht durchgeführte Prozedur
    * Description: Ein Bericht über den Ausschluss eines/r Problems/Diagnose, familiäre Krankengeschichte, Medikation, Nebenwirkung/Allergens oder eines anderen klinischen Ereignisses, welche/s zur Zeit nicht oder noch nie vorhanden war.
    */
   @Path("/content[openEHR-EHR-EVALUATION.exclusion_specific.v1 and name/value='Nicht durchgeführte Prozedur']")
   private NichtDurchgefuehrteProzedurEvaluation nichtDurchgefuehrteProzedur;
 
   /**
-   * Path: Registereintrag/Unbekannte Prozedur
+   * Path: GECCO_Prozedur/Unbekannte Prozedur
    * Description: Aussage darüber, dass bestimmte Gesundheitsinformationen zum Zeitpukt der Erfassung nicht in der Krankenakte oder einem Schriftstück erfasst werden können, da keine Kenntnisse darüber vorhanden sind.
    */
   @Path("/content[openEHR-EHR-EVALUATION.absence.v2 and name/value='Unbekannte Prozedur']")
   private UnbekannteProzedurEvaluation unbekannteProzedur;
 
   /**
-   * Path: Registereintrag/composer
+   * Path: GECCO_Prozedur/composer
    */
   @Path("/composer")
   private PartyProxy composer;
 
   /**
-   * Path: Registereintrag/language
+   * Path: GECCO_Prozedur/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: Registereintrag/feeder_audit
+   * Path: GECCO_Prozedur/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
   /**
-   * Path: Registereintrag/territory
+   * Path: GECCO_Prozedur/territory
    */
   @Path("/territory")
   private Territory territory;
@@ -185,11 +185,11 @@ public class GECCOProzedurComposition implements CompositionEntity {
      return this.statusNullFlavourDefiningCode ;
   }
 
-  public void setKategorie(List<RegistereintragKategorieElement> kategorie) {
+  public void setKategorie(List<GeccoProzedurKategorieElement> kategorie) {
      this.kategorie = kategorie;
   }
 
-  public List<RegistereintragKategorieElement> getKategorie() {
+  public List<GeccoProzedurKategorieElement> getKategorie() {
      return this.kategorie ;
   }
 

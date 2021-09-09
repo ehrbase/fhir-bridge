@@ -19,12 +19,12 @@
     <other_details id="original_namespace"/>
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
-    <other_details id="MD5-CAM-1.0.1">5627363a091492f04bf5d1bd4b1cb17d</other_details>
+    <other_details id="MD5-CAM-1.0.1">cd1ee2ec47839d9992d60992fc289463</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="sem_ver">2.0.0</other_details>
     <other_details id="build_uid"/>
-    <other_details id="original_language">ISO_639-1::en</other_details>
+    <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
         <terminology_id>
@@ -32,18 +32,13 @@
         </terminology_id>
         <code_string>de</code_string>
       </language>
-      <purpose>To represent a register entry, which provides a structured collection of information from COVID-19 personal data.</purpose>
-      <keywords>COVID-19</keywords>
+      <purpose>Zur Repräsentation von Prozeduren im Rahmen des FoDaPl-Projektes / GECCO-Datensatzes. Es können vorliegende, unbekannte und explizit ausgeschlossene Prozeduren angelegt werden.</purpose>
       <keywords>GECCO</keywords>
-      <keywords>SARS-CoV-2</keywords>
-      <keywords>Coronavirus</keywords>
-      <keywords>Virus</keywords>
-      <keywords>Research purposes</keywords>
-      <keywords>Registry</keywords>
-      <keywords>Registry entry</keywords>
-      <use>Use to represent research data from the GECCO datasets. 
-
-For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.1/files/78899</use>
+      <keywords>NUM</keywords>
+      <keywords>FoDaPl</keywords>
+      <keywords>Prozedur</keywords>
+      <keywords>CODEX</keywords>
+      <use>Für die Abbildung von Prozeduren für die Speicherung im Rahmen des FoDaPI-Projektes / GECCO-Datensatzes.</use>
     </details>
   </description>
   <uid>
@@ -341,6 +336,55 @@ For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.
                 </interval>
               </cardinality>
             </attributes>
+          </children>
+        </attributes>
+      </children>
+    </attributes>
+    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+      <rm_attribute_name>name</rm_attribute_name>
+      <existence>
+        <lower_included>true</lower_included>
+        <upper_included>true</upper_included>
+        <lower_unbounded>false</lower_unbounded>
+        <upper_unbounded>false</upper_unbounded>
+        <lower>1</lower>
+        <upper>1</upper>
+      </existence>
+      <children xsi:type="C_COMPLEX_OBJECT">
+        <rm_type_name>DV_TEXT</rm_type_name>
+        <occurrences>
+          <lower_included>true</lower_included>
+          <upper_included>true</upper_included>
+          <lower_unbounded>false</lower_unbounded>
+          <upper_unbounded>false</upper_unbounded>
+          <lower>1</lower>
+          <upper>1</upper>
+        </occurrences>
+        <node_id/>
+        <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+          <rm_attribute_name>value</rm_attribute_name>
+          <existence>
+            <lower_included>true</lower_included>
+            <upper_included>true</upper_included>
+            <lower_unbounded>false</lower_unbounded>
+            <upper_unbounded>false</upper_unbounded>
+            <lower>1</lower>
+            <upper>1</upper>
+          </existence>
+          <children xsi:type="C_PRIMITIVE_OBJECT">
+            <rm_type_name>STRING</rm_type_name>
+            <occurrences>
+              <lower_included>true</lower_included>
+              <upper_included>true</upper_included>
+              <lower_unbounded>false</lower_unbounded>
+              <upper_unbounded>false</upper_unbounded>
+              <lower>1</lower>
+              <upper>1</upper>
+            </occurrences>
+            <node_id/>
+            <item xsi:type="C_STRING">
+              <list>GECCO_Prozedur</list>
+            </item>
           </children>
         </attributes>
       </children>
@@ -1707,7 +1751,7 @@ For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.
                     <upper>1</upper>
                   </existence>
                   <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>DV_CODED_TEXT</rm_type_name>
+                    <rm_type_name>DV_TEXT</rm_type_name>
                     <occurrences>
                       <lower_included>true</lower_included>
                       <upper_included>true</upper_included>
@@ -1717,132 +1761,6 @@ For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.
                       <upper>1</upper>
                     </occurrences>
                     <node_id/>
-                    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                      <rm_attribute_name>defining_code</rm_attribute_name>
-                      <existence>
-                        <lower_included>true</lower_included>
-                        <upper_included>true</upper_included>
-                        <lower_unbounded>false</lower_unbounded>
-                        <upper_unbounded>false</upper_unbounded>
-                        <lower>1</lower>
-                        <upper>1</upper>
-                      </existence>
-                      <children xsi:type="C_CODE_PHRASE">
-                        <rm_type_name>CODE_PHRASE</rm_type_name>
-                        <occurrences>
-                          <lower_included>true</lower_included>
-                          <upper_included>true</upper_included>
-                          <lower_unbounded>false</lower_unbounded>
-                          <upper_unbounded>false</upper_unbounded>
-                          <lower>1</lower>
-                          <upper>1</upper>
-                        </occurrences>
-                        <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>56244007</code_list>
-                        <code_list>37491003</code_list>
-                        <code_list>78777002</code_list>
-                        <code_list>12423009</code_list>
-                        <code_list>36849000</code_list>
-                        <code_list>305024009</code_list>
-                        <code_list>76152003</code_list>
-                        <code_list>305005006</code_list>
-                        <code_list>91551007</code_list>
-                        <code_list>64700008</code_list>
-                        <code_list>305006007</code_list>
-                        <code_list>75324005</code_list>
-                        <code_list>305007003</code_list>
-                        <code_list>19738007</code_list>
-                        <code_list>19904008</code_list>
-                        <code_list>91035006</code_list>
-                        <code_list>51878007</code_list>
-                        <code_list>818984009</code_list>
-                        <code_list>818985005</code_list>
-                        <code_list>108350001</code_list>
-                        <code_list>7832008</code_list>
-                        <code_list>4158003</code_list>
-                        <code_list>280938000</code_list>
-                        <code_list>280508003</code_list>
-                        <code_list>1017208001</code_list>
-                        <code_list>245284000</code_list>
-                        <code_list>60865004</code_list>
-                        <code_list>420429001</code_list>
-                        <code_list>279637008</code_list>
-                        <code_list>263937002</code_list>
-                        <code_list>312518009</code_list>
-                        <code_list>280699007</code_list>
-                        <code_list>244261004</code_list>
-                        <code_list>280553001</code_list>
-                        <code_list>83908009</code_list>
-                        <code_list>818982008</code_list>
-                        <code_list>80622005</code_list>
-                        <code_list>303753001</code_list>
-                        <code_list>303802008</code_list>
-                        <code_list>303769008</code_list>
-                        <code_list>303765002</code_list>
-                        <code_list>303554009</code_list>
-                        <code_list>303742007</code_list>
-                        <code_list>305042004</code_list>
-                        <code_list>181128001</code_list>
-                        <code_list>204485007</code_list>
-                        <code_list>181118005</code_list>
-                        <code_list>39266006</code_list>
-                        <code_list>107677004</code_list>
-                        <code_list>127565009</code_list>
-                        <code_list>68425008</code_list>
-                        <code_list>397019006</code_list>
-                        <code_list>63599005</code_list>
-                        <code_list>8225009</code_list>
-                        <code_list>280268004</code_list>
-                        <code_list>69826005</code_list>
-                        <code_list>20626003</code_list>
-                        <code_list>416294005</code_list>
-                        <code_list>244648009</code_list>
-                        <code_list>244641003</code_list>
-                        <code_list>244624000</code_list>
-                        <code_list>244617001</code_list>
-                        <code_list>278101009</code_list>
-                        <code_list>277944006</code_list>
-                        <code_list>15119000</code_list>
-                        <code_list>280348007</code_list>
-                        <code_list>360477003</code_list>
-                        <code_list>128476009</code_list>
-                        <code_list>85383006</code_list>
-                        <code_list>129122007</code_list>
-                        <code_list>244329001</code_list>
-                        <code_list>361664009</code_list>
-                        <code_list>361663003</code_list>
-                        <code_list>781077004</code_list>
-                        <code_list>46926004</code_list>
-                        <code_list>410726006</code_list>
-                        <code_list>361514006</code_list>
-                        <code_list>280115004</code_list>
-                        <code_list>85856004</code_list>
-                        <code_list>312743001</code_list>
-                        <code_list>75801009</code_list>
-                        <code_list>52568003</code_list>
-                        <code_list>272743000</code_list>
-                        <code_list>8603005</code_list>
-                        <code_list>85629004</code_list>
-                        <code_list>303754007</code_list>
-                        <code_list>303803003</code_list>
-                        <code_list>303770009</code_list>
-                        <code_list>303766001</code_list>
-                        <code_list>303842003</code_list>
-                        <code_list>303555005</code_list>
-                        <code_list>303743002</code_list>
-                        <code_list>60114005</code_list>
-                        <code_list>410780003</code_list>
-                        <code_list>62818001</code_list>
-                        <code_list>55940004</code_list>
-                        <code_list>86898008</code_list>
-                        <code_list>31816008</code_list>
-                        <code_list>52676006</code_list>
-                        <code_list>18642005</code_list>
-                      </children>
-                    </attributes>
                   </children>
                 </attributes>
               </children>
@@ -2769,306 +2687,6 @@ zur Angleichung an andere Referenzmodelle/Formalismen erforderlich sind.</items>
         </term_definitions>
         <term_definitions code="53950000">
           <items id="text">Respiratory therapy (procedure)</items>
-        </term_definitions>
-        <term_definitions code="56244007">
-          <items id="text">10 to 19 percent of body surface</items>
-        </term_definitions>
-        <term_definitions code="37491003">
-          <items id="text">12 nm filaments</items>
-        </term_definitions>
-        <term_definitions code="78777002">
-          <items id="text">20 to 29 percent of body surface</items>
-        </term_definitions>
-        <term_definitions code="12423009">
-          <items id="text">30 to 39 percent of body surface</items>
-        </term_definitions>
-        <term_definitions code="36849000">
-          <items id="text">40 to 49 percent of body surface</items>
-        </term_definitions>
-        <term_definitions code="305024009">
-          <items id="text">5/6 interchondral joint</items>
-        </term_definitions>
-        <term_definitions code="76152003">
-          <items id="text">50 to 59 percent of body surface</items>
-        </term_definitions>
-        <term_definitions code="305005006">
-          <items id="text">6/7 interchondral joint</items>
-        </term_definitions>
-        <term_definitions code="91551007">
-          <items id="text">60 to 69 percent of body surface</items>
-        </term_definitions>
-        <term_definitions code="64700008">
-          <items id="text">7 nm filaments</items>
-        </term_definitions>
-        <term_definitions code="305006007">
-          <items id="text">7/8 interchondral joint</items>
-        </term_definitions>
-        <term_definitions code="75324005">
-          <items id="text">70 to 79 percent of body surface</items>
-        </term_definitions>
-        <term_definitions code="305007003">
-          <items id="text">8/9 interchondral joint</items>
-        </term_definitions>
-        <term_definitions code="19738007">
-          <items id="text">80 to 89 percent of body surface</items>
-        </term_definitions>
-        <term_definitions code="19904008">
-          <items id="text">9 nm filaments</items>
-        </term_definitions>
-        <term_definitions code="91035006">
-          <items id="text">90 percent of body surface or more</items>
-        </term_definitions>
-        <term_definitions code="51878007">
-          <items id="text">A band</items>
-        </term_definitions>
-        <term_definitions code="818984009">
-          <items id="text">Abdomen proper</items>
-        </term_definitions>
-        <term_definitions code="818985005">
-          <items id="text">Abdomen proper segment of trunk</items>
-        </term_definitions>
-        <term_definitions code="108350001">
-          <items id="text">Abdomen, excluding retroperitoneal region</items>
-        </term_definitions>
-        <term_definitions code="7832008">
-          <items id="text">Abdominal aorta structure</items>
-        </term_definitions>
-        <term_definitions code="4158003">
-          <items id="text">Abdominal aortic plexus structure</items>
-        </term_definitions>
-        <term_definitions code="280938000">
-          <items id="text">Abdominal cutaneous nerve</items>
-        </term_definitions>
-        <term_definitions code="280508003">
-          <items id="text">Abdominal ganglion</items>
-        </term_definitions>
-        <term_definitions code="1017208001">
-          <items id="text">Abdominal lumbar region</items>
-        </term_definitions>
-        <term_definitions code="245284000">
-          <items id="text">Abdominal lymph node group</items>
-        </term_definitions>
-        <term_definitions code="60865004">
-          <items id="text">Abdominal oesophagus structure</items>
-        </term_definitions>
-        <term_definitions code="420429001">
-          <items id="text">Abdominal para-aortic lymph node group</items>
-        </term_definitions>
-        <term_definitions code="279637008">
-          <items id="text">Abdominal part of vas deferens</items>
-        </term_definitions>
-        <term_definitions code="263937002">
-          <items id="text">Abdominal plexus</items>
-        </term_definitions>
-        <term_definitions code="312518009">
-          <items id="text">Abdominal skin crease</items>
-        </term_definitions>
-        <term_definitions code="280699007">
-          <items id="text">Abdominal stoma</items>
-        </term_definitions>
-        <term_definitions code="244261004">
-          <items id="text">Abdominal visceral artery</items>
-        </term_definitions>
-        <term_definitions code="280553001">
-          <items id="text">Abdominal wall muscular space</items>
-        </term_definitions>
-        <term_definitions code="83908009">
-          <items id="text">Abdominal wall structure</items>
-        </term_definitions>
-        <term_definitions code="818982008">
-          <items id="text">Abdominopelvic cross-sectional segment</items>
-        </term_definitions>
-        <term_definitions code="80622005">
-          <items id="text">Abducens nerve structure</items>
-        </term_definitions>
-        <term_definitions code="303753001">
-          <items id="text">Abductor of carpometacarpal joint of thumb</items>
-        </term_definitions>
-        <term_definitions code="303802008">
-          <items id="text">Abductor of hip joint</items>
-        </term_definitions>
-        <term_definitions code="303769008">
-          <items id="text">Abductor of metacarpophalangeal joint of finger</items>
-        </term_definitions>
-        <term_definitions code="303765002">
-          <items id="text">Abductor of metacarpophalangeal joint of thumb</items>
-        </term_definitions>
-        <term_definitions code="303554009">
-          <items id="text">Abductor of shoulder joint</items>
-        </term_definitions>
-        <term_definitions code="303742007">
-          <items id="text">Abductor of wrist joint</items>
-        </term_definitions>
-        <term_definitions code="305042004">
-          <items id="text">Abductor pollicis longus tendon sheath</items>
-        </term_definitions>
-        <term_definitions code="181128001">
-          <items id="text">Aberrant adrenal tissue</items>
-        </term_definitions>
-        <term_definitions code="204485007">
-          <items id="text">Aberrant main renal artery</items>
-        </term_definitions>
-        <term_definitions code="181118005">
-          <items id="text">Aberrant thyroid tissue</items>
-        </term_definitions>
-        <term_definitions code="39266006">
-          <items id="text">Abnormal cell</items>
-        </term_definitions>
-        <term_definitions code="107677004">
-          <items id="text">Abnormal haematopoietic cell</items>
-        </term_definitions>
-        <term_definitions code="127565009">
-          <items id="text">Abnormal macrophage</items>
-        </term_definitions>
-        <term_definitions code="68425008">
-          <items id="text">Abnormal megakaryocyte</items>
-        </term_definitions>
-        <term_definitions code="397019006">
-          <items id="text">Abnormal red blood cell</items>
-        </term_definitions>
-        <term_definitions code="63599005">
-          <items id="text">Acanthocyte</items>
-        </term_definitions>
-        <term_definitions code="8225009">
-          <items id="text">Accessory atrioventricular bundle</items>
-        </term_definitions>
-        <term_definitions code="280268004">
-          <items id="text">Accessory dental nerve</items>
-        </term_definitions>
-        <term_definitions code="69826005">
-          <items id="text">Accessory gluteal muscle</items>
-        </term_definitions>
-        <term_definitions code="20626003">
-          <items id="text">Accessory head of triceps brachii muscle</items>
-        </term_definitions>
-        <term_definitions code="416294005">
-          <items id="text">Accessory lacrimal gland duct</items>
-        </term_definitions>
-        <term_definitions code="244648009">
-          <items id="text">Accessory ligament of ankle joint</items>
-        </term_definitions>
-        <term_definitions code="244641003">
-          <items id="text">Accessory ligament of knee joint</items>
-        </term_definitions>
-        <term_definitions code="244624000">
-          <items id="text">Accessory ligament of midcarpal joint</items>
-        </term_definitions>
-        <term_definitions code="244617001">
-          <items id="text">Accessory ligament of shoulder joint</items>
-        </term_definitions>
-        <term_definitions code="278101009">
-          <items id="text">Accessory meningeal artery</items>
-        </term_definitions>
-        <term_definitions code="277944006">
-          <items id="text">Accessory muscular atrioventricular bundle</items>
-        </term_definitions>
-        <term_definitions code="15119000">
-          <items id="text">Accessory nerve structure</items>
-        </term_definitions>
-        <term_definitions code="280348007">
-          <items id="text">Accessory obturator nerve</items>
-        </term_definitions>
-        <term_definitions code="360477003">
-          <items id="text">Accessory olivary nucleus</items>
-        </term_definitions>
-        <term_definitions code="128476009">
-          <items id="text">Accessory parathyroid gland structure</items>
-        </term_definitions>
-        <term_definitions code="85383006">
-          <items id="text">Accessory renal artery</items>
-        </term_definitions>
-        <term_definitions code="129122007">
-          <items id="text">Accessory thyroid</items>
-        </term_definitions>
-        <term_definitions code="244329001">
-          <items id="text">Acetabular artery</items>
-        </term_definitions>
-        <term_definitions code="361664009">
-          <items id="text">Acetabular branch of medial circumflex femoral artery</items>
-        </term_definitions>
-        <term_definitions code="361663003">
-          <items id="text">Acetabular branch of obturator artery</items>
-        </term_definitions>
-        <term_definitions code="781077004">
-          <items id="text">Achilles tendon sheath structure</items>
-        </term_definitions>
-        <term_definitions code="46926004">
-          <items id="text">Acinus of parotid gland</items>
-        </term_definitions>
-        <term_definitions code="410726006">
-          <items id="text">Acoustic radiations structure</items>
-        </term_definitions>
-        <term_definitions code="361514006">
-          <items id="text">Acousticofacial ganglion</items>
-        </term_definitions>
-        <term_definitions code="280115004">
-          <items id="text">Acquired body structure</items>
-        </term_definitions>
-        <term_definitions code="85856004">
-          <items id="text">Acromioclavicular joint structure</items>
-        </term_definitions>
-        <term_definitions code="312743001">
-          <items id="text">Acromioclavicular joint synovium</items>
-        </term_definitions>
-        <term_definitions code="75801009">
-          <items id="text">Acrosomal granule</items>
-        </term_definitions>
-        <term_definitions code="52568003">
-          <items id="text">Acrosomal vesicle</items>
-        </term_definitions>
-        <term_definitions code="272743000">
-          <items id="text">Acupuncture point</items>
-        </term_definitions>
-        <term_definitions code="8603005">
-          <items id="text">Adductor hallucis muscle structure</items>
-        </term_definitions>
-        <term_definitions code="85629004">
-          <items id="text">Adductor longus muscle structure</items>
-        </term_definitions>
-        <term_definitions code="303754007">
-          <items id="text">Adductor of carpometacarpal joint of thumb</items>
-        </term_definitions>
-        <term_definitions code="303803003">
-          <items id="text">Adductor of hip joint</items>
-        </term_definitions>
-        <term_definitions code="303770009">
-          <items id="text">Adductor of metacarpophalangeal joint of finger</items>
-        </term_definitions>
-        <term_definitions code="303766001">
-          <items id="text">Adductor of metacarpophalangeal joint of thumb</items>
-        </term_definitions>
-        <term_definitions code="303842003">
-          <items id="text">Adductor of metatarsophalangeal joint</items>
-        </term_definitions>
-        <term_definitions code="303555005">
-          <items id="text">Adductor of shoulder joint</items>
-        </term_definitions>
-        <term_definitions code="303743002">
-          <items id="text">Adductor of wrist joint</items>
-        </term_definitions>
-        <term_definitions code="60114005">
-          <items id="text">Adductor pollicis muscle structure</items>
-        </term_definitions>
-        <term_definitions code="410780003">
-          <items id="text">Adductor-interosseous compartment structure of hand</items>
-        </term_definitions>
-        <term_definitions code="62818001">
-          <items id="text">Adenohypophysis structure</items>
-        </term_definitions>
-        <term_definitions code="55940004">
-          <items id="text">Adenoidal structure</items>
-        </term_definitions>
-        <term_definitions code="86898008">
-          <items id="text">Adhesion disc of parasite</items>
-        </term_definitions>
-        <term_definitions code="31816008">
-          <items id="text">Adhesion specialisation between lysosomes</items>
-        </term_definitions>
-        <term_definitions code="52676006">
-          <items id="text">Adhesion specialisation between microbodies</items>
-        </term_definitions>
-        <term_definitions code="18642005">
-          <items id="text">Adhesion specialisation between mitochondria</items>
         </term_definitions>
         <term_definitions code="103693007">
           <items id="text">Diagnostic procedure</items>
