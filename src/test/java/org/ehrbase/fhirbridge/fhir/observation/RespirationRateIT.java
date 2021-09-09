@@ -3,8 +3,8 @@ package org.ehrbase.fhirbridge.fhir.observation;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate.RespiratoryRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.AtemfrequenzComposition;
+import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.AtemfrequenzKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.AtemfrequenzObservation;
-import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -46,13 +46,19 @@ public class RespirationRateIT extends AbstractMappingTestSetupIT {
         testMapping("create-respiratory-rate-on-ventilator.json", "paragon-create-respiratory-rate-on-ventilator.json");
     }
 
+    @Test
+    void createRespirationrateAbsent() throws IOException {
+        testMapping("create-respiratory-rate-absent.json", "paragon-create-respiratory-rate-absent.json");
+    }
+
+
     @Override
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(AtemfrequenzComposition.class, List.of("location",  "feederAudit")))
                 .registerValueObject(AtemfrequenzObservation.class)
-                .registerValueObject(RegistereintragKategorieElement.class)
+                .registerValueObject(AtemfrequenzKategorieElement.class)
                 .build();
     }
 
