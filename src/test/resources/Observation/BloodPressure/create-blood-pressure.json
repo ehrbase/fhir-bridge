@@ -56,6 +56,10 @@
   "performer": [
     {
       "reference": "http://external.fhir.server/Practitioner/example"
+    },
+    {
+      "reference": "http://external.fhir.server/Organization/456",
+      "type": "Organization"
     }
   ],
   "interpretation": [
