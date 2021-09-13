@@ -554,7 +554,7 @@ commands:
                                              -Dexec.args='${project.version}' \
                                              --non-recursive exec:exec)
                     echo ${EHRbase_VERSION}
-                    java -jar "application/target/application-${EHRbase_VERSION}.jar" --server.disable-strict-validation="true"
+                    java -jar "application/target/application-${EHRbase_VERSION}.jar" --server.disable-strict-validation=true \
                                                                                       --security.authType="BASIC" \
                                                                                       --security.authUser="myuser" \
                                                                                       --security.authPassword="myPassword432" > log
