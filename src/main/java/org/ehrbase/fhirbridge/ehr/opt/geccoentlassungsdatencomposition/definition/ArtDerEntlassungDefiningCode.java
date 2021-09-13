@@ -4,17 +4,17 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum ArtDerEntlassungDefiningCode implements EnumValueSet {
-  DEAD_FINDING("Dead (finding)", "", "SNOMED-CT", "419099009"),
+  NICHT_BEKANNT("Nicht bekannt", "", "SNOMED CT", "261665006"),
 
-  UNKNOWN_QUALIFIER_VALUE("Unknown (qualifier value)", "", "SNOMED-CT", "261665006"),
+  PALLIATIVE_ENTLASSUNG("Palliative Entlassung", "", "SNOMED CT", "306237005"),
 
-  PATIENT_DISCHARGED_ALIVE_FINDING("Patient discharged alive (finding)", "", "SNOMED-CT", "371827001"),
+  TOD("Tod", "", "SNOMED CT", "419099009"),
 
-  PATIENT_REFERRAL_PROCEDURE("Patient referral (procedure)", "", "SNOMED-CT", "3457005"),
+  KRANKENHAUSEINWEISUNG("Krankenhauseinweisung", "", "SNOMED CT", "32485007"),
 
-  REFERRAL_TO_PALLIATIVE_CARE_SERVICE_PROCEDURE("Referral to palliative care service (procedure)", "", "SNOMED-CT", "306237005"),
+  UEBERWEISUNG_IN_EINE_ANDERE_EINRICHTUNG("Überweisung in eine andere Einrichtung", "", "SNOMED CT", "3457005"),
 
-  HOSPITAL_ADMISSION_PROCEDURE("Hospital admission (procedure)", "", "SNOMED-CT", "32485007");
+  LEBEND_ENTLASSEN("Lebend entlassen", "", "SNOMED CT", "306237005");
 
   private String value;
 

@@ -23,22 +23,22 @@ public class PatientDischargeAdminEntryConverter extends EntryEntityConverter<Ob
             String code = getSnomedCodeObservation(resource);
             switch(code) {
                 case "261665006":
-                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.UNKNOWN_QUALIFIER_VALUE);
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.NICHT_BEKANNT);
                     break;
                 case "32485007":
-                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.HOSPITAL_ADMISSION_PROCEDURE);
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.KRANKENHAUSEINWEISUNG);
                     break;
                 case "419099009":
-                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.DEAD_FINDING);
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.TOD);
                     break;
                 case "371827001":
-                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.PATIENT_DISCHARGED_ALIVE_FINDING);
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.LEBEND_ENTLASSEN);
                     break;
                 case "3457005":
-                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.PATIENT_REFERRAL_PROCEDURE);
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.UEBERWEISUNG_IN_EINE_ANDERE_EINRICHTUNG);
                     break;
                 case "306237005":
-                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.REFERRAL_TO_PALLIATIVE_CARE_SERVICE_PROCEDURE);
+                    adminEntry.setArtDerEntlassungDefiningCode(ArtDerEntlassungDefiningCode.PALLIATIVE_ENTLASSUNG);
                     break;
                 default:
                     throw new ConversionException("Value code " + resource.getValueCodeableConcept().getCoding().get(0).getCode() + " is not supported");
