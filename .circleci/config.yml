@@ -999,4 +999,3 @@ executors:
                   MINIO_ROOT_PASSWORD: minio123456
               command: server /data --console-address ":9001"
         # resource_class: large
-q
