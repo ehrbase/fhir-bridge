@@ -28,7 +28,7 @@
     <other_details id="MD5-CAM-1.0.1">5eaf6bec4486b4a929f4af01cb5593a3</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">5.0.0</other_details>
+    <other_details id="sem_ver">6.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -924,7 +924,7 @@
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>SNOMED CT</value>
+                          <value>SNOMED Clinical Terms</value>
                         </terminology_id>
                         <code_list>421245007</code_list>
                         <code_list>37146000</code_list>
