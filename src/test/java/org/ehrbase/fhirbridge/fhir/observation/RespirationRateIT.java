@@ -27,28 +27,23 @@ public class RespirationRateIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createRespiration() throws IOException {
+    void createRespirationRate() throws IOException {
         create("create-respiratory-rate.json");
     }
 
     @Test
-    void createRespirationrate() throws IOException {
-        testMapping("create-respiratory-rate.json", "paragon-create-respiratory-rate.json");
+    void createRespirationRateMagnitudeMin() throws IOException {
+        testMapping("create-respiratory-rate_magnitude-min.json", "paragon-respiratory-rate_magnitude-min.json");
     }
 
     @Test
-    void createRespirationrate_2() throws IOException {
-        testMapping("create-respiratory-rate-2.json", "paragon-create-respiratory-rate-2.json");
+    void createRespirationRateMagnitudeMax() throws IOException {
+        testMapping("create-respiratory-rate_magnitude-max.json", "paragon-respiratory-rate_magnitude-max.json");
     }
 
     @Test
-    void createRespirationrate_3() throws IOException {
-        testMapping("create-respiratory-rate-on-ventilator.json", "paragon-create-respiratory-rate-on-ventilator.json");
-    }
-
-    @Test
-    void createRespirationrateAbsent() throws IOException {
-        testMapping("create-respiratory-rate-absent.json", "paragon-create-respiratory-rate-absent.json");
+    void createRespirationRateDataAbsent() throws IOException {
+        testMapping("create-respiratory-rate_data-absent.json", "paragon-respiratory-rate_data-absent.json");
     }
 
 
