@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConsentToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.DNRAnordnungComposition;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.ArtDerRichtlinieDefiningCode;
@@ -29,7 +29,7 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
     }
 
     private StatusDefiningCode createStatusDefiningCode(Consent.ConsentState fhirStatus) {
-        switch(fhirStatus.toCode()) {
+        switch (fhirStatus.toCode()) {
             case "draft":
                 return StatusDefiningCode.ENTWORFEN;
             case "proposed":
@@ -43,7 +43,7 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
             case "entered-in-error":
                 return StatusDefiningCode.EINGABEFEHLER;
             default:
-                throw new ConversionException("createStatusDefiningCode failed. Code not found for: " + fhirStatus.toString());
+                throw new ConversionException("createStatusDefiningCode failed. Code not found for: " + fhirStatus);
         }
     }
 

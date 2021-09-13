@@ -59,6 +59,6 @@ public class OpenEhrClientExceptionHandler implements Processor {
     }
 
     private void handleException(Exception ex) {
-        throw new InternalErrorException(ex.getMessage());
+        throw new InternalErrorException("Error occurred while merging composition in EHRbase: " + ex.getMessage(), ex);
     }
 }

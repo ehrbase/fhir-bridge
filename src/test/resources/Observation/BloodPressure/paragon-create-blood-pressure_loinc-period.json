@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/5/_history/1",
+      "id" : "Observation/202f1a3a-119c-446c-a9e8-e262edb400e7/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -54,7 +54,11 @@
     }
   },
   "composer" : {
-    "_type" : "PARTY_SELF"
+    "_type" : "PARTY_IDENTIFIED",
+    "identifiers" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "http://external.fhir.server/Organization/456"
+    } ]
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
@@ -77,6 +81,13 @@
         },
         "code_string" : "232"
       }
+    },
+    "health_care_facility" : {
+      "_type" : "PARTY_IDENTIFIED",
+      "identifiers" : [ {
+        "_type" : "DV_IDENTIFIER",
+        "id" : "http://external.fhir.server/Organization/456"
+      } ]
     }
   },
   "content" : [ {
@@ -103,6 +114,9 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
+    },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "name" : {
