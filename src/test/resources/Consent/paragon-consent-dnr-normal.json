@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Consent/a0200c41-c800-47aa-9d98-35a5c03e5480/_history/1",
+      "id" : "Consent/b827fe0e-7e6e-42bb-b062-464ec7f47e54/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -65,7 +65,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-09-10T09:55:27,710485+02:00"
+      "value" : "2021-09-13T14:35:49,126806+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -141,6 +141,15 @@
       "_type" : "DV_TEXT",
       "value" : "DNR-Anordnung"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-EVALUATION.advance_care_directive.v1"
+      },
+      "template_id" : {
+        "value" : "DNR-Anordnung"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -159,9 +168,6 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
-    },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "_type" : "ITEM_TREE",
