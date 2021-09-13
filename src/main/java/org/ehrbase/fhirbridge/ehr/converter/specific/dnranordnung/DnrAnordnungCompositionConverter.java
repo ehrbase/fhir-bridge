@@ -5,12 +5,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConsentToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.DNRAnordnungComposition;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.ArtDerRichtlinieDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.BeschreibungDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.KategorieDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.StatusDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.*;
 import org.hl7.fhir.r4.model.Consent;
 import org.springframework.lang.NonNull;
 
@@ -50,7 +45,11 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
     private List<DnrAnordnungKategorieElement> createDnrAnordnungKategorieElement() {
         List<DnrAnordnungKategorieElement> items = new ArrayList<>();
         DnrAnordnungKategorieElement elem = new DnrAnordnungKategorieElement();
-        elem.setValue(KategorieDefiningCode.DO_NOT_RESUSCITATE);
+        List<DnrAnordnungKategorieChoice> dnrAnordnungKategorieChoices = new ArrayList<>();
+        DnrAnordnungKategorieDvCodedText dnrAnordnungKategorieDvCodedText = new DnrAnordnungKategorieDvCodedText();
+        dnrAnordnungKategorieDvCodedText.setKategorieDefiningCode(KategorieDefiningCode.DO_NOT_RESUSCITATE);
+        dnrAnordnungKategorieChoices.add(dnrAnordnungKategorieDvCodedText);
+        elem.setValue2(dnrAnordnungKategorieChoices);
         items.add(elem);
         return items;
     }
