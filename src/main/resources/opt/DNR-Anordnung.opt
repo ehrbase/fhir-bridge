@@ -25,9 +25,11 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">5c7f927f854514d6938e75c12c89c1bd</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="MD5-CAM-1.0.1">9aaf756107545049d861b3dba78d5a91</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -320,9 +322,12 @@
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>http://terminology.hl7.org/CodeSystem/consentcategorycodes</value>
+                          <value>LOINC</value>
                         </terminology_id>
-                        <code_list>dnr</code_list>
+                        <code_list>59284-0</code_list>
+                        <code_list>57016-8</code_list>
+                        <code_list>57017-6</code_list>
+                        <code_list>64292-6</code_list>
                       </children>
                     </attributes>
                   </children>
@@ -988,8 +993,17 @@ Oder: " Zeugen Jehovas glauben, dass die Bibel Christen verbietet, Bluttransfusi
     <term_definitions code="Eingabefehler">
       <items id="text">Eingabefehler</items>
     </term_definitions>
-    <term_definitions code="dnr">
-      <items id="text">Do Not Resuscitate</items>
+    <term_definitions code="59284-0">
+      <items id="text">Patient Consent</items>
+    </term_definitions>
+    <term_definitions code="57016-8">
+      <items id="text">Privacy policy acknowledgement Document</items>
+    </term_definitions>
+    <term_definitions code="57017-6">
+      <items id="text">Privacy policy Organization Document</items>
+    </term_definitions>
+    <term_definitions code="64292-6">
+      <items id="text">Release of information consent</items>
     </term_definitions>
   </definition>
   <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-EVALUATION.advance_care_directive.v1]">

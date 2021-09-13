@@ -5,7 +5,6 @@ import java.util.List;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.client.classgenerator.EnumValueSet;
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EthnischerHintergrundDefiningCode;
 import org.hl7.fhir.r4.model.CodeableConcept;
 
 public enum BeschreibungDefiningCode implements EnumValueSet {
@@ -30,17 +29,17 @@ public enum BeschreibungDefiningCode implements EnumValueSet {
     this.code = code;
   }
 
-    public static BeschreibungDefiningCode get_by_SNOMED_code(List<CodeableConcept> code) {
-      CodeableConcept fhir_code = code.get(0);
-      for(BeschreibungDefiningCode bc : values()) {
-        if(bc.code.equals(fhir_code.getCoding().get(0).getCode())) {
-          return bc;
-        }
+  public static BeschreibungDefiningCode get_by_SNOMED_code(List<CodeableConcept> code) {
+    CodeableConcept fhir_code = code.get(0);
+    for(BeschreibungDefiningCode bc : values()) {
+      if(bc.code.equals(fhir_code.getCoding().get(0).getCode())) {
+        return bc;
       }
-      throw new UnprocessableEntityException("Getting BeschreibungDefiningCode failed. Code not found for: " + fhir_code.getCoding().get(0).toString());
     }
+    throw new UnprocessableEntityException("Getting BeschreibungDefiningCode failed. Code not found for: " + fhir_code.getCoding().get(0).toString());
+  }
 
-    public String getValue() {
+  public String getValue() {
      return this.value ;
   }
 

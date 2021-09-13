@@ -4,7 +4,13 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum KategorieDefiningCode implements EnumValueSet {
-  DO_NOT_RESUSCITATE("Do Not Resuscitate", "", "http://terminology.hl7.org/CodeSystem/consentcategorycodes", "dnr");
+  PRIVACY_POLICY_ORGANIZATION_DOCUMENT("Privacy policy Organization Document", "", "LOINC", "57017-6"),
+
+  PATIENT_CONSENT("Patient Consent", "", "LOINC", "59284-0"),
+
+  RELEASE_OF_INFORMATION_CONSENT("Release of information consent", "", "LOINC", "64292-6"),
+
+  PRIVACY_POLICY_ACKNOWLEDGEMENT_DOCUMENT("Privacy policy acknowledgement Document", "", "LOINC", "57016-8");
 
   private String value;
 
