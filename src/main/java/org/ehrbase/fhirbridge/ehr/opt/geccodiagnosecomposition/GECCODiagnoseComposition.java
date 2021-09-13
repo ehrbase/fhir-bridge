@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.Participation;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
@@ -23,6 +22,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AusgeschlosseneDiagnoseEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.StatusDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.UnbekannteDiagnoseEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
@@ -31,8 +31,8 @@ import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.Vorlie
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-12T18:58:20.518470+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-09-13T14:55:50.684644+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("GECCO_Diagnose")
 public class GECCODiagnoseComposition implements CompositionEntity {
@@ -44,7 +44,7 @@ public class GECCODiagnoseComposition implements CompositionEntity {
 
   /**
    * Path: GECCO_Diagnose/context/Erweiterung
-   * Description: Ergänzende Angaben zum Registereintrag. 
+   * Description: Ergänzende Angaben zum Registereintrag.
    */
   @Path("/context/other_context[at0001]/items[at0002]")
   private List<Cluster> erweiterung;
@@ -66,8 +66,8 @@ public class GECCODiagnoseComposition implements CompositionEntity {
    * Path: GECCO_Diagnose/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
-  @Path("/context/other_context[at0001]/items[at0005]/value")
-  private DvCodedText kategorie;
+  @Path("/context/other_context[at0001]/items[at0005]/value|defining_code")
+  private KategorieDefiningCode kategorieDefiningCode;
 
   /**
    * Path: GECCO_Diagnose/context/Baum/Kategorie/null_flavour
@@ -192,12 +192,12 @@ public class GECCODiagnoseComposition implements CompositionEntity {
      return this.statusNullFlavourDefiningCode ;
   }
 
-  public void setKategorie(DvCodedText kategorie) {
-     this.kategorie = kategorie;
+  public void setKategorieDefiningCode(KategorieDefiningCode kategorieDefiningCode) {
+     this.kategorieDefiningCode = kategorieDefiningCode;
   }
 
-  public DvCodedText getKategorie() {
-     return this.kategorie ;
+  public KategorieDefiningCode getKategorieDefiningCode() {
+     return this.kategorieDefiningCode ;
   }
 
   public void setKategorieNullFlavourDefiningCode(NullFlavour kategorieNullFlavourDefiningCode) {
