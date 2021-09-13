@@ -5,7 +5,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConsentToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.DNRAnordnungComposition;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.ArtDerRichtlinieDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.BeschreibungDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungKategorieChoice;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungKategorieDvCodedText;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.KategorieDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Consent;
 import org.springframework.lang.NonNull;
 
