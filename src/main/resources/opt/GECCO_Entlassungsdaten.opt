@@ -27,7 +27,7 @@
     <other_details id="User roles"/>
     <other_details id="MD5-CAM-1.0.1">ccf06e9334307789253bd0cad5c9c2df</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
-    <other_details id="sem_ver">2.0.0</other_details>
+    <other_details id="sem_ver">3.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -455,7 +455,7 @@
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -466,15 +466,7 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED CT</value>
-                        </terminology_id>
-                        <code_list>261665006</code_list>
-                        <code_list>32485007</code_list>
-                        <code_list>419099009</code_list>
-                        <code_list>371827001</code_list>
-                        <code_list>3457005</code_list>
-                        <code_list>306237005</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/discharge-disposition</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -718,24 +710,6 @@
         <term_definitions code="at0068">
           <items id="description">Sonstige</items>
           <items id="text">Sonstige</items>
-        </term_definitions>
-        <term_definitions code="261665006">
-          <items id="text">Nicht bekannt</items>
-        </term_definitions>
-        <term_definitions code="32485007">
-          <items id="text">Krankenhauseinweisung</items>
-        </term_definitions>
-        <term_definitions code="419099009">
-          <items id="text">Tod</items>
-        </term_definitions>
-        <term_definitions code="371827001">
-          <items id="text">Lebend entlassen</items>
-        </term_definitions>
-        <term_definitions code="3457005">
-          <items id="text">Überweisung in eine andere Einrichtung</items>
-        </term_definitions>
-        <term_definitions code="306237005">
-          <items id="text">Palliative Entlassung</items>
         </term_definitions>
       </children>
       <cardinality>
