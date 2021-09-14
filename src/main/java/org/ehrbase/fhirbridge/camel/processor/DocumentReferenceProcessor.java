@@ -24,11 +24,9 @@ import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.minio.MinioService;
 import org.hl7.fhir.r4.model.Attachment;
 import org.hl7.fhir.r4.model.DocumentReference;
-import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 
-@Component(DocumentReferenceProcessor.BEAN_ID)
 public class DocumentReferenceProcessor implements Processor {
 
     public static final String BEAN_ID = "documentReferenceProcessor";
