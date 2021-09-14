@@ -39,12 +39,14 @@ public abstract class AbstractConverter<S extends Resource, T extends RMEntity> 
         FeederAudit result = new FeederAudit();
         String systemId = resource.getMeta().hasSource() ? resource.getMeta().getSource() : DEFAULT_SYSTEM_ID;
         result.setOriginatingSystemAudit(new FeederAuditDetails(systemId, null, null, null, null, null, null));
-        DvIdentifier identifier = new DvIdentifier();
-        identifier.setId(resource.getId());
-        identifier.setType("fhir_logical_id");
-        List<DvIdentifier> identifiers = new ArrayList<>();
-        identifiers.add(identifier);
-        result.setOriginatingSystemItemIds(identifiers);
+        if (resource.hasId()) {
+            DvIdentifier identifier = new DvIdentifier();
+            identifier.setId(resource.getId());
+            identifier.setType("fhir_logical_id");
+            List<DvIdentifier> identifiers = new ArrayList<>();
+            identifiers.add(identifier);
+            result.setOriginatingSystemItemIds(identifiers);
+        }
         return result;
     }
 }

@@ -151,6 +151,7 @@ public enum ArzneimittelNameDefiningCode4 implements EnumValueSet {
     return arzneimittelNameDefiningCodeHashMap;
   }
 
+
   public String getValue() {
      return this.value ;
   }

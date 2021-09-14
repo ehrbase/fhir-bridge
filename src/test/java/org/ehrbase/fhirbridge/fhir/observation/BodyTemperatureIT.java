@@ -1,10 +1,10 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodytemperature.KoerpertemperaturCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.KoerpertemperaturComposition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.KoerpertemperaturObservation;
+import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -28,25 +28,28 @@ class BodyTemperatureIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createBodyTemperature() throws IOException {
-        create("create-body-temp-1.json");
+        create("create-body-temp.json");
+    }
+
+    // #####################################################################################
+    // check payload
+
+    @Test
+    void testBodyTemperatureMagnitudeMin() throws IOException {
+        testMapping("create-body-temp_magnitude-min.json",
+                "paragon-body-temp_magnitude-min.json");
     }
 
     @Test
-    void mappingNormal() throws IOException {
-        testMapping("create-body-temp-1.json",
-                "paragon-create-body-temp-1.json");
+    void testBodyTemperatureMagnitudeMax() throws IOException {
+        testMapping("create-body-temp_magnitude-max.json",
+                "paragon-body-temp_magnitude-max.json");
     }
 
     @Test
-    void mappingNormal2() throws IOException {
-        testMapping("create-body-temp-2.json",
-                "paragon-create-body-temp-2.json");
-    }
-
-    @Test
-    void mappingNormal3() throws IOException {
-        testMapping("create-body-temp-3.json",
-                "paragon-create-body-temp-3.json");
+    void testValueAbsent() throws IOException {
+        testMapping("create-body-temp-absent.json",
+                "paragon-create-body-temp-absent.json");
     }
 
     // #####################################################################################
@@ -58,13 +61,14 @@ class BodyTemperatureIT extends AbstractMappingTestSetupIT {
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(KoerpertemperaturComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(KoerpertemperaturObservation.class)
+                .registerValueObject(RegistereintragKategorieElement.class)
                 .build();
     }
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () ->
+        return assertThrows(Exception.class, () ->
                 new KoerpertemperaturCompositionConverter().convert(obs)
         );
     }

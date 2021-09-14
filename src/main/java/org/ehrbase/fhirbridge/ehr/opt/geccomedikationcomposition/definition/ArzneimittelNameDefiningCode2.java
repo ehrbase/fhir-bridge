@@ -101,6 +101,8 @@ public enum ArzneimittelNameDefiningCode2 implements EnumValueSet {
 
   RAMIPRIL_UND_HYDROCHLOROTHIAZID("Ramipril und Hydrochlorothiazid", "", "ATC", "C09BA25"),
 
+  RAMIPRIL_UND_BISOPROLOL("Ramipril und Bisoprolol", "", "ATC", "C09BX05"),
+
   LISINOPRIL_UND_HYDROCHLOROTHIAZID("Lisinopril und Hydrochlorothiazid", "", "ATC", "C09BA23"),
 
   IMIDAPRIL("Imidapril", "", "ATC", "C09AA16"),

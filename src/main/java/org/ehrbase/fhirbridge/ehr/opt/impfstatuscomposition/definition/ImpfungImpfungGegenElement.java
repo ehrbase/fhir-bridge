@@ -10,8 +10,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-06-30T11:44:02.795736+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-09-13T13:53:54.775158+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ImpfungImpfungGegenElement implements LocatableEntity {
   /**

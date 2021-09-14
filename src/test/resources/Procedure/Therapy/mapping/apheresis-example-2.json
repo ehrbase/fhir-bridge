@@ -32,5 +32,15 @@
       "value": "{{patientId}}"
     }
   },
-  "performedDateTime": "2020-09-30"
+  "performedDateTime": "2020-09-30",
+  "performer": [
+    {
+      "actor": {
+        "identifier": {
+          "system": "urn:performer:identifier:system",
+          "value": "performer_123456"
+        }
+      }
+    }
+  ]
 }

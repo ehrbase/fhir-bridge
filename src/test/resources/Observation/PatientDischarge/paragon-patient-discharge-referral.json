@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1096b2fe-087a-42e0-8e70-2060eaa63b91/_history/1",
+      "id" : "Observation/5e9506b1-bc89-4d22-86ef-f36ea7e9a4ee/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -120,6 +120,15 @@
       "_type" : "DV_TEXT",
       "value" : "Entlassungsart"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-ADMIN_ENTRY.discharge_summary.v0"
+      },
+      "template_id" : {
+        "value" : "GECCO_Entlassungsdaten"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -158,7 +167,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED-CT"
+              "value" : "SNOMED Clinical Terms"
             },
             "code_string" : "3457005"
           }
