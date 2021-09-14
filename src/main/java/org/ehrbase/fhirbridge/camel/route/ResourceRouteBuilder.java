@@ -16,6 +16,7 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
+import ca.uhn.fhir.rest.server.exceptions.NotImplementedOperationException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.util.ObjectHelper;
@@ -25,12 +26,14 @@ import org.ehrbase.client.openehrclient.VersionUid;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.processor.EhrLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.FhirProfileValidator;
+import org.ehrbase.fhirbridge.camel.processor.FindPatientOpenEhrProcessor;
 import org.ehrbase.fhirbridge.camel.processor.OpenEhrClientExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourceAuditHandler;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourceResponseProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourcePersistenceProcessor;
 import org.springframework.stereotype.Component;
+import org.ehrbase.fhirbridge.config.FhirSearchProperties;
 
 /**
  * {@link RouteBuilder} implementation that configures the routes for FHIR resources.
@@ -40,6 +43,12 @@ import org.springframework.stereotype.Component;
 @Component
 @SuppressWarnings("java:S1192")
 public class ResourceRouteBuilder extends AbstractRouteBuilder {
+
+    private final FhirSearchProperties properties;
+
+    public ResourceRouteBuilder(FhirSearchProperties properties) {
+        this.properties = properties;
+    }
 
     @Override
     public void configure() throws Exception {
@@ -179,8 +188,22 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
         from("patient-provide:patientEndpoint?fhirContext=#fhirContext")
                 .to("direct:provideResource");
 
+        /*
         from("patient-find:patientEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
                 .process(ResourcePersistenceProcessor.BEAN_ID);
+        */
+        // @formatter:off
+        from("patient-find:patientEndpoint?fhirContext=#fhirContext")
+            .choice()
+                .when(exchange -> properties.isDatabaseSearch())
+                    .process(ResourcePersistenceProcessor.BEAN_ID)
+                .when(exchange -> !properties.isDatabaseSearch())
+                    .process(FindPatientOpenEhrProcessor.BEAN_ID)
+                .otherwise()
+                    .throwException(new NotImplementedOperationException("Configuration search-mode should be 'openehr' or 'database'"));
+        // @formatter:on
+
+
     }
 
     /**
