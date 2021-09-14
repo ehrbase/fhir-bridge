@@ -5,6 +5,7 @@ import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu.PatientInIcuCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.PatientAufICUComposition;
 import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.PatientAufDerIntensivstationObservation;
+import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.WirdWurdeDieAktivitaetDurchgefuehrtDefiningCode;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -43,6 +44,7 @@ public class PatientInIcuIT extends AbstractMappingTestSetupIT {
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(PatientAufICUComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(PatientAufDerIntensivstationObservation.class)
+                .registerValueObject(WirdWurdeDieAktivitaetDurchgefuehrtDefiningCode.class)
                 .build();
     }
 
