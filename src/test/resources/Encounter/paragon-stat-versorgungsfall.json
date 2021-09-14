@@ -1,279 +1,278 @@
 {
-  "_type": "COMPOSITION",
-  "name": {
-    "_type": "DV_TEXT",
-    "value": "Stationärer Versorgungsfall"
+  "_type" : "COMPOSITION",
+  "name" : {
+    "_type" : "DV_TEXT",
+    "value" : "Stationärer Versorgungsfall"
   },
-  "archetype_details": {
-    "archetype_id": {
-      "value": "openEHR-EHR-COMPOSITION.fall.v1"
+  "archetype_details" : {
+    "archetype_id" : {
+      "value" : "openEHR-EHR-COMPOSITION.fall.v1"
     },
-    "template_id": {
-      "value": "Stationärer Versorgungsfall"
+    "template_id" : {
+      "value" : "Stationärer Versorgungsfall"
     },
-    "rm_version": "1.0.4"
+    "rm_version" : "1.0.4"
   },
-  "feeder_audit": {
-    "_type": "FEEDER_AUDIT",
-    "originating_system_item_ids": [
-      {
-        "_type": "DV_IDENTIFIER",
-        "id": "Encounter/2/_history/1",
-        "type": "fhir_logical_id"
-      }
-    ],
-    "originating_system_audit": {
-      "_type": "FEEDER_AUDIT_DETAILS",
-      "system_id": "FHIR-Bridge"
+  "feeder_audit" : {
+    "_type" : "FEEDER_AUDIT",
+    "originating_system_item_ids" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "Encounter/df35cad0-b77e-430c-bb89-8d920600005a/_history/1",
+      "type" : "fhir_logical_id"
+    } ],
+    "originating_system_audit" : {
+      "_type" : "FEEDER_AUDIT_DETAILS",
+      "system_id" : "FHIR-Bridge"
     }
   },
-  "language": {
-    "_type": "CODE_PHRASE",
-    "terminology_id": {
-      "_type": "TERMINOLOGY_ID",
-      "value": "ISO_639-1"
+  "language" : {
+    "_type" : "CODE_PHRASE",
+    "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
+      "value" : "ISO_639-1"
     },
-    "code_string": "de"
+    "code_string" : "de"
   },
-  "territory": {
-    "_type": "CODE_PHRASE",
-    "terminology_id": {
-      "_type": "TERMINOLOGY_ID",
-      "value": "ISO_3166-1"
+  "territory" : {
+    "_type" : "CODE_PHRASE",
+    "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
+      "value" : "ISO_3166-1"
     },
-    "code_string": "DE"
+    "code_string" : "DE"
   },
-  "category": {
-    "_type": "DV_CODED_TEXT",
-    "value": "event",
-    "defining_code": {
-      "_type": "CODE_PHRASE",
-      "terminology_id": {
-        "_type": "TERMINOLOGY_ID",
-        "value": "openehr"
+  "category" : {
+    "_type" : "DV_CODED_TEXT",
+    "value" : "event",
+    "defining_code" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "openehr"
       },
-      "code_string": "433"
+      "code_string" : "433"
     }
   },
-  "composer": {
-    "_type": "PARTY_SELF"
+  "composer" : {
+    "_type" : "PARTY_SELF"
   },
-  "context": {
-    "_type": "EVENT_CONTEXT",
-    "start_time": {
-      "_type": "DV_DATE_TIME",
-      "value": "2021-02-13T03:04:00+01:00"
+  "context" : {
+    "_type" : "EVENT_CONTEXT",
+    "start_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2021-02-13T03:04:00+01:00"
     },
-    "end_time": {
-      "_type": "DV_DATE_TIME",
-      "value": "2021-03-01T20:42:00+01:00"
+    "end_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2021-03-01T20:42:00+01:00"
     },
-    "setting": {
-      "_type": "DV_CODED_TEXT",
-      "value": "secondary medical care",
-      "defining_code": {
-        "_type": "CODE_PHRASE",
-        "terminology_id": {
-          "_type": "TERMINOLOGY_ID",
-          "value": "openehr"
+    "setting" : {
+      "_type" : "DV_CODED_TEXT",
+      "value" : "secondary medical care",
+      "defining_code" : {
+        "_type" : "CODE_PHRASE",
+        "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
+          "value" : "openehr"
         },
-        "code_string": "232"
+        "code_string" : "232"
       }
     },
-    "other_context": {
-      "_type": "ITEM_TREE",
-      "name": {
-        "_type": "DV_TEXT",
-        "value": "Baum"
+    "other_context" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Baum"
       },
-      "items": [
-        {
-          "_type": "ELEMENT",
-          "name": {
-            "_type": "DV_TEXT",
-            "value": "Fall-Kennung"
-          },
-          "value": {
-            "_type": "DV_TEXT",
-            "value": "F_0000002"
-          },
-          "archetype_node_id": "at0003"
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Falltyp"
         },
-        {
-          "_type": "ELEMENT",
-          "name": {
-            "_type": "DV_TEXT",
-            "value": "Falltyp"
-          },
-          "value": {
-            "_type": "DV_TEXT",
-            "value": "Einrichtungskontakt"
-          },
-          "archetype_node_id": "at0005"
-        }
-      ],
-      "archetype_node_id": "at0001"
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "Einrichtungskontakt"
+        },
+        "archetype_node_id" : "at0005"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Fall-Kennung"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "F_0000002"
+        },
+        "archetype_node_id" : "at0003"
+      } ],
+      "archetype_node_id" : "at0001"
+    },
+    "health_care_facility" : {
+      "_type" : "PARTY_IDENTIFIED",
+      "identifiers" : [ {
+        "_type" : "DV_IDENTIFIER",
+        "assigner" : "http://medizininformatik-initiative.de/fhir/NamingSystem/Einrichtungsidentifikator/MusterKrankenhaus",
+        "id" : "260123451_MusterKrankenhaus"
+      } ]
     }
   },
-  "content": [
-    {
-      "_type": "ADMIN_ENTRY",
-      "name": {
-        "_type": "DV_TEXT",
-        "value": "Aufnahmedaten"
-      },
-      "language": {
-        "_type": "CODE_PHRASE",
-        "terminology_id": {
-          "_type": "TERMINOLOGY_ID",
-          "value": "ISO_639-1"
-        },
-        "code_string": "de"
-      },
-      "encoding": {
-        "_type": "CODE_PHRASE",
-        "terminology_id": {
-          "_type": "TERMINOLOGY_ID",
-          "value": "IANA_character-sets"
-        },
-        "code_string": "UTF-8"
-      },
-      "subject": {
-        "_type": "PARTY_SELF"
-      },
-      "data": {
-        "_type": "ITEM_TREE",
-        "name": {
-          "_type": "DV_TEXT",
-          "value": "Tree"
-        },
-        "items": [
-          {
-            "_type": "ELEMENT",
-            "name": {
-              "_type": "DV_TEXT",
-              "value": "Aufnahmegrund"
-            },
-            "value": {
-              "_type": "DV_CODED_TEXT",
-              "value": "Wiederaufnahme wegen Komplikationen (Fallpauschale) nach KFPV 2003",
-              "defining_code": {
-                "_type": "CODE_PHRASE",
-                "terminology_id": {
-                  "_type": "TERMINOLOGY_ID",
-                  "value": "§21 KHEntgG"
-                },
-                "code_string": "07"
-              }
-            },
-            "archetype_node_id": "at0013"
-          },
-          {
-            "_type": "ELEMENT",
-            "name": {
-              "_type": "DV_TEXT",
-              "value": "Aufnahmeanlass"
-            },
-            "value": {
-              "_type": "DV_CODED_TEXT",
-              "value": "Notfall",
-              "defining_code": {
-                "_type": "CODE_PHRASE",
-                "terminology_id": {
-                  "_type": "TERMINOLOGY_ID",
-                  "value": "§21 KHEntgG"
-                },
-                "code_string": "N"
-              }
-            },
-            "archetype_node_id": "at0049"
-          },
-          {
-            "_type": "ELEMENT",
-            "name": {
-              "_type": "DV_TEXT",
-              "value": "Datum/Uhrzeit der Aufnahme"
-            },
-            "value": {
-              "_type": "DV_DATE_TIME",
-              "value": "2021-02-13T03:04:00+01:00"
-            },
-            "archetype_node_id": "at0071"
-          }
-        ],
-        "archetype_node_id": "at0001"
-      },
-      "archetype_node_id": "openEHR-EHR-ADMIN_ENTRY.admission.v0"
+  "content" : [ {
+    "_type" : "ADMIN_ENTRY",
+    "name" : {
+      "_type" : "DV_TEXT",
+      "value" : "Aufnahmedaten"
     },
-    {
-      "_type": "ADMIN_ENTRY",
-      "name": {
-        "_type": "DV_TEXT",
-        "value": "Entlassungsdaten"
+    "language" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "ISO_639-1"
       },
-      "language": {
-        "_type": "CODE_PHRASE",
-        "terminology_id": {
-          "_type": "TERMINOLOGY_ID",
-          "value": "ISO_639-1"
+      "code_string" : "de"
+    },
+    "encoding" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "IANA_character-sets"
+      },
+      "code_string" : "UTF-8"
+    },
+    "subject" : {
+      "_type" : "PARTY_SELF"
+    },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
+    },
+    "data" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Tree"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Aufnahmegrund"
         },
-        "code_string": "de"
-      },
-      "encoding": {
-        "_type": "CODE_PHRASE",
-        "terminology_id": {
-          "_type": "TERMINOLOGY_ID",
-          "value": "IANA_character-sets"
-        },
-        "code_string": "UTF-8"
-      },
-      "subject": {
-        "_type": "PARTY_SELF"
-      },
-      "data": {
-        "_type": "ITEM_TREE",
-        "name": {
-          "_type": "DV_TEXT",
-          "value": "Tree"
-        },
-        "items": [
-          {
-            "_type": "ELEMENT",
-            "name": {
-              "_type": "DV_TEXT",
-              "value": "Datum/Uhrzeit der Entlassung"
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Wiederaufnahme wegen Komplikationen (Fallpauschale) nach KFPV 2003",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "§21 KHEntgG"
             },
-            "value": {
-              "_type": "DV_DATE_TIME",
-              "value": "2021-03-01T20:42:00+01:00"
-            },
-            "archetype_node_id": "at0011"
-          },
-          {
-            "_type": "ELEMENT",
-            "name": {
-              "_type": "DV_TEXT",
-              "value": "Art der Entlassung"
-            },
-            "value": {
-              "_type": "DV_CODED_TEXT",
-              "value": "interne Verlegung",
-              "defining_code": {
-                "_type": "CODE_PHRASE",
-                "terminology_id": {
-                  "_type": "TERMINOLOGY_ID",
-                  "value": "§21 KHEntgG"
-                },
-                "code_string": "12"
-              }
-            },
-            "archetype_node_id": "at0040"
+            "code_string" : "07"
           }
-        ],
-        "archetype_node_id": "at0001"
+        },
+        "archetype_node_id" : "at0013"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Aufnahmeanlass"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Notfall",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "§21 KHEntgG"
+            },
+            "code_string" : "N"
+          }
+        },
+        "archetype_node_id" : "at0049"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Datum/Uhrzeit der Aufnahme"
+        },
+        "value" : {
+          "_type" : "DV_DATE_TIME",
+          "value" : "2021-02-13T03:04:00+01:00"
+        },
+        "archetype_node_id" : "at0071"
+      } ],
+      "archetype_node_id" : "at0001"
+    },
+    "archetype_node_id" : "openEHR-EHR-ADMIN_ENTRY.admission.v0"
+  }, {
+    "_type" : "ADMIN_ENTRY",
+    "name" : {
+      "_type" : "DV_TEXT",
+      "value" : "Entlassungsdaten"
+    },
+    "language" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "ISO_639-1"
       },
-      "archetype_node_id": "openEHR-EHR-ADMIN_ENTRY.discharge_summary.v0"
-    }
-  ],
-  "archetype_node_id": "openEHR-EHR-COMPOSITION.fall.v1"
+      "code_string" : "de"
+    },
+    "encoding" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "IANA_character-sets"
+      },
+      "code_string" : "UTF-8"
+    },
+    "subject" : {
+      "_type" : "PARTY_SELF"
+    },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
+    },
+    "data" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Tree"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Art der Entlassung"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "interne Verlegung",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "§21 KHEntgG"
+            },
+            "code_string" : "12"
+          }
+        },
+        "archetype_node_id" : "at0040"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Datum/Uhrzeit der Entlassung"
+        },
+        "value" : {
+          "_type" : "DV_DATE_TIME",
+          "value" : "2021-03-01T20:42:00+01:00"
+        },
+        "archetype_node_id" : "at0011"
+      } ],
+      "archetype_node_id" : "at0001"
+    },
+    "archetype_node_id" : "openEHR-EHR-ADMIN_ENTRY.discharge_summary.v0"
+  } ],
+  "archetype_node_id" : "openEHR-EHR-COMPOSITION.fall.v1"
 }
