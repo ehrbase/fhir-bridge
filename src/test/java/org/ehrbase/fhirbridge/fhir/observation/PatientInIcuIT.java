@@ -29,15 +29,26 @@ public class PatientInIcuIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createPatientInIcu() throws IOException {
-        create("create-patient-in-icu.json");
+        create("create-patient-in-icu-No.json");
     }
 
     @Test
-    void mappingPatientInIcu() throws IOException {
-        testMapping("create-patient-in-icu.json",
-                "paragon-create-patient-in-icu.json");
+    void mappingPatientInIcuNo() throws IOException {
+        testMapping("create-patient-in-icu-No.json",
+                "paragon-create-patient-in-icu-No.json");
     }
 
+    @Test
+    void mappingPatientInIcuUnknown() throws IOException {
+        testMapping("create-patient-in-icu-Unknown.json",
+                "paragon-create-patient-in-icu-Unknown.json");
+    }
+
+    @Test
+    void mappingPatientInIcuYes() throws IOException {
+        testMapping("create-patient-in-icu-Yes.json",
+                "paragon-create-patient-in-icu-Yes.json");
+    }
     @Override
     public Javers getJavers() {
         return JaversBuilder.javers()
