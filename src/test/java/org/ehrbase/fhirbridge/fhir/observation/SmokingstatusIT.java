@@ -5,7 +5,7 @@ import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus.RaucherstatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.RaucherstatusComposition;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RegistereintragKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -55,7 +55,7 @@ public class SmokingstatusIT extends AbstractMappingTestSetupIT {
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(RaucherstatusComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(RaucherstatusEvaluation.class)
-                .registerValueObject(RegistereintragKategorieElement.class)
+                .registerValueObject(RaucherstatusKategorieElement.class)
                 .build();
     }
 

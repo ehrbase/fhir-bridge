@@ -18,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RegistereintragKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.StatusDefiningCode;
 
 public class RaucherstatusCompositionContainment extends Containment {
@@ -32,7 +32,7 @@ public class RaucherstatusCompositionContainment extends Containment {
 
   public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(RaucherstatusComposition.class, "/context/other_context[at0001]/items[at0004]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public ListSelectAqlField<RegistereintragKategorieElement> KATEGORIE = new ListAqlFieldImp<RegistereintragKategorieElement>(RaucherstatusComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", RegistereintragKategorieElement.class, this);
+  public ListSelectAqlField<RaucherstatusKategorieElement> KATEGORIE = new ListAqlFieldImp<RaucherstatusKategorieElement>(RaucherstatusComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", RaucherstatusKategorieElement.class, this);
 
   public SelectAqlField<TemporalAccessor> START_TIME_VALUE = new AqlFieldImp<TemporalAccessor>(RaucherstatusComposition.class, "/context/start_time|value", "startTimeValue", TemporalAccessor.class, this);
 

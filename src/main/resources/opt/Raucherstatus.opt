@@ -25,11 +25,11 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">0514dc0195d12ecfc20f0e1c1057514d</other_details>
+    <other_details id="MD5-CAM-1.0.1">20230c9f7b26e4fdbe4e43a701c58561</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
-    <other_details id="sem_ver">2.0.0</other_details>
+    <other_details id="sem_ver">4.0.0</other_details>
     <other_details id="build_uid"/>
-    <other_details id="original_language">ISO_639-1::en</other_details>
+    <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
         <terminology_id>
@@ -37,18 +37,14 @@
         </terminology_id>
         <code_string>de</code_string>
       </language>
-      <purpose>To represent a register entry, which provides a structured collection of information from COVID-19 personal data.</purpose>
-      <keywords>COVID-19</keywords>
+      <purpose>Zur Repräsentation des Raucherstatus im Rahmen des FoDaPl-Projektes / GECCO-Datensatzes.</purpose>
+      <keywords>Raucherstatus</keywords>
+      <keywords>Rauchverhalten</keywords>
       <keywords>GECCO</keywords>
-      <keywords>SARS-CoV-2</keywords>
-      <keywords>Coronavirus</keywords>
-      <keywords>Virus</keywords>
-      <keywords>Research purposes</keywords>
-      <keywords>Registry</keywords>
-      <keywords>Registry entry</keywords>
-      <use>Use to represent research data from the GECCO datasets. 
-
-For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.1/files/78899</use>
+      <keywords>NUM</keywords>
+      <keywords>FoDaPl</keywords>
+      <use>Für die Abbildung des Raucherstatus für die Speicherung im Rahmen des FoDaPI-Projektes / GECCO-Datensatzes.</use>
+      <misuse>Nicht zur Repräsentation über die Art des Raucherverhaltens verwenden.</misuse>
     </details>
   </description>
   <uid>
@@ -313,6 +309,55 @@ For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.
         </attributes>
       </children>
     </attributes>
+    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+      <rm_attribute_name>name</rm_attribute_name>
+      <existence>
+        <lower_included>true</lower_included>
+        <upper_included>true</upper_included>
+        <lower_unbounded>false</lower_unbounded>
+        <upper_unbounded>false</upper_unbounded>
+        <lower>1</lower>
+        <upper>1</upper>
+      </existence>
+      <children xsi:type="C_COMPLEX_OBJECT">
+        <rm_type_name>DV_TEXT</rm_type_name>
+        <occurrences>
+          <lower_included>true</lower_included>
+          <upper_included>true</upper_included>
+          <lower_unbounded>false</lower_unbounded>
+          <upper_unbounded>false</upper_unbounded>
+          <lower>1</lower>
+          <upper>1</upper>
+        </occurrences>
+        <node_id/>
+        <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+          <rm_attribute_name>value</rm_attribute_name>
+          <existence>
+            <lower_included>true</lower_included>
+            <upper_included>true</upper_included>
+            <lower_unbounded>false</lower_unbounded>
+            <upper_unbounded>false</upper_unbounded>
+            <lower>1</lower>
+            <upper>1</upper>
+          </existence>
+          <children xsi:type="C_PRIMITIVE_OBJECT">
+            <rm_type_name>STRING</rm_type_name>
+            <occurrences>
+              <lower_included>true</lower_included>
+              <upper_included>true</upper_included>
+              <lower_unbounded>false</lower_unbounded>
+              <upper_unbounded>false</upper_unbounded>
+              <lower>1</lower>
+              <upper>1</upper>
+            </occurrences>
+            <node_id/>
+            <item xsi:type="C_STRING">
+              <list>Raucherstatus</list>
+            </item>
+          </children>
+        </attributes>
+      </children>
+    </attributes>
     <attributes xsi:type="C_MULTIPLE_ATTRIBUTE">
       <rm_attribute_name>content</rm_attribute_name>
       <existence>
@@ -407,7 +452,7 @@ For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -418,13 +463,7 @@ For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>LOINC</value>
-                        </terminology_id>
-                        <code_list>LA18976-3</code_list>
-                        <code_list>LA18978-9</code_list>
-                        <code_list>LA15920-4</code_list>
-                        <code_list>LA18980-5</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/smoking-status</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -887,18 +926,6 @@ For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.
           <items id="description">Art von Tabak die von der Person geraucht wird.</items>
           <items id="text">Art</items>
         </term_definitions>
-        <term_definitions code="LA18976-3">
-          <items id="text">Ja</items>
-        </term_definitions>
-        <term_definitions code="LA18978-9">
-          <items id="text">Nichtraucher</items>
-        </term_definitions>
-        <term_definitions code="LA15920-4">
-          <items id="text">Ehemaliger Raucher</items>
-        </term_definitions>
-        <term_definitions code="LA18980-5">
-          <items id="text">Unbekannt</items>
-        </term_definitions>
       </children>
       <cardinality>
         <is_ordered>false</is_ordered>
@@ -954,5 +981,8 @@ For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.
       <items id="text">geändert</items>
     </term_definitions>
   </definition>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-EVALUATION.tobacco_smoking_summary.v1]">
+    <items id="72166-2">Tobacco smoking status</items>
+  </annotations>
   <view/>
 </template>

@@ -11,25 +11,25 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-27T13:21:52.564702+02:00",
+    date = "2021-09-14T11:58:03.146562+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class RegisterEntryCategoryElement implements LocatableEntity {
+public class RaucherstatusKategorieElement implements LocatableEntity {
   /**
-   * Path: Register entry/context/Category
-   * Description: The classification of the register entry (e.g. type of observation of the FHIR profile).
+   * Path: Raucherstatus/context/Kategorie
+   * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/value|value")
   private String value;
 
   /**
-   * Path: Register entry/context/Baum/Category/null_flavour
+   * Path: Raucherstatus/context/Baum/Kategorie/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: Register entry/context/feeder_audit
+   * Path: Raucherstatus/context/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
