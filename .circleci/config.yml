@@ -628,7 +628,7 @@ commands:
                     echo "FHIRBRIDGE_VERSION: ${FHIRBRIDGE_VERSION}"
                     java -jar "target/fhir-bridge-${FHIRBRIDGE_VERSION}.jar" --fhir-bridge.fhir.endpoints.DocumentReference=true \
                                                                              --fhir-bridge.minio.url=http://localhost:9000 \
-                                                                             --fhir-bridge.minio.access-key=minio² \
+                                                                             --fhir-bridge.minio.access-key=minio \
                                                                              --fhir-bridge.minio.secret-key=minio123456 \
                                                                              --fhir-bridge.minio.bucket-name=fhir-bridge-bucket > fhirbride_log
 
