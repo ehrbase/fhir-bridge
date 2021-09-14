@@ -15,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 @Archetype("openEHR-EHR-OBSERVATION.ventilator_vital_signs.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T11:36:42.483377+02:00",
+    date = "2021-09-14T15:32:26.822243300+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class BeobachtungenAmBeatmungsgeraetObservation implements EntryEntity {

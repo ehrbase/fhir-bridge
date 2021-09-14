@@ -59,14 +59,13 @@
     }
   },
   "effectiveDateTime": "2020-09-21",
-  "valueCodeableConcept": {
+  "dataAbsentReason": {
     "coding": [
       {
-        "system": "http://fhir.de/CodeSystem/gender-amtlich-de",
-        "code": "X",
-        "display": "unbestimmt"
+        "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+        "code": "unknown",
+        "display": "Unknown"
       }
-    ],
-    "text": "Unspecified"
+    ]
   }
 }

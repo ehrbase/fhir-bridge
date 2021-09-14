@@ -37,15 +37,20 @@ public class FioIT extends AbstractMappingTestSetupIT {
     // check payload
 
     @Test
-    void testFioMagnitudeMin() throws IOException {
+    void createFioMagnitudeMin() throws IOException {
         testMapping("create-fio2_magnitude-min.json",
                 "paragon-fio2_magnitude-min.json");
     }
 
     @Test
-    void testFioMagnitudeMax() throws IOException {
+    void createFioMagnitudeMax() throws IOException {
         testMapping("create-fio2_magnitude-max.json",
                 "paragon-fio2_magnitude-max.json");
+    }
+
+    @Test
+    void createFioDataAbsent() throws IOException {
+        testMapping("create-fio2_data-absent.json", "paragon-fio2_data-absent.json");create-fio2.json
     }
 
     // #####################################################################################
