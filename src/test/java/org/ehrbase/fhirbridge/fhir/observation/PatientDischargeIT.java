@@ -73,7 +73,8 @@ class PatientDischargeIT extends AbstractMappingTestSetupIT {
 
     // #####################################################################################
     // check exceptions
-
+/*
+Tested by the Terminology Server
     @Test
     void createInvalidSystem() throws IOException {
         // copy of alive, manipulated lines 57
@@ -87,6 +88,7 @@ class PatientDischargeIT extends AbstractMappingTestSetupIT {
         Exception exception = executeMappingException("create-patient-discharge-invalid-code.json");
         assertEquals("Value code 999999999 is not supported", exception.getMessage());
     }
+*/
 
     // #####################################################################################
     // default
