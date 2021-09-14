@@ -26,8 +26,10 @@
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
     <other_details id="MD5-CAM-1.0.1">5c7f927f854514d6938e75c12c89c1bd</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -326,18 +328,6 @@
                       </children>
                     </attributes>
                   </children>
-                  <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>DV_TEXT</rm_type_name>
-                    <occurrences>
-                      <lower_included>true</lower_included>
-                      <upper_included>true</upper_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>false</upper_unbounded>
-                      <lower>1</lower>
-                      <upper>1</upper>
-                    </occurrences>
-                    <node_id/>
-                  </children>
                 </attributes>
               </children>
               <cardinality>
@@ -498,7 +488,7 @@
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -509,10 +499,7 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>http://terminology.hl7.org/CodeSystem/consentcategorycodes</value>
-                        </terminology_id>
-                        <code_list>dnr</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=http://terminology.hl7.org/CodeSystem/consentcategorycodes</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -560,7 +547,7 @@
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -571,12 +558,7 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>304252001</code_list>
-                        <code_list>304253006</code_list>
-                        <code_list>261665006</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/resuscitation-status</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -889,18 +871,6 @@ Oder: " Zeugen Jehovas glauben, dass die Bibel Christen verbietet, Bluttransfusi
           <items id="comment">Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen.</items>
           <items id="description">Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.</items>
           <items id="text">Erweiterung</items>
-        </term_definitions>
-        <term_definitions code="dnr">
-          <items id="text">Do No Resusciate</items>
-        </term_definitions>
-        <term_definitions code="304252001">
-          <items id="text">For resuscitation (finding)</items>
-        </term_definitions>
-        <term_definitions code="304253006">
-          <items id="text">Not for resuscitation (finding)</items>
-        </term_definitions>
-        <term_definitions code="261665006">
-          <items id="text">Unknown (qualifier value)</items>
         </term_definitions>
         <term_bindings terminology="SNOMED-CT">
           <items code="at0044">

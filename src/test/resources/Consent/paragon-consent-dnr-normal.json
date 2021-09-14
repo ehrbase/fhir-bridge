@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Consent/b827fe0e-7e6e-42bb-b062-464ec7f47e54/_history/1",
+      "id" : "Consent/b942b5dc-d9c8-44c3-9c39-a4efa77985b0/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -65,7 +65,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-09-13T14:35:49,126806+02:00"
+      "value" : "2021-09-14T12:54:37,550478+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -183,7 +183,7 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Do No Resusciate",
+          "value" : "Do Not Resuscitate",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
@@ -202,7 +202,7 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "For resuscitation (finding)",
+          "value" : "For resuscitation",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {

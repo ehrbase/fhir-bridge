@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.advance_care_directive.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-13T13:48:21.721382+02:00",
+    date = "2021-09-14T12:58:22.466549+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class DnrAnordnungEvaluation implements EntryEntity {
@@ -29,8 +30,8 @@ public class DnrAnordnungEvaluation implements EntryEntity {
    *
    * Im Vereinigten Königreich gehören zu den Arten von Patientenverfügungen im Rahmen der medizinischen Versorgung die "Vorabentscheidung", die "Patientenverfügung" und die " Voraberklärung".
    */
-  @Path("/data[at0001]/items[at0005]/value|defining_code")
-  private ArtDerRichtlinieDefiningCode artDerRichtlinieDefiningCode;
+  @Path("/data[at0001]/items[at0005]/value")
+  private DvCodedText artDerRichtlinie;
 
   /**
    * Path: DNR-Anordnung/DNR-Anordnung/Item tree/Art der Richtlinie/null_flavour
@@ -43,8 +44,8 @@ public class DnrAnordnungEvaluation implements EntryEntity {
    * Description: Beschreibung der allgemeinen Patientenverfügung.
    * Comment: Kann verwendet werden, um eine Übersicht über die gesamte Patientenverfügung zu erfassen, die durch strukturierte Daten unterstützt werden kann. Angaben zu bestimmten strukturierten Befunden können unter Verwendung von CLUSTER-Archetypen in den Slot "Einzelheiten zur Richtlinie" aufgenommen werden. Dieses Datenelement kann verwendet werden, um Altdaten zu erfassen, die nicht in einem strukturierten Format verfügbar sind.
    */
-  @Path("/data[at0001]/items[at0006]/value|defining_code")
-  private BeschreibungDefiningCode beschreibungDefiningCode;
+  @Path("/data[at0001]/items[at0006]/value")
+  private DvCodedText beschreibung;
 
   /**
    * Path: DNR-Anordnung/DNR-Anordnung/Item tree/Beschreibung/null_flavour
@@ -94,13 +95,12 @@ public class DnrAnordnungEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setArtDerRichtlinieDefiningCode(
-      ArtDerRichtlinieDefiningCode artDerRichtlinieDefiningCode) {
-     this.artDerRichtlinieDefiningCode = artDerRichtlinieDefiningCode;
+  public void setArtDerRichtlinie(DvCodedText artDerRichtlinie) {
+     this.artDerRichtlinie = artDerRichtlinie;
   }
 
-  public ArtDerRichtlinieDefiningCode getArtDerRichtlinieDefiningCode() {
-     return this.artDerRichtlinieDefiningCode ;
+  public DvCodedText getArtDerRichtlinie() {
+     return this.artDerRichtlinie ;
   }
 
   public void setArtDerRichtlinieNullFlavourDefiningCode(
@@ -112,12 +112,12 @@ public class DnrAnordnungEvaluation implements EntryEntity {
      return this.artDerRichtlinieNullFlavourDefiningCode ;
   }
 
-  public void setBeschreibungDefiningCode(BeschreibungDefiningCode beschreibungDefiningCode) {
-     this.beschreibungDefiningCode = beschreibungDefiningCode;
+  public void setBeschreibung(DvCodedText beschreibung) {
+     this.beschreibung = beschreibung;
   }
 
-  public BeschreibungDefiningCode getBeschreibungDefiningCode() {
-     return this.beschreibungDefiningCode ;
+  public DvCodedText getBeschreibung() {
+     return this.beschreibung ;
   }
 
   public void setBeschreibungNullFlavourDefiningCode(

@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.StatusD
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-13T13:48:21.629571+02:00",
+    date = "2021-09-14T12:58:22.422238+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("DNR-Anordnung")

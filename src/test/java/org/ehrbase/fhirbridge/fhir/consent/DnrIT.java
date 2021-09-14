@@ -5,8 +5,6 @@ import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung.DnrAnordnungCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.DNRAnordnungComposition;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungKategorieDvCodedText;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungKategorieDvText;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Consent;
@@ -29,6 +27,10 @@ class DnrIT extends AbstractMappingTestSetupIT {
         super("Consent/", Consent.class); //fhir-Resource
     }
 
+    @Test
+    void mappingIntegrationTest() throws IOException {
+        create("consent-example.json");
+    }
 
     // #####################################################################################
     // check payload
@@ -40,13 +42,13 @@ class DnrIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mappingNormal_2() throws IOException {
-        testMapping("consent-example-duplicate-2.json",
+        testMapping("consent-example-2.json",
                 "paragon-consent-dnr-normal-2.json");
     }
 
     @Test
     void mappingNormal_3() throws IOException {
-        testMapping("consent-example-duplicate-3.json",
+        testMapping("consent-example-3.json",
                 "paragon-consent-dnr-normal-3.json");
     }
 
@@ -64,8 +66,6 @@ class DnrIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(new ValueObjectDefinition(DNRAnordnungComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(DnrAnordnungEvaluation.class)
                 .registerValueObject(DnrAnordnungKategorieElement.class)
-                .registerValueObject(DnrAnordnungKategorieDvCodedText.class)
-                .registerValueObject(DnrAnordnungKategorieDvText.class)
                 .build();
     }
 
@@ -75,8 +75,6 @@ class DnrIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(new ValueObjectDefinition(DNRAnordnungComposition.class, List.of("location", "feederAudit", "startTimeValue")))
                 .registerValueObject(DnrAnordnungEvaluation.class)
                 .registerValueObject(DnrAnordnungKategorieElement.class)
-                .registerValueObject(DnrAnordnungKategorieDvCodedText.class)
-                .registerValueObject(DnrAnordnungKategorieDvText.class)
                 .build();
     }
 
@@ -94,6 +92,6 @@ class DnrIT extends AbstractMappingTestSetupIT {
         DnrAnordnungCompositionConverter dnrAnordnungCompositionConverter = new DnrAnordnungCompositionConverter();
         DNRAnordnungComposition mapped = dnrAnordnungCompositionConverter.convert(consent);
         Diff diff = compareCompositions(getJaversIgnoreStartTime(), paragonPath, mapped);
-        assertEquals(2, diff.getChanges().size());
+        assertEquals(0, diff.getChanges().size());
     }
 }
