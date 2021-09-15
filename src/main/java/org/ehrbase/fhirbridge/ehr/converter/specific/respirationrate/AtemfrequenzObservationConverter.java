@@ -16,8 +16,6 @@ public class AtemfrequenzObservationConverter extends ObservationToObservationCo
         }else{
             mapMagnitude(resource).ifPresent(observation::setMesswertMagnitude);
             mapUnit(resource).ifPresent(observation::setMesswertUnits);
-            observation.setMesswertMagnitude(resource.getValueQuantity().getValue().doubleValue());
-            observation.setMesswertUnits(resource.getValueQuantity().getCode());
         }
         return observation;
     }

@@ -11,7 +11,6 @@ import org.ehrbase.fhirbridge.ehr.opt.d4lquestionnairecomposition.D4LQuestionnai
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.springframework.lang.NonNull;
 
-import java.time.OffsetDateTime;
 import java.time.temporal.TemporalAccessor;
 
 public class D4lQuestionnaireCompositionConverter extends QuestionnaireResponseToCompositionConverter<D4LQuestionnaireComposition> {

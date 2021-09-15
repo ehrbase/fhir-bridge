@@ -2,14 +2,14 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Atemfrequenz"
+    "value" : "Registereintrag"
   },
   "archetype_details" : {
     "archetype_id" : {
       "value" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
     },
     "template_id" : {
-      "value" : "Atemfrequenz"
+      "value" : "Koerpertemperatur"
     },
     "rm_version" : "1.0.4"
   },
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/848a8956-7901-420f-ad4a-f8299de48f08/_history/1",
+      "id" : "Observation/b93e1c0d-3b51-4e63-831a-e556c75558d6/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -60,7 +60,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-04-14T00:00:00+02:00"
+      "value" : "2020-09-25T00:00:00+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -106,8 +106,16 @@
           "value" : "Kategorie"
         },
         "value" : {
-          "_type" : "DV_TEXT",
-          "value" : "vital-signs"
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Vital Signs",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://terminology.hl7.org/CodeSystem/observation-category"
+            },
+            "code_string" : "vital-signs"
+          }
         },
         "archetype_node_id" : "at0005"
       } ],
@@ -118,7 +126,7 @@
     "_type" : "OBSERVATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Atemfrequenz"
+      "value" : "Koerpertemperatur"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -149,7 +157,7 @@
       },
       "origin" : {
         "_type" : "DV_DATE_TIME",
-        "value" : "2021-04-14T00:00:00+02:00"
+        "value" : "2020-09-25T00:00:00+02:00"
       },
       "events" : [ {
         "_type" : "POINT_EVENT",
@@ -159,34 +167,41 @@
         },
         "time" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2021-04-14T00:00:00+02:00"
+          "value" : "2020-09-25T00:00:00+02:00"
         },
         "data" : {
           "_type" : "ITEM_TREE",
           "name" : {
             "_type" : "DV_TEXT",
-            "value" : "*List(en)"
+            "value" : "Single"
           },
           "items" : [ {
             "_type" : "ELEMENT",
             "name" : {
               "_type" : "DV_TEXT",
-              "value" : "Messwert"
+              "value" : "Temperatur"
             },
-            "value" : {
-              "_type" : "DV_QUANTITY",
-              "units" : "/min",
-              "magnitude" : 16.0
+            "null_flavour" : {
+              "_type" : "DV_CODED_TEXT",
+              "value" : "unknown",
+              "defining_code" : {
+                "_type" : "CODE_PHRASE",
+                "terminology_id" : {
+                  "_type" : "TERMINOLOGY_ID",
+                  "value" : "openehr"
+                },
+                "code_string" : "253"
+              }
             },
             "archetype_node_id" : "at0004"
           } ],
-          "archetype_node_id" : "at0003"
+          "archetype_node_id" : "at0001"
         },
-        "archetype_node_id" : "at0002"
+        "archetype_node_id" : "at0003"
       } ],
-      "archetype_node_id" : "at0001"
+      "archetype_node_id" : "at0002"
     },
-    "archetype_node_id" : "openEHR-EHR-OBSERVATION.respiration.v2"
+    "archetype_node_id" : "openEHR-EHR-OBSERVATION.body_temperature.v2"
   } ],
   "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
 }

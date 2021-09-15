@@ -158,16 +158,14 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void mapD4LQuestionnaireCompositionJavers() throws IOException, IntrospectionException, InvocationTargetException, IllegalAccessException {
+    void mapD4LQuestionnaireCompositionJavers() throws IOException {
         testMapping("create-covapp-response.json", "paragon-d4L-questionnaire.json");
     }
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
         QuestionnaireResponse questionnaireResponse = (QuestionnaireResponse) testFileLoader.loadResource(path);
-        return assertThrows(Exception.class, () -> {
-            new D4lQuestionnaireCompositionConverter().convert(questionnaireResponse);
-        });
+        return assertThrows(Exception.class, () -> new D4lQuestionnaireCompositionConverter().convert(questionnaireResponse));
     }
 
     @Override
@@ -178,7 +176,7 @@ class QuestionnaireResponseIT extends AbstractMappingTestSetupIT {
         D4LQuestionnaireComposition mappedD4LQuestionnaireComposition = d4lQuestionnaireCompositionConverter.convert( resource);
 
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedD4LQuestionnaireComposition);
-        assertEquals(diff.getChanges().size(), 0);
+        assertEquals(0, diff.getChanges().size());
     }
 
 

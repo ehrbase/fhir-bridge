@@ -1,9 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.KoerpergroesseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 

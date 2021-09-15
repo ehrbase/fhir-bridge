@@ -17,8 +17,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
+import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.AtemfrequenzKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.AtemfrequenzObservation;
-import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.StatusDefiningCode;
 
 public class AtemfrequenzCompositionContainment extends Containment {
@@ -32,7 +32,7 @@ public class AtemfrequenzCompositionContainment extends Containment {
 
   public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(AtemfrequenzComposition.class, "/context/other_context[at0001]/items[at0004]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public ListSelectAqlField<RegistereintragKategorieElement> KATEGORIE = new ListAqlFieldImp<RegistereintragKategorieElement>(AtemfrequenzComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", RegistereintragKategorieElement.class, this);
+  public ListSelectAqlField<AtemfrequenzKategorieElement> KATEGORIE = new ListAqlFieldImp<AtemfrequenzKategorieElement>(AtemfrequenzComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", AtemfrequenzKategorieElement.class, this);
 
   public SelectAqlField<TemporalAccessor> START_TIME_VALUE = new AqlFieldImp<TemporalAccessor>(AtemfrequenzComposition.class, "/context/start_time|value", "startTimeValue", TemporalAccessor.class, this);
 
