@@ -1,6 +1,7 @@
-package org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
+import java.lang.String;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
@@ -10,35 +11,34 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-13T13:53:54.775158+02:00",
+    date = "2021-09-14T13:56:15.898535+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class ImpfungImpfungGegenElement implements LocatableEntity {
+public class SarsCov2ExpositionKategorieElement implements LocatableEntity {
   /**
-   * Path: Impfstatus/Impfung/Impfung gegen
-   * Description: Begründung, warum der Prozessschritt für das identifizierte Arzneimittel durchgeführt wurde.
-   * Comment: Zum Beispiel: "Verschoben - Patient war zum Zeitpunkt der Arzneimittelgabe nicht verfügbar", "abgesagt - Nebenwirkung". Merke: Dies ist nicht der Grund für die Arzneimittelverordnung, sondern der spezifische Grund, warum ein Behandlungsschritt durchgeführt wurde. Wird oft verwendet, um Abweichungen von der ursprünglichen Verordnung zu dokumentieren.
+   * Path: SARS-CoV-2 Exposition/context/Kategorie
+   * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
-  @Path("/value|defining_code")
-  private ImpfungGegenDefiningCode value;
+  @Path("/value|value")
+  private String value;
 
   /**
-   * Path: Impfstatus/Impfung/Tree/Impfung gegen/null_flavour
+   * Path: SARS-CoV-2 Exposition/context/Baum/Kategorie/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: Impfstatus/Impfung/feeder_audit
+   * Path: SARS-CoV-2 Exposition/context/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setValue(ImpfungGegenDefiningCode value) {
+  public void setValue(String value) {
      this.value = value;
   }
 
-  public ImpfungGegenDefiningCode getValue() {
+  public String getValue() {
      return this.value ;
   }
 
