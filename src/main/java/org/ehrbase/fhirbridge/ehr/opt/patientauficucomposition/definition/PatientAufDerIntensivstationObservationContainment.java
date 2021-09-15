@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -21,7 +20,7 @@ public class PatientAufDerIntensivstationObservationContainment extends Containm
 
   public SelectAqlField<NullFlavour> NAME_DER_AKTIVITAET_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(PatientAufDerIntensivstationObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0004]/null_flavour|defining_code", "nameDerAktivitaetNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<DvCodedText> WIRD_WURDE_DIE_AKTIVITAET_DURCHGEFUEHRT = new AqlFieldImp<DvCodedText>(PatientAufDerIntensivstationObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005]/value", "wirdWurdeDieAktivitaetDurchgefuehrt", DvCodedText.class, this);
+  public SelectAqlField<WirdWurdeDieAktivitaetDurchgefuehrtDefiningCode> WIRD_WURDE_DIE_AKTIVITAET_DURCHGEFUEHRT_DEFINING_CODE = new AqlFieldImp<WirdWurdeDieAktivitaetDurchgefuehrtDefiningCode>(PatientAufDerIntensivstationObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005]/value|defining_code", "wirdWurdeDieAktivitaetDurchgefuehrtDefiningCode", WirdWurdeDieAktivitaetDurchgefuehrtDefiningCode.class, this);
 
   public SelectAqlField<NullFlavour> WIRD_WURDE_DIE_AKTIVITAET_DURCHGEFUEHRT_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(PatientAufDerIntensivstationObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005]/null_flavour|defining_code", "wirdWurdeDieAktivitaetDurchgefuehrtNullFlavourDefiningCode", NullFlavour.class, this);
 

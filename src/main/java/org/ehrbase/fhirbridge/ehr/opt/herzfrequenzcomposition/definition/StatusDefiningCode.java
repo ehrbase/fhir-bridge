@@ -1,14 +1,16 @@
-package org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition;
 
 import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum ExpositionVorhandenDefiningCode implements EnumValueSet {
-  NO_QUALIFIER_VALUE("No (qualifier value)", "", "SNOMED-CT", "373067005"),
+public enum StatusDefiningCode implements EnumValueSet {
+  VORLAEUFIG("vorläufig", "*", "local", "at0011"),
 
-  EXPOSURE_TO_SEVERE_ACUTE_RESPIRATORY_SYNDROME_CORONAVIRUS2_EVENT("Exposure to severe acute respiratory syndrome coronavirus 2 (event)", "", "SNOMED-CT", "840546002"),
+  FINAL("final", "*", "local", "at0012"),
 
-  UNKNOWN("Unknown", "", "SNOMED-CT", "unknown");
+  REGISTRIERT("registriert", "*", "local", "at0010"),
+
+  GEAENDERT("geändert", "*", "local", "at0013");
 
   private String value;
 
@@ -18,8 +20,7 @@ public enum ExpositionVorhandenDefiningCode implements EnumValueSet {
 
   private String code;
 
-  ExpositionVorhandenDefiningCode(String value, String description, String terminologyId,
-      String code) {
+  StatusDefiningCode(String value, String description, String terminologyId, String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;
