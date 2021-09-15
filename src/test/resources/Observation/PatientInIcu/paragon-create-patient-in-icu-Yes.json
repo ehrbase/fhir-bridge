@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/40d61450-3a9b-45a4-9960-551c9cec4af1/_history/1",
+      "id" : "Observation/da56af39-3296-4f7f-b285-6d609b9cc32f/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -109,6 +109,15 @@
       "_type" : "DV_TEXT",
       "value" : "Patient auf der Intensivstation"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.management_screening.v0"
+      },
+      "template_id" : {
+        "value" : "Patient auf ICU"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -127,9 +136,6 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
-    },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "name" : {
@@ -181,14 +187,14 @@
               },
               "value" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "No",
+                "value" : "Yes (qualifier value)",
                 "defining_code" : {
                   "_type" : "CODE_PHRASE",
                   "terminology_id" : {
                     "_type" : "TERMINOLOGY_ID",
                     "value" : "SNOMED Clinical Terms"
                   },
-                  "code_string" : "373067005"
+                  "code_string" : "373066001"
                 }
               },
               "archetype_node_id" : "at0005"
