@@ -177,7 +177,7 @@ ${vCC_URL}		                http://snomed.info/sct
     $.status						missing							422		Observation.status: minimum required = 1, but only found 0 .from https://.*									Observation
     $.status						${EMPTY}						422		@value cannot be empty																						Observation.status
     $.status						${randinteger}					422		Error parsing JSON: the primitive value must be a string													Observation.status
-    $.status						${randstring}					422		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
+    $.status						${randstring}					422		Value is '${randstring}' but must be 'final'
     $.status						${{ [] }}						422    	This property must be an simple value, not an array                     									Observation.status
     $.status						${{ {} }}						422    	This property must be an simple value, not an object										                Observation.status
     $.status						${{ [{}] }}						422    	This property must be an simple value, not an array															Observation.status
