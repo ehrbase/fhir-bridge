@@ -18,7 +18,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "QuestionnaireResponse/1/_history/1",
+      "id" : "QuestionnaireResponse/9de34ad0-b4cf-4066-ae03-33efb833067d/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -55,7 +55,12 @@
     }
   },
   "composer" : {
-    "_type" : "PARTY_SELF"
+    "_type" : "PARTY_IDENTIFIED",
+    "identifiers" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "urn:author:identifier:system",
+      "id" : "author_123456"
+    } ]
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",

@@ -49,13 +49,18 @@
     }
   },
   "composer" : {
-    "_type" : "PARTY_SELF"
+    "_type" : "PARTY_IDENTIFIED",
+    "identifiers" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "urn:author:identifier:system",
+      "id" : "author_123456"
+    } ]
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-09-01T11:39:00,983873+02:00"
+      "value" : "2021-09-10T10:07:49,9498684+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -139,6 +144,14 @@
         "archetype_node_id" : "openEHR-EHR-CLUSTER.media_file.v0"
       } ],
       "archetype_node_id" : "at0001"
+    },
+    "health_care_facility" : {
+      "_type" : "PARTY_IDENTIFIED",
+      "identifiers" : [ {
+        "_type" : "DV_IDENTIFIER",
+        "assigner" : "urn:organization:identifier:system",
+        "id" : "organization_123456"
+      } ]
     }
   },
   "archetype_node_id" : "openEHR-EHR-COMPOSITION.report.v1"
