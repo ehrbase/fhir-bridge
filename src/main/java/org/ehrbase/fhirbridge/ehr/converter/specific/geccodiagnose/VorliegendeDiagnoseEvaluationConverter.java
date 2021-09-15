@@ -100,9 +100,10 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
     private void mapNameDesProblemsDerDiagnose(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         for (Coding coding : condition.getCode().getCoding()) {
             if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-                if(DvCodedTextParser.parseFHIRCoding(coding).isPresent()){
+                if(DvCodedTextParser.parseFHIRCodingOld(coding).isPresent()){
                     VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText vorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText = new VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText();
                     vorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText.setNameDesProblemsDerDiagnoseDefiningCode(NameDesProblemsDerDiagnoseDefiningCode.getCodesAsMap().get(coding.getCode()));
+                    vorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText.setNameDesProblemsDerDiagnose(DvCodedTextParser.parseFHIRCodingOld(coding).get());
                     vorliegendeDiagnose.setNameDesProblemsDerDiagnose(vorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText);
                     isEmpty = false;
                 }

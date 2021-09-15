@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -18,8 +19,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.infectious_exposure.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-10T09:30:04.779847+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-09-14T13:56:15.921082+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class SarsCov2ExpositionEvaluation implements EntryEntity {
   /**
@@ -39,8 +40,8 @@ public class SarsCov2ExpositionEvaluation implements EntryEntity {
    * Path: SARS-CoV-2 Exposition/SARS-CoV-2 Exposition/Exposition vorhanden?
    * Description: Beschreibung der Gesamtexposition.
    */
-  @Path("/data[at0001]/items[at0003 and name/value='Exposition vorhanden?']/value|defining_code")
-  private ExpositionVorhandenDefiningCode expositionVorhandenDefiningCode;
+  @Path("/data[at0001]/items[at0003 and name/value='Exposition vorhanden?']/value")
+  private DvCodedText expositionVorhanden;
 
   /**
    * Path: SARS-CoV-2 Exposition/SARS-CoV-2 Exposition/Tree/Exposition vorhanden?/null_flavour
@@ -161,13 +162,12 @@ public class SarsCov2ExpositionEvaluation implements EntryEntity {
      return this.infektionserregerNullFlavourDefiningCode ;
   }
 
-  public void setExpositionVorhandenDefiningCode(
-      ExpositionVorhandenDefiningCode expositionVorhandenDefiningCode) {
-     this.expositionVorhandenDefiningCode = expositionVorhandenDefiningCode;
+  public void setExpositionVorhanden(DvCodedText expositionVorhanden) {
+     this.expositionVorhanden = expositionVorhanden;
   }
 
-  public ExpositionVorhandenDefiningCode getExpositionVorhandenDefiningCode() {
-     return this.expositionVorhandenDefiningCode ;
+  public DvCodedText getExpositionVorhanden() {
+     return this.expositionVorhanden ;
   }
 
   public void setExpositionVorhandenNullFlavourDefiningCode(
