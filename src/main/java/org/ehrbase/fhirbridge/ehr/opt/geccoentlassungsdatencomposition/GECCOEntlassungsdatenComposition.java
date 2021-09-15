@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoentlassungsdatencomposition.definitio
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-14T13:30:28.308711+02:00",
+    date = "2021-09-15T16:52:01.162917700+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("GECCO_Entlassungsdaten")
