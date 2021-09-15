@@ -177,7 +177,7 @@ ${vCC_URL}		                http://snomed.info/sct
     $.status						missing							422		Observation.status: minimum required = 1, but only found 0 .from https://.*									Observation
     $.status						${EMPTY}						422		@value cannot be empty																						Observation.status
     $.status						${randinteger}					422		Error parsing JSON: the primitive value must be a string													Observation.status
-    $.status						${randstring}					400		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
+    $.status						${randstring}					422		Failed to parse request body as JSON resource. Error was: .element=\"status\". Invalid attribute value \"foobar\": Unknown ObservationStatus code '${randstring}'
     $.status						${{ [] }}						422    	This property must be an simple value, not an array                     									Observation.status
     $.status						${{ {} }}						422    	This property must be an simple value, not an object										                Observation.status
     $.status						${{ [{}] }}						422    	This property must be an simple value, not an array															Observation.status
@@ -365,9 +365,7 @@ ${vCC_URL}		                http://snomed.info/sct
 	$.valueCodeableConcept.coding[0].system		${{ [{}] }}				422    	This property must be an simple value, not an array 														    Observation.value.x..coding.0..system
 
 	# invalid code
-	$.valueCodeableConcept.coding[0].code		missing					422    	Observation.value.x..coding:snomed.code: minimum required = 1, but only found 0 .from ${patient-ICU-url}.		Observation.value.ofType.CodeableConcept..coding.0.
 	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						    Observation.value.ofType.CodeableConcept..coding.0..code
-	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Aktivität durchgeführt has invalid code ${randstring}
 	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													    Observation.value.x..coding.0..code
     $.valueCodeableConcept.coding[0].code		${{ [] }}				422    	This property must be an simple value, not an array                         								    Observation.value.x..coding.0..code
 	$.valueCodeableConcept.coding[0].code		${{ {} }}				422    	This property must be an simple value, not an object														    Observation.value.x..coding.0..code
