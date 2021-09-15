@@ -22,7 +22,6 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.CurrentStateDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeraetenameDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.KategorieDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.KoerperstelleDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.MedizingeraetCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
 import org.hl7.fhir.r4.model.Annotation;
@@ -41,7 +40,7 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
     protected ProzedurAction convertInternal(Procedure procedure) {
         ProzedurAction result = new ProzedurAction();
         result.setNameDerProzedurDefiningCode(convertCode(procedure));
-        convertBodySite(procedure).ifPresent(result::setKoerperstelleDefiningCode);
+        convertBodySite(procedure).ifPresent(result::setKoerperstelleValue);
         result.setMedizingeraet(convertUsedCode(procedure));
         result.setArtDerProzedurDefiningCode(convertCategory(procedure));
         convertExtension(procedure).ifPresent(result::setDurchfuehrungsabsichtValue);
@@ -50,19 +49,19 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
         return result;
     }
 
-    private Optional<KoerperstelleDefiningCode> convertBodySite(Procedure procedure) {
-        return procedure.getBodySite()
+    private Optional<String> convertBodySite(Procedure procedure) { //TODO fix when codes are replaced in the template
+        Optional<Coding> coding = procedure.getBodySite()
                 .stream()
                 .flatMap(concept -> concept.getCoding().stream())
-                .filter(coding -> coding.getSystem().equals(CodeSystem.SNOMED.getUrl()))
-                .findFirst()
-                .map(coding -> {
-                    KoerperstelleDefiningCode code = KoerperstelleDefiningCode.getCodesAsMap().get(coding.getCode());
-                    if (code == null) {
-                        throw new ConversionException("Invalid body site");
-                    }
-                    return code;
-                });
+                .filter(cding -> cding.getSystem().equals(CodeSystem.SNOMED.getUrl()))
+                .findFirst();
+        if(coding.isPresent() && coding.get().hasDisplay()){
+            return Optional.of(coding.get().getDisplay());
+        }else if(coding.isPresent() && coding.get().hasCode()){
+            return Optional.of(coding.get().getCode());
+        }
+        return Optional.empty();
+
     }
 
     private List<MedizingeraetCluster> convertUsedCode(Procedure procedure) {
