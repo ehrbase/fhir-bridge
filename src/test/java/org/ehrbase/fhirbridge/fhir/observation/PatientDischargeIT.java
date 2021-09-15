@@ -75,14 +75,14 @@ class PatientDischargeIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createPatientDischargeMissingValueCodeableConcept() throws IOException {
-        // copy of alive, changed value in line 58 from 371827001 to 999999999
+        // copy of alive, changed lines xy to xyz
         Exception exception = executeMappingException("create-patient-discharge_missing-value.json");
         assertEquals("ValueCodeableConcept missing but is required by the FHIR-Bridge.", exception.getMessage());
     }
 
     @Test
     void createPatientDischargeInvalidValueCodeableConcept() throws IOException {
-        // copy of alive, changed value in line 58 from 371827001 to 999999999
+        // copy of alive, changed value in line 58 from 371827001 to 999
         Exception exception = executeMappingException("create-patient-discharge_invalid-value.json");
         assertEquals("ValueCodeableConcept is invalid.", exception.getMessage());
     }
