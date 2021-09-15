@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.opt.geccoentlassungsdatencomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import java.lang.String;
@@ -11,25 +11,25 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-14T13:30:28.354593+02:00",
+    date = "2021-09-14T13:56:15.898535+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class EntlassungsdatenKategorieElement implements LocatableEntity {
+public class SarsCov2ExpositionKategorieElement implements LocatableEntity {
   /**
-   * Path: Entlassungsdaten/context/Kategorie
+   * Path: SARS-CoV-2 Exposition/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/value|value")
   private String value;
 
   /**
-   * Path: Entlassungsdaten/context/Baum/Kategorie/null_flavour
+   * Path: SARS-CoV-2 Exposition/context/Baum/Kategorie/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: Entlassungsdaten/context/feeder_audit
+   * Path: SARS-CoV-2 Exposition/context/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
