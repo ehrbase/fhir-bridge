@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1813475d-063b-42d5-be4d-cbaf024e6421/_history/1",
+      "id" : "Observation/4aeaa428-68a3-4227-a8da-1b8cf92baa10/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -120,15 +120,6 @@
       "_type" : "DV_TEXT",
       "value" : "Raucherstatus"
     },
-    "archetype_details" : {
-      "archetype_id" : {
-        "value" : "openEHR-EHR-EVALUATION.tobacco_smoking_summary.v1"
-      },
-      "template_id" : {
-        "value" : "Raucherstatus"
-      },
-      "rm_version" : "1.0.4"
-    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -148,6 +139,9 @@
     "subject" : {
       "_type" : "PARTY_SELF"
     },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
+    },
     "data" : {
       "_type" : "ITEM_TREE",
       "name" : {
@@ -160,16 +154,16 @@
           "_type" : "DV_TEXT",
           "value" : "Rauchverhalten"
         },
-        "value" : {
+        "null_flavour" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Never smoker",
+          "value" : "unknown",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "http://loinc.org"
+              "value" : "openehr"
             },
-            "code_string" : "LA18978-9"
+            "code_string" : "253"
           }
         },
         "archetype_node_id" : "at0043"
