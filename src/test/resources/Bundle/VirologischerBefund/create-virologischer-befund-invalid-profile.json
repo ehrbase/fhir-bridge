@@ -108,7 +108,7 @@
         "resourceType": "DiagnosticReport",
         "meta": {
           "profile": [
-            "https://simplifier.net/medizininformatikinitiative-highmed-ic/highmedicdiagnosticreport"
+            "http://highmed.org/fhir/StructureDefinition/ic/DiagnosticReportLab"
           ]
         },
         "identifier": [
@@ -154,7 +154,7 @@
         "resourceType": "Specimen",
         "meta": {
           "profile": [
-            "https://simplifier.net/medizininformatikinitiative-highmed-ic/specimen-duplicate-5"
+            "http://hl7.org/fhir/StructureDefinition/Specimen"
           ]
         },
         "subject": {

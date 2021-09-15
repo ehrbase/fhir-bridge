@@ -18,7 +18,7 @@
     "originating_system_item_ids": [
       {
         "_type": "DV_IDENTIFIER",
-        "id": "Observation/5228ac83-5bda-4871-95e5-aa56df566301/_history/1",
+        "id": "Observation/0e1a7ec3-e091-4ed3-9b05-ae350910ce19/_history/1",
         "type": "fhir_logical_id"
       }
     ],
@@ -119,9 +119,6 @@
         }
       ],
       "archetype_node_id": "at0001"
-    },
-    "health_care_facility": {
-      "_type": "PARTY_IDENTIFIED"
     }
   },
   "content": [
@@ -130,6 +127,15 @@
       "name": {
         "_type": "DV_TEXT",
         "value": "Befund"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+        },
+        "template_id": {
+          "value": "Virologischer Befund"
+        },
+        "rm_version": "1.0.4"
       },
       "language": {
         "_type": "CODE_PHRASE",
@@ -149,9 +155,6 @@
       },
       "subject": {
         "_type": "PARTY_SELF"
-      },
-      "provider": {
-        "_type": "PARTY_IDENTIFIED"
       },
       "data": {
         "name": {

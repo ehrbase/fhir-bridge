@@ -12,7 +12,7 @@
         "resourceType": "Observation",
         "meta": {
           "profile": [
-            "https://simplifier.net/medizininformatikinitiative-highmed-ic/virologischerbefund"
+            "http://highmed.org/StructureDefinition/VirologischerBefund"
           ]
         },
         "identifier":[
@@ -108,7 +108,7 @@
         "resourceType": "DiagnosticReport",
         "meta": {
           "profile": [
-            "https://simplifier.net/medizininformatikinitiative-highmed-ic/highmedicdiagnosticreport"
+            "http://highmed.org/fhir/StructureDefinition/ic/DiagnosticReportLab"
           ]
         },
         "identifier": [
