@@ -1,11 +1,13 @@
 # @formatter:off
-
 fhir-bridge:
-  minio:
-    url: http://localhost:9000
-    access-key: minio
-    secret-key: minio123456
-    bucket-name: fhir-bridge-bucket
+  fhir:
+    endpoints:
+      DocumentReference: false
+#  minio:
+#    url: http://localhost:9000
+#    access-key:
+#    secret-key:
+#    bucket-name:
 
 # CORS Properties
   cors:
