@@ -12,7 +12,7 @@
         "resourceType": "Observation",
         "meta": {
           "profile": [
-            "http://highmed.org/StructureDefinition/VirologischerBefund"
+            "http://highmed.org/StructureDefinition/ic/VirologischerBefund"
           ]
         },
         "identifier":[
