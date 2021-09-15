@@ -99,6 +99,13 @@
         <xpath value="not(exists(f:dataAbsentReason)) or (not(exists(*[starts-with(local-name(.), 'value')])))" />
         <source value="http://hl7.org/fhir/StructureDefinition/Observation" />
       </constraint>
+      <constraint>
+        <key value="mii-lab-2" />
+        <severity value="error" />
+        <human value="Falls kein Laborwert verfügbar ist, muss eine dataAbsentReason angegeben werden" />
+        <expression value="value.exists().not() implies dataAbsentReason.exists()" />
+        <source value="https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab" />
+      </constraint>
       <mapping>
         <identity value="rim" />
         <map value="Entity. Role, or Act" />
@@ -4115,7 +4122,7 @@
       <definition value="The information determined as a result of making the observation, if the information has a simple value." />
       <comment value="An observation may have; 1)  a single value here, 2)  both a value and a set of related or component values,  or 3)  only a set of related or component values. If a value is present, the datatype for this element should be determined by Observation.code.  A CodeableConcept with just a text would be used instead of a string if the field was usually coded, or if the type associated with the Observation.code defines a coded value.  For additional guidance, see the [Notes section](observation.html#notes) below." />
       <requirements value="An observation exists to have a value, though it might not if it is in error, or if it represents a group of observations." />
-      <min value="1" />
+      <min value="0" />
       <max value="1" />
       <base>
         <path value="Observation.value[x]" />
@@ -5141,6 +5148,7 @@
         <xpath value="@value|f:*|h:div" />
         <source value="http://hl7.org/fhir/StructureDefinition/Element" />
       </constraint>
+      <mustSupport value="true" />
       <binding>
         <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName">
           <valueString value="ObservationValueAbsentReason" />

@@ -1,6 +1,6 @@
 {
   "resourceType": "Observation",
-  "id": "cefe30c3-7597-421a-8509-8c15aa2a2d87",
+  "id": "ce01e111-da00-438e-8584-0d14000a5388",
   "meta": {
     "profile":  [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu"
@@ -38,8 +38,8 @@
     "coding":  [
       {
         "system": "http://snomed.info/sct",
-        "code": "373067005",
-        "display": "No (qualifier value)"
+        "code": "261665006",
+        "display": "Unknown (qualifier value)"
       }
     ]
   }
