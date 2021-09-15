@@ -311,19 +311,6 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	[Template]			Create FiO2 with ehr reference
     [Tags]              valueQuantity
 	#											HTTP
-	# FIELD/PATH 				VALUE			CODE	ERROR MESSAGE
-	$.valueQuantity			  	missing			422    	Observation.value.x.: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  	${EMPTY}		422    	Observation.value.x.: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  	${None}			422    	Observation.value.x.: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  	${{ {} }}		422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  	${{ {} }}		422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  	${{ {} }}		422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity			  	${{ {} }}		422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity.value	  	missing			422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity.unit	  	missing			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity.system	  	missing			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${profile url}
-	$.valueQuantity.code	  	missing			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
-
 	$.valueQuantity.value	  	${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
 	$.valueQuantity.value	  	${None}			422    	This property must be an simple value, not null
 	$.valueQuantity.value	  	113				422    	Error parsing JSON: the primitive value must be a number
