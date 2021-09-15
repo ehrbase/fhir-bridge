@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/8b09fed1-3327-43d7-bbe6-99d78f4a07f1/_history/1",
+      "id" : "Observation/1437a7f4-6847-468d-a81d-16053a9bbcd2/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -173,10 +173,17 @@
               "_type" : "DV_TEXT",
               "value" : "Frequenz"
             },
-            "value" : {
-              "_type" : "DV_QUANTITY",
-              "units" : "/min",
-              "magnitude" : 60.0
+            "null_flavour" : {
+              "_type" : "DV_CODED_TEXT",
+              "value" : "unknown",
+              "defining_code" : {
+                "_type" : "CODE_PHRASE",
+                "terminology_id" : {
+                  "_type" : "TERMINOLOGY_ID",
+                  "value" : "openehr"
+                },
+                "code_string" : "253"
+              }
             },
             "archetype_node_id" : "at0004"
           } ],
