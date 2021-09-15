@@ -322,7 +322,7 @@ ${randinteger}                  ${12345}
 
 	# invalid code
 	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..code
-	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Unexpected value: ${randstring}
+#	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Unexpected value: ${randstring}
 	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..code
 
 	# invalid display
