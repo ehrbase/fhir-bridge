@@ -55,7 +55,7 @@
     "coding": [
       {
         "system": "http://snomed.info/sct",
-        "code": "999999999",
+        "code": "371827001",
         "display": "Patient discharged alive (finding)"
       }
     ]

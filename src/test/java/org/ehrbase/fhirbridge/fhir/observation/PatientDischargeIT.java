@@ -28,66 +28,64 @@ class PatientDischargeIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createPatientDischarge() throws IOException {
-        create("create-patient-discharge-alive.json");
+        create("create-patient-discharge_alive.json");
     }
 
     // #####################################################################################
     // check payload
 
     @Test
-    void mappingAlive() throws IOException {
-        testMapping("create-patient-discharge-alive.json",
-                "paragon-patient-discharge-alive.json");
+    void createPatientDischargeAlive() throws IOException {
+        testMapping("create-patient-discharge_alive.json",
+                "paragon-patient-discharge_alive.json");
     }
 
     @Test
-    void mappingDead() throws IOException {
-        testMapping("create-patient-discharge-dead.json",
-                "paragon-patient-discharge-dead.json");
+    void createPatientDischargeDead() throws IOException {
+        testMapping("create-patient-discharge_dead.json",
+                "paragon-patient-discharge_dead.json");
     }
 
     @Test
-    void mappingHospital() throws IOException {
-        testMapping("create-patient-discharge-hospital.json",
-                "paragon-patient-discharge-hospital.json");
+    void createPatientDischargeHospital() throws IOException {
+        testMapping("create-patient-discharge_hospital.json",
+                "paragon-patient-discharge_hospital.json");
     }
 
     @Test
-    void mappingPalliative() throws IOException {
-        testMapping("create-patient-discharge-palliative.json",
-                "paragon-patient-discharge-palliative.json");
+    void createPatientDischargePalliative() throws IOException {
+        testMapping("create-patient-discharge_palliative.json",
+                "paragon-patient-discharge_palliative.json");
     }
 
     @Test
-    void mappingReferral() throws IOException {
-        testMapping("create-patient-discharge-referral.json",
-                "paragon-patient-discharge-referral.json");
+    void createPatientDischargeReferral() throws IOException {
+        testMapping("create-patient-discharge_referral.json",
+                "paragon-patient-discharge_referral.json");
     }
 
     @Test
-    void mappingUnknown() throws IOException {
-        testMapping("create-patient-discharge-unknown.json",
-                "paragon-patient-discharge-unknown.json");
+    void createPatientDischargeUnknown() throws IOException {
+        testMapping("create-patient-discharge_unknown.json",
+                "paragon-patient-discharge_unknown.json");
     }
 
     // #####################################################################################
     // check exceptions
-/*
-Tested by the Terminology Server
+
     @Test
-    void createInvalidSystem() throws IOException {
-        // copy of alive, manipulated lines 57
-        Exception exception = executeMappingException("create-patient-discharge-invalid-system.json");
-        assertEquals("The system is not correct. It should be 'http://snomed.info/sct', but it was 'http://loinc.org'.", exception.getMessage());
+    void createPatientDischargeMissingValueCodeableConcept() throws IOException {
+        // copy of alive, changed value in line 58 from 371827001 to 999999999
+        Exception exception = executeMappingException("create-patient-discharge_missing-value.json");
+        assertEquals("ValueCodeableConcept missing but is required by the FHIR-Bridge.", exception.getMessage());
     }
 
     @Test
-    void createInvalidCode() throws IOException {
-        // copy of alive, manipulated line 58
-        Exception exception = executeMappingException("create-patient-discharge-invalid-code.json");
-        assertEquals("Value code 999999999 is not supported", exception.getMessage());
+    void createPatientDischargeInvalidValueCodeableConcept() throws IOException {
+        // copy of alive, changed value in line 58 from 371827001 to 999999999
+        Exception exception = executeMappingException("create-patient-discharge_invalid-value.json");
+        assertEquals("ValueCodeableConcept is invalid.", exception.getMessage());
     }
-*/
 
     // #####################################################################################
     // default

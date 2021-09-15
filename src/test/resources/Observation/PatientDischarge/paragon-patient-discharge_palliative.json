@@ -2,14 +2,14 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "GECCO_Koerpertemperatur"
+    "value" : "Entlassungsdaten"
   },
   "archetype_details" : {
     "archetype_id" : {
       "value" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
     },
     "template_id" : {
-      "value" : "Koerpertemperatur"
+      "value" : "GECCO_Entlassungsdaten"
     },
     "rm_version" : "1.0.4"
   },
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1d449e11-4204-4108-9569-39702123804e/_history/1",
+      "id" : "Observation/511b32b9-5235-437b-9299-9328fdcb2b72/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -60,7 +60,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2020-09-25T00:00:00+02:00"
+      "value" : "2020-10-16T08:49:21+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -106,30 +106,28 @@
           "value" : "Kategorie"
         },
         "value" : {
-          "_type" : "DV_CODED_TEXT",
-          "value" : "Vital Signs",
-          "defining_code" : {
-            "_type" : "CODE_PHRASE",
-            "terminology_id" : {
-              "_type" : "TERMINOLOGY_ID",
-              "value" : "http://terminology.hl7.org/CodeSystem/observation-category"
-            },
-            "code_string" : "vital-signs"
-          }
+          "_type" : "DV_TEXT",
+          "value" : "social-history"
         },
         "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
-    },
-    "health_care_facility" : {
-      "_type" : "PARTY_IDENTIFIED"
     }
   },
   "content" : [ {
-    "_type" : "OBSERVATION",
+    "_type" : "ADMIN_ENTRY",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Koerpertemperatur"
+      "value" : "Entlassungsart"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-ADMIN_ENTRY.discharge_summary.v0"
+      },
+      "template_id" : {
+        "value" : "GECCO_Entlassungsdaten"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -150,54 +148,35 @@
     "subject" : {
       "_type" : "PARTY_SELF"
     },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
-    },
     "data" : {
+      "_type" : "ITEM_TREE",
       "name" : {
         "_type" : "DV_TEXT",
-        "value" : "History"
+        "value" : "Tree"
       },
-      "origin" : {
-        "_type" : "DV_DATE_TIME",
-        "value" : "2020-09-25T00:00:00+02:00"
-      },
-      "events" : [ {
-        "_type" : "POINT_EVENT",
+      "items" : [ {
+        "_type" : "ELEMENT",
         "name" : {
           "_type" : "DV_TEXT",
-          "value" : "Beliebiges Ereignis"
+          "value" : "Art der Entlassung"
         },
-        "time" : {
-          "_type" : "DV_DATE_TIME",
-          "value" : "2020-09-25T00:00:00+02:00"
-        },
-        "data" : {
-          "_type" : "ITEM_TREE",
-          "name" : {
-            "_type" : "DV_TEXT",
-            "value" : "Single"
-          },
-          "items" : [ {
-            "_type" : "ELEMENT",
-            "name" : {
-              "_type" : "DV_TEXT",
-              "value" : "Temperatur"
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Referral to palliative care service (procedure)",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
             },
-            "value" : {
-              "_type" : "DV_QUANTITY",
-              "units" : "Cel",
-              "magnitude" : 0.0
-            },
-            "archetype_node_id" : "at0004"
-          } ],
-          "archetype_node_id" : "at0001"
+            "code_string" : "306237005"
+          }
         },
-        "archetype_node_id" : "at0003"
+        "archetype_node_id" : "at0040"
       } ],
-      "archetype_node_id" : "at0002"
+      "archetype_node_id" : "at0001"
     },
-    "archetype_node_id" : "openEHR-EHR-OBSERVATION.body_temperature.v2"
+    "archetype_node_id" : "openEHR-EHR-ADMIN_ENTRY.discharge_summary.v0"
   } ],
   "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
 }

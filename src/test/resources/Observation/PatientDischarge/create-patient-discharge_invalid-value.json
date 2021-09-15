@@ -54,8 +54,8 @@
   "valueCodeableConcept": {
     "coding": [
       {
-        "system": "http://loinc.org",
-        "code": "371827001",
+        "system": "http://snomed.info/sct",
+        "code": "999",
         "display": "Patient discharged alive (finding)"
       }
     ]

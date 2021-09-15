@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/8533beda-ad33-4019-b3f3-e38a8282491d/_history/1",
+      "id" : "Observation/d484d079-5800-4b50-9c11-c5ddcaa508dd/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -162,14 +162,14 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Patient discharged alive (finding)",
+          "value" : "Hospital admission (procedure)",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
-            "code_string" : "371827001"
+            "code_string" : "32485007"
           }
         },
         "archetype_node_id" : "at0040"
