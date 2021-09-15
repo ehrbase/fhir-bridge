@@ -48,6 +48,13 @@ public class Resources {
                 StringUtils.contains(((QuestionnaireResponse) resource).getQuestionnaire(), COVID_19_QUESTIONNAIRE_URL);
     }
 
+    public static boolean isReferenceType(Reference reference, ResourceType resourceType) {
+        if (reference == null || resourceType == null) {
+            return false;
+        }
+        return reference.hasType() && reference.getType().equals(resourceType.name());
+    }
+
     public static Optional<Reference> getSubject(Resource resource) {
         switch (resource.getResourceType()) {
             case Condition:

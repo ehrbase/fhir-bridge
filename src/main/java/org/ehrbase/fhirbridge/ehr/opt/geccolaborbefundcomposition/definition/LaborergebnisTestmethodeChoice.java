@@ -4,8 +4,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-05T14:12:01.365092+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-09-08T14:37:11.054499+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public interface LaborergebnisTestmethodeChoice {
 }

@@ -13,6 +13,8 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
 
   HEPATITIS_A_VIRUS_VACCINE("Hepatitis A virus vaccine", "", "SNOMED Clinical Terms", "14745005"),
 
+  VACCINE_PRODUCT_CONTAINING_ONLY_BORDETELLA_PERTUSSIS_AND_CLOSTRIDIUM_TETANI_AND_CORYNEBACTERIUM_DIPHTHERIAE_AND_HAEMOPHILUS_INFLUENZAE_TYPE_B_AND_HUMAN_POLIOVIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Haemophilus influenzae type B and Human poliovirus antigens (medicinal product)", "", "SNOMED Clinical Terms", "871887006"),
+
   POLIOMYELITIS_ORAL_TRIVALENT_LEBEND_ABGESCHWAECHT("Poliomyelitis, oral, trivalent, lebend abgeschwächt", "", "SNOMED Clinical Terms", "J07BF02"),
 
   HAEMOPHILUS_INFLUENZAE_TYPE_B_RECOMBINANT_HEPATITIS_B_VIRUS_VACCINE_PRODUCT("Haemophilus influenzae Type b + recombinant hepatitis B virus vaccine (product)", "", "SNOMED Clinical Terms", "426971004"),
@@ -67,6 +69,8 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
 
   ANTI_D_RH_IMMUNGLOBULIN("Anti-D(rh)-Immunglobulin", "", "SNOMED Clinical Terms", "J06BB01"),
 
+  VACCINE_PRODUCT_CONTAINING_ONLY_HAEMOPHILUS_INFLUENZAE_TYPE_B_AND_HEPATITIS_B_VIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Haemophilus influenzae type B and Hepatitis B virus antigens (medicinal product)", "", "SNOMED Clinical Terms", "871806004"),
+
   VACCINE_PRODUCT_CONTAINING_BORDETELLA_PERTUSSIS_AND_CLOSTRIDIUM_TETANI_AND_CORYNEBACTERIUM_DIPHTHERIAE_AND_HAEMOPHILUS_INFLUENZAE_TYPE_B_AND_HUMAN_POLIOVIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Haemophilus influenzae type B and Human poliovirus antigens (medicinal product)", "", "SNOMED Clinical Terms", "838279002"),
 
   PRODUCT_CONTAINING_HEPATITIS_B_SURFACE_ANTIGEN_IMMUNOGLOBULIN_MEDICINAL_PRODUCT("Product containing Hepatitis B surface antigen immunoglobulin (medicinal product)", "", "SNOMED Clinical Terms", "9542007"),
@@ -90,6 +94,8 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
   PAPILLOMVIRUS_IMPFSTOFFE("Papillomvirus-Impfstoffe", "", "SNOMED Clinical Terms", "J07BM"),
 
   VACCINE_PRODUCT_CONTAINING_INFLUENZA_VIRUS_ANTIGEN_MEDICINAL_PRODUCT("Vaccine product containing Influenza virus antigen (medicinal product)", "", "SNOMED Clinical Terms", "836377006"),
+
+  VACCINE_PRODUCT_CONTAINING_MUMPS_ORTHORUBULAVIRUS_ANTIGEN_MEDICINAL_PRODUCT_VACCINE_PRODUCT_CONTAINING_MEASLES_MORBILLIVIRUS_ANTIGEN_MEDICINAL_PRODUCT("Vaccine product containing Mumps orthorubulavirus antigen (medicinal product) + Vaccine product containing Measles morbillivirus antigen (medicinal product)", "", "SNOMED Clinical Terms", "836498007+836382004"),
 
   GELBFIEBER_IMPFSTOFFE("Gelbfieber-Impfstoffe", "", "SNOMED Clinical Terms", "J07BL"),
 
@@ -126,6 +132,8 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
   VACCINE_PRODUCT_PRODUCT_HAS_ACTIVE_INGREDIENT_ATTRIBUTE_HAEMOPHILUS_INFLUENZAE_TYPE_B_VACCINE_SUBSTANCE_HAS_ACTIVE_INGREDIENT_ATTRIBUTE_LIVE_POLIOVIRUS_VACCINE_SUBSTANCE("Vaccine product (product): { Has active ingredient (attribute) = Haemophilus influenzae type b vaccine (substance) } { Has active ingredient (attribute) = Live Poliovirus vaccine (substance) }", "", "SNOMED Clinical Terms", "787859002:{127489000=412374001}{127489000=396436004}"),
 
   RUBELLA_VACCINE("Rubella vaccine", "", "SNOMED Clinical Terms", "386013003"),
+
+  VACCINE_PRODUCT_CONTAINING_ONLY_BORDETELLA_PERTUSSIS_AND_CLOSTRIDIUM_TETANI_AND_CORYNEBACTERIUM_DIPHTHERIAE_AND_HUMAN_POLIOVIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens (medicinal product)", "", "SNOMED Clinical Terms", "871878002"),
 
   CHOLERA_IMPFSTOFFE("Cholera-Impfstoffe", "", "SNOMED Clinical Terms", "J07AE"),
 
@@ -213,6 +221,8 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
 
   PERTUSSIS_GEREINIGTES_ANTIGEN("Pertussis, gereinigtes Antigen", "", "SNOMED Clinical Terms", "J07AJ02"),
 
+  VACCINE_PRODUCT_CONTAINING_MUMPS_ORTHORUBULAVIRUS_ANTIGEN_MEDICINAL_PRODUCT_VACCINE_PRODUCT_CONTAINING_RUBELLA_VIRUS_ANTIGEN_MEDICINAL_PRODUCT("Vaccine product containing Mumps orthorubulavirus antigen (medicinal product) + Vaccine product containing Rubella virus antigen (medicinal product)", "", "SNOMED Clinical Terms", "836498007+836388000"),
+
   DIPHTHERIE_PERTUSSIS_POLIOMYELITIS_TETANUS("Diphtherie-Pertussis-Poliomyelitis-Tetanus", "", "SNOMED Clinical Terms", "J07CA02"),
 
   VARICELLA_ZOSTER_LIVE_ATTENUATED_VACCINE_PRODUCT("Varicella-zoster live attenuated vaccine (product)", "", "SNOMED Clinical Terms", "407746005"),
@@ -220,6 +230,8 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
   BEZLOTOXUMAB("Bezlotoxumab", "", "SNOMED Clinical Terms", "J06BB21"),
 
   VACCINE_PRODUCT_CONTAINING_BORDETELLA_PERTUSSIS_AND_CLOSTRIDIUM_TETANI_AND_CORYNEBACTERIUM_DIPHTHERIAE_AND_HEPATITIS_B_VIRUS_AND_HUMAN_POLIOVIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Hepatitis B virus and Human poliovirus antigens (medicinal product)", "", "SNOMED Clinical Terms", "871892008"),
+
+  VACCINE_PRODUCT_CONTAINING_CLOSTRIDIUM_TETANI_ANTIGEN_MEDICINAL_PRODUCT_VACCINE_PRODUCT_CONTAINING_HEPATITIS_B_VIRUS_ANTIGEN_MEDICINAL_PRODUCT_VACCINE_PRODUCT_CONTAINING_BORDETELLA_PERTUSSIS_ANTIGEN_MEDICINAL_PRODUCT_VACCINE_PRODUCT_CONTAINING_CORYNEBACTERIUM_DIPHTHERIAE_ANTIGEN_MEDICINAL_PRODUCT("Vaccine product containing Clostridium tetani antigen (medicinal product) + Vaccine product containing Hepatitis B virus antigen (medicinal product) + Vaccine product containing Bordetella pertussis antigen (medicinal product) + Vaccine product containing Corynebacterium diphtheriae antigen (medicinal product)", "", "SNOMED Clinical Terms", "863911006+836374004+601000221108+836381006"),
 
   PERTUSSIS_INAKTIVIERT_GANZE_ZELLE("Pertussis, inaktiviert, ganze Zelle", "", "SNOMED Clinical Terms", "J07AJ01"),
 
@@ -277,7 +289,11 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
 
   CHOLERA_KOMBINATIONEN_MIT_TYPHUS_IMPFSTOFF_INAKTIVIERT_GANZE_ZELLE("Cholera, Kombinationen mit Typhus-Impfstoff, inaktiviert, ganze Zelle", "", "SNOMED Clinical Terms", "J07AE51"),
 
+  VACCINE_PRODUCT_CONTAINING_ONLY_BORDETELLA_PERTUSSIS_AND_CLOSTRIDIUM_TETANI_AND_CORYNEBACTERIUM_DIPHTHERIAE_AND_HAEMOPHILUS_INFLUENZAE_TYPE_B_AND_HEPATITIS_B_VIRUS_AND_HUMAN_POLIOVIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Haemophilus influenzae type B and Hepatitis B virus and Human poliovirus antigens (medicinal product)", "", "SNOMED Clinical Terms", "871895005"),
+
   TYPHUS_EXANTHEMATICUS_IMPFSTOFF("Typhus (exanthematicus)-Impfstoff", "", "SNOMED Clinical Terms", "J07AR"),
+
+  VACCINE_PRODUCT_CONTAINING_ONLY_CLOSTRIDIUM_TETANI_AND_CORYNEBACTERIUM_DIPHTHERIAE_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Clostridium tetani and Corynebacterium diphtheriae antigens (medicinal product)", "", "SNOMED Clinical Terms", "871826000"),
 
   PNEUMOKOKKEN_GEREINIGTES_POLYSACCHARID_ANTIGEN_KONJUGIERT("Pneumokokken, gereinigtes Polysaccharid-Antigen, konjugiert", "", "SNOMED Clinical Terms", "J07AL02"),
 
@@ -357,6 +373,8 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
 
   VACCINE_PRODUCT_CONTAINING_HUMAN_ALPHAHERPESVIRUS3_ANTIGEN_MEDICINAL_PRODUCT("Vaccine product containing Human alphaherpesvirus 3 antigen (medicinal product)", "", "SNOMED Clinical Terms", "836495005"),
 
+  VACCINE_PRODUCT_CONTAINING_ONLY_HUMAN_ALPHAHERPESVIRUS3_AND_MEASLES_MORBILLIVIRUS_AND_MUMPS_ORTHORUBULAVIRUS_AND_RUBELLA_VIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Human alphaherpesvirus 3 and Measles morbillivirus and Mumps orthorubulavirus and Rubella virus antigens (medicinal product)", "", "SNOMED Clinical Terms", "871908002"),
+
   ROTAVIRUS_PENTAVALENT_LEBEND_REASSORTANTEN("Rotavirus, pentavalent, lebend, Reassortanten", "", "SNOMED Clinical Terms", "J07BH02"),
 
   INFLUENZA_INAKTIVIERT_SPALTVIRUS_ODER_OBERFLAECHENANTIGEN("Influenza, inaktiviert, Spaltvirus oder Oberflächenantigen", "", "SNOMED Clinical Terms", "J07BB02"),
@@ -369,6 +387,8 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
 
   ROTAVIRUS_LEBEND_ABGESCHWAECHT("Rotavirus, lebend abgeschwächt", "", "SNOMED Clinical Terms", "J07BH01"),
 
+  VACCINE_PRODUCT_CONTAINING_ONLY_MEASLES_MORBILLIVIRUS_AND_MUMPS_ORTHORUBULAVIRUS_AND_RUBELLA_VIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Measles morbillivirus and Mumps orthorubulavirus and Rubella virus antigens (medicinal product)", "", "SNOMED Clinical Terms", "871831003"),
+
   VACCINE_PRODUCT_CONTAINING_ONLY_CORYNEBACTERIUM_DIPHTHERIAE_ANTIGEN_MEDICINAL_PRODUCT_VACCINE_PRODUCT_CONTAINING_HEPATITIS_B_VIRUS_ANTIGEN_MEDICINAL_PRODUCT_VACCINE_PRODUCT_CONTAINING_CLOSTRIDIUM_TETANI_ANTIGEN_MEDICINAL_PRODUCT("Vaccine product containing only Corynebacterium diphtheriae antigen (medicinal product) + Vaccine product containing Hepatitis B virus antigen (medicinal product) + Vaccine product containing Clostridium tetani antigen (medicinal product)", "", "SNOMED Clinical Terms", "871729003+836374004+863911006"),
 
   VACCINE_PRODUCT_CONTAINING_HEPATITIS_A_VIRUS_AND_SALMONELLA_ENTERICA_SUBSPECIES_ENTERICA_SEROVAR_TYPHI_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing Hepatitis A virus and Salmonella enterica subspecies enterica serovar Typhi antigens (medicinal product)", "", "SNOMED Clinical Terms", "836501007"),
@@ -379,13 +399,13 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
 
   VACCINE_PRODUCT_CONTAINING_BORDETELLA_PERTUSSIS_AND_CLOSTRIDIUM_TETANI_AND_CORYNEBACTERIUM_DIPHTHERIAE_AND_HEPATITIS_B_VIRUS_MEDICINAL_PRODUCT("Vaccine product containing Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Hepatitis B virus (medicinal product)", "", "SNOMED Clinical Terms", "871917002"),
 
+  VACCINE_PRODUCT_CONTAINING_ONLY_CLOSTRIDIUM_TETANI_AND_CORYNEBACTERIUM_DIPHTHERIAE_AND_HUMAN_POLIOVIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Clostridium tetani and Corynebacterium diphtheriae and Human poliovirus antigens (medicinal product)", "", "SNOMED Clinical Terms", "871837004"),
+
   SMALLPOX_VACCINE("Smallpox vaccine", "", "SNOMED Clinical Terms", "33234009"),
 
   VACCINE_PRODUCT_CONTAINING_JAPANESE_ENCEPHALITIS_VIRUS_ANTIGEN_MEDICINAL_PRODUCT("Vaccine product containing Japanese encephalitis virus antigen (medicinal product)", "", "SNOMED Clinical Terms", "836378001"),
 
   HAEMOPHILUS_INFLUENZAE_B_IMPFSTOFFE("Haemophilus influenzae B-Impfstoffe", "", "SNOMED Clinical Terms", "J07AG"),
-
-  VACCINE_PRODUCT_PRODUCT("Vaccine product (product)", "", "SNOMED Clinical Terms", "787859002"),
 
   JAPANESE_B_ENCEPHALITIS_VACCINE("Japanese B encephalitis vaccine", "", "SNOMED Clinical Terms", "333697005"),
 
@@ -417,11 +437,15 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
 
   DIPHTHERIE_HAEMOPHILUS_INFLUENZAE_B_PERTUSSIS_POLIOMYELITIS_TETANUS_HEPATITIS_B("Diphtherie-Haemophilus influenzae B-Pertussis-Poliomyelitis-Tetanus-Hepatitis B", "", "SNOMED Clinical Terms", "J07CA09"),
 
+  VACCINE_PRODUCT_CONTAINING_ONLY_ACELLULAR_BORDETELLA_PERTUSSIS_AND_CLOSTRIDIUM_TETANI_AND_CORYNEBACTERIUM_DIPHTHERIAE_AND_HEPATITIS_B_VIRUS_AND_INACTIVATED_WHOLE_HUMAN_POLIOVIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only acellular Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae and Hepatitis B virus and inactivated whole Human poliovirus antigens (medicinal product)", "", "SNOMED Clinical Terms", "871891001"),
+
   DIPHTHERIA_TETANUS_PERTUSSIS_POLIOMYELITIS_VACCINE_PRODUCT("Diphtheria + tetanus + pertussis + poliomyelitis vaccine (product)", "", "SNOMED Clinical Terms", "414005006"),
 
   TUBERKULOSE_LEBEND_ABGESCHWAECHT("Tuberkulose, lebend abgeschwächt", "", "SNOMED Clinical Terms", "J07AN01"),
 
   TETANUS_IMMUNGLOBULIN("Tetanus-Immunglobulin", "", "SNOMED Clinical Terms", "J06BB02"),
+
+  VACCINE_PRODUCT_MEDICINAL_PRODUCT("Vaccine product (medicinal product)", "", "SNOMED Clinical Terms", "787859002"),
 
   PLAGUE_VACCINE("Plague vaccine", "", "SNOMED Clinical Terms", "11866009"),
 
@@ -432,6 +456,8 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
   VACCINE_PRODUCT_CONTAINING_CLOSTRIDIUM_TETANI_ANTIGEN_MEDICINAL_PRODUCT("Vaccine product containing Clostridium tetani antigen (medicinal product)", "", "SNOMED Clinical Terms", "863911006"),
 
   HAEMOPHILUS_INFLUENZAE_B_KOMBINATIONEN_MIT_PERTUSSIS_UND_TOXOIDEN("Haemophilus influenzae B, Kombinationen mit Pertussis und Toxoiden", "", "SNOMED Clinical Terms", "J07AG52"),
+
+  VACCINE_PRODUCT_CONTAINING_ONLY_HEPATITIS_A_AND_HEPATITIS_B_VIRUS_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Hepatitis A and Hepatitis B virus antigens (medicinal product)", "", "SNOMED Clinical Terms", "871803007"),
 
   HUMANER_PAPILLOMVIRUS_IMPFSTOFF_TYPEN61116183133455258("Humaner-Papillomvirus-Impfstoff (Typen 6,11,16,18,31,33,45,52,58)", "", "SNOMED Clinical Terms", "J07BM03"),
 
@@ -450,6 +476,10 @@ public enum ImpfstoffDefiningCode implements EnumValueSet {
   ANDERE_VIRALE_IMPFSTOFFE("Andere virale Impfstoffe", "", "SNOMED Clinical Terms", "J07BX"),
 
   VACCINE_PRODUCT_CONTAINING_VIBRIO_CHOLERAE_ANTIGEN_MEDICINAL_PRODUCT("Vaccine product containing Vibrio cholerae antigen (medicinal product)", "", "SNOMED Clinical Terms", "836383009"),
+
+  VACCINE_PRODUCT_CONTAINING_ONLY_BORDETELLA_PERTUSSIS_AND_CLOSTRIDIUM_TETANI_AND_CORYNEBACTERIUM_DIPHTHERIAE_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Bordetella pertussis and Clostridium tetani and Corynebacterium diphtheriae antigens (medicinal product)", "", "SNOMED Clinical Terms", "871875004"),
+
+  VACCINE_PRODUCT_CONTAINING_ONLY_HEPATITIS_A_VIRUS_AND_SALMONELLA_ENTERICA_SUBSPECIES_ENTERICA_SEROVAR_TYPHI_ANTIGENS_MEDICINAL_PRODUCT("Vaccine product containing only Hepatitis A virus and Salmonella enterica subspecies enterica serovar Typhi antigens (medicinal product)", "", "SNOMED Clinical Terms", "871804001"),
 
   DIPHTHERIA_TETANUS_VACCINE_PRODUCT("Diphtheria + tetanus vaccine (product)", "", "SNOMED Clinical Terms", "350327004"),
 

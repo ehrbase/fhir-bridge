@@ -19,8 +19,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 @Archetype("openEHR-EHR-ACTION.procedure.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-01T12:17:24.146662+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-09-09T16:13:25.775886+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProzedurAction implements EntryEntity {
   /**
@@ -50,8 +50,8 @@ public class ProzedurAction implements EntryEntity {
    * Description: Anatomische Lokalisation, an der die Prozedur durchgeführt wird.
    * Comment: Das Vorkommen dieses Datenelements ist nicht eingeschränkt. Dies ermöglicht die Darstellung von klinischen Situationen, in denen alle Eigenschaften, ausgenommen die anatomische Lokalisation, identisch sind, wie z.B. das Entfernen mehrerer Hautläsionen an verschiedenen Stellen. Verwenden Sie dieses Datenelement, um einfache Begriffe oder präkoordinierte anatomische Lokalisationen aufzunehmen. Wenn die Anforderungen an die Erfassung der anatomischen Lokalisation zur Laufzeit durch die Anwendung festgelegt werden oder komplexere Modellierungen wie z.B. die relative Lokalisation erforderlich sind, verwenden Sie entweder CLUSTER.anatomical_location oder CLUSTER.relative_location innerhalb des Slots "Details zur Prozedur" in diesem Archetyp. Wird die anatomische Lokalisation über vordefinierte Codes in den Namen der Prozedur aufgenommen, wird dieses Datenelement redundant.
    */
-  @Path("/description[at0001]/items[at0063]/value|defining_code")
-  private KoerperstelleDefiningCode koerperstelleDefiningCode;
+  @Path("/description[at0001]/items[at0063]/value|value")
+  private String koerperstelleValue;
 
   /**
    * Path: GECCO_Prozedur/Prozedur/Tree/Körperstelle/null_flavour
@@ -206,12 +206,12 @@ public class ProzedurAction implements EntryEntity {
      return this.indikation ;
   }
 
-  public void setKoerperstelleDefiningCode(KoerperstelleDefiningCode koerperstelleDefiningCode) {
-     this.koerperstelleDefiningCode = koerperstelleDefiningCode;
+  public void setKoerperstelleValue(String koerperstelleValue) {
+     this.koerperstelleValue = koerperstelleValue;
   }
 
-  public KoerperstelleDefiningCode getKoerperstelleDefiningCode() {
-     return this.koerperstelleDefiningCode ;
+  public String getKoerperstelleValue() {
+     return this.koerperstelleValue ;
   }
 
   public void setKoerperstelleNullFlavourDefiningCode(

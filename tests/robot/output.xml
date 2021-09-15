@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0b1 (Python 3.9.6 on linux)" generated="20210906 11:30:29.253" rpa="false">
+<suite id="s1" name="04 Create Heart Rate" source="/home/severink/repos/fhir-bridge/tests/robot/OBSERVATION/04_create_heart_rate.robot">
+<test id="s1-t1" name="001 Create Heart Rate (valid variants)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.278" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.278" endtime="20210906 11:30:29.278"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json_
+
+3. *UPDATE* values for all attributes from the table with only valid values
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>observation_create</tag>
+<tag>valid</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.276" endtime="20210906 11:30:29.278">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t2" name="002 Create Heart Rate (invalid resourceType)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.280" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.280" endtime="20210906 11:30:29.280"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json_
+
+3. *UPDATE* values for all attributes from the table with only ``resourceType`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>resourceType</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.279" endtime="20210906 11:30:29.281">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t3" name="003 Create Heart Rate (invalid ID)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.282" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.282" endtime="20210906 11:30:29.283"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with only ``ID`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>ID</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.281" endtime="20210906 11:30:29.283">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t4" name="004 Create Heart Rate (invalid Meta/Profile)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.285" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.285" endtime="20210906 11:30:29.285"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with only ``Meta`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>invalid</tag>
+<tag>Meta</tag>
+<tag>observation_create</tag>
+<tag>Profile</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.283" endtime="20210906 11:30:29.285">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t5" name="005 Create Heart Rate (invalid Status)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.287" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.287" endtime="20210906 11:30:29.287"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with only ``Status`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>Status</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.285" endtime="20210906 11:30:29.287">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t6" name="006 Create Heart Rate (invalid Identifier)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.289" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.289" endtime="20210906 11:30:29.289"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with only ``Identifier`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>Identifier</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.287" endtime="20210906 11:30:29.289">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t7" name="007 Create Heart Rate (invalid Category)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.291" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.291" endtime="20210906 11:30:29.291"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with only ``Categroy`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>Category</tag>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.289" endtime="20210906 11:30:29.291">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t8" name="008 Create Heart Rate (invalid Code)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.293" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.293" endtime="20210906 11:30:29.293"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with only ``Code`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>Code</tag>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.291" endtime="20210906 11:30:29.293">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t9" name="009 Create Heart Rate (invalid Subject)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.295" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.295" endtime="20210906 11:30:29.295"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with only ``Subject`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>Subject</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.293" endtime="20210906 11:30:29.296">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t10" name="010 Create Heart Rate (invalid DateTime)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.298" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.298" endtime="20210906 11:30:29.298"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with only ``DateTime`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>create</tag>
+<tag>DateTime</tag>
+<tag>heart-rate</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.296" endtime="20210906 11:30:29.299">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t11" name="011 Create Heart Rate (invalid valueQuantity)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.301" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.301" endtime="20210906 11:30:29.301"></status>
+</kw>
+<kw name="TRACE GITHUB ISSUE" type="teardown">
+<arguments>
+<arg>247</arg>
+<arg>bug</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.303" level="FAIL">No keyword with name 'TRACE GITHUB ISSUE' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.303" endtime="20210906 11:30:29.303">No keyword with name 'TRACE GITHUB ISSUE' found.</status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with only ``valueQuantity`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>247</tag>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>invalid</tag>
+<tag>not-ready</tag>
+<tag>not-ready_parallel_fail</tag>
+<tag>observation_create</tag>
+<tag>valueQuantity</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.299" endtime="20210906 11:30:29.303">Setup failed:
+No keyword with name 'generic.prepare new request session' found.
+
+Also teardown failed:
+No keyword with name 'TRACE GITHUB ISSUE' found.</status>
+</test>
+<test id="s1-t12" name="012 Create Heart Rate (invalid DataAbsentReason)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.305" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.305" endtime="20210906 11:30:29.305"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with only ``DataAbsentReason`` invalid
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>create</tag>
+<tag>DataAbsentReason</tag>
+<tag>heart-rate</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.303" endtime="20210906 11:30:29.305">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t13" name="013 Create Heart Rate (invalid multi)">
+<kw name="generic.prepare new request session" type="setup">
+<arguments>
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+</arguments>
+<msg timestamp="20210906 11:30:29.307" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210906 11:30:29.307" endtime="20210906 11:30:29.307"></status>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _observation-example-heart-rate-robot.json _
+
+3. *UPDATE* values for all attributes from the table with multible invalid values 
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text</doc>
+<tags>
+<tag>create</tag>
+<tag>heart-rate</tag>
+<tag>invalid</tag>
+<tag>multi</tag>
+<tag>observation_create</tag>
+</tags>
+<status status="FAIL" starttime="20210906 11:30:29.305" endtime="20210906 11:30:29.307">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<doc>*NOTE:* The validation of error messages in the tables below depends on system language settings:
+
+Validation of English messages (if the system language is set to English), 
+
+Validation of German messages (if the system language is set to German)
+*Author:* Dave Petzold</doc>
+<status status="FAIL" starttime="20210906 11:30:29.254" endtime="20210906 11:30:29.307"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="13" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">247</stat>
+<stat pass="0" fail="1" skip="0">Category</stat>
+<stat pass="0" fail="1" skip="0">Code</stat>
+<stat pass="0" fail="13" skip="0">create</stat>
+<stat pass="0" fail="1" skip="0">DataAbsentReason</stat>
+<stat pass="0" fail="1" skip="0">DateTime</stat>
+<stat pass="0" fail="13" skip="0">heart-rate</stat>
+<stat pass="0" fail="1" skip="0">ID</stat>
+<stat pass="0" fail="1" skip="0">Identifier</stat>
+<stat pass="0" fail="12" skip="0">invalid</stat>
+<stat pass="0" fail="1" skip="0">Meta</stat>
+<stat pass="0" fail="1" skip="0">multi</stat>
+<stat pass="0" fail="1" skip="0">not-ready</stat>
+<stat pass="0" fail="1" skip="0">not-ready_parallel_fail</stat>
+<stat pass="0" fail="13" skip="0">observation_create</stat>
+<stat pass="0" fail="1" skip="0">Profile</stat>
+<stat pass="0" fail="1" skip="0">resourceType</stat>
+<stat pass="0" fail="1" skip="0">Status</stat>
+<stat pass="0" fail="1" skip="0">Subject</stat>
+<stat pass="0" fail="1" skip="0">valid</stat>
+<stat pass="0" fail="1" skip="0">valueQuantity</stat>
+</tag>
+<suite>
+<stat pass="0" fail="13" skip="0" id="s1" name="04 Create Heart Rate">04 Create Heart Rate</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20210906 11:30:29.275" level="ERROR">Error in file '/home/severink/repos/fhir-bridge/tests/robot/OBSERVATION/04_create_heart_rate.robot' on line 20: Resource file '/home/severink/repos/fhir-bridge/tests/robot/robot/_resources/suite_settings.robot' does not exist.</msg>
+</errors>
+</robot>

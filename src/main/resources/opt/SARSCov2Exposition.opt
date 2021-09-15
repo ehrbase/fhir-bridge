@@ -25,9 +25,11 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">929a45a7c03bd536331e87a3a66656e9</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">137DCA7D21FA274494054E1B81B67FC5</other_details>
+    <other_details id="MD5-CAM-1.0.1">96be9619717d4891e860653e08496f60</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">2.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -264,11 +266,9 @@
                 <rm_type_name>ELEMENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>0</lower>
-                  <upper>1</upper>
+                  <upper_unbounded>true</upper_unbounded>
+                  <lower>1</lower>
                 </occurrences>
                 <node_id>at0005</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -514,7 +514,7 @@
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -525,12 +525,7 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED-CT</value>
-                        </terminology_id>
-                        <code_list>840546002</code_list>
-                        <code_list>373067005</code_list>
-                        <code_list>unknown</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/known-exposure</referenceSetUri>
                       </children>
                     </attributes>
                   </children>

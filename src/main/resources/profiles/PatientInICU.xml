@@ -1,8 +1,18 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="gecco-observation-patient-in-icu" />
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu" />
+  <version value="1.0.4" />
   <name value="PatientInICU" />
   <title value="Patient in ICU" />
-  <status value="draft" />
+  <status value="active" />
+  <date value="2020-10-29" />
+  <publisher value="Charité" />
+  <contact>
+    <telecom>
+      <system value="url" />
+      <value value="https://www.bihealth.org/en/research/core-facilities/interoperability/" />
+    </telecom>
+  </contact>
   <description value="This observation captures if the patient is currently treated in the intensive care unit." />
   <fhirVersion value="4.0.1" />
   <mapping>
@@ -200,12 +210,6 @@
       </mapping>
     </element>
     <element id="Observation.implicitRules">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.implicitRules" />
       <short value="A set of rules under which this content was created" />
       <definition value="A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc." />
@@ -238,12 +242,6 @@
       </mapping>
     </element>
     <element id="Observation.language">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.language" />
       <short value="Language of the resource content" />
       <definition value="The base language in which the resource is written." />
@@ -677,12 +675,6 @@
       </mapping>
     </element>
     <element id="Observation.status">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-display-hint">
         <valueString value="default: final" />
       </extension>
@@ -701,6 +693,7 @@
       <type>
         <code value="code" />
       </type>
+      <fixedCode value="final" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -1066,8 +1059,8 @@
         <code value="Coding" />
       </type>
       <patternCoding>
-        <system value="https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes" />
-        <code value="01" />
+        <system value="http://loinc.org" />
+        <code value="95420-6" />
       </patternCoding>
       <condition value="ele-1" />
       <constraint>
@@ -1189,12 +1182,6 @@
       </mapping>
     </element>
     <element id="Observation.code.coding:icu.system">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.code.coding.system" />
       <short value="Identity of the terminology system" />
       <definition value="The identification of the code system that defines the meaning of the symbol in the code." />
@@ -1238,12 +1225,6 @@
       </mapping>
     </element>
     <element id="Observation.code.coding:icu.version">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.code.coding.version" />
       <short value="Version of the system - if relevant" />
       <definition value="The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged." />
@@ -1286,12 +1267,6 @@
       </mapping>
     </element>
     <element id="Observation.code.coding:icu.code">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.code.coding.code" />
       <short value="Symbol in syntax defined by the system" />
       <definition value="A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)." />
@@ -1335,12 +1310,6 @@
       </mapping>
     </element>
     <element id="Observation.code.coding:icu.display">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
         <valueBoolean value="true" />
       </extension>
@@ -1387,12 +1356,6 @@
       </mapping>
     </element>
     <element id="Observation.code.coding:icu.userSelected">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.code.coding.userSelected" />
       <short value="If this coding was chosen directly by the user" />
       <definition value="Indicates that this coding was chosen by a user directly - e.g. off a pick list of available items (codes or displays)." />
@@ -1436,12 +1399,6 @@
       </mapping>
     </element>
     <element id="Observation.code.text">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
         <valueBoolean value="true" />
       </extension>
@@ -1692,12 +1649,6 @@
       </mapping>
     </element>
     <element id="Observation.effective[x]">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.effective[x]" />
       <short value="Clinically relevant time/time-period for observation" />
       <definition value="The time or time-period the observed value is asserted as being true. For biological subjects - e.g. human patients - this is usually called the &quot;physiologically relevant time&quot;. This is usually either the time of the procedure or of specimen collection, but very often the source of the date/time is not known, only the date/time itself." />
@@ -1756,12 +1707,6 @@
       </mapping>
     </element>
     <element id="Observation.issued">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.issued" />
       <short value="Date/Time this version was made available" />
       <definition value="The date and time this version of the observation was made available to providers, typically after the results have been reviewed and verified." />
@@ -1882,6 +1827,90 @@
         <valueCode value="4.0.0" />
       </extension>
       <path value="Observation.value[x]" />
+      <slicing>
+        <discriminator>
+          <type value="type" />
+          <path value="$this" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+      <short value="Actual result" />
+      <definition value="The information determined as a result of making the observation, if the information has a simple value." />
+      <comment value="An observation may have; 1)  a single value here, 2)  both a value and a set of related or component values,  or 3)  only a set of related or component values. If a value is present, the datatype for this element should be determined by Observation.code.  A CodeableConcept with just a text would be used instead of a string if the field was usually coded, or if the type associated with the Observation.code defines a coded value.  For additional guidance, see the [Notes section](observation.html#notes) below." />
+      <requirements value="An observation exists to have a value, though it might not if it is in error, or if it represents a group of observations." />
+      <min value="1" />
+      <max value="1" />
+      <base>
+        <path value="Observation.value[x]" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <condition value="ele-1" />
+      <condition value="obs-7" />
+      <constraint>
+        <key value="ele-1" />
+        <severity value="error" />
+        <human value="All FHIR elements must have a @value or children" />
+        <expression value="hasValue() or (children().count() &gt; id.count())" />
+        <xpath value="@value|f:*|h:div" />
+        <source value="http://hl7.org/fhir/StructureDefinition/Element" />
+      </constraint>
+      <constraint>
+        <key value="qty-3" />
+        <severity value="error" />
+        <human value="If a code for the unit is present, the system SHALL also be present" />
+        <expression value="code.empty() or system.exists()" />
+        <xpath value="not(exists(f:code)) or exists(f:system)" />
+        <source value="http://hl7.org/fhir/StructureDefinition/Observation" />
+      </constraint>
+      <mustSupport value="true" />
+      <isSummary value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Yes | No | Unknown" />
+        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/yes-no-unknown-other-na" />
+      </binding>
+      <mapping>
+        <identity value="rim" />
+        <map value="n/a" />
+      </mapping>
+      <mapping>
+        <identity value="v2" />
+        <map value="SN (see also Range) or CQ" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="PQ, IVL&lt;PQ&gt;, MO, CO, depending on the values" />
+      </mapping>
+      <mapping>
+        <identity value="sct-concept" />
+        <map value="&lt; 441742003 |Evaluation finding|" />
+      </mapping>
+      <mapping>
+        <identity value="v2" />
+        <map value="OBX.2, OBX.5, OBX.6" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="value" />
+      </mapping>
+      <mapping>
+        <identity value="sct-attr" />
+        <map value="363714003 |Interprets|" />
+      </mapping>
+    </element>
+    <element id="Observation.value[x]:valueCodeableConcept">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+        <valueCode value="normative" />
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
+        <valueCode value="4.0.0" />
+      </extension>
+      <path value="Observation.value[x]" />
+      <sliceName value="valueCodeableConcept" />
       <short value="Actual result" />
       <definition value="The information determined as a result of making the observation, if the information has a simple value." />
       <comment value="An observation may have; 1)  a single value here, 2)  both a value and a set of related or component values,  or 3)  only a set of related or component values. If a value is present, the datatype for this element should be determined by Observation.code.  A CodeableConcept with just a text would be used instead of a string if the field was usually coded, or if the type associated with the Observation.code defines a coded value.  For additional guidance, see the [Notes section](observation.html#notes) below." />
@@ -1914,12 +1943,7 @@
         <xpath value="not(exists(f:code)) or exists(f:system)" />
         <source value="http://hl7.org/fhir/StructureDefinition/Observation" />
       </constraint>
-      <mustSupport value="true" />
       <isSummary value="true" />
-      <binding>
-        <strength value="preferred" />
-        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/yes-no-unknown-other-na" />
-      </binding>
       <mapping>
         <identity value="rim" />
         <map value="n/a" />
@@ -1949,7 +1973,7 @@
         <map value="363714003 |Interprets|" />
       </mapping>
     </element>
-    <element id="Observation.value[x].id">
+    <element id="Observation.value[x]:valueCodeableConcept.id">
       <path value="Observation.value[x].id" />
       <representation value="xmlAttr" />
       <short value="Unique id for inter-element referencing" />
@@ -1972,7 +1996,7 @@
         <map value="n/a" />
       </mapping>
     </element>
-    <element id="Observation.value[x].extension">
+    <element id="Observation.value[x]:valueCodeableConcept.extension">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -2029,7 +2053,7 @@
         <map value="N/A" />
       </mapping>
     </element>
-    <element id="Observation.value[x].coding">
+    <element id="Observation.value[x]:valueCodeableConcept.coding">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -2067,7 +2091,6 @@
         <xpath value="@value|f:*|h:div" />
         <source value="http://hl7.org/fhir/StructureDefinition/Element" />
       </constraint>
-      <mustSupport value="true" />
       <isSummary value="true" />
       <mapping>
         <identity value="rim" />
@@ -2098,7 +2121,7 @@
         <map value="fhir:CodeableConcept.coding rdfs:subPropertyOf dt:CD.coding" />
       </mapping>
     </element>
-    <element id="Observation.value[x].coding:snomed">
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -2133,7 +2156,6 @@
         <xpath value="@value|f:*|h:div" />
         <source value="http://hl7.org/fhir/StructureDefinition/Element" />
       </constraint>
-      <mustSupport value="true" />
       <isSummary value="true" />
       <mapping>
         <identity value="rim" />
@@ -2164,7 +2186,7 @@
         <map value="fhir:CodeableConcept.coding rdfs:subPropertyOf dt:CD.coding" />
       </mapping>
     </element>
-    <element id="Observation.value[x].coding:snomed.id">
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed.id">
       <path value="Observation.value[x].coding.id" />
       <representation value="xmlAttr" />
       <short value="Unique id for inter-element referencing" />
@@ -2187,7 +2209,7 @@
         <map value="n/a" />
       </mapping>
     </element>
-    <element id="Observation.value[x].coding:snomed.extension">
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed.extension">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -2244,13 +2266,7 @@
         <map value="N/A" />
       </mapping>
     </element>
-    <element id="Observation.value[x].coding:snomed.system">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed.system">
       <path value="Observation.value[x].coding.system" />
       <short value="Identity of the terminology system" />
       <definition value="The identification of the code system that defines the meaning of the symbol in the code." />
@@ -2293,13 +2309,7 @@
         <map value="fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem" />
       </mapping>
     </element>
-    <element id="Observation.value[x].coding:snomed.version">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed.version">
       <path value="Observation.value[x].coding.version" />
       <short value="Version of the system - if relevant" />
       <definition value="The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged." />
@@ -2341,13 +2351,7 @@
         <map value="fhir:Coding.version rdfs:subPropertyOf dt:CDCoding.codeSystemVersion" />
       </mapping>
     </element>
-    <element id="Observation.value[x].coding:snomed.code">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed.code">
       <path value="Observation.value[x].coding.code" />
       <short value="Symbol in syntax defined by the system" />
       <definition value="A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)." />
@@ -2390,13 +2394,7 @@
         <map value="fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code" />
       </mapping>
     </element>
-    <element id="Observation.value[x].coding:snomed.display">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed.display">
       <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
         <valueBoolean value="true" />
       </extension>
@@ -2442,13 +2440,7 @@
         <map value="fhir:Coding.display rdfs:subPropertyOf dt:CDCoding.displayName" />
       </mapping>
     </element>
-    <element id="Observation.value[x].coding:snomed.userSelected">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed.userSelected">
       <path value="Observation.value[x].coding.userSelected" />
       <short value="If this coding was chosen directly by the user" />
       <definition value="Indicates that this coding was chosen by a user directly - e.g. off a pick list of available items (codes or displays)." />
@@ -2491,13 +2483,7 @@
         <map value="fhir:Coding.userSelected fhir:mapsTo dt:CDCoding.codingRationale. fhir:Coding.userSelected fhir:hasMap fhir:Coding.userSelected.map. fhir:Coding.userSelected.map a fhir:Map;   fhir:target dt:CDCoding.codingRationale. fhir:Coding.userSelected\#true a [     fhir:source &quot;true&quot;;     fhir:target dt:CDCoding.codingRationale\#O   ]" />
       </mapping>
     </element>
-    <element id="Observation.value[x].text">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
+    <element id="Observation.value[x]:valueCodeableConcept.text">
       <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-translatable">
         <valueBoolean value="true" />
       </extension>
@@ -3516,12 +3502,6 @@
       </mapping>
     </element>
     <element id="Observation.referenceRange.text">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
       <path value="Observation.referenceRange.text" />
       <short value="Text based reference range in an observation" />
       <definition value="Text based reference range in an observation which may be used when a quantitative range is not appropriate for an observation.  An example would be a reference value of &quot;Negative&quot; or a list or table of &quot;normals&quot;." />
@@ -4193,6 +4173,10 @@
     </element>
   </snapshot>
   <differential>
+    <element id="Observation.status">
+      <path value="Observation.status" />
+      <fixedCode value="final" />
+    </element>
     <element id="Observation.code">
       <path value="Observation.code" />
       <mustSupport value="true" />
@@ -4215,8 +4199,8 @@
       <min value="1" />
       <max value="1" />
       <patternCoding>
-        <system value="https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes" />
-        <code value="01" />
+        <system value="http://loinc.org" />
+        <code value="95420-6" />
       </patternCoding>
     </element>
     <element id="Observation.code.coding:icu.system">
@@ -4244,16 +4228,32 @@
     </element>
     <element id="Observation.value[x]">
       <path value="Observation.value[x]" />
+      <slicing>
+        <discriminator>
+          <type value="type" />
+          <path value="$this" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+      <min value="1" />
       <type>
         <code value="CodeableConcept" />
       </type>
       <mustSupport value="true" />
       <binding>
-        <strength value="preferred" />
+        <strength value="required" />
+        <description value="Yes | No | Unknown" />
         <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/yes-no-unknown-other-na" />
       </binding>
     </element>
-    <element id="Observation.value[x].coding">
+    <element id="Observation.value[x]:valueCodeableConcept">
+      <path value="Observation.value[x]" />
+      <sliceName value="valueCodeableConcept" />
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+    </element>
+    <element id="Observation.value[x]:valueCodeableConcept.coding">
       <path value="Observation.value[x].coding" />
       <slicing>
         <discriminator>
@@ -4263,9 +4263,8 @@
         <rules value="open" />
       </slicing>
       <min value="1" />
-      <mustSupport value="true" />
     </element>
-    <element id="Observation.value[x].coding:snomed">
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed">
       <path value="Observation.value[x].coding" />
       <sliceName value="snomed" />
       <min value="1" />
@@ -4273,13 +4272,12 @@
       <patternCoding>
         <system value="http://snomed.info/sct" />
       </patternCoding>
-      <mustSupport value="true" />
     </element>
-    <element id="Observation.value[x].coding:snomed.system">
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed.system">
       <path value="Observation.value[x].coding.system" />
       <min value="1" />
     </element>
-    <element id="Observation.value[x].coding:snomed.code">
+    <element id="Observation.value[x]:valueCodeableConcept.coding:snomed.code">
       <path value="Observation.value[x].coding.code" />
       <min value="1" />
     </element>
