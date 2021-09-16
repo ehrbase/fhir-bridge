@@ -1,0 +1,59 @@
+version: '3'
+services:
+  ehrbase:
+    image: ehrbase/ehrbase:next
+    ports:
+      - 8080:8080
+    networks:
+      - ehrbase-network
+    environment:
+      DB_URL: jdbc:postgresql://ehrbase-db:5432/ehrbase
+      DB_USER: ehrbase
+      DB_PASS: ehrbase
+      SECURITY_AUTHTYPE: BASIC
+      SECURITY_AUTHUSER: myuser
+      SECURITY_AUTHPASSWORD: myPassword432
+      SECURITY_AUTHADMINUSER: myadmin
+      SECURITY_AUTHADMINPASSWORD: mySuperAwesomePassword123
+      SYSTEM_NAME: local.ehrbase.org
+      ADMIN_API_ACTIVE: 'true'
+      SERVER_DISABLESTRICTVALIDATION: 'true'
+      VALIDATION_EXTERNALTERMINOLOGY_ENABLED: 'true'
+      VALIDATION_EXTERNALTERMINOLOGY_FAILONERROR: 'true'
+      VALIDATION_EXTERNALTERMINOLOGY_PROVIDER_TERMSERVER1_TYPE: fhir
+      VALIDATION_EXTERNALTERMINOLOGY_PROVIDER_TERMSERVER1_URL: https://terminology-highmed.medic.medfak.uni-koeln.de/fhir
+      CLIENT_SSL_ENABLED: 'true'
+      CLIENT_SSL_KEYPASSWORD: Azerty#123456
+      CLIENT_SSL_KEYSTORE: /etc/ehrbase/keystore.p12
+      CLIENT_SSL_KEYSTOREPASSWORD: Azerty#123456
+      CLIENT_SSL_KEYSTORETYPE: pkcs12
+      CLIENT_SSL_TRUSTSTORE: /etc/ehrbase/truststore.p12
+      CLIENT_SSL_TRUSTSTOREPASSWORD: Azerty#123456
+      CLIENT_SSL_TRUSTSTORETYPE: pkcs12
+    volumes:
+      - /etc/ehrbase/keystores:/etc/ehrbase/
+    depends_on:
+      - ehrbase-db
+    restart: on-failure
+  ehrbase-db:
+    image: ehrbase/ehrbase-postgres:latest
+    ports:
+      - 5432:5432
+    networks:
+      - ehrbase-network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      EHRBASE_USER: ehrbase
+      EHRBASE_PASSWORD: ehrbase
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123456
+    command: server /data --console-address ":9001"
+networks:
+  ehrbase-network: { }

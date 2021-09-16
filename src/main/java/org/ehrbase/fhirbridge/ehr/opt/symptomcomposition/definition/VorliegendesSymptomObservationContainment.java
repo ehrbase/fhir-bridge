@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.time.temporal.TemporalAccessor;
 import org.ehrbase.client.aql.containment.Containment;
@@ -16,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class VorliegendesSymptomObservationContainment extends Containment {
   public SelectAqlField<VorliegendesSymptomObservation> VORLIEGENDES_SYMPTOM_OBSERVATION = new AqlFieldImp<VorliegendesSymptomObservation>(VorliegendesSymptomObservation.class, "", "VorliegendesSymptomObservation", VorliegendesSymptomObservation.class, this);
 
-  public SelectAqlField<DvCodedText> NAME_DES_SYMPTOMS_KRANKHEITSANZEICHENS = new AqlFieldImp<DvCodedText>(VorliegendesSymptomObservation.class, "/data[at0190]/events[at0191]/data[at0192]/items[at0001]/value", "nameDesSymptomsKrankheitsanzeichens", DvCodedText.class, this);
+  public SelectAqlField<NameDesSymptomsKrankheitsanzeichensDefiningCode> NAME_DES_SYMPTOMS_KRANKHEITSANZEICHENS_DEFINING_CODE = new AqlFieldImp<NameDesSymptomsKrankheitsanzeichensDefiningCode>(VorliegendesSymptomObservation.class, "/data[at0190]/events[at0191]/data[at0192]/items[at0001]/value|defining_code", "nameDesSymptomsKrankheitsanzeichensDefiningCode", NameDesSymptomsKrankheitsanzeichensDefiningCode.class, this);
 
   public SelectAqlField<NullFlavour> NAME_DES_SYMPTOMS_KRANKHEITSANZEICHENS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(VorliegendesSymptomObservation.class, "/data[at0190]/events[at0191]/data[at0192]/items[at0001]/null_flavour|defining_code", "nameDesSymptomsKrankheitsanzeichensNullFlavourDefiningCode", NullFlavour.class, this);
 
@@ -28,7 +27,7 @@ public class VorliegendesSymptomObservationContainment extends Containment {
 
   public SelectAqlField<NullFlavour> BEGINN_DER_EPISODE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(VorliegendesSymptomObservation.class, "/data[at0190]/events[at0191]/data[at0192]/items[at0152]/null_flavour|defining_code", "beginnDerEpisodeNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<DvCodedText> SCHWEREGRAD = new AqlFieldImp<DvCodedText>(VorliegendesSymptomObservation.class, "/data[at0190]/events[at0191]/data[at0192]/items[at0021]/value", "schweregrad", DvCodedText.class, this);
+  public SelectAqlField<SchweregradDefiningCode> SCHWEREGRAD_DEFINING_CODE = new AqlFieldImp<SchweregradDefiningCode>(VorliegendesSymptomObservation.class, "/data[at0190]/events[at0191]/data[at0192]/items[at0021]/value|defining_code", "schweregradDefiningCode", SchweregradDefiningCode.class, this);
 
   public SelectAqlField<NullFlavour> SCHWEREGRAD_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(VorliegendesSymptomObservation.class, "/data[at0190]/events[at0191]/data[at0192]/items[at0021]/null_flavour|defining_code", "schweregradNullFlavourDefiningCode", NullFlavour.class, this);
 
