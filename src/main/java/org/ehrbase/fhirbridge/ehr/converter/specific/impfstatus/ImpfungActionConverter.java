@@ -21,6 +21,7 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
     @Override
     protected ImpfungAction convertInternal(Immunization resource) {
         ImpfungAction impfungAction = new ImpfungAction();
+
         impfungAction.setImpfstoffDefiningCode(mapImpstoffDefiningCode(resource));
         impfungAction.setCurrentStateDefiningCode(mapCurentState(resource));
         mapImpfungGegenAndDosis(resource, impfungAction);

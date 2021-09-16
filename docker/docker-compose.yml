@@ -17,6 +17,7 @@ services:
       SECURITY_AUTHADMINPASSWORD: mySuperAwesomePassword123
       SYSTEM_NAME: local.ehrbase.org
       ADMIN_API_ACTIVE: 'true'
+      SERVER_DISABLESTRICTVALIDATION: 'true'
     depends_on:
       - ehrbase-db
     restart: on-failure

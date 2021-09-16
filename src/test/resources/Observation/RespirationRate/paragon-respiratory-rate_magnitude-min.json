@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/737a583f-15ea-4690-962d-85637a2a9f97/_history/1",
+      "id" : "Observation/f46ec8ed-4438-4326-8c56-219b158845db/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -176,7 +176,7 @@
             "value" : {
               "_type" : "DV_QUANTITY",
               "units" : "/min",
-              "magnitude" : 22.0
+              "magnitude" : 0.0
             },
             "archetype_node_id" : "at0004"
           } ],

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.KoerperstelleDefiningCode;
 
 public enum AdministrativesGeschlechtDefiningCode implements EnumValueSet {
   UNKNOWN("Unknown", "", "http://hl7.org/fhir/administrative-gender", "unknown"),
