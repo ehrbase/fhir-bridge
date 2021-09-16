@@ -40,6 +40,12 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
+    void mappingYesAbsent() throws IOException {
+        testMapping("create-history-of-travel-yes-absent.json",
+                "paragon-create-history-of-travel-yes-absent.json");
+    }
+
+    @Test
     void mappingUnknown() throws IOException {
         testMapping("create-history-of-travel-unknown.json",
                 "paragon-history-of-travel-unknown.json");

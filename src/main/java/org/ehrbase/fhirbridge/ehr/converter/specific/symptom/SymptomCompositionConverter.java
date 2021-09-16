@@ -18,7 +18,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.SymptomComposition;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.KategorieDefiningCodeSymptom;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.KategorieDefiningCode;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.codesystems.ConditionVerStatus;
 import org.springframework.lang.NonNull;
@@ -37,7 +37,7 @@ public class SymptomCompositionConverter extends ConditionToCompositionConverter
     @Override
     public SymptomComposition convertInternal(@NonNull Condition condition) {
         SymptomComposition result = new SymptomComposition();
-        result.setKategorie(KategorieDefiningCodeSymptom.N753251.toDvCodedText());
+        result.setKategorieDefiningCode(KategorieDefiningCode.SYMPTOM);
 
         Optional<ConditionVerStatus> conditionVerStatus = resolveConditionVerStatus(condition);
         if (conditionVerStatus.isPresent() && conditionVerStatus.get() == ConditionVerStatus.CONFIRMED) {

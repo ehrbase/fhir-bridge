@@ -47,5 +47,11 @@
         "system": "http://snomed.info/sct"
       }
     ]
+  },
+  "recorder": {
+    "identifier": {
+      "system": "urn:recorder:identifier:system",
+      "value": "recorder_123456"
+    }
   }
 }

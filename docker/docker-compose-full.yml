@@ -17,6 +17,7 @@ services:
       SECURITY_AUTHADMINPASSWORD: mySuperAwesomePassword123
       SYSTEM_NAME: local.ehrbase.org
       ADMIN_API_ACTIVE: 'true'
+      SERVER_DISABLESTRICTVALIDATION: 'true'
     depends_on:
       - ehrbase-db
     restart: on-failure
@@ -78,5 +79,14 @@ services:
       - ehrbase-network
     depends_on:
       - ehrbase
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123456
+    command: server /data --console-address ":9001"
 networks:
   ehrbase-network: { }

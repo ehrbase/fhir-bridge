@@ -21,115 +21,115 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.GeccoKoerpertemperaturKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.KoerpertemperaturObservation;
+import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.StatusDefiningCode;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-18T17:12:11.959704200+02:00",
+    date = "2021-09-06T14:20:39.020706+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Koerpertemperatur")
 public class KoerpertemperaturComposition implements CompositionEntity {
   /**
-   * Path: GECCO_Koerpertemperatur/category
+   * Path: Registereintrag/category
    */
   @Path("/category|defining_code")
   private Category categoryDefiningCode;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/Erweiterung
+   * Path: Registereintrag/context/Erweiterung
    * Description: Ergänzende Angaben zum Registereintrag.
    */
   @Path("/context/other_context[at0001]/items[at0002]")
   private List<Cluster> erweiterung;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/Status
+   * Path: Registereintrag/context/Status
    * Description: Status der gelieferten Daten für den Registereintrag. Hinweis: Dies ist nicht der Status einzelner Komponenten.
    */
   @Path("/context/other_context[at0001]/items[at0004]/value|defining_code")
   private StatusDefiningCode statusDefiningCode;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/Baum/Status/null_flavour
+   * Path: Registereintrag/context/Baum/Status/null_flavour
    */
   @Path("/context/other_context[at0001]/items[at0004]/null_flavour|defining_code")
   private NullFlavour statusNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/Kategorie
+   * Path: Registereintrag/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/context/other_context[at0001]/items[at0005]")
-  private List<GeccoKoerpertemperaturKategorieElement> kategorie;
+  private List<RegistereintragKategorieElement> kategorie;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/start_time
+   * Path: Registereintrag/context/start_time
    */
   @Path("/context/start_time|value")
   private TemporalAccessor startTimeValue;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/participations
+   * Path: Registereintrag/context/participations
    */
   @Path("/context/participations")
   private List<Participation> participations;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/end_time
+   * Path: Registereintrag/context/end_time
    */
   @Path("/context/end_time|value")
   private TemporalAccessor endTimeValue;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/location
+   * Path: Registereintrag/context/location
    */
   @Path("/context/location")
   private String location;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/health_care_facility
+   * Path: Registereintrag/context/health_care_facility
    */
   @Path("/context/health_care_facility")
   private PartyIdentified healthCareFacility;
 
   /**
-   * Path: GECCO_Koerpertemperatur/context/setting
+   * Path: Registereintrag/context/setting
    */
   @Path("/context/setting|defining_code")
   private Setting settingDefiningCode;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur
+   * Path: Registereintrag/Koerpertemperatur
    * Description: Eine Messung der Körpertemperatur, als Surrogat für die Temperatur des gesamten Körper der Person.
    */
   @Path("/content[openEHR-EHR-OBSERVATION.body_temperature.v2 and name/value='Koerpertemperatur']")
   private KoerpertemperaturObservation koerpertemperatur;
 
   /**
-   * Path: GECCO_Koerpertemperatur/composer
+   * Path: Registereintrag/composer
    */
   @Path("/composer")
   private PartyProxy composer;
 
   /**
-   * Path: GECCO_Koerpertemperatur/language
+   * Path: Registereintrag/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: GECCO_Koerpertemperatur/feeder_audit
+   * Path: Registereintrag/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
   /**
-   * Path: GECCO_Koerpertemperatur/territory
+   * Path: Registereintrag/territory
    */
   @Path("/territory")
   private Territory territory;
@@ -169,11 +169,11 @@ public class KoerpertemperaturComposition implements CompositionEntity {
      return this.statusNullFlavourDefiningCode ;
   }
 
-  public void setKategorie(List<GeccoKoerpertemperaturKategorieElement> kategorie) {
+  public void setKategorie(List<RegistereintragKategorieElement> kategorie) {
      this.kategorie = kategorie;
   }
 
-  public List<GeccoKoerpertemperaturKategorieElement> getKategorie() {
+  public List<RegistereintragKategorieElement> getKategorie() {
      return this.kategorie ;
   }
 

@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -25,7 +24,7 @@ public class VorliegendeDiagnoseEvaluationContainment extends Containment {
 
   public SelectAqlField<NullFlavour> DATUM_ZEITPUNKT_DES_AUFTRETENS_DER_ERSTDIAGNOSE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0077]/null_flavour|defining_code", "datumZeitpunktDesAuftretensDerErstdiagnoseNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<DvCodedText> SCHWEREGRAD = new AqlFieldImp<DvCodedText>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0005]/value", "schweregrad", DvCodedText.class, this);
+  public SelectAqlField<SchweregradDefiningCode> SCHWEREGRAD_DEFINING_CODE = new AqlFieldImp<SchweregradDefiningCode>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0005]/value|defining_code", "schweregradDefiningCode", SchweregradDefiningCode.class, this);
 
   public SelectAqlField<NullFlavour> SCHWEREGRAD_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0005]/null_flavour|defining_code", "schweregradNullFlavourDefiningCode", NullFlavour.class, this);
 

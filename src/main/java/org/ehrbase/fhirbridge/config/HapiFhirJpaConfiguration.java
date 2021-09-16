@@ -39,6 +39,7 @@ import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Group;
 import org.hl7.fhir.r4.model.Immunization;
@@ -83,6 +84,13 @@ public class HapiFhirJpaConfiguration extends BaseR4Config {
     @Bean
     public PartitionSettings partitionSettings() {
         return new PartitionSettings();
+    }
+
+    @Bean
+    public JpaResourceDao<DocumentReference> documentReferenceDao() {
+        JpaResourceDao<DocumentReference> documentReferenceDao = new JpaResourceDao<>();
+        documentReferenceDao.setResourceType(DocumentReference.class);
+        return documentReferenceDao;
     }
 
     @Bean

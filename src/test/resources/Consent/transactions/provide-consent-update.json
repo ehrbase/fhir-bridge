@@ -10,8 +10,8 @@
     "coding": [
       {
         "system": "http://terminology.hl7.org/CodeSystem/consentscope",
-        "code": "research",
-        "display": "Research"
+        "code": "adr",
+        "display": "Advanced Care Directive"
       }
     ]
   },
@@ -34,7 +34,7 @@
   },
   "policy": [
     {
-      "uri": "https://www.aerzteblatt.de/archiv/65440/DNR-Anordnungen-Das-fehlende-Bindeglied"
+      "uri": "https://www.aerzteblatt.de/archiv/65440/DNR-Anordnungen-Das-fehlende-Bindeglied-UPDATED"
     }
   ],
   "provision": {

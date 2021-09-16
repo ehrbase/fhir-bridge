@@ -6,6 +6,7 @@ import org.hl7.fhir.r4.model.CanonicalType;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.MedicationStatement;
@@ -28,8 +29,6 @@ import java.util.stream.Collectors;
 @SuppressWarnings("java:S6212")
 public class Resources {
 
-    public static final String RFC_4122_SYSTEM = "urn:ietf:rfc:4122";
-
     private static final String COVID_19_QUESTIONNAIRE_URL = "http://fhir.data4life.care/covid-19/r4/Questionnaire/covid19-recommendation";
 
     private Resources() {
@@ -49,6 +48,13 @@ public class Resources {
                 StringUtils.contains(((QuestionnaireResponse) resource).getQuestionnaire(), COVID_19_QUESTIONNAIRE_URL);
     }
 
+    public static boolean isReferenceType(Reference reference, ResourceType resourceType) {
+        if (reference == null || resourceType == null) {
+            return false;
+        }
+        return reference.hasType() && reference.getType().equals(resourceType.name());
+    }
+
     public static Optional<Reference> getSubject(Resource resource) {
         switch (resource.getResourceType()) {
             case Condition:
@@ -57,6 +63,8 @@ public class Resources {
                 return getPatient((Consent) resource);
             case DiagnosticReport:
                 return getSubject((DiagnosticReport) resource);
+            case DocumentReference:
+                return getSubject((DocumentReference) resource);
             case Encounter:
                 return getSubject((Encounter) resource);
             case Immunization:
@@ -86,6 +94,9 @@ public class Resources {
                 break;
             case DiagnosticReport:
                 ((DiagnosticReport) resource).setSubject(subject);
+                break;
+            case DocumentReference:
+                ((DocumentReference) resource).setSubject(subject);
                 break;
             case Encounter:
                 ((Encounter) resource).setSubject(subject);
@@ -146,6 +157,10 @@ public class Resources {
 
     private static Optional<Reference> getSubject(DiagnosticReport diagnosticReport) {
         return diagnosticReport.hasSubject() ? Optional.of(diagnosticReport.getSubject()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getSubject(DocumentReference documentReference) {
+        return documentReference.hasSubject() ? Optional.of(documentReference.getSubject()) : Optional.empty();
     }
 
     private static Optional<Reference> getSubject(Encounter encounter) {

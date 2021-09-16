@@ -1,6 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum LandDefiningCode implements EnumValueSet {
@@ -515,6 +518,14 @@ public enum LandDefiningCode implements EnumValueSet {
     this.description = description;
     this.terminologyId = terminologyId;
     this.code = code;
+  }
+
+  public static Map<String, LandDefiningCode> getCodesAsMap() {
+    Map<String, LandDefiningCode> landDefiningCodeHashMap = new HashMap<>();
+    for (LandDefiningCode landDefiningCode : LandDefiningCode.values()) {
+      landDefiningCodeHashMap.put(landDefiningCode.getCode(), landDefiningCode);
+    }
+    return landDefiningCodeHashMap;
   }
 
   public String getValue() {

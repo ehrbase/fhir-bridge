@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Encounter/7feb979b-d0e9-42dc-b573-eebbed60a0f4/_history/1",
+      "id" : "Encounter/df1cb256-ca0e-44d7-946d-67aeea3cd3c3/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -105,6 +105,14 @@
         "archetype_node_id" : "openEHR-EHR-CLUSTER.case_identification.v0"
       } ],
       "archetype_node_id" : "at0001"
+    },
+    "health_care_facility" : {
+      "_type" : "PARTY_IDENTIFIED",
+      "identifiers" : [ {
+        "_type" : "DV_IDENTIFIER",
+        "assigner" : "http://medizininformatik-initiative.de/fhir/NamingSystem/Abteilungsidentifikator/MusterKrankenhaus",
+        "id" : "1500_ACHI"
+      } ]
     }
   },
   "content" : [ {

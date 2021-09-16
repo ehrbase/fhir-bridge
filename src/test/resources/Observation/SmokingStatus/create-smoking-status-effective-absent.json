@@ -28,10 +28,7 @@
     ]
   },
   "subject": {
-    "identifier": {
-      "system": "urn:ietf:rfc:4122",
-      "value": "{{patientId}}"
-    }
+    "reference": "Patient/0b63ab84-8df0-4e18-bce9-b84067005c7b"
   },
   "_effectiveDateTime": {
     "extension": [{

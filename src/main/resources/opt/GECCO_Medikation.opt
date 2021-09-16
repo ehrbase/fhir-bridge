@@ -25,10 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">95c98c06e09687c4f2ef31086b8607c8</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="MD5-CAM-1.0.1">e098c0cd0f2667f439dcd5f4574f8bb4</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="sem_ver">3.0.0</other_details>
     <other_details id="build_uid">4ddce92e-bdb4-4aee-b1e5-7bbee5567e0c</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -506,6 +506,12 @@
                                 <code_list>88519001</code_list>
                                 <code_list>764877006</code_list>
                                 <code_list>41549009</code_list>
+                                <code_list>antipyretic</code_list>
+                                <code_list>camostat</code_list>
+                                <code_list>favipiravir</code_list>
+                                <code_list>convalescent-plasma</code_list>
+                                <code_list>steroids-gt</code_list>
+                                <code_list>steroids-lt</code_list>
                               </children>
                             </attributes>
                           </children>
@@ -1311,6 +1317,24 @@
         <term_definitions code="41549009">
           <items id="text">Product containing angiotensin-converting enzyme inhibitor (product)</items>
         </term_definitions>
+        <term_definitions code="antipyretic">
+          <items id="text">Product containing antipyretic</items>
+        </term_definitions>
+        <term_definitions code="camostat">
+          <items id="text">Product containing camostat</items>
+        </term_definitions>
+        <term_definitions code="favipiravir">
+          <items id="text">Product containing favipiravir</items>
+        </term_definitions>
+        <term_definitions code="convalescent-plasma">
+          <items id="text">Convalescent plasma</items>
+        </term_definitions>
+        <term_definitions code="steroids-gt">
+          <items id="text">Steroids (> 0.5 mg/kg prednisone equivalents)</items>
+        </term_definitions>
+        <term_definitions code="steroids-lt">
+          <items id="text">Steroids (&lt;= 0.5 mg/kg prednisone equivalents)</items>
+        </term_definitions>
         <term_definitions code="421974008">
           <items id="text">Adjunct - intent (qualifier value)</items>
         </term_definitions>
@@ -1528,6 +1552,7 @@
                                 <code_list>C09BX02</code_list>
                                 <code_list>C09BX03</code_list>
                                 <code_list>C09BX04</code_list>
+                                <code_list>C09BX05</code_list>
                               </children>
                             </attributes>
                           </children>
@@ -2440,6 +2465,9 @@
         </term_definitions>
         <term_definitions code="C09BX04">
           <items id="text">Perindopril, Bisoprolol und Amlodipin</items>
+        </term_definitions>
+        <term_definitions code="C09BX05">
+          <items id="text">Ramipril und Bisoprolol</items>
         </term_definitions>
         <term_definitions code="421974008">
           <items id="text">Adjunct - intent (qualifier value)</items>

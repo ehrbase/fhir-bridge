@@ -105,7 +105,7 @@ public class PatientReferenceProcessor implements FhirRequestProcessor {
             patientId = patient.getIdElement();
             LOG.debug("Resolved existing Patient: id={}", patientId);
         } else {
-            throw new UnprocessableEntityException("More than one patient");
+            throw new UnprocessableEntityException("More than one patient matching the given identifier system and value");
         }
 
         subject.setReferenceElement(patientId);

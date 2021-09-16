@@ -4,6 +4,7 @@ import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.SymptomCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.SymptomComposition;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.AusgeschlossenesSymptomEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.UnbekanntesSymptomAussageUeberDieFehlendeInformationElement;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.UnbekanntesSymptomEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomAnatomischeLokalisationElement;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomObservation;
@@ -58,6 +59,7 @@ class SymptomIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(AusgeschlossenesSymptomEvaluation.class)
                 .registerValueObject(UnbekanntesSymptomEvaluation.class)
                 .registerValueObject(VorliegendesSymptomAnatomischeLokalisationElement.class)
+                .registerValueObject(UnbekanntesSymptomAussageUeberDieFehlendeInformationElement.class)
                 .build();
     }
 

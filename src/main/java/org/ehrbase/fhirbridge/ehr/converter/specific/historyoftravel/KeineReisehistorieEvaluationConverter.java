@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToEvaluationConverter;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.AussageUeberDenAusschlussDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KeineReisehistorieEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ProblemDiagnoseDefiningCode;

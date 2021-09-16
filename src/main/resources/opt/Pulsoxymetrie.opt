@@ -25,9 +25,9 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">c6f86447c68ff45197b2c4d56f135530</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">137DCA7D21FA274494054E1B81B67FC5</other_details>
-    <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="MD5-CAM-1.0.1">e09e512468bc1526a7034d36e1a12272</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
+    <other_details id="original_language">ISO_639-1::en</other_details>
     <details>
       <language>
         <terminology_id>
@@ -35,15 +35,18 @@
         </terminology_id>
         <code_string>de</code_string>
       </language>
-      <purpose>Zur Repräsentation einer peripheren Sauerstoffsättigungsmessung mittels Pulsoximetrie im Rahmen des FoDaPI-Projektes / GECCO-Datensatzes.</purpose>
-      <keywords>Periphere Sauerstoffsättigung</keywords>
-      <keywords>Sauerstoffsättigung</keywords>
-      <keywords>Pulsoxymetrie</keywords>
+      <purpose>To represent a register entry, which provides a structured collection of information from COVID-19 personal data.</purpose>
+      <keywords>COVID-19</keywords>
       <keywords>GECCO</keywords>
-      <keywords>NUM</keywords>
-      <keywords>FoDaPl</keywords>
-      <use>Für die Abbildung einer peripheren Sauerstoffsättigungsmessung mittels Pulsoximetrie für die Speicherung im Rahmen des FoDaPI-Projektes / GECCO-Datensatzes.</use>
-      <misuse>Nicht zur Abbildung der Befunde aus der Blutgasanalyse. Dazu bitte das andere Template "Befund der Blutgasanalyse" verwenden.</misuse>
+      <keywords>SARS-CoV-2</keywords>
+      <keywords>Coronavirus</keywords>
+      <keywords>Virus</keywords>
+      <keywords>Research purposes</keywords>
+      <keywords>Registry</keywords>
+      <keywords>Registry entry</keywords>
+      <use>Use to represent research data from the GECCO datasets. 
+
+For the status Value Set-> https://simplifier.net/packages/hl7.fhir.r4.core/4.0.1/files/78899</use>
     </details>
   </description>
   <uid>
@@ -264,11 +267,9 @@
                 <rm_type_name>ELEMENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
+                  <upper_unbounded>true</upper_unbounded>
                   <lower>0</lower>
-                  <upper>1</upper>
                 </occurrences>
                 <node_id>at0005</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -306,55 +307,6 @@
                 </interval>
               </cardinality>
             </attributes>
-          </children>
-        </attributes>
-      </children>
-    </attributes>
-    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-      <rm_attribute_name>name</rm_attribute_name>
-      <existence>
-        <lower_included>true</lower_included>
-        <upper_included>true</upper_included>
-        <lower_unbounded>false</lower_unbounded>
-        <upper_unbounded>false</upper_unbounded>
-        <lower>1</lower>
-        <upper>1</upper>
-      </existence>
-      <children xsi:type="C_COMPLEX_OBJECT">
-        <rm_type_name>DV_TEXT</rm_type_name>
-        <occurrences>
-          <lower_included>true</lower_included>
-          <upper_included>true</upper_included>
-          <lower_unbounded>false</lower_unbounded>
-          <upper_unbounded>false</upper_unbounded>
-          <lower>1</lower>
-          <upper>1</upper>
-        </occurrences>
-        <node_id/>
-        <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-          <rm_attribute_name>value</rm_attribute_name>
-          <existence>
-            <lower_included>true</lower_included>
-            <upper_included>true</upper_included>
-            <lower_unbounded>false</lower_unbounded>
-            <upper_unbounded>false</upper_unbounded>
-            <lower>1</lower>
-            <upper>1</upper>
-          </existence>
-          <children xsi:type="C_PRIMITIVE_OBJECT">
-            <rm_type_name>STRING</rm_type_name>
-            <occurrences>
-              <lower_included>true</lower_included>
-              <upper_included>true</upper_included>
-              <lower_unbounded>false</lower_unbounded>
-              <upper_unbounded>false</upper_unbounded>
-              <lower>1</lower>
-              <upper>1</upper>
-            </occurrences>
-            <node_id/>
-            <item xsi:type="C_STRING">
-              <list>Pulsoxymetrie</list>
-            </item>
           </children>
         </attributes>
       </children>
