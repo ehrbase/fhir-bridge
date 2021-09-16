@@ -1,6 +1,7 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="gecco-condition-symptoms-covid-19" />
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/symptoms-covid-19" />
-  <version value="0.9" />
+  <version value="1.0" />
   <name value="SymptomsCovid19" />
   <title value="Symptoms Covid-19" />
   <status value="active" />
@@ -138,38 +139,10 @@
         <source value="http://hl7.org/fhir/StructureDefinition/Condition" />
       </constraint>
       <constraint>
-        <key value="icd-1" />
-        <severity value="warning" />
-        <human value="Bei Angabe eines Codes in der Haupt-Kreuz-Extension, muss dieser auch Bestandteil des postkoordinierten ICD-Codes sein!" />
-        <expression value="extension('https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/icd-10-gm-primaercode').empty() or code.contains($this.extension('https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/icd-10-gm-primaercode').value.code)" />
-        <source value="https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose" />
-      </constraint>
-      <constraint>
-        <key value="icd-2" />
-        <severity value="warning" />
-        <human value="Bei Angabe eines Codes in der Stern-Extension, muss dieser auch Bestandteil des postkoordinierten ICD-Codes sein!" />
-        <expression value="extension('https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/icd-10-gm-manifestation').empty() or code.contains($this.extension('https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/icd-10-gm-manifestation').value.code)" />
-        <source value="https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose" />
-      </constraint>
-      <constraint>
-        <key value="icd-3" />
-        <severity value="warning" />
-        <human value="Bei Angabe eines Codes in der Ausrufezeichen-Extension, muss dieser auch Bestandteil des postkoordinierten ICD-Codes sein!" />
-        <expression value="extension('http://fhir.de/StructureDefinition/icd-10-gm-ausrufezeichen').empty() or code.contains($this.extension('http://fhir.de/StructureDefinition/icd-10-gm-ausrufezeichen').value.code)" />
-        <source value="https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose" />
-      </constraint>
-      <constraint>
-        <key value="icd-8" />
-        <severity value="warning" />
-        <human value="Bei Angabe eines Codes in der Seitenlokalisations-Extension, muss dieser auch Bestandteil des ICD-Codes sein!" />
-        <expression value="extension('http://fhir.de/StructureDefinition/seitenlokalisation').empty() or code.contains($this.extension('http://fhir.de/StructureDefinition/seitenlokalisation').value.code)" />
-        <source value="https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose" />
-      </constraint>
-      <constraint>
         <key value="unk-1" />
         <severity value="error" />
         <human value="If verificationStatus is present, uncertaintyOfPresence-Extension SHALL NOT be present." />
-        <expression value="verificationStatus.exists() != Condition.extension.where(url = 'https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence').exists()" />
+        <expression value="verificationStatus.exists() != Condition.modifierExtension.where(url = 'https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence').exists()" />
         <source value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/gecco-base-condition" />
       </constraint>
       <mapping>
@@ -778,7 +751,7 @@
         <map value="N/A" />
       </mapping>
     </element>
-    <element id="Condition.extension:uncertaintyOfPresence">
+    <element id="Condition.extension:ReferenzPrimaerdiagnose">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -786,10 +759,10 @@
         <valueCode value="4.0.0" />
       </extension>
       <path value="Condition.extension" />
-      <sliceName value="uncertaintyOfPresence" />
-      <short value="Uncertainty of presence" />
-      <definition value="Extension used on a condition resource if the presence of the condition is unknown." />
-      <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
+      <sliceName value="ReferenzPrimaerdiagnose" />
+      <short value="Conditions associated with this condition" />
+      <definition value="This condition has an unspecified relationship with another condition." />
+      <comment value="When the relationship is specified, use the more specific extension, such as condition-dueTo, condition-occurredFollowing, or condition-part of." />
       <alias value="extensions" />
       <alias value="user content" />
       <min value="0" />
@@ -801,7 +774,7 @@
       </base>
       <type>
         <code value="Extension" />
-        <profile value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence" />
+        <profile value="http://hl7.org/fhir/StructureDefinition/condition-related" />
       </type>
       <condition value="ele-1" />
       <constraint>
@@ -821,7 +794,6 @@
         <source value="http://hl7.org/fhir/StructureDefinition/DomainResource" />
       </constraint>
       <mustSupport value="true" />
-      <isModifier value="true" />
       <mapping>
         <identity value="rim" />
         <map value="n/a" />
@@ -882,6 +854,61 @@
       </constraint>
       <isModifier value="true" />
       <isModifierReason value="Modifier extensions are expected to modify the meaning or interpretation of the resource that contains them" />
+      <mapping>
+        <identity value="rim" />
+        <map value="n/a" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="N/A" />
+      </mapping>
+    </element>
+    <element id="Condition.modifierExtension:uncertaintyOfPresence">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+        <valueCode value="normative" />
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
+        <valueCode value="4.0.0" />
+      </extension>
+      <path value="Condition.modifierExtension" />
+      <sliceName value="uncertaintyOfPresence" />
+      <short value="Uncertainty of presence" />
+      <definition value="Extension used on a condition resource if the presence of the condition is unknown." />
+      <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
+      <requirements value="Modifier extensions allow for extensions that *cannot* be safely ignored to be clearly distinguished from the vast majority of extensions which can be safely ignored.  This promotes interoperability by eliminating the need for implementers to prohibit the presence of extensions. For further information, see the [definition of modifier extensions](extensibility.html#modifierExtension)." />
+      <alias value="extensions" />
+      <alias value="user content" />
+      <min value="0" />
+      <max value="1" />
+      <base>
+        <path value="DomainResource.modifierExtension" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="Extension" />
+        <profile value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence" />
+      </type>
+      <condition value="ele-1" />
+      <constraint>
+        <key value="ele-1" />
+        <severity value="error" />
+        <human value="All FHIR elements must have a @value or children" />
+        <expression value="hasValue() or (children().count() &gt; id.count())" />
+        <xpath value="@value|f:*|h:div" />
+        <source value="http://hl7.org/fhir/StructureDefinition/Element" />
+      </constraint>
+      <constraint>
+        <key value="ext-1" />
+        <severity value="error" />
+        <human value="Must have either extensions or value[x], not both" />
+        <expression value="extension.exists() != value.exists()" />
+        <xpath value="exists(f:extension)!=exists(f:*[starts-with(local-name(.), 'value')])" />
+        <source value="http://hl7.org/fhir/StructureDefinition/DomainResource" />
+      </constraint>
+      <mustSupport value="true" />
+      <isModifier value="true" />
+      <isModifierReason value="Modifies the meaning of the presence of a condition to being unknown." />
       <mapping>
         <identity value="rim" />
         <map value="n/a" />
@@ -2989,9 +3016,9 @@
       </extension>
       <path value="Condition.code.coding" />
       <sliceName value="icd10-gm" />
-      <short value="Code defined by a terminology system" />
+      <short value="A reference to a code defined by a terminology system" />
       <definition value="A reference to a code defined by a terminology system." />
-      <comment value="Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true." />
+      <comment value="Codes may be defined very casually in enumerations or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information." />
       <requirements value="Allows for alternative encodings within a code system, and translations to other code systems." />
       <min value="0" />
       <max value="1" />
@@ -3002,9 +3029,10 @@
       </base>
       <type>
         <code value="Coding" />
+        <profile value="http://fhir.de/StructureDefinition/CodingICD10GM" />
       </type>
       <patternCoding>
-        <system value="http://fhir.de/CodeSystem/dimdi/icd-10-gm" />
+        <system value="http://fhir.de/CodeSystem/bfarm/icd-10-gm" />
       </patternCoding>
       <condition value="ele-1" />
       <constraint>
@@ -3019,7 +3047,7 @@
       <isSummary value="true" />
       <binding>
         <strength value="required" />
-        <valueSet value="http://fhir.de/ValueSet/dimdi/icd-10-gm" />
+        <valueSet value="http://fhir.de/ValueSet/bfarm/icd-10-gm" />
       </binding>
       <mapping>
         <identity value="rim" />
@@ -3130,7 +3158,7 @@
         <map value="N/A" />
       </mapping>
     </element>
-    <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit">
+    <element id="Condition.code.coding:icd10-gm.extension:Mehrfachcodierungs-Kennzeichen">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -3138,7 +3166,7 @@
         <valueCode value="4.0.0" />
       </extension>
       <path value="Condition.code.coding.extension" />
-      <sliceName value="Diagnosesicherheit" />
+      <sliceName value="Mehrfachcodierungs-Kennzeichen" />
       <short value="Optional Extensions Element" />
       <definition value="Optional Extension Element - found in all resources." />
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
@@ -3153,7 +3181,7 @@
       </base>
       <type>
         <code value="Extension" />
-        <profile value="http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit" />
+        <profile value="http://fhir.de/StructureDefinition/icd-10-gm-mehrfachcodierungs-kennzeichen" />
       </type>
       <condition value="ele-1" />
       <constraint>
@@ -3234,7 +3262,7 @@
         <map value="N/A" />
       </mapping>
     </element>
-    <element id="Condition.code.coding:icd10-gm.extension:AusrufezeichenCode">
+    <element id="Condition.code.coding:icd10-gm.extension:Diagnosesicherheit">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -3242,14 +3270,14 @@
         <valueCode value="4.0.0" />
       </extension>
       <path value="Condition.code.coding.extension" />
-      <sliceName value="AusrufezeichenCode" />
+      <sliceName value="Diagnosesicherheit" />
       <short value="Optional Extensions Element" />
       <definition value="Optional Extension Element - found in all resources." />
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
       <alias value="extensions" />
       <alias value="user content" />
       <min value="0" />
-      <max value="*" />
+      <max value="1" />
       <base>
         <path value="Element.extension" />
         <min value="0" />
@@ -3257,111 +3285,7 @@
       </base>
       <type>
         <code value="Extension" />
-        <profile value="http://fhir.de/StructureDefinition/icd-10-gm-ausrufezeichen" />
-      </type>
-      <condition value="ele-1" />
-      <constraint>
-        <key value="ele-1" />
-        <severity value="error" />
-        <human value="All FHIR elements must have a @value or children" />
-        <expression value="hasValue() or (children().count() &gt; id.count())" />
-        <xpath value="@value|f:*|h:div" />
-        <source value="http://hl7.org/fhir/StructureDefinition/Element" />
-      </constraint>
-      <constraint>
-        <key value="ext-1" />
-        <severity value="error" />
-        <human value="Must have either extensions or value[x], not both" />
-        <expression value="extension.exists() != value.exists()" />
-        <xpath value="exists(f:extension)!=exists(f:*[starts-with(local-name(.), 'value')])" />
-        <source value="http://hl7.org/fhir/StructureDefinition/DomainResource" />
-      </constraint>
-      <mustSupport value="true" />
-      <mapping>
-        <identity value="rim" />
-        <map value="n/a" />
-      </mapping>
-      <mapping>
-        <identity value="rim" />
-        <map value="N/A" />
-      </mapping>
-    </element>
-    <element id="Condition.code.coding:icd10-gm.extension:ManifestationsCode">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
-      <path value="Condition.code.coding.extension" />
-      <sliceName value="ManifestationsCode" />
-      <short value="Optional Extensions Element" />
-      <definition value="Optional Extension Element - found in all resources." />
-      <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
-      <alias value="extensions" />
-      <alias value="user content" />
-      <min value="0" />
-      <max value="*" />
-      <base>
-        <path value="Element.extension" />
-        <min value="0" />
-        <max value="*" />
-      </base>
-      <type>
-        <code value="Extension" />
-        <profile value="http://fhir.de/StructureDefinition/icd-10-gm-manifestationscode" />
-      </type>
-      <condition value="ele-1" />
-      <constraint>
-        <key value="ele-1" />
-        <severity value="error" />
-        <human value="All FHIR elements must have a @value or children" />
-        <expression value="hasValue() or (children().count() &gt; id.count())" />
-        <xpath value="@value|f:*|h:div" />
-        <source value="http://hl7.org/fhir/StructureDefinition/Element" />
-      </constraint>
-      <constraint>
-        <key value="ext-1" />
-        <severity value="error" />
-        <human value="Must have either extensions or value[x], not both" />
-        <expression value="extension.exists() != value.exists()" />
-        <xpath value="exists(f:extension)!=exists(f:*[starts-with(local-name(.), 'value')])" />
-        <source value="http://hl7.org/fhir/StructureDefinition/DomainResource" />
-      </constraint>
-      <mustSupport value="true" />
-      <mapping>
-        <identity value="rim" />
-        <map value="n/a" />
-      </mapping>
-      <mapping>
-        <identity value="rim" />
-        <map value="N/A" />
-      </mapping>
-    </element>
-    <element id="Condition.code.coding:icd10-gm.extension:Primaercode">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
-      <path value="Condition.code.coding.extension" />
-      <sliceName value="Primaercode" />
-      <short value="Optional Extensions Element" />
-      <definition value="Optional Extension Element - found in all resources." />
-      <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
-      <alias value="extensions" />
-      <alias value="user content" />
-      <min value="0" />
-      <max value="*" />
-      <base>
-        <path value="Element.extension" />
-        <min value="0" />
-        <max value="*" />
-      </base>
-      <type>
-        <code value="Extension" />
-        <profile value="http://fhir.de/StructureDefinition/icd-10-gm-primaercode" />
+        <profile value="http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit" />
       </type>
       <condition value="ele-1" />
       <constraint>
@@ -3392,7 +3316,7 @@
     </element>
     <element id="Condition.code.coding:icd10-gm.system">
       <path value="Condition.code.coding.system" />
-      <short value="Identity of the terminology system" />
+      <short value="Canonische CodeSystem URL für ICD-10-GM" />
       <definition value="The identification of the code system that defines the meaning of the symbol in the code." />
       <comment value="The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously." />
       <requirements value="Need to be unambiguous about the source of the definition of the symbol." />
@@ -3406,7 +3330,7 @@
       <type>
         <code value="uri" />
       </type>
-      <patternUri value="http://fhir.de/CodeSystem/dimdi/icd-10-gm" />
+      <fixedUri value="http://fhir.de/CodeSystem/bfarm/icd-10-gm" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -3437,8 +3361,8 @@
     </element>
     <element id="Condition.code.coding:icd10-gm.version">
       <path value="Condition.code.coding.version" />
-      <short value="Version of the system - if relevant" />
-      <definition value="The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged." />
+      <short value="Die Jahresversion von ICD-10-GM. Angegeben wird immer die vierstellige Jahreszahl (z.B. &quot;2017&quot;)" />
+      <definition value="Bie Verwendung von ICD-10-GM ist die Angabe der Version zwingend erforderlich.&#xD;&#xA;Hierdurch wird der Tatsache Rechnung getragen, dass jede der jährlich neu erscheinenden Fassung von ICD-10-GM ein neues Codesystem darstellt." />
       <comment value="Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date." />
       <min value="1" />
       <max value="1" />
@@ -3480,7 +3404,7 @@
     </element>
     <element id="Condition.code.coding:icd10-gm.code">
       <path value="Condition.code.coding.code" />
-      <short value="Symbol in syntax defined by the system" />
+      <short value="Der ICD-10-Code" />
       <definition value="A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)." />
       <comment value="Note that FHIR strings SHALL NOT exceed 1MB in size" />
       <requirements value="Need to refer to a particular code in the system." />
@@ -3494,6 +3418,10 @@
       <type>
         <code value="code" />
       </type>
+      <example>
+        <label value="Einfacher ICD-Code" />
+        <valueCode value="F17.4" />
+      </example>
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -3502,6 +3430,13 @@
         <expression value="hasValue() or (children().count() &gt; id.count())" />
         <xpath value="@value|f:*|h:div" />
         <source value="http://hl7.org/fhir/StructureDefinition/Element" />
+      </constraint>
+      <constraint>
+        <key value="icd-regex" />
+        <severity value="warning" />
+        <human value="In code sind nur gültige ICD-10-Codes ohne Zusätze erlaubt" />
+        <expression value="matches('^[A-Z][0-9][A-Z0-9](\\.?[A-Z0-9]{0,4})?$')" />
+        <source value="http://fhir.de/StructureDefinition/CodingICD10GM" />
       </constraint>
       <mustSupport value="true" />
       <isSummary value="true" />
@@ -3620,9 +3555,9 @@
       </extension>
       <path value="Condition.code.coding" />
       <sliceName value="alpha-id" />
-      <short value="Code defined by a terminology system" />
+      <short value="A reference to a code defined by a terminology system" />
       <definition value="A reference to a code defined by a terminology system." />
-      <comment value="Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true." />
+      <comment value="Codes may be defined very casually in enumerations or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information." />
       <requirements value="Allows for alternative encodings within a code system, and translations to other code systems." />
       <min value="0" />
       <max value="1" />
@@ -3633,9 +3568,10 @@
       </base>
       <type>
         <code value="Coding" />
+        <profile value="http://fhir.de/StructureDefinition/CodingAlphaID" />
       </type>
       <patternCoding>
-        <system value="http://fhir.de/CodeSystem/dimdi/alpha-id" />
+        <system value="http://fhir.de/CodeSystem/bfarm/alpha-id" />
       </patternCoding>
       <condition value="ele-1" />
       <constraint>
@@ -3650,7 +3586,7 @@
       <isSummary value="true" />
       <binding>
         <strength value="required" />
-        <valueSet value="http://fhir.de/ValueSet/dimdi/alpha-id" />
+        <valueSet value="http://fhir.de/ValueSet/bfarm/alpha-id" />
       </binding>
       <mapping>
         <identity value="rim" />
@@ -3763,7 +3699,7 @@
     </element>
     <element id="Condition.code.coding:alpha-id.system">
       <path value="Condition.code.coding.system" />
-      <short value="Identity of the terminology system" />
+      <short value="Canonische CodeSystem URL für Alpha-ID" />
       <definition value="The identification of the code system that defines the meaning of the symbol in the code." />
       <comment value="The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously." />
       <requirements value="Need to be unambiguous about the source of the definition of the symbol." />
@@ -3777,6 +3713,7 @@
       <type>
         <code value="uri" />
       </type>
+      <fixedUri value="http://fhir.de/CodeSystem/bfarm/alpha-id" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -3807,10 +3744,10 @@
     </element>
     <element id="Condition.code.coding:alpha-id.version">
       <path value="Condition.code.coding.version" />
-      <short value="Version of the system - if relevant" />
-      <definition value="The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged." />
+      <short value="Die Jahresversion von Alpha-ID. Angegeben wird immer die vierstellige Jahreszahl (z.B. &quot;2017&quot;)" />
+      <definition value="Bie Verwendung von Alpha-ID ist die Angabe der Version zwingend erforderlich.&#xD;&#xA;Hierdurch wird der Tatsache Rechnung getragen, dass jede der jährlich neu erscheinenden Fassung von Alpha-ID ein neues Codesystem darstellt." />
       <comment value="Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date." />
-      <min value="0" />
+      <min value="1" />
       <max value="1" />
       <base>
         <path value="Coding.version" />
@@ -3849,7 +3786,7 @@
     </element>
     <element id="Condition.code.coding:alpha-id.code">
       <path value="Condition.code.coding.code" />
-      <short value="Symbol in syntax defined by the system" />
+      <short value="Der Alpha-ID-Code" />
       <definition value="A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)." />
       <comment value="Note that FHIR strings SHALL NOT exceed 1MB in size" />
       <requirements value="Need to refer to a particular code in the system." />
@@ -4606,6 +4543,7 @@
         <xpath value="@value|f:*|h:div" />
         <source value="http://hl7.org/fhir/StructureDefinition/Element" />
       </constraint>
+      <mustSupport value="true" />
       <isSummary value="true" />
       <mapping>
         <identity value="rim" />
@@ -5431,8 +5369,8 @@
       <constraint>
         <key value="mii-reference-1" />
         <severity value="error" />
-        <human value="Either reference.reference XOR reference.identifier exists" />
-        <expression value="$this.reference.exists() xor ($this.identifier.value.exists() and $this.identifier.system.exists()) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
+        <human value="Either reference.reference OR reference.identifier exists" />
+        <expression value="($this.reference.exists() or ($this.identifier.value.exists() and $this.identifier.system.exists())) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
         <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />
       </constraint>
       <mustSupport value="true" />
@@ -5474,9 +5412,9 @@
         <valueCode value="4.0.0" />
       </extension>
       <path value="Condition.encounter" />
-      <short value="Encounter created as part of" />
-      <definition value="The Encounter during which this Condition was created or to which the creation of this record is tightly associated." />
-      <comment value="This will typically be the encounter the event occurred within, but some activities may be initiated prior to or after the official completion of an encounter but still be tied to the context of the encounter. This record indicates the encounter this particular record is associated with.  In the case of a &quot;new&quot; diagnosis reflecting ongoing/revised information about the condition, this might be distinct from the first encounter in which the underlying condition was first &quot;known&quot;." />
+      <short value="A reference from one resource to another" />
+      <definition value="A reference from one resource to another." />
+      <comment value="References SHALL be a reference to an actual FHIR resource, and SHALL be resolveable (allowing for access control, temporary unavailability, etc.). Resolution can be either by retrieval from the URL, or, where applicable by resource type, by treating an absolute reference as a canonical URL and looking it up in a local registry/repository." />
       <min value="0" />
       <max value="1" />
       <base>
@@ -5486,6 +5424,7 @@
       </base>
       <type>
         <code value="Reference" />
+        <profile value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Encounter" />
       </type>
       <condition value="ele-1" />
@@ -5505,6 +5444,14 @@
         <xpath value="not(starts-with(f:reference/@value, '#')) or exists(ancestor::*[self::f:entry or self::f:parameter]/f:resource/f:*/f:contained/f:*[f:id/@value=substring-after(current()/f:reference/@value, '#')]|/*/f:contained/f:*[f:id/@value=substring-after(current()/f:reference/@value, '#')])" />
         <source value="http://hl7.org/fhir/StructureDefinition/Condition" />
       </constraint>
+      <constraint>
+        <key value="mii-reference-1" />
+        <severity value="error" />
+        <human value="Either reference.reference OR reference.identifier exists" />
+        <expression value="($this.reference.exists() or ($this.identifier.value.exists() and $this.identifier.system.exists())) xor $this.extension('http://hl7.org/fhir/StructureDefinition/data-absent-reason').exists()" />
+        <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />
+      </constraint>
+      <mustSupport value="true" />
       <isSummary value="true" />
       <mapping>
         <identity value="rim" />
@@ -5914,7 +5861,7 @@
       </base>
       <type>
         <code value="Extension" />
-        <profile value="https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Stage_Life" />
+        <profile value="http://fhir.de/StructureDefinition/lebensphase" />
       </type>
       <condition value="ele-1" />
       <constraint>
@@ -6109,7 +6056,7 @@
       </base>
       <type>
         <code value="Extension" />
-        <profile value="https://fhir.kbv.de/StructureDefinition/KBV_EX_Base_Stage_Life" />
+        <profile value="http://fhir.de/StructureDefinition/lebensphase" />
       </type>
       <condition value="ele-1" />
       <constraint>

@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/14956c8c-c650-402c-8bce-07b19aab2356/_history/1",
+      "id" : "Observation/2de45b7c-84c0-423b-ae3b-f432f05e62db/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -167,7 +167,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "32485007"
           }

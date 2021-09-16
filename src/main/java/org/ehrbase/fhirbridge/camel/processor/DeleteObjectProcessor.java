@@ -5,9 +5,7 @@ import org.apache.camel.Processor;
 import org.apache.camel.util.ObjectHelper;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.minio.MinioService;
-import org.springframework.stereotype.Component;
 
-@Component(DeleteObjectProcessor.BEAN_ID)
 public class DeleteObjectProcessor implements Processor {
 
     public static final String BEAN_ID = "deleteObjectProcessor";

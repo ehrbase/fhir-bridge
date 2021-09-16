@@ -14,8 +14,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.device.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-01T12:17:24.214022+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.0.0"
+    date = "2021-09-09T16:13:25.784871+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class MedizingeraetCluster implements LocatableEntity {
   /**

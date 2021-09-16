@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Condition/49/_history/1",
+      "id" : "Condition/dbcdc3f2-8073-4570-bfa2-8e8dfae5de51/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -26,13 +26,17 @@
     }
   },
   "language" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_639-1"
     },
     "code_string" : "de"
   },
   "territory" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_3166-1"
     },
     "code_string" : "DE"
@@ -41,7 +45,9 @@
     "_type" : "DV_CODED_TEXT",
     "value" : "event",
     "defining_code" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "openehr"
       },
       "code_string" : "433"
@@ -60,7 +66,9 @@
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
       "defining_code" : {
+        "_type" : "CODE_PHRASE",
         "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
           "value" : "openehr"
         },
         "code_string" : "232"
@@ -82,7 +90,9 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Gastroenterology",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
               "value" : "SNOMED Clinical Terms"
             },
             "code_string" : "394584008"
@@ -99,14 +109,27 @@
       "_type" : "DV_TEXT",
       "value" : "Ausgeschlossene Diagnose"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-EVALUATION.exclusion_specific.v1"
+      },
+      "template_id" : {
+        "value" : "GECCO_Diagnose"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"
@@ -130,13 +153,34 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Known absent (qualifier value)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
               "value" : "SNOMED Clinical Terms"
             },
             "code_string" : "410594000"
           }
         },
         "archetype_node_id" : "at0002"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Problem/Diagnose"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Gastrointestinal ulcer",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "SNOMED Clinical Terms"
+            },
+            "code_string" : "40845000"
+          }
+        },
+        "archetype_node_id" : "at0003"
       } ],
       "archetype_node_id" : "at0001"
     },

@@ -14,6 +14,7 @@ import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
 import org.javers.core.metamodel.clazz.ValueObjectDefinition;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@Disabled("Requires MinIO")
 class DocumentReferenceIT extends AbstractMappingTestSetupIT {
 
     public DocumentReferenceIT() {
