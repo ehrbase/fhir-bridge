@@ -18,7 +18,7 @@
     "originating_system_item_ids": [
       {
         "_type": "DV_IDENTIFIER",
-        "id": "Observation/0e1a7ec3-e091-4ed3-9b05-ae350910ce19/_history/1",
+        "id": "Observation/bde27842-77eb-4ba7-bbd3-2318ae7f90e8/_history/1",
         "type": "fhir_logical_id"
       }
     ],
@@ -210,6 +210,20 @@
                     "value": "Probe"
                   },
                   "items": [
+                    {
+                      "_type": "ELEMENT",
+                      "name": {
+                        "_type": "DV_TEXT",
+                        "value": "Laborprobenidentifikator"
+                      },
+                      "value": {
+                        "_type": "DV_IDENTIFIER",
+                        "assigner": "DISPLAY",
+                        "id": "ID",
+                        "type": "URI"
+                      },
+                      "archetype_node_id": "at0001"
+                    },
                     {
                       "_type": "ELEMENT",
                       "name": {

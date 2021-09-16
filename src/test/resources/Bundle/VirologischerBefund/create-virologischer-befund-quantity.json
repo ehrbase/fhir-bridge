@@ -154,6 +154,17 @@
             "http://hl7.org/fhir/StructureDefinition/Specimen"
           ]
         },
+        "accessionIdentifier" : {
+          "assigner":
+          {
+            "display": "DISPLAY"
+          },
+          "id": "ID",
+          "type":
+          {
+            "text": "URI"
+          }
+        },
         "subject": {
           "identifier": {
             "system": "urn:ietf:rfc:4122",
