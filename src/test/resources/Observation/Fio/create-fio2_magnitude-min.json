@@ -59,14 +59,10 @@
     }
   },
   "effectiveDateTime": "2020-09-21",
-  "valueCodeableConcept": {
-    "coding": [
-      {
-        "system": "http://fhir.de/CodeSystem/gender-amtlich-de",
-        "code": "X",
-        "display": "unbestimmt"
-      }
-    ],
-    "text": "Unspecified"
+  "valueQuantity": {
+    "value": 0,
+    "unit": "%",
+    "system": "http://unitsofmeasure.org",
+    "code": "%"
   }
 }

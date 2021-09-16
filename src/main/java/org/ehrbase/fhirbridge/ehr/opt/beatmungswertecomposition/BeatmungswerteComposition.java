@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.Statu
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T11:36:42.447408+02:00",
+    date = "2021-09-14T15:32:26.798243600+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Beatmungswerte")
