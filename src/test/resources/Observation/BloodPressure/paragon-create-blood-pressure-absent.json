@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/9340a34c-121a-4c4f-be25-badd8cfa50b1/_history/1",
+      "id" : "Observation/779fca94-af86-4a9e-8ffa-9ac601d28e1b/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -54,7 +54,11 @@
     }
   },
   "composer" : {
-    "_type" : "PARTY_SELF"
+    "_type" : "PARTY_IDENTIFIED",
+    "identifiers" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "http://external.fhir.server/Practitioner/example"
+    } ]
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
@@ -162,10 +166,17 @@
               "_type" : "DV_TEXT",
               "value" : "Systolisch"
             },
-            "value" : {
-              "_type" : "DV_QUANTITY",
-              "units" : "mm[Hg]",
-              "magnitude" : 107.0
+            "null_flavour" : {
+              "_type" : "DV_CODED_TEXT",
+              "value" : "unknown",
+              "defining_code" : {
+                "_type" : "CODE_PHRASE",
+                "terminology_id" : {
+                  "_type" : "TERMINOLOGY_ID",
+                  "value" : "openehr"
+                },
+                "code_string" : "253"
+              }
             },
             "archetype_node_id" : "at0004"
           }, {
@@ -174,10 +185,17 @@
               "_type" : "DV_TEXT",
               "value" : "Diastolisch"
             },
-            "value" : {
-              "_type" : "DV_QUANTITY",
-              "units" : "mm[Hg]",
-              "magnitude" : 60.0
+            "null_flavour" : {
+              "_type" : "DV_CODED_TEXT",
+              "value" : "unknown",
+              "defining_code" : {
+                "_type" : "CODE_PHRASE",
+                "terminology_id" : {
+                  "_type" : "TERMINOLOGY_ID",
+                  "value" : "openehr"
+                },
+                "code_string" : "253"
+              }
             },
             "archetype_node_id" : "at0005"
           } ],

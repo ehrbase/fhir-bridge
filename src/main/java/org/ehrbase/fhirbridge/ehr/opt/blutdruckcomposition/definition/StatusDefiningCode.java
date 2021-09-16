@@ -1,10 +1,16 @@
-package org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition;
 
 import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum KategorieDefiningCode implements EnumValueSet {
-  SOCIAL_HISTORY("Social History", "", "http://terminology.hl7.org/CodeSystem/observation-category", "social-history");
+public enum StatusDefiningCode implements EnumValueSet {
+  VORLAEUFIG("vorläufig", "*", "local", "at0011"),
+
+  FINAL("final", "*", "local", "at0012"),
+
+  REGISTRIERT("registriert", "*", "local", "at0010"),
+
+  GEAENDERT("geändert", "*", "local", "at0013");
 
   private String value;
 
@@ -14,7 +20,7 @@ public enum KategorieDefiningCode implements EnumValueSet {
 
   private String code;
 
-  KategorieDefiningCode(String value, String description, String terminologyId, String code) {
+  StatusDefiningCode(String value, String description, String terminologyId, String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;
