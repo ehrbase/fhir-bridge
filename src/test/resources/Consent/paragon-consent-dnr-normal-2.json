@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Consent/041d0306-5205-4918-bada-f92d352d4319/_history/1",
+      "id" : "Consent/d0ae0552-647c-42be-8a45-c9d8e44dbcce/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -60,7 +60,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-09-14T13:00:02,210695+02:00"
+      "value" : "2021-09-16T14:54:33,768227+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -194,7 +194,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "304253006"
           }
