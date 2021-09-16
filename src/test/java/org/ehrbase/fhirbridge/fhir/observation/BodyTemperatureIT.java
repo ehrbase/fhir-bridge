@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodytemperature.KoerpertemperaturCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.KoerpertemperaturComposition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.GeccoKoerpertemperaturKategorieElement;
