@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/202f1a3a-119c-446c-a9e8-e262edb400e7/_history/1",
+      "id" : "Observation/5cd1c4eb-3ee3-4112-ac2e-17e46ec0ad87/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -82,6 +82,34 @@
         "code_string" : "232"
       }
     },
+    "other_context" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Baum"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Status"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "final",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "local"
+            },
+            "code_string" : "at0012"
+          }
+        },
+        "archetype_node_id" : "at0004"
+      } ],
+      "archetype_node_id" : "at0001"
+    },
     "health_care_facility" : {
       "_type" : "PARTY_IDENTIFIED",
       "identifiers" : [ {
@@ -95,6 +123,15 @@
     "name" : {
       "_type" : "DV_TEXT",
       "value" : "Blutdruck"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.blood_pressure.v2"
+      },
+      "template_id" : {
+        "value" : "Blutdruck"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -114,9 +151,6 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
-    },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "name" : {

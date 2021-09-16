@@ -1,6 +1,7 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="gecco-observation-history-of-travel" />
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/history-of-travel" />
-  <version value="0.9.1" />
+  <version value="1.0" />
   <name value="HistoryOfTravel" />
   <title value="History Of Travel" />
   <status value="active" />
@@ -2744,6 +2745,11 @@
       </constraint>
       <mustSupport value="true" />
       <isSummary value="true" />
+      <binding>
+        <strength value="required" />
+        <description value="Yes | No | Unknown" />
+        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/yes-no-unknown-other-na" />
+      </binding>
       <mapping>
         <identity value="rim" />
         <map value="n/a" />
@@ -2786,7 +2792,7 @@
       <definition value="The information determined as a result of making the observation, if the information has a simple value." />
       <comment value="An observation may have; 1)  a single value here, 2)  both a value and a set of related or component values,  or 3)  only a set of related or component values. If a value is present, the datatype for this element should be determined by Observation.code.  A CodeableConcept with just a text would be used instead of a string if the field was usually coded, or if the type associated with the Observation.code defines a coded value.  For additional guidance, see the [Notes section](observation.html#notes) below." />
       <requirements value="An observation exists to have a value, though it might not if it is in error, or if it represents a group of observations." />
-      <min value="1" />
+      <min value="0" />
       <max value="1" />
       <base>
         <path value="Observation.value[x]" />
@@ -2815,11 +2821,6 @@
         <source value="http://hl7.org/fhir/StructureDefinition/Observation" />
       </constraint>
       <isSummary value="true" />
-      <binding>
-        <strength value="required" />
-        <description value="Yes | No | Unknown" />
-        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/yes-no-unknown-other-na" />
-      </binding>
       <mapping>
         <identity value="rim" />
         <map value="n/a" />
@@ -9972,30 +9973,29 @@
         <code value="CodeableConcept" />
       </type>
       <mustSupport value="true" />
-    </element>
-    <element id="Observation.value[x]:valueCodeableConcept">
-      <path value="Observation.valueCodeableConcept" />
-      <sliceName value="valueCodeableConcept" />
-      <min value="1" />
-      <type>
-        <code value="CodeableConcept" />
-      </type>
       <binding>
         <strength value="required" />
         <description value="Yes | No | Unknown" />
         <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/yes-no-unknown-other-na" />
       </binding>
     </element>
+    <element id="Observation.value[x]:valueCodeableConcept">
+      <path value="Observation.value[x]" />
+      <sliceName value="valueCodeableConcept" />
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+    </element>
     <element id="Observation.value[x]:valueCodeableConcept.coding">
-      <path value="Observation.valueCodeableConcept.coding" />
+      <path value="Observation.value[x].coding" />
       <min value="1" />
     </element>
     <element id="Observation.value[x]:valueCodeableConcept.coding.system">
-      <path value="Observation.valueCodeableConcept.coding.system" />
+      <path value="Observation.value[x].coding.system" />
       <min value="1" />
     </element>
     <element id="Observation.value[x]:valueCodeableConcept.coding.code">
-      <path value="Observation.valueCodeableConcept.coding.code" />
+      <path value="Observation.value[x].coding.code" />
       <min value="1" />
     </element>
     <element id="Observation.bodySite">

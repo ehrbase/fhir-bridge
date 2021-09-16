@@ -38,11 +38,11 @@ public class DvCodedTextParser {
         }
     }
 
-    public static DvCodedText parseInteger(IntegerType multipleBirthIntegerType) {
+    public static DvCodedText parseBirthInteger(IntegerType multipleBirthIntegerType) {
         return new DvCodedText("amount of multiple births", new CodePhrase(new TerminologyId("", ""), multipleBirthIntegerType.toString()));
     }
 
-    public static DvCodedText parseBoolean(BooleanType multipleBirthBoolean) {
+    public static DvCodedText parseBirthBoolean(BooleanType multipleBirthBoolean) {
         return new DvCodedText("multiple births present", new CodePhrase(new TerminologyId("", ""), multipleBirthBoolean.toString()));
     }
 
