@@ -52,36 +52,7 @@ ${randurl}                      http://foobar.com
     $.resourceType					${randinteger}					422
 
 
-002 Create Consent (invalid/missing 'identifier')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _consent-example-2.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
-    ...                 5. *POST* example JSON to consent endpoint\n\n
-	...                 6. *VALIDATE* the response status \n\n                
-	[Template]		    create consent w/o ehr reference
-    [Tags]              identifier
-
-	# FIELD/PATH			    VALUE					HTTP
-    # invalid cases for value
-    $.identifier[0].value		    ${EMPTY}				422
-    $.identifier[0].value		    ${{ [] }}				422
-    $.identifier[0].value		    ${{ {} }}				422
-    $.identifier[0].value		    ${123}					422
-    
-    # invalid cases for system
-    $.identifier[0].system		    ${EMPTY}				422
-    $.identifier[0].system		    ${{ [] }}				422
-    $.identifier[0].system		    ${{ {} }}				422
-    $.identifier[0].system		    ${123}					422
-
-    # invalid cases for identifier
-    $.identifier			    ${EMPTY}				422
-    $.identifier			    ${{ [] }}				422
-    $.identifier			    ${{ {} }}				422
-    $.identifier			    ${123}					422
-
-003 Create Consent (invalid/missing 'status')
+002 Create Consent (invalid/missing 'status')
 	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _consent-example-2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -98,7 +69,7 @@ ${randurl}                      http://foobar.com
 	$.status						${randinteger}					422
 	$.status						${randstring}					400
 
-004 Create Consent (invalid/missing 'scope')
+003 Create Consent (invalid/missing 'scope')
 	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _consent-example-2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -134,7 +105,7 @@ ${randurl}                      http://foobar.com
 	$.scope.coding[0].system 			${{ {} }}				422
 	$.scope.coding[0].system 			${{ [{}] }}				422
 
-005 Create Consent (invalid/missing 'category')
+004 Create Consent (invalid/missing 'category')
 	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _consent-example-2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
@@ -170,7 +141,7 @@ ${randurl}                      http://foobar.com
 	$.category[0].coding[0].system 			${{ {} }}				422
 	$.category[0].coding[0].system 			${{ [{}] }}				422
 
-006 Create Consent (invalid/missing 'provision')
+005 Create Consent (invalid/missing 'provision')
 	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _consent-example-2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
