@@ -239,7 +239,7 @@ public class FindPatientOpenEhrProcessor implements FhirRequestProcessor {
         // Then the first result is kept, and the rest are intersected with that one, creating an AND processing
         // If any result is empty, there is no need to execute the following queries, we know the total result will be empty/zero
 
-        int totalQueries = outParams.size() + templateParamMap.size();
+        int totalQueries = outParams.size() + templateParamMap.size() + (patientParams.size() == 0 ? 0 : 1);
         int executedQueries = 0;
 
         // execute queries based on the processed parameters and intersect results
@@ -253,45 +253,59 @@ public class FindPatientOpenEhrProcessor implements FhirRequestProcessor {
         // TEST
         if (patientParams.size() > 0) {
             try {
-                handleQueryForGECCO_Personendaten(patientParams);
+                tmpResult = handleQueryForGECCO_Personendaten(patientParams);
+
+                if (tmpResult.isEmpty()) {
+                    executedQueries++;
+                    emptyResult = true;
+                } else {
+                    if (executedQueries == 0) {
+                        subjectIds.addAll(tmpResult);
+                    } else {
+                        subjectIds.retainAll(tmpResult); // does an intersection ~ AND
+                    }
+                    executedQueries++;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        // process queries not based on templates
-        for (HasParamTemplate outParam : outParams) {
+        if (!emptyResult) {
+            // process queries not based on templates
+            for (HasParamTemplate outParam : outParams) {
 
-            // TODO: execute queries based on resource type and attribute name, no template lookupt here because
-            // the attribute is not 'code', so we need to search manually for the possible matching templates
-            // and hardcode them here.
-            //
-            // Encounter => Patientenaufenthalt (openEHR-EHR-COMPOSITION.event_summary.v0)
-            // Encounter => Stationärer Versorgungsfall (openEHR-EHR-COMPOSITION.fall.v1)
-            //System.out.println(outParam.getValue());
+                // TODO: execute queries based on resource type and attribute name, no template lookupt here because
+                // the attribute is not 'code', so we need to search manually for the possible matching templates
+                // and hardcode them here.
+                //
+                // Encounter => Patientenaufenthalt (openEHR-EHR-COMPOSITION.event_summary.v0)
+                // Encounter => Stationärer Versorgungsfall (openEHR-EHR-COMPOSITION.fall.v1)
+                //System.out.println(outParam.getValue());
 
-            if (outParam.getTargetResource().equals("Encounter")) {
+                if (outParam.getTargetResource().equals("Encounter")) {
 
-                // NOTE: this will search by one date not a date range, since it accepts one date param value at a time,
-                // to search by a date range, the outParams for the Encounter should be grouped together
-                tmpResult = handleQueryForEncounter(outParam);
+                    // NOTE: this will search by one date not a date range, since it accepts one date param value at a time,
+                    // to search by a date range, the outParams for the Encounter should be grouped together
+                    tmpResult = handleQueryForEncounter(outParam);
 
-                LOG.info("Executed Query: "+ outParam.targetParamName);
+                    LOG.info("Executed Query: " + outParam.targetParamName);
 
-                if (tmpResult.isEmpty()) {
+                    if (tmpResult.isEmpty()) {
+                        executedQueries++;
+                        emptyResult = true;
+                        break;
+                    }
+
+                    if (executedQueries == 0) {
+                        subjectIds.addAll(tmpResult);
+                    } else {
+                        subjectIds.retainAll(tmpResult); // does an intersection ~ AND
+                    }
                     executedQueries++;
-                    emptyResult = true;
-                    break;
-                }
-
-                if (executedQueries == 0) {
-                    subjectIds.addAll(tmpResult);
                 } else {
-                    subjectIds.retainAll(tmpResult); // does an intersection ~ AND
+                    LOG.info("Ignoring param " + outParam.targetParamName);
                 }
-                executedQueries++;
-            } else {
-                LOG.info("Ignoring param "+ outParam.targetParamName);
             }
         }
 
@@ -627,7 +641,6 @@ public class FindPatientOpenEhrProcessor implements FhirRequestProcessor {
 
         /*
         cl1/items[at0001]/value //dob
-
         ev/data[at0002]/items[at0022]/value // administrative gender
         */
 
