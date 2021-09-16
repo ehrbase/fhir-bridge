@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -17,8 +16,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.absence.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-12T18:58:20.615124+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-09-13T14:55:50.901391+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class UnbekannteDiagnoseEvaluation implements EntryEntity {
   /**
@@ -26,8 +25,8 @@ public class UnbekannteDiagnoseEvaluation implements EntryEntity {
    * Description: Positive Aussage, dass keine Informationen verfügbar sind.
    * Comment: Zum Beispiel: "Es liegen keine Informationen über Nebenwirkungen vor"; "Es liegen keine Informationen über Probleme oder Diagnosen vor"; "Es liegen keine Informationen über vorangegangene Verfahren vor"; oder "Es liegen keine Informationen über verwendete Medikamente vor".
    */
-  @Path("/data[at0001]/items[at0002 and name/value='Unbekannte Diagnose']/value")
-  private DvCodedText unbekannteDiagnose;
+  @Path("/data[at0001]/items[at0002 and name/value='Unbekannte Diagnose']/value|defining_code")
+  private NameDesProblemsDerDiagnoseDefiningCode unbekannteDiagnoseDefiningCode;
 
   /**
    * Path: GECCO_Diagnose/Unbekannte Diagnose/Baum/Unbekannte Diagnose/null_flavour
@@ -40,8 +39,8 @@ public class UnbekannteDiagnoseEvaluation implements EntryEntity {
    * Description: Beschreibung des Grundes, warum keine Informationen vorhanden sind.
    * Comment: Zum Beispiel: Der Patient ist bewusstlos oder weigert sich Informationen preiszugeben. Die Codierung mit einer Terminologie wird empfohlen, wenn möglich.
    */
-  @Path("/data[at0001]/items[at0005 and name/value='Aussage über die fehlende Information']/value")
-  private DvCodedText aussageUeberDieFehlendeInformation;
+  @Path("/data[at0001]/items[at0005 and name/value='Aussage über die fehlende Information']/value|defining_code")
+  private AussageUeberDieFehlendeInformationDefiningCode aussageUeberDieFehlendeInformationDefiningCode;
 
   /**
    * Path: GECCO_Diagnose/Unbekannte Diagnose/Baum/Aussage über die fehlende Information/null_flavour
@@ -75,12 +74,13 @@ public class UnbekannteDiagnoseEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setUnbekannteDiagnose(DvCodedText unbekannteDiagnose) {
-     this.unbekannteDiagnose = unbekannteDiagnose;
+  public void setUnbekannteDiagnoseDefiningCode(
+      NameDesProblemsDerDiagnoseDefiningCode unbekannteDiagnoseDefiningCode) {
+     this.unbekannteDiagnoseDefiningCode = unbekannteDiagnoseDefiningCode;
   }
 
-  public DvCodedText getUnbekannteDiagnose() {
-     return this.unbekannteDiagnose ;
+  public NameDesProblemsDerDiagnoseDefiningCode getUnbekannteDiagnoseDefiningCode() {
+     return this.unbekannteDiagnoseDefiningCode ;
   }
 
   public void setUnbekannteDiagnoseNullFlavourDefiningCode(
@@ -92,13 +92,14 @@ public class UnbekannteDiagnoseEvaluation implements EntryEntity {
      return this.unbekannteDiagnoseNullFlavourDefiningCode ;
   }
 
-  public void setAussageUeberDieFehlendeInformation(
-      DvCodedText aussageUeberDieFehlendeInformation) {
-     this.aussageUeberDieFehlendeInformation = aussageUeberDieFehlendeInformation;
+  public void setAussageUeberDieFehlendeInformationDefiningCode(
+      AussageUeberDieFehlendeInformationDefiningCode aussageUeberDieFehlendeInformationDefiningCode) {
+     this.aussageUeberDieFehlendeInformationDefiningCode = aussageUeberDieFehlendeInformationDefiningCode;
   }
 
-  public DvCodedText getAussageUeberDieFehlendeInformation() {
-     return this.aussageUeberDieFehlendeInformation ;
+  public AussageUeberDieFehlendeInformationDefiningCode getAussageUeberDieFehlendeInformationDefiningCode(
+      ) {
+     return this.aussageUeberDieFehlendeInformationDefiningCode ;
   }
 
   public void setAussageUeberDieFehlendeInformationNullFlavourDefiningCode(

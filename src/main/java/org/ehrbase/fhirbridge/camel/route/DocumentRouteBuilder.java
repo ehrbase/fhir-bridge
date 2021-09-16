@@ -27,13 +27,11 @@ import org.ehrbase.fhirbridge.camel.processor.FhirProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.OpenEhrClientExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.springframework.stereotype.Component;
 
 import static org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirCamelValidators.MODEL;
 import static org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirCamelValidators.VALIDATION_MODE;
 import static org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirCamelValidators.itiRequestValidator;
 
-@Component
 public class DocumentRouteBuilder extends RouteBuilder {
 
     @Override

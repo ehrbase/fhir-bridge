@@ -14,9 +14,12 @@ import org.ehrbase.client.aql.field.ListSelectAqlField;
 import org.ehrbase.client.aql.field.SelectAqlField;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
+import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.BlutdruckKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.BlutdruckObservation;
+import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.StatusDefiningCode;
 
 public class BlutdruckCompositionContainment extends Containment {
   public SelectAqlField<BlutdruckComposition> BLUTDRUCK_COMPOSITION = new AqlFieldImp<BlutdruckComposition>(BlutdruckComposition.class, "", "BlutdruckComposition", BlutdruckComposition.class, this);
@@ -24,6 +27,12 @@ public class BlutdruckCompositionContainment extends Containment {
   public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(BlutdruckComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
 
   public ListSelectAqlField<Cluster> ERWEITERUNG = new ListAqlFieldImp<Cluster>(BlutdruckComposition.class, "/context/other_context[at0001]/items[at0002]", "erweiterung", Cluster.class, this);
+
+  public SelectAqlField<StatusDefiningCode> STATUS_DEFINING_CODE = new AqlFieldImp<StatusDefiningCode>(BlutdruckComposition.class, "/context/other_context[at0001]/items[at0004]/value|defining_code", "statusDefiningCode", StatusDefiningCode.class, this);
+
+  public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(BlutdruckComposition.class, "/context/other_context[at0001]/items[at0004]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
+
+  public ListSelectAqlField<BlutdruckKategorieElement> KATEGORIE = new ListAqlFieldImp<BlutdruckKategorieElement>(BlutdruckComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", BlutdruckKategorieElement.class, this);
 
   public SelectAqlField<TemporalAccessor> START_TIME_VALUE = new AqlFieldImp<TemporalAccessor>(BlutdruckComposition.class, "/context/start_time|value", "startTimeValue", TemporalAccessor.class, this);
 

@@ -1,55 +1,35 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus;
 
-import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.RaucherstatusComposition;
-import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.StatusDefiningCode;
-import org.hl7.fhir.r4.model.CodeableConcept;
+import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusKategorieElement;
 import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RaucherstatusCompositionConverter extends ObservationToCompositionConverter<RaucherstatusComposition> {
 
     @Override
     public RaucherstatusComposition convertInternal(@NonNull Observation resource) {
         RaucherstatusComposition composition = new RaucherstatusComposition();
-        mapCategory(resource).ifPresent(composition::setKategorieValue);
-        mapEffectiveTimeDateAbsent(resource, composition).ifPresent(composition::setStatusNullFlavourDefiningCode); //introduce reflection to set nullflavour
+        if (resource.getCategory().get(0).hasCoding()) {
+            composition.setKategorie(mapKategorie(resource));
+        }
         composition.setRaucherstatus(new RaucherstatusEvaluationConverter().convert(resource));
         return composition;
     }
 
-    private Optional<NullFlavour> mapEffectiveTimeDateAbsent(Observation resource, RaucherstatusComposition composition) {
-        if (resource.hasEffectiveDateTimeType() && resource.getEffectiveDateTimeType().hasExtension()) {
-            return convertExtension(resource, composition);
+    private List<RaucherstatusKategorieElement> mapKategorie(Observation resource) {
+        List<RaucherstatusKategorieElement> raucherstatusKategorieElementList = new ArrayList<>();
+        for (Coding coding : resource.getCategory().get(0).getCoding()) {
+            RaucherstatusKategorieElement raucherstatusKategorieElement = new RaucherstatusKategorieElement();
+            raucherstatusKategorieElement.setValue(coding.getCode());
+            raucherstatusKategorieElementList.add(raucherstatusKategorieElement);
         }
-        return Optional.empty();
-    }
-
-    private Optional<NullFlavour> convertExtension(Observation resource, RaucherstatusComposition composition) {
-        for (Extension extension : resource.getEffectiveDateTimeType().getExtension()) {
-            if (extension.hasUrl() && extension.getUrl().equals("http://hl7.org/fhir/StructureDefinition/data-absent-reason")) {
-                composition.setStartTimeValue(null);
-                return Optional.of(NullFlavour.UNKNOWN);
-            }
-        }
-        return Optional.empty();
-    }
-
-    private Optional<String> mapCategory(Observation resource) {
-        if (resource.hasCategory()) {
-            return resource.getCategory().stream()
-                    .filter(CodeableConcept::hasCoding)
-                    .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
-                    .filter(Coding::hasCode)
-                    .map(Coding::getCode)
-                    .findFirst();
-        }
-        return Optional.empty();
+        return raucherstatusKategorieElementList;
     }
 
 }

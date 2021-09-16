@@ -17,12 +17,12 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/5/_history/1",
+      "id" : "Observation/95144c29-865f-414a-b9f2-2b972a3c567c/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
       "_type" : "FEEDER_AUDIT_DETAILS",
-      "system_id" : "FHIR-bridge"
+      "system_id" : "FHIR-Bridge"
     }
   },
   "language" : {
@@ -109,6 +109,15 @@
       "_type" : "DV_TEXT",
       "value" : "SARS-CoV-2 Exposition"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-EVALUATION.infectious_exposure.v0"
+      },
+      "template_id" : {
+        "value" : "SARS-CoV-2 Exposition"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -151,16 +160,16 @@
           "_type" : "DV_TEXT",
           "value" : "Exposition vorhanden?"
         },
-        "value" : {
+        "null_flavour" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Unknown",
+          "value" : "unknown",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED-CT"
+              "value" : "openehr"
             },
-            "code_string" : "unknown"
+            "code_string" : "253"
           }
         },
         "archetype_node_id" : "at0003"

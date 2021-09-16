@@ -46,7 +46,6 @@ public enum NameDerProzedurDefiningCode implements EnumValueSet {
     this.code = code;
   }
 
-
   public static Map<String, NameDerProzedurDefiningCode> getCodesAsMap(){
     Map<String, NameDerProzedurDefiningCode> nameDerProzedurDefiningCodeCodeHashMap = new HashMap<>();
     for (NameDerProzedurDefiningCode nameDerProzedurDefiningCode : NameDerProzedurDefiningCode.values()) {

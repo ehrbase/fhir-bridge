@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -20,8 +19,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.problem_diagnosis.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-12T18:58:20.557483+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-09-13T14:55:50.778895+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class VorliegendeDiagnoseEvaluation implements EntryEntity {
   /**
@@ -56,8 +55,8 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
    * Description: Eine Gesamtbeurteilung des Schweregrades des Problems oder der Diagnose.
    * Comment: Ist der Schweregrad über vordefinierte Codes im Element "Name des Problems/ der Diagnose" enthalten, wird dieses Datenelement überflüssig. Hinweis: Eine spezifischere Einstufung des Schweregrads kann mit Hilfe des SLOTs "Spezifische Angaben" angegeben werden.
    */
-  @Path("/data[at0001]/items[at0005]/value")
-  private DvCodedText schweregrad;
+  @Path("/data[at0001]/items[at0005]/value|defining_code")
+  private SchweregradDefiningCode schweregradDefiningCode;
 
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Structure/Schweregrad/null_flavour
@@ -177,12 +176,12 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
      return this.datumZeitpunktDesAuftretensDerErstdiagnoseNullFlavourDefiningCode ;
   }
 
-  public void setSchweregrad(DvCodedText schweregrad) {
-     this.schweregrad = schweregrad;
+  public void setSchweregradDefiningCode(SchweregradDefiningCode schweregradDefiningCode) {
+     this.schweregradDefiningCode = schweregradDefiningCode;
   }
 
-  public DvCodedText getSchweregrad() {
-     return this.schweregrad ;
+  public SchweregradDefiningCode getSchweregradDefiningCode() {
+     return this.schweregradDefiningCode ;
   }
 
   public void setSchweregradNullFlavourDefiningCode(

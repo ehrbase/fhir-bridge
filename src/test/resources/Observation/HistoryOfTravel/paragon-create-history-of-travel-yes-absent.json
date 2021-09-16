@@ -1,0 +1,319 @@
+{
+  "_type" : "COMPOSITION",
+  "name" : {
+    "_type" : "DV_TEXT",
+    "value" : "Reisehistorie"
+  },
+  "archetype_details" : {
+    "archetype_id" : {
+      "value" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
+    },
+    "template_id" : {
+      "value" : "Reisehistorie"
+    },
+    "rm_version" : "1.0.4"
+  },
+  "feeder_audit" : {
+    "_type" : "FEEDER_AUDIT",
+    "originating_system_item_ids" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "Observation/861f6ba7-d6de-423a-a61c-1629b60936d9/_history/1",
+      "type" : "fhir_logical_id"
+    } ],
+    "originating_system_audit" : {
+      "_type" : "FEEDER_AUDIT_DETAILS",
+      "system_id" : "FHIR-Bridge"
+    }
+  },
+  "language" : {
+    "_type" : "CODE_PHRASE",
+    "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
+      "value" : "ISO_639-1"
+    },
+    "code_string" : "de"
+  },
+  "territory" : {
+    "_type" : "CODE_PHRASE",
+    "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
+      "value" : "ISO_3166-1"
+    },
+    "code_string" : "DE"
+  },
+  "category" : {
+    "_type" : "DV_CODED_TEXT",
+    "value" : "event",
+    "defining_code" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "openehr"
+      },
+      "code_string" : "433"
+    }
+  },
+  "composer" : {
+    "_type" : "PARTY_SELF"
+  },
+  "context" : {
+    "_type" : "EVENT_CONTEXT",
+    "start_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2020-09-28T00:00:00+02:00"
+    },
+    "setting" : {
+      "_type" : "DV_CODED_TEXT",
+      "value" : "secondary medical care",
+      "defining_code" : {
+        "_type" : "CODE_PHRASE",
+        "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
+          "value" : "openehr"
+        },
+        "code_string" : "232"
+      }
+    },
+    "other_context" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Baum"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Status"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "final",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "local"
+            },
+            "code_string" : "at0012"
+          }
+        },
+        "archetype_node_id" : "at0004"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Social History",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://terminology.hl7.org/CodeSystem/observation-category"
+            },
+            "code_string" : "social-history"
+          }
+        },
+        "archetype_node_id" : "at0005"
+      } ],
+      "archetype_node_id" : "at0001"
+    }
+  },
+  "content" : [ {
+    "_type" : "ADMIN_ENTRY",
+    "name" : {
+      "_type" : "DV_TEXT",
+      "value" : "Reisehistorie"
+    },
+    "language" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "ISO_639-1"
+      },
+      "code_string" : "de"
+    },
+    "encoding" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "IANA_character-sets"
+      },
+      "code_string" : "UTF-8"
+    },
+    "subject" : {
+      "_type" : "PARTY_SELF"
+    },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
+    },
+    "data" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Item tree"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Reise angetreten?"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Yes (qualifier value)",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "SNOMED Clinical Terms"
+            },
+            "code_string" : "373066001"
+          }
+        },
+        "archetype_node_id" : "at0022"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Bestimmtes Reiseziel"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Einreisedatum"
+          },
+          "null_flavour" : {
+            "_type" : "DV_CODED_TEXT",
+            "value" : "unknown",
+            "defining_code" : {
+              "_type" : "CODE_PHRASE",
+              "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "openehr"
+              },
+              "code_string" : "253"
+            }
+          },
+          "archetype_node_id" : "at0014"
+        } ],
+        "archetype_node_id" : "at0010"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Bestimmtes Reiseziel"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Land"
+          },
+          "null_flavour" : {
+            "_type" : "DV_CODED_TEXT",
+            "value" : "unknown",
+            "defining_code" : {
+              "_type" : "CODE_PHRASE",
+              "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "openehr"
+              },
+              "code_string" : "253"
+            }
+          },
+          "archetype_node_id" : "at0011"
+        } ],
+        "archetype_node_id" : "at0010"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Bestimmtes Reiseziel"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Bundesland / Region"
+          },
+          "null_flavour" : {
+            "_type" : "DV_CODED_TEXT",
+            "value" : "unknown",
+            "defining_code" : {
+              "_type" : "CODE_PHRASE",
+              "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "openehr"
+              },
+              "code_string" : "253"
+            }
+          },
+          "archetype_node_id" : "at0012"
+        } ],
+        "archetype_node_id" : "at0010"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Bestimmtes Reiseziel"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Stadt"
+          },
+          "null_flavour" : {
+            "_type" : "DV_CODED_TEXT",
+            "value" : "unknown",
+            "defining_code" : {
+              "_type" : "CODE_PHRASE",
+              "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "openehr"
+              },
+              "code_string" : "253"
+            }
+          },
+          "archetype_node_id" : "at0013"
+        } ],
+        "archetype_node_id" : "at0010"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Bestimmtes Reiseziel"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Abfahrtsdatum"
+          },
+          "null_flavour" : {
+            "_type" : "DV_CODED_TEXT",
+            "value" : "unknown",
+            "defining_code" : {
+              "_type" : "CODE_PHRASE",
+              "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "openehr"
+              },
+              "code_string" : "253"
+            }
+          },
+          "archetype_node_id" : "at0015"
+        } ],
+        "archetype_node_id" : "at0010"
+      } ],
+      "archetype_node_id" : "at0001"
+    },
+    "archetype_node_id" : "openEHR-EHR-ADMIN_ENTRY.travel_event.v0"
+  } ],
+  "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
+}
