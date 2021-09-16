@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patientdischarge;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.geccoentlassungsdatencomposition.definition.EntlassungsartAdminEntry;
@@ -17,10 +16,6 @@ public class PatientDischargeAdminEntryConverter extends EntryEntityConverter<Ob
     }
 
     private void convertArtDerEntlassung(Observation resource, EntlassungsartAdminEntry adminEntry) {
-        if (resource.hasValueCodeableConcept()) {
             DvCodedTextParser.parseFHIRCoding(resource.getValueCodeableConcept().getCoding().get(0)).ifPresent(adminEntry::setArtDerEntlassung);
-        } else {
-            throw new ConversionException("ValueCodeableConcept missing but is required by the FHIR-Bridge.");
-        }
     }
 }

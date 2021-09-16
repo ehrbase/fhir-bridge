@@ -40,53 +40,6 @@ class PatientDischargeIT extends AbstractMappingTestSetupIT {
                 "paragon-patient-discharge_alive.json");
     }
 
-    @Test
-    void createPatientDischargeDead() throws IOException {
-        testMapping("create-patient-discharge_dead.json",
-                "paragon-patient-discharge_dead.json");
-    }
-
-    @Test
-    void createPatientDischargeHospital() throws IOException {
-        testMapping("create-patient-discharge_hospital.json",
-                "paragon-patient-discharge_hospital.json");
-    }
-
-    @Test
-    void createPatientDischargePalliative() throws IOException {
-        testMapping("create-patient-discharge_palliative.json",
-                "paragon-patient-discharge_palliative.json");
-    }
-
-    @Test
-    void createPatientDischargeReferral() throws IOException {
-        testMapping("create-patient-discharge_referral.json",
-                "paragon-patient-discharge_referral.json");
-    }
-
-    @Test
-    void createPatientDischargeUnknown() throws IOException {
-        testMapping("create-patient-discharge_unknown.json",
-                "paragon-patient-discharge_unknown.json");
-    }
-
-    // #####################################################################################
-    // check exceptions
-
-    @Test
-    void createPatientDischargeMissingValueCodeableConcept() throws IOException {
-        // copy of alive, changed lines xy to xyz
-        Exception exception = executeMappingException("create-patient-discharge_missing-value.json");
-        assertEquals("ValueCodeableConcept missing but is required by the FHIR-Bridge.", exception.getMessage());
-    }
-
-    @Test
-    void createPatientDischargeInvalidValueCodeableConcept() throws IOException {
-        // copy of alive, changed value in line 58 from 371827001 to 999
-        Exception exception = executeMappingException("create-patient-discharge_invalid-value.json");
-        assertEquals("ValueCodeableConcept is invalid.", exception.getMessage());
-    }
-
     // #####################################################################################
     // default
 
