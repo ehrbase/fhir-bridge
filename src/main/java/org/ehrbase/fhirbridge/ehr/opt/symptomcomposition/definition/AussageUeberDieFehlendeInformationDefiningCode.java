@@ -1,13 +1,10 @@
-package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition;
 
 import java.lang.String;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum AussageUeberDieFehlendeInformationDefiningCode implements EnumValueSet {
-  UNKNOWN_QUALIFIER_VALUE("Unknown (qualifier value)", "", "SNOMED Clinical Terms", "Unknown (qualifier value)");
+  UNKNOWN_QUALIFIER_VALUE("Unknown (qualifier value)", "", "SNOMED Clinical Terms", "261665006");
 
   private String value;
 

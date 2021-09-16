@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -17,17 +16,17 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.exclusion_specific.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T14:41:23.671438+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-09-09T12:22:43.885951+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class AusgeschlossenesSymptomEvaluation implements EntryEntity {
   /**
    * Path: COVID-19 Symptom/Ausgeschlossenes Symptom/Aussage über den Ausschluss
    * Description: Ein Bericht über den Ausschluss eines/r bestimmten Problems/Diagnose, familiäre Krankengeschichte, Medikation, Verfahren, Nebenwirkung oder eines anderen klinischen Ereignisses.
-   * Comment: Diese Beschreibung muss in Verbindung mit dem Datenelement "ausgeschlossene Kategorie" verwendet werden. Zum Beispiel: Dieses Datenelement kann zur Erfassung einer allgemeinen Aussage, wie z.B. "keine bekannte Vorgeschichte über..." verwendet werden. Die "ausgeschlossene Kategorie" spezifiziert die Aussage, in dem eine Zuordnung zu z.B. Diagnose oder Medikation vorgenommen werden kann. Wird bereits die "ausgeschlossene Kategorie" dafür genutzt, durch eine präkoordinierte Bezeichnung das Vorliegen von Diabetes in der familiären Krankengeschichte auszuschließen, ist der Eintrag in diesem Datenelement redundant. 
+   * Comment: Diese Beschreibung muss in Verbindung mit dem Datenelement "ausgeschlossene Kategorie" verwendet werden. Zum Beispiel: Dieses Datenelement kann zur Erfassung einer allgemeinen Aussage, wie z.B. "keine bekannte Vorgeschichte über..." verwendet werden. Die "ausgeschlossene Kategorie" spezifiziert die Aussage, in dem eine Zuordnung zu z.B. Diagnose oder Medikation vorgenommen werden kann. Wird bereits die "ausgeschlossene Kategorie" dafür genutzt, durch eine präkoordinierte Bezeichnung das Vorliegen von Diabetes in der familiären Krankengeschichte auszuschließen, ist der Eintrag in diesem Datenelement redundant.
    */
-  @Path("/data[at0001]/items[at0002]/value")
-  private DvCodedText aussageUeberDenAusschluss;
+  @Path("/data[at0001]/items[at0002]/value|defining_code")
+  private AussageUeberDenAusschlussDefiningCode aussageUeberDenAusschlussDefiningCode;
 
   /**
    * Path: COVID-19 Symptom/Ausgeschlossenes Symptom/Tree/Aussage über den Ausschluss/null_flavour
@@ -48,8 +47,8 @@ public class AusgeschlossenesSymptomEvaluation implements EntryEntity {
    *
    * Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikation im Feld "Aussage über den Ausschluss" nicht notwendig.
    */
-  @Path("/data[at0001]/items[at0003 and name/value='Problem/Diagnose']/value")
-  private DvCodedText problemDiagnose;
+  @Path("/data[at0001]/items[at0003 and name/value='Problem/Diagnose']/value|defining_code")
+  private NameDesSymptomsKrankheitsanzeichensDefiningCode problemDiagnoseDefiningCode;
 
   /**
    * Path: COVID-19 Symptom/Ausgeschlossenes Symptom/Tree/Problem/Diagnose/null_flavour
@@ -83,12 +82,13 @@ public class AusgeschlossenesSymptomEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setAussageUeberDenAusschluss(DvCodedText aussageUeberDenAusschluss) {
-     this.aussageUeberDenAusschluss = aussageUeberDenAusschluss;
+  public void setAussageUeberDenAusschlussDefiningCode(
+      AussageUeberDenAusschlussDefiningCode aussageUeberDenAusschlussDefiningCode) {
+     this.aussageUeberDenAusschlussDefiningCode = aussageUeberDenAusschlussDefiningCode;
   }
 
-  public DvCodedText getAussageUeberDenAusschluss() {
-     return this.aussageUeberDenAusschluss ;
+  public AussageUeberDenAusschlussDefiningCode getAussageUeberDenAusschlussDefiningCode() {
+     return this.aussageUeberDenAusschlussDefiningCode ;
   }
 
   public void setAussageUeberDenAusschlussNullFlavourDefiningCode(
@@ -100,12 +100,13 @@ public class AusgeschlossenesSymptomEvaluation implements EntryEntity {
      return this.aussageUeberDenAusschlussNullFlavourDefiningCode ;
   }
 
-  public void setProblemDiagnose(DvCodedText problemDiagnose) {
-     this.problemDiagnose = problemDiagnose;
+  public void setProblemDiagnoseDefiningCode(
+      NameDesSymptomsKrankheitsanzeichensDefiningCode problemDiagnoseDefiningCode) {
+     this.problemDiagnoseDefiningCode = problemDiagnoseDefiningCode;
   }
 
-  public DvCodedText getProblemDiagnose() {
-     return this.problemDiagnose ;
+  public NameDesSymptomsKrankheitsanzeichensDefiningCode getProblemDiagnoseDefiningCode() {
+     return this.problemDiagnoseDefiningCode ;
   }
 
   public void setProblemDiagnoseNullFlavourDefiningCode(
