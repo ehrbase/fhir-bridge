@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.koerpergewichtcomposition.definition.Statu
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-06T17:51:35.179297+02:00",
+    date = "2021-09-17T10:54:50.597522+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Körpergewicht")

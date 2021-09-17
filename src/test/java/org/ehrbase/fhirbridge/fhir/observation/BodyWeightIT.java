@@ -46,6 +46,24 @@ public class BodyWeightIT extends AbstractMappingTestSetupIT {
                 "paragon-body-weight_magnitude-max.json");
     }
 
+    @Test
+    void testBodyWeightUnitGramm() throws IOException {
+        testMapping("create-body-weight_gramm.json",
+                "paragon-body-weight_gramm.json");
+    }
+
+    @Test
+    void testBodyWeightUnitPound() throws IOException {
+        testMapping("create-body-weight_pound.json",
+                "paragon-body-weight_pound.json");
+    }
+
+    @Test
+    void testBodyWeightDataAbsent() throws IOException {
+        testMapping("create-body-weight_data-absent.json",
+                "paragon-body-weight_data-absent.json");
+    }
+
     // #####################################################################################
     // default
 

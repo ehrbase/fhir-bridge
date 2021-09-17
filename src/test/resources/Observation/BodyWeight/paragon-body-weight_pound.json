@@ -2,7 +2,7 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Registereintrag"
+    "value" : "Körpergewicht"
   },
   "archetype_details" : {
     "archetype_id" : {
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/550c1d1f-2ded-4caa-a06a-88837d03f66c/_history/1",
+      "id" : "Observation/dfc58e3f-b29a-4a05-b618-d99f07cc1a03/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -120,6 +120,15 @@
       "_type" : "DV_TEXT",
       "value" : "Körpergewicht"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.body_weight.v2"
+      },
+      "template_id" : {
+        "value" : "Körpergewicht"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -138,9 +147,6 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
-    },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "name" : {
@@ -176,7 +182,7 @@
             "value" : {
               "_type" : "DV_QUANTITY",
               "units" : "kg",
-              "magnitude" : 0.084
+              "magnitude" : 38.10175908
             },
             "archetype_node_id" : "at0004"
           } ],
