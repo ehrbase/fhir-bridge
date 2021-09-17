@@ -11,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-06T17:51:35.218274+02:00",
+    date = "2021-09-17T10:54:50.619522200+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class KoerpergewichtKategorieElement implements LocatableEntity {

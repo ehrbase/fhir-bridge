@@ -2,7 +2,7 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Registereintrag"
+    "value" : "Körpergewicht"
   },
   "archetype_details" : {
     "archetype_id" : {
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/a399099a-4c08-44ac-b845-3eed4d4bf012/_history/1",
+      "id" : "Observation/de8fe945-cfda-4912-b969-0608f28e336e/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
