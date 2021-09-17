@@ -48,20 +48,20 @@ public class BodyWeightIT extends AbstractMappingTestSetupIT {
 
     @Test
     void testBodyWeightUnitGramm() throws IOException {
-        testMapping("create-body-weight-gramm.json",
-                "paragon-create-body-weight-gramm.json");
+        testMapping("create-body-weight_gramm.json",
+                "paragon-body-weight_gramm.json");
     }
 
     @Test
     void testBodyWeightUnitPound() throws IOException {
-        testMapping("create-body-weight-pound.json",
-                "paragon-create-body-weight-pound.json");
+        testMapping("create-body-weight_pound.json",
+                "paragon-body-weight_pound.json");
     }
 
     @Test
     void testBodyWeightDataAbsent() throws IOException {
-        testMapping("create-body-weight-absent.json",
-                "paragon-create-body-weight-absent.json");
+        testMapping("create-body-weight_data-absent.json",
+                "paragon-body-weight_data-absent.json");
     }
 
     // #####################################################################################
