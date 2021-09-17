@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.schwangerschaftsstatuscomposition.definiti
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-08T15:45:00.226929+02:00",
+    date = "2021-09-17T12:40:01.948140+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Schwangerschaftsstatus")
