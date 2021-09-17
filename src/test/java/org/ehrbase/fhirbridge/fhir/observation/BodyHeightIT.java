@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bodyheight.BodyHeightCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.KoerpergroesseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.definition.GroesseLaengeObservation;
@@ -46,7 +45,7 @@ class BodyHeightIT extends AbstractMappingTestSetupIT {
         testMapping("create-body-height_magnitude-max.json",
                 "paragon-body-height_magnitude-max.json");
     }
-    
+
     @Test
     void mappingDataAbsent() throws IOException {
         testMapping("create-body-height_data-absent.json",
@@ -69,7 +68,7 @@ class BodyHeightIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () ->
+        return assertThrows(Exception.class, () ->
                 new BodyHeightCompositionConverter().convert(obs)
         );
     }
