@@ -11,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-08T15:45:00.260027+02:00",
+    date = "2021-09-17T12:40:01.985604+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class SchwangerschaftsstatusKategorieElement implements LocatableEntity {
