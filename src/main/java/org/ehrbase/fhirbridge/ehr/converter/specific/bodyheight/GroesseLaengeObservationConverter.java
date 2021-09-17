@@ -13,15 +13,15 @@ public class GroesseLaengeObservationConverter extends ObservationToObservationC
     protected GroesseLaengeObservation convertInternal(Observation resource) {
         GroesseLaengeObservation groesseLaengeObservation = new GroesseLaengeObservation();
         if (resource.hasValueQuantity()) {
-            setGroesseLaengeUnits(resource).ifPresent(groesseLaengeObservation::setGroesseLaengeUnits);
-            setGroesseLaengeValue(resource).ifPresent(groesseLaengeObservation::setGroesseLaengeMagnitude);
+            mapGroesseLaengeUnit(resource).ifPresent(groesseLaengeObservation::setGroesseLaengeUnits);
+            mapGroesseLaengeMagnitude(resource).ifPresent(groesseLaengeObservation::setGroesseLaengeMagnitude);
         } else {
             groesseLaengeObservation.setGroesseLaengeNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
         return groesseLaengeObservation;
     }
 
-    private Optional<Double> setGroesseLaengeValue(Observation resource) {
+    private Optional<Double> mapGroesseLaengeMagnitude(Observation resource) {
         if (resource.hasValueQuantity()) {
             return Optional.of(resource.getValueQuantity().getValue().doubleValue());
         } else {
@@ -29,7 +29,7 @@ public class GroesseLaengeObservationConverter extends ObservationToObservationC
         }
     }
 
-    private Optional<String> setGroesseLaengeUnits(Observation resource) {
+    private Optional<String> mapGroesseLaengeUnit(Observation resource) {
         if (resource.hasValueQuantity()) {
             return Optional.of(resource.getValueQuantity().getCode());
         } else {
