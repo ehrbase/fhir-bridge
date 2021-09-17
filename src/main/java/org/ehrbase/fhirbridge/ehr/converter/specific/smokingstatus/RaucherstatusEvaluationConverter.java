@@ -1,10 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus;
 
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RauchverhaltenDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
@@ -14,7 +13,7 @@ public class RaucherstatusEvaluationConverter extends EntryEntityConverter<Obser
         RaucherstatusEvaluation evaluation = new RaucherstatusEvaluation();
         if (resource.hasValueCodeableConcept() && resource.getValueCodeableConcept().hasCoding()) {
             for (Coding coding : resource.getValueCodeableConcept().getCoding()) {
-                convertRaucherStatusDefiningCode(coding, evaluation);
+                DvCodedTextParser.parseFHIRCoding(coding).ifPresent(evaluation::setRauchverhalten);
             }
             return evaluation;
         } else {
@@ -23,24 +22,4 @@ public class RaucherstatusEvaluationConverter extends EntryEntityConverter<Obser
         return evaluation;
     }
 
-    private void convertRaucherStatusDefiningCode(Coding coding, RaucherstatusEvaluation evaluation) {
-        RauchverhaltenDefiningCode rauchverhaltenDefiningcode;
-        switch (coding.getCode()) {
-            case "LA18976-3":
-                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA189763;
-                break;
-            case "LA18978-9":
-                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA189789;
-                break;
-            case "LA15920-4":
-                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA159204;
-                break;
-            case "LA18980-5":
-                rauchverhaltenDefiningcode = RauchverhaltenDefiningCode.LA189805;
-                break;
-            default:
-                throw new ConversionException("Unexpected value: " + coding.getCode());
-        }
-        evaluation.setRauchverhalten(rauchverhaltenDefiningcode.toDvCodedText());
-    }
 }

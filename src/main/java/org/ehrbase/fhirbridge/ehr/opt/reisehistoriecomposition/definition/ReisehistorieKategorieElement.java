@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import java.lang.String;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
@@ -11,16 +10,16 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:56:41.516775+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-09-09T16:49:28.168933+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ReisehistorieKategorieElement implements LocatableEntity {
   /**
    * Path: Reisehistorie/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
-  @Path("/value|value")
-  private String value;
+  @Path("/value|defining_code")
+  private KategorieDefiningCode value;
 
   /**
    * Path: Reisehistorie/context/Baum/Kategorie/null_flavour
@@ -34,11 +33,11 @@ public class ReisehistorieKategorieElement implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setValue(String value) {
+  public void setValue(KategorieDefiningCode value) {
      this.value = value;
   }
 
-  public String getValue() {
+  public KategorieDefiningCode getValue() {
      return this.value ;
   }
 

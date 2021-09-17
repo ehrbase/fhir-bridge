@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientdischarge.PatientDischargeCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoentlassungsdatencomposition.GECCOEntlassungsdatenComposition;
@@ -29,63 +28,16 @@ class PatientDischargeIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createPatientDischarge() throws IOException {
-        create("create-patient-discharge-alive.json");
+        create("create-patient-discharge_alive.json");
     }
 
     // #####################################################################################
     // check payload
 
     @Test
-    void mappingAlive() throws IOException {
-        testMapping("create-patient-discharge-alive.json",
-                "paragon-patient-discharge-alive.json");
-    }
-
-    @Test
-    void mappingDead() throws IOException {
-        testMapping("create-patient-discharge-dead.json",
-                "paragon-patient-discharge-dead.json");
-    }
-
-    @Test
-    void mappingHospital() throws IOException {
-        testMapping("create-patient-discharge-hospital.json",
-                "paragon-patient-discharge-hospital.json");
-    }
-
-    @Test
-    void mappingPalliative() throws IOException {
-        testMapping("create-patient-discharge-palliative.json",
-                "paragon-patient-discharge-palliative.json");
-    }
-
-    @Test
-    void mappingReferral() throws IOException {
-        testMapping("create-patient-discharge-referral.json",
-                "paragon-patient-discharge-referral.json");
-    }
-
-    @Test
-    void mappingUnknown() throws IOException {
-        testMapping("create-patient-discharge-unknown.json",
-                "paragon-patient-discharge-unknown.json");
-    }
-
-    // #####################################################################################
-    // check exceptions
-
-    @Test
-    void createInvalidSystem() throws IOException {
-        // copy of alive, manipulated lines 57
-        Exception exception = executeMappingException("create-patient-discharge-invalid-system.json");
-        assertEquals("The system is not correct. It should be 'http://snomed.info/sct', but it was 'http://loinc.org'.", exception.getMessage());
-    }
-
-    @Test
-    void createInvalidCode() throws IOException {
-        // copy of alive, manipulated line 58
-        Exception exception = executeMappingException("create-patient-discharge-invalid-code.json");
-        assertEquals("Value code 999999999 is not supported", exception.getMessage());
+    void createPatientDischargeAlive() throws IOException {
+        testMapping("create-patient-discharge_alive.json",
+                "paragon-patient-discharge_alive.json");
     }
 
     // #####################################################################################
@@ -104,7 +56,7 @@ class PatientDischargeIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () ->
+        return assertThrows(Exception.class, () ->
                 new PatientDischargeCompositionConverter().convert(obs)
         );
     }

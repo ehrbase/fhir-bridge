@@ -17,7 +17,7 @@ public class PulsoxymetrieObservationConverter extends ObservationToObservationC
         mapSpo(resource).ifPresentOrElse(
                 pulsoxymetrieObservation::setSpo,
                 () -> {
-                    pulsoxymetrieObservation.setSpoNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+                        pulsoxymetrieObservation.setSpoNullFlavourDefiningCode(NullFlavour.UNKNOWN);
                 }
         );
         return pulsoxymetrieObservation;

@@ -5,6 +5,7 @@ import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
@@ -33,8 +34,8 @@ public class GECCODiagnoseCompositionConverter extends ConditionToCompositionCon
 
     private void mapCategoryCoding(Condition resource, GECCODiagnoseComposition composition) {
         Coding categoryCoding = resource.getCategory().get(0).getCoding().get(0);
-        if (categoryCoding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().containsKey(categoryCoding.getCode())) {
-            composition.setKategorie(DvCodedTextParser.parseDefiningCode(GeccoDiagnoseCodeDefiningCodeMaps.getKategorieMap().get(categoryCoding.getCode())));
+        if (categoryCoding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && KategorieDefiningCode.getCodesAsMap().containsKey(categoryCoding.getCode())) {
+            composition.setKategorieDefiningCode(KategorieDefiningCode.getCodesAsMap().get(categoryCoding.getCode()));
         } else {
             throw new UnprocessableEntityException("Category has either no or an unsupported SNOMED code");
         }

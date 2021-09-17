@@ -39,6 +39,11 @@ public class ClinicalFrailtyIT extends AbstractMappingTestSetupIT {
                "paragon-clinical-frailty-scale-score.json");
     }
 
+    @Test
+    void mappingAbsent() throws IOException {
+        testMapping("create-clinical-frailty-absent.json",
+                "paragon-create-clinical-frailty-absent.json");
+    }
     // #####################################################################################
     // check exception
 

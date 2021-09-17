@@ -19,72 +19,72 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.body_temperature.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-06T17:04:45.358648+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-09-06T14:20:39.071415+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class KoerpertemperaturObservation implements EntryEntity {
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/Beliebiges Ereignis/Temperatur
+   * Path: Registereintrag/Koerpertemperatur/Beliebiges Ereignis/Temperatur
    * Description: Die gemessene Körpertemperatur.
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|magnitude")
   private Double temperaturMagnitude;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/Beliebiges Ereignis/Temperatur
+   * Path: Registereintrag/Koerpertemperatur/Beliebiges Ereignis/Temperatur
    * Description: Die gemessene Körpertemperatur.
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|units")
   private String temperaturUnits;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/History/Beliebiges Ereignis/Single/Temperatur/null_flavour
+   * Path: Registereintrag/Koerpertemperatur/History/Beliebiges Ereignis/Single/Temperatur/null_flavour
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/null_flavour|defining_code")
   private NullFlavour temperaturNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/Beliebiges Ereignis/Umgebungsbedingungen
+   * Path: Registereintrag/Koerpertemperatur/Beliebiges Ereignis/Umgebungsbedingungen
    * Description: Details über die Umgebungsbedingungen zum Zeitpunkt der Temperaturmessung
    */
   @Path("/data[at0002]/events[at0003]/state[at0029]/items[at0056]")
   private List<Cluster> umgebungsbedingungen;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/Beliebiges Ereignis/Betätigung
+   * Path: Registereintrag/Koerpertemperatur/Beliebiges Ereignis/Betätigung
    * Description: Details über die Betätigung der Person zum Zeitpunkt der Messung der Temperatur.
    */
   @Path("/data[at0002]/events[at0003]/state[at0029]/items[at0057]")
   private Cluster betaetigung;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/Beliebiges Ereignis/time
+   * Path: Registereintrag/Koerpertemperatur/Beliebiges Ereignis/time
    */
   @Path("/data[at0002]/events[at0003]/time|value")
   private TemporalAccessor timeValue;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/origin
+   * Path: Registereintrag/Koerpertemperatur/origin
    */
   @Path("/data[at0002]/origin|value")
   private TemporalAccessor originValue;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/Strukturierte Lokalisation der Messung
+   * Path: Registereintrag/Koerpertemperatur/Strukturierte Lokalisation der Messung
    * Description: Strukturierte anatomische Lokalisation, an dem die Messung vorgenommen wurde.
    */
   @Path("/protocol[at0020]/items[at0064]")
   private List<Cluster> strukturierteLokalisationDerMessung;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/Gerät
+   * Path: Registereintrag/Koerpertemperatur/Gerät
    * Description: Details über das Gerät, das zur Temperaturmessung benutzt wurde.
    */
   @Path("/protocol[at0020]/items[at0059]")
   private Cluster geraet;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/Erweiterung
+   * Path: Registereintrag/Koerpertemperatur/Erweiterung
    * Description: Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.
    * Comment: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen.
    */
@@ -92,19 +92,19 @@ public class KoerpertemperaturObservation implements EntryEntity {
   private List<Cluster> erweiterung;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/subject
+   * Path: Registereintrag/Koerpertemperatur/subject
    */
   @Path("/subject")
   private PartyProxy subject;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/language
+   * Path: Registereintrag/Koerpertemperatur/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: GECCO_Koerpertemperatur/Koerpertemperatur/feeder_audit
+   * Path: Registereintrag/Koerpertemperatur/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;

@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.koerpergroessecomposition.definition.Statu
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-17T12:20:27.134180800+02:00",
+    date = "2021-09-09T10:49:38.346792+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Körpergröße")

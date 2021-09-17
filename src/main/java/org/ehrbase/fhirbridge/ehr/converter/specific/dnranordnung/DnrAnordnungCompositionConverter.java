@@ -1,21 +1,24 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConsentToCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.DNRAnordnungComposition;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.ArtDerRichtlinieDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.BeschreibungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.StatusDefiningCode;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Consent;
 import org.springframework.lang.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class DnrAnordnungCompositionConverter extends ConsentToCompositionConverter<DNRAnordnungComposition> {
 
@@ -24,12 +27,20 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
         DNRAnordnungComposition composition = new DNRAnordnungComposition();
         composition.setStatusDefiningCode(createStatusDefiningCode(resource.getStatus()));
         composition.setKategorie(createDnrAnordnungKategorieElement());
-        composition.setDnrAnordnung(createDnrAnordnung(resource.getProvision()));
+        composition.setDnrAnordnung(createDnrAnordnung(resource));
         return composition;
     }
 
     private StatusDefiningCode createStatusDefiningCode(Consent.ConsentState fhirStatus) {
-        switch(fhirStatus.toCode()) {
+        switch (fhirStatus.toCode()) {
+            case "final":
+                return StatusDefiningCode.FINAL;
+            case "amended":
+                return StatusDefiningCode.GEAENDERT;
+            case "registered":
+                return StatusDefiningCode.REGISTRIERT;
+            case "preliminary":
+                return StatusDefiningCode.VORLAEUFIG;
             case "draft":
                 return StatusDefiningCode.ENTWORFEN;
             case "proposed":
@@ -43,7 +54,7 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
             case "entered-in-error":
                 return StatusDefiningCode.EINGABEFEHLER;
             default:
-                throw new ConversionException("createStatusDefiningCode failed. Code not found for: " + fhirStatus.toString());
+                throw new ConversionException("createStatusDefiningCode failed. Code not found for: " + fhirStatus);
         }
     }
 
@@ -56,12 +67,21 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
     }
 
     // Not an Resource so just leave it as it is
-    private DnrAnordnungEvaluation createDnrAnordnung(@NonNull Consent.provisionComponent provision) {
+    private DnrAnordnungEvaluation createDnrAnordnung(@NonNull Consent resource) {
         DnrAnordnungEvaluation dnrAnordnung = new DnrAnordnungEvaluation();
         dnrAnordnung.setLanguage(Language.DE);
         dnrAnordnung.setSubject(new PartySelf());
-        dnrAnordnung.setArtDerRichtlinieDefiningCode(ArtDerRichtlinieDefiningCode.DO_NO_RESUSCIATE);
-        dnrAnordnung.setBeschreibungDefiningCode(BeschreibungDefiningCode.get_by_SNOMED_code(provision.getCode()));
+        dnrAnordnung.setArtDerRichtlinie(DvCodedTextParser.parseDefiningCode(KategorieDefiningCode.DO_NOT_RESUSCITATE));
+        getCoding(resource.getProvision()).ifPresent(dnrAnordnung::setBeschreibung);
         return dnrAnordnung;
     }
+
+    private Optional<DvCodedText> getCoding(Consent.provisionComponent provision) {
+        Optional<List<Coding>> codings = provision.getCode().stream()
+                .map(CodeableConcept::getCoding)
+                .findFirst();
+        return DvCodedTextParser.parseFHIRCoding(codings.get().get(0));
+    }
+
+
 }

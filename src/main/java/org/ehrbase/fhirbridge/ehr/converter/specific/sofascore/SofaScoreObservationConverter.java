@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.sofascore;
 
 import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreObservation;
@@ -51,17 +52,27 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
     @Override
     protected SofaScoreObservation convertInternal(Observation observation) {
         SofaScoreObservation result = new SofaScoreObservation();
-        convertRespirationSystem(observation).ifPresent(result::setRespiration);
-        convertCardiovascularSystem(observation).ifPresent(result::setKardiovaskulaeresSystem);
-        convertNervousSystem(observation).ifPresent(result::setZentralesNervensystem);
-        convertKidneys(observation).ifPresent(result::setNierenfunktion);
-        convertLiver(observation).ifPresent(result::setLeberfunktion);
-        convertCoagulation(observation).ifPresent(result::setBlutgerinnung);
-        convertValue(observation).ifPresent(value -> result.setGesamtergebnisMagnitude(value.longValue()));
+        convertRespirationSystem(observation, result);
+        convertCardiovascularSystem(observation, result);
+        convertNervousSystem(observation, result);
+        convertKidneys(observation, result);
+        convertLiver(observation, result);
+        convertCoagulation(observation, result);
+        convertOverallOutcome(observation, result);
         return result;
     }
 
-    private Optional<DvOrdinal> convertRespirationSystem(Observation observation) {
+
+
+    private void convertRespirationSystem(Observation observation, SofaScoreObservation result) {
+        if(getComponent(observation, "resp").isPresent() && getComponent(observation, "resp").get().hasDataAbsentReason()){
+            result.setRespirationNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }else{
+            convertRepirationSystemValue(observation).ifPresent(result::setRespiration);
+        }
+    }
+
+    private Optional<DvOrdinal> convertRepirationSystemValue(Observation observation) {
         return getComponent(observation, "resp")
                 .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
                 .map(component -> {
@@ -83,7 +94,15 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 });
     }
 
-    private Optional<DvOrdinal> convertCardiovascularSystem(Observation observation) {
+    private void convertCardiovascularSystem(Observation observation, SofaScoreObservation result) {
+        if(getComponent(observation, "cvs").isPresent() && getComponent(observation, "cvs").get().hasDataAbsentReason()){
+            result.setKardiovaskulaeresSystemNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }else{
+            convertCardiovascularSystemValue(observation).ifPresent(result::setKardiovaskulaeresSystem);
+        }
+    }
+
+    private Optional<DvOrdinal> convertCardiovascularSystemValue(Observation observation) {
         return getComponent(observation, "cvs")
                 .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
                 .map(component -> {
@@ -105,7 +124,16 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 });
     }
 
-    private Optional<DvOrdinal> convertNervousSystem(Observation observation) {
+    private void convertNervousSystem(Observation observation, SofaScoreObservation result) {
+        if(getComponent(observation, "ns").isPresent() && getComponent(observation, "ns").get().hasDataAbsentReason()){
+            result.setZentralesNervensystemNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }else{
+            convertNervousSystemValue(observation).ifPresent(result::setZentralesNervensystem);
+        }
+    }
+
+
+    private Optional<DvOrdinal> convertNervousSystemValue(Observation observation) {
         return getComponent(observation, "ns")
                 .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
                 .map(component -> {
@@ -127,7 +155,15 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 });
     }
 
-    private Optional<DvOrdinal> convertKidneys(Observation observation) {
+    private void convertKidneys(Observation observation, SofaScoreObservation result) {
+        if(getComponent(observation, "kid").isPresent() && getComponent(observation, "kid").get().hasDataAbsentReason()){
+            result.setNierenfunktionNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }else{
+            convertKidneysValue(observation).ifPresent(result::setNierenfunktion);
+        }
+    }
+
+    private Optional<DvOrdinal> convertKidneysValue(Observation observation) {
         return getComponent(observation, "kid")
                 .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
                 .map(component -> {
@@ -149,7 +185,15 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 });
     }
 
-    private Optional<DvOrdinal> convertLiver(Observation observation) {
+    private void convertLiver(Observation observation, SofaScoreObservation result) {
+        if(getComponent(observation, "liv").isPresent() && getComponent(observation, "liv").get().hasDataAbsentReason()){
+            result.setLeberfunktionNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }else{
+            convertLiverValue(observation).ifPresent(result::setLeberfunktion);
+        }
+    }
+
+    private Optional<DvOrdinal> convertLiverValue(Observation observation) {
         return getComponent(observation, "liv")
                 .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
                 .map(component -> {
@@ -171,7 +215,15 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 });
     }
 
-    private Optional<DvOrdinal> convertCoagulation(Observation observation) {
+    private void convertCoagulation(Observation observation, SofaScoreObservation result) {
+        if(getComponent(observation, "coa").isPresent() && getComponent(observation, "coa").get().hasDataAbsentReason()){
+            result.setBlutgerinnungNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }else{
+            convertCoagulationValue(observation).ifPresent(result::setBlutgerinnung);
+        }
+    }
+
+    private Optional<DvOrdinal> convertCoagulationValue(Observation observation) {
         return getComponent(observation, "coa")
                 .filter(Observation.ObservationComponentComponent::hasValueCodeableConcept)
                 .map(component -> {
@@ -193,7 +245,15 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                 });
     }
 
-    private Optional<Integer> convertValue(Observation observation) {
+    private void convertOverallOutcome(Observation observation, SofaScoreObservation result) {
+        if(observation.hasDataAbsentReason()){
+            result.setGesamtergebnisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }else{
+            convertOverallOutcomeValue(observation).ifPresent(value -> result.setGesamtergebnisMagnitude(value.longValue()));
+        }
+    }
+
+    private Optional<Integer> convertOverallOutcomeValue(Observation observation) {
         if (!observation.hasValueIntegerType()) {
             return Optional.empty();
         }

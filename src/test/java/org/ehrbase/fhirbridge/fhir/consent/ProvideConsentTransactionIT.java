@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Integration Tests that validate "Provide Consent" transaction.
  */
 class ProvideConsentTransactionIT extends AbstractTransactionIT {
 
-    @Disabled("Converter not yet implemented")
     @Test
     void provideConsentCreate() throws IOException {
         MethodOutcome outcome = create("Consent/transactions/provide-consent-create.json");
@@ -25,7 +25,6 @@ class ProvideConsentTransactionIT extends AbstractTransactionIT {
         Assertions.assertNotNull(outcome.getId().getValue());
     }
 
-    @Disabled("Converter not yet implemented")
     @Test
     void provideConsentConditionalUpdate() throws IOException {
         MethodOutcome outcome;
@@ -40,8 +39,7 @@ class ProvideConsentTransactionIT extends AbstractTransactionIT {
 
         Consent consent = (Consent) outcome.getResource();
 
-        CodeableConcept scope = consent.getScope();
-        Assertions.assertEquals("research", scope.getCodingFirstRep().getCode());
+        Assertions.assertEquals("https://www.aerzteblatt.de/archiv/65440/DNR-Anordnungen-Das-fehlende-Bindeglied-UPDATED", consent.getPolicyFirstRep().getUri());
 
         Assertions.assertEquals(PATIENT_ID, consent.getPatient().getIdentifier().getValue());
     }

@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
@@ -15,8 +14,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.anatomical_location.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-12T18:58:20.563258+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-09-13T14:55:50.785321+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class KoerperstelleCluster implements LocatableEntity {
   /**
@@ -28,8 +27,8 @@ public class KoerperstelleCluster implements LocatableEntity {
    *
    * Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben ist, kann dieses Datenelement redundant sein. Alternativ wurde ein Anwendungsfall ermittelt, bei dem der Wert in dieses Element dupliziert sein könnte, um semantische Abfragen unter Verwendung dieses Archetyps und nicht das Datenelement innerhalb des übergeordneten Elements zu unterstützen.
    */
-  @Path("/items[at0001]/value")
-  private DvCodedText nameDerKoerperstelle;
+  @Path("/items[at0001]/value|defining_code")
+  private NameDerKoerperstelleDefiningCode nameDerKoerperstelleDefiningCode;
 
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Structure/Körperstelle/Name der Körperstelle/null_flavour
@@ -72,12 +71,13 @@ public class KoerperstelleCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setNameDerKoerperstelle(DvCodedText nameDerKoerperstelle) {
-     this.nameDerKoerperstelle = nameDerKoerperstelle;
+  public void setNameDerKoerperstelleDefiningCode(
+      NameDerKoerperstelleDefiningCode nameDerKoerperstelleDefiningCode) {
+     this.nameDerKoerperstelleDefiningCode = nameDerKoerperstelleDefiningCode;
   }
 
-  public DvCodedText getNameDerKoerperstelle() {
-     return this.nameDerKoerperstelle ;
+  public NameDerKoerperstelleDefiningCode getNameDerKoerperstelleDefiningCode() {
+     return this.nameDerKoerperstelleDefiningCode ;
   }
 
   public void setNameDerKoerperstelleNullFlavourDefiningCode(

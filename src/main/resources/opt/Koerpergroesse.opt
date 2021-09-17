@@ -19,8 +19,10 @@
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="MD5-CAM-1.0.1">e8e0386f04a36448b1c9af39ed9650ed</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="MD5-CAM-1.0.1">3ebaf8b6c130ecb78a0015d55f08434a</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
+    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -190,7 +192,7 @@
                   <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>false</upper_unbounded>
-                  <lower>0</lower>
+                  <lower>1</lower>
                   <upper>1</upper>
                 </occurrences>
                 <node_id>at0004</node_id>
@@ -254,7 +256,7 @@
                   <lower_included>true</lower_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>true</upper_unbounded>
-                  <lower>0</lower>
+                  <lower>1</lower>
                 </occurrences>
                 <node_id>at0005</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">

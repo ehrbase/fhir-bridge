@@ -7,133 +7,133 @@ import java.util.Map;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum ProbenartDefiningCode implements EnumValueSet {
-  CYST_BAKER_S("Cyst, Baker's", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BCYST"),
+  CYST_BAKER_S("Cyst, Baker's", "", "HL7", "BCYST"),
 
-  AMNIOTIC_FLUID("Amniotic fluid", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "AMN"),
+  AMNIOTIC_FLUID("Amniotic fluid", "", "HL7", "AMN"),
 
-  BRUSH("Brush", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BRSH"),
+  BRUSH("Brush", "", "HL7", "BRSH"),
 
-  CARBUNCLE("Carbuncle", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CARBU"),
+  CARBUNCLE("Carbuncle", "", "HL7", "CARBU"),
 
-  BITE_CAT("Bite, Cat", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CBITE"),
+  BITE_CAT("Bite, Cat", "", "HL7", "CBITE"),
 
-  CATHETER_INSERTION_SITE("Catheter Insertion Site", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CSITE"),
+  CATHETER_INSERTION_SITE("Catheter Insertion Site", "", "HL7", "CSITE"),
 
-  CYST("Cyst", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CYST"),
+  CYST("Cyst", "", "HL7", "CYST"),
 
-  CATHETER_TIP_ARTERIAL("Catheter Tip, Arterial", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "ARTC"),
+  CATHETER_TIP_ARTERIAL("Catheter Tip, Arterial", "", "HL7", "ARTC"),
 
-  BIOSPY_CONE("Biospy, Cone", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CONE"),
+  BIOSPY_CONE("Biospy, Cone", "", "HL7", "CONE"),
 
-  BOWEL_CONTENTS("Bowel contents", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BOWL"),
+  BOWEL_CONTENTS("Bowel contents", "", "HL7", "BOWL"),
 
-  BLEB("Bleb", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BLEB"),
+  BLEB("Bleb", "", "HL7", "BLEB"),
 
-  CERVICAL_MUCUS("Cervical Mucus", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CVM"),
+  CERVICAL_MUCUS("Cervical Mucus", "", "HL7", "CVM"),
 
-  BITE("Bite", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BITE"),
+  BITE("Bite", "", "HL7", "BITE"),
 
-  BULLA_BULLAE("Bulla/Bullae", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BULLA"),
+  BULLA_BULLAE("Bulla/Bullae", "", "HL7", "BULLA"),
 
-  SCRATCH_CAT("Scratch, Cat", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CSCR"),
+  SCRATCH_CAT("Scratch, Cat", "", "HL7", "CSCR"),
 
-  AUTOPSY("Autopsy", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "AUTP"),
+  AUTOPSY("Autopsy", "", "HL7", "AUTP"),
 
-  BLOOD_VENOUS("Blood venous", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BLDV"),
+  BLOOD_VENOUS("Blood venous", "", "HL7", "BLDV"),
 
-  CEREBRAL_SPINAL_FLUID("Cerebral spinal fluid", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CSF"),
+  CEREBRAL_SPINAL_FLUID("Cerebral spinal fluid", "", "HL7", "CSF"),
 
-  CATHETER_TIP_CVP("Catheter Tip, CVP", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CVPT"),
+  CATHETER_TIP_CVP("Catheter Tip, CVP", "", "HL7", "CVPT"),
 
-  BASOPHILS("Basophils", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BPH"),
+  BASOPHILS("Basophils", "", "HL7", "BPH"),
 
-  ENVIRONMENTAL_AUTOCLAVE_AMPULE("Environmental, Autoclave Ampule", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "AUTOA"),
+  ENVIRONMENTAL_AUTOCLAVE_AMPULE("Environmental, Autoclave Ampule", "", "HL7", "AUTOA"),
 
-  BLOOD_CELL_SAVER("Blood, Cell Saver", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CSVR"),
+  BLOOD_CELL_SAVER("Blood, Cell Saver", "", "HL7", "CSVR"),
 
-  FLUID_CYSTOSTOMY_TUBE("Fluid, Cystostomy Tube", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CSMY"),
+  FLUID_CYSTOSTOMY_TUBE("Fluid, Cystostomy Tube", "", "HL7", "CSMY"),
 
-  BITE_DOG("Bite, Dog", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "DBITE"),
+  BITE_DOG("Bite, Dog", "", "HL7", "DBITE"),
 
-  BONE("Bone", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BONE"),
+  BONE("Bone", "", "HL7", "BONE"),
 
-  COLOSTRUM("Colostrum", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "COL"),
+  COLOSTRUM("Colostrum", "", "HL7", "COL"),
 
-  SERUM_CONVALESCENT("Serum, Convalescent", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CSERU"),
+  SERUM_CONVALESCENT("Serum, Convalescent", "", "HL7", "CSERU"),
 
-  WHOLE_BLOOD("Whole blood", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BLD"),
+  WHOLE_BLOOD("Whole blood", "", "HL7", "BLD"),
 
-  ALLOGRAFT("Allograft", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "ALL"),
+  ALLOGRAFT("Allograft", "", "HL7", "ALL"),
 
-  BUBO("Bubo", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BUB"),
+  BUBO("Bubo", "", "HL7", "BUB"),
 
-  CLIPPINGS("Clippings", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CLIPP"),
+  CLIPPINGS("Clippings", "", "HL7", "CLIPP"),
 
-  AIR_SAMPLE("Air Sample", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "AIRS"),
+  AIR_SAMPLE("Air Sample", "", "HL7", "AIRS"),
 
-  WHOLE_BODY("Whole body", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BDY"),
+  WHOLE_BODY("Whole body", "", "HL7", "BDY"),
 
-  BOIL("Boil", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BOIL"),
+  BOIL("Boil", "", "HL7", "BOIL"),
 
-  CANNULA("Cannula", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CNL"),
+  CANNULA("Cannula", "", "HL7", "CNL"),
 
-  CATHETER_TIP_ANGIO("Catheter Tip, Angio", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "ANGI"),
+  CATHETER_TIP_ANGIO("Catheter Tip, Angio", "", "HL7", "ANGI"),
 
-  BLISTER("Blister", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BLIST"),
+  BLISTER("Blister", "", "HL7", "BLIST"),
 
-  BRUSHING("Brushing", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BRUS"),
+  BRUSHING("Brushing", "", "HL7", "BRUS"),
 
-  ENVIRONMENT_ATTEST("Environment, Attest", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "ATTE"),
+  ENVIRONMENT_ATTEST("Environment, Attest", "", "HL7", "ATTE"),
 
-  BLOOD_ARTERIAL("Blood arterial", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BLDA"),
+  BLOOD_ARTERIAL("Blood arterial", "", "HL7", "BLDA"),
 
-  CORD_BLOOD("Cord blood", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BLDCO"),
+  CORD_BLOOD("Cord blood", "", "HL7", "BLDCO"),
 
-  FLUID_CYST("Fluid, Cyst", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CST"),
+  FLUID_CYST("Fluid, Cyst", "", "HL7", "CST"),
 
-  CATHETER("Catheter", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CAT"),
+  CATHETER("Catheter", "", "HL7", "CAT"),
 
-  BLOOD_PRODUCT_UNIT("Blood product unit", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BPU"),
+  BLOOD_PRODUCT_UNIT("Blood product unit", "", "HL7", "BPU"),
 
-  SPUTUM_DEEP_COUG("Sputum, Deep Coug", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "DCS"),
+  SPUTUM_DEEP_COUG("Sputum, Deep Coug", "", "HL7", "DCS"),
 
-  TISSUE_ACNE("Tissue, Acne", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "ACNE"),
+  TISSUE_ACNE("Tissue, Acne", "", "HL7", "ACNE"),
 
-  NODULE_CYSTIC("Nodule, Cystic", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CYN"),
+  NODULE_CYSTIC("Nodule, Cystic", "", "HL7", "CYN"),
 
-  FLUID_ACNE("Fluid, Acne", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "ACNFLD"),
+  FLUID_ACNE("Fluid, Acne", "", "HL7", "ACNFLD"),
 
-  CARDIAC_MUSCLE("Cardiac muscle", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CDM"),
+  CARDIAC_MUSCLE("Cardiac muscle", "", "HL7", "CDM"),
 
-  AMPUTATION("Amputation", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "AMP"),
+  AMPUTATION("Amputation", "", "HL7", "AMP"),
 
-  ENVIRONMENTAL_AUTOCLAVE_CAPSULE("Environmental, Autoclave Capsule", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "AUTOC"),
+  ENVIRONMENTAL_AUTOCLAVE_CAPSULE("Environmental, Autoclave Capsule", "", "HL7", "AUTOC"),
 
-  SERUM_ACUTE("Serum, Acute", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "ASERU"),
+  SERUM_ACUTE("Serum, Acute", "", "HL7", "ASERU"),
 
-  CURRETAGE("Curretage", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CUR"),
+  CURRETAGE("Curretage", "", "HL7", "CUR"),
 
-  ASPIRATE("Aspirate", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "ASP"),
+  ASPIRATE("Aspirate", "", "HL7", "ASP"),
 
-  BURN("Burn", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BRN"),
+  BURN("Burn", "", "HL7", "BRN"),
 
-  BLOOD_BAG("Blood bag", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BBL"),
+  BLOOD_BAG("Blood bag", "", "HL7", "BBL"),
 
-  BILE_FLUID("Bile Fluid", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BIFL"),
+  BILE_FLUID("Bile Fluid", "", "HL7", "BIFL"),
 
-  CONJUNCTIVA("Conjunctiva", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CNJT"),
+  CONJUNCTIVA("Conjunctiva", "", "HL7", "CNJT"),
 
-  BREATH_USE_EXHLD("Breath (use EXHLD)", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BRTH"),
+  BREATH_USE_EXHLD("Breath (use EXHLD)", "", "HL7", "BRTH"),
 
-  CATHETER_TIP("Catheter tip", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CTP"),
+  CATHETER_TIP("Catheter tip", "", "HL7", "CTP"),
 
-  SITE_CVP("Site, CVP", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CVPS"),
+  SITE_CVP("Site, CVP", "", "HL7", "CVPS"),
 
-  ABSCESS("Abscess", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "ABS"),
+  ABSCESS("Abscess", "", "HL7", "ABS"),
 
-  BIOPSY("Biopsy", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "BX"),
+  BIOPSY("Biopsy", "", "HL7", "BX"),
 
-  CALCULUS_STONE("Calculus (=Stone)", "", "http://terminology.hl7.org/CodeSystem/v2-0487", "CALC");
+  CALCULUS_STONE("Calculus (=Stone)", "", "HL7", "CALC");
 
   private String value;
 

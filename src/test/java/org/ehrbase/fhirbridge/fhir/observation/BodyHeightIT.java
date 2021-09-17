@@ -47,6 +47,12 @@ class BodyHeightIT extends AbstractMappingTestSetupIT {
                 "paragon-body-height_magnitude-max.json");
     }
 
+    @Test
+    void mappingDataAbsent() throws IOException {
+        testMapping("create-body-height-absent.json",
+                "paragon-create-body-height-absent.json");
+    }
+
     // #####################################################################################
     // default
 

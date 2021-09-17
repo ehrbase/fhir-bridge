@@ -43,7 +43,6 @@ public class SpecimenConverter {
         return probe;
     }
 
-
     private Optional<ProbenartDefiningCode> mapProbenart(Specimen specimenTarget) {
         if (specimenTarget.hasType() && specimenTarget.getType().hasCoding()) {
             return convertProbenArtDefiningCode(specimenTarget);

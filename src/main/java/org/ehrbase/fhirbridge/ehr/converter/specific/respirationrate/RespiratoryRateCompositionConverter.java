@@ -2,14 +2,13 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.AtemfrequenzComposition;
-import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.RegistereintragKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.AtemfrequenzKategorieElement;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class RespiratoryRateCompositionConverter extends ObservationToCompositionConverter<AtemfrequenzComposition> {
 
@@ -23,13 +22,13 @@ public class RespiratoryRateCompositionConverter extends ObservationToCompositio
         return composition;
     }
 
-    private List<RegistereintragKategorieElement> mapKategorie(Observation resource) {
-        List<RegistereintragKategorieElement> registereintragKategorieElements = new ArrayList<>();
+    private List<AtemfrequenzKategorieElement> mapKategorie(Observation resource) {
+        List<AtemfrequenzKategorieElement> atemfrequenzKategorieElements = new ArrayList<>();
         for (Coding coding : resource.getCategory().get(0).getCoding()) {
-            RegistereintragKategorieElement registereintragKategorieElement = new RegistereintragKategorieElement();
-            registereintragKategorieElement.setValue(coding.getCode());
-            registereintragKategorieElements.add(registereintragKategorieElement);
+            AtemfrequenzKategorieElement atemfrequenzKategorieElement = new AtemfrequenzKategorieElement();
+            atemfrequenzKategorieElement.setValue(coding.getCode());
+            atemfrequenzKategorieElements.add(atemfrequenzKategorieElement);
         }
-        return registereintragKategorieElements;
+        return atemfrequenzKategorieElements;
     }
 }
