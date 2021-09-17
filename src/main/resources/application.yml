@@ -17,8 +17,10 @@ fhir-bridge:
     allowed-origins: '*'
 # Debug Properties
   debug:
-    enabled: false
-    mapping-output-directory: ${java.io.tmpdir}/mappings
+    #enabled: false
+    enabled: true
+    #mapping-output-directory: ${java.io.tmpdir}/mappings
+    mapping-output-directory: src/main/resources/mappings
 # EHRbase Properties
   ehrbase:
     base-url: http://localhost:8080/ehrbase/
