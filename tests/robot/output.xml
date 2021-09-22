@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.1 (Python 3.9.7 on win32)" generated="20210921 13:02:22.620" rpa="false" schemaversion="2">
+<suite id="s1" name="12 Create Body Height" source="E:\1_Projekte_aktuell\NUM_KODEX\fhir-bridge\tests\robot\OBSERVATION\12_create_body_height.robot">
+<test id="s1-t1" name="001 Create Body Height (Invalid/Missing 'Subject')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.635" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.635" endtime="20210921 13:02:22.635"/>
+</kw>
+<doc>1. *LOAD* _create-body-height-normal.json_ 
+
+2. *UPDATE* values for attribute ``Subject`` 
+
+3. *POST* example JSON to observation endpoint 
+
+4. *VALIDATE* the response status 
+
+5. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>subject</tag>
+<status status="FAIL" starttime="20210921 13:02:22.635" endtime="20210921 13:02:22.635">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t2" name="002 Create Body Height (Invalid/Missing 'resourceType')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.635" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.635" endtime="20210921 13:02:22.635"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``resourceType`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>resourceType</tag>
+<status status="FAIL" starttime="20210921 13:02:22.635" endtime="20210921 13:02:22.635">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t3" name="003 Create Body Height (Invalid/Missing 'ID')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.635" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.635" endtime="20210921 13:02:22.635"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``ID`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>ID</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.635" endtime="20210921 13:02:22.635">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t4" name="004 Create Body Height (Invalid/Missing 'meta')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.635" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.635" endtime="20210921 13:02:22.635"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record
+
+4. *UPDATE* values for attribute ``meta`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>meta</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.635" endtime="20210921 13:02:22.635">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t5" name="005 Create Body Height (Invalid/Missing 'identifier')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.635" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.635" endtime="20210921 13:02:22.635"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record
+
+4. *UPDATE* values for attribute ``identifier`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>identifier</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.635" endtime="20210921 13:02:22.651">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t6" name="006 Create Body Height (Invalid/Missing 'Status')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.652" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.652" endtime="20210921 13:02:22.652"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``Status`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>status</tag>
+<status status="FAIL" starttime="20210921 13:02:22.651" endtime="20210921 13:02:22.652">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t7" name="007 Create Body Height (Invalid/Missing 'category')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.654" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.654" endtime="20210921 13:02:22.654"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``Category`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>category</tag>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.653" endtime="20210921 13:02:22.654">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t8" name="008 Create Body Height (Invalid/Missing 'code')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.655" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.655" endtime="20210921 13:02:22.655"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``Code`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>code</tag>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.654" endtime="20210921 13:02:22.655">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t9" name="009 Create Body Height (Invalid/Missing 'effectiveDateTime')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.658" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.658" endtime="20210921 13:02:22.658"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``effectiveDateTime`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>effectiveDateTime</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.656" endtime="20210921 13:02:22.658">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t10" name="010 Create Body Height (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.659" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.659" endtime="20210921 13:02:22.659"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``DataAbsentReason`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>DataAbsentReason</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.658" endtime="20210921 13:02:22.659">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t11" name="011 Create Body Height (Invalid/Missing 'DataAbsentReason')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.661" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.660" endtime="20210921 13:02:22.661"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``DataAbsentReason`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>DataAbsentReason</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.660" endtime="20210921 13:02:22.661">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t12" name="012 Create Body Height (Invalid/Missing 'valueQuantity')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.662" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.662" endtime="20210921 13:02:22.662"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record
+
+4. *UPDATE* values for attribute ``effectiveDateTime`` 
+
+5. *POST* example JSON to observation endpoint
+
+6. *VALIDATE* the response status 
+
+7. *VALIDATE* outcome against diagnostic text &amp; location</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>observation_create</tag>
+<tag>valueQuantity</tag>
+<status status="FAIL" starttime="20210921 13:02:22.661" endtime="20210921 13:02:22.662">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t13" name="013 Create Body Height (invalid multi)">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.662" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.662" endtime="20210921 13:02:22.662"/>
+</kw>
+<doc>1. *CREATE* new an EHR record
+
+2. *LOAD* _create-body-height-normal.json_
+
+3. *UPDATE* values for attributes 
+
+4. *POST* example JSON to observation endpoint
+
+5. *VALIDATE* the response status 
+
+6. *VALIDATE* outcome against diagnostic text (english + german)</doc>
+<tag>body-height</tag>
+<tag>create</tag>
+<tag>invalid</tag>
+<tag>multi</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.662" endtime="20210921 13:02:22.662">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t14" name="BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'identifier')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.662" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.662" endtime="20210921 13:02:22.662"/>
+</kw>
+<doc>Belongs to TC 005! Remove separation when it's fixed!</doc>
+<tag>body-height</tag>
+<tag>bug</tag>
+<tag>create</tag>
+<tag>identifier</tag>
+<tag>invalid</tag>
+<tag>not-ready</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.662" endtime="20210921 13:02:22.662">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<test id="s1-t15" name="BUG TRACE 02 Create Clinical Frailty Scale Score (Invalid/Missing 'DataAbsentReason')">
+<kw name="generic.prepare new request session" type="SETUP">
+<arg>Prefer=return=representation</arg>
+<arg>Authorization=${AUTHORIZATION['Authorization']}</arg>
+<msg timestamp="20210921 13:02:22.662" level="FAIL">No keyword with name 'generic.prepare new request session' found.</msg>
+<status status="FAIL" starttime="20210921 13:02:22.662" endtime="20210921 13:02:22.662"/>
+</kw>
+<doc>Belongs to TC 011! Remove separation when it's fixed!</doc>
+<tag>body-height</tag>
+<tag>bug</tag>
+<tag>create</tag>
+<tag>DataAbsentReason</tag>
+<tag>invalid</tag>
+<tag>not-ready</tag>
+<tag>observation_create</tag>
+<status status="FAIL" starttime="20210921 13:02:22.662" endtime="20210921 13:02:22.662">Setup failed:
+No keyword with name 'generic.prepare new request session' found.</status>
+</test>
+<doc>*NOTE:* Use Regular Expressions to replace braces () as described here:
+https://json-schema.org/understanding-json-schema/reference/regular_expressions.html#example 
+
+*Author:* Peter Wohlfarth</doc>
+<status status="FAIL" starttime="20210921 13:02:22.620" endtime="20210921 13:02:22.662"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="15" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="15" skip="0">body-height</stat>
+<stat pass="0" fail="2" skip="0">bug</stat>
+<stat pass="0" fail="1" skip="0">category</stat>
+<stat pass="0" fail="1" skip="0">code</stat>
+<stat pass="0" fail="15" skip="0">create</stat>
+<stat pass="0" fail="3" skip="0">DataAbsentReason</stat>
+<stat pass="0" fail="1" skip="0">effectiveDateTime</stat>
+<stat pass="0" fail="1" skip="0">ID</stat>
+<stat pass="0" fail="2" skip="0">identifier</stat>
+<stat pass="0" fail="15" skip="0">invalid</stat>
+<stat pass="0" fail="1" skip="0">meta</stat>
+<stat pass="0" fail="1" skip="0">multi</stat>
+<stat pass="0" fail="2" skip="0">not-ready</stat>
+<stat pass="0" fail="15" skip="0">observation_create</stat>
+<stat pass="0" fail="1" skip="0">resourceType</stat>
+<stat pass="0" fail="1" skip="0">status</stat>
+<stat pass="0" fail="1" skip="0">subject</stat>
+<stat pass="0" fail="1" skip="0">valueQuantity</stat>
+</tag>
+<suite>
+<stat pass="0" fail="15" skip="0" id="s1" name="12 Create Body Height">12 Create Body Height</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20210921 13:02:22.635" level="ERROR">Error in file 'E:\1_Projekte_aktuell\NUM_KODEX\fhir-bridge\tests\robot\OBSERVATION\12_create_body_height.robot' on line 19: Resource file 'E:\1_Projekte_aktuell\NUM_KODEX\fhir-bridge\tests\robot\robot\_resources\suite_settings.robot' does not exist.</msg>
+</errors>
+</robot>

@@ -15,14 +15,13 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 @Archetype("openEHR-EHR-OBSERVATION.ventilator_vital_signs.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:51:09.764650+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-09-14T15:32:26.822243300+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class BeobachtungenAmBeatmungsgeraetObservation implements EntryEntity {
   /**
    * Path: Beatmungswerte/Beobachtungen am Beatmungsgerät/Jedes Ereignis/Eingeatmeter Sauerstoff
    * Description: Die Sauerstoffmenge, die dem Patienten als Fraktion, als Prozentsatz oder indirekt als Flussrate verabreicht wird oder verabreicht werden soll.
-   *
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.inspired_oxygen.v1]")
   private EingeatmeterSauerstoffCluster eingeatmeterSauerstoff;

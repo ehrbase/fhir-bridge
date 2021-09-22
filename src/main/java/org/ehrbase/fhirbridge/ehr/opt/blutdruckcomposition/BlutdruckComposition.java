@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.StatusDefi
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-11T15:16:56.105730400+02:00",
+    date = "2021-09-09T12:53:04.735197+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Blutdruck")
@@ -42,7 +42,7 @@ public class BlutdruckComposition implements CompositionEntity {
 
   /**
    * Path: Blutdruck/context/Erweiterung
-   * Description: Ergänzende Angaben zum Registereintrag. 
+   * Description: Ergänzende Angaben zum Registereintrag.
    */
   @Path("/context/other_context[at0001]/items[at0002]")
   private List<Cluster> erweiterung;

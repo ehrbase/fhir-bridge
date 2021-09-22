@@ -25,8 +25,11 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">48c7e2092170fbea05e748e026e4f84b</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">4f2775cebcd6b1626324b118ac8914c0</other_details>
+    <other_details id="MD5-CAM-1.0.1">96740da32262d61bb93b69e1e97da196</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
+    <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -265,7 +268,7 @@
                   <lower_included>true</lower_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>true</upper_unbounded>
-                  <lower>0</lower>
+                  <lower>1</lower>
                 </occurrences>
                 <node_id>at0005</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -279,7 +282,7 @@
                     <upper>1</upper>
                   </existence>
                   <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>DV_TEXT</rm_type_name>
+                    <rm_type_name>DV_CODED_TEXT</rm_type_name>
                     <occurrences>
                       <lower_included>true</lower_included>
                       <upper_included>true</upper_included>
@@ -289,6 +292,33 @@
                       <upper>1</upper>
                     </occurrences>
                     <node_id/>
+                    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+                      <rm_attribute_name>defining_code</rm_attribute_name>
+                      <existence>
+                        <lower_included>true</lower_included>
+                        <upper_included>true</upper_included>
+                        <lower_unbounded>false</lower_unbounded>
+                        <upper_unbounded>false</upper_unbounded>
+                        <lower>1</lower>
+                        <upper>1</upper>
+                      </existence>
+                      <children xsi:type="C_CODE_PHRASE">
+                        <rm_type_name>CODE_PHRASE</rm_type_name>
+                        <occurrences>
+                          <lower_included>true</lower_included>
+                          <upper_included>true</upper_included>
+                          <lower_unbounded>false</lower_unbounded>
+                          <upper_unbounded>false</upper_unbounded>
+                          <lower>1</lower>
+                          <upper>1</upper>
+                        </occurrences>
+                        <node_id/>
+                        <terminology_id>
+                          <value>http://terminology.hl7.org/CodeSystem/observation-category</value>
+                        </terminology_id>
+                        <code_list>social-history</code_list>
+                      </children>
+                    </attributes>
                   </children>
                 </attributes>
               </children>
@@ -2978,6 +3008,9 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
     <term_definitions code="at0013">
       <items id="description">*</items>
       <items id="text">geändert</items>
+    </term_definitions>
+    <term_definitions code="social-history">
+      <items id="text">Social History</items>
     </term_definitions>
   </definition>
   <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-ADMIN_ENTRY.travel_event.v0]">

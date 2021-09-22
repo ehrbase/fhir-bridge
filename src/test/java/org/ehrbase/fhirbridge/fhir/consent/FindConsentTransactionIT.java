@@ -16,7 +16,6 @@ import java.io.IOException;
  */
 class FindConsentTransactionIT extends AbstractTransactionIT {
 
-    @Disabled("Converter not yet implemented")
     @Test
     void findConsentRead() throws IOException {
         MethodOutcome outcome = create("Consent/transactions/provide-consent-create.json");
@@ -29,7 +28,6 @@ class FindConsentTransactionIT extends AbstractTransactionIT {
         Assertions.assertEquals(PATIENT_ID, consent.getPatient().getIdentifier().getValue());
     }
 
-    @Disabled("Converter not yet implemented")
     @Test
     void findConsentVRead() throws IOException {
         MethodOutcome outcome = create("Consent/transactions/provide-consent-create.json");
@@ -42,7 +40,6 @@ class FindConsentTransactionIT extends AbstractTransactionIT {
         Assertions.assertEquals(PATIENT_ID, consent.getPatient().getIdentifier().getValue());
     }
 
-    @Disabled("Converter not yet implemented")
     @Test
     void findConsentSearch() throws IOException {
         for (int i = 0; i < 3; i++) {

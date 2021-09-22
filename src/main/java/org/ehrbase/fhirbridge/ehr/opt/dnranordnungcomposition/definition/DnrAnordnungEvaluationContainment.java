@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -14,11 +15,11 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class DnrAnordnungEvaluationContainment extends Containment {
   public SelectAqlField<DnrAnordnungEvaluation> DNR_ANORDNUNG_EVALUATION = new AqlFieldImp<DnrAnordnungEvaluation>(DnrAnordnungEvaluation.class, "", "DnrAnordnungEvaluation", DnrAnordnungEvaluation.class, this);
 
-  public SelectAqlField<ArtDerRichtlinieDefiningCode> ART_DER_RICHTLINIE_DEFINING_CODE = new AqlFieldImp<ArtDerRichtlinieDefiningCode>(DnrAnordnungEvaluation.class, "/data[at0001]/items[at0005]/value|defining_code", "artDerRichtlinieDefiningCode", ArtDerRichtlinieDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> ART_DER_RICHTLINIE = new AqlFieldImp<DvCodedText>(DnrAnordnungEvaluation.class, "/data[at0001]/items[at0005]/value", "artDerRichtlinie", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> ART_DER_RICHTLINIE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(DnrAnordnungEvaluation.class, "/data[at0001]/items[at0005]/null_flavour|defining_code", "artDerRichtlinieNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<BeschreibungDefiningCode> BESCHREIBUNG_DEFINING_CODE = new AqlFieldImp<BeschreibungDefiningCode>(DnrAnordnungEvaluation.class, "/data[at0001]/items[at0006]/value|defining_code", "beschreibungDefiningCode", BeschreibungDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> BESCHREIBUNG = new AqlFieldImp<DvCodedText>(DnrAnordnungEvaluation.class, "/data[at0001]/items[at0006]/value", "beschreibung", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> BESCHREIBUNG_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(DnrAnordnungEvaluation.class, "/data[at0001]/items[at0006]/null_flavour|defining_code", "beschreibungNullFlavourDefiningCode", NullFlavour.class, this);
 

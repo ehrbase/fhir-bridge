@@ -1,7 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
-import com.nedap.archie.rm.datavalues.DvText;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;

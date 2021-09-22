@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1/_history/1",
+      "id" : "Observation/84f07860-c3b8-42f2-ad3d-463b49931983/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -26,13 +26,17 @@
     }
   },
   "language" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_639-1"
     },
     "code_string" : "de"
   },
   "territory" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_3166-1"
     },
     "code_string" : "DE"
@@ -41,7 +45,9 @@
     "_type" : "DV_CODED_TEXT",
     "value" : "event",
     "defining_code" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "openehr"
       },
       "code_string" : "433"
@@ -60,7 +66,9 @@
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
       "defining_code" : {
+        "_type" : "CODE_PHRASE",
         "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
           "value" : "openehr"
         },
         "code_string" : "232"
@@ -98,8 +106,16 @@
           "value" : "Kategorie"
         },
         "value" : {
-          "_type" : "DV_TEXT",
-          "value" : "Social History"
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Social History",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://terminology.hl7.org/CodeSystem/observation-category"
+            },
+            "code_string" : "social-history"
+          }
         },
         "archetype_node_id" : "at0005"
       } ],
@@ -113,19 +129,26 @@
       "value" : "Reisehistorie"
     },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"
     },
     "subject" : {
       "_type" : "PARTY_SELF"
+    },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "_type" : "ITEM_TREE",
@@ -143,7 +166,9 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Yes (qualifier value)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
               "value" : "SNOMED Clinical Terms"
             },
             "code_string" : "373066001"
@@ -160,20 +185,49 @@
           "_type" : "ELEMENT",
           "name" : {
             "_type" : "DV_TEXT",
+            "value" : "Einreisedatum"
+          },
+          "value" : {
+            "_type" : "DV_DATE_TIME",
+            "value" : "2020-09-17T00:00:00+02:00"
+          },
+          "archetype_node_id" : "at0014"
+        } ],
+        "archetype_node_id" : "at0010"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Bestimmtes Reiseziel"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
             "value" : "Land"
           },
           "value" : {
             "_type" : "DV_CODED_TEXT",
             "value" : "Germany",
             "defining_code" : {
+              "_type" : "CODE_PHRASE",
               "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
                 "value" : "urn:iso:std:iso:3166"
               },
               "code_string" : "DE"
             }
           },
           "archetype_node_id" : "at0011"
-        }, {
+        } ],
+        "archetype_node_id" : "at0010"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Bestimmtes Reiseziel"
+        },
+        "items" : [ {
           "_type" : "ELEMENT",
           "name" : {
             "_type" : "DV_TEXT",
@@ -183,14 +237,24 @@
             "_type" : "DV_CODED_TEXT",
             "value" : "Nordrhein-Westfalen",
             "defining_code" : {
+              "_type" : "CODE_PHRASE",
               "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
                 "value" : "urn:iso:std:iso:3166-2:de"
               },
               "code_string" : "DE-NW"
             }
           },
           "archetype_node_id" : "at0012"
-        }, {
+        } ],
+        "archetype_node_id" : "at0010"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Bestimmtes Reiseziel"
+        },
+        "items" : [ {
           "_type" : "ELEMENT",
           "name" : {
             "_type" : "DV_TEXT",
@@ -201,18 +265,15 @@
             "value" : "Essen"
           },
           "archetype_node_id" : "at0013"
-        }, {
-          "_type" : "ELEMENT",
-          "name" : {
-            "_type" : "DV_TEXT",
-            "value" : "Einreisedatum"
-          },
-          "value" : {
-            "_type" : "DV_DATE_TIME",
-            "value" : "2020-09-17T00:00:00+02:00"
-          },
-          "archetype_node_id" : "at0014"
-        }, {
+        } ],
+        "archetype_node_id" : "at0010"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Bestimmtes Reiseziel"
+        },
+        "items" : [ {
           "_type" : "ELEMENT",
           "name" : {
             "_type" : "DV_TEXT",

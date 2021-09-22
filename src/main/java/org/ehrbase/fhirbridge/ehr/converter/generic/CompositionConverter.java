@@ -16,13 +16,16 @@
 
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
-import com.nedap.archie.rm.generic.PartySelf;
+import com.nedap.archie.rm.generic.PartyIdentified;
+import com.nedap.archie.rm.generic.PartyProxy;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.hl7.fhir.r4.model.Resource;
 import org.springframework.lang.NonNull;
+
+import java.util.Optional;
 
 /**
  * @param <R> FHIR resource type
@@ -35,14 +38,19 @@ public abstract class CompositionConverter<R extends Resource, C extends Composi
     public C convert(@NonNull R resource) {
         C composition = convertInternal(resource);
         composition.setCategoryDefiningCode(Category.EVENT);
-        composition.setComposer(new PartySelf()); // FIXME: https://github.com/ehrbase/ehrbase_client_library/issues/31
         composition.setFeederAudit(buildFeederAudit(resource));
         composition.setLanguage(resolveLanguageOrDefault(resource));
         composition.setLocation("test");
         composition.setSettingDefiningCode(Setting.SECONDARY_MEDICAL_CARE);
         composition.setTerritory(Territory.DE);
+        composition.setComposer(convertComposer(resource));
+        convertHealthCareFacility(resource).ifPresent(composition::setHealthCareFacility);
         return composition;
     }
 
     protected abstract C convertInternal(R resource);
+
+    protected abstract PartyProxy convertComposer(R resource);
+
+    protected abstract Optional<PartyIdentified> convertHealthCareFacility(R resource);
 }

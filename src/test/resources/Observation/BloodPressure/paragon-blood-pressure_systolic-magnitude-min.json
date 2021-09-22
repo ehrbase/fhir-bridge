@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1c74783e-4560-40ff-b265-8cc5bc4a4daf/_history/1",
+      "id" : "Observation/5cd1c4eb-3ee3-4112-ac2e-17e46ec0ad87/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -57,12 +57,16 @@
     "_type" : "PARTY_IDENTIFIED",
     "identifiers" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "http://external.fhir.server/Practitioner/example"
+      "id" : "http://external.fhir.server/Organization/456"
     } ]
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2012-09-17T00:00:00+02:00"
+    },
+    "end_time" : {
       "_type" : "DV_DATE_TIME",
       "value" : "2012-09-17T00:00:00+02:00"
     },
@@ -103,19 +107,15 @@
           }
         },
         "archetype_node_id" : "at0004"
-      }, {
-        "_type" : "ELEMENT",
-        "name" : {
-          "_type" : "DV_TEXT",
-          "value" : "Kategorie"
-        },
-        "value" : {
-          "_type" : "DV_TEXT",
-          "value" : "vital-signs"
-        },
-        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
+    },
+    "health_care_facility" : {
+      "_type" : "PARTY_IDENTIFIED",
+      "identifiers" : [ {
+        "_type" : "DV_IDENTIFIER",
+        "id" : "http://external.fhir.server/Organization/456"
+      } ]
     }
   },
   "content" : [ {
@@ -123,6 +123,15 @@
     "name" : {
       "_type" : "DV_TEXT",
       "value" : "Blutdruck"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.blood_pressure.v2"
+      },
+      "template_id" : {
+        "value" : "Blutdruck"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -142,9 +151,6 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
-    },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "name" : {
@@ -180,7 +186,7 @@
             "value" : {
               "_type" : "DV_QUANTITY",
               "units" : "mm[Hg]",
-              "magnitude" : 1.0
+              "magnitude" : 107.0
             },
             "archetype_node_id" : "at0004"
           }, {

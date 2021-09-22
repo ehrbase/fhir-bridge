@@ -111,7 +111,7 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
      */
     private void configureConsent() {
         from("consent-provide:consentEndpoint?fhirContext=#fhirContext")
-                .throwException(UnsupportedOperationException.class, "Not yet implemented");
+                .to("direct:provideResource");
 
         from("consent-find:consentEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
                 .process(ResourcePersistenceProcessor.BEAN_ID);

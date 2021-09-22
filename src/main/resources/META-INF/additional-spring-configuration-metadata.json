@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "fhir-bridge.fhir.endpoints.DocumentReference",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable DocumentReference support."
+    }
+  ]
+}

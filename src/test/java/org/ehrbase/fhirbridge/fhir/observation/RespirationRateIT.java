@@ -3,8 +3,8 @@ package org.ehrbase.fhirbridge.fhir.observation;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate.RespiratoryRateCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.AtemfrequenzComposition;
+import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.AtemfrequenzKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.AtemfrequenzObservation;
-import org.ehrbase.fhirbridge.ehr.opt.atemfrequenzcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -27,24 +27,25 @@ public class RespirationRateIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createRespiration() throws IOException {
+    void createRespirationRate() throws IOException {
         create("create-respiratory-rate.json");
     }
 
     @Test
-    void createRespirationrate() throws IOException {
-        testMapping("create-respiratory-rate.json", "paragon-create-respiratory-rate.json");
+    void createRespirationRateMagnitudeMin() throws IOException {
+        testMapping("create-respiratory-rate_magnitude-min.json", "paragon-respiratory-rate_magnitude-min.json");
     }
 
     @Test
-    void createRespirationrate_2() throws IOException {
-        testMapping("create-respiratory-rate-2.json", "paragon-create-respiratory-rate-2.json");
+    void createRespirationRateMagnitudeMax() throws IOException {
+        testMapping("create-respiratory-rate_magnitude-max.json", "paragon-respiratory-rate_magnitude-max.json");
     }
 
     @Test
-    void createRespirationrate_3() throws IOException {
-        testMapping("create-respiratory-rate-on-ventilator.json", "paragon-create-respiratory-rate-on-ventilator.json");
+    void createRespirationRateDataAbsent() throws IOException {
+        testMapping("create-respiratory-rate_data-absent.json", "paragon-respiratory-rate_data-absent.json");
     }
+
 
     @Override
     public Javers getJavers() {
@@ -52,7 +53,7 @@ public class RespirationRateIT extends AbstractMappingTestSetupIT {
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(AtemfrequenzComposition.class, List.of("location",  "feederAudit")))
                 .registerValueObject(AtemfrequenzObservation.class)
-                .registerValueObject(RegistereintragKategorieElement.class)
+                .registerValueObject(AtemfrequenzKategorieElement.class)
                 .build();
     }
 

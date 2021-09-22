@@ -57,6 +57,10 @@ public class BloodPressureIT extends AbstractMappingTestSetupIT {
                 "paragon-blood-pressure_diastolic-magnitude-max.json");
     }
 
+    @Test
+    void testAbsent() throws IOException {
+        testMapping("create-blood-pressure-absent.json", "paragon-create-blood-pressure-absent.json");
+    }
     // #####################################################################################
     // default
 
