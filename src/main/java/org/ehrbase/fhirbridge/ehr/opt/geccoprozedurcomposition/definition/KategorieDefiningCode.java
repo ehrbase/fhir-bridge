@@ -52,7 +52,6 @@ public enum KategorieDefiningCode implements EnumValueSet {
     return kategorieDefiningCodeHashMap;
   }
 
-
   public String getValue() {
      return this.value ;
   }

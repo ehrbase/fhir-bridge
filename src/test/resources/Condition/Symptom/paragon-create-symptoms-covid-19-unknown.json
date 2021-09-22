@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Condition/c8537710-3260-44d6-8a6f-e4d664f64cd8/_history/1",
+      "id" : "Condition/a0c226ac-9c96-40b6-80cb-f3ae6b1f1de4/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -88,7 +88,7 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "75325-1",
+          "value" : "Symptom",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
@@ -104,10 +104,19 @@
     }
   },
   "content" : [ {
-    "_type" : "OBSERVATION",
+    "_type" : "EVALUATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Vorliegendes Symptom"
+      "value" : "Unbekanntes Symptom"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-EVALUATION.absence.v2"
+      },
+      "template_id" : {
+        "value" : "Symptom"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -129,68 +138,53 @@
       "_type" : "PARTY_SELF"
     },
     "data" : {
+      "_type" : "ITEM_TREE",
       "name" : {
         "_type" : "DV_TEXT",
-        "value" : "Event Series"
+        "value" : "Baum"
       },
-      "origin" : {
-        "_type" : "DV_DATE_TIME",
-        "value" : "2020-10-05T00:00:00+02:00"
-      },
-      "events" : [ {
-        "_type" : "POINT_EVENT",
+      "items" : [ {
+        "_type" : "ELEMENT",
         "name" : {
           "_type" : "DV_TEXT",
-          "value" : "*Any event(en)"
+          "value" : "Unbekanntes Symptom"
         },
-        "time" : {
-          "_type" : "DV_DATE_TIME",
-          "value" : "2020-10-05T00:00:00+02:00"
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Loss of taste (finding)",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "SNOMED Clinical Terms"
+            },
+            "code_string" : "36955009"
+          }
         },
-        "data" : {
-          "_type" : "ITEM_TREE",
-          "name" : {
-            "_type" : "DV_TEXT",
-            "value" : "Tree"
-          },
-          "items" : [ {
-            "_type" : "ELEMENT",
-            "name" : {
-              "_type" : "DV_TEXT",
-              "value" : "Name des Symptoms/Krankheitsanzeichens"
-            },
-            "value" : {
-              "_type" : "DV_CODED_TEXT",
-              "value" : "36955009",
-              "defining_code" : {
-                "_type" : "CODE_PHRASE",
-                "terminology_id" : {
-                  "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED Clinical Terms"
-                },
-                "code_string" : "36955009"
-              }
-            },
-            "archetype_node_id" : "at0001"
-          }, {
-            "_type" : "ELEMENT",
-            "name" : {
-              "_type" : "DV_TEXT",
-              "value" : "Beginn der Episode"
-            },
-            "value" : {
-              "_type" : "DV_DATE_TIME",
-              "value" : "2020-10-05T00:00:00+02:00"
-            },
-            "archetype_node_id" : "at0152"
-          } ],
-          "archetype_node_id" : "at0192"
+        "archetype_node_id" : "at0002"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Aussage über die fehlende Information"
         },
-        "archetype_node_id" : "at0191"
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Unknown (qualifier value)",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "SNOMED Clinical Terms"
+            },
+            "code_string" : "261665006"
+          }
+        },
+        "archetype_node_id" : "at0005"
       } ],
-      "archetype_node_id" : "at0190"
+      "archetype_node_id" : "at0001"
     },
-    "archetype_node_id" : "openEHR-EHR-OBSERVATION.symptom_sign.v0"
+    "archetype_node_id" : "openEHR-EHR-EVALUATION.absence.v2"
   } ],
   "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
 }

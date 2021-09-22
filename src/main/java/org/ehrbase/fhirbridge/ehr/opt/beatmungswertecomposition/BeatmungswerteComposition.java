@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.Statu
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-19T13:15:24.698541500+02:00",
+    date = "2021-09-14T15:32:26.798243600+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Beatmungswerte")
@@ -42,7 +42,7 @@ public class BeatmungswerteComposition implements CompositionEntity {
 
   /**
    * Path: Beatmungswerte/context/Erweiterung
-   * Description: Ergänzende Angaben zum Registereintrag. 
+   * Description: Ergänzende Angaben zum Registereintrag.
    */
   @Path("/context/other_context[at0001]/items[at0002]")
   private List<Cluster> erweiterung;

@@ -3,8 +3,8 @@ package org.ehrbase.fhirbridge.fhir.observation;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HerzfrequenzCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.HerzfrequenzComposition;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.PulseHeartBeatObservation;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.RegisterEntryCategoryElement;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.PulsfrequenzHerzfrequenzObservation;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HeartRateIT extends AbstractMappingTestSetupIT {
 
+
     public HeartRateIT() {
         super("Observation/HeartRate/", Observation.class);
     }
@@ -37,14 +38,20 @@ public class HeartRateIT extends AbstractMappingTestSetupIT {
 
     @Test
     void testHeartRateMagnitudeMin() throws  IOException {
-        testMapping("create-heart-rate_magnitude-min.json",
-                "paragon-heart-rate_magnitude-min.json");
+        testMapping("create-heart-rate-magnitude-min.json",
+                "paragon-heart-rate-magnitude-min.json");
     }
 
     @Test
     void testHeartRateMagnitudeMax() throws  IOException {
-        testMapping("create-heart-rate_magnitude-max.json",
-                "paragon-heart-rate_magnitude-max.json");
+        testMapping("create-heart-rate-magnitude-max.json",
+                "paragon-heart-rate-magnitude-max.json");
+    }
+
+    @Test
+    void mappingCreateHeartAbsent() throws  IOException {
+        testMapping("create-heart-rate-absent.json",
+                "paragon-create-heart-rate-absent.json");
     }
 
     // #####################################################################################
@@ -55,8 +62,8 @@ public class HeartRateIT extends AbstractMappingTestSetupIT {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(HerzfrequenzComposition.class, List.of("location", "feederAudit")))
-                .registerValueObject(PulseHeartBeatObservation.class)
-                .registerValueObject(RegisterEntryCategoryElement.class)
+                .registerValueObject(PulsfrequenzHerzfrequenzObservation.class)
+                .registerValueObject(RegistereintragKategorieElement.class)
                 .build();
     }
 

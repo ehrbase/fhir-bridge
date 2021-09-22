@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.fio2.FiO2CompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu.PatientInIcuCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.BeatmungswerteComposition;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeatmungswerteKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeobachtungenAmBeatmungsgeraetObservation;
@@ -37,15 +36,18 @@ public class FioIT extends AbstractMappingTestSetupIT {
     // check payload
 
     @Test
-    void testFioMagnitudeMin() throws IOException {
-        testMapping("create-fio2_magnitude-min.json",
-                "paragon-fio2_magnitude-min.json");
+    void createFioMagnitudeMin() throws IOException {
+        testMapping("create-fio2_magnitude-min.json","paragon-fio2_magnitude-min.json");
     }
 
     @Test
-    void testFioMagnitudeMax() throws IOException {
-        testMapping("create-fio2_magnitude-max.json",
-                "paragon-fio2_magnitude-max.json");
+    void createFioMagnitudeMax() throws IOException {
+        testMapping("create-fio2_magnitude-max.json", "paragon-fio2_magnitude-max.json");
+    }
+
+    @Test
+    void createFioDataAbsent() throws IOException {
+        testMapping("create-fio2_data-absent.json", "paragon-fio2_data-absent.json");
     }
 
     // #####################################################################################
@@ -66,7 +68,7 @@ public class FioIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
         return assertThrows(Exception.class, () ->
-                new PatientInIcuCompositionConverter().convert(obs)
+                new FiO2CompositionConverter().convert(obs)
         );
     }
 

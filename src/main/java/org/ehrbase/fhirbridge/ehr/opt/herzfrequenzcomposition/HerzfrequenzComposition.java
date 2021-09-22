@@ -21,115 +21,115 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.PulseHeartBeatObservation;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.RegisterEntryCategoryElement;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.PulsfrequenzHerzfrequenzObservation;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.RegistereintragKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.StatusDefiningCode;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-31T12:18:54.489979+02:00",
+    date = "2021-08-27T14:20:32.180429+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Herzfrequenz")
 public class HerzfrequenzComposition implements CompositionEntity {
   /**
-   * Path: Register entry/category
+   * Path: Registereintrag/category
    */
   @Path("/category|defining_code")
   private Category categoryDefiningCode;
 
   /**
-   * Path: Register entry/context/Extension
-   * Description: Additional information to the register entry.
+   * Path: Registereintrag/context/Erweiterung
+   * Description: Ergänzende Angaben zum Registereintrag.
    */
   @Path("/context/other_context[at0001]/items[at0002]")
-  private List<Cluster> extension;
+  private List<Cluster> erweiterung;
 
   /**
-   * Path: Register entry/context/Status
-   * Description: Status of the supplied data for the register entry. Note: This is not the status of individual components.
+   * Path: Registereintrag/context/Status
+   * Description: Status der gelieferten Daten für den Registereintrag. Hinweis: Dies ist nicht der Status einzelner Komponenten.
    */
   @Path("/context/other_context[at0001]/items[at0004]/value|defining_code")
   private StatusDefiningCode statusDefiningCode;
 
   /**
-   * Path: Register entry/context/Baum/Status/null_flavour
+   * Path: Registereintrag/context/Baum/Status/null_flavour
    */
   @Path("/context/other_context[at0001]/items[at0004]/null_flavour|defining_code")
   private NullFlavour statusNullFlavourDefiningCode;
 
   /**
-   * Path: Register entry/context/Category
-   * Description: The classification of the register entry (e.g. type of observation of the FHIR profile).
+   * Path: Registereintrag/context/Kategorie
+   * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/context/other_context[at0001]/items[at0005]")
-  private List<RegisterEntryCategoryElement> category;
+  private List<RegistereintragKategorieElement> kategorie;
 
   /**
-   * Path: Register entry/context/start_time
+   * Path: Registereintrag/context/start_time
    */
   @Path("/context/start_time|value")
   private TemporalAccessor startTimeValue;
 
   /**
-   * Path: Register entry/context/participations
+   * Path: Registereintrag/context/participations
    */
   @Path("/context/participations")
   private List<Participation> participations;
 
   /**
-   * Path: Register entry/context/end_time
+   * Path: Registereintrag/context/end_time
    */
   @Path("/context/end_time|value")
   private TemporalAccessor endTimeValue;
 
   /**
-   * Path: Register entry/context/location
+   * Path: Registereintrag/context/location
    */
   @Path("/context/location")
   private String location;
 
   /**
-   * Path: Register entry/context/health_care_facility
+   * Path: Registereintrag/context/health_care_facility
    */
   @Path("/context/health_care_facility")
   private PartyIdentified healthCareFacility;
 
   /**
-   * Path: Register entry/context/setting
+   * Path: Registereintrag/context/setting
    */
   @Path("/context/setting|defining_code")
   private Setting settingDefiningCode;
 
   /**
-   * Path: Register entry/Pulse/Heart beat
-   * Description: The rate and associated attributes for a pulse or heart beat.
+   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz
+   * Description: Die Frequenz und zugehörige Attribute für die Puls- oder Herzfrequenz.
    */
   @Path("/content[openEHR-EHR-OBSERVATION.pulse.v2]")
-  private PulseHeartBeatObservation pulseHeartBeat;
+  private PulsfrequenzHerzfrequenzObservation pulsfrequenzHerzfrequenz;
 
   /**
-   * Path: Register entry/composer
+   * Path: Registereintrag/composer
    */
   @Path("/composer")
   private PartyProxy composer;
 
   /**
-   * Path: Register entry/language
+   * Path: Registereintrag/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: Register entry/feeder_audit
+   * Path: Registereintrag/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
   /**
-   * Path: Register entry/territory
+   * Path: Registereintrag/territory
    */
   @Path("/territory")
   private Territory territory;
@@ -145,12 +145,12 @@ public class HerzfrequenzComposition implements CompositionEntity {
      return this.categoryDefiningCode ;
   }
 
-  public void setExtension(List<Cluster> extension) {
-     this.extension = extension;
+  public void setErweiterung(List<Cluster> erweiterung) {
+     this.erweiterung = erweiterung;
   }
 
-  public List<Cluster> getExtension() {
-     return this.extension ;
+  public List<Cluster> getErweiterung() {
+     return this.erweiterung ;
   }
 
   public void setStatusDefiningCode(StatusDefiningCode statusDefiningCode) {
@@ -169,12 +169,12 @@ public class HerzfrequenzComposition implements CompositionEntity {
      return this.statusNullFlavourDefiningCode ;
   }
 
-  public void setCategory(List<RegisterEntryCategoryElement> category) {
-     this.category = category;
+  public void setKategorie(List<RegistereintragKategorieElement> kategorie) {
+     this.kategorie = kategorie;
   }
 
-  public List<RegisterEntryCategoryElement> getCategory() {
-     return this.category ;
+  public List<RegistereintragKategorieElement> getKategorie() {
+     return this.kategorie ;
   }
 
   public void setStartTimeValue(TemporalAccessor startTimeValue) {
@@ -225,12 +225,13 @@ public class HerzfrequenzComposition implements CompositionEntity {
      return this.settingDefiningCode ;
   }
 
-  public void setPulseHeartBeat(PulseHeartBeatObservation pulseHeartBeat) {
-     this.pulseHeartBeat = pulseHeartBeat;
+  public void setPulsfrequenzHerzfrequenz(
+      PulsfrequenzHerzfrequenzObservation pulsfrequenzHerzfrequenz) {
+     this.pulsfrequenzHerzfrequenz = pulsfrequenzHerzfrequenz;
   }
 
-  public PulseHeartBeatObservation getPulseHeartBeat() {
-     return this.pulseHeartBeat ;
+  public PulsfrequenzHerzfrequenzObservation getPulsfrequenzHerzfrequenz() {
+     return this.pulsfrequenzHerzfrequenz ;
   }
 
   public void setComposer(PartyProxy composer) {

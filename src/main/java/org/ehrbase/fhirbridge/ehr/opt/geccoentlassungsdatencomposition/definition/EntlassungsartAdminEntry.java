@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoentlassungsdatencomposition.definiti
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-ADMIN_ENTRY.discharge_summary.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-15T17:43:34.148373+02:00",
+    date = "2021-09-15T16:52:01.200703300+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class EntlassungsartAdminEntry implements EntryEntity {
@@ -24,8 +25,8 @@ public class EntlassungsartAdminEntry implements EntryEntity {
    * Path: Entlassungsdaten/Entlassungsart/Art der Entlassung
    * Description: Grund der Entlassung
    */
-  @Path("/data[at0001]/items[at0040]/value|defining_code")
-  private ArtDerEntlassungDefiningCode artDerEntlassungDefiningCode;
+  @Path("/data[at0001]/items[at0040]/value")
+  private DvCodedText artDerEntlassung;
 
   /**
    * Path: Entlassungsdaten/Entlassungsart/Tree/Art der Entlassung/null_flavour
@@ -65,13 +66,12 @@ public class EntlassungsartAdminEntry implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setArtDerEntlassungDefiningCode(
-      ArtDerEntlassungDefiningCode artDerEntlassungDefiningCode) {
-     this.artDerEntlassungDefiningCode = artDerEntlassungDefiningCode;
+  public void setArtDerEntlassung(DvCodedText artDerEntlassung) {
+     this.artDerEntlassung = artDerEntlassung;
   }
 
-  public ArtDerEntlassungDefiningCode getArtDerEntlassungDefiningCode() {
-     return this.artDerEntlassungDefiningCode ;
+  public DvCodedText getArtDerEntlassung() {
+     return this.artDerEntlassung ;
   }
 
   public void setArtDerEntlassungNullFlavourDefiningCode(

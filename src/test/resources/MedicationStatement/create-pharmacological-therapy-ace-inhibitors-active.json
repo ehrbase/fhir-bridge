@@ -2,13 +2,13 @@
   "resourceType": "MedicationStatement",
   "id": "25369138-60ff-4761-bd6e-b5c9c84758e2",
   "meta": {
-    "profile":  [
+    "profile": [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-ace-inhibitors"
     ]
   },
   "status": "active",
   "medicationCodeableConcept": {
-    "coding":  [
+    "coding": [
       {
         "system": "http://snomed.info/sct",
         "code": "41549009",
@@ -28,5 +28,12 @@
       "value": "{{patientId}}"
     }
   },
-  "effectiveDateTime": "2020-10-19T08:43:33+02:00"
+  "effectiveDateTime": "2020-10-19T08:43:33+02:00",
+  "informationSource": {
+    "identifier": {
+      "system": "urn:organization:identifier:system",
+      "value": "organization_123456"
+    },
+    "type": "Organization"
+  }
 }

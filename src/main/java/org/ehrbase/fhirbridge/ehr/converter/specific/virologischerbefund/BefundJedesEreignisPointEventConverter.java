@@ -1,7 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund;
 
+import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestPanelCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytCluster;
@@ -72,6 +74,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         if (specimen.hasCollection()){
             mapZeitpunktDerProbenentnahme(specimen).ifPresent(probecluster::setZeitpunktDerProbenentnahmeValue);
             mapAnatomischeLokalisation(specimen).ifPresent(probecluster::setAnatomischeLokalisation);
+            mapAccessionIdentifier(specimen).ifPresent(probecluster::setLaborprobenidentifikator);
             return Optional.of(probecluster);
         } else {
             return Optional.empty();
@@ -101,6 +104,14 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     private Optional<TemporalAccessor> mapZeitpunktDerProbenentnahme(Specimen specimen) {
         if (specimen.hasCollection() && specimen.getCollection().hasCollected()) {
             return TimeConverter.convertSpecimanCollection(specimen.getCollection());
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private Optional<DvIdentifier> mapAccessionIdentifier(Specimen specimen) {
+        if (specimen.hasAccessionIdentifier()) {
+            return Optional.of(DvIdentifierParser.parseIdentifierIntoDvIdentifier(specimen.getAccessionIdentifier()));
         } else {
             return Optional.empty();
         }

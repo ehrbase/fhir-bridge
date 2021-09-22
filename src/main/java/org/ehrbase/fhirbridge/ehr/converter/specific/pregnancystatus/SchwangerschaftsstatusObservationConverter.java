@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.pregnancystatus;
 
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
@@ -12,15 +13,16 @@ public class SchwangerschaftsstatusObservationConverter extends ObservationToObs
     @Override
     protected SchwangerschaftsstatusObservation convertInternal(Observation resource) {
         SchwangerschaftsstatusObservation schwangerschaftsstatusObservation = new SchwangerschaftsstatusObservation();
-        schwangerschaftsstatusObservation.setStatusDefiningCode(converStatus(resource));
+        converStatus(resource, schwangerschaftsstatusObservation);
         return schwangerschaftsstatusObservation;
     }
 
-    private StatusDefiningCode2 converStatus(Observation resource) {
+    private void converStatus(Observation resource, SchwangerschaftsstatusObservation schwangerschaftsstatusObservation) {
         if (resource.hasValueCodeableConcept() && resource.getValueCodeableConcept().hasCoding()) {
-            return mapStatus(resource);
+            schwangerschaftsstatusObservation.setStatusDefiningCode(mapStatus(resource));
+        }else{
+            schwangerschaftsstatusObservation.setStatusNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
-        return StatusDefiningCode2.UNBEKANNT; //TODO needs fix
     }
 
     private StatusDefiningCode2 mapStatus(Observation resource) {

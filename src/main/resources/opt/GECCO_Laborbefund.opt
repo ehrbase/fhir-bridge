@@ -25,10 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">0b1d58a8f0bbe5f62006097d82307ddd</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="MD5-CAM-1.0.1">5373accf8216bdad987f66efb59bd2f9</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="sem_ver">3.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -272,7 +272,7 @@
                   <lower_included>true</lower_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>true</upper_unbounded>
-                  <lower>0</lower>
+                  <lower>1</lower>
                 </occurrences>
                 <node_id>at0005</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -651,7 +651,7 @@
                                     </occurrences>
                                     <node_id/>
                                     <terminology_id>
-                                      <value>http://terminology.hl7.org/CodeSystem/v2-0487</value>
+                                      <value>HL7</value>
                                     </terminology_id>
                                     <code_list>ABS</code_list>
                                     <code_list>ACNE</code_list>
@@ -2035,6 +2035,8 @@ Ob dieses Element Bedingungen enthält, die während der Probenahme vorhanden se
                                     <code_list>30902-1</code_list>
                                     <code_list>48664-7</code_list>
                                     <code_list>3255-7</code_list>
+                                    <code_list>27812-7</code_list>
+                                    <code_list>48065-7</code_list>
                                   </children>
                                 </attributes>
                               </children>
@@ -3111,6 +3113,12 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                         </term_definitions>
                         <term_definitions code="3255-7">
                           <items id="text">Fibrinogen [Mass/volume] in Platelet poor plasma by Coagulation assay</items>
+                        </term_definitions>
+                        <term_definitions code="27812-7">
+                          <items id="text">Antithrombin Ag actual/normal in Platelet poor plasma by Immunoassay</items>
+                        </term_definitions>
+                        <term_definitions code="48065-7">
+                          <items id="text">Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma</items>
                         </term_definitions>
                         <term_definitions code="CAR">
                           <items id="text">Carrier</items>

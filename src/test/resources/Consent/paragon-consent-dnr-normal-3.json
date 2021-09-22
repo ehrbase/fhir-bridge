@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Consent/3/_history/1",
+      "id" : "Consent/a9942015-3436-45bb-ba06-51900b37e9a0/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -60,7 +60,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-05-04T15:17:39,3733223+02:00"
+      "value" : "2021-09-16T14:54:49,242161+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -128,6 +128,15 @@
       "_type" : "DV_TEXT",
       "value" : "DNR-Anordnung"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-EVALUATION.advance_care_directive.v1"
+      },
+      "template_id" : {
+        "value" : "DNR-Anordnung"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -161,7 +170,7 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Do No Resusciate",
+          "value" : "Do Not Resuscitate",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
@@ -180,12 +189,12 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Unknown (qualifier value)",
+          "value" : "Unknown",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "261665006"
           }

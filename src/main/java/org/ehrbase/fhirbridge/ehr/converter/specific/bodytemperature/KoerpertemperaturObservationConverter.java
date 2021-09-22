@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bodytemperature;
 
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.koerpertemperaturcomposition.definition.KoerpertemperaturObservation;
 import org.hl7.fhir.r4.model.Observation;
@@ -10,8 +11,12 @@ public class KoerpertemperaturObservationConverter extends ObservationToObservat
     @Override
     protected KoerpertemperaturObservation convertInternal(Observation resource) {
         KoerpertemperaturObservation koerpertemperaturObservation = new KoerpertemperaturObservation();
-        setValue(resource).ifPresent(koerpertemperaturObservation::setTemperaturMagnitude);
-        setUnits(resource).ifPresent(koerpertemperaturObservation::setTemperaturUnits);
+        if(resource.hasValueQuantity()) {
+            setValue(resource).ifPresent(koerpertemperaturObservation::setTemperaturMagnitude);
+            setUnits(resource).ifPresent(koerpertemperaturObservation::setTemperaturUnits);
+        }else{
+            koerpertemperaturObservation.setTemperaturNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }
         return koerpertemperaturObservation;
     }
 

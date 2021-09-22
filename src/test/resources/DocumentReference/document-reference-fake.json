@@ -1,0 +1,46 @@
+{
+  "resourceType": "DocumentReference",
+  "masterIdentifier": {
+    "system": "urn:ietf:rfc:4122",
+    "value": "c3fd1c33-09e8-4d3a-8e91-e111cb97ab77"
+  },
+  "type": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "18726-0",
+        "display": "Radiology studies"
+      }
+    ]
+  },
+  "status": "current",
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "content": [
+    {
+      "attachment": {
+        "contentType": "application/pdf",
+        "url": "http://localhost:9000/fhir-bridge-bucket/420d85ce-ee27-40d0-a054-c71917dbb8d9",
+        "size": 132629
+      }
+    }
+  ],
+  "author": [
+    {
+      "identifier": {
+        "system": "urn:author:identifier:system",
+        "value": "author_123456"
+      }
+    }
+  ],
+  "custodian": {
+    "identifier": {
+      "system": "urn:organization:identifier:system",
+      "value": "organization_123456"
+    }
+  }
+}
