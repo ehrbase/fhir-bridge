@@ -478,22 +478,22 @@ ${vQSystem}						http://unitsofmeasure.org
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Body Height (Invalid/Missing 'identifier')
-	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
-	[Template]			create body-height with ehr reference
-    [Tags]              identifier    not-ready    bug
-	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
-	# 																CODE
-	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''foobar'', then the identifier.value must be a full URI								Observation.identifier.0.
+#BUG TRACE 01 Create Body Height (Invalid/Missing 'identifier')
+#	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
+#	[Template]			create body-height with ehr reference
+#    [Tags]              identifier    not-ready    bug
+#	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
+#	# 																CODE
+#	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''foobar'', then the identifier.value must be a full URI								Observation.identifier.0.
 
 
-BUG TRACE 02 Create Body Height (Invalid/Missing 'DataAbsentReason')
-	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
-	[Template]			create body-height with ehr reference AND data absentreason
-    [Tags]              DataAbsentReason    not-ready    bug
-	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
-	# 																	CODE
-	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
+#BUG TRACE 02 Create Body Height (Invalid/Missing 'DataAbsentReason')
+#	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
+#	[Template]			create body-height with ehr reference AND data absentreason
+#    [Tags]              DataAbsentReason    not-ready    bug
+#	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
+#	# 																	CODE
+#	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
