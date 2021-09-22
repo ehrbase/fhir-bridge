@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/6f4f098a-1d81-4299-a049-6919e8389c45/_history/1",
+      "id" : "Observation/a809bea1-633d-4302-b842-18efd659b9eb/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -103,15 +103,19 @@
           }
         },
         "archetype_node_id" : "at0004"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "vital-signs"
+        },
+        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
-    },
-    "health_care_facility" : {
-      "_type" : "PARTY_IDENTIFIED",
-      "identifiers" : [ {
-        "_type" : "DV_IDENTIFIER",
-        "id" : "http://external.fhir.server/Organization/456"
-      } ]
     }
   },
   "content" : [ {
@@ -194,7 +198,7 @@
             "value" : {
               "_type" : "DV_QUANTITY",
               "units" : "mm[Hg]",
-              "magnitude" : 60.0
+              "magnitude" : 1.0
             },
             "archetype_node_id" : "at0005"
           } ],

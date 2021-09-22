@@ -61,6 +61,7 @@ public class BloodPressureIT extends AbstractMappingTestSetupIT {
     void testAbsent() throws IOException {
         testMapping("create-blood-pressure-absent.json", "paragon-create-blood-pressure-absent.json");
     }
+
     // #####################################################################################
     // default
 
