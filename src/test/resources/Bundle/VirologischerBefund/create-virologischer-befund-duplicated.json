@@ -12,7 +12,7 @@
         "resourceType": "Observation",
         "meta": {
           "profile": [
-            "https://simplifier.net/medizininformatikinitiative-highmed-ic/virologischerbefund"
+            "http://highmed.org/StructureDefinition/ic/VirologischerBefund"
           ]
         },
         "identifier":[
@@ -108,7 +108,7 @@
         "resourceType": "Observation",
         "meta": {
           "profile": [
-            "https://simplifier.net/medizininformatikinitiative-highmed-ic/virologischerbefund"
+            "http://highmed.org/StructureDefinition/ic/VirologischerBefund"
           ]
         },
         "identifier":[
@@ -205,7 +205,7 @@
         "resourceType": "DiagnosticReport",
         "meta": {
           "profile": [
-            "https://simplifier.net/medizininformatikinitiative-highmed-ic/highmedicdiagnosticreport"
+            "http://highmed.org/fhir/StructureDefinition/ic/DiagnosticReportLab"
           ]
         },
         "identifier": [
@@ -251,8 +251,19 @@
         "resourceType": "Specimen",
         "meta": {
           "profile": [
-            "https://simplifier.net/medizininformatikinitiative-highmed-ic/specimen-duplicate-5"
+            "http://hl7.org/fhir/StructureDefinition/Specimen"
           ]
+        },
+        "accessionIdentifier" : {
+          "assigner":
+          {
+            "display": "DISPLAY"
+          },
+          "id": "ID",
+          "type":
+          {
+            "text": "URI"
+          }
         },
         "subject": {
           "identifier": {
