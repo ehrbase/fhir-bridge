@@ -93,7 +93,7 @@ public class ClinicalFrailtyIT extends AbstractMappingTestSetupIT {
     // check exception
 
     @Test
-    void testClinicalInvalidStatus() throws IOException {
+    void testClinicalFrailtyInvalidStatus() throws IOException {
         try{
             super.testFileLoader.loadResource("create-clinical-frailty-score_status-invalid.json");
         }catch (ConversionException exception){
