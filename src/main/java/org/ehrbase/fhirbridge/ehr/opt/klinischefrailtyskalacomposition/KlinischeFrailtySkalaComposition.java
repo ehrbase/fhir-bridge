@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definitio
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-19T10:54:26.621791900+02:00",
+    date = "2021-08-26T14:55:12.854043+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Klinische Frailty-Skala")

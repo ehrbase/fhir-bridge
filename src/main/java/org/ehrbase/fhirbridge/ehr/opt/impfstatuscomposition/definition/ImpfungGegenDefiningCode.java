@@ -102,6 +102,7 @@ public enum ImpfungGegenDefiningCode implements EnumValueSet {
     return impfungGegenDefiningCodeHashMap;
   }
 
+
   public String getValue() {
      return this.value ;
   }

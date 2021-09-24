@@ -5,6 +5,7 @@ import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus.RaucherstatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.RaucherstatusComposition;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusEvaluation;
+import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusKategorieElement;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -27,10 +28,10 @@ public class SmokingstatusIT extends AbstractMappingTestSetupIT {
     }
 
 
-    @Test
+/*  @Test requires patient reference which requires to create a patient, integrations tests are anyways covered by the robot tests, so we leave this blank
     void createSmokingStatus() throws IOException {
         create("create-smoking-status.json");
-    }
+    }*/
 
     @Test
     void createSmokingStatusMapping() throws IOException {
@@ -42,10 +43,11 @@ public class SmokingstatusIT extends AbstractMappingTestSetupIT {
         testMapping("create-smoking-status-datetime.json","paragon-create-smoking-status-datetime.json");
     }
 
-/*    @Test TODO: needs to be fixed but build is not running locally currently
-    void createSmokingStatusMappingEffectiveAbsent() throws IOException {
-        testMapping("create-smoking-status-effective-absent.json","");
-    }*/
+    @Test
+    void createSmokingStatusMappingValueAbsent() throws IOException {
+        testMapping("create-smoking-status-value-absent.json","paragon-create-smoking-status-value-absent.json");
+    }
+
 
     @Override
     public Javers getJavers() {
@@ -53,6 +55,7 @@ public class SmokingstatusIT extends AbstractMappingTestSetupIT {
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(RaucherstatusComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(RaucherstatusEvaluation.class)
+                .registerValueObject(RaucherstatusKategorieElement.class)
                 .build();
     }
 

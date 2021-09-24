@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/a657b7f2-4513-4099-9dd0-07fb6a512353/_history/1",
+      "id" : "Observation/8e6cc54c-a8f3-40e4-9f17-ef615fb58fbd/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -103,17 +103,6 @@
           }
         },
         "archetype_node_id" : "at0004"
-      }, {
-        "_type" : "ELEMENT",
-        "name" : {
-          "_type" : "DV_TEXT",
-          "value" : "Kategorie"
-        },
-        "value" : {
-          "_type" : "DV_TEXT",
-          "value" : "survey"
-        },
-        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
     }

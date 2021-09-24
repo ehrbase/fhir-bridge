@@ -3,11 +3,8 @@ package org.ehrbase.fhirbridge.fhir.observation;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodpressure.BloodPressureCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty.ClinicalFrailtyScaleScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.BlutdruckComposition;
 import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.BlutdruckObservation;
-import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.KlinischeFrailtySkalaComposition;
-import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.KlinischeFrailtySkalaCfsObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -48,6 +45,10 @@ public class BloodPressureIT extends AbstractMappingTestSetupIT {
         testMapping("create-blood-pressure_loinc-period.json", "paragon-create-blood-pressure_loinc-period.json");
     }
 
+    @Test
+    void testAbsent() throws IOException {
+        testMapping("create-blood-pressure-absent.json", "paragon-create-blood-pressure-absent.json");
+    }
 
     @Override
     public Javers getJavers() {

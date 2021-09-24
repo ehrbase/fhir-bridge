@@ -37,65 +37,70 @@ public class ClinicalFrailtyIT extends AbstractMappingTestSetupIT {
 
     @Test
     void testClinicalFrailtyStatusOne() throws IOException {
-        testMapping("create-clinical-frailty-score_status-sehrfit.json",
-                "paragon-clinical-frailty-score_status-sehrfit.json");
+        testMapping("create-clinical-frailty-score-status-sehrfit.json",
+                "paragon-clinical-frailty-score-status-sehrfit.json");
     }
 
     @Test
     void testClinicalFrailtyStatusTwo() throws IOException {
-        testMapping("create-clinical-frailty-score_status-durchschnittlichaktiv.json",
-                "paragon-clinical-frailty-score_status-durchschnittlichaktiv.json");
+        testMapping("create-clinical-frailty-score-status-durchschnittlichaktiv.json",
+                "paragon-clinical-frailty-score-status-durchschnittlichaktiv.json");
     }
 
     @Test
     void testClinicalFrailtyStatusThree() throws IOException {
-        testMapping("create-clinical-frailty-score_status-gutzurechtkommend.json",
-                "paragon-clinical-frailty-score_status-gutzurechtkommend.json");
+        testMapping("create-clinical-frailty-score-status-gutzurechtkommend.json",
+                "paragon-clinical-frailty-score-status-gutzurechtkommend.json");
     }
 
     @Test
     void testClinicalFrailtyStatusFour() throws IOException {
-        testMapping("create-clinical-frailty-score_status-vulnerabel.json",
-                "paragon-clinical-frailty-score_status-vulnerabel.json");
+        testMapping("create-clinical-frailty-score-status-vulnerabel.json",
+                "paragon-clinical-frailty-score-status-vulnerabel.json");
     }
 
     @Test
     void testClinicalFrailtyStatusFive() throws IOException {
-        testMapping("create-clinical-frailty-score_status-geringgradigfrail.json",
-                "paragon-clinical-frailty-score_status-geringgradigfrail.json");
+        testMapping("create-clinical-frailty-score-status-geringgradigfrail.json",
+                "paragon-clinical-frailty-score-status-geringgradigfrail.json");
     }
 
     @Test
     void testClinicalFrailtyStatusSix() throws IOException {
-        testMapping("create-clinical-frailty-score_status-mittelgradigfrail.json",
-                "paragon-clinical-frailty-score_status-mittelgradigfrail.json");
+        testMapping("create-clinical-frailty-score-status-mittelgradigfrail.json",
+                "paragon-clinical-frailty-score-status-mittelgradigfrail.json");
     }
 
     @Test
     void testClinicalFrailtyStatusSeven() throws IOException {
-        testMapping("create-clinical-frailty-score_status-ausgepraegtfrail.json",
-                "paragon-clinical-frailty-score_status-ausgepraegtfrail.json");
+        testMapping("create-clinical-frailty-score-status-ausgepraegtfrail.json",
+                "paragon-clinical-frailty-score-status-ausgepraegtfrail.json");
     }
 
     @Test
     void testClinicalFrailtyStatusEight() throws IOException {
-        testMapping("create-clinical-frailty-score_status-extremfrail.json",
-                "paragon-clinical-frailty-score_status-extremfrail.json");
+        testMapping("create-clinical-frailty-score-status-extremfrail.json",
+                "paragon-clinical-frailty-score-status-extremfrail.json");
     }
 
     @Test
     void testClinicalFrailtyStatusNine() throws IOException {
-        testMapping("create-clinical-frailty-score_status-terminalerkrankt.json",
-                "paragon-clinical-frailty-score_status-terminalerkrankt.json");
+        testMapping("create-clinical-frailty-score-status-terminalerkrankt.json",
+                "paragon-clinical-frailty-score-status-terminalerkrankt.json");
     }
 
+    @Test
+    void mappingAbsent() throws IOException {
+        testMapping("create-clinical-frailty-absent.json",
+                "paragon-create-clinical-frailty-absent.json");
+    }
     // #####################################################################################
     // check exception
 
     @Test
     void testClinicalFrailtyInvalidStatus() throws IOException {
         try{
-            super.testFileLoader.loadResource("create-clinical-frailty-score_status-invalid.json");
+            super.testFileLoader.loadResource("create-clinical-frailty-score-status-invalid.json");
         }catch (ConversionException exception){
             assertEquals("Cannot match beurteilung\"99\"", exception.getMessage());
         }

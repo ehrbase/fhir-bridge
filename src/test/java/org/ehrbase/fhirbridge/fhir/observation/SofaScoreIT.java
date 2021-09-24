@@ -42,6 +42,11 @@ class SofaScoreIT extends AbstractMappingTestSetupIT {
         testMapping("create-sofa-score_gesamtergebnis.json", "paragon-create-sofa-score_gesamtergebnis.json");
     }
 
+    @Test
+    void createWithAbsentReason() throws IOException {
+        testMapping("create-data-absent-kidneys.json", "paragon-create-data-absent-kidneys.json");
+    }
+
     @Override
     public Javers getJavers() {
         return JaversBuilder.javers()

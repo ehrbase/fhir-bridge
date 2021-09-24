@@ -23,6 +23,8 @@ package org.ehrbase.fhirbridge.camel;
  */
 public final class CamelConstants {
 
+    public static final String MINIO_OBJECT = "CamelMinioObject";
+
     public static final String COMPOSITION_ID = "CamelFhirBridgeCompositionId";
 
     public static final String OUTCOME = "CamelFhirBridgeOutcome";

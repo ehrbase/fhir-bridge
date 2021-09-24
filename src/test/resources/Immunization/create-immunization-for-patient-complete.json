@@ -45,5 +45,24 @@
       }
     ]
   },
-  "resourceType": "Immunization"
+  "resourceType": "Immunization",
+  "performer": [
+    {
+      "actor": {
+        "identifier": {
+          "system": "urn:performer:identifier:system",
+          "value": "performer_123456"
+        }
+      }
+    },
+    {
+      "actor": {
+        "identifier": {
+          "system": "urn:organization:identifier:system",
+          "value": "organization_123456"
+        },
+        "type": "Organization"
+      }
+    }
+  ]
 }

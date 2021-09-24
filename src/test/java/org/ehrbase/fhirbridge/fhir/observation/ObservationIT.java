@@ -29,11 +29,6 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createClinicalFrailtyScaleScore() throws IOException {
-        create("create-clinical-frailty-score.json");
-    }
-
-    @Test
     void createCoronavirusNachweisTest() throws IOException {
         create("create-coronavirus-nachweis-test.json");
     }
@@ -42,17 +37,7 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     void createObservationLab() throws IOException {
         create("create-observation-lab.json");
     }
-
-    @Test
-    void createRespiratoryRate() throws IOException {
-        create("create-respiratory-rate.json");
-    }
-
-    @Test
-    void createSmokingStatus() throws IOException {
-        create("create-smoking-status.json");
-    }
-
+    
     @Test
     void createWithDefaultProfile() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-observation-with-default-profile.json");

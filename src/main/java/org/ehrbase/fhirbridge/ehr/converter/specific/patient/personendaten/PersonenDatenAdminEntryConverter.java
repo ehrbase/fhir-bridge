@@ -106,9 +106,9 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
     private Optional<DvCodedText> mapMehrereGeburten(Patient fhirPatient) {
         if(fhirPatient.hasMultipleBirth()){
             if(fhirPatient.hasMultipleBirthBooleanType()){
-                return Optional.of(DvCodedTextParser.parseBoolean(fhirPatient.getMultipleBirthBooleanType()));
+                return Optional.of(DvCodedTextParser.parseBirthBoolean(fhirPatient.getMultipleBirthBooleanType()));
             }else{
-                return Optional.of(DvCodedTextParser.parseInteger(fhirPatient.getMultipleBirthIntegerType()));
+                return Optional.of(DvCodedTextParser.parseBirthInteger(fhirPatient.getMultipleBirthIntegerType()));
             }
         }else{
             return Optional.empty();
