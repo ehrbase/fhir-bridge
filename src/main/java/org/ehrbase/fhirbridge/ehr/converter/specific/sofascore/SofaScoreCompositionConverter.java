@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-
 package org.ehrbase.fhirbridge.ehr.converter.specific.sofascore;
-
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
