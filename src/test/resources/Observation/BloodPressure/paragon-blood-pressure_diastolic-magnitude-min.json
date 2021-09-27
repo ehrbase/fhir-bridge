@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/aa94ab1a-0c30-4da3-ac0d-97d40ef2f3dc/_history/1",
+      "id" : "Observation/a809bea1-633d-4302-b842-18efd659b9eb/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -183,17 +183,10 @@
               "_type" : "DV_TEXT",
               "value" : "Systolisch"
             },
-            "null_flavour" : {
-              "_type" : "DV_CODED_TEXT",
-              "value" : "unknown",
-              "defining_code" : {
-                "_type" : "CODE_PHRASE",
-                "terminology_id" : {
-                  "_type" : "TERMINOLOGY_ID",
-                  "value" : "openehr"
-                },
-                "code_string" : "253"
-              }
+            "value" : {
+              "_type" : "DV_QUANTITY",
+              "units" : "mm[Hg]",
+              "magnitude" : 107.0
             },
             "archetype_node_id" : "at0004"
           }, {
@@ -202,17 +195,10 @@
               "_type" : "DV_TEXT",
               "value" : "Diastolisch"
             },
-            "null_flavour" : {
-              "_type" : "DV_CODED_TEXT",
-              "value" : "unknown",
-              "defining_code" : {
-                "_type" : "CODE_PHRASE",
-                "terminology_id" : {
-                  "_type" : "TERMINOLOGY_ID",
-                  "value" : "openehr"
-                },
-                "code_string" : "253"
-              }
+            "value" : {
+              "_type" : "DV_QUANTITY",
+              "units" : "mm[Hg]",
+              "magnitude" : 1.0
             },
             "archetype_node_id" : "at0005"
           } ],
