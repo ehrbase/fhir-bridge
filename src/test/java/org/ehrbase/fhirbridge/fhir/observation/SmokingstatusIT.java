@@ -27,11 +27,10 @@ public class SmokingstatusIT extends AbstractMappingTestSetupIT {
         super("Observation/SmokingStatus/", Observation.class);
     }
 
-
-/*  @Test requires patient reference which requires to create a patient, integrations tests are anyways covered by the robot tests, so we leave this blank
-    void createSmokingStatus() throws IOException {
+    @Test
+    void create() throws IOException {
         create("create-smoking-status.json");
-    }*/
+    }
 
     @Test
     void createSmokingStatusMapping() throws IOException {
@@ -39,15 +38,9 @@ public class SmokingstatusIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createSmokingStatusMappingDateTime() throws IOException {
-        testMapping("create-smoking-status-datetime.json","paragon-create-smoking-status-datetime.json");
-    }
-
-    @Test
-    void createSmokingStatusMappingValueAbsent() throws IOException {
+    void createSmokingStatusMappingAbsent() throws IOException {
         testMapping("create-smoking-status-value-absent.json","paragon-create-smoking-status-value-absent.json");
     }
-
 
     @Override
     public Javers getJavers() {
