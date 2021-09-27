@@ -57,7 +57,7 @@
   },
   "effectiveDateTime": "2020-09-25",
   "valueQuantity": {
-    "value": 81,
+    "value": 0,
     "unit": "per minute",
     "system": "http://unitsofmeasure.org",
     "code": "/min"

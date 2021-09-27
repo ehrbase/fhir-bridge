@@ -1,15 +1,15 @@
 {
   "resourceType": "Observation",
-  "id": "c8079220-594c-42dc-8cea-7a52a6833c2c",
+  "id": "23499ea6-d046-4e91-b7ab-d9cf040add72",
   "meta": {
-    "profile":  [
-      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/heart-rate"
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/body-height"
     ]
   },
-  "identifier":  [
+  "identifier": [
     {
       "type": {
-        "coding":  [
+        "coding": [
           {
             "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
             "code": "OBI"
@@ -17,16 +17,16 @@
         ]
       },
       "system": "https://www.charite.de/fhir/CodeSystem/observation-identifiers",
-      "value": "8867-4_HeartRate",
+      "value": "8302-2_BodyHeight",
       "assigner": {
         "reference": "Organization/Charité"
       }
     }
   ],
   "status": "final",
-  "category":  [
+  "category": [
     {
-      "coding":  [
+      "coding": [
         {
           "system": "http://terminology.hl7.org/CodeSystem/observation-category",
           "code": "vital-signs"
@@ -35,19 +35,19 @@
     }
   ],
   "code": {
-    "coding":  [
+    "coding": [
       {
         "system": "http://loinc.org",
-        "code": "8867-4",
-        "display": "Heart rate"
+        "code": "8302-2",
+        "display": "Body height"
       },
       {
         "system": "http://snomed.info/sct",
-        "code": "364075005",
-        "display": "Heart rate (observable entity)"
+        "code": "50373000",
+        "display": "Body height measure (observable entity)"
       }
     ],
-    "text": "Heart rate"
+    "text": "Body height"
   },
   "subject": {
     "identifier": {
@@ -55,11 +55,11 @@
       "value": "{{patientId}}"
     }
   },
-  "effectiveDateTime": "2020-09-25",
+  "effectiveDateTime": "2020-10-02",
   "valueQuantity": {
-    "value": 81,
-    "unit": "per minute",
+    "value": 167,
+    "unit": "centimeter",
     "system": "http://unitsofmeasure.org",
-    "code": "/min"
+    "code": "cm"
   }
 }
