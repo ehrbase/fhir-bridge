@@ -77,13 +77,6 @@ public class ClinicalTrialParticipationIT extends AbstractMappingTestSetupIT {
     // check exceptions
 
     @Test
-    void createInvalidSystem() throws IOException {
-        // copy of yes-eudract, manipulated line 71
-        Exception exception = executeMappingException("create-clinical-trial-participation-yes-eudract-invalid-system.json");
-        assertEquals("The system is not correct. It should be 'http://snomed.info/sct', but it was 'http://loinc.org'.", exception.getMessage());
-    }
-
-    @Test
     void createInvalidCode() throws IOException {
         // copy of yes-eudract, manipulated line 70
         Exception exception = executeMappingException("create-clinical-trial-participation-yes-eudract-invalid-code.json");
