@@ -19,10 +19,10 @@
     <other_details id="original_namespace"/>
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
-    <other_details id="MD5-CAM-1.0.1">0231e272f98cc099098dd732232f0359</other_details>
+    <other_details id="MD5-CAM-1.0.1">ee7a9b96d64a9b91585e52081e72f0b7</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">2.0.0</other_details>
+    <other_details id="sem_ver">3.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -1350,7 +1350,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
+                          <value>http://snomed.info/sct</value>
                         </terminology_id>
                         <code_list>410594000</code_list>
                       </children>
@@ -1896,7 +1896,7 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
+                          <value>http://snomed.info/sct</value>
                         </terminology_id>
                         <code_list>261665006</code_list>
                       </children>

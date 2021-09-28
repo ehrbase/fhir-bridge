@@ -17,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.absence.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-28T13:05:49.070388+02:00",
+    date = "2021-09-28T16:11:42.498962+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class UnbekanntesSymptomEvaluation implements EntryEntity {

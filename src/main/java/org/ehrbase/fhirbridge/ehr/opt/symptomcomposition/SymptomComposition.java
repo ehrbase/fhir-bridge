@@ -31,7 +31,7 @@ import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.Vorliegendes
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-28T13:05:49.001494+02:00",
+    date = "2021-09-28T16:11:42.426830+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Symptom")
