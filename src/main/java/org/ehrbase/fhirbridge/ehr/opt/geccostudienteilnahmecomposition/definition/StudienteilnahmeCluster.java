@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definiti
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
@@ -14,8 +15,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.study_participation.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-05-04T17:37:36.525694500+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-09-28T15:24:25.267857+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class StudienteilnahmeCluster implements LocatableEntity {
   /**
@@ -37,8 +38,8 @@ public class StudienteilnahmeCluster implements LocatableEntity {
    * Path: GECCO_Studienteilnahme/GECCO_Studienteilnahme/Studienteilnahme/Bestätigte Covid-19-Diagnose als Hauptursache für Aufnahme in Studie
    * Description: Zusätzliche Informationen zu der Studienteilnahme.
    */
-  @Path("/items[at0014 and name/value='Bestätigte Covid-19-Diagnose als Hauptursache für Aufnahme in Studie']/value|defining_code")
-  private BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudieDefiningCode;
+  @Path("/items[at0014 and name/value='Bestätigte Covid-19-Diagnose als Hauptursache für Aufnahme in Studie']/value")
+  private DvCodedText bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudie;
 
   /**
    * Path: GECCO_Studienteilnahme/GECCO_Studienteilnahme/Item tree/Studienteilnahme/Bestätigte Covid-19-Diagnose als Hauptursache für Aufnahme in Studie/null_flavour
@@ -68,14 +69,13 @@ public class StudienteilnahmeCluster implements LocatableEntity {
      return this.studienzentrum ;
   }
 
-  public void setBestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudieDefiningCode(
-      BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudieDefiningCode) {
-     this.bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudieDefiningCode = bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudieDefiningCode;
+  public void setBestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudie(
+      DvCodedText bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudie) {
+     this.bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudie = bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudie;
   }
 
-  public BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode getBestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudieDefiningCode(
-      ) {
-     return this.bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudieDefiningCode ;
+  public DvCodedText getBestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudie() {
+     return this.bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudie ;
   }
 
   public void setBestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudieNullFlavourDefiningCode(
