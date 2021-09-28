@@ -33,14 +33,6 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
 
     private StatusDefiningCode createStatusDefiningCode(Consent.ConsentState fhirStatus) {
         switch (fhirStatus.toCode()) {
-            case "final":
-                return StatusDefiningCode.FINAL;
-            case "amended":
-                return StatusDefiningCode.GEAENDERT;
-            case "registered":
-                return StatusDefiningCode.REGISTRIERT;
-            case "preliminary":
-                return StatusDefiningCode.VORLAEUFIG;
             case "draft":
                 return StatusDefiningCode.ENTWORFEN;
             case "proposed":
@@ -53,7 +45,7 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
                 return StatusDefiningCode.INAKTIV;
             case "entered-in-error":
                 return StatusDefiningCode.EINGABEFEHLER;
-            default:
+            default: // cannot be reached currently - maintained for security purposes
                 throw new ConversionException("createStatusDefiningCode failed. Code not found for: " + fhirStatus);
         }
     }
