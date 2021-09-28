@@ -17,12 +17,12 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1/_history/1",
+      "id" : "Observation/5db54bf3-277f-4826-8493-c0e4ec0369cd/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
       "_type" : "FEEDER_AUDIT_DETAILS",
-      "system_id" : "FHIR-bridge"
+      "system_id" : "FHIR-Bridge"
     }
   },
   "language" : {
@@ -147,6 +147,15 @@
       "_type" : "DV_TEXT",
       "value" : "Befund"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+      },
+      "template_id" : {
+        "value" : "GECCO_Virologischer Befund"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -204,7 +213,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED CT"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "122442008"
               }
@@ -216,11 +225,29 @@
               "_type" : "DV_TEXT",
               "value" : "Labortest-Panel"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_panel.v0"
+              },
+              "template_id" : {
+                "value" : "GECCO_Virologischer Befund"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "CLUSTER",
               "name" : {
                 "_type" : "DV_TEXT",
                 "value" : "Pro Analyt"
+              },
+              "archetype_details" : {
+                "archetype_id" : {
+                  "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+                },
+                "template_id" : {
+                  "value" : "GECCO_Virologischer Befund"
+                },
+                "rm_version" : "1.0.4"
               },
               "items" : [ {
                 "_type" : "ELEMENT",
@@ -254,7 +281,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "SNOMED Clinical Terms"
+                      "value" : "http://snomed.info/sct"
                     },
                     "code_string" : "260415000"
                   }
