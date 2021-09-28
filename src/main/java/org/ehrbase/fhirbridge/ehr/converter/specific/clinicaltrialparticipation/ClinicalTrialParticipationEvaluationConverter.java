@@ -13,8 +13,6 @@ import org.hl7.fhir.r4.model.Observation;
 
 import java.util.List;
 
-import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.SNOMED;
-
 public class ClinicalTrialParticipationEvaluationConverter extends ObservationToEvaluationConverter<GeccoStudienteilnahmeEvaluation> {
 
     @Override
@@ -63,13 +61,6 @@ public class ClinicalTrialParticipationEvaluationConverter extends ObservationTo
             studiePruefungRegistrierungCluster.setRegisternameDefiningCode(RegisternameDefiningCode.NCT_NUMBER);
         }else{
             throw new ConversionException("value code " + observationComponent.getCode().getCoding().get(0).getCode() + " is not supported");
-        }
-    }
-
-    private void checkForSnomedSystem(String systemCode) {
-        if (!SNOMED.getUrl().equals(systemCode)) {
-            throw new ConversionException("The system is not correct. " +
-                    "It should be '" + SNOMED.getUrl() + "', but it was '" + systemCode + "'.");
         }
     }
 }
