@@ -10,7 +10,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T12:22:43.897827+02:00",
+    date = "2021-09-28T16:11:42.501214+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class UnbekanntesSymptomAussageUeberDieFehlendeInformationElement implements LocatableEntity {

@@ -31,7 +31,7 @@ public class UnbekanntesSymptomEvaluationConverter extends EntryEntityConverter<
     @Override
     protected UnbekanntesSymptomEvaluation convertInternal(Condition condition) {
         UnbekanntesSymptomEvaluation result = new UnbekanntesSymptomEvaluation();
-        result.setUnbekanntesSymptomDefiningCode(convertCode(condition));
+        convertCode(condition).ifPresent(result::setUnbekanntesSymptom);
         UnbekanntesSymptomAussageUeberDieFehlendeInformationElement element = new UnbekanntesSymptomAussageUeberDieFehlendeInformationElement();
         element.setValue(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
         result.setAussageUeberDieFehlendeInformation(Collections.singletonList(element));
