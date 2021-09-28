@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
@@ -17,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.symptom_sign.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T12:22:43.860639+02:00",
+    date = "2021-09-28T13:05:49.042769+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class VorliegendesSymptomObservation implements EntryEntity {
@@ -26,8 +27,8 @@ public class VorliegendesSymptomObservation implements EntryEntity {
    * Description: Der Name des berichteten Symptoms/Krankheitsanzeichens.
    * Comment: Der Name des Symptoms sollte, wenn möglich, mit einer Terminologie kodiert werden.
    */
-  @Path("/data[at0190]/events[at0191]/data[at0192]/items[at0001]/value|defining_code")
-  private NameDesSymptomsKrankheitsanzeichensDefiningCode nameDesSymptomsKrankheitsanzeichensDefiningCode;
+  @Path("/data[at0190]/events[at0191]/data[at0192]/items[at0001]/value")
+  private DvCodedText nameDesSymptomsKrankheitsanzeichens;
 
   /**
    * Path: COVID-19 Symptom/Vorliegendes Symptom/Event Series/*Any event(en)/Tree/Name des Symptoms/Krankheitsanzeichens/null_flavour
@@ -71,8 +72,8 @@ public class VorliegendesSymptomObservation implements EntryEntity {
    * Description: Kategorie, die den allgemeinen Schweregrad des Symptoms/Krankheitsanzeichens beschreibt.
    * Comment: Werte wie leicht, moderat oder schwer so zu definieren, dass sie auf mehrere Symptome/Befunde anwendbar sind und von verschiedenen Benutzern interpretiert und einheitlich dokumentiert werden können, ist nicht einfach. Einige Organisationen erweitern die Wertemenge, indem sie zusätzliche Werte, wie z.B. "trivial", "sehr stark", "leicht-moderat" oder "moderat-schwer", miteinbeziehen, was zu Definitionsschwierigkeiten führt und auch die Zuverlässigkeit von Aufzeichnungen von verschiedenen Protokollanten verschlechtern kann. Die Verwendung von "lebensbedrohlich" und "tödlich" wird ebenfalls oft als Teil dieser Wertemenge betrachtet, obwohl sie eher ein Ergebnis als einen Schweregrad widerspiegelt. In Anbetracht dessen wird die Einhaltung einer gut definierten, aber kürzeren Liste bevorzugt, so dass der leichte/mittlere/schwere Wertebereich angeboten wird. Die Wahl eines anderen Textes wird durch die Aufnahme anderer Wertebereiche für dieses Datenelement im Template ermöglicht. Hinweis: Eine spezifischere Einstufung des Schweregrads kann mit Hilfe der Slots "Spezifische Details" vorgenommen werden.
    */
-  @Path("/data[at0190]/events[at0191]/data[at0192]/items[at0021]/value|defining_code")
-  private SchweregradDefiningCode schweregradDefiningCode;
+  @Path("/data[at0190]/events[at0191]/data[at0192]/items[at0021]/value")
+  private DvCodedText schweregrad;
 
   /**
    * Path: COVID-19 Symptom/Vorliegendes Symptom/Event Series/*Any event(en)/Tree/Schweregrad/null_flavour
@@ -156,14 +157,13 @@ public class VorliegendesSymptomObservation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setNameDesSymptomsKrankheitsanzeichensDefiningCode(
-      NameDesSymptomsKrankheitsanzeichensDefiningCode nameDesSymptomsKrankheitsanzeichensDefiningCode) {
-     this.nameDesSymptomsKrankheitsanzeichensDefiningCode = nameDesSymptomsKrankheitsanzeichensDefiningCode;
+  public void setNameDesSymptomsKrankheitsanzeichens(
+      DvCodedText nameDesSymptomsKrankheitsanzeichens) {
+     this.nameDesSymptomsKrankheitsanzeichens = nameDesSymptomsKrankheitsanzeichens;
   }
 
-  public NameDesSymptomsKrankheitsanzeichensDefiningCode getNameDesSymptomsKrankheitsanzeichensDefiningCode(
-      ) {
-     return this.nameDesSymptomsKrankheitsanzeichensDefiningCode ;
+  public DvCodedText getNameDesSymptomsKrankheitsanzeichens() {
+     return this.nameDesSymptomsKrankheitsanzeichens ;
   }
 
   public void setNameDesSymptomsKrankheitsanzeichensNullFlavourDefiningCode(
@@ -210,12 +210,12 @@ public class VorliegendesSymptomObservation implements EntryEntity {
      return this.beginnDerEpisodeNullFlavourDefiningCode ;
   }
 
-  public void setSchweregradDefiningCode(SchweregradDefiningCode schweregradDefiningCode) {
-     this.schweregradDefiningCode = schweregradDefiningCode;
+  public void setSchweregrad(DvCodedText schweregrad) {
+     this.schweregrad = schweregrad;
   }
 
-  public SchweregradDefiningCode getSchweregradDefiningCode() {
-     return this.schweregradDefiningCode ;
+  public DvCodedText getSchweregrad() {
+     return this.schweregrad ;
   }
 
   public void setSchweregradNullFlavourDefiningCode(

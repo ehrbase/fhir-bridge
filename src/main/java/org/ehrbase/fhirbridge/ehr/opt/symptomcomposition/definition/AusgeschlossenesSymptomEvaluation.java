@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.exclusion_specific.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T12:22:43.885951+02:00",
+    date = "2021-09-28T13:05:49.062684+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class AusgeschlossenesSymptomEvaluation implements EntryEntity {
@@ -47,8 +48,8 @@ public class AusgeschlossenesSymptomEvaluation implements EntryEntity {
    *
    * Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikation im Feld "Aussage über den Ausschluss" nicht notwendig.
    */
-  @Path("/data[at0001]/items[at0003 and name/value='Problem/Diagnose']/value|defining_code")
-  private NameDesSymptomsKrankheitsanzeichensDefiningCode problemDiagnoseDefiningCode;
+  @Path("/data[at0001]/items[at0003 and name/value='Problem/Diagnose']/value")
+  private DvCodedText problemDiagnose;
 
   /**
    * Path: COVID-19 Symptom/Ausgeschlossenes Symptom/Tree/Problem/Diagnose/null_flavour
@@ -100,13 +101,12 @@ public class AusgeschlossenesSymptomEvaluation implements EntryEntity {
      return this.aussageUeberDenAusschlussNullFlavourDefiningCode ;
   }
 
-  public void setProblemDiagnoseDefiningCode(
-      NameDesSymptomsKrankheitsanzeichensDefiningCode problemDiagnoseDefiningCode) {
-     this.problemDiagnoseDefiningCode = problemDiagnoseDefiningCode;
+  public void setProblemDiagnose(DvCodedText problemDiagnose) {
+     this.problemDiagnose = problemDiagnose;
   }
 
-  public NameDesSymptomsKrankheitsanzeichensDefiningCode getProblemDiagnoseDefiningCode() {
-     return this.problemDiagnoseDefiningCode ;
+  public DvCodedText getProblemDiagnose() {
+     return this.problemDiagnose ;
   }
 
   public void setProblemDiagnoseNullFlavourDefiningCode(

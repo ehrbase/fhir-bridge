@@ -19,9 +19,11 @@
     <other_details id="original_namespace"/>
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
-    <other_details id="MD5-CAM-1.0.1">b9073a3bc9450cb7f6016cfa9106c912</other_details>
+    <other_details id="MD5-CAM-1.0.1">0231e272f98cc099098dd732232f0359</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">2.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -515,7 +517,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -526,49 +528,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>SNOMED Clinical Terms</value>
-                                </terminology_id>
-                                <code_list>21522001</code_list>
-                                <code_list>84387000</code_list>
-                                <code_list>131148009</code_list>
-                                <code_list>29857009</code_list>
-                                <code_list>43724002</code_list>
-                                <code_list>9826008</code_list>
-                                <code_list>49727002</code_list>
-                                <code_list>62315008</code_list>
-                                <code_list>3006004</code_list>
-                                <code_list>267036007</code_list>
-                                <code_list>271807003</code_list>
-                                <code_list>84229001</code_list>
-                                <code_list>103001002</code_list>
-                                <code_list>386661006</code_list>
-                                <code_list>25064002</code_list>
-                                <code_list>66857006</code_list>
-                                <code_list>248567008</code_list>
-                                <code_list>57676002</code_list>
-                                <code_list>79890006</code_list>
-                                <code_list>44169009</code_list>
-                                <code_list>36955009</code_list>
-                                <code_list>30746006</code_list>
-                                <code_list>367391008</code_list>
-                                <code_list>68962001</code_list>
-                                <code_list>68235000</code_list>
-                                <code_list>64531003</code_list>
-                                <code_list>422587007</code_list>
-                                <code_list>162397003</code_list>
-                                <code_list>38880002</code_list>
-                                <code_list>91175000</code_list>
-                                <code_list>46742003</code_list>
-                                <code_list>282145008</code_list>
-                                <code_list>422400008</code_list>
-                                <code_list>56018004</code_list>
-                                <code_list>426000000</code_list>
-                                <code_list>13791008</code_list>
-                                <code_list>22253000</code_list>
-                                <code_list>28743005</code_list>
-                                <code_list>11833005</code_list>
-                                <code_list>40917007</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/sars-cov-2-symptoms</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -732,7 +692,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -743,13 +703,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>SNOMED Clinical Terms</value>
-                                </terminology_id>
-                                <code_list>255604002</code_list>
-                                <code_list>6736007</code_list>
-                                <code_list>24484000</code_list>
-                                <code_list>442452003</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/stage-at-diagnosis</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -1265,138 +1219,6 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
           <items id="description">Additional information required to capture local content or to align with other reference models/formalisms.</items>
           <items id="text">*Extension(en)</items>
         </term_definitions>
-        <term_definitions code="21522001">
-          <items id="text">Abdominal pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="84387000">
-          <items id="text">Asymptomatic (finding)</items>
-        </term_definitions>
-        <term_definitions code="131148009">
-          <items id="text">Bleeding (finding)</items>
-        </term_definitions>
-        <term_definitions code="29857009">
-          <items id="text">Chest pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="43724002">
-          <items id="text">Chill (finding)</items>
-        </term_definitions>
-        <term_definitions code="9826008">
-          <items id="text">Conjunctivitis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="49727002">
-          <items id="text">Cough (finding)</items>
-        </term_definitions>
-        <term_definitions code="62315008">
-          <items id="text">Diarrhea (finding)</items>
-        </term_definitions>
-        <term_definitions code="3006004">
-          <items id="text">Disturbance of consciousness (finding)</items>
-        </term_definitions>
-        <term_definitions code="267036007">
-          <items id="text">Dyspnea (finding)</items>
-        </term_definitions>
-        <term_definitions code="271807003">
-          <items id="text">Eruption of skin (disorder)</items>
-        </term_definitions>
-        <term_definitions code="84229001">
-          <items id="text">Fatigue (finding)</items>
-        </term_definitions>
-        <term_definitions code="103001002">
-          <items id="text">Feeling feverish (finding)</items>
-        </term_definitions>
-        <term_definitions code="386661006">
-          <items id="text">Fever (finding)</items>
-        </term_definitions>
-        <term_definitions code="25064002">
-          <items id="text">Headache (finding)</items>
-        </term_definitions>
-        <term_definitions code="66857006">
-          <items id="text">Hemoptysis (finding)</items>
-        </term_definitions>
-        <term_definitions code="248567008">
-          <items id="text">Indrawing of ribs during respiration (finding)</items>
-        </term_definitions>
-        <term_definitions code="57676002">
-          <items id="text">Joint pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="79890006">
-          <items id="text">Loss of appetite (finding)</items>
-        </term_definitions>
-        <term_definitions code="44169009">
-          <items id="text">Loss of sense of smell (finding)</items>
-        </term_definitions>
-        <term_definitions code="36955009">
-          <items id="text">Loss of taste (finding)</items>
-        </term_definitions>
-        <term_definitions code="30746006">
-          <items id="text">Lymphadenopathy (disorder)</items>
-        </term_definitions>
-        <term_definitions code="367391008">
-          <items id="text">Malaise (finding)</items>
-        </term_definitions>
-        <term_definitions code="68962001">
-          <items id="text">Muscle pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="68235000">
-          <items id="text">Nasal congestion (finding)</items>
-        </term_definitions>
-        <term_definitions code="64531003">
-          <items id="text">Nasal discharge (finding)</items>
-        </term_definitions>
-        <term_definitions code="422587007">
-          <items id="text">Nausea (finding)</items>
-        </term_definitions>
-        <term_definitions code="162397003">
-          <items id="text">Pain in throat (finding)</items>
-        </term_definitions>
-        <term_definitions code="38880002">
-          <items id="text">Rigor (finding)</items>
-        </term_definitions>
-        <term_definitions code="91175000">
-          <items id="text">Seizure (finding)</items>
-        </term_definitions>
-        <term_definitions code="46742003">
-          <items id="text">Skin ulcer (disorder)</items>
-        </term_definitions>
-        <term_definitions code="282145008">
-          <items id="text">Unable to walk (finding)</items>
-        </term_definitions>
-        <term_definitions code="422400008">
-          <items id="text">Vomiting (disorder)</items>
-        </term_definitions>
-        <term_definitions code="56018004">
-          <items id="text">Wheezing (finding)</items>
-        </term_definitions>
-        <term_definitions code="426000000">
-          <items id="text">Fever greater than 100.4 Fahrenheit / 38° Celsius (finding)</items>
-        </term_definitions>
-        <term_definitions code="13791008">
-          <items id="text">Asthenia (finding)</items>
-        </term_definitions>
-        <term_definitions code="22253000">
-          <items id="text">Pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="28743005">
-          <items id="text">Productive cough (finding)</items>
-        </term_definitions>
-        <term_definitions code="11833005">
-          <items id="text">Dry cough (finding)</items>
-        </term_definitions>
-        <term_definitions code="40917007">
-          <items id="text">Clouded consciousness (finding)</items>
-        </term_definitions>
-        <term_definitions code="255604002">
-          <items id="text">Mild (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="6736007">
-          <items id="text">Moderate (severity modifier) (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="24484000">
-          <items id="text">Severe (severity modifier) (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="442452003">
-          <items id="text">Life threatening severity (qualifier value)</items>
-        </term_definitions>
         <term_bindings terminology="SNOMED-CT">
           <items code="at0001">
             <value>
@@ -1654,7 +1476,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -1665,49 +1487,7 @@ Wird die anatomische Lokalisation über vordefinierte Codes in den Symptomnamen 
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>21522001</code_list>
-                        <code_list>84387000</code_list>
-                        <code_list>131148009</code_list>
-                        <code_list>29857009</code_list>
-                        <code_list>43724002</code_list>
-                        <code_list>9826008</code_list>
-                        <code_list>49727002</code_list>
-                        <code_list>62315008</code_list>
-                        <code_list>3006004</code_list>
-                        <code_list>267036007</code_list>
-                        <code_list>271807003</code_list>
-                        <code_list>84229001</code_list>
-                        <code_list>103001002</code_list>
-                        <code_list>386661006</code_list>
-                        <code_list>25064002</code_list>
-                        <code_list>66857006</code_list>
-                        <code_list>248567008</code_list>
-                        <code_list>57676002</code_list>
-                        <code_list>79890006</code_list>
-                        <code_list>44169009</code_list>
-                        <code_list>36955009</code_list>
-                        <code_list>30746006</code_list>
-                        <code_list>367391008</code_list>
-                        <code_list>68962001</code_list>
-                        <code_list>68235000</code_list>
-                        <code_list>64531003</code_list>
-                        <code_list>422587007</code_list>
-                        <code_list>162397003</code_list>
-                        <code_list>38880002</code_list>
-                        <code_list>91175000</code_list>
-                        <code_list>46742003</code_list>
-                        <code_list>282145008</code_list>
-                        <code_list>422400008</code_list>
-                        <code_list>56018004</code_list>
-                        <code_list>426000000</code_list>
-                        <code_list>13791008</code_list>
-                        <code_list>22253000</code_list>
-                        <code_list>28743005</code_list>
-                        <code_list>11833005</code_list>
-                        <code_list>40917007</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/sars-cov-2-symptoms</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -1913,126 +1693,6 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
         <term_definitions code="410594000">
           <items id="text">Known absent (qualifier value)</items>
         </term_definitions>
-        <term_definitions code="21522001">
-          <items id="text">Abdominal pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="84387000">
-          <items id="text">Asymptomatic (finding)</items>
-        </term_definitions>
-        <term_definitions code="131148009">
-          <items id="text">Bleeding (finding)</items>
-        </term_definitions>
-        <term_definitions code="29857009">
-          <items id="text">Chest pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="43724002">
-          <items id="text">Chill (finding)</items>
-        </term_definitions>
-        <term_definitions code="9826008">
-          <items id="text">Conjunctivitis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="49727002">
-          <items id="text">Cough (finding)</items>
-        </term_definitions>
-        <term_definitions code="62315008">
-          <items id="text">Diarrhea (finding)</items>
-        </term_definitions>
-        <term_definitions code="3006004">
-          <items id="text">Disturbance of consciousness (finding)</items>
-        </term_definitions>
-        <term_definitions code="267036007">
-          <items id="text">Dyspnea (finding)</items>
-        </term_definitions>
-        <term_definitions code="271807003">
-          <items id="text">Eruption of skin (disorder)</items>
-        </term_definitions>
-        <term_definitions code="84229001">
-          <items id="text">Fatigue (finding)</items>
-        </term_definitions>
-        <term_definitions code="103001002">
-          <items id="text">Feeling feverish (finding)</items>
-        </term_definitions>
-        <term_definitions code="386661006">
-          <items id="text">Fever (finding)</items>
-        </term_definitions>
-        <term_definitions code="25064002">
-          <items id="text">Headache (finding)</items>
-        </term_definitions>
-        <term_definitions code="66857006">
-          <items id="text">Hemoptysis (finding)</items>
-        </term_definitions>
-        <term_definitions code="248567008">
-          <items id="text">Indrawing of ribs during respiration (finding)</items>
-        </term_definitions>
-        <term_definitions code="57676002">
-          <items id="text">Joint pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="79890006">
-          <items id="text">Loss of appetite (finding)</items>
-        </term_definitions>
-        <term_definitions code="44169009">
-          <items id="text">Loss of sense of smell (finding)</items>
-        </term_definitions>
-        <term_definitions code="36955009">
-          <items id="text">Loss of taste (finding)</items>
-        </term_definitions>
-        <term_definitions code="30746006">
-          <items id="text">Lymphadenopathy (disorder)</items>
-        </term_definitions>
-        <term_definitions code="367391008">
-          <items id="text">Malaise (finding)</items>
-        </term_definitions>
-        <term_definitions code="68962001">
-          <items id="text">Muscle pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="68235000">
-          <items id="text">Nasal congestion (finding)</items>
-        </term_definitions>
-        <term_definitions code="64531003">
-          <items id="text">Nasal discharge (finding)</items>
-        </term_definitions>
-        <term_definitions code="422587007">
-          <items id="text">Nausea (finding)</items>
-        </term_definitions>
-        <term_definitions code="162397003">
-          <items id="text">Pain in throat (finding)</items>
-        </term_definitions>
-        <term_definitions code="38880002">
-          <items id="text">Rigor (finding)</items>
-        </term_definitions>
-        <term_definitions code="91175000">
-          <items id="text">Seizure (finding)</items>
-        </term_definitions>
-        <term_definitions code="46742003">
-          <items id="text">Skin ulcer (disorder)</items>
-        </term_definitions>
-        <term_definitions code="282145008">
-          <items id="text">Unable to walk (finding)</items>
-        </term_definitions>
-        <term_definitions code="422400008">
-          <items id="text">Vomiting (disorder)</items>
-        </term_definitions>
-        <term_definitions code="56018004">
-          <items id="text">Wheezing (finding)</items>
-        </term_definitions>
-        <term_definitions code="426000000">
-          <items id="text">Fever greater than 100.4 Fahrenheit / 38° Celsius (finding)</items>
-        </term_definitions>
-        <term_definitions code="13791008">
-          <items id="text">Asthenia (finding)</items>
-        </term_definitions>
-        <term_definitions code="22253000">
-          <items id="text">Pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="28743005">
-          <items id="text">Productive cough (finding)</items>
-        </term_definitions>
-        <term_definitions code="11833005">
-          <items id="text">Dry cough (finding)</items>
-        </term_definitions>
-        <term_definitions code="40917007">
-          <items id="text">Clouded consciousness (finding)</items>
-        </term_definitions>
       </children>
       <children xsi:type="C_ARCHETYPE_ROOT">
         <rm_type_name>EVALUATION</rm_type_name>
@@ -2118,7 +1778,7 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -2129,49 +1789,7 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>21522001</code_list>
-                        <code_list>84387000</code_list>
-                        <code_list>131148009</code_list>
-                        <code_list>29857009</code_list>
-                        <code_list>43724002</code_list>
-                        <code_list>9826008</code_list>
-                        <code_list>49727002</code_list>
-                        <code_list>62315008</code_list>
-                        <code_list>3006004</code_list>
-                        <code_list>267036007</code_list>
-                        <code_list>271807003</code_list>
-                        <code_list>84229001</code_list>
-                        <code_list>103001002</code_list>
-                        <code_list>386661006</code_list>
-                        <code_list>25064002</code_list>
-                        <code_list>66857006</code_list>
-                        <code_list>248567008</code_list>
-                        <code_list>57676002</code_list>
-                        <code_list>79890006</code_list>
-                        <code_list>44169009</code_list>
-                        <code_list>36955009</code_list>
-                        <code_list>30746006</code_list>
-                        <code_list>367391008</code_list>
-                        <code_list>68962001</code_list>
-                        <code_list>68235000</code_list>
-                        <code_list>64531003</code_list>
-                        <code_list>422587007</code_list>
-                        <code_list>162397003</code_list>
-                        <code_list>38880002</code_list>
-                        <code_list>91175000</code_list>
-                        <code_list>46742003</code_list>
-                        <code_list>282145008</code_list>
-                        <code_list>422400008</code_list>
-                        <code_list>56018004</code_list>
-                        <code_list>426000000</code_list>
-                        <code_list>13791008</code_list>
-                        <code_list>22253000</code_list>
-                        <code_list>28743005</code_list>
-                        <code_list>11833005</code_list>
-                        <code_list>40917007</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/sars-cov-2-symptoms</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -2503,126 +2121,6 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
           <items id="comment">Kommentar: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.</items>
           <items id="description">Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.</items>
           <items id="text">Erweiterung</items>
-        </term_definitions>
-        <term_definitions code="21522001">
-          <items id="text">Abdominal pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="84387000">
-          <items id="text">Asymptomatic (finding)</items>
-        </term_definitions>
-        <term_definitions code="131148009">
-          <items id="text">Bleeding (finding)</items>
-        </term_definitions>
-        <term_definitions code="29857009">
-          <items id="text">Chest pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="43724002">
-          <items id="text">Chill (finding)</items>
-        </term_definitions>
-        <term_definitions code="9826008">
-          <items id="text">Conjunctivitis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="49727002">
-          <items id="text">Cough (finding)</items>
-        </term_definitions>
-        <term_definitions code="62315008">
-          <items id="text">Diarrhea (finding)</items>
-        </term_definitions>
-        <term_definitions code="3006004">
-          <items id="text">Disturbance of consciousness (finding)</items>
-        </term_definitions>
-        <term_definitions code="267036007">
-          <items id="text">Dyspnea (finding)</items>
-        </term_definitions>
-        <term_definitions code="271807003">
-          <items id="text">Eruption of skin (disorder)</items>
-        </term_definitions>
-        <term_definitions code="84229001">
-          <items id="text">Fatigue (finding)</items>
-        </term_definitions>
-        <term_definitions code="103001002">
-          <items id="text">Feeling feverish (finding)</items>
-        </term_definitions>
-        <term_definitions code="386661006">
-          <items id="text">Fever (finding)</items>
-        </term_definitions>
-        <term_definitions code="25064002">
-          <items id="text">Headache (finding)</items>
-        </term_definitions>
-        <term_definitions code="66857006">
-          <items id="text">Hemoptysis (finding)</items>
-        </term_definitions>
-        <term_definitions code="248567008">
-          <items id="text">Indrawing of ribs during respiration (finding)</items>
-        </term_definitions>
-        <term_definitions code="57676002">
-          <items id="text">Joint pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="79890006">
-          <items id="text">Loss of appetite (finding)</items>
-        </term_definitions>
-        <term_definitions code="44169009">
-          <items id="text">Loss of sense of smell (finding)</items>
-        </term_definitions>
-        <term_definitions code="36955009">
-          <items id="text">Loss of taste (finding)</items>
-        </term_definitions>
-        <term_definitions code="30746006">
-          <items id="text">Lymphadenopathy (disorder)</items>
-        </term_definitions>
-        <term_definitions code="367391008">
-          <items id="text">Malaise (finding)</items>
-        </term_definitions>
-        <term_definitions code="68962001">
-          <items id="text">Muscle pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="68235000">
-          <items id="text">Nasal congestion (finding)</items>
-        </term_definitions>
-        <term_definitions code="64531003">
-          <items id="text">Nasal discharge (finding)</items>
-        </term_definitions>
-        <term_definitions code="422587007">
-          <items id="text">Nausea (finding)</items>
-        </term_definitions>
-        <term_definitions code="162397003">
-          <items id="text">Pain in throat (finding)</items>
-        </term_definitions>
-        <term_definitions code="38880002">
-          <items id="text">Rigor (finding)</items>
-        </term_definitions>
-        <term_definitions code="91175000">
-          <items id="text">Seizure (finding)</items>
-        </term_definitions>
-        <term_definitions code="46742003">
-          <items id="text">Skin ulcer (disorder)</items>
-        </term_definitions>
-        <term_definitions code="282145008">
-          <items id="text">Unable to walk (finding)</items>
-        </term_definitions>
-        <term_definitions code="422400008">
-          <items id="text">Vomiting (disorder)</items>
-        </term_definitions>
-        <term_definitions code="56018004">
-          <items id="text">Wheezing (finding)</items>
-        </term_definitions>
-        <term_definitions code="426000000">
-          <items id="text">Fever greater than 100.4 Fahrenheit / 38° Celsius (finding)</items>
-        </term_definitions>
-        <term_definitions code="13791008">
-          <items id="text">Asthenia (finding)</items>
-        </term_definitions>
-        <term_definitions code="22253000">
-          <items id="text">Pain (finding)</items>
-        </term_definitions>
-        <term_definitions code="28743005">
-          <items id="text">Productive cough (finding)</items>
-        </term_definitions>
-        <term_definitions code="11833005">
-          <items id="text">Dry cough (finding)</items>
-        </term_definitions>
-        <term_definitions code="40917007">
-          <items id="text">Clouded consciousness (finding)</items>
         </term_definitions>
         <term_definitions code="261665006">
           <items id="text">Unknown (qualifier value)</items>
