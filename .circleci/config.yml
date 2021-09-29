@@ -41,13 +41,13 @@ workflows:
                         ignore: gh-pages
 
             # Execute Robot Integration Tests (Parallel Execution)
-            # - BUNDLE-tests:
-            #     context: org-global
-            #     requires:
-            #         - build-test-analyse-fhirbridge
-            #     filters:
-            #         branches:
-            #             ignore: gh-pages
+            - BUNDLE-tests:
+                context: org-global
+                requires:
+                    - build-test-analyse-fhirbridge
+                filters:
+                    branches:
+                        ignore: gh-pages
 
             # - CONDITION-tests:
             #     context: org-global
