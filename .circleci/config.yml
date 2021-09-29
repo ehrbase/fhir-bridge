@@ -573,6 +573,7 @@ commands:
                                                                                       --security.authType="BASIC" \
                                                                                       --security.authUser="myuser" \
                                                                                       --security.authPassword="myPassword432" > log
+                    cat log
 
 
     build-and-test-fhirbridge:
@@ -1046,7 +1047,7 @@ executors:
                   MINIO_ROOT_USER: minio
                   MINIO_ROOT_PASSWORD: minio123456
               command: server /data --console-address ":9001"
-        # resource_class: large
+        resource_class: large
 
     machine-ubuntu-2004:
         description: |
