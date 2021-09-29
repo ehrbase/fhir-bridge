@@ -55,7 +55,7 @@ public class PCRIT extends AbstractMappingTestSetupIT {
     // check exceptions
 
     @Test
-    void createInvalidStatuseCode() throws IOException {
+    void createInvalidStatusCode() throws IOException {
         Exception exception = executeMappingException("create-PCR-status-invalid.json");
         assertEquals("The status UNKNOWN is not supported by the fhir bridge, since it does not accept unfinished entered-in-error or corrected instances. If an fix is necessary, please contact the administrator of the Bridge. Supported is either final, amended, registered or preliminary", exception.getMessage());
     }
