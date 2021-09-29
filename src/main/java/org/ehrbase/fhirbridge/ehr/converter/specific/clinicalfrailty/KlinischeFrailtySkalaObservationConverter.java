@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty;
 
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import com.nedap.archie.rm.datavalues.quantity.DvOrdinal;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
@@ -11,7 +12,9 @@ public class KlinischeFrailtySkalaObservationConverter extends ObservationToObse
     @Override
     protected KlinischeFrailtySkalaCfsObservation convertInternal(Observation resource) {
         KlinischeFrailtySkalaCfsObservation klinischeFrailtySkalaCfsObservation = new KlinischeFrailtySkalaCfsObservation();
-        if (resource.hasValueCodeableConcept() && resource.getValueCodeableConcept().hasCoding() && resource.getValueCodeableConcept().getCoding().get(0).hasCode()) {
+        if(resource.hasDataAbsentReason()){
+            klinischeFrailtySkalaCfsObservation.setBeurteilungNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }else if (resource.hasValueCodeableConcept() && resource.getValueCodeableConcept().hasCoding() && resource.getValueCodeableConcept().getCoding().get(0).hasCode()) {
             DvOrdinal ordAssessment = convertFrailtyBeurteilung(Integer.parseInt(resource.getValueCodeableConcept().getCoding().get(0).getCode()));
             klinischeFrailtySkalaCfsObservation.setBeurteilung(ordAssessment);
         }
@@ -43,4 +46,3 @@ public class KlinischeFrailtySkalaObservationConverter extends ObservationToObse
         }
     }
 }
-

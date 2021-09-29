@@ -26,13 +26,17 @@
     }
   },
   "language" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_639-1"
     },
     "code_string" : "de"
   },
   "territory" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_3166-1"
     },
     "code_string" : "DE"
@@ -41,14 +45,21 @@
     "_type" : "DV_CODED_TEXT",
     "value" : "event",
     "defining_code" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "openehr"
       },
       "code_string" : "433"
     }
   },
   "composer" : {
-    "_type" : "PARTY_SELF"
+    "_type" : "PARTY_IDENTIFIED",
+    "identifiers" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "urn:performer:identifier:system",
+      "id" : "performer_123456"
+    } ]
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
@@ -60,7 +71,9 @@
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
       "defining_code" : {
+        "_type" : "CODE_PHRASE",
         "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
           "value" : "openehr"
         },
         "code_string" : "232"
@@ -82,7 +95,9 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Therapeutic procedure (procedure)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
               "value" : "SNOMED Clinical Terms"
             },
             "code_string" : "277132007"
@@ -100,19 +115,26 @@
       "value" : "Prozedur"
     },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"
     },
     "subject" : {
       "_type" : "PARTY_SELF"
+    },
+    "provider" : {
+      "_type" : "PARTY_IDENTIFIED"
     },
     "time" : {
       "_type" : "DV_DATE_TIME",
@@ -134,7 +156,9 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Apheresis (procedure)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
               "value" : "SNOMED Clinical Terms"
             },
             "code_string" : "127788007"
@@ -151,14 +175,16 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Therapeutic procedure (procedure)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
               "value" : "SNOMED Clinical Terms"
             },
             "code_string" : "277132007"
           }
         },
         "archetype_node_id" : "at0067"
-      }],
+      } ],
       "archetype_node_id" : "at0001"
     },
     "ism_transition" : {
@@ -167,7 +193,9 @@
         "_type" : "DV_CODED_TEXT",
         "value" : "planned",
         "defining_code" : {
+          "_type" : "CODE_PHRASE",
           "terminology_id" : {
+            "_type" : "TERMINOLOGY_ID",
             "value" : "openehr"
           },
           "code_string" : "526"

@@ -335,20 +335,15 @@ ${randinteger}                  ${12345}
     $.severity.coding                       ${{ {} }}	                         422
     $.severity.coding                       ${{ [{}] }}                          422
 
-    #invalid severity.coding[0].code 
-    #$.severity.coding[0].code               missing                              422
+    #invalid severity.coding[0].code
     $.severity.coding[0].code               ${EMPTY}                             422
-    #$.severity.coding[0].code               http://foobar.de                     422
-    #$.severity.coding[0].code               ${randstring}                        422
     $.severity.coding[0].code               ${randinteger}                       422
     $.severity.coding[0].code               ${{ [] }}                            422
     $.severity.coding[0].code               ${{ {} }}                            422
     $.severity.coding[0].code               ${{ [{}] }}                          422
     
     #invalid severity.coding[0].system
-    #$.severity.coding[0].system             missing                              422
     $.severity.coding[0].system             ${EMPTY}                             422
-    #$.severity.coding[0].system             http://foobar.de                     422
     $.severity.coding[0].system             ${randstring}                        422
     $.severity.coding[0].system             ${randinteger}                       422
     $.severity.coding[0].system             ${{ [] }}                            422
@@ -376,32 +371,6 @@ ${randinteger}                  ${12345}
     # invalid Code Coding 0 Code
     $.code.coding[0].code                   ${randstring}           422
     [Teardown]          TRACE GITHUB ISSUE    262
-
-
-
-007 (BUG TRACE) - Create Symptoms-Covid-19 (Present) (invalid/missing 'severity')
-	[Documentation]		Belongs to TC 007! Remove separation when it's fixed! 
-    ...                 https://github.com/ehrbase/fhir-bridge/issues/261
-	...                 1. *CREATE* new an EHR record\n\n 
-	...                 2. *LOAD* _create-symptoms-covid-19-present.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-	...                 4. *UPDATE* values for attribute ``severity`` \n\n
-    ...                 5. *POST* example JSON to observation endpoint\n\n
-	...                 6. *VALIDATE* the response status \n\n                
-	[Template]		    create Symptoms Covid 19 with ehr reference
-    [Tags]          	261    severity    not-ready    not-ready_bug
-
-	# FIELD/PATH							VALUE					HTTP
-	# 																CODE
-	#invalid severity.coding[0].code
-	$.severity.coding[0].code               missing                 422
-    $.severity.coding[0].code               http://foobar.de        422
-    $.severity.coding[0].code               ${randstring}           422
-
-	#invalid severity.coding[0].system 
-	$.severity.coding[0].system             missing                 422
-    $.severity.coding[0].system             http://foobar.de        422
-    [Teardown]          TRACE GITHUB ISSUE  261
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

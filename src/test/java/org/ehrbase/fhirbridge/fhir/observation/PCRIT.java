@@ -41,9 +41,9 @@ public class PCRIT extends AbstractMappingTestSetupIT {
         create("create-PCR-50.json");
     }
 
-
     // #####################################################################################
     // check payload
+
     @Test
     void mappingNormal() throws IOException {
         testMapping("create-PCR-50.json",
@@ -52,16 +52,11 @@ public class PCRIT extends AbstractMappingTestSetupIT {
 
     // #####################################################################################
     // check exceptions
-    @Test
-    void createInvalidValueCode() throws IOException {
-        Exception exception = executeMappingException("create-PCR-value_invalid.json");
-        assertEquals("Value code 404 is not supported", exception.getMessage());
-    }
 
     @Test
     void createInvalidStatuseCode() throws IOException {
         Exception exception = executeMappingException("create-PCR-status_invalid.json");
-        assertEquals("createStatusDefiningCode failed. Code not found for: UNKNOWN", exception.getMessage());
+        assertEquals("The status UNKNOWN is not supported by the fhir bridge, since it does not accept unfinished entered-in-error or corrected instances. If an fix is necessary, please contact the administrator of the Bridge. Supported is either final, amended, registered or preliminary", exception.getMessage());
     }
 
 
@@ -79,7 +74,6 @@ public class PCRIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(KategorieLoincDefiningCode.class)
                 .registerValueObject(LabortestBezeichnungDefiningCode.class)
                 .registerValueObject(LabortestPanelCluster.class)
-                .registerValueObject(NachweisDefiningCode.class)
                 .registerValueObject(ProAnalytCluster.class)
                 .registerValueObject(StatusDefiningCode.class)
                 .registerValueObject(VirusnachweistestDefiningCode.class)

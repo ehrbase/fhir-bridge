@@ -10,7 +10,6 @@ class FachAbteilungsSchluesselDefiningCodeMap {
     private static final Map<String, FachabteilungsschluesselDefiningCode> fachAbteilungsSchluesselMap = new HashMap<>();
 
     private FachAbteilungsSchluesselDefiningCodeMap() {
-
         throw new IllegalStateException("Utility class");
     }
 

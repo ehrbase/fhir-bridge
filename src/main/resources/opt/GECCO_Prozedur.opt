@@ -19,9 +19,11 @@
     <other_details id="original_namespace"/>
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
-    <other_details id="MD5-CAM-1.0.1">51ff5784089cc4378f34d06e80fda5f6</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="MD5-CAM-1.0.1">cd1ee2ec47839d9992d60992fc289463</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">2.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -187,6 +189,71 @@
                     </right_operand>
                   </expression>
                 </includes>
+              </children>
+              <children xsi:type="C_COMPLEX_OBJECT">
+                <rm_type_name>ELEMENT</rm_type_name>
+                <occurrences>
+                  <lower_included>true</lower_included>
+                  <upper_included>true</upper_included>
+                  <lower_unbounded>false</lower_unbounded>
+                  <upper_unbounded>false</upper_unbounded>
+                  <lower>1</lower>
+                  <upper>1</upper>
+                </occurrences>
+                <node_id>at0004</node_id>
+                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+                  <rm_attribute_name>value</rm_attribute_name>
+                  <existence>
+                    <lower_included>true</lower_included>
+                    <upper_included>true</upper_included>
+                    <lower_unbounded>false</lower_unbounded>
+                    <upper_unbounded>false</upper_unbounded>
+                    <lower>0</lower>
+                    <upper>1</upper>
+                  </existence>
+                  <children xsi:type="C_COMPLEX_OBJECT">
+                    <rm_type_name>DV_CODED_TEXT</rm_type_name>
+                    <occurrences>
+                      <lower_included>true</lower_included>
+                      <upper_included>true</upper_included>
+                      <lower_unbounded>false</lower_unbounded>
+                      <upper_unbounded>false</upper_unbounded>
+                      <lower>1</lower>
+                      <upper>1</upper>
+                    </occurrences>
+                    <node_id/>
+                    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+                      <rm_attribute_name>defining_code</rm_attribute_name>
+                      <existence>
+                        <lower_included>true</lower_included>
+                        <upper_included>true</upper_included>
+                        <lower_unbounded>false</lower_unbounded>
+                        <upper_unbounded>false</upper_unbounded>
+                        <lower>1</lower>
+                        <upper>1</upper>
+                      </existence>
+                      <children xsi:type="C_CODE_PHRASE">
+                        <rm_type_name>CODE_PHRASE</rm_type_name>
+                        <occurrences>
+                          <lower_included>true</lower_included>
+                          <upper_included>true</upper_included>
+                          <lower_unbounded>false</lower_unbounded>
+                          <upper_unbounded>false</upper_unbounded>
+                          <lower>1</lower>
+                          <upper>1</upper>
+                        </occurrences>
+                        <node_id/>
+                        <terminology_id>
+                          <value>local</value>
+                        </terminology_id>
+                        <code_list>at0010</code_list>
+                        <code_list>at0011</code_list>
+                        <code_list>at0012</code_list>
+                        <code_list>at0013</code_list>
+                      </children>
+                    </attributes>
+                  </children>
+                </attributes>
               </children>
               <children xsi:type="C_COMPLEX_OBJECT">
                 <rm_type_name>ELEMENT</rm_type_name>
@@ -1684,7 +1751,7 @@
                     <upper>1</upper>
                   </existence>
                   <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>DV_CODED_TEXT</rm_type_name>
+                    <rm_type_name>DV_TEXT</rm_type_name>
                     <occurrences>
                       <lower_included>true</lower_included>
                       <upper_included>true</upper_included>
@@ -1694,33 +1761,6 @@
                       <upper>1</upper>
                     </occurrences>
                     <node_id/>
-                    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                      <rm_attribute_name>defining_code</rm_attribute_name>
-                      <existence>
-                        <lower_included>true</lower_included>
-                        <upper_included>true</upper_included>
-                        <lower_unbounded>false</lower_unbounded>
-                        <upper_unbounded>false</upper_unbounded>
-                        <lower>1</lower>
-                        <upper>1</upper>
-                      </existence>
-                      <children xsi:type="C_CODE_PHRASE">
-                        <rm_type_name>CODE_PHRASE</rm_type_name>
-                        <occurrences>
-                          <lower_included>true</lower_included>
-                          <upper_included>true</upper_included>
-                          <lower_unbounded>false</lower_unbounded>
-                          <upper_unbounded>false</upper_unbounded>
-                          <lower>1</lower>
-                          <upper>1</upper>
-                        </occurrences>
-                        <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>39607008</code_list>
-                      </children>
-                    </attributes>
                   </children>
                 </attributes>
               </children>
@@ -2647,9 +2687,6 @@ zur Angleichung an andere Referenzmodelle/Formalismen erforderlich sind.</items>
         </term_definitions>
         <term_definitions code="53950000">
           <items id="text">Respiratory therapy (procedure)</items>
-        </term_definitions>
-        <term_definitions code="39607008">
-          <items id="text">Lung structure (body structure)</items>
         </term_definitions>
         <term_definitions code="103693007">
           <items id="text">Diagnostic procedure</items>

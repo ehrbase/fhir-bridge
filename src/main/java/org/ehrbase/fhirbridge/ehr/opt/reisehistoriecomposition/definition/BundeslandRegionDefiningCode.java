@@ -1,6 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum BundeslandRegionDefiningCode implements EnumValueSet {
@@ -50,6 +53,14 @@ public enum BundeslandRegionDefiningCode implements EnumValueSet {
     this.description = description;
     this.terminologyId = terminologyId;
     this.code = code;
+  }
+
+  public static Map<String, BundeslandRegionDefiningCode> getCodesAsMap() {
+    Map<String, BundeslandRegionDefiningCode> bundeslandRegionDefiningCodeHashMap = new HashMap<>();
+    for (BundeslandRegionDefiningCode bundeslandRegionDefiningCode : BundeslandRegionDefiningCode.values()) {
+      bundeslandRegionDefiningCodeHashMap.put(bundeslandRegionDefiningCode.getCode(), bundeslandRegionDefiningCode);
+    }
+    return bundeslandRegionDefiningCodeHashMap;
   }
 
   public String getValue() {

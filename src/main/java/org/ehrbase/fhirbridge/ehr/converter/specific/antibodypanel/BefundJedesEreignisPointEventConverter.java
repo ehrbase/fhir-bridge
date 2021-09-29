@@ -35,7 +35,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         proAnalytCluster.setVirusnachweistestDefiningCode(convertVirusNachweisTest());
         if(immunoassay.getObservation().hasValueQuantity()){
             proAnalytCluster.setQuantitativesErgebnisMagnitude(immunoassay.getObservation().getValueQuantity().getValue().doubleValue());
-            proAnalytCluster.setQuantitativesErgebnisUnits(immunoassay.getObservation().getValueQuantity().getUnit());
+            proAnalytCluster.setQuantitativesErgebnisUnits(immunoassay.getObservation().getValueQuantity().getCode());
         }else{
             proAnalytCluster.setNachweisDefiningCode(convertNachweisDefiningCode());
         }

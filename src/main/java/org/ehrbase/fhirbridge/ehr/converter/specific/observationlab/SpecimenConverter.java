@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.generic.DvIdentifierParser;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeCluster;
@@ -42,7 +42,6 @@ public class SpecimenConverter {
         mapKommentar(specimenTarget).ifPresent(probe::setKommentarValue);
         return probe;
     }
-
 
     private Optional<ProbenartDefiningCode> mapProbenart(Specimen specimenTarget) {
         if (specimenTarget.hasType() && specimenTarget.getType().hasCoding()) {

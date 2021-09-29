@@ -45,7 +45,6 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 5. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create body-height w/o ehr reference
 	[Tags]              subject
-
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
 	# 																CODE
 
@@ -77,13 +76,13 @@ ${vQSystem}						http://unitsofmeasure.org
     $.subject						${{ [] }}						422		 The property subject must be an Object, not an array          					Observation.subject
     $.subject						${{ {} }}						422		 Object must have some content                                 					Observation.subject
     $.subject						${123}							422		 The property subject must be an Object, not a primitive property     		    Observation.subject
-	
+
 	# comment: random uuid																			 regex for uuid
     # Deprecated: $.subject.identifier.value    ${{str(uuid.uuid4())}}    		422     EhrId not found for subject
-	
+
 
 002 Create Body Height (Invalid/Missing 'resourceType')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``resourceType`` \n\n
@@ -92,7 +91,6 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]		    create body-height with ehr reference
     [Tags]          	resourceType
-
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
 	# 																CODE
     $.resourceType					missing							422		Unable to find resourceType propert
@@ -102,7 +100,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 
 003 Create Body Height (Invalid/Missing 'ID')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``ID`` \n\n
@@ -111,15 +109,14 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]		    create body-height with ehr reference
     [Tags]          	ID
-
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																	Location
 	# 																CODE
-	$.id							${EMPTY}						422		@value cannot be empty															Observation.id												
+	$.id							${EMPTY}						422		@value cannot be empty															Observation.id
 	$.id							${randinteger}					422		Error parsing JSON: the primitive value must be a string						Observation.id
 
 
 004 Create Body Height (Invalid/Missing 'meta')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``meta`` \n\n
@@ -128,7 +125,6 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create body-height with ehr reference
     [Tags]              meta
-
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
 	$.meta							missing							422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
@@ -138,16 +134,16 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.meta.profile    				${{ ["invalid_url"] }}		  	422    	Canonical URLs must be absolute URLs if they are not fragment references .invalid_url.							Observation.meta.profile.0.
 	$.meta.profile    				${{ ["http://wrong.url"] }}	   	422    	The resource does not contain any supported profile. One of the following profiles is expected
 	$.meta.profile					${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.meta.profile
-	
+
 	# comment: the next one sets the value to an empty list/array []
 	$.meta.profile					${{ [] }}						422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
-	
+
 	# comment: the next one sets value to an empty object {}
 	$.meta.profile					${{ {} }}						422    	This property must be an Array, not an object
 
 
 005 Create Body Height (Invalid/Missing 'identifier')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID: ${subject_id}_ which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``identifier`` \n\n
@@ -156,7 +152,6 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create body-height with ehr reference
     [Tags]              identifier
-
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
 	$.identifier					${EMPTY}						422    	This property must be an Array, not a primitive property														Observation.identifier
@@ -165,18 +160,18 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.identifier					${{ [{}] }}						422    	Object must have some content																					Observation.identifier.0.
 
 	# invalid system
-	$.identifier[0].system			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..system				
+	$.identifier[0].system			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..system
 	$.identifier[0].system			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..system
 	$.identifier[0].system			${randstring}				 	422	   	Identifier.system must be an absolute reference, not a local reference											Observation.identifier.0.
 
 	# invalid value
-	$.identifier[0].value			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..value				
+	$.identifier[0].value			${EMPTY}					 	422	   	@value cannot be empty																							Observation.identifier.0..value
 	$.identifier[0].value			${randinteger}				 	422	   	Error parsing JSON: the primitive value must be a string														Observation.identifier.0..value
 	#$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''foobar'', then the identifier.value must be a full URI						Observation.identifier.0.
 
 
 006 Create Body Height (Invalid/Missing 'Status')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Status`` \n\n
@@ -185,7 +180,6 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]		    create body-height with ehr reference
     [Tags]          	status
-
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 	$.status						missing							422		Observation.status: minimum required = 1, but only found 0 .from https://.*									Observation
@@ -195,7 +189,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 
 007 Create Body Height (Invalid/Missing 'category')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Category`` \n\n
@@ -204,7 +198,6 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create body-height with ehr reference
     [Tags]              category
-
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
@@ -217,13 +210,13 @@ ${vQSystem}						http://unitsofmeasure.org
 	#invalid coding
 	$.category[0].coding    				missing					422    	Object must have some content																				Observation.category.0.
 	$.category[0].coding    				${EMPTY}				422    	This property must be an Array, not a primitive property													Observation.category.0..coding
-	
+
 	#invalid code 0
 	$.category[0].coding[0].code    		missing    		    	422    	This element does not match any known slice defined in the profile ${body_height-url}
 	$.category[0].coding[0].code    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..code
 	$.category[0].coding[0].code    		${randstring}	    	422    	This element does not match any known slice defined in the profile ${body_height-url}					Observation.category.0.
 	$.category[0].coding[0].code    		${randinteger}	    	422    	Error parsing JSON: the primitive value must be a string													Observation.category.0..coding.0..code
-	
+
 	#invalid system 0
 	$.category[0].coding[0].system    		missing    		    	422    	A code with no system has no defined meaning. A system should be provided									Observation.category.0..coding.0.
 	$.category[0].coding[0].system    		${EMPTY}    	    	422    	@value cannot be empty																						Observation.category.0..coding.0..system
@@ -233,7 +226,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 
 008 Create Body Height (Invalid/Missing 'code')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``Code`` \n\n
@@ -242,7 +235,6 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create body-height with ehr reference
     [Tags]              code
-
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
 
@@ -275,7 +267,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 
 009 Create Body Height (Invalid/Missing 'effectiveDateTime')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
@@ -284,14 +276,13 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create body-height with ehr reference
     [Tags]              effectiveDateTime
-
 	# FIELD/PATH							VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																CODE
-	
+
 	# missing attribute
 	$.effectiveDateTime						missing					422    	Observation.effective.x.: minimum required = 1, but only found 0 .from https:/*								Observation
 	$.effectiveDateTime						${EMPTY}				422    	@value cannot be empty																						Observation.effective.ofType.dateTime.
-	
+
 	# wrong format
 	$.effectiveDateTime						${{ [] }}				422    	This property must be an simple value, not an array															Observation.effective.x.
 	$.effectiveDateTime						${{ {} }}				422    	This property must be an simple value, not an object														Observation.effective.x
@@ -301,7 +292,7 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.effectiveDateTime						2020-09-00				422    	Not a valid date/time .Invalid date/time format: \"2020-09-00\".											Observation.effective.ofType.dateTime.
 	$.effectiveDateTime						2020-09-32				422    	Not a valid date/time .Invalid date/time format: \"2020-09-32\".											Observation.effective.ofType.dateTime.
 	$.effectiveDateTime						2020-09-dd				422    	Not a valid date/time .Invalid date/time format: \"2020-09-dd\".											Observation.effective.ofType.dateTime.
-	
+
 	# invalid month
 	$.effectiveDateTime						2020-00-21				422    	Not a valid date/time .Invalid date/time format: \"2020-00-21\".											Observation.effective.ofType.dateTime.
 	$.effectiveDateTime						2020-13-21				422    	Not a valid date/time .Invalid date/time format: \"2020-13-21\".											Observation.effective.ofType.dateTime.
@@ -319,7 +310,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 
 010 Create Body Height (Invalid 'DataAbsentReason' AND 'valueCodeableConcept')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n
@@ -327,7 +318,6 @@ ${vQSystem}						http://unitsofmeasure.org
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Tags]              DataAbsentReason
-
 	ehr.create new ehr    				  							000_ehr_status.json
 	create with DataAbsentReason		  							DataAbsentReason				BodyHeight/create-body-height-normal.json
 	observation.validate response - 422 (with error message)	    422								obs-6: 'dataAbsentReason SHALL only be present if Observation.value.x. is not present'  			Observation
@@ -336,7 +326,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 
 011 Create Body Height (Invalid/Missing 'DataAbsentReason')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``DataAbsentReason`` \n\n
@@ -345,7 +335,6 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create body-height with ehr reference AND data absentreason
     [Tags]              DataAbsentReason
-
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 
@@ -384,7 +373,7 @@ ${vQSystem}						http://unitsofmeasure.org
 
 
 012 Create Body Height (Invalid/Missing 'valueQuantity')
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
 	...                 4. *UPDATE* values for attribute ``effectiveDateTime`` \n\n
@@ -393,7 +382,6 @@ ${vQSystem}						http://unitsofmeasure.org
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create body-height with ehr reference
     [Tags]              valueQuantity
-
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 
@@ -404,13 +392,13 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity			  					${{ {} }}		422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
-	
+
 	# missing parameters
 	$.valueQuantity.value	  					missing			422    	Observation.value.x.:valueQuantity.value: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.unit	  					missing			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.system	  					missing			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.code	  					missing			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
-	
+
 	# invalid value
 	$.valueQuantity.value	  					${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
 	$.valueQuantity.value	  					${None}			422    	This property must be an simple value, not null
@@ -420,18 +408,18 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.valueQuantity.value	  					${-1}			422    	.*value is not within interval, expected:0.0 <= -1.0 <= 1000.0.*Bad Request.*
 	$.valueQuantity.value	  					1000,7			422    	The value '1000,7' is not a valid decimal    Observation.value.ofType.Quantity..value
 	$.valueQuantity.value	  					foobar			422    	Error parsing JSON: the primitive value must be a number
-	
+
 	# invalid unit
 	$.valueQuantity.unit	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..unit
 	$.valueQuantity.unit	  					${None}			422    	Observation.value.x.:valueQuantity.unit: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.unit	  					${123}			422    	Error parsing JSON: the primitive value must be a string
-	
+
 	# invalid system
 	$.valueQuantity.system	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..system
 	$.valueQuantity.system	  					${None}			422    	Observation.value.x.:valueQuantity.system: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.system	  					foobar			422    	Value is 'foobar' but must be 'http://unitsofmeasure.org'
 	$.valueQuantity.system	  					${123}			422    	Error parsing JSON: the primitive value must be a string
-	
+
 	#invalid code
 	$.valueQuantity.code	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..code
 	$.valueQuantity.code	  					${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
@@ -440,13 +428,12 @@ ${vQSystem}						http://unitsofmeasure.org
 
 
 013 Create Body Height (invalid multi)
-	[Documentation]     1. *CREATE* new an EHR record\n\n 
+	[Documentation]     1. *CREATE* new an EHR record\n\n
 	...                 2. *LOAD* _create-body-height-normal.json_\n\n
 	...                 3. *UPDATE* values for attributes \n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status \n\n
     ...                 6. *VALIDATE* outcome against diagnostic text (english + german)
-
     [Tags]             multi
     [Template]         create body-height JSON
 #|  resourceType   |          		ID   								|           meta         						|                              identifier                         |	  status  	|                         				category                           					        					   |                                        									code          								|         subject                    |	  DateTime	   | 								valueQuantity  													|  R.-Code  |                                                             diagnostics 							                                              	  |   location
@@ -491,21 +478,19 @@ ${vQSystem}						http://unitsofmeasure.org
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Clinical Frailty Scale Score (Invalid/Missing 'identifier')
+BUG TRACE 01 Create Body Height (Invalid/Missing 'identifier')
 	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
 	[Template]			create body-height with ehr reference
     [Tags]              identifier    not-ready    bug
-
 	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
 	# 																CODE
 	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''foobar'', then the identifier.value must be a full URI								Observation.identifier.0.
 
 
-BUG TRACE 02 Create Clinical Frailty Scale Score (Invalid/Missing 'DataAbsentReason')
+BUG TRACE 02 Create Body Height (Invalid/Missing 'DataAbsentReason')
 	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
 	[Template]			create body-height with ehr reference AND data absentreason
     [Tags]              DataAbsentReason    not-ready    bug
-
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 	$.dataAbsentReason							missing					422    	Index 0 out of bounds for length 0
@@ -537,7 +522,7 @@ create body-height with ehr reference
 						...															        ${location}
 
 
-create body-height w/o ehr reference    
+create body-height w/o ehr reference
 	[Arguments]         ${json_path}        ${value}                ${http_status_code}
 	...					${error_message}    ${location}=${None}
 
@@ -558,7 +543,7 @@ generate payload from example json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 
-						# comment: delete field/object that has value 'missing' in test case table 
+						# comment: delete field/object that has value 'missing' in test case table
 						Run Keyword And Return If   $value=="missing"
 						...    	Run Keyword    Delete Object From Json    ${payload}    ${json_path}
 

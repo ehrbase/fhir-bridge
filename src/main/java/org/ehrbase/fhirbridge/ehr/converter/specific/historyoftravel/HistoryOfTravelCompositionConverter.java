@@ -8,7 +8,6 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.Aussag
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
@@ -23,7 +22,6 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
     @Override
     public ReisehistorieComposition convertInternal(@NonNull Observation resource) {
         ReisehistorieComposition composition = new ReisehistorieComposition();
-        mapStatus(composition, resource);
         mapKategorie(composition, resource);
         setReisehistorieType(composition, resource);
         return (composition);
@@ -52,21 +50,6 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         }
     }
 
-    private void mapStatus(ReisehistorieComposition composition, Observation resource) {
-        String status = resource.getStatusElement().getCode();
-        if (status.equals(StatusDefiningCode.FINAL.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.FINAL);
-        } else if (status.equals(StatusDefiningCode.GEAENDERT.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
-        } else if (status.equals(StatusDefiningCode.REGISTRIERT.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
-        } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
-            composition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
-        } else {
-            throw new ConversionException("The status " + resource.getStatus().toString() + " is not valid for reisehistorie.");
-        }
-    }
-
     private void mapKategorie(ReisehistorieComposition composition, Observation resource) {
         ReisehistorieKategorieElement element = new ReisehistorieKategorieElement();
         Coding coding = resource.getCategory().get(0).getCoding().get(0);
@@ -81,7 +64,7 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         if (!code.equals(expectedKategorie.getCode())) {
             throw new ConversionException("Categorie can't be set. Wrong code! Expected " + expectedKategorie.getCode() + ". Received" + code + "' instead");
         }
-        element.setValue(expectedKategorie.getValue());
+        element.setValue(expectedKategorie);
 
         List<ReisehistorieKategorieElement> kategorieList = new ArrayList<>();
         kategorieList.add(element);

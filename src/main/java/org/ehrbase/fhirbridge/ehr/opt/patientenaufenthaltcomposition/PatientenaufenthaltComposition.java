@@ -28,8 +28,8 @@ import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.
 @Archetype("openEHR-EHR-COMPOSITION.event_summary.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-30T13:55:02.831966300+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-07-27T16:16:20.992105+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Patientenaufenthalt")
 public class PatientenaufenthaltComposition implements CompositionEntity {

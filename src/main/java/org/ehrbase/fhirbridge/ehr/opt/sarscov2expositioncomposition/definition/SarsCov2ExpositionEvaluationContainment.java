@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -20,7 +21,7 @@ public class SarsCov2ExpositionEvaluationContainment extends Containment {
 
   public SelectAqlField<NullFlavour> INFEKTIONSERREGER_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(SarsCov2ExpositionEvaluation.class, "/data[at0001]/items[at0002]/null_flavour|defining_code", "infektionserregerNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<ExpositionVorhandenDefiningCode> EXPOSITION_VORHANDEN_DEFINING_CODE = new AqlFieldImp<ExpositionVorhandenDefiningCode>(SarsCov2ExpositionEvaluation.class, "/data[at0001]/items[at0003]/value|defining_code", "expositionVorhandenDefiningCode", ExpositionVorhandenDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> EXPOSITION_VORHANDEN = new AqlFieldImp<DvCodedText>(SarsCov2ExpositionEvaluation.class, "/data[at0001]/items[at0003]/value", "expositionVorhanden", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> EXPOSITION_VORHANDEN_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(SarsCov2ExpositionEvaluation.class, "/data[at0001]/items[at0003]/null_flavour|defining_code", "expositionVorhandenNullFlavourDefiningCode", NullFlavour.class, this);
 

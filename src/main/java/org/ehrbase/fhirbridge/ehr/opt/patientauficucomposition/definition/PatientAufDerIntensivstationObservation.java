@@ -2,7 +2,6 @@ package org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -19,8 +18,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.management_screening.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:55:47.622453+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-09-14T15:13:11.186633+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class PatientAufDerIntensivstationObservation implements EntryEntity {
   /**
@@ -40,8 +39,8 @@ public class PatientAufDerIntensivstationObservation implements EntryEntity {
    * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/Beliebiges Ereignis/Management-/Behandlungsaktivität/Wird/Wurde die Aktivität durchgeführt?
    * Description: Aktueller Status der spezifischen Aktivität.
    */
-  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005 and name/value='Wird/Wurde die Aktivität durchgeführt?']/value")
-  private DvCodedText wirdWurdeDieAktivitaetDurchgefuehrt;
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0022]/items[at0005 and name/value='Wird/Wurde die Aktivität durchgeführt?']/value|defining_code")
+  private WirdWurdeDieAktivitaetDurchgefuehrtDefiningCode wirdWurdeDieAktivitaetDurchgefuehrtDefiningCode;
 
   /**
    * Path: Patient auf der Intensivstation/Patient auf der Intensivstation/History/Beliebiges Ereignis/Tree/Management-/Behandlungsaktivität/Wird/Wurde die Aktivität durchgeführt?/null_flavour
@@ -112,13 +111,14 @@ public class PatientAufDerIntensivstationObservation implements EntryEntity {
      return this.nameDerAktivitaetNullFlavourDefiningCode ;
   }
 
-  public void setWirdWurdeDieAktivitaetDurchgefuehrt(
-      DvCodedText wirdWurdeDieAktivitaetDurchgefuehrt) {
-     this.wirdWurdeDieAktivitaetDurchgefuehrt = wirdWurdeDieAktivitaetDurchgefuehrt;
+  public void setWirdWurdeDieAktivitaetDurchgefuehrtDefiningCode(
+      WirdWurdeDieAktivitaetDurchgefuehrtDefiningCode wirdWurdeDieAktivitaetDurchgefuehrtDefiningCode) {
+     this.wirdWurdeDieAktivitaetDurchgefuehrtDefiningCode = wirdWurdeDieAktivitaetDurchgefuehrtDefiningCode;
   }
 
-  public DvCodedText getWirdWurdeDieAktivitaetDurchgefuehrt() {
-     return this.wirdWurdeDieAktivitaetDurchgefuehrt ;
+  public WirdWurdeDieAktivitaetDurchgefuehrtDefiningCode getWirdWurdeDieAktivitaetDurchgefuehrtDefiningCode(
+      ) {
+     return this.wirdWurdeDieAktivitaetDurchgefuehrtDefiningCode ;
   }
 
   public void setWirdWurdeDieAktivitaetDurchgefuehrtNullFlavourDefiningCode(

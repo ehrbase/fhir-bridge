@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.fhir.common;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.MedicationStatement;
@@ -18,8 +19,10 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("HttpUrlsUsage")
 public enum Profile {
+
+    // DocumentReference
+    DOCUMENT_REFERENCE_DEFAULT(DocumentReference.class, null),
 
     // Condition
     CONDITION_DEFAULT(Condition.class, null),
@@ -85,6 +88,7 @@ public enum Profile {
     SOFA_SCORE(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score"),
     SMOKING_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status"),
     ANTI_BODY_PANEL(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-pnl-ser-pl-ia"),
+    VIROLOGISCHER_BEFUND(Observation.class, "http://highmed.org/StructureDefinition/ic/VirologischerBefund"),
 
     // Patient
     PATIENT(Patient.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient"),

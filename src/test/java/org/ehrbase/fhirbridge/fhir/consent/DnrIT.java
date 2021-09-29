@@ -27,6 +27,10 @@ class DnrIT extends AbstractMappingTestSetupIT {
         super("Consent/", Consent.class); //fhir-Resource
     }
 
+    @Test
+    void mappingIntegrationTest() throws IOException {
+        create("consent-example.json");
+    }
 
     // #####################################################################################
     // check payload
@@ -38,13 +42,13 @@ class DnrIT extends AbstractMappingTestSetupIT {
 
     @Test
     void mappingNormal_2() throws IOException {
-        testMapping("consent-example-duplicate-2.json",
+        testMapping("consent-example-2.json",
                 "paragon-consent-dnr-normal-2.json");
     }
 
     @Test
     void mappingNormal_3() throws IOException {
-        testMapping("consent-example-duplicate-3.json",
+        testMapping("consent-example-3.json",
                 "paragon-consent-dnr-normal-3.json");
     }
 

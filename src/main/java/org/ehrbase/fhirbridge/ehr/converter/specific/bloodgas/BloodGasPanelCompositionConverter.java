@@ -17,27 +17,11 @@ public class BloodGasPanelCompositionConverter extends ObservationToCompositionC
         BloodGasPanel bloodGasPanelBundle = new BloodGasPanel(resource);
         Observation bloodGasPanel = bloodGasPanelBundle.getBloodGasPanel();
         BefundDerBlutgasanalyseComposition befundDerBlutgasanalyseComposition = new BefundDerBlutgasanalyseComposition();
-        befundDerBlutgasanalyseComposition.setStatusDefiningCode(mapStatus(bloodGasPanel));
         befundDerBlutgasanalyseComposition.setKategorieValue(mapKategorie(bloodGasPanel));
         befundDerBlutgasanalyseComposition.setLaborergebnis(new LaborergebnisBefundObservationConverter().convert(resource));
         return befundDerBlutgasanalyseComposition;
     }
 
-    private StatusDefiningCode mapStatus(Observation fhirObservation) {
-        switch (fhirObservation.getStatusElement().getCode()) {
-            case "registered":
-                return StatusDefiningCode.REGISTRIERT;
-            case "final":
-                return StatusDefiningCode.FINAL;
-            case "amended":
-                return StatusDefiningCode.GEAENDERT;
-            case "preliminary":
-                return StatusDefiningCode.VORLAEUFIG;
-            default:
-                throw new IllegalStateException("Invalid Code " + fhirObservation.getStatusElement().getCode() + "" +
-                        " for mapping of 'status', valid codes are: registered, final, amended and preliminary");
-        }
-    }
 
     private String mapKategorie(Observation fhirObservation) {
         Optional<String> categoryCode;

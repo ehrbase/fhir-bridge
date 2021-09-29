@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definiti
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
 import org.ehrbase.client.aql.field.ListAqlFieldImp;
@@ -16,7 +17,7 @@ public class StudienteilnahmeClusterContainment extends Containment {
 
   public ListSelectAqlField<Cluster> STUDIENZENTRUM = new ListAqlFieldImp<Cluster>(StudienteilnahmeCluster.class, "/items[at0015]", "studienzentrum", Cluster.class, this);
 
-  public SelectAqlField<BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode> BESTAETIGTE_COVID19_DIAGNOSE_ALS_HAUPTURSACHE_FUER_AUFNAHME_IN_STUDIE_DEFINING_CODE = new AqlFieldImp<BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode>(StudienteilnahmeCluster.class, "/items[at0014]/value|defining_code", "bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudieDefiningCode", BereitsAnInterventionellenKlinischenStudienTeilgenommenDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> BESTAETIGTE_COVID19_DIAGNOSE_ALS_HAUPTURSACHE_FUER_AUFNAHME_IN_STUDIE = new AqlFieldImp<DvCodedText>(StudienteilnahmeCluster.class, "/items[at0014]/value", "bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudie", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> BESTAETIGTE_COVID19_DIAGNOSE_ALS_HAUPTURSACHE_FUER_AUFNAHME_IN_STUDIE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(StudienteilnahmeCluster.class, "/items[at0014]/null_flavour|defining_code", "bestaetigteCovid19DiagnoseAlsHauptursacheFuerAufnahmeInStudieNullFlavourDefiningCode", NullFlavour.class, this);
 

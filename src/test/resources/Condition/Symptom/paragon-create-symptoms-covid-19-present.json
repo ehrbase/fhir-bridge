@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Condition/3200a803-f0dc-4b4b-9de5-61c7691cf649/_history/1",
+      "id" : "Condition/9f4dd95a-f97b-4f81-8258-8cff6412a625/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -88,7 +88,7 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "75325-1",
+          "value" : "Symptom",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
@@ -108,6 +108,15 @@
     "name" : {
       "_type" : "DV_TEXT",
       "value" : "Vorliegendes Symptom"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.symptom_sign.v0"
+      },
+      "template_id" : {
+        "value" : "Symptom"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -161,12 +170,12 @@
             },
             "value" : {
               "_type" : "DV_CODED_TEXT",
-              "value" : "49727002",
+              "value" : "Cough",
               "defining_code" : {
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED Clinical Terms"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "49727002"
               }
@@ -191,12 +200,12 @@
             },
             "value" : {
               "_type" : "DV_CODED_TEXT",
-              "value" : "24484000",
+              "value" : "Severe",
               "defining_code" : {
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED Clinical Terms"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "24484000"
               }

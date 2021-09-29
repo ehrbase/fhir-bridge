@@ -14,6 +14,7 @@ import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Specimen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.parameters.P;
 
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
@@ -32,7 +33,7 @@ public class TimeConverter {
     }
 
     public static TemporalAccessor convertObservationTime(Observation observation) {
-        if (observation.hasEffectiveDateTimeType()) { // EffectiveDateTime
+        if (observation.hasEffectiveDateTimeType() && !observation.getEffectiveDateTimeType().hasExtension()) {
             return observation.getEffectiveDateTimeType().getValueAsCalendar().toZonedDateTime();
         } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) { // EffectivePeriod
             return observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime();

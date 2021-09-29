@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
@@ -11,8 +10,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T14:41:23.681437+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-09-28T16:11:42.501214+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class UnbekanntesSymptomAussageUeberDieFehlendeInformationElement implements LocatableEntity {
   /**
@@ -20,8 +19,8 @@ public class UnbekanntesSymptomAussageUeberDieFehlendeInformationElement impleme
    * Description: Beschreibung des Grundes, warum keine Informationen vorhanden sind.
    * Comment: Zum Beispiel: Der Patient ist bewusstlos oder weigert sich Informationen preiszugeben. Die Codierung mit einer Terminologie wird empfohlen, wenn möglich.
    */
-  @Path("/value")
-  private DvCodedText value;
+  @Path("/value|defining_code")
+  private AussageUeberDieFehlendeInformationDefiningCode value;
 
   /**
    * Path: COVID-19 Symptom/Unbekanntes Symptom/Baum/Aussage über die fehlende Information/null_flavour
@@ -35,11 +34,11 @@ public class UnbekanntesSymptomAussageUeberDieFehlendeInformationElement impleme
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setValue(DvCodedText value) {
+  public void setValue(AussageUeberDieFehlendeInformationDefiningCode value) {
      this.value = value;
   }
 
-  public DvCodedText getValue() {
+  public AussageUeberDieFehlendeInformationDefiningCode getValue() {
      return this.value ;
   }
 

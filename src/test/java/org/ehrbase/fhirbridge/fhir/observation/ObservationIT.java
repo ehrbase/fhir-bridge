@@ -29,55 +29,15 @@ class ObservationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createBloodPressure() throws IOException {
-        create("create-blood-pressure.json");
-    }
-
-    @Test
-    void createBodyWeight() throws IOException {
-        create("create-body-weight.json");
-    }
-
-    @Test
-    void createClinicalFrailtyScaleScore() throws IOException {
-        create("create-clinical-frailty-scale-score.json");
-    }
-
-    @Test
     void createCoronavirusNachweisTest() throws IOException {
         create("create-coronavirus-nachweis-test.json");
-    }
-
-    @Test
-    void createFiO2() throws IOException {
-        create("create-fio2.json");
-    }
-
-    @Test
-    void createPatientInIcu() throws IOException {
-        create("create-patient-in-icu.json");
     }
 
     @Test
     void createObservationLab() throws IOException {
         create("create-observation-lab.json");
     }
-
-    @Test
-    void createPregnancyStatus() throws IOException {
-        create("create-pregnancy-status.json");
-    }
-
-    @Test
-    void createRespiratoryRate() throws IOException {
-        create("create-respiratory-rate.json");
-    }
-
-    @Test
-    void createSmokingStatus() throws IOException {
-        create("create-smoking-status.json");
-    }
-
+    
     @Test
     void createWithDefaultProfile() throws IOException {
         String resource = super.testFileLoader.loadResourceToString("create-observation-with-default-profile.json");

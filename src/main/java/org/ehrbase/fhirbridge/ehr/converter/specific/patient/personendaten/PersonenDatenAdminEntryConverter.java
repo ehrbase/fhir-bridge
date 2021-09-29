@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.generic.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AdresseCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AngabenZumTodCluster;
@@ -106,9 +106,9 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
     private Optional<DvCodedText> mapMehrereGeburten(Patient fhirPatient) {
         if(fhirPatient.hasMultipleBirth()){
             if(fhirPatient.hasMultipleBirthBooleanType()){
-                return Optional.of(DvCodedTextParser.parseBoolean(fhirPatient.getMultipleBirthBooleanType()));
+                return Optional.of(DvCodedTextParser.parseBirthBoolean(fhirPatient.getMultipleBirthBooleanType()));
             }else{
-                return Optional.of(DvCodedTextParser.parseInteger(fhirPatient.getMultipleBirthIntegerType()));
+                return Optional.of(DvCodedTextParser.parseBirthInteger(fhirPatient.getMultipleBirthIntegerType()));
             }
         }else{
             return Optional.empty();

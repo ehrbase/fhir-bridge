@@ -17,7 +17,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.DefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.UnbekanntesSymptomAussageUeberDieFehlendeInformationElement;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.UnbekanntesSymptomEvaluation;
 import org.hl7.fhir.r4.model.Condition;
@@ -31,10 +31,9 @@ public class UnbekanntesSymptomEvaluationConverter extends EntryEntityConverter<
     @Override
     protected UnbekanntesSymptomEvaluation convertInternal(Condition condition) {
         UnbekanntesSymptomEvaluation result = new UnbekanntesSymptomEvaluation();
-        result.setUnbekanntesSymptom(convertCode(condition));
-
+        convertCode(condition).ifPresent(result::setUnbekanntesSymptom);
         UnbekanntesSymptomAussageUeberDieFehlendeInformationElement element = new UnbekanntesSymptomAussageUeberDieFehlendeInformationElement();
-        element.setValue(DefiningCode.N261665006.toDvCodedText());
+        element.setValue(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE);
         result.setAussageUeberDieFehlendeInformation(Collections.singletonList(element));
 
         return result;

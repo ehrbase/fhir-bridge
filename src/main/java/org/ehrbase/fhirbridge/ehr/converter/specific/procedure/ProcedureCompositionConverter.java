@@ -10,7 +10,7 @@ public class ProcedureCompositionConverter extends ProcedureToCompositionConvert
     @Override
     public ProzedurComposition convertInternal(@NonNull Procedure resource) {
         ProzedurComposition composition = new ProzedurComposition();
-        composition.setProzedur(new ProzedurActionConverter().convert(resource));
+        composition.setProzedur(new ProcedureActionConverter().convert(resource));
         return composition;
     }
 }

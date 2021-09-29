@@ -34,6 +34,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.fio2.FiO2CompositionConvert
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose.GECCODiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund.PCRCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HerzfrequenzCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.hipdocument.DocumentReferenceToHipDocumentConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus.ImpfstatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
@@ -48,11 +49,12 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.procedure.ProcedureComposit
 import org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseOximetryCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerbefund.RadiologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate.RespiratoryRateCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus.SmokingStatusCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus.RaucherstatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.sofascore.SofaScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.stationaererversorgungsfall.StationaererVersorgungsfallCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.SymptomCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund.VirologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -64,6 +66,7 @@ public class ConversionConfiguration {
     @Bean(name = "fhirResourceConversionService")
     public ConversionService conversionService() {
         ConversionService conversionService = new ConversionService();
+        registerDocumentReference(conversionService);
         registerConditionConverters(conversionService);
         registerConsentConverters(conversionService);
         registerDiagnosticReportConverters(conversionService);
@@ -75,6 +78,10 @@ public class ConversionConfiguration {
         registerProcedureConverters(conversionService);
         registerQuestionnaireResponseConverters(conversionService);
         return conversionService;
+    }
+
+    private void registerDocumentReference(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.DOCUMENT_REFERENCE_DEFAULT, new DocumentReferenceToHipDocumentConverter());
     }
 
     private void registerConditionConverters(ConversionService conversionService) {
@@ -135,9 +142,10 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.OBSERVATION_LAB, new ObservationLabCompositionConverter());
         conversionService.registerConverter(Profile.RESPIRATORY_RATE, new RespiratoryRateCompositionConverter());
         conversionService.registerConverter(Profile.SOFA_SCORE, new SofaScoreCompositionConverter());
-        conversionService.registerConverter(Profile.SMOKING_STATUS, new SmokingStatusCompositionConverter());
+        conversionService.registerConverter(Profile.SMOKING_STATUS, new RaucherstatusCompositionConverter());
         conversionService.registerConverter(Profile.TRAVEL_HISTORY, new HistoryOfTravelCompositionConverter());
         conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
+        conversionService.registerConverter(Profile.VIROLOGISCHER_BEFUND, new VirologischerBefundCompositionConverter());
     }
 
     private void registerPatientConverters(ConversionService conversionService) {
