@@ -17,7 +17,7 @@ fhir-bridge:
     allowed-origins: '*'
 # Debug Properties
   debug:
-    enabled: false
+    enabled: true
     mapping-output-directory: ${java.io.tmpdir}/mappings
     # EHRbase Properties
   ehrbase:
