@@ -1,6 +1,6 @@
 {
   "resourceType": "Observation",
-  "id": "ee7afc8a-77fd-4394-a475-6171865f7119",
+  "id": "d15919ca-5407-4a10-857b-88d123d8e609",
   "meta": {
     "profile": [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/interventional-clinical-trial-participation"
@@ -23,7 +23,7 @@
       }
     }
   ],
-  "status": "temp",
+  "status": "final",
   "category": [
     {
       "coding": [
@@ -55,25 +55,10 @@
     "coding": [
       {
         "system": "http://snomed.info/sct",
-        "code": "373066001",
-        "display": "Yes (qualifier value)"
+        "code": "261665006",
+        "display": "Unknown (qualifier value)"
       }
     ],
-    "text": "Patient is enrolled in other studies"
-  },
-  "component": [
-    {
-      "code": {
-        "coding": [
-          {
-            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes",
-            "code": "04",
-            "display": "EudraCT Number"
-          }
-        ],
-        "text": "EudraCT (European Union Drug Regulating Authorities Clinical Trials) registration number"
-      },
-      "valueString": "2020-042169-13"
-    }
-  ]
+    "text": "Unknown if patient is enrolled in other studies"
+  }
 }
