@@ -354,13 +354,13 @@ jobs:
     OBSERVATION-tests:
         description: |
             todo
-        # executor: docker-py3-java11-postgres
-        executor: machine-ubuntu-2004
+        executor: docker-py3-java11-postgres
+        # executor: machine-ubuntu-2004
         steps:
             - checkout
-            # - install-maven                     # not needed on machine executor
+            - install-maven                     # not needed on machine executor
             - restore-fhirbridge-workspace
-            - start-ehrbase-database              # needed on machine executor only
+            # - start-ehrbase-database              # needed on machine executor only
             - start-ehrbase-server
             - start-fhirbridge-application
             - run-robot-integration-tests:
