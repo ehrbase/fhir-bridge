@@ -49,6 +49,9 @@ public class PatientInIcuIT extends AbstractMappingTestSetupIT {
         testMapping("create-patient-in-icu-Yes.json",
                 "paragon-create-patient-in-icu-Yes.json");
     }
+
+
+
     @Override
     public Javers getJavers() {
         return JaversBuilder.javers()
