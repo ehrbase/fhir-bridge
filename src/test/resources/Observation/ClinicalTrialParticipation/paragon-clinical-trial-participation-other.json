@@ -151,14 +151,14 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "No (qualifier value)",
+          "value" : "Other (qualifier value)",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
               "value" : "http://snomed.info/sct"
             },
-            "code_string" : "373067005"
+            "code_string" : "74964007"
           }
         },
         "archetype_node_id" : "at0002"
