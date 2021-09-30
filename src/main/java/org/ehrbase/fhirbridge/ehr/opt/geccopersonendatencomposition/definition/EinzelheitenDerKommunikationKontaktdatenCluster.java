@@ -11,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-15T13:49:30.092462+02:00",
+    date = "2021-09-30T15:26:10.457859+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class EinzelheitenDerKommunikationKontaktdatenCluster implements LocatableEntity {
@@ -19,8 +19,8 @@ public class EinzelheitenDerKommunikationKontaktdatenCluster implements Locatabl
    * Path: GECCO_Personendaten/Personendaten/Einzelheiten der Kommunikation/Kontaktdaten/Kontakttyp
    * Description: Typ des Kontakts z.B. Telefon, Fax, Pager etc. ENV 13606-4:2000 7.11.19.
    */
-  @Path("/items[at0004]/value|defining_code")
-  private KontakttypDefiningCode kontakttypDefiningCode;
+  @Path("/items[at0004]/value|value")
+  private String kontakttypValue;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Baum/Einzelheiten der Kommunikation/Kontaktdaten/Kontakttyp/null_flavour
@@ -99,12 +99,12 @@ public class EinzelheitenDerKommunikationKontaktdatenCluster implements Locatabl
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setKontakttypDefiningCode(KontakttypDefiningCode kontakttypDefiningCode) {
-     this.kontakttypDefiningCode = kontakttypDefiningCode;
+  public void setKontakttypValue(String kontakttypValue) {
+     this.kontakttypValue = kontakttypValue;
   }
 
-  public KontakttypDefiningCode getKontakttypDefiningCode() {
-     return this.kontakttypDefiningCode ;
+  public String getKontakttypValue() {
+     return this.kontakttypValue ;
   }
 
   public void setKontakttypNullFlavourDefiningCode(NullFlavour kontakttypNullFlavourDefiningCode) {

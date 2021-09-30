@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
@@ -14,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.ethnischer_hintergrund.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-15T13:49:30.126590+02:00",
+    date = "2021-09-30T15:26:10.482285+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class EthnischerHintergrundCluster implements LocatableEntity {
@@ -22,8 +23,8 @@ public class EthnischerHintergrundCluster implements LocatableEntity {
    * Path: GECCO_Personendaten/Personendaten/Ethnischer Hintergrund/Ethnischer Hintergrund
    * Description: Der ethnische Hintergrund einer Person.
    */
-  @Path("/items[at0002]/value|defining_code")
-  private EthnischerHintergrundDefiningCode ethnischerHintergrundDefiningCode;
+  @Path("/items[at0002]/value")
+  private DvCodedText ethnischerHintergrund;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Baum/Ethnischer Hintergrund/Ethnischer Hintergrund/null_flavour
@@ -44,13 +45,12 @@ public class EthnischerHintergrundCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setEthnischerHintergrundDefiningCode(
-      EthnischerHintergrundDefiningCode ethnischerHintergrundDefiningCode) {
-     this.ethnischerHintergrundDefiningCode = ethnischerHintergrundDefiningCode;
+  public void setEthnischerHintergrund(DvCodedText ethnischerHintergrund) {
+     this.ethnischerHintergrund = ethnischerHintergrund;
   }
 
-  public EthnischerHintergrundDefiningCode getEthnischerHintergrundDefiningCode() {
-     return this.ethnischerHintergrundDefiningCode ;
+  public DvCodedText getEthnischerHintergrund() {
+     return this.ethnischerHintergrund ;
   }
 
   public void setEthnischerHintergrundNullFlavourDefiningCode(

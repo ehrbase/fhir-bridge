@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
+import java.lang.String;
 import java.time.temporal.Temporal;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
@@ -15,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.person_birth_data_iso.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-15T13:49:30.053562+02:00",
+    date = "2021-09-30T15:26:10.408442+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class DatenZurGeburtCluster implements LocatableEntity {
@@ -36,8 +36,8 @@ public class DatenZurGeburtCluster implements LocatableEntity {
    * Path: GECCO_Personendaten/Personendaten/Daten zur Geburt/Kodierung für Mehrlingsgeburten
    * Description: Ein Indikator für Mehrlingsgeburten. Er gibt die Anzahl der geborenen Personen an, die aus einer Schwangerschaft resultierten.
    */
-  @Path("/items[at0003 and name/value='Kodierung für Mehrlingsgeburten']/value")
-  private DvCodedText kodierungFuerMehrlingsgeburten;
+  @Path("/items[at0003 and name/value='Kodierung für Mehrlingsgeburten']/value|value")
+  private String kodierungFuerMehrlingsgeburtenValue;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Baum/Daten zur Geburt/Kodierung für Mehrlingsgeburten/null_flavour
@@ -75,12 +75,12 @@ public class DatenZurGeburtCluster implements LocatableEntity {
      return this.geburtsdatumNullFlavourDefiningCode ;
   }
 
-  public void setKodierungFuerMehrlingsgeburten(DvCodedText kodierungFuerMehrlingsgeburten) {
-     this.kodierungFuerMehrlingsgeburten = kodierungFuerMehrlingsgeburten;
+  public void setKodierungFuerMehrlingsgeburtenValue(String kodierungFuerMehrlingsgeburtenValue) {
+     this.kodierungFuerMehrlingsgeburtenValue = kodierungFuerMehrlingsgeburtenValue;
   }
 
-  public DvCodedText getKodierungFuerMehrlingsgeburten() {
-     return this.kodierungFuerMehrlingsgeburten ;
+  public String getKodierungFuerMehrlingsgeburtenValue() {
+     return this.kodierungFuerMehrlingsgeburtenValue ;
   }
 
   public void setKodierungFuerMehrlingsgeburtenNullFlavourDefiningCode(

@@ -16,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-ADMIN_ENTRY.person_data.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-15T13:49:30.030576+02:00",
+    date = "2021-09-30T15:26:10.386909+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class PersonendatenAdminEntry implements EntryEntity {
@@ -59,7 +59,7 @@ public class PersonendatenAdminEntry implements EntryEntity {
    * Description: Details zur Adresse abgestimmt mit FHIR-Ressource.
    */
   @Path("/data[at0001]/items[openEHR-EHR-CLUSTER.address_cc.v0]")
-  private List<AdresseCluster> adresse;
+  private AdresseCluster adresse;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Einzelheiten der Kommunikation
@@ -133,11 +133,11 @@ public class PersonendatenAdminEntry implements EntryEntity {
      return this.angabenZumTod ;
   }
 
-  public void setAdresse(List<AdresseCluster> adresse) {
+  public void setAdresse(AdresseCluster adresse) {
      this.adresse = adresse;
   }
 
-  public List<AdresseCluster> getAdresse() {
+  public AdresseCluster getAdresse() {
      return this.adresse ;
   }
 

@@ -24,7 +24,7 @@ public class PersonendatenAdminEntryContainment extends Containment {
 
   public SelectAqlField<AngabenZumTodCluster> ANGABEN_ZUM_TOD = new AqlFieldImp<AngabenZumTodCluster>(PersonendatenAdminEntry.class, "/data[at0001]/items[at0024]/items[openEHR-EHR-CLUSTER.death_details.v1]", "angabenZumTod", AngabenZumTodCluster.class, this);
 
-  public ListSelectAqlField<AdresseCluster> ADRESSE = new ListAqlFieldImp<AdresseCluster>(PersonendatenAdminEntry.class, "/data[at0001]/items[openEHR-EHR-CLUSTER.address_cc.v0]", "adresse", AdresseCluster.class, this);
+  public SelectAqlField<AdresseCluster> ADRESSE = new AqlFieldImp<AdresseCluster>(PersonendatenAdminEntry.class, "/data[at0001]/items[openEHR-EHR-CLUSTER.address_cc.v0]", "adresse", AdresseCluster.class, this);
 
   public ListSelectAqlField<EinzelheitenDerKommunikationCluster> EINZELHEITEN_DER_KOMMUNIKATION = new ListAqlFieldImp<EinzelheitenDerKommunikationCluster>(PersonendatenAdminEntry.class, "/data[at0001]/items[openEHR-EHR-CLUSTER.telecom_details.v0]", "einzelheitenDerKommunikation", EinzelheitenDerKommunikationCluster.class, this);
 

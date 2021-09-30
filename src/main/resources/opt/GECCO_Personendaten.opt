@@ -25,8 +25,11 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">4c0a4debc311cf3145eadb7c1c42a784</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">137DCA7D21FA274494054E1B81B67FC5</other_details>
+    <other_details id="MD5-CAM-1.0.1">fbabb52220c7f2b58a8178b6a778d88d</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
+    <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">3.1.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -1055,7 +1058,7 @@
                         <upper>1</upper>
                       </existence>
                       <children xsi:type="C_COMPLEX_OBJECT">
-                        <rm_type_name>DV_CODED_TEXT</rm_type_name>
+                        <rm_type_name>DV_TEXT</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
                           <upper_included>true</upper_included>
@@ -1065,30 +1068,6 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                          <rm_attribute_name>defining_code</rm_attribute_name>
-                          <existence>
-                            <lower_included>true</lower_included>
-                            <upper_included>true</upper_included>
-                            <lower_unbounded>false</lower_unbounded>
-                            <upper_unbounded>false</upper_unbounded>
-                            <lower>1</lower>
-                            <upper>1</upper>
-                          </existence>
-                          <children xsi:type="CONSTRAINT_REF">
-                            <rm_type_name>CODE_PHRASE</rm_type_name>
-                            <occurrences>
-                              <lower_included>true</lower_included>
-                              <upper_included>true</upper_included>
-                              <lower_unbounded>false</lower_unbounded>
-                              <upper_unbounded>false</upper_unbounded>
-                              <lower>1</lower>
-                              <upper>1</upper>
-                            </occurrences>
-                            <node_id/>
-                            <reference>ac0001</reference>
-                          </children>
-                        </attributes>
                       </children>
                     </attributes>
                     <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -1439,9 +1418,11 @@ Datum zu erhalten.</items>
                 <rm_type_name>CLUSTER</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
+                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>true</upper_unbounded>
+                  <upper_unbounded>false</upper_unbounded>
                   <lower>0</lower>
+                  <upper>1</upper>
                 </occurrences>
                 <node_id>at0000</node_id>
                 <attributes xsi:type="C_MULTIPLE_ATTRIBUTE">
@@ -2019,10 +2000,15 @@ Datum zu erhalten.</items>
                             </occurrences>
                             <node_id/>
                             <terminology_id>
-                              <value>local</value>
+                              <value>http://hl7.org/fhir/contact-point-use</value>
                             </terminology_id>
                             <code_list>at0011</code_list>
                             <code_list>at0012</code_list>
+                            <code_list>home</code_list>
+                            <code_list>work</code_list>
+                            <code_list>temp</code_list>
+                            <code_list>old</code_list>
+                            <code_list>mobile</code_list>
                           </children>
                         </attributes>
                       </children>
@@ -2069,7 +2055,7 @@ Datum zu erhalten.</items>
                             <upper>1</upper>
                           </existence>
                           <children xsi:type="C_COMPLEX_OBJECT">
-                            <rm_type_name>DV_CODED_TEXT</rm_type_name>
+                            <rm_type_name>DV_TEXT</rm_type_name>
                             <occurrences>
                               <lower_included>true</lower_included>
                               <upper_included>true</upper_included>
@@ -2079,36 +2065,6 @@ Datum zu erhalten.</items>
                               <upper>1</upper>
                             </occurrences>
                             <node_id/>
-                            <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                              <rm_attribute_name>defining_code</rm_attribute_name>
-                              <existence>
-                                <lower_included>true</lower_included>
-                                <upper_included>true</upper_included>
-                                <lower_unbounded>false</lower_unbounded>
-                                <upper_unbounded>false</upper_unbounded>
-                                <lower>1</lower>
-                                <upper>1</upper>
-                              </existence>
-                              <children xsi:type="C_CODE_PHRASE">
-                                <rm_type_name>CODE_PHRASE</rm_type_name>
-                                <occurrences>
-                                  <lower_included>true</lower_included>
-                                  <upper_included>true</upper_included>
-                                  <lower_unbounded>false</lower_unbounded>
-                                  <upper_unbounded>false</upper_unbounded>
-                                  <lower>1</lower>
-                                  <upper>1</upper>
-                                </occurrences>
-                                <node_id/>
-                                <terminology_id>
-                                  <value>local</value>
-                                </terminology_id>
-                                <code_list>at0013</code_list>
-                                <code_list>at0014</code_list>
-                                <code_list>at0015</code_list>
-                                <code_list>at0016</code_list>
-                              </children>
-                            </attributes>
                           </children>
                         </attributes>
                       </children>
@@ -2537,6 +2493,21 @@ Datum zu erhalten.</items>
                   <items id="description">Die Art des verwendeten Kommunikationsmediums oder Dienstes.</items>
                   <items id="text">Sender</items>
                 </term_definitions>
+                <term_definitions code="home">
+                  <items id="text">Home</items>
+                </term_definitions>
+                <term_definitions code="work">
+                  <items id="text">Work</items>
+                </term_definitions>
+                <term_definitions code="temp">
+                  <items id="text">Temp</items>
+                </term_definitions>
+                <term_definitions code="old">
+                  <items id="text">Old</items>
+                </term_definitions>
+                <term_definitions code="mobile">
+                  <items id="text">Mobile</items>
+                </term_definitions>
               </children>
               <children xsi:type="C_ARCHETYPE_ROOT">
                 <rm_type_name>CLUSTER</rm_type_name>
@@ -2599,7 +2570,7 @@ Datum zu erhalten.</items>
                             <lower>1</lower>
                             <upper>1</upper>
                           </existence>
-                          <children xsi:type="C_CODE_PHRASE">
+                          <children xsi:type="C_CODE_REFERENCE">
                             <rm_type_name>CODE_PHRASE</rm_type_name>
                             <occurrences>
                               <lower_included>true</lower_included>
@@ -2610,15 +2581,7 @@ Datum zu erhalten.</items>
                               <upper>1</upper>
                             </occurrences>
                             <node_id/>
-                            <terminology_id>
-                              <value>SNOMED Clinical Terms</value>
-                            </terminology_id>
-                            <code_list>14045001</code_list>
-                            <code_list>18167009</code_list>
-                            <code_list>315280000</code_list>
-                            <code_list>90027003</code_list>
-                            <code_list>2135-2</code_list>
-                            <code_list>186019001</code_list>
+                            <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/ethnic-groups</referenceSetUri>
                           </children>
                         </attributes>
                       </children>
@@ -2682,24 +2645,6 @@ Datum zu erhalten.</items>
                 <term_definitions code="at0004">
                   <items id="description">Zusätzliche Beschreibung über den ethnischen Hintergrund einer Person, die nicht in anderen Datenelementen erfasst ist.</items>
                   <items id="text">Kommentar</items>
-                </term_definitions>
-                <term_definitions code="14045001">
-                  <items id="text">Caucasian</items>
-                </term_definitions>
-                <term_definitions code="18167009">
-                  <items id="text">Black African</items>
-                </term_definitions>
-                <term_definitions code="315280000">
-                  <items id="text">Asian</items>
-                </term_definitions>
-                <term_definitions code="90027003">
-                  <items id="text">Arabs</items>
-                </term_definitions>
-                <term_definitions code="2135-2">
-                  <items id="text">Hispanic or Latino</items>
-                </term_definitions>
-                <term_definitions code="186019001">
-                  <items id="text">Other ethnic, mixed origin</items>
                 </term_definitions>
               </children>
               <cardinality>
@@ -2918,7 +2863,7 @@ Datum zu erhalten.</items>
                                     <upper_included>true</upper_included>
                                     <lower_unbounded>false</lower_unbounded>
                                     <upper_unbounded>false</upper_unbounded>
-                                    <lower>PT0S</lower>
+                                    <lower>P0Y</lower>
                                     <upper>P200Y</upper>
                                   </range>
                                 </item>
@@ -3207,7 +3152,7 @@ Datum zu erhalten.</items>
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -3218,13 +3163,7 @@ Datum zu erhalten.</items>
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>http://hl7.org/fhir/administrative-gender</value>
-                        </terminology_id>
-                        <code_list>male</code_list>
-                        <code_list>female</code_list>
-                        <code_list>unknown</code_list>
-                        <code_list>other</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=http://hl7.org/fhir/ValueSet/administrative-gender</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -3272,7 +3211,7 @@ Datum zu erhalten.</items>
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -3283,14 +3222,7 @@ Datum zu erhalten.</items>
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>http://hl7.org/fhir/administrative-gender</value>
-                        </terminology_id>
-                        <code_list>male</code_list>
-                        <code_list>female</code_list>
-                        <code_list>unknown</code_list>
-                        <code_list>X</code_list>
-                        <code_list>D</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/birth-sex</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -3523,24 +3455,6 @@ Datum zu erhalten.</items>
           <items id="description">Das Geschlecht einer Person, das für offizielle oder rechtliche Zwecke verwendet wird.</items>
           <items id="text">Rechtliches Geschlecht</items>
         </term_definitions>
-        <term_definitions code="male">
-          <items id="text">Male</items>
-        </term_definitions>
-        <term_definitions code="female">
-          <items id="text">Female</items>
-        </term_definitions>
-        <term_definitions code="unknown">
-          <items id="text">Unknown</items>
-        </term_definitions>
-        <term_definitions code="other">
-          <items id="text">Other</items>
-        </term_definitions>
-        <term_definitions code="X">
-          <items id="text">Unbestimmt</items>
-        </term_definitions>
-        <term_definitions code="D">
-          <items id="text">Divers</items>
-        </term_definitions>
       </children>
       <cardinality>
         <is_ordered>false</is_ordered>
@@ -3596,5 +3510,19 @@ Datum zu erhalten.</items>
       <items id="text">geändert</items>
     </term_definitions>
   </definition>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-ADMIN_ENTRY.person_data.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.person_birth_data_iso.v0]">
+    <items id="184099003">Date of birth (observable entity)</items>
+    <items id="21112-8">Birth date</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-ADMIN_ENTRY.person_data.v0]/data[at0001]/items[openEHR-EHR-CLUSTER.ethnischer_hintergrund.v0]">
+    <items id="372148003">Ethnic group (ethnic group)</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.age.v0]">
+    <items id="424144002">Current chronological age (observable entity)</items>
+    <items id="30525-0">Age</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-EVALUATION.gender.v1]">
+    <items id="76689-9">Sex assigned at birth</items>
+  </annotations>
   <view/>
 </template>
