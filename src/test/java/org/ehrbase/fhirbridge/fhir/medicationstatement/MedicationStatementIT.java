@@ -84,36 +84,6 @@ class MedicationStatementIT extends AbstractMappingTestSetupIT {
         testMapping("create-pharmacological-therapy.json", "paragon-therapy.json");
     }
 
-    @Test
-    void createInvalidImmunoglobinsMedicationCode() throws IOException {
-        Exception exception =  executeMappingException("create-invalid-immunoglobulins-medication-code.json");
-        assertEquals("Invalid medicationCodeableConcept code J0sad6B", exception.getMessage());
-    }
-
-    @Test
-    void createInvalidACEInhibitorsMedicationCode() throws IOException {
-        Exception exception =  executeMappingException("create-invalid-ace-inhib-medication-code.json");
-        assertEquals("Invalid medicationCodeableConcept code C0asd9A", exception.getMessage());
-    }
-
-    @Test
-    void createInvalidAnticoagulatnsMedicationCode() throws IOException {
-        Exception exception =  executeMappingException("create-invalid-anticoagulants-medication-code.json");
-        assertEquals("Invalid medicationCodeableConcept code B01AB0asd1", exception.getMessage());
-    }
-
-    @Test
-    void createInvalidTherapyMedicationCode() throws IOException {
-        Exception exception =  executeMappingException("create-invalid-therapy-medication-code.json");
-        assertEquals("Invalid medicationCodeableConcept code 41359100asd7", exception.getMessage());
-    }
-
-    @Test
-    void createInvalidAnticoagulantReasonCode() throws IOException {
-        Exception exception =  executeMappingException("create-anticoagulants-invalid-reason-code.json");
-        assertEquals("The reasonCode 3602710as00 is invalid !", exception.getMessage());
-    }
-
     @Override
     public Exception executeMappingException(String path) throws IOException {
         MedicationStatement medicationStatement = (MedicationStatement) testFileLoader.loadResource(path);

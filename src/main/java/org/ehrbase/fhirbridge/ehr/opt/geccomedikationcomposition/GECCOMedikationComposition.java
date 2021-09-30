@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.Participation;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
@@ -25,13 +26,12 @@ import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.AceH
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.AntikoagulanzienObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.Covid19TherapieObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ImmunglobulineObservation;
-import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.KategorieDefiningCode;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-14T11:29:46.136131+02:00",
+    date = "2021-09-30T13:35:36.312229+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("GECCO_Medikation")
@@ -53,8 +53,8 @@ public class GECCOMedikationComposition implements CompositionEntity {
    * Path: Medikation/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
-  @Path("/context/other_context[at0001]/items[at0005]/value|defining_code")
-  private KategorieDefiningCode kategorieDefiningCode;
+  @Path("/context/other_context[at0001]/items[at0005]/value")
+  private DvCodedText kategorie;
 
   /**
    * Path: Medikation/context/Baum/Kategorie/null_flavour
@@ -169,12 +169,12 @@ public class GECCOMedikationComposition implements CompositionEntity {
      return this.erweiterung ;
   }
 
-  public void setKategorieDefiningCode(KategorieDefiningCode kategorieDefiningCode) {
-     this.kategorieDefiningCode = kategorieDefiningCode;
+  public void setKategorie(DvCodedText kategorie) {
+     this.kategorie = kategorie;
   }
 
-  public KategorieDefiningCode getKategorieDefiningCode() {
-     return this.kategorieDefiningCode ;
+  public DvCodedText getKategorie() {
+     return this.kategorie ;
   }
 
   public void setKategorieNullFlavourDefiningCode(NullFlavour kategorieNullFlavourDefiningCode) {

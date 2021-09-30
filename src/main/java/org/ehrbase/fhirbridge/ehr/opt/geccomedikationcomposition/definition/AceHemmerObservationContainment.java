@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.time.temporal.TemporalAccessor;
 import org.ehrbase.client.aql.containment.Containment;
@@ -15,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class AceHemmerObservationContainment extends Containment {
   public SelectAqlField<AceHemmerObservation> ACE_HEMMER_OBSERVATION = new AqlFieldImp<AceHemmerObservation>(AceHemmerObservation.class, "", "AceHemmerObservation", AceHemmerObservation.class, this);
 
-  public SelectAqlField<ArzneimittelNameDefiningCode2> ARZNEIMITTEL_NAME_DEFINING_CODE = new AqlFieldImp<ArzneimittelNameDefiningCode2>(AceHemmerObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value|defining_code", "arzneimittelNameDefiningCode", ArzneimittelNameDefiningCode2.class, this);
+  public SelectAqlField<DvCodedText> ARZNEIMITTEL_NAME = new AqlFieldImp<DvCodedText>(AceHemmerObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value", "arzneimittelName", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> ARZNEIMITTEL_NAME_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(AceHemmerObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0006]/null_flavour|defining_code", "arzneimittelNameNullFlavourDefiningCode", NullFlavour.class, this);
 
@@ -27,7 +28,7 @@ public class AceHemmerObservationContainment extends Containment {
 
   public ListSelectAqlField<Cluster> STRUKTURIERTE_DOSIS_UND_ZEITANGABEN = new ListAqlFieldImp<Cluster>(AceHemmerObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0022]", "strukturierteDosisUndZeitangaben", Cluster.class, this);
 
-  public SelectAqlField<GrundDefiningCode> GRUND_DEFINING_CODE = new AqlFieldImp<GrundDefiningCode>(AceHemmerObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0023]/value|defining_code", "grundDefiningCode", GrundDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> GRUND = new AqlFieldImp<DvCodedText>(AceHemmerObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0023]/value", "grund", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> GRUND_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(AceHemmerObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0023]/null_flavour|defining_code", "grundNullFlavourDefiningCode", NullFlavour.class, this);
 

@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.time.temporal.TemporalAccessor;
 import org.ehrbase.client.aql.containment.Containment;
@@ -15,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class AntikoagulanzienObservationContainment extends Containment {
   public SelectAqlField<AntikoagulanzienObservation> ANTIKOAGULANZIEN_OBSERVATION = new AqlFieldImp<AntikoagulanzienObservation>(AntikoagulanzienObservation.class, "", "AntikoagulanzienObservation", AntikoagulanzienObservation.class, this);
 
-  public SelectAqlField<ArzneimittelNameDefiningCode4> ARZNEIMITTEL_NAME_DEFINING_CODE = new AqlFieldImp<ArzneimittelNameDefiningCode4>(AntikoagulanzienObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value|defining_code", "arzneimittelNameDefiningCode", ArzneimittelNameDefiningCode4.class, this);
+  public SelectAqlField<DvCodedText> ARZNEIMITTEL_NAME = new AqlFieldImp<DvCodedText>(AntikoagulanzienObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value", "arzneimittelName", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> ARZNEIMITTEL_NAME_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(AntikoagulanzienObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0006]/null_flavour|defining_code", "arzneimittelNameNullFlavourDefiningCode", NullFlavour.class, this);
 
@@ -27,7 +28,7 @@ public class AntikoagulanzienObservationContainment extends Containment {
 
   public ListSelectAqlField<Cluster> STRUKTURIERTE_DOSIS_UND_ZEITANGABEN = new ListAqlFieldImp<Cluster>(AntikoagulanzienObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0022]", "strukturierteDosisUndZeitangaben", Cluster.class, this);
 
-  public SelectAqlField<GrundDefiningCode> GRUND_DEFINING_CODE = new AqlFieldImp<GrundDefiningCode>(AntikoagulanzienObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0023]/value|defining_code", "grundDefiningCode", GrundDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> GRUND = new AqlFieldImp<DvCodedText>(AntikoagulanzienObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0023]/value", "grund", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> GRUND_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(AntikoagulanzienObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0023]/null_flavour|defining_code", "grundNullFlavourDefiningCode", NullFlavour.class, this);
 

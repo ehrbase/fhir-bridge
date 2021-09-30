@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
@@ -17,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.medication_statement.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-14T11:29:46.215717+02:00",
+    date = "2021-09-30T13:35:36.374353+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class AceHemmerObservation implements EntryEntity {
@@ -26,8 +27,8 @@ public class AceHemmerObservation implements EntryEntity {
    * Description: Name des Medikaments, des Impfstoffs oder eines anderen therapeutischen / verschreibungsfähigen Mittels.
    * Comment: Es wird dringend empfohlen, das „Arzneimittel“ mit einer Terminologie zu codieren, die nach Möglichkeit Entscheidungsunterstützung auslösen kann. Das Ausmaß der Codierung kann vom einfachen generischen oder Handelsnamen des Medikamentes bis hin zu strukturierten Angaben über die tatsächlich zu verwendende Medikamentenpackung variieren. Die Freitexteingabe sollte nur verwendet werden, wenn keine geeignete Terminologie verfügbar ist.
    */
-  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value|defining_code")
-  private ArzneimittelNameDefiningCode2 arzneimittelNameDefiningCode;
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value")
+  private DvCodedText arzneimittelName;
 
   /**
    * Path: Medikation/ACE-Hemmer/History/Beliebiges Ereignis/Tree/Arzneimittel-Name/null_flavour
@@ -69,8 +70,8 @@ public class AceHemmerObservation implements EntryEntity {
    * Description: Der klinische Grund für die Anwendung des Medikaments.
    * Comment: Zum Beispiel: "Angina". Die Codierung der klinischen Indikation mit einer Terminologie wird nach Möglichkeit bevorzugt. Dieses Datenelement kann mehrfach vorkommen.
    */
-  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0023 and name/value='Grund']/value|defining_code")
-  private GrundDefiningCode grundDefiningCode;
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0023 and name/value='Grund']/value")
+  private DvCodedText grund;
 
   /**
    * Path: Medikation/ACE-Hemmer/History/Beliebiges Ereignis/Tree/Grund/null_flavour
@@ -115,13 +116,12 @@ public class AceHemmerObservation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setArzneimittelNameDefiningCode(
-      ArzneimittelNameDefiningCode2 arzneimittelNameDefiningCode) {
-     this.arzneimittelNameDefiningCode = arzneimittelNameDefiningCode;
+  public void setArzneimittelName(DvCodedText arzneimittelName) {
+     this.arzneimittelName = arzneimittelName;
   }
 
-  public ArzneimittelNameDefiningCode2 getArzneimittelNameDefiningCode() {
-     return this.arzneimittelNameDefiningCode ;
+  public DvCodedText getArzneimittelName() {
+     return this.arzneimittelName ;
   }
 
   public void setArzneimittelNameNullFlavourDefiningCode(
@@ -165,12 +165,12 @@ public class AceHemmerObservation implements EntryEntity {
      return this.strukturierteDosisUndZeitangaben ;
   }
 
-  public void setGrundDefiningCode(GrundDefiningCode grundDefiningCode) {
-     this.grundDefiningCode = grundDefiningCode;
+  public void setGrund(DvCodedText grund) {
+     this.grund = grund;
   }
 
-  public GrundDefiningCode getGrundDefiningCode() {
-     return this.grundDefiningCode ;
+  public DvCodedText getGrund() {
+     return this.grund ;
   }
 
   public void setGrundNullFlavourDefiningCode(NullFlavour grundNullFlavourDefiningCode) {

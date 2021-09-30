@@ -1,39 +1,23 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedikationObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.AntikoagulanzienObservation;
-import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ArzneimittelNameDefiningCode4;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.MedicationStatement;
-import java.util.Map;
 
 public class AntikoagulanzienObservationConverter extends GeccoMedikationObservationConverter<AntikoagulanzienObservation> {
 
     @Override
     protected AntikoagulanzienObservation convertInternal(MedicationStatement resource) {
         AntikoagulanzienObservation antikoagulanzienObservation = new AntikoagulanzienObservation();
-        antikoagulanzienObservation.setArzneimittelNameDefiningCode(getArzneimittelName(resource));
-        getGrundDefiningCode(resource).ifPresent(antikoagulanzienObservation::setGrundDefiningCode);
-        return antikoagulanzienObservation;
-    }
-
-    private ArzneimittelNameDefiningCode4 getArzneimittelName(MedicationStatement resource) {
-        for (Coding coding:resource.getMedicationCodeableConcept().getCoding()) {
-            if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.DIMDI_ATC.getUrl())) {
-                return mapArzneimittelName(coding);
+        for (Coding coding: resource.getMedicationCodeableConcept().getCoding()){
+            if(coding.getSystem().equals("http://fhir.de/CodeSystem/bfarm/atc")){
+                DvCodedTextParser.parseFHIRCoding(coding).ifPresent(antikoagulanzienObservation::setArzneimittelName);
             }
         }
-        throw new ConversionException("The MedicationStatement is missing the medication");
-    }
-
-    private ArzneimittelNameDefiningCode4 mapArzneimittelName(Coding coding) {
-        Map<String, ArzneimittelNameDefiningCode4> arzneimittelNameDefiningCodeMap = ArzneimittelNameDefiningCode4.getCodesAsMap();
-        if(arzneimittelNameDefiningCodeMap.containsKey(coding.getCode())){
-            return arzneimittelNameDefiningCodeMap.get(coding.getCode());
-        }
-        throw new ConversionException("Invalid medicationCodeableConcept code " + coding.getCode());
+        getGrundDefiningCode(resource).ifPresent(antikoagulanzienObservation::setGrund);
+        return antikoagulanzienObservation;
     }
 
 }

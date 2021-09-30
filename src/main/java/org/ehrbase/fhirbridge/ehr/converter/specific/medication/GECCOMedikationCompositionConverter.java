@@ -2,16 +2,13 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.medication;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.AceHemmerObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.AntikoagulanzienObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.Covid19TherapieObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.observations.ImmunglobulineObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.GECCOMedikationComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.KategorieDefiningCode;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.MedicationStatement;
-
-import java.util.Optional;
 
 public class GECCOMedikationCompositionConverter extends MedicationStatementToCompositionConverter<GECCOMedikationComposition> {
 
@@ -24,39 +21,10 @@ public class GECCOMedikationCompositionConverter extends MedicationStatementToCo
     protected GECCOMedikationComposition convertInternal(MedicationStatement resource) {
         GECCOMedikationComposition geccoMedikationComposition = new GECCOMedikationComposition();
         setObservation(resource, geccoMedikationComposition);
-        getKategorieDefiningCode(resource).ifPresent(geccoMedikationComposition::setKategorieDefiningCode);
-        return geccoMedikationComposition;
-    }
-
-    private Optional<KategorieDefiningCode> getKategorieDefiningCode(MedicationStatement resource) {
         if (resource.hasCategory()) {
-            return mapCategory(resource);
-        } else {
-            return Optional.empty();
+            DvCodedTextParser.parseFHIRCoding(resource.getCategory().getCoding().get(0)).ifPresent(geccoMedikationComposition::setKategorie);
         }
-    }
-
-    private Optional<KategorieDefiningCode> mapCategory(MedicationStatement resource) {
-        for (Coding coding : resource.getCategory().getCoding()) {
-            if (coding.hasCode()) {
-                return mapDefiningCode(coding.getCode());
-            }
-        }
-        return Optional.empty();
-    }
-
-    private Optional<KategorieDefiningCode> mapDefiningCode(String code) {
-        if (KategorieDefiningCode.COMMUNITY.getCode().equals(code)) {
-            return Optional.of(KategorieDefiningCode.COMMUNITY);
-        } else if (KategorieDefiningCode.INPATIENT.getCode().equals(code)) {
-            return Optional.of(KategorieDefiningCode.INPATIENT);
-        } else if (KategorieDefiningCode.OUTPATIENT.getCode().equals(code)) {
-            return Optional.of(KategorieDefiningCode.OUTPATIENT);
-        } else if (KategorieDefiningCode.PATIENT_SPECIFIED.getCode().equals(code)) {
-            return Optional.of(KategorieDefiningCode.PATIENT_SPECIFIED);
-        } else {
-            throw new ConversionException("The category code " + code + " is not supported by the Fhir bridge");
-        }
+        return geccoMedikationComposition;
     }
 
     private void setObservation(MedicationStatement resource, GECCOMedikationComposition geccoMedikationComposition) {
