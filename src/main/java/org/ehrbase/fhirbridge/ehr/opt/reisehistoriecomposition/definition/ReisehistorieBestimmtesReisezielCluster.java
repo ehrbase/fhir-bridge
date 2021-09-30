@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
@@ -14,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T16:49:28.190972+02:00",
+    date = "2021-09-30T13:08:23.815001+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ReisehistorieBestimmtesReisezielCluster implements LocatableEntity {
@@ -22,8 +23,8 @@ public class ReisehistorieBestimmtesReisezielCluster implements LocatableEntity 
    * Path: Reisehistorie/Reisehistorie/Bestimmtes Reiseziel/Land
    * Description: Das besuchte Land.
    */
-  @Path("/items[at0011]/value|defining_code")
-  private LandDefiningCode landDefiningCode;
+  @Path("/items[at0011]/value")
+  private DvCodedText land;
 
   /**
    * Path: Reisehistorie/Reisehistorie/Item tree/Bestimmtes Reiseziel/Land/null_flavour
@@ -36,8 +37,8 @@ public class ReisehistorieBestimmtesReisezielCluster implements LocatableEntity 
    * Description: Die besuchte Region.
    * Comment: Verschiedene Regionen innerhalb desselben Landes können benannt werden, wenn sie möglicherweise unterschiedliche Gesundheitsrisiken darstellen.
    */
-  @Path("/items[at0012]/value|defining_code")
-  private BundeslandRegionDefiningCode bundeslandRegionDefiningCode;
+  @Path("/items[at0012]/value")
+  private DvCodedText bundeslandRegion;
 
   /**
    * Path: Reisehistorie/Reisehistorie/Item tree/Bestimmtes Reiseziel/Bundesland / Region/null_flavour
@@ -98,12 +99,12 @@ public class ReisehistorieBestimmtesReisezielCluster implements LocatableEntity 
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setLandDefiningCode(LandDefiningCode landDefiningCode) {
-     this.landDefiningCode = landDefiningCode;
+  public void setLand(DvCodedText land) {
+     this.land = land;
   }
 
-  public LandDefiningCode getLandDefiningCode() {
-     return this.landDefiningCode ;
+  public DvCodedText getLand() {
+     return this.land ;
   }
 
   public void setLandNullFlavourDefiningCode(NullFlavour landNullFlavourDefiningCode) {
@@ -114,13 +115,12 @@ public class ReisehistorieBestimmtesReisezielCluster implements LocatableEntity 
      return this.landNullFlavourDefiningCode ;
   }
 
-  public void setBundeslandRegionDefiningCode(
-      BundeslandRegionDefiningCode bundeslandRegionDefiningCode) {
-     this.bundeslandRegionDefiningCode = bundeslandRegionDefiningCode;
+  public void setBundeslandRegion(DvCodedText bundeslandRegion) {
+     this.bundeslandRegion = bundeslandRegion;
   }
 
-  public BundeslandRegionDefiningCode getBundeslandRegionDefiningCode() {
-     return this.bundeslandRegionDefiningCode ;
+  public DvCodedText getBundeslandRegion() {
+     return this.bundeslandRegion ;
   }
 
   public void setBundeslandRegionNullFlavourDefiningCode(
