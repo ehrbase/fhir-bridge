@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.time.temporal.TemporalAccessor;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -13,7 +14,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class ProLaboranalytClusterContainment extends Containment {
   public SelectAqlField<ProLaboranalytCluster> PRO_LABORANALYT_CLUSTER = new AqlFieldImp<ProLaboranalytCluster>(ProLaboranalytCluster.class, "", "ProLaboranalytCluster", ProLaboranalytCluster.class, this);
 
-  public SelectAqlField<BezeichnungDesAnalytsDefiningCode> BEZEICHNUNG_DES_ANALYTS_DEFINING_CODE = new AqlFieldImp<BezeichnungDesAnalytsDefiningCode>(ProLaboranalytCluster.class, "/items[at0024]/value|defining_code", "bezeichnungDesAnalytsDefiningCode", BezeichnungDesAnalytsDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> BEZEICHNUNG_DES_ANALYTS = new AqlFieldImp<DvCodedText>(ProLaboranalytCluster.class, "/items[at0024]/value", "bezeichnungDesAnalyts", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> BEZEICHNUNG_DES_ANALYTS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProLaboranalytCluster.class, "/items[at0024]/null_flavour|defining_code", "bezeichnungDesAnalytsNullFlavourDefiningCode", NullFlavour.class, this);
 

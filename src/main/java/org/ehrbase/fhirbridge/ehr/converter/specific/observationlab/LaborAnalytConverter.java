@@ -1,11 +1,12 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.BezeichnungDesAnalytsDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.InterpretationDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
@@ -39,7 +40,7 @@ public class LaborAnalytConverter {
 
     public ProLaboranalytCluster convert(Observation observation) {
         ProLaboranalytCluster proLaboranalytCluster = new ProLaboranalytCluster();
-        proLaboranalytCluster.setBezeichnungDesAnalytsDefiningCode(mapUntersuchterAnalyt(observation));
+        mapUntersuchterAnalyt(observation).ifPresent(proLaboranalytCluster::setBezeichnungDesAnalyts);
         proLaboranalytCluster.setErgebnisStatus(mapErgebnisStatus(observation));
         mapKommentar(proLaboranalytCluster, observation);
         mapMesswert(observation).ifPresentOrElse(proLaboranalytCluster::setMesswert,
@@ -53,30 +54,11 @@ public class LaborAnalytConverter {
         return proLaboranalytCluster;
     }
 
-    private BezeichnungDesAnalytsDefiningCode mapUntersuchterAnalyt(Observation observation) {
+    private Optional<DvCodedText> mapUntersuchterAnalyt(Observation observation) {
         if (observation.getCode().hasCoding()) {
-            return converUntersuchterAnalyt(observation);
+            return DvCodedTextParser.parseFHIRCoding(observation.getCode().getCoding().get(0));
         } else {
             throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
-        }
-    }
-
-    private BezeichnungDesAnalytsDefiningCode converUntersuchterAnalyt(Observation observation) {
-        for (Coding coding : observation.getCode().getCoding()) {
-            if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.hasCode()) {
-                return getCode(coding.getCode());
-            } else {
-                throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
-            }
-        }
-        throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
-    }
-
-    private BezeichnungDesAnalytsDefiningCode getCode(String code) {
-        if (BezeichnungDesAnalytsDefiningCode.getCodesAsMap().containsKey(code)) {
-            return BezeichnungDesAnalytsDefiningCode.getCodesAsMap().get(code);
-        } else {
-            throw new ConversionException("code.coding.code value is not valid");
         }
     }
 
