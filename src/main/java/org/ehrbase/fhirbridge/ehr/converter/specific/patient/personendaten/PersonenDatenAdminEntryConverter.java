@@ -41,7 +41,7 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
     }
 
     private void setAdresse(Patient resource, PersonendatenAdminEntry personData) {
-        AdresseCluster adresseCluster = new AdresseConverter().convert(resource);
+        List<AdresseCluster> list = new AdresseConverter().convert(resource);
         if (!list.isEmpty()) {
             personData.setAdresse(list);
         }

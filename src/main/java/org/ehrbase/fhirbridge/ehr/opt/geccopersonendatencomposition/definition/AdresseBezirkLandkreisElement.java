@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
+import java.lang.String;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
@@ -10,34 +11,35 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-30T16:13:57.826121+02:00",
+    date = "2021-09-30T16:13:57.803079+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class EinzelheitenDerKommunikationModusElement implements LocatableEntity {
+public class AdresseBezirkLandkreisElement implements LocatableEntity {
   /**
-   * Path: GECCO_Personendaten/Personendaten/Einzelheiten der Kommunikation/Modus
-   * Description: Eine Kennzeichnung für einen Telekommunikationskontakt, die dessen Kontext beschreibt, z.B. "Arbeit", "Privat". ENV 13606 - 4:2000 7.11.19.
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Bezirk / Landkreis
+   * Description: Der Name eines internen politischen oder geografischen Bezirks oder Gebiets innerhalb eines Staates, Territoriums oder einer Provinz, der die Adresse enthält.
+   * Comment: Wenn möglich, wird die Codierung mit einer externen Terminologie bevorzugt.
    */
-  @Path("/value|defining_code")
-  private ModusDefiningCode value;
+  @Path("/value|value")
+  private String value;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Baum/Einzelheiten der Kommunikation/Modus/null_flavour
+   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Bezirk / Landkreis/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Einzelheiten der Kommunikation/feeder_audit
+   * Path: GECCO_Personendaten/Personendaten/Adresse/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setValue(ModusDefiningCode value) {
+  public void setValue(String value) {
      this.value = value;
   }
 
-  public ModusDefiningCode getValue() {
+  public String getValue() {
      return this.value ;
   }
 

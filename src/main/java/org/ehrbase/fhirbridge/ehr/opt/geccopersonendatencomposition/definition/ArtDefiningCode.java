@@ -3,12 +3,12 @@ package org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition;
 import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum TypDerAdresseDefiningCode implements EnumValueSet {
-  POSTADRESSEN("Postadressen", "Postalischer Typ der Anschrift.", "local", "at0007"),
+public enum ArtDefiningCode implements EnumValueSet {
+  POSTALISCH("Postalisch", "Adresse, die als Ziel für den Versand von Briefen oder Paketen verwendet wird.", "local", "at0003"),
 
-  PHYSISCH("Physisch", "Physischen Typ der Anschrift.", "local", "at0008"),
+  PHYSISCH("Physisch", "Ein physischer Ort, der besucht werden kann.", "local", "at0002"),
 
-  BEIDES("Beides", "Adresse, die sowohl physisch als auch postalisch ist.", "local", "at0009");
+  BEIDES("Beides", "Adresse eines physischen Standorts, der auch als Ziel für E-Mails verwendet wird.", "local", "at0004");
 
   private String value;
 
@@ -18,7 +18,7 @@ public enum TypDerAdresseDefiningCode implements EnumValueSet {
 
   private String code;
 
-  TypDerAdresseDefiningCode(String value, String description, String terminologyId, String code) {
+  ArtDefiningCode(String value, String description, String terminologyId, String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;
