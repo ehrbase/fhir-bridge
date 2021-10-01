@@ -28,7 +28,6 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
         mapEthnischerHintergrund(resource).ifPresent(personData::setEthnischerHintergrund);
         mapAngabenZumTod(resource, personData);
         setPersonenName(resource, personData);
-        setAdresse(resource, personData);
         setEinzelheitenZurKommunikation(resource, personData);
         return personData;
     }
@@ -37,13 +36,6 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
         List<EinzelheitenDerKommunikationCluster> list = new EinzelheitenDerKommunikationConverter().convert(resource);
         if (!list.isEmpty()) {
             personData.setEinzelheitenDerKommunikation(list);
-        }
-    }
-
-    private void setAdresse(Patient resource, PersonendatenAdminEntry personData) {
-        List<AdresseCluster> list = new AdresseConverter().convert(resource);
-        if (!list.isEmpty()) {
-            personData.setAdresse(list);
         }
     }
 
