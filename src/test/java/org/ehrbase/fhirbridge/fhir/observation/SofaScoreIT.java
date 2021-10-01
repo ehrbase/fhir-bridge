@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.sofascore.SofaScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreKategorieElement;
@@ -61,7 +60,7 @@ class SofaScoreIT extends AbstractMappingTestSetupIT {
     public Exception executeMappingException(String resource) throws IOException {
         Observation observation = (Observation) testFileLoader.loadResource(resource);
         SofaScoreCompositionConverter converter = new SofaScoreCompositionConverter();
-        return assertThrows(ConversionException.class, () -> converter.convert(observation));
+        return assertThrows(Exception.class, () -> converter.convert(observation));
     }
 
     @Override
