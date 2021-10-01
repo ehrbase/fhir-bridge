@@ -17,6 +17,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.AusgeschlossenesSymptomEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.AussageUeberDenAusschlussDefiningCode;
 import org.hl7.fhir.r4.model.Condition;
@@ -30,7 +31,7 @@ public class AusgeschlossenesSymptomEvaluationConverter
     protected AusgeschlossenesSymptomEvaluation convertInternal(Condition condition) {
         AusgeschlossenesSymptomEvaluation result = new AusgeschlossenesSymptomEvaluation();
         result.setAussageUeberDenAusschlussDefiningCode(AussageUeberDenAusschlussDefiningCode.KNOWN_ABSENT_QUALIFIER_VALUE);
-        result.setProblemDiagnoseDefiningCode(convertCode(condition));
+        convertCode(condition).ifPresent(result::setProblemDiagnose);
         return result;
     }
 }

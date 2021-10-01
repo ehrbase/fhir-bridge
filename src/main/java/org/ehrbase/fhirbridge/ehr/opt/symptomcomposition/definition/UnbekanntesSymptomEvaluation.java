@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.absence.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T12:22:43.893672+02:00",
+    date = "2021-09-28T16:11:42.498962+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class UnbekanntesSymptomEvaluation implements EntryEntity {
@@ -25,8 +26,8 @@ public class UnbekanntesSymptomEvaluation implements EntryEntity {
    * Description: Positive Aussage, dass keine Informationen verfügbar sind.
    * Comment: Zum Beispiel: "Es liegen keine Informationen über Nebenwirkungen vor"; "Es liegen keine Informationen über Probleme oder Diagnosen vor"; "Es liegen keine Informationen über vorangegangene Verfahren vor"; oder "Es liegen keine Informationen über verwendete Medikamente vor".
    */
-  @Path("/data[at0001]/items[at0002 and name/value='Unbekanntes Symptom']/value|defining_code")
-  private NameDesSymptomsKrankheitsanzeichensDefiningCode unbekanntesSymptomDefiningCode;
+  @Path("/data[at0001]/items[at0002 and name/value='Unbekanntes Symptom']/value")
+  private DvCodedText unbekanntesSymptom;
 
   /**
    * Path: COVID-19 Symptom/Unbekanntes Symptom/Baum/Unbekanntes Symptom/null_flavour
@@ -68,13 +69,12 @@ public class UnbekanntesSymptomEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setUnbekanntesSymptomDefiningCode(
-      NameDesSymptomsKrankheitsanzeichensDefiningCode unbekanntesSymptomDefiningCode) {
-     this.unbekanntesSymptomDefiningCode = unbekanntesSymptomDefiningCode;
+  public void setUnbekanntesSymptom(DvCodedText unbekanntesSymptom) {
+     this.unbekanntesSymptom = unbekanntesSymptom;
   }
 
-  public NameDesSymptomsKrankheitsanzeichensDefiningCode getUnbekanntesSymptomDefiningCode() {
-     return this.unbekanntesSymptomDefiningCode ;
+  public DvCodedText getUnbekanntesSymptom() {
+     return this.unbekanntesSymptom ;
   }
 
   public void setUnbekanntesSymptomNullFlavourDefiningCode(

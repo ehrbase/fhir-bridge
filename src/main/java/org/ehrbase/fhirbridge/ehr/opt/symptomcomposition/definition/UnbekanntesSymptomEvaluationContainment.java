@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -14,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class UnbekanntesSymptomEvaluationContainment extends Containment {
   public SelectAqlField<UnbekanntesSymptomEvaluation> UNBEKANNTES_SYMPTOM_EVALUATION = new AqlFieldImp<UnbekanntesSymptomEvaluation>(UnbekanntesSymptomEvaluation.class, "", "UnbekanntesSymptomEvaluation", UnbekanntesSymptomEvaluation.class, this);
 
-  public SelectAqlField<NameDesSymptomsKrankheitsanzeichensDefiningCode> UNBEKANNTES_SYMPTOM_DEFINING_CODE = new AqlFieldImp<NameDesSymptomsKrankheitsanzeichensDefiningCode>(UnbekanntesSymptomEvaluation.class, "/data[at0001]/items[at0002]/value|defining_code", "unbekanntesSymptomDefiningCode", NameDesSymptomsKrankheitsanzeichensDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> UNBEKANNTES_SYMPTOM = new AqlFieldImp<DvCodedText>(UnbekanntesSymptomEvaluation.class, "/data[at0001]/items[at0002]/value", "unbekanntesSymptom", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> UNBEKANNTES_SYMPTOM_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(UnbekanntesSymptomEvaluation.class, "/data[at0001]/items[at0002]/null_flavour|defining_code", "unbekanntesSymptomNullFlavourDefiningCode", NullFlavour.class, this);
 

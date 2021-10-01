@@ -412,7 +412,7 @@ generate payload from example json
 
 	[Arguments]			${json_path}    ${value}
 
-	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/create-body-weight.json
+	${payload}          Load JSON From File    ${DATA_SET_PATH_OBSERVATION}/BodyWeight/create-body-weight.json
                         Update Value To Json    ${payload}    $.subject.identifier.value    ${subject_id}
 						Delete Object From Json    ${payload}    $.text
 

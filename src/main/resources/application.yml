@@ -17,9 +17,9 @@ fhir-bridge:
     allowed-origins: '*'
 # Debug Properties
   debug:
-    enabled: false
+    enabled: true #edMS
     mapping-output-directory: ${java.io.tmpdir}/mappings
-# EHRbase Properties
+    # EHRbase Properties
   ehrbase:
     base-url: http://localhost:8080/ehrbase/
     security:

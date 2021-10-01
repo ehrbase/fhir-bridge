@@ -46,4 +46,3 @@ public class KlinischeFrailtySkalaObservationConverter extends ObservationToObse
         }
     }
 }
-
