@@ -15,6 +15,7 @@
  */
 
 package org.ehrbase.fhirbridge.ehr.converter.specific.sofascore;
+
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.SOFAComposition;
 import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.SofaScoreKategorieElement;
