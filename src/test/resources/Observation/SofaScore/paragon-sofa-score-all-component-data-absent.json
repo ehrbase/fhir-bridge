@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/e334e8b5-7138-4c0b-b804-cedabcd06f07/_history/1",
+      "id" : "Observation/4ef22d4d-1be1-4d91-b247-fb1f5a62b635/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -293,9 +293,17 @@
               "_type" : "DV_TEXT",
               "value" : "Gesamtergebnis"
             },
-            "value" : {
-              "_type" : "DV_COUNT",
-              "magnitude" : 0
+            "null_flavour" : {
+              "_type" : "DV_CODED_TEXT",
+              "value" : "unknown",
+              "defining_code" : {
+                "_type" : "CODE_PHRASE",
+                "terminology_id" : {
+                  "_type" : "TERMINOLOGY_ID",
+                  "value" : "openehr"
+                },
+                "code_string" : "253"
+              }
             },
             "archetype_node_id" : "at0041"
           } ],

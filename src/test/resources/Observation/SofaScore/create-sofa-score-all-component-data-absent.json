@@ -166,5 +166,13 @@
       }
     }
   ],
-  "valueInteger": 0
+  "dataAbsentReason": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+        "code": "unknown",
+        "display": "Unknown"
+      }
+    ]
+  }
 }
