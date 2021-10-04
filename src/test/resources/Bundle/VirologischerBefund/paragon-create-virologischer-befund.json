@@ -196,7 +196,7 @@
                       "_type": "CODE_PHRASE",
                       "terminology_id": {
                         "_type": "TERMINOLOGY_ID",
-                        "value": "http://snomed.info/sct"
+                        "value": "SNOMED CT"
                       },
                       "code_string": "122442008"
                     }
@@ -256,7 +256,7 @@
                               "_type": "CODE_PHRASE",
                               "terminology_id": {
                                 "_type": "TERMINOLOGY_ID",
-                                "value": "SNOMED CT"
+                                "value": "http://snomed.info/sct"
                               },
                               "code_string": "955009"
                             }
