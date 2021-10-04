@@ -196,7 +196,7 @@
                       "_type": "CODE_PHRASE",
                       "terminology_id": {
                         "_type": "TERMINOLOGY_ID",
-                        "value": "SNOMED CT"
+                        "value": "http://snomed.info/sct"
                       },
                       "code_string": "122442008"
                     }
