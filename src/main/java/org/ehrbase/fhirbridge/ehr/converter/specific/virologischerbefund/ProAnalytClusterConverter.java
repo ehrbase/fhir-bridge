@@ -25,8 +25,10 @@ public class ProAnalytClusterConverter {
         ProAnalytCluster proAnalytCluster = new ProAnalytCluster();
 
         for (Coding loop : observation.getCode().getCoding()){
-            Optional<DvCodedText> Virusnachweistest = Optional.of(new DvCodedText(loop.getDisplay(), new CodePhrase(new TerminologyId("LOINC", ""), loop.getCode())));
-            Virusnachweistest.ifPresent(proAnalytCluster::setVirusnachweistest);
+            if (loop.hasDisplay() && loop.hasCode()){
+                Optional<DvCodedText> Virusnachweistest = Optional.of(new DvCodedText(loop.getDisplay(), new CodePhrase(new TerminologyId("LOINC", ""), loop.getCode())));
+                Virusnachweistest.ifPresent(proAnalytCluster::setVirusnachweistest);
+            }
         }
 
         mapValue(observation,proAnalytCluster);

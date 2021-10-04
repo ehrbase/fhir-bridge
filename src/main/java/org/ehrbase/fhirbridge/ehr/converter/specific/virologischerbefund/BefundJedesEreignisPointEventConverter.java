@@ -98,8 +98,10 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
 
     private AnatomischeLokalisationCluster mapBodySiteCoding (Specimen specimen, AnatomischeLokalisationCluster anatomischeLokalisationCluster){
         for (Coding loop : specimen.getCollection().getBodySite().getCoding()){
-            Optional<DvCodedText> NameDerKoerperstelle = Optional.of(new DvCodedText(loop.getDisplay(), new CodePhrase(new TerminologyId("SNOMED CT", ""), loop.getCode())));
-            NameDerKoerperstelle.ifPresent(anatomischeLokalisationCluster::setNameDerKoerperstelle);
+            if (loop.hasDisplay() && loop.hasCode()){
+                Optional<DvCodedText> NameDerKoerperstelle = Optional.of(new DvCodedText(loop.getDisplay(), new CodePhrase(new TerminologyId("http://snomed.info/sct", ""), loop.getCode())));
+                NameDerKoerperstelle.ifPresent(anatomischeLokalisationCluster::setNameDerKoerperstelle);
+            }
         }
         return anatomischeLokalisationCluster;
     }
