@@ -18,7 +18,7 @@
     "originating_system_item_ids": [
       {
         "_type": "DV_IDENTIFIER",
-        "id": "Observation/bde27842-77eb-4ba7-bbd3-2318ae7f90e8/_history/1",
+        "id": "Observation/296f83c0-f696-4f99-8dda-8b98ffaba4e6/_history/1",
         "type": "fhir_logical_id"
       }
     ],
@@ -296,7 +296,7 @@
                               "_type": "CODE_PHRASE",
                               "terminology_id": {
                                 "_type": "TERMINOLOGY_ID",
-                                "value": "SNOMED Clinical Terms"
+                                "value": "http://loinc.org"
                               },
                               "code_string": "419984006"
                             }

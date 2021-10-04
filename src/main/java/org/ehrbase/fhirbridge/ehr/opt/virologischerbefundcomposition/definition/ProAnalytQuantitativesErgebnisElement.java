@@ -12,7 +12,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-14T14:30:10.557918400+02:00",
+    date = "2021-10-04T14:02:17.146337700+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProAnalytQuantitativesErgebnisElement implements LocatableEntity {

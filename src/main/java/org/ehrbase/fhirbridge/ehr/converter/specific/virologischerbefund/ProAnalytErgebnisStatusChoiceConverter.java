@@ -24,7 +24,7 @@ public class ProAnalytErgebnisStatusChoiceConverter {
 
         switch(observation.getStatus()){
             case REGISTERED:
-                proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.REGISTRIERT);
+                proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.ERFASST);
                 break;
             case PRELIMINARY:
                 proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.VORLAEUFIG);
@@ -33,10 +33,10 @@ public class ProAnalytErgebnisStatusChoiceConverter {
                 proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.ENDBEFUND);
                 break;
             case AMENDED:
-                proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.ERGAENZT);
+                proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.ENDBEFUND_ERGAENZT);
                 break;
             case CORRECTED:
-                proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.KORRIGIERT);
+                proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.ENDBEFUND_KORRIGIERT);
                 break;
             case CANCELLED:
                 proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.STORNIERT);
