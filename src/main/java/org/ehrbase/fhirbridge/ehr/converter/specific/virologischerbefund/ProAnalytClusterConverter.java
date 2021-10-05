@@ -48,7 +48,7 @@ public class ProAnalytClusterConverter {
             List<ProAnalytQuantitativesErgebnisElement>  proAnalytQuantitativesErgebnisElementList = new ArrayList<>();
             proAnalytQuantitativesErgebnisElementList.add(new ProAnalytQuantitativesErgebnisElementConverter().convert(observation));
             proAnalytCluster.setQuantitativesErgebnis(proAnalytQuantitativesErgebnisElementList);
-            proAnalytCluster.setNachweis(new DvCodedText("Detected (qualifier value)", new CodePhrase(new TerminologyId("SNOMED Clinical Terms", ""), "260373001")));
+            proAnalytCluster.setNachweis(new DvCodedText("Detected (qualifier value)", new CodePhrase(new TerminologyId("http://snomed.info/sct", ""), "260373001")));
         } else{
             throw new ConversionException("Observation needs either ValueCodeableConcept or ValueQuantity.");
         }

@@ -18,7 +18,7 @@
     "originating_system_item_ids": [
       {
         "_type": "DV_IDENTIFIER",
-        "id": "Observation/1842e1ec-cb99-4876-91de-1a6143e5de2d/_history/1",
+        "id": "Observation/1b83349c-da6f-41fc-98e3-845b323b5a23/_history/1",
         "type": "fhir_logical_id"
       }
     ],
@@ -296,7 +296,7 @@
                               "_type": "CODE_PHRASE",
                               "terminology_id": {
                                 "_type": "TERMINOLOGY_ID",
-                                "value": "SNOMED Clinical Terms"
+                                "value": "http://snomed.info/sct"
                               },
                               "code_string": "260373001"
                             }
@@ -312,7 +312,7 @@
                           "value": {
                             "_type": "DV_QUANTITY",
                             "units": "umol/L",
-                            "magnitude": 72
+                            "magnitude": 72.0
                           },
                           "archetype_node_id": "at0001"
                         },

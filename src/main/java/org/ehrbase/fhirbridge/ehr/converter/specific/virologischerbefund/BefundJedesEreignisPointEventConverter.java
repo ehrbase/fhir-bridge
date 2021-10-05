@@ -6,6 +6,7 @@ import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestPanelCluster;
@@ -98,9 +99,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
 
     private AnatomischeLokalisationCluster mapBodySiteCoding (Specimen specimen, AnatomischeLokalisationCluster anatomischeLokalisationCluster){
         for (Coding loop : specimen.getCollection().getBodySite().getCoding()){
-            if (loop.hasDisplay() && loop.hasCode()){
-                Optional.of(new DvCodedText(loop.getDisplay(), new CodePhrase(new TerminologyId("http://snomed.info/sct", ""), loop.getCode()))).ifPresent(anatomischeLokalisationCluster::setNameDerKoerperstelle);
-            }
+            DvCodedTextParser.parseFHIRCoding(loop).ifPresent(anatomischeLokalisationCluster::setNameDerKoerperstelle);
         }
         return anatomischeLokalisationCluster;
     }

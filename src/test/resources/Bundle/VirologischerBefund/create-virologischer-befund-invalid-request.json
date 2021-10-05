@@ -72,7 +72,7 @@
         "valueCodeableConcept": {
           "coding": [
             {
-              "system": "http://loinc.org",
+              "system": "http://snomed.info/sct",
               "code": "419984006",
               "display": "Inconclusive (qualifier value)"
             }
@@ -177,6 +177,7 @@
           "bodySite":{
             "coding": [
               {
+                "system": "http://snomed.info/sct",
                 "code": "955009",
                 "display": "Bronchial structure (body structure)"
               }

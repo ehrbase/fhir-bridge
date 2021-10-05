@@ -174,6 +174,7 @@
           "bodySite":{
             "coding": [
               {
+                "system": "http://snomed.info/sct",
                 "code": "955009",
                 "display": "Bronchial structure (body structure)"
               }

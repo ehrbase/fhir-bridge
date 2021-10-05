@@ -72,7 +72,7 @@
         "valueCodeableConcept": {
           "coding": [
             {
-              "system": "http://loinc.org",
+              "system": "http://snomed.info/sct",
               "code": "419984006",
               "display": "Inconclusive (qualifier value)"
             }
