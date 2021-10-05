@@ -25,8 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">6d363db61d2440034fe4c34c462a143a</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="MD5-CAM-1.0.1">7a7e3ddc02261d8ecd9eefe4b39f9d03</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
+    <other_details id="sem_ver">2.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -204,7 +206,7 @@
                   <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>false</upper_unbounded>
-                  <lower>0</lower>
+                  <lower>1</lower>
                   <upper>1</upper>
                 </occurrences>
                 <node_id>at0004</node_id>
@@ -268,7 +270,7 @@
                   <lower_included>true</lower_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>true</upper_unbounded>
-                  <lower>0</lower>
+                  <lower>1</lower>
                 </occurrences>
                 <node_id>at0005</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -480,7 +482,7 @@
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -491,14 +493,7 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>373066001</code_list>
-                        <code_list>373067005</code_list>
-                        <code_list>261665006</code_list>
-                        <code_list>74964007</code_list>
-                        <code_list>385432009</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/yes-no-unknown-other-na</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -1063,7 +1058,7 @@ Wenn die klinische Prüfung auf der Webseite Current Controlled Trials registrie
                             <lower>1</lower>
                             <upper>1</upper>
                           </existence>
-                          <children xsi:type="C_CODE_PHRASE">
+                          <children xsi:type="C_CODE_REFERENCE">
                             <rm_type_name>CODE_PHRASE</rm_type_name>
                             <occurrences>
                               <lower_included>true</lower_included>
@@ -1074,14 +1069,7 @@ Wenn die klinische Prüfung auf der Webseite Current Controlled Trials registrie
                               <upper>1</upper>
                             </occurrences>
                             <node_id/>
-                            <terminology_id>
-                              <value>SNOMED Clinical Terms</value>
-                            </terminology_id>
-                            <code_list>373066001</code_list>
-                            <code_list>373067005</code_list>
-                            <code_list>261665006</code_list>
-                            <code_list>74964007</code_list>
-                            <code_list>385432009</code_list>
+                            <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/yes-no-unknown-other-na</referenceSetUri>
                           </children>
                         </attributes>
                       </children>
@@ -1230,21 +1218,6 @@ Wenn die klinische Prüfung auf der Webseite Current Controlled Trials registrie
                   <items id="description">Rechtliche Rahmen oder Regeln für die Teilnahme.</items>
                   <items id="text">Rechtsgrundlage</items>
                 </term_definitions>
-                <term_definitions code="373066001">
-                  <items id="text">Yes (qualifier value)</items>
-                </term_definitions>
-                <term_definitions code="373067005">
-                  <items id="text">No (qualifier value)</items>
-                </term_definitions>
-                <term_definitions code="261665006">
-                  <items id="text">Unknown (qualifier value)</items>
-                </term_definitions>
-                <term_definitions code="74964007">
-                  <items id="text">Other (qualifier value)</items>
-                </term_definitions>
-                <term_definitions code="385432009">
-                  <items id="text">Not applicable (qualifier value)</items>
-                </term_definitions>
               </children>
               <cardinality>
                 <is_ordered>false</is_ordered>
@@ -1277,21 +1250,6 @@ Wenn die klinische Prüfung auf der Webseite Current Controlled Trials registrie
         <term_definitions code="at0003">
           <items id="description">*</items>
           <items id="text">Studiendetails</items>
-        </term_definitions>
-        <term_definitions code="373066001">
-          <items id="text">Yes (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373067005">
-          <items id="text">No (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="261665006">
-          <items id="text">Unknown (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="74964007">
-          <items id="text">Other (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="385432009">
-          <items id="text">Not applicable (qualifier value)</items>
         </term_definitions>
       </children>
       <cardinality>

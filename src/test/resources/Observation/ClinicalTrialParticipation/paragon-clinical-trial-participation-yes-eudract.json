@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1/_history/1",
+      "id" : "Observation/5875eb66-2039-4b07-bcb3-69560d4607c4/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -109,6 +109,15 @@
       "_type" : "DV_TEXT",
       "value" : "GECCO_Studienteilnahme"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-EVALUATION.gecco_study_participation.v0"
+      },
+      "template_id" : {
+        "value" : "GECCO_Studienteilnahme"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -147,7 +156,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "373066001"
           }
@@ -159,11 +168,29 @@
           "_type" : "DV_TEXT",
           "value" : "Studienteilnahme"
         },
+        "archetype_details" : {
+          "archetype_id" : {
+            "value" : "openEHR-EHR-CLUSTER.study_participation.v1"
+          },
+          "template_id" : {
+            "value" : "GECCO_Studienteilnahme"
+          },
+          "rm_version" : "1.0.4"
+        },
         "items" : [ {
           "_type" : "CLUSTER",
           "name" : {
             "_type" : "DV_TEXT",
             "value" : "Studie/Prüfung"
+          },
+          "archetype_details" : {
+            "archetype_id" : {
+              "value" : "openEHR-EHR-CLUSTER.study_details.v1"
+            },
+            "template_id" : {
+              "value" : "GECCO_Studienteilnahme"
+            },
+            "rm_version" : "1.0.4"
           },
           "items" : [ {
             "_type" : "ELEMENT",
@@ -209,7 +236,7 @@
               },
               "value" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "EudraCT Number",
+                "value" : "EudraCT Number‎",
                 "defining_code" : {
                   "_type" : "CODE_PHRASE",
                   "terminology_id" : {

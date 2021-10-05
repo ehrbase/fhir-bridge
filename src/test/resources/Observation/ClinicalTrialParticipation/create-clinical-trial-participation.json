@@ -54,7 +54,7 @@
   "valueCodeableConcept": {
     "coding": [
       {
-        "system": "http://loinc.org",
+        "system": "http://snomed.info/sct",
         "code": "373066001",
         "display": "Yes (qualifier value)"
       }

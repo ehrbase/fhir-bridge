@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Condition/2bb4735d-e114-48ff-86f6-1f68f484f7fd/_history/1",
+      "id" : "Condition/ef38751b-b515-4908-ae8d-6921a9e82e7b/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -93,7 +93,7 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "75325-1",
+          "value" : "Symptom",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
@@ -114,6 +114,15 @@
       "_type" : "DV_TEXT",
       "value" : "Ausgeschlossenes Symptom"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-EVALUATION.exclusion_specific.v1"
+      },
+      "template_id" : {
+        "value" : "Symptom"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -133,9 +142,6 @@
     "subject" : {
       "_type" : "PARTY_SELF"
     },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
-    },
     "data" : {
       "_type" : "ITEM_TREE",
       "name" : {
@@ -150,12 +156,12 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "410594000",
+          "value" : "Known absent (qualifier value)",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "410594000"
           }
@@ -169,12 +175,12 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "40917007",
+          "value" : "Clouded consciousness",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "40917007"
           }

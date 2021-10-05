@@ -16,12 +16,15 @@
 
 package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.SchweregradDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomAnatomischeLokalisationElement;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomObservation;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
 
 import java.util.ArrayList;
@@ -36,10 +39,10 @@ public class VorliegendesSymptomObservationConverter extends ConditionToObservat
     @Override
     protected VorliegendesSymptomObservation convertInternal(Condition condition) {
         VorliegendesSymptomObservation result = new VorliegendesSymptomObservation();
-        result.setNameDesSymptomsKrankheitsanzeichensDefiningCode(convertCode(condition));
+        convertCode(condition).ifPresent(result::setNameDesSymptomsKrankheitsanzeichens);
         result.setAnatomischeLokalisation(convertBodySites(condition));
         result.setBeginnDerEpisodeValue(TimeConverter.convertConditionOnset(condition));
-        convertSeverity(condition).ifPresent(result::setSchweregradDefiningCode);
+        convertSeverity(condition).ifPresent(result::setSchweregrad);
         TimeConverter.convertConditionAbatementTime(condition).ifPresent(result::setDatumUhrzeitDesRueckgangsValue);
         return result;
     }
@@ -60,16 +63,15 @@ public class VorliegendesSymptomObservationConverter extends ConditionToObservat
                 .collect(Collectors.toList());
     }
 
-    private Optional<SchweregradDefiningCode> convertSeverity(Condition condition) {
+    private Optional<DvCodedText> convertSeverity(Condition condition) {
         if (!condition.hasSeverity()) {
             return Optional.empty();
         }
-
-        return condition.getSeverity()
-                .getCoding()
-                .stream()
-                .filter(coding -> Objects.equals(coding.getSystem(), CodeSystem.SNOMED.getUrl()))
-                .findFirst()
-                .map(coding -> SchweregradDefiningCode.getCodesAsMap().get(coding.getCode()));
+        for(Coding coding: condition.getSeverity().getCoding()){
+            if(coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
+                return DvCodedTextParser.parseFHIRCoding(coding);
+            }
+        }
+        return Optional.empty();
     }
 }
