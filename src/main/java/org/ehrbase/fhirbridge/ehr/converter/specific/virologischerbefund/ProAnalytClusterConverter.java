@@ -26,8 +26,7 @@ public class ProAnalytClusterConverter {
 
         for (Coding loop : observation.getCode().getCoding()){
             if (loop.hasDisplay() && loop.hasCode()){
-                Optional<DvCodedText> Virusnachweistest = Optional.of(new DvCodedText(loop.getDisplay(), new CodePhrase(new TerminologyId("LOINC", ""), loop.getCode())));
-                Virusnachweistest.ifPresent(proAnalytCluster::setVirusnachweistest);
+                Optional.of(new DvCodedText(loop.getDisplay(), new CodePhrase(new TerminologyId("LOINC", ""), loop.getCode()))).ifPresent(proAnalytCluster::setVirusnachweistest);
             }
         }
 
@@ -49,8 +48,7 @@ public class ProAnalytClusterConverter {
             List<ProAnalytQuantitativesErgebnisElement>  proAnalytQuantitativesErgebnisElementList = new ArrayList<>();
             proAnalytQuantitativesErgebnisElementList.add(new ProAnalytQuantitativesErgebnisElementConverter().convert(observation));
             proAnalytCluster.setQuantitativesErgebnis(proAnalytQuantitativesErgebnisElementList);
-            DvCodedText Detected = new DvCodedText("Detected (qualifier value)", new CodePhrase(new TerminologyId("SNOMED Clinical Terms", ""), "260373001"));
-            proAnalytCluster.setNachweis(Detected);
+            proAnalytCluster.setNachweis(new DvCodedText("Detected (qualifier value)", new CodePhrase(new TerminologyId("SNOMED Clinical Terms", ""), "260373001")));
         } else{
             throw new ConversionException("Observation needs either ValueCodeableConcept or ValueQuantity.");
         }
