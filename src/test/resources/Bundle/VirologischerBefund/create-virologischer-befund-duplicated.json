@@ -139,7 +139,6 @@
                 "code": "laboratory"
               },
               {
-                "system": "http://loinc.org",
                 "code": "122442008",
                 "display": "Detection of virus (procedure)"
               }
