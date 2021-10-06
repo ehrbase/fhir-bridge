@@ -55,6 +55,7 @@
         "code": {
           "coding": [
             {
+              "system" : "http://loinc.org",
               "code": "94558-4",
               "display": "SARS-CoV-2 Ag"
             }
@@ -149,6 +150,7 @@
         "code": {
           "coding": [
             {
+              "system" : "http://loinc.org",
               "code": "94558-4",
               "display": "SARS-CoV-2 Ag"
             }

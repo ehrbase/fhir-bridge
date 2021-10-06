@@ -18,7 +18,7 @@
     "originating_system_item_ids": [
       {
         "_type": "DV_IDENTIFIER",
-        "id": "Observation/5146c793-81ca-4ea7-bfe8-e9f8de4a9b14/_history/1",
+        "id": "Observation/aaac3bf1-668c-434d-9522-affd061ea4b5/_history/1",
         "type": "fhir_logical_id"
       }
     ],
@@ -336,7 +336,7 @@
                               "_type": "CODE_PHRASE",
                               "terminology_id": {
                                 "_type": "TERMINOLOGY_ID",
-                                "value": "LOINC"
+                                "value": "http://loinc.org"
                               },
                               "code_string": "94558-4"
                             }
