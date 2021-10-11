@@ -109,6 +109,10 @@ class MedicationStatementIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(AceHemmerObservation.class)
                 .registerValueObject(ImmunglobulineObservation.class)
                 .registerValueObject(AntikoagulanzienObservation.class)
+                .registerValueObject(Covid19TherapieBeliebigesEreignisPointEvent.class)
+                .registerValueObject(AntikoagulanzienBeliebigesEreignisPointEvent.class)
+                .registerValueObject(AceHemmerBeliebigesEreignisPointEvent.class)
+                .registerValueObject(ImmunglobulineBeliebigesEreignisPointEvent.class)
                 .registerValueObject(StatusCluster.class)
                 .build();
     }

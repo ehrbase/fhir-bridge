@@ -15,7 +15,7 @@
           "display": "Product containing immunoglobulin (product)"
         },
         {
-          "system": "http://fhir.de/CodeSystem/dimdi/atc",
+          "system": "http://fhir.de/CodeSystem/bfarm/atc",
           "code": "J0sad6B",
           "display": "IMMUNGLOBULINE"
         }

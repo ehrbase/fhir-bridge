@@ -15,7 +15,7 @@
         "display": "Product containing angiotensin-converting enzyme inhibitor (product)"
       },
       {
-        "system": "http://fhir.de/CodeSystem/dimdi/atc",
+        "system": "http://fhir.de/CodeSystem/bfarm/atc",
         "code": "C09A",
         "display": "ACE-HEMMER, REIN"
       }

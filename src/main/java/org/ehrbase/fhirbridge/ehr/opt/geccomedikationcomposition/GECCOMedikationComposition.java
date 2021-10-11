@@ -31,7 +31,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.Immu
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-11T14:33:49.299051+02:00",
+    date = "2021-10-11T15:28:12.897338+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("GECCO_Medikation")
