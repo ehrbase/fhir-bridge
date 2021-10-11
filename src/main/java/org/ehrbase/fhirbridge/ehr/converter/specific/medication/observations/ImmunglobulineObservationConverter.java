@@ -18,7 +18,8 @@ public class ImmunglobulineObservationConverter extends GeccoMedikationObservati
             if(coding.getSystem().equals("http://fhir.de/CodeSystem/dimdi/atc")){
                 DvCodedTextParser.parseFHIRCoding(coding).ifPresent(immunglobulineObservation::setArzneimittelName);
             }
-        }        getGrundDefiningCode(resource).ifPresent(immunglobulineObservation::setGrund);
+        }
+        getGrundDefiningCode(resource).ifPresent(immunglobulineObservation::setGrund);
         return immunglobulineObservation;
     }
 
