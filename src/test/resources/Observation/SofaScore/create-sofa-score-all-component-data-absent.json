@@ -92,15 +92,14 @@
         ],
         "text": "SOFA Cardiovascular system scoring category"
       },
-      "valueCodeableConcept": {
+      "dataAbsentReason": {
         "coding": [
           {
-            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
-            "code": "cvs0",
-            "display": "Cardiovascular system SOFA score 0"
+            "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+            "code": "unknown",
+            "display": "Unknown"
           }
-        ],
-        "text": "Mean arterial pressure (MAP) ≥ 70 mmHg"
+        ]
       }
     },
     {
@@ -114,15 +113,14 @@
         ],
         "text": "SOFA Liver scoring category"
       },
-      "valueCodeableConcept": {
+      "dataAbsentReason": {
         "coding": [
           {
-            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
-            "code": "liv1",
-            "display": "Liver SOFA score 1"
+            "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+            "code": "unknown",
+            "display": "Unknown"
           }
-        ],
-        "text": "Bilirubin (mg/dl) [umol/L] 1.2-1.9 [20-32]"
+        ]
       }
     },
     {
@@ -136,15 +134,14 @@
         ],
         "text": "SOFA Coagulation scoring category"
       },
-      "valueCodeableConcept": {
+      "dataAbsentReason": {
         "coding": [
           {
-            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
-            "code": "coa2",
-            "display": "Coagulation SOFA score 2"
+            "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+            "code": "unknown",
+            "display": "Unknown"
           }
-        ],
-        "text": "Platelets×10^3/ul < 100"
+        ]
       }
     },
     {
@@ -169,5 +166,13 @@
       }
     }
   ],
-  "valueInteger": 15
+  "dataAbsentReason": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+        "code": "unknown",
+        "display": "Unknown"
+      }
+    ]
+  }
 }

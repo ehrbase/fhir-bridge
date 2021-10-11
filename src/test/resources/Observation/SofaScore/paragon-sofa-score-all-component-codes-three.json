@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/61c0d425-e1ea-4550-b739-44de0588145e/_history/1",
+      "id" : "Observation/6d1f31f8-adb4-49b5-87d8-d38970c6df09/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -120,6 +120,15 @@
       "_type" : "DV_TEXT",
       "value" : "SOFA score"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.sofa_score.v0"
+      },
+      "template_id" : {
+        "value" : "SOFA"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -197,17 +206,17 @@
               "_type" : "DV_ORDINAL",
               "symbol" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "MAD ≥ 70 mmHg",
+                "value" : "DA > 5; NA/A ≤ 0,1",
                 "defining_code" : {
                   "_type" : "CODE_PHRASE",
                   "terminology_id" : {
                     "_type" : "TERMINOLOGY_ID",
                     "value" : "local"
                   },
-                  "code_string" : "at0011"
+                  "code_string" : "at0014"
                 }
               },
-              "value" : 0
+              "value" : 3
             },
             "archetype_node_id" : "at0010"
           }, {
@@ -220,17 +229,17 @@
               "_type" : "DV_ORDINAL",
               "symbol" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "GCS < 6",
+                "value" : "GCS 6 - 9",
                 "defining_code" : {
                   "_type" : "CODE_PHRASE",
                   "terminology_id" : {
                     "_type" : "TERMINOLOGY_ID",
                     "value" : "local"
                   },
-                  "code_string" : "at0021"
+                  "code_string" : "at0020"
                 }
               },
-              "value" : 4
+              "value" : 3
             },
             "archetype_node_id" : "at0016"
           }, {
@@ -243,17 +252,17 @@
               "_type" : "DV_ORDINAL",
               "symbol" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "Kreatinin ≥ 5,0 mg/dL oder UOP < 200 mL/24h",
+                "value" : "Kreatinin 3,5-4,9 mg/dL oder UOP < 500 mL/24h",
                 "defining_code" : {
                   "_type" : "CODE_PHRASE",
                   "terminology_id" : {
                     "_type" : "TERMINOLOGY_ID",
                     "value" : "local"
                   },
-                  "code_string" : "at0027"
+                  "code_string" : "at0026"
                 }
               },
-              "value" : 4
+              "value" : 3
             },
             "archetype_node_id" : "at0022"
           }, {
@@ -266,17 +275,17 @@
               "_type" : "DV_ORDINAL",
               "symbol" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "Bilirubin 1,2-1,9 mg/dL",
+                "value" : "Bilirubin 6,0-11,9 mg/dL",
                 "defining_code" : {
                   "_type" : "CODE_PHRASE",
                   "terminology_id" : {
                     "_type" : "TERMINOLOGY_ID",
                     "value" : "local"
                   },
-                  "code_string" : "at0030"
+                  "code_string" : "at0032"
                 }
               },
-              "value" : 1
+              "value" : 3
             },
             "archetype_node_id" : "at0028"
           }, {
@@ -289,17 +298,17 @@
               "_type" : "DV_ORDINAL",
               "symbol" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "Thrombozyten < 100 (x10³/µL)",
+                "value" : "Thrombozyten < 50 (x10³/µL)",
                 "defining_code" : {
                   "_type" : "CODE_PHRASE",
                   "terminology_id" : {
                     "_type" : "TERMINOLOGY_ID",
                     "value" : "local"
                   },
-                  "code_string" : "at0037"
+                  "code_string" : "at0038"
                 }
               },
-              "value" : 2
+              "value" : 3
             },
             "archetype_node_id" : "at0034"
           }, {
@@ -310,7 +319,7 @@
             },
             "value" : {
               "_type" : "DV_COUNT",
-              "magnitude" : 15
+              "magnitude" : 18
             },
             "archetype_node_id" : "at0041"
           } ],
