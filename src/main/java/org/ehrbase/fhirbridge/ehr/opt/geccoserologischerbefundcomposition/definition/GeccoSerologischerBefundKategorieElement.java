@@ -10,19 +10,19 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-11T18:13:35.048246+02:00",
+    date = "2021-10-11T18:13:35.042837+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class GeccoSerologischerBefundKategorieLoincElement implements LocatableEntity {
+public class GeccoSerologischerBefundKategorieElement implements LocatableEntity {
   /**
-   * Path: GECCO_Serologischer Befund/context/Kategorie (LOINC)
+   * Path: GECCO_Serologischer Befund/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/value|defining_code")
-  private KategorieLoincDefiningCode value;
+  private KategorieDefiningCode value;
 
   /**
-   * Path: GECCO_Serologischer Befund/context/Tree/Kategorie (LOINC)/null_flavour
+   * Path: GECCO_Serologischer Befund/context/Tree/Kategorie/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
@@ -33,11 +33,11 @@ public class GeccoSerologischerBefundKategorieLoincElement implements LocatableE
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setValue(KategorieLoincDefiningCode value) {
+  public void setValue(KategorieDefiningCode value) {
      this.value = value;
   }
 
-  public KategorieLoincDefiningCode getValue() {
+  public KategorieDefiningCode getValue() {
      return this.value ;
   }
 

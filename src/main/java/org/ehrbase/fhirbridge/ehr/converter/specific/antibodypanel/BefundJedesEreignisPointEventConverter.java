@@ -1,7 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
@@ -32,7 +34,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     private LabortestPanelCluster mapLabortestPanel() {
         LabortestPanelCluster labortestPanelCluster = new LabortestPanelCluster();
         ProAnalytCluster proAnalytCluster = new ProAnalytCluster();
-        proAnalytCluster.setVirusnachweistestDefiningCode(convertVirusNachweisTest());
+        DvCodedTextParser.parseFHIRCoding(immunoassay.getObservation().getCode().getCoding().get(0)).ifPresent(proAnalytCluster::setVirusnachweistest);
         if(immunoassay.getObservation().hasValueQuantity()){
             proAnalytCluster.setQuantitativesErgebnisMagnitude(immunoassay.getObservation().getValueQuantity().getValue().doubleValue());
             proAnalytCluster.setQuantitativesErgebnisUnits(immunoassay.getObservation().getValueQuantity().getCode());
@@ -66,12 +68,4 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         }
     }
 
-    private VirusnachweistestDefiningCode convertVirusNachweisTest() {
-        if (immunoassay.getObservation().getCode().getCoding().get(0).getCode().equals(immunoassay.getVirusnachweistestDefiningCode().getCode()) &&
-                immunoassay.getObservation().getCode().getCoding().get(0).getSystem().equals(CodeSystem.LOINC.getUrl())) {
-            return immunoassay.getVirusnachweistestDefiningCode();
-        } else {
-            throw new ConversionException("The Loinc code in code.coding is not supported in this profile");
-        }
-    }
 }

@@ -29,10 +29,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">ce045a03bb73c0ca3855cd63ac2ce2e8</other_details>
+    <other_details id="MD5-CAM-1.0.1">eaf678ead324ea30ce4f3cf06ecfa522</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">4.0.0</other_details>
+    <other_details id="sem_ver">5.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -741,7 +741,7 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                                 </occurrences>
                                 <node_id/>
                                 <terminology_id>
-                                  <value>SNOMED CT</value>
+                                  <value>http://snomed.info/sct</value>
                                 </terminology_id>
                                 <code_list>68793005</code_list>
                               </children>
