@@ -3,14 +3,12 @@ package org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition;
 import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum KontakttypDefiningCode implements EnumValueSet {
-  TELEFON("Telefon", "Angaben zur Telefonnummer.", "local", "at0013"),
+public enum ArtDefiningCode implements EnumValueSet {
+  POSTALISCH("Postalisch", "Adresse, die als Ziel für den Versand von Briefen oder Paketen verwendet wird.", "local", "at0003"),
 
-  PAGER("Pager", "Angaben zur Pager-Nummer.", "local", "at0016"),
+  PHYSISCH("Physisch", "Ein physischer Ort, der besucht werden kann.", "local", "at0002"),
 
-  MOBILTELEFON("Mobiltelefon", "Angaben zur Mobiltelefonnummer.", "local", "at0015"),
-
-  TELEFAX("Telefax", "Angaben zur Faxnummer.", "local", "at0014");
+  BEIDES("Beides", "Adresse eines physischen Standorts, der auch als Ziel für E-Mails verwendet wird.", "local", "at0004");
 
   private String value;
 
@@ -20,7 +18,7 @@ public enum KontakttypDefiningCode implements EnumValueSet {
 
   private String code;
 
-  KontakttypDefiningCode(String value, String description, String terminologyId, String code) {
+  ArtDefiningCode(String value, String description, String terminologyId, String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;

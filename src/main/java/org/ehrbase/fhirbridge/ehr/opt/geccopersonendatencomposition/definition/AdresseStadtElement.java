@@ -11,25 +11,26 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-11T14:49:10.141299+02:00",
+    date = "2021-10-11T14:49:10.166950+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class PersonennameWeitererVornameElement implements LocatableEntity {
+public class AdresseStadtElement implements LocatableEntity {
   /**
-   * Path: GECCO_Personendaten/Personendaten/Personenname/Name strukturiert/Weiterer Vorname
-   * Description: Zweiter Vorname oder zweite Namen.
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Stadt
+   * Description: Der Name des Vorortes, der Stadt, des Dorfes, der Gemeinde oder des Ortes der untersten Ebene der Adresse.
+   * Comment: Die Codierung mit einer externen Terminologie wird nach Möglichkeit bevorzugt. Zum Beispiel: Fitzroy, Calgary, Bergen.
    */
   @Path("/value|value")
   private String value;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Baum/Personenname/Name strukturiert/Weiterer Vorname/null_flavour
+   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Stadt/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Personenname/Name strukturiert/feeder_audit
+   * Path: GECCO_Personendaten/Personendaten/Adresse/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
