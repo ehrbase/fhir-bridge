@@ -29,9 +29,11 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">ce8fe1711575bef21b7ef507e0299634</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="MD5-CAM-1.0.1">ce045a03bb73c0ca3855cd63ac2ce2e8</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">4.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -266,11 +268,9 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                 <rm_type_name>ELEMENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
+                  <upper_unbounded>true</upper_unbounded>
+                  <lower>0</lower>
                 </occurrences>
                 <node_id>at0005</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -425,7 +425,7 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>http://loinc.org</value>
+                          <value>LOINC</value>
                         </terminology_id>
                         <code_list>26436-6</code_list>
                       </children>
@@ -862,7 +862,7 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                                         <lower>1</lower>
                                         <upper>1</upper>
                                       </existence>
-                                      <children xsi:type="C_CODE_PHRASE">
+                                      <children xsi:type="C_CODE_REFERENCE">
                                         <rm_type_name>CODE_PHRASE</rm_type_name>
                                         <occurrences>
                                           <lower_included>true</lower_included>
@@ -873,17 +873,7 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                                           <upper>1</upper>
                                         </occurrences>
                                         <node_id/>
-                                        <terminology_id>
-                                          <value>LOINC</value>
-                                        </terminology_id>
-                                        <code_list>94769-7</code_list>
-                                        <code_list>94762-2</code_list>
-                                        <code_list>94720-0</code_list>
-                                        <code_list>94562-6</code_list>
-                                        <code_list>94505-5</code_list>
-                                        <code_list>94563-4</code_list>
-                                        <code_list>94506-3</code_list>
-                                        <code_list>94564-2</code_list>
+                                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/sars-cov-2-detection-combined</referenceSetUri>
                                       </children>
                                     </attributes>
                                   </children>
@@ -1029,7 +1019,7 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                                         <lower>1</lower>
                                         <upper>1</upper>
                                       </existence>
-                                      <children xsi:type="C_CODE_PHRASE">
+                                      <children xsi:type="C_CODE_REFERENCE">
                                         <rm_type_name>CODE_PHRASE</rm_type_name>
                                         <occurrences>
                                           <lower_included>true</lower_included>
@@ -1040,12 +1030,7 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                                           <upper>1</upper>
                                         </occurrences>
                                         <node_id/>
-                                        <terminology_id>
-                                          <value>SNOMED Clinical Terms</value>
-                                        </terminology_id>
-                                        <code_list>260373001</code_list>
-                                        <code_list>260415000</code_list>
-                                        <code_list>419984006</code_list>
+                                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/detected-not-detected-inconclusive</referenceSetUri>
                                       </children>
                                     </attributes>
                                   </children>
@@ -1109,29 +1094,6 @@ Nicht zur Repräsentation von virologischen Befunden (PCR, Antigen, ...).</misus
                                         </item>
                                       </children>
                                     </attributes>
-                                  </children>
-                                </attributes>
-                                <attributes xsi:type="C_SINGLE_ATTRIBUTE">
-                                  <rm_attribute_name>value</rm_attribute_name>
-                                  <existence>
-                                    <lower_included>true</lower_included>
-                                    <upper_included>true</upper_included>
-                                    <lower_unbounded>false</lower_unbounded>
-                                    <upper_unbounded>false</upper_unbounded>
-                                    <lower>0</lower>
-                                    <upper>1</upper>
-                                  </existence>
-                                  <children xsi:type="C_DV_QUANTITY">
-                                    <rm_type_name>DV_QUANTITY</rm_type_name>
-                                    <occurrences>
-                                      <lower_included>true</lower_included>
-                                      <upper_included>true</upper_included>
-                                      <lower_unbounded>false</lower_unbounded>
-                                      <upper_unbounded>false</upper_unbounded>
-                                      <lower>1</lower>
-                                      <upper>1</upper>
-                                    </occurrences>
-                                    <node_id/>
                                   </children>
                                 </attributes>
                               </children>
@@ -1411,39 +1373,6 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                               <items id="comment">Wenn die Testmethode für ein gesamtes Panel gilt, kann die Testmethode mithilfe des Datenelements "Testmethode" im Ergebnis OBSERVATION.laboratory_test_result erfasst werden.</items>
                               <items id="description">Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.</items>
                               <items id="text">Testmethode</items>
-                            </term_definitions>
-                            <term_definitions code="94769-7">
-                              <items id="text">SARS-CoV-2 (COVID-19) Ab [Units/volume] in Serum or Plasma by Immunoassay</items>
-                            </term_definitions>
-                            <term_definitions code="94762-2">
-                              <items id="text">SARS-CoV-2 (COVID-19) Ab [Presence] in Serum or Plasma by Immunoassay</items>
-                            </term_definitions>
-                            <term_definitions code="94720-0">
-                              <items id="text">SARS-CoV-2 (COVID-19) IgA Ab [Units/volume] in Serum or Plasma by Immunoassay</items>
-                            </term_definitions>
-                            <term_definitions code="94562-6">
-                              <items id="text">SARS-CoV-2 (COVID-19) IgA Ab [Presence] in Serum or Plasma by Immunoassay</items>
-                            </term_definitions>
-                            <term_definitions code="94505-5">
-                              <items id="text">SARS-CoV-2 (COVID-19) IgG Ab [Units/volume] in Serum or Plasma by Immunoassay</items>
-                            </term_definitions>
-                            <term_definitions code="94563-4">
-                              <items id="text">SARS-CoV-2 (COVID-19) IgG Ab [Presence] in Serum or Plasma by Immunoassay</items>
-                            </term_definitions>
-                            <term_definitions code="94506-3">
-                              <items id="text">SARS-CoV-2 (COVID-19) IgM Ab [Units/volume] in Serum or Plasma by Immunoassay</items>
-                            </term_definitions>
-                            <term_definitions code="94564-2">
-                              <items id="text">SARS-CoV-2 (COVID-19) IgM Ab [Presence] in Serum or Plasma by Immunoassay</items>
-                            </term_definitions>
-                            <term_definitions code="260373001">
-                              <items id="text">Detected (qualifier value)</items>
-                            </term_definitions>
-                            <term_definitions code="260415000">
-                              <items id="text">Not detected (qualifier value)</items>
-                            </term_definitions>
-                            <term_definitions code="419984006">
-                              <items id="text">Inconclusive (qualifier value)</items>
                             </term_definitions>
                           </children>
                           <cardinality>
