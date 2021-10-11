@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/8e6cc54c-a8f3-40e4-9f17-ef615fb58fbd/_history/1",
+      "id" : "Observation/fc6efb10-6014-44f1-ae98-74d18543adb4/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -113,6 +113,15 @@
       "_type" : "DV_TEXT",
       "value" : "Schwangerschaftsstatus"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.pregnancy_status.v0"
+      },
+      "template_id" : {
+        "value" : "Schwangerschaftsstatus"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -131,9 +140,6 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
-    },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "name" : {
@@ -168,14 +174,14 @@
             },
             "value" : {
               "_type" : "DV_CODED_TEXT",
-              "value" : "Nicht schwanger",
+              "value" : "Schwanger",
               "defining_code" : {
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
                   "value" : "local"
                 },
-                "code_string" : "at0013"
+                "code_string" : "at0012"
               }
             },
             "archetype_node_id" : "at0011"
