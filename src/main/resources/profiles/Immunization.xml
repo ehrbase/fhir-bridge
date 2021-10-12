@@ -1,11 +1,11 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
   <id value="gecco-immunization" />
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/immunization" />
-  <version value="1.0" />
+  <version value="1.0.5" />
   <name value="Immunization" />
   <title value="History of Vaccination" />
   <status value="active" />
-  <date value="2020-10-29" />
+  <date value="2021-09-20" />
   <publisher value="Charité" />
   <contact>
     <telecom>
@@ -383,61 +383,6 @@
       <mapping>
         <identity value="rim" />
         <map value="N/A" />
-      </mapping>
-    </element>
-    <element id="Immunization.extension:dataAbsentReason">
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
-        <valueCode value="normative" />
-      </extension>
-      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
-        <valueCode value="4.0.0" />
-      </extension>
-      <path value="Immunization.extension" />
-      <sliceName value="dataAbsentReason" />
-      <short value="occurrence[x] absence reason" />
-      <definition value="Provides a reason why the expected value or elements in the element that is extended are missing." />
-      <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
-      <alias value="extensions" />
-      <alias value="user content" />
-      <min value="0" />
-      <max value="1" />
-      <base>
-        <path value="DomainResource.extension" />
-        <min value="0" />
-        <max value="*" />
-      </base>
-      <type>
-        <code value="Extension" />
-        <profile value="http://hl7.org/fhir/StructureDefinition/data-absent-reason" />
-      </type>
-      <condition value="ele-1" />
-      <constraint>
-        <key value="ele-1" />
-        <severity value="error" />
-        <human value="All FHIR elements must have a @value or children" />
-        <expression value="hasValue() or (children().count() &gt; id.count())" />
-        <xpath value="@value|f:*|h:div" />
-        <source value="http://hl7.org/fhir/StructureDefinition/Element" />
-      </constraint>
-      <constraint>
-        <key value="ext-1" />
-        <severity value="error" />
-        <human value="Must have either extensions or value[x], not both" />
-        <expression value="extension.exists() != value.exists()" />
-        <xpath value="exists(f:extension)!=exists(f:*[starts-with(local-name(.), 'value')])" />
-        <source value="http://hl7.org/fhir/StructureDefinition/DomainResource" />
-      </constraint>
-      <mapping>
-        <identity value="rim" />
-        <map value="n/a" />
-      </mapping>
-      <mapping>
-        <identity value="rim" />
-        <map value="N/A" />
-      </mapping>
-      <mapping>
-        <identity value="rim" />
-        <map value="ANY.nullFlavor" />
       </mapping>
     </element>
     <element id="Immunization.modifierExtension">
@@ -942,7 +887,7 @@
       <binding>
         <strength value="extensible" />
         <description value="SNOMED Vaccine Codes" />
-        <valueSet value="https://fhir.kbv.de/ValueSet/KBV_VS_MIO_Vaccination_Vaccine_List" />
+        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/vaccines-snomed" />
       </binding>
       <mapping>
         <identity value="rim" />
@@ -1294,7 +1239,7 @@
         <code value="Coding" />
       </type>
       <patternCoding>
-        <system value="http://fhir.de/CodeSystem/dimdi/atc" />
+        <system value="http://fhir.de/CodeSystem/bfarm/atc" />
       </patternCoding>
       <condition value="ele-1" />
       <constraint>
@@ -1310,7 +1255,7 @@
       <binding>
         <strength value="extensible" />
         <description value="ATC Vaccine Codes" />
-        <valueSet value="https://fhir.kbv.de/ValueSet/KBV_VS_MIO_Vaccination_Vaccine_List_ATC" />
+        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/vaccines-atc" />
       </binding>
       <mapping>
         <identity value="rim" />
@@ -5423,25 +5368,6 @@
     </element>
   </snapshot>
   <differential>
-    <element id="Immunization.extension">
-      <path value="Immunization.extension" />
-      <slicing>
-        <discriminator>
-          <type value="value" />
-          <path value="url" />
-        </discriminator>
-        <rules value="open" />
-      </slicing>
-    </element>
-    <element id="Immunization.extension:dataAbsentReason">
-      <path value="Immunization.extension" />
-      <sliceName value="dataAbsentReason" />
-      <short value="occurrence[x] absence reason" />
-      <type>
-        <code value="Extension" />
-        <profile value="http://hl7.org/fhir/StructureDefinition/data-absent-reason" />
-      </type>
-    </element>
     <element id="Immunization.vaccineCode">
       <path value="Immunization.vaccineCode" />
       <mustSupport value="true" />
@@ -5467,7 +5393,7 @@
       <binding>
         <strength value="extensible" />
         <description value="SNOMED Vaccine Codes" />
-        <valueSet value="https://fhir.kbv.de/ValueSet/KBV_VS_MIO_Vaccination_Vaccine_List" />
+        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/vaccines-snomed" />
       </binding>
     </element>
     <element id="Immunization.vaccineCode.coding:snomed.system">
@@ -5483,13 +5409,13 @@
       <sliceName value="atc" />
       <max value="1" />
       <patternCoding>
-        <system value="http://fhir.de/CodeSystem/dimdi/atc" />
+        <system value="http://fhir.de/CodeSystem/bfarm/atc" />
       </patternCoding>
       <mustSupport value="true" />
       <binding>
         <strength value="extensible" />
         <description value="ATC Vaccine Codes" />
-        <valueSet value="https://fhir.kbv.de/ValueSet/KBV_VS_MIO_Vaccination_Vaccine_List_ATC" />
+        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/vaccines-atc" />
       </binding>
     </element>
     <element id="Immunization.vaccineCode.coding:atc.system">
