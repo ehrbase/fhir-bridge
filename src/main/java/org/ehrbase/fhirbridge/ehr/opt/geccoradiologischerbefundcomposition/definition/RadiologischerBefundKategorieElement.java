@@ -10,7 +10,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-28T16:24:04.436184+02:00",
+    date = "2021-10-12T14:47:43.560779+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class RadiologischerBefundKategorieElement implements LocatableEntity {

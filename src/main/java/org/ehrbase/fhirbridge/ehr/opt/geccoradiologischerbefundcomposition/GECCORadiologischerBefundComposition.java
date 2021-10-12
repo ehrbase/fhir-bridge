@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.defin
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-28T16:24:04.405935+02:00",
+    date = "2021-10-12T14:47:43.532320+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("GECCO_Radiologischer Befund")
