@@ -36,7 +36,7 @@
         "collector": {
           "reference": "Practitioner/example"
         },
-        "collectedDateTime": "2011-05-30T06:15:00Z",
+        "collectedDateTime": "2021-01-18T11:05:52+01:00",
         "quantity": {
           "value": 6,
           "unit": "mL"

@@ -33,7 +33,7 @@ public class SpecimenConverter {
         mapAccessionIdentifier(specimenTarget).ifPresent(probe::setLaborprobenidentifikator);
         mapIdentifier(specimenTarget).ifPresent(probe::setExternerIdentifikator);
         mapReceivedTime(specimenTarget).ifPresent(probe::setZeitpunktDesProbeneingangsValue);
-        // mapZeitpunktDerEntnahme(specimenTarget).ifPresent(probe::setZeitpunktDerProbenentnahmeValue);
+        mapZeitpunktDerEntnahme(specimenTarget).ifPresent(probe::setZeitpunktDerProbenentnahmeValue);
         mapIdentifikatorDesProbennehmers(specimenTarget).ifPresent(probe::setIdentifikatorDesProbennehmers);
         mapParentsOfProbe(probe, specimenTarget);
         mapProbeEntnahmeBedingungen(specimenTarget, probe);
