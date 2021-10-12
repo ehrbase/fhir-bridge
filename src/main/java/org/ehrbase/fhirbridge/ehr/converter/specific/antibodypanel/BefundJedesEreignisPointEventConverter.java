@@ -33,10 +33,10 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         LabortestPanelCluster labortestPanelCluster = new LabortestPanelCluster();
         ProAnalytCluster proAnalytCluster = new ProAnalytCluster();
         proAnalytCluster.setVirusnachweistestDefiningCode(convertVirusNachweisTest());
-        if(immunoassay.getObservation().hasValueQuantity()){
+        if (immunoassay.getObservation().hasValueQuantity()) {
             proAnalytCluster.setQuantitativesErgebnisMagnitude(immunoassay.getObservation().getValueQuantity().getValue().doubleValue());
             proAnalytCluster.setQuantitativesErgebnisUnits(immunoassay.getObservation().getValueQuantity().getCode());
-        }else{
+        } else {
             proAnalytCluster.setNachweisDefiningCode(convertNachweisDefiningCode());
         }
         proAnalytCluster.setErgebnisStatusValue(immunoassay.getObservation().getStatusElement().getCode());
@@ -45,17 +45,17 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     }
 
     private NachweisDefiningCode convertNachweisDefiningCode() {
-        if(immunoassay.getObservation().hasValueCodeableConcept() && immunoassay.getObservation().getValueCodeableConcept().hasCoding() && immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0).hasCode()){
+        if (immunoassay.getObservation().hasValueCodeableConcept() && immunoassay.getObservation().getValueCodeableConcept().hasCoding() && immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0).hasCode()) {
             List<Coding> codingList = immunoassay.getObservation().getValueCodeableConcept().getCoding();
             Coding coding = codingList.get(0);
             return resolveNachweisDefiningCode(coding);
-        }else{
+        } else {
             throw new ConversionException("ValueCodeableConcept.coding or code is missing");
         }
     }
 
     private NachweisDefiningCode resolveNachweisDefiningCode(Coding coding) {
-        if (coding.getCode().equals(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
+        if (coding.getCode().equals(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
             return NachweisDefiningCode.DETECTED_QUALIFIER_VALUE;
         } else if (coding.getCode().equals(NachweisDefiningCode.INCONCLUSIVE_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
             return NachweisDefiningCode.INCONCLUSIVE_QUALIFIER_VALUE;

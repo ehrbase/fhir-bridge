@@ -8,39 +8,38 @@
 
     <groupId>org.ehrbase.fhirbridge</groupId>
     <artifactId>fhir-bridge</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <version>1.4.0-SNAPSHOT</version>
 
     <name>FHIR Bridge</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipITs>true</skipITs>
         <commandLineArguments/>
-
-        <!-- Plugins -->
-        <checkstyle.version>3.1.1</checkstyle.version>
-        <failsafe.version>2.22.2</failsafe.version>
-        <surefire.version>2.22.2</surefire.version>
-        <jacoco.version>0.8.5</jacoco.version>
-
-        <!-- Dependencies -->
-        <classgraph.version>4.8.98</classgraph.version>
-        <hapi-fhir.version>5.3.3</hapi-fhir.version> <!-- 5.5.0 -->
-        <ipf.version>4.0.1</ipf.version> <!-- 4.1.0 -->
-        <javers.version>5.14.0</javers.version>
-        <minio.version>8.3.0</minio.version>
-        <okhttp.version>4.8.1</okhttp.version>
-        <spring-boot.version>2.5.4</spring-boot.version>
-
-        <commons-collections4.version>4.4</commons-collections4.version>
-        <commons-io.version>2.8.0</commons-io.version>
+        <!-- Versions -->
+        <commons-compress.version>1.21</commons-compress.version>
+        <commons-io.version>2.11.0</commons-io.version>
         <commons-text.version>1.9</commons-text.version>
-        <ehrbase-sdk.version>develop-SNAPSHOT</ehrbase-sdk.version>
+        <ehrbase-sdk.version>10cce9b</ehrbase-sdk.version>
+        <hapi-fhir.version>5.3.3</hapi-fhir.version>
+        <guava.version>31.0.1-jre</guava.version>
+        <ipf.version>4.0.1</ipf.version>
+        <javassist.version>3.28.0-GA</javassist.version>
+        <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
+        <maven-dependency-check-plugin.version>6.4.1</maven-dependency-check-plugin.version>
+        <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+        <maven-jacoco-plugin.version>0.8.5</maven-jacoco-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <minio.version>8.3.1</minio.version>
+        <spring-boot.version>2.5.5</spring-boot.version>
+
+        <classgraph.version>4.8.98</classgraph.version>
+        <javers.version>5.14.0</javers.version>
+        <okhttp.version>4.8.1</okhttp.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
         <findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
-        <guava.version>30.1-jre</guava.version>
-        <javassist.version>3.27.0-GA</javassist.version>
         <jaxb-core.version>2.3.0.1</jaxb-core.version>
         <jaxb-impl.version>2.3.3</jaxb-impl.version>
         <stax2.version>4.2.1</stax2.version>
@@ -62,7 +61,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${checkstyle.version}</version>
+                <version>${maven-checkstyle-plugin.version}</version>
                 <configuration>
                     <configLocation>${project.basedir}/config/checkstyle/ehrbase_checks.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
@@ -77,6 +76,11 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>${maven-dependency-check-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -127,7 +131,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.version}</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <!-- SETS THE VM ARGUMENT LINE USED WHEN UNIT TESTS ARE RUN. -->
                     <argLine>${surefireArgLine}</argLine>
@@ -136,7 +140,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${failsafe.version}</version>
+                <version>${maven-failsafe-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -161,7 +165,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
+                <version>${maven-jacoco-plugin.version}</version>
                 <executions>
 
                     <!-- SET ARG LINE PROPERTY FOR SUREFIRE -->
@@ -231,11 +235,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -280,18 +284,21 @@
             <artifactId>ipf-platform-camel-ihe-mllp</artifactId>
             <version>${ipf.version}</version>
         </dependency>
-
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-jpaserver-base</artifactId>
+            <version>${hapi-fhir.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.elasticsearch.client</groupId>
                     <artifactId>elasticsearch-rest-high-level-client</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.hibernate.search</groupId>
+                    <artifactId>hibernate-search-backend-elasticsearch</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>com.github.ehrbase</groupId>
             <artifactId>openEHR_SDK</artifactId>
@@ -303,7 +310,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
@@ -316,13 +322,11 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
             <version>${minio.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.javers</groupId>
             <artifactId>javers-core</artifactId>
@@ -340,11 +344,6 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>ca.uhn.hapi.fhir</groupId>
                 <artifactId>hapi-fhir-base</artifactId>
                 <version>${hapi-fhir.version}</version>
@@ -352,11 +351,6 @@
             <dependency>
                 <groupId>ca.uhn.hapi.fhir</groupId>
                 <artifactId>hapi-fhir-client</artifactId>
-                <version>${hapi-fhir.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ca.uhn.hapi.fhir</groupId>
-                <artifactId>hapi-fhir-jpaserver-base</artifactId>
                 <version>${hapi-fhir.version}</version>
             </dependency>
             <dependency>
@@ -375,6 +369,38 @@
                 <version>${hapi-fhir.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${commons-compress.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>${commons-text.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>io.github.classgraph</groupId>
                 <artifactId>classgraph</artifactId>
                 <version>${classgraph.version}</version>
@@ -384,11 +410,6 @@
                 <groupId>com.google.code.findbugs</groupId>
                 <artifactId>jsr305</artifactId>
                 <version>${findbugs-jsr305.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
@@ -406,25 +427,11 @@
                 <version>${commons-collections4.version}</version>
             </dependency>
             <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons-io.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-text</artifactId>
-                <version>${commons-text.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.codehaus.woodstox</groupId>
                 <artifactId>stax2-api</artifactId>
                 <version>${stax2.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.javassist</groupId>
-                <artifactId>javassist</artifactId>
-                <version>${javassist.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>

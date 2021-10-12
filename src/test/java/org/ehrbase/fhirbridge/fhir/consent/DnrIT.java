@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.consent;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung.DnrAnordnungCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.DNRAnordnungComposition;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungEvaluation;
@@ -24,37 +23,52 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class DnrIT extends AbstractMappingTestSetupIT {
 
     public DnrIT() {
-        super("Consent/", Consent.class); //fhir-Resource
+        super("Consent/DNR/", Consent.class); //fhir-Resource
     }
 
     @Test
-    void mappingIntegrationTest() throws IOException {
-        create("consent-example.json");
+    void createConsentDNR() throws IOException {
+        create("create-consent-dnr.json");
     }
 
     // #####################################################################################
     // check payload
+
     @Test
-    void mappingNormal() throws IOException {
-        testMapping("consent-example.json",
-                "paragon-consent-dnr-normal.json");
+    void mappingConsentDNRStatusDraft() throws IOException {
+        testMapping("create-consent-dnr-status-draft.json",
+                "paragon-consent-dnr-status-draft.json");
     }
 
     @Test
-    void mappingNormal_2() throws IOException {
-        testMapping("consent-example-2.json",
-                "paragon-consent-dnr-normal-2.json");
+    void mappingConsentDNRStatusProposed() throws IOException {
+        testMapping("create-consent-dnr-status-proposed.json",
+                "paragon-consent-dnr-status-proposed.json");
     }
 
     @Test
-    void mappingNormal_3() throws IOException {
-        testMapping("consent-example-3.json",
-                "paragon-consent-dnr-normal-3.json");
+    void mappingConsentDNRStatusActive() throws IOException {
+        testMapping("create-consent-dnr-status-active.json",
+                "paragon-consent-dnr-status-active.json");
     }
 
+    @Test
+    void mappingConsentDNRStatusRejected() throws IOException {
+        testMapping("create-consent-dnr-status-rejected.json",
+                "paragon-consent-dnr-status-rejected.json");
+    }
 
-    // #####################################################################################
-    // check exceptions
+    @Test
+    void mappingConsentDNRStatusInactive() throws IOException {
+        testMapping("create-consent-dnr-status-inactive.json",
+                "paragon-consent-dnr-status-inactive.json");
+    }
+
+    @Test
+    void mappingConsentDNRStatusEnteredInError() throws IOException {
+        testMapping("create-consent-dnr-status-enteredinerror.json",
+                "paragon-consent-dnr-status-enteredinerror.json");
+    }
 
     // #####################################################################################
     // default
@@ -81,7 +95,7 @@ class DnrIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Consent csnt = (Consent) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () ->
+        return assertThrows(Exception.class, () ->
                 new DnrAnordnungCompositionConverter().convert(csnt)
         );
     }

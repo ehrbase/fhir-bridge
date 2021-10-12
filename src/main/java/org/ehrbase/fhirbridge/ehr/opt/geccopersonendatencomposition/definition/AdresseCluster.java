@@ -1,147 +1,157 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
+import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvIdentifier;
 import java.lang.String;
-import java.time.temporal.TemporalAccessor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
+import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Entity
-@Archetype("openEHR-EHR-CLUSTER.address_cc.v0")
+@Archetype("openEHR-EHR-CLUSTER.address.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-15T13:49:30.063700+02:00",
+    date = "2021-10-11T14:49:10.160804+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class AdresseCluster implements LocatableEntity {
   /**
-   * Path: GECCO_Personendaten/Personendaten/Adresse/Verwendung
-   * Description: Der Zweck der Adresse
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Art
+   * Description: Art der Adresse.
+   * Comment: Zum Beispiel: Hausadresse oder postalische Adresse.
    */
   @Path("/items[at0001]/value|defining_code")
-  private VerwendungDefiningCode verwendungDefiningCode;
+  private ArtDefiningCode artDefiningCode;
+
+  /**
+   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Art/null_flavour
+   */
+  @Path("/items[at0001]/null_flavour|defining_code")
+  private NullFlavour artNullFlavourDefiningCode;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Verwendung/null_flavour
    */
-  @Path("/items[at0001]/null_flavour|defining_code")
+  @Path("/items[at0005]/null_flavour|defining_code")
   private NullFlavour verwendungNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Adresse/Typ der Adresse
-   * Description: Unterscheidet zwischen physischen Adressen (diejenigen, die Sie besuchen können) und Postadressen (z.B. Postfächer und Pflegeadressen). Die meisten Adressen sind beides.
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Adresse unstrukturiert
+   * Description: Eine unstrukturierte Adresse oder eine Verkettung einer oder mehrerer Komponenten aus CLUSTER.structured_address.
+   * Comment: Diese Adresszeile stellt eine niedrige geografische/physische Beschreibung eines Standorts dar, die in Verbindung mit den anderen übergeordneten Adresskomponenten, d. h. „Vorort/Stadt/Ort“, „Postleitzahl“ und „Staat/Land/Bundesland“, bildet eine vollständige geografische/physische Adresse. Mehrfaches Vorkommen erlaubt beliebig viele "Adresszeilen". Beispiel: 4 Adresszeilen dargestellt als
+   * Wohnung 7A,
+   * 52 Davis-Straße,
+   * Carlton Nord,
+   * Victoria, Australien 3042.
+   * Dieses Datenelement kann auch verwendet werden, um ein Wahrzeichen darzustellen, wie zum Beispiel "Das zweite Haus nördlich des Hauptgeschäftes" oder "An der Ecke Smith & Brown Streets".
    */
-  @Path("/items[at0006]/value|defining_code")
-  private TypDerAdresseDefiningCode typDerAdresseDefiningCode;
+  @Path("/items[at0009]")
+  private List<AdresseAdresseUnstrukturiertElement> adresseUnstrukturiert;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Typ der Adresse/null_flavour
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Strukturierte Adressdaten
+   * Description: Zusätzliche strukturierte geografische/physische Details auf niedriger Ebene zu einem Standort, die verkettet werden können, um eine oder mehrere Zeilen der „Adresse unstrukturiert“ zu bilden.
    */
-  @Path("/items[at0006]/null_flavour|defining_code")
-  private NullFlavour typDerAdresseNullFlavourDefiningCode;
-
-  /**
-   * Path: GECCO_Personendaten/Personendaten/Adresse/Text
-   * Description: Eine Darstellung der Adresse im Volltext.
-   */
-  @Path("/items[at0010]/value|value")
-  private String textValue;
-
-  /**
-   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Text/null_flavour
-   */
-  @Path("/items[at0010]/null_flavour|defining_code")
-  private NullFlavour textNullFlavourDefiningCode;
-
-  /**
-   * Path: GECCO_Personendaten/Personendaten/Adresse/Zeile
-   * Description: Diese Komponente enthält die Hausnummer, Wohnungsnummer, Straßenname, Straßenrichtung, Postfachnummer, Zustellhinweise und ähnliche Adressinformationen.
-   */
-  @Path("/items[at0011]")
-  private List<AdresseZeileElement> zeile;
+  @Path("/items[at0014]")
+  private List<Cluster> strukturierteAdressdaten;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Adresse/Stadt
-   * Description: Der Name der Stadt, des Ortes, des Dorfes oder einer anderen Gemeinde oder eines Lieferzentrums.
+   * Description: Der Name des Vorortes, der Stadt, des Dorfes, der Gemeinde oder des Ortes der untersten Ebene der Adresse.
+   * Comment: Die Codierung mit einer externen Terminologie wird nach Möglichkeit bevorzugt. Zum Beispiel: Fitzroy, Calgary, Bergen.
    */
-  @Path("/items[at0012]/value|value")
-  private String stadtValue;
+  @Path("/items[at0015]")
+  private List<AdresseStadtElement> stadt;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Stadt/null_flavour
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Bezirk / Landkreis
+   * Description: Der Name eines internen politischen oder geografischen Bezirks oder Gebiets innerhalb eines Staates, Territoriums oder einer Provinz, der die Adresse enthält.
+   * Comment: Wenn möglich, wird die Codierung mit einer externen Terminologie bevorzugt.
    */
-  @Path("/items[at0012]/null_flavour|defining_code")
-  private NullFlavour stadtNullFlavourDefiningCode;
+  @Path("/items[at0016]")
+  private List<AdresseBezirkLandkreisElement> bezirkLandkreis;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Adresse/Bezirk
-   * Description: Der Name des Verwaltungsgebiets (Landkreis).
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Staat / Land / Bundesland
+   * Description: Der Name einer internen politischen oder geografischen Abteilung eines Landes, das die Adresse enthält.
+   * Comment: Wenn möglich, wird die Codierung mit einer externen Terminologie bevorzugt. Zum Beispiel: Victoria, Alberta.
    */
-  @Path("/items[at0013]/value|value")
-  private String bezirkValue;
+  @Path("/items[at0017]/value|value")
+  private String staatLandBundeslandValue;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Bezirk/null_flavour
+   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Staat / Land / Bundesland/null_flavour
    */
-  @Path("/items[at0013]/null_flavour|defining_code")
-  private NullFlavour bezirkNullFlavourDefiningCode;
+  @Path("/items[at0017]/null_flavour|defining_code")
+  private NullFlavour staatLandBundeslandNullFlavourDefiningCode;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Adresse/Postleitzahl
-   * Description: Eine Postleitzahl, die eine durch den Postdienst definierte Region bezeichnet.
+   * Description: Der Code für einen Postzustellungsbereich, der die Adresse enthält, ausgerichtet auf Ort, Vorort oder Ort für eine Adresse, wie vom jeweiligen Postzustelldienst definiert.
+   * Comment: Auch als Postleitzahl PLZ bekannt.
    */
-  @Path("/items[at0014]/value|value")
+  @Path("/items[at0018]/value|value")
   private String postleitzahlValue;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Postleitzahl/null_flavour
    */
-  @Path("/items[at0014]/null_flavour|defining_code")
+  @Path("/items[at0018]/null_flavour|defining_code")
   private NullFlavour postleitzahlNullFlavourDefiningCode;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Adresse/Land
-   * Description: Land - eine Nation, wie allgemein verstanden oder allgemein akzeptiert.
+   * Description: Der Name des Landes, in dem sich die Adresse befindet.
+   * Comment: Wenn möglich, wird die Codierung mit einer externen Terminologie bevorzugt. Zum Beispiel: Australien, Kanada.
    */
-  @Path("/items[at0015]/value|value")
+  @Path("/items[at0019]/value|value")
   private String landValue;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Land/null_flavour
    */
-  @Path("/items[at0015]/null_flavour|defining_code")
+  @Path("/items[at0019]/null_flavour|defining_code")
   private NullFlavour landNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Adresse/Beginn der Gültigkeitsdauer
-   * Description: Der Beginn der Periode. Die Eingrenzung ist inklusive.
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Postfach
+   * Description: Eine eindeutige Nummer, die einem Postzustellungspunkt zugewiesen ist, wie vom jeweiligen Postzustelldienst definiert.
    */
-  @Path("/items[at0016]/value|value")
-  private TemporalAccessor beginnDerGueltigkeitsdauerValue;
+  @Path("/items[at0020]/value")
+  private DvIdentifier postfach;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Beginn der Gültigkeitsdauer/null_flavour
+   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Postfach/null_flavour
    */
-  @Path("/items[at0016]/null_flavour|defining_code")
-  private NullFlavour beginnDerGueltigkeitsdauerNullFlavourDefiningCode;
+  @Path("/items[at0020]/null_flavour|defining_code")
+  private NullFlavour postfachNullFlavourDefiningCode;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Adresse/Ende der Gültigkeitsdauer
-   * Description: Das Ende der Periode. Wenn das Ende der Periode fehlt, ist die Periode noch nicht abgeschlossen. Der Beginn kann in der Vergangenheit und das Enddatum in der Zukunft liegen, was bedeutet, dass der Zeitraum voraussichtlich zu diesem Zeitpunkt endet.
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Zusätzliche Details
+   * Description: Weitere Angaben zur Adresse.
+   * Comment: Beispiel: Geolokalisierung.
    */
-  @Path("/items[at0017]/value|value")
-  private TemporalAccessor endeDerGueltigkeitsdauerValue;
+  @Path("/items[at0024]")
+  private List<Cluster> zusaetzlicheDetails;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Ende der Gültigkeitsdauer/null_flavour
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Kommentar
+   * Description: Zusätzliche Erläuterungen zur Adresse, die nicht in anderen Feldern erfasst werden.
    */
-  @Path("/items[at0017]/null_flavour|defining_code")
-  private NullFlavour endeDerGueltigkeitsdauerNullFlavourDefiningCode;
+  @Path("/items[at0023]/value|value")
+  private String kommentarValue;
+
+  /**
+   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Kommentar/null_flavour
+   */
+  @Path("/items[at0023]/null_flavour|defining_code")
+  private NullFlavour kommentarNullFlavourDefiningCode;
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Adresse/feeder_audit
@@ -149,12 +159,28 @@ public class AdresseCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setVerwendungDefiningCode(VerwendungDefiningCode verwendungDefiningCode) {
-     this.verwendungDefiningCode = verwendungDefiningCode;
+  /**
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Verwendung
+   * Description: Der primäre Zweck oder die primäre Verwendung der Adresse.
+   */
+  @Path("/items[at0005]/value")
+  @Choice
+  private AdresseVerwendungChoice verwendung;
+
+  public void setArtDefiningCode(ArtDefiningCode artDefiningCode) {
+     this.artDefiningCode = artDefiningCode;
   }
 
-  public VerwendungDefiningCode getVerwendungDefiningCode() {
-     return this.verwendungDefiningCode ;
+  public ArtDefiningCode getArtDefiningCode() {
+     return this.artDefiningCode ;
+  }
+
+  public void setArtNullFlavourDefiningCode(NullFlavour artNullFlavourDefiningCode) {
+     this.artNullFlavourDefiningCode = artNullFlavourDefiningCode;
+  }
+
+  public NullFlavour getArtNullFlavourDefiningCode() {
+     return this.artNullFlavourDefiningCode ;
   }
 
   public void setVerwendungNullFlavourDefiningCode(NullFlavour verwendungNullFlavourDefiningCode) {
@@ -165,77 +191,54 @@ public class AdresseCluster implements LocatableEntity {
      return this.verwendungNullFlavourDefiningCode ;
   }
 
-  public void setTypDerAdresseDefiningCode(TypDerAdresseDefiningCode typDerAdresseDefiningCode) {
-     this.typDerAdresseDefiningCode = typDerAdresseDefiningCode;
+  public void setAdresseUnstrukturiert(
+      List<AdresseAdresseUnstrukturiertElement> adresseUnstrukturiert) {
+     this.adresseUnstrukturiert = adresseUnstrukturiert;
   }
 
-  public TypDerAdresseDefiningCode getTypDerAdresseDefiningCode() {
-     return this.typDerAdresseDefiningCode ;
+  public List<AdresseAdresseUnstrukturiertElement> getAdresseUnstrukturiert() {
+     return this.adresseUnstrukturiert ;
   }
 
-  public void setTypDerAdresseNullFlavourDefiningCode(
-      NullFlavour typDerAdresseNullFlavourDefiningCode) {
-     this.typDerAdresseNullFlavourDefiningCode = typDerAdresseNullFlavourDefiningCode;
+  public void setStrukturierteAdressdaten(List<Cluster> strukturierteAdressdaten) {
+     this.strukturierteAdressdaten = strukturierteAdressdaten;
   }
 
-  public NullFlavour getTypDerAdresseNullFlavourDefiningCode() {
-     return this.typDerAdresseNullFlavourDefiningCode ;
+  public List<Cluster> getStrukturierteAdressdaten() {
+     return this.strukturierteAdressdaten ;
   }
 
-  public void setTextValue(String textValue) {
-     this.textValue = textValue;
+  public void setStadt(List<AdresseStadtElement> stadt) {
+     this.stadt = stadt;
   }
 
-  public String getTextValue() {
-     return this.textValue ;
+  public List<AdresseStadtElement> getStadt() {
+     return this.stadt ;
   }
 
-  public void setTextNullFlavourDefiningCode(NullFlavour textNullFlavourDefiningCode) {
-     this.textNullFlavourDefiningCode = textNullFlavourDefiningCode;
+  public void setBezirkLandkreis(List<AdresseBezirkLandkreisElement> bezirkLandkreis) {
+     this.bezirkLandkreis = bezirkLandkreis;
   }
 
-  public NullFlavour getTextNullFlavourDefiningCode() {
-     return this.textNullFlavourDefiningCode ;
+  public List<AdresseBezirkLandkreisElement> getBezirkLandkreis() {
+     return this.bezirkLandkreis ;
   }
 
-  public void setZeile(List<AdresseZeileElement> zeile) {
-     this.zeile = zeile;
+  public void setStaatLandBundeslandValue(String staatLandBundeslandValue) {
+     this.staatLandBundeslandValue = staatLandBundeslandValue;
   }
 
-  public List<AdresseZeileElement> getZeile() {
-     return this.zeile ;
+  public String getStaatLandBundeslandValue() {
+     return this.staatLandBundeslandValue ;
   }
 
-  public void setStadtValue(String stadtValue) {
-     this.stadtValue = stadtValue;
+  public void setStaatLandBundeslandNullFlavourDefiningCode(
+      NullFlavour staatLandBundeslandNullFlavourDefiningCode) {
+     this.staatLandBundeslandNullFlavourDefiningCode = staatLandBundeslandNullFlavourDefiningCode;
   }
 
-  public String getStadtValue() {
-     return this.stadtValue ;
-  }
-
-  public void setStadtNullFlavourDefiningCode(NullFlavour stadtNullFlavourDefiningCode) {
-     this.stadtNullFlavourDefiningCode = stadtNullFlavourDefiningCode;
-  }
-
-  public NullFlavour getStadtNullFlavourDefiningCode() {
-     return this.stadtNullFlavourDefiningCode ;
-  }
-
-  public void setBezirkValue(String bezirkValue) {
-     this.bezirkValue = bezirkValue;
-  }
-
-  public String getBezirkValue() {
-     return this.bezirkValue ;
-  }
-
-  public void setBezirkNullFlavourDefiningCode(NullFlavour bezirkNullFlavourDefiningCode) {
-     this.bezirkNullFlavourDefiningCode = bezirkNullFlavourDefiningCode;
-  }
-
-  public NullFlavour getBezirkNullFlavourDefiningCode() {
-     return this.bezirkNullFlavourDefiningCode ;
+  public NullFlavour getStaatLandBundeslandNullFlavourDefiningCode() {
+     return this.staatLandBundeslandNullFlavourDefiningCode ;
   }
 
   public void setPostleitzahlValue(String postleitzahlValue) {
@@ -271,38 +274,44 @@ public class AdresseCluster implements LocatableEntity {
      return this.landNullFlavourDefiningCode ;
   }
 
-  public void setBeginnDerGueltigkeitsdauerValue(TemporalAccessor beginnDerGueltigkeitsdauerValue) {
-     this.beginnDerGueltigkeitsdauerValue = beginnDerGueltigkeitsdauerValue;
+  public void setPostfach(DvIdentifier postfach) {
+     this.postfach = postfach;
   }
 
-  public TemporalAccessor getBeginnDerGueltigkeitsdauerValue() {
-     return this.beginnDerGueltigkeitsdauerValue ;
+  public DvIdentifier getPostfach() {
+     return this.postfach ;
   }
 
-  public void setBeginnDerGueltigkeitsdauerNullFlavourDefiningCode(
-      NullFlavour beginnDerGueltigkeitsdauerNullFlavourDefiningCode) {
-     this.beginnDerGueltigkeitsdauerNullFlavourDefiningCode = beginnDerGueltigkeitsdauerNullFlavourDefiningCode;
+  public void setPostfachNullFlavourDefiningCode(NullFlavour postfachNullFlavourDefiningCode) {
+     this.postfachNullFlavourDefiningCode = postfachNullFlavourDefiningCode;
   }
 
-  public NullFlavour getBeginnDerGueltigkeitsdauerNullFlavourDefiningCode() {
-     return this.beginnDerGueltigkeitsdauerNullFlavourDefiningCode ;
+  public NullFlavour getPostfachNullFlavourDefiningCode() {
+     return this.postfachNullFlavourDefiningCode ;
   }
 
-  public void setEndeDerGueltigkeitsdauerValue(TemporalAccessor endeDerGueltigkeitsdauerValue) {
-     this.endeDerGueltigkeitsdauerValue = endeDerGueltigkeitsdauerValue;
+  public void setZusaetzlicheDetails(List<Cluster> zusaetzlicheDetails) {
+     this.zusaetzlicheDetails = zusaetzlicheDetails;
   }
 
-  public TemporalAccessor getEndeDerGueltigkeitsdauerValue() {
-     return this.endeDerGueltigkeitsdauerValue ;
+  public List<Cluster> getZusaetzlicheDetails() {
+     return this.zusaetzlicheDetails ;
   }
 
-  public void setEndeDerGueltigkeitsdauerNullFlavourDefiningCode(
-      NullFlavour endeDerGueltigkeitsdauerNullFlavourDefiningCode) {
-     this.endeDerGueltigkeitsdauerNullFlavourDefiningCode = endeDerGueltigkeitsdauerNullFlavourDefiningCode;
+  public void setKommentarValue(String kommentarValue) {
+     this.kommentarValue = kommentarValue;
   }
 
-  public NullFlavour getEndeDerGueltigkeitsdauerNullFlavourDefiningCode() {
-     return this.endeDerGueltigkeitsdauerNullFlavourDefiningCode ;
+  public String getKommentarValue() {
+     return this.kommentarValue ;
+  }
+
+  public void setKommentarNullFlavourDefiningCode(NullFlavour kommentarNullFlavourDefiningCode) {
+     this.kommentarNullFlavourDefiningCode = kommentarNullFlavourDefiningCode;
+  }
+
+  public NullFlavour getKommentarNullFlavourDefiningCode() {
+     return this.kommentarNullFlavourDefiningCode ;
   }
 
   public void setFeederAudit(FeederAudit feederAudit) {
@@ -311,5 +320,13 @@ public class AdresseCluster implements LocatableEntity {
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
+  }
+
+  public void setVerwendung(AdresseVerwendungChoice verwendung) {
+     this.verwendung = verwendung;
+  }
+
+  public AdresseVerwendungChoice getVerwendung() {
+     return this.verwendung ;
   }
 }

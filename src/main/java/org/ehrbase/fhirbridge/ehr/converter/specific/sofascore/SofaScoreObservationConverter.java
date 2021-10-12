@@ -89,7 +89,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                         case RESP_4:
                             return SofaScoreCode.ATEMFREQUENZ_SCORE_4.getValue();
                         default:
-                            throw new ConversionException("Code " + code + " is not valid");
+                            throw new ConversionException("The code " + code + " is not valid for the respiration score");
                     }
                 });
     }
@@ -119,7 +119,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                         case CVS_4:
                             return SofaScoreCode.HERZKREISLAUFSYSTEM_SCORE_4.getValue();
                         default:
-                            throw new ConversionException("Code " + code + " is not valid for the cardiovaskular score");
+                            throw new ConversionException("The code " + code + " is not valid for the cardiovaskular score");
                     }
                 });
     }
@@ -150,7 +150,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                         case NS_4:
                             return SofaScoreCode.NERVENSYSTEM_SCORE_4.getValue();
                         default:
-                            throw new ConversionException("Code " + code + " is not valid");
+                            throw new ConversionException("The code " + code + " is not valid for the nervous system score");
                     }
                 });
     }
@@ -180,7 +180,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                         case KID_4:
                             return SofaScoreCode.NIERENFUNKTIONS_SCORE_4.getValue();
                         default:
-                            throw new ConversionException("The code " + code + " is not valid for the Kidney Score");
+                            throw new ConversionException("The code " + code + " is not valid for the kidney score");
                     }
                 });
     }
@@ -210,7 +210,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                         case LIV_4:
                             return SofaScoreCode.LEBERFUNKTIONS_SCORE_4.getValue();
                         default:
-                            throw new ConversionException("The code " + code + " is not valid for the Liver score");
+                            throw new ConversionException("The code " + code + " is not valid for the liver score");
                     }
                 });
     }
@@ -240,7 +240,7 @@ public class SofaScoreObservationConverter extends ObservationToObservationConve
                         case COA_4:
                             return SofaScoreCode.BLUTGERINNUNGS_SCORE_4.getValue();
                         default:
-                            throw new ConversionException("The code " + code + " is not valid for the Blood clotting score");
+                            throw new ConversionException("The code " + code + " is not valid for the blood clotting score");
                     }
                 });
     }
