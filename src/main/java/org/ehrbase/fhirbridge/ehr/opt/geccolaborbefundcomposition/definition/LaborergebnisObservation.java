@@ -19,7 +19,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.laboratory_test_result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-30T14:42:27.417688+02:00",
+    date = "2021-10-12T16:46:51.703891+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class LaborergebnisObservation implements EntryEntity {

@@ -9,7 +9,7 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-30T14:42:27.506399+02:00",
+    date = "2021-10-12T16:46:51.792579+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @OptionFor("DV_CODED_TEXT")
