@@ -41,28 +41,28 @@ public class AntiBodyPanel {
 
     private void resoulveProfile(Resource resource, String profileUrl) {
         if (AntiBodyProfileUrl.AB_PRESENCE.getUrl().equals(profileUrl)) {
-            this.aBPresence = Optional.of(new Immunoassay((Observation) resource));
+            this.aBPresence = Optional.of(new Immunoassay((Observation) resource, false));
 
         } else if (AntiBodyProfileUrl.AB_UNITS_VOLUME.getUrl().equals(profileUrl)) {
-            this.aBUnitsVolume = Optional.of(new Immunoassay((Observation) resource));
+            this.aBUnitsVolume = Optional.of(new Immunoassay((Observation) resource, true));
 
         } else if (AntiBodyProfileUrl.IGA_AB_PRESENCE.getUrl().equals(profileUrl)) {
-            this.igAAbPresence = Optional.of(new Immunoassay((Observation) resource));
+            this.igAAbPresence = Optional.of(new Immunoassay((Observation) resource, false));
 
         } else if (AntiBodyProfileUrl.IGA_AB_UNITS_VOLUME.getUrl().equals(profileUrl)) {
-            this.igAAbUnitVolume = Optional.of(new Immunoassay((Observation) resource));
+            this.igAAbUnitVolume = Optional.of(new Immunoassay((Observation) resource, true));
 
         } else if (AntiBodyProfileUrl.IGM_AB_PRESENCE.getUrl().equals(profileUrl)) {
-            this.igMAbPresence = Optional.of(new Immunoassay((Observation) resource));
+            this.igMAbPresence = Optional.of(new Immunoassay((Observation) resource, false));
 
         } else if (AntiBodyProfileUrl.IGM_AB_UNITS_VOLUME.getUrl().equals(profileUrl)) {
-            this.igMAbUnitsVolume = Optional.of(new Immunoassay((Observation) resource));
+            this.igMAbUnitsVolume = Optional.of(new Immunoassay((Observation) resource, true));
 
         } else if (AntiBodyProfileUrl.IGG_AB_PRESENCE.getUrl().equals(profileUrl)) {
-            this.igGAbPresence = Optional.of(new Immunoassay((Observation) resource));
+            this.igGAbPresence = Optional.of(new Immunoassay((Observation) resource, false));
 
         } else if (AntiBodyProfileUrl.IGG_AB_UNITS_VOLUME.getUrl().equals(profileUrl)) {
-            this.igGAbUnitsVolume = Optional.of(new Immunoassay((Observation) resource));
+            this.igGAbUnitsVolume = Optional.of(new Immunoassay((Observation) resource, true));
 
         } else {
             throw new ConversionException("Anti body panel bundle needs to contain only the profiles for the Anti body panel. Please delete profile " + profileUrl + " from the Bundle.");
