@@ -27,7 +27,7 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
 
     private void initialiseLabortestBezeichnungMap() {
         for (LabortestKategorieDefiningCode code : LabortestKategorieDefiningCode.values()) {
-            if (code.getTerminologyId().equals("LOINC")) {
+            if (code.getTerminologyId().equals("http://loinc.org")) {
                 LabortestKategorieDefiningCode.getCodesAsMap().put(code.getCode(), code);
             }
         }

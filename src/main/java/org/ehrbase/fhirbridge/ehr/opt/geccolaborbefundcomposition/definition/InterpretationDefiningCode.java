@@ -1,6 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum InterpretationDefiningCode implements EnumValueSet {
@@ -32,6 +35,15 @@ public enum InterpretationDefiningCode implements EnumValueSet {
     this.terminologyId = terminologyId;
     this.code = code;
   }
+
+  public static Map<String, InterpretationDefiningCode> getCodesAsMap(){
+    Map<String, InterpretationDefiningCode> interpretationDefiningCodeHashMap = new HashMap<>();
+    for (InterpretationDefiningCode interpretationDefiningCode : InterpretationDefiningCode.values()) {
+      interpretationDefiningCodeHashMap.put(interpretationDefiningCode.getCode(), interpretationDefiningCode);
+    }
+    return interpretationDefiningCodeHashMap;
+  }
+
 
   public String getValue() {
      return this.value ;

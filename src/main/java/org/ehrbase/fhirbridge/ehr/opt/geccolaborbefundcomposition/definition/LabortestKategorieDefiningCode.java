@@ -1,6 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
 import java.lang.String;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum LabortestKategorieDefiningCode implements EnumValueSet {
@@ -40,6 +43,14 @@ public enum LabortestKategorieDefiningCode implements EnumValueSet {
     this.description = description;
     this.terminologyId = terminologyId;
     this.code = code;
+  }
+
+  public static Map<String, LabortestKategorieDefiningCode> getCodesAsMap(){
+    Map<String, LabortestKategorieDefiningCode> labortestKategorieDefiningCodeHashMap = new HashMap<>();
+    for (LabortestKategorieDefiningCode labortestKategorieDefiningCode : LabortestKategorieDefiningCode.values()) {
+      labortestKategorieDefiningCodeHashMap.put(labortestKategorieDefiningCode.getCode(), labortestKategorieDefiningCode);
+    }
+    return labortestKategorieDefiningCodeHashMap;
   }
 
   public String getValue() {
