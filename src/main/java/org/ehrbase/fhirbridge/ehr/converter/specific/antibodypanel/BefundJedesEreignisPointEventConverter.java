@@ -1,18 +1,18 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
-import com.nedap.archie.rm.datavalues.DvCodedText;
-import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.LabortestPanelCluster;
+import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.NachweisDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.ProAnalytCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisDvQuantity;
+import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.VirusnachweistestDefiningCode;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
-import java.util.Optional;
+import java.util.List;
 
 public class BefundJedesEreignisPointEventConverter extends ObservationToPointEventConverter<BefundJedesEreignisPointEvent> {
     private final Immunoassay immunoassay;

@@ -11,25 +11,26 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-11T14:49:10.141299+02:00",
+    date = "2021-10-11T14:49:10.169704+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class PersonennameWeitererVornameElement implements LocatableEntity {
+public class AdresseBezirkLandkreisElement implements LocatableEntity {
   /**
-   * Path: GECCO_Personendaten/Personendaten/Personenname/Name strukturiert/Weiterer Vorname
-   * Description: Zweiter Vorname oder zweite Namen.
+   * Path: GECCO_Personendaten/Personendaten/Adresse/Bezirk / Landkreis
+   * Description: Der Name eines internen politischen oder geografischen Bezirks oder Gebiets innerhalb eines Staates, Territoriums oder einer Provinz, der die Adresse enthält.
+   * Comment: Wenn möglich, wird die Codierung mit einer externen Terminologie bevorzugt.
    */
   @Path("/value|value")
   private String value;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Baum/Personenname/Name strukturiert/Weiterer Vorname/null_flavour
+   * Path: GECCO_Personendaten/Personendaten/Baum/Adresse/Bezirk / Landkreis/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: GECCO_Personendaten/Personendaten/Personenname/Name strukturiert/feeder_audit
+   * Path: GECCO_Personendaten/Personendaten/Adresse/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;

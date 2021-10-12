@@ -31,7 +31,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.S
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-15T13:49:29.975023+02:00",
+    date = "2021-10-11T14:49:10.088221+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("GECCO_Personendaten")
