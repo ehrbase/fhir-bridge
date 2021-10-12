@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -19,7 +20,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 @Archetype("openEHR-EHR-ACTION.procedure.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T16:13:25.775886+02:00",
+    date = "2021-10-12T21:07:24.064769+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProzedurAction implements EntryEntity {
@@ -28,8 +29,8 @@ public class ProzedurAction implements EntryEntity {
    * Description: Identifizierung der Prozedur über den Namen.
    * Comment: Wenn möglich wird die Kodierung der spezifischen Prozedur mit einer Terminologie bevorzugt.
    */
-  @Path("/description[at0001]/items[at0002]/value|defining_code")
-  private NameDerProzedurDefiningCode nameDerProzedurDefiningCode;
+  @Path("/description[at0001]/items[at0002]/value")
+  private DvCodedText nameDerProzedur;
 
   /**
    * Path: GECCO_Prozedur/Prozedur/Tree/Name der Prozedur/null_flavour
@@ -80,8 +81,8 @@ public class ProzedurAction implements EntryEntity {
    * Description: Die Art der Prozedur.
    * Comment: Dieses pragmatische Datenelement kann zur Unterstützung der Gliederung für die Benutzeroberfläche verwendet werden.
    */
-  @Path("/description[at0001]/items[at0067]/value|defining_code")
-  private KategorieDefiningCode artDerProzedurDefiningCode;
+  @Path("/description[at0001]/items[at0067]/value")
+  private DvCodedText artDerProzedur;
 
   /**
    * Path: GECCO_Prozedur/Prozedur/Tree/Art der Prozedur/null_flavour
@@ -180,13 +181,12 @@ public class ProzedurAction implements EntryEntity {
   @Path("/ism_transition/transition|defining_code")
   private Transition transitionDefiningCode;
 
-  public void setNameDerProzedurDefiningCode(
-      NameDerProzedurDefiningCode nameDerProzedurDefiningCode) {
-     this.nameDerProzedurDefiningCode = nameDerProzedurDefiningCode;
+  public void setNameDerProzedur(DvCodedText nameDerProzedur) {
+     this.nameDerProzedur = nameDerProzedur;
   }
 
-  public NameDerProzedurDefiningCode getNameDerProzedurDefiningCode() {
-     return this.nameDerProzedurDefiningCode ;
+  public DvCodedText getNameDerProzedur() {
+     return this.nameDerProzedur ;
   }
 
   public void setNameDerProzedurNullFlavourDefiningCode(
@@ -239,12 +239,12 @@ public class ProzedurAction implements EntryEntity {
      return this.multimedia ;
   }
 
-  public void setArtDerProzedurDefiningCode(KategorieDefiningCode artDerProzedurDefiningCode) {
-     this.artDerProzedurDefiningCode = artDerProzedurDefiningCode;
+  public void setArtDerProzedur(DvCodedText artDerProzedur) {
+     this.artDerProzedur = artDerProzedur;
   }
 
-  public KategorieDefiningCode getArtDerProzedurDefiningCode() {
-     return this.artDerProzedurDefiningCode ;
+  public DvCodedText getArtDerProzedur() {
+     return this.artDerProzedur ;
   }
 
   public void setArtDerProzedurNullFlavourDefiningCode(

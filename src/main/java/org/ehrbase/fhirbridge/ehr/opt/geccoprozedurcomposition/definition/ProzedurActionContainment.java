@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -17,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 public class ProzedurActionContainment extends Containment {
   public SelectAqlField<ProzedurAction> PROZEDUR_ACTION = new AqlFieldImp<ProzedurAction>(ProzedurAction.class, "", "ProzedurAction", ProzedurAction.class, this);
 
-  public SelectAqlField<NameDerProzedurDefiningCode> NAME_DER_PROZEDUR_DEFINING_CODE = new AqlFieldImp<NameDerProzedurDefiningCode>(ProzedurAction.class, "/description[at0001]/items[at0002]/value|defining_code", "nameDerProzedurDefiningCode", NameDerProzedurDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> NAME_DER_PROZEDUR = new AqlFieldImp<DvCodedText>(ProzedurAction.class, "/description[at0001]/items[at0002]/value", "nameDerProzedur", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> NAME_DER_PROZEDUR_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProzedurAction.class, "/description[at0001]/items[at0002]/null_flavour|defining_code", "nameDerProzedurNullFlavourDefiningCode", NullFlavour.class, this);
 
@@ -31,7 +32,7 @@ public class ProzedurActionContainment extends Containment {
 
   public ListSelectAqlField<Cluster> MULTIMEDIA = new ListAqlFieldImp<Cluster>(ProzedurAction.class, "/description[at0001]/items[at0062]", "multimedia", Cluster.class, this);
 
-  public SelectAqlField<KategorieDefiningCode> ART_DER_PROZEDUR_DEFINING_CODE = new AqlFieldImp<KategorieDefiningCode>(ProzedurAction.class, "/description[at0001]/items[at0067]/value|defining_code", "artDerProzedurDefiningCode", KategorieDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> ART_DER_PROZEDUR = new AqlFieldImp<DvCodedText>(ProzedurAction.class, "/description[at0001]/items[at0067]/value", "artDerProzedur", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> ART_DER_PROZEDUR_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProzedurAction.class, "/description[at0001]/items[at0067]/null_flavour|defining_code", "artDerProzedurNullFlavourDefiningCode", NullFlavour.class, this);
 
