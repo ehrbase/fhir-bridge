@@ -16,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-ADMIN_ENTRY.person_data.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-15T13:49:30.030576+02:00",
+    date = "2021-10-11T14:49:10.129618+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class PersonendatenAdminEntry implements EntryEntity {
@@ -56,9 +56,9 @@ public class PersonendatenAdminEntry implements EntryEntity {
 
   /**
    * Path: GECCO_Personendaten/Personendaten/Adresse
-   * Description: Details zur Adresse abgestimmt mit FHIR-Ressource.
+   * Description: Eine physische oder postalische Adresse zur Verwendung in einer Gesundheitsakte.
    */
-  @Path("/data[at0001]/items[openEHR-EHR-CLUSTER.address_cc.v0]")
+  @Path("/data[at0001]/items[openEHR-EHR-CLUSTER.address.v0]")
   private List<AdresseCluster> adresse;
 
   /**

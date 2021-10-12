@@ -1,0 +1,178 @@
+{
+  "resourceType": "Observation",
+  "status": "final",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score"
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/aaaaaa",
+        "code": "aaa",
+        "display": "SOFA-Scorea"
+      },
+      {
+        "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes",
+        "code": "06",
+        "display": "SOFA-Score"
+      }
+    ],
+    "text": "Sepsis-related organ failure assessment score"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "effectiveDateTime": "2020-09-16",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "resp",
+            "display": "Respiratory system"
+          }
+        ],
+        "text": "SOFA Respiratory system scoring category"
+      },
+      "dataAbsentReason": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "ns",
+            "display": "Nervous system"
+          }
+        ],
+        "text": "SOFA Nervous system scoring category"
+      },
+      "dataAbsentReason": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "cvs",
+            "display": "Cardiovascular system"
+          }
+        ],
+        "text": "SOFA Cardiovascular system scoring category"
+      },
+      "dataAbsentReason": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "liv",
+            "display": "Liver"
+          }
+        ],
+        "text": "SOFA Liver scoring category"
+      },
+      "dataAbsentReason": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "coa",
+            "display": "Coagulation"
+          }
+        ],
+        "text": "SOFA Coagulation scoring category"
+      },
+      "dataAbsentReason": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "kid",
+            "display": "Kidneys"
+          }
+        ],
+        "text": "SOFA Kidneys scoring category"
+      },
+      "dataAbsentReason": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        ]
+      }
+    }
+  ],
+  "dataAbsentReason": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+        "code": "unknown",
+        "display": "Unknown"
+      }
+    ]
+  }
+}

@@ -4,13 +4,11 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum VerwendungDefiningCode implements EnumValueSet {
-  VORLAEUFIG("Vorläufig", "Vorläufige Anschrift.", "local", "at0004"),
+  GESCHAEFTLICH("Geschäftlich", "Adresse des physischen Standorts eines Unternehmens oder Büros.", "local", "at0006"),
 
-  HEIMAT("Heimat", "Anschrift der Heimat.", "local", "at0002"),
+  VORRUEBERGEHENDE_UNTERKUNFT("Vorrübergehende Unterkunft", "Adresse, an der eine Person vorübergehend lebt.", "local", "at0008"),
 
-  ALT("Alt", "Alte Anschrift.", "local", "at0005"),
-
-  ARBEIT("Arbeit", "Anschrift der Arbeitsstelle.", "local", "at0003");
+  PRIVAT("Privat", "Adresse, an der eine Person regelmäßig lebt.", "local", "at0007");
 
   private String value;
 

@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.gender.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-15T13:49:30.136372+02:00",
+    date = "2021-10-11T14:49:10.228288+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class GeschlechtEvaluation implements EntryEntity {
@@ -25,8 +26,8 @@ public class GeschlechtEvaluation implements EntryEntity {
    * Description: Das Geschlecht einer Person, das für administrative Zwecke verwendet wird.
    * Comment: Dieses Element beschreibt das, was die meisten Systeme heutzutage als "Geschlecht" (vgl. engl.: "Sex" oder "Gender") bezeichnen. Zum Beispiel "Männlich", "Weiblich", "Divers". Dieser Archetyp entspricht dem HL7 FHIR Element "Person.gender"'. Die Kodierung mit einer Terminologie wird empfohlen, wenn möglich.
    */
-  @Path("/data[at0002]/items[at0022]/value|defining_code")
-  private AdministrativesGeschlechtDefiningCode administrativesGeschlechtDefiningCode;
+  @Path("/data[at0002]/items[at0022]/value")
+  private DvCodedText administrativesGeschlecht;
 
   /**
    * Path: GECCO_Personendaten/Geschlecht/*Tree(en)/Administratives Geschlecht/null_flavour
@@ -39,8 +40,8 @@ public class GeschlechtEvaluation implements EntryEntity {
    * Description: Das Geschlecht einer Person, bestimmt durch anatomische Merkmale, welches bei der Geburt festgestellt und eingetragen wurden.
    * Comment: Zum Beispiel: "Männlich", "Weiblich", "Divers". Die Kodierung mit einer Terminologie wird empfohlen, wenn möglich. Falls notwendig, benutzen Sie das Element "Kommentar" oder den SLOT "Details" um genauere Angaben zum Geschlecht der Person zu machen.
    */
-  @Path("/data[at0002]/items[at0019 and name/value='Geschlecht bei der Geburt']/value|defining_code")
-  private GeschlechtBeiDerGeburtDefiningCode geschlechtBeiDerGeburtDefiningCode;
+  @Path("/data[at0002]/items[at0019 and name/value='Geschlecht bei der Geburt']/value")
+  private DvCodedText geschlechtBeiDerGeburt;
 
   /**
    * Path: GECCO_Personendaten/Geschlecht/*Tree(en)/Geschlecht bei der Geburt/null_flavour
@@ -82,13 +83,12 @@ public class GeschlechtEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setAdministrativesGeschlechtDefiningCode(
-      AdministrativesGeschlechtDefiningCode administrativesGeschlechtDefiningCode) {
-     this.administrativesGeschlechtDefiningCode = administrativesGeschlechtDefiningCode;
+  public void setAdministrativesGeschlecht(DvCodedText administrativesGeschlecht) {
+     this.administrativesGeschlecht = administrativesGeschlecht;
   }
 
-  public AdministrativesGeschlechtDefiningCode getAdministrativesGeschlechtDefiningCode() {
-     return this.administrativesGeschlechtDefiningCode ;
+  public DvCodedText getAdministrativesGeschlecht() {
+     return this.administrativesGeschlecht ;
   }
 
   public void setAdministrativesGeschlechtNullFlavourDefiningCode(
@@ -100,13 +100,12 @@ public class GeschlechtEvaluation implements EntryEntity {
      return this.administrativesGeschlechtNullFlavourDefiningCode ;
   }
 
-  public void setGeschlechtBeiDerGeburtDefiningCode(
-      GeschlechtBeiDerGeburtDefiningCode geschlechtBeiDerGeburtDefiningCode) {
-     this.geschlechtBeiDerGeburtDefiningCode = geschlechtBeiDerGeburtDefiningCode;
+  public void setGeschlechtBeiDerGeburt(DvCodedText geschlechtBeiDerGeburt) {
+     this.geschlechtBeiDerGeburt = geschlechtBeiDerGeburt;
   }
 
-  public GeschlechtBeiDerGeburtDefiningCode getGeschlechtBeiDerGeburtDefiningCode() {
-     return this.geschlechtBeiDerGeburtDefiningCode ;
+  public DvCodedText getGeschlechtBeiDerGeburt() {
+     return this.geschlechtBeiDerGeburt ;
   }
 
   public void setGeschlechtBeiDerGeburtNullFlavourDefiningCode(

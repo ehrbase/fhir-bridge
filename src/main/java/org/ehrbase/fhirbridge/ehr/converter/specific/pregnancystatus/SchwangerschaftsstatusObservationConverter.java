@@ -13,11 +13,11 @@ public class SchwangerschaftsstatusObservationConverter extends ObservationToObs
     @Override
     protected SchwangerschaftsstatusObservation convertInternal(Observation resource) {
         SchwangerschaftsstatusObservation schwangerschaftsstatusObservation = new SchwangerschaftsstatusObservation();
-        converStatus(resource, schwangerschaftsstatusObservation);
+        convertStatus(resource, schwangerschaftsstatusObservation);
         return schwangerschaftsstatusObservation;
     }
 
-    private void converStatus(Observation resource, SchwangerschaftsstatusObservation schwangerschaftsstatusObservation) {
+    private void convertStatus(Observation resource, SchwangerschaftsstatusObservation schwangerschaftsstatusObservation) {
         if (resource.hasValueCodeableConcept() && resource.getValueCodeableConcept().hasCoding()) {
             schwangerschaftsstatusObservation.setStatusDefiningCode(mapStatus(resource));
         }else{
@@ -40,6 +40,7 @@ public class SchwangerschaftsstatusObservationConverter extends ObservationToObs
         } else if (coding.getSystem().equals(CodeSystem.LOINC.getUrl())) {
             return convertStatusLoinc(coding);
         } else {
+            // not accessible due to HAPI FHIR - therefore not tested
             throw new ConversionException("Code system is not of type LOINC and SNOMED " + coding.getCode() + " and therefore not supported");
         }
     }
@@ -64,6 +65,7 @@ public class SchwangerschaftsstatusObservationConverter extends ObservationToObs
         } else if ("261665006".equals(coding.getCode())) {
             return StatusDefiningCode2.UNBEKANNT;
         } else {
+            // (not thrown as valid LOINC Code [1...1] is listed above invalid SNOMED code [0...1])
             throw new ConversionException("Status code " + coding.getCode() + " is not supported");
         }
     }

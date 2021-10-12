@@ -34,13 +34,13 @@ public class PregnancyStatusCompositionConverter extends ObservationToCompositio
     private List<SchwangerschaftsstatusKategorieElement> mapKategorie(Observation resource) {
         List<SchwangerschaftsstatusKategorieElement> schwangerschaftsstatusKategorieElements = new ArrayList<>();
         if (resource.hasCategory()) {
-            return convertSchwangerschaftsstatusKategoire(resource, schwangerschaftsstatusKategorieElements);
+            return convertSchwangerschaftsstatusKategorie(resource, schwangerschaftsstatusKategorieElements);
         } else {
             return new ArrayList<>();
         }
     }
 
-    private List<SchwangerschaftsstatusKategorieElement> convertSchwangerschaftsstatusKategoire(Observation resource, List<SchwangerschaftsstatusKategorieElement> schwangerschaftsstatusKategorieElements) {
+    private List<SchwangerschaftsstatusKategorieElement> convertSchwangerschaftsstatusKategorie(Observation resource, List<SchwangerschaftsstatusKategorieElement> schwangerschaftsstatusKategorieElements) {
         resource.getCategory()
                 .stream()
                 .filter(CodeableConcept::hasCoding)
