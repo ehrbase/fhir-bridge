@@ -1,10 +1,11 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="gecco-observation-sars-cov-2-ab-pnl-ser-pl-ia" />
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-pnl-ser-pl-ia" />
-  <version value="1.0" />
+  <version value="1.0.4" />
   <name value="SarsCoV2AbPnlSerPlIA" />
   <title value="SARS-CoV-2 (COVID-19) Ab panel - Serum or Plasma by Immunoassay" />
   <status value="active" />
-  <date value="2020-10-29" />
+  <date value="2021-05-31" />
   <publisher value="Charité" />
   <contact>
     <telecom>
@@ -3965,7 +3966,7 @@
         <key value="mii-lab-1" />
         <severity value="error" />
         <human value="Datetime must be at least to day" />
-        <expression value="($this as dateTime).toString().length() &gt;= 8" />
+        <expression value="($this as dateTime).hasValue() implies ($this as dateTime).toString().length() &gt;= 8" />
         <source value="https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab" />
       </constraint>
       <mustSupport value="true" />
@@ -6329,7 +6330,7 @@
         <key value="mii-lab-1" />
         <severity value="error" />
         <human value="Datetime must be at least to day" />
-        <expression value="($this as dateTime).toString().length() &gt;= 8" />
+        <expression value="($this as dateTime).hasValue() implies ($this as dateTime).toString().length() &gt;= 8" />
         <source value="https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/ObservationLab" />
       </constraint>
       <mustSupport value="true" />

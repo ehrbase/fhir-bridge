@@ -42,6 +42,14 @@ public class SerologischerBefundIT  extends AbstractBundleMappingTestSetupIT {
     }
 
     @Test
+    void absentReason() throws IOException {
+        testMapping("create-anti-body-panel-absent.json",
+                "paragon-create-anti-body-panel-absent.json");
+    }
+
+
+
+    @Test
     void mappingInvalidKategorie() throws IOException {
         Exception exception =  executeMappingException("invalid-kategorie.json");
         assertEquals("Category code is not defined in anti body panel, therefore the bundle is incomplete. Please add category observation category to the panel", exception.getMessage());
