@@ -37,7 +37,7 @@
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-io.version>2.8.0</commons-io.version>
         <commons-text.version>1.9</commons-text.version>
-        <ehrbase-sdk.version>develop-SNAPSHOT</ehrbase-sdk.version>
+        <ehrbase-sdk.version>10cce9b</ehrbase-sdk.version>
         <findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
         <guava.version>30.1-jre</guava.version>
         <javassist.version>3.27.0-GA</javassist.version>
