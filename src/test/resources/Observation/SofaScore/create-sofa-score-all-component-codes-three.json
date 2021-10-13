@@ -1,0 +1,176 @@
+{
+  "resourceType": "Observation",
+  "status": "final",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sofa-score"
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/aaaaaa",
+        "code": "aaa",
+        "display": "SOFA-Scorea"
+      },
+      {
+        "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes",
+        "code": "06",
+        "display": "SOFA-Score"
+      }
+    ],
+    "text": "Sepsis-related organ failure assessment score"
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "effectiveDateTime": "2020-09-16",
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "resp",
+            "display": "Respiratory system"
+          }
+        ],
+        "text": "SOFA Respiratory system scoring category"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "resp3",
+            "display": "Respiratory system SOFA score 3"
+          }
+        ],
+        "text": "PaO2/FiO2 [mmHg (kPa)] < 200 (26.7) and mechanically ventilated"
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "ns",
+            "display": "Nervous system"
+          }
+        ],
+        "text": "SOFA Nervous system scoring category"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "ns3",
+            "display": "Nervous system SOFA score 3"
+          }
+        ],
+        "text": "Glasgow Coma Scale (GCS) 6-9"
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "cvs",
+            "display": "Cardiovascular system"
+          }
+        ],
+        "text": "SOFA Cardiovascular system scoring category"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "cvs3",
+            "display": "Cardiovascular system SOFA score 3"
+          }
+        ],
+        "text": "Administration of dopamine > 5 ug/kg/min OR epinephrine ≤ 0.1 ug/kg/min OR norepinephrine ≤ 0.1 ug/kg/min"
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "liv",
+            "display": "Liver"
+          }
+        ],
+        "text": "SOFA Liver scoring category"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "liv3",
+            "display": "Liver SOFA score 3"
+          }
+        ],
+        "text": "Bilirubin (mg/dl) [umol/L] 6.0-11.9 [102-204]"
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "coa",
+            "display": "Coagulation"
+          }
+        ],
+        "text": "SOFA Coagulation scoring category"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "coa3",
+            "display": "Coagulation SOFA score 3"
+          }
+        ],
+        "text": "Platelets×10^3/ul < 50"
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "kid",
+            "display": "Kidneys"
+          }
+        ],
+        "text": "SOFA Kidneys scoring category"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
+            "code": "kid3",
+            "display": "Kidneys SOFA score 3"
+          }
+        ],
+        "text": "Creatinine (mg/dl) [umol/L] (or urine output) 3.5-4.9 [300-440] (or < 500 ml/d)"
+      }
+    }
+  ],
+  "valueInteger": 18
+}

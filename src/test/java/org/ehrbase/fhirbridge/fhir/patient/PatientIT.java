@@ -86,7 +86,6 @@ class PatientIT extends AbstractMappingTestSetupIT {
                 .registerValueObject((PersonendatenAdminEntry.class))
                 .registerValueObject((AlterObservation.class))
                 .registerValueObject((EthnischerHintergrundCluster.class))
-                .registerValueObject((EthnischerHintergrundDefiningCode.class))
                 .registerValueObject((DatenZurGeburtCluster.class))
                 .registerValueObject((GeschlechtEvaluation.class))
                 .registerValueObject((AngabenZumTodCluster.class))

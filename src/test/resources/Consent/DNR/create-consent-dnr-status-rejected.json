@@ -1,0 +1,70 @@
+{
+  "resourceType": "Consent",
+  "id": "e1c90e84-aa7b-4999-8036-27f88dd7b60e",
+  "meta": {
+    "profile": [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order"
+    ]
+  },
+  "status": "rejected",
+  "scope": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/consentscope",
+        "code": "adr",
+        "display": "Advanced Care Directive"
+      }
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/consentcategorycodes",
+          "code": "dnr",
+          "display": "Do Not Resuscitate"
+        }
+      ]
+    }
+  ],
+  "patient": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "policy": [
+    {
+      "uri": "https://www.aerzteblatt.de/archiv/65440/DNR-Anordnungen-Das-fehlende-Bindeglied"
+    }
+  ],
+  "provision": {
+    "code": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "304252001",
+            "display": "For resuscitation"
+          }
+        ]
+      }
+    ]
+  },
+  "performer": [
+    {
+      "identifier": {
+        "system": "urn:performer:identifier:system",
+        "value": "performer_123456"
+      }
+    }
+  ],
+  "organization": [
+    {
+      "identifier": {
+        "system": "urn:organization:identifier:system",
+        "value": "organization_123456"
+      }
+    }
+  ]
+}
