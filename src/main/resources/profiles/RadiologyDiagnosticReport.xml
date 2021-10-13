@@ -1,10 +1,11 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="gecco-diagnostic-report-radiology" />
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnostic-report-radiology" />
-  <version value="1.0" />
+  <version value="1.0.5" />
   <name value="DiagnosticReportRadiology" />
   <title value="Diagnostic Report Radiology" />
   <status value="active" />
-  <date value="2020-10-29" />
+  <date value="2021-09-08" />
   <publisher value="Charité" />
   <contact>
     <telecom>
@@ -2415,7 +2416,7 @@
       <alias value="Observation time" />
       <alias value="Effective Time" />
       <alias value="Occurrence" />
-      <min value="0" />
+      <min value="1" />
       <max value="1" />
       <base>
         <path value="DiagnosticReport.effective[x]" />
@@ -2437,6 +2438,7 @@
         <xpath value="@value|f:*|h:div" />
         <source value="http://hl7.org/fhir/StructureDefinition/Element" />
       </constraint>
+      <mustSupport value="true" />
       <isSummary value="true" />
       <mapping>
         <identity value="rim" />
@@ -3914,6 +3916,11 @@
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Patient" />
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Group" />
       </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="DiagnosticReport.effective[x]">
+      <path value="DiagnosticReport.effective[x]" />
+      <min value="1" />
       <mustSupport value="true" />
     </element>
     <element id="DiagnosticReport.conclusionCode">

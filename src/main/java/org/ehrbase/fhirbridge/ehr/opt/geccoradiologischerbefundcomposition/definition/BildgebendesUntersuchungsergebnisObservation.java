@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.defi
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.datastructures.ItemTree;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
@@ -18,8 +19,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.imaging_exam_result.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T11:53:47.260318+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-10-12T14:47:43.572974+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class BildgebendesUntersuchungsergebnisObservation implements EntryEntity {
   /**
@@ -48,8 +49,8 @@ public class BildgebendesUntersuchungsergebnisObservation implements EntryEntity
    * Path: Radiologischer Befund/Bildgebendes Untersuchungsergebnis/Beliebiges Ereignis/Befunde
    * Description: Die Beschreibung der klinischen Befunde.
    */
-  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value|defining_code")
-  private BefundeDefiningCode befundeDefiningCode;
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value")
+  private DvCodedText befunde;
 
   /**
    * Path: Radiologischer Befund/Bildgebendes Untersuchungsergebnis/Event Series/Beliebiges Ereignis/Tree/Befunde/null_flavour
@@ -149,12 +150,12 @@ public class BildgebendesUntersuchungsergebnisObservation implements EntryEntity
      return this.anatomischePositionStrukturiert ;
   }
 
-  public void setBefundeDefiningCode(BefundeDefiningCode befundeDefiningCode) {
-     this.befundeDefiningCode = befundeDefiningCode;
+  public void setBefunde(DvCodedText befunde) {
+     this.befunde = befunde;
   }
 
-  public BefundeDefiningCode getBefundeDefiningCode() {
-     return this.befundeDefiningCode ;
+  public DvCodedText getBefunde() {
+     return this.befunde ;
   }
 
   public void setBefundeNullFlavourDefiningCode(NullFlavour befundeNullFlavourDefiningCode) {
