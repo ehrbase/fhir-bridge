@@ -20,7 +20,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 @Archetype("openEHR-EHR-ACTION.procedure.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-13T11:55:30.803841+02:00",
+    date = "2021-10-13T12:33:28.916846+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProzedurAction implements EntryEntity {
@@ -51,14 +51,8 @@ public class ProzedurAction implements EntryEntity {
    * Description: Anatomische Lokalisation, an der die Prozedur durchgeführt wird.
    * Comment: Das Vorkommen dieses Datenelements ist nicht eingeschränkt. Dies ermöglicht die Darstellung von klinischen Situationen, in denen alle Eigenschaften, ausgenommen die anatomische Lokalisation, identisch sind, wie z.B. das Entfernen mehrerer Hautläsionen an verschiedenen Stellen. Verwenden Sie dieses Datenelement, um einfache Begriffe oder präkoordinierte anatomische Lokalisationen aufzunehmen. Wenn die Anforderungen an die Erfassung der anatomischen Lokalisation zur Laufzeit durch die Anwendung festgelegt werden oder komplexere Modellierungen wie z.B. die relative Lokalisation erforderlich sind, verwenden Sie entweder CLUSTER.anatomical_location oder CLUSTER.relative_location innerhalb des Slots "Details zur Prozedur" in diesem Archetyp. Wird die anatomische Lokalisation über vordefinierte Codes in den Namen der Prozedur aufgenommen, wird dieses Datenelement redundant.
    */
-  @Path("/description[at0001]/items[at0063]/value")
-  private DvCodedText koerperstelle;
-
-  /**
-   * Path: GECCO_Prozedur/Prozedur/Tree/Körperstelle/null_flavour
-   */
-  @Path("/description[at0001]/items[at0063]/null_flavour|defining_code")
-  private NullFlavour koerperstelleNullFlavourDefiningCode;
+  @Path("/description[at0001]/items[at0063]")
+  private List<ProzedurKoerperstelleElement> koerperstelle;
 
   /**
    * Path: GECCO_Prozedur/Prozedur/Medizingerät
@@ -206,21 +200,12 @@ public class ProzedurAction implements EntryEntity {
      return this.indikation ;
   }
 
-  public void setKoerperstelle(DvCodedText koerperstelle) {
+  public void setKoerperstelle(List<ProzedurKoerperstelleElement> koerperstelle) {
      this.koerperstelle = koerperstelle;
   }
 
-  public DvCodedText getKoerperstelle() {
+  public List<ProzedurKoerperstelleElement> getKoerperstelle() {
      return this.koerperstelle ;
-  }
-
-  public void setKoerperstelleNullFlavourDefiningCode(
-      NullFlavour koerperstelleNullFlavourDefiningCode) {
-     this.koerperstelleNullFlavourDefiningCode = koerperstelleNullFlavourDefiningCode;
-  }
-
-  public NullFlavour getKoerperstelleNullFlavourDefiningCode() {
-     return this.koerperstelleNullFlavourDefiningCode ;
   }
 
   public void setMedizingeraet(List<MedizingeraetCluster> medizingeraet) {

@@ -36,8 +36,6 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
         testMapping("mapping/apheresis-example-1.json", "mapping/apheresis-example-1-result.json");
         testMapping("mapping/apheresis-example-2.json", "mapping/apheresis-example-2-result.json");
         testMapping("mapping/apheresis-example-3.json", "mapping/apheresis-example-3-result.json");
-        testMapping("mapping/apheresis-example-4.json", "mapping/apheresis-example-4-result.json");
-        testMapping("mapping/apheresis-example-5.json", "mapping/apheresis-example-5-result.json");
     }
 
     @Test
@@ -45,9 +43,6 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
         testMapping("mapping/dialysis-example-1.json", "mapping/dialysis-example-1-result.json");
         testMapping("mapping/dialysis-example-2.json", "mapping/dialysis-example-2-result.json");
         testMapping("mapping/dialysis-example-3.json", "mapping/dialysis-example-3-result.json");
-        testMapping("mapping/dialysis-example-4.json", "mapping/dialysis-example-4-result.json");
-        testMapping("mapping/dialysis-example-5.json", "mapping/dialysis-example-5-result.json");
-        testMapping("mapping/dialysis-example-6.json", "mapping/dialysis-example-6-result.json");
 
     }
 
@@ -55,7 +50,6 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
     void createExtracorporealMembraneOxygenation() throws IOException {
         testMapping("mapping/extracorporeal-membrane-oxygenation-example-1.json", "mapping/extracorporeal-membrane-oxygenation-example-1-result.json");
         testMapping("mapping/extracorporeal-membrane-oxygenation-example-3.json", "mapping/extracorporeal-membrane-oxygenation-example-3-result.json");//TODO i stopped here
-        testMapping("mapping/extracorporeal-membrane-oxygenation-example-4.json", "mapping/extracorporeal-membrane-oxygenation-example-4-result.json");
         testMapping("mapping/extracorporeal-membrane-oxygenation-example-2.json", "mapping/extracorporeal-membrane-oxygenation-example-2-result.json");
 
     }
@@ -65,16 +59,14 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
         testMapping("mapping/prone-position-example-1.json", "mapping/prone-position-example-1-result.json");
         testMapping("mapping/prone-position-example-2.json", "mapping/prone-position-example-2-result.json");
         testMapping("mapping/prone-position-example-3.json", "mapping/prone-position-example-3-result.json");
-        testMapping("mapping/prone-position-example-4.json", "mapping/prone-position-example-4-result.json");
 
     }
 
     @Test
     void createRadiologyProcedures() throws IOException {
-        //testMapping("mapping/radiology-example-1.json", "mapping/radiology-example-1-result.json");
+        testMapping("mapping/radiology-example-1.json", "mapping/radiology-example-1-result.json");
         testMapping("mapping/radiology-example-2.json", "mapping/radiology-example-2-result.json");
         testMapping("mapping/radiology-example-3.json", "mapping/radiology-example-3-result.json");
-        testMapping("mapping/radiology-example-4.json", "mapping/radiology-example-4-result.json");
     }
 
     @Test
@@ -82,8 +74,6 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
         testMapping("mapping/respiratory-therapies-example-1.json", "mapping/respiratory-therapies-example-1-result.json");
         testMapping("mapping/respiratory-therapies-example-2.json", "mapping/respiratory-therapies-example-2-result.json");
         testMapping("mapping/respiratory-therapies-example-3.json", "mapping/respiratory-therapies-example-3-result.json");
-        testMapping("mapping/respiratory-therapies-example-4.json", "mapping/respiratory-therapies-example-4-result.json");
-        testMapping("mapping/respiratory-therapies-example-5.json", "mapping/respiratory-therapies-example-5-result.json");
     }
 
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
@@ -92,26 +82,6 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
         GECCOProzedurComposition mappedProzedurComposition = therapyCompositionConverter.convert(procedure);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedProzedurComposition);
         assertEquals(diff.getChanges().size(), 0);
-    }
-
-
-    @Test
-    void createApheresisWithInvalidCode() throws IOException {
-        Exception exception = executeMappingException("invalid/apheresis-invalid-code.json");
-        assertEquals("Invalid name of procedure", exception.getMessage());
-    }
-//TODO needs to be refactored when codings from the terminology server are added
-/*
-       @Test
-    void createRadiologyWithInvalidBodySite() throws IOException {
-        Exception exception = executeMappingException("invalid/radiology-example-invalid-body-site.json");
-        assertEquals("Invalid body site", exception.getMessage());
-    }*/
-
-    @Test
-    void createRespiratoryTherapiesWithInvalidMedicalDevice() throws IOException {
-        Exception exception = executeMappingException("invalid/respiratory-therapies-invalid-medical-device.json");
-        assertEquals("Invalid medical device code", exception.getMessage());
     }
 
     @Override
@@ -131,6 +101,7 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
                 .registerValueObject((UnbekannteProzedurEvaluation.class))
                 .registerValueObject((GeccoProzedurKategorieElement.class))
                 .registerValueObject((MedizingeraetCluster.class))
+                .registerValueObject((ProzedurKoerperstelleElement.class))
                 .build();
     }
 }
