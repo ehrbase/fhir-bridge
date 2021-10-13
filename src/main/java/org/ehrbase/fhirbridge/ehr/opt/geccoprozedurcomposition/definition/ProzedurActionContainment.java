@@ -24,7 +24,7 @@ public class ProzedurActionContainment extends Containment {
 
   public ListSelectAqlField<ProzedurIndikationElement> INDIKATION = new ListAqlFieldImp<ProzedurIndikationElement>(ProzedurAction.class, "/description[at0001]/items[at0070]", "indikation", ProzedurIndikationElement.class, this);
 
-  public SelectAqlField<String> KOERPERSTELLE_VALUE = new AqlFieldImp<String>(ProzedurAction.class, "/description[at0001]/items[at0063]/value|value", "koerperstelleValue", String.class, this);
+  public SelectAqlField<DvCodedText> KOERPERSTELLE = new AqlFieldImp<DvCodedText>(ProzedurAction.class, "/description[at0001]/items[at0063]/value", "koerperstelle", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> KOERPERSTELLE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProzedurAction.class, "/description[at0001]/items[at0063]/null_flavour|defining_code", "koerperstelleNullFlavourDefiningCode", NullFlavour.class, this);
 

@@ -20,7 +20,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 @Archetype("openEHR-EHR-ACTION.procedure.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-13T10:57:34.337468+02:00",
+    date = "2021-10-13T11:55:30.803841+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProzedurAction implements EntryEntity {
@@ -51,8 +51,8 @@ public class ProzedurAction implements EntryEntity {
    * Description: Anatomische Lokalisation, an der die Prozedur durchgeführt wird.
    * Comment: Das Vorkommen dieses Datenelements ist nicht eingeschränkt. Dies ermöglicht die Darstellung von klinischen Situationen, in denen alle Eigenschaften, ausgenommen die anatomische Lokalisation, identisch sind, wie z.B. das Entfernen mehrerer Hautläsionen an verschiedenen Stellen. Verwenden Sie dieses Datenelement, um einfache Begriffe oder präkoordinierte anatomische Lokalisationen aufzunehmen. Wenn die Anforderungen an die Erfassung der anatomischen Lokalisation zur Laufzeit durch die Anwendung festgelegt werden oder komplexere Modellierungen wie z.B. die relative Lokalisation erforderlich sind, verwenden Sie entweder CLUSTER.anatomical_location oder CLUSTER.relative_location innerhalb des Slots "Details zur Prozedur" in diesem Archetyp. Wird die anatomische Lokalisation über vordefinierte Codes in den Namen der Prozedur aufgenommen, wird dieses Datenelement redundant.
    */
-  @Path("/description[at0001]/items[at0063]/value|value")
-  private String koerperstelleValue;
+  @Path("/description[at0001]/items[at0063]/value")
+  private DvCodedText koerperstelle;
 
   /**
    * Path: GECCO_Prozedur/Prozedur/Tree/Körperstelle/null_flavour
@@ -206,12 +206,12 @@ public class ProzedurAction implements EntryEntity {
      return this.indikation ;
   }
 
-  public void setKoerperstelleValue(String koerperstelleValue) {
-     this.koerperstelleValue = koerperstelleValue;
+  public void setKoerperstelle(DvCodedText koerperstelle) {
+     this.koerperstelle = koerperstelle;
   }
 
-  public String getKoerperstelleValue() {
-     return this.koerperstelleValue ;
+  public DvCodedText getKoerperstelle() {
+     return this.koerperstelle ;
   }
 
   public void setKoerperstelleNullFlavourDefiningCode(

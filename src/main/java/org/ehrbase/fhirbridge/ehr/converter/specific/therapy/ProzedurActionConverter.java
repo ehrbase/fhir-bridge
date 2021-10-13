@@ -42,7 +42,7 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
     protected ProzedurAction convertInternal(Procedure procedure) {
         ProzedurAction result = new ProzedurAction();
         convertCode(procedure).ifPresent(result::setNameDerProzedur);
-        convertBodySite(procedure).ifPresent(result::setKoerperstelleValue);
+        convertBodySite(procedure).ifPresent(result::setKoerperstelle);
         result.setMedizingeraet(convertUsedCode(procedure));
         convertCode(procedure).ifPresent(result::setNameDerProzedur);
         convertCategory(procedure).ifPresent(result::setArtDerProzedur);
@@ -52,7 +52,11 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
         return result;
     }
 
-    private Optional<String> convertBodySite(Procedure procedure) { //TODO fix when codes are replaced in the template
+    private Optional<String> convertBodySite(Procedure procedure) {
+        for(Coding coding:procedure.getBodySite()){
+            return DvCodedTextParser.parseFHIRCoding(coding);
+        }
+        return Optional.empty();
         Optional<Coding> coding = procedure.getBodySite()
                 .stream()
                 .flatMap(concept -> concept.getCoding().stream())
