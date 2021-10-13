@@ -39,8 +39,7 @@
   "vaccineCode": {
     "coding": [
       {
-        "code": "333598008",
-        "display": "Pneumococcal vaccine",
+        "code": "871804001",
         "system": "http://snomed.info/sct"
       }
     ]

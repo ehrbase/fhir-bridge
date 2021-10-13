@@ -17,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.absence.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-12T15:08:17.361626+02:00",
+    date = "2021-10-13T17:05:46.220257+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class UnbekannterImpfstatusEvaluation implements EntryEntity {

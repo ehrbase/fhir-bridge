@@ -1,5 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ImmunizationToActionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
@@ -79,18 +81,19 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
     private void convertDosierungsReihenfolge(VerabreichteDosenCluster verabreichteDosenCluster) {
         if (immunizationProtocolAppliedComponent.hasSeriesDosesPositiveIntType()) {
             verabreichteDosenCluster.setDosierungsreihenfolgeMagnitude(Long.parseLong(immunizationProtocolAppliedComponent.getSeriesDosesPositiveIntType().toString()));
-        }/*else{
-            //ignore
-           try{
-                double quantity = Double.parseDouble(String.valueOf(immunizationProtocolAppliedComponent.getDoseNumberStringType()));
-            } catch (NumberFormatException exception) {
-            }
-        }*/
+        } else if (immunizationProtocolAppliedComponent.hasSeriesDosesStringType()) {
+            throw new UnprocessableEntityException("Currently the fhir bridge does not support inprecise values like strings for the dosage series, please enter an integer.");
+        }
     }
 
     private void convertMenge(VerabreichteDosenCluster verabreichteDosenCluster) {
         if (immunizationProtocolAppliedComponent.hasDoseNumberPositiveIntType()) {
             verabreichteDosenCluster.setDosismengeMagnitude(Double.parseDouble(immunizationProtocolAppliedComponent.getDoseNumberPositiveIntType().toString()));
+        }else if (immunizationProtocolAppliedComponent.hasDoseNumberStringType() &&
+                immunizationProtocolAppliedComponent.getDoseNumberStringType().hasExtension("http://hl7.org/fhir/StructureDefinition/data-absent-reason")) {
+            verabreichteDosenCluster.setDosismengeNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }  else if (immunizationProtocolAppliedComponent.hasDoseNumberStringType()) {
+            throw new UnprocessableEntityException("Currently the fhir bridge does not support inprecise values like strings for the dosage amount, please enter an integer.");
         }
     }
 
