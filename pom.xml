@@ -23,9 +23,9 @@
         <commons-io.version>2.11.0</commons-io.version>
         <commons-text.version>1.9</commons-text.version>
         <ehrbase-sdk.version>10cce9b</ehrbase-sdk.version>
-        <hapi-fhir.version>5.3.3</hapi-fhir.version>
+        <hapi-fhir.version>5.4.2</hapi-fhir.version>
         <guava.version>31.0.1-jre</guava.version>
-        <ipf.version>4.0.1</ipf.version>
+        <ipf.version>4.1.0</ipf.version>
         <javassist.version>3.28.0-GA</javassist.version>
         <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
         <maven-dependency-check-plugin.version>6.4.1</maven-dependency-check-plugin.version>
