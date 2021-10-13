@@ -25,10 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">5373accf8216bdad987f66efb59bd2f9</other_details>
+    <other_details id="MD5-CAM-1.0.1">a496299cb9d242530872aa80216464e8</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">4.0.0</other_details>
+    <other_details id="sem_ver">6.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -511,7 +511,7 @@
                                 </occurrences>
                                 <node_id/>
                                 <terminology_id>
-                                  <value>LOINC</value>
+                                  <value>http://loinc.org</value>
                                 </terminology_id>
                                 <code_list>26436-6</code_list>
                                 <code_list>18767-4</code_list>
@@ -639,7 +639,7 @@
                                     <lower>1</lower>
                                     <upper>1</upper>
                                   </existence>
-                                  <children xsi:type="C_CODE_PHRASE">
+                                  <children xsi:type="C_CODE_REFERENCE">
                                     <rm_type_name>CODE_PHRASE</rm_type_name>
                                     <occurrences>
                                       <lower_included>true</lower_included>
@@ -650,74 +650,7 @@
                                       <upper>1</upper>
                                     </occurrences>
                                     <node_id/>
-                                    <terminology_id>
-                                      <value>HL7</value>
-                                    </terminology_id>
-                                    <code_list>ABS</code_list>
-                                    <code_list>ACNE</code_list>
-                                    <code_list>ACNFLD</code_list>
-                                    <code_list>AIRS</code_list>
-                                    <code_list>ALL</code_list>
-                                    <code_list>AMN</code_list>
-                                    <code_list>AMP</code_list>
-                                    <code_list>ANGI</code_list>
-                                    <code_list>ARTC</code_list>
-                                    <code_list>ASERU</code_list>
-                                    <code_list>ASP</code_list>
-                                    <code_list>ATTE</code_list>
-                                    <code_list>AUTOA</code_list>
-                                    <code_list>AUTOC</code_list>
-                                    <code_list>AUTP</code_list>
-                                    <code_list>BBL</code_list>
-                                    <code_list>BCYST</code_list>
-                                    <code_list>BDY</code_list>
-                                    <code_list>BIFL</code_list>
-                                    <code_list>BITE</code_list>
-                                    <code_list>BLD</code_list>
-                                    <code_list>BLDA</code_list>
-                                    <code_list>BLDCO</code_list>
-                                    <code_list>BLDV</code_list>
-                                    <code_list>BLEB</code_list>
-                                    <code_list>BLIST</code_list>
-                                    <code_list>BOIL</code_list>
-                                    <code_list>BON</code_list>
-                                    <code_list>BONE</code_list>
-                                    <code_list>BOWL</code_list>
-                                    <code_list>BPH</code_list>
-                                    <code_list>BPU</code_list>
-                                    <code_list>BRN</code_list>
-                                    <code_list>BRSH</code_list>
-                                    <code_list>BRTH</code_list>
-                                    <code_list>BRUS</code_list>
-                                    <code_list>BUB</code_list>
-                                    <code_list>BULLA</code_list>
-                                    <code_list>BX</code_list>
-                                    <code_list>CALC</code_list>
-                                    <code_list>CARBU</code_list>
-                                    <code_list>CAT</code_list>
-                                    <code_list>CBITE</code_list>
-                                    <code_list>CDM</code_list>
-                                    <code_list>CLIPP</code_list>
-                                    <code_list>CNJT</code_list>
-                                    <code_list>CNL</code_list>
-                                    <code_list>COL</code_list>
-                                    <code_list>CONE</code_list>
-                                    <code_list>CSCR</code_list>
-                                    <code_list>CSERU</code_list>
-                                    <code_list>CSF</code_list>
-                                    <code_list>CSITE</code_list>
-                                    <code_list>CSMY</code_list>
-                                    <code_list>CST</code_list>
-                                    <code_list>CSVR</code_list>
-                                    <code_list>CTP</code_list>
-                                    <code_list>CUR</code_list>
-                                    <code_list>CVM</code_list>
-                                    <code_list>CVPS</code_list>
-                                    <code_list>CVPT</code_list>
-                                    <code_list>CYN</code_list>
-                                    <code_list>CYST</code_list>
-                                    <code_list>DBITE</code_list>
-                                    <code_list>DCS</code_list>
+                                    <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=http://terminology.hl7.org/ValueSet/v2-0487</referenceSetUri>
                                   </children>
                                 </attributes>
                               </children>
@@ -1638,201 +1571,6 @@ Ob dieses Element Bedingungen enthält, die während der Probenahme vorhanden se
                           <items id="comment">Zum Beispiel das gescannte Bild eines Histopathologie-Dias.</items>
                           <items id="description">Strukturierte Details über eine digitale Darstellung des Präparates.</items>
                           <items id="text">Digitale Darstellung</items>
-                        </term_definitions>
-                        <term_definitions code="ABS">
-                          <items id="text">Abscess</items>
-                        </term_definitions>
-                        <term_definitions code="ACNE">
-                          <items id="text">Tissue, Acne</items>
-                        </term_definitions>
-                        <term_definitions code="ACNFLD">
-                          <items id="text">Fluid, Acne</items>
-                        </term_definitions>
-                        <term_definitions code="AIRS">
-                          <items id="text">Air Sample</items>
-                        </term_definitions>
-                        <term_definitions code="ALL">
-                          <items id="text">Allograft</items>
-                        </term_definitions>
-                        <term_definitions code="AMN">
-                          <items id="text">Amniotic fluid</items>
-                        </term_definitions>
-                        <term_definitions code="AMP">
-                          <items id="text">Amputation</items>
-                        </term_definitions>
-                        <term_definitions code="ANGI">
-                          <items id="text">Catheter Tip, Angio</items>
-                        </term_definitions>
-                        <term_definitions code="ARTC">
-                          <items id="text">Catheter Tip, Arterial</items>
-                        </term_definitions>
-                        <term_definitions code="ASERU">
-                          <items id="text">Serum, Acute</items>
-                        </term_definitions>
-                        <term_definitions code="ASP">
-                          <items id="text">Aspirate</items>
-                        </term_definitions>
-                        <term_definitions code="ATTE">
-                          <items id="text">Environment, Attest</items>
-                        </term_definitions>
-                        <term_definitions code="AUTOA">
-                          <items id="text">Environmental, Autoclave Ampule</items>
-                        </term_definitions>
-                        <term_definitions code="AUTOC">
-                          <items id="text">Environmental, Autoclave Capsule</items>
-                        </term_definitions>
-                        <term_definitions code="AUTP">
-                          <items id="text">Autopsy</items>
-                        </term_definitions>
-                        <term_definitions code="BBL">
-                          <items id="text">Blood bag</items>
-                        </term_definitions>
-                        <term_definitions code="BCYST">
-                          <items id="text">Cyst, Baker's</items>
-                        </term_definitions>
-                        <term_definitions code="BDY">
-                          <items id="text">Whole body</items>
-                        </term_definitions>
-                        <term_definitions code="BIFL">
-                          <items id="text">Bile Fluid</items>
-                        </term_definitions>
-                        <term_definitions code="BITE">
-                          <items id="text">Bite</items>
-                        </term_definitions>
-                        <term_definitions code="BLD">
-                          <items id="text">Whole blood</items>
-                        </term_definitions>
-                        <term_definitions code="BLDA">
-                          <items id="text">Blood arterial</items>
-                        </term_definitions>
-                        <term_definitions code="BLDCO">
-                          <items id="text">Cord blood</items>
-                        </term_definitions>
-                        <term_definitions code="BLDV">
-                          <items id="text">Blood venous</items>
-                        </term_definitions>
-                        <term_definitions code="BLEB">
-                          <items id="text">Bleb</items>
-                        </term_definitions>
-                        <term_definitions code="BLIST">
-                          <items id="text">Blister</items>
-                        </term_definitions>
-                        <term_definitions code="BOIL">
-                          <items id="text">Boil</items>
-                        </term_definitions>
-                        <term_definitions code="BON">
-                          <items id="text">Bone</items>
-                        </term_definitions>
-                        <term_definitions code="BONE">
-                          <items id="text">Bone</items>
-                        </term_definitions>
-                        <term_definitions code="BOWL">
-                          <items id="text">Bowel contents</items>
-                        </term_definitions>
-                        <term_definitions code="BPH">
-                          <items id="text">Basophils</items>
-                        </term_definitions>
-                        <term_definitions code="BPU">
-                          <items id="text">Blood product unit</items>
-                        </term_definitions>
-                        <term_definitions code="BRN">
-                          <items id="text">Burn</items>
-                        </term_definitions>
-                        <term_definitions code="BRSH">
-                          <items id="text">Brush</items>
-                        </term_definitions>
-                        <term_definitions code="BRTH">
-                          <items id="text">Breath (use EXHLD)</items>
-                        </term_definitions>
-                        <term_definitions code="BRUS">
-                          <items id="text">Brushing</items>
-                        </term_definitions>
-                        <term_definitions code="BUB">
-                          <items id="text">Bubo</items>
-                        </term_definitions>
-                        <term_definitions code="BULLA">
-                          <items id="text">Bulla/Bullae</items>
-                        </term_definitions>
-                        <term_definitions code="BX">
-                          <items id="text">Biopsy</items>
-                        </term_definitions>
-                        <term_definitions code="CALC">
-                          <items id="text">Calculus (=Stone)</items>
-                        </term_definitions>
-                        <term_definitions code="CARBU">
-                          <items id="text">Carbuncle</items>
-                        </term_definitions>
-                        <term_definitions code="CAT">
-                          <items id="text">Catheter</items>
-                        </term_definitions>
-                        <term_definitions code="CBITE">
-                          <items id="text">Bite, Cat</items>
-                        </term_definitions>
-                        <term_definitions code="CDM">
-                          <items id="text">Cardiac muscle</items>
-                        </term_definitions>
-                        <term_definitions code="CLIPP">
-                          <items id="text">Clippings</items>
-                        </term_definitions>
-                        <term_definitions code="CNJT">
-                          <items id="text">Conjunctiva</items>
-                        </term_definitions>
-                        <term_definitions code="CNL">
-                          <items id="text">Cannula</items>
-                        </term_definitions>
-                        <term_definitions code="COL">
-                          <items id="text">Colostrum</items>
-                        </term_definitions>
-                        <term_definitions code="CONE">
-                          <items id="text">Biospy, Cone</items>
-                        </term_definitions>
-                        <term_definitions code="CSCR">
-                          <items id="text">Scratch, Cat</items>
-                        </term_definitions>
-                        <term_definitions code="CSERU">
-                          <items id="text">Serum, Convalescent</items>
-                        </term_definitions>
-                        <term_definitions code="CSF">
-                          <items id="text">Cerebral spinal fluid</items>
-                        </term_definitions>
-                        <term_definitions code="CSITE">
-                          <items id="text">Catheter Insertion Site</items>
-                        </term_definitions>
-                        <term_definitions code="CSMY">
-                          <items id="text">Fluid, Cystostomy Tube</items>
-                        </term_definitions>
-                        <term_definitions code="CST">
-                          <items id="text">Fluid, Cyst</items>
-                        </term_definitions>
-                        <term_definitions code="CSVR">
-                          <items id="text">Blood, Cell Saver</items>
-                        </term_definitions>
-                        <term_definitions code="CTP">
-                          <items id="text">Catheter tip</items>
-                        </term_definitions>
-                        <term_definitions code="CUR">
-                          <items id="text">Curretage</items>
-                        </term_definitions>
-                        <term_definitions code="CVM">
-                          <items id="text">Cervical Mucus</items>
-                        </term_definitions>
-                        <term_definitions code="CVPS">
-                          <items id="text">Site, CVP</items>
-                        </term_definitions>
-                        <term_definitions code="CVPT">
-                          <items id="text">Catheter Tip, CVP</items>
-                        </term_definitions>
-                        <term_definitions code="CYN">
-                          <items id="text">Nodule, Cystic</items>
-                        </term_definitions>
-                        <term_definitions code="CYST">
-                          <items id="text">Cyst</items>
-                        </term_definitions>
-                        <term_definitions code="DBITE">
-                          <items id="text">Bite, Dog</items>
-                        </term_definitions>
-                        <term_definitions code="DCS">
-                          <items id="text">Sputum, Deep Coug</items>
                         </term_definitions>
                       </children>
                       <children xsi:type="C_ARCHETYPE_ROOT">

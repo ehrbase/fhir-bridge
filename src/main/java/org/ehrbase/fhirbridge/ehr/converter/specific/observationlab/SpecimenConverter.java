@@ -1,7 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.EignungZumTestenDefiningCode;
@@ -10,7 +12,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.Pro
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeEignungZumTestenDvCodedText;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeIdentifikatorDerUebergeordnetenProbeElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbeProbenentahmebedingungElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProbenartDefiningCode;
 import org.hl7.fhir.r4.model.Annotation;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -28,7 +29,7 @@ public class SpecimenConverter {
 
     public ProbeCluster convert(Specimen specimenTarget) {
         ProbeCluster probe = new ProbeCluster();
-        mapProbenart(specimenTarget).ifPresent(probe::setProbenartDefiningCode);
+        mapProbenart(specimenTarget).ifPresent(probe::setProbenart);
         mapAccessionIdentifier(specimenTarget).ifPresent(probe::setLaborprobenidentifikator);
         mapIdentifier(specimenTarget).ifPresent(probe::setExternerIdentifikator);
         mapReceivedTime(specimenTarget).ifPresent(probe::setZeitpunktDesProbeneingangsValue);
@@ -43,29 +44,19 @@ public class SpecimenConverter {
         return probe;
     }
 
-    private Optional<ProbenartDefiningCode> mapProbenart(Specimen specimenTarget) {
+    private Optional<DvCodedText> mapProbenart(Specimen specimenTarget) {
         if (specimenTarget.hasType() && specimenTarget.getType().hasCoding()) {
             return convertProbenArtDefiningCode(specimenTarget);
         }
         return Optional.empty();
     }
 
-    private Optional<ProbenartDefiningCode> convertProbenArtDefiningCode(Specimen specimenTarget) {
+    private Optional<DvCodedText> convertProbenArtDefiningCode(Specimen specimenTarget) {
         for (Coding coding : specimenTarget.getType().getCoding()) {
-            if (coding.hasSystem() && coding.getSystem().equals("http://terminology.hl7.org/CodeSystem/v2-0487") && coding.hasCode()) {
-                return convertProbenartIfKeyPresent(coding);
-            }
+            return DvCodedTextParser.parseFHIRCoding(coding);
         }
         return Optional.empty();
     }
-
-    private Optional<ProbenartDefiningCode> convertProbenartIfKeyPresent(Coding coding) {
-        if (ProbenartDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
-            return Optional.of(ProbenartDefiningCode.getCodesAsMap().get(coding.getCode()));
-        }
-        return Optional.empty();
-    }
-
 
     private Optional<DvIdentifier> mapAccessionIdentifier(Specimen specimenTarget) {
         if (specimenTarget.hasAccessionIdentifier()) {

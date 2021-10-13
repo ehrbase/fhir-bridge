@@ -7,27 +7,27 @@ import java.util.Map;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum LabortestKategorieDefiningCode implements EnumValueSet {
-  MICROBIOLOGY_STUDIES_SET("Microbiology studies (set)", "", "LOINC", "18725-2"),
+  MICROBIOLOGY_STUDIES_SET("Microbiology studies (set)", "", "http://loinc.org", "18725-2"),
 
-  LABORATORY_STUDIES_SET("Laboratory studies (set)", "", "LOINC", "26436-6"),
+  LABORATORY_STUDIES_SET("Laboratory studies (set)", "", "http://loinc.org", "26436-6"),
 
-  CARDIAC_BIOMARKERS_SET("Cardiac biomarkers (set)", "", "LOINC", "56846-9"),
+  CARDIAC_BIOMARKERS_SET("Cardiac biomarkers (set)", "", "http://loinc.org", "56846-9"),
 
-  HEMATOLOGY_STUDIES_SET("Hematology studies (set)", "", "LOINC", "18723-7"),
+  HEMATOLOGY_STUDIES_SET("Hematology studies (set)", "", "http://loinc.org", "18723-7"),
 
-  BLOOD_GAS_STUDIES_SET("Blood gas studies (set)", "", "LOINC", "18767-4"),
+  BLOOD_GAS_STUDIES_SET("Blood gas studies (set)", "", "http://loinc.org", "18767-4"),
 
-  SEROLOGY_AND_BLOOD_BANK_STUDIES_SET("Serology and blood bank studies (set)", "", "LOINC", "56874-1"),
+  SEROLOGY_AND_BLOOD_BANK_STUDIES_SET("Serology and blood bank studies (set)", "", "http://loinc.org", "56874-1"),
 
-  CHEMISTRY_STUDIES_SET("Chemistry studies (set)", "", "LOINC", "18719-5"),
+  CHEMISTRY_STUDIES_SET("Chemistry studies (set)", "", "http://loinc.org", "18719-5"),
 
-  COAGULATION_STUDIES_SET("Coagulation studies (set)", "", "LOINC", "18720-3"),
+  COAGULATION_STUDIES_SET("Coagulation studies (set)", "", "http://loinc.org", "18720-3"),
 
-  URINALYSIS_STUDIES_SET("Urinalysis studies (set)", "", "LOINC", "18729-4"),
+  URINALYSIS_STUDIES_SET("Urinalysis studies (set)", "", "http://loinc.org", "18729-4"),
 
-  TOXICOLOGY_STUDIES_SET("Toxicology studies (set)", "", "LOINC", "18728-6"),
+  TOXICOLOGY_STUDIES_SET("Toxicology studies (set)", "", "http://loinc.org", "18728-6"),
 
-  CALCULATED_AND_DERIVED_VALUES_SET("Calculated and derived values (set)", "", "LOINC", "56847-7");
+  CALCULATED_AND_DERIVED_VALUES_SET("Calculated and derived values (set)", "", "http://loinc.org", "56847-7");
 
   private String value;
 
