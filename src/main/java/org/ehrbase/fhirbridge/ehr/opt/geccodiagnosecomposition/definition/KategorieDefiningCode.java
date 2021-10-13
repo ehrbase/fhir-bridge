@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehrbase.client.classgenerator.EnumValueSet;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.InterpretationDefiningCode;
 
 public enum KategorieDefiningCode implements EnumValueSet {
   PULMONARYMEDICINE("PulmonaryMedicine", "", "SNOMED Clinical Terms", "418112009"),

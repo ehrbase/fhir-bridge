@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -16,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class LaborergebnisObservationContainment extends Containment {
   public SelectAqlField<LaborergebnisObservation> LABORERGEBNIS_OBSERVATION = new AqlFieldImp<LaborergebnisObservation>(LaborergebnisObservation.class, "", "LaborergebnisObservation", LaborergebnisObservation.class, this);
 
-  public SelectAqlField<LabortestKategorieDefiningCode> LABORTEST_KATEGORIE_DEFINING_CODE = new AqlFieldImp<LabortestKategorieDefiningCode>(LaborergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0005]/value|defining_code", "labortestKategorieDefiningCode", LabortestKategorieDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> LABORTEST_KATEGORIE = new AqlFieldImp<DvCodedText>(LaborergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0005]/value", "labortestKategorie", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> LABORTEST_KATEGORIE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(LaborergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0005]/null_flavour|defining_code", "labortestKategorieNullFlavourDefiningCode", NullFlavour.class, this);
 

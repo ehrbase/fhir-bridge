@@ -6,9 +6,7 @@ import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.InterpretationDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytErgebnisStatusChoice;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytErgebnisStatusDvCodedText;
@@ -47,7 +45,7 @@ public class LaborAnalytConverter {
                 () -> {
                     proLaboranalytCluster.setMesswertNullFlavourDefiningCode(NullFlavour.UNKNOWN);
                 });
-        mapInterpretation(observation).ifPresent(proLaboranalytCluster::setInterpretationDefiningCode);
+        mapInterpretation(observation).ifPresent(proLaboranalytCluster::setInterpretation); //TODO has to be updated in the template to interpretationlist
         mapProbeId(observation).ifPresent(proLaboranalytCluster::setProbeId);
         mapZeitpunktderValidierung(observation).ifPresent(proLaboranalytCluster::setZeitpunktDerValidierungValue);
         mapZeitpunktDesErgebnisStatuses(observation).ifPresent(proLaboranalytCluster::setZeitpunktErgebnisStatusValue);
@@ -117,7 +115,7 @@ public class LaborAnalytConverter {
         return laboranalytResultat;
     }
 
-    private Optional<InterpretationDefiningCode> mapInterpretation(Observation observation) {
+    private Optional<DvCodedText> mapInterpretation(Observation observation) {
         if (observation.hasInterpretation()) {
             for (CodeableConcept interpretations : observation.getInterpretation()) {
                 if (interpretations.hasCoding()) {
@@ -128,21 +126,12 @@ public class LaborAnalytConverter {
         return Optional.empty();
     }
 
-    private Optional<InterpretationDefiningCode> convertInterpretationDefiningCode(CodeableConcept interpretations) {
+    private Optional<DvCodedText> convertInterpretationDefiningCode(CodeableConcept interpretations) {
         for (Coding coding : interpretations.getCoding()) {
-            if (verifyCodingAndSystemInterpretation(coding)) {
-                return Optional.of(InterpretationDefiningCode.getCodesAsMap().get(coding.getCode()));
-            }
+                return DvCodedTextParser.parseFHIRCoding(coding);
         }
         return Optional.empty();
     }
-
-    private boolean verifyCodingAndSystemInterpretation(Coding coding) {
-        return coding.hasSystem() && coding.getSystem().equals(CodeSystem.HL7_OBSERVATI0N_INTERPRETATION.getUrl()) && coding.hasCode() && InterpretationDefiningCode.getCodesAsMap().containsKey(coding.getCode());
-    }
-
-
-
 
     private Optional<TemporalAccessor> mapZeitpunktderValidierung(Observation observation) {
         if (observation.hasEffectiveDateTimeType() || observation.hasValueTimeType() || observation.hasValueDateTimeType()) {

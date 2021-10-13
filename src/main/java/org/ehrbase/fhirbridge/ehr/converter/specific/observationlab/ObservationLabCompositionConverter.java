@@ -4,7 +4,6 @@ import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConv
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborbefundKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LabortestKategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -18,19 +17,10 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
     @Override
     public GECCOLaborbefundComposition convertInternal(@NonNull Observation resource) {
         GECCOLaborbefundComposition composition = new GECCOLaborbefundComposition();
-        initialiseLabortestBezeichnungMap();
         composition.setLaborergebnis(new LaborergebnisObservationConverter().convert(resource));
         composition.setStatusDefiningCode(getRegisterEintrag(resource));
         setKategorieValue(resource, composition);
         return composition;
-    }
-
-    private void initialiseLabortestBezeichnungMap() {
-        for (LabortestKategorieDefiningCode code : LabortestKategorieDefiningCode.values()) {
-            if (code.getTerminologyId().equals("http://loinc.org")) {
-                LabortestKategorieDefiningCode.getCodesAsMap().put(code.getCode(), code);
-            }
-        }
     }
 
     private void setKategorieValue(Observation resource, GECCOLaborbefundComposition composition) {

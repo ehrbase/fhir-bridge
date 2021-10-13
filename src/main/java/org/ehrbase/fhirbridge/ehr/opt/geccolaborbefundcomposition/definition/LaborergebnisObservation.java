@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -19,7 +20,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.laboratory_test_result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-12T16:46:51.703891+02:00",
+    date = "2021-10-13T18:14:32.910842+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class LaborergebnisObservation implements EntryEntity {
@@ -29,8 +30,8 @@ public class LaborergebnisObservation implements EntryEntity {
    * Comment: Ein Laborergebnis kann sich auf ein einzelnes Analyt oder eine Analytgruppe beziehen. Dazu zählen auch komplette Panel an Parametern. 
    * Es wird dringend empfohlen, die "Labortest-Bezeichnung" anhand einer Terminologie zu kodiereren, wie zum Beispiel LOINC oder SNOMED CT. Beispiel: "Glukose", "Harnstoff", "Abstrich", "Cortisol", "Leberbiopsie". Der Name kann u.U. auch das Probenmaterial oder den Patientenstatus (z.B. "Blutzuckerspiegel nüchtern") oder andere Informationen beinhalten wie "Kalium (Blutgas)".
    */
-  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0005 and name/value='Labortest-Kategorie']/value|defining_code")
-  private LabortestKategorieDefiningCode labortestKategorieDefiningCode;
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0005 and name/value='Labortest-Kategorie']/value")
+  private DvCodedText labortestKategorie;
 
   /**
    * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Labortest-Kategorie/null_flavour
@@ -190,13 +191,12 @@ public class LaborergebnisObservation implements EntryEntity {
   @Choice
   private LaborergebnisTestmethodeChoice testmethode;
 
-  public void setLabortestKategorieDefiningCode(
-      LabortestKategorieDefiningCode labortestKategorieDefiningCode) {
-     this.labortestKategorieDefiningCode = labortestKategorieDefiningCode;
+  public void setLabortestKategorie(DvCodedText labortestKategorie) {
+     this.labortestKategorie = labortestKategorie;
   }
 
-  public LabortestKategorieDefiningCode getLabortestKategorieDefiningCode() {
-     return this.labortestKategorieDefiningCode ;
+  public DvCodedText getLabortestKategorie() {
+     return this.labortestKategorie ;
   }
 
   public void setLabortestKategorieNullFlavourDefiningCode(
