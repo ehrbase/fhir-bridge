@@ -19,30 +19,29 @@
         <skipITs>true</skipITs>
         <commandLineArguments/>
         <!-- Versions -->
+        <checker.version>3.10.0</checker.version>
+        <classgraph.version>4.8.98</classgraph.version>
         <commons-compress.version>1.21</commons-compress.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-text.version>1.9</commons-text.version>
         <ehrbase-sdk.version>10cce9b</ehrbase-sdk.version>
-        <hapi-fhir.version>5.3.3</hapi-fhir.version>
+        <hapi-fhir.version>5.4.2</hapi-fhir.version>
         <guava.version>31.0.1-jre</guava.version>
-        <ipf.version>4.0.1</ipf.version>
+        <ipf.version>4.1.0</ipf.version>
         <javassist.version>3.28.0-GA</javassist.version>
+        <javers.version>5.14.0</javers.version>
+        <jaxb-core.version>2.3.0</jaxb-core.version>
+        <jena.version>4.2.0</jena.version>
+        <jsr305.version>3.0.2</jsr305.version>
         <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
         <maven-dependency-check-plugin.version>6.4.1</maven-dependency-check-plugin.version>
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
         <maven-jacoco-plugin.version>0.8.5</maven-jacoco-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <minio.version>8.3.1</minio.version>
+        <saxon.version>10.5</saxon.version>
         <spring-boot.version>2.5.5</spring-boot.version>
-
-        <classgraph.version>4.8.98</classgraph.version>
-        <javers.version>5.14.0</javers.version>
-        <okhttp.version>4.8.1</okhttp.version>
-        <commons-collections4.version>4.4</commons-collections4.version>
-        <findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
-        <jaxb-core.version>2.3.0.1</jaxb-core.version>
-        <jaxb-impl.version>2.3.3</jaxb-impl.version>
-        <stax2.version>4.2.1</stax2.version>
+        <woodstox.version>6.2.6</woodstox.version>
     </properties>
 
     <profiles>
@@ -369,14 +368,19 @@
                 <version>${hapi-fhir.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.fasterxml.woodstox</groupId>
+                <artifactId>woodstox-core</artifactId>
+                <version>${woodstox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>${jsr305.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-compress</artifactId>
-                <version>${commons-compress.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -384,54 +388,45 @@
                 <version>${commons-io.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>${jaxb-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.classgraph</groupId>
+                <artifactId>classgraph</artifactId>
+                <version>${classgraph.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.saxon</groupId>
+                <artifactId>Saxon-HE</artifactId>
+                <version>${saxon.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${commons-compress.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>jena-arq</artifactId>
+                <version>${jena.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-text</artifactId>
                 <version>${commons-text.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.checkerframework</groupId>
+                <artifactId>checker-qual</artifactId>
+                <version>${checker.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.javassist</groupId>
                 <artifactId>javassist</artifactId>
                 <version>${javassist.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.classgraph</groupId>
-                <artifactId>classgraph</artifactId>
-                <version>${classgraph.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.code.findbugs</groupId>
-                <artifactId>jsr305</artifactId>
-                <version>${findbugs-jsr305.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.xml.bind</groupId>
-                <artifactId>jaxb-core</artifactId>
-                <version>${jaxb-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.xml.bind</groupId>
-                <artifactId>jaxb-impl</artifactId>
-                <version>${jaxb-impl.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-collections4</artifactId>
-                <version>${commons-collections4.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.woodstox</groupId>
-                <artifactId>stax2-api</artifactId>
-                <version>${stax2.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
