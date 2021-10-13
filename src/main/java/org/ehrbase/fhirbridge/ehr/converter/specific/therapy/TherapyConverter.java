@@ -16,20 +16,20 @@
 
 package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.NameDerProzedurDefiningCode;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Procedure;
+import java.util.Optional;
 
 public interface TherapyConverter {
 
-    default NameDerProzedurDefiningCode convertCode(Procedure condition) {
-        return condition.getCode()
-                .getCoding()
-                .stream()
-                .filter(coding -> coding.getSystem().equals(CodeSystem.SNOMED.getUrl()))
-                .findFirst()
-                .map(coding -> NameDerProzedurDefiningCode.getCodesAsMap().get(coding.getCode()))
-                .orElseThrow(() -> new ConversionException("Invalid name of procedure"));
+    default Optional<DvCodedText> convertCode(Procedure condition) {
+        for(Coding coding:condition.getCode().getCoding()){
+            return DvCodedTextParser.parseFHIRCoding(coding);
+        }
+       return Optional.empty();
     }
 }

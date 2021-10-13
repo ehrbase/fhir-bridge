@@ -31,6 +31,5 @@
       "system": "urn:ietf:rfc:4122",
       "value": "{{patientId}}"
     }
-  },
-  "resourceType": "Procedure"
+  }
 }

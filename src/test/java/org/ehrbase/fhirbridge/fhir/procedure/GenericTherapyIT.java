@@ -54,7 +54,7 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
     @Test
     void createExtracorporealMembraneOxygenation() throws IOException {
         testMapping("mapping/extracorporeal-membrane-oxygenation-example-1.json", "mapping/extracorporeal-membrane-oxygenation-example-1-result.json");
-        testMapping("mapping/extracorporeal-membrane-oxygenation-example-3.json", "mapping/extracorporeal-membrane-oxygenation-example-3-result.json");
+        testMapping("mapping/extracorporeal-membrane-oxygenation-example-3.json", "mapping/extracorporeal-membrane-oxygenation-example-3-result.json");//TODO i stopped here
         testMapping("mapping/extracorporeal-membrane-oxygenation-example-4.json", "mapping/extracorporeal-membrane-oxygenation-example-4-result.json");
         testMapping("mapping/extracorporeal-membrane-oxygenation-example-2.json", "mapping/extracorporeal-membrane-oxygenation-example-2-result.json");
 
@@ -84,12 +84,6 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
         testMapping("mapping/respiratory-therapies-example-3.json", "mapping/respiratory-therapies-example-3-result.json");
         testMapping("mapping/respiratory-therapies-example-4.json", "mapping/respiratory-therapies-example-4-result.json");
         testMapping("mapping/respiratory-therapies-example-5.json", "mapping/respiratory-therapies-example-5-result.json");
-        testMapping("mapping/respiratory-therapies-example-7.json", "mapping/respiratory-therapies-example-7-result.json");
-        testMapping("mapping/respiratory-therapies-example-8.json", "mapping/respiratory-therapies-example-8-result.json");
-        testMapping("mapping/respiratory-therapies-example-11.json", "mapping/respiratory-therapies-example-11-result.json");
-        testMapping("mapping/respiratory-therapies-example-10.json", "mapping/respiratory-therapies-example-10-result.json");
-        testMapping("mapping/respiratory-therapies-example-9.json", "mapping/respiratory-therapies-example-9-result.json");
-        testMapping("mapping/respiratory-therapies-example-6.json", "mapping/respiratory-therapies-example-6-result.json");
     }
 
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
@@ -131,7 +125,7 @@ class GenericTherapyIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(GECCOProzedurComposition.class, List.of("location")))
+                .registerValueObject(new ValueObjectDefinition(GECCOProzedurComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject((ProzedurAction.class))
                 .registerValueObject((NichtDurchgefuehrteProzedurEvaluation.class))
                 .registerValueObject((UnbekannteProzedurEvaluation.class))

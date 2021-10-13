@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Procedure/b60e7e62-87a5-406c-93ed-c8ce7706757b",
+      "id" : "Procedure/a56d9be5-1e57-48ef-9f08-ca7c422e47a6/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -98,7 +98,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "277132007"
           }
@@ -113,6 +113,15 @@
     "name" : {
       "_type" : "DV_TEXT",
       "value" : "Prozedur"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-ACTION.procedure.v1"
+      },
+      "template_id" : {
+        "value" : "GECCO_Prozedur"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -132,9 +141,6 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
-    },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
     },
     "time" : {
       "_type" : "DV_DATE_TIME",
@@ -159,7 +165,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "127788007"
           }
@@ -178,7 +184,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "277132007"
           }

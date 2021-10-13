@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Procedure/3def6ffd-45de-4b02-a98f-f0ba54a3adcd",
+      "id" : "Procedure/a20528e9-b97c-41db-a552-57be1200024f/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -26,13 +26,17 @@
     }
   },
   "language" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_639-1"
     },
     "code_string" : "de"
   },
   "territory" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_3166-1"
     },
     "code_string" : "DE"
@@ -41,7 +45,9 @@
     "_type" : "DV_CODED_TEXT",
     "value" : "event",
     "defining_code" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "openehr"
       },
       "code_string" : "433"
@@ -60,7 +66,9 @@
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
       "defining_code" : {
+        "_type" : "CODE_PHRASE",
         "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
           "value" : "openehr"
         },
         "code_string" : "232"
@@ -82,8 +90,10 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Therapeutic procedure (procedure)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
-              "value" : "SNOMED Clinical Terms"
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "277132007"
           }
@@ -99,14 +109,27 @@
       "_type" : "DV_TEXT",
       "value" : "Prozedur"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-ACTION.procedure.v1"
+      },
+      "template_id" : {
+        "value" : "GECCO_Prozedur"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"
@@ -134,8 +157,10 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Dialysis procedure (procedure)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
-              "value" : "SNOMED Clinical Terms"
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "108241001"
           }
@@ -151,14 +176,16 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Therapeutic procedure (procedure)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
-              "value" : "SNOMED Clinical Terms"
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "277132007"
           }
         },
         "archetype_node_id" : "at0067"
-      }],
+      } ],
       "archetype_node_id" : "at0001"
     },
     "ism_transition" : {
@@ -167,7 +194,9 @@
         "_type" : "DV_CODED_TEXT",
         "value" : "planned",
         "defining_code" : {
+          "_type" : "CODE_PHRASE",
           "terminology_id" : {
+            "_type" : "TERMINOLOGY_ID",
             "value" : "openehr"
           },
           "code_string" : "526"

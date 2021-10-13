@@ -19,10 +19,10 @@
     <other_details id="original_namespace"/>
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
-    <other_details id="MD5-CAM-1.0.1">150e6598fbf058a21fcae068a927f4e6</other_details>
+    <other_details id="MD5-CAM-1.0.1">6af4b477c98cf7207aa2be307bab86a3</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">3.0.0</other_details>
+    <other_details id="sem_ver">4.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -295,7 +295,7 @@
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -306,20 +306,7 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>103693007</code_list>
-                        <code_list>363679005</code_list>
-                        <code_list>387713003</code_list>
-                        <code_list>18629005</code_list>
-                        <code_list>277132007</code_list>
-                        <code_list>394841004</code_list>
-                        <code_list>225287004</code_list>
-                        <code_list>53950000</code_list>
-                        <code_list>428311008</code_list>
-                        <code_list>371907003</code_list>
-                        <code_list>40617009</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/procedure-category</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -1809,7 +1796,7 @@
                             <lower>1</lower>
                             <upper>1</upper>
                           </existence>
-                          <children xsi:type="C_CODE_PHRASE">
+                          <children xsi:type="C_CODE_REFERENCE">
                             <rm_type_name>CODE_PHRASE</rm_type_name>
                             <occurrences>
                               <lower_included>true</lower_included>
@@ -1820,13 +1807,7 @@
                               <upper>1</upper>
                             </occurrences>
                             <node_id/>
-                            <terminology_id>
-                              <value>SNOMED Clinical Terms</value>
-                            </terminology_id>
-                            <code_list>129121000</code_list>
-                            <code_list>26412008</code_list>
-                            <code_list>426854004</code_list>
-                            <code_list>26412008</code_list>
+                            <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/procedure-medical-device-name</referenceSetUri>
                           </children>
                         </attributes>
                       </children>
@@ -2088,15 +2069,6 @@ zur Angleichung an andere Referenzmodelle/Formalismen erforderlich sind.</items>
                   <items id="comment">Zum Beispiel: ein technisches Diagramm eines Geräts oder ein digitales Bild.</items>
                   <items id="description">Digitale Repräsentation des Gerätes.</items>
                   <items id="text">Multimedia</items>
-                </term_definitions>
-                <term_definitions code="129121000">
-                  <items id="text">Tracheostomy tube, device (physical object)</items>
-                </term_definitions>
-                <term_definitions code="26412008">
-                  <items id="text">Endotracheal tube, device (physical object)</items>
-                </term_definitions>
-                <term_definitions code="426854004">
-                  <items id="text">High flow oxygen nasal cannula (physical object)</items>
                 </term_definitions>
               </children>
               <children xsi:type="ARCHETYPE_SLOT">
@@ -3542,39 +3514,6 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
     <term_definitions code="at0013">
       <items id="description">*</items>
       <items id="text">geändert</items>
-    </term_definitions>
-    <term_definitions code="103693007">
-      <items id="text">Diagnostic procedure</items>
-    </term_definitions>
-    <term_definitions code="363679005">
-      <items id="text">Imaging</items>
-    </term_definitions>
-    <term_definitions code="387713003">
-      <items id="text">Surgical procedure</items>
-    </term_definitions>
-    <term_definitions code="18629005">
-      <items id="text">Administration of medicine</items>
-    </term_definitions>
-    <term_definitions code="277132007">
-      <items id="text">Therapeutic procedure (procedure)</items>
-    </term_definitions>
-    <term_definitions code="394841004">
-      <items id="text">Other category</items>
-    </term_definitions>
-    <term_definitions code="225287004">
-      <items id="text">Procedures relating to positioning and support (procedure)</items>
-    </term_definitions>
-    <term_definitions code="53950000">
-      <items id="text">Respiratory therapy (procedure)</items>
-    </term_definitions>
-    <term_definitions code="428311008">
-      <items id="text">Noninvasive ventilation (procedure)</items>
-    </term_definitions>
-    <term_definitions code="371907003">
-      <items id="text">Oxygen administration by nasal cannula (procedure)</items>
-    </term_definitions>
-    <term_definitions code="40617009">
-      <items id="text">Artificial respiration (procedure)</items>
     </term_definitions>
   </definition>
   <view/>

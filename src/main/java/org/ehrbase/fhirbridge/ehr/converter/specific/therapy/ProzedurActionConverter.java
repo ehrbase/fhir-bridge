@@ -16,18 +16,20 @@
 
 package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ProcedureToProcedureActionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.CurrentStateDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeraetenameDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.MedizingeraetCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
 import org.hl7.fhir.r4.model.Annotation;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Procedure;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,10 +41,11 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
     @Override
     protected ProzedurAction convertInternal(Procedure procedure) {
         ProzedurAction result = new ProzedurAction();
-        result.setNameDerProzedurDefiningCode(convertCode(procedure));
+        convertCode(procedure).ifPresent(result::setNameDerProzedur);
         convertBodySite(procedure).ifPresent(result::setKoerperstelleValue);
         result.setMedizingeraet(convertUsedCode(procedure));
-        result.setArtDerProzedurDefiningCode(convertCategory(procedure));
+        convertCode(procedure).ifPresent(result::setNameDerProzedur);
+        convertCategory(procedure).ifPresent(result::setArtDerProzedur);
         convertExtension(procedure).ifPresent(result::setDurchfuehrungsabsichtValue);
         convertNote(procedure).ifPresent(result::setKommentarValue);
         result.setCurrentStateDefiningCode(CurrentStateDefiningCode.PLANNED);
@@ -65,30 +68,23 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
     }
 
     private List<MedizingeraetCluster> convertUsedCode(Procedure procedure) {
-        return procedure.getUsedCode()
-                .stream()
-                .flatMap(concept -> concept.getCoding().stream())
-                .filter(coding -> coding.getSystem().equals(CodeSystem.SNOMED.getUrl()))
-                .map(coding -> {
-                    GeraetenameDefiningCode code = GeraetenameDefiningCode.getCodesAsMap().get(coding.getCode());
-                    if (code == null) {
-                        throw new ConversionException("Invalid medical device code");
-                    }
-                    MedizingeraetCluster medizingeraetCluster = new MedizingeraetCluster();
-                    medizingeraetCluster.setGeraetenameDefiningCode(GeraetenameDefiningCode.getCodesAsMap().get(coding.getCode()));
-                    return medizingeraetCluster;
-                })
-                .collect(Collectors.toList());
+        List<MedizingeraetCluster> medizingeraetClusters = new ArrayList<>();
+        for(CodeableConcept codeableConcept:procedure.getUsedCode()){
+            for(Coding coding:codeableConcept.getCoding()){
+                MedizingeraetCluster medizingeraetCluster = new MedizingeraetCluster();
+                DvCodedTextParser.parseFHIRCoding(coding).ifPresent(medizingeraetCluster::setGeraetename);
+                medizingeraetClusters.add(medizingeraetCluster);
+            }
+
+        }
+        return medizingeraetClusters;
     }
 
-    private KategorieDefiningCode convertCategory(Procedure procedure) {
-        return procedure.getCategory()
-                .getCoding()
-                .stream()
-                .filter(coding -> coding.getSystem().equals(CodeSystem.SNOMED.getUrl()))
-                .map(coding -> KategorieDefiningCode.getCodesAsMap().get(coding.getCode()))
-                .findFirst()
-                .orElseThrow(() -> new ConversionException("Invalid category"));
+    private Optional<DvCodedText> convertCategory(Procedure procedure) {
+        for(Coding coding:procedure.getCategory().getCoding()){
+            return DvCodedTextParser.parseFHIRCoding(coding);
+        }
+        return Optional.empty();
     }
 
     private Optional<String> convertExtension(Procedure procedure) {
