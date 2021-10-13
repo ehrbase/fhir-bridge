@@ -25,10 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">a496299cb9d242530872aa80216464e8</other_details>
+    <other_details id="MD5-CAM-1.0.1">9063b6c285334b593cc2d9bed02f8482</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">6.0.0</other_details>
+    <other_details id="sem_ver">7.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -499,7 +499,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -510,20 +510,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>http://loinc.org</value>
-                                </terminology_id>
-                                <code_list>26436-6</code_list>
-                                <code_list>18767-4</code_list>
-                                <code_list>18719-5</code_list>
-                                <code_list>18723-7</code_list>
-                                <code_list>18720-3</code_list>
-                                <code_list>18728-6</code_list>
-                                <code_list>18725-2</code_list>
-                                <code_list>56874-1</code_list>
-                                <code_list>18729-4</code_list>
-                                <code_list>56847-7</code_list>
-                                <code_list>56846-9</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/labreport-labtest-category</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -1820,7 +1807,7 @@ Ob dieses Element Bedingungen enthält, die während der Probenahme vorhanden se
                                     <lower>1</lower>
                                     <upper>1</upper>
                                   </existence>
-                                  <children xsi:type="C_CODE_PHRASE">
+                                  <children xsi:type="C_CODE_REFERENCE">
                                     <rm_type_name>CODE_PHRASE</rm_type_name>
                                     <occurrences>
                                       <lower_included>true</lower_included>
@@ -1831,16 +1818,7 @@ Ob dieses Element Bedingungen enthält, die während der Probenahme vorhanden se
                                       <upper>1</upper>
                                     </occurrences>
                                     <node_id/>
-                                    <terminology_id>
-                                      <value>http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation</value>
-                                    </terminology_id>
-                                    <code_list>CAR</code_list>
-                                    <code_list>B</code_list>
-                                    <code_list>D</code_list>
-                                    <code_list>U</code_list>
-                                    <code_list>W</code_list>
-                                    <code_list>&lt;</code_list>
-                                    <code_list>></code_list>
+                                    <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=http://hl7.org/fhir/ValueSet/observation-interpretation</referenceSetUri>
                                   </children>
                                 </attributes>
                               </children>
@@ -2355,27 +2333,6 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                           <items id="comment">Wenn die Testmethode für ein gesamtes Panel gilt, kann die Testmethode mithilfe des Datenelements "Testmethode" im Ergebnis OBSERVATION.laboratory_test_result erfasst werden.</items>
                           <items id="description">Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.</items>
                           <items id="text">Testmethode</items>
-                        </term_definitions>
-                        <term_definitions code="CAR">
-                          <items id="text">Carrier</items>
-                        </term_definitions>
-                        <term_definitions code="B">
-                          <items id="text">Better</items>
-                        </term_definitions>
-                        <term_definitions code="D">
-                          <items id="text">Significant change down</items>
-                        </term_definitions>
-                        <term_definitions code="U">
-                          <items id="text">Significant change up</items>
-                        </term_definitions>
-                        <term_definitions code="W">
-                          <items id="text">Worse</items>
-                        </term_definitions>
-                        <term_definitions code="&lt;">
-                          <items id="text">Off scale low</items>
-                        </term_definitions>
-                        <term_definitions code=">">
-                          <items id="text">Off scale hig</items>
                         </term_definitions>
                       </children>
                       <children xsi:type="C_COMPLEX_OBJECT">
@@ -3105,39 +3062,6 @@ Bekannte Schwierigkeiten bei der Probenentnahme oder -behandlung, wie z.B. die "
           <items id="comment">Zum Beispiel: Anatomische Pathologiediagnosen, die aus mehreren verschiedenen Schwerpunkten wie Morphologie, Ätiologie und Funktion zusammengesetzt sind.</items>
           <items id="description">Eine strukturierte oder komplexe Diagnose für die Laboruntersuchung.</items>
           <items id="text">Strukturierte Testdiagnostik</items>
-        </term_definitions>
-        <term_definitions code="26436-6">
-          <items id="text">Laboratory studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18767-4">
-          <items id="text">Blood gas studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18719-5">
-          <items id="text">Chemistry studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18723-7">
-          <items id="text">Hematology studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18720-3">
-          <items id="text">Coagulation studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18728-6">
-          <items id="text">Toxicology studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18725-2">
-          <items id="text">Microbiology studies (set)</items>
-        </term_definitions>
-        <term_definitions code="56874-1">
-          <items id="text">Serology and blood bank studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18729-4">
-          <items id="text">Urinalysis studies (set)</items>
-        </term_definitions>
-        <term_definitions code="56847-7">
-          <items id="text">Calculated and derived values (set)</items>
-        </term_definitions>
-        <term_definitions code="56846-9">
-          <items id="text">Cardiac biomarkers (set)</items>
         </term_definitions>
       </children>
       <cardinality>
