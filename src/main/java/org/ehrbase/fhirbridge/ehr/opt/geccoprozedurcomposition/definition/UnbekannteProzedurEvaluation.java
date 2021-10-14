@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.util.List;
@@ -17,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.absence.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T16:13:25.809333+02:00",
+    date = "2021-10-13T12:33:28.948745+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class UnbekannteProzedurEvaluation implements EntryEntity {
@@ -26,8 +27,8 @@ public class UnbekannteProzedurEvaluation implements EntryEntity {
    * Description: Positive Aussage, dass keine Informationen verfügbar sind.
    * Comment: Zum Beispiel: "Es liegen keine Informationen über Nebenwirkungen vor"; "Es liegen keine Informationen über Probleme oder Diagnosen vor"; "Es liegen keine Informationen über vorangegangene Verfahren vor"; oder "Es liegen keine Informationen über verwendete Medikamente vor".
    */
-  @Path("/data[at0001]/items[at0002 and name/value='Unbekannte Prozedur']/value|defining_code")
-  private NameDerProzedurDefiningCode unbekannteProzedurDefiningCode;
+  @Path("/data[at0001]/items[at0002 and name/value='Unbekannte Prozedur']/value")
+  private DvCodedText unbekannteProzedur;
 
   /**
    * Path: GECCO_Prozedur/Unbekannte Prozedur/Baum/Unbekannte Prozedur/null_flavour
@@ -75,13 +76,12 @@ public class UnbekannteProzedurEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setUnbekannteProzedurDefiningCode(
-      NameDerProzedurDefiningCode unbekannteProzedurDefiningCode) {
-     this.unbekannteProzedurDefiningCode = unbekannteProzedurDefiningCode;
+  public void setUnbekannteProzedur(DvCodedText unbekannteProzedur) {
+     this.unbekannteProzedur = unbekannteProzedur;
   }
 
-  public NameDerProzedurDefiningCode getUnbekannteProzedurDefiningCode() {
-     return this.unbekannteProzedurDefiningCode ;
+  public DvCodedText getUnbekannteProzedur() {
+     return this.unbekannteProzedur ;
   }
 
   public void setUnbekannteProzedurNullFlavourDefiningCode(

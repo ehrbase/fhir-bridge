@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.util.List;
@@ -17,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.exclusion_specific.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T16:13:25.802946+02:00",
+    date = "2021-10-13T12:33:28.942135+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class NichtDurchgefuehrteProzedurEvaluation implements EntryEntity {
@@ -48,8 +49,8 @@ public class NichtDurchgefuehrteProzedurEvaluation implements EntryEntity {
    *
    * Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikation im Feld "Aussage über den Ausschluss" nicht notwendig.
    */
-  @Path("/data[at0001]/items[at0003 and name/value='Eingriff']/value|defining_code")
-  private NameDerProzedurDefiningCode eingriffDefiningCode;
+  @Path("/data[at0001]/items[at0003 and name/value='Eingriff']/value")
+  private DvCodedText eingriff;
 
   /**
    * Path: GECCO_Prozedur/Nicht durchgeführte Prozedur/Tree/Eingriff/null_flavour
@@ -100,12 +101,12 @@ public class NichtDurchgefuehrteProzedurEvaluation implements EntryEntity {
      return this.aussageUeberDenAusschlussNullFlavourDefiningCode ;
   }
 
-  public void setEingriffDefiningCode(NameDerProzedurDefiningCode eingriffDefiningCode) {
-     this.eingriffDefiningCode = eingriffDefiningCode;
+  public void setEingriff(DvCodedText eingriff) {
+     this.eingriff = eingriff;
   }
 
-  public NameDerProzedurDefiningCode getEingriffDefiningCode() {
-     return this.eingriffDefiningCode ;
+  public DvCodedText getEingriff() {
+     return this.eingriff ;
   }
 
   public void setEingriffNullFlavourDefiningCode(NullFlavour eingriffNullFlavourDefiningCode) {

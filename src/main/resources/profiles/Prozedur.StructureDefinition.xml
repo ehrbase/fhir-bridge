@@ -1,19 +1,11 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
-  <id value="gecco-procedure-apheresis" />
-  <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis" />
-  <version value="1.0" />
-  <name value="Apheresis" />
-  <title value="Apheresis" />
+  <id value="Profile-MII-Procedure-Prozedur" />
+  <url value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure" />
+  <version value="2.0.0" />
+  <name value="Profile_MII_ProcedureProzedur" />
+  <title value="Profile - MI-I - Procedure - Prozedur" />
   <status value="active" />
-  <date value="2020-10-29" />
-  <publisher value="Charité" />
-  <contact>
-    <telecom>
-      <system value="url" />
-      <value value="https://www.bihealth.org/en/research/core-facilities/interoperability/" />
-    </telecom>
-  </contact>
-  <description value="Apheresis procedures" />
+  <description value="Dieses Profil beschreibt eine Prozedur in der Medizininformatik-Initiative." />
   <fhirVersion value="4.0.1" />
   <mapping>
     <identity value="workflow" />
@@ -38,7 +30,7 @@
   <kind value="resource" />
   <abstract value="false" />
   <type value="Procedure" />
-  <baseDefinition value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Procedure" />
   <derivation value="constraint" />
   <snapshot>
     <element id="Procedure">
@@ -1262,7 +1254,7 @@
       <short value="Classification of the procedure" />
       <definition value="A code that classifies the procedure for searching, sorting and display purposes (e.g. &quot;Surgical Procedure&quot;)." />
       <comment value="Not all terminology uses fit this general pattern. In some cases, models should not use CodeableConcept and use Coding directly and provide their own structure for managing text, codings, translations and the relationship between elements and pre- and post-coordination." />
-      <min value="1" />
+      <min value="0" />
       <max value="1" />
       <base>
         <path value="Procedure.category" />
@@ -1415,7 +1407,7 @@
       <definition value="A reference to a code defined by a terminology system." />
       <comment value="Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true." />
       <requirements value="Allows for alternative encodings within a code system, and translations to other code systems." />
-      <min value="1" />
+      <min value="0" />
       <max value="*" />
       <base>
         <path value="CodeableConcept.coding" />
@@ -1477,7 +1469,7 @@
       <definition value="A reference to a code defined by a terminology system." />
       <comment value="Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true." />
       <requirements value="Allows for alternative encodings within a code system, and translations to other code systems." />
-      <min value="1" />
+      <min value="0" />
       <max value="1" />
       <base>
         <path value="CodeableConcept.coding" />
@@ -1489,7 +1481,6 @@
       </type>
       <patternCoding>
         <system value="http://snomed.info/sct" />
-        <code value="277132007" />
       </patternCoding>
       <condition value="ele-1" />
       <constraint>
@@ -2053,7 +2044,7 @@
       <slicing>
         <discriminator>
           <type value="pattern" />
-          <path value="system" />
+          <path value="$this" />
         </discriminator>
         <rules value="open" />
       </slicing>
@@ -2148,7 +2139,7 @@
       <isSummary value="true" />
       <binding>
         <strength value="required" />
-        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/apheresis-procedures-ops" />
+        <valueSet value="http://fhir.de/ValueSet/bfarm/ops" />
       </binding>
       <mapping>
         <identity value="rim" />
@@ -2630,7 +2621,7 @@
       <isSummary value="true" />
       <binding>
         <strength value="required" />
-        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/apheresis-procedures" />
+        <valueSet value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/ValueSet/procedures-sct" />
       </binding>
       <mapping>
         <identity value="rim" />
@@ -2757,7 +2748,6 @@
       <type>
         <code value="uri" />
       </type>
-      <patternUri value="http://snomed.info/sct" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -3030,6 +3020,7 @@
         <code value="Reference" />
         <profile value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />
         <targetProfile value="http://hl7.org/fhir/StructureDefinition/Patient" />
+        <targetProfile value="http://hl7.org/fhir/StructureDefinition/Group" />
       </type>
       <condition value="ele-1" />
       <constraint>
@@ -4686,44 +4677,228 @@
     </element>
   </snapshot>
   <differential>
+    <element id="Procedure">
+      <path value="Procedure" />
+      <constraint>
+        <key value="proc-mii-1" />
+        <severity value="error" />
+        <human value="Falls die Prozedur per OPS kodiert wird, muss eine SNOMED-CT kodierte Category abgebildet werden" />
+        <expression value="code.coding.where(system = 'http://fhir.de/CodeSystem/bfarm/ops').exists() implies category.coding.where(system = 'http://snomed.info/sct').exists()" />
+        <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/Procedure" />
+      </constraint>
+    </element>
+    <element id="Procedure.id">
+      <path value="Procedure.id" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.meta">
+      <path value="Procedure.meta" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.meta.source">
+      <path value="Procedure.meta.source" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.meta.profile">
+      <path value="Procedure.meta.profile" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.extension">
+      <path value="Procedure.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Procedure.extension:Dokumentationsdatum">
+      <path value="Procedure.extension" />
+      <sliceName value="Dokumentationsdatum" />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://fhir.de/StructureDefinition/ProzedurDokumentationsdatum" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.extension:durchfuehrungsabsicht">
+      <path value="Procedure.extension" />
+      <sliceName value="durchfuehrungsabsicht" />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Durchfuehrungsabsicht" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.status">
+      <path value="Procedure.status" />
+      <mustSupport value="true" />
+    </element>
     <element id="Procedure.category">
       <path value="Procedure.category" />
-      <min value="1" />
+      <mustSupport value="true" />
     </element>
     <element id="Procedure.category.coding">
       <path value="Procedure.category.coding" />
-      <min value="1" />
+      <slicing>
+        <discriminator>
+          <type value="pattern" />
+          <path value="$this" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+      <min value="0" />
     </element>
     <element id="Procedure.category.coding:sct">
       <path value="Procedure.category.coding" />
       <sliceName value="sct" />
-      <min value="1" />
+      <min value="0" />
+      <max value="1" />
       <patternCoding>
-        <code value="277132007" />
+        <system value="http://snomed.info/sct" />
       </patternCoding>
+      <mustSupport value="true" />
+      <binding>
+        <strength value="preferred" />
+        <valueSet value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/ValueSet/procedures-category-sct" />
+      </binding>
+    </element>
+    <element id="Procedure.category.coding:sct.system">
+      <path value="Procedure.category.coding.system" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.category.coding:sct.code">
+      <path value="Procedure.category.coding.code" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.code">
+      <path value="Procedure.code" />
+      <min value="1" />
+      <constraint>
+        <key value="sct-ops-1" />
+        <severity value="error" />
+        <human value="Entweder wird die Prozedur mit OPS oder SNOMED-CT kodiert." />
+        <expression value="coding.where(system = 'http://snomed.info/sct').exists() or coding.where(system = 'http://fhir.de/CodeSystem/bfarm/ops').exists()" />
+        <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/Procedure" />
+      </constraint>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.code.coding">
+      <path value="Procedure.code.coding" />
+      <slicing>
+        <discriminator>
+          <type value="pattern" />
+          <path value="$this" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+      <min value="1" />
+      <mustSupport value="true" />
     </element>
     <element id="Procedure.code.coding:ops">
       <path value="Procedure.code.coding" />
       <sliceName value="ops" />
+      <max value="1" />
+      <type>
+        <code value="Coding" />
+        <profile value="http://fhir.de/StructureDefinition/CodingOPS" />
+      </type>
+      <mustSupport value="true" />
       <binding>
         <strength value="required" />
-        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/apheresis-procedures-ops" />
+        <valueSet value="http://fhir.de/ValueSet/bfarm/ops" />
       </binding>
+    </element>
+    <element id="Procedure.code.coding:ops.extension">
+      <path value="Procedure.code.coding.extension" />
+      <slicing>
+        <discriminator>
+          <type value="value" />
+          <path value="url" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
+    </element>
+    <element id="Procedure.code.coding:ops.extension:seitenlokalisation">
+      <path value="Procedure.code.coding.extension" />
+      <sliceName value="seitenlokalisation" />
+      <max value="1" />
+      <type>
+        <code value="Extension" />
+        <profile value="http://fhir.de/StructureDefinition/seitenlokalisation" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.code.coding:ops.system">
+      <path value="Procedure.code.coding.system" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.code.coding:ops.version">
+      <path value="Procedure.code.coding.version" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.code.coding:ops.code">
+      <path value="Procedure.code.coding.code" />
+      <mustSupport value="true" />
     </element>
     <element id="Procedure.code.coding:sct">
       <path value="Procedure.code.coding" />
       <sliceName value="sct" />
+      <max value="1" />
+      <mustSupport value="true" />
       <binding>
         <strength value="required" />
-        <valueSet value="https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/apheresis-procedures" />
+        <valueSet value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/ValueSet/procedures-sct" />
       </binding>
+    </element>
+    <element id="Procedure.code.coding:sct.system">
+      <path value="Procedure.code.coding.system" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.code.coding:sct.code">
+      <path value="Procedure.code.coding.code" />
+      <min value="1" />
+      <mustSupport value="true" />
     </element>
     <element id="Procedure.subject">
       <path value="Procedure.subject" />
+      <min value="1" />
+      <max value="1" />
       <type>
         <code value="Reference" />
-        <targetProfile value="http://hl7.org/fhir/StructureDefinition/Patient" />
+        <profile value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/MII-Reference" />
       </type>
+    </element>
+    <element id="Procedure.performed[x]">
+      <path value="Procedure.performed[x]" />
+      <min value="1" />
+      <type>
+        <code value="dateTime" />
+      </type>
+      <type>
+        <code value="Period" />
+      </type>
+      <mustSupport value="true" />
+    </element>
+    <element id="Procedure.bodySite">
+      <path value="Procedure.bodySite" />
+      <mustSupport value="true" />
+      <binding>
+        <extension url="http://hl7.org/fhir/StructureDefinition/elementdefinition-bindingName">
+          <valueString value="BodySite" />
+        </extension>
+        <strength value="extensible" />
+      </binding>
+    </element>
+    <element id="Procedure.note">
+      <path value="Procedure.note" />
+      <mustSupport value="true" />
     </element>
   </differential>
 </StructureDefinition>
