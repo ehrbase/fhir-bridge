@@ -140,7 +140,7 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "",
+          "value" : "Vaccine product containing only Hepatitis A virus and Salmonella enterica subspecies enterica serovar Typhi antigens (medicinal product)",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
