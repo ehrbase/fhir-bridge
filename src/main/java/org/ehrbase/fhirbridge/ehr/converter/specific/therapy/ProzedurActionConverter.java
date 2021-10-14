@@ -19,7 +19,6 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ProcedureToProcedureActionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KoerperstelleCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.CurrentStateDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.MedizingeraetCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.ProzedurAction;
@@ -54,7 +53,7 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
 
     private List<ProzedurKoerperstelleElement> convertBodySite(Procedure procedure) {
         List<ProzedurKoerperstelleElement> koerperstelleElementList = new ArrayList<>();
-        if (procedure.hasBodySite() && procedure.getBodySite().size() > 0) {
+        if (procedure.hasBodySite()) {
             for (CodeableConcept codeableConcept : procedure.getBodySite()) {
                 convertBodySiteCoding(codeableConcept, koerperstelleElementList);
             }
@@ -87,11 +86,9 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
         return medizingeraetClusters;
     }
 
-    private Optional<DvCodedText> convertCategory(Procedure procedure) {
-        for (Coding coding : procedure.getCategory().getCoding()) {
-            return DvCodedTextParser.parseFHIRCoding(coding);
-        }
-        return Optional.empty();
+    private Optional<DvCodedText> convertCategory(Procedure condition) {
+        return DvCodedTextParser.parseFHIRCoding(condition.getCategory()
+                .getCodingFirstRep());
     }
 
     private Optional<String> convertExtension(Procedure procedure) {
