@@ -67,32 +67,6 @@ class HistoryOfVaccinationIT extends AbstractMappingTestSetupIT {
                 "paragon-create-immunization-for-patient-not-done.json");
     }
 
-    @Test
-    void createInvalidImpstoffDefiningCode() throws IOException {
-        Exception exception = executeMappingException("invalid-impstoff-defining-code.json");
-        assertEquals("Invalid Code or vaccineCode3335asd98008 entered", exception.getMessage());
-    }
-
-    @Test
-    void createInvalidDiseaseCodeMissing() throws IOException {
-        Exception exception = executeMappingException("invalid-target-disease-code-missing.json");
-        assertEquals("Target Disease code and dose missing", exception.getMessage());
-    }
-
-
-    @Test
-    void createInvalidDiseaseSnomedCode() throws IOException {
-        Exception exception = executeMappingException("invalid-target-disease-snomed-code.json");
-        assertEquals("Invalid Snomed code 16814asd004 entered", exception.getMessage());
-    }
-
-
-    @Test
-    void createInvalidTargetDiseaseSystem() throws IOException {
-        Exception exception = executeMappingException("invalid-target-disease-system.json");
-        assertEquals("Target disease system is wrong, has to be SNOMED.", exception.getMessage());
-    }
-
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Immunization immunization = (Immunization) testFileLoader.loadResource(path);
