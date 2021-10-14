@@ -67,13 +67,13 @@ ${randinteger}                  ${12345}
 
 	#invalid coding
 	$.category[0].coding    				missing					422
-	$.category[0].coding    				EMPTY					422
+    $.category[0].coding    				${EMPTY}				422
 	$.category[0].coding					${{ [] }}				422
 	$.category[0].coding					${{ {} }}				422
 	$.category[0].coding					${{ [{}] }}				422
 
 	#invalid code 0
-	$.category[0].coding[0].code    		EMPTY    	    		422
+	$.category[0].coding[0].code    		${EMPTY}    	   		422
 	$.category[0].coding[0].code    		${randstring}	    	422
 	$.category[0].coding[0].code    		${randinteger}	    	422
 	$.category[0].coding[0].code 			${{ [] }}				422
@@ -81,7 +81,7 @@ ${randinteger}                  ${12345}
 	$.category[0].coding[0].code 			${{ [{}] }}				422
 
 	# invaild system 0
-	$.category[0].coding[0].system    		EMPTY    	    		422
+	$.category[0].coding[0].system    		${EMPTY}   	    		422
 	$.category[0].coding[0].system    		${randstring}	    	422
 	$.category[0].coding[0].system    		${randinteger}	    	422
 	$.category[0].coding[0].system    		http://foobar.de      	422
@@ -106,20 +106,20 @@ ${randinteger}                  ${12345}
 
 	# invalid code
 	$.code									missing					422
-	$.code									EMPTY					422
+	$.code									${EMPTY}				422
 	$.code									${{ [] }}				422
 	$.code									${{ {} }}				422
 	$.code									${{ [{}] }}				422
 
 	# invalid coding
 	$.code.coding   	 					missing					422
-	$.code.coding	    					EMPTY					422
+	$.code.coding	    					${EMPTY}				422
 	$.code.coding							${{ [] }}				422
 	$.code.coding							${{ {} }}				422
 	$.code.coding							${{ [{}] }}				422
 
 	# invalid Code Coding 0 System
-	$.code.coding[0].system					EMPTY					422
+	$.code.coding[0].system					${EMPTY}				422
 	$.code.coding[0].system					${randstring}			422
 	$.code.coding[0].system					${randinteger}			422
 	$.code.coding[0].system      			${{ [] }}				422
@@ -127,7 +127,7 @@ ${randinteger}                  ${12345}
 	$.code.coding[0].system      			${{ [{}] }}				422
 
 	# invalid Code Coding 0 Code
-	$.code.coding[0].code					EMPTY					422
+	$.code.coding[0].code					${EMPTY}				422
 	$.code.coding[0].code					${randinteger}			422
 	$.code.coding[0].code      			    ${{ [] }}				422
 	$.code.coding[0].code      			    ${{ {} }}				422
@@ -149,7 +149,7 @@ ${randinteger}                  ${12345}
 	# 																CODE
 	#$.conclusion					missing							422
 	#$.conclusion					${randstring}					422
-	#$.conclusion					EMPTY							422
+	#$.conclusion					${EMPTY}						422
 	# .conclusion is 0..1 and an unchecked string, therefore no errors are to be expected when this parameter is empty or a random string
 	$.conclusion					${randinteger}					422
 	
@@ -170,20 +170,20 @@ ${randinteger}                  ${12345}
 
 	# invalid conclusionCode
 	$.conclusionCode						missing					422
-	$.conclusionCode						EMPTY					422
+	$.conclusionCode						${EMPTY}				422
 	$.conclusionCode						${{ [] }}				422
 	$.conclusionCode						${{ {} }}				422
 	$.conclusionCode						${{ [{}] }}				422
 
 	# invalid conclusionCode coding
 	$.conclusionCode[0].coding   	 		missing					422
-	$.conclusionCode[0].coding	    		EMPTY					422
+	$.conclusionCode[0].coding	    		${EMPTY}				422
 	$.conclusionCode[0].coding				${{ [] }}				422
 	$.conclusionCode[0].coding				${{ {} }}				422
 	$.conclusionCode[0].coding				${{ [{}] }}				422
 
 	# invalid conclusionCode Coding 0 System
-	$.conclusionCode[0].coding[0].system	EMPTY					422
+	$.conclusionCode[0].coding[0].system	${EMPTY}				422
 	$.conclusionCode[0].coding[0].system	${randstring}			422
 	$.conclusionCode[0].coding[0].system	${randinteger}			422
 	$.conclusionCode[0].coding[0].system    ${{ [] }}				422
@@ -191,7 +191,7 @@ ${randinteger}                  ${12345}
 	$.conclusionCode[0].coding[0].system    ${{ [{}] }}				422
 
 	# invalid conclusionCode Coding 0 Code
-	$.conclusionCode[0].coding[0].code		EMPTY					422
+	$.conclusionCode[0].coding[0].code		${EMPTY}				422
 	$.conclusionCode[0].coding[0].code		${randinteger}			422
 	$.conclusionCode[0].coding[0].code      ${{ [] }}				422
 	$.conclusionCode[0].coding[0].code      ${{ {} }}				422

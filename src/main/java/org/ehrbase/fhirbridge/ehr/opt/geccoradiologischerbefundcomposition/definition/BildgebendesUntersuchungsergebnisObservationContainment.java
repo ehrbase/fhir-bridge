@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.defi
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.datastructures.ItemTree;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.time.temporal.TemporalAccessor;
 import org.ehrbase.client.aql.containment.Containment;
@@ -22,7 +23,7 @@ public class BildgebendesUntersuchungsergebnisObservationContainment extends Con
 
   public ListSelectAqlField<Cluster> ANATOMISCHE_POSITION_STRUKTURIERT = new ListAqlFieldImp<Cluster>(BildgebendesUntersuchungsergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0006]", "anatomischePositionStrukturiert", Cluster.class, this);
 
-  public SelectAqlField<BefundeDefiningCode> BEFUNDE_DEFINING_CODE = new AqlFieldImp<BefundeDefiningCode>(BildgebendesUntersuchungsergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value|defining_code", "befundeDefiningCode", BefundeDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> BEFUNDE = new AqlFieldImp<DvCodedText>(BildgebendesUntersuchungsergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value", "befunde", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> BEFUNDE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(BildgebendesUntersuchungsergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0008]/null_flavour|defining_code", "befundeNullFlavourDefiningCode", NullFlavour.class, this);
 

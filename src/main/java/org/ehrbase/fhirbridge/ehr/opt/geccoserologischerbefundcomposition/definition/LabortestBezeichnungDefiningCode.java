@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum LabortestBezeichnungDefiningCode implements EnumValueSet {
-  SEROLOGIC_TEST_PROCEDURE("Serologic test (procedure)", "", "SNOMED CT", "68793005");
+  SEROLOGIC_TEST_PROCEDURE("Serologic test (procedure)", "", "http://snomed.info/sct", "68793005");
 
   private String value;
 

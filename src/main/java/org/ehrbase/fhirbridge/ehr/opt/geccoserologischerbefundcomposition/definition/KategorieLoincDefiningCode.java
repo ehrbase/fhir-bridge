@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum KategorieLoincDefiningCode implements EnumValueSet {
-  LABORATORY_STUDIES_SET("Laboratory studies (set)", "", "http://loinc.org", "26436-6");
+  LABORATORY_STUDIES_SET("Laboratory studies (set)", "", "LOINC", "26436-6");
 
   private String value;
 
