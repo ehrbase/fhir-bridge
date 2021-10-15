@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bloodpressure;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.BlutdruckObservation;
@@ -27,11 +27,27 @@ public class BlutdruckObservationConverter extends ObservationToObservationConve
 
     private void mapSystolicAndDiastolic(Coding coding, BlutdruckObservation bloodPressure, Observation.ObservationComponentComponent component) {
         if (coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.getCode().equals("8480-6")){
+            setSystolisch(component, bloodPressure);
+        }else if(coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.getCode().equals("8462-4")){
+            setDiastolisch(component, bloodPressure);
+        }
+    }
+
+    private void setSystolisch(Observation.ObservationComponentComponent component, BlutdruckObservation bloodPressure) {
+        if(component.hasValueQuantity()){
             getValue(component).ifPresent(bloodPressure::setSystolischMagnitude);
             getUnit(component).ifPresent(bloodPressure::setSystolischUnits);
-        }else if(coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.getCode().equals("8462-4")){
+        }else{
+            bloodPressure.setSystolischNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }
+    }
+
+    private void setDiastolisch(Observation.ObservationComponentComponent component, BlutdruckObservation bloodPressure) {
+        if(component.hasValueQuantity()){
             getValue(component).ifPresent(bloodPressure::setDiastolischMagnitude);
             getUnit(component).ifPresent(bloodPressure::setDiastolischUnits);
+        }else{
+            bloodPressure.setDiastolischNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
     }
 

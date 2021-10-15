@@ -25,8 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">5317285e23f5704c137969925df874d6</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">4f2775cebcd6b1626324b118ac8914c0</other_details>
+    <other_details id="MD5-CAM-1.0.1">1c19f87f62d00261e2a367325b06d399</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
+    <other_details id="sem_ver">2.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -611,7 +613,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -622,12 +624,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>SNOMED-CT</value>
-                                </terminology_id>
-                                <code_list>373068000</code_list>
-                                <code_list>840539006</code_list>
-                                <code_list>17621005</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/radiology-findings</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -1080,15 +1077,6 @@
         </term_definitions>
         <term_definitions code="18748-4">
           <items id="text">Diagnostic imaging study</items>
-        </term_definitions>
-        <term_definitions code="373068000">
-          <items id="text">Unspezifischer Befund</items>
-        </term_definitions>
-        <term_definitions code="840539006">
-          <items id="text">COVID-19-typischer Befund</items>
-        </term_definitions>
-        <term_definitions code="17621005">
-          <items id="text">Normalbefund</items>
         </term_definitions>
       </children>
       <cardinality>

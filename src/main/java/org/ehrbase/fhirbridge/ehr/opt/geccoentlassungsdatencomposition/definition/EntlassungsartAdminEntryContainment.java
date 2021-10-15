@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoentlassungsdatencomposition.definiti
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -14,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class EntlassungsartAdminEntryContainment extends Containment {
   public SelectAqlField<EntlassungsartAdminEntry> ENTLASSUNGSART_ADMIN_ENTRY = new AqlFieldImp<EntlassungsartAdminEntry>(EntlassungsartAdminEntry.class, "", "EntlassungsartAdminEntry", EntlassungsartAdminEntry.class, this);
 
-  public SelectAqlField<ArtDerEntlassungDefiningCode> ART_DER_ENTLASSUNG_DEFINING_CODE = new AqlFieldImp<ArtDerEntlassungDefiningCode>(EntlassungsartAdminEntry.class, "/data[at0001]/items[at0040]/value|defining_code", "artDerEntlassungDefiningCode", ArtDerEntlassungDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> ART_DER_ENTLASSUNG = new AqlFieldImp<DvCodedText>(EntlassungsartAdminEntry.class, "/data[at0001]/items[at0040]/value", "artDerEntlassung", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> ART_DER_ENTLASSUNG_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(EntlassungsartAdminEntry.class, "/data[at0001]/items[at0040]/null_flavour|defining_code", "artDerEntlassungNullFlavourDefiningCode", NullFlavour.class, this);
 

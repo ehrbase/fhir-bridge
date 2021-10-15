@@ -1,4 +1,5 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="gecco-procedure-respiratory-therapy" />
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies" />
   <version value="1.0" />
   <name value="RespiratoryTherapies" />
@@ -101,7 +102,7 @@
         <key value="proc-mii-1" />
         <severity value="error" />
         <human value="Falls die Prozedur per OPS kodiert wird, muss eine SNOMED-CT kodierte Category abgebildet werden" />
-        <expression value="code.coding.where(system = 'http://fhir.de/CodeSystem/dimdi/ops').exists() implies category.coding.where(system = 'http://snomed.info/sct').exists()" />
+        <expression value="code.coding.where(system = 'http://fhir.de/CodeSystem/bfarm/ops').exists() implies category.coding.where(system = 'http://snomed.info/sct').exists()" />
         <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/Procedure" />
       </constraint>
       <mapping>
@@ -702,7 +703,7 @@
         <map value="N/A" />
       </mapping>
     </element>
-    <element id="Procedure.extension:recordedDate">
+    <element id="Procedure.extension:Dokumentationsdatum">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -710,7 +711,7 @@
         <valueCode value="4.0.0" />
       </extension>
       <path value="Procedure.extension" />
-      <sliceName value="recordedDate" />
+      <sliceName value="Dokumentationsdatum" />
       <short value="Dokumentationsdatum der Prozedur" />
       <definition value="Dokumentationsdatum der Prozedur, falls abweichend vom Durchführungsdatum" />
       <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
@@ -725,7 +726,7 @@
       </base>
       <type>
         <code value="Extension" />
-        <profile value="https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/procedure-recordedDate" />
+        <profile value="http://fhir.de/StructureDefinition/ProzedurDokumentationsdatum" />
       </type>
       <condition value="ele-1" />
       <constraint>
@@ -1915,8 +1916,8 @@
         <key value="sct-ops-1" />
         <severity value="error" />
         <human value="Entweder wird die Prozedur mit OPS oder SNOMED-CT kodiert." />
-        <expression value="coding.where(system = 'http://snomed.info/sct').exists() or coding.where(system = 'http://fhir.de/CodeSystem/dimdi/ops').exists()" />
-        <source value="Procedure" />
+        <expression value="coding.where(system = 'http://snomed.info/sct').exists() or coding.where(system = 'http://fhir.de/CodeSystem/bfarm/ops').exists()" />
+        <source value="https://www.medizininformatik-initiative.de/fhir/core/StructureDefinition/Procedure" />
       </constraint>
       <mustSupport value="true" />
       <isSummary value="true" />
@@ -2119,9 +2120,9 @@
       </extension>
       <path value="Procedure.code.coding" />
       <sliceName value="ops" />
-      <short value="Code defined by a terminology system" />
+      <short value="A reference to a code defined by a terminology system" />
       <definition value="A reference to a code defined by a terminology system." />
-      <comment value="Codes may be defined very casually in enumerations, or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information.  Ordering of codings is undefined and SHALL NOT be used to infer meaning. Generally, at most only one of the coding values will be labeled as UserSelected = true." />
+      <comment value="Codes may be defined very casually in enumerations or code lists, up to very formal definitions such as SNOMED CT - see the HL7 v3 Core Principles for more information." />
       <requirements value="Allows for alternative encodings within a code system, and translations to other code systems." />
       <min value="0" />
       <max value="1" />
@@ -2132,6 +2133,7 @@
       </base>
       <type>
         <code value="Coding" />
+        <profile value="http://fhir.de/StructureDefinition/CodingOPS" />
       </type>
       <condition value="ele-1" />
       <constraint>
@@ -2146,7 +2148,7 @@
       <isSummary value="true" />
       <binding>
         <strength value="required" />
-        <valueSet value="http://fhir.de/ValueSet/dimdi/ops" />
+        <valueSet value="http://fhir.de/ValueSet/bfarm/ops" />
       </binding>
       <mapping>
         <identity value="rim" />
@@ -2257,6 +2259,57 @@
         <map value="N/A" />
       </mapping>
     </element>
+    <element id="Procedure.code.coding:ops.extension:Seitenlokalisation">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+        <valueCode value="normative" />
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
+        <valueCode value="4.0.0" />
+      </extension>
+      <path value="Procedure.code.coding.extension" />
+      <sliceName value="Seitenlokalisation" />
+      <short value="Optional Extensions Element" />
+      <definition value="Optional Extension Element - found in all resources." />
+      <comment value="There can be no stigma associated with the use of extensions by any application, project, or standard - regardless of the institution or jurisdiction that uses or defines the extensions.  The use of extensions is what allows the FHIR specification to retain a core level of simplicity for everyone." />
+      <alias value="extensions" />
+      <alias value="user content" />
+      <min value="0" />
+      <max value="1" />
+      <base>
+        <path value="Element.extension" />
+        <min value="0" />
+        <max value="*" />
+      </base>
+      <type>
+        <code value="Extension" />
+        <profile value="http://fhir.de/StructureDefinition/seitenlokalisation" />
+      </type>
+      <condition value="ele-1" />
+      <constraint>
+        <key value="ele-1" />
+        <severity value="error" />
+        <human value="All FHIR elements must have a @value or children" />
+        <expression value="hasValue() or (children().count() &gt; id.count())" />
+        <xpath value="@value|f:*|h:div" />
+        <source value="http://hl7.org/fhir/StructureDefinition/Element" />
+      </constraint>
+      <constraint>
+        <key value="ext-1" />
+        <severity value="error" />
+        <human value="Must have either extensions or value[x], not both" />
+        <expression value="extension.exists() != value.exists()" />
+        <xpath value="exists(f:extension)!=exists(f:*[starts-with(local-name(.), 'value')])" />
+        <source value="http://hl7.org/fhir/StructureDefinition/DomainResource" />
+      </constraint>
+      <mapping>
+        <identity value="rim" />
+        <map value="n/a" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="N/A" />
+      </mapping>
+    </element>
     <element id="Procedure.code.coding:ops.extension:seitenlokalisation">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
@@ -2311,7 +2364,7 @@
     </element>
     <element id="Procedure.code.coding:ops.system">
       <path value="Procedure.code.coding.system" />
-      <short value="Identity of the terminology system" />
+      <short value="Canonische CodeSystem URL für OPS" />
       <definition value="The identification of the code system that defines the meaning of the symbol in the code." />
       <comment value="The URI may be an OID (urn:oid:...) or a UUID (urn:uuid:...).  OIDs and UUIDs SHALL be references to the HL7 OID registry. Otherwise, the URI should come from HL7's list of FHIR defined special URIs or it should reference to some definition that establishes the system clearly and unambiguously." />
       <requirements value="Need to be unambiguous about the source of the definition of the symbol." />
@@ -2325,7 +2378,7 @@
       <type>
         <code value="uri" />
       </type>
-      <patternUri value="http://fhir.de/CodeSystem/dimdi/ops" />
+      <fixedUri value="http://fhir.de/CodeSystem/bfarm/ops" />
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -2356,8 +2409,8 @@
     </element>
     <element id="Procedure.code.coding:ops.version">
       <path value="Procedure.code.coding.version" />
-      <short value="Version of the system - if relevant" />
-      <definition value="The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged." />
+      <short value="Die Jahresversion des OPS Kataloges. Angegeben wird immer die vierstellige Jahreszahl (z.B. &quot;2017&quot;)" />
+      <definition value="Bie Verwendung von OPS ist die Angabe der Version zwingend erforderlich.&#xD;&#xA;Hierdurch wird der Tatsache Rechnung getragen, dass jede der jährlich neu erscheinenden Fassung von OPS ein neues Codesystem darstellt." />
       <comment value="Where the terminology does not clearly define what string should be used to identify code system versions, the recommendation is to use the date (expressed in FHIR date format) on which that version was officially published as the version date." />
       <min value="1" />
       <max value="1" />
@@ -2399,7 +2452,7 @@
     </element>
     <element id="Procedure.code.coding:ops.code">
       <path value="Procedure.code.coding.code" />
-      <short value="Symbol in syntax defined by the system" />
+      <short value="Der OPS-Code" />
       <definition value="A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination)." />
       <comment value="Note that FHIR strings SHALL NOT exceed 1MB in size" />
       <requirements value="Need to refer to a particular code in the system." />
@@ -2413,6 +2466,10 @@
       <type>
         <code value="code" />
       </type>
+      <example>
+        <label value="Einfacher OPS-Code" />
+        <valueCode value="5-470" />
+      </example>
       <condition value="ele-1" />
       <constraint>
         <key value="ele-1" />
@@ -2421,6 +2478,13 @@
         <expression value="hasValue() or (children().count() &gt; id.count())" />
         <xpath value="@value|f:*|h:div" />
         <source value="http://hl7.org/fhir/StructureDefinition/Element" />
+      </constraint>
+      <constraint>
+        <key value="ops-regex" />
+        <severity value="warning" />
+        <human value="In code sind nur gültige OPS-Codes ohne Zusätze erlaubt" />
+        <expression value="matches('^[1|3|5|6|8|9]-[a-zA-Z0-9]{3}([.][a-zA-Z0-9]{2})$')" />
+        <source value="http://fhir.de/StructureDefinition/CodingOPS" />
       </constraint>
       <mustSupport value="true" />
       <isSummary value="true" />

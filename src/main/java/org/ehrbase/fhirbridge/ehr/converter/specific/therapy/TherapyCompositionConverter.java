@@ -17,15 +17,14 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.ProcedureToCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.GECCOProzedurComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeccoProzedurKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.KategorieDefiningCode;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Procedure;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("java:S6212")
 public class TherapyCompositionConverter extends ProcedureToCompositionConverter<GECCOProzedurComposition> {
@@ -43,7 +42,7 @@ public class TherapyCompositionConverter extends ProcedureToCompositionConverter
         List<GeccoProzedurKategorieElement> categories = convertCategory(procedure);
         result.setKategorie(categories);
 
-        if (procedure.getStatus() == Procedure.ProcedureStatus.UNKNOWN) {
+        if (procedure.getStatus() == Procedure.ProcedureStatus.UNKNOWN || !procedure.hasCategory()) {
             result.setUnbekannteProzedur(unknownConverter.convert(procedure));
         } else if (procedure.getStatus() == Procedure.ProcedureStatus.NOTDONE) {
             result.setNichtDurchgefuehrteProzedur(notDoneConverter.convert(procedure));
@@ -55,19 +54,12 @@ public class TherapyCompositionConverter extends ProcedureToCompositionConverter
     }
 
     private List<GeccoProzedurKategorieElement> convertCategory(Procedure procedure) {
-        if (!procedure.hasCategory()) {
-            return new ArrayList<>();
+        List<GeccoProzedurKategorieElement> kategorieElementList = new ArrayList<>();
+        for (Coding coding : procedure.getCategory().getCoding()) {
+            GeccoProzedurKategorieElement element = new GeccoProzedurKategorieElement();
+            DvCodedTextParser.parseFHIRCoding(coding).ifPresent(element::setValue);
+            kategorieElementList.add(element);
         }
-
-        return procedure.getCategory()
-                .getCoding()
-                .stream()
-                .filter(coding -> coding.getSystem().equals(CodeSystem.SNOMED.getUrl()))
-                .map(coding -> {
-                    GeccoProzedurKategorieElement element = new GeccoProzedurKategorieElement();
-                    element.setValue(KategorieDefiningCode.getCodesAsMap().get(coding.getCode()));
-                    return element;
-                })
-                .collect(Collectors.toList());
+        return kategorieElementList;
     }
 }

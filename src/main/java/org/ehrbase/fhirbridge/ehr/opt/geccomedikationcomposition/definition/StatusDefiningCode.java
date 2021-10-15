@@ -4,23 +4,21 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum StatusDefiningCode implements EnumValueSet {
-  AKTIV("Aktiv", "Das Medikament wird derzeit angewendet.", "local", "at0011"),
+  BEABSICHTIGT("Beabsichtigt", "Die Medikation kann irgendwann in der Zukunft angewendet werden.", "local", "at0005"),
 
-  UNBEKANNT("Unbekannt", "Der Status der Medikamentenanwendung ist nicht bekannt.", "local", "at0017"),
+  UNBEKANNT("Unbekannt", "Der Status des Medikaments ist derzeit nicht bekannt.", "local", "at0008"),
 
-  VORGESEHEN("Vorgesehen", "Das Medikament soll in Zukunft zu einem nicht festgelegten Zeitpunkt angewendet werden.", "local", "at0009"),
+  AKTIV("Aktiv", "Das Medikament wird noch angewendet.", "local", "at0002"),
 
-  GEPLANT("Geplant", "Das Medikament soll zu einem späteren Zeitpunkt eingenommen werden.", "local", "at0010"),
+  FEHLERHAFTE_ANWENDUNG("Fehlerhafte Anwendung", "Einige der Aktionen, die im Medikation Statement enthalten sind, können bereits stattgefunden haben. Beispielsweise kann der Patient einen Teil der Medikamente eingenommen haben.", "local", "at0004"),
 
-  ABGEBROCHEN("Abgebrochen", "Die Medikamentenanwendung wurde begonnen und dann eingestellt.", "local", "at0016"),
+  ANGEHALTEN("Angehalten", "Die im Medikation Statement implizierten Aktionen wurden vorübergehend gestoppt, werden aber voraussichtlich später fortgesetzt. Kann auch als \"ausgesetzt\" bezeichnet werden.", "local", "at0007"),
 
-  ABGESCHLOSSEN("Abgeschlossen", "Das Medikament wird nicht mehr angewendet.", "local", "at0012"),
+  ABGESCHLOSSEN("Abgeschlossen", "Das Medikament wird nicht mehr angewendet.", "local", "at0003"),
 
-  VERSCHOBEN("Verschoben", "Die Anwendung des Medikaments ist geplant, der Beginn wurde jedoch vorübergehend verzögert.", "local", "at0013"),
+  GESTOPPT("Gestoppt", "Die im Medikation Statement implizierten Aktionen wurden dauerhaft gestoppt, bevor alle von ihnen eingetreten sind. Dies sollte nicht verwendet werden, wenn Medikation Statement versehentlich eingegeben wurde.", "local", "at0006"),
 
-  UNTERBROCHEN("Unterbrochen", "Die Medikamentenanwendung wurde begonnen, aber vorübergehend ausgesetzt.", "local", "at0015"),
-
-  WIDERRUFEN("Widerrufen", "Das Medikament sollte angewendet werden, wurde jedoch vor Beginn abgesagt.", "local", "at0014");
+  NICHT_GENOMMEN("Nicht genommen", "Das Medikament wurde vom Patienten nicht angewendet.", "local", "at0009");
 
   private String value;
 

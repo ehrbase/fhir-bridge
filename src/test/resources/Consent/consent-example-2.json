@@ -1,17 +1,11 @@
 {
   "resourceType": "Consent",
-  "id": "e1c90e84-aa7b-4999-8036-27f88dd7b60e",
+  "id": "7976c6e2-1b4c-4af5-99d7-a701e7f43472",
   "meta": {
     "profile": [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order"
     ]
   },
-  "identifier": [
-    {
-      "system": "urn:ietf:rfc:3986",
-      "value": "urn:uuid:123e4567-e89b-12d3-a456-426655440000"
-    }
-  ],
   "status": "active",
   "scope": {
     "coding": [
@@ -50,8 +44,8 @@
         "coding": [
           {
             "system": "http://snomed.info/sct",
-            "code": "304252001",
-            "display": "For resuscitation"
+            "code": "304253006",
+            "display": "Not for resuscitation"
           }
         ]
       }

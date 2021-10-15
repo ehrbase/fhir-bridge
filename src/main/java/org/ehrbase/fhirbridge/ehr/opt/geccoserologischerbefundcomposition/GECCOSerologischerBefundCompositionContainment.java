@@ -18,8 +18,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundObservation;
+import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.GeccoSerologischerBefundKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.GeccoSerologischerBefundKategorieLoincElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.StatusDefiningCode;
 
 public class GECCOSerologischerBefundCompositionContainment extends Containment {
@@ -33,9 +33,7 @@ public class GECCOSerologischerBefundCompositionContainment extends Containment 
 
   public SelectAqlField<NullFlavour> STATUS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(GECCOSerologischerBefundComposition.class, "/context/other_context[at0001]/items[at0004]/null_flavour|defining_code", "statusNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<KategorieDefiningCode> KATEGORIE_DEFINING_CODE = new AqlFieldImp<KategorieDefiningCode>(GECCOSerologischerBefundComposition.class, "/context/other_context[at0001]/items[at0005]/value|defining_code", "kategorieDefiningCode", KategorieDefiningCode.class, this);
-
-  public SelectAqlField<NullFlavour> KATEGORIE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(GECCOSerologischerBefundComposition.class, "/context/other_context[at0001]/items[at0005]/null_flavour|defining_code", "kategorieNullFlavourDefiningCode", NullFlavour.class, this);
+  public ListSelectAqlField<GeccoSerologischerBefundKategorieElement> KATEGORIE = new ListAqlFieldImp<GeccoSerologischerBefundKategorieElement>(GECCOSerologischerBefundComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorie", GeccoSerologischerBefundKategorieElement.class, this);
 
   public ListSelectAqlField<GeccoSerologischerBefundKategorieLoincElement> KATEGORIE_LOINC = new ListAqlFieldImp<GeccoSerologischerBefundKategorieLoincElement>(GECCOSerologischerBefundComposition.class, "/context/other_context[at0001]/items[at0005]", "kategorieLoinc", GeccoSerologischerBefundKategorieLoincElement.class, this);
 

@@ -32,121 +32,122 @@ workflows:
                             # - release
 
     # WORKFLOW 2/2 Build, Fully Test & Analyze FHIR-bridge code
-    QUALITY-GATE-II:
-        jobs:
-            - build-test-analyse-fhirbridge:
-                context: org-global
-                filters:
-                    branches:
-                        ignore: gh-pages
-
-            # Execute Robot Integration Tests (Parallel Execution)
-            - BUNDLE-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
-
-            - CONDITION-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
-
-            - CONSENT-tests:
-                  context: org-global
-                  requires:
-                      - build-test-analyse-fhirbridge
-                  filters:
-                      branches:
-                          ignore: gh-pages
-
-            - DIAGNOSTIC-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
-
-            - IMMUNIZATION-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
-
-            - MEDICATIONSTATEMENT-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
-
-            - OBSERVATION-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
-
-            - PROCEDURE-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
-
-            - QUESTIONAIRE-tests:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        ignore: gh-pages
-
-            - ROBOT-TEST-REPORT:
-                context: org-global
-                requires:
-                    - BUNDLE-tests
-                    - CONDITION-tests
-                    - CONSENT-tests
-                    - DIAGNOSTIC-tests
-                    - IMMUNIZATION-tests
-                    - MEDICATIONSTATEMENT-tests
-                    - OBSERVATION-tests
-                    - PROCEDURE-tests
-                    - QUESTIONAIRE-tests
-
-
-            - tag-version:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        only:
-                            - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+)$/
-
-
-            - build-and-deploy:
-                context: org-global
-                requires:
-                    - build-test-analyse-fhirbridge
-                filters:
-                    branches:
-                        only:
-                            - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
-
-
+#    QUALITY-GATE-II:
+#        jobs:
+#            - build-test-analyse-fhirbridge:
+#                context: org-global
+#                filters:
+#                    branches:
+#                        ignore: gh-pages
+#
+#            # Execute Robot Integration Tests (Parallel Execution)
+#            - BUNDLE-tests:
+#                context: org-global
+#                requires:
+#                    - build-test-analyse-fhirbridge
+#                filters:
+#                    branches:
+#                        ignore: gh-pages
+#
+#            - CONDITION-tests:
+#                context: org-global
+#                requires:
+#                    - build-test-analyse-fhirbridge
+#                filters:
+#                    branches:
+#                        ignore: gh-pages
+#
+#            - CONSENT-tests:
+#                  context: org-global
+#                  requires:
+#                      - build-test-analyse-fhirbridge
+#                  filters:
+#                      branches:
+#                          ignore: gh-pages
+#
+#            - DIAGNOSTIC-tests:
+#                context: org-global
+#                requires:
+#                    - build-test-analyse-fhirbridge
+#                filters:
+#                    branches:
+#                        ignore: gh-pages
+#
+#            - IMMUNIZATION-tests:
+#                context: org-global
+#                requires:
+#                    - build-test-analyse-fhirbridge
+#                filters:
+#                    branches:
+#                        ignore: gh-pages
+#
+#            - MEDICATIONSTATEMENT-tests:
+#                context: org-global
+#                requires:
+#                    - build-test-analyse-fhirbridge
+#                filters:
+#                    branches:
+#                        ignore: gh-pages
+#
+#            - OBSERVATION-tests:
+#                context: org-global
+#                requires:
+#                    - build-test-analyse-fhirbridge
+#                filters:
+#                    branches:
+#                        ignore: gh-pages
+#
+#            - PROCEDURE-tests:
+#                context: org-global
+#                requires:
+#                    - build-test-analyse-fhirbridge
+#                filters:
+#                    branches:
+#                        ignore: gh-pages
+#
+#            - QUESTIONAIRE-tests:
+#                context: org-global
+#                requires:
+#                    - build-test-analyse-fhirbridge
+#                filters:
+#                    branches:
+#                        ignore: gh-pages
+#
+#            - ROBOT-TEST-REPORT:
+#                context: org-global
+#                requires:
+#                    - BUNDLE-tests
+#                    - CONDITION-tests
+#                    - CONSENT-tests
+#                    - DIAGNOSTIC-tests
+#                    - IMMUNIZATION-tests
+#                    - MEDICATIONSTATEMENT-tests
+#                    - OBSERVATION-tests
+#                    - PROCEDURE-tests
+#                    - QUESTIONAIRE-tests
+#
+#
+#            - tag-version:
+#                context: org-global
+#                requires:
+#                    - build-test-analyse-fhirbridge
+#                filters:
+#                    branches:
+#                        only:
+#                            - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+)$/
+#
+#
+#            - build-and-deploy:
+#                context: org-global
+#                requires:
+#                    - build-test-analyse-fhirbridge
+#                filters:
+#                    branches:
+#                        only:
+#                            - /^(release\/v\d+\.\d+\.\d+|hotfix\/v\d+\.\d+\.\d+|master|develop)$/
+#
+#
+#
 #            - deploy-testdocs-githup-pages:
 #                context: org-global
 #                requires:
@@ -554,7 +555,8 @@ commands:
                                              -Dexec.args='${project.version}' \
                                              --non-recursive exec:exec)
                     echo ${EHRbase_VERSION}
-                    java -jar "application/target/application-${EHRbase_VERSION}.jar" --security.authType="BASIC" \
+                    java -jar "application/target/application-${EHRbase_VERSION}.jar" --server.disable-strict-validation=true \
+                                                                                      --security.authType="BASIC" \
                                                                                       --security.authUser="myuser" \
                                                                                       --security.authPassword="myPassword432" > log
 
@@ -625,7 +627,11 @@ commands:
                                              -Dexec.args='${project.version}' \
                                              --non-recursive exec:exec)
                     echo "FHIRBRIDGE_VERSION: ${FHIRBRIDGE_VERSION}"
-                    java -jar "target/fhir-bridge-${FHIRBRIDGE_VERSION}.jar" > fhirbride_log
+                    java -jar "target/fhir-bridge-${FHIRBRIDGE_VERSION}.jar" --fhir-bridge.fhir.endpoints.DocumentReference=true \
+                                                                             --fhir-bridge.minio.url=http://localhost:9000 \
+                                                                             --fhir-bridge.minio.access-key=minio \
+                                                                             --fhir-bridge.minio.secret-key=minio123456 \
+                                                                             --fhir-bridge.minio.bucket-name=fhir-bridge-bucket > fhirbride_log
 
             - run:
                 name: WAIT FOR FHIRBRIDE TO BE READY

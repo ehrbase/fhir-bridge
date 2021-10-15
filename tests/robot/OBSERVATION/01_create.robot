@@ -127,14 +127,14 @@ Force Tags              observation_create    create
 
 008 Create Body Height
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-height-normal.json_\n\n
+	...                 2. *LOAD* _create-body-height.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid
 
 	ehr.create new ehr    000_ehr_status.json
-	observation.create body height    Body Height    BodyHeight/create-body-height-normal.json
+	observation.create body height    Body Height    BodyHeight/create-body-height.json
 	observation.validate response - 201
 
 
@@ -294,43 +294,43 @@ Force Tags              observation_create    create
     observation.validate response - 201
 
 
-021 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Present)
-	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-study-inclusion-due-to-covid-19-confirmed-diagnosis-present.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-    ...                 4. *POST* example JSON to observation endpoint\n\n
-	...                 5. *VALIDATE* the response status
-	[Tags]             	study-inclusion-due-to-covid-19   valid    not-ready    not-implemented
-
-    ehr.create new ehr    000_ehr_status.json
-    observation.create study inclusion due to covid 19    Study Inclusion due to Covid-19 confirmed Diagnosis (Present)    create-study-inclusion-due-to-covid-19-confirmed-diagnosis-present.json
-    observation.validate response - 201
-
-
-022 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Absent)
-	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-study-inclusion-due-to-covid-19-confirmed-diagnosis-absent.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-    ...                 4. *POST* example JSON to observation endpoint\n\n
-	...                 5. *VALIDATE* the response status
-	[Tags]             	study-inclusion-due-to-covid-19   valid    not-ready    not-implemented
-
-    ehr.create new ehr    000_ehr_status.json
-    observation.create study inclusion due to covid 19    Study Inclusion due to Covid-19 confirmed Diagnosis (Absent)    create-study-inclusion-due-to-covid-19-confirmed-diagnosis-absent.json
-    observation.validate response - 201
-
-
-023 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Unknown)
-	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-study-inclusion-due-to-covid-19-confirmed-diagnosis-unknown.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-    ...                 4. *POST* example JSON to observation endpoint\n\n
-	...                 5. *VALIDATE* the response status
-	[Tags]             	study-inclusion-due-to-covid-19   valid    not-ready    not-implemented
-
-    ehr.create new ehr    000_ehr_status.json
-    observation.create study inclusion due to covid 19    Study Inclusion due to Covid-19 confirmed Diagnosis (Unknown)    create-study-inclusion-due-to-covid-19-confirmed-diagnosis-unknown.json
-    observation.validate response - 201
+#021 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Present)
+#	[Documentation]     1. *CREATE* new EHR record\n\n
+#	...                 2. *LOAD* _create-study-inclusion-due-to-covid-19-confirmed-diagnosis-present.json_\n\n
+#	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+#    ...                 4. *POST* example JSON to observation endpoint\n\n
+#	...                 5. *VALIDATE* the response status
+#	[Tags]             	study-inclusion-due-to-covid-19   valid    not-ready    not-implemented
+#
+#    ehr.create new ehr    000_ehr_status.json
+#    observation.create study inclusion due to covid 19    Study Inclusion due to Covid-19 confirmed Diagnosis (Present)    create-study-inclusion-due-to-covid-19-confirmed-diagnosis-present.json
+#    observation.validate response - 201
+#
+#
+#022 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Absent)
+#	[Documentation]     1. *CREATE* new EHR record\n\n
+#	...                 2. *LOAD* _create-study-inclusion-due-to-covid-19-confirmed-diagnosis-absent.json_\n\n
+#	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+#    ...                 4. *POST* example JSON to observation endpoint\n\n
+#	...                 5. *VALIDATE* the response status
+#	[Tags]             	study-inclusion-due-to-covid-19   valid    not-ready    not-implemented
+#
+#    ehr.create new ehr    000_ehr_status.json
+#    observation.create study inclusion due to covid 19    Study Inclusion due to Covid-19 confirmed Diagnosis (Absent)    create-study-inclusion-due-to-covid-19-confirmed-diagnosis-absent.json
+#    observation.validate response - 201
+#
+#
+#023 Create Study Inclusion due to Covid-19 confirmed Diagnosis (Unknown)
+#	[Documentation]     1. *CREATE* new EHR record\n\n
+#	...                 2. *LOAD* _create-study-inclusion-due-to-covid-19-confirmed-diagnosis-unknown.json_\n\n
+#	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+#    ...                 4. *POST* example JSON to observation endpoint\n\n
+#	...                 5. *VALIDATE* the response status
+#	[Tags]             	study-inclusion-due-to-covid-19   valid    not-ready    not-implemented
+#
+#    ehr.create new ehr    000_ehr_status.json
+#    observation.create study inclusion due to covid 19    Study Inclusion due to Covid-19 confirmed Diagnosis (Unknown)    create-study-inclusion-due-to-covid-19-confirmed-diagnosis-unknown.json
+#    observation.validate response - 201
 
 
 024 Create Interventional Clinical Trial Participation (Present with EudraCT)
@@ -912,28 +912,25 @@ Force Tags              observation_create    create
 
 
 
-
 068 Create Observation Body Height loinc datetime
-	[Documentation]     1. *CREATE* new EHR record\n\n 
+	[Documentation]     1. *CREATE* new EHR record\n\n
 	...                 2. *LOAD* _create-body-height-loinc-datetime.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    loinc    datetime
-
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-loinc-datetime.json
     observation.validate response - 201
 
 
 069 Create Observation Body Height loinc period
-	[Documentation]     1. *CREATE* new EHR record\n\n 
+	[Documentation]     1. *CREATE* new EHR record\n\n
 	...                 2. *LOAD* _create-body-height-loinc-period.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    loinc    period
-
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-loinc-period.json
     observation.validate response - 201
@@ -941,13 +938,12 @@ Force Tags              observation_create    create
 
 
 070 Create Observation Body Height loinc period_2
-	[Documentation]     1. *CREATE* new EHR record\n\n 
+	[Documentation]     1. *CREATE* new EHR record\n\n
 	...                 2. *LOAD* _create-body-height-loinc-period_2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    loinc    period_2
-
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-loinc-period_2.json
     observation.validate response - 201
@@ -955,13 +951,12 @@ Force Tags              observation_create    create
 
 
 071 Create Observation Body Height snomed datetime
-	[Documentation]     1. *CREATE* new EHR record\n\n 
+	[Documentation]     1. *CREATE* new EHR record\n\n
 	...                 2. *LOAD* _create-body-height-snomed-datetime.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    snomed    datetime
-
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-snomed-datetime.json
     observation.validate response - 201
@@ -969,13 +964,12 @@ Force Tags              observation_create    create
 
 
 072 Create Observation Body Height snomed period
-	[Documentation]     1. *CREATE* new EHR record\n\n 
+	[Documentation]     1. *CREATE* new EHR record\n\n
 	...                 2. *LOAD* _create-body-height-snomed-period.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    snomed    period
-
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-snomed-period.json
     observation.validate response - 201
@@ -983,13 +977,12 @@ Force Tags              observation_create    create
 
 
 073 Create Observation Body Height snomed period_2
-	[Documentation]     1. *CREATE* new EHR record\n\n 
+	[Documentation]     1. *CREATE* new EHR record\n\n
 	...                 2. *LOAD* _create-body-height-snomed-period_2.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
 	[Tags]             	body-height    valid    alternative    snomed    period_2
-
     ehr.create new ehr    000_ehr_status.json
     observation.create body height  Body Height  BodyHeight/create-body-height-snomed-period_2.json
     observation.validate response - 201
@@ -1079,87 +1072,87 @@ Force Tags              observation_create    create
 
 
 
-080 Create Body Weight loinc datetime
+080 Create Body Weight data absent
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-weight-loinc-datetime.json_\n\n
+	...                 2. *LOAD* _create-body-weight_data-absent.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-weight    valid    alternative    loinc    datetime
+	[Tags]             	body-weight    valid
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body weight  Body Weight  create-body-weight-loinc-datetime.json
+    observation.create body weight  Body Weight  create-body-weight_data-absent.json
     observation.validate response - 201
 
 
 
-081 Create Body Weight loinc period
+081 Create Body Weight unit gramm
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-weight-loinc-period.json_\n\n
+	...                 2. *LOAD* _create-body-weight_gramm.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-weight    valid    alternative    loinc    period    not-ready    not-ready_bug    218
+	[Tags]             	body-weight    valid
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body weight  Body Weight  create-body-weight-loinc-period.json
+    observation.create body weight  Body Weight  create-body-weight_gramm.json
     observation.validate response - 201
 
 
 
-082 Create Body Weight loinc period_2
+082 Create Body Weight magnitude min
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-weight-loinc-period_2.json_\n\n
+	...                 2. *LOAD* _create-body-weight_magnitude-min.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-weight    valid    alternative   loinc    period_2     not-ready    not-ready_bug    218
+	[Tags]             	body-weight    valid
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body weight  Body Weight  create-body-weight-loinc-period_2.json
+    observation.create body weight  Body Weight  create-body-weight_magnitude-min.json
     observation.validate response - 201
 
 
 
-083 Create Body Weight snomed datetime
+083 Create Body Weight magnitude max
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _.json_\n\n
+	...                 2. *LOAD* _create-body-weight_magnitude-max.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-weight    valid    alternative    snomed    datetime
+	[Tags]             	body-weight    valid
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body weight  Body Weight  create-body-weight-snomed-datetime.json
+    observation.create body weight  Body Weight  create-body-weight_magnitude-max.json
     observation.validate response - 201
 
 
 
-084 Create Body Weight snomed period
+084 Create Body Weight unit pound
 	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-weight-snomed-period.json_\n\n
+	...                 2. *LOAD* _create-body-weight_pound.json_\n\n
 	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status
-	[Tags]             	body-weight    valid    alternative    snomed    period    not-ready    not-ready_bug    218
+	[Tags]             	body-weight    valid
 
     ehr.create new ehr    000_ehr_status.json
-    observation.create body weight  Body Weight  create-body-weight-snomed-period.json
+    observation.create body weight  Body Weight  create-body-weight_pound.json
     observation.validate response - 201
 
 
 
-085 Create Body Weight snomed period_2
-	[Documentation]     1. *CREATE* new EHR record\n\n 
-	...                 2. *LOAD* _create-body-weight-snomed-period_2.json_\n\n
-	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
-    ...                 4. *POST* example JSON to observation endpoint\n\n
-	...                 5. *VALIDATE* the response status
-	[Tags]             	body-weight    valid    alternative    snomed    period_2    not-ready    not-ready_bug    218
-
-    ehr.create new ehr    000_ehr_status.json
-    observation.create body weight  Body Weight  create-body-weight-snomed-period_2.json
-    observation.validate response - 201
+#085 Create Body Weight snomed period_2
+#	[Documentation]     1. *CREATE* new EHR record\n\n
+#	...                 2. *LOAD* _create-body-weight-snomed-period_2.json_\n\n
+#	...                 3. *UPDATE* ``Subject - Identifier - value`` with the _UUID:_ ${subject_id} which was created in EHR record\n\n
+#    ...                 4. *POST* example JSON to observation endpoint\n\n
+#	...                 5. *VALIDATE* the response status
+#	[Tags]             	body-weight    valid    alternative    snomed    period_2    not-ready    not-ready_bug    218
+#
+#    ehr.create new ehr    000_ehr_status.json
+#    observation.create body weight  Body Weight  create-body-weight-snomed-period_2.json
+#    observation.validate response - 201
 
 
 

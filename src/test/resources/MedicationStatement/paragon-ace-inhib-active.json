@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "MedicationStatement/3/_history/1",
+      "id" : "MedicationStatement/77caf34d-d6c6-4623-a9c2-2f3e71be0986/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -54,7 +54,12 @@
     }
   },
   "composer" : {
-    "_type" : "PARTY_SELF"
+    "_type" : "PARTY_IDENTIFIED",
+    "identifiers" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "urn:organization:identifier:system",
+      "id" : "organization_123456"
+    } ]
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
@@ -73,6 +78,14 @@
         },
         "code_string" : "232"
       }
+    },
+    "health_care_facility" : {
+      "_type" : "PARTY_IDENTIFIED",
+      "identifiers" : [ {
+        "_type" : "DV_IDENTIFIER",
+        "assigner" : "urn:organization:identifier:system",
+        "id" : "organization_123456"
+      } ]
     }
   },
   "content" : [ {
@@ -80,6 +93,15 @@
     "name" : {
       "_type" : "DV_TEXT",
       "value" : "ACE-Hemmer"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.medication_statement.v0"
+      },
+      "template_id" : {
+        "value" : "GECCO_Medikation"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -111,6 +133,15 @@
         "name" : {
           "_type" : "DV_TEXT",
           "value" : "Status"
+        },
+        "archetype_details" : {
+          "archetype_id" : {
+            "value" : "openEHR-EHR-CLUSTER.medication_status_fhir.v0"
+          },
+          "template_id" : {
+            "value" : "GECCO_Medikation"
+          },
+          "rm_version" : "1.0.4"
         },
         "items" : [ {
           "_type" : "ELEMENT",
@@ -174,7 +205,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "ATC"
+                  "value" : "http://fhir.de/CodeSystem/bfarm/atc"
                 },
                 "code_string" : "C09A"
               }

@@ -12,11 +12,9 @@ import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.FallidentifikationCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestPanelCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytCluster;
-import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytErgebnisStatusChoice;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytErgebnisStatusDvCodedText;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytErgebnisStatusDvText;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytErgebnisStatusElement;
-import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisChoice;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisDvCount;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisDvQuantity;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisElement;
@@ -151,7 +149,7 @@ public class VirologischerBefundIT extends AbstractBundleMappingTestSetupIT {
         VirologischerBefundCompositionConverter virologischerBefundCompositionConverter = new VirologischerBefundCompositionConverter();
         VirologischerBefundComposition mappedVirologischerBefundComposition = virologischerBefundCompositionConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedVirologischerBefundComposition);
-        assertEquals(diff.getChanges().size(), 4);
+        assertEquals(diff.getChanges().size(), 2);
     }
 
     public void testMappingQuantity(String resourcePath, String paragonPath) throws IOException{
@@ -161,7 +159,7 @@ public class VirologischerBefundIT extends AbstractBundleMappingTestSetupIT {
         VirologischerBefundCompositionConverter virologischerBefundCompositionConverter = new VirologischerBefundCompositionConverter();
         VirologischerBefundComposition mappedVirologischerBefundComposition = virologischerBefundCompositionConverter.convert(observation);
         Diff diff = compareCompositions(getJavers(), paragonPath, mappedVirologischerBefundComposition);
-        assertEquals(diff.getChanges().size(), 4);
+        assertEquals(diff.getChanges().size(), 2);
     }
 
     public Exception executeValidatorException(String path) throws IOException {

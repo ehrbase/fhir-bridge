@@ -28,5 +28,19 @@
         "size": 132629
       }
     }
-  ]
+  ],
+  "author": [
+    {
+      "identifier": {
+        "system": "urn:author:identifier:system",
+        "value": "author_123456"
+      }
+    }
+  ],
+  "custodian": {
+    "identifier": {
+      "system": "urn:organization:identifier:system",
+      "value": "organization_123456"
+    }
+  }
 }

@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
@@ -18,8 +19,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 @Archetype("openEHR-EHR-ACTION.medication.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-06-30T11:44:02.752999+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-10-13T17:05:46.193181+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ImpfungAction implements EntryEntity {
   /**
@@ -28,8 +29,8 @@ public class ImpfungAction implements EntryEntity {
    * Comment: Zum Beispiel: "Atenolol 100 mg" oder "Tenormin Tabletten 100 mg".
    * Es wird dringend empfohlen, dass das Element "Arzneimittel" mit einer Terminologie kodiert wird, die nach Möglichkeit eine Entscheidungsunterstützung auslösen kann. Der Umfang der Kodierung kann vom einfachen Namen des Arzneimittels bis hin zu strukturierten Details über die tatsächlich verwendete Medikamentenpackung variieren. Die Freitext-Eingabe sollte nur dann verwendet werden, wenn keine entsprechende Terminologie vorhanden ist.
    */
-  @Path("/description[at0017]/items[at0020 and name/value='Impfstoff']/value|defining_code")
-  private ImpfstoffDefiningCode impfstoffDefiningCode;
+  @Path("/description[at0017]/items[at0020 and name/value='Impfstoff']/value")
+  private DvCodedText impfstoff;
 
   /**
    * Path: Impfstatus/Impfung/Tree/Impfstoff/null_flavour
@@ -118,12 +119,12 @@ public class ImpfungAction implements EntryEntity {
   @Path("/ism_transition/transition|defining_code")
   private Transition transitionDefiningCode;
 
-  public void setImpfstoffDefiningCode(ImpfstoffDefiningCode impfstoffDefiningCode) {
-     this.impfstoffDefiningCode = impfstoffDefiningCode;
+  public void setImpfstoff(DvCodedText impfstoff) {
+     this.impfstoff = impfstoff;
   }
 
-  public ImpfstoffDefiningCode getImpfstoffDefiningCode() {
-     return this.impfstoffDefiningCode ;
+  public DvCodedText getImpfstoff() {
+     return this.impfstoff ;
   }
 
   public void setImpfstoffNullFlavourDefiningCode(NullFlavour impfstoffNullFlavourDefiningCode) {

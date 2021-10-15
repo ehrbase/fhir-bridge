@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.pregnancystatus;
 
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
@@ -12,15 +13,16 @@ public class SchwangerschaftsstatusObservationConverter extends ObservationToObs
     @Override
     protected SchwangerschaftsstatusObservation convertInternal(Observation resource) {
         SchwangerschaftsstatusObservation schwangerschaftsstatusObservation = new SchwangerschaftsstatusObservation();
-        schwangerschaftsstatusObservation.setStatusDefiningCode(converStatus(resource));
+        convertStatus(resource, schwangerschaftsstatusObservation);
         return schwangerschaftsstatusObservation;
     }
 
-    private StatusDefiningCode2 converStatus(Observation resource) {
+    private void convertStatus(Observation resource, SchwangerschaftsstatusObservation schwangerschaftsstatusObservation) {
         if (resource.hasValueCodeableConcept() && resource.getValueCodeableConcept().hasCoding()) {
-            return mapStatus(resource);
+            schwangerschaftsstatusObservation.setStatusDefiningCode(mapStatus(resource));
+        }else{
+            schwangerschaftsstatusObservation.setStatusNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
-        return StatusDefiningCode2.UNBEKANNT; //TODO needs fix
     }
 
     private StatusDefiningCode2 mapStatus(Observation resource) {
@@ -38,6 +40,7 @@ public class SchwangerschaftsstatusObservationConverter extends ObservationToObs
         } else if (coding.getSystem().equals(CodeSystem.LOINC.getUrl())) {
             return convertStatusLoinc(coding);
         } else {
+            // not accessible due to HAPI FHIR - therefore not tested
             throw new ConversionException("Code system is not of type LOINC and SNOMED " + coding.getCode() + " and therefore not supported");
         }
     }
@@ -62,6 +65,7 @@ public class SchwangerschaftsstatusObservationConverter extends ObservationToObs
         } else if ("261665006".equals(coding.getCode())) {
             return StatusDefiningCode2.UNBEKANNT;
         } else {
+            // (not thrown as valid LOINC Code [1...1] is listed above invalid SNOMED code [0...1])
             throw new ConversionException("Status code " + coding.getCode() + " is not supported");
         }
     }

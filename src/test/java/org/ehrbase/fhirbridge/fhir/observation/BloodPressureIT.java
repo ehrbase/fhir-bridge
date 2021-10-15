@@ -1,13 +1,10 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodpressure.BloodPressureCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty.ClinicalFrailtyScaleScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.BlutdruckComposition;
+import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.BlutdruckKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.blutdruckcomposition.definition.BlutdruckObservation;
-import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.KlinischeFrailtySkalaComposition;
-import org.ehrbase.fhirbridge.ehr.opt.klinischefrailtyskalacomposition.definition.KlinischeFrailtySkalaCfsObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -33,21 +30,40 @@ public class BloodPressureIT extends AbstractMappingTestSetupIT {
         create("create-blood-pressure.json");
     }
 
+    // #####################################################################################
+    // check payload
+
     @Test
-    void testCreateBloodPressure() throws IOException {
-        testMapping("create-blood-pressure.json", "paragon-create-blood-pressure.json");
+    void testBloodPressureSystolicMagnitudeMin() throws IOException {
+        testMapping("create-blood-pressure_systolic-magnitude-min.json",
+                "paragon-blood-pressure_systolic-magnitude-min.json");
     }
 
     @Test
-    void testLOINCDatetime() throws IOException {
-        testMapping("create-blood-pressure_loinc-datetime.json", "paragon-create-blood-pressure_loinc-datetime.json");
+    void testBloodPressureSystolicMagnitudeMax() throws IOException {
+        testMapping("create-blood-pressure_systolic-magnitude-max.json",
+                "paragon-blood-pressure_systolic-magnitude-max.json");
     }
 
     @Test
-    void testLOINCPeriod() throws IOException {
-        testMapping("create-blood-pressure_loinc-period.json", "paragon-create-blood-pressure_loinc-period.json");
+    void testBloodPressureDiastolicMagnitudeMin() throws IOException {
+        testMapping("create-blood-pressure_diastolic-magnitude-min.json",
+                "paragon-blood-pressure_diastolic-magnitude-min.json");
     }
 
+    @Test
+    void testBloodPressureDiastolicMagnitudeMax() throws IOException {
+        testMapping("create-blood-pressure_diastolic-magnitude-max.json",
+                "paragon-blood-pressure_diastolic-magnitude-max.json");
+    }
+
+    @Test
+    void testAbsent() throws IOException {
+        testMapping("create-blood-pressure-absent.json", "paragon-create-blood-pressure-absent.json");
+    }
+
+    // #####################################################################################
+    // default
 
     @Override
     public Javers getJavers() {
@@ -55,13 +71,14 @@ public class BloodPressureIT extends AbstractMappingTestSetupIT {
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(BlutdruckComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(BlutdruckObservation.class)
+                .registerValueObject(BlutdruckKategorieElement.class)
                 .build();
     }
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () ->
+        return assertThrows(Exception.class, () ->
                 new BloodPressureCompositionConverter().convert(obs)
         );
     }

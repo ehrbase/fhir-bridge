@@ -25,10 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">95c98c06e09687c4f2ef31086b8607c8</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">8BD8D5F850A9DEE8A16075105D36FD32</other_details>
+    <other_details id="MD5-CAM-1.0.1">8b105e9a068aae23306a3b8ddfc205ad</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">1.0.0</other_details>
+    <other_details id="sem_ver">6.0.0</other_details>
     <other_details id="build_uid">4ddce92e-bdb4-4aee-b1e5-7bbee5567e0c</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -247,7 +247,7 @@
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -258,13 +258,7 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>HL7 FHIR</value>
-                        </terminology_id>
-                        <code_list>inpatient</code_list>
-                        <code_list>outpatient</code_list>
-                        <code_list>community</code_list>
-                        <code_list>patientspecified</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=http://hl7.org/fhir/ValueSet/medication-statement-category</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -390,11 +384,9 @@
                 <rm_type_name>EVENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
+                  <upper_unbounded>true</upper_unbounded>
+                  <lower>0</lower>
                 </occurrences>
                 <node_id>at0002</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -470,7 +462,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -481,31 +473,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>SNOMED CT</value>
-                                </terminology_id>
-                                <code_list>768759001</code_list>
-                                <code_list>413591007</code_list>
-                                <code_list>424096001</code_list>
-                                <code_list>14728000</code_list>
-                                <code_list>83490000</code_list>
-                                <code_list>96138006</code_list>
-                                <code_list>134573001</code_list>
-                                <code_list>78025001</code_list>
-                                <code_list>386142008</code_list>
-                                <code_list>870518005</code_list>
-                                <code_list>35063004</code_list>
-                                <code_list>444649004</code_list>
-                                <code_list>763522001</code_list>
-                                <code_list>416587008</code_list>
-                                <code_list>416897008</code_list>
-                                <code_list>430817009</code_list>
-                                <code_list>703779004</code_list>
-                                <code_list>73133000</code_list>
-                                <code_list>768865007</code_list>
-                                <code_list>88519001</code_list>
-                                <code_list>764877006</code_list>
-                                <code_list>41549009</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/pharmacological-therapy-atc</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -681,7 +649,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -692,15 +660,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>SNOMED CT</value>
-                                </terminology_id>
-                                <code_list>421974008</code_list>
-                                <code_list>373846009</code_list>
-                                <code_list>373808002</code_list>
-                                <code_list>373847000</code_list>
-                                <code_list>360271000</code_list>
-                                <code_list>399707004</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/therapeutic-intent</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -1245,90 +1205,6 @@
           <items id="description">Art der Anwendung des Arzneimittels am Körper.</items>
           <items id="text">Verabreichungsweg</items>
         </term_definitions>
-        <term_definitions code="768759001">
-          <items id="text">Product containing steroid (product)</items>
-        </term_definitions>
-        <term_definitions code="413591007">
-          <items id="text">Product containing atazanavir (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="424096001">
-          <items id="text">Product containing darunavir (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="14728000">
-          <items id="text">Product containing chloroquine (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="83490000">
-          <items id="text">Product containing hydroxychloroquine (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="96138006">
-          <items id="text">Product containing ivermectin (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="134573001">
-          <items id="text">Product containing lopinavir and ritonavir (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="78025001">
-          <items id="text">Product containing ganciclovir (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="386142008">
-          <items id="text">Product containing oseltamivir (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="870518005">
-          <items id="text">Product containing remdesivir (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="35063004">
-          <items id="text">Product containing ribavirin (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="444649004">
-          <items id="text">Product containing tocilizumab (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="763522001">
-          <items id="text">Product containing sarilumab (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="416587008">
-          <items id="text">Product containing calcineurin inhibitor (product)</items>
-        </term_definitions>
-        <term_definitions code="416897008">
-          <items id="text">Product containing tumor necrosis factor alpha inhibitor (product)</items>
-        </term_definitions>
-        <term_definitions code="430817009">
-          <items id="text">Product containing interleukin 1 receptor antagonist (product)</items>
-        </term_definitions>
-        <term_definitions code="703779004">
-          <items id="text">Product containing ruxolitinib (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="73133000">
-          <items id="text">Product containing colchicine (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="768865007">
-          <items id="text">Product containing interferon (product)</items>
-        </term_definitions>
-        <term_definitions code="88519001">
-          <items id="text">Product containing calcifediol (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="764877006">
-          <items id="text">Product containing zinc (medicinal product)</items>
-        </term_definitions>
-        <term_definitions code="41549009">
-          <items id="text">Product containing angiotensin-converting enzyme inhibitor (product)</items>
-        </term_definitions>
-        <term_definitions code="421974008">
-          <items id="text">Adjunct - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373846009">
-          <items id="text">Adjuvant - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373808002">
-          <items id="text">Curative - procedure intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373847000">
-          <items id="text">Neo-adjuvant - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="360271000">
-          <items id="text">Prophylaxis - procedure intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="399707004">
-          <items id="text">Supportive - procedure intent (qualifier value)</items>
-        </term_definitions>
       </children>
       <children xsi:type="C_ARCHETYPE_ROOT">
         <rm_type_name>OBSERVATION</rm_type_name>
@@ -1376,11 +1252,9 @@
                 <rm_type_name>EVENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
+                  <upper_unbounded>true</upper_unbounded>
+                  <lower>0</lower>
                 </occurrences>
                 <node_id>at0002</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -1456,7 +1330,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -1467,67 +1341,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>ATC</value>
-                                </terminology_id>
-                                <code_list>C09A</code_list>
-                                <code_list>C09AA</code_list>
-                                <code_list>C09AA01</code_list>
-                                <code_list>C09AA02</code_list>
-                                <code_list>C09AA03</code_list>
-                                <code_list>C09AA04</code_list>
-                                <code_list>C09AA05</code_list>
-                                <code_list>C09AA06</code_list>
-                                <code_list>C09AA07</code_list>
-                                <code_list>C09AA08</code_list>
-                                <code_list>C09AA09</code_list>
-                                <code_list>C09AA10</code_list>
-                                <code_list>C09AA11</code_list>
-                                <code_list>C09AA12</code_list>
-                                <code_list>C09AA13</code_list>
-                                <code_list>C09AA14</code_list>
-                                <code_list>C09AA15</code_list>
-                                <code_list>C09AA16</code_list>
-                                <code_list>C09B</code_list>
-                                <code_list>C09BA</code_list>
-                                <code_list>C09BA01</code_list>
-                                <code_list>C09BA02</code_list>
-                                <code_list>C09BA03</code_list>
-                                <code_list>C09BA04</code_list>
-                                <code_list>C09BA05</code_list>
-                                <code_list>C09BA06</code_list>
-                                <code_list>C09BA07</code_list>
-                                <code_list>C09BA08</code_list>
-                                <code_list>C09BA09</code_list>
-                                <code_list>C09BA12</code_list>
-                                <code_list>C09BA13</code_list>
-                                <code_list>C09BA15</code_list>
-                                <code_list>C09BA21</code_list>
-                                <code_list>C09BA22</code_list>
-                                <code_list>C09BA23</code_list>
-                                <code_list>C09BA25</code_list>
-                                <code_list>C09BA26</code_list>
-                                <code_list>C09BA27</code_list>
-                                <code_list>C09BA28</code_list>
-                                <code_list>C09BA29</code_list>
-                                <code_list>C09BA33</code_list>
-                                <code_list>C09BA35</code_list>
-                                <code_list>C09BA54</code_list>
-                                <code_list>C09BA55</code_list>
-                                <code_list>C09BB</code_list>
-                                <code_list>C09BB02</code_list>
-                                <code_list>C09BB03</code_list>
-                                <code_list>C09BB04</code_list>
-                                <code_list>C09BB05</code_list>
-                                <code_list>C09BB06</code_list>
-                                <code_list>C09BB07</code_list>
-                                <code_list>C09BB10</code_list>
-                                <code_list>C09BB12</code_list>
-                                <code_list>C09BX</code_list>
-                                <code_list>C09BX01</code_list>
-                                <code_list>C09BX02</code_list>
-                                <code_list>C09BX03</code_list>
-                                <code_list>C09BX04</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/ace-inhibitors-atc</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -1703,7 +1517,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -1714,15 +1528,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>SNOMED CT</value>
-                                </terminology_id>
-                                <code_list>421974008</code_list>
-                                <code_list>373846009</code_list>
-                                <code_list>373808002</code_list>
-                                <code_list>373847000</code_list>
-                                <code_list>360271000</code_list>
-                                <code_list>399707004</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/therapeutic-intent</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -2267,198 +2073,6 @@
           <items id="description">Art der Anwendung des Arzneimittels am Körper.</items>
           <items id="text">Verabreichungsweg</items>
         </term_definitions>
-        <term_definitions code="C09A">
-          <items id="text">ACE-HEMMER, REIN</items>
-        </term_definitions>
-        <term_definitions code="C09AA">
-          <items id="text">ACE-Hemmer, rein</items>
-        </term_definitions>
-        <term_definitions code="C09AA01">
-          <items id="text">Captopril</items>
-        </term_definitions>
-        <term_definitions code="C09AA02">
-          <items id="text">Enalapril</items>
-        </term_definitions>
-        <term_definitions code="C09AA03">
-          <items id="text">Lisinopril</items>
-        </term_definitions>
-        <term_definitions code="C09AA04">
-          <items id="text">Perindopril</items>
-        </term_definitions>
-        <term_definitions code="C09AA05">
-          <items id="text">Ramipril</items>
-        </term_definitions>
-        <term_definitions code="C09AA06">
-          <items id="text">Quinapril</items>
-        </term_definitions>
-        <term_definitions code="C09AA07">
-          <items id="text">Benazepril</items>
-        </term_definitions>
-        <term_definitions code="C09AA08">
-          <items id="text">Cilazapril</items>
-        </term_definitions>
-        <term_definitions code="C09AA09">
-          <items id="text">Fosinopril</items>
-        </term_definitions>
-        <term_definitions code="C09AA10">
-          <items id="text">Trandolapril</items>
-        </term_definitions>
-        <term_definitions code="C09AA11">
-          <items id="text">Spirapril</items>
-        </term_definitions>
-        <term_definitions code="C09AA12">
-          <items id="text">Delapril</items>
-        </term_definitions>
-        <term_definitions code="C09AA13">
-          <items id="text">Moexipril</items>
-        </term_definitions>
-        <term_definitions code="C09AA14">
-          <items id="text">Temocapril</items>
-        </term_definitions>
-        <term_definitions code="C09AA15">
-          <items id="text">Zofenopril</items>
-        </term_definitions>
-        <term_definitions code="C09AA16">
-          <items id="text">Imidapril</items>
-        </term_definitions>
-        <term_definitions code="C09B">
-          <items id="text">ACE-HEMMER, KOMBINATIONEN</items>
-        </term_definitions>
-        <term_definitions code="C09BA">
-          <items id="text">ACE-Hemmer und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA01">
-          <items id="text">Captopril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA02">
-          <items id="text">Enalapril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA03">
-          <items id="text">Lisinopril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA04">
-          <items id="text">Perindopril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA05">
-          <items id="text">Ramipril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA06">
-          <items id="text">Quinapril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA07">
-          <items id="text">Benazepril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA08">
-          <items id="text">Cilazapril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA09">
-          <items id="text">Fosinopril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA12">
-          <items id="text">Delapril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA13">
-          <items id="text">Moexipril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA15">
-          <items id="text">Zofenopril und Diuretika</items>
-        </term_definitions>
-        <term_definitions code="C09BA21">
-          <items id="text">Captopril und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BA22">
-          <items id="text">Enalapril und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BA23">
-          <items id="text">Lisinopril und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BA25">
-          <items id="text">Ramipril und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BA26">
-          <items id="text">Quinapril und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BA27">
-          <items id="text">Benazepril und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BA28">
-          <items id="text">Cilazapril und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BA29">
-          <items id="text">Fosinopril und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BA33">
-          <items id="text">Moexipril und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BA35">
-          <items id="text">Zofenopril und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BA54">
-          <items id="text">Perindopril und Indapamid</items>
-        </term_definitions>
-        <term_definitions code="C09BA55">
-          <items id="text">Ramipril und Piretanid</items>
-        </term_definitions>
-        <term_definitions code="C09BB">
-          <items id="text">ACE-Hemmer und Calciumkanalblocker</items>
-        </term_definitions>
-        <term_definitions code="C09BB02">
-          <items id="text">Enalapril und Lercanidipin</items>
-        </term_definitions>
-        <term_definitions code="C09BB03">
-          <items id="text">Lisinopril und Amlodipin</items>
-        </term_definitions>
-        <term_definitions code="C09BB04">
-          <items id="text">Perindopril und Amlodipin</items>
-        </term_definitions>
-        <term_definitions code="C09BB05">
-          <items id="text">Ramipril und Felodipin</items>
-        </term_definitions>
-        <term_definitions code="C09BB06">
-          <items id="text">Enalapril und Nitrendipin</items>
-        </term_definitions>
-        <term_definitions code="C09BB07">
-          <items id="text">Ramipril und Amlodipin</items>
-        </term_definitions>
-        <term_definitions code="C09BB10">
-          <items id="text">Trandolapril und Verapamil</items>
-        </term_definitions>
-        <term_definitions code="C09BB12">
-          <items id="text">Delapril und Manidipin</items>
-        </term_definitions>
-        <term_definitions code="C09BX">
-          <items id="text">ACE-Hemmer, andere Kombinationen</items>
-        </term_definitions>
-        <term_definitions code="C09BX01">
-          <items id="text">Perindopril, Amlodipin und Indapamid</items>
-        </term_definitions>
-        <term_definitions code="C09BX02">
-          <items id="text">Perindopril und Bisoprolol</items>
-        </term_definitions>
-        <term_definitions code="C09BX03">
-          <items id="text">Ramipril, Amlodipin und Hydrochlorothiazid</items>
-        </term_definitions>
-        <term_definitions code="C09BX04">
-          <items id="text">Perindopril, Bisoprolol und Amlodipin</items>
-        </term_definitions>
-        <term_definitions code="421974008">
-          <items id="text">Adjunct - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373846009">
-          <items id="text">Adjuvant - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373808002">
-          <items id="text">Curative - procedure intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373847000">
-          <items id="text">Neo-adjuvant - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="360271000">
-          <items id="text">Prophylaxis - procedure intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="399707004">
-          <items id="text">Supportive - procedure intent (qualifier value)</items>
-        </term_definitions>
       </children>
       <children xsi:type="C_ARCHETYPE_ROOT">
         <rm_type_name>OBSERVATION</rm_type_name>
@@ -2506,11 +2120,9 @@
                 <rm_type_name>EVENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
+                  <upper_unbounded>true</upper_unbounded>
+                  <lower>0</lower>
                 </occurrences>
                 <node_id>at0002</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -2586,7 +2198,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -2597,39 +2209,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>ATC</value>
-                                </terminology_id>
-                                <code_list>J06B</code_list>
-                                <code_list>J06BA</code_list>
-                                <code_list>J06BA01</code_list>
-                                <code_list>J06BA02</code_list>
-                                <code_list>J06BB</code_list>
-                                <code_list>J06BB01</code_list>
-                                <code_list>J06BB02</code_list>
-                                <code_list>J06BB03</code_list>
-                                <code_list>J06BB04</code_list>
-                                <code_list>J06BB05</code_list>
-                                <code_list>J06BB06</code_list>
-                                <code_list>J06BB07</code_list>
-                                <code_list>J06BB08</code_list>
-                                <code_list>J06BB09</code_list>
-                                <code_list>J06BB10</code_list>
-                                <code_list>J06BB11</code_list>
-                                <code_list>J06BB12</code_list>
-                                <code_list>J06BB13</code_list>
-                                <code_list>J06BB14</code_list>
-                                <code_list>J06BB15</code_list>
-                                <code_list>J06BB16</code_list>
-                                <code_list>J06BB17</code_list>
-                                <code_list>J06BB18</code_list>
-                                <code_list>J06BB19</code_list>
-                                <code_list>J06BB21</code_list>
-                                <code_list>J06BB22</code_list>
-                                <code_list>J06BB30</code_list>
-                                <code_list>J06BC</code_list>
-                                <code_list>J06BC01</code_list>
-                                <code_list>J06BC10</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/immunoglobulins-atc</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -2805,7 +2385,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -2816,15 +2396,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>SNOMED CT</value>
-                                </terminology_id>
-                                <code_list>421974008</code_list>
-                                <code_list>373846009</code_list>
-                                <code_list>373808002</code_list>
-                                <code_list>373847000</code_list>
-                                <code_list>360271000</code_list>
-                                <code_list>399707004</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/therapeutic-intent</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -3369,114 +2941,6 @@
           <items id="description">Art der Anwendung des Arzneimittels am Körper.</items>
           <items id="text">Verabreichungsweg</items>
         </term_definitions>
-        <term_definitions code="J06B">
-          <items id="text">IMMUNGLOBULINE</items>
-        </term_definitions>
-        <term_definitions code="J06BA">
-          <items id="text">Immunglobuline, normal human</items>
-        </term_definitions>
-        <term_definitions code="J06BA01">
-          <items id="text">Immunglobuline, normal human, zur extravasalen Anwendung</items>
-        </term_definitions>
-        <term_definitions code="J06BA02">
-          <items id="text">Immunglobuline, normal human, zur intravasalen Anwendung</items>
-        </term_definitions>
-        <term_definitions code="J06BB">
-          <items id="text">Spezifische Immunglobuline</items>
-        </term_definitions>
-        <term_definitions code="J06BB01">
-          <items id="text">Anti-D(rh)-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB02">
-          <items id="text">Tetanus-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB03">
-          <items id="text">Varicella/Zoster-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB04">
-          <items id="text">Hepatitis-B-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB05">
-          <items id="text">Tollwut-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB06">
-          <items id="text">Röteln-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB07">
-          <items id="text">Kuhpocken-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB08">
-          <items id="text">Staphylococcus-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB09">
-          <items id="text">Cytomegalievirus-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB10">
-          <items id="text">Diphtherie-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB11">
-          <items id="text">Hepatitis-A-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB12">
-          <items id="text">FSME-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB13">
-          <items id="text">Pertussis-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB14">
-          <items id="text">Masern-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB15">
-          <items id="text">Mumps-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB16">
-          <items id="text">Palivizumab</items>
-        </term_definitions>
-        <term_definitions code="J06BB17">
-          <items id="text">Motavizumab</items>
-        </term_definitions>
-        <term_definitions code="J06BB18">
-          <items id="text">Raxibacumab</items>
-        </term_definitions>
-        <term_definitions code="J06BB19">
-          <items id="text">Anthrax-Immunglobulin</items>
-        </term_definitions>
-        <term_definitions code="J06BB21">
-          <items id="text">Bezlotoxumab</items>
-        </term_definitions>
-        <term_definitions code="J06BB22">
-          <items id="text">Obiltoxaximab</items>
-        </term_definitions>
-        <term_definitions code="J06BB30">
-          <items id="text">Kombinationen</items>
-        </term_definitions>
-        <term_definitions code="J06BC">
-          <items id="text">Andere Immunglobuline</items>
-        </term_definitions>
-        <term_definitions code="J06BC01">
-          <items id="text">Nebacumab</items>
-        </term_definitions>
-        <term_definitions code="J06BC10">
-          <items id="text">Andere Immunglobuline</items>
-        </term_definitions>
-        <term_definitions code="421974008">
-          <items id="text">Adjunct - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373846009">
-          <items id="text">Adjuvant - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373808002">
-          <items id="text">Curative - procedure intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373847000">
-          <items id="text">Neo-adjuvant - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="360271000">
-          <items id="text">Prophylaxis - procedure intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="399707004">
-          <items id="text">Supportive - procedure intent (qualifier value)</items>
-        </term_definitions>
       </children>
       <children xsi:type="C_ARCHETYPE_ROOT">
         <rm_type_name>OBSERVATION</rm_type_name>
@@ -3524,11 +2988,9 @@
                 <rm_type_name>EVENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>1</lower>
-                  <upper>1</upper>
+                  <upper_unbounded>true</upper_unbounded>
+                  <lower>0</lower>
                 </occurrences>
                 <node_id>at0002</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -3604,7 +3066,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -3615,70 +3077,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>ATC</value>
-                                </terminology_id>
-                                <code_list>B01AB</code_list>
-                                <code_list>B01AB01</code_list>
-                                <code_list>B01AB02</code_list>
-                                <code_list>B01AB04</code_list>
-                                <code_list>B01AB05</code_list>
-                                <code_list>B01AB06</code_list>
-                                <code_list>B01AB07</code_list>
-                                <code_list>B01AB08</code_list>
-                                <code_list>B01AB09</code_list>
-                                <code_list>B01AB10</code_list>
-                                <code_list>B01AB11</code_list>
-                                <code_list>B01AB12</code_list>
-                                <code_list>B01AB13</code_list>
-                                <code_list>B01AB51</code_list>
-                                <code_list>B01AB63</code_list>
-                                <code_list>B01AE03</code_list>
-                                <code_list>B01AC</code_list>
-                                <code_list>B01AC01</code_list>
-                                <code_list>B01AC02</code_list>
-                                <code_list>B01AC03</code_list>
-                                <code_list>B01AC04</code_list>
-                                <code_list>B01AC05</code_list>
-                                <code_list>B01AC06</code_list>
-                                <code_list>B01AC07</code_list>
-                                <code_list>B01AC08</code_list>
-                                <code_list>B01AC09</code_list>
-                                <code_list>B01AC10</code_list>
-                                <code_list>B01AC11</code_list>
-                                <code_list>B01AC12</code_list>
-                                <code_list>B01AC13</code_list>
-                                <code_list>B01AC15</code_list>
-                                <code_list>B01AC16</code_list>
-                                <code_list>B01AC17</code_list>
-                                <code_list>B01AC18</code_list>
-                                <code_list>B01AC19</code_list>
-                                <code_list>B01AC21</code_list>
-                                <code_list>B01AC22</code_list>
-                                <code_list>B01AC23</code_list>
-                                <code_list>B01AC24</code_list>
-                                <code_list>B01AC25</code_list>
-                                <code_list>B01AC26</code_list>
-                                <code_list>B01AC27</code_list>
-                                <code_list>B01AC30</code_list>
-                                <code_list>B01AC34</code_list>
-                                <code_list>B01AC36</code_list>
-                                <code_list>B01AC56</code_list>
-                                <code_list>B01AC86</code_list>
-                                <code_list>B01AA04</code_list>
-                                <code_list>B01AF</code_list>
-                                <code_list>B01AF01</code_list>
-                                <code_list>B01AF02</code_list>
-                                <code_list>B01AF03</code_list>
-                                <code_list>B01AF04</code_list>
-                                <code_list>B01AE</code_list>
-                                <code_list>B01AE01</code_list>
-                                <code_list>B01AE02</code_list>
-                                <code_list>B01AE03</code_list>
-                                <code_list>B01AE04</code_list>
-                                <code_list>B01AE05</code_list>
-                                <code_list>B01AE06</code_list>
-                                <code_list>B01AE07</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/anticoagulants-atc</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -3854,7 +3253,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -3865,15 +3264,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>SNOMED CT</value>
-                                </terminology_id>
-                                <code_list>421974008</code_list>
-                                <code_list>373846009</code_list>
-                                <code_list>373808002</code_list>
-                                <code_list>373847000</code_list>
-                                <code_list>360271000</code_list>
-                                <code_list>399707004</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/therapeutic-intent</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -4418,204 +3809,6 @@
           <items id="description">Art der Anwendung des Arzneimittels am Körper.</items>
           <items id="text">Verabreichungsweg</items>
         </term_definitions>
-        <term_definitions code="B01AB">
-          <items id="text">Heparingruppe</items>
-        </term_definitions>
-        <term_definitions code="B01AB01">
-          <items id="text">Heparin</items>
-        </term_definitions>
-        <term_definitions code="B01AB02">
-          <items id="text">Antithrombin III, Antithrombin alfa</items>
-        </term_definitions>
-        <term_definitions code="B01AB04">
-          <items id="text">Dalteparin</items>
-        </term_definitions>
-        <term_definitions code="B01AB05">
-          <items id="text">Enoxaparin</items>
-        </term_definitions>
-        <term_definitions code="B01AB06">
-          <items id="text">Nadroparin</items>
-        </term_definitions>
-        <term_definitions code="B01AB07">
-          <items id="text">Parnaparin</items>
-        </term_definitions>
-        <term_definitions code="B01AB08">
-          <items id="text">Reviparin</items>
-        </term_definitions>
-        <term_definitions code="B01AB09">
-          <items id="text">Danaparoid</items>
-        </term_definitions>
-        <term_definitions code="B01AB10">
-          <items id="text">Tinzaparin</items>
-        </term_definitions>
-        <term_definitions code="B01AB11">
-          <items id="text">Sulodexid</items>
-        </term_definitions>
-        <term_definitions code="B01AB12">
-          <items id="text">Bemiparin</items>
-        </term_definitions>
-        <term_definitions code="B01AB13">
-          <items id="text">Certoparin</items>
-        </term_definitions>
-        <term_definitions code="B01AB51">
-          <items id="text">Heparin, Kombinationen</items>
-        </term_definitions>
-        <term_definitions code="B01AB63">
-          <items id="text">Certoparin, Kombinationen</items>
-        </term_definitions>
-        <term_definitions code="B01AE03">
-          <items id="text">Argatroban</items>
-        </term_definitions>
-        <term_definitions code="B01AC">
-          <items id="text">Thrombozytenaggregationshemmer, exkl. Heparin</items>
-        </term_definitions>
-        <term_definitions code="B01AC01">
-          <items id="text">Ditazol</items>
-        </term_definitions>
-        <term_definitions code="B01AC02">
-          <items id="text">Cloricromen</items>
-        </term_definitions>
-        <term_definitions code="B01AC03">
-          <items id="text">Picotamid</items>
-        </term_definitions>
-        <term_definitions code="B01AC04">
-          <items id="text">Clopidogrel</items>
-        </term_definitions>
-        <term_definitions code="B01AC05">
-          <items id="text">Ticlopidin</items>
-        </term_definitions>
-        <term_definitions code="B01AC06">
-          <items id="text">Acetylsalicylsäure</items>
-        </term_definitions>
-        <term_definitions code="B01AC07">
-          <items id="text">Dipyridamol</items>
-        </term_definitions>
-        <term_definitions code="B01AC08">
-          <items id="text">Carbasalat calcium</items>
-        </term_definitions>
-        <term_definitions code="B01AC09">
-          <items id="text">Epoprostenol</items>
-        </term_definitions>
-        <term_definitions code="B01AC10">
-          <items id="text">Indobufen</items>
-        </term_definitions>
-        <term_definitions code="B01AC11">
-          <items id="text">Iloprost</items>
-        </term_definitions>
-        <term_definitions code="B01AC12">
-          <items id="text">Sulfinpyrazon</items>
-        </term_definitions>
-        <term_definitions code="B01AC13">
-          <items id="text">Abciximab</items>
-        </term_definitions>
-        <term_definitions code="B01AC15">
-          <items id="text">Aloxiprin</items>
-        </term_definitions>
-        <term_definitions code="B01AC16">
-          <items id="text">Eptifibatid</items>
-        </term_definitions>
-        <term_definitions code="B01AC17">
-          <items id="text">Tirofiban</items>
-        </term_definitions>
-        <term_definitions code="B01AC18">
-          <items id="text">Triflusal</items>
-        </term_definitions>
-        <term_definitions code="B01AC19">
-          <items id="text">Beraprost</items>
-        </term_definitions>
-        <term_definitions code="B01AC21">
-          <items id="text">Treprostinil</items>
-        </term_definitions>
-        <term_definitions code="B01AC22">
-          <items id="text">Prasugrel</items>
-        </term_definitions>
-        <term_definitions code="B01AC23">
-          <items id="text">Cilostazol</items>
-        </term_definitions>
-        <term_definitions code="B01AC24">
-          <items id="text">Ticagrelor</items>
-        </term_definitions>
-        <term_definitions code="B01AC25">
-          <items id="text">Cangrelor</items>
-        </term_definitions>
-        <term_definitions code="B01AC26">
-          <items id="text">Vorapaxar</items>
-        </term_definitions>
-        <term_definitions code="B01AC27">
-          <items id="text">Selexipag</items>
-        </term_definitions>
-        <term_definitions code="B01AC30">
-          <items id="text">Kombinationen</items>
-        </term_definitions>
-        <term_definitions code="B01AC34">
-          <items id="text">Clopidogrel und Acetylsalicylsäure</items>
-        </term_definitions>
-        <term_definitions code="B01AC36">
-          <items id="text">Dipyridamol und Acetylsalicylsäure</items>
-        </term_definitions>
-        <term_definitions code="B01AC56">
-          <items id="text">Acetylsalicylsäure, Kombinationen mit Protonenpumpenhemmern</items>
-        </term_definitions>
-        <term_definitions code="B01AC86">
-          <items id="text">Acetylsalicylsäure und Esomeprazol</items>
-        </term_definitions>
-        <term_definitions code="B01AA04">
-          <items id="text">Phenprocoumon</items>
-        </term_definitions>
-        <term_definitions code="B01AF">
-          <items id="text">Direkte Faktor-Xa-Inhibitoren</items>
-        </term_definitions>
-        <term_definitions code="B01AF01">
-          <items id="text">Rivaroxaban</items>
-        </term_definitions>
-        <term_definitions code="B01AF02">
-          <items id="text">Apixaban</items>
-        </term_definitions>
-        <term_definitions code="B01AF03">
-          <items id="text">Edoxaban</items>
-        </term_definitions>
-        <term_definitions code="B01AF04">
-          <items id="text">Betrixaban</items>
-        </term_definitions>
-        <term_definitions code="B01AE">
-          <items id="text">Direkte Thrombininhibitoren</items>
-        </term_definitions>
-        <term_definitions code="B01AE01">
-          <items id="text">Desirudin</items>
-        </term_definitions>
-        <term_definitions code="B01AE02">
-          <items id="text">Lepirudin</items>
-        </term_definitions>
-        <term_definitions code="B01AE04">
-          <items id="text">Melagatran</items>
-        </term_definitions>
-        <term_definitions code="B01AE05">
-          <items id="text">Ximelagatran</items>
-        </term_definitions>
-        <term_definitions code="B01AE06">
-          <items id="text">Bivalirudin</items>
-        </term_definitions>
-        <term_definitions code="B01AE07">
-          <items id="text">Dabigatranetexilat</items>
-        </term_definitions>
-        <term_definitions code="421974008">
-          <items id="text">Adjunct - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373846009">
-          <items id="text">Adjuvant - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373808002">
-          <items id="text">Curative - procedure intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="373847000">
-          <items id="text">Neo-adjuvant - intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="360271000">
-          <items id="text">Prophylaxis - procedure intent (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="399707004">
-          <items id="text">Supportive - procedure intent (qualifier value)</items>
-        </term_definitions>
       </children>
       <cardinality>
         <is_ordered>false</is_ordered>
@@ -4669,18 +3862,6 @@
     <term_definitions code="at0013">
       <items id="description">*</items>
       <items id="text">geändert</items>
-    </term_definitions>
-    <term_definitions code="inpatient">
-      <items id="text">Inpatient</items>
-    </term_definitions>
-    <term_definitions code="outpatient">
-      <items id="text">Outpatient</items>
-    </term_definitions>
-    <term_definitions code="community">
-      <items id="text">Community</items>
-    </term_definitions>
-    <term_definitions code="patientspecified">
-      <items id="text">Patient Specified</items>
     </term_definitions>
   </definition>
   <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.medication_statement.v0,'COVID-19 Therapie']/data[at0001]/events[at0002]/data[at0003]/items[at0006]">

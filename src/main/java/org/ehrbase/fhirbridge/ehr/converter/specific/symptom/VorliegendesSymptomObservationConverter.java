@@ -16,15 +16,15 @@
 
 package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.DvCodedText;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.KrankheitsanzeichenCode;
-import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.SchweregradSymptomCode;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomAnatomischeLokalisationElement;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomObservation;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
 
 import java.util.ArrayList;
@@ -34,28 +34,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("java:S6212")
-public class VorliegendesSymptomObservationConverter extends ConditionToObservationConverter<VorliegendesSymptomObservation> {
+public class VorliegendesSymptomObservationConverter extends ConditionToObservationConverter<VorliegendesSymptomObservation> implements SymptomConverter {
 
     @Override
     protected VorliegendesSymptomObservation convertInternal(Condition condition) {
         VorliegendesSymptomObservation result = new VorliegendesSymptomObservation();
-        result.setNameDesSymptomsKrankheitsanzeichens(convertCode(condition));
+        convertCode(condition).ifPresent(result::setNameDesSymptomsKrankheitsanzeichens);
         result.setAnatomischeLokalisation(convertBodySites(condition));
         result.setBeginnDerEpisodeValue(TimeConverter.convertConditionOnset(condition));
         convertSeverity(condition).ifPresent(result::setSchweregrad);
         TimeConverter.convertConditionAbatementTime(condition).ifPresent(result::setDatumUhrzeitDesRueckgangsValue);
         return result;
-    }
-
-    private DvCodedText convertCode(Condition condition) {
-        return condition.getCode()
-                .getCoding()
-                .stream()
-                .filter(coding -> coding.getSystem().equals(CodeSystem.SNOMED.getUrl()))
-                .findFirst()
-                .map(coding -> KrankheitsanzeichenCode.getCodesAsMap().get(coding.getCode()))
-                .orElseThrow(() -> new ConversionException("Unbekanntes <unbekanntes Symptom>"))
-                .toDvCodedText();
     }
 
     private List<VorliegendesSymptomAnatomischeLokalisationElement> convertBodySites(Condition condition) {
@@ -78,13 +67,11 @@ public class VorliegendesSymptomObservationConverter extends ConditionToObservat
         if (!condition.hasSeverity()) {
             return Optional.empty();
         }
-
-        return condition.getSeverity()
-                .getCoding()
-                .stream()
-                .filter(coding -> Objects.equals(coding.getSystem(), CodeSystem.SNOMED.getUrl()))
-                .findFirst()
-                .map(coding -> SchweregradSymptomCode.getCodesAsMap().get(coding.getCode()))
-                .map(SchweregradSymptomCode::toDvCodedText);
+        for(Coding coding: condition.getSeverity().getCoding()){
+            if(coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
+                return DvCodedTextParser.parseFHIRCoding(coding);
+            }
+        }
+        return Optional.empty();
     }
 }

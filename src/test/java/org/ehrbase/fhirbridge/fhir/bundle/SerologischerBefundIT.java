@@ -32,7 +32,6 @@ public class SerologischerBefundIT  extends AbstractBundleMappingTestSetupIT {
         create("create-anti-body-panel.json");
     }
 
-
     // #####################################################################################
     // check payload
 
@@ -43,28 +42,17 @@ public class SerologischerBefundIT  extends AbstractBundleMappingTestSetupIT {
     }
 
     @Test
+    void absentReason() throws IOException {
+        testMapping("create-anti-body-panel-absent.json",
+                "paragon-create-anti-body-panel-absent.json");
+    }
+
+
+
+    @Test
     void mappingInvalidKategorie() throws IOException {
         Exception exception =  executeMappingException("invalid-kategorie.json");
         assertEquals("Category code is not defined in anti body panel, therefore the bundle is incomplete. Please add category observation category to the panel", exception.getMessage());
-    }
-
-
-    @Test
-    void mappingInvalkidValueCodeableConcept() throws IOException {
-        Exception exception =  executeMappingException("invalid-value-codeable-concept.json");
-        assertEquals("The code in valueCodeableConcept.coding.code is not supported", exception.getMessage());
-    }
-
-    @Test
-    void mappingInvalidCodingCode() throws IOException {
-        Exception exception =  executeMappingException("invalid-coding-code.json");
-        assertEquals("The Loinc code in code.coding is not supported in this profile", exception.getMessage());
-    }
-
-    @Test
-    void mappingInvalidMissingCValueCodeableConceptCode() throws IOException {
-        Exception exception =  executeMappingException("invalid-missing-value-codeable-concept.json");
-        assertEquals("ValueCodeableConcept.coding or code is missing", exception.getMessage());
     }
 
     @Override
@@ -96,6 +84,7 @@ public class SerologischerBefundIT  extends AbstractBundleMappingTestSetupIT {
                 .registerValueObject(GeccoSerologischerBefundKategorieLoincElement.class)
                 .registerValueObject(LabortestPanelCluster.class)
                 .registerValueObject(ProAnalytCluster.class)
+                .registerValueObject(ProAnalytQuantitativesErgebnisDvQuantity.class)
                 .build();
     }
 

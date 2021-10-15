@@ -1,11 +1,13 @@
 # @formatter:off
-
 fhir-bridge:
-  minio:
-    url: http://localhost:9000
-    access-key: minio
-    secret-key: minio123456
-    bucket-name: fhir-bridge-bucket
+  fhir:
+    endpoints:
+      DocumentReference: false
+#  minio:
+#    url: http://localhost:9000
+#    access-key:
+#    secret-key:
+#    bucket-name:
 
 # CORS Properties
   cors:
@@ -15,9 +17,9 @@ fhir-bridge:
     allowed-origins: '*'
 # Debug Properties
   debug:
-    enabled: false
+    enabled: true #edMS
     mapping-output-directory: ${java.io.tmpdir}/mappings
-# EHRbase Properties
+    # EHRbase Properties
   ehrbase:
     base-url: http://localhost:8080/ehrbase/
     security:
@@ -110,6 +112,8 @@ spring:
   messages:
     basename: messages/messages
     use-code-as-default-message: true
+  main:
+    allow-bean-definition-overriding: true
 # Server Properties
 server:
   port: 8888

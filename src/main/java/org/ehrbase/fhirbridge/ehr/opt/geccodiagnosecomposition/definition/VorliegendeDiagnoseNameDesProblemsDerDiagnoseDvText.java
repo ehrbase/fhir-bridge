@@ -10,8 +10,8 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-12T18:58:20.591271+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.4.0"
+    date = "2021-09-13T14:55:50.869917+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @OptionFor("DV_TEXT")
 public class VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvText implements RMEntity, VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice {

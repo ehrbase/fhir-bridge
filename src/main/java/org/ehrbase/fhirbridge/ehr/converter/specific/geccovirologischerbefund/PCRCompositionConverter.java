@@ -1,12 +1,10 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.GECCOVirologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.GeccoVirologischerBefundKategorieLoincElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.KategorieLoincDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 

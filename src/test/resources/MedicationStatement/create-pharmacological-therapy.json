@@ -14,7 +14,7 @@
         "display": "Product containing atazanavir (medicinal product)"
       },
       {
-        "system": "http://fhir.de/CodeSystem/dimdi/atc",
+        "system": "http://fhir.de/CodeSystem/bfarm/atc",
         "code": "J05AE08",
         "display": "Atazanavir"
       }

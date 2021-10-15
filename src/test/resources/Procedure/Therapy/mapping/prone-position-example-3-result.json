@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Procedure/ccbf6e11-aa1c-497b-8b4c-da00cdf8dd70",
+      "id" : "Procedure/8198dc4f-0340-4b3d-96f9-f0645a06be17/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -26,13 +26,17 @@
     }
   },
   "language" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_639-1"
     },
     "code_string" : "de"
   },
   "territory" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_3166-1"
     },
     "code_string" : "DE"
@@ -41,7 +45,9 @@
     "_type" : "DV_CODED_TEXT",
     "value" : "event",
     "defining_code" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "openehr"
       },
       "code_string" : "433"
@@ -60,7 +66,9 @@
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
       "defining_code" : {
+        "_type" : "CODE_PHRASE",
         "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
           "value" : "openehr"
         },
         "code_string" : "232"
@@ -82,8 +90,10 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Procedures relating to positioning and support (procedure)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
-              "value" : "SNOMED Clinical Terms"
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "225287004"
           }
@@ -99,14 +109,27 @@
       "_type" : "DV_TEXT",
       "value" : "Prozedur"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-ACTION.procedure.v1"
+      },
+      "template_id" : {
+        "value" : "GECCO_Prozedur"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"
@@ -134,8 +157,10 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Placing subject in prone position (procedure)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
-              "value" : "SNOMED Clinical Terms"
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "431182000"
           }
@@ -151,14 +176,16 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Procedures relating to positioning and support (procedure)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
-              "value" : "SNOMED Clinical Terms"
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "225287004"
           }
         },
         "archetype_node_id" : "at0067"
-      }],
+      } ],
       "archetype_node_id" : "at0001"
     },
     "ism_transition" : {
@@ -167,7 +194,9 @@
         "_type" : "DV_CODED_TEXT",
         "value" : "planned",
         "defining_code" : {
+          "_type" : "CODE_PHRASE",
           "terminology_id" : {
+            "_type" : "TERMINOLOGY_ID",
             "value" : "openehr"
           },
           "code_string" : "526"

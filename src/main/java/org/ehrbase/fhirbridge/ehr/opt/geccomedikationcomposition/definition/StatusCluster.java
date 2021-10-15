@@ -13,8 +13,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.medication_status_fhir.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-04-30T13:16:38.179883+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-10-11T15:28:12.937756+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class StatusCluster implements LocatableEntity {
   /**
@@ -22,7 +22,7 @@ public class StatusCluster implements LocatableEntity {
    * Description: Status der Einnahme des Medikamentes im Verlauf oder nach dem Ende der Therapie bzw. der Nachsorge.
    */
   @Path("/items[at0001]/value|defining_code")
-  private StatusDefiningCode2 statusDefiningCode;
+  private StatusDefiningCode statusDefiningCode;
 
   /**
    * Path: Medikation/COVID-19 Therapie/Item tree/Status/Status/null_flavour
@@ -49,11 +49,11 @@ public class StatusCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setStatusDefiningCode(StatusDefiningCode2 statusDefiningCode) {
+  public void setStatusDefiningCode(StatusDefiningCode statusDefiningCode) {
      this.statusDefiningCode = statusDefiningCode;
   }
 
-  public StatusDefiningCode2 getStatusDefiningCode() {
+  public StatusDefiningCode getStatusDefiningCode() {
      return this.statusDefiningCode ;
   }
 

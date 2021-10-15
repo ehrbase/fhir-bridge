@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Immunization/11/_history/1",
+      "id" : "Immunization/714b0bb3-bef5-4882-887a-81d150950069/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -60,7 +60,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-06-30T12:46:34,307538+02:00"
+      "value" : "2021-10-13T18:11:32.501742+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -80,6 +80,15 @@
     "name" : {
       "_type" : "DV_TEXT",
       "value" : "Unbekannter Impfstatus"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-EVALUATION.absence.v2"
+      },
+      "template_id" : {
+        "value" : "Impfstatus"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -119,7 +128,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "HL7 NoImmunizationInfoUvIps"
+              "value" : "http://hl7.org/fhir/uv/ips/CodeSystem/absent-unknown-uv-ips"
             },
             "code_string" : "no-known-immunizations"
           }

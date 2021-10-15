@@ -16,14 +16,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.exclusion_specific.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-06T14:30:59.984590200+02:00",
+    date = "2021-09-30T13:08:23.830574+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class KeineReisehistorieEvaluation implements EntryEntity {
   /**
    * Path: Reisehistorie/Keine Reisehistorie/Aussage über den Ausschluss
    * Description: Ein Bericht über den Ausschluss eines/r bestimmten Problems/Diagnose, familiäre Krankengeschichte, Medikation, Verfahren, Nebenwirkung oder eines anderen klinischen Ereignisses.
-   * Comment: Diese Beschreibung muss in Verbindung mit dem Datenelement "ausgeschlossene Kategorie" verwendet werden. Zum Beispiel: Dieses Datenelement kann zur Erfassung einer allgemeinen Aussage, wie z.B. "keine bekannte Vorgeschichte über..." verwendet werden. Die "ausgeschlossene Kategorie" spezifiziert die Aussage, in dem eine Zuordnung zu z.B. Diagnose oder Medikation vorgenommen werden kann. Wird bereits die "ausgeschlossene Kategorie" dafür genutzt, durch eine präkoordinierte Bezeichnung das Vorliegen von Diabetes in der familiären Krankengeschichte auszuschließen, ist der Eintrag in diesem Datenelement redundant. 
+   * Comment: Diese Beschreibung muss in Verbindung mit dem Datenelement "ausgeschlossene Kategorie" verwendet werden. Zum Beispiel: Dieses Datenelement kann zur Erfassung einer allgemeinen Aussage, wie z.B. "keine bekannte Vorgeschichte über..." verwendet werden. Die "ausgeschlossene Kategorie" spezifiziert die Aussage, in dem eine Zuordnung zu z.B. Diagnose oder Medikation vorgenommen werden kann. Wird bereits die "ausgeschlossene Kategorie" dafür genutzt, durch eine präkoordinierte Bezeichnung das Vorliegen von Diabetes in der familiären Krankengeschichte auszuschließen, ist der Eintrag in diesem Datenelement redundant.
    */
   @Path("/data[at0001]/items[at0002]/value|defining_code")
   private AussageUeberDenAusschlussDefiningCode aussageUeberDenAusschlussDefiningCode;
@@ -36,7 +36,16 @@ public class KeineReisehistorieEvaluation implements EntryEntity {
 
   /**
    * Path: Reisehistorie/Keine Reisehistorie/Problem/Diagnose
-   * Description: Das Problem oder die Diagnose, auf die sich die Ausschlussaussage bezieht. Zum Beispiel: "Diabetes", "COPD" oder "Asthma".
+   * Description: Benennung der Kategorie, des ausgeschlossenen Sachverhalts.
+   * Comment: Dieses Item kann unterschiedlich genutzt werden. Zum Beispiel: "Familiäre Vorgeschichte Diabetes":
+   *
+   * (1) Einschränkung des Namens der "ausgeschlossenen Kategorie" zur Laufzeit über einen "Name constraint" (in diesem Fall "familiäre Probleme/Diagnosen") und Speicherung von "Diabetes" als Wert dieses Datenelements. 
+   * oder
+   * (2) Belegung des Wertes mit Hilfe von präkoordinierten Benennungen, z.B. "keine familiäre Diabetes-Vorgeschichte".
+   *
+   * Die Kodierung des Datenelements "ausgeschlossene Kategorie", z.B. durch präkoordinierte Benennungen oder Terminologien, ist wünschenswert.
+   *
+   * Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikation im Feld "Aussage über den Ausschluss" nicht notwendig.
    */
   @Path("/data[at0001]/items[at0003 and name/value='Problem/Diagnose']/value|defining_code")
   private ProblemDiagnoseDefiningCode problemDiagnoseDefiningCode;

@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.time.temporal.TemporalAccessor;
 import org.ehrbase.client.aql.containment.Containment;
@@ -16,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.Transition;
 public class ImpfungActionContainment extends Containment {
   public SelectAqlField<ImpfungAction> IMPFUNG_ACTION = new AqlFieldImp<ImpfungAction>(ImpfungAction.class, "", "ImpfungAction", ImpfungAction.class, this);
 
-  public SelectAqlField<ImpfstoffDefiningCode> IMPFSTOFF_DEFINING_CODE = new AqlFieldImp<ImpfstoffDefiningCode>(ImpfungAction.class, "/description[at0017]/items[at0020]/value|defining_code", "impfstoffDefiningCode", ImpfstoffDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> IMPFSTOFF = new AqlFieldImp<DvCodedText>(ImpfungAction.class, "/description[at0017]/items[at0020]/value", "impfstoff", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> IMPFSTOFF_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ImpfungAction.class, "/description[at0017]/items[at0020]/null_flavour|defining_code", "impfstoffNullFlavourDefiningCode", NullFlavour.class, this);
 

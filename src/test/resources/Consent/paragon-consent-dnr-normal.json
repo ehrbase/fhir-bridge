@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Consent/1/_history/1",
+      "id" : "Consent/d9236975-d8a3-4838-a6f2-427c8fde9384/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -54,13 +54,18 @@
     }
   },
   "composer" : {
-    "_type" : "PARTY_SELF"
+    "_type" : "PARTY_IDENTIFIED",
+    "identifiers" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "urn:performer:identifier:system",
+      "id" : "performer_123456"
+    } ]
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-05-04T14:37:55,4500188+02:00"
+      "value" : "2021-09-16T14:55:00,697322+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -120,6 +125,14 @@
         "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
+    },
+    "health_care_facility" : {
+      "_type" : "PARTY_IDENTIFIED",
+      "identifiers" : [ {
+        "_type" : "DV_IDENTIFIER",
+        "assigner" : "urn:organization:identifier:system",
+        "id" : "organization_123456"
+      } ]
     }
   },
   "content" : [ {
@@ -127,6 +140,15 @@
     "name" : {
       "_type" : "DV_TEXT",
       "value" : "DNR-Anordnung"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-EVALUATION.advance_care_directive.v1"
+      },
+      "template_id" : {
+        "value" : "DNR-Anordnung"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -161,7 +183,7 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Do No Resusciate",
+          "value" : "Do Not Resuscitate",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
@@ -180,12 +202,12 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "For resuscitation (finding)",
+          "value" : "For resuscitation",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "304252001"
           }

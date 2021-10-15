@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/2/_history/1",
+      "id" : "Observation/c4e4b5e1-2978-451b-982f-f3e3d4a8b0c2/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -112,7 +112,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "http://loinc.org"
+              "value" : "LOINC"
             },
             "code_string" : "26436-6"
           }
@@ -127,6 +127,15 @@
     "name" : {
       "_type" : "DV_TEXT",
       "value" : "Befund"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+      },
+      "template_id" : {
+        "value" : "GECCO_Serologischer Befund"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -185,7 +194,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED CT"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "68793005"
               }
@@ -197,11 +206,29 @@
               "_type" : "DV_TEXT",
               "value" : "Labortest-Panel"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_panel.v0"
+              },
+              "template_id" : {
+                "value" : "GECCO_Serologischer Befund"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "CLUSTER",
               "name" : {
                 "_type" : "DV_TEXT",
                 "value" : "Pro Analyt"
+              },
+              "archetype_details" : {
+                "archetype_id" : {
+                  "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+                },
+                "template_id" : {
+                  "value" : "GECCO_Serologischer Befund"
+                },
+                "rm_version" : "1.0.4"
               },
               "items" : [ {
                 "_type" : "ELEMENT",
@@ -216,7 +243,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "LOINC"
+                      "value" : "http://loinc.org"
                     },
                     "code_string" : "94762-2"
                   }
@@ -235,7 +262,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "SNOMED Clinical Terms"
+                      "value" : "http://snomed.info/sct"
                     },
                     "code_string" : "260373001"
                   }
@@ -289,7 +316,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED CT"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "68793005"
               }
@@ -301,11 +328,29 @@
               "_type" : "DV_TEXT",
               "value" : "Labortest-Panel"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_panel.v0"
+              },
+              "template_id" : {
+                "value" : "GECCO_Serologischer Befund"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "CLUSTER",
               "name" : {
                 "_type" : "DV_TEXT",
                 "value" : "Pro Analyt"
+              },
+              "archetype_details" : {
+                "archetype_id" : {
+                  "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+                },
+                "template_id" : {
+                  "value" : "GECCO_Serologischer Befund"
+                },
+                "rm_version" : "1.0.4"
               },
               "items" : [ {
                 "_type" : "ELEMENT",
@@ -320,7 +365,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "LOINC"
+                      "value" : "http://loinc.org"
                     },
                     "code_string" : "94769-7"
                   }
@@ -386,7 +431,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED CT"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "68793005"
               }
@@ -398,11 +443,29 @@
               "_type" : "DV_TEXT",
               "value" : "Labortest-Panel"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_panel.v0"
+              },
+              "template_id" : {
+                "value" : "GECCO_Serologischer Befund"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "CLUSTER",
               "name" : {
                 "_type" : "DV_TEXT",
                 "value" : "Pro Analyt"
+              },
+              "archetype_details" : {
+                "archetype_id" : {
+                  "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+                },
+                "template_id" : {
+                  "value" : "GECCO_Serologischer Befund"
+                },
+                "rm_version" : "1.0.4"
               },
               "items" : [ {
                 "_type" : "ELEMENT",
@@ -417,7 +480,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "LOINC"
+                      "value" : "http://loinc.org"
                     },
                     "code_string" : "94562-6"
                   }
@@ -436,7 +499,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "SNOMED Clinical Terms"
+                      "value" : "http://snomed.info/sct"
                     },
                     "code_string" : "260373001"
                   }
@@ -490,7 +553,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED CT"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "68793005"
               }
@@ -502,11 +565,29 @@
               "_type" : "DV_TEXT",
               "value" : "Labortest-Panel"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_panel.v0"
+              },
+              "template_id" : {
+                "value" : "GECCO_Serologischer Befund"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "CLUSTER",
               "name" : {
                 "_type" : "DV_TEXT",
                 "value" : "Pro Analyt"
+              },
+              "archetype_details" : {
+                "archetype_id" : {
+                  "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+                },
+                "template_id" : {
+                  "value" : "GECCO_Serologischer Befund"
+                },
+                "rm_version" : "1.0.4"
               },
               "items" : [ {
                 "_type" : "ELEMENT",
@@ -521,7 +602,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "LOINC"
+                      "value" : "http://loinc.org"
                     },
                     "code_string" : "94720-0"
                   }
@@ -587,7 +668,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED CT"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "68793005"
               }
@@ -599,11 +680,29 @@
               "_type" : "DV_TEXT",
               "value" : "Labortest-Panel"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_panel.v0"
+              },
+              "template_id" : {
+                "value" : "GECCO_Serologischer Befund"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "CLUSTER",
               "name" : {
                 "_type" : "DV_TEXT",
                 "value" : "Pro Analyt"
+              },
+              "archetype_details" : {
+                "archetype_id" : {
+                  "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+                },
+                "template_id" : {
+                  "value" : "GECCO_Serologischer Befund"
+                },
+                "rm_version" : "1.0.4"
               },
               "items" : [ {
                 "_type" : "ELEMENT",
@@ -618,7 +717,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "LOINC"
+                      "value" : "http://loinc.org"
                     },
                     "code_string" : "94564-2"
                   }
@@ -637,7 +736,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "SNOMED Clinical Terms"
+                      "value" : "http://snomed.info/sct"
                     },
                     "code_string" : "260373001"
                   }
@@ -691,7 +790,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED CT"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "68793005"
               }
@@ -703,11 +802,29 @@
               "_type" : "DV_TEXT",
               "value" : "Labortest-Panel"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_panel.v0"
+              },
+              "template_id" : {
+                "value" : "GECCO_Serologischer Befund"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "CLUSTER",
               "name" : {
                 "_type" : "DV_TEXT",
                 "value" : "Pro Analyt"
+              },
+              "archetype_details" : {
+                "archetype_id" : {
+                  "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+                },
+                "template_id" : {
+                  "value" : "GECCO_Serologischer Befund"
+                },
+                "rm_version" : "1.0.4"
               },
               "items" : [ {
                 "_type" : "ELEMENT",
@@ -722,7 +839,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "LOINC"
+                      "value" : "http://loinc.org"
                     },
                     "code_string" : "94506-3"
                   }
@@ -788,7 +905,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED CT"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "68793005"
               }
@@ -800,11 +917,29 @@
               "_type" : "DV_TEXT",
               "value" : "Labortest-Panel"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_panel.v0"
+              },
+              "template_id" : {
+                "value" : "GECCO_Serologischer Befund"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "CLUSTER",
               "name" : {
                 "_type" : "DV_TEXT",
                 "value" : "Pro Analyt"
+              },
+              "archetype_details" : {
+                "archetype_id" : {
+                  "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+                },
+                "template_id" : {
+                  "value" : "GECCO_Serologischer Befund"
+                },
+                "rm_version" : "1.0.4"
               },
               "items" : [ {
                 "_type" : "ELEMENT",
@@ -819,7 +954,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "LOINC"
+                      "value" : "http://loinc.org"
                     },
                     "code_string" : "94563-4"
                   }
@@ -838,7 +973,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "SNOMED Clinical Terms"
+                      "value" : "http://snomed.info/sct"
                     },
                     "code_string" : "260373001"
                   }
@@ -892,7 +1027,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED CT"
+                  "value" : "http://snomed.info/sct"
                 },
                 "code_string" : "68793005"
               }
@@ -904,11 +1039,29 @@
               "_type" : "DV_TEXT",
               "value" : "Labortest-Panel"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_panel.v0"
+              },
+              "template_id" : {
+                "value" : "GECCO_Serologischer Befund"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "CLUSTER",
               "name" : {
                 "_type" : "DV_TEXT",
                 "value" : "Pro Analyt"
+              },
+              "archetype_details" : {
+                "archetype_id" : {
+                  "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+                },
+                "template_id" : {
+                  "value" : "GECCO_Serologischer Befund"
+                },
+                "rm_version" : "1.0.4"
               },
               "items" : [ {
                 "_type" : "ELEMENT",
@@ -923,7 +1076,7 @@
                     "_type" : "CODE_PHRASE",
                     "terminology_id" : {
                       "_type" : "TERMINOLOGY_ID",
-                      "value" : "LOINC"
+                      "value" : "http://loinc.org"
                     },
                     "code_string" : "94505-5"
                   }

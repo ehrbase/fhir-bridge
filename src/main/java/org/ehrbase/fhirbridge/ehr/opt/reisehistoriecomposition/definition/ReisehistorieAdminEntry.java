@@ -16,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-ADMIN_ENTRY.travel_event.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-06T14:30:59.956591+02:00",
+    date = "2021-09-30T13:08:23.808845+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ReisehistorieAdminEntry implements EntryEntity {
