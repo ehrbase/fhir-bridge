@@ -51,7 +51,8 @@ public class PCRIT extends AbstractMappingTestSetupIT {
                 "paragon-PCR-inconclusive.json");
     }
 
-/*    @Test
+    /* not accepted because valueCodableConcept is 1:1
+    @Test
     void testPcrDataAbsent() throws IOException {
         testMapping("create-PCR-data-absent.json",
                 "paragon-PCR-data-absent.json");
