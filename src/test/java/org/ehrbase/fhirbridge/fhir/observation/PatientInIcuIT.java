@@ -50,7 +50,17 @@ public class PatientInIcuIT extends AbstractMappingTestSetupIT {
                 "paragon-create-patient-in-icu-Yes.json");
     }
 
+    @Test
+    void mappingPatientInIcuOther() throws IOException {
+        testMapping("create-patient-in-icu-Other.json",
+                "paragon-create-patient-in-icu-Other.json");
+    }
 
+    @Test
+    void mappingPatientInIcuNA() throws IOException {
+        testMapping("create-patient-in-icu-NotApplicable.json",
+                "paragon-create-patient-in-icu-NotApplicable.json");
+    }
 
     @Override
     public Javers getJavers() {

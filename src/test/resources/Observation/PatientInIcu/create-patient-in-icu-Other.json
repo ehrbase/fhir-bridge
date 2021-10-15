@@ -1,0 +1,46 @@
+{
+  "resourceType": "Observation",
+  "id": "90cf27fe-5dde-4e92-a66b-7235144b1e65",
+  "meta": {
+    "profile":  [
+      "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/patient-in-icu"
+    ]
+  },
+  "status": "final",
+  "category":  [
+    {
+      "coding":  [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey",
+          "display": "Survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding":  [
+      {
+        "system": "http://loinc.org",
+        "code": "95420-6",
+        "display": "Whether the patient was admitted to intensive care unit (ICU) for condition of interest"
+      }
+    ]
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "effectiveDateTime": "2020-10-14",
+  "valueCodeableConcept": {
+    "coding":  [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "74964007",
+        "display": "Other (qualifier value)"
+      }
+    ]
+  }
+}
