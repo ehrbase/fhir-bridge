@@ -1,8 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry;
 
 import com.nedap.archie.rm.datavalues.quantity.DvProportion;
-import com.nedap.archie.rm.generic.PartySelf;
-import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
