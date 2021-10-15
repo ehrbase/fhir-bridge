@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
 import org.ehrbase.client.aql.field.ListAqlFieldImp;
@@ -12,7 +13,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class EthnischerHintergrundClusterContainment extends Containment {
   public SelectAqlField<EthnischerHintergrundCluster> ETHNISCHER_HINTERGRUND_CLUSTER = new AqlFieldImp<EthnischerHintergrundCluster>(EthnischerHintergrundCluster.class, "", "EthnischerHintergrundCluster", EthnischerHintergrundCluster.class, this);
 
-  public SelectAqlField<EthnischerHintergrundDefiningCode> ETHNISCHER_HINTERGRUND_DEFINING_CODE = new AqlFieldImp<EthnischerHintergrundDefiningCode>(EthnischerHintergrundCluster.class, "/items[at0002]/value|defining_code", "ethnischerHintergrundDefiningCode", EthnischerHintergrundDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> ETHNISCHER_HINTERGRUND = new AqlFieldImp<DvCodedText>(EthnischerHintergrundCluster.class, "/items[at0002]/value", "ethnischerHintergrund", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> ETHNISCHER_HINTERGRUND_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(EthnischerHintergrundCluster.class, "/items[at0002]/null_flavour|defining_code", "ethnischerHintergrundNullFlavourDefiningCode", NullFlavour.class, this);
 

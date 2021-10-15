@@ -44,7 +44,7 @@
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "118247008:363713009=17621005",
+          "code": "118247008:{363713009=17621005}",
           "display": "|Radiologic finding (finding)|:|Has interpretation (attribute)|=|Normal (qualifier value)|"
         }
       ]

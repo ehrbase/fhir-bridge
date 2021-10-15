@@ -11,8 +11,8 @@
       "url": "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/ethnic-group",
       "valueCoding": {
         "system": "http://snomed.info/sct",
-        "code": "186019001",
-        "display": "Other ethnic, mixed origin"
+        "code": "26242008",
+        "display": "Mixed (qualifier value)"
       }
     },
     {

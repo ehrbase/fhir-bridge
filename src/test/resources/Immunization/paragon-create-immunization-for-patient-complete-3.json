@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Immunization/7/_history/1",
+      "id" : "Immunization/cc9ea1c7-772c-4cea-8f20-8769a3b58301/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -81,6 +81,15 @@
       "_type" : "DV_TEXT",
       "value" : "Impfung"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-ACTION.medication.v1"
+      },
+      "template_id" : {
+        "value" : "Impfstatus"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -118,17 +127,53 @@
         },
         "value" : {
           "_type" : "DV_CODED_TEXT",
-          "value" : "Pneumococcal vaccine",
+          "value" : "Vaccine product containing Streptococcus pneumoniae antigen (medicinal product)",
           "defining_code" : {
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
-            "code_string" : "333598008"
+            "code_string" : "836398006"
           }
         },
         "archetype_node_id" : "at0020"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Verabreichte Dosen"
+        },
+        "archetype_details" : {
+          "archetype_id" : {
+            "value" : "openEHR-EHR-CLUSTER.dosage.v1"
+          },
+          "template_id" : {
+            "value" : "Impfstatus"
+          },
+          "rm_version" : "1.0.4"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Dosismenge"
+          },
+          "null_flavour" : {
+            "_type" : "DV_CODED_TEXT",
+            "value" : "unknown",
+            "defining_code" : {
+              "_type" : "CODE_PHRASE",
+              "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "openehr"
+              },
+              "code_string" : "253"
+            }
+          },
+          "archetype_node_id" : "at0144"
+        } ],
+        "archetype_node_id" : "openEHR-EHR-CLUSTER.dosage.v1"
       }, {
         "_type" : "ELEMENT",
         "name" : {
@@ -142,7 +187,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "16814004"
           }

@@ -1,7 +1,5 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
 
-import com.nedap.archie.rm.datavalues.DvCodedText;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AdresseCluster;
@@ -9,7 +7,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.A
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.DatenZurGeburtCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EinzelheitenDerKommunikationCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EthnischerHintergrundCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EthnischerHintergrundDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.PersonendatenAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.PersonennameCluster;
 import org.hl7.fhir.r4.model.Coding;
@@ -31,7 +28,6 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
         mapEthnischerHintergrund(resource).ifPresent(personData::setEthnischerHintergrund);
         mapAngabenZumTod(resource, personData);
         setPersonenName(resource, personData);
-        setAdresse(resource, personData);
         setEinzelheitenZurKommunikation(resource, personData);
         return personData;
     }
@@ -40,13 +36,6 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
         List<EinzelheitenDerKommunikationCluster> list = new EinzelheitenDerKommunikationConverter().convert(resource);
         if (!list.isEmpty()) {
             personData.setEinzelheitenDerKommunikation(list);
-        }
-    }
-
-    private void setAdresse(Patient resource, PersonendatenAdminEntry personData) {
-        List<AdresseCluster> list = new AdresseConverter().convert(resource);
-        if (!list.isEmpty()) {
-            personData.setAdresse(list);
         }
     }
 
@@ -83,32 +72,28 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
         List<EthnischerHintergrundCluster> ethnischerHintergrundClusterList = new ArrayList<>();
         Coding codig = (Coding) patient.getExtensionByUrl(ethnischerHintergrundExtensionUrl).getValue();
         EthnischerHintergrundCluster ethnischerHintergrundCluster = new EthnischerHintergrundCluster();
-        if (EthnischerHintergrundDefiningCode.getBySNOMEDCode(codig.getCode()).isPresent()) {
-            EthnischerHintergrundDefiningCode.getBySNOMEDCode(codig.getCode()).ifPresent(ethnischerHintergrundCluster::setEthnischerHintergrundDefiningCode);
-            ethnischerHintergrundClusterList.add(ethnischerHintergrundCluster);
-            return Optional.of(ethnischerHintergrundClusterList);
-        } else {
-            throw new ConversionException("The SNOMED code is not supported for this entry");
-        }
+        DvCodedTextParser.parseFHIRCoding(codig).ifPresent(ethnischerHintergrundCluster::setEthnischerHintergrund);
+        ethnischerHintergrundClusterList.add(ethnischerHintergrundCluster);
+        return Optional.of(ethnischerHintergrundClusterList);
     }
 
     private Optional<DatenZurGeburtCluster> mapDataOnBirth(Patient fhirPatient) {
         if (fhirPatient.hasBirthDate()) {
             DatenZurGeburtCluster datenZurGeburtCluster = new DatenZurGeburtCluster();
             datenZurGeburtCluster.setGeburtsdatumValue(fhirPatient.getBirthDate().toInstant().atZone(ZoneId.of("Europe/Berlin")).toLocalDate());
-            mapMehrereGeburten(fhirPatient).ifPresent(datenZurGeburtCluster::setKodierungFuerMehrlingsgeburten);
+            mapMehrereGeburten(fhirPatient).ifPresent(datenZurGeburtCluster::setKodierungFuerMehrlingsgeburtenValue);
             return Optional.of(datenZurGeburtCluster);
         } else {
             return Optional.empty();
         }
     }
 
-    private Optional<DvCodedText> mapMehrereGeburten(Patient fhirPatient) {
+    private Optional<String> mapMehrereGeburten(Patient fhirPatient) {
         if(fhirPatient.hasMultipleBirth()){
             if(fhirPatient.hasMultipleBirthBooleanType()){
-                return Optional.of(DvCodedTextParser.parseBirthBoolean(fhirPatient.getMultipleBirthBooleanType()));
+                return Optional.of(fhirPatient.getMultipleBirthBooleanType().getValue().toString());
             }else{
-                return Optional.of(DvCodedTextParser.parseBirthInteger(fhirPatient.getMultipleBirthIntegerType()));
+                return Optional.of(fhirPatient.getMultipleBirthIntegerType().getValue().toString());
             }
         }else{
             return Optional.empty();

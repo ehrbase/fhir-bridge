@@ -28,7 +28,7 @@ public class UnbekannteProzedurEvaluationConverter extends EntryEntityConverter<
     protected UnbekannteProzedurEvaluation convertInternal(Procedure procedure) {
         UnbekannteProzedurEvaluation result = new UnbekannteProzedurEvaluation();
         result.setAussageUeberDieFehlendeInformationValue(Procedure.ProcedureStatus.UNKNOWN.getDisplay());
-        result.setUnbekannteProzedurDefiningCode(convertCode(procedure));
+        convertCode(procedure).ifPresent(result::setUnbekannteProzedur);
         return result;
     }
 }

@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
@@ -10,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-13T13:53:54.775158+02:00",
+    date = "2021-10-13T17:05:46.206632+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ImpfungImpfungGegenElement implements LocatableEntity {
@@ -19,8 +20,8 @@ public class ImpfungImpfungGegenElement implements LocatableEntity {
    * Description: Begründung, warum der Prozessschritt für das identifizierte Arzneimittel durchgeführt wurde.
    * Comment: Zum Beispiel: "Verschoben - Patient war zum Zeitpunkt der Arzneimittelgabe nicht verfügbar", "abgesagt - Nebenwirkung". Merke: Dies ist nicht der Grund für die Arzneimittelverordnung, sondern der spezifische Grund, warum ein Behandlungsschritt durchgeführt wurde. Wird oft verwendet, um Abweichungen von der ursprünglichen Verordnung zu dokumentieren.
    */
-  @Path("/value|defining_code")
-  private ImpfungGegenDefiningCode value;
+  @Path("/value")
+  private DvCodedText value;
 
   /**
    * Path: Impfstatus/Impfung/Tree/Impfung gegen/null_flavour
@@ -34,11 +35,11 @@ public class ImpfungImpfungGegenElement implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setValue(ImpfungGegenDefiningCode value) {
+  public void setValue(DvCodedText value) {
      this.value = value;
   }
 
-  public ImpfungGegenDefiningCode getValue() {
+  public DvCodedText getValue() {
      return this.value ;
   }
 

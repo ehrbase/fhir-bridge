@@ -1,18 +1,18 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import com.nedap.archie.rm.datavalues.DvCodedText;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.LabortestPanelCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.NachweisDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.ProAnalytCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.VirusnachweistestDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisDvQuantity;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
-import java.util.List;
+import java.util.Optional;
 
 public class BefundJedesEreignisPointEventConverter extends ObservationToPointEventConverter<BefundJedesEreignisPointEvent> {
     private final Immunoassay immunoassay;
@@ -32,46 +32,51 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     private LabortestPanelCluster mapLabortestPanel() {
         LabortestPanelCluster labortestPanelCluster = new LabortestPanelCluster();
         ProAnalytCluster proAnalytCluster = new ProAnalytCluster();
-        proAnalytCluster.setVirusnachweistestDefiningCode(convertVirusNachweisTest());
-        if(immunoassay.getObservation().hasValueQuantity()){
-            proAnalytCluster.setQuantitativesErgebnisMagnitude(immunoassay.getObservation().getValueQuantity().getValue().doubleValue());
-            proAnalytCluster.setQuantitativesErgebnisUnits(immunoassay.getObservation().getValueQuantity().getCode());
-        }else{
-            proAnalytCluster.setNachweisDefiningCode(convertNachweisDefiningCode());
+        DvCodedTextParser.parseFHIRCoding(immunoassay.getObservation().getCode().getCoding().get(0)).ifPresent(proAnalytCluster::setVirusnachweistest);
+        if (immunoassay.getObservation().hasValue()) {
+            mapValue(proAnalytCluster);
+        } else {
+            mapNullFlavour(proAnalytCluster);
         }
         proAnalytCluster.setErgebnisStatusValue(immunoassay.getObservation().getStatusElement().getCode());
         labortestPanelCluster.setProAnalyt(proAnalytCluster);
         return labortestPanelCluster;
     }
 
-    private NachweisDefiningCode convertNachweisDefiningCode() {
-        if(immunoassay.getObservation().hasValueCodeableConcept() && immunoassay.getObservation().getValueCodeableConcept().hasCoding() && immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0).hasCode()){
-            List<Coding> codingList = immunoassay.getObservation().getValueCodeableConcept().getCoding();
-            Coding coding = codingList.get(0);
-            return resolveNachweisDefiningCode(coding);
-        }else{
-            throw new ConversionException("ValueCodeableConcept.coding or code is missing");
+    private void mapNullFlavour(ProAnalytCluster proAnalytCluster) {
+        if (immunoassay.getHasValueQuantity()) {
+            proAnalytCluster.setQuantitativesErgebnisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        } else {
+            proAnalytCluster.setNachweisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
     }
 
-    private NachweisDefiningCode resolveNachweisDefiningCode(Coding coding) {
-        if (coding.getCode().equals(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
-            return NachweisDefiningCode.DETECTED_QUALIFIER_VALUE;
-        } else if (coding.getCode().equals(NachweisDefiningCode.INCONCLUSIVE_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-            return NachweisDefiningCode.INCONCLUSIVE_QUALIFIER_VALUE;
-        } else if (coding.getCode().equals(NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE.getCode()) && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-            return NachweisDefiningCode.NOT_DETECTED_QUALIFIER_VALUE;
+    private void mapValue(ProAnalytCluster proAnalytCluster) {
+        if (immunoassay.getObservation().hasValueQuantity()) {
+            convertValueQuantity().ifPresent(proAnalytCluster::setQuantitativesErgebnis);
         } else {
-            throw new ConversionException("The code in valueCodeableConcept.coding.code is not supported");
+            convertNachweisDefiningCode().ifPresent(proAnalytCluster::setNachweis);
         }
     }
 
-    private VirusnachweistestDefiningCode convertVirusNachweisTest() {
-        if (immunoassay.getObservation().getCode().getCoding().get(0).getCode().equals(immunoassay.getVirusnachweistestDefiningCode().getCode()) &&
-                immunoassay.getObservation().getCode().getCoding().get(0).getSystem().equals(CodeSystem.LOINC.getUrl())) {
-            return immunoassay.getVirusnachweistestDefiningCode();
+    private Optional<ProAnalytQuantitativesErgebnisDvQuantity> convertValueQuantity() {
+        if (immunoassay.getObservation().hasValueQuantity()) {
+            ProAnalytQuantitativesErgebnisDvQuantity proAnalytQuantitativesErgebnisDvQuantity = new ProAnalytQuantitativesErgebnisDvQuantity();
+            proAnalytQuantitativesErgebnisDvQuantity.setQuantitativesErgebnisMagnitude(immunoassay.getObservation().getValueQuantity().getValue().doubleValue());
+            proAnalytQuantitativesErgebnisDvQuantity.setQuantitativesErgebnisUnits(immunoassay.getObservation().getValueQuantity().getCode());
+            return Optional.of(proAnalytQuantitativesErgebnisDvQuantity);
         } else {
-            throw new ConversionException("The Loinc code in code.coding is not supported in this profile");
+            return Optional.empty();
         }
     }
+
+    private Optional<DvCodedText> convertNachweisDefiningCode() {
+        if (immunoassay.getObservation().hasValueCodeableConcept() && immunoassay.getObservation().getValueCodeableConcept().hasCoding() && immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0).hasCode()) {
+            Coding coding = immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0);
+            return DvCodedTextParser.parseFHIRCoding(coding);
+        } else {
+            return Optional.empty();
+        }
+    }
+
 }
