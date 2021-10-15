@@ -1,12 +1,11 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
-import org.ehrbase.client.classgenerator.EnumValueSet;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.GECCOSerologischerBefundComposition;
+import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.GeccoSerologischerBefundKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.GeccoSerologischerBefundKategorieLoincElement;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.KategorieLoincDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
@@ -62,7 +61,9 @@ public class GECCOSerologischerBefundCompositionConverter extends ObservationToC
     }
 
     private void mapKategorieDefiningCode(GECCOSerologischerBefundComposition geccoSerologischerBefundComposition) {
-        geccoSerologischerBefundComposition.setKategorieDefiningCode(KategorieDefiningCode.LABORATORY);
+        GeccoSerologischerBefundKategorieElement geccoSerologischerBefundKategorieElement = new GeccoSerologischerBefundKategorieElement();
+        geccoSerologischerBefundKategorieElement.setValue(KategorieDefiningCode.LABORATORY);
+        geccoSerologischerBefundComposition.setKategorie(List.of(geccoSerologischerBefundKategorieElement));
     }
 
     private boolean isLoincCode(Coding code) {

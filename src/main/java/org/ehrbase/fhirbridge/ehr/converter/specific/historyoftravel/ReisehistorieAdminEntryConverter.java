@@ -3,8 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.BundeslandRegionDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.LandDefiningCode;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
@@ -28,7 +27,6 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
         }
         return adminEntry;
     }
-
 
     private List<ReisehistorieBestimmtesReisezielCluster> convertReisehistorie(Observation observation) {
         List<ReisehistorieBestimmtesReisezielCluster> reisehistorieBestimmtesReisezielClusters = new ArrayList<>();
@@ -57,7 +55,6 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
             throw new ConversionException("Expected loinc-code for history of travel, but got '" + coding.getSystem() + ":" + code + "' instead");
         }
     }
-
 
     private ReisehistorieBestimmtesReisezielCluster convertEinreiseDatum(Observation.ObservationComponentComponent observationComponent) {
         ReisehistorieBestimmtesReisezielCluster reisehistorieBestimmtesReisezielCluster = new ReisehistorieBestimmtesReisezielCluster();
@@ -92,7 +89,7 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
     private ReisehistorieBestimmtesReisezielCluster convertBundeslandRegion(Observation.ObservationComponentComponent observationComponent) {
         ReisehistorieBestimmtesReisezielCluster reisehistorieBestimmtesReisezielCluster = new ReisehistorieBestimmtesReisezielCluster();
         if (observationComponent.hasValueCodeableConcept()) {
-            reisehistorieBestimmtesReisezielCluster.setBundeslandRegionDefiningCode(getBundeslandRegion(observationComponent));
+            DvCodedTextParser.parseFHIRCoding(observationComponent.getValueCodeableConcept().getCoding().get(0)).ifPresent(reisehistorieBestimmtesReisezielCluster::setBundeslandRegion);
         } else {
             reisehistorieBestimmtesReisezielCluster.setBundeslandRegionNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
@@ -102,7 +99,7 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
     private ReisehistorieBestimmtesReisezielCluster convertLandCode(Observation.ObservationComponentComponent observationComponent) {
         ReisehistorieBestimmtesReisezielCluster reisehistorieBestimmtesReisezielCluster = new ReisehistorieBestimmtesReisezielCluster();
         if (observationComponent.hasValueCodeableConcept()) {
-            reisehistorieBestimmtesReisezielCluster.setLandDefiningCode(getLand(observationComponent));
+            DvCodedTextParser.parseFHIRCoding(observationComponent.getValueCodeableConcept().getCoding().get(0)).ifPresent(reisehistorieBestimmtesReisezielCluster::setLand);
         } else {
             reisehistorieBestimmtesReisezielCluster.setLandNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
@@ -115,14 +112,6 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
 
     private String getCity(Observation.ObservationComponentComponent observationComponent) {
         return observationComponent.getValueStringType().getValue();
-    }
-
-    private LandDefiningCode getLand(Observation.ObservationComponentComponent observationComponent) {
-        return LandDefiningCode.getCodesAsMap().get(observationComponent.getValueCodeableConcept().getCoding().get(0).getCode());
-    }
-
-    private BundeslandRegionDefiningCode getBundeslandRegion(Observation.ObservationComponentComponent observationComponent) {
-        return BundeslandRegionDefiningCode.getCodesAsMap().get(observationComponent.getValueCodeableConcept().getCoding().get(0).getCode());
     }
 
     private void validateCodeSystemLOINC(String systemCode) {

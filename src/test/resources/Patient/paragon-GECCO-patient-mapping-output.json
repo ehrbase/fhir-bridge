@@ -13,14 +13,30 @@
     },
     "rm_version" : "1.0.4"
   },
+  "feeder_audit" : {
+    "_type" : "FEEDER_AUDIT",
+    "originating_system_item_ids" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "Patient/172510a9-64f8-43ff-a3f1-4fe7ad378393/_history/1",
+      "type" : "fhir_logical_id"
+    } ],
+    "originating_system_audit" : {
+      "_type" : "FEEDER_AUDIT_DETAILS",
+      "system_id" : "FHIR-Bridge"
+    }
+  },
   "language" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_639-1"
     },
     "code_string" : "de"
   },
   "territory" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_3166-1"
     },
     "code_string" : "DE"
@@ -29,7 +45,9 @@
     "_type" : "DV_CODED_TEXT",
     "value" : "event",
     "defining_code" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "openehr"
       },
       "code_string" : "433"
@@ -48,7 +66,9 @@
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
       "defining_code" : {
+        "_type" : "CODE_PHRASE",
         "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
           "value" : "openehr"
         },
         "code_string" : "232"
@@ -61,14 +81,27 @@
       "_type" : "DV_TEXT",
       "value" : "Personendaten"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-ADMIN_ENTRY.person_data.v0"
+      },
+      "template_id" : {
+        "value" : "GECCO_Personendaten"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"
@@ -87,6 +120,15 @@
         "name" : {
           "_type" : "DV_TEXT",
           "value" : "Daten zur Geburt"
+        },
+        "archetype_details" : {
+          "archetype_id" : {
+            "value" : "openEHR-EHR-CLUSTER.person_birth_data_iso.v0"
+          },
+          "template_id" : {
+            "value" : "GECCO_Personendaten"
+          },
+          "rm_version" : "1.0.4"
         },
         "items" : [ {
           "_type" : "ELEMENT",
@@ -107,6 +149,15 @@
           "_type" : "DV_TEXT",
           "value" : "Ethnischer Hintergrund"
         },
+        "archetype_details" : {
+          "archetype_id" : {
+            "value" : "openEHR-EHR-CLUSTER.ethnischer_hintergrund.v0"
+          },
+          "template_id" : {
+            "value" : "GECCO_Personendaten"
+          },
+          "rm_version" : "1.0.4"
+        },
         "items" : [ {
           "_type" : "ELEMENT",
           "name" : {
@@ -115,12 +166,14 @@
           },
           "value" : {
             "_type" : "DV_CODED_TEXT",
-            "value" : "Other ethnic, mixed origin",
+            "value" : "Mixed (qualifier value)",
             "defining_code" : {
+              "_type" : "CODE_PHRASE",
               "terminology_id" : {
-                "value" : "SNOMED Clinical Terms"
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "http://snomed.info/sct"
               },
-              "code_string" : "186019001"
+              "code_string" : "26242008"
             }
           },
           "archetype_node_id" : "at0002"
@@ -136,14 +189,27 @@
       "_type" : "DV_TEXT",
       "value" : "Alter"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.age.v0"
+      },
+      "template_id" : {
+        "value" : "GECCO_Personendaten"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"

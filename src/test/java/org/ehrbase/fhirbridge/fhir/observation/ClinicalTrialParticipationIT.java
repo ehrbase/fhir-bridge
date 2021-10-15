@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation.ClinicalTrialParticipationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.GECCOStudienteilnahmeComposition;
@@ -31,7 +30,7 @@ public class ClinicalTrialParticipationIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createClinicalTrialParticipation() throws IOException {
-        create("create-clinical-trial-participation-yes-eudract.json");
+        create("create-clinical-trial-participation.json");
     }
 
     // #####################################################################################
@@ -44,7 +43,7 @@ public class ClinicalTrialParticipationIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void mappingYesEudraCTNCT() throws  IOException {
+    void mappingYesEudraCTAndNCT() throws  IOException {
         testMapping("create-clinical-trial-participation-yes-eudract-nct.json",
                 "paragon-clinical-trial-participation-yes-eudract-nct.json");
     }
@@ -65,6 +64,12 @@ public class ClinicalTrialParticipationIT extends AbstractMappingTestSetupIT {
     void mappingUnknown() throws IOException {
         testMapping("create-clinical-trial-participation-unknown.json",
                 "paragon-clinical-trial-participation-unknown.json");
+    }
+
+    @Test
+    void mappingOther() throws IOException {
+        testMapping("create-clinical-trial-participation-other.json",
+                "paragon-clinical-trial-participation-other.json");
     }
 
     @Test
@@ -101,7 +106,7 @@ public class ClinicalTrialParticipationIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () ->
+        return assertThrows(Exception.class, () ->
                 new ClinicalTrialParticipationCompositionConverter().convert(obs)
         );
     }

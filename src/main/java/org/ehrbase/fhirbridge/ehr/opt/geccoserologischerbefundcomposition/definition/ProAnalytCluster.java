@@ -2,11 +2,12 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.defin
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import java.lang.Double;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.lang.String;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
+import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
@@ -16,8 +17,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.laboratory_test_analyte.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-04-22T17:35:13.500582+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-10-11T18:13:35.167844+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProAnalytCluster implements LocatableEntity {
   /**
@@ -26,8 +27,8 @@ public class ProAnalytCluster implements LocatableEntity {
    * Comment: Der Wert dieses Elements wird normalerweise, meist durch eine Spezialisierung, in einem Template oder zur Laufzeit der Anwendung geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum', 'Hämoglobin'. 
    * Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.
    */
-  @Path("/items[at0024 and name/value='Virusnachweistest']/value|defining_code")
-  private VirusnachweistestDefiningCode virusnachweistestDefiningCode;
+  @Path("/items[at0024 and name/value='Virusnachweistest']/value")
+  private DvCodedText virusnachweistest;
 
   /**
    * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Tree/Labortest-Panel/Pro Analyt/Virusnachweistest/null_flavour
@@ -40,30 +41,14 @@ public class ProAnalytCluster implements LocatableEntity {
    * Description: (Mess-)Wert des Analyt-Ergebnisses.
    * Comment: Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
    */
-  @Path("/items[at0001 and name/value='Nachweis']/value|defining_code")
-  private NachweisDefiningCode nachweisDefiningCode;
+  @Path("/items[at0001 and name/value='Nachweis']/value")
+  private DvCodedText nachweis;
 
   /**
    * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Tree/Labortest-Panel/Pro Analyt/Nachweis/null_flavour
    */
   @Path("/items[at0001 and name/value='Nachweis']/null_flavour|defining_code")
   private NullFlavour nachweisNullFlavourDefiningCode;
-
-  /**
-   * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Quantitatives Ergebnis
-   * Description: (Mess-)Wert des Analyt-Ergebnisses.
-   * Comment: Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
-   */
-  @Path("/items[at0001 and name/value='Quantitatives Ergebnis']/value|magnitude")
-  private Double quantitativesErgebnisMagnitude;
-
-  /**
-   * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Quantitatives Ergebnis
-   * Description: (Mess-)Wert des Analyt-Ergebnisses.
-   * Comment: Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
-   */
-  @Path("/items[at0001 and name/value='Quantitatives Ergebnis']/value|units")
-  private String quantitativesErgebnisUnits;
 
   /**
    * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Tree/Labortest-Panel/Pro Analyt/Quantitatives Ergebnis/null_flavour
@@ -106,13 +91,28 @@ public class ProAnalytCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setVirusnachweistestDefiningCode(
-      VirusnachweistestDefiningCode virusnachweistestDefiningCode) {
-     this.virusnachweistestDefiningCode = virusnachweistestDefiningCode;
+  /**
+   * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Testmethode
+   * Description: Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.
+   */
+  @Path("/items[at0028]/value")
+  @Choice
+  private ProAnalytTestmethodeChoice testmethode;
+
+  /**
+   * Path: GECCO_Serologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Quantitatives Ergebnis
+   * Description: (Mess-)Wert des Analyt-Ergebnisses.
+   */
+  @Path("/items[at0001 and name/value='Quantitatives Ergebnis']/value")
+  @Choice
+  private ProAnalytQuantitativesErgebnisChoice quantitativesErgebnis;
+
+  public void setVirusnachweistest(DvCodedText virusnachweistest) {
+     this.virusnachweistest = virusnachweistest;
   }
 
-  public VirusnachweistestDefiningCode getVirusnachweistestDefiningCode() {
-     return this.virusnachweistestDefiningCode ;
+  public DvCodedText getVirusnachweistest() {
+     return this.virusnachweistest ;
   }
 
   public void setVirusnachweistestNullFlavourDefiningCode(
@@ -124,12 +124,12 @@ public class ProAnalytCluster implements LocatableEntity {
      return this.virusnachweistestNullFlavourDefiningCode ;
   }
 
-  public void setNachweisDefiningCode(NachweisDefiningCode nachweisDefiningCode) {
-     this.nachweisDefiningCode = nachweisDefiningCode;
+  public void setNachweis(DvCodedText nachweis) {
+     this.nachweis = nachweis;
   }
 
-  public NachweisDefiningCode getNachweisDefiningCode() {
-     return this.nachweisDefiningCode ;
+  public DvCodedText getNachweis() {
+     return this.nachweis ;
   }
 
   public void setNachweisNullFlavourDefiningCode(NullFlavour nachweisNullFlavourDefiningCode) {
@@ -138,22 +138,6 @@ public class ProAnalytCluster implements LocatableEntity {
 
   public NullFlavour getNachweisNullFlavourDefiningCode() {
      return this.nachweisNullFlavourDefiningCode ;
-  }
-
-  public void setQuantitativesErgebnisMagnitude(Double quantitativesErgebnisMagnitude) {
-     this.quantitativesErgebnisMagnitude = quantitativesErgebnisMagnitude;
-  }
-
-  public Double getQuantitativesErgebnisMagnitude() {
-     return this.quantitativesErgebnisMagnitude ;
-  }
-
-  public void setQuantitativesErgebnisUnits(String quantitativesErgebnisUnits) {
-     this.quantitativesErgebnisUnits = quantitativesErgebnisUnits;
-  }
-
-  public String getQuantitativesErgebnisUnits() {
-     return this.quantitativesErgebnisUnits ;
   }
 
   public void setQuantitativesErgebnisNullFlavourDefiningCode(
@@ -205,5 +189,21 @@ public class ProAnalytCluster implements LocatableEntity {
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
+  }
+
+  public void setTestmethode(ProAnalytTestmethodeChoice testmethode) {
+     this.testmethode = testmethode;
+  }
+
+  public ProAnalytTestmethodeChoice getTestmethode() {
+     return this.testmethode ;
+  }
+
+  public void setQuantitativesErgebnis(ProAnalytQuantitativesErgebnisChoice quantitativesErgebnis) {
+     this.quantitativesErgebnis = quantitativesErgebnis;
+  }
+
+  public ProAnalytQuantitativesErgebnisChoice getQuantitativesErgebnis() {
+     return this.quantitativesErgebnis ;
   }
 }

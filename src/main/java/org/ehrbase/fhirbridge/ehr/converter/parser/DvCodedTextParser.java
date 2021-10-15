@@ -18,22 +18,21 @@ public class DvCodedTextParser {
     }
 
     @Deprecated
-    public static Optional<DvCodedText> parseFHIRCodingOld(Coding coding){
-        if(coding.hasDisplay() && coding.hasSystem() && coding.hasCode() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
-            return  Optional.of(new DvCodedText(coding.getDisplay(), new CodePhrase(new TerminologyId("SNOMED Clinical Terms", ""), coding.getCode())));
-        }else if (coding.hasCode() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
+    public static Optional<DvCodedText> parseFHIRCodingOld(Coding coding) {
+        if (coding.hasDisplay() && coding.hasSystem() && coding.hasCode() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
+            return Optional.of(new DvCodedText(coding.getDisplay(), new CodePhrase(new TerminologyId("SNOMED Clinical Terms", ""), coding.getCode())));
+        } else if (coding.hasCode() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
             return Optional.of(new DvCodedText("", new CodePhrase(new TerminologyId("SNOMED Clinical Terms", ""), coding.getCode())));
-        }else{
+        } else {
             return Optional.empty();
         }
     }
 
-    public static Optional<DvCodedText> parseFHIRCoding(Coding coding){
-        if(coding.hasDisplay() && coding.hasSystem() && coding.hasCode()){
-            return  Optional.of(new DvCodedText(coding.getDisplay(), new CodePhrase(new TerminologyId(coding.getSystem(), ""), coding.getCode())));
-        }else if (coding.hasCode() && coding.hasSystem()){
-            return Optional.of(new DvCodedText("", new CodePhrase(new TerminologyId(coding.getSystem(), ""), coding.getCode())));
-        }else{
+    // TODO: behavior if 'display' is missing? (not allowed in openEHR)
+    public static Optional<DvCodedText> parseFHIRCoding(Coding coding) {
+        if (coding.hasDisplay() && coding.hasSystem() && coding.hasCode()) {
+            return Optional.of(new DvCodedText(coding.getDisplay(), new CodePhrase(new TerminologyId(coding.getSystem(), ""), coding.getCode())));
+        } else {
             return Optional.empty();
         }
     }

@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "MedicationStatement/57451203-228d-440a-a6ba-5ba2188e5a57/_history/1",
+      "id" : "MedicationStatement/ed4f4fdb-f99f-474f-a288-a00de749a5bd/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -86,6 +86,15 @@
       "_type" : "DV_TEXT",
       "value" : "ACE-Hemmer"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.medication_statement.v0"
+      },
+      "template_id" : {
+        "value" : "GECCO_Medikation"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -105,9 +114,6 @@
     "subject" : {
       "_type" : "PARTY_SELF"
     },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
-    },
     "protocol" : {
       "_type" : "ITEM_TREE",
       "name" : {
@@ -119,6 +125,15 @@
         "name" : {
           "_type" : "DV_TEXT",
           "value" : "Status"
+        },
+        "archetype_details" : {
+          "archetype_id" : {
+            "value" : "openEHR-EHR-CLUSTER.medication_status_fhir.v0"
+          },
+          "template_id" : {
+            "value" : "GECCO_Medikation"
+          },
+          "rm_version" : "1.0.4"
         },
         "items" : [ {
           "_type" : "ELEMENT",
@@ -182,7 +197,7 @@
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "ATC"
+                  "value" : "http://fhir.de/CodeSystem/bfarm/atc"
                 },
                 "code_string" : "C09A"
               }

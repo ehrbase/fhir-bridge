@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import org.ehrbase.client.aql.containment.Containment;
@@ -15,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class UnbekannteProzedurEvaluationContainment extends Containment {
   public SelectAqlField<UnbekannteProzedurEvaluation> UNBEKANNTE_PROZEDUR_EVALUATION = new AqlFieldImp<UnbekannteProzedurEvaluation>(UnbekannteProzedurEvaluation.class, "", "UnbekannteProzedurEvaluation", UnbekannteProzedurEvaluation.class, this);
 
-  public SelectAqlField<NameDerProzedurDefiningCode> UNBEKANNTE_PROZEDUR_DEFINING_CODE = new AqlFieldImp<NameDerProzedurDefiningCode>(UnbekannteProzedurEvaluation.class, "/data[at0001]/items[at0002]/value|defining_code", "unbekannteProzedurDefiningCode", NameDerProzedurDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> UNBEKANNTE_PROZEDUR = new AqlFieldImp<DvCodedText>(UnbekannteProzedurEvaluation.class, "/data[at0001]/items[at0002]/value", "unbekannteProzedur", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> UNBEKANNTE_PROZEDUR_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(UnbekannteProzedurEvaluation.class, "/data[at0001]/items[at0002]/null_flavour|defining_code", "unbekannteProzedurNullFlavourDefiningCode", NullFlavour.class, this);
 

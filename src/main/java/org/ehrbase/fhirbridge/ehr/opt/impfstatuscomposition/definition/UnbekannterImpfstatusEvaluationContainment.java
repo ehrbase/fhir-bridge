@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -14,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class UnbekannterImpfstatusEvaluationContainment extends Containment {
   public SelectAqlField<UnbekannterImpfstatusEvaluation> UNBEKANNTER_IMPFSTATUS_EVALUATION = new AqlFieldImp<UnbekannterImpfstatusEvaluation>(UnbekannterImpfstatusEvaluation.class, "", "UnbekannterImpfstatusEvaluation", UnbekannterImpfstatusEvaluation.class, this);
 
-  public SelectAqlField<AussageUeberAbwesenheitDefiningCode> AUSSAGE_UEBER_ABWESENHEIT_DEFINING_CODE = new AqlFieldImp<AussageUeberAbwesenheitDefiningCode>(UnbekannterImpfstatusEvaluation.class, "/data[at0001]/items[at0002]/value|defining_code", "aussageUeberAbwesenheitDefiningCode", AussageUeberAbwesenheitDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> AUSSAGE_UEBER_ABWESENHEIT = new AqlFieldImp<DvCodedText>(UnbekannterImpfstatusEvaluation.class, "/data[at0001]/items[at0002]/value", "aussageUeberAbwesenheit", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> AUSSAGE_UEBER_ABWESENHEIT_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(UnbekannterImpfstatusEvaluation.class, "/data[at0001]/items[at0002]/null_flavour|defining_code", "aussageUeberAbwesenheitNullFlavourDefiningCode", NullFlavour.class, this);
 

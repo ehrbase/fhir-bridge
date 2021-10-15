@@ -11,13 +11,12 @@
     "coding":  [
       {
         "system": "http://snomed.info/sct",
-        "code": "333598008",
-        "display": "Pneumococcal vaccine"
+        "code": "836398006",
+        "display": "Vaccine product containing Streptococcus pneumoniae antigen (medicinal product)"
       }
     ]
   },
   "patient": {
-    "reference": "Patient/c786ac3c-0579-4aa2-adda-db784b214ad6",
     "identifier": {
       "system": "urn:ietf:rfc:4122",
       "value": "{{patientId}}"

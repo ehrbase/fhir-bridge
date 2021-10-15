@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
@@ -14,7 +15,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.device.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T16:13:25.784871+02:00",
+    date = "2021-10-13T12:33:28.924875+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class MedizingeraetCluster implements LocatableEntity {
@@ -24,8 +25,8 @@ public class MedizingeraetCluster implements LocatableEntity {
    * gebräuchlichen Namen, einer formellen und vollständig beschreibenden Bezeichnung oder falls notwendig anhand einer Klasse oder Kategorie des Gerätes.
    * Comment: Dieses Datenelement erfasst den Begriff, die Phrase oder die Kategorie, die in der klinischen Praxis verwendet werden. Zum Beispiel: <Markenname> <Maschine> (XYZ-Audiometer); <Markenname> (14G Jelco IV-Katheter); oder <Markenname / Typ> <Implantat>. Die Codierung mit einer Terminologie ist nach Möglichkeit wünschenswert, auch wenn dies lokal sein kann und von den verfügbaren lokalen Lieferungen abhängt.
    */
-  @Path("/items[at0001]/value|defining_code")
-  private GeraetenameDefiningCode geraetenameDefiningCode;
+  @Path("/items[at0001]/value")
+  private DvCodedText geraetename;
 
   /**
    * Path: GECCO_Prozedur/Prozedur/Tree/Medizingerät/Gerätename/null_flavour
@@ -77,12 +78,12 @@ public class MedizingeraetCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setGeraetenameDefiningCode(GeraetenameDefiningCode geraetenameDefiningCode) {
-     this.geraetenameDefiningCode = geraetenameDefiningCode;
+  public void setGeraetename(DvCodedText geraetename) {
+     this.geraetename = geraetename;
   }
 
-  public GeraetenameDefiningCode getGeraetenameDefiningCode() {
-     return this.geraetenameDefiningCode ;
+  public DvCodedText getGeraetename() {
+     return this.geraetename ;
   }
 
   public void setGeraetenameNullFlavourDefiningCode(

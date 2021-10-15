@@ -16,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.exclusion_specific.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-09T16:49:28.248247+02:00",
+    date = "2021-09-30T13:08:23.830574+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class KeineReisehistorieEvaluation implements EntryEntity {

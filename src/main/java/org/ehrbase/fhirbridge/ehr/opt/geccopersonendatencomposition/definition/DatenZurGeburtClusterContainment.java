@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
-import com.nedap.archie.rm.datavalues.DvCodedText;
+import java.lang.String;
 import java.time.temporal.Temporal;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -16,7 +16,7 @@ public class DatenZurGeburtClusterContainment extends Containment {
 
   public SelectAqlField<NullFlavour> GEBURTSDATUM_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(DatenZurGeburtCluster.class, "/items[at0001]/null_flavour|defining_code", "geburtsdatumNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<DvCodedText> KODIERUNG_FUER_MEHRLINGSGEBURTEN = new AqlFieldImp<DvCodedText>(DatenZurGeburtCluster.class, "/items[at0003]/value", "kodierungFuerMehrlingsgeburten", DvCodedText.class, this);
+  public SelectAqlField<String> KODIERUNG_FUER_MEHRLINGSGEBURTEN_VALUE = new AqlFieldImp<String>(DatenZurGeburtCluster.class, "/items[at0003]/value|value", "kodierungFuerMehrlingsgeburtenValue", String.class, this);
 
   public SelectAqlField<NullFlavour> KODIERUNG_FUER_MEHRLINGSGEBURTEN_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(DatenZurGeburtCluster.class, "/items[at0003]/null_flavour|defining_code", "kodierungFuerMehrlingsgeburtenNullFlavourDefiningCode", NullFlavour.class, this);
 

@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.Participation;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
@@ -21,7 +22,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.AceH
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.AntikoagulanzienObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.Covid19TherapieObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.ImmunglobulineObservation;
-import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.KategorieDefiningCode;
 
 public class GECCOMedikationCompositionContainment extends Containment {
   public SelectAqlField<GECCOMedikationComposition> G_E_C_C_O_MEDIKATION_COMPOSITION = new AqlFieldImp<GECCOMedikationComposition>(GECCOMedikationComposition.class, "", "GECCOMedikationComposition", GECCOMedikationComposition.class, this);
@@ -30,7 +30,7 @@ public class GECCOMedikationCompositionContainment extends Containment {
 
   public ListSelectAqlField<Cluster> ERWEITERUNG = new ListAqlFieldImp<Cluster>(GECCOMedikationComposition.class, "/context/other_context[at0001]/items[at0002]", "erweiterung", Cluster.class, this);
 
-  public SelectAqlField<KategorieDefiningCode> KATEGORIE_DEFINING_CODE = new AqlFieldImp<KategorieDefiningCode>(GECCOMedikationComposition.class, "/context/other_context[at0001]/items[at0005]/value|defining_code", "kategorieDefiningCode", KategorieDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> KATEGORIE = new AqlFieldImp<DvCodedText>(GECCOMedikationComposition.class, "/context/other_context[at0001]/items[at0005]/value", "kategorie", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> KATEGORIE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(GECCOMedikationComposition.class, "/context/other_context[at0001]/items[at0005]/null_flavour|defining_code", "kategorieNullFlavourDefiningCode", NullFlavour.class, this);
 

@@ -4,9 +4,19 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum ModusDefiningCode implements EnumValueSet {
-  ARBEIT("Arbeit", "Angaben zu den Kommunikationswegen der Arbeit.", "local", "at0012"),
+  ARBEIT("Arbeit", "Angaben zu den Kommunikationswegen der Arbeit.", "http://hl7.org/fhir/contact-point-use", "at0012"),
 
-  PRIVAT("Privat", "Angaben zu den privaten Kommunikationswegen.", "local", "at0011");
+  MOBILE("Mobile", "", "http://hl7.org/fhir/contact-point-use", "mobile"),
+
+  PRIVAT("Privat", "Angaben zu den privaten Kommunikationswegen.", "http://hl7.org/fhir/contact-point-use", "at0011"),
+
+  TEMP("Temp", "", "http://hl7.org/fhir/contact-point-use", "temp"),
+
+  OLD("Old", "", "http://hl7.org/fhir/contact-point-use", "old"),
+
+  HOME("Home", "", "http://hl7.org/fhir/contact-point-use", "home"),
+
+  WORK("Work", "", "http://hl7.org/fhir/contact-point-use", "work");
 
   private String value;
 
