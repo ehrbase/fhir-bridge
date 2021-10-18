@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyteconverter;
 
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.PhWertCluster;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.UntersuchterAnalytDefiningCode3;
 import org.hl7.fhir.r4.model.Coding;
@@ -13,6 +14,11 @@ public class PhWertConverter extends LaboratoryTestAnalyteConverter {
 
     public PhWertCluster map() {
         PhWertCluster phWertCluster = new PhWertCluster();
+
+        kohlendioxidpartialdruckCluster.setErgebnisStatus(mapKohlendioxidErgebnisStatus());
+        DvCodedTextParser.parseFHIRCoding(fhirObservation.getCode().getCoding().get(0)).ifPresent(kohlendioxidpartialdruckCluster::setBezeichnungDesAnalyts);
+        convertAnalytErgebnis(kohlendioxidpartialdruckCluster);
+
         phWertCluster.setErgebnisStatusValue(mapErgebnisStatus());
         phWertCluster.setUntersuchterAnalytDefiningCode(mapUntersuchterAnalyt());
         phWertCluster.setAnalytResultatUnits("pH");

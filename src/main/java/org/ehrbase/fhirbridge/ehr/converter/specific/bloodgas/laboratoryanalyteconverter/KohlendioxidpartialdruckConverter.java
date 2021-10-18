@@ -1,9 +1,13 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyteconverter;
 
+import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.KohlendioxidpartialdruckCluster;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.UntersuchterAnalytDefiningCode;
-import org.hl7.fhir.r4.model.Coding;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.KohlendioxidpartialdruckErgebnisStatusElement;
 import org.hl7.fhir.r4.model.Observation;
+
+import java.util.List;
 
 public class KohlendioxidpartialdruckConverter extends LaboratoryTestAnalyteConverter {
 
@@ -13,32 +17,25 @@ public class KohlendioxidpartialdruckConverter extends LaboratoryTestAnalyteConv
 
     public KohlendioxidpartialdruckCluster map() {
         KohlendioxidpartialdruckCluster kohlendioxidpartialdruckCluster = new KohlendioxidpartialdruckCluster();
-        kohlendioxidpartialdruckCluster.setErgebnisStatusValue(mapErgebnisStatus());
-        kohlendioxidpartialdruckCluster.setUntersuchterAnalytDefiningCode(mapUntersuchterAnalyt());
-        kohlendioxidpartialdruckCluster.setAnalytResultatUnits("mmHg");
-        kohlendioxidpartialdruckCluster.setAnalytResultatMagnitude(mapValue());
-
+        kohlendioxidpartialdruckCluster.setErgebnisStatus(mapKohlendioxidErgebnisStatus());
+        DvCodedTextParser.parseFHIRCoding(fhirObservation.getCode().getCoding().get(0)).ifPresent(kohlendioxidpartialdruckCluster::setBezeichnungDesAnalyts);
+        convertAnalytErgebnis(kohlendioxidpartialdruckCluster);
         return kohlendioxidpartialdruckCluster;
     }
 
-    protected UntersuchterAnalytDefiningCode mapUntersuchterAnalyt() {
-        UntersuchterAnalytDefiningCode carbonDioxideBlood = UntersuchterAnalytDefiningCode.CARBON_DIOXIDE_PARTIAL_PRESSURE_IN_BLOOD;
-        UntersuchterAnalytDefiningCode carbonDioxideArterial= UntersuchterAnalytDefiningCode.CARBON_DIOXIDE_PARTIAL_PRESSURE_IN_ARTERIAL_BLOOD;
-        UntersuchterAnalytDefiningCode carbonDioxideCapillary = UntersuchterAnalytDefiningCode.CARBON_DIOXIDE_PARTIAL_PRESSURE_IN_CAPILLARY_BLOOD;
-
-        for (Coding coding : fhirObservation.getCode().getCoding()) {
-            String code = coding.getCode();
-            if (code.equals(carbonDioxideBlood.getCode())) {
-                return carbonDioxideBlood;
-            } else if (code.equals(carbonDioxideArterial.getCode())) {
-                return carbonDioxideArterial;
-            } else if (code.equals(carbonDioxideCapillary.getCode())) {
-                return carbonDioxideCapillary;
-            }
+    @Override
+    void convertAnalytErgebnis(LocatableEntity locatableEntity) {
+        if(fhirObservation.hasValue()){
+            ((KohlendioxidpartialdruckCluster) locatableEntity).setAnalytErgebnisUnits("mmHg");
+            ((KohlendioxidpartialdruckCluster) locatableEntity).setAnalytErgebnisMagnitude(mapValue());
+        }else{
+            ((KohlendioxidpartialdruckCluster) locatableEntity).setAnalytErgebnisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
-        throw new IllegalArgumentException("The coding of the Untersuchter Analyte cannot be mapped, since code " + fhirObservation.getCode().getCoding() + " is unknown");
     }
 
-
-
+    private List<KohlendioxidpartialdruckErgebnisStatusElement> mapKohlendioxidErgebnisStatus() {
+        KohlendioxidpartialdruckErgebnisStatusElement kohlendioxidpartialdruckErgebnisStatusElement = new KohlendioxidpartialdruckErgebnisStatusElement();
+        kohlendioxidpartialdruckErgebnisStatusElement.setValue(mapErgebnisStatus());
+        return List.of(kohlendioxidpartialdruckErgebnisStatusElement);
+    }
 }
