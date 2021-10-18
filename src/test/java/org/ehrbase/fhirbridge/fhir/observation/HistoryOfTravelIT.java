@@ -1,6 +1,5 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.ReisehistorieComposition;
@@ -34,45 +33,64 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
     // #####################################################################################
     // check payload
     @Test
-    void mappingNo() throws IOException {
+    void mappingSnomedCodeNo() throws IOException {
         testMapping("create-history-of-travel-no.json",
                 "paragon-history-of-travel-no.json");
     }
 
     @Test
-    void mappingYesAbsent() throws IOException {
+    void mappingSnomedCodeYesAbsent() throws IOException {
         testMapping("create-history-of-travel-yes-absent.json",
                 "paragon-create-history-of-travel-yes-absent.json");
     }
 
     @Test
-    void mappingUnknown() throws IOException {
+    void mappingSnomedCodeUnknown() throws IOException {
         testMapping("create-history-of-travel-unknown.json",
                 "paragon-history-of-travel-unknown.json");
     }
 
     @Test
-    void mappingYes() throws IOException {
+    void mappingSnomedCodeYes() throws IOException {
         testMapping("create-history-of-travel-yes.json",
                 "paragon-history-of-travel-yes.json");
     }
 
     // #####################################################################################
     // check exceptions
+
     @Test
-    void createInvalidSystem() throws IOException {
+    void createInvalidSnomedCodeOther() throws IOException {
+        Exception exception = executeMappingException("create-history-of-travel-invalid-code-other.json");
+        assertEquals("'Other' and 'Not applicable' not accepted in openehr template", exception.getMessage());
+    }
+
+    @Test
+    void createInvalidSnomedCodeNotApplicable() throws IOException {
+        Exception exception = executeMappingException("create-history-of-travel-invalid-code-na.json");
+        assertEquals("'Other' and 'Not applicable' not accepted in openehr template", exception.getMessage());
+    }
+
+    @Test
+    void createInvalidSystemSnomed() throws IOException {
+        // copy of yes, manipulated line 64
+        Exception exception = executeMappingException("create-history-of-travel-invalid-system-snomed.json");
+        assertEquals("The system is not correct. It should be 'http://snomed.info/sct', but it was 'http://loinc.org'.", exception.getMessage());
+    }
+
+    @Test
+    void createInvalidSystemLoinc() throws IOException {
         // copy of yes, manipulated line 143
-        Exception exception = executeMappingException("create-history-of-travel-invalid-system.json");
+        Exception exception = executeMappingException("create-history-of-travel-invalid-system-loinc.json");
         assertEquals("The system is not correct. It should be 'http://loinc.org', but it was 'http://snomed.info/sct'.", exception.getMessage());
     }
 
     @Test
-    void createInvalidCode() throws IOException {
+    void createInvalidCodeLoinc() throws IOException {
         // copy of yes, manipulated line 131
         Exception exception = executeMappingException("create-history-of-travel-invalid-code.json");
-        assertEquals("Expected loinc-code for history of travel, but got 'http://loinc.org:94653-2' instead", exception.getMessage());
+        assertEquals("Expected loinc-code for history of travel, but got 'http://loinc.org:94653-9' instead", exception.getMessage());
     }
-
 
     // #####################################################################################
     // default
@@ -93,7 +111,7 @@ public class HistoryOfTravelIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Observation obs = (Observation) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () ->
+        return assertThrows(Exception.class, () ->
                 new HistoryOfTravelCompositionConverter().convert(obs)
         );
     }

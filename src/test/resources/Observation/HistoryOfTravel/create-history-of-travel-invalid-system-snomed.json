@@ -61,7 +61,7 @@
       {
         "code": "373066001",
         "display": "Yes (qualifier value)",
-        "system": "http://snomed.info/sct"
+        "system": "http://loinc.org"
       }
     ]
   },
@@ -128,7 +128,7 @@
         "coding": [
           {
             "system": "http://loinc.org",
-            "code": "94653-9",
+            "code": "94653-3",
             "display": "City of travel"
           }
         ],

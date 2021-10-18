@@ -8,7 +8,6 @@ import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.Aussag
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieKategorieElement;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.springframework.lang.NonNull;
 
@@ -35,11 +34,12 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
             composition.setKeineReisehistorie(new KeineReisehistorieEvaluationConverter().convert(resource));
         } else if (code.equals(AussageUeberDieFehlendeInformationDefiningCode.UNKNOWN_QUALIFIER_VALUE.getCode())) {
             composition.setUnbekannteReisehistorie(new UnbekannteReisehistorieEvaluationConverter().convert(resource));
-        } else {
+        } else if (code.equals("74964007") || code.equals("385432009")) {
+            throw new ConversionException("'Other' and 'Not applicable' not accepted in openehr template");
+        } else { //currently not reachable
             throw new ConversionException("Expected snomed-code for history of travel, but got '" + code + "' instead ");
         }
     }
-
 
     private String getSnomedCodeObservation(Observation fhirObservation) {
         if (fhirObservation.getValueCodeableConcept().getCoding().get(0).getSystem().equals(SNOMED.getUrl())) {
@@ -52,11 +52,15 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
 
     private void mapKategorie(ReisehistorieComposition composition, Observation resource) {
         ReisehistorieKategorieElement element = new ReisehistorieKategorieElement();
+
+        /* fixed pattern - done by HAPI FHIR
         Coding coding = resource.getCategory().get(0).getCoding().get(0);
+
         String code = coding.getCode();
         String system = coding.getSystem();
 
         KategorieDefiningCode expectedKategorie = KategorieDefiningCode.SOCIAL_HISTORY;
+
         if (!system.equals(expectedKategorie.getTerminologyId())) {
             throw new ConversionException("Categorie can't be set. Wrong terminology! Expected " + expectedKategorie.getTerminologyId() + ". Received" + system + "' instead");
         }
@@ -64,7 +68,10 @@ public class HistoryOfTravelCompositionConverter extends ObservationToCompositio
         if (!code.equals(expectedKategorie.getCode())) {
             throw new ConversionException("Categorie can't be set. Wrong code! Expected " + expectedKategorie.getCode() + ". Received" + code + "' instead");
         }
-        element.setValue(expectedKategorie);
+
+        element.setValue(expectedKategorie);*/
+
+        element.setValue(KategorieDefiningCode.SOCIAL_HISTORY);
 
         List<ReisehistorieKategorieElement> kategorieList = new ArrayList<>();
         kategorieList.add(element);
