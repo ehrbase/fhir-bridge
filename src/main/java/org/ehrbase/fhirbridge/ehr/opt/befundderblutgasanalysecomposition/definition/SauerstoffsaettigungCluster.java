@@ -2,11 +2,13 @@ package org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.defini
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.lang.Double;
 import java.lang.String;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
+import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
@@ -16,71 +18,69 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.laboratory_test_analyte.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T12:08:29.697719+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-10-18T17:21:00.403330+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class SauerstoffsaettigungCluster implements LocatableEntity {
   /**
-   * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/untersuchter Analyt
-   * Description: Die Bezeichnung des Analyt-Resultats
-   * Comment: Der Wert dieses Elements wird normalerweise meist durch eine Spezialisierung, durch einer Vorlage oder zur Laufzeit geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum','Hämoglobin'.
+   * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/Bezeichnung des Analyts
+   * Description: Der Name des untersuchten Analyts.
+   * Comment: Der Wert dieses Elements wird normalerweise, meist durch eine Spezialisierung, in einem Template oder zur Laufzeit der Anwendung geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum', 'Hämoglobin'. 
    * Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.
    */
-  @Path("/items[at0024]/value|defining_code")
-  private UntersuchterAnalytDefiningCode4 untersuchterAnalytDefiningCode;
+  @Path("/items[at0024]/value")
+  private DvCodedText bezeichnungDesAnalyts;
 
   /**
-   * Path: Befund der Blutgasanalyse/Laborergebnis/Event Series/Jedes Ereignis/Tree/Sauerstoffsättigung/untersuchter Analyt/null_flavour
+   * Path: Befund der Blutgasanalyse/Laborergebnis/Event Series/Jedes Ereignis/Tree/Sauerstoffsättigung/Bezeichnung des Analyts/null_flavour
    */
   @Path("/items[at0024]/null_flavour|defining_code")
-  private NullFlavour untersuchterAnalytNullFlavourDefiningCode;
+  private NullFlavour bezeichnungDesAnalytsNullFlavourDefiningCode;
 
   /**
-   * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/Analyt-Resultat
-   * Description: (Mess-)Wert des Analyt-Resultats.
-   * Comment: z.B. '7.3 mmol/l', 'Erhöht'. Der 'Any'-Datentyp wird dann
-   * durch eine Spezialisierung, eine Vorlage oder zur Laufzeit
-   * auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der 'Quantity'-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
+   * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/Analyt-Ergebnis
+   * Description: (Mess-)Wert des Analyt-Ergebnisses.
+   * Comment: Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
    */
   @Path("/items[at0001]/value|magnitude")
-  private Double analytResultatMagnitude;
+  private Double analytErgebnisMagnitude;
 
   /**
-   * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/Analyt-Resultat
-   * Description: (Mess-)Wert des Analyt-Resultats.
-   * Comment: z.B. '7.3 mmol/l', 'Erhöht'. Der 'Any'-Datentyp wird dann
-   * durch eine Spezialisierung, eine Vorlage oder zur Laufzeit
-   * auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der 'Quantity'-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
+   * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/Analyt-Ergebnis
+   * Description: (Mess-)Wert des Analyt-Ergebnisses.
+   * Comment: Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .
    */
   @Path("/items[at0001]/value|units")
-  private String analytResultatUnits;
+  private String analytErgebnisUnits;
 
   /**
-   * Path: Befund der Blutgasanalyse/Laborergebnis/Event Series/Jedes Ereignis/Tree/Sauerstoffsättigung/Analyt-Resultat/null_flavour
+   * Path: Befund der Blutgasanalyse/Laborergebnis/Event Series/Jedes Ereignis/Tree/Sauerstoffsättigung/Analyt-Ergebnis/null_flavour
    */
   @Path("/items[at0001]/null_flavour|defining_code")
-  private NullFlavour analytResultatNullFlavourDefiningCode;
+  private NullFlavour analytErgebnisNullFlavourDefiningCode;
 
   /**
-   * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/Analyseergebnis-Details
+   * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/Analyseergebnis-Detail
    * Description: Weitere Details zu einem einzelnen Ergebnis.
    */
   @Path("/items[at0014]")
-  private List<Cluster> analyseergebnisDetails;
+  private List<Cluster> analyseergebnisDetail;
+
+  /**
+   * Path: Befund der Blutgasanalyse/Laborergebnis/Event Series/Jedes Ereignis/Tree/Sauerstoffsättigung/Testmethode/null_flavour
+   */
+  @Path("/items[at0028]/null_flavour|defining_code")
+  private NullFlavour testmethodeNullFlavourDefiningCode;
 
   /**
    * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/Ergebnis-Status
-   * Description: Status des Analyseergebnisses.
-   * Comment: Die Werte wurden analog zum HL7 FHIR Diagnostic Report gewählt, die wiederum aus der HL7-Praxis stammen. Andere Codes/Ausdrücke können über den Text 'choice' verwendet werden.
+   * Description: Status des Analyt-Ergebniswertes.
+   * Comment: Die Werte wurden speziell so ausgewählt, dass sie mit denen im HL7 FHIR-Diagnosebericht übereinstimmen, der ursprünglich aus der HL7v2-Praxis abgeleitet wurde. Andere lokale Codes / Begriffe können über die Textauswahl verwendet werden.
+   *
+   * Dieses Element ermöglicht mehrere Vorkommen, um Anwendungsfälle zu unterstützen, wo mehr als eine Art von Status implementiert werden muss.
    */
-  @Path("/items[at0005]/value|value")
-  private String ergebnisStatusValue;
-
-  /**
-   * Path: Befund der Blutgasanalyse/Laborergebnis/Event Series/Jedes Ereignis/Tree/Sauerstoffsättigung/Ergebnis-Status/null_flavour
-   */
-  @Path("/items[at0005]/null_flavour|defining_code")
-  private NullFlavour ergebnisStatusNullFlavourDefiningCode;
+  @Path("/items[at0005]")
+  private List<SauerstoffpartialdruckErgebnisStatusElement> ergebnisStatus;
 
   /**
    * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/feeder_audit
@@ -88,72 +88,79 @@ public class SauerstoffsaettigungCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setUntersuchterAnalytDefiningCode(
-      UntersuchterAnalytDefiningCode4 untersuchterAnalytDefiningCode) {
-     this.untersuchterAnalytDefiningCode = untersuchterAnalytDefiningCode;
+  /**
+   * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung/Testmethode
+   * Description: Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.
+   */
+  @Path("/items[at0028]/value")
+  @Choice
+  private KohlendioxidpartialdruckTestmethodeChoice testmethode;
+
+  public void setBezeichnungDesAnalyts(DvCodedText bezeichnungDesAnalyts) {
+     this.bezeichnungDesAnalyts = bezeichnungDesAnalyts;
   }
 
-  public UntersuchterAnalytDefiningCode4 getUntersuchterAnalytDefiningCode() {
-     return this.untersuchterAnalytDefiningCode ;
+  public DvCodedText getBezeichnungDesAnalyts() {
+     return this.bezeichnungDesAnalyts ;
   }
 
-  public void setUntersuchterAnalytNullFlavourDefiningCode(
-      NullFlavour untersuchterAnalytNullFlavourDefiningCode) {
-     this.untersuchterAnalytNullFlavourDefiningCode = untersuchterAnalytNullFlavourDefiningCode;
+  public void setBezeichnungDesAnalytsNullFlavourDefiningCode(
+      NullFlavour bezeichnungDesAnalytsNullFlavourDefiningCode) {
+     this.bezeichnungDesAnalytsNullFlavourDefiningCode = bezeichnungDesAnalytsNullFlavourDefiningCode;
   }
 
-  public NullFlavour getUntersuchterAnalytNullFlavourDefiningCode() {
-     return this.untersuchterAnalytNullFlavourDefiningCode ;
+  public NullFlavour getBezeichnungDesAnalytsNullFlavourDefiningCode() {
+     return this.bezeichnungDesAnalytsNullFlavourDefiningCode ;
   }
 
-  public void setAnalytResultatMagnitude(Double analytResultatMagnitude) {
-     this.analytResultatMagnitude = analytResultatMagnitude;
+  public void setAnalytErgebnisMagnitude(Double analytErgebnisMagnitude) {
+     this.analytErgebnisMagnitude = analytErgebnisMagnitude;
   }
 
-  public Double getAnalytResultatMagnitude() {
-     return this.analytResultatMagnitude ;
+  public Double getAnalytErgebnisMagnitude() {
+     return this.analytErgebnisMagnitude ;
   }
 
-  public void setAnalytResultatUnits(String analytResultatUnits) {
-     this.analytResultatUnits = analytResultatUnits;
+  public void setAnalytErgebnisUnits(String analytErgebnisUnits) {
+     this.analytErgebnisUnits = analytErgebnisUnits;
   }
 
-  public String getAnalytResultatUnits() {
-     return this.analytResultatUnits ;
+  public String getAnalytErgebnisUnits() {
+     return this.analytErgebnisUnits ;
   }
 
-  public void setAnalytResultatNullFlavourDefiningCode(
-      NullFlavour analytResultatNullFlavourDefiningCode) {
-     this.analytResultatNullFlavourDefiningCode = analytResultatNullFlavourDefiningCode;
+  public void setAnalytErgebnisNullFlavourDefiningCode(
+      NullFlavour analytErgebnisNullFlavourDefiningCode) {
+     this.analytErgebnisNullFlavourDefiningCode = analytErgebnisNullFlavourDefiningCode;
   }
 
-  public NullFlavour getAnalytResultatNullFlavourDefiningCode() {
-     return this.analytResultatNullFlavourDefiningCode ;
+  public NullFlavour getAnalytErgebnisNullFlavourDefiningCode() {
+     return this.analytErgebnisNullFlavourDefiningCode ;
   }
 
-  public void setAnalyseergebnisDetails(List<Cluster> analyseergebnisDetails) {
-     this.analyseergebnisDetails = analyseergebnisDetails;
+  public void setAnalyseergebnisDetail(List<Cluster> analyseergebnisDetail) {
+     this.analyseergebnisDetail = analyseergebnisDetail;
   }
 
-  public List<Cluster> getAnalyseergebnisDetails() {
-     return this.analyseergebnisDetails ;
+  public List<Cluster> getAnalyseergebnisDetail() {
+     return this.analyseergebnisDetail ;
   }
 
-  public void setErgebnisStatusValue(String ergebnisStatusValue) {
-     this.ergebnisStatusValue = ergebnisStatusValue;
+  public void setTestmethodeNullFlavourDefiningCode(
+      NullFlavour testmethodeNullFlavourDefiningCode) {
+     this.testmethodeNullFlavourDefiningCode = testmethodeNullFlavourDefiningCode;
   }
 
-  public String getErgebnisStatusValue() {
-     return this.ergebnisStatusValue ;
+  public NullFlavour getTestmethodeNullFlavourDefiningCode() {
+     return this.testmethodeNullFlavourDefiningCode ;
   }
 
-  public void setErgebnisStatusNullFlavourDefiningCode(
-      NullFlavour ergebnisStatusNullFlavourDefiningCode) {
-     this.ergebnisStatusNullFlavourDefiningCode = ergebnisStatusNullFlavourDefiningCode;
+  public void setErgebnisStatus(List<SauerstoffpartialdruckErgebnisStatusElement> ergebnisStatus) {
+     this.ergebnisStatus = ergebnisStatus;
   }
 
-  public NullFlavour getErgebnisStatusNullFlavourDefiningCode() {
-     return this.ergebnisStatusNullFlavourDefiningCode ;
+  public List<SauerstoffpartialdruckErgebnisStatusElement> getErgebnisStatus() {
+     return this.ergebnisStatus ;
   }
 
   public void setFeederAudit(FeederAudit feederAudit) {
@@ -162,5 +169,13 @@ public class SauerstoffsaettigungCluster implements LocatableEntity {
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
+  }
+
+  public void setTestmethode(KohlendioxidpartialdruckTestmethodeChoice testmethode) {
+     this.testmethode = testmethode;
+  }
+
+  public KohlendioxidpartialdruckTestmethodeChoice getTestmethode() {
+     return this.testmethode ;
   }
 }
