@@ -28,6 +28,8 @@ import java.net.URISyntaxException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class LaborAnalytConverter {
@@ -36,7 +38,30 @@ public class LaborAnalytConverter {
 
     private final String EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT = "Valid code coding code is missing, this field is required to be present in order to do a mapping! Please add it to the instance. This also includes the System not to be empty.";
 
-    public ProLaboranalytCluster convert(Observation observation) {
+    public List<ProLaboranalytCluster> convert(Observation observation) {
+        List<ProLaboranalytCluster> proLaboranalytClusterList = new ArrayList<>();
+        if (observation.hasInterpretation() && observation.getInterpretation().get(0).hasCoding()) {
+            return mapProAnalytClusterWithInterpretation(observation, proLaboranalytClusterList);
+        } else {
+            return List.of(mapProAnalytCluster(observation));
+
+        }
+    }
+
+    private List<ProLaboranalytCluster> mapProAnalytClusterWithInterpretation(Observation observation, List<ProLaboranalytCluster> proLaboranalytClusterList) {
+        for (CodeableConcept interpretations : observation.getInterpretation()) {
+            if (interpretations.hasCoding()) {
+                for (Coding coding : interpretations.getCoding()) {
+                    ProLaboranalytCluster proLaboranalytCluster = mapProAnalytCluster(observation); // deepcopy requires too much work so we have to do it allover again.
+                    mapInterpretation(coding).ifPresent(proLaboranalytCluster::setInterpretation);
+                    proLaboranalytClusterList.add(proLaboranalytCluster);
+                }
+            }
+        }
+        return proLaboranalytClusterList;
+    }
+
+    private ProLaboranalytCluster mapProAnalytCluster(Observation observation) {
         ProLaboranalytCluster proLaboranalytCluster = new ProLaboranalytCluster();
         mapUntersuchterAnalyt(observation).ifPresent(proLaboranalytCluster::setBezeichnungDesAnalyts);
         proLaboranalytCluster.setErgebnisStatus(mapErgebnisStatus(observation));
@@ -45,7 +70,6 @@ public class LaborAnalytConverter {
                 () -> {
                     proLaboranalytCluster.setMesswertNullFlavourDefiningCode(NullFlavour.UNKNOWN);
                 });
-        mapInterpretation(observation).ifPresent(proLaboranalytCluster::setInterpretation); //TODO has to be updated in the template to interpretationlist
         mapProbeId(observation).ifPresent(proLaboranalytCluster::setProbeId);
         mapZeitpunktderValidierung(observation).ifPresent(proLaboranalytCluster::setZeitpunktDerValidierungValue);
         mapZeitpunktDesErgebnisStatuses(observation).ifPresent(proLaboranalytCluster::setZeitpunktErgebnisStatusValue);
@@ -115,22 +139,8 @@ public class LaborAnalytConverter {
         return laboranalytResultat;
     }
 
-    private Optional<DvCodedText> mapInterpretation(Observation observation) {
-        if (observation.hasInterpretation()) {
-            for (CodeableConcept interpretations : observation.getInterpretation()) {
-                if (interpretations.hasCoding()) {
-                    return convertInterpretationDefiningCode(interpretations);
-                }
-            }
-        }
-        return Optional.empty();
-    }
-
-    private Optional<DvCodedText> convertInterpretationDefiningCode(CodeableConcept interpretations) {
-        for (Coding coding : interpretations.getCoding()) {
-                return DvCodedTextParser.parseFHIRCoding(coding);
-        }
-        return Optional.empty();
+    private Optional<DvCodedText> mapInterpretation(Coding coding) {
+        return DvCodedTextParser.parseFHIRCoding(coding);
     }
 
     private Optional<TemporalAccessor> mapZeitpunktderValidierung(Observation observation) {

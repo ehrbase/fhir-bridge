@@ -23,7 +23,7 @@ public class LaborergebnisObservationContainment extends Containment {
 
   public ListSelectAqlField<ProbeCluster> PROBE = new ListAqlFieldImp<ProbeCluster>(LaborergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.specimen.v1]", "probe", ProbeCluster.class, this);
 
-  public SelectAqlField<ProLaboranalytCluster> PRO_LABORANALYT = new AqlFieldImp<ProLaboranalytCluster>(LaborergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]", "proLaboranalyt", ProLaboranalytCluster.class, this);
+  public ListSelectAqlField<ProLaboranalytCluster> PRO_LABORANALYT = new ListAqlFieldImp<ProLaboranalytCluster>(LaborergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1]", "proLaboranalyt", ProLaboranalytCluster.class, this);
 
   public SelectAqlField<String> SCHLUSSFOLGERUNG_VALUE = new AqlFieldImp<String>(LaborergebnisObservation.class, "/data[at0001]/events[at0002]/data[at0003]/items[at0057]/value|value", "schlussfolgerungValue", String.class, this);
 

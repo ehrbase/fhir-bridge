@@ -21,10 +21,10 @@ public class LaborergebnisObservationConverter extends ObservationToObservationC
     @Override
     protected LaborergebnisObservation convertInternal(Observation resource) {
         LaborergebnisObservation laborergebnisObservation = new LaborergebnisObservation();
-        ProLaboranalytCluster laboranalyt = new LaborAnalytConverter().convert(resource);
+        List<ProLaboranalytCluster> laboranalytList = new LaborAnalytConverter().convert(resource);
         setKategorieValue(laborergebnisObservation, resource);
         setProbe(resource, laborergebnisObservation);
-        laborergebnisObservation.setProLaboranalyt(laboranalyt);
+        laborergebnisObservation.setProLaboranalyt(laboranalytList);
         return laborergebnisObservation;
     }
 

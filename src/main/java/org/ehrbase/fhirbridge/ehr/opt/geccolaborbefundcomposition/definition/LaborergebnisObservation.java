@@ -20,7 +20,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.laboratory_test_result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-13T18:14:32.910842+02:00",
+    date = "2021-10-18T12:28:12.499717+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class LaborergebnisObservation implements EntryEntity {
@@ -52,7 +52,7 @@ public class LaborergebnisObservation implements EntryEntity {
    * Description: Ergebnis einer Laboranalyse für einen bestimmten Analytwert.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1 and name/value='Pro Laboranalyt']")
-  private ProLaboranalytCluster proLaboranalyt;
+  private List<ProLaboranalytCluster> proLaboranalyt;
 
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Schlussfolgerung
@@ -216,11 +216,11 @@ public class LaborergebnisObservation implements EntryEntity {
      return this.probe ;
   }
 
-  public void setProLaboranalyt(ProLaboranalytCluster proLaboranalyt) {
+  public void setProLaboranalyt(List<ProLaboranalytCluster> proLaboranalyt) {
      this.proLaboranalyt = proLaboranalyt;
   }
 
-  public ProLaboranalytCluster getProLaboranalyt() {
+  public List<ProLaboranalytCluster> getProLaboranalyt() {
      return this.proLaboranalyt ;
   }
 
