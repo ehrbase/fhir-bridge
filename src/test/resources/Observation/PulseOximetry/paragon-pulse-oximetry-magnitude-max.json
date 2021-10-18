@@ -2,7 +2,7 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Pulsoxymetrie"
+    "value" : "Registereintrag"
   },
   "archetype_details" : {
     "archetype_id" : {
@@ -13,14 +13,30 @@
     },
     "rm_version" : "1.0.4"
   },
+  "feeder_audit" : {
+    "_type" : "FEEDER_AUDIT",
+    "originating_system_item_ids" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "Observation/f52ca928-e9a7-499c-a60a-4391591a7747/_history/1",
+      "type" : "fhir_logical_id"
+    } ],
+    "originating_system_audit" : {
+      "_type" : "FEEDER_AUDIT_DETAILS",
+      "system_id" : "FHIR-Bridge"
+    }
+  },
   "language" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_639-1"
     },
     "code_string" : "de"
   },
   "territory" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_3166-1"
     },
     "code_string" : "DE"
@@ -29,7 +45,9 @@
     "_type" : "DV_CODED_TEXT",
     "value" : "event",
     "defining_code" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "openehr"
       },
       "code_string" : "433"
@@ -42,13 +60,15 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2020-10-11T00:00:00+02:00"
+      "value" : "2020-09-21T00:00:00+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
       "defining_code" : {
+        "_type" : "CODE_PHRASE",
         "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
           "value" : "openehr"
         },
         "code_string" : "232"
@@ -70,7 +90,9 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "final",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
               "value" : "local"
             },
             "code_string" : "at0012"
@@ -98,14 +120,27 @@
       "_type" : "DV_TEXT",
       "value" : "Pulsoxymetrie"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.pulse_oximetry.v1"
+      },
+      "template_id" : {
+        "value" : "Pulsoxymetrie"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"
@@ -120,7 +155,7 @@
       },
       "origin" : {
         "_type" : "DV_DATE_TIME",
-        "value" : "2020-10-11T00:00:00+02:00"
+        "value" : "2020-09-21T00:00:00+02:00"
       },
       "events" : [ {
         "_type" : "POINT_EVENT",
@@ -130,7 +165,7 @@
         },
         "time" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2020-10-11T00:00:00+02:00"
+          "value" : "2020-09-21T00:00:00+02:00"
         },
         "data" : {
           "_type" : "ITEM_TREE",
@@ -146,7 +181,7 @@
             },
             "value" : {
               "_type" : "DV_PROPORTION",
-              "numerator" : 98.0,
+              "numerator" : 100.0,
               "denominator" : 100.0,
               "type" : 2
             },

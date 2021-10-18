@@ -1,11 +1,28 @@
 {
   "resourceType": "Observation",
-  "id": "Example-observation-sauerstoffsaettigung",
+  "id": "6fa9e2be-d15a-4e77-81fc-056dda521875",
   "meta": {
     "profile":  [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/oxygen-saturation"
     ]
   },
+  "identifier":  [
+    {
+      "type": {
+        "coding":  [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "OBI"
+          }
+        ]
+      },
+      "system": "https://www.charite.de/fhir/CodeSystem/lab-identifiers",
+      "value": "2708-6_oxygenSaturation",
+      "assigner": {
+        "reference": "Organization/Charité"
+      }
+    }
+  ],
   "status": "final",
   "category":  [
     {
@@ -25,7 +42,7 @@
         "display": "Oxygen saturation in Arterial blood"
       }
     ],
-    "text": "Pulsoximetrische Sauerstoffsättigung"
+    "text": "Oxygen saturation in Arterial blood"
   },
   "subject": {
     "identifier": {
@@ -33,14 +50,11 @@
       "value": "{{patientId}}"
     }
   },
-  "effectiveDateTime": "2020-10-11",
-  "dataAbsentReason": {
-    "coding": [
-      {
-        "system": "http://terminology.hl7.org/CodeSystem/data-absent-reason",
-        "code": "unknown",
-        "display": "Unknown"
-      }
-    ]
+  "effectiveDateTime": "2020-09-21",
+  "valueQuantity": {
+    "value": 0,
+    "unit": "%",
+    "system": "http://unitsofmeasure.org",
+    "code": "%"
   }
 }

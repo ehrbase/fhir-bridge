@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/9193feba-51ca-4070-b9c6-547c83df6532/_history/1",
+      "id" : "Observation/df746863-ad68-45ce-bac5-60fc7e72b157/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -60,7 +60,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2020-10-11T00:00:00+02:00"
+      "value" : "2020-09-21T00:00:00+02:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -120,6 +120,15 @@
       "_type" : "DV_TEXT",
       "value" : "Pulsoxymetrie"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.pulse_oximetry.v1"
+      },
+      "template_id" : {
+        "value" : "Pulsoxymetrie"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -139,9 +148,6 @@
     "subject" : {
       "_type" : "PARTY_SELF"
     },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
-    },
     "data" : {
       "name" : {
         "_type" : "DV_TEXT",
@@ -149,7 +155,7 @@
       },
       "origin" : {
         "_type" : "DV_DATE_TIME",
-        "value" : "2020-10-11T00:00:00+02:00"
+        "value" : "2020-09-21T00:00:00+02:00"
       },
       "events" : [ {
         "_type" : "POINT_EVENT",
@@ -159,7 +165,7 @@
         },
         "time" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2020-10-11T00:00:00+02:00"
+          "value" : "2020-09-21T00:00:00+02:00"
         },
         "data" : {
           "_type" : "ITEM_TREE",
@@ -173,17 +179,11 @@
               "_type" : "DV_TEXT",
               "value" : "SpO₂"
             },
-            "null_flavour" : {
-              "_type" : "DV_CODED_TEXT",
-              "value" : "unknown",
-              "defining_code" : {
-                "_type" : "CODE_PHRASE",
-                "terminology_id" : {
-                  "_type" : "TERMINOLOGY_ID",
-                  "value" : "openehr"
-                },
-                "code_string" : "253"
-              }
+            "value" : {
+              "_type" : "DV_PROPORTION",
+              "numerator" : 0.0,
+              "denominator" : 100.0,
+              "type" : 2
             },
             "archetype_node_id" : "at0006"
           } ],

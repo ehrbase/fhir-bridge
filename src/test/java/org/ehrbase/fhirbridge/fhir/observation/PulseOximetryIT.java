@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseOximetryCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.PulsoxymetrieComposition;
 import org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition.PulsoxymetrieObservation;
@@ -31,35 +30,25 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createPulseOxymetry() throws IOException {
-        create("create-pulse-oximetry-arterial.json");
+        create("create-pulse-oximetry.json");
     }
 
     @Test
-    void mappingArterial() throws IOException {
-        testMapping("create-pulse-oximetry-arterial.json", "paragon-create-pulse-oximetry-arterial.json");
+    void testPulseOxymetryMagnitudeMin() throws IOException {
+        testMapping("create-pulse-oximetry-magnitude-min.json",
+                "paragon-pulse-oximetry-magnitude-min.json");
     }
 
     @Test
-    void mappingByPulseOximetry() throws IOException {
-        testMapping("create-pulse-oximetry-by-oximetry.json", "paragon-create-pulse-oximetry-by-oximetry.json");
+    void testPulseOxymetryMagnitudeMax() throws IOException {
+        testMapping("create-pulse-oximetry-magnitude-max.json",
+                "paragon-pulse-oximetry-magnitude-max.json");
     }
 
     @Test
-    void mappingPheriperalSaturation() throws IOException {
-        testMapping("create-pulse-oximetry-pheriperal-saturation.json", "paragon-create-pulse-oximetry-pheriperal-saturation.json");
-    }
-
-    @Test
-    void mappingOxygenAbsent() throws IOException {
-        testMapping("create-pulse-oximetry-absent.json", "paragon-create-pulse-oximetry-absent.json");
-    }
-
-
-    @Test
-    void mappingInvalid() throws IOException {
-        Exception exception = executeMappingException("create-pulse-oximetry-invalid.json");
-        assertEquals("The Code of code.coding is not supported for the Fhir-Bridge, or duplicated within the resource. If the LOINC-code 20564-1 or 2708-6 AND 20564-1 was entered, the oxygen Saturation has to be send as part of a Blood gas panel. It can not be processed as a single resource in this cases.", exception.getMessage());
-
+    void testPulseOxymetryDataAbsent() throws IOException {
+        testMapping("create-pulse-oximetry-data-absent.json",
+                "paragon-pulse-oximetry-data-absent.json");
     }
 
     @Override
@@ -74,7 +63,7 @@ class PulseOximetryIT extends AbstractMappingTestSetupIT {
     @Override
     public Exception executeMappingException(String resource) throws IOException {
         Observation pulseOximetry = (Observation) testFileLoader.loadResource(resource);
-        return assertThrows(ConversionException.class, () -> new PulseOximetryCompositionConverter().convert(pulseOximetry));
+        return assertThrows(Exception.class, () -> new PulseOximetryCompositionConverter().convert(pulseOximetry));
     }
 
     @Override
