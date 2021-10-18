@@ -4,7 +4,6 @@ import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.AussageUeberDieFehlendeInformationDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.NameDesProblemsDerDiagnoseDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.UnbekannteDiagnoseEvaluation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
@@ -21,10 +20,9 @@ public class UnbekannteDiagnoseEvaluationConverter extends EntryEntityConverter<
     }
 
     private void mapProblem(Condition condition, UnbekannteDiagnoseEvaluation unbekannteDiagnose) {
-        for(Coding coding : condition.getCode().getCoding()){
-            if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) &&
-                    NameDesProblemsDerDiagnoseDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
-                unbekannteDiagnose.setUnbekannteDiagnoseDefiningCode(NameDesProblemsDerDiagnoseDefiningCode.getCodesAsMap().get(coding.getCode()));
+        for (Coding coding : condition.getCode().getCoding()) {
+            if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
+                DvCodedTextParser.parseFHIRCoding(coding).ifPresent(unbekannteDiagnose::setUnbekannteDiagnose);
             }
         }
     }

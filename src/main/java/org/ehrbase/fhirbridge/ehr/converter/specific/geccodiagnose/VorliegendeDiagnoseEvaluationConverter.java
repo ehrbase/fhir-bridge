@@ -1,25 +1,33 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KoerperstelleCluster;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.NameDerKoerperstelleDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.NameDesProblemsDerDiagnoseDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.SchweregradDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseSchweregradChoice;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseSchweregradDvCodedText;
+import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseSchweregradDvText;
 import org.hl7.fhir.r4.model.Annotation;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter<Condition, VorliegendeDiagnoseEvaluation> {
 
     boolean isEmpty = true;
+    private final List<String> severityCodes = new ArrayList<>() {{
+        add("255604002");
+        add("6736007");
+        add("24484000");
+        add("442452003");
+    }};
 
     @Override
     protected VorliegendeDiagnoseEvaluation convertInternal(Condition resource) {
@@ -64,25 +72,54 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
         }
     }
 
-    private void convertSevertiy(Coding coding, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
-        if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && SchweregradDefiningCode.getCodesAsMap().containsKey(coding.getCode())) {
-            vorliegendeDiagnose.setSchweregradDefiningCode(SchweregradDefiningCode.getCodesAsMap().get(coding.getCode()));
+    private void convertSevertiy(Coding coding, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) { //  Symptoms Covid-19 requires severity
+        if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl()) && severityCodes.contains(coding.getCode())) {
+            vorliegendeDiagnose.setSchweregrad(convertDvCodedText(coding));
             isEmpty = false;
         } else {
-            throw new UnprocessableEntityException("Severity contains either a wrong code or code system.");
+            vorliegendeDiagnose.setSchweregrad(convertDvText(coding));
+            isEmpty = false;
         }
     }
 
+    private VorliegendeDiagnoseSchweregradChoice convertDvText(Coding coding) {
+        VorliegendeDiagnoseSchweregradDvText vorliegendeDiagnoseSchweregradDvText = new VorliegendeDiagnoseSchweregradDvText();
+        if (coding.hasDisplay()) {
+            vorliegendeDiagnoseSchweregradDvText.setSchweregradValue(coding.getDisplay());
+        } else {
+            vorliegendeDiagnoseSchweregradDvText.setSchweregradValue(coding.getCode());
+        }
+        return vorliegendeDiagnoseSchweregradDvText;
+    }
+
+    private VorliegendeDiagnoseSchweregradDvCodedText convertDvCodedText(Coding coding) {
+        VorliegendeDiagnoseSchweregradDvCodedText vorliegendeDiagnoseSchweregradDvCodedText = new VorliegendeDiagnoseSchweregradDvCodedText();
+        switch (coding.getCode()) {
+            case "255604002":
+                vorliegendeDiagnoseSchweregradDvCodedText.setSchweregradDefiningCode(SchweregradDefiningCode.LEICHT);
+                break;
+            case "6736007":
+                vorliegendeDiagnoseSchweregradDvCodedText.setSchweregradDefiningCode(SchweregradDefiningCode.MAESSIG);
+                break;
+            case "24484000":
+            case "442452003":
+                vorliegendeDiagnoseSchweregradDvCodedText.setSchweregradDefiningCode(SchweregradDefiningCode.SCHWER);
+                break;
+            default:
+                throw new UnprocessableEntityException("The code " + coding + " is not a valid value!");
+        }
+        return vorliegendeDiagnoseSchweregradDvCodedText;
+    }
+
+
     private void mapBodySite(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         if (condition.hasBodySite()) {
-            for (Coding bodySite : condition.getBodySite().get(0).getCoding()) {
-                if (bodySite.getSystem().equals(CodeSystem.SNOMED.getUrl()) && NameDerKoerperstelleDefiningCode.getCodesAsMap().containsKey(bodySite.getCode())) {
+            for (CodeableConcept codeableConcept : condition.getBodySite()) {
+                for (Coding coding : codeableConcept.getCoding()) {
                     KoerperstelleCluster korperstelleCluster = new KoerperstelleCluster();
-                    korperstelleCluster.setNameDerKoerperstelleDefiningCode(NameDerKoerperstelleDefiningCode.getCodesAsMap().get(bodySite.getCode()));
+                    DvCodedTextParser.parseFHIRCoding(coding).ifPresent(korperstelleCluster::setNameDerKoerperstelle);
                     addKoerperstelleCluster(korperstelleCluster, vorliegendeDiagnose);
                     isEmpty = false;
-                } else {
-                    throw new UnprocessableEntityException("Bodysite contains either a wrong code or code system.");
                 }
             }
         }
@@ -100,10 +137,8 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
     private void mapNameDesProblemsDerDiagnose(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         for (Coding coding : condition.getCode().getCoding()) {
             if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-                    VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText vorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText = new VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText();
-                    vorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText.setNameDesProblemsDerDiagnoseDefiningCode(NameDesProblemsDerDiagnoseDefiningCode.getCodesAsMap().get(coding.getCode()));
-                    vorliegendeDiagnose.setNameDesProblemsDerDiagnose(vorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText);
-                    isEmpty = false;
+                DvCodedTextParser.parseFHIRCoding(coding).ifPresent(vorliegendeDiagnose::setNameDesProblemsDerDiagnose);
+                isEmpty = false;
             }
         }
     }

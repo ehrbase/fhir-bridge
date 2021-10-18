@@ -117,24 +117,6 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
         assertEquals("SNOMED code is invalid in VerificationStatus.coding.code", exception.getMessage());
     }
 
-    @Test
-    void createDiagnoseInvalidKategorie() throws IOException {
-        Exception exception = executeMappingException("invalid/invalid-kategorie.json");
-        assertEquals("Category has either no or an unsupported SNOMED code", exception.getMessage());
-    }
-
-    @Test
-    void createDiagnoseInvalidBodySite() throws IOException {
-        Exception exception = executeMappingException("invalid/invalid-body-site.json");
-        assertEquals("Bodysite contains either a wrong code or code system.", exception.getMessage());
-    }
-
-    @Test
-    void createDiagnoseInvalidSeverity() throws IOException {
-        Exception exception = executeMappingException("invalid/invalid-severity.json");
-        assertEquals("Severity contains either a wrong code or code system.", exception.getMessage());
-    }
-
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Condition condition = (Condition) testFileLoader.loadResource(path);
@@ -160,7 +142,6 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(AusgeschlosseneDiagnoseEvaluation.class)
                 .registerValueObject(VorliegendeDiagnoseEvaluation.class)
                 .registerValueObject(UnbekannteDiagnoseEvaluation.class)
-                .registerValueObject(VorliegendeDiagnoseNameDesProblemsDerDiagnoseDvCodedText.class)
                 .registerValueObject(KoerperstelleCluster.class)
                 .build();
     }
