@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Condition/47/_history/1",
+      "id" : "Condition/5307ea59-0dab-4389-aa90-508e1f664bcd/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -26,13 +26,17 @@
     }
   },
   "language" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_639-1"
     },
     "code_string" : "de"
   },
   "territory" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_3166-1"
     },
     "code_string" : "DE"
@@ -41,7 +45,9 @@
     "_type" : "DV_CODED_TEXT",
     "value" : "event",
     "defining_code" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "openehr"
       },
       "code_string" : "433"
@@ -60,37 +66,13 @@
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
       "defining_code" : {
+        "_type" : "CODE_PHRASE",
         "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
           "value" : "openehr"
         },
         "code_string" : "232"
       }
-    },
-    "other_context" : {
-      "_type" : "ITEM_TREE",
-      "name" : {
-        "_type" : "DV_TEXT",
-        "value" : "Baum"
-      },
-      "items" : [ {
-        "_type" : "ELEMENT",
-        "name" : {
-          "_type" : "DV_TEXT",
-          "value" : "Kategorie"
-        },
-        "value" : {
-          "_type" : "DV_CODED_TEXT",
-          "value" : "Ventilation status (observable entity)",
-          "defining_code" : {
-            "terminology_id" : {
-              "value" : "SNOMED Clinical Terms"
-            },
-            "code_string" : "404989005"
-          }
-        },
-        "archetype_node_id" : "at0005"
-      } ],
-      "archetype_node_id" : "at0001"
     }
   },
   "content" : [ {
@@ -99,14 +81,27 @@
       "_type" : "DV_TEXT",
       "value" : "Ausgeschlossene Diagnose"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-EVALUATION.exclusion_specific.v1"
+      },
+      "template_id" : {
+        "value" : "GECCO_Diagnose"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"
@@ -130,13 +125,34 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "Known absent (qualifier value)",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
-              "value" : "SNOMED Clinical Terms"
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "410594000"
           }
         },
         "archetype_node_id" : "at0002"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Problem/Diagnose"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Dependence on ventilator (finding)",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
+            },
+            "code_string" : "444932008"
+          }
+        },
+        "archetype_node_id" : "at0003"
       } ],
       "archetype_node_id" : "at0001"
     },

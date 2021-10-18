@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
@@ -18,7 +19,7 @@ public class AusgeschlosseneDiagnoseEvaluationContainment extends Containment {
 
   public SelectAqlField<NullFlavour> AUSSAGE_UEBER_DEN_AUSSCHLUSS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(AusgeschlosseneDiagnoseEvaluation.class, "/data[at0001]/items[at0002]/null_flavour|defining_code", "aussageUeberDenAusschlussNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<NameDesProblemsDerDiagnoseDefiningCode> PROBLEM_DIAGNOSE_DEFINING_CODE = new AqlFieldImp<NameDesProblemsDerDiagnoseDefiningCode>(AusgeschlosseneDiagnoseEvaluation.class, "/data[at0001]/items[at0003]/value|defining_code", "problemDiagnoseDefiningCode", NameDesProblemsDerDiagnoseDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> PROBLEM_DIAGNOSE = new AqlFieldImp<DvCodedText>(AusgeschlosseneDiagnoseEvaluation.class, "/data[at0001]/items[at0003]/value", "problemDiagnose", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> PROBLEM_DIAGNOSE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(AusgeschlosseneDiagnoseEvaluation.class, "/data[at0001]/items[at0003]/null_flavour|defining_code", "problemDiagnoseNullFlavourDefiningCode", NullFlavour.class, this);
 

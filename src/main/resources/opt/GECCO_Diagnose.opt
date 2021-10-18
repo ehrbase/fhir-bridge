@@ -19,10 +19,10 @@
     <other_details id="original_namespace"/>
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
-    <other_details id="MD5-CAM-1.0.1">0d49de96095bd3f782f30957e86c7dfc</other_details>
+    <other_details id="MD5-CAM-1.0.1">7bd3534618fa1389bf6834ab876042b2</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">4.0.0</other_details>
+    <other_details id="sem_ver">7.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -297,7 +297,7 @@
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -308,24 +308,7 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>418112009</code_list>
-                        <code_list>722414000</code_list>
-                        <code_list>408472002</code_list>
-                        <code_list>394810000</code_list>
-                        <code_list>408480009</code_list>
-                        <code_list>394807007</code_list>
-                        <code_list>408475000</code_list>
-                        <code_list>394593009</code_list>
-                        <code_list>394584008</code_list>
-                        <code_list>788415003</code_list>
-                        <code_list>116223007</code_list>
-                        <code_list>394591006</code_list>
-                        <code_list>394587001</code_list>
-                        <code_list>394589003</code_list>
-                        <code_list>404989005</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/diagnosis-category</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -480,6 +463,32 @@
                     </occurrences>
                     <node_id/>
                     <attributes xsi:type="C_SINGLE_ATTRIBUTE">
+                      <rm_attribute_name>value</rm_attribute_name>
+                      <existence>
+                        <lower_included>true</lower_included>
+                        <upper_included>true</upper_included>
+                        <lower_unbounded>false</lower_unbounded>
+                        <upper_unbounded>false</upper_unbounded>
+                        <lower>1</lower>
+                        <upper>1</upper>
+                      </existence>
+                      <children xsi:type="C_PRIMITIVE_OBJECT">
+                        <rm_type_name>STRING</rm_type_name>
+                        <occurrences>
+                          <lower_included>true</lower_included>
+                          <upper_included>true</upper_included>
+                          <lower_unbounded>false</lower_unbounded>
+                          <upper_unbounded>false</upper_unbounded>
+                          <lower>1</lower>
+                          <upper>1</upper>
+                        </occurrences>
+                        <node_id/>
+                        <item xsi:type="C_STRING">
+                          <list_open>true</list_open>
+                        </item>
+                      </children>
+                    </attributes>
+                    <attributes xsi:type="C_SINGLE_ATTRIBUTE">
                       <rm_attribute_name>defining_code</rm_attribute_name>
                       <existence>
                         <lower_included>true</lower_included>
@@ -489,7 +498,7 @@
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -500,95 +509,9 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>195967001</code_list>
-                        <code_list>13645005</code_list>
-                        <code_list>51615001</code_list>
-                        <code_list>70995007</code_list>
-                        <code_list>190966007</code_list>
-                        <code_list>73430006</code_list>
-                        <code_list>78275009</code_list>
-                        <code_list>190905008</code_list>
-                        <code_list>38341003</code_list>
-                        <code_list>399211009</code_list>
-                        <code_list>698247007</code_list>
-                        <code_list>84114007</code_list>
-                        <code_list>399957001</code_list>
-                        <code_list>399261000</code_list>
-                        <code_list>53741008</code_list>
-                        <code_list>64586002</code_list>
-                        <code_list>197321007</code_list>
-                        <code_list>19943007</code_list>
-                        <code_list>10295004</code_list>
-                        <code_list>235890007</code_list>
-                        <code_list>24526004</code_list>
-                        <code_list>69896004</code_list>
-                        <code_list>105969002</code_list>
-                        <code_list>31996006</code_list>
-                        <code_list>36138009</code_list>
-                        <code_list>302509004</code_list>
-                        <code_list>181216001</code_list>
-                        <code_list>181268008</code_list>
-                        <code_list>181414000</code_list>
-                        <code_list>181277001</code_list>
-                        <code_list>113276009</code_list>
-                        <code_list>181250005</code_list>
-                        <code_list>181254001</code_list>
-                        <code_list>119181002</code_list>
-                        <code_list>181162001</code_list>
-                        <code_list>41845008</code_list>
-                        <code_list>181285005</code_list>
-                        <code_list>119206002</code_list>
-                        <code_list>8935007</code_list>
-                        <code_list>3138006</code_list>
-                        <code_list>309312004</code_list>
-                        <code_list>13024002</code_list>
-                        <code_list>46635009</code_list>
-                        <code_list>44054006</code_list>
-                        <code_list>237599002</code_list>
-                        <code_list>8801005</code_list>
-                        <code_list>128283000</code_list>
-                        <code_list>74732009</code_list>
-                        <code_list>197480006</code_list>
-                        <code_list>35489007</code_list>
-                        <code_list>69322001</code_list>
-                        <code_list>49049000</code_list>
-                        <code_list>52448006</code_list>
-                        <code_list>24700007</code_list>
-                        <code_list>257277002</code_list>
-                        <code_list>84757009</code_list>
-                        <code_list>37796009</code_list>
-                        <code_list>440140008</code_list>
-                        <code_list>429993008</code_list>
-                        <code_list>714152005</code_list>
-                        <code_list>431855005</code_list>
-                        <code_list>431856006</code_list>
-                        <code_list>433144002</code_list>
-                        <code_list>431857002</code_list>
-                        <code_list>433146000</code_list>
-                        <code_list>709044004</code_list>
-                        <code_list>86406008</code_list>
-                        <code_list>363346000</code_list>
-                        <code_list>40845000</code_list>
-                        <code_list>14669001</code_list>
-                        <code_list>439127006</code_list>
-                        <code_list>414086009</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/diseases-combined</referenceSetUri>
                       </children>
                     </attributes>
-                  </children>
-                  <children xsi:type="C_COMPLEX_OBJECT">
-                    <rm_type_name>DV_TEXT</rm_type_name>
-                    <occurrences>
-                      <lower_included>true</lower_included>
-                      <upper_included>true</upper_included>
-                      <lower_unbounded>false</lower_unbounded>
-                      <upper_unbounded>false</upper_unbounded>
-                      <lower>1</lower>
-                      <upper>1</upper>
-                    </occurrences>
-                    <node_id/>
                   </children>
                 </attributes>
               </children>
@@ -653,7 +576,7 @@
                             <lower>1</lower>
                             <upper>1</upper>
                           </existence>
-                          <children xsi:type="C_CODE_PHRASE">
+                          <children xsi:type="C_CODE_REFERENCE">
                             <rm_type_name>CODE_PHRASE</rm_type_name>
                             <occurrences>
                               <lower_included>true</lower_included>
@@ -664,25 +587,7 @@
                               <upper>1</upper>
                             </occurrences>
                             <node_id/>
-                            <terminology_id>
-                              <value>SNOMED Clinical Terms</value>
-                            </terminology_id>
-                            <code_list>302509004</code_list>
-                            <code_list>181216001</code_list>
-                            <code_list>181268008</code_list>
-                            <code_list>181414000</code_list>
-                            <code_list>181277001</code_list>
-                            <code_list>181250005</code_list>
-                            <code_list>181254001</code_list>
-                            <code_list>119181002</code_list>
-                            <code_list>181162001</code_list>
-                            <code_list>41845008</code_list>
-                            <code_list>181285005</code_list>
-                            <code_list>119206002</code_list>
-                            <code_list>8935007</code_list>
-                            <code_list>3138006</code_list>
-                            <code_list>309312004</code_list>
-                            <code_list>13024002</code_list>
+                            <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/diagnosis-body-site</referenceSetUri>
                           </children>
                         </attributes>
                       </children>
@@ -1019,54 +924,6 @@ Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben is
                   <items id="description">In Richtung des Handrückens oder des Fußrückens hin gelegen. Als Gegenstück zu Palmar oder Plantar, nicht als Synonym für posterior.</items>
                   <items id="text">Dorsal</items>
                 </term_definitions>
-                <term_definitions code="302509004">
-                  <items id="text">Entire heart (body structure)</items>
-                </term_definitions>
-                <term_definitions code="181216001">
-                  <items id="text">Entire lung (body structure)</items>
-                </term_definitions>
-                <term_definitions code="181268008">
-                  <items id="text">Entire liver (body structure)</items>
-                </term_definitions>
-                <term_definitions code="181414000">
-                  <items id="text">Entire kidney (body structure)</items>
-                </term_definitions>
-                <term_definitions code="181277001">
-                  <items id="text">Entire pancreas (body structure)</items>
-                </term_definitions>
-                <term_definitions code="181250005">
-                  <items id="text">Entire small intestine (body structure)</items>
-                </term_definitions>
-                <term_definitions code="181254001">
-                  <items id="text">Entire large intestine (body structure)</items>
-                </term_definitions>
-                <term_definitions code="119181002">
-                  <items id="text">Skin part (body structure)</items>
-                </term_definitions>
-                <term_definitions code="181162001">
-                  <items id="text">Entire cornea (body structure)</items>
-                </term_definitions>
-                <term_definitions code="41845008">
-                  <items id="text">Ear ossicle structure (body structure)</items>
-                </term_definitions>
-                <term_definitions code="181285005">
-                  <items id="text">Entire heart valve (body structure)</items>
-                </term_definitions>
-                <term_definitions code="119206002">
-                  <items id="text">Blood vessel part (body structure)</items>
-                </term_definitions>
-                <term_definitions code="8935007">
-                  <items id="text">Cerebral meninges structure (body structure)</items>
-                </term_definitions>
-                <term_definitions code="3138006">
-                  <items id="text">Bone (tissue) structure (body structure)</items>
-                </term_definitions>
-                <term_definitions code="309312004">
-                  <items id="text">Cartilage tissue (body structure)</items>
-                </term_definitions>
-                <term_definitions code="13024002">
-                  <items id="text">Tendon structure (body structure)</items>
-                </term_definitions>
                 <term_bindings terminology="SNOMED-CT">
                   <items code="at0002">
                     <value>
@@ -1183,22 +1040,25 @@ Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben is
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
+                          <value>local</value>
                         </terminology_id>
                         <code_list>at0047</code_list>
                         <code_list>at0048</code_list>
                         <code_list>at0049</code_list>
-                        <code_list>255604002</code_list>
-                        <code_list>371923003</code_list>
-                        <code_list>6736007</code_list>
-                        <code_list>371924009</code_list>
-                        <code_list>24484000</code_list>
-                        <code_list>442452003</code_list>
-                        <code_list>277022003</code_list>
-                        <code_list>399166001</code_list>
-                        <code_list>261665006</code_list>
                       </children>
                     </attributes>
+                  </children>
+                  <children xsi:type="C_COMPLEX_OBJECT">
+                    <rm_type_name>DV_TEXT</rm_type_name>
+                    <occurrences>
+                      <lower_included>true</lower_included>
+                      <upper_included>true</upper_included>
+                      <lower_unbounded>false</lower_unbounded>
+                      <upper_unbounded>false</upper_unbounded>
+                      <lower>1</lower>
+                      <upper>1</upper>
+                    </occurrences>
+                    <node_id/>
                   </children>
                 </attributes>
               </children>
@@ -1576,249 +1436,6 @@ Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben is
           <items id="description">Geschätzte oder exakte Zeit (bzw. Datum), zu der die Krankheitsanzeichen oder Symptome zum ersten mal beobachtet wurden.</items>
           <items id="text">Datum/ Zeitpunkt des Auftretens/ der Erstdiagnose</items>
         </term_definitions>
-        <term_definitions code="195967001">
-          <items id="text">Asthma (disorder)</items>
-        </term_definitions>
-        <term_definitions code="13645005">
-          <items id="text">Chronic obstructive lung disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="51615001">
-          <items id="text">Fibrosis of lung (disorder) Lungenfibrose</items>
-        </term_definitions>
-        <term_definitions code="70995007">
-          <items id="text">Pulmonary hypertension (disorder)</items>
-        </term_definitions>
-        <term_definitions code="190966007">
-          <items id="text">Extreme obesity with alveolar hypoventilation (disorder)</items>
-        </term_definitions>
-        <term_definitions code="73430006">
-          <items id="text">Sleep apnea (disorder)</items>
-        </term_definitions>
-        <term_definitions code="78275009">
-          <items id="text">Obstructive sleep apnea syndrome (disorder)</items>
-        </term_definitions>
-        <term_definitions code="190905008">
-          <items id="text">Cystic fibrosis (disorder) Cystische Fibrose</items>
-        </term_definitions>
-        <term_definitions code="38341003">
-          <items id="text">Hypertensive disorder, systemic arterial (disorder) Bluthochdruck</items>
-        </term_definitions>
-        <term_definitions code="399211009">
-          <items id="text">History of myocardial infarction (situation) Zustand nach Herzinfarkt</items>
-        </term_definitions>
-        <term_definitions code="698247007">
-          <items id="text">Cardiac arrhythmia (disorder) Herzrhythmusstörungen</items>
-        </term_definitions>
-        <term_definitions code="84114007">
-          <items id="text">Heart failure (disorder) Herzinsuffizienz</items>
-        </term_definitions>
-        <term_definitions code="399957001">
-          <items id="text">Peripheral arterial occlusive disease (disorder) pAVK</items>
-        </term_definitions>
-        <term_definitions code="399261000">
-          <items id="text">History of coronary artery bypass grafting (situation) Zustand nach Revaskularisation</items>
-        </term_definitions>
-        <term_definitions code="53741008">
-          <items id="text">Coronary arteriosclerosis (disorder) koronare Herzkrankheit</items>
-        </term_definitions>
-        <term_definitions code="64586002">
-          <items id="text">Carotid artery stenosis (disorder) Carotisstenose</items>
-        </term_definitions>
-        <term_definitions code="197321007">
-          <items id="text">Steatosis of liver (disorder)</items>
-        </term_definitions>
-        <term_definitions code="19943007">
-          <items id="text">Cirrhosis of liver (disorder)</items>
-        </term_definitions>
-        <term_definitions code="10295004">
-          <items id="text">Chronic viral hepatitis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="235890007">
-          <items id="text">Autoimmune liver disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="24526004">
-          <items id="text">Inflammatory bowel disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="69896004">
-          <items id="text">Rheumatoid arthritis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="105969002">
-          <items id="text">Disorder of connective tissue (disorder</items>
-        </term_definitions>
-        <term_definitions code="31996006">
-          <items id="text">Vasculitis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="36138009">
-          <items id="text">Congenital immunodeficiency disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="302509004">
-          <items id="text">Entire heart (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181216001">
-          <items id="text">Entire lung (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181268008">
-          <items id="text">Entire liver (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181414000">
-          <items id="text">Entire kidney (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181277001">
-          <items id="text">Entire pancreas (body structure)</items>
-        </term_definitions>
-        <term_definitions code="113276009">
-          <items id="text">Intestinal structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181250005">
-          <items id="text">Entire small intestine (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181254001">
-          <items id="text">Entire large intestine (body structure)</items>
-        </term_definitions>
-        <term_definitions code="119181002">
-          <items id="text">Skin part (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181162001">
-          <items id="text">Entire cornea (body structure)</items>
-        </term_definitions>
-        <term_definitions code="41845008">
-          <items id="text">Ear ossicle structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181285005">
-          <items id="text">Entire heart valve (body structure)</items>
-        </term_definitions>
-        <term_definitions code="119206002">
-          <items id="text">Blood vessel part (body structure)</items>
-        </term_definitions>
-        <term_definitions code="8935007">
-          <items id="text">Cerebral meninges structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="3138006">
-          <items id="text">Bone (tissue) structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="309312004">
-          <items id="text">Cartilage tissue (body structure)</items>
-        </term_definitions>
-        <term_definitions code="13024002">
-          <items id="text">Tendon structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="46635009">
-          <items id="text">Diabetes mellitus type 1 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="44054006">
-          <items id="text">Diabetes mellitus type 2 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="237599002">
-          <items id="text">Insulin treated type 2 diabetes mellitus (disorder)</items>
-        </term_definitions>
-        <term_definitions code="8801005">
-          <items id="text">Secondary diabetes mellitus (disorder)</items>
-        </term_definitions>
-        <term_definitions code="128283000">
-          <items id="text">Chronic nervous system disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="74732009">
-          <items id="text">Mental disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="197480006">
-          <items id="text">Anxiety disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="35489007">
-          <items id="text">Depressive disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="69322001">
-          <items id="text">Psychotic disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="49049000">
-          <items id="text">Parkinson's disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="52448006">
-          <items id="text">Dementia (disorder)</items>
-        </term_definitions>
-        <term_definitions code="24700007">
-          <items id="text">Multiple sclerosis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="257277002">
-          <items id="text">Combined disorder of muscle AND peripheral nerve (disorder)</items>
-        </term_definitions>
-        <term_definitions code="84757009">
-          <items id="text">Epilepsy (disorder)</items>
-        </term_definitions>
-        <term_definitions code="37796009">
-          <items id="text">Migraine (disorder)</items>
-        </term_definitions>
-        <term_definitions code="440140008">
-          <items id="text">History of cerebrovascular accident with residual deficit (situation)</items>
-        </term_definitions>
-        <term_definitions code="429993008">
-          <items id="text">History of cerebrovascular accident without residual deficits (situation</items>
-        </term_definitions>
-        <term_definitions code="714152005">
-          <items id="text">Chronic kidney disease stage 5 on dialysis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="431855005">
-          <items id="text">Chronic kidney disease stage 1 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="431856006">
-          <items id="text">Chronic kidney disease stage 2 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="433144002">
-          <items id="text">Chronic kidney disease stage 3 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="431857002">
-          <items id="text">Chronic kidney disease stage 4 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="433146000">
-          <items id="text">Chronic kidney disease stage 5 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="709044004">
-          <items id="text">Chronic kidney disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="86406008">
-          <items id="text">Human immunodeficiency virus infection</items>
-        </term_definitions>
-        <term_definitions code="363346000">
-          <items id="text">Malignant neoplastic disease</items>
-        </term_definitions>
-        <term_definitions code="40845000">
-          <items id="text">Gastrointestinal ulcer</items>
-        </term_definitions>
-        <term_definitions code="14669001">
-          <items id="text">Acute renal failure syndrome (disorder)</items>
-        </term_definitions>
-        <term_definitions code="439127006">
-          <items id="text">Thrombosis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="414086009">
-          <items id="text">Embolism (disorder)</items>
-        </term_definitions>
-        <term_definitions code="255604002">
-          <items id="text">Mild (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="371923003">
-          <items id="text">Mild to moderate (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="6736007">
-          <items id="text">Moderate (severity modifier) (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="371924009">
-          <items id="text">Moderate to severe (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="24484000">
-          <items id="text">Severe (severity modifier) (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="442452003">
-          <items id="text">Life threatening severity (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="277022003">
-          <items id="text">Remission phase (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="399166001">
-          <items id="text">Fatal (qualifier value)</items>
-        </term_definitions>
-        <term_definitions code="261665006">
-          <items id="text">Unknown (qualifier value)</items>
-        </term_definitions>
       </children>
       <children xsi:type="C_ARCHETYPE_ROOT">
         <rm_type_name>EVALUATION</rm_type_name>
@@ -1916,7 +1533,7 @@ Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben is
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
+                          <value>http://snomed.info/sct</value>
                         </terminology_id>
                         <code_list>410594000</code_list>
                       </children>
@@ -2042,7 +1659,7 @@ Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben is
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -2053,81 +1670,7 @@ Wenn der Name der Körperstelle bereits im übergeordneten Archetyp angegeben is
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>195967001</code_list>
-                        <code_list>13645005</code_list>
-                        <code_list>51615001</code_list>
-                        <code_list>70995007</code_list>
-                        <code_list>190966007</code_list>
-                        <code_list>73430006</code_list>
-                        <code_list>78275009</code_list>
-                        <code_list>190905008</code_list>
-                        <code_list>38341003</code_list>
-                        <code_list>399211009</code_list>
-                        <code_list>698247007</code_list>
-                        <code_list>84114007</code_list>
-                        <code_list>399957001</code_list>
-                        <code_list>399261000</code_list>
-                        <code_list>53741008</code_list>
-                        <code_list>64586002</code_list>
-                        <code_list>197321007</code_list>
-                        <code_list>19943007</code_list>
-                        <code_list>10295004</code_list>
-                        <code_list>235890007</code_list>
-                        <code_list>24526004</code_list>
-                        <code_list>69896004</code_list>
-                        <code_list>105969002</code_list>
-                        <code_list>31996006</code_list>
-                        <code_list>36138009</code_list>
-                        <code_list>302509004</code_list>
-                        <code_list>181216001</code_list>
-                        <code_list>181268008</code_list>
-                        <code_list>181414000</code_list>
-                        <code_list>181277001</code_list>
-                        <code_list>113276009</code_list>
-                        <code_list>181250005</code_list>
-                        <code_list>181254001</code_list>
-                        <code_list>119181002</code_list>
-                        <code_list>181162001</code_list>
-                        <code_list>41845008</code_list>
-                        <code_list>181285005</code_list>
-                        <code_list>119206002</code_list>
-                        <code_list>8935007</code_list>
-                        <code_list>3138006</code_list>
-                        <code_list>309312004</code_list>
-                        <code_list>13024002</code_list>
-                        <code_list>46635009</code_list>
-                        <code_list>44054006</code_list>
-                        <code_list>237599002</code_list>
-                        <code_list>8801005</code_list>
-                        <code_list>128283000</code_list>
-                        <code_list>74732009</code_list>
-                        <code_list>197480006</code_list>
-                        <code_list>35489007</code_list>
-                        <code_list>69322001</code_list>
-                        <code_list>49049000</code_list>
-                        <code_list>52448006</code_list>
-                        <code_list>24700007</code_list>
-                        <code_list>257277002</code_list>
-                        <code_list>84757009</code_list>
-                        <code_list>37796009</code_list>
-                        <code_list>440140008</code_list>
-                        <code_list>429993008</code_list>
-                        <code_list>714152005</code_list>
-                        <code_list>431855005</code_list>
-                        <code_list>431856006</code_list>
-                        <code_list>433144002</code_list>
-                        <code_list>431857002</code_list>
-                        <code_list>433146000</code_list>
-                        <code_list>709044004</code_list>
-                        <code_list>86406008</code_list>
-                        <code_list>363346000</code_list>
-                        <code_list>40845000</code_list>
-                        <code_list>14669001</code_list>
-                        <code_list>439127006</code_list>
-                        <code_list>414086009</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/diseases-combined</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -2333,222 +1876,6 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
         <term_definitions code="410594000">
           <items id="text">Known absent (qualifier value)</items>
         </term_definitions>
-        <term_definitions code="195967001">
-          <items id="text">Asthma (disorder)</items>
-        </term_definitions>
-        <term_definitions code="13645005">
-          <items id="text">Chronic obstructive lung disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="51615001">
-          <items id="text">Fibrosis of lung (disorder) Lungenfibrose</items>
-        </term_definitions>
-        <term_definitions code="70995007">
-          <items id="text">Pulmonary hypertension (disorder)</items>
-        </term_definitions>
-        <term_definitions code="190966007">
-          <items id="text">Extreme obesity with alveolar hypoventilation (disorder)</items>
-        </term_definitions>
-        <term_definitions code="73430006">
-          <items id="text">Sleep apnea (disorder)</items>
-        </term_definitions>
-        <term_definitions code="78275009">
-          <items id="text">Obstructive sleep apnea syndrome (disorder)</items>
-        </term_definitions>
-        <term_definitions code="190905008">
-          <items id="text">Cystic fibrosis (disorder) Cystische Fibrose</items>
-        </term_definitions>
-        <term_definitions code="38341003">
-          <items id="text">Hypertensive disorder, systemic arterial (disorder) Bluthochdruck</items>
-        </term_definitions>
-        <term_definitions code="399211009">
-          <items id="text">History of myocardial infarction (situation) Zustand nach Herzinfarkt</items>
-        </term_definitions>
-        <term_definitions code="698247007">
-          <items id="text">Cardiac arrhythmia (disorder) Herzrhythmusstörungen</items>
-        </term_definitions>
-        <term_definitions code="84114007">
-          <items id="text">Heart failure (disorder) Herzinsuffizienz</items>
-        </term_definitions>
-        <term_definitions code="399957001">
-          <items id="text">Peripheral arterial occlusive disease (disorder) pAVK</items>
-        </term_definitions>
-        <term_definitions code="399261000">
-          <items id="text">History of coronary artery bypass grafting (situation) Zustand nach Revaskularisation</items>
-        </term_definitions>
-        <term_definitions code="53741008">
-          <items id="text">Coronary arteriosclerosis (disorder) koronare Herzkrankheit</items>
-        </term_definitions>
-        <term_definitions code="64586002">
-          <items id="text">Carotid artery stenosis (disorder) Carotisstenose</items>
-        </term_definitions>
-        <term_definitions code="197321007">
-          <items id="text">Steatosis of liver (disorder)</items>
-        </term_definitions>
-        <term_definitions code="19943007">
-          <items id="text">Cirrhosis of liver (disorder)</items>
-        </term_definitions>
-        <term_definitions code="10295004">
-          <items id="text">Chronic viral hepatitis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="235890007">
-          <items id="text">Autoimmune liver disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="24526004">
-          <items id="text">Inflammatory bowel disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="69896004">
-          <items id="text">Rheumatoid arthritis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="105969002">
-          <items id="text">Disorder of connective tissue (disorder</items>
-        </term_definitions>
-        <term_definitions code="31996006">
-          <items id="text">Vasculitis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="36138009">
-          <items id="text">Congenital immunodeficiency disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="302509004">
-          <items id="text">Entire heart (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181216001">
-          <items id="text">Entire lung (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181268008">
-          <items id="text">Entire liver (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181414000">
-          <items id="text">Entire kidney (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181277001">
-          <items id="text">Entire pancreas (body structure)</items>
-        </term_definitions>
-        <term_definitions code="113276009">
-          <items id="text">Intestinal structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181250005">
-          <items id="text">Entire small intestine (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181254001">
-          <items id="text">Entire large intestine (body structure)</items>
-        </term_definitions>
-        <term_definitions code="119181002">
-          <items id="text">Skin part (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181162001">
-          <items id="text">Entire cornea (body structure)</items>
-        </term_definitions>
-        <term_definitions code="41845008">
-          <items id="text">Ear ossicle structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181285005">
-          <items id="text">Entire heart valve (body structure)</items>
-        </term_definitions>
-        <term_definitions code="119206002">
-          <items id="text">Blood vessel part (body structure)</items>
-        </term_definitions>
-        <term_definitions code="8935007">
-          <items id="text">Cerebral meninges structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="3138006">
-          <items id="text">Bone (tissue) structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="309312004">
-          <items id="text">Cartilage tissue (body structure)</items>
-        </term_definitions>
-        <term_definitions code="13024002">
-          <items id="text">Tendon structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="46635009">
-          <items id="text">Diabetes mellitus type 1 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="44054006">
-          <items id="text">Diabetes mellitus type 2 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="237599002">
-          <items id="text">Insulin treated type 2 diabetes mellitus (disorder)</items>
-        </term_definitions>
-        <term_definitions code="8801005">
-          <items id="text">Secondary diabetes mellitus (disorder)</items>
-        </term_definitions>
-        <term_definitions code="128283000">
-          <items id="text">Chronic nervous system disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="74732009">
-          <items id="text">Mental disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="197480006">
-          <items id="text">Anxiety disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="35489007">
-          <items id="text">Depressive disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="69322001">
-          <items id="text">Psychotic disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="49049000">
-          <items id="text">Parkinson's disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="52448006">
-          <items id="text">Dementia (disorder)</items>
-        </term_definitions>
-        <term_definitions code="24700007">
-          <items id="text">Multiple sclerosis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="257277002">
-          <items id="text">Combined disorder of muscle AND peripheral nerve (disorder)</items>
-        </term_definitions>
-        <term_definitions code="84757009">
-          <items id="text">Epilepsy (disorder)</items>
-        </term_definitions>
-        <term_definitions code="37796009">
-          <items id="text">Migraine (disorder)</items>
-        </term_definitions>
-        <term_definitions code="440140008">
-          <items id="text">History of cerebrovascular accident with residual deficit (situation)</items>
-        </term_definitions>
-        <term_definitions code="429993008">
-          <items id="text">History of cerebrovascular accident without residual deficits (situation</items>
-        </term_definitions>
-        <term_definitions code="714152005">
-          <items id="text">Chronic kidney disease stage 5 on dialysis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="431855005">
-          <items id="text">Chronic kidney disease stage 1 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="431856006">
-          <items id="text">Chronic kidney disease stage 2 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="433144002">
-          <items id="text">Chronic kidney disease stage 3 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="431857002">
-          <items id="text">Chronic kidney disease stage 4 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="433146000">
-          <items id="text">Chronic kidney disease stage 5 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="709044004">
-          <items id="text">Chronic kidney disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="86406008">
-          <items id="text">Human immunodeficiency virus infection</items>
-        </term_definitions>
-        <term_definitions code="363346000">
-          <items id="text">Malignant neoplastic disease</items>
-        </term_definitions>
-        <term_definitions code="40845000">
-          <items id="text">Gastrointestinal ulcer</items>
-        </term_definitions>
-        <term_definitions code="14669001">
-          <items id="text">Acute renal failure syndrome (disorder)</items>
-        </term_definitions>
-        <term_definitions code="439127006">
-          <items id="text">Thrombosis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="414086009">
-          <items id="text">Embolism (disorder)</items>
-        </term_definitions>
       </children>
       <children xsi:type="C_ARCHETYPE_ROOT">
         <rm_type_name>EVALUATION</rm_type_name>
@@ -2634,7 +1961,7 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
                         <lower>1</lower>
                         <upper>1</upper>
                       </existence>
-                      <children xsi:type="C_CODE_PHRASE">
+                      <children xsi:type="C_CODE_REFERENCE">
                         <rm_type_name>CODE_PHRASE</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
@@ -2645,81 +1972,7 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
-                        </terminology_id>
-                        <code_list>195967001</code_list>
-                        <code_list>13645005</code_list>
-                        <code_list>51615001</code_list>
-                        <code_list>70995007</code_list>
-                        <code_list>190966007</code_list>
-                        <code_list>73430006</code_list>
-                        <code_list>78275009</code_list>
-                        <code_list>190905008</code_list>
-                        <code_list>38341003</code_list>
-                        <code_list>399211009</code_list>
-                        <code_list>698247007</code_list>
-                        <code_list>84114007</code_list>
-                        <code_list>399957001</code_list>
-                        <code_list>399261000</code_list>
-                        <code_list>53741008</code_list>
-                        <code_list>64586002</code_list>
-                        <code_list>197321007</code_list>
-                        <code_list>19943007</code_list>
-                        <code_list>10295004</code_list>
-                        <code_list>235890007</code_list>
-                        <code_list>24526004</code_list>
-                        <code_list>69896004</code_list>
-                        <code_list>105969002</code_list>
-                        <code_list>31996006</code_list>
-                        <code_list>36138009</code_list>
-                        <code_list>302509004</code_list>
-                        <code_list>181216001</code_list>
-                        <code_list>181268008</code_list>
-                        <code_list>181414000</code_list>
-                        <code_list>181277001</code_list>
-                        <code_list>113276009</code_list>
-                        <code_list>181250005</code_list>
-                        <code_list>181254001</code_list>
-                        <code_list>119181002</code_list>
-                        <code_list>181162001</code_list>
-                        <code_list>41845008</code_list>
-                        <code_list>181285005</code_list>
-                        <code_list>119206002</code_list>
-                        <code_list>8935007</code_list>
-                        <code_list>3138006</code_list>
-                        <code_list>309312004</code_list>
-                        <code_list>13024002</code_list>
-                        <code_list>46635009</code_list>
-                        <code_list>44054006</code_list>
-                        <code_list>237599002</code_list>
-                        <code_list>8801005</code_list>
-                        <code_list>128283000</code_list>
-                        <code_list>74732009</code_list>
-                        <code_list>197480006</code_list>
-                        <code_list>35489007</code_list>
-                        <code_list>69322001</code_list>
-                        <code_list>49049000</code_list>
-                        <code_list>52448006</code_list>
-                        <code_list>24700007</code_list>
-                        <code_list>257277002</code_list>
-                        <code_list>84757009</code_list>
-                        <code_list>37796009</code_list>
-                        <code_list>440140008</code_list>
-                        <code_list>429993008</code_list>
-                        <code_list>714152005</code_list>
-                        <code_list>431855005</code_list>
-                        <code_list>431856006</code_list>
-                        <code_list>433144002</code_list>
-                        <code_list>431857002</code_list>
-                        <code_list>433146000</code_list>
-                        <code_list>709044004</code_list>
-                        <code_list>86406008</code_list>
-                        <code_list>363346000</code_list>
-                        <code_list>40845000</code_list>
-                        <code_list>14669001</code_list>
-                        <code_list>439127006</code_list>
-                        <code_list>414086009</code_list>
+                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/diseases-combined</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -2828,7 +2081,7 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
                         </occurrences>
                         <node_id/>
                         <terminology_id>
-                          <value>SNOMED Clinical Terms</value>
+                          <value>http://snomed.info/sct</value>
                         </terminology_id>
                         <code_list>Unknown (qualifier value)</code_list>
                       </children>
@@ -3054,222 +2307,6 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
           <items id="description">Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.</items>
           <items id="text">Erweiterung</items>
         </term_definitions>
-        <term_definitions code="195967001">
-          <items id="text">Asthma (disorder)</items>
-        </term_definitions>
-        <term_definitions code="13645005">
-          <items id="text">Chronic obstructive lung disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="51615001">
-          <items id="text">Fibrosis of lung (disorder) Lungenfibrose</items>
-        </term_definitions>
-        <term_definitions code="70995007">
-          <items id="text">Pulmonary hypertension (disorder)</items>
-        </term_definitions>
-        <term_definitions code="190966007">
-          <items id="text">Extreme obesity with alveolar hypoventilation (disorder)</items>
-        </term_definitions>
-        <term_definitions code="73430006">
-          <items id="text">Sleep apnea (disorder)</items>
-        </term_definitions>
-        <term_definitions code="78275009">
-          <items id="text">Obstructive sleep apnea syndrome (disorder)</items>
-        </term_definitions>
-        <term_definitions code="190905008">
-          <items id="text">Cystic fibrosis (disorder) Cystische Fibrose</items>
-        </term_definitions>
-        <term_definitions code="38341003">
-          <items id="text">Hypertensive disorder, systemic arterial (disorder) Bluthochdruck</items>
-        </term_definitions>
-        <term_definitions code="399211009">
-          <items id="text">History of myocardial infarction (situation) Zustand nach Herzinfarkt</items>
-        </term_definitions>
-        <term_definitions code="698247007">
-          <items id="text">Cardiac arrhythmia (disorder) Herzrhythmusstörungen</items>
-        </term_definitions>
-        <term_definitions code="84114007">
-          <items id="text">Heart failure (disorder) Herzinsuffizienz</items>
-        </term_definitions>
-        <term_definitions code="399957001">
-          <items id="text">Peripheral arterial occlusive disease (disorder) pAVK</items>
-        </term_definitions>
-        <term_definitions code="399261000">
-          <items id="text">History of coronary artery bypass grafting (situation) Zustand nach Revaskularisation</items>
-        </term_definitions>
-        <term_definitions code="53741008">
-          <items id="text">Coronary arteriosclerosis (disorder) koronare Herzkrankheit</items>
-        </term_definitions>
-        <term_definitions code="64586002">
-          <items id="text">Carotid artery stenosis (disorder) Carotisstenose</items>
-        </term_definitions>
-        <term_definitions code="197321007">
-          <items id="text">Steatosis of liver (disorder)</items>
-        </term_definitions>
-        <term_definitions code="19943007">
-          <items id="text">Cirrhosis of liver (disorder)</items>
-        </term_definitions>
-        <term_definitions code="10295004">
-          <items id="text">Chronic viral hepatitis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="235890007">
-          <items id="text">Autoimmune liver disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="24526004">
-          <items id="text">Inflammatory bowel disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="69896004">
-          <items id="text">Rheumatoid arthritis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="105969002">
-          <items id="text">Disorder of connective tissue (disorder</items>
-        </term_definitions>
-        <term_definitions code="31996006">
-          <items id="text">Vasculitis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="36138009">
-          <items id="text">Congenital immunodeficiency disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="302509004">
-          <items id="text">Entire heart (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181216001">
-          <items id="text">Entire lung (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181268008">
-          <items id="text">Entire liver (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181414000">
-          <items id="text">Entire kidney (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181277001">
-          <items id="text">Entire pancreas (body structure)</items>
-        </term_definitions>
-        <term_definitions code="113276009">
-          <items id="text">Intestinal structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181250005">
-          <items id="text">Entire small intestine (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181254001">
-          <items id="text">Entire large intestine (body structure)</items>
-        </term_definitions>
-        <term_definitions code="119181002">
-          <items id="text">Skin part (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181162001">
-          <items id="text">Entire cornea (body structure)</items>
-        </term_definitions>
-        <term_definitions code="41845008">
-          <items id="text">Ear ossicle structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="181285005">
-          <items id="text">Entire heart valve (body structure)</items>
-        </term_definitions>
-        <term_definitions code="119206002">
-          <items id="text">Blood vessel part (body structure)</items>
-        </term_definitions>
-        <term_definitions code="8935007">
-          <items id="text">Cerebral meninges structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="3138006">
-          <items id="text">Bone (tissue) structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="309312004">
-          <items id="text">Cartilage tissue (body structure)</items>
-        </term_definitions>
-        <term_definitions code="13024002">
-          <items id="text">Tendon structure (body structure)</items>
-        </term_definitions>
-        <term_definitions code="46635009">
-          <items id="text">Diabetes mellitus type 1 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="44054006">
-          <items id="text">Diabetes mellitus type 2 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="237599002">
-          <items id="text">Insulin treated type 2 diabetes mellitus (disorder)</items>
-        </term_definitions>
-        <term_definitions code="8801005">
-          <items id="text">Secondary diabetes mellitus (disorder)</items>
-        </term_definitions>
-        <term_definitions code="128283000">
-          <items id="text">Chronic nervous system disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="74732009">
-          <items id="text">Mental disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="197480006">
-          <items id="text">Anxiety disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="35489007">
-          <items id="text">Depressive disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="69322001">
-          <items id="text">Psychotic disorder (disorder)</items>
-        </term_definitions>
-        <term_definitions code="49049000">
-          <items id="text">Parkinson's disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="52448006">
-          <items id="text">Dementia (disorder)</items>
-        </term_definitions>
-        <term_definitions code="24700007">
-          <items id="text">Multiple sclerosis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="257277002">
-          <items id="text">Combined disorder of muscle AND peripheral nerve (disorder)</items>
-        </term_definitions>
-        <term_definitions code="84757009">
-          <items id="text">Epilepsy (disorder)</items>
-        </term_definitions>
-        <term_definitions code="37796009">
-          <items id="text">Migraine (disorder)</items>
-        </term_definitions>
-        <term_definitions code="440140008">
-          <items id="text">History of cerebrovascular accident with residual deficit (situation)</items>
-        </term_definitions>
-        <term_definitions code="429993008">
-          <items id="text">History of cerebrovascular accident without residual deficits (situation</items>
-        </term_definitions>
-        <term_definitions code="714152005">
-          <items id="text">Chronic kidney disease stage 5 on dialysis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="431855005">
-          <items id="text">Chronic kidney disease stage 1 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="431856006">
-          <items id="text">Chronic kidney disease stage 2 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="433144002">
-          <items id="text">Chronic kidney disease stage 3 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="431857002">
-          <items id="text">Chronic kidney disease stage 4 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="433146000">
-          <items id="text">Chronic kidney disease stage 5 (disorder)</items>
-        </term_definitions>
-        <term_definitions code="709044004">
-          <items id="text">Chronic kidney disease (disorder)</items>
-        </term_definitions>
-        <term_definitions code="86406008">
-          <items id="text">Human immunodeficiency virus infection</items>
-        </term_definitions>
-        <term_definitions code="363346000">
-          <items id="text">Malignant neoplastic disease</items>
-        </term_definitions>
-        <term_definitions code="40845000">
-          <items id="text">Gastrointestinal ulcer</items>
-        </term_definitions>
-        <term_definitions code="14669001">
-          <items id="text">Acute renal failure syndrome (disorder)</items>
-        </term_definitions>
-        <term_definitions code="439127006">
-          <items id="text">Thrombosis (disorder)</items>
-        </term_definitions>
-        <term_definitions code="414086009">
-          <items id="text">Embolism (disorder)</items>
-        </term_definitions>
         <term_definitions code="Unknown (qualifier value)">
           <items id="text">Unknown (qualifier value)</items>
         </term_definitions>
@@ -3326,51 +2363,6 @@ Wird das Datenelement wie in Beispiel (2) kodiert, ist eine weitere Spezifikatio
     <term_definitions code="at0013">
       <items id="description">*</items>
       <items id="text">geändert</items>
-    </term_definitions>
-    <term_definitions code="418112009">
-      <items id="text">PulmonaryMedicine</items>
-    </term_definitions>
-    <term_definitions code="722414000">
-      <items id="text">VascularMedicine</items>
-    </term_definitions>
-    <term_definitions code="408472002">
-      <items id="text">Hepatology</items>
-    </term_definitions>
-    <term_definitions code="394810000">
-      <items id="text">Rheumatoloty</items>
-    </term_definitions>
-    <term_definitions code="408480009">
-      <items id="text">Immunology</items>
-    </term_definitions>
-    <term_definitions code="394807007">
-      <items id="text">InfectiousDiseases</items>
-    </term_definitions>
-    <term_definitions code="408475000">
-      <items id="text">Diabetic Medicine</items>
-    </term_definitions>
-    <term_definitions code="394593009">
-      <items id="text">Oncology</items>
-    </term_definitions>
-    <term_definitions code="394584008">
-      <items id="text">Gastroenterology</items>
-    </term_definitions>
-    <term_definitions code="788415003">
-      <items id="text">Transplant medicine</items>
-    </term_definitions>
-    <term_definitions code="116223007">
-      <items id="text">Complication (disorder)</items>
-    </term_definitions>
-    <term_definitions code="394591006">
-      <items id="text">Neurology</items>
-    </term_definitions>
-    <term_definitions code="394587001">
-      <items id="text">Psychiatry</items>
-    </term_definitions>
-    <term_definitions code="394589003">
-      <items id="text">Nephrology (qualifier value)</items>
-    </term_definitions>
-    <term_definitions code="404989005">
-      <items id="text">Ventilation status (observable entity)</items>
     </term_definitions>
   </definition>
   <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-EVALUATION.problem_diagnosis.v1]">

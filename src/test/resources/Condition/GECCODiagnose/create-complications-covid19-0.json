@@ -1,6 +1,6 @@
 {
   "resourceType": "Condition",
-  "id": "ead303c5-7da6-4038-b5d4-7d17b224fa65",
+  "id": "77a8826d-4397-4937-8cca-de90008d3368",
   "meta": {
     "profile":  [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/complications-covid-19"
@@ -44,8 +44,8 @@
     "coding":  [
       {
         "system": "http://snomed.info/sct",
-        "code": "129561000119108",
-        "display": "Pre-renal acute kidney injury (disorder)"
+        "code": "128601007",
+        "display": "Infectious disease of lung (disorder)"
       }
     ]
   },
