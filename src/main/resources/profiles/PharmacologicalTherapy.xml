@@ -1418,7 +1418,7 @@
         <code value="Coding" />
       </type>
       <patternCoding>
-        <system value="http://fhir.de/CodeSystem/dimdi/atc" />
+        <system value="http://fhir.de/CodeSystem/bfarm/atc" />
       </patternCoding>
       <condition value="ele-1" />
       <constraint>
@@ -1784,7 +1784,7 @@
         <code value="Coding" />
       </type>
       <patternCoding>
-        <system value="http://fhir.de/CodeSystem/dimdi/ops" />
+        <system value="http://fhir.de/CodeSystem/bfarm/ops" />
       </patternCoding>
       <condition value="ele-1" />
       <constraint>
@@ -5740,7 +5740,7 @@
       <path value="MedicationStatement.medication[x].coding" />
       <sliceName value="atcClassDe" />
       <patternCoding>
-        <system value="http://fhir.de/CodeSystem/dimdi/atc" />
+        <system value="http://fhir.de/CodeSystem/bfarm/atc" />
       </patternCoding>
       <binding>
         <strength value="extensible" />
@@ -5759,7 +5759,7 @@
       <path value="MedicationStatement.medication[x].coding" />
       <sliceName value="ops" />
       <patternCoding>
-        <system value="http://fhir.de/CodeSystem/dimdi/ops" />
+        <system value="http://fhir.de/CodeSystem/bfarm/ops" />
       </patternCoding>
       <binding>
         <strength value="extensible" />

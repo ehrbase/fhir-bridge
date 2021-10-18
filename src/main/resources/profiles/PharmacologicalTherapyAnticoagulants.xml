@@ -1419,7 +1419,7 @@
         <code value="Coding" />
       </type>
       <patternCoding>
-        <system value="http://fhir.de/CodeSystem/dimdi/atc" />
+        <system value="http://fhir.de/CodeSystem/bfarm/atc" />
       </patternCoding>
       <condition value="ele-1" />
       <constraint>
@@ -5576,7 +5576,7 @@
       <path value="MedicationStatement.medication[x].coding" />
       <sliceName value="atcClassDe" />
       <patternCoding>
-        <system value="http://fhir.de/CodeSystem/dimdi/atc" />
+        <system value="http://fhir.de/CodeSystem/bfarm/atc" />
       </patternCoding>
       <binding>
         <strength value="extensible" />

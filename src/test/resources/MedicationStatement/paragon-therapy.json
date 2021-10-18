@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "MedicationStatement/1/_history/1",
+      "id" : "MedicationStatement/196c9b13-220b-4088-8945-a5a8c1a72dd4/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -81,6 +81,15 @@
       "_type" : "DV_TEXT",
       "value" : "COVID-19 Therapie"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.medication_statement.v0"
+      },
+      "template_id" : {
+        "value" : "GECCO_Medikation"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -111,6 +120,15 @@
         "name" : {
           "_type" : "DV_TEXT",
           "value" : "Status"
+        },
+        "archetype_details" : {
+          "archetype_id" : {
+            "value" : "openEHR-EHR-CLUSTER.medication_status_fhir.v0"
+          },
+          "template_id" : {
+            "value" : "GECCO_Medikation"
+          },
+          "rm_version" : "1.0.4"
         },
         "items" : [ {
           "_type" : "ELEMENT",
@@ -169,14 +187,14 @@
             },
             "value" : {
               "_type" : "DV_CODED_TEXT",
-              "value" : "Product containing atazanavir (medicinal product)",
+              "value" : "Atazanavir",
               "defining_code" : {
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED CT"
+                  "value" : "http://fhir.de/CodeSystem/bfarm/atc"
                 },
-                "code_string" : "413591007"
+                "code_string" : "J05AE08"
               }
             },
             "archetype_node_id" : "at0006"

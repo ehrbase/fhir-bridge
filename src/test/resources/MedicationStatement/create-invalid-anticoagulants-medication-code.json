@@ -15,7 +15,7 @@
         "display": "Medicinal product acting as anticoagulant agent (product)"
       },
       {
-        "system": "http://fhir.de/CodeSystem/dimdi/atc",
+        "system": "http://fhir.de/CodeSystem/bfarm/atc",
         "code": "B01AB0asd1",
         "display": "Heparin"
       }

@@ -45,7 +45,7 @@
       "coding": [
         {
           "system": "http://snomed.info/sct",
-          "code": "118247008:363713009=373068000",
+          "code": "118247008:{363713009=373068000}",
           "display": "|Radiologic finding (finding)|:|Has interpretation (attribute)|=|Undetermined (qualifier value)|"
         }
       ]

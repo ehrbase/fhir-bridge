@@ -1,23 +1,28 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
-import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.VirusnachweistestDefiningCode;
 import org.hl7.fhir.r4.model.Observation;
 
 public class Immunoassay {
     private final Observation observation;
-    private final VirusnachweistestDefiningCode virusnachweistestDefiningCode;
+    private final Boolean hasValueQuantity;
+    private final Boolean hasValueCodeableConcept;
 
-
-    public Immunoassay(Observation observation, VirusnachweistestDefiningCode virusnachweistestDefiningCode) {
+    public Immunoassay(Observation observation, Boolean hasValueQuantity) {
         this.observation = observation;
-        this.virusnachweistestDefiningCode = virusnachweistestDefiningCode;
+        this.hasValueQuantity = hasValueQuantity;
+        this.hasValueCodeableConcept = !hasValueQuantity;
     }
 
     public Observation getObservation() {
         return observation;
     }
 
-    public VirusnachweistestDefiningCode getVirusnachweistestDefiningCode() {
-        return virusnachweistestDefiningCode;
+    public Boolean getHasValueQuantity() {
+        return hasValueQuantity;
     }
+
+    public Boolean getHasValueCodeableConcept() {
+        return hasValueCodeableConcept;
+    }
+
 }

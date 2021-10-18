@@ -19,10 +19,10 @@ venv
 __pycache__/
 
 # Robot Tests
-**results**
-tests/log.html
-tests/output.xml
-tests/report.html
+results/
+log.html
+output.xml
+report.html
 .pabotsuitenames
 
 # VSCode

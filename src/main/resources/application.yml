@@ -112,6 +112,8 @@ spring:
   messages:
     basename: messages/messages
     use-code-as-default-message: true
+  main:
+    allow-bean-definition-overriding: true
 # Server Properties
 server:
   port: 8888

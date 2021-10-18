@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "DiagnosticReport/c06e9a39-bdc5-4e63-b6d9-3e763da71ade/_history/1",
+      "id" : "DiagnosticReport/e35740af-926f-45e0-b725-4c548ea03731/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -160,6 +160,15 @@
       "_type" : "DV_TEXT",
       "value" : "Bildgebendes Untersuchungsergebnis"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.imaging_exam_result.v0"
+      },
+      "template_id" : {
+        "value" : "GECCO_Radiologischer Befund"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -178,9 +187,6 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
-    },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "name" : {
@@ -234,14 +240,14 @@
             },
             "value" : {
               "_type" : "DV_CODED_TEXT",
-              "value" : "Normalbefund",
+              "value" : "|Radiologic finding (finding)|:|Has interpretation (attribute)|=|Normal (qualifier value)|",
               "defining_code" : {
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "SNOMED-CT"
+                  "value" : "http://snomed.info/sct"
                 },
-                "code_string" : "17621005"
+                "code_string" : "118247008:{363713009=17621005}"
               }
             },
             "archetype_node_id" : "at0008"
