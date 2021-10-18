@@ -18,7 +18,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.management_screening.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-14T15:13:11.186633+02:00",
+    date = "2021-10-15T12:43:38.784754800+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class PatientAufDerIntensivstationObservation implements EntryEntity {
