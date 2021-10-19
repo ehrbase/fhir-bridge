@@ -3,11 +3,7 @@ package org.ehrbase.fhirbridge.fhir.bundle;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.BefundDerBlutgasanalyseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.KohlendioxidpartialdruckCluster;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.LaborergebnisObservation;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.PhWertCluster;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffpartialdruckCluster;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffsaettigungCluster;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractBundleMappingTestSetupIT;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.BloodGasPanelBundleValidator;
@@ -124,6 +120,9 @@ class BloodGasIT extends AbstractBundleMappingTestSetupIT {
                 .registerValueObject(SauerstoffpartialdruckCluster.class)
                 .registerValueObject(KohlendioxidpartialdruckCluster.class)
                 .registerValueObject(SauerstoffsaettigungCluster.class)
+                .registerValueObject(BefundDerBlutgasanalyseKategorieElement.class)
+                .registerValueObject(KohlendioxidpartialdruckErgebnisStatusElement.class)
+                .registerValueObject(SauerstoffpartialdruckErgebnisStatusElement.class)
                 .build();
     }
 

@@ -11,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-18T17:21:00.350702+02:00",
+    date = "2021-10-19T12:08:14.395084+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class KohlendioxidpartialdruckErgebnisStatusElement implements LocatableEntity {

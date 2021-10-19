@@ -11,7 +11,7 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-18T17:21:00.360884+02:00",
+    date = "2021-10-19T12:08:14.406827+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @OptionFor("DV_QUANTITY")

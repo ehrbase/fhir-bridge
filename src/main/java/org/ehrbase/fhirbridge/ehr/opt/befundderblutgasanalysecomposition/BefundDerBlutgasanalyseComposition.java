@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definit
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-18T17:21:00.264931+02:00",
+    date = "2021-10-19T12:08:14.320229+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Befund der Blutgasanalyse")

@@ -1,10 +1,13 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyteconverter;
 
+import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.PhWertCluster;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.UntersuchterAnalytDefiningCode3;
-import org.hl7.fhir.r4.model.Coding;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffpartialdruckErgebnisStatusElement;
 import org.hl7.fhir.r4.model.Observation;
+
+import java.util.List;
 
 public class PhWertConverter extends LaboratoryTestAnalyteConverter {
 
@@ -14,46 +17,28 @@ public class PhWertConverter extends LaboratoryTestAnalyteConverter {
 
     public PhWertCluster map() {
         PhWertCluster phWertCluster = new PhWertCluster();
-
-        kohlendioxidpartialdruckCluster.setErgebnisStatus(mapKohlendioxidErgebnisStatus());
-        DvCodedTextParser.parseFHIRCoding(fhirObservation.getCode().getCoding().get(0)).ifPresent(kohlendioxidpartialdruckCluster::setBezeichnungDesAnalyts);
-        convertAnalytErgebnis(kohlendioxidpartialdruckCluster);
-
-        phWertCluster.setErgebnisStatusValue(mapErgebnisStatus());
-        phWertCluster.setUntersuchterAnalytDefiningCode(mapUntersuchterAnalyt());
-        phWertCluster.setAnalytResultatUnits("pH");
-        phWertCluster.setAnalytResultatMagnitude(mapValue());
+        phWertCluster.setErgebnisStatus(mapPhClusterErgebnisStatus());
+        DvCodedTextParser.parseFHIRCoding(fhirObservation.getCode().getCoding().get(0)).ifPresent(phWertCluster::setBezeichnungDesAnalyts);
+        convertAnalytErgebnis(phWertCluster);
+        convertAnalytErgebnis(phWertCluster);
         return phWertCluster;
     }
 
-    @Override
-    UntersuchterAnalytDefiningCode3 mapUntersuchterAnalyt() {
-        UntersuchterAnalytDefiningCode3 phSerumOrPlasma = UntersuchterAnalytDefiningCode3.PH_OF_SERUM_OR_PLASMA;
-        UntersuchterAnalytDefiningCode3 phVenousBlood= UntersuchterAnalytDefiningCode3.PH_OF_VENOUS_BLOOD;
-        UntersuchterAnalytDefiningCode3 phCapillaryBlood = UntersuchterAnalytDefiningCode3.PH_OF_CAPILLARY_BLOOD;
-        UntersuchterAnalytDefiningCode3 phArterialBlood = UntersuchterAnalytDefiningCode3.PH_OF_ARTERIAL_BLOOD;
-        UntersuchterAnalytDefiningCode3 phMixedVenousBlood = UntersuchterAnalytDefiningCode3.PH_OF_MIXED_VENOUS_BLOOD;
-        UntersuchterAnalytDefiningCode3 phBlood = UntersuchterAnalytDefiningCode3.PH_OF_BLOOD;
-
-        for (Coding coding : fhirObservation.getCode().getCoding()) {
-            String code = coding.getCode();
-            if (code.equals(phSerumOrPlasma.getCode())) {
-                return phSerumOrPlasma;
-            } else if (code.equals(phVenousBlood.getCode())) {
-                return phVenousBlood;
-            } else if (code.equals(phCapillaryBlood.getCode())) {
-                return phCapillaryBlood;
-            }else if (code.equals(phArterialBlood.getCode())) {
-                return phArterialBlood;
-            }else if (code.equals(phMixedVenousBlood.getCode())) {
-                return phMixedVenousBlood;
-            }else if (code.equals(phBlood.getCode())) {
-                return phBlood;
-            }
-        }
-        throw new IllegalArgumentException("The coding of the Untersuchter Analyte cannot be mapped, since code " + fhirObservation.getCode().getCoding() + " is unknown");
+    private List<SauerstoffpartialdruckErgebnisStatusElement> mapPhClusterErgebnisStatus() {
+        SauerstoffpartialdruckErgebnisStatusElement sauerstoffpartialdruckErgebnisStatusElement = new SauerstoffpartialdruckErgebnisStatusElement();
+         sauerstoffpartialdruckErgebnisStatusElement.setValue(mapErgebnisStatus());
+         return List.of(sauerstoffpartialdruckErgebnisStatusElement);
     }
 
+    @Override
+    void convertAnalytErgebnis(LocatableEntity locatableEntity) {
+        if(fhirObservation.hasValue()){
+            ((PhWertCluster) locatableEntity).setAnalytErgebnisUnits("pH");
+            ((PhWertCluster) locatableEntity).setAnalytErgebnisMagnitude(mapValue());
+        }else{
+            ((PhWertCluster) locatableEntity).setAnalytErgebnisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }
+    }
 
 }
 

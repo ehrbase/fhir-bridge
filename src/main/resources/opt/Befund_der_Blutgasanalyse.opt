@@ -19,10 +19,10 @@
     <other_details id="original_namespace"/>
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
-    <other_details id="MD5-CAM-1.0.1">751b5489a6e024a7a62756a75ab50eb7</other_details>
+    <other_details id="MD5-CAM-1.0.1">312a60b084ac6e1e1e25b16c094a0dcd</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">2.0.0</other_details>
+    <other_details id="sem_ver">3.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -497,7 +497,7 @@
                                 </occurrences>
                                 <node_id/>
                                 <terminology_id>
-                                  <value>LOINC</value>
+                                  <value>http://loinc.org</value>
                                 </terminology_id>
                                 <code_list>24338-6</code_list>
                                 <code_list>24336-0</code_list>
