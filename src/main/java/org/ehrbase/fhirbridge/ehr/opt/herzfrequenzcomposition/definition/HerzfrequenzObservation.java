@@ -19,58 +19,58 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.pulse.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-27T14:20:32.227393+02:00",
+    date = "2021-10-19T12:27:57.248926+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
+public class HerzfrequenzObservation implements EntryEntity {
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Frequenz
+   * Path: Herzfrequenz/Herzfrequenz/Jedes Ereignis/Frequenz
    * Description: Die Frequenz, gemessen in Schlägen pro Minute.
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|magnitude")
   private Double frequenzMagnitude;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Frequenz
+   * Path: Herzfrequenz/Herzfrequenz/Jedes Ereignis/Frequenz
    * Description: Die Frequenz, gemessen in Schlägen pro Minute.
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|units")
   private String frequenzUnits;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/History/Jedes Ereignis/Structure/Frequenz/null_flavour
+   * Path: Herzfrequenz/Herzfrequenz/History/Jedes Ereignis/Structure/Frequenz/null_flavour
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/null_flavour|defining_code")
   private NullFlavour frequenzNullFlavourDefiningCode;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Anstrengung
+   * Path: Herzfrequenz/Herzfrequenz/Jedes Ereignis/Anstrengung
    * Description: Details über die körperliche Anstrengung, die der Patient während der Untersuchung ausgesetzt war.
    */
   @Path("/data[at0002]/events[at0003]/state[at0012]/items[at1017]")
   private List<Cluster> anstrengung;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/time
+   * Path: Herzfrequenz/Herzfrequenz/Jedes Ereignis/time
    */
   @Path("/data[at0002]/events[at0003]/time|value")
   private TemporalAccessor timeValue;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/origin
+   * Path: Herzfrequenz/Herzfrequenz/origin
    */
   @Path("/data[at0002]/origin|value")
   private TemporalAccessor originValue;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/Gerät
+   * Path: Herzfrequenz/Herzfrequenz/Gerät
    * Description: Informationen zu dem Gerät, welches zur Messung der Puls- oder der Herzfrequenz verwendet wurde.
    */
   @Path("/protocol[at0010]/items[at1013]")
   private Cluster geraet;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/Erweiterung
+   * Path: Herzfrequenz/Herzfrequenz/Erweiterung
    * Description: Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.
    * Comment: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.
    */
@@ -78,19 +78,19 @@ public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
   private List<Cluster> erweiterung;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/subject
+   * Path: Herzfrequenz/Herzfrequenz/subject
    */
   @Path("/subject")
   private PartyProxy subject;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/language
+   * Path: Herzfrequenz/Herzfrequenz/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz/feeder_audit
+   * Path: Herzfrequenz/Herzfrequenz/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;

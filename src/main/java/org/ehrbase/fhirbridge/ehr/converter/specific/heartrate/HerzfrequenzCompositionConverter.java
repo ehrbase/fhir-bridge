@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.heartrate;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.HerzfrequenzComposition;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.RegistereintragKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.HerzfrequenzKategorieElement;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
@@ -15,12 +15,12 @@ public class HerzfrequenzCompositionConverter extends ObservationToCompositionCo
     @Override
     protected HerzfrequenzComposition convertInternal(Observation resource) {
         HerzfrequenzComposition result = new HerzfrequenzComposition();
-        result.setPulsfrequenzHerzfrequenz(new PulsfrequenzHerzfrequenzObservationConverter().convert(resource));
+        result.setHerzfrequenz(new HerzfrequenzObservationConverter().convert(resource));
         result.setKategorie(convertCategory(resource));
         return result;
     }
 
-    private List<RegistereintragKategorieElement> convertCategory(Observation resource) {
+    private List<HerzfrequenzKategorieElement> convertCategory(Observation resource) {
         if (!resource.hasCategory()) {
             return new ArrayList<>();
         }
@@ -30,7 +30,7 @@ public class HerzfrequenzCompositionConverter extends ObservationToCompositionCo
                 .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
                 .map(Coding::getCode)
                 .map(code -> {
-                    RegistereintragKategorieElement element = new RegistereintragKategorieElement();
+                    HerzfrequenzKategorieElement element = new HerzfrequenzKategorieElement();
                     element.setValue(code);
                     return element;
                 })

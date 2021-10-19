@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.sofacomposition.definition.StatusDefiningC
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-24T12:20:22.127498+02:00",
+    date = "2021-10-19T12:28:28.499197+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("SOFA")

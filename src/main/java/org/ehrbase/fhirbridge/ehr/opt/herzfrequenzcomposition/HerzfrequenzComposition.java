@@ -21,115 +21,115 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.PulsfrequenzHerzfrequenzObservation;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.RegistereintragKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.HerzfrequenzKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.HerzfrequenzObservation;
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.StatusDefiningCode;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-27T14:20:32.180429+02:00",
+    date = "2021-10-19T12:27:57.202746+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Herzfrequenz")
 public class HerzfrequenzComposition implements CompositionEntity {
   /**
-   * Path: Registereintrag/category
+   * Path: Herzfrequenz/category
    */
   @Path("/category|defining_code")
   private Category categoryDefiningCode;
 
   /**
-   * Path: Registereintrag/context/Erweiterung
+   * Path: Herzfrequenz/context/Erweiterung
    * Description: Ergänzende Angaben zum Registereintrag.
    */
   @Path("/context/other_context[at0001]/items[at0002]")
   private List<Cluster> erweiterung;
 
   /**
-   * Path: Registereintrag/context/Status
+   * Path: Herzfrequenz/context/Status
    * Description: Status der gelieferten Daten für den Registereintrag. Hinweis: Dies ist nicht der Status einzelner Komponenten.
    */
   @Path("/context/other_context[at0001]/items[at0004]/value|defining_code")
   private StatusDefiningCode statusDefiningCode;
 
   /**
-   * Path: Registereintrag/context/Baum/Status/null_flavour
+   * Path: Herzfrequenz/context/Baum/Status/null_flavour
    */
   @Path("/context/other_context[at0001]/items[at0004]/null_flavour|defining_code")
   private NullFlavour statusNullFlavourDefiningCode;
 
   /**
-   * Path: Registereintrag/context/Kategorie
+   * Path: Herzfrequenz/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/context/other_context[at0001]/items[at0005]")
-  private List<RegistereintragKategorieElement> kategorie;
+  private List<HerzfrequenzKategorieElement> kategorie;
 
   /**
-   * Path: Registereintrag/context/start_time
+   * Path: Herzfrequenz/context/start_time
    */
   @Path("/context/start_time|value")
   private TemporalAccessor startTimeValue;
 
   /**
-   * Path: Registereintrag/context/participations
+   * Path: Herzfrequenz/context/participations
    */
   @Path("/context/participations")
   private List<Participation> participations;
 
   /**
-   * Path: Registereintrag/context/end_time
+   * Path: Herzfrequenz/context/end_time
    */
   @Path("/context/end_time|value")
   private TemporalAccessor endTimeValue;
 
   /**
-   * Path: Registereintrag/context/location
+   * Path: Herzfrequenz/context/location
    */
   @Path("/context/location")
   private String location;
 
   /**
-   * Path: Registereintrag/context/health_care_facility
+   * Path: Herzfrequenz/context/health_care_facility
    */
   @Path("/context/health_care_facility")
   private PartyIdentified healthCareFacility;
 
   /**
-   * Path: Registereintrag/context/setting
+   * Path: Herzfrequenz/context/setting
    */
   @Path("/context/setting|defining_code")
   private Setting settingDefiningCode;
 
   /**
-   * Path: Registereintrag/Pulsfrequenz/Herzfrequenz
+   * Path: Herzfrequenz/Herzfrequenz
    * Description: Die Frequenz und zugehörige Attribute für die Puls- oder Herzfrequenz.
    */
-  @Path("/content[openEHR-EHR-OBSERVATION.pulse.v2]")
-  private PulsfrequenzHerzfrequenzObservation pulsfrequenzHerzfrequenz;
+  @Path("/content[openEHR-EHR-OBSERVATION.pulse.v2 and name/value='Herzfrequenz']")
+  private HerzfrequenzObservation herzfrequenz;
 
   /**
-   * Path: Registereintrag/composer
+   * Path: Herzfrequenz/composer
    */
   @Path("/composer")
   private PartyProxy composer;
 
   /**
-   * Path: Registereintrag/language
+   * Path: Herzfrequenz/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: Registereintrag/feeder_audit
+   * Path: Herzfrequenz/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
   /**
-   * Path: Registereintrag/territory
+   * Path: Herzfrequenz/territory
    */
   @Path("/territory")
   private Territory territory;
@@ -169,11 +169,11 @@ public class HerzfrequenzComposition implements CompositionEntity {
      return this.statusNullFlavourDefiningCode ;
   }
 
-  public void setKategorie(List<RegistereintragKategorieElement> kategorie) {
+  public void setKategorie(List<HerzfrequenzKategorieElement> kategorie) {
      this.kategorie = kategorie;
   }
 
-  public List<RegistereintragKategorieElement> getKategorie() {
+  public List<HerzfrequenzKategorieElement> getKategorie() {
      return this.kategorie ;
   }
 
@@ -225,13 +225,12 @@ public class HerzfrequenzComposition implements CompositionEntity {
      return this.settingDefiningCode ;
   }
 
-  public void setPulsfrequenzHerzfrequenz(
-      PulsfrequenzHerzfrequenzObservation pulsfrequenzHerzfrequenz) {
-     this.pulsfrequenzHerzfrequenz = pulsfrequenzHerzfrequenz;
+  public void setHerzfrequenz(HerzfrequenzObservation herzfrequenz) {
+     this.herzfrequenz = herzfrequenz;
   }
 
-  public PulsfrequenzHerzfrequenzObservation getPulsfrequenzHerzfrequenz() {
-     return this.pulsfrequenzHerzfrequenz ;
+  public HerzfrequenzObservation getHerzfrequenz() {
+     return this.herzfrequenz ;
   }
 
   public void setComposer(PartyProxy composer) {

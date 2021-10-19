@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.pulsoxymetriecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import java.lang.String;
@@ -11,25 +11,25 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-08-27T14:20:32.215704+02:00",
+    date = "2021-10-19T12:28:18.366751+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class RegistereintragKategorieElement implements LocatableEntity {
+public class PulsoxymetrieKategorieElement implements LocatableEntity {
   /**
-   * Path: Registereintrag/context/Kategorie
+   * Path: Pulsoxymetrie/context/Kategorie
    * Description: Die Klassifikation des Registereintrags (z.B. Typ der Observation des FHIR-Profils).
    */
   @Path("/value|value")
   private String value;
 
   /**
-   * Path: Registereintrag/context/Baum/Kategorie/null_flavour
+   * Path: Pulsoxymetrie/context/Baum/Kategorie/null_flavour
    */
   @Path("/null_flavour|defining_code")
   private NullFlavour value2;
 
   /**
-   * Path: Registereintrag/context/feeder_audit
+   * Path: Pulsoxymetrie/context/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
