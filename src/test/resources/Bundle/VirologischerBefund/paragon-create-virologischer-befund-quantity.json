@@ -18,7 +18,7 @@
     "originating_system_item_ids": [
       {
         "_type": "DV_IDENTIFIER",
-        "id": "Observation/bcd696ca-507a-483e-a339-74054d04a597/_history/1",
+        "id": "Observation/900ce5fd-ec58-47b0-964c-193772602ffd/_history/1",
         "type": "fhir_logical_id"
       }
     ],
@@ -196,7 +196,7 @@
                       "_type": "CODE_PHRASE",
                       "terminology_id": {
                         "_type": "TERMINOLOGY_ID",
-                        "value": "SNOMED CT"
+                        "value": "http://snomed.info/sct"
                       },
                       "code_string": "122442008"
                     }
@@ -256,7 +256,7 @@
                               "_type": "CODE_PHRASE",
                               "terminology_id": {
                                 "_type": "TERMINOLOGY_ID",
-                                "value": "SNOMED CT"
+                                "value": "http://snomed.info/sct"
                               },
                               "code_string": "955009"
                             }
@@ -296,7 +296,7 @@
                               "_type": "CODE_PHRASE",
                               "terminology_id": {
                                 "_type": "TERMINOLOGY_ID",
-                                "value": "SNOMED Clinical Terms"
+                                "value": "http://snomed.info/sct"
                               },
                               "code_string": "260373001"
                             }
@@ -312,7 +312,7 @@
                           "value": {
                             "_type": "DV_QUANTITY",
                             "units": "umol/L",
-                            "magnitude": 72
+                            "magnitude": 72.0
                           },
                           "archetype_node_id": "at0001"
                         },
@@ -349,7 +349,7 @@
                               "_type": "CODE_PHRASE",
                               "terminology_id": {
                                 "_type": "TERMINOLOGY_ID",
-                                "value": "LOINC"
+                                "value": "http://loinc.org"
                               },
                               "code_string": "94558-4"
                             }

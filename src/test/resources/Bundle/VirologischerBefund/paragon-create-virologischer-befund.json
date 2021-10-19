@@ -18,7 +18,7 @@
     "originating_system_item_ids": [
       {
         "_type": "DV_IDENTIFIER",
-        "id": "Observation/bde27842-77eb-4ba7-bbd3-2318ae7f90e8/_history/1",
+        "id": "Observation/aaac3bf1-668c-434d-9522-affd061ea4b5/_history/1",
         "type": "fhir_logical_id"
       }
     ],
@@ -196,7 +196,7 @@
                       "_type": "CODE_PHRASE",
                       "terminology_id": {
                         "_type": "TERMINOLOGY_ID",
-                        "value": "SNOMED CT"
+                        "value": "http://snomed.info/sct"
                       },
                       "code_string": "122442008"
                     }
@@ -256,7 +256,7 @@
                               "_type": "CODE_PHRASE",
                               "terminology_id": {
                                 "_type": "TERMINOLOGY_ID",
-                                "value": "SNOMED CT"
+                                "value": "http://snomed.info/sct"
                               },
                               "code_string": "955009"
                             }
@@ -296,7 +296,7 @@
                               "_type": "CODE_PHRASE",
                               "terminology_id": {
                                 "_type": "TERMINOLOGY_ID",
-                                "value": "SNOMED Clinical Terms"
+                                "value": "http://snomed.info/sct"
                               },
                               "code_string": "419984006"
                             }
@@ -336,7 +336,7 @@
                               "_type": "CODE_PHRASE",
                               "terminology_id": {
                                 "_type": "TERMINOLOGY_ID",
-                                "value": "LOINC"
+                                "value": "http://loinc.org"
                               },
                               "code_string": "94558-4"
                             }

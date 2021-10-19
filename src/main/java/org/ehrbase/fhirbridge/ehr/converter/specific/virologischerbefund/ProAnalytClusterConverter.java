@@ -1,14 +1,15 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund;
 
+import com.nedap.archie.rm.datatypes.CodePhrase;
+import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytErgebnisStatusElement;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisElement;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytZugehoerigeLaborprobeChoice;
-import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.NachweisDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.VirusnachweistestDefiningCode;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 
-
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
@@ -24,7 +25,7 @@ public class ProAnalytClusterConverter {
         ProAnalytCluster proAnalytCluster = new ProAnalytCluster();
 
         for (Coding loop : observation.getCode().getCoding()){
-            proAnalytCluster.setVirusnachweistestDefiningCode(getVirusCode(loop.getCode()));
+            DvCodedTextParser.parseFHIRCoding(loop).ifPresent(proAnalytCluster::setVirusnachweistest);
         }
 
         mapValue(observation,proAnalytCluster);
@@ -40,12 +41,12 @@ public class ProAnalytClusterConverter {
 
     private void mapValue (Observation observation, ProAnalytCluster proAnalytCluster){
         if (observation.hasValueCodeableConcept()){
-            proAnalytCluster.setNachweisDefiningCode(getNachweisCode(observation.getValueCodeableConcept().getCoding().get(0).getCode()));
+            DvCodedTextParser.parseFHIRCoding(observation.getValueCodeableConcept().getCoding().get(0)).ifPresent(proAnalytCluster::setNachweis);
         } else if (observation.hasValueQuantity()) {
             List<ProAnalytQuantitativesErgebnisElement>  proAnalytQuantitativesErgebnisElementList = new ArrayList<>();
             proAnalytQuantitativesErgebnisElementList.add(new ProAnalytQuantitativesErgebnisElementConverter().convert(observation));
             proAnalytCluster.setQuantitativesErgebnis(proAnalytQuantitativesErgebnisElementList);
-            proAnalytCluster.setNachweisDefiningCode(NachweisDefiningCode.DETECTED_QUALIFIER_VALUE);
+            proAnalytCluster.setNachweis(new DvCodedText("Detected (qualifier value)", new CodePhrase(new TerminologyId("http://snomed.info/sct", ""), "260373001")));
         } else{
             throw new ConversionException("Observation needs either ValueCodeableConcept or ValueQuantity.");
         }
@@ -62,21 +63,4 @@ public class ProAnalytClusterConverter {
             return Optional.empty();
         }
     }
-
-    private VirusnachweistestDefiningCode getVirusCode (String code){
-        if(VirusnachweistestDefiningCode.getCodesAsMap().containsKey(code)){
-            return VirusnachweistestDefiningCode.getCodesAsMap().get(code);
-        } else{
-            throw new ConversionException("Value code for Virusnachweistest is not supported");
-        }
-    }
-
-    private NachweisDefiningCode getNachweisCode (String code){
-        if(NachweisDefiningCode.getCodesAsMap().containsKey(code)){
-            return NachweisDefiningCode.getCodesAsMap().get(code);
-        } else{
-            throw new ConversionException("Value code for Nachweistest is not supported");
-        }
-    }
-
 }

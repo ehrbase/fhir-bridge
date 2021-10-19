@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.lang.Long;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -19,11 +20,11 @@ public class ProAnalytClusterContainment extends Containment {
 
   public SelectAqlField<NullFlavour> ANALYSEERGEBNIS_REIHENFOLGE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProAnalytCluster.class, "/items[at0027]/null_flavour|defining_code", "analyseergebnisReihenfolgeNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<VirusnachweistestDefiningCode> VIRUSNACHWEISTEST_DEFINING_CODE = new AqlFieldImp<VirusnachweistestDefiningCode>(ProAnalytCluster.class, "/items[at0024]/value|defining_code", "virusnachweistestDefiningCode", VirusnachweistestDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> VIRUSNACHWEISTEST = new AqlFieldImp<DvCodedText>(ProAnalytCluster.class, "/items[at0024]/value", "virusnachweistest", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> VIRUSNACHWEISTEST_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProAnalytCluster.class, "/items[at0024]/null_flavour|defining_code", "virusnachweistestNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<NachweisDefiningCode> NACHWEIS_DEFINING_CODE = new AqlFieldImp<NachweisDefiningCode>(ProAnalytCluster.class, "/items[at0001]/value|defining_code", "nachweisDefiningCode", NachweisDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> NACHWEIS = new AqlFieldImp<DvCodedText>(ProAnalytCluster.class, "/items[at0001]/value", "nachweis", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> NACHWEIS_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProAnalytCluster.class, "/items[at0001]/null_flavour|defining_code", "nachweisNullFlavourDefiningCode", NullFlavour.class, this);
 

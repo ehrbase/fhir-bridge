@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum LabortestBezeichnungDefiningCode implements EnumValueSet {
-  DETECTION_OF_VIRUS_PROCEDURE("Detection of virus (procedure)", "", "SNOMED CT", "122442008");
+  DETECTION_OF_VIRUS_PROCEDURE("Detection of virus (procedure)", "", "http://snomed.info/sct", "122442008");
 
   private String value;
 
