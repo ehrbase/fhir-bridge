@@ -4,6 +4,7 @@ import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.service.TerminologyService;
+import org.ehrbase.fhirbridge.service.TerminologyServiceException;
 import org.ehrbase.fhirbridge.support.SpringContext;
 import org.hl7.fhir.r4.model.Coding;
 import org.springframework.beans.factory.ObjectProvider;
@@ -53,8 +54,12 @@ public final class CodingToDvCodedTextConverter implements Converter<Coding, DvC
         if (coding.hasDisplay()) {
             display = coding.getDisplay();
         } else {
-            display = getDisplay(coding.getSystem(), coding.getCode())
-                    .orElseThrow(() -> new ConversionException("Coding must have a display or TerminologyService must not be null"));
+            try {
+                display = getDisplay(coding.getSystem(), coding.getCode())
+                        .orElseThrow(() -> new ConversionException("Coding must have a display or TerminologyService must not be null"));
+            } catch (TerminologyServiceException e) {
+                throw new ConversionException("Cannot convert coding. Reason: " + e.getMessage(), e);
+            }
         }
 
         CodePhrase codePhrase = new CodePhrase(new TerminologyId(coding.getSystem()), coding.getCode());
