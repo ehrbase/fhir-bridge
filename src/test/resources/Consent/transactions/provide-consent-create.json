@@ -26,6 +26,7 @@
       ]
     }
   ],
+  "dateTime": "2020-10-06",
   "patient": {
     "identifier": {
       "system": "urn:ietf:rfc:4122",
