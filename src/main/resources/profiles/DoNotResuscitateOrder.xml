@@ -1,10 +1,11 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="gecco-consent-do-not-resuscitate-order" />
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order" />
-  <version value="1.0" />
+  <version value="1.0.5" />
   <name value="DoNotResuscitateOrder" />
   <title value="Do-Not-Resuscitate Order" />
   <status value="active" />
-  <date value="2020-10-29" />
+  <date value="2021-09-08" />
   <publisher value="Charité" />
   <contact>
     <telecom>
@@ -1781,7 +1782,7 @@
       <short value="When this Consent was created or indexed" />
       <definition value="When this  Consent was issued / created / indexed." />
       <comment value="This is not the time of the original consent, but the time that this statement was made or derived." />
-      <min value="0" />
+      <min value="1" />
       <max value="1" />
       <base>
         <path value="Consent.dateTime" />
@@ -1800,6 +1801,7 @@
         <xpath value="@value|f:*|h:div" />
         <source value="http://hl7.org/fhir/StructureDefinition/Element" />
       </constraint>
+      <mustSupport value="true" />
       <isSummary value="true" />
       <mapping>
         <identity value="rim" />
@@ -4253,6 +4255,11 @@
     </element>
     <element id="Consent.patient">
       <path value="Consent.patient" />
+      <min value="1" />
+      <mustSupport value="true" />
+    </element>
+    <element id="Consent.dateTime">
+      <path value="Consent.dateTime" />
       <min value="1" />
       <mustSupport value="true" />
     </element>

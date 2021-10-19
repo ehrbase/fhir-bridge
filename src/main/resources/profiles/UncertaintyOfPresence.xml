@@ -1,6 +1,7 @@
 <StructureDefinition xmlns="http://hl7.org/fhir">
+  <id value="gecco-extension-condition-uncertainty-of-presence" />
   <url value="https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/uncertainty-of-presence" />
-  <version value="0.9" />
+  <version value="1.0" />
   <name value="UncertaintyOfPresence" />
   <title value="Uncertainty Of Presence" />
   <status value="active" />
@@ -64,6 +65,7 @@
         <source value="http://hl7.org/fhir/StructureDefinition/Element" />
       </constraint>
       <isModifier value="true" />
+      <isModifierReason value="Modifies the meaning of the presence of a condition to being unknown." />
       <mapping>
         <identity value="rim" />
         <map value="n/a" />
@@ -186,6 +188,13 @@
         <valueCode value="4.0.0" />
       </extension>
       <path value="Extension.value[x]" />
+      <slicing>
+        <discriminator>
+          <type value="type" />
+          <path value="$this" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
       <short value="Value of extension" />
       <definition value="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list)." />
       <comment value="A stream of bytes, base64 encoded" />
@@ -217,7 +226,47 @@
         <map value="N/A" />
       </mapping>
     </element>
-    <element id="Extension.value[x].id">
+    <element id="Extension.value[x]:valueCodeableConcept">
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
+        <valueCode value="normative" />
+      </extension>
+      <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version">
+        <valueCode value="4.0.0" />
+      </extension>
+      <path value="Extension.value[x]" />
+      <sliceName value="valueCodeableConcept" />
+      <short value="Value of extension" />
+      <definition value="Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list)." />
+      <comment value="A stream of bytes, base64 encoded" />
+      <min value="0" />
+      <max value="1" />
+      <base>
+        <path value="Extension.value[x]" />
+        <min value="0" />
+        <max value="1" />
+      </base>
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+      <condition value="ele-1" />
+      <constraint>
+        <key value="ele-1" />
+        <severity value="error" />
+        <human value="All FHIR elements must have a @value or children" />
+        <expression value="hasValue() or (children().count() &gt; id.count())" />
+        <xpath value="@value|f:*|h:div" />
+        <source value="http://hl7.org/fhir/StructureDefinition/Element" />
+      </constraint>
+      <mapping>
+        <identity value="rim" />
+        <map value="n/a" />
+      </mapping>
+      <mapping>
+        <identity value="rim" />
+        <map value="N/A" />
+      </mapping>
+    </element>
+    <element id="Extension.value[x]:valueCodeableConcept.id">
       <path value="Extension.value[x].id" />
       <representation value="xmlAttr" />
       <short value="Unique id for inter-element referencing" />
@@ -240,7 +289,7 @@
         <map value="n/a" />
       </mapping>
     </element>
-    <element id="Extension.value[x].extension">
+    <element id="Extension.value[x]:valueCodeableConcept.extension">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -297,7 +346,7 @@
         <map value="N/A" />
       </mapping>
     </element>
-    <element id="Extension.value[x].coding">
+    <element id="Extension.value[x]:valueCodeableConcept.coding">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -358,7 +407,7 @@
         <map value="fhir:CodeableConcept.coding rdfs:subPropertyOf dt:CD.coding" />
       </mapping>
     </element>
-    <element id="Extension.value[x].coding.id">
+    <element id="Extension.value[x]:valueCodeableConcept.coding.id">
       <path value="Extension.value[x].coding.id" />
       <representation value="xmlAttr" />
       <short value="Unique id for inter-element referencing" />
@@ -381,7 +430,7 @@
         <map value="n/a" />
       </mapping>
     </element>
-    <element id="Extension.value[x].coding.extension">
+    <element id="Extension.value[x]:valueCodeableConcept.coding.extension">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -438,7 +487,7 @@
         <map value="N/A" />
       </mapping>
     </element>
-    <element id="Extension.value[x].coding.system">
+    <element id="Extension.value[x]:valueCodeableConcept.coding.system">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -488,7 +537,7 @@
         <map value="fhir:Coding.system rdfs:subPropertyOf dt:CDCoding.codeSystem" />
       </mapping>
     </element>
-    <element id="Extension.value[x].coding.version">
+    <element id="Extension.value[x]:valueCodeableConcept.coding.version">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -536,7 +585,7 @@
         <map value="fhir:Coding.version rdfs:subPropertyOf dt:CDCoding.codeSystemVersion" />
       </mapping>
     </element>
-    <element id="Extension.value[x].coding.code">
+    <element id="Extension.value[x]:valueCodeableConcept.coding.code">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -586,7 +635,7 @@
         <map value="fhir:Coding.code rdfs:subPropertyOf dt:CDCoding.code" />
       </mapping>
     </element>
-    <element id="Extension.value[x].coding.display">
+    <element id="Extension.value[x]:valueCodeableConcept.coding.display">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -638,7 +687,7 @@
         <map value="fhir:Coding.display rdfs:subPropertyOf dt:CDCoding.displayName" />
       </mapping>
     </element>
-    <element id="Extension.value[x].coding.userSelected">
+    <element id="Extension.value[x]:valueCodeableConcept.coding.userSelected">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -687,7 +736,7 @@
         <map value="fhir:Coding.userSelected fhir:mapsTo dt:CDCoding.codingRationale. fhir:Coding.userSelected fhir:hasMap fhir:Coding.userSelected.map. fhir:Coding.userSelected.map a fhir:Map;   fhir:target dt:CDCoding.codingRationale. fhir:Coding.userSelected\#true a [     fhir:source &quot;true&quot;;     fhir:target dt:CDCoding.codingRationale\#O   ]" />
       </mapping>
     </element>
-    <element id="Extension.value[x].text">
+    <element id="Extension.value[x]:valueCodeableConcept.text">
       <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
         <valueCode value="normative" />
       </extension>
@@ -746,6 +795,7 @@
       <short value="Uncertainty of presence" />
       <definition value="Extension used on a condition resource if the presence of the condition is unknown." />
       <isModifier value="true" />
+      <isModifierReason value="Modifies the meaning of the presence of a condition to being unknown." />
     </element>
     <element id="Extension.url">
       <path value="Extension.url" />
@@ -753,22 +803,36 @@
     </element>
     <element id="Extension.value[x]">
       <path value="Extension.value[x]" />
+      <slicing>
+        <discriminator>
+          <type value="type" />
+          <path value="$this" />
+        </discriminator>
+        <rules value="open" />
+      </slicing>
       <min value="1" />
       <type>
         <code value="CodeableConcept" />
       </type>
     </element>
-    <element id="Extension.value[x].coding">
+    <element id="Extension.value[x]:valueCodeableConcept">
+      <path value="Extension.value[x]" />
+      <sliceName value="valueCodeableConcept" />
+      <type>
+        <code value="CodeableConcept" />
+      </type>
+    </element>
+    <element id="Extension.value[x]:valueCodeableConcept.coding">
       <path value="Extension.value[x].coding" />
       <min value="1" />
       <max value="1" />
     </element>
-    <element id="Extension.value[x].coding.system">
+    <element id="Extension.value[x]:valueCodeableConcept.coding.system">
       <path value="Extension.value[x].coding.system" />
       <min value="1" />
       <fixedUri value="http://snomed.info/sct" />
     </element>
-    <element id="Extension.value[x].coding.code">
+    <element id="Extension.value[x]:valueCodeableConcept.coding.code">
       <path value="Extension.value[x].coding.code" />
       <min value="1" />
       <fixedCode value="261665006" />

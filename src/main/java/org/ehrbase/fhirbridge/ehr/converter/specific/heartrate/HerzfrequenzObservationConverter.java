@@ -2,15 +2,15 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.heartrate;
 
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.PulsfrequenzHerzfrequenzObservation;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.HerzfrequenzObservation;
 import org.hl7.fhir.r4.model.Observation;
 import java.util.Optional;
 
-public class PulsfrequenzHerzfrequenzObservationConverter extends ObservationToObservationConverter<PulsfrequenzHerzfrequenzObservation> {
+public class HerzfrequenzObservationConverter extends ObservationToObservationConverter<HerzfrequenzObservation> {
 
     @Override
-    protected PulsfrequenzHerzfrequenzObservation convertInternal(Observation resource) {
-        PulsfrequenzHerzfrequenzObservation herzfrequenzObservation = new PulsfrequenzHerzfrequenzObservation();
+    protected HerzfrequenzObservation convertInternal(Observation resource) {
+        HerzfrequenzObservation herzfrequenzObservation = new HerzfrequenzObservation();
         if(resource.hasDataAbsentReason()){
             herzfrequenzObservation.setFrequenzNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }else{

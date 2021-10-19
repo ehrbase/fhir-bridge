@@ -111,7 +111,6 @@ class ConditionIT extends AbstractMappingTestSetupIT {
         create("create-complications-of-covid-19-infectious-disease-of-lung.json");
         create("create-complications-of-covid-19-myocardial-infarction-present.json");
         create("create-complications-of-covid-19-myocardial-infarction-unknown.json");
-        create("create-complications-of-covid-19-pre-renal-acute-kidney-injury.json");
         create("create-complications-of-covid-19-pulmonary-embolism.json");
         create("create-complications-of-covid-19-venous-thrombosis.json");
     }
