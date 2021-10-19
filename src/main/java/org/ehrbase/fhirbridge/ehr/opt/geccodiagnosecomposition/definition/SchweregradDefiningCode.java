@@ -1,9 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import java.lang.String;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum SchweregradDefiningCode implements EnumValueSet {
@@ -26,14 +23,6 @@ public enum SchweregradDefiningCode implements EnumValueSet {
     this.description = description;
     this.terminologyId = terminologyId;
     this.code = code;
-  }
-
-  public static Map<String, SchweregradDefiningCode> getCodesAsMap(){
-    Map<String, SchweregradDefiningCode> stringSchweregradDefiningCodeHashMap = new HashMap<>();
-    for (SchweregradDefiningCode schweregradDefiningCode : SchweregradDefiningCode.values()) {
-      stringSchweregradDefiningCodeHashMap.put(schweregradDefiningCode.getCode(), schweregradDefiningCode);
-    }
-    return stringSchweregradDefiningCodeHashMap;
   }
 
   public String getValue() {
