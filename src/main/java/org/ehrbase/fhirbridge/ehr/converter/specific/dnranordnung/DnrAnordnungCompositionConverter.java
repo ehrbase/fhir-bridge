@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
+import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConsentToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
@@ -72,8 +73,7 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
         Optional<List<Coding>> codings = provision.getCode().stream()
                 .map(CodeableConcept::getCoding)
                 .findFirst();
-        return DvCodedTextParser.parseFHIRCoding(codings.get().get(0));
+        return Optional.of(CodingToDvCodedTextConverter.getInstance()
+                .convert(codings.get().get(0)));
     }
-
-
 }

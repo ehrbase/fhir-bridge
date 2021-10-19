@@ -2,8 +2,8 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.LabortestPanelCluster;
@@ -15,6 +15,9 @@ import org.hl7.fhir.r4.model.Observation;
 import java.util.Optional;
 
 public class BefundJedesEreignisPointEventConverter extends ObservationToPointEventConverter<BefundJedesEreignisPointEvent> {
+
+    private final CodingToDvCodedTextConverter converter = CodingToDvCodedTextConverter.getInstance();
+
     private final Immunoassay immunoassay;
 
     public BefundJedesEreignisPointEventConverter(Immunoassay immunoassay) {
@@ -32,7 +35,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     private LabortestPanelCluster mapLabortestPanel() {
         LabortestPanelCluster labortestPanelCluster = new LabortestPanelCluster();
         ProAnalytCluster proAnalytCluster = new ProAnalytCluster();
-        DvCodedTextParser.parseFHIRCoding(immunoassay.getObservation().getCode().getCoding().get(0)).ifPresent(proAnalytCluster::setVirusnachweistest);
+        proAnalytCluster.setVirusnachweistest(converter.convert(immunoassay.getObservation().getCode().getCoding().get(0)));
         if (immunoassay.getObservation().hasValue()) {
             mapValue(proAnalytCluster);
         } else {
@@ -73,7 +76,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     private Optional<DvCodedText> convertNachweisDefiningCode() {
         if (immunoassay.getObservation().hasValueCodeableConcept() && immunoassay.getObservation().getValueCodeableConcept().hasCoding() && immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0).hasCode()) {
             Coding coding = immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0);
-            return DvCodedTextParser.parseFHIRCoding(coding);
+            return Optional.of(converter.convert(coding));
         } else {
             return Optional.empty();
         }

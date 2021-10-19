@@ -16,8 +16,8 @@
 
 package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 
+import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ProcedureToCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.GECCOProzedurComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.GeccoProzedurKategorieElement;
 import org.hl7.fhir.r4.model.Coding;
@@ -54,12 +54,12 @@ public class TherapyCompositionConverter extends ProcedureToCompositionConverter
     }
 
     private List<GeccoProzedurKategorieElement> convertCategory(Procedure procedure) {
-        List<GeccoProzedurKategorieElement> kategorieElementList = new ArrayList<>();
+        List<GeccoProzedurKategorieElement> elements = new ArrayList<>();
         for (Coding coding : procedure.getCategory().getCoding()) {
             GeccoProzedurKategorieElement element = new GeccoProzedurKategorieElement();
-            DvCodedTextParser.parseFHIRCoding(coding).ifPresent(element::setValue);
-            kategorieElementList.add(element);
+            element.setValue(CodingToDvCodedTextConverter.getInstance().convert(coding));
+            elements.add(element);
         }
-        return kategorieElementList;
+        return elements;
     }
 }

@@ -1,9 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel;
 
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReiseAngetretenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieAdminEntry;
 import org.ehrbase.fhirbridge.ehr.opt.reisehistoriecomposition.definition.ReisehistorieBestimmtesReisezielCluster;
@@ -17,6 +17,8 @@ import java.util.List;
 import static org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem.LOINC;
 
 public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Observation, ReisehistorieAdminEntry> {
+
+    private final CodingToDvCodedTextConverter converter = CodingToDvCodedTextConverter.getInstance();
 
     @Override
     protected ReisehistorieAdminEntry convertInternal(Observation resource) {
@@ -87,23 +89,23 @@ public class ReisehistorieAdminEntryConverter extends EntryEntityConverter<Obser
     }
 
     private ReisehistorieBestimmtesReisezielCluster convertBundeslandRegion(Observation.ObservationComponentComponent observationComponent) {
-        ReisehistorieBestimmtesReisezielCluster reisehistorieBestimmtesReisezielCluster = new ReisehistorieBestimmtesReisezielCluster();
+        ReisehistorieBestimmtesReisezielCluster cluster = new ReisehistorieBestimmtesReisezielCluster();
         if (observationComponent.hasValueCodeableConcept()) {
-            DvCodedTextParser.parseFHIRCoding(observationComponent.getValueCodeableConcept().getCoding().get(0)).ifPresent(reisehistorieBestimmtesReisezielCluster::setBundeslandRegion);
+            cluster.setBundeslandRegion(converter.convert(observationComponent.getValueCodeableConcept().getCoding().get(0)));
         } else {
-            reisehistorieBestimmtesReisezielCluster.setBundeslandRegionNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+            cluster.setBundeslandRegionNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
-        return reisehistorieBestimmtesReisezielCluster;
+        return cluster;
     }
 
     private ReisehistorieBestimmtesReisezielCluster convertLandCode(Observation.ObservationComponentComponent observationComponent) {
-        ReisehistorieBestimmtesReisezielCluster reisehistorieBestimmtesReisezielCluster = new ReisehistorieBestimmtesReisezielCluster();
+        ReisehistorieBestimmtesReisezielCluster cluster = new ReisehistorieBestimmtesReisezielCluster();
         if (observationComponent.hasValueCodeableConcept()) {
-            DvCodedTextParser.parseFHIRCoding(observationComponent.getValueCodeableConcept().getCoding().get(0)).ifPresent(reisehistorieBestimmtesReisezielCluster::setLand);
+            cluster.setLand(converter.convert(observationComponent.getValueCodeableConcept().getCoding().get(0)));
         } else {
-            reisehistorieBestimmtesReisezielCluster.setLandNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+            cluster.setLandNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
-        return reisehistorieBestimmtesReisezielCluster;
+        return cluster;
     }
 
     private TemporalAccessor getDate(Observation.ObservationComponentComponent observationComponent) {

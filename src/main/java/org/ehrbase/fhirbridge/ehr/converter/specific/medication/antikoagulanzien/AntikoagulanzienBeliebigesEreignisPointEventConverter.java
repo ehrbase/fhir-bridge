@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.medication.antikoagulanzien;
 
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedikationPointEventConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.AntikoagulanzienBeliebigesEreignisPointEvent;
 import org.hl7.fhir.r4.model.Coding;
@@ -10,13 +10,13 @@ public class AntikoagulanzienBeliebigesEreignisPointEventConverter extends Gecco
 
     @Override
     protected AntikoagulanzienBeliebigesEreignisPointEvent convertInternal(MedicationStatement resource) {
-        AntikoagulanzienBeliebigesEreignisPointEvent antikoagulanzienBeliebigesEreignisPointEvent = new AntikoagulanzienBeliebigesEreignisPointEvent();
+        AntikoagulanzienBeliebigesEreignisPointEvent pointEvent = new AntikoagulanzienBeliebigesEreignisPointEvent();
         for (Coding coding : resource.getMedicationCodeableConcept().getCoding()) {
             if (coding.getSystem().equals("http://fhir.de/CodeSystem/bfarm/atc")) {
-                DvCodedTextParser.parseFHIRCoding(coding).ifPresent(antikoagulanzienBeliebigesEreignisPointEvent::setArzneimittelName);
+                pointEvent.setArzneimittelName(CodingToDvCodedTextConverter.getInstance().convert(coding));
             }
         }
-        getGrundDefiningCode(resource).ifPresent(antikoagulanzienBeliebigesEreignisPointEvent::setGrund);
-        return antikoagulanzienBeliebigesEreignisPointEvent;
+        getGrundDefiningCode(resource).ifPresent(pointEvent::setGrund);
+        return pointEvent;
     }
 }

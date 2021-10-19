@@ -2,9 +2,9 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ImmunizationToActionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.CurrentStateDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungAction;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungImpfungGegenElement;
@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImpfungActionConverter extends ImmunizationToActionConverter<ImpfungAction> {
+
+    private final CodingToDvCodedTextConverter converter = CodingToDvCodedTextConverter.getInstance();
 
     private Immunization.ImmunizationProtocolAppliedComponent immunizationProtocolAppliedComponent;
     private Boolean hasImmunizationProtocolApplied = false;
@@ -30,13 +32,13 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
 
     @Override
     protected ImpfungAction convertInternal(Immunization resource) {
-        ImpfungAction impfungAction = new ImpfungAction();
-        DvCodedTextParser.parseFHIRCoding(resource.getVaccineCode().getCoding().get(0)).ifPresent(impfungAction::setImpfstoff);
-        impfungAction.setCurrentStateDefiningCode(mapCurentState(resource));
+        ImpfungAction action = new ImpfungAction();
+        action.setImpfstoff(converter.convert(resource.getVaccineCode().getCoding().get(0)));
+        action.setCurrentStateDefiningCode(mapCurentState(resource));
         if (hasImmunizationProtocolApplied) {
-            mapImpfungGegenAndDosis(impfungAction);
+            mapImpfungGegenAndDosis(action);
         }
-        return impfungAction;
+        return action;
     }
 
     private CurrentStateDefiningCode mapCurentState(Immunization resource) {
@@ -60,9 +62,9 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
     private List<ImpfungImpfungGegenElement> mapImpfungGegen() {
         List<ImpfungImpfungGegenElement> impfungGegenList = new ArrayList<>();
         for (CodeableConcept targetDisease : immunizationProtocolAppliedComponent.getTargetDisease()) {
-            ImpfungImpfungGegenElement impfungGegenElement = new ImpfungImpfungGegenElement();
-            DvCodedTextParser.parseFHIRCoding(targetDisease.getCoding().get(0)).ifPresent(impfungGegenElement::setValue);
-            impfungGegenList.add(impfungGegenElement);
+            ImpfungImpfungGegenElement element = new ImpfungImpfungGegenElement();
+            element.setValue(converter.convert(targetDisease.getCoding().get(0)));
+            impfungGegenList.add(element);
         }
         return impfungGegenList;
     }
@@ -89,10 +91,10 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
     private void convertMenge(VerabreichteDosenCluster verabreichteDosenCluster) {
         if (immunizationProtocolAppliedComponent.hasDoseNumberPositiveIntType()) {
             verabreichteDosenCluster.setDosismengeMagnitude(Double.parseDouble(immunizationProtocolAppliedComponent.getDoseNumberPositiveIntType().toString()));
-        }else if (immunizationProtocolAppliedComponent.hasDoseNumberStringType() &&
+        } else if (immunizationProtocolAppliedComponent.hasDoseNumberStringType() &&
                 immunizationProtocolAppliedComponent.getDoseNumberStringType().hasExtension("http://hl7.org/fhir/StructureDefinition/data-absent-reason")) {
             verabreichteDosenCluster.setDosismengeNullFlavourDefiningCode(NullFlavour.UNKNOWN);
-        }  else if (immunizationProtocolAppliedComponent.hasDoseNumberStringType()) {
+        } else if (immunizationProtocolAppliedComponent.hasDoseNumberStringType()) {
             throw new UnprocessableEntityException("Currently the fhir bridge does not support inprecise values like strings for the dosage amount, please enter an integer.");
         }
     }

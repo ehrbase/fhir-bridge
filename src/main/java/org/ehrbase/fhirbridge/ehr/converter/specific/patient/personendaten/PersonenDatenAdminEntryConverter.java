@@ -1,8 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
 
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AdresseCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AngabenZumTodCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.DatenZurGeburtCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EinzelheitenDerKommunikationCluster;
@@ -48,8 +47,8 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
 
     private void mapAngabenZumTod(Patient resource, PersonendatenAdminEntry personData) {
         AngabenZumTodCluster angabenZumTodCluster = new AngabenZumTodCluster();
-        if(resource.hasDeceased()){
-            if(resource.hasDeceasedBooleanType()){
+        if (resource.hasDeceased()) {
+            if (resource.hasDeceasedBooleanType()) {
                 personData.setVerstorbenValue(true);
             }
             if (resource.hasDeceasedDateTimeType()) {
@@ -70,10 +69,10 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
 
     private Optional<List<EthnischerHintergrundCluster>> convertEthnischerHintergrund(Patient patient) {
         List<EthnischerHintergrundCluster> ethnischerHintergrundClusterList = new ArrayList<>();
-        Coding codig = (Coding) patient.getExtensionByUrl(ethnischerHintergrundExtensionUrl).getValue();
-        EthnischerHintergrundCluster ethnischerHintergrundCluster = new EthnischerHintergrundCluster();
-        DvCodedTextParser.parseFHIRCoding(codig).ifPresent(ethnischerHintergrundCluster::setEthnischerHintergrund);
-        ethnischerHintergrundClusterList.add(ethnischerHintergrundCluster);
+        Coding coding = (Coding) patient.getExtensionByUrl(ethnischerHintergrundExtensionUrl).getValue();
+        EthnischerHintergrundCluster cluster = new EthnischerHintergrundCluster();
+        cluster.setEthnischerHintergrund(CodingToDvCodedTextConverter.getInstance().convert(coding));
+        ethnischerHintergrundClusterList.add(cluster);
         return Optional.of(ethnischerHintergrundClusterList);
     }
 
@@ -89,13 +88,13 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
     }
 
     private Optional<String> mapMehrereGeburten(Patient fhirPatient) {
-        if(fhirPatient.hasMultipleBirth()){
-            if(fhirPatient.hasMultipleBirthBooleanType()){
+        if (fhirPatient.hasMultipleBirth()) {
+            if (fhirPatient.hasMultipleBirthBooleanType()) {
                 return Optional.of(fhirPatient.getMultipleBirthBooleanType().getValue().toString());
-            }else{
+            } else {
                 return Optional.of(fhirPatient.getMultipleBirthIntegerType().getValue().toString());
             }
-        }else{
+        } else {
             return Optional.empty();
         }
     }

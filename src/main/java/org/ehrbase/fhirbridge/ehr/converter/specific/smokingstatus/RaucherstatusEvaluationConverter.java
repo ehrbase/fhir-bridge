@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus;
 
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.raucherstatuscomposition.definition.RaucherstatusEvaluation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
@@ -13,7 +13,7 @@ public class RaucherstatusEvaluationConverter extends EntryEntityConverter<Obser
         RaucherstatusEvaluation evaluation = new RaucherstatusEvaluation();
         if (resource.hasValueCodeableConcept() && resource.getValueCodeableConcept().hasCoding()) {
             for (Coding coding : resource.getValueCodeableConcept().getCoding()) {
-                DvCodedTextParser.parseFHIRCoding(coding).ifPresent(evaluation::setRauchverhalten);
+                evaluation.setRauchverhalten(CodingToDvCodedTextConverter.getInstance().convert(coding));
             }
             return evaluation;
         } else {

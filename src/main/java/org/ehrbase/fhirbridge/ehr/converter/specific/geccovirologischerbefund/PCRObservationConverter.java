@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund;
 
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.BefundObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.LabortestPanelCluster;
@@ -25,9 +25,11 @@ public class PCRObservationConverter extends ObservationToObservationConverter<B
         LabortestPanelCluster labortestPanel = new LabortestPanelCluster();
         ProAnalytCluster analyt = new ProAnalytCluster();
         analyt.setVirusnachweistestDefiningCode(VirusnachweistestDefiningCode.SARS_COV2_COVID19_RNA_PRESENCE_IN_RESPIRATORY_SPECIMEN_BY_NAA_WITH_PROBE_DETECTION);
-        if(observation.hasValueCodeableConcept()){
-            DvCodedTextParser.parseFHIRCoding(observation.getValueCodeableConcept().getCoding().get(0)).ifPresent(analyt::setNachweis);
-        }else{
+        if (observation.hasValueCodeableConcept()) {
+            analyt.setNachweis(
+                    CodingToDvCodedTextConverter.getInstance()
+                            .convert(observation.getValueCodeableConcept().getCoding().get(0)));
+        } else {
             analyt.setNachweisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
         analyt.setErgebnisStatusValue(observation.getStatus().toCode());
