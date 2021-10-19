@@ -17,14 +17,14 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.hl7.fhir.r4.model.Procedure;
 
 import java.util.Optional;
 
 public interface TherapyConverter {
 
-    default Optional<DvCodedText> convertCode(Procedure condition) {
-        return Optional.of(CodingToDvCodedTextConverter.getInstance().convert(condition.getCode().getCodingFirstRep()));
+    default Optional<DvCodedText> convertCode(Procedure procedure) {
+        return DvCodedTextParser.getInstance().parseFHIRCoding(procedure.getCode().getCodingFirstRep());
     }
 }

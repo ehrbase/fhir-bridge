@@ -21,7 +21,7 @@ public class DvCodedTextParser {
     }
 
     /**
-     * @deprecated Use {@link org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter#convert(Coding)}
+     * @deprecated Use {@link org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser#parseFHIRCoding(Coding)}
      */
     @Deprecated(since = "1.4", forRemoval = true)
     public static Optional<DvCodedText> parseFHIRCodingOld(Coding coding) {
@@ -35,7 +35,7 @@ public class DvCodedTextParser {
     }
 
     /**
-     * @deprecated Use {@link org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter#convert(Coding)}
+     * @deprecated Use {@link org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser#parseFHIRCoding(Coding)}
      */
     @Deprecated(since = "1.4", forRemoval = true)
     public static Optional<DvCodedText> parseFHIRCoding(Coding coding) {

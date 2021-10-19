@@ -17,7 +17,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.therapy;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ProcedureToProcedureActionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.CurrentStateDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition.MedizingeraetCluster;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 public class ProzedurActionConverter extends ProcedureToProcedureActionConverter<ProzedurAction>
         implements TherapyConverter {
 
-    private final CodingToDvCodedTextConverter converter = CodingToDvCodedTextConverter.getInstance();
+    private final DvCodedTextParser dvCodedTextParser = DvCodedTextParser.getInstance();
 
     @Override
     protected ProzedurAction convertInternal(Procedure procedure) {
@@ -63,13 +63,14 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
         return koerperstelleElementList;
     }
 
-    private void convertBodySiteCoding(CodeableConcept codeableConcept, List<ProzedurKoerperstelleElement> koerperstelleElementList) {
-        if (codeableConcept.hasCoding()) {
-            for (Coding coding : codeableConcept.getCoding()) {
+    private void convertBodySiteCoding(CodeableConcept concept, List<ProzedurKoerperstelleElement> prozedurKoerperstelleElements) {
+        if (concept.hasCoding()) {
+            for (Coding coding : concept.getCoding()) {
                 if (coding.hasCode()) {
-                    ProzedurKoerperstelleElement element = new ProzedurKoerperstelleElement();
-                    element.setValue(converter.convert(coding));
-                    koerperstelleElementList.add(element);
+                    ProzedurKoerperstelleElement prozedurKoerperstelleElement = new ProzedurKoerperstelleElement();
+                    dvCodedTextParser.parseFHIRCoding(coding)
+                            .ifPresent(prozedurKoerperstelleElement::setValue);
+                    prozedurKoerperstelleElements.add(prozedurKoerperstelleElement);
                 }
             }
         }
@@ -79,20 +80,18 @@ public class ProzedurActionConverter extends ProcedureToProcedureActionConverter
         List<MedizingeraetCluster> medizingeraetClusters = new ArrayList<>();
         for (CodeableConcept codeableConcept : procedure.getUsedCode()) {
             for (Coding coding : codeableConcept.getCoding()) {
-                MedizingeraetCluster cluster = new MedizingeraetCluster();
-                cluster.setGeraetename(converter.convert(coding));
-                medizingeraetClusters.add(cluster);
+                MedizingeraetCluster medizingeraetCluster = new MedizingeraetCluster();
+                dvCodedTextParser.parseFHIRCoding(coding)
+                        .ifPresent(medizingeraetCluster::setGeraetename);
+                medizingeraetClusters.add(medizingeraetCluster);
             }
 
         }
         return medizingeraetClusters;
     }
 
-    private Optional<DvCodedText> convertCategory(Procedure condition) {
-        if (!condition.hasCategory()) {
-            return Optional.empty();
-        }
-        return Optional.of(converter.convert(condition.getCategory().getCodingFirstRep()));
+    private Optional<DvCodedText> convertCategory(Procedure procedure) {
+        return dvCodedTextParser.parseFHIRCoding(procedure.getCategory().getCodingFirstRep());
     }
 
     private Optional<String> convertExtension(Procedure procedure) {

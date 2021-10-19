@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
 
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AngabenZumTodCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.DatenZurGeburtCluster;
@@ -70,9 +70,10 @@ public class PersonenDatenAdminEntryConverter extends EntryEntityConverter<Patie
     private Optional<List<EthnischerHintergrundCluster>> convertEthnischerHintergrund(Patient patient) {
         List<EthnischerHintergrundCluster> ethnischerHintergrundClusterList = new ArrayList<>();
         Coding coding = (Coding) patient.getExtensionByUrl(ethnischerHintergrundExtensionUrl).getValue();
-        EthnischerHintergrundCluster cluster = new EthnischerHintergrundCluster();
-        cluster.setEthnischerHintergrund(CodingToDvCodedTextConverter.getInstance().convert(coding));
-        ethnischerHintergrundClusterList.add(cluster);
+        EthnischerHintergrundCluster ethnischerHintergrundCluster = new EthnischerHintergrundCluster();
+        DvCodedTextParser.getInstance().parseFHIRCoding(coding)
+                .ifPresent(ethnischerHintergrundCluster::setEthnischerHintergrund);
+        ethnischerHintergrundClusterList.add(ethnischerHintergrundCluster);
         return Optional.of(ethnischerHintergrundClusterList);
     }
 

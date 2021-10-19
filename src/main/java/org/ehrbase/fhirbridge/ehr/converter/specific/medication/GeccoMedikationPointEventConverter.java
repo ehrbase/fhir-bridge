@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.medication;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.classgenerator.interfaces.PointEventEntity;
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToPointEventConverter;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.springframework.lang.NonNull;
@@ -16,9 +16,11 @@ public abstract class GeccoMedikationPointEventConverter<PEE extends PointEventE
         return super.convert(resource);
     }
 
-    protected Optional<DvCodedText> getGrundDefiningCode(MedicationStatement resource) {
-        if (resource.hasReasonCode() && resource.getReasonCode().size() > 0 && resource.getReasonCode().get(0).hasCoding()) {
-            return Optional.of(CodingToDvCodedTextConverter.getInstance().convert(resource.getReasonCode().get(0).getCoding().get(0)));
+    protected Optional<DvCodedText> getGrundDefiningCode(MedicationStatement medicationStatement) {
+        if (medicationStatement.hasReasonCode() &&
+                !medicationStatement.getReasonCode().isEmpty() &&
+                medicationStatement.getReasonCode().get(0).hasCoding()) {
+            return DvCodedTextParser.getInstance().parseFHIRCoding(medicationStatement.getReasonCode().get(0).getCoding().get(0));
         }
         return Optional.empty();
     }

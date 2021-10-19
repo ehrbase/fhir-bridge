@@ -2,8 +2,8 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ImmunizationToActionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.CurrentStateDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungAction;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ImpfungActionConverter extends ImmunizationToActionConverter<ImpfungAction> {
 
-    private final CodingToDvCodedTextConverter converter = CodingToDvCodedTextConverter.getInstance();
+    private final DvCodedTextParser dvCodedTextParser = DvCodedTextParser.getInstance();
 
     private Immunization.ImmunizationProtocolAppliedComponent immunizationProtocolAppliedComponent;
     private Boolean hasImmunizationProtocolApplied = false;
@@ -31,14 +31,15 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
     }
 
     @Override
-    protected ImpfungAction convertInternal(Immunization resource) {
-        ImpfungAction action = new ImpfungAction();
-        action.setImpfstoff(converter.convert(resource.getVaccineCode().getCoding().get(0)));
-        action.setCurrentStateDefiningCode(mapCurentState(resource));
+    protected ImpfungAction convertInternal(Immunization immunization) {
+        ImpfungAction impfungAction = new ImpfungAction();
+        dvCodedTextParser.parseFHIRCoding(immunization.getVaccineCode().getCoding().get(0))
+                .ifPresent(impfungAction::setImpfstoff);
+        impfungAction.setCurrentStateDefiningCode(mapCurentState(immunization));
         if (hasImmunizationProtocolApplied) {
-            mapImpfungGegenAndDosis(action);
+            mapImpfungGegenAndDosis(impfungAction);
         }
-        return action;
+        return impfungAction;
     }
 
     private CurrentStateDefiningCode mapCurentState(Immunization resource) {
@@ -60,13 +61,14 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
     }
 
     private List<ImpfungImpfungGegenElement> mapImpfungGegen() {
-        List<ImpfungImpfungGegenElement> impfungGegenList = new ArrayList<>();
+        List<ImpfungImpfungGegenElement> impfungImpfungGegenElements = new ArrayList<>();
         for (CodeableConcept targetDisease : immunizationProtocolAppliedComponent.getTargetDisease()) {
-            ImpfungImpfungGegenElement element = new ImpfungImpfungGegenElement();
-            element.setValue(converter.convert(targetDisease.getCoding().get(0)));
-            impfungGegenList.add(element);
+            ImpfungImpfungGegenElement impfungImpfungGegenElement = new ImpfungImpfungGegenElement();
+            dvCodedTextParser.parseFHIRCoding(targetDisease.getCoding().get(0))
+                    .ifPresent(impfungImpfungGegenElement::setValue);
+            impfungImpfungGegenElements.add(impfungImpfungGegenElement);
         }
-        return impfungGegenList;
+        return impfungImpfungGegenElements;
     }
 
     private VerabreichteDosenCluster convertVerabreichteDosis() {

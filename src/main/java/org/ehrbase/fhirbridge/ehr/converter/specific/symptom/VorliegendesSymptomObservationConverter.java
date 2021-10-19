@@ -17,7 +17,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
@@ -67,7 +67,7 @@ public class VorliegendesSymptomObservationConverter extends ConditionToObservat
         }
         for (Coding coding : condition.getSeverity().getCoding()) {
             if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-                return Optional.of(CodingToDvCodedTextConverter.getInstance().convert(coding));
+                return DvCodedTextParser.getInstance().parseFHIRCoding(coding);
             }
         }
         return Optional.empty();

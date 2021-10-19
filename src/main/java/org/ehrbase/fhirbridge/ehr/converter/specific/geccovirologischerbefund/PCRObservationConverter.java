@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund;
 
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.BefundObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
@@ -14,26 +14,26 @@ import org.hl7.fhir.r4.model.Observation;
 public class PCRObservationConverter extends ObservationToObservationConverter<BefundObservation> {
 
     @Override
-    protected BefundObservation convertInternal(Observation resource) {
+    protected BefundObservation convertInternal(Observation observation) {
         BefundObservation befundObservation = new BefundObservation();
         befundObservation.setLabortestBezeichnungDefiningCode(LabortestBezeichnungDefiningCode.DETECTION_OF_VIRUS_PROCEDURE);
-        befundObservation.setLabortestPanel(createLabortestPanel(resource));
+        befundObservation.setLabortestPanel(createLabortestPanel(observation));
         return befundObservation;
     }
 
     private LabortestPanelCluster createLabortestPanel(Observation observation) {
-        LabortestPanelCluster labortestPanel = new LabortestPanelCluster();
-        ProAnalytCluster analyt = new ProAnalytCluster();
-        analyt.setVirusnachweistestDefiningCode(VirusnachweistestDefiningCode.SARS_COV2_COVID19_RNA_PRESENCE_IN_RESPIRATORY_SPECIMEN_BY_NAA_WITH_PROBE_DETECTION);
+        LabortestPanelCluster labortestPanelCluster = new LabortestPanelCluster();
+        ProAnalytCluster proAnalytCluster = new ProAnalytCluster();
+        proAnalytCluster.setVirusnachweistestDefiningCode(VirusnachweistestDefiningCode.SARS_COV2_COVID19_RNA_PRESENCE_IN_RESPIRATORY_SPECIMEN_BY_NAA_WITH_PROBE_DETECTION);
         if (observation.hasValueCodeableConcept()) {
-            analyt.setNachweis(
-                    CodingToDvCodedTextConverter.getInstance()
-                            .convert(observation.getValueCodeableConcept().getCoding().get(0)));
+            DvCodedTextParser.getInstance()
+                    .parseFHIRCoding(observation.getValueCodeableConcept().getCoding().get(0))
+                    .ifPresent(proAnalytCluster::setNachweis);
         } else {
-            analyt.setNachweisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+            proAnalytCluster.setNachweisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
-        analyt.setErgebnisStatusValue(observation.getStatus().toCode());
-        labortestPanel.setProAnalyt(analyt);
-        return labortestPanel;
+        proAnalytCluster.setErgebnisStatusValue(observation.getStatus().toCode());
+        labortestPanelCluster.setProAnalyt(proAnalytCluster);
+        return labortestPanelCluster;
     }
 }

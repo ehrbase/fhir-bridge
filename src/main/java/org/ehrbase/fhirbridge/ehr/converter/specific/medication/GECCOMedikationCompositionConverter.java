@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.medication;
 
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.acehemmer.AceHemmerObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.antikoagulanzien.AntikoagulanzienObservationConverter;
@@ -18,13 +18,15 @@ public class GECCOMedikationCompositionConverter extends MedicationStatementToCo
     private static final String PHARMACOLOGICAL_IMMUNOGLOBULINS = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-immunoglobulins";
 
     @Override
-    protected GECCOMedikationComposition convertInternal(MedicationStatement resource) {
-        GECCOMedikationComposition composition = new GECCOMedikationComposition();
-        setObservation(resource, composition);
-        if (resource.hasCategory()) {
-            composition.setKategorie(CodingToDvCodedTextConverter.getInstance().convert(resource.getCategory().getCoding().get(0)));
+    protected GECCOMedikationComposition convertInternal(MedicationStatement medicationStatement) {
+        GECCOMedikationComposition geccoMedikationComposition = new GECCOMedikationComposition();
+        setObservation(medicationStatement, geccoMedikationComposition);
+        if (medicationStatement.hasCategory()) {
+            DvCodedTextParser.getInstance()
+                    .parseFHIRCoding(medicationStatement.getCategory().getCoding().get(0))
+                    .ifPresent(geccoMedikationComposition::setKategorie);
         }
-        return composition;
+        return geccoMedikationComposition;
     }
 
     private void setObservation(MedicationStatement resource, GECCOMedikationComposition geccoMedikationComposition) {

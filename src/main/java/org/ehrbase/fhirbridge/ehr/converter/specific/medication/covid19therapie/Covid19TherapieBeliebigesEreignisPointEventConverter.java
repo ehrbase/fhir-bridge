@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.medication.covid19therapie;
 
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GeccoMedikationPointEventConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.Covid19TherapieBeliebigesEreignisPointEvent;
 import org.hl7.fhir.r4.model.Coding;
@@ -10,13 +10,15 @@ public class Covid19TherapieBeliebigesEreignisPointEventConverter extends GeccoM
 
     @Override
     protected Covid19TherapieBeliebigesEreignisPointEvent convertInternal(MedicationStatement resource) {
-        Covid19TherapieBeliebigesEreignisPointEvent pointEvent = new Covid19TherapieBeliebigesEreignisPointEvent();
+        Covid19TherapieBeliebigesEreignisPointEvent covid19TherapieBeliebigesEreignisPointEvent = new Covid19TherapieBeliebigesEreignisPointEvent();
         for (Coding coding : resource.getMedicationCodeableConcept().getCoding()) {
             if (coding.getSystem().equals("http://fhir.de/CodeSystem/bfarm/atc")) {
-                pointEvent.setArzneimittelName(CodingToDvCodedTextConverter.getInstance().convert(coding));
+                DvCodedTextParser.getInstance()
+                        .parseFHIRCoding(coding)
+                        .ifPresent(covid19TherapieBeliebigesEreignisPointEvent::setArzneimittelName);
             }
         }
-        getGrundDefiningCode(resource).ifPresent(pointEvent::setGrund);
-        return pointEvent;
+        getGrundDefiningCode(resource).ifPresent(covid19TherapieBeliebigesEreignisPointEvent::setGrund);
+        return covid19TherapieBeliebigesEreignisPointEvent;
     }
 }

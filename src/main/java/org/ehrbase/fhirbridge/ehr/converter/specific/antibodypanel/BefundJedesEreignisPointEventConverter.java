@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class BefundJedesEreignisPointEventConverter extends ObservationToPointEventConverter<BefundJedesEreignisPointEvent> {
 
-    private final CodingToDvCodedTextConverter converter = CodingToDvCodedTextConverter.getInstance();
+    private final DvCodedTextParser dvCodedTextParser = DvCodedTextParser.getInstance();
 
     private final Immunoassay immunoassay;
 
@@ -25,7 +25,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     }
 
     @Override
-    protected BefundJedesEreignisPointEvent convertInternal(Observation resource) {
+    protected BefundJedesEreignisPointEvent convertInternal(Observation observation) {
         BefundJedesEreignisPointEvent befundJedesEreignisPointEvent = new BefundJedesEreignisPointEvent();
         befundJedesEreignisPointEvent.setLabortestBezeichnungDefiningCode(LabortestBezeichnungDefiningCode.SEROLOGIC_TEST_PROCEDURE);
         befundJedesEreignisPointEvent.setLabortestPanel(mapLabortestPanel());
@@ -35,7 +35,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     private LabortestPanelCluster mapLabortestPanel() {
         LabortestPanelCluster labortestPanelCluster = new LabortestPanelCluster();
         ProAnalytCluster proAnalytCluster = new ProAnalytCluster();
-        proAnalytCluster.setVirusnachweistest(converter.convert(immunoassay.getObservation().getCode().getCoding().get(0)));
+        dvCodedTextParser.parseFHIRCoding(immunoassay.getObservation().getCode().getCoding().get(0)).ifPresent(proAnalytCluster::setVirusnachweistest);
         if (immunoassay.getObservation().hasValue()) {
             mapValue(proAnalytCluster);
         } else {
@@ -76,7 +76,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     private Optional<DvCodedText> convertNachweisDefiningCode() {
         if (immunoassay.getObservation().hasValueCodeableConcept() && immunoassay.getObservation().getValueCodeableConcept().hasCoding() && immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0).hasCode()) {
             Coding coding = immunoassay.getObservation().getValueCodeableConcept().getCoding().get(0);
-            return Optional.of(converter.convert(coding));
+            return dvCodedTextParser.parseFHIRCoding(coding);
         } else {
             return Optional.empty();
         }

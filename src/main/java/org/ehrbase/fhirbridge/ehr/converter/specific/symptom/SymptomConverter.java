@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.hl7.fhir.r4.model.Condition;
 
@@ -15,6 +15,6 @@ public interface SymptomConverter {
                 .stream()
                 .filter(coding -> coding.getSystem().equals(CodeSystem.SNOMED.getUrl()))
                 .findFirst()
-                .map(CodingToDvCodedTextConverter.getInstance()::convert);
+                .flatMap(DvCodedTextParser.getInstance()::parseFHIRCoding);
     }
 }

@@ -3,10 +3,9 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConsentToCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.DNRAnordnungComposition;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.dnranordnungcomposition.definition.DnrAnordnungKategorieElement;
@@ -64,7 +63,7 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
         DnrAnordnungEvaluation dnrAnordnung = new DnrAnordnungEvaluation();
         dnrAnordnung.setLanguage(Language.DE);
         dnrAnordnung.setSubject(new PartySelf());
-        dnrAnordnung.setArtDerRichtlinie(DvCodedTextParser.parseDefiningCode(KategorieDefiningCode.DO_NOT_RESUSCITATE));
+        dnrAnordnung.setArtDerRichtlinie(org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser.parseDefiningCode(KategorieDefiningCode.DO_NOT_RESUSCITATE));
         getCoding(resource.getProvision()).ifPresent(dnrAnordnung::setBeschreibung);
         return dnrAnordnung;
     }
@@ -73,7 +72,6 @@ public class DnrAnordnungCompositionConverter extends ConsentToCompositionConver
         Optional<List<Coding>> codings = provision.getCode().stream()
                 .map(CodeableConcept::getCoding)
                 .findFirst();
-        return Optional.of(CodingToDvCodedTextConverter.getInstance()
-                .convert(codings.get().get(0)));
+        return DvCodedTextParser.getInstance().parseFHIRCoding(codings.get().get(0));
     }
 }

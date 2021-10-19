@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure;
 
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToEvaluationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.sarscov2expositioncomposition.definition.SarsCov2ExpositionEvaluation;
@@ -39,9 +39,11 @@ public class SarsCov2ExpositionEvaluationConverter extends ObservationToEvaluati
         }
     }
 
-    private void mapExpositionPresent(SarsCov2ExpositionEvaluation evaluation, Observation observation) {
+    private void mapExpositionPresent(SarsCov2ExpositionEvaluation sarsCov2ExpositionEvaluation, Observation observation) {
         for (Coding coding : observation.getValueCodeableConcept().getCoding()) {
-            evaluation.setExpositionVorhanden(CodingToDvCodedTextConverter.getInstance().convert(coding));
+            DvCodedTextParser.getInstance()
+                    .parseFHIRCoding(coding)
+                    .ifPresent(sarsCov2ExpositionEvaluation::setExpositionVorhanden);
         }
     }
 }

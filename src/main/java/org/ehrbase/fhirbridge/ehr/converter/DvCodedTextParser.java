@@ -11,39 +11,38 @@ import org.springframework.beans.factory.ObjectProvider;
 
 import java.util.Optional;
 
-public final class CodingToDvCodedTextConverter implements Converter<Coding, DvCodedText> {
+public final class DvCodedTextParser {
 
-    private static CodingToDvCodedTextConverter instance;
+    private static DvCodedTextParser instance;
 
     private final TerminologyService terminologyService;
 
-    private CodingToDvCodedTextConverter(TerminologyService terminologyService) {
+    private DvCodedTextParser(TerminologyService terminologyService) {
         this.terminologyService = terminologyService;
     }
 
-    public static CodingToDvCodedTextConverter getInstance() {
+    public static DvCodedTextParser getInstance() {
         if (instance == null) {
             TerminologyService terminologyService = null;
             if (SpringContext.exists()) {
                 ObjectProvider<TerminologyService> provider = SpringContext.getBeanProvider(TerminologyService.class);
                 terminologyService = provider.getIfAvailable();
             }
-            instance = new CodingToDvCodedTextConverter(terminologyService);
+            instance = new DvCodedTextParser(terminologyService);
         }
         return instance;
     }
 
-    public static CodingToDvCodedTextConverter getInstance(TerminologyService terminologyService) {
+    public static DvCodedTextParser getInstance(TerminologyService terminologyService) {
         if (instance == null) {
-            instance = new CodingToDvCodedTextConverter(terminologyService);
+            instance = new DvCodedTextParser(terminologyService);
         }
         return instance;
     }
 
-    @Override
-    public DvCodedText convert(Coding coding) {
+    public Optional<DvCodedText> parseFHIRCoding(Coding coding) {
         if (coding == null) {
-            return null;
+            return Optional.empty();
         }
 
         if (!coding.hasSystem() || !coding.hasCode()) {
@@ -63,7 +62,7 @@ public final class CodingToDvCodedTextConverter implements Converter<Coding, DvC
         }
 
         CodePhrase codePhrase = new CodePhrase(new TerminologyId(coding.getSystem()), coding.getCode());
-        return new DvCodedText(display, codePhrase);
+        return Optional.of(new DvCodedText(display, codePhrase));
     }
 
     private Optional<String> getDisplay(String system, String code) {

@@ -1,6 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation;
 
-import org.ehrbase.fhirbridge.ehr.converter.CodingToDvCodedTextConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToEvaluationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccostudienteilnahmecomposition.definition.GeccoStudienteilnahmeEvaluation;
@@ -16,15 +16,15 @@ import java.util.List;
 public class ClinicalTrialParticipationEvaluationConverter extends ObservationToEvaluationConverter<GeccoStudienteilnahmeEvaluation> {
 
     @Override
-    protected GeccoStudienteilnahmeEvaluation convertInternal(Observation resource) {
-        GeccoStudienteilnahmeEvaluation evaluation = new GeccoStudienteilnahmeEvaluation();
-        evaluation.setBereitsAnInterventionellenKlinischenStudienTeilgenommen(
-                CodingToDvCodedTextConverter.getInstance()
-                        .convert(resource.getValueCodeableConcept().getCoding().get(0)));
-        if (evaluation.getBereitsAnInterventionellenKlinischenStudienTeilgenommen().getDefiningCode().getCodeString().equals("373066001")) {
-            evaluation.setStudienteilnahme(createStudyCluster(resource));
+    protected GeccoStudienteilnahmeEvaluation convertInternal(Observation observation) {
+        GeccoStudienteilnahmeEvaluation geccoStudienteilnahmeEvaluation = new GeccoStudienteilnahmeEvaluation();
+                DvCodedTextParser.getInstance()
+                        .parseFHIRCoding(observation.getValueCodeableConcept().getCoding().get(0))
+                        .ifPresent(geccoStudienteilnahmeEvaluation::setBereitsAnInterventionellenKlinischenStudienTeilgenommen);
+        if (geccoStudienteilnahmeEvaluation.getBereitsAnInterventionellenKlinischenStudienTeilgenommen().getDefiningCode().getCodeString().equals("373066001")) {
+            geccoStudienteilnahmeEvaluation.setStudienteilnahme(createStudyCluster(observation));
         }
-        return evaluation;
+        return geccoStudienteilnahmeEvaluation;
     }
 
 
