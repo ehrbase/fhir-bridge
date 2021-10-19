@@ -19,8 +19,11 @@
     <other_details id="original_namespace"/>
     <other_details id="original_publisher"/>
     <other_details id="custodian_namespace"/>
-    <other_details id="MD5-CAM-1.0.1">cc5c9f49e12264392c1c8e747b5303eb</other_details>
-    <other_details id="PARENT:MD5-CAM-1.0.1">137DCA7D21FA274494054E1B81B67FC5</other_details>
+    <other_details id="MD5-CAM-1.0.1">312a60b084ac6e1e1e25b16c094a0dcd</other_details>
+    <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
+    <other_details id="original_language">ISO_639-1::de</other_details>
+    <other_details id="sem_ver">3.0.0</other_details>
+    <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
       <language>
@@ -191,7 +194,7 @@
                   <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
                   <upper_unbounded>false</upper_unbounded>
-                  <lower>0</lower>
+                  <lower>1</lower>
                   <upper>1</upper>
                 </occurrences>
                 <node_id>at0004</node_id>
@@ -253,11 +256,9 @@
                 <rm_type_name>ELEMENT</rm_type_name>
                 <occurrences>
                   <lower_included>true</lower_included>
-                  <upper_included>true</upper_included>
                   <lower_unbounded>false</lower_unbounded>
-                  <upper_unbounded>false</upper_unbounded>
-                  <lower>0</lower>
-                  <upper>1</upper>
+                  <upper_unbounded>true</upper_unbounded>
+                  <lower>1</lower>
                 </occurrences>
                 <node_id>at0005</node_id>
                 <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -496,7 +497,7 @@
                                 </occurrences>
                                 <node_id/>
                                 <terminology_id>
-                                  <value>LOINC</value>
+                                  <value>http://loinc.org</value>
                                 </terminology_id>
                                 <code_list>24338-6</code_list>
                                 <code_list>24336-0</code_list>
@@ -528,7 +529,7 @@
                             <right_operand xsi:type="EXPR_LEAF">
                               <type>C_STRING</type>
                               <item xsi:type="C_STRING">
-                                <pattern>openEHR-EHR-CLUSTER\.specimen(-[a-zA-Z0-9_]+)*\.v0|openEHR-EHR-CLUSTER\.specimen(-[a-zA-Z0-9_]+)*\.v1</pattern>
+                                <pattern>openEHR-EHR-CLUSTER\.specimen(-[a-zA-Z0-9_]+)*\.v1</pattern>
                               </item>
                               <reference_type>constraint</reference_type>
                             </right_operand>
@@ -598,7 +599,7 @@
                                     <lower>1</lower>
                                     <upper>1</upper>
                                   </existence>
-                                  <children xsi:type="C_CODE_PHRASE">
+                                  <children xsi:type="C_CODE_REFERENCE">
                                     <rm_type_name>CODE_PHRASE</rm_type_name>
                                     <occurrences>
                                       <lower_included>true</lower_included>
@@ -609,12 +610,7 @@
                                       <upper>1</upper>
                                     </occurrences>
                                     <node_id/>
-                                    <terminology_id>
-                                      <value>LOINC</value>
-                                    </terminology_id>
-                                    <code_list>2019-8</code_list>
-                                    <code_list>11557-6</code_list>
-                                    <code_list>2020-6</code_list>
+                                    <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/blood-gas-analysis-pco2</referenceSetUri>
                                   </children>
                                 </attributes>
                               </children>
@@ -696,6 +692,16 @@
                               <upper_unbounded>false</upper_unbounded>
                               <lower>0</lower>
                               <upper>1</upper>
+                            </occurrences>
+                            <node_id>at0028</node_id>
+                          </children>
+                          <children xsi:type="C_COMPLEX_OBJECT">
+                            <rm_type_name>ELEMENT</rm_type_name>
+                            <occurrences>
+                              <lower_included>true</lower_included>
+                              <lower_unbounded>false</lower_unbounded>
+                              <upper_unbounded>true</upper_unbounded>
+                              <lower>0</lower>
                             </occurrences>
                             <node_id>at0005</node_id>
                             <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -815,33 +821,32 @@
                           <value>openEHR-EHR-CLUSTER.laboratory_test_analyte.v1</value>
                         </archetype_id>
                         <term_definitions code="at0000">
-                          <items id="comment">Beispiele: 'Natrium', 'Leukozytenzahl', 'T3'. Üblicherweise über eine externe Terminologie codiert.</items>
-                          <items id="description">Ergebnis eines Labortests für einen bestimmten Analytwert.</items>
-                          <items id="text">Laboranalyt-Resultat</items>
+                          <items id="description">Ergebnis einer Laboranalyse für einen bestimmten Analytwert.</items>
+                          <items id="text">Laboranalyt-Ergebnis</items>
                         </term_definitions>
                         <term_definitions code="at0001">
-                          <items id="comment">z.B. '7.3 mmol/l', 'Erhöht'. Der 'Any'-Datentyp wird dann
-durch eine Spezialisierung, eine Vorlage oder zur Laufzeit
-auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der 'Quantity'-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .</items>
-                          <items id="description">(Mess-)Wert des Analyt-Resultats.</items>
+                          <items id="comment">Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .</items>
+                          <items id="description">(Mess-)Wert des Analyt-Ergebnisses.</items>
                           <items id="fhir_mapping">Observation.value[x]</items>
                           <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
-                          <items id="text">Analyt-Resultat</items>
+                          <items id="text">Analyt-Ergebnis</items>
                         </term_definitions>
                         <term_definitions code="at0003">
-                          <items id="description">Kommentar zum Analyt-Resultat, soweit noch nicht in anderen Feldern erfasst.</items>
+                          <items id="description">Kommentar zum Analyt-Ergebnis, soweit noch nicht in anderen Feldern erfasst.</items>
                           <items id="fhir_mapping">Observation.note</items>
                           <items id="hl7v2_mapping">NTE.3</items>
                           <items id="text">Kommentar</items>
                         </term_definitions>
                         <term_definitions code="at0004">
                           <items id="comment">z.B.: 'im Referenzbereich, bezogen auf Alter und Geschlecht'.</items>
-                          <items id="description">Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Resultat im Referenzbereich ist oder nicht.</items>
+                          <items id="description">Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Ergebnis im Referenzbereich ist oder nicht.</items>
                           <items id="text">Referenzbereichs-Hinweise</items>
                         </term_definitions>
                         <term_definitions code="at0005">
-                          <items id="comment">Die Werte wurden analog zum HL7 FHIR Diagnostic Report gewählt, die wiederum aus der HL7-Praxis stammen. Andere Codes/Ausdrücke können über den Text 'choice' verwendet werden.</items>
-                          <items id="description">Status des Analyseergebnisses.</items>
+                          <items id="comment">Die Werte wurden speziell so ausgewählt, dass sie mit denen im HL7 FHIR-Diagnosebericht übereinstimmen, der ursprünglich aus der HL7v2-Praxis abgeleitet wurde. Andere lokale Codes / Begriffe können über die Textauswahl verwendet werden.
+
+Dieses Element ermöglicht mehrere Vorkommen, um Anwendungsfälle zu unterstützen, wo mehr als eine Art von Status implementiert werden muss.</items>
+                          <items id="description">Status des Analyt-Ergebniswertes.</items>
                           <items id="fhir_mapping">Observation.status</items>
                           <items id="hl7v2_mapping">OBX.11</items>
                           <items id="text">Ergebnis-Status</items>
@@ -854,14 +859,14 @@ auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle An
                         </term_definitions>
                         <term_definitions code="at0014">
                           <items id="description">Weitere Details zu einem einzelnen Ergebnis.</items>
-                          <items id="text">Analyseergebnis-Details</items>
+                          <items id="text">Analyseergebnis-Detail</items>
                         </term_definitions>
                         <term_definitions code="at0015">
-                          <items id="description">Der Test ist im Laborinformationssystem erfasst, aber noch kein Resultat verfügbar.</items>
-                          <items id="text">Erfasst</items>
+                          <items id="description">Der Test ist im Laborinformationssystem registriert, aber noch kein Ergebnis verfügbar.</items>
+                          <items id="text">Registriert</items>
                         </term_definitions>
                         <term_definitions code="at0016">
-                          <items id="description">Das Testresultat ist ein Anfangs- oder Interimswert, vorläufig oder nicht verifiziert/validiert.</items>
+                          <items id="description">Das Testergebnis ist ein Anfangs- oder Interimswert: Daten im Testergebnis können unvollständig oder nicht verifiziert/validiert sein.</items>
                           <items id="text">Unvollständig</items>
                         </term_definitions>
                         <term_definitions code="at0017">
@@ -869,60 +874,56 @@ auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle An
                           <items id="text">Vorläufig</items>
                         </term_definitions>
                         <term_definitions code="at0018">
-                          <items id="description">Das Testresultat ist vollständig und durch eine autorisierte Person verifiziert.</items>
+                          <items id="description">Das Analyseergebnis ist vollständig und durch eine autorisierte Person verifiziert.</items>
                           <items id="text">Endbefund</items>
                         </term_definitions>
                         <term_definitions code="at0019">
-                          <items id="description">Der Endbefund wurde erneut modifiziert, ist vollständig und wurde durch den verantwortlichen Pathologen verifiziert. Dies ist eine Unterkategorie von "Endbefund, geändert".</items>
-                          <items id="text">Endbefund, korrigiert</items>
+                          <items id="description">Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und wird von einer autorisierten Person überprüft. Dies ist eine Sub-Kategorie von "Geändert".</items>
+                          <items id="text">Korrigiert</items>
                         </term_definitions>
                         <term_definitions code="at0020">
-                          <items id="description">Der Endbefund wurde erneut modifiziert, ist vollständig und wurde durch den verantwortlichen Pathologen verifiziert. Des Weiteren haben sich die Ergebnisdaten hierdurch verändert.</items>
-                          <items id="text">Endbefund, geändert</items>
+                          <items id="description">Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und von einer autorisierten Person überprüft. Die Ergebnisdaten wurden geändert.</items>
+                          <items id="text">Geändert</items>
                         </term_definitions>
                         <term_definitions code="at0021">
-                          <items id="description">Nach Abschluss wurde der Bericht durch Hinzufügen neuer Inhalte abgeändert. Der vorhandenen Inhalte sind unverändert. Dies ist eine Unterkategorie von "Endbefund, geändert".</items>
-                          <items id="text">Endbefund, ergänzt</items>
+                          <items id="description">Nach Abschluss wurde der Bericht durch das Hinzufügen neuer Inhalte abgeändert. Die vorhandene Inhalte sind unverändert. Dies ist eine Sub-Kategorie von "Geändert".</items>
+                          <items id="text">Ergänzt</items>
                         </term_definitions>
                         <term_definitions code="at0022">
-                          <items id="description">Das Testresultat wurde nach Endbefundung zurückgezogen.</items>
+                          <items id="description">Das Testergebnis wurde nach Endbefundung zurückgezogen.</items>
                           <items id="text">Endbefund, widerrufen</items>
                         </term_definitions>
                         <term_definitions code="at0023">
-                          <items id="description">Das Testresultat ist nicht verfügbar, weil der Test nicht (vollständig) durchgeführt oder abgebrochen wurde.</items>
+                          <items id="description">Das Testergebnis ist nicht verfügbar, weil der Test nicht gestartet oder nicht abgeschlossen wurde (manchmal auch als "abgebrochen" bezeichnet).</items>
                           <items id="text">Storniert</items>
                         </term_definitions>
                         <term_definitions code="at0024">
-                          <items id="comment">Der Wert dieses Elements wird normalerweise meist durch eine Spezialisierung, durch einer Vorlage oder zur Laufzeit geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum','Hämoglobin'.
+                          <items id="comment">Der Wert dieses Elements wird normalerweise, meist durch eine Spezialisierung, in einem Template oder zur Laufzeit der Anwendung geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum', 'Hämoglobin'. 
 Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.</items>
-                          <items id="description">Die Bezeichnung des Analyt-Resultats</items>
+                          <items id="description">Der Name des untersuchten Analyts.</items>
                           <items id="fhir_mapping">Observation.code</items>
                           <items id="hl7v2_mapping">OBX.3</items>
-                          <items id="text">untersuchter Analyt</items>
+                          <items id="text">Bezeichnung des Analyts</items>
                         </term_definitions>
                         <term_definitions code="at0025">
-                          <items id="comment">In vielen Gerichtsbarkeiten wird angenommen, dass der 'Ergebnisstatus' die medizinische Validation einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet</items>
-                          <items id="description">Datum und Zeit, an dem das Analyseergebnis im Labor medizinisch validiert wurde.</items>
-                          <items id="text">Zeitpunkt Validation</items>
+                          <items id="comment">In vielen Gerichtsbarkeiten wird angenommen, dass der "Ergebnis-Status" die medizinische Validierung einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet.</items>
+                          <items id="description">Datum und Uhrzeit der Validierung des Analyt-Ergebnisses im Labor durch einen Arzt.</items>
+                          <items id="text">Zeitpunkt der Validierung</items>
                         </term_definitions>
                         <term_definitions code="at0026">
-                          <items id="comment">In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Resultat-Archetypen enthalten. In diesen Fällen wird dieses 'Probe'-Datenelement benötigt, um die Resultate mit den richtigen Proben zu verknüpfen.</items>
+                          <items id="comment">In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Ergebnis-Archetypen enthalten. In diesen Fällen wird dieses "Probe"-Datenelement benötigt, um die Ergebnisse mit den richtigen Proben zu verknüpfen.</items>
                           <items id="description">Kennung der Probe, die für das Analyseergebnis verwendet wurde.</items>
                           <items id="text">Probe</items>
                         </term_definitions>
                         <term_definitions code="at0027">
                           <items id="comment">z.B. '1', '2', '3'. Werden mehrere Analysenergebnisse berichtet, gibt die Analyseergebnis-Reihenfolge explizit die Reihenfolge der Analyseergebnisse an.</items>
-                          <items id="description">Die beabsichtigte Position dieses Analyseergebnisses in der Reihenfolge aller Analyseergebnisse</items>
+                          <items id="description">Die beabsichtigte Position dieses Analyseergebnisses in der Reihenfolge aller Analyseergebnisse.</items>
                           <items id="text">Analyseergebnis-Reihenfolge</items>
                         </term_definitions>
-                        <term_definitions code="2019-8">
-                          <items id="text">Carbon dioxide [Partial pressure] in Arterial blood</items>
-                        </term_definitions>
-                        <term_definitions code="11557-6">
-                          <items id="text">Carbon dioxide [Partial pressure] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="2020-6">
-                          <items id="text">Carbon dioxide [Partial pressure] in Capillary blood</items>
+                        <term_definitions code="at0028">
+                          <items id="comment">Wenn die Testmethode für ein gesamtes Panel gilt, kann die Testmethode mithilfe des Datenelements "Testmethode" im Ergebnis OBSERVATION.laboratory_test_result erfasst werden.</items>
+                          <items id="description">Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.</items>
+                          <items id="text">Testmethode</items>
                         </term_definitions>
                       </children>
                       <children xsi:type="C_ARCHETYPE_ROOT">
@@ -988,7 +989,7 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                                     <lower>1</lower>
                                     <upper>1</upper>
                                   </existence>
-                                  <children xsi:type="C_CODE_PHRASE">
+                                  <children xsi:type="C_CODE_REFERENCE">
                                     <rm_type_name>CODE_PHRASE</rm_type_name>
                                     <occurrences>
                                       <lower_included>true</lower_included>
@@ -999,12 +1000,7 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                                       <upper>1</upper>
                                     </occurrences>
                                     <node_id/>
-                                    <terminology_id>
-                                      <value>LOINC</value>
-                                    </terminology_id>
-                                    <code_list>2703-7</code_list>
-                                    <code_list>11556-8</code_list>
-                                    <code_list>2704-5</code_list>
+                                    <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/blood-gas-analysis-po2</referenceSetUri>
                                   </children>
                                 </attributes>
                               </children>
@@ -1086,6 +1082,16 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                               <upper_unbounded>false</upper_unbounded>
                               <lower>0</lower>
                               <upper>1</upper>
+                            </occurrences>
+                            <node_id>at0028</node_id>
+                          </children>
+                          <children xsi:type="C_COMPLEX_OBJECT">
+                            <rm_type_name>ELEMENT</rm_type_name>
+                            <occurrences>
+                              <lower_included>true</lower_included>
+                              <lower_unbounded>false</lower_unbounded>
+                              <upper_unbounded>true</upper_unbounded>
+                              <lower>0</lower>
                             </occurrences>
                             <node_id>at0005</node_id>
                             <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -1205,33 +1211,32 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                           <value>openEHR-EHR-CLUSTER.laboratory_test_analyte.v1</value>
                         </archetype_id>
                         <term_definitions code="at0000">
-                          <items id="comment">Beispiele: 'Natrium', 'Leukozytenzahl', 'T3'. Üblicherweise über eine externe Terminologie codiert.</items>
-                          <items id="description">Ergebnis eines Labortests für einen bestimmten Analytwert.</items>
-                          <items id="text">Laboranalyt-Resultat</items>
+                          <items id="description">Ergebnis einer Laboranalyse für einen bestimmten Analytwert.</items>
+                          <items id="text">Laboranalyt-Ergebnis</items>
                         </term_definitions>
                         <term_definitions code="at0001">
-                          <items id="comment">z.B. '7.3 mmol/l', 'Erhöht'. Der 'Any'-Datentyp wird dann
-durch eine Spezialisierung, eine Vorlage oder zur Laufzeit
-auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der 'Quantity'-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .</items>
-                          <items id="description">(Mess-)Wert des Analyt-Resultats.</items>
+                          <items id="comment">Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .</items>
+                          <items id="description">(Mess-)Wert des Analyt-Ergebnisses.</items>
                           <items id="fhir_mapping">Observation.value[x]</items>
                           <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
-                          <items id="text">Analyt-Resultat</items>
+                          <items id="text">Analyt-Ergebnis</items>
                         </term_definitions>
                         <term_definitions code="at0003">
-                          <items id="description">Kommentar zum Analyt-Resultat, soweit noch nicht in anderen Feldern erfasst.</items>
+                          <items id="description">Kommentar zum Analyt-Ergebnis, soweit noch nicht in anderen Feldern erfasst.</items>
                           <items id="fhir_mapping">Observation.note</items>
                           <items id="hl7v2_mapping">NTE.3</items>
                           <items id="text">Kommentar</items>
                         </term_definitions>
                         <term_definitions code="at0004">
                           <items id="comment">z.B.: 'im Referenzbereich, bezogen auf Alter und Geschlecht'.</items>
-                          <items id="description">Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Resultat im Referenzbereich ist oder nicht.</items>
+                          <items id="description">Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Ergebnis im Referenzbereich ist oder nicht.</items>
                           <items id="text">Referenzbereichs-Hinweise</items>
                         </term_definitions>
                         <term_definitions code="at0005">
-                          <items id="comment">Die Werte wurden analog zum HL7 FHIR Diagnostic Report gewählt, die wiederum aus der HL7-Praxis stammen. Andere Codes/Ausdrücke können über den Text 'choice' verwendet werden.</items>
-                          <items id="description">Status des Analyseergebnisses.</items>
+                          <items id="comment">Die Werte wurden speziell so ausgewählt, dass sie mit denen im HL7 FHIR-Diagnosebericht übereinstimmen, der ursprünglich aus der HL7v2-Praxis abgeleitet wurde. Andere lokale Codes / Begriffe können über die Textauswahl verwendet werden.
+
+Dieses Element ermöglicht mehrere Vorkommen, um Anwendungsfälle zu unterstützen, wo mehr als eine Art von Status implementiert werden muss.</items>
+                          <items id="description">Status des Analyt-Ergebniswertes.</items>
                           <items id="fhir_mapping">Observation.status</items>
                           <items id="hl7v2_mapping">OBX.11</items>
                           <items id="text">Ergebnis-Status</items>
@@ -1244,14 +1249,14 @@ auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle An
                         </term_definitions>
                         <term_definitions code="at0014">
                           <items id="description">Weitere Details zu einem einzelnen Ergebnis.</items>
-                          <items id="text">Analyseergebnis-Details</items>
+                          <items id="text">Analyseergebnis-Detail</items>
                         </term_definitions>
                         <term_definitions code="at0015">
-                          <items id="description">Der Test ist im Laborinformationssystem erfasst, aber noch kein Resultat verfügbar.</items>
-                          <items id="text">Erfasst</items>
+                          <items id="description">Der Test ist im Laborinformationssystem registriert, aber noch kein Ergebnis verfügbar.</items>
+                          <items id="text">Registriert</items>
                         </term_definitions>
                         <term_definitions code="at0016">
-                          <items id="description">Das Testresultat ist ein Anfangs- oder Interimswert, vorläufig oder nicht verifiziert/validiert.</items>
+                          <items id="description">Das Testergebnis ist ein Anfangs- oder Interimswert: Daten im Testergebnis können unvollständig oder nicht verifiziert/validiert sein.</items>
                           <items id="text">Unvollständig</items>
                         </term_definitions>
                         <term_definitions code="at0017">
@@ -1259,60 +1264,56 @@ auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle An
                           <items id="text">Vorläufig</items>
                         </term_definitions>
                         <term_definitions code="at0018">
-                          <items id="description">Das Testresultat ist vollständig und durch eine autorisierte Person verifiziert.</items>
+                          <items id="description">Das Analyseergebnis ist vollständig und durch eine autorisierte Person verifiziert.</items>
                           <items id="text">Endbefund</items>
                         </term_definitions>
                         <term_definitions code="at0019">
-                          <items id="description">Der Endbefund wurde erneut modifiziert, ist vollständig und wurde durch den verantwortlichen Pathologen verifiziert. Dies ist eine Unterkategorie von "Endbefund, geändert".</items>
-                          <items id="text">Endbefund, korrigiert</items>
+                          <items id="description">Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und wird von einer autorisierten Person überprüft. Dies ist eine Sub-Kategorie von "Geändert".</items>
+                          <items id="text">Korrigiert</items>
                         </term_definitions>
                         <term_definitions code="at0020">
-                          <items id="description">Der Endbefund wurde erneut modifiziert, ist vollständig und wurde durch den verantwortlichen Pathologen verifiziert. Des Weiteren haben sich die Ergebnisdaten hierdurch verändert.</items>
-                          <items id="text">Endbefund, geändert</items>
+                          <items id="description">Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und von einer autorisierten Person überprüft. Die Ergebnisdaten wurden geändert.</items>
+                          <items id="text">Geändert</items>
                         </term_definitions>
                         <term_definitions code="at0021">
-                          <items id="description">Nach Abschluss wurde der Bericht durch Hinzufügen neuer Inhalte abgeändert. Der vorhandenen Inhalte sind unverändert. Dies ist eine Unterkategorie von "Endbefund, geändert".</items>
-                          <items id="text">Endbefund, ergänzt</items>
+                          <items id="description">Nach Abschluss wurde der Bericht durch das Hinzufügen neuer Inhalte abgeändert. Die vorhandene Inhalte sind unverändert. Dies ist eine Sub-Kategorie von "Geändert".</items>
+                          <items id="text">Ergänzt</items>
                         </term_definitions>
                         <term_definitions code="at0022">
-                          <items id="description">Das Testresultat wurde nach Endbefundung zurückgezogen.</items>
+                          <items id="description">Das Testergebnis wurde nach Endbefundung zurückgezogen.</items>
                           <items id="text">Endbefund, widerrufen</items>
                         </term_definitions>
                         <term_definitions code="at0023">
-                          <items id="description">Das Testresultat ist nicht verfügbar, weil der Test nicht (vollständig) durchgeführt oder abgebrochen wurde.</items>
+                          <items id="description">Das Testergebnis ist nicht verfügbar, weil der Test nicht gestartet oder nicht abgeschlossen wurde (manchmal auch als "abgebrochen" bezeichnet).</items>
                           <items id="text">Storniert</items>
                         </term_definitions>
                         <term_definitions code="at0024">
-                          <items id="comment">Der Wert dieses Elements wird normalerweise meist durch eine Spezialisierung, durch einer Vorlage oder zur Laufzeit geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum','Hämoglobin'.
+                          <items id="comment">Der Wert dieses Elements wird normalerweise, meist durch eine Spezialisierung, in einem Template oder zur Laufzeit der Anwendung geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum', 'Hämoglobin'. 
 Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.</items>
-                          <items id="description">Die Bezeichnung des Analyt-Resultats</items>
+                          <items id="description">Der Name des untersuchten Analyts.</items>
                           <items id="fhir_mapping">Observation.code</items>
                           <items id="hl7v2_mapping">OBX.3</items>
-                          <items id="text">untersuchter Analyt</items>
+                          <items id="text">Bezeichnung des Analyts</items>
                         </term_definitions>
                         <term_definitions code="at0025">
-                          <items id="comment">In vielen Gerichtsbarkeiten wird angenommen, dass der 'Ergebnisstatus' die medizinische Validation einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet</items>
-                          <items id="description">Datum und Zeit, an dem das Analyseergebnis im Labor medizinisch validiert wurde.</items>
-                          <items id="text">Zeitpunkt Validation</items>
+                          <items id="comment">In vielen Gerichtsbarkeiten wird angenommen, dass der "Ergebnis-Status" die medizinische Validierung einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet.</items>
+                          <items id="description">Datum und Uhrzeit der Validierung des Analyt-Ergebnisses im Labor durch einen Arzt.</items>
+                          <items id="text">Zeitpunkt der Validierung</items>
                         </term_definitions>
                         <term_definitions code="at0026">
-                          <items id="comment">In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Resultat-Archetypen enthalten. In diesen Fällen wird dieses 'Probe'-Datenelement benötigt, um die Resultate mit den richtigen Proben zu verknüpfen.</items>
+                          <items id="comment">In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Ergebnis-Archetypen enthalten. In diesen Fällen wird dieses "Probe"-Datenelement benötigt, um die Ergebnisse mit den richtigen Proben zu verknüpfen.</items>
                           <items id="description">Kennung der Probe, die für das Analyseergebnis verwendet wurde.</items>
                           <items id="text">Probe</items>
                         </term_definitions>
                         <term_definitions code="at0027">
                           <items id="comment">z.B. '1', '2', '3'. Werden mehrere Analysenergebnisse berichtet, gibt die Analyseergebnis-Reihenfolge explizit die Reihenfolge der Analyseergebnisse an.</items>
-                          <items id="description">Die beabsichtigte Position dieses Analyseergebnisses in der Reihenfolge aller Analyseergebnisse</items>
+                          <items id="description">Die beabsichtigte Position dieses Analyseergebnisses in der Reihenfolge aller Analyseergebnisse.</items>
                           <items id="text">Analyseergebnis-Reihenfolge</items>
                         </term_definitions>
-                        <term_definitions code="2703-7">
-                          <items id="text">Oxygen [Partial pressure] in Arterial blood</items>
-                        </term_definitions>
-                        <term_definitions code="11556-8">
-                          <items id="text">Oxygen [Partial pressure] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="2704-5">
-                          <items id="text">Oxygen [Partial pressure] in Capillary blood</items>
+                        <term_definitions code="at0028">
+                          <items id="comment">Wenn die Testmethode für ein gesamtes Panel gilt, kann die Testmethode mithilfe des Datenelements "Testmethode" im Ergebnis OBSERVATION.laboratory_test_result erfasst werden.</items>
+                          <items id="description">Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.</items>
+                          <items id="text">Testmethode</items>
                         </term_definitions>
                       </children>
                       <children xsi:type="C_ARCHETYPE_ROOT">
@@ -1378,7 +1379,7 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                                     <lower>1</lower>
                                     <upper>1</upper>
                                   </existence>
-                                  <children xsi:type="C_CODE_PHRASE">
+                                  <children xsi:type="C_CODE_REFERENCE">
                                     <rm_type_name>CODE_PHRASE</rm_type_name>
                                     <occurrences>
                                       <lower_included>true</lower_included>
@@ -1389,15 +1390,7 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                                       <upper>1</upper>
                                     </occurrences>
                                     <node_id/>
-                                    <terminology_id>
-                                      <value>LOINC</value>
-                                    </terminology_id>
-                                    <code_list>2753-2</code_list>
-                                    <code_list>2746-6</code_list>
-                                    <code_list>2745-8</code_list>
-                                    <code_list>2744-1</code_list>
-                                    <code_list>19213-8</code_list>
-                                    <code_list>11558-4</code_list>
+                                    <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/blood-gas-analysis-ph</referenceSetUri>
                                   </children>
                                 </attributes>
                               </children>
@@ -1479,6 +1472,16 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                               <upper_unbounded>false</upper_unbounded>
                               <lower>0</lower>
                               <upper>1</upper>
+                            </occurrences>
+                            <node_id>at0028</node_id>
+                          </children>
+                          <children xsi:type="C_COMPLEX_OBJECT">
+                            <rm_type_name>ELEMENT</rm_type_name>
+                            <occurrences>
+                              <lower_included>true</lower_included>
+                              <lower_unbounded>false</lower_unbounded>
+                              <upper_unbounded>true</upper_unbounded>
+                              <lower>0</lower>
                             </occurrences>
                             <node_id>at0005</node_id>
                             <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -1598,33 +1601,32 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                           <value>openEHR-EHR-CLUSTER.laboratory_test_analyte.v1</value>
                         </archetype_id>
                         <term_definitions code="at0000">
-                          <items id="comment">Beispiele: 'Natrium', 'Leukozytenzahl', 'T3'. Üblicherweise über eine externe Terminologie codiert.</items>
-                          <items id="description">Ergebnis eines Labortests für einen bestimmten Analytwert.</items>
-                          <items id="text">Laboranalyt-Resultat</items>
+                          <items id="description">Ergebnis einer Laboranalyse für einen bestimmten Analytwert.</items>
+                          <items id="text">Laboranalyt-Ergebnis</items>
                         </term_definitions>
                         <term_definitions code="at0001">
-                          <items id="comment">z.B. '7.3 mmol/l', 'Erhöht'. Der 'Any'-Datentyp wird dann
-durch eine Spezialisierung, eine Vorlage oder zur Laufzeit
-auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der 'Quantity'-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .</items>
-                          <items id="description">(Mess-)Wert des Analyt-Resultats.</items>
+                          <items id="comment">Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .</items>
+                          <items id="description">(Mess-)Wert des Analyt-Ergebnisses.</items>
                           <items id="fhir_mapping">Observation.value[x]</items>
                           <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
-                          <items id="text">Analyt-Resultat</items>
+                          <items id="text">Analyt-Ergebnis</items>
                         </term_definitions>
                         <term_definitions code="at0003">
-                          <items id="description">Kommentar zum Analyt-Resultat, soweit noch nicht in anderen Feldern erfasst.</items>
+                          <items id="description">Kommentar zum Analyt-Ergebnis, soweit noch nicht in anderen Feldern erfasst.</items>
                           <items id="fhir_mapping">Observation.note</items>
                           <items id="hl7v2_mapping">NTE.3</items>
                           <items id="text">Kommentar</items>
                         </term_definitions>
                         <term_definitions code="at0004">
                           <items id="comment">z.B.: 'im Referenzbereich, bezogen auf Alter und Geschlecht'.</items>
-                          <items id="description">Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Resultat im Referenzbereich ist oder nicht.</items>
+                          <items id="description">Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Ergebnis im Referenzbereich ist oder nicht.</items>
                           <items id="text">Referenzbereichs-Hinweise</items>
                         </term_definitions>
                         <term_definitions code="at0005">
-                          <items id="comment">Die Werte wurden analog zum HL7 FHIR Diagnostic Report gewählt, die wiederum aus der HL7-Praxis stammen. Andere Codes/Ausdrücke können über den Text 'choice' verwendet werden.</items>
-                          <items id="description">Status des Analyseergebnisses.</items>
+                          <items id="comment">Die Werte wurden speziell so ausgewählt, dass sie mit denen im HL7 FHIR-Diagnosebericht übereinstimmen, der ursprünglich aus der HL7v2-Praxis abgeleitet wurde. Andere lokale Codes / Begriffe können über die Textauswahl verwendet werden.
+
+Dieses Element ermöglicht mehrere Vorkommen, um Anwendungsfälle zu unterstützen, wo mehr als eine Art von Status implementiert werden muss.</items>
+                          <items id="description">Status des Analyt-Ergebniswertes.</items>
                           <items id="fhir_mapping">Observation.status</items>
                           <items id="hl7v2_mapping">OBX.11</items>
                           <items id="text">Ergebnis-Status</items>
@@ -1637,14 +1639,14 @@ auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle An
                         </term_definitions>
                         <term_definitions code="at0014">
                           <items id="description">Weitere Details zu einem einzelnen Ergebnis.</items>
-                          <items id="text">Analyseergebnis-Details</items>
+                          <items id="text">Analyseergebnis-Detail</items>
                         </term_definitions>
                         <term_definitions code="at0015">
-                          <items id="description">Der Test ist im Laborinformationssystem erfasst, aber noch kein Resultat verfügbar.</items>
-                          <items id="text">Erfasst</items>
+                          <items id="description">Der Test ist im Laborinformationssystem registriert, aber noch kein Ergebnis verfügbar.</items>
+                          <items id="text">Registriert</items>
                         </term_definitions>
                         <term_definitions code="at0016">
-                          <items id="description">Das Testresultat ist ein Anfangs- oder Interimswert, vorläufig oder nicht verifiziert/validiert.</items>
+                          <items id="description">Das Testergebnis ist ein Anfangs- oder Interimswert: Daten im Testergebnis können unvollständig oder nicht verifiziert/validiert sein.</items>
                           <items id="text">Unvollständig</items>
                         </term_definitions>
                         <term_definitions code="at0017">
@@ -1652,69 +1654,56 @@ auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle An
                           <items id="text">Vorläufig</items>
                         </term_definitions>
                         <term_definitions code="at0018">
-                          <items id="description">Das Testresultat ist vollständig und durch eine autorisierte Person verifiziert.</items>
+                          <items id="description">Das Analyseergebnis ist vollständig und durch eine autorisierte Person verifiziert.</items>
                           <items id="text">Endbefund</items>
                         </term_definitions>
                         <term_definitions code="at0019">
-                          <items id="description">Der Endbefund wurde erneut modifiziert, ist vollständig und wurde durch den verantwortlichen Pathologen verifiziert. Dies ist eine Unterkategorie von "Endbefund, geändert".</items>
-                          <items id="text">Endbefund, korrigiert</items>
+                          <items id="description">Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und wird von einer autorisierten Person überprüft. Dies ist eine Sub-Kategorie von "Geändert".</items>
+                          <items id="text">Korrigiert</items>
                         </term_definitions>
                         <term_definitions code="at0020">
-                          <items id="description">Der Endbefund wurde erneut modifiziert, ist vollständig und wurde durch den verantwortlichen Pathologen verifiziert. Des Weiteren haben sich die Ergebnisdaten hierdurch verändert.</items>
-                          <items id="text">Endbefund, geändert</items>
+                          <items id="description">Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und von einer autorisierten Person überprüft. Die Ergebnisdaten wurden geändert.</items>
+                          <items id="text">Geändert</items>
                         </term_definitions>
                         <term_definitions code="at0021">
-                          <items id="description">Nach Abschluss wurde der Bericht durch Hinzufügen neuer Inhalte abgeändert. Der vorhandenen Inhalte sind unverändert. Dies ist eine Unterkategorie von "Endbefund, geändert".</items>
-                          <items id="text">Endbefund, ergänzt</items>
+                          <items id="description">Nach Abschluss wurde der Bericht durch das Hinzufügen neuer Inhalte abgeändert. Die vorhandene Inhalte sind unverändert. Dies ist eine Sub-Kategorie von "Geändert".</items>
+                          <items id="text">Ergänzt</items>
                         </term_definitions>
                         <term_definitions code="at0022">
-                          <items id="description">Das Testresultat wurde nach Endbefundung zurückgezogen.</items>
+                          <items id="description">Das Testergebnis wurde nach Endbefundung zurückgezogen.</items>
                           <items id="text">Endbefund, widerrufen</items>
                         </term_definitions>
                         <term_definitions code="at0023">
-                          <items id="description">Das Testresultat ist nicht verfügbar, weil der Test nicht (vollständig) durchgeführt oder abgebrochen wurde.</items>
+                          <items id="description">Das Testergebnis ist nicht verfügbar, weil der Test nicht gestartet oder nicht abgeschlossen wurde (manchmal auch als "abgebrochen" bezeichnet).</items>
                           <items id="text">Storniert</items>
                         </term_definitions>
                         <term_definitions code="at0024">
-                          <items id="comment">Der Wert dieses Elements wird normalerweise meist durch eine Spezialisierung, durch einer Vorlage oder zur Laufzeit geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum','Hämoglobin'.
+                          <items id="comment">Der Wert dieses Elements wird normalerweise, meist durch eine Spezialisierung, in einem Template oder zur Laufzeit der Anwendung geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum', 'Hämoglobin'. 
 Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.</items>
-                          <items id="description">Die Bezeichnung des Analyt-Resultats</items>
+                          <items id="description">Der Name des untersuchten Analyts.</items>
                           <items id="fhir_mapping">Observation.code</items>
                           <items id="hl7v2_mapping">OBX.3</items>
-                          <items id="text">untersuchter Analyt</items>
+                          <items id="text">Bezeichnung des Analyts</items>
                         </term_definitions>
                         <term_definitions code="at0025">
-                          <items id="comment">In vielen Gerichtsbarkeiten wird angenommen, dass der 'Ergebnisstatus' die medizinische Validation einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet</items>
-                          <items id="description">Datum und Zeit, an dem das Analyseergebnis im Labor medizinisch validiert wurde.</items>
-                          <items id="text">Zeitpunkt Validation</items>
+                          <items id="comment">In vielen Gerichtsbarkeiten wird angenommen, dass der "Ergebnis-Status" die medizinische Validierung einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet.</items>
+                          <items id="description">Datum und Uhrzeit der Validierung des Analyt-Ergebnisses im Labor durch einen Arzt.</items>
+                          <items id="text">Zeitpunkt der Validierung</items>
                         </term_definitions>
                         <term_definitions code="at0026">
-                          <items id="comment">In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Resultat-Archetypen enthalten. In diesen Fällen wird dieses 'Probe'-Datenelement benötigt, um die Resultate mit den richtigen Proben zu verknüpfen.</items>
+                          <items id="comment">In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Ergebnis-Archetypen enthalten. In diesen Fällen wird dieses "Probe"-Datenelement benötigt, um die Ergebnisse mit den richtigen Proben zu verknüpfen.</items>
                           <items id="description">Kennung der Probe, die für das Analyseergebnis verwendet wurde.</items>
                           <items id="text">Probe</items>
                         </term_definitions>
                         <term_definitions code="at0027">
                           <items id="comment">z.B. '1', '2', '3'. Werden mehrere Analysenergebnisse berichtet, gibt die Analyseergebnis-Reihenfolge explizit die Reihenfolge der Analyseergebnisse an.</items>
-                          <items id="description">Die beabsichtigte Position dieses Analyseergebnisses in der Reihenfolge aller Analyseergebnisse</items>
+                          <items id="description">Die beabsichtigte Position dieses Analyseergebnisses in der Reihenfolge aller Analyseergebnisse.</items>
                           <items id="text">Analyseergebnis-Reihenfolge</items>
                         </term_definitions>
-                        <term_definitions code="2753-2">
-                          <items id="text">pH of Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="2746-6">
-                          <items id="text">pH of Venous blood</items>
-                        </term_definitions>
-                        <term_definitions code="2745-8">
-                          <items id="text">pH of Capillary blood</items>
-                        </term_definitions>
-                        <term_definitions code="2744-1">
-                          <items id="text">pH of Arterial blood</items>
-                        </term_definitions>
-                        <term_definitions code="19213-8">
-                          <items id="text">pH of Mixed venous blood</items>
-                        </term_definitions>
-                        <term_definitions code="11558-4">
-                          <items id="text">pH of Blood</items>
+                        <term_definitions code="at0028">
+                          <items id="comment">Wenn die Testmethode für ein gesamtes Panel gilt, kann die Testmethode mithilfe des Datenelements "Testmethode" im Ergebnis OBSERVATION.laboratory_test_result erfasst werden.</items>
+                          <items id="description">Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.</items>
+                          <items id="text">Testmethode</items>
                         </term_definitions>
                       </children>
                       <children xsi:type="C_ARCHETYPE_ROOT">
@@ -1780,7 +1769,7 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                                     <lower>1</lower>
                                     <upper>1</upper>
                                   </existence>
-                                  <children xsi:type="C_CODE_PHRASE">
+                                  <children xsi:type="C_CODE_REFERENCE">
                                     <rm_type_name>CODE_PHRASE</rm_type_name>
                                     <occurrences>
                                       <lower_included>true</lower_included>
@@ -1791,11 +1780,7 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                                       <upper>1</upper>
                                     </occurrences>
                                     <node_id/>
-                                    <terminology_id>
-                                      <value>LOINC</value>
-                                    </terminology_id>
-                                    <code_list>2708-6</code_list>
-                                    <code_list>20564-1</code_list>
+                                    <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/blood-gas-analysis-sO2</referenceSetUri>
                                   </children>
                                 </attributes>
                               </children>
@@ -1877,6 +1862,16 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                               <upper_unbounded>false</upper_unbounded>
                               <lower>0</lower>
                               <upper>1</upper>
+                            </occurrences>
+                            <node_id>at0028</node_id>
+                          </children>
+                          <children xsi:type="C_COMPLEX_OBJECT">
+                            <rm_type_name>ELEMENT</rm_type_name>
+                            <occurrences>
+                              <lower_included>true</lower_included>
+                              <lower_unbounded>false</lower_unbounded>
+                              <upper_unbounded>true</upper_unbounded>
+                              <lower>0</lower>
                             </occurrences>
                             <node_id>at0005</node_id>
                             <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -1996,33 +1991,32 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                           <value>openEHR-EHR-CLUSTER.laboratory_test_analyte.v1</value>
                         </archetype_id>
                         <term_definitions code="at0000">
-                          <items id="comment">Beispiele: 'Natrium', 'Leukozytenzahl', 'T3'. Üblicherweise über eine externe Terminologie codiert.</items>
-                          <items id="description">Ergebnis eines Labortests für einen bestimmten Analytwert.</items>
-                          <items id="text">Laboranalyt-Resultat</items>
+                          <items id="description">Ergebnis einer Laboranalyse für einen bestimmten Analytwert.</items>
+                          <items id="text">Laboranalyt-Ergebnis</items>
                         </term_definitions>
                         <term_definitions code="at0001">
-                          <items id="comment">z.B. '7.3 mmol/l', 'Erhöht'. Der 'Any'-Datentyp wird dann
-durch eine Spezialisierung, eine Vorlage oder zur Laufzeit
-auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der 'Quantity'-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .</items>
-                          <items id="description">(Mess-)Wert des Analyt-Resultats.</items>
+                          <items id="comment">Z.B. "7,3 mmol/l", "Erhöht". Der "Any"-Datentyp wird dann durch eine Spezialisierung, eine Vorlage oder zur Laufzeit der Anwendung auf einen passenden Datentyp eingeschränkt werden müssen, um das aktuelle Analyt-Ergebnis wiederzugeben. Der "Quantity"-Datentyp hat Referenzmodell-Attribute, wie Kennungen für normal/abnormal, Referenzbereiche und Näherungen - für weitere Details s. https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class .</items>
+                          <items id="description">(Mess-)Wert des Analyt-Ergebnisses.</items>
                           <items id="fhir_mapping">Observation.value[x]</items>
                           <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
-                          <items id="text">Analyt-Resultat</items>
+                          <items id="text">Analyt-Ergebnis</items>
                         </term_definitions>
                         <term_definitions code="at0003">
-                          <items id="description">Kommentar zum Analyt-Resultat, soweit noch nicht in anderen Feldern erfasst.</items>
+                          <items id="description">Kommentar zum Analyt-Ergebnis, soweit noch nicht in anderen Feldern erfasst.</items>
                           <items id="fhir_mapping">Observation.note</items>
                           <items id="hl7v2_mapping">NTE.3</items>
                           <items id="text">Kommentar</items>
                         </term_definitions>
                         <term_definitions code="at0004">
                           <items id="comment">z.B.: 'im Referenzbereich, bezogen auf Alter und Geschlecht'.</items>
-                          <items id="description">Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Resultat im Referenzbereich ist oder nicht.</items>
+                          <items id="description">Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Ergebnis im Referenzbereich ist oder nicht.</items>
                           <items id="text">Referenzbereichs-Hinweise</items>
                         </term_definitions>
                         <term_definitions code="at0005">
-                          <items id="comment">Die Werte wurden analog zum HL7 FHIR Diagnostic Report gewählt, die wiederum aus der HL7-Praxis stammen. Andere Codes/Ausdrücke können über den Text 'choice' verwendet werden.</items>
-                          <items id="description">Status des Analyseergebnisses.</items>
+                          <items id="comment">Die Werte wurden speziell so ausgewählt, dass sie mit denen im HL7 FHIR-Diagnosebericht übereinstimmen, der ursprünglich aus der HL7v2-Praxis abgeleitet wurde. Andere lokale Codes / Begriffe können über die Textauswahl verwendet werden.
+
+Dieses Element ermöglicht mehrere Vorkommen, um Anwendungsfälle zu unterstützen, wo mehr als eine Art von Status implementiert werden muss.</items>
+                          <items id="description">Status des Analyt-Ergebniswertes.</items>
                           <items id="fhir_mapping">Observation.status</items>
                           <items id="hl7v2_mapping">OBX.11</items>
                           <items id="text">Ergebnis-Status</items>
@@ -2035,14 +2029,14 @@ auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle An
                         </term_definitions>
                         <term_definitions code="at0014">
                           <items id="description">Weitere Details zu einem einzelnen Ergebnis.</items>
-                          <items id="text">Analyseergebnis-Details</items>
+                          <items id="text">Analyseergebnis-Detail</items>
                         </term_definitions>
                         <term_definitions code="at0015">
-                          <items id="description">Der Test ist im Laborinformationssystem erfasst, aber noch kein Resultat verfügbar.</items>
-                          <items id="text">Erfasst</items>
+                          <items id="description">Der Test ist im Laborinformationssystem registriert, aber noch kein Ergebnis verfügbar.</items>
+                          <items id="text">Registriert</items>
                         </term_definitions>
                         <term_definitions code="at0016">
-                          <items id="description">Das Testresultat ist ein Anfangs- oder Interimswert, vorläufig oder nicht verifiziert/validiert.</items>
+                          <items id="description">Das Testergebnis ist ein Anfangs- oder Interimswert: Daten im Testergebnis können unvollständig oder nicht verifiziert/validiert sein.</items>
                           <items id="text">Unvollständig</items>
                         </term_definitions>
                         <term_definitions code="at0017">
@@ -2050,57 +2044,56 @@ auf einen passenden Datentypen eingeschränkt werden müssen, um das aktuelle An
                           <items id="text">Vorläufig</items>
                         </term_definitions>
                         <term_definitions code="at0018">
-                          <items id="description">Das Testresultat ist vollständig und durch eine autorisierte Person verifiziert.</items>
+                          <items id="description">Das Analyseergebnis ist vollständig und durch eine autorisierte Person verifiziert.</items>
                           <items id="text">Endbefund</items>
                         </term_definitions>
                         <term_definitions code="at0019">
-                          <items id="description">Der Endbefund wurde erneut modifiziert, ist vollständig und wurde durch den verantwortlichen Pathologen verifiziert. Dies ist eine Unterkategorie von "Endbefund, geändert".</items>
-                          <items id="text">Endbefund, korrigiert</items>
+                          <items id="description">Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und wird von einer autorisierten Person überprüft. Dies ist eine Sub-Kategorie von "Geändert".</items>
+                          <items id="text">Korrigiert</items>
                         </term_definitions>
                         <term_definitions code="at0020">
-                          <items id="description">Der Endbefund wurde erneut modifiziert, ist vollständig und wurde durch den verantwortlichen Pathologen verifiziert. Des Weiteren haben sich die Ergebnisdaten hierdurch verändert.</items>
-                          <items id="text">Endbefund, geändert</items>
+                          <items id="description">Das Ergebnis wurde nach dem endgültigen Abschluss geändert und ist vollständig und von einer autorisierten Person überprüft. Die Ergebnisdaten wurden geändert.</items>
+                          <items id="text">Geändert</items>
                         </term_definitions>
                         <term_definitions code="at0021">
-                          <items id="description">Nach Abschluss wurde der Bericht durch Hinzufügen neuer Inhalte abgeändert. Der vorhandenen Inhalte sind unverändert. Dies ist eine Unterkategorie von "Endbefund, geändert".</items>
-                          <items id="text">Endbefund, ergänzt</items>
+                          <items id="description">Nach Abschluss wurde der Bericht durch das Hinzufügen neuer Inhalte abgeändert. Die vorhandene Inhalte sind unverändert. Dies ist eine Sub-Kategorie von "Geändert".</items>
+                          <items id="text">Ergänzt</items>
                         </term_definitions>
                         <term_definitions code="at0022">
-                          <items id="description">Das Testresultat wurde nach Endbefundung zurückgezogen.</items>
+                          <items id="description">Das Testergebnis wurde nach Endbefundung zurückgezogen.</items>
                           <items id="text">Endbefund, widerrufen</items>
                         </term_definitions>
                         <term_definitions code="at0023">
-                          <items id="description">Das Testresultat ist nicht verfügbar, weil der Test nicht (vollständig) durchgeführt oder abgebrochen wurde.</items>
+                          <items id="description">Das Testergebnis ist nicht verfügbar, weil der Test nicht gestartet oder nicht abgeschlossen wurde (manchmal auch als "abgebrochen" bezeichnet).</items>
                           <items id="text">Storniert</items>
                         </term_definitions>
                         <term_definitions code="at0024">
-                          <items id="comment">Der Wert dieses Elements wird normalerweise meist durch eine Spezialisierung, durch einer Vorlage oder zur Laufzeit geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum','Hämoglobin'.
+                          <items id="comment">Der Wert dieses Elements wird normalerweise, meist durch eine Spezialisierung, in einem Template oder zur Laufzeit der Anwendung geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum', 'Hämoglobin'. 
 Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.</items>
-                          <items id="description">Die Bezeichnung des Analyt-Resultats</items>
+                          <items id="description">Der Name des untersuchten Analyts.</items>
                           <items id="fhir_mapping">Observation.code</items>
                           <items id="hl7v2_mapping">OBX.3</items>
-                          <items id="text">untersuchter Analyt</items>
+                          <items id="text">Bezeichnung des Analyts</items>
                         </term_definitions>
                         <term_definitions code="at0025">
-                          <items id="comment">In vielen Gerichtsbarkeiten wird angenommen, dass der 'Ergebnisstatus' die medizinische Validation einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet</items>
-                          <items id="description">Datum und Zeit, an dem das Analyseergebnis im Labor medizinisch validiert wurde.</items>
-                          <items id="text">Zeitpunkt Validation</items>
+                          <items id="comment">In vielen Gerichtsbarkeiten wird angenommen, dass der "Ergebnis-Status" die medizinische Validierung einschliesst, in anderen wird diese anhand dieses Datenelements separat erfasst und befundet.</items>
+                          <items id="description">Datum und Uhrzeit der Validierung des Analyt-Ergebnisses im Labor durch einen Arzt.</items>
+                          <items id="text">Zeitpunkt der Validierung</items>
                         </term_definitions>
                         <term_definitions code="at0026">
-                          <items id="comment">In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Resultat-Archetypen enthalten. In diesen Fällen wird dieses 'Probe'-Datenelement benötigt, um die Resultate mit den richtigen Proben zu verknüpfen.</items>
+                          <items id="comment">In manchen Situationen wird ein einzelner Laborergebnis-Archetyp mehrere Probe- und Laboranalyt-Ergebnis-Archetypen enthalten. In diesen Fällen wird dieses "Probe"-Datenelement benötigt, um die Ergebnisse mit den richtigen Proben zu verknüpfen.</items>
                           <items id="description">Kennung der Probe, die für das Analyseergebnis verwendet wurde.</items>
                           <items id="text">Probe</items>
                         </term_definitions>
                         <term_definitions code="at0027">
                           <items id="comment">z.B. '1', '2', '3'. Werden mehrere Analysenergebnisse berichtet, gibt die Analyseergebnis-Reihenfolge explizit die Reihenfolge der Analyseergebnisse an.</items>
-                          <items id="description">Die beabsichtigte Position dieses Analyseergebnisses in der Reihenfolge aller Analyseergebnisse</items>
+                          <items id="description">Die beabsichtigte Position dieses Analyseergebnisses in der Reihenfolge aller Analyseergebnisse.</items>
                           <items id="text">Analyseergebnis-Reihenfolge</items>
                         </term_definitions>
-                        <term_definitions code="2708-6">
-                          <items id="text">Oxygen saturation in Arterial blood</items>
-                        </term_definitions>
-                        <term_definitions code="20564-1">
-                          <items id="text">Oxygen saturation in Blood</items>
+                        <term_definitions code="at0028">
+                          <items id="comment">Wenn die Testmethode für ein gesamtes Panel gilt, kann die Testmethode mithilfe des Datenelements "Testmethode" im Ergebnis OBSERVATION.laboratory_test_result erfasst werden.</items>
+                          <items id="description">Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.</items>
+                          <items id="text">Testmethode</items>
                         </term_definitions>
                       </children>
                       <children xsi:type="ARCHETYPE_SLOT">
@@ -2154,7 +2147,7 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                             <right_operand xsi:type="EXPR_LEAF">
                               <type>C_STRING</type>
                               <item xsi:type="C_STRING">
-                                <pattern>openEHR-EHR-CLUSTER\.multimedia(-[a-zA-Z0-9_]+)*\.v1</pattern>
+                                <pattern>openEHR-EHR-CLUSTER\.media_capture(-[a-zA-Z0-9_]+)*\.v1|openEHR-EHR-CLUSTER\.media_capture(-[a-zA-Z0-9_]+)*\.v0</pattern>
                               </item>
                               <reference_type>constraint</reference_type>
                             </right_operand>
@@ -2418,7 +2411,7 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
           <items id="text">Tree</items>
         </term_definitions>
         <term_definitions code="at0005">
-          <items id="comment">Ein Laborergebnis kann sich auf ein einzelnes Analyt oder eine Analytgruppe beziehen. Dazu zählen auch komplette Panel an Parametern.
+          <items id="comment">Ein Laborergebnis kann sich auf ein einzelnes Analyt oder eine Analytgruppe beziehen. Dazu zählen auch komplette Panel an Parametern. 
 Es wird dringend empfohlen, die "Labortest-Bezeichnung" anhand einer Terminologie zu kodiereren, wie zum Beispiel LOINC oder SNOMED CT. Beispiel: "Glukose", "Harnstoff", "Abstrich", "Cortisol", "Leberbiopsie". Der Name kann u.U. auch das Probenmaterial oder den Patientenstatus (z.B. "Blutzuckerspiegel nüchtern") oder andere Informationen beinhalten wie "Kalium (Blutgas)".</items>
           <items id="description">Name der Laboruntersuchung, die an der/den Probe(n) durchgeführt wurde.</items>
           <items id="text">Labortest-Bezeichnung</items>
@@ -2473,7 +2466,7 @@ Das Empfangslabor kann den Test entweder durchführen oder an ein anderes Labor 
           <items id="text">Laborinterne Kennzeichnung</items>
         </term_definitions>
         <term_definitions code="at0073">
-          <items id="comment">Die Werte wurden so ausgewählt, dass sie mit denen im HL7 FHIR Diagnosebericht übereinstimmen, der historisch aus der HL7v2Praxis stammt. Andere lokale Codes/Begriffe können über den Text "Auswahl" verwendet werden.
+          <items id="comment">Die Werte wurden so ausgewählt, dass sie mit denen im HL7 FHIR Diagnosebericht übereinstimmen, der historisch aus der HL7v2Praxis stammt. Andere lokale Codes/Begriffe können über den Text "Auswahl" verwendet werden. 
 
 Dieses Element kann mehrfach vorkommen, um Fälle abzudecken, bei denen der Status für verschiedene Aspekte des Ergebnisses in mehrere Elemente unterteilt wurde.</items>
           <items id="description">Der Status des gesamten Laborprüfergebnisses.</items>
@@ -2659,45 +2652,65 @@ Bekannte Schwierigkeiten bei der Probenentnahme oder -behandlung, wie z.B. die "
       <items id="text">geändert</items>
     </term_definitions>
   </definition>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Kohlendioxidpartialdruck']/items[at0001]">
-    <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
-    <items id="fhir_mapping">Observation.value[x]</items>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]">
+    <items id="2019-8">Carbon dioxide [Partial pressure] in Arterial blood</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]">
+    <items id="24336-0">Gas panel - Arterial blood</items>
   </annotations>
   <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Kohlendioxidpartialdruck']/items[at0024]">
     <items id="hl7v2_mapping">OBX.3</items>
     <items id="fhir_mapping">Observation.code</items>
   </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Kohlendioxidpartialdruck']/items[at0005]">
-    <items id="hl7v2_mapping">OBX.11</items>
-    <items id="fhir_mapping">Observation.status</items>
-  </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Kohlendioxidpartialdruck']/items[at0006]">
-    <items id="hl7v2_mapping">OBX.19</items>
-    <items id="fhir_mapping">Observation.issued</items>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Kohlendioxidpartialdruck']/items[at0001]">
+    <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
+    <items id="fhir_mapping">Observation.value[x]</items>
   </annotations>
   <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Kohlendioxidpartialdruck']/items[at0003]">
     <items id="hl7v2_mapping">NTE.3</items>
     <items id="fhir_mapping">Observation.note</items>
   </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffpartialdruck']/items[at0005]">
-    <items id="hl7v2_mapping">OBX.11</items>
-    <items id="fhir_mapping">Observation.status</items>
-  </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffpartialdruck']/items[at0006]">
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Kohlendioxidpartialdruck']/items[at0006]">
     <items id="hl7v2_mapping">OBX.19</items>
     <items id="fhir_mapping">Observation.issued</items>
   </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffpartialdruck']/items[at0003]">
-    <items id="hl7v2_mapping">NTE.3</items>
-    <items id="fhir_mapping">Observation.note</items>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Kohlendioxidpartialdruck']/items[at0005]">
+    <items id="hl7v2_mapping">OBX.11</items>
+    <items id="fhir_mapping">Observation.status</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Kohlendioxidpartialdruck']">
+    <items id="2019-8">Carbon dioxide [Partial pressure] in Arterial blood</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffpartialdruck']/items[at0024]">
+    <items id="hl7v2_mapping">OBX.3</items>
+    <items id="fhir_mapping">Observation.code</items>
   </annotations>
   <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffpartialdruck']/items[at0001]">
     <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
     <items id="fhir_mapping">Observation.value[x]</items>
   </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffpartialdruck']/items[at0024]">
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffpartialdruck']/items[at0003]">
+    <items id="hl7v2_mapping">NTE.3</items>
+    <items id="fhir_mapping">Observation.note</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffpartialdruck']/items[at0006]">
+    <items id="hl7v2_mapping">OBX.19</items>
+    <items id="fhir_mapping">Observation.issued</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffpartialdruck']/items[at0005]">
+    <items id="hl7v2_mapping">OBX.11</items>
+    <items id="fhir_mapping">Observation.status</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffpartialdruck']">
+    <items id="2703-7">Oxygen [Partial pressure] in Arterial blood</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'pH-Wert']/items[at0024]">
     <items id="hl7v2_mapping">OBX.3</items>
     <items id="fhir_mapping">Observation.code</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'pH-Wert']/items[at0001]">
+    <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
+    <items id="fhir_mapping">Observation.value[x]</items>
   </annotations>
   <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'pH-Wert']/items[at0003]">
     <items id="hl7v2_mapping">NTE.3</items>
@@ -2711,33 +2724,31 @@ Bekannte Schwierigkeiten bei der Probenentnahme oder -behandlung, wie z.B. die "
     <items id="hl7v2_mapping">OBX.11</items>
     <items id="fhir_mapping">Observation.status</items>
   </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'pH-Wert']/items[at0001]">
-    <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
-    <items id="fhir_mapping">Observation.value[x]</items>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'pH-Wert']">
+    <items id="2744-1">pH of Arterial blood</items>
   </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'pH-Wert']/items[at0024]">
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffsättigung']/items[at0024]">
     <items id="hl7v2_mapping">OBX.3</items>
     <items id="fhir_mapping">Observation.code</items>
-  </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffsättigung']/items[at0005]">
-    <items id="hl7v2_mapping">OBX.11</items>
-    <items id="fhir_mapping">Observation.status</items>
-  </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffsättigung']/items[at0006]">
-    <items id="hl7v2_mapping">OBX.19</items>
-    <items id="fhir_mapping">Observation.issued</items>
-  </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffsättigung']/items[at0003]">
-    <items id="hl7v2_mapping">NTE.3</items>
-    <items id="fhir_mapping">Observation.note</items>
   </annotations>
   <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffsättigung']/items[at0001]">
     <items id="hl7v2_mapping">OBX.2, OBX.5, OBX.6, OBX.7, OBX.8</items>
     <items id="fhir_mapping">Observation.value[x]</items>
   </annotations>
-  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffsättigung']/items[at0024]">
-    <items id="hl7v2_mapping">OBX.3</items>
-    <items id="fhir_mapping">Observation.code</items>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffsättigung']/items[at0003]">
+    <items id="hl7v2_mapping">NTE.3</items>
+    <items id="fhir_mapping">Observation.note</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffsättigung']/items[at0006]">
+    <items id="hl7v2_mapping">OBX.19</items>
+    <items id="fhir_mapping">Observation.issued</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffsättigung']/items[at0005]">
+    <items id="hl7v2_mapping">OBX.11</items>
+    <items id="fhir_mapping">Observation.status</items>
+  </annotations>
+  <annotations path="[openEHR-EHR-COMPOSITION.registereintrag.v1]/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1,'Sauerstoffsättigung']">
+    <items id="3150-0">Inhaled oxygen concentration</items>
   </annotations>
   <view/>
 </template>

@@ -13,14 +13,30 @@
     },
     "rm_version" : "1.0.4"
   },
+  "feeder_audit" : {
+    "_type" : "FEEDER_AUDIT",
+    "originating_system_item_ids" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "Observation/3115d7ee-d9f1-4390-b57d-89cbeb0db494/_history/1",
+      "type" : "fhir_logical_id"
+    } ],
+    "originating_system_audit" : {
+      "_type" : "FEEDER_AUDIT_DETAILS",
+      "system_id" : "FHIR-Bridge"
+    }
+  },
   "language" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_639-1"
     },
     "code_string" : "de"
   },
   "territory" : {
+    "_type" : "CODE_PHRASE",
     "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
       "value" : "ISO_3166-1"
     },
     "code_string" : "DE"
@@ -29,7 +45,9 @@
     "_type" : "DV_CODED_TEXT",
     "value" : "event",
     "defining_code" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "openehr"
       },
       "code_string" : "433"
@@ -48,7 +66,9 @@
       "_type" : "DV_CODED_TEXT",
       "value" : "secondary medical care",
       "defining_code" : {
+        "_type" : "CODE_PHRASE",
         "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
           "value" : "openehr"
         },
         "code_string" : "232"
@@ -70,7 +90,9 @@
           "_type" : "DV_CODED_TEXT",
           "value" : "final",
           "defining_code" : {
+            "_type" : "CODE_PHRASE",
             "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
               "value" : "local"
             },
             "code_string" : "at0012"
@@ -98,14 +120,27 @@
       "_type" : "DV_TEXT",
       "value" : "Laborergebnis"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+      },
+      "template_id" : {
+        "value" : "Befund der Blutgasanalyse"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "ISO_639-1"
       },
       "code_string" : "de"
     },
     "encoding" : {
+      "_type" : "CODE_PHRASE",
       "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
         "value" : "IANA_character-sets"
       },
       "code_string" : "UTF-8"
@@ -148,8 +183,10 @@
               "_type" : "DV_CODED_TEXT",
               "value" : "Gas panel - Arterial blood",
               "defining_code" : {
+                "_type" : "CODE_PHRASE",
                 "terminology_id" : {
-                  "value" : "LOINC"
+                  "_type" : "TERMINOLOGY_ID",
+                  "value" : "http://loinc.org"
                 },
                 "code_string" : "24336-0"
               }
@@ -161,18 +198,29 @@
               "_type" : "DV_TEXT",
               "value" : "Kohlendioxidpartialdruck"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+              },
+              "template_id" : {
+                "value" : "Befund der Blutgasanalyse"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "ELEMENT",
               "name" : {
                 "_type" : "DV_TEXT",
-                "value" : "untersuchter Analyt"
+                "value" : "Bezeichnung des Analyts"
               },
               "value" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "Carbon dioxide [Partial pressure] in Arterial blood",
+                "value" : "CO2 (BldA) [Partial pressure]",
                 "defining_code" : {
+                  "_type" : "CODE_PHRASE",
                   "terminology_id" : {
-                    "value" : "LOINC"
+                    "_type" : "TERMINOLOGY_ID",
+                    "value" : "http://loinc.org"
                   },
                   "code_string" : "2019-8"
                 }
@@ -182,7 +230,7 @@
               "_type" : "ELEMENT",
               "name" : {
                 "_type" : "DV_TEXT",
-                "value" : "Analyt-Resultat"
+                "value" : "Analyt-Ergebnis"
               },
               "value" : {
                 "_type" : "DV_QUANTITY",
@@ -209,18 +257,29 @@
               "_type" : "DV_TEXT",
               "value" : "Sauerstoffpartialdruck"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+              },
+              "template_id" : {
+                "value" : "Befund der Blutgasanalyse"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "ELEMENT",
               "name" : {
                 "_type" : "DV_TEXT",
-                "value" : "untersuchter Analyt"
+                "value" : "Bezeichnung des Analyts"
               },
               "value" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "Oxygen [Partial pressure] in Arterial blood",
+                "value" : "Oxygen (BldA) [Partial pressure]",
                 "defining_code" : {
+                  "_type" : "CODE_PHRASE",
                   "terminology_id" : {
-                    "value" : "LOINC"
+                    "_type" : "TERMINOLOGY_ID",
+                    "value" : "http://loinc.org"
                   },
                   "code_string" : "2703-7"
                 }
@@ -230,7 +289,7 @@
               "_type" : "ELEMENT",
               "name" : {
                 "_type" : "DV_TEXT",
-                "value" : "Analyt-Resultat"
+                "value" : "Analyt-Ergebnis"
               },
               "value" : {
                 "_type" : "DV_QUANTITY",
@@ -257,18 +316,29 @@
               "_type" : "DV_TEXT",
               "value" : "pH-Wert"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+              },
+              "template_id" : {
+                "value" : "Befund der Blutgasanalyse"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "ELEMENT",
               "name" : {
                 "_type" : "DV_TEXT",
-                "value" : "untersuchter Analyt"
+                "value" : "Bezeichnung des Analyts"
               },
               "value" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "pH of Arterial blood",
+                "value" : "pH (BldA)",
                 "defining_code" : {
+                  "_type" : "CODE_PHRASE",
                   "terminology_id" : {
-                    "value" : "LOINC"
+                    "_type" : "TERMINOLOGY_ID",
+                    "value" : "http://loinc.org"
                   },
                   "code_string" : "2744-1"
                 }
@@ -278,7 +348,7 @@
               "_type" : "ELEMENT",
               "name" : {
                 "_type" : "DV_TEXT",
-                "value" : "Analyt-Resultat"
+                "value" : "Analyt-Ergebnis"
               },
               "value" : {
                 "_type" : "DV_QUANTITY",
@@ -305,18 +375,29 @@
               "_type" : "DV_TEXT",
               "value" : "Sauerstoffsättigung"
             },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+              },
+              "template_id" : {
+                "value" : "Befund der Blutgasanalyse"
+              },
+              "rm_version" : "1.0.4"
+            },
             "items" : [ {
               "_type" : "ELEMENT",
               "name" : {
                 "_type" : "DV_TEXT",
-                "value" : "untersuchter Analyt"
+                "value" : "Bezeichnung des Analyts"
               },
               "value" : {
                 "_type" : "DV_CODED_TEXT",
                 "value" : "Oxygen saturation in Arterial blood",
                 "defining_code" : {
+                  "_type" : "CODE_PHRASE",
                   "terminology_id" : {
-                    "value" : "LOINC"
+                    "_type" : "TERMINOLOGY_ID",
+                    "value" : "http://loinc.org"
                   },
                   "code_string" : "2708-6"
                 }
@@ -326,7 +407,7 @@
               "_type" : "ELEMENT",
               "name" : {
                 "_type" : "DV_TEXT",
-                "value" : "Analyt-Resultat"
+                "value" : "Analyt-Ergebnis"
               },
               "value" : {
                 "_type" : "DV_QUANTITY",

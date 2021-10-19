@@ -17,14 +17,14 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.laboratory_test_result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-03-09T12:08:29.660409+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.3.0"
+    date = "2021-10-19T12:08:14.374831+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class LaborergebnisObservation implements EntryEntity {
   /**
    * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Labortest-Bezeichnung
    * Description: Name der Laboruntersuchung, die an der/den Probe(n) durchgeführt wurde.
-   * Comment: Ein Laborergebnis kann sich auf ein einzelnes Analyt oder eine Analytgruppe beziehen. Dazu zählen auch komplette Panel an Parametern.
+   * Comment: Ein Laborergebnis kann sich auf ein einzelnes Analyt oder eine Analytgruppe beziehen. Dazu zählen auch komplette Panel an Parametern. 
    * Es wird dringend empfohlen, die "Labortest-Bezeichnung" anhand einer Terminologie zu kodiereren, wie zum Beispiel LOINC oder SNOMED CT. Beispiel: "Glukose", "Harnstoff", "Abstrich", "Cortisol", "Leberbiopsie". Der Name kann u.U. auch das Probenmaterial oder den Patientenstatus (z.B. "Blutzuckerspiegel nüchtern") oder andere Informationen beinhalten wie "Kalium (Blutgas)".
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0005]/value|defining_code")
@@ -46,32 +46,28 @@ public class LaborergebnisObservation implements EntryEntity {
 
   /**
    * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Kohlendioxidpartialdruck
-   * Description: Ergebnis eines Labortests für einen bestimmten Analytwert.
-   * Comment: Beispiele: 'Natrium', 'Leukozytenzahl', 'T3'. Üblicherweise über eine externe Terminologie codiert.
+   * Description: Ergebnis einer Laboranalyse für einen bestimmten Analytwert.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1 and name/value='Kohlendioxidpartialdruck']")
   private KohlendioxidpartialdruckCluster kohlendioxidpartialdruck;
 
   /**
    * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffpartialdruck
-   * Description: Ergebnis eines Labortests für einen bestimmten Analytwert.
-   * Comment: Beispiele: 'Natrium', 'Leukozytenzahl', 'T3'. Üblicherweise über eine externe Terminologie codiert.
+   * Description: Ergebnis einer Laboranalyse für einen bestimmten Analytwert.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1 and name/value='Sauerstoffpartialdruck']")
   private SauerstoffpartialdruckCluster sauerstoffpartialdruck;
 
   /**
    * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/pH-Wert
-   * Description: Ergebnis eines Labortests für einen bestimmten Analytwert.
-   * Comment: Beispiele: 'Natrium', 'Leukozytenzahl', 'T3'. Üblicherweise über eine externe Terminologie codiert.
+   * Description: Ergebnis einer Laboranalyse für einen bestimmten Analytwert.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1 and name/value='pH-Wert']")
   private PhWertCluster phWert;
 
   /**
    * Path: Befund der Blutgasanalyse/Laborergebnis/Jedes Ereignis/Sauerstoffsättigung
-   * Description: Ergebnis eines Labortests für einen bestimmten Analytwert.
-   * Comment: Beispiele: 'Natrium', 'Leukozytenzahl', 'T3'. Üblicherweise über eine externe Terminologie codiert.
+   * Description: Ergebnis einer Laboranalyse für einen bestimmten Analytwert.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1 and name/value='Sauerstoffsättigung']")
   private SauerstoffsaettigungCluster sauerstoffsaettigung;
