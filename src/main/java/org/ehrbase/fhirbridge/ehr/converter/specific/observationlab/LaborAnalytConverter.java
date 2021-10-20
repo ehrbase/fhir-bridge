@@ -3,7 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningCode;
@@ -35,6 +35,8 @@ import java.util.Optional;
 public class LaborAnalytConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(LaborAnalytConverter.class);
+
+    private final DvCodedTextParser dvCodedTextParser = DvCodedTextParser.getInstance();
 
     private final String EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT = "Valid code coding code is missing, this field is required to be present in order to do a mapping! Please add it to the instance. This also includes the System not to be empty.";
 
@@ -78,7 +80,7 @@ public class LaborAnalytConverter {
 
     private Optional<DvCodedText> mapUntersuchterAnalyt(Observation observation) {
         if (observation.getCode().hasCoding()) {
-            return DvCodedTextParser.parseFHIRCoding(observation.getCode().getCoding().get(0));
+            return dvCodedTextParser.parseFHIRCoding(observation.getCode().getCoding().get(0));
         } else {
             throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
         }
@@ -140,7 +142,7 @@ public class LaborAnalytConverter {
     }
 
     private Optional<DvCodedText> mapInterpretation(Coding coding) {
-        return DvCodedTextParser.parseFHIRCoding(coding);
+        return dvCodedTextParser.parseFHIRCoding(coding);
     }
 
     private Optional<TemporalAccessor> mapZeitpunktderValidierung(Observation observation) {
