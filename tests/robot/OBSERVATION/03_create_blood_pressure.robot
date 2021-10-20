@@ -205,7 +205,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	
 	$.component[0].code.coding[0].code    	foobar    		1    	422    	Observation.component:systolicBloodPressure: minimum required = 1, but only found 0 .from ${profile url}
 
-	$.component[0].valueQuantity			missing			1		422    	vs-3: 'If there is no a value a data absent reason must be present' failed
+	$.component[0].valueQuantity			missing			1		422    	vs-3: 'If there is no a value a data absent reason must be present'
 	...																		Observation.component[0]
 	
 	$.component[0].valueQuantity			${EMPTY}		0		422    	The property valueQuantity must be an Object, not a primitive property
@@ -303,7 +303,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	
 	$.component[1].code.coding[0].code    	foobar    		1    	422		Observation.component.diastolicBloodPressure: minimum required = 1, but only found 0 .from ${profile url}
 
-	$.component[1].valueQuantity			missing			1		422		vs-3: 'If there is no a value a data absent reason must be present' failed
+	$.component[1].valueQuantity			missing			1		422		vs-3: 'If there is no a value a data absent reason must be present'
 	...																		Observation.component[1]
 	
 	$.component[1].valueQuantity			${EMPTY}		0		422		The property valueQuantity must be an Object, not a primitive property
