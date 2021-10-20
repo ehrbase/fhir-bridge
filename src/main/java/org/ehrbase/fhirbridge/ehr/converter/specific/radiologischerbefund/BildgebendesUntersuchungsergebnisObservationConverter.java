@@ -25,9 +25,8 @@ public class BildgebendesUntersuchungsergebnisObservationConverter extends Diagn
     private void mapNameDerUntersuchung(BildgebendesUntersuchungsergebnisObservation bildgebendesUntersuchungsergebnisObservation, List<Coding> coding) {
         if (coding.get(0).getCode().equals("18748-4")) {
             bildgebendesUntersuchungsergebnisObservation.setNameDerUntersuchungDefiningCode(NameDerUntersuchungDefiningCode.DIAGNOSTIC_IMAGING_STUDY);
-        } else {
+        } else { // currently not reachable because fix pattern; therefore not tested
             throw new ConversionException("The Loinc code " + coding.get(0).getCode() + " is not supported for radiology report !");
         }
     }
-
 }

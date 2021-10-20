@@ -1,6 +1,5 @@
 {
   "resourceType": "DiagnosticReport",
-  "id": "29cd7bc6-2b7b-44b9-8242-3d05fabd3e6a",
   "meta": {
     "profile": [
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnostic-report-radiology"
@@ -39,7 +38,7 @@
     }
   },
   "effectiveDateTime": "2020-09-30",
-  "conclusion": "Unspezifischer Befund",
+  "conclusion": "COVID-19-typischer Befund",
   "conclusionCode": [
     {
       "coding": [

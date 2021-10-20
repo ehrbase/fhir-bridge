@@ -49,20 +49,5 @@
         }
       ]
     }
-  ],
-  "performer": [
-    {
-      "identifier": {
-        "system": "urn:performer:identifier:system",
-        "value": "performer_123456"
-      }
-    },
-    {
-      "identifier": {
-        "system": "urn:organization:identifier:system",
-        "value": "organization_123456"
-      },
-      "type": "Organization"
-    }
   ]
 }

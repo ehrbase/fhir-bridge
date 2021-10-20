@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "DiagnosticReport/4b8b860b-b925-49fa-9026-16218f580445/_history/1",
+      "id" : "DiagnosticReport/348f00db-1941-437f-b673-921ec147e98c/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -81,25 +81,6 @@
         "value" : "Baum"
       },
       "items" : [ {
-        "_type" : "ELEMENT",
-        "name" : {
-          "_type" : "DV_TEXT",
-          "value" : "Status"
-        },
-        "value" : {
-          "_type" : "DV_CODED_TEXT",
-          "value" : "final",
-          "defining_code" : {
-            "_type" : "CODE_PHRASE",
-            "terminology_id" : {
-              "_type" : "TERMINOLOGY_ID",
-              "value" : "local"
-            },
-            "code_string" : "at0012"
-          }
-        },
-        "archetype_node_id" : "at0004"
-      }, {
         "_type" : "ELEMENT",
         "name" : {
           "_type" : "DV_TEXT",

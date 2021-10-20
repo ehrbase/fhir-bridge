@@ -1,8 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.diagnosticreport;
 
-import ca.uhn.fhir.parser.DataFormatException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerbefund.RadiologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
@@ -28,52 +26,39 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
         super("DiagnosticReport/RadiologyReport/", DiagnosticReport.class);
     }
 
+    // #####################################################################################
+    // check payload
+
     @Test
-    void createNormalFinding() throws IOException {
+    void createRadiologyReportNormalFinding() throws IOException {
         create("create-radiology-report-normal-finding.json");
     }
 
     @Test
-    void mappingNormalFinding() throws IOException {
-        testMapping("create-radiology-report-normal-finding.json", "paragon-radiology-report-normal-finding.json");
+    void mappingRadiologyReportNormalFinding() throws IOException {
+        testMapping("create-radiology-report-normal-finding.json",
+                "paragon-radiology-report-normal-finding.json");
     }
 
     @Test
-    void mappingTypicalFinding() throws IOException {
-        testMapping("create-radiology-report-typical-finding.json", "paragon-radiology-report-typical-finding.json");
+    void mappingRadiologyReportTypicalFinding() throws IOException {
+        testMapping("create-radiology-report-typical-finding.json",
+                "paragon-radiology-report-typical-finding.json");
     }
 
     @Test
-    void mappingUnspecificFinding() throws IOException {
-        testMapping("create-radiology-report-unspecific-finding.json", "paragon-radiology-report-unspecific-finding.json");
+    void mappingRadiologyReportUnspecificFinding() throws IOException {
+        testMapping("create-radiology-report-unspecific-finding.json",
+                "paragon-radiology-report-unspecific-finding.json");
     }
 
-    //BSa wieso hier die unterschiedliche Art die Exception entgegen zu nehmen?
-    @Test
-    void createInvalidNameDerUntersuchung() throws IOException {
-        Exception exception = executeMappingException("create-radiology-report-invalid-kategorie.json");
-        assertEquals("The LOINC code: safs-0 is not valid for radiology report!", exception.getMessage());
-    }
-
-    @Test
-    void createInvalidStatus() throws IOException {
-        try {
-            super.testFileLoader.loadResource("create-radiology-report-invalid-status.json");
-        } catch (DataFormatException dataFormatException) {
-            assertEquals("[element=\"status\"] Invalid attribute value \"asd\": Unknown DiagnosticReportStatus code 'asd'", dataFormatException.getMessage());
-        }
-    }
-
-    @Test
-    void createInvalidKategorie() throws IOException {
-        Exception exception = executeMappingException("create-radiology-report-invalid-untersuchung.json");
-        assertEquals("The Loinc code sfds-4 is not supported for radiology report !", exception.getMessage());
-    }
+    // #####################################################################################
+    // default
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
         DiagnosticReport radiologyReport = (DiagnosticReport) testFileLoader.loadResource(path);
-        return assertThrows(ConversionException.class, () -> {
+        return assertThrows(Exception.class, () -> {
             new RadiologischerBefundCompositionConverter().convert(radiologyReport);
         });
     }

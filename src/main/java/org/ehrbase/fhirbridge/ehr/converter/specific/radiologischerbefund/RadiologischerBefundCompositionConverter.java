@@ -5,7 +5,6 @@ import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToCompositio
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.KategorieDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.RadiologischerBefundKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DiagnosticReport;
@@ -19,25 +18,9 @@ public class RadiologischerBefundCompositionConverter extends DiagnosticReportTo
     @Override
     public GECCORadiologischerBefundComposition convertInternal(@NonNull DiagnosticReport resource) {
         GECCORadiologischerBefundComposition composition = new GECCORadiologischerBefundComposition();
-        mapStatus(composition, resource);
         mapKategorie(composition, resource);
         composition.setBildgebendesUntersuchungsergebnis(List.of(new BildgebendesUntersuchungsergebnisObservationConverter().convert(resource)));
         return composition;
-    }
-
-    private void mapStatus(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition, DiagnosticReport diagnosticReport) {
-        String status = diagnosticReport.getStatusElement().getCode();
-        if (status.equals(StatusDefiningCode.FINAL.getValue())) {
-            geccoRadiologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.FINAL);
-        } else if (status.equals(StatusDefiningCode.GEAENDERT.getValue())) {
-            geccoRadiologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.GEAENDERT);
-        } else if (status.equals(StatusDefiningCode.REGISTRIERT.getValue())) {
-            geccoRadiologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.REGISTRIERT);
-        } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
-            geccoRadiologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
-        } else {
-            throw new ConversionException("The status " + diagnosticReport.getStatus().toString() + " is not valid for radiology report.");
-        }
     }
 
     private void mapKategorie(GECCORadiologischerBefundComposition geccoRadiologischerBefundComposition, DiagnosticReport diagnosticReport) {
@@ -59,7 +42,7 @@ public class RadiologischerBefundCompositionConverter extends DiagnosticReportTo
             radiologischerBefundKategorieElement.setValue(KategorieDefiningCode.RADIOLOGY);
         } else if (coding.getCode().equals(KategorieDefiningCode.RADIOLOGY_STUDIES_SET.getCode())) {
             radiologischerBefundKategorieElement.setValue(KategorieDefiningCode.RADIOLOGY_STUDIES_SET);
-        } else {
+        } else { // currently not reachable because fix pattern; therefore not tested
             throw new ConversionException("The LOINC code: " + coding.getCode() + " is not valid for radiology report!");
         }
         return radiologischerBefundKategorieElement;
