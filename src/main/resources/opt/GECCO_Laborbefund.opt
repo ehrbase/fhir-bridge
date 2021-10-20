@@ -25,10 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">41ffab670241b66773ed8b5999061897</other_details>
+    <other_details id="MD5-CAM-1.0.1">37ecf95fdb32023a634af7bcb90a84d7</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">7.1.0</other_details>
+    <other_details id="sem_ver">7.2.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -377,11 +377,9 @@
         <rm_type_name>OBSERVATION</rm_type_name>
         <occurrences>
           <lower_included>true</lower_included>
-          <upper_included>true</upper_included>
           <lower_unbounded>false</lower_unbounded>
-          <upper_unbounded>false</upper_unbounded>
+          <upper_unbounded>true</upper_unbounded>
           <lower>1</lower>
-          <upper>1</upper>
         </occurrences>
         <node_id>at0000</node_id>
         <attributes xsi:type="C_SINGLE_ATTRIBUTE">

@@ -46,7 +46,7 @@ public class GECCOLaborbefundCompositionContainment extends Containment {
 
   public SelectAqlField<Setting> SETTING_DEFINING_CODE = new AqlFieldImp<Setting>(GECCOLaborbefundComposition.class, "/context/setting|defining_code", "settingDefiningCode", Setting.class, this);
 
-  public SelectAqlField<LaborergebnisObservation> LABORERGEBNIS = new AqlFieldImp<LaborergebnisObservation>(GECCOLaborbefundComposition.class, "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]", "laborergebnis", LaborergebnisObservation.class, this);
+  public ListSelectAqlField<LaborergebnisObservation> LABORERGEBNIS = new ListAqlFieldImp<LaborergebnisObservation>(GECCOLaborbefundComposition.class, "/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]", "laborergebnis", LaborergebnisObservation.class, this);
 
   public SelectAqlField<PartyProxy> COMPOSER = new AqlFieldImp<PartyProxy>(GECCOLaborbefundComposition.class, "/composer", "composer", PartyProxy.class, this);
 

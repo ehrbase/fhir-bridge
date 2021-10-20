@@ -17,7 +17,7 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
     @Override
     public GECCOLaborbefundComposition convertInternal(@NonNull Observation resource) {
         GECCOLaborbefundComposition composition = new GECCOLaborbefundComposition();
-        composition.setLaborergebnis(new LaborergebnisObservationConverter().convert(resource));
+        composition.setLaborergebnis(List.of(new LaborergebnisObservationConverter().convert(resource)));
         composition.setStatusDefiningCode(getRegisterEintrag(resource));
         setKategorieValue(resource, composition);
         return composition;
@@ -39,7 +39,7 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
         }
     }
 
-    private StatusDefiningCode getRegisterEintrag(Observation resource) {
+    private StatusDefiningCode getRegisterEintrag(Observation resource) { //TODO what if other status
         switch (resource.getStatus()) {
             case FINAL:
                 return StatusDefiningCode.FINAL;

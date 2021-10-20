@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "DiagnosticReport/fea75598-f382-4215-b683-306597b48f40/_history/1",
+      "id" : "DiagnosticReport/49a83826-a7af-41ea-bfb2-866b7c441f13/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -107,7 +107,18 @@
         },
         "value" : {
           "_type" : "DV_TEXT",
-          "value" : "laboratory"
+          "value" : "LAB"
+        },
+        "archetype_node_id" : "at0005"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "26436-6"
         },
         "archetype_node_id" : "at0005"
       } ],

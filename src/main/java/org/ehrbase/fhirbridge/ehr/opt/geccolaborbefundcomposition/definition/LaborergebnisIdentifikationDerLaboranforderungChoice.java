@@ -4,7 +4,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-18T12:28:12.638260+02:00",
+    date = "2021-10-20T12:36:29.092061+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public interface LaborergebnisIdentifikationDerLaboranforderungChoice {
