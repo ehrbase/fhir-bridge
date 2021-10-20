@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
@@ -104,7 +105,7 @@ public class LaborAnalytConverter {
             case PRELIMINARY:
                 return ErgebnisStatusDefiningCode.VORLAEUFIG;
             default:
-                return ErgebnisStatusDefiningCode.UNVOLLSTAENDIG;
+                throw new InvalidStatusCodeException(observation.getStatus().toString());
         }
     }
 

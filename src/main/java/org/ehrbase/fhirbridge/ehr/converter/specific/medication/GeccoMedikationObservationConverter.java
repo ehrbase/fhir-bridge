@@ -4,6 +4,7 @@ import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.StatusCluster;
@@ -60,7 +61,7 @@ public abstract class GeccoMedikationObservationConverter<E extends EntryEntity>
         } else if (fhirStatus.equals(StatusDefiningCode.BEABSICHTIGT.getValue()) || fhirStatus.equals("intended")) {
             statusCluster.setStatusDefiningCode(StatusDefiningCode.BEABSICHTIGT);
         } else if (fhirStatus.equals(StatusDefiningCode.FEHLERHAFTE_ANWENDUNG.getValue()) || fhirStatus.equals("entered-in-error")) {
-            statusCluster.setStatusDefiningCode(StatusDefiningCode.FEHLERHAFTE_ANWENDUNG);
+            throw new InvalidStatusCodeException(resource.getStatusElement().getCode());
         } else if (fhirStatus.equals(StatusDefiningCode.GESTOPPT.getValue()) || fhirStatus.equals("stopped")) {
             statusCluster.setStatusDefiningCode(StatusDefiningCode.GESTOPPT);
         } else if (fhirStatus.equals(StatusDefiningCode.NICHT_GENOMMEN.getValue()) || fhirStatus.equals("not-taken")) {
