@@ -27,7 +27,7 @@ import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.
 @Archetype("openEHR-EHR-COMPOSITION.report-result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-14T14:30:10.341722300+02:00",
+    date = "2021-10-04T14:02:16.934335900+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Virologischer Befund")
@@ -53,7 +53,7 @@ public class VirologischerBefundComposition implements CompositionEntity {
 
   /**
    * Path: Virologischer Befund/context/Status
-   * Description: Der Status des gesamten Berichts. Hinweis: Dies ist nicht der Status einer Berichtskomponente.
+   * Description: Status des gesamten Ergebnisberichts. Hinweis: Dies ist nicht der Status einzelner Berichtskomponenten.
    */
   @Path("/context/other_context[at0001 and name/value='Tree']/items[at0005]/value|value")
   private String statusValue;

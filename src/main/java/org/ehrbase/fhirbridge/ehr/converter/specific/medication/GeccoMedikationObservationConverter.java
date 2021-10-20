@@ -1,11 +1,11 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.medication;
 
 import com.nedap.archie.rm.datavalues.DvCodedText;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToObservationConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.StatusCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.MedicationStatement;
@@ -40,10 +40,11 @@ public abstract class GeccoMedikationObservationConverter<E extends EntryEntity>
         }
     }
 
-    protected Optional<DvCodedText> getGrundDefiningCode(MedicationStatement resource) {
-        if (resource.hasReasonCode() && resource.getReasonCode().size()>0 && resource.getReasonCode().get(0).hasCoding()) {
-                return DvCodedTextParser.parseFHIRCoding(resource.getReasonCode().get(0).getCoding().get(0));
-            }
+    protected Optional<DvCodedText> getGrundDefiningCode(MedicationStatement medicationStatement) {
+        if (medicationStatement.hasReasonCode() && !medicationStatement.getReasonCode().isEmpty() && medicationStatement.getReasonCode().get(0).hasCoding()) {
+            return DvCodedTextParser.getInstance()
+                    .parseFHIRCoding(medicationStatement.getReasonCode().get(0).getCoding().get(0));
+        }
         return Optional.empty();
     }
 

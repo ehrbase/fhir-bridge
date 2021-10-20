@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.absence.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-13T13:53:54.793161+02:00",
+    date = "2021-10-13T17:05:46.220257+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class UnbekannterImpfstatusEvaluation implements EntryEntity {
@@ -25,8 +26,8 @@ public class UnbekannterImpfstatusEvaluation implements EntryEntity {
    * Description: Positive Aussage, dass keine Informationen verfügbar sind.
    * Comment: Zum Beispiel: "Es liegen keine Informationen über Nebenwirkungen vor"; "Es liegen keine Informationen über Probleme oder Diagnosen vor"; "Es liegen keine Informationen über vorangegangene Verfahren vor"; oder "Es liegen keine Informationen über verwendete Medikamente vor".
    */
-  @Path("/data[at0001]/items[at0002]/value|defining_code")
-  private AussageUeberAbwesenheitDefiningCode aussageUeberAbwesenheitDefiningCode;
+  @Path("/data[at0001]/items[at0002]/value")
+  private DvCodedText aussageUeberAbwesenheit;
 
   /**
    * Path: Impfstatus/Unbekannter Impfstatus/Baum/Aussage über Abwesenheit/null_flavour
@@ -60,13 +61,12 @@ public class UnbekannterImpfstatusEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setAussageUeberAbwesenheitDefiningCode(
-      AussageUeberAbwesenheitDefiningCode aussageUeberAbwesenheitDefiningCode) {
-     this.aussageUeberAbwesenheitDefiningCode = aussageUeberAbwesenheitDefiningCode;
+  public void setAussageUeberAbwesenheit(DvCodedText aussageUeberAbwesenheit) {
+     this.aussageUeberAbwesenheit = aussageUeberAbwesenheit;
   }
 
-  public AussageUeberAbwesenheitDefiningCode getAussageUeberAbwesenheitDefiningCode() {
-     return this.aussageUeberAbwesenheitDefiningCode ;
+  public DvCodedText getAussageUeberAbwesenheit() {
+     return this.aussageUeberAbwesenheit ;
   }
 
   public void setAussageUeberAbwesenheitNullFlavourDefiningCode(

@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccoprozedurcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
 import org.ehrbase.client.aql.field.ListAqlFieldImp;
@@ -12,7 +13,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class MedizingeraetClusterContainment extends Containment {
   public SelectAqlField<MedizingeraetCluster> MEDIZINGERAET_CLUSTER = new AqlFieldImp<MedizingeraetCluster>(MedizingeraetCluster.class, "", "MedizingeraetCluster", MedizingeraetCluster.class, this);
 
-  public SelectAqlField<GeraetenameDefiningCode> GERAETENAME_DEFINING_CODE = new AqlFieldImp<GeraetenameDefiningCode>(MedizingeraetCluster.class, "/items[at0001]/value|defining_code", "geraetenameDefiningCode", GeraetenameDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> GERAETENAME = new AqlFieldImp<DvCodedText>(MedizingeraetCluster.class, "/items[at0001]/value", "geraetename", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> GERAETENAME_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(MedizingeraetCluster.class, "/items[at0001]/null_flavour|defining_code", "geraetenameNullFlavourDefiningCode", NullFlavour.class, this);
 

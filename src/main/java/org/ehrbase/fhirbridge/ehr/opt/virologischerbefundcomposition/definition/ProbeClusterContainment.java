@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -15,7 +16,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class ProbeClusterContainment extends Containment {
   public SelectAqlField<ProbeCluster> PROBE_CLUSTER = new AqlFieldImp<ProbeCluster>(ProbeCluster.class, "", "ProbeCluster", ProbeCluster.class, this);
 
-  public SelectAqlField<ProbenartDefiningCode> PROBENART_DEFINING_CODE = new AqlFieldImp<ProbenartDefiningCode>(ProbeCluster.class, "/items[at0029]/value|defining_code", "probenartDefiningCode", ProbenartDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> PROBENART = new AqlFieldImp<DvCodedText>(ProbeCluster.class, "/items[at0029]/value", "probenart", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> PROBENART_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(ProbeCluster.class, "/items[at0029]/null_flavour|defining_code", "probenartNullFlavourDefiningCode", NullFlavour.class, this);
 

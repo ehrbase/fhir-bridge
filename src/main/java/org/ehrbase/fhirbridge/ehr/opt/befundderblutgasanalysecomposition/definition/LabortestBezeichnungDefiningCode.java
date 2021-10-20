@@ -4,11 +4,11 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum LabortestBezeichnungDefiningCode implements EnumValueSet {
-  GAS_PANEL_BLOOD("Gas panel - Blood", "", "LOINC", "24338-6"),
+  GAS_PANEL_BLOOD("Gas panel - Blood", "", "http://loinc.org", "24338-6"),
 
-  GAS_PANEL_CAPILLARY_BLOOD("Gas panel - Capillary blood", "", "LOINC", "24337-8"),
+  GAS_PANEL_CAPILLARY_BLOOD("Gas panel - Capillary blood", "", "http://loinc.org", "24337-8"),
 
-  GAS_PANEL_ARTERIAL_BLOOD("Gas panel - Arterial blood", "", "LOINC", "24336-0");
+  GAS_PANEL_ARTERIAL_BLOOD("Gas panel - Arterial blood", "", "http://loinc.org", "24336-0");
 
   private String value;
 

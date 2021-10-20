@@ -13,27 +13,35 @@ import java.util.Optional;
 
 public class DvCodedTextParser {
 
+    private DvCodedTextParser() {
+    }
+
     public static DvCodedText parseDefiningCode(EnumValueSet enumValueSet) {
         return new DvCodedText(enumValueSet.getValue(), new CodePhrase(new TerminologyId(enumValueSet.getTerminologyId(), ""), enumValueSet.getCode()));
     }
 
-    @Deprecated
-    public static Optional<DvCodedText> parseFHIRCodingOld(Coding coding){
-        if(coding.hasDisplay() && coding.hasSystem() && coding.hasCode() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
-            return  Optional.of(new DvCodedText(coding.getDisplay(), new CodePhrase(new TerminologyId("SNOMED Clinical Terms", ""), coding.getCode())));
-        }else if (coding.hasCode() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
+    /**
+     * @deprecated Use {@link org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser#parseFHIRCoding(Coding)}
+     */
+    @Deprecated(since = "1.4", forRemoval = true)
+    public static Optional<DvCodedText> parseFHIRCodingOld(Coding coding) {
+        if (coding.hasDisplay() && coding.hasSystem() && coding.hasCode() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
+            return Optional.of(new DvCodedText(coding.getDisplay(), new CodePhrase(new TerminologyId("SNOMED Clinical Terms", ""), coding.getCode())));
+        } else if (coding.hasCode() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
             return Optional.of(new DvCodedText("", new CodePhrase(new TerminologyId("SNOMED Clinical Terms", ""), coding.getCode())));
-        }else{
+        } else {
             return Optional.empty();
         }
     }
 
-    public static Optional<DvCodedText> parseFHIRCoding(Coding coding){
-        if(coding.hasDisplay() && coding.hasSystem() && coding.hasCode()){
-            return  Optional.of(new DvCodedText(coding.getDisplay(), new CodePhrase(new TerminologyId(coding.getSystem(), ""), coding.getCode())));
-        }else if (coding.hasCode() && coding.hasSystem()){
-            return Optional.of(new DvCodedText("", new CodePhrase(new TerminologyId(coding.getSystem(), ""), coding.getCode())));
-        }else{
+    /**
+     * @deprecated Use {@link org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser#parseFHIRCoding(Coding)}
+     */
+    @Deprecated(since = "1.4", forRemoval = true)
+    public static Optional<DvCodedText> parseFHIRCoding(Coding coding) {
+        if (coding.hasDisplay() && coding.hasSystem() && coding.hasCode()) {
+            return Optional.of(new DvCodedText(coding.getDisplay(), new CodePhrase(new TerminologyId(coding.getSystem(), ""), coding.getCode())));
+        } else {
             return Optional.empty();
         }
     }

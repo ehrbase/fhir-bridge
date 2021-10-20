@@ -44,7 +44,6 @@
                 "code": "laboratory"
               },
               {
-                "system": "http://loinc.org",
                 "code": "122442008",
                 "display": "Detection of virus (procedure)"
               }
@@ -55,7 +54,7 @@
         "code": {
           "coding": [
             {
-              "system": "http://loinc.org",
+              "system" : "http://loinc.org",
               "code": "94558-4",
               "display": "SARS-CoV-2 Ag"
             }
@@ -70,7 +69,7 @@
         "valueCodeableConcept": {
           "coding": [
             {
-              "system": "http://loinc.org",
+              "system": "http://snomed.info/sct",
               "code": "419984006",
               "display": "Inconclusive (qualifier value)"
             }
@@ -175,6 +174,7 @@
           "bodySite":{
             "coding": [
               {
+                "system": "http://snomed.info/sct",
                 "code": "955009",
                 "display": "Bronchial structure (body structure)"
               }

@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
 import org.ehrbase.client.aql.field.ListAqlFieldImp;
@@ -12,7 +13,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class AnatomischeLokalisationClusterContainment extends Containment {
   public SelectAqlField<AnatomischeLokalisationCluster> ANATOMISCHE_LOKALISATION_CLUSTER = new AqlFieldImp<AnatomischeLokalisationCluster>(AnatomischeLokalisationCluster.class, "", "AnatomischeLokalisationCluster", AnatomischeLokalisationCluster.class, this);
 
-  public SelectAqlField<NameDerKoerperstelleDefiningCode> NAME_DER_KOERPERSTELLE_DEFINING_CODE = new AqlFieldImp<NameDerKoerperstelleDefiningCode>(AnatomischeLokalisationCluster.class, "/items[at0001]/value|defining_code", "nameDerKoerperstelleDefiningCode", NameDerKoerperstelleDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> NAME_DER_KOERPERSTELLE = new AqlFieldImp<DvCodedText>(AnatomischeLokalisationCluster.class, "/items[at0001]/value", "nameDerKoerperstelle", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> NAME_DER_KOERPERSTELLE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(AnatomischeLokalisationCluster.class, "/items[at0001]/null_flavour|defining_code", "nameDerKoerperstelleNullFlavourDefiningCode", NullFlavour.class, this);
 

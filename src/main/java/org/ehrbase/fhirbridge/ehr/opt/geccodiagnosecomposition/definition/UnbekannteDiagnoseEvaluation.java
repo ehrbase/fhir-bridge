@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.absence.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-13T14:55:50.901391+02:00",
+    date = "2021-10-19T15:40:13.539267+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class UnbekannteDiagnoseEvaluation implements EntryEntity {
@@ -25,8 +26,8 @@ public class UnbekannteDiagnoseEvaluation implements EntryEntity {
    * Description: Positive Aussage, dass keine Informationen verfügbar sind.
    * Comment: Zum Beispiel: "Es liegen keine Informationen über Nebenwirkungen vor"; "Es liegen keine Informationen über Probleme oder Diagnosen vor"; "Es liegen keine Informationen über vorangegangene Verfahren vor"; oder "Es liegen keine Informationen über verwendete Medikamente vor".
    */
-  @Path("/data[at0001]/items[at0002 and name/value='Unbekannte Diagnose']/value|defining_code")
-  private NameDesProblemsDerDiagnoseDefiningCode unbekannteDiagnoseDefiningCode;
+  @Path("/data[at0001]/items[at0002 and name/value='Unbekannte Diagnose']/value")
+  private DvCodedText unbekannteDiagnose;
 
   /**
    * Path: GECCO_Diagnose/Unbekannte Diagnose/Baum/Unbekannte Diagnose/null_flavour
@@ -74,13 +75,12 @@ public class UnbekannteDiagnoseEvaluation implements EntryEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setUnbekannteDiagnoseDefiningCode(
-      NameDesProblemsDerDiagnoseDefiningCode unbekannteDiagnoseDefiningCode) {
-     this.unbekannteDiagnoseDefiningCode = unbekannteDiagnoseDefiningCode;
+  public void setUnbekannteDiagnose(DvCodedText unbekannteDiagnose) {
+     this.unbekannteDiagnose = unbekannteDiagnose;
   }
 
-  public NameDesProblemsDerDiagnoseDefiningCode getUnbekannteDiagnoseDefiningCode() {
-     return this.unbekannteDiagnoseDefiningCode ;
+  public DvCodedText getUnbekannteDiagnose() {
+     return this.unbekannteDiagnose ;
   }
 
   public void setUnbekannteDiagnoseNullFlavourDefiningCode(

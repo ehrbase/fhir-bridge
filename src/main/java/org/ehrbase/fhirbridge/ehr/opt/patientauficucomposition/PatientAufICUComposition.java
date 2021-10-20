@@ -28,7 +28,7 @@ import org.ehrbase.fhirbridge.ehr.opt.patientauficucomposition.definition.Status
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-14T15:13:11.133254+02:00",
+    date = "2021-10-15T12:43:38.755755500+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("Patient auf ICU")

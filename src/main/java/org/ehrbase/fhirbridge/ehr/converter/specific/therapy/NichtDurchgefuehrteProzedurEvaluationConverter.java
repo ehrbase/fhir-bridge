@@ -29,7 +29,7 @@ public class NichtDurchgefuehrteProzedurEvaluationConverter
     protected NichtDurchgefuehrteProzedurEvaluation convertInternal(Procedure procedure) {
         NichtDurchgefuehrteProzedurEvaluation result = new NichtDurchgefuehrteProzedurEvaluation();
         result.setAussageUeberDenAusschlussValue(Procedure.ProcedureStatus.NOTDONE.getDisplay());
-        result.setEingriffDefiningCode(convertCode(procedure));
+        convertCode(procedure).ifPresent(result::setEingriff);
         return result;
     }
 }

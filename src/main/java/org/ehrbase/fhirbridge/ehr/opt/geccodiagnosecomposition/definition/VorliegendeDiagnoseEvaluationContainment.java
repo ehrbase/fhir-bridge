@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -16,6 +17,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class VorliegendeDiagnoseEvaluationContainment extends Containment {
   public SelectAqlField<VorliegendeDiagnoseEvaluation> VORLIEGENDE_DIAGNOSE_EVALUATION = new AqlFieldImp<VorliegendeDiagnoseEvaluation>(VorliegendeDiagnoseEvaluation.class, "", "VorliegendeDiagnoseEvaluation", VorliegendeDiagnoseEvaluation.class, this);
 
+  public SelectAqlField<DvCodedText> NAME_DES_PROBLEMS_DER_DIAGNOSE = new AqlFieldImp<DvCodedText>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0002]/value", "nameDesProblemsDerDiagnose", DvCodedText.class, this);
+
   public SelectAqlField<NullFlavour> NAME_DES_PROBLEMS_DER_DIAGNOSE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0002]/null_flavour|defining_code", "nameDesProblemsDerDiagnoseNullFlavourDefiningCode", NullFlavour.class, this);
 
   public ListSelectAqlField<KoerperstelleCluster> KOERPERSTELLE = new ListAqlFieldImp<KoerperstelleCluster>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[openEHR-EHR-CLUSTER.anatomical_location.v1]", "koerperstelle", KoerperstelleCluster.class, this);
@@ -23,8 +26,6 @@ public class VorliegendeDiagnoseEvaluationContainment extends Containment {
   public SelectAqlField<TemporalAccessor> DATUM_ZEITPUNKT_DES_AUFTRETENS_DER_ERSTDIAGNOSE_VALUE = new AqlFieldImp<TemporalAccessor>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0077]/value|value", "datumZeitpunktDesAuftretensDerErstdiagnoseValue", TemporalAccessor.class, this);
 
   public SelectAqlField<NullFlavour> DATUM_ZEITPUNKT_DES_AUFTRETENS_DER_ERSTDIAGNOSE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0077]/null_flavour|defining_code", "datumZeitpunktDesAuftretensDerErstdiagnoseNullFlavourDefiningCode", NullFlavour.class, this);
-
-  public SelectAqlField<SchweregradDefiningCode> SCHWEREGRAD_DEFINING_CODE = new AqlFieldImp<SchweregradDefiningCode>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0005]/value|defining_code", "schweregradDefiningCode", SchweregradDefiningCode.class, this);
 
   public SelectAqlField<NullFlavour> SCHWEREGRAD_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0005]/null_flavour|defining_code", "schweregradNullFlavourDefiningCode", NullFlavour.class, this);
 
@@ -48,7 +49,7 @@ public class VorliegendeDiagnoseEvaluationContainment extends Containment {
 
   public SelectAqlField<FeederAudit> FEEDER_AUDIT = new AqlFieldImp<FeederAudit>(VorliegendeDiagnoseEvaluation.class, "/feeder_audit", "feederAudit", FeederAudit.class, this);
 
-  public SelectAqlField<VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice> NAME_DES_PROBLEMS_DER_DIAGNOSE = new AqlFieldImp<VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0002]/value", "nameDesProblemsDerDiagnose", VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice.class, this);
+  public SelectAqlField<VorliegendeDiagnoseSchweregradChoice> SCHWEREGRAD = new AqlFieldImp<VorliegendeDiagnoseSchweregradChoice>(VorliegendeDiagnoseEvaluation.class, "/data[at0001]/items[at0005]/value", "schweregrad", VorliegendeDiagnoseSchweregradChoice.class, this);
 
   private VorliegendeDiagnoseEvaluationContainment() {
     super("openEHR-EHR-EVALUATION.problem_diagnosis.v1");

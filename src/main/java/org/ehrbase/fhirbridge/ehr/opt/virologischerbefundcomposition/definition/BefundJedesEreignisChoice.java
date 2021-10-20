@@ -9,7 +9,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-07-14T14:30:10.595708400+02:00",
+    date = "2021-10-04T14:02:17.200338600+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public interface BefundJedesEreignisChoice {

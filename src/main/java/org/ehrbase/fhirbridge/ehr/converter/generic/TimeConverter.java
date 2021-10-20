@@ -179,7 +179,7 @@ public class TimeConverter {
 
     public static TemporalAccessor convertConsentTime(Consent resource) {
         if (resource.hasDateTime()) {
-            return resource.getDateTime().toInstant();
+            return resource.getDateTimeElement().getValueAsCalendar().toZonedDateTime();
         } else {
             return OffsetDateTime.now();
         }

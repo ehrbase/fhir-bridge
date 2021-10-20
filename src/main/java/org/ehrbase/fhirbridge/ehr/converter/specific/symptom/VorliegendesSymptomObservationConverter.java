@@ -16,11 +16,10 @@
 
 package org.ehrbase.fhirbridge.ehr.converter.specific.symptom;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.DvCodedText;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomAnatomischeLokalisationElement;
 import org.ehrbase.fhirbridge.ehr.opt.symptomcomposition.definition.VorliegendesSymptomObservation;
@@ -29,7 +28,6 @@ import org.hl7.fhir.r4.model.Condition;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -67,9 +65,9 @@ public class VorliegendesSymptomObservationConverter extends ConditionToObservat
         if (!condition.hasSeverity()) {
             return Optional.empty();
         }
-        for(Coding coding: condition.getSeverity().getCoding()){
-            if(coding.getSystem().equals(CodeSystem.SNOMED.getUrl())){
-                return DvCodedTextParser.parseFHIRCoding(coding);
+        for (Coding coding : condition.getSeverity().getCoding()) {
+            if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
+                return DvCodedTextParser.getInstance().parseFHIRCoding(coding);
             }
         }
         return Optional.empty();

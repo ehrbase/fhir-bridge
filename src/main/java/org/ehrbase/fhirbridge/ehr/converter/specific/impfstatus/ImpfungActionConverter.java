@@ -1,30 +1,44 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ImmunizationToActionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.CurrentStateDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfstoffDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungAction;
-import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungGegenDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.ImpfungImpfungGegenElement;
 import org.ehrbase.fhirbridge.ehr.opt.impfstatuscomposition.definition.VerabreichteDosenCluster;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Immunization;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ImpfungActionConverter extends ImmunizationToActionConverter<ImpfungAction> {
 
-    Optional<VerabreichteDosenCluster> verabreichteDosenClusterOptional = Optional.empty();
+    private final DvCodedTextParser dvCodedTextParser = DvCodedTextParser.getInstance();
+
+    private Immunization.ImmunizationProtocolAppliedComponent immunizationProtocolAppliedComponent;
+    private Boolean hasImmunizationProtocolApplied = false;
+
+    ImpfungActionConverter(Immunization.ImmunizationProtocolAppliedComponent immunizationProtocolAppliedComponent) {
+        hasImmunizationProtocolApplied = true;
+        this.immunizationProtocolAppliedComponent = immunizationProtocolAppliedComponent;
+    }
+
+    ImpfungActionConverter() {
+    }
 
     @Override
-    protected ImpfungAction convertInternal(Immunization resource) {
+    protected ImpfungAction convertInternal(Immunization immunization) {
         ImpfungAction impfungAction = new ImpfungAction();
-
-        impfungAction.setImpfstoffDefiningCode(mapImpstoffDefiningCode(resource));
-        impfungAction.setCurrentStateDefiningCode(mapCurentState(resource));
-        mapImpfungGegenAndDosis(resource, impfungAction);
+        dvCodedTextParser.parseFHIRCoding(immunization.getVaccineCode().getCoding().get(0))
+                .ifPresent(impfungAction::setImpfstoff);
+        impfungAction.setCurrentStateDefiningCode(mapCurentState(immunization));
+        if (hasImmunizationProtocolApplied) {
+            mapImpfungGegenAndDosis(impfungAction);
+        }
         return impfungAction;
     }
 
@@ -41,82 +55,52 @@ public class ImpfungActionConverter extends ImmunizationToActionConverter<Impfun
         }
     }
 
-    private void mapImpfungGegenAndDosis(Immunization resource, ImpfungAction impfungAction) {
-        if (resource.hasProtocolApplied()) {
-            determineAndSet(resource, impfungAction);
-        } else {
-            throw new ConversionException("Target Disease code and dose missing");
+    private void mapImpfungGegenAndDosis(ImpfungAction impfungAction) {
+        impfungAction.setImpfungGegen(mapImpfungGegen());
+        impfungAction.setVerabreichteDosen(convertVerabreichteDosis());
+    }
+
+    private List<ImpfungImpfungGegenElement> mapImpfungGegen() {
+        List<ImpfungImpfungGegenElement> impfungImpfungGegenElements = new ArrayList<>();
+        for (CodeableConcept targetDisease : immunizationProtocolAppliedComponent.getTargetDisease()) {
+            ImpfungImpfungGegenElement impfungImpfungGegenElement = new ImpfungImpfungGegenElement();
+            dvCodedTextParser.parseFHIRCoding(targetDisease.getCoding().get(0))
+                    .ifPresent(impfungImpfungGegenElement::setValue);
+            impfungImpfungGegenElements.add(impfungImpfungGegenElement);
+        }
+        return impfungImpfungGegenElements;
+    }
+
+    private VerabreichteDosenCluster convertVerabreichteDosis() {
+        VerabreichteDosenCluster verabreichteDosenCluster = new VerabreichteDosenCluster();
+        if (immunizationProtocolAppliedComponent.hasDoseNumber()) {
+            convertMenge(verabreichteDosenCluster);
+        }
+        if (immunizationProtocolAppliedComponent.hasSeriesDoses()) {
+            convertDosierungsReihenfolge(verabreichteDosenCluster);
+        }
+        return verabreichteDosenCluster;
+    }
+
+    private void convertDosierungsReihenfolge(VerabreichteDosenCluster verabreichteDosenCluster) {
+        if (immunizationProtocolAppliedComponent.hasSeriesDosesPositiveIntType()) {
+            verabreichteDosenCluster.setDosierungsreihenfolgeMagnitude(Long.parseLong(immunizationProtocolAppliedComponent.getSeriesDosesPositiveIntType().toString()));
+        } else if (immunizationProtocolAppliedComponent.hasSeriesDosesStringType()) {
+            throw new UnprocessableEntityException("Currently the fhir bridge does not support inprecise values like strings for the dosage series, please enter an integer.");
         }
     }
 
-    private void determineAndSet(Immunization resource, ImpfungAction impfungAction) {
-        for (Immunization.ImmunizationProtocolAppliedComponent immunizationProtocolAppliedComponent : resource.getProtocolApplied()) {
-            if (immunizationProtocolAppliedComponent.hasTargetDisease()) {
-                setImfungGegen(impfungAction, resource);
-            } else if (immunizationProtocolAppliedComponent.hasDoseNumber()) {
-                setVerabreichteDosis(impfungAction, immunizationProtocolAppliedComponent);
-            }
+    private void convertMenge(VerabreichteDosenCluster verabreichteDosenCluster) {
+        if (immunizationProtocolAppliedComponent.hasDoseNumberPositiveIntType()) {
+            verabreichteDosenCluster.setDosismengeMagnitude(Double.parseDouble(immunizationProtocolAppliedComponent.getDoseNumberPositiveIntType().toString()));
+        } else if (immunizationProtocolAppliedComponent.hasDoseNumberStringType() &&
+                immunizationProtocolAppliedComponent.getDoseNumberStringType().hasExtension("http://hl7.org/fhir/StructureDefinition/data-absent-reason")) {
+            verabreichteDosenCluster.setDosismengeNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        } else if (immunizationProtocolAppliedComponent.hasDoseNumberStringType()) {
+            throw new UnprocessableEntityException("Currently the fhir bridge does not support inprecise values like strings for the dosage amount, please enter an integer.");
         }
     }
 
-    private void setImfungGegen(ImpfungAction impfungAction, Immunization resource) {
-        if (resource.getProtocolApplied().get(0).getTargetDisease().get(0).hasCoding()
-                && resource.getProtocolApplied().get(0).getTargetDisease().get(0).getCoding().get(0).hasSystem()
-                && resource.getProtocolApplied().get(0).getTargetDisease().get(0).getCoding().get(0).getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-            impfungAction.setImpfungGegen(List.of(mapImpfungGegen(resource)));
-        } else {
-            throw new ConversionException("Target disease system is wrong, has to be SNOMED.");
-        }
-    }
 
-    private ImpfungImpfungGegenElement mapImpfungGegen(Immunization resource) {
-        ImpfungImpfungGegenElement impfungImpfungGegenElement = new ImpfungImpfungGegenElement();
-        String snomedCode = resource.getProtocolApplied().get(0).getTargetDisease().get(0).getCoding().get(0).getCode();
-        if (ImpfungGegenDefiningCode.getCodesAsMap().containsKey(snomedCode)) {
-            impfungImpfungGegenElement.setValue(ImpfungGegenDefiningCode.getCodesAsMap().get(snomedCode));
-            return impfungImpfungGegenElement;
-        } else {
-            throw new ConversionException("Invalid Snomed code " + snomedCode + " entered");
-        }
-    }
-
-    private void setVerabreichteDosis(ImpfungAction impfungAction, Immunization.ImmunizationProtocolAppliedComponent resource) {
-        verabreichteDosenClusterOptional = Optional.empty();
-        if (resource.hasDoseNumberPositiveIntType() && !resource.getDoseNumberPositiveIntType().hasExtension()) { // if it contains an unknown no mapping shall be done
-            setDosisMenge(resource);
-        } else if (resource.hasSeriesDosesPositiveIntType() && !resource.getSeriesDosesPositiveIntType().hasExtension()) { // if it contains an unknown no mapping shall be done
-            setDosierungsReihenfolge(resource);
-        }
-        verabreichteDosenClusterOptional.ifPresent(impfungAction::setVerabreichteDosen);
-    }
-
-    private void setDosierungsReihenfolge(Immunization.ImmunizationProtocolAppliedComponent resource) {
-        VerabreichteDosenCluster verabreichteDosenCluster = getVerabreichteDosenCluster();
-        verabreichteDosenCluster.setDosierungsreihenfolgeMagnitude(Long.parseLong(resource.getSeriesDosesPositiveIntType().toString()));
-        verabreichteDosenClusterOptional = Optional.of(verabreichteDosenCluster);
-    }
-
-    private void setDosisMenge(Immunization.ImmunizationProtocolAppliedComponent resource) {
-        VerabreichteDosenCluster verabreichteDosenCluster = getVerabreichteDosenCluster();
-        verabreichteDosenCluster.setDosismengeMagnitude(Double.parseDouble(resource.getDoseNumberPositiveIntType().toString()));
-        verabreichteDosenClusterOptional = Optional.of(verabreichteDosenCluster);
-    }
-
-    private VerabreichteDosenCluster getVerabreichteDosenCluster() {
-        if (verabreichteDosenClusterOptional.isEmpty()) {
-            return new VerabreichteDosenCluster();
-        } else {
-            return verabreichteDosenClusterOptional.get();
-        }
-    }
-
-    private ImpfstoffDefiningCode mapImpstoffDefiningCode(Immunization resource) {
-        String code = resource.getVaccineCode().getCoding().get(0).getCode();
-        if (ImpfstoffDefiningCode.getCodesAsMap().containsKey(code)) {
-            return ImpfstoffDefiningCode.getCodesAsMap().get(code);
-        } else {
-            throw new ConversionException("Invalid Code or vaccineCode" + code + " entered");
-        }
-    }
 }
 

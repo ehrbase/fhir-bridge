@@ -1,15 +1,18 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund;
 
+import com.nedap.archie.rm.datatypes.CodePhrase;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
+import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestPanelCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProbeCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.AnatomischeLokalisationCluster;
-import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.NameDerKoerperstelleDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 
@@ -96,7 +99,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
 
     private AnatomischeLokalisationCluster mapBodySiteCoding (Specimen specimen, AnatomischeLokalisationCluster anatomischeLokalisationCluster){
         for (Coding loop : specimen.getCollection().getBodySite().getCoding()){
-            anatomischeLokalisationCluster.setNameDerKoerperstelleDefiningCode(getNameDerKoerperstelleCode(loop.getCode()));
+            DvCodedTextParser.parseFHIRCoding(loop).ifPresent(anatomischeLokalisationCluster::setNameDerKoerperstelle);
         }
         return anatomischeLokalisationCluster;
     }
@@ -116,15 +119,6 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
             return Optional.empty();
         }
     }
-
-    private NameDerKoerperstelleDefiningCode getNameDerKoerperstelleCode (String code){
-        if(NameDerKoerperstelleDefiningCode.getCodesAsMap().containsKey(code)){
-            return NameDerKoerperstelleDefiningCode.getCodesAsMap().get(code);
-        } else{
-            throw new ConversionException("Value code for NameDerKoerperstelle is not supported");
-        }
-    }
-
 }
 
 

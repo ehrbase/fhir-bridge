@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.medication;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.MedicationStatementToCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.acehemmer.AceHemmerObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.antikoagulanzien.AntikoagulanzienObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.covid19therapie.Covid19TherapieObservationConverter;
@@ -15,14 +15,16 @@ public class GECCOMedikationCompositionConverter extends MedicationStatementToCo
     private static final String PHARMACOLOGICAL_THERAPY_URL = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy";
     private static final String PHARMACOLOGICAL_ACE_INHIB_URL = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-ace-inhibitors";
     private static final String PHARMACOLOGICAL_ANTICOAGULATNS = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-anticoagulants";
-    private static final String PHARMACOLOGICAL_IMMUNOGLOBULINS =  "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-immunoglobulins";
+    private static final String PHARMACOLOGICAL_IMMUNOGLOBULINS = "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/pharmacological-therapy-immunoglobulins";
 
     @Override
-    protected GECCOMedikationComposition convertInternal(MedicationStatement resource) {
+    protected GECCOMedikationComposition convertInternal(MedicationStatement medicationStatement) {
         GECCOMedikationComposition geccoMedikationComposition = new GECCOMedikationComposition();
-        setObservation(resource, geccoMedikationComposition);
-        if (resource.hasCategory()) {
-            DvCodedTextParser.parseFHIRCoding(resource.getCategory().getCoding().get(0)).ifPresent(geccoMedikationComposition::setKategorie);
+        setObservation(medicationStatement, geccoMedikationComposition);
+        if (medicationStatement.hasCategory()) {
+            DvCodedTextParser.getInstance()
+                    .parseFHIRCoding(medicationStatement.getCategory().getCoding().get(0))
+                    .ifPresent(geccoMedikationComposition::setKategorie);
         }
         return geccoMedikationComposition;
     }

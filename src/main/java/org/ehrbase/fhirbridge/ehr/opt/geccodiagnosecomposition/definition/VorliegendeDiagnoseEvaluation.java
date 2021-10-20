@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Choice;
@@ -19,10 +20,18 @@ import java.util.List;
 @Archetype("openEHR-EHR-EVALUATION.problem_diagnosis.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-13T14:55:50.778895+02:00",
+    date = "2021-10-19T15:40:13.490442+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class VorliegendeDiagnoseEvaluation implements EntryEntity {
+  /**
+   * Path: GECCO_Diagnose/Vorliegende Diagnose/Name des Problems/ der Diagnose
+   * Description: Namentliche Identifikation des Problems oder der Diagnose.
+   * Comment: Wo möglich, ist die Kodierung des Problems oder der Diagnose über eine Terminologie zu bevorzugen.
+   */
+  @Path("/data[at0001]/items[at0002]/value")
+  private DvCodedText nameDesProblemsDerDiagnose;
+
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Structure/Name des Problems/ der Diagnose/null_flavour
    */
@@ -49,14 +58,6 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
    */
   @Path("/data[at0001]/items[at0077]/null_flavour|defining_code")
   private NullFlavour datumZeitpunktDesAuftretensDerErstdiagnoseNullFlavourDefiningCode;
-
-  /**
-   * Path: GECCO_Diagnose/Vorliegende Diagnose/Schweregrad
-   * Description: Eine Gesamtbeurteilung des Schweregrades des Problems oder der Diagnose.
-   * Comment: Ist der Schweregrad über vordefinierte Codes im Element "Name des Problems/ der Diagnose" enthalten, wird dieses Datenelement überflüssig. Hinweis: Eine spezifischere Einstufung des Schweregrads kann mit Hilfe des SLOTs "Spezifische Angaben" angegeben werden.
-   */
-  @Path("/data[at0001]/items[at0005]/value|defining_code")
-  private SchweregradDefiningCode schweregradDefiningCode;
 
   /**
    * Path: GECCO_Diagnose/Vorliegende Diagnose/Structure/Schweregrad/null_flavour
@@ -134,12 +135,20 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
   private FeederAudit feederAudit;
 
   /**
-   * Path: GECCO_Diagnose/Vorliegende Diagnose/Name des Problems/ der Diagnose
-   * Description: Namentliche Identifikation des Problems oder der Diagnose.
+   * Path: GECCO_Diagnose/Vorliegende Diagnose/Schweregrad
+   * Description: Eine Gesamtbeurteilung des Schweregrades des Problems oder der Diagnose.
    */
-  @Path("/data[at0001]/items[at0002]/value")
+  @Path("/data[at0001]/items[at0005]/value")
   @Choice
-  private VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice nameDesProblemsDerDiagnose;
+  private VorliegendeDiagnoseSchweregradChoice schweregrad;
+
+  public void setNameDesProblemsDerDiagnose(DvCodedText nameDesProblemsDerDiagnose) {
+     this.nameDesProblemsDerDiagnose = nameDesProblemsDerDiagnose;
+  }
+
+  public DvCodedText getNameDesProblemsDerDiagnose() {
+     return this.nameDesProblemsDerDiagnose ;
+  }
 
   public void setNameDesProblemsDerDiagnoseNullFlavourDefiningCode(
       NullFlavour nameDesProblemsDerDiagnoseNullFlavourDefiningCode) {
@@ -174,14 +183,6 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
 
   public NullFlavour getDatumZeitpunktDesAuftretensDerErstdiagnoseNullFlavourDefiningCode() {
      return this.datumZeitpunktDesAuftretensDerErstdiagnoseNullFlavourDefiningCode ;
-  }
-
-  public void setSchweregradDefiningCode(SchweregradDefiningCode schweregradDefiningCode) {
-     this.schweregradDefiningCode = schweregradDefiningCode;
-  }
-
-  public SchweregradDefiningCode getSchweregradDefiningCode() {
-     return this.schweregradDefiningCode ;
   }
 
   public void setSchweregradNullFlavourDefiningCode(
@@ -274,12 +275,11 @@ public class VorliegendeDiagnoseEvaluation implements EntryEntity {
      return this.feederAudit ;
   }
 
-  public void setNameDesProblemsDerDiagnose(
-      VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice nameDesProblemsDerDiagnose) {
-     this.nameDesProblemsDerDiagnose = nameDesProblemsDerDiagnose;
+  public void setSchweregrad(VorliegendeDiagnoseSchweregradChoice schweregrad) {
+     this.schweregrad = schweregrad;
   }
 
-  public VorliegendeDiagnoseNameDesProblemsDerDiagnoseChoice getNameDesProblemsDerDiagnose() {
-     return this.nameDesProblemsDerDiagnose ;
+  public VorliegendeDiagnoseSchweregradChoice getSchweregrad() {
+     return this.schweregrad ;
   }
 }

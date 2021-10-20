@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Condition/dbcdc3f2-8073-4570-bfa2-8e8dfae5de51/_history/1",
+      "id" : "Condition/a569f51f-f0e8-43e1-bf6c-9df1273fe9b5/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -73,34 +73,6 @@
         },
         "code_string" : "232"
       }
-    },
-    "other_context" : {
-      "_type" : "ITEM_TREE",
-      "name" : {
-        "_type" : "DV_TEXT",
-        "value" : "Baum"
-      },
-      "items" : [ {
-        "_type" : "ELEMENT",
-        "name" : {
-          "_type" : "DV_TEXT",
-          "value" : "Kategorie"
-        },
-        "value" : {
-          "_type" : "DV_CODED_TEXT",
-          "value" : "Gastroenterology",
-          "defining_code" : {
-            "_type" : "CODE_PHRASE",
-            "terminology_id" : {
-              "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
-            },
-            "code_string" : "394584008"
-          }
-        },
-        "archetype_node_id" : "at0005"
-      } ],
-      "archetype_node_id" : "at0001"
     }
   },
   "content" : [ {
@@ -156,7 +128,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "410594000"
           }
@@ -175,7 +147,7 @@
             "_type" : "CODE_PHRASE",
             "terminology_id" : {
               "_type" : "TERMINOLOGY_ID",
-              "value" : "SNOMED Clinical Terms"
+              "value" : "http://snomed.info/sct"
             },
             "code_string" : "40845000"
           }

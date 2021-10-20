@@ -2,7 +2,7 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Registereintrag"
+    "value" : "Herzfrequenz"
   },
   "archetype_details" : {
     "archetype_id" : {
@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/dea45ccc-5da2-44f3-a0df-e7de17c7268f/_history/1",
+      "id" : "Observation/18f00026-c804-485b-93c7-84c2b82730e8/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -118,7 +118,7 @@
     "_type" : "OBSERVATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Pulsfrequenz/Herzfrequenz"
+      "value" : "Herzfrequenz"
     },
     "archetype_details" : {
       "archetype_id" : {

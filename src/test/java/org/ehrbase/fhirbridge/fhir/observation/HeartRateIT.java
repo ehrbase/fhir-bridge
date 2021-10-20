@@ -2,9 +2,10 @@ package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HerzfrequenzCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeatmungswerteKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.HerzfrequenzComposition;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.PulsfrequenzHerzfrequenzObservation;
-import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.RegistereintragKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.HerzfrequenzKategorieElement;
+import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.definition.HerzfrequenzObservation;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
@@ -62,8 +63,8 @@ public class HeartRateIT extends AbstractMappingTestSetupIT {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(HerzfrequenzComposition.class, List.of("location", "feederAudit")))
-                .registerValueObject(PulsfrequenzHerzfrequenzObservation.class)
-                .registerValueObject(RegistereintragKategorieElement.class)
+                .registerValueObject(HerzfrequenzObservation.class)
+                .registerValueObject(HerzfrequenzKategorieElement.class)
                 .build();
     }
 
