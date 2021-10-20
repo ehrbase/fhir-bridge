@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "DiagnosticReport/49a83826-a7af-41ea-bfb2-866b7c441f13/_history/1",
+      "id" : "DiagnosticReport/1d1eb1a0-c974-49eb-b330-a61be962e2a3/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -185,6 +185,25 @@
             "value" : "Tree"
           },
           "items" : [ {
+            "_type" : "ELEMENT",
+            "name" : {
+              "_type" : "DV_TEXT",
+              "value" : "Labortest-Kategorie"
+            },
+            "value" : {
+              "_type" : "DV_CODED_TEXT",
+              "value" : "Display",
+              "defining_code" : {
+                "_type" : "CODE_PHRASE",
+                "terminology_id" : {
+                  "_type" : "TERMINOLOGY_ID",
+                  "value" : "http://loinc.org"
+                },
+                "code_string" : "26436-6"
+              }
+            },
+            "archetype_node_id" : "at0005"
+          }, {
             "_type" : "CLUSTER",
             "name" : {
               "_type" : "DV_TEXT",
@@ -230,6 +249,25 @@
                 "magnitude" : 72.0
               },
               "archetype_node_id" : "at0001"
+            }, {
+              "_type" : "ELEMENT",
+              "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Interpretation"
+              },
+              "value" : {
+                "_type" : "DV_CODED_TEXT",
+                "value" : "Display",
+                "defining_code" : {
+                  "_type" : "CODE_PHRASE",
+                  "terminology_id" : {
+                    "_type" : "TERMINOLOGY_ID",
+                    "value" : "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"
+                  },
+                  "code_string" : "N"
+                }
+              },
+              "archetype_node_id" : "at0004"
             }, {
               "_type" : "ELEMENT",
               "name" : {

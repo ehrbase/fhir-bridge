@@ -14,6 +14,7 @@
             "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
             "code": "OBI",
               "display": "Observation Instance Identifier"
+
           }
         ]
       },
@@ -82,7 +83,8 @@
       "coding": [
         {
           "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
-          "code": "N"
+          "code": "N",
+          "display": "Normal"
         }
       ]
     }
