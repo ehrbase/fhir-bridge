@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @ConditionalOnProperty(name = "fhir-bridge.fhir.endpoints.DocumentReference", havingValue = "true")
 @Import(MinioConfiguration.class)
-public class FhirConfiguration {
+public class FhirMinIoConfiguration {
 
     @Bean
     public DocumentRouteBuilder documentRouteBuilder() {

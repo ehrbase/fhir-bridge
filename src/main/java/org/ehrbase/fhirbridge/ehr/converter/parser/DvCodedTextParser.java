@@ -13,11 +13,17 @@ import java.util.Optional;
 
 public class DvCodedTextParser {
 
+    private DvCodedTextParser() {
+    }
+
     public static DvCodedText parseDefiningCode(EnumValueSet enumValueSet) {
         return new DvCodedText(enumValueSet.getValue(), new CodePhrase(new TerminologyId(enumValueSet.getTerminologyId(), ""), enumValueSet.getCode()));
     }
 
-    @Deprecated
+    /**
+     * @deprecated Use {@link org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser#parseFHIRCoding(Coding)}
+     */
+    @Deprecated(since = "1.4", forRemoval = true)
     public static Optional<DvCodedText> parseFHIRCodingOld(Coding coding) {
         if (coding.hasDisplay() && coding.hasSystem() && coding.hasCode() && coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
             return Optional.of(new DvCodedText(coding.getDisplay(), new CodePhrase(new TerminologyId("SNOMED Clinical Terms", ""), coding.getCode())));
@@ -28,7 +34,10 @@ public class DvCodedTextParser {
         }
     }
 
-    // TODO: behavior if 'display' is missing? (not allowed in openEHR)
+    /**
+     * @deprecated Use {@link org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser#parseFHIRCoding(Coding)}
+     */
+    @Deprecated(since = "1.4", forRemoval = true)
     public static Optional<DvCodedText> parseFHIRCoding(Coding coding) {
         if (coding.hasDisplay() && coding.hasSystem() && coding.hasCode()) {
             return Optional.of(new DvCodedText(coding.getDisplay(), new CodePhrase(new TerminologyId(coding.getSystem(), ""), coding.getCode())));

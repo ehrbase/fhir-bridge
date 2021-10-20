@@ -16,6 +16,8 @@
 
 package org.ehrbase.fhirbridge.config;
 
+import ca.uhn.fhir.context.FhirContext;
+import org.apache.http.client.HttpClient;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionService;
 import org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel.GECCOSerologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
@@ -56,12 +58,17 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.SymptomCompositionC
 import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund.VirologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
+import org.ehrbase.fhirbridge.service.TerminologyService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties(FhirProperties.class)
 @SuppressWarnings("java:S6212")
 public class ConversionConfiguration {
+
 
     @Bean(name = "fhirResourceConversionService")
     public ConversionService conversionService() {
@@ -78,6 +85,14 @@ public class ConversionConfiguration {
         registerProcedureConverters(conversionService);
         registerQuestionnaireResponseConverters(conversionService);
         return conversionService;
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "fhir-bridge.fhir.terminology-server", name = "url")
+    public TerminologyService myTerminologyService(HttpClient httpClient, FhirProperties properties) {
+        FhirContext context = FhirContext.forR4();
+        context.getRestfulClientFactory().setHttpClient(httpClient);
+        return new TerminologyService(context.newRestfulGenericClient(properties.getTerminologyServer().getUrl()));
     }
 
     private void registerDocumentReference(ConversionService conversionService) {
