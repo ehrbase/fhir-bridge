@@ -48,7 +48,7 @@ public abstract class GeccoMedikationObservationConverter<E extends EntryEntity>
         return Optional.empty();
     }
 
-    protected StatusCluster mapStatus(MedicationStatement resource) {
+    protected StatusCluster mapStatus(MedicationStatement resource) { //TODO also reject unfinished ones
         StatusCluster statusCluster = new StatusCluster();
         String fhirStatus = resource.getStatusElement().getCode();
         if (fhirStatus.equals(StatusDefiningCode.ABGESCHLOSSEN.getValue()) || fhirStatus.equals("completed")) {

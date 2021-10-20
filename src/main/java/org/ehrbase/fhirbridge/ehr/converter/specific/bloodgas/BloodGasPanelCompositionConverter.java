@@ -3,7 +3,6 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.BefundDerBlutgasanalyseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.BefundDerBlutgasanalyseKategorieElement;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.StatusDefiningCode;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;

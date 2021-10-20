@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerbefund;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.KategorieDefiningCode;
@@ -36,7 +37,7 @@ public class RadiologischerBefundCompositionConverter extends DiagnosticReportTo
         } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
             geccoRadiologischerBefundComposition.setStatusDefiningCode(StatusDefiningCode.VORLAEUFIG);
         } else {
-            throw new ConversionException("The status " + diagnosticReport.getStatus().toString() + " is not valid for radiology report.");
+            throw new InvalidStatusCodeException(diagnosticReport.getStatusElement().getCode());
         }
     }
 
