@@ -1,13 +1,10 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.LaborergebnisObservation;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
 import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Resource;
 import org.hl7.fhir.r4.model.ResourceType;
@@ -45,12 +42,8 @@ public class LaborergebnisObservationConverter extends ObservationToObservationC
     }
 
     private void convertKategorieValue(CodeableConcept codeableConcept, LaborergebnisObservation observation) {
-        for (Coding coding : codeableConcept.getCoding()) {
-            if (coding.getSystem().equals(CodeSystem.LOINC.getUrl())) {
-                DvCodedTextParser.getInstance().parseFHIRCoding(coding).ifPresent(observation::setLabortestKategorie);
-            } else if (coding.getSystem().equals(CodeSystem.LOINC.getUrl())) {
-                throw new ConversionException("Unsupported LOINC Code in Category.Coding.Loinc-observation Observation");
-            }
-        }
+        DvCodedTextParser.getInstance()
+                .parseFHIRCoding(codeableConcept.getCodingFirstRep())
+                .ifPresent(observation::setLabortestKategorie);
     }
 }
