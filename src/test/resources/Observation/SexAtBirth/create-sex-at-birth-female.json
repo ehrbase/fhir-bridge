@@ -37,11 +37,11 @@
   "valueCodeableConcept": {
     "coding":  [
       {
-        "system": "http://fhir.de/CodeSystem/gender-amtlich-de",
-        "code": "D",
-        "display": "divers"
+        "system": "http://hl7.org/fhir/administrative-gender",
+        "code": "female",
+        "display": "Female"
       }
     ],
-    "text": "Diverse"
+    "text": "Female"
   }
 }
