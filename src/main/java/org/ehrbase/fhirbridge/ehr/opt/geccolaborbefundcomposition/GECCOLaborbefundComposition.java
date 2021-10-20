@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.Sta
 @Archetype("openEHR-EHR-COMPOSITION.registereintrag.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-08T14:37:10.881862+02:00",
+    date = "2021-10-20T15:29:31.465572+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("GECCO_Laborbefund")
@@ -108,7 +108,7 @@ public class GECCOLaborbefundComposition implements CompositionEntity {
    * Description: Das Ergebnis - einschließlich der Befunde und der Interpretation des Labors - einer Untersuchung, die an Proben durchgeführt wurde, die von einer Einzelperson stammen oder mit dieser Person zusammenhängen.
    */
   @Path("/content[openEHR-EHR-OBSERVATION.laboratory_test_result.v1]")
-  private LaborergebnisObservation laborergebnis;
+  private List<LaborergebnisObservation> laborergebnis;
 
   /**
    * Path: Laborbefund/composer
@@ -225,11 +225,11 @@ public class GECCOLaborbefundComposition implements CompositionEntity {
      return this.settingDefiningCode ;
   }
 
-  public void setLaborergebnis(LaborergebnisObservation laborergebnis) {
+  public void setLaborergebnis(List<LaborergebnisObservation> laborergebnis) {
      this.laborergebnis = laborergebnis;
   }
 
-  public LaborergebnisObservation getLaborergebnis() {
+  public List<LaborergebnisObservation> getLaborergebnis() {
      return this.laborergebnis ;
   }
 

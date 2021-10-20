@@ -1,13 +1,12 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.BezeichnungDesAnalytsDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ErgebnisStatusDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.InterpretationDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytErgebnisStatusChoice;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.ProLaboranalytErgebnisStatusDvCodedText;
@@ -29,6 +28,8 @@ import java.net.URISyntaxException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class LaborAnalytConverter {
@@ -37,46 +38,49 @@ public class LaborAnalytConverter {
 
     private final String EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT = "Valid code coding code is missing, this field is required to be present in order to do a mapping! Please add it to the instance. This also includes the System not to be empty.";
 
-    public ProLaboranalytCluster convert(Observation observation) {
+    public List<ProLaboranalytCluster> convert(Observation observation) {
+        List<ProLaboranalytCluster> proLaboranalytClusterList = new ArrayList<>();
+        if (observation.hasInterpretation() && observation.getInterpretation().get(0).hasCoding()) {
+            return mapProAnalytClusterWithInterpretation(observation, proLaboranalytClusterList);
+        } else {
+            return List.of(mapProAnalytCluster(observation));
+
+        }
+    }
+
+    private List<ProLaboranalytCluster> mapProAnalytClusterWithInterpretation(Observation observation, List<ProLaboranalytCluster> proLaboranalytClusterList) {
+        for (CodeableConcept interpretations : observation.getInterpretation()) {
+            if (interpretations.hasCoding()) {
+                for (Coding coding : interpretations.getCoding()) {
+                    ProLaboranalytCluster proLaboranalytCluster = mapProAnalytCluster(observation); // deepcopy requires too much work so we have to do it allover again.
+                    mapInterpretation(coding).ifPresent(proLaboranalytCluster::setInterpretation);
+                    proLaboranalytClusterList.add(proLaboranalytCluster);
+                }
+            }
+        }
+        return proLaboranalytClusterList;
+    }
+
+    private ProLaboranalytCluster mapProAnalytCluster(Observation observation) {
         ProLaboranalytCluster proLaboranalytCluster = new ProLaboranalytCluster();
-        proLaboranalytCluster.setBezeichnungDesAnalytsDefiningCode(mapUntersuchterAnalyt(observation));
+        mapUntersuchterAnalyt(observation).ifPresent(proLaboranalytCluster::setBezeichnungDesAnalyts);
         proLaboranalytCluster.setErgebnisStatus(mapErgebnisStatus(observation));
         mapKommentar(proLaboranalytCluster, observation);
         mapMesswert(observation).ifPresentOrElse(proLaboranalytCluster::setMesswert,
                 () -> {
                     proLaboranalytCluster.setMesswertNullFlavourDefiningCode(NullFlavour.UNKNOWN);
                 });
-        mapInterpretation(observation).ifPresent(proLaboranalytCluster::setInterpretationDefiningCode);
         mapProbeId(observation).ifPresent(proLaboranalytCluster::setProbeId);
         mapZeitpunktderValidierung(observation).ifPresent(proLaboranalytCluster::setZeitpunktDerValidierungValue);
         mapZeitpunktDesErgebnisStatuses(observation).ifPresent(proLaboranalytCluster::setZeitpunktErgebnisStatusValue);
         return proLaboranalytCluster;
     }
 
-    private BezeichnungDesAnalytsDefiningCode mapUntersuchterAnalyt(Observation observation) {
+    private Optional<DvCodedText> mapUntersuchterAnalyt(Observation observation) {
         if (observation.getCode().hasCoding()) {
-            return converUntersuchterAnalyt(observation);
+            return DvCodedTextParser.parseFHIRCoding(observation.getCode().getCoding().get(0));
         } else {
             throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
-        }
-    }
-
-    private BezeichnungDesAnalytsDefiningCode converUntersuchterAnalyt(Observation observation) {
-        for (Coding coding : observation.getCode().getCoding()) {
-            if (coding.hasSystem() && coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.hasCode()) {
-                return getCode(coding.getCode());
-            } else {
-                throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
-            }
-        }
-        throw new ConversionException(EXCEPTION_MESSAGE_UNTERSUCHTER_ANALYT);
-    }
-
-    private BezeichnungDesAnalytsDefiningCode getCode(String code) {
-        if (BezeichnungDesAnalytsDefiningCode.getCodesAsMap().containsKey(code)) {
-            return BezeichnungDesAnalytsDefiningCode.getCodesAsMap().get(code);
-        } else {
-            throw new ConversionException("code.coding.code value is not valid");
         }
     }
 
@@ -135,32 +139,9 @@ public class LaborAnalytConverter {
         return laboranalytResultat;
     }
 
-    private Optional<InterpretationDefiningCode> mapInterpretation(Observation observation) {
-        if (observation.hasInterpretation()) {
-            for (CodeableConcept interpretations : observation.getInterpretation()) {
-                if (interpretations.hasCoding()) {
-                    return convertInterpretationDefiningCode(interpretations);
-                }
-            }
-        }
-        return Optional.empty();
+    private Optional<DvCodedText> mapInterpretation(Coding coding) {
+        return DvCodedTextParser.parseFHIRCoding(coding);
     }
-
-    private Optional<InterpretationDefiningCode> convertInterpretationDefiningCode(CodeableConcept interpretations) {
-        for (Coding coding : interpretations.getCoding()) {
-            if (verifyCodingAndSystemInterpretation(coding)) {
-                return Optional.of(InterpretationDefiningCode.getCodesAsMap().get(coding.getCode()));
-            }
-        }
-        return Optional.empty();
-    }
-
-    private boolean verifyCodingAndSystemInterpretation(Coding coding) {
-        return coding.hasSystem() && coding.getSystem().equals(CodeSystem.HL7_OBSERVATI0N_INTERPRETATION.getUrl()) && coding.hasCode() && InterpretationDefiningCode.getCodesAsMap().containsKey(coding.getCode());
-    }
-
-
-
 
     private Optional<TemporalAccessor> mapZeitpunktderValidierung(Observation observation) {
         if (observation.hasEffectiveDateTimeType() || observation.hasValueTimeType() || observation.hasValueDateTimeType()) {

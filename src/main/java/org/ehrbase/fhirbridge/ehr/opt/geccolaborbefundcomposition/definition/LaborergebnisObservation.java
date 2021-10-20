@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -19,7 +20,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.laboratory_test_result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-08T14:37:10.927307+02:00",
+    date = "2021-10-20T15:29:31.532714+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class LaborergebnisObservation implements EntryEntity {
@@ -29,8 +30,8 @@ public class LaborergebnisObservation implements EntryEntity {
    * Comment: Ein Laborergebnis kann sich auf ein einzelnes Analyt oder eine Analytgruppe beziehen. Dazu zählen auch komplette Panel an Parametern. 
    * Es wird dringend empfohlen, die "Labortest-Bezeichnung" anhand einer Terminologie zu kodiereren, wie zum Beispiel LOINC oder SNOMED CT. Beispiel: "Glukose", "Harnstoff", "Abstrich", "Cortisol", "Leberbiopsie". Der Name kann u.U. auch das Probenmaterial oder den Patientenstatus (z.B. "Blutzuckerspiegel nüchtern") oder andere Informationen beinhalten wie "Kalium (Blutgas)".
    */
-  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0005 and name/value='Labortest-Kategorie']/value|defining_code")
-  private LabortestKategorieDefiningCode labortestKategorieDefiningCode;
+  @Path("/data[at0001]/events[at0002]/data[at0003]/items[at0005 and name/value='Labortest-Kategorie']/value")
+  private DvCodedText labortestKategorie;
 
   /**
    * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Labortest-Kategorie/null_flavour
@@ -51,7 +52,7 @@ public class LaborergebnisObservation implements EntryEntity {
    * Description: Ergebnis einer Laboranalyse für einen bestimmten Analytwert.
    */
   @Path("/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.laboratory_test_analyte.v1 and name/value='Pro Laboranalyt']")
-  private ProLaboranalytCluster proLaboranalyt;
+  private List<ProLaboranalytCluster> proLaboranalyt;
 
   /**
    * Path: Laborbefund/Laborergebnis/Jedes Ereignis/Schlussfolgerung
@@ -190,13 +191,12 @@ public class LaborergebnisObservation implements EntryEntity {
   @Choice
   private LaborergebnisTestmethodeChoice testmethode;
 
-  public void setLabortestKategorieDefiningCode(
-      LabortestKategorieDefiningCode labortestKategorieDefiningCode) {
-     this.labortestKategorieDefiningCode = labortestKategorieDefiningCode;
+  public void setLabortestKategorie(DvCodedText labortestKategorie) {
+     this.labortestKategorie = labortestKategorie;
   }
 
-  public LabortestKategorieDefiningCode getLabortestKategorieDefiningCode() {
-     return this.labortestKategorieDefiningCode ;
+  public DvCodedText getLabortestKategorie() {
+     return this.labortestKategorie ;
   }
 
   public void setLabortestKategorieNullFlavourDefiningCode(
@@ -216,11 +216,11 @@ public class LaborergebnisObservation implements EntryEntity {
      return this.probe ;
   }
 
-  public void setProLaboranalyt(ProLaboranalytCluster proLaboranalyt) {
+  public void setProLaboranalyt(List<ProLaboranalytCluster> proLaboranalyt) {
      this.proLaboranalyt = proLaboranalyt;
   }
 
-  public ProLaboranalytCluster getProLaboranalyt() {
+  public List<ProLaboranalytCluster> getProLaboranalyt() {
      return this.proLaboranalyt ;
   }
 

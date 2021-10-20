@@ -45,7 +45,7 @@ public class ProAnalytErgebnisStatusChoiceConverter {
                 proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.ENDBEFUND_WIDERRUFEN);
                 break;
             default:
-                proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.UNVOLLSTAENDIG);
+                proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.UNVOLLSTAENDIG);//TODO why default
         }
         return proAnalytErgebnisStatusDvCodedText;
     }

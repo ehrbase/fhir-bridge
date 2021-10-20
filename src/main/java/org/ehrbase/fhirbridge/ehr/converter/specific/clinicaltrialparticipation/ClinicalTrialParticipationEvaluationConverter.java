@@ -47,7 +47,6 @@ public class ClinicalTrialParticipationEvaluationConverter extends ObservationTo
 
     private List<StudiePruefungRegistrierungCluster> createRegistryCluster(Observation resource) {
         StudiePruefungRegistrierungCluster studiePruefungRegistrierungCluster = new StudiePruefungRegistrierungCluster();
-
         for (Observation.ObservationComponentComponent observationComponent
                 : resource.getComponent()) {
             mapRegistername(observationComponent, studiePruefungRegistrierungCluster);

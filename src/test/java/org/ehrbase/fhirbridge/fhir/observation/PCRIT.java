@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccovirologischerbefund.PCRCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.GECCOVirologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccovirologischerbefundcomposition.definition.*;
@@ -64,7 +65,7 @@ public class PCRIT extends AbstractMappingTestSetupIT {
     @Test
     void createInvalidStatusCode() throws IOException {
         Exception exception = executeMappingException("create-PCR-status-invalid.json");
-        assertEquals("The status UNKNOWN is not supported by the fhir bridge, since it does not accept unfinished entered-in-error or corrected instances. If an fix is necessary, please contact the administrator of the Bridge. Supported is either final, amended, registered or preliminary", exception.getMessage());
+        assertEquals(exception.getClass(), InvalidStatusCodeException.class);
     }
 
     // #####################################################################################
