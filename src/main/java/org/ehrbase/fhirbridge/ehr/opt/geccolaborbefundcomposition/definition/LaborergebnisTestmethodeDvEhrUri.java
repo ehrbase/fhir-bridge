@@ -10,7 +10,7 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-20T12:36:29.096872+02:00",
+    date = "2021-10-20T15:29:31.674957+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @OptionFor("DV_EHR_URI")

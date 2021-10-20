@@ -60,15 +60,15 @@ public class DiagnosticReportLabCompositionConverter extends DiagnosticReportToC
     }
 
     private StatusDefiningCode convertStatus(DiagnosticReport diagnosticReport) {
-        String status = diagnosticReport.getStatusElement().getCode();
-        if (status.equals(StatusDefiningCode.FINAL.getValue())) {
+        DiagnosticReport.DiagnosticReportStatus status = diagnosticReport.getStatus();
+        if (status.equals(DiagnosticReport.DiagnosticReportStatus.FINAL)) {
             return StatusDefiningCode.FINAL;
-        } else if (status.equals(StatusDefiningCode.GEAENDERT.getValue())) {
+        } else if (status.equals(DiagnosticReport.DiagnosticReportStatus.CORRECTED)) {
             return StatusDefiningCode.GEAENDERT;
-        } else if (status.equals(StatusDefiningCode.REGISTRIERT.getValue())) {
+        } else if (status.equals(DiagnosticReport.DiagnosticReportStatus.REGISTERED)) {
             return StatusDefiningCode.REGISTRIERT;
-        } else if (status.equals(StatusDefiningCode.VORLAEUFIG.getValue())) {
-            return StatusDefiningCode.FINAL;
+        } else if (status.equals(DiagnosticReport.DiagnosticReportStatus.PRELIMINARY)) {
+            return StatusDefiningCode.VORLAEUFIG;
         } else {
             throw new ConversionException("The status " + diagnosticReport.getStatus().toString() + " is not valid for diagnostic report report.");
         }

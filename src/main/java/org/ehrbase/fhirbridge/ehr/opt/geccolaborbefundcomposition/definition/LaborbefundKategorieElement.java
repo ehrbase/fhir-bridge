@@ -11,7 +11,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-20T12:36:28.948357+02:00",
+    date = "2021-10-20T15:29:31.502581+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class LaborbefundKategorieElement implements LocatableEntity {
