@@ -163,7 +163,9 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.TRAVEL_HISTORY, new HistoryOfTravelCompositionConverter());
         conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
         conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
+        conversionService.registerConverter(Profile.VIROLOGISCHER_BEFUND, new VirologischerBefundCompositionConverter());
         conversionService.registerConverter(Profile.SEX_AT_BIRTH, new SexAtBirthConverter());
+
     }
 
     private void registerPatientConverters(ConversionService conversionService) {
