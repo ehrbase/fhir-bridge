@@ -54,7 +54,7 @@ class DiagnosticReportLabIT extends AbstractMappingTestSetupIT {
         DiagnosticReportLabCompositionConverter compositionConverter = new DiagnosticReportLabCompositionConverter();
         GECCOLaborbefundComposition geccoLaborbefundComposition = compositionConverter.convert(resource);
         Diff diff = compareCompositions(getJavers(), paragonPath, geccoLaborbefundComposition);
-        assertEquals(diff.getChanges().size(), 0);
+        assertEquals(diff.getChanges().toArray(), 0);
     }
 
     @Override
