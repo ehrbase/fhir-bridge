@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.fhir.diagnosticreport;
 import ca.uhn.fhir.parser.DataFormatException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerbefund.RadiologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.GECCORadiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccoradiologischerbefundcomposition.definition.BildgebendesUntersuchungsergebnisObservation;
@@ -63,6 +64,13 @@ public class RadiologyReportIT extends AbstractMappingTestSetupIT {
             assertEquals("[element=\"status\"] Invalid attribute value \"asd\": Unknown DiagnosticReportStatus code 'asd'", dataFormatException.getMessage());
         }
     }
+
+    @Test
+    void createWrongStatusCode() throws IOException {
+        Exception exception = executeMappingException("create-entered-in-error.json");
+        assertEquals(exception.getClass(), InvalidStatusCodeException.class);
+    }
+
 
     @Test
     void createInvalidKategorie() throws IOException {

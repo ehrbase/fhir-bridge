@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.bundle;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.BefundDerBlutgasanalyseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.*;
@@ -96,6 +97,13 @@ class BloodGasIT extends AbstractBundleMappingTestSetupIT {
     void createInvalidWithPanelMissing() throws IOException {
         Exception exception = executeMappingException("create-blood-gas-invalid-with-panel-missing.json");
         assertEquals("Root resource with profile 'https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/blood-gas-panel' is missing", exception.getMessage());
+    }
+
+
+    @Test
+    void createEnteredInError() throws IOException {
+        Exception exception = executeMappingException("create-blood-gas-entered-in-error.json");
+        assertEquals(exception.getClass(), InvalidStatusCodeException.class);
     }
 
     @Test

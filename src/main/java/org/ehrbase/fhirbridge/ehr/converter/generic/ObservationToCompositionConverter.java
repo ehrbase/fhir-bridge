@@ -5,6 +5,7 @@ import com.nedap.archie.rm.generic.PartyProxy;
 import com.nedap.archie.rm.generic.PartySelf;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.r4.model.Observation;
@@ -81,7 +82,7 @@ public abstract class ObservationToCompositionConverter<C extends CompositionEnt
             case "preliminary":
                 return (T) Enum.valueOf(clazz, "VORLAEUFIG");
             default:
-                throw new ConversionException("The status " + resource.getStatus().toString() + " is not supported by the fhir bridge, since it does not accept unfinished entered-in-error or corrected instances. If an fix is necessary, please contact the administrator of the Bridge. Supported is either final, amended, registered or preliminary");
+                throw new InvalidStatusCodeException(resource.getStatusElement().getCode());
         }
     }
 }
