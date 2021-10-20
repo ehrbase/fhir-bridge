@@ -46,27 +46,6 @@ class DiagnosticReportLabIT extends AbstractMappingTestSetupIT {
     }
 
 
-    @Test
-    void createWithDefaultProfile() throws IOException {
-        String resource = super.testFileLoader.loadResourceToString("create-diagnosticReport-with-default-profile.json");
-        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
-
-        assertEquals("HTTP 422 : Default profile is not supported for DiagnosticReport. One of the following profiles is expected: " +
-                "[https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab, https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diagnostic-report-radiology]", exception.getMessage());
-    }
-
-    @Test
-    void createWithInvalidCode() throws IOException {
-        String resource = super.testFileLoader.loadResourceToString("create-diagnosticReport-with-invalid-code.json");
-
-        ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
-        Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
-
-        assertEquals("HTTP 422 : This element does not match any known slice defined in the profile https://www.medizininformatik-initiative.de/fhir/core/modul-labor/StructureDefinition/DiagnosticReportLab", exception.getMessage());
-    }
-
-
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Condition condition = (Condition) testFileLoader.loadResource(path);
