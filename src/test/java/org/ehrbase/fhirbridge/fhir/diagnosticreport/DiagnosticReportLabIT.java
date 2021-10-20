@@ -54,7 +54,7 @@ class DiagnosticReportLabIT extends AbstractMappingTestSetupIT {
         DiagnosticReportLabCompositionConverter compositionConverter = new DiagnosticReportLabCompositionConverter();
         GECCOLaborbefundComposition geccoLaborbefundComposition = compositionConverter.convert(resource);
         Diff diff = compareCompositions(getJavers(), paragonPath, geccoLaborbefundComposition);
-        assertEquals(diff.getChanges().toArray(), 0);
+        assertEquals(diff.getChanges().size(), 0);
     }
 
     @Override
@@ -64,7 +64,7 @@ class DiagnosticReportLabIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(new ValueObjectDefinition(GECCOLaborbefundComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(LaborergebnisObservation.class)
                 .registerValueObject(LaborbefundKategorieElement.class)
-                .registerValueObject(ProLaboranalytCluster.class)
+                .registerValueObject(new ValueObjectDefinition(ProLaboranalytCluster.class, List.of("zeitpunktErgebnisStatusValue")))// is a instant which has no zone when the CI is testing that it fails since the CI uses another zone, mappes is the system default zone
                 .registerValueObject(ProLaboranalytErgebnisStatusDvCodedText.class)
                 .registerValueObject(ProLaboranalytMesswertDvQuantity.class)
                 .build();
