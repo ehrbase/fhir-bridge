@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyte
 
 import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.PhWertCluster;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffpartialdruckErgebnisStatusElement;
 import org.hl7.fhir.r4.model.Observation;
@@ -18,7 +18,9 @@ public class PhWertConverter extends LaboratoryTestAnalyteConverter {
     public PhWertCluster map() {
         PhWertCluster phWertCluster = new PhWertCluster();
         phWertCluster.setErgebnisStatus(mapPhClusterErgebnisStatus());
-        DvCodedTextParser.parseFHIRCoding(fhirObservation.getCode().getCoding().get(0)).ifPresent(phWertCluster::setBezeichnungDesAnalyts);
+        DvCodedTextParser.getInstance()
+                .parseFHIRCoding(fhirObservation.getCode().getCoding().get(0))
+                .ifPresent(phWertCluster::setBezeichnungDesAnalyts);
         convertAnalytErgebnis(phWertCluster);
         convertAnalytErgebnis(phWertCluster);
         return phWertCluster;
@@ -26,16 +28,16 @@ public class PhWertConverter extends LaboratoryTestAnalyteConverter {
 
     private List<SauerstoffpartialdruckErgebnisStatusElement> mapPhClusterErgebnisStatus() {
         SauerstoffpartialdruckErgebnisStatusElement sauerstoffpartialdruckErgebnisStatusElement = new SauerstoffpartialdruckErgebnisStatusElement();
-         sauerstoffpartialdruckErgebnisStatusElement.setValue(mapErgebnisStatus());
-         return List.of(sauerstoffpartialdruckErgebnisStatusElement);
+        sauerstoffpartialdruckErgebnisStatusElement.setValue(mapErgebnisStatus());
+        return List.of(sauerstoffpartialdruckErgebnisStatusElement);
     }
 
     @Override
     void convertAnalytErgebnis(LocatableEntity locatableEntity) {
-        if(fhirObservation.hasValue()){
+        if (fhirObservation.hasValue()) {
             ((PhWertCluster) locatableEntity).setAnalytErgebnisUnits("pH");
             ((PhWertCluster) locatableEntity).setAnalytErgebnisMagnitude(mapValue());
-        }else{
+        } else {
             ((PhWertCluster) locatableEntity).setAnalytErgebnisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
     }

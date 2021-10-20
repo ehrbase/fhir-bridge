@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyte
 
 import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.KohlendioxidpartialdruckCluster;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.KohlendioxidpartialdruckErgebnisStatusElement;
 import org.hl7.fhir.r4.model.Observation;
@@ -18,17 +18,19 @@ public class KohlendioxidpartialdruckConverter extends LaboratoryTestAnalyteConv
     public KohlendioxidpartialdruckCluster map() {
         KohlendioxidpartialdruckCluster kohlendioxidpartialdruckCluster = new KohlendioxidpartialdruckCluster();
         kohlendioxidpartialdruckCluster.setErgebnisStatus(mapKohlendioxidErgebnisStatus());
-        DvCodedTextParser.parseFHIRCoding(fhirObservation.getCode().getCoding().get(0)).ifPresent(kohlendioxidpartialdruckCluster::setBezeichnungDesAnalyts);
+        DvCodedTextParser.getInstance()
+                .parseFHIRCoding(fhirObservation.getCode().getCoding().get(0))
+                .ifPresent(kohlendioxidpartialdruckCluster::setBezeichnungDesAnalyts);
         convertAnalytErgebnis(kohlendioxidpartialdruckCluster);
         return kohlendioxidpartialdruckCluster;
     }
 
     @Override
     void convertAnalytErgebnis(LocatableEntity locatableEntity) {
-        if(fhirObservation.hasValue()){
+        if (fhirObservation.hasValue()) {
             ((KohlendioxidpartialdruckCluster) locatableEntity).setAnalytErgebnisUnits("mmHg");
             ((KohlendioxidpartialdruckCluster) locatableEntity).setAnalytErgebnisMagnitude(mapValue());
-        }else{
+        } else {
             ((KohlendioxidpartialdruckCluster) locatableEntity).setAnalytErgebnisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
     }

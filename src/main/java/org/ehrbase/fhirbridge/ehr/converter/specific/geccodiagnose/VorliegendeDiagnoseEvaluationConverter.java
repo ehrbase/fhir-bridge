@@ -1,9 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.KoerperstelleCluster;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.SchweregradDefiningCode;
@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter<Condition, VorliegendeDiagnoseEvaluation> {
+
+    private final DvCodedTextParser dvCodedTextParser = DvCodedTextParser.getInstance();
 
     boolean isEmpty = true;
     private final List<String> severityCodes = new ArrayList<>() {{
@@ -117,7 +119,7 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
             for (CodeableConcept codeableConcept : condition.getBodySite()) {
                 for (Coding coding : codeableConcept.getCoding()) {
                     KoerperstelleCluster korperstelleCluster = new KoerperstelleCluster();
-                    DvCodedTextParser.parseFHIRCoding(coding).ifPresent(korperstelleCluster::setNameDerKoerperstelle);
+                    dvCodedTextParser.parseFHIRCoding(coding).ifPresent(korperstelleCluster::setNameDerKoerperstelle);
                     addKoerperstelleCluster(korperstelleCluster, vorliegendeDiagnose);
                     isEmpty = false;
                 }
@@ -137,7 +139,7 @@ public class VorliegendeDiagnoseEvaluationConverter extends EntryEntityConverter
     private void mapNameDesProblemsDerDiagnose(Condition condition, VorliegendeDiagnoseEvaluation vorliegendeDiagnose) {
         for (Coding coding : condition.getCode().getCoding()) {
             if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-                DvCodedTextParser.parseFHIRCoding(coding).ifPresent(vorliegendeDiagnose::setNameDesProblemsDerDiagnose);
+                dvCodedTextParser.parseFHIRCoding(coding).ifPresent(vorliegendeDiagnose::setNameDesProblemsDerDiagnose);
                 isEmpty = false;
             }
         }

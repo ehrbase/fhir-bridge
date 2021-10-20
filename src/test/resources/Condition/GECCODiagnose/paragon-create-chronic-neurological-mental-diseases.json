@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Condition/2f294999-0cd8-4cb1-8ef8-98cc65a23202/_history/1",
+      "id" : "Condition/0ef585ec-d7a9-4806-ae13-1586e3c2a030/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -73,6 +73,34 @@
         },
         "code_string" : "232"
       }
+    },
+    "other_context" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Baum"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Psychiatry",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
+            },
+            "code_string" : "394587001"
+          }
+        },
+        "archetype_node_id" : "at0005"
+      } ],
+      "archetype_node_id" : "at0001"
     }
   },
   "content" : [ {
