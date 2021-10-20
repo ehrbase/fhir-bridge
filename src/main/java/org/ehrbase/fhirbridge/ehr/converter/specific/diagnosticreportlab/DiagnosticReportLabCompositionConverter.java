@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.DiagnosticReportToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.LaborergebnisObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
@@ -70,7 +71,7 @@ public class DiagnosticReportLabCompositionConverter extends DiagnosticReportToC
         } else if (status.equals(DiagnosticReport.DiagnosticReportStatus.PRELIMINARY)) {
             return StatusDefiningCode.VORLAEUFIG;
         } else {
-            throw new ConversionException("The status " + diagnosticReport.getStatus().toString() + " is not valid for diagnostic report report.");
+            throw new InvalidStatusCodeException(status.toString());
         }
     }
 

@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
@@ -39,7 +40,7 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
         }
     }
 
-    private StatusDefiningCode getRegisterEintrag(Observation resource) { //TODO what if other status
+    private StatusDefiningCode getRegisterEintrag(Observation resource) {
         switch (resource.getStatus()) {
             case FINAL:
                 return StatusDefiningCode.FINAL;
@@ -47,8 +48,10 @@ public class ObservationLabCompositionConverter extends ObservationToComposition
                 return StatusDefiningCode.GEAENDERT;
             case PRELIMINARY:
                 return StatusDefiningCode.VORLAEUFIG;
-            default:
+            case REGISTERED:
                 return StatusDefiningCode.REGISTRIERT;
+            default:
+                throw new InvalidStatusCodeException(resource.getStatus().toString());
         }
     }
 }
