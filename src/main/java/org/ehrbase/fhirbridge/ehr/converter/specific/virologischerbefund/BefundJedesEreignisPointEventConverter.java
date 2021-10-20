@@ -1,21 +1,17 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund;
 
-import com.nedap.archie.rm.datatypes.CodePhrase;
-import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
-import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.AnatomischeLokalisationCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestPanelCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytCluster;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProbeCluster;
-import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.AnatomischeLokalisationCluster;
-import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
-import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
-
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -35,9 +31,9 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         Specimen specimen = observation.getSpecimenTarget();
         BefundJedesEreignisPointEvent befundevent = new BefundJedesEreignisPointEvent();
 
-        if(checkLabortestbezeichnung(observation)){
+        if (checkLabortestbezeichnung(observation)) {
             befundevent.setLabortestBezeichnungDefiningCode(LabortestBezeichnungDefiningCode.DETECTION_OF_VIRUS_PROCEDURE);
-        }else {
+        } else {
             throw new ConversionException("createLabortestBezeichnungDefiningCode failed as snomedct-subcategory Code was not 122442008.");
         }
         mapProbe(specimen).ifPresent(befundevent::setProbe);
@@ -54,18 +50,18 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
     }
 
     private boolean checkLabortestbezeichnung(Observation observation) {
-        for (CodeableConcept loop1 : observation.getCategory()){
+        for (CodeableConcept loop1 : observation.getCategory()) {
             boolean result = checkLabortestbezeichnungcode(loop1);
-            if(result){
+            if (result) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean checkLabortestbezeichnungcode(CodeableConcept loop1){
+    private boolean checkLabortestbezeichnungcode(CodeableConcept loop1) {
         for (Coding loop2 : loop1.getCoding()) {
-            if(loop2.getCode().equals("122442008")) {
+            if (loop2.getCode().equals("122442008")) {
                 return true;
             }
         }
@@ -74,7 +70,7 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
 
     private Optional<ProbeCluster> mapProbe(Specimen specimen) throws FHIRException {
         ProbeCluster probecluster = new ProbeCluster();
-        if (specimen.hasCollection()){
+        if (specimen.hasCollection()) {
             mapZeitpunktDerProbenentnahme(specimen).ifPresent(probecluster::setZeitpunktDerProbenentnahmeValue);
             mapAnatomischeLokalisation(specimen).ifPresent(probecluster::setAnatomischeLokalisation);
             mapAccessionIdentifier(specimen).ifPresent(probecluster::setLaborprobenidentifikator);
@@ -84,22 +80,24 @@ public class BefundJedesEreignisPointEventConverter extends ObservationToPointEv
         }
     }
 
-    private  Optional<AnatomischeLokalisationCluster> mapAnatomischeLokalisation (Specimen specimen){
+    private Optional<AnatomischeLokalisationCluster> mapAnatomischeLokalisation(Specimen specimen) {
 
         AnatomischeLokalisationCluster anatomischeLokalisationCluster = new AnatomischeLokalisationCluster();
-        if (specimen.getCollection().hasBodySite()){
-            if (specimen.getCollection().getBodySite().hasCoding()){
-                return Optional.of(mapBodySiteCoding(specimen,anatomischeLokalisationCluster));
-            } else{
+        if (specimen.getCollection().hasBodySite()) {
+            if (specimen.getCollection().getBodySite().hasCoding()) {
+                return Optional.of(mapBodySiteCoding(specimen, anatomischeLokalisationCluster));
+            } else {
                 return Optional.empty();
             }
         }
         return Optional.empty();
     }
 
-    private AnatomischeLokalisationCluster mapBodySiteCoding (Specimen specimen, AnatomischeLokalisationCluster anatomischeLokalisationCluster){
-        for (Coding loop : specimen.getCollection().getBodySite().getCoding()){
-            DvCodedTextParser.parseFHIRCoding(loop).ifPresent(anatomischeLokalisationCluster::setNameDerKoerperstelle);
+    private AnatomischeLokalisationCluster mapBodySiteCoding(Specimen specimen, AnatomischeLokalisationCluster anatomischeLokalisationCluster) {
+        for (Coding loop : specimen.getCollection().getBodySite().getCoding()) {
+            DvCodedTextParser.getInstance()
+                    .parseFHIRCoding(loop)
+                    .ifPresent(anatomischeLokalisationCluster::setNameDerKoerperstelle);
         }
         return anatomischeLokalisationCluster;
     }
