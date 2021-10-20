@@ -78,6 +78,26 @@ public class ClinicalTrialParticipationIT extends AbstractMappingTestSetupIT {
                 "paragon-clinical-trial-participation-notapplicable.json");
     }
 
+
+    @Test
+    void mappingStudyCovid() throws IOException {
+        testMapping("create-clinical-trial-participation-unknown.json",
+                "paragon-clinical-trial-participation-unknown.json");
+    }
+
+    @Test
+    void mappingStudyCovid2() throws IOException {
+        testMapping("create-clinical-trial-participation-other.json",
+                "paragon-clinical-trial-participation-other.json");
+    }
+
+    @Test
+    void mappingStudyCovid3() throws IOException {
+        testMapping("create-clinical-trial-participation-notapplicable.json",
+                "paragon-clinical-trial-participation-notapplicable.json");
+    }
+
+
     // #####################################################################################
     // check exceptions
 
