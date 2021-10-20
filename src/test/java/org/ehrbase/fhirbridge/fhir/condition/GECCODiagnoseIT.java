@@ -67,7 +67,6 @@ class GECCODiagnoseIT extends AbstractMappingTestSetupIT {
     void createMappingCardiovascularDiseases() throws IOException {
         testMapping("create-cardiovascular-diseases.json", "paragon-create-cardiovascular-diseases.json");
 
-
     }
 
     @Test

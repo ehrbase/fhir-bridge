@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Condition/b5fff0d8-d9b0-4506-8a7e-5618852c950f/_history/1",
+      "id" : "Condition/c2837236-3f59-4807-bc7c-4a9a05a32262/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -73,6 +73,34 @@
         },
         "code_string" : "232"
       }
+    },
+    "other_context" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Baum"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Clinical immunology",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "http://snomed.info/sct"
+            },
+            "code_string" : "408480009"
+          }
+        },
+        "archetype_node_id" : "at0005"
+      } ],
+      "archetype_node_id" : "at0001"
     }
   },
   "content" : [ {
