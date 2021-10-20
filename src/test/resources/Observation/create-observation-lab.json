@@ -12,7 +12,8 @@
         "coding": [
           {
             "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-            "code": "OBI"
+            "code": "OBI",
+            "display": "_"
           }
         ]
       },
@@ -32,11 +33,13 @@
       "coding": [
         {
           "system": "http://loinc.org",
-          "code": "26436-6"
+          "code": "26436-6",
+          "display": "_"
         },
         {
           "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "laboratory"
+          "code": "laboratory",
+          "display": "_"
         }
       ]
     }
@@ -79,7 +82,8 @@
       "coding": [
         {
           "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
-          "code": "N"
+          "code": "N",
+          "display": "_"
         }
       ]
     }

@@ -21,7 +21,8 @@
             "coding": [
               {
                 "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-                "code": "OBI"
+                "code": "OBI",
+                "display": "Display"
               }
             ]
           },
@@ -41,11 +42,13 @@
           "coding": [
             {
               "system": "http://loinc.org",
-              "code": "26436-6"
+              "code": "26436-6",
+              "display": "Display"
             },
             {
               "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-              "code": "laboratory"
+              "code": "laboratory",
+              "display": "Display"
             }
           ]
         }
@@ -85,7 +88,8 @@
           "coding": [
             {
               "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
-              "code": "N"
+              "code": "N",
+              "display": "Display"
             }
           ]
         }
@@ -117,7 +121,8 @@
         "coding": [
           {
             "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-            "code": "FILL"
+            "code": "FILL",
+            "display": "Display"
           }
         ]
       },
@@ -142,7 +147,8 @@
       "coding": [
         {
           "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
-          "code": "LAB"
+          "code": "LAB",
+          "display": "Display"
         },
         {
           "system": "http://loinc.org",
