@@ -6,6 +6,7 @@
       "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/do-not-resuscitate-order"
     ]
   },
+  "dateTime": "2015-02-07T13:28:17-05:00",
   "status": "active",
   "scope": {
     "coding": [
