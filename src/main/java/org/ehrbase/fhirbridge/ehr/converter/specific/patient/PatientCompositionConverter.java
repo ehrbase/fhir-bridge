@@ -13,7 +13,6 @@ public class PatientCompositionConverter extends PatientToCompositionConverter<G
         GECCOPersonendatenComposition composition = new GECCOPersonendatenComposition();
         composition.setAlter(new AlterObservationConverter().convert(resource));
         composition.setPersonendaten(new PersonenDatenAdminEntryConverter().convert(resource));
-        new GeschlechtConverter().convert(resource).ifPresent(composition::setGeschlecht);
         return composition;
     }
 }

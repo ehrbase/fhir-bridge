@@ -51,6 +51,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.procedure.ProcedureComposit
 import org.ehrbase.fhirbridge.ehr.converter.specific.pulseoximetry.PulseOximetryCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.radiologischerbefund.RadiologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.respirationrate.RespiratoryRateCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.sexatbirth.SexAtBirthConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.smokingstatus.RaucherstatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.sofascore.SofaScoreCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.stationaererversorgungsfall.StationaererVersorgungsfallCompositionConverter;
@@ -161,7 +162,10 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.SMOKING_STATUS, new RaucherstatusCompositionConverter());
         conversionService.registerConverter(Profile.TRAVEL_HISTORY, new HistoryOfTravelCompositionConverter());
         conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
+        conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
         conversionService.registerConverter(Profile.VIROLOGISCHER_BEFUND, new VirologischerBefundCompositionConverter());
+        conversionService.registerConverter(Profile.SEX_AT_BIRTH, new SexAtBirthConverter());
+
     }
 
     private void registerPatientConverters(ConversionService conversionService) {
