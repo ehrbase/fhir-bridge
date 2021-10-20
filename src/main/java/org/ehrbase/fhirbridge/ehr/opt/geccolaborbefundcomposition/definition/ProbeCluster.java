@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import com.nedap.archie.rm.datavalues.quantity.DvOrdered;
 import java.lang.Boolean;
@@ -20,7 +21,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.specimen.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-08T14:37:10.937286+02:00",
+    date = "2021-10-20T15:29:31.541735+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProbeCluster implements LocatableEntity {
@@ -29,8 +30,8 @@ public class ProbeCluster implements LocatableEntity {
    * Description: Die Art der Probe.
    * Comment: Zum Beispiel: Venöses Blut, Bakterienkultur, Zytologie oder Prostatabiopsie. Nach Möglichkeit wird die Kodierung der Probenart mit einer Terminologie bevorzugt.
    */
-  @Path("/items[at0029]/value|defining_code")
-  private ProbenartDefiningCode probenartDefiningCode;
+  @Path("/items[at0029]/value")
+  private DvCodedText probenart;
 
   /**
    * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Probe/Probenart/null_flavour
@@ -269,12 +270,12 @@ public class ProbeCluster implements LocatableEntity {
   @Choice
   private ProbeEignungZumTestenChoice eignungZumTesten;
 
-  public void setProbenartDefiningCode(ProbenartDefiningCode probenartDefiningCode) {
-     this.probenartDefiningCode = probenartDefiningCode;
+  public void setProbenart(DvCodedText probenart) {
+     this.probenart = probenart;
   }
 
-  public ProbenartDefiningCode getProbenartDefiningCode() {
-     return this.probenartDefiningCode ;
+  public DvCodedText getProbenart() {
+     return this.probenart ;
   }
 
   public void setProbenartNullFlavourDefiningCode(NullFlavour probenartNullFlavourDefiningCode) {

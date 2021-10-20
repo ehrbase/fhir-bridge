@@ -25,10 +25,10 @@
     <other_details id="Sign off"/>
     <other_details id="Speciality"/>
     <other_details id="User roles"/>
-    <other_details id="MD5-CAM-1.0.1">5373accf8216bdad987f66efb59bd2f9</other_details>
+    <other_details id="MD5-CAM-1.0.1">37ecf95fdb32023a634af7bcb90a84d7</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">3.0.0</other_details>
+    <other_details id="sem_ver">7.2.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -377,11 +377,9 @@
         <rm_type_name>OBSERVATION</rm_type_name>
         <occurrences>
           <lower_included>true</lower_included>
-          <upper_included>true</upper_included>
           <lower_unbounded>false</lower_unbounded>
-          <upper_unbounded>false</upper_unbounded>
+          <upper_unbounded>true</upper_unbounded>
           <lower>1</lower>
-          <upper>1</upper>
         </occurrences>
         <node_id>at0000</node_id>
         <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -499,7 +497,7 @@
                                 <lower>1</lower>
                                 <upper>1</upper>
                               </existence>
-                              <children xsi:type="C_CODE_PHRASE">
+                              <children xsi:type="C_CODE_REFERENCE">
                                 <rm_type_name>CODE_PHRASE</rm_type_name>
                                 <occurrences>
                                   <lower_included>true</lower_included>
@@ -510,20 +508,7 @@
                                   <upper>1</upper>
                                 </occurrences>
                                 <node_id/>
-                                <terminology_id>
-                                  <value>LOINC</value>
-                                </terminology_id>
-                                <code_list>26436-6</code_list>
-                                <code_list>18767-4</code_list>
-                                <code_list>18719-5</code_list>
-                                <code_list>18723-7</code_list>
-                                <code_list>18720-3</code_list>
-                                <code_list>18728-6</code_list>
-                                <code_list>18725-2</code_list>
-                                <code_list>56874-1</code_list>
-                                <code_list>18729-4</code_list>
-                                <code_list>56847-7</code_list>
-                                <code_list>56846-9</code_list>
+                                <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/labreport-labtest-category</referenceSetUri>
                               </children>
                             </attributes>
                           </children>
@@ -639,7 +624,7 @@
                                     <lower>1</lower>
                                     <upper>1</upper>
                                   </existence>
-                                  <children xsi:type="C_CODE_PHRASE">
+                                  <children xsi:type="C_CODE_REFERENCE">
                                     <rm_type_name>CODE_PHRASE</rm_type_name>
                                     <occurrences>
                                       <lower_included>true</lower_included>
@@ -650,74 +635,7 @@
                                       <upper>1</upper>
                                     </occurrences>
                                     <node_id/>
-                                    <terminology_id>
-                                      <value>HL7</value>
-                                    </terminology_id>
-                                    <code_list>ABS</code_list>
-                                    <code_list>ACNE</code_list>
-                                    <code_list>ACNFLD</code_list>
-                                    <code_list>AIRS</code_list>
-                                    <code_list>ALL</code_list>
-                                    <code_list>AMN</code_list>
-                                    <code_list>AMP</code_list>
-                                    <code_list>ANGI</code_list>
-                                    <code_list>ARTC</code_list>
-                                    <code_list>ASERU</code_list>
-                                    <code_list>ASP</code_list>
-                                    <code_list>ATTE</code_list>
-                                    <code_list>AUTOA</code_list>
-                                    <code_list>AUTOC</code_list>
-                                    <code_list>AUTP</code_list>
-                                    <code_list>BBL</code_list>
-                                    <code_list>BCYST</code_list>
-                                    <code_list>BDY</code_list>
-                                    <code_list>BIFL</code_list>
-                                    <code_list>BITE</code_list>
-                                    <code_list>BLD</code_list>
-                                    <code_list>BLDA</code_list>
-                                    <code_list>BLDCO</code_list>
-                                    <code_list>BLDV</code_list>
-                                    <code_list>BLEB</code_list>
-                                    <code_list>BLIST</code_list>
-                                    <code_list>BOIL</code_list>
-                                    <code_list>BON</code_list>
-                                    <code_list>BONE</code_list>
-                                    <code_list>BOWL</code_list>
-                                    <code_list>BPH</code_list>
-                                    <code_list>BPU</code_list>
-                                    <code_list>BRN</code_list>
-                                    <code_list>BRSH</code_list>
-                                    <code_list>BRTH</code_list>
-                                    <code_list>BRUS</code_list>
-                                    <code_list>BUB</code_list>
-                                    <code_list>BULLA</code_list>
-                                    <code_list>BX</code_list>
-                                    <code_list>CALC</code_list>
-                                    <code_list>CARBU</code_list>
-                                    <code_list>CAT</code_list>
-                                    <code_list>CBITE</code_list>
-                                    <code_list>CDM</code_list>
-                                    <code_list>CLIPP</code_list>
-                                    <code_list>CNJT</code_list>
-                                    <code_list>CNL</code_list>
-                                    <code_list>COL</code_list>
-                                    <code_list>CONE</code_list>
-                                    <code_list>CSCR</code_list>
-                                    <code_list>CSERU</code_list>
-                                    <code_list>CSF</code_list>
-                                    <code_list>CSITE</code_list>
-                                    <code_list>CSMY</code_list>
-                                    <code_list>CST</code_list>
-                                    <code_list>CSVR</code_list>
-                                    <code_list>CTP</code_list>
-                                    <code_list>CUR</code_list>
-                                    <code_list>CVM</code_list>
-                                    <code_list>CVPS</code_list>
-                                    <code_list>CVPT</code_list>
-                                    <code_list>CYN</code_list>
-                                    <code_list>CYST</code_list>
-                                    <code_list>DBITE</code_list>
-                                    <code_list>DCS</code_list>
+                                    <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=http://terminology.hl7.org/ValueSet/v2-0487</referenceSetUri>
                                   </children>
                                 </attributes>
                               </children>
@@ -1639,211 +1557,14 @@ Ob dieses Element Bedingungen enthält, die während der Probenahme vorhanden se
                           <items id="description">Strukturierte Details über eine digitale Darstellung des Präparates.</items>
                           <items id="text">Digitale Darstellung</items>
                         </term_definitions>
-                        <term_definitions code="ABS">
-                          <items id="text">Abscess</items>
-                        </term_definitions>
-                        <term_definitions code="ACNE">
-                          <items id="text">Tissue, Acne</items>
-                        </term_definitions>
-                        <term_definitions code="ACNFLD">
-                          <items id="text">Fluid, Acne</items>
-                        </term_definitions>
-                        <term_definitions code="AIRS">
-                          <items id="text">Air Sample</items>
-                        </term_definitions>
-                        <term_definitions code="ALL">
-                          <items id="text">Allograft</items>
-                        </term_definitions>
-                        <term_definitions code="AMN">
-                          <items id="text">Amniotic fluid</items>
-                        </term_definitions>
-                        <term_definitions code="AMP">
-                          <items id="text">Amputation</items>
-                        </term_definitions>
-                        <term_definitions code="ANGI">
-                          <items id="text">Catheter Tip, Angio</items>
-                        </term_definitions>
-                        <term_definitions code="ARTC">
-                          <items id="text">Catheter Tip, Arterial</items>
-                        </term_definitions>
-                        <term_definitions code="ASERU">
-                          <items id="text">Serum, Acute</items>
-                        </term_definitions>
-                        <term_definitions code="ASP">
-                          <items id="text">Aspirate</items>
-                        </term_definitions>
-                        <term_definitions code="ATTE">
-                          <items id="text">Environment, Attest</items>
-                        </term_definitions>
-                        <term_definitions code="AUTOA">
-                          <items id="text">Environmental, Autoclave Ampule</items>
-                        </term_definitions>
-                        <term_definitions code="AUTOC">
-                          <items id="text">Environmental, Autoclave Capsule</items>
-                        </term_definitions>
-                        <term_definitions code="AUTP">
-                          <items id="text">Autopsy</items>
-                        </term_definitions>
-                        <term_definitions code="BBL">
-                          <items id="text">Blood bag</items>
-                        </term_definitions>
-                        <term_definitions code="BCYST">
-                          <items id="text">Cyst, Baker's</items>
-                        </term_definitions>
-                        <term_definitions code="BDY">
-                          <items id="text">Whole body</items>
-                        </term_definitions>
-                        <term_definitions code="BIFL">
-                          <items id="text">Bile Fluid</items>
-                        </term_definitions>
-                        <term_definitions code="BITE">
-                          <items id="text">Bite</items>
-                        </term_definitions>
-                        <term_definitions code="BLD">
-                          <items id="text">Whole blood</items>
-                        </term_definitions>
-                        <term_definitions code="BLDA">
-                          <items id="text">Blood arterial</items>
-                        </term_definitions>
-                        <term_definitions code="BLDCO">
-                          <items id="text">Cord blood</items>
-                        </term_definitions>
-                        <term_definitions code="BLDV">
-                          <items id="text">Blood venous</items>
-                        </term_definitions>
-                        <term_definitions code="BLEB">
-                          <items id="text">Bleb</items>
-                        </term_definitions>
-                        <term_definitions code="BLIST">
-                          <items id="text">Blister</items>
-                        </term_definitions>
-                        <term_definitions code="BOIL">
-                          <items id="text">Boil</items>
-                        </term_definitions>
-                        <term_definitions code="BON">
-                          <items id="text">Bone</items>
-                        </term_definitions>
-                        <term_definitions code="BONE">
-                          <items id="text">Bone</items>
-                        </term_definitions>
-                        <term_definitions code="BOWL">
-                          <items id="text">Bowel contents</items>
-                        </term_definitions>
-                        <term_definitions code="BPH">
-                          <items id="text">Basophils</items>
-                        </term_definitions>
-                        <term_definitions code="BPU">
-                          <items id="text">Blood product unit</items>
-                        </term_definitions>
-                        <term_definitions code="BRN">
-                          <items id="text">Burn</items>
-                        </term_definitions>
-                        <term_definitions code="BRSH">
-                          <items id="text">Brush</items>
-                        </term_definitions>
-                        <term_definitions code="BRTH">
-                          <items id="text">Breath (use EXHLD)</items>
-                        </term_definitions>
-                        <term_definitions code="BRUS">
-                          <items id="text">Brushing</items>
-                        </term_definitions>
-                        <term_definitions code="BUB">
-                          <items id="text">Bubo</items>
-                        </term_definitions>
-                        <term_definitions code="BULLA">
-                          <items id="text">Bulla/Bullae</items>
-                        </term_definitions>
-                        <term_definitions code="BX">
-                          <items id="text">Biopsy</items>
-                        </term_definitions>
-                        <term_definitions code="CALC">
-                          <items id="text">Calculus (=Stone)</items>
-                        </term_definitions>
-                        <term_definitions code="CARBU">
-                          <items id="text">Carbuncle</items>
-                        </term_definitions>
-                        <term_definitions code="CAT">
-                          <items id="text">Catheter</items>
-                        </term_definitions>
-                        <term_definitions code="CBITE">
-                          <items id="text">Bite, Cat</items>
-                        </term_definitions>
-                        <term_definitions code="CDM">
-                          <items id="text">Cardiac muscle</items>
-                        </term_definitions>
-                        <term_definitions code="CLIPP">
-                          <items id="text">Clippings</items>
-                        </term_definitions>
-                        <term_definitions code="CNJT">
-                          <items id="text">Conjunctiva</items>
-                        </term_definitions>
-                        <term_definitions code="CNL">
-                          <items id="text">Cannula</items>
-                        </term_definitions>
-                        <term_definitions code="COL">
-                          <items id="text">Colostrum</items>
-                        </term_definitions>
-                        <term_definitions code="CONE">
-                          <items id="text">Biospy, Cone</items>
-                        </term_definitions>
-                        <term_definitions code="CSCR">
-                          <items id="text">Scratch, Cat</items>
-                        </term_definitions>
-                        <term_definitions code="CSERU">
-                          <items id="text">Serum, Convalescent</items>
-                        </term_definitions>
-                        <term_definitions code="CSF">
-                          <items id="text">Cerebral spinal fluid</items>
-                        </term_definitions>
-                        <term_definitions code="CSITE">
-                          <items id="text">Catheter Insertion Site</items>
-                        </term_definitions>
-                        <term_definitions code="CSMY">
-                          <items id="text">Fluid, Cystostomy Tube</items>
-                        </term_definitions>
-                        <term_definitions code="CST">
-                          <items id="text">Fluid, Cyst</items>
-                        </term_definitions>
-                        <term_definitions code="CSVR">
-                          <items id="text">Blood, Cell Saver</items>
-                        </term_definitions>
-                        <term_definitions code="CTP">
-                          <items id="text">Catheter tip</items>
-                        </term_definitions>
-                        <term_definitions code="CUR">
-                          <items id="text">Curretage</items>
-                        </term_definitions>
-                        <term_definitions code="CVM">
-                          <items id="text">Cervical Mucus</items>
-                        </term_definitions>
-                        <term_definitions code="CVPS">
-                          <items id="text">Site, CVP</items>
-                        </term_definitions>
-                        <term_definitions code="CVPT">
-                          <items id="text">Catheter Tip, CVP</items>
-                        </term_definitions>
-                        <term_definitions code="CYN">
-                          <items id="text">Nodule, Cystic</items>
-                        </term_definitions>
-                        <term_definitions code="CYST">
-                          <items id="text">Cyst</items>
-                        </term_definitions>
-                        <term_definitions code="DBITE">
-                          <items id="text">Bite, Dog</items>
-                        </term_definitions>
-                        <term_definitions code="DCS">
-                          <items id="text">Sputum, Deep Coug</items>
-                        </term_definitions>
                       </children>
                       <children xsi:type="C_ARCHETYPE_ROOT">
                         <rm_type_name>CLUSTER</rm_type_name>
                         <occurrences>
                           <lower_included>true</lower_included>
-                          <upper_included>true</upper_included>
                           <lower_unbounded>false</lower_unbounded>
-                          <upper_unbounded>false</upper_unbounded>
+                          <upper_unbounded>true</upper_unbounded>
                           <lower>0</lower>
-                          <upper>1</upper>
                         </occurrences>
                         <node_id>at0000</node_id>
                         <attributes xsi:type="C_MULTIPLE_ATTRIBUTE">
@@ -1898,7 +1619,7 @@ Ob dieses Element Bedingungen enthält, die während der Probenahme vorhanden se
                                     <lower>1</lower>
                                     <upper>1</upper>
                                   </existence>
-                                  <children xsi:type="C_CODE_PHRASE">
+                                  <children xsi:type="C_CODE_REFERENCE">
                                     <rm_type_name>CODE_PHRASE</rm_type_name>
                                     <occurrences>
                                       <lower_included>true</lower_included>
@@ -1909,134 +1630,7 @@ Ob dieses Element Bedingungen enthält, die während der Probenahme vorhanden se
                                       <upper>1</upper>
                                     </occurrences>
                                     <node_id/>
-                                    <terminology_id>
-                                      <value>LOINC</value>
-                                    </terminology_id>
-                                    <code_list>48421-2</code_list>
-                                    <code_list>71426-1</code_list>
-                                    <code_list>76486-0</code_list>
-                                    <code_list>30522-7</code_list>
-                                    <code_list>1988-5</code_list>
-                                    <code_list>76485-2</code_list>
-                                    <code_list>20567-4</code_list>
-                                    <code_list>86914-9</code_list>
-                                    <code_list>14723-1</code_list>
-                                    <code_list>2276-4</code_list>
-                                    <code_list>24373-3</code_list>
-                                    <code_list>1971-1</code_list>
-                                    <code_list>1975-2</code_list>
-                                    <code_list>14631-6</code_list>
-                                    <code_list>59828-4</code_list>
-                                    <code_list>59827-6</code_list>
-                                    <code_list>42719-5</code_list>
-                                    <code_list>48066-5</code_list>
-                                    <code_list>48067-3</code_list>
-                                    <code_list>55398-2</code_list>
-                                    <code_list>71427-9</code_list>
-                                    <code_list>7799-0</code_list>
-                                    <code_list>91556-1</code_list>
-                                    <code_list>38898-3</code_list>
-                                    <code_list>3246-6</code_list>
-                                    <code_list>48058-2</code_list>
-                                    <code_list>2325-9</code_list>
-                                    <code_list>2324-2</code_list>
-                                    <code_list>1920-8</code_list>
-                                    <code_list>30239-8</code_list>
-                                    <code_list>88112-8</code_list>
-                                    <code_list>2532-0</code_list>
-                                    <code_list>14805-6</code_list>
-                                    <code_list>14804-9</code_list>
-                                    <code_list>14803-1</code_list>
-                                    <code_list>60017-1</code_list>
-                                    <code_list>49563-0</code_list>
-                                    <code_list>89579-7</code_list>
-                                    <code_list>67151-1</code_list>
-                                    <code_list>6598-7</code_list>
-                                    <code_list>6597-9</code_list>
-                                    <code_list>48425-3</code_list>
-                                    <code_list>42757-5</code_list>
-                                    <code_list>10839-9</code_list>
-                                    <code_list>76769-9</code_list>
-                                    <code_list>59260-0</code_list>
-                                    <code_list>718-7</code_list>
-                                    <code_list>20509-6</code_list>
-                                    <code_list>55782-7</code_list>
-                                    <code_list>75928-2</code_list>
-                                    <code_list>14775-1</code_list>
-                                    <code_list>30313-1</code_list>
-                                    <code_list>30350-3</code_list>
-                                    <code_list>30351-1</code_list>
-                                    <code_list>30352-9</code_list>
-                                    <code_list>76768-1</code_list>
-                                    <code_list>21232-4</code_list>
-                                    <code_list>38483-4</code_list>
-                                    <code_list>59826-8</code_list>
-                                    <code_list>12190-5</code_list>
-                                    <code_list>25386-4</code_list>
-                                    <code_list>2160-0</code_list>
-                                    <code_list>14682-9</code_list>
-                                    <code_list>14118-4</code_list>
-                                    <code_list>59032-3</code_list>
-                                    <code_list>32693-4</code_list>
-                                    <code_list>2520-5</code_list>
-                                    <code_list>19239-3</code_list>
-                                    <code_list>19240-1</code_list>
-                                    <code_list>2518-9</code_list>
-                                    <code_list>2519-7</code_list>
-                                    <code_list>2524-7</code_list>
-                                    <code_list>30242-2</code_list>
-                                    <code_list>27941-4</code_list>
-                                    <code_list>49498-9</code_list>
-                                    <code_list>6690-2</code_list>
-                                    <code_list>804-5</code_list>
-                                    <code_list>26464-8</code_list>
-                                    <code_list>732-8</code_list>
-                                    <code_list>731-0</code_list>
-                                    <code_list>30364-4</code_list>
-                                    <code_list>26474-7</code_list>
-                                    <code_list>753-4</code_list>
-                                    <code_list>751-8</code_list>
-                                    <code_list>26499-4</code_list>
-                                    <code_list>16631-4</code_list>
-                                    <code_list>43734-3</code_list>
-                                    <code_list>14979-9</code_list>
-                                    <code_list>3173-2</code_list>
-                                    <code_list>74775-8</code_list>
-                                    <code_list>13056-7</code_list>
-                                    <code_list>26516-5</code_list>
-                                    <code_list>74464-9</code_list>
-                                    <code_list>778-1</code_list>
-                                    <code_list>49497-1</code_list>
-                                    <code_list>777-3</code_list>
-                                    <code_list>26515-7</code_list>
-                                    <code_list>6301-6</code_list>
-                                    <code_list>46418-0</code_list>
-                                    <code_list>34714-6</code_list>
-                                    <code_list>76631-1</code_list>
-                                    <code_list>62235-7</code_list>
-                                    <code_list>62234-0</code_list>
-                                    <code_list>61152-5</code_list>
-                                    <code_list>61151-7</code_list>
-                                    <code_list>2862-1</code_list>
-                                    <code_list>1751-7</code_list>
-                                    <code_list>54347-0</code_list>
-                                    <code_list>3176-5</code_list>
-                                    <code_list>91120-6</code_list>
-                                    <code_list>3174-0</code_list>
-                                    <code_list>27811-9</code_list>
-                                    <code_list>75241-0</code_list>
-                                    <code_list>33959-8</code_list>
-                                    <code_list>44322-6</code_list>
-                                    <code_list>26881-3</code_list>
-                                    <code_list>49919-4</code_list>
-                                    <code_list>49732-1</code_list>
-                                    <code_list>33762-6</code_list>
-                                    <code_list>16859-1</code_list>
-                                    <code_list>30902-1</code_list>
-                                    <code_list>48664-7</code_list>
-                                    <code_list>3255-7</code_list>
-                                    <code_list>27812-7</code_list>
-                                    <code_list>48065-7</code_list>
+                                    <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/lab-tests-gecco</referenceSetUri>
                                   </children>
                                 </attributes>
                               </children>
@@ -2209,7 +1803,7 @@ Ob dieses Element Bedingungen enthält, die während der Probenahme vorhanden se
                                     <lower>1</lower>
                                     <upper>1</upper>
                                   </existence>
-                                  <children xsi:type="C_CODE_PHRASE">
+                                  <children xsi:type="C_CODE_REFERENCE">
                                     <rm_type_name>CODE_PHRASE</rm_type_name>
                                     <occurrences>
                                       <lower_included>true</lower_included>
@@ -2220,16 +1814,7 @@ Ob dieses Element Bedingungen enthält, die während der Probenahme vorhanden se
                                       <upper>1</upper>
                                     </occurrences>
                                     <node_id/>
-                                    <terminology_id>
-                                      <value>http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation</value>
-                                    </terminology_id>
-                                    <code_list>CAR</code_list>
-                                    <code_list>B</code_list>
-                                    <code_list>D</code_list>
-                                    <code_list>U</code_list>
-                                    <code_list>W</code_list>
-                                    <code_list>&lt;</code_list>
-                                    <code_list>></code_list>
+                                    <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=http://hl7.org/fhir/ValueSet/observation-interpretation</referenceSetUri>
                                   </children>
                                 </attributes>
                               </children>
@@ -2744,402 +2329,6 @@ Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lo
                           <items id="comment">Wenn die Testmethode für ein gesamtes Panel gilt, kann die Testmethode mithilfe des Datenelements "Testmethode" im Ergebnis OBSERVATION.laboratory_test_result erfasst werden.</items>
                           <items id="description">Die Beschreibung der Methode, mit der der Test nur für diesen Analyten durchgeführt wurde.</items>
                           <items id="text">Testmethode</items>
-                        </term_definitions>
-                        <term_definitions code="48421-2">
-                          <items id="text">C reactive protein [Mass/volume] in Capillary blood</items>
-                        </term_definitions>
-                        <term_definitions code="71426-1">
-                          <items id="text">C reactive protein [Mass/volume] in Blood by High sensitivity method</items>
-                        </term_definitions>
-                        <term_definitions code="76486-0">
-                          <items id="text">C reactive protein [Moles/volume] in Serum or Plasma by High sensitivity method</items>
-                        </term_definitions>
-                        <term_definitions code="30522-7">
-                          <items id="text">C reactive protein [Mass/volume] in Serum or Plasma by High sensitivity method</items>
-                        </term_definitions>
-                        <term_definitions code="1988-5">
-                          <items id="text">C reactive protein [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="76485-2">
-                          <items id="text">C reactive protein [Moles/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="20567-4">
-                          <items id="text">Ferritin [Mass/volume] in Serum or Plasma by Immunoassay</items>
-                        </term_definitions>
-                        <term_definitions code="86914-9">
-                          <items id="text">Ferritin goal [Mass/volume] Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="14723-1">
-                          <items id="text">Ferritin [Moles/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="2276-4">
-                          <items id="text">Ferritin [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="24373-3">
-                          <items id="text">Ferritin [Mass/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="1971-1">
-                          <items id="text">Bilirubin.indirect [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="1975-2">
-                          <items id="text">Bilirubin.total [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="14631-6">
-                          <items id="text">Bilirubin.total [Moles/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="59828-4">
-                          <items id="text">Bilirubin.total [Mass/volume] in Venous blood</items>
-                        </term_definitions>
-                        <term_definitions code="59827-6">
-                          <items id="text">Bilirubin.total [Mass/volume] in Arterial blood</items>
-                        </term_definitions>
-                        <term_definitions code="42719-5">
-                          <items id="text">Bilirubin.total [Mass/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="48066-5">
-                          <items id="text">Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma</items>
-                        </term_definitions>
-                        <term_definitions code="48067-3">
-                          <items id="text">Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma by Immunoassay</items>
-                        </term_definitions>
-                        <term_definitions code="55398-2">
-                          <items id="text">Short Fibrin D-dimer FEU and DDU panel - Platelet poor plasma</items>
-                        </term_definitions>
-                        <term_definitions code="71427-9">
-                          <items id="text">Fibrin D-dimer FEU [Mass/volume] in Blood by Immunoassay</items>
-                        </term_definitions>
-                        <term_definitions code="7799-0">
-                          <items id="text">Fibrin D-dimer [Units/volume] in Platelet poor plasma</items>
-                        </term_definitions>
-                        <term_definitions code="91556-1">
-                          <items id="text">Fibrin D-dimer DDU [Mass/volume] in Blood by Immunoassay</items>
-                        </term_definitions>
-                        <term_definitions code="38898-3">
-                          <items id="text">Fibrin D-dimer [Titer] in Platelet poor plasma</items>
-                        </term_definitions>
-                        <term_definitions code="3246-6">
-                          <items id="text">Fibrin D-dimer [Units/volume] in Platelet poor plasma by Immunoassay</items>
-                        </term_definitions>
-                        <term_definitions code="48058-2">
-                          <items id="text">Fibrin D-dimer DDU [Mass/volume] in Platelet poor plasma by Immunoassay</items>
-                        </term_definitions>
-                        <term_definitions code="2325-9">
-                          <items id="text">Gamma glutamyl transferase/Aspartate aminotransferase [Enzymatic activity ratio] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="2324-2">
-                          <items id="text">Gamma glutamyl transferase [Enzymatic activity/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="1920-8">
-                          <items id="text">Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="30239-8">
-                          <items id="text">Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma by With P-5'-P</items>
-                        </term_definitions>
-                        <term_definitions code="88112-8">
-                          <items id="text">Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P</items>
-                        </term_definitions>
-                        <term_definitions code="2532-0">
-                          <items id="text">Lactate dehydrogenase [Enzymatic activity/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="14805-6">
-                          <items id="text">Lactate dehydrogenase [Enzymatic activity/volume] in Serum or Plasma by Pyruvate to lactate reaction</items>
-                        </term_definitions>
-                        <term_definitions code="14804-9">
-                          <items id="text">Lactate dehydrogenase [Enzymatic activity/volume] in Serum or Plasma by Lactate to pyruvate reaction</items>
-                        </term_definitions>
-                        <term_definitions code="14803-1">
-                          <items id="text">Lactate dehydrogenase [Enzymatic activity/volume] in Body fluid by Lactate to pyruvate reaction</items>
-                        </term_definitions>
-                        <term_definitions code="60017-1">
-                          <items id="text">Lactate dehydrogenase [Enzymatic activity/volume] in Body fluid by Pyruvate to lactate reaction</items>
-                        </term_definitions>
-                        <term_definitions code="49563-0">
-                          <items id="text">Troponin I.cardiac [Mass/volume] in Serum or Plasma by Detection limit &lt;= 0.01 ng/mL</items>
-                        </term_definitions>
-                        <term_definitions code="89579-7">
-                          <items id="text">Troponin I.cardiac [Mass/volume] in Serum or Plasma by High sensitivity method</items>
-                        </term_definitions>
-                        <term_definitions code="67151-1">
-                          <items id="text">Troponin T.cardiac [Mass/volume] in Serum or Plasma by High sensitivity method</items>
-                        </term_definitions>
-                        <term_definitions code="6598-7">
-                          <items id="text">Troponin T.cardiac [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="6597-9">
-                          <items id="text">Troponin T.cardiac [Mass/volume] in Venous blood</items>
-                        </term_definitions>
-                        <term_definitions code="48425-3">
-                          <items id="text">Troponin T.cardiac [Mass/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="42757-5">
-                          <items id="text">Troponin I.cardiac [Mass/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="10839-9">
-                          <items id="text">Troponin I.cardiac [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="76769-9">
-                          <items id="text">Hemoglobin [Mass/volume] in Venous blood by Oximetry</items>
-                        </term_definitions>
-                        <term_definitions code="59260-0">
-                          <items id="text">Hemoglobin [Moles/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="718-7">
-                          <items id="text">Hemoglobin [Mass/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="20509-6">
-                          <items id="text">Hemoglobin [Mass/volume] in Blood by calculation</items>
-                        </term_definitions>
-                        <term_definitions code="55782-7">
-                          <items id="text">Hemoglobin [Mass/volume] in Blood by Oximetry</items>
-                        </term_definitions>
-                        <term_definitions code="75928-2">
-                          <items id="text">Hemoglobin [Moles/volume] in Arterial blood</items>
-                        </term_definitions>
-                        <term_definitions code="14775-1">
-                          <items id="text">Hemoglobin [Mass/volume] in Arterial blood by Oximetry</items>
-                        </term_definitions>
-                        <term_definitions code="30313-1">
-                          <items id="text">Hemoglobin [Mass/volume] in Arterial blood</items>
-                        </term_definitions>
-                        <term_definitions code="30350-3">
-                          <items id="text">Hemoglobin [Mass/volume] in Venous blood</items>
-                        </term_definitions>
-                        <term_definitions code="30351-1">
-                          <items id="text">Hemoglobin [Mass/volume] in Mixed venous blood</items>
-                        </term_definitions>
-                        <term_definitions code="30352-9">
-                          <items id="text">Hemoglobin [Mass/volume] in Capillary blood</items>
-                        </term_definitions>
-                        <term_definitions code="76768-1">
-                          <items id="text">Hemoglobin [Mass/volume] in Mixed venous blood by Oximetry</items>
-                        </term_definitions>
-                        <term_definitions code="21232-4">
-                          <items id="text">Creatinine [Mass/volume] in Arterial blood</items>
-                        </term_definitions>
-                        <term_definitions code="38483-4">
-                          <items id="text">Creatinine [Mass/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="59826-8">
-                          <items id="text">Creatinine [Moles/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="12190-5">
-                          <items id="text">Creatinine [Mass/volume] in Body fluid</items>
-                        </term_definitions>
-                        <term_definitions code="25386-4">
-                          <items id="text">Creatinine [Moles/volume] in Body fluid</items>
-                        </term_definitions>
-                        <term_definitions code="2160-0">
-                          <items id="text">Creatinine [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="14682-9">
-                          <items id="text">Creatinine [Moles/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="14118-4">
-                          <items id="text">Lactate [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="59032-3">
-                          <items id="text">Lactate [Mass/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="32693-4">
-                          <items id="text">Lactate [Moles/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="2520-5">
-                          <items id="text">Lactate [Moles/volume] in Cerebral spinal fluid</items>
-                        </term_definitions>
-                        <term_definitions code="19239-3">
-                          <items id="text">Lactate [Moles/volume] in Capillary blood</items>
-                        </term_definitions>
-                        <term_definitions code="19240-1">
-                          <items id="text">Lactate [Moles/volume] in Mixed venous blood</items>
-                        </term_definitions>
-                        <term_definitions code="2518-9">
-                          <items id="text">Lactate [Moles/volume] in Arterial blood</items>
-                        </term_definitions>
-                        <term_definitions code="2519-7">
-                          <items id="text">Lactate [Moles/volume] in Venous blood</items>
-                        </term_definitions>
-                        <term_definitions code="2524-7">
-                          <items id="text">Lactate [Moles/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="30242-2">
-                          <items id="text">Lactate [Mass/volume] in Arterial blood</items>
-                        </term_definitions>
-                        <term_definitions code="27941-4">
-                          <items id="text">Lactate [Mass/volume] in Cerebral spinal fluid</items>
-                        </term_definitions>
-                        <term_definitions code="49498-9">
-                          <items id="text">Leukocytes [#/volume] in Blood by Estimate</items>
-                        </term_definitions>
-                        <term_definitions code="6690-2">
-                          <items id="text">Leukocytes [#/volume] in Blood by Automated count</items>
-                        </term_definitions>
-                        <term_definitions code="804-5">
-                          <items id="text">Leukocytes [#/volume] in Blood by Manual count</items>
-                        </term_definitions>
-                        <term_definitions code="26464-8">
-                          <items id="text">Leukocytes [#/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="732-8">
-                          <items id="text">Lymphocytes [#/volume] in Blood by Manual count</items>
-                        </term_definitions>
-                        <term_definitions code="731-0">
-                          <items id="text">Lymphocytes [#/volume] in Blood by Automated count</items>
-                        </term_definitions>
-                        <term_definitions code="30364-4">
-                          <items id="text">Lymphocytes [#/volume] in Blood by Flow cytometry (FC)</items>
-                        </term_definitions>
-                        <term_definitions code="26474-7">
-                          <items id="text">Lymphocytes [#/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="753-4">
-                          <items id="text">Neutrophils [#/volume] in Blood by Manual count</items>
-                        </term_definitions>
-                        <term_definitions code="751-8">
-                          <items id="text">Neutrophils [#/volume] in Blood by Automated count</items>
-                        </term_definitions>
-                        <term_definitions code="26499-4">
-                          <items id="text">Neutrophils [#/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="16631-4">
-                          <items id="text">aPTT in Blood by Coagulation 1:1 saline</items>
-                        </term_definitions>
-                        <term_definitions code="43734-3">
-                          <items id="text">aPTT in Platelet poor plasma by Coagulation 1:1 saline</items>
-                        </term_definitions>
-                        <term_definitions code="14979-9">
-                          <items id="text">aPTT in Platelet poor plasma by Coagulation assay</items>
-                        </term_definitions>
-                        <term_definitions code="3173-2">
-                          <items id="text">aPTT in Blood by Coagulation assay</items>
-                        </term_definitions>
-                        <term_definitions code="74775-8">
-                          <items id="text">Platelets [#/volume] in Platelet rich plasma by Automated count</items>
-                        </term_definitions>
-                        <term_definitions code="13056-7">
-                          <items id="text">Platelets [#/volume] in Plasma by Automated count</items>
-                        </term_definitions>
-                        <term_definitions code="26516-5">
-                          <items id="text">Platelets [#/volume] in Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="74464-9">
-                          <items id="text">Platelets [#/volume] in Capillary blood by Manual count</items>
-                        </term_definitions>
-                        <term_definitions code="778-1">
-                          <items id="text">Platelets [#/volume] in Blood by Manual count</items>
-                        </term_definitions>
-                        <term_definitions code="49497-1">
-                          <items id="text">Platelets [#/volume] in Blood by Estimate</items>
-                        </term_definitions>
-                        <term_definitions code="777-3">
-                          <items id="text">Platelets [#/volume] in Blood by Automated count</items>
-                        </term_definitions>
-                        <term_definitions code="26515-7">
-                          <items id="text">Platelets [#/volume] in Blood</items>
-                        </term_definitions>
-                        <term_definitions code="6301-6">
-                          <items id="text">INR in Platelet poor plasma by Coagulation assay</items>
-                        </term_definitions>
-                        <term_definitions code="46418-0">
-                          <items id="text">INR in Capillary blood by Coagulation assay</items>
-                        </term_definitions>
-                        <term_definitions code="34714-6">
-                          <items id="text">INR in Blood by Coagulation assay</items>
-                        </term_definitions>
-                        <term_definitions code="76631-1">
-                          <items id="text">Albumin [Mass/volume] in Blood by Bromocresol purple (BCP) dye binding method</items>
-                        </term_definitions>
-                        <term_definitions code="62235-7">
-                          <items id="text">Albumin [Moles/volume] in Serum or Plasma by Bromocresol green (BCG) dye binding method</items>
-                        </term_definitions>
-                        <term_definitions code="62234-0">
-                          <items id="text">Albumin [Moles/volume] in Serum or Plasma by Bromocresol purple (BCP) dye binding method</items>
-                        </term_definitions>
-                        <term_definitions code="61152-5">
-                          <items id="text">Albumin [Mass/volume] in Serum or Plasma by Bromocresol purple (BCP) dye binding method</items>
-                        </term_definitions>
-                        <term_definitions code="61151-7">
-                          <items id="text">Albumin [Mass/volume] in Serum or Plasma by Bromocresol green (BCG) dye binding method</items>
-                        </term_definitions>
-                        <term_definitions code="2862-1">
-                          <items id="text">Albumin [Mass/volume] in Serum or Plasma by Electrophoresis</items>
-                        </term_definitions>
-                        <term_definitions code="1751-7">
-                          <items id="text">Albumin [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="54347-0">
-                          <items id="text">Albumin [Moles/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="3176-5">
-                          <items id="text">Antithrombin [Moles/volume] in Platelet poor plasma by Chromogenic method</items>
-                        </term_definitions>
-                        <term_definitions code="91120-6">
-                          <items id="text">Antithrombin in Platelet poor plasma by Chromo.no addition of heparin</items>
-                        </term_definitions>
-                        <term_definitions code="3174-0">
-                          <items id="text">Antithrombin [Units/volume] in Platelet poor plasma by Chromogenic method</items>
-                        </term_definitions>
-                        <term_definitions code="27811-9">
-                          <items id="text">Antithrombin actual/normal in Platelet poor plasma by Chromogenic method</items>
-                        </term_definitions>
-                        <term_definitions code="75241-0">
-                          <items id="text">Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay</items>
-                        </term_definitions>
-                        <term_definitions code="33959-8">
-                          <items id="text">Procalcitonin [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="44322-6">
-                          <items id="text">Interleukin 6 [Presence] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="26881-3">
-                          <items id="text">Interleukin 6 [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="49919-4">
-                          <items id="text">Interleukin 6 [Mass/volume] in Cerebral spinal fluid</items>
-                        </term_definitions>
-                        <term_definitions code="49732-1">
-                          <items id="text">Interleukin 6 [Mass/volume] in Body fluid</items>
-                        </term_definitions>
-                        <term_definitions code="33762-6">
-                          <items id="text">Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma</items>
-                        </term_definitions>
-                        <term_definitions code="16859-1">
-                          <items id="text">Fibrinogen [Presence] in Platelet poor plasma</items>
-                        </term_definitions>
-                        <term_definitions code="30902-1">
-                          <items id="text">Fibrinogen [Mass/volume] in Platelet poor plasma by Heat denaturation</items>
-                        </term_definitions>
-                        <term_definitions code="48664-7">
-                          <items id="text">Fibrinogen [Mass/volume] in Platelet poor plasma by Coagulation.derived</items>
-                        </term_definitions>
-                        <term_definitions code="3255-7">
-                          <items id="text">Fibrinogen [Mass/volume] in Platelet poor plasma by Coagulation assay</items>
-                        </term_definitions>
-                        <term_definitions code="27812-7">
-                          <items id="text">Antithrombin Ag actual/normal in Platelet poor plasma by Immunoassay</items>
-                        </term_definitions>
-                        <term_definitions code="48065-7">
-                          <items id="text">Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma</items>
-                        </term_definitions>
-                        <term_definitions code="CAR">
-                          <items id="text">Carrier</items>
-                        </term_definitions>
-                        <term_definitions code="B">
-                          <items id="text">Better</items>
-                        </term_definitions>
-                        <term_definitions code="D">
-                          <items id="text">Significant change down</items>
-                        </term_definitions>
-                        <term_definitions code="U">
-                          <items id="text">Significant change up</items>
-                        </term_definitions>
-                        <term_definitions code="W">
-                          <items id="text">Worse</items>
-                        </term_definitions>
-                        <term_definitions code="&lt;">
-                          <items id="text">Off scale low</items>
-                        </term_definitions>
-                        <term_definitions code=">">
-                          <items id="text">Off scale hig</items>
                         </term_definitions>
                       </children>
                       <children xsi:type="C_COMPLEX_OBJECT">
@@ -3869,39 +3058,6 @@ Bekannte Schwierigkeiten bei der Probenentnahme oder -behandlung, wie z.B. die "
           <items id="comment">Zum Beispiel: Anatomische Pathologiediagnosen, die aus mehreren verschiedenen Schwerpunkten wie Morphologie, Ätiologie und Funktion zusammengesetzt sind.</items>
           <items id="description">Eine strukturierte oder komplexe Diagnose für die Laboruntersuchung.</items>
           <items id="text">Strukturierte Testdiagnostik</items>
-        </term_definitions>
-        <term_definitions code="26436-6">
-          <items id="text">Laboratory studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18767-4">
-          <items id="text">Blood gas studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18719-5">
-          <items id="text">Chemistry studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18723-7">
-          <items id="text">Hematology studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18720-3">
-          <items id="text">Coagulation studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18728-6">
-          <items id="text">Toxicology studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18725-2">
-          <items id="text">Microbiology studies (set)</items>
-        </term_definitions>
-        <term_definitions code="56874-1">
-          <items id="text">Serology and blood bank studies (set)</items>
-        </term_definitions>
-        <term_definitions code="18729-4">
-          <items id="text">Urinalysis studies (set)</items>
-        </term_definitions>
-        <term_definitions code="56847-7">
-          <items id="text">Calculated and derived values (set)</items>
-        </term_definitions>
-        <term_definitions code="56846-9">
-          <items id="text">Cardiac biomarkers (set)</items>
         </term_definitions>
       </children>
       <cardinality>

@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -16,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.laboratory_test_analyte.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-09-08T14:37:10.991079+02:00",
+    date = "2021-10-20T15:29:31.596779+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class ProLaboranalytCluster implements LocatableEntity {
@@ -26,8 +27,8 @@ public class ProLaboranalytCluster implements LocatableEntity {
    * Comment: Der Wert dieses Elements wird normalerweise, meist durch eine Spezialisierung, in einem Template oder zur Laufzeit der Anwendung geliefert, um den aktuellen Analyt wiederzugeben. Zum Beispiel: 'Natrium im Serum', 'Hämoglobin'. 
    * Die Codierung mit einer externen Terminologie, wie LOINC, NPU, SNOMED-CT oder lokalen Labor-Terminologien wird dringend empfohlen.
    */
-  @Path("/items[at0024]/value|defining_code")
-  private BezeichnungDesAnalytsDefiningCode bezeichnungDesAnalytsDefiningCode;
+  @Path("/items[at0024]/value")
+  private DvCodedText bezeichnungDesAnalyts;
 
   /**
    * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Bezeichnung des Analyts/null_flavour
@@ -53,8 +54,8 @@ public class ProLaboranalytCluster implements LocatableEntity {
    * Description: Zusätzliche Hinweise zur Anwendbarkeit des Referenzbereichs für dieses Resultat oder (codierter) Text, ob das Ergebnis im Referenzbereich ist oder nicht.
    * Comment: z.B.: 'im Referenzbereich, bezogen auf Alter und Geschlecht'.
    */
-  @Path("/items[at0004 and name/value='Interpretation']/value|defining_code")
-  private InterpretationDefiningCode interpretationDefiningCode;
+  @Path("/items[at0004 and name/value='Interpretation']/value")
+  private DvCodedText interpretation;
 
   /**
    * Path: Laborbefund/Laborergebnis/Event Series/Jedes Ereignis/Tree/Pro Laboranalyt/Interpretation/null_flavour
@@ -152,13 +153,12 @@ public class ProLaboranalytCluster implements LocatableEntity {
   @Choice
   private ProLaboranalytMesswertChoice messwert;
 
-  public void setBezeichnungDesAnalytsDefiningCode(
-      BezeichnungDesAnalytsDefiningCode bezeichnungDesAnalytsDefiningCode) {
-     this.bezeichnungDesAnalytsDefiningCode = bezeichnungDesAnalytsDefiningCode;
+  public void setBezeichnungDesAnalyts(DvCodedText bezeichnungDesAnalyts) {
+     this.bezeichnungDesAnalyts = bezeichnungDesAnalyts;
   }
 
-  public BezeichnungDesAnalytsDefiningCode getBezeichnungDesAnalytsDefiningCode() {
-     return this.bezeichnungDesAnalytsDefiningCode ;
+  public DvCodedText getBezeichnungDesAnalyts() {
+     return this.bezeichnungDesAnalyts ;
   }
 
   public void setBezeichnungDesAnalytsNullFlavourDefiningCode(
@@ -186,12 +186,12 @@ public class ProLaboranalytCluster implements LocatableEntity {
      return this.analyseergebnisDetail ;
   }
 
-  public void setInterpretationDefiningCode(InterpretationDefiningCode interpretationDefiningCode) {
-     this.interpretationDefiningCode = interpretationDefiningCode;
+  public void setInterpretation(DvCodedText interpretation) {
+     this.interpretation = interpretation;
   }
 
-  public InterpretationDefiningCode getInterpretationDefiningCode() {
-     return this.interpretationDefiningCode ;
+  public DvCodedText getInterpretation() {
+     return this.interpretation ;
   }
 
   public void setInterpretationNullFlavourDefiningCode(
