@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.observationlab;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
@@ -45,17 +46,11 @@ public class SpecimenConverter {
     }
 
     private Optional<DvCodedText> mapProbenart(Specimen specimenTarget) {
-        if (specimenTarget.hasType() && specimenTarget.getType().hasCoding()) {
-            return convertProbenArtDefiningCode(specimenTarget);
+        if (specimenTarget.hasType() && specimenTarget.getType().hasCoding() && specimenTarget.getType().getCoding().size() == 1) {
+            return DvCodedTextParser.parseFHIRCoding(specimenTarget.getType().getCoding().get(0));
+        } else {
+            throw new UnprocessableEntityException("The fhir bridge does not support a specimen with multiple type.codings, since a specimen cannot have several types. Please alter the data accordingly.");
         }
-        return Optional.empty();
-    }
-
-    private Optional<DvCodedText> convertProbenArtDefiningCode(Specimen specimenTarget) {
-        for (Coding coding : specimenTarget.getType().getCoding()) {
-            return DvCodedTextParser.parseFHIRCoding(coding);
-        }
-        return Optional.empty();
     }
 
     private Optional<DvIdentifier> mapAccessionIdentifier(Specimen specimenTarget) {
