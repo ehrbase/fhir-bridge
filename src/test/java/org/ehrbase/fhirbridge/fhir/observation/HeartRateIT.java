@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.observation;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HerzfrequenzCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.beatmungswertecomposition.definition.BeatmungswerteKategorieElement;
 import org.ehrbase.fhirbridge.ehr.opt.herzfrequenzcomposition.HerzfrequenzComposition;
@@ -53,6 +54,12 @@ public class HeartRateIT extends AbstractMappingTestSetupIT {
     void mappingCreateHeartAbsent() throws  IOException {
         testMapping("create-heart-rate-absent.json",
                 "paragon-create-heart-rate-absent.json");
+    }
+
+    @Test
+    void mappingEnteredInError() throws  IOException {
+       Exception exception = executeMappingException("create-entered-in-error.json");
+        assertEquals(exception.getClass(), InvalidStatusCodeException.class);
     }
 
     // #####################################################################################

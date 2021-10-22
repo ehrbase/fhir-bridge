@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.fhir.medicationstatement;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GECCOMedikationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.GECCOMedikationComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccomedikationcomposition.definition.*;
@@ -82,6 +83,12 @@ class MedicationStatementIT extends AbstractMappingTestSetupIT {
     @Test
     void createMappingTherapy() throws IOException {
         testMapping("create-pharmacological-therapy.json", "paragon-therapy.json");
+    }
+
+    @Test
+    void createEnteredInError() throws IOException {
+        Exception exception = executeMappingException("create-entered-in-error.json");
+        assertEquals(exception.getClass(), InvalidStatusCodeException.class);
     }
 
     @Override
