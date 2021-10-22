@@ -24,7 +24,9 @@ public class SarsCov2ExpositionEvaluationConverter extends ObservationToEvaluati
 
     private void mapSpezifischeDetailsZurExposition(SarsCov2ExpositionEvaluation sarsCov2ExpositionEvaluation, Observation fhirObserv) {
         sarsCov2ExpositionEvaluation.setBeschreibungDerExpositionValue("Kontakt zu COVID-19 erkrankter Person");
-        sarsCov2ExpositionEvaluation.setDatumUhrzeitDerExpositionValue(TimeConverter.convertObservationTime(fhirObserv));
+        if(fhirObserv.hasValueCodeableConcept() && fhirObserv.getValueCodeableConcept().getCoding().get(0).getCode().equals("840546002")) {
+            sarsCov2ExpositionEvaluation.setDatumUhrzeitDerExpositionValue(TimeConverter.convertObservationTime(fhirObserv));
+        }
     }
 
     private void mapInfektionserreger(SarsCov2ExpositionEvaluation sarsCov2ExpositionEvaluation) {
@@ -47,5 +49,3 @@ public class SarsCov2ExpositionEvaluationConverter extends ObservationToEvaluati
         }
     }
 }
-
-
