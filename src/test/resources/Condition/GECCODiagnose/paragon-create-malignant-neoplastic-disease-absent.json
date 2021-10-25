@@ -17,7 +17,7 @@
         "_type" : "FEEDER_AUDIT",
         "originating_system_item_ids" : [ {
             "_type" : "DV_IDENTIFIER",
-            "id" : "Condition/b6ec4158-1052-43a4-ba4f-25be58605b8c/_history/1",
+            "id" : "Condition/39d7be1f-8d2c-4a34-87f0-820f363f028a/_history/1",
             "type" : "fhir_logical_id"
         } ],
         "originating_system_audit" : {
@@ -73,6 +73,34 @@
                 },
                 "code_string" : "232"
             }
+        },
+        "other_context" : {
+            "_type" : "ITEM_TREE",
+            "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Baum"
+            },
+            "items" : [ {
+                "_type" : "ELEMENT",
+                "name" : {
+                    "_type" : "DV_TEXT",
+                    "value" : "Kategorie"
+                },
+                "value" : {
+                    "_type" : "DV_CODED_TEXT",
+                    "value" : "Medical oncology (qualifier value)",
+                    "defining_code" : {
+                        "_type" : "CODE_PHRASE",
+                        "terminology_id" : {
+                            "_type" : "TERMINOLOGY_ID",
+                            "value" : "http://snomed.info/sct"
+                        },
+                        "code_string" : "394593009"
+                    }
+                },
+                "archetype_node_id" : "at0005"
+            } ],
+            "archetype_node_id" : "at0001"
         }
     },
     "content" : [ {

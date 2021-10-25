@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/f65cf744-a06d-4060-a48a-402f6de815c6/_history/1",
+      "id" : "Observation/654aa5cc-c15f-4fe9-ad50-98ca8477a9be/_history/1",
       "type" : "fhir_logical_id"
     } ],
     "originating_system_audit" : {
@@ -99,6 +99,17 @@
           }
         },
         "archetype_node_id" : "at0004"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Kategorie"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "social-history"
+        },
+        "archetype_node_id" : "at0005"
       } ],
       "archetype_node_id" : "at0001"
     }
@@ -190,17 +201,6 @@
             "value" : "Kontakt zu COVID-19 erkrankter Person"
           },
           "archetype_node_id" : "at0006"
-        }, {
-          "_type" : "ELEMENT",
-          "name" : {
-            "_type" : "DV_TEXT",
-            "value" : "Datum/Uhrzeit der Exposition"
-          },
-          "value" : {
-            "_type" : "DV_DATE_TIME",
-            "value" : "2020-10-04T00:00:00+02:00"
-          },
-          "archetype_node_id" : "at0007"
         } ],
         "archetype_node_id" : "at0005"
       } ],

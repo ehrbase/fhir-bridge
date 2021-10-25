@@ -1,8 +1,8 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.GECCODiagnoseComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccodiagnosecomposition.definition.VorliegendeDiagnoseEvaluation;
@@ -32,12 +32,14 @@ public class GECCODiagnoseCompositionConverter extends ConditionToCompositionCon
         return composition;
     }
 
-    private void mapCategoryCoding(Condition resource, GECCODiagnoseComposition composition) {
-        Coding categoryCoding = resource.getCategory().get(0).getCoding().get(0);
-        for(CodeableConcept category : resource.getCategory()){
-            for(Coding coding : category.getCoding()){
+    private void mapCategoryCoding(Condition condition, GECCODiagnoseComposition composition) {
+        Coding categoryCoding = condition.getCategory().get(0).getCoding().get(0);
+        for (CodeableConcept category : condition.getCategory()) {
+            for (Coding coding : category.getCoding()) {
                 if (categoryCoding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-                    DvCodedTextParser.parseFHIRCoding(coding);
+                    DvCodedTextParser.getInstance()
+                            .parseFHIRCoding(coding)
+                            .ifPresent(composition::setKategorie);
                 }
             }
         }
@@ -46,7 +48,7 @@ public class GECCODiagnoseCompositionConverter extends ConditionToCompositionCon
     private void mapVerficationStatus(Condition resource, Optional<VorliegendeDiagnoseEvaluation> vorliegendeDiagnose, GECCODiagnoseComposition composition) {
         for (Coding coding : resource.getVerificationStatus().getCoding()) {
             if (coding.getSystem().equals(CodeSystem.SNOMED.getUrl())) {
-               determineIfDiagnosePresent(coding, vorliegendeDiagnose, composition, resource);
+                determineIfDiagnosePresent(coding, vorliegendeDiagnose, composition, resource);
             }
         }
     }

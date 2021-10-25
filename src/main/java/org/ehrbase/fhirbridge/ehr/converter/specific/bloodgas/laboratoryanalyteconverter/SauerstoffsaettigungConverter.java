@@ -2,7 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.laboratoryanalyte
 
 import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffpartialdruckErgebnisStatusElement;
 import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.SauerstoffsaettigungCluster;
 import org.hl7.fhir.r4.model.Observation;
@@ -17,7 +17,9 @@ public class SauerstoffsaettigungConverter extends LaboratoryTestAnalyteConverte
     public SauerstoffsaettigungCluster map() {
         SauerstoffsaettigungCluster sauerstoffsaettigungCluster = new SauerstoffsaettigungCluster();
         sauerstoffsaettigungCluster.setErgebnisStatus(mapSauerstoffsaettigungErgebnisStatus());
-        DvCodedTextParser.parseFHIRCoding(fhirObservation.getCode().getCoding().get(0)).ifPresent(sauerstoffsaettigungCluster::setBezeichnungDesAnalyts);
+        DvCodedTextParser.getInstance()
+                .parseFHIRCoding(fhirObservation.getCode().getCoding().get(0))
+                .ifPresent(sauerstoffsaettigungCluster::setBezeichnungDesAnalyts);
         convertAnalytErgebnis(sauerstoffsaettigungCluster);
         return sauerstoffsaettigungCluster;
 
@@ -25,10 +27,10 @@ public class SauerstoffsaettigungConverter extends LaboratoryTestAnalyteConverte
 
     @Override
     void convertAnalytErgebnis(LocatableEntity locatableEntity) {
-        if(fhirObservation.hasValue()){
+        if (fhirObservation.hasValue()) {
             ((SauerstoffsaettigungCluster) locatableEntity).setAnalytErgebnisUnits("%");
             ((SauerstoffsaettigungCluster) locatableEntity).setAnalytErgebnisMagnitude(mapValue());
-        }else{
+        } else {
             ((SauerstoffsaettigungCluster) locatableEntity).setAnalytErgebnisNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
     }

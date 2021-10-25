@@ -4,10 +4,6 @@ import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.generic.PartyProxy;
-import java.lang.String;
-import java.time.temporal.TemporalAccessor;
-import java.util.List;
-import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
@@ -15,6 +11,10 @@ import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+
+import javax.annotation.processing.Generated;
+import java.time.temporal.TemporalAccessor;
+import java.util.List;
 
 @Entity
 @Archetype("openEHR-EHR-EVALUATION.problem_diagnosis.v1")

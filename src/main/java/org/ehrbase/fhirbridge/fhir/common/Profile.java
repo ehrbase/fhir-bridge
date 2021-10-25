@@ -90,6 +90,7 @@ public enum Profile {
     SMOKING_STATUS(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/smoking-status"),
     ANTI_BODY_PANEL(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-pnl-ser-pl-ia"),
     VIROLOGISCHER_BEFUND(Observation.class, "http://highmed.org/StructureDefinition/ic/VirologischerBefund"),
+    SEX_AT_BIRTH(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sex-assigned-at-birth"),
 
     // Patient
     PATIENT(Patient.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient"),
