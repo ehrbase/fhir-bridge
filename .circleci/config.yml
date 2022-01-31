@@ -991,7 +991,7 @@ executors:
               auth:
                 username: $DOCKER_USER
                 password: $DOCKER_HUB_PASSWORD
-            - image: ehrbase/ehrbase-postgres:11.10
+            - image: ehrbase/ehrbase-postgres:13.4
               auth:
                 username: $DOCKER_USER
                 password: $DOCKER_HUB_PASSWORD
