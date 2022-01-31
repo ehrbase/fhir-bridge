@@ -24,7 +24,7 @@
         <commons-compress.version>1.21</commons-compress.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-text.version>1.9</commons-text.version>
-        <ehrbase-sdk.version>10cce9b</ehrbase-sdk.version>
+        <ehrbase-sdk.version>1.6.0</ehrbase-sdk.version>
         <hapi-fhir.version>5.4.2</hapi-fhir.version>
         <guava.version>31.0.1-jre</guava.version>
         <ipf.version>4.1.0</ipf.version>
@@ -300,8 +300,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.github.ehrbase</groupId>
-            <artifactId>openEHR_SDK</artifactId>
+            <groupId>org.ehrbase.openehr.sdk</groupId>
+            <artifactId>client</artifactId>
             <version>${ehrbase-sdk.version}</version>
             <exclusions>
                 <exclusion>
@@ -442,11 +442,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
 </project>
