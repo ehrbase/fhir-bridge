@@ -20,6 +20,8 @@ import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.archetyped.FeederAuditDetails;
 import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.client.classgenerator.interfaces.RMEntity;
+import org.ehrbase.fhirbridge.fhir.support.Resources;
+import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Resource;
 import org.springframework.lang.NonNull;
 
@@ -39,14 +41,42 @@ public abstract class AbstractConverter<S extends Resource, T extends RMEntity> 
         FeederAudit result = new FeederAudit();
         String systemId = resource.getMeta().hasSource() ? resource.getMeta().getSource() : DEFAULT_SYSTEM_ID;
         result.setOriginatingSystemAudit(new FeederAuditDetails(systemId, null, null, null, null, null, null));
+
+        List<DvIdentifier> identifiers = new ArrayList<>();
+
         if (resource.hasId()) {
             DvIdentifier identifier = new DvIdentifier();
             identifier.setId(resource.getId());
             identifier.setType("fhir_logical_id");
-            List<DvIdentifier> identifiers = new ArrayList<>();
             identifiers.add(identifier);
-            result.setOriginatingSystemItemIds(identifiers);
         }
+
+        identifiers.addAll(subjectIdentifiers(resource));
+
+        result.setOriginatingSystemItemIds(identifiers);
         return result;
+    }
+
+    protected List<DvIdentifier> subjectIdentifiers(S resource) {
+        List<DvIdentifier> identifiers = new ArrayList<>();
+
+        Resources.getSubject(resource)
+                .ifPresent(reference -> {
+                    var id = new DvIdentifier();
+                    id.setAssigner("fhir_patient_id");
+                    id.setId(reference.getReferenceElement().getValue());
+                    identifiers.add(id);
+
+                    var identifier = new DvIdentifier();
+                    identifier.setType("fhir_patient_identifier");
+                    if (reference.hasIdentifier()) {
+                        identifier.setId(reference.getIdentifier().getValue());
+                    } else {
+                        identifier.setId(((Patient) reference.getResource()).getIdentifierFirstRep().getValue());
+                    }
+                    identifiers.add(identifier);
+                });
+
+        return identifiers;
     }
 }
