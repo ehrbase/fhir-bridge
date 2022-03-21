@@ -72,6 +72,7 @@ public class PatientReferenceProcessor implements FhirRequestProcessor {
             if (subject.hasReference()) {
                 Patient patient = patientDao.read(subject.getReferenceElement());
                 patientId = patient.getIdElement();
+                subject.setResource(patient);
             } else if (hasIdentifier(subject)) {
                 patientId = handleSubjectIdentifier(subject, requestDetails);
             } else {
