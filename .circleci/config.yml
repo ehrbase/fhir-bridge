@@ -184,7 +184,7 @@ jobs:
       - cache-out-fhirbridge-m2-dependencies
       #            - cache-out-ehrbase-m2-dependencies
       #            - build-ehrbase
-      - start-ehrbase-server
+      #      - start-ehrbase-server
       - build-and-test-fhirbridge:
           skip-tests: false    # TODO: set to true if/when FHIRbrige gets some unit tests (at the moment *IT.java tests is all we have)
       #            - cache-in-ehrbase-m2-dependencies
@@ -206,7 +206,7 @@ jobs:
       - cache-out-fhirbridge-m2-dependencies
       #      - cache-out-ehrbase-m2-dependencies
       #      - build-ehrbase
-      - start-ehrbase-server
+      #      - start-ehrbase-server
       - build-and-test-fhirbridge:
           skip-javadoc: true
           skip-jacoco: false
@@ -578,35 +578,35 @@ commands:
         type: boolean
         default: true
     steps:
-      - run:
-          name: WAIT FOR EHRBASE SERVER TO BE READY
-          command: |
-            ls -la
-            timeout=600
-            while [ ! -f ehrbase/log ];
-                do
-                    echo "Waiting for file ehrbase/log ..."
-                    if [ "$timeout" == 0 ]; then
-                        echo "ERROR: timed out while waiting for file ehrbase/log"
-                        exit 1
-                    fi
-                    sleep 1
-                ((timeout--))
-            done
-            echo "REMAINING TIMEOUT: $timeout"
-            while ! (cat ehrbase/log | grep -m 1 "Started EhrBase in");
-                do
-                    echo "waiting for EHRbase to be ready ...";
-                    if [ "$timeout" == 0 ]; then
-                        echo "WARNING: Did not see a startup message even after waiting 600s"
-                        cat ehrbase/log
-                        exit 1
-                    fi
-                    sleep 1;
-                ((timeout--))
-            done
-            echo "REMAINING TIMEOUT: $timeout"
-            jps
+#      - run:
+      #          name: WAIT FOR EHRBASE SERVER TO BE READY
+      #          command: |
+      #            ls -la
+      #            timeout=600
+      #            while [ ! -f ehrbase/log ];
+      #                do
+      #                    echo "Waiting for file ehrbase/log ..."
+      #                    if [ "$timeout" == 0 ]; then
+      #                        echo "ERROR: timed out while waiting for file ehrbase/log"
+      #                        exit 1
+      #                    fi
+      #                    sleep 1
+      #                ((timeout--))
+      #            done
+      #            echo "REMAINING TIMEOUT: $timeout"
+      #            while ! (cat ehrbase/log | grep -m 1 "Started EhrBase in");
+      #                do
+      #                    echo "waiting for EHRbase to be ready ...";
+      #                    if [ "$timeout" == 0 ]; then
+      #                        echo "WARNING: Did not see a startup message even after waiting 600s"
+      #                        cat ehrbase/log
+      #                        exit 1
+      #                    fi
+      #                    sleep 1;
+      #                ((timeout--))
+      #            done
+      #            echo "REMAINING TIMEOUT: $timeout"
+      #            jps
       - run:
           name: BUILD FHIR-BRIDGE
           command: |
