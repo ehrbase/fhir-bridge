@@ -233,7 +233,7 @@ jobs:
       - checkout
       - install-maven
       - restore-fhirbridge-workspace
-      - start-ehrbase-server
+#      - start-ehrbase-server
       - start-fhirbridge-application
       - run-robot-integration-tests:
           include-tags: "bundle"
@@ -252,7 +252,7 @@ jobs:
       - checkout
       - install-maven
       - restore-fhirbridge-workspace
-      - start-ehrbase-server
+#      - start-ehrbase-server
       - start-fhirbridge-application
       - run-robot-integration-tests:
           include-tags: "condition"
@@ -270,7 +270,7 @@ jobs:
       - checkout
       - install-maven
       - restore-fhirbridge-workspace
-      - start-ehrbase-server
+#      - start-ehrbase-server
       - start-fhirbridge-application
       - run-robot-integration-tests:
           include-tags: "consent"
@@ -288,7 +288,7 @@ jobs:
       - checkout
       - install-maven
       - restore-fhirbridge-workspace
-      - start-ehrbase-server
+#      - start-ehrbase-server
       - start-fhirbridge-application
       - run-robot-integration-tests:
           include-tags: "document-reference"
@@ -306,7 +306,7 @@ jobs:
       - checkout
       - install-maven
       - restore-fhirbridge-workspace
-      - start-ehrbase-server
+#      - start-ehrbase-server
       - start-fhirbridge-application
       - run-robot-integration-tests:
           include-tags: "diagnostic-report"
@@ -324,7 +324,7 @@ jobs:
       - checkout
       - install-maven
       - restore-fhirbridge-workspace
-      - start-ehrbase-server
+#      - start-ehrbase-server
       - start-fhirbridge-application
       - run-robot-integration-tests:
           include-tags: "immunization"
@@ -342,7 +342,7 @@ jobs:
       - checkout
       - install-maven
       - restore-fhirbridge-workspace
-      - start-ehrbase-server
+#      - start-ehrbase-server
       - start-fhirbridge-application
       - run-robot-integration-tests:
           include-tags: "medicationstatement"
@@ -360,7 +360,7 @@ jobs:
       - checkout
       - install-maven
       - restore-fhirbridge-workspace
-      - start-ehrbase-server
+#      - start-ehrbase-server
       - start-fhirbridge-application
       - run-robot-integration-tests:
           include-tags: "observation"
@@ -378,7 +378,7 @@ jobs:
       - checkout
       - install-maven
       - restore-fhirbridge-workspace
-      - start-ehrbase-server
+#      - start-ehrbase-server
       - start-fhirbridge-application
       - run-robot-integration-tests:
           include-tags: "procedure"
@@ -396,7 +396,7 @@ jobs:
       - checkout
       - install-maven
       - restore-fhirbridge-workspace
-      - start-ehrbase-server
+#      - start-ehrbase-server
       - start-fhirbridge-application
       - run-robot-integration-tests:
           include-tags: "questionnaire"

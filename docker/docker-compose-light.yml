@@ -1,7 +1,7 @@
 version: '3'
 services:
   ehrbase:
-    image: ehrbase/ehrbase:next
+    image: ehrbase/ehrbase:0.18.2
     ports:
       - 8080:8080
     networks:
@@ -22,7 +22,7 @@ services:
       - ehrbase-db
     restart: on-failure
   ehrbase-db:
-    image: ehrbase/ehrbase-postgres:latest
+    image: ehrbase/ehrbase-postgres:13.4
     ports:
       - 5432:5432
     networks:
