@@ -1000,7 +1000,6 @@ executors:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
       - image: ehrbase/ehrbase:0.18.2
-        name: ehrbase
         auth:
           username: $DOCKER_USER
           password: $DOCKER_HUB_PASSWORD
