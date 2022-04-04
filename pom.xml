@@ -24,7 +24,7 @@
         <commons-compress.version>1.21</commons-compress.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-text.version>1.9</commons-text.version>
-        <ehrbase-sdk.version>10cce9b</ehrbase-sdk.version>
+        <ehrbase-sdk.version>1.18.0</ehrbase-sdk.version>
         <hapi-fhir.version>5.4.2</hapi-fhir.version>
         <guava.version>31.0.1-jre</guava.version>
         <ipf.version>4.1.0</ipf.version>
@@ -167,8 +167,6 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${maven-jacoco-plugin.version}</version>
                 <executions>
-
-                    <!-- SET ARG LINE PROPERTY FOR SUREFIRE -->
                     <execution>
                         <id>agent for unit tests</id>
                         <goals>
@@ -178,8 +176,6 @@
                             <propertyName>surefireArgLine</propertyName>
                         </configuration>
                     </execution>
-
-                    <!-- SET ARG LINE PROPERTY FOR FAILSAFE -->
                     <execution>
                         <id>agent for integration tests</id>
                         <goals>
@@ -196,33 +192,6 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-
-                    <!-- FAIL BUILD IF RULES NOT MET! -->
-                    <!-- <execution>
-                        <id>default-check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <rule>
-                                    <element>BUNDLE</element>
-                                    <limits>
-                                        <limit>
-                                            <counter>INSTRUCTION</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.50</minimum>
-                                        </limit>
-                                        <limit>
-                                            <counter>CLASS</counter>
-                                            <value>MISSEDCOUNT</value>
-                                            <maximum>0</maximum>
-                                        </limit>
-                                    </limits>
-                                </rule>
-                            </rules>
-                        </configuration>
-                    </execution> -->
                 </executions>
             </plugin>
         </plugins>
@@ -304,8 +273,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.github.ehrbase</groupId>
-            <artifactId>openEHR_SDK</artifactId>
+            <groupId>org.ehrbase.openehr.sdk</groupId>
+            <artifactId>client</artifactId>
             <version>${ehrbase-sdk.version}</version>
             <exclusions>
                 <exclusion>
@@ -336,7 +305,6 @@
             <artifactId>javers-core</artifactId>
             <version>${javers.version}</version>
         </dependency>
-
         <!-- Test Dependencies-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -438,6 +406,11 @@
                 <version>${javassist.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.github.jsonld-java</groupId>
+                <artifactId>jsonld-java</artifactId>
+                <version>0.13.4</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
@@ -449,8 +422,14 @@
 
     <repositories>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
+            <id>ossrh-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </repositories>
 </project>

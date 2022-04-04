@@ -16,6 +16,7 @@
 
 package org.ehrbase.fhirbridge.camel.processor;
 
+import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.ehr.EhrStatus;
@@ -28,6 +29,10 @@ import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.core.domain.PatientEhr;
 import org.ehrbase.fhirbridge.core.repository.PatientEhrRepository;
+import org.ehrbase.fhirbridge.fhir.support.PatientUtils;
+import org.hl7.fhir.instance.model.api.IIdType;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Resource;
 import org.hl7.fhir.r4.model.ResourceType;
 import org.slf4j.Logger;
@@ -52,20 +57,24 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
 
     private static final String ARCHETYPE_NODE_ID = "openEHR-EHR-EHR_STATUS.generic.v1";
 
+    private final IFhirResourceDao<Patient> patientDao;
+
     private final PatientEhrRepository patientEhrRepository;
 
     private final OpenEhrClient openEhrClient;
 
-    public EhrLookupProcessor(PatientEhrRepository patientEhrRepository, OpenEhrClient openEhrClient) {
+    public EhrLookupProcessor(IFhirResourceDao<Patient> patientDao, PatientEhrRepository patientEhrRepository,
+                              OpenEhrClient openEhrClient) {
+        this.patientDao = patientDao;
         this.patientEhrRepository = patientEhrRepository;
         this.openEhrClient = openEhrClient;
     }
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        String patientId = getPatientId(exchange);
+        IIdType patientId = getPatientId(exchange);
 
-        UUID ehrId = patientEhrRepository.findById(patientId)
+        UUID ehrId = patientEhrRepository.findById(patientId.getIdPart())
                 .map(PatientEhr::getEhrId)
                 .orElseGet(() -> createEhr(patientId));
 
@@ -78,13 +87,13 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
      * @param exchange the current exchange
      * @return the patient ID
      */
-    private String getPatientId(Exchange exchange) {
+    private IIdType getPatientId(Exchange exchange) {
         Resource resource = exchange.getIn().getBody(Resource.class);
 
         if (resource.getResourceType() == ResourceType.Patient) {
-            return exchange.getProperty(CamelConstants.OUTCOME, MethodOutcome.class).getId().getIdPart();
+            return exchange.getProperty(CamelConstants.OUTCOME, MethodOutcome.class).getId();
         } else {
-            return exchange.getIn().getHeader(CamelConstants.PATIENT_ID, String.class);
+            return exchange.getIn().getHeader(CamelConstants.PATIENT_ID, IIdType.class);
         }
     }
 
@@ -94,12 +103,15 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
      * @param patientId the given patient ID
      * @return the EHR ID
      */
-    private UUID createEhr(String patientId) {
-        PartySelf subject = new PartySelf(new PartyRef(new HierObjectId(patientId), "DEMOGRAPHIC", "PERSON"));
+    private UUID createEhr(IIdType patientId) {
+        Patient patient = patientDao.read(patientId);
+        Identifier pseudonym = PatientUtils.getPseudonym(patient);
+
+        PartySelf subject = new PartySelf(new PartyRef(new HierObjectId(pseudonym.getValue()), "DEMOGRAPHIC", "PERSON"));
         EhrStatus ehrStatus = new EhrStatus(ARCHETYPE_NODE_ID, new DvText("EHR Status"), subject, true, true, null);
         UUID ehrId = openEhrClient.ehrEndpoint().createEhr(ehrStatus);
 
-        PatientEhr patientEhr = new PatientEhr(patientId, ehrId);
+        PatientEhr patientEhr = new PatientEhr(patientId.getIdPart(), ehrId);
         patientEhrRepository.save(patientEhr);
         LOG.debug("Created PatientEhr: patientId={}, ehrId={}", patientEhr.getPatientId(), patientEhr.getEhrId());
 

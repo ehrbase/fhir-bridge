@@ -79,7 +79,7 @@ public class PatientReferenceProcessor implements FhirRequestProcessor {
                 throw new UnprocessableEntityException("Subject identifier is required");
             }
 
-            exchange.getIn().setHeader(CamelConstants.PATIENT_ID, patientId.getIdPart());
+            exchange.getIn().setHeader(CamelConstants.PATIENT_ID, patientId);
         }
     }
 
