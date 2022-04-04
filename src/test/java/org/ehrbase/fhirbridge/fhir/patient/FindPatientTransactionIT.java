@@ -23,9 +23,11 @@ import java.util.UUID;
  */
 class FindPatientTransactionIT extends AbstractTransactionIT {
 
+    private String patientId;
+
     @BeforeEach
-    public void setup() throws URISyntaxException {
-        PATIENT_ID = UUID.randomUUID().toString();
+    public void setup() {
+        patientId = UUID.randomUUID().toString();
     }
 
     @Test
@@ -37,7 +39,7 @@ class FindPatientTransactionIT extends AbstractTransactionIT {
 
         Assertions.assertNotNull(patient);
         Assertions.assertNotNull(patient.getId(), id.getIdPart());
-        Assertions.assertEquals(PATIENT_ID, patient.getIdentifier().get(0).getValue());
+        Assertions.assertEquals(patientId, patient.getIdentifier().get(0).getValue());
     }
 
     @Test
@@ -49,11 +51,11 @@ class FindPatientTransactionIT extends AbstractTransactionIT {
         Assertions.assertNotNull(patient);
         Assertions.assertNotNull(patient.getId(), id.getIdPart());
         Assertions.assertNotNull(patient.getMeta().getVersionId(), id.getVersionIdPart());
-        Assertions.assertEquals(PATIENT_ID, patient.getIdentifier().get(0).getValue());
+        Assertions.assertEquals(patientId, patient.getIdentifier().get(0).getValue());
     }
 
     @Test
-    void findPatientSearch() throws IOException, ParseException {
+    void findPatientSearch() throws IOException {
         String patientId = null;
         for (int i = 0; i < 3; i++) {
             String uuid = UUID.randomUUID().toString();
@@ -75,6 +77,12 @@ class FindPatientTransactionIT extends AbstractTransactionIT {
     }
 
     protected String getResourceAsString(String resourceLocation, String patientId) throws IOException {
+        Reader reader = new InputStreamReader(new ClassPathResource(resourceLocation).getInputStream(), StandardCharsets.UTF_8);
+        String resource = FileCopyUtils.copyToString(reader);
+        return resource.replaceAll(PATIENT_ID_TOKEN, patientId);
+    }
+
+    protected String getResourceAsString(String resourceLocation) throws IOException {
         Reader reader = new InputStreamReader(new ClassPathResource(resourceLocation).getInputStream(), StandardCharsets.UTF_8);
         String resource = FileCopyUtils.copyToString(reader);
         return resource.replaceAll(PATIENT_ID_TOKEN, patientId);
