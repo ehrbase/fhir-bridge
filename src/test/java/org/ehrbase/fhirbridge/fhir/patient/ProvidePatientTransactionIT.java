@@ -13,7 +13,6 @@ import org.springframework.util.FileCopyUtils;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
@@ -25,7 +24,7 @@ class ProvidePatientTransactionIT extends AbstractTransactionIT {
     private String patientId;
 
     @BeforeEach
-    public void setup() {
+    public void beforeEach() {
         patientId = UUID.randomUUID().toString();
     }
 
@@ -54,6 +53,7 @@ class ProvidePatientTransactionIT extends AbstractTransactionIT {
         Assertions.assertEquals(patientId, patient.getIdentifier().get(0).getValue());
     }
 
+    @Override
     protected String getResourceAsString(String resourceLocation) throws IOException {
         Reader reader = new InputStreamReader(new ClassPathResource(resourceLocation).getInputStream(), StandardCharsets.UTF_8);
         String resource = FileCopyUtils.copyToString(reader);

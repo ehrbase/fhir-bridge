@@ -13,9 +13,7 @@ import org.springframework.util.FileCopyUtils;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.text.ParseException;
 import java.util.UUID;
 
 /**
@@ -26,7 +24,7 @@ class FindPatientTransactionIT extends AbstractTransactionIT {
     private String patientId;
 
     @BeforeEach
-    public void setup() {
+    public void beforeEach() {
         patientId = UUID.randomUUID().toString();
     }
 
@@ -56,11 +54,11 @@ class FindPatientTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findPatientSearch() throws IOException {
-        String patientId = null;
+        String uuid;
         for (int i = 0; i < 3; i++) {
-            String uuid = UUID.randomUUID().toString();
+            uuid = UUID.randomUUID().toString();
             if (i == 0) {
-                patientId = uuid;
+                uuid = patientId;
             }
             create("Patient/transactions/find-patient-search.json", uuid);
         }
@@ -82,6 +80,7 @@ class FindPatientTransactionIT extends AbstractTransactionIT {
         return resource.replaceAll(PATIENT_ID_TOKEN, patientId);
     }
 
+    @Override
     protected String getResourceAsString(String resourceLocation) throws IOException {
         Reader reader = new InputStreamReader(new ClassPathResource(resourceLocation).getInputStream(), StandardCharsets.UTF_8);
         String resource = FileCopyUtils.copyToString(reader);
