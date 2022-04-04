@@ -60,6 +60,4 @@ public abstract class AbstractSetupIT {
         ehrStatus.setName(new DvText("Integration tests status"));
         client.ehrEndpoint().createEhr(ehrStatus);
     }
-
-
 }
