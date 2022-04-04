@@ -1,20 +1,32 @@
 package org.ehrbase.fhirbridge.fhir.patient;
 
+import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.ehrbase.fhirbridge.fhir.AbstractTransactionIT;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Patient;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.FileCopyUtils;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.UUID;
 
 /**
  * Integration Tests that validate "Find Patient" transaction.
  */
 class FindPatientTransactionIT extends AbstractTransactionIT {
+
+    @BeforeEach
+    public void setup() throws URISyntaxException {
+        PATIENT_ID = UUID.randomUUID().toString();
+    }
 
     @Test
     void findPatientRead() throws IOException {
@@ -42,21 +54,29 @@ class FindPatientTransactionIT extends AbstractTransactionIT {
 
     @Test
     void findPatientSearch() throws IOException, ParseException {
+        String patientId = null;
         for (int i = 0; i < 3; i++) {
-            create("Patient/transactions/find-patient-search.json");
+            String uuid = UUID.randomUUID().toString();
+            if (i == 0) {
+                patientId = uuid;
+            }
+            create("Patient/transactions/find-patient-search.json", uuid);
         }
 
-        Bundle bundle = search("Patient?identifier=" + PATIENT_ID + "&birthdate=2000-09-30");
+        Bundle bundle = search("Patient?identifier=" + patientId + "&birthdate=2000-09-30");
 
-        Assertions.assertEquals(3, bundle.getTotal());
+        Assertions.assertEquals(1, bundle.getTotal());
+    }
 
-        Date birthdate = new SimpleDateFormat("yyyy-MM-dd").parse("2000-09-30");
+    protected MethodOutcome create(String resourceLocation, String patientId) throws IOException {
+        return client.create()
+                .resource(getResourceAsString(resourceLocation, patientId))
+                .execute();
+    }
 
-        bundle.getEntry().forEach(entry -> {
-            var patient = (Patient) entry.getResource();
-
-            Assertions.assertEquals(PATIENT_ID, patient.getIdentifier().get(0).getValue());
-            Assertions.assertEquals(birthdate, patient.getBirthDate());
-        });
+    protected String getResourceAsString(String resourceLocation, String patientId) throws IOException {
+        Reader reader = new InputStreamReader(new ClassPathResource(resourceLocation).getInputStream(), StandardCharsets.UTF_8);
+        String resource = FileCopyUtils.copyToString(reader);
+        return resource.replaceAll(PATIENT_ID_TOKEN, patientId);
     }
 }

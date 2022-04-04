@@ -5,14 +5,22 @@ import org.ehrbase.fhirbridge.fhir.AbstractTransactionIT;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.Patient;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.UUID;
 
 /**
  * Integration Tests that validate "Provide Patient" transaction.
  */
 class ProvidePatientTransactionIT extends AbstractTransactionIT {
+
+    @BeforeEach
+    public void setup() throws URISyntaxException {
+        PATIENT_ID = UUID.randomUUID().toString();
+    }
 
     @Test
     void providePatientCreate() throws IOException {
