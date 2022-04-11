@@ -21,15 +21,15 @@ services:
       VALIDATION_EXTERNALTERMINOLOGY_ENABLED: 'true'
       VALIDATION_EXTERNALTERMINOLOGY_FAILONERROR: 'true'
       VALIDATION_EXTERNALTERMINOLOGY_PROVIDER_TERMSERVER1_TYPE: fhir
-      VALIDATION_EXTERNALTERMINOLOGY_PROVIDER_TERMSERVER1_URL: https://terminology-highmed.medic.medfak.uni-koeln.de/fhir
+      VALIDATION_EXTERNALTERMINOLOGY_PROVIDER_TERMSERVER1_URL: #your term serer url
       CLIENT_SSL_ENABLED: 'true'
-      CLIENT_SSL_KEYPASSWORD: Azerty#123456
-      CLIENT_SSL_KEYSTORE: /etc/ehrbase/keystore.p12
-      CLIENT_SSL_KEYSTOREPASSWORD: Azerty#123456
-      CLIENT_SSL_KEYSTORETYPE: pkcs12
-      CLIENT_SSL_TRUSTSTORE: /etc/ehrbase/truststore.p12
-      CLIENT_SSL_TRUSTSTOREPASSWORD: Azerty#123456
-      CLIENT_SSL_TRUSTSTORETYPE: pkcs12
+      CLIENT_SSL_KEYPASSWORD:  #your password
+      CLIENT_SSL_KEYSTORE: #your keystore path
+      CLIENT_SSL_KEYSTOREPASSWORD: #your keystore path
+      CLIENT_SSL_KEYSTORETYPE:  #your keystore type
+      CLIENT_SSL_TRUSTSTORE:  #your truststore path
+      CLIENT_SSL_TRUSTSTOREPASSWORD: #your truststore password
+      CLIENT_SSL_TRUSTSTORETYPE: #your truststore type
     volumes:
       - /etc/ehrbase/keystores:/etc/ehrbase/
     depends_on:
