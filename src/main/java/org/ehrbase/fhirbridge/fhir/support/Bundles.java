@@ -31,6 +31,7 @@ public class Bundles {
         if (Resources.hasProfile(entry.getResource(), Profile.VIROLOGISCHER_BEFUND)) {
             return Optional.of(Profile.VIROLOGISCHER_BEFUND);
         }
-        return Optional.empty();
+        return Optional.of(Profile.UCC_SENSORDATEN_APP);
+        //return Optional.empty();
     }
 }

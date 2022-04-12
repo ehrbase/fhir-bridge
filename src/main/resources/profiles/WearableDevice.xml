@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StructureDefinition xmlns="http://hl7.org/fhir">
+  <url value="https://example.org/fhir/StructureDefinition/WearableDevice" />
+  <name value="WearableDevice" />
+  <status value="draft" />
+  <fhirVersion value="3.0.2" />
+  <kind value="resource" />
+  <abstract value="false" />
+  <type value="Device" />
+  <baseDefinition value="http://hl7.org/fhir/StructureDefinition/Device" />
+  <derivation value="constraint" />
+  <differential>
+    <element id="Device.identifier">
+      <path value="Device.identifier" />
+      <min value="1" />
+      <max value="1" />
+    </element>
+    <element id="Device.identifier.use">
+      <path value="Device.identifier.use" />
+      <max value="0" />
+    </element>
+    <element id="Device.identifier.type">
+      <path value="Device.identifier.type" />
+      <max value="0" />
+    </element>
+    <element id="Device.identifier.system">
+      <path value="Device.identifier.system" />
+      <max value="0" />
+    </element>
+    <element id="Device.identifier.value">
+      <path value="Device.identifier.value" />
+      <min value="1" />
+    </element>
+    <element id="Device.identifier.period">
+      <path value="Device.identifier.period" />
+      <max value="0" />
+    </element>
+    <element id="Device.identifier.assigner">
+      <path value="Device.identifier.assigner" />
+      <max value="0" />
+    </element>
+    <element id="Device.udi">
+      <path value="Device.udi" />
+      <max value="0" />
+    </element>
+    <element id="Device.status">
+      <path value="Device.status" />
+      <max value="0" />
+    </element>
+    <element id="Device.type">
+      <path value="Device.type" />
+      <max value="0" />
+    </element>
+    <element id="Device.lotNumber">
+      <path value="Device.lotNumber" />
+      <max value="0" />
+    </element>
+    <element id="Device.manufacturer">
+      <path value="Device.manufacturer" />
+      <min value="1" />
+      <fixedString value="Apple Inc" />
+    </element>
+    <element id="Device.manufactureDate">
+      <path value="Device.manufactureDate" />
+      <max value="0" />
+    </element>
+    <element id="Device.expirationDate">
+      <path value="Device.expirationDate" />
+      <max value="0" />
+    </element>
+    <element id="Device.model">
+      <path value="Device.model" />
+      <max value="0" />
+    </element>
+    <element id="Device.version">
+      <path value="Device.version" />
+      <max value="0" />
+    </element>
+    <element id="Device.patient">
+      <path value="Device.patient" />
+      <max value="0" />
+    </element>
+    <element id="Device.owner">
+      <path value="Device.owner" />
+      <max value="0" />
+    </element>
+    <element id="Device.contact">
+      <path value="Device.contact" />
+      <max value="0" />
+    </element>
+    <element id="Device.location">
+      <path value="Device.location" />
+      <max value="0" />
+    </element>
+    <element id="Device.url">
+      <path value="Device.url" />
+      <max value="0" />
+    </element>
+    <element id="Device.note">
+      <path value="Device.note" />
+      <max value="0" />
+    </element>
+    <element id="Device.safety">
+      <path value="Device.safety" />
+      <max value="0" />
+    </element>
+  </differential>
+</StructureDefinition>

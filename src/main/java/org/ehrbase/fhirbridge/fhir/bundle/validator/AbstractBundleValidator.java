@@ -22,14 +22,16 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
     public void validateRequest(Object payload, Map<String, Object> parameters) {
         Bundle bundle = (Bundle) payload;
 
-        validateBundleType(bundle);
+     //   validateBundleType(bundle);
         MemberValidator memberValidator = new MemberValidator();
         validateEqualPatientIds(bundle);
 
         for (Bundle.BundleEntryComponent entry : bundle.getEntry()) {
             setUrlMemberLists(entry, memberValidator);
             checkForClientIds(entry);//has to be after setUrlMemberList because of fullUrl validation
-            validateRequestElement(entry);
+            if(bundle.getType()!= Bundle.BundleType.DOCUMENT){
+                validateRequestElement(entry);
+            }
         }
         memberValidator.validateMembers();
     }
