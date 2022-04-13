@@ -20,10 +20,10 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.processor.BundleResponseProcessor;
-import org.ehrbase.fhirbridge.ehr.converter.specific.ucc_sensordaten.UCCSensordatenCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.AntiBodyPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.DiagnosticReportLabConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.UCCSensordatenBundleConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.VirologischerBefundConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.AntiBodyPanelBundleValidator;
 import org.ehrbase.fhirbridge.fhir.bundle.validator.BloodGasPanelBundleValidator;
@@ -61,11 +61,12 @@ public class TransactionRouteBuilder extends AbstractRouteBuilder {
                 .when(header(CamelConstants.PROFILE).isEqualTo(Profile.VIROLOGISCHER_BEFUND))
                     .bean(VirologischerBefundBundleValidator.class)
                     .bean(VirologischerBefundConverter.class,"convert")
-                .otherwise()
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_SENSORDATEN_APP))
                     .bean(UCCSensorDatenValidator.class)
-                    .bean(UCCSensordatenCompositionConverter.class,"convert")
-                 /*   .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
-                            "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri()))*/
+                    .bean(UCCSensordatenBundleConverter.class,"convert")
+                .otherwise()
+                    .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
+                                "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri()))
             .end()
             .to("direct:provideResource")
             .process(BundleResponseProcessor.BEAN_ID);

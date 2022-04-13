@@ -34,6 +34,7 @@ import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.CodeSystem;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
@@ -107,6 +108,14 @@ public class HapiFhirJpaConfiguration extends BaseR4Config {
         conditionDao.setResourceType(Condition.class);
         conditionDao.setContext(fhirContext());
         return conditionDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Composition> compositionDao() {
+        JpaResourceDao<Composition> compositionDao = new JpaResourceDao<>();
+        compositionDao.setResourceType(Composition.class);
+        compositionDao.setContext(fhirContext());
+        return compositionDao;
     }
 
     @Bean

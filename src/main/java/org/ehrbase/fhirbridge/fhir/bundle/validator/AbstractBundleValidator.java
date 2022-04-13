@@ -22,7 +22,7 @@ public abstract class AbstractBundleValidator implements FhirTransactionValidato
     public void validateRequest(Object payload, Map<String, Object> parameters) {
         Bundle bundle = (Bundle) payload;
 
-     //   validateBundleType(bundle);
+        // validateBundleType(bundle);
         MemberValidator memberValidator = new MemberValidator();
         validateEqualPatientIds(bundle);
 

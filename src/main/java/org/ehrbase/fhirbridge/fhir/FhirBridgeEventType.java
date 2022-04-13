@@ -21,6 +21,11 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     FIND_CONSENT("consent-find", "Find Consent"),
 
+    // Composition
+    PROVIDE_COMPOSITION("composition-provide", "Provide Composition"),
+
+    FIND_COMPOSITION("composition-find","Find Composition"),
+
     // DiagnosticReport
 
     PROVIDE_DIAGNOSTIC_REPORT("diagnostic-report-provide", "Provide Diagnostic Report"),

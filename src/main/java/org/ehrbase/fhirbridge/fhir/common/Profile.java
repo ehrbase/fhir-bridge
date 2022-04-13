@@ -26,7 +26,7 @@ public enum Profile {
     DOCUMENT_REFERENCE_DEFAULT(DocumentReference.class, null),
 
     //Composition
-    UCC_SENSORDATEN_APP(Composition.class, null),
+    UCC_SENSORDATEN_APP(Composition.class, "http://hl7.org/fhir/StructureDefinition/Composition"),
 
     // Condition
     CONDITION_DEFAULT(Condition.class, null),

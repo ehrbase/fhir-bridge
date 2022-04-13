@@ -57,7 +57,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.sofascore.SofaScoreComposit
 import org.ehrbase.fhirbridge.ehr.converter.specific.stationaererversorgungsfall.StationaererVersorgungsfallCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.SymptomCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.ucc_sensordaten.UCCSensordatenCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten.UCCSensordatenCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund.VirologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.service.TerminologyService;
