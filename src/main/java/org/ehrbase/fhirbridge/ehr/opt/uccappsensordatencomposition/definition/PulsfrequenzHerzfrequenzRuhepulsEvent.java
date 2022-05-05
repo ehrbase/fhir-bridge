@@ -1,26 +1,24 @@
 package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
+import com.nedap.archie.rm.datastructures.Cluster;
 import java.lang.Double;
-import java.lang.Long;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
-import java.time.temporal.TemporalAmount;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
-import org.ehrbase.client.classgenerator.interfaces.IntervalEventEntity;
-import org.ehrbase.client.classgenerator.shareddefinition.MathFunction;
+import org.ehrbase.client.classgenerator.interfaces.PointEventEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-04-13T16:38:21.304628151+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
+    date = "2022-05-05T11:59:39.158876+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class PulsfrequenzHerzfrequenzRuhepulsIntervalEvent implements IntervalEventEntity {
+public class PulsfrequenzHerzfrequenzRuhepulsEvent implements PointEventEntity {
   /**
    * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/Frequenz
    * Description: Die Frequenz, gemessen in Schlägen pro Minute.
@@ -69,29 +67,11 @@ public class PulsfrequenzHerzfrequenzRuhepulsIntervalEvent implements IntervalEv
   private NullFlavour unregelmaessigerTypNullFlavourDefiningCode;
 
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/Belastungsgrad
-   * Description: Aufzeichnung von Informationen zum Belastungsgrad/Zustand des Patienten.
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/Anstrengung
+   * Description: Details über die körperliche Anstrengung, die der Patient während der Untersuchung ausgesetzt war.
    */
-  @Path("/state[at0012]/items[openEHR-EHR-CLUSTER.level_of_exertion.v0]")
-  private List<BelastungsgradCluster> belastungsgrad;
-
-  /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/math_function
-   */
-  @Path("/math_function|defining_code")
-  private MathFunction mathFunctionDefiningCode;
-
-  /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/sample_count
-   */
-  @Path("/sample_count")
-  private Long sampleCount;
-
-  /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/width
-   */
-  @Path("/width|value")
-  private TemporalAmount widthValue;
+  @Path("/state[at0012]/items[at1017]")
+  private List<Cluster> anstrengung;
 
   /**
    * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/feeder_audit
@@ -165,36 +145,12 @@ public class PulsfrequenzHerzfrequenzRuhepulsIntervalEvent implements IntervalEv
      return this.unregelmaessigerTypNullFlavourDefiningCode ;
   }
 
-  public void setBelastungsgrad(List<BelastungsgradCluster> belastungsgrad) {
-     this.belastungsgrad = belastungsgrad;
+  public void setAnstrengung(List<Cluster> anstrengung) {
+     this.anstrengung = anstrengung;
   }
 
-  public List<BelastungsgradCluster> getBelastungsgrad() {
-     return this.belastungsgrad ;
-  }
-
-  public void setMathFunctionDefiningCode(MathFunction mathFunctionDefiningCode) {
-     this.mathFunctionDefiningCode = mathFunctionDefiningCode;
-  }
-
-  public MathFunction getMathFunctionDefiningCode() {
-     return this.mathFunctionDefiningCode ;
-  }
-
-  public void setSampleCount(Long sampleCount) {
-     this.sampleCount = sampleCount;
-  }
-
-  public Long getSampleCount() {
-     return this.sampleCount ;
-  }
-
-  public void setWidthValue(TemporalAmount widthValue) {
-     this.widthValue = widthValue;
-  }
-
-  public TemporalAmount getWidthValue() {
-     return this.widthValue ;
+  public List<Cluster> getAnstrengung() {
+     return this.anstrengung ;
   }
 
   public void setFeederAudit(FeederAudit feederAudit) {

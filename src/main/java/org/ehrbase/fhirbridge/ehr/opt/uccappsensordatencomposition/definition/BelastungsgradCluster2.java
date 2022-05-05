@@ -5,6 +5,7 @@ import java.lang.String;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
+import org.ehrbase.client.annotations.OptionFor;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
@@ -13,25 +14,26 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.level_of_exertion.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-04-13T16:38:21.333017388+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
+    date = "2022-05-05T11:59:39.225205+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
-public class BelastungsgradCluster2 implements LocatableEntity {
+@OptionFor("CLUSTER")
+public class BelastungsgradCluster2 implements LocatableEntity, BelastungsgradChoice {
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Mittlere Herzfrequenz/Belastungsgrad/Intensität der Übung/Beschreibung
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Belastungsgrad/Intensität der Übung/Beschreibung
    * Description: Beschreibung der körperlichen Anstrengung.
    */
   @Path("/items[at0010]/items[at0016]/value|value")
   private String beschreibungValue;
 
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/History/Mittlere Herzfrequenz/List/Belastungsgrad/Intensität der Übung/Beschreibung/null_flavour
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/List/List/Belastungsgrad/Intensität der Übung/Beschreibung/null_flavour
    */
   @Path("/items[at0010]/items[at0016]/null_flavour|defining_code")
   private NullFlavour beschreibungNullFlavourDefiningCode;
 
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Mittlere Herzfrequenz/Belastungsgrad/feeder_audit
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Belastungsgrad/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;

@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datastructures.Cluster;
 import java.lang.Double;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -11,8 +10,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-04-13T16:38:21.355059612+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
+    date = "2022-05-05T11:59:39.273132+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public interface PulsfrequenzHerzfrequenzJedesEreignisChoice {
   NullFlavour getRegelmaessigkeitNullFlavourDefiningCode();
@@ -25,13 +24,17 @@ public interface PulsfrequenzHerzfrequenzJedesEreignisChoice {
   void setUnregelmaessigerTypDefiningCode(
       UnregelmaessigerTypDefiningCode unregelmaessigerTypDefiningCode);
 
-  String getFrequenzUnits();
+  List<PulsfrequenzHerzfrequenzStoerfaktorenElement> getStoerfaktoren();
 
-  void setFrequenzUnits(String frequenzUnits);
+  void setStoerfaktoren(List<PulsfrequenzHerzfrequenzStoerfaktorenElement> stoerfaktoren);
 
   NullFlavour getFrequenzNullFlavourDefiningCode();
 
   void setFrequenzNullFlavourDefiningCode(NullFlavour frequenzNullFlavourDefiningCode);
+
+  KoerperhaltungDefiningCode getKoerperhaltungDefiningCode();
+
+  void setKoerperhaltungDefiningCode(KoerperhaltungDefiningCode koerperhaltungDefiningCode);
 
   RegelmaessigkeitDefiningCode getRegelmaessigkeitDefiningCode();
 
@@ -42,6 +45,40 @@ public interface PulsfrequenzHerzfrequenzJedesEreignisChoice {
   void setUnregelmaessigerTypNullFlavourDefiningCode(
       NullFlavour unregelmaessigerTypNullFlavourDefiningCode);
 
+  NullFlavour getVorhandenseinNullFlavourDefiningCode();
+
+  void setVorhandenseinNullFlavourDefiningCode(NullFlavour vorhandenseinNullFlavourDefiningCode);
+
+  NullFlavour getKlinischeBeschreibungNullFlavourDefiningCode();
+
+  void setKlinischeBeschreibungNullFlavourDefiningCode(
+      NullFlavour klinischeBeschreibungNullFlavourDefiningCode);
+
+  VorhandenseinDefiningCode getVorhandenseinDefiningCode();
+
+  void setVorhandenseinDefiningCode(VorhandenseinDefiningCode vorhandenseinDefiningCode);
+
+  List<PulsfrequenzHerzfrequenzKlinischeInterpretationElement> getKlinischeInterpretation();
+
+  void setKlinischeInterpretation(
+      List<PulsfrequenzHerzfrequenzKlinischeInterpretationElement> klinischeInterpretation);
+
+  NullFlavour getKoerperhaltungNullFlavourDefiningCode();
+
+  void setKoerperhaltungNullFlavourDefiningCode(NullFlavour koerperhaltungNullFlavourDefiningCode);
+
+  String getKlinischeBeschreibungValue();
+
+  void setKlinischeBeschreibungValue(String klinischeBeschreibungValue);
+
+  String getFrequenzUnits();
+
+  void setFrequenzUnits(String frequenzUnits);
+
+  NullFlavour getKommentarNullFlavourDefiningCode();
+
+  void setKommentarNullFlavourDefiningCode(NullFlavour kommentarNullFlavourDefiningCode);
+
   FeederAudit getFeederAudit();
 
   void setFeederAudit(FeederAudit feederAudit);
@@ -50,9 +87,17 @@ public interface PulsfrequenzHerzfrequenzJedesEreignisChoice {
 
   void setFrequenzMagnitude(Double frequenzMagnitude);
 
-  List<Cluster> getAnstrengung();
+  List<PulsfrequenzHerzfrequenzMerkmalElement> getMerkmal();
 
-  void setAnstrengung(List<Cluster> anstrengung);
+  void setMerkmal(List<PulsfrequenzHerzfrequenzMerkmalElement> merkmal);
+
+  List<BelastungsgradChoice> getBelastungsgrad();
+
+  void setBelastungsgrad(List<BelastungsgradChoice> belastungsgrad);
+
+  String getKommentarValue();
+
+  void setKommentarValue(String kommentarValue);
 
   TemporalAccessor getTimeValue();
 

@@ -3,14 +3,10 @@ package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
 import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum AktivitaetDefiningCode implements EnumValueSet {
-  GEHEN("Gehen", "Die Aktivität war Fortbewegung zu Fuß, langsamer als Laufen/Joggen.", "local", "at0035"),
+public enum VorhandenseinDefiningCode implements EnumValueSet {
+  VORHANDEN("Vorhanden", "Eine Puls- oder eine Herzfrequenz kann ermittelt werden.", "local", "at1024"),
 
-  WANDERN("Wandern", "Aufzeichung von Aktivitäten bei Fortbewegung zu Fuß im Gelände.", "local", "at0042"),
-
-  RUHE("Ruhe", "Körper ruht, keine Bewegung wird gemessen.", "local", "at0055"),
-
-  LAUFEN("Laufen", "Die Aktivität war Fortbewegung zu Fuß, in einem sportlichen Jogging- /Lauftempo.", "local", "at0036");
+  NICHT_ERMITTELBAR("Nicht ermittelbar", "Eine Puls- oder eine Herzfrequenz kann nicht ermittelt werden.", "local", "at1025");
 
   private String value;
 
@@ -20,7 +16,7 @@ public enum AktivitaetDefiningCode implements EnumValueSet {
 
   private String code;
 
-  AktivitaetDefiningCode(String value, String description, String terminologyId, String code) {
+  VorhandenseinDefiningCode(String value, String description, String terminologyId, String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;

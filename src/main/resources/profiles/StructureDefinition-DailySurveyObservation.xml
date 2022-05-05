@@ -2810,8 +2810,8 @@
             <short value="Specimen used for this observation"/>
             <definition value="The specimen that was used when this observation was made."/>
             <comment value="Should only be used if not implicit in code found in `Observation.code`.  Observations are not made on specimens themselves; they are made on a subject, but in many cases by the means of a specimen. Note that although specimens are often involved, they are not always tracked and reported explicitly. Also note that observation resources may be used in contexts that track the specimen explicitly (e.g. Diagnostic Report)."/>
-            <min value="1"/>
-            <max value="1"/>
+            <min value="0"/>
+            <max value="0"/>
             <base>
                 <path value="Observation.specimen"/>
                 <min value="0"/>
@@ -3559,7 +3559,7 @@
             <comment value="For a discussion on the ways Observations can be assembled in groups together see [Notes](observation.html#notes) below."/>
             <requirements value="Component observations share the same attributes in the Observation resource as the primary observation and are always treated a part of a single observation (they are not separable).   However, the reference range for the primary observation value is not inherited by the component values and is required when appropriate for each component observation."/>
             <min value="1"/>
-            <max value="1"/>
+            <max value="*"/>
             <base>
                 <path value="Observation.component"/>
                 <min value="0"/>
@@ -4461,7 +4461,7 @@
         </element>
         <element id="Observation.specimen">
             <path value="Observation.specimen"/>
-            <min value="1"/>
+            <max value="0"/>
         </element>
         <element id="Observation.device">
             <path value="Observation.device"/>
@@ -4500,7 +4500,6 @@
         <element id="Observation.component">
             <path value="Observation.component"/>
             <min value="1"/>
-            <max value="1"/>
         </element>
         <element id="Observation.component.value[x]">
             <path value="Observation.component.value[x]"/>

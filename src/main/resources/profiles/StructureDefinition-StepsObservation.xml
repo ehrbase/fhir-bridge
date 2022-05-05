@@ -1028,7 +1028,7 @@
             <definition value="A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user."/>
             <comment value="Very often the text is the same as a displayName of one of the codings."/>
             <requirements value="The codes from the terminologies do not always capture the correct meaning with all the nuances of the human using them, or sometimes there is no appropriate code at all. In these cases, the text is used to capture the full meaning of the source."/>
-            <min value="1"/>
+            <min value="0"/>
             <max value="1"/>
             <base>
                 <path value="CodeableConcept.text"/>
@@ -1038,7 +1038,6 @@
             <type>
                 <code value="string"/>
             </type>
-            <fixedString value="Activity"/>
             <constraint>
                 <key value="ele-1"/>
                 <severity value="error"/>
@@ -2492,7 +2491,7 @@
             <comment value="Only used if not implicit in code for Observation.code."/>
             <requirements value="In some cases, method can impact results and is thus used for determining whether results can be compared or determining significance of results."/>
             <min value="0"/>
-            <max value="0"/>
+            <max value="1"/>
             <base>
                 <path value="Observation.method"/>
                 <min value="0"/>
@@ -4461,11 +4460,6 @@
             <path value="Observation.category.coding.userSelected"/>
             <max value="0"/>
         </element>
-        <element id="Observation.category.text">
-            <path value="Observation.category.text"/>
-            <min value="1"/>
-            <fixedString value="Activity"/>
-        </element>
         <element id="Observation.code.coding">
             <path value="Observation.code.coding"/>
             <min value="1"/>
@@ -4579,10 +4573,6 @@
         </element>
         <element id="Observation.bodySite">
             <path value="Observation.bodySite"/>
-            <max value="0"/>
-        </element>
-        <element id="Observation.method">
-            <path value="Observation.method"/>
             <max value="0"/>
         </element>
         <element id="Observation.specimen">

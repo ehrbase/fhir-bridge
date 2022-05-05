@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datastructures.Cluster;
+import com.nedap.archie.rm.datastructures.ItemTree;
 import com.nedap.archie.rm.generic.Participation;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
@@ -27,8 +27,8 @@ import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.Pu
 @Archetype("openEHR-EHR-COMPOSITION.self_monitoring.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-04-13T16:38:21.271208255+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
+    date = "2022-05-05T11:59:39.118925+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("UCC_App_Sensor_Daten")
 public class UCCAppSensorDatenComposition implements CompositionEntity {
@@ -39,12 +39,11 @@ public class UCCAppSensorDatenComposition implements CompositionEntity {
   private Category categoryDefiningCode;
 
   /**
-   * Path: Selbstüberwachung/context/Erweiterung
-   * Description: Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.
-   * Comment: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.
+   * Path: Selbstüberwachung/context/Tree
+   * Description: @ internal @
    */
-  @Path("/context/other_context[at0001]/items[at0002]")
-  private List<Cluster> erweiterung;
+  @Path("/context/other_context[at0001]")
+  private ItemTree tree;
 
   /**
    * Path: Selbstüberwachung/context/start_time
@@ -131,12 +130,12 @@ public class UCCAppSensorDatenComposition implements CompositionEntity {
      return this.categoryDefiningCode ;
   }
 
-  public void setErweiterung(List<Cluster> erweiterung) {
-     this.erweiterung = erweiterung;
+  public void setTree(ItemTree tree) {
+     this.tree = tree;
   }
 
-  public List<Cluster> getErweiterung() {
-     return this.erweiterung ;
+  public ItemTree getTree() {
+     return this.tree ;
   }
 
   public void setStartTimeValue(TemporalAccessor startTimeValue) {

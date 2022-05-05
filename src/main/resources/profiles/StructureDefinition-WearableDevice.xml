@@ -1228,7 +1228,6 @@
             <type>
                 <code value="string"/>
             </type>
-            <fixedString value="Apple Inc"/>
             <constraint>
                 <key value="ele-1"/>
                 <severity value="error"/>
@@ -2487,7 +2486,7 @@
             <short value="Device notes and comments"/>
             <definition value="Descriptive information, usage information or implantation information that is not captured in an existing element."/>
             <min value="0"/>
-            <max value="0"/>
+            <max value="*"/>
             <base>
                 <path value="Device.note"/>
                 <min value="0"/>
@@ -2616,7 +2615,6 @@
         <element id="Device.manufacturer">
             <path value="Device.manufacturer"/>
             <min value="1"/>
-            <fixedString value="Apple Inc"/>
         </element>
         <element id="Device.manufactureDate">
             <path value="Device.manufactureDate"/>
@@ -2682,10 +2680,6 @@
         </element>
         <element id="Device.url">
             <path value="Device.url"/>
-            <max value="0"/>
-        </element>
-        <element id="Device.note">
-            <path value="Device.note"/>
             <max value="0"/>
         </element>
         <element id="Device.safety">

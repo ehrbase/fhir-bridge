@@ -15,9 +15,9 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class PulsfrequenzHerzfrequenzObservationContainment extends Containment {
   public SelectAqlField<PulsfrequenzHerzfrequenzObservation> PULSFREQUENZ_HERZFREQUENZ_OBSERVATION = new AqlFieldImp<PulsfrequenzHerzfrequenzObservation>(PulsfrequenzHerzfrequenzObservation.class, "", "PulsfrequenzHerzfrequenzObservation", PulsfrequenzHerzfrequenzObservation.class, this);
 
-  public SelectAqlField<PulsfrequenzHerzfrequenzRuhepulsIntervalEvent> RUHEPULS = new AqlFieldImp<PulsfrequenzHerzfrequenzRuhepulsIntervalEvent>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/events[at0003]", "ruhepuls", PulsfrequenzHerzfrequenzRuhepulsIntervalEvent.class, this);
+  public SelectAqlField<PulsfrequenzHerzfrequenzRuhepulsEvent> RUHEPULS = new AqlFieldImp<PulsfrequenzHerzfrequenzRuhepulsEvent>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/events[at0003]", "ruhepuls", PulsfrequenzHerzfrequenzRuhepulsEvent.class, this);
 
-  public SelectAqlField<PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent> MITTLERE_HERZFREQUENZ = new AqlFieldImp<PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/events[at0003]", "mittlereHerzfrequenz", PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent.class, this);
+  public SelectAqlField<PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent> MITTLERE_HERZFREQUENZ = new AqlFieldImp<PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/events[at0003]", "mittlereHerzfrequenz", PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent.class, this);
 
   public SelectAqlField<TemporalAccessor> ORIGIN_VALUE = new AqlFieldImp<TemporalAccessor>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/origin|value", "originValue", TemporalAccessor.class, this);
 
@@ -35,7 +35,7 @@ public class PulsfrequenzHerzfrequenzObservationContainment extends Containment 
 
   public SelectAqlField<FeederAudit> FEEDER_AUDIT = new AqlFieldImp<FeederAudit>(PulsfrequenzHerzfrequenzObservation.class, "/feeder_audit", "feederAudit", FeederAudit.class, this);
 
-  public SelectAqlField<PulsfrequenzHerzfrequenzJedesEreignisChoice> JEDES_EREIGNIS = new AqlFieldImp<PulsfrequenzHerzfrequenzJedesEreignisChoice>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/events[at0003]", "jedesEreignis", PulsfrequenzHerzfrequenzJedesEreignisChoice.class, this);
+  public ListSelectAqlField<PulsfrequenzHerzfrequenzJedesEreignisChoice> JEDES_EREIGNIS = new ListAqlFieldImp<PulsfrequenzHerzfrequenzJedesEreignisChoice>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/events[at0003]", "jedesEreignis", PulsfrequenzHerzfrequenzJedesEreignisChoice.class, this);
 
   private PulsfrequenzHerzfrequenzObservationContainment() {
     super("openEHR-EHR-OBSERVATION.pulse.v2");
