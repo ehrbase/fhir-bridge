@@ -28,6 +28,7 @@ import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.instance.model.api.IIdType;
+import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Reference;
@@ -70,9 +71,10 @@ public class PatientReferenceProcessor implements FhirRequestProcessor {
 
             IIdType patientId;
             if (subject.hasReference()) {
-                Patient patient = patientDao.read(subject.getReferenceElement());
+                patientId = handleSubjectReference(subject, requestDetails);
+               /* Patient patient = patientDao.read(subject.getReferenceElement());
                 patientId = patient.getIdElement();
-                subject.setResource(patient);
+                subject.setResource(patient);*/
             } else if (hasIdentifier(subject)) {
                 patientId = handleSubjectIdentifier(subject, requestDetails);
             } else {
@@ -81,6 +83,31 @@ public class PatientReferenceProcessor implements FhirRequestProcessor {
 
             exchange.getIn().setHeader(CamelConstants.PATIENT_ID, patientId);
         }
+    }
+
+    private IIdType handleSubjectReference(Reference subject, RequestDetails requestDetails){
+        Patient patientReference = (Patient) subject.getResource();
+        Identifier identifier =  patientReference.getIdentifier().get(0); //TODO bad practice
+        SearchParameterMap parameters = new SearchParameterMap();
+        parameters.add(Patient.SP_IDENTIFIER, new TokenParam(identifier.getSystem(), identifier.getValue()));
+        Set<ResourcePersistentId> ids = patientDao.searchForIds(parameters, requestDetails);
+
+        IIdType patientId;
+        if (ids.isEmpty()) {
+            patientId = createPatient(identifier, requestDetails);
+        } else if (ids.size() == 1) {
+            IBundleProvider bundleProvider = patientDao.search(parameters, requestDetails);
+            List<IBaseResource> result = bundleProvider.getResources(0, 1);
+            Patient patient = (Patient) result.get(0);
+            patientId = patient.getIdElement();
+            LOG.debug("Resolved existing Patient: id={}", patientId);
+        } else {
+            throw new UnprocessableEntityException("More than one patient matching the given identifier system and value");
+        }
+
+        subject.setReferenceElement(patientId);
+
+        return patientId;
     }
 
     /**
