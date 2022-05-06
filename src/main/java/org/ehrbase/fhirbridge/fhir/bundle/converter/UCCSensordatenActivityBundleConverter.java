@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class UCCSensordatenBundleConverter extends AbstractBundleConverter<Composition> {
+public class UCCSensordatenActivityBundleConverter extends AbstractBundleConverter<Composition> {
 
     @Override
     public Composition convert(@NonNull Bundle bundle) {
-        Composition composition = getRoot(bundle, Profile.UCC_SENSORDATEN_APP);
+        Composition composition = getRoot(bundle, Profile.UCC_SENSORDATEN_STEPS);
         Map<String, Resource> resources = mapResources(bundle);
 
         List<Resource> contains = new ArrayList<>();

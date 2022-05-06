@@ -26,7 +26,8 @@ public enum Profile {
     DOCUMENT_REFERENCE_DEFAULT(DocumentReference.class, null),
 
     //Composition
-    UCC_SENSORDATEN_APP(Composition.class, "https://example.org/fhir/StructureDefinition/VitalSignsComposition"),
+    UCC_SENSORDATEN_VITALSIGNS(Composition.class, "https://example.org/fhir/StructureDefinition/VitalSignsComposition"),
+    UCC_SENSORDATEN_STEPS(Composition.class, "https://example.org/fhir/StructureDefinition/ActivityComposition"),
 
     // Condition
     CONDITION_DEFAULT(Condition.class, null),

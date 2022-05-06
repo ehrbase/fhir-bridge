@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionToObservationConverter;
-import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzJedesEreignisChoice;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
 import org.hl7.fhir.r4.model.Coding;
@@ -26,7 +25,7 @@ public class PulsfrequenzHerzfrequenzToObservation extends CompositionToObservat
         for (Composition.SectionComponent section : composition.getSection()) {
             for (Coding coding : section.getCode().getCoding()) {
                 if (coding.getCode().equals("vital-signs") && coding.getSystem().equals("http://terminology.hl7.org/CodeSystem/observation-category")) {
-                    mapBefundErgebnise(section, pulsfrequenzHerzfrequenzJedesEreignisChoices);
+                    mapPulseFrequenzErgebnis(section, pulsfrequenzHerzfrequenzJedesEreignisChoices);
                 }
             }
         }
@@ -34,7 +33,7 @@ public class PulsfrequenzHerzfrequenzToObservation extends CompositionToObservat
 
     }
 
-    private void mapBefundErgebnise(Composition.SectionComponent section, List<PulsfrequenzHerzfrequenzJedesEreignisChoice> pulsfrequenzHerzfrequenzJedesEreignisChoices) {
+    private void mapPulseFrequenzErgebnis(Composition.SectionComponent section, List<PulsfrequenzHerzfrequenzJedesEreignisChoice> pulsfrequenzHerzfrequenzJedesEreignisChoices) {
         for(Reference entry: section.getEntry()){
             pulsfrequenzHerzfrequenzJedesEreignisChoices.add(new HerzfrequenzJedesEreignisPointEventConverter().convert((Observation) entry.getResource()));
         }

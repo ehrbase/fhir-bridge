@@ -103,7 +103,8 @@ public class ConversionConfiguration {
     }
 
     private void registerCompositionConverter(ConversionService conversionService) {
-        conversionService.registerConverter(Profile.UCC_SENSORDATEN_APP, new UCCSensordatenCompositionConverter());
+        conversionService.registerConverter(Profile.UCC_SENSORDATEN_VITALSIGNS, new UCCSensordatenCompositionConverter());
+        conversionService.registerConverter(Profile.UCC_SENSORDATEN_STEPS, new UCCSensordatenCompositionConverter());
     }
 
 

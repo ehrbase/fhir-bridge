@@ -20,6 +20,9 @@ public class UCCSensordatenCompositionConverter extends CompositionToComposition
                 if (coding.getCode().equals("vital-signs") && coding.getSystem().equals("http://terminology.hl7.org/CodeSystem/observation-category")) {
                     uccAppSensorDatenComposition.setPulsfrequenzHerzfrequenz(new PulsfrequenzHerzfrequenzToObservation().convert(composition));
                 }
+                if (coding.getCode().equals("activity") && coding.getSystem().equals("http://terminology.hl7.org/CodeSystem/observation-category")) {
+                    uccAppSensorDatenComposition.setMitSensorGemesseneKoerperlicheAktivitaet(new KoerperlicheAktivitaetToObservation().convert(composition));
+                }
             }
         }
 

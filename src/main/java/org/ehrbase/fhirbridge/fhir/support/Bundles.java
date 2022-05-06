@@ -33,8 +33,11 @@ public class Bundles {
         if (Resources.hasProfile(entry.getResource(), Profile.VIROLOGISCHER_BEFUND)) {
             return Optional.of(Profile.VIROLOGISCHER_BEFUND);
         }
-        if (Resources.hasProfile(entry.getResource(), Profile.UCC_SENSORDATEN_APP)) {
-            return Optional.of(Profile.UCC_SENSORDATEN_APP);
+        if (Resources.hasProfile(entry.getResource(), Profile.UCC_SENSORDATEN_STEPS)) {
+            return Optional.of(Profile.UCC_SENSORDATEN_STEPS);
+        }
+        if (Resources.hasProfile(entry.getResource(), Profile.UCC_SENSORDATEN_VITALSIGNS)) {
+            return Optional.of(Profile.UCC_SENSORDATEN_VITALSIGNS);
         }
         return Optional.empty();
     }

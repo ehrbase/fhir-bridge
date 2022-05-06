@@ -1,21 +1,17 @@
 package org.ehrbase.fhirbridge.fhir.bundle;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.specific.antibodypanel.GECCOSerologischerBefundCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.bloodgas.BloodGasPanelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten.UCCSensordatenCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.BefundDerBlutgasanalyseComposition;
-import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.*;
-import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.UCCAppSensorDatenComposition;
-import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.MitSensorGemesseneKoerperlicheAktivitaetObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzJedesEreignisPointEvent;
+import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent;
+import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzRuhepulsEvent;
 import org.ehrbase.fhirbridge.fhir.AbstractBundleMappingTestSetupIT;
-import org.ehrbase.fhirbridge.fhir.bundle.converter.AntiBodyPanelConverter;
-import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
-import org.ehrbase.fhirbridge.fhir.bundle.converter.UCCSensordatenBundleConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.UCCSensordatenVitalSignsBundleConverter;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Composition;
-import org.hl7.fhir.r4.model.Observation;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
 import org.javers.core.diff.Diff;
@@ -64,13 +60,13 @@ public class SesordatenIT  extends AbstractBundleMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Bundle bundle = (Bundle) testFileLoader.loadResource(path);
         return assertThrows(Exception.class, () -> {
-            new UCCSensordatenCompositionConverter().convert(new UCCSensordatenBundleConverter().convert(bundle));
+            new UCCSensordatenCompositionConverter().convert(new UCCSensordatenVitalSignsBundleConverter().convert(bundle));
         });    }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Bundle bundle = (Bundle) super.testFileLoader.loadResource(resourcePath);
-        UCCSensordatenBundleConverter uccSensordatenBundleConverter = new UCCSensordatenBundleConverter();
+        UCCSensordatenVitalSignsBundleConverter uccSensordatenBundleConverter = new UCCSensordatenVitalSignsBundleConverter();
         Composition composition = uccSensordatenBundleConverter.convert(bundle);
         UCCSensordatenCompositionConverter uccSensordatenCompositionConverter = new UCCSensordatenCompositionConverter();
         UCCAppSensorDatenComposition uccAppSensorDatenComposition = uccSensordatenCompositionConverter.convert(composition);
