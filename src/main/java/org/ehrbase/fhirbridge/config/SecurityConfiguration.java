@@ -30,7 +30,7 @@ public class SecurityConfiguration {
     @ConditionalOnProperty(value = "fhir-bridge.security.authentication-type", havingValue = "basic")
     protected static class BasicAuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 
-        private static final String NOOP_PASSWORD_PREFIX = "{noop}";
+        private static final String NOOP_ENCODER_PREFIX = "{noop}";
 
         private final SecurityProperties properties;
 
@@ -63,7 +63,7 @@ public class SecurityConfiguration {
             auth
                 .inMemoryAuthentication()
                     .withUser(properties.getBasic().getUsername())
-                    .password(NOOP_PASSWORD_PREFIX + properties.getBasic().getPassword())
+                    .password(NOOP_ENCODER_PREFIX + properties.getBasic().getPassword())
                     .roles("");
             // @formatter:on
         }
