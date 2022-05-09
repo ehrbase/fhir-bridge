@@ -1,16 +1,13 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.uccappdaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionToCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.bloodpressure.BloodPressureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.UCCAppPRODatenComposition;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BlutdruckObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BodyWeightObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.PulseHeartBeatObservation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Reference;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UCCAppProDatenConverter extends CompositionToCompositionConverter<UCCAppPRODatenComposition> {
 
@@ -26,39 +23,36 @@ public class UCCAppProDatenConverter extends CompositionToCompositionConverter<U
             for (Coding coding : section.getCode().getCoding()) {
                 if (coding.getCode().equals("vital-signs") && coding.getSystem().equals("http://terminology.hl7.org/CodeSystem/observation-category")) {
                     for (Reference entry : section.getEntry()) {
-                            mapEntry(uccAppPRODatenComposition, entry);
-                        }
+                        mapEntry(uccAppPRODatenComposition, entry);
                     }
                 }
             }
         }
+    }
 
     private void mapEntry(UCCAppPRODatenComposition composition, Reference entry) {
-        List<BlutdruckObservation> blutdruecke = new ArrayList<>();
         Observation observation = (Observation) entry.getResource();
         for (Coding coding : observation.getCode().getCoding()) {
             if (coding.getCode().equals("55284-4")) {
-                mapBlutdruck(composition, observation, blutdruecke);
+                mapBlutdruck(observation, composition);
             } else if (coding.getCode().equals("3141-9")) {
-                mapKoerpergewicht(composition, observation);
+                mapKoerpergewicht(observation, composition);
             } else if (coding.getCode().equals("8867-4")) {
-                mapPulsfrequenz(composition, observation);
+                mapPulsfrequenz(observation, composition);
             }
         }
-
-        if (blutdruecke.size() != 0) {
-            composition.setBlutdruck(blutdruecke);
-        }
     }
 
-    private void mapBlutdruck(UCCAppPRODatenComposition uccAppPRODatenComposition, Observation observation, List<BlutdruckObservation> blutdruecke) {
-        uccAppPRODatenComposition.setBlutdruck(new BloodPressureCompositionConverter().convert(observation));
+    private void mapBlutdruck(Observation observation, UCCAppPRODatenComposition uccAppPRODatenComposition) {
+        uccAppPRODatenComposition.setBloodPressure(new BlutdruckObservationConverter().convert(observation));
     }
 
-    private void mapKoerpergewicht(UCCAppPRODatenComposition uccAppPRODatenComposition, Observation composition) {
+    private void mapKoerpergewicht(Observation observation, UCCAppPRODatenComposition uccAppPRODatenComposition) {
+        uccAppPRODatenComposition.setBodyWeight(new BodyWeightObservationConverter().convert(observation));
     }
 
-    private void mapPulsfrequenz(UCCAppPRODatenComposition uccAppPRODatenComposition, Observation composition) {
+    private void mapPulsfrequenz(Observation observation, UCCAppPRODatenComposition uccAppPRODatenComposition) {
+        uccAppPRODatenComposition.setPulseHeartBeat(new PulseHeartBeatConverter().convert(observation));
     }
 
 }

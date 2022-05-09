@@ -37,11 +37,10 @@ public class SensordatenStepsIT extends AbstractBundleMappingTestSetupIT {
         create("create-ucc-steps.json");
     }
 
-/* TODO: fixed in Javers 6.6.6 https://github.com/javers/javers/issues/1200 wait until updated
     @Test
     void createMappingUCCSensordatenVitalSigns() throws IOException {
         testMapping("create-ucc-steps.json", "paragon-create-ucc-steps.json");
-    }*/
+    }
 
     @Override
     public Javers getJavers() {

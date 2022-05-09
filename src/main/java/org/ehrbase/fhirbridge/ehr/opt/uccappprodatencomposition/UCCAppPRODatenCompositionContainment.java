@@ -16,16 +16,16 @@ import org.ehrbase.client.classgenerator.shareddefinition.Category;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BlutdruckObservation;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.KoerpergewichtObservation;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BloodPressureObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BodyWeightObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.PulseHeartBeatObservation;
 
 public class UCCAppPRODatenCompositionContainment extends Containment {
   public SelectAqlField<UCCAppPRODatenComposition> U_C_C_APP_P_R_O_DATEN_COMPOSITION = new AqlFieldImp<UCCAppPRODatenComposition>(UCCAppPRODatenComposition.class, "", "UCCAppPRODatenComposition", UCCAppPRODatenComposition.class, this);
 
   public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(UCCAppPRODatenComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
 
-  public ListSelectAqlField<Cluster> ERWEITERUNG = new ListAqlFieldImp<Cluster>(UCCAppPRODatenComposition.class, "/context/other_context[at0001]/items[at0002]", "erweiterung", Cluster.class, this);
+  public ListSelectAqlField<Cluster> EXTENSION = new ListAqlFieldImp<Cluster>(UCCAppPRODatenComposition.class, "/context/other_context[at0001]/items[at0002]", "extension", Cluster.class, this);
 
   public SelectAqlField<TemporalAccessor> START_TIME_VALUE = new AqlFieldImp<TemporalAccessor>(UCCAppPRODatenComposition.class, "/context/start_time|value", "startTimeValue", TemporalAccessor.class, this);
 
@@ -39,11 +39,11 @@ public class UCCAppPRODatenCompositionContainment extends Containment {
 
   public SelectAqlField<Setting> SETTING_DEFINING_CODE = new AqlFieldImp<Setting>(UCCAppPRODatenComposition.class, "/context/setting|defining_code", "settingDefiningCode", Setting.class, this);
 
-  public ListSelectAqlField<BlutdruckObservation> BLUTDRUCK = new ListAqlFieldImp<BlutdruckObservation>(UCCAppPRODatenComposition.class, "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]", "blutdruck", BlutdruckObservation.class, this);
+  public SelectAqlField<BloodPressureObservation> BLOOD_PRESSURE = new AqlFieldImp<BloodPressureObservation>(UCCAppPRODatenComposition.class, "/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]", "bloodPressure", BloodPressureObservation.class, this);
 
-  public ListSelectAqlField<KoerpergewichtObservation> KOERPERGEWICHT = new ListAqlFieldImp<KoerpergewichtObservation>(UCCAppPRODatenComposition.class, "/content[openEHR-EHR-OBSERVATION.body_weight.v2]", "koerpergewicht", KoerpergewichtObservation.class, this);
+  public SelectAqlField<BodyWeightObservation> BODY_WEIGHT = new AqlFieldImp<BodyWeightObservation>(UCCAppPRODatenComposition.class, "/content[openEHR-EHR-OBSERVATION.body_weight.v2]", "bodyWeight", BodyWeightObservation.class, this);
 
-  public ListSelectAqlField<PulsfrequenzHerzfrequenzObservation> PULSFREQUENZ_HERZFREQUENZ = new ListAqlFieldImp<PulsfrequenzHerzfrequenzObservation>(UCCAppPRODatenComposition.class, "/content[openEHR-EHR-OBSERVATION.pulse.v2]", "pulsfrequenzHerzfrequenz", PulsfrequenzHerzfrequenzObservation.class, this);
+  public SelectAqlField<PulseHeartBeatObservation> PULSE_HEART_BEAT = new AqlFieldImp<PulseHeartBeatObservation>(UCCAppPRODatenComposition.class, "/content[openEHR-EHR-OBSERVATION.pulse.v2]", "pulseHeartBeat", PulseHeartBeatObservation.class, this);
 
   public SelectAqlField<PartyProxy> COMPOSER = new AqlFieldImp<PartyProxy>(UCCAppPRODatenComposition.class, "/composer", "composer", PartyProxy.class, this);
 
