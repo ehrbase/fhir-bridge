@@ -57,6 +57,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.sofascore.SofaScoreComposit
 import org.ehrbase.fhirbridge.ehr.converter.specific.stationaererversorgungsfall.StationaererVersorgungsfallCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.SymptomCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten.UCCSensordatenCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund.VirologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.service.TerminologyService;
@@ -74,6 +75,7 @@ public class ConversionConfiguration {
     @Bean(name = "fhirResourceConversionService")
     public ConversionService conversionService() {
         ConversionService conversionService = new ConversionService();
+        registerCompositionConverter(conversionService);
         registerDocumentReference(conversionService);
         registerConditionConverters(conversionService);
         registerConsentConverters(conversionService);
@@ -99,6 +101,12 @@ public class ConversionConfiguration {
     private void registerDocumentReference(ConversionService conversionService) {
         conversionService.registerConverter(Profile.DOCUMENT_REFERENCE_DEFAULT, new DocumentReferenceToHipDocumentConverter());
     }
+
+    private void registerCompositionConverter(ConversionService conversionService) {
+        conversionService.registerConverter(Profile.UCC_SENSORDATEN_VITALSIGNS, new UCCSensordatenCompositionConverter());
+        conversionService.registerConverter(Profile.UCC_SENSORDATEN_STEPS, new UCCSensordatenCompositionConverter());
+    }
+
 
     private void registerConditionConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.CONDITION_DEFAULT, new DiagnoseCompositionConverter());

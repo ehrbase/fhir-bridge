@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.fhir.common;
 
+import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
@@ -23,6 +24,10 @@ public enum Profile {
 
     // DocumentReference
     DOCUMENT_REFERENCE_DEFAULT(DocumentReference.class, null),
+
+    //Composition
+    UCC_SENSORDATEN_VITALSIGNS(Composition.class, "https://example.org/fhir/StructureDefinition/VitalSignsComposition"),
+    UCC_SENSORDATEN_STEPS(Composition.class, "https://example.org/fhir/StructureDefinition/ActivityComposition"),
 
     // Condition
     CONDITION_DEFAULT(Condition.class, null),

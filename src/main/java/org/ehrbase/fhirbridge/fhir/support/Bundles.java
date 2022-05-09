@@ -15,7 +15,9 @@ public class Bundles {
             if (Resources.hasProfile(entry.getResource(), Profile.BLOOD_GAS_PANEL)) {
                 return Optional.of(Profile.BLOOD_GAS_PANEL);
             } else{
-                return returnProfiles (entry);
+              //  if(!returnProfiles(entry).equals(Optional.empty())){
+                    return returnProfiles (entry);
+             //   }
             }
         }
         return Optional.empty();
@@ -30,6 +32,12 @@ public class Bundles {
         }
         if (Resources.hasProfile(entry.getResource(), Profile.VIROLOGISCHER_BEFUND)) {
             return Optional.of(Profile.VIROLOGISCHER_BEFUND);
+        }
+        if (Resources.hasProfile(entry.getResource(), Profile.UCC_SENSORDATEN_STEPS)) {
+            return Optional.of(Profile.UCC_SENSORDATEN_STEPS);
+        }
+        if (Resources.hasProfile(entry.getResource(), Profile.UCC_SENSORDATEN_VITALSIGNS)) {
+            return Optional.of(Profile.UCC_SENSORDATEN_VITALSIGNS);
         }
         return Optional.empty();
     }
