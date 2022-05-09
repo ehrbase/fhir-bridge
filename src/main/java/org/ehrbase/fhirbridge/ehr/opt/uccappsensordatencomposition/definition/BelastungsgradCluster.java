@@ -1,11 +1,9 @@
 package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datastructures.Cluster;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
-import org.ehrbase.client.annotations.OptionFor;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
@@ -14,44 +12,28 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.level_of_exertion.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-05T11:59:39.220897+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
+    date = "2022-05-09T13:12:33.366707038+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
-@OptionFor("CLUSTER")
-public class BelastungsgradCluster implements LocatableEntity, BelastungsgradChoice {
+public class BelastungsgradCluster implements LocatableEntity {
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Belastungsgrad/Intensität der Übung
-   * Description: Die körperliche Anstrengung/Intensität, die während der Übung geleistet wird.
-   */
-  @Path("/items[at0010]")
-  private Cluster intensitaetDerUebung;
-
-  /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Belastungsgrad/Phase
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/Belastungsgrad/Phase
    * Description: Die Phase oder der Kontext zur Übung/körperlichen Anstrengung.
    */
   @Path("/items[at0009]/value|defining_code")
   private PhaseDefiningCode phaseDefiningCode;
 
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/List/List/Belastungsgrad/Phase/null_flavour
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/History/Ruhepuls/List/Belastungsgrad/Phase/null_flavour
    */
   @Path("/items[at0009]/null_flavour|defining_code")
   private NullFlavour phaseNullFlavourDefiningCode;
 
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Belastungsgrad/feeder_audit
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/Belastungsgrad/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
-
-  public void setIntensitaetDerUebung(Cluster intensitaetDerUebung) {
-     this.intensitaetDerUebung = intensitaetDerUebung;
-  }
-
-  public Cluster getIntensitaetDerUebung() {
-     return this.intensitaetDerUebung ;
-  }
 
   public void setPhaseDefiningCode(PhaseDefiningCode phaseDefiningCode) {
      this.phaseDefiningCode = phaseDefiningCode;

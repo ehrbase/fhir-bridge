@@ -13,14 +13,13 @@ import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
-import org.ehrbase.fhirbridge.ehr.opt.geccoserologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
 
 @Entity
 @Archetype("openEHR-EHR-OBSERVATION.pulse.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-05T11:59:39.153858+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
+    date = "2022-05-09T13:12:33.337584516+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
 public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
   /**
@@ -28,14 +27,14 @@ public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
    * Description: Ein Standardwert, ein spezifizierter Zeitpunkt oder ein Intervallereignis, welches explizit in einem Template oder während der Laufzeit definiert werden kann.
    */
   @Path("/data[at0002]/events[at0003 and name/value='Ruhepuls']")
-  private PulsfrequenzHerzfrequenzRuhepulsEvent ruhepuls;
+  private PulsfrequenzHerzfrequenzRuhepulsIntervalEvent ruhepuls;
 
   /**
    * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Mittlere Herzfrequenz
    * Description: Ein Standardwert, ein spezifizierter Zeitpunkt oder ein Intervallereignis, welches explizit in einem Template oder während der Laufzeit definiert werden kann.
    */
   @Path("/data[at0002]/events[at0003 and name/value='Mittlere Herzfrequenz']")
-  private PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent mittlereHerzfrequenz;
+  private PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent mittlereHerzfrequenz;
 
   /**
    * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/origin
@@ -91,27 +90,27 @@ public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
   private FeederAudit feederAudit;
 
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Momentane Herzfrequenz
    * Description: Ein Standardwert, ein spezifizierter Zeitpunkt oder ein Intervallereignis, welches explizit in einem Template oder während der Laufzeit definiert werden kann.
    */
-  @Path("/data[at0002]/events[at0003 and name/value='Jedes Ereignis']")
+  @Path("/data[at0002]/events[at0003 and name/value='Momentane Herzfrequenz']")
   @Choice
-  private List<PulsfrequenzHerzfrequenzJedesEreignisChoice> jedesEreignis;
+  private List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> momentaneHerzfrequenz;
 
-  public void setRuhepuls(PulsfrequenzHerzfrequenzRuhepulsEvent ruhepuls) {
+  public void setRuhepuls(PulsfrequenzHerzfrequenzRuhepulsIntervalEvent ruhepuls) {
      this.ruhepuls = ruhepuls;
   }
 
-  public PulsfrequenzHerzfrequenzRuhepulsEvent getRuhepuls() {
+  public PulsfrequenzHerzfrequenzRuhepulsIntervalEvent getRuhepuls() {
      return this.ruhepuls ;
   }
 
   public void setMittlereHerzfrequenz(
-      PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent mittlereHerzfrequenz) {
+      PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent mittlereHerzfrequenz) {
      this.mittlereHerzfrequenz = mittlereHerzfrequenz;
   }
 
-  public PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent getMittlereHerzfrequenz() {
+  public PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent getMittlereHerzfrequenz() {
      return this.mittlereHerzfrequenz ;
   }
 
@@ -179,11 +178,12 @@ public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
      return this.feederAudit ;
   }
 
-  public void setJedesEreignis(List<PulsfrequenzHerzfrequenzJedesEreignisChoice> jedesEreignis) {
-     this.jedesEreignis = jedesEreignis;
+  public void setMomentaneHerzfrequenz(
+      List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> momentaneHerzfrequenz) {
+     this.momentaneHerzfrequenz = momentaneHerzfrequenz;
   }
 
-  public List<PulsfrequenzHerzfrequenzJedesEreignisChoice> getJedesEreignis() {
-     return this.jedesEreignis ;
+  public List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> getMomentaneHerzfrequenz() {
+     return this.momentaneHerzfrequenz ;
   }
 }
