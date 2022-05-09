@@ -28,6 +28,7 @@ public enum Profile {
     //Composition
     UCC_SENSORDATEN_VITALSIGNS(Composition.class, "https://example.org/fhir/StructureDefinition/VitalSignsComposition"),
     UCC_SENSORDATEN_STEPS(Composition.class, "https://example.org/fhir/StructureDefinition/ActivityComposition"),
+    UCC_APP_PRO_DATEN(Composition.class, "https://example.org/fhir/StructureDefinition/DailySurveyComposition"),
 
     // Condition
     CONDITION_DEFAULT(Condition.class, null),

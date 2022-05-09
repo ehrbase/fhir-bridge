@@ -1,12 +1,10 @@
-package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition;
 
 import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
-public enum VorhandenseinDefiningCode implements EnumValueSet {
-  VORHANDEN("Vorhanden", "Eine Puls- oder eine Herzfrequenz kann ermittelt werden.", "local", "at1024"),
-
-  NICHT_ERMITTELBAR("Nicht ermittelbar", "Eine Puls- oder eine Herzfrequenz kann nicht ermittelt werden.", "local", "at1025");
+public enum PhaseDefiningCode implements EnumValueSet {
+  IN_RUHE("In Ruhe", "Die Person befindet sich im Ruhezustand vor Beginn der Übung/körperlichen Anstrengung.", "local", "at0006");
 
   private String value;
 
@@ -16,7 +14,7 @@ public enum VorhandenseinDefiningCode implements EnumValueSet {
 
   private String code;
 
-  VorhandenseinDefiningCode(String value, String description, String terminologyId, String code) {
+  PhaseDefiningCode(String value, String description, String terminologyId, String code) {
     this.value = value;
     this.description = description;
     this.terminologyId = terminologyId;

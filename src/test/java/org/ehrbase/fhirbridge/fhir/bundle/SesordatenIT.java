@@ -1,13 +1,10 @@
 package org.ehrbase.fhirbridge.fhir.bundle;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten.UCCSensordatenCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.UCCSensordatenCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.UCCAppSensorDatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.MitSensorGemesseneKoerperlicheAktivitaetObservation;
-import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzJedesEreignisPointEvent;
-import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
-import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzRuhepulsEvent;
 import org.ehrbase.fhirbridge.fhir.AbstractBundleMappingTestSetupIT;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.UCCSensordatenVitalSignsBundleConverter;
 import org.hl7.fhir.r4.model.Bundle;
@@ -50,9 +47,6 @@ public class SesordatenIT  extends AbstractBundleMappingTestSetupIT {
                 .registerValueObject(new ValueObjectDefinition(UCCAppSensorDatenComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(PulsfrequenzHerzfrequenzObservation.class)
                 .registerValueObject(MitSensorGemesseneKoerperlicheAktivitaetObservation.class)
-                .registerValueObject(PulsfrequenzHerzfrequenzRuhepulsEvent.class)
-                .registerValueObject(PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent.class)
-                .registerValueObject(PulsfrequenzHerzfrequenzJedesEreignisPointEvent.class)
                 .build();
     }
 

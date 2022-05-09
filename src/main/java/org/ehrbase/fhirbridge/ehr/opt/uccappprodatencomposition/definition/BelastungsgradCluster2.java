@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import javax.annotation.processing.Generated;
@@ -12,25 +12,25 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.level_of_exertion.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T12:03:03.759377921+02:00",
+    date = "2022-05-09T13:01:54.595855902+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
-public class BelastungsgradCluster implements LocatableEntity {
+public class BelastungsgradCluster2 implements LocatableEntity {
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/Belastungsgrad/Phase
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Belastungsgrad/Phase
    * Description: Die Phase oder der Kontext zur Übung/körperlichen Anstrengung.
    */
   @Path("/items[at0009]/value|defining_code")
   private PhaseDefiningCode phaseDefiningCode;
 
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/History/Ruhepuls/List/Belastungsgrad/Phase/null_flavour
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/List/Belastungsgrad/Phase/null_flavour
    */
   @Path("/items[at0009]/null_flavour|defining_code")
   private NullFlavour phaseNullFlavourDefiningCode;
 
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls/Belastungsgrad/feeder_audit
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Belastungsgrad/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;

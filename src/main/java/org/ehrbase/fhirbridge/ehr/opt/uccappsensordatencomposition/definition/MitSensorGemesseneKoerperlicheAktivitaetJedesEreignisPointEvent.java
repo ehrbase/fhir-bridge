@@ -17,8 +17,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-05T11:59:39.299970+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
+    date = "2022-05-09T12:03:03.837003108+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
 @OptionFor("POINT_EVENT")
 public class MitSensorGemesseneKoerperlicheAktivitaetJedesEreignisPointEvent implements PointEventEntity, MitSensorGemesseneKoerperlicheAktivitaetJedesEreignisChoice {

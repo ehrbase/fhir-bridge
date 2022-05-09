@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import org.ehrbase.client.aql.containment.Containment;

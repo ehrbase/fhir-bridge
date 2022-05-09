@@ -39,6 +39,9 @@ public class Bundles {
         if (Resources.hasProfile(entry.getResource(), Profile.UCC_SENSORDATEN_VITALSIGNS)) {
             return Optional.of(Profile.UCC_SENSORDATEN_VITALSIGNS);
         }
+        if (Resources.hasProfile(entry.getResource(), Profile.UCC_APP_PRO_DATEN)) {
+            return Optional.of(Profile.UCC_APP_PRO_DATEN);
+        }
         return Optional.empty();
     }
 }

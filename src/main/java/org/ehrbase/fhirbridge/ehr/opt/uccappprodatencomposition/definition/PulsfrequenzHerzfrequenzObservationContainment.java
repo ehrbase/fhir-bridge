@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
@@ -15,15 +15,13 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 public class PulsfrequenzHerzfrequenzObservationContainment extends Containment {
   public SelectAqlField<PulsfrequenzHerzfrequenzObservation> PULSFREQUENZ_HERZFREQUENZ_OBSERVATION = new AqlFieldImp<PulsfrequenzHerzfrequenzObservation>(PulsfrequenzHerzfrequenzObservation.class, "", "PulsfrequenzHerzfrequenzObservation", PulsfrequenzHerzfrequenzObservation.class, this);
 
-  public SelectAqlField<PulsfrequenzHerzfrequenzRuhepulsIntervalEvent> RUHEPULS = new AqlFieldImp<PulsfrequenzHerzfrequenzRuhepulsIntervalEvent>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/events[at0003]", "ruhepuls", PulsfrequenzHerzfrequenzRuhepulsIntervalEvent.class, this);
-
-  public SelectAqlField<PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent> MITTLERE_HERZFREQUENZ = new AqlFieldImp<PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/events[at0003]", "mittlereHerzfrequenz", PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent.class, this);
-
   public SelectAqlField<TemporalAccessor> ORIGIN_VALUE = new AqlFieldImp<TemporalAccessor>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/origin|value", "originValue", TemporalAccessor.class, this);
 
   public SelectAqlField<MethodeDefiningCode> METHODE_DEFINING_CODE = new AqlFieldImp<MethodeDefiningCode>(PulsfrequenzHerzfrequenzObservation.class, "/protocol[at0010]/items[at1019]/value|defining_code", "methodeDefiningCode", MethodeDefiningCode.class, this);
 
   public SelectAqlField<NullFlavour> METHODE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(PulsfrequenzHerzfrequenzObservation.class, "/protocol[at0010]/items[at1019]/null_flavour|defining_code", "methodeNullFlavourDefiningCode", NullFlavour.class, this);
+
+  public SelectAqlField<NullFlavour> KOERPERSTELLE_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(PulsfrequenzHerzfrequenzObservation.class, "/protocol[at0010]/items[at1037]/null_flavour|defining_code", "koerperstelleNullFlavourDefiningCode", NullFlavour.class, this);
 
   public SelectAqlField<Cluster> GERAET = new AqlFieldImp<Cluster>(PulsfrequenzHerzfrequenzObservation.class, "/protocol[at0010]/items[at1013]", "geraet", Cluster.class, this);
 
@@ -35,7 +33,9 @@ public class PulsfrequenzHerzfrequenzObservationContainment extends Containment 
 
   public SelectAqlField<FeederAudit> FEEDER_AUDIT = new AqlFieldImp<FeederAudit>(PulsfrequenzHerzfrequenzObservation.class, "/feeder_audit", "feederAudit", FeederAudit.class, this);
 
-  public ListSelectAqlField<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> MOMENTANE_HERZFREQUENZ = new ListAqlFieldImp<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/events[at0003]", "momentaneHerzfrequenz", PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice.class, this);
+  public ListSelectAqlField<PulsfrequenzHerzfrequenzJedesEreignisChoice> JEDES_EREIGNIS = new ListAqlFieldImp<PulsfrequenzHerzfrequenzJedesEreignisChoice>(PulsfrequenzHerzfrequenzObservation.class, "/data[at0002]/events[at0003]", "jedesEreignis", PulsfrequenzHerzfrequenzJedesEreignisChoice.class, this);
+
+  public SelectAqlField<PulsfrequenzHerzfrequenzKoerperstelleChoice> KOERPERSTELLE = new AqlFieldImp<PulsfrequenzHerzfrequenzKoerperstelleChoice>(PulsfrequenzHerzfrequenzObservation.class, "/protocol[at0010]/items[at1037]/value", "koerperstelle", PulsfrequenzHerzfrequenzKoerperstelleChoice.class, this);
 
   private PulsfrequenzHerzfrequenzObservationContainment() {
     super("openEHR-EHR-OBSERVATION.pulse.v2");

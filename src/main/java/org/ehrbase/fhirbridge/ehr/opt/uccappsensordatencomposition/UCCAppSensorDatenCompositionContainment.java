@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datastructures.ItemTree;
+import com.nedap.archie.rm.datastructures.Cluster;
 import com.nedap.archie.rm.generic.Participation;
 import com.nedap.archie.rm.generic.PartyIdentified;
 import com.nedap.archie.rm.generic.PartyProxy;
@@ -24,7 +24,7 @@ public class UCCAppSensorDatenCompositionContainment extends Containment {
 
   public SelectAqlField<Category> CATEGORY_DEFINING_CODE = new AqlFieldImp<Category>(UCCAppSensorDatenComposition.class, "/category|defining_code", "categoryDefiningCode", Category.class, this);
 
-  public SelectAqlField<ItemTree> TREE = new AqlFieldImp<ItemTree>(UCCAppSensorDatenComposition.class, "/context/other_context[at0001]", "tree", ItemTree.class, this);
+  public ListSelectAqlField<Cluster> ERWEITERUNG = new ListAqlFieldImp<Cluster>(UCCAppSensorDatenComposition.class, "/context/other_context[at0001]/items[at0002]", "erweiterung", Cluster.class, this);
 
   public SelectAqlField<TemporalAccessor> START_TIME_VALUE = new AqlFieldImp<TemporalAccessor>(UCCAppSensorDatenComposition.class, "/context/start_time|value", "startTimeValue", TemporalAccessor.class, this);
 

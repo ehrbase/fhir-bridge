@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
+package org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
@@ -18,24 +18,10 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.pulse.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T12:03:03.736734196+02:00",
+    date = "2022-05-09T13:01:54.587927234+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
 public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
-  /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Ruhepuls
-   * Description: Ein Standardwert, ein spezifizierter Zeitpunkt oder ein Intervallereignis, welches explizit in einem Template oder während der Laufzeit definiert werden kann.
-   */
-  @Path("/data[at0002]/events[at0003 and name/value='Ruhepuls']")
-  private PulsfrequenzHerzfrequenzRuhepulsIntervalEvent ruhepuls;
-
-  /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Mittlere Herzfrequenz
-   * Description: Ein Standardwert, ein spezifizierter Zeitpunkt oder ein Intervallereignis, welches explizit in einem Template oder während der Laufzeit definiert werden kann.
-   */
-  @Path("/data[at0002]/events[at0003 and name/value='Mittlere Herzfrequenz']")
-  private PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent mittlereHerzfrequenz;
-
   /**
    * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/origin
    */
@@ -55,6 +41,12 @@ public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
    */
   @Path("/protocol[at0010]/items[at1019]/null_flavour|defining_code")
   private NullFlavour methodeNullFlavourDefiningCode;
+
+  /**
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/List/Körperstelle/null_flavour
+   */
+  @Path("/protocol[at0010]/items[at1037]/null_flavour|defining_code")
+  private NullFlavour koerperstelleNullFlavourDefiningCode;
 
   /**
    * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Gerät
@@ -90,29 +82,20 @@ public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
   private FeederAudit feederAudit;
 
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Momentane Herzfrequenz
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis
    * Description: Ein Standardwert, ein spezifizierter Zeitpunkt oder ein Intervallereignis, welches explizit in einem Template oder während der Laufzeit definiert werden kann.
    */
-  @Path("/data[at0002]/events[at0003 and name/value='Momentane Herzfrequenz']")
+  @Path("/data[at0002]/events[at0003]")
   @Choice
-  private List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> momentaneHerzfrequenz;
+  private List<PulsfrequenzHerzfrequenzJedesEreignisChoice> jedesEreignis;
 
-  public void setRuhepuls(PulsfrequenzHerzfrequenzRuhepulsIntervalEvent ruhepuls) {
-     this.ruhepuls = ruhepuls;
-  }
-
-  public PulsfrequenzHerzfrequenzRuhepulsIntervalEvent getRuhepuls() {
-     return this.ruhepuls ;
-  }
-
-  public void setMittlereHerzfrequenz(
-      PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent mittlereHerzfrequenz) {
-     this.mittlereHerzfrequenz = mittlereHerzfrequenz;
-  }
-
-  public PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent getMittlereHerzfrequenz() {
-     return this.mittlereHerzfrequenz ;
-  }
+  /**
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Körperstelle
+   * Description: Die Körperstelle an der die Puls- oder die Herzfrequenz gemessen wird.
+   */
+  @Path("/protocol[at0010]/items[at1037]/value")
+  @Choice
+  private PulsfrequenzHerzfrequenzKoerperstelleChoice koerperstelle;
 
   public void setOriginValue(TemporalAccessor originValue) {
      this.originValue = originValue;
@@ -136,6 +119,15 @@ public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
 
   public NullFlavour getMethodeNullFlavourDefiningCode() {
      return this.methodeNullFlavourDefiningCode ;
+  }
+
+  public void setKoerperstelleNullFlavourDefiningCode(
+      NullFlavour koerperstelleNullFlavourDefiningCode) {
+     this.koerperstelleNullFlavourDefiningCode = koerperstelleNullFlavourDefiningCode;
+  }
+
+  public NullFlavour getKoerperstelleNullFlavourDefiningCode() {
+     return this.koerperstelleNullFlavourDefiningCode ;
   }
 
   public void setGeraet(Cluster geraet) {
@@ -178,12 +170,19 @@ public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
      return this.feederAudit ;
   }
 
-  public void setMomentaneHerzfrequenz(
-      List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> momentaneHerzfrequenz) {
-     this.momentaneHerzfrequenz = momentaneHerzfrequenz;
+  public void setJedesEreignis(List<PulsfrequenzHerzfrequenzJedesEreignisChoice> jedesEreignis) {
+     this.jedesEreignis = jedesEreignis;
   }
 
-  public List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> getMomentaneHerzfrequenz() {
-     return this.momentaneHerzfrequenz ;
+  public List<PulsfrequenzHerzfrequenzJedesEreignisChoice> getJedesEreignis() {
+     return this.jedesEreignis ;
+  }
+
+  public void setKoerperstelle(PulsfrequenzHerzfrequenzKoerperstelleChoice koerperstelle) {
+     this.koerperstelle = koerperstelle;
+  }
+
+  public PulsfrequenzHerzfrequenzKoerperstelleChoice getKoerperstelle() {
+     return this.koerperstelle ;
   }
 }

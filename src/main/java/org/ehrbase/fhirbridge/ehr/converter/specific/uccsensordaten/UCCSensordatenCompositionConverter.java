@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten;
+package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.UCCAppSensorDatenComposition;

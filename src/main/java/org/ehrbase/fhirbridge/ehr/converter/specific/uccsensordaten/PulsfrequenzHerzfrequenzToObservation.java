@@ -1,7 +1,7 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten;
+package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionToObservationConverter;
-import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzJedesEreignisChoice;
+import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Composition;
@@ -21,21 +21,20 @@ public class PulsfrequenzHerzfrequenzToObservation extends CompositionToObservat
     }
 
     private void mapEreignise(PulsfrequenzHerzfrequenzObservation pulsfrequenzHerzfrequenzObservation, Composition composition) {
-        List<PulsfrequenzHerzfrequenzJedesEreignisChoice> pulsfrequenzHerzfrequenzJedesEreignisChoices = new ArrayList<>();
+        List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> momentaneHerzfrequenzChoices = new ArrayList<>();
         for (Composition.SectionComponent section : composition.getSection()) {
             for (Coding coding : section.getCode().getCoding()) {
                 if (coding.getCode().equals("vital-signs") && coding.getSystem().equals("http://terminology.hl7.org/CodeSystem/observation-category")) {
-                    mapPulseFrequenzErgebnis(section, pulsfrequenzHerzfrequenzJedesEreignisChoices);
+                    mapPulseFrequenzErgebnis(section, momentaneHerzfrequenzChoices);
                 }
             }
         }
-        pulsfrequenzHerzfrequenzObservation.setJedesEreignis(pulsfrequenzHerzfrequenzJedesEreignisChoices);
-
+        pulsfrequenzHerzfrequenzObservation.setMomentaneHerzfrequenz(momentaneHerzfrequenzChoices);
     }
 
-    private void mapPulseFrequenzErgebnis(Composition.SectionComponent section, List<PulsfrequenzHerzfrequenzJedesEreignisChoice> pulsfrequenzHerzfrequenzJedesEreignisChoices) {
+    private void mapPulseFrequenzErgebnis(Composition.SectionComponent section, List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> pulsfrequenzHerzfrequenzJedesEreignisChoices) {
         for(Reference entry: section.getEntry()){
-            pulsfrequenzHerzfrequenzJedesEreignisChoices.add(new HerzfrequenzJedesEreignisPointEventConverter().convert((Observation) entry.getResource()));
+            pulsfrequenzHerzfrequenzJedesEreignisChoices.add(new MomentaneHerzfrequenzConverter().convert((Observation) entry.getResource()));
         }
     }
 }

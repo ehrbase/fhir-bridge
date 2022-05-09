@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition;
+package org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
 import com.nedap.archie.rm.datastructures.Cluster;
@@ -20,18 +20,19 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.MitSensorGemesseneKoerperlicheAktivitaetObservation;
-import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BlutdruckObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.KoerpergewichtObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.self_monitoring.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T12:03:03.707557156+02:00",
+    date = "2022-05-09T13:01:54.446099990+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
-@Template("UCC_App_Sensor_Daten")
-public class UCCAppSensorDatenComposition implements CompositionEntity {
+@Template("UCC_App_PRO_Daten")
+public class UCCAppPRODatenComposition implements CompositionEntity {
   /**
    * Path: Selbstüberwachung/category
    */
@@ -83,18 +84,26 @@ public class UCCAppSensorDatenComposition implements CompositionEntity {
   private Setting settingDefiningCode;
 
   /**
+   * Path: Selbstüberwachung/Blutdruck
+   * Description: Die lokale Messung des arteriellen Blutdrucks als Surrogat für den arteriellen Druck in der systemischen Zirkulation.
+   * Comment: Häufig wird der Ausdruck 'Blutdruck' zur Bezeichung der Messung des brachialen Ateriendrucks im Oberarm verwendet.
+   */
+  @Path("/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]")
+  private List<BlutdruckObservation> blutdruck;
+
+  /**
+   * Path: Selbstüberwachung/Körpergewicht
+   * Description: Messung des Körpergewichts eines Individuums.
+   */
+  @Path("/content[openEHR-EHR-OBSERVATION.body_weight.v2]")
+  private List<KoerpergewichtObservation> koerpergewicht;
+
+  /**
    * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz
    * Description: Die Frequenz und zugehörige Attribute für die Puls- oder Herzfrequenz.
    */
   @Path("/content[openEHR-EHR-OBSERVATION.pulse.v2]")
-  private PulsfrequenzHerzfrequenzObservation pulsfrequenzHerzfrequenz;
-
-  /**
-   * Path: Selbstüberwachung/Mit Sensor gemessene körperliche Aktivität
-   * Description: Zur Darstellung von Aktivitätsparametern, gemessen mit einem tragbaren Sensor in einem definierten Zeitraum.
-   */
-  @Path("/content[openEHR-EHR-OBSERVATION.wearable_sensor_activity.v0]")
-  private MitSensorGemesseneKoerperlicheAktivitaetObservation mitSensorGemesseneKoerperlicheAktivitaet;
+  private List<PulsfrequenzHerzfrequenzObservation> pulsfrequenzHerzfrequenz;
 
   /**
    * Path: Selbstüberwachung/composer
@@ -187,23 +196,29 @@ public class UCCAppSensorDatenComposition implements CompositionEntity {
      return this.settingDefiningCode ;
   }
 
+  public void setBlutdruck(List<BlutdruckObservation> blutdruck) {
+     this.blutdruck = blutdruck;
+  }
+
+  public List<BlutdruckObservation> getBlutdruck() {
+     return this.blutdruck ;
+  }
+
+  public void setKoerpergewicht(List<KoerpergewichtObservation> koerpergewicht) {
+     this.koerpergewicht = koerpergewicht;
+  }
+
+  public List<KoerpergewichtObservation> getKoerpergewicht() {
+     return this.koerpergewicht ;
+  }
+
   public void setPulsfrequenzHerzfrequenz(
-      PulsfrequenzHerzfrequenzObservation pulsfrequenzHerzfrequenz) {
+      List<PulsfrequenzHerzfrequenzObservation> pulsfrequenzHerzfrequenz) {
      this.pulsfrequenzHerzfrequenz = pulsfrequenzHerzfrequenz;
   }
 
-  public PulsfrequenzHerzfrequenzObservation getPulsfrequenzHerzfrequenz() {
+  public List<PulsfrequenzHerzfrequenzObservation> getPulsfrequenzHerzfrequenz() {
      return this.pulsfrequenzHerzfrequenz ;
-  }
-
-  public void setMitSensorGemesseneKoerperlicheAktivitaet(
-      MitSensorGemesseneKoerperlicheAktivitaetObservation mitSensorGemesseneKoerperlicheAktivitaet) {
-     this.mitSensorGemesseneKoerperlicheAktivitaet = mitSensorGemesseneKoerperlicheAktivitaet;
-  }
-
-  public MitSensorGemesseneKoerperlicheAktivitaetObservation getMitSensorGemesseneKoerperlicheAktivitaet(
-      ) {
-     return this.mitSensorGemesseneKoerperlicheAktivitaet ;
   }
 
   public void setComposer(PartyProxy composer) {
