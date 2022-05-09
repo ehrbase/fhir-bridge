@@ -7,6 +7,7 @@ import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PhaseDefiningCode;
 
 @Entity
 @Archetype("openEHR-EHR-CLUSTER.level_of_exertion.v0")

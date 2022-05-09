@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.bundle;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten.UCCSensordatenCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.UCCSensordatenCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.UCCAppSensorDatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractBundleMappingTestSetupIT;

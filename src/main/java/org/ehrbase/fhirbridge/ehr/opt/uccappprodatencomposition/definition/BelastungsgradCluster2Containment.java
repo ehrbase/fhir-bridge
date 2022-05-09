@@ -5,6 +5,7 @@ import org.ehrbase.client.aql.containment.Containment;
 import org.ehrbase.client.aql.field.AqlFieldImp;
 import org.ehrbase.client.aql.field.SelectAqlField;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PhaseDefiningCode;
 
 public class BelastungsgradCluster2Containment extends Containment {
   public SelectAqlField<BelastungsgradCluster2> BELASTUNGSGRAD_CLUSTER2 = new AqlFieldImp<BelastungsgradCluster2>(BelastungsgradCluster2.class, "", "BelastungsgradCluster2", BelastungsgradCluster2.class, this);

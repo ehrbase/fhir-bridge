@@ -57,6 +57,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.sofascore.SofaScoreComposit
 import org.ehrbase.fhirbridge.ehr.converter.specific.stationaererversorgungsfall.StationaererVersorgungsfallCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.symptom.SymptomCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.therapy.TherapyCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.uccappdaten.UCCAppProDatenConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.UCCSensordatenCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund.VirologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
@@ -105,6 +106,7 @@ public class ConversionConfiguration {
     private void registerCompositionConverter(ConversionService conversionService) {
         conversionService.registerConverter(Profile.UCC_SENSORDATEN_VITALSIGNS, new UCCSensordatenCompositionConverter());
         conversionService.registerConverter(Profile.UCC_SENSORDATEN_STEPS, new UCCSensordatenCompositionConverter());
+        conversionService.registerConverter(Profile.UCC_APP_PRO_DATEN, new UCCAppProDatenConverter());
     }
 
 
