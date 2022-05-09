@@ -17,7 +17,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T12:03:03.741253601+02:00",
+    date = "2022-05-09T13:12:33.342633093+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
 public class PulsfrequenzHerzfrequenzRuhepulsIntervalEvent implements IntervalEventEntity {

@@ -29,7 +29,7 @@
         <guava.version>31.0.1-jre</guava.version>
         <ipf.version>4.1.0</ipf.version>
         <javassist.version>3.28.0-GA</javassist.version>
-        <javers.version>5.14.0</javers.version>
+        <javers.version>6.6.5</javers.version>
         <jaxb-core.version>2.3.0</jaxb-core.version>
         <jena.version>4.2.0</jena.version>
         <jsr305.version>3.0.2</jsr305.version>

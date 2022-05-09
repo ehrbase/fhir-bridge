@@ -27,7 +27,7 @@ import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.Pu
 @Archetype("openEHR-EHR-COMPOSITION.self_monitoring.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T12:03:03.707557156+02:00",
+    date = "2022-05-09T13:12:33.305993800+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
 @Template("UCC_App_Sensor_Daten")

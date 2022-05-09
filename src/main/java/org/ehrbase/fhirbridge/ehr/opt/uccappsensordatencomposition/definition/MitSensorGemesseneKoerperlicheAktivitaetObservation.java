@@ -19,7 +19,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.wearable_sensor_activity.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T12:03:03.823614090+02:00",
+    date = "2022-05-09T13:12:33.425007197+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
 public class MitSensorGemesseneKoerperlicheAktivitaetObservation implements EntryEntity {

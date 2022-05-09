@@ -13,7 +13,7 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.level_of_exertion.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T12:03:03.781843310+02:00",
+    date = "2022-05-09T13:12:33.380235503+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
 public class BelastungsgradCluster2 implements LocatableEntity {

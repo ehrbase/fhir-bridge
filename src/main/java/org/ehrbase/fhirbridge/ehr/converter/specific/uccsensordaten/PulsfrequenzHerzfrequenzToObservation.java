@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten;
+package org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice;
@@ -30,11 +30,12 @@ public class PulsfrequenzHerzfrequenzToObservation extends CompositionToObservat
             }
         }
         pulsfrequenzHerzfrequenzObservation.setMomentaneHerzfrequenz(momentaneHerzfrequenzChoices);
+
     }
 
-    private void mapPulseFrequenzErgebnis(Composition.SectionComponent section, List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> pulsfrequenzHerzfrequenzJedesEreignisChoices) {
+    private void mapPulseFrequenzErgebnis(Composition.SectionComponent section, List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> momentaneHerzfrequenzChoices) {
         for(Reference entry: section.getEntry()){
-            pulsfrequenzHerzfrequenzJedesEreignisChoices.add(new MomentaneHerzfrequenzConverter().convert((Observation) entry.getResource()));
+            momentaneHerzfrequenzChoices.add(new MomentaneHerzfrequenzConverter().convert((Observation) entry.getResource()));
         }
     }
 }
