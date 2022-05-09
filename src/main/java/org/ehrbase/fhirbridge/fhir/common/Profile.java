@@ -110,7 +110,8 @@ public enum Profile {
     RESPIRATORY_THERAPIES_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/respiratory-therapies"),
 
     // QuestionnaireResponse
-    QUESTIONNAIRE_RESPONSE_DEFAULT(QuestionnaireResponse.class, null);
+    QUESTIONNAIRE_RESPONSE_DEFAULT(QuestionnaireResponse.class, null),
+    KCCQ12_QUESTIONNAIRE(QuestionnaireResponse.class, "https://example.org/fhir/StructureDefinition/Kccq12QuestionnaireResponse");
 
     private final Class<? extends Resource> resourceType;
 

@@ -194,6 +194,7 @@ public class ConversionConfiguration {
 
     private void registerQuestionnaireResponseConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.QUESTIONNAIRE_RESPONSE_DEFAULT, new D4lQuestionnaireCompositionConverter());
+        conversionService.registerConverter(Profile.KCCQ12_QUESTIONNAIRE, new D4lQuestionnaireCompositionConverter());
     }
 
     private void registerEncounterConverters(ConversionService conversionService) {
