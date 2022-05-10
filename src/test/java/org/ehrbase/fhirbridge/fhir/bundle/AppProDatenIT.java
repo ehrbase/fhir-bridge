@@ -5,6 +5,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.uccappdaten.UCCAppProDatenC
 import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.UCCSensordatenCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.UCCAppPRODatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.UCCAppSensorDatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractBundleMappingTestSetupIT;
@@ -48,11 +49,11 @@ public class AppProDatenIT extends AbstractBundleMappingTestSetupIT {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
                 .registerValueObject(new ValueObjectDefinition(UCCAppPRODatenComposition.class, List.of("location", "feederAudit")))
-                .registerValueObject(BloodPressureObservation.class)
-                .registerValueObject(BodyWeightObservation.class)
-                .registerValueObject(PulseHeartBeatObservation.class)
-                .registerValueObject(BloodPressure24HourAverageIntervalEvent.class)
-                .registerValueObject(BloodPressureAnyEventPointEvent.class)
+                .registerValueObject(BlutdruckObservation.class)
+                .registerValueObject(KoerpergewichtObservation.class)
+                .registerValueObject(PulsfrequenzHerzfrequenzObservation.class)
+                .registerValueObject(Blutdruck24StundenDurchschnittIntervalEvent.class)
+                .registerValueObject(BlutdruckBeliebigesEreignisChoice.class)
                 .build();
     }
 

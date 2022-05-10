@@ -2,8 +2,6 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.uccappdaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.UCCAppPRODatenComposition;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BodyWeightObservation;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.PulseHeartBeatObservation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Observation;
@@ -44,15 +42,15 @@ public class UCCAppProDatenConverter extends CompositionToCompositionConverter<U
     }
 
     private void mapBlutdruck(Observation observation, UCCAppPRODatenComposition uccAppPRODatenComposition) {
-        uccAppPRODatenComposition.setBloodPressure(new BlutdruckObservationConverter().convert(observation));
+        uccAppPRODatenComposition.setBlutdruck(new BlutdruckObservationConverter().convert(observation));
     }
 
     private void mapKoerpergewicht(Observation observation, UCCAppPRODatenComposition uccAppPRODatenComposition) {
-        uccAppPRODatenComposition.setBodyWeight(new BodyWeightObservationConverter().convert(observation));
+        uccAppPRODatenComposition.setKoerpergewicht(new KoerpergewichtConverter().convert(observation));
     }
 
     private void mapPulsfrequenz(Observation observation, UCCAppPRODatenComposition uccAppPRODatenComposition) {
-        uccAppPRODatenComposition.setPulseHeartBeat(new PulseHeartBeatConverter().convert(observation));
+        uccAppPRODatenComposition.setPulsfrequenzHerzfrequenz(new PulsfrequenzConverter().convert(observation));
     }
 
 }

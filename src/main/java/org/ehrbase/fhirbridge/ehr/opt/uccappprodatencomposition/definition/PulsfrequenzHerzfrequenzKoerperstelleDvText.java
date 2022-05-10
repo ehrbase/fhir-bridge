@@ -10,23 +10,23 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T16:40:29.058218445+02:00",
+    date = "2022-05-10T17:43:37.191148670+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
 @OptionFor("DV_TEXT")
-public class PulseHeartBeatBodySiteDvText implements RMEntity, PulseHeartBeatBodySiteChoice {
+public class PulsfrequenzHerzfrequenzKoerperstelleDvText implements RMEntity, PulsfrequenzHerzfrequenzKoerperstelleChoice {
   /**
-   * Path: Self monitoring/Pulse/Heart beat/Body site/Body site
-   * Description: Body site where the pulse or heart beat were observed.
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Körperstelle/Körperstelle
+   * Description: Die Körperstelle an der die Puls- oder die Herzfrequenz gemessen wird.
    */
   @Path("|value")
-  private String bodySiteValue;
+  private String koerperstelleValue;
 
-  public void setBodySiteValue(String bodySiteValue) {
-     this.bodySiteValue = bodySiteValue;
+  public void setKoerperstelleValue(String koerperstelleValue) {
+     this.koerperstelleValue = koerperstelleValue;
   }
 
-  public String getBodySiteValue() {
-     return this.bodySiteValue ;
+  public String getKoerperstelleValue() {
+     return this.koerperstelleValue ;
   }
 }

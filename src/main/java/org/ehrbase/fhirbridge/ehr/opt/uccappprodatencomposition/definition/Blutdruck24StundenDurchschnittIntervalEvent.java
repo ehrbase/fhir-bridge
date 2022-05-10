@@ -15,56 +15,56 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T16:40:29.004724839+02:00",
+    date = "2022-05-10T17:43:37.117860953+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
-public class BloodPressure24HourAverageIntervalEvent implements IntervalEventEntity {
+public class Blutdruck24StundenDurchschnittIntervalEvent implements IntervalEventEntity {
   /**
-   * Path: Self monitoring/Blood pressure/24 hour average/math_function
+   * Path: Selbstüberwachung/Blutdruck/24 Stunden Durchschnitt/math_function
    */
   @Path("/math_function|defining_code")
   private MathFunction mathFunctionDefiningCode;
 
   /**
-   * Path: Self monitoring/Blood pressure/24 hour average/width
+   * Path: Selbstüberwachung/Blutdruck/24 Stunden Durchschnitt/width
    */
   @Path("/width|value")
   private TemporalAmount widthValue;
 
   /**
-   * Path: Self monitoring/Blood pressure/24 hour average/Clinical interpretation
-   * Description: Single word, phrase or brief description that represents the clinical meaning and significance of the blood pressure measurement.
+   * Path: Selbstüberwachung/Blutdruck/24 Stunden Durchschnitt/Klinische Interpretation
+   * Description: Einzelnes Wort, Ausdruck oder Kurzbeschreibung der klinischen Bedeutung und Aussagekraft der Blutdruckmessung.
    */
   @Path("/data[at0003]/items[at1059]/value|value")
-  private String clinicalInterpretationValue;
+  private String klinischeInterpretationValue;
 
   /**
-   * Path: Self monitoring/Blood pressure/History/24 hour average/blood pressure/Clinical interpretation/null_flavour
+   * Path: Selbstüberwachung/Blutdruck/Historie/24 Stunden Durchschnitt/Blutdruck/Klinische Interpretation/null_flavour
    */
   @Path("/data[at0003]/items[at1059]/null_flavour|defining_code")
-  private NullFlavour clinicalInterpretationNullFlavourDefiningCode;
+  private NullFlavour klinischeInterpretationNullFlavourDefiningCode;
 
   /**
-   * Path: Self monitoring/Blood pressure/24 hour average/Level of exertion
-   * Description: Record information about level of exertion.
+   * Path: Selbstüberwachung/Blutdruck/24 Stunden Durchschnitt/Belastungsgrad
+   * Description: Aufzeichnung von Informationen zum Belastungsgrad/Zustand des Patienten.
    */
   @Path("/state[at0007]/items[openEHR-EHR-CLUSTER.level_of_exertion.v0]")
-  private LevelOfExertionCluster levelOfExertion;
+  private BelastungsgradCluster belastungsgrad;
 
   /**
-   * Path: Self monitoring/Blood pressure/24 hour average/sample_count
+   * Path: Selbstüberwachung/Blutdruck/24 Stunden Durchschnitt/sample_count
    */
   @Path("/sample_count")
   private Long sampleCount;
 
   /**
-   * Path: Self monitoring/Blood pressure/24 hour average/feeder_audit
+   * Path: Selbstüberwachung/Blutdruck/24 Stunden Durchschnitt/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
   /**
-   * Path: Self monitoring/Blood pressure/24 hour average/time
+   * Path: Selbstüberwachung/Blutdruck/24 Stunden Durchschnitt/time
    */
   @Path("/time|value")
   private TemporalAccessor timeValue;
@@ -85,29 +85,29 @@ public class BloodPressure24HourAverageIntervalEvent implements IntervalEventEnt
      return this.widthValue ;
   }
 
-  public void setClinicalInterpretationValue(String clinicalInterpretationValue) {
-     this.clinicalInterpretationValue = clinicalInterpretationValue;
+  public void setKlinischeInterpretationValue(String klinischeInterpretationValue) {
+     this.klinischeInterpretationValue = klinischeInterpretationValue;
   }
 
-  public String getClinicalInterpretationValue() {
-     return this.clinicalInterpretationValue ;
+  public String getKlinischeInterpretationValue() {
+     return this.klinischeInterpretationValue ;
   }
 
-  public void setClinicalInterpretationNullFlavourDefiningCode(
-      NullFlavour clinicalInterpretationNullFlavourDefiningCode) {
-     this.clinicalInterpretationNullFlavourDefiningCode = clinicalInterpretationNullFlavourDefiningCode;
+  public void setKlinischeInterpretationNullFlavourDefiningCode(
+      NullFlavour klinischeInterpretationNullFlavourDefiningCode) {
+     this.klinischeInterpretationNullFlavourDefiningCode = klinischeInterpretationNullFlavourDefiningCode;
   }
 
-  public NullFlavour getClinicalInterpretationNullFlavourDefiningCode() {
-     return this.clinicalInterpretationNullFlavourDefiningCode ;
+  public NullFlavour getKlinischeInterpretationNullFlavourDefiningCode() {
+     return this.klinischeInterpretationNullFlavourDefiningCode ;
   }
 
-  public void setLevelOfExertion(LevelOfExertionCluster levelOfExertion) {
-     this.levelOfExertion = levelOfExertion;
+  public void setBelastungsgrad(BelastungsgradCluster belastungsgrad) {
+     this.belastungsgrad = belastungsgrad;
   }
 
-  public LevelOfExertionCluster getLevelOfExertion() {
-     return this.levelOfExertion ;
+  public BelastungsgradCluster getBelastungsgrad() {
+     return this.belastungsgrad ;
   }
 
   public void setSampleCount(Long sampleCount) {

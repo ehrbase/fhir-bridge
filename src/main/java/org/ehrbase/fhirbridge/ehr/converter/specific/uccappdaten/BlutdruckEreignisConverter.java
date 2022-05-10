@@ -3,22 +3,23 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.uccappdaten;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToPointEventConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BloodPressureAnyEventPointEvent;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BlutdruckBeliebigesEreignisPointEvent;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BlutdruckBeliebigesEreignisPointEvent;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 
 import java.util.Optional;
 
-public class BlutdruckEreignisConverter extends ObservationToPointEventConverter<BloodPressureAnyEventPointEvent> {
+public class BlutdruckEreignisConverter extends ObservationToPointEventConverter<BlutdruckBeliebigesEreignisPointEvent> {
 
     @Override
-    protected BloodPressureAnyEventPointEvent convertInternal(Observation observation) {
-        BloodPressureAnyEventPointEvent bloodPressureAnyEventPointEvent = new BloodPressureAnyEventPointEvent();
+    protected BlutdruckBeliebigesEreignisPointEvent convertInternal(Observation observation) {
+        BlutdruckBeliebigesEreignisPointEvent bloodPressureAnyEventPointEvent = new BlutdruckBeliebigesEreignisPointEvent();
         setSystolicAndDiastolic(bloodPressureAnyEventPointEvent, observation);
         return bloodPressureAnyEventPointEvent;
     }
 
-    private void setSystolicAndDiastolic(BloodPressureAnyEventPointEvent bloodPressure, Observation resource) {
+    private void setSystolicAndDiastolic(BlutdruckBeliebigesEreignisPointEvent bloodPressure, Observation resource) {
         for (Observation.ObservationComponentComponent component:resource.getComponent()) {
             for(Coding coding:component.getCode().getCoding()){
                 mapSystolicAndDiastolic(coding, bloodPressure, component);
@@ -26,7 +27,7 @@ public class BlutdruckEreignisConverter extends ObservationToPointEventConverter
         }
     }
 
-    private void mapSystolicAndDiastolic(Coding coding, BloodPressureAnyEventPointEvent bloodPressure, Observation.ObservationComponentComponent component) {
+    private void mapSystolicAndDiastolic(Coding coding, BlutdruckBeliebigesEreignisPointEvent bloodPressure, Observation.ObservationComponentComponent component) {
         if (coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.getCode().equals("8480-6")){
             setSystolisch(component, bloodPressure);
         }else if(coding.getSystem().equals(CodeSystem.LOINC.getUrl()) && coding.getCode().equals("8462-4")){
@@ -34,21 +35,21 @@ public class BlutdruckEreignisConverter extends ObservationToPointEventConverter
         }
     }
 
-    private void setSystolisch(Observation.ObservationComponentComponent component, BloodPressureAnyEventPointEvent bloodPressure) {
+    private void setSystolisch(Observation.ObservationComponentComponent component, BlutdruckBeliebigesEreignisPointEvent bloodPressure) {
         if(component.hasValueQuantity()){
-            getValue(component).ifPresent(bloodPressure::setSystolicMagnitude);
-            getUnit(component).ifPresent(bloodPressure::setSystolicUnits);
+            getValue(component).ifPresent(bloodPressure::setSystolischMagnitude);
+            getUnit(component).ifPresent(bloodPressure::setSystolischUnits);
         }else{
-            bloodPressure.setSystolicNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+            bloodPressure.setSystolischNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
     }
 
-    private void setDiastolisch(Observation.ObservationComponentComponent component, BloodPressureAnyEventPointEvent bloodPressure) {
+    private void setDiastolisch(Observation.ObservationComponentComponent component, BlutdruckBeliebigesEreignisPointEvent bloodPressure) {
         if(component.hasValueQuantity()){
-            getValue(component).ifPresent(bloodPressure::setDiastolicMagnitude);
-            getUnit(component).ifPresent(bloodPressure::setDiastolicUnits);
+            getValue(component).ifPresent(bloodPressure::setDiastolischMagnitude);
+            getUnit(component).ifPresent(bloodPressure::setDiastolischUnits);
         }else{
-            bloodPressure.setDiastolicNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+            bloodPressure.setDiastolischNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
     }
 

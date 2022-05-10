@@ -4,7 +4,7 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum PhaseDefiningCode implements EnumValueSet {
-  AT_REST("At rest", "The person is at rest, prior to undertaking exercise.", "local", "at0006");
+  IN_RUHE("In Ruhe", "Die Person befindet sich im Ruhezustand vor Beginn der Übung/körperlichen Anstrengung.", "local", "at0006");
 
   private String value;
 

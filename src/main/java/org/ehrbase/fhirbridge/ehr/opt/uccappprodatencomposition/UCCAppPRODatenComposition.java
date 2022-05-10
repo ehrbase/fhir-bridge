@@ -20,111 +20,111 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 import org.ehrbase.client.classgenerator.shareddefinition.Setting;
 import org.ehrbase.client.classgenerator.shareddefinition.Territory;
 import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BloodPressureObservation;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BodyWeightObservation;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.PulseHeartBeatObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BlutdruckObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.KoerpergewichtObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
 
 @Entity
 @Archetype("openEHR-EHR-COMPOSITION.self_monitoring.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T16:40:28.978471340+02:00",
+    date = "2022-05-10T17:43:37.086401370+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
 @Template("UCC_App_PRO_Daten")
 public class UCCAppPRODatenComposition implements CompositionEntity {
   /**
-   * Path: Self monitoring/category
+   * Path: Selbstüberwachung/category
    */
   @Path("/category|defining_code")
   private Category categoryDefiningCode;
 
   /**
-   * Path: Self monitoring/context/Extension
-   * Description: Additional information required to capture local context or to align with other reference models/formalisms.
-   * Comment: For example: Local hospital departmental infomation or additional metadata to align with FHIR or CIMI equivalents.
+   * Path: Selbstüberwachung/context/Erweiterung
+   * Description: Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.
+   * Comment: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.
    */
   @Path("/context/other_context[at0001]/items[at0002]")
-  private List<Cluster> extension;
+  private List<Cluster> erweiterung;
 
   /**
-   * Path: Self monitoring/context/start_time
+   * Path: Selbstüberwachung/context/start_time
    */
   @Path("/context/start_time|value")
   private TemporalAccessor startTimeValue;
 
   /**
-   * Path: Self monitoring/context/participations
+   * Path: Selbstüberwachung/context/participations
    */
   @Path("/context/participations")
   private List<Participation> participations;
 
   /**
-   * Path: Self monitoring/context/end_time
+   * Path: Selbstüberwachung/context/end_time
    */
   @Path("/context/end_time|value")
   private TemporalAccessor endTimeValue;
 
   /**
-   * Path: Self monitoring/context/location
+   * Path: Selbstüberwachung/context/location
    */
   @Path("/context/location")
   private String location;
 
   /**
-   * Path: Self monitoring/context/health_care_facility
+   * Path: Selbstüberwachung/context/health_care_facility
    */
   @Path("/context/health_care_facility")
   private PartyIdentified healthCareFacility;
 
   /**
-   * Path: Self monitoring/context/setting
+   * Path: Selbstüberwachung/context/setting
    */
   @Path("/context/setting|defining_code")
   private Setting settingDefiningCode;
 
   /**
-   * Path: Self monitoring/Blood pressure
-   * Description: The local measurement of arterial blood pressure which is a surrogate for arterial pressure in the systemic circulation.
-   * Comment: Most commonly, use of the term 'blood pressure' refers to measurement of brachial artery pressure in the upper arm.
+   * Path: Selbstüberwachung/Blutdruck
+   * Description: Die lokale Messung des arteriellen Blutdrucks als Surrogat für den arteriellen Druck in der systemischen Zirkulation.
+   * Comment: Häufig wird der Ausdruck 'Blutdruck' zur Bezeichung der Messung des brachialen Ateriendrucks im Oberarm verwendet.
    */
   @Path("/content[openEHR-EHR-OBSERVATION.blood_pressure.v2]")
-  private BloodPressureObservation bloodPressure;
+  private BlutdruckObservation blutdruck;
 
   /**
-   * Path: Self monitoring/Body weight
-   * Description: Measurement of the body weight of an individual.
+   * Path: Selbstüberwachung/Körpergewicht
+   * Description: Messung des Körpergewichts eines Individuums.
    */
   @Path("/content[openEHR-EHR-OBSERVATION.body_weight.v2]")
-  private BodyWeightObservation bodyWeight;
+  private KoerpergewichtObservation koerpergewicht;
 
   /**
-   * Path: Self monitoring/Pulse/Heart beat
-   * Description: The rate and associated attributes for a pulse or heart beat.
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz
+   * Description: Die Frequenz und zugehörige Attribute für die Puls- oder Herzfrequenz.
    */
   @Path("/content[openEHR-EHR-OBSERVATION.pulse.v2]")
-  private PulseHeartBeatObservation pulseHeartBeat;
+  private PulsfrequenzHerzfrequenzObservation pulsfrequenzHerzfrequenz;
 
   /**
-   * Path: Self monitoring/composer
+   * Path: Selbstüberwachung/composer
    */
   @Path("/composer")
   private PartyProxy composer;
 
   /**
-   * Path: Self monitoring/language
+   * Path: Selbstüberwachung/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: Self monitoring/feeder_audit
+   * Path: Selbstüberwachung/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
   /**
-   * Path: Self monitoring/territory
+   * Path: Selbstüberwachung/territory
    */
   @Path("/territory")
   private Territory territory;
@@ -140,12 +140,12 @@ public class UCCAppPRODatenComposition implements CompositionEntity {
      return this.categoryDefiningCode ;
   }
 
-  public void setExtension(List<Cluster> extension) {
-     this.extension = extension;
+  public void setErweiterung(List<Cluster> erweiterung) {
+     this.erweiterung = erweiterung;
   }
 
-  public List<Cluster> getExtension() {
-     return this.extension ;
+  public List<Cluster> getErweiterung() {
+     return this.erweiterung ;
   }
 
   public void setStartTimeValue(TemporalAccessor startTimeValue) {
@@ -196,28 +196,29 @@ public class UCCAppPRODatenComposition implements CompositionEntity {
      return this.settingDefiningCode ;
   }
 
-  public void setBloodPressure(BloodPressureObservation bloodPressure) {
-     this.bloodPressure = bloodPressure;
+  public void setBlutdruck(BlutdruckObservation blutdruck) {
+     this.blutdruck = blutdruck;
   }
 
-  public BloodPressureObservation getBloodPressure() {
-     return this.bloodPressure ;
+  public BlutdruckObservation getBlutdruck() {
+     return this.blutdruck ;
   }
 
-  public void setBodyWeight(BodyWeightObservation bodyWeight) {
-     this.bodyWeight = bodyWeight;
+  public void setKoerpergewicht(KoerpergewichtObservation koerpergewicht) {
+     this.koerpergewicht = koerpergewicht;
   }
 
-  public BodyWeightObservation getBodyWeight() {
-     return this.bodyWeight ;
+  public KoerpergewichtObservation getKoerpergewicht() {
+     return this.koerpergewicht ;
   }
 
-  public void setPulseHeartBeat(PulseHeartBeatObservation pulseHeartBeat) {
-     this.pulseHeartBeat = pulseHeartBeat;
+  public void setPulsfrequenzHerzfrequenz(
+      PulsfrequenzHerzfrequenzObservation pulsfrequenzHerzfrequenz) {
+     this.pulsfrequenzHerzfrequenz = pulsfrequenzHerzfrequenz;
   }
 
-  public PulseHeartBeatObservation getPulseHeartBeat() {
-     return this.pulseHeartBeat ;
+  public PulsfrequenzHerzfrequenzObservation getPulsfrequenzHerzfrequenz() {
+     return this.pulsfrequenzHerzfrequenz ;
   }
 
   public void setComposer(PartyProxy composer) {

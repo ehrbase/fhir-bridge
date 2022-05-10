@@ -12,25 +12,25 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.level_of_exertion.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T16:40:29.009033801+02:00",
+    date = "2022-05-10T17:43:37.183330898+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
-public class LevelOfExertionCluster implements LocatableEntity {
+public class BelastungsgradCluster2 implements LocatableEntity {
   /**
-   * Path: Self monitoring/Blood pressure/24 hour average/Level of exertion/Phase
-   * Description: The phase or context of exercise.
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Belastungsgrad/Phase
+   * Description: Die Phase oder der Kontext zur Übung/körperlichen Anstrengung.
    */
   @Path("/items[at0009]/value|defining_code")
   private PhaseDefiningCode phaseDefiningCode;
 
   /**
-   * Path: Self monitoring/Blood pressure/History/24 hour average/state structure/Level of exertion/Phase/null_flavour
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/History/Jedes Ereignis/List/Belastungsgrad/Phase/null_flavour
    */
   @Path("/items[at0009]/null_flavour|defining_code")
   private NullFlavour phaseNullFlavourDefiningCode;
 
   /**
-   * Path: Self monitoring/Blood pressure/24 hour average/Level of exertion/feeder_audit
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Jedes Ereignis/Belastungsgrad/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;

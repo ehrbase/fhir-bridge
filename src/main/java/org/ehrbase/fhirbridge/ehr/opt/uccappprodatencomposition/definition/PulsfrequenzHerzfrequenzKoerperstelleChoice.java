@@ -4,8 +4,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T16:40:29.045962074+02:00",
+    date = "2022-05-10T17:43:37.191747982+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
-public interface BloodPressureLocationOfMeasurementChoice {
+public interface PulsfrequenzHerzfrequenzKoerperstelleChoice {
 }

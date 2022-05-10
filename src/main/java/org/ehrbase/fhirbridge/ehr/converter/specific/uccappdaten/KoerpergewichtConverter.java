@@ -1,17 +1,17 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.uccappdaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
-import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.BodyWeightObservation;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.KoerpergewichtObservation;
 import org.hl7.fhir.r4.model.Observation;
 
-public class BodyWeightObservationConverter extends ObservationToObservationConverter<BodyWeightObservation> {
+public class KoerpergewichtConverter extends ObservationToObservationConverter<KoerpergewichtObservation> {
     //TODO sadly duplicated mapping opt generated templates changed therefore cannot reuse :(
 
     @Override
-    protected BodyWeightObservation convertInternal(Observation observation) {
-        BodyWeightObservation bodyWeightObservation = new BodyWeightObservation();
-        bodyWeightObservation.setWeightMagnitude(mapWeightMagnitude(observation));
-        bodyWeightObservation.setWeightUnits(mapWeightUnit(observation));
+    protected KoerpergewichtObservation convertInternal(Observation observation) {
+        KoerpergewichtObservation bodyWeightObservation = new KoerpergewichtObservation();
+        bodyWeightObservation.setGewichtMagnitude(mapWeightMagnitude(observation));
+        bodyWeightObservation.setGewichtUnits(mapWeightUnit(observation));
         mapWeightUnit(observation);
         return bodyWeightObservation;
     }

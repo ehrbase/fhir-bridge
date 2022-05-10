@@ -20,104 +20,104 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.body_weight.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T16:40:29.047988795+02:00",
+    date = "2022-05-10T17:43:37.177621986+02:00",
     comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
 )
-public class BodyWeightObservation implements EntryEntity {
+public class KoerpergewichtObservation implements EntryEntity {
   /**
-   * Path: Self monitoring/Body weight/Any event/Weight
-   * Description: The weight of the individual.
+   * Path: Selbstüberwachung/Körpergewicht/Beliebiges Ereignis/Gewicht
+   * Description: Das Gewicht eines Individuums.
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|magnitude")
-  private Double weightMagnitude;
+  private Double gewichtMagnitude;
 
   /**
-   * Path: Self monitoring/Body weight/Any event/Weight
-   * Description: The weight of the individual.
+   * Path: Selbstüberwachung/Körpergewicht/Beliebiges Ereignis/Gewicht
+   * Description: Das Gewicht eines Individuums.
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value|units")
-  private String weightUnits;
+  private String gewichtUnits;
 
   /**
-   * Path: Self monitoring/Body weight/history/Any event/Simple/Weight/null_flavour
+   * Path: Selbstüberwachung/Körpergewicht/History/Beliebiges Ereignis/Simple/Gewicht/null_flavour
    */
   @Path("/data[at0002]/events[at0003]/data[at0001]/items[at0004]/null_flavour|defining_code")
-  private NullFlavour weightNullFlavourDefiningCode;
+  private NullFlavour gewichtNullFlavourDefiningCode;
 
   /**
-   * Path: Self monitoring/Body weight/Any event/state structure
+   * Path: Selbstüberwachung/Körpergewicht/Beliebiges Ereignis/State structure
    * Description: @ internal @
    */
   @Path("/data[at0002]/events[at0003]/state[at0008]")
   private ItemTree stateStructure;
 
   /**
-   * Path: Self monitoring/Body weight/Any event/time
+   * Path: Selbstüberwachung/Körpergewicht/Beliebiges Ereignis/time
    */
   @Path("/data[at0002]/events[at0003]/time|value")
   private TemporalAccessor timeValue;
 
   /**
-   * Path: Self monitoring/Body weight/origin
+   * Path: Selbstüberwachung/Körpergewicht/origin
    */
   @Path("/data[at0002]/origin|value")
   private TemporalAccessor originValue;
 
   /**
-   * Path: Self monitoring/Body weight/Device
-   * Description: Details about the weighing device.
+   * Path: Selbstüberwachung/Körpergewicht/Gerät
+   * Description: Details über die benutzte Waage.
    */
   @Path("/protocol[at0015]/items[at0020]")
-  private Cluster device;
+  private Cluster geraet;
 
   /**
-   * Path: Self monitoring/Body weight/Extension
-   * Description: Additional information required to capture local content or to align with other reference models/formalisms.
-   * Comment: For example: local information requirements or additional metadata to align with FHIR or CIMI equivalents.
+   * Path: Selbstüberwachung/Körpergewicht/Erweiterung
+   * Description: Zusätzliche Informationen zur Erfassung lokaler Inhalte oder Anpassung an andere Referenzmodelle/Formalismen.
+   * Comment: Zum Beispiel: Lokaler Informationsbedarf oder zusätzliche Metadaten zur Anpassung an FHIR-Ressourcen oder CIMI-Modelle.
    */
   @Path("/protocol[at0015]/items[at0027]")
-  private List<Cluster> extension;
+  private List<Cluster> erweiterung;
 
   /**
-   * Path: Self monitoring/Body weight/subject
+   * Path: Selbstüberwachung/Körpergewicht/subject
    */
   @Path("/subject")
   private PartyProxy subject;
 
   /**
-   * Path: Self monitoring/Body weight/language
+   * Path: Selbstüberwachung/Körpergewicht/language
    */
   @Path("/language")
   private Language language;
 
   /**
-   * Path: Self monitoring/Body weight/feeder_audit
+   * Path: Selbstüberwachung/Körpergewicht/feeder_audit
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setWeightMagnitude(Double weightMagnitude) {
-     this.weightMagnitude = weightMagnitude;
+  public void setGewichtMagnitude(Double gewichtMagnitude) {
+     this.gewichtMagnitude = gewichtMagnitude;
   }
 
-  public Double getWeightMagnitude() {
-     return this.weightMagnitude ;
+  public Double getGewichtMagnitude() {
+     return this.gewichtMagnitude ;
   }
 
-  public void setWeightUnits(String weightUnits) {
-     this.weightUnits = weightUnits;
+  public void setGewichtUnits(String gewichtUnits) {
+     this.gewichtUnits = gewichtUnits;
   }
 
-  public String getWeightUnits() {
-     return this.weightUnits ;
+  public String getGewichtUnits() {
+     return this.gewichtUnits ;
   }
 
-  public void setWeightNullFlavourDefiningCode(NullFlavour weightNullFlavourDefiningCode) {
-     this.weightNullFlavourDefiningCode = weightNullFlavourDefiningCode;
+  public void setGewichtNullFlavourDefiningCode(NullFlavour gewichtNullFlavourDefiningCode) {
+     this.gewichtNullFlavourDefiningCode = gewichtNullFlavourDefiningCode;
   }
 
-  public NullFlavour getWeightNullFlavourDefiningCode() {
-     return this.weightNullFlavourDefiningCode ;
+  public NullFlavour getGewichtNullFlavourDefiningCode() {
+     return this.gewichtNullFlavourDefiningCode ;
   }
 
   public void setStateStructure(ItemTree stateStructure) {
@@ -144,20 +144,20 @@ public class BodyWeightObservation implements EntryEntity {
      return this.originValue ;
   }
 
-  public void setDevice(Cluster device) {
-     this.device = device;
+  public void setGeraet(Cluster geraet) {
+     this.geraet = geraet;
   }
 
-  public Cluster getDevice() {
-     return this.device ;
+  public Cluster getGeraet() {
+     return this.geraet ;
   }
 
-  public void setExtension(List<Cluster> extension) {
-     this.extension = extension;
+  public void setErweiterung(List<Cluster> erweiterung) {
+     this.erweiterung = erweiterung;
   }
 
-  public List<Cluster> getExtension() {
-     return this.extension ;
+  public List<Cluster> getErweiterung() {
+     return this.erweiterung ;
   }
 
   public void setSubject(PartyProxy subject) {
