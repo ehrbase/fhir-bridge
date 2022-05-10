@@ -45,9 +45,7 @@ import org.javers.core.metamodel.clazz.ValueObjectDefinition;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.beans.IntrospectionException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.time.temporal.TemporalAccessor;
 import java.util.List;
 

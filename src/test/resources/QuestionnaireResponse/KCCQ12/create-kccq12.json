@@ -1,0 +1,181 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "meta": {
+    "profile": [
+      "https://example.org/fhir/StructureDefinition/Kccq12QuestionnaireResponse"
+    ]
+  },
+  "language": "de-DE",
+  "contained": [
+    {
+      "resourceType": "Patient",
+      "id": "1",
+      "meta": {
+        "profile": [
+          "https://example.org/fhir/StructureDefinition/MedpowerPatient"
+        ]
+      },
+      "identifier": [
+        {
+          "system": "urn:ietf:rfc:4122",
+          "value": "{{patientId}}"
+        }
+      ]
+    }
+  ],
+  "status": "completed",
+  "subject": {
+    "reference": "#1"
+  },
+  "authored": "2022-05-06T13:14:29+00:00",
+  "item": [
+    {
+      "linkId": "1",
+      "item": [
+        {
+          "linkId": "1a",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Beeintraechtigung",
+                "code": "1"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "1b",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Beeintraechtigung",
+                "code": "1"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "1c",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Beeintraechtigung",
+                "code": "1"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "8",
+      "item": [
+        {
+          "linkId": "8a",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Beeintraechtigung",
+                "code": "1"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "8b",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Beeintraechtigung",
+                "code": "4"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "8c",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Beeintraechtigung",
+                "code": "4"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "2",
+      "answer": [
+        {
+          "valueCoding": {
+            "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Haeuf1",
+            "code": "1",
+            "display": "Jeden Morgen"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "3",
+      "answer": [
+        {
+          "valueCoding": {
+            "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Haeuf2",
+            "code": "3",
+            "display": "Mindestens einmal am Tag"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "4",
+      "answer": [
+        {
+          "valueCoding": {
+            "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Haeuf2",
+            "code": "4",
+            "display": "3-mal pro Woche oder Älter, aber nicht jeden Tag"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "5",
+      "answer": [
+        {
+          "valueCoding": {
+            "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Haeuf3",
+            "code": "4",
+            "display": "Weniger als einmal pro Woche"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "6",
+      "answer": [
+        {
+          "valueCoding": {
+            "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Beeintraechtigungkurz",
+            "code": "2",
+            "display": "Ziemlich beeinträchtigt"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "7",
+      "answer": [
+        {
+          "valueCoding": {
+            "system": "http://www.columbiaheartvalve.org/KCCQ12/system/code/Zufriedenheit",
+            "code": "2",
+            "display": "Größtenteils unzufrieden"
+          }
+        }
+      ]
+    }
+  ]
+}
