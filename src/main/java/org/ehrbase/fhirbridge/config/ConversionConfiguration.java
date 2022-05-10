@@ -39,6 +39,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.heartrate.HerzfrequenzCompo
 import org.ehrbase.fhirbridge.ehr.converter.specific.hipdocument.DocumentReferenceToHipDocumentConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus.ImpfstatusCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.kccq12.KCCQ12CompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GECCOMedikationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.observationlab.ObservationLabCompositionConverter;
@@ -194,6 +195,7 @@ public class ConversionConfiguration {
 
     private void registerQuestionnaireResponseConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.QUESTIONNAIRE_RESPONSE_DEFAULT, new D4lQuestionnaireCompositionConverter());
+        conversionService.registerConverter(Profile.KCCQ12_QUESTIONNAIRE, new KCCQ12CompositionConverter());
     }
 
     private void registerEncounterConverters(ConversionService conversionService) {
