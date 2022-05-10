@@ -10,7 +10,7 @@ public class MHDRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         // @formatter:off
-        from("mhd-iti68://service?audit=true")
+        from("mhd-iti65://service?audit=true")
                 .process(MHDDocumentProcessor.BEAN_ID);
     }
     // @formatter:on
