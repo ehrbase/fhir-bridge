@@ -234,6 +234,11 @@
             <version>${ipf.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.openehealth.ipf.platform-camel</groupId>
+            <artifactId>ipf-platform-camel-ihe-xds</artifactId>
+            <version>${ipf.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.openehealth.ipf.boot</groupId>
             <artifactId>ipf-fhir-r4-spring-boot-starter</artifactId>
             <version>${ipf.version}</version>
