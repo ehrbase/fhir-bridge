@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten;
+package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.MitSensorGemesseneKoerperlicheAktivitaetJedesEreignisChoice;
@@ -11,7 +11,7 @@ import org.hl7.fhir.r4.model.Reference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KoerperlicheAktivitaetToObservation extends CompositionToObservationConverter<MitSensorGemesseneKoerperlicheAktivitaetObservation> {
+public class KoerperlicheAktivitaetConverter extends CompositionToObservationConverter<MitSensorGemesseneKoerperlicheAktivitaetObservation> {
     @Override
     protected MitSensorGemesseneKoerperlicheAktivitaetObservation convertInternal(Composition composition) {
         MitSensorGemesseneKoerperlicheAktivitaetObservation koerperlicheAktivitaetObservation = new MitSensorGemesseneKoerperlicheAktivitaetObservation();
