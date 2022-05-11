@@ -133,7 +133,7 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
     }
 
     private Object createEhr(String pseudonym) {
-        PartySelf subject = new PartySelf(new PartyRef(new HierObjectId(pseudonym), "DEMOGRAPHIC", "PERSON"));
+        PartySelf subject = new PartySelf(new PartyRef(new HierObjectId(pseudonym), "fhir-bridge", "PERSON"));
         EhrStatus ehrStatus = new EhrStatus(ARCHETYPE_NODE_ID, new DvText("EHR Status"), subject, true, true, null);
         return openEhrClient.ehrEndpoint().createEhr(ehrStatus);
     }
