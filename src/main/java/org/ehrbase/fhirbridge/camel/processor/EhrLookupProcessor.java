@@ -17,6 +17,7 @@
 package org.ehrbase.fhirbridge.camel.processor;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
+import org.ehrbase.client.aql.query.Query;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.ehr.EhrStatus;
@@ -24,11 +25,13 @@ import com.nedap.archie.rm.generic.PartySelf;
 import com.nedap.archie.rm.support.identification.HierObjectId;
 import com.nedap.archie.rm.support.identification.PartyRef;
 import org.apache.camel.Exchange;
+import org.ehrbase.client.aql.record.Record1;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
 import org.ehrbase.fhirbridge.core.domain.PatientEhr;
 import org.ehrbase.fhirbridge.core.repository.PatientEhrRepository;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.fhir.support.PatientUtils;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.Identifier;
@@ -39,6 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -76,7 +80,7 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
 
         UUID ehrId = patientEhrRepository.findById(patientId.getIdPart())
                 .map(PatientEhr::getEhrId)
-                .orElseGet(() -> createEhr(patientId));
+                .orElseGet(() -> createPatientEhr(patientId));
 
         exchange.getMessage().setHeader(CompositionConstants.EHR_ID, ehrId);
     }
@@ -103,18 +107,35 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
      * @param patientId the given patient ID
      * @return the EHR ID
      */
-    private UUID createEhr(IIdType patientId) {
+    private UUID createPatientEhr(IIdType patientId) {
+        UUID ehrId;
         Patient patient = patientDao.read(patientId);
         Identifier pseudonym = PatientUtils.getPseudonym(patient);
-
-        PartySelf subject = new PartySelf(new PartyRef(new HierObjectId(pseudonym.getValue()), "DEMOGRAPHIC", "PERSON"));
-        EhrStatus ehrStatus = new EhrStatus(ARCHETYPE_NODE_ID, new DvText("EHR Status"), subject, true, true, null);
-        UUID ehrId = openEhrClient.ehrEndpoint().createEhr(ehrStatus);
-
+        Query<Record1<UUID>> query = Query.buildNativeQuery(
+                "SELECT e/ehr_id/value from EHR e WHERE e/ehr_status/subject/external_ref/id/value = '"+pseudonym.getValue()+"'", UUID.class);
+        List<Record1<UUID>> result = openEhrClient.aqlEndpoint().execute(query);
+        if (result.size() == 0) {
+            ehrId = (UUID) createEhr(pseudonym.getValue());
+        } else {
+            ehrId = getAlreadyExistingEHR(result);
+        }
         PatientEhr patientEhr = new PatientEhr(patientId.getIdPart(), ehrId);
         patientEhrRepository.save(patientEhr);
         LOG.debug("Created PatientEhr: patientId={}, ehrId={}", patientEhr.getPatientId(), patientEhr.getEhrId());
-
         return ehrId;
     }
+
+    private UUID getAlreadyExistingEHR(List<Record1<UUID>> result) {
+        if(result.size()>1){
+            throw new ConversionException("Conflict: several EHR ids have the same patient id connected (subject.external_ref.id.value). Please check your EHR ids");
+        }
+        return  result.get(0).value1();
+    }
+
+    private Object createEhr(String pseudonym) {
+        PartySelf subject = new PartySelf(new PartyRef(new HierObjectId(pseudonym), "fhir-bridge", "PERSON"));
+        EhrStatus ehrStatus = new EhrStatus(ARCHETYPE_NODE_ID, new DvText("EHR Status"), subject, true, true, null);
+        return openEhrClient.ehrEndpoint().createEhr(ehrStatus);
+    }
+
 }
