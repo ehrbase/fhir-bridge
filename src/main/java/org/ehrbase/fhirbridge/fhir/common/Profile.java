@@ -25,14 +25,14 @@ import java.util.stream.Collectors;
 public enum Profile {
 
     // Bundle
-    ITI68_BUNDLE(Bundle.class, "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Comprehensive.ProvideBundle"),
+    ITI65_BUNDLE(Bundle.class, "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Comprehensive.ProvideBundle"),
 
     // Binary
     BINARY(Binary.class, null),
 
     // DocumentReference
     DOCUMENT_REFERENCE_DEFAULT(DocumentReference.class, null),
-    ITI68(DocumentReference.class, "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Comprehensive.DocumentReference"),
+    ITI65(DocumentReference.class, "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Comprehensive.DocumentReference"),
 
     //Composition
     UCC_SENSORDATEN_VITALSIGNS(Composition.class, "https://example.org/fhir/StructureDefinition/VitalSignsComposition"),

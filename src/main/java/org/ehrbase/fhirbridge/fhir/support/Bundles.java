@@ -33,8 +33,8 @@ public class Bundles {
             if (Resources.hasProfile(entry.getResource(), Profile.UCC_SENSORDATEN_VITALSIGNS)) {
                 return Optional.of(Profile.UCC_SENSORDATEN_VITALSIGNS);
             }
-            if (Resources.hasProfile(entry.getResource(), Profile.ITI68)) {
-                return Optional.of(Profile.ITI68);
+            if (Resources.hasProfile(entry.getResource(), Profile.ITI65)) {
+                return Optional.of(Profile.ITI65);
             }
         }
         return Optional.empty();
