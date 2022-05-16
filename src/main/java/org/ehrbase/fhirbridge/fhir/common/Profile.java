@@ -1,5 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.common;
 
+import org.hl7.fhir.r4.model.Binary;
+import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
@@ -22,8 +24,15 @@ import java.util.stream.Collectors;
 
 public enum Profile {
 
+    // Bundle
+    ITI68_BUNDLE(Bundle.class, "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Comprehensive.ProvideBundle"),
+
+    // Binary
+    BINARY(Binary.class, null),
+
     // DocumentReference
     DOCUMENT_REFERENCE_DEFAULT(DocumentReference.class, null),
+    ITI68(DocumentReference.class, "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Comprehensive.DocumentReference"),
 
     //Composition
     UCC_SENSORDATEN_VITALSIGNS(Composition.class, "https://example.org/fhir/StructureDefinition/VitalSignsComposition"),
