@@ -20,7 +20,6 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.processor.BundleResponseProcessor;
-import org.ehrbase.fhirbridge.camel.processor.ITI65Processor;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.AntiBodyPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.DiagnosticReportLabConverter;
@@ -54,27 +53,38 @@ public class TransactionRouteBuilder extends AbstractRouteBuilder {
                 .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ITI65))
                     .bean(ITI65Processor.class)
             .choice()
-               .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
                     .bean(AntiBodyPanelBundleValidator.class)
                     .bean(AntiBodyPanelConverter.class, "convert")
-               .when(header(CamelConstants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
-                     .bean(BloodGasPanelBundleValidator.class)
-                     .bean(BloodGasPanelConverter.class, "convert")
-               .when(header(CamelConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
-                     .bean(DiagnosticReportLabBundleValidator.class)
-                     .bean(DiagnosticReportLabConverter.class,"convert")
-               .when(header(CamelConstants.PROFILE).isEqualTo(Profile.VIROLOGISCHER_BEFUND))
-                     .bean(VirologischerBefundBundleValidator.class)
-                     .bean(VirologischerBefundConverter.class,"convert")
-               .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_SENSORDATEN_STEPS))
-                     .bean(UCCSensorDatenValidator.class)
-                     .bean(UCCSensordatenActivityBundleConverter.class,"convert")
-               .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_SENSORDATEN_VITALSIGNS))
-                      .bean(UCCSensorDatenValidator.class)
-                      .bean(UCCSensordatenVitalSignsBundleConverter.class,"convert")
-               .otherwise()
-                      .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
-                                        "uses on of the following profiles: " + Profile.BLOOD_GAS_PANEL.getUri() + ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri() + ", " + Profile.ANTI_BODY_PANEL.getUri() + ", " +Profile.VIROLOGISCHER_BEFUND.getUri() + ", " + Profile.UCC_SENSORDATEN_STEPS.getUri()+ ", " + Profile.UCC_SENSORDATEN_VITALSIGNS.getUri()))
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
+                    .bean(BloodGasPanelBundleValidator.class)
+                    .bean(BloodGasPanelConverter.class, "convert")
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
+                    .bean(DiagnosticReportLabBundleValidator.class)
+                    .bean(DiagnosticReportLabConverter.class,"convert")
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.VIROLOGISCHER_BEFUND))
+                    .bean(VirologischerBefundBundleValidator.class)
+                    .bean(VirologischerBefundConverter.class,"convert")
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_SENSORDATEN_STEPS))
+                    .bean(UCCSensorDatenValidator.class)
+                    .bean(UCCSensordatenActivityBundleConverter.class,"convert")
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_SENSORDATEN_VITALSIGNS))
+                    .bean(UCCSensorDatenValidator.class)
+                    .bean(UCCSensordatenVitalSignsBundleConverter.class,"convert")
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_APP_PRO_DATEN))
+                    .bean(UCCAppProDatenValidator.class)
+                    .bean(UCCAppProDatenBundleConverter.class,"convert")
+                .otherwise()
+                .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
+                        "uses on of the following profiles: " +
+                        Profile.BLOOD_GAS_PANEL.getUri() +
+                        ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri() +
+                        ", " + Profile.ANTI_BODY_PANEL.getUri() +
+                        ", " +Profile.VIROLOGISCHER_BEFUND.getUri() +
+                        ", " + Profile.UCC_SENSORDATEN_STEPS.getUri()+
+                        ", " + Profile.UCC_SENSORDATEN_VITALSIGNS.getUri() +
+                        ", " + Profile.UCC_APP_PRO_DATEN.getUri()
+                ))
             .end()
             .to("direct:provideResource")
             .process(BundleResponseProcessor.BEAN_ID);

@@ -36,8 +36,10 @@ public class Bundles {
             if (Resources.hasProfile(entry.getResource(), Profile.ITI65)) {
                 return Optional.of(Profile.ITI65);
             }
+            if (Resources.hasProfile(entry.getResource(), Profile.UCC_APP_PRO_DATEN)) {
+                return Optional.of(Profile.UCC_APP_PRO_DATEN);
+            }
         }
         return Optional.empty();
     }
-
 }

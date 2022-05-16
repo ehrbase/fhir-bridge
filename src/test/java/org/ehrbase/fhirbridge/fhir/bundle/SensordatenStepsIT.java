@@ -1,7 +1,7 @@
 package org.ehrbase.fhirbridge.fhir.bundle;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.specific.sensordaten.UCCSensordatenCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.UCCSensordatenCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.UCCAppSensorDatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.MitSensorGemesseneKoerperlicheAktivitaetJedesEreignisIntervalEvent;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.MitSensorGemesseneKoerperlicheAktivitaetObservation;
@@ -37,11 +37,10 @@ public class SensordatenStepsIT extends AbstractBundleMappingTestSetupIT {
         create("create-ucc-steps.json");
     }
 
-/* TODO: fixed in Javers 6.6.6 https://github.com/javers/javers/issues/1200 wait until updated
     @Test
     void createMappingUCCSensordatenVitalSigns() throws IOException {
         testMapping("create-ucc-steps.json", "paragon-create-ucc-steps.json");
-    }*/
+    }
 
     @Override
     public Javers getJavers() {
