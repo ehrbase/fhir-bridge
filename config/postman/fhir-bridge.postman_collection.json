@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "95286492-19cd-4e9d-b13c-e44972c8f60d",
+		"_postman_id": "c4deb0b5-16e5-4acf-b551-c9b48acfe8ae",
 		"name": "FHIR Bridge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -71,132 +71,132 @@
 									"query": [
 										{
 											"key": "_id",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_language",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_profile",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_security",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_tag",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_content",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_text",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_filter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "action",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "address",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "agent",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "agent-name",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "agent-role",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "altid",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "entity",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "entity-name",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "entity-role",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "entity-type",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "outcome",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "policy",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "site",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "subtype",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "type",
-											"value": null,
+											"value": "",
 											"disabled": true
 										}
 									]
@@ -254,6 +254,117 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"bundle-transaction-bga\",\n  \"meta\": {\n    \"lastUpdated\": \"2020-09-24T05:33:00Z\"\n  },\n  \"type\": \"transaction\",\n  \"entry\": [\n    {\n      \"fullUrl\": \"urn:uuid:220767b9-5760-40b8-8741-8772dae04c3f\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-pnl-ser-pl-ia\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94504-8_SARS-CoV-2-Ab-Panel\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94504-8\",\n              \"display\": \"SARS-CoV-2 (COVID-19) Ab panel - Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 antibodies panel\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"hasMember\": [\n          {\n            \"reference\": \"urn:uuid:22732de8-3eb6-477e-81d6-28fb906b3e4e\"\n          },\n          {\n            \"reference\": \"urn:uuid:70ca7d00-0d8b-42bb-9508-a8fc76e5c7ad\"\n          },\n          {\n            \"reference\": \"urn:uuid:7e746710-fad4-474b-8a28-422863f3a2b8\"\n          },\n          {\n            \"reference\": \"urn:uuid:f35f17da-f642-402d-8cf4-ff70607713a7\"\n          },\n          {\n            \"reference\": \"urn:uuid:7297b0fd-3be7-4b88-a63a-6ba651152c41\"\n          },\n          {\n            \"reference\": \"urn:uuid:da1fa3fe-a8a3-44b6-94c6-3497269436ec\"\n          },\n          {\n            \"reference\": \"urn:uuid:b5adbc53-a1ee-4a57-9ede-fae4b4462bfb\"\n          },\n          {\n            \"reference\": \"urn:uuid:b08b1687-2ea1-4b14-9473-dd04389169ec\"\n          }\n        ]\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:70ca7d00-0d8b-42bb-9508-a8fc76e5c7ad\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-ser-pl-ql-ia\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94762-2_SARS-CoV-2-Ab-Ql\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94762-2\",\n              \"display\": \"SARS-CoV-2 (COVID-19) Ab [Presence] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 antibodies qualitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueCodeableConcept\": {\n          \"coding\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"260373001\",\n              \"display\": \"Detected (qualifier value)\"\n            }\n          ]\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:22732de8-3eb6-477e-81d6-28fb906b3e4e\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-ab-ser-pl-ia-acnc\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94769-7_SARS-CoV-2-Ab-Qn\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94769-7\",\n              \"display\": \"SARS-CoV-2 (COVID-19) Ab [Units/volume] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 antibodies quantitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueQuantity\": {\n          \"value\": 240,\n          \"unit\": \"[IU]/mL\",\n          \"system\": \"http://unitsofmeasure.org\",\n          \"code\": \"[IU]/mL\"\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:7e746710-fad4-474b-8a28-422863f3a2b8\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-iga-ser-pl-ia-acnc\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94720-0_SARS-CoV-2-IgA-Qn\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94720-0\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgA Ab [Units/volume] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgA antibodies quantitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueQuantity\": {\n          \"value\": 0.5,\n          \"unit\": \"[IU]/mL\",\n          \"system\": \"http://unitsofmeasure.org\",\n          \"code\": \"[IU]/mL\"\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:f35f17da-f642-402d-8cf4-ff70607713a7\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-iga-ser-pl-ql-ia\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94562-6_SARS-CoV-2-IgA-Ql\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94562-6\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgA Ab [Presence] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgA antibodies qualitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueCodeableConcept\": {\n          \"coding\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"260373001\",\n              \"display\": \"Detected (qualifier value)\"\n            }\n          ]\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:7297b0fd-3be7-4b88-a63a-6ba651152c41\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-igg-ser-pl-ia-acnc\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94505-5_SARS-CoV-2-IgG-Qn\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94505-5\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgG Ab [Units/volume] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgG antibodies quantitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueQuantity\": {\n          \"value\": 20,\n          \"unit\": \"[arb'U]/mL\",\n          \"system\": \"http://unitsofmeasure.org\",\n          \"code\": \"[arb'U]/mL\"\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:da1fa3fe-a8a3-44b6-94c6-3497269436ec\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-igg-ser-pl-ql-ia\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94563-4_SARS-CoV-2-IgG-Ql\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94563-4\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgG Ab [Presence] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgG antibodies qualitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueCodeableConcept\": {\n          \"coding\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"260373001\",\n              \"display\": \"Detected (qualifier value)\"\n            }\n          ]\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:b5adbc53-a1ee-4a57-9ede-fae4b4462bfb\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-igm-ser-pl-ia-acnc\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94505-5_SARS-CoV-2-IgM-Qn\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94506-3\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgM Ab [Units/volume] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgM antibodies quantitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueQuantity\": {\n          \"value\": 219.5,\n          \"unit\": \"[arb'U]/mL\",\n          \"system\": \"http://unitsofmeasure.org\",\n          \"code\": \"[arb'U]/mL\"\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    },\n    {\n      \"fullUrl\": \"urn:uuid:b08b1687-2ea1-4b14-9473-dd04389169ec\",\n      \"resource\": {\n        \"resourceType\": \"Observation\",\n        \"meta\": {\n          \"profile\": [\n            \"https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sars-cov-2-igm-ser-pl-ql-ia\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"type\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/v2-0203\",\n                  \"code\": \"OBI\"\n                }\n              ]\n            },\n            \"system\": \"https://www.charite.de/fhir/CodeSystem/lab-identifiers\",\n            \"value\": \"94564-2_SARS-CoV-2-IgM-Ql\",\n            \"assigner\": {\n              \"reference\": \"Organization/Charité\"\n            }\n          }\n        ],\n        \"status\": \"final\",\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://loinc.org\",\n                \"code\": \"26436-6\"\n              },\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\n                \"code\": \"laboratory\"\n              }\n            ]\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://loinc.org\",\n              \"code\": \"94564-2\",\n              \"display\": \"SARS-CoV-2 (COVID-19) IgM Ab [Presence] in Serum or Plasma by Immunoassay\"\n            }\n          ],\n          \"text\": \"SARS-CoV-2 IgM antibodies qualitative\"\n        },\n        \"subject\": {\n          \"identifier\": {\n            \"system\": \"urn:ietf:rfc:4122\",\n            \"value\": \"{{patientId}}\"\n          }\n        },\n        \"effectiveDateTime\": \"2020-10-19T08:43:33+02:00\",\n        \"valueCodeableConcept\": {\n          \"coding\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"code\": \"260373001\",\n              \"display\": \"Detected (qualifier value)\"\n            }\n          ]\n        }\n      },\n      \"request\": {\n        \"method\": \"POST\",\n        \"url\": \"Observation\"\n      }\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UCC_SensorDaten VitalSigns",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Bundle\",\r\n  \"meta\": {\r\n    \"lastUpdated\": \"2022-05-05T11:56:17.410+00:00\",\r\n    \"profile\": [\r\n      \"https://example.org/fhir/StructureDefinition/VitalSignsBundle\"\r\n    ]\r\n  },\r\n  \"identifier\": {\r\n    \"system\": \"urn:ietf:rfc:3986\",\r\n    \"value\": \"urn:uuid:5926d0df-4a88-4a11-93f5-05f4bb1c9587\"\r\n  },\r\n  \"type\": \"document\",\r\n  \"timestamp\": \"2022-05-05T11:56:17.410+00:00\",\r\n  \"entry\": [\r\n    {\r\n      \"fullUrl\": \"urn:uuid:491ddb2e-362f-4803-be91-d5a5d88d5e8e\",\r\n      \"resource\": {\r\n        \"resourceType\": \"Composition\",\r\n        \"meta\": {\r\n          \"profile\": [\r\n            \"https://example.org/fhir/StructureDefinition/VitalSignsComposition\"\r\n          ]\r\n        },\r\n        \"contained\": [\r\n          {\r\n            \"resourceType\": \"Device\",\r\n            \"id\": \"1\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/WearableDevice\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"value\": \"HiGHmed-Test\"\r\n              }\r\n            ],\r\n            \"manufacturer\": \"Apple Inc.\",\r\n            \"deviceName\": [\r\n              {\r\n                \"name\": \"Watch6,4\",\r\n                \"type\": \"model-name\"\r\n              }\r\n            ],\r\n            \"version\": [\r\n              {\r\n                \"value\": \"8.5.1\"\r\n              }\r\n            ]\r\n          },{\r\n            \"resourceType\": \"Patient\",\r\n            \"id\": \"3\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/MedpowerPatient\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"system\": \"urn:ietf:rfc:4122\",\r\n                \"value\": \"{{patientId}}\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"status\": \"final\",\r\n        \"type\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"64296-7\",\r\n              \"display\": \"Personal health monitoring report Automated\"\r\n            }\r\n          ]\r\n        },\r\n        \"subject\": {\r\n          \"reference\": \"#3\"\r\n        },\r\n        \"date\": \"2022-05-05T11:56:17+00:00\",\r\n        \"author\": [\r\n          {\r\n            \"reference\": \"#1\"\r\n          }\r\n        ],\r\n        \"title\": \"Vital Signs Section\",\r\n        \"section\": [\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                  \"code\": \"vital-signs\",\r\n                  \"display\": \"Vital Signs\"\r\n                }\r\n              ]\r\n            },\r\n            \"entry\": [\r\n              {\r\n                \"reference\": \"urn:uuid:22e44b79-ecf7-46b5-830d-83a522de092c\"\r\n              },\r\n              {\r\n                \"reference\": \"urn:uuid:6b83d4ef-f178-46a6-90d6-a5d9ebe04869\"\r\n              }\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    {\r\n      \"fullUrl\": \"urn:uuid:22e44b79-ecf7-46b5-830d-83a522de092c\",\r\n      \"resource\": {\r\n        \"resourceType\": \"Observation\",\r\n        \"id\": \"22e44b79-ecf7-46b5-830d-83a522de092c\",\r\n        \"meta\": {\r\n          \"profile\": [\r\n            \"https://example.org/fhir/StructureDefinition/HeartRateObservation\"\r\n          ]\r\n        },\r\n        \"contained\": [\r\n          {\r\n            \"resourceType\": \"Device\",\r\n            \"id\": \"1\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/WearableDevice\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"value\": \"HiGHmed-Test\"\r\n              }\r\n            ],\r\n            \"manufacturer\": \"Apple Inc.\",\r\n            \"deviceName\": [\r\n              {\r\n                \"name\": \"Watch6,4\",\r\n                \"type\": \"model-name\"\r\n              }\r\n            ],\r\n            \"version\": [\r\n              {\r\n                \"value\": \"8.5.1\"\r\n              }\r\n            ]\r\n          },\r\n          {\r\n            \"resourceType\": \"Patient\",\r\n            \"id\": \"2\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/MedpowerPatient\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"system\": \"urn:ietf:rfc:4122\",\r\n                \"value\": \"{{patientId}}\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"status\": \"final\",\r\n        \"category\": [\r\n          {\r\n            \"coding\": [\r\n              {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                \"code\": \"vital-signs\",\r\n                \"display\": \"Vital Signs\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"code\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"76477-9\",\r\n              \"display\": \"Heart rate by Noninvasive\"\r\n            }\r\n          ],\r\n          \"text\": \"Discrete Heart Rate\"\r\n        },\r\n        \"subject\": {\r\n          \"reference\": \"#2\"\r\n        },\r\n        \"effectiveDateTime\": \"2022-05-05T09:38:48Z\",\r\n        \"device\": {\r\n          \"reference\": \"#1\"\r\n        },\r\n        \"component\": [\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://loinc.org\",\r\n                  \"code\": \"76477-9\",\r\n                  \"display\": \"Heart rate by Noninvasive\"\r\n                }\r\n              ],\r\n              \"text\": \"Discrete Heart Rate\"\r\n            },\r\n            \"valueQuantity\": {\r\n              \"value\": 59.0,\r\n              \"unit\": \"bpm\",\r\n              \"system\": \"http://unitsofmeasure.org\",\r\n              \"code\": \"{beats}/min\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    {\r\n      \"fullUrl\": \"urn:uuid:6b83d4ef-f178-46a6-90d6-a5d9ebe04869\",\r\n      \"resource\": {\r\n        \"resourceType\": \"Observation\",\r\n        \"id\": \"6b83d4ef-f178-46a6-90d6-a5d9ebe04869\",\r\n        \"meta\": {\r\n          \"profile\": [\r\n            \"https://example.org/fhir/StructureDefinition/HeartRateObservation\"\r\n          ]\r\n        },\r\n        \"contained\": [\r\n          {\r\n            \"resourceType\": \"Device\",\r\n            \"id\": \"1\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/WearableDevice\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"value\": \"HiGHmed-Test\"\r\n              }\r\n            ],\r\n            \"manufacturer\": \"Apple Inc.\",\r\n            \"deviceName\": [\r\n              {\r\n                \"name\": \"Watch6,4\",\r\n                \"type\": \"model-name\"\r\n              }\r\n            ],\r\n            \"version\": [\r\n              {\r\n                \"value\": \"8.5.1\"\r\n              }\r\n            ]\r\n          },\r\n          {\r\n            \"resourceType\": \"Patient\",\r\n            \"id\": \"2\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/MedpowerPatient\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"system\": \"urn:ietf:rfc:4122\",\r\n                \"value\": \"{{patientId}}\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"status\": \"final\",\r\n        \"category\": [\r\n          {\r\n            \"coding\": [\r\n              {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                \"code\": \"vital-signs\",\r\n                \"display\": \"Vital Signs\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"code\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"76477-9\",\r\n              \"display\": \"Heart rate by Noninvasive\"\r\n            }\r\n          ],\r\n          \"text\": \"Discrete Heart Rate\"\r\n        },\r\n        \"subject\": {\r\n          \"reference\": \"#2\"\r\n        },\r\n        \"effectiveDateTime\": \"2022-05-05T09:41:49Z\",\r\n        \"device\": {\r\n          \"reference\": \"#1\"\r\n        },\r\n        \"component\": [\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://loinc.org\",\r\n                  \"code\": \"76477-9\",\r\n                  \"display\": \"Heart rate by Noninvasive\"\r\n                }\r\n              ],\r\n              \"text\": \"Discrete Heart Rate\"\r\n            },\r\n            \"valueQuantity\": {\r\n              \"value\": 69.0,\r\n              \"unit\": \"bpm\",\r\n              \"system\": \"http://unitsofmeasure.org\",\r\n              \"code\": \"{beats}/min\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UCC Daily Survey",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Bundle\",\r\n  \"meta\": {\r\n    \"lastUpdated\": \"2022-05-06T13:14:06.387+00:00\",\r\n    \"profile\": [\r\n      \"https://example.org/fhir/StructureDefinition/DailySurveyBundle\"\r\n    ]\r\n  },\r\n  \"identifier\": {\r\n    \"system\": \"urn:ietf:rfc:3986\",\r\n    \"value\": \"urn:uuid:507032b8-233e-40c1-907f-43edeefd7c73\"\r\n  },\r\n  \"type\": \"document\",\r\n  \"timestamp\": \"2022-05-06T13:14:06.387+00:00\",\r\n  \"entry\": [\r\n    {\r\n      \"fullUrl\": \"urn:uuid:920b4ec3-c31f-462f-9973-ece8b636e434\",\r\n      \"resource\": {\r\n        \"resourceType\": \"Composition\",\r\n        \"meta\": {\r\n          \"profile\": [\r\n            \"https://example.org/fhir/StructureDefinition/DailySurveyComposition\"\r\n          ]\r\n        },\r\n        \"contained\": [\r\n          {\r\n            \"resourceType\": \"Patient\",\r\n            \"id\": \"1\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/MedpowerPatient\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"system\": \"urn:ietf:rfc:4122\",\r\n                \"value\": \"{{patientId}}\"\r\n              }\r\n            ]\r\n          },\r\n          {\r\n            \"resourceType\": \"Device\",\r\n            \"id\": \"SURVEY\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/SurveyDevice\"\r\n              ]\r\n            }\r\n          }\r\n        ],\r\n        \"status\": \"final\",\r\n        \"type\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"64296-7\",\r\n              \"display\": \"Personal health monitoring report Automated\"\r\n            }\r\n          ]\r\n        },\r\n        \"subject\": {\r\n          \"reference\": \"#1\"\r\n        },\r\n        \"date\": \"2022-05-06T13:14:06+00:00\",\r\n        \"author\": [\r\n          {\r\n            \"reference\": \"#SURVEY\"\r\n          }\r\n        ],\r\n        \"title\": \"Vital Signs Section\",\r\n        \"section\": [\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                  \"code\": \"vital-signs\",\r\n                  \"display\": \"Vital Signs\"\r\n                }\r\n              ]\r\n            },\r\n            \"entry\": [\r\n              {\r\n                \"reference\": \"urn:uuid:01G2CR31719D5TD6X533GVTB69\"\r\n              },\r\n              {\r\n                \"reference\": \"urn:uuid:01G2CR31713P90FWR5WSDPK8J7\"\r\n              },\r\n              {\r\n                \"reference\": \"urn:uuid:01G2CR3171N7FPZXCVMMM8VKGV\"\r\n              }\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    {\r\n      \"fullUrl\": \"urn:uuid:01G2CR31719D5TD6X533GVTB69\",\r\n      \"resource\": {\r\n        \"resourceType\": \"Observation\",\r\n        \"id\": \"01G2CR31719D5TD6X533GVTB69\",\r\n        \"meta\": {\r\n          \"profile\": [\r\n            \"https://example.org/fhir/StructureDefinition/DailySurveyObservation\"\r\n          ]\r\n        },\r\n        \"contained\": [\r\n          {\r\n            \"resourceType\": \"Device\",\r\n            \"id\": \"SURVEY\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/SurveyDevice\"\r\n              ]\r\n            }\r\n          },\r\n          {\r\n            \"resourceType\": \"Patient\",\r\n            \"id\": \"1\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/MedpowerPatient\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"system\": \"urn:ietf:rfc:4122\",\r\n                \"value\": \"{{patientId}}\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"status\": \"final\",\r\n        \"category\": [\r\n          {\r\n            \"coding\": [\r\n              {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                \"code\": \"vital-signs\",\r\n                \"display\": \"Vital Signs\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"code\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"3141-9\"\r\n            }\r\n          ]\r\n        },\r\n        \"subject\": {\r\n          \"reference\": \"#1\"\r\n        },\r\n        \"effectiveDateTime\": \"2022-05-06T13:14:03Z\",\r\n        \"method\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://snomed.info/sct\",\r\n              \"code\": \"362943005\",\r\n              \"display\": \"Manual method\"\r\n            }\r\n          ]\r\n        },\r\n        \"device\": {\r\n          \"reference\": \"#SURVEY\"\r\n        },\r\n        \"component\": [\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://loinc.org\",\r\n                  \"code\": \"3141-9\"\r\n                }\r\n              ]\r\n            },\r\n            \"valueQuantity\": {\r\n              \"value\": 123.0,\r\n              \"unit\": \"kg\",\r\n              \"system\": \"http://unitsofmeasure.org\",\r\n              \"code\": \"kg\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    {\r\n      \"fullUrl\": \"urn:uuid:01G2CR31713P90FWR5WSDPK8J7\",\r\n      \"resource\": {\r\n        \"resourceType\": \"Observation\",\r\n        \"id\": \"01G2CR31713P90FWR5WSDPK8J7\",\r\n        \"meta\": {\r\n          \"profile\": [\r\n            \"https://example.org/fhir/StructureDefinition/DailySurveyObservation\"\r\n          ]\r\n        },\r\n        \"contained\": [\r\n          {\r\n            \"resourceType\": \"Device\",\r\n            \"id\": \"SURVEY\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/SurveyDevice\"\r\n              ]\r\n            }\r\n          },\r\n          {\r\n            \"resourceType\": \"Patient\",\r\n            \"id\": \"1\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/MedpowerPatient\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"system\": \"urn:ietf:rfc:4122\",\r\n                \"value\": \"{{patientId}}\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"status\": \"final\",\r\n        \"category\": [\r\n          {\r\n            \"coding\": [\r\n              {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                \"code\": \"vital-signs\",\r\n                \"display\": \"Vital Signs\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"code\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"55284-4\"\r\n            }\r\n          ]\r\n        },\r\n        \"subject\": {\r\n          \"reference\": \"#1\"\r\n        },\r\n        \"effectiveDateTime\": \"2022-05-06T13:14:03Z\",\r\n        \"method\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://snomed.info/sct\",\r\n              \"code\": \"362943005\",\r\n              \"display\": \"Manual method\"\r\n            }\r\n          ]\r\n        },\r\n        \"device\": {\r\n          \"reference\": \"#SURVEY\"\r\n        },\r\n        \"component\": [\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://loinc.org\",\r\n                  \"code\": \"8480-6\"\r\n                }\r\n              ]\r\n            },\r\n            \"valueQuantity\": {\r\n              \"value\": 123.0,\r\n              \"unit\": \"mmHg\",\r\n              \"system\": \"http://unitsofmeasure.org\",\r\n              \"code\": \"mm[Hg]\"\r\n            }\r\n          },\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://loinc.org\",\r\n                  \"code\": \"8462-4\"\r\n                }\r\n              ]\r\n            },\r\n            \"valueQuantity\": {\r\n              \"value\": 89.0,\r\n              \"unit\": \"mmHg\",\r\n              \"system\": \"http://unitsofmeasure.org\",\r\n              \"code\": \"mm[Hg]\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    {\r\n      \"fullUrl\": \"urn:uuid:01G2CR3171N7FPZXCVMMM8VKGV\",\r\n      \"resource\": {\r\n        \"resourceType\": \"Observation\",\r\n        \"id\": \"01G2CR3171N7FPZXCVMMM8VKGV\",\r\n        \"meta\": {\r\n          \"profile\": [\r\n            \"https://example.org/fhir/StructureDefinition/DailySurveyObservation\"\r\n          ]\r\n        },\r\n        \"contained\": [\r\n          {\r\n            \"resourceType\": \"Device\",\r\n            \"id\": \"SURVEY\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/SurveyDevice\"\r\n              ]\r\n            }\r\n          },\r\n          {\r\n            \"resourceType\": \"Patient\",\r\n            \"id\": \"1\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/MedpowerPatient\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"system\": \"urn:ietf:rfc:4122\",\r\n                \"value\": \"{{patientId}}\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"status\": \"final\",\r\n        \"category\": [\r\n          {\r\n            \"coding\": [\r\n              {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                \"code\": \"vital-signs\",\r\n                \"display\": \"Vital Signs\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"code\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"8867-4\"\r\n            }\r\n          ]\r\n        },\r\n        \"subject\": {\r\n          \"reference\": \"#1\"\r\n        },\r\n        \"effectiveDateTime\": \"2022-05-06T13:14:03Z\",\r\n        \"method\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://snomed.info/sct\",\r\n              \"code\": \"362943005\",\r\n              \"display\": \"Manual method\"\r\n            }\r\n          ]\r\n        },\r\n        \"device\": {\r\n          \"reference\": \"#SURVEY\"\r\n        },\r\n        \"component\": [\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://loinc.org\",\r\n                  \"code\": \"8867-4\"\r\n                }\r\n              ]\r\n            },\r\n            \"valueQuantity\": {\r\n              \"value\": 100.0,\r\n              \"unit\": \"bpm\",\r\n              \"system\": \"http://unitsofmeasure.org\",\r\n              \"code\": \"{beats}/min\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/fhir",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"fhir"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UCC_SensorDaten Steps",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"resourceType\": \"Bundle\",\r\n  \"meta\": {\r\n    \"lastUpdated\": \"2022-05-06T13:13:54.005+00:00\",\r\n    \"profile\": [\r\n      \"https://example.org/fhir/StructureDefinition/ActivityBundle\"\r\n    ]\r\n  },\r\n  \"identifier\": {\r\n    \"system\": \"urn:ietf:rfc:3986\",\r\n    \"value\": \"urn:uuid:e373c6b6-d2de-4743-9b23-be3a2e28b055\"\r\n  },\r\n  \"type\": \"document\",\r\n  \"timestamp\": \"2022-05-06T13:13:54.005+00:00\",\r\n  \"entry\": [\r\n    {\r\n      \"fullUrl\": \"urn:uuid:925b5d8c-ca24-4bad-b3eb-e44e911e2d61\",\r\n      \"resource\": {\r\n        \"resourceType\": \"Composition\",\r\n        \"meta\": {\r\n          \"profile\": [\r\n            \"https://example.org/fhir/StructureDefinition/ActivityComposition\"\r\n          ]\r\n        },\r\n        \"contained\": [\r\n          {\r\n            \"resourceType\": \"Patient\",\r\n            \"id\": \"2\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/MedpowerPatient\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"system\": \"urn:ietf:rfc:4122\",\r\n                \"value\": \"{{patientId}}\"\r\n              }\r\n            ]\r\n          },\r\n          {\r\n            \"resourceType\": \"Device\",\r\n            \"id\": \"1\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/WearableDevice\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"value\": \"HiGHmed-Test\"\r\n              }\r\n            ],\r\n            \"manufacturer\": \"Apple Inc.\",\r\n            \"deviceName\": [\r\n              {\r\n                \"name\": \"Watch6,4\",\r\n                \"type\": \"model-name\"\r\n              }\r\n            ],\r\n            \"version\": [\r\n              {\r\n                \"value\": \"8.5.1\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"status\": \"final\",\r\n        \"type\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"64296-7\",\r\n              \"display\": \"Personal health monitoring report Automated\"\r\n            }\r\n          ]\r\n        },\r\n        \"subject\": {\r\n          \"reference\": \"#2\"\r\n        },\r\n        \"date\": \"2022-05-06T13:13:54+00:00\",\r\n        \"author\": [\r\n          {\r\n            \"reference\": \"#1\"\r\n          }\r\n        ],\r\n        \"title\": \"Physical Activity Section\",\r\n        \"section\": [\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                  \"code\": \"activity\",\r\n                  \"display\": \"Activity\"\r\n                }\r\n              ],\r\n              \"text\": \"Activity\"\r\n            },\r\n            \"entry\": [\r\n              {\r\n                \"reference\": \"urn:uuid:4ec8fb45-01eb-476a-a000-10b9d514d806\"\r\n              },\r\n              {\r\n                \"reference\": \"urn:uuid:d2755bec-ea52-4134-8258-4de9d4162a22\"\r\n              }\r\n            ]\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    {\r\n      \"fullUrl\": \"urn:uuid:4ec8fb45-01eb-476a-a000-10b9d514d806\",\r\n      \"resource\": {\r\n        \"resourceType\": \"Observation\",\r\n        \"id\": \"4ec8fb45-01eb-476a-a000-10b9d514d806\",\r\n        \"meta\": {\r\n          \"profile\": [\r\n            \"https://example.org/fhir/StructureDefinition/StepsObservation\"\r\n          ]\r\n        },\r\n        \"contained\": [\r\n          {\r\n            \"resourceType\": \"Device\",\r\n            \"id\": \"1\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/WearableDevice\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"value\": \"HiGHmed-Test\"\r\n              }\r\n            ],\r\n            \"manufacturer\": \"Apple Inc.\",\r\n            \"deviceName\": [\r\n              {\r\n                \"name\": \"Watch6,4\",\r\n                \"type\": \"model-name\"\r\n              }\r\n            ],\r\n            \"version\": [\r\n              {\r\n                \"value\": \"8.5.1\"\r\n              }\r\n            ]\r\n          },\r\n          {\r\n            \"resourceType\": \"Patient\",\r\n            \"id\": \"2\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/MedpowerPatient\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"system\": \"urn:ietf:rfc:4122\",\r\n                \"value\": \"{{patientId}}\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"status\": \"final\",\r\n        \"category\": [\r\n          {\r\n            \"coding\": [\r\n              {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                \"code\": \"activity\",\r\n                \"display\": \"Activity\"\r\n              }\r\n            ],\r\n            \"text\": \"Activity\"\r\n          }\r\n        ],\r\n        \"code\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"55423-8\",\r\n              \"display\": \"Number of steps in unspecified time Pedometer\"\r\n            }\r\n          ],\r\n          \"text\": \"Number of Steps\"\r\n        },\r\n        \"subject\": {\r\n          \"reference\": \"#2\"\r\n        },\r\n        \"effectivePeriod\": {\r\n          \"start\": \"2022-05-04T22:08:33Z\",\r\n          \"end\": \"2022-05-04T22:12:48Z\"\r\n        },\r\n        \"note\": [\r\n          {\r\n            \"text\": \"{\\\"type\\\":\\\"ADDITIONAL_DEVICE\\\",\\\"device_id\\\":\\\"HiGHmed-Test_Apple Inc._iPhone13,2_15.4.1\\\",\\\"manufacturer\\\":\\\"Apple Inc.\\\",\\\"deviceName\\\":\\\"iPhone13,2\\\",\\\"version\\\":\\\"15.4.1\\\"}\"\r\n          }\r\n        ],\r\n        \"method\": {\r\n          \"text\": \"Measurement calculated via Apple Health Kit algorithm\"\r\n        },\r\n        \"device\": {\r\n          \"reference\": \"#1\"\r\n        },\r\n        \"component\": [\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://loinc.org\",\r\n                  \"code\": \"55423-8\",\r\n                  \"display\": \"Number of steps in unspecified time Pedometer\"\r\n                }\r\n              ],\r\n              \"text\": \"Number of Steps\"\r\n            },\r\n            \"valueQuantity\": {\r\n              \"value\": 83.0,\r\n              \"unit\": \"steps\",\r\n              \"system\": \"http://unitsofmeasure.org\",\r\n              \"code\": \"{steps}\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    {\r\n      \"fullUrl\": \"urn:uuid:d2755bec-ea52-4134-8258-4de9d4162a22\",\r\n      \"resource\": {\r\n        \"resourceType\": \"Observation\",\r\n        \"id\": \"d2755bec-ea52-4134-8258-4de9d4162a22\",\r\n        \"meta\": {\r\n          \"profile\": [\r\n            \"https://example.org/fhir/StructureDefinition/StepsObservation\"\r\n          ]\r\n        },\r\n        \"contained\": [\r\n          {\r\n            \"resourceType\": \"Device\",\r\n            \"id\": \"1\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/WearableDevice\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"value\": \"HiGHmed-Test\"\r\n              }\r\n            ],\r\n            \"manufacturer\": \"Apple Inc.\",\r\n            \"deviceName\": [\r\n              {\r\n                \"name\": \"Watch6,4\",\r\n                \"type\": \"model-name\"\r\n              }\r\n            ],\r\n            \"version\": [\r\n              {\r\n                \"value\": \"8.5.1\"\r\n              }\r\n            ]\r\n          },\r\n          {\r\n            \"resourceType\": \"Patient\",\r\n            \"id\": \"2\",\r\n            \"meta\": {\r\n              \"profile\": [\r\n                \"https://example.org/fhir/StructureDefinition/MedpowerPatient\"\r\n              ]\r\n            },\r\n            \"identifier\": [\r\n              {\r\n                \"system\": \"urn:ietf:rfc:4122\",\r\n                \"value\": \"{{patientId}}\"\r\n              }\r\n            ]\r\n          }\r\n        ],\r\n        \"status\": \"final\",\r\n        \"category\": [\r\n          {\r\n            \"coding\": [\r\n              {\r\n                \"system\": \"http://terminology.hl7.org/CodeSystem/observation-category\",\r\n                \"code\": \"activity\",\r\n                \"display\": \"Activity\"\r\n              }\r\n            ],\r\n            \"text\": \"Activity\"\r\n          }\r\n        ],\r\n        \"code\": {\r\n          \"coding\": [\r\n            {\r\n              \"system\": \"http://loinc.org\",\r\n              \"code\": \"55423-8\",\r\n              \"display\": \"Number of steps in unspecified time Pedometer\"\r\n            }\r\n          ],\r\n          \"text\": \"Number of Steps\"\r\n        },\r\n        \"subject\": {\r\n          \"reference\": \"#2\"\r\n        },\r\n        \"note\": [\r\n          {\r\n            \"text\": \"{\\\"type\\\":\\\"ADDITIONAL_DEVICE\\\",\\\"device_id\\\":\\\"HiGHmed-Test_Apple Inc._iPhone13,2_15.4.1\\\",\\\"manufacturer\\\":\\\"Apple Inc.\\\",\\\"deviceName\\\":\\\"iPhone13,2\\\",\\\"version\\\":\\\"15.4.1\\\"}\"\r\n          }\r\n        ],\r\n        \"method\": {\r\n          \"text\": \"Measurement calculated via Apple Health Kit algorithm\"\r\n        },\r\n        \"device\": {\r\n          \"reference\": \"#1\"\r\n        },\r\n        \"component\": [\r\n          {\r\n            \"code\": {\r\n              \"coding\": [\r\n                {\r\n                  \"system\": \"http://loinc.org\",\r\n                  \"code\": \"55423-8\",\r\n                  \"display\": \"Number of steps in unspecified time Pedometer\"\r\n                }\r\n              ],\r\n              \"text\": \"Number of Steps\"\r\n            },\r\n            \"valueQuantity\": {\r\n              \"value\": 38.0,\r\n              \"unit\": \"steps\",\r\n              \"system\": \"http://unitsofmeasure.org\",\r\n              \"code\": \"{steps}\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  ]\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -399,7 +510,7 @@
 										},
 										{
 											"key": "subject.identifier",
-											"value": null,
+											"value": "",
 											"disabled": true
 										}
 									]
@@ -527,132 +638,132 @@
 										},
 										{
 											"key": "_profile",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_security",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_tag",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_content",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_text",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_filter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "abatement-age",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "abatement-date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "abatement-string",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "asserter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "body-site",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "category",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "clinical-status",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "code",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "encounter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "evidence",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "evidence-detail",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "identifier",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "onset-age",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "onset-date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "onset-info",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "patient",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "recorded-date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "severity",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "stage",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -1126,77 +1237,77 @@
 										},
 										{
 											"key": "_language",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_profile",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_security",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_tag",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_content",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_text",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_filter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "based-on",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "category",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "code",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "conclusion",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "encounter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "identifier",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -1206,32 +1317,32 @@
 										},
 										{
 											"key": "media",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "patient",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "performer",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "result",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "results-interpreter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "specimen",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -1241,7 +1352,7 @@
 										},
 										{
 											"key": "subject",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -1430,77 +1541,77 @@
 										},
 										{
 											"key": "_language",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_profile",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_security",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_tag",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_content",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_text",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_filter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "identifier",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "location",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "lot-number",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "manufacturer",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "patient",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "performer",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -1510,22 +1621,22 @@
 										},
 										{
 											"key": "reaction-date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "reason-code",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "reason-reference",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "series",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -1534,7 +1645,7 @@
 										},
 										{
 											"key": "status-reason",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -1544,7 +1655,7 @@
 										},
 										{
 											"key": "vaccine-code",
-											"value": null,
+											"value": "",
 											"disabled": true
 										}
 									]
@@ -1885,77 +1996,77 @@
 										},
 										{
 											"key": "_language",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_profile",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_security",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_tag",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_content",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_text",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_filter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "based-on",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "category",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "code",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "conclusion",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "encounter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "identifier",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -1965,27 +2076,27 @@
 										},
 										{
 											"key": "media",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "performer",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "result",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "results-interpreter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "specimen",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -1995,7 +2106,7 @@
 										},
 										{
 											"key": "subject",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -2768,27 +2879,27 @@
 										},
 										{
 											"key": "_language",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_profile",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_security",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_tag",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -2803,12 +2914,12 @@
 										},
 										{
 											"key": "_filter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "based-on",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -2823,132 +2934,132 @@
 										},
 										{
 											"key": "code-value-concept",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "code-value-date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "code-value-quantity",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "code-value-string",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "combo-code",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "combo-code-value-concept",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "combo-code-value-quantity",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "combo-data-absent-reason",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "combo-value-concept",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "combo-value-quantity",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "component-code",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "component-code-value-concept",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "component-code-value-quantity",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "component-data-absent-reason",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "component-value-concept",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "component-value-quantity",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "data-absent-reason",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "derived-from",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "device",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "encounter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "focus",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "has-member",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "identifier",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "method",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "part-of",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -2958,32 +3069,32 @@
 										},
 										{
 											"key": "performer",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "specimen",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "status",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "subject",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "value-concept",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "value-date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -2993,7 +3104,7 @@
 										},
 										{
 											"key": "value-string",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -3246,152 +3357,152 @@
 										},
 										{
 											"key": "_language",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_security",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_tag",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_content",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_text",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_filter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "active",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "address",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "address-city",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "address-country",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "address-postalcode",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "address-state",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "address-use",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "birthdate",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "death-date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "deceased",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "email",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "family",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "gender",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "general-practitioner",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "given",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "identifier",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "language",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "link",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "name",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "organization",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "phone",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "phonetic",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "telecom",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -3602,117 +3713,117 @@
 										},
 										{
 											"key": "_language",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_profile",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_security",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_tag",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_content",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_text",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_filter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "based-on",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "category",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "encounter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "identifier",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "instantiates-canonical",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "instantiates-uri",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "location",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "part-of",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "patient",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "performer",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "reason-code",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "reason-reference",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "status",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "subject",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -3947,77 +4058,77 @@
 										},
 										{
 											"key": "_source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_security",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_tag",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_content",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_text",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_filter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "author",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "authored",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "based-on",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "encounter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "identifier",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "part-of",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "questionnaire",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "status",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -4310,77 +4421,77 @@
 										},
 										{
 											"key": "_language",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_profile",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_source",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_security",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_tag",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_content",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_text",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "_filter",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "identifier",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "location",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "lot-number",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "manufacturer",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "patient",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "performer",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -4390,22 +4501,22 @@
 										},
 										{
 											"key": "reaction-date",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "reason-code",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "reason-reference",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
 											"key": "series",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -4414,7 +4525,7 @@
 										},
 										{
 											"key": "status-reason",
-											"value": null,
+											"value": "",
 											"disabled": true
 										},
 										{
@@ -4424,7 +4535,7 @@
 										},
 										{
 											"key": "vaccine-code",
-											"value": null,
+											"value": "",
 											"disabled": true
 										}
 									]

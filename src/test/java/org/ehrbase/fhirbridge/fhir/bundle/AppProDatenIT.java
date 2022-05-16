@@ -1,10 +1,15 @@
 package org.ehrbase.fhirbridge.fhir.bundle;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
+import org.ehrbase.fhirbridge.ehr.converter.specific.uccappdaten.UCCAppProDatenConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.UCCSensordatenCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.UCCAppPRODatenComposition;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.uccappprodatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.UCCAppSensorDatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractBundleMappingTestSetupIT;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.UCCAppProDatenBundleConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.UCCSensordatenVitalSignsBundleConverter;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Composition;
@@ -21,35 +26,34 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class SensordatenVitalSignsIT extends AbstractBundleMappingTestSetupIT {
+public class AppProDatenIT extends AbstractBundleMappingTestSetupIT {
 
 
-    public SensordatenVitalSignsIT() {
-        super("Bundle/UCCSensordaten/", Bundle.class);
+    public AppProDatenIT() {
+        super("Bundle/UCCAppPro/", Bundle.class);
     }
 
 
     @Test
-    void createUCCSensordatenVitalSigns() throws IOException {
-        create("create-ucc-vitalsigns.json");
+    void createAppProDaten() throws IOException {
+        create("create-app-pro.json");
     }
 
     @Test
-    void createMappingUCCSensordatenVitalSigns() throws IOException {
-        testMapping("create-ucc-vitalsigns.json", "paragon-create-ucc-vitalsigns.json");
+    void createMappingAppProDaten() throws IOException {
+        testMapping("create-app-pro.json", "paragon-create-app-pro.json");
     }
 
     @Override
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(UCCAppSensorDatenComposition.class, List.of("location", "feederAudit")))
+                .registerValueObject(new ValueObjectDefinition(UCCAppPRODatenComposition.class, List.of("location", "feederAudit")))
+                .registerValueObject(BlutdruckObservation.class)
+                .registerValueObject(KoerpergewichtObservation.class)
                 .registerValueObject(PulsfrequenzHerzfrequenzObservation.class)
-                .registerValueObject(MitSensorGemesseneKoerperlicheAktivitaetObservation.class)
-                .registerValueObject(PulsfrequenzHerzfrequenzRuhepulsIntervalEvent.class)
-                .registerValueObject(PulsfrequenzHerzfrequenzObservation.class)
-                .registerValueObject(PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent.class)
-                .registerValueObject(PulsfrequenzHerzfrequenzMomentaneHerzfrequenzPointEvent.class)
+                .registerValueObject(Blutdruck24StundenDurchschnittIntervalEvent.class)
+                .registerValueObject(BlutdruckBeliebigesEreignisChoice.class)
                 .build();
     }
 
@@ -57,17 +61,18 @@ public class SensordatenVitalSignsIT extends AbstractBundleMappingTestSetupIT {
     public Exception executeMappingException(String path) throws IOException {
         Bundle bundle = (Bundle) testFileLoader.loadResource(path);
         return assertThrows(Exception.class, () -> {
-            new UCCSensordatenCompositionConverter().convert(new UCCSensordatenVitalSignsBundleConverter().convert(bundle));
-        });    }
+            new UCCAppProDatenConverter().convert(new UCCAppProDatenBundleConverter().convert(bundle));
+        });
+    }
 
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         Bundle bundle = (Bundle) super.testFileLoader.loadResource(resourcePath);
-        UCCSensordatenVitalSignsBundleConverter uccSensordatenBundleConverter = new UCCSensordatenVitalSignsBundleConverter();
-        Composition composition = uccSensordatenBundleConverter.convert(bundle);
-        UCCSensordatenCompositionConverter uccSensordatenCompositionConverter = new UCCSensordatenCompositionConverter();
-        UCCAppSensorDatenComposition uccAppSensorDatenComposition = uccSensordatenCompositionConverter.convert(composition);
-        Diff diff = compareCompositions(getJavers(), paragonPath, uccAppSensorDatenComposition);
+        UCCAppProDatenBundleConverter appProDatenBundleConverter = new UCCAppProDatenBundleConverter();
+        Composition composition = appProDatenBundleConverter.convert(bundle);
+        UCCAppProDatenConverter uccAppProDatenConverter = new UCCAppProDatenConverter();
+        UCCAppPRODatenComposition uccAppPRODatenComposition = uccAppProDatenConverter.convert(composition);
+        Diff diff = compareCompositions(getJavers(), paragonPath, uccAppPRODatenComposition);
         assertEquals(diff.getChanges().size(), 0);
     }
 }
