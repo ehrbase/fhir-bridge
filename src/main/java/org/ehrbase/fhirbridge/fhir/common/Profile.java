@@ -7,6 +7,7 @@ import org.hl7.fhir.r4.model.DiagnosticReport;
 import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.Encounter;
 import org.hl7.fhir.r4.model.Immunization;
+import org.hl7.fhir.r4.model.ListResource;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
@@ -22,9 +23,11 @@ import java.util.stream.Collectors;
 
 public enum Profile {
 
+    // List resource
+    ITI65(ListResource.class, "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Comprehensive.SubmissionSet"),
+
     // DocumentReference
     DOCUMENT_REFERENCE_DEFAULT(DocumentReference.class, null),
-    ITI65(DocumentReference.class, "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Comprehensive.DocumentReference"),
 
     //Composition
     UCC_SENSORDATEN_VITALSIGNS(Composition.class, "https://example.org/fhir/StructureDefinition/VitalSignsComposition"),
