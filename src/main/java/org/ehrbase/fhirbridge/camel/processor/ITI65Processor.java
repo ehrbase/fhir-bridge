@@ -30,7 +30,7 @@ public class ITI65Processor implements Processor {
                 String fhirInstance = new String(binary.getData(), StandardCharsets.UTF_8);   //string with "UTF-8" encoding
                 IParser parser = ctx.newJsonParser();
                 Bundle bundleNew = parser.parseResource(Bundle.class, fhirInstance);
-                exchange.getIn().setBody(fhirInstance);
+                exchange.getIn().setBody(bundleNew);
                 exchange.getMessage().setHeader(CamelConstants.PROFILE, Bundles.getTransactionProfile(bundleNew));
             }
         }

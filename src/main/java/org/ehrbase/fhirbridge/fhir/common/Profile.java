@@ -1,7 +1,5 @@
 package org.ehrbase.fhirbridge.fhir.common;
 
-import org.hl7.fhir.r4.model.Binary;
-import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
@@ -23,12 +21,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum Profile {
-
-    // Bundle
-    ITI65_BUNDLE(Bundle.class, "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Comprehensive.ProvideBundle"),
-
-    // Binary
-    BINARY(Binary.class, null),
 
     // DocumentReference
     DOCUMENT_REFERENCE_DEFAULT(DocumentReference.class, null),
