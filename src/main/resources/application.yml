@@ -1,97 +1,37 @@
 # @formatter:off
+################################################################################
+#   FHIR Bridge Properties                                                     #
+################################################################################
 fhir-bridge:
-  fhir:
-    endpoints:
-      DocumentReference: false
-#  minio:
-#    url: http://localhost:9000
-#    access-key:
-#    secret-key:
-#    bucket-name:
-
-# CORS Properties
   cors:
-    allow-credentials: false
     allowed-headers: '*'
     allowed-methods: '*'
     allowed-origins: '*'
-# Debug Properties
-  debug:
-    enabled: false
-    mapping-output-directory: ${java.io.tmpdir}/mappings
-    # EHRbase Properties
-  ehrbase:
-    base-url: http://localhost:8080/ehrbase/
+  mode: openehr
+  openehr:
+    url: http://localhost:8080/ehrbase/
     security:
       type: basic
       user:
         name: myuser
         password: myPassword432
-        admin-name: myadmin
-        admin-password: mySuperAwesomePassword123
-#      oauth2:
-#        token-url:
-#        client-id:
-#        client-secret:
-    template:
-      prefix: classpath:/opt/
-      force-update: false
-# FHIR Properties
-#  fhir:
-#    jpa:
-#      allow-external-references:
-#      allow-inline-match-url-references:
-#      auto-create-placeholder-references:
-#      populate-identifier-in-auto-created-placeholder-references:
-#    validation:
-#      any-extensions-allowed:
-#      error-for-unknown-profiles:
-#      failed-on-severity:
-#      optional-identifier:
-#      terminology:
-#        mode:
-#        server-base-url:
-# HTTP Client Properties
-#  http-client:
-#    ssl:
-#      enabled:
-#      key-password:
-#      key-store:
-#      key-store-password:
-#      key-store-type:
-#      trust-store:
-#      trust-store-password:
-#      trust-store-type:
-# Security Properties
   security:
-    authentication-type: none
-#    basic:
-#      username:
-#      password:
-#    oauth2:
-#      jwk-set-uri:
-#      jws-algorithm: RS256
+    type: none
 
 ################################################################################
-# Spring Properties                                                            #
+#   Spring Boot Properties                                                     #
 ################################################################################
-
 spring:
   application:
     name: FHIR Bridge
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration
-      - org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration
-      - org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration
-      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
-      - org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration
-      - org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
-# Batch Properties
   batch:
     job:
       enabled: false
-# JPA Properties
+  main:
+    allow-bean-definition-overriding: true      # Upgrade HAPI FHIR
+    allow-circular-references: true             # Upgrade HAPI FHIR
+  cache:
+    cache-names: templateCache
   jpa:
     hibernate:
       ddl-auto: validate
@@ -104,7 +44,6 @@ spring:
       hibernate.search.backend.directory.type: local-filesystem
       hibernate.search.backend.directory.root: ${java.io.tmpdir}/fhir-bridge/lucenefiles
       hibernate.search.backend.lucene_version: lucene_current
-# Liquibase Properties
   liquibase:
     database-change-log-table: DATABASE_CHANGELOG
     database-change-log-lock-table: DATABASE_CHANGELOG_LOCK
@@ -112,14 +51,10 @@ spring:
   messages:
     basename: messages/messages
     use-code-as-default-message: true
-  main:
-    allow-bean-definition-overriding: true
-# Server Properties
 server:
   port: 8888
   servlet:
     context-path: /fhir-bridge
-# Logging Properties
 logging:
   file:
     name: ./logs/fhir-bridge.log
@@ -139,7 +74,6 @@ logging:
     org.quartz: error
     org.springframework: error
     org.springframework.boot: error
-# Management Properties
 management:
   endpoints:
     web:
@@ -157,16 +91,9 @@ management:
 ################################################################################
 # Open eHealth Integration Platform Properties                                 #
 ################################################################################
-
 ipf:
-  # Audit Properties
   atna:
     audit-enabled: false
-#    audit-repository-host:
-#    audit-repository-port:
-#    audit-source-id:
-#    audit-value-if-missing:
-  # FHIR Properties
   fhir:
     fhir-version: r4
 

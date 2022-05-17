@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 the original author or authors.
+ * Copyright 2020-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,63 +14,79 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.config.ehrbase;
+package org.ehrbase.fhirbridge.security.oauth2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * AccessTokenResponse model.
+ * @author Renaud Subiger
+ * @since 1.2
  */
 public class AccessTokenResponse {
 
-    private final String accessToken;
+    @JsonProperty("access_token")
+    private String accessToken;
 
-    private final long expiresIn;
+    @JsonProperty("expires_in")
+    private long expiresIn;
 
-    private final long refreshExpiresIn;
+    @JsonProperty("refresh_expires_in")
+    private long refreshExpiresIn;
 
-    private final String tokenType;
+    @JsonProperty("token_type")
+    private String tokenType;
 
-    private final String idToken;
+    @JsonProperty("id_token")
+    private String idToken;
 
-    private final String scope;
-
-
-    public AccessTokenResponse(@JsonProperty("access_token") String accessToken,
-                               @JsonProperty("expires_in") long expiresIn,
-                               @JsonProperty("refresh_expires_in") long refreshExpiresIn,
-                               @JsonProperty("token_type") String tokenType,
-                               @JsonProperty("id_token") String idToken,
-                               @JsonProperty("scope") String scope) {
-        this.accessToken = accessToken;
-        this.tokenType = tokenType;
-        this.expiresIn = expiresIn;
-        this.refreshExpiresIn = refreshExpiresIn;
-        this.idToken = idToken;
-        this.scope = scope;
-    }
+    @JsonProperty("scope")
+    private String scope;
 
     public String getAccessToken() {
         return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     public long getExpiresIn() {
         return expiresIn;
     }
 
+    public void setExpiresIn(long expiresIn) {
+        this.expiresIn = expiresIn;
+    }
+
     public long getRefreshExpiresIn() {
         return refreshExpiresIn;
+    }
+
+    public void setRefreshExpiresIn(long refreshExpiresIn) {
+        this.refreshExpiresIn = refreshExpiresIn;
     }
 
     public String getTokenType() {
         return tokenType;
     }
 
+    public void setTokenType(String tokenType) {
+        this.tokenType = tokenType;
+    }
+
     public String getIdToken() {
         return idToken;
     }
 
+    public void setIdToken(String idToken) {
+        this.idToken = idToken;
+    }
+
     public String getScope() {
         return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.ehr.web;
+package org.ehrbase.fhirbridge.openehr.web;
 
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rm.ehr.EhrStatus;

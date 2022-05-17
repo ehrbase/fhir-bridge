@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 the original author or authors.
+ * Copyright 2020-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-
-package org.ehrbase.fhirbridge.config.ehrbase;
+package org.ehrbase.fhirbridge.security.oauth2;
 
 import org.apache.http.HttpException;
 import org.apache.http.HttpHeaders;
@@ -26,9 +25,8 @@ import org.apache.http.protocol.HttpContext;
 import java.io.IOException;
 
 /**
- * {@link HttpRequestInterceptor} implementation that handles Authorization header using Bearer token.
- *
- * @since 1.2.0
+ * @author Renaud Subiger
+ * @since 1.2
  */
 public class TokenAuthenticationInterceptor implements HttpRequestInterceptor {
 

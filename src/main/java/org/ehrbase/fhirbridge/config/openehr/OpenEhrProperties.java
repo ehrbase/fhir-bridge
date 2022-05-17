@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 the original author or authors.
+ * Copyright 2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,86 +14,73 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.config.ehrbase;
+package org.ehrbase.fhirbridge.config.openehr;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * {@link ConfigurationProperties ConfigurationProperties} to configure EHRbase.
+ * {@link ConfigurationProperties} to configure openEHR.
  *
- * @since 1.0.0
+ * @author Renaud Subiger
+ * @since 1.6
  */
-@ConfigurationProperties(prefix = "fhir-bridge.ehrbase")
-public class EhrbaseProperties {
+@ConfigurationProperties(prefix = "fhir-bridge.openehr")
+public class OpenEhrProperties {
 
-    private String baseUrl;
+    private String url;
 
     private final Security security = new Security();
 
-    private final Template template = new Template();
+    private boolean updateTemplatesOnStartup = false;
 
-    public String getBaseUrl() {
-        return baseUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Security getSecurity() {
         return security;
     }
 
-    public Template getTemplate() {
-        return template;
+    public boolean isUpdateTemplatesOnStartup() {
+        return updateTemplatesOnStartup;
+    }
+
+    public void setUpdateTemplatesOnStartup(boolean updateTemplatesOnStartup) {
+        this.updateTemplatesOnStartup = updateTemplatesOnStartup;
     }
 
     public static class Security {
 
-        private AuthorizationType type;
+        private SecurityType type = SecurityType.NONE;
 
-        private final User user = new User();
-
-        private final OAuth2 oAuth2 = new OAuth2();
-
-        public AuthorizationType getType() {
+        public SecurityType getType() {
             return type;
         }
 
-        public void setType(AuthorizationType type) {
+        public void setType(SecurityType type) {
             this.type = type;
         }
+
+        private final User user = new User();
+
+        private final OAuth2 oauth2 = new OAuth2();
 
         public User getUser() {
             return user;
         }
 
-        public OAuth2 getOAuth2() {
-            return oAuth2;
+        public OAuth2 getOauth2() {
+            return oauth2;
         }
     }
 
-    public static class Template {
+    public enum SecurityType {
 
-        private String prefix;
-
-        private boolean forceUpdate;
-
-        public String getPrefix() {
-            return prefix;
-        }
-
-        public void setPrefix(String prefix) {
-            this.prefix = prefix;
-        }
-
-        public boolean isForceUpdate() {
-            return forceUpdate;
-        }
-
-        public void setForceUpdate(boolean forceUpdate) {
-            this.forceUpdate = forceUpdate;
-        }
+        NONE, BASIC, OAUTH2
     }
 
     public static class User {
@@ -101,10 +88,6 @@ public class EhrbaseProperties {
         private String name;
 
         private String password;
-
-        private String adminName;
-
-        private String adminPassword;
 
         public String getName() {
             return name;
@@ -121,24 +104,7 @@ public class EhrbaseProperties {
         public void setPassword(String password) {
             this.password = password;
         }
-
-        public String getAdminName() {
-            return adminName;
-        }
-
-        public void setAdminName(String adminName) {
-            this.adminName = adminName;
-        }
-
-        public String getAdminPassword() {
-            return adminPassword;
-        }
-
-        public void setAdminPassword(String adminPassword) {
-            this.adminPassword = adminPassword;
-        }
     }
-
 
     public static class OAuth2 {
 
@@ -171,10 +137,5 @@ public class EhrbaseProperties {
         public void setClientSecret(String clientSecret) {
             this.clientSecret = clientSecret;
         }
-    }
-
-    public enum AuthorizationType {
-
-        NONE, BASIC, OAUTH2
     }
 }
