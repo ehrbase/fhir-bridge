@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.fhir;
 
+import ca.uhn.fhir.parser.DataFormatException;
 import ca.uhn.fhir.parser.IParser;
 import org.hl7.fhir.r4.model.Bundle;
 import java.io.IOException;
@@ -16,7 +17,15 @@ public abstract class AbstractBundleMappingTestSetupIT extends AbstractMappingTe
     protected void create(String path) throws IOException {
         String resource = testFileLoader.loadResourceToString(path);
         String outcome = client.transaction().withBundle(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID)).execute();
-        IParser parser = context.newJsonParser();
+        String fileEnding = path.substring(path.length() - 4);
+        IParser parser;
+        if (fileEnding.equals(".xml")) {
+            parser = context.newXmlParser();
+        } else if (fileEnding.equals("json")) {
+            parser = context.newJsonParser();
+        } else {
+            throw new DataFormatException("File ending has to be either .json or .xml");
+        }
         Bundle bundle = parser.parseResource(Bundle.class, outcome);
 
         assertNotNull(bundle.getId());

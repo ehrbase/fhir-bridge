@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.parser.DataFormatException;
 import ca.uhn.fhir.parser.IParser;
 import org.apache.commons.io.IOUtils;
 import org.hl7.fhir.instance.model.api.IBaseResource;
@@ -23,7 +24,15 @@ public class TestFileLoader {
 
     public IBaseResource loadResource(String path) throws IOException {
         String resource = IOUtils.toString(new ClassPathResource(directory + path).getInputStream(), StandardCharsets.UTF_8);
-        IParser parser = context.newJsonParser();
+        String fileEnding = path.substring(path.length() - 4);
+        IParser parser;
+        if (fileEnding.equals(".xml")) {
+            parser = context.newXmlParser();
+        } else if (fileEnding.equals("json")) {
+            parser = context.newJsonParser();
+        } else {
+            throw new DataFormatException("File ending has to be either .json or .xml");
+        }
         return parser.parseResource(clazz, resource);
     }
 

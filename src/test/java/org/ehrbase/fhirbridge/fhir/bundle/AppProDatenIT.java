@@ -40,6 +40,11 @@ public class AppProDatenIT extends AbstractBundleMappingTestSetupIT {
     }
 
     @Test
+    void createAppProDatenITI65() throws IOException {
+        create("iti65-create-app-pro.xml");
+    }
+
+    @Test
     void createMappingAppProDaten() throws IOException {
         testMapping("create-app-pro.json", "paragon-create-app-pro.json");
     }

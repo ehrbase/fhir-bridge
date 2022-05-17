@@ -35,6 +35,11 @@ public class SensordatenVitalSignsIT extends AbstractBundleMappingTestSetupIT {
     }
 
     @Test
+    void createUCCSensordatenVitalSignsITI65() throws IOException {
+        create("iti65-create-ucc-vitalsigns.xml");
+    }
+
+    @Test
     void createMappingUCCSensordatenVitalSigns() throws IOException {
         testMapping("create-ucc-vitalsigns.json", "paragon-create-ucc-vitalsigns.json");
     }

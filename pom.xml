@@ -273,6 +273,11 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.openehealth.ipf.platform-camel</groupId>
+            <artifactId>ipf-platform-camel-ihe-fhir-r4-mhd</artifactId>
+            <version>${ipf.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.ehrbase.openehr.sdk</groupId>
             <artifactId>client</artifactId>
             <version>${ehrbase-sdk.version}</version>
