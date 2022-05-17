@@ -60,6 +60,7 @@ public class TransactionRouteBuilder extends AbstractRouteBuilder {
                     .choice()
                         .when(header(CamelConstants.PROFILE).isEqualTo(Optional.empty()))
                             .to("direct:provideResource")
+                            .end()
                 .choice()
                     .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
                         .bean(AntiBodyPanelBundleValidator.class)
