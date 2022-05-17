@@ -45,8 +45,8 @@ public class Iti41Converter implements Converter<Object, ProvideAndRegisterDocum
         List<Document > documents = getDocuments(composition);
         List< Association > associations = getAssociations();
         ProvideAndRegisterDocumentSetBuilder provideAndRegisterDocumentSetBuilder = new ProvideAndRegisterDocumentSetBuilder(true, new SubmissionSet());
-        // TODO: Implement conversion logic
-        return provideAndRegisterDocumentSetBuilder.doBuild(submissionSet, folders, documents, associations);
+        ProvideAndRegisterDocumentSet provideAndRegisterDocumentSet = provideAndRegisterDocumentSetBuilder.doBuild(submissionSet, folders, documents, associations);
+        return provideAndRegisterDocumentSet;
 
     }
 
@@ -76,18 +76,4 @@ public class Iti41Converter implements Converter<Object, ProvideAndRegisterDocum
         Folder folder = new Folder();
         return List.of(folder);
     }
-
-
-    /*
-         .log('Transform to RegisterDocumentSetRequest')
-            // Transform to ITI-42 RegisterDocumentSet Request
-            .transform().body({entry -> supportiveBuilderWith(entry.req.submissionSet)
-                                            .withDocuments(entry.req.documents*.documentEntry)
-                                            .withFolders(entry.req.folders)
-                                            .withAssociations(entry.req.associations).build()} as Function)
-            .setHeader("port", {"" + getPort()}  as Supplier)
-            .log('Send to ITI-42 endpoint: xds-iti42://localhost:${header.port}/xds-iti42')
-            .toD('xds-iti42://localhost:${header.port}/xds-iti42')
-     */
-
 }
