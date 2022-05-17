@@ -17,13 +17,19 @@
 package org.ehrbase.fhirbridge.ihe.xds;
 
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
+import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLProvideAndRegisterDocumentSetRequest;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.builder.ProvideAndRegisterDocumentSetBuilder;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 
 import javax.activation.DataHandler;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -44,8 +50,10 @@ public class Iti41Converter implements Converter<CompositionEntity, ProvideAndRe
         return provideAndRegisterDocumentSetBuilder.doBuild(submissionSet, folders, documents, associations);
 
     }
+
     private SubmissionSet getSumissionSet() {
         SubmissionSet submissionSet = new SubmissionSet();
+        submissionSet.setSubmissionTime(String.valueOf(OffsetDateTime.now()));
         return submissionSet;
     }
 
