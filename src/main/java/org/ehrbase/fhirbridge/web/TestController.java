@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/test")
 public class TestController {
-
     private final ProducerTemplate producerTemplate;
 
     public TestController(ProducerTemplate producerTemplate) {

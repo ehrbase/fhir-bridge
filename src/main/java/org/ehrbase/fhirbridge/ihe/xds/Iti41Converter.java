@@ -16,13 +16,12 @@
 
 package org.ehrbase.fhirbridge.ihe.xds;
 
-import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
-import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLProvideAndRegisterDocumentSetRequest;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.builder.ProvideAndRegisterDocumentSetBuilder;
 import org.springframework.core.convert.converter.Converter;
@@ -37,10 +36,10 @@ import java.util.List;
  * @since 1.6
  */
 // TODO: Check with @SevKohler, if the Exchange is required here. If yes, use TypeConverter from Camel
-public class Iti41Converter implements Converter<CompositionEntity, ProvideAndRegisterDocumentSet> {
+public class Iti41Converter implements Converter<Object, ProvideAndRegisterDocumentSet> {
 
     @Override
-    public ProvideAndRegisterDocumentSet convert(@NonNull CompositionEntity composition) {
+    public ProvideAndRegisterDocumentSet convert(@NonNull Object composition) {
         SubmissionSet submissionSet = getSumissionSet();
         List<Folder> folders = getFolders();
         List<Document > documents = getDocuments(composition);
@@ -53,7 +52,9 @@ public class Iti41Converter implements Converter<CompositionEntity, ProvideAndRe
 
     private SubmissionSet getSumissionSet() {
         SubmissionSet submissionSet = new SubmissionSet();
-        submissionSet.setSubmissionTime(String.valueOf(OffsetDateTime.now()));
+        Timestamp timestamp =new Timestamp();
+        timestamp.setDateTime(OffsetDateTime.now().toZonedDateTime());
+        submissionSet.setSubmissionTime(timestamp);
         return submissionSet;
     }
 
@@ -62,7 +63,7 @@ public class Iti41Converter implements Converter<CompositionEntity, ProvideAndRe
         return List.of(association);
     }
 
-    private List<Document> getDocuments(CompositionEntity source) {
+    private List<Document> getDocuments(Object source) {
         Document document = new Document();
         DataHandler dataHandler = new DataHandler(source, "application/json");
         DocumentEntry documentEntry = new DocumentEntry();
@@ -76,5 +77,17 @@ public class Iti41Converter implements Converter<CompositionEntity, ProvideAndRe
         return List.of(folder);
     }
 
+
+    /*
+         .log('Transform to RegisterDocumentSetRequest')
+            // Transform to ITI-42 RegisterDocumentSet Request
+            .transform().body({entry -> supportiveBuilderWith(entry.req.submissionSet)
+                                            .withDocuments(entry.req.documents*.documentEntry)
+                                            .withFolders(entry.req.folders)
+                                            .withAssociations(entry.req.associations).build()} as Function)
+            .setHeader("port", {"" + getPort()}  as Supplier)
+            .log('Send to ITI-42 endpoint: xds-iti42://localhost:${header.port}/xds-iti42')
+            .toD('xds-iti42://localhost:${header.port}/xds-iti42')
+     */
 
 }
