@@ -58,6 +58,7 @@ public abstract class AbstractSetupIT {
         ehrStatus.setSubject(new PartySelf(new PartyRef(new HierObjectId(PATIENT_ID), "demographic", "PERSON")));
         ehrStatus.setArchetypeNodeId("openEHR-EHR-EHR_STATUS.generic.v1");
         ehrStatus.setName(new DvText("Integration tests status"));
+        ehrStatus.setModifiable(true);
         client.ehrEndpoint().createEhr(ehrStatus);
     }
 }
