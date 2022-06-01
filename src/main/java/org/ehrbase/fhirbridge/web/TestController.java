@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/test")
 public class TestController {
+    //TEST copntroller for ITI41 is working do not use productive !
     private final ProducerTemplate producerTemplate;
 
     public TestController(ProducerTemplate producerTemplate) {
