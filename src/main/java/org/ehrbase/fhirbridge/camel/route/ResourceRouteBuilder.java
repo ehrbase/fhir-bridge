@@ -85,6 +85,7 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
         configurePatient();
         configureProcedure();
         configureQuestionnaireResponse();
+        configureComposition();
     }
 
     /**
@@ -205,4 +206,15 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
         from("questionnaire-response-find:questionnaireResponseEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
                 .process(ResourcePersistenceProcessor.BEAN_ID);
     }
+
+    /**
+     * Configures available endpoints for {@link org.hl7.fhir.r4.model.Composition} resource.
+     */
+    private void configureComposition() {
+        from("composition-provide:compositionEndpoint?fhirContext=#fhirContext")
+                .to("direct:provideResource");
+        from("composition-find:compositionEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
+                .process(ResourcePersistenceProcessor.BEAN_ID);
+    }
+
 }
