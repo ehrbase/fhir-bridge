@@ -33,14 +33,20 @@ public class SensordatenStepsIT extends AbstractBundleMappingTestSetupIT {
 
 
     @Test
-    void createUCCSensordatenVitalSigns() throws IOException {
+    void createUCCSensordatenSteps() throws IOException {
         create("create-ucc-steps.json");
     }
 
     @Test
-    void createMappingUCCSensordatenVitalSigns() throws IOException {
+    void createUCCSensordatenStepsITI65() throws IOException {
+        create("iti65-create-ucc-steps.xml");
+    }
+
+    @Test
+    void createMappingUCCSensordatenSteps() throws IOException {
         testMapping("create-ucc-steps.json", "paragon-create-ucc-steps.json");
     }
+
 
     @Override
     public Javers getJavers() {

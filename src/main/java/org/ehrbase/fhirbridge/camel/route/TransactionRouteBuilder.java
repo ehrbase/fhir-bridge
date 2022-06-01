@@ -20,6 +20,8 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.processor.BundleResponseProcessor;
+import org.ehrbase.fhirbridge.camel.processor.ITI65Processor;
+import org.ehrbase.fhirbridge.camel.processor.ProvideResourceResponseProcessor;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.AntiBodyPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.DiagnosticReportLabConverter;
@@ -37,6 +39,8 @@ import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.fhir.support.Bundles;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 /**
  * Implementation of {@link RouteBuilder} that configures the route definitions for transaction.
  *
@@ -52,30 +56,38 @@ public class TransactionRouteBuilder extends AbstractRouteBuilder {
         from("bundle-provide:consumer?fhirContext=#fhirContext")
             .setHeader(CamelConstants.PROFILE, method(Bundles.class, "getTransactionProfile"))
             .choice()
-                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
-                    .bean(AntiBodyPanelBundleValidator.class)
-                    .bean(AntiBodyPanelConverter.class, "convert")
-                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
-                    .bean(BloodGasPanelBundleValidator.class)
-                    .bean(BloodGasPanelConverter.class, "convert")
-                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
-                    .bean(DiagnosticReportLabBundleValidator.class)
-                    .bean(DiagnosticReportLabConverter.class,"convert")
-                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.VIROLOGISCHER_BEFUND))
-                    .bean(VirologischerBefundBundleValidator.class)
-                    .bean(VirologischerBefundConverter.class,"convert")
-                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_SENSORDATEN_STEPS))
-                    .bean(UCCSensorDatenValidator.class)
-                    .bean(UCCSensordatenActivityBundleConverter.class,"convert")
-                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_SENSORDATEN_VITALSIGNS))
-                    .bean(UCCSensorDatenValidator.class)
-                    .bean(UCCSensordatenVitalSignsBundleConverter.class,"convert")
-                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_APP_PRO_DATEN))
-                    .bean(UCCAppProDatenValidator.class)
-                    .bean(UCCAppProDatenBundleConverter.class,"convert")
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ITI65))
+                    .bean(ITI65Processor.class)
+                    .choice()
+                        .when(header(CamelConstants.PROFILE).isEqualTo(Optional.empty()))
+                            .to("direct:provideResource")
+                            .process(BundleResponseProcessor.BEAN_ID)
                 .otherwise()
+                .choice()
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ANTI_BODY_PANEL))
+                        .bean(AntiBodyPanelBundleValidator.class)
+                        .bean(AntiBodyPanelConverter.class, "convert")
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.BLOOD_GAS_PANEL))
+                        .bean(BloodGasPanelBundleValidator.class)
+                        .bean(BloodGasPanelConverter.class, "convert")
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.DIAGNOSTIC_REPORT_LAB))
+                        .bean(DiagnosticReportLabBundleValidator.class)
+                        .bean(DiagnosticReportLabConverter.class,"convert")
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.VIROLOGISCHER_BEFUND))
+                        .bean(VirologischerBefundBundleValidator.class)
+                        .bean(VirologischerBefundConverter.class,"convert")
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_SENSORDATEN_STEPS))
+                        .bean(UCCSensorDatenValidator.class)
+                        .bean(UCCSensordatenActivityBundleConverter.class,"convert")
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_SENSORDATEN_VITALSIGNS))
+                        .bean(UCCSensorDatenValidator.class)
+                        .bean(UCCSensordatenVitalSignsBundleConverter.class,"convert")
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Profile.UCC_APP_PRO_DATEN))
+                        .bean(UCCAppProDatenValidator.class)
+                        .bean(UCCAppProDatenBundleConverter.class,"convert")
+                    .otherwise()
                     .throwException(new UnprocessableEntityException("Unsupported transaction: provided Bundle should have a resource that " +
-                                "uses on of the following profiles: " +
+                            "uses on of the following profiles: " +
                             Profile.BLOOD_GAS_PANEL.getUri() +
                             ", " + Profile.DIAGNOSTIC_REPORT_LAB.getUri() +
                             ", " + Profile.ANTI_BODY_PANEL.getUri() +
@@ -83,8 +95,7 @@ public class TransactionRouteBuilder extends AbstractRouteBuilder {
                             ", " + Profile.UCC_SENSORDATEN_STEPS.getUri()+
                             ", " + Profile.UCC_SENSORDATEN_VITALSIGNS.getUri() +
                             ", " + Profile.UCC_APP_PRO_DATEN.getUri()
-                            ))
-
+                    ))
             .end()
             .to("direct:provideResource")
             .process(BundleResponseProcessor.BEAN_ID);

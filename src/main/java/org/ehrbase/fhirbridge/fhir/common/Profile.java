@@ -24,6 +24,7 @@ public enum Profile {
 
     // DocumentReference
     DOCUMENT_REFERENCE_DEFAULT(DocumentReference.class, null),
+    ITI65(DocumentReference.class, "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Comprehensive.DocumentReference"),
 
     //Composition
     UCC_SENSORDATEN_VITALSIGNS(Composition.class, "https://example.org/fhir/StructureDefinition/VitalSignsComposition"),
