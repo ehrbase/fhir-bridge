@@ -1,6 +1,5 @@
 {
   "resourceType": "Observation",
-  "id": "sofa-score",
   "status": "final",
   "meta": {
     "profile": [
@@ -12,14 +11,18 @@
       "coding": [
         {
           "system": "http://terminology.hl7.org/CodeSystem/observation-category",
-          "code": "survey",
-          "display": "Survey"
+          "code": "survey"
         }
       ]
     }
   ],
   "code": {
     "coding": [
+      {
+        "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/aaaaaa",
+        "code": "aaa",
+        "display": "SOFA-Scorea"
+      },
       {
         "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/ecrf-parameter-codes",
         "code": "06",
@@ -95,11 +98,11 @@
         "coding": [
           {
             "system": "https://www.netzwerk-universitaetsmedizin.de/fhir/CodeSystem/sofa-score",
-            "code": "cvs1",
-            "display": "Cardiovascular system SOFA score 1"
+            "code": "cvs0",
+            "display": "Cardiovascular system SOFA score 0"
           }
         ],
-        "text": "Mean arterial pressure (MAP) < 70 mmHg"
+        "text": "Mean arterial pressure (MAP) ≥ 70 mmHg"
       }
     },
     {
@@ -168,5 +171,6 @@
         "text": "Creatinine (mg/dl) [umol/L] (or urine output) > 5.0 [> 440] (or < 200 ml/d)"
       }
     }
-  ]
+  ],
+  "valueInteger": 15
 }

@@ -171,21 +171,6 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.meta.profile		${123}						422    	This property must be an Array, not a primitive property
 	$.meta.profile		${None}						422    	This property must be an Array, not null
 
-	# comment: the next one sets the value to an empty list/array []
-	$.meta.profile		${{ [] }}					422    	Default profile is not supported for Observation. One of the following profiles is expected: .https://.*
-
-	# comment: the next one sets value to an empty object {}
-	$.meta.profile		${{ {} }}					422    	This property must be an Array, not an object
-
-
-005 Create FiO2 (Invalid/Missing 'meta') - BUG TRACE TEST
-	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
-	[Template]			Create FiO2 with ehr reference
-	[Tags]				TODO: ADD GITHUB ISSUE    not-ready    bug
-	# NOT-READY, RETURNS --> ERROR 500
-	# comment: sets value to an array with empty object
-	$.meta.profile		${{ [{}] }}					422    	This property should contain list of strings
-
 
 006 Create FiO2 (Invalid/Missing 'code')
 	[Documentation]     1. *CREATE* new an EHR record\n\n
@@ -259,23 +244,23 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.category[0].coding[1].system    	http://foo    		422    	This element does not match any known slice defined in the profile ${profile url}
 
 
-007 Create FiO2 (Invalid/Missing 'category') - BUG TRACE TEST
-	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
-	[Template]			Create FiO2 with ehr reference
-	[Tags]				TODO: ADD GITHUB ISSUE    not-ready    bug
-	#														HTTP
-	# FIELD/PATH 						VALUE				CODE	ERROR MESSAGE
-	# comment: category:blood-gas-studies
-	$.category[0].coding[2].code      	missing    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
-	$.category[0].coding[2].code      	${EMPTY}    		422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
-	$.category[0].coding[2].code      	${None}    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
-	$.category[0].coding[2].code      	foobar    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
-	$.category[0].coding[2].code      	${123}    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
-	$.category[0].coding[2].system    	missing    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
-	$.category[0].coding[2].system    	${EMPTY}    		422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
-	$.category[0].coding[2].system    	${None}    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
-	$.category[0].coding[2].system    	http://foo bar		422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
-	$.category[0].coding[2].system    	http://foo    		422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
+#007 Create FiO2 (Invalid/Missing 'category') - BUG TRACE TEST
+#	[Documentation]		Belongs to TC 004! Remove separation when it's fixed!
+#	[Template]			Create FiO2 with ehr reference
+#	[Tags]				TODO: ADD GITHUB ISSUE    not-ready    bug
+#	#														HTTP
+#	# FIELD/PATH 						VALUE				CODE	ERROR MESSAGE
+#	# comment: category:blood-gas-studies
+#	$.category[0].coding[2].code      	missing    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
+#	$.category[0].coding[2].code      	${EMPTY}    		422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
+#	$.category[0].coding[2].code      	${None}    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
+#	$.category[0].coding[2].code      	foobar    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
+#	$.category[0].coding[2].code      	${123}    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
+#	$.category[0].coding[2].system    	missing    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
+#	$.category[0].coding[2].system    	${EMPTY}    		422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
+#	$.category[0].coding[2].system    	${None}    			422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
+#	$.category[0].coding[2].system    	http://foo bar		422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
+#	$.category[0].coding[2].system    	http://foo    		422    	Observation.category.coding:blood-gas-studies: minimum required = 1, but only found 0 .from ${profile url}
 
 
 008 Create FiO2 (Invalid/Missing 'effectiveDateTime')
