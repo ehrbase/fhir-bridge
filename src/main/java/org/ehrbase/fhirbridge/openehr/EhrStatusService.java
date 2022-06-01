@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.service;
+package org.ehrbase.fhirbridge.openehr;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import com.nedap.archie.rm.ehr.EhrStatus;
@@ -40,7 +40,7 @@ public class EhrStatusService {
     }
 
     @Async
-    public void updateEhrStatus() throws InterruptedException {
+    public void updateEhrStatus() {
         log.info("--- Start Update Process ---");
         Pageable pageable = PageRequest.of(0, 100);
         Page<PatientEhr> result = null;

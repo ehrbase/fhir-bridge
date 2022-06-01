@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.processor;
+package org.ehrbase.fhirbridge.openehr.camel;
 
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.apache.camel.Exchange;

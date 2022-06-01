@@ -21,7 +21,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.processor.BundleResponseProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ITI65Processor;
-import org.ehrbase.fhirbridge.camel.processor.ProvideResourceResponseProcessor;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.AntiBodyPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
 import org.ehrbase.fhirbridge.fhir.bundle.converter.DiagnosticReportLabConverter;
