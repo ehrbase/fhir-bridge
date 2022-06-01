@@ -5,7 +5,7 @@
       "https://www.medizininformatik-initiative.de/fhir/core/modul-prozedur/StructureDefinition/Procedure"
     ]
   },
-  "status": "completed",
+  "status": "not-done",
   "category": {
     "coding": [
       {
