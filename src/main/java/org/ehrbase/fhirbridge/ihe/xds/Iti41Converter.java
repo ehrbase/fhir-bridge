@@ -17,6 +17,7 @@
 package org.ehrbase.fhirbridge.ihe.xds;
 
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
@@ -43,11 +44,10 @@ public class Iti41Converter implements Converter<Object, ProvideAndRegisterDocum
         SubmissionSet submissionSet = getSumissionSet();
         List<Folder> folders = getFolders();
         List<Document > documents = getDocuments(composition);
-        List< Association > associations = getAssociations();
+        List<Association> associations = getAssociations();
         ProvideAndRegisterDocumentSetBuilder provideAndRegisterDocumentSetBuilder = new ProvideAndRegisterDocumentSetBuilder(true, new SubmissionSet());
         ProvideAndRegisterDocumentSet provideAndRegisterDocumentSet = provideAndRegisterDocumentSetBuilder.doBuild(submissionSet, folders, documents, associations);
         return provideAndRegisterDocumentSet;
-
     }
 
     private SubmissionSet getSumissionSet() {
@@ -55,7 +55,13 @@ public class Iti41Converter implements Converter<Object, ProvideAndRegisterDocum
         Timestamp timestamp =new Timestamp();
         timestamp.setDateTime(OffsetDateTime.now().toZonedDateTime());
         submissionSet.setSubmissionTime(timestamp);
+        submissionSet.setAuthor(getAuthor());
         return submissionSet;
+    }
+
+    private Author getAuthor() {
+        Author author = new Author();
+        return author;
     }
 
     private List<Association> getAssociations() {
@@ -77,3 +83,7 @@ public class Iti41Converter implements Converter<Object, ProvideAndRegisterDocum
         return List.of(folder);
     }
 }
+
+/*
+
+ */

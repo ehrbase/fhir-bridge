@@ -27,6 +27,7 @@ public class ITI65Processor implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         Bundle bundle = (Bundle) exchange.getIn().getBody(Resource.class);
+        setSaveInput(exchange, bundle);
         for(Bundle.BundleEntryComponent entry: bundle.getEntry()){
             if(entry.getResource().getResourceType().equals(ResourceType.Binary)){
                 Binary binary = (Binary) entry.getResource();
@@ -43,5 +44,15 @@ public class ITI65Processor implements Processor {
                 }
             }
         }
+    }
+
+    private void setSaveInput(Exchange exchange, Bundle bundle) {
+        Bundle newBundle = new Bundle();
+        for(Bundle.BundleEntryComponent entry: bundle.getEntry()){
+            if(!entry.getResource().getResourceType().equals(ResourceType.Binary)){
+                newBundle.addEntry(entry);
+            }
+        }
+        exchange.getIn().setHeader("input_bundle", newBundle);
     }
 }

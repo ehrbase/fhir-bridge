@@ -31,11 +31,12 @@ public class XdsRouteBuilder extends RouteBuilder {
         errorHandler(defaultErrorHandler().logExhaustedMessageHistory(false));
 
         from("direct:send-to-cdr")
-            .routeId("sendToXdsCdr")
-            .setProperty("fhir_resource").body()
-            .convertBodyTo(ProvideAndRegisterDocumentSet.class)
-            .to("xds-iti41://{{fhir-bridge.xds.hostname}}:{{fhir-bridge.xds.port}}{{fhir-bridge.xds.context-path}}")
-            .setBody().exchangeProperty("fhir_resource");
+                .routeId("sendToXdsCdr")
+                .setProperty("fhir_resource").body()
+                .bean(ITI41Processor.class)
+                .convertBodyTo(ProvideAndRegisterDocumentSet.class)
+                .to("xds-iti41://{{fhir-bridge.xds.hostname}}:{{fhir-bridge.xds.port}}{{fhir-bridge.xds.context-path}}")
+                .setBody().exchangeProperty("fhir_resource");
         // @formatter:on
     }
 }
