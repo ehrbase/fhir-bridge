@@ -38,10 +38,11 @@ public class XdsRouteBuilder extends RouteBuilder {
 
         from("direct:send-to-cdr")
                 .routeId("sendToXdsCdr")
+                .bean(XDSValidator.class)
                 .doTry()
-                .to("bean:fhirResourceConversionService?method=convert(${headers.CamelFhirBridgeProfile}, ${body})")
-                .doCatch(ConversionException.class)
-                .throwException(UnprocessableEntityException.class, "${exception.message}")
+                    .to("bean:fhirResourceConversionService?method=convert(${headers.CamelFhirBridgeProfile}, ${body})")
+                    .doCatch(ConversionException.class)
+                    .throwException(UnprocessableEntityException.class, "${exception.message}")
                 .end()
                 .process(exchange -> {
                     if (ObjectHelper.isNotEmpty(exchange.getIn().getHeader(CamelConstants.COMPOSITION_ID))) {

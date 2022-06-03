@@ -16,7 +16,7 @@
 
 package org.ehrbase.fhirbridge.config.ihe.xds;
 
-import org.ehrbase.fhirbridge.ihe.xds.Iti41Converter;
+import org.ehrbase.fhirbridge.ihe.xds.converter.Iti41Converter;
 import org.ehrbase.fhirbridge.ihe.xds.XdsRouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

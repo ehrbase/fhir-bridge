@@ -21,11 +21,25 @@ import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.processor.BundleResponseProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ITI65Processor;
-import org.ehrbase.fhirbridge.fhir.bundle.converter.*;
-import org.ehrbase.fhirbridge.fhir.bundle.validator.*;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.AntiBodyPanelConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.BloodGasPanelConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.DiagnosticReportLabConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.UCCAppProDatenBundleConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.UCCSensordatenActivityBundleConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.UCCSensordatenVitalSignsBundleConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.converter.VirologischerBefundConverter;
+import org.ehrbase.fhirbridge.fhir.bundle.validator.AntiBodyPanelBundleValidator;
+import org.ehrbase.fhirbridge.fhir.bundle.validator.BloodGasPanelBundleValidator;
+import org.ehrbase.fhirbridge.fhir.bundle.validator.DiagnosticReportLabBundleValidator;
+import org.ehrbase.fhirbridge.fhir.bundle.validator.Iti65BundleValidator;
+import org.ehrbase.fhirbridge.fhir.bundle.validator.UCCAppProDatenValidator;
+import org.ehrbase.fhirbridge.fhir.bundle.validator.UCCSensorDatenValidator;
+import org.ehrbase.fhirbridge.fhir.bundle.validator.VirologischerBefundBundleValidator;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.fhir.support.Bundles;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 /**
  * Implementation of {@link RouteBuilder} that configures the route definitions for transaction.
@@ -43,13 +57,17 @@ public class TransactionRouteBuilder extends AbstractRouteBuilder {
                 .setHeader(CamelConstants.PROFILE, method(Bundles.class, "getTransactionProfile"))
                 .choice()
                     .when(header(CamelConstants.PROFILE).isEqualTo(Profile.ITI65))
-                        .bean(ITI65Processor.class)
-                      /*  .choice()
-                            .when(header(CamelConstants.PROFILE).isEqualTo(Optional.empty()))
-                                .to("direct:provideResource")
-                                .process(BundleResponseProcessor.BEAN_ID)*/
-                      /*  .otherwise()
-                            .to("direct:process-bundle")*/
+                        .to("direct:processITI65")
+                .otherwise()
+                .to("direct:process-bundle");
+
+        from("direct:processITI65")
+                .bean(ITI65Processor.class)
+                .bean(Iti65BundleValidator.class)
+                .choice()
+                    .when(header(CamelConstants.PROFILE).isEqualTo(Optional.empty())) // If no Bundle is contained within MHD
+                        .to("direct:provideResource")
+                        .process(BundleResponseProcessor.BEAN_ID)
                 .otherwise()
                     .to("direct:process-bundle");
 
