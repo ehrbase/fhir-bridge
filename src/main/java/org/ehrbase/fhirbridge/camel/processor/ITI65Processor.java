@@ -7,9 +7,12 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.fhir.support.Bundles;
+import org.ehrbase.fhirbridge.ihe.xds.ITITrace;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Binary;
 import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.DocumentManifest;
+import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.Resource;
 import org.hl7.fhir.r4.model.ResourceType;
 import org.springframework.stereotype.Component;
@@ -47,12 +50,16 @@ public class ITI65Processor implements Processor {
     }
 
     private void setSaveInput(Exchange exchange, Bundle bundle) {
-        Bundle newBundle = new Bundle();
+        DocumentManifest documentManifest = null; // cant be null since fhir profile requires it
+        DocumentReference documentReference = null; // cant be null since fhir profile requires it
         for(Bundle.BundleEntryComponent entry: bundle.getEntry()){
-            if(!entry.getResource().getResourceType().equals(ResourceType.Binary)){
-                newBundle.addEntry(entry);
+            if(entry.getResource().getResourceType().equals(ResourceType.DocumentManifest)){
+                documentManifest = (DocumentManifest) entry.getResource();
+            }else if(entry.getResource().getResourceType().equals(ResourceType.DocumentReference)){
+                documentReference = (DocumentReference) entry.getResource();
             }
         }
-        exchange.getIn().setHeader("input_bundle", newBundle);
+        ITITrace itiTrace = new ITITrace(documentManifest, documentReference);
+        exchange.getIn().setHeader("iti65-trace", itiTrace);
     }
 }

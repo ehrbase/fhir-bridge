@@ -16,7 +16,13 @@
 
 package org.ehrbase.fhirbridge.ihe.xds;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.util.ObjectHelper;
+import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
+import org.ehrbase.client.openehrclient.VersionUid;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 
 /**
@@ -32,7 +38,17 @@ public class XdsRouteBuilder extends RouteBuilder {
 
         from("direct:send-to-cdr")
                 .routeId("sendToXdsCdr")
-                .setProperty("fhir_resource").body()
+                .doTry()
+                .to("bean:fhirResourceConversionService?method=convert(${headers.CamelFhirBridgeProfile}, ${body})")
+                .doCatch(ConversionException.class)
+                .throwException(UnprocessableEntityException.class, "${exception.message}")
+                .end()
+                .process(exchange -> {
+                    if (ObjectHelper.isNotEmpty(exchange.getIn().getHeader(CamelConstants.COMPOSITION_ID))) {
+                        String compositionId = exchange.getIn().getHeader(CamelConstants.COMPOSITION_ID, String.class);
+                        exchange.getIn().getBody(CompositionEntity.class).setVersionUid(new VersionUid(compositionId));
+                    }
+                })
                 .bean(ITI41Processor.class)
                 .convertBodyTo(ProvideAndRegisterDocumentSet.class)
                 .to("xds-iti41://{{fhir-bridge.xds.hostname}}:{{fhir-bridge.xds.port}}{{fhir-bridge.xds.context-path}}")
