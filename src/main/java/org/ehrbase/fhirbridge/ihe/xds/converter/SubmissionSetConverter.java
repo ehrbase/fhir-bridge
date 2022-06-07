@@ -27,7 +27,8 @@ public class SubmissionSetConverter {
         submissionSet.setSubmissionTime(timestamp);
         submissionSet.setAuthor(getAuthor(documentManifest.getAuthor()));
         submissionSet.setUniqueId(documentManifest.getMasterIdentifier().getId());
-        submissionSet.setSourceId(documentManifest.getIdentifier().get(0).getValue());
+        submissionSet.setEntryUuid(documentManifest.getIdentifier().get(0).getValue());
+        submissionSet.setSourceId(documentManifest.getSource());
         submissionSet.setContentTypeCode(getContentType(documentManifest));
         submissionSet.setPatientId(new Identifiable(documentManifest.getSubject().getReference()));
         return submissionSet;
