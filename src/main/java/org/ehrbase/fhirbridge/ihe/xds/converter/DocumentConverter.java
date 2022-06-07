@@ -1,6 +1,15 @@
 package org.ehrbase.fhirbridge.ihe.xds.converter;
 
+import com.nedap.archie.rm.RMObject;
+import com.sun.istack.ByteArrayDataSource;
+import org.apache.commons.codec.binary.Base64;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
+import org.ehrbase.client.flattener.Unflattener;
+import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
+import org.ehrbase.serialisation.flatencoding.FlatJasonProvider;
+import org.ehrbase.serialisation.flatencoding.std.marshal.FlatJsonMarshaller;
+import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
+import org.ehrbase.webtemplate.model.WebTemplate;
 import org.hl7.fhir.r4.model.Attachment;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -14,6 +23,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.PatientInfo;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 
 import javax.activation.DataHandler;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class DocumentConverter {
@@ -21,10 +31,32 @@ public class DocumentConverter {
     public static List<Document> convert(DocumentReference documentReference, CompositionEntity compositionEntity) {
         Document document = new Document();
         document.setDocumentEntry(getDocumentEntry(documentReference));
-        document.setDataHandler(new DataHandler(compositionEntity, "application/xml"));
+        document.setDataHandler(getDataHandler(compositionEntity));
         return List.of(document);
     }
 
+    private static DataHandler getDataHandler(CompositionEntity compositionEntity) {
+        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
+        resourceTemplateProvider.afterPropertiesSet();
+        Unflattener unflattener = new Unflattener(resourceTemplateProvider);
+        RMObject rmObject = unflattener.unflatten(compositionEntity);
+     //   flattened(compositionEntity );
+        CanonicalJson canonicalJson = new CanonicalJson();
+        String compositionJson = canonicalJson.marshal(rmObject);
+        byte[] encodedBytes = Base64.encodeBase64(compositionJson.getBytes(StandardCharsets.UTF_8));
+        ByteArrayDataSource barrds = new ByteArrayDataSource(encodedBytes, "application/xml");
+        return new DataHandler(barrds);
+    }
+
+    private static void flattened(CompositionEntity compositionEntity){
+        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
+        resourceTemplateProvider.afterPropertiesSet();
+        Unflattener unflattener = new Unflattener(resourceTemplateProvider);
+        RMObject rmObject = unflattener.unflatten(compositionEntity);
+        FlatJasonProvider flatJasonProvider = new FlatJasonProvider(resourceTemplateProvider);
+        FlatJsonMarshaller flatJsonMarshaller = new FlatJsonMarshaller();
+        WebTemplate webTemplate = new WebTemplate();
+    }
 
     private static DocumentEntry getDocumentEntry(DocumentReference documentReference) {
         DocumentEntry documentEntry = new DocumentEntry();

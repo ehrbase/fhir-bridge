@@ -44,6 +44,9 @@ public class Iti41Converter implements Converter<ITITrace, ProvideAndRegisterDoc
         List<Association> associations = getAssociations();
         ProvideAndRegisterDocumentSetBuilder provideAndRegisterDocumentSetBuilder = new ProvideAndRegisterDocumentSetBuilder(true, new SubmissionSet());
         ProvideAndRegisterDocumentSet provideAndRegisterDocumentSet = provideAndRegisterDocumentSetBuilder.doBuild(submissionSet, folders, documents, associations);
+        StringWriter sw = new StringWriter();
+        JAXB.marshal(provideAndRegisterDocumentSet, sw);
+        System.out.println("HIER: "+sw.toString());
         return provideAndRegisterDocumentSet;
     }
 
