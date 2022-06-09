@@ -1,51 +1,56 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
+import org.ehrbase.fhirbridge.ehr.converter.generic.ConditionToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
 import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.AlterObservation;
 
 import org.hl7.fhir.r4.model.Age;
-import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Patient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Period;
-import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 
 public class AlterObservationConverter extends EntryEntityConverter<Patient, AlterObservation> {
+    private static final Logger LOG = LoggerFactory.getLogger(AlterObservationConverter.class);
 
     @Override
     protected AlterObservation convertInternal(Patient resource) {
-        AlterObservation age = new AlterObservation();
+        AlterObservation ageObservation = new AlterObservation();
         Extension extensionAge = resource.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age");
-        if (extensionAge != null) {
-            TemporalAccessor time = TimeConverter.convertAgeExtensionTime(extensionAge); //should be sth. generic in TimeConverter?
-            age.setOriginValue(time);
-            age.setTimeValue(time);
-            age.setAlterValue(getAge(extensionAge));
-        }
-        return age;
+        TemporalAccessor time = TimeConverter.convertAgeExtensionTime(extensionAge); //should be sth. generic in TimeConverter?
+        ageObservation.setOriginValue(time);
+        ageObservation.setTimeValue(time);
+        setAge(extensionAge, ageObservation);
+        return ageObservation;
     }
 
-    private Period getAge(Extension extensionAge){
+    private void setAge(Extension extensionAge, AlterObservation ageObservation) { //TODO
         Age ageValue = (Age) extensionAge.getExtensionByUrl("age").getValue();
-        if(ageValue.hasValue()){
-            return Period.ofYears(ageValue.getValue().intValue());
-        }else if(ageValue.hasCode()){
-          return getCodeAsInt(ageValue.getCode());
-        }else{
-            throw new ConversionException("No age value for the Patient was found");
+        if (ageValue.hasValue() && ageValue.getSystem().equals("http://unitsofmeasure.org")) {
+            if (ageValue.hasValue() && ageValue.getCode().equals("a")) {
+                ageObservation.setAlterValue(Period.ofYears(ageValue.getValue().intValue()));
+            } else if (ageValue.hasValue() && ageValue.getCode().equals("mo")) {
+                ageObservation.setAlterValue(Period.ofMonths(ageValue.getValue().intValue()));
+            } else if (ageValue.hasValue() && ageValue.getCode().equals("wk")) {
+                ageObservation.setAlterValue(Period.ofWeeks(ageValue.getValue().intValue()));
+            } else if (ageValue.hasValue() && ageValue.getCode().equals("d")) {
+                ageObservation.setAlterValue(Period.ofDays(ageValue.getValue().intValue()));
+            } else {
+                LOG.warn("Patient resource contains age not in days, weeks, months or years, therefore no age is mapped");
+                ageObservation.setAlterNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+            }
+        } else {
+            LOG.warn("Patient resource contains age in another format then UCUM, therefore no age is mapped");
+            ageObservation.setAlterNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
+
     }
 
-    private Period getCodeAsInt(String code) {
-        try{
-            return Period.ofYears(Integer.parseInt(code));
-        }catch (NumberFormatException numberFormatException){
-            throw new ConversionException("The code " + code + " is not a valid age. Please enter an integer");
-        }
-    }
+
 }
 

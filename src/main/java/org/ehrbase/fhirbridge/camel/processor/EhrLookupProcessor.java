@@ -77,10 +77,9 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
     @Override
     public void process(Exchange exchange) throws Exception {
         IIdType patientId = getPatientId(exchange);
-
         UUID ehrId = patientEhrRepository.findById(patientId.getIdPart())
                 .map(PatientEhr::getEhrId)
-                .orElseGet(() -> createPatientEhr(patientId));
+                .orElseGet(() -> createOrGetPatientEhr(patientId));
 
         exchange.getMessage().setHeader(CompositionConstants.EHR_ID, ehrId);
     }
@@ -107,29 +106,39 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
      * @param patientId the given patient ID
      * @return the EHR ID
      */
-    private UUID createPatientEhr(IIdType patientId) {
+    private UUID createOrGetPatientEhr(IIdType patientId) { //SPAGHETTI
         UUID ehrId;
         Patient patient = patientDao.read(patientId);
         Identifier pseudonym = PatientUtils.getPseudonym(patient);
         Query<Record1<UUID>> query = Query.buildNativeQuery(
-                "SELECT e/ehr_id/value from EHR e WHERE e/ehr_status/subject/external_ref/id/value = '"+pseudonym.getValue()+"'", UUID.class);
+                "SELECT e/ehr_id/value from EHR e WHERE e/ehr_status/subject/external_ref/id/value = '" + pseudonym.getValue() + "'", UUID.class);
         List<Record1<UUID>> result = openEhrClient.aqlEndpoint().execute(query);
         if (result.size() == 0) {
             ehrId = (UUID) createEhr(pseudonym.getValue());
         } else {
             ehrId = getAlreadyExistingEHR(result);
         }
-        PatientEhr patientEhr = new PatientEhr(patientId.getIdPart(), ehrId);
-        patientEhrRepository.save(patientEhr);
-        LOG.debug("Created PatientEhr: patientId={}, ehrId={}", patientEhr.getPatientId(), patientEhr.getEhrId());
-        return ehrId;
+
+        if(patientEHRDuplicate(ehrId)){
+            LOG.info("Duplicated PatientEhr nothing was created since already existent, ehrId={}", ehrId);
+            return ehrId;
+        }else{
+            PatientEhr patientEhr = new PatientEhr(patientId.getIdPart(), ehrId);
+            patientEhrRepository.save(patientEhr);
+            LOG.debug("Created PatientEhr: patientId={}, ehrId={}", patientEhr.getPatientId(), patientEhr.getEhrId());
+            return ehrId;
+        }
+    }
+
+    private boolean patientEHRDuplicate(UUID ehrId) {
+        return patientEhrRepository.findByEhrId(ehrId).size()!=0;
     }
 
     private UUID getAlreadyExistingEHR(List<Record1<UUID>> result) {
-        if(result.size()>1){
+        if (result.size() > 1) {
             throw new ConversionException("Conflict: several EHR ids have the same patient id connected (subject.external_ref.id.value). Please check your EHR ids");
         }
-        return  result.get(0).value1();
+        return result.get(0).value1();
     }
 
     private Object createEhr(String pseudonym) {

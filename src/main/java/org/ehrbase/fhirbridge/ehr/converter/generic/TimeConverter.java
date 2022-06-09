@@ -10,6 +10,7 @@ import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Specimen;
@@ -194,12 +195,21 @@ public class TimeConverter {
         }
     }
 
+    public static TemporalAccessor convertPatientDateTime(Patient patient) {
+        if(patient.hasExtension("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age")){
+            return convertAgeExtensionTime(patient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age"));
+        }else{
+            LOG.info("No age extension was contained in Patient, therefore date time NOW is used");
+            return OffsetDateTime.now();
+        }
+    }
+
     public static TemporalAccessor convertAgeExtensionTime(Extension extension) {
         if (extension == null) {
             return OffsetDateTime.now();
         }
         Extension dataTimeOfDocumentationExtension = extension.getExtensionByUrl("dateTimeOfDocumentation");
-        if (dataTimeOfDocumentationExtension == null) {
+        if (dataTimeOfDocumentationExtension == null || dataTimeOfDocumentationExtension.getValue().hasExtension("http://hl7.org/fhir/StructureDefinition/data-absent-reason")){
             return OffsetDateTime.now();
         }
         DateTimeType dateTimeOfDocumentationDt = (DateTimeType) dataTimeOfDocumentationExtension.getValue();

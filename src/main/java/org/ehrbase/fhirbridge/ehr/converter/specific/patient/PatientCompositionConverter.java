@@ -11,7 +11,9 @@ public class PatientCompositionConverter extends PatientToCompositionConverter<G
     @Override
     public GECCOPersonendatenComposition convertInternal(@NonNull Patient resource) {
         GECCOPersonendatenComposition composition = new GECCOPersonendatenComposition();
-        composition.setAlter(new AlterObservationConverter().convert(resource));
+        if(resource.hasExtension("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age")){
+            composition.setAlter(new AlterObservationConverter().convert(resource));
+        }
         composition.setPersonendaten(new PersonenDatenAdminEntryConverter().convert(resource));
         return composition;
     }
