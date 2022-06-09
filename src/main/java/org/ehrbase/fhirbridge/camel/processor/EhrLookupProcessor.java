@@ -121,6 +121,7 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
 
         if(patientEHRDuplicate(ehrId)){
             LOG.info("Duplicated PatientEhr nothing was created since already existent, ehrId={}", ehrId);
+
             return ehrId;
         }else{
             PatientEhr patientEhr = new PatientEhr(patientId.getIdPart(), ehrId);

@@ -30,8 +30,8 @@ public class AlterObservationConverter extends EntryEntityConverter<Patient, Alt
     }
 
     private void setAge(Extension extensionAge, AlterObservation ageObservation) { //TODO
-        Age ageValue = (Age) extensionAge.getExtensionByUrl("age").getValue();
-        if (ageValue.hasValue() && ageValue.getSystem().equals("http://unitsofmeasure.org")) {
+        if (extensionAge.getExtensionByUrl("age").hasValue()) {
+            Age ageValue = (Age) extensionAge.getExtensionByUrl("age").getValue();
             if (ageValue.hasValue() && ageValue.getCode().equals("a")) {
                 ageObservation.setAlterValue(Period.ofYears(ageValue.getValue().intValue()));
             } else if (ageValue.hasValue() && ageValue.getCode().equals("mo")) {
