@@ -1,15 +1,16 @@
 package org.ehrbase.fhirbridge.ihe.xds.converter;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.RMObject;
+import com.nedap.archie.rm.composition.Composition;
 import com.sun.istack.ByteArrayDataSource;
 import org.apache.commons.codec.binary.Base64;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.client.flattener.Unflattener;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
+import org.ehrbase.serialisation.flatencoding.FlatFormat;
 import org.ehrbase.serialisation.flatencoding.FlatJasonProvider;
-import org.ehrbase.serialisation.flatencoding.std.marshal.FlatJsonMarshaller;
 import org.ehrbase.serialisation.jsonencoding.CanonicalJson;
-import org.ehrbase.webtemplate.model.WebTemplate;
 import org.hl7.fhir.r4.model.Attachment;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -36,26 +37,25 @@ public class DocumentConverter {
     }
 
     private static DataHandler getDataHandler(CompositionEntity compositionEntity) {
-        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
-        resourceTemplateProvider.afterPropertiesSet();
-        Unflattener unflattener = new Unflattener(resourceTemplateProvider);
-        RMObject rmObject = unflattener.unflatten(compositionEntity);
-     //   flattened(compositionEntity );
-        CanonicalJson canonicalJson = new CanonicalJson();
-        String compositionJson = canonicalJson.marshal(rmObject);
-        byte[] encodedBytes = Base64.encodeBase64(compositionJson.getBytes(StandardCharsets.UTF_8));
-        ByteArrayDataSource barrds = new ByteArrayDataSource(encodedBytes, "application/xml");
-        return new DataHandler(barrds);
+        byte[] encodedBytes = Base64.encodeBase64(getFlattenedJson(compositionEntity).getBytes(StandardCharsets.UTF_8));
+        ByteArrayDataSource compositionInBytes = new ByteArrayDataSource(encodedBytes, "application/xml");
+        return new DataHandler(compositionInBytes);
     }
 
-    private static void flattened(CompositionEntity compositionEntity){
+    private static String getFlattenedJson(CompositionEntity compositionEntity) {
         ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
         resourceTemplateProvider.afterPropertiesSet();
         Unflattener unflattener = new Unflattener(resourceTemplateProvider);
         RMObject rmObject = unflattener.unflatten(compositionEntity);
-        FlatJasonProvider flatJasonProvider = new FlatJasonProvider(resourceTemplateProvider);
-        FlatJsonMarshaller flatJsonMarshaller = new FlatJsonMarshaller();
-        WebTemplate webTemplate = new WebTemplate();
+        CanonicalJson canonicalJson = new CanonicalJson();
+        String compositionJson = canonicalJson.marshal(rmObject); //super dump but currently i dont see any other way
+        Composition composition = canonicalJson.unmarshal(compositionJson);
+        if(composition.getArchetypeDetails().getTemplateId() == null){
+            throw new UnprocessableEntityException("No Template id could be found within the composition, therefore base64 is not possible");
+        }
+        return new FlatJasonProvider(resourceTemplateProvider)
+                .buildFlatJson(FlatFormat.SIM_SDT, composition.getArchetypeDetails().getTemplateId().toString())
+                .marshal(rmObject);
     }
 
     private static DocumentEntry getDocumentEntry(DocumentReference documentReference) {
