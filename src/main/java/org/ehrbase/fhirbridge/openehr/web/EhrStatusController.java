@@ -1,6 +1,6 @@
-package org.ehrbase.fhirbridge.web;
+package org.ehrbase.fhirbridge.openehr.web;
 
-import org.ehrbase.fhirbridge.service.EhrStatusService;
+import org.ehrbase.fhirbridge.openehr.EhrStatusService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

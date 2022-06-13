@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.camel.processor;
+package org.ehrbase.fhirbridge.openehr.camel;
 
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import org.ehrbase.client.aql.query.Query;
@@ -29,6 +29,7 @@ import org.ehrbase.client.aql.record.Record1;
 import org.ehrbase.client.openehrclient.OpenEhrClient;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.component.ehr.composition.CompositionConstants;
+import org.ehrbase.fhirbridge.camel.processor.FhirRequestProcessor;
 import org.ehrbase.fhirbridge.core.domain.PatientEhr;
 import org.ehrbase.fhirbridge.core.repository.PatientEhrRepository;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
