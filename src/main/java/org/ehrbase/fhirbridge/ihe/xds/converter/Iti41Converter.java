@@ -14,48 +14,40 @@
  * limitations under the License.
  */
 
-package org.ehrbase.fhirbridge.ihe.xds;
+package org.ehrbase.fhirbridge.ihe.xds.converter;
 
+import org.ehrbase.fhirbridge.ihe.xds.ITITrace;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.builder.ProvideAndRegisterDocumentSetBuilder;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 
-import javax.activation.DataHandler;
-import java.time.OffsetDateTime;
+import javax.xml.bind.JAXB;
+import java.io.StringWriter;
 import java.util.List;
 
 /**
  * @author Renaud Subiger
  * @since 1.6
  */
-// TODO: Check with @SevKohler, if the Exchange is required here. If yes, use TypeConverter from Camel
-public class Iti41Converter implements Converter<Object, ProvideAndRegisterDocumentSet> {
+public class Iti41Converter implements Converter<ITITrace, ProvideAndRegisterDocumentSet> {
 
     @Override
-    public ProvideAndRegisterDocumentSet convert(@NonNull Object composition) {
-        SubmissionSet submissionSet = getSumissionSet();
+    public ProvideAndRegisterDocumentSet convert(@NonNull ITITrace itiTrace) {
+        SubmissionSet submissionSet = SubmissionSetConverter.convert(itiTrace.getDocumentManifest());
         List<Folder> folders = getFolders();
-        List<Document > documents = getDocuments(composition);
-        List< Association > associations = getAssociations();
+        List<Document > documents = DocumentConverter.convert(itiTrace.getDocumentReference(), itiTrace.getCompositionEntity());
+        List<Association> associations = getAssociations();
         ProvideAndRegisterDocumentSetBuilder provideAndRegisterDocumentSetBuilder = new ProvideAndRegisterDocumentSetBuilder(true, new SubmissionSet());
         ProvideAndRegisterDocumentSet provideAndRegisterDocumentSet = provideAndRegisterDocumentSetBuilder.doBuild(submissionSet, folders, documents, associations);
+        StringWriter sw = new StringWriter();
+        JAXB.marshal(provideAndRegisterDocumentSet, sw);
+        System.out.println("HIER: "+sw.toString());
         return provideAndRegisterDocumentSet;
-
-    }
-
-    private SubmissionSet getSumissionSet() {
-        SubmissionSet submissionSet = new SubmissionSet();
-        Timestamp timestamp =new Timestamp();
-        timestamp.setDateTime(OffsetDateTime.now().toZonedDateTime());
-        submissionSet.setSubmissionTime(timestamp);
-        return submissionSet;
     }
 
     private List<Association> getAssociations() {
@@ -63,17 +55,12 @@ public class Iti41Converter implements Converter<Object, ProvideAndRegisterDocum
         return List.of(association);
     }
 
-    private List<Document> getDocuments(Object source) {
-        Document document = new Document();
-        DataHandler dataHandler = new DataHandler(source, "application/json");
-        DocumentEntry documentEntry = new DocumentEntry();
-        document.setDataHandler(dataHandler);
-      //  document.setDocumentEntry();
-        return List.of(document);
-    }
-
     private List<Folder> getFolders() {
         Folder folder = new Folder();
         return List.of(folder);
     }
 }
+
+/*
+
+ */
