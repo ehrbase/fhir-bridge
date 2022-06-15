@@ -22,8 +22,8 @@ import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourceAuditHandler;
 import org.ehrbase.fhirbridge.camel.processor.ResourcePersistenceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.OpenEhrMappingExceptionHandler;
-import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.springframework.stereotype.Component;
+
 
 /**
  * {@link RouteBuilder} implementation that configures the routes for FHIR resources.
@@ -50,8 +50,7 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
             .doTry()
                 .to("direct:send-to-cdr")
             .doCatch(Exception.class)
-                .process(new OpenEhrMappingExceptionHandler())
-            .setBody(exchangeProperty(CamelConstants.OUTCOME));
+                .process(new OpenEhrMappingExceptionHandler());
         // @formatter:on
 
         configureAuditEvent();
