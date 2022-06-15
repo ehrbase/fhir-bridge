@@ -16,6 +16,7 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
+import org.apache.camel.builder.RouteBuilder;
 import org.ehrbase.fhirbridge.camel.processor.FhirProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourceAuditHandler;
