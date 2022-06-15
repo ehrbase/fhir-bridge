@@ -24,5 +24,4 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PatientEhrRepository extends JpaRepository<PatientEhr, String> {
-    List<PatientEhr> findByEhrId(UUID ehrId);
 }
