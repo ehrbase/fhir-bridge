@@ -56,10 +56,4 @@ public class XdsConfiguration {
         return new Iti41Converter();
     }
 
-    @Bean(name = "serverOutLogger")
-    public OutPayloadLoggerInterceptor serverOutLogger() {
-        return new OutPayloadLoggerInterceptor("#{systemProperties['java.io.tmpdir']}/mappings/log.txt");
-    }
-
-
 }
