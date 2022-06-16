@@ -23,6 +23,8 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.builder.ProvideAndRegisterDocumentSetBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 
@@ -35,6 +37,7 @@ import java.util.List;
  * @since 1.6
  */
 public class Iti41Converter implements Converter<ITITrace, ProvideAndRegisterDocumentSet> {
+    private static final Logger LOG = LoggerFactory.getLogger(Iti41Converter.class);
 
     @Override
     public ProvideAndRegisterDocumentSet convert(@NonNull ITITrace itiTrace) {
@@ -47,6 +50,7 @@ public class Iti41Converter implements Converter<ITITrace, ProvideAndRegisterDoc
         StringWriter sw = new StringWriter();
         JAXB.marshal(provideAndRegisterDocumentSet, sw);
         System.out.println("HIER: "+sw.toString());
+        LOG.info("Created iti41: " + sw );
         return provideAndRegisterDocumentSet;
     }
 

@@ -4,7 +4,6 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.RMObject;
 import com.nedap.archie.rm.composition.Composition;
 import com.sun.istack.ByteArrayDataSource;
-import org.apache.commons.codec.binary.Base64;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.client.flattener.Unflattener;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
@@ -37,8 +36,8 @@ public class DocumentConverter {
     }
 
     private static DataHandler getDataHandler(CompositionEntity compositionEntity) {
-        byte[] encodedBytes = Base64.encodeBase64(getFlattenedJson(compositionEntity).getBytes(StandardCharsets.UTF_8));
-        ByteArrayDataSource compositionInBytes = new ByteArrayDataSource(encodedBytes, "application/xml");
+        byte[] encodedBytes = getFlattenedJson(compositionEntity).getBytes(StandardCharsets.UTF_8);
+        ByteArrayDataSource compositionInBytes = new ByteArrayDataSource(encodedBytes, "application/json");
         return new DataHandler(compositionInBytes);
     }
 

@@ -36,7 +36,7 @@ public class XdsRouteBuilder extends RouteBuilder {
         // @formatter:off
         errorHandler(defaultErrorHandler().logExhaustedMessageHistory(false));
 
-        from("direct:send-to-cdr")
+        from("direct:send-to-cdr?outInterceptors=#serverOutLogger")
                 .routeId("sendToXdsCdr")
                 .bean(XDSValidator.class)
                 .doTry()
