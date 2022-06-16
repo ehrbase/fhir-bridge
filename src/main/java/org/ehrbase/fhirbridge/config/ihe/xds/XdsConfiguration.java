@@ -16,8 +16,9 @@
 
 package org.ehrbase.fhirbridge.config.ihe.xds;
 
-import org.ehrbase.fhirbridge.ihe.xds.converter.Iti41Converter;
 import org.ehrbase.fhirbridge.ihe.xds.XdsRouteBuilder;
+import org.ehrbase.fhirbridge.ihe.xds.converter.Iti41Converter;
+import org.openehealth.ipf.commons.ihe.ws.cxf.payload.OutPayloadLoggerInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -54,4 +55,11 @@ public class XdsConfiguration {
     public Iti41Converter iti41Converter() {
         return new Iti41Converter();
     }
+
+    @Bean(name = "serverOutLogger")
+    public OutPayloadLoggerInterceptor serverOutLogger() {
+        return new OutPayloadLoggerInterceptor("#{systemProperties['java.io.tmpdir']}/mappings/log.txt");
+    }
+
+
 }
