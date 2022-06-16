@@ -62,8 +62,8 @@ public class TransactionRouteBuilder extends AbstractRouteBuilder {
                 .to("direct:process-bundle");
 
         from("direct:processITI65")
-                .bean(ITI65Processor.class)
                 .bean(Iti65BundleValidator.class)
+                .bean(ITI65Processor.class)
                 .choice()
                     .when(header(CamelConstants.PROFILE).isEqualTo(Optional.empty())) // If no Bundle is contained within MHD
                         .to("direct:provideResource")

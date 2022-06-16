@@ -119,22 +119,12 @@ public class EhrLookupProcessor implements FhirRequestProcessor {
         } else {
             ehrId = getAlreadyExistingEHR(result);
         }
-
-        if(patientEHRDuplicate(ehrId)){
-            LOG.info("Duplicated PatientEhr nothing was created since already existent, ehrId={}", ehrId);
-
-            return ehrId;
-        }else{
-            PatientEhr patientEhr = new PatientEhr(patientId.getIdPart(), ehrId);
-            patientEhrRepository.save(patientEhr);
-            LOG.debug("Created PatientEhr: patientId={}, ehrId={}", patientEhr.getPatientId(), patientEhr.getEhrId());
-            return ehrId;
-        }
+        PatientEhr patientEhr = new PatientEhr(patientId.getIdPart(), ehrId);
+        patientEhrRepository.save(patientEhr);
+        LOG.debug("Created PatientEhr: patientId={}, ehrId={}", patientEhr.getPatientId(), patientEhr.getEhrId());
+        return ehrId;
     }
 
-    private boolean patientEHRDuplicate(UUID ehrId) {
-        return patientEhrRepository.findByEhrId(ehrId).size()!=0;
-    }
 
     private UUID getAlreadyExistingEHR(List<Record1<UUID>> result) {
         if (result.size() > 1) {
