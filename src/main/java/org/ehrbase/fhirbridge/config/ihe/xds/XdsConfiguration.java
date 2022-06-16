@@ -56,4 +56,10 @@ public class XdsConfiguration {
         return new Iti41Converter();
     }
 
+    @Bean(name = "serverOutLogger")
+    public OutPayloadLoggerInterceptor serverOutLogger() {
+        return new OutPayloadLoggerInterceptor("/logs/log.txt");
+    }
+
+
 }
