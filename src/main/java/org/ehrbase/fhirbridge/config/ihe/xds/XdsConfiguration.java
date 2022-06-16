@@ -58,7 +58,7 @@ public class XdsConfiguration {
 
     @Bean(name = "serverOutLogger")
     public OutPayloadLoggerInterceptor serverOutLogger() {
-        return new OutPayloadLoggerInterceptor("/logs/log.txt");
+        return new OutPayloadLoggerInterceptor("logs/soap_message.txt");
     }
 
 

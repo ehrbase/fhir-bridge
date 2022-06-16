@@ -28,8 +28,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 
-import javax.xml.bind.JAXB;
-import java.io.StringWriter;
 import java.util.List;
 
 /**
@@ -46,12 +44,7 @@ public class Iti41Converter implements Converter<ITITrace, ProvideAndRegisterDoc
         List<Document > documents = DocumentConverter.convert(itiTrace.getDocumentReference(), itiTrace.getCompositionEntity());
         List<Association> associations = getAssociations();
         ProvideAndRegisterDocumentSetBuilder provideAndRegisterDocumentSetBuilder = new ProvideAndRegisterDocumentSetBuilder(true, new SubmissionSet());
-        ProvideAndRegisterDocumentSet provideAndRegisterDocumentSet = provideAndRegisterDocumentSetBuilder.doBuild(submissionSet, folders, documents, associations);
-        StringWriter sw = new StringWriter();
-        JAXB.marshal(provideAndRegisterDocumentSet, sw);
-        System.out.println("HIER: "+sw.toString());
-        LOG.info("Created iti41: " + sw );
-        return provideAndRegisterDocumentSet;
+        return provideAndRegisterDocumentSetBuilder.doBuild(submissionSet, folders, documents, associations);
     }
 
     private List<Association> getAssociations() {
