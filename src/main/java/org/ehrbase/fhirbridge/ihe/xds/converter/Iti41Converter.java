@@ -17,18 +17,14 @@
 package org.ehrbase.fhirbridge.ihe.xds.converter;
 
 import org.ehrbase.fhirbridge.ihe.xds.ITITrace;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.builder.ProvideAndRegisterDocumentSetBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
-
-import javax.xml.bind.JAXB;
-import java.io.StringWriter;
-import java.util.List;
 
 /**
  * @author Renaud Subiger
@@ -36,31 +32,15 @@ import java.util.List;
  */
 public class Iti41Converter implements Converter<ITITrace, ProvideAndRegisterDocumentSet> {
 
+    private static final Logger LOG = LoggerFactory.getLogger(Iti41Converter.class);
+
     @Override
     public ProvideAndRegisterDocumentSet convert(@NonNull ITITrace itiTrace) {
         SubmissionSet submissionSet = SubmissionSetConverter.convert(itiTrace.getDocumentManifest());
-        List<Folder> folders = getFolders();
-        List<Document > documents = DocumentConverter.convert(itiTrace.getDocumentReference(), itiTrace.getCompositionEntity());
-        List<Association> associations = getAssociations();
-        ProvideAndRegisterDocumentSetBuilder provideAndRegisterDocumentSetBuilder = new ProvideAndRegisterDocumentSetBuilder(true, new SubmissionSet());
-        ProvideAndRegisterDocumentSet provideAndRegisterDocumentSet = provideAndRegisterDocumentSetBuilder.doBuild(submissionSet, folders, documents, associations);
-        StringWriter sw = new StringWriter();
-        JAXB.marshal(provideAndRegisterDocumentSet, sw);
-        System.out.println("HIER: "+sw.toString());
-        return provideAndRegisterDocumentSet;
-    }
-
-    private List<Association> getAssociations() {
-        Association association = new Association();
-        return List.of(association);
-    }
-
-    private List<Folder> getFolders() {
-        Folder folder = new Folder();
-        return List.of(folder);
+        Document document = DocumentConverter.convert(itiTrace.getDocumentReference(), itiTrace.getCompositionEntity());
+        ProvideAndRegisterDocumentSetBuilder provideAndRegisterDocumentSetBuilder = new ProvideAndRegisterDocumentSetBuilder(true, submissionSet);
+        provideAndRegisterDocumentSetBuilder.withDocument(document);
+        return provideAndRegisterDocumentSetBuilder.build();
     }
 }
 
-/*
-
- */

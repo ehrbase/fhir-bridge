@@ -4,7 +4,6 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.RMObject;
 import com.nedap.archie.rm.composition.Composition;
 import com.sun.istack.ByteArrayDataSource;
-import org.apache.commons.codec.binary.Base64;
 import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
 import org.ehrbase.client.flattener.Unflattener;
 import org.ehrbase.fhirbridge.ehr.ResourceTemplateProvider;
@@ -25,20 +24,19 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 
 import javax.activation.DataHandler;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 public class DocumentConverter {
 
-    public static List<Document> convert(DocumentReference documentReference, CompositionEntity compositionEntity) {
+    public static Document convert(DocumentReference documentReference, CompositionEntity compositionEntity) {
         Document document = new Document();
         document.setDocumentEntry(getDocumentEntry(documentReference));
         document.setDataHandler(getDataHandler(compositionEntity));
-        return List.of(document);
+        return document;
     }
 
     private static DataHandler getDataHandler(CompositionEntity compositionEntity) {
-        byte[] encodedBytes = Base64.encodeBase64(getFlattenedJson(compositionEntity).getBytes(StandardCharsets.UTF_8));
-        ByteArrayDataSource compositionInBytes = new ByteArrayDataSource(encodedBytes, "application/xml");
+        byte[] encodedBytes = getFlattenedJson(compositionEntity).getBytes(StandardCharsets.UTF_8);
+        ByteArrayDataSource compositionInBytes = new ByteArrayDataSource(encodedBytes, "application/json");
         return new DataHandler(compositionInBytes);
     }
 
@@ -65,9 +63,8 @@ public class DocumentConverter {
         documentEntry.setClassCode(getClassCode(documentReference));
         documentEntry.setPatientId(new Identifiable(documentReference.getSubject().getReference()));
         documentEntry.getConfidentialityCodes().add(getConfidentialityCode(documentReference));
-        documentEntry.setMimeType("application/xml");
+        documentEntry.setMimeType("application/json");
         setDataFromContent(documentEntry, documentReference);
-     //   documentEntry.setFormatCode(new Code(documentReference.getFo));
         setEventCodeList(documentEntry, documentReference);
         return documentEntry;
     }
