@@ -31,6 +31,7 @@ import org.springframework.lang.NonNull;
  * @since 1.6
  */
 public class Iti41Converter implements Converter<ITITrace, ProvideAndRegisterDocumentSet> {
+
     private static final Logger LOG = LoggerFactory.getLogger(Iti41Converter.class);
 
     @Override
