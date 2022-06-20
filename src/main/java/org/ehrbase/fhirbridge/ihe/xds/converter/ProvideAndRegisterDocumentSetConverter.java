@@ -26,6 +26,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 
+import javax.xml.bind.JAXB;
+import java.io.StringWriter;
+
 /**
  * @author Renaud Subiger
  * @since 1.6
@@ -33,6 +36,7 @@ import org.springframework.lang.NonNull;
 public class ProvideAndRegisterDocumentSetConverter implements Converter<ITITrace, ProvideAndRegisterDocumentSet> {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProvideAndRegisterDocumentSetConverter.class);
+    private final StringWriter stringWriter = new StringWriter();
 
     @Override
     public ProvideAndRegisterDocumentSet convert(@NonNull ITITrace itiTrace) {
@@ -40,6 +44,9 @@ public class ProvideAndRegisterDocumentSetConverter implements Converter<ITITrac
         Document document = DocumentConverter.convert(itiTrace.getDocumentReference(), itiTrace.getCompositionEntity());
         ProvideAndRegisterDocumentSetBuilder provideAndRegisterDocumentSetBuilder = new ProvideAndRegisterDocumentSetBuilder(true, submissionSet);
         provideAndRegisterDocumentSetBuilder.withDocument(document);
+        ProvideAndRegisterDocumentSet provideAndRegisterDocumentSet = provideAndRegisterDocumentSetBuilder.build();
+        JAXB.marshal(provideAndRegisterDocumentSet, stringWriter);
+        LOG.info("Generated Provide and Register Document :" + stringWriter);
         return provideAndRegisterDocumentSetBuilder.build();
     }
 }
