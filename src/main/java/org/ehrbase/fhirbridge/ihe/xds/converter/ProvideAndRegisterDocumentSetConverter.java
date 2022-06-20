@@ -30,9 +30,9 @@ import org.springframework.lang.NonNull;
  * @author Renaud Subiger
  * @since 1.6
  */
-public class Iti41Converter implements Converter<ITITrace, ProvideAndRegisterDocumentSet> {
+public class ProvideAndRegisterDocumentSetConverter implements Converter<ITITrace, ProvideAndRegisterDocumentSet> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Iti41Converter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProvideAndRegisterDocumentSetConverter.class);
 
     @Override
     public ProvideAndRegisterDocumentSet convert(@NonNull ITITrace itiTrace) {

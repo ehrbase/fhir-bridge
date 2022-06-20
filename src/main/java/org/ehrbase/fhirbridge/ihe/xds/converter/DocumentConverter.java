@@ -25,7 +25,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import javax.activation.DataHandler;
 import java.nio.charset.StandardCharsets;
 
-public class DocumentConverter {
+public class DocumentConverter extends ITI41Converter {
 
     public static Document convert(DocumentReference documentReference, CompositionEntity compositionEntity) {
         Document document = new Document();
@@ -78,7 +78,7 @@ public class DocumentConverter {
 
     private static void setSourcePatientId(DocumentEntry documentEntry, DocumentReference documentReference) {
         PatientInfo patientInfo = new PatientInfo();
-        patientInfo.getIds().add(new Identifiable(documentReference.getContext().getSourcePatientInfo().getReference()));
+        patientInfo.getIds().add(getPatientId(documentReference.getContext().getSourcePatientInfo()));
         documentEntry.setSourcePatientInfo(patientInfo);
     }
 
