@@ -18,7 +18,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class SubmissionSetConverter {
+public class SubmissionSetConverter extends ITI41Converter{
 
     public static SubmissionSet convert(DocumentManifest documentManifest) {
         SubmissionSet submissionSet = new SubmissionSet();
@@ -30,9 +30,10 @@ public class SubmissionSetConverter {
         submissionSet.setEntryUuid(documentManifest.getIdentifier().get(0).getValue());
         submissionSet.setSourceId(documentManifest.getSource());
         submissionSet.setContentTypeCode(getContentType(documentManifest));
-        submissionSet.setPatientId(new Identifiable(documentManifest.getSubject().getReference()));
+        submissionSet.setPatientId(getPatientId(documentManifest.getSubject()));
         return submissionSet;
     }
+
 
     private static Code getContentType(DocumentManifest documentManifest) {
         Coding coding = documentManifest.getType().getCoding().get(0);

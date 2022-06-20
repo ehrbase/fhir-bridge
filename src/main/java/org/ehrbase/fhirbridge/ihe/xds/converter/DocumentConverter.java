@@ -17,7 +17,6 @@ import org.hl7.fhir.r4.model.DocumentReference;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.PatientInfo;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
@@ -25,7 +24,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import javax.activation.DataHandler;
 import java.nio.charset.StandardCharsets;
 
-public class DocumentConverter {
+public class DocumentConverter extends ITI41Converter {
 
     public static Document convert(DocumentReference documentReference, CompositionEntity compositionEntity) {
         Document document = new Document();
@@ -61,7 +60,7 @@ public class DocumentConverter {
         documentEntry.setUniqueId(documentReference.getIdentifier().get(0).getId());
         documentEntry.setTypeCode(getTypeCode(documentReference));
         documentEntry.setClassCode(getClassCode(documentReference));
-        documentEntry.setPatientId(new Identifiable(documentReference.getSubject().getReference()));
+        documentEntry.setPatientId(getPatientId(documentReference.getSubject()));
         documentEntry.getConfidentialityCodes().add(getConfidentialityCode(documentReference));
         documentEntry.setMimeType("application/json");
         setDataFromContent(documentEntry, documentReference);
@@ -78,7 +77,7 @@ public class DocumentConverter {
 
     private static void setSourcePatientId(DocumentEntry documentEntry, DocumentReference documentReference) {
         PatientInfo patientInfo = new PatientInfo();
-        patientInfo.getIds().add(new Identifiable(documentReference.getContext().getSourcePatientInfo().getReference()));
+        patientInfo.getIds().add(getPatientId(documentReference.getContext().getSourcePatientInfo()));
         documentEntry.setSourcePatientInfo(patientInfo);
     }
 
