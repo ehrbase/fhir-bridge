@@ -35,9 +35,18 @@ public class DocumentConverter extends ITI41Converter {
     }
 
     private static DataHandler getDataHandler(CompositionEntity compositionEntity) {
-        byte[] encodedBytes = getFlattenedJson(compositionEntity).getBytes(StandardCharsets.UTF_8);
+        byte[] encodedBytes = getCanonical(compositionEntity).getBytes(StandardCharsets.UTF_8);
         ByteArrayDataSource compositionInBytes = new ByteArrayDataSource(encodedBytes, "application/json");
         return new DataHandler(compositionInBytes);
+    }
+
+    private static String getCanonical(CompositionEntity compositionEntity) {
+        ResourceTemplateProvider resourceTemplateProvider = new ResourceTemplateProvider("classpath:/opt/");
+        resourceTemplateProvider.afterPropertiesSet();
+        Unflattener unflattener = new Unflattener(resourceTemplateProvider);
+        RMObject rmObject = unflattener.unflatten(compositionEntity);
+        CanonicalJson canonicalJson = new CanonicalJson();
+        return canonicalJson.marshal(rmObject);
     }
 
     private static String getFlattenedJson(CompositionEntity compositionEntity) {
