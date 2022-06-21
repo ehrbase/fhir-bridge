@@ -96,10 +96,6 @@ public class DocumentConverter extends ITI41Converter {
         documentEntry.setSourcePatientInfo(patientInfo);
     }
 
-    private static void setFacilityTypeCode(DocumentEntry documentEntry, DocumentReference documentReference) {
-
-    }
-
     private static void setEventCodes(DocumentEntry documentEntry, DocumentReference documentReference) {
         for(CodeableConcept event :  documentReference.getContext().getEvent()){
             for(Coding coding : event.getCoding()){
