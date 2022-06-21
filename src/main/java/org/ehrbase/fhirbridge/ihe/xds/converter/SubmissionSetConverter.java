@@ -10,7 +10,6 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 
@@ -18,7 +17,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class SubmissionSetConverter extends ITI41Converter{
+public class SubmissionSetConverter extends ITI41Converter {
 
     public static SubmissionSet convert(DocumentManifest documentManifest) {
         SubmissionSet submissionSet = new SubmissionSet();
@@ -44,13 +43,27 @@ public class SubmissionSetConverter extends ITI41Converter{
         for (Reference authorEntry : authors) {
             Author author = new Author();
             authorEntry.getResource();
-            author.setAuthorPerson(getPerson(authorEntry));
+            author.getAuthorRole().add(getRole(authorEntry));
             return author;
         }
         throw new UnprocessableEntityException("no Author was defined in the MHD Bundle");
     }
 
-    private static Person getPerson(Reference authorEntry) {
+    private static Identifiable getRole(Reference authorEntry) {
+        if (authorEntry.getResource().getClass().equals(PractitionerRole.class)) {
+            PractitionerRole practitionerRole = (PractitionerRole) authorEntry.getResource();
+            Optional<String> id = practitionerRole.getCode().stream().filter(CodeableConcept::hasCoding)
+                    .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
+                    .map(Coding::getCode)
+                    .findFirst();
+            return new Identifiable(id.get()); //always present
+        } else {
+            throw new UnprocessableEntityException("Only PractionerRole is currently supported for DocumentManifest Author");
+        }
+
+    }
+
+/*    private static Person getPerson(Reference authorEntry) {
         if (authorEntry.getResource().getClass().equals(PractitionerRole.class)) {
             PractitionerRole practitionerRole = (PractitionerRole) authorEntry.getResource();
             Person person = new Person();
@@ -58,17 +71,17 @@ public class SubmissionSetConverter extends ITI41Converter{
                     .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
                     .map(Coding::getCode)
                     .findFirst();
-/*            Optional<String> name = practitionerRole.getCode().stream().filter(CodeableConcept::hasCoding)
+*//*            Optional<String> name = practitionerRole.getCode().stream().filter(CodeableConcept::hasCoding)
                     .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
                     .map(Coding::getDisplay)
                     .findFirst();
-            person.setName(new Name(name.get()));*/
+            person.setName(new Name(name.get()));*//*
             person.setId(new Identifiable(id.get())); //Always present
             return person;
         } else {
             throw new UnprocessableEntityException("Only PractionerRole is currently supported for DocumentManifest Author");
         }
-    }
+    }*/
 
 
 }

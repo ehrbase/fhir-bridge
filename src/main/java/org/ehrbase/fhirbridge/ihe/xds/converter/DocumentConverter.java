@@ -18,7 +18,6 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.PatientInfo;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 
 import javax.activation.DataHandler;
@@ -100,9 +99,7 @@ public class DocumentConverter extends ITI41Converter {
     }
 
     private static void setSourcePatientId(DocumentEntry documentEntry, DocumentReference documentReference) {
-        PatientInfo patientInfo = new PatientInfo();
-        patientInfo.getIds().add(getPatientId(documentReference.getContext().getSourcePatientInfo()));
-        documentEntry.setSourcePatientInfo(patientInfo);
+        documentEntry.setSourcePatientId(getPatientId(documentReference.getContext().getSourcePatientInfo()));
     }
 
     private static void setEventCodes(DocumentEntry documentEntry, DocumentReference documentReference) {
