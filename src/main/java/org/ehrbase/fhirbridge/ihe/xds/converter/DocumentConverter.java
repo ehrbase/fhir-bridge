@@ -23,6 +23,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 
 import javax.activation.DataHandler;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
 public class DocumentConverter extends ITI41Converter {
 
@@ -63,15 +64,29 @@ public class DocumentConverter extends ITI41Converter {
         documentEntry.setPatientId(getPatientId(documentReference.getSubject()));
         documentEntry.getConfidentialityCodes().add(getConfidentialityCode(documentReference));
         documentEntry.setMimeType("application/json");
+        getPracticeSettingCode(documentReference).ifPresent(documentEntry::setPracticeSettingCode);
+        getHealthCareFacilityCode(documentReference).ifPresent(documentEntry::setHealthcareFacilityTypeCode);
         setDataFromContent(documentEntry, documentReference);
         setEventCodeList(documentEntry, documentReference);
         return documentEntry;
     }
 
+    private static Optional<Code> getHealthCareFacilityCode(DocumentReference documentReference) {
+        for(Coding coding : documentReference.getContext().getFacilityType().getCoding()){
+           return Optional.of(codingToCode(coding));
+        }
+        return Optional.empty();
+    }
+
+    private static Optional<Code> getPracticeSettingCode(DocumentReference documentReference) {
+        for(Coding coding : documentReference.getContext().getPracticeSetting().getCoding()){
+            return Optional.of(codingToCode(coding));
+        }
+        return Optional.empty();
+    }
+
     private static void setEventCodeList(DocumentEntry documentEntry, DocumentReference documentReference) {
         setEventCodes(documentEntry, documentReference);
-        setFacilityTypeCode(documentEntry, documentReference);
-        setPracticeSettingCode(documentEntry, documentReference);
         setSourcePatientId(documentEntry, documentReference);
     }
 
@@ -79,18 +94,6 @@ public class DocumentConverter extends ITI41Converter {
         PatientInfo patientInfo = new PatientInfo();
         patientInfo.getIds().add(getPatientId(documentReference.getContext().getSourcePatientInfo()));
         documentEntry.setSourcePatientInfo(patientInfo);
-    }
-
-    private static void setPracticeSettingCode(DocumentEntry documentEntry, DocumentReference documentReference) {
-        for(Coding coding : documentReference.getContext().getPracticeSetting().getCoding()){
-            documentEntry.getEventCodeList().add(codingToCode(coding));
-        }
-    }
-
-    private static void setFacilityTypeCode(DocumentEntry documentEntry, DocumentReference documentReference) {
-       for(Coding coding : documentReference.getContext().getFacilityType().getCoding()){
-           documentEntry.getEventCodeList().add(codingToCode(coding));
-       }
     }
 
     private static void setEventCodes(DocumentEntry documentEntry, DocumentReference documentReference) {
@@ -102,38 +105,44 @@ public class DocumentConverter extends ITI41Converter {
     }
 
     private static void setDataFromContent(DocumentEntry documentEntry, DocumentReference documentReference) {
-        Attachment content = documentReference.getContent().get(0).getAttachment();
-        documentEntry.setLanguageCode(content.getLanguage());
-        documentEntry.setTitle(new LocalizedString(content.getTitle(), content.getLanguage(), "UTF-8"));
+        Attachment attachment = documentReference.getContent().get(0).getAttachment();
+        DocumentReference.DocumentReferenceContentComponent content = documentReference.getContent().get(0);
+        documentEntry.setLanguageCode(attachment.getLanguage());
+        documentEntry.setTitle(new LocalizedString(attachment.getTitle(), attachment.getLanguage(), "UTF-8"));
+        documentEntry.setFormatCode(getFormatCode(content));
         Timestamp timestamp = new Timestamp();
-        timestamp.setDateTime(content.getCreationElement().getValueAsCalendar().toZonedDateTime());
+        timestamp.setDateTime(attachment.getCreationElement().getValueAsCalendar().toZonedDateTime());
         documentEntry.setCreationTime(timestamp);
     }
 
+
+    private static Code getFormatCode(DocumentReference.DocumentReferenceContentComponent content) {
+        return codingToCode(content.getFormat());
+    }
+
     private static Code getConfidentialityCode(DocumentReference documentReference) {
-        Coding coding = documentReference.getSecurityLabel().get(0).getCoding().get(0);
-        return new Code(coding.getCode(), new LocalizedString(coding.getDisplay()), coding.getSystem());
+        return codingToCode(documentReference.getSecurityLabel().get(0).getCoding().get(0));
     }
 
     private static Code getTypeCode(DocumentReference documentReference) {
         Coding coding = documentReference.getType().getCoding().get(0);
-        return new Code(coding.getCode(), new LocalizedString(coding.getDisplay()), coding.getSystem());
+        return codingToCode(coding);
     }
 
     private static Code getClassCode(DocumentReference documentReference) {
         Coding coding = documentReference.getCategory().get(0).getCoding().get(0);
-        return new Code(coding.getCode(), new LocalizedString(coding.getDisplay()), coding.getSystem());
+        return codingToCode(coding);
     }
 
     private static Code codingToCode(Coding coding){
-            Code code = new Code();
-            code.setCode(coding.getCode());
+            Code result = new Code();
+            result.setCode(coding.getCode());
             LocalizedString display = new LocalizedString();
             display.setLang("de-DE");
             display.setCharset("UTF-8");
             display.setValue(coding.getDisplay());
-            code.setDisplayName(display);
-            code.setSchemeName(code.getSchemeName());
-            return code;
+            result.setDisplayName(display);
+            result.setSchemeName(coding.getSystem());
+            return result;
         }
 }
