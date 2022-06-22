@@ -17,6 +17,7 @@
 
 *** Settings ***
 Resource                ${EXECDIR}/robot/_resources/suite_settings.robot
+Resource    ../_resources/keywords/generic.robot
 
 Test Setup              generic.prepare new request session    Prefer=return=representation
 ...															   Authorization=${AUTHORIZATION['Authorization']}
@@ -286,7 +287,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              valueCodeableConcept
+    [Tags]              valueCodeableConcept	prepare
 
 	# FIELD/PATH								VALUE					HTTP
 	# 																	CODE
@@ -308,7 +309,6 @@ ${randinteger}                  ${12345}
 	# invalid system
 	$.valueCodeableConcept.coding[0].system		missing					422
 	$.valueCodeableConcept.coding[0].system		${EMPTY}				422
-	$.valueCodeableConcept.coding[0].system		http://foobar.de		422
 	$.valueCodeableConcept.coding[0].system		${randstring}			422
 	$.valueCodeableConcept.coding[0].system		${randinteger}			422
 	$.valueCodeableConcept.coding[0].system		${{ [] }}				422
@@ -318,7 +318,6 @@ ${randinteger}                  ${12345}
 	# invalid code
 	$.valueCodeableConcept.coding[0].code		missing					422
 	$.valueCodeableConcept.coding[0].code		${EMPTY}				422
-	$.valueCodeableConcept.coding[0].code		${randstring}			422
 	$.valueCodeableConcept.coding[0].code		${randinteger}			422
 	$.valueCodeableConcept.coding[0].code		${{ [] }}				422
 	$.valueCodeableConcept.coding[0].code		${{ {} }}				422
@@ -362,7 +361,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              component-travel-start-date
+    [Tags]              component-travel-start-date    prepare
 
 	# FIELD/PATH							VALUE					HTTP
 	# 																CODE
@@ -388,7 +387,6 @@ ${randinteger}                  ${12345}
 	# invalid Code Coding 0 System
 	$.component[0].code.coding[0].system	missing					422
 	$.component[0].code.coding[0].system	${EMPTY}				422
-	$.component[0].code.coding[0].system	http://foobar.de		422
 	$.component[0].code.coding[0].system	${randstring}			422
 	$.component[0].code.coding[0].system	${randinteger}			422
 	$.component[0].code.coding[0].system    ${{ [] }}				422
@@ -399,7 +397,6 @@ ${randinteger}                  ${12345}
 	# $.component[0].code.coding[0].code		missing					422
 	# See Bug Trace 01
 	$.component[0].code.coding[0].code		${EMPTY}				422
-	$.component[0].code.coding[0].code		${randstring}			422
 	$.component[0].code.coding[0].code		${randinteger}			422
 	$.component[0].code.coding[0].code      ${{ [] }}				422
 	$.component[0].code.coding[0].code      ${{ {} }}				422
@@ -435,7 +432,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              component-country
+    [Tags]              component-country	prepare
 
 	# FIELD/PATH												VALUE					HTTP
 	# 															CODE
@@ -461,7 +458,6 @@ ${randinteger}                  ${12345}
 	# invalid Code Coding 1 System
 	$.component[1].code.coding[0].system						missing					422
 	$.component[1].code.coding[0].system						${EMPTY}				422
-	$.component[1].code.coding[0].system						http://foobar.de		422
 	$.component[1].code.coding[0].system						${randstring}			422
 	$.component[1].code.coding[0].system						${randinteger}			422
 	$.component[1].code.coding[0].system    					${{ [] }}				422
@@ -472,7 +468,6 @@ ${randinteger}                  ${12345}
 	# $.component[1].code.coding[0].code							missing					422
 	# See Bug Trace 01
 	$.component[1].code.coding[0].code							${EMPTY}				422
-	$.component[1].code.coding[0].code							${randstring}			422
 	$.component[1].code.coding[0].code							${randinteger}			422
 	$.component[1].code.coding[0].code      					${{ [] }}				422
 	$.component[1].code.coding[0].code      					${{ {} }}				422
@@ -527,7 +522,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              component-state
+    [Tags]              component-state    prepare
 	
 	# FIELD/PATH												VALUE					HTTP
 	# 															CODE
@@ -553,7 +548,6 @@ ${randinteger}                  ${12345}
 	# invalid Code Coding 2 System
 	$.component[2].code.coding[0].system						missing					422
 	$.component[2].code.coding[0].system						${EMPTY}				422
-	$.component[2].code.coding[0].system						http://foobar.de		422
 	$.component[2].code.coding[0].system						${randstring}			422
 	$.component[2].code.coding[0].system						${randinteger}			422
 	$.component[2].code.coding[0].system    					${{ [] }}				422
@@ -564,7 +558,6 @@ ${randinteger}                  ${12345}
 	# $.component[2].code.coding[0].code							missing					422
 	# See Bug Trace 01
 	$.component[2].code.coding[0].code							${EMPTY}				422
-	$.component[2].code.coding[0].code							${randstring}			422
 	$.component[2].code.coding[0].code							${randinteger}			422
 	$.component[2].code.coding[0].code      					${{ [] }}				422
 	$.component[2].code.coding[0].code      					${{ {} }}				422
@@ -619,7 +612,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              component-start-city
+    [Tags]              component-start-city	prepare
 	
 	# FIELD/PATH												VALUE					HTTP
 	# 															CODE
@@ -645,7 +638,6 @@ ${randinteger}                  ${12345}
 	# invalid Code Coding 2 System
 	$.component[3].code.coding[0].system						missing					422
 	$.component[3].code.coding[0].system						${EMPTY}				422
-	$.component[3].code.coding[0].system						http://foobar.de		422
 	$.component[3].code.coding[0].system						${randstring}			422
 	$.component[3].code.coding[0].system						${randinteger}			422
 	$.component[3].code.coding[0].system    					${{ [] }}				422
@@ -656,7 +648,6 @@ ${randinteger}                  ${12345}
 	# $.component[3].code.coding[0].code							missing					422
 	# See Bug Trace 01
 	$.component[3].code.coding[0].code							${EMPTY}				422
-	$.component[3].code.coding[0].code							${randstring}			422
 	$.component[3].code.coding[0].code							${randinteger}			422
 	$.component[3].code.coding[0].code      					${{ [] }}				422
 	$.component[3].code.coding[0].code      					${{ {} }}				422
@@ -672,7 +663,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              component-travel-end-date
+    [Tags]              component-travel-end-date	prepare
 	
 	# FIELD/PATH									VALUE					HTTP
 	# 																		CODE
@@ -698,7 +689,6 @@ ${randinteger}                  ${12345}
 	# invalid Code Coding 2 System
 	$.component[4].code.coding[0].system			missing					422
 	$.component[4].code.coding[0].system			${EMPTY}				422
-	$.component[4].code.coding[0].system			http://foobar.de		422
 	$.component[4].code.coding[0].system			${randstring}			422
 	$.component[4].code.coding[0].system			${randinteger}			422
 	$.component[4].code.coding[0].system    		${{ [] }}				422
@@ -709,7 +699,6 @@ ${randinteger}                  ${12345}
 	# $.component[4].code.coding[0].code				missing					422
 	# See Bug Trace 01
 	$.component[4].code.coding[0].code				${EMPTY}				422
-	$.component[4].code.coding[0].code				${randstring}			422
 	$.component[4].code.coding[0].code				${randinteger}			422
 	$.component[4].code.coding[0].code      		${{ [] }}				422
 	$.component[4].code.coding[0].code      		${{ {} }}				422
@@ -802,8 +791,20 @@ ${randinteger}                  ${12345}
 	$.component[2].valueCodeableConcept.coding[0].code 		${randstring}			422
 
 
+06 Bug Trace component[x].code.coding[0].system unexpected 201
+	[Documentation]		Bug Trace tests for component[x].code.coding[0].system unexpected 201 validations
+	[Template]			create History of Travel with ehr reference
+	[Tags]    			not-ready    not-ready_bug   valueCodeableConcept    201
 
-
+	# FIELD/PATH											VALUE					HTTP
+	# 																				CODE
+	$.component[0].code.coding[0].system					missing					422
+	$.component[1].code.coding[0].system					missing					422
+	$.component[2].code.coding[0].system					missing					422
+	$.component[3].code.coding[0].system					missing					422
+	$.component[4].code.coding[0].system					missing					422
+	
+	[Teardown]	TRACE GITHUB ISSUE    568    bug
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *** Keywords ***

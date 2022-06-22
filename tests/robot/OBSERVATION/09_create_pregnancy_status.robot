@@ -325,7 +325,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create pregnancy status with ehr reference
-    [Tags]              valueCodeableConcept
+    [Tags]              valueCodeableConcept	prepare
 
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
@@ -352,7 +352,6 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 
 	# invalid code
 	$.valueCodeableConcept.coding[0].code		${EMPTY}				422    	@value cannot be empty																						Observation.value.ofType.CodeableConcept..coding.0..code
-	$.valueCodeableConcept.coding[0].code		${randstring}			422    	Status code ${randstring} is not supported
 	$.valueCodeableConcept.coding[0].code		${randinteger}			422    	Error parsing JSON: the primitive value must be a string													Observation.value.x..coding.0..code
 
 	# invalid display

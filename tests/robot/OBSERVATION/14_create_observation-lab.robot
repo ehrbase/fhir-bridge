@@ -156,7 +156,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                 
 	[Template]			create Observation lab with ehr reference
-    [Tags]              code
+    [Tags]              code	prepare
 
 	# FIELD/PATH							VALUE					HTTP
 	# 																CODE
@@ -169,14 +169,12 @@ ${randinteger}                  ${12345}
 	$.code									${{ [{}] }}				422
 
 	# invalid coding
-	$.code.coding   	 					missing					422
 	$.code.coding	    					${EMPTY}				422
 	$.code.coding							${{ [] }}				422
 	$.code.coding							${{ {} }}				422
 	$.code.coding							${{ [{}] }}				422
 
 	# invalid Code Coding 0 System
-	$.code.coding[0].system					missing					422
 	$.code.coding[0].system					${EMPTY}				422
 	$.code.coding[0].system					${randstring}			422
 	$.code.coding[0].system					${randinteger}			422
@@ -185,7 +183,6 @@ ${randinteger}                  ${12345}
 	$.code.coding[0].system      			${{ [{}] }}				422
 
 	# invalid Code Coding 0 Code
-	$.code.coding[0].code					missing					422
 	$.code.coding[0].code					${EMPTY}				422
 	$.code.coding[0].code					${randinteger}			422
     $.code.coding[0].code      			    ${{ [] }}				422

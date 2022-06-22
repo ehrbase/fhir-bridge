@@ -381,7 +381,7 @@ ${vQSystem}						http://unitsofmeasure.org
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create body-height with ehr reference
-    [Tags]              valueQuantity
+    [Tags]              valueQuantity	prepare
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 
@@ -403,9 +403,6 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.valueQuantity.value	  					${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
 	$.valueQuantity.value	  					${None}			422    	This property must be an simple value, not null
 	$.valueQuantity.value	  					113				422    	Error parsing JSON: the primitive value must be a number
-	$.valueQuantity.value	  					${1001}			422    	.*value is not within interval, expected:0.0 <= 1001.0 <= 1000.0.*Bad Request.*
-	$.valueQuantity.value	  					${1000.09}		422    	.*value is not within interval, expected:0.0 <= 1000.09 <= 1000.0.*Bad Request.*
-	$.valueQuantity.value	  					${-1}			422    	.*value is not within interval, expected:0.0 <= -1.0 <= 1000.0.*Bad Request.*
 	$.valueQuantity.value	  					1000,7			422    	The value '1000,7' is not a valid decimal    Observation.value.ofType.Quantity..value
 	$.valueQuantity.value	  					foobar			422    	Error parsing JSON: the primitive value must be a number
 
@@ -478,16 +475,7 @@ ${vQSystem}						http://unitsofmeasure.org
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Body Height (Invalid/Missing 'identifier')
-	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
-	[Template]			create body-height with ehr reference
-    [Tags]              identifier    not-ready    bug
-	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
-	# 																CODE
-	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''foobar'', then the identifier.value must be a full URI								Observation.identifier.0.
-
-
-BUG TRACE 02 Create Body Height (Invalid/Missing 'DataAbsentReason')
+BUG TRACE 01 Create Body Height (Invalid/Missing 'DataAbsentReason')
 	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
 	[Template]			create body-height with ehr reference AND data absentreason
     [Tags]              DataAbsentReason    not-ready    bug

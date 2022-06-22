@@ -55,11 +55,11 @@ Force Tags              diagnostic_create    create
     ...                 4. *POST* example JSON to diagnostic endpoint\n\n
 	...                 5. *VALIDATE* the response status \n\n
     ...                 6. *VALIDATE* outcome against diagnostic text
-    [Tags]              invalid
+    [Tags]              diagnostic-report    valid    prepare
 
     ehr.create new ehr                      000_ehr_status.json
     diagnostic.create diagnostic report     create-diagnosticReport-without-observation.json 
-    diagnostic.validate response - 422 (missing observation)
+    diagnostic.validate response - 201
 
 
 003 Create Diagnostic Report Using Default Profile
