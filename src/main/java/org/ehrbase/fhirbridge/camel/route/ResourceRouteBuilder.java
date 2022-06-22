@@ -16,21 +16,14 @@
 
 package org.ehrbase.fhirbridge.camel.route;
 
-import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.util.ObjectHelper;
-import org.ehrbase.client.classgenerator.interfaces.CompositionEntity;
-import org.ehrbase.client.exception.ClientException;
-import org.ehrbase.client.openehrclient.VersionUid;
-import org.ehrbase.fhirbridge.camel.CamelConstants;
-import org.ehrbase.fhirbridge.camel.processor.EhrLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.FhirProfileValidator;
-import org.ehrbase.fhirbridge.camel.processor.OpenEhrClientExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourceAuditHandler;
-import org.ehrbase.fhirbridge.camel.processor.ProvideResourceResponseProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ResourcePersistenceProcessor;
+import org.ehrbase.fhirbridge.camel.processor.OpenEhrMappingExceptionHandler;
 import org.springframework.stereotype.Component;
+
 
 /**
  * {@link RouteBuilder} implementation that configures the routes for FHIR resources.
@@ -54,24 +47,10 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
             .process(FhirProfileValidator.BEAN_ID)
             .process(PatientReferenceProcessor.BEAN_ID)
             .process(ResourcePersistenceProcessor.BEAN_ID)
-            .process(EhrLookupProcessor.BEAN_ID)
             .doTry()
-                .to("bean:fhirResourceConversionService?method=convert(${headers.CamelFhirBridgeProfile}, ${body})")
-            .doCatch(Exception.class) // TODO: ConversionException
-                .throwException(UnprocessableEntityException.class, "${exception.message}")
-            .end()
-            .process(exchange -> {
-                if (ObjectHelper.isNotEmpty(exchange.getIn().getHeader(CamelConstants.COMPOSITION_ID))) {
-                    String compositionId = exchange.getIn().getHeader(CamelConstants.COMPOSITION_ID, String.class);
-                    exchange.getIn().getBody(CompositionEntity.class).setVersionUid(new VersionUid(compositionId));
-                }
-            })
-            .doTry()
-                .to("ehr-composition:compositionProducer?operation=mergeCompositionEntity")
-            .doCatch(ClientException.class)
-                .process(new OpenEhrClientExceptionHandler())
-            .end()
-            .process(ProvideResourceResponseProcessor.BEAN_ID);
+                .to("direct:send-to-cdr")
+            .doCatch(Exception.class)
+                .process(new OpenEhrMappingExceptionHandler());
         // @formatter:on
 
         configureAuditEvent();
@@ -85,6 +64,7 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
         configurePatient();
         configureProcedure();
         configureQuestionnaireResponse();
+        configureComposition();
     }
 
     /**
@@ -205,4 +185,15 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
         from("questionnaire-response-find:questionnaireResponseEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
                 .process(ResourcePersistenceProcessor.BEAN_ID);
     }
+
+    /**
+     * Configures available endpoints for {@link org.hl7.fhir.r4.model.Composition} resource.
+     */
+    private void configureComposition() {
+        from("composition-provide:compositionEndpoint?fhirContext=#fhirContext")
+                .to("direct:provideResource");
+        from("composition-find:compositionEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
+                .process(ResourcePersistenceProcessor.BEAN_ID);
+    }
+
 }

@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.fhir.support;
 import org.apache.commons.lang3.StringUtils;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.hl7.fhir.r4.model.CanonicalType;
+import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DiagnosticReport;
@@ -79,6 +80,8 @@ public class Resources {
                 return getSubject((QuestionnaireResponse) resource);
             case Specimen:
                 return getSubject((Specimen) resource);
+            case Composition:
+                return getSubject((Composition) resource);
             default:
                 throw new IllegalArgumentException("Unsupported resource type: " + resource.getResourceType());
         }
@@ -119,6 +122,8 @@ public class Resources {
             case Specimen:
                 ((Specimen) resource).setSubject(subject);
                 break;
+            case Composition:
+                ((Composition) resource).setSubject(subject);
             default:
                 throw new IllegalArgumentException("Unsupported resource type: " + resource.getResourceType());
         }
@@ -189,5 +194,9 @@ public class Resources {
 
     private static Optional<Reference> getSubject(Specimen specimen) {
         return specimen.hasSubject() ? Optional.of(specimen.getSubject()) : Optional.empty();
+    }
+
+    private static Optional<Reference> getSubject(Composition composition) {
+        return composition.hasSubject() ? Optional.of(composition.getSubject()) : Optional.empty();
     }
 }

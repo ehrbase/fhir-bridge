@@ -22,7 +22,7 @@ import org.ehrbase.client.exception.ClientException;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.processor.DeleteObjectProcessor;
 import org.ehrbase.fhirbridge.camel.processor.DocumentReferenceProcessor;
-import org.ehrbase.fhirbridge.camel.processor.EhrLookupProcessor;
+import org.ehrbase.fhirbridge.openehr.camel.EhrLookupProcessor;
 import org.ehrbase.fhirbridge.camel.processor.FhirProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.OpenEhrClientExceptionHandler;
 import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
@@ -62,11 +62,5 @@ public class DocumentRouteBuilder extends RouteBuilder {
             .setBody(exchangeProperty(CamelConstants.OUTCOME));
         // @formatter:on
 
-//        from("mllp://0.0.0.0:8889?hl7TransactionConfig=#transactionConfiguration")
-//                .process(exchange -> {
-//                    MDM_T02 message = exchange.getIn().getBody(MDM_T02.class);
-//                    EVN evn = message.getEVN();
-//                    message.getOBXNTE();
-//                });
     }
 }

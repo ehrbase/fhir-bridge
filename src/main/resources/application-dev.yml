@@ -1,15 +1,8 @@
-spring:
-  jpa:
-    properties:
-      hibernate.show_sql: true
-      hibernate.format_sql: true
-logging:
-  level:
-    ca.uhn.fhir: info
-    org.apache.camel: info
-    org.ehrbase.fhirbridge: debug
-    org.hibernate: info
-    org.openehealth.ipf: info
-    org.quartz: info
-    org.springframework: info
-    org.springframework.boot: info
+# @formatter:off
+
+fhir-bridge:
+  mode: xds
+  xds:
+    hostname: localhost
+    port: 9999
+    context-path: /ihe-mock-server/services/iti41

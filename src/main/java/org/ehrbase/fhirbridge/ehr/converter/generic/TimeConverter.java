@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.generic;
 
+import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.DateTimeType;
@@ -9,13 +10,14 @@ import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Specimen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.parameters.P;
 
+import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
@@ -55,6 +57,14 @@ public class TimeConverter {
             return Optional.of(observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
         } else {
             return Optional.empty();
+        }
+    }
+
+    public static TemporalAccessor convertCompositionTime(Composition composition) {
+        if (composition.getDate() != null) {
+            return composition.getDateElement().getValueAsCalendar().toZonedDateTime();
+        } else {
+            return ZonedDateTime.now();
         }
     }
 
@@ -185,12 +195,21 @@ public class TimeConverter {
         }
     }
 
+    public static TemporalAccessor convertPatientDateTime(Patient patient) {
+        if(patient.hasExtension("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age")){
+            return convertAgeExtensionTime(patient.getExtensionByUrl("https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/age"));
+        }else{
+            LOG.info("No age extension was contained in Patient, therefore date time NOW is used");
+            return OffsetDateTime.now();
+        }
+    }
+
     public static TemporalAccessor convertAgeExtensionTime(Extension extension) {
         if (extension == null) {
             return OffsetDateTime.now();
         }
         Extension dataTimeOfDocumentationExtension = extension.getExtensionByUrl("dateTimeOfDocumentation");
-        if (dataTimeOfDocumentationExtension == null) {
+        if (dataTimeOfDocumentationExtension == null || dataTimeOfDocumentationExtension.getValue().hasExtension("http://hl7.org/fhir/StructureDefinition/data-absent-reason")){
             return OffsetDateTime.now();
         }
         DateTimeType dateTimeOfDocumentationDt = (DateTimeType) dataTimeOfDocumentationExtension.getValue();
@@ -236,5 +255,14 @@ public class TimeConverter {
             return Optional.of(collection.getCollectedPeriod().getEndElement().getValueAsCalendar().toZonedDateTime());
         }
         return Optional.empty();
+    }
+
+    public static Optional<Duration> convertObservationTimeInterval(Observation observation) {
+        if(observation.getEffectivePeriod().hasStart() && observation.getEffectivePeriod().hasEnd()){
+            return Optional.of(Duration.between(observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime(),
+                    observation.getEffectivePeriod().getEndElement().getValueAsCalendar().toZonedDateTime()));
+        }else{
+            return Optional.empty();
+        }
     }
 }

@@ -37,7 +37,7 @@
       "value": "{{patientId}}"
     }
   },
-  "effectiveDateTime": "2020-09-16",
+  "effectiveInstant": "2020-09-07T13:28:17.239+02:00",
   "component": [
     {
       "code": {

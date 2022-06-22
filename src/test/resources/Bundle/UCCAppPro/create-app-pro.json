@@ -1,0 +1,390 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "lastUpdated": "2022-05-06T13:14:06.387+00:00",
+    "profile": [
+      "https://example.org/fhir/StructureDefinition/DailySurveyBundle"
+    ]
+  },
+  "identifier": {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:uuid:507032b8-233e-40c1-907f-43edeefd7c73"
+  },
+  "type": "document",
+  "timestamp": "2022-05-06T13:14:06.387+00:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:920b4ec3-c31f-462f-9973-ece8b636e434",
+      "resource": {
+        "resourceType": "Composition",
+        "meta": {
+          "profile": [
+            "https://example.org/fhir/StructureDefinition/DailySurveyComposition"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Patient",
+            "id": "1",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/MedpowerPatient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:4122",
+                "value": "{{patientId}}"
+              }
+            ]
+          },
+          {
+            "resourceType": "Device",
+            "id": "SURVEY",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/SurveyDevice"
+              ]
+            }
+          }
+        ],
+        "status": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "64296-7",
+              "display": "Personal health monitoring report Automated"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "#1"
+        },
+        "date": "2022-05-06T13:14:06+00:00",
+        "author": [
+          {
+            "reference": "#SURVEY"
+          }
+        ],
+        "title": "Vital Signs Section",
+        "section": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            },
+            "entry": [
+              {
+                "reference": "urn:uuid:01G2CR31719D5TD6X533GVTB69"
+              },
+              {
+                "reference": "urn:uuid:01G2CR31713P90FWR5WSDPK8J7"
+              },
+              {
+                "reference": "urn:uuid:01G2CR3171N7FPZXCVMMM8VKGV"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:01G2CR31719D5TD6X533GVTB69",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "01G2CR31719D5TD6X533GVTB69",
+        "meta": {
+          "profile": [
+            "https://example.org/fhir/StructureDefinition/DailySurveyObservation"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Device",
+            "id": "SURVEY",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/SurveyDevice"
+              ]
+            }
+          },
+          {
+            "resourceType": "Patient",
+            "id": "1",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/MedpowerPatient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:4122",
+                "value": "{{patientId}}"
+              }
+            ]
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "3141-9"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "#1"
+        },
+        "effectiveDateTime": "2022-05-06T13:14:03Z",
+        "method": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "362943005",
+              "display": "Manual method"
+            }
+          ]
+        },
+        "device": {
+          "reference": "#SURVEY"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "3141-9"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 123.0,
+              "unit": "kg",
+              "system": "http://unitsofmeasure.org",
+              "code": "kg"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:01G2CR31713P90FWR5WSDPK8J7",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "01G2CR31713P90FWR5WSDPK8J7",
+        "meta": {
+          "profile": [
+            "https://example.org/fhir/StructureDefinition/DailySurveyObservation"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Device",
+            "id": "SURVEY",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/SurveyDevice"
+              ]
+            }
+          },
+          {
+            "resourceType": "Patient",
+            "id": "1",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/MedpowerPatient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:4122",
+                "value": "{{patientId}}"
+              }
+            ]
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "55284-4"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "#1"
+        },
+        "effectiveDateTime": "2022-05-06T13:14:03Z",
+        "method": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "362943005",
+              "display": "Manual method"
+            }
+          ]
+        },
+        "device": {
+          "reference": "#SURVEY"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 123.0,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 89.0,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:01G2CR3171N7FPZXCVMMM8VKGV",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "01G2CR3171N7FPZXCVMMM8VKGV",
+        "meta": {
+          "profile": [
+            "https://example.org/fhir/StructureDefinition/DailySurveyObservation"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Device",
+            "id": "SURVEY",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/SurveyDevice"
+              ]
+            }
+          },
+          {
+            "resourceType": "Patient",
+            "id": "1",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/MedpowerPatient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:4122",
+                "value": "{{patientId}}"
+              }
+            ]
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "#1"
+        },
+        "effectiveDateTime": "2022-05-06T13:14:03Z",
+        "method": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "362943005",
+              "display": "Manual method"
+            }
+          ]
+        },
+        "device": {
+          "reference": "#SURVEY"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8867-4"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 100.0,
+              "unit": "bpm",
+              "system": "http://unitsofmeasure.org",
+              "code": "{beats}/min"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

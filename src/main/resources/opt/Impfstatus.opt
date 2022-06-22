@@ -28,7 +28,7 @@
     <other_details id="MD5-CAM-1.0.1">5eaf6bec4486b4a929f4af01cb5593a3</other_details>
     <other_details id="PARENT:MD5-CAM-1.0.1">CD5C7EF669BF9300C4CE104319009B71</other_details>
     <other_details id="original_language">ISO_639-1::de</other_details>
-    <other_details id="sem_ver">7.0.0</other_details>
+    <other_details id="sem_ver">8.0.0</other_details>
     <other_details id="build_uid"/>
     <other_details id="original_language">ISO_639-1::de</other_details>
     <details>
@@ -377,7 +377,7 @@
           <lower_included>true</lower_included>
           <lower_unbounded>false</lower_unbounded>
           <upper_unbounded>true</upper_unbounded>
-          <lower>1</lower>
+          <lower>0</lower>
         </occurrences>
         <node_id>at0000</node_id>
         <attributes xsi:type="C_SINGLE_ATTRIBUTE">
@@ -923,7 +923,7 @@
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/vaccines-snomed</referenceSetUri>
+                        <referenceSetUri>terminology://fhir.hl7.org//ValueSet/$expand?url=https://www.netzwerk-universitaetsmedizin.de/fhir/ValueSet/vaccines-snomed</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -1347,7 +1347,7 @@ Wenn mehrere Dosierungen angegeben werden, gibt die 'Dosierungsreihenfolge' die 
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=https://fhir.kbv.de/ValueSet/KBV_VS_MIO_Vaccination_TargetDisease</referenceSetUri>
+                        <referenceSetUri>terminology://fhir.hl7.org//ValueSet/$expand?url=https://fhir.kbv.de/ValueSet/KBV_VS_MIO_Vaccination_TargetDisease</referenceSetUri>
                       </children>
                     </attributes>
                   </children>
@@ -1897,7 +1897,7 @@ Es wird dringend empfohlen, dass das Element "Arzneimittel" mit einer Terminolog
                           <upper>1</upper>
                         </occurrences>
                         <node_id/>
-                        <referenceSetUri>terminology://fhir.hl7.org/ValueSet/$expand?url=http://hl7.org/fhir/uv/ips/ValueSet/absent-or-unknown-immunizations-uv-ips</referenceSetUri>
+                        <referenceSetUri>terminology://fhir.hl7.org//ValueSet/$expand?url=http://hl7.org/fhir/uv/ips/ValueSet/absent-or-unknown-immunizations-uv-ips</referenceSetUri>
                       </children>
                     </attributes>
                   </children>

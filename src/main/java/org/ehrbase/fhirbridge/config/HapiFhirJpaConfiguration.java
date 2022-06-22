@@ -30,10 +30,16 @@ import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoSearchParameterR4;
 import ca.uhn.fhir.jpa.dao.r4.FhirResourceDaoValueSetR4;
 import ca.uhn.fhir.jpa.model.config.PartitionSettings;
 import ca.uhn.fhir.jpa.model.entity.ModelConfig;
+import io.minio.BucketExistsArgs;
+import io.minio.MakeBucketArgs;
+import io.minio.MinioClient;
+import org.ehrbase.fhirbridge.minio.MinioException;
+import org.ehrbase.fhirbridge.minio.MinioService;
 import org.hl7.fhir.r4.model.AuditEvent;
 import org.hl7.fhir.r4.model.CodeSystem;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.Consent;
@@ -51,6 +57,9 @@ import org.hl7.fhir.r4.model.Procedure;
 import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.SearchParameter;
 import org.hl7.fhir.r4.model.ValueSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -107,6 +116,14 @@ public class HapiFhirJpaConfiguration extends BaseR4Config {
         conditionDao.setResourceType(Condition.class);
         conditionDao.setContext(fhirContext());
         return conditionDao;
+    }
+
+    @Bean
+    public IFhirResourceDao<Composition> compositionDao() {
+        JpaResourceDao<Composition> compositionDao = new JpaResourceDao<>();
+        compositionDao.setResourceType(Composition.class);
+        compositionDao.setContext(fhirContext());
+        return compositionDao;
     }
 
     @Bean
@@ -235,5 +252,69 @@ public class HapiFhirJpaConfiguration extends BaseR4Config {
         searchParameterDao.setResourceType(SearchParameter.class);
         searchParameterDao.setContext(fhirContext());
         return searchParameterDao;
+    }
+
+    /**
+     * {@link Configuration} for MinIO.
+     */
+    @Configuration
+    @ConditionalOnProperty(prefix = "fhir-bridge.minio", name = "url")
+    @EnableConfigurationProperties(HapiFhirJpaProperties.MinioProperties.class)
+    public static class MinioConfiguration {
+
+        private static final Logger LOG = LoggerFactory.getLogger(MinioConfiguration.class);
+
+        private final HapiFhirJpaProperties.MinioProperties properties;
+
+        public MinioConfiguration(HapiFhirJpaProperties.MinioProperties properties) {
+            this.properties = properties;
+        }
+
+        @Bean
+        public MinioService minioService(MinioClient minioClient) {
+            try {
+                var found = minioClient.bucketExists(BucketExistsArgs.builder()
+                        .bucket(properties.getBucketName())
+                        .build());
+                if (!found) {
+                    if (properties.isAutoCreateBucket()) {
+                        createBucket(minioClient);
+                    } else {
+                        throw new IllegalStateException("The specified bucket does not exist: " + properties.getBucketName());
+                    }
+                }
+            } catch (Exception e) {
+                throw new MinioException("Error occurred while checking if the specified bucket exists", e);
+            }
+
+            return new MinioService(minioClient, properties.getBucketName(), properties.getUrl());
+        }
+
+        @Bean
+        public MinioClient minioClient() {
+            MinioClient minioClient = MinioClient.builder()
+                    .endpoint(properties.getUrl())
+                    .credentials(properties.getAccessKey(), properties.getSecretKey())
+                    .build();
+
+            minioClient.setTimeout(
+                    properties.getConnectTimeout().toMillis(),
+                    properties.getWriteTimeout().toMillis(),
+                    properties.getReadTimeout().toMillis()
+            );
+
+            return minioClient;
+        }
+
+        private void createBucket(MinioClient minioClient) {
+            try {
+                minioClient.makeBucket(MakeBucketArgs.builder()
+                        .bucket(properties.getBucketName())
+                        .build());
+                LOG.info("Bucket '{}' created successfully", properties.getBucketName());
+            } catch (Exception e) {
+                throw new MinioException("Cannot create the specified bucket", e);
+            }
+        }
     }
 }

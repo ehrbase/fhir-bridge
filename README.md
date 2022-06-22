@@ -11,7 +11,7 @@ The implementation is based on [Apache Camel](https://camel.apache.org/) and [Op
 
 * JDK (>= 11.0.2)
 * Apache Maven (>= 3.6.0)
-* EHRbase (>= v0.14.0)
+* EHRbase (>= v0.14.0) (or similiar openEHR platform)
 * MinIO 
 * [Optional] ELK Stack: Elasticsearch, Kibana and Logstash (>= 7.7.0)
 

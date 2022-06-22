@@ -1,0 +1,319 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "lastUpdated": "2022-05-05T11:56:17.410+00:00",
+    "profile": [
+      "https://example.org/fhir/StructureDefinition/VitalSignsBundle"
+    ]
+  },
+  "identifier": {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:uuid:5926d0df-4a88-4a11-93f5-05f4bb1c9587"
+  },
+  "type": "document",
+  "timestamp": "2022-05-05T11:56:17.410+00:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:491ddb2e-362f-4803-be91-d5a5d88d5e8e",
+      "resource": {
+        "resourceType": "Composition",
+        "meta": {
+          "profile": [
+            "https://example.org/fhir/StructureDefinition/VitalSignsComposition"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Device",
+            "id": "1",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/WearableDevice"
+              ]
+            },
+            "identifier": [
+              {
+                "value": "HiGHmed-Test"
+              }
+            ],
+            "manufacturer": "Apple Inc.",
+            "deviceName": [
+              {
+                "name": "Watch6,4",
+                "type": "model-name"
+              }
+            ],
+            "version": [
+              {
+                "value": "8.5.1"
+              }
+            ]
+          },{
+            "resourceType": "Patient",
+            "id": "3",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/MedpowerPatient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:4122",
+                "value": "{{patientId}}"
+              }
+            ]
+          }
+        ],
+        "status": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "64296-7",
+              "display": "Personal health monitoring report Automated"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "#3"
+        },
+        "date": "2022-05-05T11:56:17+00:00",
+        "author": [
+          {
+            "reference": "#1"
+          }
+        ],
+        "title": "Vital Signs Section",
+        "section": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                  "code": "vital-signs",
+                  "display": "Vital Signs"
+                }
+              ]
+            },
+            "entry": [
+              {
+                "reference": "urn:uuid:22e44b79-ecf7-46b5-830d-83a522de092c"
+              },
+              {
+                "reference": "urn:uuid:6b83d4ef-f178-46a6-90d6-a5d9ebe04869"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:22e44b79-ecf7-46b5-830d-83a522de092c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "22e44b79-ecf7-46b5-830d-83a522de092c",
+        "meta": {
+          "profile": [
+            "https://example.org/fhir/StructureDefinition/HeartRateObservation"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Device",
+            "id": "1",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/WearableDevice"
+              ]
+            },
+            "identifier": [
+              {
+                "value": "HiGHmed-Test"
+              }
+            ],
+            "manufacturer": "Apple Inc.",
+            "deviceName": [
+              {
+                "name": "Watch6,4",
+                "type": "model-name"
+              }
+            ],
+            "version": [
+              {
+                "value": "8.5.1"
+              }
+            ]
+          },
+          {
+            "resourceType": "Patient",
+            "id": "2",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/MedpowerPatient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:4122",
+                "value": "{{patientId}}"
+              }
+            ]
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "76477-9",
+              "display": "Heart rate by Noninvasive"
+            }
+          ],
+          "text": "Discrete Heart Rate"
+        },
+        "subject": {
+          "reference": "#2"
+        },
+        "effectiveDateTime": "2022-05-05T09:38:48Z",
+        "device": {
+          "reference": "#1"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "76477-9",
+                  "display": "Heart rate by Noninvasive"
+                }
+              ],
+              "text": "Discrete Heart Rate"
+            },
+            "valueQuantity": {
+              "value": 59.0,
+              "unit": "bpm",
+              "system": "http://unitsofmeasure.org",
+              "code": "{beats}/min"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6b83d4ef-f178-46a6-90d6-a5d9ebe04869",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "6b83d4ef-f178-46a6-90d6-a5d9ebe04869",
+        "meta": {
+          "profile": [
+            "https://example.org/fhir/StructureDefinition/HeartRateObservation"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Device",
+            "id": "1",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/WearableDevice"
+              ]
+            },
+            "identifier": [
+              {
+                "value": "HiGHmed-Test"
+              }
+            ],
+            "manufacturer": "Apple Inc.",
+            "deviceName": [
+              {
+                "name": "Watch6,4",
+                "type": "model-name"
+              }
+            ],
+            "version": [
+              {
+                "value": "8.5.1"
+              }
+            ]
+          },
+          {
+            "resourceType": "Patient",
+            "id": "2",
+            "meta": {
+              "profile": [
+                "https://example.org/fhir/StructureDefinition/MedpowerPatient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:4122",
+                "value": "{{patientId}}"
+              }
+            ]
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "76477-9",
+              "display": "Heart rate by Noninvasive"
+            }
+          ],
+          "text": "Discrete Heart Rate"
+        },
+        "subject": {
+          "reference": "#2"
+        },
+        "effectiveDateTime": "2022-05-05T09:41:49Z",
+        "device": {
+          "reference": "#1"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "76477-9",
+                  "display": "Heart rate by Noninvasive"
+                }
+              ],
+              "text": "Discrete Heart Rate"
+            },
+            "valueQuantity": {
+              "value": 69.0,
+              "unit": "bpm",
+              "system": "http://unitsofmeasure.org",
+              "code": "{beats}/min"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
