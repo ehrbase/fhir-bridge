@@ -8,6 +8,7 @@
 
     <groupId>org.ehrbase.fhirbridge</groupId>
     <artifactId>fhir-bridge</artifactId>
+  
     <version>1.5.5</version>
 
     <parent>
