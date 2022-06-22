@@ -385,7 +385,8 @@ ${randinteger}                  ${12345}
 	$.component[0].code.coding[0]			${{ [{}] }}				422
 
 	# invalid Code Coding 0 System
-	$.component[0].code.coding[0].system	missing					422
+	#$.component[0].code.coding[0].system	missing					422
+	# See Bug Trace 06
 	$.component[0].code.coding[0].system	${EMPTY}				422
 	$.component[0].code.coding[0].system	${randstring}			422
 	$.component[0].code.coding[0].system	${randinteger}			422
@@ -456,7 +457,8 @@ ${randinteger}                  ${12345}
 	$.component[1].code.coding[0]								${{ [{}] }}				422
 
 	# invalid Code Coding 1 System
-	$.component[1].code.coding[0].system						missing					422
+	#$.component[1].code.coding[0].system						missing					422
+	# See Bug Trace 06
 	$.component[1].code.coding[0].system						${EMPTY}				422
 	$.component[1].code.coding[0].system						${randstring}			422
 	$.component[1].code.coding[0].system						${randinteger}			422
@@ -546,7 +548,8 @@ ${randinteger}                  ${12345}
 	$.component[2].code.coding[0]								${{ [{}] }}				422
 
 	# invalid Code Coding 2 System
-	$.component[2].code.coding[0].system						missing					422
+	#$.component[2].code.coding[0].system						missing					422
+	# See Bug Trace 06
 	$.component[2].code.coding[0].system						${EMPTY}				422
 	$.component[2].code.coding[0].system						${randstring}			422
 	$.component[2].code.coding[0].system						${randinteger}			422
@@ -636,7 +639,8 @@ ${randinteger}                  ${12345}
 	$.component[3].code.coding[0]								${{ [{}] }}				422
 
 	# invalid Code Coding 2 System
-	$.component[3].code.coding[0].system						missing					422
+	#$.component[3].code.coding[0].system						missing					422
+	# See Bug Trace 06
 	$.component[3].code.coding[0].system						${EMPTY}				422
 	$.component[3].code.coding[0].system						${randstring}			422
 	$.component[3].code.coding[0].system						${randinteger}			422
@@ -687,7 +691,8 @@ ${randinteger}                  ${12345}
 	$.component[4].code.coding[0]					${{ [{}] }}				422
 
 	# invalid Code Coding 2 System
-	$.component[4].code.coding[0].system			missing					422
+	#$.component[4].code.coding[0].system			missing					422
+	# See Bug Trace 06
 	$.component[4].code.coding[0].system			${EMPTY}				422
 	$.component[4].code.coding[0].system			${randstring}			422
 	$.component[4].code.coding[0].system			${randinteger}			422
