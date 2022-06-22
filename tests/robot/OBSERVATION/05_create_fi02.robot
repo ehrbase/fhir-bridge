@@ -294,7 +294,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 
 	[Template]			Create FiO2 with ehr reference
-    [Tags]              valueQuantity	prepare
+    [Tags]              valueQuantity
 	#											HTTP
 	$.valueQuantity.value	  	${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
 	$.valueQuantity.value	  	${None}			422    	This property must be an simple value, not null

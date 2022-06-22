@@ -281,7 +281,7 @@ Force Tags              observation_create    body-temperature    create
     ...                 4. *POST* example JSON to observation endpoint\n\n
 	...                 5. *VALIDATE* the response status \n\n
     ...                 6. *VALIDATE* outcome against diagnostic text
-    [Tags]             invalid    valueQuantity    prepare
+    [Tags]             invalid    valueQuantity
     [Template]         create Observation Body Temperature JSON
 
 #|  ressourceType  |          		ID   			|           meta         											|  	  status  	|                             									Identifier   						                            					  						                                                  			|                      				category                           					        						|                                        									code          										                            	                                                                                    	    	|         subject                       |	   DateTime	    |                      			    	  valueQuantity  			           		            |  dataabsentreason  |  R.-Code  |  ArrayNumber |         				                                                                                                                        diagnostics 							                                                                        |

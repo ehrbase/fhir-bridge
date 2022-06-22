@@ -156,7 +156,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n                 
 	[Template]			create Observation lab with ehr reference
-    [Tags]              code	prepare
+    [Tags]              code
 
 	# FIELD/PATH							VALUE					HTTP
 	# 																CODE

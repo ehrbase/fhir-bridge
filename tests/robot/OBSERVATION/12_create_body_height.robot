@@ -381,7 +381,7 @@ ${vQSystem}						http://unitsofmeasure.org
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create body-height with ehr reference
-    [Tags]              valueQuantity	prepare
+    [Tags]              valueQuantity
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location
 	# 																	CODE
 

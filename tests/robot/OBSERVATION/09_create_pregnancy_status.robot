@@ -325,7 +325,7 @@ ${identifiervalue}              urn:uuid:187e0c12-8dd2-67e2-1234-bf273c878281
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create pregnancy status with ehr reference
-    [Tags]              valueCodeableConcept	prepare
+    [Tags]              valueCodeableConcept
 
 
 	# FIELD/PATH								VALUE					HTTP	ERROR MESSAGE																								Location

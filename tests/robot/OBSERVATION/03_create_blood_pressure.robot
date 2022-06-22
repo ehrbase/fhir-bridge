@@ -178,7 +178,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create blood pressure with ehr reference
-    [Tags]              component	prepare
+    [Tags]              component
 
 	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    LOCATION
 	# 														INDEX	CODE
@@ -277,7 +277,7 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	...                 6. *VALIDATE* the response status \n\n
     ...                 7. *VALIDATE* outcome against diagnostic text & location
 	[Template]			create blood pressure with ehr reference
-    [Tags]              component	prepare
+    [Tags]              component
 
 	# FIELD/PATH							VALUE			ISSUE	HTTP	ERROR MESSAGE    LOCATION
 	$.component[1].code  					missing			1		422		Observation.component.diastolicBloodPressure: minimum required = 1, but only found 0 .from ${profile url}

@@ -287,7 +287,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              valueCodeableConcept	prepare
+    [Tags]              valueCodeableConcept
 
 	# FIELD/PATH								VALUE					HTTP
 	# 																	CODE
@@ -361,7 +361,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              component-travel-start-date    prepare
+    [Tags]              component-travel-start-date
 
 	# FIELD/PATH							VALUE					HTTP
 	# 																CODE
@@ -432,7 +432,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              component-country	prepare
+    [Tags]              component-country
 
 	# FIELD/PATH												VALUE					HTTP
 	# 															CODE
@@ -522,7 +522,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              component-state    prepare
+    [Tags]              component-state
 	
 	# FIELD/PATH												VALUE					HTTP
 	# 															CODE
@@ -612,7 +612,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              component-start-city	prepare
+    [Tags]              component-start-city
 	
 	# FIELD/PATH												VALUE					HTTP
 	# 															CODE
@@ -663,7 +663,7 @@ ${randinteger}                  ${12345}
     ...                 5. *POST* example JSON to observation endpoint\n\n
 	...                 6. *VALIDATE* the response status \n\n
 	[Template]			create History of Travel with ehr reference
-    [Tags]              component-travel-end-date	prepare
+    [Tags]              component-travel-end-date
 	
 	# FIELD/PATH									VALUE					HTTP
 	# 																		CODE
