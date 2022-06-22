@@ -43,7 +43,7 @@ public class SubmissionSetConverter extends ITI41Converter {
 
     private static Optional<Author> getAuthor(List<Reference> authors) {
         for (Reference authorEntry : authors) {
-            Optional<Identifiable> authorRole = getAuthorRole(authorEntry);
+            Optional<Identifiable> authorRole = getAuthorRoleIdentifiable(authorEntry);
             if (authorRole.isPresent()) {
                 Author author = new Author();
                 author.getAuthorRole().add(authorRole.get());
@@ -53,29 +53,29 @@ public class SubmissionSetConverter extends ITI41Converter {
         return Optional.empty();
     }
 
-    private static Optional<Identifiable> getAuthorRole(Reference authorEntry) {
+    private static Optional<Identifiable> getAuthorRoleIdentifiable(Reference authorEntry) {
         if (authorEntry.getResource().getClass().equals(PractitionerRole.class)) {
-            return practitionerToAuthorRole(authorEntry);
+            return practitionerRoleToIdentifiable(authorEntry);
         } else {
             LOG.warn("Only PractitionerRole is currently supported for DocumentManifest, therefore nothing is mapped");
             return Optional.empty();
         }
     }
 
-    private static Optional<Identifiable> practitionerToAuthorRole(Reference authorEntry) {
+    private static Optional<Identifiable> practitionerRoleToIdentifiable(Reference authorEntry) {
         PractitionerRole practitionerRole = (PractitionerRole) authorEntry.getResource();
         Optional<Coding> coding = practitionerRole.getCode().stream().filter(CodeableConcept::hasCoding)
                 .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
                 .findFirst();
         if (coding.isPresent()) {
-            return codingToAuthorRole(coding.get());
+            return codingToIdentifiable(coding.get());
         } else {
             LOG.warn("Only PractitionerRole is currently supported for DocumentManifest, therefore nothing is mapped");
             return Optional.empty();
         }
     }
 
-    private static Optional<Identifiable> codingToAuthorRole(Coding coding) {
+    private static Optional<Identifiable> codingToIdentifiable(Coding coding) {
         try {
             return Optional.of(new Identifiable(coding.getCode(), new Oid(coding.getSystem()))); //always present
         } catch (GSSException e) {
