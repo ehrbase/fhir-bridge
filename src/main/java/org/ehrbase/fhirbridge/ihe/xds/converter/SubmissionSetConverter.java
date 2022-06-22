@@ -6,25 +6,27 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DocumentManifest;
 import org.hl7.fhir.r4.model.PractitionerRole;
 import org.hl7.fhir.r4.model.Reference;
+import org.ietf.jgss.GSSException;
+import org.ietf.jgss.Oid;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public class SubmissionSetConverter extends ITI41Converter {
+    private static final Logger LOG = LoggerFactory.getLogger(SubmissionSetConverter.class);
+
 
     public static SubmissionSet convert(DocumentManifest documentManifest) {
         SubmissionSet submissionSet = new SubmissionSet();
-        Timestamp timestamp = new Timestamp();
-        timestamp.setDateTime(OffsetDateTime.now().toZonedDateTime());
-        submissionSet.setSubmissionTime(timestamp);
-        submissionSet.setAuthor(getAuthor(documentManifest.getAuthor()));
+        submissionSet.setSubmissionTime(documentManifest.getCreated().toString());
+        getAuthor(documentManifest.getAuthor()).ifPresent(submissionSet::setAuthor);
         submissionSet.setUniqueId(documentManifest.getMasterIdentifier().getId());
         submissionSet.setEntryUuid(documentManifest.getIdentifier().get(0).getValue());
         submissionSet.setSourceId(documentManifest.getSource());
@@ -39,49 +41,46 @@ public class SubmissionSetConverter extends ITI41Converter {
         return new Code(coding.getCode(), new LocalizedString(coding.getDisplay()), coding.getSystem());
     }
 
-    private static Author getAuthor(List<Reference> authors) {
+    private static Optional<Author> getAuthor(List<Reference> authors) {
         for (Reference authorEntry : authors) {
-            Author author = new Author();
-            authorEntry.getResource();
-            author.getAuthorRole().add(getRole(authorEntry));
-            return author;
+            Optional<Identifiable> authorRole = getAuthorRole(authorEntry);
+            if (authorRole.isPresent()) {
+                Author author = new Author();
+                author.getAuthorRole().add(authorRole.get());
+                return Optional.of(author);
+            }
         }
-        throw new UnprocessableEntityException("no Author was defined in the MHD Bundle");
+        return Optional.empty();
     }
 
-    private static Identifiable getRole(Reference authorEntry) {
+    private static Optional<Identifiable> getAuthorRole(Reference authorEntry) {
         if (authorEntry.getResource().getClass().equals(PractitionerRole.class)) {
-            PractitionerRole practitionerRole = (PractitionerRole) authorEntry.getResource();
-            Optional<String> id = practitionerRole.getCode().stream().filter(CodeableConcept::hasCoding)
-                    .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
-                    .map(Coding::getCode)
-                    .findFirst();
-            return new Identifiable(id.get()); //always present
+            return practitionerToAuthorRole(authorEntry);
         } else {
-            throw new UnprocessableEntityException("Only PractionerRole is currently supported for DocumentManifest Author");
+            LOG.warn("Only PractitionerRole is currently supported for DocumentManifest, therefore nothing is mapped");
+            return Optional.empty();
         }
-
     }
 
-/*    private static Person getPerson(Reference authorEntry) {
-        if (authorEntry.getResource().getClass().equals(PractitionerRole.class)) {
-            PractitionerRole practitionerRole = (PractitionerRole) authorEntry.getResource();
-            Person person = new Person();
-            Optional<String> id = practitionerRole.getCode().stream().filter(CodeableConcept::hasCoding)
-                    .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
-                    .map(Coding::getCode)
-                    .findFirst();
-*//*            Optional<String> name = practitionerRole.getCode().stream().filter(CodeableConcept::hasCoding)
-                    .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
-                    .map(Coding::getDisplay)
-                    .findFirst();
-            person.setName(new Name(name.get()));*//*
-            person.setId(new Identifiable(id.get())); //Always present
-            return person;
+    private static Optional<Identifiable> practitionerToAuthorRole(Reference authorEntry) {
+        PractitionerRole practitionerRole = (PractitionerRole) authorEntry.getResource();
+        Optional<Coding> coding = practitionerRole.getCode().stream().filter(CodeableConcept::hasCoding)
+                .flatMap(codeableConcept -> codeableConcept.getCoding().stream())
+                .findFirst();
+        if (coding.isPresent()) {
+            return codingToAuthorRole(coding.get());
         } else {
-            throw new UnprocessableEntityException("Only PractionerRole is currently supported for DocumentManifest Author");
+            LOG.warn("Only PractitionerRole is currently supported for DocumentManifest, therefore nothing is mapped");
+            return Optional.empty();
         }
-    }*/
+    }
 
+    private static Optional<Identifiable> codingToAuthorRole(Coding coding) {
+        try {
+            return Optional.of(new Identifiable(coding.getCode(), new Oid(coding.getSystem()))); //always present
+        } catch (GSSException e) {
+            throw new UnprocessableEntityException("OID system code of practitionerRole seems not to be valid");
+        }
+    }
 
 }
