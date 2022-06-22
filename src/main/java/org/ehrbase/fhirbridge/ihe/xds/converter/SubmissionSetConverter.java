@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ihe.xds.converter;
 
+import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -13,6 +14,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +27,7 @@ public class SubmissionSetConverter extends ITI41Converter {
 
     public static SubmissionSet convert(DocumentManifest documentManifest) {
         SubmissionSet submissionSet = new SubmissionSet();
-        submissionSet.setSubmissionTime(documentManifest.getCreated().toString());
+        submissionSet.setSubmissionTime(new Timestamp(documentManifest.getCreatedElement().getValueAsCalendar().toZonedDateTime(), convertPrecision(documentManifest.getCreatedElement().getPrecision())));
         getAuthor(documentManifest.getAuthor()).ifPresent(submissionSet::setAuthor);
         submissionSet.setUniqueId(documentManifest.getMasterIdentifier().getId());
         submissionSet.setEntryUuid(documentManifest.getIdentifier().get(0).getValue());
@@ -33,6 +35,23 @@ public class SubmissionSetConverter extends ITI41Converter {
         submissionSet.setContentTypeCode(getContentType(documentManifest));
         submissionSet.setPatientId(getPatientId(documentManifest.getSubject()));
         return submissionSet;
+    }
+
+    private static Timestamp.Precision convertPrecision(TemporalPrecisionEnum precision) {
+        if(precision == TemporalPrecisionEnum.YEAR){
+            return Timestamp.Precision.YEAR;
+        }else if(precision == TemporalPrecisionEnum.MONTH){
+            return Timestamp.Precision.MONTH;
+        }else if(precision == TemporalPrecisionEnum.MINUTE){
+            return Timestamp.Precision.MINUTE;
+        }else if(precision == TemporalPrecisionEnum.SECOND){
+            return Timestamp.Precision.SECOND;
+        }else if(precision == TemporalPrecisionEnum.MILLI){
+            LOG.warn("precision mini is not supported for the timestamp of submissionTime, second is the precisest. Therefore it will be mapped.");
+            return Timestamp.Precision.SECOND;
+        }else{
+            throw new UnprocessableEntityException("Created time could not be to submissions time. The precision could not be mapped.");
+        }
     }
 
 
@@ -77,8 +96,9 @@ public class SubmissionSetConverter extends ITI41Converter {
 
     private static Optional<Identifiable> codingToIdentifiable(Coding coding) {
         try {
-            return Optional.of(new Identifiable(coding.getCode(), new Oid(coding.getSystem()))); //always present
+            return Optional.of(new Identifiable(coding.getCode(),new Oid(coding.getSystem().replace("urn:oid:","")))); //always present
         } catch (GSSException e) {
+            e.printStackTrace();
             throw new UnprocessableEntityException("OID system code of practitionerRole seems not to be valid");
         }
     }
