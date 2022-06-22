@@ -421,7 +421,7 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.valueQuantity.code	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..code
 	$.valueQuantity.code	  					${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.code	  					${123}			422    	Error parsing JSON: the primitive value must be a string
-	$.valueQuantity.code	  					foobar			422    	.*No matching units for:foobar, expected units:cm.*Bad Request.*
+	#$.valueQuantity.code	  					foobar			422    	.*No matching units for:foobar, expected units:cm.*Bad Request.*
 
 
 013 Create Body Height (invalid multi)
