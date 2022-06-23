@@ -99,7 +99,7 @@ public class SubmissionSetConverter extends ITI41Converter {
         try {
             return Optional.of(new Identifiable(coding.getCode(),new Oid(coding.getSystem().replace("urn:oid:","")))); //always present
         } catch (GSSException e) {
-            e.printStackTrace();
+            LOG.error("Error occured when for the OID of Author role: " + e);
             throw new UnprocessableEntityException("OID system code of practitionerRole seems not to be valid");
         }
     }
