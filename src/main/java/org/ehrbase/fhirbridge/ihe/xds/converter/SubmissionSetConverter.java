@@ -27,7 +27,8 @@ public class SubmissionSetConverter extends ITI41Converter {
 
     public static SubmissionSet convert(DocumentManifest documentManifest) {
         SubmissionSet submissionSet = new SubmissionSet();
-        submissionSet.setSubmissionTime(new Timestamp(documentManifest.getCreatedElement().getValueAsCalendar().toZonedDateTime(), convertPrecision(documentManifest.getCreatedElement().getPrecision())));
+        submissionSet.setSubmissionTime(new Timestamp(documentManifest.getCreatedElement().getValueAsCalendar().toZonedDateTime(),
+                convertPrecision(documentManifest.getCreatedElement().getPrecision())));
         getAuthor(documentManifest.getAuthor()).ifPresent(submissionSet::setAuthor);
         submissionSet.setUniqueId(documentManifest.getMasterIdentifier().getId());
         submissionSet.setEntryUuid(documentManifest.getIdentifier().get(0).getValue());
@@ -98,7 +99,7 @@ public class SubmissionSetConverter extends ITI41Converter {
         try {
             return Optional.of(new Identifiable(coding.getCode(),new Oid(coding.getSystem().replace("urn:oid:","")))); //always present
         } catch (GSSException e) {
-            e.printStackTrace();
+            LOG.error("Error occured when for the OID of Author role: " + e);
             throw new UnprocessableEntityException("OID system code of practitionerRole seems not to be valid");
         }
     }

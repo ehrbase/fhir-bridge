@@ -81,14 +81,18 @@ public class DocumentConverter extends ITI41Converter {
 
     private static Optional<Code> getHealthCareFacilityCode(DocumentReference documentReference) {
         for(Coding coding : documentReference.getContext().getFacilityType().getCoding()){
-           return Optional.of(codingToCode(coding));
+            if(coding.hasCode()){
+                return Optional.of(codingToCode(coding));
+            }
         }
         return Optional.empty();
     }
 
     private static Optional<Code> getPracticeSettingCode(DocumentReference documentReference) {
         for(Coding coding : documentReference.getContext().getPracticeSetting().getCoding()){
-            return Optional.of(codingToCode(coding));
+            if(coding.hasCode()){
+                return Optional.of(codingToCode(coding));
+            }
         }
         return Optional.empty();
     }
