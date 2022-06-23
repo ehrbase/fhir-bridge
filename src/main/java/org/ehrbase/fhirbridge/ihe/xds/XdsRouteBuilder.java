@@ -51,8 +51,8 @@ public class XdsRouteBuilder extends RouteBuilder {
                     }
                 })
                 .bean(ITI41Processor.class)
-                .convertBodyTo(ProvideAndRegisterDocumentSet.class)
-            //    .to("xds-iti41://{{fhir-bridge.xds.hostname}}:{{fhir-bridge.xds.port}}{{fhir-bridge.xds.context-path}}?outInterceptors=#serverOutLogger")
+                .convertBodyTo(ProvideAndRegisterDocumentSet.class) //TODO exception catch
+              //  .to("xds-iti41://{{fhir-bridge.xds.hostname}}:{{fhir-bridge.xds.port}}{{fhir-bridge.xds.context-path}}?outInterceptors=#serverOutLogger")
                 .to("xds-iti41://{{fhir-bridge.xds.hostname}}:{{fhir-bridge.xds.port}}{{fhir-bridge.xds.context-path}}")
                 .setBody().exchangeProperty("fhir_resource");
         // @formatter:on
