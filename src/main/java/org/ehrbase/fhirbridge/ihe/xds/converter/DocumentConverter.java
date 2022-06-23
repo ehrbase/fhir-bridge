@@ -66,7 +66,8 @@ public class DocumentConverter extends ITI41Converter {
 
     private static DocumentEntry getDocumentEntry(DocumentReference documentReference) {
         DocumentEntry documentEntry = new DocumentEntry();
-        documentEntry.setUniqueId(documentReference.getIdentifier().get(0).getId());
+        documentEntry.setEntryUuid(documentReference.getIdentifier().get(0).getValue());
+        documentEntry.setUniqueId(documentReference.getMasterIdentifier().getValue());
         documentEntry.setTypeCode(getTypeCode(documentReference));
         documentEntry.setClassCode(getClassCode(documentReference));
         documentEntry.setPatientId(getPatientId(documentReference.getSubject()));
@@ -103,7 +104,11 @@ public class DocumentConverter extends ITI41Converter {
     }
 
     private static void setSourcePatientId(DocumentEntry documentEntry, DocumentReference documentReference) {
-        documentEntry.setSourcePatientId(getPatientId(documentReference.getContext().getSourcePatientInfo()));
+        if(documentReference.getContext().hasSourcePatientInfo()){
+            if( documentReference.getContext().getSourcePatientInfo().hasIdentifier()){
+                documentEntry.setSourcePatientId(convertPatientIdentifierToIdentifiable(documentReference.getContext().getSourcePatientInfo().getIdentifier()));
+            }
+        }
     }
 
     private static void setEventCodes(DocumentEntry documentEntry, DocumentReference documentReference) {
@@ -152,7 +157,7 @@ public class DocumentConverter extends ITI41Converter {
             display.setCharset("UTF-8");
             display.setValue(coding.getDisplay());
             result.setDisplayName(display);
-            result.setSchemeName(coding.getSystem());
+            result.setSchemeName(replaceUrnOid(coding.getSystem()));
             return result;
         }
 }
