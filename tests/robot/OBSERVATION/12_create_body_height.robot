@@ -403,9 +403,6 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.valueQuantity.value	  					${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
 	$.valueQuantity.value	  					${None}			422    	This property must be an simple value, not null
 	$.valueQuantity.value	  					113				422    	Error parsing JSON: the primitive value must be a number
-	$.valueQuantity.value	  					${1001}			422    	.*value is not within interval, expected:0.0 <= 1001.0 <= 1000.0.*Bad Request.*
-	$.valueQuantity.value	  					${1000.09}		422    	.*value is not within interval, expected:0.0 <= 1000.09 <= 1000.0.*Bad Request.*
-	$.valueQuantity.value	  					${-1}			422    	.*value is not within interval, expected:0.0 <= -1.0 <= 1000.0.*Bad Request.*
 	$.valueQuantity.value	  					1000,7			422    	The value '1000,7' is not a valid decimal    Observation.value.ofType.Quantity..value
 	$.valueQuantity.value	  					foobar			422    	Error parsing JSON: the primitive value must be a number
 
@@ -424,7 +421,7 @@ ${vQSystem}						http://unitsofmeasure.org
 	$.valueQuantity.code	  					${EMPTY}		422    	@value cannot be empty    Observation.value.ofType.Quantity..code
 	$.valueQuantity.code	  					${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${body_height-url}
 	$.valueQuantity.code	  					${123}			422    	Error parsing JSON: the primitive value must be a string
-	$.valueQuantity.code	  					foobar			422    	.*No matching units for:foobar, expected units:cm.*Bad Request.*
+	#$.valueQuantity.code	  					foobar			422    	.*No matching units for:foobar, expected units:cm.*Bad Request.*
 
 
 013 Create Body Height (invalid multi)
@@ -478,16 +475,7 @@ ${vQSystem}						http://unitsofmeasure.org
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # BUG TRACE
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-BUG TRACE 01 Create Body Height (Invalid/Missing 'identifier')
-	[Documentation]		Belongs to TC 005! Remove separation when it's fixed!
-	[Template]			create body-height with ehr reference
-    [Tags]              identifier    not-ready    bug
-	# FIELD/PATH					VALUE							HTTP	ERROR MESSAGE																									Location
-	# 																CODE
-	$.identifier[0].value			${randstring}				 	422	   	if identifier.system is ''foobar'', then the identifier.value must be a full URI								Observation.identifier.0.
-
-
-BUG TRACE 02 Create Body Height (Invalid/Missing 'DataAbsentReason')
+BUG TRACE 01 Create Body Height (Invalid/Missing 'DataAbsentReason')
 	[Documentation]		Belongs to TC 011! Remove separation when it's fixed!
 	[Template]			create body-height with ehr reference AND data absentreason
     [Tags]              DataAbsentReason    not-ready    bug

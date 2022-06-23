@@ -229,9 +229,6 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.component[0].valueQuantity.value		113				0		422    	Error parsing JSON: the primitive value must be a number
 	...																		Observation.component[0].value[x].value
 
-	$.component[0].valueQuantity.value		${1000}			0		422    	.*value is not within interval, expected:0.0 <= 1000.0 < 1000.0.*Bad Request.*
-	$.component[0].valueQuantity.value		${1000.09}		0		422    	.*value is not within interval, expected:0.0 <= 1000.09 < 1000.0.*Bad Request.*
-	$.component[0].valueQuantity.value		${-1}			0		422    	.*value is not within interval, expected:0.0 <= -1.0 < 1000.0.*Bad Request.*
 	$.component[0].valueQuantity.value		100,7			2		422    	The value '100,7' is not a valid decimal
 	...																		"Observation.component[0].value.ofType(Quantity).value
 	$.component[0].valueQuantity.value		foobar			0		422    	Error parsing JSON: the primitive value must be a number
@@ -327,9 +324,6 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.component[1].valueQuantity.value		107				0		422		Error parsing JSON: the primitive value must be a number
 	...																		Observation.component[1].value[x].value
 
-	$.component[1].valueQuantity.value		${1000}			0		422		.*value is not within interval, expected:0.0 <= 1000.0 < 1000.0.*Bad Request.*
-	$.component[1].valueQuantity.value		${1500}			0		422		.*value is not within interval, expected:0.0 <= 1500.0 < 1000.0.*Bad Request.*
-	$.component[1].valueQuantity.value		${-1}			0		422		.*value is not within interval, expected:0.0 <= -1.0 < 1000.0.*Bad Request.*
 	$.component[1].valueQuantity.value		foobar			2		422		The value 'foobar' is not a valid decimal
 	...																		Observation.component[1].value.ofType(Quantity).value
 	

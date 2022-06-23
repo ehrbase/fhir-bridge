@@ -299,9 +299,6 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.valueQuantity.value	  	${EMPTY}		422    	Error parsing JSON: the primitive value must be a number
 	$.valueQuantity.value	  	${None}			422    	This property must be an simple value, not null
 	$.valueQuantity.value	  	113				422    	Error parsing JSON: the primitive value must be a number
-	$.valueQuantity.value	  	${101}			422    	.*value is not within interval, expected:0.0 <= 101.0 <= 100.0.*Bad Request.*
-	$.valueQuantity.value	  	${100.09}		422    	.*value is not within interval, expected:0.0 <= 100.09 <= 100.0.*Bad Request.*
-	$.valueQuantity.value	  	${-1}			422    	.*value is not within interval, expected:0.0 <= -1.0 <= 100.0.*Bad Request.*
 	$.valueQuantity.value	  	100,7			422    	The value '100,7' is not a valid decimal    Observation.value.ofType.Quantity..value
 	$.valueQuantity.value	  	foobar			422    	Error parsing JSON: the primitive value must be a number
 
@@ -318,7 +315,6 @@ ${profile url}			https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefi
 	$.valueQuantity.code	  	${None}			422    	Observation.value.x.:valueQuantity.code: minimum required = 1, but only found 0 .from ${profile url}
 	$.valueQuantity.code	  	${123}			422    	Error parsing JSON: the primitive value must be a string
 	$.valueQuantity.code	  	foobar			422    	Value is 'foobar' but must be '%'
-	[Teardown]          TRACE GITHUB ISSUE  247  bug
 
 
 
