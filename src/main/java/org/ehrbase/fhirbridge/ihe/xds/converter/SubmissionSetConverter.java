@@ -30,7 +30,7 @@ public class SubmissionSetConverter extends ITI41Converter {
         submissionSet.setSubmissionTime(new Timestamp(documentManifest.getCreatedElement().getValueAsCalendar().toZonedDateTime(),
                 convertPrecision(documentManifest.getCreatedElement().getPrecision())));
         getAuthor(documentManifest.getAuthor()).ifPresent(submissionSet::setAuthor);
-        submissionSet.setUniqueId(documentManifest.getMasterIdentifier().getId());
+        submissionSet.setUniqueId(documentManifest.getMasterIdentifier().getValue());
         submissionSet.setEntryUuid(documentManifest.getIdentifier().get(0).getValue());
         submissionSet.setSourceId(documentManifest.getSource());
         submissionSet.setContentTypeCode(getContentType(documentManifest));
@@ -58,7 +58,7 @@ public class SubmissionSetConverter extends ITI41Converter {
 
     private static Code getContentType(DocumentManifest documentManifest) {
         Coding coding = documentManifest.getType().getCoding().get(0);
-        return new Code(coding.getCode(), new LocalizedString(coding.getDisplay()), coding.getSystem());
+        return new Code(coding.getCode(), new LocalizedString(coding.getDisplay()), replaceUrnOid(coding.getSystem()));
     }
 
     private static Optional<Author> getAuthor(List<Reference> authors) {
@@ -97,7 +97,7 @@ public class SubmissionSetConverter extends ITI41Converter {
 
     private static Optional<Identifiable> codingToIdentifiable(Coding coding) {
         try {
-            return Optional.of(new Identifiable(coding.getCode(),new Oid(coding.getSystem().replace("urn:oid:","")))); //always present
+            return Optional.of(new Identifiable(coding.getCode(),new Oid(replaceUrnOid(coding.getSystem())))); //always present
         } catch (GSSException e) {
             LOG.error("Error occured when for the OID of Author role: " + e);
             throw new UnprocessableEntityException("OID system code of practitionerRole seems not to be valid");
