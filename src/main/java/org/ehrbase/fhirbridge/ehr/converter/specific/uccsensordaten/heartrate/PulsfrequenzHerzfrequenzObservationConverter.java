@@ -1,6 +1,8 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten;
+package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.heartrate;
 
-import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionToObservationConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.UCCObservationToObservationConverter;
+import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.MethodeDefiningCode;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.PulsfrequenzHerzfrequenzObservation;
 import org.hl7.fhir.r4.model.Coding;
@@ -11,11 +13,12 @@ import org.hl7.fhir.r4.model.Reference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PulsfrequenzHerzfrequenzObservationConverter extends CompositionToObservationConverter<PulsfrequenzHerzfrequenzObservation> {
+public class PulsfrequenzHerzfrequenzObservationConverter extends UCCObservationToObservationConverter<PulsfrequenzHerzfrequenzObservation> {
 
     @Override
     protected PulsfrequenzHerzfrequenzObservation convertInternal(Composition composition) {
         PulsfrequenzHerzfrequenzObservation pulsfrequenzHerzfrequenzObservation = new PulsfrequenzHerzfrequenzObservation();
+        pulsfrequenzHerzfrequenzObservation.setMethodeDefiningCode(MethodeDefiningCode.AUTOMATISCH_NICHT_INVASIV);
         mapEreignise(pulsfrequenzHerzfrequenzObservation, composition);
         return pulsfrequenzHerzfrequenzObservation;
     }
@@ -30,12 +33,12 @@ public class PulsfrequenzHerzfrequenzObservationConverter extends CompositionToO
             }
         }
         pulsfrequenzHerzfrequenzObservation.setMomentaneHerzfrequenz(momentaneHerzfrequenzChoices);
-
     }
 
     private void mapPulseFrequenzErgebnis(Composition.SectionComponent section, List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> momentaneHerzfrequenzChoices) {
         for(Reference entry: section.getEntry()){
             momentaneHerzfrequenzChoices.add(new MomentaneHerzfrequenzConverter().convert((Observation) entry.getResource()));
+            addEventTimings(TimeConverter.convertObservationTime((Observation) entry.getResource()));
         }
     }
 }

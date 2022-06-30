@@ -2,6 +2,7 @@ package org.ehrbase.fhirbridge.ehr.converter.generic;
 
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
 import org.ehrbase.fhirbridge.ehr.converter.LoggerMessages;
+import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.heartrate.PulsfrequenzHerzfrequenzObservationConverter;
 import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Condition;
 import org.slf4j.Logger;
@@ -13,7 +14,7 @@ import java.lang.reflect.Method;
 import java.time.temporal.TemporalAccessor;
 
 public abstract class CompositionToObservationConverter <E extends EntryEntity> extends EntryEntityConverter<Composition, E> {
-    private static final Logger LOG = LoggerFactory.getLogger(ConditionToObservationConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CompositionToObservationConverter.class);
 
     @Override
     public E convert(@NonNull Composition resource) {

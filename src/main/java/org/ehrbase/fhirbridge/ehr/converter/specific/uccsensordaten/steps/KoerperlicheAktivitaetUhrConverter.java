@@ -1,6 +1,7 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten;
+package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.steps;
 
-import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionToObservationConverter;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.UCCObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.MitSensorGemesseneKoerperlicheAktivitaetJedesEreignisChoice;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.MitSensorGemesseneKoerperlicheAktivitaetObservation;
 import org.hl7.fhir.r4.model.Coding;
@@ -8,10 +9,12 @@ import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Reference;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class KoerperlicheAktivitaetConverter extends CompositionToObservationConverter<MitSensorGemesseneKoerperlicheAktivitaetObservation> {
+public class KoerperlicheAktivitaetUhrConverter extends UCCObservationToObservationConverter<MitSensorGemesseneKoerperlicheAktivitaetObservation> {
+
     @Override
     protected MitSensorGemesseneKoerperlicheAktivitaetObservation convertInternal(Composition composition) {
         MitSensorGemesseneKoerperlicheAktivitaetObservation koerperlicheAktivitaetObservation = new MitSensorGemesseneKoerperlicheAktivitaetObservation();
@@ -31,9 +34,14 @@ public class KoerperlicheAktivitaetConverter extends CompositionToObservationCon
         koerperlicheAktivitaetObservation.setJedesEreignis(koerperlicheAktivitaeten);
     }
 
-    private void mapKoerperlicheAktivitaetErgebnis(Composition.SectionComponent section, List<MitSensorGemesseneKoerperlicheAktivitaetJedesEreignisChoice> koerperlicheAktivitaeten){
-        for(Reference entry: section.getEntry()){
-            koerperlicheAktivitaeten.add(new KoerperlicheAktivitaetEreignisIntervalEventConverter().convert((Observation) entry.getResource()));
+    private void mapKoerperlicheAktivitaetErgebnis(Composition.SectionComponent section, List<MitSensorGemesseneKoerperlicheAktivitaetJedesEreignisChoice> koerperlicheAktivitaeten) {
+        for (Reference entry : section.getEntry()) {
+            Observation observation = (Observation) entry.getResource();
+            if(!observation.hasNote()){
+                koerperlicheAktivitaeten.add(new KoerperlicheAktivitaetEreignisIntervalEventConverter().convert((Observation) entry.getResource()));
+                addEventTimings(TimeConverter.convertObservationTime((Observation) entry.getResource()));
+            }
         }
     }
+
 }

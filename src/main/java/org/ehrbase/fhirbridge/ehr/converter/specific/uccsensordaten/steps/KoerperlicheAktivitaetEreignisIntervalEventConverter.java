@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten;
+package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.steps;
 
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;

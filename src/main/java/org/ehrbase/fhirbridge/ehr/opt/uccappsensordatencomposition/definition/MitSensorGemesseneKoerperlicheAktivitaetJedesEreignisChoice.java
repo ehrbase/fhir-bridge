@@ -12,8 +12,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T13:12:33.447324246+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
+    date = "2022-06-30T13:56:48.488831+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public interface MitSensorGemesseneKoerperlicheAktivitaetJedesEreignisChoice {
   NullFlavour getAnzahlStockwerkeNullFlavourDefiningCode();

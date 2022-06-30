@@ -40,7 +40,7 @@ public class UCCAppSensorDatenCompositionContainment extends Containment {
 
   public SelectAqlField<PulsfrequenzHerzfrequenzObservation> PULSFREQUENZ_HERZFREQUENZ = new AqlFieldImp<PulsfrequenzHerzfrequenzObservation>(UCCAppSensorDatenComposition.class, "/content[openEHR-EHR-OBSERVATION.pulse.v2]", "pulsfrequenzHerzfrequenz", PulsfrequenzHerzfrequenzObservation.class, this);
 
-  public SelectAqlField<MitSensorGemesseneKoerperlicheAktivitaetObservation> MIT_SENSOR_GEMESSENE_KOERPERLICHE_AKTIVITAET = new AqlFieldImp<MitSensorGemesseneKoerperlicheAktivitaetObservation>(UCCAppSensorDatenComposition.class, "/content[openEHR-EHR-OBSERVATION.wearable_sensor_activity.v0]", "mitSensorGemesseneKoerperlicheAktivitaet", MitSensorGemesseneKoerperlicheAktivitaetObservation.class, this);
+  public ListSelectAqlField<MitSensorGemesseneKoerperlicheAktivitaetObservation> MIT_SENSOR_GEMESSENE_KOERPERLICHE_AKTIVITAET = new ListAqlFieldImp<MitSensorGemesseneKoerperlicheAktivitaetObservation>(UCCAppSensorDatenComposition.class, "/content[openEHR-EHR-OBSERVATION.wearable_sensor_activity.v0]", "mitSensorGemesseneKoerperlicheAktivitaet", MitSensorGemesseneKoerperlicheAktivitaetObservation.class, this);
 
   public SelectAqlField<PartyProxy> COMPOSER = new AqlFieldImp<PartyProxy>(UCCAppSensorDatenComposition.class, "/composer", "composer", PartyProxy.class, this);
 
