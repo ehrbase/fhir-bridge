@@ -1,9 +1,13 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten;
 
+import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.collections.list.SetUniqueList;
 import org.ehrbase.fhirbridge.ehr.converter.generic.CompositionToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.heartrate.PulsfrequenzHerzfrequenzObservationConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.steps.KoerperlicheAktivitaetHandyConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.steps.KoerperlicheAktivitaetUhrConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.steps.KoerperlicheAktivitaetConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.steps.NoteDevice;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.UCCAppSensorDatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.MitSensorGemesseneKoerperlicheAktivitaetObservation;
 import org.hl7.fhir.r4.model.Coding;
@@ -37,26 +41,33 @@ public class UCCSensordatenCompositionConverter extends CompositionToComposition
 
     }
 
-    private  List<MitSensorGemesseneKoerperlicheAktivitaetObservation> convertKoerperlicheAktivitaet(Composition composition, List<Reference> entries) {
-        boolean hasNote = false;
-        int handyConverterCount = 0;
+    private List<MitSensorGemesseneKoerperlicheAktivitaetObservation> convertKoerperlicheAktivitaet(Composition composition, List<Reference> entries) {
         List<MitSensorGemesseneKoerperlicheAktivitaetObservation> koerperlicheAktivitaeten = new ArrayList<>();
+        List<String> deviceIds = new ArrayList<>();
         for (Reference entry : entries) {
             Observation observation = (Observation) entry.getResource(); //Always Observation
             if (observation.hasNote()) {
-                hasNote = true;
-            }else {
-                handyConverterCount++;
+                if(!deviceIds.contains(getDeviceId(observation))){
+                    deviceIds.add(getDeviceId(observation));
+                }
             }
-
         }
 
-        if(hasNote){
-            koerperlicheAktivitaeten.add(new KoerperlicheAktivitaetHandyConverter().convert(composition));
-        }
-        if(handyConverterCount>0){
-            koerperlicheAktivitaeten.add(new KoerperlicheAktivitaetUhrConverter().convert(composition));
+        for (String deviceId : deviceIds) {
+            koerperlicheAktivitaeten.add(new KoerperlicheAktivitaetConverter(deviceId).convert(composition));
         }
         return koerperlicheAktivitaeten;
+    }
+
+    String getDeviceId(Observation observation) {
+        ObjectMapper mapper = new ObjectMapper();
+        String x = observation.getNote().get(0).getText().replace("\\\"", "\"");
+        NoteDevice noteDevice = null;
+        try {
+            noteDevice = mapper.readValue(x, NoteDevice.class);
+            return noteDevice.getDevice_id();
+        } catch (JsonProcessingException e) {
+            throw new UnprocessableEntityException("Could not get DeviceId from Note");
+        }
     }
 }

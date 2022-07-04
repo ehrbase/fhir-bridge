@@ -29,12 +29,9 @@ public abstract class UCCObservationToObservationConverter<E extends EntryEntity
         return entryEntity;
     }
 
-
     private void invokeTimeValues(E entryEntity, Composition resource) {
         invokeTimeValue(entryEntity, resource);
     }
-
-
 
     private void invokeTimeValue(E entryEntity, Composition resource) {
         try {

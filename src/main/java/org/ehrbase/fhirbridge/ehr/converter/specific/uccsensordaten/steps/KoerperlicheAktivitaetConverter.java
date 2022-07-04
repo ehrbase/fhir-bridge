@@ -14,9 +14,12 @@ import org.hl7.fhir.r4.model.Reference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KoerperlicheAktivitaetHandyConverter extends UCCObservationToObservationConverter<MitSensorGemesseneKoerperlicheAktivitaetObservation> {
+public class KoerperlicheAktivitaetConverter extends UCCObservationToObservationConverter<MitSensorGemesseneKoerperlicheAktivitaetObservation>{
+    String deviceId;
 
-
+    public KoerperlicheAktivitaetConverter(String deviceId) {
+        this.deviceId = deviceId;
+    }
 
     @Override
     protected MitSensorGemesseneKoerperlicheAktivitaetObservation convertInternal(Composition composition) {
@@ -40,7 +43,7 @@ public class KoerperlicheAktivitaetHandyConverter extends UCCObservationToObserv
     private void convertEntries(Composition.SectionComponent section, List<MitSensorGemesseneKoerperlicheAktivitaetJedesEreignisChoice> koerperlicheAktivitaeten, MitSensorGemesseneKoerperlicheAktivitaetObservation koerperlicheAktivitaetObservation) {
         for (Reference entry : section.getEntry()) {
             Observation observation = (Observation) entry.getResource(); //Always Observation
-            if (observation.hasNote()) {
+            if (observation.hasNote() && observation.getNote().get(0).getText().contains(deviceId)) {
                 koerperlicheAktivitaeten.add(new KoerperlicheAktivitaetEreignisIntervalEventConverter().convert(observation));
                 addEventTimings(TimeConverter.convertObservationTime((Observation) entry.getResource()));
                 convertInformationAboutTheDevice(observation, koerperlicheAktivitaetObservation);
@@ -48,18 +51,19 @@ public class KoerperlicheAktivitaetHandyConverter extends UCCObservationToObserv
         }
     }
 
+
     private void convertInformationAboutTheDevice(Observation entry, MitSensorGemesseneKoerperlicheAktivitaetObservation koerperlicheAktivitaetObservation) {
         ObjectMapper mapper = new ObjectMapper();
-        String x = entry.getNote().get(0).getText().replace("\\\"","\"");
+        String x = entry.getNote().get(0).getText().replace("\\\"", "\"");
         NoteDevice noteDevice = null;
         try {
             noteDevice = mapper.readValue(x, NoteDevice.class);
+            koerperlicheAktivitaetObservation.setInformationenZuHardUndSoftwareValue(noteDevice.toString());
             koerperlicheAktivitaetObservation.setInformationenZuHardUndSoftwareValue(noteDevice.toString());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
     }
-
 }
 
 
