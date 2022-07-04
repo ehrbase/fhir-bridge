@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Composition/02adb4c5-e829-47a9-96e4-f8d4ce28140d/_history/1",
+      "id" : "Composition/e98907ed-18f8-4732-96c8-d721520f6175/_history/1",
       "type" : "fhir_logical_id"
     }, {
       "_type" : "DV_IDENTIFIER",
@@ -25,7 +25,7 @@
       "id" : "#3"
     }, {
       "_type" : "DV_IDENTIFIER",
-      "id" : "07f602e0-579e-4fe3-95af-381728bf0d67",
+      "id" : "07f602e0-579e-4fe3-95af-381728bf0d66",
       "type" : "fhir_patient_identifier"
     } ],
     "originating_system_audit" : {
@@ -121,6 +121,34 @@
     "subject" : {
       "_type" : "PARTY_SELF"
     },
+    "protocol" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "List"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Methode"
+        },
+        "value" : {
+          "_type" : "DV_CODED_TEXT",
+          "value" : "Automatisch, nicht-invasiv",
+          "defining_code" : {
+            "_type" : "CODE_PHRASE",
+            "terminology_id" : {
+              "_type" : "TERMINOLOGY_ID",
+              "value" : "local"
+            },
+            "code_string" : "at1034"
+          }
+        },
+        "archetype_node_id" : "at1019"
+      } ],
+      "archetype_node_id" : "at0010"
+    },
     "data" : {
       "name" : {
         "_type" : "DV_TEXT",
@@ -128,7 +156,7 @@
       },
       "origin" : {
         "_type" : "DV_DATE_TIME",
-        "value" : "2022-05-05T11:56:17.000Z"
+        "value" : "2022-05-05T09:38:48.000Z"
       },
       "events" : [ {
         "_type" : "POINT_EVENT",

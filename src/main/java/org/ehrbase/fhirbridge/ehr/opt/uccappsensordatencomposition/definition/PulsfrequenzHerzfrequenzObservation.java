@@ -18,8 +18,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-OBSERVATION.pulse.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T13:12:33.337584516+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
+    date = "2022-06-30T13:56:48.379482+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
   /**
@@ -27,14 +27,14 @@ public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
    * Description: Ein Standardwert, ein spezifizierter Zeitpunkt oder ein Intervallereignis, welches explizit in einem Template oder während der Laufzeit definiert werden kann.
    */
   @Path("/data[at0002]/events[at0003 and name/value='Ruhepuls']")
-  private PulsfrequenzHerzfrequenzRuhepulsIntervalEvent ruhepuls;
+  private PulsfrequenzHerzfrequenzRuhepulsEvent ruhepuls;
 
   /**
    * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Mittlere Herzfrequenz
    * Description: Ein Standardwert, ein spezifizierter Zeitpunkt oder ein Intervallereignis, welches explizit in einem Template oder während der Laufzeit definiert werden kann.
    */
   @Path("/data[at0002]/events[at0003 and name/value='Mittlere Herzfrequenz']")
-  private PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent mittlereHerzfrequenz;
+  private PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent mittlereHerzfrequenz;
 
   /**
    * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/origin
@@ -97,20 +97,20 @@ public class PulsfrequenzHerzfrequenzObservation implements EntryEntity {
   @Choice
   private List<PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice> momentaneHerzfrequenz;
 
-  public void setRuhepuls(PulsfrequenzHerzfrequenzRuhepulsIntervalEvent ruhepuls) {
+  public void setRuhepuls(PulsfrequenzHerzfrequenzRuhepulsEvent ruhepuls) {
      this.ruhepuls = ruhepuls;
   }
 
-  public PulsfrequenzHerzfrequenzRuhepulsIntervalEvent getRuhepuls() {
+  public PulsfrequenzHerzfrequenzRuhepulsEvent getRuhepuls() {
      return this.ruhepuls ;
   }
 
   public void setMittlereHerzfrequenz(
-      PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent mittlereHerzfrequenz) {
+      PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent mittlereHerzfrequenz) {
      this.mittlereHerzfrequenz = mittlereHerzfrequenz;
   }
 
-  public PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent getMittlereHerzfrequenz() {
+  public PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent getMittlereHerzfrequenz() {
      return this.mittlereHerzfrequenz ;
   }
 

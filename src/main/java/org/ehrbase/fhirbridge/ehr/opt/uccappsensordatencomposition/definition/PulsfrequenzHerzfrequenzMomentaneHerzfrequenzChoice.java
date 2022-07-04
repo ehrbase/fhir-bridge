@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datastructures.Cluster;
 import java.lang.Double;
 import java.lang.String;
 import java.time.temporal.TemporalAccessor;
@@ -11,14 +10,10 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T13:12:33.405098126+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
+    date = "2022-06-30T13:56:48.445741+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 public interface PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice {
-  List<Cluster> getAnstrengung();
-
-  void setAnstrengung(List<Cluster> anstrengung);
-
   NullFlavour getFrequenzNullFlavourDefiningCode();
 
   void setFrequenzNullFlavourDefiningCode(NullFlavour frequenzNullFlavourDefiningCode);
@@ -35,6 +30,10 @@ public interface PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice {
   TemporalAccessor getTimeValue();
 
   void setTimeValue(TemporalAccessor timeValue);
+
+  List<BelastungsgradChoice> getBelastungsgrad();
+
+  void setBelastungsgrad(List<BelastungsgradChoice> belastungsgrad);
 
   NullFlavour getUnregelmaessigerTypNullFlavourDefiningCode();
 

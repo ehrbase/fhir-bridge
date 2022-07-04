@@ -52,9 +52,9 @@ public class SensordatenVitalSignsIT extends AbstractBundleMappingTestSetupIT {
                 .registerValueObject(new ValueObjectDefinition(UCCAppSensorDatenComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(PulsfrequenzHerzfrequenzObservation.class)
                 .registerValueObject(MitSensorGemesseneKoerperlicheAktivitaetObservation.class)
-                .registerValueObject(PulsfrequenzHerzfrequenzRuhepulsIntervalEvent.class)
+                .registerValueObject(PulsfrequenzHerzfrequenzRuhepulsEvent.class)
                 .registerValueObject(PulsfrequenzHerzfrequenzObservation.class)
-                .registerValueObject(PulsfrequenzHerzfrequenzMittlereHerzfrequenzIntervalEvent.class)
+                .registerValueObject(PulsfrequenzHerzfrequenzMittlereHerzfrequenzEvent.class)
                 .registerValueObject(PulsfrequenzHerzfrequenzMomentaneHerzfrequenzPointEvent.class)
                 .build();
     }

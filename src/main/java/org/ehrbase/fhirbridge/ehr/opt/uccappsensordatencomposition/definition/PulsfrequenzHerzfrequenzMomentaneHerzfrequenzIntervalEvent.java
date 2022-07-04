@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import com.nedap.archie.rm.datastructures.Cluster;
 import java.lang.Double;
 import java.lang.Long;
 import java.lang.String;
@@ -9,6 +8,7 @@ import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAmount;
 import java.util.List;
 import javax.annotation.processing.Generated;
+import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.OptionFor;
 import org.ehrbase.client.annotations.Path;
@@ -19,8 +19,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T13:12:33.392167277+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
+    date = "2022-06-30T13:56:48.411998+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @OptionFor("INTERVAL_EVENT")
 public class PulsfrequenzHerzfrequenzMomentaneHerzfrequenzIntervalEvent implements IntervalEventEntity, PulsfrequenzHerzfrequenzMomentaneHerzfrequenzChoice {
@@ -72,13 +72,6 @@ public class PulsfrequenzHerzfrequenzMomentaneHerzfrequenzIntervalEvent implemen
   private NullFlavour unregelmaessigerTypNullFlavourDefiningCode;
 
   /**
-   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Momentane Herzfrequenz/Anstrengung
-   * Description: Details über die körperliche Anstrengung, die der Patient während der Untersuchung ausgesetzt war.
-   */
-  @Path("/state[at0012]/items[at1017]")
-  private List<Cluster> anstrengung;
-
-  /**
    * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Momentane Herzfrequenz/feeder_audit
    */
   @Path("/feeder_audit")
@@ -107,6 +100,14 @@ public class PulsfrequenzHerzfrequenzMomentaneHerzfrequenzIntervalEvent implemen
    */
   @Path("/sample_count")
   private Long sampleCount;
+
+  /**
+   * Path: Selbstüberwachung/Pulsfrequenz/Herzfrequenz/Momentane Herzfrequenz/Belastungsgrad
+   * Description: Aufzeichnung von Informationen zum Belastungsgrad/Zustand des Patienten.
+   */
+  @Path("/state[at0012]/items[openEHR-EHR-CLUSTER.level_of_exertion.v0 and name/value='Belastungsgrad']")
+  @Choice
+  private List<BelastungsgradChoice> belastungsgrad;
 
   public void setFrequenzMagnitude(Double frequenzMagnitude) {
      this.frequenzMagnitude = frequenzMagnitude;
@@ -168,14 +169,6 @@ public class PulsfrequenzHerzfrequenzMomentaneHerzfrequenzIntervalEvent implemen
      return this.unregelmaessigerTypNullFlavourDefiningCode ;
   }
 
-  public void setAnstrengung(List<Cluster> anstrengung) {
-     this.anstrengung = anstrengung;
-  }
-
-  public List<Cluster> getAnstrengung() {
-     return this.anstrengung ;
-  }
-
   public void setFeederAudit(FeederAudit feederAudit) {
      this.feederAudit = feederAudit;
   }
@@ -214,5 +207,13 @@ public class PulsfrequenzHerzfrequenzMomentaneHerzfrequenzIntervalEvent implemen
 
   public Long getSampleCount() {
      return this.sampleCount ;
+  }
+
+  public void setBelastungsgrad(List<BelastungsgradChoice> belastungsgrad) {
+     this.belastungsgrad = belastungsgrad;
+  }
+
+  public List<BelastungsgradChoice> getBelastungsgrad() {
+     return this.belastungsgrad ;
   }
 }

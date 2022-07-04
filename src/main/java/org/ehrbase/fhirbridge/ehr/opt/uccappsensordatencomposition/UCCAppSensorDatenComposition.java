@@ -27,8 +27,8 @@ import org.ehrbase.fhirbridge.ehr.opt.uccappsensordatencomposition.definition.Pu
 @Archetype("openEHR-EHR-COMPOSITION.self_monitoring.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2022-05-09T13:12:33.305993800+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.19.0-SNAPSHOT"
+    date = "2022-06-30T13:56:48.344974+02:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
 )
 @Template("UCC_App_Sensor_Daten")
 public class UCCAppSensorDatenComposition implements CompositionEntity {
@@ -94,7 +94,7 @@ public class UCCAppSensorDatenComposition implements CompositionEntity {
    * Description: Zur Darstellung von Aktivitätsparametern, gemessen mit einem tragbaren Sensor in einem definierten Zeitraum.
    */
   @Path("/content[openEHR-EHR-OBSERVATION.wearable_sensor_activity.v0]")
-  private MitSensorGemesseneKoerperlicheAktivitaetObservation mitSensorGemesseneKoerperlicheAktivitaet;
+  private List<MitSensorGemesseneKoerperlicheAktivitaetObservation> mitSensorGemesseneKoerperlicheAktivitaet;
 
   /**
    * Path: Selbstüberwachung/composer
@@ -197,11 +197,11 @@ public class UCCAppSensorDatenComposition implements CompositionEntity {
   }
 
   public void setMitSensorGemesseneKoerperlicheAktivitaet(
-      MitSensorGemesseneKoerperlicheAktivitaetObservation mitSensorGemesseneKoerperlicheAktivitaet) {
+      List<MitSensorGemesseneKoerperlicheAktivitaetObservation> mitSensorGemesseneKoerperlicheAktivitaet) {
      this.mitSensorGemesseneKoerperlicheAktivitaet = mitSensorGemesseneKoerperlicheAktivitaet;
   }
 
-  public MitSensorGemesseneKoerperlicheAktivitaetObservation getMitSensorGemesseneKoerperlicheAktivitaet(
+  public List<MitSensorGemesseneKoerperlicheAktivitaetObservation> getMitSensorGemesseneKoerperlicheAktivitaet(
       ) {
      return this.mitSensorGemesseneKoerperlicheAktivitaet ;
   }

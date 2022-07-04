@@ -29,6 +29,6 @@ public class Iti65BundleValidator implements FhirTransactionValidator {
 
     @Override
     public void validateResponse(Object o, Map<String, Object> map) {
-        throw new UnsupportedOperationException("Response validation is not supported");
+       // throw new UnsupportedOperationException("Response validation is not supported");
     }
 }
