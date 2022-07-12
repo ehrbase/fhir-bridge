@@ -51,8 +51,8 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
                 .to("direct:send-to-cdr")
             .doCatch(Exception.class)
                 .process(new OpenEhrMappingExceptionHandler());
-        // @formatter:on
 
+        // @formatter:on
         configureAuditEvent();
         configureCondition();
         configureConsent();

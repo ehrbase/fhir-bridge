@@ -54,7 +54,7 @@ public class TimeConverter {
 
     static Optional<TemporalAccessor> convertObservationEndTime(Observation observation) {
         if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasEnd()) { // EffectivePeriod
-            return Optional.of(observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+            return Optional.of(observation.getEffectivePeriod().getEndElement().getValueAsCalendar().toZonedDateTime());
         } else {
             return Optional.empty();
         }
@@ -136,7 +136,7 @@ public class TimeConverter {
 
     public static Optional<TemporalAccessor> convertDiagnosticReportEndTime(DiagnosticReport resource) {
         if (resource.hasEffectivePeriod() && resource.getEffectivePeriod().hasEnd()) { // EffectivePeriod
-            return Optional.of(resource.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+            return Optional.of(resource.getEffectivePeriod().getEndElement().getValueAsCalendar().toZonedDateTime());
         } else {
             return Optional.empty();
         }
@@ -154,7 +154,7 @@ public class TimeConverter {
 
     public static Optional<TemporalAccessor> convertProcedureEndTime(Procedure resource) {
         if (resource.hasPerformedPeriod() && resource.getPerformedPeriod().hasEnd()) { // EffectivePeriod
-            return Optional.of(resource.getPerformedPeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+            return Optional.of(resource.getPerformedPeriod().getEndElement().getValueAsCalendar().toZonedDateTime());
         } else {
             return Optional.empty();
         }
@@ -181,7 +181,7 @@ public class TimeConverter {
 
     public static Optional<TemporalAccessor> convertMedicationStatementEndTime(MedicationStatement medicationStatement) {
         if (medicationStatement.hasEffectivePeriod() && medicationStatement.getEffectivePeriod().hasEnd()) { // EffectivePeriod
-            return Optional.of(medicationStatement.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime());
+            return Optional.of(medicationStatement.getEffectivePeriod().getEndElement().getValueAsCalendar().toZonedDateTime());
         } else {
             return Optional.empty();
         }

@@ -17,8 +17,16 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Encounter/df35cad0-b77e-430c-bb89-8d920600005a/_history/1",
+      "id" : "Encounter/c0f097e3-c8a2-482d-8abd-181961ae60aa/_history/1",
       "type" : "fhir_logical_id"
+    }, {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "fhir_patient_id",
+      "id" : "Patient/46982bc0-1771-4f85-bf4f-7897541fe8df/_history/1"
+    }, {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "01G1T92V1YG9H54VTWC9HXGQZM",
+      "type" : "fhir_patient_identifier"
     } ],
     "originating_system_audit" : {
       "_type" : "FEEDER_AUDIT_DETAILS",
@@ -60,11 +68,11 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-02-13T03:04:00+01:00"
+      "value" : "2021-02-13T03:04:00.000+01:00"
     },
     "end_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2021-03-01T20:42:00+01:00"
+      "value" : "2021-03-01T20:42:00.000+01:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -124,6 +132,15 @@
       "_type" : "DV_TEXT",
       "value" : "Aufnahmedaten"
     },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-ADMIN_ENTRY.admission.v0"
+      },
+      "template_id" : {
+        "value" : "Stationärer Versorgungsfall"
+      },
+      "rm_version" : "1.0.4"
+    },
     "language" : {
       "_type" : "CODE_PHRASE",
       "terminology_id" : {
@@ -142,9 +159,6 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
-    },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "_type" : "ITEM_TREE",
@@ -198,7 +212,7 @@
         },
         "value" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2021-02-13T03:04:00+01:00"
+          "value" : "2021-02-13T03:04:00.000+01:00"
         },
         "archetype_node_id" : "at0071"
       } ],
@@ -210,6 +224,15 @@
     "name" : {
       "_type" : "DV_TEXT",
       "value" : "Entlassungsdaten"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-ADMIN_ENTRY.discharge_summary.v0"
+      },
+      "template_id" : {
+        "value" : "Stationärer Versorgungsfall"
+      },
+      "rm_version" : "1.0.4"
     },
     "language" : {
       "_type" : "CODE_PHRASE",
@@ -229,9 +252,6 @@
     },
     "subject" : {
       "_type" : "PARTY_SELF"
-    },
-    "provider" : {
-      "_type" : "PARTY_IDENTIFIED"
     },
     "data" : {
       "_type" : "ITEM_TREE",
@@ -266,7 +286,7 @@
         },
         "value" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2021-03-01T20:42:00+01:00"
+          "value" : "2021-03-01T20:42:00.000+01:00"
         },
         "archetype_node_id" : "at0011"
       } ],
