@@ -17,8 +17,16 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/cf67a3b9-5204-4100-ab2e-9c1b5c77390f/_history/1",
+      "id" : "Observation/b59c544d-e437-4389-bd36-b5f184796db7/_history/1",
       "type" : "fhir_logical_id"
+    }, {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "fhir_patient_id",
+      "id" : "Patient/46982bc0-1771-4f85-bf4f-7897541fe8df/_history/1"
+    }, {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "01G1T92V1YG9H54VTWC9HXGQZM",
+      "type" : "fhir_patient_identifier"
     } ],
     "originating_system_audit" : {
       "_type" : "FEEDER_AUDIT_DETAILS",
@@ -60,7 +68,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2020-10-26T10:51:48+01:00"
+      "value" : "2020-10-26T10:51:48.000+01:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
