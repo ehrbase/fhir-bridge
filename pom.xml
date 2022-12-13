@@ -45,6 +45,8 @@
         <okhttp.version>4.9.2</okhttp.version>
         <saxon.version>10.5</saxon.version>
         <woodstox.version>6.2.6</woodstox.version>
+
+        <docker-image-name>numresearchdataplatform/num-fhir-bridge</docker-image-name>
     </properties>
 
     <profiles>
@@ -90,7 +92,7 @@
                 <configuration>
                     <fork>false</fork>
                     <image>
-                        <name>ehrbase/${project.artifactId}</name>
+                        <name>${docker-image-name}</name>
                     </image>
                     <wait>1000</wait>
                     <maxAttempts>180</maxAttempts>

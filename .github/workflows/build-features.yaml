@@ -30,8 +30,5 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
-      - name: Build with Maven
-        run: ./mvnw verify
-
       - name: Build Docker image
         run: ./mvnw spring-boot:build-image
