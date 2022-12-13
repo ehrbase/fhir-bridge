@@ -1,8 +1,7 @@
 version: "1"
 rules:
-  - base: master
-    upstream: ehrbase:master
-    mergeMethod: hardreset
-  - base: develop
-    upstream: ehrbase:develop
-    mergeMethod: hardreset
+  - base: num-main
+    upstream: num-fhir-bridge:num-main
+    mergeMethod: merge
+label: ":arrow_heading_down: pull"
+conflictLabel: "merge-conflict"
