@@ -62,5 +62,5 @@ jobs:
       - name: Build project with Maven
         run: ./mvnw verify
 
-      - name: Build Docker image
-        run: ./mvnw spring-boot:build-image
+      - name: Docker push image
+        run: ./mvnw io.fabric8:docker-maven-plugin:0.40.2:push

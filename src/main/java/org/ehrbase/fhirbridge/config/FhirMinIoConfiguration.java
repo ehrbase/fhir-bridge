@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.config;
 import org.ehrbase.fhirbridge.camel.processor.DeleteObjectProcessor;
 import org.ehrbase.fhirbridge.camel.processor.DocumentReferenceProcessor;
 import org.ehrbase.fhirbridge.camel.route.DocumentRouteBuilder;
+import org.ehrbase.fhirbridge.config.minio.MinioConfiguration;
 import org.ehrbase.fhirbridge.minio.MinioService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @ConditionalOnProperty(name = "fhir-bridge.fhir.endpoints.DocumentReference", havingValue = "true")
-@Import(HapiFhirJpaConfiguration.MinioConfiguration.class)
+@Import(MinioConfiguration.class)
 public class FhirMinIoConfiguration {
 
     @Bean

@@ -16,6 +16,7 @@
 
 package org.ehrbase.fhirbridge;
 
+import org.openehealth.ipf.boot.fhir.IpfFhirAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

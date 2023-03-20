@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fbridge
+    username: fbridge
+    password: fbridge
+    hikari:
+      driver-class-name: org.postgresql.Driver
+      maximum-pool-size: 5
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL10Dialect
