@@ -171,7 +171,7 @@
                                                 <method>get</method>
                                                 <status>200</status>
                                             </http>
-                                            <time>35000</time>
+                                            <time>50000</time>
                                         </wait>
                                         <log>
                                             <enabled>true</enabled>
@@ -221,15 +221,15 @@
                                         </env>
                                         <ports>
                                             <port>9088:8888</port>
-                                            <port>9988:7979</port>
+                                            <!--<port>9988:7979</port>-->
                                         </ports>
                                         <wait>
                                             <http>
-                                                <url>http://localhost:9988/actuator/health</url>
+                                                <url>http://localhost:9088/fhir-bridge/actuator/health</url>
                                                 <method>get</method>
                                                 <status>200</status>
                                             </http>
-                                            <time>50000</time>
+                                            <time>80000</time>
                                         </wait>
                                         <log>
                                             <enabled>true</enabled>

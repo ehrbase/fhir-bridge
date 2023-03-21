@@ -90,8 +90,6 @@ management:
     export:
       elastic:
         auto-create-index:
-  server:
-    port: 7979
 
 ################################################################################
 # Open eHealth Integration Platform Properties                                 #
