@@ -65,6 +65,7 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
         configureProcedure();
         configureQuestionnaireResponse();
         configureComposition();
+        configureSpecimen();
     }
 
     /**
@@ -195,5 +196,15 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
         from("composition-find:compositionEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
                 .process(ResourcePersistenceProcessor.BEAN_ID);
     }
+
+
+    private void configureSpecimen() {
+        from("specimen-provide:specimenEndpoint?fhirContext=#fhirContext")
+                .to("direct:provideResource");
+
+        from("specimen-find:specimenEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
+                .process(ResourcePersistenceProcessor.BEAN_ID);
+    }
+
 
 }
