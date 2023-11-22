@@ -29,7 +29,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.clinicalfrailty.ClinicalFra
 import org.ehrbase.fhirbridge.ehr.converter.specific.clinicaltrialparticipation.ClinicalTrialParticipationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.coronavirusnachweistest.CoronavirusNachweisTestCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.d4lquestionnaire.D4lQuestionnaireCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.diagnose.DiagnoseCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.kdsdiagnose.KDSDiagnoseCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab.DiagnosticReportLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.dnranordnung.DnrAnordnungCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.fio2.FiO2CompositionConverter;
@@ -111,7 +111,9 @@ public class ConversionConfiguration {
 
 
     private void registerConditionConverters(ConversionService conversionService) {
-        conversionService.registerConverter(Profile.CONDITION_DEFAULT, new DiagnoseCompositionConverter());
+        conversionService.registerConverter(Profile.CONDITION_DEFAULT, new KDSDiagnoseCompositionConverter());
+        conversionService.registerConverter(Profile.KDS_DIAGNOSE, new KDSDiagnoseCompositionConverter());
+
         conversionService.registerConverter(Profile.SYMPTOMS_COVID_19, new SymptomCompositionConverter());
 
         GECCODiagnoseCompositionConverter converter = new GECCODiagnoseCompositionConverter();

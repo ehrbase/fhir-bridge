@@ -1,25 +1,30 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.diagnose;
+package org.ehrbase.fhirbridge.ehr.converter.specific.kdsdiagnose;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
-import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.AnatomischeLokalisationCluster;
-import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.NameDesProblemsDerDiagnoseDefiningCode;
-import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.ProblemDiagnoseEvaluation;
-import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.ProblemDiagnoseSchweregradChoice;
-import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.ProblemDiagnoseSchweregradDvCodedText;
-import org.ehrbase.fhirbridge.ehr.opt.diagnosecomposition.definition.SchweregradDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.kdsdiagnosecomposition.definition.SekundaercodeEvaluation;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Extension;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class ProblemDiagnoseEvaluationConverter extends EntryEntityConverter<Condition, ProblemDiagnoseEvaluation> {
+public class SekundaercodeEvaluationConverter extends DiagnoseCodeEvaluationConverter<SekundaercodeEvaluation> {
+
+    public SekundaercodeEvaluationConverter(Extension extension) {
+        super(extension);
+    }
 
     @Override
-    protected ProblemDiagnoseEvaluation convertInternal(Condition resource) {
+    protected SekundaercodeEvaluation convertInternal(Condition resource) {
 
+        for(Coding coding:resource.getCode().getCoding()){
+            for(Extension extension: coding.getExtension()){
+
+            }
+        }
         ProblemDiagnoseEvaluation evaluation = new ProblemDiagnoseEvaluation();
         evaluation.setLetztesDokumentationsdatumValue(OffsetDateTime.now());
 
@@ -33,7 +38,7 @@ public class ProblemDiagnoseEvaluationConverter extends EntryEntityConverter<Con
             DateTimeType fhirOnsetDateTime = resource.getOnsetDateTimeType();
             evaluation.setDatumDesAuftretensDerErstdiagnoseValue(fhirOnsetDateTime.getValueAsCalendar().toZonedDateTime());
         }
-        
+
         if (resource.getBodySite().size() == 1) {
             String bodySiteName = resource.getBodySite().get(0).getCoding().get(0).getDisplay();
             evaluation.setLokalisationValue("body site");

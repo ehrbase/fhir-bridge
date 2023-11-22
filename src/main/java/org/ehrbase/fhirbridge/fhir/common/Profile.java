@@ -33,6 +33,9 @@ public enum Profile {
 
     // Condition
     CONDITION_DEFAULT(Condition.class, null),
+
+    KDS_DIAGNOSE(Condition.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"),
+
     DIAGNOSE_LIVER_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-liver-diseases"),
     DIAGNOSE_LUNG_DISEASE(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/chronic-lung-diseases"),
     DIAGNOSE_DIABETES_MELLITUS(Condition.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/diabetes-mellitus"),
