@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.opt.kdsdiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
@@ -10,8 +11,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2023-11-20T16:17:09.055924130+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
+    date = "2023-11-22T15:55:37.590074927+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
 )
 public class ProblemDiagnoseAttributDiagnoserolleElement implements LocatableEntity {
   /**
@@ -20,8 +21,8 @@ public class ProblemDiagnoseAttributDiagnoserolleElement implements LocatableEnt
    * Comment: Dieses Datenelement enthält eine Gruppe von Werten, welche üblicherweise in der diagnostischen Kategorisierung benutzt werden. Es ist üblich, dass im episodischen Versorgungskontext (üblicherweise in der Sekundärversorgung) die Diagnosen während der aktuellen Versorgungsepisode nach ihrer Beziehung zur Hauptdiagnose zu kategorisieren/ zu organisieren sind. Diese Kategorien können ebenfalls für die klinische Kodierungs-, Berichts- und Abrechnungszwecke verwendet werden. In manchen Ländern kann die diagnostische Kategorisierung als DRG (diagnosebezogene Fallgruppierungen) bezeichnet werden.
    * Falls es nötig sein sollte, erlaubt das Freitextfeld die Benutzung von lokalen Werten.
    */
-  @Path("/value|defining_code")
-  private DiagnoserolleDefiningCode value;
+  @Path("/value")
+  private DvCodedText value;
 
   /**
    * Path: Diagnose/context/Tree/Problem/Diagnose Attribut/Diagnoserolle/null_flavour
@@ -35,11 +36,11 @@ public class ProblemDiagnoseAttributDiagnoserolleElement implements LocatableEnt
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setValue(DiagnoserolleDefiningCode value) {
+  public void setValue(DvCodedText value) {
      this.value = value;
   }
 
-  public DiagnoserolleDefiningCode getValue() {
+  public DvCodedText getValue() {
      return this.value ;
   }
 

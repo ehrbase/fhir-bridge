@@ -5,7 +5,9 @@ import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
 import org.ehrbase.fhirbridge.ehr.opt.kdsdiagnosecomposition.definition.KlinischerStatusCluster;
 import org.ehrbase.fhirbridge.ehr.opt.kdsdiagnosecomposition.definition.PrimaercodeEvaluation;
 import org.ehrbase.fhirbridge.ehr.opt.kdsdiagnosecomposition.definition.PrimaercodeKoerperstelleElement;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Condition;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -15,8 +17,8 @@ import java.util.Optional;
 
 public class PrimaercodeEvaluationConverter extends DiagnoseCodeEvaluationConverter<PrimaercodeEvaluation> {
 
-    public PrimaercodeEvaluationConverter(Extension extension) {
-        super(extension);
+    public PrimaercodeEvaluationConverter(Coding coding) {
+        super(coding);
     }
 
     @Override
@@ -24,11 +26,8 @@ public class PrimaercodeEvaluationConverter extends DiagnoseCodeEvaluationConver
         PrimaercodeEvaluation evaluation = new PrimaercodeEvaluation();
         evaluation.setLetztesDokumentationsdatumValue(OffsetDateTime.now());
 
-        if (resource.hasSeverity() && resource.getSeverity().hasCoding()) {
-            evaluation.setSchweregradDefiningCode(transformSchweregrad(resource.getSeverity().getCoding().get(0)));
-        }
         if (resource.hasCode() && resource.getCode().hasCoding()) {
-            DvCodedTextParser.getInstance().parseFHIRCoding((Coding) extension.getValue()).ifPresent(evaluation::setKodierteDiagnose);
+            DvCodedTextParser.getInstance().parseFHIRCoding(coding).ifPresent(evaluation::setKodierteDiagnose);
         }
         if (resource.hasOnset()) {
             evaluation.setKlinischRelevanterZeitraumZeitpunktDesAuftretensValue(TimeConverter.convertConditionOnset(resource));
@@ -42,9 +41,9 @@ public class PrimaercodeEvaluationConverter extends DiagnoseCodeEvaluationConver
         transformBodySite(resource).ifPresent(evaluation::setKoerperstelle);
 
         if (resource.hasClinicalStatus() && resource.getClinicalStatus().hasCoding()) {
-            transformKlinischerStatus(resource.getClinicalStatus().getCoding().get(0));
-
-            //evaluation.setSchweregradDefiningCode(transformSchweregrad(resource.getSeverity().getCoding().get(0)));
+            KlinischerStatusCluster klinischerStatusCluster = new KlinischerStatusCluster();
+            DvCodedTextParser.getInstance().parseFHIRCoding(resource.getClinicalStatus().getCoding().get(0)).ifPresent(klinischerStatusCluster::setKlinischerStatus);
+            evaluation.setKlinischerStatus(klinischerStatusCluster);
         }
         return evaluation;
     }

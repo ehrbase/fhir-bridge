@@ -1,6 +1,7 @@
 package org.ehrbase.fhirbridge.ehr.opt.kdsdiagnosecomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
+import com.nedap.archie.rm.datavalues.DvCodedText;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
 import org.ehrbase.client.annotations.Entity;
@@ -12,8 +13,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.problem_qualifier.v2")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2023-11-20T16:17:09.075593725+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
+    date = "2023-11-22T15:55:37.615507628+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
 )
 public class KlinischerStatusCluster implements LocatableEntity {
   /**
@@ -21,8 +22,8 @@ public class KlinischerStatusCluster implements LocatableEntity {
    * Description: Eine Kategorie, die die Aufteilung der Problemlisten von Problemen und Diagnosen in aktiv und inaktiv unterstützt.
    * Comment: Die Aktiv/Inaktiv und Aktuell/Vergangen Datenelemente haben einen ähnlichen klinischen Einfluss, repräsentieren aber eine etwas andere Semantik. Beide werden aktiv in verschiedenen klinischen Rahmen benutzt, aber normalerweise nicht zusammen. Wenn ein Aktuell/Vergangen Attribut dokumentiert wird, dann ist dieses Datenelement wahrscheinlich redundant. Eine Ausnahme ist ein Zustand der aktuell, aber inaktiv ist. Ein Beispiel dafür ist Asthma, welches keine akuten Symptome auslöst.
    */
-  @Path("/items[at0003 and name/value='Klinischer Status']/value|defining_code")
-  private KlinischerStatusDefiningCode klinischerStatusDefiningCode;
+  @Path("/items[at0003 and name/value='Klinischer Status']/value")
+  private DvCodedText klinischerStatus;
 
   /**
    * Path: Diagnose/Primärcode/Structure/Klinischer Status/Klinischer Status/null_flavour
@@ -36,13 +37,12 @@ public class KlinischerStatusCluster implements LocatableEntity {
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
 
-  public void setKlinischerStatusDefiningCode(
-      KlinischerStatusDefiningCode klinischerStatusDefiningCode) {
-     this.klinischerStatusDefiningCode = klinischerStatusDefiningCode;
+  public void setKlinischerStatus(DvCodedText klinischerStatus) {
+     this.klinischerStatus = klinischerStatus;
   }
 
-  public KlinischerStatusDefiningCode getKlinischerStatusDefiningCode() {
-     return this.klinischerStatusDefiningCode ;
+  public DvCodedText getKlinischerStatus() {
+     return this.klinischerStatus ;
   }
 
   public void setKlinischerStatusNullFlavourDefiningCode(

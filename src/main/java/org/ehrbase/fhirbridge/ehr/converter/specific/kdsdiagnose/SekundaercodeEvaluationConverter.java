@@ -1,98 +1,68 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.kdsdiagnose;
 
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
+import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
+import org.ehrbase.fhirbridge.ehr.opt.kdsdiagnosecomposition.definition.KlinischerStatusCluster;
+import org.ehrbase.fhirbridge.ehr.opt.kdsdiagnosecomposition.definition.PrimaercodeKoerperstelleElement;
 import org.ehrbase.fhirbridge.ehr.opt.kdsdiagnosecomposition.definition.SekundaercodeEvaluation;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Condition;
-import org.hl7.fhir.r4.model.DateTimeType;
-import org.hl7.fhir.r4.model.Extension;
 
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SekundaercodeEvaluationConverter extends DiagnoseCodeEvaluationConverter<SekundaercodeEvaluation> {
 
-    public SekundaercodeEvaluationConverter(Extension extension) {
+    public SekundaercodeEvaluationConverter(Coding extension) {
         super(extension);
     }
 
     @Override
     protected SekundaercodeEvaluation convertInternal(Condition resource) {
-
-        for(Coding coding:resource.getCode().getCoding()){
-            for(Extension extension: coding.getExtension()){
-
-            }
-        }
-        ProblemDiagnoseEvaluation evaluation = new ProblemDiagnoseEvaluation();
+        SekundaercodeEvaluation evaluation = new SekundaercodeEvaluation();
         evaluation.setLetztesDokumentationsdatumValue(OffsetDateTime.now());
 
-        if(resource.hasSeverity() && resource.getSeverity().hasCoding()){
-            evaluation.setSchweregrad(getSchweregrad(resource.getSeverity().getCoding().get(0)));
+        if (resource.hasCode() && resource.getCode().hasCoding()) {
+            DvCodedTextParser.getInstance().parseFHIRCoding(coding).ifPresent(evaluation::setKodierteDiagnose);
         }
-        if(resource.hasCode() && resource.getCode().hasCoding()){
-            evaluation.setNameDesProblemsDerDiagnoseDefiningCode(getNameDesProblemsDerDiagnose(resource.getCode().getCoding().get(0)));
-        }
-        if(resource.hasOnset()){
-            DateTimeType fhirOnsetDateTime = resource.getOnsetDateTimeType();
-            evaluation.setDatumDesAuftretensDerErstdiagnoseValue(fhirOnsetDateTime.getValueAsCalendar().toZonedDateTime());
+        if (resource.hasOnset()) {
+            evaluation.setKlinischRelevanterZeitraumZeitpunktDesAuftretensValue(TimeConverter.convertConditionOnset(resource));
+            TimeConverter.convertConditionEndTime(resource).ifPresent(evaluation::setKlinischRelevanterZeitraumZeitpunktDerGenesungValue);
         }
 
-        if (resource.getBodySite().size() == 1) {
-            String bodySiteName = resource.getBodySite().get(0).getCoding().get(0).getDisplay();
-            evaluation.setLokalisationValue("body site");
-            AnatomischeLokalisationCluster anatomischeLokalisationCluster = new AnatomischeLokalisationCluster();
-            anatomischeLokalisationCluster.setNameDerKoerperstelleValue(bodySiteName);
-            evaluation.setAnatomischeLokalisation(List.of(anatomischeLokalisationCluster));
+        if (resource.hasRecordedDate()) {
+            evaluation.setFeststellungsdatumValue(resource.getRecordedDate().toInstant().atZone(ZoneId.systemDefault()));
+        }
+
+        transformBodySite(resource).ifPresent(evaluation::setKoerperstelle);
+
+        if (resource.hasClinicalStatus() && resource.getClinicalStatus().hasCoding()) {
+            KlinischerStatusCluster klinischerStatusCluster = new KlinischerStatusCluster();
+            DvCodedTextParser.getInstance().parseFHIRCoding(resource.getClinicalStatus().getCoding().get(0)).ifPresent(klinischerStatusCluster::setKlinischerStatus);
+            evaluation.setKlinischerStatus(klinischerStatusCluster);
         }
         return evaluation;
     }
 
-    private NameDesProblemsDerDiagnoseDefiningCode getNameDesProblemsDerDiagnose(Coding fhirDiagnosis) {
-        NameDesProblemsDerDiagnoseDefiningCode openEHRDiagnosis;
-        if (!fhirDiagnosis.getSystem().equalsIgnoreCase("http://fhir.de/CodeSystem/dimdi/icd-10-gm")) {
-            throw new ConversionException("code.system should be http://fhir.de/CodeSystem/dimdi/icd-10-gm but found" + fhirDiagnosis.getSystem());
+    Optional<List<PrimaercodeKoerperstelleElement>> transformBodySite(Condition resource) {
+        List<PrimaercodeKoerperstelleElement> koerperstelle = new ArrayList<>();
+        if (resource.getBodySite().size() > 1) {
+            for (CodeableConcept bodySite : resource.getBodySite()) {
+                for (Coding coding : bodySite.getCoding()) {
+                    PrimaercodeKoerperstelleElement primaercodeKoerperstelleElement = new PrimaercodeKoerperstelleElement();
+                    DvCodedTextParser.getInstance().parseFHIRCoding(coding).ifPresent(primaercodeKoerperstelleElement::setValue);
+                    koerperstelle.add(primaercodeKoerperstelleElement);
+                }
+            }
         }
-        switch (fhirDiagnosis.getCode()) {
-            case "B97.2":
-                openEHRDiagnosis = NameDesProblemsDerDiagnoseDefiningCode.KORONAVIREN_ALS_URSACHE_VON_KRANKHEITEN_DIE_IN_ANDEREN_KAPITELN_KLASSIFIZIERT_SIND;
-                break;
-            case "U07.1":
-                openEHRDiagnosis = NameDesProblemsDerDiagnoseDefiningCode.COVID19_VIRUS_NACHGEWIESEN;
-                break;
-            case "U07.2":
-                openEHRDiagnosis = NameDesProblemsDerDiagnoseDefiningCode.COVID19_VIRUS_NICHT_NACHGEWIESEN;
-                break;
-            case "B34.2":
-                openEHRDiagnosis = NameDesProblemsDerDiagnoseDefiningCode.INFEKTION_DURCH_KORONAVIREN_NICHT_NAEHER_BEZEICHNETER_LOKALISATION;
-                break;
-            default:
-                throw new ConversionException("Unexpected value: " + fhirDiagnosis.getCode());
+        if (koerperstelle.size() == 0) {
+            return Optional.empty();
         }
-        return openEHRDiagnosis;
-    }
-
-    private ProblemDiagnoseSchweregradChoice getSchweregrad(Coding fhirSeverity) {
-        SchweregradDefiningCode openEHRSeverity;
-        if (!fhirSeverity.getSystem().equalsIgnoreCase("http://snomed.info/sct")) {
-            throw new ConversionException("severity code system should be http://snomed.info/sct, found " + fhirSeverity.getSystem());
-        }
-        switch (fhirSeverity.getCode()) {
-            case "24484000":
-                openEHRSeverity = SchweregradDefiningCode.SCHWER;
-                break;
-            case "6736007":
-                openEHRSeverity = SchweregradDefiningCode.MAESSIG;
-                break;
-            case "255604002":
-                openEHRSeverity = SchweregradDefiningCode.LEICHT;
-                break;
-            default:
-                throw new ConversionException("Unexpected value: " + fhirSeverity.getCode());
-        }
-        ProblemDiagnoseSchweregradDvCodedText severityCoded = new ProblemDiagnoseSchweregradDvCodedText();
-        severityCoded.setSchweregradDefiningCode(openEHRSeverity);
-        return severityCoded;
+        return Optional.of(koerperstelle);
     }
 }
+

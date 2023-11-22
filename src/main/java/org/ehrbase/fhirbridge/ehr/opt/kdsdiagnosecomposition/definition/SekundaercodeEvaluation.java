@@ -9,6 +9,7 @@ import java.time.temporal.TemporalAccessor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Archetype;
+import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
 import org.ehrbase.client.annotations.Path;
 import org.ehrbase.client.classgenerator.interfaces.EntryEntity;
@@ -19,8 +20,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-EVALUATION.problem_diagnosis.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2023-11-20T16:17:09.079754052+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
+    date = "2023-11-22T15:55:37.623134463+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
 )
 public class SekundaercodeEvaluation implements EntryEntity {
   /**
@@ -104,20 +105,6 @@ public class SekundaercodeEvaluation implements EntryEntity {
   private NullFlavour feststellungsdatumNullFlavourDefiningCode;
 
   /**
-   * Path: Diagnose/Sekundärcode/Schweregrad
-   * Description: Eine Gesamtbeurteilung des Schweregrades des Problems oder der Diagnose.
-   * Comment: Ist der Schweregrad über vordefinierte Codes im Element "Name des Problems/ der Diagnose" enthalten, wird dieses Datenelement überflüssig. Hinweis: Eine spezifischere Einstufung des Schweregrads kann mit Hilfe des SLOTs "Spezifische Angaben" angegeben werden.
-   */
-  @Path("/data[at0001]/items[at0005]/value|defining_code")
-  private SchweregradDefiningCode schweregradDefiningCode;
-
-  /**
-   * Path: Diagnose/Sekundärcode/Structure/Schweregrad/null_flavour
-   */
-  @Path("/data[at0001]/items[at0005]/null_flavour|defining_code")
-  private NullFlavour schweregradNullFlavourDefiningCode;
-
-  /**
    * Path: Diagnose/Sekundärcode/Lebensphase
    * Description: Beschreibung des ungefähren Alters, wann die Erkrankung durchgemacht wurde. Ungefähre Angabe des Alters, da häufig keine genaue Angabe des Zeitpunktes (klinisch relevanter Zeitraum) der Erkrankung möglich ist, vor allem wenn die Diagnose nicht durch die eintragende ärztliche Person erfolgt.
    */
@@ -157,8 +144,8 @@ public class SekundaercodeEvaluation implements EntryEntity {
    * Description: Grad der Sicherheit, mit der die Diagnose festgestellt wurde.
    * Comment: Wenn ein alternativer Wertesatz benötigt wird, können diese Werte in einem Template zum Datentyp DV_TEXT hinzugefügt werden.
    */
-  @Path("/data[at0001]/items[at0073 and name/value='Diagnosesicherheit']/value|defining_code")
-  private DiagnosesicherheitDefiningCode diagnosesicherheitDefiningCode;
+  @Path("/data[at0001]/items[at0073 and name/value='Diagnosesicherheit']/value")
+  private DvCodedText diagnosesicherheit;
 
   /**
    * Path: Diagnose/Sekundärcode/Structure/Diagnosesicherheit/null_flavour
@@ -217,6 +204,22 @@ public class SekundaercodeEvaluation implements EntryEntity {
    */
   @Path("/feeder_audit")
   private FeederAudit feederAudit;
+
+  /**
+   * Path: Diagnose/Sekundärcode/Structure/Structure/Schweregrad/null_flavour
+   */
+  @Path("/data[at0001]/items[at0005 and name/value='Schweregrad']/null_flavour")
+  @Choice
+  private PrimaercodeSchweregradNullFlavourChoice schweregradNullFlavour;
+
+  /**
+   * Path: Diagnose/Sekundärcode/Schweregrad
+   * Description: Eine Gesamtbeurteilung des Schweregrades des Problems oder der Diagnose.
+   * Comment: Ist der Schweregrad über vordefinierte Codes im Element "Name des Problems/ der Diagnose" enthalten, wird dieses Datenelement überflüssig. Hinweis: Eine spezifischere Einstufung des Schweregrads kann mit Hilfe des SLOTs "Spezifische Angaben" angegeben werden.
+   */
+  @Path("/data[at0001]/items[at0005 and name/value='Schweregrad']/value")
+  @Choice
+  private PrimaercodeSchweregradChoice schweregrad;
 
   public void setKodierteDiagnose(DvCodedText kodierteDiagnose) {
      this.kodierteDiagnose = kodierteDiagnose;
@@ -311,23 +314,6 @@ public class SekundaercodeEvaluation implements EntryEntity {
      return this.feststellungsdatumNullFlavourDefiningCode ;
   }
 
-  public void setSchweregradDefiningCode(SchweregradDefiningCode schweregradDefiningCode) {
-     this.schweregradDefiningCode = schweregradDefiningCode;
-  }
-
-  public SchweregradDefiningCode getSchweregradDefiningCode() {
-     return this.schweregradDefiningCode ;
-  }
-
-  public void setSchweregradNullFlavourDefiningCode(
-      NullFlavour schweregradNullFlavourDefiningCode) {
-     this.schweregradNullFlavourDefiningCode = schweregradNullFlavourDefiningCode;
-  }
-
-  public NullFlavour getSchweregradNullFlavourDefiningCode() {
-     return this.schweregradNullFlavourDefiningCode ;
-  }
-
   public void setLebensphase(LebensphaseCluster lebensphase) {
      this.lebensphase = lebensphase;
   }
@@ -371,13 +357,12 @@ public class SekundaercodeEvaluation implements EntryEntity {
      return this.klinischerStatus ;
   }
 
-  public void setDiagnosesicherheitDefiningCode(
-      DiagnosesicherheitDefiningCode diagnosesicherheitDefiningCode) {
-     this.diagnosesicherheitDefiningCode = diagnosesicherheitDefiningCode;
+  public void setDiagnosesicherheit(DvCodedText diagnosesicherheit) {
+     this.diagnosesicherheit = diagnosesicherheit;
   }
 
-  public DiagnosesicherheitDefiningCode getDiagnosesicherheitDefiningCode() {
-     return this.diagnosesicherheitDefiningCode ;
+  public DvCodedText getDiagnosesicherheit() {
+     return this.diagnosesicherheit ;
   }
 
   public void setDiagnosesicherheitNullFlavourDefiningCode(
@@ -453,5 +438,22 @@ public class SekundaercodeEvaluation implements EntryEntity {
 
   public FeederAudit getFeederAudit() {
      return this.feederAudit ;
+  }
+
+  public void setSchweregradNullFlavour(
+      PrimaercodeSchweregradNullFlavourChoice schweregradNullFlavour) {
+     this.schweregradNullFlavour = schweregradNullFlavour;
+  }
+
+  public PrimaercodeSchweregradNullFlavourChoice getSchweregradNullFlavour() {
+     return this.schweregradNullFlavour ;
+  }
+
+  public void setSchweregrad(PrimaercodeSchweregradChoice schweregrad) {
+     this.schweregrad = schweregrad;
+  }
+
+  public PrimaercodeSchweregradChoice getSchweregrad() {
+     return this.schweregrad ;
   }
 }

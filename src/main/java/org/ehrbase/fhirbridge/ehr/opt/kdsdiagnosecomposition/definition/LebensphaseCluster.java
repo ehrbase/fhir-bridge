@@ -13,8 +13,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Archetype("openEHR-EHR-CLUSTER.lebensphase.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2023-11-20T16:17:09.066896097+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
+    date = "2023-11-22T15:55:37.605217077+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
 )
 public class LebensphaseCluster implements LocatableEntity {
   /**

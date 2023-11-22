@@ -11,8 +11,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2023-11-20T16:17:09.062416155+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
+    date = "2023-11-22T15:55:37.601104056+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
 )
 public class PrimaercodeKoerperstelleElement implements LocatableEntity {
   /**

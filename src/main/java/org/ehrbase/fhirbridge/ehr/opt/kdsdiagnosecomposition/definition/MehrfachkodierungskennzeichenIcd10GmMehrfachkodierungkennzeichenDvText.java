@@ -10,8 +10,8 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2023-11-20T16:17:09.069644970+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
+    date = "2023-11-22T15:55:37.609540786+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
 )
 @OptionFor("DV_TEXT")
 public class MehrfachkodierungskennzeichenIcd10GmMehrfachkodierungkennzeichenDvText implements RMEntity, MehrfachkodierungskennzeichenIcd10GmMehrfachkodierungkennzeichenChoice {

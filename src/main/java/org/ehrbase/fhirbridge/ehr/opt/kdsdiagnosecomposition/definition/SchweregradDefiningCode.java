@@ -4,11 +4,11 @@ import java.lang.String;
 import org.ehrbase.client.classgenerator.EnumValueSet;
 
 public enum SchweregradDefiningCode implements EnumValueSet {
-  SEVERE_SEVERITY_MODIFIER_QUALIFIER_VALUE("Severe (severity modifier) (qualifier value)", "", "local", "24484000"),
+  SEVERE_SEVERITY_MODIFIER_QUALIFIER_VALUE("Severe (severity modifier) (qualifier value)", "", "SNOMED CT", "24484000"),
 
-  MILD_QUALIFIER_VALUE("Mild (qualifier value)", "", "local", "255604002"),
+  MILD_QUALIFIER_VALUE("Mild (qualifier value)", "", "SNOMED CT", "255604002"),
 
-  MODERATE_SEVERITY_MODIFIER_QUALIFIER_VALUE("Moderate (severity modifier) (qualifier value)", "", "local", "6736007");
+  MODERATE_SEVERITY_MODIFIER_QUALIFIER_VALUE("Moderate (severity modifier) (qualifier value)", "", "SNOMED CT", "6736007");
 
   private String value;
 

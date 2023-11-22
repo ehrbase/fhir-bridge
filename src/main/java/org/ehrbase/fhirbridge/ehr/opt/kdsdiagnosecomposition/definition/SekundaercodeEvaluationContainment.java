@@ -39,10 +39,6 @@ public class SekundaercodeEvaluationContainment extends Containment {
 
   public SelectAqlField<NullFlavour> FESTSTELLUNGSDATUM_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(SekundaercodeEvaluation.class, "/data[at0001]/items[at0003]/null_flavour|defining_code", "feststellungsdatumNullFlavourDefiningCode", NullFlavour.class, this);
 
-  public SelectAqlField<SchweregradDefiningCode> SCHWEREGRAD_DEFINING_CODE = new AqlFieldImp<SchweregradDefiningCode>(SekundaercodeEvaluation.class, "/data[at0001]/items[at0005]/value|defining_code", "schweregradDefiningCode", SchweregradDefiningCode.class, this);
-
-  public SelectAqlField<NullFlavour> SCHWEREGRAD_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(SekundaercodeEvaluation.class, "/data[at0001]/items[at0005]/null_flavour|defining_code", "schweregradNullFlavourDefiningCode", NullFlavour.class, this);
-
   public SelectAqlField<LebensphaseCluster> LEBENSPHASE = new AqlFieldImp<LebensphaseCluster>(SekundaercodeEvaluation.class, "/data[at0001]/items[openEHR-EHR-CLUSTER.lebensphase.v0]", "lebensphase", LebensphaseCluster.class, this);
 
   public SelectAqlField<MehrfachkodierungskennzeichenIcd10GmCluster> MEHRFACHKODIERUNGSKENNZEICHEN_ICD10_GM = new AqlFieldImp<MehrfachkodierungskennzeichenIcd10GmCluster>(SekundaercodeEvaluation.class, "/data[at0001]/items[openEHR-EHR-CLUSTER.multiple_coding_icd10gm.v1]", "mehrfachkodierungskennzeichenIcd10Gm", MehrfachkodierungskennzeichenIcd10GmCluster.class, this);
@@ -53,7 +49,7 @@ public class SekundaercodeEvaluationContainment extends Containment {
 
   public SelectAqlField<KlinischerStatusCluster> KLINISCHER_STATUS = new AqlFieldImp<KlinischerStatusCluster>(SekundaercodeEvaluation.class, "/data[at0001]/items[openEHR-EHR-CLUSTER.problem_qualifier.v2]", "klinischerStatus", KlinischerStatusCluster.class, this);
 
-  public SelectAqlField<DiagnosesicherheitDefiningCode> DIAGNOSESICHERHEIT_DEFINING_CODE = new AqlFieldImp<DiagnosesicherheitDefiningCode>(SekundaercodeEvaluation.class, "/data[at0001]/items[at0073]/value|defining_code", "diagnosesicherheitDefiningCode", DiagnosesicherheitDefiningCode.class, this);
+  public SelectAqlField<DvCodedText> DIAGNOSESICHERHEIT = new AqlFieldImp<DvCodedText>(SekundaercodeEvaluation.class, "/data[at0001]/items[at0073]/value", "diagnosesicherheit", DvCodedText.class, this);
 
   public SelectAqlField<NullFlavour> DIAGNOSESICHERHEIT_NULL_FLAVOUR_DEFINING_CODE = new AqlFieldImp<NullFlavour>(SekundaercodeEvaluation.class, "/data[at0001]/items[at0073]/null_flavour|defining_code", "diagnosesicherheitNullFlavourDefiningCode", NullFlavour.class, this);
 
@@ -72,6 +68,10 @@ public class SekundaercodeEvaluationContainment extends Containment {
   public SelectAqlField<Language> LANGUAGE = new AqlFieldImp<Language>(SekundaercodeEvaluation.class, "/language", "language", Language.class, this);
 
   public SelectAqlField<FeederAudit> FEEDER_AUDIT = new AqlFieldImp<FeederAudit>(SekundaercodeEvaluation.class, "/feeder_audit", "feederAudit", FeederAudit.class, this);
+
+  public SelectAqlField<PrimaercodeSchweregradNullFlavourChoice> SCHWEREGRAD_NULL_FLAVOUR = new AqlFieldImp<PrimaercodeSchweregradNullFlavourChoice>(SekundaercodeEvaluation.class, "/data[at0001]/items[at0005]/null_flavour", "schweregradNullFlavour", PrimaercodeSchweregradNullFlavourChoice.class, this);
+
+  public SelectAqlField<PrimaercodeSchweregradChoice> SCHWEREGRAD = new AqlFieldImp<PrimaercodeSchweregradChoice>(SekundaercodeEvaluation.class, "/data[at0001]/items[at0005]/value", "schweregrad", PrimaercodeSchweregradChoice.class, this);
 
   private SekundaercodeEvaluationContainment() {
     super("openEHR-EHR-EVALUATION.problem_diagnosis.v1");
