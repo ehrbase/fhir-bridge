@@ -1,0 +1,50 @@
+{
+  "resourceType": "Condition",
+  "id": "ExampleConditionDuplicate3",
+  "meta": {
+    "profile":  [
+      "https://www.medizininformatik-initiative.de/fhir/core/modul-diagnose/StructureDefinition/Diagnose"
+    ]
+  },
+  "clinicalStatus": {
+    "coding":  [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+        "code": "active",
+        "display": "active"
+
+      }
+    ]
+  },
+  "code": {
+    "coding":  [
+      {
+        "system": "http://fhir.de/CodeSystem/dimdi/icd-10-gm",
+        "version": "2020",
+        "code": "H83.8",
+        "display": "Sonstige näher bezeichnete Krankheiten des Innenohres"
+      },
+      {
+        "system": "http://fhir.de/ValueSet/dimdi/alpha-id",
+        "code": "I125918",
+        "display": "I125918"
+
+      },
+      {
+        "system": "http://www.orpha.net",
+        "code": "420402",
+        "display": "Bogengangsdehiszenz-Syndrom"
+      }
+    ]
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  },
+  "onsetPeriod": {
+    "start": "2020-02-13T16:56:00+01:00"
+  },
+  "recordedDate": "2020-04-26T12:00:00+01:00"
+}

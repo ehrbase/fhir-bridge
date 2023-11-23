@@ -24,7 +24,6 @@ public class SekundaercodeEvaluationConverter extends DiagnoseCodeEvaluationConv
     @Override
     protected SekundaercodeEvaluation convertInternal(Condition resource) {
         SekundaercodeEvaluation evaluation = new SekundaercodeEvaluation();
-        evaluation.setLetztesDokumentationsdatumValue(OffsetDateTime.now());
 
         if (resource.hasCode() && resource.getCode().hasCoding()) {
             DvCodedTextParser.getInstance().parseFHIRCoding(coding).ifPresent(evaluation::setKodierteDiagnose);

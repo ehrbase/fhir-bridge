@@ -24,7 +24,6 @@ public class PrimaercodeEvaluationConverter extends DiagnoseCodeEvaluationConver
     @Override
     protected PrimaercodeEvaluation convertInternal(Condition resource) {
         PrimaercodeEvaluation evaluation = new PrimaercodeEvaluation();
-        evaluation.setLetztesDokumentationsdatumValue(OffsetDateTime.now());
 
         if (resource.hasCode() && resource.getCode().hasCoding()) {
             DvCodedTextParser.getInstance().parseFHIRCoding(coding).ifPresent(evaluation::setKodierteDiagnose);
