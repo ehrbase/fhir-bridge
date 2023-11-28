@@ -104,6 +104,7 @@ public enum Profile {
 
     // Patient
     PATIENT(Patient.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient"),
+    KDS_PATIENT(Patient.class, "https://www.medizininformatik-initiative.de/fhir/core/modul-person/StructureDefinition/Patient"),
 
     // Procedure
     APHERESIS_PROCEDURE(Procedure.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/apheresis"),
