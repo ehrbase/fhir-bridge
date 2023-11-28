@@ -17,7 +17,7 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "DiagnosticReport/7cb78ad3-d06c-4466-8349-b4e8e52a7211/_history/1",
+      "id" : "DiagnosticReport/a425a86f-80b3-4b33-a572-5e8379dc37e3/_history/1",
       "type" : "fhir_logical_id"
     }, {
       "_type" : "DV_IDENTIFIER",
@@ -30,7 +30,7 @@
     } ],
     "originating_system_audit" : {
       "_type" : "FEEDER_AUDIT_DETAILS",
-      "system_id" : "http://www.highmed.org"
+      "system_id" : "FHIR-Bridge"
     }
   },
   "language" : {
@@ -144,7 +144,7 @@
       },
       "origin" : {
         "_type" : "DV_DATE_TIME",
-        "value" : "2018-11-20T12:05:00.000+01:00"
+        "value" : "2020-10-16T08:49:21.000+02:00"
       },
       "events" : [ {
         "_type" : "POINT_EVENT",
@@ -154,7 +154,7 @@
         },
         "time" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2018-11-20T12:05:00.000+01:00"
+          "value" : "2020-10-16T08:49:21.000+02:00"
         },
         "data" : {
           "_type" : "ITEM_TREE",
@@ -204,14 +204,14 @@
               },
               "value" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "Lymphocytes [#/volume] in Blood by Manual count",
+                "value" : "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma by With P-5-P",
                 "defining_code" : {
                   "_type" : "CODE_PHRASE",
                   "terminology_id" : {
                     "_type" : "TERMINOLOGY_ID",
                     "value" : "http://loinc.org"
                   },
-                  "code_string" : "732-8"
+                  "code_string" : "30239-8"
                 }
               },
               "archetype_node_id" : "at0024"
@@ -223,29 +223,10 @@
               },
               "value" : {
                 "_type" : "DV_QUANTITY",
-                "units" : "umol/L",
-                "magnitude" : 72.0
+                "units" : "U/L",
+                "magnitude" : 34.0
               },
               "archetype_node_id" : "at0001"
-            }, {
-              "_type" : "ELEMENT",
-              "name" : {
-                "_type" : "DV_TEXT",
-                "value" : "Interpretation"
-              },
-              "value" : {
-                "_type" : "DV_CODED_TEXT",
-                "value" : "Display",
-                "defining_code" : {
-                  "_type" : "CODE_PHRASE",
-                  "terminology_id" : {
-                    "_type" : "TERMINOLOGY_ID",
-                    "value" : "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"
-                  },
-                  "code_string" : "N"
-                }
-              },
-              "archetype_node_id" : "at0004"
             }, {
               "_type" : "ELEMENT",
               "name" : {
@@ -254,7 +235,7 @@
               },
               "value" : {
                 "_type" : "DV_DATE_TIME",
-                "value" : "2018-11-20T12:05:00.000+01:00"
+                "value" : "2020-10-16T08:49:21.000+02:00"
               },
               "archetype_node_id" : "at0025"
             }, {
@@ -280,13 +261,13 @@
               "_type" : "ELEMENT",
               "name" : {
                 "_type" : "DV_TEXT",
-                "value" : "Zeitpunkt Ergebnis-Status"
+                "value" : "Probe ID"
               },
               "value" : {
-                "_type" : "DV_DATE_TIME",
-                "value" : "2018-03-11T10:28:00.000+01:00"
+                "_type" : "DV_URI",
+                "value" : "Specimen/#2"
               },
-              "archetype_node_id" : "at0006"
+              "archetype_node_id" : "at0026"
             } ],
             "archetype_node_id" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
           } ],
