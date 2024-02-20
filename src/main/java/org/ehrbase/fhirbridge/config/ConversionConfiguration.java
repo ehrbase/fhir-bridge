@@ -183,6 +183,7 @@ public class ConversionConfiguration {
     private void registerPatientConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.PATIENT, new PatientCompositionConverter());
         conversionService.registerConverter(Profile.KDS_PATIENT, new PatientCompositionConverter());
+        conversionService.registerConverter(Profile.KDS_PATIENT_PSEUDO, new PatientCompositionConverter());
     }
 
     private void registerProcedureConverters(ConversionService conversionService) {

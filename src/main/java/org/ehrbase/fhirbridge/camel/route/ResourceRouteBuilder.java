@@ -17,11 +17,15 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
 import org.ehrbase.fhirbridge.camel.processor.FhirProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourceAuditHandler;
 import org.ehrbase.fhirbridge.camel.processor.ResourcePersistenceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.OpenEhrMappingExceptionHandler;
+import org.ehrbase.fhirbridge.fhir.encounter.validator.KDSEncounterValidator;
+import org.ehrbase.fhirbridge.fhir.common.Profile;
+import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.springframework.stereotype.Component;
 
 
@@ -40,11 +44,16 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
 
         // @formatter:off
         from("direct:provideResource")
+            .setHeader(CamelConstants.PROFILE, method(Resources.class, "getResourceProfile"))
             .routeId("provideResourceRoute")
             .onCompletion()
                 .process(ProvideResourceAuditHandler.BEAN_ID)
             .end()
             .process(FhirProfileValidator.BEAN_ID)
+            .choice()
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.KONTAKT_GESUNDHEIT_ABTEILUNG))
+                    .bean(KDSEncounterValidator.class)
+            .end()
             .process(PatientReferenceProcessor.BEAN_ID)
             .process(ResourcePersistenceProcessor.BEAN_ID)
             .doTry()
@@ -114,6 +123,7 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
      */
     private void configureEncounter() {
         from("encounter-provide:encounterEndpoint?fhirContext=#fhirContext")
+
                 .to("direct:provideResource");
 
         from("encounter-find:encounterEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")

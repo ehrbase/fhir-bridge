@@ -34,7 +34,7 @@
         <hapi-fhir.version>5.4.2</hapi-fhir.version>
         <guava.version>31.0.1-jre</guava.version>
         <javassist.version>3.28.0-GA</javassist.version>
-        <javers.version>6.6.5</javers.version>
+        <javers.version>7.3.7</javers.version>
         <jaxb-core.version>2.3.0</jaxb-core.version>
         <jena.version>4.2.0</jena.version>
         <jsr305.version>3.0.2</jsr305.version>

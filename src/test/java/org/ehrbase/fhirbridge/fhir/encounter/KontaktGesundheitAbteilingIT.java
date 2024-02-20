@@ -6,6 +6,9 @@ import org.ehrbase.fhirbridge.ehr.opt.patientenaufenthaltcomposition.definition.
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt.PatientenAufenthaltCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
+import org.ehrbase.fhirbridge.fhir.bundle.validator.BloodGasPanelBundleValidator;
+import org.ehrbase.fhirbridge.fhir.encounter.validator.KDSEncounterValidator;
+import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Encounter;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
@@ -68,6 +71,12 @@ public class KontaktGesundheitAbteilingIT extends AbstractMappingTestSetupIT {
         assertEquals("Invalid Code XXXX or Code System for 'Fachabteilungsschlüssel'.", exception.getMessage());
     }
 
+    @Test
+    void createInvalidStatus() throws IOException {
+        Exception exception = executeValidatorException("create-patienten-aufenthalt-invalid-status.json");
+        assertEquals("Encounter status has to be finished !", exception.getMessage());
+    }
+
     // #####################################################################################
     // default
     @Override
@@ -87,6 +96,12 @@ public class KontaktGesundheitAbteilingIT extends AbstractMappingTestSetupIT {
         assertEquals(0, diff.getChanges().size());
     }
 
+    public Exception executeValidatorException(String path) throws IOException {
+        Encounter encounter = (Encounter) testFileLoader.loadResource(path);
+        return assertThrows(Exception.class, () -> {
+            new KDSEncounterValidator().validateRequest(encounter, null);
+        });
+    }
 
     @Override
     public Javers getJavers() {

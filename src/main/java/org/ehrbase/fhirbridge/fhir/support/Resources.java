@@ -199,4 +199,11 @@ public class Resources {
     private static Optional<Reference> getSubject(Composition composition) {
         return composition.hasSubject() ? Optional.of(composition.getSubject()) : Optional.empty();
     }
+
+    public static Optional<Profile> getResourceProfile(Resource resource) {
+        Set<Profile> supportedProfiles = Profile.resolveAll(resource);
+        return supportedProfiles.stream()
+                .filter(profile -> resource.getMeta().getProfile().get(0).equals(profile.getUri()))
+                        .findFirst();
+    }
 }
