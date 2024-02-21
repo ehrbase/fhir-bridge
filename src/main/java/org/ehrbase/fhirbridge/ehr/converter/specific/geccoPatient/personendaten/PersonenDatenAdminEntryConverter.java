@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
+package org.ehrbase.fhirbridge.ehr.converter.specific.geccoPatient.personendaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;

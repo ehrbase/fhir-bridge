@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
+package org.ehrbase.fhirbridge.ehr.converter.specific.geccoPatient.personendaten;
 
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.NamensartDefiningCode;
@@ -7,7 +7,6 @@ import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Patient;
 import org.javers.core.Javers;
 import org.javers.core.JaversBuilder;
-import org.javers.core.diff.Diff;
 
 import java.util.ArrayList;
 import java.util.List;

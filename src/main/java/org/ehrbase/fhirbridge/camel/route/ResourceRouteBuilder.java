@@ -27,6 +27,7 @@ import org.ehrbase.fhirbridge.fhir.encounter.validator.KDSEncounterValidator;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.fhir.observation.validator.MibiKulturValidator;
 import org.ehrbase.fhirbridge.fhir.observation.validator.MibiMolekDiagnostikValidator;
+import org.ehrbase.fhirbridge.fhir.patient.validator.KdsPersonValidator;
 import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.springframework.stereotype.Component;
 
@@ -59,6 +60,8 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
                     .bean(MibiKulturValidator.class)
                 .when(header(CamelConstants.PROFILE).isEqualTo(Profile.MIBI_MOLEKULARE_DIAGNOSTIC))
                     .bean(MibiMolekDiagnostikValidator.class)
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.KDS_PATIENT_PSEUDO))
+                    .bean(KdsPersonValidator.class)
             .end()
             .process(PatientReferenceProcessor.BEAN_ID)
             .process(ResourcePersistenceProcessor.BEAN_ID)

@@ -2,9 +2,8 @@ package org.ehrbase.fhirbridge.fhir.patient;
 
 import ca.uhn.fhir.rest.gclient.ICreateTyped;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
-import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.geccoPatient.PatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.GECCOPersonendatenComposition;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.*;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;

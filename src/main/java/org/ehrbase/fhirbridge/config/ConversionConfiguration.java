@@ -39,12 +39,13 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.hipdocument.DocumentReferen
 import org.ehrbase.fhirbridge.ehr.converter.specific.historyoftravel.HistoryOfTravelCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.impfstatus.ImpfstatusCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.kdslaborbefund.KDSLaborbefundCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.kdspatient.KDSPatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GECCOMedikationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.kdsobservationlab.KDSObservationLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.mibikultur.MibiKulturNachweisConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.mibimolekdiagnostik.MibiMolekDiagnostikConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.geccoPatient.PatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientdischarge.PatientDischargeCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt.PatientenAufenthaltCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientinicu.PatientInIcuCompositionConverter;
@@ -63,7 +64,6 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.uccappdaten.UCCAppProDatenC
 import org.ehrbase.fhirbridge.ehr.converter.specific.uccsensordaten.UCCSensordatenCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.virologischerbefund.VirologischerBefundCompositionConverter;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
-import org.ehrbase.fhirbridge.fhir.observation.validator.MibiMolekDiagnostikValidator;
 import org.ehrbase.fhirbridge.service.TerminologyService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -182,13 +182,12 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.SEX_AT_BIRTH, new SexAtBirthConverter());
         conversionService.registerConverter(Profile.MIBI_KULTUR, new MibiKulturNachweisConverter());
         conversionService.registerConverter(Profile.MIBI_MOLEKULARE_DIAGNOSTIC, new MibiMolekDiagnostikConverter());
-
     }
 
     private void registerPatientConverters(ConversionService conversionService) {
         conversionService.registerConverter(Profile.PATIENT, new PatientCompositionConverter());
         conversionService.registerConverter(Profile.KDS_PATIENT, new PatientCompositionConverter());
-        conversionService.registerConverter(Profile.KDS_PATIENT_PSEUDO, new PatientCompositionConverter());
+        conversionService.registerConverter(Profile.KDS_PATIENT_PSEUDO, new KDSPatientCompositionConverter());
     }
 
     private void registerProcedureConverters(ConversionService conversionService) {

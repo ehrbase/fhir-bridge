@@ -1,7 +1,5 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.patient.personendaten;
+package org.ehrbase.fhirbridge.ehr.converter.specific.geccoPatient.personendaten;
 
-import liquibase.pro.packaged.E;
-import liquibase.pro.packaged.U;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EinzelheitenDerKommunikationAdresseDvText;
 import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.EinzelheitenDerKommunikationAdresseDvUri;

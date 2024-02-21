@@ -23,8 +23,6 @@ import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
 
 public class ProbenConverter {
-    private static final Logger LOG = LoggerFactory.getLogger(org.ehrbase.fhirbridge.ehr.converter.specific.kdsobservationlab.SpecimenConverter.class);
-
     public ProbeCluster convert(Specimen specimenTarget) {
         ProbeCluster probe = new ProbeCluster();
         mapProbenart(specimenTarget).ifPresent(probe::setProbenart);

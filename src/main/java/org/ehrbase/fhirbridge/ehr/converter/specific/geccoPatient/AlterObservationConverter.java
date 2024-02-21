@@ -1,4 +1,4 @@
-package org.ehrbase.fhirbridge.ehr.converter.specific.patient;
+package org.ehrbase.fhirbridge.ehr.converter.specific.geccoPatient;
 
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.generic.EntryEntityConverter;
@@ -8,7 +8,6 @@ import org.ehrbase.fhirbridge.ehr.opt.geccopersonendatencomposition.definition.A
 import org.hl7.fhir.r4.model.Age;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Patient;
-import org.hl7.fhir.r4.model.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
