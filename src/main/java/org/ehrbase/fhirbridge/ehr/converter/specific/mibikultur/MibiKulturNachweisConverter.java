@@ -6,11 +6,8 @@ import org.ehrbase.fhirbridge.ehr.opt.mikrobiologischerbefundcomposition.definit
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Reference;
 
-import java.util.List;
-import java.util.Optional;
 
-
-public class MibiKulturConverter extends ObservationToCompositionConverter<MikrobiologischerBefundComposition> {
+public class MibiKulturNachweisConverter extends ObservationToCompositionConverter<MikrobiologischerBefundComposition> {
 
     @Override
     protected MikrobiologischerBefundComposition convertInternal(Observation resource) {

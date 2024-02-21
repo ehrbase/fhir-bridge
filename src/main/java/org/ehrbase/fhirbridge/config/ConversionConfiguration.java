@@ -42,7 +42,7 @@ import org.ehrbase.fhirbridge.ehr.converter.specific.kdslaborbefund.KDSLaborbefu
 import org.ehrbase.fhirbridge.ehr.converter.specific.knownexposure.SarsCov2KnownExposureCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.medication.GECCOMedikationCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.kdsobservationlab.KDSObservationLabCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.converter.specific.mibikultur.MibiKulturConverter;
+import org.ehrbase.fhirbridge.ehr.converter.specific.mibikultur.MibiKulturNachweisConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patient.PatientCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientdischarge.PatientDischargeCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.patientenaufenthalt.PatientenAufenthaltCompositionConverter;
@@ -178,7 +178,7 @@ public class ConversionConfiguration {
         conversionService.registerConverter(Profile.OXYGEN_SATURATION, new PulseOximetryCompositionConverter());
         conversionService.registerConverter(Profile.VIROLOGISCHER_BEFUND, new VirologischerBefundCompositionConverter());
         conversionService.registerConverter(Profile.SEX_AT_BIRTH, new SexAtBirthConverter());
-        conversionService.registerConverter(Profile.MIBI_KULTUR, new MibiKulturConverter());
+        conversionService.registerConverter(Profile.MIBI_KULTUR, new MibiKulturNachweisConverter());
 
     }
 

@@ -17,20 +17,31 @@ public class MibiKulturValidator implements FhirTransactionValidator {
         validate(payload, map);
     }
 
-    public void validate(Object payload, Map<String, Object> map){
+    public void validate(Object payload, Map<String, Object> map) {
         Observation observation = (Observation) payload;
         checkForIdentifier(observation);
         checkForEncounter(observation);
+        checkForNachweis(observation);
+    }
+
+    private void checkForNachweis(Observation observation) {
+        if (observation.hasValueCodeableConcept() && observation.getValueCodeableConcept().hasCoding()) {
+            if (!observation.getValueCodeableConcept().getCoding().get(0).getCode().equals("260373001")) {
+                throw new UnprocessableEntityException("Mibi Kultur has to have a code valueCodeableConcept with 260373001 (Nachweis)");
+            } else {
+                throw new UnprocessableEntityException("Mibi Kultur must include an valueCodeableConcept");
+            }
+        }
     }
 
     private void checkForIdentifier(Observation observation) {
-        if(!observation.hasIdentifier() || observation.getIdentifier().size() == 0 || !observation.getIdentifier().get(0).hasValue()){
+        if (!observation.hasIdentifier() || observation.getIdentifier().isEmpty() || !observation.getIdentifier().get(0).hasValue()) {
             throw new UnprocessableEntityException("Mibi Kultur must include an Identifier and value for BerichtId");
         }
     }
 
     private void checkForEncounter(Observation observation) {
-        if(!observation.hasEncounter() || !observation.getEncounter().hasIdentifier()|| !observation.getEncounter().getIdentifier().hasValue()){
+        if (!observation.hasEncounter() || !observation.getEncounter().hasIdentifier() || !observation.getEncounter().getIdentifier().hasValue()) {
             throw new UnprocessableEntityException("Mibi Kultur must include a Encounter with Identifier and Value !");
         }
     }
