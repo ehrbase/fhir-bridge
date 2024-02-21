@@ -102,6 +102,7 @@ public enum Profile {
     VIROLOGISCHER_BEFUND(Observation.class, "http://highmed.org/StructureDefinition/ic/VirologischerBefund"),
     SEX_AT_BIRTH(Observation.class, "https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/sex-assigned-at-birth"),
     MIBI_KULTUR(Observation.class, "https://www.medizininformatik-initiative.de/fhir/modul-mikrobio/StructureDefinition/mii-pr-mikrobio-kultur-nachweis"),
+    MIBI_MOLEKULARE_DIAGNOSTIC(Observation.class, "https://www.medizininformatik-initiative.de/fhir/modul-mikrobio/StructureDefinition/mii-pr-mikrobio-molekulare-diagnostik" ),
 
 
     // Patient
