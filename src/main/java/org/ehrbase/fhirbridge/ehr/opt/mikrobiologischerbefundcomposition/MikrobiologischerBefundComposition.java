@@ -27,8 +27,8 @@ import org.ehrbase.fhirbridge.ehr.opt.mikrobiologischerbefundcomposition.definit
 @Archetype("openEHR-EHR-COMPOSITION.report-result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2024-02-20T15:55:44.323694377+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
+    date = "2024-02-22T14:23:00.146804+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
 )
 @Template("Mikrobiologischer Befund")
 public class MikrobiologischerBefundComposition implements CompositionEntity {

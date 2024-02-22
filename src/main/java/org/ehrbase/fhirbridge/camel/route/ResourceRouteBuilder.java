@@ -22,7 +22,6 @@ import org.ehrbase.fhirbridge.camel.processor.FhirProfileValidator;
 import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
 import org.ehrbase.fhirbridge.camel.processor.ProvideResourceAuditHandler;
 import org.ehrbase.fhirbridge.camel.processor.ResourcePersistenceProcessor;
-import org.ehrbase.fhirbridge.camel.processor.OpenEhrMappingExceptionHandler;
 import org.ehrbase.fhirbridge.fhir.encounter.validator.KDSEncounterValidator;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.fhir.observation.validator.MibiKulturValidator;
@@ -67,7 +66,7 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
             .process(ResourcePersistenceProcessor.BEAN_ID)
             .doTry()
                 .to("direct:send-to-cdr");
-           /* .doCatch(Exception.class)
+           /*TODO for production pack back in .doCatch(Exception.class)
                 .process(new OpenEhrMappingExceptionHandler());*/
 
         // @formatter:on

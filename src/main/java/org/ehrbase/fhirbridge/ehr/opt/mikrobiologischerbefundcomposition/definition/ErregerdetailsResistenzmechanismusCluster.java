@@ -11,8 +11,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2024-02-20T15:55:44.392816805+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
+    date = "2024-02-22T14:23:00.226919+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
 )
 public class ErregerdetailsResistenzmechanismusCluster implements LocatableEntity {
   /**

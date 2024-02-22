@@ -10,8 +10,8 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2024-02-20T15:55:44.405645083+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
+    date = "2024-02-22T14:23:00.246335+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
 )
 @OptionFor("DV_TEXT")
 public class BefundAuftragsIdEmpfaengerDvText implements RMEntity, BefundAuftragsIdEmpfaengerChoice {

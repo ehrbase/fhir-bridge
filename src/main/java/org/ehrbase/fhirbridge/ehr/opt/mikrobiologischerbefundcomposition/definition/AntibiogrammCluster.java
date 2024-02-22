@@ -12,8 +12,8 @@ import org.ehrbase.client.classgenerator.interfaces.LocatableEntity;
 @Archetype("openEHR-EHR-CLUSTER.laboratory_test_panel.v0")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2024-02-20T15:55:44.383177767+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
+    date = "2024-02-22T14:23:00.214093+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
 )
 public class AntibiogrammCluster implements LocatableEntity {
   /**

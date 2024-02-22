@@ -11,8 +11,8 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2024-02-20T15:55:44.368824796+01:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.25.0"
+    date = "2024-02-22T14:23:00.196867+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
 )
 @OptionFor("DV_INTERVAL")
 public class ProbeZeitpunktDerProbenentnahmeDvInterval implements RMEntity, ProbeZeitpunktDerProbenentnahmeChoice {

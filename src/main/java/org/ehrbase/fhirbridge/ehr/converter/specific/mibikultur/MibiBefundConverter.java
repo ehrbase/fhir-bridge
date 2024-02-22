@@ -9,6 +9,8 @@ import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConv
 import org.ehrbase.fhirbridge.ehr.opt.mikrobiologischerbefundcomposition.definition.*;
 import org.hl7.fhir.r4.model.*;
 
+import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,13 +32,13 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
                 befundObservation.setProbe(List.of(probenConverter.convert(resource.getSpecimenTarget())));
             }else{
                 ProbeCluster probeCluster = new ProbeCluster();
-                probeCluster.setProbenartNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
-                probeCluster.setZeitpunktDerProbenentnahmeNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
-                probeCluster.setZeitpunktDesProbeneingangsNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
-                probeCluster.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
-               // ProbeZeitpunktDerProbenentnahmeDvDateTime probeZeitpunktDerProbenentnahmeDvDateTime = new ProbeZeitpunktDerProbenentnahmeDvDateTime();
-               // probeZeitpunktDerProbenentnahmeDvDateTime.set
-               // probeCluster.setZeitpunktDerProbenentnahme();
+                ProbeZeitpunktDerProbenentnahmeDvDateTime probeZeitpunktDerProbenentnahmeDvDateTime = new ProbeZeitpunktDerProbenentnahmeDvDateTime();
+                probeZeitpunktDerProbenentnahmeDvDateTime.setZeitpunktDerProbenentnahmeValue(LocalDateTime.of(1000,1,1, 0, 0, 0));
+                probeCluster.setZeitpunktDerProbenentnahme(probeZeitpunktDerProbenentnahmeDvDateTime);
+                probeCluster.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE);
+                probeCluster.setProbenartNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE);
+                //TODO add this lines in as soon as ehrbase bug is fixed
+                // probeCluster.setZeitpunktDerProbenentnahmeNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
                 befundObservation.setProbe(List.of(probeCluster));
             }
         }
@@ -48,6 +50,12 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
         proErregerCluster.setNachweisValue("Nachweis");
         DvCodedTextParser.getInstance().parseFHIRCoding(resource.getComponent().get(0).getValueCodeableConcept().getCoding().get(0)).ifPresent(proErregerCluster::setErregername);
         proErregerCluster.setErregerdetails(mapErregerdetails(resource));
+        //TODO: reimplement as soon as ehrbase bug ist fixed
+       //  proErregerCluster.setZugehoerigeLaborprobeNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        ProErregerZugehoerigeLaborprobeDvUri proErregerZugehoerigeLaborprobeDvUri = new ProErregerZugehoerigeLaborprobeDvUri();
+        proErregerZugehoerigeLaborprobeDvUri.setZugehoerigeLaborprobeValue(URI.create("null"));
+        proErregerCluster.setZugehoerigeLaborprobe(proErregerZugehoerigeLaborprobeDvUri);
+        kulturCluster.setProErreger(List.of(proErregerCluster));
         return kulturCluster;
     }
 
