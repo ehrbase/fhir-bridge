@@ -66,9 +66,9 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
             .process(PatientReferenceProcessor.BEAN_ID)
             .process(ResourcePersistenceProcessor.BEAN_ID)
             .doTry()
-                .to("direct:send-to-cdr")
-            .doCatch(Exception.class)
-                .process(new OpenEhrMappingExceptionHandler());
+                .to("direct:send-to-cdr");
+           /* .doCatch(Exception.class)
+                .process(new OpenEhrMappingExceptionHandler());*/
 
         // @formatter:on
         configureAuditEvent();

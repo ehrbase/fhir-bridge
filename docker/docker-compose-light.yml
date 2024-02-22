@@ -1,7 +1,7 @@
 version: '3'
 services:
   ehrbase:
-    image: ehrbase/ehrbase:0.23.0 #0.18.2 was the old version used to run 90% of the tests.
+    image: ehrbase/ehrbase:next #0.18.2 was the old version used to run 90% of the tests.
     ports:
       - 8080:8080
     networks:

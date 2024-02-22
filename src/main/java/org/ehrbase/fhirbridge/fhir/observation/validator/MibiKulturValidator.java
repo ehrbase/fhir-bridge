@@ -20,23 +20,28 @@ public class MibiKulturValidator implements FhirTransactionValidator {
     public void validate(Object payload, Map<String, Object> map) {
         Observation observation = (Observation) payload;
         checkForIdentifier(observation);
-        checkForEncounter(observation);
+        checkForEncounter(observation); // MUss nicht sein
         checkForNachweis(observation);
+        //final check
         //COMPONENT UND WIEVIELE
         // Loinc
         // Valueablecodeconcept
 
         // check coding in MRE
         //Check Empfindlichkeiten für Value Coding und Interpret
+
+        // Interpretation bei EMpfindlichkeit
+
+        //Check Interpretation only EUCAS used.
     }
 
     private void checkForNachweis(Observation observation) {
         if (observation.hasValueCodeableConcept() && observation.getValueCodeableConcept().hasCoding()) {
             if (!observation.getValueCodeableConcept().getCoding().get(0).getCode().equals("260373001")) {
                 throw new UnprocessableEntityException("Mibi Kultur has to have a code valueCodeableConcept with 260373001 (Nachweis)");
-            } else {
-                throw new UnprocessableEntityException("Mibi Kultur must include an valueCodeableConcept");
             }
+        }else{
+            throw new UnprocessableEntityException("Mibi Kultur must include an valueCodeableConcept");
         }
     }
 

@@ -1,5 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.converter.specific.mibikultur;
 
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.opt.mikrobiologischerbefundcomposition.MikrobiologischerBefundComposition;
 import org.ehrbase.fhirbridge.ehr.opt.mikrobiologischerbefundcomposition.definition.FallidentifikationCluster;
@@ -14,7 +15,13 @@ public class MibiKulturNachweisConverter extends ObservationToCompositionConvert
         MikrobiologischerBefundComposition mikrobiologischerBefundComposition = new MikrobiologischerBefundComposition();
         mikrobiologischerBefundComposition.setStatusValue("Endbefund");
         mikrobiologischerBefundComposition.setBerichtIdValue(resource.getIdentifier().get(0).getValue());
-        mikrobiologischerBefundComposition.setFallidentifikation(mapFallidentifikation(resource.getEncounter()));
+        if(resource.hasEncounter()){
+            mikrobiologischerBefundComposition.setFallidentifikation(mapFallidentifikation(resource.getEncounter()));
+        }else{
+            FallidentifikationCluster fallidentifikationCluster = new FallidentifikationCluster();
+            fallidentifikationCluster.setFallKennungNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
+            mikrobiologischerBefundComposition.setFallidentifikation(fallidentifikationCluster);
+        }
         mikrobiologischerBefundComposition.setBefund(new MibiBefundConverter().convert(resource));
         return mikrobiologischerBefundComposition;
     }

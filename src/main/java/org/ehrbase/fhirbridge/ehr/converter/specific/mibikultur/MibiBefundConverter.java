@@ -3,6 +3,7 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.mibikultur;
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.support.identification.TerminologyId;
+import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.opt.mikrobiologischerbefundcomposition.definition.*;
@@ -27,6 +28,16 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
             if (resource.getSpecimen().hasExtension() && !resource.getSpecimen().getExtension().get(0).getUrl().equals("http://hl7.org/fhir/StructureDefinition/data-absent-reason")) {
                 ProbenConverter probenConverter = new ProbenConverter();
                 befundObservation.setProbe(List.of(probenConverter.convert(resource.getSpecimenTarget())));
+            }else{
+                ProbeCluster probeCluster = new ProbeCluster();
+                probeCluster.setProbenartNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
+                probeCluster.setZeitpunktDerProbenentnahmeNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
+                probeCluster.setZeitpunktDesProbeneingangsNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
+                probeCluster.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
+               // ProbeZeitpunktDerProbenentnahmeDvDateTime probeZeitpunktDerProbenentnahmeDvDateTime = new ProbeZeitpunktDerProbenentnahmeDvDateTime();
+               // probeZeitpunktDerProbenentnahmeDvDateTime.set
+               // probeCluster.setZeitpunktDerProbenentnahme();
+                befundObservation.setProbe(List.of(probeCluster));
             }
         }
     }
@@ -51,12 +62,40 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
         AntibiogrammCluster antibiogrammCluster = new AntibiogrammCluster();
         ProAntibiotikumCluster proAntibiotikumCluster = new ProAntibiotikumCluster();
         Observation empfindlichkeit = getEmpfindlichkeit(resource);
-        DvCodedTextParser.getInstance().parseFHIRCoding(empfindlichkeit.getValueCodeableConcept().getCoding().get(0)).ifPresent(proAntibiotikumCluster::setAntibiotikum);
-        
-        // valueQuantity
-        // Interpretation
+        DvCodedTextParser.getInstance().parseFHIRCoding(empfindlichkeit.getCode().getCoding().get(0)).ifPresent(proAntibiotikumCluster::setAntibiotikum);
+        mapMinimalHemmkonzentration(proAntibiotikumCluster, empfindlichkeit);
+        proAntibiotikumCluster.setResistenz(mapInterpretationsCodeToHIGHMEDCode(empfindlichkeit));
         antibiogrammCluster.setProAntibiotikum(List.of(proAntibiotikumCluster));
         return antibiogrammCluster;
+    }
+
+    private DvCodedText mapInterpretationsCodeToHIGHMEDCode(Observation empfindlichkeit) {
+        Coding coding = empfindlichkeit.getInterpretation().get(0).getCoding().get(0);
+        switch (coding.getCode()) {
+            case "1306577009":
+                return getEUCASTCodes("Susceptible, standard dosing regimen");
+            case "1306583007":
+                return getEUCASTCodes("Susceptible, increased exposure");
+            case "1306581009":
+                return getEUCASTCodes("Resistant");
+            default:
+                throw new IllegalArgumentException("Unsupported code for Interpretation of Resistance, has to be SNOMED EUCAST codes !");
+        }
+    }
+
+    private DvCodedText getEUCASTCodes(String code){
+        CodePhrase codePhrase = new CodePhrase(new TerminologyId("http://highmed.org/fhir/CodeSystem/ic/resistenzklassen-antibiogramm-eucast"), code);
+        DvCodedText dvCodedText = new DvCodedText(code, codePhrase);
+        return dvCodedText;
+    }
+
+
+    private ProAntibiotikumCluster mapMinimalHemmkonzentration(ProAntibiotikumCluster proAntibiotikumCluster, Observation empfindlichkeit) {
+        if(empfindlichkeit.hasValueQuantity()){
+            proAntibiotikumCluster.setMinimaleHemmkonzentrationMagnitude(empfindlichkeit.getValueQuantity().getValue().doubleValue());
+            proAntibiotikumCluster.setMinimaleHemmkonzentrationUnits(empfindlichkeit.getValueQuantity().getUnit());
+        }
+        return proAntibiotikumCluster;
     }
 
     private Observation getEmpfindlichkeit(Observation resource) {
@@ -77,21 +116,21 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
     private DvCodedText mapMREMRGNCoding(Optional<Coding> coding) {
         switch (coding.get().getCode()) {
             case "115329001":
-                return getHighmedDVCoded("MRSA");
+                return getHighmedMREDVCoded("MRSA");
             case "113727004":
-                return getHighmedDVCoded("VRE");
+                return getHighmedMREDVCoded("VRE");
             case "LA33214-0":
-                return getHighmedDVCoded("2MRGN");
+                return getHighmedMREDVCoded("2MRGN");
             case "LA33215-7":
-                return getHighmedDVCoded("3MRGN");
+                return getHighmedMREDVCoded("3MRGN");
             case "LA33216-5":
-                return getHighmedDVCoded("4MRGN");
+                return getHighmedMREDVCoded("4MRGN");
             default:
                 throw new IllegalArgumentException("Unsupported code for MRE or MRGN !");
         }
     }
 
-    private DvCodedText getHighmedDVCoded(String code) {
+    private DvCodedText getHighmedMREDVCoded(String code) {
         CodePhrase codePhrase = new CodePhrase(new TerminologyId("http://highmed.org/fhir/CodeSystem/ic/mre-klassen-lokal"), code);
         DvCodedText dvCodedText = new DvCodedText(code, codePhrase);
         return dvCodedText;
