@@ -27,10 +27,10 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
 
     private void mapProbe(Observation resource, BefundObservation befundObservation) {
         if (resource.hasSpecimen()) {
-            if (resource.getSpecimen().hasExtension() && !resource.getSpecimen().getExtension().get(0).getUrl().equals("http://hl7.org/fhir/StructureDefinition/data-absent-reason")) {
+            if (!resource.getSpecimen().hasExtension()) {
                 ProbenConverter probenConverter = new ProbenConverter();
-                befundObservation.setProbe(List.of(probenConverter.convert(resource.getSpecimenTarget())));
-            }else{
+                befundObservation.setProbe(List.of(probenConverter.convert((Specimen) resource.getSpecimen().getResource())));
+            }else if(resource.getSpecimen().getExtension().get(0).getUrl().equals("http://hl7.org/fhir/StructureDefinition/data-absent-reason")){
                 ProbeCluster probeCluster = new ProbeCluster();
                 ProbeZeitpunktDerProbenentnahmeDvDateTime probeZeitpunktDerProbenentnahmeDvDateTime = new ProbeZeitpunktDerProbenentnahmeDvDateTime();
                 probeZeitpunktDerProbenentnahmeDvDateTime.setZeitpunktDerProbenentnahmeValue(LocalDateTime.of(1000,1,1, 0, 0, 0));

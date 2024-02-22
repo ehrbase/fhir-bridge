@@ -26,13 +26,9 @@ public class ProbenConverter {
     public ProbeCluster convert(Specimen specimenTarget) {
         ProbeCluster probe = new ProbeCluster();
         mapProbenart(specimenTarget).ifPresent(probe::setProbenart);
-        if(probe.getProbenart() == null){
-            probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
-        }
-        mapAccessionIdentifier(specimenTarget).ifPresent(probe::setLaborprobenidentifikator);
-        mapReceivedTime(specimenTarget).ifPresent(probe::setZeitpunktDesProbeneingangsValue);
+        probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         mapZeitpunktDerEntnahme(specimenTarget).ifPresent(probe::setZeitpunktDerProbenentnahme);
-        if(probe.getZeitpunktDerProbenentnahme() == null){
+        if (probe.getZeitpunktDerProbenentnahme() == null) {
             probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
         mapKommentar(specimenTarget).ifPresent(probe::setKommentarValue);

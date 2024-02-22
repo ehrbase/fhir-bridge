@@ -14,7 +14,7 @@ public class MibiKulturNachweisConverter extends ObservationToCompositionConvert
     protected MikrobiologischerBefundComposition convertInternal(Observation resource) {
         MikrobiologischerBefundComposition mikrobiologischerBefundComposition = new MikrobiologischerBefundComposition();
         mikrobiologischerBefundComposition.setStatusValue("Endbefund");
-        mikrobiologischerBefundComposition.setBerichtIdValue(resource.getIdentifier().get(0).getValue());
+        mikrobiologischerBefundComposition.setBerichtIdNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE);
         if(resource.hasEncounter()){
             mikrobiologischerBefundComposition.setFallidentifikation(mapFallidentifikation(resource.getEncounter()));
         }else{

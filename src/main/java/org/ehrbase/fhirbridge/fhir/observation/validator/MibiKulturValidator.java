@@ -110,7 +110,7 @@ public class MibiKulturValidator implements FhirTransactionValidator {
 
     private void checkMRE(Observation mreKlassen) {
         if (mreKlassen.hasValueCodeableConcept()) {
-            if (!mreKlassen.getValueCodeableConcept().getCoding().get(0).getCode().equals("115329001") || !mreKlassen.getValueCodeableConcept().getCoding().get(0).getCode().equals("113727004")) {
+            if (!mreKlassen.getValueCodeableConcept().getCoding().get(0).getCode().equals("115329001") && !mreKlassen.getValueCodeableConcept().getCoding().get(0).getCode().equals("113727004")) {
                 throw new UnprocessableEntityException("MRE contains coding that is not supported, has to be either SNOMED: 115329001 (Methicillin resistant Staphylococcus aureus ) or 113727004 (Vancomycin resistant Enterococcus ) ");
             }
         } else {
