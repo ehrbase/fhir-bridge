@@ -55,7 +55,7 @@ class KDSPatientIT extends AbstractMappingTestSetupIT {
         Exception exception = executeValidatorException("create-without-birthdate-kds-patient.json");
         assertEquals("KDS Person must include a BirthDate!", exception.getMessage());
     }
-    
+
 
     @Override
     public Exception executeMappingException(String path) throws IOException {
@@ -90,6 +90,10 @@ class KDSPatientIT extends AbstractMappingTestSetupIT {
                 .registerValueObject((AngabenZumTodCluster.class))
                 .registerValueObject((KontaktpersonCluster.class))
                 .registerValueObject((Period.class))
+                .registerValueObject((NameCluster.class))
+                .registerValueObject((GeburtsnameCluster.class))
+                .registerValueObject((PostfachCluster.class))
+                .registerValueObject((VerwaltungsorganisationCluster.class))
                 .build();
     }
 }

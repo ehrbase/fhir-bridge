@@ -1,0 +1,202 @@
+{
+  "_type" : "COMPOSITION",
+  "name" : {
+    "_type" : "DV_TEXT",
+    "value" : "Patientenaufenthalt"
+  },
+  "archetype_details" : {
+    "archetype_id" : {
+      "value" : "openEHR-EHR-COMPOSITION.event_summary.v0"
+    },
+    "template_id" : {
+      "value" : "Patientenaufenthalt"
+    },
+    "rm_version" : "1.0.4"
+  },
+  "feeder_audit" : {
+    "_type" : "FEEDER_AUDIT",
+    "originating_system_item_ids" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "Encounter/056e28fa-2345-4931-abf1-603cd88e6ce6/_history/1",
+      "type" : "fhir_logical_id"
+    }, {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "fhir_patient_id",
+      "id" : "Patient/bb760392-855d-44db-ae2b-65cfbd824feb/_history/1"
+    }, {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "07f602e0-579e-4fe3-95af-381728bf0d49",
+      "type" : "fhir_patient_identifier"
+    } ],
+    "originating_system_audit" : {
+      "_type" : "FEEDER_AUDIT_DETAILS",
+      "system_id" : "FHIR-Bridge"
+    }
+  },
+  "language" : {
+    "_type" : "CODE_PHRASE",
+    "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
+      "value" : "ISO_639-1"
+    },
+    "code_string" : "de"
+  },
+  "territory" : {
+    "_type" : "CODE_PHRASE",
+    "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
+      "value" : "ISO_3166-1"
+    },
+    "code_string" : "DE"
+  },
+  "category" : {
+    "_type" : "DV_CODED_TEXT",
+    "value" : "event",
+    "defining_code" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "openehr"
+      },
+      "code_string" : "433"
+    }
+  },
+  "composer" : {
+    "_type" : "PARTY_SELF"
+  },
+  "context" : {
+    "_type" : "EVENT_CONTEXT",
+    "start_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2020-01-08T07:00:00.000+01:00"
+    },
+    "end_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2020-01-11T05:00:00.000+01:00"
+    },
+    "setting" : {
+      "_type" : "DV_CODED_TEXT",
+      "value" : "secondary medical care",
+      "defining_code" : {
+        "_type" : "CODE_PHRASE",
+        "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
+          "value" : "openehr"
+        },
+        "code_string" : "232"
+      }
+    },
+    "health_care_facility" : {
+      "_type" : "PARTY_IDENTIFIED",
+      "identifiers" : [ {
+        "_type" : "DV_IDENTIFIER",
+        "assigner" : "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/core-location-identifier",
+        "id" : "MRI"
+      } ]
+    }
+  },
+  "content" : [ {
+    "_type" : "ADMIN_ENTRY",
+    "name" : {
+      "_type" : "DV_TEXT",
+      "value" : "Versorgungsaufenthalt"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-ADMIN_ENTRY.hospitalization.v0"
+      },
+      "template_id" : {
+        "value" : "Patientenaufenthalt"
+      },
+      "rm_version" : "1.0.4"
+    },
+    "language" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "ISO_639-1"
+      },
+      "code_string" : "de"
+    },
+    "encoding" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "IANA_character-sets"
+      },
+      "code_string" : "UTF-8"
+    },
+    "subject" : {
+      "_type" : "PARTY_SELF"
+    },
+    "data" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Baum"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Beginn"
+        },
+        "value" : {
+          "_type" : "DV_DATE_TIME",
+          "value" : "2020-01-11T05:00:00.000+01:00"
+        },
+        "archetype_node_id" : "at0004"
+      }, {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Ende"
+        },
+        "value" : {
+          "_type" : "DV_DATE_TIME",
+          "value" : "2020-01-08T07:00:00.000+01:00"
+        },
+        "archetype_node_id" : "at0005"
+      }, {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Fachliche Organisationseinheit"
+        },
+        "archetype_details" : {
+          "archetype_id" : {
+            "value" : "openEHR-EHR-CLUSTER.organization.v0"
+          },
+          "template_id" : {
+            "value" : "Patientenaufenthalt"
+          },
+          "rm_version" : "1.0.4"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Fachabteilungsschlüssel"
+          },
+          "value" : {
+            "_type" : "DV_CODED_TEXT",
+            "value" : "Sonstige Fachabteilung",
+            "defining_code" : {
+              "_type" : "CODE_PHRASE",
+              "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "Anhang 1 der BPflV (31.12.2003)"
+              },
+              "code_string" : "3700"
+            }
+          },
+          "archetype_node_id" : "at0024"
+        } ],
+        "archetype_node_id" : "openEHR-EHR-CLUSTER.organization.v0"
+      } ],
+      "archetype_node_id" : "at0001"
+    },
+    "archetype_node_id" : "openEHR-EHR-ADMIN_ENTRY.hospitalization.v0"
+  } ],
+  "archetype_node_id" : "openEHR-EHR-COMPOSITION.event_summary.v0"
+}

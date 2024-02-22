@@ -33,16 +33,9 @@ public class KontaktGesundheitAbteilingIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createPatientenAufenthalt() throws IOException {
-        create("create-patienten-aufenthalt.json");
-    }
-
-    // #####################################################################################
-    // check payload
-    @Test
-    void mappingNormal() throws IOException {
-        testMapping("create-patienten-aufenthalt.json",
-                "paragon-patienten-aufenthalt.json");
+    void mappingNormalKDS() throws IOException {
+        testMapping("create-kds-encounter.json",
+                "paragon-create-kds-encounter.json");
     }
 
     // #####################################################################################

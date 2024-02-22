@@ -17,12 +17,12 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Patient/5885a473-6f5d-4f07-b460-3a84ee9f0c6e/_history/1",
+      "id" : "Patient/245fdee1-7256-4495-9862-feaa9bef081e/_history/1",
       "type" : "fhir_logical_id"
     }, {
       "_type" : "DV_IDENTIFIER",
       "assigner" : "fhir_patient_id",
-      "id" : "Patient/5885a473-6f5d-4f07-b460-3a84ee9f0c6e/_history/1"
+      "id" : "Patient/245fdee1-7256-4495-9862-feaa9bef081e/_history/1"
     }, {
       "_type" : "DV_IDENTIFIER",
       "id" : "07f602e0-579e-4fe3-95af-381728bf0d52",
@@ -68,7 +68,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2024-02-21T16:41:52.086118529+01:00"
+      "value" : "2024-02-22T11:30:58.243186+01:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -187,6 +187,61 @@
         "value" : "Baum"
       },
       "items" : [ {
+        "_type" : "CLUSTER",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Person"
+        },
+        "archetype_details" : {
+          "archetype_id" : {
+            "value" : "openEHR-EHR-CLUSTER.person.v1"
+          },
+          "template_id" : {
+            "value" : "KDS_Person"
+          },
+          "rm_version" : "1.0.4"
+        },
+        "items" : [ {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Versicherten ID_GKV"
+          },
+          "null_flavour" : {
+            "_type" : "DV_CODED_TEXT",
+            "value" : "not applicable",
+            "defining_code" : {
+              "_type" : "CODE_PHRASE",
+              "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "openehr"
+              },
+              "code_string" : "273"
+            }
+          },
+          "archetype_node_id" : "at0003"
+        }, {
+          "_type" : "ELEMENT",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Versicherungsnummer PKV"
+          },
+          "null_flavour" : {
+            "_type" : "DV_CODED_TEXT",
+            "value" : "not applicable",
+            "defining_code" : {
+              "_type" : "CODE_PHRASE",
+              "terminology_id" : {
+                "_type" : "TERMINOLOGY_ID",
+                "value" : "openehr"
+              },
+              "code_string" : "273"
+            }
+          },
+          "archetype_node_id" : "at0003"
+        } ],
+        "archetype_node_id" : "openEHR-EHR-CLUSTER.person.v1"
+      }, {
         "_type" : "CLUSTER",
         "name" : {
           "_type" : "DV_TEXT",
