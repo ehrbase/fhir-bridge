@@ -22,6 +22,12 @@ public class MibiKulturValidator implements FhirTransactionValidator {
         checkForIdentifier(observation);
         checkForEncounter(observation);
         checkForNachweis(observation);
+        //COMPONENT UND WIEVIELE
+        // Loinc
+        // Valueablecodeconcept
+
+        // check coding in MRE
+        //Check Empfindlichkeiten für Value Coding und Interpret
     }
 
     private void checkForNachweis(Observation observation) {
