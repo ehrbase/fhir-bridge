@@ -17,12 +17,12 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/1ccd69d3-6722-4f56-8f45-f7119c0a3964/_history/1",
+      "id" : "Observation/972d0a8d-b548-454b-8ffe-248853c1ae51/_history/1",
       "type" : "fhir_logical_id"
     }, {
       "_type" : "DV_IDENTIFIER",
       "assigner" : "fhir_patient_id",
-      "id" : "Patient/17552686-4d42-4e99-bde6-66258a256630/_history/1"
+      "id" : "Patient/f8e2b5ee-6e93-444b-9680-3a3d3453cf1e/_history/1"
     }, {
       "_type" : "DV_IDENTIFIER",
       "id" : "07f602e0-579e-4fe3-95af-381728bf0d49",
@@ -62,7 +62,12 @@
     }
   },
   "composer" : {
-    "_type" : "PARTY_SELF"
+    "_type" : "PARTY_IDENTIFIED",
+    "identifiers" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/core-location-identifiers",
+      "id" : "Charité"
+    } ]
   },
   "context" : {
     "_type" : "EVENT_CONTEXT",
@@ -422,18 +427,30 @@
                       "_type" : "ELEMENT",
                       "name" : {
                         "_type" : "DV_TEXT",
+                        "value" : "Minimale Hemmkonzentration"
+                      },
+                      "value" : {
+                        "_type" : "DV_QUANTITY",
+                        "units" : "mg/L",
+                        "magnitude" : 32.0
+                      },
+                      "archetype_node_id" : "at0001"
+                    }, {
+                      "_type" : "ELEMENT",
+                      "name" : {
+                        "_type" : "DV_TEXT",
                         "value" : "Resistenz"
                       },
                       "value" : {
                         "_type" : "DV_CODED_TEXT",
-                        "value" : "S",
+                        "value" : "R",
                         "defining_code" : {
                           "_type" : "CODE_PHRASE",
                           "terminology_id" : {
                             "_type" : "TERMINOLOGY_ID",
                             "value" : "http://highmed.org/fhir/CodeSystem/ic/resistenzklassen-antibiogramm-eucast"
                           },
-                          "code_string" : "S"
+                          "code_string" : "R"
                         }
                       },
                       "archetype_node_id" : "at0004"
@@ -449,14 +466,14 @@
                   },
                   "value" : {
                     "_type" : "DV_CODED_TEXT",
-                    "value" : "06",
+                    "value" : "05",
                     "defining_code" : {
                       "_type" : "CODE_PHRASE",
                       "terminology_id" : {
                         "_type" : "TERMINOLOGY_ID",
                         "value" : "http://highmed.org/fhir/CodeSystem/ic/mre-klassen-lokal"
                       },
-                      "code_string" : "06"
+                      "code_string" : "05"
                     }
                   },
                   "archetype_node_id" : "at0018"

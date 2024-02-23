@@ -22,7 +22,6 @@ public class MibiKulturValidator implements FhirTransactionValidator {
 
     public void validate(Object payload, Map<String, Object> map) {
         Observation observation = (Observation) payload;
-        checkForNachweis(observation);
         checkValuableCodeConcept(observation);
         checkStatus(observation);
         checkContained(observation);
@@ -86,10 +85,10 @@ public class MibiKulturValidator implements FhirTransactionValidator {
             }
         }
         if (!hasMREOrMRGN) {
-            throw new UnprocessableEntityException("Either MRE or MRGN is missing in the contained of Kultur");
+            throw new UnprocessableEntityException("Either MRE or MRGN is missing from the contained of Kultur");
         }
         if (!hasEmpfindlichkeit) {
-            throw new UnprocessableEntityException("Empfindlichkeit is missing inside the contained of Kultur. ");
+            throw new UnprocessableEntityException("Empfindlichkeit is missing from the contained of Kultur.");
         }
     }
 
@@ -111,7 +110,7 @@ public class MibiKulturValidator implements FhirTransactionValidator {
     private void checkMRE(Observation mreKlassen) {
         if (mreKlassen.hasValueCodeableConcept()) {
             if (!mreKlassen.getValueCodeableConcept().getCoding().get(0).getCode().equals("115329001") && !mreKlassen.getValueCodeableConcept().getCoding().get(0).getCode().equals("113727004")) {
-                throw new UnprocessableEntityException("MRE contains coding that is not supported, has to be either SNOMED: 115329001 (Methicillin resistant Staphylococcus aureus ) or 113727004 (Vancomycin resistant Enterococcus ) ");
+                throw new UnprocessableEntityException("MRE contains coding that is not supported, has to be either SNOMED: 115329001 (Methicillin resistant Staphylococcus aureus ) or 113727004 (Vancomycin resistant Enterococcus ).");
             }
         } else {
             throw new UnprocessableEntityException("Missing valueCodeableConcept in MRE");
@@ -136,24 +135,22 @@ public class MibiKulturValidator implements FhirTransactionValidator {
 
     private void checkInterpretationCodings(List<CodeableConcept> interpretation) {
         boolean hasEUCASTCodes = false;
+        boolean hasCLSICodes = false;
+        String codeCLSICode = "";
         for (CodeableConcept codeableConcept : interpretation) {
             if (codeableConcept.getCoding().get(0).getSystem().equals("http://snomed.info/sct")) {
                 hasEUCASTCodes = true;
             }
-        }
-        if (!hasEUCASTCodes) {
-            throw new UnprocessableEntityException("EUCAST codes are missing in Interpretation CodeableConcept");
-        }
+            if (codeableConcept.getCoding().get(0).getSystem().equals("https://www.medizininformatik-initiative.de/fhir/modul-mikrobio/CodeSystem/mii-vs-mikrobio-eucast-eucast")) {
+                hasCLSICodes = true;
+                codeCLSICode = codeableConcept.getCoding().get(0).getCode();
 
-    }
-
-    private void checkForNachweis(Observation observation) {
-        if (observation.hasValueCodeableConcept() && observation.getValueCodeableConcept().hasCoding()) {
-            if (!observation.getValueCodeableConcept().getCoding().get(0).getCode().equals("260373001")) {
-                throw new UnprocessableEntityException("Mibi Kultur has to have a code valueCodeableConcept with 260373001 (Nachweis)");
             }
-        } else {
-            throw new UnprocessableEntityException("Mibi Kultur must include an valueCodeableConcept");
+        }
+        if(hasCLSICodes && !hasEUCASTCodes){
+            if(codeCLSICode.equals("SDD") || codeCLSICode.equals("NS")){
+                throw new UnprocessableEntityException("SDD and NS are not supported as codes for EUCAST!");
+            }
         }
     }
 }

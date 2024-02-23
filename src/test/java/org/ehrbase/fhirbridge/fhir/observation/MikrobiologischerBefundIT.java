@@ -72,6 +72,114 @@ public class MikrobiologischerBefundIT  extends AbstractMappingTestSetupIT {
     void createProbeMapping() throws IOException {
         testMapping("create-mibi-probe.json", "paragon-create-mibi-probe.json");
     }
+
+    @Test
+    void createMibiCLSI() throws IOException {
+        testMapping("create-mibi-CLSI.json", "paragon-create-mibi-CLSI.json");
+    }
+
+
+    @Test
+    void invalidComponentValueMissing() throws IOException {
+        Exception exception = executeValidatorException("kultur-component-value-missing.json");
+        assertEquals("Kultur component has to include a valueCodeableConcept!", exception.getMessage());
+    }
+    @Test
+    void invalidComponentMissing() throws IOException {
+        Exception exception = executeValidatorException("kultur-missing-component.json");
+        assertEquals("Kultur has to include a component!", exception.getMessage());
+    }
+
+    @Test
+    void invalidMultipleComponent() throws IOException {
+        Exception exception = executeValidatorException("kultur-multiple-component.json");
+        assertEquals("Kultur has to include only one component not multiple", exception.getMessage());
+    }
+
+    @Test
+    void invalidMissingValuecodable() throws IOException {
+        Exception exception = executeValidatorException("missing-valuecodable.json");
+        assertEquals("Kultur has to include a ValueCodeableConcept with the Outcome of the Test!", exception.getMessage());
+    }
+
+
+    @Test
+    void invalidNotDetectedKultur() throws IOException {
+        Exception exception = executeValidatorException("not-detected-kultur.json");
+        assertEquals("Only detected Kulturen are allowed!", exception.getMessage());
+    }
+
+    @Test
+    void invalidStatus() throws IOException {
+        Exception exception = executeValidatorException("wrong-status-kultur.json");
+        assertEquals("For Status in Kultur only final is allowed", exception.getMessage());
+    }
+
+    @Test
+    void invalidContainedMissing() throws IOException {
+        Exception exception = executeValidatorException("no-contained.json");
+        assertEquals("No contained resources provided, MRE/MRGN and Empfindlichkeit are missing.", exception.getMessage());
+    }
+
+    @Test
+    void invalidMREAndMRGN() throws IOException {
+        Exception exception = executeValidatorException("both-MRE-and-MRGN.json");
+        assertEquals("Both MRGN and MRE are provided, has to be either one of those not both.", exception.getMessage());
+    }
+
+    @Test
+    void invalidMREMRGNMissing() throws IOException {
+        Exception exception = executeValidatorException("missing-mrgn-mre.json");
+        assertEquals("Either MRE or MRGN is missing from the contained of Kultur", exception.getMessage());
+    }
+
+    @Test
+    void invalidMissingEmpfindlichkeit() throws IOException {
+        Exception exception = executeValidatorException("missing-empfindlichkeit.json");
+        assertEquals("Empfindlichkeit is missing from the contained of Kultur.", exception.getMessage());
+    }
+
+    @Test
+    void invalidMissingMRGNValue() throws IOException {
+        Exception exception = executeValidatorException("mrgn-value-missing.json");
+        assertEquals("Missing valueCodeableConcept in MRGN", exception.getMessage());
+    }
+
+    @Test
+    void invalidUnsupportedMRECode() throws IOException {
+        Exception exception = executeValidatorException("unsupported-mre.json");
+        assertEquals("MRE contains coding that is not supported, has to be either SNOMED: 115329001 (Methicillin resistant Staphylococcus aureus ) or 113727004 (Vancomycin resistant Enterococcus ).", exception.getMessage());
+    }
+
+    @Test
+    void invalidMRECodeMissing() throws IOException {
+        Exception exception = executeValidatorException("missing-value-mre.json");
+        assertEquals("Missing valueCodeableConcept in MRE", exception.getMessage());
+    }
+
+    @Test
+    void invalidEmpfindlichkeitStatus() throws IOException {
+        Exception exception = executeValidatorException("invalid-empfindlichkeit-status.json");
+        assertEquals("For status of Empfindlichkeit only final is allowed", exception.getMessage());
+    }
+
+    @Test
+    void invalidInterpretationMissingEmpfindlichkeit() throws IOException {
+        Exception exception = executeValidatorException("interpretation-missing-empfindlichkeit.json");
+        assertEquals("Interpretation missing in Empfindlichkeit", exception.getMessage());
+    }
+
+    @Test
+    void invalidUnsupportedCLSI() throws IOException {
+        Exception exception = executeValidatorException("unsupported-CLSI.json");
+        assertEquals("SDD and NS are not supported as codes for EUCAST!", exception.getMessage());
+    }
+
+    void invalidUnsupportedCLSI2() throws IOException {
+        Exception exception = executeValidatorException("unsupported-CLSI2.json");
+        assertEquals("SDD and NS are not supported as codes for EUCAST!", exception.getMessage());
+    }
+
     @Override
     public Javers getJavers() {
         return JaversBuilder.javers()

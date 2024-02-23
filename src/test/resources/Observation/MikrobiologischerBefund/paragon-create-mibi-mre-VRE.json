@@ -17,12 +17,12 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/c6f32540-ec45-4cbc-87d4-d5e7f000167d/_history/1",
+      "id" : "Observation/5d064df9-a199-4afa-83c9-8aa42d407ad4/_history/1",
       "type" : "fhir_logical_id"
     }, {
       "_type" : "DV_IDENTIFIER",
       "assigner" : "fhir_patient_id",
-      "id" : "Patient/2f839379-a369-4219-baaa-685b38f6b34a/_history/1"
+      "id" : "Patient/17552686-4d42-4e99-bde6-66258a256630/_history/1"
     }, {
       "_type" : "DV_IDENTIFIER",
       "id" : "07f602e0-579e-4fe3-95af-381728bf0d49",
@@ -438,14 +438,14 @@
                       },
                       "value" : {
                         "_type" : "DV_CODED_TEXT",
-                        "value" : "Susceptible, standard dosing regimen",
+                        "value" : "S",
                         "defining_code" : {
                           "_type" : "CODE_PHRASE",
                           "terminology_id" : {
                             "_type" : "TERMINOLOGY_ID",
                             "value" : "http://highmed.org/fhir/CodeSystem/ic/resistenzklassen-antibiogramm-eucast"
                           },
-                          "code_string" : "Susceptible, standard dosing regimen"
+                          "code_string" : "S"
                         }
                       },
                       "archetype_node_id" : "at0004"
@@ -461,14 +461,14 @@
                   },
                   "value" : {
                     "_type" : "DV_CODED_TEXT",
-                    "value" : "VRE",
+                    "value" : "02",
                     "defining_code" : {
                       "_type" : "CODE_PHRASE",
                       "terminology_id" : {
                         "_type" : "TERMINOLOGY_ID",
                         "value" : "http://highmed.org/fhir/CodeSystem/ic/mre-klassen-lokal"
                       },
-                      "code_string" : "VRE"
+                      "code_string" : "02"
                     }
                   },
                   "archetype_node_id" : "at0018"

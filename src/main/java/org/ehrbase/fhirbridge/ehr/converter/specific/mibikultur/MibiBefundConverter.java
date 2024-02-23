@@ -37,7 +37,7 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
                 probeCluster.setZeitpunktDerProbenentnahme(probeZeitpunktDerProbenentnahmeDvDateTime);
                 probeCluster.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE);
                 probeCluster.setProbenartNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE);
-                //TODO add this lines in as soon as ehrbase bug is fixed
+                // TODO add this lines in as soon as ehrbase bug is fixed
                 // probeCluster.setZeitpunktDerProbenentnahmeNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
                 befundObservation.setProbe(List.of(probeCluster));
             }
@@ -79,16 +79,30 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
 
     private DvCodedText mapInterpretationsCodeToHIGHMEDCode(Observation empfindlichkeit) {
         Coding coding = empfindlichkeit.getInterpretation().get(0).getCoding().get(0);
-        switch (coding.getCode()) {
-            case "1306577009":
-                return getEUCASTCodes("Susceptible, standard dosing regimen");
-            case "1306583007":
-                return getEUCASTCodes("Susceptible, increased exposure");
-            case "1306581009":
-                return getEUCASTCodes("Resistant");
-            default:
-                throw new IllegalArgumentException("Unsupported code for Interpretation of Resistance, has to be SNOMED EUCAST codes !");
+        if(empfindlichkeit.getInterpretation().get(0).getCoding().get(0).getSystem().equals("http://snomed.info/sct")){ // first since better mappable
+            switch (coding.getCode()) {
+                case "1306577009":
+                    return getEUCASTCodes("S");
+                case "1306583007":
+                    return getEUCASTCodes("I");
+                case "1306581009":
+                    return getEUCASTCodes("R");
+                default:
+                    throw new IllegalArgumentException("Unsupported code for Interpretation of Resistance, has to be SNOMED EUCAST codes !");
+            }
+        }else{
+            switch (coding.getCode()) {
+                case "S":
+                    return getEUCASTCodes("S");
+                case "I":
+                    return getEUCASTCodes("I");
+                case "R":
+                    return getEUCASTCodes("R");
+                default:
+                    throw new IllegalArgumentException("Unsupported code for Interpretation of Resistance, onlt R, I or S are supported!");
+            }
         }
+
     }
 
     private DvCodedText getEUCASTCodes(String code){
@@ -124,15 +138,15 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
     private DvCodedText mapMREMRGNCoding(Optional<Coding> coding) {
         switch (coding.get().getCode()) {
             case "115329001":
-                return getHighmedMREDVCoded("MRSA");
+                return getHighmedMREDVCoded("01");
             case "113727004":
-                return getHighmedMREDVCoded("VRE");
+                return getHighmedMREDVCoded("02");
             case "LA33214-0":
-                return getHighmedMREDVCoded("2MRGN");
+                return getHighmedMREDVCoded("05");
             case "LA33215-7":
-                return getHighmedMREDVCoded("3MRGN");
+                return getHighmedMREDVCoded("06");
             case "LA33216-5":
-                return getHighmedMREDVCoded("4MRGN");
+                return getHighmedMREDVCoded("07");
             default:
                 throw new IllegalArgumentException("Unsupported code for MRE or MRGN !");
         }
