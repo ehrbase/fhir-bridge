@@ -43,21 +43,6 @@ public class ProbenConverter {
         }
     }
 
-    private Optional<DvIdentifier> mapAccessionIdentifier(Specimen specimenTarget) {
-        if (specimenTarget.hasAccessionIdentifier()) {
-            return Optional.of(DvIdentifierParser.parseIdentifierIntoDvIdentifier(specimenTarget.getAccessionIdentifier()));
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    private Optional<TemporalAccessor> mapReceivedTime(Specimen specimenTarget) {
-        if (specimenTarget.hasReceivedTime()) {
-            return Optional.of((new DateTimeType(specimenTarget.getReceivedTime())).getValueAsCalendar().toZonedDateTime());
-        } else {
-            return Optional.empty();
-        }
-    }
 
     private Optional<ProbeZeitpunktDerProbenentnahmeChoice> mapZeitpunktDerEntnahme(Specimen specimenTarget) {
         if (specimenTarget.hasCollection() && specimenTarget.getCollection().hasCollected()) {

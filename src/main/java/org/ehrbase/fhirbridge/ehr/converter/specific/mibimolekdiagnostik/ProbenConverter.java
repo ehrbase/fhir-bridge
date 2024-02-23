@@ -2,13 +2,11 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.mibimolekdiagnostik;
 
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import com.nedap.archie.rm.datavalues.DvCodedText;
-import com.nedap.archie.rm.datavalues.DvIdentifier;
 import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 import org.ehrbase.fhirbridge.ehr.converter.DvCodedTextParser;
-import org.ehrbase.fhirbridge.ehr.converter.parser.DvIdentifierParser;
+import org.ehrbase.fhirbridge.ehr.converter.generic.TimeConverter;
+import org.ehrbase.fhirbridge.ehr.opt.mikrobiologischerbefundcomposition.definition.ProbeZeitpunktDerProbenentnahmeDvDateTime;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProbeCluster;
-import org.hl7.fhir.r4.model.Annotation;
-import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Specimen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +20,14 @@ public class ProbenConverter {
     public ProbeCluster convert(Specimen specimenTarget) {
         ProbeCluster probe = new ProbeCluster();
         mapProbenart(specimenTarget).ifPresent(probe::setProbenart);
-        if(probe.getProbenart() == null){
+        probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        mapZeitpunktDerEntnahme(specimenTarget).ifPresent(probe::setZeitpunktDerProbenentnahmeValue);
+        if (probe.getZeitpunktDerProbenentnahmeValue() == null) {
             probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         }
-        mapKommentar(specimenTarget).ifPresent(probe::setKommentarValue);
+        if (probe.getProbenart() == null) {
+            probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        }
         return probe;
     }
 
@@ -37,32 +39,12 @@ public class ProbenConverter {
         }
     }
 
-    private Optional<DvIdentifier> mapAccessionIdentifier(Specimen specimenTarget) {
-        if (specimenTarget.hasAccessionIdentifier()) {
-            return Optional.of(DvIdentifierParser.parseIdentifierIntoDvIdentifier(specimenTarget.getAccessionIdentifier()));
+    private Optional<TemporalAccessor> mapZeitpunktDerEntnahme(Specimen specimenTarget) {
+        if (specimenTarget.hasCollection() && specimenTarget.getCollection().hasCollected()) {
+            return TimeConverter.convertSpecimanCollection(specimenTarget.getCollection());
         } else {
             return Optional.empty();
         }
-    }
-
-    private Optional<TemporalAccessor> mapReceivedTime(Specimen specimenTarget) {
-        if (specimenTarget.hasReceivedTime()) {
-            return Optional.of((new DateTimeType(specimenTarget.getReceivedTime())).getValueAsCalendar().toZonedDateTime());
-        } else {
-            return Optional.empty();
-        }
-    }
-
-
-    private Optional<String> mapKommentar(Specimen specimenTarget) {
-        if (specimenTarget.hasNote()) {
-            StringBuilder kommentar = new StringBuilder();
-            for (Annotation annotation : specimenTarget.getNote()) {
-                kommentar.append(annotation.getText());
-            }
-            return Optional.of(kommentar.toString());
-        }
-        return Optional.empty();
     }
 }
 
