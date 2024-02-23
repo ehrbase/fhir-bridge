@@ -175,10 +175,35 @@ public class MikrobiologischerBefundIT  extends AbstractMappingTestSetupIT {
         assertEquals("SDD and NS are not supported as codes for EUCAST!", exception.getMessage());
     }
 
+    @Test
     void invalidUnsupportedCLSI2() throws IOException {
         Exception exception = executeValidatorException("unsupported-CLSI2.json");
         assertEquals("SDD and NS are not supported as codes for EUCAST!", exception.getMessage());
     }
+    @Test
+    void invalidCollectedMissing() throws IOException {
+        Exception exception = executeValidatorException("missing-collection.json");
+        assertEquals("Specimen is missing collection", exception.getMessage());
+    }
+
+    @Test
+    void invalidMissingCollected() throws IOException {
+        Exception exception = executeValidatorException("missing-collected.json");
+        assertEquals("Specimen is missing collection collected time.", exception.getMessage());
+    }
+
+    @Test
+    void invalidUnsupportedCodingProbe() throws IOException {
+        Exception exception = executeValidatorException("probe-unsupported-coding.json");
+        assertEquals("This type coding is not supported for specimen, check implementation guide.", exception.getMessage());
+    }
+
+    @Test
+    void invalidTypeIsMissingProbe() throws IOException {
+        Exception exception = executeValidatorException("missing-probe-type.json");
+        assertEquals("Type is missing from specimen.", exception.getMessage());
+    }
+
 
     @Override
     public Javers getJavers() {

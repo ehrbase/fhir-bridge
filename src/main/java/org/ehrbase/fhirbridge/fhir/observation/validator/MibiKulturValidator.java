@@ -4,6 +4,7 @@ import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.Specimen;
 import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 
 import java.util.List;
@@ -83,12 +84,37 @@ public class MibiKulturValidator implements FhirTransactionValidator {
                 }
                 hasMREOrMRGN = true;
             }
+            if (resource.getMeta().getProfile().get(0).equals("http://hl7.org/fhir/StructureDefinition/Specimen")) {
+                checkSpecimen((Specimen) resource);
+            }
         }
         if (!hasMREOrMRGN) {
             throw new UnprocessableEntityException("Either MRE or MRGN is missing from the contained of Kultur");
         }
         if (!hasEmpfindlichkeit) {
             throw new UnprocessableEntityException("Empfindlichkeit is missing from the contained of Kultur.");
+        }
+    }
+
+    private void checkSpecimen(Specimen resource) {
+        if (resource.hasCollection()) {
+            if (!resource.getCollection().hasCollectedDateTimeType() && !resource.getCollection().hasCollectedPeriod()) {
+                throw new UnprocessableEntityException("Specimen is missing collection collected time.");
+            }
+        }else{
+            throw new UnprocessableEntityException("Specimen is missing collection");
+        }
+        if (resource.hasType()) {
+            if (!resource.getType().getCoding().get(0).getCode().equals("866033003") &&
+                    !resource.getType().getCoding().get(0).getCode().equals("866032008") &&
+                    !resource.getType().getCoding().get(0).getCode().equals("257261003") &&
+                    !resource.getType().getCoding().get(0).getCode().equals("878861003")) {
+                throw new UnprocessableEntityException("This type coding is not supported for specimen, check implementation guide.");
+
+            }
+        } else {
+            throw new UnprocessableEntityException("Type is missing from specimen.");
+
         }
     }
 
@@ -147,8 +173,8 @@ public class MibiKulturValidator implements FhirTransactionValidator {
 
             }
         }
-        if(hasCLSICodes && !hasEUCASTCodes){
-            if(codeCLSICode.equals("SDD") || codeCLSICode.equals("NS")){
+        if (hasCLSICodes && !hasEUCASTCodes) {
+            if (codeCLSICode.equals("SDD") || codeCLSICode.equals("NS")) {
                 throw new UnprocessableEntityException("SDD and NS are not supported as codes for EUCAST!");
             }
         }
