@@ -11,8 +11,8 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-04T14:02:17.164338+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
+    date = "2024-02-23T18:23:03.141058464+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
 )
 @OptionFor("DV_QUANTITY")
 public class ProAnalytTestmethodeDvQuantity implements RMEntity, ProAnalytTestmethodeChoice {

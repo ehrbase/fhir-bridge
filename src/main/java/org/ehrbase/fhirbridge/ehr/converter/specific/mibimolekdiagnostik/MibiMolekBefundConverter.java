@@ -4,6 +4,7 @@ import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
 import com.nedap.archie.rm.datavalues.quantity.DvQuantity;
 import com.nedap.archie.rm.support.identification.TerminologyId;
+import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
 import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
@@ -11,6 +12,7 @@ import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Resource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +25,7 @@ public class MibiMolekBefundConverter extends ObservationToObservationConverter<
         befundJedesEreignisPointEvent.setLabortestBezeichnungDefiningCode(LabortestBezeichnungDefiningCode.DETECTION_OF_VIRUS_PROCEDURE);
         befundJedesEreignisPointEvent.setLabortestPanel(mapLabortestPanel(resource));
         mapProbe(resource, befundJedesEreignisPointEvent);
+        befundObservation.setJedesEreignis(List.of(befundJedesEreignisPointEvent));
         return befundObservation;
     }
 
@@ -34,38 +37,43 @@ public class MibiMolekBefundConverter extends ObservationToObservationConverter<
         ProAnalytErgebnisStatusElement proAnalytErgebnisStatusElement = new ProAnalytErgebnisStatusElement();
         ProAnalytErgebnisStatusDvCodedText proAnalytErgebnisStatusDvCodedText = new ProAnalytErgebnisStatusDvCodedText();
         proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.ENDBEFUND);
-        proAnalytErgebnisStatusElement.setValue2(List.of(proAnalytErgebnisStatusDvCodedText));
+        proAnalytErgebnisStatusElement.setValue2(proAnalytErgebnisStatusDvCodedText);
         proAnalytCluster.setErgebnisStatus(List.of(proAnalytErgebnisStatusElement));
-        mapQuantitativesErgebnis(resource).ifPresent(proAnalytCluster::setQuantitativesErgebnis);
+
+
+        List<ProAnalytQuantitativesErgebnisElement> proAnalytQuantitativesErgebnisElementList = new ArrayList<>();
+        mapQuantitativesErgebnis(resource).ifPresent(proAnalytQuantitativesErgebnisElementList::add);
+        proAnalytCluster.setQuantitativesErgebnis(proAnalytQuantitativesErgebnisElementList);
+
         labortestPanelCluster.setProAnalyt(List.of(proAnalytCluster));
         return labortestPanelCluster;
     }
 
-    private Optional<List<ProAnalytQuantitativesErgebnisElement>> mapQuantitativesErgebnis(Observation mibiDiag) {
+    private Optional<ProAnalytQuantitativesErgebnisElement> mapQuantitativesErgebnis(Observation mibiDiag) {
         for (Observation.ObservationComponentComponent observation : mibiDiag.getComponent()) {
             if (observation.getCode().getCoding().get(0).getCode().equals("398545005")) {
                 ProAnalytQuantitativesErgebnisElement proAnalytQuantitativesErgebnisElement = new ProAnalytQuantitativesErgebnisElement();
                 ProAnalytQuantitativesErgebnisDvQuantity proAnalytQuantitativesErgebnisDvQuantity = new ProAnalytQuantitativesErgebnisDvQuantity();
                 proAnalytQuantitativesErgebnisDvQuantity.setQuantitativesErgebnisMagnitude(observation.getValueQuantity().getValue().doubleValue());
-                proAnalytQuantitativesErgebnisDvQuantity.setQuantitativesErgebnisUnits(observation.getValueQuantity().getUnit());
-                proAnalytQuantitativesErgebnisElement.setValue2(List.of(proAnalytQuantitativesErgebnisDvQuantity));
-                return Optional.of(List.of(proAnalytQuantitativesErgebnisElement));
+                proAnalytQuantitativesErgebnisDvQuantity.setQuantitativesErgebnisUnits(observation.getValueQuantity().getCode());
+                proAnalytQuantitativesErgebnisElement.setValue2(proAnalytQuantitativesErgebnisDvQuantity);
+                return Optional.of(proAnalytQuantitativesErgebnisElement);
             }
         }
         return Optional.empty();
     }
 
     private DvCodedText mapNachweis(Observation resource) {
-        switch (resource.getStatusElement().getCode()) {
-            case "Positive":
-            case "Weakly positive":
+        switch (resource.getValueCodeableConcept().getCoding().get(0).getCode()) {
+            case "10828004":
+            case "260408008":
                 return getAsDvCodedTest(CodeSystem.SNOMED, "260373001", "Detected");
-            case "Negative":
+            case "260385009":
                 return getAsDvCodedTest(CodeSystem.SNOMED, "260415000", "Not detected");
-            case "Inconclusive":
+            case "419984006":
                 return getAsDvCodedTest(CodeSystem.SNOMED, "419984006", "Inconclusive");
             default:
-                throw new InvalidStatusCodeException(resource.getStatusElement().getCode());
+                throw new ConversionException("Code is not supported");
         }
     }
 

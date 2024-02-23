@@ -12,16 +12,16 @@ public class ProAnalytQuantitativesErgebnisElementConverter {
     public ProAnalytQuantitativesErgebnisElement convert(Observation observation){
 
         ProAnalytQuantitativesErgebnisElement proAnalytQuantitativesErgebnisElement = new ProAnalytQuantitativesErgebnisElement();
-        List <ProAnalytQuantitativesErgebnisChoice> proAnalytQuantitativesErgebnisChoiceList = new ArrayList<>();
+        ProAnalytQuantitativesErgebnisChoice proAnalytQuantitativesErgebnisChoice ;
         /**
          *  Unit is 1..1 so observation.getValueQuantity().hasUnit() should be true. The other option is still implemented.
          */
         if (observation.getValueQuantity().hasUnit()){
-            proAnalytQuantitativesErgebnisChoiceList.add(new ProAnalytQuantitativesErgebnisChoiceConverter().convertDvQuantity(observation));
+            proAnalytQuantitativesErgebnisChoice = new ProAnalytQuantitativesErgebnisChoiceConverter().convertDvQuantity(observation);
         }else {
-            proAnalytQuantitativesErgebnisChoiceList.add(new ProAnalytQuantitativesErgebnisChoiceConverter().convertDvCount(observation));
+            proAnalytQuantitativesErgebnisChoice = new ProAnalytQuantitativesErgebnisChoiceConverter().convertDvCount(observation);
         }
-        proAnalytQuantitativesErgebnisElement.setValue2(proAnalytQuantitativesErgebnisChoiceList);
+        proAnalytQuantitativesErgebnisElement.setValue2(proAnalytQuantitativesErgebnisChoice);
 
         return proAnalytQuantitativesErgebnisElement;
     }

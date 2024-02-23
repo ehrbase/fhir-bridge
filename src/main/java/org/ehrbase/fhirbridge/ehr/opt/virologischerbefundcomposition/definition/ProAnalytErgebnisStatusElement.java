@@ -1,7 +1,6 @@
 package org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition;
 
 import com.nedap.archie.rm.archetyped.FeederAudit;
-import java.util.List;
 import javax.annotation.processing.Generated;
 import org.ehrbase.client.annotations.Choice;
 import org.ehrbase.client.annotations.Entity;
@@ -12,8 +11,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-04T14:02:17.153338400+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
+    date = "2024-02-23T18:23:03.136300433+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
 )
 public class ProAnalytErgebnisStatusElement implements LocatableEntity {
   /**
@@ -31,10 +30,11 @@ public class ProAnalytErgebnisStatusElement implements LocatableEntity {
   /**
    * Path: Virologischer Befund/Befund/Jedes Ereignis/Labortest-Panel/Pro Analyt/Ergebnis-Status
    * Description: Status des Analyseergebnisses.
+   * Comment: Die Werte wurden analog zum HL7 FHIR Diagnostic Report gewählt, die wiederum aus der HL7-Praxis stammen. Andere Codes/Ausdrücke können über den Text 'choice' verwendet werden.
    */
   @Path("/value")
   @Choice
-  private List<ProAnalytErgebnisStatusChoice> value2;
+  private ProAnalytErgebnisStatusChoice value2;
 
   public void setValue(NullFlavour value) {
      this.value = value;
@@ -52,11 +52,11 @@ public class ProAnalytErgebnisStatusElement implements LocatableEntity {
      return this.feederAudit ;
   }
 
-  public void setValue2(List<ProAnalytErgebnisStatusChoice> value2) {
+  public void setValue2(ProAnalytErgebnisStatusChoice value2) {
      this.value2 = value2;
   }
 
-  public List<ProAnalytErgebnisStatusChoice> getValue2() {
+  public ProAnalytErgebnisStatusChoice getValue2() {
      return this.value2 ;
   }
 }

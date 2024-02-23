@@ -17,8 +17,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.Language;
 @Archetype("openEHR-EHR-OBSERVATION.laboratory_test_result.v1")
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-04T14:02:17.010337300+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
+    date = "2024-02-23T18:23:03.097236624+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
 )
 public class BefundObservation implements EntryEntity {
   /**

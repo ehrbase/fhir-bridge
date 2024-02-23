@@ -13,12 +13,12 @@ public class MibiMolekDiagnostikConverter extends ObservationToCompositionConver
         VirologischerBefundComposition virologischerBefundComposition = new VirologischerBefundComposition();
         virologischerBefundComposition.setStatusValue("final");
         virologischerBefundComposition.setBerichtIdNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE);
-        virologischerBefundComposition.setFallidentifikation(mapFallidentifikation(resource, virologischerBefundComposition));
+        virologischerBefundComposition.setFallidentifikation(mapFallidentifikation(resource));
         virologischerBefundComposition.setBefund(new MibiMolekBefundConverter().convert(resource));
         return virologischerBefundComposition;
     }
 
-    private FallidentifikationCluster mapFallidentifikation(Observation resource, VirologischerBefundComposition virologischerBefundComposition) {
+    private FallidentifikationCluster mapFallidentifikation(Observation resource) {
         FallidentifikationCluster fallidentifikationCluster = new FallidentifikationCluster();
         if (resource.hasEncounter()) {
             fallidentifikationCluster.setFallKennungValue(resource.getEncounter().getIdentifier().getValue());
