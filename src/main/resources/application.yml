@@ -3,9 +3,9 @@
 #   FHIR Bridge Properties                                                     #
 ################################################################################
 fhir-bridge:
-  debug:
-    enabled: true
-    mapping-output-directory: ${java.io.tmpdir}/mappings
+#  debug:
+#    enabled: true
+#    mapping-output-directory: ${java.io.tmpdir}/mappings
   cors:
     allowed-headers: '*'
     allowed-methods: '*'

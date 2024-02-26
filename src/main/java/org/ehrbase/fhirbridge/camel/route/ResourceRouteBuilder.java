@@ -17,11 +17,9 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.ehrbase.client.exception.ClientException;
 import org.ehrbase.fhirbridge.camel.CamelConstants;
-import org.ehrbase.fhirbridge.camel.processor.FhirProfileValidator;
-import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
-import org.ehrbase.fhirbridge.camel.processor.ProvideResourceAuditHandler;
-import org.ehrbase.fhirbridge.camel.processor.ResourcePersistenceProcessor;
+import org.ehrbase.fhirbridge.camel.processor.*;
 import org.ehrbase.fhirbridge.fhir.encounter.validator.KDSEncounterValidator;
 import org.ehrbase.fhirbridge.fhir.common.Profile;
 import org.ehrbase.fhirbridge.fhir.observation.validator.MibiKulturValidator;
@@ -65,9 +63,10 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
             .process(PatientReferenceProcessor.BEAN_ID)
             .process(ResourcePersistenceProcessor.BEAN_ID)
             .doTry()
-                .to("direct:send-to-cdr");
-           /*TODO for production pack back in .doCatch(Exception.class)
-                .process(new OpenEhrMappingExceptionHandler());*/
+                .to("direct:send-to-cdr")
+            .doCatch(ClientException.class)
+                .process(new OpenEhrClientExceptionHandler());
+
 
         // @formatter:on
         configureAuditEvent();
