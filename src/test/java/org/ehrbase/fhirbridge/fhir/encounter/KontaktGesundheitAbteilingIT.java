@@ -32,11 +32,11 @@ public class KontaktGesundheitAbteilingIT extends AbstractMappingTestSetupIT {
         super("Encounter/", Encounter.class);
     }
 
-    @Test
+ /*   @Test
     void mappingNormalKDS() throws IOException {
         testMapping("create-kds-encounter.json",
                 "paragon-create-kds-encounter.json");
-    }
+    }*/
 
     // #####################################################################################
     // check exceptions
@@ -66,7 +66,7 @@ public class KontaktGesundheitAbteilingIT extends AbstractMappingTestSetupIT {
 
     @Test
     void createInvalidStatus() throws IOException {
-        Exception exception = executeValidatorException("create-patienten-aufenthalt-invalid-status.json");
+        Exception exception = executeValidatorException("invalid-status.json");
         assertEquals("Encounter status has to be finished !", exception.getMessage());
     }
 

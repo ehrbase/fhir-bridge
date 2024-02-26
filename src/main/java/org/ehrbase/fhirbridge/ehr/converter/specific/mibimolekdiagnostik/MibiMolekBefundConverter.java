@@ -2,15 +2,21 @@ package org.ehrbase.fhirbridge.ehr.converter.specific.mibimolekdiagnostik;
 
 import com.nedap.archie.rm.datatypes.CodePhrase;
 import com.nedap.archie.rm.datavalues.DvCodedText;
-import com.nedap.archie.rm.datavalues.quantity.DvQuantity;
 import com.nedap.archie.rm.support.identification.TerminologyId;
 import org.ehrbase.fhirbridge.ehr.converter.ConversionException;
-import org.ehrbase.fhirbridge.ehr.converter.InvalidStatusCodeException;
 import org.ehrbase.fhirbridge.ehr.converter.generic.ObservationToObservationConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.CodeSystem;
-import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.BefundJedesEreignisPointEvent;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.BefundObservation;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ErgebnisStatusDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestBezeichnungDefiningCode;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.LabortestPanelCluster;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytCluster;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytErgebnisStatusDvCodedText;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytErgebnisStatusElement;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisDvQuantity;
+import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisElement;
 import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Resource;
 
 import java.util.ArrayList;
 import java.util.List;

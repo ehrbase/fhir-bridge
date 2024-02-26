@@ -11,6 +11,7 @@ public abstract class ObservationToEvaluationConverter<E extends EntryEntity> ex
     public E convert(@NonNull Observation resource) {
         return super.convert(resource);
     }
+
     public TemporalAccessor convertTime(@NonNull Observation resource){
        return TimeConverter.convertObservationTime(resource);
     }
