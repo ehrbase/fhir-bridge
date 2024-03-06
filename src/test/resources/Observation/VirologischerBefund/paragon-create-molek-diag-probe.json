@@ -17,12 +17,12 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/def66723-4d3e-4d7d-9730-9c000ed0a615/_history/1",
+      "id" : "Observation/689786bb-3815-43cb-9ee2-6819c69d9c39/_history/1",
       "type" : "fhir_logical_id"
     }, {
       "_type" : "DV_IDENTIFIER",
       "assigner" : "fhir_patient_id",
-      "id" : "Patient/63628f74-c46d-4526-90b4-956fb0bd7a17/_history/1"
+      "id" : "Patient/97bf799d-de70-46ed-9e80-f0ffa9fb113c/_history/1"
     }, {
       "_type" : "DV_IDENTIFIER",
       "id" : "07f602e0-579e-4fe3-95af-381728bf0d49",
@@ -228,6 +228,72 @@
               }
             },
             "archetype_node_id" : "at0005"
+          }, {
+            "_type" : "CLUSTER",
+            "name" : {
+              "_type" : "DV_TEXT",
+              "value" : "Probe"
+            },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.specimen.v1"
+              },
+              "template_id" : {
+                "value" : "Virologischer Befund"
+              },
+              "rm_version" : "1.0.4"
+            },
+            "items" : [ {
+              "_type" : "ELEMENT",
+              "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Probenart"
+              },
+              "null_flavour" : {
+                "_type" : "DV_CODED_TEXT",
+                "value" : "not applicable",
+                "defining_code" : {
+                  "_type" : "CODE_PHRASE",
+                  "terminology_id" : {
+                    "_type" : "TERMINOLOGY_ID",
+                    "value" : "openehr"
+                  },
+                  "code_string" : "273"
+                }
+              },
+              "archetype_node_id" : "at0029"
+            }, {
+              "_type" : "ELEMENT",
+              "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Laborprobenidentifikator"
+              },
+              "null_flavour" : {
+                "_type" : "DV_CODED_TEXT",
+                "value" : "unknown",
+                "defining_code" : {
+                  "_type" : "CODE_PHRASE",
+                  "terminology_id" : {
+                    "_type" : "TERMINOLOGY_ID",
+                    "value" : "openehr"
+                  },
+                  "code_string" : "253"
+                }
+              },
+              "archetype_node_id" : "at0001"
+            }, {
+              "_type" : "ELEMENT",
+              "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Zeitpunkt der Probenentnahme"
+              },
+              "value" : {
+                "_type" : "DV_DATE_TIME",
+                "value" : "2011-08-16T06:15:00.000Z"
+              },
+              "archetype_node_id" : "at0015"
+            } ],
+            "archetype_node_id" : "openEHR-EHR-CLUSTER.specimen.v1"
           }, {
             "_type" : "CLUSTER",
             "name" : {

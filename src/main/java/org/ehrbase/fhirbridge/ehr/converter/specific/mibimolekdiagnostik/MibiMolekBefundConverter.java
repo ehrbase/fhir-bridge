@@ -17,6 +17,7 @@ import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisDvQuantity;
 import org.ehrbase.fhirbridge.ehr.opt.virologischerbefundcomposition.definition.ProAnalytQuantitativesErgebnisElement;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Specimen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +46,9 @@ public class MibiMolekBefundConverter extends ObservationToObservationConverter<
         proAnalytErgebnisStatusDvCodedText.setErgebnisStatusDefiningCode(ErgebnisStatusDefiningCode.ENDBEFUND);
         proAnalytErgebnisStatusElement.setValue2(proAnalytErgebnisStatusDvCodedText);
         proAnalytCluster.setErgebnisStatus(List.of(proAnalytErgebnisStatusElement));
-
-
         List<ProAnalytQuantitativesErgebnisElement> proAnalytQuantitativesErgebnisElementList = new ArrayList<>();
         mapQuantitativesErgebnis(resource).ifPresent(proAnalytQuantitativesErgebnisElementList::add);
         proAnalytCluster.setQuantitativesErgebnis(proAnalytQuantitativesErgebnisElementList);
-
         labortestPanelCluster.setProAnalyt(List.of(proAnalytCluster));
         return labortestPanelCluster;
     }
@@ -84,12 +82,8 @@ public class MibiMolekBefundConverter extends ObservationToObservationConverter<
     }
 
     private void mapProbe(Observation resource, BefundJedesEreignisPointEvent befundJedesEreignisPointEvent) {
-        if (resource.hasSpecimen()) {
-            if (resource.getSpecimen().hasExtension() && !resource.getSpecimen().getExtension().get(0).getUrl().equals("http://hl7.org/fhir/StructureDefinition/data-absent-reason")) {
-                ProbenConverter probenConverter = new ProbenConverter();
-                befundJedesEreignisPointEvent.setProbe(probenConverter.convert(resource.getSpecimenTarget()));
-            }
-        }
+        ProbenConverter probenConverter = new ProbenConverter();
+        befundJedesEreignisPointEvent.setProbe(probenConverter.convert((Specimen) resource.getSpecimen().getResource()));
     }
 
     private DvCodedText getAsDvCodedTest(CodeSystem system, String code, String display) {

@@ -37,22 +37,8 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
     }
 
     private void mapProbe(Observation resource, BefundObservation befundObservation) {
-        if (resource.hasSpecimen()) {
-            if (!resource.getSpecimen().hasExtension()) {
-                ProbenConverter probenConverter = new ProbenConverter();
-                befundObservation.setProbe(List.of(probenConverter.convert((Specimen) resource.getSpecimen().getResource())));
-            }else if(resource.getSpecimen().getExtension().get(0).getUrl().equals("http://hl7.org/fhir/StructureDefinition/data-absent-reason")){
-                ProbeCluster probeCluster = new ProbeCluster();
-                ProbeZeitpunktDerProbenentnahmeDvDateTime probeZeitpunktDerProbenentnahmeDvDateTime = new ProbeZeitpunktDerProbenentnahmeDvDateTime();
-                probeZeitpunktDerProbenentnahmeDvDateTime.setZeitpunktDerProbenentnahmeValue(LocalDateTime.of(1000,1,1, 0, 0, 0));
-                probeCluster.setZeitpunktDerProbenentnahme(probeZeitpunktDerProbenentnahmeDvDateTime);
-                probeCluster.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE);
-                probeCluster.setProbenartNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE);
-                // TODO add this lines in as soon as ehrbase bug is fixed
-                // probeCluster.setZeitpunktDerProbenentnahmeNullFlavourDefiningCode(NullFlavour.NO_INFORMATION);
-                befundObservation.setProbe(List.of(probeCluster));
-            }
-        }
+        ProbenConverter probenConverter = new ProbenConverter();
+        befundObservation.setProbe(List.of(probenConverter.convert((Specimen) resource.getSpecimen().getResource())));
     }
 
     private KulturCluster mapKultur(Observation resource) {
@@ -62,7 +48,7 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
         DvCodedTextParser.getInstance().parseFHIRCoding(resource.getComponent().get(0).getValueCodeableConcept().getCoding().get(0)).ifPresent(proErregerCluster::setErregername);
         proErregerCluster.setErregerdetails(mapErregerdetails(resource));
         //TODO: reimplement as soon as ehrbase bug ist fixed
-       //  proErregerCluster.setZugehoerigeLaborprobeNullFlavourDefiningCode(NullFlavour.UNKNOWN);
+        //  proErregerCluster.setZugehoerigeLaborprobeNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         ProErregerZugehoerigeLaborprobeDvUri proErregerZugehoerigeLaborprobeDvUri = new ProErregerZugehoerigeLaborprobeDvUri();
         proErregerZugehoerigeLaborprobeDvUri.setZugehoerigeLaborprobeValue(URI.create("null"));
         proErregerCluster.setZugehoerigeLaborprobe(proErregerZugehoerigeLaborprobeDvUri);
@@ -90,7 +76,7 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
 
     private DvCodedText mapInterpretationsCodeToHIGHMEDCode(Observation empfindlichkeit) {
         Coding coding = empfindlichkeit.getInterpretation().get(0).getCoding().get(0);
-        if(empfindlichkeit.getInterpretation().get(0).getCoding().get(0).getSystem().equals("http://snomed.info/sct")){ // first since better mappable
+        if (empfindlichkeit.getInterpretation().get(0).getCoding().get(0).getSystem().equals("http://snomed.info/sct")) { // first since better mappable
             switch (coding.getCode()) {
                 case "1306577009":
                     return getEUCASTCodes("S");
@@ -101,7 +87,7 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
                 default:
                     throw new IllegalArgumentException("Unsupported code for Interpretation of Resistance, has to be SNOMED EUCAST codes !");
             }
-        }else{
+        } else {
             switch (coding.getCode()) {
                 case "S":
                     return getEUCASTCodes("S");
@@ -116,7 +102,7 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
 
     }
 
-    private DvCodedText getEUCASTCodes(String code){
+    private DvCodedText getEUCASTCodes(String code) {
         CodePhrase codePhrase = new CodePhrase(new TerminologyId("http://highmed.org/fhir/CodeSystem/ic/resistenzklassen-antibiogramm-eucast"), code);
         DvCodedText dvCodedText = new DvCodedText(code, codePhrase);
         return dvCodedText;
@@ -124,7 +110,7 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
 
 
     private ProAntibiotikumCluster mapMinimalHemmkonzentration(ProAntibiotikumCluster proAntibiotikumCluster, Observation empfindlichkeit) {
-        if(empfindlichkeit.hasValueQuantity()){
+        if (empfindlichkeit.hasValueQuantity()) {
             proAntibiotikumCluster.setMinimaleHemmkonzentrationMagnitude(empfindlichkeit.getValueQuantity().getValue().doubleValue());
             proAntibiotikumCluster.setMinimaleHemmkonzentrationUnits(empfindlichkeit.getValueQuantity().getUnit());
         }

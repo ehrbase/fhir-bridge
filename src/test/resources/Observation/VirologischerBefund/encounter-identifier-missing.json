@@ -90,11 +90,21 @@
     "reference": "#probe-1"
   },
   "encounter": {
-    "identifier": {
-      "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus",
-      "value": "F_0000001"
-    }
+    "extension": [
+      {
+        "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+        "valueCode": "unsupported"
+      }
+    ]
   },
+  "performer": [
+    {
+      "identifier": {
+        "system": "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/core-location-identifiers",
+        "value": "Charité"
+      }
+    }
+  ],
   "component": [
     {
       "code": {

@@ -17,24 +17,11 @@ import java.util.Optional;
 public class ProbenConverter {
     public ProbeCluster convert(Specimen specimenTarget) {
         ProbeCluster probe = new ProbeCluster();
-        mapProbenart(specimenTarget).ifPresent(probe::setProbenart);
+        probe.setProbenartNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE);
         probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         mapZeitpunktDerEntnahme(specimenTarget).ifPresent(probe::setZeitpunktDerProbenentnahme);
-        if (probe.getZeitpunktDerProbenentnahme() == null) {
-            probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
-        }
-        mapKommentar(specimenTarget).ifPresent(probe::setKommentarValue);
         return probe;
     }
-
-    private Optional<DvCodedText> mapProbenart(Specimen specimenTarget) {
-        if (specimenTarget.hasType() && specimenTarget.getType().hasCoding() && specimenTarget.getType().getCoding().size() == 1) {
-            return DvCodedTextParser.getInstance().parseFHIRCoding(specimenTarget.getType().getCoding().get(0));
-        } else {
-            throw new UnprocessableEntityException("The fhir bridge does not support a specimen with multiple type.codings, since a specimen cannot have several types. Please alter the data accordingly.");
-        }
-    }
-
 
     private Optional<ProbeZeitpunktDerProbenentnahmeChoice> mapZeitpunktDerEntnahme(Specimen specimenTarget) {
         if (specimenTarget.hasCollection() && specimenTarget.getCollection().hasCollected()) {

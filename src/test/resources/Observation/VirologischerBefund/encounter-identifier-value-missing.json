@@ -16,15 +16,6 @@
       },
       "collection": {
         "collectedDateTime": "2011-08-16T06:15:00Z"
-      },
-      "type": {
-        "coding": [
-          {
-            "system": "http://snomed.info/sct",
-            "code": "866033003",
-            "display": "Blood specimen in aerobic blood culture bottle (specimen)"
-          }
-        ]
       }
     }
   ],
@@ -96,17 +87,11 @@
     ]
   },
   "specimen": {
-    "extension": [
-      {
-        "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
-        "valueCode": "unsupported"
-      }
-    ]
+    "reference": "#probe-1"
   },
   "encounter": {
     "identifier": {
-      "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus",
-      "value": "F_0000001"
+      "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus"
     }
   },
   "performer": [

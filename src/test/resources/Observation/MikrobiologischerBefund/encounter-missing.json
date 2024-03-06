@@ -236,12 +236,6 @@
       "reference": "#mrgn-1"
     }
   ],
-  "encounter": {
-    "identifier": {
-      "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus",
-      "value": "F_0000001"
-    }
-  },
   "component": [
     {
       "code": {

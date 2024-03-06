@@ -15,23 +15,12 @@
         ]
       },
       "identifier": [
-        {
-          "type": {
-            "coding": [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-                "code": "OBI"
-              }
-            ]
-          },
-          "system": "https://example.org/fhir/sid/test-lab-results",
-          "value": "59826-8_1234567890",
-          "assigner": {
-            "identifier": {
-              "system": "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/core-location-identifier",
-              "value": "DIZ-ID"
-            }
+        {"extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+            "valueCode": "unsupported"
           }
+        ]
         }
       ],
       "status": "final",
@@ -86,16 +75,17 @@
           }
         ]
       },
-      "interpretation": [{
-        "coding":  [
-          {
-            "system": "https://www.medizininformatik-initiative.de/fhir/modul-mikrobio/CodeSystem/mii-vs-mikrobio-eucast-eucast",
-            "code": "R",
-            "version": "2019",
-            "display": "Resistant: A microorganism is categorised as Resistant when there is a high likelihood of therapeutic failure even when there is increased exposure."
-          }
-        ]
-      }]
+      "interpretation": [
+        {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1306577009",
+              "display": "European Committee on Antimicrobial Susceptibility Testing category 2019 Susceptible, standard dosing regimen"
+            }
+          ]
+        }
+      ]
     },
     {
       "resourceType": "Observation",
@@ -106,23 +96,12 @@
         ]
       },
       "identifier":  [
-        {
-          "type": {
-            "coding":  [
-              {
-                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-                "code": "OBI"
-              }
-            ]
-          },
-          "system": "https://example.org/fhir/sid/test-lab-results",
-          "value": "59826-8_1234567890",
-          "assigner": {
-            "identifier": {
-              "system": "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/core-location-identifier",
-              "value": "DIZ-ID"
-            }
+        {"extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+            "valueCode": "unsupported"
           }
+        ]
         }
       ],
       "status": "final",
@@ -164,8 +143,8 @@
         "coding":  [
           {
             "system": "http://loinc.org",
-            "code": "LA33214-0",
-            "display": "2MRGN"
+            "code": "LA33215-7",
+            "display": "3MRGN"
           }
         ]
       },
@@ -192,34 +171,15 @@
     }
   ],
   "identifier": [
-    {
-      "type": {
-        "coding": [
-          {
-            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
-            "code": "OBI"
-          }
-        ]
-      },
-      "system": "https://example.org/fhir/sid/test-lab-results",
-      "value": "59826-8_1234567890",
-      "assigner": {
-        "identifier": {
-          "system": "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/core-location-identifier",
-          "value": "DIZ-ID"
-        }
+    {"extension": [
+      {
+        "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+        "valueCode": "unsupported"
       }
+    ]
     }
   ],
   "status": "final",
-  "performer": [
-    {
-      "identifier": {
-        "system": "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/core-location-identifiers",
-        "value": "Charité"
-      }
-    }
-  ],
   "category": [
     {
       "coding": [
@@ -276,11 +236,12 @@
       "reference": "#mrgn-1"
     }
   ],
-  "encounter": {
-    "identifier": {
-      "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus",
-      "value": "F_0000001"
+  "encounter": {"extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+      "valueCode": "unsupported"
     }
+  ]
   },
   "component": [
     {

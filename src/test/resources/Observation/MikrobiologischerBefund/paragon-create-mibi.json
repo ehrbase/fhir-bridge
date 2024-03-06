@@ -17,12 +17,12 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "Observation/263b90f7-b1dc-447e-8306-ce1aa422bb0c/_history/1",
+      "id" : "Observation/9f957bf1-27c1-488d-8ba4-dc2cf7fefe6e/_history/1",
       "type" : "fhir_logical_id"
     }, {
       "_type" : "DV_IDENTIFIER",
       "assigner" : "fhir_patient_id",
-      "id" : "Patient/17552686-4d42-4e99-bde6-66258a256630/_history/1"
+      "id" : "Patient/2179ef32-0df4-4785-bdce-5a99b3af30ba/_history/1"
     }, {
       "_type" : "DV_IDENTIFIER",
       "id" : "07f602e0-579e-4fe3-95af-381728bf0d49",
@@ -270,14 +270,14 @@
               },
               "null_flavour" : {
                 "_type" : "DV_CODED_TEXT",
-                "value" : "not applicable",
+                "value" : "unknown",
                 "defining_code" : {
                   "_type" : "CODE_PHRASE",
                   "terminology_id" : {
                     "_type" : "TERMINOLOGY_ID",
                     "value" : "openehr"
                   },
-                  "code_string" : "273"
+                  "code_string" : "253"
                 }
               },
               "archetype_node_id" : "at0001"
@@ -289,7 +289,7 @@
               },
               "value" : {
                 "_type" : "DV_DATE_TIME",
-                "value" : "1000-01-01T00:00:00.000"
+                "value" : "2011-08-16T06:15:00.000Z"
               },
               "archetype_node_id" : "at0015"
             } ],

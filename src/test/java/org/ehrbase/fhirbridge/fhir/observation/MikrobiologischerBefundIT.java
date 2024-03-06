@@ -102,6 +102,23 @@ public class MikrobiologischerBefundIT  extends AbstractMappingTestSetupIT {
         assertEquals("Kultur has to include a ValueCodeableConcept with the Outcome of the Test!", exception.getMessage());
     }
 
+    @Test
+    void invalidEncounterMissing() throws IOException {
+        Exception exception = executeValidatorException("encounter-missing.json");
+        assertEquals("Encounter is missing", exception.getMessage());
+    }
+
+    @Test
+    void invalidEncounterIdentifierMissing() throws IOException {
+        Exception exception = executeValidatorException("encounter-identifier-missing.json");
+        assertEquals("Encounter is missing identifier", exception.getMessage());
+    }
+
+    @Test
+    void invalidEncounterIdentifierValueMissing() throws IOException {
+        Exception exception = executeValidatorException("encounter-identifier-value-missing.json");
+        assertEquals("Encounter is missing identifier.system and/or identifier.value", exception.getMessage());
+    }
 
     @Test
     void invalidNotDetectedKultur() throws IOException {
@@ -128,9 +145,10 @@ public class MikrobiologischerBefundIT  extends AbstractMappingTestSetupIT {
     }
 
     @Test
+
     void invalidMREMRGNMissing() throws IOException {
         Exception exception = executeValidatorException("missing-mrgn-mre.json");
-        assertEquals("Either MRE or MRGN is missing from the contained of Kultur", exception.getMessage());
+        assertEquals("Either MRE or MRGN is missing from the contained of Kultur.", exception.getMessage());
     }
 
     @Test
@@ -191,19 +209,6 @@ public class MikrobiologischerBefundIT  extends AbstractMappingTestSetupIT {
         Exception exception = executeValidatorException("missing-collected.json");
         assertEquals("Specimen is missing collection collected time.", exception.getMessage());
     }
-
-    @Test
-    void invalidUnsupportedCodingProbe() throws IOException {
-        Exception exception = executeValidatorException("probe-unsupported-coding.json");
-        assertEquals("This type coding is not supported for specimen, check implementation guide.", exception.getMessage());
-    }
-
-    @Test
-    void invalidTypeIsMissingProbe() throws IOException {
-        Exception exception = executeValidatorException("missing-probe-type.json");
-        assertEquals("Type is missing from specimen.", exception.getMessage());
-    }
-
 
     @Override
     public Javers getJavers() {

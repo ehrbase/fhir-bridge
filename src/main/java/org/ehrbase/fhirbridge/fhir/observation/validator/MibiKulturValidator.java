@@ -27,6 +27,19 @@ public class MibiKulturValidator implements FhirTransactionValidator {
         checkStatus(observation);
         checkContained(observation);
         checkComponent(observation);
+        checkEncounter(observation);
+    }
+
+    private void checkEncounter(Observation observation) {
+        if(observation.hasEncounter()){
+            if(!observation.getEncounter().hasIdentifier()){
+                throw new UnprocessableEntityException("Encounter is missing identifier");
+            } else if(!observation.getEncounter().getIdentifier().hasSystem() || !observation.getEncounter().getIdentifier().hasValue()){
+                throw new UnprocessableEntityException("Encounter is missing identifier.system and/or identifier.value");
+            }
+        }else{
+            throw new UnprocessableEntityException("Encounter is missing");
+        }
     }
 
     private void checkComponent(Observation observation) {
@@ -74,6 +87,7 @@ public class MibiKulturValidator implements FhirTransactionValidator {
     private void checkForExistenceOfMREMRGNAndEmpfindlichkeit(Observation observation) {
         boolean hasMREOrMRGN = false;
         boolean hasEmpfindlichkeit = false;
+        boolean hasSpecimen = false;
         for (Resource resource : observation.getContained()) {
             if (resource.getMeta().getProfile().get(0).equals("https://www.medizininformatik-initiative.de/fhir/modul-mikrobio/StructureDefinition/mii-pr-mikrobio-empfindlichkeit")) {
                 hasEmpfindlichkeit = true;
@@ -86,13 +100,17 @@ public class MibiKulturValidator implements FhirTransactionValidator {
             }
             if (resource.getMeta().getProfile().get(0).equals("http://hl7.org/fhir/StructureDefinition/Specimen")) {
                 checkSpecimen((Specimen) resource);
+                hasSpecimen = true;
             }
         }
         if (!hasMREOrMRGN) {
-            throw new UnprocessableEntityException("Either MRE or MRGN is missing from the contained of Kultur");
+            throw new UnprocessableEntityException("Either MRE or MRGN is missing from the contained of Kultur.");
         }
         if (!hasEmpfindlichkeit) {
             throw new UnprocessableEntityException("Empfindlichkeit is missing from the contained of Kultur.");
+        }
+        if(!hasSpecimen){
+            throw new UnprocessableEntityException("Specimen is missing in Kultur.");
         }
     }
 
@@ -103,18 +121,6 @@ public class MibiKulturValidator implements FhirTransactionValidator {
             }
         }else{
             throw new UnprocessableEntityException("Specimen is missing collection");
-        }
-        if (resource.hasType()) {
-            if (!resource.getType().getCoding().get(0).getCode().equals("866033003") &&
-                    !resource.getType().getCoding().get(0).getCode().equals("866032008") &&
-                    !resource.getType().getCoding().get(0).getCode().equals("257261003") &&
-                    !resource.getType().getCoding().get(0).getCode().equals("878861003")) {
-                throw new UnprocessableEntityException("This type coding is not supported for specimen, check implementation guide.");
-
-            }
-        } else {
-            throw new UnprocessableEntityException("Type is missing from specimen.");
-
         }
     }
 

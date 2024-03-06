@@ -156,6 +156,18 @@
           }
         ]
       }
+    },
+    {
+      "resourceType": "Specimen",
+      "id": "probe-1",
+      "meta": {
+        "profile": [
+          "http://hl7.org/fhir/StructureDefinition/Specimen"
+        ]
+      },
+      "collection": {
+        "collectedDateTime": "2011-08-16T06:15:00Z"
+      }
     }
   ],
   "identifier": [
@@ -213,14 +225,6 @@
       }
     ]
   },
-  "specimen": {
-    "extension": [
-      {
-        "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
-        "valueCode": "unsupported"
-      }
-    ]
-  },
   "hasMember": [
     {
       "reference": "#empf-1"
@@ -234,6 +238,9 @@
       "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus",
       "value": "F_0000001"
     }
+  },
+  "specimen": {
+    "reference": "#probe-1"
   },
   "component": [
     {

@@ -24,7 +24,20 @@ public class MibiMolekDiagnostikValidator implements FhirTransactionValidator {
         checkStatus(observation.getStatus());
         checkForSpecimen(observation);
         checkComponent(observation);
+        checkEncounter(observation);
         checkValueCodeableConcept(observation);
+    }
+
+    private void checkEncounter(Observation observation) {
+        if(observation.hasEncounter()){
+            if(!observation.getEncounter().hasIdentifier()){
+                throw new UnprocessableEntityException("Encounter is missing identifier");
+            } else if(!observation.getEncounter().getIdentifier().hasSystem() || !observation.getEncounter().getIdentifier().hasValue()){
+                throw new UnprocessableEntityException("Encounter is missing identifier.system and/or identifier.value");
+            }
+        }else{
+            throw new UnprocessableEntityException("Encounter is missing");
+        }
     }
 
     private void checkValueCodeableConcept(Observation observation) {
@@ -64,6 +77,8 @@ public class MibiMolekDiagnostikValidator implements FhirTransactionValidator {
         for (Resource resource : observation.getContained()) {
             if (resource.getMeta().getProfile().get(0).equals("http://hl7.org/fhir/StructureDefinition/Specimen")) {
                 checkSpecimen((Specimen) resource);
+            }else{
+                throw new UnprocessableEntityException("Specimen is missing in Mibi Molekulare Diagnostik.");
             }
         }
     }
@@ -76,20 +91,6 @@ public class MibiMolekDiagnostikValidator implements FhirTransactionValidator {
         }else{
             throw new UnprocessableEntityException("Specimen is missing collection");
         }
-        if (resource.hasType()) {
-            if (!resource.getType().getCoding().get(0).getCode().equals("257261003") &&
-                    !resource.getType().getCoding().get(0).getCode().equals("119334006") &&
-                    !resource.getType().getCoding().get(0).getCode().equals("119342007") &&
-                    !resource.getType().getCoding().get(0).getCode().equals("410580001") &&
-                    !resource.getType().getCoding().get(0).getCode().equals("258607008")) {
-                throw new UnprocessableEntityException("This type coding is not supported for specimen, check implementation guide.");
-
-            }
-        } else {
-            throw new UnprocessableEntityException("Type is missing from specimen.");
-
-        }
     }
-
 
 }

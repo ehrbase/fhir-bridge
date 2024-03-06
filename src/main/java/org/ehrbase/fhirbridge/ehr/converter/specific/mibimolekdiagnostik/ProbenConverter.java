@@ -18,24 +18,10 @@ public class ProbenConverter {
 
     public ProbeCluster convert(Specimen specimenTarget) {
         ProbeCluster probe = new ProbeCluster();
-        mapProbenart(specimenTarget).ifPresent(probe::setProbenart);
+        probe.setProbenartNullFlavourDefiningCode(NullFlavour.NOT_APPLICABLE);
         probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
         mapZeitpunktDerEntnahme(specimenTarget).ifPresent(probe::setZeitpunktDerProbenentnahmeValue);
-        if (probe.getZeitpunktDerProbenentnahmeValue() == null) {
-            probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
-        }
-        if (probe.getProbenart() == null) {
-            probe.setLaborprobenidentifikatorNullFlavourDefiningCode(NullFlavour.UNKNOWN);
-        }
         return probe;
-    }
-
-    private Optional<DvCodedText> mapProbenart(Specimen specimenTarget) {
-        if (specimenTarget.hasType() && specimenTarget.getType().hasCoding() && specimenTarget.getType().getCoding().size() == 1) {
-            return DvCodedTextParser.getInstance().parseFHIRCoding(specimenTarget.getType().getCoding().get(0));
-        } else {
-            throw new UnprocessableEntityException("The fhir bridge does not support a specimen with multiple type.codings, since a specimen cannot have several types. Please alter the data accordingly.");
-        }
     }
 
     private Optional<TemporalAccessor> mapZeitpunktDerEntnahme(Specimen specimenTarget) {

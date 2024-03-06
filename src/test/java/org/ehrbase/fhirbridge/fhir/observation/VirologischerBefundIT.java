@@ -68,28 +68,27 @@ public class VirologischerBefundIT extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void invalidSpecimenWrongCode() throws IOException {
-        Exception exception = executeValidatorException("specimen-wrong-code.json");
-        assertEquals("This type coding is not supported for specimen, check implementation guide.", exception.getMessage());
-    }
-
-    @Test
-    void invalidTypeMissingSpecimen() throws IOException {
-        Exception exception = executeValidatorException("type-missing-specimen.json");
-        assertEquals("This type coding is not supported for specimen, check implementation guide.", exception.getMessage());
-    }
-
-    @Test
-    void invalidUnsupported() throws IOException {
-        Exception exception = executeValidatorException("unsupported-type-coding-specimen.json");
-        assertEquals("This type coding is not supported for specimen, check implementation guide.", exception.getMessage());
-    }
-
-
-    @Test
     void invalidWrongStatus() throws IOException {
         Exception exception = executeValidatorException("wrong-status.json");
         assertEquals("For status in Molekulare Diagnostik only final is allowed", exception.getMessage());
+    }
+
+    @Test
+    void invalidEncounterMissing() throws IOException {
+        Exception exception = executeValidatorException("encounter-missing.json");
+        assertEquals("Encounter is missing", exception.getMessage());
+    }
+
+    @Test
+    void invalidEncounterIdentifierMissing() throws IOException {
+        Exception exception = executeValidatorException("encounter-identifier-missing.json");
+        assertEquals("Encounter is missing identifier", exception.getMessage());
+    }
+
+    @Test
+    void invalidEncounterIdentifierValue() throws IOException {
+        Exception exception = executeValidatorException("encounter-identifier-value-missing.json");
+        assertEquals("Encounter is missing identifier.system and/or identifier.value", exception.getMessage());
     }
 
 
@@ -109,6 +108,7 @@ public class VirologischerBefundIT extends AbstractMappingTestSetupIT {
                 .registerValueObject(ProAnalytErgebnisStatusElement.class)
                 .registerValueObject(ProAnalytQuantitativesErgebnisDvQuantity.class)
                 .registerValueObject(ProAnalytErgebnisStatusDvCodedText.class)
+                .registerValueObject(AnatomischeLokalisationCluster.class)
                 .build();
     }
 
