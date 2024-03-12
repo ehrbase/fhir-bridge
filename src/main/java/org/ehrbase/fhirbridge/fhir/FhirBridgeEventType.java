@@ -51,6 +51,7 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     // Patient
 
+
     PROVIDE_PATIENT("patient-provide", "Provide Patient"),
 
     FIND_PATIENT("patient-find", "Find Patient"),
@@ -65,7 +66,13 @@ public enum FhirBridgeEventType implements EventType, EnumeratedCodedValue<Event
 
     PROVIDE_QUESTIONNAIRE_RESPONSE("questionnaire-response-provide", "Provide Questionnaire Response"),
 
-    FIND_QUESTIONNAIRE_RESPONSE("questionnaire-response-find", "Find Questionnaire Response");
+    FIND_QUESTIONNAIRE_RESPONSE("questionnaire-response-find", "Find Questionnaire Response"),
+
+
+    //Specimen
+    PROVIDE_SPECIMEN("specimen-provide", "Provide Specimen"),
+
+    FIND_SPECIMEN("specimen-find", "Find Specimen");
 
     private final EventType value;
 

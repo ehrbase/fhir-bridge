@@ -1,7 +1,7 @@
 version: '3'
 services:
   ehrbase:
-    image: ehrbase/ehrbase:0.18.2
+    image: ehrbase/ehrbase:0.23.0 #0.18.2 was the old version used to run 90% of the tests.
     ports:
       - 8080:8080
     networks:
@@ -10,6 +10,8 @@ services:
       DB_URL: jdbc:postgresql://ehrbase-db:5432/ehrbase
       DB_USER: ehrbase
       DB_PASS: ehrbase
+      DB_USER_ADMIN: ehrbase
+      DB_PASS_ADMIN: ehrbase
       SECURITY_AUTHTYPE: BASIC
       SECURITY_AUTHUSER: myuser
       SECURITY_AUTHPASSWORD: myPassword432

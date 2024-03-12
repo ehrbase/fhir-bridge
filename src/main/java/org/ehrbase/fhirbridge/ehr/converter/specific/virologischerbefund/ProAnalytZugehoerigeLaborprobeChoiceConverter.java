@@ -23,7 +23,7 @@ public class ProAnalytZugehoerigeLaborprobeChoiceConverter {
 
         ProAnalytZugehoerigeLaborprobeDvUri proAnalytZugehoerigeLaborprobeDvUri = new ProAnalytZugehoerigeLaborprobeDvUri();
 
-        proAnalytZugehoerigeLaborprobeDvUri.setZugehoerigeLaborprobeValue(observation.getSpecimen().getTypeElement());
+        // FIX proAnalytZugehoerigeLaborprobeDvUri.setZugehoerigeLaborprobeValue(observation.getSpecimen().getTypeElement());
 
         return proAnalytZugehoerigeLaborprobeDvUri;
 

@@ -2,14 +2,14 @@
   "_type" : "COMPOSITION",
   "name" : {
     "_type" : "DV_TEXT",
-    "value" : "Laborbefund"
+    "value" : "Laborbericht"
   },
   "archetype_details" : {
     "archetype_id" : {
-      "value" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
+      "value" : "openEHR-EHR-COMPOSITION.report-result.v1"
     },
     "template_id" : {
-      "value" : "GECCO_Laborbefund"
+      "value" : "KDS_Laborbericht"
     },
     "rm_version" : "1.0.4"
   },
@@ -17,8 +17,16 @@
     "_type" : "FEEDER_AUDIT",
     "originating_system_item_ids" : [ {
       "_type" : "DV_IDENTIFIER",
-      "id" : "DiagnosticReport/1d1eb1a0-c974-49eb-b330-a61be962e2a3/_history/1",
+      "id" : "DiagnosticReport/7cb78ad3-d06c-4466-8349-b4e8e52a7211/_history/1",
       "type" : "fhir_logical_id"
+    }, {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "fhir_patient_id",
+      "id" : "Patient/e8c2a937-a5f4-40de-b9b9-fe032b7e511b/_history/1"
+    }, {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "07f602e0-579e-4fe3-95af-381728bf0d49",
+      "type" : "fhir_patient_identifier"
     } ],
     "originating_system_audit" : {
       "_type" : "FEEDER_AUDIT_DETAILS",
@@ -60,7 +68,7 @@
     "_type" : "EVENT_CONTEXT",
     "start_time" : {
       "_type" : "DV_DATE_TIME",
-      "value" : "2018-11-20T12:05:00+01:00"
+      "value" : "2018-11-20T12:05:00.000+01:00"
     },
     "setting" : {
       "_type" : "DV_CODED_TEXT",
@@ -78,7 +86,7 @@
       "_type" : "ITEM_TREE",
       "name" : {
         "_type" : "DV_TEXT",
-        "value" : "Baum"
+        "value" : "Tree"
       },
       "items" : [ {
         "_type" : "ELEMENT",
@@ -87,38 +95,8 @@
           "value" : "Status"
         },
         "value" : {
-          "_type" : "DV_CODED_TEXT",
-          "value" : "final",
-          "defining_code" : {
-            "_type" : "CODE_PHRASE",
-            "terminology_id" : {
-              "_type" : "TERMINOLOGY_ID",
-              "value" : "local"
-            },
-            "code_string" : "at0012"
-          }
-        },
-        "archetype_node_id" : "at0004"
-      }, {
-        "_type" : "ELEMENT",
-        "name" : {
           "_type" : "DV_TEXT",
-          "value" : "Kategorie"
-        },
-        "value" : {
-          "_type" : "DV_TEXT",
-          "value" : "LAB"
-        },
-        "archetype_node_id" : "at0005"
-      }, {
-        "_type" : "ELEMENT",
-        "name" : {
-          "_type" : "DV_TEXT",
-          "value" : "Kategorie"
-        },
-        "value" : {
-          "_type" : "DV_TEXT",
-          "value" : "26436-6"
+          "value" : "final"
         },
         "archetype_node_id" : "at0005"
       } ],
@@ -129,14 +107,14 @@
     "_type" : "OBSERVATION",
     "name" : {
       "_type" : "DV_TEXT",
-      "value" : "Laborergebnis"
+      "value" : "Laborbefund"
     },
     "archetype_details" : {
       "archetype_id" : {
         "value" : "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
       },
       "template_id" : {
-        "value" : "GECCO_Laborbefund"
+        "value" : "KDS_Laborbericht"
       },
       "rm_version" : "1.0.4"
     },
@@ -166,7 +144,7 @@
       },
       "origin" : {
         "_type" : "DV_DATE_TIME",
-        "value" : "2018-11-20T12:05:00+01:00"
+        "value" : "2018-11-20T12:05:00.000+01:00"
       },
       "events" : [ {
         "_type" : "POINT_EVENT",
@@ -176,7 +154,7 @@
         },
         "time" : {
           "_type" : "DV_DATE_TIME",
-          "value" : "2018-11-20T12:05:00+01:00"
+          "value" : "2018-11-20T12:05:00.000+01:00"
         },
         "data" : {
           "_type" : "ITEM_TREE",
@@ -192,12 +170,12 @@
             },
             "value" : {
               "_type" : "DV_CODED_TEXT",
-              "value" : "Display",
+              "value" : "laboratory",
               "defining_code" : {
                 "_type" : "CODE_PHRASE",
                 "terminology_id" : {
                   "_type" : "TERMINOLOGY_ID",
-                  "value" : "http://loinc.org"
+                  "value" : "LOINC"
                 },
                 "code_string" : "26436-6"
               }
@@ -214,7 +192,7 @@
                 "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
               },
               "template_id" : {
-                "value" : "GECCO_Laborbefund"
+                "value" : "KDS_Laborbericht"
               },
               "rm_version" : "1.0.4"
             },
@@ -276,7 +254,7 @@
               },
               "value" : {
                 "_type" : "DV_DATE_TIME",
-                "value" : "2018-11-20T12:05:00+01:00"
+                "value" : "2018-11-20T12:05:00.000+01:00"
               },
               "archetype_node_id" : "at0025"
             }, {
@@ -306,7 +284,7 @@
               },
               "value" : {
                 "_type" : "DV_DATE_TIME",
-                "value" : "2018-03-11T10:28:00+01:00"
+                "value" : "2018-03-11T10:28:00.000+01:00"
               },
               "archetype_node_id" : "at0006"
             } ],
@@ -320,5 +298,5 @@
     },
     "archetype_node_id" : "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
   } ],
-  "archetype_node_id" : "openEHR-EHR-COMPOSITION.registereintrag.v1"
+  "archetype_node_id" : "openEHR-EHR-COMPOSITION.report-result.v1"
 }

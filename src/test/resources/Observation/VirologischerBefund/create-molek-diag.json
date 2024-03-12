@@ -1,0 +1,143 @@
+{
+  "resourceType": "Observation",
+  "meta": {
+    "profile": [
+      "https://www.medizininformatik-initiative.de/fhir/modul-mikrobio/StructureDefinition/mii-pr-mikrobio-molekulare-diagnostik"
+    ]
+  },
+  "contained": [
+    {
+      "resourceType": "Specimen",
+      "id": "probe-1",
+      "meta": {
+        "profile": [
+          "http://hl7.org/fhir/StructureDefinition/Specimen"
+        ]
+      },
+      "collection": {
+        "collectedDateTime": "2011-08-16T06:15:00Z"
+      }
+    }
+  ],
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "OBI"
+          }
+        ]
+      },
+      "system": "https://example.org/fhir/sid/test-lab-results",
+      "value": "59826-8_1234567890",
+      "assigner": {
+        "identifier": {
+          "system": "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/core-location-identifier",
+          "value": "DIZ-ID"
+        }
+      }
+    }
+  ],
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "laboratory",
+          "display": "Laboratory"
+        },
+        {
+          "system": "http://loinc.org",
+          "code": "26436-6",
+          "display": "Laboratory studies (set)"
+        },
+        {
+          "system": "http://loinc.org",
+          "code": "18725-2",
+          "display": "Microbiology studies"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "92253-4",
+        "display": "Microorganism identified in Isolate or Specimen by Molecular genetics method"
+      }
+    ]
+  },
+  "subject": {
+    "identifier": {
+      "system": "urn:ietf:rfc:4122",
+      "value": "07f602e0-579e-4fe3-95af-381728bf0d49"
+    }
+  },
+  "effectiveDateTime": "2018-11-20T12:05:00+01:00",
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "10828004",
+        "display": "Positive"
+      }
+    ]
+  },
+  "specimen": {
+    "reference": "#probe-1"
+  },
+  "encounter": {
+    "identifier": {
+      "system": "http://medizininformatik-initiative.de/fhir/NamingSystem/Aufnahmenummer/MusterKrankenhaus",
+      "value": "F_0000001"
+    }
+  },
+  "performer": [
+    {
+      "identifier": {
+        "system": "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/core-location-identifiers",
+        "value": "Charité"
+      }
+    }
+  ],
+  "component": [
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "398545005"
+          }
+        ]
+      },
+      "valueQuantity": {
+        "value": 25.5,
+        "unit": "ng/mL",
+        "system": "http://unitsofmeasure.org",
+        "code": "ng/mL"
+      }
+    },
+    {
+      "code": {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "89248-9"
+          }
+        ]
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "840533007",
+            "display": "Severe acute respiratory syndrome coronavirus 2 (organism)"
+          }
+        ]
+      }
+    }
+  ]
+}

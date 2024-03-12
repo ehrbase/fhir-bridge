@@ -13,8 +13,8 @@ import org.ehrbase.client.classgenerator.shareddefinition.NullFlavour;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-04T14:02:17.040336100+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
+    date = "2024-02-23T18:23:03.103663675+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
 )
 public class BefundDetailsDerTestanforderungCluster implements LocatableEntity {
   /**
@@ -61,6 +61,7 @@ public class BefundDetailsDerTestanforderungCluster implements LocatableEntity {
   /**
    * Path: Virologischer Befund/Befund/Details der Testanforderung/Auftrags-ID des anfordernden/einsendenden Systems
    * Description: Lokale Auftrags-ID des anfordernden/einsendenden Systems.
+   * Comment: Äquivalent zur "HL7 Placer Order Identifier".
    */
   @Path("/items[at0062]/value")
   @Choice
@@ -69,6 +70,7 @@ public class BefundDetailsDerTestanforderungCluster implements LocatableEntity {
   /**
    * Path: Virologischer Befund/Befund/Details der Testanforderung/Auftrags-ID (Empfänger)
    * Description: Lokale Auftrags-ID, die vom auftragsempfangendem System, gewöhnlich dem Laborinformationssystem (LIS) zugewiesen wird.
+   * Comment: Die Vergabe einer solchen ID ermöglicht das Nachverfolgen des Auftragsstatus und das Verlinken der Ergebnisse zum Auftrag. Es erlaubt auch das Verwalten von weiteren Erkundigungen und Nachfragen und ist äquivalent zum "HL7 Filler Order Identifier".
    */
   @Path("/items[at0063]/value")
   @Choice

@@ -257,6 +257,13 @@ public class TimeConverter {
         return Optional.empty();
     }
 
+    public static Optional<TemporalAccessor> convertSpecimanCollectionEndtime(Specimen.SpecimenCollectionComponent collection) {
+         if (collection.hasCollectedPeriod() && collection.getCollectedPeriod().hasEnd()) {
+            return Optional.of(collection.getCollectedPeriod().getEndElement().getValueAsCalendar().toZonedDateTime());
+        }
+        return Optional.empty();
+    }
+
     public static Optional<Duration> convertObservationTimeInterval(Observation observation) {
         if(observation.getEffectivePeriod().hasStart() && observation.getEffectivePeriod().hasEnd()){
             return Optional.of(Duration.between(observation.getEffectivePeriod().getStartElement().getValueAsCalendar().toZonedDateTime(),

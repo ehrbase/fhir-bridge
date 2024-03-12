@@ -17,11 +17,15 @@
 package org.ehrbase.fhirbridge.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.ehrbase.fhirbridge.camel.processor.FhirProfileValidator;
-import org.ehrbase.fhirbridge.camel.processor.PatientReferenceProcessor;
-import org.ehrbase.fhirbridge.camel.processor.ProvideResourceAuditHandler;
-import org.ehrbase.fhirbridge.camel.processor.ResourcePersistenceProcessor;
-import org.ehrbase.fhirbridge.camel.processor.OpenEhrMappingExceptionHandler;
+import org.ehrbase.client.exception.ClientException;
+import org.ehrbase.fhirbridge.camel.CamelConstants;
+import org.ehrbase.fhirbridge.camel.processor.*;
+import org.ehrbase.fhirbridge.fhir.encounter.validator.KDSEncounterValidator;
+import org.ehrbase.fhirbridge.fhir.common.Profile;
+import org.ehrbase.fhirbridge.fhir.observation.validator.MibiKulturValidator;
+import org.ehrbase.fhirbridge.fhir.observation.validator.MibiMolekDiagnostikValidator;
+import org.ehrbase.fhirbridge.fhir.patient.validator.KdsPersonValidator;
+import org.ehrbase.fhirbridge.fhir.support.Resources;
 import org.springframework.stereotype.Component;
 
 
@@ -40,17 +44,29 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
 
         // @formatter:off
         from("direct:provideResource")
+            .setHeader(CamelConstants.PROFILE, method(Resources.class, "getResourceProfile"))
             .routeId("provideResourceRoute")
             .onCompletion()
                 .process(ProvideResourceAuditHandler.BEAN_ID)
             .end()
             .process(FhirProfileValidator.BEAN_ID)
+            .choice()
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.KONTAKT_GESUNDHEIT_ABTEILUNG))
+                    .bean(KDSEncounterValidator.class)
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.MIBI_KULTUR))
+                    .bean(MibiKulturValidator.class)
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.MIBI_MOLEKULARE_DIAGNOSTIC))
+                    .bean(MibiMolekDiagnostikValidator.class)
+                .when(header(CamelConstants.PROFILE).isEqualTo(Profile.KDS_PATIENT_PSEUDO))
+                    .bean(KdsPersonValidator.class)
+            .end()
             .process(PatientReferenceProcessor.BEAN_ID)
             .process(ResourcePersistenceProcessor.BEAN_ID)
             .doTry()
                 .to("direct:send-to-cdr")
-            .doCatch(Exception.class)
-                .process(new OpenEhrMappingExceptionHandler());
+            .doCatch(ClientException.class)
+                .process(new OpenEhrClientExceptionHandler());
+
 
         // @formatter:on
         configureAuditEvent();
@@ -65,6 +81,7 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
         configureProcedure();
         configureQuestionnaireResponse();
         configureComposition();
+        configureSpecimen();
     }
 
     /**
@@ -113,6 +130,7 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
      */
     private void configureEncounter() {
         from("encounter-provide:encounterEndpoint?fhirContext=#fhirContext")
+
                 .to("direct:provideResource");
 
         from("encounter-find:encounterEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
@@ -195,5 +213,15 @@ public class ResourceRouteBuilder extends AbstractRouteBuilder {
         from("composition-find:compositionEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
                 .process(ResourcePersistenceProcessor.BEAN_ID);
     }
+
+
+    private void configureSpecimen() {
+        from("specimen-provide:specimenEndpoint?fhirContext=#fhirContext")
+                .to("direct:provideResource");
+
+        from("specimen-find:specimenEndpoint?fhirContext=#fhirContext&lazyLoadBundles=true")
+                .process(ResourcePersistenceProcessor.BEAN_ID);
+    }
+
 
 }

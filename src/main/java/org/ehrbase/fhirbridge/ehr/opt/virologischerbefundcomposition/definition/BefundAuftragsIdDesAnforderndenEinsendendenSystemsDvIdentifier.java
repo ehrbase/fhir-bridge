@@ -10,14 +10,15 @@ import org.ehrbase.client.classgenerator.interfaces.RMEntity;
 @Entity
 @Generated(
     value = "org.ehrbase.client.classgenerator.ClassGenerator",
-    date = "2021-10-04T14:02:17.064338600+02:00",
-    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.5.0"
+    date = "2024-02-23T18:23:03.108923187+01:00",
+    comments = "https://github.com/ehrbase/openEHR_SDK Version: 1.18.0"
 )
 @OptionFor("DV_IDENTIFIER")
 public class BefundAuftragsIdDesAnforderndenEinsendendenSystemsDvIdentifier implements RMEntity, BefundAuftragsIdDesAnforderndenEinsendendenSystemsChoice {
   /**
    * Path: Virologischer Befund/Befund/Details der Testanforderung/Auftrags-ID des anfordernden/einsendenden Systems/Auftrags-ID des anfordernden/einsendenden Systems
    * Description: Lokale Auftrags-ID des anfordernden/einsendenden Systems.
+   * Comment: Äquivalent zur "HL7 Placer Order Identifier".
    */
   @Path("")
   private DvIdentifier auftragsIdDesAnforderndenEinsendendenSystems;

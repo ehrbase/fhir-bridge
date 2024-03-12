@@ -4237,7 +4237,7 @@ Bekannte Schwierigkeiten bei der Probenentnahme oder -behandlung, wie z.B. die "
           <items id="description">Eine strukturierte oder komplexe Diagnose für die Laboruntersuchung.</items>
           <items id="text">Strukturierte Testdiagnostik</items>
         </term_definitions>
-        <term_definitions code="122442008">
+        <term_definitions code="http://snomed.info/sct::122442008">
           <items id="text">Detection of virus (procedure)</items>
         </term_definitions>
       </children>

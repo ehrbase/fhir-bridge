@@ -1,10 +1,16 @@
 package org.ehrbase.fhirbridge.fhir.diagnosticreport;
 
 import org.ehrbase.fhirbridge.comparators.CustomTemporalAcessorComparator;
-import org.ehrbase.fhirbridge.ehr.converter.specific.diagnosticreportlab.DiagnosticReportLabCompositionConverter;
 import org.ehrbase.fhirbridge.ehr.converter.specific.geccodiagnose.GECCODiagnoseCompositionConverter;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.GECCOLaborbefundComposition;
-import org.ehrbase.fhirbridge.ehr.opt.geccolaborbefundcomposition.definition.*;
+import org.ehrbase.fhirbridge.ehr.converter.specific.kdslaborbefund.KDSLaborbefundCompositionConverter;
+import org.ehrbase.fhirbridge.ehr.opt.befundderblutgasanalysecomposition.definition.LaborergebnisObservation;
+import org.ehrbase.fhirbridge.ehr.opt.kdslaborberichtcomposition.KDSLaborberichtComposition;
+import org.ehrbase.fhirbridge.ehr.opt.kdslaborberichtcomposition.definition.FallidentifikationCluster;
+import org.ehrbase.fhirbridge.ehr.opt.kdslaborberichtcomposition.definition.LaborbefundObservation;
+import org.ehrbase.fhirbridge.ehr.opt.kdslaborberichtcomposition.definition.ProLaboranalytCluster;
+import org.ehrbase.fhirbridge.ehr.opt.kdslaborberichtcomposition.definition.ProLaboranalytMesswertDvQuantity;
+import org.ehrbase.fhirbridge.ehr.opt.kdslaborberichtcomposition.definition.ProLaboranalytMesswertElement;
+import org.ehrbase.fhirbridge.ehr.opt.kdslaborberichtcomposition.definition.ProbenmaterialCluster;
 import org.ehrbase.fhirbridge.fhir.AbstractMappingTestSetupIT;
 import org.hl7.fhir.r4.model.Condition;
 import org.hl7.fhir.r4.model.DiagnosticReport;
@@ -40,6 +46,12 @@ class DiagnosticReportLabIT extends AbstractMappingTestSetupIT {
         testMapping("create-diagnosticReport.json", "paragon-create-diagnosticReport.json");
     }
 
+    @Test
+    void createDiagnosticReportSpecimenMapping() throws IOException {
+        testMapping("create-diagnosticReport-specimen.json", "paragon-create-diagnosticReport-specimen.json");
+    }
+
+
     @Override
     public Exception executeMappingException(String path) throws IOException {
         Condition condition = (Condition) testFileLoader.loadResource(path);
@@ -51,9 +63,9 @@ class DiagnosticReportLabIT extends AbstractMappingTestSetupIT {
     @Override
     public void testMapping(String resourcePath, String paragonPath) throws IOException {
         DiagnosticReport resource = (DiagnosticReport) super.testFileLoader.loadResource(resourcePath);
-        DiagnosticReportLabCompositionConverter compositionConverter = new DiagnosticReportLabCompositionConverter();
-        GECCOLaborbefundComposition geccoLaborbefundComposition = compositionConverter.convert(resource);
-        Diff diff = compareCompositions(getJavers(), paragonPath, geccoLaborbefundComposition);
+        KDSLaborbefundCompositionConverter compositionConverter = new KDSLaborbefundCompositionConverter();
+        KDSLaborberichtComposition laborbefundComposition = compositionConverter.convert(resource);
+        Diff diff = compareCompositions(getJavers(), paragonPath, laborbefundComposition);
         assertEquals(diff.getChanges().size(), 0);
     }
 
@@ -61,12 +73,14 @@ class DiagnosticReportLabIT extends AbstractMappingTestSetupIT {
     public Javers getJavers() {
         return JaversBuilder.javers()
                 .registerValue(TemporalAccessor.class, new CustomTemporalAcessorComparator())
-                .registerValueObject(new ValueObjectDefinition(GECCOLaborbefundComposition.class, List.of("location", "feederAudit")))
+                .registerValueObject(new ValueObjectDefinition(KDSLaborberichtComposition.class, List.of("location", "feederAudit")))
                 .registerValueObject(LaborergebnisObservation.class)
-                .registerValueObject(LaborbefundKategorieElement.class)
-                .registerValueObject(new ValueObjectDefinition(ProLaboranalytCluster.class, List.of("zeitpunktErgebnisStatusValue")))// is a instant which has no zone when the CI is testing that it fails since the CI uses another zone, mappes is the system default zone
-                .registerValueObject(ProLaboranalytErgebnisStatusDvCodedText.class)
+                .registerValueObject(FallidentifikationCluster.class)
                 .registerValueObject(ProLaboranalytMesswertDvQuantity.class)
+                .registerValueObject(LaborbefundObservation.class)
+                .registerValueObject(ProLaboranalytCluster.class)
+                .registerValueObject(ProLaboranalytMesswertElement.class)
+                .registerValueObject(ProbenmaterialCluster.class)
                 .build();
     }
 

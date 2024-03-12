@@ -12,15 +12,15 @@ public class ProAnalytErgebnisStatusElementConverter {
     public ProAnalytErgebnisStatusElement convert(Observation observation){
 
         ProAnalytErgebnisStatusElement proAnalytErgebnisStatusElement = new ProAnalytErgebnisStatusElement();
-        List <ProAnalytErgebnisStatusChoice>  proAnalytErgebnisStatusChoiceList = new ArrayList<>();
+        ProAnalytErgebnisStatusChoice  proAnalytErgebnisStatusChoice ;
 
         if(!observation.getStatus().equals(Observation.ObservationStatus.UNKNOWN)){
-            proAnalytErgebnisStatusChoiceList.add(new ProAnalytErgebnisStatusChoiceConverter().convertDvCodedText(observation));
+            proAnalytErgebnisStatusChoice = new ProAnalytErgebnisStatusChoiceConverter().convertDvCodedText(observation);
         }else{
-            proAnalytErgebnisStatusChoiceList.add(new ProAnalytErgebnisStatusChoiceConverter().convertDvText(observation));
+            proAnalytErgebnisStatusChoice = new ProAnalytErgebnisStatusChoiceConverter().convertDvText(observation);
         }
 
-        proAnalytErgebnisStatusElement.setValue2(proAnalytErgebnisStatusChoiceList);
+        proAnalytErgebnisStatusElement.setValue2(proAnalytErgebnisStatusChoice);
 
         return proAnalytErgebnisStatusElement;
 

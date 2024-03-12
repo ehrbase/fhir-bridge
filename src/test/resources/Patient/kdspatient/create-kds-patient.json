@@ -1,0 +1,42 @@
+{
+  "resourceType": "Patient",
+  "meta": {
+    "profile": [
+      "https://www.medizininformatik-initiative.de/fhir/core/modul-person/StructureDefinition/PatientPseudonymisiert"
+    ]
+  },
+  "identifier": [
+    {
+      "type": {
+        "coding": [
+          {
+            "code": "PSEUDED",
+            "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationValue"
+          }
+        ]
+      },
+      "system": "urn:ietf:rfc:4122",
+      "value": "{{patientId}}"
+    }
+  ],
+  "gender": "other",
+  "_gender": {
+    "extension": [
+      {
+        "url": "http://fhir.de/StructureDefinition/gender-amtlich-de",
+        "valueCoding": {
+          "code": "D",
+          "system": "http://fhir.de/CodeSystem/gender-amtlich-de",
+          "display": "divers"
+        }
+      }
+    ]
+  },
+  "birthDate": "2022-12-01",
+  "managingOrganization": {
+    "identifier": {
+      "system": "https://www.medizininformatik-initiative.de/fhir/core/CodeSystem/core-location-identifier",
+      "value": "MHH"
+    }
+  }
+}

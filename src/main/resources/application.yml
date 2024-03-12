@@ -3,11 +3,18 @@
 #   FHIR Bridge Properties                                                     #
 ################################################################################
 fhir-bridge:
+#  debug:
+#    enabled: true
+#    mapping-output-directory: ${java.io.tmpdir}/mappings
   cors:
     allowed-headers: '*'
     allowed-methods: '*'
     allowed-origins: '*'
   mode: openehr
+  fhir:
+    validation:
+      terminology:
+        mode: none
   openehr:
     url: http://localhost:8080/ehrbase/
     security:

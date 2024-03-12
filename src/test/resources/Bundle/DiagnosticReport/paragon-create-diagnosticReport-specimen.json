@@ -1,0 +1,283 @@
+{
+  "_type" : "COMPOSITION",
+  "name" : {
+    "_type" : "DV_TEXT",
+    "value" : "Laborbericht"
+  },
+  "archetype_details" : {
+    "archetype_id" : {
+      "value" : "openEHR-EHR-COMPOSITION.report-result.v1"
+    },
+    "template_id" : {
+      "value" : "KDS_Laborbericht"
+    },
+    "rm_version" : "1.0.4"
+  },
+  "feeder_audit" : {
+    "_type" : "FEEDER_AUDIT",
+    "originating_system_item_ids" : [ {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "DiagnosticReport/a425a86f-80b3-4b33-a572-5e8379dc37e3/_history/1",
+      "type" : "fhir_logical_id"
+    }, {
+      "_type" : "DV_IDENTIFIER",
+      "assigner" : "fhir_patient_id",
+      "id" : "Patient/e8c2a937-a5f4-40de-b9b9-fe032b7e511b/_history/1"
+    }, {
+      "_type" : "DV_IDENTIFIER",
+      "id" : "07f602e0-579e-4fe3-95af-381728bf0d49",
+      "type" : "fhir_patient_identifier"
+    } ],
+    "originating_system_audit" : {
+      "_type" : "FEEDER_AUDIT_DETAILS",
+      "system_id" : "FHIR-Bridge"
+    }
+  },
+  "language" : {
+    "_type" : "CODE_PHRASE",
+    "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
+      "value" : "ISO_639-1"
+    },
+    "code_string" : "de"
+  },
+  "territory" : {
+    "_type" : "CODE_PHRASE",
+    "terminology_id" : {
+      "_type" : "TERMINOLOGY_ID",
+      "value" : "ISO_3166-1"
+    },
+    "code_string" : "DE"
+  },
+  "category" : {
+    "_type" : "DV_CODED_TEXT",
+    "value" : "event",
+    "defining_code" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "openehr"
+      },
+      "code_string" : "433"
+    }
+  },
+  "composer" : {
+    "_type" : "PARTY_SELF"
+  },
+  "context" : {
+    "_type" : "EVENT_CONTEXT",
+    "start_time" : {
+      "_type" : "DV_DATE_TIME",
+      "value" : "2018-11-20T12:05:00.000+01:00"
+    },
+    "setting" : {
+      "_type" : "DV_CODED_TEXT",
+      "value" : "secondary medical care",
+      "defining_code" : {
+        "_type" : "CODE_PHRASE",
+        "terminology_id" : {
+          "_type" : "TERMINOLOGY_ID",
+          "value" : "openehr"
+        },
+        "code_string" : "232"
+      }
+    },
+    "other_context" : {
+      "_type" : "ITEM_TREE",
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Tree"
+      },
+      "items" : [ {
+        "_type" : "ELEMENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Status"
+        },
+        "value" : {
+          "_type" : "DV_TEXT",
+          "value" : "final"
+        },
+        "archetype_node_id" : "at0005"
+      } ],
+      "archetype_node_id" : "at0001"
+    }
+  },
+  "content" : [ {
+    "_type" : "OBSERVATION",
+    "name" : {
+      "_type" : "DV_TEXT",
+      "value" : "Laborbefund"
+    },
+    "archetype_details" : {
+      "archetype_id" : {
+        "value" : "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+      },
+      "template_id" : {
+        "value" : "KDS_Laborbericht"
+      },
+      "rm_version" : "1.0.4"
+    },
+    "language" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "ISO_639-1"
+      },
+      "code_string" : "de"
+    },
+    "encoding" : {
+      "_type" : "CODE_PHRASE",
+      "terminology_id" : {
+        "_type" : "TERMINOLOGY_ID",
+        "value" : "IANA_character-sets"
+      },
+      "code_string" : "UTF-8"
+    },
+    "subject" : {
+      "_type" : "PARTY_SELF"
+    },
+    "data" : {
+      "name" : {
+        "_type" : "DV_TEXT",
+        "value" : "Event Series"
+      },
+      "origin" : {
+        "_type" : "DV_DATE_TIME",
+        "value" : "2020-10-16T08:49:21.000+02:00"
+      },
+      "events" : [ {
+        "_type" : "POINT_EVENT",
+        "name" : {
+          "_type" : "DV_TEXT",
+          "value" : "Jedes Ereignis"
+        },
+        "time" : {
+          "_type" : "DV_DATE_TIME",
+          "value" : "2020-10-16T08:49:21.000+02:00"
+        },
+        "data" : {
+          "_type" : "ITEM_TREE",
+          "name" : {
+            "_type" : "DV_TEXT",
+            "value" : "Tree"
+          },
+          "items" : [ {
+            "_type" : "ELEMENT",
+            "name" : {
+              "_type" : "DV_TEXT",
+              "value" : "Labortest-Kategorie"
+            },
+            "value" : {
+              "_type" : "DV_CODED_TEXT",
+              "value" : "laboratory",
+              "defining_code" : {
+                "_type" : "CODE_PHRASE",
+                "terminology_id" : {
+                  "_type" : "TERMINOLOGY_ID",
+                  "value" : "LOINC"
+                },
+                "code_string" : "26436-6"
+              }
+            },
+            "archetype_node_id" : "at0005"
+          }, {
+            "_type" : "CLUSTER",
+            "name" : {
+              "_type" : "DV_TEXT",
+              "value" : "Pro Laboranalyt"
+            },
+            "archetype_details" : {
+              "archetype_id" : {
+                "value" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+              },
+              "template_id" : {
+                "value" : "KDS_Laborbericht"
+              },
+              "rm_version" : "1.0.4"
+            },
+            "items" : [ {
+              "_type" : "ELEMENT",
+              "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Bezeichnung des Analyts"
+              },
+              "value" : {
+                "_type" : "DV_CODED_TEXT",
+                "value" : "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma by With P-5-P",
+                "defining_code" : {
+                  "_type" : "CODE_PHRASE",
+                  "terminology_id" : {
+                    "_type" : "TERMINOLOGY_ID",
+                    "value" : "http://loinc.org"
+                  },
+                  "code_string" : "30239-8"
+                }
+              },
+              "archetype_node_id" : "at0024"
+            }, {
+              "_type" : "ELEMENT",
+              "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Messwert"
+              },
+              "value" : {
+                "_type" : "DV_QUANTITY",
+                "units" : "U/L",
+                "magnitude" : 34.0
+              },
+              "archetype_node_id" : "at0001"
+            }, {
+              "_type" : "ELEMENT",
+              "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Zeitpunkt der Validierung"
+              },
+              "value" : {
+                "_type" : "DV_DATE_TIME",
+                "value" : "2020-10-16T08:49:21.000+02:00"
+              },
+              "archetype_node_id" : "at0025"
+            }, {
+              "_type" : "ELEMENT",
+              "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Ergebnis-Status"
+              },
+              "value" : {
+                "_type" : "DV_CODED_TEXT",
+                "value" : "Endbefund",
+                "defining_code" : {
+                  "_type" : "CODE_PHRASE",
+                  "terminology_id" : {
+                    "_type" : "TERMINOLOGY_ID",
+                    "value" : "local"
+                  },
+                  "code_string" : "at0018"
+                }
+              },
+              "archetype_node_id" : "at0005"
+            }, {
+              "_type" : "ELEMENT",
+              "name" : {
+                "_type" : "DV_TEXT",
+                "value" : "Probe ID"
+              },
+              "value" : {
+                "_type" : "DV_URI",
+                "value" : "Specimen/#2"
+              },
+              "archetype_node_id" : "at0026"
+            } ],
+            "archetype_node_id" : "openEHR-EHR-CLUSTER.laboratory_test_analyte.v1"
+          } ],
+          "archetype_node_id" : "at0003"
+        },
+        "archetype_node_id" : "at0002"
+      } ],
+      "archetype_node_id" : "at0001"
+    },
+    "archetype_node_id" : "openEHR-EHR-OBSERVATION.laboratory_test_result.v1"
+  } ],
+  "archetype_node_id" : "openEHR-EHR-COMPOSITION.report-result.v1"
+}
