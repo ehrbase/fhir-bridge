@@ -16,6 +16,7 @@
 
 package org.ehrbase.fhirbridge.security.oauth2;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -41,6 +42,9 @@ public class AccessTokenResponse {
 
     @JsonProperty("scope")
     private String scope;
+
+    @JsonProperty("not-before-policy")
+    private long notBeforePolicy;
 
     public String getAccessToken() {
         return accessToken;
@@ -88,5 +92,13 @@ public class AccessTokenResponse {
 
     public void setScope(String scope) {
         this.scope = scope;
+    }
+
+    public long getNotBeforePolicy() {
+        return notBeforePolicy;
+    }
+
+    public void setNotBeforePolicy(long notBeforePolicy) {
+        this.notBeforePolicy = notBeforePolicy;
     }
 }

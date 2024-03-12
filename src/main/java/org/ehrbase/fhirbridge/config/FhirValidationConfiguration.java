@@ -6,7 +6,7 @@ import ca.uhn.fhir.context.support.IValidationSupport;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.server.interceptor.RequestValidatingInterceptor;
 import org.apache.http.client.HttpClient;
-import org.ehrbase.fhirbridge.FhirBridgeException;
+import org.ehrbase.fhirbridge.exception.InputOutputException;
 import org.ehrbase.fhirbridge.fhir.common.validation.TerminologyValidationMode;
 import org.hl7.fhir.common.hapi.validation.support.CachingValidationSupport;
 import org.hl7.fhir.common.hapi.validation.support.CommonCodeSystemsTerminologyService;
@@ -26,6 +26,8 @@ import org.springframework.core.io.Resource;
 import java.io.IOException;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+
+import static org.ehrbase.fhirbridge.exception.ExceptionsTemplate.AN_IO_EXCEPTION_OCCURED_WHILE_LOADING_CUSTOM_PROFILES;
 
 /**
  * {@link Configuration Configuration} for FHIR validation.
@@ -83,7 +85,7 @@ public class FhirValidationConfiguration {
                 prePopulatedValidationSupport.addStructureDefinition(profile);
             }
         } catch (IOException e) {
-            throw new FhirBridgeException("An I/O exception occurred while loading custom profiles");
+            throw new InputOutputException(FhirValidationConfiguration.class, AN_IO_EXCEPTION_OCCURED_WHILE_LOADING_CUSTOM_PROFILES);
         }
         validationSupportChain.fetchAllStructureDefinitions();
         defaultProfileValidationSupport.fetchCodeSystem("");

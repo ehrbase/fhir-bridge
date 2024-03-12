@@ -51,10 +51,12 @@ spring:
   messages:
     basename: messages/messages
     use-code-as-default-message: true
+
 server:
   port: 8888
   servlet:
     context-path: /fhir-bridge
+
 logging:
   file:
     name: ./logs/fhir-bridge.log
@@ -63,17 +65,18 @@ logging:
       max-history: 30
       max-file-size: 100MB
   level:
-    ca.uhn.fhir: error
-    com.zaxxer.hikari: error
-    liquibase: error
-    org.apache.camel: error
-    org.ehrbase.client: warn
-    org.ehrbase.fhirbridge: info
-    org.hibernate: error
-    org.openehealth.ipf: error
-    org.quartz: error
-    org.springframework: error
-    org.springframework.boot: error
+    ca.uhn.fhir: WARN
+    com.zaxxer.hikari: WARN
+    liquibase: INFO
+    org.apache.camel: INFO
+    org.ehrbase.client: WARN
+    org.ehrbase.fhirbridge: INFO
+    org.hibernate: INFO
+    org.openehealth.ipf: ERROR
+    org.quartz: WARN
+    org.springframework: WARN
+    org.springframework.boot: INFO
+
 management:
   endpoints:
     web:
@@ -82,7 +85,7 @@ management:
         allowed-methods: '*'
         allowed-headers: '*'
       exposure:
-        include: env, health, info, liquibase, logfile, loggers
+        include: env, health, info, liquibase, logfile, loggers, prometheus
   metrics:
     export:
       elastic:

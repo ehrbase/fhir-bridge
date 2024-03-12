@@ -1,0 +1,76 @@
+name: Create release branch
+
+on:
+  workflow_dispatch:
+    branches: [ develop ]
+    inputs:
+      release:
+        description: 'Type of the release.'
+        options:
+          - major
+          - minor
+          - patch
+        default: minor
+
+jobs:
+  create_branch:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/develop'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Create version
+        run: |
+          CURRENT_VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)
+          echo $CURRENT_VERSION
+          MAJOR=`echo $CURRENT_VERSION | cut -d. -f1`
+          MINOR=`echo $CURRENT_VERSION | cut -d. -f2`
+          PATCH=`echo $CURRENT_VERSION | cut -d. -f3 | cut -d- -f1`
+          
+          if [ ${{ inputs.release }} == 'major' ] 
+          then
+            VERSION=${MAJOR+1}.0.0
+            DEV_VERSION=${MAJOR}.1.0-SNAPSHOT
+          elif [ ${{ inputs.release }} == 'minor' ]
+          then
+            VERSION=${MAJOR}.${MINOR}.0
+            DEV_VERSION=${MAJOR}.${MINOR+1}.0-SNAPSHOT
+          else
+            VERSION=${MAJOR}.${MINOR-1}.${PATCH+1}
+            DEV_VERSION=${MAJOR}.${MINOR}.0-SNAPSHOT
+          fi
+          echo $VERSION
+
+      - name: Create release branch
+        run: |
+          git branch release/$VERSION
+          
+          mvn versions:set -DnewVersion=${VERSION}-SNAPSHOT versions:commit
+          git commit -am "updated project version to ${VERSION}"
+          
+          git push --set-upstream origin release/$VERSION
+      - name: Create branch to update develop version
+        run: |
+          git branch feature/update_develop_version_${DEV_VERSION}
+          
+          mvn versions:set -DnewVersion=${DEV_VERSION} versions:commit
+          git commit -am "updated development version to ${DEV_VERSION}"
+          
+          git push --set-upstream origin feature/update_develop_version_${DEV_VERSION}
+
+  wrong_branch:
+    if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/develop'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ERROR
+        run: echo 'This workflow only runs on develop branch!'

@@ -1,12 +1,15 @@
 package org.ehrbase.fhirbridge.ehr;
 
-import org.junit.jupiter.api.Test;
-import org.openehr.schemas.v1.OPERATIONALTEMPLATE;
+import static org.ehrbase.fhirbridge.exception.ExceptionsTemplate.AN_IO_EXCEPTION_OCCURED_DURING_INITIALIZATION;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.ehrbase.fhirbridge.exception.IODetailedException;
+import org.junit.jupiter.api.Test;
+import org.openehr.schemas.v1.OPERATIONALTEMPLATE;
 
 class ResourceTemplateProviderTests {
 
@@ -30,4 +33,12 @@ class ResourceTemplateProviderTests {
 
         assertTrue(template.isEmpty());
     }
+
+    @Test
+    void afterPropertiesSetThrowIODetailedException() {
+        ResourceTemplateProvider templateProvider = new ResourceTemplateProvider("classpath:/opt1/");
+        assertThrows(IODetailedException.class, templateProvider::afterPropertiesSet,
+                AN_IO_EXCEPTION_OCCURED_DURING_INITIALIZATION);
+    }
+
 }

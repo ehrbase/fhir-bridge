@@ -60,12 +60,6 @@ public class OpenEhrConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private final OpenEhrProperties properties;
-
-    public OpenEhrConfiguration(OpenEhrProperties properties) {
-        this.properties = properties;
-    }
-
     @PostConstruct
     public void initialize() {
         log.info("Running FHIR Bridge using openEHR");
@@ -83,8 +77,9 @@ public class OpenEhrConfiguration {
     }
 
     @Bean
-    public OpenEhrClientConfig configuration() {
-        return new OpenEhrClientConfig(URI.create(properties.getUrl()));
+    public OpenEhrClientConfig configuration(OpenEhrProperties openEhrProperties) {
+        log.info("Creating OpenEhrClientConfig with configured url : {}", openEhrProperties.getUrl());
+        return new OpenEhrClientConfig(URI.create(openEhrProperties.getUrl()));
     }
 
     @Bean
@@ -99,7 +94,7 @@ public class OpenEhrConfiguration {
     }
 
     @Bean(name = "openEhrHttpClient")
-    public HttpClient httpClient(ObjectProvider<AccessTokenService> accessTokenService) {
+    public HttpClient httpClient(ObjectProvider<AccessTokenService> accessTokenService, OpenEhrProperties properties) {
         var builder = HttpClientBuilder.create();
 
         var security = properties.getSecurity();
@@ -116,8 +111,8 @@ public class OpenEhrConfiguration {
     }
 
     @Bean
-    @ConditionalOnProperty(name = "fhir-bridge.ehrbase.security.type", havingValue = "oauth2")
-    public AccessTokenService accessTokenService() {
+    @ConditionalOnProperty(name = "fhir-bridge.openehr.security.type", havingValue = "oauth2")
+    public AccessTokenService accessTokenService(OpenEhrProperties properties) {
         var oauth2 = properties.getSecurity().getOauth2();
         return new AccessTokenService(oauth2.getTokenUrl(), oauth2.getClientId(), oauth2.getClientSecret());
     }

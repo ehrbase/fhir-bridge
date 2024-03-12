@@ -1,7 +1,8 @@
 package org.ehrbase.fhirbridge.ehr;
 
 import org.apache.xmlbeans.XmlException;
-import org.ehrbase.fhirbridge.FhirBridgeException;
+import org.ehrbase.fhirbridge.exception.IODetailedException;
+import org.ehrbase.fhirbridge.exception.ParsingTemplateException;
 import org.ehrbase.webtemplate.templateprovider.TemplateProvider;
 import org.openehr.schemas.v1.OPERATIONALTEMPLATE;
 import org.openehr.schemas.v1.TemplateDocument;
@@ -15,6 +16,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import static org.ehrbase.fhirbridge.exception.ExceptionsTemplate.AN_ERROR_OCCURRED_WHILE_PARSING_TEMPLATE;
+import static org.ehrbase.fhirbridge.exception.ExceptionsTemplate.AN_IO_EXCEPTION_OCCURED_DURING_INITIALIZATION;
 
 public class ResourceTemplateProvider implements TemplateProvider, InitializingBean {
 
@@ -48,7 +52,7 @@ public class ResourceTemplateProvider implements TemplateProvider, InitializingB
                         templates.put(template.getTemplateId().getValue(), resource.getFilename());
                     });
         } catch (IOException e) {
-            throw new FhirBridgeException("An I/O exception occurred during initialization", e);
+            throw new IODetailedException(ResourceTemplateProvider.class, AN_IO_EXCEPTION_OCCURED_DURING_INITIALIZATION, e.getMessage());
         }
     }
 
@@ -61,7 +65,8 @@ public class ResourceTemplateProvider implements TemplateProvider, InitializingB
             TemplateDocument document = TemplateDocument.Factory.parse(resource.getInputStream());
             return document.getTemplate();
         } catch (XmlException | IOException e) {
-            throw new FhirBridgeException("An error occurred while parsing template [" + resource.getFilename() + "]", e);
+            throw new ParsingTemplateException(ResourceTemplateProvider.class, AN_ERROR_OCCURRED_WHILE_PARSING_TEMPLATE,
+                    String.format(AN_ERROR_OCCURRED_WHILE_PARSING_TEMPLATE, resource.getFilename()));
         }
     }
 }
