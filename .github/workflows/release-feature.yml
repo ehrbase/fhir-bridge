@@ -25,6 +25,7 @@ jobs:
       - name: Build and push docker image
         run: |
           mvn spring-boot:build-image -Dspring-boot.build-image.imageName=${{ secrets.DOCKER_USERNAME }}/num-fhir-bridge:${{ github.ref_name }} -DskipTests
+          docker tag ${{ secrets.DOCKER_USERNAME }}/num-fhir-bridge ${{ secrets.DOCKER_USERNAME }}/num-fhir-bridge:${{ github.ref_name }}
           docker push ${{ secrets.DOCKER_USERNAME }}/num-fhir-bridge:${{ github.ref_name }}
           
           echo "### :rocket: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
