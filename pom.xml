@@ -50,7 +50,7 @@
 
         <docker-maven-plugin.version>0.41.0</docker-maven-plugin.version>
 
-        <docker-image-from>eclipse-temurin:17-jre-jammy</docker-image-from>
+        <docker-image-from>eclipse-temurin:11-jre-jammy</docker-image-from>
 
         <database.port>5432</database.port>
     </properties>
