@@ -1,0 +1,126 @@
+name: release
+
+on:
+  workflow_dispatch:
+    branches: [ 'release/**' ]
+
+env:
+  RELEASE_VERSION: ''
+  DEV_VERSION: ''
+
+jobs:
+
+  read_version:
+    runs-on: ubuntu-latest
+
+    outputs:
+      DEV_VERSION: ${{ steps.createVersion.outputs.DEV_VERSION}}
+      RELEASE_VERSION: ${{ steps.createVersion.outputs.RELEASE_VERSION}}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Create new development version
+        id: createVersion
+        run: |
+          CURRENT_VERSION=$(mvn -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)
+          RELEASE_VERSION=`echo $CURRENT_VERSION | cut -d- -f1`
+          echo "Current version: $CURRENT_VERSION"
+          MAJOR=`echo $CURRENT_VERSION | cut -d. -f1`
+          MINOR=`echo $CURRENT_VERSION | cut -d. -f2`
+          
+          DEV_VERSION=${MAJOR}.$((MINOR+1)).0-SNAPSHOT
+          
+          echo
+          echo "Release version: $RELEASE_VERSION"
+          echo "Develop version: $DEV_VERSION"
+          
+          echo "RELEASE_VERSION=${RELEASE_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "DEV_VERSION=${DEV_VERSION}" >> "$GITHUB_OUTPUT"
+          
+          echo "### :rocket: ${RELEASE_VERSION}" >> $GITHUB_STEP_SUMMARY
+
+  update_dev:
+    needs: read_version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Create branch to update develop version
+        env:
+          DEV_VERSION: ${{ needs.read_version.outputs.DEV_VERSION }}
+        run: |
+          git config --global user.email "noreply@github.com"
+          git config --global user.name "Github Actions"
+          
+          git branch feature/update_develop_${DEV_VERSION}
+          git checkout feature/update_develop_${DEV_VERSION}
+          
+          mvn versions:set -DnewVersion=${DEV_VERSION} versions:commit
+          git commit -am "updated development version to ${DEV_VERSION}"
+          
+          git push --set-upstream origin feature/update_develop_${DEV_VERSION}
+
+      - name: Create PR to merge changes to Develop and update Version
+        env:
+          RELEASE_VERSION: ${{ needs.read_version.outputs.RELEASE_VERSION }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PR_URL=`gh pr create -B develop --title "Merge release branch '${RELEASE_VERSION}' back to develop" --body "Merge release branch '${RELEASE_VERSION}' back to develop"`
+          echo $PR_URL
+  #        gh pr merge --auto --delete-branch --squash $PR_URL
+
+  release:
+    needs: read_version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven'
+      - name: Create branch to update develop version
+        env:
+          RELEASE_VERSION: ${{ needs.read_version.outputs.RELEASE_VERSION }}
+        run: |
+          git config --global user.email "noreply@github.com"
+          git config --global user.name "Github Actions"
+          
+          mvn versions:set -DremoveSnapshot versions:commit
+          git commit -am "updated release version to ${RELEASE_VERSION}"
+          git push
+
+      - name: Create PR to merge release branch to main
+        env:
+          RELEASE_VERSION: ${{ needs.read_version.outputs.RELEASE_VERSION }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PR_URL=`gh pr create -B main --title "Merge release branch '${RELEASE_VERSION}'" --body "Merge release branch '${RELEASE_VERSION}'"`
+          echo $PR_URL
+#        gh pr merge --auto --delete-branch --squash $PR_URL
+
+#  wrong_branch:
+#    if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/release*'
+#
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: ERROR
+#      run: echo 'This workflow only runs on develop branch!'
