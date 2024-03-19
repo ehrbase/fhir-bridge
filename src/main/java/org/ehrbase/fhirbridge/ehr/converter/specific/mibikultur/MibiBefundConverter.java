@@ -76,31 +76,18 @@ public class MibiBefundConverter extends ObservationToObservationConverter<Befun
 
     private DvCodedText mapInterpretationsCodeToHIGHMEDCode(Observation empfindlichkeit) {
         Coding coding = empfindlichkeit.getInterpretation().get(0).getCoding().get(0);
-        if (empfindlichkeit.getInterpretation().get(0).getCoding().get(0).getSystem().equals("http://snomed.info/sct")) { // first since better mappable
-            switch (coding.getCode()) {
-                case "1306577009":
-                    return getEUCASTCodes("S");
-                case "1306583007":
-                    return getEUCASTCodes("I");
-                case "1306581009":
-                    return getEUCASTCodes("R");
-                default:
-                    throw new IllegalArgumentException("Unsupported code for Interpretation of Resistance, has to be SNOMED EUCAST codes !");
-            }
-        } else {
-            switch (coding.getCode()) {
-                case "S":
-                    return getEUCASTCodes("S");
-                case "I":
-                    return getEUCASTCodes("I");
-                case "R":
-                    return getEUCASTCodes("R");
-                default:
-                    throw new IllegalArgumentException("Unsupported code for Interpretation of Resistance, onlt R, I or S are supported!");
-            }
+        switch (coding.getCode()) {
+            case "1306577009":
+                return getEUCASTCodes("S");
+            case "1306583007":
+                return getEUCASTCodes("I");
+            case "1306581009":
+                return getEUCASTCodes("R");
+            default:
+                throw new IllegalArgumentException("Unsupported code for Interpretation of Resistance, has to be SNOMED EUCAST codes !");
         }
-
     }
+
 
     private DvCodedText getEUCASTCodes(String code) {
         CodePhrase codePhrase = new CodePhrase(new TerminologyId("http://highmed.org/fhir/CodeSystem/ic/resistenzklassen-antibiogramm-eucast"), code);

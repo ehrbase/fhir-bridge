@@ -74,11 +74,9 @@ public class MikrobiologischerBefundIT  extends AbstractMappingTestSetupIT {
     }
 
     @Test
-    void createMibiCLSI() throws IOException {
-        testMapping("create-mibi-CLSI.json", "paragon-create-mibi-CLSI.json");
+    void createProbeMappingPeriod() throws IOException {
+        testMapping("create-mibi-probe-interval-entnahme.json", "paragon-create-mibi-probe-interval-entnahme.json");
     }
-
-
     @Test
     void invalidComponentValueMissing() throws IOException {
         Exception exception = executeValidatorException("kultur-component-value-missing.json");
@@ -88,6 +86,12 @@ public class MikrobiologischerBefundIT  extends AbstractMappingTestSetupIT {
     void invalidComponentMissing() throws IOException {
         Exception exception = executeValidatorException("kultur-missing-component.json");
         assertEquals("Kultur has to include a component!", exception.getMessage());
+    }
+
+    @Test
+    void invalidCLSIContained() throws IOException {
+        Exception exception = executeValidatorException("unsupported-clsi.json");
+        assertEquals("Only EUCAST SNOMED is supported.", exception.getMessage());
     }
 
     @Test
@@ -187,17 +191,6 @@ public class MikrobiologischerBefundIT  extends AbstractMappingTestSetupIT {
         assertEquals("Interpretation missing in Empfindlichkeit", exception.getMessage());
     }
 
-    @Test
-    void invalidUnsupportedCLSI() throws IOException {
-        Exception exception = executeValidatorException("unsupported-CLSI.json");
-        assertEquals("SDD and NS are not supported as codes for EUCAST!", exception.getMessage());
-    }
-
-    @Test
-    void invalidUnsupportedCLSI2() throws IOException {
-        Exception exception = executeValidatorException("unsupported-CLSI2.json");
-        assertEquals("SDD and NS are not supported as codes for EUCAST!", exception.getMessage());
-    }
     @Test
     void invalidCollectedMissing() throws IOException {
         Exception exception = executeValidatorException("missing-collection.json");

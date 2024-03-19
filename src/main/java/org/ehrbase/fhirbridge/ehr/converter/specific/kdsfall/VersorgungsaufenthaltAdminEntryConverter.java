@@ -19,14 +19,14 @@ public class VersorgungsaufenthaltAdminEntryConverter extends EncounterToAdminEn
 
     private Optional<TemporalAccessor> mapEnde(Encounter encounter) { //Exceptions in Timeconversion should not be moved to abstract converter
         if (encounter.hasPeriod()) {
-            return Optional.of(TimeConverter.convertEncounterTime(encounter));
+            return TimeConverter.convertEncounterEndTime(encounter);
         }
         return Optional.empty();
     }
 
     private Optional<TemporalAccessor> mapBeginn(Encounter encounter) { //Exceptions should in Timeconversion not be moved to abstract converter
         if (encounter.hasPeriod()) {
-            return TimeConverter.convertEncounterEndTime(encounter);
+            return Optional.of(TimeConverter.convertEncounterTime(encounter));
         }
         return Optional.empty();
     }

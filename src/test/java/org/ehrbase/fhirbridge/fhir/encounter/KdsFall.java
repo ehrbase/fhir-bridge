@@ -48,6 +48,12 @@ public class KdsFall extends AbstractMappingTestSetupIT {
         Exception exception = executeValidatorException("invalid-status.json");
         assertEquals("Encounter status has to be finished !", exception.getMessage());
     }
+
+    @Test
+    void invalidIdentifierMissing() throws IOException {
+        Exception exception = executeValidatorException("identifier-missing.json");
+        assertEquals("Encounter identifier missing!", exception.getMessage());
+    }
     // #####################################################################################
     // default
     @Override

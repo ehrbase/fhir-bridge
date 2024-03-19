@@ -31,13 +31,13 @@ public class MibiKulturValidator implements FhirTransactionValidator {
     }
 
     private void checkEncounter(Observation observation) {
-        if(observation.hasEncounter()){
-            if(!observation.getEncounter().hasIdentifier()){
+        if (observation.hasEncounter()) {
+            if (!observation.getEncounter().hasIdentifier()) {
                 throw new UnprocessableEntityException("Encounter is missing identifier");
-            } else if(!observation.getEncounter().getIdentifier().hasSystem() || !observation.getEncounter().getIdentifier().hasValue()){
+            } else if (!observation.getEncounter().getIdentifier().hasSystem() || !observation.getEncounter().getIdentifier().hasValue()) {
                 throw new UnprocessableEntityException("Encounter is missing identifier.system and/or identifier.value");
             }
-        }else{
+        } else {
             throw new UnprocessableEntityException("Encounter is missing");
         }
     }
@@ -109,7 +109,7 @@ public class MibiKulturValidator implements FhirTransactionValidator {
         if (!hasEmpfindlichkeit) {
             throw new UnprocessableEntityException("Empfindlichkeit is missing from the contained of Kultur.");
         }
-        if(!hasSpecimen){
+        if (!hasSpecimen) {
             throw new UnprocessableEntityException("Specimen is missing in Kultur.");
         }
     }
@@ -119,7 +119,7 @@ public class MibiKulturValidator implements FhirTransactionValidator {
             if (!resource.getCollection().hasCollectedDateTimeType() && !resource.getCollection().hasCollectedPeriod()) {
                 throw new UnprocessableEntityException("Specimen is missing collection collected time.");
             }
-        }else{
+        } else {
             throw new UnprocessableEntityException("Specimen is missing collection");
         }
     }
@@ -166,22 +166,9 @@ public class MibiKulturValidator implements FhirTransactionValidator {
     }
 
     private void checkInterpretationCodings(List<CodeableConcept> interpretation) {
-        boolean hasEUCASTCodes = false;
-        boolean hasCLSICodes = false;
-        String codeCLSICode = "";
         for (CodeableConcept codeableConcept : interpretation) {
-            if (codeableConcept.getCoding().get(0).getSystem().equals("http://snomed.info/sct")) {
-                hasEUCASTCodes = true;
-            }
-            if (codeableConcept.getCoding().get(0).getSystem().equals("https://www.medizininformatik-initiative.de/fhir/modul-mikrobio/CodeSystem/mii-vs-mikrobio-eucast-eucast")) {
-                hasCLSICodes = true;
-                codeCLSICode = codeableConcept.getCoding().get(0).getCode();
-
-            }
-        }
-        if (hasCLSICodes && !hasEUCASTCodes) {
-            if (codeCLSICode.equals("SDD") || codeCLSICode.equals("NS")) {
-                throw new UnprocessableEntityException("SDD and NS are not supported as codes for EUCAST!");
+            if (!codeableConcept.getCoding().get(0).getSystem().equals("http://snomed.info/sct")) {
+                throw new UnprocessableEntityException("Only EUCAST SNOMED is supported.");
             }
         }
     }

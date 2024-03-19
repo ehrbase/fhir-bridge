@@ -64,12 +64,6 @@ public class KontaktGesundheitAbteilingIT extends AbstractMappingTestSetupIT {
         assertEquals("Invalid Code XXXX or Code System for 'Fachabteilungsschlüssel'.", exception.getMessage());
     }
 
-    @Test
-    void createInvalidStatus() throws IOException {
-        Exception exception = executeValidatorException("invalid-status.json");
-        assertEquals("Encounter status has to be finished !", exception.getMessage());
-    }
-
     // #####################################################################################
     // default
     @Override

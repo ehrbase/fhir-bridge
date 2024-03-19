@@ -40,7 +40,7 @@ public class VirologischerBefundIT extends AbstractMappingTestSetupIT {
     @Test
     void invalidMikroMissing() throws IOException {
         Exception exception = executeValidatorException("mirko_org_missing.json");
-        assertEquals("Components are missing from Molekulare Diagnostik", exception.getMessage());
+        assertEquals("NameDesMikrorganismus is missing from Molekulare Diagnostik", exception.getMessage());
     }
 
     @Test
@@ -59,12 +59,6 @@ public class VirologischerBefundIT extends AbstractMappingTestSetupIT {
     void invalidMissingValue() throws IOException {
         Exception exception = executeValidatorException("missing-value.json");
         assertEquals("Molekulare Diagnostik has to include a ValueCodeableConcept.", exception.getMessage());
-    }
-
-    @Test
-    void invalidPCRMissing() throws IOException {
-        Exception exception = executeValidatorException("pcr-missing.json");
-        assertEquals("Components are missing from Molekulare Diagnostik", exception.getMessage());
     }
 
     @Test

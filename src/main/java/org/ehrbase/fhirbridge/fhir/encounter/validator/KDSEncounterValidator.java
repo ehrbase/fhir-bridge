@@ -25,6 +25,9 @@ public class KDSEncounterValidator implements FhirTransactionValidator {
         if(!encounter.hasServiceType()){
             throw new UnprocessableEntityException("Encounter serviceType missing!");
         }
+        if(!encounter.hasIdentifier()){
+            throw new UnprocessableEntityException("Encounter identifier missing!");
+        }
         if(encounter.hasStatus() && !encounter.getStatus().equals(Encounter.EncounterStatus.FINISHED)){
             throw new UnprocessableEntityException("Encounter status has to be finished !");
         }

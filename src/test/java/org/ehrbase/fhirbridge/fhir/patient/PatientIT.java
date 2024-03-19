@@ -60,8 +60,7 @@ class PatientIT extends AbstractMappingTestSetupIT {
         ICreateTyped createTyped = client.create().resource(resource.replaceAll(PATIENT_ID_TOKEN, PATIENT_ID));
         Exception exception = Assertions.assertThrows(UnprocessableEntityException.class, createTyped::execute);
 
-        assertEquals("HTTP 422 : Default profile is not supported for Patient. One of the following profiles is expected: " +
-                "[https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient]", exception.getMessage());
+        assertEquals("HTTP 422 : Default profile is not supported for Patient. One of the following profiles is expected: [https://www.netzwerk-universitaetsmedizin.de/fhir/StructureDefinition/Patient, https://www.medizininformatik-initiative.de/fhir/core/modul-person/StructureDefinition/Patient, https://www.medizininformatik-initiative.de/fhir/core/modul-person/StructureDefinition/PatientPseudonymisiert]", exception.getMessage());
     }
 
     @Override

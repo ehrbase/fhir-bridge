@@ -12,6 +12,7 @@ import org.ehrbase.fhirbridge.ehr.opt.mikrobiologischerbefundcomposition.definit
 import org.ehrbase.fhirbridge.ehr.opt.mikrobiologischerbefundcomposition.definition.ProbeZeitpunktDerProbenentnahmeDvInterval;
 import org.hl7.fhir.r4.model.Annotation;
 import org.hl7.fhir.r4.model.Specimen;
+
 import java.util.Optional;
 
 public class ProbenConverter {
@@ -26,14 +27,11 @@ public class ProbenConverter {
     private Optional<ProbeZeitpunktDerProbenentnahmeChoice> mapZeitpunktDerEntnahme(Specimen specimenTarget) {
         if (specimenTarget.hasCollection() && specimenTarget.getCollection().hasCollected()) {
             if (specimenTarget.getCollection().hasCollectedPeriod()) {
-                ProbeZeitpunktDerProbenentnahmeDvInterval interval = new ProbeZeitpunktDerProbenentnahmeDvInterval();
-                DvDateTime startTime = new DvDateTime();
-                TimeConverter.convertSpecimanCollection(specimenTarget.getCollection()).ifPresent(startTime::setValue);
-                interval.setUpper(startTime);
-                DvDateTime endTime = new DvDateTime();
-                TimeConverter.convertSpecimanCollectionEndtime(specimenTarget.getCollection()).ifPresent(endTime::setValue);
-                interval.setLower(endTime);
-                return Optional.of(interval);
+                ProbeZeitpunktDerProbenentnahmeDvDateTime probeZeitpunktDerProbenentnahmeDvDateTime = new ProbeZeitpunktDerProbenentnahmeDvDateTime();
+                TimeConverter.convertSpecimanCollection(specimenTarget.getCollection()).ifPresent(probeZeitpunktDerProbenentnahmeDvDateTime::setZeitpunktDerProbenentnahmeValue);
+                if (probeZeitpunktDerProbenentnahmeDvDateTime.getZeitpunktDerProbenentnahmeValue() != null) {
+                    return Optional.of(probeZeitpunktDerProbenentnahmeDvDateTime);
+                }
             } else {
                 ProbeZeitpunktDerProbenentnahmeDvDateTime probeZeitpunktDerProbenentnahmeDvDateTime = new ProbeZeitpunktDerProbenentnahmeDvDateTime();
                 TimeConverter.convertSpecimanCollection(specimenTarget.getCollection()).ifPresent(probeZeitpunktDerProbenentnahmeDvDateTime::setZeitpunktDerProbenentnahmeValue);
@@ -43,17 +41,6 @@ public class ProbenConverter {
             }
         } else {
             return Optional.empty();
-        }
-        return Optional.empty();
-    }
-
-    private Optional<String> mapKommentar(Specimen specimenTarget) {
-        if (specimenTarget.hasNote()) {
-            StringBuilder kommentar = new StringBuilder();
-            for (Annotation annotation : specimenTarget.getNote()) {
-                kommentar.append(annotation.getText());
-            }
-            return Optional.of(kommentar.toString());
         }
         return Optional.empty();
     }

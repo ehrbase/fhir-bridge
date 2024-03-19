@@ -48,7 +48,6 @@ public class MibiMolekDiagnostikValidator implements FhirTransactionValidator {
 
     private void checkComponent(Observation observation) {
         boolean containsMikroOrga = false;
-        boolean containsPcr = false;
         for (Observation.ObservationComponentComponent component : observation.getComponent()) {
             if (component.getCode().getCoding().get(0).getCode().equals("89248-9")) {
                 if (!component.getValueCodeableConcept().getCoding().get(0).getCode().equals("840533007")) {
@@ -56,13 +55,10 @@ public class MibiMolekDiagnostikValidator implements FhirTransactionValidator {
                 }
                 containsMikroOrga = true;
             }
-            if (component.getCode().getCoding().get(0).getCode().equals("398545005")) {
-                containsPcr = true;
-            }
         }
 
-        if (!containsMikroOrga || !containsPcr) {
-            throw new UnprocessableEntityException("Components are missing from Molekulare Diagnostik");
+        if (!containsMikroOrga) {
+            throw new UnprocessableEntityException("NameDesMikrorganismus is missing from Molekulare Diagnostik");
         }
     }
 
