@@ -1,4 +1,4 @@
-name: release feature branch
+name: release new tag
 
 on:
   push:
