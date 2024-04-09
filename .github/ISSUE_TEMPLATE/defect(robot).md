@@ -8,34 +8,40 @@ labels: bug
 
 ## Test Case/s To Reproduce Issue
 
-```
 # path to test case
-tests/robot/CONTRIBUTION_TESTS/...
-```
 
-```
-# robot command to execute related test case(s) in your terminal/console
+fhir-bridge/tests/robot/...
+fhir-bridge/tests/robot/...
+fhir-bridge/tests/robot/...
+
+
+# Using test data from:
+
+fhir-bridge/src/test/resources/...
+fhir-bridge/src/test/resources/...
+fhir-bridge/src/test/resources/...
+
 
 # by test case name (wildcards possible)
-robot -t "*Bug Case 01*" -d results -L TRACE robot/TEST_SUITE FOLDER
 
-# by tag
-robot -i failing -d results -L TRACE robot/TEST_SUITE_FOLDER
+e.g.
+008 Create Body Height
+012 Create Body Weight
+008 Create History of Travel (invalid/missing 'component[0] start date')
 
-# Valid test suite folder names
-COMPOSITION_TESTS
-CONTRIBUTION_TESTS
-DIRECTORY_TESTS
-EHR_SERVICE_TESTS
-EHR_STATUS_TESTS
-KNOWLEDGE_TESTS
-QUERY_SERVICE_TESTS
-```
+
+# robot command to execute related test case(s) in your terminal/console
+
+robot -d results -L TRACE (PARAMETERS) robot
+
+
+# Description
+
+
 
 ## Actual Result
 
 foo
-
 
 ## Expected Result
 
